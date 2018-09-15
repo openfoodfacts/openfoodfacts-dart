@@ -7,8 +7,8 @@ import 'package:openfoodfacts/model/User.dart';
 void main() {
   group('succesful api calls', ()  {
     User user = new User(
-        userId: "grumpf",
-        password: "OpenFoodFacts77",
+        userId: "off",
+        password: "off",
         comment: "dart API test"
     );
 
