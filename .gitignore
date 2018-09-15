@@ -1,0 +1,28 @@
+openfoodfacts.iml
+
+# local files of paths to flutter and android SDK
+android/local.properties
+
+.DS_Store
+.dart_tool/
+
+.packages
+.pub/
+.flutter-plugins
+
+# build files
+build/
+out/
+android/
+ios/
+
+# IntelliJ project files 
+*.iml
+*.iws
+*.ipr
+.idea/
+
+# eclipse project file
+.settings/
+.classpath
+.project
