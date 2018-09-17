@@ -15,9 +15,7 @@ class User extends JsonObject {
   @JsonKey( nullable: false)
   final String password;
 
-
-
-  User({
+  const User({
     @required this.userId,
     @required this.password,
     this.comment

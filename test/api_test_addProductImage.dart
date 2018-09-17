@@ -2,15 +2,17 @@ import 'package:test/test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/SendImage.dart';
 import 'package:openfoodfacts/model/Status.dart';
-import 'package:openfoodfacts/model/User.dart';
+import 'package:openfoodfacts/utils/HttpHelper.dart';
+import 'test_constants.dart';
 
 void main() {
-  group('succesful api calls', ()  {
-    User user = new User(
-        userId: "off",
-        password: "off",
-        comment: "dart API test"
-    );
+  group('$OpenFoodAPIClient add product images', ()  {
+
+    setUpAll(() async {
+      // test mode is not working here.
+      // image uploads are addressed to production database in every case. Oo
+      new HttpHelper().isTestMode = true;
+    });
 
     test('add front image test', () async {
       SendImage image = new SendImage(
@@ -19,11 +21,10 @@ void main() {
         imageField: SendImage.FIELD_FRONT,
         imageUrl: Uri.parse("assets/front_de.jpg"),
       );
-      Status status = await OpenFoodAPIClient.addProductImage(user, image);
+      Status status = await OpenFoodAPIClient.addProductImage(TestConstants.TEST_USER, image);
 
       expect(status != null, true);
-      expect(status.status, "1");
-      expect(status.statusVerbose, "fields saved");
+      expect(status.status, "status ok");
     });
 
     test('add ingredients image test', () async {
@@ -33,11 +34,10 @@ void main() {
         imageField: SendImage.FIELD_INGREDIENTS,
         imageUrl: Uri.parse("assets/ingredients_en.jpg"),
       );
-      Status status = await OpenFoodAPIClient.addProductImage(user, image);
+      Status status = await OpenFoodAPIClient.addProductImage(TestConstants.TEST_USER, image);
 
       expect(status != null, true);
-      expect(status.status, "1");
-      expect(status.statusVerbose, "fields saved");
+      expect(status.status, "status ok");
     });
   });
 }

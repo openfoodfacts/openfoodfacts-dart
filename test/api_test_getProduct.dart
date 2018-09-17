@@ -3,7 +3,7 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
 
 void main() {
-  group('succesful api calls', ()  {
+  group('$OpenFoodAPIClient get products', ()  {
 
     test('get product test 1', () async {
 

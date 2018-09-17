@@ -1,7 +1,7 @@
 library openfoodfacts;
 
-import 'dart:async';
 import 'dart:convert';
+import 'dart:async';
 
 import 'model/SendImage.dart';
 import 'model/SendProduct.dart';
@@ -14,25 +14,28 @@ import 'utils/HttpHelper.dart';
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
 
+  static const String URI_SCHEME = "https";
+  static const String URI_HOST = "world.openfoodfacts.org";
+
   /// Add the given product to the database.
   /// Returns a Status object as result.
   static Future<Status> saveProduct(User user, SendProduct product) async {
 
-    var parameterMap = new Map<String, dynamic>();
-    //parameterMap.addAll(user.toJson());
-    parameterMap.addAll(product.toJson());
+    var parameterMap = new Map<String, String>();
+    parameterMap.addAll(user.toData());
+    parameterMap.addAll(product.toData());
 
     var productUri = Uri(
-        scheme: 'https',
-        host: 'world.openfoodfacts.net',
-        path: '/cgi/product_jqm2.pl',
-        queryParameters: parameterMap);
+        scheme: URI_SCHEME,
+        host: URI_HOST,
+        path: '/cgi/product_jqm2.pl');
 
-    String response = await HttpHelper.doGetRequest(productUri);
+    String response = await HttpHelper().doPostRequest(productUri, parameterMap);
     print(response);
     var status = Status.fromJson(json.decode(response));
     return status;
   }
+
 
   /// Send one image to the server.
   /// The image will be added to the product specified in the SendImage
@@ -47,29 +50,36 @@ class OpenFoodAPIClient {
     fileMap.putIfAbsent(image.getImageDataKey(), () => image.imageUrl);
 
     var imageUri = Uri(
-        scheme: 'https',
-        host: 'world.openfoodfacts.net',
+        scheme: URI_SCHEME,
+        host: URI_HOST,
         path: '/cgi/product_image_upload.pl');
 
-    return await HttpHelper.doMultipartRequest(imageUri, dataMap, fileMap);
+    return await HttpHelper().doMultipartRequest(imageUri, dataMap, fileMap);
   }
 
-  static Future<Status> editProduct(User user, SendProduct product) async {
-
-  }
 
   /// Returns the product for the given barcode.
   /// The ProductResult does not contain a product, if the product is not available.
   static Future<ProductResult> getProduct(String barcode) async {
 
     var productUri = Uri(
-      scheme: 'https',
-      host: 'world.openfoodfacts.org',
+      scheme: URI_SCHEME,
+      host: URI_HOST,
       path: 'api/v0/product/' + barcode + '.json');
 
-    String response = await HttpHelper.doGetRequest(productUri);
+    String response = await HttpHelper().doGetRequest(productUri);
     var result = ProductResult.fromJson(json.decode(response));
     return result;
+  }
+
+
+  /// login on the main page - not used
+  static Future<String> _login(User user) async {
+    var loginUri = new Uri(
+        scheme: URI_SCHEME,
+        host: URI_HOST);
+    String response = await HttpHelper().doPostRequest(loginUri, user.toData());
+    return response;
   }
 
 }
