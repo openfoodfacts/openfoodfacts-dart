@@ -11,6 +11,17 @@ import 'model/User.dart';
 
 import 'utils/HttpHelper.dart';
 
+export 'model/ImageLocation.dart';
+export 'model/ImageSize.dart';
+export 'model/ImageUrl.dart';
+export 'model/Ingredient.dart';
+export 'model/Product.dart';
+export 'model/ProductResult.dart';
+export 'model/SendImage.dart';
+export 'model/SendProduct.dart';
+export 'model/Status.dart';
+export 'model/User.dart';
+
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
 

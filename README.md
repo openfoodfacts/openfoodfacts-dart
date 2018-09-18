@@ -2,6 +2,13 @@
 
 Dart package for the Open Food Facts API
 
+## Content
+
+available API services:
+- add product
+- add product image
+- get product
+
 ## Getting Started
 
 For help getting started with Flutter, view our online [documentation](https://flutter.io/).
