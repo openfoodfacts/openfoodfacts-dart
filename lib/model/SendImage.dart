@@ -13,21 +13,21 @@ class SendImage extends JsonObject {
   static const String FIELD_NUTRITION = "nutrition";
   static const String FIELD_OTHER = "other";
 
-  final String lang;
+  String lang;
 
   @JsonKey(ignore: true)
-  final Uri imageUrl;
+  Uri imageUrl;
 
   @JsonKey(name: 'code')
-  final String barcode;
+  String barcode;
 
   @JsonKey(name: 'imagefield')
-  final String imageField;
+  String imageField;
 
-  const SendImage({
+  SendImage({
     @required this.lang,
     @required this.barcode,
-    @required this.imageUrl,
+    this.imageUrl,
     this.imageField = FIELD_OTHER,
   });
 

@@ -8,25 +8,25 @@ part 'SendProduct.g.dart';
 class SendProduct extends JsonObject {
 
   @JsonKey(name: 'code', nullable: false)
-  final String barcode;
+  String barcode;
   @JsonKey(name: 'product_name', nullable: false)
-  final String productName;
+  String productName;
 
-  final String lang;
-  final String brands;
-  final String quantity;
+  String lang;
+  String brands;
+  String quantity;
 
   @JsonKey(name: 'ingredients_text', includeIfNull: false)
-  final String ingredientsText;
+  String ingredientsText;
 
   @JsonKey(name: 'nutriment_energy', includeIfNull: false)
-  final String nutrimentEnergy;
+  String nutrimentEnergy;
   @JsonKey(name: 'nutriment_energy_unit', includeIfNull: false)
-  final String nutrimentEnergyUnit;
+  String nutrimentEnergyUnit;
   @JsonKey(name: 'nutrition_data_per', includeIfNull: false)
-  final String nutrimentDataPer;
+  String nutrimentDataPer;
 
-  const SendProduct({
+  SendProduct({
     @required this.barcode,
     @required this.productName,
     this.lang,

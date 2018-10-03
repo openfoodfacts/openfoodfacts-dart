@@ -22,6 +22,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.8"
+  async_loader:
+    dependency: transitive
+    description:
+      name: async_loader
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -130,6 +137,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.1+1"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   json_rpc_2:
     dependency: transitive
     description:
@@ -186,6 +200,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.4"
+  openfoodfacts:
+    dependency: "direct main"
+    description:
+      name: openfoodfacts
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   package_config:
     dependency: transitive
     description:

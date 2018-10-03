@@ -2,7 +2,7 @@ name: example
 description: example for this dart API
 version: 0.0.1
 author: Alexander Schacht <grumpf@gmx.de>
-homepage: https://tioli.team/
+homepage: https://github.com/Grumpf86/openfoodfacts-dart
 
 environment:
   sdk: '>=2.0.0-dev.54.0 <3.0.0'
@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  openfoodfacts: ^0.0.1
 
 dev_dependencies:
   flutter_test:

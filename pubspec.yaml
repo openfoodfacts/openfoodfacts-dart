@@ -2,7 +2,7 @@ name: openfoodfacts
 description: dart package for the Open Food Facts API
 version: 0.0.1
 author: Alexander Schacht <grumpf@gmx.de>
-homepage: https://tioli.team/
+homepage: https://github.com/Grumpf86/openfoodfacts-dart
 
 environment:
   sdk: '>=2.0.0-dev.54.0 <3.0.0'
