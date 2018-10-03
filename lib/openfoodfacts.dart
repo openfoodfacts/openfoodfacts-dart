@@ -47,7 +47,6 @@ class OpenFoodAPIClient {
     return status;
   }
 
-
   /// Send one image to the server.
   /// The image will be added to the product specified in the SendImage
   /// Returns a Status object as result.

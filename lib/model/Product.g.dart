@@ -37,7 +37,9 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
         (json['labels_tags'] as List)?.map((e) => e as String)?.toList()
     ..miscTags = (json['misc'] as List)?.map((e) => e as String)?.toList()
     ..statesTags =
-        (json['states_tags'] as List)?.map((e) => e as String)?.toList();
+        (json['states_tags'] as List)?.map((e) => e as String)?.toList()
+    ..tracesTags =
+        (json['traces_tags'] as List)?.map((e) => e as String)?.toList();
 }
 
 Map<String, dynamic> _$ProductToJson(Product instance) {
@@ -71,5 +73,6 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('labels_tags', instance.labelsTags);
   writeNotNull('misc', instance.miscTags);
   writeNotNull('states_tags', instance.statesTags);
+  writeNotNull('traces_tags', instance.tracesTags);
   return val;
 }
