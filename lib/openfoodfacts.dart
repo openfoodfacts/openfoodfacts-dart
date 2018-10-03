@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:async';
 
 import 'model/SendImage.dart';
-import 'model/SendProduct.dart';
+import 'model/Product.dart';
 import 'model/ProductResult.dart';
 import 'model/Status.dart';
 import 'model/User.dart';
@@ -18,7 +18,6 @@ export 'model/Ingredient.dart';
 export 'model/Product.dart';
 export 'model/ProductResult.dart';
 export 'model/SendImage.dart';
-export 'model/SendProduct.dart';
 export 'model/Status.dart';
 export 'model/User.dart';
 
@@ -30,7 +29,7 @@ class OpenFoodAPIClient {
 
   /// Add the given product to the database.
   /// Returns a Status object as result.
-  static Future<Status> saveProduct(User user, SendProduct product) async {
+  static Future<Status> saveProduct(User user, Product product) async {
 
     var parameterMap = new Map<String, String>();
     parameterMap.addAll(user.toData());

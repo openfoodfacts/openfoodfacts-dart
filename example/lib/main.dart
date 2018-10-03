@@ -18,7 +18,7 @@ void addNewProduct() async {
 
   // define the product to be added.
   // more attributes available ...
-  SendProduct myProduct = new SendProduct(
+  Product myProduct = new Product(
     barcode: "0048151623426",
     productName: "Maryland Choc Chip",
   );
