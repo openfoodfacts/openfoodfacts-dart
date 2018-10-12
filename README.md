@@ -30,5 +30,8 @@ By running (in command prompt) *flutter packages pub run build_runner build* in 
 ### running the unit tests
 Adjust the file *test_constants.dart* to provide your own login credentials (OpenFoodFacts).
 
+### publish the package to pub.dartlang.org
+run *flutter packages pub publish* in the project directory
+
 ## Authors
 Alexander Schacht - [Grumpf86](https://github.com/Grumpf86 )
