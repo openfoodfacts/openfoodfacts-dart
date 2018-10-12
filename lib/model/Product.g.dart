@@ -25,8 +25,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
       nutrimentDataPer: json['nutrition_data_per'] as String)
     ..selectedImages = json['selected_images'] == null
         ? null
-        : ImageLocation.fromJson(
-            json['selected_images'] as Map<String, dynamic>)
+        : ImageList.fromJson(json['selected_images'] as Map<String, dynamic>)
     ..ingredients = (json['ingredients'] as List)
         ?.map((e) =>
             e == null ? null : Ingredient.fromJson(e as Map<String, dynamic>))

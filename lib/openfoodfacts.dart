@@ -11,9 +11,8 @@ import 'model/User.dart';
 
 import 'utils/HttpHelper.dart';
 
-export 'model/ImageLocation.dart';
-export 'model/ImageSize.dart';
-export 'model/ImageUrl.dart';
+export 'model/ImageList.dart';
+export 'model/Image.dart';
 export 'model/Ingredient.dart';
 export 'model/Product.dart';
 export 'model/ProductResult.dart';

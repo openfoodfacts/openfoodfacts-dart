@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../interface/JsonObject.dart';
-import 'ImageLocation.dart';
+import 'ImageList.dart';
 import 'Ingredient.dart';
 
 part 'Product.g.dart';
@@ -23,7 +23,7 @@ class Product extends JsonObject {
 
   /// cause nesting is sooo cool ;)
   @JsonKey(name: 'selected_images', includeIfNull: false)
-  ImageLocation selectedImages;
+  ImageList selectedImages;
 
   @JsonKey(includeIfNull: false)
   List<Ingredient> ingredients;

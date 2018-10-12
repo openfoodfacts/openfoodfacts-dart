@@ -1,3 +1,6 @@
+## [0.0.3] - 12.10.2018.
+- model of selected product images changed.
+
 ## [0.0.2] - 3.10.2018.
 
 - Service *saveProduct()* can handle to add and to edit a product.

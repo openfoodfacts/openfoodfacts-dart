@@ -7,6 +7,16 @@ part 'User.g.dart';
 @JsonSerializable()
 class User extends JsonObject {
 
+  static const String LANGUAGE_DE = "de";
+  static const String LANGUAGE_EN = "en";
+  static const String LANGUAGE_FR = "fr";
+
+  static const List<String> LANGUAGES = <String>[
+    LANGUAGE_DE,
+    LANGUAGE_EN,
+    LANGUAGE_FR
+  ];
+
   @JsonKey(includeIfNull: false)
   final String comment;
 
