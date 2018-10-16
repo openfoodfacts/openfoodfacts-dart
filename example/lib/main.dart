@@ -43,7 +43,7 @@ void addProductImage() async {
     SendImage image = new SendImage(
       lang: "en",
       barcode: "0048151623426",
-      imageField: Image.FIELD_INGREDIENTS,
+      imageField: ProductImage.FIELD_INGREDIENTS,
       imageUrl: Uri.parse("assets/ingredients_en.jpg"),
     );
 

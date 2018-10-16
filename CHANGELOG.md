@@ -1,3 +1,6 @@
+## [0.0.4] - 16.10.2018.
+- class *Image* changed to *ProductImage* for a easier namespace resolving.
+
 ## [0.0.3] - 12.10.2018.
 - model of selected product images changed.
 

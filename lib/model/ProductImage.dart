@@ -1,6 +1,6 @@
-import '../interface/JsonObject.dart';
-
-class Image {
+/// The url to a specific product image.
+/// Categorized by content type, size and language
+class ProductImage {
 
   static const String FIELD_FRONT = "front";
   static const String FIELD_INGREDIENTS = "ingredients";
@@ -24,7 +24,7 @@ class Image {
     SIZE_DISPLAY
   ];
 
-  Image({
+  ProductImage({
     this.field,
     this.size,
     this.language,

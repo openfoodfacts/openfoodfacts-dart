@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../interface/JsonObject.dart';
-import '../model/Image.dart';
+import '../model/ProductImage.dart';
 
 part 'SendImage.g.dart';
 
@@ -24,19 +24,19 @@ class SendImage extends JsonObject {
     @required this.lang,
     @required this.barcode,
     this.imageUrl,
-    this.imageField = Image.FIELD_OTHER,
+    this.imageField = ProductImage.FIELD_OTHER,
   });
 
   /// the json key depending on the image field of this object.
   String getImageDataKey() {
     switch (this.imageField) {
-      case Image.FIELD_FRONT:
+      case ProductImage.FIELD_FRONT:
         return 'imgupload_front_' + this.lang;
-      case Image.FIELD_INGREDIENTS:
+      case ProductImage.FIELD_INGREDIENTS:
         return 'imgupload_ingredients_' + this.lang;
-      case Image.FIELD_NUTRITION:
+      case ProductImage.FIELD_NUTRITION:
         return 'imgupload_nutrition_' + this.lang;
-      case Image.FIELD_OTHER:
+      case ProductImage.FIELD_OTHER:
         return 'imgupload_other_' + this.lang;
       default:
         return null;

@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../interface/JsonObject.dart';
-import '../model/Image.dart';
+import '../model/ProductImage.dart';
 import '../model/User.dart';
 
 @JsonSerializable()
@@ -9,12 +9,12 @@ class ImageList extends JsonObject {
 
   ImageList(this.list);
 
-  List<Image> list;
+  List<ProductImage> list;
 
   factory ImageList.fromJson(Map<String, dynamic> json) {
-    var imageList = new List<Image>();
-    for (var field in Image.FIELDS) {
-      for (var size in Image.SIZES) {
+    var imageList = new List<ProductImage>();
+    for (var field in ProductImage.FIELDS) {
+      for (var size in ProductImage.SIZES) {
         for (var lang in User.LANGUAGES) {
           // use the field to get the size
           if (json[field] == null) continue;
@@ -30,7 +30,7 @@ class ImageList extends JsonObject {
 
           // use the url to build the image
           if (url == null) continue;
-          var image = new Image(field: field, size: size, language: lang, url: url);
+          var image = new ProductImage(field: field, size: size, language: lang, url: url);
 
           imageList.add(image);
         }

@@ -12,7 +12,7 @@ import 'model/User.dart';
 import 'utils/HttpHelper.dart';
 
 export 'model/ImageList.dart';
-export 'model/Image.dart';
+export 'model/ProductImage.dart';
 export 'model/Ingredient.dart';
 export 'model/Product.dart';
 export 'model/ProductResult.dart';

@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
-import 'package:openfoodfacts/model/Image.dart';
+import 'package:openfoodfacts/model/ProductImage.dart';
 
 void main() {
   group('$OpenFoodAPIClient get products', ()  {
@@ -25,8 +25,8 @@ void main() {
       expect(result.product.selectedImages != null, true);
       expect(result.product.selectedImages.list.length, 15);
       expect(result.product.selectedImages.list.singleWhere((image) =>
-        image.field == Image.FIELD_INGREDIENTS &&
-        image.size == Image.SIZE_DISPLAY &&
+        image.field == ProductImage.FIELD_INGREDIENTS &&
+        image.size == ProductImage.SIZE_DISPLAY &&
         image.language == User.LANGUAGE_DE).url,
         "https://static.openfoodfacts.org/images/products/800/869/801/1065/ingredients_de.27.400.jpg");
       expect(result.product.labelsTags.contains("en:gluten-free"), true);
@@ -34,5 +34,19 @@ void main() {
       expect(result.product.tracesTags.contains("en:lupin"), true);
     });
 
+  });
+
+  test('get product test 2', () async {
+    String barcode = "4388810057787";
+    ProductResult result = await OpenFoodAPIClient.getProduct(barcode);
+
+    expect(result != null, true);
+    expect(result.status, 1);
+    expect(result.barcode, barcode);
+    expect(result.product != null, true);
+    expect(result.product.barcode, barcode);
+
+    expect(result.product.productName, "Natürliches Mineralwasser, Marinus-Quelle, still");
+    expect(result.product.productNameDE, "Natürliches Mineralwasser, Marinus-Quelle, still");
   });
 }
