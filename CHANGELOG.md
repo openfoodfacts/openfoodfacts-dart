@@ -1,3 +1,7 @@
+## [0.0.5] - 25.10.2018.
+- upgrade of http 0.12.0
+- upgrade of build_runner 1.0.0
+
 ## [0.0.4] - 16.10.2018.
 - class *Image* changed to *ProductImage* for a easier namespace resolving.
 
