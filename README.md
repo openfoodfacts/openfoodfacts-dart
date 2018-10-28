@@ -35,4 +35,4 @@ run *flutter packages pub publish* in the project directory
 
 ## Authors
 Alexander Schacht - [Grumpf86](https://github.com/Grumpf86 )
-Niklas Casper
+Niklas Casper - [phanlipo](https://github.com/phanlipo)
