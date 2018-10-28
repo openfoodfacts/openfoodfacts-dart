@@ -1,5 +1,5 @@
 ## [0.0.6] - 27.10.2018.
-- set dependency versions to "any"
+- set dependency versions as range
 
 ## [0.0.5] - 25.10.2018.
 - upgrade of http 0.12.0
