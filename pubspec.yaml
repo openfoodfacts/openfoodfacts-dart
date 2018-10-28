@@ -1,7 +1,9 @@
 name: openfoodfacts
 description: dart package for the Open Food Facts API
 version: 0.0.6
-author: Alexander Schacht <grumpf@gmx.de>, Niklas Casper <casperniklas@gmail.com>
+author:
+- Alexander Schacht <grumpf@gmx.de>
+- Niklas Casper <casperniklas@gmail.com>
 homepage: https://github.com/Grumpf86/openfoodfacts-dart
 
 environment:
