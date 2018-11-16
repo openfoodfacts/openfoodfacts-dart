@@ -72,6 +72,10 @@ class OpenFoodAPIClient {
   /// No adjustment by language.
   static Future<ProductResult> getProductRaw(String barcode) async {
 
+    if (barcode == null || barcode.isEmpty) {
+      return new ProductResult();
+    }
+
     var productUri = Uri(
       scheme: URI_SCHEME,
       host: URI_HOST,
