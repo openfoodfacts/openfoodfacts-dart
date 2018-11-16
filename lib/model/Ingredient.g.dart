@@ -11,7 +11,8 @@ Ingredient _$IngredientFromJson(Map<String, dynamic> json) {
       rank: json['rank'] as int,
       id: json['id'] as String,
       text: json['text'] as String,
-      percent: json['percent'] as String);
+      percent: json['percent'] as String,
+      bold: json['bold'] as bool);
 }
 
 Map<String, dynamic> _$IngredientToJson(Ingredient instance) {
@@ -27,5 +28,6 @@ Map<String, dynamic> _$IngredientToJson(Ingredient instance) {
   writeNotNull('id', instance.id);
   val['text'] = instance.text;
   writeNotNull('percent', instance.percent);
+  val['bold'] = instance.bold;
   return val;
 }

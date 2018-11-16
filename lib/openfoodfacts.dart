@@ -10,6 +10,7 @@ import 'model/Status.dart';
 import 'model/User.dart';
 
 import 'utils/HttpHelper.dart';
+import 'utils/IngredientHelper.dart';
 
 export 'model/ImageList.dart';
 export 'model/ProductImage.dart';
@@ -91,6 +92,8 @@ class OpenFoodAPIClient {
   /// ingredients, images and product name will be prepared for the given language.
   static Future<ProductResult> getProduct(String barcode, String lang) async {
     ProductResult result = await getProductRaw(barcode);
+
+    IngredientHelper.parseIngredients(result.product, lang);
 
     return result;
   }

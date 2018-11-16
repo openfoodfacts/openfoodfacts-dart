@@ -4,7 +4,7 @@ import '../interface/JsonObject.dart';
 import '../model/ProductImage.dart';
 import '../model/User.dart';
 
-@JsonSerializable()
+
 class ImageList extends JsonObject {
 
   ImageList(this.list);

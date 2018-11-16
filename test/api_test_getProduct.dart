@@ -17,24 +17,26 @@ void main() {
       expect(result.product.barcode, barcode);
 
       // only german ingredients
-      expect(result.product.ingredientsTextDE != null, true);
+      expect(result.product.ingredientsText != null, true);
+      expect(result.product.ingredientsTextDE == null, true);
       expect(result.product.ingredientsTextEN == null, true);
       expect(result.product.ingredientsTextFR == null, true);
 
+      print(result.product.ingredientsText);
       expect(result.product.ingredients != null, true);
       expect(result.product.ingredients.length, 10);
 
-      expect(result.product.ingredients.any((i) => i.text == "Acesulfam K"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Aroma Koffein"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Farbstoff E 150d"), true);
+      expect(result.product.ingredients.any((i) => i.text == "Wasser"), true);
       expect(result.product.ingredients.any((i) => i.text == "Kohlensäure"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Natriumcyclamat"), true);
-
+      expect(result.product.ingredients.any((i) => i.text == "Farbstoff E 150d"), true);
       expect(result.product.ingredients.any((i) => i.text == "Säuerungsmittel Phosphorsäure und Citronensäure"), true);
+      expect(result.product.ingredients.any((i) => i.text == "Süßungsmittel"), true);
+
+      expect(result.product.ingredients.any((i) => i.text == "Natriumcyclamat"), true);
+      expect(result.product.ingredients.any((i) => i.text == "Acesulfam K"), true);
       expect(result.product.ingredients.any((i) => i.text == "Aspartam"), true);
       expect(result.product.ingredients.any((i) => i.text == "Aroma"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Süßungsmittel"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Wasser"), true);
+      expect(result.product.ingredients.any((i) => i.text == "Aroma Koffein"), true);
 
       expect(result.product.selectedImages.list.length, 9);
     });
@@ -50,9 +52,11 @@ void main() {
       expect(result.product.barcode, barcode);
 
       // only german ingredients
-      expect(result.product.ingredientsTextDE != null, true);
+      expect(result.product.ingredientsText != null, true);
+      expect(result.product.ingredientsTextDE == null, true);
       expect(result.product.ingredientsTextEN == null, true);
       expect(result.product.ingredientsTextFR == null, true);
+      print(result.product.ingredientsText);
 
       expect(result.product.ingredients != null, true);
       expect(result.product.ingredients.length, 18);
@@ -94,9 +98,11 @@ void main() {
       expect(result.product.productName, "Cornichon aigre doux");
 
       // only france ingredients
+      expect(result.product.ingredientsText != null, true);
       expect(result.product.ingredientsTextDE == null, true);
       expect(result.product.ingredientsTextEN == null, true);
-      expect(result.product.ingredientsTextFR != null, true);
+      expect(result.product.ingredientsTextFR == null, true);
+      print(result.product.ingredientsText);
 
       expect(result.product.ingredients != null, true);
       expect(result.product.ingredients.length, 12);

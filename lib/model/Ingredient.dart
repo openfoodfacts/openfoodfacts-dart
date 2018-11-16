@@ -15,11 +15,14 @@ class Ingredient extends JsonObject {
   @JsonKey(includeIfNull: false)
   String percent;
 
+  bool bold;
+
   Ingredient({
     this.rank,
     this.id,
     this.text,
-    this.percent
+    this.percent,
+    this.bold = false
   });
 
   factory Ingredient.fromJson(Map<String, dynamic> json) => _$IngredientFromJson(json);
