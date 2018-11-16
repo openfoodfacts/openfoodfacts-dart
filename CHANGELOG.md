@@ -1,3 +1,7 @@
+## [0.0.8] - 16.11.2018.
+- getProduct() provides ingredients and images for a given language.
+- getProductRaw() provides *all* data fields without preparation.
+
 ## [0.0.6] - 27.10.2018.
 - set dependency versions as range
 

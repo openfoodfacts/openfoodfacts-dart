@@ -10,8 +10,7 @@ import 'model/Status.dart';
 import 'model/User.dart';
 
 import 'utils/HttpHelper.dart';
-import 'utils/IngredientHelper.dart';
-import 'utils/ImageHelper.dart';
+import 'utils/ProductHelper.dart';
 
 export 'model/ImageList.dart';
 export 'model/ProductImage.dart';
@@ -94,8 +93,9 @@ class OpenFoodAPIClient {
   static Future<ProductResult> getProduct(String barcode, String lang) async {
     ProductResult result = await getProductRaw(barcode);
 
-    IngredientHelper.parseIngredients(result.product, lang);
-    ImageHelper.removeImages(result.product, lang);
+    ProductHelper.prepareProductName(result.product, lang);
+    ProductHelper.parseIngredients(result.product, lang);
+    ProductHelper.removeImages(result.product, lang);
 
     return result;
   }
