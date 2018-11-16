@@ -68,7 +68,9 @@ class OpenFoodAPIClient {
 
   /// Returns the product for the given barcode.
   /// The ProductResult does not contain a product, if the product is not available.
-  static Future<ProductResult> getProduct(String barcode) async {
+  /// No parsing of ingredients.
+  /// No adjustment by language.
+  static Future<ProductResult> getProductRaw(String barcode) async {
 
     var productUri = Uri(
       scheme: URI_SCHEME,
@@ -80,6 +82,14 @@ class OpenFoodAPIClient {
     return result;
   }
 
+  /// Returns the product for the given barcode.
+  /// The ProductResult does not contain a product, if the product is not available.
+  /// ingredients, images and product name will be prepared for the given language.
+  static Future<ProductResult> getProduct(String barcode, String lang) async {
+    ProductResult result = await getProductRaw(barcode);
+
+    return result;
+  }
 
   /// login on the main page - not used
   static Future<String> _login(User user) async {

@@ -15,6 +15,8 @@ class Product extends JsonObject {
   String productNameDE;
   @JsonKey(name: 'product_name_en', includeIfNull: false)
   String productNameEN;
+  @JsonKey(name: 'product_name_fr', includeIfNull: false)
+  String productNameFR;
   String brands;
   String lang;
   String quantity;
@@ -34,6 +36,8 @@ class Product extends JsonObject {
   String ingredientsTextDE;
   @JsonKey(name: 'ingredients_text_en', includeIfNull: false)
   String ingredientsTextEN;
+  @JsonKey(name: 'ingredients_text_fr', includeIfNull: false)
+  String ingredientsTextFR;
 
   @JsonKey(name: 'nutriment_energy', includeIfNull: false)
   String nutrimentEnergy;

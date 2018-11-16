@@ -4,12 +4,12 @@ import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 
 void main() {
-  group('$OpenFoodAPIClient get products', ()  {
+  group('$OpenFoodAPIClient get raw products', ()  {
 
     test('get product test 1', () async {
 
       String barcode = "8008698011065";
-      ProductResult result = await OpenFoodAPIClient.getProduct(barcode);
+      ProductResult result = await OpenFoodAPIClient.getProductRaw(barcode);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -34,19 +34,18 @@ void main() {
       expect(result.product.tracesTags.contains("en:lupin"), true);
     });
 
-  });
+    test('get product test 2', () async {
+      String barcode = "4388810057787";
+      ProductResult result = await OpenFoodAPIClient.getProductRaw(barcode);
 
-  test('get product test 2', () async {
-    String barcode = "4388810057787";
-    ProductResult result = await OpenFoodAPIClient.getProduct(barcode);
+      expect(result != null, true);
+      expect(result.status, 1);
+      expect(result.barcode, barcode);
+      expect(result.product != null, true);
+      expect(result.product.barcode, barcode);
 
-    expect(result != null, true);
-    expect(result.status, 1);
-    expect(result.barcode, barcode);
-    expect(result.product != null, true);
-    expect(result.product.barcode, barcode);
-
-    expect(result.product.productName, "Natürliches Mineralwasser, Marinus-Quelle, still");
-    expect(result.product.productNameDE, "Natürliches Mineralwasser, Marinus-Quelle, still");
+      expect(result.product.productName, "Natürliches Mineralwasser, Marinus-Quelle, still");
+      expect(result.product.productNameDE, "Natürliches Mineralwasser, Marinus-Quelle, still");
+    });
   });
 }
