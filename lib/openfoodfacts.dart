@@ -11,6 +11,7 @@ import 'model/User.dart';
 
 import 'utils/HttpHelper.dart';
 import 'utils/IngredientHelper.dart';
+import 'utils/ImageHelper.dart';
 
 export 'model/ImageList.dart';
 export 'model/ProductImage.dart';
@@ -94,6 +95,7 @@ class OpenFoodAPIClient {
     ProductResult result = await getProductRaw(barcode);
 
     IngredientHelper.parseIngredients(result.product, lang);
+    ImageHelper.removeImages(result.product, lang);
 
     return result;
   }
