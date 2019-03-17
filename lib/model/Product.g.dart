@@ -44,7 +44,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ProductToJson(Product instance) {
-  var val = <String, dynamic>{
+  final val = <String, dynamic>{
     'code': instance.barcode,
     'product_name': instance.productName,
   };

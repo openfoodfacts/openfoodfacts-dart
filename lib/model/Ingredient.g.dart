@@ -16,7 +16,7 @@ Ingredient _$IngredientFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$IngredientToJson(Ingredient instance) {
-  var val = <String, dynamic>{};
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
