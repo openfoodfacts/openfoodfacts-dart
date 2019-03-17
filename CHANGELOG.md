@@ -1,3 +1,9 @@
+## [0.0.9] - 16.03.2019.
+dependency version upgrade to:
+- json_annotation: 2.0.0
+- build_runner: 1.2.6
+- json_serializable: 2.0.2
+
 ## [0.0.8] - 16.11.2018.
 - getProduct() provides ingredients and images for a given language.
 - getProductRaw() provides *all* data fields without preparation.
