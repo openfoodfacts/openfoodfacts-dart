@@ -19,6 +19,8 @@ Add a new product or edit an existing one, using the specified *Open Food Facts*
 ### addProductImage(user, image)
 Add an product image of the front, the ingredients or the nutrition, using the specified *Open Food Facts* user credentials.
 
+### searchProducts(parameterList, language)
+Search for all products matching to the given parameters. Optional: use a language specific host. 
 
 
 ## Development

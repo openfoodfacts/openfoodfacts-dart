@@ -3,6 +3,9 @@ library openfoodfacts;
 import 'dart:convert';
 import 'dart:async';
 
+import 'package:openfoodfacts/model/SearchResult.dart';
+
+import 'interface/Parameter.dart';
 import 'model/SendImage.dart';
 import 'model/Product.dart';
 import 'model/ProductResult.dart';
@@ -20,12 +23,20 @@ export 'model/ProductResult.dart';
 export 'model/SendImage.dart';
 export 'model/Status.dart';
 export 'model/User.dart';
+export 'model/parameter/OutputFormat.dart';
+export 'model/parameter/Page.dart';
+export 'model/parameter/PageSize.dart';
+export 'model/parameter/SearchSimple.dart';
+export 'model/parameter/SortBy.dart';
 
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
 
   static const String URI_SCHEME = "https";
   static const String URI_HOST = "world.openfoodfacts.org";
+  static const String URI_HOST_DE = "de.openfoodfacts.org";
+  static const String URI_HOST_EN = "en.openfoodfacts.org";
+  static const String URI_HOST_FR = "fr.openfoodfacts.org";
 
   /// Add the given product to the database.
   /// Returns a Status object as result.
@@ -100,6 +111,32 @@ class OpenFoodAPIClient {
     return result;
   }
 
+
+  /// Search the OpenFoodFacts product database with the given parameters.
+  /// Returns the list of products as SearchResult.
+  /// Query the language specific host from OpenFoodFacts.
+  static Future<SearchResult> searchProducts(
+      List<Parameter> parameterList,
+      {String lang = User.LANGUAGE_UNDEFINED}) async {
+
+    var parameterMap = new Map<String, String>();
+    parameterMap.putIfAbsent('search_terms', () => "");
+    parameterList.forEach(
+            (p) => parameterMap.putIfAbsent(p.getName(), () => p.getValue()));
+
+    var searchUri = Uri(
+        scheme: URI_SCHEME,
+        host: _getHostByLanguage(lang),
+        path: '/cgi/search.pl',
+        queryParameters: parameterMap);
+
+    print("URI: " + searchUri.toString());
+
+    String response  = await HttpHelper().doGetRequest(searchUri);
+    var result = SearchResult.fromJson(json.decode(response));
+    return result;
+  }
+
   /// login on the main page - not used
   static Future<String> _login(User user) async {
     var loginUri = new Uri(
@@ -107,6 +144,19 @@ class OpenFoodAPIClient {
         host: URI_HOST);
     String response = await HttpHelper().doPostRequest(loginUri, user.toData());
     return response;
+  }
+
+  static String _getHostByLanguage(String lang) {
+    switch (lang) {
+      case User.LANGUAGE_DE:
+        return URI_HOST_DE;
+      case User.LANGUAGE_EN:
+        return URI_HOST_EN;
+      case User.LANGUAGE_FR:
+        return URI_HOST_FR;
+      default:
+        return URI_HOST;
+    }
   }
 
 }

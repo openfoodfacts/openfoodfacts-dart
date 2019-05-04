@@ -6,6 +6,8 @@ class TestConstants {
   static const User TEST_USER = const User(
       userId: "grumpf@gmx.de",
       password: "takeitorleaveit",
-      comment: "dart API test"
+      comment: "dart API test",
   );
+
+  static const String USER_AGENT = "TIOLI App - https://tioli.team";
 }

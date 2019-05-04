@@ -1,9 +1,18 @@
+import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:test/test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 
+import 'test_constants.dart';
+
 void main() {
+
+  setUpAll(() async {
+    new HttpHelper().isTestMode = true;
+    new HttpHelper().userAgent = TestConstants.USER_AGENT;
+  });
+
   group('$OpenFoodAPIClient get raw products', ()  {
 
     test('get product test 1', () async {

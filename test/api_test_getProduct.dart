@@ -1,10 +1,19 @@
+import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:test/test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/model/User.dart';
 
+import 'test_constants.dart';
+
 void main() {
+
+  setUpAll(() async {
+    new HttpHelper().isTestMode = true;
+    new HttpHelper().userAgent = TestConstants.USER_AGENT;
+  });
+
   group('$OpenFoodAPIClient get products', ()  {
     test('get product Coca Cola Light', () async {
       String barcode = "5000112548167";

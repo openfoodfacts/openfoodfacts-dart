@@ -1,3 +1,4 @@
+import 'package:openfoodfacts/model/User.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
 //import 'package:http_parser/http_parser.dart';
@@ -17,6 +18,8 @@ class HttpHelper {
 
   /// use the basic authentication credentials "off:off" to switch to the test server via htaccess
   bool isTestMode = false;
+
+  String userAgent = "Dart API";
 
   // Initialize the client once
   final http.Client client = new http.Client();
@@ -94,6 +97,7 @@ class HttpHelper {
   Map<String, String> _buildHeaders() {
     var headers = new Map<String, String>();
     headers.addAll({'Accept': 'application/json'});
+    headers.addAll({'UserAgent': this.userAgent});
 
     if (isTestMode) {
       var token = 'Basic ' + base64Encode(utf8.encode('off:off'));
