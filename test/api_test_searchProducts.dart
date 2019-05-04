@@ -1,6 +1,6 @@
+import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/interface/Parameter.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
-import 'package:test/test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/SearchResult.dart';
 import 'package:openfoodfacts/model/User.dart';

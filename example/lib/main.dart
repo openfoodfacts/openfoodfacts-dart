@@ -4,7 +4,7 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 Future<Product> getProduct() async {
 
   var barcode = "0048151623426";
-  ProductResult result = await OpenFoodAPIClient.getProduct("barcode");
+  ProductResult result = await OpenFoodAPIClient.getProduct("barcode", User.LANGUAGE_DE);
 
   if (result.status == 1) {
     return result.product;
