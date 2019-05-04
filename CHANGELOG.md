@@ -1,6 +1,9 @@
 ## [0.1.0] - 4.05.2019.
 - service method *searchProducts()* implemented. 
 
+## [0.0.10] - 28.03.2019
+the test package dependency has been moved to flutter_test.
+
 ## [0.0.9] - 16.03.2019.
 dependency version upgrade to:
 - json_annotation: 2.0.0
