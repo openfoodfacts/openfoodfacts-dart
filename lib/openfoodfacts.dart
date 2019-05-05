@@ -3,23 +3,25 @@ library openfoodfacts;
 import 'dart:convert';
 import 'dart:async';
 
-import 'package:openfoodfacts/model/SearchResult.dart';
 
 import 'interface/Parameter.dart';
 import 'model/SendImage.dart';
 import 'model/Product.dart';
 import 'model/ProductResult.dart';
+import 'model/SearchResult.dart';
 import 'model/Status.dart';
 import 'model/User.dart';
 
 import 'utils/HttpHelper.dart';
 import 'utils/ProductHelper.dart';
 
+export 'interface/Parameter.dart';
 export 'model/ImageList.dart';
 export 'model/ProductImage.dart';
 export 'model/Ingredient.dart';
 export 'model/Product.dart';
 export 'model/ProductResult.dart';
+export 'model/SearchResult.dart';
 export 'model/SendImage.dart';
 export 'model/Status.dart';
 export 'model/User.dart';

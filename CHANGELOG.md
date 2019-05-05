@@ -1,3 +1,6 @@
+## [0.1.1] - 5.05.2019
+- class SearchResult now visible
+
 ## [0.1.0] - 4.05.2019.
 - service method *searchProducts()* implemented. 
 
