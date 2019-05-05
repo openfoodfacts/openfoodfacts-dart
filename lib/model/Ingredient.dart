@@ -7,13 +7,14 @@ part 'Ingredient.g.dart';
 class Ingredient extends JsonObject {
 
   @JsonKey(includeIfNull: false)
-  int rank;
+  dynamic rank;
   @JsonKey(includeIfNull: false)
   String id;
   @JsonKey(nullable: false)
   String text;
+  //TODO: can be a int Oo
   @JsonKey(includeIfNull: false)
-  String percent;
+  dynamic percent;
 
   bool bold;
 

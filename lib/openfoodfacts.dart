@@ -30,6 +30,7 @@ export 'model/parameter/Page.dart';
 export 'model/parameter/PageSize.dart';
 export 'model/parameter/SearchSimple.dart';
 export 'model/parameter/SortBy.dart';
+export 'utils/HttpHelper.dart';
 
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
