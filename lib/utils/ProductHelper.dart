@@ -25,6 +25,7 @@ class ProductHelper {
       case User.LANGUAGE_DE:
         product.productName = product.productNameDE ?? product.productName;
         break;
+      case User.LANGUAGE_UNDEFINED:
       case User.LANGUAGE_EN:
         product.productName = product.productNameEN ?? product.productName;
         break;
@@ -49,6 +50,7 @@ class ProductHelper {
       case User.LANGUAGE_DE:
         product.ingredientsText = product.ingredientsTextDE;
         break;
+      case User.LANGUAGE_UNDEFINED:
       case User.LANGUAGE_EN:
         product.ingredientsText = product.ingredientsTextEN;
         break;

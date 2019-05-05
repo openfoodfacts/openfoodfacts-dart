@@ -1,3 +1,9 @@
+## [0.1.3] - 5.05.2019
+- *searchProducts()* with language support
+
+## [0.1.2] - 5.05.2019
+- Ingredients.dart more type safe (THX to dynamic) 
+
 ## [0.1.1] - 5.05.2019
 - class SearchResult now visible
 

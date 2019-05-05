@@ -36,7 +36,8 @@ void main() {
       expect(result.products[0].runtimeType, Product);
       expect(result.count > 30000, true);
 
-      print(result.products[0].toData().toString());
+      print(result.products[2].toData().toString());
+      result.products[3].ingredients.forEach((i) => print(i.text));
     });
   });
 }

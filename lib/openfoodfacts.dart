@@ -137,6 +137,13 @@ class OpenFoodAPIClient {
 
     String response  = await HttpHelper().doGetRequest(searchUri);
     var result = SearchResult.fromJson(json.decode(response));
+
+    for(Product product in result.products) {
+      ProductHelper.prepareProductName(product, lang);
+      ProductHelper.parseIngredients(product, lang);
+      ProductHelper.removeImages(product, lang);
+    }
+
     return result;
   }
 
