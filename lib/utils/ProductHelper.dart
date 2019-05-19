@@ -8,6 +8,10 @@ class ProductHelper {
 
   /// reduce the set of images of the product depending on the given language.
   static void removeImages(Product product, String language) {
+    if (product.selectedImages == null || product.selectedImages.list == null) {
+      return;
+    }
+
     for (String field in ProductImage.FIELDS) {
       if (product.selectedImages.list.any(
               (i) => i.field == field && i.language == language)) {

@@ -18,7 +18,7 @@ void main() {
     test('get product test 1', () async {
 
       String barcode = "8008698011065";
-      ProductResult result = await OpenFoodAPIClient.getProductRaw(barcode);
+      ProductResult result = await OpenFoodAPIClient.getProductRaw(barcode, User.LANGUAGE_DE);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -45,7 +45,7 @@ void main() {
 
     test('get product test 2', () async {
       String barcode = "4388810057787";
-      ProductResult result = await OpenFoodAPIClient.getProductRaw(barcode);
+      ProductResult result = await OpenFoodAPIClient.getProductRaw(barcode, User.LANGUAGE_DE);
 
       expect(result != null, true);
       expect(result.status, 1);

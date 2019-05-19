@@ -1,3 +1,7 @@
+## [0.1.4] - 19.05.2019
+- *getProduct()* chooses a language dependent host (world, de, ..)
+- Bugfix: *getProduct()* won't fail if no images are provided 
+
 ## [0.1.3] - 5.05.2019
 - *searchProducts()* with language support
 

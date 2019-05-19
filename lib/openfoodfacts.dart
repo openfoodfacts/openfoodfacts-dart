@@ -85,7 +85,7 @@ class OpenFoodAPIClient {
   /// The ProductResult does not contain a product, if the product is not available.
   /// No parsing of ingredients.
   /// No adjustment by language.
-  static Future<ProductResult> getProductRaw(String barcode) async {
+  static Future<ProductResult> getProductRaw(String barcode, String lang) async {
 
     if (barcode == null || barcode.isEmpty) {
       return new ProductResult();
@@ -93,7 +93,7 @@ class OpenFoodAPIClient {
 
     var productUri = Uri(
       scheme: URI_SCHEME,
-      host: URI_HOST,
+      host: _getHostByLanguage(lang),
       path: 'api/v0/product/' + barcode + '.json');
 
     String response = await HttpHelper().doGetRequest(productUri);
@@ -105,7 +105,7 @@ class OpenFoodAPIClient {
   /// The ProductResult does not contain a product, if the product is not available.
   /// ingredients, images and product name will be prepared for the given language.
   static Future<ProductResult> getProduct(String barcode, String lang) async {
-    ProductResult result = await getProductRaw(barcode);
+    ProductResult result = await getProductRaw(barcode, lang);
 
     ProductHelper.prepareProductName(result.product, lang);
     ProductHelper.parseIngredients(result.product, lang);
