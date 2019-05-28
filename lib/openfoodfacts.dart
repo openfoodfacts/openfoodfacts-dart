@@ -38,7 +38,7 @@ class OpenFoodAPIClient {
   static const String URI_SCHEME = "https";
   static const String URI_HOST = "world.openfoodfacts.org";
   static const String URI_HOST_DE = "de.openfoodfacts.org";
-  static const String URI_HOST_EN = "en.openfoodfacts.org";
+  static const String URI_HOST_EN = "world.openfoodfacts.org";
   static const String URI_HOST_FR = "fr.openfoodfacts.org";
 
   /// Add the given product to the database.
@@ -107,9 +107,11 @@ class OpenFoodAPIClient {
   static Future<ProductResult> getProduct(String barcode, String lang) async {
     ProductResult result = await getProductRaw(barcode, lang);
 
-    ProductHelper.prepareProductName(result.product, lang);
-    ProductHelper.parseIngredients(result.product, lang);
-    ProductHelper.removeImages(result.product, lang);
+    if (result.product != null) {
+      ProductHelper.prepareProductName(result.product, lang);
+      ProductHelper.parseIngredients(result.product, lang);
+      ProductHelper.removeImages(result.product, lang);
+    }
 
     return result;
   }

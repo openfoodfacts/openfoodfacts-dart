@@ -1,4 +1,3 @@
-import 'package:openfoodfacts/model/User.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
 //import 'package:http_parser/http_parser.dart';

@@ -39,5 +39,29 @@ void main() {
       print(result.products[2].toData().toString());
       result.products[3].ingredients.forEach((i) => print(i.text));
     });
+
+    test('search favorite products EN', () async {
+
+      var parameterList = <Parameter>[
+        const OutputFormat(format: Format.JSON),
+        const Page(page: 14),
+        const PageSize(size: 3),
+        const SearchSimple(active: true),
+        const SortBy(option: SortOption.EDIT)
+      ];
+
+      SearchResult result = await OpenFoodAPIClient.searchProducts(
+          parameterList, lang: User.LANGUAGE_EN);
+
+      expect(result != null, true);
+      expect(result.page, "14");
+      expect(result.pageSize, "3");
+      expect(result.products != null, true);
+      expect(result.products.length, 3);
+      expect(result.products[0].runtimeType, Product);
+      expect(result.count > 30000, true);
+
+      print(result.products[0].toData().toString());
+    });
   });
 }

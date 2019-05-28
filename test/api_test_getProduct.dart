@@ -141,4 +141,12 @@ void main() {
       expect(result.product.selectedImages.list.where((image) => image.size == ProductImage.SIZE_SMALL).length, 3);
     });
   });
+
+  test('product not available', () async {
+    String barcode = "11111111111111111111111111";
+    ProductResult result = await OpenFoodAPIClient.getProduct(
+        barcode, User.LANGUAGE_DE);
+    assert(result != null);
+    assert(result.product == null);
+  });
 }

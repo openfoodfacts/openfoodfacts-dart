@@ -1,3 +1,7 @@
+## [0.1.5] - 28.05.2019
+- *getProduct()* fixed null-pointer for non existing product. 
+- *searchProducts()* english URL now working. (-> world)
+
 ## [0.1.4] - 19.05.2019
 - *getProduct()* chooses a language dependent host (world, de, ..)
 - Bugfix: *getProduct()* won't fail if no images are provided 
