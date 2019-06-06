@@ -1,3 +1,6 @@
+## [0.1.6] - 06.06.2019
+- Bugfix: ingredients percent json parse error fixed (string vs. int)
+
 ## [0.1.5] - 28.05.2019
 - *getProduct()* fixed null-pointer for non existing product. 
 - *searchProducts()* english URL now working. (-> world)
