@@ -96,7 +96,7 @@ void main() {
 
       print(result.products[3].toData().toString());
       result.products[3].ingredients?.forEach((i) => print(i.percent?.toString()));
-      
+
       print(result.products[4].toData().toString());
       result.products[4].ingredients?.forEach((i) => print(i.percent?.toString()));
     });
