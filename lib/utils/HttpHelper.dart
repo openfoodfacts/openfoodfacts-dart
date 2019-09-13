@@ -20,16 +20,12 @@ class HttpHelper {
 
   String userAgent = "Dart API";
 
-  // Initialize the client once
-  final http.Client client = new http.Client();
-
-
   /// Send a http get request to the specified uri.
   /// The data of the request (if any) has to be provided as parameter within the uri.
   /// The result of the request will be returned as string.
   Future<String> doGetRequest(Uri uri) async {
 
-    http.Response response = await client.get(
+    http.Response response = await http.get(
         uri.toString(),
         headers: _buildHeaders()
     );
@@ -42,7 +38,7 @@ class HttpHelper {
   /// The result of the request will be returned as string.
   Future<String> doPostRequest(Uri uri, Map<String, String> body) async {
 
-    http.Response response = await client.post(
+    http.Response response = await http.post(
       uri.toString(),
       headers: _buildHeaders(),
       body: body,
@@ -78,7 +74,7 @@ class HttpHelper {
     print("files " + files.toString());
 
     // get the response status
-    Status status = await client.send(request).then((response) {
+    Status status = await request.send().then((response) {
       if (response.statusCode == 200) {
         return response.stream.first.then((responseBody) {
           //print(utf8.decode(responseBody));

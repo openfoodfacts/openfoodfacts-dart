@@ -1,3 +1,6 @@
+## [0.1.8] - 13.09.2019
+- http: 0.12.0
+
 ## [0.1.7] - 13.09.2019
 - Bugfix: search result page - json parse error fixed (string vs. int)
 - json_annotation: 3.0.0

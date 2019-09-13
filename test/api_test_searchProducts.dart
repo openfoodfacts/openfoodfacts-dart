@@ -77,6 +77,8 @@ void main() {
       SearchResult result = await OpenFoodAPIClient.searchProducts(
           parameterList, lang: User.LANGUAGE_DE);
 
+      print(result);
+
       expect(result != null, true);
       expect(result.page, 16);
       expect(result.pageSize, 5);
