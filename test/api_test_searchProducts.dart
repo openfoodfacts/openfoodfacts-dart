@@ -29,8 +29,8 @@ void main() {
           parameterList, lang: User.LANGUAGE_DE);
 
       expect(result != null, true);
-      expect(result.page, "1");
-      expect(result.pageSize, "10");
+      expect(result.page, 1);
+      expect(result.pageSize, 10);
       expect(result.products != null, true);
       expect(result.products.length, 10);
       expect(result.products[0].runtimeType, Product);
@@ -54,8 +54,8 @@ void main() {
           parameterList, lang: User.LANGUAGE_EN);
 
       expect(result != null, true);
-      expect(result.page, "14");
-      expect(result.pageSize, "3");
+      expect(result.page, 14);
+      expect(result.pageSize, 3);
       expect(result.products != null, true);
       expect(result.products.length, 3);
       expect(result.products[0].runtimeType, Product);
@@ -78,8 +78,8 @@ void main() {
           parameterList, lang: User.LANGUAGE_DE);
 
       expect(result != null, true);
-      expect(result.page, "16");
-      expect(result.pageSize, "5");
+      expect(result.page, 16);
+      expect(result.pageSize, 5);
       expect(result.products != null, true);
       expect(result.products.length, 5);
       expect(result.products[0].runtimeType, Product);

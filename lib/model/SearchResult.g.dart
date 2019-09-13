@@ -8,8 +8,8 @@ part of 'SearchResult.dart';
 
 SearchResult _$SearchResultFromJson(Map<String, dynamic> json) {
   return SearchResult(
-      page: json['page'] as String,
-      pageSize: json['page_size'] as String,
+      page: JsonObject.parseInt(json['page']),
+      pageSize: JsonObject.parseInt(json['page_size']),
       count: json['count'] as int,
       skip: json['skip'] as int,
       products: (json['products'] as List)

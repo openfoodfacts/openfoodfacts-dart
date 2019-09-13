@@ -1,3 +1,9 @@
+## [0.1.7] - 13.09.2019
+- Bugfix: search result page - json parse error fixed (string vs. int)
+- json_annotation: 3.0.0
+- build_runner: 1.6.9
+- json_serializable: 3.2.2
+
 ## [0.1.6] - 06.06.2019
 - Bugfix: ingredients percent json parse error fixed (string vs. int)
 

@@ -1,9 +1,8 @@
 name: openfoodfacts
 description: dart package for the Open Food Facts API
-version: 0.1.6
+version: 0.1.7
 authors:
 - Alexander Schacht <grumpf@gmx.de>
-- Niklas Casper <casperniklas@gmail.com>
 homepage: https://github.com/Grumpf86/openfoodfacts-dart
 
 environment:
@@ -13,16 +12,16 @@ dependencies:
   flutter:
     sdk: flutter
   async_loader: ^0.1.2
-  json_annotation: ^2.0.0
-  http: ^0.11.0
-  path: ^1.6.2
+  json_annotation: ^3.0.0
+  http: ^0.12.0
+  path: ^1.6.4
   image: ^2.1.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.2.6
-  json_serializable: ^2.0.2
+  build_runner: ^1.6.9
+  json_serializable: ^3.2.2
 
 
 # https://www.dartlang.org/tools/pub/pubspec

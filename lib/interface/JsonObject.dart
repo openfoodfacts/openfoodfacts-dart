@@ -14,4 +14,6 @@ abstract class JsonObject {
   }
 
   const JsonObject();
+
+  static int parseInt(dynamic json) => json is String ? int.tryParse(json) : json;
 }
