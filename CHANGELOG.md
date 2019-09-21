@@ -1,3 +1,6 @@
+## [0.1.9] - 21.09.2019
+- get product image by field, size and language
+
 ## [0.1.8] - 13.09.2019
 - http: 0.12.0
 
