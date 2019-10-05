@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../interface/JsonObject.dart';
 import 'ImageList.dart';
 import 'Ingredient.dart';
+import 'Nutriments.dart';
 
 part 'Product.g.dart';
 
@@ -30,6 +31,9 @@ class Product extends JsonObject {
   @JsonKey(includeIfNull: false)
   List<Ingredient> ingredients;
 
+  @JsonKey(includeIfNull: false)
+  Nutriments nutriments;
+
   @JsonKey(name: 'ingredients_text', includeIfNull: false)
   String ingredientsText;
   @JsonKey(name: 'ingredients_text_de', includeIfNull: false)
@@ -39,8 +43,6 @@ class Product extends JsonObject {
   @JsonKey(name: 'ingredients_text_fr', includeIfNull: false)
   String ingredientsTextFR;
 
-  @JsonKey(name: 'nutriment_energy', includeIfNull: false)
-  String nutrimentEnergy;
   @JsonKey(name: 'nutriment_energy_unit', includeIfNull: false)
   String nutrimentEnergyUnit;
   @JsonKey(name: 'nutrition_data_per', includeIfNull: false)
@@ -73,9 +75,9 @@ class Product extends JsonObject {
     this.ingredientsTextDE,
     this.ingredientsTextEN,
     this.categories,
-    this.nutrimentEnergy,
     this.nutrimentEnergyUnit,
     this.nutrimentDataPer,
+    this.nutriments
   });
 
 

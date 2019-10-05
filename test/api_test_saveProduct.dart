@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:openfoodfacts/model/Nutriments.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/Status.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
@@ -19,10 +20,10 @@ void main() {
         quantity: "230g",
         lang: "en",
         brands: "Golden Cookies",
-        nutrimentEnergy: "450",
         nutrimentEnergyUnit: "kJ",
         nutrimentDataPer: "serving",
         ingredientsText: "fortified wheat flour, chocolate chips (25%), sugar, palm oil,  golden syrup, whey and whey derivatives (milk), raising agents, salt, flavouring",
+        nutriments: Nutriments(energyUnit: "kJ", novaGroup: 4)
       );
       Status status = await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product);
 
