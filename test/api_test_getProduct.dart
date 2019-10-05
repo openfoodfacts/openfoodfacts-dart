@@ -48,6 +48,18 @@ void main() {
       expect(result.product.ingredients.any((i) => i.text == "Aroma Koffein"), true);
 
       expect(result.product.selectedImages.list.length, 9);
+
+      expect(result.product.nutriments != null, true);
+
+      expect(result.product.nutriments.energyUnit, "kj");
+      expect(result.product.nutriments.energy, 0.8);
+      expect(result.product.nutriments.sugars, 0.0);
+      expect(result.product.nutriments.salt, 0.02);
+      expect(result.product.nutriments.fiber, null);
+      expect(result.product.nutriments.fat, null);
+      expect(result.product.nutriments.saturatedFat, null);
+      expect(result.product.nutriments.proteins, null);
+      expect(result.product.nutriments.novaGroup, 4);
     });
 
     test('get product Danish Butter Cookies & Chocolate Chip Cookies', () async {
@@ -93,9 +105,21 @@ void main() {
       expect(result.product.ingredients.any((i) => i.text == "fettarmes Kakaopulver"), true);
 
       expect(result.product.selectedImages.list.length, 9);
+
+      expect(result.product.nutriments != null, true);
+
+      expect(result.product.nutriments.energyUnit, "kJ");
+      expect(result.product.nutriments.energy, 2125.0);
+      expect(result.product.nutriments.sugars, 28.0);
+      expect(result.product.nutriments.salt, 0.31);
+      expect(result.product.nutriments.fiber, null);
+      expect(result.product.nutriments.fat, 25.0);
+      expect(result.product.nutriments.saturatedFat, 15.0);
+      expect(result.product.nutriments.proteins, 5.3);
+      expect(result.product.nutriments.novaGroup, 4);
     });
 
-    test('get product Cornichon aigre doux', () async {
+    test('get product Pâte brisée', () async {
       String barcode = "20004361";
       ProductResult result = await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_FR);
 
@@ -104,7 +128,7 @@ void main() {
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product.barcode, barcode);
-      expect(result.product.productName, "Cornichon aigre doux");
+      expect(result.product.productName, "Pâte brisée");
 
       // only france ingredients
       expect(result.product.ingredientsText != null, true);
@@ -132,13 +156,25 @@ void main() {
       expect(result.product.ingredients.any((i) => i.text == "L-cystéine"), true);
 
       expect(result.product.selectedImages.list.length, 9);
-      expect(result.product.selectedImages.list.where((image) => image.language == User.LANGUAGE_FR).length, 9);
+      expect(result.product.selectedImages.list.where((image) => image.language == User.LANGUAGE_FR).length, 6);
       expect(result.product.selectedImages.list.where((image) => image.field == ProductImage.FIELD_FRONT).length, 3);
       expect(result.product.selectedImages.list.where((image) => image.field == ProductImage.FIELD_INGREDIENTS).length, 3);
       expect(result.product.selectedImages.list.where((image) => image.field == ProductImage.FIELD_NUTRITION).length, 3);
       expect(result.product.selectedImages.list.where((image) => image.size == ProductImage.SIZE_THUMB).length, 3);
       expect(result.product.selectedImages.list.where((image) => image.size == ProductImage.SIZE_DISPLAY).length, 3);
       expect(result.product.selectedImages.list.where((image) => image.size == ProductImage.SIZE_SMALL).length, 3);
+
+      expect(result.product.nutriments != null, true);
+
+      expect(result.product.nutriments.energyUnit, "kcal");
+      expect(result.product.nutriments.energy, 1736.0);
+      expect(result.product.nutriments.sugars, 2.8);
+      expect(result.product.nutriments.salt, 0.9);
+      expect(result.product.nutriments.fiber, 1.1);
+      expect(result.product.nutriments.fat, 23.3);
+      expect(result.product.nutriments.saturatedFat, 10.7);
+      expect(result.product.nutriments.proteins, 6.3);
+      expect(result.product.nutriments.novaGroup, 4);
     });
   });
 

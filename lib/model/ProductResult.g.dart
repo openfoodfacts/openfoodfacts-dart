@@ -8,12 +8,13 @@ part of 'ProductResult.dart';
 
 ProductResult _$ProductResultFromJson(Map<String, dynamic> json) {
   return ProductResult(
-      status: json['status'] as int,
-      barcode: json['code'] as String,
-      statusVerbose: json['status_verbose'] as String,
-      product: json['product'] == null
-          ? null
-          : Product.fromJson(json['product'] as Map<String, dynamic>));
+    status: json['status'] as int,
+    barcode: json['code'] as String,
+    statusVerbose: json['status_verbose'] as String,
+    product: json['product'] == null
+        ? null
+        : Product.fromJson(json['product'] as Map<String, dynamic>),
+  );
 }
 
 Map<String, dynamic> _$ProductResultToJson(ProductResult instance) =>
@@ -21,5 +22,5 @@ Map<String, dynamic> _$ProductResultToJson(ProductResult instance) =>
       'status': instance.status,
       'code': instance.barcode,
       'status_verbose': instance.statusVerbose,
-      'product': instance.product
+      'product': instance.product,
     };
