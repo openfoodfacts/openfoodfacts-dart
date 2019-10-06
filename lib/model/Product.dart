@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../interface/JsonObject.dart';
+import 'Additives.dart';
 import 'ImageList.dart';
 import 'Ingredient.dart';
 import 'Nutriments.dart';
@@ -33,6 +34,9 @@ class Product extends JsonObject {
 
   @JsonKey(includeIfNull: false)
   Nutriments nutriments;
+
+  @JsonKey(name: 'additives_tags', includeIfNull: false)
+  Additives additives;
 
   @JsonKey(name: 'ingredients_text', includeIfNull: false)
   String ingredientsText;
@@ -77,7 +81,8 @@ class Product extends JsonObject {
       this.categories,
       this.nutrimentEnergyUnit,
       this.nutrimentDataPer,
-      this.nutriments});
+      this.nutriments,
+      this.additives});
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);

@@ -17,6 +17,7 @@ Nutriments _$NutrimentsFromJson(Map<String, dynamic> json) {
     novaGroup: JsonObject.parseInt(json['nova-group_100g']),
     energy: (json['energy_100g'] as num)?.toDouble(),
     energyUnit: json['energy_unit'] as String,
+    carbohydrates: (json['carbohydrates_100g'] as num)?.toDouble(),
   );
 }
 
@@ -38,5 +39,6 @@ Map<String, dynamic> _$NutrimentsToJson(Nutriments instance) {
   writeNotNull('nova-group_100g', instance.novaGroup);
   writeNotNull('energy_100g', instance.energy);
   writeNotNull('energy_unit', instance.energyUnit);
+  writeNotNull('carbohydrates_100g', instance.carbohydrates);
   return val;
 }

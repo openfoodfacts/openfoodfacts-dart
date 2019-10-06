@@ -2,9 +2,9 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 
 /// request a product from the OpenFoodFacts database
 Future<Product> getProduct() async {
-
   var barcode = "0048151623426";
-  ProductResult result = await OpenFoodAPIClient.getProduct("barcode", User.LANGUAGE_DE);
+  ProductResult result =
+      await OpenFoodAPIClient.getProduct("barcode", User.LANGUAGE_DE);
 
   if (result.status == 1) {
     return result.product;
@@ -15,7 +15,6 @@ Future<Product> getProduct() async {
 
 /// add a new product to the OpenFoodFacts database
 void addNewProduct() async {
-
   // define the product to be added.
   // more attributes available ...
   Product myProduct = new Product(
@@ -36,26 +35,26 @@ void addNewProduct() async {
 
 /// add a new image for an existing product of the OpenFoodFacts database
 void addProductImage() async {
+  // define the product image
+  // set the uri to the local image file
+  // choose the "imageField" as location / description of the image content.
+  SendImage image = new SendImage(
+    lang: "en",
+    barcode: "0048151623426",
+    imageField: ProductImage.FIELD_INGREDIENTS,
+    imageUrl: Uri.parse("assets/ingredients_en.jpg"),
+  );
 
-    // define the product image
-    // set the uri to the local image file
-    // choose the "imageField" as location / description of the image content.
-    SendImage image = new SendImage(
-      lang: "en",
-      barcode: "0048151623426",
-      imageField: ProductImage.FIELD_INGREDIENTS,
-      imageUrl: Uri.parse("assets/ingredients_en.jpg"),
-    );
+  // a registered user login for https://world.openfoodfacts.org/ is required
+  User myUser = new User(userId: "max@off.com", password: "password");
 
-    // a registered user login for https://world.openfoodfacts.org/ is required
-    User myUser = new User(userId: "max@off.com", password: "password");
+  // query the OpenFoodFacts API
+  Status result = await OpenFoodAPIClient.addProductImage(myUser, image);
 
-    // query the OpenFoodFacts API
-    Status result = await OpenFoodAPIClient.addProductImage(myUser, image);
-
-    if (result.status != "status ok") {
-      throw new Exception("image could not be uploaded: "
-          + result.error + " " + result.imageId.toString());
-    }
+  if (result.status != "status ok") {
+    throw new Exception("image could not be uploaded: " +
+        result.error +
+        " " +
+        result.imageId.toString());
+  }
 }
-

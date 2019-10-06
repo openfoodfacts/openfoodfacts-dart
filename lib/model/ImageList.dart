@@ -1,4 +1,3 @@
-
 import '../interface/JsonObject.dart';
 import '../model/ProductImage.dart';
 import '../model/User.dart';
