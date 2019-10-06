@@ -6,7 +6,6 @@ part 'SearchResult.g.dart';
 
 @JsonSerializable()
 class SearchResult extends JsonObject {
-
   @JsonKey(name: "page", nullable: false, fromJson: JsonObject.parseInt)
   final int page;
 
@@ -22,15 +21,11 @@ class SearchResult extends JsonObject {
   @JsonKey(includeIfNull: false)
   final List<Product> products;
 
-  const SearchResult({
-    this.page,
-    this.pageSize,
-    this.count,
-    this.skip,
-    this.products
-  });
+  const SearchResult(
+      {this.page, this.pageSize, this.count, this.skip, this.products});
 
-  factory SearchResult.fromJson(Map<String, dynamic> json) => _$SearchResultFromJson(json);
+  factory SearchResult.fromJson(Map<String, dynamic> json) =>
+      _$SearchResultFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$SearchResultToJson(this);

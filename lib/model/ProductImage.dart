@@ -1,7 +1,6 @@
 /// The url to a specific product image.
 /// Categorized by content type, size and language
 class ProductImage {
-
   static const String FIELD_FRONT = "front";
   static const String FIELD_INGREDIENTS = "ingredients";
   static const String FIELD_NUTRITION = "nutrition";
@@ -18,18 +17,13 @@ class ProductImage {
     FIELD_OTHER
   ];
 
-  static const List<String> SIZES  = <String>[
+  static const List<String> SIZES = <String>[
     SIZE_SMALL,
     SIZE_THUMB,
     SIZE_DISPLAY
   ];
 
-  ProductImage({
-    this.field,
-    this.size,
-    this.language,
-    this.url
-  });
+  ProductImage({this.field, this.size, this.language, this.url});
 
   final String field;
   final String size;

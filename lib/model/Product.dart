@@ -62,28 +62,26 @@ class Product extends JsonObject {
   @JsonKey(name: 'traces_tags', includeIfNull: false)
   List<String> tracesTags;
 
-  Product({
-    this.barcode,
-    this.productName,
-    this.productNameDE,
-    this.productNameEN,
-    this.brands,
-    this.lang,
-    this.quantity,
-    this.imgSmallUrl,
-    this.ingredientsText,
-    this.ingredientsTextDE,
-    this.ingredientsTextEN,
-    this.categories,
-    this.nutrimentEnergyUnit,
-    this.nutrimentDataPer,
-    this.nutriments
-  });
+  Product(
+      {this.barcode,
+      this.productName,
+      this.productNameDE,
+      this.productNameEN,
+      this.brands,
+      this.lang,
+      this.quantity,
+      this.imgSmallUrl,
+      this.ingredientsText,
+      this.ingredientsTextDE,
+      this.ingredientsTextEN,
+      this.categories,
+      this.nutrimentEnergyUnit,
+      this.nutrimentDataPer,
+      this.nutriments});
 
-
-  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
+  factory Product.fromJson(Map<String, dynamic> json) =>
+      _$ProductFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$ProductToJson(this);
-
 }

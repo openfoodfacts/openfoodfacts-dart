@@ -3,9 +3,7 @@ import '../model/ProductImage.dart';
 import '../model/User.dart';
 import '../model/Ingredient.dart';
 
-
 class ProductHelper {
-
   /// reduce the set of images of the product depending on the given language.
   static void removeImages(Product product, String language) {
     if (product.selectedImages == null || product.selectedImages.list == null) {
@@ -13,10 +11,10 @@ class ProductHelper {
     }
 
     for (String field in ProductImage.FIELDS) {
-      if (product.selectedImages.list.any(
-              (i) => i.field == field && i.language == language)) {
-        product.selectedImages.list.removeWhere(
-                (i) => i.field == field && i.language != language);
+      if (product.selectedImages.list
+          .any((i) => i.field == field && i.language == language)) {
+        product.selectedImages.list
+            .removeWhere((i) => i.field == field && i.language != language);
       }
     }
   }
@@ -77,7 +75,7 @@ class ProductHelper {
       // An element may contain 1-n letters
       // An element may contain numbers if there is a letter directly in front of it. (E150d)
       Iterable<Match> matches = new RegExp(
-          r"(([\s-_])*([a-zA-ZäöüÄÖÜßàâæçèéêëîïôœùûüÿÀÂÆÇÈÉÊËÎÏÔŒÙÛÜŸ])+([\s0-9%])*)+([\w])*")
+              r"(([\s-_])*([a-zA-ZäöüÄÖÜßàâæçèéêëîïôœùûüÿÀÂÆÇÈÉÊËÎÏÔŒÙÛÜŸ])+([\s0-9%])*)+([\w])*")
           .allMatches(product.ingredientsText);
 
       for (var m in matches) {

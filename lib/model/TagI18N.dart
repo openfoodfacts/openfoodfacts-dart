@@ -1,7 +1,5 @@
-
 /// A tag with internationalisation.
 class TagI18N {
-
   String id;
 
   String textDE;

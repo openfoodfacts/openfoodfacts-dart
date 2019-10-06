@@ -1,7 +1,6 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 
 class PageSize extends Parameter {
-
   @override
   String getName() {
     return "page_size";
@@ -14,7 +13,5 @@ class PageSize extends Parameter {
 
   final int size;
 
-  const PageSize({
-    this.size
-  });
+  const PageSize({this.size});
 }

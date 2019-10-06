@@ -5,7 +5,6 @@ part 'Ingredient.g.dart';
 
 @JsonSerializable()
 class Ingredient extends JsonObject {
-
   @JsonKey(includeIfNull: false, fromJson: JsonObject.parseInt)
   int rank;
   @JsonKey(includeIfNull: false)
@@ -17,15 +16,10 @@ class Ingredient extends JsonObject {
 
   bool bold;
 
-  Ingredient({
-    this.rank,
-    this.id,
-    this.text,
-    this.percent,
-    this.bold = false
-  });
+  Ingredient({this.rank, this.id, this.text, this.percent, this.bold = false});
 
-  factory Ingredient.fromJson(Map<String, dynamic> json) => _$IngredientFromJson(json);
+  factory Ingredient.fromJson(Map<String, dynamic> json) =>
+      _$IngredientFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$IngredientToJson(this);

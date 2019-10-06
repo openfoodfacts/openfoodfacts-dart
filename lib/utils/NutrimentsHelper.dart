@@ -1,41 +1,57 @@
-
 import 'package:openfoodfacts/model/Nutriments.dart';
 
-enum NormalizedEnergyUnit {
-  kCal,
-  kJ,
-  undefined
-}
+enum NormalizedEnergyUnit { kCal, kJ, undefined }
 
 class NutrimentsHelper {
-
   /// normalize the energy unit as it is pretty fragmented.
   static NormalizedEnergyUnit normalizeEnergyUnit(String unit) {
     var unitLowerCase = unit != null ? unit.toLowerCase() : null;
-    switch(unitLowerCase) {
-      case "kj": return NormalizedEnergyUnit.kJ; break;
-      case "kcal": return NormalizedEnergyUnit.kCal; break;
-      default: return NormalizedEnergyUnit.undefined; break;
+    switch (unitLowerCase) {
+      case "kj":
+        return NormalizedEnergyUnit.kJ;
+        break;
+      case "kcal":
+        return NormalizedEnergyUnit.kCal;
+        break;
+      default:
+        return NormalizedEnergyUnit.undefined;
+        break;
     }
   }
 
   /// get the energy value converted in kCal if necessary.
   static double getEnergyAsKCal(Nutriments nutriments) {
-    switch(normalizeEnergyUnit(nutriments.energyUnit)) {
-      case NormalizedEnergyUnit.kCal: return nutriments.energy; break;
-      case NormalizedEnergyUnit.kJ: return (nutriments.energy *  0.2388); break;
-      case NormalizedEnergyUnit.undefined: return null; break;
-      default: return null; break;
+    switch (normalizeEnergyUnit(nutriments.energyUnit)) {
+      case NormalizedEnergyUnit.kCal:
+        return nutriments.energy;
+        break;
+      case NormalizedEnergyUnit.kJ:
+        return (nutriments.energy * 0.2388);
+        break;
+      case NormalizedEnergyUnit.undefined:
+        return null;
+        break;
+      default:
+        return null;
+        break;
     }
   }
 
   /// get the energy value converted in kJ if necessary.
   static double getEnergyAsKJ(Nutriments nutriments) {
-    switch(normalizeEnergyUnit(nutriments.energyUnit)) {
-      case NormalizedEnergyUnit.kCal: return (nutriments.energy * 4.1868); break;
-      case NormalizedEnergyUnit.kJ: return nutriments.energy; break;
-      case NormalizedEnergyUnit.undefined: return null; break;
-      default: return null; break;
+    switch (normalizeEnergyUnit(nutriments.energyUnit)) {
+      case NormalizedEnergyUnit.kCal:
+        return (nutriments.energy * 4.1868);
+        break;
+      case NormalizedEnergyUnit.kJ:
+        return nutriments.energy;
+        break;
+      case NormalizedEnergyUnit.undefined:
+        return null;
+        break;
+      default:
+        return null;
+        break;
     }
   }
 
@@ -48,7 +64,8 @@ class NutrimentsHelper {
     double proteins = nutriments.proteins;
     double fiber = nutriments.fiber;
 
-    if(fat == null || carbs == null || proteins == null || fiber == null) return null;
+    if (fat == null || carbs == null || proteins == null || fiber == null)
+      return null;
 
     return (fat * 37 + carbs * 17 + proteins * 17 + fiber * 8);
   }
@@ -56,19 +73,24 @@ class NutrimentsHelper {
   /// check if the stated energy value is within a margin of error
   /// a use case for this is before saving a product, check if the values aren't
   /// uncoherent.
-  static bool checkEnergyCoherence(Nutriments nutriments, double marginPercentage) {
-    NormalizedEnergyUnit energyUnit = normalizeEnergyUnit(nutriments.energyUnit);
+  static bool checkEnergyCoherence(
+      Nutriments nutriments, double marginPercentage) {
+    NormalizedEnergyUnit energyUnit =
+        normalizeEnergyUnit(nutriments.energyUnit);
 
-    if(energyUnit == NormalizedEnergyUnit.undefined) return null;
+    if (energyUnit == NormalizedEnergyUnit.undefined) return null;
 
-    double statedEnergy = energyUnit == NormalizedEnergyUnit.kJ ? nutriments.energy : getEnergyAsKJ(nutriments);
+    double statedEnergy = energyUnit == NormalizedEnergyUnit.kJ
+        ? nutriments.energy
+        : getEnergyAsKJ(nutriments);
 
-    double lowLimit = statedEnergy - (statedEnergy * (marginPercentage / 100.0));
-    double highLimit = statedEnergy + (statedEnergy * (marginPercentage / 100.0));
+    double lowLimit =
+        statedEnergy - (statedEnergy * (marginPercentage / 100.0));
+    double highLimit =
+        statedEnergy + (statedEnergy * (marginPercentage / 100.0));
 
     double calculatedEnergy = calculateEnergy(nutriments);
 
-    return(calculatedEnergy >= lowLimit && calculatedEnergy <= highLimit);
+    return (calculatedEnergy >= lowLimit && calculatedEnergy <= highLimit);
   }
-
 }

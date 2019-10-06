@@ -8,7 +8,7 @@ class SortBy extends Parameter {
 
   @override
   String getValue() {
-    switch(option) {
+    switch (option) {
       case SortOption.PRODUCT_NAME:
         return "product_name";
 
@@ -26,9 +26,7 @@ class SortBy extends Parameter {
 
   final SortOption option;
 
-  const SortBy({
-    this.option
-  });
+  const SortBy({this.option});
 }
 
 enum SortOption {

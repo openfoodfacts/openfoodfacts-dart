@@ -1,6 +1,4 @@
-
 abstract class Parameter {
-
   String getName();
 
   String getValue();

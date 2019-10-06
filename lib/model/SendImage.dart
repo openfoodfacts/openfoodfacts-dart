@@ -8,7 +8,6 @@ part 'SendImage.g.dart';
 
 @JsonSerializable()
 class SendImage extends JsonObject {
-
   String lang;
 
   @JsonKey(ignore: true)
@@ -43,8 +42,8 @@ class SendImage extends JsonObject {
     }
   }
 
-  factory SendImage.fromJson(Map<String, dynamic> json) => _$SendImageFromJson(json);
+  factory SendImage.fromJson(Map<String, dynamic> json) =>
+      _$SendImageFromJson(json);
 
   Map<String, dynamic> toJson() => _$SendImageToJson(this);
 }
-

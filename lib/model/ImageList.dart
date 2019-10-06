@@ -1,12 +1,9 @@
-import 'package:json_annotation/json_annotation.dart';
 
 import '../interface/JsonObject.dart';
 import '../model/ProductImage.dart';
 import '../model/User.dart';
 
-
 class ImageList extends JsonObject {
-
   ImageList(this.list);
 
   List<ProductImage> list;
@@ -30,7 +27,8 @@ class ImageList extends JsonObject {
 
           // use the url to build the image
           if (url == null) continue;
-          var image = new ProductImage(field: field, size: size, language: lang, url: url);
+          var image = new ProductImage(
+              field: field, size: size, language: lang, url: url);
 
           imageList.add(image);
         }
@@ -51,14 +49,12 @@ class ImageList extends JsonObject {
   /// @param language - see User.LANGUAGES
   ProductImage getBy(String field, String size, String language) {
     try {
-      return list.where((e) =>
-          e.field == field &&
-          e.size == size &&
-          e.language == language)
+      return list
+          .where((e) =>
+              e.field == field && e.size == size && e.language == language)
           .single;
     } catch (e) {
       return null;
     }
   }
-
 }
