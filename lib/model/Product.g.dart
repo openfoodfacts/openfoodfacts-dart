@@ -22,6 +22,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     categories: json['categories'] as String,
     nutrimentEnergyUnit: json['nutriment_energy_unit'] as String,
     nutrimentDataPer: json['nutrition_data_per'] as String,
+    nutriscore: json['nutrition_grade_fr'] as String,
     nutriments: json['nutriments'] == null
         ? null
         : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
@@ -80,6 +81,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('ingredients_text_fr', instance.ingredientsTextFR);
   writeNotNull('nutriment_energy_unit', instance.nutrimentEnergyUnit);
   writeNotNull('nutrition_data_per', instance.nutrimentDataPer);
+  writeNotNull('nutrition_grade_fr', instance.nutriscore);
   writeNotNull('categories', instance.categories);
   writeNotNull('categories_tags', instance.categoriesTags);
   writeNotNull('labels_tags', instance.labelsTags);
