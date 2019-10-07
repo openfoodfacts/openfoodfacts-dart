@@ -1,3 +1,4 @@
+import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
@@ -75,6 +76,12 @@ void main() {
       expect(result.product.additives.names[0], "E150d");
       expect(result.product.additives.ids[4], "en:e950");
       expect(result.product.additives.names[4], "E950");
+
+      expect(
+          result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SUGARS],
+          Level.LOW);
+      expect(result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SALT],
+          Level.LOW);
     });
 
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',
