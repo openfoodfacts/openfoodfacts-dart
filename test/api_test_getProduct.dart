@@ -147,6 +147,8 @@ void main() {
 
       expect(result.product.selectedImages.list.length, 9);
 
+      expect(result.product.nutriscore, "e");
+
       expect(result.product.nutriments != null, true);
 
       expect(result.product.nutriments.energyUnit, "kJ");

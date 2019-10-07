@@ -51,6 +51,8 @@ class Product extends JsonObject {
   String nutrimentEnergyUnit;
   @JsonKey(name: 'nutrition_data_per', includeIfNull: false)
   String nutrimentDataPer;
+  @JsonKey(name: 'nutrition_grade_fr', includeIfNull: false)
+  String nutriscore;
 
   @JsonKey(includeIfNull: false)
   String categories;
@@ -81,6 +83,7 @@ class Product extends JsonObject {
       this.categories,
       this.nutrimentEnergyUnit,
       this.nutrimentDataPer,
+      this.nutriscore,
       this.nutriments,
       this.additives});
 
