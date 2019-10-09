@@ -3,7 +3,6 @@ library openfoodfacts;
 import 'dart:convert';
 import 'dart:async';
 
-
 import 'interface/Parameter.dart';
 import 'model/SendImage.dart';
 import 'model/Product.dart';
@@ -34,7 +33,6 @@ export 'utils/HttpHelper.dart';
 
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
-
   static const String URI_SCHEME = "https";
   static const String URI_HOST = "world.openfoodfacts.org";
   static const String URI_HOST_DE = "de.openfoodfacts.org";
@@ -44,17 +42,15 @@ class OpenFoodAPIClient {
   /// Add the given product to the database.
   /// Returns a Status object as result.
   static Future<Status> saveProduct(User user, Product product) async {
-
     var parameterMap = new Map<String, String>();
     parameterMap.addAll(user.toData());
     parameterMap.addAll(product.toData());
 
-    var productUri = Uri(
-        scheme: URI_SCHEME,
-        host: URI_HOST,
-        path: '/cgi/product_jqm2.pl');
+    var productUri =
+        Uri(scheme: URI_SCHEME, host: URI_HOST, path: '/cgi/product_jqm2.pl');
 
-    String response = await HttpHelper().doPostRequest(productUri, parameterMap);
+    String response =
+        await HttpHelper().doPostRequest(productUri, parameterMap);
     print(response);
     var status = Status.fromJson(json.decode(response));
     return status;
@@ -64,7 +60,6 @@ class OpenFoodAPIClient {
   /// The image will be added to the product specified in the SendImage
   /// Returns a Status object as result.
   static Future<Status> addProductImage(User user, SendImage image) async {
-
     var dataMap = new Map<String, String>();
     var fileMap = new Map<String, Uri>();
 
@@ -80,21 +75,20 @@ class OpenFoodAPIClient {
     return await HttpHelper().doMultipartRequest(imageUri, dataMap, fileMap);
   }
 
-
   /// Returns the product for the given barcode.
   /// The ProductResult does not contain a product, if the product is not available.
   /// No parsing of ingredients.
   /// No adjustment by language.
-  static Future<ProductResult> getProductRaw(String barcode, String lang) async {
-
+  static Future<ProductResult> getProductRaw(
+      String barcode, String lang) async {
     if (barcode == null || barcode.isEmpty) {
       return new ProductResult();
     }
 
     var productUri = Uri(
-      scheme: URI_SCHEME,
-      host: _getHostByLanguage(lang),
-      path: 'api/v0/product/' + barcode + '.json');
+        scheme: URI_SCHEME,
+        host: _getHostByLanguage(lang),
+        path: 'api/v0/product/' + barcode + '.json');
 
     String response = await HttpHelper().doGetRequest(productUri);
     var result = ProductResult.fromJson(json.decode(response));
@@ -116,18 +110,15 @@ class OpenFoodAPIClient {
     return result;
   }
 
-
   /// Search the OpenFoodFacts product database with the given parameters.
   /// Returns the list of products as SearchResult.
   /// Query the language specific host from OpenFoodFacts.
-  static Future<SearchResult> searchProducts(
-      List<Parameter> parameterList,
+  static Future<SearchResult> searchProducts(List<Parameter> parameterList,
       {String lang = User.LANGUAGE_UNDEFINED}) async {
-
     var parameterMap = new Map<String, String>();
     parameterMap.putIfAbsent('search_terms', () => "");
     parameterList.forEach(
-            (p) => parameterMap.putIfAbsent(p.getName(), () => p.getValue()));
+        (p) => parameterMap.putIfAbsent(p.getName(), () => p.getValue()));
 
     var searchUri = Uri(
         scheme: URI_SCHEME,
@@ -137,10 +128,10 @@ class OpenFoodAPIClient {
 
     print("URI: " + searchUri.toString());
 
-    String response  = await HttpHelper().doGetRequest(searchUri);
+    String response = await HttpHelper().doGetRequest(searchUri);
     var result = SearchResult.fromJson(json.decode(response));
 
-    for(Product product in result.products) {
+    for (Product product in result.products) {
       ProductHelper.prepareProductName(product, lang);
       ProductHelper.parseIngredients(product, lang);
       ProductHelper.removeImages(product, lang);
@@ -151,9 +142,7 @@ class OpenFoodAPIClient {
 
   /// login on the main page - not used
   static Future<String> _login(User user) async {
-    var loginUri = new Uri(
-        scheme: URI_SCHEME,
-        host: URI_HOST);
+    var loginUri = new Uri(scheme: URI_SCHEME, host: URI_HOST);
     String response = await HttpHelper().doPostRequest(loginUri, user.toData());
     return response;
   }
@@ -170,7 +159,4 @@ class OpenFoodAPIClient {
         return URI_HOST;
     }
   }
-
 }
-
-

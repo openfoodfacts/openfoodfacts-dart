@@ -7,8 +7,7 @@ import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'test_constants.dart';
 
 void main() {
-  group('$OpenFoodAPIClient add product images', ()  {
-
+  group('$OpenFoodAPIClient add product images', () {
     setUpAll(() async {
       // test mode is not working here.
       // image uploads are addressed to production database in every case. Oo
@@ -23,7 +22,8 @@ void main() {
         imageField: ProductImage.FIELD_FRONT,
         imageUrl: Uri.parse("assets/front_de.jpg"),
       );
-      Status status = await OpenFoodAPIClient.addProductImage(TestConstants.TEST_USER, image);
+      Status status = await OpenFoodAPIClient.addProductImage(
+          TestConstants.TEST_USER, image);
 
       expect(status != null, true);
       expect(status.status, "status ok");
@@ -36,7 +36,8 @@ void main() {
         imageField: ProductImage.FIELD_INGREDIENTS,
         imageUrl: Uri.parse("assets/ingredients_en.jpg"),
       );
-      Status status = await OpenFoodAPIClient.addProductImage(TestConstants.TEST_USER, image);
+      Status status = await OpenFoodAPIClient.addProductImage(
+          TestConstants.TEST_USER, image);
 
       expect(status != null, true);
       expect(status.status, "status ok");

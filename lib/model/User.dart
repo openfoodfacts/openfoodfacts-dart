@@ -6,7 +6,6 @@ part 'User.g.dart';
 
 @JsonSerializable()
 class User extends JsonObject {
-
   static const String LANGUAGE_UNDEFINED = "-";
   static const String LANGUAGE_DE = "de";
   static const String LANGUAGE_EN = "en";
@@ -24,15 +23,10 @@ class User extends JsonObject {
 
   @JsonKey(name: 'user_id', nullable: false)
   final String userId;
-  @JsonKey( nullable: false)
+  @JsonKey(nullable: false)
   final String password;
 
-  const User({
-    @required this.userId,
-    @required this.password,
-    this.comment
-  });
-
+  const User({@required this.userId, @required this.password, this.comment});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

@@ -1,10 +1,9 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 
 class OutputFormat extends Parameter {
-
   @override
   String getName() {
-    switch(format) {
+    switch (format) {
       case Format.XML:
         return "xml";
 
@@ -14,7 +13,7 @@ class OutputFormat extends Parameter {
       case Format.JSON:
       default:
         return "json";
-    };
+    }
   }
 
   @override
@@ -24,9 +23,7 @@ class OutputFormat extends Parameter {
 
   final Format format;
 
-  const OutputFormat({
-    this.format
-  });
+  const OutputFormat({this.format});
 }
 
 enum Format {

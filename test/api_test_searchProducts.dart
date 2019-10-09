@@ -8,15 +8,13 @@ import 'package:openfoodfacts/model/User.dart';
 import 'test_constants.dart';
 
 void main() {
-
   setUpAll(() async {
     new HttpHelper().isTestMode = true;
     new HttpHelper().userAgent = TestConstants.USER_AGENT;
   });
 
-  group('$OpenFoodAPIClient search products', ()  {
+  group('$OpenFoodAPIClient search products', () {
     test('search favorite products', () async {
-
       var parameterList = <Parameter>[
         const OutputFormat(format: Format.JSON),
         const Page(page: 1),
@@ -26,7 +24,8 @@ void main() {
       ];
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          parameterList, lang: User.LANGUAGE_DE);
+          parameterList,
+          lang: User.LANGUAGE_DE);
 
       expect(result != null, true);
       expect(result.page, 1);
@@ -41,7 +40,6 @@ void main() {
     });
 
     test('search favorite products EN', () async {
-
       var parameterList = <Parameter>[
         const OutputFormat(format: Format.JSON),
         const Page(page: 14),
@@ -51,7 +49,8 @@ void main() {
       ];
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          parameterList, lang: User.LANGUAGE_EN);
+          parameterList,
+          lang: User.LANGUAGE_EN);
 
       expect(result != null, true);
       expect(result.page, 14);
@@ -65,7 +64,6 @@ void main() {
     });
 
     test('type bug : ingredient percent int vs String ', () async {
-
       var parameterList = <Parameter>[
         const OutputFormat(format: Format.JSON),
         const Page(page: 16),
@@ -75,7 +73,8 @@ void main() {
       ];
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          parameterList, lang: User.LANGUAGE_DE);
+          parameterList,
+          lang: User.LANGUAGE_DE);
 
       print(result);
 
@@ -88,19 +87,24 @@ void main() {
       expect(result.count > 30000, true);
 
       print(result.products[0].toData().toString());
-      result.products[0].ingredients?.forEach((i) => print(i.percent?.toString()));
+      result.products[0].ingredients
+          ?.forEach((i) => print(i.percent?.toString()));
 
       print(result.products[1].toData().toString());
-      result.products[1].ingredients?.forEach((i) => print(i.percent?.toString()));
+      result.products[1].ingredients
+          ?.forEach((i) => print(i.percent?.toString()));
 
       print(result.products[2].toData().toString());
-      result.products[2].ingredients?.forEach((i) => print(i.percent?.toString()));
+      result.products[2].ingredients
+          ?.forEach((i) => print(i.percent?.toString()));
 
       print(result.products[3].toData().toString());
-      result.products[3].ingredients?.forEach((i) => print(i.percent?.toString()));
+      result.products[3].ingredients
+          ?.forEach((i) => print(i.percent?.toString()));
 
       print(result.products[4].toData().toString());
-      result.products[4].ingredients?.forEach((i) => print(i.percent?.toString()));
+      result.products[4].ingredients
+          ?.forEach((i) => print(i.percent?.toString()));
     });
   });
 }

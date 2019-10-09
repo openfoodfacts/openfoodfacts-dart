@@ -1,7 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../interface/JsonObject.dart';
+import 'Additives.dart';
 import 'ImageList.dart';
 import 'Ingredient.dart';
+import 'Nutriments.dart';
 
 part 'Product.g.dart';
 
@@ -30,6 +32,12 @@ class Product extends JsonObject {
   @JsonKey(includeIfNull: false)
   List<Ingredient> ingredients;
 
+  @JsonKey(includeIfNull: false)
+  Nutriments nutriments;
+
+  @JsonKey(name: 'additives_tags', includeIfNull: false)
+  Additives additives;
+
   @JsonKey(name: 'ingredients_text', includeIfNull: false)
   String ingredientsText;
   @JsonKey(name: 'ingredients_text_de', includeIfNull: false)
@@ -39,12 +47,12 @@ class Product extends JsonObject {
   @JsonKey(name: 'ingredients_text_fr', includeIfNull: false)
   String ingredientsTextFR;
 
-  @JsonKey(name: 'nutriment_energy', includeIfNull: false)
-  String nutrimentEnergy;
   @JsonKey(name: 'nutriment_energy_unit', includeIfNull: false)
   String nutrimentEnergyUnit;
   @JsonKey(name: 'nutrition_data_per', includeIfNull: false)
   String nutrimentDataPer;
+  @JsonKey(name: 'nutrition_grade_fr', includeIfNull: false)
+  String nutriscore;
 
   @JsonKey(includeIfNull: false)
   String categories;
@@ -60,28 +68,28 @@ class Product extends JsonObject {
   @JsonKey(name: 'traces_tags', includeIfNull: false)
   List<String> tracesTags;
 
-  Product({
-    this.barcode,
-    this.productName,
-    this.productNameDE,
-    this.productNameEN,
-    this.brands,
-    this.lang,
-    this.quantity,
-    this.imgSmallUrl,
-    this.ingredientsText,
-    this.ingredientsTextDE,
-    this.ingredientsTextEN,
-    this.categories,
-    this.nutrimentEnergy,
-    this.nutrimentEnergyUnit,
-    this.nutrimentDataPer,
-  });
+  Product(
+      {this.barcode,
+      this.productName,
+      this.productNameDE,
+      this.productNameEN,
+      this.brands,
+      this.lang,
+      this.quantity,
+      this.imgSmallUrl,
+      this.ingredientsText,
+      this.ingredientsTextDE,
+      this.ingredientsTextEN,
+      this.categories,
+      this.nutrimentEnergyUnit,
+      this.nutrimentDataPer,
+      this.nutriscore,
+      this.nutriments,
+      this.additives});
 
-
-  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
+  factory Product.fromJson(Map<String, dynamic> json) =>
+      _$ProductFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$ProductToJson(this);
-
 }

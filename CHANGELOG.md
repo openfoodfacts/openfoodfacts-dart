@@ -1,3 +1,6 @@
+## [0.1.10] - 5.10.2019
+- nutriments management implemented
+
 ## [0.1.9] - 21.09.2019
 - get product image by field, size and language
 

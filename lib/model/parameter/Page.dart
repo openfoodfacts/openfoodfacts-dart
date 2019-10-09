@@ -1,7 +1,6 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 
 class Page extends Parameter {
-
   @override
   String getName() {
     return "page";
@@ -14,8 +13,5 @@ class Page extends Parameter {
 
   final int page;
 
-  const Page({
-    this.page
-  });
-
+  const Page({this.page});
 }

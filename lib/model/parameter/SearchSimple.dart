@@ -1,8 +1,6 @@
-
 import 'package:openfoodfacts/interface/Parameter.dart';
 
 class SearchSimple extends Parameter {
-
   @override
   String getName() {
     return "search_type";
@@ -15,8 +13,5 @@ class SearchSimple extends Parameter {
 
   final bool active;
 
-  const SearchSimple({
-    this.active = true
-  });
-
+  const SearchSimple({this.active = true});
 }

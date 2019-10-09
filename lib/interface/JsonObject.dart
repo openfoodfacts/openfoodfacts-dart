@@ -1,7 +1,5 @@
-
 /// interface class for all serializable json model objects.
 abstract class JsonObject {
-
   Map<String, dynamic> toJson();
 
   Map<String, String> toData() {
@@ -15,5 +13,6 @@ abstract class JsonObject {
 
   const JsonObject();
 
-  static int parseInt(dynamic json) => json is String ? int.tryParse(json) : json;
+  static int parseInt(dynamic json) =>
+      json is String ? int.tryParse(json) : json;
 }

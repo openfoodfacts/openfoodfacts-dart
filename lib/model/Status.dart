@@ -5,7 +5,6 @@ part 'Status.g.dart';
 
 @JsonSerializable()
 class Status extends JsonObject {
-
   final status;
 
   @JsonKey(name: 'status_verbose')
@@ -27,4 +26,3 @@ class Status extends JsonObject {
 
   Map<String, dynamic> toJson() => _$StatusToJson(this);
 }
-

@@ -6,7 +6,6 @@ part 'ProductResult.g.dart';
 
 @JsonSerializable()
 class ProductResult extends JsonObject {
-
   final int status;
   @JsonKey(name: "code", nullable: false)
   final String barcode;
@@ -14,14 +13,11 @@ class ProductResult extends JsonObject {
   final String statusVerbose;
   final Product product;
 
-  const ProductResult({
-    this.status,
-    this.barcode,
-    this.statusVerbose,
-    this.product
-  });
+  const ProductResult(
+      {this.status, this.barcode, this.statusVerbose, this.product});
 
-  factory ProductResult.fromJson(Map<String, dynamic> json) => _$ProductResultFromJson(json);
+  factory ProductResult.fromJson(Map<String, dynamic> json) =>
+      _$ProductResultFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$ProductResultToJson(this);
