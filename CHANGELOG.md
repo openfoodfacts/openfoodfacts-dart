@@ -1,7 +1,8 @@
-## [0.1.1] - 5.10.2019
+## [0.1.11] - 9.10.2019
 - additives management implemented
 - nutrient levels implemented
 - added Nutriscore to product
+- bugfix: ingredientText language dependent
 
 ## [0.1.10] - 5.10.2019
 - nutriments management implemented
