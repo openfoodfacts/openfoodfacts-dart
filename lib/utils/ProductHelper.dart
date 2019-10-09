@@ -52,14 +52,14 @@ class ProductHelper {
     // choose the language specific string of ingredients
     switch (lang) {
       case User.LANGUAGE_DE:
-        product.ingredientsText = product.ingredientsTextDE;
+        product.ingredientsText = product.ingredientsTextDE ?? product.ingredientsText;
         break;
       case User.LANGUAGE_UNDEFINED:
       case User.LANGUAGE_EN:
-        product.ingredientsText = product.ingredientsTextEN;
+        product.ingredientsText = product.ingredientsTextEN ?? product.ingredientsText;
         break;
       case User.LANGUAGE_FR:
-        product.ingredientsText = product.ingredientsTextFR;
+        product.ingredientsText = product.ingredientsTextFR ?? product.ingredientsText;
         break;
       default:
         break;
