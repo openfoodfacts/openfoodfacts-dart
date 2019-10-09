@@ -1,3 +1,4 @@
+import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
@@ -54,6 +55,21 @@ void main() {
       expect(result.product.nutriments.saturatedFat, 1.1);
       expect(result.product.nutriments.proteins, 4.5);
       expect(result.product.nutriments.novaGroup, 4);
+
+      expect(result.product.additives.ids[0], "en:e464");
+      expect(result.product.additives.names[0], "E464");
+
+      expect(
+          result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SUGARS],
+          Level.LOW);
+      expect(result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_FAT],
+          Level.MODERATE);
+      expect(
+          result.product.nutrientLevels
+              .levels[NutrientLevels.NUTRIENT_SATURATED_FAT],
+          Level.LOW);
+      expect(result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SALT],
+          Level.MODERATE);
     });
 
     test('get product test 2', () async {
