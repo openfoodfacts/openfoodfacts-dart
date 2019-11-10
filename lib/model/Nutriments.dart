@@ -24,8 +24,6 @@ class Nutriments extends JsonObject {
   int novaGroup;
   @JsonKey(name: "energy_100g", includeIfNull: false)
   double energy;
-  @JsonKey(name: "energy_unit", includeIfNull: false)
-  String energyUnit;
   @JsonKey(name: "carbohydrates_100g", includeIfNull: false)
   double carbohydrates;
 
@@ -38,7 +36,6 @@ class Nutriments extends JsonObject {
       this.proteins,
       this.novaGroup,
       this.energy,
-      this.energyUnit,
       this.carbohydrates});
 
   factory Nutriments.fromJson(Map<String, dynamic> json) =>

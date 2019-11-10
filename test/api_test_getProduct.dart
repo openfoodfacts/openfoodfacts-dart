@@ -62,7 +62,6 @@ void main() {
 
       expect(result.product.nutriments != null, true);
 
-      expect(result.product.nutriments.energyUnit, "kj");
       expect(result.product.nutriments.energy, 0.8);
       expect(result.product.nutriments.sugars, 0.0);
       expect(result.product.nutriments.salt, 0.02);
@@ -158,7 +157,6 @@ void main() {
 
       expect(result.product.nutriments != null, true);
 
-      expect(result.product.nutriments.energyUnit, "kJ");
       expect(result.product.nutriments.energy, 2125.0);
       expect(result.product.nutriments.sugars, 28.0);
       expect(result.product.nutriments.salt, 0.31);
@@ -262,7 +260,6 @@ void main() {
 
       expect(result.product.nutriments != null, true);
 
-      expect(result.product.nutriments.energyUnit, "kcal");
       expect(result.product.nutriments.energy, 1736.0);
       expect(result.product.nutriments.sugars, 2.8);
       expect(result.product.nutriments.salt, 0.9);
