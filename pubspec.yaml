@@ -1,6 +1,6 @@
 name: openfoodfacts
 description: dart package for the Open Food Facts API, a food products database made by everyone, for everyone.
-version: 0.1.11
+version: 0.1.12
 authors:
 - Alexander Schacht <grumpf@gmx.de>
 - Primaël Quémerais <primael@reefind.com>

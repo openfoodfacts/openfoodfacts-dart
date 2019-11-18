@@ -1,6 +1,8 @@
+## [0.1.12] - 18.11.2019
+- nutrient levels added
+
 ## [0.1.11] - 9.10.2019
 - additives management implemented
-- nutrient levels implemented
 - added Nutriscore to product
 - bugfix: ingredientText language dependent
 
