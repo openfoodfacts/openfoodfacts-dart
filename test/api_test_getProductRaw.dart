@@ -1,3 +1,4 @@
+import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
@@ -45,7 +46,6 @@ void main() {
 
       expect(result.product.nutriments != null, true);
 
-      expect(result.product.nutriments.energyUnit, "kJ");
       expect(result.product.nutriments.energy, 1099.0);
       expect(result.product.nutriments.sugars, 0.9);
       expect(result.product.nutriments.salt, 1.0);
@@ -54,6 +54,21 @@ void main() {
       expect(result.product.nutriments.saturatedFat, 1.1);
       expect(result.product.nutriments.proteins, 4.5);
       expect(result.product.nutriments.novaGroup, 4);
+
+      expect(result.product.additives.ids[0], "en:e464");
+      expect(result.product.additives.names[0], "E464");
+
+      expect(
+          result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SUGARS],
+          Level.LOW);
+      expect(result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_FAT],
+          Level.MODERATE);
+      expect(
+          result.product.nutrientLevels
+              .levels[NutrientLevels.NUTRIENT_SATURATED_FAT],
+          Level.LOW);
+      expect(result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SALT],
+          Level.MODERATE);
     });
 
     test('get product test 2', () async {
@@ -74,7 +89,6 @@ void main() {
 
       expect(result.product.nutriments != null, true);
 
-      expect(result.product.nutriments.energyUnit, null);
       expect(result.product.nutriments.energy, null);
       expect(result.product.nutriments.sugars, null);
       expect(result.product.nutriments.salt, 0.0019558);

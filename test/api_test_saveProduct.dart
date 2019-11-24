@@ -24,7 +24,7 @@ void main() {
           nutrimentDataPer: "serving",
           ingredientsText:
               "fortified wheat flour, chocolate chips (25%), sugar, palm oil,  golden syrup, whey and whey derivatives (milk), raising agents, salt, flavouring",
-          nutriments: Nutriments(energyUnit: "kJ", novaGroup: 4),
+          nutriments: Nutriments(novaGroup: 4),
           additives: Additives(["en:e150d"], ["E150d"]));
       Status status =
           await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product);

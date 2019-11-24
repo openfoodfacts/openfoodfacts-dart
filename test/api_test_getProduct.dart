@@ -1,3 +1,4 @@
+import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
@@ -61,7 +62,6 @@ void main() {
 
       expect(result.product.nutriments != null, true);
 
-      expect(result.product.nutriments.energyUnit, "kj");
       expect(result.product.nutriments.energy, 0.8);
       expect(result.product.nutriments.sugars, 0.0);
       expect(result.product.nutriments.salt, 0.02);
@@ -75,6 +75,12 @@ void main() {
       expect(result.product.additives.names[0], "E150d");
       expect(result.product.additives.ids[4], "en:e950");
       expect(result.product.additives.names[4], "E950");
+
+      expect(
+          result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SUGARS],
+          Level.LOW);
+      expect(result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SALT],
+          Level.LOW);
     });
 
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',
@@ -147,9 +153,10 @@ void main() {
 
       expect(result.product.selectedImages.list.length, 9);
 
+      expect(result.product.nutriscore, "e");
+
       expect(result.product.nutriments != null, true);
 
-      expect(result.product.nutriments.energyUnit, "kJ");
       expect(result.product.nutriments.energy, 2125.0);
       expect(result.product.nutriments.sugars, 28.0);
       expect(result.product.nutriments.salt, 0.31);
@@ -253,7 +260,6 @@ void main() {
 
       expect(result.product.nutriments != null, true);
 
-      expect(result.product.nutriments.energyUnit, "kcal");
       expect(result.product.nutriments.energy, 1736.0);
       expect(result.product.nutriments.sugars, 2.8);
       expect(result.product.nutriments.salt, 0.9);
@@ -272,4 +278,17 @@ void main() {
     assert(result != null);
     assert(result.product == null);
   });
+
+  test('product ingredients not available', () async {
+    String barcode = "4316268596299";
+    ProductResult result = await OpenFoodAPIClient.getProduct(
+        barcode, User.LANGUAGE_DE);
+
+
+    assert(result != null);
+    assert(result.product != null);
+    print("number of ingredients: " + result.product.ingredients.length.toString());
+    assert(result.product.ingredientsText != null);
+  });
 }
+

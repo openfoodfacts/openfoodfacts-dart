@@ -3,6 +3,7 @@ import '../interface/JsonObject.dart';
 import 'Additives.dart';
 import 'ImageList.dart';
 import 'Ingredient.dart';
+import 'NutrientLevels.dart';
 import 'Nutriments.dart';
 
 part 'Product.g.dart';
@@ -38,6 +39,9 @@ class Product extends JsonObject {
   @JsonKey(name: 'additives_tags', includeIfNull: false)
   Additives additives;
 
+  @JsonKey(name: 'nutrient_levels', includeIfNull: false)
+  NutrientLevels nutrientLevels;
+
   @JsonKey(name: 'ingredients_text', includeIfNull: false)
   String ingredientsText;
   @JsonKey(name: 'ingredients_text_de', includeIfNull: false)
@@ -51,6 +55,8 @@ class Product extends JsonObject {
   String nutrimentEnergyUnit;
   @JsonKey(name: 'nutrition_data_per', includeIfNull: false)
   String nutrimentDataPer;
+  @JsonKey(name: 'nutrition_grade_fr', includeIfNull: false)
+  String nutriscore;
 
   @JsonKey(includeIfNull: false)
   String categories;
@@ -81,8 +87,10 @@ class Product extends JsonObject {
       this.categories,
       this.nutrimentEnergyUnit,
       this.nutrimentDataPer,
+      this.nutriscore,
       this.nutriments,
-      this.additives});
+      this.additives,
+      this.nutrientLevels});
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);

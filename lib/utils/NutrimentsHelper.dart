@@ -4,7 +4,8 @@ enum NormalizedEnergyUnit { kCal, kJ, undefined }
 
 class NutrimentsHelper {
   /// normalize the energy unit as it is pretty fragmented.
-  static NormalizedEnergyUnit normalizeEnergyUnit(String unit) {
+  /// Removed as now energy is always in kJ
+  /*static NormalizedEnergyUnit normalizeEnergyUnit(String unit) {
     var unitLowerCase = unit != null ? unit.toLowerCase() : null;
     switch (unitLowerCase) {
       case "kj":
@@ -17,28 +18,16 @@ class NutrimentsHelper {
         return NormalizedEnergyUnit.undefined;
         break;
     }
-  }
+  }*/
 
-  /// get the energy value converted in kCal if necessary.
+  /// get the energy value converted in kCal.
   static double getEnergyAsKCal(Nutriments nutriments) {
-    switch (normalizeEnergyUnit(nutriments.energyUnit)) {
-      case NormalizedEnergyUnit.kCal:
-        return nutriments.energy;
-        break;
-      case NormalizedEnergyUnit.kJ:
-        return (nutriments.energy * 0.2388);
-        break;
-      case NormalizedEnergyUnit.undefined:
-        return null;
-        break;
-      default:
-        return null;
-        break;
-    }
+    return (nutriments.energy * 0.2388);
   }
 
   /// get the energy value converted in kJ if necessary.
-  static double getEnergyAsKJ(Nutriments nutriments) {
+  /// Removed as now energy is always in kJ
+  /*static double getEnergyAsKJ(Nutriments nutriments) {
     switch (normalizeEnergyUnit(nutriments.energyUnit)) {
       case NormalizedEnergyUnit.kCal:
         return (nutriments.energy * 4.1868);
@@ -53,7 +42,7 @@ class NutrimentsHelper {
         return null;
         break;
     }
-  }
+  }*/
 
   /// calculates the energy for 100g in kJ.
   /// ! should be used cautiously (might not be displayed to the end user) !
@@ -75,14 +64,8 @@ class NutrimentsHelper {
   /// uncoherent.
   static bool checkEnergyCoherence(
       Nutriments nutriments, double marginPercentage) {
-    NormalizedEnergyUnit energyUnit =
-        normalizeEnergyUnit(nutriments.energyUnit);
 
-    if (energyUnit == NormalizedEnergyUnit.undefined) return null;
-
-    double statedEnergy = energyUnit == NormalizedEnergyUnit.kJ
-        ? nutriments.energy
-        : getEnergyAsKJ(nutriments);
+    double statedEnergy = nutriments.energy;
 
     double lowLimit =
         statedEnergy - (statedEnergy * (marginPercentage / 100.0));
