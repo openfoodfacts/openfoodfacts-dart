@@ -38,6 +38,7 @@ class OpenFoodAPIClient {
   static const String URI_HOST_DE = "de.openfoodfacts.org";
   static const String URI_HOST_EN = "world.openfoodfacts.org";
   static const String URI_HOST_FR = "fr.openfoodfacts.org";
+  static const String URI_HOST_ES = "es.openfoodfacts.org";
 
   /// Add the given product to the database.
   /// Returns a Status object as result.
@@ -155,6 +156,8 @@ class OpenFoodAPIClient {
         return URI_HOST_EN;
       case User.LANGUAGE_FR:
         return URI_HOST_FR;
+      case User.LANGUAGE_ES:
+        return URI_HOST_ES;
       default:
         return URI_HOST;
     }

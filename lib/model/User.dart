@@ -10,12 +10,14 @@ class User extends JsonObject {
   static const String LANGUAGE_DE = "de";
   static const String LANGUAGE_EN = "en";
   static const String LANGUAGE_FR = "fr";
+  static const String LANGUAGE_ES = "es";
 
   static const List<String> LANGUAGES = <String>[
     LANGUAGE_UNDEFINED,
     LANGUAGE_DE,
     LANGUAGE_EN,
-    LANGUAGE_FR
+    LANGUAGE_FR,
+    LANGUAGE_ES
   ];
 
   @JsonKey(includeIfNull: false)
