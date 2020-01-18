@@ -1,3 +1,8 @@
+## [0.1.13] - 18.01.2020
+- search products by tags
+- search products with / without additives
+- search products with keywords
+
 ## [0.1.12] - 18.11.2019
 - nutrient levels added
 

@@ -1,5 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/interface/Parameter.dart';
+import 'package:openfoodfacts/model/Additives.dart';
+import 'package:openfoodfacts/model/parameter/ContainsAdditives.dart';
+import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
+import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/SearchResult.dart';
@@ -105,6 +109,101 @@ void main() {
       print(result.products[4].toData().toString());
       result.products[4].ingredients
           ?.forEach((i) => print(i.percent?.toString()));
+    });
+
+    test('search products by keywords', () async {
+      var parameterList = <Parameter>[
+        const OutputFormat(format: Format.JSON),
+        const Page(page: 5),
+        const PageSize(size: 10),
+        const SearchSimple(active: true),
+        const SortBy(option: SortOption.PRODUCT_NAME),
+        const SearchTerms(terms: ["Fruit"])
+      ];
+
+      SearchResult result = await OpenFoodAPIClient.searchProducts(
+          parameterList,
+          lang: User.LANGUAGE_FR);
+
+      expect(result != null, true);
+      expect(result.page, 5);
+      expect(result.pageSize, 10);
+      expect(result.products != null, true);
+      expect(result.products.length, 10);
+      expect(result.products[0].runtimeType, Product);
+      expect(result.count > 30000, true);
+      // This test may fail if the order of products returned by the API changes
+      expect(result.products[9].brands.contains("Minute Maid"), true);
+
+      print(result.products[9].toData().toString());
+    });
+
+    test('search products filter additives', () async {
+      var parameterList = <Parameter>[
+        const OutputFormat(format: Format.JSON),
+        const Page(page: 5),
+        const PageSize(size: 10),
+        const SearchSimple(active: true),
+        const SortBy(option: SortOption.PRODUCT_NAME),
+        const SearchTerms(terms: ["Fruit à coques"]),
+        const ContainsAdditives(filter: false)
+      ];
+
+      SearchResult result = await OpenFoodAPIClient.searchProducts(
+          parameterList,
+          lang: User.LANGUAGE_FR);
+
+      int totalCount = result.count;
+
+      parameterList = <Parameter>[
+        const OutputFormat(format: Format.JSON),
+        const Page(page: 5),
+        const PageSize(size: 10),
+        const SearchSimple(active: true),
+        const SortBy(option: SortOption.PRODUCT_NAME),
+        const SearchTerms(terms: ["Fruit à coques"]),
+        const ContainsAdditives(filter: true)
+      ];
+
+      result = await OpenFoodAPIClient.searchProducts(parameterList,
+          lang: User.LANGUAGE_FR);
+
+      expect(result.count < totalCount, true);
+
+      print(
+          "Total product count : $totalCount; Filtered count : ${result.count}");
+    });
+
+    test('search products with filter on tags', () async {
+      var parameterList = <Parameter>[
+        const OutputFormat(format: Format.JSON),
+        const Page(page: 5),
+        const PageSize(size: 10),
+        const SearchSimple(active: true),
+        const SortBy(option: SortOption.PRODUCT_NAME),
+        const TagFilter(
+            tagType: "categories",
+            contains: true,
+            tagName: "breakfast_cereals"),
+        const TagFilter(
+            tagType: "nutrition_grades", contains: true, tagName: "A")
+      ];
+
+      SearchResult result = await OpenFoodAPIClient.searchProducts(
+          parameterList,
+          lang: User.LANGUAGE_FR);
+
+      expect(result != null, true);
+      expect(result.page, 5);
+      expect(result.pageSize, 10);
+      expect(result.products != null, true);
+      expect(result.products.length, 10);
+      expect(result.products[0].runtimeType, Product);
+      expect(result.products[0].categoriesTags.contains("en:breakfast-cereals"),
+          true);
+      expect(result.products[0].nutriscore.toUpperCase() == 'A', true);
+
+      print(result.products[0].toData().toString());
     });
   });
 }

@@ -64,7 +64,6 @@ class NutrimentsHelper {
   /// uncoherent.
   static bool checkEnergyCoherence(
       Nutriments nutriments, double marginPercentage) {
-
     double statedEnergy = nutriments.energy;
 
     double lowLimit =
