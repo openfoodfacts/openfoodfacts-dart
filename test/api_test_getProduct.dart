@@ -281,14 +281,13 @@ void main() {
 
   test('product ingredients not available', () async {
     String barcode = "4316268596299";
-    ProductResult result = await OpenFoodAPIClient.getProduct(
-        barcode, User.LANGUAGE_DE);
-
+    ProductResult result =
+        await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_DE);
 
     assert(result != null);
     assert(result.product != null);
-    print("number of ingredients: " + result.product.ingredients.length.toString());
+    print("number of ingredients: " +
+        result.product.ingredients.length.toString());
     assert(result.product.ingredientsText != null);
   });
 }
-

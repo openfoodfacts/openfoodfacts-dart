@@ -3,6 +3,8 @@ library openfoodfacts;
 import 'dart:convert';
 import 'dart:async';
 
+import 'package:openfoodfacts/model/parameter/TagFilter.dart';
+
 import 'interface/Parameter.dart';
 import 'model/SendImage.dart';
 import 'model/Product.dart';
@@ -117,9 +119,23 @@ class OpenFoodAPIClient {
   static Future<SearchResult> searchProducts(List<Parameter> parameterList,
       {String lang = User.LANGUAGE_UNDEFINED}) async {
     var parameterMap = new Map<String, String>();
+    /*parameterList.forEach(
+        (p) => parameterMap.putIfAbsent(p.getName(), () => p.getValue()));*/
+    int filterTagCount = 0;
+    for (Parameter p in parameterList) {
+      if (p is TagFilter) {
+        TagFilter tf = p;
+        parameterMap.putIfAbsent(
+            "tagtype_$filterTagCount", () => tf.getTagType());
+        parameterMap.putIfAbsent(
+            "tag_contains_$filterTagCount", () => tf.getContains());
+        parameterMap.putIfAbsent("tag_$filterTagCount", () => tf.getTagName());
+        filterTagCount++;
+      } else {
+        parameterMap.putIfAbsent(p.getName(), () => p.getValue());
+      }
+    }
     parameterMap.putIfAbsent('search_terms', () => "");
-    parameterList.forEach(
-        (p) => parameterMap.putIfAbsent(p.getName(), () => p.getValue()));
 
     var searchUri = Uri(
         scheme: URI_SCHEME,

@@ -8,15 +8,15 @@ part of 'Nutriments.dart';
 
 Nutriments _$NutrimentsFromJson(Map<String, dynamic> json) {
   return Nutriments(
-    salt: (json['salt_100g'] as num)?.toDouble(),
-    fiber: (json['fiber_100g'] as num)?.toDouble(),
-    sugars: (json['sugars_100g'] as num)?.toDouble(),
-    fat: (json['fat_100g'] as num)?.toDouble(),
-    saturatedFat: (json['saturated-fat_100g'] as num)?.toDouble(),
-    proteins: (json['proteins_100g'] as num)?.toDouble(),
+    salt: JsonObject.parseDouble(json['salt_100g']),
+    fiber: JsonObject.parseDouble(json['fiber_100g']),
+    sugars: JsonObject.parseDouble(json['sugars_100g']),
+    fat: JsonObject.parseDouble(json['fat_100g']),
+    saturatedFat: JsonObject.parseDouble(json['saturated-fat_100g']),
+    proteins: JsonObject.parseDouble(json['proteins_100g']),
     novaGroup: JsonObject.parseInt(json['nova-group_100g']),
-    energy: (json['energy_100g'] as num)?.toDouble(),
-    carbohydrates: (json['carbohydrates_100g'] as num)?.toDouble(),
+    energy: JsonObject.parseDouble(json['energy_100g']),
+    carbohydrates: JsonObject.parseDouble(json['carbohydrates_100g']),
   );
 }
 

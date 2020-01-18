@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 /// interface class for all serializable json model objects.
 abstract class JsonObject {
   Map<String, dynamic> toJson();
@@ -15,4 +17,14 @@ abstract class JsonObject {
 
   static int parseInt(dynamic json) =>
       json is String ? int.tryParse(json) : json;
+
+  static double parseDouble(dynamic json) {
+    if (json is String) {
+      return double.tryParse(json);
+    } else if (json is int) {
+      return json.toDouble();
+    } else {
+      return json;
+    }
+  }
 }

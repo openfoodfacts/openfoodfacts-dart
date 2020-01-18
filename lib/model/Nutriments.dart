@@ -5,26 +5,46 @@ part 'Nutriments.g.dart';
 
 @JsonSerializable()
 class Nutriments extends JsonObject {
-  @JsonKey(name: "salt_100g", includeIfNull: false)
+  @JsonKey(
+      name: "salt_100g", includeIfNull: false, fromJson: JsonObject.parseDouble)
   double salt;
-  @JsonKey(name: "fiber_100g", includeIfNull: false)
+  @JsonKey(
+      name: "fiber_100g",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
   double fiber;
-  @JsonKey(name: "sugars_100g", includeIfNull: false)
+  @JsonKey(
+      name: "sugars_100g",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
   double sugars;
-  @JsonKey(name: "fat_100g", includeIfNull: false)
+  @JsonKey(
+      name: "fat_100g", includeIfNull: false, fromJson: JsonObject.parseDouble)
   double fat;
-  @JsonKey(name: "saturated-fat_100g", includeIfNull: false)
+  @JsonKey(
+      name: "saturated-fat_100g",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
   double saturatedFat;
-  @JsonKey(name: "proteins_100g", includeIfNull: false)
+  @JsonKey(
+      name: "proteins_100g",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
   double proteins;
   @JsonKey(
       name: "nova-group_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseInt)
   int novaGroup;
-  @JsonKey(name: "energy_100g", includeIfNull: false)
+  @JsonKey(
+      name: "energy_100g",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
   double energy;
-  @JsonKey(name: "carbohydrates_100g", includeIfNull: false)
+  @JsonKey(
+      name: "carbohydrates_100g",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
   double carbohydrates;
 
   Nutriments(
