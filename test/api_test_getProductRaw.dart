@@ -55,8 +55,7 @@ void main() {
       expect(result.product.nutriments.proteins, 4.5);
       expect(result.product.nutriments.novaGroup, 4);
 
-      expect(result.product.additives.ids[0], "en:e464");
-      expect(result.product.additives.names[0], "E464");
+      expect(result.product.additives.ids.isEmpty, true);
 
       expect(
           result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SUGARS],
