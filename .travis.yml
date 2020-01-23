@@ -1,6 +1,7 @@
-language: dart
-dart: - stable
-dart-task:
-  - test: true
-  - dartanalyzer: true
-  - dartfmt: true
+dart:
+- string
+dart_task:
+- test: string
+  dartanalyzer: string
+  dartfmt: true
+with_content_shell: true
