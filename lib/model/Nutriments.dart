@@ -47,6 +47,52 @@ class Nutriments extends JsonObject {
       fromJson: JsonObject.parseDouble)
   double carbohydrates;
 
+  @JsonKey(
+      name: "salt_serving",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double saltServing;
+  @JsonKey(
+      name: "fiber_serving",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double fiberServing;
+  @JsonKey(
+      name: "sugars_serving",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double sugarsServing;
+  @JsonKey(
+      name: "fat_serving",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double fatServing;
+  @JsonKey(
+      name: "saturated-fat_serving",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double saturatedFatServing;
+  @JsonKey(
+      name: "proteins_serving",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double proteinsServing;
+  @JsonKey(
+      name: "nova-group_serving",
+      includeIfNull: false,
+      fromJson: JsonObject.parseInt)
+  int novaGroupServing;
+  @JsonKey(
+      name: "energy_serving",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double energyServing;
+  @JsonKey(
+      name: "carbohydrates_serving",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double carbohydratesServing;
+
   Nutriments(
       {this.salt,
       this.fiber,
@@ -56,7 +102,16 @@ class Nutriments extends JsonObject {
       this.proteins,
       this.novaGroup,
       this.energy,
-      this.carbohydrates});
+      this.carbohydrates,
+      this.saltServing,
+      this.fiberServing,
+      this.sugarsServing,
+      this.fatServing,
+      this.saturatedFatServing,
+      this.proteinsServing,
+      this.novaGroupServing,
+      this.energyServing,
+      this.carbohydratesServing});
 
   factory Nutriments.fromJson(Map<String, dynamic> json) =>
       _$NutrimentsFromJson(json);

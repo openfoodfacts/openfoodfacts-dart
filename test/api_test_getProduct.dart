@@ -35,6 +35,8 @@ void main() {
       print(result.product.ingredientsText);
       expect(result.product.ingredients != null, true);
       expect(result.product.ingredients.length, 10);
+      print("Serving Size: ");
+      print(result.product.servingSize);
 
       expect(result.product.ingredients.any((i) => i.text == "Wasser"), true);
       expect(
@@ -70,17 +72,41 @@ void main() {
       expect(result.product.nutriments.saturatedFat, null);
       expect(result.product.nutriments.proteins, null);
       expect(result.product.nutriments.novaGroup, 4);
+      expect(result.product.nutriments.fatServing == null, true);
+      expect(result.product.nutriments.carbohydratesServing == null, true);
 
       expect(result.product.additives.ids[0], "en:e150d");
       expect(result.product.additives.names[0], "E150d");
       expect(result.product.additives.ids[4], "en:e950");
       expect(result.product.additives.names[4], "E950");
 
+      expect(result.product.servingSize == null, true);
+
       expect(
           result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SUGARS],
           Level.LOW);
       expect(result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SALT],
           Level.LOW);
+    });
+
+    test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g', () async {
+      String barcode = '0028400047685';
+      ProductResult result =
+      await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_EN);
+      expect(result != null, true);
+      expect(result.status, 1);
+      expect(result.barcode, barcode);
+      expect(result.product != null, true);
+      expect(result.product.barcode, barcode);
+
+      expect(result.product.servingSize != null, true);
+      expect(result.product.nutriments.carbohydratesServing != null, true);
+      expect(result.product.nutriments.proteinsServing != null, true);
+      expect(result.product.nutriments.saltServing != null, true);
+      expect(result.product.nutriments.proteinsServing != null, true);
+      expect(result.product.nutriments.fatServing != null, true);
+
+      print(result.product.nutriments.carbohydratesServing);
     });
 
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',

@@ -35,6 +35,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
         ? null
         : NutrientLevels.fromJson(
             json['nutrient_levels'] as Map<String, dynamic>),
+    servingSize: json['serving_size'] as String,
   )
     ..productNameFR = json['product_name_fr'] as String
     ..selectedImages = json['selected_images'] == null
@@ -75,6 +76,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   val['lang'] = instance.lang;
   val['quantity'] = instance.quantity;
   val['image_small_url'] = instance.imgSmallUrl;
+  val['serving_size'] = instance.servingSize;
   writeNotNull('selected_images', instance.selectedImages);
   writeNotNull('ingredients', instance.ingredients);
   writeNotNull('nutriments', instance.nutriments);

@@ -25,6 +25,8 @@ class Product extends JsonObject {
   String quantity;
   @JsonKey(name: 'image_small_url')
   String imgSmallUrl;
+  @JsonKey(name: 'serving_size')
+  String servingSize;
 
   /// cause nesting is sooo cool ;)
   @JsonKey(name: 'selected_images', includeIfNull: false)
@@ -90,7 +92,8 @@ class Product extends JsonObject {
       this.nutriscore,
       this.nutriments,
       this.additives,
-      this.nutrientLevels});
+      this.nutrientLevels,
+      this.servingSize});
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
