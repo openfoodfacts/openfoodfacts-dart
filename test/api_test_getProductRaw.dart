@@ -70,6 +70,24 @@ void main() {
           Level.MODERATE);
     });
 
+    test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g', () async {
+      String barcode = '0028400047685';
+      ProductResult result =
+      await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_EN);
+      expect(result != null, true);
+      expect(result.status, 1);
+      expect(result.barcode, barcode);
+      expect(result.product != null, true);
+      expect(result.product.barcode, barcode);
+
+      expect(result.product.servingSize != null, true);
+      expect(result.product.nutriments.carbohydratesServing != null, true);
+      expect(result.product.nutriments.proteinsServing != null, true);
+      expect(result.product.nutriments.saltServing != null, true);
+      expect(result.product.nutriments.proteinsServing != null, true);
+      expect(result.product.nutriments.fatServing != null, true);
+    });
+
     test('get product test 2', () async {
       String barcode = "4388810057787";
       ProductResult result =
@@ -96,6 +114,9 @@ void main() {
       expect(result.product.nutriments.saturatedFat, null);
       expect(result.product.nutriments.proteins, null);
       expect(result.product.nutriments.novaGroup, 1);
+      expect(result.product.nutriments.fatServing == null, true);
+      expect(result.product.servingSize == null, true);
+
     });
   });
 }

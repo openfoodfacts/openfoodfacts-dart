@@ -17,6 +17,15 @@ Nutriments _$NutrimentsFromJson(Map<String, dynamic> json) {
     novaGroup: JsonObject.parseInt(json['nova-group_100g']),
     energy: JsonObject.parseDouble(json['energy_100g']),
     carbohydrates: JsonObject.parseDouble(json['carbohydrates_100g']),
+    saltServing: JsonObject.parseDouble(json['salt_serving']),
+    fiberServing: JsonObject.parseDouble(json['fiber_serving']),
+    sugarsServing: JsonObject.parseDouble(json['sugars_serving']),
+    fatServing: JsonObject.parseDouble(json['fat_serving']),
+    saturatedFatServing: JsonObject.parseDouble(json['saturated-fat_serving']),
+    proteinsServing: JsonObject.parseDouble(json['proteins_serving']),
+    novaGroupServing: JsonObject.parseInt(json['nova-group_serving']),
+    energyServing: JsonObject.parseDouble(json['energy_serving']),
+    carbohydratesServing: JsonObject.parseDouble(json['carbohydrates_serving']),
   );
 }
 
@@ -38,5 +47,14 @@ Map<String, dynamic> _$NutrimentsToJson(Nutriments instance) {
   writeNotNull('nova-group_100g', instance.novaGroup);
   writeNotNull('energy_100g', instance.energy);
   writeNotNull('carbohydrates_100g', instance.carbohydrates);
+  writeNotNull('salt_serving', instance.saltServing);
+  writeNotNull('fiber_serving', instance.fiberServing);
+  writeNotNull('sugars_serving', instance.sugarsServing);
+  writeNotNull('fat_serving', instance.fatServing);
+  writeNotNull('saturated-fat_serving', instance.saturatedFatServing);
+  writeNotNull('proteins_serving', instance.proteinsServing);
+  writeNotNull('nova-group_serving', instance.novaGroupServing);
+  writeNotNull('energy_serving', instance.energyServing);
+  writeNotNull('carbohydrates_serving', instance.carbohydratesServing);
   return val;
 }
