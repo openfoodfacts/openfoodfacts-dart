@@ -42,3 +42,4 @@ run *flutter packages pub publish* in the project directory
 ## Authors
 * Alexander Schacht - [Grumpf86](https://github.com/Grumpf86 )
 * Primaël Quémerais - [Reefind](https://gitlab.com/Reefind )
+* Marcus Cantu - [Cantum2](https://github.com/Cantum2 )

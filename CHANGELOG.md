@@ -1,3 +1,6 @@
+## [0.1.15] - 24.02.2020
+- added serving size and nutriment serving sizes
+
 ## [0.1.14] - 25.01.2020
 - search products by tags
 - search products with / without additives
