@@ -1,3 +1,6 @@
+## [0.1.16] - 05.03.2020
+- added brandsTags to get brands as a list
+
 ## [0.1.15] - 24.02.2020
 - added serving size and nutriment serving sizes
 
