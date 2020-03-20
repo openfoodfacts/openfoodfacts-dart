@@ -3,9 +3,12 @@ library openfoodfacts;
 import 'dart:convert';
 import 'dart:async';
 
+import 'package:http/http.dart';
+import 'package:openfoodfacts/model/Insight.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 
 import 'interface/Parameter.dart';
+import 'model/RobotoffQuestion.dart';
 import 'model/SendImage.dart';
 import 'model/Product.dart';
 import 'model/ProductResult.dart';
@@ -41,6 +44,8 @@ class OpenFoodAPIClient {
   static const String URI_HOST_EN = "world.openfoodfacts.org";
   static const String URI_HOST_FR = "fr.openfoodfacts.org";
   static const String URI_HOST_ES = "es.openfoodfacts.org";
+
+  static const String URI_HOST_ROBOTOFF = "robotoff.openfoodfacts.org";
 
   /// Add the given product to the database.
   /// Returns a Status object as result.
@@ -153,6 +158,63 @@ class OpenFoodAPIClient {
       ProductHelper.parseIngredients(product, lang);
       ProductHelper.removeImages(product, lang);
     }
+
+    return result;
+  }
+
+  static Future<InsightResult> getInsightRandom({InsightTypes type, String country, String valueTag, String serverDomain}) async {
+
+    final Map<String, String> parameters = Map<String, String>();
+
+    if(type != null) {
+      parameters["type"] = type.value;
+    }
+    if(country != null) {
+    parameters["country"] = country;
+    }
+    if(valueTag != null) {
+    parameters["value_tag"] = valueTag;
+    }
+    if(serverDomain != null) {
+    parameters["server_domain"] = serverDomain;
+    }
+
+    var robotoffInsightUri = Uri(
+      scheme: URI_SCHEME,
+      host: URI_HOST_ROBOTOFF,
+      path: 'api/v1/insights/random/',
+      queryParameters: parameters,
+    );
+
+    Response response = await HttpHelper().doGetRequestFull(robotoffInsightUri);
+    var result = InsightResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+
+    return result;
+  }
+
+  static Future<RobotoffQuestionResult> getQuestionsForProduct(String barcode, String lang, {int count}) async {
+    if(barcode == null || barcode.isEmpty) {
+      return RobotoffQuestionResult();
+    }
+
+    if(count == null || count <= 0) {
+      count = 1;
+    }
+
+    final Map<String, String> parameters = <String, String>{
+      'lang': lang,
+      'count' : count.toString()
+    };
+
+    var robotoffQuestionUri = Uri(
+      scheme: URI_SCHEME,
+      host: URI_HOST_ROBOTOFF,
+      path: 'api/v1/questions/$barcode',
+      queryParameters: parameters,
+    );
+
+    Response response = await HttpHelper().doGetRequestFull(robotoffQuestionUri);
+    var result = RobotoffQuestionResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
 
     return result;
   }

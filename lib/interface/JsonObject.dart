@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 /// interface class for all serializable json model objects.
 abstract class JsonObject {

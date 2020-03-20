@@ -1,3 +1,4 @@
+import 'package:openfoodfacts/model/User.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
 //import 'package:http_parser/http_parser.dart';
@@ -27,6 +28,13 @@ class HttpHelper {
         await http.get(uri.toString(), headers: _buildHeaders());
 
     return response.body;
+  }
+
+  Future<http.Response> doGetRequestFull(Uri uri) async {
+    http.Response response =
+    await http.get(uri.toString(), headers: _buildHeaders());
+
+    return response;
   }
 
   /// Send a http post request to the specified uri.
@@ -75,6 +83,7 @@ class HttpHelper {
         });
       } else {
         print("Error: " + response.statusCode.toString());
+        return null;
       }
     });
     print(status.toJson().toString());
@@ -82,15 +91,18 @@ class HttpHelper {
   }
 
   /// build the request headers
-  Map<String, String> _buildHeaders() {
+  Map<String, String> _buildHeaders({User user}) {
     var headers = new Map<String, String>();
     headers.addAll({'Accept': 'application/json'});
     headers.addAll({'UserAgent': this.userAgent});
 
     if (isTestMode) {
       var token = 'Basic ' + base64Encode(utf8.encode('off:off'));
-      headers.addAll({'authorization': token});
+      headers.addAll({'Authorization': token});
       print("TEST-MODE");
+    } else if(user != null) {
+      var token = 'Basic ' + base64Encode(utf8.encode('${user.userId}:${user.password}'));
+      headers.addAll({'Authorization': token});
     }
 
     return headers;

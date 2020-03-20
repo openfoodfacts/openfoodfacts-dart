@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/interface/Parameter.dart';
-import 'package:openfoodfacts/model/Additives.dart';
 import 'package:openfoodfacts/model/parameter/ContainsAdditives.dart';
 import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
