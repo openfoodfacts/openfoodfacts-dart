@@ -120,6 +120,7 @@ void main() {
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product.barcode, barcode);
+      expect(result.product.brandsTags[0], "kelsin");
 
       // only german ingredients
       expect(result.product.ingredientsText != null, true);

@@ -38,6 +38,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     servingSize: json['serving_size'] as String,
   )
     ..productNameFR = json['product_name_fr'] as String
+    ..brandsTags =
+        (json['brands_tags'] as List)?.map((e) => e as String)?.toList()
     ..selectedImages = json['selected_images'] == null
         ? null
         : ImageList.fromJson(json['selected_images'] as Map<String, dynamic>)
@@ -73,6 +75,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('product_name_en', instance.productNameEN);
   writeNotNull('product_name_fr', instance.productNameFR);
   val['brands'] = instance.brands;
+  val['brands_tags'] = instance.brandsTags;
   val['lang'] = instance.lang;
   val['quantity'] = instance.quantity;
   val['image_small_url'] = instance.imgSmallUrl;
