@@ -11,13 +11,15 @@ Ingredient _$IngredientFromJson(Map<String, dynamic> json) {
     rank: JsonObject.parseInt(json['rank']),
     id: json['id'] as String,
     text: json['text'] as String,
-    percent: JsonObject.parseInt(json['percent']),
+    percent: JsonObject.parseDouble(json['percent']),
     bold: json['bold'] as bool,
   );
 }
 
 Map<String, dynamic> _$IngredientToJson(Ingredient instance) {
-  final val = <String, dynamic>{};
+  final val = <String, dynamic>{
+    'rank': JsonObject.numToString(instance.rank),
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -25,10 +27,9 @@ Map<String, dynamic> _$IngredientToJson(Ingredient instance) {
     }
   }
 
-  writeNotNull('rank', instance.rank);
   writeNotNull('id', instance.id);
   val['text'] = instance.text;
-  writeNotNull('percent', instance.percent);
+  val['percent'] = JsonObject.numToString(instance.percent);
   val['bold'] = instance.bold;
   return val;
 }

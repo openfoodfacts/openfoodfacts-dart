@@ -11,14 +11,13 @@ import 'test_constants.dart';
 void main() {
   setUpAll(() async {
     new HttpHelper().isTestMode = true;
-    new HttpHelper().userAgent = TestConstants.USER_AGENT;
   });
 
   group('$OpenFoodAPIClient get products', () {
     test('get product Coca Cola Light', () async {
       String barcode = "5000112548167";
-      ProductResult result =
-          await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_DE);
+      ProductResult result = await OpenFoodAPIClient.getProduct(
+          TestConstants.TEST_USER, barcode, User.LANGUAGE_DE);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -91,8 +90,8 @@ void main() {
 
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g', () async {
       String barcode = '0028400047685';
-      ProductResult result =
-      await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_EN);
+      ProductResult result = await OpenFoodAPIClient.getProduct(
+          TestConstants.TEST_USER, barcode, User.LANGUAGE_EN);
       expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
@@ -112,8 +111,8 @@ void main() {
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',
         () async {
       String barcode = "5701184005007";
-      ProductResult result =
-          await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_DE);
+      ProductResult result = await OpenFoodAPIClient.getProduct(
+          TestConstants.TEST_USER, barcode, User.LANGUAGE_DE);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -196,8 +195,8 @@ void main() {
 
     test('get product Pâte brisée', () async {
       String barcode = "20004361";
-      ProductResult result =
-          await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_FR);
+      ProductResult result = await OpenFoodAPIClient.getProduct(
+          TestConstants.TEST_USER, barcode, User.LANGUAGE_FR);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -296,25 +295,44 @@ void main() {
       expect(result.product.nutriments.proteins, 6.3);
       expect(result.product.nutriments.novaGroup, 4);
     });
-  });
 
-  test('product not available', () async {
-    String barcode = "11111111111111111111111111";
-    ProductResult result =
-        await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_DE);
-    assert(result != null);
-    assert(result.product == null);
-  });
+    test('product not available', () async {
+      String barcode = "11111111111111111111111111";
+      ProductResult result = await OpenFoodAPIClient.getProduct(
+          TestConstants.TEST_USER, barcode, User.LANGUAGE_DE);
+      assert(result != null);
+      assert(result.product == null);
+    });
 
-  test('product ingredients not available', () async {
-    String barcode = "4316268596299";
-    ProductResult result =
-        await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_DE);
+    test('product ingredients not available', () async {
+      String barcode = "4316268596299";
+      ProductResult result = await OpenFoodAPIClient.getProduct(
+          TestConstants.TEST_USER, barcode, User.LANGUAGE_DE);
 
-    assert(result != null);
-    assert(result.product != null);
-    print("number of ingredients: " +
-        result.product.ingredients.length.toString());
-    assert(result.product.ingredientsText != null);
+      assert(result != null);
+      assert(result.product != null);
+      print("number of ingredients: " +
+          result.product.ingredients.length.toString());
+      assert(result.product.ingredientsText != null);
+    });
+
+    test('product ingredients with percent', () async {
+      String barcode = "4388860154948";
+      ProductResult result = await OpenFoodAPIClient.getProduct(
+          TestConstants.TEST_USER, barcode, User.LANGUAGE_DE);
+
+      assert(result != null);
+      assert(result.product != null);
+      print("number of ingredients: " +
+          result.product.ingredients.length.toString());
+      assert(result.product.ingredientsText != null);
+      assert(result.product.ingredients != null);
+      assert(result.product.ingredients.length > 0);
+      result.product.ingredients.forEach((Ingredient i) => print(i.toJson()));
+      print("percent: " + result.product.ingredients.firstWhere(
+              (Ingredient i) => i.percent != null).percent.toString());
+      assert(result.product.ingredients.firstWhere(
+              (Ingredient i) => i.percent != null).percent == 32);
+    });
   });
 }

@@ -2,9 +2,12 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 
 /// request a product from the OpenFoodFacts database
 Future<Product> getProduct() async {
+  // a registered user login for https://world.openfoodfacts.org/ is required
+  User myUser = new User(userId: "max@off.com", password: "password");
+
   var barcode = "0048151623426";
   ProductResult result =
-      await OpenFoodAPIClient.getProduct("barcode", User.LANGUAGE_DE);
+      await OpenFoodAPIClient.getProduct(myUser, "barcode", User.LANGUAGE_DE);
 
   if (result.status == 1) {
     return result.product;
