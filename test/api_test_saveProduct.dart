@@ -10,7 +10,6 @@ void main() {
   group('$OpenFoodAPIClient add new products', () {
     setUpAll(() async {
       new HttpHelper().isTestMode = true;
-      new HttpHelper().userAgent = TestConstants.USER_AGENT;
     });
 
     test('add new product test 1', () async {

@@ -21,6 +21,8 @@ class Product extends JsonObject {
   @JsonKey(name: 'product_name_fr', includeIfNull: false)
   String productNameFR;
   String brands;
+  @JsonKey(name: 'brands_tags')
+  List<String> brandsTags;
   String lang;
   String quantity;
   @JsonKey(name: 'image_small_url')

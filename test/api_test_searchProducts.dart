@@ -13,7 +13,6 @@ import 'test_constants.dart';
 void main() {
   setUpAll(() async {
     new HttpHelper().isTestMode = true;
-    new HttpHelper().userAgent = TestConstants.USER_AGENT;
   });
 
   group('$OpenFoodAPIClient search products', () {
@@ -27,6 +26,7 @@ void main() {
       ];
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
+          TestConstants.TEST_USER,
           parameterList,
           lang: User.LANGUAGE_DE);
 
@@ -52,6 +52,7 @@ void main() {
       ];
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
+          TestConstants.TEST_USER,
           parameterList,
           lang: User.LANGUAGE_EN);
 
@@ -76,6 +77,7 @@ void main() {
       ];
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
+          TestConstants.TEST_USER,
           parameterList,
           lang: User.LANGUAGE_DE);
 
@@ -121,6 +123,7 @@ void main() {
       ];
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
+          TestConstants.TEST_USER,
           parameterList,
           lang: User.LANGUAGE_FR);
 
@@ -131,10 +134,6 @@ void main() {
       expect(result.products.length, 10);
       expect(result.products[0].runtimeType, Product);
       expect(result.count > 30000, true);
-      // This test may fail if the order of products returned by the API changes
-      expect(result.products[9].brands.contains("Minute Maid"), true);
-
-      print(result.products[9].toData().toString());
     });
 
     test('search products filter additives', () async {
@@ -149,6 +148,7 @@ void main() {
       ];
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
+          TestConstants.TEST_USER,
           parameterList,
           lang: User.LANGUAGE_FR);
 
@@ -164,13 +164,14 @@ void main() {
         const ContainsAdditives(filter: true)
       ];
 
-      result = await OpenFoodAPIClient.searchProducts(parameterList,
+      result = await OpenFoodAPIClient.searchProducts(
+          TestConstants.TEST_USER,
+          parameterList,
           lang: User.LANGUAGE_FR);
-
-      expect(result.count < totalCount, true);
 
       print(
           "Total product count : $totalCount; Filtered count : ${result.count}");
+      expect(result.count < totalCount, true);
     });
 
     test('search products with filter on tags', () async {
@@ -189,6 +190,7 @@ void main() {
       ];
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
+          TestConstants.TEST_USER,
           parameterList,
           lang: User.LANGUAGE_FR);
 

@@ -58,7 +58,7 @@ class OpenFoodAPIClient {
         Uri(scheme: URI_SCHEME, host: URI_HOST, path: '/cgi/product_jqm2.pl');
 
     String response =
-        await HttpHelper().doPostRequest(productUri, parameterMap);
+        await HttpHelper().doPostRequest(productUri, parameterMap, user);
     print(response);
     var status = Status.fromJson(json.decode(response));
     return status;
@@ -80,7 +80,7 @@ class OpenFoodAPIClient {
         host: URI_HOST,
         path: '/cgi/product_image_upload.pl');
 
-    return await HttpHelper().doMultipartRequest(imageUri, dataMap, fileMap);
+    return await HttpHelper().doMultipartRequest(imageUri, dataMap, fileMap, user);
   }
 
   /// Returns the product for the given barcode.
@@ -88,7 +88,7 @@ class OpenFoodAPIClient {
   /// No parsing of ingredients.
   /// No adjustment by language.
   static Future<ProductResult> getProductRaw(
-      String barcode, String lang) async {
+      String barcode, String lang, {User user}) async {
     if (barcode == null || barcode.isEmpty) {
       return new ProductResult();
     }
@@ -98,7 +98,7 @@ class OpenFoodAPIClient {
         host: _getHostByLanguage(lang),
         path: 'api/v0/product/' + barcode + '.json');
 
-    String response = await HttpHelper().doGetRequest(productUri);
+    String response = await HttpHelper().doGetRequest(productUri, user: user);
     var result = ProductResult.fromJson(json.decode(response));
     return result;
   }
@@ -106,8 +106,9 @@ class OpenFoodAPIClient {
   /// Returns the product for the given barcode.
   /// The ProductResult does not contain a product, if the product is not available.
   /// ingredients, images and product name will be prepared for the given language.
-  static Future<ProductResult> getProduct(String barcode, String lang) async {
-    ProductResult result = await getProductRaw(barcode, lang);
+  static Future<ProductResult> getProduct(
+      String barcode, String lang, {User user}) async {
+    ProductResult result = await getProductRaw(barcode, lang, user: user);
 
     if (result.product != null) {
       ProductHelper.prepareProductName(result.product, lang);
@@ -121,8 +122,11 @@ class OpenFoodAPIClient {
   /// Search the OpenFoodFacts product database with the given parameters.
   /// Returns the list of products as SearchResult.
   /// Query the language specific host from OpenFoodFacts.
-  static Future<SearchResult> searchProducts(List<Parameter> parameterList,
+  static Future<SearchResult> searchProducts(
+      User user,
+      List<Parameter> parameterList,
       {String lang = User.LANGUAGE_UNDEFINED}) async {
+
     var parameterMap = new Map<String, String>();
     /*parameterList.forEach(
         (p) => parameterMap.putIfAbsent(p.getName(), () => p.getValue()));*/
@@ -150,7 +154,7 @@ class OpenFoodAPIClient {
 
     print("URI: " + searchUri.toString());
 
-    String response = await HttpHelper().doGetRequest(searchUri);
+    String response = await HttpHelper().doGetRequest(searchUri, user:user);
     var result = SearchResult.fromJson(json.decode(response));
 
     for (Product product in result.products) {
@@ -222,7 +226,8 @@ class OpenFoodAPIClient {
   /// login on the main page - not used
   static Future<String> _login(User user) async {
     var loginUri = new Uri(scheme: URI_SCHEME, host: URI_HOST);
-    String response = await HttpHelper().doPostRequest(loginUri, user.toData());
+    String response = await HttpHelper().doPostRequest(
+        loginUri, user.toData(), user);
     return response;
   }
 

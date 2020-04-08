@@ -12,7 +12,6 @@ void main() {
       // test mode is not working here.
       // image uploads are addressed to production database in every case. Oo
       new HttpHelper().isTestMode = true;
-      new HttpHelper().userAgent = TestConstants.USER_AGENT;
     });
 
     test('add front image test', () async {
