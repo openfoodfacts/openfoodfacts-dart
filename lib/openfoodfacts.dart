@@ -57,10 +57,10 @@ class OpenFoodAPIClient {
     var productUri =
         Uri(scheme: URI_SCHEME, host: URI_HOST, path: '/cgi/product_jqm2.pl');
 
-    String response =
+    Response response =
         await HttpHelper().doPostRequest(productUri, parameterMap, user);
     print(response);
-    var status = Status.fromJson(json.decode(response));
+    var status = Status.fromJson(json.decode(response.body));
     return status;
   }
 
@@ -98,8 +98,8 @@ class OpenFoodAPIClient {
         host: _getHostByLanguage(lang),
         path: 'api/v0/product/' + barcode + '.json');
 
-    String response = await HttpHelper().doGetRequest(productUri, user: user);
-    var result = ProductResult.fromJson(json.decode(response));
+    Response response = await HttpHelper().doGetRequest(productUri, user: user);
+    var result = ProductResult.fromJson(json.decode(response.body));
     return result;
   }
 
@@ -154,8 +154,8 @@ class OpenFoodAPIClient {
 
     print("URI: " + searchUri.toString());
 
-    String response = await HttpHelper().doGetRequest(searchUri, user:user);
-    var result = SearchResult.fromJson(json.decode(response));
+    Response response = await HttpHelper().doGetRequest(searchUri, user:user);
+    var result = SearchResult.fromJson(json.decode(response.body));
 
     for (Product product in result.products) {
       ProductHelper.prepareProductName(product, lang);
@@ -166,7 +166,7 @@ class OpenFoodAPIClient {
     return result;
   }
 
-  static Future<InsightResult> getInsightRandom({InsightTypes type, String country, String valueTag, String serverDomain}) async {
+  static Future<InsightResult> getInsightRandom(User user, {InsightTypes type, String country, String valueTag, String serverDomain}) async {
 
     final Map<String, String> parameters = Map<String, String>();
 
@@ -190,13 +190,13 @@ class OpenFoodAPIClient {
       queryParameters: parameters,
     );
 
-    Response response = await HttpHelper().doGetRequestFull(robotoffInsightUri);
+    Response response = await HttpHelper().doGetRequest(robotoffInsightUri, user: user);
     var result = InsightResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
 
     return result;
   }
 
-  static Future<RobotoffQuestionResult> getQuestionsForProduct(String barcode, String lang, {int count}) async {
+  static Future<RobotoffQuestionResult> getQuestionsForProduct(String barcode, String lang, User user, {int count}) async {
     if(barcode == null || barcode.isEmpty) {
       return RobotoffQuestionResult();
     }
@@ -217,7 +217,7 @@ class OpenFoodAPIClient {
       queryParameters: parameters,
     );
 
-    Response response = await HttpHelper().doGetRequestFull(robotoffQuestionUri);
+    Response response = await HttpHelper().doGetRequest(robotoffQuestionUri, user: user);
     var result = RobotoffQuestionResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
 
     return result;
@@ -226,9 +226,9 @@ class OpenFoodAPIClient {
   /// login on the main page - not used
   static Future<String> _login(User user) async {
     var loginUri = new Uri(scheme: URI_SCHEME, host: URI_HOST);
-    String response = await HttpHelper().doPostRequest(
+    Response response = await HttpHelper().doPostRequest(
         loginUri, user.toData(), user);
-    return response;
+    return response.body;
   }
 
   static String _getHostByLanguage(String lang) {

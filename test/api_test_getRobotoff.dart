@@ -6,14 +6,14 @@ import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'test_constants.dart';
 
 void main() {
+
   setUpAll(() async {
     new HttpHelper().isTestMode = true;
-    new HttpHelper().userAgent = TestConstants.USER_AGENT;
   });
 
   group('$OpenFoodAPIClient get robotoff questions', () {
     test('get questions for Noix de Saint-Jacques EN', () async {
-      RobotoffQuestionResult result = await OpenFoodAPIClient.getQuestionsForProduct("3274570800026", "en", count: 1);
+      RobotoffQuestionResult result = await OpenFoodAPIClient.getQuestionsForProduct("3274570800026", "en", TestConstants.TEST_USER, count: 1);
 
       expect(result != null, true);
       expect(result.status != null, true);
@@ -29,7 +29,7 @@ void main() {
     });
 
     test('get questions for Noix de Saint-Jacques FR', () async {
-      RobotoffQuestionResult result = await OpenFoodAPIClient.getQuestionsForProduct("3274570800026", "fr");
+      RobotoffQuestionResult result = await OpenFoodAPIClient.getQuestionsForProduct("3274570800026", "fr", TestConstants.TEST_USER);
 
       expect(result != null, true);
       expect(result.status != null, true);
@@ -48,7 +48,7 @@ void main() {
   group('$OpenFoodAPIClient get robotoff insights', () {
 
     test('get random insight', () async {
-      InsightResult result = await OpenFoodAPIClient.getInsightRandom(type: InsightTypes.CATEGORY);
+      InsightResult result = await OpenFoodAPIClient.getInsightRandom(TestConstants.TEST_USER, type: InsightTypes.CATEGORY);
 
       expect(result != null, true);
       expect(result.status != null, true);

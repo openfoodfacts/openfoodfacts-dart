@@ -24,24 +24,24 @@ class HttpHelper {
   /// Send a http get request to the specified uri.
   /// The data of the request (if any) has to be provided as parameter within the uri.
   /// The result of the request will be returned as string.
-  Future<String> doGetRequest(Uri uri, {User user}) async {
+  Future<http.Response> doGetRequest(Uri uri, {User user}) async {
     http.Response response =
         await http.get(uri.toString(), headers: _buildHeaders(user));
 
-    return response.body;
+    return response;
   }
 
   /// Send a http post request to the specified uri.
   /// The data / body of the request has to be provided as map. (key, value)
   /// The result of the request will be returned as string.
-  Future<String> doPostRequest(Uri uri, Map<String, String> body, User user) async {
+  Future<http.Response> doPostRequest(Uri uri, Map<String, String> body, User user) async {
     http.Response response = await http.post(
       uri.toString(),
       headers: _buildHeaders(user),
       body: body,
     );
 
-    return response.body;
+    return response;
   }
 
   /// Send a multipart post request to the specified uri.
