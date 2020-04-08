@@ -16,7 +16,7 @@ void main() {
     test('get product test 1', () async {
       String barcode = "8008698011065";
       ProductResult result = await OpenFoodAPIClient.getProductRaw(
-          TestConstants.TEST_USER, barcode, User.LANGUAGE_DE);
+          barcode, User.LANGUAGE_DE, user: TestConstants.TEST_USER);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -72,7 +72,7 @@ void main() {
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g', () async {
       String barcode = '0028400047685';
       ProductResult result = await OpenFoodAPIClient.getProduct(
-          TestConstants.TEST_USER, barcode, User.LANGUAGE_EN);
+          barcode, User.LANGUAGE_EN, user: TestConstants.TEST_USER);
       expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
@@ -90,7 +90,7 @@ void main() {
     test('get product test 2', () async {
       String barcode = "4388810057787";
       ProductResult result = await OpenFoodAPIClient.getProductRaw(
-          TestConstants.TEST_USER, barcode, User.LANGUAGE_DE);
+          barcode, User.LANGUAGE_DE, user: TestConstants.TEST_USER);
 
       expect(result != null, true);
       expect(result.status, 1);

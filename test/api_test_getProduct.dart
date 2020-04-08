@@ -17,7 +17,7 @@ void main() {
     test('get product Coca Cola Light', () async {
       String barcode = "5000112548167";
       ProductResult result = await OpenFoodAPIClient.getProduct(
-          TestConstants.TEST_USER, barcode, User.LANGUAGE_DE);
+          barcode, User.LANGUAGE_DE, user: TestConstants.TEST_USER);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -91,7 +91,7 @@ void main() {
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g', () async {
       String barcode = '0028400047685';
       ProductResult result = await OpenFoodAPIClient.getProduct(
-          TestConstants.TEST_USER, barcode, User.LANGUAGE_EN);
+          barcode, User.LANGUAGE_EN, user: TestConstants.TEST_USER);
       expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
@@ -112,7 +112,7 @@ void main() {
         () async {
       String barcode = "5701184005007";
       ProductResult result = await OpenFoodAPIClient.getProduct(
-          TestConstants.TEST_USER, barcode, User.LANGUAGE_DE);
+          barcode, User.LANGUAGE_DE, user: TestConstants.TEST_USER);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -196,7 +196,7 @@ void main() {
     test('get product Pâte brisée', () async {
       String barcode = "20004361";
       ProductResult result = await OpenFoodAPIClient.getProduct(
-          TestConstants.TEST_USER, barcode, User.LANGUAGE_FR);
+         barcode, User.LANGUAGE_FR, user: TestConstants.TEST_USER);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -299,7 +299,7 @@ void main() {
     test('product not available', () async {
       String barcode = "11111111111111111111111111";
       ProductResult result = await OpenFoodAPIClient.getProduct(
-          TestConstants.TEST_USER, barcode, User.LANGUAGE_DE);
+          barcode, User.LANGUAGE_DE, user: TestConstants.TEST_USER);
       assert(result != null);
       assert(result.product == null);
     });
@@ -307,32 +307,13 @@ void main() {
     test('product ingredients not available', () async {
       String barcode = "4316268596299";
       ProductResult result = await OpenFoodAPIClient.getProduct(
-          TestConstants.TEST_USER, barcode, User.LANGUAGE_DE);
+          barcode, User.LANGUAGE_DE, user: TestConstants.TEST_USER);
 
       assert(result != null);
       assert(result.product != null);
       print("number of ingredients: " +
           result.product.ingredients.length.toString());
       assert(result.product.ingredientsText != null);
-    });
-
-    test('product ingredients with percent', () async {
-      String barcode = "4388860154948";
-      ProductResult result = await OpenFoodAPIClient.getProduct(
-          TestConstants.TEST_USER, barcode, User.LANGUAGE_DE);
-
-      assert(result != null);
-      assert(result.product != null);
-      print("number of ingredients: " +
-          result.product.ingredients.length.toString());
-      assert(result.product.ingredientsText != null);
-      assert(result.product.ingredients != null);
-      assert(result.product.ingredients.length > 0);
-      result.product.ingredients.forEach((Ingredient i) => print(i.toJson()));
-      print("percent: " + result.product.ingredients.firstWhere(
-              (Ingredient i) => i.percent != null).percent.toString());
-      assert(result.product.ingredients.firstWhere(
-              (Ingredient i) => i.percent != null).percent == 32);
     });
   });
 }

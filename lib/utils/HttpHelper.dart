@@ -24,7 +24,7 @@ class HttpHelper {
   /// Send a http get request to the specified uri.
   /// The data of the request (if any) has to be provided as parameter within the uri.
   /// The result of the request will be returned as string.
-  Future<String> doGetRequest(Uri uri, User user) async {
+  Future<String> doGetRequest(Uri uri, {User user}) async {
     http.Response response =
         await http.get(uri.toString(), headers: _buildHeaders(user));
 
