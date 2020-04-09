@@ -197,7 +197,7 @@ class OpenFoodAPIClient {
     return result;
   }
 
-  static Future<List<InsightResult>> getProductInsights(String barcode, User user) async {
+  static Future<MultipleInsightResult> getProductInsights(String barcode, User user) async {
     var insightsUri = Uri(
       scheme: URI_SCHEME,
       host: URI_HOST_ROBOTOFF,
@@ -206,13 +206,7 @@ class OpenFoodAPIClient {
 
     Response response = await HttpHelper().doGetRequest(insightsUri, user: user);
 
-    List<InsightResult> result = List<InsightResult>();
-
-    for(Map<String, dynamic> i in json.decode(utf8.decode(response.bodyBytes))) {
-      result.add(InsightResult.fromJson(i));
-    }
-
-    return result;
+    return MultipleInsightResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
   }
 
   static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(String barcode, String lang, User user, {int count}) async {
@@ -248,18 +242,27 @@ class OpenFoodAPIClient {
       count = 1;
     }
 
+    List<String> typesValues = List<String>();
+    types.forEach((t) {
+      typesValues.add(t.value);
+    });
+
+    String parsedTypes = typesValues.join(',');
+
     final Map<String, String> parameters = <String, String>{
       'lang': lang,
       'count' : count.toString(),
-      'insight_types' : types.toString()
+      'insight_types' : parsedTypes.toString()
     };
 
     var robotoffQuestionUri = Uri(
       scheme: URI_SCHEME,
       host: URI_HOST_ROBOTOFF,
-      path: 'api/v1/questions/"random',
+      path: 'api/v1/questions/random',
       queryParameters: parameters,
     );
+
+    print(robotoffQuestionUri);
 
     Response response = await HttpHelper().doGetRequest(robotoffQuestionUri, user: user);
     var result = RobotoffQuestionResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));

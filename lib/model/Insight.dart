@@ -124,6 +124,22 @@ class InsightResult extends JsonObject {
 }
 
 @JsonSerializable()
+class MultipleInsightResult extends JsonObject {
+
+  final String status;
+  final List<Insight> insights;
+
+  const MultipleInsightResult(
+      {this.status, this.insights});
+
+  factory MultipleInsightResult.fromJson(Map<String, dynamic> json) =>
+      _$MultipleInsightResultFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$MultipleInsightResultToJson(this);
+}
+
+@JsonSerializable()
 class Insight extends JsonObject {
 
   final String id;

@@ -44,6 +44,17 @@ void main() {
       expect(result.questions[0].insightType, InsightType.CATEGORY);
       expect(result.questions[0].imageUrl, "https://static.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg");
     });
+
+    test('get 2 random questions', () async {
+      RobotoffQuestionResult result = await OpenFoodAPIClient.getRandomRobotoffQuestion("fr", TestConstants.TEST_USER, types: [InsightType.CATEGORY], count: 2);
+
+      expect(result != null, true);
+      expect(result.status != null, true);
+      expect(result.status, "found");
+      expect(result.questions.length, 2);
+      expect(result.questions[0].insightType, InsightType.CATEGORY);
+      expect(result.questions[1].insightType, InsightType.CATEGORY);
+    });
   });
 
   group('$OpenFoodAPIClient get robotoff insights', () {
@@ -59,6 +70,22 @@ void main() {
       expect(result.insight.countries != null, true);
       expect(result.insight.lang != null, true);
       expect(result.insight.model != null, true);
+      // Actually, I stumbled across insights without confidence field...
+      //expect(result.insight.confidence != null, true);
+    });
+
+    test('get product insights', () async {
+      MultipleInsightResult result = await OpenFoodAPIClient.getProductInsights("8025386005564", TestConstants.TEST_USER);
+
+      expect(result != null, true);
+      expect(result.status != null, true);
+      expect(result.status, "found");
+      expect(result.insights.length > 0, true);
+      expect(result.insights[0].id != null, true);
+      expect(result.insights[0].barcode != null, true);
+      expect(result.insights[0].countries != null, true);
+      expect(result.insights[0].lang != null, true);
+      expect(result.insights[0].model != null, true);
       // Actually, I stumbled across insights without confidence field...
       //expect(result.insight.confidence != null, true);
     });

@@ -21,6 +21,24 @@ Map<String, dynamic> _$InsightResultToJson(InsightResult instance) =>
       'insight': instance.insight,
     };
 
+MultipleInsightResult _$MultipleInsightResultFromJson(
+    Map<String, dynamic> json) {
+  return MultipleInsightResult(
+    status: json['status'] as String,
+    insights: (json['insights'] as List)
+        ?.map((e) =>
+            e == null ? null : Insight.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$MultipleInsightResultToJson(
+        MultipleInsightResult instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'insights': instance.insights,
+    };
+
 Insight _$InsightFromJson(Map<String, dynamic> json) {
   return Insight(
     id: json['id'] as String,
