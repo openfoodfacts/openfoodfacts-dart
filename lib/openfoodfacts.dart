@@ -109,6 +109,7 @@ class OpenFoodAPIClient {
       ProductHelper.prepareProductName(result.product, lang);
       ProductHelper.parseIngredients(result.product, lang);
       ProductHelper.removeImages(result.product, lang);
+      ProductHelper.createImageUrls(result.product);
     }
 
     return result;

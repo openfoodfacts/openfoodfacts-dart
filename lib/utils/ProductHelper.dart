@@ -1,3 +1,5 @@
+import 'package:openfoodfacts/utils/ImageHelper.dart';
+
 import '../model/Product.dart';
 import '../model/ProductImage.dart';
 import '../model/User.dart';
@@ -16,6 +18,17 @@ class ProductHelper {
         product.selectedImages.list
             .removeWhere((i) => i.field == field && i.language != language);
       }
+    }
+  }
+
+  // generate a image url for each product image entry
+  static void createImageUrls(Product product) {
+    if (product.images == null || product.images.list == null) {
+      return;
+    }
+
+    for (ProductImage image in product.images.list) {
+        image.url = ImageHelper.buildUrl(product.barcode, image);
     }
   }
 

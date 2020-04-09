@@ -86,6 +86,15 @@ void main() {
           Level.LOW);
       expect(result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SALT],
           Level.LOW);
+
+      expect(result.product.images != null, true);
+      expect(result.product.images.list.length, 20);
+      expect(result.product.images.list
+          .singleWhere((image) =>
+                image.field == ProductImage.FIELD_INGREDIENTS &&
+                image.size == ProductImage.SIZE_DISPLAY &&
+                image.language == User.LANGUAGE_DE).url,
+          "https://static.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg");
     });
 
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g', () async {

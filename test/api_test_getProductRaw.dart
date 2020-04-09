@@ -39,6 +39,13 @@ void main() {
                   image.language == User.LANGUAGE_DE)
               .url,
           "https://static.openfoodfacts.org/images/products/800/869/801/1065/ingredients_de.27.400.jpg");
+      expect(result.product.images != null, true);
+      expect(result.product.images.list.length, 20);
+      expect(result.product.images.list
+        .singleWhere((image) =>
+              image.field == ProductImage.FIELD_INGREDIENTS &&
+              image.size == ProductImage.SIZE_DISPLAY &&
+              image.language == User.LANGUAGE_DE).rev, 27);
       expect(result.product.labelsTags.contains("en:gluten-free"), true);
       expect(result.product.tracesTags != null, true);
       expect(result.product.tracesTags.contains("en:lupin"), true);
