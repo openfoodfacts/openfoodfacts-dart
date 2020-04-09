@@ -24,9 +24,9 @@ Map<String, dynamic> _$InsightResultToJson(InsightResult instance) =>
 Insight _$InsightFromJson(Map<String, dynamic> json) {
   return Insight(
     id: json['id'] as String,
-    type: _$enumDecodeNullable(_$InsightTypesEnumMap, json['type']),
+    type: _$enumDecodeNullable(_$InsightTypeEnumMap, json['type']),
     barcode: json['barcode'] as String,
-    countries: (json['countries'] as List)?.map((e) => e as String)?.toList(),
+    countries: json['countries'] as List,
     lang: json['lang'] as String,
     model: json['model'] as String,
     confidence: (json['confidence'] as num)?.toDouble(),
@@ -35,7 +35,7 @@ Insight _$InsightFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$InsightToJson(Insight instance) => <String, dynamic>{
       'id': instance.id,
-      'type': _$InsightTypesEnumMap[instance.type],
+      'type': _$InsightTypeEnumMap[instance.type],
       'barcode': instance.barcode,
       'countries': instance.countries,
       'lang': instance.lang,
@@ -75,15 +75,15 @@ T _$enumDecodeNullable<T>(
   return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
 }
 
-const _$InsightTypesEnumMap = {
-  InsightTypes.INGREDIENT_SPELLCHECK: 'INGREDIENT_SPELLCHECK',
-  InsightTypes.PACKAGER_CODE: 'PACKAGER_CODE',
-  InsightTypes.LABEL: 'LABEL',
-  InsightTypes.CATEGORY: 'CATEGORY',
-  InsightTypes.PRODUCT_WEIGHT: 'PRODUCT_WEIGHT',
-  InsightTypes.EXPIRATION_DATE: 'EXPIRATION_DATE',
-  InsightTypes.BRAND: 'BRAND',
-  InsightTypes.STORE: 'STORE',
-  InsightTypes.NUTRIENT: 'NUTRIENT',
-  InsightTypes.UNDEFINED: 'UNDEFINED',
+const _$InsightTypeEnumMap = {
+  InsightType.INGREDIENT_SPELLCHECK: 'INGREDIENT_SPELLCHECK',
+  InsightType.PACKAGER_CODE: 'PACKAGER_CODE',
+  InsightType.LABEL: 'LABEL',
+  InsightType.CATEGORY: 'CATEGORY',
+  InsightType.PRODUCT_WEIGHT: 'PRODUCT_WEIGHT',
+  InsightType.EXPIRATION_DATE: 'EXPIRATION_DATE',
+  InsightType.BRAND: 'BRAND',
+  InsightType.STORE: 'STORE',
+  InsightType.NUTRIENT: 'NUTRIENT',
+  InsightType.UNDEFINED: 'UNDEFINED',
 };

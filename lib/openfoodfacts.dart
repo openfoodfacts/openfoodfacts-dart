@@ -5,6 +5,7 @@ import 'dart:async';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/model/Insight.dart';
+import 'package:openfoodfacts/model/SpellingCorrections.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 
 import 'interface/Parameter.dart';
@@ -166,7 +167,7 @@ class OpenFoodAPIClient {
     return result;
   }
 
-  static Future<InsightResult> getInsightRandom(User user, {InsightTypes type, String country, String valueTag, String serverDomain}) async {
+  static Future<InsightResult> getRandomInsight(User user, {InsightType type, String country, String valueTag, String serverDomain}) async {
 
     final Map<String, String> parameters = Map<String, String>();
 
@@ -174,13 +175,13 @@ class OpenFoodAPIClient {
       parameters["type"] = type.value;
     }
     if(country != null) {
-    parameters["country"] = country;
+      parameters["country"] = country;
     }
     if(valueTag != null) {
-    parameters["value_tag"] = valueTag;
+      parameters["value_tag"] = valueTag;
     }
     if(serverDomain != null) {
-    parameters["server_domain"] = serverDomain;
+      parameters["server_domain"] = serverDomain;
     }
 
     var robotoffInsightUri = Uri(
@@ -196,7 +197,25 @@ class OpenFoodAPIClient {
     return result;
   }
 
-  static Future<RobotoffQuestionResult> getQuestionsForProduct(String barcode, String lang, User user, {int count}) async {
+  static Future<List<InsightResult>> getProductInsights(String barcode, User user) async {
+    var insightsUri = Uri(
+      scheme: URI_SCHEME,
+      host: URI_HOST_ROBOTOFF,
+      path: 'api/v1/insights/$barcode',
+    );
+
+    Response response = await HttpHelper().doGetRequest(insightsUri, user: user);
+
+    List<InsightResult> result = List<InsightResult>();
+
+    for(Map<String, dynamic> i in json.decode(utf8.decode(response.bodyBytes))) {
+      result.add(InsightResult.fromJson(i));
+    }
+
+    return result;
+  }
+
+  static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(String barcode, String lang, User user, {int count}) async {
     if(barcode == null || barcode.isEmpty) {
       return RobotoffQuestionResult();
     }
@@ -219,6 +238,70 @@ class OpenFoodAPIClient {
 
     Response response = await HttpHelper().doGetRequest(robotoffQuestionUri, user: user);
     var result = RobotoffQuestionResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+
+    return result;
+  }
+
+  static Future<RobotoffQuestionResult> getRandomRobotoffQuestion(String lang, User user, {int count, List<InsightType> types}) async {
+
+    if(count == null || count <= 0) {
+      count = 1;
+    }
+
+    final Map<String, String> parameters = <String, String>{
+      'lang': lang,
+      'count' : count.toString(),
+      'insight_types' : types.toString()
+    };
+
+    var robotoffQuestionUri = Uri(
+      scheme: URI_SCHEME,
+      host: URI_HOST_ROBOTOFF,
+      path: 'api/v1/questions/"random',
+      queryParameters: parameters,
+    );
+
+    Response response = await HttpHelper().doGetRequest(robotoffQuestionUri, user: user);
+    var result = RobotoffQuestionResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+
+    return result;
+  }
+
+  static Future<Status> postInsightAnnotation(String insightId, InsightAnnotation annotation, User user, {bool update = false}) async {
+    var insightUri = Uri(scheme: URI_SCHEME, host: URI_HOST_ROBOTOFF, path: 'api/v1/insights/annotate');
+
+    Map<String, String> annotationData = {
+      "insight_id" : insightId,
+      "annotation" : annotation.value.toString(),
+      "update" : update ? "1" : "0"
+    };
+
+
+    Response response = await HttpHelper().doPostRequest(insightUri, annotationData, user);
+    var status = Status.fromJson(json.decode(response.body));
+    return status;
+  }
+
+  static Future<SpellingCorrection> getIngredientSpellingCorrection({String ingredientName, Product product, User user}) async {
+
+    Map<String, String> spellingCorrectionParam;
+
+    if(ingredientName != null) {
+      spellingCorrectionParam = {
+        "text" : ingredientName,
+      };
+    } else if(product != null) {
+      spellingCorrectionParam = {
+        "barcode" : product.barcode,
+      };
+    } else {
+      return null;
+    }
+
+    var spellingCorrectionUri = Uri(scheme: URI_SCHEME, host: URI_HOST_ROBOTOFF, path: 'api/v1/predict/ingredients/spellcheck', queryParameters: spellingCorrectionParam);
+
+    Response response = await HttpHelper().doGetRequest(spellingCorrectionUri, user: user);
+    SpellingCorrection result = SpellingCorrection.fromJson(json.decode(utf8.decode(response.bodyBytes)));
 
     return result;
   }

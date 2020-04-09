@@ -2,9 +2,110 @@
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
-import 'RobotoffQuestion.dart';
 
 part 'Insight.g.dart';
+
+enum InsightAnnotation {
+  YES,
+  NO,
+  MAYBE
+}
+
+extension InsightAnnotationExtension on InsightAnnotation {
+  int get value {
+    switch (this) {
+      case InsightAnnotation.YES:
+        return 1;
+        break;
+      case InsightAnnotation.NO:
+        return 0;
+        break;
+      case InsightAnnotation.MAYBE:
+        return -1;
+        break;
+      default:
+        return -1;
+        break;
+    }
+  }
+}
+
+enum InsightType {
+  INGREDIENT_SPELLCHECK,
+  PACKAGER_CODE,
+  LABEL,
+  CATEGORY,
+  PRODUCT_WEIGHT,
+  EXPIRATION_DATE,
+  BRAND,
+  STORE,
+  NUTRIENT,
+  UNDEFINED
+}
+
+extension InsightTypesExtension on InsightType {
+  String get value {
+    switch (this) {
+      case InsightType.INGREDIENT_SPELLCHECK:
+        return 'ingredient_spellcheck';
+      case InsightType.PACKAGER_CODE:
+        return 'packager_code';
+      case InsightType.LABEL:
+        return 'label';
+      case InsightType.CATEGORY:
+        return 'category';
+      case InsightType.PRODUCT_WEIGHT:
+        return 'product_weight';
+      case InsightType.EXPIRATION_DATE:
+        return 'expiration_date';
+      case InsightType.BRAND:
+        return 'brand';
+      case InsightType.STORE:
+        return 'store';
+      case InsightType.NUTRIENT:
+        return 'nutrient';
+      case InsightType.UNDEFINED:
+        return 'undefined';
+      default:
+        return null;
+    }
+  }
+
+  static InsightType getType(String s) {
+    switch(s) {
+      case "ingredient_spellcheck":
+        return InsightType.INGREDIENT_SPELLCHECK;
+        break;
+      case "packager_code":
+        return InsightType.PACKAGER_CODE;
+        break;
+      case "label":
+        return InsightType.LABEL;
+        break;
+      case "category":
+        return InsightType.CATEGORY;
+        break;
+      case "product_weight":
+        return InsightType.PRODUCT_WEIGHT;
+        break;
+      case "expiration_date":
+        return InsightType.EXPIRATION_DATE;
+        break;
+      case "brand":
+        return InsightType.BRAND;
+        break;
+      case "store":
+        return InsightType.STORE;
+        break;
+      case "nutrient":
+        return InsightType.NUTRIENT;
+        break;
+      default:
+        return InsightType.UNDEFINED;
+        break;
+    }
+  }
+}
 
 @JsonSerializable()
 class InsightResult extends JsonObject {
@@ -26,7 +127,7 @@ class InsightResult extends JsonObject {
 class Insight extends JsonObject {
 
   final String id;
-  final InsightTypes type;
+  final InsightType type;
   final String barcode;
   final List<dynamic> countries;
   final String lang;
@@ -38,7 +139,7 @@ class Insight extends JsonObject {
 
   factory Insight.fromJson(Map<String, dynamic> json) {
 
-    InsightTypes insightType = InsightTypesExtension.getType(json["type"]);
+    InsightType insightType = InsightTypesExtension.getType(json["type"]);
 
     return Insight(
         id: json["id"],

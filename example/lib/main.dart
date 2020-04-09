@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:openfoodfacts/openfoodfacts.dart';
 
 /// request a product from the OpenFoodFacts database

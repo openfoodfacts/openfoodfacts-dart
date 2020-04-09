@@ -77,6 +77,7 @@ class HttpHelper {
         });
       } else {
         print("Error: " + response.statusCode.toString());
+        return Status(status: response.statusCode);
       }
     });
     print(status.toJson().toString());
