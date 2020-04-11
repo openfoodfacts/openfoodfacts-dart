@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/utils/JsonHelper.dart';
 import '../interface/JsonObject.dart';
 import 'Additives.dart';
-import 'ImageList.dart';
 import 'Ingredient.dart';
 import 'NutrientLevels.dart';
 import 'Nutriments.dart';
@@ -36,13 +36,13 @@ class Product extends JsonObject {
       includeIfNull: false,
       fromJson: JsonHelper.selectedImagesFromJson,
       toJson: JsonHelper.selectedImagesToJson )
-  ImageList selectedImages;
+  List<ProductImage> selectedImages;
 
   @JsonKey(name: 'images',
       includeIfNull: false,
       fromJson: JsonHelper.imagesFromJson,
       toJson: JsonHelper.imagesToJson )
-  ImageList images;
+  List<ProductImage> images;
 
   @JsonKey(includeIfNull: false)
   List<Ingredient> ingredients;

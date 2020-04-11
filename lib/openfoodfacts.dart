@@ -17,7 +17,6 @@ import 'utils/HttpHelper.dart';
 import 'utils/ProductHelper.dart';
 
 export 'interface/Parameter.dart';
-export 'model/ImageList.dart';
 export 'model/ProductImage.dart';
 export 'model/Ingredient.dart';
 export 'model/Product.dart';

@@ -8,14 +8,14 @@ import '../model/Ingredient.dart';
 class ProductHelper {
   /// reduce the set of images of the product depending on the given language.
   static void removeImages(Product product, String language) {
-    if (product.selectedImages == null || product.selectedImages.list == null) {
+    if (product.selectedImages == null) {
       return;
     }
 
     for (String field in ProductImage.FIELDS) {
-      if (product.selectedImages.list
+      if (product.selectedImages
           .any((i) => i.field == field && i.language == language)) {
-        product.selectedImages.list
+        product.selectedImages
             .removeWhere((i) => i.field == field && i.language != language);
       }
     }
@@ -23,11 +23,11 @@ class ProductHelper {
 
   // generate a image url for each product image entry
   static void createImageUrls(Product product) {
-    if (product.images == null || product.images.list == null) {
+    if (product.images == null) {
       return;
     }
 
-    for (ProductImage image in product.images.list) {
+    for (ProductImage image in product.images) {
         image.url = ImageHelper.buildUrl(product.barcode, image);
     }
   }

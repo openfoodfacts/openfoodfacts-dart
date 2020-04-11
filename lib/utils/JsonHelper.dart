@@ -1,13 +1,13 @@
 import 'package:openfoodfacts/interface/JsonObject.dart';
-import 'package:openfoodfacts/utils/ImageHelper.dart';
 
 import '../model/User.dart';
 import '../model/ProductImage.dart';
-import '../model/ImageList.dart';
 
 class JsonHelper {
 
-  static ImageList selectedImagesFromJson(Map<String, dynamic> json) {
+  static List<ProductImage> selectedImagesFromJson(Map<String, dynamic> json) {
+    if(json == null) return null;
+
     var imageList = new List<ProductImage>();
     for (var field in ProductImage.FIELDS) {
       for (var size in ProductImage.SIZES) {
@@ -33,15 +33,17 @@ class JsonHelper {
         }
       }
     }
-    return new ImageList(imageList);
+    return imageList;
   }
 
-  static Map<String, dynamic> selectedImagesToJson(ImageList imageList) {
+  static Map<String, dynamic> selectedImagesToJson(List<ProductImage> images) {
     // not implemented and needed, yet.
     return new Map<String, dynamic>();
   }
 
-  static ImageList imagesFromJson(Map<String, dynamic> json) {
+  static List<ProductImage> imagesFromJson(Map<String, dynamic> json) {
+    if(json == null) return null;
+
     var imageList = new List<ProductImage>();
 
     for (var field in ProductImage.FIELDS) {
@@ -77,10 +79,10 @@ class JsonHelper {
 
     }
 
-    return new ImageList(imageList);
+    return imageList;
   }
 
-  static Map<String, dynamic> imagesToJson(ImageList imageList) {
+  static Map<String, dynamic> imagesToJson(List<ProductImage> images) {
     // not implemented and needed, yet.
     return new Map<String, dynamic>();
   }

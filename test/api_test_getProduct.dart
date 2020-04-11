@@ -59,7 +59,7 @@ void main() {
       expect(result.product.ingredients.any((i) => i.text == "Aroma Koffein"),
           true);
 
-      expect(result.product.selectedImages.list.length, 9);
+      expect(result.product.selectedImages.length, 9);
 
       expect(result.product.nutriments != null, true);
 
@@ -88,8 +88,8 @@ void main() {
           Level.LOW);
 
       expect(result.product.images != null, true);
-      expect(result.product.images.list.length, 20);
-      expect(result.product.images.list
+      expect(result.product.images.length, 20);
+      expect(result.product.images
           .singleWhere((image) =>
                 image.field == ProductImage.FIELD_INGREDIENTS &&
                 image.size == ProductImage.SIZE_DISPLAY &&
@@ -186,7 +186,7 @@ void main() {
               .any((i) => i.text == "fettarmes Kakaopulver"),
           true);
 
-      expect(result.product.selectedImages.list.length, 9);
+      expect(result.product.selectedImages.length, 9);
 
       expect(result.product.nutriscore, "e");
 
@@ -256,39 +256,37 @@ void main() {
       expect(
           result.product.ingredients.any((i) => i.text == "L-cystéine"), true);
 
-      expect(result.product.selectedImages.list.length, 9);
+      expect(result.product.selectedImages.length, 9);
       expect(
-          result.product.selectedImages.list
-              .where((image) => image.language == User.LANGUAGE_FR)
-              .length,
-          6);
+          result.product.selectedImages
+              .where((image) => image.language == User.LANGUAGE_FR).length, 6);
       expect(
-          result.product.selectedImages.list
+          result.product.selectedImages
               .where((image) => image.field == ProductImage.FIELD_FRONT)
               .length,
           3);
       expect(
-          result.product.selectedImages.list
+          result.product.selectedImages
               .where((image) => image.field == ProductImage.FIELD_INGREDIENTS)
               .length,
           3);
       expect(
-          result.product.selectedImages.list
+          result.product.selectedImages
               .where((image) => image.field == ProductImage.FIELD_NUTRITION)
               .length,
           3);
       expect(
-          result.product.selectedImages.list
+          result.product.selectedImages
               .where((image) => image.size == ProductImage.SIZE_THUMB)
               .length,
           3);
       expect(
-          result.product.selectedImages.list
+          result.product.selectedImages
               .where((image) => image.size == ProductImage.SIZE_DISPLAY)
               .length,
           3);
       expect(
-          result.product.selectedImages.list
+          result.product.selectedImages
               .where((image) => image.size == ProductImage.SIZE_SMALL)
               .length,
           3);

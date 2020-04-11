@@ -37,6 +37,7 @@ class ImageHelper {
       barcodeUrl = p1 + "/" + p2 + "/" + p3 + "/" + p4;
     }
 
-    return IMAGE_URL_BASE + barcodeUrl + "/" + image.field + "_" + image.language + "." + image.rev.toString() + "." + number + ".jpg";
+    return IMAGE_URL_BASE + barcodeUrl + "/" + image.field + "_"
+        + image.language + "." + image.rev.toString() + "." + number + ".jpg";
   }
 }
