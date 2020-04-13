@@ -3,9 +3,13 @@ library openfoodfacts;
 import 'dart:convert';
 import 'dart:async';
 
+import 'package:http/http.dart';
+import 'package:openfoodfacts/model/Insight.dart';
+import 'package:openfoodfacts/model/SpellingCorrections.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 
 import 'interface/Parameter.dart';
+import 'model/RobotoffQuestion.dart';
 import 'model/SendImage.dart';
 import 'model/Product.dart';
 import 'model/ProductResult.dart';
@@ -42,6 +46,8 @@ class OpenFoodAPIClient {
   static const String URI_HOST_FR = "fr.openfoodfacts.org";
   static const String URI_HOST_ES = "es.openfoodfacts.org";
 
+  static const String URI_HOST_ROBOTOFF = "robotoff.openfoodfacts.org";
+
   /// Add the given product to the database.
   /// Returns a Status object as result.
   static Future<Status> saveProduct(User user, Product product) async {
@@ -52,10 +58,10 @@ class OpenFoodAPIClient {
     var productUri =
         Uri(scheme: URI_SCHEME, host: URI_HOST, path: '/cgi/product_jqm2.pl');
 
-    String response =
+    Response response =
         await HttpHelper().doPostRequest(productUri, parameterMap, user);
     print(response);
-    var status = Status.fromJson(json.decode(response));
+    var status = Status.fromJson(json.decode(response.body));
     return status;
   }
 
@@ -93,8 +99,8 @@ class OpenFoodAPIClient {
         host: _getHostByLanguage(lang),
         path: 'api/v0/product/' + barcode + '.json');
 
-    String response = await HttpHelper().doGetRequest(productUri, user: user);
-    var result = ProductResult.fromJson(json.decode(response));
+    Response response = await HttpHelper().doGetRequest(productUri, user: user);
+    var result = ProductResult.fromJson(json.decode(response.body));
     return result;
   }
 
@@ -149,8 +155,8 @@ class OpenFoodAPIClient {
 
     print("URI: " + searchUri.toString());
 
-    String response = await HttpHelper().doGetRequest(searchUri, user:user);
-    var result = SearchResult.fromJson(json.decode(response));
+    Response response = await HttpHelper().doGetRequest(searchUri, user:user);
+    var result = SearchResult.fromJson(json.decode(response.body));
 
     for (Product product in result.products) {
       ProductHelper.prepareProductName(product, lang);
@@ -161,12 +167,154 @@ class OpenFoodAPIClient {
     return result;
   }
 
+  static Future<InsightResult> getRandomInsight(User user, {InsightType type, String country, String valueTag, String serverDomain}) async {
+
+    final Map<String, String> parameters = Map<String, String>();
+
+    if(type != null) {
+      parameters["type"] = type.value;
+    }
+    if(country != null) {
+      parameters["country"] = country;
+    }
+    if(valueTag != null) {
+      parameters["value_tag"] = valueTag;
+    }
+    if(serverDomain != null) {
+      parameters["server_domain"] = serverDomain;
+    }
+
+    var robotoffInsightUri = Uri(
+      scheme: URI_SCHEME,
+      host: URI_HOST_ROBOTOFF,
+      path: 'api/v1/insights/random/',
+      queryParameters: parameters,
+    );
+
+    Response response = await HttpHelper().doGetRequest(robotoffInsightUri, user: user);
+    var result = InsightResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+
+    return result;
+  }
+
+  static Future<MultipleInsightResult> getProductInsights(String barcode, User user) async {
+    var insightsUri = Uri(
+      scheme: URI_SCHEME,
+      host: URI_HOST_ROBOTOFF,
+      path: 'api/v1/insights/$barcode',
+    );
+
+    Response response = await HttpHelper().doGetRequest(insightsUri, user: user);
+
+    return MultipleInsightResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+  }
+
+  static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(String barcode, String lang, User user, {int count}) async {
+    if(barcode == null || barcode.isEmpty) {
+      return RobotoffQuestionResult();
+    }
+
+    if(count == null || count <= 0) {
+      count = 1;
+    }
+
+    final Map<String, String> parameters = <String, String>{
+      'lang': lang,
+      'count' : count.toString()
+    };
+
+    var robotoffQuestionUri = Uri(
+      scheme: URI_SCHEME,
+      host: URI_HOST_ROBOTOFF,
+      path: 'api/v1/questions/$barcode',
+      queryParameters: parameters,
+    );
+
+    Response response = await HttpHelper().doGetRequest(robotoffQuestionUri, user: user);
+    var result = RobotoffQuestionResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+
+    return result;
+  }
+
+  static Future<RobotoffQuestionResult> getRandomRobotoffQuestion(String lang, User user, {int count, List<InsightType> types}) async {
+
+    if(count == null || count <= 0) {
+      count = 1;
+    }
+
+    List<String> typesValues = List<String>();
+    types.forEach((t) {
+      typesValues.add(t.value);
+    });
+
+    String parsedTypes = typesValues.join(',');
+
+    final Map<String, String> parameters = <String, String>{
+      'lang': lang,
+      'count' : count.toString(),
+      'insight_types' : parsedTypes.toString()
+    };
+
+    var robotoffQuestionUri = Uri(
+      scheme: URI_SCHEME,
+      host: URI_HOST_ROBOTOFF,
+      path: 'api/v1/questions/random',
+      queryParameters: parameters,
+    );
+
+    print(robotoffQuestionUri);
+
+    Response response = await HttpHelper().doGetRequest(robotoffQuestionUri, user: user);
+    var result = RobotoffQuestionResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+
+    return result;
+  }
+
+  static Future<Status> postInsightAnnotation(String insightId, InsightAnnotation annotation, User user, {bool update = false}) async {
+    var insightUri = Uri(scheme: URI_SCHEME, host: URI_HOST_ROBOTOFF, path: 'api/v1/insights/annotate');
+
+    Map<String, String> annotationData = {
+      "insight_id" : insightId,
+      "annotation" : annotation.value.toString(),
+      "update" : update ? "1" : "0"
+    };
+
+
+    Response response = await HttpHelper().doPostRequest(insightUri, annotationData, user);
+    var status = Status.fromJson(json.decode(response.body));
+    return status;
+  }
+
+  static Future<SpellingCorrection> getIngredientSpellingCorrection({String ingredientName, Product product, User user}) async {
+
+    Map<String, String> spellingCorrectionParam;
+
+    if(ingredientName != null) {
+      spellingCorrectionParam = {
+        "text" : ingredientName,
+      };
+    } else if(product != null) {
+      spellingCorrectionParam = {
+        "barcode" : product.barcode,
+      };
+    } else {
+      return null;
+    }
+
+    var spellingCorrectionUri = Uri(scheme: URI_SCHEME, host: URI_HOST_ROBOTOFF, path: 'api/v1/predict/ingredients/spellcheck', queryParameters: spellingCorrectionParam);
+
+    Response response = await HttpHelper().doGetRequest(spellingCorrectionUri, user: user);
+    SpellingCorrection result = SpellingCorrection.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+
+    return result;
+  }
+
   /// login on the main page - not used
   static Future<String> _login(User user) async {
     var loginUri = new Uri(scheme: URI_SCHEME, host: URI_HOST);
-    String response = await HttpHelper().doPostRequest(
+    Response response = await HttpHelper().doPostRequest(
         loginUri, user.toData(), user);
-    return response;
+    return response.body;
   }
 
   static String _getHostByLanguage(String lang) {

@@ -20,7 +20,7 @@ Add a new product or edit an existing one, using the specified *Open Food Facts*
 Add an product image of the front, the ingredients or the nutrition, using the specified *Open Food Facts* user credentials.
 
 ### searchProducts(parameterList, language)
-Search for all products matching to the given parameters. Optional: use a language specific host. 
+Search for all products matching to the given parameters. Optional: use a language specific host.
 
 
 ## Development
@@ -30,7 +30,7 @@ Search for all products matching to the given parameters. Optional: use a langua
 For help getting started with Flutter, view our online [flutter docs](https://flutter.io/).
 For help on editing package code, view the [package docs](https://flutter.io/developing-packages/).
 
-### auto generate the json classes 
+### auto generate the json classes
 By running (in command prompt) *flutter packages pub run build_runner build* in our project root, you can generate json serialization code for our models whenever needed.
 
 ### running the unit tests
