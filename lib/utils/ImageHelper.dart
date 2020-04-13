@@ -1,4 +1,5 @@
 import 'package:image/image.dart';
+import '../model/ProductImage.dart';
 
 class ImageHelper {
   static const int MAX_IMAGE_SIZE = 2048;

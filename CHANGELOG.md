@@ -1,3 +1,13 @@
+## [0.2.0] - 13.04.2020
+- added robotoff support, new service methods:
+  *getProductInsights()*
+  *getRobotoffQuestionsForProduct()*
+  *getRandomRobotoffQuestion()*
+  *postInsightAnnotation()*
+  *getIngredientSpellingCorrection()*
+- added images field
+- added documentation.md
+
 ## [0.1.16] - 05.03.2020
 - added brandsTags to get brands as a list
 
