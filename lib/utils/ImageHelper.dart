@@ -26,7 +26,6 @@ class ImageHelper {
       return null;
     }
 
-    String number = ProductImage.SIZE_TO_NUMBER[image.size];
     String barcodeUrl = barcode;
     if (barcode.length >= 9) {
       var p1 = barcode.substring(0,3);
@@ -37,7 +36,7 @@ class ImageHelper {
       barcodeUrl = p1 + "/" + p2 + "/" + p3 + "/" + p4;
     }
 
-    return IMAGE_URL_BASE + barcodeUrl + "/" + image.field + "_"
-        + image.language + "." + image.rev.toString() + "." + number + ".jpg";
+    return IMAGE_URL_BASE + barcodeUrl + "/" + image.field.value + "_"
+        + image.language + "." + image.rev.toString() + "." + image.size.toNumber() + ".jpg";
   }
 }

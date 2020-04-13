@@ -9,16 +9,17 @@ class JsonHelper {
     if(json == null) return null;
 
     var imageList = new List<ProductImage>();
-    for (var field in ProductImage.FIELDS) {
-      for (var size in ProductImage.SIZES) {
+    for (var field in ImageField.values) {
+      for (var size in ImageSize.values) {
         for (var lang in User.LANGUAGES) {
+
           // use the field to get the size
-          if (json[field] == null) continue;
-          var sizeJson = json[field] as Map<String, dynamic>;
+          if (json[field.value] == null) continue;
+          var sizeJson = json[field.value] as Map<String, dynamic>;
 
           // use the size to get the language
           if (sizeJson == null) continue;
-          var langJson = sizeJson[size] as Map<String, dynamic>;
+          var langJson = sizeJson[size.value] as Map<String, dynamic>;
 
           // use the language to get the url
           if (langJson == null) continue;
@@ -46,11 +47,11 @@ class JsonHelper {
 
     var imageList = new List<ProductImage>();
 
-    for (var field in ProductImage.FIELDS) {
+    for (var field in ImageField.values) {
         for (var lang in User.LANGUAGES) {
 
           // get the field object e.g. front_en
-          String fieldName = field + "_" + lang;
+          String fieldName = field.value + "_" + lang;
           if (json[fieldName] == null) continue;
 
           var fieldObject = json[fieldName] as Map<String, dynamic>;
@@ -64,13 +65,14 @@ class JsonHelper {
           if (sizesObject == null) continue;
 
           // get each number object (e.g. 200)
-          for (var number in ProductImage.NUMBERS) {
+          for (var size in ImageSize.values) {
+            var number = size.toNumber();
             var numberObject = sizesObject[number] as Map<String, dynamic>;
             if (numberObject == null) continue;
 
             var image = new ProductImage(
                 field: field,
-                size: ProductImage.NUMBER_TO_SIZE[number],
+                size: size,
                 language: lang,
                 rev:rev);
             imageList.add(image);

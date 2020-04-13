@@ -34,8 +34,8 @@ void main() {
       expect(
           result.product.selectedImages
               .singleWhere((image) =>
-                  image.field == ProductImage.FIELD_INGREDIENTS &&
-                  image.size == ProductImage.SIZE_DISPLAY &&
+                  image.field == ImageField.INGREDIENTS &&
+                  image.size == ImageSize.DISPLAY &&
                   image.language == User.LANGUAGE_DE)
               .url,
           "https://static.openfoodfacts.org/images/products/800/869/801/1065/ingredients_de.27.400.jpg");
@@ -43,8 +43,8 @@ void main() {
       expect(result.product.images.length, 20);
       expect(result.product.images
         .singleWhere((image) =>
-              image.field == ProductImage.FIELD_INGREDIENTS &&
-              image.size == ProductImage.SIZE_DISPLAY &&
+              image.field == ImageField.INGREDIENTS &&
+              image.size == ImageSize.DISPLAY &&
               image.language == User.LANGUAGE_DE).rev, 27);
       expect(result.product.labelsTags.contains("en:gluten-free"), true);
       expect(result.product.tracesTags != null, true);

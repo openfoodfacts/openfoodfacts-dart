@@ -12,7 +12,7 @@ class ProductHelper {
       return;
     }
 
-    for (String field in ProductImage.FIELDS) {
+    for (var field in ImageField.values) {
       if (product.selectedImages
           .any((i) => i.field == field && i.language == language)) {
         product.selectedImages

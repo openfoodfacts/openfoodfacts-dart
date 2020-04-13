@@ -91,8 +91,8 @@ void main() {
       expect(result.product.images.length, 20);
       expect(result.product.images
           .singleWhere((image) =>
-                image.field == ProductImage.FIELD_INGREDIENTS &&
-                image.size == ProductImage.SIZE_DISPLAY &&
+                image.field == ImageField.INGREDIENTS &&
+                image.size == ImageSize.DISPLAY &&
                 image.language == User.LANGUAGE_DE).url,
           "https://static.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg");
     });
@@ -262,32 +262,32 @@ void main() {
               .where((image) => image.language == User.LANGUAGE_FR).length, 6);
       expect(
           result.product.selectedImages
-              .where((image) => image.field == ProductImage.FIELD_FRONT)
+              .where((image) => image.field == ImageField.FRONT)
               .length,
           3);
       expect(
           result.product.selectedImages
-              .where((image) => image.field == ProductImage.FIELD_INGREDIENTS)
+              .where((image) => image.field == ImageField.INGREDIENTS)
               .length,
           3);
       expect(
           result.product.selectedImages
-              .where((image) => image.field == ProductImage.FIELD_NUTRITION)
+              .where((image) => image.field == ImageField.NUTRITION)
               .length,
           3);
       expect(
           result.product.selectedImages
-              .where((image) => image.size == ProductImage.SIZE_THUMB)
+              .where((image) => image.size == ImageSize.THUMB)
               .length,
           3);
       expect(
           result.product.selectedImages
-              .where((image) => image.size == ProductImage.SIZE_DISPLAY)
+              .where((image) => image.size == ImageSize.DISPLAY)
               .length,
           3);
       expect(
           result.product.selectedImages
-              .where((image) => image.size == ProductImage.SIZE_SMALL)
+              .where((image) => image.size ==ImageSize.SMALL)
               .length,
           3);
 

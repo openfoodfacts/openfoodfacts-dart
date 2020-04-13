@@ -58,7 +58,7 @@ class HttpHelper {
     // add all file entries to the request
     for (MapEntry<String, Uri> entry in files.entries) {
       List<int> fileBytes = await File.fromUri(entry.value).readAsBytes();
-      print(fileBytes.toString());
+      //print(fileBytes.toString());
 
       var multipartFile = new http.MultipartFile.fromBytes(entry.key, fileBytes,
           filename: basename(entry.value.toString()));
