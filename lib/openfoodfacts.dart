@@ -21,7 +21,6 @@ import 'utils/HttpHelper.dart';
 import 'utils/ProductHelper.dart';
 
 export 'interface/Parameter.dart';
-export 'model/ImageList.dart';
 export 'model/ProductImage.dart';
 export 'model/Ingredient.dart';
 export 'model/Product.dart';
@@ -115,6 +114,7 @@ class OpenFoodAPIClient {
       ProductHelper.prepareProductName(result.product, lang);
       ProductHelper.parseIngredients(result.product, lang);
       ProductHelper.removeImages(result.product, lang);
+      ProductHelper.createImageUrls(result.product);
     }
 
     return result;

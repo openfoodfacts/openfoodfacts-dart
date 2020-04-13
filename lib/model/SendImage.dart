@@ -4,46 +4,57 @@ import 'package:json_annotation/json_annotation.dart';
 import '../interface/JsonObject.dart';
 import '../model/ProductImage.dart';
 
-part 'SendImage.g.dart';
-
-@JsonSerializable()
 class SendImage extends JsonObject {
+
   String lang;
 
-  @JsonKey(ignore: true)
+  // ignored for json
   Uri imageUrl;
 
-  @JsonKey(name: 'code')
   String barcode;
 
-  @JsonKey(name: 'imagefield')
-  String imageField;
+  ImageField imageField;
 
   SendImage({
     @required this.lang,
     @required this.barcode,
     this.imageUrl,
-    this.imageField = ProductImage.FIELD_OTHER,
+    this.imageField = ImageField.OTHER,
   });
 
   /// the json key depending on the image field of this object.
   String getImageDataKey() {
     switch (this.imageField) {
-      case ProductImage.FIELD_FRONT:
+      case ImageField.FRONT:
         return 'imgupload_front_' + this.lang;
-      case ProductImage.FIELD_INGREDIENTS:
+      case ImageField.INGREDIENTS:
         return 'imgupload_ingredients_' + this.lang;
-      case ProductImage.FIELD_NUTRITION:
+      case ImageField.NUTRITION:
         return 'imgupload_nutrition_' + this.lang;
-      case ProductImage.FIELD_OTHER:
+      case ImageField.OTHER:
         return 'imgupload_other_' + this.lang;
       default:
         return null;
     }
   }
 
-  factory SendImage.fromJson(Map<String, dynamic> json) =>
-      _$SendImageFromJson(json);
+  factory SendImage.fromJson(Map<String, dynamic> json) {
 
-  Map<String, dynamic> toJson() => _$SendImageToJson(this);
+    ImageField imageField = ImageFieldExtension.getType(json["imagefield"]);
+
+    return SendImage(
+        lang: json['lang'] as String,
+        barcode: json['code'] as String,
+        imageField: imageField,
+    );
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'lang': this.lang,
+      'code': this.barcode,
+      'imagefield': this.imageField.value
+    };
+  }
 }

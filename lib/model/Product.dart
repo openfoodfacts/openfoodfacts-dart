@@ -1,7 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:openfoodfacts/model/ProductImage.dart';
+import 'package:openfoodfacts/utils/JsonHelper.dart';
 import '../interface/JsonObject.dart';
 import 'Additives.dart';
-import 'ImageList.dart';
 import 'Ingredient.dart';
 import 'NutrientLevels.dart';
 import 'Nutriments.dart';
@@ -31,8 +32,17 @@ class Product extends JsonObject {
   String servingSize;
 
   /// cause nesting is sooo cool ;)
-  @JsonKey(name: 'selected_images', includeIfNull: false)
-  ImageList selectedImages;
+  @JsonKey(name: 'selected_images',
+      includeIfNull: false,
+      fromJson: JsonHelper.selectedImagesFromJson,
+      toJson: JsonHelper.selectedImagesToJson )
+  List<ProductImage> selectedImages;
+
+  @JsonKey(name: 'images',
+      includeIfNull: false,
+      fromJson: JsonHelper.imagesFromJson,
+      toJson: JsonHelper.imagesToJson )
+  List<ProductImage> images;
 
   @JsonKey(includeIfNull: false)
   List<Ingredient> ingredients;

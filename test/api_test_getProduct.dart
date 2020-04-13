@@ -59,7 +59,7 @@ void main() {
       expect(result.product.ingredients.any((i) => i.text == "Aroma Koffein"),
           true);
 
-      expect(result.product.selectedImages.list.length, 9);
+      expect(result.product.selectedImages.length, 9);
 
       expect(result.product.nutriments != null, true);
 
@@ -86,6 +86,15 @@ void main() {
           Level.LOW);
       expect(result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SALT],
           Level.LOW);
+
+      expect(result.product.images != null, true);
+      expect(result.product.images.length, 20);
+      expect(result.product.images
+          .singleWhere((image) =>
+                image.field == ImageField.INGREDIENTS &&
+                image.size == ImageSize.DISPLAY &&
+                image.language == User.LANGUAGE_DE).url,
+          "https://static.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg");
     });
 
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g', () async {
@@ -177,7 +186,7 @@ void main() {
               .any((i) => i.text == "fettarmes Kakaopulver"),
           true);
 
-      expect(result.product.selectedImages.list.length, 9);
+      expect(result.product.selectedImages.length, 9);
 
       expect(result.product.nutriscore, "e");
 
@@ -247,40 +256,38 @@ void main() {
       expect(
           result.product.ingredients.any((i) => i.text == "L-cystéine"), true);
 
-      expect(result.product.selectedImages.list.length, 9);
+      expect(result.product.selectedImages.length, 9);
       expect(
-          result.product.selectedImages.list
-              .where((image) => image.language == User.LANGUAGE_FR)
-              .length,
-          6);
+          result.product.selectedImages
+              .where((image) => image.language == User.LANGUAGE_FR).length, 6);
       expect(
-          result.product.selectedImages.list
-              .where((image) => image.field == ProductImage.FIELD_FRONT)
+          result.product.selectedImages
+              .where((image) => image.field == ImageField.FRONT)
               .length,
           3);
       expect(
-          result.product.selectedImages.list
-              .where((image) => image.field == ProductImage.FIELD_INGREDIENTS)
+          result.product.selectedImages
+              .where((image) => image.field == ImageField.INGREDIENTS)
               .length,
           3);
       expect(
-          result.product.selectedImages.list
-              .where((image) => image.field == ProductImage.FIELD_NUTRITION)
+          result.product.selectedImages
+              .where((image) => image.field == ImageField.NUTRITION)
               .length,
           3);
       expect(
-          result.product.selectedImages.list
-              .where((image) => image.size == ProductImage.SIZE_THUMB)
+          result.product.selectedImages
+              .where((image) => image.size == ImageSize.THUMB)
               .length,
           3);
       expect(
-          result.product.selectedImages.list
-              .where((image) => image.size == ProductImage.SIZE_DISPLAY)
+          result.product.selectedImages
+              .where((image) => image.size == ImageSize.DISPLAY)
               .length,
           3);
       expect(
-          result.product.selectedImages.list
-              .where((image) => image.size == ProductImage.SIZE_SMALL)
+          result.product.selectedImages
+              .where((image) => image.size ==ImageSize.SMALL)
               .length,
           3);
 

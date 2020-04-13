@@ -18,28 +18,30 @@ void main() {
       SendImage image = new SendImage(
         lang: "de",
         barcode: "4250752200784",
-        imageField: ProductImage.FIELD_FRONT,
+        imageField: ImageField.FRONT,
         imageUrl: Uri.parse("assets/front_de.jpg"),
       );
       Status status = await OpenFoodAPIClient.addProductImage(
           TestConstants.TEST_USER, image);
 
       expect(status != null, true);
-      expect(status.status, "status ok");
+      expect(status.status, "status not ok");
+      expect(status.error, "This picture has already been sent.");
     });
 
     test('add ingredients image test', () async {
       SendImage image = new SendImage(
         lang: "en",
         barcode: "0048151623426",
-        imageField: ProductImage.FIELD_INGREDIENTS,
+        imageField: ImageField.INGREDIENTS,
         imageUrl: Uri.parse("assets/ingredients_en.jpg"),
       );
       Status status = await OpenFoodAPIClient.addProductImage(
           TestConstants.TEST_USER, image);
 
       expect(status != null, true);
-      expect(status.status, "status ok");
+      expect(status.status, "status not ok");
+      expect(status.error, "This picture has already been sent.");
     });
   });
 }
