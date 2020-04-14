@@ -1,10 +1,13 @@
+## [0.2.1] - 14.04.2020
+- expose robotoff and helper classes
+
 ## [0.2.0] - 13.04.2020
 - added robotoff support, new service methods:
-  *getProductInsights()*
-  *getRobotoffQuestionsForProduct()*
-  *getRandomRobotoffQuestion()*
-  *postInsightAnnotation()*
-  *getIngredientSpellingCorrection()*
+  *getProductInsights()*,
+  *getRobotoffQuestionsForProduct()*,
+  *getRandomRobotoffQuestion()*,
+  *postInsightAnnotation()*,
+  *getIngredientSpellingCorrection()*,
 - added images field
 - added documentation.md
 

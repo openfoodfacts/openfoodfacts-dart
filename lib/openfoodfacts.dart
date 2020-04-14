@@ -21,20 +21,31 @@ import 'utils/HttpHelper.dart';
 import 'utils/ProductHelper.dart';
 
 export 'interface/Parameter.dart';
-export 'model/ProductImage.dart';
+export 'model/Additives.dart';
 export 'model/Ingredient.dart';
+export 'model/Insight.dart';
 export 'model/Product.dart';
+export 'model/ProductImage.dart';
 export 'model/ProductResult.dart';
+export 'model/RobotoffQuestion.dart';
 export 'model/SearchResult.dart';
 export 'model/SendImage.dart';
+export 'model/SpellingCorrections.dart';
 export 'model/Status.dart';
+export 'model/TagI18N.dart';
 export 'model/User.dart';
 export 'model/parameter/OutputFormat.dart';
 export 'model/parameter/Page.dart';
 export 'model/parameter/PageSize.dart';
 export 'model/parameter/SearchSimple.dart';
 export 'model/parameter/SortBy.dart';
+
 export 'utils/HttpHelper.dart';
+export 'utils/ImageHelper.dart';
+export 'utils/JsonHelper.dart';
+export 'utils/NutrimentsHelper.dart';
+export 'utils/ProductHelper.dart';
+
 
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
