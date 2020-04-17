@@ -4,6 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
+import 'package:openfoodfacts/utils/LanguageHelper.dart';
+import 'package:openfoodfacts/utils/ProductFields.dart';
+import 'package:openfoodfacts/utils/ProductQueryConfigurations.dart';
 
 import 'test_constants.dart';
 
@@ -16,7 +19,8 @@ void main() {
     test('get product test 1', () async {
       String barcode = "8008698011065";
       ProductResult result = await OpenFoodAPIClient.getProductRaw(
-          barcode, User.LANGUAGE_DE, user: TestConstants.TEST_USER);
+          barcode, OpenFoodFactsLanguage.GERMAN,
+          user: TestConstants.TEST_USER);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -36,16 +40,19 @@ void main() {
               .singleWhere((image) =>
                   image.field == ImageField.INGREDIENTS &&
                   image.size == ImageSize.DISPLAY &&
-                  image.language == User.LANGUAGE_DE)
+                  image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
           "https://static.openfoodfacts.org/images/products/800/869/801/1065/ingredients_de.27.400.jpg");
       expect(result.product.images != null, true);
       expect(result.product.images.length, 20);
-      expect(result.product.images
-        .singleWhere((image) =>
-              image.field == ImageField.INGREDIENTS &&
-              image.size == ImageSize.DISPLAY &&
-              image.language == User.LANGUAGE_DE).rev, 27);
+      expect(
+          result.product.images
+              .singleWhere((image) =>
+                  image.field == ImageField.INGREDIENTS &&
+                  image.size == ImageSize.DISPLAY &&
+                  image.language == OpenFoodFactsLanguage.GERMAN)
+              .rev,
+          27);
       expect(result.product.labelsTags.contains("en:gluten-free"), true);
       expect(result.product.tracesTags != null, true);
       expect(result.product.tracesTags.contains("en:lupin"), true);
@@ -76,10 +83,15 @@ void main() {
           Level.MODERATE);
     });
 
-    test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g', () async {
+    test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',
+        () async {
       String barcode = '0028400047685';
-      ProductResult result = await OpenFoodAPIClient.getProduct(
-          barcode, User.LANGUAGE_EN, user: TestConstants.TEST_USER);
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.ENGLISH,
+          fields: [ProductField.ALL]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
       expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
@@ -96,8 +108,10 @@ void main() {
 
     test('get product test 2', () async {
       String barcode = "4388810057787";
+
       ProductResult result = await OpenFoodAPIClient.getProductRaw(
-          barcode, User.LANGUAGE_DE, user: TestConstants.TEST_USER);
+          barcode, OpenFoodFactsLanguage.GERMAN,
+          user: TestConstants.TEST_USER);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -122,7 +136,6 @@ void main() {
       expect(result.product.nutriments.novaGroup, 1);
       expect(result.product.nutriments.fatServing == null, true);
       expect(result.product.servingSize == null, true);
-
     });
   });
 }

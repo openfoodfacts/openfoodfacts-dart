@@ -14,7 +14,8 @@ class SpellingCorrection extends JsonObject {
 
   SpellingCorrection(this.corrected, this.input, this.termCorrections);
 
-  factory SpellingCorrection.fromJson(Map<String, dynamic> json) => _$SpellingCorrectionFromJson(json);
+  factory SpellingCorrection.fromJson(Map<String, dynamic> json) =>
+      _$SpellingCorrectionFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$SpellingCorrectionToJson(this);
@@ -49,7 +50,8 @@ class Correction extends JsonObject {
   @JsonKey(name: 'is_valid')
   bool isValid;
 
-  Correction(this.correction, this.original, this.startOffset, this.endOffset, this.isValid);
+  Correction(this.correction, this.original, this.startOffset, this.endOffset,
+      this.isValid);
 
   factory Correction.fromJson(Map<String, dynamic> json) =>
       _$CorrectionFromJson(json);

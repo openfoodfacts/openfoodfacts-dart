@@ -1,13 +1,13 @@
 import 'package:openfoodfacts/utils/ImageHelper.dart';
+import 'package:openfoodfacts/utils/LanguageHelper.dart';
 
 import '../model/Product.dart';
 import '../model/ProductImage.dart';
-import '../model/User.dart';
 import '../model/Ingredient.dart';
 
 class ProductHelper {
   /// reduce the set of images of the product depending on the given language.
-  static void removeImages(Product product, String language) {
+  static void removeImages(Product product, OpenFoodFactsLanguage language) {
     if (product.selectedImages == null) {
       return;
     }
@@ -28,62 +28,15 @@ class ProductHelper {
     }
 
     for (ProductImage image in product.images) {
-        image.url = ImageHelper.buildUrl(product.barcode, image);
+      image.url = ImageHelper.buildUrl(product.barcode, image);
     }
-  }
-
-  /// prepare the product name for the given product.
-  /// remove name strings of other languages.
-  static void prepareProductName(Product product, String lang) {
-    // choose the language specific product name
-    switch (lang) {
-      case User.LANGUAGE_DE:
-        product.productName = product.productNameDE ?? product.productName;
-        break;
-      case User.LANGUAGE_UNDEFINED:
-      case User.LANGUAGE_EN:
-        product.productName = product.productNameEN ?? product.productName;
-        break;
-      case User.LANGUAGE_FR:
-        product.productName = product.productNameFR ?? product.productName;
-        break;
-      default:
-        break;
-    }
-
-    // remove unused fields
-    product.productNameDE = null;
-    product.productNameEN = null;
-    product.productNameFR = null;
   }
 
   /// prepare the ingredients for the given product.
   /// parse the language specific ingredient text into ingredient objects.
-  static void parseIngredients(Product product, String lang) {
-    // choose the language specific string of ingredients
-    switch (lang) {
-      case User.LANGUAGE_DE:
-        product.ingredientsText =
-            product.ingredientsTextDE ?? product.ingredientsText;
-        break;
-      case User.LANGUAGE_UNDEFINED:
-      case User.LANGUAGE_EN:
-        product.ingredientsText =
-            product.ingredientsTextEN ?? product.ingredientsText;
-        break;
-      case User.LANGUAGE_FR:
-        product.ingredientsText =
-            product.ingredientsTextFR ?? product.ingredientsText;
-        break;
-      default:
-        break;
-    }
-
+  static void parseIngredients(Product product) {
     // override the current list of ingredients
     product.ingredients = new List<Ingredient>();
-    product.ingredientsTextDE = null;
-    product.ingredientsTextEN = null;
-    product.ingredientsTextFR = null;
 
     if (product.ingredientsText != null && product.ingredientsText.isNotEmpty) {
       // find the names of all ingredients within the given string.

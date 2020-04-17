@@ -7,14 +7,16 @@ import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'test_constants.dart';
 
 void main() {
-
   setUpAll(() async {
     new HttpHelper().isTestMode = true;
   });
 
   group('$OpenFoodAPIClient get robotoff questions', () {
     test('get questions for Noix de Saint-Jacques EN', () async {
-      RobotoffQuestionResult result = await OpenFoodAPIClient.getRobotoffQuestionsForProduct("3274570800026", "en", TestConstants.TEST_USER, count: 1);
+      RobotoffQuestionResult result =
+          await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
+              "3274570800026", "en", TestConstants.TEST_USER,
+              count: 1);
 
       expect(result != null, true);
       expect(result.status != null, true);
@@ -23,14 +25,19 @@ void main() {
       expect(result.questions[0].barcode, "3274570800026");
       expect(result.questions[0].type, "add-binary");
       expect(result.questions[0].value, "Scallop");
-      expect(result.questions[0].question, "Does the product belong to this category?");
-      expect(result.questions[0].insightId, "5cac03bc-a5a7-4ec2-a548-17fd9319fee7");
+      expect(result.questions[0].question,
+          "Does the product belong to this category?");
+      expect(result.questions[0].insightId,
+          "5cac03bc-a5a7-4ec2-a548-17fd9319fee7");
       expect(result.questions[0].insightType, InsightType.CATEGORY);
-      expect(result.questions[0].imageUrl, "https://static.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg");
+      expect(result.questions[0].imageUrl,
+          "https://static.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg");
     });
 
     test('get questions for Noix de Saint-Jacques FR', () async {
-      RobotoffQuestionResult result = await OpenFoodAPIClient.getRobotoffQuestionsForProduct("3274570800026", "fr", TestConstants.TEST_USER);
+      RobotoffQuestionResult result =
+          await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
+              "3274570800026", "fr", TestConstants.TEST_USER);
 
       expect(result != null, true);
       expect(result.status != null, true);
@@ -39,14 +46,20 @@ void main() {
       expect(result.questions[0].barcode, "3274570800026");
       expect(result.questions[0].type, "add-binary");
       expect(result.questions[0].value, "Noix de Saint-Jacques");
-      expect(result.questions[0].question, "Le produit appartient-il à cette catégorie ?");
-      expect(result.questions[0].insightId, "5cac03bc-a5a7-4ec2-a548-17fd9319fee7");
+      expect(result.questions[0].question,
+          "Le produit appartient-il à cette catégorie ?");
+      expect(result.questions[0].insightId,
+          "5cac03bc-a5a7-4ec2-a548-17fd9319fee7");
       expect(result.questions[0].insightType, InsightType.CATEGORY);
-      expect(result.questions[0].imageUrl, "https://static.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg");
+      expect(result.questions[0].imageUrl,
+          "https://static.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg");
     });
 
     test('get 2 random questions', () async {
-      RobotoffQuestionResult result = await OpenFoodAPIClient.getRandomRobotoffQuestion("fr", TestConstants.TEST_USER, types: [InsightType.CATEGORY], count: 2);
+      RobotoffQuestionResult result =
+          await OpenFoodAPIClient.getRandomRobotoffQuestion(
+              "fr", TestConstants.TEST_USER,
+              types: [InsightType.CATEGORY], count: 2);
 
       expect(result != null, true);
       expect(result.status != null, true);
@@ -59,7 +72,9 @@ void main() {
 
   group('$OpenFoodAPIClient get robotoff insights', () {
     test('get random insight', () async {
-      InsightResult result = await OpenFoodAPIClient.getRandomInsight(TestConstants.TEST_USER, type: InsightType.CATEGORY);
+      InsightResult result = await OpenFoodAPIClient.getRandomInsight(
+          TestConstants.TEST_USER,
+          type: InsightType.CATEGORY);
 
       expect(result != null, true);
       expect(result.status != null, true);
@@ -75,7 +90,8 @@ void main() {
     });
 
     test('get product insights', () async {
-      MultipleInsightResult result = await OpenFoodAPIClient.getProductInsights("8025386005564", TestConstants.TEST_USER);
+      MultipleInsightResult result = await OpenFoodAPIClient.getProductInsights(
+          "8025386005564", TestConstants.TEST_USER);
 
       expect(result != null, true);
       expect(result.status != null, true);
@@ -93,7 +109,9 @@ void main() {
 
   group('$OpenFoodAPIClient get robotoff ingredient spelling corrections', () {
     test('get farine de blé spelling corrections', () async {
-      SpellingCorrection result = await OpenFoodAPIClient.getIngredientSpellingCorrection(ingredientName: "fqrine de blé");
+      SpellingCorrection result =
+          await OpenFoodAPIClient.getIngredientSpellingCorrection(
+              ingredientName: "fqrine de blé");
 
       expect(result != null, true);
       expect(result.corrected, "farine de blé");

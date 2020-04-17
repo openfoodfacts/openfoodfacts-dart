@@ -1,9 +1,11 @@
 import 'package:image/image.dart';
 import '../model/ProductImage.dart';
+import 'LanguageHelper.dart';
 
 class ImageHelper {
   static const int MAX_IMAGE_SIZE = 2048;
-  static const String IMAGE_URL_BASE = "https://static.openfoodfacts.org/images/products/";
+  static const String IMAGE_URL_BASE =
+      "https://static.openfoodfacts.org/images/products/";
 
   static Image resize(Image image, {int maxSize = MAX_IMAGE_SIZE}) {
     // check if the image is already small enough
@@ -28,15 +30,24 @@ class ImageHelper {
 
     String barcodeUrl = barcode;
     if (barcode.length >= 9) {
-      var p1 = barcode.substring(0,3);
-      var p2 = barcode.substring(3,6);
-      var p3 = barcode.substring(6,9);
+      var p1 = barcode.substring(0, 3);
+      var p2 = barcode.substring(3, 6);
+      var p3 = barcode.substring(6, 9);
       var p4 = barcode.length >= 10 ? barcode.substring(9) : "";
 
       barcodeUrl = p1 + "/" + p2 + "/" + p3 + "/" + p4;
     }
 
-    return IMAGE_URL_BASE + barcodeUrl + "/" + image.field.value + "_"
-        + image.language + "." + image.rev.toString() + "." + image.size.toNumber() + ".jpg";
+    return IMAGE_URL_BASE +
+        barcodeUrl +
+        "/" +
+        image.field.value +
+        "_" +
+        image.language.code +
+        "." +
+        image.rev.toString() +
+        "." +
+        image.size.toNumber() +
+        ".jpg";
   }
 }
