@@ -4,6 +4,7 @@ import 'package:openfoodfacts/model/SendImage.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/model/Status.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
+import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'test_constants.dart';
 
 void main() {
@@ -16,7 +17,7 @@ void main() {
 
     test('add front image test', () async {
       SendImage image = new SendImage(
-        lang: "de",
+        lang: OpenFoodFactsLanguage.GERMAN,
         barcode: "4250752200784",
         imageField: ImageField.FRONT,
         imageUrl: Uri.parse("assets/front_de.jpg"),
@@ -31,7 +32,7 @@ void main() {
 
     test('add ingredients image test', () async {
       SendImage image = new SendImage(
-        lang: "en",
+        lang: OpenFoodFactsLanguage.ENGLISH,
         barcode: "0048151623426",
         imageField: ImageField.INGREDIENTS,
         imageUrl: Uri.parse("assets/ingredients_en.jpg"),

@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
+import 'package:openfoodfacts/utils/LanguageHelper.dart';
 
 import '../interface/JsonObject.dart';
 import '../model/ProductImage.dart';
 
 class SendImage extends JsonObject {
-  String lang;
+  OpenFoodFactsLanguage lang;
 
   // ignored for json
   Uri imageUrl;
@@ -24,13 +25,13 @@ class SendImage extends JsonObject {
   String getImageDataKey() {
     switch (this.imageField) {
       case ImageField.FRONT:
-        return 'imgupload_front_' + this.lang;
+        return 'imgupload_front_' + this.lang.code;
       case ImageField.INGREDIENTS:
-        return 'imgupload_ingredients_' + this.lang;
+        return 'imgupload_ingredients_' + this.lang.code;
       case ImageField.NUTRITION:
-        return 'imgupload_nutrition_' + this.lang;
+        return 'imgupload_nutrition_' + this.lang.code;
       case ImageField.OTHER:
-        return 'imgupload_other_' + this.lang;
+        return 'imgupload_other_' + this.lang.code;
       default:
         return null;
     }
@@ -40,7 +41,7 @@ class SendImage extends JsonObject {
     ImageField imageField = ImageFieldExtension.getType(json["imagefield"]);
 
     return SendImage(
-      lang: json['lang'] as String,
+      lang: LanguageHelper.fromJson(json['lang']),
       barcode: json['code'] as String,
       imageField: imageField,
     );

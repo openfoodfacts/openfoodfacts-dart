@@ -1,43 +1,22 @@
 # Open Food Facts - Dart
-
 Dart package for the Open Food Facts API.
 
-## Content
+Easily access to more than 1.3 million products from all around the world.
+Open Food Facts is powered by global contributors and is constantly growing thanks to them.
 
-The following API services are implemented:
-
-### getProduct(barcode, language)
-Get the product information for an existing barcode.
-Prepare ingredients, images and product name depending on the specified language.
-
-### getProductRaw(barcode)
-Get the product information for an existing barcode without additional preparation.
-
-### saveProduct(user, product)
-Add a new product or edit an existing one, using the specified *Open Food Facts* user credentials.
-
-### addProductImage(user, image)
-Add an product image of the front, the ingredients or the nutrition, using the specified *Open Food Facts* user credentials.
-
-### searchProducts(parameterList, language)
-Search for all products matching to the given parameters. Optional: use a language specific host.
+You can check the terms of use here : [Terms of use](https://world.openfoodfacts.org/terms-of-use).
 
 
-## Development
+## Contribute
+There are many ways to contribute, and Open Food Facts has a lot of projects beside this package.
+Most of our operations are coordinated through our Slack which you can join here : [Open Food Facts Slack](https://openfoodfacts.slack.com).
 
-### Getting Started
+Regarding this package, we accept pull requests as well feature requests.
 
-For help getting started with Flutter, view our online [flutter docs](https://flutter.io/).
-For help on editing package code, view the [package docs](https://flutter.io/developing-packages/).
 
-### auto generate the json classes
-By running (in command prompt) *flutter packages pub run build_runner build* in our project root, you can generate json serialization code for our models whenever needed.
+## How to use ?
+You can find the full documentation here : [Documentation](https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md).
 
-### running the unit tests
-Adjust the file *test_constants.dart* to provide your own login credentials (OpenFoodFacts).
-
-### publish the package to pub.dartlang.org
-run *flutter packages pub publish* in the project directory
 
 ## Authors
 * Alexander Schacht - [Grumpf86](https://github.com/Grumpf86 )

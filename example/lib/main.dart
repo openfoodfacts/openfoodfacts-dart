@@ -45,7 +45,7 @@ void addProductImage() async {
   // set the uri to the local image file
   // choose the "imageField" as location / description of the image content.
   SendImage image = new SendImage(
-    lang: "en",
+    lang: OpenFoodFactsLanguage.ENGLISH,
     barcode: "0048151623426",
     imageField: ImageField.INGREDIENTS,
     imageUrl: Uri.parse("assets/ingredients_en.jpg"),

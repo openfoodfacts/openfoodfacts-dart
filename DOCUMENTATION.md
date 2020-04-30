@@ -4,7 +4,7 @@ Dart package for the Open Food Facts API. Free and Easy access to food products 
 
 ## Quick note on Open Food Facts
 
-Open Food Facts is an open and crownsourced database that contains various information about over a million food products. Data such as Ingredients, Additives, Brands, Nutritional intakes, Serving sizes, Nutriscore, NOVA group, and many more can be found in the Open Food Facts database.
+Open Food Facts is an open and crowdsourced database that contains various information about over a million food products. Data such as Ingredients, Additives, Brands, Nutritional intakes, Serving sizes, Nutriscore, NOVA group, and many more can be found in the Open Food Facts database.
 
 You are free to use the API but also contribute to it, the products list is constantly growing thanks to the many awesome contributors we have, and your help is more than welcomed.
 
@@ -16,23 +16,18 @@ This plugin also allows you to edit a product or upload a new one to Open Food F
 
 ## How do I use it ?
 
-Jump to [**Object structures**](#object-structures), [**Functions**](#functions) or [**Examples**](#examples).
+Jump to [**Object structures**](#objects-structures), [**Functions**](#functions) or [**Examples**](#examples).
 
 ### Objects Structures
 
 This section details all the available fields in each class.
 
 #### User
-This class handles languages, as well as user identification when writing into the database.
+This class handles user identification when writing into the database.
 
 ```
 String userId
 String password
-
-static const LANGUAGE_DE
-static const LANGUAGE_FR
-static const LANGUAGE_EN
-static const LANGUAGE_ES
 ```
 
 #### ProductResult
@@ -51,7 +46,7 @@ This class contains all the data regarding a specific product.
 ```
 String barcode
 String productName
-String lang
+OpenFoodFactsLanguage lang
 String quantity
 String servingSize
 
@@ -114,7 +109,7 @@ static const String SIZE_DISPLAY
 
 String field
 String size
-String language
+OpenFoodFactsLanguage language
 String url
 ```
 
@@ -259,7 +254,7 @@ list<Product> products
 This class is the object template to be provided to the image upload function.
 
 ```
-String lang
+OpenFoodFactsLanguage lang
 Uri imageUrl
 String barcode
 String imageField
@@ -275,27 +270,58 @@ String statusVerbose
 int imageId
 ```
 
+#### ProductQueryConfigurations
+This class allows you to configure a Product query by specifying the [language](#openfoodfactslanguage) and [fields](#productfield).
+It is then passed to the [getProduct()](#get-a-productproduct-from-a-barcode) function.
+
+```
+String barcode;
+OpenFoodFactsLanguage language;
+List<ProductField> fields;
+```
+
+#### ProductSearchQueryConfigurations
+This class allows you to configure a Product query by specifying the [language](#openfoodfactslanguage), [fields](#productfield) and [search parameters](#parameter).
+It is then passed to the [searchProducts()](#search-products) function.
+
+```
+OpenFoodFactsLanguage language;
+List<ProductField> fields;
+List<Parameter> parametersList;
+```
+
+#### ProductField
+This enum allows you to easily select product fields.
+You can find the full list of available fields here : [Product Fields](https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/lib/utils/ProductFields.dart).
+
+#### OpenFoodFactsLanguage
+This enum contains all the supported languages (180+) and allows an easy and reliable language selection.
+You can find the full list of available languages here : [Open Food Facts Languages](https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/lib/utils/LanguageHelper.dart).
+
+
 ### Functions
 
 #### Get a [product](#product) from a barcode
-This function retrieves the data of the product as well as formating the Product according to the selected language. The result is a [ProductResult](#productresult).
+This function retrieves the data of the product following the [ProductQueryConfigurations](#productqueryconfigurations) passed to it. The result is a [ProductResult](#productresult).
 
 ```
-Parameters : String barcode, String lang
+Parameters : ProductQueryConfiguration config
+Optional : User user
 
-ProductResult result = await OpenFoodFacts.getProduct("yourbarcode", User.LANGUAGE_FR);
+ProductResult result = await OpenFoodAPIClient.getProduct(configurations, user: TestConstants.TEST_USER);
 ```
-See the [example](#example-1-:-get-a-product-from-a-barcode)
+See the [example](#example-1--get-a-product-from-a-barcode)
 
 #### Get a [product](#product) from a barcode (RAW)
-This function retreives the data of the product but returns it "as is". The language parameter is used the target the selected country's API. The result is a [ProductResult](#productresult).
+This function retrieves the data of the product but returns it "as is". Fields are returned in the selected language if available. The result is a [ProductResult](#productresult).
 
 ```
-Parameters : String barcode, String lang
+Parameters : String barcode, OpenFoodFactsLanguage lang
+Optional : User user
 
-ProductResult result = await OpenFoodFacts.getProductRaw("yourbarcode", User.LANGUAGE_FR);
+ProductResult result = await OpenFoodFacts.getProductRaw("yourbarcode", OpenFoodFactsLanguage.FRENCH);
 ```
-See the [example](#example-2-:-get-a-RAW-product-from-a-barcode)
+See the [example](#example-2--get-a-raw-product-from-a-barcode)
 
 #### Search products
 This function allows you to get a list of products according to a list of [parameters](#parameter). The result is a [SearchResult](#searchresult).
@@ -306,17 +332,17 @@ Optional : String lang
 
 SearchResult result = await OpenFoodFacts.searchProducts(parameterList, lang: User.LANGUAGE_FR);
 ```
-See the [example](#example-3-:-search-for-products)
+See the [example](#example-3--search-for-products)
 
 #### Edit or Add a product to Open Food Facts
 This functions sends a [product](#product) to the API in order to be written into the database. The result is a [Status](#status).
 
 ```
-Parameters : User user, Product parameterList
+Parameters : User user, ProductSearchQueryConfigurations config
 
-Status result = await OpenFoodFacts.saveProduct(user, product);
+Status result = await OpenFoodAPIClient.searchProducts(TestConstants.TEST_USER, configuration);
 ```
-See the [example](#example-4-:-send-a-product-to-open-food-facts)
+See the [example](#example-4--send-a-product-to-open-food-facts)
 
 #### Send a picture for an existing product to Open Food Facts
 This function allows you to send a [picture](#productimage) linked to an existing [product](#product) in the database.
@@ -326,7 +352,7 @@ Parameters : User user, ProductImage image
 
 Status result = await OpenFoodFacts.addProductImage(user, image);
 ```
-See the [example](#example-5-:-upload-an-image-for-a-given-product)
+See the [example](#example-5--upload-an-image-for-a-given-product)
 
 ### Examples
 
@@ -335,7 +361,17 @@ See the [example](#example-5-:-upload-an-image-for-a-given-product)
 ```
 String barcode = "0000000000000";
 
-ProductResult result = await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_FR);
+ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.GERMAN,
+          fields: [ProductField.NUTRIMENTS,
+                   ProductField.INGREDIENTS_TEXT,
+                   ProductField.INGREDIENTS,
+                   ProductField.ADDITIVES
+                   ProductField.NUTRIENT_LEVELS]);
+
+ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+  user: TestConstants.TEST_USER);
 
 if(result.status != 1) {
 	print("Error retreiving the product : ${result.status.errorVerbose}");
@@ -357,11 +393,13 @@ Level sugars_level = result.product.nutrientLevels.levels[NutrientLevels.NUTRIEN
 ```
 
 #### Example 2 : Get a RAW product from a barcode
-
+Notice : You should use getProduct() as much as possible to filter the fields in the result and speed up the API answer
 ```
 String barcode = "0000000000000";
 
-ProductResult result = await OpenFoodAPIClient.getProductRaw(barcode, User.LANGUAGE_FR);
+ProductResult result = await OpenFoodAPIClient.getProductRaw(
+          barcode, OpenFoodFactsLanguage.GERMAN,
+          user: TestConstants.TEST_USER);
 
 if(result.status != 1) {
 	print("Error retreiving the product : ${result.status.errorVerbose}");
@@ -385,7 +423,7 @@ Level sugars_level = result.product.nutrientLevels.levels[NutrientLevels.NUTRIEN
 #### Example 3 : Search for products
 
 ```
-var parameterList = <Parameter>[
+var parameters = <Parameter>[
     const OutputFormat(format: Format.JSON),
     const Page(page: 5),
     const PageSize(size: 10),
@@ -399,7 +437,14 @@ var parameterList = <Parameter>[
         tagType: "nutrition_grades", contains: true, tagName: "A")
 ];
 
-SearchResult result = await OpenFoodAPIClient.searchProducts(parameterList, lang: User.LANGUAGE_FR);
+ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+              parametersList: parameters,
+              fields: [ProductField.NUTRISCORE],
+              language: OpenFoodFactsLanguage.FRENCH);
+
+      SearchResult result = await OpenFoodAPIClient.searchProducts(
+          TestConstants.TEST_USER, configuration);
 
 String nutriscore_first_product = result.products[0].nutriscore;
 ```

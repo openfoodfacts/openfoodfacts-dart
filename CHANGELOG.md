@@ -1,3 +1,7 @@
+## [0.3.1] - 30.04.2020
+- Added documentation form version 0.3.0
+- Updated README.md
+
 ## [0.3.0] - 30.04.2020
 - Support for more than 180 languages
 - New query / search principle - _ProductQueryConfiguration_ : 
