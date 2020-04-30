@@ -1,3 +1,9 @@
+## [0.3.0] - 30.04.2020
+- Support for more than 180 languages
+- New query / search principle - _ProductQueryConfiguration_ : 
+In order to optimize the queries you can now set the return language and fields list through _ProductQueryConfiguration_ (Default Behaviour)
+- _getProductRaw()_ is still available (Old Behaviour)
+
 ## [0.2.1] - 14.04.2020
 - expose robotoff and helper classes
 
