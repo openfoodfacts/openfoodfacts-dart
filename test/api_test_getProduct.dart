@@ -4,7 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
-import 'package:openfoodfacts/model/User.dart';
+import 'package:openfoodfacts/utils/LanguageHelper.dart';
+import 'package:openfoodfacts/utils/ProductFields.dart';
+import 'package:openfoodfacts/utils/ProductQueryConfigurations.dart';
 
 import 'test_constants.dart';
 
@@ -16,8 +18,13 @@ void main() {
   group('$OpenFoodAPIClient get products', () {
     test('get product Coca Cola Light', () async {
       String barcode = "5000112548167";
-      ProductResult result = await OpenFoodAPIClient.getProduct(
-          barcode, User.LANGUAGE_DE, user: TestConstants.TEST_USER);
+
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.GERMAN,
+          fields: [ProductField.ALL]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -27,9 +34,6 @@ void main() {
 
       // only german ingredients
       expect(result.product.ingredientsText != null, true);
-      expect(result.product.ingredientsTextDE == null, true);
-      expect(result.product.ingredientsTextEN == null, true);
-      expect(result.product.ingredientsTextFR == null, true);
 
       print(result.product.ingredientsText);
       expect(result.product.ingredients != null, true);
@@ -89,18 +93,25 @@ void main() {
 
       expect(result.product.images != null, true);
       expect(result.product.images.length, 20);
-      expect(result.product.images
-          .singleWhere((image) =>
-                image.field == ImageField.INGREDIENTS &&
-                image.size == ImageSize.DISPLAY &&
-                image.language == User.LANGUAGE_DE).url,
+      expect(
+          result.product.images
+              .singleWhere((image) =>
+                  image.field == ImageField.INGREDIENTS &&
+                  image.size == ImageSize.DISPLAY &&
+                  image.language == OpenFoodFactsLanguage.GERMAN)
+              .url,
           "https://static.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg");
     });
 
-    test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g', () async {
+    test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',
+        () async {
       String barcode = '0028400047685';
-      ProductResult result = await OpenFoodAPIClient.getProduct(
-          barcode, User.LANGUAGE_EN, user: TestConstants.TEST_USER);
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.ENGLISH,
+          fields: [ProductField.ALL]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
       expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
@@ -120,8 +131,12 @@ void main() {
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',
         () async {
       String barcode = "5701184005007";
-      ProductResult result = await OpenFoodAPIClient.getProduct(
-          barcode, User.LANGUAGE_DE, user: TestConstants.TEST_USER);
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.GERMAN,
+          fields: [ProductField.ALL]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -132,9 +147,6 @@ void main() {
 
       // only german ingredients
       expect(result.product.ingredientsText != null, true);
-      expect(result.product.ingredientsTextDE == null, true);
-      expect(result.product.ingredientsTextEN == null, true);
-      expect(result.product.ingredientsTextFR == null, true);
       print(result.product.ingredientsText);
 
       expect(result.product.ingredients != null, true);
@@ -204,8 +216,12 @@ void main() {
 
     test('get product Pâte brisée', () async {
       String barcode = "20004361";
-      ProductResult result = await OpenFoodAPIClient.getProduct(
-         barcode, User.LANGUAGE_FR, user: TestConstants.TEST_USER);
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.FRENCH,
+          fields: [ProductField.ALL]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -216,9 +232,6 @@ void main() {
 
       // only france ingredients
       expect(result.product.ingredientsText != null, true);
-      expect(result.product.ingredientsTextDE == null, true);
-      expect(result.product.ingredientsTextEN == null, true);
-      expect(result.product.ingredientsTextFR == null, true);
       print(result.product.ingredientsText);
 
       expect(result.product.ingredients != null, true);
@@ -237,7 +250,7 @@ void main() {
           true);
       expect(result.product.ingredients.any((i) => i.text == "colorant"), true);
 
-      expect(result.product.ingredients.any((i) => i.text == "carroténoïdes"),
+      expect(result.product.ingredients.any((i) => i.text == "caroténoïdes"),
           true);
       expect(result.product.ingredients.any((i) => i.text == "eau"), true);
       expect(
@@ -259,7 +272,9 @@ void main() {
       expect(result.product.selectedImages.length, 9);
       expect(
           result.product.selectedImages
-              .where((image) => image.language == User.LANGUAGE_FR).length, 6);
+              .where((image) => image.language == OpenFoodFactsLanguage.FRENCH)
+              .length,
+          6);
       expect(
           result.product.selectedImages
               .where((image) => image.field == ImageField.FRONT)
@@ -287,7 +302,7 @@ void main() {
           3);
       expect(
           result.product.selectedImages
-              .where((image) => image.size ==ImageSize.SMALL)
+              .where((image) => image.size == ImageSize.SMALL)
               .length,
           3);
 
@@ -305,22 +320,71 @@ void main() {
 
     test('product not available', () async {
       String barcode = "11111111111111111111111111";
-      ProductResult result = await OpenFoodAPIClient.getProduct(
-          barcode, User.LANGUAGE_DE, user: TestConstants.TEST_USER);
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.GERMAN,
+          fields: [ProductField.ALL]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
       assert(result != null);
       assert(result.product == null);
     });
 
-    test('product ingredients not available', () async {
+    test('product ingredients', () async {
       String barcode = "4316268596299";
-      ProductResult result = await OpenFoodAPIClient.getProduct(
-          barcode, User.LANGUAGE_DE, user: TestConstants.TEST_USER);
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.GERMAN,
+          fields: [ProductField.ALL]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
 
       assert(result != null);
       assert(result.product != null);
       print("number of ingredients: " +
           result.product.ingredients.length.toString());
       assert(result.product.ingredientsText != null);
+    });
+
+    test('product fields', () async {
+      String barcode = "20004361";
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.GERMAN,
+          fields: [ProductField.NAME, ProductField.BRANDS_TAGS]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
+
+      assert(result != null);
+      assert(result.product != null);
+      assert(result.product.productName != null);
+      assert(result.product.brandsTags != null);
+      assert(result.product.ingredients.length == 0);
+      assert(result.product.ingredientsText == null);
+      assert(result.product.productNameDE == null);
+      assert(result.product.additives == null);
+      assert(result.product.nutrientLevels == null);
+      assert(result.product.lang == OpenFoodFactsLanguage.UNDEFINED);
+
+      configurations = ProductQueryConfiguration(barcode,
+          language: OpenFoodFactsLanguage.GERMAN,
+          fields: [ProductField.NAME, ProductField.LANGUAGE]);
+      result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
+
+      assert(result != null);
+      assert(result.product != null);
+      assert(result.product.productName != null);
+      assert(result.product.brandsTags == null);
+      assert(result.product.ingredients.length == 0);
+      assert(result.product.ingredientsText == null);
+      assert(result.product.productNameDE == null);
+      assert(result.product.additives == null);
+      assert(result.product.nutrientLevels == null);
+
+      // This product is not available in German
+      // -> API fallback to default language (for this product French)
+      assert(result.product.lang == OpenFoodFactsLanguage.FRENCH);
     });
   });
 }

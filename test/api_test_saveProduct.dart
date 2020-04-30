@@ -4,6 +4,7 @@ import 'package:openfoodfacts/model/Nutriments.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/Status.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
+import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'test_constants.dart';
 
 void main() {
@@ -17,7 +18,7 @@ void main() {
           barcode: "0048151623426",
           productName: "Maryland Choc Chip",
           quantity: "230g",
-          lang: "en",
+          lang: OpenFoodFactsLanguage.ENGLISH,
           brands: "Golden Cookies",
           nutrimentEnergyUnit: "kJ",
           nutrimentDataPer: "serving",
@@ -39,7 +40,7 @@ void main() {
         productName: "Meisterbäckers Vital",
         quantity: "350g",
         brands: "Schär",
-        lang: "de",
+        lang: OpenFoodFactsLanguage.GERMAN,
       );
       Status status =
           await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product);
@@ -55,7 +56,7 @@ void main() {
         productName: "Johanneskraut-Rotöl Kapseln",
         quantity: "30 Kapseln",
         brands: "Abtei",
-        lang: "de",
+        lang: OpenFoodFactsLanguage.GERMAN,
         ingredientsText:
             "Johanneskraut, Maisöl, Phospholipide (Sojabohnen, Ponceau 4R)",
       );
@@ -73,7 +74,7 @@ void main() {
           productName: "Calcium + Vitamin D3 + C",
           quantity: "14 Tabletten",
           brands: "DocMorris",
-          lang: "de",
+          lang: OpenFoodFactsLanguage.GERMAN,
           ingredientsText:
               "Säurungsmittel Citronensäure, Calciumcarbonat, Natriumhydrogencarbonat",
           categories: "Nahrungsergänzungsmittel, Vitamine");

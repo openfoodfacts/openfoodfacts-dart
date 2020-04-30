@@ -13,7 +13,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     productNameDE: json['product_name_de'] as String,
     productNameEN: json['product_name_en'] as String,
     brands: json['brands'] as String,
-    lang: json['lang'] as String,
+    lang: LanguageHelper.fromJson(json['lang'] as String),
     quantity: json['quantity'] as String,
     imgSmallUrl: json['image_small_url'] as String,
     ingredientsText: json['ingredients_text'] as String,
@@ -76,7 +76,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('product_name_fr', instance.productNameFR);
   val['brands'] = instance.brands;
   val['brands_tags'] = instance.brandsTags;
-  val['lang'] = instance.lang;
+  val['lang'] = LanguageHelper.toJson(instance.lang);
   val['quantity'] = instance.quantity;
   val['image_small_url'] = instance.imgSmallUrl;
   val['serving_size'] = instance.servingSize;

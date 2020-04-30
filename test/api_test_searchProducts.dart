@@ -6,7 +6,9 @@ import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/SearchResult.dart';
-import 'package:openfoodfacts/model/User.dart';
+import 'package:openfoodfacts/utils/LanguageHelper.dart';
+import 'package:openfoodfacts/utils/ProductFields.dart';
+import 'package:openfoodfacts/utils/ProductSearchQueryConfiguration.dart';
 
 import 'test_constants.dart';
 
@@ -17,7 +19,7 @@ void main() {
 
   group('$OpenFoodAPIClient search products', () {
     test('search favorite products', () async {
-      var parameterList = <Parameter>[
+      var parameters = <Parameter>[
         const OutputFormat(format: Format.JSON),
         const Page(page: 1),
         const PageSize(size: 10),
@@ -25,10 +27,14 @@ void main() {
         const SortBy(option: SortOption.POPULARITY)
       ];
 
+      ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+              parametersList: parameters,
+              fields: [ProductField.ALL],
+              language: OpenFoodFactsLanguage.GERMAN);
+
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER,
-          parameterList,
-          lang: User.LANGUAGE_DE);
+          TestConstants.TEST_USER, configuration);
 
       expect(result != null, true);
       expect(result.page, 1);
@@ -43,7 +49,7 @@ void main() {
     });
 
     test('search favorite products EN', () async {
-      var parameterList = <Parameter>[
+      var parameters = <Parameter>[
         const OutputFormat(format: Format.JSON),
         const Page(page: 14),
         const PageSize(size: 3),
@@ -51,10 +57,14 @@ void main() {
         const SortBy(option: SortOption.EDIT)
       ];
 
+      ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+              parametersList: parameters,
+              fields: [ProductField.ALL],
+              language: OpenFoodFactsLanguage.ENGLISH);
+
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER,
-          parameterList,
-          lang: User.LANGUAGE_EN);
+          TestConstants.TEST_USER, configuration);
 
       expect(result != null, true);
       expect(result.page, 14);
@@ -68,7 +78,7 @@ void main() {
     });
 
     test('type bug : ingredient percent int vs String ', () async {
-      var parameterList = <Parameter>[
+      var parameters = <Parameter>[
         const OutputFormat(format: Format.JSON),
         const Page(page: 16),
         const PageSize(size: 5),
@@ -76,10 +86,16 @@ void main() {
         const SortBy(option: SortOption.POPULARITY)
       ];
 
+      ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+              parametersList: parameters,
+              fields: [ProductField.ALL],
+              language: OpenFoodFactsLanguage.GERMAN);
+
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER,
-          parameterList,
-          lang: User.LANGUAGE_DE);
+        TestConstants.TEST_USER,
+        configuration,
+      );
 
       print(result);
 
@@ -113,7 +129,7 @@ void main() {
     });
 
     test('search products by keywords', () async {
-      var parameterList = <Parameter>[
+      var parameters = <Parameter>[
         const OutputFormat(format: Format.JSON),
         const Page(page: 5),
         const PageSize(size: 10),
@@ -122,10 +138,14 @@ void main() {
         const SearchTerms(terms: ["Fruit"])
       ];
 
+      ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+              parametersList: parameters,
+              fields: [ProductField.ALL],
+              language: OpenFoodFactsLanguage.FRENCH);
+
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER,
-          parameterList,
-          lang: User.LANGUAGE_FR);
+          TestConstants.TEST_USER, configuration);
 
       expect(result != null, true);
       expect(result.page, 5);
@@ -137,7 +157,7 @@ void main() {
     });
 
     test('search products filter additives', () async {
-      var parameterList = <Parameter>[
+      var parameters = <Parameter>[
         const OutputFormat(format: Format.JSON),
         const Page(page: 5),
         const PageSize(size: 10),
@@ -147,14 +167,18 @@ void main() {
         const ContainsAdditives(filter: false)
       ];
 
+      ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+              parametersList: parameters,
+              fields: [ProductField.ALL],
+              language: OpenFoodFactsLanguage.FRENCH);
+
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER,
-          parameterList,
-          lang: User.LANGUAGE_FR);
+          TestConstants.TEST_USER, configuration);
 
       int totalCount = result.count;
 
-      parameterList = <Parameter>[
+      parameters = <Parameter>[
         const OutputFormat(format: Format.JSON),
         const Page(page: 5),
         const PageSize(size: 10),
@@ -164,10 +188,13 @@ void main() {
         const ContainsAdditives(filter: true)
       ];
 
+      configuration = ProductSearchQueryConfiguration(
+          parametersList: parameters,
+          fields: [ProductField.ALL],
+          language: OpenFoodFactsLanguage.FRENCH);
+
       result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER,
-          parameterList,
-          lang: User.LANGUAGE_FR);
+          TestConstants.TEST_USER, configuration);
 
       print(
           "Total product count : $totalCount; Filtered count : ${result.count}");
@@ -175,7 +202,7 @@ void main() {
     });
 
     test('search products with filter on tags', () async {
-      var parameterList = <Parameter>[
+      var parameters = <Parameter>[
         const OutputFormat(format: Format.JSON),
         const Page(page: 5),
         const PageSize(size: 10),
@@ -189,10 +216,14 @@ void main() {
             tagType: "nutrition_grades", contains: true, tagName: "A")
       ];
 
+      ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+              parametersList: parameters,
+              fields: [ProductField.ALL],
+              language: OpenFoodFactsLanguage.FRENCH);
+
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER,
-          parameterList,
-          lang: User.LANGUAGE_FR);
+          TestConstants.TEST_USER, configuration);
 
       expect(result != null, true);
       expect(result.page, 5);

@@ -1,15 +1,9 @@
-
-
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 
 part 'Insight.g.dart';
 
-enum InsightAnnotation {
-  YES,
-  NO,
-  MAYBE
-}
+enum InsightAnnotation { YES, NO, MAYBE }
 
 extension InsightAnnotationExtension on InsightAnnotation {
   int get value {
@@ -72,7 +66,7 @@ extension InsightTypesExtension on InsightType {
   }
 
   static InsightType getType(String s) {
-    switch(s) {
+    switch (s) {
       case "ingredient_spellcheck":
         return InsightType.INGREDIENT_SPELLCHECK;
         break;
@@ -109,12 +103,10 @@ extension InsightTypesExtension on InsightType {
 
 @JsonSerializable()
 class InsightResult extends JsonObject {
-
   final String status;
   final Insight insight;
 
-  const InsightResult(
-      {this.status, this.insight});
+  const InsightResult({this.status, this.insight});
 
   factory InsightResult.fromJson(Map<String, dynamic> json) =>
       _$InsightResultFromJson(json);
@@ -125,12 +117,10 @@ class InsightResult extends JsonObject {
 
 @JsonSerializable()
 class MultipleInsightResult extends JsonObject {
-
   final String status;
   final List<Insight> insights;
 
-  const MultipleInsightResult(
-      {this.status, this.insights});
+  const MultipleInsightResult({this.status, this.insights});
 
   factory MultipleInsightResult.fromJson(Map<String, dynamic> json) =>
       _$MultipleInsightResultFromJson(json);
@@ -141,7 +131,6 @@ class MultipleInsightResult extends JsonObject {
 
 @JsonSerializable()
 class Insight extends JsonObject {
-
   final String id;
   final InsightType type;
   final String barcode;
@@ -151,10 +140,15 @@ class Insight extends JsonObject {
   final double confidence;
 
   const Insight(
-      {this.id, this.type, this.barcode, this.countries, this.lang, this.model, this.confidence});
+      {this.id,
+      this.type,
+      this.barcode,
+      this.countries,
+      this.lang,
+      this.model,
+      this.confidence});
 
   factory Insight.fromJson(Map<String, dynamic> json) {
-
     InsightType insightType = InsightTypesExtension.getType(json["type"]);
 
     return Insight(
@@ -164,8 +158,7 @@ class Insight extends JsonObject {
         countries: json["countries"],
         lang: json["lang"],
         model: json["model"],
-        confidence: json["confidence"]
-    );
+        confidence: json["confidence"]);
   }
 
   @override

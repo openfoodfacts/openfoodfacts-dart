@@ -1,11 +1,9 @@
 import 'package:flutter/foundation.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 import '../interface/JsonObject.dart';
 import '../model/ProductImage.dart';
 
 class SendImage extends JsonObject {
-
   String lang;
 
   // ignored for json
@@ -39,13 +37,12 @@ class SendImage extends JsonObject {
   }
 
   factory SendImage.fromJson(Map<String, dynamic> json) {
-
     ImageField imageField = ImageFieldExtension.getType(json["imagefield"]);
 
     return SendImage(
-        lang: json['lang'] as String,
-        barcode: json['code'] as String,
-        imageField: imageField,
+      lang: json['lang'] as String,
+      barcode: json['code'] as String,
+      imageField: imageField,
     );
   }
 

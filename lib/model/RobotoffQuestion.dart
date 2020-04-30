@@ -9,8 +9,7 @@ class RobotoffQuestionResult extends JsonObject {
   final String status;
   final List<RobotoffQuestion> questions;
 
-  const RobotoffQuestionResult(
-      {this.status, this.questions});
+  const RobotoffQuestionResult({this.status, this.questions});
 
   factory RobotoffQuestionResult.fromJson(Map<String, dynamic> json) =>
       _$RobotoffQuestionResultFromJson(json);
@@ -33,21 +32,26 @@ class RobotoffQuestion extends JsonObject {
   final String imageUrl;
 
   const RobotoffQuestion(
-      {this.barcode, this.type, this.value, this.question, this.insightId, this.insightType, this.imageUrl});
+      {this.barcode,
+      this.type,
+      this.value,
+      this.question,
+      this.insightId,
+      this.insightType,
+      this.imageUrl});
 
   factory RobotoffQuestion.fromJson(Map<String, dynamic> json) {
-
-    InsightType insightType = InsightTypesExtension.getType(json["insight_type"]);
+    InsightType insightType =
+        InsightTypesExtension.getType(json["insight_type"]);
 
     return RobotoffQuestion(
-      barcode: json["barcode"],
-      type: json["type"],
-      value: json["value"],
-      question: json["question"],
-      insightId: json["insight_id"],
-      insightType: insightType,
-      imageUrl: json["source_image_url"]
-    );
+        barcode: json["barcode"],
+        type: json["type"],
+        value: json["value"],
+        question: json["question"],
+        insightId: json["insight_id"],
+        insightType: insightType,
+        imageUrl: json["source_image_url"]);
   }
 
   @override

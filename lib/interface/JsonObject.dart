@@ -1,4 +1,3 @@
-
 /// interface class for all serializable json model objects.
 abstract class JsonObject {
   Map<String, dynamic> toJson();

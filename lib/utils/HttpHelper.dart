@@ -1,4 +1,3 @@
-
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,7 +33,8 @@ class HttpHelper {
   /// Send a http post request to the specified uri.
   /// The data / body of the request has to be provided as map. (key, value)
   /// The result of the request will be returned as string.
-  Future<http.Response> doPostRequest(Uri uri, Map<String, String> body, User user) async {
+  Future<http.Response> doPostRequest(
+      Uri uri, Map<String, String> body, User user) async {
     http.Response response = await http.post(
       uri.toString(),
       headers: _buildHeaders(user),
