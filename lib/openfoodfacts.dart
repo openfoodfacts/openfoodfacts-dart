@@ -18,6 +18,7 @@ import 'model/SearchResult.dart';
 import 'model/Status.dart';
 import 'model/User.dart';
 
+import 'model/parameter/OutputFormat.dart';
 import 'utils/HttpHelper.dart';
 import 'utils/ProductHelper.dart';
 
@@ -147,11 +148,15 @@ class OpenFoodAPIClient {
   /// Query the language specific host from OpenFoodFacts.
   static Future<SearchResult> searchProducts(
       User user, ProductSearchQueryConfiguration config) async {
+    const outputFormat = OutputFormat(format: Format.JSON);
+    var queryParameters = config.getParametersMap();
+    queryParameters[outputFormat.getName()] = outputFormat.getValue();
+
     var searchUri = Uri(
         scheme: URI_SCHEME,
         host: URI_HOST,
         path: '/cgi/search.pl',
-        queryParameters: config.getParametersMap());
+        queryParameters: queryParameters);
 
     print("URI: " + searchUri.toString());
 
