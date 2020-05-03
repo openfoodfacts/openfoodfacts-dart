@@ -12,10 +12,10 @@ class SearchResult extends JsonObject {
   @JsonKey(name: "page_size", nullable: false, fromJson: JsonObject.parseInt)
   final int pageSize;
 
-  @JsonKey(name: "count", nullable: false)
+  @JsonKey(name: "count", nullable: false, fromJson: JsonObject.parseInt)
   final int count;
 
-  @JsonKey(name: "skip", nullable: false)
+  @JsonKey(name: "skip", nullable: false, fromJson: JsonObject.parseInt)
   final int skip;
 
   @JsonKey(includeIfNull: false)
