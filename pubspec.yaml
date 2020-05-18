@@ -18,9 +18,10 @@ dependencies:
   image: ^2.1.4
 
 dev_dependencies:
-  test: any
   build_runner: ^1.6.9
   json_serializable: ^3.2.2
+  flutter_test:
+    sdk: flutter
 
 
 # https://www.dartlang.org/tools/pub/pubspec
