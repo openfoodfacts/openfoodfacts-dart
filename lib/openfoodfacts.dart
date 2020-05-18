@@ -4,22 +4,23 @@ import 'dart:convert';
 import 'dart:async';
 
 import 'package:http/http.dart';
-import 'package:openfoodfacts/model/Insight.dart';
-import 'package:openfoodfacts/model/SpellingCorrections.dart';
-import 'package:openfoodfacts/utils/LanguageHelper.dart';
-import 'package:openfoodfacts/utils/ProductQueryConfigurations.dart';
-import 'package:openfoodfacts/utils/ProductSearchQueryConfiguration.dart';
 
+
+import 'model/Insight.dart';
 import 'model/RobotoffQuestion.dart';
 import 'model/SendImage.dart';
 import 'model/Product.dart';
 import 'model/ProductResult.dart';
 import 'model/SearchResult.dart';
+import 'model/SpellingCorrections.dart';
 import 'model/Status.dart';
 import 'model/User.dart';
 
 import 'utils/HttpHelper.dart';
+import 'utils/LanguageHelper.dart';
 import 'utils/ProductHelper.dart';
+import 'utils/ProductQueryConfigurations.dart';
+import 'utils/ProductSearchQueryConfiguration.dart';
 
 export 'interface/Parameter.dart';
 export 'model/Additives.dart';
@@ -44,8 +45,12 @@ export 'model/parameter/SortBy.dart';
 export 'utils/HttpHelper.dart';
 export 'utils/ImageHelper.dart';
 export 'utils/JsonHelper.dart';
+export 'utils/LanguageHelper.dart';
 export 'utils/NutrimentsHelper.dart';
+export 'utils/ProductFields.dart';
 export 'utils/ProductHelper.dart';
+export 'utils/ProductQueryConfigurations.dart';
+export 'utils/ProductSearchQueryConfiguration.dart';
 
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
