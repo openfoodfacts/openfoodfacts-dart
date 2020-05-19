@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 
 import '../interface/JsonObject.dart';
@@ -15,8 +14,8 @@ class SendImage extends JsonObject {
   ImageField imageField;
 
   SendImage({
-    @required this.lang,
-    @required this.barcode,
+    this.lang,
+    this.barcode,
     this.imageUrl,
     this.imageField = ImageField.OTHER,
   });

@@ -1,13 +1,11 @@
 import 'dart:async';
 
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/LanguageHelper.dart';
-import 'package:openfoodfacts/utils/ProductFields.dart';
-import 'package:openfoodfacts/utils/ProductQueryConfigurations.dart';
 
 /// request a product from the OpenFoodFacts database
 Future<Product> getProduct() async {
   var barcode = "0048151623426";
+
   ProductQueryConfiguration configuration = ProductQueryConfiguration(barcode, language: OpenFoodFactsLanguage.GERMAN, fields: [ProductField.ALL]);
   ProductResult result =
       await OpenFoodAPIClient.getProduct(configuration);

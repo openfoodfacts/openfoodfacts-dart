@@ -8,14 +8,10 @@ environment:
   sdk: '>=2.0.0-dev.54.0 <3.0.0'
 
 dependencies:
-  flutter:
-    sdk: flutter
-  openfoodfacts: any
+  openfoodfacts:
+    path: ../
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  test: any
 
 # https://www.dartlang.org/tools/pub/pubspec
-
-flutter:
