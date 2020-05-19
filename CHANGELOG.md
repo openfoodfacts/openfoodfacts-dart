@@ -1,3 +1,7 @@
+## [0.3.2] - 19.05.2020
+- dart:ui - dependencies removed
+- search result decoding and parsing errors fixed
+
 ## [0.3.1] - 30.04.2020
 - Added documentation form version 0.3.0
 - Updated README.md

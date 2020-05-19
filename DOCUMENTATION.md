@@ -87,13 +87,6 @@ String ingredientsTextEN
 String ingredientsTextFR
 ```
 
-#### ImageList
-This class contains the list of images for the product.
-
-```
-List<ProductImage> list
-```
-
 #### ProductImage
 This class handles the different types and sizes of the image, it also contains it's URL.
 
