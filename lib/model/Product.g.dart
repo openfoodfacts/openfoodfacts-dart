@@ -76,7 +76,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('product_name_fr', instance.productNameFR);
   val['brands'] = instance.brands;
   val['brands_tags'] = instance.brandsTags;
-  val['lang'] = LanguageHelper.toJson(instance.lang);
+  writeNotNull('lang', LanguageHelper.toJson(instance.lang));
   val['quantity'] = instance.quantity;
   val['image_small_url'] = instance.imgSmallUrl;
   val['serving_size'] = instance.servingSize;

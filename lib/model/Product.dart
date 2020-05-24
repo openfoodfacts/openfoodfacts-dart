@@ -26,9 +26,10 @@ class Product extends JsonObject {
   @JsonKey(name: 'brands_tags')
   List<String> brandsTags;
   @JsonKey(
-      name: 'lang',
-      toJson: LanguageHelper.toJson,
-      fromJson: LanguageHelper.fromJson)
+    name: 'lang',
+    toJson: LanguageHelper.toJson,
+    fromJson: LanguageHelper.fromJson,
+    includeIfNull: false)
   OpenFoodFactsLanguage lang;
   String quantity;
   @JsonKey(name: 'image_small_url')

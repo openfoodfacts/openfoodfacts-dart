@@ -755,8 +755,8 @@ extension OpenFoodFactsLanguageExtension on OpenFoodFactsLanguage {
 }
 
 class LanguageHelper {
-  static Map<String, String> toJson(OpenFoodFactsLanguage language) {
-    return {"lang": language.code};
+  static String toJson(OpenFoodFactsLanguage language) {
+    return language.code;
   }
 
   static OpenFoodFactsLanguage fromJson(String code) {
