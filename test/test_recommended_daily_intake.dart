@@ -5,10 +5,12 @@ import 'package:openfoodfacts/utils/UnitHelper.dart';
 
 void main() {
 
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   group('Get Recommendations', () {
 
-    test('Get', () async {
-      RecommendedDailyIntake rdi = await RecommendedDailyIntake.getRecommendedDailyIntakes();
+    test('Get', () {
+      RecommendedDailyIntake rdi = RecommendedDailyIntake.getRecommendedDailyIntakes();
 
       expect(rdi.energyKcal.value == 2000, true);
       expect(rdi.energyKcal.unit == Unit.KCAL, true);

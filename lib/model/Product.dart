@@ -5,6 +5,7 @@ import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import '../interface/JsonObject.dart';
 import 'Additives.dart';
 import 'Ingredient.dart';
+import 'IngredientsAnalysisTags.dart';
 import 'NutrientLevels.dart';
 import 'Nutriments.dart';
 
@@ -26,16 +27,20 @@ class Product extends JsonObject {
   @JsonKey(name: 'brands_tags')
   List<String> brandsTags;
   @JsonKey(
-    name: 'lang',
-    toJson: LanguageHelper.toJson,
-    fromJson: LanguageHelper.fromJson,
-    includeIfNull: false)
+      name: 'lang',
+      toJson: LanguageHelper.toJson,
+      fromJson: LanguageHelper.fromJson,
+      includeIfNull: false)
   OpenFoodFactsLanguage lang;
   String quantity;
   @JsonKey(name: 'image_small_url')
   String imgSmallUrl;
   @JsonKey(name: 'serving_size')
   String servingSize;
+  @JsonKey(name: 'serving_quantity')
+  String servingQuantity;
+  @JsonKey(name: 'product_quantity')
+  dynamic packagingQuantity;
 
   /// cause nesting is sooo cool ;)
   @JsonKey(
@@ -55,7 +60,7 @@ class Product extends JsonObject {
   @JsonKey(includeIfNull: false)
   List<Ingredient> ingredients;
 
-  @JsonKey(includeIfNull: false)
+  @JsonKey(includeIfNull: false, toJson: Nutriments.toJsonHelper)
   Nutriments nutriments;
 
   @JsonKey(name: 'additives_tags', includeIfNull: false)
@@ -72,6 +77,13 @@ class Product extends JsonObject {
   String ingredientsTextEN;
   @JsonKey(name: 'ingredients_text_fr', includeIfNull: false)
   String ingredientsTextFR;
+
+  @JsonKey(
+      name: 'ingredients_analysis_tags',
+      includeIfNull: false,
+      fromJson: IngredientsAnalysisTags.fromJson,
+      toJson: IngredientsAnalysisTags.toJson)
+  IngredientsAnalysisTags ingredientsAnalysisTags;
 
   @JsonKey(name: 'nutriment_energy_unit', includeIfNull: false)
   String nutrimentEnergyUnit;
@@ -113,7 +125,8 @@ class Product extends JsonObject {
       this.nutriments,
       this.additives,
       this.nutrientLevels,
-      this.servingSize});
+      this.servingSize,
+      this.servingQuantity});
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);

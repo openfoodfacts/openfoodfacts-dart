@@ -5,7 +5,7 @@ version: 0.3.2
 #- Alexander Schacht <grumpf@gmx.de>
 #- Primaël Quémerais <primael@reefind.com>
 #- Marcus Cantu
-homepage: https://github.com/Grumpf86/openfoodfacts-dart
+homepage: https://github.com/openfoodfacts/openfoodfacts-dart
 
 environment:
   sdk: '>=2.6.0 <3.0.0'
@@ -23,6 +23,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
 # https://www.dartlang.org/tools/pub/pubspec
 flutter:
+  assets:
+    - assets/json/

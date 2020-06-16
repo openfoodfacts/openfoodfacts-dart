@@ -1,48 +1,46 @@
-
 import 'dart:convert';
-import 'dart:io';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:openfoodfacts/utils/RecommendedDailyIntakeHelper.dart';
 
 import 'package:openfoodfacts/utils/UnitHelper.dart';
 
 class RecommendedDailyIntake {
-
   RecommendedDailyIntake(
-    this.energyKcal,
-    this.energyKj,
-    this.fat,
-    this.saturatedFat,
-    this.carbohydrates,
-    this.sugars,
-    this.proteins,
-    this.sodium,
-    this.vitaminA,
-    this.vitaminD,
-    this.vitaminE,
-    this.vitaminK,
-    this.vitaminC,
-    this.vitaminB1,
-    this.vitaminB2,
-    this.vitaminB3,
-    this.vitaminB6,
-    this.vitaminB9,
-    this.vitaminB12,
-    this.biotin,
-    this.pantothenicAcid,
-    this.potassium,
-    this.chloride,
-    this.calcium,
-    this.phosphorus,
-    this.magnesium,
-    this.iron,
-    this.zinc,
-    this.copper,
-    this.manganese,
-    this.fluoride,
-    this.selenium,
-    this.chromium,
-    this.molybdenum,
-    this.iodine
-  );
+      this.energyKcal,
+      this.energyKj,
+      this.fat,
+      this.saturatedFat,
+      this.carbohydrates,
+      this.sugars,
+      this.proteins,
+      this.sodium,
+      this.vitaminA,
+      this.vitaminD,
+      this.vitaminE,
+      this.vitaminK,
+      this.vitaminC,
+      this.vitaminB1,
+      this.vitaminB2,
+      this.vitaminB3,
+      this.vitaminB6,
+      this.vitaminB9,
+      this.vitaminB12,
+      this.biotin,
+      this.pantothenicAcid,
+      this.potassium,
+      this.chloride,
+      this.calcium,
+      this.phosphorus,
+      this.magnesium,
+      this.iron,
+      this.zinc,
+      this.copper,
+      this.manganese,
+      this.fluoride,
+      this.selenium,
+      this.chromium,
+      this.molybdenum,
+      this.iodine);
 
   factory RecommendedDailyIntake.fromJson(Map<String, dynamic> parsedJson) {
     return RecommendedDailyIntake(
@@ -80,8 +78,7 @@ class RecommendedDailyIntake {
         IntakeRecommendation(parsedJson["selenium"]),
         IntakeRecommendation(parsedJson["chromium"]),
         IntakeRecommendation(parsedJson["molybdenum"]),
-        IntakeRecommendation(parsedJson["iodine"])
-    );
+        IntakeRecommendation(parsedJson["iodine"]));
   }
 
   final IntakeRecommendation energyKcal;
@@ -120,23 +117,25 @@ class RecommendedDailyIntake {
   final IntakeRecommendation molybdenum;
   final IntakeRecommendation iodine;
 
-  static Future<Map<String, dynamic>> _loadRecommendationAsset() async {
-    String jsonString = await File('assets/data/recommended_daily_intakes.json').readAsString();
+  // The plugin is unable to access the assets/json/recommended_daily_intakes.json file. Looking for a fix.
+  /*static Future<Map<String, dynamic>> _loadRecommendationAsset() async {
+    String jsonString = await rootBundle.loadString('assets/json/recommended_daily_intakes.json');
     return await json.decode(jsonString);
-  }
+  }*/
 
-  static Future<RecommendedDailyIntake> getRecommendedDailyIntakes() async {
-    return RecommendedDailyIntake.fromJson(await _loadRecommendationAsset());
+  static RecommendedDailyIntake getRecommendedDailyIntakes() {
+    //return RecommendedDailyIntake.fromJson(await _loadRecommendationAsset());
+    return RecommendedDailyIntake.fromJson(
+        RecommendedDailyIntakeHelper.getEURecommendationsJson());
   }
-
 }
 
 class IntakeRecommendation {
-
   IntakeRecommendation(Map<String, dynamic> json) {
-    print("checking : ${json["value"]}");
     this.unit = UnitHelper.stringToUnit(json["unit"]);
-    this.value = json["value"] is double ? json["value"] : (json["value"] as int).toDouble();
+    this.value = json["value"] is double
+        ? json["value"]
+        : (json["value"] as int).toDouble();
   }
 
   Unit unit;

@@ -12,6 +12,10 @@ class UnitHelper {
 
   static Unit stringToUnit(String s) {
 
+    if(s == null) {
+      return null;
+    }
+
     if(s[0] == String.fromCharCode(0x03BC)) {
       String newS = s.substring(1);
       switch(newS) {

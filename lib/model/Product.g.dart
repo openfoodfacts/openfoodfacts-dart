@@ -36,10 +36,12 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
         : NutrientLevels.fromJson(
             json['nutrient_levels'] as Map<String, dynamic>),
     servingSize: json['serving_size'] as String,
+    servingQuantity: json['serving_quantity'] as String,
   )
     ..productNameFR = json['product_name_fr'] as String
     ..brandsTags =
         (json['brands_tags'] as List)?.map((e) => e as String)?.toList()
+    ..packagingQuantity = json['product_quantity']
     ..selectedImages = JsonHelper.selectedImagesFromJson(
         json['selected_images'] as Map<String, dynamic>)
     ..images = JsonHelper.imagesFromJson(json['images'] as Map<String, dynamic>)
@@ -48,6 +50,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
             e == null ? null : Ingredient.fromJson(e as Map<String, dynamic>))
         ?.toList()
     ..ingredientsTextFR = json['ingredients_text_fr'] as String
+    ..ingredientsAnalysisTags = IngredientsAnalysisTags.fromJson(
+        json['ingredients_analysis_tags'] as List)
     ..categoriesTags =
         (json['categories_tags'] as List)?.map((e) => e as String)?.toList()
     ..labelsTags =
@@ -80,17 +84,21 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   val['quantity'] = instance.quantity;
   val['image_small_url'] = instance.imgSmallUrl;
   val['serving_size'] = instance.servingSize;
+  val['serving_quantity'] = instance.servingQuantity;
+  val['product_quantity'] = instance.packagingQuantity;
   writeNotNull('selected_images',
       JsonHelper.selectedImagesToJson(instance.selectedImages));
   writeNotNull('images', JsonHelper.imagesToJson(instance.images));
   writeNotNull('ingredients', instance.ingredients);
-  writeNotNull('nutriments', instance.nutriments);
+  writeNotNull('nutriments', Nutriments.toJsonHelper(instance.nutriments));
   writeNotNull('additives_tags', instance.additives);
   writeNotNull('nutrient_levels', instance.nutrientLevels);
   writeNotNull('ingredients_text', instance.ingredientsText);
   writeNotNull('ingredients_text_de', instance.ingredientsTextDE);
   writeNotNull('ingredients_text_en', instance.ingredientsTextEN);
   writeNotNull('ingredients_text_fr', instance.ingredientsTextFR);
+  writeNotNull('ingredients_analysis_tags',
+      IngredientsAnalysisTags.toJson(instance.ingredientsAnalysisTags));
   writeNotNull('nutriment_energy_unit', instance.nutrimentEnergyUnit);
   writeNotNull('nutrition_data_per', instance.nutrimentDataPer);
   writeNotNull('nutrition_grade_fr', instance.nutriscore);
