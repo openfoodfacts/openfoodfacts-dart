@@ -7,7 +7,7 @@ class JsonHelper {
   static List<ProductImage> selectedImagesFromJson(Map<String, dynamic> json) {
     if (json == null) return null;
 
-    var imageList = new List<ProductImage>();
+    var imageList = List<ProductImage>();
     for (var field in ImageField.values) {
       for (var size in ImageSize.values) {
         for (OpenFoodFactsLanguage lang in OpenFoodFactsLanguage.values) {
@@ -25,8 +25,8 @@ class JsonHelper {
 
           // use the url to build the image
           if (url == null) continue;
-          var image = new ProductImage(
-              field: field, size: size, language: lang, url: url);
+          var image =
+              ProductImage(field: field, size: size, language: lang, url: url);
 
           imageList.add(image);
         }
@@ -36,14 +36,29 @@ class JsonHelper {
   }
 
   static Map<String, dynamic> selectedImagesToJson(List<ProductImage> images) {
-    // not implemented and needed, yet.
-    return new Map<String, dynamic>();
+    Map<String, dynamic> result = Map<String, dynamic>();
+
+    for (ImageField field in ImageField.values) {
+      Map<String, dynamic> fieldMap = Map<String, dynamic>();
+      for (ImageSize size in ImageSize.values) {
+        Map<String, dynamic> sizeMap = Map<String, dynamic>();
+        for (ProductImage image in images) {
+          if(image.field == field && image.size == size) {
+            sizeMap[image.language.code] = image.url;
+          }
+        }
+        fieldMap[size.value] = sizeMap;
+      }
+      result[field.value] = fieldMap;
+    }
+
+    return result;
   }
 
   static List<ProductImage> imagesFromJson(Map<String, dynamic> json) {
     if (json == null) return null;
 
-    var imageList = new List<ProductImage>();
+    var imageList = List<ProductImage>();
 
     for (var field in ImageField.values) {
       for (OpenFoodFactsLanguage lang in OpenFoodFactsLanguage.values) {
@@ -67,8 +82,8 @@ class JsonHelper {
           var numberObject = sizesObject[number] as Map<String, dynamic>;
           if (numberObject == null) continue;
 
-          var image = new ProductImage(
-              field: field, size: size, language: lang, rev: rev);
+          var image =
+              ProductImage(field: field, size: size, language: lang, rev: rev);
           imageList.add(image);
         }
       }
@@ -79,6 +94,6 @@ class JsonHelper {
 
   static Map<String, dynamic> imagesToJson(List<ProductImage> images) {
     // not implemented and needed, yet.
-    return new Map<String, dynamic>();
+    return Map<String, dynamic>();
   }
 }

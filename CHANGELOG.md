@@ -1,3 +1,7 @@
+## [0.3.4] - 25.06.2020
+- selectedImages toJson implementation
+- codebase improvements
+
 ## [0.3.3] - 25.06.2020
 - ingredient percentage parsing fixed
 

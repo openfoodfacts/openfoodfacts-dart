@@ -5,7 +5,6 @@ import 'dart:async';
 
 import 'package:http/http.dart';
 
-
 import 'model/Insight.dart';
 import 'model/RobotoffQuestion.dart';
 import 'model/SendImage.dart';
@@ -174,7 +173,7 @@ class OpenFoodAPIClient {
     return result;
   }
 
-  static Future<InsightResult> getRandomInsight(User user,
+  static Future<InsightsResult> getRandomInsight(User user,
       {InsightType type,
       String country,
       String valueTag,
@@ -194,22 +193,23 @@ class OpenFoodAPIClient {
       parameters["server_domain"] = serverDomain;
     }
 
-    var robotoffInsightUri = Uri(
+    var insightUri = Uri(
       scheme: URI_SCHEME,
       host: URI_HOST_ROBOTOFF,
       path: 'api/v1/insights/random/',
       queryParameters: parameters,
     );
 
-    Response response =
-        await HttpHelper().doGetRequest(robotoffInsightUri, user: user);
+    print(insightUri);
+
+    Response response = await HttpHelper().doGetRequest(insightUri, user: user);
     var result =
-        InsightResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+        InsightsResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
 
     return result;
   }
 
-  static Future<MultipleInsightResult> getProductInsights(
+  static Future<InsightsResult> getProductInsights(
       String barcode, User user) async {
     var insightsUri = Uri(
       scheme: URI_SCHEME,
@@ -217,10 +217,12 @@ class OpenFoodAPIClient {
       path: 'api/v1/insights/$barcode',
     );
 
+    print(insightsUri);
+
     Response response =
         await HttpHelper().doGetRequest(insightsUri, user: user);
 
-    return MultipleInsightResult.fromJson(
+    return InsightsResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
   }
 
@@ -343,7 +345,7 @@ class OpenFoodAPIClient {
   }
 
   /// login on the main page - not used
-  static Future<String> _login(User user) async {
+  static Future<String> login(User user) async {
     var loginUri = new Uri(scheme: URI_SCHEME, host: URI_HOST);
     Response response =
         await HttpHelper().doPostRequest(loginUri, user.toData(), user);

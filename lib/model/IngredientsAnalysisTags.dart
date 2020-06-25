@@ -69,6 +69,13 @@ class IngredientsAnalysisTags {
   static List<dynamic> toJson(IngredientsAnalysisTags ingredientsAnalysisTags) {
     List<String> result = <String>[];
 
+    if(ingredientsAnalysisTags == null) {
+      result.add('en:maybe-vegan');
+      result.add('en:maybe-vegetarian');
+      result.add('en:maybe-palm-oil-free');
+      return result;
+    }
+
     switch(ingredientsAnalysisTags.veganStatus) {
       case VeganStatus.IS_VEGAN:
         result.add('en:vegan');

@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:openfoodfacts/utils/RecommendedDailyIntakeHelper.dart';
 
 import 'package:openfoodfacts/utils/UnitHelper.dart';
@@ -117,9 +115,9 @@ class RecommendedDailyIntake {
   final IntakeRecommendation molybdenum;
   final IntakeRecommendation iodine;
 
-  // The plugin is unable to access the assets/json/recommended_daily_intakes.json file. Looking for a fix.
+  // The plugin is unable to access the assets/json/recommended_daily_intakes_source _eu.json file. Looking for a fix.
   /*static Future<Map<String, dynamic>> _loadRecommendationAsset() async {
-    String jsonString = await rootBundle.loadString('assets/json/recommended_daily_intakes.json');
+    String jsonString = await rootBundle.loadString('assets/json/recommended_daily_intakes_source _eu.json');
     return await json.decode(jsonString);
   }*/
 

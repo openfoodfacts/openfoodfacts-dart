@@ -1,5 +1,5 @@
 class RecommendedDailyIntakeHelper {
-  // There is an issue where the plugin cannot access the assets/json/recommended_daily_intakes.json file. This is used as a replacement while the problem is being fixed.
+  // There is an issue where the plugin cannot access the assets/json/recommended_daily_intakes_source _eu.json file. This is used as a replacement while the problem is being fixed.
   static final Map<String, dynamic> _euRecommendations = {
     "energy_kcal": {"unit": "kcal", "value": 2000},
     "energy_kJ": {"unit": "kJ", "value": 8400},
