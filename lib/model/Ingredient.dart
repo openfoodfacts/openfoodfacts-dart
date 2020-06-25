@@ -11,8 +11,8 @@ class Ingredient extends JsonObject {
   String id;
   @JsonKey(nullable: false)
   String text;
-  @JsonKey(includeIfNull: false, fromJson: JsonObject.parseInt)
-  int percent;
+  @JsonKey(includeIfNull: false, fromJson: JsonObject.parseDouble)
+  double percent;
 
   bool bold;
 

@@ -11,7 +11,7 @@ Ingredient _$IngredientFromJson(Map<String, dynamic> json) {
     rank: JsonObject.parseInt(json['rank']),
     id: json['id'] as String,
     text: json['text'] as String,
-    percent: JsonObject.parseInt(json['percent']),
+    percent: JsonObject.parseDouble(json['percent']),
     bold: json['bold'] as bool,
   );
 }

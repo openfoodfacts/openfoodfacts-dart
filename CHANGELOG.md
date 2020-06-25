@@ -1,3 +1,6 @@
+## [0.3.3] - 25.06.2020
+- ingredient percentage parsing fixed
+
 ## [0.3.2] - 19.05.2020
 - dart:ui - dependencies removed
 - search result decoding and parsing errors fixed
