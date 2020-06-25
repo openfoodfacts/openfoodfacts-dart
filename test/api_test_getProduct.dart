@@ -37,7 +37,9 @@ void main() {
 
       print(result.product.ingredientsText);
       expect(result.product.ingredients != null, true);
-      expect(result.product.ingredients.length, 10);
+      result.product.ingredients.forEach((element) {
+        print(element.toData().toString());});
+      expect(result.product.ingredients.length, 13);
       print("Serving Size: ");
       print(result.product.servingSize);
 
@@ -45,11 +47,13 @@ void main() {
       expect(
           result.product.ingredients.any((i) => i.text == "Kohlensäure"), true);
       expect(
-          result.product.ingredients.any((i) => i.text == "Farbstoff E 150d"),
+          result.product.ingredients.any((i) => i.text == "e150d"),
           true);
       expect(
-          result.product.ingredients.any((i) =>
-              i.text == "Säuerungsmittel Phosphorsäure und Citronensäure"),
+          result.product.ingredients.any((i) => i.text == "Citronensäure"),
+          true);
+      expect(
+          result.product.ingredients.any((i) => i.text == "Phosphorsäure"),
           true);
       expect(result.product.ingredients.any((i) => i.text == "Süßungsmittel"),
           true);
@@ -150,14 +154,16 @@ void main() {
       print(result.product.ingredientsText);
 
       expect(result.product.ingredients != null, true);
-      expect(result.product.ingredients.length, 18);
+      result.product.ingredients.forEach((element) {
+        print(element.toData().toString());});
+      expect(result.product.ingredients.length, 24);
 
       expect(result.product.ingredients.any((i) => i.text == "Buttergebäck"),
           true);
       expect(
-          result.product.ingredients.any((i) => i.text == "Weizenmehl"), true);
+          result.product.ingredients.any((i) => i.text == "_Weizenmehl_"), true);
       expect(result.product.ingredients.any((i) => i.text == "Zucker"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Butter"), true);
+      expect(result.product.ingredients.any((i) => i.text == "_Butter_"), true);
       expect(
           result.product.ingredients.any((i) => i.text == "Speisesalz"), true);
 
@@ -227,6 +233,7 @@ void main() {
       expect(result.status, 1);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
+      print(result.product.toData().toString());
       expect(result.product.barcode, barcode);
       expect(result.product.productName, "Pâte brisée");
 
@@ -359,7 +366,7 @@ void main() {
       assert(result.product != null);
       assert(result.product.productName != null);
       assert(result.product.brandsTags != null);
-      assert(result.product.ingredients.length == 0);
+      assert(result.product.ingredients == null);
       assert(result.product.ingredientsText == null);
       assert(result.product.productNameDE == null);
       assert(result.product.additives == null);
@@ -376,15 +383,34 @@ void main() {
       assert(result.product != null);
       assert(result.product.productName != null);
       assert(result.product.brandsTags == null);
-      assert(result.product.ingredients.length == 0);
+      assert(result.product.ingredients == null);
       assert(result.product.ingredientsText == null);
       assert(result.product.productNameDE == null);
       assert(result.product.additives == null);
       assert(result.product.nutrientLevels == null);
 
-      // This product is not available in German
-      // -> API fallback to default language (for this product French)
-      assert(result.product.lang == OpenFoodFactsLanguage.FRENCH);
+      // go back to english as default language, cause german is not available
+      assert(result.product.lang == OpenFoodFactsLanguage.ENGLISH);
+    });
+
+    test('product ingredients with percent', () async {
+      String barcode = "4388860154948";
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.GERMAN,
+          fields: [ProductField.NAME, ProductField.BRANDS_TAGS,
+            ProductField.INGREDIENTS, ProductField.INGREDIENTS_TEXT]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations);
+
+      assert(result != null);
+      assert(result.product != null);
+      print("number of ingredients: " +
+          result.product.ingredients.length.toString());
+      assert(result.product.ingredientsText != null);
+      assert(result.product.ingredients != null);
+      assert(result.product.ingredients.length > 0);
+      result.product.ingredients.forEach((Ingredient i) => print(i.toJson()));
+      assert(result.product.ingredients.any((Ingredient i) => i.percent != null));
     });
   });
 }

@@ -140,7 +140,6 @@ class OpenFoodAPIClient {
     ProductResult result = ProductResult.fromJson(json.decode(response.body));
 
     if (result.product != null) {
-      ProductHelper.parseIngredients(result.product);
       ProductHelper.removeImages(result.product, config.language);
       ProductHelper.createImageUrls(result.product);
     }
@@ -169,7 +168,6 @@ class OpenFoodAPIClient {
     var result = SearchResult.fromJson(json.decode(response.body));
 
     for (Product product in result.products) {
-      ProductHelper.parseIngredients(product);
       ProductHelper.removeImages(product, config.language);
     }
 
