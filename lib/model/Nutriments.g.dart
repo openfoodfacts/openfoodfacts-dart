@@ -26,6 +26,7 @@ Nutriments _$NutrimentsFromJson(Map<String, dynamic> json) {
     novaGroupServing: JsonObject.parseInt(json['nova-group_serving']),
     energyServing: JsonObject.parseDouble(json['energy_serving']),
     carbohydratesServing: JsonObject.parseDouble(json['carbohydrates_serving']),
+    energyUnit: UnitHelper.stringToUnit(json['energy_unit'] as String),
   );
 }
 
@@ -56,5 +57,15 @@ Map<String, dynamic> _$NutrimentsToJson(Nutriments instance) {
   writeNotNull('nova-group_serving', instance.novaGroupServing);
   writeNotNull('energy_serving', instance.energyServing);
   writeNotNull('carbohydrates_serving', instance.carbohydratesServing);
+  writeNotNull('energy_unit', _$UnitEnumMap[instance.energyUnit]);
   return val;
 }
+
+const _$UnitEnumMap = {
+  Unit.KCAL: 'KCAL',
+  Unit.KJ: 'KJ',
+  Unit.G: 'G',
+  Unit.MILLI_G: 'MILLI_G',
+  Unit.MICRO_G: 'MICRO_G',
+  Unit.UNKNOWN: 'UNKNOWN',
+};

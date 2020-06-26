@@ -7,6 +7,11 @@ part 'RobotoffQuestion.g.dart';
 @JsonSerializable()
 class RobotoffQuestionResult extends JsonObject {
   final String status;
+  @JsonKey(
+      name: 'questions',
+      includeIfNull: false,
+      fromJson: RobotoffQuestion.fromJson,
+      toJson: RobotoffQuestion.toJson)
   final List<RobotoffQuestion> questions;
 
   const RobotoffQuestionResult({this.status, this.questions});
@@ -18,8 +23,7 @@ class RobotoffQuestionResult extends JsonObject {
   Map<String, dynamic> toJson() => _$RobotoffQuestionResultToJson(this);
 }
 
-@JsonSerializable()
-class RobotoffQuestion extends JsonObject {
+class RobotoffQuestion {
   final String barcode;
   final String type;
   final String value;
@@ -40,32 +44,40 @@ class RobotoffQuestion extends JsonObject {
       this.insightType,
       this.imageUrl});
 
-  factory RobotoffQuestion.fromJson(Map<String, dynamic> json) {
-    InsightType insightType =
-        InsightTypesExtension.getType(json["insight_type"]);
+  static List<RobotoffQuestion> fromJson(List<dynamic> json) {
+    List<RobotoffQuestion> result = List<RobotoffQuestion>();
+    for (Map<String, dynamic> jsonQuestion in json) {
+      InsightType insightType =
+          InsightTypesExtension.getType(jsonQuestion["insight_type"]);
 
-    return RobotoffQuestion(
-        barcode: json["barcode"],
-        type: json["type"],
-        value: json["value"],
-        question: json["question"],
-        insightId: json["insight_id"],
-        insightType: insightType,
-        imageUrl: json["source_image_url"]);
+      result.add(RobotoffQuestion(
+          barcode: jsonQuestion["barcode"],
+          type: jsonQuestion["type"],
+          value: jsonQuestion["value"],
+          question: jsonQuestion["question"],
+          insightId: jsonQuestion["insight_id"],
+          insightType: insightType,
+          imageUrl: jsonQuestion["source_image_url"]));
+    }
+    return result;
   }
 
-  @override
-  Map<String, dynamic> toJson() {
-    Map<String, String> result = Map<String, String>();
+  static List<Map<String, dynamic>> toJson(List<RobotoffQuestion> questions) {
+    List<Map<String, dynamic>> result = List<Map<String, dynamic>>();
 
-    result["barcode"] = this.barcode;
-    result["type"] = this.type;
-    result["value"] = this.value;
-    result["question"] = this.question;
-    result["insight_id"] = this.insightId;
-    result["insight_type"] = this.insightType.value;
-    result["insight_url"] = this.imageUrl;
+    for (RobotoffQuestion question in questions) {
+      Map<String, String> jsonQuestion = Map<String, String>();
 
+      jsonQuestion["barcode"] = question.barcode;
+      jsonQuestion["type"] = question.type;
+      jsonQuestion["value"] = question.value;
+      jsonQuestion["question"] = question.question;
+      jsonQuestion["insight_id"] = question.insightId;
+      jsonQuestion["insight_type"] = question.insightType.value;
+      jsonQuestion["insight_url"] = question.imageUrl;
+
+      result.add(jsonQuestion);
+    }
     return result;
   }
 }

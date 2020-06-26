@@ -3,7 +3,6 @@ import 'package:openfoodfacts/utils/LanguageHelper.dart';
 
 import '../model/Product.dart';
 import '../model/ProductImage.dart';
-import '../model/Ingredient.dart';
 
 class ProductHelper {
   /// reduce the set of images of the product depending on the given language.

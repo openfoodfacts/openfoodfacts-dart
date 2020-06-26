@@ -7,6 +7,8 @@ enum ProductField {
   LANGUAGE,
   QUANTITY,
   SERVING_SIZE,
+  PACKAGING_QUANTITY,
+  FRONT_IMAGE,
   SELECTED_IMAGE,
   IMAGES,
   INGREDIENTS,
@@ -23,6 +25,7 @@ enum ProductField {
   MISC_TAGS,
   STATES_TAGS,
   TRACES_TAGS,
+  INGREDIENTS_ANALYSIS_TAGS,
   ALL
 }
 
@@ -52,6 +55,12 @@ extension ProductFieldExtension on ProductField {
         break;
       case ProductField.SERVING_SIZE:
         return "serving_size";
+        break;
+      case ProductField.PACKAGING_QUANTITY:
+        return "product_quantity";
+        break;
+      case ProductField.FRONT_IMAGE:
+        return "image_small_url";
         break;
       case ProductField.SELECTED_IMAGE:
         return "selected_images";
@@ -100,6 +109,9 @@ extension ProductFieldExtension on ProductField {
         break;
       case ProductField.TRACES_TAGS:
         return "traces_tags";
+        break;
+      case ProductField.INGREDIENTS_ANALYSIS_TAGS:
+        return "ingredients_analysis_tags";
         break;
       default:
         return "";

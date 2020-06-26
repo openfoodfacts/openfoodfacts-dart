@@ -102,35 +102,25 @@ extension InsightTypesExtension on InsightType {
 }
 
 @JsonSerializable()
-class InsightResult extends JsonObject {
+class InsightsResult extends JsonObject {
   final String status;
-  final Insight insight;
-
-  const InsightResult({this.status, this.insight});
-
-  factory InsightResult.fromJson(Map<String, dynamic> json) =>
-      _$InsightResultFromJson(json);
-
-  @override
-  Map<String, dynamic> toJson() => _$InsightResultToJson(this);
-}
-
-@JsonSerializable()
-class MultipleInsightResult extends JsonObject {
-  final String status;
+  @JsonKey(
+      name: 'insights',
+      includeIfNull: false,
+      fromJson: Insight.fromJson,
+      toJson: Insight.toJson)
   final List<Insight> insights;
 
-  const MultipleInsightResult({this.status, this.insights});
+  const InsightsResult({this.status, this.insights});
 
-  factory MultipleInsightResult.fromJson(Map<String, dynamic> json) =>
-      _$MultipleInsightResultFromJson(json);
+  factory InsightsResult.fromJson(Map<String, dynamic> json) =>
+      _$InsightsResultFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$MultipleInsightResultToJson(this);
+  Map<String, dynamic> toJson() => _$InsightsResultToJson(this);
 }
 
-@JsonSerializable()
-class Insight extends JsonObject {
+class Insight {
   final String id;
   final InsightType type;
   final String barcode;
@@ -148,30 +138,38 @@ class Insight extends JsonObject {
       this.model,
       this.confidence});
 
-  factory Insight.fromJson(Map<String, dynamic> json) {
-    InsightType insightType = InsightTypesExtension.getType(json["type"]);
+  static List<Insight> fromJson(List<dynamic> json) {
+    List<Insight> result = List<Insight>();
+    for(Map<String, dynamic> jsonInsight in json) {
+      InsightType insightType = InsightTypesExtension.getType(jsonInsight["type"]);
 
-    return Insight(
-        id: json["id"],
-        type: insightType,
-        barcode: json["barcode"],
-        countries: json["countries"],
-        lang: json["lang"],
-        model: json["model"],
-        confidence: json["confidence"]);
+      result.add(Insight(
+          id: jsonInsight["id"],
+          type: insightType,
+          barcode: jsonInsight["barcode"],
+          countries: jsonInsight["countries"],
+          lang: jsonInsight["lang"],
+          model: jsonInsight["model"],
+          confidence: jsonInsight["confidence"]));
+    }
+    return result;
   }
 
-  @override
-  Map<String, dynamic> toJson() {
-    Map<String, dynamic> result = Map<String, dynamic>();
+  static List<Map<String, dynamic>> toJson(List<Insight> insights) {
+    List<Map<String, dynamic>> result = List<Map<String, dynamic>>();
+    for(Insight insight in insights) {
+      Map<String, dynamic> jsonInsight = Map<String, dynamic>();
 
-    result["id"] = this.id;
-    result["type"] = this.type.value;
-    result["barcode"] = this.barcode;
-    result["countries"] = this.countries;
-    result["lang"] = this.lang;
-    result["model"] = this.model;
-    result["confidence"] = this.confidence;
+      jsonInsight["id"] = insight.id;
+      jsonInsight["type"] = insight.type.value;
+      jsonInsight["barcode"] = insight.barcode;
+      jsonInsight["countries"] = insight.countries;
+      jsonInsight["lang"] = insight.lang;
+      jsonInsight["model"] = insight.model;
+      jsonInsight["confidence"] = insight.confidence;
+
+      result.add(jsonInsight);
+    }
 
     return result;
   }

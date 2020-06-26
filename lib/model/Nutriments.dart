@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:openfoodfacts/utils/UnitHelper.dart';
 import '../interface/JsonObject.dart';
 
 part 'Nutriments.g.dart';
@@ -93,6 +94,12 @@ class Nutriments extends JsonObject {
       fromJson: JsonObject.parseDouble)
   double carbohydratesServing;
 
+  @JsonKey(
+      name: "energy_unit",
+      includeIfNull: false,
+      fromJson: UnitHelper.stringToUnit)
+  Unit energyUnit;
+
   Nutriments(
       {this.salt,
       this.fiber,
@@ -111,11 +118,15 @@ class Nutriments extends JsonObject {
       this.proteinsServing,
       this.novaGroupServing,
       this.energyServing,
-      this.carbohydratesServing});
+      this.carbohydratesServing,
+      this.energyUnit});
 
   factory Nutriments.fromJson(Map<String, dynamic> json) =>
       _$NutrimentsFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$NutrimentsToJson(this);
+
+  static Map<String, dynamic> toJsonHelper(Nutriments n) =>
+      _$NutrimentsToJson(n);
 }

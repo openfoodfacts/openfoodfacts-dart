@@ -14,7 +14,7 @@ void main() {
     test('get questions for Noix de Saint-Jacques EN and answer', () async {
       RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
-              "3274570800026", "en", TestConstants.TEST_USER,
+              "0080868000633", "en", TestConstants.TEST_USER,
               count: 1);
 
       if (result.status == "found") {
@@ -25,9 +25,9 @@ void main() {
         expect(postResult.status, "saved");
       } else if (result.status == "no_questions") {
         print("No question found for this product");
-        expect(result.status, "found");
+        expect(result.status, "no_questions");
       } else {
-        expect(result.status, "found");
+        print("An error occurred while fetching questions");
       }
     });
   });
