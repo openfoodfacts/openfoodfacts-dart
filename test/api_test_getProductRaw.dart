@@ -98,7 +98,6 @@ void main() {
       expect(result.product != null, true);
       expect(result.product.barcode, barcode);
 
-      expect(result.product.servingSize != null, true);
       expect(result.product.nutriments.carbohydratesServing != null, true);
       expect(result.product.nutriments.proteinsServing != null, true);
       expect(result.product.nutriments.saltServing != null, true);
@@ -135,7 +134,6 @@ void main() {
       expect(result.product.nutriments.proteins, null);
       expect(result.product.nutriments.novaGroup, 1);
       expect(result.product.nutriments.fatServing == null, true);
-      expect(result.product.servingSize == null, true);
     });
   });
 }

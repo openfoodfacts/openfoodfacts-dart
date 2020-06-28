@@ -40,8 +40,6 @@ void main() {
       result.product.ingredients.forEach((element) {
         print(element.toData().toString());});
       expect(result.product.ingredients.length, 13);
-      print("Serving Size: ");
-      print(result.product.servingSize);
 
       expect(result.product.ingredients.any((i) => i.text == "Wasser"), true);
       expect(
@@ -87,8 +85,6 @@ void main() {
       expect(result.product.additives.ids[4], "en:e950");
       expect(result.product.additives.names[4], "E950");
 
-      expect(result.product.servingSize == null, true);
-
       expect(
           result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SUGARS],
           Level.LOW);
@@ -122,7 +118,6 @@ void main() {
       expect(result.product != null, true);
       expect(result.product.barcode, barcode);
 
-      expect(result.product.servingSize != null, true);
       expect(result.product.nutriments.carbohydratesServing != null, true);
       expect(result.product.nutriments.proteinsServing != null, true);
       expect(result.product.nutriments.saltServing != null, true);
