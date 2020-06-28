@@ -10,11 +10,11 @@ import 'test_constants.dart';
 void main() {
   group('$OpenFoodAPIClient add new products', () {
     setUpAll(() async {
-      new HttpHelper().isTestMode = true;
+      HttpHelper().isTestMode = true;
     });
 
     test('add new product test 1', () async {
-      Product product = new Product(
+      Product product = Product(
           barcode: "0048151623426",
           productName: "Maryland Choc Chip",
           quantity: "230g",
@@ -35,7 +35,7 @@ void main() {
     });
 
     test('add new product test 2', () async {
-      Product product = new Product(
+      Product product = Product(
         barcode: "8008698011065",
         productName: "Meisterbäckers Vital",
         quantity: "350g",
@@ -51,7 +51,7 @@ void main() {
     });
 
     test('add new product test 3', () async {
-      Product product = new Product(
+      Product product = Product(
         barcode: "4250752200784",
         productName: "Johanneskraut-Rotöl Kapseln",
         quantity: "30 Kapseln",
@@ -69,7 +69,7 @@ void main() {
     });
 
     test('add new product test 4', () async {
-      Product product = new Product(
+      Product product = Product(
           barcode: "4052700676180",
           productName: "Calcium + Vitamin D3 + C",
           quantity: "14 Tabletten",

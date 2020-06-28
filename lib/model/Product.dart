@@ -37,8 +37,8 @@ class Product extends JsonObject {
   String imgSmallUrl;
   @JsonKey(name: 'serving_size')
   String servingSize;
-  @JsonKey(name: 'serving_quantity')
-  String servingQuantity;
+  @JsonKey(name: 'serving_quantity', fromJson: JsonHelper.servingQuantityFromJson)
+  double servingQuantity;
   @JsonKey(name: 'product_quantity')
   dynamic packagingQuantity;
 

@@ -1,3 +1,6 @@
+## [0.3.5] - 28.06.2020
+- fixed servingQuantity issue introduced in 0.3.4
+
 ## [0.3.4] - 25.06.2020
 - selectedImages toJson implementation
 - codebase improvements

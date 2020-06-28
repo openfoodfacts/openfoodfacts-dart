@@ -96,4 +96,19 @@ class JsonHelper {
     // not implemented and needed, yet.
     return Map<String, dynamic>();
   }
+
+  static double servingQuantityFromJson(dynamic data) {
+    if(data is double) {
+      return data;
+    }
+    if(data is int) {
+      return data.toDouble();
+    }
+    try {
+      return double.parse(data);
+    } catch(e) {
+      print("Unable to parse data to double : $e");
+      return null;
+    }
+  }
 }

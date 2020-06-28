@@ -36,7 +36,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
         : NutrientLevels.fromJson(
             json['nutrient_levels'] as Map<String, dynamic>),
     servingSize: json['serving_size'] as String,
-    servingQuantity: json['serving_quantity'] as String,
+    servingQuantity:
+        JsonHelper.servingQuantityFromJson(json['serving_quantity']),
   )
     ..productNameFR = json['product_name_fr'] as String
     ..brandsTags =
