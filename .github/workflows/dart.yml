@@ -15,6 +15,12 @@ jobs:
       image:  google/dart:latest
 
     steps:
+    - name: Setup Flutter ${{ matrix.flutter-version }}
+        id: flutter
+        if: "!startsWith(matrix.bot, 'dart')"
+        uses: DanTup/gh-actions/setup-flutter@master
+        with:
+          channel: ${{ matrix.flutter-version }}
     - uses: actions/checkout@v2
     - name: Install dependencies
       run: pub get
