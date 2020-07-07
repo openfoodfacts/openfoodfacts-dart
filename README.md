@@ -13,10 +13,16 @@ Most of our operations are coordinated through our Slack which you can join here
 
 Regarding this package, we accept pull requests as well feature requests.
 
+### Testing
+
+Execute the following command from the root of the repository to run the tests:
+
+```
+flutter test
+```
 
 ## How to use ?
 You can find the full documentation here : [Documentation](https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md).
-
 
 ## Authors
 * Alexander Schacht - [Grumpf86](https://github.com/Grumpf86 )

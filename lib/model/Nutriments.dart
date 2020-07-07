@@ -128,5 +128,5 @@ class Nutriments extends JsonObject {
   Map<String, dynamic> toJson() => _$NutrimentsToJson(this);
 
   static Map<String, dynamic> toJsonHelper(Nutriments n) =>
-      _$NutrimentsToJson(n);
+      n != null ? _$NutrimentsToJson(n) : {};
 }

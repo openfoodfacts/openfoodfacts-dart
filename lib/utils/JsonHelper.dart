@@ -38,6 +38,10 @@ class JsonHelper {
   static Map<String, dynamic> selectedImagesToJson(List<ProductImage> images) {
     Map<String, dynamic> result = Map<String, dynamic>();
 
+    if(images == null) {
+      return result;
+    }
+
     for (ImageField field in ImageField.values) {
       Map<String, dynamic> fieldMap = Map<String, dynamic>();
       for (ImageSize size in ImageSize.values) {

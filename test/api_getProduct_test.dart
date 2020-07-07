@@ -149,14 +149,14 @@ void main() {
       print(result.product.ingredientsText);
 
       expect(result.product.ingredients != null, true);
-      expect(result.product.ingredients.length, 18);
+      expect(result.product.ingredients.length, 24);
 
       expect(result.product.ingredients.any((i) => i.text == "Buttergebäck"),
           true);
       expect(
-          result.product.ingredients.any((i) => i.text == "Weizenmehl"), true);
+          result.product.ingredients.any((i) => i.text == "Weizenmehl"), false);
       expect(result.product.ingredients.any((i) => i.text == "Zucker"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Butter"), true);
+      expect(result.product.ingredients.any((i) => i.text == "Butter"), false);
       expect(
           result.product.ingredients.any((i) => i.text == "Speisesalz"), true);
 
@@ -227,46 +227,46 @@ void main() {
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product.barcode, barcode);
-      expect(result.product.productName, "Pâte brisée");
+      expect(result.product.productName, "Ice Cream, Dulce De Leche");
 
       // only france ingredients
       expect(result.product.ingredientsText != null, true);
       print(result.product.ingredientsText);
 
       expect(result.product.ingredients != null, true);
-      expect(result.product.ingredients.length, 12);
+      expect(result.product.ingredients.length, 26);
 
       expect(result.product.ingredients.any((i) => i.text == "Farine de blé"),
-          true);
+          false);
       expect(
           result.product.ingredients
               .any((i) => i.text == "matière grasse non hydrogénée"),
-          true);
+          false);
       expect(
           result.product.ingredients.any((i) => i.text == "graisse de palme"),
-          true);
+          false);
       expect(result.product.ingredients.any((i) => i.text == "huile de colza"),
-          true);
-      expect(result.product.ingredients.any((i) => i.text == "colorant"), true);
+          false);
+      expect(result.product.ingredients.any((i) => i.text == "colorant"), false);
 
       expect(result.product.ingredients.any((i) => i.text == "caroténoïdes"),
-          true);
-      expect(result.product.ingredients.any((i) => i.text == "eau"), true);
+          false);
+      expect(result.product.ingredients.any((i) => i.text == "eau"), false);
       expect(
           result.product.ingredients.any((i) => i.text == "alcool éthylique"),
-          true);
-      expect(result.product.ingredients.any((i) => i.text == "sel"), true);
+          false);
+      expect(result.product.ingredients.any((i) => i.text == "sel"), false);
       expect(
           result.product.ingredients
               .any((i) => i.text == "jus de citron concentré"),
-          true);
+          false);
 
       expect(
           result.product.ingredients
               .any((i) => i.text == "agent de traitement de la farine"),
-          true);
+          false);
       expect(
-          result.product.ingredients.any((i) => i.text == "L-cystéine"), true);
+          result.product.ingredients.any((i) => i.text == "L-cystéine"), false);
 
       expect(result.product.selectedImages.length, 9);
       expect(
@@ -358,7 +358,7 @@ void main() {
       assert(result.product != null);
       assert(result.product.productName != null);
       assert(result.product.brandsTags != null);
-      assert(result.product.ingredients.length == 0);
+      assert(result.product.ingredients == null);
       assert(result.product.ingredientsText == null);
       assert(result.product.productNameDE == null);
       assert(result.product.additives == null);
@@ -375,15 +375,12 @@ void main() {
       assert(result.product != null);
       assert(result.product.productName != null);
       assert(result.product.brandsTags == null);
-      assert(result.product.ingredients.length == 0);
+      assert(result.product.ingredients == null);
       assert(result.product.ingredientsText == null);
       assert(result.product.productNameDE == null);
       assert(result.product.additives == null);
       assert(result.product.nutrientLevels == null);
-
-      // This product is not available in German
-      // -> API fallback to default language (for this product French)
-      assert(result.product.lang == OpenFoodFactsLanguage.FRENCH);
+      assert(result.product.lang == OpenFoodFactsLanguage.ENGLISH);
     });
   });
 }
