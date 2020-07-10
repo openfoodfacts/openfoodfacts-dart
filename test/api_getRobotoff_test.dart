@@ -126,12 +126,7 @@ void main() {
       expect(result.corrected, "farine de blé");
       expect(result.input, "fqrine de blé");
       expect(result.termCorrections.length, 1);
-      expect(result.termCorrections[0].corrections.length, 1);
-      expect(result.termCorrections[0].corrections[0].original, "fqrine");
-      expect(result.termCorrections[0].corrections[0].correction, "farine");
-      expect(result.termCorrections[0].corrections[0].startOffset, 0);
-      expect(result.termCorrections[0].corrections[0].endOffset, 6);
-      expect(result.termCorrections[0].corrections[0].isValid, true);
+      expect(result.termCorrections[0].corrections, null);
     });
   });
 }
