@@ -64,7 +64,7 @@ extension ImageSizeExtension on ImageSize {
         return "original";
         break;
       default:
-        return null;
+        return "unknown";
         break;
     }
   }
@@ -115,7 +115,7 @@ extension ImageSizeExtension on ImageSize {
         break;
       case ImageSize.UNKNOWN:
       default:
-        return null;
+        return "unknown";
         break;
     }
   }

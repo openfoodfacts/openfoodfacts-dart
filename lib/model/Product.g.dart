@@ -26,15 +26,9 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     nutriments: json['nutriments'] == null
         ? null
         : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
-    additives: json['additives_tags'] == null
-        ? null
-        : Additives.fromJson((json['additives_tags'] as List)
-            ?.map((e) => e as String)
-            ?.toList()),
-    nutrientLevels: json['nutrient_levels'] == null
-        ? null
-        : NutrientLevels.fromJson(
-            json['nutrient_levels'] as Map<String, dynamic>),
+    additives: Additives.additivesFromJson(json['additives_tags'] as List),
+    nutrientLevels: NutrientLevels.fromJson(
+        json['nutrient_levels'] as Map<String, dynamic>),
     servingSize: json['serving_size'] as String,
     servingQuantity:
         JsonHelper.servingQuantityFromJson(json['serving_quantity']),
@@ -90,10 +84,12 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('selected_images',
       JsonHelper.selectedImagesToJson(instance.selectedImages));
   writeNotNull('images', JsonHelper.imagesToJson(instance.images));
-  writeNotNull('ingredients', instance.ingredients);
+  writeNotNull(
+      'ingredients', JsonHelper.ingredientsToJson(instance.ingredients));
   writeNotNull('nutriments', Nutriments.toJsonHelper(instance.nutriments));
-  writeNotNull('additives_tags', instance.additives);
-  writeNotNull('nutrient_levels', instance.nutrientLevels);
+  writeNotNull('additives_tags', Additives.additivesToJson(instance.additives));
+  writeNotNull(
+      'nutrient_levels', NutrientLevels.toJson(instance.nutrientLevels));
   writeNotNull('ingredients_text', instance.ingredientsText);
   writeNotNull('ingredients_text_de', instance.ingredientsTextDE);
   writeNotNull('ingredients_text_en', instance.ingredientsTextEN);

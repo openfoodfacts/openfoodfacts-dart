@@ -37,7 +37,8 @@ class Product extends JsonObject {
   String imgSmallUrl;
   @JsonKey(name: 'serving_size')
   String servingSize;
-  @JsonKey(name: 'serving_quantity', fromJson: JsonHelper.servingQuantityFromJson)
+  @JsonKey(
+      name: 'serving_quantity', fromJson: JsonHelper.servingQuantityFromJson)
   double servingQuantity;
   @JsonKey(name: 'product_quantity')
   dynamic packagingQuantity;
@@ -57,16 +58,24 @@ class Product extends JsonObject {
       toJson: JsonHelper.imagesToJson)
   List<ProductImage> images;
 
-  @JsonKey(includeIfNull: false)
+  @JsonKey(includeIfNull: false, toJson: JsonHelper.ingredientsToJson)
   List<Ingredient> ingredients;
 
   @JsonKey(includeIfNull: false, toJson: Nutriments.toJsonHelper)
   Nutriments nutriments;
 
-  @JsonKey(name: 'additives_tags', includeIfNull: false)
+  @JsonKey(
+      name: 'additives_tags',
+      includeIfNull: false,
+      fromJson: Additives.additivesFromJson,
+      toJson: Additives.additivesToJson)
   Additives additives;
 
-  @JsonKey(name: 'nutrient_levels', includeIfNull: false)
+  @JsonKey(
+      name: 'nutrient_levels',
+      includeIfNull: false,
+      fromJson: NutrientLevels.fromJson,
+      toJson: NutrientLevels.toJson)
   NutrientLevels nutrientLevels;
 
   @JsonKey(name: 'ingredients_text', includeIfNull: false)

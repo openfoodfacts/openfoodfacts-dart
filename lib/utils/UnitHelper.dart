@@ -1,24 +1,14 @@
-
-enum Unit {
-  KCAL,
-  KJ,
-  G,
-  MILLI_G,
-  MICRO_G,
-  UNKNOWN
-}
+enum Unit { KCAL, KJ, G, MILLI_G, MICRO_G, UNKNOWN }
 
 class UnitHelper {
-
   static Unit stringToUnit(String s) {
-
-    if(s == null) {
+    if (s == null) {
       return null;
     }
 
-    if(s[0] == String.fromCharCode(0x03BC)) {
+    if (s[0] == String.fromCharCode(0x03BC)) {
       String newS = s.substring(1);
-      switch(newS) {
+      switch (newS) {
         case 'g':
           return Unit.MICRO_G;
           break;
@@ -28,7 +18,7 @@ class UnitHelper {
       }
     }
 
-    switch(s) {
+    switch (s) {
       case 'kcal':
         return Unit.KCAL;
         break;
@@ -73,5 +63,4 @@ class UnitHelper {
         break;
     }
   }
-
 }
