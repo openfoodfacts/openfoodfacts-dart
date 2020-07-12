@@ -1,59 +1,44 @@
+enum VeganStatus { IS_VEGAN, IS_NOT_VEGAN, MAYBE }
 
-enum VeganStatus {
-  IS_VEGAN,
-  IS_NOT_VEGAN,
-  MAYBE
-}
+enum VegetarianStatus { IS_VEGETARIAN, IS_NOT_VEGETARIAN, MAYBE }
 
-enum VegetarianStatus {
-  IS_VEGETARIAN,
-  IS_NOT_VEGETARIAN,
-  MAYBE
-}
-
-enum PalmOilFreeStatus {
-  IS_PALM_OIL_FREE,
-  IS_NOT_PALM_OIL_FREE,
-  MAYBE
-}
+enum PalmOilFreeStatus { IS_PALM_OIL_FREE, IS_NOT_PALM_OIL_FREE, MAYBE }
 
 class IngredientsAnalysisTags {
-
   IngredientsAnalysisTags(List<dynamic> data) {
-
-    if(data.contains('en:vegan')) {
+    if (data.contains('en:vegan')) {
       veganStatus = VeganStatus.IS_VEGAN;
     }
 
-    if(data.contains('en:vegetarian')) {
+    if (data.contains('en:vegetarian')) {
       vegetarianStatus = VegetarianStatus.IS_VEGETARIAN;
     }
 
-    if(data.contains('en:palm-oil-free')) {
+    if (data.contains('en:palm-oil-free')) {
       palmOilFreeStatus = PalmOilFreeStatus.IS_PALM_OIL_FREE;
     }
 
-    if(data.contains('en:non-vegan')) {
+    if (data.contains('en:non-vegan')) {
       veganStatus = VeganStatus.IS_NOT_VEGAN;
     }
 
-    if(data.contains('en:non-vegetarian')) {
+    if (data.contains('en:non-vegetarian')) {
       vegetarianStatus = VegetarianStatus.IS_NOT_VEGETARIAN;
     }
 
-    if(data.contains('en:non-palm-oil-free')) {
+    if (data.contains('en:non-palm-oil-free')) {
       palmOilFreeStatus = PalmOilFreeStatus.IS_NOT_PALM_OIL_FREE;
     }
 
-    if(veganStatus == null) {
+    if (veganStatus == null) {
       veganStatus = VeganStatus.MAYBE;
     }
 
-    if(vegetarianStatus == null) {
+    if (vegetarianStatus == null) {
       vegetarianStatus = VegetarianStatus.MAYBE;
     }
 
-    if(palmOilFreeStatus == null) {
+    if (palmOilFreeStatus == null) {
       palmOilFreeStatus = PalmOilFreeStatus.MAYBE;
     }
   }
@@ -69,14 +54,14 @@ class IngredientsAnalysisTags {
   static List<dynamic> toJson(IngredientsAnalysisTags ingredientsAnalysisTags) {
     List<String> result = <String>[];
 
-    if(ingredientsAnalysisTags == null) {
+    if (ingredientsAnalysisTags == null) {
       result.add('en:maybe-vegan');
       result.add('en:maybe-vegetarian');
       result.add('en:maybe-palm-oil-free');
       return result;
     }
 
-    switch(ingredientsAnalysisTags.veganStatus) {
+    switch (ingredientsAnalysisTags.veganStatus) {
       case VeganStatus.IS_VEGAN:
         result.add('en:vegan');
         break;
@@ -88,7 +73,7 @@ class IngredientsAnalysisTags {
         break;
     }
 
-    switch(ingredientsAnalysisTags.vegetarianStatus) {
+    switch (ingredientsAnalysisTags.vegetarianStatus) {
       case VegetarianStatus.IS_VEGETARIAN:
         result.add('en:vegetarian');
         break;
@@ -100,7 +85,7 @@ class IngredientsAnalysisTags {
         break;
     }
 
-    switch(ingredientsAnalysisTags.palmOilFreeStatus) {
+    switch (ingredientsAnalysisTags.palmOilFreeStatus) {
       case PalmOilFreeStatus.IS_PALM_OIL_FREE:
         result.add('en:palm-oil-free');
         break;
@@ -114,5 +99,4 @@ class IngredientsAnalysisTags {
 
     return result;
   }
-
 }

@@ -1,8 +1,6 @@
-import '../interface/JsonObject.dart';
-
 enum Level { LOW, MODERATE, HIGH, UNDEFINED }
 
-class NutrientLevels extends JsonObject {
+class NutrientLevels {
   static const String NUTRIENT_SUGARS = "sugars";
   static const String NUTRIENT_FAT = "fat";
   static const String NUTRIENT_SATURATED_FAT = "saturated-fat";
@@ -19,7 +17,7 @@ class NutrientLevels extends JsonObject {
 
   NutrientLevels(this.levels);
 
-  factory NutrientLevels.fromJson(Map<String, dynamic> json) {
+  static NutrientLevels fromJson(Map<String, dynamic> json) {
     Map<String, Level> result = Map<String, Level>();
 
     for (int i = 0; i < nutrients.length; i++) {
@@ -44,14 +42,21 @@ class NutrientLevels extends JsonObject {
     return NutrientLevels(result);
   }
 
-  @override
-  Map<String, dynamic> toJson() {
+  static Map<String, dynamic> toJson(NutrientLevels nutrientLevels) {
     Map<String, String> result = Map<String, String>();
 
-    for (int i = 0; i < levels.length; i++) {
+    if (nutrientLevels.levels == null) {
+      nutrientLevels.levels = Map<String, Level>();
+      nutrientLevels.levels[NUTRIENT_SUGARS] = Level.UNDEFINED;
+      nutrientLevels.levels[NUTRIENT_FAT] = Level.UNDEFINED;
+      nutrientLevels.levels[NUTRIENT_SATURATED_FAT] = Level.UNDEFINED;
+      nutrientLevels.levels[NUTRIENT_SALT] = Level.UNDEFINED;
+    }
+
+    for (int i = 0; i < nutrientLevels.levels.length; i++) {
       var key = nutrients[i];
 
-      switch (levels[key]) {
+      switch (nutrientLevels.levels[key]) {
         case Level.LOW:
           result[key] = "low";
           break;

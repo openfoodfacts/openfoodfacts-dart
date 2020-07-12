@@ -1,12 +1,10 @@
-import '../interface/JsonObject.dart';
-
-class Additives extends JsonObject {
+class Additives {
   List<String> ids; // additive id formatted as 'en:e100i'
   List<String> names; // additive name formatted as 'E100i'
 
   Additives(this.ids, this.names);
 
-  factory Additives.fromJson(List<String> json) {
+  static Additives additivesFromJson(List<dynamic> json) {
     List<String> ids = List<String>();
     List<String> names = List<String>();
 
@@ -22,12 +20,11 @@ class Additives extends JsonObject {
     return Additives(ids, names);
   }
 
-  @override
-  Map<String, dynamic> toJson() {
-    Map<String, String> result = Map<String, String>();
+  static List<String> additivesToJson(Additives additives) {
+    List<String> result = List<String>();
 
-    for (int i = 0; i < ids.length; i++) {
-      result[i.toString()] = ids[i].toString();
+    for (int i = 0; i < additives.ids.length; i++) {
+      result.add(additives.ids[i].toString());
     }
 
     return result;

@@ -1,3 +1,6 @@
+## [0.3.6] - 12.07.2020
+- fixed Json product generation (additives, selectedImages)
+
 ## [0.3.5] - 28.06.2020
 - fixed servingQuantity issue introduced in 0.3.4
 

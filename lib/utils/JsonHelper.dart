@@ -1,5 +1,6 @@
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
+import 'package:openfoodfacts/model/Ingredient.dart';
 
 import '../model/ProductImage.dart';
 
@@ -38,16 +39,16 @@ class JsonHelper {
   static Map<String, dynamic> selectedImagesToJson(List<ProductImage> images) {
     Map<String, dynamic> result = Map<String, dynamic>();
 
-    if(images == null) {
+    if (images == null) {
       return result;
     }
 
     for (ImageField field in ImageField.values) {
       Map<String, dynamic> fieldMap = Map<String, dynamic>();
       for (ImageSize size in ImageSize.values) {
-        Map<String, dynamic> sizeMap = Map<String, dynamic>();
+        Map<String, String> sizeMap = Map<String, String>();
         for (ProductImage image in images) {
-          if(image.field == field && image.size == size) {
+          if (image.field == field && image.size == size) {
             sizeMap[image.language.code] = image.url;
           }
         }
@@ -102,17 +103,32 @@ class JsonHelper {
   }
 
   static double servingQuantityFromJson(dynamic data) {
-    if(data is double) {
+    if (data == null || data is double) {
       return data;
     }
-    if(data is int) {
+    if (data is int) {
       return data.toDouble();
     }
     try {
       return double.parse(data);
-    } catch(e) {
+    } catch (e) {
       print("Unable to parse data to double : $e");
       return null;
     }
+  }
+
+  static List<Map<String, dynamic>> ingredientsToJson(
+      List<Ingredient> ingredients) {
+    if (ingredients == null || ingredients.length == 0) {
+      return null;
+    }
+
+    List<Map<String, dynamic>> result = List<Map<String, dynamic>>();
+
+    for (Ingredient ingredient in ingredients) {
+      result.add(ingredient.toJson());
+    }
+
+    return result;
   }
 }
