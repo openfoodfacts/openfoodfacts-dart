@@ -8,6 +8,10 @@ class Additives {
     List<String> ids = List<String>();
     List<String> names = List<String>();
 
+    if(json == null) {
+      return Additives(ids, names);
+    }
+
     for (int i = 0; i < json.length; i++) {
       ids.add(json[i].toString());
       String name = 'E' +
@@ -22,6 +26,10 @@ class Additives {
 
   static List<String> additivesToJson(Additives additives) {
     List<String> result = List<String>();
+
+    if(additives == null) {
+      return null;
+    }
 
     for (int i = 0; i < additives.ids.length; i++) {
       result.add(additives.ids[i].toString());

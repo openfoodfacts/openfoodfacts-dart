@@ -20,6 +20,10 @@ class NutrientLevels {
   static NutrientLevels fromJson(Map<String, dynamic> json) {
     Map<String, Level> result = Map<String, Level>();
 
+    if(json == null) {
+      return NutrientLevels(result);
+    }
+
     for (int i = 0; i < nutrients.length; i++) {
       var key = nutrients[i];
 
@@ -44,6 +48,10 @@ class NutrientLevels {
 
   static Map<String, dynamic> toJson(NutrientLevels nutrientLevels) {
     Map<String, String> result = Map<String, String>();
+
+    if(nutrientLevels == null) {
+      return null;
+    }
 
     if (nutrientLevels.levels == null) {
       nutrientLevels.levels = Map<String, Level>();

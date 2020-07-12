@@ -361,8 +361,9 @@ void main() {
       assert(result.product.ingredients == null);
       assert(result.product.ingredientsText == null);
       assert(result.product.productNameDE == null);
-      assert(result.product.additives == null);
-      assert(result.product.nutrientLevels == null);
+      assert(result.product.additives.ids.length == 0);
+      assert(result.product.additives.names.length == 0);
+      assert(result.product.nutrientLevels.levels.length == 0);
       assert(result.product.lang == OpenFoodFactsLanguage.UNDEFINED);
 
       configurations = ProductQueryConfiguration(barcode,
@@ -378,8 +379,9 @@ void main() {
       assert(result.product.ingredients == null);
       assert(result.product.ingredientsText == null);
       assert(result.product.productNameDE == null);
-      assert(result.product.additives == null);
-      assert(result.product.nutrientLevels == null);
+      assert(result.product.additives.ids.length == 0);
+      assert(result.product.additives.names.length == 0);
+      assert(result.product.nutrientLevels.levels.length == 0);
       assert(result.product.lang == OpenFoodFactsLanguage.ENGLISH);
     });
   });
