@@ -5,6 +5,7 @@ version: 0.3.6
 #- Alexander Schacht <grumpf@gmx.de>
 #- Primaël Quémerais <primael@reefind.com>
 #- Marcus Cantu
+#- Peter Tran-Jørgensen
 homepage: https://github.com/openfoodfacts/openfoodfacts-dart
 
 environment:
