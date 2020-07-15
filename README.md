@@ -1,3 +1,5 @@
+![Pub Version](https://img.shields.io/pub/v/openfoodfacts?&colorB=green)
+
 # Open Food Facts - Dart
 Dart package for the Open Food Facts API.
 
