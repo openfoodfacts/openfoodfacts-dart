@@ -1,3 +1,7 @@
+## [0.3.7] - 17.07.2020
+- Added allergens
+- Introduced PNNS groups and PnnsGroup2 queries
+
 ## [0.3.6] - 12.07.2020
 - fixed Json product generation (additives, selectedImages)
 
