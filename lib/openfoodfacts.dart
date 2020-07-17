@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'dart:async';
 
 import 'package:http/http.dart';
+import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
+import 'package:openfoodfacts/utils/PnnsGroups.dart';
 
 import 'model/Insight.dart';
 import 'model/RobotoffQuestion.dart';
@@ -121,17 +123,18 @@ class OpenFoodAPIClient {
   /// Returns the product for the given barcode.
   /// The ProductResult does not contain a product, if the product is not available.
   /// ingredients, images and product name will be prepared for the given language.
-  static Future<ProductResult> getProduct(ProductQueryConfiguration config,
+  static Future<ProductResult> getProduct(
+      ProductQueryConfiguration configuration,
       {User user}) async {
-    if (config.barcode == null || config.barcode.isEmpty) {
+    if (configuration.barcode == null || configuration.barcode.isEmpty) {
       return new ProductResult();
     }
 
     var productUri = Uri(
         scheme: URI_SCHEME,
         host: URI_HOST,
-        path: 'api/v0/product/${config.barcode}.json',
-        queryParameters: config.getParametersMap());
+        path: 'api/v0/product/${configuration.barcode}.json',
+        queryParameters: configuration.getParametersMap());
 
     print(productUri.toString());
 
@@ -139,7 +142,7 @@ class OpenFoodAPIClient {
     ProductResult result = ProductResult.fromJson(json.decode(response.body));
 
     if (result.product != null) {
-      ProductHelper.removeImages(result.product, config.language);
+      ProductHelper.removeImages(result.product, configuration.language);
       ProductHelper.createImageUrls(result.product);
     }
 
@@ -150,9 +153,9 @@ class OpenFoodAPIClient {
   /// Returns the list of products as SearchResult.
   /// Query the language specific host from OpenFoodFacts.
   static Future<SearchResult> searchProducts(
-      User user, ProductSearchQueryConfiguration config) async {
+      User user, ProductSearchQueryConfiguration configuration) async {
     const outputFormat = OutputFormat(format: Format.JSON);
-    var queryParameters = config.getParametersMap();
+    var queryParameters = configuration.getParametersMap();
     queryParameters[outputFormat.getName()] = outputFormat.getValue();
 
     var searchUri = Uri(
@@ -167,7 +170,31 @@ class OpenFoodAPIClient {
     var result = SearchResult.fromJson(json.decode(response.body));
 
     for (Product product in result.products) {
-      ProductHelper.removeImages(product, config.language);
+      ProductHelper.removeImages(product, configuration.language);
+    }
+
+    return result;
+  }
+
+  static Future<SearchResult> queryPnnsGroup(
+      User user, PnnsGroupQueryConfiguration configuration) async {
+    const outputFormat = OutputFormat(format: Format.JSON);
+    var queryParameters = configuration.getParametersMap();
+    queryParameters[outputFormat.getName()] = outputFormat.getValue();
+
+    var searchUri = Uri(
+        scheme: URI_SCHEME,
+        host: URI_HOST,
+        path: '/pnns-group-2/${configuration.group.id}/${configuration.page}',
+        queryParameters: queryParameters);
+
+    print("URI: " + searchUri.toString());
+
+    Response response = await HttpHelper().doGetRequest(searchUri, user: user);
+    var result = SearchResult.fromJson(json.decode(response.body));
+
+    for (Product product in result.products) {
+      ProductHelper.removeImages(product, configuration.language);
     }
 
     return result;

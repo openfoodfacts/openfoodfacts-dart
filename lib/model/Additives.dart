@@ -8,7 +8,7 @@ class Additives {
     List<String> ids = List<String>();
     List<String> names = List<String>();
 
-    if(json == null) {
+    if (json == null) {
       return Additives(ids, names);
     }
 
@@ -27,7 +27,7 @@ class Additives {
   static List<String> additivesToJson(Additives additives) {
     List<String> result = List<String>();
 
-    if(additives == null) {
+    if (additives == null) {
       return null;
     }
 

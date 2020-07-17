@@ -305,6 +305,9 @@ void main() {
               .length,
           3);
 
+      expect(result.product.allergens.ids.length, 2);
+      expect(result.product.allergens.ids, ["en:gluten", "en:milk"]);
+
       expect(result.product.nutriments != null, true);
 
       expect(result.product.nutriments.energy, 1736.0);
