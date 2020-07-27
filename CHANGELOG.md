@@ -1,3 +1,6 @@
+## [0.3.8] - 27.07.2020
+- Fixed typos in PnnsGroup2 ids
+
 ## [0.3.7] - 17.07.2020
 - Added allergens
 - Introduced PNNS groups and PnnsGroup2 queries
