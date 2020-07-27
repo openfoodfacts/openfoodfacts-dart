@@ -16,8 +16,8 @@ enum PnnsGroup2 {
   ALCOHOLIC_BEVERAGES,
   UNSWEETENED_BEVERAGES,
   ARTIFICIALLY_SWEETENED_BEVERAGES,
-  WATERS_AND_FLAVOURED_WATERS,
-  FRUIT_NECTAR,
+  WATERS_AND_FLAVORED_WATERS,
+  FRUIT_NECTARS,
   TEAS_AND_HERBAL_TEAS_AND_COFFEES,
 
   BREAKFAST_CEREALS,
@@ -31,7 +31,7 @@ enum PnnsGroup2 {
   SOUPS,
   ONE_DISH_MEALS,
 
-  DRESSING_AND_SAUCES,
+  DRESSINGS_AND_SAUCES,
   FATS,
 
   PROCESSED_MEAT,
@@ -103,8 +103,8 @@ extension PnnsGroup1Extension on PnnsGroup1 {
           PnnsGroup2.ALCOHOLIC_BEVERAGES,
           PnnsGroup2.UNSWEETENED_BEVERAGES,
           PnnsGroup2.ARTIFICIALLY_SWEETENED_BEVERAGES,
-          PnnsGroup2.WATERS_AND_FLAVOURED_WATERS,
-          PnnsGroup2.FRUIT_NECTAR,
+          PnnsGroup2.WATERS_AND_FLAVORED_WATERS,
+          PnnsGroup2.FRUIT_NECTARS,
           PnnsGroup2.TEAS_AND_HERBAL_TEAS_AND_COFFEES
         ];
         break;
@@ -126,7 +126,7 @@ extension PnnsGroup1Extension on PnnsGroup1 {
         ];
         break;
       case PnnsGroup1.FAT_AND_SAUCES:
-        return <PnnsGroup2>[PnnsGroup2.DRESSING_AND_SAUCES, PnnsGroup2.FATS];
+        return <PnnsGroup2>[PnnsGroup2.DRESSINGS_AND_SAUCES, PnnsGroup2.FATS];
         break;
       case PnnsGroup1.FISH_MEAT_AND_EGGS:
         return <PnnsGroup2>[
@@ -191,11 +191,11 @@ extension PnnsGroup2Extension on PnnsGroup2 {
       case PnnsGroup2.ARTIFICIALLY_SWEETENED_BEVERAGES:
         return 'Artificially sweetened beverages';
         break;
-      case PnnsGroup2.WATERS_AND_FLAVOURED_WATERS:
-        return 'Waters and flavoured waters';
+      case PnnsGroup2.WATERS_AND_FLAVORED_WATERS:
+        return 'Waters and flavored waters';
         break;
-      case PnnsGroup2.FRUIT_NECTAR:
-        return 'Fruits nectar';
+      case PnnsGroup2.FRUIT_NECTARS:
+        return 'Fruits nectars';
         break;
       case PnnsGroup2.TEAS_AND_HERBAL_TEAS_AND_COFFEES:
         return 'Teas and herbal teas and coffees';
@@ -227,8 +227,8 @@ extension PnnsGroup2Extension on PnnsGroup2 {
       case PnnsGroup2.ONE_DISH_MEALS:
         return 'One dish meals';
         break;
-      case PnnsGroup2.DRESSING_AND_SAUCES:
-        return 'Dressing and sauces';
+      case PnnsGroup2.DRESSINGS_AND_SAUCES:
+        return 'Dressings and sauces';
         break;
       case PnnsGroup2.FATS:
         return 'Fats';
@@ -310,11 +310,11 @@ extension PnnsGroup2Extension on PnnsGroup2 {
       case PnnsGroup2.ARTIFICIALLY_SWEETENED_BEVERAGES:
         return 'artificially-sweetened-beverages';
         break;
-      case PnnsGroup2.WATERS_AND_FLAVOURED_WATERS:
-        return 'waters-and-flavoured-waters';
+      case PnnsGroup2.WATERS_AND_FLAVORED_WATERS:
+        return 'waters-and-flavored-waters';
         break;
-      case PnnsGroup2.FRUIT_NECTAR:
-        return 'fruits-nectar';
+      case PnnsGroup2.FRUIT_NECTARS:
+        return 'fruit-nectars';
         break;
       case PnnsGroup2.TEAS_AND_HERBAL_TEAS_AND_COFFEES:
         return 'teas-and-herbal-teas-and-coffees';
@@ -346,8 +346,8 @@ extension PnnsGroup2Extension on PnnsGroup2 {
       case PnnsGroup2.ONE_DISH_MEALS:
         return 'one-dish-meals';
         break;
-      case PnnsGroup2.DRESSING_AND_SAUCES:
-        return 'dressing-and-sauces';
+      case PnnsGroup2.DRESSINGS_AND_SAUCES:
+        return 'dressings-and-sauces';
         break;
       case PnnsGroup2.FATS:
         return 'fats';
