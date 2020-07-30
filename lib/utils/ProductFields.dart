@@ -26,6 +26,8 @@ enum ProductField {
   STATES_TAGS,
   TRACES_TAGS,
   INGREDIENTS_ANALYSIS_TAGS,
+  ALLERGENS,
+  ENVIRONMENT_IMPACT_LEVELS,
   ALL
 }
 
@@ -112,6 +114,12 @@ extension ProductFieldExtension on ProductField {
         break;
       case ProductField.INGREDIENTS_ANALYSIS_TAGS:
         return "ingredients_analysis_tags";
+        break;
+      case ProductField.ALLERGENS:
+        return "allergens_tags";
+        break;
+      case ProductField.ENVIRONMENT_IMPACT_LEVELS:
+        return "environment_impact_level_tags";
         break;
       default:
         return "";

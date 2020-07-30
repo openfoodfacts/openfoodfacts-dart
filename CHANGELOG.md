@@ -1,3 +1,7 @@
+## [0.3.9] - 30.07.2020
+- Added EnvironmentImpactLevels
+- Rewrote NutrientLevels
+
 ## [0.3.8] - 27.07.2020
 - Fixed typos in PnnsGroup2 ids
 

@@ -5,6 +5,7 @@ import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import '../interface/JsonObject.dart';
 import 'Additives.dart';
 import 'Allergens.dart';
+import 'EnvironmentImpactLevels.dart';
 import 'Ingredient.dart';
 import 'IngredientsAnalysisTags.dart';
 import 'NutrientLevels.dart';
@@ -71,6 +72,13 @@ class Product extends JsonObject {
       fromJson: Additives.additivesFromJson,
       toJson: Additives.additivesToJson)
   Additives additives;
+
+  @JsonKey(
+      name: 'environment_impact_level_tags',
+      includeIfNull: false,
+      fromJson: EnvironmentImpactLevels.fromJson,
+      toJson: EnvironmentImpactLevels.toJson)
+  EnvironmentImpactLevels environmentImpactLevels;
 
   @JsonKey(
       name: 'allergens_tags',

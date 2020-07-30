@@ -44,6 +44,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : Ingredient.fromJson(e as Map<String, dynamic>))
         ?.toList()
+    ..environmentImpactLevels = EnvironmentImpactLevels.fromJson(
+        json['environment_impact_level_tags'] as List)
     ..allergens = Allergens.allergensFromJson(json['allergens_tags'] as List)
     ..ingredientsTextFR = json['ingredients_text_fr'] as String
     ..ingredientsAnalysisTags = IngredientsAnalysisTags.fromJson(
@@ -89,6 +91,8 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
       'ingredients', JsonHelper.ingredientsToJson(instance.ingredients));
   writeNotNull('nutriments', Nutriments.toJsonHelper(instance.nutriments));
   val['additives_tags'] = Additives.additivesToJson(instance.additives);
+  writeNotNull('environment_impact_level_tags',
+      EnvironmentImpactLevels.toJson(instance.environmentImpactLevels));
   val['allergens_tags'] = Allergens.allergensToJson(instance.allergens);
   writeNotNull(
       'nutrient_levels', NutrientLevels.toJson(instance.nutrientLevels));
