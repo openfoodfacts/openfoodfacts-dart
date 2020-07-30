@@ -71,14 +71,14 @@ void main() {
 
       expect(result.product.nutriments.energy, 0.8);
       expect(result.product.nutriments.sugars, 0.0);
-      expect(result.product.nutriments.salt, 0.02);
+      expect(result.product.nutriments.salt, 0.01);
       expect(result.product.nutriments.fiber, null);
       expect(result.product.nutriments.fat, null);
       expect(result.product.nutriments.saturatedFat, null);
       expect(result.product.nutriments.proteins, null);
       expect(result.product.nutriments.novaGroup, 4);
       expect(result.product.nutriments.fatServing == null, true);
-      expect(result.product.nutriments.carbohydratesServing == null, true);
+      expect(result.product.nutriments.carbohydratesServing == null, false);
 
       expect(result.product.additives.ids[0], "en:e150d");
       expect(result.product.additives.names[0], "E150d");
@@ -202,6 +202,8 @@ void main() {
       expect(result.product.nutriscore, "e");
 
       expect(result.product.nutriments != null, true);
+
+      expect(result.product.environmentImpactLevels == null, true);
 
       expect(result.product.nutriments.energy, 2125.0);
       expect(result.product.nutriments.sugars, 28.0);
@@ -346,6 +348,21 @@ void main() {
       print("number of ingredients: " +
           result.product.ingredients.length.toString());
       assert(result.product.ingredientsText != null);
+    });
+
+    test('product environment impact levels', () async {
+      String barcode = "7613331814562";
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.ENGLISH,
+          fields: [ProductField.ENVIRONMENT_IMPACT_LEVELS]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
+
+      assert(result != null);
+      assert(result.product != null);
+      assert(result.product.environmentImpactLevels != null);
+      assert(result.product.environmentImpactLevels.levels.first == Level.HIGH);
     });
 
     test('product fields', () async {

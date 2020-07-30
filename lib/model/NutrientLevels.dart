@@ -1,5 +1,44 @@
 enum Level { LOW, MODERATE, HIGH, UNDEFINED }
 
+extension LevelExtension on Level {
+  String get value {
+    switch (this) {
+      case Level.LOW:
+        return 'low';
+        break;
+      case Level.MODERATE:
+        return 'moderate';
+        break;
+      case Level.HIGH:
+        return 'high';
+        break;
+      case Level.UNDEFINED:
+        return 'undefined';
+        break;
+      default:
+        return 'undefined';
+        break;
+    }
+  }
+
+  static Level getLevel(String s) {
+    switch (s) {
+      case 'low':
+        return Level.LOW;
+        break;
+      case 'moderate':
+        return Level.MODERATE;
+        break;
+      case 'high':
+        return Level.HIGH;
+        break;
+      default:
+        return Level.UNDEFINED;
+        break;
+    }
+  }
+}
+
 class NutrientLevels {
   static const String NUTRIENT_SUGARS = "sugars";
   static const String NUTRIENT_FAT = "fat";
@@ -26,21 +65,7 @@ class NutrientLevels {
 
     for (int i = 0; i < nutrients.length; i++) {
       var key = nutrients[i];
-
-      switch (json[key]) {
-        case "low":
-          result[key] = Level.LOW;
-          break;
-        case "moderate":
-          result[key] = Level.MODERATE;
-          break;
-        case "high":
-          result[key] = Level.HIGH;
-          break;
-        default:
-          result[key] = Level.UNDEFINED;
-          break;
-      }
+      result[key] = LevelExtension.getLevel(json[key]);
     }
 
     return NutrientLevels(result);
@@ -63,20 +88,7 @@ class NutrientLevels {
 
     for (int i = 0; i < nutrientLevels.levels.length; i++) {
       var key = nutrients[i];
-
-      switch (nutrientLevels.levels[key]) {
-        case Level.LOW:
-          result[key] = "low";
-          break;
-        case Level.MODERATE:
-          result[key] = "moderate";
-          break;
-        case Level.HIGH:
-          result[key] = "high";
-          break;
-        default:
-          break;
-      }
+      result[key] = nutrientLevels.levels[key].value;
     }
 
     return result;
