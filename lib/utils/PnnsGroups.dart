@@ -186,7 +186,7 @@ extension PnnsGroup2Extension on PnnsGroup2 {
         return 'Alcoholic beverages';
         break;
       case PnnsGroup2.UNSWEETENED_BEVERAGES:
-        return 'unsweetened beverages';
+        return 'Unsweetened beverages';
         break;
       case PnnsGroup2.ARTIFICIALLY_SWEETENED_BEVERAGES:
         return 'Artificially sweetened beverages';

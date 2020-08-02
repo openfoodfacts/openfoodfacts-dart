@@ -1,3 +1,6 @@
+## [0.3.10] - 02.08.2020
+- Added energyKcal and energyKcal100g
+
 ## [0.3.9] - 30.07.2020
 - Added EnvironmentImpactLevels
 - Rewrote NutrientLevels
