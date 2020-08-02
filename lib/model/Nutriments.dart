@@ -43,6 +43,16 @@ class Nutriments extends JsonObject {
       fromJson: JsonObject.parseDouble)
   double energy;
   @JsonKey(
+      name: "energy-kcal",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double energyKcal;
+  @JsonKey(
+      name: "energy-kcal_100g",
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double energyKcal100g;
+  @JsonKey(
       name: "carbohydrates_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
@@ -100,6 +110,12 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit energyUnit;
 
+  @JsonKey(
+      name: "energy-kcal_unit",
+      includeIfNull: false,
+      fromJson: UnitHelper.stringToUnit)
+  Unit energyKcalUnit;
+
   Nutriments(
       {this.salt,
       this.fiber,
@@ -109,6 +125,8 @@ class Nutriments extends JsonObject {
       this.proteins,
       this.novaGroup,
       this.energy,
+      this.energyKcal,
+      this.energyKcal100g,
       this.carbohydrates,
       this.saltServing,
       this.fiberServing,
@@ -119,6 +137,7 @@ class Nutriments extends JsonObject {
       this.novaGroupServing,
       this.energyServing,
       this.carbohydratesServing,
+      this.energyKcalUnit,
       this.energyUnit});
 
   factory Nutriments.fromJson(Map<String, dynamic> json) =>
