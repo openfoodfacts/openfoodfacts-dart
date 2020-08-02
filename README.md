@@ -30,3 +30,4 @@ You can find the full documentation here : [Documentation](https://github.com/op
 * Alexander Schacht - [Grumpf86](https://github.com/Grumpf86 )
 * Primaël Quémerais - [Reefind](https://gitlab.com/Reefind )
 * Marcus Cantu - [Cantum2](https://github.com/Cantum2 )
+* Adrien Faure - [Adfaure](https://github.com/adfaure )
