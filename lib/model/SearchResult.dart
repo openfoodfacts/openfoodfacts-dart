@@ -18,11 +18,14 @@ class SearchResult extends JsonObject {
   @JsonKey(name: "skip", nullable: false, fromJson: JsonObject.parseInt)
   final int skip;
 
+  @JsonKey(name: "product", includeIfNull: false)
+  final List<Map<String, dynamic>> jsonProducts;
+
   @JsonKey(includeIfNull: false)
   final List<Product> products;
 
   const SearchResult(
-      {this.page, this.pageSize, this.count, this.skip, this.products});
+      {this.page, this.pageSize, this.count, this.skip, this.jsonProducts, this.products});
 
   factory SearchResult.fromJson(Map<String, dynamic> json) =>
       _$SearchResultFromJson(json);

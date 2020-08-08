@@ -122,8 +122,12 @@ class Product extends JsonObject {
 
   @JsonKey(name: 'categories_tags', includeIfNull: false)
   List<String> categoriesTags;
+  @JsonKey(name: 'categories_tags_translated', includeIfNull: false)
+  List<String> categoriesTagsTranslated;
   @JsonKey(name: 'labels_tags', includeIfNull: false)
   List<String> labelsTags;
+  @JsonKey(name: 'labels_tags_translated', includeIfNull: false)
+  List<String> labelsTagsTranslated;
   @JsonKey(name: 'misc', includeIfNull: false)
   List<String> miscTags;
   @JsonKey(name: 'states_tags', includeIfNull: false)

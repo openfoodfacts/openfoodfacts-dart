@@ -30,4 +30,9 @@ class ProductHelper {
       image.url = ImageHelper.buildUrl(product.barcode, image);
     }
   }
+
+  static void addTranslatedFields(Product product, Map<String, dynamic> source, OpenFoodFactsLanguage language) {
+    product.categoriesTagsTranslated = source['categories_tags_${language.code}'];
+    product.labelsTagsTranslated = source['labels_tags_${language.code}'];
+  }
 }
