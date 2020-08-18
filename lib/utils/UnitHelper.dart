@@ -1,4 +1,4 @@
-enum Unit { KCAL, KJ, G, MILLI_G, MICRO_G, UNKNOWN }
+enum Unit { KCAL, KJ, G, MILLI_G, MICRO_G, MILLI_L, L, PERCENT, UNKNOWN }
 
 class UnitHelper {
   static Unit stringToUnit(String s) {
@@ -57,6 +57,39 @@ class UnitHelper {
         break;
       case 'micro-gram':
         return Unit.MICRO_G;
+        break;
+      case 'ml':
+        return Unit.MILLI_L;
+        break;
+      case 'mL':
+        return Unit.MILLI_L;
+        break;
+      case 'Ml':
+        return Unit.MILLI_L;
+        break;
+      case 'ML':
+        return Unit.MILLI_L;
+        break;
+      case 'milli-liter':
+        return Unit.MILLI_L;
+        break;
+      case 'liter':
+        return Unit.L;
+        break;
+      case 'L':
+        return Unit.L;
+        break;
+      case 'l':
+        return Unit.L;
+        break;
+      case '%':
+        return Unit.PERCENT;
+        break;
+      case 'per cent':
+        return Unit.PERCENT;
+        break;
+      case 'percent':
+        return Unit.PERCENT;
         break;
       default:
         return Unit.UNKNOWN;
