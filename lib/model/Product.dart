@@ -134,6 +134,8 @@ class Product extends JsonObject {
   List<String> statesTags;
   @JsonKey(name: 'traces_tags', includeIfNull: false)
   List<String> tracesTags;
+  @JsonKey(name: 'stores_tags', includeIfNull: false)
+  List<String> storesTags;
 
   Product(
       {this.barcode,

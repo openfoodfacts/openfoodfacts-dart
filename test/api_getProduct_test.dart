@@ -320,6 +320,7 @@ void main() {
       expect(result.product.nutriments.saturatedFat, 10.7);
       expect(result.product.nutriments.proteins, 6.3);
       expect(result.product.nutriments.novaGroup, 4);
+      expect(result.product.storesTags.length, 1);
 
       print(result.product.labelsTagsTranslated);
       print(result.product.categoriesTagsTranslated);

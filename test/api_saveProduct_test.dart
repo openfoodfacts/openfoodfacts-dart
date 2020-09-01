@@ -85,5 +85,29 @@ void main() {
       expect(status.status, 1);
       expect(status.statusVerbose, "fields saved");
     });
+
+    test('add new product test 5', () async {
+
+      var nutriments = Nutriments();
+      nutriments.energy = 365;
+      nutriments.carbohydrates = 12;
+      nutriments.proteins = 6;
+      nutriments.fat = 0.1;
+
+      Product product = Product(
+          barcode: "7340011364184",
+          productName: "Chili beans",
+          nutrimentDataPer: "100g",
+          nutriments: nutriments);
+
+      print(product.toData());
+
+      /*Status status =
+      await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product);
+
+      expect(status != null, true);
+      expect(status.status, 1);
+      expect(status.statusVerbose, "fields saved");*/
+    });
   });
 }

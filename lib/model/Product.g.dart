@@ -52,13 +52,21 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
         json['ingredients_analysis_tags'] as List)
     ..categoriesTags =
         (json['categories_tags'] as List)?.map((e) => e as String)?.toList()
+    ..categoriesTagsTranslated = (json['categories_tags_translated'] as List)
+        ?.map((e) => e as String)
+        ?.toList()
     ..labelsTags =
         (json['labels_tags'] as List)?.map((e) => e as String)?.toList()
+    ..labelsTagsTranslated = (json['labels_tags_translated'] as List)
+        ?.map((e) => e as String)
+        ?.toList()
     ..miscTags = (json['misc'] as List)?.map((e) => e as String)?.toList()
     ..statesTags =
         (json['states_tags'] as List)?.map((e) => e as String)?.toList()
     ..tracesTags =
-        (json['traces_tags'] as List)?.map((e) => e as String)?.toList();
+        (json['traces_tags'] as List)?.map((e) => e as String)?.toList()
+    ..storesTags =
+        (json['stores_tags'] as List)?.map((e) => e as String)?.toList();
 }
 
 Map<String, dynamic> _$ProductToJson(Product instance) {
@@ -107,9 +115,12 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('nutrition_grade_fr', instance.nutriscore);
   writeNotNull('categories', instance.categories);
   writeNotNull('categories_tags', instance.categoriesTags);
+  writeNotNull('categories_tags_translated', instance.categoriesTagsTranslated);
   writeNotNull('labels_tags', instance.labelsTags);
+  writeNotNull('labels_tags_translated', instance.labelsTagsTranslated);
   writeNotNull('misc', instance.miscTags);
   writeNotNull('states_tags', instance.statesTags);
   writeNotNull('traces_tags', instance.tracesTags);
+  writeNotNull('stores_tags', instance.storesTags);
   return val;
 }
