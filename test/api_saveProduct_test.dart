@@ -5,6 +5,7 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/Status.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
+import 'package:openfoodfacts/utils/UnitHelper.dart';
 import 'test_constants.dart';
 
 void main() {
@@ -84,6 +85,52 @@ void main() {
       expect(status != null, true);
       expect(status.status, 1);
       expect(status.statusVerbose, "fields saved");
+    });
+
+    test('confirm that fields are saved', () async {
+      double energy = 365;
+      double carbs = 12;
+      double proteins = 6;
+      double fat = 0.1;
+      var nutriments = Nutriments();
+      nutriments.energy = energy;
+      nutriments.energyUnit = Unit.KJ;
+      nutriments.carbohydrates = carbs;
+      nutriments.proteins = proteins;
+      nutriments.fat = fat;
+
+      String barcode = "7340011364184";
+      String productName = "Chili beans";
+      String nutrimentDataPer = "100g";
+      var newProduct = Product(
+          barcode: barcode,
+          productName: productName,
+          nutrimentDataPer: nutrimentDataPer,
+          nutriments: nutriments);
+
+      Status status = await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, newProduct);
+
+      expect(status != null, true);
+      expect(status.status, 1);
+      expect(status.statusVerbose, "fields saved");
+
+      ProductResult result = await OpenFoodAPIClient.getProductRaw(
+          barcode, OpenFoodFactsLanguage.ENGLISH,
+          user: TestConstants.TEST_USER);
+
+      expect(result != null, true);
+      expect(result.status, 1);
+      expect(result.barcode, barcode);
+      var searchedProduct = result.product;
+      expect(searchedProduct != null, true);
+      expect(searchedProduct.barcode, barcode);
+      expect(searchedProduct.productName, productName);
+      expect(searchedProduct.nutrimentDataPer, nutrimentDataPer);
+      var searchedNutriments = searchedProduct.nutriments;
+      expect(searchedNutriments.energy, energy);
+      expect(searchedNutriments.carbohydrates, carbs);
+      expect(searchedNutriments.proteins, proteins);
+      expect(searchedNutriments.fat, fat);
     });
   });
 }
