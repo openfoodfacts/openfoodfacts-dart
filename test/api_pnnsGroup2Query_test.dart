@@ -36,7 +36,6 @@ void main() {
       expect(result.count > 1500, true);
 
       print(result.products[2].toData().toString());
-      result.products[3].ingredients.forEach((i) => print("Ingredient : ${i.text}"));
     });
   });
 

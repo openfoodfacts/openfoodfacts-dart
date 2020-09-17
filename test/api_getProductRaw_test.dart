@@ -34,7 +34,7 @@ void main() {
       expect(result.product.ingredients.isNotEmpty, true);
       expect(result.product.ingredients.first.text, "Maisstärke");
       expect(result.product.selectedImages != null, true);
-      expect(result.product.selectedImages.length, 15);
+      expect(result.product.selectedImages.length, 18);
       expect(
           result.product.selectedImages
               .singleWhere((image) =>
@@ -44,7 +44,7 @@ void main() {
               .url,
           "https://static.openfoodfacts.org/images/products/800/869/801/1065/ingredients_de.27.400.jpg");
       expect(result.product.images != null, true);
-      expect(result.product.images.length, 20);
+      expect(result.product.images.length, 24);
       expect(
           result.product.images
               .singleWhere((image) =>

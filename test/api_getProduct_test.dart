@@ -229,7 +229,7 @@ void main() {
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product.barcode, barcode);
-      expect(result.product.productName, "Ice Cream, Dulce De Leche");
+      expect(result.product.productName, "Cornichons");
 
       // only france ingredients
       expect(result.product.ingredientsText != null, true);
@@ -270,7 +270,7 @@ void main() {
       expect(
           result.product.ingredients.any((i) => i.text == "L-cystéine"), false);
 
-      expect(result.product.selectedImages.length, 9);
+      expect(result.product.selectedImages.length, 12);
       expect(
           result.product.selectedImages
               .where((image) => image.language == OpenFoodFactsLanguage.FRENCH)
@@ -290,35 +290,35 @@ void main() {
           result.product.selectedImages
               .where((image) => image.field == ImageField.NUTRITION)
               .length,
-          3);
+          6);
       expect(
           result.product.selectedImages
               .where((image) => image.size == ImageSize.THUMB)
               .length,
-          3);
+          4);
       expect(
           result.product.selectedImages
               .where((image) => image.size == ImageSize.DISPLAY)
               .length,
-          3);
+          4);
       expect(
           result.product.selectedImages
               .where((image) => image.size == ImageSize.SMALL)
               .length,
-          3);
+          4);
 
-      expect(result.product.allergens.ids.length, 2);
-      expect(result.product.allergens.ids, ["en:gluten", "en:milk"]);
+      expect(result.product.allergens.ids.length, 4);
+      expect(result.product.allergens.ids, ['en:eggs', 'en:gluten', 'en:milk', 'en:soybeans']);
 
       expect(result.product.nutriments != null, true);
 
-      expect(result.product.nutriments.energy, 1736.0);
-      expect(result.product.nutriments.sugars, 2.8);
-      expect(result.product.nutriments.salt, 0.9);
+      expect(result.product.nutriments.energy, 146.0);
+      expect(result.product.nutriments.sugars, 0.0);
+      expect(result.product.nutriments.salt, 1.0);
       expect(result.product.nutriments.fiber, 1.1);
-      expect(result.product.nutriments.fat, 23.3);
-      expect(result.product.nutriments.saturatedFat, 10.7);
-      expect(result.product.nutriments.proteins, 6.3);
+      expect(result.product.nutriments.fat, 0.30000001192093);
+      expect(result.product.nutriments.saturatedFat, 0.10000000149012);
+      expect(result.product.nutriments.proteins, 1.2000000476837);
       expect(result.product.nutriments.novaGroup, 4);
       expect(result.product.storesTags.length, 1);
 
