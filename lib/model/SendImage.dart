@@ -24,13 +24,13 @@ class SendImage extends JsonObject {
   String getImageDataKey() {
     switch (this.imageField) {
       case ImageField.FRONT:
-        return 'imgupload_front_' + this.lang.code;
+        return 'imgupload_front';
       case ImageField.INGREDIENTS:
-        return 'imgupload_ingredients_' + this.lang.code;
+        return 'imgupload_ingredients';
       case ImageField.NUTRITION:
-        return 'imgupload_nutrition_' + this.lang.code;
+        return 'imgupload_nutrition';
       case ImageField.OTHER:
-        return 'imgupload_other_' + this.lang.code;
+        return 'imgupload_other';
       default:
         return null;
     }

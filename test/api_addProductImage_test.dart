@@ -44,5 +44,19 @@ void main() {
       expect(status.status, "status not ok");
       expect(status.error, "This picture has already been sent.");
     });
+
+    test('add ingredients image test', () async {
+      SendImage image = new SendImage(
+        lang: OpenFoodFactsLanguage.DANISH,
+        barcode: "5722970900207",
+        imageField: ImageField.FRONT,
+        imageUrl: Uri.parse("assets/corn_da.jpg"),
+      );
+      Status status = await OpenFoodAPIClient.addProductImage(
+          TestConstants.TEST_USER, image);
+
+      expect(status != null, true);
+      assert(status.error != "field imgupload_front_xx not set");
+    });
   });
 }
