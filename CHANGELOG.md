@@ -1,3 +1,8 @@
+## [0.3.11] - 19.09.2020
+- Added userPreferences
+- Product image upload fixed (Thanks to Peter Tran-Jørgensen)
+
+
 ## [0.3.10] - 02.08.2020
 - Added energyKcal and energyKcal100g
 

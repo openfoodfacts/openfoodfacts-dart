@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 enum UserPreferencesVariableValue {
   NOT_IMPORTANT,
   IMPORTANT,
@@ -50,7 +48,7 @@ extension UserPreferencesVariableValueExtention
     }
   }
 
-  Color get color {
+  /*Color get color {
     switch (this) {
       case UserPreferencesVariableValue.NOT_IMPORTANT:
         return Colors.black87;
@@ -68,7 +66,7 @@ extension UserPreferencesVariableValueExtention
         return Colors.black26;
         break;
     }
-  }
+  }*/
 
   static UserPreferencesVariableValue fromString(String s) {
     switch (s) {
