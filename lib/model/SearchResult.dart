@@ -18,8 +18,8 @@ class SearchResult extends JsonObject {
   @JsonKey(name: "skip", nullable: false, fromJson: JsonObject.parseInt)
   final int skip;
 
-  @JsonKey(name: "product", includeIfNull: false)
-  final List<Map<String, dynamic>> jsonProducts;
+  @JsonKey(name: "products_json", includeIfNull: false)
+  final List<dynamic> jsonProducts;
 
   @JsonKey(includeIfNull: false)
   final List<Product> products;
@@ -27,8 +27,19 @@ class SearchResult extends JsonObject {
   const SearchResult(
       {this.page, this.pageSize, this.count, this.skip, this.jsonProducts, this.products});
 
-  factory SearchResult.fromJson(Map<String, dynamic> json) =>
-      _$SearchResultFromJson(json);
+  factory SearchResult.fromJson(Map<String, dynamic> json) {
+    return SearchResult(
+      page: JsonObject.parseInt(json['page']),
+      pageSize: JsonObject.parseInt(json['page_size']),
+      count: JsonObject.parseInt(json['count']),
+      skip: JsonObject.parseInt(json['skip']),
+      jsonProducts: json['products'],
+      products: (json['products'] as List)
+          ?.map((e) =>
+      e == null ? null : Product.fromJson(e as Map<String, dynamic>))
+          ?.toList(),
+    );
+  }
 
   @override
   Map<String, dynamic> toJson() => _$SearchResultToJson(this);

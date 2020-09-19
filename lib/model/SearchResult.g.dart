@@ -12,9 +12,7 @@ SearchResult _$SearchResultFromJson(Map<String, dynamic> json) {
     pageSize: JsonObject.parseInt(json['page_size']),
     count: JsonObject.parseInt(json['count']),
     skip: JsonObject.parseInt(json['skip']),
-    jsonProducts: (json['product'] as List)
-        ?.map((e) => e as Map<String, dynamic>)
-        ?.toList(),
+    jsonProducts: json['products_json'] as List,
     products: (json['products'] as List)
         ?.map((e) =>
             e == null ? null : Product.fromJson(e as Map<String, dynamic>))
@@ -36,7 +34,7 @@ Map<String, dynamic> _$SearchResultToJson(SearchResult instance) {
     }
   }
 
-  writeNotNull('product', instance.jsonProducts);
+  writeNotNull('products_json', instance.jsonProducts);
   writeNotNull('products', instance.products);
   return val;
 }
