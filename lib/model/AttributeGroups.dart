@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 enum AttributeGroup { NUTRITIONAL_QUALITY, PROCESSING, LABELS, UNKNOWN }
 
 extension AttributeGroupExtension on AttributeGroup {
