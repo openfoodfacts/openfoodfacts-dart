@@ -12,7 +12,7 @@ class Status extends JsonObject {
 
   final String error;
 
-  @JsonKey(name: 'imgid')
+  @JsonKey(name: 'imgid', fromJson: JsonObject.parseInt)
   final int imageId;
 
   Status({
