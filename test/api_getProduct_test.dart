@@ -1,3 +1,4 @@
+import 'package:openfoodfacts/model/AttributeGroups.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -408,5 +409,40 @@ void main() {
       assert(result.product.nutrientLevels.levels.length == 0);
       assert(result.product.lang == OpenFoodFactsLanguage.ENGLISH);
     });
+
+  test('attribute groups', () async {
+    String barcode = "3700214614266";
+    ProductQueryConfiguration configurations = ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.NAME, ProductField.ATTRIBUTE_GROUPS]);
+    ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+        user: TestConstants.TEST_USER);
+
+    assert(result != null);
+    assert(result.product != null);
+    assert(result.product.productName != null);
+    assert(result.product.attributeGroups != null);
+
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY] != null);
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.id == 'nutriscore');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.settingName == 'Good nutritional quality (Nutri-Score)');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.settingNote == 'The Nutri-Score is computed and can be taken into account for all products, even if is not displayed on the packaging.');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.title == 'Nutri-Score D');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.name == 'Nutri-Score');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.match == 30);
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.status == 'known');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY][1].id == 'low_salt');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY][2].id == 'low_fat');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY][3].id == 'low_sugars');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY][4].id == 'low_saturated_fat');
+
+    assert(result.product.attributeGroups.groups[AttributeGroup.PROCESSING] != null);
+    assert(result.product.attributeGroups.groups[AttributeGroup.PROCESSING].first.id == 'nova');
+
+
+    assert(result.product.attributeGroups.groups[AttributeGroup.LABELS] != null);
   });
+
+});
 }

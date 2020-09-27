@@ -1,3 +1,6 @@
+## [0.3.12] - 27.09.2020
+- Added AttributeGroups
+
 ## [0.3.11+1] - 19.09.2020
 - Fixed SearchResult
 
