@@ -1,3 +1,6 @@
+## [0.3.12+1] - 27.09.2020
+- Fixed image upload
+
 ## [0.3.12] - 27.09.2020
 - Added AttributeGroups
 
