@@ -6,16 +6,16 @@ part 'SearchResult.g.dart';
 
 @JsonSerializable()
 class SearchResult extends JsonObject {
-  @JsonKey(name: "page", nullable: false, fromJson: JsonObject.parseInt)
+  @JsonKey(name: "page", fromJson: JsonObject.parseInt)
   final int page;
 
-  @JsonKey(name: "page_size", nullable: false, fromJson: JsonObject.parseInt)
+  @JsonKey(name: "page_size", fromJson: JsonObject.parseInt)
   final int pageSize;
 
-  @JsonKey(name: "count", nullable: false, fromJson: JsonObject.parseInt)
+  @JsonKey(name: "count", fromJson: JsonObject.parseInt)
   final int count;
 
-  @JsonKey(name: "skip", nullable: false, fromJson: JsonObject.parseInt)
+  @JsonKey(name: "skip", fromJson: JsonObject.parseInt)
   final int skip;
 
   @JsonKey(name: "products_json", includeIfNull: false)

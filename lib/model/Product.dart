@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:openfoodfacts/model/AttributeGroups.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/utils/JsonHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
@@ -136,6 +137,13 @@ class Product extends JsonObject {
   List<String> tracesTags;
   @JsonKey(name: 'stores_tags', includeIfNull: false)
   List<String> storesTags;
+
+  @JsonKey(
+      name: 'attribute_groups',
+      includeIfNull: false,
+      fromJson: AttributeGroups.fromJson,
+      toJson: AttributeGroups.toJson)
+  AttributeGroups attributeGroups;
 
   Product(
       {this.barcode,
