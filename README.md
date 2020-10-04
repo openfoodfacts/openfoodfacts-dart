@@ -11,6 +11,30 @@ You can check the terms of use here : [Terms of use](https://world.openfoodfacts
 ## List of current features
 TODO: complete me
 
+### READ
+- [ ] Product 
+- [ ] ???
+### WRITE
+- [ ] ???
+
+### Other
+
+## Roadmap
+TODO: complete me
+
+### READ
+- [ ] ???
+
+### WRITE
+- [ ] Nutrition table
+- [ ] Ingredient list
+- [ ] Multilingual fields
+- [ ] Regular fields
+- [ ] Photo upload
+- [ ] Photo operations (rotate, crop, select, unselect with language awareness)
+
+### Other
+
 ## Contribute
 There are many ways to contribute, and Open Food Facts has a lot of projects beside this package.
 Most of our operations are coordinated through our Slack which you can join here : [Open Food Facts Slack](https://openfoodfacts.slack.com).
