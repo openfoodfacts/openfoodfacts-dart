@@ -8,6 +8,8 @@ Open Food Facts is powered by global contributors and is constantly growing than
 
 You can check the terms of use here : [Terms of use](https://world.openfoodfacts.org/terms-of-use).
 
+## List of current features
+TODO: complete me
 
 ## Contribute
 There are many ways to contribute, and Open Food Facts has a lot of projects beside this package.
