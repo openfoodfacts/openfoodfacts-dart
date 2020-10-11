@@ -5,7 +5,7 @@ Dart package for the Open Food Facts API.
 
 Easily access to more than 1.3 million products from all around the world.
 Open Food Facts is powered by global contributors and is constantly growing thanks to them.
-
+The database in under the OdBL. This means attributing the source and also contributing back any additions, which this packages makes easy to do.
 You can check the terms of use here : [Terms of use](https://world.openfoodfacts.org/terms-of-use).
 
 ## List of current features
@@ -13,9 +13,17 @@ TODO: complete me
 
 ### READ
 - [ ] Product 
-- [ ] ???
+- [ ] Product images
+- [ ] Additives, Allergens, Environnement impact, Ingredient analysis, Nutrient levels
+- [ ] Recommanded Daily Intakes
+- [ ] Personalized search
+- [ ] Product completion status
 ### WRITE
 - [ ] ???
+- [ ] Send images
+- [ ] User comments and auth
+### ML
+- [ ] Robotoff support
 
 ### Other
 
