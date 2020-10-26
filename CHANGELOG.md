@@ -1,3 +1,6 @@
+## [0.3.12+2] - 26.10.2020
+- Fixed save product. NULL values won't be sent.
+
 ## [0.3.12+1] - 27.09.2020
 - Fixed image upload
 

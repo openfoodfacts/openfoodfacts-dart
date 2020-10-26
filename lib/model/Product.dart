@@ -70,7 +70,7 @@ class Product extends JsonObject {
 
   @JsonKey(
       name: 'additives_tags',
-      includeIfNull: true,
+      includeIfNull: false,
       fromJson: Additives.additivesFromJson,
       toJson: Additives.additivesToJson)
   Additives additives;
@@ -84,7 +84,7 @@ class Product extends JsonObject {
 
   @JsonKey(
       name: 'allergens_tags',
-      includeIfNull: true,
+      includeIfNull: false,
       fromJson: Allergens.allergensFromJson,
       toJson: Allergens.allergensToJson)
   Allergens allergens;
