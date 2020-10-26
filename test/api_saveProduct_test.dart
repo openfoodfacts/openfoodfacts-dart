@@ -13,11 +13,40 @@ void main() {
       HttpHelper().isTestMode = true;
     });
 
-    test('add new product test 1', () async {
+    String barcode_1 = "0048151623426";
+    String quantity_1 = "230g";
+    String servingSize_1 = "100g";
+    double servingQuantity_1 = 100;
+
+    void testProductResult1(ProductResult result) {
+      print("test product result");
+      expect(result != null, true);
+      expect(result.status, 1);
+      print("barcode: " + result.barcode);
+      expect(result.barcode, barcode_1);
+      expect(result.product != null, true);
+      expect(result.product.barcode, barcode_1);
+
+      expect(result.product.quantity != null, true);
+      print("quantity: " + result.product.quantity);
+      expect(result.product.quantity, quantity_1);
+
+      expect(result.product.servingQuantity != null, true);
+      print("servingQuantity: " + result.product.servingQuantity.toString());
+      expect(result.product.servingQuantity, servingQuantity_1);
+
+      expect(result.product.servingSize != null, true);
+      print("servingSize: " + result.product.servingSize);
+      expect(result.product.servingSize, servingSize_1);
+    }
+
+    test('save product test, set serving-size', () async {
       Product product = Product(
-          barcode: "0048151623426",
+          barcode: barcode_1,
           productName: "Maryland Choc Chip",
-          quantity: "230g",
+          quantity: quantity_1,
+          servingSize: servingSize_1,
+          servingQuantity: servingQuantity_1,
           lang: OpenFoodFactsLanguage.ENGLISH,
           brands: "Golden Cookies",
           nutrimentEnergyUnit: "kJ",
@@ -32,7 +61,31 @@ void main() {
       expect(status != null, true);
       expect(status.status, 1);
       expect(status.statusVerbose, "fields saved");
+
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode_1,
+          language: OpenFoodFactsLanguage.ENGLISH,
+          fields: [ProductField.ALL]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
+
+      testProductResult1(result);
+
+      // save and get the existing product to test, if no attributes get lost
+      Product product2 = Product(
+          barcode: barcode_1,
+          productName: "Maryland Choc Chip");
+      Status status2 = await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product2);
+      expect(status2 != null, true);
+      expect(status2.status, 1);
+      expect(status2.statusVerbose, "fields saved");
+
+      ProductResult result2 = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
+
+      testProductResult1(result2);
     });
+
 
     test('add new product test 2', () async {
       Product product = Product(

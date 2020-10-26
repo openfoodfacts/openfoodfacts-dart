@@ -19,6 +19,7 @@ dependencies:
   image: ^2.1.4
 
 dev_dependencies:
+  analyzer: ^0.39.17
   build_runner: ^1.10.1
   json_serializable: ^3.5.0
   flutter_test:

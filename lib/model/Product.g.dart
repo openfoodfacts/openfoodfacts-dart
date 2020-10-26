@@ -87,13 +87,13 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('product_name_en', instance.productNameEN);
   writeNotNull('product_name_fr', instance.productNameFR);
   val['brands'] = instance.brands;
-  val['brands_tags'] = instance.brandsTags;
+  writeNotNull('brands_tags', instance.brandsTags);
   writeNotNull('lang', LanguageHelper.toJson(instance.lang));
-  val['quantity'] = instance.quantity;
-  val['image_small_url'] = instance.imgSmallUrl;
-  val['serving_size'] = instance.servingSize;
-  val['serving_quantity'] = instance.servingQuantity;
-  val['product_quantity'] = instance.packagingQuantity;
+  writeNotNull('quantity', instance.quantity);
+  writeNotNull('image_small_url', instance.imgSmallUrl);
+  writeNotNull('serving_size', instance.servingSize);
+  writeNotNull('serving_quantity', instance.servingQuantity);
+  writeNotNull('product_quantity', instance.packagingQuantity);
   writeNotNull('selected_images',
       JsonHelper.selectedImagesToJson(instance.selectedImages));
   writeNotNull('images', JsonHelper.imagesToJson(instance.images));

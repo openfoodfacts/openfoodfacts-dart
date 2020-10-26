@@ -27,7 +27,7 @@ class Product extends JsonObject {
   @JsonKey(name: 'product_name_fr', includeIfNull: false)
   String productNameFR;
   String brands;
-  @JsonKey(name: 'brands_tags')
+  @JsonKey(name: 'brands_tags', includeIfNull: false)
   List<String> brandsTags;
   @JsonKey(
       name: 'lang',
@@ -35,15 +35,16 @@ class Product extends JsonObject {
       fromJson: LanguageHelper.fromJson,
       includeIfNull: false)
   OpenFoodFactsLanguage lang;
+  @JsonKey(includeIfNull: false)
   String quantity;
-  @JsonKey(name: 'image_small_url')
+  @JsonKey(name: 'image_small_url', includeIfNull: false)
   String imgSmallUrl;
-  @JsonKey(name: 'serving_size')
+  @JsonKey(name: 'serving_size', includeIfNull: false)
   String servingSize;
   @JsonKey(
-      name: 'serving_quantity', fromJson: JsonHelper.servingQuantityFromJson)
+      name: 'serving_quantity', fromJson: JsonHelper.servingQuantityFromJson, includeIfNull: false)
   double servingQuantity;
-  @JsonKey(name: 'product_quantity')
+  @JsonKey(name: 'product_quantity', includeIfNull: false)
   dynamic packagingQuantity;
 
   /// cause nesting is sooo cool ;)
