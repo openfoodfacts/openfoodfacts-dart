@@ -32,6 +32,10 @@ void main() {
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product.barcode, barcode);
+      expect(result.product.lastModified != null, true);
+      print("last modified: " + result.product.lastModified.toIso8601String());
+      expect(JsonHelper.dateToTimestamp(result.product.lastModified), 1595179328);
+      expect(JsonHelper.timestampToDate(1595179328).compareTo(result.product.lastModified), 0);
 
       // only german ingredients
       expect(result.product.ingredientsText != null, true);

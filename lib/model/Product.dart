@@ -146,6 +146,13 @@ class Product extends JsonObject {
       toJson: AttributeGroups.toJson)
   AttributeGroups attributeGroups;
 
+  @JsonKey(
+    name: 'last_modified_t',
+    includeIfNull: false,
+    fromJson: JsonHelper.timestampToDate,
+    toJson: JsonHelper.dateToTimestamp)
+  DateTime lastModified;
+
   Product(
       {this.barcode,
       this.productName,
