@@ -21,13 +21,16 @@ enum ProductField {
   NUTRISCORE,
   CATEGORIES,
   CATEGORIES_TAGS,
+  CATEGORIES_TAGS_TRANSLATED,
   LABELS_TAGS,
+  LABELS_TAGS_TRANSLATED,
   MISC_TAGS,
   STATES_TAGS,
   TRACES_TAGS,
   INGREDIENTS_ANALYSIS_TAGS,
   ALLERGENS,
   ENVIRONMENT_IMPACT_LEVELS,
+  ATTRIBUTE_GROUPS,
   ALL
 }
 
@@ -100,8 +103,14 @@ extension ProductFieldExtension on ProductField {
       case ProductField.CATEGORIES_TAGS:
         return "categories_tags";
         break;
+      case ProductField.CATEGORIES_TAGS_TRANSLATED:
+        return "categories_tags_";
+        break;
       case ProductField.LABELS_TAGS:
         return "labels_tags";
+        break;
+      case ProductField.LABELS_TAGS_TRANSLATED:
+        return "labels_tags_";
         break;
       case ProductField.MISC_TAGS:
         return "misc";
@@ -120,6 +129,9 @@ extension ProductFieldExtension on ProductField {
         break;
       case ProductField.ENVIRONMENT_IMPACT_LEVELS:
         return "environment_impact_level_tags";
+        break;
+      case ProductField.ATTRIBUTE_GROUPS:
+        return "attribute_groups";
         break;
       default:
         return "";

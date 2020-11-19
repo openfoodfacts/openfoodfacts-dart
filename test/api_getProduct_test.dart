@@ -1,3 +1,4 @@
+import 'package:openfoodfacts/model/AttributeGroups.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -249,7 +250,7 @@ void main() {
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product.barcode, barcode);
-      expect(result.product.productName, "Ice Cream, Dulce De Leche");
+      expect(result.product.productName, "Cornichons");
 
       // only france ingredients
       expect(result.product.ingredientsText != null, true);
@@ -291,7 +292,7 @@ void main() {
       expect(
           result.product.ingredients.any((i) => i.text == "L-cystéine"), false);
 
-      expect(result.product.selectedImages.length, 9);
+      expect(result.product.selectedImages.length, 12);
       expect(
           result.product.selectedImages
               .where((image) => image.language == OpenFoodFactsLanguage.FRENCH)
@@ -311,36 +312,40 @@ void main() {
           result.product.selectedImages
               .where((image) => image.field == ImageField.NUTRITION)
               .length,
-          3);
+          6);
       expect(
           result.product.selectedImages
               .where((image) => image.size == ImageSize.THUMB)
               .length,
-          3);
+          4);
       expect(
           result.product.selectedImages
               .where((image) => image.size == ImageSize.DISPLAY)
               .length,
-          3);
+          4);
       expect(
           result.product.selectedImages
               .where((image) => image.size == ImageSize.SMALL)
               .length,
-          3);
+          4);
 
-      expect(result.product.allergens.ids.length, 2);
-      expect(result.product.allergens.ids, ["en:gluten", "en:milk"]);
+      expect(result.product.allergens.ids.length, 4);
+      expect(result.product.allergens.ids, ['en:eggs', 'en:gluten', 'en:milk', 'en:soybeans']);
 
       expect(result.product.nutriments != null, true);
 
-      expect(result.product.nutriments.energy, 1736.0);
-      expect(result.product.nutriments.sugars, 2.8);
-      expect(result.product.nutriments.salt, 0.9);
+      expect(result.product.nutriments.energy, 146.0);
+      expect(result.product.nutriments.sugars, 0.0);
+      expect(result.product.nutriments.salt, 1.0);
       expect(result.product.nutriments.fiber, 1.1);
-      expect(result.product.nutriments.fat, 23.3);
-      expect(result.product.nutriments.saturatedFat, 10.7);
-      expect(result.product.nutriments.proteins, 6.3);
+      expect(result.product.nutriments.fat, 0.30000001192093);
+      expect(result.product.nutriments.saturatedFat, 0.10000000149012);
+      expect(result.product.nutriments.proteins, 1.2000000476837);
       expect(result.product.nutriments.novaGroup, 4);
+      expect(result.product.storesTags.length, 1);
+
+      print(result.product.labelsTagsTranslated);
+      print(result.product.categoriesTagsTranslated);
     });
 
     test('product not available', () async {
@@ -425,5 +430,40 @@ void main() {
       assert(result.product.nutrientLevels.levels.length == 0);
       assert(result.product.lang == OpenFoodFactsLanguage.ENGLISH);
     });
+
+  test('attribute groups', () async {
+    String barcode = "3700214614266";
+    ProductQueryConfiguration configurations = ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.NAME, ProductField.ATTRIBUTE_GROUPS]);
+    ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+        user: TestConstants.TEST_USER);
+
+    assert(result != null);
+    assert(result.product != null);
+    assert(result.product.productName != null);
+    assert(result.product.attributeGroups != null);
+
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY] != null);
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.id == 'nutriscore');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.settingName == 'Good nutritional quality (Nutri-Score)');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.settingNote == 'The Nutri-Score is computed and can be taken into account for all products, even if is not displayed on the packaging.');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.title == 'Nutri-Score D');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.name == 'Nutri-Score');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.match == 30);
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.status == 'known');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY][1].id == 'low_salt');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY][2].id == 'low_fat');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY][3].id == 'low_sugars');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY][4].id == 'low_saturated_fat');
+
+    assert(result.product.attributeGroups.groups[AttributeGroup.PROCESSING] != null);
+    assert(result.product.attributeGroups.groups[AttributeGroup.PROCESSING].first.id == 'nova');
+
+
+    assert(result.product.attributeGroups.groups[AttributeGroup.LABELS] != null);
   });
+
+});
 }

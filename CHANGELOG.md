@@ -1,3 +1,19 @@
+## [0.3.12+2] - 26.10.2020
+- Fixed save product. NULL values won't be sent.
+
+## [0.3.12+1] - 27.09.2020
+- Fixed image upload
+
+## [0.3.12] - 27.09.2020
+- Added AttributeGroups
+
+## [0.3.11+1] - 19.09.2020
+- Fixed SearchResult
+
+## [0.3.11] - 19.09.2020
+- Added userPreferences
+- Product image upload fixed (Thanks to Peter Tran-Jørgensen)
+
 ## [0.3.10] - 02.08.2020
 - Added energyKcal and energyKcal100g
 

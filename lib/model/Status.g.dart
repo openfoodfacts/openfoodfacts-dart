@@ -11,7 +11,7 @@ Status _$StatusFromJson(Map<String, dynamic> json) {
     status: json['status'],
     statusVerbose: json['status_verbose'] as String,
     error: json['error'] as String,
-    imageId: json['imgid'] as int,
+    imageId: JsonObject.parseInt(json['imgid']),
   );
 }
 

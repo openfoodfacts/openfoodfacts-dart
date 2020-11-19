@@ -35,7 +35,20 @@ class ProductQueryConfiguration {
       }
 
       if (!ignoreFieldsFilter) {
-        result.putIfAbsent('fields', () => this.getFieldsKeys().join(','));
+
+        String value = '';
+
+        if(fields.contains(ProductField.CATEGORIES_TAGS_TRANSLATED)) {
+          fields.remove(ProductField.CATEGORIES_TAGS_TRANSLATED);
+          value = "$value,${ProductField.CATEGORIES_TAGS_TRANSLATED.key}${language.code}";
+        }
+
+        if(fields.contains(ProductField.LABELS_TAGS_TRANSLATED)) {
+          fields.remove(ProductField.LABELS_TAGS_TRANSLATED);
+          value = "$value,${ProductField.LABELS_TAGS_TRANSLATED.key}${language.code}";
+        }
+
+        result.putIfAbsent('fields', () => "$value,${this.getFieldsKeys().join(',')}");
       }
     }
 

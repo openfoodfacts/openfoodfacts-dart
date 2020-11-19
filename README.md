@@ -8,6 +8,32 @@ Open Food Facts is powered by global contributors and is constantly growing than
 
 You can check the terms of use here : [Terms of use](https://world.openfoodfacts.org/terms-of-use).
 
+## List of current features
+TODO: complete me
+
+### READ
+- [ ] Product 
+- [ ] ???
+### WRITE
+- [ ] ???
+
+### Other
+
+## Roadmap
+TODO: complete me
+
+### READ
+- [ ] ???
+
+### WRITE
+- [ ] Nutrition table
+- [ ] Ingredient list
+- [ ] Multilingual fields
+- [ ] Regular fields
+- [ ] Photo upload
+- [ ] Photo operations (rotate, crop, select, unselect with language awareness)
+
+### Other
 
 ## Contribute
 There are many ways to contribute, and Open Food Facts has a lot of projects beside this package.
@@ -31,3 +57,4 @@ You can find the full documentation here : [Documentation](https://github.com/op
 * Primaël Quémerais - [Reefind](https://gitlab.com/Reefind )
 * Marcus Cantu - [Cantum2](https://github.com/Cantum2 )
 * Adrien Faure - [Adfaure](https://github.com/adfaure )
+* Peter Tran-Jørgensen - [peterwvj](https://https://github.com/peterwvj )

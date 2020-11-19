@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:openfoodfacts/model/AttributeGroups.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/utils/JsonHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
@@ -26,7 +27,7 @@ class Product extends JsonObject {
   @JsonKey(name: 'product_name_fr', includeIfNull: false)
   String productNameFR;
   String brands;
-  @JsonKey(name: 'brands_tags')
+  @JsonKey(name: 'brands_tags', includeIfNull: false)
   List<String> brandsTags;
   @JsonKey(
       name: 'lang',
@@ -34,15 +35,16 @@ class Product extends JsonObject {
       fromJson: LanguageHelper.fromJson,
       includeIfNull: false)
   OpenFoodFactsLanguage lang;
+  @JsonKey(includeIfNull: false)
   String quantity;
-  @JsonKey(name: 'image_small_url')
+  @JsonKey(name: 'image_small_url', includeIfNull: false)
   String imgSmallUrl;
-  @JsonKey(name: 'serving_size')
+  @JsonKey(name: 'serving_size', includeIfNull: false)
   String servingSize;
   @JsonKey(
-      name: 'serving_quantity', fromJson: JsonHelper.servingQuantityFromJson)
+      name: 'serving_quantity', fromJson: JsonHelper.servingQuantityFromJson, includeIfNull: false)
   double servingQuantity;
-  @JsonKey(name: 'product_quantity')
+  @JsonKey(name: 'product_quantity', includeIfNull: false)
   dynamic packagingQuantity;
 
   /// cause nesting is sooo cool ;)
@@ -68,7 +70,7 @@ class Product extends JsonObject {
 
   @JsonKey(
       name: 'additives_tags',
-      includeIfNull: true,
+      includeIfNull: false,
       fromJson: Additives.additivesFromJson,
       toJson: Additives.additivesToJson)
   Additives additives;
@@ -82,7 +84,7 @@ class Product extends JsonObject {
 
   @JsonKey(
       name: 'allergens_tags',
-      includeIfNull: true,
+      includeIfNull: false,
       fromJson: Allergens.allergensFromJson,
       toJson: Allergens.allergensToJson)
   Allergens allergens;
@@ -122,14 +124,27 @@ class Product extends JsonObject {
 
   @JsonKey(name: 'categories_tags', includeIfNull: false)
   List<String> categoriesTags;
+  @JsonKey(name: 'categories_tags_translated', includeIfNull: false)
+  List<String> categoriesTagsTranslated;
   @JsonKey(name: 'labels_tags', includeIfNull: false)
   List<String> labelsTags;
+  @JsonKey(name: 'labels_tags_translated', includeIfNull: false)
+  List<String> labelsTagsTranslated;
   @JsonKey(name: 'misc', includeIfNull: false)
   List<String> miscTags;
   @JsonKey(name: 'states_tags', includeIfNull: false)
   List<String> statesTags;
   @JsonKey(name: 'traces_tags', includeIfNull: false)
   List<String> tracesTags;
+  @JsonKey(name: 'stores_tags', includeIfNull: false)
+  List<String> storesTags;
+
+  @JsonKey(
+      name: 'attribute_groups',
+      includeIfNull: false,
+      fromJson: AttributeGroups.fromJson,
+      toJson: AttributeGroups.toJson)
+  AttributeGroups attributeGroups;
 
   Product(
       {this.barcode,

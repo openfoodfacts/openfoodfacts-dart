@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:http/http.dart';
 import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
+import 'package:openfoodfacts/utils/ProductFields.dart';
 
 import 'model/Insight.dart';
 import 'model/RobotoffQuestion.dart';
@@ -144,6 +145,13 @@ class OpenFoodAPIClient {
     if (result.product != null) {
       ProductHelper.removeImages(result.product, configuration.language);
       ProductHelper.createImageUrls(result.product);
+      if (configuration.fields
+              .contains(ProductField.CATEGORIES_TAGS_TRANSLATED) ||
+          configuration.fields.contains(ProductField.LABELS_TAGS_TRANSLATED) ||
+          configuration.fields.contains(ProductField.ALL)) {
+        ProductHelper.addTranslatedFields(result.product,
+            json.decode(response.body)['product'], configuration.language);
+      }
     }
 
     return result;
@@ -169,8 +177,19 @@ class OpenFoodAPIClient {
     Response response = await HttpHelper().doGetRequest(searchUri, user: user);
     var result = SearchResult.fromJson(json.decode(response.body));
 
-    for (Product product in result.products) {
-      ProductHelper.removeImages(product, configuration.language);
+    if (configuration.fields
+            .contains(ProductField.CATEGORIES_TAGS_TRANSLATED) ||
+        configuration.fields.contains(ProductField.LABELS_TAGS_TRANSLATED) ||
+        configuration.fields.contains(ProductField.ALL)) {
+      result.products.asMap().forEach((index, product) {
+        ProductHelper.removeImages(product, configuration.language);
+        ProductHelper.addTranslatedFields(product,
+            result.jsonProducts.elementAt(index), configuration.language);
+      });
+    } else {
+      result.products.asMap().forEach((index, product) {
+        ProductHelper.removeImages(product, configuration.language);
+      });
     }
 
     return result;
@@ -193,8 +212,19 @@ class OpenFoodAPIClient {
     Response response = await HttpHelper().doGetRequest(searchUri, user: user);
     var result = SearchResult.fromJson(json.decode(response.body));
 
-    for (Product product in result.products) {
-      ProductHelper.removeImages(product, configuration.language);
+    if (configuration.fields
+            .contains(ProductField.CATEGORIES_TAGS_TRANSLATED) ||
+        configuration.fields.contains(ProductField.LABELS_TAGS_TRANSLATED) ||
+        configuration.fields.contains(ProductField.ALL)) {
+      result.products.asMap().forEach((index, product) {
+        ProductHelper.removeImages(product, configuration.language);
+        ProductHelper.addTranslatedFields(product,
+            result.jsonProducts.elementAt(index), configuration.language);
+      });
+    } else {
+      result.products.asMap().forEach((index, product) {
+        ProductHelper.removeImages(product, configuration.language);
+      });
     }
 
     return result;
