@@ -8,6 +8,7 @@ import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductQueryConfigurations.dart';
+import 'package:openfoodfacts/utils/UnitHelper.dart';
 
 import 'test_constants.dart';
 
@@ -43,20 +44,17 @@ void main() {
       print(result.product.ingredientsText);
       expect(result.product.ingredients != null, true);
       result.product.ingredients.forEach((element) {
-        print(element.toData().toString());});
+        print(element.toData().toString());
+      });
       expect(result.product.ingredients.length, 13);
 
       expect(result.product.ingredients.any((i) => i.text == "Wasser"), true);
       expect(
           result.product.ingredients.any((i) => i.text == "Kohlensäure"), true);
-      expect(
-          result.product.ingredients.any((i) => i.text == "e150d"),
+      expect(result.product.ingredients.any((i) => i.text == "e150d"), true);
+      expect(result.product.ingredients.any((i) => i.text == "Citronensäure"),
           true);
-      expect(
-          result.product.ingredients.any((i) => i.text == "Citronensäure"),
-          true);
-      expect(
-          result.product.ingredients.any((i) => i.text == "Phosphorsäure"),
+      expect(result.product.ingredients.any((i) => i.text == "Phosphorsäure"),
           true);
       expect(result.product.ingredients.any((i) => i.text == "Süßungsmittel"),
           true);
@@ -220,6 +218,28 @@ void main() {
       expect(result.product.nutriments.novaGroup, 4);
     });
 
+    test('get product Dole Packaged Foods Company 100% pineapple juice',
+        () async {
+      String barcode = "0038900009472";
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.ENGLISH,
+          fields: [ProductField.ALL]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
+
+      expect(result != null, true);
+      expect(result.status, 1);
+      expect(result.barcode, barcode);
+      expect(result.product != null, true);
+      expect(result.product.barcode, barcode);
+
+      expect(result.product.nutriments.iron, 0.00041);
+      expect(result.product.nutriments.ironUnit, Unit.MILLI_G);
+      expect(result.product.nutriments.vitaminC, 0.0339);
+      expect(result.product.nutriments.vitaminCUnit, Unit.MILLI_G);
+    });
+
     test('get product Pâte brisée', () async {
       String barcode = "20004361";
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
@@ -254,7 +274,8 @@ void main() {
           false);
       expect(result.product.ingredients.any((i) => i.text == "huile de colza"),
           false);
-      expect(result.product.ingredients.any((i) => i.text == "colorant"), false);
+      expect(
+          result.product.ingredients.any((i) => i.text == "colorant"), false);
 
       expect(result.product.ingredients.any((i) => i.text == "caroténoïdes"),
           false);
