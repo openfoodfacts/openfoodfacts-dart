@@ -1,3 +1,7 @@
+## [0.3.13] - 20.11.2020
+- Extended micronutrients support (thanks to Ilia (Elliot) Tikhomirov)
+- product attribute: lastModified
+
 ## [0.3.12+2] - 26.10.2020
 - Fixed save product. NULL values won't be sent.
 
