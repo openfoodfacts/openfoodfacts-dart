@@ -6,6 +6,8 @@ version: 0.3.12+2
 #- Primaël Quémerais <primael@reefind.com>
 #- Marcus Cantu
 #- Peter Tran-Jørgensen
+#contributors:
+#- Ilia (Elliot) Tikhomirov
 homepage: https://github.com/openfoodfacts/openfoodfacts-dart
 
 environment:
