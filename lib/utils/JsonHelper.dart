@@ -5,6 +5,7 @@ import 'package:openfoodfacts/model/Ingredient.dart';
 import '../model/ProductImage.dart';
 
 class JsonHelper {
+
   static List<ProductImage> selectedImagesFromJson(Map<String, dynamic> json) {
     if (json == null) return null;
 
@@ -130,5 +131,16 @@ class JsonHelper {
     }
 
     return result;
+  }
+
+  static DateTime timestampToDate(int timestamp) {
+    if (timestamp == null || timestamp is String) {
+      return null;
+    }
+    return new DateTime.fromMillisecondsSinceEpoch(Duration.millisecondsPerSecond * timestamp, isUtc: true);
+  }
+
+  static int dateToTimestamp(DateTime dateTime) {
+    return (dateTime.toUtc().millisecondsSinceEpoch / Duration.millisecondsPerSecond).round();
   }
 }

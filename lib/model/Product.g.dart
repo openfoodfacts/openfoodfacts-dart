@@ -68,7 +68,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     ..storesTags =
         (json['stores_tags'] as List)?.map((e) => e as String)?.toList()
     ..attributeGroups =
-        AttributeGroups.fromJson(json['attribute_groups'] as List);
+        AttributeGroups.fromJson(json['attribute_groups'] as List)
+    ..lastModified = JsonHelper.timestampToDate(json['last_modified_t'] as int);
 }
 
 Map<String, dynamic> _$ProductToJson(Product instance) {
@@ -100,10 +101,10 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull(
       'ingredients', JsonHelper.ingredientsToJson(instance.ingredients));
   writeNotNull('nutriments', Nutriments.toJsonHelper(instance.nutriments));
-  val['additives_tags'] = Additives.additivesToJson(instance.additives);
+  writeNotNull('additives_tags', Additives.additivesToJson(instance.additives));
   writeNotNull('environment_impact_level_tags',
       EnvironmentImpactLevels.toJson(instance.environmentImpactLevels));
-  val['allergens_tags'] = Allergens.allergensToJson(instance.allergens);
+  writeNotNull('allergens_tags', Allergens.allergensToJson(instance.allergens));
   writeNotNull(
       'nutrient_levels', NutrientLevels.toJson(instance.nutrientLevels));
   writeNotNull('ingredients_text', instance.ingredientsText);
@@ -126,5 +127,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('stores_tags', instance.storesTags);
   writeNotNull(
       'attribute_groups', AttributeGroups.toJson(instance.attributeGroups));
+  writeNotNull(
+      'last_modified_t', JsonHelper.dateToTimestamp(instance.lastModified));
   return val;
 }

@@ -33,6 +33,10 @@ void main() {
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product.barcode, barcode);
+      expect(result.product.lastModified != null, true);
+      print("last modified: " + result.product.lastModified.toIso8601String());
+      expect(JsonHelper.dateToTimestamp(result.product.lastModified), 1595179328);
+      expect(JsonHelper.timestampToDate(1595179328).compareTo(result.product.lastModified), 0);
 
       // only german ingredients
       expect(result.product.ingredientsText != null, true);
@@ -206,11 +210,11 @@ void main() {
 
       expect(result.product.nutriments.energy, 2125.0);
       expect(result.product.nutriments.sugars, 28.0);
-      expect(result.product.nutriments.salt, 0.31);
+      expect(result.product.nutriments.salt, 0.30000001192093);
       expect(result.product.nutriments.fiber, null);
       expect(result.product.nutriments.fat, 25.0);
       expect(result.product.nutriments.saturatedFat, 15.0);
-      expect(result.product.nutriments.proteins, 5.3);
+      expect(result.product.nutriments.proteins, 5.3000001907349);
       expect(result.product.nutriments.novaGroup, 4);
     });
 
@@ -447,8 +451,11 @@ void main() {
 
     assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY] != null);
     assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.id == 'nutriscore');
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.settingName == 'Good nutritional quality (Nutri-Score)');
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.settingNote == 'The Nutri-Score is computed and can be taken into account for all products, even if is not displayed on the packaging.');
+    print(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.toJson());
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.settingName == null);
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.settingNote == null);
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.description == '');
+    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.shortDescription == 'Poor nutritional quality');
     assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.title == 'Nutri-Score D');
     assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.name == 'Nutri-Score');
     assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.match == 30);
