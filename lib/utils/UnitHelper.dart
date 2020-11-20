@@ -2,7 +2,7 @@ enum Unit { KCAL, KJ, G, MILLI_G, MICRO_G, MILLI_L, L, PERCENT, UNKNOWN }
 
 class UnitHelper {
   static Unit stringToUnit(String s) {
-    if (s == null) {
+    if (s == null || s.isEmpty) {
       return null;
     }
 
