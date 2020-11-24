@@ -133,14 +133,19 @@ class JsonHelper {
     return result;
   }
 
-  static DateTime timestampToDate(int timestamp) {
-    if (timestamp == null || timestamp is String) {
+  static DateTime timestampToDate(dynamic json) {
+    if (json == null) {
       return null;
+    } else  {
+      int timestamp = JsonObject.parseInt(json);
+      return new DateTime.fromMillisecondsSinceEpoch(Duration.millisecondsPerSecond * timestamp, isUtc: true);
     }
-    return new DateTime.fromMillisecondsSinceEpoch(Duration.millisecondsPerSecond * timestamp, isUtc: true);
   }
 
   static int dateToTimestamp(DateTime dateTime) {
+    if (dateTime == null) {
+      return null;
+    }
     return (dateTime.toUtc().millisecondsSinceEpoch / Duration.millisecondsPerSecond).round();
   }
 }

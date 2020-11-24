@@ -1,3 +1,6 @@
+## [0.3.13+1] - 24.11.2020
+- product upload hotfix
+
 ## [0.3.13] - 20.11.2020
 - Extended micronutrients support (thanks to Ilia (Elliot) Tikhomirov)
 - product attribute: lastModified
