@@ -153,6 +153,9 @@ class Product extends JsonObject {
     toJson: JsonHelper.dateToTimestamp)
   DateTime lastModified;
 
+  @JsonKey(name: 'ecoscore_grade', includeIfNull: false)
+  String ecoscoreGrade;
+
   Product(
       {this.barcode,
       this.productName,
@@ -173,7 +176,8 @@ class Product extends JsonObject {
       this.additives,
       this.nutrientLevels,
       this.servingSize,
-      this.servingQuantity});
+      this.servingQuantity,
+      this.ecoscoreGrade});
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);

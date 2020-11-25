@@ -379,6 +379,20 @@ void main() {
           result.product.ingredients.length.toString());
       assert(result.product.ingredientsText != null);
     });
+    
+    test('product ecoscore grade', () async {
+      String barcode = "5000112548167";
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.ENGLISH,
+          fields: [ProductField.ECOSCORE_GRADE, ProductField.ECOSCORE_ALPHA]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
+
+      assert(result != null);
+      assert(result.product != null);
+      assert(result.product.ecoscoreGrade != null);
+    });
 
     test('product environment impact levels', () async {
       String barcode = "7613331814562";
