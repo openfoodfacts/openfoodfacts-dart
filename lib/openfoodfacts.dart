@@ -71,7 +71,7 @@ class OpenFoodAPIClient {
 
     var productUri =
         Uri(scheme: URI_SCHEME, host: URI_HOST, path: '/cgi/product_jqm2.pl');
-    print(parameterMap);
+
     Response response =
         await HttpHelper().doPostRequest(productUri, parameterMap, user);
     print(response);
