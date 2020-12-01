@@ -12,6 +12,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     productName: json['product_name'] as String,
     productNameDE: json['product_name_de'] as String,
     productNameEN: json['product_name_en'] as String,
+    productNameFR: json['product_name_fr'] as String,
     brands: json['brands'] as String,
     lang: LanguageHelper.fromJson(json['lang'] as String),
     quantity: json['quantity'] as String,
@@ -33,7 +34,6 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     servingQuantity:
         JsonHelper.servingQuantityFromJson(json['serving_quantity']),
   )
-    ..productNameFR = json['product_name_fr'] as String
     ..brandsTags =
         (json['brands_tags'] as List)?.map((e) => e as String)?.toList()
     ..packagingQuantity = json['product_quantity']
@@ -69,13 +69,12 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
         (json['stores_tags'] as List)?.map((e) => e as String)?.toList()
     ..attributeGroups =
         AttributeGroups.fromJson(json['attribute_groups'] as List)
-    ..lastModified = JsonHelper.timestampToDate(json['last_modified_t'] as int);
+    ..lastModified = JsonHelper.timestampToDate(json['last_modified_t']);
 }
 
 Map<String, dynamic> _$ProductToJson(Product instance) {
   final val = <String, dynamic>{
     'code': instance.barcode,
-    'product_name': instance.productName,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -84,6 +83,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
     }
   }
 
+  writeNotNull('product_name', instance.productName);
   writeNotNull('product_name_de', instance.productNameDE);
   writeNotNull('product_name_en', instance.productNameEN);
   writeNotNull('product_name_fr', instance.productNameFR);
