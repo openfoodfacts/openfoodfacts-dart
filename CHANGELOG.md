@@ -1,3 +1,6 @@
+## [0.3.13+2] - 2.12.2020
+- nullable product name hotfix
+
 ## [0.3.13+1] - 24.11.2020
 - product upload hotfix
 
