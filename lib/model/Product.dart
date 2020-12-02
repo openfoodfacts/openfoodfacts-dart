@@ -18,7 +18,7 @@ part 'Product.g.dart';
 class Product extends JsonObject {
   @JsonKey(name: 'code', nullable: false)
   String barcode;
-  @JsonKey(name: 'product_name', nullable: false)
+  @JsonKey(name: 'product_name', includeIfNull: false)
   String productName;
   @JsonKey(name: 'product_name_de', includeIfNull: false)
   String productNameDE;
@@ -158,6 +158,7 @@ class Product extends JsonObject {
       this.productName,
       this.productNameDE,
       this.productNameEN,
+      this.productNameFR,
       this.brands,
       this.lang,
       this.quantity,
