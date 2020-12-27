@@ -202,7 +202,7 @@ class Product extends JsonObject {
   final List<String> statesTags;
   final List<String> tracesTags;
   final List<String> storesTags;
-  final Map<String, AttributeGroup> attributeGroups;
+  final List<AttributeGroup> attributeGroups;
   final DateTime lastModified;
   final String ecoscoreGrade;
 
@@ -256,25 +256,17 @@ class Product extends JsonObject {
   @override
   String toString() => 'Product(${toJson()})';
 
-  static Map<String, AttributeGroup> _attributeGroupsFromJson(
-      final dynamic json) {
-    final List<AttributeGroup> attributeGroups =
-        (json[_JSON_TAG_ATTRIBUTE_GROUPS] as List<dynamic>)
-            ?.map((dynamic item) => AttributeGroup.fromJson(item))
-            ?.toList();
-    final Map<String, AttributeGroup> attributeGroupsMap = {};
-    attributeGroups?.forEach((final AttributeGroup element) {
-      attributeGroupsMap[element.id] = element;
-    });
-    return attributeGroupsMap;
-  }
+  static List<AttributeGroup> _attributeGroupsFromJson(final dynamic json) =>
+      (json[_JSON_TAG_ATTRIBUTE_GROUPS] as List<dynamic>)
+          ?.map((dynamic item) => AttributeGroup.fromJson(item))
+          ?.toList();
 
   List<Map<String, dynamic>> _attributeGroupsToJson() {
     if (attributeGroups == null || attributeGroups.isEmpty) {
       return null;
     }
-    final List<Map<String, dynamic>> result = <Map<String, dynamic>>[];
-    for (final AttributeGroup item in attributeGroups.values) {
+    final List<Map<String, dynamic>> result = [];
+    for (final AttributeGroup item in attributeGroups) {
       result.add(item.toJson());
     }
     return result;

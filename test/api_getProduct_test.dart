@@ -471,7 +471,8 @@ void main() {
 
       AttributeGroup group;
 
-      group = result.product.attributeGroups['nutritional_quality'];
+      group = result.product.attributeGroups
+          .singleWhere((element) => element.id == 'nutritional_quality');
       assert(group != null);
       final List<Attribute> nutritionalQuality = group.attributes;
       assert(nutritionalQuality.first.id == 'nutriscore');
@@ -490,13 +491,15 @@ void main() {
       assert(nutritionalQuality[3].id == 'low_sugars');
       assert(nutritionalQuality[4].id == 'low_saturated_fat');
 
-      group = result.product.attributeGroups['processing'];
+      group = result.product.attributeGroups
+          .singleWhere((element) => element.id == 'processing');
       assert(group != null);
       final List<Attribute> processing = group.attributes;
       assert(processing != null);
       assert(processing.first.id == 'nova');
 
-      group = result.product.attributeGroups['labels'];
+      group = result.product.attributeGroups
+          .singleWhere((element) => element.id == 'labels');
       assert(group != null);
     });
   });
