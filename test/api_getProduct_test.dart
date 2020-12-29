@@ -1,4 +1,5 @@
 import 'package:openfoodfacts/model/AttributeGroups.dart';
+import 'package:openfoodfacts/model/EcoscoreData.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -380,18 +381,29 @@ void main() {
       assert(result.product.ingredientsText != null);
     });
     
-    test('product ecoscore grade', () async {
+    test('product ecoscore', () async {
       String barcode = "5000112548167";
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.ENGLISH,
-          fields: [ProductField.ECOSCORE_GRADE, ProductField.ECOSCORE_ALPHA]);
+          fields: [ProductField.ECOSCORE_GRADE, ProductField.ECOSCORE_SCORE,
+            ProductField.ECOSCORE_DATA, ProductField.ECOSCORE_ALPHA]);
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER);
 
       assert(result != null);
       assert(result.product != null);
       assert(result.product.ecoscoreGrade != null);
+      assert(result.product.ecoscoreScore != null);
+      assert(result.product.ecoscoreData.grade != null);
+      assert(result.product.ecoscoreData.score != null);
+      assert(result.product.ecoscoreData.status == EcoscoreStatus.KNOWN);
+      assert(result.product.ecoscoreData.adjustments.ingredientsOrigins.epiScore != null);
+      assert(result.product.ecoscoreData.adjustments.ingredientsOrigins.epiValue != null);
+      assert(result.product.ecoscoreData.adjustments.ingredientsOrigins.transportationScore != null);
+      assert(result.product.ecoscoreData.adjustments.ingredientsOrigins.transportationValue != null);
+      assert(result.product.ecoscoreData.adjustments.packaging.score != null);
+      assert(result.product.ecoscoreData.adjustments.packaging.value != null);
     });
 
     test('product environment impact levels', () async {

@@ -6,6 +6,7 @@ import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import '../interface/JsonObject.dart';
 import 'Additives.dart';
 import 'Allergens.dart';
+import 'EcoscoreData.dart';
 import 'EnvironmentImpactLevels.dart';
 import 'Ingredient.dart';
 import 'IngredientsAnalysisTags.dart';
@@ -155,6 +156,10 @@ class Product extends JsonObject {
 
   @JsonKey(name: 'ecoscore_grade', includeIfNull: false)
   String ecoscoreGrade;
+  @JsonKey(name: 'ecoscore_score', includeIfNull: false, fromJson: JsonObject.parseDouble)
+  double ecoscoreScore;
+  @JsonKey(name: 'ecoscore_data', includeIfNull: false)
+  EcoscoreData ecoscoreData;
 
   Product(
       {this.barcode,
@@ -178,7 +183,8 @@ class Product extends JsonObject {
       this.nutrientLevels,
       this.servingSize,
       this.servingQuantity,
-      this.ecoscoreGrade});
+      this.ecoscoreGrade,
+      this.ecoscoreScore});
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);

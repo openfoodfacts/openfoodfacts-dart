@@ -32,6 +32,8 @@ enum ProductField {
   ENVIRONMENT_IMPACT_LEVELS,
   ATTRIBUTE_GROUPS,
   ECOSCORE_GRADE,
+  ECOSCORE_SCORE,
+  ECOSCORE_DATA,
   ECOSCORE_ALPHA,
   ALL
 }
@@ -137,6 +139,12 @@ extension ProductFieldExtension on ProductField {
         break;
       case ProductField.ECOSCORE_GRADE:
         return "ecoscore_grade";
+        break;
+      case ProductField.ECOSCORE_SCORE:
+        return "ecoscore_score";
+        break;
+      case ProductField.ECOSCORE_DATA:
+        return "ecoscore_data";
         break;
       case ProductField.ECOSCORE_ALPHA:
         return "ecoscore_alpha";
