@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'IngredientsOrigins.dart';
+part of 'OriginsOfIngredients.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-IngredientsOrigins _$IngredientsOriginsFromJson(Map<String, dynamic> json) {
-  return IngredientsOrigins(
+OriginsOfIngredients _$OriginsOfIngredientsFromJson(Map<String, dynamic> json) {
+  return OriginsOfIngredients(
     epiScore: JsonObject.parseDouble(json['epi_score']),
     epiValue: JsonObject.parseDouble(json['epi_value']),
     transportationScore: JsonObject.parseDouble(json['transportation_score']),
@@ -15,7 +15,8 @@ IngredientsOrigins _$IngredientsOriginsFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$IngredientsOriginsToJson(IngredientsOrigins instance) {
+Map<String, dynamic> _$OriginsOfIngredientsToJson(
+    OriginsOfIngredients instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

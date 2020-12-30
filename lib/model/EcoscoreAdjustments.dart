@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../interface/JsonObject.dart';
-import 'IngredientsOrigins.dart';
+import 'OriginsOfIngredients.dart';
 import 'Packaging.dart';
 
 part 'EcoscoreAdjustments.g.dart';
@@ -10,9 +10,9 @@ class EcoscoreAdjustments extends JsonObject {
   @JsonKey(includeIfNull: false)
   Packaging packaging;
   @JsonKey(name: "origins_of_ingredients", includeIfNull: false)
-  IngredientsOrigins ingredientsOrigins;
+  OriginsOfIngredients originsOfIngredients;
 
-  EcoscoreAdjustments({this.packaging, this.ingredientsOrigins});
+  EcoscoreAdjustments({this.packaging, this.originsOfIngredients});
 
   factory EcoscoreAdjustments.fromJson(Map<String, dynamic> json) =>
       _$EcoscoreAdjustmentsFromJson(json);

@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../interface/JsonObject.dart';
 
-part 'IngredientsOrigins.g.dart';
+part 'OriginsOfIngredients.g.dart';
 
 @JsonSerializable()
-class IngredientsOrigins extends JsonObject {
+class OriginsOfIngredients extends JsonObject {
   @JsonKey(name: "epi_score", includeIfNull: false, fromJson: JsonObject.parseDouble)
   double epiScore;
   @JsonKey(name: "epi_value", includeIfNull: false, fromJson: JsonObject.parseDouble)
@@ -14,11 +14,11 @@ class IngredientsOrigins extends JsonObject {
   @JsonKey(name: "transportation_value", includeIfNull: false, fromJson: JsonObject.parseDouble)
   double transportationValue;
 
-  IngredientsOrigins({this.epiScore, this.epiValue, this.transportationScore, this.transportationValue});
+  OriginsOfIngredients({this.epiScore, this.epiValue, this.transportationScore, this.transportationValue});
 
-  factory IngredientsOrigins.fromJson(Map<String, dynamic> json) =>
-      _$IngredientsOriginsFromJson(json);
+  factory OriginsOfIngredients.fromJson(Map<String, dynamic> json) =>
+      _$OriginsOfIngredientsFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$IngredientsOriginsToJson(this);
+  Map<String, dynamic> toJson() => _$OriginsOfIngredientsToJson(this);
 }

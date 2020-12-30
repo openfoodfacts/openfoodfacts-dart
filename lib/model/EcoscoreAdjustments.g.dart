@@ -11,9 +11,9 @@ EcoscoreAdjustments _$EcoscoreAdjustmentsFromJson(Map<String, dynamic> json) {
     packaging: json['packaging'] == null
         ? null
         : Packaging.fromJson(json['packaging'] as Map<String, dynamic>),
-    ingredientsOrigins: json['origins_of_ingredients'] == null
+    originsOfIngredients: json['origins_of_ingredients'] == null
         ? null
-        : IngredientsOrigins.fromJson(
+        : OriginsOfIngredients.fromJson(
             json['origins_of_ingredients'] as Map<String, dynamic>),
   );
 }
@@ -28,6 +28,6 @@ Map<String, dynamic> _$EcoscoreAdjustmentsToJson(EcoscoreAdjustments instance) {
   }
 
   writeNotNull('packaging', instance.packaging);
-  writeNotNull('origins_of_ingredients', instance.ingredientsOrigins);
+  writeNotNull('origins_of_ingredients', instance.originsOfIngredients);
   return val;
 }

@@ -398,10 +398,10 @@ void main() {
       assert(result.product.ecoscoreData.grade != null);
       assert(result.product.ecoscoreData.score != null);
       assert(result.product.ecoscoreData.status == EcoscoreStatus.KNOWN);
-      assert(result.product.ecoscoreData.adjustments.ingredientsOrigins.epiScore != null);
-      assert(result.product.ecoscoreData.adjustments.ingredientsOrigins.epiValue != null);
-      assert(result.product.ecoscoreData.adjustments.ingredientsOrigins.transportationScore != null);
-      assert(result.product.ecoscoreData.adjustments.ingredientsOrigins.transportationValue != null);
+      assert(result.product.ecoscoreData.adjustments.originsOfIngredients.epiScore != null);
+      assert(result.product.ecoscoreData.adjustments.originsOfIngredients.epiValue != null);
+      assert(result.product.ecoscoreData.adjustments.originsOfIngredients.transportationScore != null);
+      assert(result.product.ecoscoreData.adjustments.originsOfIngredients.transportationValue != null);
       assert(result.product.ecoscoreData.adjustments.packaging.score != null);
       assert(result.product.ecoscoreData.adjustments.packaging.value != null);
     });
