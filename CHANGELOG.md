@@ -1,3 +1,6 @@
+## [0.3.14] - 01.01.2021
+- Added support for Ecoscore (thanks to Frédéric Julian)
+
 ## [0.3.13+2] - 2.12.2020
 - nullable product name hotfix
 
