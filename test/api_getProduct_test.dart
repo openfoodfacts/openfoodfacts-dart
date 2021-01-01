@@ -340,12 +340,12 @@ void main() {
       expect(result.product.nutriments != null, true);
 
       expect(result.product.nutriments.energy, 146.0);
-      expect(result.product.nutriments.sugars, 0.0);
+      expect(result.product.nutriments.sugars, 5.4);
       expect(result.product.nutriments.salt, 1.0);
       expect(result.product.nutriments.fiber, 1.1);
-      expect(result.product.nutriments.fat, 0.30000001192093);
+      expect(result.product.nutriments.fat, 0.3);
       expect(result.product.nutriments.saturatedFat, 0.10000000149012);
-      expect(result.product.nutriments.proteins, 1.2000000476837);
+      expect(result.product.nutriments.proteins, 1.2);
       expect(result.product.nutriments.novaGroup, 4);
       expect(result.product.storesTags.length, 1);
 

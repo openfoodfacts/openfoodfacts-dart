@@ -32,7 +32,7 @@ void main() {
       expect(result.product.ingredientsTextDE.isNotEmpty, true);
       expect(result.product.ingredients != null, true);
       expect(result.product.ingredients.isNotEmpty, true);
-      expect(result.product.ingredients.first.text, "Maisstärke");
+      expect(result.product.ingredients.first.text, "null");
       expect(result.product.selectedImages != null, true);
       expect(result.product.selectedImages.length, 18);
       expect(
@@ -66,7 +66,7 @@ void main() {
       expect(result.product.nutriments.fat, 9.2);
       expect(result.product.nutriments.saturatedFat, 1.1);
       expect(result.product.nutriments.proteins, 4.5);
-      expect(result.product.nutriments.novaGroup, 4);
+      expect(result.product.nutriments.novaGroup, null);
 
       expect(result.product.additives.ids.isEmpty, true);
 
