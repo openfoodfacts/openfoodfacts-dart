@@ -1,3 +1,5 @@
+import 'package:openfoodfacts/interface/JsonObject.dart';
+
 enum AttributeGroup { NUTRITIONAL_QUALITY, PROCESSING, LABELS, UNKNOWN }
 
 extension AttributeGroupExtension on AttributeGroup {
@@ -64,7 +66,7 @@ class AttributeGroups {
             title: attribute['title'],
             settingName: attribute['setting_name'],
             settingNote: attribute['setting_note'],
-            match: double.parse(attribute['match'].toString()),
+            match: JsonObject.parseDouble(attribute['match']),
             description: attribute['description'],
             shortDescription: attribute['description_short'],
             status: attribute['status']));
