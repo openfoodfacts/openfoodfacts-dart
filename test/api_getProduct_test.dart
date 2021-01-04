@@ -1,4 +1,5 @@
-import 'package:openfoodfacts/model/AttributeGroups.dart';
+import 'package:openfoodfacts/model/AttributeGroup.dart';
+import 'package:openfoodfacts/model/Attribute.dart';
 import 'package:openfoodfacts/model/EcoscoreData.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/utils/HttpHelper.dart';
@@ -36,8 +37,12 @@ void main() {
       expect(result.product.barcode, barcode);
       expect(result.product.lastModified != null, true);
       print("last modified: " + result.product.lastModified.toIso8601String());
-      expect(JsonHelper.dateToTimestamp(result.product.lastModified), 1595179328);
-      expect(JsonHelper.timestampToDate(1595179328).compareTo(result.product.lastModified), 0);
+      expect(
+          JsonHelper.dateToTimestamp(result.product.lastModified), 1595179328);
+      expect(
+          JsonHelper.timestampToDate(1595179328)
+              .compareTo(result.product.lastModified),
+          0);
 
       // only german ingredients
       expect(result.product.ingredientsText != null, true);
@@ -335,7 +340,8 @@ void main() {
           4);
 
       expect(result.product.allergens.ids.length, 4);
-      expect(result.product.allergens.ids, ['en:eggs', 'en:gluten', 'en:milk', 'en:soybeans']);
+      expect(result.product.allergens.ids,
+          ['en:eggs', 'en:gluten', 'en:milk', 'en:soybeans']);
 
       expect(result.product.nutriments != null, true);
 
@@ -380,14 +386,18 @@ void main() {
           result.product.ingredients.length.toString());
       assert(result.product.ingredientsText != null);
     });
-    
+
     test('product ecoscore', () async {
       String barcode = "5000112548167";
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.ENGLISH,
-          fields: [ProductField.ECOSCORE_GRADE, ProductField.ECOSCORE_SCORE,
-            ProductField.ECOSCORE_DATA, ProductField.ECOSCORE_ALPHA]);
+          fields: [
+            ProductField.ECOSCORE_GRADE,
+            ProductField.ECOSCORE_SCORE,
+            ProductField.ECOSCORE_DATA,
+            ProductField.ECOSCORE_ALPHA
+          ]);
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER);
 
@@ -398,10 +408,18 @@ void main() {
       assert(result.product.ecoscoreData.grade != null);
       assert(result.product.ecoscoreData.score != null);
       assert(result.product.ecoscoreData.status == EcoscoreStatus.KNOWN);
-      assert(result.product.ecoscoreData.adjustments.originsOfIngredients.epiScore != null);
-      assert(result.product.ecoscoreData.adjustments.originsOfIngredients.epiValue != null);
-      assert(result.product.ecoscoreData.adjustments.originsOfIngredients.transportationScore != null);
-      assert(result.product.ecoscoreData.adjustments.originsOfIngredients.transportationValue != null);
+      assert(result
+              .product.ecoscoreData.adjustments.originsOfIngredients.epiScore !=
+          null);
+      assert(result
+              .product.ecoscoreData.adjustments.originsOfIngredients.epiValue !=
+          null);
+      assert(result.product.ecoscoreData.adjustments.originsOfIngredients
+              .transportationScore !=
+          null);
+      assert(result.product.ecoscoreData.adjustments.originsOfIngredients
+              .transportationValue !=
+          null);
       assert(result.product.ecoscoreData.adjustments.packaging.score != null);
       assert(result.product.ecoscoreData.adjustments.packaging.value != null);
     });
@@ -461,42 +479,52 @@ void main() {
       assert(result.product.lang == OpenFoodFactsLanguage.ENGLISH);
     });
 
-  test('attribute groups', () async {
-    String barcode = "3700214614266";
-    ProductQueryConfiguration configurations = ProductQueryConfiguration(
-        barcode,
-        language: OpenFoodFactsLanguage.ENGLISH,
-        fields: [ProductField.NAME, ProductField.ATTRIBUTE_GROUPS]);
-    ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
-        user: TestConstants.TEST_USER);
+    test('attribute groups', () async {
+      String barcode = "3700214614266";
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.ENGLISH,
+          fields: [ProductField.NAME, ProductField.ATTRIBUTE_GROUPS]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
 
-    assert(result != null);
-    assert(result.product != null);
-    assert(result.product.productName != null);
-    assert(result.product.attributeGroups != null);
+      assert(result != null);
+      assert(result.product != null);
+      assert(result.product.productName != null);
+      assert(result.product.attributeGroups != null);
 
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY] != null);
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.id == 'nutriscore');
-    print(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.toJson());
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.settingName == null);
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.settingNote == null);
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.description == '');
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.shortDescription == 'Poor nutritional quality');
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.title == 'Nutri-Score D');
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.name == 'Nutri-Score');
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.match == 30);
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY].first.status == 'known');
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY][1].id == 'low_salt');
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY][2].id == 'low_fat');
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY][3].id == 'low_sugars');
-    assert(result.product.attributeGroups.groups[AttributeGroup.NUTRITIONAL_QUALITY][4].id == 'low_saturated_fat');
+      AttributeGroup group;
 
-    assert(result.product.attributeGroups.groups[AttributeGroup.PROCESSING] != null);
-    assert(result.product.attributeGroups.groups[AttributeGroup.PROCESSING].first.id == 'nova');
+      group = result.product.attributeGroups
+          .singleWhere((element) => element.id == 'nutritional_quality');
+      assert(group != null);
+      final List<Attribute> nutritionalQuality = group.attributes;
+      assert(nutritionalQuality.first.id == 'nutriscore');
+      print(nutritionalQuality.first.toJson());
+      assert(nutritionalQuality.first.settingName == null);
+      assert(nutritionalQuality.first.settingNote == null);
+      assert(nutritionalQuality.first.description == '');
+      assert(nutritionalQuality.first.descriptionShort ==
+          'Poor nutritional quality');
+      assert(nutritionalQuality.first.title == 'Nutri-Score D');
+      assert(nutritionalQuality.first.name == 'Nutri-Score');
+      assert(nutritionalQuality.first.match == 30);
+      assert(nutritionalQuality.first.status == 'known');
+      assert(nutritionalQuality[1].id == 'low_salt');
+      assert(nutritionalQuality[2].id == 'low_fat');
+      assert(nutritionalQuality[3].id == 'low_sugars');
+      assert(nutritionalQuality[4].id == 'low_saturated_fat');
 
+      group = result.product.attributeGroups
+          .singleWhere((element) => element.id == 'processing');
+      assert(group != null);
+      final List<Attribute> processing = group.attributes;
+      assert(processing != null);
+      assert(processing.first.id == 'nova');
 
-    assert(result.product.attributeGroups.groups[AttributeGroup.LABELS] != null);
+      group = result.product.attributeGroups
+          .singleWhere((element) => element.id == 'labels');
+      assert(group != null);
+    });
   });
-
-});
 }

@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:openfoodfacts/model/AttributeGroups.dart';
+import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/utils/JsonHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
@@ -43,7 +43,9 @@ class Product extends JsonObject {
   @JsonKey(name: 'serving_size', includeIfNull: false)
   String servingSize;
   @JsonKey(
-      name: 'serving_quantity', fromJson: JsonHelper.servingQuantityFromJson, includeIfNull: false)
+      name: 'serving_quantity',
+      fromJson: JsonHelper.servingQuantityFromJson,
+      includeIfNull: false)
   double servingQuantity;
   @JsonKey(name: 'product_quantity', includeIfNull: false)
   dynamic packagingQuantity;
@@ -143,20 +145,22 @@ class Product extends JsonObject {
   @JsonKey(
       name: 'attribute_groups',
       includeIfNull: false,
-      fromJson: AttributeGroups.fromJson,
-      toJson: AttributeGroups.toJson)
-  AttributeGroups attributeGroups;
+      toJson: JsonHelper.attributeGroupsToJson)
+  List<AttributeGroup> attributeGroups;
 
   @JsonKey(
-    name: 'last_modified_t',
-    includeIfNull: false,
-    fromJson: JsonHelper.timestampToDate,
-    toJson: JsonHelper.dateToTimestamp)
+      name: 'last_modified_t',
+      includeIfNull: false,
+      fromJson: JsonHelper.timestampToDate,
+      toJson: JsonHelper.dateToTimestamp)
   DateTime lastModified;
 
   @JsonKey(name: 'ecoscore_grade', includeIfNull: false)
   String ecoscoreGrade;
-  @JsonKey(name: 'ecoscore_score', includeIfNull: false, fromJson: JsonObject.parseDouble)
+  @JsonKey(
+      name: 'ecoscore_score',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
   double ecoscoreScore;
   @JsonKey(name: 'ecoscore_data', includeIfNull: false)
   EcoscoreData ecoscoreData;

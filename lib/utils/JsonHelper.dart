@@ -1,11 +1,10 @@
 import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/model/Ingredient.dart';
-
-import '../model/ProductImage.dart';
+import 'package:openfoodfacts/model/ProductImage.dart';
 
 class JsonHelper {
-
   static List<ProductImage> selectedImagesFromJson(Map<String, dynamic> json) {
     if (json == null) return null;
 
@@ -133,19 +132,37 @@ class JsonHelper {
     return result;
   }
 
+  static List<Map<String, dynamic>> attributeGroupsToJson(
+      List<AttributeGroup> list) {
+    if (list == null || list.length == 0) {
+      return null;
+    }
+
+    List<Map<String, dynamic>> result = List<Map<String, dynamic>>();
+
+    for (final AttributeGroup item in list) {
+      result.add(item.toJson());
+    }
+
+    return result;
+  }
+
   static DateTime timestampToDate(dynamic json) {
     if (json == null) {
       return null;
-    } else  {
-      int timestamp = JsonObject.parseInt(json);
-      return new DateTime.fromMillisecondsSinceEpoch(Duration.millisecondsPerSecond * timestamp, isUtc: true);
     }
+    final int timestamp = JsonObject.parseInt(json);
+    return new DateTime.fromMillisecondsSinceEpoch(
+        Duration.millisecondsPerSecond * timestamp,
+        isUtc: true);
   }
 
   static int dateToTimestamp(DateTime dateTime) {
     if (dateTime == null) {
       return null;
     }
-    return (dateTime.toUtc().millisecondsSinceEpoch / Duration.millisecondsPerSecond).round();
+    return (dateTime.toUtc().millisecondsSinceEpoch /
+            Duration.millisecondsPerSecond)
+        .round();
   }
 }
