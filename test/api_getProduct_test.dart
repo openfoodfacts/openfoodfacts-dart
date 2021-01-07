@@ -395,8 +395,7 @@ void main() {
           fields: [
             ProductField.ECOSCORE_GRADE,
             ProductField.ECOSCORE_SCORE,
-            ProductField.ECOSCORE_DATA,
-            ProductField.ECOSCORE_ALPHA
+            ProductField.ECOSCORE_DATA
           ]);
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER);

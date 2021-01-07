@@ -1,3 +1,7 @@
+## [0.3.14+1] - 07.01.2021
+- Refactored Attribute & AttributeGroup
+- Removed ProductFields.ECOSCORE_ALPHA as deprecated
+
 ## [0.3.14] - 01.01.2021
 - Added support for Ecoscore (thanks to Frédéric Julian)
 

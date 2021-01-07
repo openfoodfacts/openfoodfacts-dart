@@ -34,7 +34,6 @@ enum ProductField {
   ECOSCORE_GRADE,
   ECOSCORE_SCORE,
   ECOSCORE_DATA,
-  ECOSCORE_ALPHA,
   ALL
 }
 
@@ -145,9 +144,6 @@ extension ProductFieldExtension on ProductField {
         break;
       case ProductField.ECOSCORE_DATA:
         return "ecoscore_data";
-        break;
-      case ProductField.ECOSCORE_ALPHA:
-        return "ecoscore_alpha";
         break;
       default:
         return "";

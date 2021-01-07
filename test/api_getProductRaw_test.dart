@@ -32,7 +32,7 @@ void main() {
       expect(result.product.ingredientsTextDE.isNotEmpty, true);
       expect(result.product.ingredients != null, true);
       expect(result.product.ingredients.isNotEmpty, true);
-      expect(result.product.ingredients.first.text, "null");
+      expect(result.product.ingredients.first.text, "Sauerteig");
       expect(result.product.selectedImages != null, true);
       expect(result.product.selectedImages.length, 18);
       expect(
@@ -42,7 +42,7 @@ void main() {
                   image.size == ImageSize.DISPLAY &&
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
-          "https://static.openfoodfacts.org/images/products/800/869/801/1065/ingredients_de.27.400.jpg");
+          "https://static.openfoodfacts.org/images/products/800/869/801/1065/ingredients_de.269.400.jpg");
       expect(result.product.images != null, true);
       expect(result.product.images.length, 24);
       expect(
@@ -52,8 +52,8 @@ void main() {
                   image.size == ImageSize.DISPLAY &&
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .rev,
-          27);
-      expect(result.product.labelsTags.contains("en:gluten-free"), true);
+          269);
+      expect(result.product.labelsTags.contains("en:gluten-free"), false);
       expect(result.product.tracesTags != null, true);
       expect(result.product.tracesTags.contains("en:lupin"), true);
 
@@ -66,9 +66,9 @@ void main() {
       expect(result.product.nutriments.fat, 9.2);
       expect(result.product.nutriments.saturatedFat, 1.1);
       expect(result.product.nutriments.proteins, 4.5);
-      expect(result.product.nutriments.novaGroup, null);
+      expect(result.product.nutriments.novaGroup, 4);
 
-      expect(result.product.additives.ids.isEmpty, true);
+      expect(result.product.additives.ids.isEmpty, false);
 
       expect(
           result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SUGARS],
