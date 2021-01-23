@@ -70,9 +70,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     ..storesTags =
         (json['stores_tags'] as List)?.map((e) => e as String)?.toList()
     ..attributeGroups = (json['attribute_groups'] as List)
-        ?.map((e) => e == null
-            ? null
-            : AttributeGroup.fromJson(e as Map<String, dynamic>))
+        ?.map((e) => e == null ? null : AttributeGroup.fromJson(e))
         ?.toList()
     ..lastModified = JsonHelper.timestampToDate(json['last_modified_t'])
     ..ecoscoreData = json['ecoscore_data'] == null
@@ -139,6 +137,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
       'last_modified_t', JsonHelper.dateToTimestamp(instance.lastModified));
   writeNotNull('ecoscore_grade', instance.ecoscoreGrade);
   writeNotNull('ecoscore_score', instance.ecoscoreScore);
-  writeNotNull('ecoscore_data', instance.ecoscoreData);
+  writeNotNull(
+      'ecoscore_data', EcoscoreData.toJsonHelper(instance.ecoscoreData));
   return val;
 }

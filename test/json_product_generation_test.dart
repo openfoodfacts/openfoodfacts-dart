@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:openfoodfacts/model/EcoscoreData.dart';
 import 'package:openfoodfacts/model/Product.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
@@ -22,8 +23,17 @@ void main() {
     expect(result.status, 1);
     Product product = result.product;
     Map<String, dynamic> productMap = product.toJson();
-    print(JsonHelper.selectedImagesToJson(product.selectedImages));
     String json = jsonEncode(productMap);
     assert(json is String);
+  });
+
+  test('EcoscoreData JSON generation', () {
+    final product = Product();
+    product.productName = 'TestProduct';
+    final ecoscoreData = EcoscoreData();
+    ecoscoreData.grade = 'x';
+    product.ecoscoreData = ecoscoreData;
+    final productJson = product.toJson();
+    assert(!(productJson['ecoscore_data'] is EcoscoreData));
   });
 }

@@ -27,4 +27,7 @@ class EcoscoreData extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$EcoscoreDataToJson(this);
+
+  static Map<String, dynamic> toJsonHelper(EcoscoreData d) =>
+      d != null ? d.toJson() : {};
 }

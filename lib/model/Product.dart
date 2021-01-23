@@ -162,7 +162,10 @@ class Product extends JsonObject {
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double ecoscoreScore;
-  @JsonKey(name: 'ecoscore_data', includeIfNull: false)
+  @JsonKey(
+      name: 'ecoscore_data',
+      includeIfNull: false,
+      toJson: EcoscoreData.toJsonHelper)
   EcoscoreData ecoscoreData;
 
   Product(
