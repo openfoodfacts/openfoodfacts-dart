@@ -33,7 +33,10 @@ void main() {
     final ecoscoreData = EcoscoreData();
     ecoscoreData.grade = 'x';
     product.ecoscoreData = ecoscoreData;
-    final productJson = product.toJson();
+    var productJson = product.toJson();
     assert(!(productJson['ecoscore_data'] is EcoscoreData));
+    product.ecoscoreData = null;
+    productJson = product.toJson();
+    assert(productJson['ecoscore_data'] == null);
   });
 }
