@@ -28,10 +28,8 @@ void main() {
   });
 
   test('EcoscoreData JSON generation', () {
-    final product = Product();
-    product.productName = 'TestProduct';
-    final ecoscoreData = EcoscoreData();
-    ecoscoreData.grade = 'x';
+    final product = Product(productName: 'TestProduct');
+    final ecoscoreData = EcoscoreData(grade: 'x');
     product.ecoscoreData = ecoscoreData;
     var productJson = product.toJson();
     assert(!(productJson['ecoscore_data'] is EcoscoreData));
