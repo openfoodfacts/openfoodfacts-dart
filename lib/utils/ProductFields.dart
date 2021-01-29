@@ -4,6 +4,8 @@ enum ProductField {
   GENERIC_NAME,
   BRANDS,
   BRANDS_TAGS,
+  COUNTRIES,
+  COUNTRIES_TAGS,
   LANGUAGE,
   QUANTITY,
   SERVING_SIZE,
@@ -54,6 +56,12 @@ extension ProductFieldExtension on ProductField {
         break;
       case ProductField.BRANDS_TAGS:
         return "brands_tags";
+        break;
+      case ProductField.COUNTRIES:
+        return "countries";
+        break;
+      case ProductField.COUNTRIES_TAGS:
+        return "countries_tags";
         break;
       case ProductField.LANGUAGE:
         return "lang";

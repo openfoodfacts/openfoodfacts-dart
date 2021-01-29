@@ -30,6 +30,10 @@ class Product extends JsonObject {
   String brands;
   @JsonKey(name: 'brands_tags', includeIfNull: false)
   List<String> brandsTags;
+  @JsonKey(name: 'countries', includeIfNull: false)
+  String countries;
+  @JsonKey(name: 'countries_tags', includeIfNull: false)
+  List<String> countriesTags;
   @JsonKey(
       name: 'lang',
       toJson: LanguageHelper.toJson,
@@ -175,6 +179,8 @@ class Product extends JsonObject {
       this.productNameEN,
       this.productNameFR,
       this.brands,
+      this.countries,
+      this.countriesTags,
       this.lang,
       this.quantity,
       this.imgSmallUrl,
