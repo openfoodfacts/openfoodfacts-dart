@@ -6,7 +6,11 @@ class ProductQueryConfiguration {
   OpenFoodFactsLanguage language;
   List<ProductField> fields;
 
-  ProductQueryConfiguration(this.barcode, {this.language, this.fields});
+
+  ProductQueryConfiguration(this.barcode, {this.language = OpenFoodFactsLanguage.WORLD,
+    this.fields}){
+    fields ??= [ProductField.ALL];
+  }
 
   List<String> getFieldsKeys() {
     List<String> result = List<String>();
