@@ -351,7 +351,11 @@ void main() {
       expect(result.product.nutriments.energy, 138.0);
       expect(result.product.nutriments.sugars, 5.4);
       expect(result.product.nutriments.salt, 1.23);
+
+      //This field does not exist on the product 20004361
+      // (Seems that the product was updated in meantime)
       //expect(result.product.nutriments.fiber, 1.1);
+
       expect(result.product.nutriments.fat, 0.3);
       expect(result.product.nutriments.saturatedFat, 0.1);
       expect(result.product.nutriments.proteins, 1.2);
