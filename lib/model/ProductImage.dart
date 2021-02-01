@@ -1,6 +1,6 @@
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 
-enum ImageField { FRONT, INGREDIENTS, NUTRITION, OTHER }
+enum ImageField { FRONT, INGREDIENTS, NUTRITION, PACKAGING, OTHER }
 
 extension ImageFieldExtension on ImageField {
   String get value {
@@ -18,6 +18,9 @@ extension ImageFieldExtension on ImageField {
       case ImageField.NUTRITION:
         return "nutrition";
         break;
+      case ImageField.PACKAGING:
+        return "packaging";
+        break;
       case ImageField.OTHER:
       default:
         return "other";
@@ -33,6 +36,8 @@ extension ImageFieldExtension on ImageField {
         return ImageField.INGREDIENTS;
       case "nutrition":
         return ImageField.NUTRITION;
+      case "packaging":
+        return ImageField.PACKAGING;
       case "other":
       default:
         return ImageField.OTHER;
@@ -41,10 +46,10 @@ extension ImageFieldExtension on ImageField {
 }
 
 enum ImageSize {
-  THUMB, // width: 100 px
-  SMALL, // width: 200 px
-  DISPLAY, // width: 400 px
-  ORIGINAL, // width: as uploaded
+  THUMB, // width and height <= 100 px
+  SMALL, // width and height <= 200 px
+  DISPLAY, // width and height <= 400 px
+  ORIGINAL, // width and height: as uploaded
   UNKNOWN, // size not available
 }
 
