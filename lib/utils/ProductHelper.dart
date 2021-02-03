@@ -1,5 +1,6 @@
 import 'package:openfoodfacts/utils/ImageHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
+import 'package:openfoodfacts/utils/QueryType.dart';
 
 import '../model/Product.dart';
 import '../model/ProductImage.dart';
@@ -21,18 +22,22 @@ class ProductHelper {
   }
 
   // generate a image url for each product image entry
-  static void createImageUrls(Product product) {
+  static void createImageUrls(Product product,
+      {QueryType queryType = QueryType.PROD}) {
     if (product.images == null) {
       return;
     }
 
     for (ProductImage image in product.images) {
-      image.url = ImageHelper.buildUrl(product.barcode, image);
+      image.url =
+          ImageHelper.buildUrl(product.barcode, image, queryType: queryType);
     }
   }
 
-  static void addTranslatedFields(Product product, Map<String, dynamic> source, OpenFoodFactsLanguage language) {
-    product.categoriesTagsTranslated = source['categories_tags_${language.code}'];
+  static void addTranslatedFields(Product product, Map<String, dynamic> source,
+      OpenFoodFactsLanguage language) {
+    product.categoriesTagsTranslated =
+        source['categories_tags_${language.code}'];
     product.labelsTagsTranslated = source['labels_tags_${language.code}'];
   }
 }

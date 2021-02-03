@@ -163,7 +163,7 @@ class OpenFoodAPIClient {
 
     if (result.product != null) {
       ProductHelper.removeImages(result.product, configuration.language);
-      ProductHelper.createImageUrls(result.product);
+      ProductHelper.createImageUrls(result.product, queryType: queryType);
       if (configuration.fields
               .contains(ProductField.CATEGORIES_TAGS_TRANSLATED) ||
           configuration.fields.contains(ProductField.LABELS_TAGS_TRANSLATED) ||
@@ -281,7 +281,7 @@ class OpenFoodAPIClient {
       scheme: URI_SCHEME,
       host: queryType == QueryType.PROD
           ? URI_PROD_HOST_ROBOTOFF
-          : URI_TEST_HOST_ROBOTOFF,
+          : URI_PROD_HOST_ROBOTOFF, // once the Robotoff is added to the test DB this can be changed to URI_TEST_HOST_ROBOTOFF
       path: 'api/v1/insights/random/',
       queryParameters: parameters,
     );
@@ -303,7 +303,7 @@ class OpenFoodAPIClient {
       scheme: URI_SCHEME,
       host: queryType == QueryType.PROD
           ? URI_PROD_HOST_ROBOTOFF
-          : URI_TEST_HOST_ROBOTOFF,
+          : URI_PROD_HOST_ROBOTOFF, // once the Robotoff is added to the test DB this can be changed to URI_TEST_HOST_ROBOTOFF
       path: 'api/v1/insights/$barcode',
     );
 
@@ -337,7 +337,7 @@ class OpenFoodAPIClient {
       scheme: URI_SCHEME,
       host: queryType == QueryType.PROD
           ? URI_PROD_HOST_ROBOTOFF
-          : URI_TEST_HOST_ROBOTOFF,
+          : URI_PROD_HOST_ROBOTOFF, // once the Robotoff is added to the test DB this can be changed to URI_TEST_HOST_ROBOTOFF
       path: 'api/v1/questions/$barcode',
       queryParameters: parameters,
     );
@@ -378,7 +378,7 @@ class OpenFoodAPIClient {
       scheme: URI_SCHEME,
       host: queryType == QueryType.PROD
           ? URI_PROD_HOST_ROBOTOFF
-          : URI_TEST_HOST_ROBOTOFF,
+          : URI_PROD_HOST_ROBOTOFF, // once the Robotoff is added to the test DB this can be changed to URI_TEST_HOST_ROBOTOFF
       path: 'api/v1/questions/random',
       queryParameters: parameters,
     );
@@ -442,7 +442,7 @@ class OpenFoodAPIClient {
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD
             ? URI_PROD_HOST_ROBOTOFF
-            : URI_TEST_HOST_ROBOTOFF,
+            : URI_PROD_HOST_ROBOTOFF, // once the Robotoff is added to the test DB this can be changed to URI_TEST_HOST_ROBOTOFF
         path: 'api/v1/predict/ingredients/spellcheck',
         queryParameters: spellingCorrectionParam);
 
