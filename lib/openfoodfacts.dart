@@ -403,8 +403,6 @@ class OpenFoodAPIClient {
             : URI_PROD_HOST_ROBOTOFF,
         path: 'api/v1/insights/annotate');
 
-    print(insightUri);
-
     Map<String, String> annotationData = {
       "insight_id": insightId,
       "annotation": annotation.value.toString(),

@@ -92,7 +92,7 @@ void main() {
 
       expect(result.product.selectedImages.length, 3);
 
-      /* TODO: Activate those tests once the issue  #48 is fixed
+      /* Activate those tests once the issue  #48 is fixed
        expect(result.product.nutriments != null, true);
       expect(result.product.nutriments.energy, 0.8);
       expect(result.product.nutriments.sugars, 0.0);
@@ -132,7 +132,7 @@ void main() {
 
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',
         () async {
-      //TODO: Refactor the test once the issue  #48 is fixed
+      //Refactor the test once the issue  #48 is fixed
       String barcode = '0028400047685';
 
       ProductQueryConfiguration configurations = ProductQueryConfiguration(

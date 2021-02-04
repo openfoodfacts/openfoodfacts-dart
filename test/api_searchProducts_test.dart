@@ -3,7 +3,6 @@ import 'package:openfoodfacts/interface/Parameter.dart';
 import 'package:openfoodfacts/model/parameter/ContainsAdditives.dart';
 import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
-import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/SearchResult.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
