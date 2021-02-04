@@ -1,3 +1,10 @@
+## [0.3.15] - 04.02.2021
+- Added packaging image type
+- Allow setting the country code cc field
+- Added countries and countries tags to Product (thanks to Mohamed Boussaid)
+- Allow anonymous photo upload
+- Fixed product JSON generation for Eco-Score data (thanks to Peter Tran-Jørgensen)
+
 ## [0.3.14+1] - 07.01.2021
 - Refactored Attribute & AttributeGroup
 - Removed ProductFields.ECOSCORE_ALPHA as deprecated
