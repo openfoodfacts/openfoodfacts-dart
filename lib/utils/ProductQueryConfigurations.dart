@@ -11,7 +11,9 @@ class ProductQueryConfiguration {
   List<ProductField> fields;
 
   ProductQueryConfiguration(this.barcode,
-      {this.language, this.lc, this.cc, this.fields});
+      {this.language, this.lc, this.cc, this.fields}) {
+    fields ??= [ProductField.ALL];
+  }
 
   List<String> getFieldsKeys() {
     List<String> result = List<String>();
