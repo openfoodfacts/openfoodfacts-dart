@@ -81,7 +81,6 @@ class OpenFoodAPIClient {
 
     Response response = await HttpHelper()
         .doPostRequest(productUri, parameterMap, user, queryType: queryType);
-    print(response);
     var status = Status.fromJson(json.decode(response.body));
     return status;
   }

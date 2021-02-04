@@ -47,6 +47,11 @@ class HttpHelper {
       body: body,
     );
 
+    print(uri);
+    print(body);
+    print(_buildHeaders(user,
+        isTestModeActive: queryType == QueryType.PROD ? false : true));
+
     return response;
   }
 

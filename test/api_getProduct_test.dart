@@ -36,7 +36,7 @@ void main() {
           nutrimentEnergyUnit: "kcal",
           servingSize: "100g",
           ingredientsText:
-              "Wasser, Kohlensäure, e150d, Citronensäure,  Phosphorsäure, Süßungsmittel, Natriumcyclamat, Acesulfam K, Aroma, Aroma Koffein, Aspartam",
+          "Wasser, Kohlensäure, e150d, Citronensäure,  Phosphorsäure, Süßungsmittel, Natriumcyclamat, Acesulfam K, Aroma, Aroma Koffein, Aspartam",
           nutriments: Nutriments(
               novaGroup: 4,
               energy: 0.8,
@@ -138,9 +138,9 @@ void main() {
       expect(
           result.product.images
               .singleWhere((image) =>
-                  image.field == ImageField.INGREDIENTS &&
-                  image.size == ImageSize.DISPLAY &&
-                  image.language == OpenFoodFactsLanguage.GERMAN)
+          image.field == ImageField.INGREDIENTS &&
+              image.size == ImageSize.DISPLAY &&
+              image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
           "https://static.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg");
     });
