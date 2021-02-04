@@ -81,6 +81,7 @@ void main() {
           Level.LOW);
       expect(result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SALT],
           Level.MODERATE);
+      expect(result.product.countries, "Belgien,Deutschland,Niederlande,Spanien,Schweiz, en:france");
     });
 
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',

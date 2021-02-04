@@ -110,6 +110,8 @@ void main() {
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
           "https://static.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg");
+
+      expect(result.product.countries, "Frankreich,Deutschland");
     });
 
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',
@@ -134,6 +136,7 @@ void main() {
       expect(result.product.nutriments.fatServing != null, true);
 
       print(result.product.nutriments.carbohydratesServing);
+      expect(result.product.countries, "United States");
     });
 
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',
@@ -361,6 +364,9 @@ void main() {
 
       print(result.product.labelsTagsTranslated);
       print(result.product.categoriesTagsTranslated);
+
+
+      expect(result.product.countriesTags, ["en:france","en:germany","en:switzerland"]);
     });
 
     test('product not available', () async {
@@ -474,6 +480,44 @@ void main() {
       assert(result.product.additives.names.length == 0);
       assert(result.product.nutrientLevels.levels.length == 0);
       assert(result.product.lang == OpenFoodFactsLanguage.ENGLISH);
+
+      configurations = ProductQueryConfiguration(barcode,
+          language: OpenFoodFactsLanguage.GERMAN,
+          fields: [ProductField.NAME, ProductField.COUNTRIES]);
+      result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
+
+      assert(result != null);
+      assert(result.product != null);
+      assert(result.product.productName != null);
+      assert(result.product.brandsTags == null);
+      assert(result.product.ingredients == null);
+      assert(result.product.ingredientsText == null);
+      assert(result.product.productNameDE == null);
+      assert(result.product.additives.ids.length == 0);
+      assert(result.product.additives.names.length == 0);
+      assert(result.product.nutrientLevels.levels.length == 0);
+      assert(result.product.lang == OpenFoodFactsLanguage.UNDEFINED);
+      assert(result.product.countries != null);
+
+      configurations = ProductQueryConfiguration(barcode,
+          language: OpenFoodFactsLanguage.GERMAN,
+          fields: [ProductField.NAME, ProductField.COUNTRIES_TAGS]);
+      result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER);
+
+      assert(result != null);
+      assert(result.product != null);
+      assert(result.product.productName != null);
+      assert(result.product.brandsTags == null);
+      assert(result.product.ingredients == null);
+      assert(result.product.ingredientsText == null);
+      assert(result.product.productNameDE == null);
+      assert(result.product.additives.ids.length == 0);
+      assert(result.product.additives.names.length == 0);
+      assert(result.product.nutrientLevels.levels.length == 0);
+      assert(result.product.lang == OpenFoodFactsLanguage.UNDEFINED);
+      assert(result.product.countriesTags != null);
     });
 
     test('attribute groups', () async {
