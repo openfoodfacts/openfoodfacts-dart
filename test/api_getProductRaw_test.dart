@@ -1,5 +1,4 @@
 import 'package:openfoodfacts/model/NutrientLevels.dart';
-import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
@@ -7,20 +6,18 @@ import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductQueryConfigurations.dart';
+import 'package:openfoodfacts/utils/QueryType.dart';
 
 import 'test_constants.dart';
 
 void main() {
-  setUpAll(() async {
-    new HttpHelper().isTestMode = true;
-  });
 
   group('$OpenFoodAPIClient get raw products', () {
     test('get product test 1', () async {
       String barcode = "8008698011065";
       ProductResult result = await OpenFoodAPIClient.getProductRaw(
           barcode, OpenFoodFactsLanguage.GERMAN,
-          user: TestConstants.TEST_USER);
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -32,9 +29,9 @@ void main() {
       expect(result.product.ingredientsTextDE.isNotEmpty, true);
       expect(result.product.ingredients != null, true);
       expect(result.product.ingredients.isNotEmpty, true);
-      expect(result.product.ingredients.first.text, "Sauerteig");
+      expect(result.product.ingredients.first.text, "Maisstärke");
       expect(result.product.selectedImages != null, true);
-      expect(result.product.selectedImages.length, 18);
+      expect(result.product.selectedImages.length, 15);
       expect(
           result.product.selectedImages
               .singleWhere((image) =>
@@ -42,9 +39,9 @@ void main() {
                   image.size == ImageSize.DISPLAY &&
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
-          "https://static.openfoodfacts.org/images/products/800/869/801/1065/ingredients_de.269.400.jpg");
+          "https://static.openfoodfacts.net/images/products/800/869/801/1065/ingredients_de.27.400.jpg");
       expect(result.product.images != null, true);
-      expect(result.product.images.length, 24);
+      expect(result.product.images.length, 20);
       expect(
           result.product.images
               .singleWhere((image) =>
@@ -52,8 +49,8 @@ void main() {
                   image.size == ImageSize.DISPLAY &&
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .rev,
-          269);
-      expect(result.product.labelsTags.contains("en:gluten-free"), false);
+          27);
+      expect(result.product.labelsTags.contains("en:gluten-free"), true);
       expect(result.product.tracesTags != null, true);
       expect(result.product.tracesTags.contains("en:lupin"), true);
 
@@ -68,7 +65,7 @@ void main() {
       expect(result.product.nutriments.proteins, 4.5);
       expect(result.product.nutriments.novaGroup, 4);
 
-      expect(result.product.additives.ids.isEmpty, false);
+      expect(result.product.additives.ids.isEmpty, true);
 
       expect(
           result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SUGARS],
@@ -81,6 +78,8 @@ void main() {
           Level.LOW);
       expect(result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SALT],
           Level.MODERATE);
+      expect(result.product.countries,
+          "Belgique,France,Allemagne,Pays-Bas,Espagne,Suisse");
     });
 
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',
@@ -91,7 +90,7 @@ void main() {
           language: OpenFoodFactsLanguage.ENGLISH,
           fields: [ProductField.ALL]);
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
-          user: TestConstants.TEST_USER);
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
       expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
@@ -110,7 +109,7 @@ void main() {
 
       ProductResult result = await OpenFoodAPIClient.getProductRaw(
           barcode, OpenFoodFactsLanguage.GERMAN,
-          user: TestConstants.TEST_USER);
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
       expect(result != null, true);
       expect(result.status, 1);

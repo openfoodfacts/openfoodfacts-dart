@@ -9,12 +9,6 @@ import 'test_constants.dart';
 
 void main() {
   group('$OpenFoodAPIClient add product images', () {
-/*    setUpAll(() async {
-      // test mode is not working here.
-      // image uploads are addressed to production database in every case. Oo
-      new HttpHelper().isTestMode = true;
-    });*/
-
     test('add front image test', () async {
       SendImage image = new SendImage(
         lang: OpenFoodFactsLanguage.GERMAN,

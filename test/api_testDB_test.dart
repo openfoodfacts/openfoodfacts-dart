@@ -11,7 +11,7 @@ import 'test_constants.dart';
 
 void main() {
   group('$OpenFoodAPIClient add new products', () {
-    String barcode_1 = "0048151620000";
+    String barcode_1 = "0101010101010";
     String quantity_1 = "230g";
     String servingSize_1 = "100g";
     double servingQuantity_1 = 100;
@@ -79,7 +79,8 @@ void main() {
         imageUrl: Uri.parse("assets/front_de.jpg"),
       );
       Status status = await OpenFoodAPIClient.addProductImage(
-          TestConstants.TEST_USER, image, queryType: QueryType.TEST);
+          TestConstants.TEST_USER, image,
+          queryType: QueryType.TEST);
 
       expect(status != null, true);
       expect(status.status, "status not ok");
@@ -128,13 +129,14 @@ void main() {
     ];
 
     ProductSearchQueryConfiguration configuration =
-    ProductSearchQueryConfiguration(
-        parametersList: parameters,
-        fields: [ProductField.ALL],
-        language: OpenFoodFactsLanguage.GERMAN);
+        ProductSearchQueryConfiguration(
+            parametersList: parameters,
+            fields: [ProductField.ALL],
+            language: OpenFoodFactsLanguage.GERMAN);
 
     SearchResult result = await OpenFoodAPIClient.searchProducts(
-        TestConstants.TEST_USER, configuration, queryType: QueryType.TEST);
+        TestConstants.TEST_USER, configuration,
+        queryType: QueryType.TEST);
 
     expect(result != null, true);
     expect(result.page, 1);
@@ -149,7 +151,6 @@ void main() {
   });
 
   test('query potatoes products', () async {
-
     PnnsGroupQueryConfiguration configuration = PnnsGroupQueryConfiguration(
       PnnsGroup2.POTATOES,
       page: 3,
@@ -158,7 +159,8 @@ void main() {
     );
 
     SearchResult result = await OpenFoodAPIClient.queryPnnsGroup(
-        TestConstants.TEST_USER, configuration, queryType: QueryType.TEST);
+        TestConstants.TEST_USER, configuration,
+        queryType: QueryType.TEST);
 
     expect(result != null, true);
     expect(result.page, 3);
@@ -175,7 +177,7 @@ void main() {
     InsightsResult result = await OpenFoodAPIClient.getRandomInsight(
         TestConstants.TEST_USER,
         type: InsightType.CATEGORY,
-    queryType: QueryType.TEST);
+        queryType: QueryType.TEST);
 
     expect(result != null, true);
     expect(result.status == null, true);
@@ -191,7 +193,8 @@ void main() {
 
   test('get product insights', () async {
     InsightsResult result = await OpenFoodAPIClient.getProductInsights(
-        "8025386005564", TestConstants.TEST_USER, queryType: QueryType.TEST);
+        "8025386005564", TestConstants.TEST_USER,
+        queryType: QueryType.TEST);
 
     expect(result != null, true);
     expect(result.status != null, true);
@@ -208,12 +211,13 @@ void main() {
 
   test('get questions for Noix de Saint-Jacques EN', () async {
     RobotoffQuestionResult result =
-    await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
-        "3274570800026", "en", TestConstants.TEST_USER,
-        count: 1, queryType: QueryType.TEST);
+        await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
+            "3274570800026", "en", TestConstants.TEST_USER,
+            count: 1, queryType: QueryType.TEST);
 
-    if(result.status == "no_questions") {
-      print("No question found for this product, please try with another barcode");
+    if (result.status == "no_questions") {
+      print(
+          "No question found for this product, please try with another barcode");
     } else {
       expect(result != null, true);
       expect(result.status != null, true);
@@ -234,9 +238,9 @@ void main() {
 
   test('get 2 random questions', () async {
     RobotoffQuestionResult result =
-    await OpenFoodAPIClient.getRandomRobotoffQuestion(
-        "fr", TestConstants.TEST_USER,
-        types: [InsightType.CATEGORY], count: 2, queryType: QueryType.TEST);
+        await OpenFoodAPIClient.getRandomRobotoffQuestion(
+            "fr", TestConstants.TEST_USER,
+            types: [InsightType.CATEGORY], count: 2, queryType: QueryType.TEST);
 
     expect(result != null, true);
     expect(result.status != null, true);
@@ -248,15 +252,16 @@ void main() {
 
   test('get questions for Noix de Saint-Jacques EN and answer', () async {
     RobotoffQuestionResult result =
-    await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
-        "0080868000633", "en", TestConstants.TEST_USER,
-        count: 1);
+        await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
+            "0080868000633", "en", TestConstants.TEST_USER,
+            count: 1);
 
     if (result.status == "found") {
       Status postResult = await OpenFoodAPIClient.postInsightAnnotation(
           result.questions[0].insightId,
           InsightAnnotation.YES,
-          TestConstants.TEST_USER, queryType: QueryType.TEST);
+          TestConstants.TEST_USER,
+          queryType: QueryType.TEST);
       expect(postResult.status, "saved");
     } else if (result.status == "no_questions") {
       print("No question found for this product");
@@ -268,8 +273,8 @@ void main() {
 
   test('get farine de blé spelling corrections', () async {
     SpellingCorrection result =
-    await OpenFoodAPIClient.getIngredientSpellingCorrection(
-        ingredientName: "fqrine de blé", queryType: QueryType.TEST);
+        await OpenFoodAPIClient.getIngredientSpellingCorrection(
+            ingredientName: "fqrine de blé", queryType: QueryType.TEST);
 
     expect(result != null, true);
     expect(result.corrected, "farine de blé");

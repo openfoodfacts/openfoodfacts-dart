@@ -15,8 +15,6 @@ class HttpHelper {
   factory HttpHelper() => _singleton;
   HttpHelper._internal();
 
-  /// use the basic authentication credentials "off:off" to switch to the test server via htaccess
-  bool isTestMode = false;
 
   static const String USER_AGENT = "Dart API";
   static const String FROM = "anonymous";
@@ -46,13 +44,7 @@ class HttpHelper {
           isTestModeActive: queryType == QueryType.PROD ? false : true),
       body: body,
     );
-
-    print(uri);
-    print(body);
-    print(_buildHeaders(user,
-        isTestModeActive: queryType == QueryType.PROD ? false : true));
-
-    return response;
+        return response;
   }
 
   /// Send a multipart post request to the specified uri.
@@ -78,8 +70,6 @@ class HttpHelper {
       request.files.add(multipartFile);
     }
 
-    print("body " + body.toString());
-    print("files " + files.toString());
 
     // get the response status
     Status status = await request.send().then((response) {

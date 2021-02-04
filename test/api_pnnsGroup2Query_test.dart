@@ -1,22 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/SearchResult.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
+import 'package:openfoodfacts/utils/QueryType.dart';
 
 import 'test_constants.dart';
 
 void main() {
-  setUpAll(() async {
-    new HttpHelper().isTestMode = true;
-  });
-
   group('$OpenFoodAPIClient search products', () {
     test('query potatoes products', () async {
-
       PnnsGroupQueryConfiguration configuration = PnnsGroupQueryConfiguration(
         PnnsGroup2.POTATOES,
         page: 3,
@@ -25,7 +20,10 @@ void main() {
       );
 
       SearchResult result = await OpenFoodAPIClient.queryPnnsGroup(
-          TestConstants.TEST_USER, configuration);
+        TestConstants.TEST_USER,
+        configuration,
+        queryType: QueryType.TEST,
+      );
 
       expect(result != null, true);
       expect(result.page, 3);
@@ -38,5 +36,4 @@ void main() {
       print(result.products[2].toData().toString());
     });
   });
-
 }
