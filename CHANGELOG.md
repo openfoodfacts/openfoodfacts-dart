@@ -1,4 +1,5 @@
 ## [0.3.15] - 04.02.2021
+- Refactored tests to use the Open Food Facts test database (thanks to Mohamed Boussaid)
 - Added packaging image type
 - Allow setting the country code cc field
 - Added countries and countries tags to Product (thanks to Mohamed Boussaid)
