@@ -3,16 +3,12 @@ import 'package:openfoodfacts/model/Additives.dart';
 import 'package:openfoodfacts/model/Nutriments.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/Status.dart';
-import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
+import 'package:openfoodfacts/utils/QueryType.dart';
 import 'test_constants.dart';
 
 void main() {
   group('$OpenFoodAPIClient add new products', () {
-    setUpAll(() async {
-      HttpHelper().isTestMode = true;
-    });
-
     String barcode_1 = "0048151623426";
     String quantity_1 = "230g";
     String servingSize_1 = "100g";
@@ -55,8 +51,11 @@ void main() {
               "fortified wheat flour, chocolate chips (25%), sugar, palm oil,  golden syrup, whey and whey derivatives (milk), raising agents, salt, flavouring",
           nutriments: Nutriments(novaGroup: 4),
           additives: Additives(["en:e150d"], ["E150d"]));
-      Status status =
-          await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product);
+      Status status = await OpenFoodAPIClient.saveProduct(
+        TestConstants.TEST_USER,
+        product,
+        queryType: QueryType.TEST,
+      );
 
       expect(status != null, true);
       expect(status.status, 1);
@@ -66,28 +65,31 @@ void main() {
           barcode_1,
           language: OpenFoodFactsLanguage.ENGLISH,
           fields: [ProductField.ALL]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
-          user: TestConstants.TEST_USER);
+      ProductResult result = await OpenFoodAPIClient.getProduct(
+        configurations,
+        user: TestConstants.TEST_USER,
+        queryType: QueryType.TEST,
+      );
 
       testProductResult1(result);
 
       // save and get the existing product to test, if no attributes get lost
-      Product product2 = Product(
-          barcode: barcode_1,
-          productName: "Maryland Choc Chip");
-      Status status2 = await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product2);
+      Product product2 =
+          Product(barcode: barcode_1, productName: "Maryland Choc Chip");
+      Status status2 = await OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER, product2,
+          queryType: QueryType.TEST);
       expect(status2 != null, true);
       expect(status2.status, 1);
       expect(status2.statusVerbose, "fields saved");
 
       ProductResult result2 = await OpenFoodAPIClient.getProduct(configurations,
-          user: TestConstants.TEST_USER);
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
       testProductResult1(result2);
     });
 
     test('dont overwrite language', () async {
-
       String barcode = "4008391212596";
 
       // save french product name
@@ -99,7 +101,11 @@ void main() {
         lang: OpenFoodFactsLanguage.FRENCH,
       );
 
-      Status frenchStatus = await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, frenchProduct);
+      Status frenchStatus = await OpenFoodAPIClient.saveProduct(
+        TestConstants.TEST_USER,
+        frenchProduct,
+        queryType: QueryType.TEST,
+      );
       expect(frenchStatus != null, true);
       expect(frenchStatus.status, 1);
       expect(frenchStatus.statusVerbose, "fields saved");
@@ -113,18 +119,24 @@ void main() {
         lang: OpenFoodFactsLanguage.GERMAN,
       );
 
-      Status germanStatus = await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, germanProduct);
+      Status germanStatus = await OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER, germanProduct,
+          queryType: QueryType.TEST);
       expect(germanStatus != null, true);
       expect(germanStatus.status, 1);
       expect(germanStatus.statusVerbose, "fields saved");
-
 
       // get french product
       ProductQueryConfiguration frenchConfig = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.FRENCH,
-          fields: [ProductField.NAME, ProductField.BRANDS, ProductField.QUANTITY]);
-      var frenchResult = await OpenFoodAPIClient.getProduct(frenchConfig);
+          fields: [
+            ProductField.NAME,
+            ProductField.BRANDS,
+            ProductField.QUANTITY
+          ]);
+      var frenchResult = await OpenFoodAPIClient.getProduct(frenchConfig,
+          queryType: QueryType.TEST);
       assert(frenchResult != null);
       assert(frenchResult.product != null);
       assert(frenchResult.product.productName != null);
@@ -134,15 +146,19 @@ void main() {
       ProductQueryConfiguration germanConfig = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
-          fields: [ProductField.NAME, ProductField.BRANDS, ProductField.QUANTITY]);
-      var germanResult = await OpenFoodAPIClient.getProduct(germanConfig);
+          fields: [
+            ProductField.NAME,
+            ProductField.BRANDS,
+            ProductField.QUANTITY
+          ]);
+      var germanResult = await OpenFoodAPIClient.getProduct(germanConfig,
+          queryType: QueryType.TEST);
 
       assert(germanResult != null);
       assert(germanResult.product != null);
       assert(germanResult.product.productName != null);
       print("german product name: " + germanResult.product.productName);
     });
-
 
     test('add new product test 2', () async {
       Product product = Product(
@@ -152,8 +168,9 @@ void main() {
         brands: "Schär",
         lang: OpenFoodFactsLanguage.GERMAN,
       );
-      Status status =
-          await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product);
+      Status status = await OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER, product,
+          queryType: QueryType.TEST);
 
       expect(status != null, true);
       expect(status.status, 1);
@@ -170,8 +187,9 @@ void main() {
         ingredientsText:
             "Johanneskraut, Maisöl, Phospholipide (Sojabohnen, Ponceau 4R)",
       );
-      Status status =
-          await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product);
+      Status status = await OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER, product,
+          queryType: QueryType.TEST);
 
       expect(status != null, true);
       expect(status.status, 1);
@@ -188,8 +206,9 @@ void main() {
           ingredientsText:
               "Säurungsmittel Citronensäure, Calciumcarbonat, Natriumhydrogencarbonat",
           categories: "Nahrungsergänzungsmittel, Vitamine");
-      Status status =
-          await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product);
+      Status status = await OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER, product,
+          queryType: QueryType.TEST);
 
       expect(status != null, true);
       expect(status.status, 1);
@@ -197,7 +216,6 @@ void main() {
     });
 
     test('add new product test 5', () async {
-
       var nutriments = Nutriments();
       nutriments.energy = 365;
       nutriments.carbohydrates = 12;
@@ -212,12 +230,13 @@ void main() {
 
       print(product.toData());
 
-      /*Status status =
-      await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product);
+      Status status = await OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER, product,
+          queryType: QueryType.TEST);
 
       expect(status != null, true);
       expect(status.status, 1);
-      expect(status.statusVerbose, "fields saved");*/
+      expect(status.statusVerbose, "fields saved");
     });
   });
 }

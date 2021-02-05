@@ -1,11 +1,14 @@
 import 'package:image/image.dart';
+import 'package:openfoodfacts/utils/QueryType.dart';
 import '../model/ProductImage.dart';
 import 'LanguageHelper.dart';
 
 class ImageHelper {
   static const int MAX_IMAGE_SIZE = 2048;
-  static const String IMAGE_URL_BASE =
+  static const String IMAGE_PROD_URL_BASE =
       "https://static.openfoodfacts.org/images/products/";
+  static const String IMAGE_TEST_URL_BASE =
+      "https://static.openfoodfacts.net/images/products/";
 
   static Image resize(Image image, {int maxSize = MAX_IMAGE_SIZE}) {
     // check if the image is already small enough
@@ -23,7 +26,8 @@ class ImageHelper {
 
   // build the image url
   // e.g. https://static.openfoodfacts.org/images/products/359/671/046/2858/front_fr.4.100.jpg"
-  static String buildUrl(String barcode, ProductImage image) {
+  static String buildUrl(String barcode, ProductImage image,
+      {QueryType queryType = QueryType.PROD}) {
     if (barcode == null || image == null) {
       return null;
     }
@@ -38,8 +42,7 @@ class ImageHelper {
       barcodeUrl = p1 + "/" + p2 + "/" + p3 + "/" + p4;
     }
 
-    return IMAGE_URL_BASE +
-        barcodeUrl +
+    String urlHelper = barcodeUrl +
         "/" +
         image.field.value +
         "_" +
@@ -49,5 +52,10 @@ class ImageHelper {
         "." +
         image.size.toNumber() +
         ".jpg";
+
+    return queryType == QueryType.PROD
+        ? IMAGE_PROD_URL_BASE + urlHelper
+        : IMAGE_TEST_URL_BASE + urlHelper;
+
   }
 }

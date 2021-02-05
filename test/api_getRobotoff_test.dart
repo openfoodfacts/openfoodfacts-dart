@@ -3,23 +3,21 @@ import 'package:openfoodfacts/model/Insight.dart';
 import 'package:openfoodfacts/model/RobotoffQuestion.dart';
 import 'package:openfoodfacts/model/SpellingCorrections.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/HttpHelper.dart';
+import 'package:openfoodfacts/utils/QueryType.dart';
 import 'test_constants.dart';
 
 void main() {
-  setUpAll(() async {
-    new HttpHelper().isTestMode = true;
-  });
 
   group('$OpenFoodAPIClient get robotoff questions', () {
     test('get questions for Noix de Saint-Jacques EN', () async {
       RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
               "3274570800026", "en", TestConstants.TEST_USER,
-              count: 1);
+              queryType: QueryType.PROD, count: 1);
 
-      if(result.status == "no_questions") {
-        print("No question found for this product, please try with another barcode");
+      if (result.status == "no_questions") {
+        print(
+            "No question found for this product, please try with another barcode");
       } else {
         expect(result != null, true);
         expect(result.status != null, true);
@@ -41,10 +39,12 @@ void main() {
     test('get questions for Noix de Saint-Jacques FR', () async {
       RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
-              "3274570800026", "fr", TestConstants.TEST_USER);
+              "3274570800026", "fr", TestConstants.TEST_USER,
+              queryType: QueryType.TEST);
 
-      if(result.status == "no_questions") {
-        print("No question found for this product, please try with another barcode");
+      if (result.status == "no_questions") {
+        print(
+            "No question found for this product, please try with another barcode");
       } else {
         expect(result != null, true);
         expect(result.status != null, true);
@@ -61,15 +61,15 @@ void main() {
         expect(result.questions[0].imageUrl,
             "https://static.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg");
       }
-
-
     });
 
     test('get 2 random questions', () async {
       RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRandomRobotoffQuestion(
               "fr", TestConstants.TEST_USER,
-              types: [InsightType.CATEGORY], count: 2);
+              queryType: QueryType.TEST,
+              types: [InsightType.CATEGORY],
+              count: 2);
 
       expect(result != null, true);
       expect(result.status != null, true);
@@ -84,6 +84,7 @@ void main() {
     test('get random insight', () async {
       InsightsResult result = await OpenFoodAPIClient.getRandomInsight(
           TestConstants.TEST_USER,
+          queryType: QueryType.TEST,
           type: InsightType.CATEGORY);
 
       expect(result != null, true);
@@ -100,7 +101,8 @@ void main() {
 
     test('get product insights', () async {
       InsightsResult result = await OpenFoodAPIClient.getProductInsights(
-          "8025386005564", TestConstants.TEST_USER);
+          "8025386005564", TestConstants.TEST_USER,
+          queryType: QueryType.TEST);
 
       expect(result != null, true);
       expect(result.status != null, true);
@@ -120,7 +122,9 @@ void main() {
     test('get farine de blé spelling corrections', () async {
       SpellingCorrection result =
           await OpenFoodAPIClient.getIngredientSpellingCorrection(
-              ingredientName: "fqrine de blé");
+              user: TestConstants.TEST_USER,
+              ingredientName: "fqrine de blé",
+              queryType: QueryType.TEST);
 
       expect(result != null, true);
       expect(result.corrected, "farine de blé");
