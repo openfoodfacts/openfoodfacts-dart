@@ -63,11 +63,7 @@ void main() {
       // only german ingredients
       expect(result.product.ingredientsText != null, true);
 
-      print(result.product.ingredientsText);
       expect(result.product.ingredients != null, true);
-      result.product.ingredients.forEach((element) {
-        print(element.toData().toString());
-      });
       expect(result.product.ingredients.length, 11);
 
       expect(result.product.ingredients.any((i) => i.text == "Wasser"), true);
@@ -153,7 +149,6 @@ void main() {
       expect(result.product.nutriments.proteinsServing != null, true);
       expect(result.product.nutriments.fatServing != null, true);
 
-      print(result.product.nutriments.carbohydratesServing);
       expect(result.product.countries, "United States");
     });
 
@@ -176,7 +171,6 @@ void main() {
 
       // only german ingredients
       expect(result.product.ingredientsText != null, true);
-      print(result.product.ingredientsText);
 
       expect(result.product.ingredients != null, true);
       expect(result.product.ingredients.length, 21);
@@ -285,7 +279,6 @@ void main() {
 
       // only france ingredients
       expect(result.product.ingredientsText != null, true);
-      print(result.product.ingredientsText);
 
       expect(result.product.ingredients != null, true);
       expect(result.product.ingredients.length, 3);
@@ -377,9 +370,6 @@ void main() {
       expect(result.product.nutriments.proteins, 0.6);
       expect(result.product.nutriments.novaGroup, 3);
       expect(result.product.storesTags.length, 1);
-
-      print(result.product.labelsTagsTranslated);
-      print(result.product.categoriesTagsTranslated);
 
       expect(result.product.countriesTags, ["en:france"]);
     });
@@ -561,7 +551,6 @@ void main() {
       assert(group != null);
       final List<Attribute> nutritionalQuality = group.attributes;
       assert(nutritionalQuality.first.id == 'nutriscore');
-      print(nutritionalQuality.first.toJson());
       assert(nutritionalQuality.first.settingName == null);
       assert(nutritionalQuality.first.settingNote == null);
       assert(nutritionalQuality.first.description == '');
@@ -603,14 +592,9 @@ void main() {
       expect(result.product != null, true);
       expect(result.product.barcode, barcode);
       expect(result.product.lastModified != null, true);
-      print("last modified: " + result.product.lastModified.toIso8601String());
       expect(result.product.ingredientsText != null, true);
 
-      print(result.product.ingredientsText);
       expect(result.product.ingredients != null, true);
-      result.product.ingredients.forEach((element) {
-        print(element.toData().toString());
-      });
       expect(result.product.ingredients.length, 13);
       expect(result.product.ingredients.any((i) => i.text == "e150d"), true);
 
@@ -649,15 +633,10 @@ void main() {
       expect(result.product != null, true);
       expect(result.product.barcode, barcode);
       expect(result.product.lastModified != null, true);
-      print("last modified: " + result.product.lastModified.toIso8601String());
 
       expect(result.product.ingredientsText != null, true);
 
-      print(result.product.ingredientsText);
       expect(result.product.ingredients != null, true);
-      result.product.ingredients.forEach((element) {
-        print(element.toData().toString());
-      });
       expect(result.product.ingredients.length, 11);
 
       expect(result.product.ingredients.any((i) => i.text == "Wasser"), true);
@@ -700,15 +679,10 @@ void main() {
       expect(result.product != null, true);
       expect(result.product.barcode, barcode);
       expect(result.product.lastModified != null, true);
-      print("last modified: " + result.product.lastModified.toIso8601String());
 
       expect(result.product.ingredientsText != null, true);
 
-      print(result.product.ingredientsText);
       expect(result.product.ingredients != null, true);
-      result.product.ingredients.forEach((element) {
-        print(element.toData().toString());
-      });
       expect(result.product.ingredients.length, 11);
 
       expect(result.product.ingredients.any((i) => i.text == "Wasser"), true);

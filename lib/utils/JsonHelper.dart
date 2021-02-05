@@ -112,7 +112,6 @@ class JsonHelper {
     try {
       return double.parse(data);
     } catch (e) {
-      print("Unable to parse data to double : $e");
       return null;
     }
   }

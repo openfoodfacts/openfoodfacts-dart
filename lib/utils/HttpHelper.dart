@@ -63,8 +63,6 @@ class HttpHelper {
     // add all file entries to the request
     for (MapEntry<String, Uri> entry in files.entries) {
       List<int> fileBytes = await File.fromUri(entry.value).readAsBytes();
-      //print(fileBytes.toString());
-
       var multipartFile = new http.MultipartFile.fromBytes(entry.key, fileBytes,
           filename: basename(entry.value.toString()));
       request.files.add(multipartFile);
@@ -75,15 +73,12 @@ class HttpHelper {
     Status status = await request.send().then((response) {
       if (response.statusCode == 200) {
         return response.stream.first.then((responseBody) {
-          //print(utf8.decode(responseBody));
           return Status.fromJson(json.decode(utf8.decode(responseBody)));
         });
       } else {
-        print("Error: " + response.statusCode.toString());
         return Status(status: response.statusCode);
       }
     });
-    print(status.toJson().toString());
     return status;
   }
 
@@ -99,7 +94,6 @@ class HttpHelper {
     if (isTestModeActive) {
       var token = 'Basic ' + base64Encode(utf8.encode('off:off'));
       headers.addAll({'authorization': token});
-      print("TEST-MODE");
     }
 
     return headers;

@@ -15,10 +15,7 @@ void main() {
               "3274570800026", "en", TestConstants.TEST_USER,
               queryType: QueryType.PROD, count: 1);
 
-      if (result.status == "no_questions") {
-        print(
-            "No question found for this product, please try with another barcode");
-      } else {
+      if (result.status != "no_questions") {
         expect(result != null, true);
         expect(result.status != null, true);
         expect(result.status, "found");
@@ -42,10 +39,7 @@ void main() {
               "3274570800026", "fr", TestConstants.TEST_USER,
               queryType: QueryType.TEST);
 
-      if (result.status == "no_questions") {
-        print(
-            "No question found for this product, please try with another barcode");
-      } else {
+      if (result.status != "no_questions") {
         expect(result != null, true);
         expect(result.status != null, true);
         expect(result.status, "found");

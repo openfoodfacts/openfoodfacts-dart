@@ -128,8 +128,6 @@ class OpenFoodAPIClient {
         path: 'api/v0/product/' + barcode + '.json',
         queryParameters: {"lc": language.code});
 
-    print(productUri.toString());
-
     Response response = await HttpHelper()
         .doGetRequest(productUri, user: user, queryType: queryType);
     var result = ProductResult.fromJson(json.decode(response.body));
@@ -153,8 +151,6 @@ class OpenFoodAPIClient {
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
         path: 'api/v0/product/${configuration.barcode}.json',
         queryParameters: configuration.getParametersMap());
-
-    print(productUri.toString());
 
     Response response = await HttpHelper()
         .doGetRequest(productUri, user: user, queryType: queryType);
@@ -192,8 +188,6 @@ class OpenFoodAPIClient {
         path: '/cgi/search.pl',
         queryParameters: queryParameters);
 
-    print("URI: " + searchUri.toString());
-
     Response response = await HttpHelper()
         .doGetRequest(searchUri, user: user, queryType: queryType);
     var result = SearchResult.fromJson(json.decode(response.body));
@@ -229,8 +223,6 @@ class OpenFoodAPIClient {
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
         path: '/pnns-group-2/${configuration.group.id}/${configuration.page}',
         queryParameters: queryParameters);
-
-    print("URI: " + searchUri.toString());
 
     Response response = await HttpHelper()
         .doGetRequest(searchUri, user: user, queryType: queryType);
@@ -285,8 +277,6 @@ class OpenFoodAPIClient {
       queryParameters: parameters,
     );
 
-    print(insightUri);
-
     Response response = await HttpHelper()
         .doGetRequest(insightUri, user: user, queryType: QueryType.PROD);
     var result =
@@ -305,8 +295,6 @@ class OpenFoodAPIClient {
           : URI_PROD_HOST_ROBOTOFF, // once the Robotoff is added to the test DB this can be changed to URI_TEST_HOST_ROBOTOFF
       path: 'api/v1/insights/$barcode',
     );
-
-    print(insightsUri);
 
     Response response = await HttpHelper()
         .doGetRequest(insightsUri, user: user, queryType: QueryType.PROD);
@@ -341,7 +329,6 @@ class OpenFoodAPIClient {
       queryParameters: parameters,
     );
 
-    print(robotoffQuestionUri);
     Response response = await HttpHelper()
         .doGetRequest(robotoffQuestionUri, user: user, queryType: QueryType.PROD);
     var result = RobotoffQuestionResult.fromJson(
@@ -381,8 +368,6 @@ class OpenFoodAPIClient {
       path: 'api/v1/questions/random',
       queryParameters: parameters,
     );
-
-    print(robotoffQuestionUri);
 
     Response response = await HttpHelper()
         .doGetRequest(robotoffQuestionUri, user: user, queryType:  QueryType.PROD);
@@ -443,7 +428,6 @@ class OpenFoodAPIClient {
         path: 'api/v1/predict/ingredients/spellcheck',
         queryParameters: spellingCorrectionParam);
 
-    print(spellingCorrectionUri);
     Response response = await HttpHelper()
         .doGetRequest(spellingCorrectionUri, user: user, queryType: QueryType.PROD);
     SpellingCorrection result = SpellingCorrection.fromJson(
