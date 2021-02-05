@@ -1,16 +1,14 @@
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/model/RecommendedDailyIntake.dart';
 import 'package:openfoodfacts/utils/UnitHelper.dart';
 
 void main() {
-
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('Get Recommendations', () {
-
     test('Get', () {
-      RecommendedDailyIntake rdi = RecommendedDailyIntake.getRecommendedDailyIntakes();
+      RecommendedDailyIntake rdi =
+          RecommendedDailyIntake.getRecommendedDailyIntakes();
 
       expect(rdi.energyKcal.value == 2000, true);
       expect(rdi.energyKcal.unit == Unit.KCAL, true);
@@ -36,7 +34,5 @@ void main() {
       expect(rdi.magnesium.value == 375, true);
       expect(rdi.magnesium.unit == Unit.MILLI_G, true);
     });
-
   });
-
 }
