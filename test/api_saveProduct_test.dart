@@ -15,24 +15,19 @@ void main() {
     double servingQuantity_1 = 100;
 
     void testProductResult1(ProductResult result) {
-      print("test product result");
       expect(result != null, true);
       expect(result.status, 1);
-      print("barcode: " + result.barcode);
       expect(result.barcode, barcode_1);
       expect(result.product != null, true);
       expect(result.product.barcode, barcode_1);
 
       expect(result.product.quantity != null, true);
-      print("quantity: " + result.product.quantity);
       expect(result.product.quantity, quantity_1);
 
       expect(result.product.servingQuantity != null, true);
-      print("servingQuantity: " + result.product.servingQuantity.toString());
       expect(result.product.servingQuantity, servingQuantity_1);
 
       expect(result.product.servingSize != null, true);
-      print("servingSize: " + result.product.servingSize);
       expect(result.product.servingSize, servingSize_1);
     }
 
@@ -140,7 +135,6 @@ void main() {
       assert(frenchResult != null);
       assert(frenchResult.product != null);
       assert(frenchResult.product.productName != null);
-      print("french product name: " + frenchResult.product.productName);
 
       // get german product
       ProductQueryConfiguration germanConfig = ProductQueryConfiguration(
@@ -157,7 +151,6 @@ void main() {
       assert(germanResult != null);
       assert(germanResult.product != null);
       assert(germanResult.product.productName != null);
-      print("german product name: " + germanResult.product.productName);
     });
 
     test('add new product test 2', () async {
@@ -227,8 +220,6 @@ void main() {
           productName: "Chili beans",
           nutrimentDataPer: "100g",
           nutriments: nutriments);
-
-      print(product.toData());
 
       Status status = await OpenFoodAPIClient.saveProduct(
           TestConstants.TEST_USER, product,

@@ -40,9 +40,6 @@ void main() {
       expect(result.products.length, 10);
       expect(result.products[0].runtimeType, Product);
       expect(result.count > 30000, true);
-
-      print(result.products[2].toData().toString());
-      result.products[3].ingredients.forEach((i) => print(i.text));
     });
 
     test('search favorite products EN', () async {
@@ -71,8 +68,6 @@ void main() {
       expect(result.products.length, 3);
       expect(result.products[0].runtimeType, Product);
       expect(result.count > 30000, true);
-
-      print(result.products[0].toData().toString());
     });
 
     test('type bug : ingredient percent int vs String ', () async {
@@ -94,8 +89,6 @@ void main() {
           TestConstants.TEST_USER, configuration,
           queryType: QueryType.TEST);
 
-      print(result);
-
       expect(result != null, true);
       expect(result.page, 16);
       expect(result.pageSize, 5);
@@ -103,26 +96,6 @@ void main() {
       expect(result.products.length, 5);
       expect(result.products[0].runtimeType, Product);
       expect(result.count > 30000, true);
-
-      print(result.products[0].toData().toString());
-      result.products[0].ingredients
-          ?.forEach((i) => print(i.percent?.toString()));
-
-      print(result.products[1].toData().toString());
-      result.products[1].ingredients
-          ?.forEach((i) => print(i.percent?.toString()));
-
-      print(result.products[2].toData().toString());
-      result.products[2].ingredients
-          ?.forEach((i) => print(i.percent?.toString()));
-
-      print(result.products[3].toData().toString());
-      result.products[3].ingredients
-          ?.forEach((i) => print(i.percent?.toString()));
-
-      print(result.products[4].toData().toString());
-      result.products[4].ingredients
-          ?.forEach((i) => print(i.percent?.toString()));
     });
 
     test('search products by keywords', () async {
@@ -198,8 +171,6 @@ void main() {
           TestConstants.TEST_USER, configuration,
           queryType: QueryType.TEST);
 
-      print(
-          "Total product count : $totalCount; Filtered count : ${result.count}");
       expect(result.count < totalCount, true);
     });
 
@@ -237,8 +208,6 @@ void main() {
       expect(result.products[0].categoriesTags.contains("en:breakfast-cereals"),
           true);
       expect(result.products[0].nutriscore.toUpperCase() == 'A', true);
-
-      print(result.products[0].toData().toString());
     });
   });
 }

@@ -19,11 +19,6 @@ void main() {
             InsightAnnotation.YES,
             TestConstants.TEST_USER);
         expect(postResult.status, "saved");
-      } else if (result.status == "no_questions") {
-        print("No question found for this product");
-        expect(result.status, "no_questions");
-      } else {
-        print("An error occurred while fetching questions");
       }
     });
   });

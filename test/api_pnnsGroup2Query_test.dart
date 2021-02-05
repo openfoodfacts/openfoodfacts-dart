@@ -32,8 +32,6 @@ void main() {
       expect(result.products.length, 24);
       expect(result.products[0].runtimeType, Product);
       expect(result.count > 1500, true);
-
-      print(result.products[2].toData().toString());
     });
   });
 }
