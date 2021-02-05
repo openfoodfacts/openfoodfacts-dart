@@ -1,3 +1,6 @@
+## [0.3.15+1] - 04.02.2021
+- fix issue with images URLs
+
 ## [0.3.15] - 04.02.2021
 - Refactored tests to use the Open Food Facts test database (thanks to Mohamed Boussaid)
 - Added packaging image type
