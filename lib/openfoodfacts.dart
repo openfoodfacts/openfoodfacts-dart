@@ -288,7 +288,7 @@ class OpenFoodAPIClient {
     print(insightUri);
 
     Response response = await HttpHelper()
-        .doGetRequest(insightUri, user: user, queryType: queryType);
+        .doGetRequest(insightUri, user: user, queryType: QueryType.PROD);
     var result =
         InsightsResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
 
@@ -309,7 +309,7 @@ class OpenFoodAPIClient {
     print(insightsUri);
 
     Response response = await HttpHelper()
-        .doGetRequest(insightsUri, user: user, queryType: queryType);
+        .doGetRequest(insightsUri, user: user, queryType: QueryType.PROD);
 
     return InsightsResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
@@ -343,7 +343,7 @@ class OpenFoodAPIClient {
 
     print(robotoffQuestionUri);
     Response response = await HttpHelper()
-        .doGetRequest(robotoffQuestionUri, user: user, queryType: queryType);
+        .doGetRequest(robotoffQuestionUri, user: user, queryType: QueryType.PROD);
     var result = RobotoffQuestionResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 
@@ -385,7 +385,7 @@ class OpenFoodAPIClient {
     print(robotoffQuestionUri);
 
     Response response = await HttpHelper()
-        .doGetRequest(robotoffQuestionUri, user: user, queryType: queryType);
+        .doGetRequest(robotoffQuestionUri, user: user, queryType:  QueryType.PROD);
     var result = RobotoffQuestionResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 
@@ -410,7 +410,7 @@ class OpenFoodAPIClient {
     };
 
     Response response = await HttpHelper()
-        .doPostRequest(insightUri, annotationData, user, queryType: queryType);
+        .doPostRequest(insightUri, annotationData, user, queryType: QueryType.PROD);
     var status = Status.fromJson(json.decode(response.body));
     return status;
   }
@@ -445,7 +445,7 @@ class OpenFoodAPIClient {
 
     print(spellingCorrectionUri);
     Response response = await HttpHelper()
-        .doGetRequest(spellingCorrectionUri, user: user, queryType: queryType);
+        .doGetRequest(spellingCorrectionUri, user: user, queryType: QueryType.PROD);
     SpellingCorrection result = SpellingCorrection.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 

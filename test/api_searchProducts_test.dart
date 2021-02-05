@@ -141,9 +141,11 @@ void main() {
               fields: [ProductField.ALL],
               language: OpenFoodFactsLanguage.FRENCH);
 
+      //For this query we will use the PROD bcs on the TEST DB the query take
+      // more then 30 sec and this lead to a timeout
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER, configuration,
-          queryType: QueryType.TEST);
+          TestConstants.PROD_USER, configuration,
+          queryType: QueryType.PROD);
 
       expect(result != null, true);
       expect(result.page, 2);

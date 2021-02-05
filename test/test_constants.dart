@@ -7,4 +7,10 @@ class TestConstants {
     password: "iloveflutter",
     comment: "dart API test",
   );
+
+  static const User PROD_USER = const User(
+    userId: "grumpf@gmx.de",
+    password: "takeitorleaveit",
+    comment: "dart API test",
+  );
 }

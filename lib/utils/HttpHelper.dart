@@ -56,7 +56,7 @@ class HttpHelper {
       {QueryType queryType = QueryType.PROD}) async {
     var request = new http.MultipartRequest("POST", uri);
     request.headers.addAll(_buildHeaders(user,
-        isTestModeActive: queryType == QueryType.PROD ? true : false));
+        isTestModeActive: queryType == QueryType.PROD ? false : true));
     request.headers.addAll({'Content-Type': 'multipart/form-data'});
     request.fields.addAll(body);
 

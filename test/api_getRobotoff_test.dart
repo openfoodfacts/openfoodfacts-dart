@@ -13,7 +13,7 @@ void main() {
       RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
               "3274570800026", "en", TestConstants.TEST_USER,
-              queryType: QueryType.TEST, count: 1);
+              queryType: QueryType.PROD, count: 1);
 
       if (result.status == "no_questions") {
         print(

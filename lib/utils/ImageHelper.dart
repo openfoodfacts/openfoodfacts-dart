@@ -42,18 +42,20 @@ class ImageHelper {
       barcodeUrl = p1 + "/" + p2 + "/" + p3 + "/" + p4;
     }
 
+    String urlHelper = barcodeUrl +
+        "/" +
+        image.field.value +
+        "_" +
+        image.language.code +
+        "." +
+        image.rev.toString() +
+        "." +
+        image.size.toNumber() +
+        ".jpg";
+
     return queryType == QueryType.PROD
-        ? IMAGE_PROD_URL_BASE
-        : IMAGE_TEST_URL_BASE +
-            barcodeUrl +
-            "/" +
-            image.field.value +
-            "_" +
-            image.language.code +
-            "." +
-            image.rev.toString() +
-            "." +
-            image.size.toNumber() +
-            ".jpg";
+        ? IMAGE_PROD_URL_BASE + urlHelper
+        : IMAGE_TEST_URL_BASE + urlHelper;
+
   }
 }
