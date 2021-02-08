@@ -6,7 +6,6 @@ import 'dart:async';
 import 'package:http/http.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
-import 'package:openfoodfacts/utils/OcrIngredientsField.dart';
 import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
@@ -447,7 +446,7 @@ class OpenFoodAPIClient {
   /// By default the query will hit the PROD DB
 
   static Future<OcrIngredientsResult> extractIngredients(
-      User user, String barcode, OcrIngredientsField ocrIngredientsField,
+      User user, String barcode, OpenFoodFactsLanguage language,
       {OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
       QueryType queryType = QueryType.PROD}) async {
 
@@ -458,7 +457,7 @@ class OpenFoodAPIClient {
         queryParameters: {
           "code": barcode,
           "process_image": "1",
-          "id": ocrIngredientsField.key,
+          "id": "ingredients_${language.code}",
           "ocr_engine": OcrField.GOOGLE_CLOUD_VISION.key
         });
 
