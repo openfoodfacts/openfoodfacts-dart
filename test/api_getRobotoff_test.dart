@@ -1,14 +1,15 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:openfoodfacts/model/Insight.dart';
-import 'package:openfoodfacts/model/RobotoffQuestion.dart';
-import 'package:openfoodfacts/model/SpellingCorrections.dart';
-import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/QueryType.dart';
-import 'test_constants.dart';
+//import 'package:flutter_test/flutter_test.dart';
+//import 'package:openfoodfacts/model/Insight.dart';
+//import 'package:openfoodfacts/model/RobotoffQuestion.dart';
+//import 'package:openfoodfacts/model/SpellingCorrections.dart';
+//import 'package:openfoodfacts/openfoodfacts.dart';
+//import 'package:openfoodfacts/utils/QueryType.dart';
+//import 'test_constants.dart';
 
+/*
 void main() {
 
-/*  group('$OpenFoodAPIClient get robotoff questions', () {
+  group('$OpenFoodAPIClient get robotoff questions', () {
     test('get questions for Noix de Saint-Jacques EN', () async {
       RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
@@ -126,5 +127,6 @@ void main() {
       expect(result.termCorrections.length, 1);
       expect(result.termCorrections[0].corrections, null);
     });
-  });*/
+  });x
 }
+ */
