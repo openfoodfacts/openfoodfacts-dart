@@ -30,7 +30,7 @@ Map<String, dynamic> _$EcoscoreDataToJson(EcoscoreData instance) {
   writeNotNull('grade', instance.grade);
   writeNotNull('score', instance.score);
   writeNotNull('status', _$EcoscoreStatusEnumMap[instance.status]);
-  writeNotNull('adjustments', instance.adjustments);
+  writeNotNull('adjustments', instance.adjustments?.toJson());
   return val;
 }
 

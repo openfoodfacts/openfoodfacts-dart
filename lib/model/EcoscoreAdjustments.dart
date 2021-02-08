@@ -5,7 +5,7 @@ import 'Packaging.dart';
 
 part 'EcoscoreAdjustments.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class EcoscoreAdjustments extends JsonObject {
   @JsonKey(includeIfNull: false)
   Packaging packaging;

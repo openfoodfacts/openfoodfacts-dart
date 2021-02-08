@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:openfoodfacts/model/EcoscoreAdjustments.dart';
 import 'package:openfoodfacts/model/EcoscoreData.dart';
+import 'package:openfoodfacts/model/OriginsOfIngredients.dart';
+import 'package:openfoodfacts/model/Packaging.dart';
 import 'package:openfoodfacts/model/Product.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
@@ -28,13 +31,37 @@ void main() {
   });
 
   test('EcoscoreData JSON generation', () {
-    final product = Product(productName: 'TestProduct');
-    final ecoscoreData = EcoscoreData(grade: 'x');
-    product.ecoscoreData = ecoscoreData;
+    final product = _createProductWithEcoscoreData();
     var productJson = product.toJson();
-    assert(!(productJson['ecoscore_data'] is EcoscoreData));
+    final ecoscoreDataJson = productJson['ecoscore_data'];
+    assert(ecoscoreDataJson is Map);
+    final adjustmentsJson = ecoscoreDataJson['adjustments'];
+    assert(adjustmentsJson is Map);
+    final packagingJson = adjustmentsJson['packaging'];
+    assert(packagingJson is Map);
+    final originJson = adjustmentsJson['origins_of_ingredients'];
+    assert(originJson is Map);
     product.ecoscoreData = null;
     productJson = product.toJson();
     assert(productJson['ecoscore_data'] == null);
   });
+}
+
+Product _createProductWithEcoscoreData() {
+  final packaging = Packaging(score: 1.2, value: 4.1);
+  final originOfIngredients = OriginsOfIngredients(
+      epiScore: 1.2,
+      epiValue: 3.1,
+      transportationScore: 1.1,
+      transportationValue: 6.7);
+  final adjustments = EcoscoreAdjustments(
+      packaging: packaging, originsOfIngredients: originOfIngredients);
+  final ecoscoreData = EcoscoreData(
+      grade: 'x',
+      score: 1.2,
+      status: EcoscoreStatus.KNOWN,
+      adjustments: adjustments);
+  final product = Product(productName: 'TestProduct');
+  product.ecoscoreData = ecoscoreData;
+  return product;
 }
