@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/OcrIngredientsField.dart';
 
 /// request a product from the OpenFoodFacts database
 Future<Product> getProduct() async {
