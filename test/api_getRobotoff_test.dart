@@ -1,17 +1,17 @@
-//import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 //import 'package:openfoodfacts/model/Insight.dart';
 //import 'package:openfoodfacts/model/RobotoffQuestion.dart';
 //import 'package:openfoodfacts/model/SpellingCorrections.dart';
-//import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 //import 'package:openfoodfacts/utils/QueryType.dart';
 //import 'test_constants.dart';
 
-/*
+
 void main() {
 
   group('$OpenFoodAPIClient get robotoff questions', () {
     test('get questions for Noix de Saint-Jacques EN', () async {
-      RobotoffQuestionResult result =
+      /* RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
               "3274570800026", "en", TestConstants.TEST_USER,
               queryType: QueryType.PROD, count: 1);
@@ -31,11 +31,11 @@ void main() {
         expect(result.questions[0].insightType, InsightType.CATEGORY);
         expect(result.questions[0].imageUrl,
             "https://static.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg");
-      }
+      }*/
     });
 
     test('get questions for Noix de Saint-Jacques FR', () async {
-      RobotoffQuestionResult result =
+      /*  RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
               "3274570800026", "fr", TestConstants.TEST_USER,
               queryType: QueryType.TEST);
@@ -55,29 +55,29 @@ void main() {
         expect(result.questions[0].insightType, InsightType.CATEGORY);
         expect(result.questions[0].imageUrl,
             "https://static.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg");
-      }
+      }*/
     });
 
     test('get 2 random questions', () async {
-      RobotoffQuestionResult result =
+      /*    RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRandomRobotoffQuestion(
               "fr", TestConstants.TEST_USER,
               queryType: QueryType.TEST,
               types: [InsightType.CATEGORY],
               count: 2);
 
-      expect(result != null, true);
+     expect(result != null, true);
       expect(result.status != null, true);
       expect(result.status, "found");
       expect(result.questions.length, 2);
       expect(result.questions[0].insightType, InsightType.CATEGORY);
-      expect(result.questions[1].insightType, InsightType.CATEGORY);
+      expect(result.questions[1].insightType, InsightType.CATEGORY);*/
     });
   });
 
   group('$OpenFoodAPIClient get robotoff insights', () {
     test('get random insight', () async {
-      InsightsResult result = await OpenFoodAPIClient.getRandomInsight(
+      /*     InsightsResult result = await OpenFoodAPIClient.getRandomInsight(
           TestConstants.TEST_USER,
           queryType: QueryType.TEST,
           type: InsightType.CATEGORY);
@@ -89,17 +89,17 @@ void main() {
       expect(result.insights[0].barcode != null, true);
       expect(result.insights[0].countries != null, true);
       expect(result.insights[0].lang != null, true);
-      expect(result.insights[0].model != null, true);
+      expect(result.insights[0].model != null, true);*/
       // Actually, I stumbled across insights without confidence field...
       //expect(result.insight.confidence != null, true);
     });
 
     test('get product insights', () async {
-      InsightsResult result = await OpenFoodAPIClient.getProductInsights(
+      /*   InsightsResult result = await OpenFoodAPIClient.getProductInsights(
           "8025386005564", TestConstants.TEST_USER,
           queryType: QueryType.TEST);
 
-      expect(result != null, true);
+     expect(result != null, true);
       expect(result.status != null, true);
       expect(result.status, "found");
       expect(result.insights.length > 0, true);
@@ -107,7 +107,7 @@ void main() {
       expect(result.insights[0].barcode != null, true);
       expect(result.insights[0].countries != null, true);
       expect(result.insights[0].lang != null, true);
-      expect(result.insights[0].model != null, true);
+      expect(result.insights[0].model != null, true);*/
       // Actually, I stumbled across insights without confidence field...
       //expect(result.insight.confidence != null, true);
     });
@@ -115,7 +115,7 @@ void main() {
 
   group('$OpenFoodAPIClient get robotoff ingredient spelling corrections', () {
     test('get farine de blé spelling corrections', () async {
-      SpellingCorrection result =
+      /*  SpellingCorrection result =
           await OpenFoodAPIClient.getIngredientSpellingCorrection(
               user: TestConstants.TEST_USER,
               ingredientName: "fqrine de blé",
@@ -125,8 +125,7 @@ void main() {
       expect(result.corrected, "farine de blé");
       expect(result.input, "fqrine de blé");
       expect(result.termCorrections.length, 1);
-      expect(result.termCorrections[0].corrections, null);
+      expect(result.termCorrections[0].corrections, null);*/
     });
-  });x
+  });
 }
- */
