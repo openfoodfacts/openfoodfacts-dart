@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'dart:async';
 
 import 'package:http/http.dart';
+import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
+import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
@@ -329,8 +331,8 @@ class OpenFoodAPIClient {
       queryParameters: parameters,
     );
 
-    Response response = await HttpHelper()
-        .doGetRequest(robotoffQuestionUri, user: user, queryType: QueryType.PROD);
+    Response response = await HttpHelper().doGetRequest(robotoffQuestionUri,
+        user: user, queryType: QueryType.PROD);
     var result = RobotoffQuestionResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 
@@ -369,8 +371,8 @@ class OpenFoodAPIClient {
       queryParameters: parameters,
     );
 
-    Response response = await HttpHelper()
-        .doGetRequest(robotoffQuestionUri, user: user, queryType:  QueryType.PROD);
+    Response response = await HttpHelper().doGetRequest(robotoffQuestionUri,
+        user: user, queryType: QueryType.PROD);
     var result = RobotoffQuestionResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 
@@ -394,8 +396,9 @@ class OpenFoodAPIClient {
       "update": update ? "1" : "0"
     };
 
-    Response response = await HttpHelper()
-        .doPostRequest(insightUri, annotationData, user, queryType: QueryType.PROD);
+    Response response = await HttpHelper().doPostRequest(
+        insightUri, annotationData, user,
+        queryType: QueryType.PROD);
     var status = Status.fromJson(json.decode(response.body));
     return status;
   }
@@ -428,11 +431,41 @@ class OpenFoodAPIClient {
         path: 'api/v1/predict/ingredients/spellcheck',
         queryParameters: spellingCorrectionParam);
 
-    Response response = await HttpHelper()
-        .doGetRequest(spellingCorrectionUri, user: user, queryType: QueryType.PROD);
+    Response response = await HttpHelper().doGetRequest(spellingCorrectionUri,
+        user: user, queryType: QueryType.PROD);
     SpellingCorrection result = SpellingCorrection.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 
+    return result;
+  }
+
+  /// Extract the ingredients from image with the given parameters.
+  /// The ingredients language should be given (ingredients_fr, ingredients_de, ingredients_en)
+  /// Returns the ingredients using OCR.
+  /// By default the query will use the Google Cloud Vision.
+  /// By default the query will hit the PROD DB
+
+  static Future<OcrIngredientsResult> extractIngredients(
+      User user, String barcode, OpenFoodFactsLanguage language,
+      {OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
+      QueryType queryType = QueryType.PROD}) async {
+
+    var productUri = Uri(
+        scheme: URI_SCHEME,
+        host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_PROD_HOST,
+        path: '/cgi/ingredients.pl',
+        queryParameters: {
+          "code": barcode,
+          "process_image": "1",
+          "id": "ingredients_${language.code}",
+          "ocr_engine": OcrField.GOOGLE_CLOUD_VISION.key
+        });
+
+    Response response = await HttpHelper()
+        .doGetRequest(productUri, user: user, queryType: queryType);
+
+    OcrIngredientsResult result = OcrIngredientsResult.fromJson(
+        json.decode(utf8.decode(response.bodyBytes)));
     return result;
   }
 

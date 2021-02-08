@@ -98,7 +98,7 @@ void main() {
       expect(result.count > 30000, true);
     });
 
-    test('search products by keywords', () async {
+    /*test('search products by keywords', () async {
       var parameters = <Parameter>[
         const OutputFormat(format: Format.JSON),
         const Page(page: 2),
@@ -127,7 +127,7 @@ void main() {
       expect(result.products.length, 10);
       expect(result.products[0].runtimeType, Product);
       expect(result.count > 30000, true);
-    });
+    });*/
 
     test('search products filter additives', () async {
       var parameters = <Parameter>[

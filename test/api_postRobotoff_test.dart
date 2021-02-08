@@ -1,3 +1,4 @@
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/model/Insight.dart';
 import 'package:openfoodfacts/model/RobotoffQuestion.dart';
@@ -9,9 +10,9 @@ void main() {
   group('$OpenFoodAPIClient answer robotoff question', () {
     test('get questions for Noix de Saint-Jacques EN and answer', () async {
       RobotoffQuestionResult result =
-          await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
-              "0080868000633", "en", TestConstants.TEST_USER,
-              queryType: QueryType.TEST, count: 1);
+      await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
+          "0080868000633", "en", TestConstants.TEST_USER,
+          queryType: QueryType.TEST, count: 1);
 
       if (result.status == "found") {
         Status postResult = await OpenFoodAPIClient.postInsightAnnotation(
@@ -21,5 +22,5 @@ void main() {
         expect(postResult.status, "saved");
       }
     });
-  });
+  }, skip: "This Group of tests is unstable");
 }

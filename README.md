@@ -27,20 +27,22 @@ You can check the terms of use here : [Terms of use](https://world.openfoodfacts
 - [x] Product: you can retrieve information about products
 - [x] Fetch Product images
 - [x] Send images: that you can do
+- [x] Extract ingredients from ingredients image: User can extract the ingredients text if it is missing
 
 ### READ
-- [ ] Product 
-- [ ] Product images
-- [ ] Additives, Allergens, Environnement impact, Ingredient analysis, Nutrient levels
-- [ ] Recommanded Daily Intakes
-- [ ] Personalized search
-- [ ] Product completion status
+- [x] Product 
+- [x] Product images
+- [x] Additives, Allergens, Environment impact, Ingredient analysis, Nutrient levels
+- [x] Recommended Daily Intakes
+- [x] Personalized search
+- [x] Product completion status
+- [x] Extract ingredients text from image
 ### WRITE
-- [ ] ???
-- [ ] Send images
-- [ ] User comments and auth
+- [x] Save product to the Open Food Facts 
+- [x] Send images
+- [x] User comments and auth
 ### ML
-- [ ] Robotoff support
+- [x] Robotoff support
 
 ### Other
 

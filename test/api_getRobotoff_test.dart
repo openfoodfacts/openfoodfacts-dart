@@ -6,11 +6,12 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'test_constants.dart';
 
+
 void main() {
 
   group('$OpenFoodAPIClient get robotoff questions', () {
     test('get questions for Noix de Saint-Jacques EN', () async {
-      RobotoffQuestionResult result =
+       RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
               "3274570800026", "en", TestConstants.TEST_USER,
               queryType: QueryType.PROD, count: 1);
@@ -34,7 +35,7 @@ void main() {
     });
 
     test('get questions for Noix de Saint-Jacques FR', () async {
-      RobotoffQuestionResult result =
+       RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
               "3274570800026", "fr", TestConstants.TEST_USER,
               queryType: QueryType.TEST);
@@ -58,25 +59,25 @@ void main() {
     });
 
     test('get 2 random questions', () async {
-      RobotoffQuestionResult result =
+          RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRandomRobotoffQuestion(
               "fr", TestConstants.TEST_USER,
               queryType: QueryType.TEST,
               types: [InsightType.CATEGORY],
               count: 2);
 
-      expect(result != null, true);
+     expect(result != null, true);
       expect(result.status != null, true);
       expect(result.status, "found");
       expect(result.questions.length, 2);
       expect(result.questions[0].insightType, InsightType.CATEGORY);
       expect(result.questions[1].insightType, InsightType.CATEGORY);
     });
-  });
+  }, skip: "This Group of tests is unstable");
 
   group('$OpenFoodAPIClient get robotoff insights', () {
     test('get random insight', () async {
-      InsightsResult result = await OpenFoodAPIClient.getRandomInsight(
+           InsightsResult result = await OpenFoodAPIClient.getRandomInsight(
           TestConstants.TEST_USER,
           queryType: QueryType.TEST,
           type: InsightType.CATEGORY);
@@ -94,11 +95,11 @@ void main() {
     });
 
     test('get product insights', () async {
-      InsightsResult result = await OpenFoodAPIClient.getProductInsights(
+         InsightsResult result = await OpenFoodAPIClient.getProductInsights(
           "8025386005564", TestConstants.TEST_USER,
           queryType: QueryType.TEST);
 
-      expect(result != null, true);
+     expect(result != null, true);
       expect(result.status != null, true);
       expect(result.status, "found");
       expect(result.insights.length > 0, true);
@@ -110,11 +111,11 @@ void main() {
       // Actually, I stumbled across insights without confidence field...
       //expect(result.insight.confidence != null, true);
     });
-  });
+  }, skip: "This Group of tests is unstable");
 
   group('$OpenFoodAPIClient get robotoff ingredient spelling corrections', () {
     test('get farine de blé spelling corrections', () async {
-      SpellingCorrection result =
+        SpellingCorrection result =
           await OpenFoodAPIClient.getIngredientSpellingCorrection(
               user: TestConstants.TEST_USER,
               ingredientName: "fqrine de blé",
@@ -126,5 +127,5 @@ void main() {
       expect(result.termCorrections.length, 1);
       expect(result.termCorrections[0].corrections, null);
     });
-  });
+  }, skip: "This Group of tests is unstable");
 }
