@@ -27,7 +27,8 @@ Map<String, dynamic> _$EcoscoreAdjustmentsToJson(EcoscoreAdjustments instance) {
     }
   }
 
-  writeNotNull('packaging', instance.packaging);
-  writeNotNull('origins_of_ingredients', instance.originsOfIngredients);
+  writeNotNull('packaging', instance.packaging?.toJson());
+  writeNotNull(
+      'origins_of_ingredients', instance.originsOfIngredients?.toJson());
   return val;
 }

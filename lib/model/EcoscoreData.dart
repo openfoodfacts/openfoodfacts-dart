@@ -9,7 +9,7 @@ enum EcoscoreStatus {
   @JsonValue("unknown") UNKNOWN
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class EcoscoreData extends JsonObject {
   @JsonKey(includeIfNull: false)
   String grade;
