@@ -11,7 +11,6 @@ import 'package:openfoodfacts/utils/QueryType.dart';
 import 'test_constants.dart';
 
 void main() {
-
   group('$OpenFoodAPIClient get raw products', () {
     test('get product test 1', () async {
       String barcode = "8008698011065";

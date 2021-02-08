@@ -25,7 +25,12 @@ class SearchResult extends JsonObject {
   final List<Product> products;
 
   const SearchResult(
-      {this.page, this.pageSize, this.count, this.skip, this.jsonProducts, this.products});
+      {this.page,
+      this.pageSize,
+      this.count,
+      this.skip,
+      this.jsonProducts,
+      this.products});
 
   factory SearchResult.fromJson(Map<String, dynamic> json) {
     return SearchResult(
@@ -36,7 +41,7 @@ class SearchResult extends JsonObject {
       jsonProducts: json['products'],
       products: (json['products'] as List)
           ?.map((e) =>
-      e == null ? null : Product.fromJson(e as Map<String, dynamic>))
+              e == null ? null : Product.fromJson(e as Map<String, dynamic>))
           ?.toList(),
     );
   }

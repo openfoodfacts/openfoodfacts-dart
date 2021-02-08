@@ -58,8 +58,8 @@ void main() {
 
     test('Read image from PROD', () async {
       //Get product without setting ProductField
-      ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          "7622210449283");
+      ProductQueryConfiguration configurations =
+          ProductQueryConfiguration("7622210449283");
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.PROD_USER, queryType: QueryType.PROD);
 
@@ -67,8 +67,8 @@ void main() {
       expect(
           result.product.images
               .singleWhere((image) =>
-          image.field == ImageField.FRONT &&
-              image.size == ImageSize.DISPLAY )
+                  image.field == ImageField.FRONT &&
+                  image.size == ImageSize.DISPLAY)
               .url,
           "https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.400.jpg");
     });

@@ -12,11 +12,11 @@ class OcrIngredientsResult extends JsonObject {
 
   @JsonKey(name: "ingredients_text_from_image")
   final String ingredientsTextFromImage;
-  
 
   const OcrIngredientsResult(
-      {this.status, this.ingredientsTextFromImageOrig, this.ingredientsTextFromImage});
-
+      {this.status,
+      this.ingredientsTextFromImageOrig,
+      this.ingredientsTextFromImage});
 
   factory OcrIngredientsResult.fromJson(Map<String, dynamic> json) =>
       _$OcrIngredientsResultFromJson(json);

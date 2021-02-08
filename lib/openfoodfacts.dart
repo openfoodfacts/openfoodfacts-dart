@@ -449,7 +449,6 @@ class OpenFoodAPIClient {
       User user, String barcode, OpenFoodFactsLanguage language,
       {OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
       QueryType queryType = QueryType.PROD}) async {
-
     var productUri = Uri(
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_PROD_HOST,

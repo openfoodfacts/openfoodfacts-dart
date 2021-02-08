@@ -577,12 +577,13 @@ void main() {
       assert(group != null);
     });
 
-    test('get product without setting OpenFoodFactsLanguage or ProductField; ', () async {
+    test('get product without setting OpenFoodFactsLanguage or ProductField; ',
+        () async {
       String barcode = "5000112548167";
 
       //Get product without setting OpenFoodFactsLanguage or ProductField
-      ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode);
+      ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(barcode);
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER);
 
@@ -614,16 +615,15 @@ void main() {
       expect(
           result.product.images
               .singleWhere((image) =>
-          image.field == ImageField.INGREDIENTS &&
-              image.size == ImageSize.DISPLAY &&
-              image.language == OpenFoodFactsLanguage.GERMAN)
+                  image.field == ImageField.INGREDIENTS &&
+                  image.size == ImageSize.DISPLAY &&
+                  image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
           "https://static.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg");
 
       //Get product without setting ProductField
-      configurations = ProductQueryConfiguration(
-          barcode,
-      language: OpenFoodFactsLanguage.GERMAN);
+      configurations = ProductQueryConfiguration(barcode,
+          language: OpenFoodFactsLanguage.GERMAN);
       result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
@@ -660,16 +660,15 @@ void main() {
       expect(
           result.product.images
               .singleWhere((image) =>
-          image.field == ImageField.INGREDIENTS &&
-              image.size == ImageSize.DISPLAY &&
-              image.language == OpenFoodFactsLanguage.GERMAN)
+                  image.field == ImageField.INGREDIENTS &&
+                  image.size == ImageSize.DISPLAY &&
+                  image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
           "https://static.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg");
 
       //Get product without setting OpenFoodFactsLanguage
-      configurations = ProductQueryConfiguration(
-          barcode,
-          fields: [ProductField.ALL]);
+      configurations =
+          ProductQueryConfiguration(barcode, fields: [ProductField.ALL]);
       result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
@@ -736,12 +735,11 @@ void main() {
       expect(
           result.product.images
               .singleWhere((image) =>
-          image.field == ImageField.INGREDIENTS &&
-              image.size == ImageSize.DISPLAY &&
-              image.language == OpenFoodFactsLanguage.GERMAN)
+                  image.field == ImageField.INGREDIENTS &&
+                  image.size == ImageSize.DISPLAY &&
+                  image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
           "https://static.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg");
-
     });
   });
 }

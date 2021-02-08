@@ -15,7 +15,6 @@ class HttpHelper {
   factory HttpHelper() => _singleton;
   HttpHelper._internal();
 
-
   static const String USER_AGENT = "Dart API";
   static const String FROM = "anonymous";
 
@@ -44,7 +43,7 @@ class HttpHelper {
           isTestModeActive: queryType == QueryType.PROD ? false : true),
       body: body,
     );
-        return response;
+    return response;
   }
 
   /// Send a multipart post request to the specified uri.
@@ -67,7 +66,6 @@ class HttpHelper {
           filename: basename(entry.value.toString()));
       request.files.add(multipartFile);
     }
-
 
     // get the response status
     Status status = await request.send().then((response) {

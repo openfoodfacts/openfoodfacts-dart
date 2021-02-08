@@ -56,6 +56,5 @@ class ImageHelper {
     return queryType == QueryType.PROD
         ? IMAGE_PROD_URL_BASE + urlHelper
         : IMAGE_TEST_URL_BASE + urlHelper;
-
   }
 }
