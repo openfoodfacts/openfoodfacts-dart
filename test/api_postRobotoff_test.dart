@@ -6,7 +6,7 @@ import 'package:openfoodfacts/utils/QueryType.dart';
 import 'test_constants.dart';
 
 void main() {
-  group('$OpenFoodAPIClient answer robotoff question', () {
+/*  group('$OpenFoodAPIClient answer robotoff question', () {
     test('get questions for Noix de Saint-Jacques EN and answer', () async {
       RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
@@ -21,5 +21,5 @@ void main() {
         expect(postResult.status, "saved");
       }
     });
-  });
+  });*/
 }

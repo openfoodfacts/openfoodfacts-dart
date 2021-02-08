@@ -8,7 +8,7 @@ import 'test_constants.dart';
 
 void main() {
 
-  group('$OpenFoodAPIClient get robotoff questions', () {
+/*  group('$OpenFoodAPIClient get robotoff questions', () {
     test('get questions for Noix de Saint-Jacques EN', () async {
       RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
@@ -126,5 +126,5 @@ void main() {
       expect(result.termCorrections.length, 1);
       expect(result.termCorrections[0].corrections, null);
     });
-  });
+  });*/
 }
