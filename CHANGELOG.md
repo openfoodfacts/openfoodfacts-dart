@@ -1,3 +1,9 @@
+## [0.3.15+2] - 08.02.2021
+- fix additional issue with EcoScoreData JSON generation
+- use Github action to test changes
+- fix test output (avoid chatty tests)
+- add support for OCR ingredients
+
 ## [0.3.15+1] - 04.02.2021
 - fix issue with images URLs
 
