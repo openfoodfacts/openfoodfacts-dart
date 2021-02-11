@@ -130,8 +130,8 @@ class RecommendedDailyIntake {
 
 class IntakeRecommendation {
   IntakeRecommendation(Map<String, dynamic> json) {
-    this.unit = UnitHelper.stringToUnit(json["unit"]);
-    this.value = json["value"] is double
+    unit = UnitHelper.stringToUnit(json["unit"]);
+    value = json["value"] is double
         ? json["value"]
         : (json["value"] as int).toDouble();
   }

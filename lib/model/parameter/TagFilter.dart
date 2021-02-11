@@ -7,7 +7,7 @@ class TagFilter extends Parameter {
   }
 
   String getTagType() {
-    return this.tagType;
+    return tagType;
   }
 
   String getContains() {
@@ -15,7 +15,7 @@ class TagFilter extends Parameter {
   }
 
   String getTagName() {
-    return this.tagName;
+    return tagName;
   }
 
   @override

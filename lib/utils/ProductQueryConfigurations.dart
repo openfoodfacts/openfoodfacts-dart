@@ -16,7 +16,7 @@ class ProductQueryConfiguration {
   }
 
   List<String> getFieldsKeys() {
-    List<String> result = List<String>();
+    List<String> result = [];
 
     for (ProductField field in fields) {
       result.add(field.key);
@@ -26,19 +26,19 @@ class ProductQueryConfiguration {
   }
 
   Map<String, String> getParametersMap() {
-    Map<String, String> result = Map<String, String>();
+    Map<String, String> result = {};
 
-    if (this.language != null) {
+    if (language != null) {
       result.putIfAbsent("lc", () => language.code);
-    } else if (this.lc != null) {
+    } else if (lc != null) {
       result.putIfAbsent("lc", () => lc);
     }
 
-    if (this.cc != null) {
+    if (cc != null) {
       result.putIfAbsent("cc", () => cc);
     }
 
-    if (this.fields != null) {
+    if (fields != null) {
       bool ignoreFieldsFilter = false;
       for (ProductField field in fields) {
         if (field == ProductField.ALL) {
@@ -63,7 +63,7 @@ class ProductQueryConfiguration {
         }
 
         result.putIfAbsent(
-            'fields', () => "$value,${this.getFieldsKeys().join(',')}");
+            'fields', () => "$value,${getFieldsKeys().join(',')}");
       }
     }
 

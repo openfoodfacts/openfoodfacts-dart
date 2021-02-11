@@ -10,7 +10,7 @@ import 'test_constants.dart';
 void main() {
   group('$OpenFoodAPIClient add product images', () {
     test('add front image test', () async {
-      SendImage image = new SendImage(
+      SendImage image = SendImage(
         lang: OpenFoodFactsLanguage.GERMAN,
         barcode: "4250752200784",
         imageField: ImageField.FRONT,
@@ -26,7 +26,7 @@ void main() {
     });
 
     test('add ingredients image test', () async {
-      SendImage image = new SendImage(
+      SendImage image = SendImage(
         lang: OpenFoodFactsLanguage.ENGLISH,
         barcode: "0048151623426",
         imageField: ImageField.INGREDIENTS,
@@ -42,7 +42,7 @@ void main() {
     });
 
     test('add ingredients image test', () async {
-      SendImage image = new SendImage(
+      SendImage image = SendImage(
         lang: OpenFoodFactsLanguage.DANISH,
         barcode: "5722970900207",
         imageField: ImageField.FRONT,

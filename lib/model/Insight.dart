@@ -139,7 +139,7 @@ class Insight {
       this.confidence});
 
   static List<Insight> fromJson(List<dynamic> json) {
-    List<Insight> result = List<Insight>();
+    List<Insight> result = [];
     for (Map<String, dynamic> jsonInsight in json) {
       InsightType insightType =
           InsightTypesExtension.getType(jsonInsight["type"]);
@@ -157,9 +157,9 @@ class Insight {
   }
 
   static List<Map<String, dynamic>> toJson(List<Insight> insights) {
-    List<Map<String, dynamic>> result = List<Map<String, dynamic>>();
+    List<Map<String, dynamic>> result = [];
     for (Insight insight in insights) {
-      Map<String, dynamic> jsonInsight = Map<String, dynamic>();
+      Map<String, dynamic> jsonInsight = {};
 
       jsonInsight["id"] = insight.id;
       jsonInsight["type"] = insight.type.value;

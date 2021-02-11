@@ -53,8 +53,9 @@ class NutrimentsHelper {
     double proteins = nutriments.proteins;
     double fiber = nutriments.fiber;
 
-    if (fat == null || carbs == null || proteins == null || fiber == null)
+    if (fat == null || carbs == null || proteins == null || fiber == null) {
       return null;
+    }
 
     return (fat * 37 + carbs * 17 + proteins * 17 + fiber * 8);
   }

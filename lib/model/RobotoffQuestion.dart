@@ -45,7 +45,7 @@ class RobotoffQuestion {
       this.imageUrl});
 
   static List<RobotoffQuestion> fromJson(List<dynamic> json) {
-    List<RobotoffQuestion> result = List<RobotoffQuestion>();
+    List<RobotoffQuestion> result = [];
     for (Map<String, dynamic> jsonQuestion in json) {
       InsightType insightType =
           InsightTypesExtension.getType(jsonQuestion["insight_type"]);
@@ -63,10 +63,10 @@ class RobotoffQuestion {
   }
 
   static List<Map<String, dynamic>> toJson(List<RobotoffQuestion> questions) {
-    List<Map<String, dynamic>> result = List<Map<String, dynamic>>();
+    List<Map<String, dynamic>> result = [];
 
     for (RobotoffQuestion question in questions) {
-      Map<String, String> jsonQuestion = Map<String, String>();
+      Map<String, String> jsonQuestion = {};
 
       jsonQuestion["barcode"] = question.barcode;
       jsonQuestion["type"] = question.type;

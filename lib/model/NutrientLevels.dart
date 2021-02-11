@@ -57,7 +57,7 @@ class NutrientLevels {
   NutrientLevels(this.levels);
 
   static NutrientLevels fromJson(Map<String, dynamic> json) {
-    Map<String, Level> result = Map<String, Level>();
+    Map<String, Level> result = {};
 
     if (json == null) {
       return NutrientLevels(result);
@@ -72,14 +72,14 @@ class NutrientLevels {
   }
 
   static Map<String, dynamic> toJson(NutrientLevels nutrientLevels) {
-    Map<String, String> result = Map<String, String>();
+    Map<String, String> result = {};
 
     if (nutrientLevels == null) {
       return null;
     }
 
     if (nutrientLevels.levels == null) {
-      nutrientLevels.levels = Map<String, Level>();
+      nutrientLevels.levels = {};
       nutrientLevels.levels[NUTRIENT_SUGARS] = Level.UNDEFINED;
       nutrientLevels.levels[NUTRIENT_FAT] = Level.UNDEFINED;
       nutrientLevels.levels[NUTRIENT_SATURATED_FAT] = Level.UNDEFINED;

@@ -8,7 +8,7 @@ class SearchSimple extends Parameter {
 
   @override
   String getValue() {
-    return this.active ? "1" : "0";
+    return active ? "1" : "0";
   }
 
   final bool active;

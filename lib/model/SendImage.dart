@@ -22,7 +22,7 @@ class SendImage extends JsonObject {
 
   /// the json key depending on the image field of this object.
   String getImageDataKey() {
-    switch (this.imageField) {
+    switch (imageField) {
       case ImageField.FRONT:
         return 'imgupload_front';
       case ImageField.INGREDIENTS:
@@ -49,9 +49,9 @@ class SendImage extends JsonObject {
   @override
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'lang': this.lang,
-      'code': this.barcode,
-      'imagefield': this.imageField.value
+      'lang': lang,
+      'code': barcode,
+      'imagefield': imageField.value
     };
   }
 }
