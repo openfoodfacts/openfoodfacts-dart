@@ -72,7 +72,7 @@ class OpenFoodAPIClient {
   /// Returns a Status object as result.
   static Future<Status> saveProduct(User user, Product product,
       {QueryType queryType = QueryType.PROD}) async {
-    var parameterMap = new Map<String, String>();
+    var parameterMap = <String, String>{};
     parameterMap.addAll(user.toData());
     parameterMap.addAll(product.toData());
 
@@ -93,8 +93,8 @@ class OpenFoodAPIClient {
   /// Returns a Status object as result.
   static Future<Status> addProductImage(User user, SendImage image,
       {QueryType queryType = QueryType.PROD}) async {
-    var dataMap = new Map<String, String>();
-    var fileMap = new Map<String, Uri>();
+    var dataMap = <String, String>{};
+    var fileMap = <String, Uri>{};
 
     // Images can be sent anonymously
     if (user != null) {
@@ -121,7 +121,7 @@ class OpenFoodAPIClient {
       String barcode, OpenFoodFactsLanguage language,
       {User user, QueryType queryType = QueryType.PROD}) async {
     if (barcode == null || barcode.isEmpty) {
-      return new ProductResult();
+      return ProductResult();
     }
 
     var productUri = Uri(
@@ -145,7 +145,7 @@ class OpenFoodAPIClient {
       {User user,
       QueryType queryType = QueryType.PROD}) async {
     if (configuration.barcode == null || configuration.barcode.isEmpty) {
-      return new ProductResult();
+      return ProductResult();
     }
 
     var productUri = Uri(
@@ -255,7 +255,7 @@ class OpenFoodAPIClient {
       String valueTag,
       String serverDomain,
       QueryType queryType = QueryType.PROD}) async {
-    final Map<String, String> parameters = Map<String, String>();
+    final Map<String, String> parameters = {};
 
     if (type != null) {
       parameters["type"] = type.value;
@@ -349,7 +349,7 @@ class OpenFoodAPIClient {
       count = 1;
     }
 
-    List<String> typesValues = List<String>();
+    List<String> typesValues = [];
     types.forEach((t) {
       typesValues.add(t.value);
     });
@@ -470,7 +470,7 @@ class OpenFoodAPIClient {
 
   /// login on the main page - not used
   static Future<String> login(User user) async {
-    var loginUri = new Uri(scheme: URI_SCHEME, host: URI_PROD_HOST);
+    var loginUri = Uri(scheme: URI_SCHEME, host: URI_PROD_HOST);
     Response response =
         await HttpHelper().doPostRequest(loginUri, user.toData(), user);
     return response.body;

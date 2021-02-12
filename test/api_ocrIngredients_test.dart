@@ -93,7 +93,7 @@ void main() {
 
     test('Add ingredients image to OFF server and then extract the text',
         () async {
-      SendImage image = new SendImage(
+      SendImage image = SendImage(
         lang: OpenFoodFactsLanguage.FRENCH,
         barcode: "3613042717385",
         imageField: ImageField.INGREDIENTS,

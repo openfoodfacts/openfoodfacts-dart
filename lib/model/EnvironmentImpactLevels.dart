@@ -10,7 +10,7 @@ class EnvironmentImpactLevels {
       return null;
     }
 
-    List<Level> result = List<Level>();
+    List<Level> result = <Level>[];
 
     for (String s in json) {
       result.add(LevelExtension.getLevel(s.substring(3)));
@@ -24,7 +24,7 @@ class EnvironmentImpactLevels {
       return null;
     }
 
-    List<String> result = List<String>();
+    List<String> result = [];
 
     for (Level level in environmentImpactLevels.levels) {
       result.add('en:${level.value}');

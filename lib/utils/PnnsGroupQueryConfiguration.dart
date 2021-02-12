@@ -11,7 +11,7 @@ class PnnsGroupQueryConfiguration {
       {this.language, this.fields, this.page = 1});
 
   List<String> getFieldsKeys() {
-    List<String> result = List<String>();
+    List<String> result = [];
 
     for (ProductField field in fields) {
       result.add(field.key);
@@ -21,13 +21,13 @@ class PnnsGroupQueryConfiguration {
   }
 
   Map<String, String> getParametersMap() {
-    Map<String, String> result = Map<String, String>();
+    Map<String, String> result = {};
 
-    if (this.language != null) {
+    if (language != null) {
       result.putIfAbsent("lc", () => language.code);
     }
 
-    if (this.fields != null) {
+    if (fields != null) {
       bool ignoreFieldsFilter = false;
       for (ProductField field in fields) {
         if (field == ProductField.ALL) {
@@ -37,7 +37,7 @@ class PnnsGroupQueryConfiguration {
       }
 
       if (!ignoreFieldsFilter) {
-        result.putIfAbsent('fields', () => this.getFieldsKeys().join(','));
+        result.putIfAbsent('fields', () => getFieldsKeys().join(','));
       }
     }
 

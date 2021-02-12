@@ -36,7 +36,7 @@ void main() {
       await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product,
           queryType: QueryType.TEST);
 
-      SendImage fontImage = new SendImage(
+      SendImage fontImage = SendImage(
         lang: OpenFoodFactsLanguage.GERMAN,
         barcode: barcode,
         imageField: ImageField.FRONT,
@@ -468,9 +468,9 @@ void main() {
       assert(result.product.ingredients == null);
       assert(result.product.ingredientsText == null);
       assert(result.product.productNameDE == null);
-      assert(result.product.additives.ids.length == 0);
-      assert(result.product.additives.names.length == 0);
-      assert(result.product.nutrientLevels.levels.length == 0);
+      assert(result.product.additives.ids.isEmpty);
+      assert(result.product.additives.names.isEmpty);
+      assert(result.product.nutrientLevels.levels.isEmpty);
       assert(result.product.lang == OpenFoodFactsLanguage.UNDEFINED);
 
       configurations = ProductQueryConfiguration(barcode,
@@ -486,9 +486,9 @@ void main() {
       assert(result.product.ingredients == null);
       assert(result.product.ingredientsText == null);
       assert(result.product.productNameDE == null);
-      assert(result.product.additives.ids.length == 0);
-      assert(result.product.additives.names.length == 0);
-      assert(result.product.nutrientLevels.levels.length == 0);
+      assert(result.product.additives.ids.isEmpty);
+      assert(result.product.additives.names.isEmpty);
+      assert(result.product.nutrientLevels.levels.isEmpty);
       assert(result.product.lang == OpenFoodFactsLanguage.FRENCH);
 
       configurations = ProductQueryConfiguration(barcode,
@@ -504,9 +504,9 @@ void main() {
       assert(result.product.ingredients == null);
       assert(result.product.ingredientsText == null);
       assert(result.product.productNameDE == null);
-      assert(result.product.additives.ids.length == 0);
-      assert(result.product.additives.names.length == 0);
-      assert(result.product.nutrientLevels.levels.length == 0);
+      assert(result.product.additives.ids.isEmpty);
+      assert(result.product.additives.names.isEmpty);
+      assert(result.product.nutrientLevels.levels.isEmpty);
       assert(result.product.lang == OpenFoodFactsLanguage.UNDEFINED);
       assert(result.product.countries != null);
 
@@ -523,9 +523,9 @@ void main() {
       assert(result.product.ingredients == null);
       assert(result.product.ingredientsText == null);
       assert(result.product.productNameDE == null);
-      assert(result.product.additives.ids.length == 0);
-      assert(result.product.additives.names.length == 0);
-      assert(result.product.nutrientLevels.levels.length == 0);
+      assert(result.product.additives.ids.isEmpty);
+      assert(result.product.additives.names.isEmpty);
+      assert(result.product.nutrientLevels.levels.isEmpty);
       assert(result.product.lang == OpenFoodFactsLanguage.UNDEFINED);
       assert(result.product.countriesTags != null);
     });

@@ -8,7 +8,7 @@ class JsonHelper {
   static List<ProductImage> selectedImagesFromJson(Map<String, dynamic> json) {
     if (json == null) return null;
 
-    var imageList = List<ProductImage>();
+    var imageList = <ProductImage>[];
     for (var field in ImageField.values) {
       for (var size in ImageSize.values) {
         for (OpenFoodFactsLanguage lang in OpenFoodFactsLanguage.values) {
@@ -37,16 +37,16 @@ class JsonHelper {
   }
 
   static Map<String, dynamic> selectedImagesToJson(List<ProductImage> images) {
-    Map<String, dynamic> result = Map<String, dynamic>();
+    Map<String, dynamic> result = {};
 
     if (images == null) {
       return result;
     }
 
     for (ImageField field in ImageField.values) {
-      Map<String, dynamic> fieldMap = Map<String, dynamic>();
+      Map<String, dynamic> fieldMap = {};
       for (ImageSize size in ImageSize.values) {
-        Map<String, String> sizeMap = Map<String, String>();
+        Map<String, String> sizeMap = {};
         for (ProductImage image in images) {
           if (image.field == field && image.size == size) {
             sizeMap[image.language.code] = image.url;
@@ -63,7 +63,7 @@ class JsonHelper {
   static List<ProductImage> imagesFromJson(Map<String, dynamic> json) {
     if (json == null) return null;
 
-    var imageList = List<ProductImage>();
+    var imageList = <ProductImage>[];
 
     for (var field in ImageField.values) {
       for (OpenFoodFactsLanguage lang in OpenFoodFactsLanguage.values) {
@@ -99,7 +99,7 @@ class JsonHelper {
 
   static Map<String, dynamic> imagesToJson(List<ProductImage> images) {
     // not implemented and needed, yet.
-    return Map<String, dynamic>();
+    return {};
   }
 
   static double servingQuantityFromJson(dynamic data) {
@@ -118,11 +118,11 @@ class JsonHelper {
 
   static List<Map<String, dynamic>> ingredientsToJson(
       List<Ingredient> ingredients) {
-    if (ingredients == null || ingredients.length == 0) {
+    if (ingredients == null || ingredients.isEmpty) {
       return null;
     }
 
-    List<Map<String, dynamic>> result = List<Map<String, dynamic>>();
+    List<Map<String, dynamic>> result = [];
 
     for (Ingredient ingredient in ingredients) {
       result.add(ingredient.toJson());
@@ -133,11 +133,11 @@ class JsonHelper {
 
   static List<Map<String, dynamic>> attributeGroupsToJson(
       List<AttributeGroup> list) {
-    if (list == null || list.length == 0) {
+    if (list == null || list.isEmpty) {
       return null;
     }
 
-    List<Map<String, dynamic>> result = List<Map<String, dynamic>>();
+    List<Map<String, dynamic>> result = [];
 
     for (final AttributeGroup item in list) {
       result.add(item.toJson());
@@ -151,7 +151,7 @@ class JsonHelper {
       return null;
     }
     final int timestamp = JsonObject.parseInt(json);
-    return new DateTime.fromMillisecondsSinceEpoch(
+    return DateTime.fromMillisecondsSinceEpoch(
         Duration.millisecondsPerSecond * timestamp,
         isUtc: true);
   }

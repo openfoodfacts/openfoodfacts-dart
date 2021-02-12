@@ -30,17 +30,11 @@ class IngredientsAnalysisTags {
       palmOilFreeStatus = PalmOilFreeStatus.IS_NOT_PALM_OIL_FREE;
     }
 
-    if (veganStatus == null) {
-      veganStatus = VeganStatus.MAYBE;
-    }
+    veganStatus ??= VeganStatus.MAYBE;
 
-    if (vegetarianStatus == null) {
-      vegetarianStatus = VegetarianStatus.MAYBE;
-    }
+    vegetarianStatus ??= VegetarianStatus.MAYBE;
 
-    if (palmOilFreeStatus == null) {
-      palmOilFreeStatus = PalmOilFreeStatus.MAYBE;
-    }
+    palmOilFreeStatus ??= PalmOilFreeStatus.MAYBE;
   }
 
   VeganStatus veganStatus;

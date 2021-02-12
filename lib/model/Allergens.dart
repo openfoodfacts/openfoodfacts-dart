@@ -5,8 +5,8 @@ class Allergens {
   Allergens(this.ids, this.names);
 
   static Allergens allergensFromJson(List<dynamic> json) {
-    List<String> ids = List<String>();
-    List<String> names = List<String>();
+    List<String> ids = [];
+    List<String> names = [];
 
     if (json == null) {
       return Allergens(ids, names);
@@ -22,7 +22,7 @@ class Allergens {
   }
 
   static List<String> allergensToJson(Allergens allergens) {
-    List<String> result = List<String>();
+    List<String> result = [];
 
     if (allergens == null) {
       return null;

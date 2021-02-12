@@ -11,7 +11,7 @@ import 'QueryType.dart';
 
 /// General functions for sending http requests (post, get, multipart, ...)
 class HttpHelper {
-  static final HttpHelper _singleton = new HttpHelper._internal();
+  static final HttpHelper _singleton = HttpHelper._internal();
   factory HttpHelper() => _singleton;
   HttpHelper._internal();
 
@@ -53,7 +53,7 @@ class HttpHelper {
   Future<Status> doMultipartRequest(
       Uri uri, Map<String, String> body, Map<String, Uri> files, User user,
       {QueryType queryType = QueryType.PROD}) async {
-    var request = new http.MultipartRequest("POST", uri);
+    var request = http.MultipartRequest("POST", uri);
     request.headers.addAll(_buildHeaders(user,
         isTestModeActive: queryType == QueryType.PROD ? false : true));
     request.headers.addAll({'Content-Type': 'multipart/form-data'});
@@ -62,7 +62,7 @@ class HttpHelper {
     // add all file entries to the request
     for (MapEntry<String, Uri> entry in files.entries) {
       List<int> fileBytes = await File.fromUri(entry.value).readAsBytes();
-      var multipartFile = new http.MultipartFile.fromBytes(entry.key, fileBytes,
+      var multipartFile = http.MultipartFile.fromBytes(entry.key, fileBytes,
           filename: basename(entry.value.toString()));
       request.files.add(multipartFile);
     }
@@ -84,7 +84,7 @@ class HttpHelper {
   /// By default isTestMode is false
   Map<String, String> _buildHeaders(User user,
       {bool isTestModeActive = false}) {
-    var headers = new Map<String, String>();
+    var headers = <String, String>{};
     headers.addAll({'Accept': 'application/json'});
     headers.addAll({'UserAgent': user != null ? user.comment : USER_AGENT});
     headers.addAll({'From': user != null ? user.userId : FROM});

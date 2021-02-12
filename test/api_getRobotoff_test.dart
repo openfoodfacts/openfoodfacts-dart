@@ -100,7 +100,7 @@ void main() {
       expect(result != null, true);
       expect(result.status != null, true);
       expect(result.status, "found");
-      expect(result.insights.length > 0, true);
+      expect(result.insights.isNotEmpty, true);
       expect(result.insights[0].id != null, true);
       expect(result.insights[0].barcode != null, true);
       expect(result.insights[0].countries != null, true);

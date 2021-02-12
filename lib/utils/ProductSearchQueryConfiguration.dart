@@ -16,7 +16,7 @@ class ProductSearchQueryConfiguration {
       {this.language, this.lc, this.cc, this.fields, this.parametersList});
 
   List<String> getFieldsKeys() {
-    List<String> result = List<String>();
+    List<String> result = [];
 
     for (ProductField field in fields) {
       result.add(field.key);
@@ -26,7 +26,7 @@ class ProductSearchQueryConfiguration {
   }
 
   Map<String, String> getParametersMap() {
-    var result = new Map<String, String>();
+    var result = <String, String>{};
     int filterTagCount = 0;
     for (Parameter p in parametersList) {
       if (p is TagFilter) {
@@ -42,17 +42,17 @@ class ProductSearchQueryConfiguration {
     }
     result.putIfAbsent('search_terms', () => "");
 
-    if (this.language != null) {
+    if (language != null) {
       result.putIfAbsent("lc", () => language.code);
-    } else if (this.lc != null) {
+    } else if (lc != null) {
       result.putIfAbsent("lc", () => lc);
     }
 
-    if (this.cc != null) {
+    if (cc != null) {
       result.putIfAbsent("cc", () => cc);
     }
 
-    if (this.fields != null) {
+    if (fields != null) {
       bool ignoreFieldsFilter = false;
       for (ProductField field in fields) {
         if (field == ProductField.ALL) {
@@ -77,7 +77,7 @@ class ProductSearchQueryConfiguration {
         }
 
         result.putIfAbsent(
-            'fields', () => "$value,${this.getFieldsKeys().join(',')}");
+            'fields', () => "$value,${getFieldsKeys().join(',')}");
       }
     }
 

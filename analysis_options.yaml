@@ -1,3 +1,10 @@
+include: package:pedantic/analysis_options.yaml
+
 analyzer:
   exclude:
     - "**/*.g.dart"
+  errors:
+    omit_local_variable_types: ignore
+    annotate_overrides: ignore
+    prefer_single_quotes: ignore
+    use_function_type_syntax_for_parameters: ignore

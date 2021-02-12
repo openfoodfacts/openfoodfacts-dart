@@ -3,7 +3,7 @@ abstract class JsonObject {
   Map<String, dynamic> toJson();
 
   Map<String, String> toData() {
-    var result = new Map<String, String>();
+    var result = <String, String>{};
     for (MapEntry<String, dynamic> entry in toJson().entries) {
       result.putIfAbsent(entry.key, () => entry.value.toString());
     }
