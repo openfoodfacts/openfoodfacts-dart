@@ -131,7 +131,6 @@ void saveAndExtractIngredient() async {
       await OpenFoodAPIClient.getProduct(configurations, user: myUser);
 
   if (productResult.status != 1) {
-    throw new Exception(
-        "product not found, please insert data for 3613042717385");
+    throw Exception("product not found, please insert data for 3613042717385");
   }
 }
