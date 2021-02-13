@@ -17,7 +17,6 @@ abstract class UriReader {
   Future<List<int>> readAsBytes(final Uri uri) async {
     final Uint8List content = uri.data?.contentAsBytes();
     if (content != null) {
-      print('size=====${content.length}');
       return content;
     }
     switch (uri.scheme) {
