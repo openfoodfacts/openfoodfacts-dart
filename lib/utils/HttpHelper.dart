@@ -1,7 +1,7 @@
+import 'package:openfoodfacts/utils/UriReader.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
 
-import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 
@@ -61,7 +61,7 @@ class HttpHelper {
 
     // add all file entries to the request
     for (MapEntry<String, Uri> entry in files.entries) {
-      List<int> fileBytes = await File.fromUri(entry.value).readAsBytes();
+      List<int> fileBytes = await UriReader.instance.readAsBytes(entry.value);
       var multipartFile = http.MultipartFile.fromBytes(entry.key, fileBytes,
           filename: basename(entry.value.toString()));
       request.files.add(multipartFile);
