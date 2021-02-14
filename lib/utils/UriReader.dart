@@ -20,11 +20,12 @@ abstract class UriReader {
       return content;
     }
     switch (uri.scheme) {
+      case '':
       case 'file':
         return await readFileAsBytes(uri);
       case 'http':
       case 'https':
-        http.Response response = await http.get(uri);
+        final http.Response response = await http.get(uri);
         return response?.bodyBytes;
     }
     throw Exception('Unknown uri scheme for $uri');
