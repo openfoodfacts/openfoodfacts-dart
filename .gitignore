@@ -9,6 +9,8 @@ android/local.properties
 .packages
 .pub/
 .flutter-plugins
+pubspec.lock
+
 
 # build files
 build/

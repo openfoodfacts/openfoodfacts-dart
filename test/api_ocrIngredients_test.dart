@@ -99,7 +99,7 @@ void main() {
         lang: OpenFoodFactsLanguage.FRENCH,
         barcode: "3613042717385",
         imageField: ImageField.INGREDIENTS,
-        imageUrl: File("test/test_assets/ingredient_3613042717385.jpg").absolute.uri,
+        imageUrl: File("test/test_assets/ingredient_3613042717385.jpg").uri,
       );
       await OpenFoodAPIClient.addProductImage(TestConstants.PROD_USER, image,
           queryType: QueryType.PROD);
