@@ -29,5 +29,3 @@ ios/
 .classpath
 .project
 
-# file with test user
-test_constants.dart
