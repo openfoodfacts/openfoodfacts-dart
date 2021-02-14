@@ -9,6 +9,8 @@ android/local.properties
 .packages
 .pub/
 .flutter-plugins
+pubspec.lock
+
 
 # build files
 build/
@@ -27,5 +29,3 @@ ios/
 .classpath
 .project
 
-# file with test user
-test_constants.dart
