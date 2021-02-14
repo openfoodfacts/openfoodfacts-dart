@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/SendImage.dart';
@@ -16,7 +14,7 @@ void main() {
         lang: OpenFoodFactsLanguage.GERMAN,
         barcode: "4250752200784",
         imageField: ImageField.FRONT,
-        imageUrl: File("test/test_assets/front_de.jpg").absolute.uri,
+        imageUrl: Uri.file("test/test_assets/front_de.jpg"),
       );
       Status status = await OpenFoodAPIClient.addProductImage(
           TestConstants.PROD_USER, image,
@@ -32,7 +30,7 @@ void main() {
         lang: OpenFoodFactsLanguage.ENGLISH,
         barcode: "0048151623426",
         imageField: ImageField.INGREDIENTS,
-        imageUrl: File("test/test_assets/ingredients_en.jpg").absolute.uri,
+        imageUrl: Uri.file("test/test_assets/ingredients_en.jpg"),
       );
       Status status = await OpenFoodAPIClient.addProductImage(
           TestConstants.PROD_USER, image,
@@ -48,7 +46,7 @@ void main() {
         lang: OpenFoodFactsLanguage.DANISH,
         barcode: "5722970900207",
         imageField: ImageField.FRONT,
-        imageUrl: File("test/test_assets/corn_da.jpg").absolute.uri,
+        imageUrl: Uri.file("test/test_assets/corn_da.jpg"),
       );
       Status status = await OpenFoodAPIClient.addProductImage(
           TestConstants.PROD_USER, image,

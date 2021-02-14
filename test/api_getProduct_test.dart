@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/model/Attribute.dart';
 import 'package:openfoodfacts/model/EcoscoreData.dart';
@@ -42,7 +40,7 @@ void main() {
         lang: OpenFoodFactsLanguage.GERMAN,
         barcode: barcode,
         imageField: ImageField.FRONT,
-        imageUrl: File("test/test_assets/front_coca_light_de.jpg").absolute.uri,
+        imageUrl: Uri.file("test/test_assets/front_coca_light_de.jpg"),
       );
       await OpenFoodAPIClient.addProductImage(
           TestConstants.TEST_USER, fontImage,
