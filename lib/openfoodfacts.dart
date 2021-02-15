@@ -8,7 +8,6 @@ import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
-import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 
 import 'model/Insight.dart';
@@ -161,13 +160,6 @@ class OpenFoodAPIClient {
     if (result.product != null) {
       ProductHelper.removeImages(result.product, configuration.language);
       ProductHelper.createImageUrls(result.product, queryType: queryType);
-      if (configuration.fields
-              .contains(ProductField.CATEGORIES_TAGS_TRANSLATED) ||
-          configuration.fields.contains(ProductField.LABELS_TAGS_TRANSLATED) ||
-          configuration.fields.contains(ProductField.ALL)) {
-        ProductHelper.addTranslatedFields(result.product,
-            json.decode(response.body)['product'], configuration.language);
-      }
     }
 
     return result;
@@ -194,20 +186,9 @@ class OpenFoodAPIClient {
         .doGetRequest(searchUri, user: user, queryType: queryType);
     var result = SearchResult.fromJson(json.decode(response.body));
 
-    if (configuration.fields
-            .contains(ProductField.CATEGORIES_TAGS_TRANSLATED) ||
-        configuration.fields.contains(ProductField.LABELS_TAGS_TRANSLATED) ||
-        configuration.fields.contains(ProductField.ALL)) {
-      result.products.asMap().forEach((index, product) {
-        ProductHelper.removeImages(product, configuration.language);
-        ProductHelper.addTranslatedFields(product,
-            result.jsonProducts.elementAt(index), configuration.language);
-      });
-    } else {
-      result.products.asMap().forEach((index, product) {
-        ProductHelper.removeImages(product, configuration.language);
-      });
-    }
+    result.products.asMap().forEach((index, product) {
+      ProductHelper.removeImages(product, configuration.language);
+    });
 
     return result;
   }
@@ -230,20 +211,9 @@ class OpenFoodAPIClient {
         .doGetRequest(searchUri, user: user, queryType: queryType);
     var result = SearchResult.fromJson(json.decode(response.body));
 
-    if (configuration.fields
-            .contains(ProductField.CATEGORIES_TAGS_TRANSLATED) ||
-        configuration.fields.contains(ProductField.LABELS_TAGS_TRANSLATED) ||
-        configuration.fields.contains(ProductField.ALL)) {
-      result.products.asMap().forEach((index, product) {
-        ProductHelper.removeImages(product, configuration.language);
-        ProductHelper.addTranslatedFields(product,
-            result.jsonProducts.elementAt(index), configuration.language);
-      });
-    } else {
-      result.products.asMap().forEach((index, product) {
-        ProductHelper.removeImages(product, configuration.language);
-      });
-    }
+    result.products.asMap().forEach((index, product) {
+      ProductHelper.removeImages(product, configuration.language);
+    });
 
     return result;
   }

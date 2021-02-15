@@ -199,8 +199,20 @@ class Product extends JsonObject {
       this.ecoscoreGrade,
       this.ecoscoreScore});
 
-  factory Product.fromJson(Map<String, dynamic> json) =>
-      _$ProductFromJson(json);
+  factory Product.fromJson(Map<String, dynamic> json) {
+    final Product result = _$ProductFromJson(json);
+    for (final String key in json.keys) {
+      if (key.startsWith('categories_tags_')) {
+        result.categoriesTagsTranslated =
+            (json[key] as List)?.map((e) => e as String)?.toList();
+      }
+      if (key.startsWith('labels_tags_')) {
+        result.labelsTagsTranslated =
+            (json[key] as List)?.map((e) => e as String)?.toList();
+      }
+    }
+    return result;
+  }
 
   @override
   Map<String, dynamic> toJson() => _$ProductToJson(this);

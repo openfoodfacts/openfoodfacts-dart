@@ -34,6 +34,7 @@ class ProductHelper {
     }
   }
 
+  @deprecated
   static void addTranslatedFields(Product product, Map<String, dynamic> source,
       OpenFoodFactsLanguage language) {
     product.categoriesTagsTranslated =
