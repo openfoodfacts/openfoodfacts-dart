@@ -1,63 +1,72 @@
 ![Pub Version](https://img.shields.io/pub/v/openfoodfacts?&colorB=green)
 
 # Open Food Facts - Dart
-Dart package for the Open Food Facts API. Easily access to more than 1.5 million products from all around the world.
-Open Food Facts is powered by global contributors and is constantly growing thanks to them.
+Dart package for the Open Food Facts API. Easily access to more than 1.6 million products from all around the world.
+Open Food Facts is powered by contributors from around the world and is constantly growing thanks to them.
 
 ## General principles
 - You can look for information about products, including many useful computed values. 
 - If you can't get the information on a specific product, you can get your user to send photos and data, that will then be processed by Open Food Facts AI and contributors to get the computed result you want to show them.
 - You can also implement the complete flow so that they get immediately the result with some effort on their side.
 
-## If your users do expect a result immediately (eg. Inventory apps)
-- Send photos (front/nutrition/ingredients): most painless thing for your users
+## If your users do not expect a specific result immediately (eg. Inventory apps)
+- Send photos (front/nutrition/ingredients/packaging): most painless thing for your users
 - The Open Food Facts AI Robotoff will generate some derived data from the photos
 - Overtime, other apps, and the Open Food Facts community will fill the data gaps
 
-## If your users expect a result immediately:
-- Send nutrition facts + category > get Nutri-Score
+## If your users do expect a result immediately (eg Nutrition apps, Scoring apps…):
+- Send nutrition facts + category > get the Nutri-Score
 - Send ingredients > get the NOVA group (about food ultra-processing), additives, allergens, normalized ingredients, vegan, vegetarian…
-- Send category + labels > get soon the Eco-Score (about environmental impact)
+- Send category (strict minimum) + labels + origins of ingredients + packaging (photo and text) > get the Eco-Score (about environmental impact)
 
 ## Open Data Licence
 The database in under the OdBL. This means attributing the source and also contributing back any additions (photos, data), which this package makes easy to do.
 You can check the terms of use here : [Terms of use](https://world.openfoodfacts.org/terms-of-use).
 
 ## List of current features
-- [x] Product: you can retrieve information about products
-- [x] Fetch Product images
-- [x] Send images: that you can do
-- [x] Extract ingredients from ingredients image: User can extract the ingredients text if it is missing
+
+### GENERAL
+- [x] Multilingual (180 languages are supported)
 
 ### READ
-- [x] Product 
-- [x] Product images
-- [x] Additives, Allergens, Environment impact, Ingredient analysis, Nutrient levels
-- [x] Recommended Daily Intakes
-- [x] Personalized search
+- [x] Product: you can retrieve information about products
+- [x] Product images (get product image by field, size and language, current fields are: Front, Ingredients, Nutrition, Packaging)
+- [x] Additives, Allergens, Environment impact, Ingredient analysis, Nutrient levels, Nutrition facts (incl. micro-nutrients)
+- [x] Language dependant fields (like ingredients, product name, packaging text)
+- [x] Eco-Score, Nutri-Score, NOVA groups
+- [x] Translated, high-level and customizable product information (Attributes)
 - [x] Product completion status
-- [x] Extract ingredients text from image
+
+### PERSONALIZATION
+- [x] Recommended Daily Intakes
+- [x] Translated, high-level and customizable product information (Attributes)
+
+### SEARCH
+- [x] search products by tags
+- [x] search products with / without additives
+- [x] search products with keywords
+- [x] Personalized search
+
 ### WRITE
-- [x] Save product to the Open Food Facts 
+- [x] Save product to Open Food Facts 
 - [x] Send images
 - [x] User comments and auth
+- [x] Anonymous photo upload
+
 ### ML
 - [x] Robotoff support
+- [x] Extract ingredients from ingredients image: User can extract the ingredients text if it is missing
+- [x] Get the OCR of the ingredients photo (for validation purposes)
 
 ### Other
 
 ## Roadmap
-TODO: complete me
+
 
 ### READ
 - [ ] ???
 
 ### WRITE
-- [ ] Nutrition table
-- [ ] Ingredient list
-- [ ] Multilingual fields
-- [ ] Regular fields
-- [ ] Photo upload
 - [ ] Photo operations (rotate, crop, select, unselect with language awareness)
 
 ### Other
