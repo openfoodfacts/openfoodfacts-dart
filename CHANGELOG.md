@@ -1,3 +1,6 @@
+## [0.3.15+3] - 01.03.2021
+- Greatly improved code quality and readability
+
 ## [0.3.15+2] - 08.02.2021
 - fix additional issue with EcoScoreData JSON generation
 - use Github action to test changes
