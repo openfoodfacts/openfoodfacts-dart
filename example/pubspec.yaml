@@ -8,10 +8,7 @@ environment:
   sdk: '>=2.0.0-dev.54.0 <3.0.0'
 
 dependencies:
-  openfoodfacts:
-    path: ../
+  openfoodfacts: 0.3.15+2
 
 dev_dependencies:
   test: any
-
-# https://www.dartlang.org/tools/pub/pubspec
