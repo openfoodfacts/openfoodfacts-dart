@@ -24,7 +24,7 @@ class HttpHelper {
   /// By default the query will hit the PROD DB
   Future<http.Response> doGetRequest(Uri uri,
       {User user, QueryType queryType = QueryType.PROD}) async {
-    http.Response response = await http.get(uri.toString(),
+    http.Response response = await http.get(uri,
         headers: _buildHeaders(user,
             isTestModeActive: queryType == QueryType.PROD ? false : true));
 
@@ -38,7 +38,7 @@ class HttpHelper {
       Uri uri, Map<String, String> body, User user,
       {QueryType queryType = QueryType.PROD}) async {
     http.Response response = await http.post(
-      uri.toString(),
+      uri,
       headers: _buildHeaders(user,
           isTestModeActive: queryType == QueryType.PROD ? false : true),
       body: body,
