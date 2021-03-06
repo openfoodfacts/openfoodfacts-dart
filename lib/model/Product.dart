@@ -17,7 +17,7 @@ part 'Product.g.dart';
 
 @JsonSerializable()
 class Product extends JsonObject {
-  @JsonKey(name: 'code', nullable: false)
+  @JsonKey(name: 'code')
   String barcode;
   @JsonKey(name: 'product_name', includeIfNull: false)
   String productName;

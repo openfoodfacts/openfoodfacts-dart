@@ -7,7 +7,7 @@ part 'SpellingCorrections.g.dart';
 class SpellingCorrection extends JsonObject {
   @JsonKey(includeIfNull: false)
   String corrected;
-  @JsonKey(name: 'text', nullable: false)
+  @JsonKey(name: 'text')
   String input;
   @JsonKey(name: 'corrections', includeIfNull: false)
   List<TermCorrections> termCorrections;
@@ -41,7 +41,7 @@ class TermCorrections extends JsonObject {
 class Correction extends JsonObject {
   @JsonKey(includeIfNull: false)
   String correction;
-  @JsonKey(nullable: false)
+  @JsonKey()
   String original;
   @JsonKey(name: 'start_offset')
   int startOffset;

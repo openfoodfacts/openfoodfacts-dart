@@ -9,7 +9,7 @@ class Ingredient extends JsonObject {
   int rank;
   @JsonKey(includeIfNull: false)
   String id;
-  @JsonKey(nullable: false)
+  @JsonKey()
   String text;
   @JsonKey(includeIfNull: false, fromJson: JsonObject.parseDouble)
   double percent;

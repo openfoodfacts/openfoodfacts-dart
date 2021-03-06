@@ -8,9 +8,9 @@ class User extends JsonObject {
   @JsonKey(includeIfNull: false)
   final String comment;
 
-  @JsonKey(name: 'user_id', nullable: false)
+  @JsonKey(name: 'user_id')
   final String userId;
-  @JsonKey(nullable: false)
+  @JsonKey()
   final String password;
 
   const User({this.userId, this.password, this.comment});
