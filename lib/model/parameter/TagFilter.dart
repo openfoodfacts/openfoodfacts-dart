@@ -6,15 +6,15 @@ class TagFilter extends Parameter {
     return "";
   }
 
-  String getTagType() {
+  String? getTagType() {
     return tagType;
   }
 
   String getContains() {
-    return contains ? "contains" : "without";
+    return contains! ? "contains" : "without";
   }
 
-  String getTagName() {
+  String? getTagName() {
     return tagName;
   }
 
@@ -23,9 +23,9 @@ class TagFilter extends Parameter {
     return "";
   }
 
-  final String tagType;
-  final bool contains;
-  final String tagName;
+  final String? tagType;
+  final bool? contains;
+  final String? tagName;
 
   const TagFilter({this.tagType, this.contains, this.tagName});
 }

@@ -6,15 +6,15 @@ part 'Ingredient.g.dart';
 @JsonSerializable()
 class Ingredient extends JsonObject {
   @JsonKey(includeIfNull: false, fromJson: JsonObject.parseInt)
-  int rank;
+  int? rank;
   @JsonKey(includeIfNull: false)
-  String id;
+  String? id;
   @JsonKey()
-  String text;
+  String? text;
   @JsonKey(includeIfNull: false, fromJson: JsonObject.parseDouble)
-  double percent;
+  double? percent;
 
-  bool bold;
+  bool? bold;
 
   Ingredient({this.rank, this.id, this.text, this.percent, this.bold = false});
 

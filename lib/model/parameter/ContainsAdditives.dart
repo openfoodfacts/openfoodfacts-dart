@@ -8,10 +8,10 @@ class ContainsAdditives extends Parameter {
 
   @override
   String getValue() {
-    return filter ? "without" : "";
+    return filter! ? "without" : "";
   }
 
-  final bool filter;
+  final bool? filter;
 
   const ContainsAdditives({this.filter});
 }

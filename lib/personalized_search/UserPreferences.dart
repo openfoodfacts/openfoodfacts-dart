@@ -7,24 +7,19 @@ enum UserPreferencesVariableValue {
 }
 
 extension UserPreferencesVariableValueExtention
-    on UserPreferencesVariableValue {
+    on UserPreferencesVariableValue? {
   String get value {
     switch (this) {
       case UserPreferencesVariableValue.NOT_IMPORTANT:
         return 'not_important';
-        break;
       case UserPreferencesVariableValue.IMPORTANT:
         return 'important';
-        break;
       case UserPreferencesVariableValue.VERY_IMPORTANT:
         return 'very_important';
-        break;
       case UserPreferencesVariableValue.MANDATORY:
         return 'mandatory';
-        break;
       default:
         return 'unset';
-        break;
     }
   }
 
@@ -32,19 +27,14 @@ extension UserPreferencesVariableValueExtention
     switch (this) {
       case UserPreferencesVariableValue.NOT_IMPORTANT:
         return 'Not important';
-        break;
       case UserPreferencesVariableValue.IMPORTANT:
         return 'Important';
-        break;
       case UserPreferencesVariableValue.VERY_IMPORTANT:
         return 'Very important';
-        break;
       case UserPreferencesVariableValue.MANDATORY:
         return 'Mandatory';
-        break;
       default:
         return 'Unset';
-        break;
     }
   }
 
@@ -72,19 +62,14 @@ extension UserPreferencesVariableValueExtention
     switch (s) {
       case 'not_important':
         return UserPreferencesVariableValue.NOT_IMPORTANT;
-        break;
       case 'important':
         return UserPreferencesVariableValue.IMPORTANT;
-        break;
       case 'very_important':
         return UserPreferencesVariableValue.VERY_IMPORTANT;
-        break;
       case 'mandatory':
         return UserPreferencesVariableValue.MANDATORY;
-        break;
       default:
         return UserPreferencesVariableValue.UNSET;
-        break;
     }
   }
 }
@@ -106,34 +91,24 @@ extension UserPreferencesVariableExtension on UserPreferencesVariable {
     switch (this) {
       case UserPreferencesVariable.VEGAN:
         return 'Vegan';
-        break;
       case UserPreferencesVariable.VEGETARIAN:
         return 'Vegetarian';
-        break;
       case UserPreferencesVariable.GLUTEN_FREE:
         return 'Gluten Free';
-        break;
       case UserPreferencesVariable.ORGANIC_LABELS:
         return 'Organic labels';
-        break;
       case UserPreferencesVariable.FAIR_TRADE_LABELS:
         return 'Fair trade labels';
-        break;
       case UserPreferencesVariable.PALM_FREE_LABELS:
         return 'Palm free labels';
-        break;
       case UserPreferencesVariable.ADDITIVES:
         return 'Additives';
-        break;
       case UserPreferencesVariable.NOVA_GROUP:
         return 'NOVA Group';
-        break;
       case UserPreferencesVariable.NUTRI_SCORE:
         return 'Nutri-Score';
-        break;
       default:
         return 'Accountable variables';
-        break;
     }
   }
 
@@ -183,16 +158,16 @@ class UserPreferences {
     loadJson(data);
   }
 
-  UserPreferencesVariableValue _vegan;
-  UserPreferencesVariableValue _vegetarian;
-  UserPreferencesVariableValue _glutenFree;
+  UserPreferencesVariableValue? _vegan;
+  UserPreferencesVariableValue? _vegetarian;
+  UserPreferencesVariableValue? _glutenFree;
 
-  UserPreferencesVariableValue _organicLabels;
-  UserPreferencesVariableValue _fairTradeLabels;
-  UserPreferencesVariableValue _palmFreeLabels;
-  UserPreferencesVariableValue _additives;
-  UserPreferencesVariableValue _novaGroup;
-  UserPreferencesVariableValue _nutriScore;
+  UserPreferencesVariableValue? _organicLabels;
+  UserPreferencesVariableValue? _fairTradeLabels;
+  UserPreferencesVariableValue? _palmFreeLabels;
+  UserPreferencesVariableValue? _additives;
+  UserPreferencesVariableValue? _novaGroup;
+  UserPreferencesVariableValue? _nutriScore;
 
   void setVariable(
       UserPreferencesVariable variable, UserPreferencesVariableValue value) {
@@ -227,38 +202,28 @@ class UserPreferences {
     }
   }
 
-  UserPreferencesVariableValue getVariable(UserPreferencesVariable variable) {
+  UserPreferencesVariableValue? getVariable(UserPreferencesVariable variable) {
     switch (variable) {
       case UserPreferencesVariable.VEGAN:
         return _vegan;
-        break;
       case UserPreferencesVariable.VEGETARIAN:
         return _vegetarian;
-        break;
       case UserPreferencesVariable.GLUTEN_FREE:
         return _glutenFree;
-        break;
       case UserPreferencesVariable.ORGANIC_LABELS:
         return _organicLabels;
-        break;
       case UserPreferencesVariable.FAIR_TRADE_LABELS:
         return _fairTradeLabels;
-        break;
       case UserPreferencesVariable.PALM_FREE_LABELS:
         return _palmFreeLabels;
-        break;
       case UserPreferencesVariable.ADDITIVES:
         return _additives;
-        break;
       case UserPreferencesVariable.NOVA_GROUP:
         return _novaGroup;
-        break;
       case UserPreferencesVariable.NUTRI_SCORE:
         return _nutriScore;
-        break;
       default:
         return null;
-        break;
     }
   }
 
@@ -282,7 +247,7 @@ class UserPreferences {
         setVariable(
             variable,
             UserPreferencesVariableValueExtention.fromString(
-                data[variable.name] as String ?? 'unset'));
+                data[variable.name] as String? ?? 'unset'));
       }
     }
   }

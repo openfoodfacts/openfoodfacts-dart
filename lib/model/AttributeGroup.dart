@@ -10,12 +10,12 @@ class AttributeGroup extends JsonObject {
   });
 
   factory AttributeGroup.fromJson(dynamic json) => AttributeGroup(
-        id: json[_JSON_TAG_ID] as String,
-        name: json[_JSON_TAG_NAME] as String,
-        warning: json[_JSON_TAG_WARNING] as String,
-        attributes: (json[_JSON_TAG_ATTRIBUTES] as List)
+        id: json[_JSON_TAG_ID] as String?,
+        name: json[_JSON_TAG_NAME] as String?,
+        warning: json[_JSON_TAG_WARNING] as String?,
+        attributes: (json[_JSON_TAG_ATTRIBUTES] as List?)
             ?.map((item) => Attribute.fromJson(item))
-            ?.toList(),
+            .toList(),
       );
 
   @override
@@ -31,20 +31,20 @@ class AttributeGroup extends JsonObject {
   static const String _JSON_TAG_WARNING = 'warning';
   static const String _JSON_TAG_ATTRIBUTES = 'attributes';
 
-  final String id;
-  final String name;
-  final String warning;
-  final List<Attribute> attributes;
+  final String? id;
+  final String? name;
+  final String? warning;
+  final List<Attribute>? attributes;
 
   @override
   String toString() => 'AttributeGroup(${toJson()})';
 
-  List<Map<String, dynamic>> _listToJson() {
-    if (attributes == null || attributes.isEmpty) {
+  List<Map<String, dynamic>>? _listToJson() {
+    if (attributes == null || attributes!.isEmpty) {
       return null;
     }
     final List<Map<String, dynamic>> result = [];
-    for (final Attribute item in attributes) {
+    for (final Attribute item in attributes!) {
       result.add(item.toJson());
     }
     return result;

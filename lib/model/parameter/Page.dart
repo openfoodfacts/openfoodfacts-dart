@@ -11,7 +11,7 @@ class Page extends Parameter {
     return page.toString();
   }
 
-  final int page;
+  final int? page;
 
   const Page({this.page});
 }

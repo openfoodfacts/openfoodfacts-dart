@@ -4,13 +4,13 @@ import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 
 class ProductSearchQueryConfiguration {
-  OpenFoodFactsLanguage language;
+  OpenFoodFactsLanguage? language;
   // Allow apps to directly provide the language code and country code without
   // having to use the OpenFoodFactsLanguage helper.
-  String lc;
-  String cc;
-  List<ProductField> fields;
-  List<Parameter> parametersList;
+  String? lc;
+  String? cc;
+  List<ProductField>? fields;
+  List<Parameter>? parametersList;
 
   ProductSearchQueryConfiguration(
       {this.language, this.lc, this.cc, this.fields, this.parametersList});
@@ -18,17 +18,17 @@ class ProductSearchQueryConfiguration {
   List<String> getFieldsKeys() {
     List<String> result = [];
 
-    for (ProductField field in fields) {
+    for (ProductField field in fields!) {
       result.add(field.key);
     }
 
     return result;
   }
 
-  Map<String, String> getParametersMap() {
-    var result = <String, String>{};
+  Map<String, String?> getParametersMap() {
+    var result = <String, String?>{};
     int filterTagCount = 0;
-    for (Parameter p in parametersList) {
+    for (Parameter p in parametersList!) {
       if (p is TagFilter) {
         TagFilter tf = p;
         result.putIfAbsent("tagtype_$filterTagCount", () => tf.getTagType());
@@ -54,7 +54,7 @@ class ProductSearchQueryConfiguration {
 
     if (fields != null) {
       bool ignoreFieldsFilter = false;
-      for (ProductField field in fields) {
+      for (ProductField field in fields!) {
         if (field == ProductField.ALL) {
           ignoreFieldsFilter = true;
           break;
@@ -64,14 +64,14 @@ class ProductSearchQueryConfiguration {
       if (!ignoreFieldsFilter) {
         String value = '';
 
-        if (fields.contains(ProductField.CATEGORIES_TAGS_TRANSLATED)) {
-          fields.remove(ProductField.CATEGORIES_TAGS_TRANSLATED);
+        if (fields!.contains(ProductField.CATEGORIES_TAGS_TRANSLATED)) {
+          fields!.remove(ProductField.CATEGORIES_TAGS_TRANSLATED);
           value =
               "$value,${ProductField.CATEGORIES_TAGS_TRANSLATED.key}${language.code}";
         }
 
-        if (fields.contains(ProductField.LABELS_TAGS_TRANSLATED)) {
-          fields.remove(ProductField.LABELS_TAGS_TRANSLATED);
+        if (fields!.contains(ProductField.LABELS_TAGS_TRANSLATED)) {
+          fields!.remove(ProductField.LABELS_TAGS_TRANSLATED);
           value =
               "$value,${ProductField.LABELS_TAGS_TRANSLATED.key}${language.code}";
         }

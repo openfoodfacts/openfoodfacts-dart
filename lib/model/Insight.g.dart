@@ -8,7 +8,7 @@ part of 'Insight.dart';
 
 InsightsResult _$InsightsResultFromJson(Map<String, dynamic> json) {
   return InsightsResult(
-    status: json['status'] as String,
+    status: json['status'] as String?,
     insights: Insight.fromJson(json['insights'] as List),
   );
 }

@@ -8,10 +8,10 @@ part of 'OcrIngredientsResult.dart';
 
 OcrIngredientsResult _$OcrIngredientsResultFromJson(Map<String, dynamic> json) {
   return OcrIngredientsResult(
-    status: json['status'] as int,
+    status: json['status'] as int?,
     ingredientsTextFromImageOrig:
-        json['ingredients_text_from_image_orig'] as String,
-    ingredientsTextFromImage: json['ingredients_text_from_image'] as String,
+        json['ingredients_text_from_image_orig'] as String?,
+    ingredientsTextFromImage: json['ingredients_text_from_image'] as String?,
   );
 }
 

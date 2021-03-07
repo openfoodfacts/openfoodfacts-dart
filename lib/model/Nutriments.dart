@@ -8,798 +8,798 @@ part 'Nutriments.g.dart';
 class Nutriments extends JsonObject {
   @JsonKey(
       name: "salt_100g", includeIfNull: false, fromJson: JsonObject.parseDouble)
-  double salt;
+  double? salt;
   @JsonKey(
       name: "fiber_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double fiber;
+  double? fiber;
   @JsonKey(
       name: "sugars_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double sugars;
+  double? sugars;
   @JsonKey(
       name: "fat_100g", includeIfNull: false, fromJson: JsonObject.parseDouble)
-  double fat;
+  double? fat;
   @JsonKey(
       name: "saturated-fat_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double saturatedFat;
+  double? saturatedFat;
   @JsonKey(
       name: "proteins_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double proteins;
+  double? proteins;
   @JsonKey(
       name: "nova-group_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseInt)
-  int novaGroup;
+  int? novaGroup;
   @JsonKey(
       name: "energy_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double energy;
+  double? energy;
   @JsonKey(
       name: "energy-kcal",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double energyKcal;
+  double? energyKcal;
   @JsonKey(
       name: "energy-kcal_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double energyKcal100g;
+  double? energyKcal100g;
   @JsonKey(
       name: "carbohydrates_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double carbohydrates;
+  double? carbohydrates;
 
   @JsonKey(
       name: "salt_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double saltServing;
+  double? saltServing;
   @JsonKey(
       name: "fiber_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double fiberServing;
+  double? fiberServing;
   @JsonKey(
       name: "sugars_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double sugarsServing;
+  double? sugarsServing;
   @JsonKey(
       name: "fat_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double fatServing;
+  double? fatServing;
   @JsonKey(
       name: "saturated-fat_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double saturatedFatServing;
+  double? saturatedFatServing;
   @JsonKey(
       name: "proteins_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double proteinsServing;
+  double? proteinsServing;
   @JsonKey(
       name: "proteins_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit proteinsUnit;
+  Unit? proteinsUnit;
   @JsonKey(
       name: "nova-group_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseInt)
-  int novaGroupServing;
+  int? novaGroupServing;
   @JsonKey(
       name: "energy_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double energyServing;
+  double? energyServing;
   @JsonKey(
       name: "carbohydrates_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double carbohydratesServing;
+  double? carbohydratesServing;
 
   @JsonKey(
       name: "energy_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit energyUnit;
+  Unit? energyUnit;
 
   @JsonKey(
       name: "energy-kcal_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit energyKcalUnit;
+  Unit? energyKcalUnit;
 
   @JsonKey(
       name: "caffeine_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double caffeineServing;
+  double? caffeineServing;
 
   @JsonKey(
       name: "caffeine_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double caffeine;
+  double? caffeine;
 
   @JsonKey(
       name: "caffeine_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit caffeineUnit;
+  Unit? caffeineUnit;
 
   @JsonKey(
       name: "calcium_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double calciumServing;
+  double? calciumServing;
 
   @JsonKey(
       name: "calcium_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double calcium;
+  double? calcium;
 
   @JsonKey(
       name: "calcium_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit calciumUnit;
+  Unit? calciumUnit;
 
   @JsonKey(
       name: "iron_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double ironServing;
+  double? ironServing;
 
   @JsonKey(
       name: "iron_100g", includeIfNull: false, fromJson: JsonObject.parseDouble)
-  double iron;
+  double? iron;
 
   @JsonKey(
       name: "iron_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit ironUnit;
+  Unit? ironUnit;
 
   @JsonKey(
       name: "vitamin-c_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminCServing;
+  double? vitaminCServing;
 
   @JsonKey(
       name: "vitamin-c_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminC;
+  double? vitaminC;
 
   @JsonKey(
       name: "vitamin-c_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit vitaminCUnit;
+  Unit? vitaminCUnit;
 
   @JsonKey(
       name: "magnesium_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double magnesiumServing;
+  double? magnesiumServing;
 
   @JsonKey(
       name: "magnesium_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double magnesium;
+  double? magnesium;
 
   @JsonKey(
       name: "magnesium_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit magnesiumUnit;
+  Unit? magnesiumUnit;
 
   @JsonKey(
       name: "phosphorus_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double phosphorusServing;
+  double? phosphorusServing;
 
   @JsonKey(
       name: "phosphorus_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double phosphorus;
+  double? phosphorus;
 
   @JsonKey(
       name: "phosphorus_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit phosphorusUnit;
+  Unit? phosphorusUnit;
 
   @JsonKey(
       name: "potassium_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double potassiumServing;
+  double? potassiumServing;
 
   @JsonKey(
       name: "potassium_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double potassium;
+  double? potassium;
 
   @JsonKey(
       name: "potassium_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit potassiumUnit;
+  Unit? potassiumUnit;
 
   @JsonKey(
       name: "sodium_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double sodiumServing;
+  double? sodiumServing;
 
   @JsonKey(
       name: "sodium_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double sodium;
+  double? sodium;
 
   @JsonKey(
       name: "sodium_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit sodiumUnit;
+  Unit? sodiumUnit;
 
   @JsonKey(
       name: "zinc_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double zincServing;
+  double? zincServing;
 
   @JsonKey(
       name: "zinc_100g", includeIfNull: false, fromJson: JsonObject.parseDouble)
-  double zinc;
+  double? zinc;
 
   @JsonKey(
       name: "zinc_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit zincUnit;
+  Unit? zincUnit;
 
   @JsonKey(
       name: "copper_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double copperServing;
+  double? copperServing;
 
   @JsonKey(
       name: "copper_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double copper;
+  double? copper;
 
   @JsonKey(
       name: "copper_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit copperUnit;
+  Unit? copperUnit;
 
   @JsonKey(
       name: "selenium_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double seleniumServing;
+  double? seleniumServing;
 
   @JsonKey(
       name: "selenium_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double selenium;
+  double? selenium;
 
   @JsonKey(
       name: "selenium_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit seleniumUnit;
+  Unit? seleniumUnit;
 
   @JsonKey(
       name: "vitamin-a_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminAServing;
+  double? vitaminAServing;
 
   @JsonKey(
       name: "vitamin-a_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminA;
+  double? vitaminA;
 
   @JsonKey(
       name: "vitamin-a_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit vitaminAUnit;
+  Unit? vitaminAUnit;
 
   @JsonKey(
       name: "vitamin-e_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminEServing;
+  double? vitaminEServing;
 
   @JsonKey(
       name: "vitamin-e_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminE;
+  double? vitaminE;
 
   @JsonKey(
       name: "vitamin-e_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit vitaminEUnit;
+  Unit? vitaminEUnit;
 
   @JsonKey(
       name: "vitamin-d_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminDServing;
+  double? vitaminDServing;
 
   @JsonKey(
       name: "vitamin-d_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminD;
+  double? vitaminD;
 
   @JsonKey(
       name: "vitamin-d_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit vitaminDUnit;
+  Unit? vitaminDUnit;
 
   @JsonKey(
       name: "vitamin-b1_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminB1Serving;
+  double? vitaminB1Serving;
 
   @JsonKey(
       name: "vitamin-b1_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminB1;
+  double? vitaminB1;
 
   @JsonKey(
       name: "vitamin-b1_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit vitaminB1Unit;
+  Unit? vitaminB1Unit;
 
   @JsonKey(
       name: "vitamin-b2_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminB2Serving;
+  double? vitaminB2Serving;
 
   @JsonKey(
       name: "vitamin-b2_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminB2;
+  double? vitaminB2;
 
   @JsonKey(
       name: "vitamin-b2_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit vitaminB2Unit;
+  Unit? vitaminB2Unit;
 
   @JsonKey(
       name: "vitamin-pp_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminPPServing;
+  double? vitaminPPServing;
 
   @JsonKey(
       name: "vitamin-pp_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminPP;
+  double? vitaminPP;
 
   @JsonKey(
       name: "vitamin-pp_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit vitaminPPUnit;
+  Unit? vitaminPPUnit;
 
   @JsonKey(
       name: "vitamin-b6_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminB6Serving;
+  double? vitaminB6Serving;
 
   @JsonKey(
       name: "vitamin-b6_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminB6;
+  double? vitaminB6;
 
   @JsonKey(
       name: "vitamin-b6_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit vitaminB6Unit;
+  Unit? vitaminB6Unit;
 
   @JsonKey(
       name: "vitamin-b12_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminB12Serving;
+  double? vitaminB12Serving;
 
   @JsonKey(
       name: "vitamin-b12_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminB12;
+  double? vitaminB12;
 
   @JsonKey(
       name: "vitamin-b12_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit vitaminB12Unit;
+  Unit? vitaminB12Unit;
 
   @JsonKey(
       name: "vitamin-b9_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminB9Serving;
+  double? vitaminB9Serving;
 
   @JsonKey(
       name: "vitamin-b9_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminB9;
+  double? vitaminB9;
 
   @JsonKey(
       name: "vitamin-b9_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit vitaminB9Unit;
+  Unit? vitaminB9Unit;
 
   @JsonKey(
       name: "vitamin-k_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminKServing;
+  double? vitaminKServing;
 
   @JsonKey(
       name: "vitamin-k_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double vitaminK;
+  double? vitaminK;
 
   @JsonKey(
       name: "vitamin-k_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit vitaminKUnit;
+  Unit? vitaminKUnit;
 
   @JsonKey(
       name: "cholesterol_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double cholesterolServing;
+  double? cholesterolServing;
 
   @JsonKey(
       name: "cholesterol_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double cholesterol;
+  double? cholesterol;
 
   @JsonKey(
       name: "cholesterol_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit cholesterolUnit;
+  Unit? cholesterolUnit;
 
   @JsonKey(
       name: "butyric-acid_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double butyricAcidServing;
+  double? butyricAcidServing;
 
   @JsonKey(
       name: "butyric-acid_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double butyricAcid;
+  double? butyricAcid;
 
   @JsonKey(
       name: "butyric-acid_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit butyricAcidUnit;
+  Unit? butyricAcidUnit;
 
   @JsonKey(
       name: "caproic-acid_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double caproicAcidServing;
+  double? caproicAcidServing;
 
   @JsonKey(
       name: "caproic-acid_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double caproicAcid;
+  double? caproicAcid;
 
   @JsonKey(
       name: "caproic-acid_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit caproicAcidUnit;
+  Unit? caproicAcidUnit;
 
   @JsonKey(
       name: "caprylic-acid_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double caprylicAcidServing;
+  double? caprylicAcidServing;
 
   @JsonKey(
       name: "caprylic-acid_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double caprylicAcid;
+  double? caprylicAcid;
 
   @JsonKey(
       name: "caprylic-acid_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit caprylicAcidUnit;
+  Unit? caprylicAcidUnit;
 
   @JsonKey(
       name: "capric-acid_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double capricAcidServing;
+  double? capricAcidServing;
 
   @JsonKey(
       name: "capric-acid_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double capricAcid;
+  double? capricAcid;
 
   @JsonKey(
       name: "capric-acid_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit capricAcidUnit;
+  Unit? capricAcidUnit;
 
   @JsonKey(
       name: "lauric-acid_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double lauricAcidServing;
+  double? lauricAcidServing;
 
   @JsonKey(
       name: "lauric-acid_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double lauricAcid;
+  double? lauricAcid;
 
   @JsonKey(
       name: "lauric-acid_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit lauricAcidUnit;
+  Unit? lauricAcidUnit;
 
   @JsonKey(
       name: "myristic-acid_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double myristicAcidServing;
+  double? myristicAcidServing;
 
   @JsonKey(
       name: "myristic-acid_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double myristicAcid;
+  double? myristicAcid;
 
   @JsonKey(
       name: "myristic-acid_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit myristicAcidUnit;
+  Unit? myristicAcidUnit;
 
   @JsonKey(
       name: "palmitic-acid_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double palmiticAcidServing;
+  double? palmiticAcidServing;
 
   @JsonKey(
       name: "palmitic-acid_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double palmiticAcid;
+  double? palmiticAcid;
 
   @JsonKey(
       name: "palmitic-acid_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit palmiticAcidUnit;
+  Unit? palmiticAcidUnit;
 
   @JsonKey(
       name: "stearic-acid_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double stearicAcidServing;
+  double? stearicAcidServing;
 
   @JsonKey(
       name: "stearic-acid_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double stearicAcid;
+  double? stearicAcid;
 
   @JsonKey(
       name: "stearic-acid_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit stearicAcidUnit;
+  Unit? stearicAcidUnit;
 
   @JsonKey(
       name: "oleic-acid_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double oleicAcidServing;
+  double? oleicAcidServing;
 
   @JsonKey(
       name: "oleic-acid_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double oleicAcid;
+  double? oleicAcid;
 
   @JsonKey(
       name: "oleic-acid_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit oleicAcidUnit;
+  Unit? oleicAcidUnit;
 
   @JsonKey(
       name: "linoleic-acid_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double linoleicAcidServing;
+  double? linoleicAcidServing;
 
   @JsonKey(
       name: "linoleic-acid_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double linoleicAcid;
+  double? linoleicAcid;
 
   @JsonKey(
       name: "linoleic-acid_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit linoleicAcidUnit;
+  Unit? linoleicAcidUnit;
 
   @JsonKey(
       name: "docosahexaenoic-acid_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double docosahexaenoicAcidServing;
+  double? docosahexaenoicAcidServing;
 
   @JsonKey(
       name: "docosahexaenoic-acid_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double docosahexaenoicAcid;
+  double? docosahexaenoicAcid;
 
   @JsonKey(
       name: "docosahexaenoic-acid_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit docosahexaenoicAcidUnit;
+  Unit? docosahexaenoicAcidUnit;
 
   @JsonKey(
       name: "eicosapentaenoic-acid_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double eicosapentaenoicAcidServing;
+  double? eicosapentaenoicAcidServing;
 
   @JsonKey(
       name: "eicosapentaenoic-acid_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double eicosapentaenoicAcid;
+  double? eicosapentaenoicAcid;
 
   @JsonKey(
       name: "eicosapentaenoic-acid_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit eicosapentaenoicAcidUnit;
+  Unit? eicosapentaenoicAcidUnit;
 
   @JsonKey(
       name: "erucic-acid_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double erucicAcidServing;
+  double? erucicAcidServing;
 
   @JsonKey(
       name: "erucic-acid_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double erucicAcid;
+  double? erucicAcid;
 
   @JsonKey(
       name: "erucic-acid_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit erucicAcidUnit;
+  Unit? erucicAcidUnit;
 
   @JsonKey(
       name: "monounsaturated_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double monounsaturatedServing;
+  double? monounsaturatedServing;
 
   @JsonKey(
       name: "monounsaturated_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double monounsaturatedAcid;
+  double? monounsaturatedAcid;
 
   @JsonKey(
       name: "monounsaturated_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit monounsaturatedUnit;
+  Unit? monounsaturatedUnit;
 
   @JsonKey(
       name: "polyunsaturated_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double polyunsaturatedServing;
+  double? polyunsaturatedServing;
 
   @JsonKey(
       name: "polyunsaturated_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double polyunsaturatedAcid;
+  double? polyunsaturatedAcid;
 
   @JsonKey(
       name: "polyunsaturated_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit polyunsaturatedUnit;
+  Unit? polyunsaturatedUnit;
 
   @JsonKey(
       name: "alcohol: % vol of alcohol_serving",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double alcoholServing;
+  double? alcoholServing;
 
   @JsonKey(
       name: "alcohol: % vol of alcohol_100g",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double alcohol;
+  double? alcohol;
 
   @JsonKey(
       name: "alcohol: % vol of alcohol_unit",
       includeIfNull: false,
       fromJson: UnitHelper.stringToUnit)
-  Unit alcoholUnit;
+  Unit? alcoholUnit;
 
   Nutriments({
     this.salt,
@@ -947,6 +947,6 @@ class Nutriments extends JsonObject {
   @override
   Map<String, dynamic> toJson() => _$NutrimentsToJson(this);
 
-  static Map<String, dynamic> toJsonHelper(Nutriments n) =>
+  static Map<String, dynamic> toJsonHelper(Nutriments? n) =>
       n != null ? _$NutrimentsToJson(n) : {};
 }

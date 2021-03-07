@@ -8,11 +8,9 @@ extension OcrFieldExtension on OcrField {
     switch (this) {
       case OcrField.TESSERACT:
         return "tesseract";
-        break;
       case OcrField.GOOGLE_CLOUD_VISION:
       default:
         return "google_cloud_vision";
-        break;
     }
   }
 }

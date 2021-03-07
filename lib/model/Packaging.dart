@@ -6,9 +6,9 @@ part 'Packaging.g.dart';
 @JsonSerializable()
 class Packaging extends JsonObject {
   @JsonKey(includeIfNull: false, fromJson: JsonObject.parseDouble)
-  double value;
+  double? value;
   @JsonKey(includeIfNull: false, fromJson: JsonObject.parseDouble)
-  double score;
+  double? score;
 
   Packaging({this.score, this.value});
 

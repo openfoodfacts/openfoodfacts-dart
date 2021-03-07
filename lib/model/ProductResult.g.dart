@@ -8,9 +8,9 @@ part of 'ProductResult.dart';
 
 ProductResult _$ProductResultFromJson(Map<String, dynamic> json) {
   return ProductResult(
-    status: json['status'] as int,
-    barcode: json['code'] as String,
-    statusVerbose: json['status_verbose'] as String,
+    status: json['status'] as int?,
+    barcode: json['code'] as String?,
+    statusVerbose: json['status_verbose'] as String?,
     product: json['product'] == null
         ? null
         : Product.fromJson(json['product'] as Map<String, dynamic>),

@@ -11,7 +11,7 @@ class PageSize extends Parameter {
     return size.toString();
   }
 
-  final int size;
+  final int? size;
 
   const PageSize({this.size});
 }

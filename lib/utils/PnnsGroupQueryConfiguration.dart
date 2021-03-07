@@ -3,8 +3,8 @@ import 'package:openfoodfacts/utils/PnnsGroups.dart';
 
 class PnnsGroupQueryConfiguration {
   PnnsGroup2 group;
-  OpenFoodFactsLanguage language;
-  List<ProductField> fields;
+  OpenFoodFactsLanguage? language;
+  List<ProductField>? fields;
   int page;
 
   PnnsGroupQueryConfiguration(this.group,
@@ -13,7 +13,7 @@ class PnnsGroupQueryConfiguration {
   List<String> getFieldsKeys() {
     List<String> result = [];
 
-    for (ProductField field in fields) {
+    for (ProductField field in fields!) {
       result.add(field.key);
     }
 
@@ -29,7 +29,7 @@ class PnnsGroupQueryConfiguration {
 
     if (fields != null) {
       bool ignoreFieldsFilter = false;
-      for (ProductField field in fields) {
+      for (ProductField field in fields!) {
         if (field == ProductField.ALL) {
           ignoreFieldsFilter = true;
           break;

@@ -16,17 +16,17 @@ class Attribute extends JsonObject {
   });
 
   factory Attribute.fromJson(dynamic json) => Attribute(
-        id: json[_JSON_TAG_ID] as String,
-        name: json[_JSON_TAG_NAME] as String,
-        title: json[_JSON_TAG_TITLE] as String,
-        iconUrl: json[_JSON_TAG_ICON_URL] as String,
-        defaultF: json[_JSON_TAG_DEFAULT] as String,
-        settingNote: json[_JSON_TAG_SETTING_NOTE] as String,
-        settingName: json[_JSON_TAG_SETTING_NAME] as String,
-        description: json[_JSON_TAG_DESCRIPTION] as String,
-        descriptionShort: json[_JSON_TAG_DESCRIPTION_SHORT] as String,
+        id: json[_JSON_TAG_ID] as String?,
+        name: json[_JSON_TAG_NAME] as String?,
+        title: json[_JSON_TAG_TITLE] as String?,
+        iconUrl: json[_JSON_TAG_ICON_URL] as String?,
+        defaultF: json[_JSON_TAG_DEFAULT] as String?,
+        settingNote: json[_JSON_TAG_SETTING_NOTE] as String?,
+        settingName: json[_JSON_TAG_SETTING_NAME] as String?,
+        description: json[_JSON_TAG_DESCRIPTION] as String?,
+        descriptionShort: json[_JSON_TAG_DESCRIPTION_SHORT] as String?,
         match: JsonObject.parseDouble(json[_JSON_TAG_MATCH]),
-        status: json[_JSON_TAG_STATUS] as String,
+        status: json[_JSON_TAG_STATUS] as String?,
       );
 
   @override
@@ -56,17 +56,17 @@ class Attribute extends JsonObject {
   static const String _JSON_TAG_MATCH = 'match';
   static const String _JSON_TAG_STATUS = 'status';
 
-  final String id;
-  final String name;
-  final String title;
-  final String iconUrl;
-  final String defaultF;
-  final String settingNote;
-  final String settingName;
-  final String description;
-  final String descriptionShort;
-  final double match;
-  final String status;
+  final String? id;
+  final String? name;
+  final String? title;
+  final String? iconUrl;
+  final String? defaultF;
+  final String? settingNote;
+  final String? settingName;
+  final String? description;
+  final String? descriptionShort;
+  final double? match;
+  final String? status;
 
   @override
   String toString() => 'Attribute(${toJson()})';
