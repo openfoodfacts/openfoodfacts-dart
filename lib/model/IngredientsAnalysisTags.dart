@@ -66,6 +66,8 @@ class IngredientsAnalysisTags {
       case VeganStatus.MAYBE:
         result.add('en:maybe-vegan');
         break;
+      default:
+        break;
     }
 
     switch (ingredientsAnalysisTags.vegetarianStatus) {
@@ -78,6 +80,8 @@ class IngredientsAnalysisTags {
       case VegetarianStatus.MAYBE:
         result.add('en:maybe-vegetarian');
         break;
+      default:
+        break;
     }
 
     switch (ingredientsAnalysisTags.palmOilFreeStatus) {
@@ -89,6 +93,8 @@ class IngredientsAnalysisTags {
         break;
       case PalmOilFreeStatus.MAYBE:
         result.add('en:maybe-palm-oil-free');
+        break;
+      default:
         break;
     }
 

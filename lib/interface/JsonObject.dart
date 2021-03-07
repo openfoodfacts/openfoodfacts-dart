@@ -35,9 +35,6 @@ abstract class JsonObject {
 
   static Map<String, dynamic> removeNullEntries(
       final Map<String, dynamic> input) {
-    if (input == null) {
-      return null;
-    }
     final Map<String, dynamic> result = {};
     input.entries.forEach((element) {
       if (element.value != null) {

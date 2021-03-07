@@ -33,7 +33,6 @@ void main() {
           TestConstants.TEST_USER, configuration,
           queryType: QueryType.TEST);
 
-      expect(result != null, true);
       expect(result.page, 1);
       expect(result.pageSize, 10);
       expect(result.products != null, true);
@@ -61,7 +60,6 @@ void main() {
           TestConstants.TEST_USER, configuration,
           queryType: QueryType.TEST);
 
-      expect(result != null, true);
       expect(result.page, 14);
       expect(result.pageSize, 3);
       expect(result.products != null, true);
@@ -89,7 +87,6 @@ void main() {
           TestConstants.TEST_USER, configuration,
           queryType: QueryType.TEST);
 
-      expect(result != null, true);
       expect(result.page, 16);
       expect(result.pageSize, 5);
       expect(result.products != null, true);
@@ -199,7 +196,6 @@ void main() {
           TestConstants.TEST_USER, configuration,
           queryType: QueryType.TEST);
 
-      expect(result != null, true);
       expect(result.page, 5);
       expect(result.pageSize, 10);
       expect(result.products != null, true);

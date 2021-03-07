@@ -10,16 +10,12 @@ extension InsightAnnotationExtension on InsightAnnotation {
     switch (this) {
       case InsightAnnotation.YES:
         return 1;
-        break;
       case InsightAnnotation.NO:
         return 0;
-        break;
       case InsightAnnotation.MAYBE:
         return -1;
-        break;
       default:
         return -1;
-        break;
     }
   }
 }
@@ -69,34 +65,24 @@ extension InsightTypesExtension on InsightType? {
     switch (s) {
       case "ingredient_spellcheck":
         return InsightType.INGREDIENT_SPELLCHECK;
-        break;
       case "packager_code":
         return InsightType.PACKAGER_CODE;
-        break;
       case "label":
         return InsightType.LABEL;
-        break;
       case "category":
         return InsightType.CATEGORY;
-        break;
       case "product_weight":
         return InsightType.PRODUCT_WEIGHT;
-        break;
       case "expiration_date":
         return InsightType.EXPIRATION_DATE;
-        break;
       case "brand":
         return InsightType.BRAND;
-        break;
       case "store":
         return InsightType.STORE;
-        break;
       case "nutrient":
         return InsightType.NUTRIENT;
-        break;
       default:
         return InsightType.UNDEFINED;
-        break;
     }
   }
 }

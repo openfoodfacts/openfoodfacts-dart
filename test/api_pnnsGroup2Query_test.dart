@@ -25,7 +25,6 @@ void main() {
         queryType: QueryType.TEST,
       );
 
-      expect(result != null, true);
       expect(result.page, 3);
       expect(result.pageSize, 24);
       expect(result.products != null, true);

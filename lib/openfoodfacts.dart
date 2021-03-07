@@ -96,9 +96,7 @@ class OpenFoodAPIClient {
     var fileMap = <String?, Uri?>{};
 
     // Images can be sent anonymously
-    if (user != null) {
-      dataMap.addAll(user.toData());
-    }
+    dataMap.addAll(user.toData());
     dataMap.addAll(image.toData());
     fileMap.putIfAbsent(image.getImageDataKey(), () => image.imageUrl);
 
@@ -119,10 +117,6 @@ class OpenFoodAPIClient {
   static Future<ProductResult> getProductRaw(
       String barcode, OpenFoodFactsLanguage language,
       {User? user, QueryType queryType = QueryType.PROD}) async {
-    if (barcode == null || barcode.isEmpty) {
-      return ProductResult();
-    }
-
     var productUri = Uri(
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
@@ -143,10 +137,6 @@ class OpenFoodAPIClient {
       ProductQueryConfiguration configuration,
       {User? user,
       QueryType queryType = QueryType.PROD}) async {
-    if (configuration.barcode == null || configuration.barcode.isEmpty) {
-      return ProductResult();
-    }
-
     var productUri = Uri(
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
@@ -279,10 +269,6 @@ class OpenFoodAPIClient {
   static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(
       String barcode, String lang, User user,
       {int? count, QueryType queryType = QueryType.PROD}) async {
-    if (barcode == null || barcode.isEmpty) {
-      return RobotoffQuestionResult();
-    }
-
     if (count == null || count <= 0) {
       count = 1;
     }

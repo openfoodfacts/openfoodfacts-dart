@@ -15,7 +15,6 @@ void main() {
     double servingQuantity_1 = 100;
 
     void testProductResult1(ProductResult result) {
-      expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode_1);
       expect(result.product != null, true);
@@ -52,7 +51,6 @@ void main() {
         queryType: QueryType.TEST,
       );
 
-      expect(status != null, true);
       expect(status.status, 1);
       expect(status.statusVerbose, "fields saved");
 
@@ -74,7 +72,6 @@ void main() {
       Status status2 = await OpenFoodAPIClient.saveProduct(
           TestConstants.TEST_USER, product2,
           queryType: QueryType.TEST);
-      expect(status2 != null, true);
       expect(status2.status, 1);
       expect(status2.statusVerbose, "fields saved");
 
@@ -101,7 +98,6 @@ void main() {
         frenchProduct,
         queryType: QueryType.TEST,
       );
-      expect(frenchStatus != null, true);
       expect(frenchStatus.status, 1);
       expect(frenchStatus.statusVerbose, "fields saved");
 
@@ -117,7 +113,6 @@ void main() {
       Status germanStatus = await OpenFoodAPIClient.saveProduct(
           TestConstants.TEST_USER, germanProduct,
           queryType: QueryType.TEST);
-      expect(germanStatus != null, true);
       expect(germanStatus.status, 1);
       expect(germanStatus.statusVerbose, "fields saved");
 
@@ -132,7 +127,6 @@ void main() {
           ]);
       var frenchResult = await OpenFoodAPIClient.getProduct(frenchConfig,
           queryType: QueryType.TEST);
-      assert(frenchResult != null);
       assert(frenchResult.product != null);
       assert(frenchResult.product!.productName != null);
 
@@ -148,7 +142,6 @@ void main() {
       var germanResult = await OpenFoodAPIClient.getProduct(germanConfig,
           queryType: QueryType.TEST);
 
-      assert(germanResult != null);
       assert(germanResult.product != null);
       assert(germanResult.product!.productName != null);
     });
@@ -165,7 +158,6 @@ void main() {
           TestConstants.TEST_USER, product,
           queryType: QueryType.TEST);
 
-      expect(status != null, true);
       expect(status.status, 1);
       expect(status.statusVerbose, "fields saved");
     });
@@ -184,7 +176,6 @@ void main() {
           TestConstants.TEST_USER, product,
           queryType: QueryType.TEST);
 
-      expect(status != null, true);
       expect(status.status, 1);
       expect(status.statusVerbose, "fields saved");
     });
@@ -203,7 +194,6 @@ void main() {
           TestConstants.TEST_USER, product,
           queryType: QueryType.TEST);
 
-      expect(status != null, true);
       expect(status.status, 1);
       expect(status.statusVerbose, "fields saved");
     });
@@ -225,7 +215,6 @@ void main() {
           TestConstants.TEST_USER, product,
           queryType: QueryType.TEST);
 
-      expect(status != null, true);
       expect(status.status, 1);
       expect(status.statusVerbose, "fields saved");
     });

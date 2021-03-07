@@ -18,7 +18,6 @@ void main() {
           barcode, OpenFoodFactsLanguage.GERMAN,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
@@ -93,7 +92,6 @@ void main() {
           fields: [ProductField.ALL]);
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
-      expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
@@ -113,7 +111,6 @@ void main() {
           barcode, OpenFoodFactsLanguage.GERMAN,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
       expect(result.product != null, true);

@@ -53,7 +53,6 @@ void main() {
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
@@ -139,7 +138,6 @@ void main() {
           fields: [ProductField.ALL]);
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
-      expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
@@ -164,7 +162,6 @@ void main() {
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
@@ -256,7 +253,6 @@ void main() {
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
@@ -277,7 +273,6 @@ void main() {
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
@@ -390,7 +385,6 @@ void main() {
           fields: [ProductField.ALL]);
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
-      assert(result != null);
       assert(result.product == null);
     });
 
@@ -403,7 +397,6 @@ void main() {
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      assert(result != null);
       assert(result.product != null);
       assert(result.product!.ingredientsText != null);
     });
@@ -421,7 +414,6 @@ void main() {
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      assert(result != null);
       assert(result.product != null);
       assert(result.product!.ecoscoreGrade != null);
 
@@ -456,7 +448,6 @@ void main() {
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      assert(result != null);
       assert(result.product != null);
       assert(result.product!.environmentImpactLevels != null);
       assert(
@@ -472,7 +463,6 @@ void main() {
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      assert(result != null);
       assert(result.product != null);
       assert(result.product!.productName != null);
       assert(result.product!.brandsTags != null);
@@ -490,7 +480,6 @@ void main() {
       result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      assert(result != null);
       assert(result.product != null);
       assert(result.product!.productName != null);
       assert(result.product!.brandsTags == null);
@@ -508,7 +497,6 @@ void main() {
       result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      assert(result != null);
       assert(result.product != null);
       assert(result.product!.productName != null);
       assert(result.product!.brandsTags == null);
@@ -527,7 +515,6 @@ void main() {
       result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      assert(result != null);
       assert(result.product != null);
       assert(result.product!.productName != null);
       assert(result.product!.brandsTags == null);
@@ -550,7 +537,6 @@ void main() {
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      assert(result != null);
       assert(result.product != null);
       assert(result.product!.productName != null);
       assert(result.product!.attributeGroups != null);
@@ -559,7 +545,6 @@ void main() {
 
       group = result.product!.attributeGroups!
           .singleWhere((element) => element.id == 'nutritional_quality');
-      assert(group != null);
       final List<Attribute> nutritionalQuality = group.attributes!;
       assert(nutritionalQuality.first.id == 'nutriscore');
       assert(nutritionalQuality.first.settingName == null);
@@ -578,14 +563,11 @@ void main() {
 
       group = result.product!.attributeGroups!
           .singleWhere((element) => element.id == 'processing');
-      assert(group != null);
       final List<Attribute> processing = group.attributes!;
-      assert(processing != null);
       assert(processing.first.id == 'nova');
 
       group = result.product!.attributeGroups!
           .singleWhere((element) => element.id == 'labels');
-      assert(group != null);
     });
 
     test('get product without setting OpenFoodFactsLanguage or ProductField; ',
@@ -598,7 +580,6 @@ void main() {
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER);
 
-      expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
@@ -640,7 +621,6 @@ void main() {
       result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
@@ -687,7 +667,6 @@ void main() {
       result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
-      expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
       expect(result.product != null, true);

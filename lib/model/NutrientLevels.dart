@@ -5,19 +5,14 @@ extension LevelExtension on Level? {
     switch (this) {
       case Level.LOW:
         return 'low';
-        break;
       case Level.MODERATE:
         return 'moderate';
-        break;
       case Level.HIGH:
         return 'high';
-        break;
       case Level.UNDEFINED:
         return 'undefined';
-        break;
       default:
         return 'undefined';
-        break;
     }
   }
 
@@ -25,16 +20,12 @@ extension LevelExtension on Level? {
     switch (s) {
       case 'low':
         return Level.LOW;
-        break;
       case 'moderate':
         return Level.MODERATE;
-        break;
       case 'high':
         return Level.HIGH;
-        break;
       default:
         return Level.UNDEFINED;
-        break;
     }
   }
 }
@@ -76,14 +67,6 @@ class NutrientLevels {
 
     if (nutrientLevels == null) {
       return null;
-    }
-
-    if (nutrientLevels.levels == null) {
-      nutrientLevels.levels = {};
-      nutrientLevels.levels[NUTRIENT_SUGARS] = Level.UNDEFINED;
-      nutrientLevels.levels[NUTRIENT_FAT] = Level.UNDEFINED;
-      nutrientLevels.levels[NUTRIENT_SATURATED_FAT] = Level.UNDEFINED;
-      nutrientLevels.levels[NUTRIENT_SALT] = Level.UNDEFINED;
     }
 
     for (int i = 0; i < nutrientLevels.levels.length; i++) {

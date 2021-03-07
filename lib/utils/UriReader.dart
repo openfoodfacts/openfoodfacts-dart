@@ -26,7 +26,7 @@ abstract class UriReader {
       case 'http':
       case 'https':
         final http.Response response = await http.get(uri);
-        return response?.bodyBytes;
+        return response.bodyBytes;
     }
     throw Exception('Unknown uri scheme for $uri');
   }

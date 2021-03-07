@@ -20,7 +20,6 @@ void main() {
           TestConstants.PROD_USER, image,
           queryType: QueryType.PROD);
 
-      expect(status != null, true);
       expect(status.status, "status not ok");
       expect(status.error, "This picture has already been sent.");
     });
@@ -36,7 +35,6 @@ void main() {
           TestConstants.PROD_USER, image,
           queryType: QueryType.PROD);
 
-      expect(status != null, true);
       expect(status.status, "status not ok");
       expect(status.error, "This picture has already been sent.");
     });
@@ -52,7 +50,6 @@ void main() {
           TestConstants.PROD_USER, image,
           queryType: QueryType.PROD);
 
-      expect(status != null, true);
       assert(status.error != "field imgupload_front_xx not set");
     });
 

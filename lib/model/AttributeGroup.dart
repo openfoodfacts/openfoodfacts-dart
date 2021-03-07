@@ -15,7 +15,7 @@ class AttributeGroup extends JsonObject {
         warning: json[_JSON_TAG_WARNING] as String?,
         attributes: (json[_JSON_TAG_ATTRIBUTES] as List?)
             ?.map((item) => Attribute.fromJson(item))
-            ?.toList(),
+            .toList(),
       );
 
   @override

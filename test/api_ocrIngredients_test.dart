@@ -117,7 +117,6 @@ void main() {
               barcode: "3613042717385",
               ingredientsText: ocrResponse.ingredientsTextFromImage),
           queryType: QueryType.PROD);
-      expect(saveStatus != null, true);
       expect(saveStatus.status, 1);
       expect(saveStatus.statusVerbose, "fields saved");
 
