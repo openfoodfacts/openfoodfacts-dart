@@ -20,6 +20,14 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     lang: LanguageHelper.fromJson(json['lang'] as String),
     quantity: json['quantity'] as String,
     imgSmallUrl: json['image_small_url'] as String,
+    imageFrontUrl: json['image_front_url'] as String,
+    imageFrontSmallUrl: json['image_front_small_url'] as String,
+    imageIngredientsUrl: json['image_ingredients_url'] as String,
+    imageIngredientsSmallUrl: json['image_ingredients_small_url'] as String,
+    imageNutritionUrl: json['image_nutrition_url'] as String,
+    imageNutritionSmallUrl: json['image_nutrition_small_url'] as String,
+    imagePackagingUrl: json['image_packaging_url'] as String,
+    imagePackagingSmallUrl: json['image_packaging_small_url'] as String,
     ingredientsText: json['ingredients_text'] as String,
     ingredientsTextDE: json['ingredients_text_de'] as String,
     ingredientsTextEN: json['ingredients_text_en'] as String,
@@ -103,6 +111,15 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('lang', LanguageHelper.toJson(instance.lang));
   writeNotNull('quantity', instance.quantity);
   writeNotNull('image_small_url', instance.imgSmallUrl);
+  writeNotNull('image_front_url', instance.imageFrontUrl);
+  writeNotNull('image_front_small_url', instance.imageFrontSmallUrl);
+  writeNotNull('image_ingredients_url', instance.imageIngredientsUrl);
+  writeNotNull(
+      'image_ingredients_small_url', instance.imageIngredientsSmallUrl);
+  writeNotNull('image_nutrition_url', instance.imageNutritionUrl);
+  writeNotNull('image_nutrition_small_url', instance.imageNutritionSmallUrl);
+  writeNotNull('image_packaging_url', instance.imagePackagingUrl);
+  writeNotNull('image_packaging_small_url', instance.imagePackagingSmallUrl);
   writeNotNull('serving_size', instance.servingSize);
   writeNotNull('serving_quantity', instance.servingQuantity);
   writeNotNull('product_quantity', instance.packagingQuantity);

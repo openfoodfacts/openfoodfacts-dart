@@ -42,8 +42,32 @@ class Product extends JsonObject {
   OpenFoodFactsLanguage lang;
   @JsonKey(includeIfNull: false)
   String quantity;
+
+  // Images
+  @Deprecated('imgSmallUrl is deprecated, use imageFrontSmallUrl instead')
   @JsonKey(name: 'image_small_url', includeIfNull: false)
   String imgSmallUrl;
+
+  @JsonKey(name: 'image_front_url', includeIfNull: false)
+  String imageFrontUrl;
+  @JsonKey(name: 'image_front_small_url', includeIfNull: false)
+  String imageFrontSmallUrl;
+
+  @JsonKey(name: 'image_ingredients_url', includeIfNull: false)
+  String imageIngredientsUrl;
+  @JsonKey(name: 'image_ingredients_small_url', includeIfNull: false)
+  String imageIngredientsSmallUrl;
+
+  @JsonKey(name: 'image_nutrition_url', includeIfNull: false)
+  String imageNutritionUrl;
+  @JsonKey(name: 'image_nutrition_small_url', includeIfNull: false)
+  String imageNutritionSmallUrl;
+
+  @JsonKey(name: 'image_packaging_url', includeIfNull: false)
+  String imagePackagingUrl;
+  @JsonKey(name: 'image_packaging_small_url', includeIfNull: false)
+  String imagePackagingSmallUrl;
+
   @JsonKey(name: 'serving_size', includeIfNull: false)
   String servingSize;
   @JsonKey(
@@ -184,6 +208,14 @@ class Product extends JsonObject {
       this.lang,
       this.quantity,
       this.imgSmallUrl,
+      this.imageFrontUrl,
+      this.imageFrontSmallUrl,
+      this.imageIngredientsUrl,
+      this.imageIngredientsSmallUrl,
+      this.imageNutritionUrl,
+      this.imageNutritionSmallUrl,
+      this.imagePackagingUrl,
+      this.imagePackagingSmallUrl,
       this.ingredientsText,
       this.ingredientsTextDE,
       this.ingredientsTextEN,
