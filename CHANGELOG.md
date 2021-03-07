@@ -1,4 +1,4 @@
-## [1.0.0] - 07.03.2021
+## [1.0.0-beta] - 07.03.2021
 - Migrated SDK to null safety
 - Updated test instructions in README.md
 - Improved Github Action validation
