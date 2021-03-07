@@ -63,7 +63,10 @@ class RobotoffQuestion {
     return result;
   }
 
-  static List<Map<String, dynamic>> toJson(List<RobotoffQuestion> questions) {
+  static List<Map<String, dynamic>> toJson(List<RobotoffQuestion>? questions) {
+    if (questions == null) {
+      return [];
+    }
     List<Map<String, dynamic>> result = [];
 
     for (RobotoffQuestion question in questions) {

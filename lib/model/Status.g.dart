@@ -9,8 +9,8 @@ part of 'Status.dart';
 Status _$StatusFromJson(Map<String, dynamic> json) {
   return Status(
     status: json['status'],
-    statusVerbose: json['status_verbose'] as String,
-    error: json['error'] as String,
+    statusVerbose: json['status_verbose'] as String?,
+    error: json['error'] as String?,
     imageId: JsonObject.parseInt(json['imgid']),
   );
 }

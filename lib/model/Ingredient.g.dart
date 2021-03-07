@@ -9,10 +9,10 @@ part of 'Ingredient.dart';
 Ingredient _$IngredientFromJson(Map<String, dynamic> json) {
   return Ingredient(
     rank: JsonObject.parseInt(json['rank']),
-    id: json['id'] as String,
-    text: json['text'] as String,
+    id: json['id'] as String?,
+    text: json['text'] as String?,
     percent: JsonObject.parseDouble(json['percent']),
-    bold: json['bold'] as bool,
+    bold: json['bold'] as bool?,
   );
 }
 

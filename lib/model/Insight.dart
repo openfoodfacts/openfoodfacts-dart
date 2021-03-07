@@ -143,7 +143,10 @@ class Insight {
     return result;
   }
 
-  static List<Map<String, dynamic>> toJson(List<Insight> insights) {
+  static List<Map<String, dynamic>> toJson(List<Insight>? insights) {
+    if (insights == null) {
+      return [];
+    }
     List<Map<String, dynamic>> result = [];
     for (Insight insight in insights) {
       Map<String, dynamic> jsonInsight = {};

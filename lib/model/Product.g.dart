@@ -8,73 +8,80 @@ part of 'Product.dart';
 
 Product _$ProductFromJson(Map<String, dynamic> json) {
   return Product(
-    barcode: json['code'] as String,
-    productName: json['product_name'] as String,
-    productNameDE: json['product_name_de'] as String,
-    productNameEN: json['product_name_en'] as String,
-    productNameFR: json['product_name_fr'] as String,
-    brands: json['brands'] as String,
-    countries: json['countries'] as String,
-    countriesTags:
-        (json['countries_tags'] as List)?.map((e) => e as String)?.toList(),
-    lang: LanguageHelper.fromJson(json['lang'] as String),
-    quantity: json['quantity'] as String,
-    imgSmallUrl: json['image_small_url'] as String,
-    ingredientsText: json['ingredients_text'] as String,
-    ingredientsTextDE: json['ingredients_text_de'] as String,
-    ingredientsTextEN: json['ingredients_text_en'] as String,
-    categories: json['categories'] as String,
-    nutrimentEnergyUnit: json['nutriment_energy_unit'] as String,
-    nutrimentDataPer: json['nutrition_data_per'] as String,
-    nutriscore: json['nutrition_grade_fr'] as String,
+    barcode: json['code'] as String?,
+    productName: json['product_name'] as String?,
+    productNameDE: json['product_name_de'] as String?,
+    productNameEN: json['product_name_en'] as String?,
+    productNameFR: json['product_name_fr'] as String?,
+    brands: json['brands'] as String?,
+    countries: json['countries'] as String?,
+    countriesTags: (json['countries_tags'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList(),
+    lang: LanguageHelper.fromJson(json['lang'] as String?),
+    quantity: json['quantity'] as String?,
+    imgSmallUrl: json['image_small_url'] as String?,
+    ingredientsText: json['ingredients_text'] as String?,
+    ingredientsTextDE: json['ingredients_text_de'] as String?,
+    ingredientsTextEN: json['ingredients_text_en'] as String?,
+    categories: json['categories'] as String?,
+    nutrimentEnergyUnit: json['nutriment_energy_unit'] as String?,
+    nutrimentDataPer: json['nutrition_data_per'] as String?,
+    nutriscore: json['nutrition_grade_fr'] as String?,
     nutriments: json['nutriments'] == null
         ? null
         : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
-    additives: Additives.additivesFromJson(json['additives_tags'] as List),
+    additives: Additives.additivesFromJson(json['additives_tags'] as List?),
     nutrientLevels: NutrientLevels.fromJson(
         json['nutrient_levels'] as Map<String, dynamic>),
-    servingSize: json['serving_size'] as String,
+    servingSize: json['serving_size'] as String?,
     servingQuantity:
         JsonHelper.servingQuantityFromJson(json['serving_quantity']),
-    ecoscoreGrade: json['ecoscore_grade'] as String,
+    ecoscoreGrade: json['ecoscore_grade'] as String?,
     ecoscoreScore: JsonObject.parseDouble(json['ecoscore_score']),
   )
-    ..brandsTags =
-        (json['brands_tags'] as List)?.map((e) => e as String)?.toList()
+    ..brandsTags = (json['brands_tags'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList()
     ..packagingQuantity = json['product_quantity']
     ..selectedImages = JsonHelper.selectedImagesFromJson(
         json['selected_images'] as Map<String, dynamic>)
     ..images = JsonHelper.imagesFromJson(json['images'] as Map<String, dynamic>)
-    ..ingredients = (json['ingredients'] as List)
-        ?.map((e) =>
-            e == null ? null : Ingredient.fromJson(e as Map<String, dynamic>))
-        ?.toList()
+    ..ingredients = (json['ingredients'] as List<dynamic>?)
+        ?.map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
+        .toList()
     ..environmentImpactLevels = EnvironmentImpactLevels.fromJson(
-        json['environment_impact_level_tags'] as List)
-    ..allergens = Allergens.allergensFromJson(json['allergens_tags'] as List)
-    ..ingredientsTextFR = json['ingredients_text_fr'] as String
+        json['environment_impact_level_tags'] as List?)
+    ..allergens = Allergens.allergensFromJson(json['allergens_tags'] as List?)
+    ..ingredientsTextFR = json['ingredients_text_fr'] as String?
     ..ingredientsAnalysisTags = IngredientsAnalysisTags.fromJson(
-        json['ingredients_analysis_tags'] as List)
-    ..categoriesTags =
-        (json['categories_tags'] as List)?.map((e) => e as String)?.toList()
-    ..categoriesTagsTranslated = (json['categories_tags_translated'] as List)
+        json['ingredients_analysis_tags'] as List?)
+    ..categoriesTags = (json['categories_tags'] as List<dynamic>?)
         ?.map((e) => e as String)
-        ?.toList()
-    ..labelsTags =
-        (json['labels_tags'] as List)?.map((e) => e as String)?.toList()
-    ..labelsTagsTranslated = (json['labels_tags_translated'] as List)
+        .toList()
+    ..categoriesTagsTranslated = (json['categories_tags_translated'] as List<dynamic>?)
         ?.map((e) => e as String)
-        ?.toList()
-    ..miscTags = (json['misc'] as List)?.map((e) => e as String)?.toList()
-    ..statesTags =
-        (json['states_tags'] as List)?.map((e) => e as String)?.toList()
-    ..tracesTags =
-        (json['traces_tags'] as List)?.map((e) => e as String)?.toList()
-    ..storesTags =
-        (json['stores_tags'] as List)?.map((e) => e as String)?.toList()
-    ..attributeGroups = (json['attribute_groups'] as List)
-        ?.map((e) => e == null ? null : AttributeGroup.fromJson(e))
-        ?.toList()
+        .toList()
+    ..labelsTags = (json['labels_tags'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList()
+    ..labelsTagsTranslated = (json['labels_tags_translated'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList()
+    ..miscTags =
+        (json['misc'] as List<dynamic>?)?.map((e) => e as String).toList()
+    ..statesTags = (json['states_tags'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList()
+    ..tracesTags = (json['traces_tags'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList()
+    ..storesTags = (json['stores_tags'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList()
+    ..attributeGroups = (json['attribute_groups'] as List<dynamic>?)
+        ?.map((e) => AttributeGroup.fromJson(e))
+        .toList()
     ..lastModified = JsonHelper.timestampToDate(json['last_modified_t'])
     ..ecoscoreData = json['ecoscore_data'] == null
         ? null

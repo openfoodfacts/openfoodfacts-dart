@@ -8,13 +8,11 @@ part of 'SpellingCorrections.dart';
 
 SpellingCorrection _$SpellingCorrectionFromJson(Map<String, dynamic> json) {
   return SpellingCorrection(
-    json['corrected'] as String,
-    json['text'] as String,
-    (json['corrections'] as List)
-        ?.map((e) => e == null
-            ? null
-            : TermCorrections.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    json['corrected'] as String?,
+    json['text'] as String?,
+    (json['corrections'] as List<dynamic>?)
+        ?.map((e) => TermCorrections.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
@@ -35,11 +33,10 @@ Map<String, dynamic> _$SpellingCorrectionToJson(SpellingCorrection instance) {
 
 TermCorrections _$TermCorrectionsFromJson(Map<String, dynamic> json) {
   return TermCorrections(
-    (json['term_corrections'] as List)
-        ?.map((e) =>
-            e == null ? null : Correction.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    (json['score'] as num)?.toDouble(),
+    (json['term_corrections'] as List<dynamic>?)
+        ?.map((e) => Correction.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    (json['score'] as num?)?.toDouble(),
   );
 }
 
@@ -51,11 +48,11 @@ Map<String, dynamic> _$TermCorrectionsToJson(TermCorrections instance) =>
 
 Correction _$CorrectionFromJson(Map<String, dynamic> json) {
   return Correction(
-    json['correction'] as String,
-    json['original'] as String,
-    json['start_offset'] as int,
-    json['end_offset'] as int,
-    json['is_valid'] as bool,
+    json['correction'] as String?,
+    json['original'] as String?,
+    json['start_offset'] as int?,
+    json['end_offset'] as int?,
+    json['is_valid'] as bool?,
   );
 }
 
