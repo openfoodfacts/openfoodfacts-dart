@@ -32,8 +32,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
         ? null
         : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
     additives: Additives.additivesFromJson(json['additives_tags'] as List?),
-    nutrientLevels: NutrientLevels.fromJson(
-        json['nutrient_levels'] as Map<String, dynamic>),
+    nutrientLevels: NutrientLevels.fromJson(json['nutrient_levels'] as Map?),
     servingSize: json['serving_size'] as String?,
     servingQuantity:
         JsonHelper.servingQuantityFromJson(json['serving_quantity']),
@@ -44,9 +43,9 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
         ?.map((e) => e as String)
         .toList()
     ..packagingQuantity = json['product_quantity']
-    ..selectedImages = JsonHelper.selectedImagesFromJson(
-        json['selected_images'] as Map<String, dynamic>)
-    ..images = JsonHelper.imagesFromJson(json['images'] as Map<String, dynamic>)
+    ..selectedImages =
+        JsonHelper.selectedImagesFromJson(json['selected_images'] as Map?)
+    ..images = JsonHelper.imagesFromJson(json['images'] as Map?)
     ..ingredients = (json['ingredients'] as List<dynamic>?)
         ?.map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
         .toList()
@@ -59,9 +58,10 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     ..categoriesTags = (json['categories_tags'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList()
-    ..categoriesTagsTranslated = (json['categories_tags_translated'] as List<dynamic>?)
-        ?.map((e) => e as String)
-        .toList()
+    ..categoriesTagsTranslated =
+        (json['categories_tags_translated'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList()
     ..labelsTags = (json['labels_tags'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList()

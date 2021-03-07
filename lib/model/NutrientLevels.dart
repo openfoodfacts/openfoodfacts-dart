@@ -47,7 +47,7 @@ class NutrientLevels {
 
   NutrientLevels(this.levels);
 
-  static NutrientLevels fromJson(Map<String, dynamic>? json) {
+  static NutrientLevels fromJson(Map? json) {
     Map<String, Level> result = {};
 
     if (json == null) {

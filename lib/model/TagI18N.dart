@@ -7,6 +7,4 @@ class TagI18N {
   String? textFR;
 
   TagI18N(this.id);
-
-  //TODO: how to get the text (DE, EN, FR, ...) for the given id ?
 }

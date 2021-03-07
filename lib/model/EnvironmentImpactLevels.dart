@@ -9,10 +9,9 @@ class EnvironmentImpactLevels {
     if (json == null) {
       return null;
     }
-
     List<Level> result = <Level>[];
 
-    for (String s in json as Iterable<String>) {
+    for (String s in json) {
       result.add(LevelExtension.getLevel(s.substring(3)));
     }
 

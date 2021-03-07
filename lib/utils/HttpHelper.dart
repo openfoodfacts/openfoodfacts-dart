@@ -26,8 +26,7 @@ class HttpHelper {
       {User? user, QueryType queryType = QueryType.PROD}) async {
     http.Response response = await http.get(uri,
         headers: _buildHeaders(user,
-                isTestModeActive: queryType == QueryType.PROD ? false : true)
-            as Map<String, String>?);
+            isTestModeActive: queryType == QueryType.PROD ? false : true));
 
     return response;
   }
@@ -41,8 +40,7 @@ class HttpHelper {
     http.Response response = await http.post(
       uri,
       headers: _buildHeaders(user,
-              isTestModeActive: queryType == QueryType.PROD ? false : true)
-          as Map<String, String>?,
+          isTestModeActive: queryType == QueryType.PROD ? false : true),
       body: body,
     );
     return response;
@@ -85,12 +83,16 @@ class HttpHelper {
 
   /// build the request headers
   /// By default isTestMode is false
-  Map<String, String?> _buildHeaders(User? user,
+  Map<String, String>? _buildHeaders(User? user,
       {bool isTestModeActive = false}) {
-    var headers = <String, String?>{};
+    Map<String, String>? headers = {};
     headers.addAll({'Accept': 'application/json'});
-    headers.addAll({'UserAgent': user != null ? user.comment : USER_AGENT});
-    headers.addAll({'From': user != null ? user.userId : FROM});
+    headers.addAll({
+      'UserAgent':
+          (user != null && user.comment != null) ? user.comment! : USER_AGENT
+    });
+    headers.addAll(
+        {'From': (user != null && user.userId != null) ? user.userId! : FROM});
 
     if (isTestModeActive) {
       var token = 'Basic ' + base64Encode(utf8.encode('off:off'));
