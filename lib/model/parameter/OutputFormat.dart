@@ -21,7 +21,7 @@ class OutputFormat extends Parameter {
     return "1";
   }
 
-  final Format format;
+  final Format? format;
 
   const OutputFormat({this.format});
 }

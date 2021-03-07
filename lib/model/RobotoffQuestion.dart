@@ -6,13 +6,13 @@ part 'RobotoffQuestion.g.dart';
 
 @JsonSerializable()
 class RobotoffQuestionResult extends JsonObject {
-  final String status;
+  final String? status;
   @JsonKey(
       name: 'questions',
       includeIfNull: false,
       fromJson: RobotoffQuestion.fromJson,
       toJson: RobotoffQuestion.toJson)
-  final List<RobotoffQuestion> questions;
+  final List<RobotoffQuestion>? questions;
 
   const RobotoffQuestionResult({this.status, this.questions});
 
@@ -24,16 +24,16 @@ class RobotoffQuestionResult extends JsonObject {
 }
 
 class RobotoffQuestion {
-  final String barcode;
-  final String type;
-  final String value;
-  final String question;
+  final String? barcode;
+  final String? type;
+  final String? value;
+  final String? question;
   @JsonKey(name: "insight_id")
-  final String insightId;
+  final String? insightId;
   @JsonKey(name: "insight_type")
-  final InsightType insightType;
+  final InsightType? insightType;
   @JsonKey(name: "source_image_url")
-  final String imageUrl;
+  final String? imageUrl;
 
   const RobotoffQuestion(
       {this.barcode,
@@ -46,7 +46,7 @@ class RobotoffQuestion {
 
   static List<RobotoffQuestion> fromJson(List<dynamic> json) {
     List<RobotoffQuestion> result = [];
-    for (Map<String, dynamic> jsonQuestion in json) {
+    for (Map<String, dynamic> jsonQuestion in json as Iterable<Map<String, dynamic>>) {
       InsightType insightType =
           InsightTypesExtension.getType(jsonQuestion["insight_type"]);
 
@@ -66,7 +66,7 @@ class RobotoffQuestion {
     List<Map<String, dynamic>> result = [];
 
     for (RobotoffQuestion question in questions) {
-      Map<String, String> jsonQuestion = {};
+      Map<String, String?> jsonQuestion = {};
 
       jsonQuestion["barcode"] = question.barcode;
       jsonQuestion["type"] = question.type;

@@ -18,39 +18,39 @@ part 'Product.g.dart';
 @JsonSerializable()
 class Product extends JsonObject {
   @JsonKey(name: 'code')
-  String barcode;
+  String? barcode;
   @JsonKey(name: 'product_name', includeIfNull: false)
-  String productName;
+  String? productName;
   @JsonKey(name: 'product_name_de', includeIfNull: false)
-  String productNameDE;
+  String? productNameDE;
   @JsonKey(name: 'product_name_en', includeIfNull: false)
-  String productNameEN;
+  String? productNameEN;
   @JsonKey(name: 'product_name_fr', includeIfNull: false)
-  String productNameFR;
-  String brands;
+  String? productNameFR;
+  String? brands;
   @JsonKey(name: 'brands_tags', includeIfNull: false)
-  List<String> brandsTags;
+  List<String>? brandsTags;
   @JsonKey(name: 'countries', includeIfNull: false)
-  String countries;
+  String? countries;
   @JsonKey(name: 'countries_tags', includeIfNull: false)
-  List<String> countriesTags;
+  List<String>? countriesTags;
   @JsonKey(
       name: 'lang',
       toJson: LanguageHelper.toJson,
       fromJson: LanguageHelper.fromJson,
       includeIfNull: false)
-  OpenFoodFactsLanguage lang;
+  OpenFoodFactsLanguage? lang;
   @JsonKey(includeIfNull: false)
-  String quantity;
+  String? quantity;
   @JsonKey(name: 'image_small_url', includeIfNull: false)
-  String imgSmallUrl;
+  String? imgSmallUrl;
   @JsonKey(name: 'serving_size', includeIfNull: false)
-  String servingSize;
+  String? servingSize;
   @JsonKey(
       name: 'serving_quantity',
       fromJson: JsonHelper.servingQuantityFromJson,
       includeIfNull: false)
-  double servingQuantity;
+  double? servingQuantity;
   @JsonKey(name: 'product_quantity', includeIfNull: false)
   dynamic packagingQuantity;
 
@@ -60,117 +60,117 @@ class Product extends JsonObject {
       includeIfNull: false,
       fromJson: JsonHelper.selectedImagesFromJson,
       toJson: JsonHelper.selectedImagesToJson)
-  List<ProductImage> selectedImages;
+  List<ProductImage>? selectedImages;
 
   @JsonKey(
       name: 'images',
       includeIfNull: false,
       fromJson: JsonHelper.imagesFromJson,
       toJson: JsonHelper.imagesToJson)
-  List<ProductImage> images;
+  List<ProductImage>? images;
 
   @JsonKey(includeIfNull: false, toJson: JsonHelper.ingredientsToJson)
-  List<Ingredient> ingredients;
+  List<Ingredient>? ingredients;
 
   @JsonKey(includeIfNull: false, toJson: Nutriments.toJsonHelper)
-  Nutriments nutriments;
+  Nutriments? nutriments;
 
   @JsonKey(
       name: 'additives_tags',
       includeIfNull: false,
       fromJson: Additives.additivesFromJson,
       toJson: Additives.additivesToJson)
-  Additives additives;
+  Additives? additives;
 
   @JsonKey(
       name: 'environment_impact_level_tags',
       includeIfNull: false,
       fromJson: EnvironmentImpactLevels.fromJson,
       toJson: EnvironmentImpactLevels.toJson)
-  EnvironmentImpactLevels environmentImpactLevels;
+  EnvironmentImpactLevels? environmentImpactLevels;
 
   @JsonKey(
       name: 'allergens_tags',
       includeIfNull: false,
       fromJson: Allergens.allergensFromJson,
       toJson: Allergens.allergensToJson)
-  Allergens allergens;
+  Allergens? allergens;
 
   @JsonKey(
       name: 'nutrient_levels',
       includeIfNull: false,
       fromJson: NutrientLevels.fromJson,
       toJson: NutrientLevels.toJson)
-  NutrientLevels nutrientLevels;
+  NutrientLevels? nutrientLevels;
 
   @JsonKey(name: 'ingredients_text', includeIfNull: false)
-  String ingredientsText;
+  String? ingredientsText;
   @JsonKey(name: 'ingredients_text_de', includeIfNull: false)
-  String ingredientsTextDE;
+  String? ingredientsTextDE;
   @JsonKey(name: 'ingredients_text_en', includeIfNull: false)
-  String ingredientsTextEN;
+  String? ingredientsTextEN;
   @JsonKey(name: 'ingredients_text_fr', includeIfNull: false)
-  String ingredientsTextFR;
+  String? ingredientsTextFR;
 
   @JsonKey(
       name: 'ingredients_analysis_tags',
       includeIfNull: false,
       fromJson: IngredientsAnalysisTags.fromJson,
       toJson: IngredientsAnalysisTags.toJson)
-  IngredientsAnalysisTags ingredientsAnalysisTags;
+  IngredientsAnalysisTags? ingredientsAnalysisTags;
 
   @JsonKey(name: 'nutriment_energy_unit', includeIfNull: false)
-  String nutrimentEnergyUnit;
+  String? nutrimentEnergyUnit;
   @JsonKey(name: 'nutrition_data_per', includeIfNull: false)
-  String nutrimentDataPer;
+  String? nutrimentDataPer;
   @JsonKey(name: 'nutrition_grade_fr', includeIfNull: false)
-  String nutriscore;
+  String? nutriscore;
 
   @JsonKey(includeIfNull: false)
-  String categories;
+  String? categories;
 
   @JsonKey(name: 'categories_tags', includeIfNull: false)
-  List<String> categoriesTags;
+  List<String>? categoriesTags;
   @JsonKey(name: 'categories_tags_translated', includeIfNull: false)
-  List<String> categoriesTagsTranslated;
+  List<String>? categoriesTagsTranslated;
   @JsonKey(name: 'labels_tags', includeIfNull: false)
-  List<String> labelsTags;
+  List<String>? labelsTags;
   @JsonKey(name: 'labels_tags_translated', includeIfNull: false)
-  List<String> labelsTagsTranslated;
+  List<String>? labelsTagsTranslated;
   @JsonKey(name: 'misc', includeIfNull: false)
-  List<String> miscTags;
+  List<String>? miscTags;
   @JsonKey(name: 'states_tags', includeIfNull: false)
-  List<String> statesTags;
+  List<String>? statesTags;
   @JsonKey(name: 'traces_tags', includeIfNull: false)
-  List<String> tracesTags;
+  List<String>? tracesTags;
   @JsonKey(name: 'stores_tags', includeIfNull: false)
-  List<String> storesTags;
+  List<String>? storesTags;
 
   @JsonKey(
       name: 'attribute_groups',
       includeIfNull: false,
       toJson: JsonHelper.attributeGroupsToJson)
-  List<AttributeGroup> attributeGroups;
+  List<AttributeGroup>? attributeGroups;
 
   @JsonKey(
       name: 'last_modified_t',
       includeIfNull: false,
       fromJson: JsonHelper.timestampToDate,
       toJson: JsonHelper.dateToTimestamp)
-  DateTime lastModified;
+  DateTime? lastModified;
 
   @JsonKey(name: 'ecoscore_grade', includeIfNull: false)
-  String ecoscoreGrade;
+  String? ecoscoreGrade;
   @JsonKey(
       name: 'ecoscore_score',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double ecoscoreScore;
+  double? ecoscoreScore;
   @JsonKey(
       name: 'ecoscore_data',
       includeIfNull: false,
       toJson: EcoscoreData.toJsonHelper)
-  EcoscoreData ecoscoreData;
+  EcoscoreData? ecoscoreData;
 
   Product(
       {this.barcode,
@@ -204,11 +204,11 @@ class Product extends JsonObject {
     for (final String key in json.keys) {
       if (key.startsWith('categories_tags_')) {
         result.categoriesTagsTranslated =
-            (json[key] as List)?.map((e) => e as String)?.toList();
+            (json[key] as List?)?.map((e) => e as String)?.toList();
       }
       if (key.startsWith('labels_tags_')) {
         result.labelsTagsTranslated =
-            (json[key] as List)?.map((e) => e as String)?.toList();
+            (json[key] as List?)?.map((e) => e as String)?.toList();
       }
     }
     return result;

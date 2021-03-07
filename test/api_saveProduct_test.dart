@@ -19,16 +19,16 @@ void main() {
       expect(result.status, 1);
       expect(result.barcode, barcode_1);
       expect(result.product != null, true);
-      expect(result.product.barcode, barcode_1);
+      expect(result.product!.barcode, barcode_1);
 
-      expect(result.product.quantity != null, true);
-      expect(result.product.quantity, quantity_1);
+      expect(result.product!.quantity != null, true);
+      expect(result.product!.quantity, quantity_1);
 
-      expect(result.product.servingQuantity != null, true);
-      expect(result.product.servingQuantity, servingQuantity_1);
+      expect(result.product!.servingQuantity != null, true);
+      expect(result.product!.servingQuantity, servingQuantity_1);
 
-      expect(result.product.servingSize != null, true);
-      expect(result.product.servingSize, servingSize_1);
+      expect(result.product!.servingSize != null, true);
+      expect(result.product!.servingSize, servingSize_1);
     }
 
     test('save product test, set serving-size', () async {
@@ -134,7 +134,7 @@ void main() {
           queryType: QueryType.TEST);
       assert(frenchResult != null);
       assert(frenchResult.product != null);
-      assert(frenchResult.product.productName != null);
+      assert(frenchResult.product!.productName != null);
 
       // get german product
       ProductQueryConfiguration germanConfig = ProductQueryConfiguration(
@@ -150,7 +150,7 @@ void main() {
 
       assert(germanResult != null);
       assert(germanResult.product != null);
-      assert(germanResult.product.productName != null);
+      assert(germanResult.product!.productName != null);
     });
 
     test('add new product test 2', () async {

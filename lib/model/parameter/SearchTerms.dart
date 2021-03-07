@@ -8,10 +8,10 @@ class SearchTerms extends Parameter {
 
   @override
   String getValue() {
-    return terms.join('+');
+    return terms!.join('+');
   }
 
-  final List<String> terms;
+  final List<String>? terms;
 
   const SearchTerms({this.terms});
 }

@@ -1,6 +1,6 @@
 enum Level { LOW, MODERATE, HIGH, UNDEFINED }
 
-extension LevelExtension on Level {
+extension LevelExtension on Level? {
   String get value {
     switch (this) {
       case Level.LOW:
@@ -21,7 +21,7 @@ extension LevelExtension on Level {
     }
   }
 
-  static Level getLevel(String s) {
+  static Level getLevel(String? s) {
     switch (s) {
       case 'low':
         return Level.LOW;
@@ -56,7 +56,7 @@ class NutrientLevels {
 
   NutrientLevels(this.levels);
 
-  static NutrientLevels fromJson(Map<String, dynamic> json) {
+  static NutrientLevels fromJson(Map<String, dynamic>? json) {
     Map<String, Level> result = {};
 
     if (json == null) {
@@ -71,7 +71,7 @@ class NutrientLevels {
     return NutrientLevels(result);
   }
 
-  static Map<String, dynamic> toJson(NutrientLevels nutrientLevels) {
+  static Map<String, dynamic>? toJson(NutrientLevels? nutrientLevels) {
     Map<String, String> result = {};
 
     if (nutrientLevels == null) {

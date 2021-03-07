@@ -8,12 +8,12 @@ class Status extends JsonObject {
   final status;
 
   @JsonKey(name: 'status_verbose')
-  final String statusVerbose;
+  final String? statusVerbose;
 
-  final String error;
+  final String? error;
 
   @JsonKey(name: 'imgid', fromJson: JsonObject.parseInt)
-  final int imageId;
+  final int? imageId;
 
   Status({
     this.status,

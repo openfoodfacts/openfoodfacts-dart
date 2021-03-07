@@ -24,7 +24,7 @@ void main() {
     ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
         user: TestConstants.TEST_USER);
     expect(result.status, 1);
-    Product product = result.product;
+    Product product = result.product!;
     Map<String, dynamic> productMap = product.toJson();
     String json = jsonEncode(productMap);
     assert(json is String);

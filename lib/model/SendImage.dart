@@ -4,12 +4,12 @@ import '../interface/JsonObject.dart';
 import '../model/ProductImage.dart';
 
 class SendImage extends JsonObject {
-  OpenFoodFactsLanguage lang;
+  OpenFoodFactsLanguage? lang;
 
   // ignored for json
-  Uri imageUrl;
+  Uri? imageUrl;
 
-  String barcode;
+  String? barcode;
 
   ImageField imageField;
 
@@ -21,7 +21,7 @@ class SendImage extends JsonObject {
   });
 
   /// the json key depending on the image field of this object.
-  String getImageDataKey() {
+  String? getImageDataKey() {
     switch (imageField) {
       case ImageField.FRONT:
         return 'imgupload_front';
@@ -41,7 +41,7 @@ class SendImage extends JsonObject {
 
     return SendImage(
       lang: LanguageHelper.fromJson(json['lang']),
-      barcode: json['code'] as String,
+      barcode: json['code'] as String?,
       imageField: imageField,
     );
   }

@@ -6,7 +6,7 @@ part 'Agribalyse.g.dart';
 @JsonSerializable()
 class Agribalyse extends JsonObject {
   @JsonKey(includeIfNull: false, fromJson: JsonObject.parseDouble)
-  double score;
+  double? score;
 
   Agribalyse({this.score});
 

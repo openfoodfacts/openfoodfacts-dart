@@ -29,9 +29,9 @@ void main() {
       expect(result.page, 3);
       expect(result.pageSize, 24);
       expect(result.products != null, true);
-      expect(result.products.length, 24);
-      expect(result.products[0].runtimeType, Product);
-      expect(result.count > 1500, true);
+      expect(result.products!.length, 24);
+      expect(result.products![0].runtimeType, Product);
+      expect(result.count! > 1500, true);
     });
   }, skip: "This Group of tests is unstable");
 }

@@ -37,9 +37,9 @@ void main() {
       expect(result.page, 1);
       expect(result.pageSize, 10);
       expect(result.products != null, true);
-      expect(result.products.length, 10);
-      expect(result.products[0].runtimeType, Product);
-      expect(result.count > 30000, true);
+      expect(result.products!.length, 10);
+      expect(result.products![0].runtimeType, Product);
+      expect(result.count! > 30000, true);
     });
 
     test('search favorite products EN', () async {
@@ -65,9 +65,9 @@ void main() {
       expect(result.page, 14);
       expect(result.pageSize, 3);
       expect(result.products != null, true);
-      expect(result.products.length, 3);
-      expect(result.products[0].runtimeType, Product);
-      expect(result.count > 30000, true);
+      expect(result.products!.length, 3);
+      expect(result.products![0].runtimeType, Product);
+      expect(result.count! > 30000, true);
     });
 
     test('type bug : ingredient percent int vs String ', () async {
@@ -93,9 +93,9 @@ void main() {
       expect(result.page, 16);
       expect(result.pageSize, 5);
       expect(result.products != null, true);
-      expect(result.products.length, 5);
-      expect(result.products[0].runtimeType, Product);
-      expect(result.count > 30000, true);
+      expect(result.products!.length, 5);
+      expect(result.products![0].runtimeType, Product);
+      expect(result.count! > 30000, true);
     });
 
     /*test('search products by keywords', () async {
@@ -150,7 +150,7 @@ void main() {
           TestConstants.TEST_USER, configuration,
           queryType: QueryType.TEST);
 
-      int totalCount = result.count;
+      int totalCount = result.count!;
 
       parameters = <Parameter>[
         const OutputFormat(format: Format.JSON),
@@ -171,7 +171,7 @@ void main() {
           TestConstants.TEST_USER, configuration,
           queryType: QueryType.TEST);
 
-      expect(result.count < totalCount, true);
+      expect(result.count! < totalCount, true);
     });
 
     test('search products with filter on tags', () async {
@@ -203,11 +203,11 @@ void main() {
       expect(result.page, 5);
       expect(result.pageSize, 10);
       expect(result.products != null, true);
-      expect(result.products.length, 10);
-      expect(result.products[0].runtimeType, Product);
-      expect(result.products[0].categoriesTags.contains("en:breakfast-cereals"),
+      expect(result.products!.length, 10);
+      expect(result.products![0].runtimeType, Product);
+      expect(result.products![0].categoriesTags!.contains("en:breakfast-cereals"),
           true);
-      expect(result.products[0].nutriscore.toUpperCase() == 'A', true);
+      expect(result.products![0].nutriscore!.toUpperCase() == 'A', true);
     });
   });
 }

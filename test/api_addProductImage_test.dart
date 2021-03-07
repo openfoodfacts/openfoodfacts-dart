@@ -65,7 +65,7 @@ void main() {
 
       expect(result.status != null, true);
       expect(
-          result.product.images
+          result.product!.images!
               .singleWhere((image) =>
                   image.field == ImageField.FRONT &&
                   image.size == ImageSize.DISPLAY)

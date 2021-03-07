@@ -13,7 +13,7 @@ void main() {
               "5449000227959", OpenFoodFactsLanguage.FRENCH,
               queryType: QueryType.PROD);
 
-      expect(response.ingredientsTextFromImage.isNotEmpty, true);
+      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
 
       response = await OpenFoodAPIClient.extractIngredients(
           TestConstants.PROD_USER,
@@ -21,7 +21,7 @@ void main() {
           OpenFoodFactsLanguage.ENGLISH,
           queryType: QueryType.PROD);
 
-      expect(response.ingredientsTextFromImage.isNotEmpty, true);
+      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
 
       response = await OpenFoodAPIClient.extractIngredients(
           TestConstants.PROD_USER,
@@ -29,7 +29,7 @@ void main() {
           OpenFoodFactsLanguage.GERMAN,
           queryType: QueryType.PROD);
 
-      expect(response.ingredientsTextFromImage.isNotEmpty, true);
+      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
     });
     test('Extract Ingredients using Google Vision Cloud', () async {
       OcrIngredientsResult response =
@@ -39,7 +39,7 @@ void main() {
               queryType: QueryType.PROD);
 
       expect(response.status, 0);
-      expect(response.ingredientsTextFromImage.isNotEmpty, true);
+      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
 
       response = await OpenFoodAPIClient.extractIngredients(
           TestConstants.PROD_USER,
@@ -49,7 +49,7 @@ void main() {
           queryType: QueryType.PROD);
 
       expect(response.status, 0);
-      expect(response.ingredientsTextFromImage.isNotEmpty, true);
+      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
 
       response = await OpenFoodAPIClient.extractIngredients(
           TestConstants.PROD_USER,
@@ -59,7 +59,7 @@ void main() {
           queryType: QueryType.PROD);
 
       expect(response.status, 0);
-      expect(response.ingredientsTextFromImage.isNotEmpty, true);
+      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
     });
     test('Extract Ingredients using Tesseract', () async {
       OcrIngredientsResult response =
@@ -68,7 +68,7 @@ void main() {
               ocrField: OcrField.TESSERACT, queryType: QueryType.PROD);
 
       expect(response.status, 0);
-      expect(response.ingredientsTextFromImage.isNotEmpty, true);
+      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
 
       response = await OpenFoodAPIClient.extractIngredients(
           TestConstants.PROD_USER,
@@ -78,7 +78,7 @@ void main() {
           queryType: QueryType.PROD);
 
       expect(response.status, 0);
-      expect(response.ingredientsTextFromImage.isNotEmpty, true);
+      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
 
       response = await OpenFoodAPIClient.extractIngredients(
           TestConstants.PROD_USER,
@@ -88,7 +88,7 @@ void main() {
           queryType: QueryType.PROD);
 
       expect(response.status, 0);
-      expect(response.ingredientsTextFromImage.isNotEmpty, true);
+      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
     });
 
     test('Add ingredients image to OFF server and then extract the text',
@@ -108,7 +108,7 @@ void main() {
               queryType: QueryType.PROD);
 
       expect(ocrResponse.status, 0);
-      expect(ocrResponse.ingredientsTextFromImage.isNotEmpty, true);
+      expect(ocrResponse.ingredientsTextFromImage!.isNotEmpty, true);
 
       // Save the extracted ingredients to the product on the OFF server
       Status saveStatus = await OpenFoodAPIClient.saveProduct(
@@ -132,7 +132,7 @@ void main() {
           user: TestConstants.PROD_USER, queryType: QueryType.PROD);
 
       expect(
-          ocrResponse.ingredientsTextFromImage, result.product.ingredientsText);
+          ocrResponse.ingredientsTextFromImage, result.product!.ingredientsText);
     });
   });
 }

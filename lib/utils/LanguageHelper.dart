@@ -187,7 +187,7 @@ enum OpenFoodFactsLanguage {
   UNDEFINED
 }
 
-extension OpenFoodFactsLanguageExtension on OpenFoodFactsLanguage {
+extension OpenFoodFactsLanguageExtension on OpenFoodFactsLanguage? {
   String get code {
     switch (this) {
       case OpenFoodFactsLanguage.ENGLISH:
@@ -755,11 +755,11 @@ extension OpenFoodFactsLanguageExtension on OpenFoodFactsLanguage {
 }
 
 class LanguageHelper {
-  static String toJson(OpenFoodFactsLanguage language) {
+  static String toJson(OpenFoodFactsLanguage? language) {
     return language.code;
   }
 
-  static OpenFoodFactsLanguage fromJson(String code) {
+  static OpenFoodFactsLanguage fromJson(String? code) {
     for (OpenFoodFactsLanguage language in OpenFoodFactsLanguage.values) {
       if (code == language.code) {
         return language;

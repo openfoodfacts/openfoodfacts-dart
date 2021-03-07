@@ -4,7 +4,7 @@ class Additives {
 
   Additives(this.ids, this.names);
 
-  static Additives additivesFromJson(List<dynamic> json) {
+  static Additives additivesFromJson(List<dynamic>? json) {
     List<String> ids = [];
     List<String> names = [];
 
@@ -24,7 +24,7 @@ class Additives {
     return Additives(ids, names);
   }
 
-  static List<String> additivesToJson(Additives additives) {
+  static List<String>? additivesToJson(Additives? additives) {
     List<String> result = [];
 
     if (additives == null) {

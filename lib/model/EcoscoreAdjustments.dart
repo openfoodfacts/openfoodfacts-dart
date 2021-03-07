@@ -8,9 +8,9 @@ part 'EcoscoreAdjustments.g.dart';
 @JsonSerializable(explicitToJson: true)
 class EcoscoreAdjustments extends JsonObject {
   @JsonKey(includeIfNull: false)
-  Packaging packaging;
+  Packaging? packaging;
   @JsonKey(name: "origins_of_ingredients", includeIfNull: false)
-  OriginsOfIngredients originsOfIngredients;
+  OriginsOfIngredients? originsOfIngredients;
 
   EcoscoreAdjustments({this.packaging, this.originsOfIngredients});
 

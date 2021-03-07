@@ -13,7 +13,7 @@ abstract class JsonObject {
 
   const JsonObject();
 
-  static int parseInt(dynamic json) {
+  static int? parseInt(dynamic json) {
     if (json is String) {
       return int.tryParse(json);
     } else if (json is double) {
@@ -23,7 +23,7 @@ abstract class JsonObject {
     }
   }
 
-  static double parseDouble(dynamic json) {
+  static double? parseDouble(dynamic json) {
     if (json is String) {
       return double.tryParse(json);
     } else if (json is int) {

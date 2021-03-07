@@ -5,7 +5,7 @@ import 'package:openfoodfacts/model/Ingredient.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 
 class JsonHelper {
-  static List<ProductImage> selectedImagesFromJson(Map<String, dynamic> json) {
+  static List<ProductImage>? selectedImagesFromJson(Map<String, dynamic>? json) {
     if (json == null) return null;
 
     var imageList = <ProductImage>[];
@@ -14,15 +14,15 @@ class JsonHelper {
         for (OpenFoodFactsLanguage lang in OpenFoodFactsLanguage.values) {
           // use the field to get the size
           if (json[field.value] == null) continue;
-          var sizeJson = json[field.value] as Map<String, dynamic>;
+          var sizeJson = json[field.value] as Map<String, dynamic>?;
 
           // use the size to get the language
           if (sizeJson == null) continue;
-          var langJson = sizeJson[size.value] as Map<String, dynamic>;
+          var langJson = sizeJson[size.value] as Map<String, dynamic>?;
 
           // use the language to get the url
           if (langJson == null) continue;
-          var url = langJson[lang.code] as String;
+          var url = langJson[lang.code] as String?;
 
           // use the url to build the image
           if (url == null) continue;
@@ -36,7 +36,7 @@ class JsonHelper {
     return imageList;
   }
 
-  static Map<String, dynamic> selectedImagesToJson(List<ProductImage> images) {
+  static Map<String, dynamic> selectedImagesToJson(List<ProductImage>? images) {
     Map<String, dynamic> result = {};
 
     if (images == null) {
@@ -46,7 +46,7 @@ class JsonHelper {
     for (ImageField field in ImageField.values) {
       Map<String, dynamic> fieldMap = {};
       for (ImageSize size in ImageSize.values) {
-        Map<String, String> sizeMap = {};
+        Map<String, String?> sizeMap = {};
         for (ProductImage image in images) {
           if (image.field == field && image.size == size) {
             sizeMap[image.language.code] = image.url;
@@ -60,7 +60,7 @@ class JsonHelper {
     return result;
   }
 
-  static List<ProductImage> imagesFromJson(Map<String, dynamic> json) {
+  static List<ProductImage>? imagesFromJson(Map<String, dynamic>? json) {
     if (json == null) return null;
 
     var imageList = <ProductImage>[];
@@ -71,20 +71,20 @@ class JsonHelper {
         String fieldName = field.value + "_" + lang.code;
         if (json[fieldName] == null) continue;
 
-        var fieldObject = json[fieldName] as Map<String, dynamic>;
+        var fieldObject = json[fieldName] as Map<String, dynamic>?;
         if (fieldObject == null) continue;
 
         // get the rev object
         var rev = JsonObject.parseInt(fieldObject["rev"]);
 
         // get the sizes object
-        var sizesObject = fieldObject["sizes"] as Map<String, dynamic>;
+        var sizesObject = fieldObject["sizes"] as Map<String, dynamic>?;
         if (sizesObject == null) continue;
 
         // get each number object (e.g. 200)
         for (var size in ImageSize.values) {
           var number = size.toNumber();
-          var numberObject = sizesObject[number] as Map<String, dynamic>;
+          var numberObject = sizesObject[number] as Map<String, dynamic>?;
           if (numberObject == null) continue;
 
           var image =
@@ -97,12 +97,12 @@ class JsonHelper {
     return imageList;
   }
 
-  static Map<String, dynamic> imagesToJson(List<ProductImage> images) {
+  static Map<String, dynamic> imagesToJson(List<ProductImage>? images) {
     // not implemented and needed, yet.
     return {};
   }
 
-  static double servingQuantityFromJson(dynamic data) {
+  static double? servingQuantityFromJson(dynamic data) {
     if (data == null || data is double) {
       return data;
     }
@@ -116,8 +116,8 @@ class JsonHelper {
     }
   }
 
-  static List<Map<String, dynamic>> ingredientsToJson(
-      List<Ingredient> ingredients) {
+  static List<Map<String, dynamic>>? ingredientsToJson(
+      List<Ingredient>? ingredients) {
     if (ingredients == null || ingredients.isEmpty) {
       return null;
     }
@@ -131,8 +131,8 @@ class JsonHelper {
     return result;
   }
 
-  static List<Map<String, dynamic>> attributeGroupsToJson(
-      List<AttributeGroup> list) {
+  static List<Map<String, dynamic>>? attributeGroupsToJson(
+      List<AttributeGroup>? list) {
     if (list == null || list.isEmpty) {
       return null;
     }
@@ -146,17 +146,17 @@ class JsonHelper {
     return result;
   }
 
-  static DateTime timestampToDate(dynamic json) {
+  static DateTime? timestampToDate(dynamic json) {
     if (json == null) {
       return null;
     }
-    final int timestamp = JsonObject.parseInt(json);
+    final int timestamp = JsonObject.parseInt(json)!;
     return DateTime.fromMillisecondsSinceEpoch(
         Duration.millisecondsPerSecond * timestamp,
         isUtc: true);
   }
 
-  static int dateToTimestamp(DateTime dateTime) {
+  static int? dateToTimestamp(DateTime? dateTime) {
     if (dateTime == null) {
       return null;
     }

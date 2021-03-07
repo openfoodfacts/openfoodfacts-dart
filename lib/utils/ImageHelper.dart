@@ -26,7 +26,7 @@ class ImageHelper {
 
   // build the image url
   // e.g. https://static.openfoodfacts.org/images/products/359/671/046/2858/front_fr.4.100.jpg"
-  static String buildUrl(String barcode, ProductImage image,
+  static String? buildUrl(String? barcode, ProductImage image,
       {QueryType queryType = QueryType.PROD}) {
     if (barcode == null || image == null) {
       return null;

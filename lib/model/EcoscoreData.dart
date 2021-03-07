@@ -14,13 +14,13 @@ enum EcoscoreStatus {
 @JsonSerializable(explicitToJson: true)
 class EcoscoreData extends JsonObject {
   @JsonKey(includeIfNull: false)
-  String grade;
+  String? grade;
   @JsonKey(includeIfNull: false, fromJson: JsonObject.parseDouble)
-  double score;
+  double? score;
   @JsonKey(includeIfNull: false)
-  EcoscoreStatus status;
+  EcoscoreStatus? status;
   @JsonKey(includeIfNull: false)
-  EcoscoreAdjustments adjustments;
+  EcoscoreAdjustments? adjustments;
 
   EcoscoreData({this.grade, this.score, this.status, this.adjustments});
 
@@ -30,6 +30,6 @@ class EcoscoreData extends JsonObject {
   @override
   Map<String, dynamic> toJson() => _$EcoscoreDataToJson(this);
 
-  static Map<String, dynamic> toJsonHelper(EcoscoreData d) =>
+  static Map<String, dynamic>? toJsonHelper(EcoscoreData? d) =>
       d != null ? d.toJson() : null;
 }

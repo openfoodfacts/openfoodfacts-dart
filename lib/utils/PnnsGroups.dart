@@ -94,7 +94,7 @@ extension PnnsGroup1Extension on PnnsGroup1 {
     }
   }
 
-  List<PnnsGroup2> get subGroups {
+  List<PnnsGroup2>? get subGroups {
     switch (this) {
       case PnnsGroup1.BEVERAGES:
         return <PnnsGroup2>[

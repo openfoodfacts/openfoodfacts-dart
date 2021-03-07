@@ -37,8 +37,8 @@ enum InsightType {
   UNDEFINED
 }
 
-extension InsightTypesExtension on InsightType {
-  String get value {
+extension InsightTypesExtension on InsightType? {
+  String? get value {
     switch (this) {
       case InsightType.INGREDIENT_SPELLCHECK:
         return 'ingredient_spellcheck';
@@ -65,7 +65,7 @@ extension InsightTypesExtension on InsightType {
     }
   }
 
-  static InsightType getType(String s) {
+  static InsightType getType(String? s) {
     switch (s) {
       case "ingredient_spellcheck":
         return InsightType.INGREDIENT_SPELLCHECK;
@@ -103,13 +103,13 @@ extension InsightTypesExtension on InsightType {
 
 @JsonSerializable()
 class InsightsResult extends JsonObject {
-  final String status;
+  final String? status;
   @JsonKey(
       name: 'insights',
       includeIfNull: false,
       fromJson: Insight.fromJson,
       toJson: Insight.toJson)
-  final List<Insight> insights;
+  final List<Insight>? insights;
 
   const InsightsResult({this.status, this.insights});
 
@@ -121,13 +121,13 @@ class InsightsResult extends JsonObject {
 }
 
 class Insight {
-  final String id;
-  final InsightType type;
-  final String barcode;
-  final List<dynamic> countries;
-  final String lang;
-  final String model;
-  final double confidence;
+  final String? id;
+  final InsightType? type;
+  final String? barcode;
+  final List<dynamic>? countries;
+  final String? lang;
+  final String? model;
+  final double? confidence;
 
   const Insight(
       {this.id,
@@ -140,7 +140,7 @@ class Insight {
 
   static List<Insight> fromJson(List<dynamic> json) {
     List<Insight> result = [];
-    for (Map<String, dynamic> jsonInsight in json) {
+    for (Map<String, dynamic> jsonInsight in json as Iterable<Map<String, dynamic>>) {
       InsightType insightType =
           InsightTypesExtension.getType(jsonInsight["type"]);
 

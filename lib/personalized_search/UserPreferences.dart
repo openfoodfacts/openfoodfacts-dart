@@ -7,7 +7,7 @@ enum UserPreferencesVariableValue {
 }
 
 extension UserPreferencesVariableValueExtention
-    on UserPreferencesVariableValue {
+    on UserPreferencesVariableValue? {
   String get value {
     switch (this) {
       case UserPreferencesVariableValue.NOT_IMPORTANT:
@@ -183,16 +183,16 @@ class UserPreferences {
     loadJson(data);
   }
 
-  UserPreferencesVariableValue _vegan;
-  UserPreferencesVariableValue _vegetarian;
-  UserPreferencesVariableValue _glutenFree;
+  UserPreferencesVariableValue? _vegan;
+  UserPreferencesVariableValue? _vegetarian;
+  UserPreferencesVariableValue? _glutenFree;
 
-  UserPreferencesVariableValue _organicLabels;
-  UserPreferencesVariableValue _fairTradeLabels;
-  UserPreferencesVariableValue _palmFreeLabels;
-  UserPreferencesVariableValue _additives;
-  UserPreferencesVariableValue _novaGroup;
-  UserPreferencesVariableValue _nutriScore;
+  UserPreferencesVariableValue? _organicLabels;
+  UserPreferencesVariableValue? _fairTradeLabels;
+  UserPreferencesVariableValue? _palmFreeLabels;
+  UserPreferencesVariableValue? _additives;
+  UserPreferencesVariableValue? _novaGroup;
+  UserPreferencesVariableValue? _nutriScore;
 
   void setVariable(
       UserPreferencesVariable variable, UserPreferencesVariableValue value) {
@@ -227,7 +227,7 @@ class UserPreferences {
     }
   }
 
-  UserPreferencesVariableValue getVariable(UserPreferencesVariable variable) {
+  UserPreferencesVariableValue? getVariable(UserPreferencesVariable variable) {
     switch (variable) {
       case UserPreferencesVariable.VEGAN:
         return _vegan;
@@ -282,7 +282,7 @@ class UserPreferences {
         setVariable(
             variable,
             UserPreferencesVariableValueExtention.fromString(
-                data[variable.name] as String ?? 'unset'));
+                data[variable.name] as String? ?? 'unset'));
       }
     }
   }

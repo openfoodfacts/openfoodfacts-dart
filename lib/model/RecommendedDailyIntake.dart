@@ -136,6 +136,6 @@ class IntakeRecommendation {
         : (json["value"] as int).toDouble();
   }
 
-  Unit unit;
-  double value;
+  Unit? unit;
+  double? value;
 }

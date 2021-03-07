@@ -7,15 +7,15 @@ import 'UriReader_stub.dart'
 
 /// Abstract reader of URI data, declined in "not web" and "web" versions
 abstract class UriReader {
-  static UriReader _instance;
+  static UriReader? _instance;
 
-  static UriReader get instance {
+  static UriReader? get instance {
     _instance ??= getUriReaderInstance();
     return _instance;
   }
 
   Future<List<int>> readAsBytes(final Uri uri) async {
-    final Uint8List content = uri.data?.contentAsBytes();
+    final Uint8List? content = uri.data?.contentAsBytes();
     if (content != null) {
       return content;
     }

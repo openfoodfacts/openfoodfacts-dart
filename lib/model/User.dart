@@ -6,12 +6,12 @@ part 'User.g.dart';
 @JsonSerializable()
 class User extends JsonObject {
   @JsonKey(includeIfNull: false)
-  final String comment;
+  final String? comment;
 
   @JsonKey(name: 'user_id')
-  final String userId;
+  final String? userId;
   @JsonKey()
-  final String password;
+  final String? password;
 
   const User({this.userId, this.password, this.comment});
 

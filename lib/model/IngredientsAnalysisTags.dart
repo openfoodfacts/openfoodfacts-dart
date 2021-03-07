@@ -37,15 +37,15 @@ class IngredientsAnalysisTags {
     palmOilFreeStatus ??= PalmOilFreeStatus.MAYBE;
   }
 
-  VeganStatus veganStatus;
-  VegetarianStatus vegetarianStatus;
-  PalmOilFreeStatus palmOilFreeStatus;
+  VeganStatus? veganStatus;
+  VegetarianStatus? vegetarianStatus;
+  PalmOilFreeStatus? palmOilFreeStatus;
 
-  static IngredientsAnalysisTags fromJson(List<dynamic> data) {
+  static IngredientsAnalysisTags? fromJson(List<dynamic>? data) {
     return data != null ? IngredientsAnalysisTags(data) : null;
   }
 
-  static List<dynamic> toJson(IngredientsAnalysisTags ingredientsAnalysisTags) {
+  static List<dynamic> toJson(IngredientsAnalysisTags? ingredientsAnalysisTags) {
     List<String> result = <String>[];
 
     if (ingredientsAnalysisTags == null) {
