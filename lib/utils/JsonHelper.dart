@@ -5,7 +5,8 @@ import 'package:openfoodfacts/model/Ingredient.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 
 class JsonHelper {
-  static List<ProductImage>? selectedImagesFromJson(Map<String, dynamic>? json) {
+  static List<ProductImage>? selectedImagesFromJson(
+      Map<String, dynamic>? json) {
     if (json == null) return null;
 
     var imageList = <ProductImage>[];

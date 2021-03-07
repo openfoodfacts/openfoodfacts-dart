@@ -140,7 +140,8 @@ class Insight {
 
   static List<Insight> fromJson(List<dynamic> json) {
     List<Insight> result = [];
-    for (Map<String, dynamic> jsonInsight in json as Iterable<Map<String, dynamic>>) {
+    for (Map<String, dynamic> jsonInsight
+        in json as Iterable<Map<String, dynamic>>) {
       InsightType insightType =
           InsightTypesExtension.getType(jsonInsight["type"]);
 

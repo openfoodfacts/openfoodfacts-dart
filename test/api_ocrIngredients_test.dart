@@ -131,8 +131,8 @@ void main() {
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.PROD_USER, queryType: QueryType.PROD);
 
-      expect(
-          ocrResponse.ingredientsTextFromImage, result.product!.ingredientsText);
+      expect(ocrResponse.ingredientsTextFromImage,
+          result.product!.ingredientsText);
     });
   });
 }

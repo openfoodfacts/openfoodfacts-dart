@@ -67,8 +67,8 @@ void main() {
       expect(result.product!.ingredients!.length, 11);
 
       expect(result.product!.ingredients!.any((i) => i.text == "Wasser"), true);
-      expect(
-          result.product!.ingredients!.any((i) => i.text == "Kohlensäure"), true);
+      expect(result.product!.ingredients!.any((i) => i.text == "Kohlensäure"),
+          true);
       expect(result.product!.ingredients!.any((i) => i.text == "e150d"), true);
       expect(result.product!.ingredients!.any((i) => i.text == "Citronensäure"),
           true);
@@ -77,11 +77,13 @@ void main() {
       expect(result.product!.ingredients!.any((i) => i.text == "Süßungsmittel"),
           true);
 
-      expect(result.product!.ingredients!.any((i) => i.text == "Natriumcyclamat"),
+      expect(
+          result.product!.ingredients!.any((i) => i.text == "Natriumcyclamat"),
+          true);
+      expect(result.product!.ingredients!.any((i) => i.text == "Acesulfam K"),
           true);
       expect(
-          result.product!.ingredients!.any((i) => i.text == "Acesulfam K"), true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Aspartam"), true);
+          result.product!.ingredients!.any((i) => i.text == "Aspartam"), true);
       expect(result.product!.ingredients!.any((i) => i.text == "Aroma"), true);
       expect(result.product!.ingredients!.any((i) => i.text == "Aroma Koffein"),
           true);
@@ -177,24 +179,28 @@ void main() {
 
       expect(result.product!.ingredients!.any((i) => i.text == "Buttergebäck"),
           true);
-      expect(
-          result.product!.ingredients!.any((i) => i.text == "Weizenmehl"), false);
+      expect(result.product!.ingredients!.any((i) => i.text == "Weizenmehl"),
+          false);
       expect(result.product!.ingredients!.any((i) => i.text == "Zucker"), true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Butter"), false);
       expect(
-          result.product!.ingredients!.any((i) => i.text == "Speisesalz"), true);
+          result.product!.ingredients!.any((i) => i.text == "Butter"), false);
+      expect(result.product!.ingredients!.any((i) => i.text == "Speisesalz"),
+          true);
 
-      expect(result.product!.ingredients!.any((i) => i.text == "Backtriebmittel"),
+      expect(
+          result.product!.ingredients!.any((i) => i.text == "Backtriebmittel"),
           true);
       expect(
           result.product!.ingredients!
               .any((i) => i.text == "Ammouniumhydrogencarbonat"),
           true);
       expect(
-          result.product!.ingredients!.any((i) => i.text == "Invertzuckersirup"),
+          result.product!.ingredients!
+              .any((i) => i.text == "Invertzuckersirup"),
           true);
       expect(
-          result.product!.ingredients!.any((i) => i.text == "natürliches Aroma"),
+          result.product!.ingredients!
+              .any((i) => i.text == "natürliches Aroma"),
           true);
       expect(
           result.product!.ingredients!
@@ -208,14 +214,15 @@ void main() {
           result.product!.ingredients!
               .any((i) => i.text == "Schokoladenstückchen"),
           true);
-      expect(
-          result.product!.ingredients!.any((i) => i.text == "Kakaomasse"), true);
-      expect(
-          result.product!.ingredients!.any((i) => i.text == "Kakaobutter"), true);
+      expect(result.product!.ingredients!.any((i) => i.text == "Kakaomasse"),
+          true);
+      expect(result.product!.ingredients!.any((i) => i.text == "Kakaobutter"),
+          true);
 
       expect(
           result.product!.ingredients!.any((i) => i.text == "Emulgator"), true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Lecithin"), true);
+      expect(
+          result.product!.ingredients!.any((i) => i.text == "Lecithin"), true);
       expect(
           result.product!.ingredients!
               .any((i) => i.text == "fettarmes Kakaopulver"),
@@ -292,7 +299,8 @@ void main() {
       expect(
           result.product!.ingredients!.any((i) => i.text == "graisse de palme"),
           false);
-      expect(result.product!.ingredients!.any((i) => i.text == "huile de colza"),
+      expect(
+          result.product!.ingredients!.any((i) => i.text == "huile de colza"),
           false);
       expect(
           result.product!.ingredients!.any((i) => i.text == "colorant"), false);
@@ -313,8 +321,8 @@ void main() {
           result.product!.ingredients!
               .any((i) => i.text == "agent de traitement de la farine"),
           false);
-      expect(
-          result.product!.ingredients!.any((i) => i.text == "L-cystéine"), false);
+      expect(result.product!.ingredients!.any((i) => i.text == "L-cystéine"),
+          false);
 
       expect(result.product!.selectedImages!.length, 9);
       expect(
@@ -421,11 +429,11 @@ void main() {
       assert(result.product!.ecoscoreData!.grade != null);
       assert(result.product!.ecoscoreData!.score != null);
       assert(result.product!.ecoscoreData!.status == EcoscoreStatus.KNOWN);
-      assert(result
-              .product!.ecoscoreData!.adjustments!.originsOfIngredients!.epiScore !=
+      assert(result.product!.ecoscoreData!.adjustments!.originsOfIngredients!
+              .epiScore !=
           null);
-      assert(result
-              .product!.ecoscoreData!.adjustments!.originsOfIngredients!.epiValue !=
+      assert(result.product!.ecoscoreData!.adjustments!.originsOfIngredients!
+              .epiValue !=
           null);
       assert(result.product!.ecoscoreData!.adjustments!.originsOfIngredients!
               .transportationScore !=
@@ -433,8 +441,10 @@ void main() {
       assert(result.product!.ecoscoreData!.adjustments!.originsOfIngredients!
               .transportationValue !=
           null);
-      assert(result.product!.ecoscoreData!.adjustments!.packaging!.score != null);
-      assert(result.product!.ecoscoreData!.adjustments!.packaging!.value != null);
+      assert(
+          result.product!.ecoscoreData!.adjustments!.packaging!.score != null);
+      assert(
+          result.product!.ecoscoreData!.adjustments!.packaging!.value != null);
     });
 
     test('product environment impact levels', () async {
@@ -449,7 +459,8 @@ void main() {
       assert(result != null);
       assert(result.product != null);
       assert(result.product!.environmentImpactLevels != null);
-      assert(result.product!.environmentImpactLevels!.levels.first == Level.HIGH);
+      assert(
+          result.product!.environmentImpactLevels!.levels.first == Level.HIGH);
     });
 
     test('product fields', () async {
@@ -605,9 +616,11 @@ void main() {
       expect(result.product!.additives!.names[4], "E950");
 
       expect(
-          result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SUGARS],
+          result
+              .product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SUGARS],
           Level.LOW);
-      expect(result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
+      expect(
+          result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
           Level.LOW);
 
       expect(result.product!.images != null, true);
@@ -640,8 +653,8 @@ void main() {
       expect(result.product!.ingredients!.length, 11);
 
       expect(result.product!.ingredients!.any((i) => i.text == "Wasser"), true);
-      expect(
-          result.product!.ingredients!.any((i) => i.text == "Kohlensäure"), true);
+      expect(result.product!.ingredients!.any((i) => i.text == "Kohlensäure"),
+          true);
       expect(result.product!.ingredients!.any((i) => i.text == "e150d"), true);
 
       expect(result.product!.additives!.ids[0], "en:e150d");
@@ -650,9 +663,11 @@ void main() {
       expect(result.product!.additives!.names[4], "E950");
 
       expect(
-          result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SUGARS],
+          result
+              .product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SUGARS],
           Level.LOW);
-      expect(result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
+      expect(
+          result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
           Level.LOW);
 
       expect(result.product!.images != null, true);
@@ -685,8 +700,8 @@ void main() {
       expect(result.product!.ingredients!.length, 11);
 
       expect(result.product!.ingredients!.any((i) => i.text == "Wasser"), true);
-      expect(
-          result.product!.ingredients!.any((i) => i.text == "Kohlensäure"), true);
+      expect(result.product!.ingredients!.any((i) => i.text == "Kohlensäure"),
+          true);
       expect(result.product!.ingredients!.any((i) => i.text == "e150d"), true);
       expect(result.product!.ingredients!.any((i) => i.text == "Citronensäure"),
           true);
@@ -695,11 +710,13 @@ void main() {
       expect(result.product!.ingredients!.any((i) => i.text == "Süßungsmittel"),
           true);
 
-      expect(result.product!.ingredients!.any((i) => i.text == "Natriumcyclamat"),
+      expect(
+          result.product!.ingredients!.any((i) => i.text == "Natriumcyclamat"),
+          true);
+      expect(result.product!.ingredients!.any((i) => i.text == "Acesulfam K"),
           true);
       expect(
-          result.product!.ingredients!.any((i) => i.text == "Acesulfam K"), true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Aspartam"), true);
+          result.product!.ingredients!.any((i) => i.text == "Aspartam"), true);
       expect(result.product!.ingredients!.any((i) => i.text == "Aroma"), true);
       expect(result.product!.ingredients!.any((i) => i.text == "Aroma Koffein"),
           true);
@@ -725,9 +742,11 @@ void main() {
       expect(result.product!.additives!.names[4], "E950");
 
       expect(
-          result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SUGARS],
+          result
+              .product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SUGARS],
           Level.LOW);
-      expect(result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
+      expect(
+          result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
           Level.LOW);
 
       expect(result.product!.images != null, true);

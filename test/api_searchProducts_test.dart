@@ -205,7 +205,8 @@ void main() {
       expect(result.products != null, true);
       expect(result.products!.length, 10);
       expect(result.products![0].runtimeType, Product);
-      expect(result.products![0].categoriesTags!.contains("en:breakfast-cereals"),
+      expect(
+          result.products![0].categoriesTags!.contains("en:breakfast-cereals"),
           true);
       expect(result.products![0].nutriscore!.toUpperCase() == 'A', true);
     });

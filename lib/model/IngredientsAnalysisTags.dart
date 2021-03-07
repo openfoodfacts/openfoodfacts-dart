@@ -45,7 +45,8 @@ class IngredientsAnalysisTags {
     return data != null ? IngredientsAnalysisTags(data) : null;
   }
 
-  static List<dynamic> toJson(IngredientsAnalysisTags? ingredientsAnalysisTags) {
+  static List<dynamic> toJson(
+      IngredientsAnalysisTags? ingredientsAnalysisTags) {
     List<String> result = <String>[];
 
     if (ingredientsAnalysisTags == null) {

@@ -19,7 +19,8 @@ class EnvironmentImpactLevels {
     return EnvironmentImpactLevels(result);
   }
 
-  static List<String>? toJson(EnvironmentImpactLevels? environmentImpactLevels) {
+  static List<String>? toJson(
+      EnvironmentImpactLevels? environmentImpactLevels) {
     if (environmentImpactLevels == null) {
       return null;
     }

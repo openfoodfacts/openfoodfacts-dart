@@ -26,7 +26,8 @@ class HttpHelper {
       {User? user, QueryType queryType = QueryType.PROD}) async {
     http.Response response = await http.get(uri,
         headers: _buildHeaders(user,
-            isTestModeActive: queryType == QueryType.PROD ? false : true) as Map<String, String>?);
+                isTestModeActive: queryType == QueryType.PROD ? false : true)
+            as Map<String, String>?);
 
     return response;
   }
@@ -40,7 +41,8 @@ class HttpHelper {
     http.Response response = await http.post(
       uri,
       headers: _buildHeaders(user,
-          isTestModeActive: queryType == QueryType.PROD ? false : true) as Map<String, String>?,
+              isTestModeActive: queryType == QueryType.PROD ? false : true)
+          as Map<String, String>?,
       body: body,
     );
     return response;
@@ -55,7 +57,8 @@ class HttpHelper {
       {QueryType queryType = QueryType.PROD}) async {
     var request = http.MultipartRequest("POST", uri);
     request.headers.addAll(_buildHeaders(user,
-        isTestModeActive: queryType == QueryType.PROD ? false : true) as Map<String, String>);
+            isTestModeActive: queryType == QueryType.PROD ? false : true)
+        as Map<String, String>);
     request.headers.addAll({'Content-Type': 'multipart/form-data'});
     request.fields.addAll(body);
 

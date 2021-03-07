@@ -67,15 +67,18 @@ void main() {
       expect(result.product!.additives!.ids.isEmpty, true);
 
       expect(
-          result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SUGARS],
+          result
+              .product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SUGARS],
           Level.LOW);
-      expect(result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_FAT],
+      expect(
+          result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_FAT],
           Level.MODERATE);
       expect(
           result.product!.nutrientLevels!
               .levels[NutrientLevels.NUTRIENT_SATURATED_FAT],
           Level.LOW);
-      expect(result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
+      expect(
+          result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
           Level.MODERATE);
       expect(result.product!.countries,
           "Belgique,France,Allemagne,Pays-Bas,Espagne,Suisse");

@@ -46,7 +46,8 @@ class RobotoffQuestion {
 
   static List<RobotoffQuestion> fromJson(List<dynamic> json) {
     List<RobotoffQuestion> result = [];
-    for (Map<String, dynamic> jsonQuestion in json as Iterable<Map<String, dynamic>>) {
+    for (Map<String, dynamic> jsonQuestion
+        in json as Iterable<Map<String, dynamic>>) {
       InsightType insightType =
           InsightTypesExtension.getType(jsonQuestion["insight_type"]);
 
