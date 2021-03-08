@@ -6,9 +6,9 @@ import 'LanguageHelper.dart';
 class ImageHelper {
   static const int MAX_IMAGE_SIZE = 2048;
   static const String IMAGE_PROD_URL_BASE =
-      "https://static.openfoodfacts.org/images/products/";
+      'https://static.openfoodfacts.org/images/products/';
   static const String IMAGE_TEST_URL_BASE =
-      "https://static.openfoodfacts.net/images/products/";
+      'https://static.openfoodfacts.net/images/products/';
 
   static Image resize(Image image, {int maxSize = MAX_IMAGE_SIZE}) {
     // check if the image is already small enough
@@ -36,21 +36,21 @@ class ImageHelper {
       var p1 = barcode.substring(0, 3);
       var p2 = barcode.substring(3, 6);
       var p3 = barcode.substring(6, 9);
-      var p4 = barcode.length >= 10 ? barcode.substring(9) : "";
+      var p4 = barcode.length >= 10 ? barcode.substring(9) : '';
 
-      barcodeUrl = p1 + "/" + p2 + "/" + p3 + "/" + p4;
+      barcodeUrl = p1 + '/' + p2 + '/' + p3 + '/' + p4;
     }
 
     String urlHelper = barcodeUrl +
-        "/" +
+        '/' +
         image.field.value +
-        "_" +
+        '_' +
         image.language.code +
-        "." +
+        '.' +
         image.rev.toString() +
-        "." +
+        '.' +
         image.size.toNumber() +
-        ".jpg";
+        '.jpg';
 
     return queryType == QueryType.PROD
         ? IMAGE_PROD_URL_BASE + urlHelper

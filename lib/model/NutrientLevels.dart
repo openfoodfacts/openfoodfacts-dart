@@ -31,10 +31,10 @@ extension LevelExtension on Level? {
 }
 
 class NutrientLevels {
-  static const String NUTRIENT_SUGARS = "sugars";
-  static const String NUTRIENT_FAT = "fat";
-  static const String NUTRIENT_SATURATED_FAT = "saturated-fat";
-  static const String NUTRIENT_SALT = "salt";
+  static const String NUTRIENT_SUGARS = 'sugars';
+  static const String NUTRIENT_FAT = 'fat';
+  static const String NUTRIENT_SATURATED_FAT = 'saturated-fat';
+  static const String NUTRIENT_SALT = 'salt';
 
   static const List<String> nutrients = [
     NUTRIENT_SUGARS,

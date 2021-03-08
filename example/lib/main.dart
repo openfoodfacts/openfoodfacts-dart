@@ -5,7 +5,7 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 
 /// request a product from the OpenFoodFacts database
 Future<Product> getProduct() async {
-  var barcode = "0048151623426";
+  var barcode = '0048151623426';
 
   ProductQueryConfiguration configuration = ProductQueryConfiguration(barcode,
       language: OpenFoodFactsLanguage.GERMAN, fields: [ProductField.ALL]);
@@ -14,7 +14,7 @@ Future<Product> getProduct() async {
   if (result.status == 1) {
     return result.product;
   } else {
-    throw Exception("product not found, please insert data for " + barcode);
+    throw Exception('product not found, please insert data for ' + barcode);
   }
 }
 
@@ -23,18 +23,18 @@ void addNewProduct() async {
   // define the product to be added.
   // more attributes available ...
   Product myProduct = Product(
-    barcode: "0048151623426",
-    productName: "Maryland Choc Chip",
+    barcode: '0048151623426',
+    productName: 'Maryland Choc Chip',
   );
 
   // a registered user login for https://world.openfoodfacts.org/ is required
-  User myUser = User(userId: "max@off.com", password: "password");
+  User myUser = User(userId: 'max@off.com', password: 'password');
 
   // query the OpenFoodFacts API
   Status result = await OpenFoodAPIClient.saveProduct(myUser, myProduct);
 
   if (result.status != 1) {
-    throw Exception("product could not be added: " + result.error);
+    throw Exception('product could not be added: ' + result.error);
   }
 }
 
@@ -45,21 +45,21 @@ void addProductImage() async {
   // choose the "imageField" as location / description of the image content.
   SendImage image = SendImage(
     lang: OpenFoodFactsLanguage.ENGLISH,
-    barcode: "0048151623426",
+    barcode: '0048151623426',
     imageField: ImageField.INGREDIENTS,
-    imageUrl: Uri.parse("Path to you image"),
+    imageUrl: Uri.parse('Path to you image'),
   );
 
   // a registered user login for https://world.openfoodfacts.org/ is required
-  User myUser = User(userId: "max@off.com", password: "password");
+  User myUser = User(userId: 'max@off.com', password: 'password');
 
   // query the OpenFoodFacts API
   Status result = await OpenFoodAPIClient.addProductImage(myUser, image);
 
-  if (result.status != "status ok") {
-    throw Exception("image could not be uploaded: " +
+  if (result.status != 'status ok') {
+    throw Exception('image could not be uploaded: ' +
         result.error +
-        " " +
+        ' ' +
         result.imageId.toString());
   }
 }
@@ -69,11 +69,11 @@ void addProductImage() async {
 /// Otherwise it should be added first to the server and then this can be called
 Future<String> extractIngredient() async {
   // a registered user login for https://world.openfoodfacts.org/ is required
-  User myUser = User(userId: "max@off.com", password: "password");
+  User myUser = User(userId: 'max@off.com', password: 'password');
 
   // query the OpenFoodFacts API
   OcrIngredientsResult response = await OpenFoodAPIClient.extractIngredients(
-      myUser, "0041220576920", OpenFoodFactsLanguage.ENGLISH);
+      myUser, '0041220576920', OpenFoodFactsLanguage.ENGLISH);
 
   if (response.status != 0) {
     throw Exception("Text can't be extracted.");
@@ -86,24 +86,24 @@ Future<String> extractIngredient() async {
 /// And then save it back to the OFF server
 void saveAndExtractIngredient() async {
   // a registered user login for https://world.openfoodfacts.org/ is required
-  User myUser = User(userId: "max@off.com", password: "password");
+  User myUser = User(userId: 'max@off.com', password: 'password');
 
   SendImage image = SendImage(
     lang: OpenFoodFactsLanguage.FRENCH,
-    barcode: "3613042717385",
+    barcode: '3613042717385',
     imageField: ImageField.INGREDIENTS,
-    imageUrl: Uri.parse("Path to your image"),
+    imageUrl: Uri.parse('Path to your image'),
   );
 
   //Add the ingredients image to the server
   Status results = await OpenFoodAPIClient.addProductImage(myUser, image);
 
   if (results.status == null) {
-    throw Exception("Adding image failed");
+    throw Exception('Adding image failed');
   }
 
   OcrIngredientsResult ocrResponse = await OpenFoodAPIClient.extractIngredients(
-      myUser, "3613042717385", OpenFoodFactsLanguage.FRENCH);
+      myUser, '3613042717385', OpenFoodFactsLanguage.FRENCH);
 
   if (ocrResponse.status != 0) {
     throw Exception("Text can't be extracted.");
@@ -113,16 +113,16 @@ void saveAndExtractIngredient() async {
   results = await OpenFoodAPIClient.saveProduct(
       myUser,
       Product(
-          barcode: "3613042717385",
+          barcode: '3613042717385',
           ingredientsText: ocrResponse.ingredientsTextFromImage));
 
   if (results.status != 1) {
-    throw Exception("product could not be added");
+    throw Exception('product could not be added');
   }
 
   //Get The saved product's ingredients from the server
   ProductQueryConfiguration configurations = ProductQueryConfiguration(
-      "3613042717385",
+      '3613042717385',
       language: OpenFoodFactsLanguage.FRENCH,
       fields: [
         ProductField.INGREDIENTS_TEXT,
@@ -131,6 +131,6 @@ void saveAndExtractIngredient() async {
       await OpenFoodAPIClient.getProduct(configurations, user: myUser);
 
   if (productResult.status != 1) {
-    throw Exception("product not found, please insert data for 3613042717385");
+    throw Exception('product not found, please insert data for 3613042717385');
   }
 }

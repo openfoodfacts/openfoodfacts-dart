@@ -28,11 +28,11 @@ class RobotoffQuestion {
   final String? type;
   final String? value;
   final String? question;
-  @JsonKey(name: "insight_id")
+  @JsonKey(name: 'insight_id')
   final String? insightId;
-  @JsonKey(name: "insight_type")
+  @JsonKey(name: 'insight_type')
   final InsightType? insightType;
-  @JsonKey(name: "source_image_url")
+  @JsonKey(name: 'source_image_url')
   final String? imageUrl;
 
   const RobotoffQuestion(
@@ -49,16 +49,16 @@ class RobotoffQuestion {
     for (Map<String, dynamic> jsonQuestion
         in json as Iterable<Map<String, dynamic>>) {
       InsightType insightType =
-          InsightTypesExtension.getType(jsonQuestion["insight_type"]);
+          InsightTypesExtension.getType(jsonQuestion['insight_type']);
 
       result.add(RobotoffQuestion(
-          barcode: jsonQuestion["barcode"],
-          type: jsonQuestion["type"],
-          value: jsonQuestion["value"],
-          question: jsonQuestion["question"],
-          insightId: jsonQuestion["insight_id"],
+          barcode: jsonQuestion['barcode'],
+          type: jsonQuestion['type'],
+          value: jsonQuestion['value'],
+          question: jsonQuestion['question'],
+          insightId: jsonQuestion['insight_id'],
           insightType: insightType,
-          imageUrl: jsonQuestion["source_image_url"]));
+          imageUrl: jsonQuestion['source_image_url']));
     }
     return result;
   }
@@ -72,13 +72,13 @@ class RobotoffQuestion {
     for (RobotoffQuestion question in questions) {
       Map<String, String?> jsonQuestion = {};
 
-      jsonQuestion["barcode"] = question.barcode;
-      jsonQuestion["type"] = question.type;
-      jsonQuestion["value"] = question.value;
-      jsonQuestion["question"] = question.question;
-      jsonQuestion["insight_id"] = question.insightId;
-      jsonQuestion["insight_type"] = question.insightType.value;
-      jsonQuestion["insight_url"] = question.imageUrl;
+      jsonQuestion['barcode'] = question.barcode;
+      jsonQuestion['type'] = question.type;
+      jsonQuestion['value'] = question.value;
+      jsonQuestion['question'] = question.question;
+      jsonQuestion['insight_id'] = question.insightId;
+      jsonQuestion['insight_type'] = question.insightType.value;
+      jsonQuestion['insight_url'] = question.imageUrl;
 
       result.add(jsonQuestion);
     }

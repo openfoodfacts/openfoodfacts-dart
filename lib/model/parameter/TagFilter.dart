@@ -3,7 +3,7 @@ import 'package:openfoodfacts/interface/Parameter.dart';
 class TagFilter extends Parameter {
   @override
   String getName() {
-    return "";
+    return '';
   }
 
   String? getTagType() {
@@ -11,7 +11,7 @@ class TagFilter extends Parameter {
   }
 
   String getContains() {
-    return contains! ? "contains" : "without";
+    return contains! ? 'contains' : 'without';
   }
 
   String? getTagName() {
@@ -20,7 +20,7 @@ class TagFilter extends Parameter {
 
   @override
   String getValue() {
-    return "";
+    return '';
   }
 
   final String? tagType;

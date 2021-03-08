@@ -42,41 +42,41 @@ class RecommendedDailyIntake {
 
   factory RecommendedDailyIntake.fromJson(Map<String, dynamic> parsedJson) {
     return RecommendedDailyIntake(
-        IntakeRecommendation(parsedJson["energy_kcal"]),
-        IntakeRecommendation(parsedJson["energy_kJ"]),
-        IntakeRecommendation(parsedJson["fat"]),
-        IntakeRecommendation(parsedJson["saturated-fat"]),
-        IntakeRecommendation(parsedJson["carbohydrates"]),
-        IntakeRecommendation(parsedJson["sugars"]),
-        IntakeRecommendation(parsedJson["proteins"]),
-        IntakeRecommendation(parsedJson["sodium"]),
-        IntakeRecommendation(parsedJson["vitamin-a"]),
-        IntakeRecommendation(parsedJson["vitamin-d"]),
-        IntakeRecommendation(parsedJson["vitamin-e"]),
-        IntakeRecommendation(parsedJson["vitamin-k"]),
-        IntakeRecommendation(parsedJson["vitamin-c"]),
-        IntakeRecommendation(parsedJson["vitamin-b1"]),
-        IntakeRecommendation(parsedJson["vitamin-b2"]),
-        IntakeRecommendation(parsedJson["vitamin-b3"]),
-        IntakeRecommendation(parsedJson["vitamin-b6"]),
-        IntakeRecommendation(parsedJson["vitamin-b9"]),
-        IntakeRecommendation(parsedJson["vitamin-b12"]),
-        IntakeRecommendation(parsedJson["biotin"]),
-        IntakeRecommendation(parsedJson["pantothenic-acid"]),
-        IntakeRecommendation(parsedJson["potassium"]),
-        IntakeRecommendation(parsedJson["chloride"]),
-        IntakeRecommendation(parsedJson["calcium"]),
-        IntakeRecommendation(parsedJson["phosphorus"]),
-        IntakeRecommendation(parsedJson["magnesium"]),
-        IntakeRecommendation(parsedJson["iron"]),
-        IntakeRecommendation(parsedJson["zinc"]),
-        IntakeRecommendation(parsedJson["copper"]),
-        IntakeRecommendation(parsedJson["manganese"]),
-        IntakeRecommendation(parsedJson["fluoride"]),
-        IntakeRecommendation(parsedJson["selenium"]),
-        IntakeRecommendation(parsedJson["chromium"]),
-        IntakeRecommendation(parsedJson["molybdenum"]),
-        IntakeRecommendation(parsedJson["iodine"]));
+        IntakeRecommendation(parsedJson['energy_kcal']),
+        IntakeRecommendation(parsedJson['energy_kJ']),
+        IntakeRecommendation(parsedJson['fat']),
+        IntakeRecommendation(parsedJson['saturated-fat']),
+        IntakeRecommendation(parsedJson['carbohydrates']),
+        IntakeRecommendation(parsedJson['sugars']),
+        IntakeRecommendation(parsedJson['proteins']),
+        IntakeRecommendation(parsedJson['sodium']),
+        IntakeRecommendation(parsedJson['vitamin-a']),
+        IntakeRecommendation(parsedJson['vitamin-d']),
+        IntakeRecommendation(parsedJson['vitamin-e']),
+        IntakeRecommendation(parsedJson['vitamin-k']),
+        IntakeRecommendation(parsedJson['vitamin-c']),
+        IntakeRecommendation(parsedJson['vitamin-b1']),
+        IntakeRecommendation(parsedJson['vitamin-b2']),
+        IntakeRecommendation(parsedJson['vitamin-b3']),
+        IntakeRecommendation(parsedJson['vitamin-b6']),
+        IntakeRecommendation(parsedJson['vitamin-b9']),
+        IntakeRecommendation(parsedJson['vitamin-b12']),
+        IntakeRecommendation(parsedJson['biotin']),
+        IntakeRecommendation(parsedJson['pantothenic-acid']),
+        IntakeRecommendation(parsedJson['potassium']),
+        IntakeRecommendation(parsedJson['chloride']),
+        IntakeRecommendation(parsedJson['calcium']),
+        IntakeRecommendation(parsedJson['phosphorus']),
+        IntakeRecommendation(parsedJson['magnesium']),
+        IntakeRecommendation(parsedJson['iron']),
+        IntakeRecommendation(parsedJson['zinc']),
+        IntakeRecommendation(parsedJson['copper']),
+        IntakeRecommendation(parsedJson['manganese']),
+        IntakeRecommendation(parsedJson['fluoride']),
+        IntakeRecommendation(parsedJson['selenium']),
+        IntakeRecommendation(parsedJson['chromium']),
+        IntakeRecommendation(parsedJson['molybdenum']),
+        IntakeRecommendation(parsedJson['iodine']));
   }
 
   final IntakeRecommendation energyKcal;
@@ -130,10 +130,10 @@ class RecommendedDailyIntake {
 
 class IntakeRecommendation {
   IntakeRecommendation(Map<String, dynamic> json) {
-    unit = UnitHelper.stringToUnit(json["unit"]);
-    value = json["value"] is double
-        ? json["value"]
-        : (json["value"] as int).toDouble();
+    unit = UnitHelper.stringToUnit(json['unit']);
+    value = json['value'] is double
+        ? json['value']
+        : (json['value'] as int).toDouble();
   }
 
   Unit? unit;

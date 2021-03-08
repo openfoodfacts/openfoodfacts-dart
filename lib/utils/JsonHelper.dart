@@ -68,17 +68,17 @@ class JsonHelper {
     for (var field in ImageField.values) {
       for (OpenFoodFactsLanguage lang in OpenFoodFactsLanguage.values) {
         // get the field object e.g. front_en
-        String fieldName = field.value + "_" + lang.code;
+        String fieldName = field.value + '_' + lang.code;
         if (json[fieldName] == null) continue;
 
         var fieldObject = json[fieldName] as Map<String, dynamic>?;
         if (fieldObject == null) continue;
 
         // get the rev object
-        var rev = JsonObject.parseInt(fieldObject["rev"]);
+        var rev = JsonObject.parseInt(fieldObject['rev']);
 
         // get the sizes object
-        var sizesObject = fieldObject["sizes"] as Map<String, dynamic>?;
+        var sizesObject = fieldObject['sizes'] as Map<String, dynamic>?;
         if (sizesObject == null) continue;
 
         // get each number object (e.g. 200)

@@ -24,7 +24,7 @@ class PnnsGroupQueryConfiguration {
     Map<String, String> result = {};
 
     if (language != null) {
-      result.putIfAbsent("lc", () => language.code);
+      result.putIfAbsent('lc', () => language.code);
     }
 
     if (fields != null) {

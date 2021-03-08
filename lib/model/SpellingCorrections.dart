@@ -23,7 +23,7 @@ class SpellingCorrection extends JsonObject {
 
 @JsonSerializable()
 class TermCorrections extends JsonObject {
-  @JsonKey(name: "term_corrections")
+  @JsonKey(name: 'term_corrections')
   List<Correction>? corrections;
   @JsonKey()
   double? score;

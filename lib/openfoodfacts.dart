@@ -59,12 +59,12 @@ export 'utils/ProductSearchQueryConfiguration.dart';
 
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
-  static const String URI_SCHEME = "https";
-  static const String URI_PROD_HOST = "world.openfoodfacts.org";
-  static const String URI_TEST_HOST = "world.openfoodfacts.net";
+  static const String URI_SCHEME = 'https';
+  static const String URI_PROD_HOST = 'world.openfoodfacts.org';
+  static const String URI_TEST_HOST = 'world.openfoodfacts.net';
 
-  static const String URI_PROD_HOST_ROBOTOFF = "robotoff.openfoodfacts.org";
-  static const String URI_TEST_HOST_ROBOTOFF = "robotoff.openfoodfacts.net";
+  static const String URI_PROD_HOST_ROBOTOFF = 'robotoff.openfoodfacts.org';
+  static const String URI_TEST_HOST_ROBOTOFF = 'robotoff.openfoodfacts.net';
 
   /// Add the given product to the database.
   /// By default the query will hit the PROD DB
@@ -121,7 +121,7 @@ class OpenFoodAPIClient {
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
         path: 'api/v0/product/' + barcode + '.json',
-        queryParameters: {"lc": language.code});
+        queryParameters: {'lc': language.code});
 
     Response response = await HttpHelper()
         .doGetRequest(productUri, user: user, queryType: queryType);
@@ -218,16 +218,16 @@ class OpenFoodAPIClient {
     final Map<String, String?> parameters = {};
 
     if (type != null) {
-      parameters["type"] = type.value;
+      parameters['type'] = type.value;
     }
     if (country != null) {
-      parameters["country"] = country;
+      parameters['country'] = country;
     }
     if (valueTag != null) {
-      parameters["value_tag"] = valueTag;
+      parameters['value_tag'] = valueTag;
     }
     if (serverDomain != null) {
-      parameters["server_domain"] = serverDomain;
+      parameters['server_domain'] = serverDomain;
     }
 
     var insightUri = Uri(
@@ -347,9 +347,9 @@ class OpenFoodAPIClient {
         path: 'api/v1/insights/annotate');
 
     Map<String, String?> annotationData = {
-      "insight_id": insightId,
-      "annotation": annotation.value.toString(),
-      "update": update ? "1" : "0"
+      'insight_id': insightId,
+      'annotation': annotation.value.toString(),
+      'update': update ? '1' : '0'
     };
 
     Response response = await HttpHelper().doPostRequest(
@@ -369,11 +369,11 @@ class OpenFoodAPIClient {
 
     if (ingredientName != null) {
       spellingCorrectionParam = {
-        "text": ingredientName,
+        'text': ingredientName,
       };
     } else if (product != null) {
       spellingCorrectionParam = {
-        "barcode": product.barcode,
+        'barcode': product.barcode,
       };
     } else {
       return null;
@@ -410,10 +410,10 @@ class OpenFoodAPIClient {
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_PROD_HOST,
         path: '/cgi/ingredients.pl',
         queryParameters: {
-          "code": barcode,
-          "process_image": "1",
-          "id": "ingredients_${language.code}",
-          "ocr_engine": OcrField.GOOGLE_CLOUD_VISION.key
+          'code': barcode,
+          'process_image': '1',
+          'id': 'ingredients_${language.code}',
+          'ocr_engine': OcrField.GOOGLE_CLOUD_VISION.key
         });
 
     Response response = await HttpHelper()
