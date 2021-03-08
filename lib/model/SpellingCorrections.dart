@@ -6,11 +6,11 @@ part 'SpellingCorrections.g.dart';
 @JsonSerializable()
 class SpellingCorrection extends JsonObject {
   @JsonKey(includeIfNull: false)
-  String corrected;
+  String? corrected;
   @JsonKey(name: 'text')
-  String input;
+  String? input;
   @JsonKey(name: 'corrections', includeIfNull: false)
-  List<TermCorrections> termCorrections;
+  List<TermCorrections>? termCorrections;
 
   SpellingCorrection(this.corrected, this.input, this.termCorrections);
 
@@ -24,9 +24,9 @@ class SpellingCorrection extends JsonObject {
 @JsonSerializable()
 class TermCorrections extends JsonObject {
   @JsonKey(name: "term_corrections")
-  List<Correction> corrections;
+  List<Correction>? corrections;
   @JsonKey()
-  double score;
+  double? score;
 
   TermCorrections(this.corrections, this.score);
 
@@ -40,15 +40,15 @@ class TermCorrections extends JsonObject {
 @JsonSerializable()
 class Correction extends JsonObject {
   @JsonKey(includeIfNull: false)
-  String correction;
+  String? correction;
   @JsonKey()
-  String original;
+  String? original;
   @JsonKey(name: 'start_offset')
-  int startOffset;
+  int? startOffset;
   @JsonKey(name: 'end_offset')
-  int endOffset;
+  int? endOffset;
   @JsonKey(name: 'is_valid')
-  bool isValid;
+  bool? isValid;
 
   Correction(this.correction, this.original, this.startOffset, this.endOffset,
       this.isValid);

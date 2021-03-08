@@ -93,12 +93,10 @@ class OpenFoodAPIClient {
   static Future<Status> addProductImage(User user, SendImage image,
       {QueryType queryType = QueryType.PROD}) async {
     var dataMap = <String, String>{};
-    var fileMap = <String, Uri>{};
+    var fileMap = <String?, Uri?>{};
 
     // Images can be sent anonymously
-    if (user != null) {
-      dataMap.addAll(user.toData());
-    }
+    dataMap.addAll(user.toData());
     dataMap.addAll(image.toData());
     fileMap.putIfAbsent(image.getImageDataKey(), () => image.imageUrl);
 
@@ -118,11 +116,7 @@ class OpenFoodAPIClient {
   /// By default the query will hit the PROD DB
   static Future<ProductResult> getProductRaw(
       String barcode, OpenFoodFactsLanguage language,
-      {User user, QueryType queryType = QueryType.PROD}) async {
-    if (barcode == null || barcode.isEmpty) {
-      return ProductResult();
-    }
-
+      {User? user, QueryType queryType = QueryType.PROD}) async {
     var productUri = Uri(
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
@@ -141,12 +135,8 @@ class OpenFoodAPIClient {
   /// By default the query will hit the PROD DB
   static Future<ProductResult> getProduct(
       ProductQueryConfiguration configuration,
-      {User user,
+      {User? user,
       QueryType queryType = QueryType.PROD}) async {
-    if (configuration.barcode == null || configuration.barcode.isEmpty) {
-      return ProductResult();
-    }
-
     var productUri = Uri(
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
@@ -158,8 +148,8 @@ class OpenFoodAPIClient {
     ProductResult result = ProductResult.fromJson(json.decode(response.body));
 
     if (result.product != null) {
-      ProductHelper.removeImages(result.product, configuration.language);
-      ProductHelper.createImageUrls(result.product, queryType: queryType);
+      ProductHelper.removeImages(result.product!, configuration.language);
+      ProductHelper.createImageUrls(result.product!, queryType: queryType);
     }
 
     return result;
@@ -186,7 +176,7 @@ class OpenFoodAPIClient {
         .doGetRequest(searchUri, user: user, queryType: queryType);
     var result = SearchResult.fromJson(json.decode(response.body));
 
-    result.products.asMap().forEach((index, product) {
+    result.products!.asMap().forEach((index, product) {
       ProductHelper.removeImages(product, configuration.language);
     });
 
@@ -211,7 +201,7 @@ class OpenFoodAPIClient {
         .doGetRequest(searchUri, user: user, queryType: queryType);
     var result = SearchResult.fromJson(json.decode(response.body));
 
-    result.products.asMap().forEach((index, product) {
+    result.products!.asMap().forEach((index, product) {
       ProductHelper.removeImages(product, configuration.language);
     });
 
@@ -220,12 +210,12 @@ class OpenFoodAPIClient {
 
   /// By default the query will hit the PROD DB
   static Future<InsightsResult> getRandomInsight(User user,
-      {InsightType type,
-      String country,
-      String valueTag,
-      String serverDomain,
+      {InsightType? type,
+      String? country,
+      String? valueTag,
+      String? serverDomain,
       QueryType queryType = QueryType.PROD}) async {
-    final Map<String, String> parameters = {};
+    final Map<String, String?> parameters = {};
 
     if (type != null) {
       parameters["type"] = type.value;
@@ -278,11 +268,7 @@ class OpenFoodAPIClient {
   /// By default the query will hit the PROD DB
   static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(
       String barcode, String lang, User user,
-      {int count, QueryType queryType = QueryType.PROD}) async {
-    if (barcode == null || barcode.isEmpty) {
-      return RobotoffQuestionResult();
-    }
-
+      {int? count, QueryType queryType = QueryType.PROD}) async {
     if (count == null || count <= 0) {
       count = 1;
     }
@@ -312,14 +298,14 @@ class OpenFoodAPIClient {
   /// By default the query will hit the PROD DB
   static Future<RobotoffQuestionResult> getRandomRobotoffQuestion(
       String lang, User user,
-      {int count,
-      List<InsightType> types,
+      {int? count,
+      required List<InsightType> types,
       QueryType queryType = QueryType.PROD}) async {
     if (count == null || count <= 0) {
       count = 1;
     }
 
-    List<String> typesValues = [];
+    List<String?> typesValues = [];
     types.forEach((t) {
       typesValues.add(t.value);
     });
@@ -351,7 +337,7 @@ class OpenFoodAPIClient {
 
   /// By default the query will hit the PROD DB
   static Future<Status> postInsightAnnotation(
-      String insightId, InsightAnnotation annotation, User user,
+      String? insightId, InsightAnnotation annotation, User user,
       {bool update = false, queryType = QueryType.PROD}) async {
     var insightUri = Uri(
         scheme: URI_SCHEME,
@@ -360,7 +346,7 @@ class OpenFoodAPIClient {
             : URI_PROD_HOST_ROBOTOFF,
         path: 'api/v1/insights/annotate');
 
-    Map<String, String> annotationData = {
+    Map<String, String?> annotationData = {
       "insight_id": insightId,
       "annotation": annotation.value.toString(),
       "update": update ? "1" : "0"
@@ -374,12 +360,12 @@ class OpenFoodAPIClient {
   }
 
   /// By default the query will hit the PROD DB
-  static Future<SpellingCorrection> getIngredientSpellingCorrection(
-      {String ingredientName,
-      Product product,
-      User user,
+  static Future<SpellingCorrection?> getIngredientSpellingCorrection(
+      {String? ingredientName,
+      Product? product,
+      User? user,
       queryType = QueryType.PROD}) async {
-    Map<String, String> spellingCorrectionParam;
+    Map<String, String?> spellingCorrectionParam;
 
     if (ingredientName != null) {
       spellingCorrectionParam = {

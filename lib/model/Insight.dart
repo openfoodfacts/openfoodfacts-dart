@@ -10,16 +10,12 @@ extension InsightAnnotationExtension on InsightAnnotation {
     switch (this) {
       case InsightAnnotation.YES:
         return 1;
-        break;
       case InsightAnnotation.NO:
         return 0;
-        break;
       case InsightAnnotation.MAYBE:
         return -1;
-        break;
       default:
         return -1;
-        break;
     }
   }
 }
@@ -37,8 +33,8 @@ enum InsightType {
   UNDEFINED
 }
 
-extension InsightTypesExtension on InsightType {
-  String get value {
+extension InsightTypesExtension on InsightType? {
+  String? get value {
     switch (this) {
       case InsightType.INGREDIENT_SPELLCHECK:
         return 'ingredient_spellcheck';
@@ -65,51 +61,41 @@ extension InsightTypesExtension on InsightType {
     }
   }
 
-  static InsightType getType(String s) {
+  static InsightType getType(String? s) {
     switch (s) {
       case "ingredient_spellcheck":
         return InsightType.INGREDIENT_SPELLCHECK;
-        break;
       case "packager_code":
         return InsightType.PACKAGER_CODE;
-        break;
       case "label":
         return InsightType.LABEL;
-        break;
       case "category":
         return InsightType.CATEGORY;
-        break;
       case "product_weight":
         return InsightType.PRODUCT_WEIGHT;
-        break;
       case "expiration_date":
         return InsightType.EXPIRATION_DATE;
-        break;
       case "brand":
         return InsightType.BRAND;
-        break;
       case "store":
         return InsightType.STORE;
-        break;
       case "nutrient":
         return InsightType.NUTRIENT;
-        break;
       default:
         return InsightType.UNDEFINED;
-        break;
     }
   }
 }
 
 @JsonSerializable()
 class InsightsResult extends JsonObject {
-  final String status;
+  final String? status;
   @JsonKey(
       name: 'insights',
       includeIfNull: false,
       fromJson: Insight.fromJson,
       toJson: Insight.toJson)
-  final List<Insight> insights;
+  final List<Insight>? insights;
 
   const InsightsResult({this.status, this.insights});
 
@@ -121,13 +107,13 @@ class InsightsResult extends JsonObject {
 }
 
 class Insight {
-  final String id;
-  final InsightType type;
-  final String barcode;
-  final List<dynamic> countries;
-  final String lang;
-  final String model;
-  final double confidence;
+  final String? id;
+  final InsightType? type;
+  final String? barcode;
+  final List<dynamic>? countries;
+  final String? lang;
+  final String? model;
+  final double? confidence;
 
   const Insight(
       {this.id,
@@ -140,7 +126,8 @@ class Insight {
 
   static List<Insight> fromJson(List<dynamic> json) {
     List<Insight> result = [];
-    for (Map<String, dynamic> jsonInsight in json) {
+    for (Map<String, dynamic> jsonInsight
+        in json as Iterable<Map<String, dynamic>>) {
       InsightType insightType =
           InsightTypesExtension.getType(jsonInsight["type"]);
 
@@ -156,7 +143,10 @@ class Insight {
     return result;
   }
 
-  static List<Map<String, dynamic>> toJson(List<Insight> insights) {
+  static List<Map<String, dynamic>> toJson(List<Insight>? insights) {
+    if (insights == null) {
+      return [];
+    }
     List<Map<String, dynamic>> result = [];
     for (Insight insight in insights) {
       Map<String, dynamic> jsonInsight = {};

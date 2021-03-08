@@ -7,20 +7,20 @@ part 'OriginsOfIngredients.g.dart';
 class OriginsOfIngredients extends JsonObject {
   @JsonKey(
       name: "epi_score", includeIfNull: false, fromJson: JsonObject.parseDouble)
-  double epiScore;
+  double? epiScore;
   @JsonKey(
       name: "epi_value", includeIfNull: false, fromJson: JsonObject.parseDouble)
-  double epiValue;
+  double? epiValue;
   @JsonKey(
       name: "transportation_score",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double transportationScore;
+  double? transportationScore;
   @JsonKey(
       name: "transportation_value",
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
-  double transportationValue;
+  double? transportationValue;
 
   OriginsOfIngredients(
       {this.epiScore,

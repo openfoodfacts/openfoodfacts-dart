@@ -6,12 +6,12 @@ part 'ProductResult.g.dart';
 
 @JsonSerializable()
 class ProductResult extends JsonObject {
-  final int status;
+  final int? status;
   @JsonKey(name: "code")
-  final String barcode;
+  final String? barcode;
   @JsonKey(name: "status_verbose")
-  final String statusVerbose;
-  final Product product;
+  final String? statusVerbose;
+  final Product? product;
 
   const ProductResult(
       {this.status, this.barcode, this.statusVerbose, this.product});

@@ -5,13 +5,13 @@ part 'OcrIngredientsResult.g.dart';
 
 @JsonSerializable()
 class OcrIngredientsResult extends JsonObject {
-  final int status;
+  final int? status;
 
   @JsonKey(name: "ingredients_text_from_image_orig")
-  final String ingredientsTextFromImageOrig;
+  final String? ingredientsTextFromImageOrig;
 
   @JsonKey(name: "ingredients_text_from_image")
-  final String ingredientsTextFromImage;
+  final String? ingredientsTextFromImage;
 
   const OcrIngredientsResult(
       {this.status,

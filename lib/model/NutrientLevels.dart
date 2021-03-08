@@ -1,40 +1,31 @@
 enum Level { LOW, MODERATE, HIGH, UNDEFINED }
 
-extension LevelExtension on Level {
+extension LevelExtension on Level? {
   String get value {
     switch (this) {
       case Level.LOW:
         return 'low';
-        break;
       case Level.MODERATE:
         return 'moderate';
-        break;
       case Level.HIGH:
         return 'high';
-        break;
       case Level.UNDEFINED:
         return 'undefined';
-        break;
       default:
         return 'undefined';
-        break;
     }
   }
 
-  static Level getLevel(String s) {
+  static Level getLevel(String? s) {
     switch (s) {
       case 'low':
         return Level.LOW;
-        break;
       case 'moderate':
         return Level.MODERATE;
-        break;
       case 'high':
         return Level.HIGH;
-        break;
       default:
         return Level.UNDEFINED;
-        break;
     }
   }
 }
@@ -56,7 +47,7 @@ class NutrientLevels {
 
   NutrientLevels(this.levels);
 
-  static NutrientLevels fromJson(Map<String, dynamic> json) {
+  static NutrientLevels fromJson(Map? json) {
     Map<String, Level> result = {};
 
     if (json == null) {
@@ -71,19 +62,11 @@ class NutrientLevels {
     return NutrientLevels(result);
   }
 
-  static Map<String, dynamic> toJson(NutrientLevels nutrientLevels) {
+  static Map<String, dynamic>? toJson(NutrientLevels? nutrientLevels) {
     Map<String, String> result = {};
 
     if (nutrientLevels == null) {
       return null;
-    }
-
-    if (nutrientLevels.levels == null) {
-      nutrientLevels.levels = {};
-      nutrientLevels.levels[NUTRIENT_SUGARS] = Level.UNDEFINED;
-      nutrientLevels.levels[NUTRIENT_FAT] = Level.UNDEFINED;
-      nutrientLevels.levels[NUTRIENT_SATURATED_FAT] = Level.UNDEFINED;
-      nutrientLevels.levels[NUTRIENT_SALT] = Level.UNDEFINED;
     }
 
     for (int i = 0; i < nutrientLevels.levels.length; i++) {

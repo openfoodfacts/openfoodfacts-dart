@@ -24,7 +24,7 @@ class SortBy extends Parameter {
     }
   }
 
-  final SortOption option;
+  final SortOption? option;
 
   const SortBy({this.option});
 }

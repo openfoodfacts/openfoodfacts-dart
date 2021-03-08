@@ -22,7 +22,7 @@ class NutrimentsHelper {
 
   /// get the energy value converted in kCal.
   static double getEnergyAsKCal(Nutriments nutriments) {
-    return (nutriments.energy * 0.2388);
+    return (nutriments.energy! * 0.2388);
   }
 
   /// get the energy value converted in kJ if necessary.
@@ -47,11 +47,11 @@ class NutrimentsHelper {
   /// calculates the energy for 100g in kJ.
   /// ! should be used cautiously (might not be displayed to the end user) !
   /// source : https://en.wikipedia.org/wiki/Food_energy
-  static double calculateEnergy(Nutriments nutriments) {
-    double fat = nutriments.fat;
-    double carbs = nutriments.carbohydrates;
-    double proteins = nutriments.proteins;
-    double fiber = nutriments.fiber;
+  static double? calculateEnergy(Nutriments nutriments) {
+    double? fat = nutriments.fat;
+    double? carbs = nutriments.carbohydrates;
+    double? proteins = nutriments.proteins;
+    double? fiber = nutriments.fiber;
 
     if (fat == null || carbs == null || proteins == null || fiber == null) {
       return null;
@@ -65,14 +65,14 @@ class NutrimentsHelper {
   /// uncoherent.
   static bool checkEnergyCoherence(
       Nutriments nutriments, double marginPercentage) {
-    double statedEnergy = nutriments.energy;
+    double statedEnergy = nutriments.energy!;
 
     double lowLimit =
         statedEnergy - (statedEnergy * (marginPercentage / 100.0));
     double highLimit =
         statedEnergy + (statedEnergy * (marginPercentage / 100.0));
 
-    double calculatedEnergy = calculateEnergy(nutriments);
+    double calculatedEnergy = calculateEnergy(nutriments)!;
 
     return (calculatedEnergy >= lowLimit && calculatedEnergy <= highLimit);
   }

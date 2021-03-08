@@ -5,11 +5,10 @@ class EnvironmentImpactLevels {
 
   EnvironmentImpactLevels(this.levels);
 
-  static EnvironmentImpactLevels fromJson(List<dynamic> json) {
+  static EnvironmentImpactLevels? fromJson(List<dynamic>? json) {
     if (json == null) {
       return null;
     }
-
     List<Level> result = <Level>[];
 
     for (String s in json) {
@@ -19,7 +18,8 @@ class EnvironmentImpactLevels {
     return EnvironmentImpactLevels(result);
   }
 
-  static List<String> toJson(EnvironmentImpactLevels environmentImpactLevels) {
+  static List<String>? toJson(
+      EnvironmentImpactLevels? environmentImpactLevels) {
     if (environmentImpactLevels == null) {
       return null;
     }
