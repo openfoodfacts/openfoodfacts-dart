@@ -160,7 +160,7 @@ class OpenFoodAPIClient {
   /// Query the language specific host from OpenFoodFacts.
   /// By default the query will hit the PROD DB
   static Future<SearchResult> searchProducts(
-      User user, ProductSearchQueryConfiguration configuration,
+      User? user, ProductSearchQueryConfiguration configuration,
       {QueryType queryType = QueryType.PROD}) async {
     const outputFormat = OutputFormat(format: Format.JSON);
     var queryParameters = configuration.getParametersMap();
