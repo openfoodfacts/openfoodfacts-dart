@@ -15,8 +15,8 @@ class HttpHelper {
   factory HttpHelper() => _singleton;
   HttpHelper._internal();
 
-  static const String USER_AGENT = "Dart API";
-  static const String FROM = "anonymous";
+  static const String USER_AGENT = 'Dart API';
+  static const String FROM = 'anonymous';
 
   /// Send a http get request to the specified uri.
   /// The data of the request (if any) has to be provided as parameter within the uri.
@@ -53,7 +53,7 @@ class HttpHelper {
   Future<Status> doMultipartRequest(
       Uri uri, Map<String, String> body, Map<String?, Uri?> files, User user,
       {QueryType queryType = QueryType.PROD}) async {
-    var request = http.MultipartRequest("POST", uri);
+    var request = http.MultipartRequest('POST', uri);
     request.headers.addAll(_buildHeaders(user,
             isTestModeActive: queryType == QueryType.PROD ? false : true)
         as Map<String, String>);

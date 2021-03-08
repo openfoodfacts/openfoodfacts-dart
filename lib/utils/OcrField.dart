@@ -7,10 +7,10 @@ extension OcrFieldExtension on OcrField {
   String get key {
     switch (this) {
       case OcrField.TESSERACT:
-        return "tesseract";
+        return 'tesseract';
       case OcrField.GOOGLE_CLOUD_VISION:
       default:
-        return "google_cloud_vision";
+        return 'google_cloud_vision';
     }
   }
 }

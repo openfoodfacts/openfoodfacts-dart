@@ -37,7 +37,7 @@ class SendImage extends JsonObject {
   }
 
   factory SendImage.fromJson(Map<String, dynamic> json) {
-    ImageField imageField = ImageFieldExtension.getType(json["imagefield"]);
+    ImageField imageField = ImageFieldExtension.getType(json['imagefield']);
 
     return SendImage(
       lang: LanguageHelper.fromJson(json['lang']),

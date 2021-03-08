@@ -7,10 +7,10 @@ part 'OcrIngredientsResult.g.dart';
 class OcrIngredientsResult extends JsonObject {
   final int? status;
 
-  @JsonKey(name: "ingredients_text_from_image_orig")
+  @JsonKey(name: 'ingredients_text_from_image_orig')
   final String? ingredientsTextFromImageOrig;
 
-  @JsonKey(name: "ingredients_text_from_image")
+  @JsonKey(name: 'ingredients_text_from_image')
   final String? ingredientsTextFromImage;
 
   const OcrIngredientsResult(

@@ -4,7 +4,7 @@ abstract class Parameter {
   String getValue();
 
   String toString() {
-    return "&" + getName() + "=" + getValue();
+    return '&' + getName() + '=' + getValue();
   }
 
   const Parameter();

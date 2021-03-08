@@ -29,13 +29,13 @@ class ProductQueryConfiguration {
     Map<String, String?> result = {};
 
     if (language != null) {
-      result.putIfAbsent("lc", () => language.code);
+      result.putIfAbsent('lc', () => language.code);
     } else if (lc != null) {
-      result.putIfAbsent("lc", () => lc);
+      result.putIfAbsent('lc', () => lc);
     }
 
     if (cc != null) {
-      result.putIfAbsent("cc", () => cc);
+      result.putIfAbsent('cc', () => cc);
     }
 
     if (fields != null) {
@@ -53,13 +53,13 @@ class ProductQueryConfiguration {
         if (fields!.contains(ProductField.CATEGORIES_TAGS_TRANSLATED)) {
           fields!.remove(ProductField.CATEGORIES_TAGS_TRANSLATED);
           value =
-              "$value,${ProductField.CATEGORIES_TAGS_TRANSLATED.key}${language.code}";
+              '$value,${ProductField.CATEGORIES_TAGS_TRANSLATED.key}${language.code}';
         }
 
         if (fields!.contains(ProductField.LABELS_TAGS_TRANSLATED)) {
           fields!.remove(ProductField.LABELS_TAGS_TRANSLATED);
           value =
-              "$value,${ProductField.LABELS_TAGS_TRANSLATED.key}${language.code}";
+              '$value,${ProductField.LABELS_TAGS_TRANSLATED.key}${language.code}';
         }
 
         result.putIfAbsent(

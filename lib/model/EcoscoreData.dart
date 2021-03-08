@@ -5,9 +5,9 @@ import 'EcoscoreAdjustments.dart';
 part 'EcoscoreData.g.dart';
 
 enum EcoscoreStatus {
-  @JsonValue("known")
+  @JsonValue('known')
   KNOWN,
-  @JsonValue("unknown")
+  @JsonValue('unknown')
   UNKNOWN
 }
 

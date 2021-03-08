@@ -7,9 +7,9 @@ part 'ProductResult.g.dart';
 @JsonSerializable()
 class ProductResult extends JsonObject {
   final int? status;
-  @JsonKey(name: "code")
+  @JsonKey(name: 'code')
   final String? barcode;
-  @JsonKey(name: "status_verbose")
+  @JsonKey(name: 'status_verbose')
   final String? statusVerbose;
   final Product? product;
 

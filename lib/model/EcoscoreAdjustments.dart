@@ -9,7 +9,7 @@ part 'EcoscoreAdjustments.g.dart';
 class EcoscoreAdjustments extends JsonObject {
   @JsonKey(includeIfNull: false)
   Packaging? packaging;
-  @JsonKey(name: "origins_of_ingredients", includeIfNull: false)
+  @JsonKey(name: 'origins_of_ingredients', includeIfNull: false)
   OriginsOfIngredients? originsOfIngredients;
 
   EcoscoreAdjustments({this.packaging, this.originsOfIngredients});

@@ -133,7 +133,7 @@ void main() {
         const PageSize(size: 10),
         const SearchSimple(active: true),
         const SortBy(option: SortOption.PRODUCT_NAME),
-        const SearchTerms(terms: ["Fruit à coques"]),
+        const SearchTerms(terms: ['Fruit à coques']),
         const ContainsAdditives(filter: false)
       ];
 
@@ -155,7 +155,7 @@ void main() {
         const PageSize(size: 10),
         const SearchSimple(active: true),
         const SortBy(option: SortOption.PRODUCT_NAME),
-        const SearchTerms(terms: ["Fruit à coques"]),
+        const SearchTerms(terms: ['Fruit à coques']),
         const ContainsAdditives(filter: true)
       ];
 
@@ -179,11 +179,11 @@ void main() {
         const SearchSimple(active: true),
         const SortBy(option: SortOption.PRODUCT_NAME),
         const TagFilter(
-            tagType: "categories",
+            tagType: 'categories',
             contains: true,
-            tagName: "breakfast_cereals"),
+            tagName: 'breakfast_cereals'),
         const TagFilter(
-            tagType: "nutrition_grades", contains: true, tagName: "A")
+            tagType: 'nutrition_grades', contains: true, tagName: 'A')
       ];
 
       ProductSearchQueryConfiguration configuration =
@@ -202,7 +202,7 @@ void main() {
       expect(result.products!.length, 10);
       expect(result.products![0].runtimeType, Product);
       expect(
-          result.products![0].categoriesTags!.contains("en:breakfast-cereals"),
+          result.products![0].categoriesTags!.contains('en:breakfast-cereals'),
           true);
       expect(result.products![0].nutriscore!.toUpperCase() == 'A', true);
     });

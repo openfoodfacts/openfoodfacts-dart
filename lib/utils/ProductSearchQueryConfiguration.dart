@@ -31,25 +31,25 @@ class ProductSearchQueryConfiguration {
     for (Parameter p in parametersList!) {
       if (p is TagFilter) {
         TagFilter tf = p;
-        result.putIfAbsent("tagtype_$filterTagCount", () => tf.getTagType());
+        result.putIfAbsent('tagtype_$filterTagCount', () => tf.getTagType());
         result.putIfAbsent(
-            "tag_contains_$filterTagCount", () => tf.getContains());
-        result.putIfAbsent("tag_$filterTagCount", () => tf.getTagName());
+            'tag_contains_$filterTagCount', () => tf.getContains());
+        result.putIfAbsent('tag_$filterTagCount', () => tf.getTagName());
         filterTagCount++;
       } else {
         result.putIfAbsent(p.getName(), () => p.getValue());
       }
     }
-    result.putIfAbsent('search_terms', () => "");
+    result.putIfAbsent('search_terms', () => '');
 
     if (language != null) {
-      result.putIfAbsent("lc", () => language.code);
+      result.putIfAbsent('lc', () => language.code);
     } else if (lc != null) {
-      result.putIfAbsent("lc", () => lc);
+      result.putIfAbsent('lc', () => lc);
     }
 
     if (cc != null) {
-      result.putIfAbsent("cc", () => cc);
+      result.putIfAbsent('cc', () => cc);
     }
 
     if (fields != null) {
@@ -67,13 +67,13 @@ class ProductSearchQueryConfiguration {
         if (fields!.contains(ProductField.CATEGORIES_TAGS_TRANSLATED)) {
           fields!.remove(ProductField.CATEGORIES_TAGS_TRANSLATED);
           value =
-              "$value,${ProductField.CATEGORIES_TAGS_TRANSLATED.key}${language.code}";
+              '$value,${ProductField.CATEGORIES_TAGS_TRANSLATED.key}${language.code}';
         }
 
         if (fields!.contains(ProductField.LABELS_TAGS_TRANSLATED)) {
           fields!.remove(ProductField.LABELS_TAGS_TRANSLATED);
           value =
-              "$value,${ProductField.LABELS_TAGS_TRANSLATED.key}${language.code}";
+              '$value,${ProductField.LABELS_TAGS_TRANSLATED.key}${language.code}';
         }
 
         result.putIfAbsent(
