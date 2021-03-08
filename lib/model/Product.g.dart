@@ -28,7 +28,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     imageNutritionUrl: json['image_nutrition_url'] as String?,
     imageNutritionSmallUrl: json['image_nutrition_small_url'] as String?,
     imagePackagingUrl: json['image_packaging_url'] as String?,
-    imagePackagingSmallUrl: json['image_packaging_small_url'] as String?,    
+    imagePackagingSmallUrl: json['image_packaging_small_url'] as String?,
     ingredientsText: json['ingredients_text'] as String?,
     ingredientsTextDE: json['ingredients_text_de'] as String?,
     ingredientsTextEN: json['ingredients_text_en'] as String?,
