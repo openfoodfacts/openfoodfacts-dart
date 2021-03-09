@@ -3,7 +3,7 @@ import 'package:openfoodfacts/interface/Parameter.dart';
 class SearchTerms extends Parameter {
   @override
   String getName() {
-    return "search_terms";
+    return 'search_terms';
   }
 
   @override

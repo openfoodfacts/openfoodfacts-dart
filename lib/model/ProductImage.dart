@@ -10,30 +10,30 @@ extension ImageFieldExtension on ImageField? {
   static String getValue(ImageField? field) {
     switch (field) {
       case ImageField.FRONT:
-        return "front";
+        return 'front';
       case ImageField.INGREDIENTS:
-        return "ingredients";
+        return 'ingredients';
       case ImageField.NUTRITION:
-        return "nutrition";
+        return 'nutrition';
       case ImageField.PACKAGING:
-        return "packaging";
+        return 'packaging';
       case ImageField.OTHER:
       default:
-        return "other";
+        return 'other';
     }
   }
 
   static ImageField getType(String s) {
     switch (s.toLowerCase()) {
-      case "front":
+      case 'front':
         return ImageField.FRONT;
-      case "ingredients":
+      case 'ingredients':
         return ImageField.INGREDIENTS;
-      case "nutrition":
+      case 'nutrition':
         return ImageField.NUTRITION;
-      case "packaging":
+      case 'packaging':
         return ImageField.PACKAGING;
-      case "other":
+      case 'other':
       default:
         return ImageField.OTHER;
     }
@@ -52,27 +52,27 @@ extension ImageSizeExtension on ImageSize? {
   String get value {
     switch (this) {
       case ImageSize.THUMB:
-        return "thumb";
+        return 'thumb';
       case ImageSize.SMALL:
-        return "small";
+        return 'small';
       case ImageSize.DISPLAY:
-        return "display";
+        return 'display';
       case ImageSize.ORIGINAL:
-        return "original";
+        return 'original';
       default:
-        return "unknown";
+        return 'unknown';
     }
   }
 
   static ImageSize getType(String s) {
     switch (s.toLowerCase()) {
-      case "thumb":
+      case 'thumb':
         return ImageSize.THUMB;
-      case "small":
+      case 'small':
         return ImageSize.SMALL;
-      case "display":
+      case 'display':
         return ImageSize.DISPLAY;
-      case "original":
+      case 'original':
         return ImageSize.ORIGINAL;
       default:
         return ImageSize.UNKNOWN;
@@ -81,13 +81,13 @@ extension ImageSizeExtension on ImageSize? {
 
   static ImageSize fromNumber(String s) {
     switch (s) {
-      case "100":
+      case '100':
         return ImageSize.THUMB;
-      case "200":
+      case '200':
         return ImageSize.SMALL;
-      case "400":
+      case '400':
         return ImageSize.DISPLAY;
-      case "full":
+      case 'full':
         return ImageSize.ORIGINAL;
       default:
         return ImageSize.UNKNOWN;
@@ -97,16 +97,16 @@ extension ImageSizeExtension on ImageSize? {
   String toNumber() {
     switch (this) {
       case ImageSize.THUMB:
-        return "100";
+        return '100';
       case ImageSize.SMALL:
-        return "200";
+        return '200';
       case ImageSize.DISPLAY:
-        return "400";
+        return '400';
       case ImageSize.ORIGINAL:
-        return "full";
+        return 'full';
       case ImageSize.UNKNOWN:
       default:
-        return "unknown";
+        return 'unknown';
     }
   }
 }

@@ -5,20 +5,20 @@ class OutputFormat extends Parameter {
   String getName() {
     switch (format) {
       case Format.XML:
-        return "xml";
+        return 'xml';
 
       case Format.JQM:
-        return "jqm";
+        return 'jqm';
 
       case Format.JSON:
       default:
-        return "json";
+        return 'json';
     }
   }
 
   @override
   String getValue() {
-    return "1";
+    return '1';
   }
 
   final Format? format;

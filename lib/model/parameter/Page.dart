@@ -3,7 +3,7 @@ import 'package:openfoodfacts/interface/Parameter.dart';
 class Page extends Parameter {
   @override
   String getName() {
-    return "page";
+    return 'page';
   }
 
   @override

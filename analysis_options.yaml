@@ -6,5 +6,7 @@ analyzer:
   errors:
     omit_local_variable_types: ignore
     annotate_overrides: ignore
-    prefer_single_quotes: ignore
     use_function_type_syntax_for_parameters: ignore
+    missing_required_param: warning
+    missing_return: warning
+    prefer_single_quotes: warning

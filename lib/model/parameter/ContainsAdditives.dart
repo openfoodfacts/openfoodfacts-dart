@@ -3,12 +3,12 @@ import 'package:openfoodfacts/interface/Parameter.dart';
 class ContainsAdditives extends Parameter {
   @override
   String getName() {
-    return "additives";
+    return 'additives';
   }
 
   @override
   String getValue() {
-    return filter! ? "without" : "";
+    return filter! ? 'without' : '';
   }
 
   final bool? filter;

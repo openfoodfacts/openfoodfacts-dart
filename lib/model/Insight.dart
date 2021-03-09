@@ -63,23 +63,23 @@ extension InsightTypesExtension on InsightType? {
 
   static InsightType getType(String? s) {
     switch (s) {
-      case "ingredient_spellcheck":
+      case 'ingredient_spellcheck':
         return InsightType.INGREDIENT_SPELLCHECK;
-      case "packager_code":
+      case 'packager_code':
         return InsightType.PACKAGER_CODE;
-      case "label":
+      case 'label':
         return InsightType.LABEL;
-      case "category":
+      case 'category':
         return InsightType.CATEGORY;
-      case "product_weight":
+      case 'product_weight':
         return InsightType.PRODUCT_WEIGHT;
-      case "expiration_date":
+      case 'expiration_date':
         return InsightType.EXPIRATION_DATE;
-      case "brand":
+      case 'brand':
         return InsightType.BRAND;
-      case "store":
+      case 'store':
         return InsightType.STORE;
-      case "nutrient":
+      case 'nutrient':
         return InsightType.NUTRIENT;
       default:
         return InsightType.UNDEFINED;
@@ -129,16 +129,16 @@ class Insight {
     for (Map<String, dynamic> jsonInsight
         in json as Iterable<Map<String, dynamic>>) {
       InsightType insightType =
-          InsightTypesExtension.getType(jsonInsight["type"]);
+          InsightTypesExtension.getType(jsonInsight['type']);
 
       result.add(Insight(
-          id: jsonInsight["id"],
+          id: jsonInsight['id'],
           type: insightType,
-          barcode: jsonInsight["barcode"],
-          countries: jsonInsight["countries"],
-          lang: jsonInsight["lang"],
-          model: jsonInsight["model"],
-          confidence: jsonInsight["confidence"]));
+          barcode: jsonInsight['barcode'],
+          countries: jsonInsight['countries'],
+          lang: jsonInsight['lang'],
+          model: jsonInsight['model'],
+          confidence: jsonInsight['confidence']));
     }
     return result;
   }
@@ -151,13 +151,13 @@ class Insight {
     for (Insight insight in insights) {
       Map<String, dynamic> jsonInsight = {};
 
-      jsonInsight["id"] = insight.id;
-      jsonInsight["type"] = insight.type.value;
-      jsonInsight["barcode"] = insight.barcode;
-      jsonInsight["countries"] = insight.countries;
-      jsonInsight["lang"] = insight.lang;
-      jsonInsight["model"] = insight.model;
-      jsonInsight["confidence"] = insight.confidence;
+      jsonInsight['id'] = insight.id;
+      jsonInsight['type'] = insight.type.value;
+      jsonInsight['barcode'] = insight.barcode;
+      jsonInsight['countries'] = insight.countries;
+      jsonInsight['lang'] = insight.lang;
+      jsonInsight['model'] = insight.model;
+      jsonInsight['confidence'] = insight.confidence;
 
       result.add(jsonInsight);
     }

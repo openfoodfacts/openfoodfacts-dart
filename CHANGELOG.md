@@ -1,3 +1,6 @@
+## [1.0.1-beta] - 08.03.2021
+- API method for searching products does not require a user being passed
+
 ## [1.0.0-beta] - 07.03.2021
 - Migrated SDK to null safety
 - Updated test instructions in README.md

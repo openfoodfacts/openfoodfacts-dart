@@ -51,27 +51,27 @@ extension ProductFieldExtension on ProductField {
   String get key {
     switch (this) {
       case ProductField.BARCODE:
-        return "code";
+        return 'code';
       case ProductField.NAME:
-        return "product_name";
+        return 'product_name';
       case ProductField.GENERIC_NAME:
-        return "generic_name";
+        return 'generic_name';
       case ProductField.BRANDS:
-        return "brands";
+        return 'brands';
       case ProductField.BRANDS_TAGS:
-        return "brands_tags";
+        return 'brands_tags';
       case ProductField.COUNTRIES:
-        return "countries";
+        return 'countries';
       case ProductField.COUNTRIES_TAGS:
-        return "countries_tags";
+        return 'countries_tags';
       case ProductField.LANGUAGE:
-        return "lang";
+        return 'lang';
       case ProductField.QUANTITY:
-        return "quantity";
+        return 'quantity';
       case ProductField.SERVING_SIZE:
-        return "serving_size";
+        return 'serving_size';
       case ProductField.PACKAGING_QUANTITY:
-        return "product_quantity";
+        return 'product_quantity';
       case ProductField.FRONT_IMAGE:
         return "image_small_url";
       case ProductField.IMAGE_FRONT_URL:
@@ -91,57 +91,57 @@ extension ProductFieldExtension on ProductField {
       case ProductField.IMAGE_PACKAGING_SMALL_URL:
         return "image_packaging_small_url";
       case ProductField.SELECTED_IMAGE:
-        return "selected_images";
+        return 'selected_images';
       case ProductField.IMAGES:
-        return "images";
+        return 'images';
       case ProductField.INGREDIENTS:
-        return "ingredients";
+        return 'ingredients';
       case ProductField.NUTRIMENTS:
-        return "nutriments";
+        return 'nutriments';
       case ProductField.ADDITIVES:
-        return "additives_tags";
+        return 'additives_tags';
       case ProductField.NUTRIENT_LEVELS:
-        return "nutrient_levels";
+        return 'nutrient_levels';
       case ProductField.INGREDIENTS_TEXT:
-        return "ingredients_text";
+        return 'ingredients_text';
       case ProductField.NUTRIMENT_ENERGY_UNIT:
-        return "nutriment_energy_unit";
+        return 'nutriment_energy_unit';
       case ProductField.NUTRIMENT_DATA_PER:
-        return "nutrition_data_per";
+        return 'nutrition_data_per';
       case ProductField.NUTRISCORE:
-        return "nutrition_grade_fr";
+        return 'nutrition_grade_fr';
       case ProductField.CATEGORIES:
-        return "categories";
+        return 'categories';
       case ProductField.CATEGORIES_TAGS:
-        return "categories_tags";
+        return 'categories_tags';
       case ProductField.CATEGORIES_TAGS_TRANSLATED:
-        return "categories_tags_";
+        return 'categories_tags_';
       case ProductField.LABELS_TAGS:
-        return "labels_tags";
+        return 'labels_tags';
       case ProductField.LABELS_TAGS_TRANSLATED:
-        return "labels_tags_";
+        return 'labels_tags_';
       case ProductField.MISC_TAGS:
-        return "misc";
+        return 'misc';
       case ProductField.STATES_TAGS:
-        return "states_tags";
+        return 'states_tags';
       case ProductField.TRACES_TAGS:
-        return "traces_tags";
+        return 'traces_tags';
       case ProductField.INGREDIENTS_ANALYSIS_TAGS:
-        return "ingredients_analysis_tags";
+        return 'ingredients_analysis_tags';
       case ProductField.ALLERGENS:
-        return "allergens_tags";
+        return 'allergens_tags';
       case ProductField.ENVIRONMENT_IMPACT_LEVELS:
-        return "environment_impact_level_tags";
+        return 'environment_impact_level_tags';
       case ProductField.ATTRIBUTE_GROUPS:
-        return "attribute_groups";
+        return 'attribute_groups';
       case ProductField.ECOSCORE_GRADE:
-        return "ecoscore_grade";
+        return 'ecoscore_grade';
       case ProductField.ECOSCORE_SCORE:
-        return "ecoscore_score";
+        return 'ecoscore_score';
       case ProductField.ECOSCORE_DATA:
-        return "ecoscore_data";
+        return 'ecoscore_data';
       default:
-        return "";
+        return '';
     }
   }
 }

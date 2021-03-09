@@ -17,21 +17,21 @@ import 'test_constants.dart';
 void main() {
   group('$OpenFoodAPIClient get products', () {
     test('get product Coca Cola Light', () async {
-      String barcode = "1111111111111";
+      String barcode = '1111111111111';
 
       //First add the product to the Test DB
       Product product = Product(
           barcode: barcode,
-          productName: "Coca Cola Light",
+          productName: 'Coca Cola Light',
           lang: OpenFoodFactsLanguage.GERMAN,
-          countries: "Frankreich,Deutschland",
-          brands: "Coca Cola",
-          nutrimentDataPer: "serving",
-          nutrimentEnergyUnit: "kcal",
-          servingSize: "100g",
+          countries: 'Frankreich,Deutschland',
+          brands: 'Coca Cola',
+          nutrimentDataPer: 'serving',
+          nutrimentEnergyUnit: 'kcal',
+          servingSize: '100g',
           ingredientsText:
-              "Wasser, Kohlensäure, e150d, Citronensäure,  Phosphorsäure, Süßungsmittel, Natriumcyclamat, Acesulfam K, Aroma, Aroma Koffein, Aspartam",
-          additives: Additives(["en:e150d, en:e950"], ["E150d, E950"]));
+              'Wasser, Kohlensäure, e150d, Citronensäure,  Phosphorsäure, Süßungsmittel, Natriumcyclamat, Acesulfam K, Aroma, Aroma Koffein, Aspartam',
+          additives: Additives(['en:e150d, en:e950'], ['E150d, E950']));
 
       await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product,
           queryType: QueryType.TEST);
@@ -40,7 +40,7 @@ void main() {
         lang: OpenFoodFactsLanguage.GERMAN,
         barcode: barcode,
         imageField: ImageField.FRONT,
-        imageUrl: Uri.file("test/test_assets/front_coca_light_de.jpg"),
+        imageUrl: Uri.file('test/test_assets/front_coca_light_de.jpg'),
       );
       await OpenFoodAPIClient.addProductImage(
           TestConstants.TEST_USER, fontImage,
@@ -65,26 +65,26 @@ void main() {
       expect(result.product!.ingredients != null, true);
       expect(result.product!.ingredients!.length, 11);
 
-      expect(result.product!.ingredients!.any((i) => i.text == "Wasser"), true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Kohlensäure"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Wasser'), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'Kohlensäure'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == "e150d"), true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Citronensäure"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'e150d'), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'Citronensäure'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Phosphorsäure"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Phosphorsäure'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Süßungsmittel"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Süßungsmittel'),
           true);
 
       expect(
-          result.product!.ingredients!.any((i) => i.text == "Natriumcyclamat"),
+          result.product!.ingredients!.any((i) => i.text == 'Natriumcyclamat'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Acesulfam K"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Acesulfam K'),
           true);
       expect(
-          result.product!.ingredients!.any((i) => i.text == "Aspartam"), true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Aroma"), true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Aroma Koffein"),
+          result.product!.ingredients!.any((i) => i.text == 'Aspartam'), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'Aroma'), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'Aroma Koffein'),
           true);
 
       expect(result.product!.selectedImages!.length, 3);
@@ -108,10 +108,10 @@ void main() {
           Level.LOW);
       */
 
-      expect(result.product!.additives!.ids[0], "en:e150d");
-      expect(result.product!.additives!.names[0], "E150d");
-      expect(result.product!.additives!.ids[4], "en:e950");
-      expect(result.product!.additives!.names[4], "E950");
+      expect(result.product!.additives!.ids[0], 'en:e150d');
+      expect(result.product!.additives!.names[0], 'E150d');
+      expect(result.product!.additives!.ids[4], 'en:e950');
+      expect(result.product!.additives!.names[4], 'E950');
 
       expect(result.product!.images != null, true);
       expect(result.product!.images!.length, 4);
@@ -122,9 +122,9 @@ void main() {
                   image.size == ImageSize.DISPLAY &&
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
-          "https://static.openfoodfacts.net/images/products/111/111/111/1111/front_de.18.400.jpg");
+          'https://static.openfoodfacts.net/images/products/111/111/111/1111/front_de.18.400.jpg');
 
-      expect(result.product!.countries, "Frankreich,Deutschland");
+      expect(result.product!.countries, 'Frankreich,Deutschland');
     });
 
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',
@@ -149,12 +149,12 @@ void main() {
       expect(result.product!.nutriments!.proteinsServing != null, true);
       expect(result.product!.nutriments!.fatServing != null, true);
 
-      expect(result.product!.countries, "United States");
+      expect(result.product!.countries, 'United States');
     });
 
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',
         () async {
-      String barcode = "5701184005007";
+      String barcode = '5701184005007';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -166,7 +166,7 @@ void main() {
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
-      expect(result.product!.brandsTags![0], "kelsin");
+      expect(result.product!.brandsTags![0], 'kelsin');
 
       // only german ingredients
       expect(result.product!.ingredientsText != null, true);
@@ -174,60 +174,60 @@ void main() {
       expect(result.product!.ingredients != null, true);
       expect(result.product!.ingredients!.length, 21);
 
-      expect(result.product!.ingredients!.any((i) => i.text == "Buttergebäck"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Buttergebäck'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Weizenmehl"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Weizenmehl'),
           false);
-      expect(result.product!.ingredients!.any((i) => i.text == "Zucker"), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'Zucker'), true);
       expect(
-          result.product!.ingredients!.any((i) => i.text == "Butter"), false);
-      expect(result.product!.ingredients!.any((i) => i.text == "Speisesalz"),
+          result.product!.ingredients!.any((i) => i.text == 'Butter'), false);
+      expect(result.product!.ingredients!.any((i) => i.text == 'Speisesalz'),
           true);
 
       expect(
-          result.product!.ingredients!.any((i) => i.text == "Backtriebmittel"),
+          result.product!.ingredients!.any((i) => i.text == 'Backtriebmittel'),
           true);
       expect(
           result.product!.ingredients!
-              .any((i) => i.text == "Ammouniumhydrogencarbonat"),
+              .any((i) => i.text == 'Ammouniumhydrogencarbonat'),
           true);
       expect(
           result.product!.ingredients!
-              .any((i) => i.text == "Invertzuckersirup"),
+              .any((i) => i.text == 'Invertzuckersirup'),
           true);
       expect(
           result.product!.ingredients!
-              .any((i) => i.text == "natürliches Aroma"),
+              .any((i) => i.text == 'natürliches Aroma'),
           true);
       expect(
           result.product!.ingredients!
-              .any((i) => i.text == "Schokolade Mürbegebäck"),
+              .any((i) => i.text == 'Schokolade Mürbegebäck'),
           true);
 
-      expect(result.product!.ingredients!.any((i) => i.text == "Pflanzenfett"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Pflanzenfett'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Palm"), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'Palm'), true);
       expect(
           result.product!.ingredients!
-              .any((i) => i.text == "Schokoladenstückchen"),
+              .any((i) => i.text == 'Schokoladenstückchen'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Kakaomasse"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Kakaomasse'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Kakaobutter"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Kakaobutter'),
           true);
 
       expect(
-          result.product!.ingredients!.any((i) => i.text == "Emulgator"), true);
+          result.product!.ingredients!.any((i) => i.text == 'Emulgator'), true);
       expect(
-          result.product!.ingredients!.any((i) => i.text == "Lecithin"), true);
+          result.product!.ingredients!.any((i) => i.text == 'Lecithin'), true);
       expect(
           result.product!.ingredients!
-              .any((i) => i.text == "fettarmes Kakaopulver"),
+              .any((i) => i.text == 'fettarmes Kakaopulver'),
           true);
 
       expect(result.product!.selectedImages!.length, 9);
 
-      expect(result.product!.nutriscore, "e");
+      expect(result.product!.nutriscore, 'e');
 
       expect(result.product!.nutriments != null, true);
 
@@ -245,7 +245,7 @@ void main() {
 
     test('get product Dole Packaged Foods Company 100% pineapple juice',
         () async {
-      String barcode = "0038900009472";
+      String barcode = '0038900009472';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.ENGLISH,
@@ -265,7 +265,7 @@ void main() {
     });
 
     test('get product Confiture Rhubarbe Fraises extra', () async {
-      String barcode = "3301595000305";
+      String barcode = '3301595000305';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.FRENCH,
@@ -277,7 +277,7 @@ void main() {
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
-      expect(result.product!.productName, "Confiture Rhubarbe Fraises extra");
+      expect(result.product!.productName, 'Confiture Rhubarbe Fraises extra');
 
       // only france ingredients
       expect(result.product!.ingredientsText != null, true);
@@ -285,38 +285,38 @@ void main() {
       expect(result.product!.ingredients != null, true);
       expect(result.product!.ingredients!.length, 3);
 
-      expect(result.product!.ingredients!.any((i) => i.text == "Farine de blé"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Farine de blé'),
           false);
       expect(
           result.product!.ingredients!
-              .any((i) => i.text == "matière grasse non hydrogénée"),
+              .any((i) => i.text == 'matière grasse non hydrogénée'),
           false);
       expect(
-          result.product!.ingredients!.any((i) => i.text == "graisse de palme"),
+          result.product!.ingredients!.any((i) => i.text == 'graisse de palme'),
           false);
       expect(
-          result.product!.ingredients!.any((i) => i.text == "huile de colza"),
+          result.product!.ingredients!.any((i) => i.text == 'huile de colza'),
           false);
       expect(
-          result.product!.ingredients!.any((i) => i.text == "colorant"), false);
+          result.product!.ingredients!.any((i) => i.text == 'colorant'), false);
 
-      expect(result.product!.ingredients!.any((i) => i.text == "caroténoïdes"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'caroténoïdes'),
           false);
-      expect(result.product!.ingredients!.any((i) => i.text == "eau"), false);
+      expect(result.product!.ingredients!.any((i) => i.text == 'eau'), false);
       expect(
-          result.product!.ingredients!.any((i) => i.text == "alcool éthylique"),
+          result.product!.ingredients!.any((i) => i.text == 'alcool éthylique'),
           false);
-      expect(result.product!.ingredients!.any((i) => i.text == "sel"), false);
+      expect(result.product!.ingredients!.any((i) => i.text == 'sel'), false);
       expect(
           result.product!.ingredients!
-              .any((i) => i.text == "jus de citron concentré"),
+              .any((i) => i.text == 'jus de citron concentré'),
           false);
 
       expect(
           result.product!.ingredients!
-              .any((i) => i.text == "agent de traitement de la farine"),
+              .any((i) => i.text == 'agent de traitement de la farine'),
           false);
-      expect(result.product!.ingredients!.any((i) => i.text == "L-cystéine"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'L-cystéine'),
           false);
 
       expect(result.product!.selectedImages!.length, 9);
@@ -374,11 +374,11 @@ void main() {
       expect(result.product!.nutriments!.novaGroup, 3);
       expect(result.product!.storesTags!.length, 1);
 
-      expect(result.product!.countriesTags, ["en:france"]);
+      expect(result.product!.countriesTags, ['en:france']);
     });
 
     test('product not available', () async {
-      String barcode = "11111111111111111111111111";
+      String barcode = '11111111111111111111111111';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -389,7 +389,7 @@ void main() {
     });
 
     test('product ingredients', () async {
-      String barcode = "4316268596299";
+      String barcode = '4316268596299';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -402,7 +402,7 @@ void main() {
     });
 
     test('product ecoscore', () async {
-      String barcode = "5000112548167";
+      String barcode = '5000112548167';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.ENGLISH,
@@ -440,7 +440,7 @@ void main() {
     });
 
     test('product environment impact levels', () async {
-      String barcode = "7613331814562";
+      String barcode = '7613331814562';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.ENGLISH,
@@ -455,7 +455,7 @@ void main() {
     });
 
     test('product fields', () async {
-      String barcode = "20004361";
+      String barcode = '20004361';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -529,7 +529,7 @@ void main() {
     });
 
     test('attribute groups', () async {
-      String barcode = "3700214614266";
+      String barcode = '3700214614266';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.ENGLISH,
@@ -572,7 +572,7 @@ void main() {
 
     test('get product without setting OpenFoodFactsLanguage or ProductField; ',
         () async {
-      String barcode = "5000112548167";
+      String barcode = '5000112548167';
 
       //Get product without setting OpenFoodFactsLanguage or ProductField
       ProductQueryConfiguration configurations =
@@ -589,12 +589,12 @@ void main() {
 
       expect(result.product!.ingredients != null, true);
       expect(result.product!.ingredients!.length, 13);
-      expect(result.product!.ingredients!.any((i) => i.text == "e150d"), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'e150d'), true);
 
-      expect(result.product!.additives!.ids[0], "en:e150d");
-      expect(result.product!.additives!.names[0], "E150d");
-      expect(result.product!.additives!.ids[4], "en:e950");
-      expect(result.product!.additives!.names[4], "E950");
+      expect(result.product!.additives!.ids[0], 'en:e150d');
+      expect(result.product!.additives!.names[0], 'E150d');
+      expect(result.product!.additives!.ids[4], 'en:e950');
+      expect(result.product!.additives!.names[4], 'E950');
 
       expect(
           result
@@ -613,7 +613,7 @@ void main() {
                   image.size == ImageSize.DISPLAY &&
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
-          "https://static.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg");
+          'https://static.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
 
       //Get product without setting ProductField
       configurations = ProductQueryConfiguration(barcode,
@@ -632,15 +632,15 @@ void main() {
       expect(result.product!.ingredients != null, true);
       expect(result.product!.ingredients!.length, 11);
 
-      expect(result.product!.ingredients!.any((i) => i.text == "Wasser"), true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Kohlensäure"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Wasser'), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'Kohlensäure'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == "e150d"), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'e150d'), true);
 
-      expect(result.product!.additives!.ids[0], "en:e150d");
-      expect(result.product!.additives!.names[0], "E150d");
-      expect(result.product!.additives!.ids[4], "en:e950");
-      expect(result.product!.additives!.names[4], "E950");
+      expect(result.product!.additives!.ids[0], 'en:e150d');
+      expect(result.product!.additives!.names[0], 'E150d');
+      expect(result.product!.additives!.ids[4], 'en:e950');
+      expect(result.product!.additives!.names[4], 'E950');
 
       expect(
           result
@@ -659,7 +659,7 @@ void main() {
                   image.size == ImageSize.DISPLAY &&
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
-          "https://static.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg");
+          'https://static.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
 
       //Get product without setting OpenFoodFactsLanguage
       configurations =
@@ -678,26 +678,26 @@ void main() {
       expect(result.product!.ingredients != null, true);
       expect(result.product!.ingredients!.length, 11);
 
-      expect(result.product!.ingredients!.any((i) => i.text == "Wasser"), true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Kohlensäure"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Wasser'), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'Kohlensäure'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == "e150d"), true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Citronensäure"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'e150d'), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'Citronensäure'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Phosphorsäure"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Phosphorsäure'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Süßungsmittel"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Süßungsmittel'),
           true);
 
       expect(
-          result.product!.ingredients!.any((i) => i.text == "Natriumcyclamat"),
+          result.product!.ingredients!.any((i) => i.text == 'Natriumcyclamat'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Acesulfam K"),
+      expect(result.product!.ingredients!.any((i) => i.text == 'Acesulfam K'),
           true);
       expect(
-          result.product!.ingredients!.any((i) => i.text == "Aspartam"), true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Aroma"), true);
-      expect(result.product!.ingredients!.any((i) => i.text == "Aroma Koffein"),
+          result.product!.ingredients!.any((i) => i.text == 'Aspartam'), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'Aroma'), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'Aroma Koffein'),
           true);
 
       expect(result.product!.selectedImages!.length, 18);
@@ -715,10 +715,10 @@ void main() {
       expect(result.product!.nutriments!.fatServing == null, true);
       expect(result.product!.nutriments!.carbohydratesServing == null, false);
 
-      expect(result.product!.additives!.ids[0], "en:e150d");
-      expect(result.product!.additives!.names[0], "E150d");
-      expect(result.product!.additives!.ids[4], "en:e950");
-      expect(result.product!.additives!.names[4], "E950");
+      expect(result.product!.additives!.ids[0], 'en:e150d');
+      expect(result.product!.additives!.names[0], 'E150d');
+      expect(result.product!.additives!.ids[4], 'en:e950');
+      expect(result.product!.additives!.names[4], 'E950');
 
       expect(
           result
@@ -737,7 +737,7 @@ void main() {
                   image.size == ImageSize.DISPLAY &&
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
-          "https://static.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg");
+          'https://static.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
     });
   });
 }

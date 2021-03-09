@@ -10,14 +10,14 @@ void main() {
     test('Extract Ingredients using Default OCR', () async {
       OcrIngredientsResult response =
           await OpenFoodAPIClient.extractIngredients(TestConstants.PROD_USER,
-              "5449000227959", OpenFoodFactsLanguage.FRENCH,
+              '5449000227959', OpenFoodFactsLanguage.FRENCH,
               queryType: QueryType.PROD);
 
       expect(response.ingredientsTextFromImage!.isNotEmpty, true);
 
       response = await OpenFoodAPIClient.extractIngredients(
           TestConstants.PROD_USER,
-          "0041220576920",
+          '0041220576920',
           OpenFoodFactsLanguage.ENGLISH,
           queryType: QueryType.PROD);
 
@@ -25,7 +25,7 @@ void main() {
 
       response = await OpenFoodAPIClient.extractIngredients(
           TestConstants.PROD_USER,
-          "5701184005007",
+          '5701184005007',
           OpenFoodFactsLanguage.GERMAN,
           queryType: QueryType.PROD);
 
@@ -34,7 +34,7 @@ void main() {
     test('Extract Ingredients using Google Vision Cloud', () async {
       OcrIngredientsResult response =
           await OpenFoodAPIClient.extractIngredients(TestConstants.PROD_USER,
-              "5449000227959", OpenFoodFactsLanguage.FRENCH,
+              '5449000227959', OpenFoodFactsLanguage.FRENCH,
               ocrField: OcrField.GOOGLE_CLOUD_VISION,
               queryType: QueryType.PROD);
 
@@ -43,7 +43,7 @@ void main() {
 
       response = await OpenFoodAPIClient.extractIngredients(
           TestConstants.PROD_USER,
-          "0041220576920",
+          '0041220576920',
           OpenFoodFactsLanguage.ENGLISH,
           ocrField: OcrField.GOOGLE_CLOUD_VISION,
           queryType: QueryType.PROD);
@@ -53,7 +53,7 @@ void main() {
 
       response = await OpenFoodAPIClient.extractIngredients(
           TestConstants.PROD_USER,
-          "5701184005007",
+          '5701184005007',
           OpenFoodFactsLanguage.GERMAN,
           ocrField: OcrField.GOOGLE_CLOUD_VISION,
           queryType: QueryType.PROD);
@@ -64,7 +64,7 @@ void main() {
     test('Extract Ingredients using Tesseract', () async {
       OcrIngredientsResult response =
           await OpenFoodAPIClient.extractIngredients(TestConstants.PROD_USER,
-              "5449000227959", OpenFoodFactsLanguage.FRENCH,
+              '5449000227959', OpenFoodFactsLanguage.FRENCH,
               ocrField: OcrField.TESSERACT, queryType: QueryType.PROD);
 
       expect(response.status, 0);
@@ -72,7 +72,7 @@ void main() {
 
       response = await OpenFoodAPIClient.extractIngredients(
           TestConstants.PROD_USER,
-          "0041220576920",
+          '0041220576920',
           OpenFoodFactsLanguage.ENGLISH,
           ocrField: OcrField.TESSERACT,
           queryType: QueryType.PROD);
@@ -82,7 +82,7 @@ void main() {
 
       response = await OpenFoodAPIClient.extractIngredients(
           TestConstants.PROD_USER,
-          "5701184005007",
+          '5701184005007',
           OpenFoodFactsLanguage.GERMAN,
           ocrField: OcrField.TESSERACT,
           queryType: QueryType.PROD);
@@ -95,16 +95,16 @@ void main() {
         () async {
       SendImage image = SendImage(
         lang: OpenFoodFactsLanguage.FRENCH,
-        barcode: "3613042717385",
+        barcode: '3613042717385',
         imageField: ImageField.INGREDIENTS,
-        imageUrl: Uri.file("test/test_assets/ingredient_3613042717385.jpg"),
+        imageUrl: Uri.file('test/test_assets/ingredient_3613042717385.jpg'),
       );
       await OpenFoodAPIClient.addProductImage(TestConstants.PROD_USER, image,
           queryType: QueryType.PROD);
 
       OcrIngredientsResult ocrResponse =
           await OpenFoodAPIClient.extractIngredients(TestConstants.PROD_USER,
-              "3613042717385", OpenFoodFactsLanguage.FRENCH,
+              '3613042717385', OpenFoodFactsLanguage.FRENCH,
               queryType: QueryType.PROD);
 
       expect(ocrResponse.status, 0);
@@ -114,15 +114,15 @@ void main() {
       Status saveStatus = await OpenFoodAPIClient.saveProduct(
           TestConstants.PROD_USER,
           Product(
-              barcode: "3613042717385",
+              barcode: '3613042717385',
               ingredientsText: ocrResponse.ingredientsTextFromImage),
           queryType: QueryType.PROD);
       expect(saveStatus.status, 1);
-      expect(saveStatus.statusVerbose, "fields saved");
+      expect(saveStatus.statusVerbose, 'fields saved');
 
       //Get The saved product's ingredients from the server
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          "3613042717385",
+          '3613042717385',
           language: OpenFoodFactsLanguage.FRENCH,
           fields: [
             ProductField.INGREDIENTS_TEXT,

@@ -10,16 +10,16 @@ void main() {
     test('get questions for Noix de Saint-Jacques EN and answer', () async {
       RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
-              "0080868000633", "en", TestConstants.TEST_USER,
+              '0080868000633', 'en', TestConstants.TEST_USER,
               queryType: QueryType.TEST, count: 1);
 
-      if (result.status == "found") {
+      if (result.status == 'found') {
         Status postResult = await OpenFoodAPIClient.postInsightAnnotation(
             result.questions![0].insightId,
             InsightAnnotation.YES,
             TestConstants.TEST_USER);
-        expect(postResult.status, "saved");
+        expect(postResult.status, 'saved');
       }
     });
-  }, skip: "This Group of tests is unstable");
+  }, skip: 'This Group of tests is unstable');
 }
