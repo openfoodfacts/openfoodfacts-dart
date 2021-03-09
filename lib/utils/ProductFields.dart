@@ -12,6 +12,14 @@ enum ProductField {
   PACKAGING_QUANTITY,
   FRONT_IMAGE,
   SELECTED_IMAGE,
+  IMAGE_FRONT_URL,
+  IMAGE_FRONT_SMALL_URL,
+  IMAGE_INGREDIENTS_URL,
+  IMAGE_INGREDIENTS_SMALL_URL,
+  IMAGE_NUTRITION_URL,
+  IMAGE_NUTRITION_SMALL_URL,
+  IMAGE_PACKAGING_URL,
+  IMAGE_PACKAGING_SMALL_URL,
   IMAGES,
   INGREDIENTS,
   NUTRIMENTS,
@@ -66,6 +74,22 @@ extension ProductFieldExtension on ProductField {
         return "product_quantity";
       case ProductField.FRONT_IMAGE:
         return "image_small_url";
+      case ProductField.IMAGE_FRONT_URL:
+        return "image_front_url";
+      case ProductField.IMAGE_FRONT_SMALL_URL:
+        return "image_front_small_url";
+      case ProductField.IMAGE_INGREDIENTS_URL:
+        return "image_ingredients_url";
+      case ProductField.IMAGE_INGREDIENTS_SMALL_URL:
+        return "image_ingredients_small_url";
+      case ProductField.IMAGE_NUTRITION_URL:
+        return "image_nutrition_url";
+      case ProductField.IMAGE_NUTRITION_SMALL_URL:
+        return "image_nutrition_small_url";
+      case ProductField.IMAGE_PACKAGING_URL:
+        return "image_packaging_url";
+      case ProductField.IMAGE_PACKAGING_SMALL_URL:
+        return "image_packaging_small_url";
       case ProductField.SELECTED_IMAGE:
         return "selected_images";
       case ProductField.IMAGES:
