@@ -73,23 +73,23 @@ extension ProductFieldExtension on ProductField {
       case ProductField.PACKAGING_QUANTITY:
         return 'product_quantity';
       case ProductField.FRONT_IMAGE:
-        return "image_small_url";
+        return 'image_small_url';
       case ProductField.IMAGE_FRONT_URL:
-        return "image_front_url";
+        return 'image_front_url';
       case ProductField.IMAGE_FRONT_SMALL_URL:
-        return "image_front_small_url";
+        return 'image_front_small_url';
       case ProductField.IMAGE_INGREDIENTS_URL:
-        return "image_ingredients_url";
+        return 'image_ingredients_url';
       case ProductField.IMAGE_INGREDIENTS_SMALL_URL:
-        return "image_ingredients_small_url";
+        return 'image_ingredients_small_url';
       case ProductField.IMAGE_NUTRITION_URL:
-        return "image_nutrition_url";
+        return 'image_nutrition_url';
       case ProductField.IMAGE_NUTRITION_SMALL_URL:
-        return "image_nutrition_small_url";
+        return 'image_nutrition_small_url';
       case ProductField.IMAGE_PACKAGING_URL:
-        return "image_packaging_url";
+        return 'image_packaging_url';
       case ProductField.IMAGE_PACKAGING_SMALL_URL:
-        return "image_packaging_small_url";
+        return 'image_packaging_small_url';
       case ProductField.SELECTED_IMAGE:
         return 'selected_images';
       case ProductField.IMAGES:
