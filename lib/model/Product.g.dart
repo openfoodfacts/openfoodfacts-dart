@@ -18,6 +18,14 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     countriesTags: (json['countries_tags'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList(),
+    labels: json['labels'] as String?,
+    labelsTags: (json['labels_tags'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList(),
+    packaging: json['packaging'] as String?,
+    packagingTags: (json['packaging_tags'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList(),
     lang: LanguageHelper.fromJson(json['lang'] as String?),
     quantity: json['quantity'] as String?,
     imgSmallUrl: json['image_small_url'] as String?,
@@ -33,6 +41,9 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     ingredientsTextDE: json['ingredients_text_de'] as String?,
     ingredientsTextEN: json['ingredients_text_en'] as String?,
     categories: json['categories'] as String?,
+    categoriesTags: (json['categories_tags'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList(),
     nutrimentEnergyUnit: json['nutriment_energy_unit'] as String?,
     nutrimentDataPer: json['nutrition_data_per'] as String?,
     nutriscore: json['nutrition_grade_fr'] as String?,
@@ -63,16 +74,10 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     ..ingredientsTextFR = json['ingredients_text_fr'] as String?
     ..ingredientsAnalysisTags = IngredientsAnalysisTags.fromJson(
         json['ingredients_analysis_tags'] as List?)
-    ..categoriesTags = (json['categories_tags'] as List<dynamic>?)
-        ?.map((e) => e as String)
-        .toList()
     ..categoriesTagsTranslated =
         (json['categories_tags_translated'] as List<dynamic>?)
             ?.map((e) => e as String)
             .toList()
-    ..labelsTags = (json['labels_tags'] as List<dynamic>?)
-        ?.map((e) => e as String)
-        .toList()
     ..labelsTagsTranslated = (json['labels_tags_translated'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList()
@@ -155,6 +160,9 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('categories_tags', instance.categoriesTags);
   writeNotNull('categories_tags_translated', instance.categoriesTagsTranslated);
   writeNotNull('labels_tags', instance.labelsTags);
+  writeNotNull('labels', instance.labels);
+  writeNotNull('packaging', instance.packaging);
+  writeNotNull('packaging_tags', instance.packagingTags);
   writeNotNull('labels_tags_translated', instance.labelsTagsTranslated);
   writeNotNull('misc', instance.miscTags);
   writeNotNull('states_tags', instance.statesTags);
