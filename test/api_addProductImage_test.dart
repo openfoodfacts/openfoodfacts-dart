@@ -17,8 +17,8 @@ void main() {
         imageUrl: Uri.file('test/test_assets/front_de.jpg'),
       );
       Status status = await OpenFoodAPIClient.addProductImage(
-          TestConstants.PROD_USER, image,
-          queryType: QueryType.PROD);
+          TestConstants.TEST_USER, image,
+          queryType: QueryType.TEST);
 
       expect(status.status, 'status not ok');
       expect(status.error, 'This picture has already been sent.');
@@ -32,8 +32,8 @@ void main() {
         imageUrl: Uri.file('test/test_assets/ingredients_en.jpg'),
       );
       Status status = await OpenFoodAPIClient.addProductImage(
-          TestConstants.PROD_USER, image,
-          queryType: QueryType.PROD);
+          TestConstants.TEST_USER, image,
+          queryType: QueryType.TEST);
 
       expect(status.status, 'status not ok');
       expect(status.error, 'This picture has already been sent.');
@@ -47,8 +47,8 @@ void main() {
         imageUrl: Uri.file('test/test_assets/corn_da.jpg'),
       );
       Status status = await OpenFoodAPIClient.addProductImage(
-          TestConstants.PROD_USER, image,
-          queryType: QueryType.PROD);
+          TestConstants.TEST_USER, image,
+          queryType: QueryType.TEST);
 
       assert(status.error != 'field imgupload_front_xx not set');
     });
@@ -58,7 +58,7 @@ void main() {
       ProductQueryConfiguration configurations =
           ProductQueryConfiguration('7622210449283');
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
-          user: TestConstants.PROD_USER, queryType: QueryType.PROD);
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
 
       expect(result.status != null, true);
       expect(
@@ -67,7 +67,7 @@ void main() {
                   image.field == ImageField.FRONT &&
                   image.size == ImageSize.DISPLAY)
               .url,
-          'https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.400.jpg');
+          'https://static.openfoodfacts.net/images/products/762/221/044/9283/front_fr.286.400.jpg');
     });
   });
 }
