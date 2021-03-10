@@ -739,5 +739,29 @@ void main() {
               .url,
           'https://static.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
     });
+
+    test(
+        'vegan, vegetarian and palm oil ingredients of Danish Butter Cookies & Chocolate Chip Cookies',
+        () async {
+      String barcode = '5701184005007';
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.GERMAN,
+          fields: [ProductField.ALL]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
+
+      final lecithin = result.product!.ingredients!
+          .firstWhere((ingredient) => ingredient.text == 'Lecithin');
+      expect(lecithin.vegan, IngredientSpecialPropertyStatus.MAYBE);
+      expect(lecithin.vegetarian, IngredientSpecialPropertyStatus.MAYBE);
+      expect(lecithin.fromPalmOil, null);
+
+      final vegetableFat = result.product!.ingredients!
+          .firstWhere((ingredient) => ingredient.text == 'Pflanzenfett');
+      expect(vegetableFat.vegan, IngredientSpecialPropertyStatus.POSITIVE);
+      expect(vegetableFat.vegetarian, IngredientSpecialPropertyStatus.POSITIVE);
+      expect(vegetableFat.fromPalmOil, IngredientSpecialPropertyStatus.MAYBE);
+    });
   });
 }
