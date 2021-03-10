@@ -12,6 +12,9 @@ Ingredient _$IngredientFromJson(Map<String, dynamic> json) {
     id: json['id'] as String?,
     text: json['text'] as String?,
     percent: JsonObject.parseDouble(json['percent']),
+    vegan: ingredientSpecialPropertyStatusFromJson(json['vegan']),
+    vegetarian: ingredientSpecialPropertyStatusFromJson(json['vegetarian']),
+    fromPalmOil: ingredientSpecialPropertyStatusFromJson(json['from_palm_oil']),
     bold: json['bold'] as bool?,
   );
 }
@@ -29,6 +32,11 @@ Map<String, dynamic> _$IngredientToJson(Ingredient instance) {
   writeNotNull('id', instance.id);
   val['text'] = instance.text;
   writeNotNull('percent', instance.percent);
+  writeNotNull('vegan', ingredientSpecialPropertyStatusToJson(instance.vegan));
+  writeNotNull(
+      'vegetarian', ingredientSpecialPropertyStatusToJson(instance.vegetarian));
+  writeNotNull('from_palm_oil',
+      ingredientSpecialPropertyStatusToJson(instance.fromPalmOil));
   val['bold'] = instance.bold;
   return val;
 }
