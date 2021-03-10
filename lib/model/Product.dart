@@ -152,7 +152,7 @@ class Product extends JsonObject {
   @JsonKey(name: 'nutrition_grade_fr', includeIfNull: false)
   String? nutriscore;
 
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'categories', includeIfNull: false)
   String? categories;
 
   @JsonKey(name: 'categories_tags', includeIfNull: false)
@@ -161,6 +161,12 @@ class Product extends JsonObject {
   List<String>? categoriesTagsTranslated;
   @JsonKey(name: 'labels_tags', includeIfNull: false)
   List<String>? labelsTags;
+  @JsonKey(name: 'labels', includeIfNull: false)
+  String? labels;
+  @JsonKey(name: 'packaging', includeIfNull: false)
+  String? packaging;
+  @JsonKey(name: 'packaging_tags', includeIfNull: false)
+  List<String>? packagingTags;
   @JsonKey(name: 'labels_tags_translated', includeIfNull: false)
   List<String>? labelsTagsTranslated;
   @JsonKey(name: 'misc', includeIfNull: false)
@@ -207,6 +213,10 @@ class Product extends JsonObject {
       this.brands,
       this.countries,
       this.countriesTags,
+      this.labels,
+      this.labelsTags,
+      this.packaging,
+      this.packagingTags,
       this.lang,
       this.quantity,
       this.imgSmallUrl,
@@ -222,6 +232,7 @@ class Product extends JsonObject {
       this.ingredientsTextDE,
       this.ingredientsTextEN,
       this.categories,
+      this.categoriesTags,
       this.nutrimentEnergyUnit,
       this.nutrimentDataPer,
       this.nutriscore,

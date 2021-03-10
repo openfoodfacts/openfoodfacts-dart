@@ -218,5 +218,38 @@ void main() {
       expect(status.status, 1);
       expect(status.statusVerbose, 'fields saved');
     });
+
+    test('add new product test 6', () async {
+      Product product = Product(
+          barcode: '7340011364184',
+          categories: 'Product categories test 1,Product categories test 2',
+          packaging: 'Product packaging test 1,Product packaging test 2',
+          labels: 'Product labels test 1,Product labels test 2');
+
+      Status status = await OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER, product,
+          queryType: QueryType.TEST);
+
+      expect(status.status, 1);
+      expect(status.statusVerbose, 'fields saved');
+
+      ProductQueryConfiguration configurations =
+          ProductQueryConfiguration('7340011364184');
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
+
+      expect(result.product!.labels,
+          'Product labels test 1,Product labels test 2');
+      expect(result.product!.labelsTags,
+          ['en:product-labels-test-1', 'en:product-labels-test-2']);
+      expect(result.product!.packaging,
+          'Product packaging test 1,Product packaging test 2');
+      expect(result.product!.packagingTags,
+          ['product-packaging-test-1', 'product-packaging-test-2']);
+      expect(result.product!.categories,
+          'Product categories test 1,Product categories test 2');
+      expect(result.product!.categoriesTags,
+          ['en:product-categories-test-1', 'en:product-categories-test-2']);
+    });
   });
 }
