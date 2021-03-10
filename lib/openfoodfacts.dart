@@ -105,8 +105,9 @@ class OpenFoodAPIClient {
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
         path: '/cgi/product_image_upload.pl');
 
-    return await HttpHelper()
-        .doMultipartRequest(imageUri, dataMap, fileMap, user, queryType: queryType);
+    return await HttpHelper().doMultipartRequest(
+        imageUri, dataMap, fileMap, user,
+        queryType: queryType);
   }
 
   /// Returns the product for the given barcode.
