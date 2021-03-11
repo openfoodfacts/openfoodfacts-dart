@@ -1,3 +1,7 @@
+## [1.0.2-beta] - 11.03.2021
+- Added support for new fields (images URLs, vegan/vegetarian/from palm oil ingredients, categories, labels and packaging)
+- Fixed test mode for addProductImage
+
 ## [1.0.1-beta] - 08.03.2021
 - API method for searching products does not require a user being passed
 
