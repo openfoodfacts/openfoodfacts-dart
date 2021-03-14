@@ -93,7 +93,7 @@ class OpenFoodAPIClient {
   static Future<Status> addProductImage(User user, SendImage image,
       {QueryType queryType = QueryType.PROD}) async {
     var dataMap = <String, String>{};
-    var fileMap = <String?, Uri?>{};
+    var fileMap = <String, Uri>{};
 
     // Images can be sent anonymously
     dataMap.addAll(user.toData());

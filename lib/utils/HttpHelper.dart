@@ -51,7 +51,7 @@ class HttpHelper {
   /// The files to send have to be provided as map containing the source file uri.
   /// As result a json object of the "type" Status is expected.
   Future<Status> doMultipartRequest(
-      Uri uri, Map<String, String> body, Map<String?, Uri?> files, User user,
+      Uri uri, Map<String, String> body, Map<String, Uri> files, User user,
       {QueryType queryType = QueryType.PROD}) async {
     var request = http.MultipartRequest('POST', uri);
     request.headers.addAll(_buildHeaders(user,
@@ -61,9 +61,9 @@ class HttpHelper {
     request.fields.addAll(body);
 
     // add all file entries to the request
-    for (MapEntry<String?, Uri?> entry in files.entries) {
-      List<int> fileBytes = await UriReader.instance!.readAsBytes(entry.value!);
-      var multipartFile = http.MultipartFile.fromBytes(entry.key!, fileBytes,
+    for (MapEntry<String, Uri> entry in files.entries) {
+      List<int> fileBytes = await UriReader.instance!.readAsBytes(entry.value);
+      var multipartFile = http.MultipartFile.fromBytes(entry.key, fileBytes,
           filename: basename(entry.value.toString()));
       request.files.add(multipartFile);
     }
