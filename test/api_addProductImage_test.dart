@@ -21,7 +21,7 @@ void main() {
           queryType: QueryType.TEST);
 
       expect(status.status, 'status not ok');
-      expect(status.error, 'This picture has already been sent.');
+      expect(status.error, 'Dieses Foto wurde schon hochgeladen.');
     });
 
     test('add ingredients image test', () async {
