@@ -2,12 +2,12 @@ import 'package:openfoodfacts/utils/LanguageHelper.dart';
 
 enum ImageField { FRONT, INGREDIENTS, NUTRITION, PACKAGING, OTHER }
 
-extension ImageFieldExtension on ImageField? {
+extension ImageFieldExtension on ImageField {
   String get value {
     return getValue(this);
   }
 
-  static String getValue(ImageField? field) {
+  static String getValue(ImageField field) {
     switch (field) {
       case ImageField.FRONT:
         return 'front';
@@ -114,9 +114,10 @@ extension ImageSizeExtension on ImageSize? {
 /// The url to a specific product image.
 /// Categorized by content type, size and language
 class ProductImage {
-  ProductImage({this.field, this.size, this.language, this.url, this.rev});
+  ProductImage(
+      {required this.field, this.size, this.language, this.url, this.rev});
 
-  final ImageField? field;
+  final ImageField field;
   final ImageSize? size;
   final OpenFoodFactsLanguage? language;
   String? url;

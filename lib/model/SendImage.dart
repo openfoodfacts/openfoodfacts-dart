@@ -7,49 +7,32 @@ class SendImage extends JsonObject {
   OpenFoodFactsLanguage? lang;
 
   // ignored for json
-  Uri? imageUrl;
+  Uri imageUrl;
 
-  String? barcode;
+  String barcode;
 
   ImageField imageField;
 
   SendImage({
     this.lang,
-    this.barcode,
-    this.imageUrl,
+    required this.barcode,
+    required this.imageUrl,
     this.imageField = ImageField.OTHER,
   });
 
   /// the json key depending on the image field of this object.
-  String? getImageDataKey() {
-    switch (imageField) {
-      case ImageField.FRONT:
-        return 'imgupload_front';
-      case ImageField.INGREDIENTS:
-        return 'imgupload_ingredients';
-      case ImageField.NUTRITION:
-        return 'imgupload_nutrition';
-      case ImageField.OTHER:
-        return 'imgupload_other';
-      default:
-        return null;
+  String getImageDataKey() {
+    String imageDataKey = 'imgupload_' + imageField.value;
+    if (lang != null) {
+      imageDataKey += '_' + lang.code;
     }
-  }
-
-  factory SendImage.fromJson(Map<String, dynamic> json) {
-    ImageField imageField = ImageFieldExtension.getType(json['imagefield']);
-
-    return SendImage(
-      lang: LanguageHelper.fromJson(json['lang']),
-      barcode: json['code'] as String?,
-      imageField: imageField,
-    );
+    return imageDataKey;
   }
 
   @override
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'lang': lang,
+      'lc': lang.code,
       'code': barcode,
       'imagefield': imageField.value
     };
