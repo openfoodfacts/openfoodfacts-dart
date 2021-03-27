@@ -16,7 +16,7 @@ class Attribute extends JsonObject {
   });
 
   factory Attribute.fromJson(dynamic json) => Attribute(
-        id: json[_JSON_TAG_ID] as String?,
+        id: json[_JSON_TAG_ID] as String,
         name: json[_JSON_TAG_NAME] as String?,
         title: json[_JSON_TAG_TITLE] as String?,
         iconUrl: json[_JSON_TAG_ICON_URL] as String?,
@@ -55,6 +55,9 @@ class Attribute extends JsonObject {
   static const String _JSON_TAG_DESCRIPTION_SHORT = 'description_short';
   static const String _JSON_TAG_MATCH = 'match';
   static const String _JSON_TAG_STATUS = 'status';
+
+  static const String STATUS_UNKNOWN = 'unknown';
+  static const String STATUS_KNOWN = 'known';
 
   final String? id;
   final String? name;
