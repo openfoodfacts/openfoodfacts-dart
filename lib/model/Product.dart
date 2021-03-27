@@ -263,7 +263,6 @@ class Product extends JsonObject {
   @override
   Map<String, dynamic> toJson() => _$ProductToJson(this);
 
-  // TODO(stephanegigandet): move to Product as non-static method getAttributes(final List<String> attributeIds)
   /// Returns all existing product attributes matching a list of attribute ids
   Map<String, Attribute> getAttributes(
     final List<String> attributeIds,
