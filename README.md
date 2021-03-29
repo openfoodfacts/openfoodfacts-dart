@@ -82,7 +82,7 @@ Regarding this package, we accept pull requests as well feature requests.
 Execute the following command from the root of the repository to run the tests:
 
 ```
-flutter test
+dart test
 ```
 
 ## How to use ?
