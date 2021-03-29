@@ -14,6 +14,15 @@ import 'package:openfoodfacts/utils/UnitHelper.dart';
 
 import 'test_constants.dart';
 
+import 'package:http/http.dart' as http;
+import 'package:openfoodfacts/personalized_search/available_attribute_groups.dart';
+import 'package:openfoodfacts/personalized_search/available_preference_importances.dart';
+import 'package:openfoodfacts/personalized_search/available_product_preferences.dart';
+import 'package:openfoodfacts/personalized_search/matched_product.dart';
+import 'package:openfoodfacts/personalized_search/preference_importance.dart';
+import 'package:openfoodfacts/personalized_search/product_preferences_manager.dart';
+import 'package:openfoodfacts/personalized_search/product_preferences_selection.dart';
+
 void main() {
   group('$OpenFoodAPIClient get products', () {
     test('get product Coca Cola Light', () async {
@@ -762,6 +771,87 @@ void main() {
       expect(vegetableFat.vegan, IngredientSpecialPropertyStatus.POSITIVE);
       expect(vegetableFat.vegetarian, IngredientSpecialPropertyStatus.POSITIVE);
       expect(vegetableFat.fromPalmOil, IngredientSpecialPropertyStatus.MAYBE);
+    });
+
+    test('matched product', () async {
+      final Map<String, String> attributeImportances = {};
+      int refreshCounter = 0;
+      final ProductPreferencesManager manager = ProductPreferencesManager(
+        ProductPreferencesSelection(
+          (String attributeId, String importanceIndex) async {
+            attributeImportances[attributeId] = importanceIndex;
+          },
+          (String attributeId) =>
+              attributeImportances[attributeId] ??
+              PreferenceImportance.ID_NOT_IMPORTANT,
+          () => refreshCounter++,
+        ),
+      );
+      const String languageCode = 'en';
+      const int httpOk = 200;
+      final String importanceUrl =
+          AvailablePreferenceImportances.getUrl(languageCode);
+      final String attributeGroupUrl =
+          AvailableAttributeGroups.getUrl(languageCode);
+      http.Response response;
+      response = await http.get(Uri.parse(importanceUrl));
+      expect(response.statusCode, httpOk);
+      final String preferenceImportancesString = response.body;
+      response = await http.get(Uri.parse(attributeGroupUrl));
+      expect(response.statusCode, httpOk);
+      final String attributeGroupsString = response.body;
+      manager.availableProductPreferences =
+          AvailableProductPreferences.loadFromJSONStrings(
+        preferenceImportancesString,
+        attributeGroupsString,
+      );
+      expect(refreshCounter, 0);
+
+      const String barcode = '0028400047685';
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        lc: languageCode,
+        fields: [ProductField.NAME, ProductField.ATTRIBUTE_GROUPS],
+      );
+      final ProductResult result = await OpenFoodAPIClient.getProduct(
+          configurations,
+          user: TestConstants.TEST_USER,
+          queryType: QueryType.TEST);
+      expect(result.status, 1);
+      expect(result.barcode, barcode);
+
+      final String attributeId1 = Attribute.ATTRIBUTE_NUTRISCORE;
+      final String attributeId2 = Attribute.ATTRIBUTE_FOREST_FOOTPRINT;
+      final String importanceId1 = PreferenceImportance.ID_MANDATORY;
+      final String importanceId2 = PreferenceImportance.ID_IMPORTANT;
+      await manager.setImportance(attributeId1, importanceId1);
+      expect(
+          manager.getImportanceIdForAttributeId(attributeId1), importanceId1);
+      expect(refreshCounter, 1);
+      await manager.setImportance(attributeId2, importanceId2);
+      expect(
+          manager.getImportanceIdForAttributeId(attributeId2), importanceId2);
+      expect(refreshCounter, 2);
+      MatchedProduct matchedProduct;
+
+      matchedProduct = MatchedProduct(result.product!, manager);
+      expect(matchedProduct.score, 150);
+      expect(matchedProduct.status, true);
+
+      await manager.setImportance(attributeId1, importanceId2);
+      expect(
+          manager.getImportanceIdForAttributeId(attributeId1), importanceId2);
+      expect(refreshCounter, 3);
+      await manager.setImportance(attributeId2, importanceId1);
+      expect(
+          manager.getImportanceIdForAttributeId(attributeId2), importanceId1);
+      expect(refreshCounter, 4);
+
+      matchedProduct = MatchedProduct(result.product!, manager);
+      expect(matchedProduct.score, 37.5);
+      expect(matchedProduct.status,
+          false); // because FOREST is mandatory, but unknown
     });
   });
 }
