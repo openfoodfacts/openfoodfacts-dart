@@ -778,13 +778,13 @@ void main() {
       int refreshCounter = 0;
       final ProductPreferencesManager manager = ProductPreferencesManager(
         ProductPreferencesSelection(
-          (String attributeId, String importanceIndex) async {
+          setImportance: (String attributeId, String importanceIndex) async {
             attributeImportances[attributeId] = importanceIndex;
           },
-          (String attributeId) =>
+          getImportance: (String attributeId) =>
               attributeImportances[attributeId] ??
               PreferenceImportance.ID_NOT_IMPORTANT,
-          () => refreshCounter++,
+          notify: () => refreshCounter++,
         ),
       );
       const String languageCode = 'en';
@@ -802,8 +802,8 @@ void main() {
       final String attributeGroupsString = response.body;
       manager.availableProductPreferences =
           AvailableProductPreferences.loadFromJSONStrings(
-        preferenceImportancesString,
-        attributeGroupsString,
+        preferenceImportancesString: preferenceImportancesString,
+        attributeGroupsString: attributeGroupsString,
       );
       expect(refreshCounter, 0);
 

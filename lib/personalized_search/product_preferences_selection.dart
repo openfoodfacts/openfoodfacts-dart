@@ -5,11 +5,11 @@
 /// E.g. `SharedPreferences` and provider.
 /// Some simple app may even use simple fix solution.
 class ProductPreferencesSelection {
-  ProductPreferencesSelection(
-    this._setImportance,
-    this._getImportance,
-    this._notify,
-  );
+  ProductPreferencesSelection({
+    required this.setImportance,
+    required this.getImportance,
+    required this.notify,
+  });
 
   /// Sets the importance of an attribute, e.g. in a SharedPreferences.
   ///
@@ -25,13 +25,7 @@ class ProductPreferencesSelection {
   final Future<void> Function(
     String attributeId,
     String importanceId,
-  ) _setImportance;
-
-  Future<void> setImportance(
-    final String attributeId,
-    final String importanceId,
-  ) =>
-      _setImportance(attributeId, importanceId);
+  ) setImportance;
 
   /// Gets the importance of an attribute, e.g. from a SharedPreferences.
   ///
@@ -48,9 +42,7 @@ class ProductPreferencesSelection {
   ///     ? PreferenceImportance.ID_MANDATORY
   ///     : PreferenceImportance.ID_NOT_IMPORTANT
   /// ```
-  final String Function(String attributeId) _getImportance;
-
-  String getImportance(String attributeId) => _getImportance(attributeId);
+  final String Function(String attributeId) getImportance;
 
   /// Notifies listeners about a refresh.
   ///
@@ -62,7 +54,5 @@ class ProductPreferencesSelection {
   /// ```dart
   /// () {}
   /// ```
-  final void Function() _notify;
-
-  void notify() => _notify();
+  final void Function() notify;
 }
