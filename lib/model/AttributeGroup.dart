@@ -49,4 +49,13 @@ class AttributeGroup extends JsonObject {
     }
     return result;
   }
+
+  static const String ATTRIBUTE_GROUP_NUTRITIONAL_QUALITY =
+      'nutritional_quality';
+  static const String ATTRIBUTE_GROUP_PROCESSING = 'processing';
+  static const String ATTRIBUTE_GROUP_ALLERGENS = 'allergens';
+  static const String ATTRIBUTE_GROUP_INGREDIENT_ANALYSIS =
+      'ingredients_analysis';
+  static const String ATTRIBUTE_GROUP_LABELS = 'labels';
+  static const String ATTRIBUTE_GROUP_ENVIRONMENT = 'environment';
 }

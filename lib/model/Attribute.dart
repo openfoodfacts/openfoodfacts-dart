@@ -59,6 +59,43 @@ class Attribute extends JsonObject {
   static const String STATUS_UNKNOWN = 'unknown';
   static const String STATUS_KNOWN = 'known';
 
+  static const String ATTRIBUTE_NUTRISCORE = 'nutriscore';
+  static const String ATTRIBUTE_LOW_SALT = 'low_salt';
+  static const String ATTRIBUTE_LOW_SUGARS = 'low_sugars';
+  static const String ATTRIBUTE_LOW_FAT = 'low_fat';
+  static const String ATTRIBUTE_LOW_SATURATED_FAT = 'low_saturated_fat';
+
+  static const String ATTRIBUTE_NOVA = 'nova';
+  static const String ATTRIBUTE_ADDITIVES = 'additives';
+
+  static const String ATTRIBUTE_ALLERGENS_NO_GLUTEN = 'allergens_no_gluten';
+  static const String ATTRIBUTE_ALLERGENS_NO_MILK = 'allergens_no_milk';
+  static const String ATTRIBUTE_ALLERGENS_NO_EGGS = 'allergens_no_eggs';
+  static const String ATTRIBUTE_ALLERGENS_NO_NUTS = 'allergens_no_nuts';
+  static const String ATTRIBUTE_ALLERGENS_NO_PEANUTS = 'allergens_no_peanuts';
+  static const String ATTRIBUTE_ALLERGENS_NO_SESAME_SEEDS =
+      'allergens_no_sesame_seeds';
+  static const String ATTRIBUTE_ALLERGENS_NO_SOYBEANS = 'allergens_no_soybeans';
+  static const String ATTRIBUTE_ALLERGENS_NO_CELERY = 'allergens_no_celery';
+  static const String ATTRIBUTE_ALLERGENS_NO_MUSTARD = 'allergens_no_mustard';
+  static const String ATTRIBUTE_ALLERGENS_NO_LUPIN = 'allergens_no_lupin';
+  static const String ATTRIBUTE_ALLERGENS_NO_FISH = 'allergens_no_fish';
+  static const String ATTRIBUTE_ALLERGENS_NO_CRUSTACEANS =
+      'allergens_no_crustaceans';
+  static const String ATTRIBUTE_ALLERGENS_NO_MOLLUSCS = 'allergens_no_molluscs';
+  static const String ATTRIBUTE_ALLERGENS_NO_SULPHUR_DIOXIDE_AND_SULPHITES =
+      'allergens_no_sulphur_dioxide_and_sulphites';
+
+  static const String ATTRIBUTE_VEGETARIAN = 'vegetarian';
+  static const String ATTRIBUTE_VEGAN = 'vegan';
+  static const String ATTRIBUTE_PALM_OIL_FREE = 'palm_oil_free';
+
+  static const String ATTRIBUTE_LABELS_ORGANIC = 'labels_organic';
+  static const String ATTRIBUTE_LABELS_FAIR_TRADE = 'labels_fair_trade';
+
+  static const String ATTRIBUTE_ECOSCORE = 'ecoscore';
+  static const String ATTRIBUTE_FOREST_FOOTPRINT = 'forest_footprint';
+
   final String? id;
   final String? name;
   final String? title;
