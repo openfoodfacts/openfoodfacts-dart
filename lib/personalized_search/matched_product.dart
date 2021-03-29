@@ -10,6 +10,13 @@ import 'package:openfoodfacts/personalized_search/product_preferences_manager.da
 /// Match and score of a [Product] vs. Preferences
 ///
 /// cf. https://github.com/openfoodfacts/smooth-app/issues/39
+
+enum MatchedProductStatus {
+  YES,
+  NO,
+  UNKNOWN,
+}
+
 class MatchedProduct {
   MatchedProduct(
     this.product,
@@ -20,6 +27,7 @@ class MatchedProduct {
       _status = null;
       return;
     }
+    _status = MatchedProductStatus.YES;
     for (final AttributeGroup group in attributeGroups) {
       if (group.attributes != null) {
         for (final Attribute attribute in group.attributes!) {
@@ -37,8 +45,8 @@ class MatchedProduct {
               _debug += '${attribute.id} $importanceId\n';
             } else {
               if (attribute.status == Attribute.STATUS_UNKNOWN) {
-                if (_status ?? false) {
-                  _status = null;
+                if (_status == MatchedProductStatus.YES) {
+                  _status = MatchedProductStatus.UNKNOWN;
                 }
               } else {
                 _debug +=
@@ -46,7 +54,7 @@ class MatchedProduct {
                 _score += (attribute.match ?? 0) * factor;
                 if (minimalMatch != null &&
                     (attribute.match ?? 0) <= minimalMatch) {
-                  _status = false;
+                  _status = MatchedProductStatus.NO;
                 }
               }
             }
@@ -58,11 +66,11 @@ class MatchedProduct {
 
   final Product product;
   double _score = 0;
-  bool? _status = true;
+  MatchedProductStatus? _status;
   String _debug = '';
 
   double get score => _score;
-  bool? get status => _status;
+  MatchedProductStatus? get status => _status;
   String get debug => _debug;
 
   static List<MatchedProduct> sort(
