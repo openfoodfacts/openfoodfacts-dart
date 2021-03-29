@@ -851,7 +851,7 @@ void main() {
       matchedProduct = MatchedProduct(result.product!, manager);
       expect(matchedProduct.score, 37.5);
       expect(matchedProduct.status,
-          false); // because FOREST is mandatory, but unknown
+          false); // because the score for FOREST is not good enough
     });
   });
 }
