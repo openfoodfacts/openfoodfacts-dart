@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/model/AttributeGroup.dart';
+import 'package:openfoodfacts/model/Attribute.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/utils/JsonHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
@@ -261,4 +262,26 @@ class Product extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$ProductToJson(this);
+
+  /// Returns all existing product attributes matching a list of attribute ids
+  Map<String, Attribute> getAttributes(
+    final List<String> attributeIds,
+  ) {
+    final Map<String, Attribute> result = <String, Attribute>{};
+    if (attributeGroups == null) {
+      return result;
+    }
+    for (final AttributeGroup attributeGroup in attributeGroups!) {
+      if (attributeGroup.attributes == null) {
+        continue;
+      }
+      for (final Attribute attribute in attributeGroup.attributes!) {
+        final String attributeId = attribute.id!;
+        if (attributeIds.contains(attributeId)) {
+          result[attributeId] = attribute;
+        }
+      }
+    }
+    return result;
+  }
 }
