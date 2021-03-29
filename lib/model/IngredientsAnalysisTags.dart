@@ -26,46 +26,76 @@ class IngredientsAnalysisTags {
     palmOilFreeStatus = _getPalmOilFreeStatus(data);
   }
 
+  static const List<String> _VEGAN_TAGS = [
+    'en:vegan',
+    'en:non-vegan',
+    'en:maybe-vegan',
+    'en:vegan-status-unknown',
+  ];
+
+  static const List<VeganStatus> _VEGAN_STATUSES = [
+    VeganStatus.VEGAN,
+    VeganStatus.NON_VEGAN,
+    VeganStatus.MAYBE_VEGAN,
+    VeganStatus.VEGAN_STATUS_UNKNOWN,
+  ];
+
+  static const List<String> _VEGETARIAN_TAGS = [
+    'en:vegetarian',
+    'en:non-vegetarian',
+    'en:maybe-vegetarian',
+    'en:vegetarian-status-unknown',
+  ];
+
+  static const List<VegetarianStatus> _VEGETARIAN_STATUSES = [
+    VegetarianStatus.VEGETARIAN,
+    VegetarianStatus.NON_VEGETARIAN,
+    VegetarianStatus.MAYBE_VEGETARIAN,
+    VegetarianStatus.VEGETARIAN_STATUS_UNKNOWN,
+  ];
+
+  static const List<String> _PALM_OIL_FREE_TAGS = [
+    'en:palm-oil-free',
+    'en:palm-oil',
+    'en:may-contain-palm-oil',
+    'en:palm-oil-content-unknown',
+  ];
+
+  static const List<PalmOilFreeStatus> _PALM_OIL_FREE_STATUSES = [
+    PalmOilFreeStatus.PALM_OIL_FREE,
+    PalmOilFreeStatus.PALM_OIL,
+    PalmOilFreeStatus.MAY_CONTAIN_PALM_OIL,
+    PalmOilFreeStatus.PALM_OIL_CONTENT_UNKNOWN,
+  ];
+
   static VeganStatus? _getVeganStatus(List<dynamic> data) {
-    if (data.contains('en:vegan')) {
-      return VeganStatus.VEGAN;
-    } else if (data.contains('en:non-vegan')) {
-      return VeganStatus.NON_VEGAN;
-    } else if (data.contains('en:maybe-vegan')) {
-      return VeganStatus.MAYBE_VEGAN;
-    } else if (data.contains('en:vegan-status-unknown')) {
-      return VeganStatus.VEGAN_STATUS_UNKNOWN;
-    } else {
-      return null;
-    }
+    VeganStatus? result;
+    _VEGAN_TAGS.asMap().forEach((key, value) {
+      if (data.contains(value)) {
+        result = _VEGAN_STATUSES[key];
+      }
+    });
+    return result;
   }
 
   static VegetarianStatus? _getVegetarianStatus(List<dynamic> data) {
-    if (data.contains('en:vegetarian')) {
-      return VegetarianStatus.VEGETARIAN;
-    } else if (data.contains('en:non-vegetarian')) {
-      return VegetarianStatus.NON_VEGETARIAN;
-    } else if (data.contains('en:maybe-vegetarian')) {
-      return VegetarianStatus.MAYBE_VEGETARIAN;
-    } else if (data.contains('en:vegetarian-status-unknown')) {
-      return VegetarianStatus.VEGETARIAN_STATUS_UNKNOWN;
-    } else {
-      return null;
-    }
+    VegetarianStatus? result;
+    _VEGETARIAN_TAGS.asMap().forEach((key, value) {
+      if (data.contains(value)) {
+        result = _VEGETARIAN_STATUSES[key];
+      }
+    });
+    return result;
   }
 
   static PalmOilFreeStatus? _getPalmOilFreeStatus(List<dynamic> data) {
-    if (data.contains('en:palm-oil-free')) {
-      return PalmOilFreeStatus.PALM_OIL_FREE;
-    } else if (data.contains('en:palm-oil')) {
-      return PalmOilFreeStatus.PALM_OIL;
-    } else if (data.contains('en:may-contain-palm-oil')) {
-      return PalmOilFreeStatus.MAY_CONTAIN_PALM_OIL;
-    } else if (data.contains('en:palm-oil-content-unknown')) {
-      return PalmOilFreeStatus.PALM_OIL_CONTENT_UNKNOWN;
-    } else {
-      return null;
-    }
+    PalmOilFreeStatus? result;
+    _PALM_OIL_FREE_TAGS.asMap().forEach((key, value) {
+      if (data.contains(value)) {
+        result = _PALM_OIL_FREE_STATUSES[key];
+      }
+    });
+    return result;
   }
 
   VeganStatus? veganStatus;
@@ -76,67 +106,30 @@ class IngredientsAnalysisTags {
     return data != null ? IngredientsAnalysisTags(data) : null;
   }
 
-  static List<dynamic> toJson(
-      IngredientsAnalysisTags? ingredientsAnalysisTags) {
+  static List<String> toJson(IngredientsAnalysisTags? ingredientsAnalysisTags) {
     List<String> result = <String>[];
 
     if (ingredientsAnalysisTags == null) {
-      result.add('en:maybe-vegan');
-      result.add('en:maybe-vegetarian');
-      result.add('en:maybe-palm-oil-free');
       return result;
     }
 
-    switch (ingredientsAnalysisTags.veganStatus) {
-      case VeganStatus.VEGAN:
-        result.add('en:vegan');
-        break;
-      case VeganStatus.NON_VEGAN:
-        result.add('en:non-vegan');
-        break;
-      case VeganStatus.MAYBE_VEGAN:
-        result.add('en:maybe-vegan');
-        break;
-      case VeganStatus.VEGAN_STATUS_UNKNOWN:
-        result.add('en:vegan-status-unknown');
-        break;
-      default:
-        break;
-    }
+    _VEGAN_STATUSES.asMap().forEach((key, value) {
+      if (ingredientsAnalysisTags.veganStatus == value) {
+        result.add(_VEGAN_TAGS[key]);
+      }
+    });
 
-    switch (ingredientsAnalysisTags.vegetarianStatus) {
-      case VegetarianStatus.VEGETARIAN:
-        result.add('en:vegetarian');
-        break;
-      case VegetarianStatus.NON_VEGETARIAN:
-        result.add('en:non-vegetarian');
-        break;
-      case VegetarianStatus.MAYBE_VEGETARIAN:
-        result.add('en:maybe-vegetarian');
-        break;
-      case VegetarianStatus.VEGETARIAN_STATUS_UNKNOWN:
-        result.add('en:vegetarian-status-unknown');
-        break;
-      default:
-        break;
-    }
+    _VEGETARIAN_STATUSES.asMap().forEach((key, value) {
+      if (ingredientsAnalysisTags.vegetarianStatus == value) {
+        result.add(_VEGETARIAN_TAGS[key]);
+      }
+    });
 
-    switch (ingredientsAnalysisTags.palmOilFreeStatus) {
-      case PalmOilFreeStatus.PALM_OIL_FREE:
-        result.add('en:palm-oil-free');
-        break;
-      case PalmOilFreeStatus.PALM_OIL:
-        result.add('en:palm-oil');
-        break;
-      case PalmOilFreeStatus.MAY_CONTAIN_PALM_OIL:
-        result.add('en:may-contain-palm-oil');
-        break;
-      case PalmOilFreeStatus.PALM_OIL_CONTENT_UNKNOWN:
-        result.add('en:palm-oil-content-unknown');
-        break;
-      default:
-        break;
-    }
+    _PALM_OIL_FREE_STATUSES.asMap().forEach((key, value) {
+      if (ingredientsAnalysisTags.palmOilFreeStatus == value) {
+        result.add(_PALM_OIL_FREE_TAGS[key]);
+      }
+    });
 
     return result;
   }
