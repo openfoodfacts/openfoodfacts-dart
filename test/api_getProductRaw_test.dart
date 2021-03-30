@@ -1,5 +1,4 @@
 import 'package:openfoodfacts/model/NutrientLevels.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
@@ -7,6 +6,7 @@ import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductQueryConfigurations.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
+import 'package:test/test.dart';
 
 import 'test_constants.dart';
 

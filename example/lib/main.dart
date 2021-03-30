@@ -4,7 +4,7 @@ import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 
 /// request a product from the OpenFoodFacts database
-Future<Product> getProduct() async {
+Future<Product?> getProduct() async {
   var barcode = '0048151623426';
 
   ProductQueryConfiguration configuration = ProductQueryConfiguration(barcode,
@@ -34,7 +34,7 @@ void addNewProduct() async {
   Status result = await OpenFoodAPIClient.saveProduct(myUser, myProduct);
 
   if (result.status != 1) {
-    throw Exception('product could not be added: ' + result.error);
+    throw Exception('product could not be added: ${result.error}');
   }
 }
 
@@ -57,17 +57,15 @@ void addProductImage() async {
   Status result = await OpenFoodAPIClient.addProductImage(myUser, image);
 
   if (result.status != 'status ok') {
-    throw Exception('image could not be uploaded: ' +
-        result.error +
-        ' ' +
-        result.imageId.toString());
+    throw Exception(
+        'image could not be uploaded: ${result.error} ${result.imageId.toString()}');
   }
 }
 
 /// Extract the ingredients of an existing product of the OpenFoodFacts database
 /// That has already ingredient image
 /// Otherwise it should be added first to the server and then this can be called
-Future<String> extractIngredient() async {
+Future<String?> extractIngredient() async {
   // a registered user login for https://world.openfoodfacts.org/ is required
   User myUser = User(userId: 'max@off.com', password: 'password');
 
