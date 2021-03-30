@@ -6,38 +6,45 @@
 /// Some simple app may even use simple fix solution.
 class ProductPreferencesSelection {
   ProductPreferencesSelection({
-    required this.setImportance,
     required this.getImportance,
-    required this.notify,
-  });
+    final Future<void> Function(String attributeId, String importanceId)?
+        setImportance,
+    final Function()? notify,
+  })  : _setImportance = setImportance,
+        _notify = notify;
 
   /// Sets the importance of an attribute, e.g. in a SharedPreferences.
   ///
   /// Ex:
   /// ```dart
-  /// (String attributeId, String importanceIndex) async =>
+  /// setImportance: (String attributeId, String importanceIndex) async =>
   ///     await mySharedPreferences.setString(attributeId, importanceId)
   /// ```
   /// For pre-determined fix settings, that can be more simple:
   /// ```dart
-  /// (String attributeId, String importanceIndex) async {}
+  /// setImportance: null
   /// ```
-  final Future<void> Function(
-    String attributeId,
-    String importanceId,
-  ) setImportance;
+  final Future<void> Function(String attributeId, String importanceId)?
+      _setImportance;
+
+  Future<void> setImportance(String attributeId, String importanceId) async {
+    if (_setImportance == null) {
+      return;
+    }
+    await _setImportance!(attributeId, importanceId);
+  }
 
   /// Gets the importance of an attribute, e.g. from a SharedPreferences.
   ///
   /// Ex:
   /// ```dart
-  /// (String attributeId) =>
+  /// getImportance: (String attributeId) =>
   ///     mySharedPreferences.getString(attributeId)
   ///     ?? PreferenceImportance.ID_NOT_IMPORTANT
   /// ```
   /// For pre-determined fix settings, that can be more simple:
   /// ```dart
-  /// (String attributeId) =>
+  /// getImportance: (String attributeId) =>
   ///     attributeId == AvailableAttributeGroups.ATTRIBUTE_VEGAN
   ///     ? PreferenceImportance.ID_MANDATORY
   ///     : PreferenceImportance.ID_NOT_IMPORTANT
@@ -48,11 +55,18 @@ class ProductPreferencesSelection {
   ///
   /// Ex:
   /// ```dart
-  /// () => myProvider.notifyListeners()
+  /// notify: () => myProvider.notifyListeners()
   /// ```
   /// For pre-determined fix settings, that can be more simple:
   /// ```dart
-  /// () {}
+  /// notify: null
   /// ```
-  final void Function() notify;
+  final void Function()? _notify;
+
+  void notify() {
+    if (_notify == null) {
+      return;
+    }
+    _notify!();
+  }
 }

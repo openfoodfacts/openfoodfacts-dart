@@ -852,6 +852,13 @@ void main() {
       expect(matchedProduct.score, 37.5);
       expect(matchedProduct.status,
           false); // because the score for FOREST is not good enough
+
+      await manager.clearImportances(); // no attribute parameters at all
+      expect(refreshCounter, 5);
+
+      matchedProduct = MatchedProduct(result.product!, manager);
+      expect(matchedProduct.score, 0.0);
+      expect(matchedProduct.status, true);
     });
   });
 }
