@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/model/EcoscoreAdjustments.dart';
 import 'package:openfoodfacts/model/EcoscoreData.dart';
+import 'package:openfoodfacts/model/IngredientsAnalysisTags.dart';
 import 'package:openfoodfacts/model/OriginsOfIngredients.dart';
 import 'package:openfoodfacts/model/Packaging.dart';
 import 'package:openfoodfacts/model/Product.dart';
@@ -44,6 +45,27 @@ void main() {
     product.ecoscoreData = null;
     productJson = product.toJson();
     assert(productJson['ecoscore_data'] == null);
+  });
+
+  test('IngredientsAnalysisTags', () {
+    List<String> data = [
+      'en:vegetarian',
+      'en:non-vegan',
+      'en:palm-oil-content-unknown',
+    ];
+    IngredientsAnalysisTags ingredients_analysis_tags =
+        IngredientsAnalysisTags(data);
+    assert(ingredients_analysis_tags.vegetarianStatus ==
+        VegetarianStatus.VEGETARIAN);
+    assert(ingredients_analysis_tags.veganStatus == VeganStatus.NON_VEGAN);
+    assert(ingredients_analysis_tags.palmOilFreeStatus ==
+        PalmOilFreeStatus.PALM_OIL_CONTENT_UNKNOWN);
+
+    List<String> json_strings =
+        IngredientsAnalysisTags.toJson(ingredients_analysis_tags);
+    assert(json_strings[0] == 'en:non-vegan');
+    assert(json_strings[1] == 'en:vegetarian');
+    assert(json_strings[2] == 'en:palm-oil-content-unknown');
   });
 }
 
