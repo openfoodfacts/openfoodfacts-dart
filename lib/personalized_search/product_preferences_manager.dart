@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:openfoodfacts/model/Attribute.dart';
 import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/personalized_search/preference_importance.dart';
@@ -13,7 +12,6 @@ class ProductPreferencesManager {
   final ProductPreferencesSelection _productPreferencesSelection;
   AvailableProductPreferences? _availableProductPreferences;
 
-  @protected
   set availableProductPreferences(
     AvailableProductPreferences availableProductPreferences,
   ) =>

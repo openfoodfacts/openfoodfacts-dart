@@ -4,10 +4,10 @@ import 'package:openfoodfacts/personalized_search/available_preference_importanc
 /// Referential for product preferences: attribute groups and importance.
 class AvailableProductPreferences {
   /// Load constructor - may throw an exception.
-  AvailableProductPreferences.loadFromJSONStrings(
-    final String preferenceImportancesString,
-    final String attributeGroupsString,
-  ) {
+  AvailableProductPreferences.loadFromJSONStrings({
+    required final String preferenceImportancesString,
+    required final String attributeGroupsString,
+  }) {
     final AvailableAttributeGroups availableAttributeGroups =
         AvailableAttributeGroups.loadFromJSONString(attributeGroupsString);
     final AvailablePreferenceImportances availablePreferenceImportances =
