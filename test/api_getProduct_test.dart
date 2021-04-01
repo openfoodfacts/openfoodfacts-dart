@@ -837,7 +837,7 @@ void main() {
 
       matchedProduct = MatchedProduct(result.product!, manager);
       expect(matchedProduct.score, 150);
-      expect(matchedProduct.status, true);
+      expect(matchedProduct.status, MatchedProductStatus.YES);
 
       await manager.setImportance(attributeId1, importanceId2);
       expect(
@@ -850,15 +850,17 @@ void main() {
 
       matchedProduct = MatchedProduct(result.product!, manager);
       expect(matchedProduct.score, 37.5);
-      expect(matchedProduct.status,
-          false); // because the score for FOREST is not good enough
+      expect(
+          matchedProduct.status,
+          MatchedProductStatus
+              .NO); // because the score for FOREST is not good enough
 
       await manager.clearImportances(); // no attribute parameters at all
       expect(refreshCounter, 5);
 
       matchedProduct = MatchedProduct(result.product!, manager);
       expect(matchedProduct.score, 0.0);
-      expect(matchedProduct.status, true);
+      expect(matchedProduct.status, MatchedProductStatus.YES);
     });
   });
 }
