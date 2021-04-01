@@ -7,7 +7,7 @@ class SendImage extends JsonObject {
   OpenFoodFactsLanguage? lang;
 
   // ignored for json
-  Uri imageUrl;
+  Uri imageUri;
 
   String barcode;
 
@@ -16,7 +16,7 @@ class SendImage extends JsonObject {
   SendImage({
     this.lang,
     required this.barcode,
-    required this.imageUrl,
+    required this.imageUri,
     this.imageField = ImageField.OTHER,
   });
 

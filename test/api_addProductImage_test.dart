@@ -14,7 +14,7 @@ void main() {
         lang: OpenFoodFactsLanguage.GERMAN,
         barcode: '4250752200784',
         imageField: ImageField.FRONT,
-        imageUrl: Uri.file('test/test_assets/front_de.jpg'),
+        imageUri: Uri.file('test/test_assets/front_de.jpg'),
       );
       Status status = await OpenFoodAPIClient.addProductImage(
           TestConstants.TEST_USER, image,
@@ -29,7 +29,7 @@ void main() {
         lang: OpenFoodFactsLanguage.ENGLISH,
         barcode: '0048151623426',
         imageField: ImageField.INGREDIENTS,
-        imageUrl: Uri.file('test/test_assets/ingredients_en.jpg'),
+        imageUri: Uri.file('test/test_assets/ingredients_en.jpg'),
       );
       Status status = await OpenFoodAPIClient.addProductImage(
           TestConstants.TEST_USER, image,
@@ -44,7 +44,7 @@ void main() {
         lang: OpenFoodFactsLanguage.DANISH,
         barcode: '5722970900207',
         imageField: ImageField.FRONT,
-        imageUrl: Uri.file('test/test_assets/corn_da.jpg'),
+        imageUri: Uri.file('test/test_assets/corn_da.jpg'),
       );
       Status status = await OpenFoodAPIClient.addProductImage(
           TestConstants.TEST_USER, image,
