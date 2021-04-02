@@ -49,7 +49,7 @@ void main() {
         lang: OpenFoodFactsLanguage.GERMAN,
         barcode: barcode,
         imageField: ImageField.FRONT,
-        imageUrl: Uri.file('test/test_assets/front_coca_light_de.jpg'),
+        imageUri: Uri.file('test/test_assets/front_coca_light_de.jpg'),
       );
       await OpenFoodAPIClient.addProductImage(
           TestConstants.TEST_USER, fontImage,

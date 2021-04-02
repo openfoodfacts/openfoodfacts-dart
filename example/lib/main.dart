@@ -47,7 +47,7 @@ void addProductImage() async {
     lang: OpenFoodFactsLanguage.ENGLISH,
     barcode: '0048151623426',
     imageField: ImageField.INGREDIENTS,
-    imageUrl: Uri.parse('Path to you image'),
+    imageUri: Uri.parse('Path to you image'),
   );
 
   // a registered user login for https://world.openfoodfacts.org/ is required
@@ -90,7 +90,7 @@ void saveAndExtractIngredient() async {
     lang: OpenFoodFactsLanguage.FRENCH,
     barcode: '3613042717385',
     imageField: ImageField.INGREDIENTS,
-    imageUrl: Uri.parse('Path to your image'),
+    imageUri: Uri.parse('Path to your image'),
   );
 
   //Add the ingredients image to the server

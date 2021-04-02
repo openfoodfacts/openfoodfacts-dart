@@ -248,7 +248,7 @@ This class is the object template to be provided to the image upload function.
 
 ```
 OpenFoodFactsLanguage lang
-Uri imageUrl
+Uri imageUri
 String barcode
 String imageField
 ```
@@ -479,7 +479,7 @@ SendImage image = new SendImage(
     lang: "fr",
     barcode: barcode,
     imageField: ProductImage.FIELD_FRONT,
-    imageUrl: Uri.parse("path_to_my_image"),
+    imageUri: Uri.parse("path_to_my_image"),
 );
 
 
