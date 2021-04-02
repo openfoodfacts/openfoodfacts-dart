@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/model/EcoscoreAdjustments.dart';
 import 'package:openfoodfacts/model/EcoscoreData.dart';
 import 'package:openfoodfacts/model/IngredientsAnalysisTags.dart';
@@ -12,6 +11,7 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductQueryConfigurations.dart';
+import 'package:test/test.dart';
 
 import 'test_constants.dart';
 

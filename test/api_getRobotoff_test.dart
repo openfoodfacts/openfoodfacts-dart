@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/model/Insight.dart';
 import 'package:openfoodfacts/model/RobotoffQuestion.dart';
 import 'package:openfoodfacts/model/SpellingCorrections.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
+import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {

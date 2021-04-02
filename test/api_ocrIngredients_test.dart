@@ -1,8 +1,8 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
+import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {
@@ -97,7 +97,7 @@ void main() {
         lang: OpenFoodFactsLanguage.FRENCH,
         barcode: '3613042717385',
         imageField: ImageField.INGREDIENTS,
-        imageUrl: Uri.file('test/test_assets/ingredient_3613042717385.jpg'),
+        imageUri: Uri.file('test/test_assets/ingredient_3613042717385.jpg'),
       );
       await OpenFoodAPIClient.addProductImage(TestConstants.PROD_USER, image,
           queryType: QueryType.PROD);

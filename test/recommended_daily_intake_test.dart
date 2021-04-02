@@ -1,10 +1,8 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/model/RecommendedDailyIntake.dart';
 import 'package:openfoodfacts/utils/UnitHelper.dart';
+import 'package:test/test.dart';
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-
   group('Get Recommendations', () {
     test('Get', () {
       RecommendedDailyIntake rdi =

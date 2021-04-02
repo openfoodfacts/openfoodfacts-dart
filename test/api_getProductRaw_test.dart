@@ -1,5 +1,4 @@
 import 'package:openfoodfacts/model/NutrientLevels.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
@@ -7,6 +6,7 @@ import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductQueryConfigurations.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
+import 'package:test/test.dart';
 
 import 'test_constants.dart';
 
@@ -80,7 +80,7 @@ void main() {
           result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
           Level.MODERATE);
       expect(result.product!.countries,
-          'Belgique,France,Allemagne,Pays-Bas,Espagne,Suisse');
+          'Belgique,France,Allemagne,Pays-Bas,Espagne,Suisse, en:world');
     });
 
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',

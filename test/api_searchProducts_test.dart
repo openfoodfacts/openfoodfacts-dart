@@ -1,4 +1,3 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:openfoodfacts/interface/Parameter.dart';
 import 'package:openfoodfacts/model/parameter/ContainsAdditives.dart';
 import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
@@ -9,6 +8,7 @@ import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductSearchQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
+import 'package:test/test.dart';
 
 import 'test_constants.dart';
 
