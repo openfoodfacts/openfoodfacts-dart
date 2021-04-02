@@ -1,3 +1,9 @@
+## [1.1.0-beta] - 30.03.2021
+- Renamed SendImage imageUrl parameter to imageUri as it is an Uri (breaking change)
+- New product preferences and matching classes for personalized search (thanks to monsieurtanuki)
+- Added missing values for IngredientsAnalysisTags, and renamed some values to match API names (breaking change)
+- Fixed image upload and added PACKAGING image type
+
 ## [1.0.2-beta] - 11.03.2021
 - Added support for new fields (images URLs, vegan/vegetarian/from palm oil ingredients, categories, labels and packaging)
 - Fixed test mode for addProductImage
