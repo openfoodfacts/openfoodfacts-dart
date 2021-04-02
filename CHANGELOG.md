@@ -1,4 +1,5 @@
 ## [1.1.0-beta] - 30.03.2021
+- Renamed SendImage imageUrl parameter to imageUri as it is an Uri (breaking change)
 - New product preferences and matching classes for personalized search (thanks to monsieurtanuki)
 - Added missing values for IngredientsAnalysisTags, and renamed some values to match API names (breaking change)
 - Fixed image upload and added PACKAGING image type
