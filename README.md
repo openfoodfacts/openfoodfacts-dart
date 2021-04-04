@@ -1,4 +1,7 @@
 ![Pub Version](https://img.shields.io/pub/v/openfoodfacts?&colorB=green)
+[![likes](https://badges.bar/openfoodfacts/likes)](https://pub.dev/packages/openfoodfacts/score)
+[![popularity](https://badges.bar/openfoodfacts/popularity)](https://pub.dev/packages/openfoodfacts/score)
+[![pub points](https://badges.bar/openfoodfacts/pub%20points)](https://pub.dev/packages/openfoodfacts/score)
 
 # Open Food Facts - Dart
 Dart package for the Open Food Facts API. Easily access to more than 1.6 million products from all around the world.
