@@ -29,12 +29,20 @@ class SendImage extends JsonObject {
     return imageDataKey;
   }
 
+  String _getImageFieldWithLang() {
+    String imageFieldWithLang = imageField.value;
+    if (lang != null) {
+      imageFieldWithLang += '_' + lang.code;
+    }
+    return imageFieldWithLang;
+  }
+
   @override
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'lc': lang.code,
       'code': barcode,
-      'imagefield': imageField.value
+      'imagefield': _getImageFieldWithLang(),
     };
   }
 }
