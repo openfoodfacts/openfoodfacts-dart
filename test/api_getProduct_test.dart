@@ -862,5 +862,184 @@ void main() {
       expect(matchedProduct.score, 0.0);
       expect(matchedProduct.status, MatchedProductStatus.YES);
     });
+
+    test(
+        'translated fields when product is not translated into second language',
+        () async {
+      String barcode = '3333333333333';
+
+      Product englishInputProduct = Product(
+        barcode: barcode,
+        lang: OpenFoodFactsLanguage.ENGLISH,
+        productNameTranslated: 'Pancakes',
+        ingredientsTextTranslated: 'Flour, water',
+        categories: 'Beverages',
+        countries: 'Russia',
+      );
+
+      await OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER, englishInputProduct,
+          queryType: QueryType.TEST);
+
+      final fields = [
+        ProductField.NAME,
+        ProductField.NAME_TRANSLATED,
+        ProductField.INGREDIENTS_TEXT,
+        ProductField.INGREDIENTS_TEXT_TRANSLATED,
+        ProductField.INGREDIENTS_TAGS,
+        ProductField.INGREDIENTS_TAGS_TRANSLATED,
+        ProductField.CATEGORIES_TAGS,
+        ProductField.CATEGORIES_TAGS_TRANSLATED,
+        ProductField.COUNTRIES_TAGS,
+        ProductField.COUNTRIES_TAGS_TRANSLATED,
+      ];
+
+      ProductQueryConfiguration englishConf = ProductQueryConfiguration(barcode,
+          language: OpenFoodFactsLanguage.ENGLISH, fields: fields);
+      ProductQueryConfiguration russianConf = ProductQueryConfiguration(barcode,
+          language: OpenFoodFactsLanguage.RUSSIAN, fields: fields);
+
+      // English!
+
+      ProductResult englishResult = await OpenFoodAPIClient.getProduct(
+          englishConf,
+          user: TestConstants.TEST_USER,
+          queryType: QueryType.TEST);
+      Product englishProduct = englishResult.product!;
+
+      expect(englishProduct.productName, equals('Pancakes'));
+      expect(englishProduct.productNameTranslated, equals('Pancakes'));
+
+      expect(englishProduct.ingredientsText, equals('Flour, water'));
+      expect(englishProduct.ingredientsTextTranslated, equals('Flour, water'));
+
+      expect(englishProduct.ingredientsTags, equals(['en:flour', 'en:water']));
+      expect(
+          englishProduct.ingredientsTagsTranslated, equals(['Flour', 'Water']));
+
+      expect(englishProduct.categoriesTags, equals(['en:beverages']));
+      expect(englishProduct.categoriesTagsTranslated, equals(['Beverages']));
+
+      expect(englishProduct.countriesTags, equals(['en:russia']));
+      expect(englishProduct.countriesTagsTranslated, equals(['Russia']));
+
+      // Russian!
+
+      ProductResult russianResult = await OpenFoodAPIClient.getProduct(
+          russianConf,
+          user: TestConstants.TEST_USER,
+          queryType: QueryType.TEST);
+      Product russianProduct = russianResult.product!;
+
+      expect(russianProduct.productName, equals('Pancakes'));
+      expect(russianProduct.productNameTranslated, isNull);
+
+      expect(russianProduct.ingredientsText, equals('Flour, water'));
+      expect(russianProduct.ingredientsTextTranslated, isNull);
+
+      expect(russianProduct.ingredientsTags, equals(['en:flour', 'en:water']));
+      expect(
+          russianProduct.ingredientsTagsTranslated, equals(['Мука', 'Вода']));
+
+      expect(russianProduct.categoriesTags, equals(['en:beverages']));
+      expect(russianProduct.categoriesTagsTranslated, equals(['Напитки']));
+
+      expect(russianProduct.countriesTags, equals(['en:russia']));
+      expect(russianProduct.countriesTagsTranslated, equals(['Россия']));
+    });
+
+    test('translated fields when product is translated into second language',
+        () async {
+      String barcode = '2222222222222';
+
+      Product englishInputProduct = Product(
+        barcode: barcode,
+        lang: OpenFoodFactsLanguage.ENGLISH,
+        productNameTranslated: 'Pancakes',
+        ingredientsTextTranslated: 'Flour, water',
+        categories: 'Beverages',
+        countries: 'Russia',
+      );
+
+      Product russianInputProduct = Product(
+        barcode: barcode,
+        lang: OpenFoodFactsLanguage.RUSSIAN,
+        productNameTranslated: 'Блинчики',
+        ingredientsTextTranslated: 'Мука, вода',
+      );
+
+      await OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER, englishInputProduct,
+          queryType: QueryType.TEST);
+      await OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER, russianInputProduct,
+          queryType: QueryType.TEST);
+
+      final fields = [
+        ProductField.NAME,
+        ProductField.NAME_TRANSLATED,
+        ProductField.INGREDIENTS_TEXT,
+        ProductField.INGREDIENTS_TEXT_TRANSLATED,
+        ProductField.INGREDIENTS_TAGS,
+        ProductField.INGREDIENTS_TAGS_TRANSLATED,
+        ProductField.CATEGORIES_TAGS,
+        ProductField.CATEGORIES_TAGS_TRANSLATED,
+        ProductField.COUNTRIES_TAGS,
+        ProductField.COUNTRIES_TAGS_TRANSLATED,
+      ];
+
+      ProductQueryConfiguration englishConf = ProductQueryConfiguration(barcode,
+          language: OpenFoodFactsLanguage.ENGLISH, fields: fields);
+      ProductQueryConfiguration russianConf = ProductQueryConfiguration(barcode,
+          language: OpenFoodFactsLanguage.RUSSIAN, fields: fields);
+
+      // English!
+
+      ProductResult englishResult = await OpenFoodAPIClient.getProduct(
+          englishConf,
+          user: TestConstants.TEST_USER,
+          queryType: QueryType.TEST);
+      Product englishProduct = englishResult.product!;
+
+      expect(englishProduct.productName, equals('Pancakes'));
+      expect(englishProduct.productNameTranslated, equals('Pancakes'));
+
+      expect(englishProduct.ingredientsText, equals('Flour, water'));
+      expect(englishProduct.ingredientsTextTranslated, equals('Flour, water'));
+
+      expect(englishProduct.ingredientsTags, equals(['en:flour', 'en:water']));
+      expect(
+          englishProduct.ingredientsTagsTranslated, equals(['Flour', 'Water']));
+
+      expect(englishProduct.categoriesTags, equals(['en:beverages']));
+      expect(englishProduct.categoriesTagsTranslated, equals(['Beverages']));
+
+      expect(englishProduct.countriesTags, equals(['en:russia']));
+      expect(englishProduct.countriesTagsTranslated, equals(['Russia']));
+
+      // Russian!
+
+      ProductResult russianResult = await OpenFoodAPIClient.getProduct(
+          russianConf,
+          user: TestConstants.TEST_USER,
+          queryType: QueryType.TEST);
+      Product russianProduct = russianResult.product!;
+
+      expect(russianProduct.productName, equals('Блинчики'));
+      expect(russianProduct.productNameTranslated, equals('Блинчики'));
+
+      expect(russianProduct.ingredientsText, equals('Мука, вода'));
+      expect(russianProduct.ingredientsTextTranslated, equals('Мука, вода'));
+
+      expect(russianProduct.ingredientsTags, equals(['en:flour', 'en:water']));
+      expect(
+          russianProduct.ingredientsTagsTranslated, equals(['Мука', 'Вода']));
+
+      expect(russianProduct.categoriesTags, equals(['en:beverages']));
+      expect(russianProduct.categoriesTagsTranslated, equals(['Напитки']));
+
+      expect(russianProduct.countriesTags, equals(['en:russia']));
+      expect(russianProduct.countriesTagsTranslated, equals(['Россия']));
+    });
   });
 }

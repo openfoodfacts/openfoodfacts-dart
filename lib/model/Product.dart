@@ -20,33 +20,52 @@ part 'Product.g.dart';
 class Product extends JsonObject {
   @JsonKey(name: 'code')
   String? barcode;
+
   @JsonKey(name: 'product_name', includeIfNull: false)
   String? productName;
+  @JsonKey(name: 'product_name_translated', includeIfNull: false)
+  String? productNameTranslated;
+
+  /// Deprecated: please use productNameTranslated
   @JsonKey(name: 'product_name_de', includeIfNull: false)
+  @deprecated
   String? productNameDE;
+
+  /// Deprecated: please use productNameTranslated
   @JsonKey(name: 'product_name_en', includeIfNull: false)
+  @deprecated
   String? productNameEN;
+
+  /// Deprecated: please use productNameTranslated
   @JsonKey(name: 'product_name_fr', includeIfNull: false)
+  @deprecated
   String? productNameFR;
+
+  @JsonKey(name: 'brands', includeIfNull: false)
   String? brands;
   @JsonKey(name: 'brands_tags', includeIfNull: false)
   List<String>? brandsTags;
+
   @JsonKey(name: 'countries', includeIfNull: false)
   String? countries;
   @JsonKey(name: 'countries_tags', includeIfNull: false)
   List<String>? countriesTags;
+  @JsonKey(name: 'countries_tags_translated', includeIfNull: false)
+  List<String>? countriesTagsTranslated;
+
   @JsonKey(
       name: 'lang',
       toJson: LanguageHelper.toJson,
       fromJson: LanguageHelper.fromJson,
       includeIfNull: false)
   OpenFoodFactsLanguage? lang;
-  @JsonKey(includeIfNull: false)
+
+  @JsonKey(name: 'quantity', includeIfNull: false)
   String? quantity;
 
   // Images
 
-  // imgSmallUrl is deprecated, use imageFrontSmallUrl instead
+  /// imgSmallUrl is deprecated, use imageFrontSmallUrl instead
   @JsonKey(name: 'image_small_url', includeIfNull: false)
   @deprecated
   String? imgSmallUrl;
@@ -96,10 +115,46 @@ class Product extends JsonObject {
       toJson: JsonHelper.imagesToJson)
   List<ProductImage>? images;
 
-  @JsonKey(includeIfNull: false, toJson: JsonHelper.ingredientsToJson)
+  @JsonKey(
+      name: 'ingredients',
+      includeIfNull: false,
+      toJson: JsonHelper.ingredientsToJson)
   List<Ingredient>? ingredients;
 
-  @JsonKey(includeIfNull: false, toJson: Nutriments.toJsonHelper)
+  @JsonKey(name: 'ingredients_text', includeIfNull: false)
+  String? ingredientsText;
+  @JsonKey(name: 'ingredients_text_translated', includeIfNull: false)
+  String? ingredientsTextTranslated;
+
+  @JsonKey(name: 'ingredients_tags', includeIfNull: false)
+  List<String>? ingredientsTags;
+  @JsonKey(name: 'ingredients_tags_translated', includeIfNull: false)
+  List<String>? ingredientsTagsTranslated;
+
+  /// Deprecated: please use ingredientsTextTranslated
+  @JsonKey(name: 'ingredients_text_de', includeIfNull: false)
+  @deprecated
+  String? ingredientsTextDE;
+
+  /// Deprecated: please use ingredientsTextTranslated
+  @JsonKey(name: 'ingredients_text_en', includeIfNull: false)
+  @deprecated
+  String? ingredientsTextEN;
+
+  /// Deprecated: please use ingredientsTextTranslated
+  @JsonKey(name: 'ingredients_text_fr', includeIfNull: false)
+  @deprecated
+  String? ingredientsTextFR;
+
+  @JsonKey(
+      name: 'ingredients_analysis_tags',
+      includeIfNull: false,
+      fromJson: IngredientsAnalysisTags.fromJson,
+      toJson: IngredientsAnalysisTags.toJson)
+  IngredientsAnalysisTags? ingredientsAnalysisTags;
+
+  @JsonKey(
+      name: 'nutriments', includeIfNull: false, toJson: Nutriments.toJsonHelper)
   Nutriments? nutriments;
 
   @JsonKey(
@@ -130,22 +185,6 @@ class Product extends JsonObject {
       toJson: NutrientLevels.toJson)
   NutrientLevels? nutrientLevels;
 
-  @JsonKey(name: 'ingredients_text', includeIfNull: false)
-  String? ingredientsText;
-  @JsonKey(name: 'ingredients_text_de', includeIfNull: false)
-  String? ingredientsTextDE;
-  @JsonKey(name: 'ingredients_text_en', includeIfNull: false)
-  String? ingredientsTextEN;
-  @JsonKey(name: 'ingredients_text_fr', includeIfNull: false)
-  String? ingredientsTextFR;
-
-  @JsonKey(
-      name: 'ingredients_analysis_tags',
-      includeIfNull: false,
-      fromJson: IngredientsAnalysisTags.fromJson,
-      toJson: IngredientsAnalysisTags.toJson)
-  IngredientsAnalysisTags? ingredientsAnalysisTags;
-
   @JsonKey(name: 'nutriment_energy_unit', includeIfNull: false)
   String? nutrimentEnergyUnit;
   @JsonKey(name: 'nutrition_data_per', includeIfNull: false)
@@ -155,21 +194,23 @@ class Product extends JsonObject {
 
   @JsonKey(name: 'categories', includeIfNull: false)
   String? categories;
-
   @JsonKey(name: 'categories_tags', includeIfNull: false)
   List<String>? categoriesTags;
   @JsonKey(name: 'categories_tags_translated', includeIfNull: false)
   List<String>? categoriesTagsTranslated;
-  @JsonKey(name: 'labels_tags', includeIfNull: false)
-  List<String>? labelsTags;
+
   @JsonKey(name: 'labels', includeIfNull: false)
   String? labels;
+  @JsonKey(name: 'labels_tags', includeIfNull: false)
+  List<String>? labelsTags;
+  @JsonKey(name: 'labels_tags_translated', includeIfNull: false)
+  List<String>? labelsTagsTranslated;
+
   @JsonKey(name: 'packaging', includeIfNull: false)
   String? packaging;
   @JsonKey(name: 'packaging_tags', includeIfNull: false)
   List<String>? packagingTags;
-  @JsonKey(name: 'labels_tags_translated', includeIfNull: false)
-  List<String>? labelsTagsTranslated;
+
   @JsonKey(name: 'misc', includeIfNull: false)
   List<String>? miscTags;
   @JsonKey(name: 'states_tags', includeIfNull: false)
@@ -208,16 +249,15 @@ class Product extends JsonObject {
   Product(
       {this.barcode,
       this.productName,
+      this.productNameTranslated,
       this.productNameDE,
       this.productNameEN,
       this.productNameFR,
       this.brands,
+      this.brandsTags,
       this.countries,
       this.countriesTags,
-      this.labels,
-      this.labelsTags,
-      this.packaging,
-      this.packagingTags,
+      this.countriesTagsTranslated,
       this.lang,
       this.quantity,
       this.imgSmallUrl,
@@ -229,39 +269,113 @@ class Product extends JsonObject {
       this.imageNutritionSmallUrl,
       this.imagePackagingUrl,
       this.imagePackagingSmallUrl,
+      this.servingSize,
+      this.servingQuantity,
+      this.packagingQuantity,
+      this.selectedImages,
+      this.images,
+      this.ingredients,
       this.ingredientsText,
+      this.ingredientsTextTranslated,
+      this.ingredientsTags,
+      this.ingredientsTagsTranslated,
       this.ingredientsTextDE,
       this.ingredientsTextEN,
-      this.categories,
-      this.categoriesTags,
+      this.ingredientsTextFR,
+      this.ingredientsAnalysisTags,
+      this.nutriments,
+      this.additives,
+      this.environmentImpactLevels,
+      this.allergens,
+      this.nutrientLevels,
       this.nutrimentEnergyUnit,
       this.nutrimentDataPer,
       this.nutriscore,
-      this.nutriments,
-      this.additives,
-      this.nutrientLevels,
-      this.servingSize,
-      this.servingQuantity,
+      this.categories,
+      this.categoriesTags,
+      this.categoriesTagsTranslated,
+      this.labels,
+      this.labelsTags,
+      this.labelsTagsTranslated,
+      this.packaging,
+      this.packagingTags,
+      this.miscTags,
+      this.statesTags,
+      this.tracesTags,
+      this.storesTags,
+      this.attributeGroups,
+      this.lastModified,
       this.ecoscoreGrade,
-      this.ecoscoreScore});
+      this.ecoscoreScore,
+      this.ecoscoreData});
 
   factory Product.fromJson(Map<String, dynamic> json) {
     final Product result = _$ProductFromJson(json);
     for (final String key in json.keys) {
-      if (key.startsWith('categories_tags_')) {
-        result.categoriesTagsTranslated =
-            (json[key] as List?)?.map((e) => e as String).toList();
+      if (key.contains('debug')) {
+        continue;
+      } else if (key.startsWith('product_name_')) {
+        result.productNameTranslated = json[key];
+      } else if (key.startsWith('categories_tags_')) {
+        result.categoriesTagsTranslated = _jsonValueToList(json[key]);
+      } else if (key.startsWith('ingredients_tags_')) {
+        result.ingredientsTagsTranslated = _jsonValueToList(json[key]);
+      } else if (key.startsWith('labels_tags_')) {
+        result.labelsTagsTranslated = _jsonValueToList(json[key]);
+      } else if (key.startsWith('countries_tags_')) {
+        result.countriesTagsTranslated = _jsonValueToList(json[key]);
+      } else if (key.startsWith('ingredients_text_')) {
+        result.ingredientsTextTranslated = json[key];
       }
-      if (key.startsWith('labels_tags_')) {
-        result.labelsTagsTranslated =
-            (json[key] as List?)?.map((e) => e as String).toList();
+    }
+    return result;
+  }
+
+  static List<String>? _jsonValueToList(dynamic value) {
+    return (value as List?)?.map((e) => e as String).toList();
+  }
+
+  Map<String, String> toValidatedData() {
+    final result = super.toData();
+    for (final key in result.keys) {
+      if (key.endsWith('_translated') && lang == null) {
+        throw StateError('Cannot send translated field without language');
+      }
+      if (key.endsWith('_tags_translated')) {
+        throw StateError(
+            'Fields "SOMENAME_tags_translated" cannot be sent to backend. '
+            'Please send translated values either by "SOMENAME_translated" field '
+            'if it exists, or by "SOMENAME" field and '
+            'prepending language code to values, e.g.: '
+            '{"categories": "en:nuts, en:peanut"}');
       }
     }
     return result;
   }
 
   @override
-  Map<String, dynamic> toJson() => _$ProductToJson(this);
+  Map<String, dynamic> toJson() {
+    final json = _$ProductToJson(this);
+    if (lang == null) {
+      return json;
+    }
+
+    // Defensive keys copy to modify map while iterating
+    final keys = json.keys.toList();
+
+    for (final key in keys) {
+      // NOTE: '_tags_translated' are not supported because tags translation
+      // is done automatically on the server.
+      if (key.endsWith('_translated') && !key.endsWith('_tags_translated')) {
+        final value = json[key];
+        json.remove(key);
+        final keyUntranslated = key.substring(0, key.indexOf('_translated'));
+        final realKey = '${keyUntranslated}_${lang.code}';
+        json[realKey] = value;
+      }
+    }
+    return json;
+  }
 
   /// Returns all existing product attributes matching a list of attribute ids
   Map<String, Attribute> getAttributes(

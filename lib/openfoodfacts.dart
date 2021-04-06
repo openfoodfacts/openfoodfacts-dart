@@ -73,7 +73,7 @@ class OpenFoodAPIClient {
       {QueryType queryType = QueryType.PROD}) async {
     var parameterMap = <String, String>{};
     parameterMap.addAll(user.toData());
-    parameterMap.addAll(product.toData());
+    parameterMap.addAll(product.toValidatedData());
 
     var productUri = Uri(
         scheme: URI_SCHEME,
