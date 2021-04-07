@@ -3,12 +3,14 @@ description: example for this dart API
 version: 0.0.2
 author: Alexander Schacht <grumpf@gmx.de>
 homepage: https://github.com/Grumpf86/openfoodfacts-dart
+publish_to: none
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  openfoodfacts: ^1.0.2-beta
+  openfoodfacts:
+    path: ../
 
 dev_dependencies:
   test: any
