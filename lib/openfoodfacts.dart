@@ -70,10 +70,10 @@ class OpenFoodAPIClient {
   /// By default the query will hit the PROD DB
   /// Returns a Status object as result.
   static Future<Status> saveProduct(User user, Product product,
-      {QueryType queryType = QueryType.PROD}) async {
+      {String? lc, QueryType queryType = QueryType.PROD}) async {
     var parameterMap = <String, String>{};
     parameterMap.addAll(user.toData());
-    parameterMap.addAll(product.toValidatedData());
+    parameterMap.addAll(product.toServerData(lc));
 
     var productUri = Uri(
         scheme: URI_SCHEME,

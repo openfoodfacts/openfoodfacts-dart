@@ -335,47 +335,41 @@ class Product extends JsonObject {
     return (value as List?)?.map((e) => e as String).toList();
   }
 
-  Map<String, String> toValidatedData() {
-    final result = super.toData();
-    for (final key in result.keys) {
-      if (key.endsWith('_translated') && lang == null) {
-        throw StateError('Cannot send translated field without language');
-      }
-      if (key.endsWith('_tags_translated')) {
-        throw StateError(
-            'Fields "SOMENAME_tags_translated" cannot be sent to backend. '
-            'Please send translated values either by "SOMENAME_translated" field '
-            'if it exists, or by "SOMENAME" field and '
-            'prepending language code to values, e.g.: '
-            '{"categories": "en:nuts, en:peanut"}');
-      }
-    }
-    return result;
-  }
+  Map<String, String> toServerData(String? lc) {
+    final data = super.toData();
 
-  @override
-  Map<String, dynamic> toJson() {
-    final json = _$ProductToJson(this);
-    if (lang == null) {
-      return json;
-    }
+    lc ??= lang?.code;
 
     // Defensive keys copy to modify map while iterating
-    final keys = json.keys.toList();
+    final keys = data.keys.toList();
 
     for (final key in keys) {
       // NOTE: '_tags_translated' are not supported because tags translation
       // is done automatically on the server.
-      if (key.endsWith('_translated') && !key.endsWith('_tags_translated')) {
-        final value = json[key];
-        json.remove(key);
+      if (key.endsWith('_translated')) {
+        if (lc == null) {
+          throw StateError('Cannot send translated field without language');
+        }
+        if (key.endsWith('_tags_translated')) {
+          throw StateError(
+              'Fields "SOMENAME_tags_translated" cannot be sent to the server. '
+              'Please send translated values either by "SOMENAME_translated" field '
+              'if it exists, or by "SOMENAME" field and '
+              'prepending language code to values, e.g.: '
+              '{"categories": "en:nuts, en:peanut"}');
+        }
+        final value = data[key];
+        data.remove(key);
         final keyUntranslated = key.substring(0, key.indexOf('_translated'));
-        final realKey = '${keyUntranslated}_${lang.code}';
-        json[realKey] = value;
+        final realKey = '${keyUntranslated}_$lc';
+        data[realKey] = value!;
       }
     }
-    return json;
+    return data;
   }
+
+  @override
+  Map<String, dynamic> toJson() => _$ProductToJson(this);
 
   /// Returns all existing product attributes matching a list of attribute ids
   Map<String, Attribute> getAttributes(

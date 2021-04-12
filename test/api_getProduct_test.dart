@@ -864,7 +864,7 @@ void main() {
     });
 
     test(
-        'translated fields when product is not translated into second language',
+        'translated fields when product is not translated into a second language',
         () async {
       String barcode = '3333333333333';
 
@@ -948,7 +948,7 @@ void main() {
       expect(russianProduct.countriesTagsTranslated, equals(['Россия']));
     });
 
-    test('translated fields when product is translated into second language',
+    test('translated fields when product is translated into a second language',
         () async {
       String barcode = '2222222222222';
 
