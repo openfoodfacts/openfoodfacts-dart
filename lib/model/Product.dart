@@ -18,6 +18,9 @@ part 'Product.g.dart';
 
 @JsonSerializable()
 class Product extends JsonObject {
+  @JsonKey(ignore: true)
+  OpenFoodFactsLanguage? translatedLang;
+
   @JsonKey(name: 'code')
   String? barcode;
 
@@ -247,7 +250,8 @@ class Product extends JsonObject {
   EcoscoreData? ecoscoreData;
 
   Product(
-      {this.barcode,
+      {this.translatedLang,
+      this.barcode,
       this.productName,
       this.productNameTranslated,
       this.productNameDE,
@@ -335,10 +339,10 @@ class Product extends JsonObject {
     return (value as List?)?.map((e) => e as String).toList();
   }
 
-  Map<String, String> toServerData(String? lc) {
+  Map<String, String> toServerData() {
     final data = super.toData();
 
-    lc ??= lang?.code;
+    final lc = translatedLang?.code ?? lang?.code;
 
     // Defensive keys copy to modify map while iterating
     final keys = data.keys.toList();

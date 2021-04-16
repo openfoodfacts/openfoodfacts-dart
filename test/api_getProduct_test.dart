@@ -477,7 +477,7 @@ void main() {
       assert(result.product!.brandsTags != null);
       assert(result.product!.ingredients == null);
       assert(result.product!.ingredientsText == null);
-      assert(result.product!.productNameDE == null);
+      assert(result.product!.productNameTranslated == null);
       assert(result.product!.additives!.ids.isEmpty);
       assert(result.product!.additives!.names.isEmpty);
       assert(result.product!.nutrientLevels!.levels.isEmpty);
@@ -494,7 +494,7 @@ void main() {
       assert(result.product!.brandsTags == null);
       assert(result.product!.ingredients == null);
       assert(result.product!.ingredientsText == null);
-      assert(result.product!.productNameDE == null);
+      assert(result.product!.productNameTranslated == null);
       assert(result.product!.additives!.ids.isEmpty);
       assert(result.product!.additives!.names.isEmpty);
       assert(result.product!.nutrientLevels!.levels.isEmpty);
@@ -511,7 +511,7 @@ void main() {
       assert(result.product!.brandsTags == null);
       assert(result.product!.ingredients == null);
       assert(result.product!.ingredientsText == null);
-      assert(result.product!.productNameDE == null);
+      assert(result.product!.productNameTranslated == null);
       assert(result.product!.additives!.ids.isEmpty);
       assert(result.product!.additives!.names.isEmpty);
       assert(result.product!.nutrientLevels!.levels.isEmpty);
@@ -529,7 +529,7 @@ void main() {
       assert(result.product!.brandsTags == null);
       assert(result.product!.ingredients == null);
       assert(result.product!.ingredientsText == null);
-      assert(result.product!.productNameDE == null);
+      assert(result.product!.productNameTranslated == null);
       assert(result.product!.additives!.ids.isEmpty);
       assert(result.product!.additives!.names.isEmpty);
       assert(result.product!.nutrientLevels!.levels.isEmpty);
@@ -923,6 +923,9 @@ void main() {
       expect(englishProduct.countriesTags, equals(['en:russia']));
       expect(englishProduct.countriesTagsTranslated, equals(['Russia']));
 
+      expect(
+          englishProduct.translatedLang, equals(OpenFoodFactsLanguage.ENGLISH));
+
       // Russian!
 
       ProductResult russianResult = await OpenFoodAPIClient.getProduct(
@@ -946,6 +949,9 @@ void main() {
 
       expect(russianProduct.countriesTags, equals(['en:russia']));
       expect(russianProduct.countriesTagsTranslated, equals(['Россия']));
+
+      expect(
+          russianProduct.translatedLang, equals(OpenFoodFactsLanguage.RUSSIAN));
     });
 
     test('translated fields when product is translated into a second language',
@@ -963,7 +969,7 @@ void main() {
 
       Product russianInputProduct = Product(
         barcode: barcode,
-        lang: OpenFoodFactsLanguage.RUSSIAN,
+        translatedLang: OpenFoodFactsLanguage.RUSSIAN,
         productNameTranslated: 'Блинчики',
         ingredientsTextTranslated: 'Мука, вода',
       );
@@ -1017,6 +1023,9 @@ void main() {
       expect(englishProduct.countriesTags, equals(['en:russia']));
       expect(englishProduct.countriesTagsTranslated, equals(['Russia']));
 
+      expect(
+          englishProduct.translatedLang, equals(OpenFoodFactsLanguage.ENGLISH));
+
       // Russian!
 
       ProductResult russianResult = await OpenFoodAPIClient.getProduct(
@@ -1040,6 +1049,9 @@ void main() {
 
       expect(russianProduct.countriesTags, equals(['en:russia']));
       expect(russianProduct.countriesTagsTranslated, equals(['Россия']));
+
+      expect(
+          russianProduct.translatedLang, equals(OpenFoodFactsLanguage.RUSSIAN));
     });
   });
 }

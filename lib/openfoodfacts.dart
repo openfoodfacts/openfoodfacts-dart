@@ -70,10 +70,10 @@ class OpenFoodAPIClient {
   /// By default the query will hit the PROD DB
   /// Returns a Status object as result.
   static Future<Status> saveProduct(User user, Product product,
-      {String? lc, QueryType queryType = QueryType.PROD}) async {
+      {QueryType queryType = QueryType.PROD}) async {
     var parameterMap = <String, String>{};
     parameterMap.addAll(user.toData());
-    parameterMap.addAll(product.toServerData(lc));
+    parameterMap.addAll(product.toServerData());
 
     var productUri = Uri(
         scheme: URI_SCHEME,
@@ -151,6 +151,8 @@ class OpenFoodAPIClient {
     if (result.product != null) {
       ProductHelper.removeImages(result.product!, configuration.language);
       ProductHelper.createImageUrls(result.product!, queryType: queryType);
+      final translatedLang = configuration.lc ?? configuration.language?.code;
+      result.product!.translatedLang = LanguageHelper.fromJson(translatedLang);
     }
 
     return result;
