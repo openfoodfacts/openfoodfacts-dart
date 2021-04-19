@@ -40,5 +40,11 @@ class ProductHelper {
     product.categoriesTagsTranslated =
         source['categories_tags_${language.code}'];
     product.labelsTagsTranslated = source['labels_tags_${language.code}'];
+    product.ingredientsTagsTranslated =
+        source['ingredients_tags_${language.code}'];
+    product.ingredientsTextTranslated =
+        source['ingredients_text_${language.code}'];
+    product.productNameTranslated = source['product_name_${language.code}'];
+    product.countriesTagsTranslated = source['countries_tags_${language.code}'];
   }
 }

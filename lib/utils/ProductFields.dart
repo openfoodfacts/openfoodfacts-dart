@@ -1,11 +1,15 @@
+import 'package:openfoodfacts/utils/LanguageHelper.dart';
+
 enum ProductField {
   BARCODE,
   NAME,
+  NAME_TRANSLATED,
   GENERIC_NAME,
   BRANDS,
   BRANDS_TAGS,
   COUNTRIES,
   COUNTRIES_TAGS,
+  COUNTRIES_TAGS_TRANSLATED,
   LANGUAGE,
   QUANTITY,
   SERVING_SIZE,
@@ -22,10 +26,13 @@ enum ProductField {
   IMAGE_PACKAGING_SMALL_URL,
   IMAGES,
   INGREDIENTS,
+  INGREDIENTS_TAGS,
+  INGREDIENTS_TAGS_TRANSLATED,
   NUTRIMENTS,
   ADDITIVES,
   NUTRIENT_LEVELS,
   INGREDIENTS_TEXT,
+  INGREDIENTS_TEXT_TRANSLATED,
   NUTRIMENT_ENERGY_UNIT,
   NUTRIMENT_DATA_PER,
   NUTRISCORE,
@@ -54,6 +61,8 @@ extension ProductFieldExtension on ProductField {
         return 'code';
       case ProductField.NAME:
         return 'product_name';
+      case ProductField.NAME_TRANSLATED:
+        return 'product_name_';
       case ProductField.GENERIC_NAME:
         return 'generic_name';
       case ProductField.BRANDS:
@@ -64,6 +73,8 @@ extension ProductFieldExtension on ProductField {
         return 'countries';
       case ProductField.COUNTRIES_TAGS:
         return 'countries_tags';
+      case ProductField.COUNTRIES_TAGS_TRANSLATED:
+        return 'countries_tags_';
       case ProductField.LANGUAGE:
         return 'lang';
       case ProductField.QUANTITY:
@@ -96,6 +107,10 @@ extension ProductFieldExtension on ProductField {
         return 'images';
       case ProductField.INGREDIENTS:
         return 'ingredients';
+      case ProductField.INGREDIENTS_TAGS:
+        return 'ingredients_tags';
+      case ProductField.INGREDIENTS_TAGS_TRANSLATED:
+        return 'ingredients_tags_';
       case ProductField.NUTRIMENTS:
         return 'nutriments';
       case ProductField.ADDITIVES:
@@ -104,6 +119,8 @@ extension ProductFieldExtension on ProductField {
         return 'nutrient_levels';
       case ProductField.INGREDIENTS_TEXT:
         return 'ingredients_text';
+      case ProductField.INGREDIENTS_TEXT_TRANSLATED:
+        return 'ingredients_text_';
       case ProductField.NUTRIMENT_ENERGY_UNIT:
         return 'nutriment_energy_unit';
       case ProductField.NUTRIMENT_DATA_PER:
@@ -144,4 +161,33 @@ extension ProductFieldExtension on ProductField {
         return '';
     }
   }
+}
+
+/// NOTE: if one of the fields is TRANSLATED and language is null -
+/// the function will throw.
+List<String> convertFieldsToStrings(
+    List<ProductField> fields, OpenFoodFactsLanguage? language) {
+  final fieldsStrings = <String>[];
+
+  const translatedFields = [
+    ProductField.CATEGORIES_TAGS_TRANSLATED,
+    ProductField.LABELS_TAGS_TRANSLATED,
+    ProductField.NAME_TRANSLATED,
+    ProductField.COUNTRIES_TAGS_TRANSLATED,
+    ProductField.INGREDIENTS_TEXT_TRANSLATED,
+    ProductField.INGREDIENTS_TAGS_TRANSLATED,
+  ];
+
+  for (final field in fields) {
+    if (translatedFields.contains(field)) {
+      if (language == null) {
+        throw ArgumentError('Cannot request translated field without language');
+      }
+      fieldsStrings.add('${field.key}${language.code}');
+    } else {
+      fieldsStrings.add(field.key);
+    }
+  }
+
+  return fieldsStrings;
 }
