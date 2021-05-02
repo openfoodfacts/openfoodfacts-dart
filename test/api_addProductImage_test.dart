@@ -67,7 +67,7 @@ void main() {
                   image.field == ImageField.FRONT &&
                   image.size == ImageSize.DISPLAY)
               .url,
-          'https://static.openfoodfacts.net/images/products/762/221/044/9283/front_fr.286.400.jpg');
+          'https://static.openfoodfacts.net/images/products/762/221/044/9283/front_fr.415.400.jpg');
     });
   });
 }

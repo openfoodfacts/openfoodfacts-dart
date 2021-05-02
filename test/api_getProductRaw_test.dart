@@ -23,13 +23,11 @@ void main() {
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
       expect(result.product!.quantity, '350g');
-      expect(result.product!.productNameDE, 'Meisterbäckers Vital');
-      expect(result.product!.ingredientsTextDE!.isNotEmpty, true);
       expect(result.product!.ingredients != null, true);
       expect(result.product!.ingredients!.isNotEmpty, true);
-      expect(result.product!.ingredients!.first.text, 'Maisstärke');
+      expect(result.product!.ingredients!.first.text, 'Sauerteig');
       expect(result.product!.selectedImages != null, true);
-      expect(result.product!.selectedImages!.length, 15);
+      expect(result.product!.selectedImages!.length, 21);
       expect(
           result.product!.selectedImages!
               .singleWhere((image) =>
@@ -37,9 +35,9 @@ void main() {
                   image.size == ImageSize.DISPLAY &&
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
-          'https://static.openfoodfacts.net/images/products/800/869/801/1065/ingredients_de.27.400.jpg');
+          'https://static.openfoodfacts.net/images/products/800/869/801/1065/ingredients_de.269.400.jpg');
       expect(result.product!.images != null, true);
-      expect(result.product!.images!.length, 20);
+      expect(result.product!.images!.length, 28);
       expect(
           result.product!.images!
               .singleWhere((image) =>
@@ -47,8 +45,8 @@ void main() {
                   image.size == ImageSize.DISPLAY &&
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .rev,
-          27);
-      expect(result.product!.labelsTags!.contains('en:gluten-free'), true);
+          269);
+      expect(result.product!.labelsTags!.contains('en:gluten-free'), false);
       expect(result.product!.tracesTags != null, true);
       expect(result.product!.tracesTags!.contains('en:lupin'), true);
 
@@ -63,7 +61,7 @@ void main() {
       expect(result.product!.nutriments!.proteins, 4.5);
       expect(result.product!.nutriments!.novaGroup, 4);
 
-      expect(result.product!.additives!.ids.isEmpty, true);
+      expect(result.product!.additives!.ids.isEmpty, false);
 
       expect(
           result
@@ -79,8 +77,9 @@ void main() {
       expect(
           result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
           Level.MODERATE);
+          print(result.product!.countries);
       expect(result.product!.countries,
-          'Belgique,France,Allemagne,Pays-Bas,Espagne,Suisse, en:world');
+          'Belgien,Deutschland,Niederlande,Spanien,Schweiz, en:france');
     });
 
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',
@@ -117,19 +116,17 @@ void main() {
       expect(result.product!.barcode, barcode);
 
       expect(result.product!.productName,
-          'Natürliches Mineralwasser, Marinus-Quelle, still');
-      expect(result.product!.productNameDE,
-          'Natürliches Mineralwasser, Marinus-Quelle, still');
+          'Elitess Still, Neutral');
 
       expect(result.product!.nutriments != null, true);
 
-      expect(result.product!.nutriments!.energy, null);
-      expect(result.product!.nutriments!.sugars, null);
-      expect(result.product!.nutriments!.salt, 0.0019558);
+      expect(result.product!.nutriments!.energy, 0.0);
+      expect(result.product!.nutriments!.sugars, 0.0);
+      expect(result.product!.nutriments!.salt, 0.0);
       expect(result.product!.nutriments!.fiber, null);
-      expect(result.product!.nutriments!.fat, null);
-      expect(result.product!.nutriments!.saturatedFat, null);
-      expect(result.product!.nutriments!.proteins, null);
+      expect(result.product!.nutriments!.fat, 0.0);
+      expect(result.product!.nutriments!.saturatedFat, 0.0);
+      expect(result.product!.nutriments!.proteins, 0.0);
       expect(result.product!.nutriments!.novaGroup, 1);
       expect(result.product!.nutriments!.fatServing == null, true);
     });

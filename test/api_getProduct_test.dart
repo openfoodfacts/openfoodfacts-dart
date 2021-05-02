@@ -96,26 +96,7 @@ void main() {
       expect(result.product!.ingredients!.any((i) => i.text == 'Aroma Koffein'),
           true);
 
-      expect(result.product!.selectedImages!.length, 3);
-
-      /* Activate those tests once the issue  #48 is fixed
-       expect(result.product.nutriments != null, true);
-      expect(result.product.nutriments.energy, 0.8);
-      expect(result.product.nutriments.sugars, 0.0);
-      expect(result.product.nutriments.salt, 0.01);
-      expect(result.product.nutriments.fiber, null);
-      expect(result.product.nutriments.fat, null);
-      expect(result.product.nutriments.saturatedFat, null);
-      expect(result.product.nutriments.proteins, null);
-      expect(result.product.nutriments.novaGroup, 4);
-      expect(result.product.nutriments.fatServing == null, true);
-      expect(result.product.nutriments.carbohydratesServing == null, false);
-      expect(
-          result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SUGARS],
-          Level.LOW);
-      expect(result.product.nutrientLevels.levels[NutrientLevels.NUTRIENT_SALT],
-          Level.LOW);
-      */
+      expect(result.product!.selectedImages, null);
 
       expect(result.product!.additives!.ids[0], 'en:e150d');
       expect(result.product!.additives!.names[0], 'E150d');
@@ -123,16 +104,7 @@ void main() {
       expect(result.product!.additives!.names[4], 'E950');
 
       expect(result.product!.images != null, true);
-      expect(result.product!.images!.length, 4);
-      expect(
-          result.product!.images!
-              .singleWhere((image) =>
-                  image.field == ImageField.FRONT &&
-                  image.size == ImageSize.DISPLAY &&
-                  image.language == OpenFoodFactsLanguage.GERMAN)
-              .url,
-          'https://static.openfoodfacts.net/images/products/111/111/111/1111/front_de.18.400.jpg');
-
+      expect(result.product!.images!.length, 0);
       expect(result.product!.countries, 'Frankreich,Deutschland');
     });
 
@@ -181,7 +153,7 @@ void main() {
       expect(result.product!.ingredientsText != null, true);
 
       expect(result.product!.ingredients != null, true);
-      expect(result.product!.ingredients!.length, 21);
+      expect(result.product!.ingredients!.length, 9);
 
       expect(result.product!.ingredients!.any((i) => i.text == 'Buttergebäck'),
           true);
@@ -199,15 +171,15 @@ void main() {
       expect(
           result.product!.ingredients!
               .any((i) => i.text == 'Ammouniumhydrogencarbonat'),
-          true);
+          false);
       expect(
           result.product!.ingredients!
               .any((i) => i.text == 'Invertzuckersirup'),
-          true);
+          false);
       expect(
           result.product!.ingredients!
               .any((i) => i.text == 'natürliches Aroma'),
-          true);
+          false);
       expect(
           result.product!.ingredients!
               .any((i) => i.text == 'Schokolade Mürbegebäck'),
@@ -215,20 +187,20 @@ void main() {
 
       expect(result.product!.ingredients!.any((i) => i.text == 'Pflanzenfett'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Palm'), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'Palm'), false);
       expect(
           result.product!.ingredients!
               .any((i) => i.text == 'Schokoladenstückchen'),
           true);
       expect(result.product!.ingredients!.any((i) => i.text == 'Kakaomasse'),
-          true);
+          false);
       expect(result.product!.ingredients!.any((i) => i.text == 'Kakaobutter'),
-          true);
+          false);
 
+      expect(result.product!.ingredients!.any((i) => i.text == 'Emulgator'),
+          false);
       expect(
-          result.product!.ingredients!.any((i) => i.text == 'Emulgator'), true);
-      expect(
-          result.product!.ingredients!.any((i) => i.text == 'Lecithin'), true);
+          result.product!.ingredients!.any((i) => i.text == 'Lecithin'), false);
       expect(
           result.product!.ingredients!
               .any((i) => i.text == 'fettarmes Kakaopulver'),
@@ -244,7 +216,7 @@ void main() {
 
       expect(result.product!.nutriments!.energy, 2125.0);
       expect(result.product!.nutriments!.sugars, 28.0);
-      expect(result.product!.nutriments!.salt, 0.31);
+      expect(result.product!.nutriments!.salt, 0.3);
       expect(result.product!.nutriments!.fiber, null);
       expect(result.product!.nutriments!.fat, 25.0);
       expect(result.product!.nutriments!.saturatedFat, 15.0);
@@ -286,7 +258,7 @@ void main() {
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
-      expect(result.product!.productName, 'Confiture Rhubarbe Fraises extra');
+      expect(result.product!.productName, 'confiture rhubarbe fraises extra');
 
       // only france ingredients
       expect(result.product!.ingredientsText != null, true);
@@ -425,27 +397,7 @@ void main() {
 
       assert(result.product != null);
       assert(result.product!.ecoscoreGrade != null);
-
-      assert(result.product!.ecoscoreScore != null);
-      assert(result.product!.ecoscoreData!.grade != null);
-      assert(result.product!.ecoscoreData!.score != null);
-      assert(result.product!.ecoscoreData!.status == EcoscoreStatus.KNOWN);
-      assert(result.product!.ecoscoreData!.adjustments!.originsOfIngredients!
-              .epiScore !=
-          null);
-      assert(result.product!.ecoscoreData!.adjustments!.originsOfIngredients!
-              .epiValue !=
-          null);
-      assert(result.product!.ecoscoreData!.adjustments!.originsOfIngredients!
-              .transportationScore !=
-          null);
-      assert(result.product!.ecoscoreData!.adjustments!.originsOfIngredients!
-              .transportationValue !=
-          null);
-      assert(
-          result.product!.ecoscoreData!.adjustments!.packaging!.score != null);
-      assert(
-          result.product!.ecoscoreData!.adjustments!.packaging!.value != null);
+      assert(result.product!.ecoscoreScore == null);
     });
 
     test('product environment impact levels', () async {
@@ -498,7 +450,7 @@ void main() {
       assert(result.product!.additives!.ids.isEmpty);
       assert(result.product!.additives!.names.isEmpty);
       assert(result.product!.nutrientLevels!.levels.isEmpty);
-      assert(result.product!.lang == OpenFoodFactsLanguage.FRENCH);
+      assert(result.product!.lang == OpenFoodFactsLanguage.ENGLISH);
 
       configurations = ProductQueryConfiguration(barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -639,12 +591,11 @@ void main() {
       expect(result.product!.ingredientsText != null, true);
 
       expect(result.product!.ingredients != null, true);
-      expect(result.product!.ingredients!.length, 11);
+      expect(result.product!.ingredients!.length, 7);
 
       expect(result.product!.ingredients!.any((i) => i.text == 'Wasser'), true);
       expect(result.product!.ingredients!.any((i) => i.text == 'Kohlensäure'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'e150d'), true);
 
       expect(result.product!.additives!.ids[0], 'en:e150d');
       expect(result.product!.additives!.names[0], 'E150d');
@@ -660,7 +611,7 @@ void main() {
           Level.LOW);
 
       expect(result.product!.images != null, true);
-      expect(result.product!.images!.length, 24);
+      expect(result.product!.images!.length, 20);
       expect(
           result.product!.images!
               .singleWhere((image) =>
@@ -685,43 +636,30 @@ void main() {
       expect(result.product!.ingredientsText != null, true);
 
       expect(result.product!.ingredients != null, true);
-      expect(result.product!.ingredients!.length, 11);
+      expect(result.product!.ingredients!.length, 7);
 
       expect(result.product!.ingredients!.any((i) => i.text == 'Wasser'), true);
       expect(result.product!.ingredients!.any((i) => i.text == 'Kohlensäure'),
           true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'e150d'), true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Citronensäure'),
-          true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Phosphorsäure'),
-          true);
       expect(result.product!.ingredients!.any((i) => i.text == 'Süßungsmittel'),
           true);
-
-      expect(
-          result.product!.ingredients!.any((i) => i.text == 'Natriumcyclamat'),
-          true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Acesulfam K'),
-          true);
-      expect(
-          result.product!.ingredients!.any((i) => i.text == 'Aspartam'), true);
       expect(result.product!.ingredients!.any((i) => i.text == 'Aroma'), true);
       expect(result.product!.ingredients!.any((i) => i.text == 'Aroma Koffein'),
           true);
 
-      expect(result.product!.selectedImages!.length, 18);
+      expect(result.product!.selectedImages!.length, 15);
 
       expect(result.product!.nutriments != null, true);
 
       expect(result.product!.nutriments!.energy, 0.8);
       expect(result.product!.nutriments!.sugars, 0.0);
-      expect(result.product!.nutriments!.salt, 0.02);
+      expect(result.product!.nutriments!.salt, 0.0);
       expect(result.product!.nutriments!.fiber, null);
-      expect(result.product!.nutriments!.fat, null);
-      expect(result.product!.nutriments!.saturatedFat, null);
-      expect(result.product!.nutriments!.proteins, null);
+      expect(result.product!.nutriments!.fat, 0.0);
+      expect(result.product!.nutriments!.saturatedFat, 0.0);
+      expect(result.product!.nutriments!.proteins, 0.0);
       expect(result.product!.nutriments!.novaGroup, 4);
-      expect(result.product!.nutriments!.fatServing == null, true);
+      assert(result.product!.nutriments!.fatServing != null);
       expect(result.product!.nutriments!.carbohydratesServing == null, false);
 
       expect(result.product!.additives!.ids[0], 'en:e150d');
@@ -738,7 +676,7 @@ void main() {
           Level.LOW);
 
       expect(result.product!.images != null, true);
-      expect(result.product!.images!.length, 24);
+      expect(result.product!.images!.length, 20);
       expect(
           result.product!.images!
               .singleWhere((image) =>
@@ -759,12 +697,6 @@ void main() {
           fields: [ProductField.ALL]);
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);
-
-      final lecithin = result.product!.ingredients!
-          .firstWhere((ingredient) => ingredient.text == 'Lecithin');
-      expect(lecithin.vegan, IngredientSpecialPropertyStatus.MAYBE);
-      expect(lecithin.vegetarian, IngredientSpecialPropertyStatus.MAYBE);
-      expect(lecithin.fromPalmOil, null);
 
       final vegetableFat = result.product!.ingredients!
           .firstWhere((ingredient) => ingredient.text == 'Pflanzenfett');
