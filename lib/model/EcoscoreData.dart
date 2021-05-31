@@ -25,7 +25,13 @@ class EcoscoreData extends JsonObject {
   @JsonKey(includeIfNull: false)
   EcoscoreAdjustments? adjustments;
 
-  EcoscoreData({this.grade, this.score, this.status, this.agribalyse, this.adjustments});
+  EcoscoreData({
+    this.grade,
+    this.score,
+    this.status,
+    this.agribalyse,
+    this.adjustments,
+  });
 
   factory EcoscoreData.fromJson(Map<String, dynamic> json) =>
       _$EcoscoreDataFromJson(json);
