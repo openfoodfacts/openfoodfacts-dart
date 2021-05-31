@@ -11,6 +11,9 @@ EcoscoreData _$EcoscoreDataFromJson(Map<String, dynamic> json) {
     grade: json['grade'] as String?,
     score: JsonObject.parseDouble(json['score']),
     status: _$enumDecodeNullable(_$EcoscoreStatusEnumMap, json['status']),
+    agribalyse: json['agribalyse'] == null
+        ? null
+        : Agribalyse.fromJson(json['agribalyse'] as Map<String, dynamic>),
     adjustments: json['adjustments'] == null
         ? null
         : EcoscoreAdjustments.fromJson(
@@ -30,6 +33,7 @@ Map<String, dynamic> _$EcoscoreDataToJson(EcoscoreData instance) {
   writeNotNull('grade', instance.grade);
   writeNotNull('score', instance.score);
   writeNotNull('status', _$EcoscoreStatusEnumMap[instance.status]);
+  writeNotNull('agribalyse', instance.agribalyse?.toJson());
   writeNotNull('adjustments', instance.adjustments?.toJson());
   return val;
 }

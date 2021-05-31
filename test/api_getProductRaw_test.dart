@@ -77,7 +77,6 @@ void main() {
       expect(
           result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
           Level.MODERATE);
-          print(result.product!.countries);
       expect(result.product!.countries,
           'Belgien,Deutschland,Niederlande,Spanien,Schweiz, en:france');
     });
@@ -115,8 +114,7 @@ void main() {
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
 
-      expect(result.product!.productName,
-          'Elitess Still, Neutral');
+      expect(result.product!.productName, 'Elitess Still, Neutral');
 
       expect(result.product!.nutriments != null, true);
 
