@@ -1,6 +1,5 @@
 import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/model/Attribute.dart';
-import 'package:openfoodfacts/model/EcoscoreData.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
@@ -383,7 +382,7 @@ void main() {
     });
 
     test('product ecoscore', () async {
-      String barcode = '5000112548167';
+      String barcode = '3229820129488';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.ENGLISH,
@@ -397,7 +396,9 @@ void main() {
 
       assert(result.product != null);
       assert(result.product!.ecoscoreGrade != null);
-      assert(result.product!.ecoscoreScore == null);
+      assert(result.product!.ecoscoreScore != null);
+      assert(result.product!.ecoscoreData!.agribalyse != null);
+      assert(result.product!.ecoscoreData!.adjustments != null);
     });
 
     test('product environment impact levels', () async {

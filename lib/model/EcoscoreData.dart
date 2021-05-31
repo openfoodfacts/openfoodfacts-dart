@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../interface/JsonObject.dart';
+import 'Agribalyse.dart';
 import 'EcoscoreAdjustments.dart';
 
 part 'EcoscoreData.g.dart';
@@ -20,9 +21,11 @@ class EcoscoreData extends JsonObject {
   @JsonKey(includeIfNull: false)
   EcoscoreStatus? status;
   @JsonKey(includeIfNull: false)
+  Agribalyse? agribalyse;
+  @JsonKey(includeIfNull: false)
   EcoscoreAdjustments? adjustments;
 
-  EcoscoreData({this.grade, this.score, this.status, this.adjustments});
+  EcoscoreData({this.grade, this.score, this.status, this.agribalyse, this.adjustments});
 
   factory EcoscoreData.fromJson(Map<String, dynamic> json) =>
       _$EcoscoreDataFromJson(json);
