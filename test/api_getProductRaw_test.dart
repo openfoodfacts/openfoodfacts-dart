@@ -77,7 +77,6 @@ void main() {
       expect(
           result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
           Level.MODERATE);
-      print(result.product!.countries);
       expect(result.product!.countries,
           'Belgien,Deutschland,Niederlande,Spanien,Schweiz, en:france');
     });
