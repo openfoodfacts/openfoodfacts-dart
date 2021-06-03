@@ -24,6 +24,11 @@ class EcoscoreData extends JsonObject {
   Agribalyse? agribalyse;
   @JsonKey(includeIfNull: false)
   EcoscoreAdjustments? adjustments;
+  @JsonKey(
+    name: 'missing_data_warning',
+    fromJson: JsonObject.parseBool,
+  )
+  bool missingDataWarning;
 
   EcoscoreData({
     this.grade,
@@ -31,6 +36,7 @@ class EcoscoreData extends JsonObject {
     this.status,
     this.agribalyse,
     this.adjustments,
+    this.missingDataWarning = false,
   });
 
   factory EcoscoreData.fromJson(Map<String, dynamic> json) =>

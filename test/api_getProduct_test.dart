@@ -399,6 +399,7 @@ void main() {
       assert(result.product!.ecoscoreScore != null);
       assert(result.product!.ecoscoreData!.agribalyse != null);
       assert(result.product!.ecoscoreData!.adjustments != null);
+      assert(result.product!.ecoscoreData!.missingDataWarning == false);
     });
 
     test('product environment impact levels', () async {
