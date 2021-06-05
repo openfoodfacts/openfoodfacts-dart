@@ -18,6 +18,7 @@ EcoscoreData _$EcoscoreDataFromJson(Map<String, dynamic> json) {
         ? null
         : EcoscoreAdjustments.fromJson(
             json['adjustments'] as Map<String, dynamic>),
+    missingDataWarning: JsonObject.parseBool(json['missing_data_warning']),
   );
 }
 
@@ -35,6 +36,7 @@ Map<String, dynamic> _$EcoscoreDataToJson(EcoscoreData instance) {
   writeNotNull('status', _$EcoscoreStatusEnumMap[instance.status]);
   writeNotNull('agribalyse', instance.agribalyse?.toJson());
   writeNotNull('adjustments', instance.adjustments?.toJson());
+  val['missing_data_warning'] = instance.missingDataWarning;
   return val;
 }
 
