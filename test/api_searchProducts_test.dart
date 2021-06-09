@@ -206,5 +206,37 @@ void main() {
           true);
       expect(result.products![0].nutriscore!.toUpperCase() == 'A', true);
     });
+
+    test('search products with quotes', () async {
+      String barcode = '2222222222223';
+      Product product = Product(
+          barcode: barcode,
+          productName: 'Quoted Coca "cola"',
+          lang: OpenFoodFactsLanguage.GERMAN,
+          brands: 'Quoted Coca "Cola"');
+
+      await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product,
+          queryType: QueryType.TEST);
+
+      var parameters = <Parameter>[
+        const OutputFormat(format: Format.JSON),
+        const Page(page: 1),
+        const SearchTerms(terms: ['Quoted Coca "Cola"']),
+      ];
+
+      ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+              parametersList: parameters,
+              fields: [ProductField.ALL],
+              language: OpenFoodFactsLanguage.GERMAN);
+
+      SearchResult result = await OpenFoodAPIClient.searchProducts(
+          TestConstants.TEST_USER, configuration,
+          queryType: QueryType.TEST);
+
+      expect(result.products!.length, 1);
+      expect(result.products![0].productName, equals('Quoted Coca "cola"'));
+      expect(result.products![0].brands, equals('Quoted Coca "Cola"'));
+    });
   });
 }
