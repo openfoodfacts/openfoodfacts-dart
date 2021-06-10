@@ -114,6 +114,7 @@ class OpenFoodAPIClient {
   /// The ProductResult does not contain a product, if the product is not available.
   /// No parsing of ingredients.
   /// No adjustment by language.
+  /// No replacing of '&quot;' with '"'.
   /// By default the query will hit the PROD DB
   static Future<ProductResult> getProductRaw(
       String barcode, OpenFoodFactsLanguage language,
@@ -146,7 +147,8 @@ class OpenFoodAPIClient {
 
     Response response = await HttpHelper()
         .doGetRequest(productUri, user: user, queryType: queryType);
-    ProductResult result = ProductResult.fromJson(json.decode(response.body));
+    final jsonStr = _replaceQuotes(response.body);
+    ProductResult result = ProductResult.fromJson(jsonDecode(jsonStr));
 
     if (result.product != null) {
       ProductHelper.removeImages(result.product!, configuration.language);
@@ -156,6 +158,10 @@ class OpenFoodAPIClient {
     }
 
     return result;
+  }
+
+  static String _replaceQuotes(String str) {
+    return str.replaceAll('&quot;', '\\"');
   }
 
   /// Search the OpenFoodFacts product database with the given parameters.
@@ -177,7 +183,8 @@ class OpenFoodAPIClient {
 
     Response response = await HttpHelper()
         .doGetRequest(searchUri, user: user, queryType: queryType);
-    var result = SearchResult.fromJson(json.decode(response.body));
+    final jsonStr = _replaceQuotes(response.body);
+    var result = SearchResult.fromJson(json.decode(jsonStr));
 
     result.products!.asMap().forEach((index, product) {
       ProductHelper.removeImages(product, configuration.language);
@@ -202,7 +209,8 @@ class OpenFoodAPIClient {
 
     Response response = await HttpHelper()
         .doGetRequest(searchUri, user: user, queryType: queryType);
-    var result = SearchResult.fromJson(json.decode(response.body));
+    final jsonStr = _replaceQuotes(response.body);
+    var result = SearchResult.fromJson(json.decode(jsonStr));
 
     result.products!.asMap().forEach((index, product) {
       ProductHelper.removeImages(product, configuration.language);

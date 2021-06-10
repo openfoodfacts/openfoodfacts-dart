@@ -987,5 +987,27 @@ void main() {
       expect(
           russianProduct.translatedLang, equals(OpenFoodFactsLanguage.RUSSIAN));
     });
+
+    test('product with quotes', () async {
+      String barcode = '2222222222223';
+      Product product = Product(
+          barcode: barcode,
+          productName: 'Quoted Coca "cola"',
+          lang: OpenFoodFactsLanguage.GERMAN,
+          brands: 'Quoted Coca "Cola"');
+
+      await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product,
+          queryType: QueryType.TEST);
+
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.GERMAN,
+          fields: [ProductField.ALL]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
+
+      expect(result.product!.productName, equals('Quoted Coca "cola"'));
+      expect(result.product!.brands, equals('Quoted Coca "Cola"'));
+    });
   });
 }
