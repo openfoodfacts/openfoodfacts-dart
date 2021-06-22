@@ -407,7 +407,7 @@ ProductResult result = await OpenFoodAPIClient.getProductRaw(
           user: TestConstants.TEST_USER);
 
 if(result.status != 1) {
-	print("Error retreiving the product : ${result.status.errorVerbose}");
+	print("Error retrieving the product : ${result.status.errorVerbose}");
     return;
 }
 
