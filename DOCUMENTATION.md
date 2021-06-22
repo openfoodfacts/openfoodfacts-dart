@@ -312,7 +312,7 @@ This function retrieves the data of the product but returns it "as is". Fields a
 Parameters : String barcode, OpenFoodFactsLanguage lang
 Optional : User user
 
-ProductResult result = await OpenFoodFacts.getProductRaw("yourbarcode", OpenFoodFactsLanguage.FRENCH);
+ProductResult result = await OpenFoodAPIClient.getProductRaw("yourbarcode", OpenFoodFactsLanguage.FRENCH);
 ```
 See the [example](#example-2--get-a-raw-product-from-a-barcode)
 
@@ -323,7 +323,7 @@ This function allows you to get a list of products according to a list of [param
 Parameters : List<Parameter> parameterList
 Optional : String lang
 
-SearchResult result = await OpenFoodFacts.searchProducts(parameterList, lang: User.LANGUAGE_FR);
+SearchResult result = await OpenFoodAPIClient.searchProducts(parameterList, lang: User.LANGUAGE_FR);
 ```
 See the [example](#example-3--search-for-products)
 
@@ -343,7 +343,7 @@ This function allows you to send a [picture](#productimage) linked to an existin
 ```dart
 Parameters : User user, ProductImage image
 
-Status result = await OpenFoodFacts.addProductImage(user, image);
+Status result = await OpenFoodAPIClient.addProductImage(user, image);
 ```
 See the [example](#example-5--upload-an-image-for-a-given-product)
 
@@ -354,7 +354,7 @@ This function checks if the user_id and password of a provided user object are c
 ```dart
 Parameters : User user
 
-bool result = await OpenFoodFacts.login(user);
+bool result = await OpenFoodAPIClient.login(user);
 ```
 
 
