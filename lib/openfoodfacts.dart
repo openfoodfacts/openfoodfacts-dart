@@ -444,6 +444,6 @@ class OpenFoodAPIClient {
     );
     Response response =
         await HttpHelper().doPostRequest(loginUri, user.toData(), user);
-    return response.statusCode == 200 ? true : false;
+    return response.statusCode == 200;
   }
 }
