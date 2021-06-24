@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the subGroups property from the PnnsGroup1Extension extension, for the Dart programming language.">
+  <title>subGroups property - PnnsGroup1Extension extension - PnnsGroups library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../../static-assets/github.css">
+  <link rel="stylesheet" href="../../static-assets/styles.css">
+  <link rel="icon" href="../../static-assets/favicon.png">
+
+  
+</head>
+
+
+<body data-base-href="../../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">openfoodfacts</a></li>
+    <li><a href="../../utils_PnnsGroups/utils_PnnsGroups-library.html">PnnsGroups</a></li>
+    <li><a href="../../utils_PnnsGroups/PnnsGroup1Extension.html">PnnsGroup1Extension</a></li>
+    <li class="self-crumb">subGroups property</li>
+  </ol>
+  <div class="self-name">subGroups</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../../index.html">openfoodfacts</a></li>
+  <li><a href="../../utils_PnnsGroups/utils_PnnsGroups-library.html">PnnsGroups</a></li>
+  <li><a href="../../utils_PnnsGroups/PnnsGroup1Extension.html">PnnsGroup1Extension</a></li>
+  <li class="self-crumb">subGroups property</li>
+</ol>
+
+
+    <h5>PnnsGroup1Extension extension</h5>
+    <ol>
+
+
+
+
+    <li class="section-title"> <a href="../../utils_PnnsGroups/PnnsGroup1Extension.html#instance-properties">Properties</a>
+    </li>
+    <li><a href="../../utils_PnnsGroups/PnnsGroup1Extension/name.html">name</a></li>
+    <li><a href="../../utils_PnnsGroups/PnnsGroup1Extension/subGroups.html">subGroups</a></li>
+
+
+
+
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-property">subGroups</span> property 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+</h1></div>
+
+
+        
+<section id="getter">
+
+<section class="multi-line-signature">
+  <span class="returntype"><a href="https://api.dart.dev/stable/2.13.3/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../utils_PnnsGroups/PnnsGroup2-class.html">PnnsGroup2</a></span>&gt;</span>?</span>
+  <span class="name ">subGroups</span>
+  
+
+</section>
+
+
+
+
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">List&lt;PnnsGroup2&gt;? get subGroups {
+  switch (this) {
+    case PnnsGroup1.BEVERAGES:
+      return &lt;PnnsGroup2&gt;[
+        PnnsGroup2.FRUIT_JUICES,
+        PnnsGroup2.SWEETENED_BEVERAGES,
+        PnnsGroup2.ALCOHOLIC_BEVERAGES,
+        PnnsGroup2.UNSWEETENED_BEVERAGES,
+        PnnsGroup2.ARTIFICIALLY_SWEETENED_BEVERAGES,
+        PnnsGroup2.WATERS_AND_FLAVORED_WATERS,
+        PnnsGroup2.FRUIT_NECTARS,
+        PnnsGroup2.TEAS_AND_HERBAL_TEAS_AND_COFFEES
+      ];
+    case PnnsGroup1.CEREALS_AND_POTATOES:
+      return &lt;PnnsGroup2&gt;[
+        PnnsGroup2.BREAKFAST_CEREALS,
+        PnnsGroup2.PASTRIES,
+        PnnsGroup2.POTATOES,
+        PnnsGroup2.CEREALS,
+        PnnsGroup2.BREAD
+      ];
+    case PnnsGroup1.COMPOSITE_FOODS:
+      return &lt;PnnsGroup2&gt;[
+        PnnsGroup2.PIZZA_PIES_AND_QUICHE,
+        PnnsGroup2.SANDWICHES,
+        PnnsGroup2.SOUPS,
+        PnnsGroup2.ONE_DISH_MEALS,
+      ];
+    case PnnsGroup1.FAT_AND_SAUCES:
+      return &lt;PnnsGroup2&gt;[PnnsGroup2.DRESSINGS_AND_SAUCES, PnnsGroup2.FATS];
+    case PnnsGroup1.FISH_MEAT_AND_EGGS:
+      return &lt;PnnsGroup2&gt;[
+        PnnsGroup2.PROCESSED_MEAT,
+        PnnsGroup2.MEAT,
+        PnnsGroup2.FISH_AND_SEAFOOD,
+        PnnsGroup2.OFFALS
+      ];
+    case PnnsGroup1.FRUITS_AND_VEGETABLES:
+      return &lt;PnnsGroup2&gt;[
+        PnnsGroup2.FRUITS,
+        PnnsGroup2.VEGETABLES,
+        PnnsGroup2.DRIED_FRUITS,
+        PnnsGroup2.NUTS,
+        PnnsGroup2.LEGUMES,
+      ];
+    case PnnsGroup1.MILK_AND_DAIRIES:
+      return &lt;PnnsGroup2&gt;[
+        PnnsGroup2.MILK_AND_YOGURT,
+        PnnsGroup2.DAIRY_DESSERTS,
+        PnnsGroup2.CHEESE,
+        PnnsGroup2.PLANT_BASED_MILK_SUBSTITUTES,
+      ];
+    case PnnsGroup1.SALTY_SNACKS:
+      return &lt;PnnsGroup2&gt;[
+        PnnsGroup2.APPETIZERS,
+        PnnsGroup2.SALTY_AND_FATTY_PRODUCTS,
+      ];
+    case PnnsGroup1.SUGARY_SNACKS:
+      return &lt;PnnsGroup2&gt;[
+        PnnsGroup2.SWEETS,
+        PnnsGroup2.CHOCOLATE_PRODUCTS,
+        PnnsGroup2.ICE_CREAM
+      ];
+    default:
+      return null;
+  }
+}</code></pre>
+</section>
+
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    openfoodfacts
+      1.1.0-beta
+  </span>
+
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js"></script>
+<script src="../../static-assets/script.js"></script>
+
+
+
+</body>
+
+</html>
+
