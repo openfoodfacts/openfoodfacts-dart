@@ -9,6 +9,7 @@ import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
+import 'package:openfoodfacts/utils/TagType.dart';
 
 import 'model/Insight.dart';
 import 'model/RobotoffQuestion.dart';
@@ -415,7 +416,7 @@ class OpenFoodAPIClient {
       User user, String barcode, OpenFoodFactsLanguage language,
       {OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
       QueryType queryType = QueryType.PROD}) async {
-    var productUri = Uri(
+    var ocrUri = Uri(
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_PROD_HOST,
         path: '/cgi/ingredients.pl',
@@ -427,11 +428,36 @@ class OpenFoodAPIClient {
         });
 
     Response response = await HttpHelper()
-        .doGetRequest(productUri, user: user, queryType: queryType);
+        .doGetRequest(ocrUri, user: user, queryType: queryType);
 
     OcrIngredientsResult result = OcrIngredientsResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
     return result;
+  }
+
+  /// Give user suggestion based on autocompleted outputs
+  /// The expected output language can be set otherwise English will be used by default
+  /// The TagType is required
+  /// Returns a List of suggestions
+  /// By default the query will hit the PROD DB
+  static Future<List<dynamic>> getSuggestions(TagType tagType,
+      {String input = '',
+      OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
+      QueryType queryType = QueryType.PROD}) async {
+    var suggestionUri = Uri(
+        scheme: URI_SCHEME,
+        host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_PROD_HOST,
+        path: '/cgi/suggest.pl',
+        queryParameters: {
+          'tagtype': tagType.key,
+          'string': input,
+          'lc': language.code,
+        });
+
+    Response response = await HttpHelper()
+        .doGetRequest(suggestionUri, queryType: queryType);
+
+    return json.decode(response.body);
   }
 
   /// Uses the auth.pl API to see if login was successful
