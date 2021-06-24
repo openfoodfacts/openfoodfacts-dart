@@ -90,6 +90,7 @@ dart test
 
 ## How to use ?
 You can find the full documentation here : [Documentation](https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md).
+You can find automated code documentation here:  [Documentation](https://openfoodfacts.github.io/openfoodfacts-dart/).
 
 ## Authors
 * Alexander Schacht - [Grumpf86](https://github.com/Grumpf86)
