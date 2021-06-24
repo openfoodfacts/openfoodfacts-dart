@@ -2,8 +2,7 @@
     on:
         push:
             branches:
-               # - "develop"
-               - "dart-doc-deploy-gha"
+               - "develop"
     jobs:
         deploy-pages:
             name: Deploy to GitHub Pages
