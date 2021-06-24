@@ -411,7 +411,6 @@ class OpenFoodAPIClient {
   /// Returns the ingredients using OCR.
   /// By default the query will use the Google Cloud Vision.
   /// By default the query will hit the PROD DB
-
   static Future<OcrIngredientsResult> extractIngredients(
       User user, String barcode, OpenFoodFactsLanguage language,
       {OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
@@ -435,11 +434,16 @@ class OpenFoodAPIClient {
     return result;
   }
 
-  /// login on the main page - not used
-  static Future<String> login(User user) async {
-    var loginUri = Uri(scheme: URI_SCHEME, host: URI_PROD_HOST);
+  /// Uses the auth.pl API to see if login was successful
+  /// Returns a bool if the login data of the provided user is correct
+  static Future<bool> login(User user) async {
+    var loginUri = Uri(
+      scheme: URI_SCHEME,
+      host: URI_PROD_HOST,
+      path: '/cgi/auth.pl',
+    );
     Response response =
         await HttpHelper().doPostRequest(loginUri, user.toData(), user);
-    return response.body;
+    return response.statusCode == 200;
   }
 }
