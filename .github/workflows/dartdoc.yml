@@ -20,5 +20,5 @@
               with:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 BRANCH: gh-pages
-                FOLDER: doc/api/
+                FOLDER: /home/runner/work/openfoodfacts-dart/openfoodfacts-dart/doc/api
                 
