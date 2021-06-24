@@ -454,8 +454,8 @@ class OpenFoodAPIClient {
           'lc': language.code,
         });
 
-    Response response = await HttpHelper()
-        .doGetRequest(suggestionUri, queryType: queryType);
+    Response response =
+        await HttpHelper().doGetRequest(suggestionUri, queryType: queryType);
 
     return json.decode(response.body);
   }
