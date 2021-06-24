@@ -15,6 +15,8 @@
               uses: dart-lang/setup-dart@v1
             - name: Run Dartdoc
               run: dartdoc
+            - name: LS
+              run: ls
             - name: Deploy API documentation to Github Pages
               uses: JamesIves/github-pages-deploy-action@4.1.4
               with:
