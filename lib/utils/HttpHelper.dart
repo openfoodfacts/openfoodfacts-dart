@@ -51,28 +51,44 @@ class HttpHelper {
   /// The files to send have to be provided as map containing the source file uri.
   /// As result a json object of the "type" Status is expected.
   Future<Status> doMultipartRequest(
-      Uri uri, Map<String, String> body, Map<String, Uri> files, User user,
-      {QueryType queryType = QueryType.PROD}) async {
+    Uri uri,
+    Map<String, String> body, {
+    Map<String, Uri>? files,
+    User? user,
+    QueryType queryType = QueryType.PROD,
+  }) async {
     var request = http.MultipartRequest('POST', uri);
-    request.headers.addAll(_buildHeaders(user,
-            isTestModeActive: queryType == QueryType.PROD ? false : true)
-        as Map<String, String>);
+
+    request.headers.addAll(
+      _buildHeaders(user,
+              isTestModeActive: queryType == QueryType.PROD ? false : true)
+          as Map<String, String>,
+    );
+
     request.headers.addAll({'Content-Type': 'multipart/form-data'});
     request.fields.addAll(body);
 
     // add all file entries to the request
-    for (MapEntry<String, Uri> entry in files.entries) {
-      List<int> fileBytes = await UriReader.instance!.readAsBytes(entry.value);
-      var multipartFile = http.MultipartFile.fromBytes(entry.key, fileBytes,
-          filename: basename(entry.value.toString()));
-      request.files.add(multipartFile);
+    if (files != null) {
+      for (MapEntry<String, Uri> entry in files.entries) {
+        List<int> fileBytes =
+            await UriReader.instance!.readAsBytes(entry.value);
+        var multipartFile = http.MultipartFile.fromBytes(entry.key, fileBytes,
+            filename: basename(entry.value.toString()));
+        request.files.add(multipartFile);
+      }
     }
 
     // get the response status
     Status status = await request.send().then((response) {
       if (response.statusCode == 200) {
         return response.stream.first.then((responseBody) {
-          return Status.fromJson(json.decode(utf8.decode(responseBody)));
+          try {
+            return Status.fromJson(json.decode(utf8.decode(responseBody)));
+          } catch (e) {
+            //When the server returns html
+            return Status(status: 200);
+          }
         });
       } else {
         return Status(status: response.statusCode);
@@ -91,14 +107,12 @@ class HttpHelper {
       'UserAgent':
           (user != null && user.comment != null) ? user.comment! : USER_AGENT
     });
-    headers.addAll(
-        {'From': (user != null && user.userId != null) ? user.userId! : FROM});
+    headers.addAll({'From': (user != null) ? user.userId : FROM});
 
     if (isTestModeActive) {
       var token = 'Basic ' + base64Encode(utf8.encode('off:off'));
       headers.addAll({'authorization': token});
     }
-
     return headers;
   }
 }

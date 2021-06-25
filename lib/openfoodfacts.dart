@@ -105,9 +105,8 @@ class OpenFoodAPIClient {
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
         path: '/cgi/product_image_upload.pl');
 
-    return await HttpHelper().doMultipartRequest(
-        imageUri, dataMap, fileMap, user,
-        queryType: queryType);
+    return await HttpHelper().doMultipartRequest(imageUri, dataMap,
+        files: fileMap, user: user, queryType: queryType);
   }
 
   /// Returns the product for the given barcode.
@@ -446,4 +445,53 @@ class OpenFoodAPIClient {
         await HttpHelper().doPostRequest(loginUri, user.toData(), user);
     return response.statusCode == 200;
   }
+
+  /// Creates a new user, EVERY field in [User] is needed
+  /// Since there is no official endpoint the response is always 200
+  static Future<Status> register(User user) async {
+    var registerUri = Uri(
+      scheme: URI_SCHEME,
+      host: URI_PROD_HOST,
+      path: '/cgi/user.pl',
+    );
+
+    if (user.name == null || user.email == null) {
+      throw Exception('user.name and user.email have to be set to register');
+    }
+
+    Map<String, String> data = <String, String>{
+      'name': user.name!,
+      'email': user.email!,
+      'userid': user.userId,
+      'password': user.password,
+      'confirm_password': user.password,
+      if (user.pro) 'pro': 'on',
+      'pro_checkbox': '1',
+      'requested_org': user.requested_org ?? ' ',
+      if (user.newsletter) 'newsletter': 'on',
+      'action': 'process',
+      'type': 'add',
+      '.submit': 'Register',
+    };
+
+    return await HttpHelper().doMultipartRequest(
+      registerUri,
+      data,
+    );
+  }
+}
+
+void main() async {
+  Status status = await OpenFoodAPIClient.register(
+    User(
+      name: 'DasIstMeinName2',
+      email: 'meineEmail2@gmail.com',
+      userId: 'dasistmeinnutzername2',
+      password: 'Password',
+      pro: false,
+      newsletter: true,
+    ),
+  );
+
+  print(status.status);
 }
