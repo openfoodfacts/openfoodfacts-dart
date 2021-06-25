@@ -64,7 +64,7 @@ You can check the terms of use here : [Terms of use](https://world.openfoodfacts
 ### Other
 
 ## Roadmap
-
+List of new APIs to implement: https://github.com/openfoodfacts/api-documentation/issues
 
 ### READ
 - [ ] ???
