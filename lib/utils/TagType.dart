@@ -7,7 +7,8 @@ enum TagType {
   INGREDIENTS,
   TRACES,
   ADDITIVES,
-  ALLERGENS
+  ALLERGENS,
+  EMB_CODES
 }
 
 extension TagTypeExtension on TagType {
@@ -31,6 +32,8 @@ extension TagTypeExtension on TagType {
         return 'allergens';
       case TagType.LANGUAGES:
         return 'languages';
+      case TagType.EMB_CODES:
+        return 'emb_codes';
       default:
         return '';
     }

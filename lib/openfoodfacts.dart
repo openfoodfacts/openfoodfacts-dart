@@ -440,7 +440,7 @@ class OpenFoodAPIClient {
   /// The TagType is required
   /// Returns a List of suggestions
   /// By default the query will hit the PROD DB
-  static Future<List<dynamic>> getSuggestions(TagType tagType,
+  static Future<List<dynamic>> getAutocompletedSuggestions(TagType tagType,
       {String input = '',
       OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
       QueryType queryType = QueryType.PROD}) async {
@@ -450,7 +450,7 @@ class OpenFoodAPIClient {
         path: '/cgi/suggest.pl',
         queryParameters: {
           'tagtype': tagType.key,
-          'string': input,
+          'term': input,
           'lc': language.code,
         });
 
