@@ -359,13 +359,15 @@ bool result = await OpenFoodAPIClient.login(user);
 
 #### Register a new user
 
-This functions creates a new Open Food Facts user. Each parameter of the user class must not be null.
+This functions creates a new Open Food Facts user. 
 
 ```dart
 Parameters: User user
     
 Status status = await OpenFoodAPIClient.register(user);
 ```
+
+Although `user.name` and `user.email` are nullable they must not be null for registering.
 
 Possible `status.status` responses:
 
