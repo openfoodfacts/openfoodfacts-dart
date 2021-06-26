@@ -435,10 +435,11 @@ class OpenFoodAPIClient {
 
   /// Uses the auth.pl API to see if login was successful
   /// Returns a bool if the login data of the provided user is correct
-  static Future<bool> login(User user) async {
+  static Future<bool> login(User user,
+      {QueryType queryType = QueryType.PROD}) async {
     var loginUri = Uri(
       scheme: URI_SCHEME,
-      host: URI_PROD_HOST,
+      host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
       path: '/cgi/auth.pl',
     );
     Response response =
@@ -447,11 +448,12 @@ class OpenFoodAPIClient {
   }
 
   /// Creates a new user, EVERY field in [User] is needed
-  /// Since there is no official endpoint the response is always 200
-  static Future<Status> register(User user) async {
+  /// Returns [Status.status] 201 = complete; 400 = wrong inputs + [Status.error]; 500 = server error;
+  static Future<Status> register(User user,
+      {QueryType queryType = QueryType.PROD}) async {
     var registerUri = Uri(
       scheme: URI_SCHEME,
-      host: URI_PROD_HOST,
+      host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
       path: '/cgi/user.pl',
     );
 
@@ -474,24 +476,37 @@ class OpenFoodAPIClient {
       '.submit': 'Register',
     };
 
-    return await HttpHelper().doMultipartRequest(
+    Status status = await HttpHelper().doMultipartRequest(
       registerUri,
       data,
+      queryType: queryType,
     );
+
+    //Since this is not a official endpoint the response code is always 200
+    //Here we check the response body for certain keyword to find out if the registration was complete
+    if (status.body == null) {
+      return Status(
+        status: 500,
+        error:
+            'No response, open a issue here: https://github.com/openfoodfacts/openfoodfacts-dart/issues/new',
+      );
+    }
+    if (status.body!.contains('loggedin')) {
+      return Status(status: 201);
+    } else if (status.body!
+        .contains('This username already exists, please choose another.')) {
+      return Status(
+        status: 400,
+        error: 'This username already exists, please choose another.',
+      );
+    } else if (status.body!.contains('The e-mail address is already used')) {
+      return Status(
+        status: 400,
+        error:
+            'The e-mail address is already used by another user. Maybe you already have an account? You can reset the password of your other account.',
+      );
+    } else {
+      return Status(status: 400, error: 'Other');
+    }
   }
-}
-
-void main() async {
-  Status status = await OpenFoodAPIClient.register(
-    User(
-      name: 'DasIstMeinName2',
-      email: 'meineEmail2@gmail.com',
-      userId: 'dasistmeinnutzername2',
-      password: 'Password',
-      pro: false,
-      newsletter: true,
-    ),
-  );
-
-  print(status.status);
 }

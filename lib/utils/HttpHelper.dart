@@ -87,11 +87,12 @@ class HttpHelper {
             return Status.fromJson(json.decode(utf8.decode(responseBody)));
           } catch (e) {
             //When the server returns html
-            return Status(status: 200);
+            return Status(status: 200, body: utf8.decode(responseBody));
           }
         });
       } else {
-        return Status(status: response.statusCode);
+        return Status(
+            status: response.statusCode, error: response.reasonPhrase);
       }
     });
     return status;

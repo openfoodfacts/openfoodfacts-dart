@@ -10,6 +10,8 @@ class Status extends JsonObject {
   @JsonKey(name: 'status_verbose')
   final String? statusVerbose;
 
+  final String? body;
+
   final String? error;
 
   @JsonKey(name: 'imgid', fromJson: JsonObject.parseInt)
@@ -18,6 +20,7 @@ class Status extends JsonObject {
   Status({
     this.status,
     this.statusVerbose,
+    this.body,
     this.error,
     this.imageId,
   });
