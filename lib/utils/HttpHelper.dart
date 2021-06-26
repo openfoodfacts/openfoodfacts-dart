@@ -86,7 +86,7 @@ class HttpHelper {
           try {
             return Status.fromJson(json.decode(utf8.decode(responseBody)));
           } catch (e) {
-            //When the server returns html
+            //When the server returns html instead of json
             return Status(status: 200, body: utf8.decode(responseBody));
           }
         });
