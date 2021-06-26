@@ -458,7 +458,9 @@ class OpenFoodAPIClient {
     );
 
     if (user.name == null || user.email == null) {
-      throw Exception('user.name and user.email have to be set to register');
+      return Status(
+          status: 400,
+          body: 'user.name and user.email must not be null for registering.');
     }
 
     Map<String, String> data = <String, String>{
@@ -499,7 +501,7 @@ class OpenFoodAPIClient {
         status: 400,
         error: 'This username already exists, please choose another.',
       );
-    } else if (status.body!.contains('The e-mail address is already used')) {
+    } else if (status.body!.contains('The e-mail address is already used.')) {
       return Status(
         status: 400,
         error:
