@@ -447,32 +447,34 @@ class OpenFoodAPIClient {
     return response.statusCode == 200;
   }
 
-  /// Creates a new user, EVERY field in [User] is needed
+  /// Creates a new user
   /// Returns [Status.status] 201 = complete; 400 = wrong inputs + [Status.error]; 500 = server error;
-  static Future<Status> register(User user,
-      {QueryType queryType = QueryType.PROD}) async {
+  ///
+  /// When creating a [producer account](https://world.pro.openfoodfacts.org/) use [requested_org] to name the Producer or brand
+  static Future<Status> register({
+    required User user,
+    required String name,
+    required String email,
+    String? requested_org,
+    bool newsletter = true,
+    QueryType queryType = QueryType.PROD,
+  }) async {
     var registerUri = Uri(
       scheme: URI_SCHEME,
       host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
       path: '/cgi/user.pl',
     );
 
-    if (user.name == null || user.email == null) {
-      return Status(
-          status: 400,
-          body: 'user.name and user.email must not be null for registering.');
-    }
-
     Map<String, String> data = <String, String>{
-      'name': user.name!,
-      'email': user.email!,
+      'name': name,
+      'email': email,
       'userid': user.userId,
       'password': user.password,
       'confirm_password': user.password,
-      if (user.pro) 'pro': 'on',
+      if (requested_org != null) 'pro': 'on',
       'pro_checkbox': '1',
-      'requested_org': user.requested_org ?? ' ',
-      if (user.newsletter) 'newsletter': 'on',
+      'requested_org': requested_org ?? ' ',
+      if (newsletter) 'newsletter': 'on',
       'action': 'process',
       'type': 'add',
       '.submit': 'Register',
@@ -490,7 +492,7 @@ class OpenFoodAPIClient {
       return Status(
         status: 500,
         error:
-            'No response, open a issue here: https://github.com/openfoodfacts/openfoodfacts-dart/issues/new',
+            'No response, open an issue here: https://github.com/openfoodfacts/openfoodfacts-dart/issues/new',
       );
     }
     if (status.body!.contains('loggedin')) {
@@ -508,7 +510,15 @@ class OpenFoodAPIClient {
             'The e-mail address is already used by another user. Maybe you already have an account? You can reset the password of your other account.',
       );
     } else {
-      return Status(status: 400, error: 'Other');
+      return Status(status: 400, error: 'Unrecognized request error');
     }
   }
+}
+
+void main() async {
+  await OpenFoodAPIClient.register(
+    user: User(password: '', userId: ''),
+    name: 'name',
+    email: 'email',
+  );
 }
