@@ -514,11 +514,3 @@ class OpenFoodAPIClient {
     }
   }
 }
-
-void main() async {
-  await OpenFoodAPIClient.register(
-    user: User(password: '', userId: ''),
-    name: 'name',
-    email: 'email',
-  );
-}

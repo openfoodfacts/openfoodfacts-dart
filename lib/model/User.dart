@@ -7,6 +7,7 @@ part 'User.g.dart';
 class User extends JsonObject {
   @JsonKey(includeIfNull: false)
   final String? comment;
+
   @JsonKey(name: 'user_id')
   final String userId;
   @JsonKey()
