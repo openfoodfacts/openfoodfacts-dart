@@ -9,11 +9,15 @@ class User extends JsonObject {
   final String? comment;
 
   @JsonKey(name: 'user_id')
-  final String? userId;
+  final String userId;
   @JsonKey()
-  final String? password;
+  final String password;
 
-  const User({this.userId, this.password, this.comment});
+  const User({
+    this.comment,
+    required this.userId,
+    required this.password,
+  });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

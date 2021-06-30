@@ -9,7 +9,7 @@ class TestConstants {
   );
 
   static const User PROD_USER = User(
-    userId: 'grumpf@gmx.de',
+    userId: 'grumpf',
     password: 'takeitorleaveit',
     comment: 'dart API test',
   );

@@ -357,6 +357,26 @@ Parameters : User user
 bool result = await OpenFoodAPIClient.login(user);
 ```
 
+#### Register a new user
+
+This functions creates a new Open Food Facts user. 
+
+```dart
+Parameters: User user, String name, String email, String? requested_org, bool newsletter = true,
+    
+Status status = await OpenFoodAPIClient.register(...);
+```
+
+When creating a [producer account](https://world.pro.openfoodfacts.org/) use `requested_org` to name the Producer or brand
+
+Possible `status.status` responses:
+
+| Code                   | Meaning       |
+| :--------------------- | ------------- |
+| 201                    | User created  |
+| 400 (+ `status.error`) | Request error |
+| 500                    | Server error  |
+
 
 
 ### Examples

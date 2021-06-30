@@ -105,9 +105,8 @@ class OpenFoodAPIClient {
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
         path: '/cgi/product_image_upload.pl');
 
-    return await HttpHelper().doMultipartRequest(
-        imageUri, dataMap, fileMap, user,
-        queryType: queryType);
+    return await HttpHelper().doMultipartRequest(imageUri, dataMap,
+        files: fileMap, user: user, queryType: queryType);
   }
 
   /// Returns the product for the given barcode.
@@ -436,14 +435,81 @@ class OpenFoodAPIClient {
 
   /// Uses the auth.pl API to see if login was successful
   /// Returns a bool if the login data of the provided user is correct
-  static Future<bool> login(User user) async {
+  static Future<bool> login(User user,
+      {QueryType queryType = QueryType.PROD}) async {
     var loginUri = Uri(
       scheme: URI_SCHEME,
-      host: URI_PROD_HOST,
+      host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
       path: '/cgi/auth.pl',
     );
     Response response =
         await HttpHelper().doPostRequest(loginUri, user.toData(), user);
     return response.statusCode == 200;
+  }
+
+  /// Creates a new user
+  /// Returns [Status.status] 201 = complete; 400 = wrong inputs + [Status.error]; 500 = server error;
+  ///
+  /// When creating a [producer account](https://world.pro.openfoodfacts.org/) use [requested_org] to name the Producer or brand
+  static Future<Status> register({
+    required User user,
+    required String name,
+    required String email,
+    String? requested_org,
+    bool newsletter = true,
+    QueryType queryType = QueryType.PROD,
+  }) async {
+    var registerUri = Uri(
+      scheme: URI_SCHEME,
+      host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
+      path: '/cgi/user.pl',
+    );
+
+    Map<String, String> data = <String, String>{
+      'name': name,
+      'email': email,
+      'userid': user.userId,
+      'password': user.password,
+      'confirm_password': user.password,
+      if (requested_org != null) 'pro': 'on',
+      'pro_checkbox': '1',
+      'requested_org': requested_org ?? ' ',
+      if (newsletter) 'newsletter': 'on',
+      'action': 'process',
+      'type': 'add',
+      '.submit': 'Register',
+    };
+
+    Status status = await HttpHelper().doMultipartRequest(
+      registerUri,
+      data,
+      queryType: queryType,
+    );
+
+    //Since this is not a official endpoint the response code is always 200
+    //Here we check the response body for certain keyword to find out if the registration was complete
+    if (status.body == null) {
+      return Status(
+        status: 500,
+        error:
+            'No response, open an issue here: https://github.com/openfoodfacts/openfoodfacts-dart/issues/new',
+      );
+    } else if (status.body!.contains('loggedin')) {
+      return Status(status: 201);
+    } else if (status.body!
+        .contains('This username already exists, please choose another.')) {
+      return Status(
+        status: 400,
+        error: 'This username already exists, please choose another.',
+      );
+    } else if (status.body!.contains('The e-mail address is already used.')) {
+      return Status(
+        status: 400,
+        error:
+            'The e-mail address is already used by another user. Maybe you already have an account? You can reset the password of your other account.',
+      );
+    } else {
+      return Status(status: 400, error: 'Unrecognized request error');
+    }
   }
 }
