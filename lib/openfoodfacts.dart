@@ -494,8 +494,7 @@ class OpenFoodAPIClient {
         error:
             'No response, open an issue here: https://github.com/openfoodfacts/openfoodfacts-dart/issues/new',
       );
-    }
-    if (status.body!.contains('loggedin')) {
+    } else if (status.body!.contains('loggedin')) {
       return Status(status: 201);
     } else if (status.body!
         .contains('This username already exists, please choose another.')) {
