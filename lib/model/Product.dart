@@ -67,10 +67,8 @@ class Product extends JsonObject {
   String? quantity;
 
   // Images
-
-  /// imgSmallUrl is deprecated, use imageFrontSmallUrl instead
   @JsonKey(name: 'image_small_url', includeIfNull: false)
-  @deprecated
+  @Deprecated('imgSmallUrl is deprecated, use imageFrontSmallUrl instead')
   String? imgSmallUrl;
 
   @JsonKey(name: 'image_front_url', includeIfNull: false)

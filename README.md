@@ -45,6 +45,7 @@ You can check the terms of use here : [Terms of use](https://world.openfoodfacts
 ### PERSONALIZATION
 - [x] Recommended Daily Intakes
 - [x] Translated, high-level and customizable product information (Attributes)
+- [x] Autocompleting for the user inputs, by giving suggestions for (Labels, categories, ingredients, additives, traces ...)
 
 ### SEARCH
 - [x] search products by tags
