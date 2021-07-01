@@ -30,6 +30,8 @@ You can check the terms of use here : [Terms of use](https://world.openfoodfacts
 
 ### GENERAL
 - [x] Multilingual (180 languages are supported)
+- [x] Create users
+- [x] Check if users exist   
 
 ### READ
 - [x] Product: you can retrieve information about products
