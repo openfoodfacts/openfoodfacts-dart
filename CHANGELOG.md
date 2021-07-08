@@ -1,3 +1,11 @@
+## [1.2.0] - 08.07.2021
+- `product_name_de`, `productNameEN`, ... are now deprecated. Use `productNameTranslated` instead
+- Added the `agribalyse` field in `EcoscoreData`
+- Added support for the `missing_data_warning` field, to inform users that the ecoscore may be improved
+- Added support for user management
+- Added [dart-doc documentation](https://openfoodfacts.github.io/openfoodfacts-dart/)
+- Added suggestion for states, languages, labels, categories and more.
+
 ## [1.1.0-beta] - 30.03.2021
 - Renamed SendImage imageUrl parameter to imageUri as it is an Uri (breaking change)
 - New product preferences and matching classes for personalized search (thanks to monsieurtanuki)
