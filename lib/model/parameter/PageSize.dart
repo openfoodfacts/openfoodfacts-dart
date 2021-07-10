@@ -1,17 +1,14 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 
+/// "Page size" search API parameter
 class PageSize extends Parameter {
   @override
-  String getName() {
-    return 'page_size';
-  }
+  String getName() => 'page_size';
 
   @override
-  String getValue() {
-    return size.toString();
-  }
+  String getValue() => size.toString();
 
-  final int? size;
+  final int size;
 
-  const PageSize({this.size});
+  const PageSize({required this.size});
 }

@@ -1,17 +1,14 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 
+/// Term list search API parameter
 class SearchTerms extends Parameter {
   @override
-  String getName() {
-    return 'search_terms';
-  }
+  String getName() => 'search_terms';
 
   @override
-  String getValue() {
-    return terms!.join('+');
-  }
+  String getValue() => terms.join('+');
 
-  final List<String>? terms;
+  final List<String> terms;
 
-  const SearchTerms({this.terms});
+  const SearchTerms({required this.terms});
 }
