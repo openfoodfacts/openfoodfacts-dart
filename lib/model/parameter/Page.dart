@@ -1,17 +1,14 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 
+/// "Page number" search API parameter
 class Page extends Parameter {
   @override
-  String getName() {
-    return 'page';
-  }
+  String getName() => 'page';
 
   @override
-  String getValue() {
-    return page.toString();
-  }
+  String getValue() => page.toString();
 
-  final int? page;
+  final int page;
 
-  const Page({this.page});
+  const Page({required this.page});
 }

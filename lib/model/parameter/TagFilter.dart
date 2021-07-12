@@ -1,31 +1,33 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 
+/// Tag filter ("LIST contains/without ITEM") search API parameter
+///
+/// Eg. 'nutrition_grades' contains 'A'
 class TagFilter extends Parameter {
+  // actually not used
   @override
-  String getName() {
-    return '';
-  }
+  String getName() => '';
 
-  String? getTagType() {
-    return tagType;
-  }
+  /// Tag type (e.g. 'nutrition_grades')
+  String getTagType() => tagType;
 
-  String getContains() {
-    return contains! ? 'contains' : 'without';
-  }
+  /// "Contains - Yes/No?" parameter string
+  String getContains() => contains ? 'contains' : 'without';
 
-  String? getTagName() {
-    return tagName;
-  }
+  /// Tag value (e.g. 'A')
+  String getTagName() => tagName;
 
+  // actually not used
   @override
-  String getValue() {
-    return '';
-  }
+  String getValue() => '';
 
-  final String? tagType;
-  final bool? contains;
-  final String? tagName;
+  final String tagType;
+  final bool contains;
+  final String tagName;
 
-  const TagFilter({this.tagType, this.contains, this.tagName});
+  const TagFilter({
+    required this.tagType,
+    required this.contains,
+    required this.tagName,
+  });
 }

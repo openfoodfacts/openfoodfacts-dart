@@ -3,6 +3,7 @@ import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 
+/// Product Search Query Configuration, that helps building search API URI
 class ProductSearchQueryConfiguration {
   OpenFoodFactsLanguage? language;
   // Allow apps to directly provide the language code and country code without
@@ -10,10 +11,15 @@ class ProductSearchQueryConfiguration {
   String? lc;
   String? cc;
   List<ProductField>? fields;
-  List<Parameter>? parametersList;
+  List<Parameter> parametersList;
 
-  ProductSearchQueryConfiguration(
-      {this.language, this.lc, this.cc, this.fields, this.parametersList});
+  ProductSearchQueryConfiguration({
+    this.language,
+    this.lc,
+    this.cc,
+    this.fields,
+    required this.parametersList,
+  });
 
   List<String> getFieldsKeys() {
     List<String> result = [];
@@ -25,10 +31,11 @@ class ProductSearchQueryConfiguration {
     return result;
   }
 
-  Map<String, String?> getParametersMap() {
-    var result = <String, String?>{};
+  /// Returns the corresponding search API URI parameter map
+  Map<String, String> getParametersMap() {
+    var result = <String, String>{};
     int filterTagCount = 0;
-    for (Parameter p in parametersList!) {
+    for (Parameter p in parametersList) {
       if (p is TagFilter) {
         TagFilter tf = p;
         result.putIfAbsent('tagtype_$filterTagCount', () => tf.getTagType());
@@ -43,13 +50,13 @@ class ProductSearchQueryConfiguration {
     result.putIfAbsent('search_terms', () => '');
 
     if (language != null) {
-      result.putIfAbsent('lc', () => language.code);
+      result.putIfAbsent('lc', () => language!.code);
     } else if (lc != null) {
-      result.putIfAbsent('lc', () => lc);
+      result.putIfAbsent('lc', () => lc!);
     }
 
     if (cc != null) {
-      result.putIfAbsent('cc', () => cc);
+      result.putIfAbsent('cc', () => cc!);
     }
 
     if (fields != null) {

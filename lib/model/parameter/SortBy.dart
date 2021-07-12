@@ -1,10 +1,9 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 
+/// Sort search API parameter
 class SortBy extends Parameter {
   @override
-  String getName() {
-    return 'sort_by';
-  }
+  String getName() => 'sort_by';
 
   @override
   String getValue() {
@@ -29,6 +28,7 @@ class SortBy extends Parameter {
   const SortBy({this.option});
 }
 
+/// Possible sort options for search API
 enum SortOption {
   POPULARITY,
   PRODUCT_NAME,
