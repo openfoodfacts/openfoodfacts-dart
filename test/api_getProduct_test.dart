@@ -23,6 +23,9 @@ import 'package:openfoodfacts/personalized_search/product_preferences_manager.da
 import 'package:openfoodfacts/personalized_search/product_preferences_selection.dart';
 
 void main() {
+  const _BARCODE_UNKNOWN = '11111111111111111111111111';
+  const _BARCODE_DANISH_BUTTER_COOKIES = '5701184005007';
+
   group('$OpenFoodAPIClient get products', () {
     test('get product Coca Cola Light', () async {
       String barcode = '1111111111111';
@@ -134,7 +137,7 @@ void main() {
 
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',
         () async {
-      String barcode = '5701184005007';
+      String barcode = _BARCODE_DANISH_BUTTER_COOKIES;
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -358,7 +361,7 @@ void main() {
     });
 
     test('product not available', () async {
-      String barcode = '11111111111111111111111111';
+      String barcode = _BARCODE_UNKNOWN;
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -692,7 +695,7 @@ void main() {
     test(
         'vegan, vegetarian and palm oil ingredients of Danish Butter Cookies & Chocolate Chip Cookies',
         () async {
-      String barcode = '5701184005007';
+      String barcode = _BARCODE_DANISH_BUTTER_COOKIES;
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -1008,6 +1011,23 @@ void main() {
 
       expect(result.product!.productName, equals('Quoted Coca "cola"'));
       expect(result.product!.brands, equals('Quoted Coca "Cola"'));
+    });
+
+    test('get ecoscore html description', () async {
+      final String language = OpenFoodFactsLanguage.FRENCH.code;
+      String? result;
+
+      result = await OpenFoodAPIClient.getEcoscoreHtmlDescription(
+        _BARCODE_DANISH_BUTTER_COOKIES,
+        language,
+      );
+      assert(result != null);
+
+      result = await OpenFoodAPIClient.getEcoscoreHtmlDescription(
+        _BARCODE_UNKNOWN,
+        language,
+      );
+      assert(result == null);
     });
   });
 }
