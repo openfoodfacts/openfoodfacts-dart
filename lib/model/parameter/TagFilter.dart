@@ -8,10 +8,13 @@ class TagFilter extends Parameter {
   @override
   String getName() => '';
 
+  /// Tag type (e.g. 'nutrition_grades')
   String getTagType() => tagType;
 
+  /// "Contains - Yes/No?" parameter string
   String getContains() => contains ? 'contains' : 'without';
 
+  /// Tag value (e.g. 'A')
   String getTagName() => tagName;
 
   // actually not used
@@ -27,12 +30,4 @@ class TagFilter extends Parameter {
     required this.contains,
     required this.tagName,
   });
-
-  @override
-  int addToMap(final Map<String, String> result, final int currentIndex) {
-    result['tagtype_$currentIndex'] = getTagType();
-    result['tag_contains_$currentIndex'] = getContains();
-    result['tag_$currentIndex'] = getTagName();
-    return currentIndex + 1;
-  }
 }

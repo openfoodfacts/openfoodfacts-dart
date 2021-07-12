@@ -1,4 +1,5 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
+import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 
@@ -33,12 +34,19 @@ class ProductSearchQueryConfiguration {
   /// Returns the corresponding search API URI parameter map
   Map<String, String> getParametersMap() {
     var result = <String, String>{};
-
     int filterTagCount = 0;
     for (Parameter p in parametersList) {
-      filterTagCount = p.addToMap(result, filterTagCount);
+      if (p is TagFilter) {
+        TagFilter tf = p;
+        result.putIfAbsent('tagtype_$filterTagCount', () => tf.getTagType());
+        result.putIfAbsent(
+            'tag_contains_$filterTagCount', () => tf.getContains());
+        result.putIfAbsent('tag_$filterTagCount', () => tf.getTagName());
+        filterTagCount++;
+      } else {
+        result.putIfAbsent(p.getName(), () => p.getValue());
+      }
     }
-
     result.putIfAbsent('search_terms', () => '');
 
     if (language != null) {
