@@ -1,6 +1,8 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 
+// TODO(monsieurtanuki): deprecated from 2021-07-13 (#92) because we can use [PnnsGroup2Filter] with [ProductSearchQueryConfiguration]; remove when old enough
+@deprecated
 class PnnsGroupQueryConfiguration {
   PnnsGroup2 group;
   OpenFoodFactsLanguage? language;
