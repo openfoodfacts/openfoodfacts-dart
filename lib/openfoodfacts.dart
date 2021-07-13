@@ -542,12 +542,12 @@ class OpenFoodAPIClient {
   /// Returns the Ecoscore description in HTML
   static Future<String?> getEcoscoreHtmlDescription(
     final String barcode,
-    final String language,
+    final OpenFoodFactsLanguage language,
   ) async {
     const String FIELD = 'environment_infocard';
     final Uri uri = Uri(
       scheme: URI_SCHEME,
-      host: 'world-$language.openfoodfacts.org',
+      host: 'world-${language.code}.openfoodfacts.org',
       path: '/api/v0/product/$barcode.json',
       queryParameters: <String, String>{'fields': FIELD},
     );

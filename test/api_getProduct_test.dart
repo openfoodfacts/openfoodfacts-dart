@@ -1014,7 +1014,7 @@ void main() {
     });
 
     test('get ecoscore html description', () async {
-      final String language = OpenFoodFactsLanguage.FRENCH.code;
+      final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
       String? result;
 
       result = await OpenFoodAPIClient.getEcoscoreHtmlDescription(
