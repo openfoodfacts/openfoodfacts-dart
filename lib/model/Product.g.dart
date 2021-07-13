@@ -10,7 +10,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
   return Product(
     barcode: json['code'] as String?,
     productName: json['product_name'] as String?,
-    productNameTranslated: json['product_name_translated'] as String?,
+    productNameTranslated: LanguageHelper.fromJsonStringMap(
+        json['product_name_translated'] as Map<String, String>?),
     productNameDE: json['product_name_de'] as String?,
     productNameEN: json['product_name_en'] as String?,
     productNameFR: json['product_name_fr'] as String?,
@@ -22,10 +23,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     countriesTags: (json['countries_tags'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList(),
-    countriesTagsTranslated:
-        (json['countries_tags_translated'] as List<dynamic>?)
-            ?.map((e) => e as String)
-            .toList(),
+    countriesTagsTranslated: LanguageHelper.fromJsonStringsListMap(
+        json['countries_tags_translated'] as Map<String, List<String>>?),
     lang: LanguageHelper.fromJson(json['lang'] as String?),
     quantity: json['quantity'] as String?,
     imgSmallUrl: json['image_small_url'] as String?,
@@ -48,14 +47,13 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
         ?.map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
         .toList(),
     ingredientsText: json['ingredients_text'] as String?,
-    ingredientsTextTranslated: json['ingredients_text_translated'] as String?,
+    ingredientsTextTranslated: LanguageHelper.fromJsonStringMap(
+        json['ingredients_text_translated'] as Map<String, String>?),
     ingredientsTags: (json['ingredients_tags'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList(),
-    ingredientsTagsTranslated:
-        (json['ingredients_tags_translated'] as List<dynamic>?)
-            ?.map((e) => e as String)
-            .toList(),
+    ingredientsTagsTranslated: LanguageHelper.fromJsonStringsListMap(
+        json['ingredients_tags_translated'] as Map<String, List<String>>?),
     ingredientsTextDE: json['ingredients_text_de'] as String?,
     ingredientsTextEN: json['ingredients_text_en'] as String?,
     ingredientsTextFR: json['ingredients_text_fr'] as String?,
@@ -76,17 +74,14 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     categoriesTags: (json['categories_tags'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList(),
-    categoriesTagsTranslated:
-        (json['categories_tags_translated'] as List<dynamic>?)
-            ?.map((e) => e as String)
-            .toList(),
+    categoriesTagsTranslated: LanguageHelper.fromJsonStringsListMap(
+        json['categories_tags_translated'] as Map<String, List<String>>?),
     labels: json['labels'] as String?,
     labelsTags: (json['labels_tags'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList(),
-    labelsTagsTranslated: (json['labels_tags_translated'] as List<dynamic>?)
-        ?.map((e) => e as String)
-        .toList(),
+    labelsTagsTranslated: LanguageHelper.fromJsonStringsListMap(
+        json['labels_tags_translated'] as Map<String, List<String>>?),
     packaging: json['packaging'] as String?,
     packagingTags: (json['packaging_tags'] as List<dynamic>?)
         ?.map((e) => e as String)
@@ -126,7 +121,8 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   }
 
   writeNotNull('product_name', instance.productName);
-  writeNotNull('product_name_translated', instance.productNameTranslated);
+  writeNotNull('product_name_translated',
+      LanguageHelper.toJsonStringMap(instance.productNameTranslated));
   writeNotNull('product_name_de', instance.productNameDE);
   writeNotNull('product_name_en', instance.productNameEN);
   writeNotNull('product_name_fr', instance.productNameFR);
@@ -134,7 +130,8 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('brands_tags', instance.brandsTags);
   writeNotNull('countries', instance.countries);
   writeNotNull('countries_tags', instance.countriesTags);
-  writeNotNull('countries_tags_translated', instance.countriesTagsTranslated);
+  writeNotNull('countries_tags_translated',
+      LanguageHelper.toJsonStringsListMap(instance.countriesTagsTranslated));
   writeNotNull('lang', LanguageHelper.toJson(instance.lang));
   writeNotNull('quantity', instance.quantity);
   writeNotNull('image_small_url', instance.imgSmallUrl);
@@ -156,11 +153,11 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull(
       'ingredients', JsonHelper.ingredientsToJson(instance.ingredients));
   writeNotNull('ingredients_text', instance.ingredientsText);
-  writeNotNull(
-      'ingredients_text_translated', instance.ingredientsTextTranslated);
+  writeNotNull('ingredients_text_translated',
+      LanguageHelper.toJsonStringMap(instance.ingredientsTextTranslated));
   writeNotNull('ingredients_tags', instance.ingredientsTags);
-  writeNotNull(
-      'ingredients_tags_translated', instance.ingredientsTagsTranslated);
+  writeNotNull('ingredients_tags_translated',
+      LanguageHelper.toJsonStringsListMap(instance.ingredientsTagsTranslated));
   writeNotNull('ingredients_text_de', instance.ingredientsTextDE);
   writeNotNull('ingredients_text_en', instance.ingredientsTextEN);
   writeNotNull('ingredients_text_fr', instance.ingredientsTextFR);
@@ -178,10 +175,12 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('nutrition_grade_fr', instance.nutriscore);
   writeNotNull('categories', instance.categories);
   writeNotNull('categories_tags', instance.categoriesTags);
-  writeNotNull('categories_tags_translated', instance.categoriesTagsTranslated);
+  writeNotNull('categories_tags_translated',
+      LanguageHelper.toJsonStringsListMap(instance.categoriesTagsTranslated));
   writeNotNull('labels', instance.labels);
   writeNotNull('labels_tags', instance.labelsTags);
-  writeNotNull('labels_tags_translated', instance.labelsTagsTranslated);
+  writeNotNull('labels_tags_translated',
+      LanguageHelper.toJsonStringsListMap(instance.labelsTagsTranslated));
   writeNotNull('packaging', instance.packaging);
   writeNotNull('packaging_tags', instance.packagingTags);
   writeNotNull('misc', instance.miscTags);

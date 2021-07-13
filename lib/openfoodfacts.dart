@@ -152,8 +152,6 @@ class OpenFoodAPIClient {
     if (result.product != null) {
       ProductHelper.removeImages(result.product!, configuration.language);
       ProductHelper.createImageUrls(result.product!, queryType: queryType);
-      final translatedLang = configuration.lc ?? configuration.language?.code;
-      result.product!.translatedLang = LanguageHelper.fromJson(translatedLang);
     }
 
     return result;

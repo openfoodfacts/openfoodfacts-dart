@@ -5,7 +5,7 @@ import 'package:openfoodfacts/utils/ProductFields.dart';
 
 /// Product Search Query Configuration, that helps building search API URI
 class ProductSearchQueryConfiguration {
-  OpenFoodFactsLanguage? language;
+  List<OpenFoodFactsLanguage> languages;
   // Allow apps to directly provide the language code and country code without
   // having to use the OpenFoodFactsLanguage helper.
   String? lc;
@@ -13,13 +13,32 @@ class ProductSearchQueryConfiguration {
   List<ProductField>? fields;
   List<Parameter> parametersList;
 
-  ProductSearchQueryConfiguration({
-    this.language,
-    this.lc,
-    this.cc,
-    this.fields,
-    required this.parametersList,
-  });
+  @deprecated
+  OpenFoodFactsLanguage? get language =>
+      languages.isNotEmpty ? languages.first : null;
+  @deprecated
+  set language(OpenFoodFactsLanguage? value) {
+    languages.clear();
+    if (value != null) {
+      languages.add(value);
+    }
+  }
+
+  ProductSearchQueryConfiguration(
+      {this.languages = const [],
+      @deprecated OpenFoodFactsLanguage? language,
+      this.lc,
+      this.cc,
+      this.fields,
+      required this.parametersList}) {
+    if (languages.isNotEmpty && language != null) {
+      throw ArgumentError(
+          'Please provide either language or languages, not both');
+    }
+    if (language != null) {
+      languages = [language];
+    }
+  }
 
   List<String> getFieldsKeys() {
     List<String> result = [];
@@ -68,7 +87,7 @@ class ProductSearchQueryConfiguration {
         }
       }
       if (!ignoreFieldsFilter) {
-        final fieldsStrings = convertFieldsToStrings(fields!, language);
+        final fieldsStrings = convertFieldsToStrings(fields!, languages);
         result.putIfAbsent('fields', () => fieldsStrings.join(','));
       }
     }

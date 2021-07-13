@@ -56,7 +56,7 @@ void main() {
 
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode_1,
-          language: OpenFoodFactsLanguage.ENGLISH,
+          languages: [OpenFoodFactsLanguage.ENGLISH],
           fields: [ProductField.ALL]);
       ProductResult result = await OpenFoodAPIClient.getProduct(
         configurations,
@@ -117,28 +117,28 @@ void main() {
       expect(germanStatus.statusVerbose, 'fields saved');
 
       // get french product
-      ProductQueryConfiguration frenchConfig = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.FRENCH,
-          fields: [
-            ProductField.NAME,
-            ProductField.BRANDS,
-            ProductField.QUANTITY
-          ]);
+      ProductQueryConfiguration frenchConfig =
+          ProductQueryConfiguration(barcode, languages: [
+        OpenFoodFactsLanguage.FRENCH
+      ], fields: [
+        ProductField.NAME,
+        ProductField.BRANDS,
+        ProductField.QUANTITY
+      ]);
       var frenchResult = await OpenFoodAPIClient.getProduct(frenchConfig,
           queryType: QueryType.TEST);
       assert(frenchResult.product != null);
       assert(frenchResult.product!.productName != null);
 
       // get german product
-      ProductQueryConfiguration germanConfig = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.GERMAN,
-          fields: [
-            ProductField.NAME,
-            ProductField.BRANDS,
-            ProductField.QUANTITY
-          ]);
+      ProductQueryConfiguration germanConfig =
+          ProductQueryConfiguration(barcode, languages: [
+        OpenFoodFactsLanguage.GERMAN
+      ], fields: [
+        ProductField.NAME,
+        ProductField.BRANDS,
+        ProductField.QUANTITY
+      ]);
       var germanResult = await OpenFoodAPIClient.getProduct(germanConfig,
           queryType: QueryType.TEST);
 
