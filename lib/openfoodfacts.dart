@@ -190,7 +190,8 @@ class OpenFoodAPIClient {
     return result;
   }
 
-  /// By default the query will hit the PROD DB
+// TODO(monsieurtanuki): deprecated from 2021-07-13 (#92) because we can use [PnnsGroup2Filter] with [ProductSearchQueryConfiguration]; remove when old enough
+  @deprecated
   static Future<SearchResult> queryPnnsGroup(
       User user, PnnsGroupQueryConfiguration configuration,
       {QueryType queryType = QueryType.PROD}) async {
