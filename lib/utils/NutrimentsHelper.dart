@@ -1,10 +1,13 @@
 import 'package:openfoodfacts/model/Nutriments.dart';
 
+/// Energy units
 enum NormalizedEnergyUnit { kCal, kJ, undefined }
 
+// TODO: rename as NormalizedEnergyHelper or fix typo as NutrientHelper
+/// Helper class for energy computations and checks
 class NutrimentsHelper {
-  /// normalize the energy unit as it is pretty fragmented.
-  /// Removed as now energy is always in kJ
+  // Normalizes the energy unit as it is pretty fragmented.
+  // Removed as now energy is always in kJ
   /*static NormalizedEnergyUnit normalizeEnergyUnit(String unit) {
     var unitLowerCase = unit != null ? unit.toLowerCase() : null;
     switch (unitLowerCase) {
@@ -20,13 +23,13 @@ class NutrimentsHelper {
     }
   }*/
 
-  /// get the energy value converted in kCal.
+  /// Gets the energy value (stored in kJ) converted in kCal.
   static double getEnergyAsKCal(Nutriments nutriments) {
     return (nutriments.energy! * 0.2388);
   }
 
-  /// get the energy value converted in kJ if necessary.
-  /// Removed as now energy is always in kJ
+  // Gets the energy value converted in kJ if necessary.
+  // Removed as now energy is always in kJ
   /*static double getEnergyAsKJ(Nutriments nutriments) {
     switch (normalizeEnergyUnit(nutriments.energyUnit)) {
       case NormalizedEnergyUnit.kCal:
@@ -44,7 +47,7 @@ class NutrimentsHelper {
     }
   }*/
 
-  /// calculates the energy for 100g in kJ.
+  /// Calculates the energy for 100g in kJ.
   /// ! should be used cautiously (might not be displayed to the end user) !
   /// source : https://en.wikipedia.org/wiki/Food_energy
   static double? calculateEnergy(Nutriments nutriments) {
@@ -60,9 +63,9 @@ class NutrimentsHelper {
     return (fat * 37 + carbs * 17 + proteins * 17 + fiber * 8);
   }
 
-  /// check if the stated energy value is within a margin of error
+  /// Checks if the stated energy value is within a margin of error
   /// a use case for this is before saving a product, check if the values aren't
-  /// uncoherent.
+  /// incoherent.
   static bool checkEnergyCoherence(
       Nutriments nutriments, double marginPercentage) {
     double statedEnergy = nutriments.energy!;

@@ -4,7 +4,9 @@ import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/model/Ingredient.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 
+/// Helper class around product field conversion to/from JSON
 class JsonHelper {
+  /// Returns [ProductImage]s from a product JSON map for "Selected images"
   static List<ProductImage>? selectedImagesFromJson(Map? json) {
     if (json == null) return null;
 
@@ -36,6 +38,7 @@ class JsonHelper {
     return imageList;
   }
 
+  /// Returns a JSON map from [ProductImage]s for "Selected images"
   static Map<String, dynamic> selectedImagesToJson(List<ProductImage>? images) {
     Map<String, dynamic> result = {};
 
@@ -60,6 +63,7 @@ class JsonHelper {
     return result;
   }
 
+  /// Returns [ProductImage]s from a JSON map for "Images"
   static List<ProductImage>? imagesFromJson(Map? json) {
     if (json == null) return null;
 
@@ -97,11 +101,12 @@ class JsonHelper {
     return imageList;
   }
 
+  // TODO(monsieurtanuki): not implemented and needed, yet.
   static Map<String, dynamic> imagesToJson(List<ProductImage>? images) {
-    // not implemented and needed, yet.
     return {};
   }
 
+  /// Returns a double from a JSON-encoded int or double
   static double? servingQuantityFromJson(dynamic data) {
     if (data == null || data is double) {
       return data;
@@ -116,6 +121,7 @@ class JsonHelper {
     }
   }
 
+  /// Returns a JSON map from [Ingredient]s
   static List<Map<String, dynamic>>? ingredientsToJson(
       List<Ingredient>? ingredients) {
     if (ingredients == null || ingredients.isEmpty) {
@@ -131,6 +137,7 @@ class JsonHelper {
     return result;
   }
 
+  /// Returns a JSON map from [AttributeGroup]s
   static List<Map<String, dynamic>>? attributeGroupsToJson(
       List<AttributeGroup>? list) {
     if (list == null || list.isEmpty) {
@@ -146,6 +153,7 @@ class JsonHelper {
     return result;
   }
 
+  /// Returns a [DateTime] from a JSON-encoded int (UTC seconds since epoch)
   static DateTime? timestampToDate(dynamic json) {
     if (json == null) {
       return null;
@@ -156,6 +164,7 @@ class JsonHelper {
         isUtc: true);
   }
 
+  /// Returns UTC seconds since epoch from a [DateTime]
   static int? dateToTimestamp(DateTime? dateTime) {
     if (dateTime == null) {
       return null;

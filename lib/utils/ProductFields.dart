@@ -1,5 +1,6 @@
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 
+/// Fields of a [Product]
 enum ProductField {
   BARCODE,
   NAME,
@@ -55,6 +56,7 @@ enum ProductField {
 }
 
 extension ProductFieldExtension on ProductField {
+  /// Returns the key of the product field
   String get key {
     switch (this) {
       case ProductField.BARCODE:

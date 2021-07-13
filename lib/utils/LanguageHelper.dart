@@ -1,3 +1,4 @@
+/// Available languages
 enum OpenFoodFactsLanguage {
   ENGLISH,
   OLD_CHURCH_SLAVONIC,
@@ -188,6 +189,11 @@ enum OpenFoodFactsLanguage {
 }
 
 extension OpenFoodFactsLanguageExtension on OpenFoodFactsLanguage? {
+  /// Returns the corresponding ISO-639-1 code
+  ///
+  /// Won't return 2 characters for special cases like
+  /// * [OpenFoodFactsLanguage.WORLD]
+  /// * [OpenFoodFactsLanguage.UNDEFINED]
   String get code {
     switch (this) {
       case OpenFoodFactsLanguage.ENGLISH:
@@ -568,11 +574,14 @@ extension OpenFoodFactsLanguageExtension on OpenFoodFactsLanguage? {
   }
 }
 
+/// Helper class around [OpenFoodFactsLanguage]
 class LanguageHelper {
+  /// Converts an [OpenFoodFactsLanguage] into an ISO-639-1 code
   static String toJson(OpenFoodFactsLanguage? language) {
     return language.code;
   }
 
+  /// Converts an ISO-639-1 code into an [OpenFoodFactsLanguage]
   static OpenFoodFactsLanguage fromJson(String? code) {
     for (OpenFoodFactsLanguage language in OpenFoodFactsLanguage.values) {
       if (code == language.code) {
