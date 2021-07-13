@@ -1,6 +1,7 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 
-// TODO(teolemon): find what this parameter is all about
+// TODO(monsieurtanuki): deprecated from 2021-07-13 (#107) because useless; remove when old enough
+@deprecated
 class SearchSimple extends Parameter {
   @override
   String getName() => 'search_type';

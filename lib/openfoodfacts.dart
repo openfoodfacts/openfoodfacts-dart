@@ -21,7 +21,6 @@ import 'model/SpellingCorrections.dart';
 import 'model/Status.dart';
 import 'model/User.dart';
 
-import 'model/parameter/OutputFormat.dart';
 import 'utils/HttpHelper.dart';
 import 'utils/LanguageHelper.dart';
 import 'utils/ProductHelper.dart';
@@ -171,9 +170,7 @@ class OpenFoodAPIClient {
   static Future<SearchResult> searchProducts(
       User? user, ProductSearchQueryConfiguration configuration,
       {QueryType queryType = QueryType.PROD}) async {
-    const outputFormat = OutputFormat(format: Format.JSON);
     var queryParameters = configuration.getParametersMap();
-    queryParameters[outputFormat.getName()] = outputFormat.getValue();
 
     var searchUri = Uri(
         scheme: URI_SCHEME,
@@ -197,9 +194,7 @@ class OpenFoodAPIClient {
   static Future<SearchResult> queryPnnsGroup(
       User user, PnnsGroupQueryConfiguration configuration,
       {QueryType queryType = QueryType.PROD}) async {
-    const outputFormat = OutputFormat(format: Format.JSON);
     var queryParameters = configuration.getParametersMap();
-    queryParameters[outputFormat.getName()] = outputFormat.getValue();
 
     var searchUri = Uri(
         scheme: URI_SCHEME,

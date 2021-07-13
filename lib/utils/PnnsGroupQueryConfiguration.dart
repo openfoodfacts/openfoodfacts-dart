@@ -41,6 +41,9 @@ class PnnsGroupQueryConfiguration {
       }
     }
 
+    // explicit json output
+    result.putIfAbsent('json', () => '1');
+
     return result;
   }
 }
