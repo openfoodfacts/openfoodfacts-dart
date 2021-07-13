@@ -1,6 +1,9 @@
+/// Unit of measurement for nutrients
 enum Unit { KCAL, KJ, G, MILLI_G, MICRO_G, MILLI_L, L, PERCENT, UNKNOWN }
 
+/// Helper class for conversions to/from [Unit]
 class UnitHelper {
+  /// Returns the [Unit] described by [s]
   static Unit? stringToUnit(String? s) {
     if (s == null || s.isEmpty) {
       return null;

@@ -12,16 +12,20 @@ class PnnsGroupQueryConfiguration {
   PnnsGroupQueryConfiguration(this.group,
       {this.language, this.fields, this.page = 1});
 
+  /// Returns the [fields] as [String]s
   List<String> getFieldsKeys() {
     List<String> result = [];
 
-    for (ProductField field in fields!) {
-      result.add(field.key);
+    if (fields != null) {
+      for (ProductField field in fields!) {
+        result.add(field.key);
+      }
     }
 
     return result;
   }
 
+  /// Returns the whole configuration as an API parameter map
   Map<String, String> getParametersMap() {
     Map<String, String> result = {};
 
