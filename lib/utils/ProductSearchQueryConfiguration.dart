@@ -73,6 +73,9 @@ class ProductSearchQueryConfiguration {
       }
     }
 
+    // explicit json output
+    result.putIfAbsent('json', () => '1');
+
     return result;
   }
 }

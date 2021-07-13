@@ -1,21 +1,10 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 
-/// "Output format" search API parameter
+// TODO(monsieurtanuki): deprecated from 2021-07-13 (#107) because in fact always JSON; remove when old enough
+@deprecated
 class OutputFormat extends Parameter {
   @override
-  String getName() {
-    switch (format) {
-      case Format.XML:
-        return 'xml';
-
-      case Format.JQM:
-        return 'jqm';
-
-      case Format.JSON:
-      default:
-        return 'json';
-    }
-  }
+  String getName() => 'json';
 
   @override
   String getValue() => '1';
@@ -25,7 +14,8 @@ class OutputFormat extends Parameter {
   const OutputFormat({this.format});
 }
 
-/// Possible output formats for search API
+// TODO(monsieurtanuki): deprecated from 2021-07-13 (#107) because in fact always JSON; remove when old enough
+@deprecated
 enum Format {
   JSON,
   XML,

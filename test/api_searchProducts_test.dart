@@ -16,10 +16,8 @@ void main() {
   group('$OpenFoodAPIClient search products', () {
     test('search favorite products', () async {
       var parameters = <Parameter>[
-        const OutputFormat(format: Format.JSON),
         const Page(page: 1),
         const PageSize(size: 10),
-        const SearchSimple(active: true),
         const SortBy(option: SortOption.POPULARITY)
       ];
 
@@ -43,10 +41,8 @@ void main() {
 
     test('search favorite products EN', () async {
       var parameters = <Parameter>[
-        const OutputFormat(format: Format.JSON),
         const Page(page: 14),
         const PageSize(size: 3),
-        const SearchSimple(active: true),
         const SortBy(option: SortOption.EDIT)
       ];
 
@@ -70,10 +66,8 @@ void main() {
 
     test('type bug : ingredient percent int vs String ', () async {
       var parameters = <Parameter>[
-        const OutputFormat(format: Format.JSON),
         const Page(page: 16),
         const PageSize(size: 5),
-        const SearchSimple(active: true),
         const SortBy(option: SortOption.POPULARITY)
       ];
 
@@ -128,10 +122,8 @@ void main() {
 
     test('search products filter additives', () async {
       var parameters = <Parameter>[
-        const OutputFormat(format: Format.JSON),
         const Page(page: 5),
         const PageSize(size: 10),
-        const SearchSimple(active: true),
         const SortBy(option: SortOption.PRODUCT_NAME),
         const SearchTerms(terms: ['Fruit à coques']),
         const ContainsAdditives(filter: false)
@@ -150,10 +142,8 @@ void main() {
       int totalCount = result.count!;
 
       parameters = <Parameter>[
-        const OutputFormat(format: Format.JSON),
         const Page(page: 5),
         const PageSize(size: 10),
-        const SearchSimple(active: true),
         const SortBy(option: SortOption.PRODUCT_NAME),
         const SearchTerms(terms: ['Fruit à coques']),
         const ContainsAdditives(filter: true)
@@ -173,10 +163,8 @@ void main() {
 
     test('search products with filter on tags', () async {
       var parameters = <Parameter>[
-        const OutputFormat(format: Format.JSON),
         const Page(page: 5),
         const PageSize(size: 10),
-        const SearchSimple(active: true),
         const SortBy(option: SortOption.PRODUCT_NAME),
         const TagFilter(
             tagType: 'categories',
@@ -219,7 +207,6 @@ void main() {
           queryType: QueryType.TEST);
 
       var parameters = <Parameter>[
-        const OutputFormat(format: Format.JSON),
         const Page(page: 1),
         const SearchTerms(terms: ['Quoted Coca "Cola"']),
       ];
