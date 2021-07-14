@@ -30,14 +30,12 @@ enum ImageSize {
 }
 
 extension ImageSizeExtension on ImageSize? {
-  static const String _UNKNOWN_TAG = 'unknown';
-
   static const Map<ImageSize, String> _VALUES = {
     ImageSize.THUMB: 'thumb',
     ImageSize.SMALL: 'small',
     ImageSize.DISPLAY: 'display',
     ImageSize.ORIGINAL: 'original',
-    ImageSize.UNKNOWN: _UNKNOWN_TAG,
+    ImageSize.UNKNOWN: 'unknown',
   };
 
   static const Map<ImageSize, String> _NUMBERS = {
@@ -45,12 +43,12 @@ extension ImageSizeExtension on ImageSize? {
     ImageSize.SMALL: '200',
     ImageSize.DISPLAY: '400',
     ImageSize.ORIGINAL: 'full',
-    ImageSize.UNKNOWN: _UNKNOWN_TAG,
+    ImageSize.UNKNOWN: 'unknown',
   };
 
-  String get value => _VALUES[this] ?? _UNKNOWN_TAG;
+  String get value => _VALUES[this] ?? 'unknown';
 
-  String toNumber() => _NUMBERS[this] ?? _UNKNOWN_TAG;
+  String toNumber() => _NUMBERS[this] ?? 'unknown';
 
   static ImageSize getType(String s) => ImageSize.values.firstWhere(
         (final ImageSize key) => _VALUES[key] == s.toLowerCase(),
