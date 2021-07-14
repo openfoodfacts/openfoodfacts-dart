@@ -6,18 +6,12 @@ part 'Insight.g.dart';
 enum InsightAnnotation { YES, NO, MAYBE }
 
 extension InsightAnnotationExtension on InsightAnnotation {
-  int get value {
-    switch (this) {
-      case InsightAnnotation.YES:
-        return 1;
-      case InsightAnnotation.NO:
-        return 0;
-      case InsightAnnotation.MAYBE:
-        return -1;
-      default:
-        return -1;
-    }
-  }
+  static const Map<InsightAnnotation, int> _VALUES = {
+    InsightAnnotation.YES: 1,
+    InsightAnnotation.NO: 0,
+    InsightAnnotation.MAYBE: -1,
+  };
+  int get value => _VALUES[this] ?? -1;
 }
 
 enum InsightType {
@@ -34,57 +28,25 @@ enum InsightType {
 }
 
 extension InsightTypesExtension on InsightType? {
-  String? get value {
-    switch (this) {
-      case InsightType.INGREDIENT_SPELLCHECK:
-        return 'ingredient_spellcheck';
-      case InsightType.PACKAGER_CODE:
-        return 'packager_code';
-      case InsightType.LABEL:
-        return 'label';
-      case InsightType.CATEGORY:
-        return 'category';
-      case InsightType.PRODUCT_WEIGHT:
-        return 'product_weight';
-      case InsightType.EXPIRATION_DATE:
-        return 'expiration_date';
-      case InsightType.BRAND:
-        return 'brand';
-      case InsightType.STORE:
-        return 'store';
-      case InsightType.NUTRIENT:
-        return 'nutrient';
-      case InsightType.UNDEFINED:
-        return 'undefined';
-      default:
-        return null;
-    }
-  }
+  static const Map<InsightType, String> _VALUES = {
+    InsightType.INGREDIENT_SPELLCHECK: 'ingredient_spellcheck',
+    InsightType.PACKAGER_CODE: 'packager_code',
+    InsightType.LABEL: 'label',
+    InsightType.CATEGORY: 'category',
+    InsightType.PRODUCT_WEIGHT: 'product_weight',
+    InsightType.EXPIRATION_DATE: 'expiration_date',
+    InsightType.BRAND: 'brand',
+    InsightType.STORE: 'store',
+    InsightType.NUTRIENT: 'nutrient',
+    InsightType.UNDEFINED: 'undefined',
+  };
 
-  static InsightType getType(String? s) {
-    switch (s) {
-      case 'ingredient_spellcheck':
-        return InsightType.INGREDIENT_SPELLCHECK;
-      case 'packager_code':
-        return InsightType.PACKAGER_CODE;
-      case 'label':
-        return InsightType.LABEL;
-      case 'category':
-        return InsightType.CATEGORY;
-      case 'product_weight':
-        return InsightType.PRODUCT_WEIGHT;
-      case 'expiration_date':
-        return InsightType.EXPIRATION_DATE;
-      case 'brand':
-        return InsightType.BRAND;
-      case 'store':
-        return InsightType.STORE;
-      case 'nutrient':
-        return InsightType.NUTRIENT;
-      default:
-        return InsightType.UNDEFINED;
-    }
-  }
+  String? get value => _VALUES[this];
+
+  static InsightType getType(String? s) => InsightType.values.firstWhere(
+        (final InsightType key) => _VALUES[key] == s,
+        orElse: () => InsightType.UNDEFINED,
+      );
 }
 
 @JsonSerializable()

@@ -63,264 +63,171 @@ enum PnnsGroup2 {
 }
 
 extension PnnsGroup1Extension on PnnsGroup1 {
+  static const Map<PnnsGroup1, String> _NAMES = {
+    PnnsGroup1.BEVERAGES: 'Beverages',
+    PnnsGroup1.CEREALS_AND_POTATOES: 'Cereals and potatoes',
+    PnnsGroup1.COMPOSITE_FOODS: 'Composite foods',
+    PnnsGroup1.FAT_AND_SAUCES: 'Fat and sauces',
+    PnnsGroup1.FISH_MEAT_AND_EGGS: 'Fish, meat and eggs',
+    PnnsGroup1.FRUITS_AND_VEGETABLES: 'Fruits and vegetables',
+    PnnsGroup1.MILK_AND_DAIRIES: 'Milk and dairies',
+    PnnsGroup1.SALTY_SNACKS: 'Salty snacks',
+    PnnsGroup1.SUGARY_SNACKS: 'Sugary snacks',
+  };
+
   /// Returns the name of the group, in English
-  String get name {
-    switch (this) {
-      case PnnsGroup1.BEVERAGES:
-        return 'Beverages';
-      case PnnsGroup1.CEREALS_AND_POTATOES:
-        return 'Cereals and potatoes';
-      case PnnsGroup1.COMPOSITE_FOODS:
-        return 'Composite foods';
-      case PnnsGroup1.FAT_AND_SAUCES:
-        return 'Fat and sauces';
-      case PnnsGroup1.FISH_MEAT_AND_EGGS:
-        return 'Fish, meat and eggs';
-      case PnnsGroup1.FRUITS_AND_VEGETABLES:
-        return 'Fruits and vegetables';
-      case PnnsGroup1.MILK_AND_DAIRIES:
-        return 'Milk and dairies';
-      case PnnsGroup1.SALTY_SNACKS:
-        return 'Salty snacks';
-      case PnnsGroup1.SUGARY_SNACKS:
-        return 'Sugary snacks';
-      default:
-        return 'PNNS group 1';
-    }
-  }
+  String get name => _NAMES[this] ?? 'PNNS group 1';
+
+  static const Map<PnnsGroup1, List<PnnsGroup2>> _SUBGROUPS = {
+    PnnsGroup1.BEVERAGES: <PnnsGroup2>[
+      PnnsGroup2.FRUIT_JUICES,
+      PnnsGroup2.SWEETENED_BEVERAGES,
+      PnnsGroup2.ALCOHOLIC_BEVERAGES,
+      PnnsGroup2.UNSWEETENED_BEVERAGES,
+      PnnsGroup2.ARTIFICIALLY_SWEETENED_BEVERAGES,
+      PnnsGroup2.WATERS_AND_FLAVORED_WATERS,
+      PnnsGroup2.FRUIT_NECTARS,
+      PnnsGroup2.TEAS_AND_HERBAL_TEAS_AND_COFFEES
+    ],
+    PnnsGroup1.CEREALS_AND_POTATOES: <PnnsGroup2>[
+      PnnsGroup2.BREAKFAST_CEREALS,
+      PnnsGroup2.PASTRIES,
+      PnnsGroup2.POTATOES,
+      PnnsGroup2.CEREALS,
+      PnnsGroup2.BREAD
+    ],
+    PnnsGroup1.COMPOSITE_FOODS: <PnnsGroup2>[
+      PnnsGroup2.PIZZA_PIES_AND_QUICHE,
+      PnnsGroup2.SANDWICHES,
+      PnnsGroup2.SOUPS,
+      PnnsGroup2.ONE_DISH_MEALS,
+    ],
+    PnnsGroup1.FAT_AND_SAUCES: <PnnsGroup2>[
+      PnnsGroup2.DRESSINGS_AND_SAUCES,
+      PnnsGroup2.FATS,
+    ],
+    PnnsGroup1.FISH_MEAT_AND_EGGS: <PnnsGroup2>[
+      PnnsGroup2.PROCESSED_MEAT,
+      PnnsGroup2.MEAT,
+      PnnsGroup2.FISH_AND_SEAFOOD,
+      PnnsGroup2.OFFALS
+    ],
+    PnnsGroup1.FRUITS_AND_VEGETABLES: <PnnsGroup2>[
+      PnnsGroup2.FRUITS,
+      PnnsGroup2.VEGETABLES,
+      PnnsGroup2.DRIED_FRUITS,
+      PnnsGroup2.NUTS,
+      PnnsGroup2.LEGUMES,
+    ],
+    PnnsGroup1.MILK_AND_DAIRIES: <PnnsGroup2>[
+      PnnsGroup2.MILK_AND_YOGURT,
+      PnnsGroup2.DAIRY_DESSERTS,
+      PnnsGroup2.CHEESE,
+      PnnsGroup2.PLANT_BASED_MILK_SUBSTITUTES,
+    ],
+    PnnsGroup1.SALTY_SNACKS: <PnnsGroup2>[
+      PnnsGroup2.APPETIZERS,
+      PnnsGroup2.SALTY_AND_FATTY_PRODUCTS,
+    ],
+    PnnsGroup1.SUGARY_SNACKS: <PnnsGroup2>[
+      PnnsGroup2.SWEETS,
+      PnnsGroup2.CHOCOLATE_PRODUCTS,
+      PnnsGroup2.ICE_CREAM
+    ],
+  };
 
   /// Returns the subgroups of the group
-  List<PnnsGroup2>? get subGroups {
-    switch (this) {
-      case PnnsGroup1.BEVERAGES:
-        return <PnnsGroup2>[
-          PnnsGroup2.FRUIT_JUICES,
-          PnnsGroup2.SWEETENED_BEVERAGES,
-          PnnsGroup2.ALCOHOLIC_BEVERAGES,
-          PnnsGroup2.UNSWEETENED_BEVERAGES,
-          PnnsGroup2.ARTIFICIALLY_SWEETENED_BEVERAGES,
-          PnnsGroup2.WATERS_AND_FLAVORED_WATERS,
-          PnnsGroup2.FRUIT_NECTARS,
-          PnnsGroup2.TEAS_AND_HERBAL_TEAS_AND_COFFEES
-        ];
-      case PnnsGroup1.CEREALS_AND_POTATOES:
-        return <PnnsGroup2>[
-          PnnsGroup2.BREAKFAST_CEREALS,
-          PnnsGroup2.PASTRIES,
-          PnnsGroup2.POTATOES,
-          PnnsGroup2.CEREALS,
-          PnnsGroup2.BREAD
-        ];
-      case PnnsGroup1.COMPOSITE_FOODS:
-        return <PnnsGroup2>[
-          PnnsGroup2.PIZZA_PIES_AND_QUICHE,
-          PnnsGroup2.SANDWICHES,
-          PnnsGroup2.SOUPS,
-          PnnsGroup2.ONE_DISH_MEALS,
-        ];
-      case PnnsGroup1.FAT_AND_SAUCES:
-        return <PnnsGroup2>[PnnsGroup2.DRESSINGS_AND_SAUCES, PnnsGroup2.FATS];
-      case PnnsGroup1.FISH_MEAT_AND_EGGS:
-        return <PnnsGroup2>[
-          PnnsGroup2.PROCESSED_MEAT,
-          PnnsGroup2.MEAT,
-          PnnsGroup2.FISH_AND_SEAFOOD,
-          PnnsGroup2.OFFALS
-        ];
-      case PnnsGroup1.FRUITS_AND_VEGETABLES:
-        return <PnnsGroup2>[
-          PnnsGroup2.FRUITS,
-          PnnsGroup2.VEGETABLES,
-          PnnsGroup2.DRIED_FRUITS,
-          PnnsGroup2.NUTS,
-          PnnsGroup2.LEGUMES,
-        ];
-      case PnnsGroup1.MILK_AND_DAIRIES:
-        return <PnnsGroup2>[
-          PnnsGroup2.MILK_AND_YOGURT,
-          PnnsGroup2.DAIRY_DESSERTS,
-          PnnsGroup2.CHEESE,
-          PnnsGroup2.PLANT_BASED_MILK_SUBSTITUTES,
-        ];
-      case PnnsGroup1.SALTY_SNACKS:
-        return <PnnsGroup2>[
-          PnnsGroup2.APPETIZERS,
-          PnnsGroup2.SALTY_AND_FATTY_PRODUCTS,
-        ];
-      case PnnsGroup1.SUGARY_SNACKS:
-        return <PnnsGroup2>[
-          PnnsGroup2.SWEETS,
-          PnnsGroup2.CHOCOLATE_PRODUCTS,
-          PnnsGroup2.ICE_CREAM
-        ];
-      default:
-        return null;
-    }
-  }
+  List<PnnsGroup2>? get subGroups => _SUBGROUPS[this];
 }
 
 extension PnnsGroup2Extension on PnnsGroup2 {
+  static const Map<PnnsGroup2, String> _NAMES = {
+    PnnsGroup2.FRUIT_JUICES: 'Fruit juices',
+    PnnsGroup2.SWEETENED_BEVERAGES: 'Sweetened beverages',
+    PnnsGroup2.ALCOHOLIC_BEVERAGES: 'Alcoholic beverages',
+    PnnsGroup2.UNSWEETENED_BEVERAGES: 'Unsweetened beverages',
+    PnnsGroup2.ARTIFICIALLY_SWEETENED_BEVERAGES:
+        'Artificially sweetened beverages',
+    PnnsGroup2.WATERS_AND_FLAVORED_WATERS: 'Waters and flavored waters',
+    PnnsGroup2.FRUIT_NECTARS: 'Fruits nectars',
+    PnnsGroup2.TEAS_AND_HERBAL_TEAS_AND_COFFEES:
+        'Teas and herbal teas and coffees',
+    PnnsGroup2.BREAKFAST_CEREALS: 'Breakfast cereals',
+    PnnsGroup2.PASTRIES: 'Pastries',
+    PnnsGroup2.POTATOES: 'Potatoes',
+    PnnsGroup2.CEREALS: 'Cereals',
+    PnnsGroup2.BREAD: 'Bread',
+    PnnsGroup2.PIZZA_PIES_AND_QUICHE: 'Pizza, pies and quiche',
+    PnnsGroup2.SANDWICHES: 'Sandwiches',
+    PnnsGroup2.SOUPS: 'Soups',
+    PnnsGroup2.ONE_DISH_MEALS: 'One dish meals',
+    PnnsGroup2.DRESSINGS_AND_SAUCES: 'Dressings and sauces',
+    PnnsGroup2.FATS: 'Fats',
+    PnnsGroup2.PROCESSED_MEAT: 'Processed meat',
+    PnnsGroup2.MEAT: 'Meat',
+    PnnsGroup2.FISH_AND_SEAFOOD: 'Fish and seafood',
+    PnnsGroup2.OFFALS: 'Offals',
+    PnnsGroup2.FRUITS: 'Fruits',
+    PnnsGroup2.VEGETABLES: 'Vegetables',
+    PnnsGroup2.DRIED_FRUITS: 'Dried fruits',
+    PnnsGroup2.NUTS: 'Nuts',
+    PnnsGroup2.LEGUMES: 'Legumes',
+    PnnsGroup2.MILK_AND_YOGURT: 'Milk and yogurt',
+    PnnsGroup2.DAIRY_DESSERTS: 'Dairy desserts',
+    PnnsGroup2.CHEESE: 'Cheese',
+    PnnsGroup2.PLANT_BASED_MILK_SUBSTITUTES: 'Plant based milk substitutes',
+    PnnsGroup2.APPETIZERS: 'Appetizers',
+    PnnsGroup2.SALTY_AND_FATTY_PRODUCTS: 'Salty and fatty products',
+    PnnsGroup2.SWEETS: 'Sweets',
+    PnnsGroup2.CHOCOLATE_PRODUCTS: 'Chocolate products',
+    PnnsGroup2.ICE_CREAM: 'Ice cream',
+  };
+
+  static const Map<PnnsGroup2, String> _IDS = {
+    PnnsGroup2.FRUIT_JUICES: 'fruit-juices',
+    PnnsGroup2.SWEETENED_BEVERAGES: 'sweetened-beverages',
+    PnnsGroup2.ALCOHOLIC_BEVERAGES: 'alcoholic-beverages',
+    PnnsGroup2.UNSWEETENED_BEVERAGES: 'unsweetened-beverages',
+    PnnsGroup2.ARTIFICIALLY_SWEETENED_BEVERAGES:
+        'artificially-sweetened-beverages',
+    PnnsGroup2.WATERS_AND_FLAVORED_WATERS: 'waters-and-flavored-waters',
+    PnnsGroup2.FRUIT_NECTARS: 'fruit-nectars',
+    PnnsGroup2.TEAS_AND_HERBAL_TEAS_AND_COFFEES:
+        'teas-and-herbal-teas-and-coffees',
+    PnnsGroup2.BREAKFAST_CEREALS: 'breakfast-cereals',
+    PnnsGroup2.PASTRIES: 'pastries',
+    PnnsGroup2.POTATOES: 'potatoes',
+    PnnsGroup2.CEREALS: 'cereals',
+    PnnsGroup2.BREAD: 'bread',
+    PnnsGroup2.PIZZA_PIES_AND_QUICHE: 'pizza-pies-and-quiche',
+    PnnsGroup2.SANDWICHES: 'sandwiches',
+    PnnsGroup2.SOUPS: 'soups',
+    PnnsGroup2.ONE_DISH_MEALS: 'one-dish-meals',
+    PnnsGroup2.DRESSINGS_AND_SAUCES: 'dressings-and-sauces',
+    PnnsGroup2.FATS: 'fats',
+    PnnsGroup2.PROCESSED_MEAT: 'processed-meat',
+    PnnsGroup2.MEAT: 'meat',
+    PnnsGroup2.FISH_AND_SEAFOOD: 'fish-and-seafood',
+    PnnsGroup2.OFFALS: 'offals',
+    PnnsGroup2.FRUITS: 'fruits',
+    PnnsGroup2.VEGETABLES: 'vegetables',
+    PnnsGroup2.DRIED_FRUITS: 'dried-fruits',
+    PnnsGroup2.NUTS: 'nuts',
+    PnnsGroup2.LEGUMES: 'legumes',
+    PnnsGroup2.MILK_AND_YOGURT: 'milk-and-yogurt',
+    PnnsGroup2.DAIRY_DESSERTS: 'dairy-desserts',
+    PnnsGroup2.CHEESE: 'cheese',
+    PnnsGroup2.PLANT_BASED_MILK_SUBSTITUTES: 'plant-based-milk-substitutes',
+    PnnsGroup2.APPETIZERS: 'appetizers',
+    PnnsGroup2.SALTY_AND_FATTY_PRODUCTS: 'salty-and-fatty-products',
+    PnnsGroup2.SWEETS: 'sweets',
+    PnnsGroup2.CHOCOLATE_PRODUCTS: 'chocolate-products',
+    PnnsGroup2.ICE_CREAM: 'ice-cream',
+  };
+
   /// Returns the name of the subgroup, in English
-  String get name {
-    switch (this) {
-      case PnnsGroup2.FRUIT_JUICES:
-        return 'Fruit juices';
-      case PnnsGroup2.SWEETENED_BEVERAGES:
-        return 'Sweetened beverages';
-      case PnnsGroup2.ALCOHOLIC_BEVERAGES:
-        return 'Alcoholic beverages';
-      case PnnsGroup2.UNSWEETENED_BEVERAGES:
-        return 'Unsweetened beverages';
-      case PnnsGroup2.ARTIFICIALLY_SWEETENED_BEVERAGES:
-        return 'Artificially sweetened beverages';
-      case PnnsGroup2.WATERS_AND_FLAVORED_WATERS:
-        return 'Waters and flavored waters';
-      case PnnsGroup2.FRUIT_NECTARS:
-        return 'Fruits nectars';
-      case PnnsGroup2.TEAS_AND_HERBAL_TEAS_AND_COFFEES:
-        return 'Teas and herbal teas and coffees';
-      case PnnsGroup2.BREAKFAST_CEREALS:
-        return 'Breakfast cereals';
-      case PnnsGroup2.PASTRIES:
-        return 'Pastries';
-      case PnnsGroup2.POTATOES:
-        return 'Potatoes';
-      case PnnsGroup2.CEREALS:
-        return 'Cereals';
-      case PnnsGroup2.BREAD:
-        return 'Bread';
-      case PnnsGroup2.PIZZA_PIES_AND_QUICHE:
-        return 'Pizza, pies and quiche';
-      case PnnsGroup2.SANDWICHES:
-        return 'Sandwiches';
-      case PnnsGroup2.SOUPS:
-        return 'Soups';
-      case PnnsGroup2.ONE_DISH_MEALS:
-        return 'One dish meals';
-      case PnnsGroup2.DRESSINGS_AND_SAUCES:
-        return 'Dressings and sauces';
-      case PnnsGroup2.FATS:
-        return 'Fats';
-      case PnnsGroup2.PROCESSED_MEAT:
-        return 'Processed meat';
-      case PnnsGroup2.MEAT:
-        return 'Meat';
-      case PnnsGroup2.FISH_AND_SEAFOOD:
-        return 'Fish and seafood';
-      case PnnsGroup2.OFFALS:
-        return 'Offals';
-      case PnnsGroup2.FRUITS:
-        return 'Fruits';
-      case PnnsGroup2.VEGETABLES:
-        return 'Vegetables';
-      case PnnsGroup2.DRIED_FRUITS:
-        return 'Dried fruits';
-      case PnnsGroup2.NUTS:
-        return 'Nuts';
-      case PnnsGroup2.LEGUMES:
-        return 'Legumes';
-      case PnnsGroup2.MILK_AND_YOGURT:
-        return 'Milk and yogurt';
-      case PnnsGroup2.DAIRY_DESSERTS:
-        return 'Dairy desserts';
-      case PnnsGroup2.CHEESE:
-        return 'Cheese';
-      case PnnsGroup2.PLANT_BASED_MILK_SUBSTITUTES:
-        return 'Plant based milk substitutes';
-      case PnnsGroup2.APPETIZERS:
-        return 'Appetizers';
-      case PnnsGroup2.SALTY_AND_FATTY_PRODUCTS:
-        return 'Salty and fatty products';
-      case PnnsGroup2.SWEETS:
-        return 'Sweets';
-      case PnnsGroup2.CHOCOLATE_PRODUCTS:
-        return 'Chocolate products';
-      case PnnsGroup2.ICE_CREAM:
-        return 'Ice cream';
-      default:
-        return 'PNNS group 2';
-    }
-  }
+  String get name => _NAMES[this] ?? 'PNNS group 2';
 
   /// Returns the id of the subgroup
-  String get id {
-    switch (this) {
-      case PnnsGroup2.FRUIT_JUICES:
-        return 'fruit-juices';
-      case PnnsGroup2.SWEETENED_BEVERAGES:
-        return 'sweetened-beverages';
-      case PnnsGroup2.ALCOHOLIC_BEVERAGES:
-        return 'alcoholic-beverages';
-      case PnnsGroup2.UNSWEETENED_BEVERAGES:
-        return 'unsweetened-beverages';
-      case PnnsGroup2.ARTIFICIALLY_SWEETENED_BEVERAGES:
-        return 'artificially-sweetened-beverages';
-      case PnnsGroup2.WATERS_AND_FLAVORED_WATERS:
-        return 'waters-and-flavored-waters';
-      case PnnsGroup2.FRUIT_NECTARS:
-        return 'fruit-nectars';
-      case PnnsGroup2.TEAS_AND_HERBAL_TEAS_AND_COFFEES:
-        return 'teas-and-herbal-teas-and-coffees';
-      case PnnsGroup2.BREAKFAST_CEREALS:
-        return 'breakfast-cereals';
-      case PnnsGroup2.PASTRIES:
-        return 'pastries';
-      case PnnsGroup2.POTATOES:
-        return 'potatoes';
-      case PnnsGroup2.CEREALS:
-        return 'cereals';
-      case PnnsGroup2.BREAD:
-        return 'bread';
-      case PnnsGroup2.PIZZA_PIES_AND_QUICHE:
-        return 'pizza-pies-and-quiche';
-      case PnnsGroup2.SANDWICHES:
-        return 'sandwiches';
-      case PnnsGroup2.SOUPS:
-        return 'soups';
-      case PnnsGroup2.ONE_DISH_MEALS:
-        return 'one-dish-meals';
-      case PnnsGroup2.DRESSINGS_AND_SAUCES:
-        return 'dressings-and-sauces';
-      case PnnsGroup2.FATS:
-        return 'fats';
-      case PnnsGroup2.PROCESSED_MEAT:
-        return 'processed-meat';
-      case PnnsGroup2.MEAT:
-        return 'meat';
-      case PnnsGroup2.FISH_AND_SEAFOOD:
-        return 'fish-and-seafood';
-      case PnnsGroup2.OFFALS:
-        return 'offals';
-      case PnnsGroup2.FRUITS:
-        return 'fruits';
-      case PnnsGroup2.VEGETABLES:
-        return 'vegetables';
-      case PnnsGroup2.DRIED_FRUITS:
-        return 'dried-fruits';
-      case PnnsGroup2.NUTS:
-        return 'nuts';
-      case PnnsGroup2.LEGUMES:
-        return 'legumes';
-      case PnnsGroup2.MILK_AND_YOGURT:
-        return 'milk-and-yogurt';
-      case PnnsGroup2.DAIRY_DESSERTS:
-        return 'dairy-desserts';
-      case PnnsGroup2.CHEESE:
-        return 'cheese';
-      case PnnsGroup2.PLANT_BASED_MILK_SUBSTITUTES:
-        return 'plant-based-milk-substitutes';
-      case PnnsGroup2.APPETIZERS:
-        return 'appetizers';
-      case PnnsGroup2.SALTY_AND_FATTY_PRODUCTS:
-        return 'salty-and-fatty-products';
-      case PnnsGroup2.SWEETS:
-        return 'sweets';
-      case PnnsGroup2.CHOCOLATE_PRODUCTS:
-        return 'chocolate-products';
-      case PnnsGroup2.ICE_CREAM:
-        return 'ice-cream';
-      default:
-        return '';
-    }
-  }
+  String get id => _IDS[this] ?? '';
 }

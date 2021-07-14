@@ -1,33 +1,19 @@
 enum Level { LOW, MODERATE, HIGH, UNDEFINED }
 
 extension LevelExtension on Level? {
-  String get value {
-    switch (this) {
-      case Level.LOW:
-        return 'low';
-      case Level.MODERATE:
-        return 'moderate';
-      case Level.HIGH:
-        return 'high';
-      case Level.UNDEFINED:
-        return 'undefined';
-      default:
-        return 'undefined';
-    }
-  }
+  static const Map<Level, String> _VALUES = {
+    Level.LOW: 'low',
+    Level.MODERATE: 'moderate',
+    Level.HIGH: 'high',
+    Level.UNDEFINED: 'undefined',
+  };
 
-  static Level getLevel(String? s) {
-    switch (s) {
-      case 'low':
-        return Level.LOW;
-      case 'moderate':
-        return Level.MODERATE;
-      case 'high':
-        return Level.HIGH;
-      default:
-        return Level.UNDEFINED;
-    }
-  }
+  String get value => _VALUES[this] ?? 'undefined';
+
+  static Level getLevel(String? s) => Level.values.firstWhere(
+        (final Level key) => _VALUES[key] == s,
+        orElse: () => Level.UNDEFINED,
+      );
 }
 
 class NutrientLevels {
