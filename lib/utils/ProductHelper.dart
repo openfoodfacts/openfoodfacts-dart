@@ -38,14 +38,28 @@ class ProductHelper {
   @deprecated
   static void addTranslatedFields(Product product, Map<String, dynamic> source,
       OpenFoodFactsLanguage language) {
-    product.categoriesTagsTranslated =
+    product.categoriesTagsTranslated ??= {};
+    product.categoriesTagsTranslated![language] =
         source['categories_tags_${language.code}'];
-    product.labelsTagsTranslated = source['labels_tags_${language.code}'];
-    product.ingredientsTagsTranslated =
+
+    product.labelsTagsTranslated ??= {};
+    product.labelsTagsTranslated![language] =
+        source['labels_tags_${language.code}'];
+
+    product.ingredientsTagsTranslated ??= {};
+    product.ingredientsTagsTranslated![language] =
         source['ingredients_tags_${language.code}'];
-    product.ingredientsTextTranslated =
+
+    product.ingredientsTextTranslated ??= {};
+    product.ingredientsTextTranslated![language] =
         source['ingredients_text_${language.code}'];
-    product.productNameTranslated = source['product_name_${language.code}'];
-    product.countriesTagsTranslated = source['countries_tags_${language.code}'];
+
+    product.productNameTranslated = {};
+    product.productNameTranslated![language] =
+        source['product_name_${language.code}'];
+
+    product.countriesTagsTranslated = {};
+    product.countriesTagsTranslated![language] =
+        source['countries_tags_${language.code}'];
   }
 }

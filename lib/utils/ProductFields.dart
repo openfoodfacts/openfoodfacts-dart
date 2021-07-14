@@ -165,10 +165,10 @@ extension ProductFieldExtension on ProductField {
   }
 }
 
-/// NOTE: if one of the fields is TRANSLATED and language is null -
+/// NOTE: if one of the fields is TRANSLATED and [languages] is empty -
 /// the function will throw.
 List<String> convertFieldsToStrings(
-    List<ProductField> fields, OpenFoodFactsLanguage? language) {
+    List<ProductField> fields, List<OpenFoodFactsLanguage> languages) {
   final fieldsStrings = <String>[];
 
   const translatedFields = [
@@ -182,10 +182,12 @@ List<String> convertFieldsToStrings(
 
   for (final field in fields) {
     if (translatedFields.contains(field)) {
-      if (language == null) {
+      if (languages.isEmpty == null) {
         throw ArgumentError('Cannot request translated field without language');
       }
-      fieldsStrings.add('${field.key}${language.code}');
+      for (final language in languages) {
+        fieldsStrings.add('${field.key}${language.code}');
+      }
     } else {
       fieldsStrings.add(field.key);
     }

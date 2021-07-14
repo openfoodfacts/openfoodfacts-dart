@@ -86,7 +86,7 @@ void main() {
       String barcode = '0028400047685';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
-          language: OpenFoodFactsLanguage.ENGLISH,
+          languages: [OpenFoodFactsLanguage.ENGLISH],
           fields: [ProductField.ALL]);
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.TEST_USER, queryType: QueryType.TEST);

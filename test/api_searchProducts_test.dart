@@ -27,7 +27,7 @@ void main() {
           ProductSearchQueryConfiguration(
               parametersList: parameters,
               fields: [ProductField.ALL],
-              language: OpenFoodFactsLanguage.GERMAN);
+              languages: [OpenFoodFactsLanguage.GERMAN]);
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
           TestConstants.TEST_USER, configuration,
@@ -52,7 +52,7 @@ void main() {
           ProductSearchQueryConfiguration(
               parametersList: parameters,
               fields: [ProductField.ALL],
-              language: OpenFoodFactsLanguage.ENGLISH);
+              languages: [OpenFoodFactsLanguage.ENGLISH]);
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
           TestConstants.TEST_USER, configuration,
@@ -77,7 +77,7 @@ void main() {
           ProductSearchQueryConfiguration(
               parametersList: parameters,
               fields: [ProductField.ALL],
-              language: OpenFoodFactsLanguage.GERMAN);
+              languages: [OpenFoodFactsLanguage.GERMAN]);
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
           TestConstants.TEST_USER, configuration,
@@ -105,7 +105,7 @@ void main() {
           ProductSearchQueryConfiguration(
               parametersList: parameters,
               fields: [ProductField.ALL],
-              language: OpenFoodFactsLanguage.FRENCH);
+              languages: [OpenFoodFactsLanguage.FRENCH]);
 
       //For this query we will use the PROD bcs on the TEST DB the query take
       // more then 30 sec and this lead to a timeout
@@ -135,7 +135,7 @@ void main() {
           ProductSearchQueryConfiguration(
               parametersList: parameters,
               fields: [ProductField.ALL],
-              language: OpenFoodFactsLanguage.FRENCH);
+              languages: [OpenFoodFactsLanguage.FRENCH]);
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
           TestConstants.TEST_USER, configuration,
@@ -154,7 +154,7 @@ void main() {
       configuration = ProductSearchQueryConfiguration(
           parametersList: parameters,
           fields: [ProductField.ALL],
-          language: OpenFoodFactsLanguage.FRENCH);
+          languages: [OpenFoodFactsLanguage.FRENCH]);
 
       result = await OpenFoodAPIClient.searchProducts(
           TestConstants.TEST_USER, configuration,
@@ -180,7 +180,7 @@ void main() {
           ProductSearchQueryConfiguration(
               parametersList: parameters,
               fields: [ProductField.ALL],
-              language: OpenFoodFactsLanguage.FRENCH);
+              languages: [OpenFoodFactsLanguage.FRENCH]);
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
           TestConstants.TEST_USER, configuration,
@@ -217,7 +217,7 @@ void main() {
           ProductSearchQueryConfiguration(
               parametersList: parameters,
               fields: [ProductField.ALL],
-              language: OpenFoodFactsLanguage.GERMAN);
+              languages: [OpenFoodFactsLanguage.GERMAN]);
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
           TestConstants.TEST_USER, configuration,
@@ -231,7 +231,7 @@ void main() {
     test('query potatoes products', () async {
       final ProductSearchQueryConfiguration configuration =
           ProductSearchQueryConfiguration(
-        language: OpenFoodFactsLanguage.ENGLISH,
+        languages: [OpenFoodFactsLanguage.ENGLISH],
         fields: [ProductField.ALL],
         parametersList: [
           PnnsGroup2Filter(pnnsGroup2: PnnsGroup2.POTATOES),

@@ -590,4 +590,42 @@ class LanguageHelper {
     }
     return OpenFoodFactsLanguage.UNDEFINED;
   }
+
+  static Map<String, String>? toJsonStringMap(
+      Map<OpenFoodFactsLanguage, String>? map) {
+    return toJsonMap(map);
+  }
+
+  static Map<OpenFoodFactsLanguage, String>? fromJsonStringMap(
+      Map<String, String>? map) {
+    return fromJsonMap(map);
+  }
+
+  static Map<String, List<String>>? toJsonStringsListMap(
+      Map<OpenFoodFactsLanguage, List<String>>? map) {
+    return toJsonMap(map);
+  }
+
+  static Map<OpenFoodFactsLanguage, List<String>>? fromJsonStringsListMap(
+      Map<String, List<String>>? map) {
+    return fromJsonMap(map);
+  }
+
+  static Map<String, T>? toJsonMap<T>(Map<OpenFoodFactsLanguage, T>? map) {
+    if (map == null) {
+      return null;
+    }
+    return map.map((key, value) => MapEntry(key.code, value));
+  }
+
+  static Map<OpenFoodFactsLanguage, T>? fromJsonMap<T>(Map<String, T>? map) {
+    if (map == null) {
+      return null;
+    }
+    final result = <OpenFoodFactsLanguage, T>{};
+    for (final key in map.keys) {
+      result[fromJson(key)] = map[key]!;
+    }
+    return result;
+  }
 }

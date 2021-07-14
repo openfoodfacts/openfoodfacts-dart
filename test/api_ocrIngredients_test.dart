@@ -121,12 +121,12 @@ void main() {
       expect(saveStatus.statusVerbose, 'fields saved');
 
       //Get The saved product's ingredients from the server
-      ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          '3613042717385',
-          language: OpenFoodFactsLanguage.FRENCH,
-          fields: [
-            ProductField.INGREDIENTS_TEXT,
-          ]);
+      ProductQueryConfiguration configurations =
+          ProductQueryConfiguration('3613042717385', languages: [
+        OpenFoodFactsLanguage.FRENCH
+      ], fields: [
+        ProductField.INGREDIENTS_TEXT,
+      ]);
       ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
           user: TestConstants.PROD_USER, queryType: QueryType.PROD);
 
