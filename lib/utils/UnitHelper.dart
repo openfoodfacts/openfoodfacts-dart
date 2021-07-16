@@ -45,6 +45,10 @@ class UnitHelper {
       case 'mG':
         return Unit.MILLI_G;
       case 'micro-gram':
+      case 'µg':
+      case '&#181;g':
+      case '&micro;g':
+      case '&#xb5;g':
         return Unit.MICRO_G;
       case 'ml':
         return Unit.MILLI_L;
