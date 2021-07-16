@@ -79,8 +79,19 @@ class OpenFoodAPIClient {
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
         path: '/cgi/product_jqm2.pl');
-
-    Response response = await HttpHelper()
+    if (product.nutriments != null) {
+      final Map<String, String> rawNutrients = product.nutriments!.toData();
+      for (final MapEntry<String, String> entry in rawNutrients.entries) {
+        String key = 'nutriment_${entry.key}';
+        final int pos = key.indexOf('_100g');
+        if (pos != -1) {
+          key = key.substring(0, pos);
+        }
+        parameterMap[key] = entry.value;
+      }
+    }
+    parameterMap.remove('nutriments');
+    final Response response = await HttpHelper()
         .doPostRequest(productUri, parameterMap, user, queryType: queryType);
     var status = Status.fromJson(json.decode(response.body));
     return status;
