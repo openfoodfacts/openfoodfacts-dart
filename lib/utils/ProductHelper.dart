@@ -5,8 +5,9 @@ import 'package:openfoodfacts/utils/QueryType.dart';
 import '../model/Product.dart';
 import '../model/ProductImage.dart';
 
+/// Helper class around [Product] fields
 class ProductHelper {
-  /// reduce the set of images of the product depending on the given language.
+  /// Reduces the set of images of the product depending on the given language.
   static void removeImages(Product product, OpenFoodFactsLanguage? language) {
     if (product.selectedImages == null) {
       return;
@@ -21,7 +22,7 @@ class ProductHelper {
     }
   }
 
-  // generate a image url for each product image entry
+  /// Generates a image url for each product image entry
   static void createImageUrls(Product product,
       {QueryType queryType = QueryType.PROD}) {
     if (product.images == null) {
