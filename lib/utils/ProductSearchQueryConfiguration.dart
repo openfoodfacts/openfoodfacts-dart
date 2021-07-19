@@ -1,25 +1,25 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
+import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 
-/// Product Search Query Configuration, that helps building search API URI
-class ProductSearchQueryConfiguration {
-  OpenFoodFactsLanguage? language;
-  // Allow apps to directly provide the language code and country code without
-  // having to use the OpenFoodFactsLanguage helper.
-  String? lc;
-  String? cc;
-  List<ProductField>? fields;
-  List<Parameter> parametersList;
+/// Query Configuration for search parameters
+class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
+  final List<Parameter> parametersList;
 
   ProductSearchQueryConfiguration({
-    this.language,
-    this.lc,
-    this.cc,
-    this.fields,
+    final OpenFoodFactsLanguage? language,
+    final String? lc,
+    final String? cc,
+    final List<ProductField>? fields,
     required this.parametersList,
-  });
+  }) : super(
+          language: language,
+          lc: lc,
+          cc: cc,
+          fields: fields,
+        );
 
   List<String> getFieldsKeys() {
     List<String> result = [];
@@ -31,9 +31,10 @@ class ProductSearchQueryConfiguration {
     return result;
   }
 
-  /// Returns the corresponding search API URI parameter map
+  @override
   Map<String, String> getParametersMap() {
-    var result = <String, String>{};
+    final Map<String, String> result = super.getParametersMap();
+
     int filterTagCount = 0;
     for (Parameter p in parametersList) {
       if (p is TagFilter) {
@@ -48,30 +49,6 @@ class ProductSearchQueryConfiguration {
       }
     }
     result.putIfAbsent('search_terms', () => '');
-
-    if (language != null) {
-      result.putIfAbsent('lc', () => language!.code);
-    } else if (lc != null) {
-      result.putIfAbsent('lc', () => lc!);
-    }
-
-    if (cc != null) {
-      result.putIfAbsent('cc', () => cc!);
-    }
-
-    if (fields != null) {
-      bool ignoreFieldsFilter = false;
-      for (ProductField field in fields!) {
-        if (field == ProductField.ALL) {
-          ignoreFieldsFilter = true;
-          break;
-        }
-      }
-      if (!ignoreFieldsFilter) {
-        final fieldsStrings = convertFieldsToStrings(fields!, language);
-        result.putIfAbsent('fields', () => fieldsStrings.join(','));
-      }
-    }
 
     // explicit json output
     result.putIfAbsent('json', () => '1');

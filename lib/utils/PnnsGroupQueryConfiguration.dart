@@ -1,16 +1,26 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 
 // TODO(monsieurtanuki): deprecated from 2021-07-13 (#92) because we can use [PnnsGroup2Filter] with [ProductSearchQueryConfiguration]; remove when old enough
 @deprecated
-class PnnsGroupQueryConfiguration {
+class PnnsGroupQueryConfiguration extends AbstractQueryConfiguration {
   PnnsGroup2 group;
-  OpenFoodFactsLanguage? language;
-  List<ProductField>? fields;
   int page;
 
-  PnnsGroupQueryConfiguration(this.group,
-      {this.language, this.fields, this.page = 1});
+  PnnsGroupQueryConfiguration(
+    this.group, {
+    final OpenFoodFactsLanguage? language,
+    final String? lc,
+    final String? cc,
+    final List<ProductField>? fields,
+    this.page = 1,
+  }) : super(
+          language: language,
+          lc: lc,
+          cc: cc,
+          fields: fields,
+        );
 
   /// Returns the [fields] as [String]s
   List<String> getFieldsKeys() {
@@ -25,27 +35,9 @@ class PnnsGroupQueryConfiguration {
     return result;
   }
 
-  /// Returns the whole configuration as an API parameter map
+  @override
   Map<String, String> getParametersMap() {
-    Map<String, String> result = {};
-
-    if (language != null) {
-      result.putIfAbsent('lc', () => language.code);
-    }
-
-    if (fields != null) {
-      bool ignoreFieldsFilter = false;
-      for (ProductField field in fields!) {
-        if (field == ProductField.ALL) {
-          ignoreFieldsFilter = true;
-          break;
-        }
-      }
-
-      if (!ignoreFieldsFilter) {
-        result.putIfAbsent('fields', () => getFieldsKeys().join(','));
-      }
-    }
+    final Map<String, String> result = super.getParametersMap();
 
     // explicit json output
     result.putIfAbsent('json', () => '1');

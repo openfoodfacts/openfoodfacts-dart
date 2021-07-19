@@ -8,6 +8,7 @@ import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
+import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/ProductSearchQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:test/test.dart';
@@ -226,6 +227,53 @@ void main() {
       expect(result.products!.length, 1);
       expect(result.products![0].productName, equals('Quoted Coca "cola"'));
       expect(result.products![0].brands, equals('Quoted Coca "Cola"'));
+    });
+
+    test('multiple products', () async {
+      const String UNKNOWN_BARCODE = '1111111111111111111111111111111';
+      const List<String> BARCODES = [
+        '8024884500403',
+        '3263855093192',
+        '3045320001570',
+        '3021762383344',
+        '4008400402222',
+        '3330720237255',
+        '3608580823513',
+        '3700278403936',
+        '3302747010029',
+        '3608580823490',
+        '3250391660995',
+        '3760020506605',
+        '8722700202387',
+        '3330720237330',
+        '3535800940005',
+        '20000691',
+        '3270190127512',
+        UNKNOWN_BARCODE,
+      ];
+
+      final ProductListQueryConfiguration configuration =
+          ProductListQueryConfiguration(
+        BARCODES,
+        fields: [ProductField.BARCODE, ProductField.NAME],
+        language: OpenFoodFactsLanguage.FRENCH,
+      );
+
+      SearchResult result = await OpenFoodAPIClient.getProductList(
+        TestConstants.PROD_USER,
+        configuration,
+        queryType: QueryType.PROD,
+      );
+
+      expect(result.page, 1);
+      expect(result.pageSize, 24);
+      expect(result.count, BARCODES.length - 1);
+      expect(result.products != null, true);
+      expect(result.products!.length, BARCODES.length - 1);
+      for (final Product product in result.products!) {
+        final String barcode = product.barcode!;
+        expect(BARCODES.contains(barcode), barcode != UNKNOWN_BARCODE);
+      }
     });
 
     test('query potatoes products', () async {

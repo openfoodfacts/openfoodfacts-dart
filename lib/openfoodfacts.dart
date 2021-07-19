@@ -5,9 +5,11 @@ import 'dart:async';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
+import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
+import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
 
@@ -194,9 +196,30 @@ class OpenFoodAPIClient {
     final jsonStr = _replaceQuotes(response.body);
     var result = SearchResult.fromJson(json.decode(jsonStr));
 
-    result.products!.asMap().forEach((index, product) {
-      ProductHelper.removeImages(product, configuration.language);
-    });
+    _removeImages(result, configuration);
+
+    return result;
+  }
+
+  /// Search the OpenFoodFacts product database: multiple barcodes in input.
+  static Future<SearchResult> getProductList(
+    User? user,
+    ProductListQueryConfiguration configuration, {
+    QueryType queryType = QueryType.PROD,
+  }) async {
+    final Uri uri = Uri(
+        scheme: URI_SCHEME,
+        host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
+        path: 'products/${configuration.barcodes.join(',')}.json',
+        queryParameters: configuration.getParametersMap());
+
+    final Response response =
+        await HttpHelper().doGetRequest(uri, user: user, queryType: queryType);
+
+    final String jsonStr = _replaceQuotes(response.body);
+    final SearchResult result = SearchResult.fromJson(json.decode(jsonStr));
+
+    _removeImages(result, configuration);
 
     return result;
   }
@@ -219,11 +242,20 @@ class OpenFoodAPIClient {
     final jsonStr = _replaceQuotes(response.body);
     var result = SearchResult.fromJson(json.decode(jsonStr));
 
-    result.products!.asMap().forEach((index, product) {
-      ProductHelper.removeImages(product, configuration.language);
-    });
+    _removeImages(result, configuration);
 
     return result;
+  }
+
+  static void _removeImages(
+    final SearchResult searchResult,
+    final AbstractQueryConfiguration configuration,
+  ) {
+    if (searchResult.products != null) {
+      searchResult.products!.asMap().forEach((index, product) {
+        ProductHelper.removeImages(product, configuration.language);
+      });
+    }
   }
 
   /// By default the query will hit the PROD DB
