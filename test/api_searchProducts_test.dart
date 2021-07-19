@@ -274,6 +274,7 @@ void main() {
         final String barcode = product.barcode!;
         expect(BARCODES.contains(barcode), barcode != UNKNOWN_BARCODE);
       }
+    });
 
     test('query potatoes products', () async {
       final ProductSearchQueryConfiguration configuration =
