@@ -53,6 +53,9 @@ Nutriments _$NutrimentsFromJson(Map<String, dynamic> json) {
     potassium: JsonObject.parseDouble(json['potassium_100g']),
     potassiumServing: JsonObject.parseDouble(json['potassium_serving']),
     potassiumUnit: UnitHelper.stringToUnit(json['potassium_unit'] as String?),
+    chloride: JsonObject.parseDouble(json['chloride_100g']),
+    chlorideServing: JsonObject.parseDouble(json['chloride_serving']),
+    chlorideUnit: UnitHelper.stringToUnit(json['chloride_unit'] as String?),
     sodium: JsonObject.parseDouble(json['sodium_100g']),
     sodiumServing: JsonObject.parseDouble(json['sodium_serving']),
     sodiumUnit: UnitHelper.stringToUnit(json['sodium_unit'] as String?),
@@ -62,9 +65,24 @@ Nutriments _$NutrimentsFromJson(Map<String, dynamic> json) {
     copper: JsonObject.parseDouble(json['copper_100g']),
     copperServing: JsonObject.parseDouble(json['copper_serving']),
     copperUnit: UnitHelper.stringToUnit(json['copper_unit'] as String?),
+    manganese: JsonObject.parseDouble(json['manganese_100g']),
+    manganeseServing: JsonObject.parseDouble(json['manganese_serving']),
+    manganeseUnit: UnitHelper.stringToUnit(json['manganese_unit'] as String?),
+    fluoride: JsonObject.parseDouble(json['fluoride_100g']),
+    fluorideServing: JsonObject.parseDouble(json['fluoride_serving']),
+    fluorideUnit: UnitHelper.stringToUnit(json['fluoride_unit'] as String?),
     selenium: JsonObject.parseDouble(json['selenium_100g']),
     seleniumServing: JsonObject.parseDouble(json['selenium_serving']),
     seleniumUnit: UnitHelper.stringToUnit(json['selenium_unit'] as String?),
+    chromium: JsonObject.parseDouble(json['chromium_100g']),
+    chromiumServing: JsonObject.parseDouble(json['chromium_serving']),
+    chromiumUnit: UnitHelper.stringToUnit(json['chromium_unit'] as String?),
+    molybdenum: JsonObject.parseDouble(json['molybdenum_100g']),
+    molybdenumServing: JsonObject.parseDouble(json['molybdenum_serving']),
+    molybdenumUnit: UnitHelper.stringToUnit(json['molybdenum_unit'] as String?),
+    iodine: JsonObject.parseDouble(json['iodine_100g']),
+    iodineServing: JsonObject.parseDouble(json['iodine_serving']),
+    iodineUnit: UnitHelper.stringToUnit(json['iodine_unit'] as String?),
     vitaminA: JsonObject.parseDouble(json['vitamin-a_100g']),
     vitaminAServing: JsonObject.parseDouble(json['vitamin-a_serving']),
     vitaminAUnit: UnitHelper.stringToUnit(json['vitamin-a_unit'] as String?),
@@ -96,6 +114,17 @@ Nutriments _$NutrimentsFromJson(Map<String, dynamic> json) {
     vitaminB9: JsonObject.parseDouble(json['vitamin-b9_100g']),
     vitaminB9Serving: JsonObject.parseDouble(json['vitamin-b9_serving']),
     vitaminB9Unit: UnitHelper.stringToUnit(json['vitamin-b9_unit'] as String?),
+    biotin: JsonObject.parseDouble(json['biotin_100g']),
+    biotinServing: JsonObject.parseDouble(json['biotin_serving']),
+    biotinUnit: UnitHelper.stringToUnit(json['biotin_unit'] as String?),
+    pantothenicAcid: JsonObject.parseDouble(json['pantothenic-acid_100g']),
+    pantothenicAcidServing:
+        JsonObject.parseDouble(json['pantothenic-acid_serving']),
+    pantothenicAcidUnit:
+        UnitHelper.stringToUnit(json['pantothenic-acid_unit'] as String?),
+    transFat: JsonObject.parseDouble(json['trans-fat_100g']),
+    transFatServing: JsonObject.parseDouble(json['trans-fat_serving']),
+    transFatUnit: UnitHelper.stringToUnit(json['trans-fat_unit'] as String?),
     cholesterol: JsonObject.parseDouble(json['cholesterol_100g']),
     cholesterolServing: JsonObject.parseDouble(json['cholesterol_serving']),
     cholesterolUnit:
@@ -166,6 +195,12 @@ Nutriments _$NutrimentsFromJson(Map<String, dynamic> json) {
         JsonObject.parseDouble(json['polyunsaturated_serving']),
     polyunsaturatedUnit:
         UnitHelper.stringToUnit(json['polyunsaturated_unit'] as String?),
+    omega3Fat: JsonObject.parseDouble(json['omega-3-fat_100g']),
+    omega3FatServing: JsonObject.parseDouble(json['omega-3-fat_serving']),
+    omega3FatUnit: UnitHelper.stringToUnit(json['omega-3-fat_unit'] as String?),
+    omega6Fat: JsonObject.parseDouble(json['omega-6-fat_100g']),
+    omega6FatServing: JsonObject.parseDouble(json['omega-6-fat_serving']),
+    omega6FatUnit: UnitHelper.stringToUnit(json['omega-6-fat_unit'] as String?),
     stearicAcid: JsonObject.parseDouble(json['stearic-acid_100g']),
     stearicAcidServing: JsonObject.parseDouble(json['stearic-acid_serving']),
     stearicAcidUnit:
@@ -326,6 +361,40 @@ Map<String, dynamic> _$NutrimentsToJson(Nutriments instance) {
   writeNotNull('alcohol: % vol of alcohol_100g', instance.alcohol);
   writeNotNull(
       'alcohol: % vol of alcohol_unit', _$UnitEnumMap[instance.alcoholUnit]);
+  writeNotNull('pantothenic-acid_serving', instance.pantothenicAcidServing);
+  writeNotNull('pantothenic-acid_100g', instance.pantothenicAcid);
+  writeNotNull(
+      'pantothenic-acid_unit', _$UnitEnumMap[instance.pantothenicAcidUnit]);
+  writeNotNull('biotin_serving', instance.biotinServing);
+  writeNotNull('biotin_100g', instance.biotin);
+  writeNotNull('biotin_unit', _$UnitEnumMap[instance.biotinUnit]);
+  writeNotNull('chloride_serving', instance.chlorideServing);
+  writeNotNull('chloride_100g', instance.chloride);
+  writeNotNull('chloride_unit', _$UnitEnumMap[instance.chlorideUnit]);
+  writeNotNull('chromium_serving', instance.chromiumServing);
+  writeNotNull('chromium_100g', instance.chromium);
+  writeNotNull('chromium_unit', _$UnitEnumMap[instance.chromiumUnit]);
+  writeNotNull('fluoride_serving', instance.fluorideServing);
+  writeNotNull('fluoride_100g', instance.fluoride);
+  writeNotNull('fluoride_unit', _$UnitEnumMap[instance.fluorideUnit]);
+  writeNotNull('iodine_serving', instance.iodineServing);
+  writeNotNull('iodine_100g', instance.iodine);
+  writeNotNull('iodine_unit', _$UnitEnumMap[instance.iodineUnit]);
+  writeNotNull('manganese_serving', instance.manganeseServing);
+  writeNotNull('manganese_100g', instance.manganese);
+  writeNotNull('manganese_unit', _$UnitEnumMap[instance.manganeseUnit]);
+  writeNotNull('molybdenum_serving', instance.molybdenumServing);
+  writeNotNull('molybdenum_100g', instance.molybdenum);
+  writeNotNull('molybdenum_unit', _$UnitEnumMap[instance.molybdenumUnit]);
+  writeNotNull('omega-3-fat_serving', instance.omega3FatServing);
+  writeNotNull('omega-3-fat_100g', instance.omega3Fat);
+  writeNotNull('omega-3-fat_unit', _$UnitEnumMap[instance.omega3FatUnit]);
+  writeNotNull('omega-6-fat_serving', instance.omega6FatServing);
+  writeNotNull('omega-6-fat_100g', instance.omega6Fat);
+  writeNotNull('omega-6-fat_unit', _$UnitEnumMap[instance.omega6FatUnit]);
+  writeNotNull('trans-fat_serving', instance.transFatServing);
+  writeNotNull('trans-fat_100g', instance.transFat);
+  writeNotNull('trans-fat_unit', _$UnitEnumMap[instance.transFatUnit]);
   return val;
 }
 

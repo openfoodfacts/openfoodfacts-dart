@@ -801,6 +801,204 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? alcoholUnit;
 
+  @JsonKey(
+      name: 'pantothenic-acid_serving',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? pantothenicAcidServing;
+
+  @JsonKey(
+      name: 'pantothenic-acid_100g',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? pantothenicAcid;
+
+  @JsonKey(
+      name: 'pantothenic-acid_unit',
+      includeIfNull: false,
+      fromJson: UnitHelper.stringToUnit)
+  Unit? pantothenicAcidUnit;
+
+  @JsonKey(
+      name: 'biotin_serving',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? biotinServing;
+
+  @JsonKey(
+      name: 'biotin_100g',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? biotin;
+
+  @JsonKey(
+      name: 'biotin_unit',
+      includeIfNull: false,
+      fromJson: UnitHelper.stringToUnit)
+  Unit? biotinUnit;
+
+  @JsonKey(
+      name: 'chloride_serving',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? chlorideServing;
+
+  @JsonKey(
+      name: 'chloride_100g',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? chloride;
+
+  @JsonKey(
+      name: 'chloride_unit',
+      includeIfNull: false,
+      fromJson: UnitHelper.stringToUnit)
+  Unit? chlorideUnit;
+
+  @JsonKey(
+      name: 'chromium_serving',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? chromiumServing;
+
+  @JsonKey(
+      name: 'chromium_100g',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? chromium;
+
+  @JsonKey(
+      name: 'chromium_unit',
+      includeIfNull: false,
+      fromJson: UnitHelper.stringToUnit)
+  Unit? chromiumUnit;
+
+  @JsonKey(
+      name: 'fluoride_serving',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? fluorideServing;
+
+  @JsonKey(
+      name: 'fluoride_100g',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? fluoride;
+
+  @JsonKey(
+      name: 'fluoride_unit',
+      includeIfNull: false,
+      fromJson: UnitHelper.stringToUnit)
+  Unit? fluorideUnit;
+
+  @JsonKey(
+      name: 'iodine_serving',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? iodineServing;
+
+  @JsonKey(
+      name: 'iodine_100g',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? iodine;
+
+  @JsonKey(
+      name: 'iodine_unit',
+      includeIfNull: false,
+      fromJson: UnitHelper.stringToUnit)
+  Unit? iodineUnit;
+
+  @JsonKey(
+      name: 'manganese_serving',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? manganeseServing;
+
+  @JsonKey(
+      name: 'manganese_100g',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? manganese;
+
+  @JsonKey(
+      name: 'manganese_unit',
+      includeIfNull: false,
+      fromJson: UnitHelper.stringToUnit)
+  Unit? manganeseUnit;
+
+  @JsonKey(
+      name: 'molybdenum_serving',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? molybdenumServing;
+
+  @JsonKey(
+      name: 'molybdenum_100g',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? molybdenum;
+
+  @JsonKey(
+      name: 'molybdenum_unit',
+      includeIfNull: false,
+      fromJson: UnitHelper.stringToUnit)
+  Unit? molybdenumUnit;
+
+  @JsonKey(
+      name: 'omega-3-fat_serving',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? omega3FatServing;
+
+  @JsonKey(
+      name: 'omega-3-fat_100g',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? omega3Fat;
+
+  @JsonKey(
+      name: 'omega-3-fat_unit',
+      includeIfNull: false,
+      fromJson: UnitHelper.stringToUnit)
+  Unit? omega3FatUnit;
+
+  @JsonKey(
+      name: 'omega-6-fat_serving',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? omega6FatServing;
+
+  @JsonKey(
+      name: 'omega-6-fat_100g',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? omega6Fat;
+
+  @JsonKey(
+      name: 'omega-6-fat_unit',
+      includeIfNull: false,
+      fromJson: UnitHelper.stringToUnit)
+  Unit? omega6FatUnit;
+
+  @JsonKey(
+      name: 'trans-fat_serving',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? transFatServing;
+
+  @JsonKey(
+      name: 'trans-fat_100g',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? transFat;
+
+  @JsonKey(
+      name: 'trans-fat_unit',
+      includeIfNull: false,
+      fromJson: UnitHelper.stringToUnit)
+  Unit? transFatUnit;
+
   Nutriments({
     this.salt,
     this.fiber,
@@ -846,6 +1044,9 @@ class Nutriments extends JsonObject {
     this.potassium,
     this.potassiumServing,
     this.potassiumUnit,
+    this.chloride,
+    this.chlorideServing,
+    this.chlorideUnit,
     this.sodium,
     this.sodiumServing,
     this.sodiumUnit,
@@ -855,9 +1056,24 @@ class Nutriments extends JsonObject {
     this.copper,
     this.copperServing,
     this.copperUnit,
+    this.manganese,
+    this.manganeseServing,
+    this.manganeseUnit,
+    this.fluoride,
+    this.fluorideServing,
+    this.fluorideUnit,
     this.selenium,
     this.seleniumServing,
     this.seleniumUnit,
+    this.chromium,
+    this.chromiumServing,
+    this.chromiumUnit,
+    this.molybdenum,
+    this.molybdenumServing,
+    this.molybdenumUnit,
+    this.iodine,
+    this.iodineServing,
+    this.iodineUnit,
     this.vitaminA,
     this.vitaminAServing,
     this.vitaminAUnit,
@@ -888,6 +1104,15 @@ class Nutriments extends JsonObject {
     this.vitaminB9,
     this.vitaminB9Serving,
     this.vitaminB9Unit,
+    this.biotin,
+    this.biotinServing,
+    this.biotinUnit,
+    this.pantothenicAcid,
+    this.pantothenicAcidServing,
+    this.pantothenicAcidUnit,
+    this.transFat,
+    this.transFatServing,
+    this.transFatUnit,
     this.cholesterol,
     this.cholesterolServing,
     this.cholesterolUnit,
@@ -936,6 +1161,12 @@ class Nutriments extends JsonObject {
     this.polyunsaturatedAcid,
     this.polyunsaturatedServing,
     this.polyunsaturatedUnit,
+    this.omega3Fat,
+    this.omega3FatServing,
+    this.omega3FatUnit,
+    this.omega6Fat,
+    this.omega6FatServing,
+    this.omega6FatUnit,
     this.stearicAcid,
     this.stearicAcidServing,
     this.stearicAcidUnit,
