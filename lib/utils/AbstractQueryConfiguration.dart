@@ -4,6 +4,15 @@ import 'package:openfoodfacts/utils/ProductFields.dart';
 /// Abstract Query Configuration, that helps build API URI
 abstract class AbstractQueryConfiguration {
   OpenFoodFactsLanguage? language;
+
+  /// The [secondaryLanguages] field should be used when a product is requested
+  /// with fields in multiple languages. I.e. when some of the
+  /// `IN_LANGS` fields are used (e.g. [ProductField.NAME_IN_LANGS]).
+  ///
+  /// However, the `IN_LANGS` fields are also compatible with the [language]
+  /// and [lc] fields - if only 1 language is needed, [secondaryLanguages] can
+  /// be omitted.
+  List<OpenFoodFactsLanguage> secondaryLanguages;
   // Allow apps to directly provide the language code and country code without
   // having to use the OpenFoodFactsLanguage helper.
   String? lc;
@@ -12,6 +21,7 @@ abstract class AbstractQueryConfiguration {
 
   AbstractQueryConfiguration({
     this.language,
+    this.secondaryLanguages = const [],
     this.lc,
     this.cc,
     this.fields,
@@ -38,7 +48,16 @@ abstract class AbstractQueryConfiguration {
         (field) => field == ProductField.ALL,
       );
       if (!ignoreFieldsFilter) {
-        final fieldsStrings = convertFieldsToStrings(fields!, language);
+        final languages = secondaryLanguages.toList();
+        if (language != null && !languages.contains(language)) {
+          languages.add(language!);
+        }
+        final lcLanguage = LanguageHelper.fromJson(lc);
+        if (lcLanguage != OpenFoodFactsLanguage.UNDEFINED &&
+            !languages.contains(lcLanguage)) {
+          languages.add(lcLanguage);
+        }
+        final fieldsStrings = convertFieldsToStrings(fields!, languages);
         result.putIfAbsent('fields', () => fieldsStrings.join(','));
       }
     }

@@ -397,4 +397,54 @@ class LanguageHelper {
         (final OpenFoodFactsLanguage language) => language.code == code,
         orElse: () => OpenFoodFactsLanguage.UNDEFINED,
       );
+
+  /// Converts a Map with [OpenFoodFactsLanguage] into
+  /// a map with ISO-639-1 codes.
+  static Map<String, T>? toJsonMap<T>(Map<OpenFoodFactsLanguage, T>? map) {
+    if (map == null) {
+      return null;
+    }
+    return map.map((key, value) => MapEntry(key.code, value));
+  }
+
+  /// Converts a Map with ISO-639-1 codes into
+  /// a map with [OpenFoodFactsLanguage].
+  static Map<OpenFoodFactsLanguage, T>? fromJsonMap<T>(Map<String, T>? map) {
+    if (map == null) {
+      return null;
+    }
+    final result = <OpenFoodFactsLanguage, T>{};
+    for (final key in map.keys) {
+      result[fromJson(key)] = map[key]!;
+    }
+    return result;
+  }
+
+  /// Helper function without generic types. Needed for the
+  /// `@JsonKey` annotation (the annotation can't work with generics).
+  static Map<String, String>? toJsonStringMap(
+      Map<OpenFoodFactsLanguage, String>? map) {
+    return toJsonMap(map);
+  }
+
+  /// Helper function without generic types. Needed for the
+  /// `@JsonKey` annotation (the annotation can't work with generics).
+  static Map<OpenFoodFactsLanguage, String>? fromJsonStringMap(
+      Map<String, String>? map) {
+    return fromJsonMap(map);
+  }
+
+  /// Helper function without generic types. Needed for the
+  /// `@JsonKey` annotation (the annotation can't work with generics).
+  static Map<String, List<String>>? toJsonStringsListMap(
+      Map<OpenFoodFactsLanguage, List<String>>? map) {
+    return toJsonMap(map);
+  }
+
+  /// Helper function without generic types. Needed for the
+  /// `@JsonKey` annotation (the annotation can't work with generics).
+  static Map<OpenFoodFactsLanguage, List<String>>? fromJsonStringsListMap(
+      Map<String, List<String>>? map) {
+    return fromJsonMap(map);
+  }
 }

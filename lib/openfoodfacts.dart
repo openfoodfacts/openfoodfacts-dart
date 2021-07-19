@@ -71,6 +71,9 @@ class OpenFoodAPIClient {
   /// Add the given product to the database.
   /// By default the query will hit the PROD DB
   /// Returns a Status object as result.
+  ///
+  /// Please read the language mechanics explanation if you intend to display
+  /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
   static Future<Status> saveProduct(User user, Product product,
       {QueryType queryType = QueryType.PROD}) async {
     var parameterMap = <String, String>{};
@@ -147,6 +150,9 @@ class OpenFoodAPIClient {
   /// The ProductResult does not contain a product, if the product is not available.
   /// ingredients, images and product name will be prepared for the given language.
   /// By default the query will hit the PROD DB
+  ///
+  /// Please read the language mechanics explanation if you intend to show
+  /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
   static Future<ProductResult> getProduct(
       ProductQueryConfiguration configuration,
       {User? user,
@@ -165,8 +171,6 @@ class OpenFoodAPIClient {
     if (result.product != null) {
       ProductHelper.removeImages(result.product!, configuration.language);
       ProductHelper.createImageUrls(result.product!, queryType: queryType);
-      final translatedLang = configuration.lc ?? configuration.language?.code;
-      result.product!.translatedLang = LanguageHelper.fromJson(translatedLang);
     }
 
     return result;
