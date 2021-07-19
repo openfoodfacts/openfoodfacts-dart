@@ -247,6 +247,106 @@ void main() {
       expect(result.product!.nutriments!.vitaminCUnit, Unit.MILLI_G);
     });
 
+    test('get uncommon nutrients', () async {
+      // TODO: find a product with fluoride data and add it to that test
+      // PROD data as of 2021-07-16
+      const QueryType queryType = QueryType.PROD;
+      const User user = TestConstants.PROD_USER;
+      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+      const List<ProductField> fields = [ProductField.NUTRIMENTS];
+      ProductResult result;
+
+      result = await OpenFoodAPIClient.getProduct(
+        ProductQueryConfiguration(
+          '5060517883638',
+          language: language,
+          fields: fields,
+        ),
+        user: user,
+        queryType: queryType,
+      );
+      expect(result.product!.nutriments!.pantothenicAcid, .0042);
+      expect(result.product!.nutriments!.pantothenicAcidUnit, Unit.MILLI_G);
+      expect(result.product!.nutriments!.pantothenicAcidServing, null);
+
+      result = await OpenFoodAPIClient.getProduct(
+        ProductQueryConfiguration(
+          '7612100018477',
+          language: language,
+          fields: fields,
+        ),
+        user: user,
+        queryType: queryType,
+      );
+      expect(result.product!.nutriments!.biotin, .0000165);
+      expect(result.product!.nutriments!.biotinUnit, Unit.MICRO_G);
+      expect(result.product!.nutriments!.biotinServing, null);
+
+      result = await OpenFoodAPIClient.getProduct(
+        ProductQueryConfiguration(
+          '3057640257773',
+          language: language,
+          fields: fields,
+        ),
+        user: user,
+        queryType: queryType,
+      );
+      expect(result.product!.nutriments!.chloride, .015);
+      expect(result.product!.nutriments!.chlorideUnit, Unit.MILLI_G);
+      expect(result.product!.nutriments!.chlorideServing, .15);
+
+      result = await OpenFoodAPIClient.getProduct(
+        ProductQueryConfiguration(
+          '4260556630007',
+          language: language,
+          fields: fields,
+        ),
+        user: user,
+        queryType: queryType,
+      );
+      expect(result.product!.nutriments!.chromium, .000002);
+      expect(result.product!.nutriments!.chromiumUnit, Unit.MICRO_G);
+      expect(result.product!.nutriments!.chromiumServing, .00001);
+      expect(result.product!.nutriments!.iodine, .0000075);
+      expect(result.product!.nutriments!.iodineUnit, Unit.MICRO_G);
+      expect(result.product!.nutriments!.iodineServing, .0000375);
+      expect(result.product!.nutriments!.manganese, .0001);
+      expect(result.product!.nutriments!.manganeseUnit, Unit.MILLI_G);
+      expect(result.product!.nutriments!.manganeseServing, .0005);
+      expect(result.product!.nutriments!.molybdenum, .000004);
+      expect(result.product!.nutriments!.molybdenumUnit, Unit.MICRO_G);
+      expect(result.product!.nutriments!.molybdenumServing, .00002);
+
+      result = await OpenFoodAPIClient.getProduct(
+        ProductQueryConfiguration(
+          '3155251205319',
+          language: language,
+          fields: fields,
+        ),
+        user: user,
+        queryType: queryType,
+      );
+      expect(result.product!.nutriments!.omega3Fat, 4);
+      expect(result.product!.nutriments!.omega3FatUnit, Unit.G);
+      expect(result.product!.nutriments!.omega3FatServing, 4);
+      expect(result.product!.nutriments!.omega6Fat, 9.1);
+      expect(result.product!.nutriments!.omega6FatUnit, Unit.G);
+      expect(result.product!.nutriments!.omega6FatServing, 9.1);
+
+      result = await OpenFoodAPIClient.getProduct(
+        ProductQueryConfiguration(
+          '5000159461122',
+          language: language,
+          fields: fields,
+        ),
+        user: user,
+        queryType: queryType,
+      );
+      expect(result.product!.nutriments!.transFat, 0.1);
+      expect(result.product!.nutriments!.transFatUnit, Unit.G);
+      expect(result.product!.nutriments!.transFatServing, 0.05);
+    });
+
     test('get product Confiture Rhubarbe Fraises extra', () async {
       String barcode = '3301595000305';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(

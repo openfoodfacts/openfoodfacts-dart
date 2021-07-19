@@ -4,7 +4,9 @@ import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/SearchResult.dart';
+import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
+import 'package:openfoodfacts/utils/PnnsGroups.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/ProductSearchQueryConfiguration.dart';
@@ -272,6 +274,30 @@ void main() {
         final String barcode = product.barcode!;
         expect(BARCODES.contains(barcode), barcode != UNKNOWN_BARCODE);
       }
+
+    test('query potatoes products', () async {
+      final ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.ALL],
+        parametersList: [
+          PnnsGroup2Filter(pnnsGroup2: PnnsGroup2.POTATOES),
+          Page(page: 3),
+        ],
+      );
+
+      final SearchResult result = await OpenFoodAPIClient.searchProducts(
+        TestConstants.TEST_USER,
+        configuration,
+        queryType: QueryType.TEST,
+      );
+
+      expect(result.page, 3);
+      expect(result.pageSize, 24);
+      expect(result.products != null, true);
+      expect(result.products!.length, 24);
+      expect(result.products![0].runtimeType, Product);
+      expect(result.count! > 1500, true);
     });
   });
 }

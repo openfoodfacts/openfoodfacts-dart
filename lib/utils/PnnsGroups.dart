@@ -1,3 +1,6 @@
+/// PNNS food groups
+///
+/// PNNS is the French "Programme National Nutrition Santé"
 enum PnnsGroup1 {
   BEVERAGES,
   CEREALS_AND_POTATOES,
@@ -10,6 +13,7 @@ enum PnnsGroup1 {
   SUGARY_SNACKS
 }
 
+/// PNNS food subgroups
 enum PnnsGroup2 {
   FRUIT_JUICES,
   SWEETENED_BEVERAGES,
@@ -59,6 +63,7 @@ enum PnnsGroup2 {
 }
 
 extension PnnsGroup1Extension on PnnsGroup1 {
+  /// Returns the name of the group, in English
   String get name {
     switch (this) {
       case PnnsGroup1.BEVERAGES:
@@ -84,6 +89,7 @@ extension PnnsGroup1Extension on PnnsGroup1 {
     }
   }
 
+  /// Returns the subgroups of the group
   List<PnnsGroup2>? get subGroups {
     switch (this) {
       case PnnsGroup1.BEVERAGES:
@@ -154,6 +160,7 @@ extension PnnsGroup1Extension on PnnsGroup1 {
 }
 
 extension PnnsGroup2Extension on PnnsGroup2 {
+  /// Returns the name of the subgroup, in English
   String get name {
     switch (this) {
       case PnnsGroup2.FRUIT_JUICES:
@@ -235,6 +242,7 @@ extension PnnsGroup2Extension on PnnsGroup2 {
     }
   }
 
+  /// Returns the id of the subgroup
   String get id {
     switch (this) {
       case PnnsGroup2.FRUIT_JUICES:

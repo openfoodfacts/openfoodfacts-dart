@@ -2,6 +2,8 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 
+// TODO(monsieurtanuki): deprecated from 2021-07-13 (#92) because we can use [PnnsGroup2Filter] with [ProductSearchQueryConfiguration]; remove when old enough
+@deprecated
 class PnnsGroupQueryConfiguration extends AbstractQueryConfiguration {
   PnnsGroup2 group;
   int page;
@@ -20,11 +22,14 @@ class PnnsGroupQueryConfiguration extends AbstractQueryConfiguration {
           fields: fields,
         );
 
+  /// Returns the [fields] as [String]s
   List<String> getFieldsKeys() {
     List<String> result = [];
 
-    for (ProductField field in fields!) {
-      result.add(field.key);
+    if (fields != null) {
+      for (ProductField field in fields!) {
+        result.add(field.key);
+      }
     }
 
     return result;
