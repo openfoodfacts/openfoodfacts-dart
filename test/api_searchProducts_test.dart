@@ -162,7 +162,7 @@ void main() {
           queryType: QueryType.TEST);
 
       expect(result.count! < totalCount, true);
-    });
+    }, skip: 'https://github.com/openfoodfacts/openfoodfacts-dart/issues/189');
 
     test('search products with filter on tags', () async {
       var parameters = <Parameter>[
@@ -299,6 +299,6 @@ void main() {
       expect(result.products!.length, 24);
       expect(result.products![0].runtimeType, Product);
       expect(result.count! > 1500, true);
-    });
+    }, skip: 'https://github.com/openfoodfacts/openfoodfacts-dart/issues/189');
   });
 }

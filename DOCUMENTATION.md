@@ -537,11 +537,11 @@ Here are main concepts.
 
 Products in Open Food Facts can have some of their fields in multiple
 languages. Such fields are of 2 types:
-1. Fields with info taken directly from product packaging
+1. Text fields with info taken directly from product packaging
    (like product name and ingredients list). Such fields generally are
    not touched by the backend and are stored in the DB exactly as they
    were sent.
-2. Fields with meta-information (like list countries where the product is
+2. Lists of tags with meta-information (like list countries where the product is
    being sold, or like product's categories). Such fields are processed
    by the backend in different ways and often shouldn't be displayed to
    the user as-is.
@@ -594,18 +594,19 @@ final conf = ProductQueryConfiguration(
           language: OpenFoodFactsLanguage.GERMAN,
           fields: [ProductField.NAME]);
 final product = await OpenFoodAPIClient.getProduct(conf);
+// The requested language is German, so `product.productName`
+// either is in German, or in main product's language, or null.
 var name = product.productName ?? 'No name';
 _displayProductName(name);
 ```
 
-#### Example: display a product in German language, or in Russian,
-#### or rollback to default.
+#### Example: display a product in German language, or in Russian, or rollback to default.
 
 ```dart
 final conf = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
-          secondaryLanguages: [OpenFoodFactsLanguage.RUSSIAN],
+          languages: [OpenFoodFactsLanguage.RUSSIAN],
           fields: [ProductField.NAME, ProductField.NAME_IN_LANGS]);
 final product = await OpenFoodAPIClient.getProduct(conf);
 var name = product.productNameInLangs[OpenFoodFactsLanguage.GERMAN];
