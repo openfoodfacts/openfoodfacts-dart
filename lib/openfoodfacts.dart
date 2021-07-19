@@ -5,6 +5,7 @@ import 'dart:async';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
+import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
@@ -184,9 +185,7 @@ class OpenFoodAPIClient {
     final jsonStr = _replaceQuotes(response.body);
     var result = SearchResult.fromJson(json.decode(jsonStr));
 
-    result.products!.asMap().forEach((index, product) {
-      ProductHelper.removeImages(product, configuration.language);
-    });
+    _removeImages(result, configuration);
 
     return result;
   }
@@ -209,9 +208,7 @@ class OpenFoodAPIClient {
     final String jsonStr = _replaceQuotes(response.body);
     final SearchResult result = SearchResult.fromJson(json.decode(jsonStr));
 
-    result.products!.asMap().forEach((index, product) {
-      ProductHelper.removeImages(product, configuration.language);
-    });
+    _removeImages(result, configuration);
 
     return result;
   }
@@ -233,11 +230,20 @@ class OpenFoodAPIClient {
     final jsonStr = _replaceQuotes(response.body);
     var result = SearchResult.fromJson(json.decode(jsonStr));
 
-    result.products!.asMap().forEach((index, product) {
-      ProductHelper.removeImages(product, configuration.language);
-    });
+    _removeImages(result, configuration);
 
     return result;
+  }
+
+  static void _removeImages(
+    final SearchResult searchResult,
+    final AbstractQueryConfiguration configuration,
+  ) {
+    if (searchResult.products != null) {
+      searchResult.products!.asMap().forEach((index, product) {
+        ProductHelper.removeImages(product, configuration.language);
+      });
+    }
   }
 
   /// By default the query will hit the PROD DB

@@ -1,14 +1,24 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 
-class PnnsGroupQueryConfiguration {
+class PnnsGroupQueryConfiguration extends AbstractQueryConfiguration {
   PnnsGroup2 group;
-  OpenFoodFactsLanguage? language;
-  List<ProductField>? fields;
   int page;
 
-  PnnsGroupQueryConfiguration(this.group,
-      {this.language, this.fields, this.page = 1});
+  PnnsGroupQueryConfiguration(
+    this.group, {
+    final OpenFoodFactsLanguage? language,
+    final String? lc,
+    final String? cc,
+    final List<ProductField>? fields,
+    this.page = 1,
+  }) : super(
+          language: language,
+          lc: lc,
+          cc: cc,
+          fields: fields,
+        );
 
   List<String> getFieldsKeys() {
     List<String> result = [];
@@ -20,26 +30,9 @@ class PnnsGroupQueryConfiguration {
     return result;
   }
 
+  @override
   Map<String, String> getParametersMap() {
-    Map<String, String> result = {};
-
-    if (language != null) {
-      result.putIfAbsent('lc', () => language.code);
-    }
-
-    if (fields != null) {
-      bool ignoreFieldsFilter = false;
-      for (ProductField field in fields!) {
-        if (field == ProductField.ALL) {
-          ignoreFieldsFilter = true;
-          break;
-        }
-      }
-
-      if (!ignoreFieldsFilter) {
-        result.putIfAbsent('fields', () => getFieldsKeys().join(','));
-      }
-    }
+    final Map<String, String> result = super.getParametersMap();
 
     // explicit json output
     result.putIfAbsent('json', () => '1');

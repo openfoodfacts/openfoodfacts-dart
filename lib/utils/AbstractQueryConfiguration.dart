@@ -34,13 +34,9 @@ abstract class AbstractQueryConfiguration {
     }
 
     if (fields != null) {
-      bool ignoreFieldsFilter = false;
-      for (ProductField field in fields!) {
-        if (field == ProductField.ALL) {
-          ignoreFieldsFilter = true;
-          break;
-        }
-      }
+      final bool ignoreFieldsFilter = fields!.any(
+        (field) => field == ProductField.ALL,
+      );
       if (!ignoreFieldsFilter) {
         final fieldsStrings = convertFieldsToStrings(fields!, language);
         result.putIfAbsent('fields', () => fieldsStrings.join(','));
