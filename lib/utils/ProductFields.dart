@@ -56,113 +56,61 @@ enum ProductField {
 }
 
 extension ProductFieldExtension on ProductField {
+  static const Map<ProductField, String> _KEYS = {
+    ProductField.BARCODE: 'code',
+    ProductField.NAME: 'product_name',
+    ProductField.NAME_TRANSLATED: 'product_name_',
+    ProductField.GENERIC_NAME: 'generic_name',
+    ProductField.BRANDS: 'brands',
+    ProductField.BRANDS_TAGS: 'brands_tags',
+    ProductField.COUNTRIES: 'countries',
+    ProductField.COUNTRIES_TAGS: 'countries_tags',
+    ProductField.COUNTRIES_TAGS_TRANSLATED: 'countries_tags_',
+    ProductField.LANGUAGE: 'lang',
+    ProductField.QUANTITY: 'quantity',
+    ProductField.SERVING_SIZE: 'serving_size',
+    ProductField.PACKAGING_QUANTITY: 'product_quantity',
+    ProductField.FRONT_IMAGE: 'image_small_url',
+    ProductField.IMAGE_FRONT_URL: 'image_front_url',
+    ProductField.IMAGE_FRONT_SMALL_URL: 'image_front_small_url',
+    ProductField.IMAGE_INGREDIENTS_URL: 'image_ingredients_url',
+    ProductField.IMAGE_INGREDIENTS_SMALL_URL: 'image_ingredients_small_url',
+    ProductField.IMAGE_NUTRITION_URL: 'image_nutrition_url',
+    ProductField.IMAGE_NUTRITION_SMALL_URL: 'image_nutrition_small_url',
+    ProductField.IMAGE_PACKAGING_URL: 'image_packaging_url',
+    ProductField.IMAGE_PACKAGING_SMALL_URL: 'image_packaging_small_url',
+    ProductField.SELECTED_IMAGE: 'selected_images',
+    ProductField.IMAGES: 'images',
+    ProductField.INGREDIENTS: 'ingredients',
+    ProductField.INGREDIENTS_TAGS: 'ingredients_tags',
+    ProductField.INGREDIENTS_TAGS_TRANSLATED: 'ingredients_tags_',
+    ProductField.NUTRIMENTS: 'nutriments',
+    ProductField.ADDITIVES: 'additives_tags',
+    ProductField.NUTRIENT_LEVELS: 'nutrient_levels',
+    ProductField.INGREDIENTS_TEXT: 'ingredients_text',
+    ProductField.INGREDIENTS_TEXT_TRANSLATED: 'ingredients_text_',
+    ProductField.NUTRIMENT_ENERGY_UNIT: 'nutriment_energy_unit',
+    ProductField.NUTRIMENT_DATA_PER: 'nutrition_data_per',
+    ProductField.NUTRISCORE: 'nutrition_grade_fr',
+    ProductField.CATEGORIES: 'categories',
+    ProductField.CATEGORIES_TAGS: 'categories_tags',
+    ProductField.CATEGORIES_TAGS_TRANSLATED: 'categories_tags_',
+    ProductField.LABELS_TAGS: 'labels_tags',
+    ProductField.LABELS_TAGS_TRANSLATED: 'labels_tags_',
+    ProductField.MISC_TAGS: 'misc',
+    ProductField.STATES_TAGS: 'states_tags',
+    ProductField.TRACES_TAGS: 'traces_tags',
+    ProductField.INGREDIENTS_ANALYSIS_TAGS: 'ingredients_analysis_tags',
+    ProductField.ALLERGENS: 'allergens_tags',
+    ProductField.ENVIRONMENT_IMPACT_LEVELS: 'environment_impact_level_tags',
+    ProductField.ATTRIBUTE_GROUPS: 'attribute_groups',
+    ProductField.ECOSCORE_GRADE: 'ecoscore_grade',
+    ProductField.ECOSCORE_SCORE: 'ecoscore_score',
+    ProductField.ECOSCORE_DATA: 'ecoscore_data',
+  };
+
   /// Returns the key of the product field
-  String get key {
-    switch (this) {
-      case ProductField.BARCODE:
-        return 'code';
-      case ProductField.NAME:
-        return 'product_name';
-      case ProductField.NAME_TRANSLATED:
-        return 'product_name_';
-      case ProductField.GENERIC_NAME:
-        return 'generic_name';
-      case ProductField.BRANDS:
-        return 'brands';
-      case ProductField.BRANDS_TAGS:
-        return 'brands_tags';
-      case ProductField.COUNTRIES:
-        return 'countries';
-      case ProductField.COUNTRIES_TAGS:
-        return 'countries_tags';
-      case ProductField.COUNTRIES_TAGS_TRANSLATED:
-        return 'countries_tags_';
-      case ProductField.LANGUAGE:
-        return 'lang';
-      case ProductField.QUANTITY:
-        return 'quantity';
-      case ProductField.SERVING_SIZE:
-        return 'serving_size';
-      case ProductField.PACKAGING_QUANTITY:
-        return 'product_quantity';
-      case ProductField.FRONT_IMAGE:
-        return 'image_small_url';
-      case ProductField.IMAGE_FRONT_URL:
-        return 'image_front_url';
-      case ProductField.IMAGE_FRONT_SMALL_URL:
-        return 'image_front_small_url';
-      case ProductField.IMAGE_INGREDIENTS_URL:
-        return 'image_ingredients_url';
-      case ProductField.IMAGE_INGREDIENTS_SMALL_URL:
-        return 'image_ingredients_small_url';
-      case ProductField.IMAGE_NUTRITION_URL:
-        return 'image_nutrition_url';
-      case ProductField.IMAGE_NUTRITION_SMALL_URL:
-        return 'image_nutrition_small_url';
-      case ProductField.IMAGE_PACKAGING_URL:
-        return 'image_packaging_url';
-      case ProductField.IMAGE_PACKAGING_SMALL_URL:
-        return 'image_packaging_small_url';
-      case ProductField.SELECTED_IMAGE:
-        return 'selected_images';
-      case ProductField.IMAGES:
-        return 'images';
-      case ProductField.INGREDIENTS:
-        return 'ingredients';
-      case ProductField.INGREDIENTS_TAGS:
-        return 'ingredients_tags';
-      case ProductField.INGREDIENTS_TAGS_TRANSLATED:
-        return 'ingredients_tags_';
-      case ProductField.NUTRIMENTS:
-        return 'nutriments';
-      case ProductField.ADDITIVES:
-        return 'additives_tags';
-      case ProductField.NUTRIENT_LEVELS:
-        return 'nutrient_levels';
-      case ProductField.INGREDIENTS_TEXT:
-        return 'ingredients_text';
-      case ProductField.INGREDIENTS_TEXT_TRANSLATED:
-        return 'ingredients_text_';
-      case ProductField.NUTRIMENT_ENERGY_UNIT:
-        return 'nutriment_energy_unit';
-      case ProductField.NUTRIMENT_DATA_PER:
-        return 'nutrition_data_per';
-      case ProductField.NUTRISCORE:
-        return 'nutrition_grade_fr';
-      case ProductField.CATEGORIES:
-        return 'categories';
-      case ProductField.CATEGORIES_TAGS:
-        return 'categories_tags';
-      case ProductField.CATEGORIES_TAGS_TRANSLATED:
-        return 'categories_tags_';
-      case ProductField.LABELS_TAGS:
-        return 'labels_tags';
-      case ProductField.LABELS_TAGS_TRANSLATED:
-        return 'labels_tags_';
-      case ProductField.MISC_TAGS:
-        return 'misc';
-      case ProductField.STATES_TAGS:
-        return 'states_tags';
-      case ProductField.TRACES_TAGS:
-        return 'traces_tags';
-      case ProductField.INGREDIENTS_ANALYSIS_TAGS:
-        return 'ingredients_analysis_tags';
-      case ProductField.ALLERGENS:
-        return 'allergens_tags';
-      case ProductField.ENVIRONMENT_IMPACT_LEVELS:
-        return 'environment_impact_level_tags';
-      case ProductField.ATTRIBUTE_GROUPS:
-        return 'attribute_groups';
-      case ProductField.ECOSCORE_GRADE:
-        return 'ecoscore_grade';
-      case ProductField.ECOSCORE_SCORE:
-        return 'ecoscore_score';
-      case ProductField.ECOSCORE_DATA:
-        return 'ecoscore_data';
-      default:
-        return '';
-    }
-  }
+  String get key => _KEYS[this] ?? '';
 }
 
 /// NOTE: if one of the fields is TRANSLATED and language is null -

@@ -4,13 +4,10 @@ enum OcrField {
 }
 
 extension OcrFieldExtension on OcrField {
-  String get key {
-    switch (this) {
-      case OcrField.TESSERACT:
-        return 'tesseract';
-      case OcrField.GOOGLE_CLOUD_VISION:
-      default:
-        return 'google_cloud_vision';
-    }
-  }
+  static const Map<OcrField, String> _KEYS = {
+    OcrField.TESSERACT: 'tesseract',
+    OcrField.GOOGLE_CLOUD_VISION: 'google_cloud_vision',
+  };
+
+  String get key => _KEYS[this] ?? 'google_cloud_vision';
 }

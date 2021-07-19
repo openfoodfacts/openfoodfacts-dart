@@ -3,41 +3,22 @@ import 'package:openfoodfacts/utils/LanguageHelper.dart';
 enum ImageField { FRONT, INGREDIENTS, NUTRITION, PACKAGING, OTHER }
 
 extension ImageFieldExtension on ImageField {
-  String get value {
-    return getValue(this);
-  }
+  static const Map<ImageField, String> _VALUES = {
+    ImageField.FRONT: 'front',
+    ImageField.INGREDIENTS: 'ingredients',
+    ImageField.NUTRITION: 'nutrition',
+    ImageField.PACKAGING: 'packaging',
+    ImageField.OTHER: 'other',
+  };
 
-  static String getValue(ImageField field) {
-    switch (field) {
-      case ImageField.FRONT:
-        return 'front';
-      case ImageField.INGREDIENTS:
-        return 'ingredients';
-      case ImageField.NUTRITION:
-        return 'nutrition';
-      case ImageField.PACKAGING:
-        return 'packaging';
-      case ImageField.OTHER:
-      default:
-        return 'other';
-    }
-  }
+  String get value => getValue(this);
 
-  static ImageField getType(String s) {
-    switch (s.toLowerCase()) {
-      case 'front':
-        return ImageField.FRONT;
-      case 'ingredients':
-        return ImageField.INGREDIENTS;
-      case 'nutrition':
-        return ImageField.NUTRITION;
-      case 'packaging':
-        return ImageField.PACKAGING;
-      case 'other':
-      default:
-        return ImageField.OTHER;
-    }
-  }
+  static String getValue(ImageField field) => _VALUES[field] ?? 'other';
+
+  static ImageField getType(String s) => ImageField.values.firstWhere(
+        (final ImageField key) => _VALUES[key] == s.toLowerCase(),
+        orElse: () => ImageField.OTHER,
+      );
 }
 
 enum ImageSize {
@@ -49,66 +30,35 @@ enum ImageSize {
 }
 
 extension ImageSizeExtension on ImageSize? {
-  String get value {
-    switch (this) {
-      case ImageSize.THUMB:
-        return 'thumb';
-      case ImageSize.SMALL:
-        return 'small';
-      case ImageSize.DISPLAY:
-        return 'display';
-      case ImageSize.ORIGINAL:
-        return 'original';
-      default:
-        return 'unknown';
-    }
-  }
+  static const Map<ImageSize, String> _VALUES = {
+    ImageSize.THUMB: 'thumb',
+    ImageSize.SMALL: 'small',
+    ImageSize.DISPLAY: 'display',
+    ImageSize.ORIGINAL: 'original',
+    ImageSize.UNKNOWN: 'unknown',
+  };
 
-  static ImageSize getType(String s) {
-    switch (s.toLowerCase()) {
-      case 'thumb':
-        return ImageSize.THUMB;
-      case 'small':
-        return ImageSize.SMALL;
-      case 'display':
-        return ImageSize.DISPLAY;
-      case 'original':
-        return ImageSize.ORIGINAL;
-      default:
-        return ImageSize.UNKNOWN;
-    }
-  }
+  static const Map<ImageSize, String> _NUMBERS = {
+    ImageSize.THUMB: '100',
+    ImageSize.SMALL: '200',
+    ImageSize.DISPLAY: '400',
+    ImageSize.ORIGINAL: 'full',
+    ImageSize.UNKNOWN: 'unknown',
+  };
 
-  static ImageSize fromNumber(String s) {
-    switch (s) {
-      case '100':
-        return ImageSize.THUMB;
-      case '200':
-        return ImageSize.SMALL;
-      case '400':
-        return ImageSize.DISPLAY;
-      case 'full':
-        return ImageSize.ORIGINAL;
-      default:
-        return ImageSize.UNKNOWN;
-    }
-  }
+  String get value => _VALUES[this] ?? 'unknown';
 
-  String toNumber() {
-    switch (this) {
-      case ImageSize.THUMB:
-        return '100';
-      case ImageSize.SMALL:
-        return '200';
-      case ImageSize.DISPLAY:
-        return '400';
-      case ImageSize.ORIGINAL:
-        return 'full';
-      case ImageSize.UNKNOWN:
-      default:
-        return 'unknown';
-    }
-  }
+  String toNumber() => _NUMBERS[this] ?? 'unknown';
+
+  static ImageSize getType(String s) => ImageSize.values.firstWhere(
+        (final ImageSize key) => _VALUES[key] == s.toLowerCase(),
+        orElse: () => ImageSize.UNKNOWN,
+      );
+
+  static ImageSize fromNumber(String s) => ImageSize.values.firstWhere(
+        (final ImageSize key) => _NUMBERS[key] == s,
+        orElse: () => ImageSize.UNKNOWN,
+      );
 }
 
 /// The url to a specific product image.

@@ -54,22 +54,24 @@ class Ingredient extends JsonObject {
   Map<String, dynamic> toJson() => _$IngredientToJson(this);
 }
 
+const Map<IngredientSpecialPropertyStatus, String> _MAP = {
+  IngredientSpecialPropertyStatus.POSITIVE: 'yes',
+  IngredientSpecialPropertyStatus.NEGATIVE: 'no',
+  IngredientSpecialPropertyStatus.MAYBE: 'maybe',
+  IngredientSpecialPropertyStatus.IGNORE: 'ignore',
+};
+
 IngredientSpecialPropertyStatus? ingredientSpecialPropertyStatusFromJson(
     dynamic json) {
   if (json == null || json is! String) {
     return null;
   }
-  switch (json) {
-    case 'yes':
-      return IngredientSpecialPropertyStatus.POSITIVE;
-    case 'no':
-      return IngredientSpecialPropertyStatus.NEGATIVE;
-    case 'maybe':
-      return IngredientSpecialPropertyStatus.MAYBE;
-    case 'ignore':
-      return IngredientSpecialPropertyStatus.IGNORE;
-    default:
-      return null;
+  try {
+    return IngredientSpecialPropertyStatus.values.firstWhere(
+      (final IngredientSpecialPropertyStatus key) => _MAP[key] == json,
+    );
+  } on StateError {
+    return null;
   }
 }
 
@@ -78,16 +80,9 @@ String? ingredientSpecialPropertyStatusToJson(
   if (status == null) {
     return null;
   }
-  switch (status) {
-    case IngredientSpecialPropertyStatus.POSITIVE:
-      return 'yes';
-    case IngredientSpecialPropertyStatus.NEGATIVE:
-      return 'no';
-    case IngredientSpecialPropertyStatus.MAYBE:
-      return 'maybe';
-    case IngredientSpecialPropertyStatus.IGNORE:
-      return 'ignore';
-    default:
-      throw Exception('New enum type is not handled: $status');
+  final String? result = _MAP[status];
+  if (result != null) {
+    return result;
   }
+  throw Exception('New enum type is not handled: $status');
 }

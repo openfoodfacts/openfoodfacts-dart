@@ -3,6 +3,38 @@ enum Unit { KCAL, KJ, G, MILLI_G, MICRO_G, MILLI_L, L, PERCENT, UNKNOWN }
 
 /// Helper class for conversions to/from [Unit]
 class UnitHelper {
+  static const Map<String, Unit> _UNITS = {
+    'kcal': Unit.KCAL,
+    'kCal': Unit.KCAL,
+    'KCal': Unit.KCAL,
+    'kj': Unit.KJ,
+    'Kj': Unit.KJ,
+    'kJ': Unit.KJ,
+    'KJ': Unit.KJ,
+    'g': Unit.G,
+    'G': Unit.G,
+    'mg': Unit.MILLI_G,
+    'milli-gram': Unit.MILLI_G,
+    'mG': Unit.MILLI_G,
+    'micro-gram': Unit.MICRO_G,
+    'µg': Unit.MICRO_G,
+    '&#181;g': Unit.MICRO_G,
+    '&micro;g': Unit.MICRO_G,
+    '&#xb5;g': Unit.MICRO_G,
+    'ml': Unit.MILLI_L,
+    'mL': Unit.MILLI_L,
+    'Ml': Unit.MILLI_L,
+    'ML': Unit.MILLI_L,
+    'milli-liter': Unit.MILLI_L,
+    'liter': Unit.L,
+    'L': Unit.L,
+    'l': Unit.L,
+    '%': Unit.PERCENT,
+    'per cent': Unit.PERCENT,
+    'percent': Unit.PERCENT,
+    'μg': Unit.MICRO_G,
+  };
+
   /// Returns the [Unit] described by [s]
   static Unit? stringToUnit(String? s) {
     if (s == null || s.isEmpty) {
@@ -10,70 +42,13 @@ class UnitHelper {
     }
 
     if (s[0] == String.fromCharCode(0x03BC)) {
-      String newS = s.substring(1);
-      switch (newS) {
-        case 'g':
-          return Unit.MICRO_G;
-        default:
-          return Unit.UNKNOWN;
+      // greek letter mu
+      if (s.length > 1 && s.substring(1) == 'g') {
+        return Unit.MICRO_G;
       }
+      return Unit.UNKNOWN;
     }
 
-    switch (s) {
-      case 'kcal':
-        return Unit.KCAL;
-      case 'kCal':
-        return Unit.KCAL;
-      case 'KCal':
-        return Unit.KCAL;
-      case 'kj':
-        return Unit.KJ;
-      case 'Kj':
-        return Unit.KJ;
-      case 'kJ':
-        return Unit.KJ;
-      case 'KJ':
-        return Unit.KJ;
-      case 'g':
-        return Unit.G;
-      case 'G':
-        return Unit.G;
-      case 'mg':
-        return Unit.MILLI_G;
-      case 'milli-gram':
-        return Unit.MILLI_G;
-      case 'mG':
-        return Unit.MILLI_G;
-      case 'micro-gram':
-      case 'µg':
-      case '&#181;g':
-      case '&micro;g':
-      case '&#xb5;g':
-        return Unit.MICRO_G;
-      case 'ml':
-        return Unit.MILLI_L;
-      case 'mL':
-        return Unit.MILLI_L;
-      case 'Ml':
-        return Unit.MILLI_L;
-      case 'ML':
-        return Unit.MILLI_L;
-      case 'milli-liter':
-        return Unit.MILLI_L;
-      case 'liter':
-        return Unit.L;
-      case 'L':
-        return Unit.L;
-      case 'l':
-        return Unit.L;
-      case '%':
-        return Unit.PERCENT;
-      case 'per cent':
-        return Unit.PERCENT;
-      case 'percent':
-        return Unit.PERCENT;
-      default:
-        return Unit.UNKNOWN;
-    }
+    return _UNITS[s] ?? Unit.UNKNOWN;
   }
 }

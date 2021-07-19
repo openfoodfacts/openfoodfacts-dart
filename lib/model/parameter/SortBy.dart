@@ -2,26 +2,18 @@ import 'package:openfoodfacts/interface/Parameter.dart';
 
 /// Sort search API parameter
 class SortBy extends Parameter {
+  static const Map<SortOption, String> _VALUES = {
+    SortOption.PRODUCT_NAME: 'product_name',
+    SortOption.CREATED: 'created_t',
+    SortOption.EDIT: 'last_modified_t',
+    SortOption.POPULARITY: 'unique_scans_n',
+  };
+
   @override
   String getName() => 'sort_by';
 
   @override
-  String getValue() {
-    switch (option) {
-      case SortOption.PRODUCT_NAME:
-        return 'product_name';
-
-      case SortOption.CREATED:
-        return 'created_t';
-
-      case SortOption.EDIT:
-        return 'last_modified_t';
-
-      case SortOption.POPULARITY:
-      default:
-        return 'unique_scans_n';
-    }
-  }
+  String getValue() => _VALUES[option] ?? 'unique_scans_n';
 
   final SortOption? option;
 
