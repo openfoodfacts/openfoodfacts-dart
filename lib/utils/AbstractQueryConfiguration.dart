@@ -5,14 +5,14 @@ import 'package:openfoodfacts/utils/ProductFields.dart';
 abstract class AbstractQueryConfiguration {
   OpenFoodFactsLanguage? language;
 
-  /// The [languages] field should be used when a product is requested
+  /// The [extraLanguages] field should be used when a product is requested
   /// with fields in multiple languages. I.e. when some of the
   /// `IN_LANGS` fields are used (e.g. [ProductField.NAME_IN_LANGS]).
   ///
   /// However, the `IN_LANGS` fields are also compatible with the [language]
-  /// and [lc] fields - if only 1 language is needed, [languages] can
+  /// and [lc] fields - if only 1 language is needed, [extraLanguages] can
   /// be omitted.
-  List<OpenFoodFactsLanguage> languages;
+  List<OpenFoodFactsLanguage> extraLanguages;
   // Allow apps to directly provide the language code and country code without
   // having to use the OpenFoodFactsLanguage helper.
   String? lc;
@@ -21,7 +21,7 @@ abstract class AbstractQueryConfiguration {
 
   AbstractQueryConfiguration({
     this.language,
-    this.languages = const [],
+    this.extraLanguages = const [],
     this.lc,
     this.cc,
     this.fields,
@@ -48,7 +48,7 @@ abstract class AbstractQueryConfiguration {
         (field) => field == ProductField.ALL,
       );
       if (!ignoreFieldsFilter) {
-        final languages = this.languages.toList();
+        final languages = extraLanguages.toList();
         if (language != null && !languages.contains(language)) {
           languages.insert(0, language!);
         }

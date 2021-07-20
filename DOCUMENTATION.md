@@ -606,7 +606,7 @@ _displayProductName(name);
 final conf = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
-          languages: [OpenFoodFactsLanguage.RUSSIAN],
+          extraLanguages: [OpenFoodFactsLanguage.RUSSIAN],
           fields: [ProductField.NAME, ProductField.NAME_IN_LANGS]);
 final product = await OpenFoodAPIClient.getProduct(conf);
 var name = product.productNameInLangs[OpenFoodFactsLanguage.GERMAN];

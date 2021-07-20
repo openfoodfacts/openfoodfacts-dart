@@ -8,18 +8,18 @@ import 'package:openfoodfacts/utils/ProductFields.dart';
 class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
   final List<Parameter> parametersList;
 
-  /// See [AbstractQueryConfiguration.languages] for
+  /// See [AbstractQueryConfiguration.extraLanguages] for
   /// parameter's description.
   ProductSearchQueryConfiguration({
     final OpenFoodFactsLanguage? language,
-    final List<OpenFoodFactsLanguage> languages = const [],
+    final List<OpenFoodFactsLanguage> extraLanguages = const [],
     final String? lc,
     final String? cc,
     final List<ProductField>? fields,
     required this.parametersList,
   }) : super(
           language: language,
-          languages: languages,
+          extraLanguages: extraLanguages,
           lc: lc,
           cc: cc,
           fields: fields,

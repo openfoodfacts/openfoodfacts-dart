@@ -1165,7 +1165,7 @@ void main() {
       ];
 
       ProductQueryConfiguration conf = ProductQueryConfiguration(barcode,
-          languages: [
+          extraLanguages: [
             OpenFoodFactsLanguage.ENGLISH,
             OpenFoodFactsLanguage.RUSSIAN,
             OpenFoodFactsLanguage.GERMAN
