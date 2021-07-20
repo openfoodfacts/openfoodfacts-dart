@@ -102,13 +102,13 @@ void main() {
       final ProductSearchQueryConfiguration configuration =
           ProductSearchQueryConfiguration(
               parametersList: parameters,
-              fields: [ProductField.ALL],
+              fields: [ProductField.BARCODE],
               language: OpenFoodFactsLanguage.FRENCH);
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
-        TestConstants.PROD_USER,
+        TestConstants.TEST_USER,
         configuration,
-        queryType: QueryType.PROD,
+        queryType: QueryType.TEST,
       );
 
       expect(result.page, 2);
@@ -116,7 +116,7 @@ void main() {
       expect(result.products != null, true);
       expect(result.products!.length, 10);
       expect(result.products![0].runtimeType, Product);
-      expect(result.count! > 1000, true);
+      expect(result.count! > 900, true);
     });
 
     test('search products filter additives', () async {
