@@ -90,7 +90,7 @@ void main() {
       // save french product name
       Product frenchProduct = Product(
         barcode: barcode,
-        productNameInLangs: {
+        productNameInLanguages: {
           OpenFoodFactsLanguage.FRENCH: "Flocons d'epeautre au blé complet"
         },
         quantity: '500 g',
@@ -109,7 +109,7 @@ void main() {
       // save german product name
       Product germanProduct = Product(
         barcode: barcode,
-        productNameInLangs: {OpenFoodFactsLanguage.GERMAN: 'Dinkelflakes'},
+        productNameInLanguages: {OpenFoodFactsLanguage.GERMAN: 'Dinkelflakes'},
         quantity: '500 g',
         brands: 'Seitenbacher',
         lang: OpenFoodFactsLanguage.GERMAN,

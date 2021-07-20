@@ -4,13 +4,13 @@ import 'package:openfoodfacts/utils/LanguageHelper.dart';
 enum ProductField {
   BARCODE,
   NAME,
-  NAME_IN_LANGS,
+  NAME_IN_LANGUAGES,
   GENERIC_NAME,
   BRANDS,
   BRANDS_TAGS,
   COUNTRIES,
   COUNTRIES_TAGS,
-  COUNTRIES_TAGS_IN_LANGS,
+  COUNTRIES_TAGS_IN_LANGUAGES,
   LANGUAGE,
   QUANTITY,
   SERVING_SIZE,
@@ -28,20 +28,20 @@ enum ProductField {
   IMAGES,
   INGREDIENTS,
   INGREDIENTS_TAGS,
-  INGREDIENTS_TAGS_IN_LANGS,
+  INGREDIENTS_TAGS_IN_LANGUAGES,
   NUTRIMENTS,
   ADDITIVES,
   NUTRIENT_LEVELS,
   INGREDIENTS_TEXT,
-  INGREDIENTS_TEXT_IN_LANGS,
+  INGREDIENTS_TEXT_IN_LANGUAGES,
   NUTRIMENT_ENERGY_UNIT,
   NUTRIMENT_DATA_PER,
   NUTRISCORE,
   CATEGORIES,
   CATEGORIES_TAGS,
-  CATEGORIES_TAGS_IN_LANGS,
+  CATEGORIES_TAGS_IN_LANGUAGES,
   LABELS_TAGS,
-  LABELS_TAGS_IN_LANGS,
+  LABELS_TAGS_IN_LANGUAGES,
   MISC_TAGS,
   STATES_TAGS,
   TRACES_TAGS,
@@ -59,13 +59,13 @@ extension ProductFieldExtension on ProductField {
   static const Map<ProductField, String> _KEYS = {
     ProductField.BARCODE: 'code',
     ProductField.NAME: 'product_name',
-    ProductField.NAME_IN_LANGS: 'product_name_',
+    ProductField.NAME_IN_LANGUAGES: 'product_name_',
     ProductField.GENERIC_NAME: 'generic_name',
     ProductField.BRANDS: 'brands',
     ProductField.BRANDS_TAGS: 'brands_tags',
     ProductField.COUNTRIES: 'countries',
     ProductField.COUNTRIES_TAGS: 'countries_tags',
-    ProductField.COUNTRIES_TAGS_IN_LANGS: 'countries_tags_',
+    ProductField.COUNTRIES_TAGS_IN_LANGUAGES: 'countries_tags_',
     ProductField.LANGUAGE: 'lang',
     ProductField.QUANTITY: 'quantity',
     ProductField.SERVING_SIZE: 'serving_size',
@@ -83,20 +83,20 @@ extension ProductFieldExtension on ProductField {
     ProductField.IMAGES: 'images',
     ProductField.INGREDIENTS: 'ingredients',
     ProductField.INGREDIENTS_TAGS: 'ingredients_tags',
-    ProductField.INGREDIENTS_TAGS_IN_LANGS: 'ingredients_tags_',
+    ProductField.INGREDIENTS_TAGS_IN_LANGUAGES: 'ingredients_tags_',
     ProductField.NUTRIMENTS: 'nutriments',
     ProductField.ADDITIVES: 'additives_tags',
     ProductField.NUTRIENT_LEVELS: 'nutrient_levels',
     ProductField.INGREDIENTS_TEXT: 'ingredients_text',
-    ProductField.INGREDIENTS_TEXT_IN_LANGS: 'ingredients_text_',
+    ProductField.INGREDIENTS_TEXT_IN_LANGUAGES: 'ingredients_text_',
     ProductField.NUTRIMENT_ENERGY_UNIT: 'nutriment_energy_unit',
     ProductField.NUTRIMENT_DATA_PER: 'nutrition_data_per',
     ProductField.NUTRISCORE: 'nutrition_grade_fr',
     ProductField.CATEGORIES: 'categories',
     ProductField.CATEGORIES_TAGS: 'categories_tags',
-    ProductField.CATEGORIES_TAGS_IN_LANGS: 'categories_tags_',
+    ProductField.CATEGORIES_TAGS_IN_LANGUAGES: 'categories_tags_',
     ProductField.LABELS_TAGS: 'labels_tags',
-    ProductField.LABELS_TAGS_IN_LANGS: 'labels_tags_',
+    ProductField.LABELS_TAGS_IN_LANGUAGES: 'labels_tags_',
     ProductField.MISC_TAGS: 'misc',
     ProductField.STATES_TAGS: 'states_tags',
     ProductField.TRACES_TAGS: 'traces_tags',
@@ -113,23 +113,23 @@ extension ProductFieldExtension on ProductField {
   String get key => _KEYS[this] ?? '';
 }
 
-/// NOTE: if one of the fields is IN_LANGS and [languages] is empty -
+/// NOTE: if one of the fields is IN_LANGUAGES and [languages] is empty -
 /// the function will throw.
 List<String> convertFieldsToStrings(
     List<ProductField> fields, List<OpenFoodFactsLanguage> languages) {
   final fieldsStrings = <String>[];
 
-  const fieldsInLangs = [
-    ProductField.CATEGORIES_TAGS_IN_LANGS,
-    ProductField.LABELS_TAGS_IN_LANGS,
-    ProductField.NAME_IN_LANGS,
-    ProductField.COUNTRIES_TAGS_IN_LANGS,
-    ProductField.INGREDIENTS_TEXT_IN_LANGS,
-    ProductField.INGREDIENTS_TAGS_IN_LANGS,
+  const fieldsInLanguages = [
+    ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
+    ProductField.LABELS_TAGS_IN_LANGUAGES,
+    ProductField.NAME_IN_LANGUAGES,
+    ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
+    ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+    ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
   ];
 
   for (final field in fields) {
-    if (fieldsInLangs.contains(field)) {
+    if (fieldsInLanguages.contains(field)) {
       if (languages.isEmpty == null) {
         throw ArgumentError(
             'Cannot request in-lang field $field without language');

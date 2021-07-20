@@ -518,8 +518,8 @@ print("Upload was successful");
 
 ## Notes on languages mechanics.
 
-TL;DR: use the "..InLangs" fields if you intend to display products data in
-specific language(s). You __must__ use the "..InLangs" fields if you intend
+TL;DR: use the "..InLanguages" fields if you intend to display products data in
+specific language(s). You __must__ use the "..InLanguages" fields if you intend
 to update products. Otherwise you might accidentally corrupt products by
 overwriting proper-language data with improper-language data.
 
@@ -549,7 +549,7 @@ languages. Such fields are of 2 types:
 In addition to that, fields of the [Product] class with multilingual
 support also are of 2 types:
 1. Fields with simple value (e.g. [Product.productName]).
-2. Fields with multilingual values (e.g. [Product.productNameInLangs]).
+2. Fields with multilingual values (e.g. [Product.productNameInLanguages]).
 
 Lastly, products in Open Food Facts have a main language. That's the
 language which will be used to fill fields of [Product] when no specific
@@ -567,15 +567,15 @@ Here's how the described above types of fields work in combinations:
    If the German version is not available, the fields will be in the main
    product's language.
 2. 1-2 (packaging info + multilingual value).
-   Fields like [Product.productNameInLangs] will have the German value
+   Fields like [Product.productNameInLanguages] will have the German value
    inside if it's available.
-   If it's not available, `product.productNameInLangs[GERMAN]`
+   If it's not available, `product.productNameInLanguages[GERMAN]`
    will be `null`.
 3. 2-1 (meta info + simple value).
    Fields like [Product.countriesTags] __will not be in German__, ever.
    They will have values like `["en:austria", "en:belgium", "en:canada"]`.
 4. 2-2 (meta info + multilingual value).
-   Fields like [Product.countriesTagsInLangs] will have German values
+   Fields like [Product.countriesTagsInLanguages] will have German values
    when available, if some of the values is not available in German it
    will have a language prefix: `["Österreich ", "Belgien", "en:canada"]`.
 
@@ -606,11 +606,11 @@ _displayProductName(name);
 final conf = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
-          extraLanguages: [OpenFoodFactsLanguage.RUSSIAN],
-          fields: [ProductField.NAME, ProductField.NAME_IN_LANGS]);
+          languages: [OpenFoodFactsLanguage.RUSSIAN],
+          fields: [ProductField.NAME, ProductField.NAME_IN_LANGUAGES]);
 final product = await OpenFoodAPIClient.getProduct(conf);
-var name = product.productNameInLangs[OpenFoodFactsLanguage.GERMAN];
-name ??= product.productNameInLangs[OpenFoodFactsLanguage.RUSSIAN];
+var name = product.productNameInLanguages[OpenFoodFactsLanguage.GERMAN];
+name ??= product.productNameInLanguages[OpenFoodFactsLanguage.RUSSIAN];
 name ??= product.productName;
 name ??= 'No name';
 _displayProductName(name);
@@ -622,9 +622,9 @@ _displayProductName(name);
 final conf = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
-          fields: [ProductField.CATEGORIES_TAGS_IN_LANGS]);
+          fields: [ProductField.CATEGORIES_TAGS_IN_LANGUAGES]);
 final product = await OpenFoodAPIClient.getProduct(conf);
-var categories = product.categoriesTagsInLangs[OpenFoodFactsLanguage.GERMAN];
+var categories = product.categoriesTagsInLanguages[OpenFoodFactsLanguage.GERMAN];
 
 // Erase not translated categories (e.g. "en:cake").
 categories = categories.where((c) => !c.startsWith(RegExp('\w+:')));
@@ -638,9 +638,9 @@ _displayProductCategories(categories);
 final conf = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
-          fields: [ProductField.CATEGORIES_TAGS_IN_LANGS]);
+          fields: [ProductField.CATEGORIES_TAGS_IN_LANGUAGES]);
 final product = await OpenFoodAPIClient.getProduct(conf);
-var categories = product.categoriesTagsInLangs[OpenFoodFactsLanguage.GERMAN];
+var categories = product.categoriesTagsInLanguages[OpenFoodFactsLanguage.GERMAN];
 
 // Will have only categories which start with
 // lang prefixes (e.g. "en:cake").
@@ -652,7 +652,7 @@ final updatedCategories = await _askUserToUpdateCategories(
   translatedCategories);
 // Set updated German categories AND avoid
 // erasure of the not translated ones.
-product.categoriesTagsInLangs[OpenFoodFactsLanguage.GERMAN] =
+product.categoriesTagsInLanguages[OpenFoodFactsLanguage.GERMAN] =
   updatedCategories + notTranslatedCategories;
 
 await OpenFoodAPIClient.saveProduct(_user, product);
