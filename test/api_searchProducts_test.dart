@@ -1,7 +1,7 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
-import 'package:openfoodfacts/model/parameter/ContainsAdditives.dart';
 import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
+import 'package:openfoodfacts/model/parameter/WithoutAdditives.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/SearchResult.dart';
 import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
@@ -128,8 +128,10 @@ void main() {
 
         final List<Parameter> parameters = <Parameter>[
           const SearchTerms(terms: ['Moules marinières']),
-          ContainsAdditives(filter: withoutAdditives),
         ];
+        if (withoutAdditives) {
+          parameters.add(WithoutAdditives());
+        }
 
         final ProductSearchQueryConfiguration configuration =
             ProductSearchQueryConfiguration(
