@@ -92,75 +92,64 @@ void main() {
       expect(result.count! > 30000, true);
     });
 
-    /*test('search products by keywords', () async {
-      var parameters = <Parameter>[
-        const OutputFormat(format: Format.JSON),
+    test('search products by keywords', () async {
+      final List<Parameter> parameters = <Parameter>[
         const Page(page: 2),
         const PageSize(size: 10),
-        const SearchSimple(active: true),
-        const SortBy(option: SortOption.PRODUCT_NAME),
-        const SearchTerms(terms: ["Fruit"])
+        const SearchTerms(terms: ['Kiwi'])
       ];
 
-      ProductSearchQueryConfiguration configuration =
+      final ProductSearchQueryConfiguration configuration =
           ProductSearchQueryConfiguration(
               parametersList: parameters,
-              fields: [ProductField.ALL],
+              fields: [ProductField.BARCODE],
               language: OpenFoodFactsLanguage.FRENCH);
 
-      //For this query we will use the PROD bcs on the TEST DB the query take
-      // more then 30 sec and this lead to a timeout
-      SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.PROD_USER, configuration,
-          queryType: QueryType.PROD);
+      final SearchResult result = await OpenFoodAPIClient.searchProducts(
+        TestConstants.TEST_USER,
+        configuration,
+        queryType: QueryType.TEST,
+      );
 
-      expect(result != null, true);
       expect(result.page, 2);
       expect(result.pageSize, 10);
       expect(result.products != null, true);
-      expect(result.products.length, 10);
-      expect(result.products[0].runtimeType, Product);
-      expect(result.count > 30000, true);
-    });*/
+      expect(result.products!.length, 10);
+      expect(result.products![0].runtimeType, Product);
+      expect(result.count! > 900, true);
+    });
 
     test('search products filter additives', () async {
-      var parameters = <Parameter>[
-        const Page(page: 5),
-        const PageSize(size: 10),
-        const SortBy(option: SortOption.PRODUCT_NAME),
-        const SearchTerms(terms: ['Fruit à coques']),
-      ];
+      final Map<bool, int> counts = {};
+      const bool WITHOUT_ADDITIVES = true;
+      const bool ADDITIVE_AGNOSTIC = false;
+      for (int i = 0; i < 2; i++) {
+        final bool withoutAdditives = i == 1;
 
-      ProductSearchQueryConfiguration configuration =
-          ProductSearchQueryConfiguration(
-              parametersList: parameters,
-              fields: [ProductField.ALL],
-              language: OpenFoodFactsLanguage.FRENCH);
+        final List<Parameter> parameters = <Parameter>[
+          const SearchTerms(terms: ['Moules marinières']),
+        ];
+        if (withoutAdditives) {
+          parameters.add(WithoutAdditives());
+        }
 
-      SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER, configuration,
-          queryType: QueryType.TEST);
-
-      int totalCount = result.count!;
-
-      parameters = <Parameter>[
-        const Page(page: 5),
-        const PageSize(size: 10),
-        const SortBy(option: SortOption.PRODUCT_NAME),
-        const SearchTerms(terms: ['Fruit à coques']),
-        const WithoutAdditives(),
-      ];
-
-      configuration = ProductSearchQueryConfiguration(
+        final ProductSearchQueryConfiguration configuration =
+            ProductSearchQueryConfiguration(
           parametersList: parameters,
-          fields: [ProductField.ALL],
-          language: OpenFoodFactsLanguage.FRENCH);
+          fields: [ProductField.BARCODE],
+          language: OpenFoodFactsLanguage.FRENCH,
+        );
 
-      result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER, configuration,
-          queryType: QueryType.TEST);
+        final SearchResult result = await OpenFoodAPIClient.searchProducts(
+          TestConstants.TEST_USER,
+          configuration,
+          queryType: QueryType.TEST,
+        );
 
-      expect(result.count! < totalCount, true);
+        counts[withoutAdditives] = result.count!;
+      }
+
+      expect(counts[WITHOUT_ADDITIVES]! < counts[ADDITIVE_AGNOSTIC]!, true);
     });
 
     test('search products with filter on tags', () async {
