@@ -3,8 +3,12 @@ abstract class JsonObject {
   Map<String, dynamic> toJson();
 
   Map<String, String> toData() {
+    return toDataStatic(toJson());
+  }
+
+  static Map<String, String> toDataStatic(Map<String, dynamic> json) {
     var result = <String, String>{};
-    for (MapEntry<String, dynamic> entry in toJson().entries) {
+    for (MapEntry<String, dynamic> entry in json.entries) {
       result.putIfAbsent(entry.key, () => entry.value.toString());
     }
 

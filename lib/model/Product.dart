@@ -16,33 +16,23 @@ import 'Nutriments.dart';
 
 part 'Product.g.dart';
 
+/// This class contains most of the data about a specific product.
+///
+/// Please read the language mechanics explanation if you intend to display
+/// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
 @JsonSerializable()
 class Product extends JsonObject {
-  @JsonKey(ignore: true)
-  OpenFoodFactsLanguage? translatedLang;
-
   @JsonKey(name: 'code')
   String? barcode;
 
   @JsonKey(name: 'product_name', includeIfNull: false)
   String? productName;
-  @JsonKey(name: 'product_name_translated', includeIfNull: false)
-  String? productNameTranslated;
-
-  /// Deprecated: please use productNameTranslated
-  @JsonKey(name: 'product_name_de', includeIfNull: false)
-  @deprecated
-  String? productNameDE;
-
-  /// Deprecated: please use productNameTranslated
-  @JsonKey(name: 'product_name_en', includeIfNull: false)
-  @deprecated
-  String? productNameEN;
-
-  /// Deprecated: please use productNameTranslated
-  @JsonKey(name: 'product_name_fr', includeIfNull: false)
-  @deprecated
-  String? productNameFR;
+  @JsonKey(
+      name: 'product_name_in_languages',
+      fromJson: LanguageHelper.fromJsonStringMap,
+      toJson: LanguageHelper.toJsonStringMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, String>? productNameInLanguages;
 
   @JsonKey(name: 'brands', includeIfNull: false)
   String? brands;
@@ -53,8 +43,12 @@ class Product extends JsonObject {
   String? countries;
   @JsonKey(name: 'countries_tags', includeIfNull: false)
   List<String>? countriesTags;
-  @JsonKey(name: 'countries_tags_translated', includeIfNull: false)
-  List<String>? countriesTagsTranslated;
+  @JsonKey(
+      name: 'countries_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, List<String>>? countriesTagsInLanguages;
 
   @JsonKey(
       name: 'lang',
@@ -124,28 +118,21 @@ class Product extends JsonObject {
 
   @JsonKey(name: 'ingredients_text', includeIfNull: false)
   String? ingredientsText;
-  @JsonKey(name: 'ingredients_text_translated', includeIfNull: false)
-  String? ingredientsTextTranslated;
+  @JsonKey(
+      name: 'ingredients_text_in_languages',
+      fromJson: LanguageHelper.fromJsonStringMap,
+      toJson: LanguageHelper.toJsonStringMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, String>? ingredientsTextInLanguages;
 
   @JsonKey(name: 'ingredients_tags', includeIfNull: false)
   List<String>? ingredientsTags;
-  @JsonKey(name: 'ingredients_tags_translated', includeIfNull: false)
-  List<String>? ingredientsTagsTranslated;
-
-  /// Deprecated: please use ingredientsTextTranslated
-  @JsonKey(name: 'ingredients_text_de', includeIfNull: false)
-  @deprecated
-  String? ingredientsTextDE;
-
-  /// Deprecated: please use ingredientsTextTranslated
-  @JsonKey(name: 'ingredients_text_en', includeIfNull: false)
-  @deprecated
-  String? ingredientsTextEN;
-
-  /// Deprecated: please use ingredientsTextTranslated
-  @JsonKey(name: 'ingredients_text_fr', includeIfNull: false)
-  @deprecated
-  String? ingredientsTextFR;
+  @JsonKey(
+      name: 'ingredients_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, List<String>>? ingredientsTagsInLanguages;
 
   @JsonKey(
       name: 'ingredients_analysis_tags',
@@ -197,15 +184,23 @@ class Product extends JsonObject {
   String? categories;
   @JsonKey(name: 'categories_tags', includeIfNull: false)
   List<String>? categoriesTags;
-  @JsonKey(name: 'categories_tags_translated', includeIfNull: false)
-  List<String>? categoriesTagsTranslated;
+  @JsonKey(
+      name: 'categories_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, List<String>>? categoriesTagsInLanguages;
 
   @JsonKey(name: 'labels', includeIfNull: false)
   String? labels;
   @JsonKey(name: 'labels_tags', includeIfNull: false)
   List<String>? labelsTags;
-  @JsonKey(name: 'labels_tags_translated', includeIfNull: false)
-  List<String>? labelsTagsTranslated;
+  @JsonKey(
+      name: 'labels_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, List<String>>? labelsTagsInLanguages;
 
   @JsonKey(name: 'packaging', includeIfNull: false)
   String? packaging;
@@ -248,18 +243,14 @@ class Product extends JsonObject {
   EcoscoreData? ecoscoreData;
 
   Product(
-      {this.translatedLang,
-      this.barcode,
+      {this.barcode,
       this.productName,
-      this.productNameTranslated,
-      this.productNameDE,
-      this.productNameEN,
-      this.productNameFR,
+      this.productNameInLanguages,
       this.brands,
       this.brandsTags,
       this.countries,
       this.countriesTags,
-      this.countriesTagsTranslated,
+      this.countriesTagsInLanguages,
       this.lang,
       this.quantity,
       this.imgSmallUrl,
@@ -278,12 +269,9 @@ class Product extends JsonObject {
       this.images,
       this.ingredients,
       this.ingredientsText,
-      this.ingredientsTextTranslated,
+      this.ingredientsTextInLanguages,
       this.ingredientsTags,
-      this.ingredientsTagsTranslated,
-      this.ingredientsTextDE,
-      this.ingredientsTextEN,
-      this.ingredientsTextFR,
+      this.ingredientsTagsInLanguages,
       this.ingredientsAnalysisTags,
       this.nutriments,
       this.additives,
@@ -295,10 +283,10 @@ class Product extends JsonObject {
       this.nutriscore,
       this.categories,
       this.categoriesTags,
-      this.categoriesTagsTranslated,
+      this.categoriesTagsInLanguages,
       this.labels,
       this.labelsTags,
-      this.labelsTagsTranslated,
+      this.labelsTagsInLanguages,
       this.packaging,
       this.packagingTags,
       this.miscTags,
@@ -317,20 +305,52 @@ class Product extends JsonObject {
       if (key.contains('debug')) {
         continue;
       } else if (key.startsWith('product_name_')) {
-        result.productNameTranslated = json[key];
+        OpenFoodFactsLanguage lang = _langFrom(key, 'product_name_');
+        if (lang != OpenFoodFactsLanguage.UNDEFINED) {
+          result.productNameInLanguages ??= {};
+          result.productNameInLanguages![lang] = json[key];
+        }
       } else if (key.startsWith('categories_tags_')) {
-        result.categoriesTagsTranslated = _jsonValueToList(json[key]);
+        OpenFoodFactsLanguage lang = _langFrom(key, 'categories_tags_');
+        final values = _jsonValueToList(json[key]);
+        if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
+          result.categoriesTagsInLanguages ??= {};
+          result.categoriesTagsInLanguages![lang] = values;
+        }
       } else if (key.startsWith('ingredients_tags_')) {
-        result.ingredientsTagsTranslated = _jsonValueToList(json[key]);
+        OpenFoodFactsLanguage lang = _langFrom(key, 'ingredients_tags_');
+        final values = _jsonValueToList(json[key]);
+        if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
+          result.ingredientsTagsInLanguages ??= {};
+          result.ingredientsTagsInLanguages![lang] = values;
+        }
       } else if (key.startsWith('labels_tags_')) {
-        result.labelsTagsTranslated = _jsonValueToList(json[key]);
+        OpenFoodFactsLanguage lang = _langFrom(key, 'labels_tags_');
+        final values = _jsonValueToList(json[key]);
+        if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
+          result.labelsTagsInLanguages ??= {};
+          result.labelsTagsInLanguages![lang] = values;
+        }
       } else if (key.startsWith('countries_tags_')) {
-        result.countriesTagsTranslated = _jsonValueToList(json[key]);
+        OpenFoodFactsLanguage lang = _langFrom(key, 'countries_tags_');
+        final values = _jsonValueToList(json[key]);
+        if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
+          result.countriesTagsInLanguages ??= {};
+          result.countriesTagsInLanguages![lang] = values;
+        }
       } else if (key.startsWith('ingredients_text_')) {
-        result.ingredientsTextTranslated = json[key];
+        OpenFoodFactsLanguage lang = _langFrom(key, 'ingredients_text_');
+        if (lang != OpenFoodFactsLanguage.UNDEFINED) {
+          result.ingredientsTextInLanguages ??= {};
+          result.ingredientsTextInLanguages![lang] = json[key];
+        }
       }
     }
     return result;
+  }
+
+  static OpenFoodFactsLanguage _langFrom(String key, String prefix) {
+    return LanguageHelper.fromJson(key.substring(prefix.length));
   }
 
   static List<String>? _jsonValueToList(dynamic value) {
@@ -338,36 +358,38 @@ class Product extends JsonObject {
   }
 
   Map<String, String> toServerData() {
-    final data = super.toData();
-
-    final lc = translatedLang?.code ?? lang?.code;
+    final json = toJson();
 
     // Defensive keys copy to modify map while iterating
-    final keys = data.keys.toList();
+    final keys = json.keys.toList();
 
     for (final key in keys) {
-      // NOTE: '_tags_translated' are not supported because tags translation
+      // NOTE: '_tags_in_languages' are not supported because tags translation
       // is done automatically on the server.
-      if (key.endsWith('_translated')) {
-        if (lc == null) {
-          throw StateError('Cannot send translated field without language');
-        }
-        if (key.endsWith('_tags_translated')) {
+      if (key.endsWith('_in_languages')) {
+        if (key.endsWith('_tags_in_languages')) {
           throw StateError(
-              'Fields "SOMENAME_tags_translated" cannot be sent to the server. '
-              'Please send translated values either by "SOMENAME_translated" field '
-              'if it exists, or by "SOMENAME" field and '
+              'Fields "SOMENAME_tags_in_languages" cannot be sent to the server. '
+              'Please send localized values either by "SOMENAME_in_languages" '
+              'field if it exists, or by "SOMENAME" field and '
               'prepending language code to values, e.g.: '
               '{"categories": "en:nuts, en:peanut"}');
         }
-        final value = data[key];
-        data.remove(key);
-        final keyUntranslated = key.substring(0, key.indexOf('_translated'));
-        final realKey = '${keyUntranslated}_$lc';
-        data[realKey] = value!;
+        final value = json.remove(key) as Map<String, dynamic>;
+        for (final entry in value.entries) {
+          final langKey = entry.key;
+          final lang = LanguageHelper.fromJson(langKey);
+          if (lang == OpenFoodFactsLanguage.UNDEFINED) {
+            throw StateError('Cannot send localized field without '
+                'a proper language. Received: $langKey');
+          }
+          final keyNoLangs = key.substring(0, key.indexOf('_in_languages'));
+          final realKey = '${keyNoLangs}_${lang.code}';
+          json[realKey] = entry.value;
+        }
       }
     }
-    return data;
+    return JsonObject.toDataStatic(json);
   }
 
   @override

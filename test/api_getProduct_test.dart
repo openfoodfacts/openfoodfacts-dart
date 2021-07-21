@@ -537,7 +537,7 @@ void main() {
       assert(result.product!.brandsTags != null);
       assert(result.product!.ingredients == null);
       assert(result.product!.ingredientsText == null);
-      assert(result.product!.productNameTranslated == null);
+      assert(result.product!.productNameInLanguages == null);
       assert(result.product!.additives!.ids.isEmpty);
       assert(result.product!.additives!.names.isEmpty);
       assert(result.product!.nutrientLevels!.levels.isEmpty);
@@ -554,7 +554,7 @@ void main() {
       assert(result.product!.brandsTags == null);
       assert(result.product!.ingredients == null);
       assert(result.product!.ingredientsText == null);
-      assert(result.product!.productNameTranslated == null);
+      assert(result.product!.productNameInLanguages == null);
       assert(result.product!.additives!.ids.isEmpty);
       assert(result.product!.additives!.names.isEmpty);
       assert(result.product!.nutrientLevels!.levels.isEmpty);
@@ -571,7 +571,7 @@ void main() {
       assert(result.product!.brandsTags == null);
       assert(result.product!.ingredients == null);
       assert(result.product!.ingredientsText == null);
-      assert(result.product!.productNameTranslated == null);
+      assert(result.product!.productNameInLanguages == null);
       assert(result.product!.additives!.ids.isEmpty);
       assert(result.product!.additives!.names.isEmpty);
       assert(result.product!.nutrientLevels!.levels.isEmpty);
@@ -589,7 +589,7 @@ void main() {
       assert(result.product!.brandsTags == null);
       assert(result.product!.ingredients == null);
       assert(result.product!.ingredientsText == null);
-      assert(result.product!.productNameTranslated == null);
+      assert(result.product!.productNameInLanguages == null);
       assert(result.product!.additives!.ids.isEmpty);
       assert(result.product!.additives!.names.isEmpty);
       assert(result.product!.nutrientLevels!.levels.isEmpty);
@@ -903,15 +903,17 @@ void main() {
     });
 
     test(
-        'translated fields when product is not translated into a second language',
+        'localized fields when a product is not available in a second language',
         () async {
       String barcode = '3333333333333';
 
       Product englishInputProduct = Product(
         barcode: barcode,
         lang: OpenFoodFactsLanguage.ENGLISH,
-        productNameTranslated: 'Pancakes',
-        ingredientsTextTranslated: 'Flour, water',
+        productNameInLanguages: {OpenFoodFactsLanguage.ENGLISH: 'Pancakes'},
+        ingredientsTextInLanguages: {
+          OpenFoodFactsLanguage.ENGLISH: 'Flour, water'
+        },
         categories: 'Beverages',
         countries: 'Russia',
       );
@@ -922,15 +924,15 @@ void main() {
 
       final fields = [
         ProductField.NAME,
-        ProductField.NAME_TRANSLATED,
+        ProductField.NAME_IN_LANGUAGES,
         ProductField.INGREDIENTS_TEXT,
-        ProductField.INGREDIENTS_TEXT_TRANSLATED,
+        ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
         ProductField.INGREDIENTS_TAGS,
-        ProductField.INGREDIENTS_TAGS_TRANSLATED,
+        ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
         ProductField.CATEGORIES_TAGS,
-        ProductField.CATEGORIES_TAGS_TRANSLATED,
+        ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
         ProductField.COUNTRIES_TAGS,
-        ProductField.COUNTRIES_TAGS_TRANSLATED,
+        ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
       ];
 
       ProductQueryConfiguration englishConf = ProductQueryConfiguration(barcode,
@@ -947,23 +949,33 @@ void main() {
       Product englishProduct = englishResult.product!;
 
       expect(englishProduct.productName, equals('Pancakes'));
-      expect(englishProduct.productNameTranslated, equals('Pancakes'));
+      expect(englishProduct.productNameInLanguages,
+          equals({OpenFoodFactsLanguage.ENGLISH: 'Pancakes'}));
 
       expect(englishProduct.ingredientsText, equals('Flour, water'));
-      expect(englishProduct.ingredientsTextTranslated, equals('Flour, water'));
+      expect(englishProduct.ingredientsTextInLanguages,
+          equals({OpenFoodFactsLanguage.ENGLISH: 'Flour, water'}));
 
       expect(englishProduct.ingredientsTags, equals(['en:flour', 'en:water']));
       expect(
-          englishProduct.ingredientsTagsTranslated, equals(['Flour', 'Water']));
+          englishProduct.ingredientsTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: ['Flour', 'Water']
+          }));
 
       expect(englishProduct.categoriesTags, equals(['en:beverages']));
-      expect(englishProduct.categoriesTagsTranslated, equals(['Beverages']));
+      expect(
+          englishProduct.categoriesTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: ['Beverages']
+          }));
 
       expect(englishProduct.countriesTags, equals(['en:russia']));
-      expect(englishProduct.countriesTagsTranslated, equals(['Russia']));
-
       expect(
-          englishProduct.translatedLang, equals(OpenFoodFactsLanguage.ENGLISH));
+          englishProduct.countriesTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: ['Russia']
+          }));
 
       // Russian!
 
@@ -974,43 +986,54 @@ void main() {
       Product russianProduct = russianResult.product!;
 
       expect(russianProduct.productName, equals('Pancakes'));
-      expect(russianProduct.productNameTranslated, isNull);
+      expect(russianProduct.productNameInLanguages, isNull);
 
       expect(russianProduct.ingredientsText, equals('Flour, water'));
-      expect(russianProduct.ingredientsTextTranslated, isNull);
+      expect(russianProduct.ingredientsTextInLanguages, isNull);
 
       expect(russianProduct.ingredientsTags, equals(['en:flour', 'en:water']));
       expect(
-          russianProduct.ingredientsTagsTranslated, equals(['Мука', 'Вода']));
+          russianProduct.ingredientsTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.RUSSIAN: ['Мука', 'Вода']
+          }));
 
       expect(russianProduct.categoriesTags, equals(['en:beverages']));
-      expect(russianProduct.categoriesTagsTranslated, equals(['Напитки']));
+      expect(
+          russianProduct.categoriesTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.RUSSIAN: ['Напитки']
+          }));
 
       expect(russianProduct.countriesTags, equals(['en:russia']));
-      expect(russianProduct.countriesTagsTranslated, equals(['Россия']));
-
       expect(
-          russianProduct.translatedLang, equals(OpenFoodFactsLanguage.RUSSIAN));
+          russianProduct.countriesTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.RUSSIAN: ['Россия']
+          }));
     });
 
-    test('translated fields when product is translated into a second language',
+    test('localized fields when a product is available in a second language',
         () async {
       String barcode = '2222222222222';
 
       Product englishInputProduct = Product(
         barcode: barcode,
         lang: OpenFoodFactsLanguage.ENGLISH,
-        productNameTranslated: 'Pancakes',
-        ingredientsTextTranslated: 'Flour, water',
+        productNameInLanguages: {OpenFoodFactsLanguage.ENGLISH: 'Pancakes'},
+        ingredientsTextInLanguages: {
+          OpenFoodFactsLanguage.ENGLISH: 'Flour, water'
+        },
         categories: 'Beverages',
         countries: 'Russia',
       );
 
       Product russianInputProduct = Product(
         barcode: barcode,
-        translatedLang: OpenFoodFactsLanguage.RUSSIAN,
-        productNameTranslated: 'Блинчики',
-        ingredientsTextTranslated: 'Мука, вода',
+        productNameInLanguages: {OpenFoodFactsLanguage.RUSSIAN: 'Блинчики'},
+        ingredientsTextInLanguages: {
+          OpenFoodFactsLanguage.RUSSIAN: 'Мука, вода'
+        },
       );
 
       await OpenFoodAPIClient.saveProduct(
@@ -1022,15 +1045,15 @@ void main() {
 
       final fields = [
         ProductField.NAME,
-        ProductField.NAME_TRANSLATED,
+        ProductField.NAME_IN_LANGUAGES,
         ProductField.INGREDIENTS_TEXT,
-        ProductField.INGREDIENTS_TEXT_TRANSLATED,
+        ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
         ProductField.INGREDIENTS_TAGS,
-        ProductField.INGREDIENTS_TAGS_TRANSLATED,
+        ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
         ProductField.CATEGORIES_TAGS,
-        ProductField.CATEGORIES_TAGS_TRANSLATED,
+        ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
         ProductField.COUNTRIES_TAGS,
-        ProductField.COUNTRIES_TAGS_TRANSLATED,
+        ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
       ];
 
       ProductQueryConfiguration englishConf = ProductQueryConfiguration(barcode,
@@ -1047,23 +1070,33 @@ void main() {
       Product englishProduct = englishResult.product!;
 
       expect(englishProduct.productName, equals('Pancakes'));
-      expect(englishProduct.productNameTranslated, equals('Pancakes'));
+      expect(englishProduct.productNameInLanguages,
+          equals({OpenFoodFactsLanguage.ENGLISH: 'Pancakes'}));
 
       expect(englishProduct.ingredientsText, equals('Flour, water'));
-      expect(englishProduct.ingredientsTextTranslated, equals('Flour, water'));
+      expect(englishProduct.ingredientsTextInLanguages,
+          equals({OpenFoodFactsLanguage.ENGLISH: 'Flour, water'}));
 
       expect(englishProduct.ingredientsTags, equals(['en:flour', 'en:water']));
       expect(
-          englishProduct.ingredientsTagsTranslated, equals(['Flour', 'Water']));
+          englishProduct.ingredientsTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: ['Flour', 'Water']
+          }));
 
       expect(englishProduct.categoriesTags, equals(['en:beverages']));
-      expect(englishProduct.categoriesTagsTranslated, equals(['Beverages']));
+      expect(
+          englishProduct.categoriesTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: ['Beverages']
+          }));
 
       expect(englishProduct.countriesTags, equals(['en:russia']));
-      expect(englishProduct.countriesTagsTranslated, equals(['Russia']));
-
       expect(
-          englishProduct.translatedLang, equals(OpenFoodFactsLanguage.ENGLISH));
+          englishProduct.countriesTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: ['Russia']
+          }));
 
       // Russian!
 
@@ -1074,23 +1107,200 @@ void main() {
       Product russianProduct = russianResult.product!;
 
       expect(russianProduct.productName, equals('Блинчики'));
-      expect(russianProduct.productNameTranslated, equals('Блинчики'));
+      expect(russianProduct.productNameInLanguages,
+          equals({OpenFoodFactsLanguage.RUSSIAN: 'Блинчики'}));
 
       expect(russianProduct.ingredientsText, equals('Мука, вода'));
-      expect(russianProduct.ingredientsTextTranslated, equals('Мука, вода'));
+      expect(russianProduct.ingredientsTextInLanguages,
+          equals({OpenFoodFactsLanguage.RUSSIAN: 'Мука, вода'}));
 
       expect(russianProduct.ingredientsTags, equals(['en:flour', 'en:water']));
       expect(
-          russianProduct.ingredientsTagsTranslated, equals(['Мука', 'Вода']));
+          russianProduct.ingredientsTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.RUSSIAN: ['Мука', 'Вода']
+          }));
 
       expect(russianProduct.categoriesTags, equals(['en:beverages']));
-      expect(russianProduct.categoriesTagsTranslated, equals(['Напитки']));
+      expect(
+          russianProduct.categoriesTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.RUSSIAN: ['Напитки']
+          }));
 
       expect(russianProduct.countriesTags, equals(['en:russia']));
-      expect(russianProduct.countriesTagsTranslated, equals(['Россия']));
-
       expect(
-          russianProduct.translatedLang, equals(OpenFoodFactsLanguage.RUSSIAN));
+          russianProduct.countriesTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.RUSSIAN: ['Россия']
+          }));
+    });
+
+    test('multiple languages and in-languages fields', () async {
+      String barcode = '2222222222224';
+
+      Product inputProduct = Product(
+        barcode: barcode,
+        lang: OpenFoodFactsLanguage.ENGLISH,
+        productNameInLanguages: {
+          OpenFoodFactsLanguage.ENGLISH: 'Pancakes',
+          OpenFoodFactsLanguage.RUSSIAN: 'Блинчики',
+          OpenFoodFactsLanguage.GERMAN: 'Pfannkuchen',
+        },
+        ingredientsTextInLanguages: {
+          OpenFoodFactsLanguage.ENGLISH: 'Flour, water',
+          OpenFoodFactsLanguage.RUSSIAN: 'Мука, вода',
+          OpenFoodFactsLanguage.GERMAN: 'Mehl, wasser',
+        },
+        categories: 'Beverages',
+        countries: 'Russia',
+      );
+
+      await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, inputProduct,
+          queryType: QueryType.TEST);
+
+      final fields = [
+        ProductField.NAME,
+        ProductField.NAME_IN_LANGUAGES,
+        ProductField.INGREDIENTS_TEXT,
+        ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+        ProductField.INGREDIENTS_TAGS,
+        ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
+        ProductField.CATEGORIES_TAGS,
+        ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
+        ProductField.COUNTRIES_TAGS,
+        ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
+      ];
+
+      ProductQueryConfiguration conf = ProductQueryConfiguration(barcode,
+          languages: [
+            OpenFoodFactsLanguage.ENGLISH,
+            OpenFoodFactsLanguage.RUSSIAN,
+            OpenFoodFactsLanguage.GERMAN
+          ],
+          fields: fields);
+
+      ProductResult result = await OpenFoodAPIClient.getProduct(conf,
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
+      Product product = result.product!;
+
+      expect(product.productName, equals('Pancakes'));
+      expect(
+          product.productNameInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: 'Pancakes',
+            OpenFoodFactsLanguage.RUSSIAN: 'Блинчики',
+            OpenFoodFactsLanguage.GERMAN: 'Pfannkuchen',
+          }));
+
+      expect(product.ingredientsText, equals('Flour, water'));
+      expect(
+          product.ingredientsTextInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: 'Flour, water',
+            OpenFoodFactsLanguage.RUSSIAN: 'Мука, вода',
+            OpenFoodFactsLanguage.GERMAN: 'Mehl, wasser',
+          }));
+
+      expect(product.ingredientsTags, equals(['en:flour', 'en:water']));
+      expect(
+          product.ingredientsTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: ['Flour', 'Water'],
+            OpenFoodFactsLanguage.RUSSIAN: ['Мука', 'Вода'],
+            OpenFoodFactsLanguage.GERMAN: ['Mehl', 'Wasser'],
+          }));
+
+      expect(product.categoriesTags, equals(['en:beverages']));
+      expect(
+          product.categoriesTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: ['Beverages'],
+            OpenFoodFactsLanguage.RUSSIAN: ['Напитки'],
+            OpenFoodFactsLanguage.GERMAN: ['Getränke'],
+          }));
+
+      expect(product.countriesTags, equals(['en:russia']));
+      expect(
+          product.countriesTagsInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: ['Russia'],
+            OpenFoodFactsLanguage.RUSSIAN: ['Россия'],
+            OpenFoodFactsLanguage.GERMAN: ['Russland'],
+          }));
+    });
+
+    test('multiple languages and text fields priority', () async {
+      String barcode = '2222222222225';
+
+      Product inputProduct = Product(
+        barcode: barcode,
+        lang: OpenFoodFactsLanguage.ENGLISH,
+        productNameInLanguages: {
+          OpenFoodFactsLanguage.ENGLISH: 'Pancakes',
+          OpenFoodFactsLanguage.RUSSIAN: 'Блинчики',
+          OpenFoodFactsLanguage.GERMAN: 'Pfannkuchen',
+        },
+        ingredientsTextInLanguages: {
+          OpenFoodFactsLanguage.ENGLISH: 'Flour, water',
+          OpenFoodFactsLanguage.GERMAN: 'Mehl, wasser',
+        },
+      );
+
+      await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, inputProduct,
+          queryType: QueryType.TEST);
+
+      final fields = [
+        ProductField.NAME,
+        ProductField.INGREDIENTS_TEXT,
+      ];
+
+      // English first
+      ProductQueryConfiguration conf = ProductQueryConfiguration(barcode,
+          languages: [
+            OpenFoodFactsLanguage.ENGLISH,
+            OpenFoodFactsLanguage.RUSSIAN,
+            OpenFoodFactsLanguage.GERMAN,
+          ],
+          fields: fields);
+      ProductResult result = await OpenFoodAPIClient.getProduct(conf,
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
+      Product product = result.product!;
+      // English was of highest priority so English texts are expected
+      expect(product.productName, equals('Pancakes'));
+      expect(product.ingredientsText, equals('Flour, water'));
+
+      // German first
+      conf = ProductQueryConfiguration(barcode,
+          languages: [
+            OpenFoodFactsLanguage.GERMAN,
+            OpenFoodFactsLanguage.RUSSIAN,
+            OpenFoodFactsLanguage.ENGLISH,
+          ],
+          fields: fields);
+      result = await OpenFoodAPIClient.getProduct(conf,
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
+      product = result.product!;
+      // German was of highest priority so German texts are expected
+      expect(product.productName, equals('Pfannkuchen'));
+      expect(product.ingredientsText, equals('Mehl, wasser'));
+
+      // Russian first
+      conf = ProductQueryConfiguration(barcode,
+          languages: [
+            OpenFoodFactsLanguage.RUSSIAN,
+            OpenFoodFactsLanguage.GERMAN,
+            OpenFoodFactsLanguage.ENGLISH,
+          ],
+          fields: fields);
+      result = await OpenFoodAPIClient.getProduct(conf,
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
+      product = result.product!;
+      // Russian was of highest priority so Russian _name_ is expected...
+      expect(product.productName, equals('Блинчики'));
+      // ...but there's no ingredients list in Russian so ingredients list with
+      // next priority (German) is expected to be used.
+      expect(product.ingredientsText, equals('Mehl, wasser'));
     });
 
     test('product with quotes', () async {
