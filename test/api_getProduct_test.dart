@@ -4,6 +4,7 @@ import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
+import 'package:openfoodfacts/utils/InvalidBarcodes.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductQueryConfigurations.dart';
@@ -23,6 +24,8 @@ import 'package:openfoodfacts/personalized_search/product_preferences_manager.da
 import 'package:openfoodfacts/personalized_search/product_preferences_selection.dart';
 
 void main() {
+  const int _HTTP_OK = 200;
+
   const _BARCODE_UNKNOWN = '11111111111111111111111111';
   const _BARCODE_DANISH_BUTTER_COOKIES = '5701184005007';
 
@@ -825,17 +828,16 @@ void main() {
         ),
       );
       const String languageCode = 'en';
-      const int httpOk = 200;
       final String importanceUrl =
           AvailablePreferenceImportances.getUrl(languageCode);
       final String attributeGroupUrl =
           AvailableAttributeGroups.getUrl(languageCode);
       http.Response response;
       response = await http.get(Uri.parse(importanceUrl));
-      expect(response.statusCode, httpOk);
+      expect(response.statusCode, _HTTP_OK);
       final String preferenceImportancesString = response.body;
       response = await http.get(Uri.parse(attributeGroupUrl));
-      expect(response.statusCode, httpOk);
+      expect(response.statusCode, _HTTP_OK);
       final String attributeGroupsString = response.body;
       manager.availableProductPreferences =
           AvailableProductPreferences.loadFromJSONStrings(
@@ -1129,5 +1131,20 @@ void main() {
       );
       assert(result == null);
     });
+  });
+
+  test('get invalid barcodes', () async {
+    final String url = InvalidBarcodes.getUrl();
+    final http.Response response = await http.get(Uri.parse(url));
+    expect(response.statusCode, _HTTP_OK);
+    final String jsonString = response.body;
+    InvalidBarcodes invalidBarcodes =
+        InvalidBarcodes.loadFromJSONString(jsonString);
+    assert(invalidBarcodes.isBlacklisted('15600703'));
+    assert(!invalidBarcodes.isBlacklisted(_BARCODE_DANISH_BUTTER_COOKIES));
+
+    invalidBarcodes = InvalidBarcodes.base();
+    assert(invalidBarcodes.isBlacklisted('15600703'));
+    assert(!invalidBarcodes.isBlacklisted(_BARCODE_DANISH_BUTTER_COOKIES));
   });
 }
