@@ -1,7 +1,7 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
-import 'package:openfoodfacts/model/parameter/ContainsAdditives.dart';
 import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
+import 'package:openfoodfacts/model/parameter/WithoutAdditives.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/SearchResult.dart';
 import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
@@ -129,7 +129,6 @@ void main() {
         const PageSize(size: 10),
         const SortBy(option: SortOption.PRODUCT_NAME),
         const SearchTerms(terms: ['Fruit à coques']),
-        const ContainsAdditives(filter: false)
       ];
 
       ProductSearchQueryConfiguration configuration =
@@ -149,7 +148,7 @@ void main() {
         const PageSize(size: 10),
         const SortBy(option: SortOption.PRODUCT_NAME),
         const SearchTerms(terms: ['Fruit à coques']),
-        const ContainsAdditives(filter: true)
+        const WithoutAdditives(),
       ];
 
       configuration = ProductSearchQueryConfiguration(
