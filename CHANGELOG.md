@@ -1,3 +1,15 @@
+## [1.3.0] - 21.07.2021
+- Added explicit parameter WithoutAdditives to replace ContainsAdditives (deprecated)
+- Added new InvalidBarcodes class
+- Simplified product search tests
+- Added several nutrients
+- Added ability to request and set multiple translated product fields at once (breaking change)
+- Added support for product list queries
+- Added PnnsGroup2 filter to ProductSearchQueryConfiguration, deprecated PnnsGroupQueryConfiguration
+- Deprecated useless parameters OutputFormat and SearchSimple
+- Added new feature to get the Ecoscore description in HTML
+- Added comments to several classes and methods
+
 ## [1.2.0] - 08.07.2021
 - `product_name_de`, `productNameEN`, ... are now deprecated. Use `productNameTranslated` instead
 - Added the `agribalyse` field in `EcoscoreData`
