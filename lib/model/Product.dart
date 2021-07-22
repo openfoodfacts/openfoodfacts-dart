@@ -359,37 +359,6 @@ class Product extends JsonObject {
 
   Map<String, String> toServerData() {
     final json = toJson();
-
-// Defensive keys copy to modify map while iterating
-    final keys = json.keys.toList();
-
-    for (final key in keys) {
-      // NOTE: '_tags_in_languages' are not supported because tags translation
-      // is done automatically on the server.
-      if (key.endsWith('_in_languages')) {
-        if (key.endsWith('_tags_in_languages')) {
-          throw StateError(
-              'Fields "SOMENAME_tags_in_languages" cannot be sent to the server. '
-              'Please send localized values either by "SOMENAME_in_languages" '
-              'field if it exists, or by "SOMENAME" field and '
-              'prepending language code to values, e.g.: '
-              '{"categories": "en:nuts, en:peanut"}');
-        }
-        final value = json.remove(key) as Map<String, dynamic>;
-        for (final entry in value.entries) {
-          final langKey = entry.key;
-          final lang = LanguageHelper.fromJson(langKey);
-          if (lang == OpenFoodFactsLanguage.UNDEFINED) {
-            throw StateError('Cannot send localized field without '
-                'a proper language. Received: $langKey');
-          }
-          final keyNoLangs = key.substring(0, key.indexOf('_in_languages'));
-          final realKey = '${keyNoLangs}_${lang.code}';
-          json[realKey] = entry.value;
-        }
-      }
-    }
-
     return JsonObject.toDataStatic(json);
   }
 
