@@ -407,19 +407,6 @@ class LanguageHelper {
     return map.map((key, value) => MapEntry(key.code, value));
   }
 
-  /// Converts a Map with ISO-639-1 codes into
-  /// a map with [OpenFoodFactsLanguage].
-  static Map<OpenFoodFactsLanguage, T>? fromJsonMap<T>(Map<String, T>? map) {
-    if (map == null) {
-      return null;
-    }
-    final result = <OpenFoodFactsLanguage, T>{};
-    for (final key in map.keys) {
-      result[fromJson(key)] = map[key]!;
-    }
-    return result;
-  }
-
   /// Helper function without generic types. Needed for the
   /// `@JsonKey` annotation (the annotation can't work with generics).
   static Map<String, String>? toJsonStringMap(
@@ -427,11 +414,19 @@ class LanguageHelper {
     return toJsonMap(map);
   }
 
-  /// Helper function without generic types. Needed for the
-  /// `@JsonKey` annotation (the annotation can't work with generics).
-  static Map<OpenFoodFactsLanguage, String>? fromJsonStringMap(
-      Map<String, String>? map) {
-    return fromJsonMap(map);
+  /// From a `Map<String, String>` in `dynamic`'s clothing (JsonKey annotation)
+  static Map<OpenFoodFactsLanguage, String>? fromJsonStringMap(dynamic map) {
+    if (map == null) {
+      return null;
+    }
+    if (!(map is Map<String, dynamic>)) {
+      throw Exception('Expected type: Map<String, String>');
+    }
+    final result = <OpenFoodFactsLanguage, String>{};
+    for (final key in map.keys) {
+      result[LanguageHelper.fromJson(key)] = map[key]! as String;
+    }
+    return result;
   }
 
   /// Helper function without generic types. Needed for the
@@ -441,10 +436,20 @@ class LanguageHelper {
     return toJsonMap(map);
   }
 
-  /// Helper function without generic types. Needed for the
-  /// `@JsonKey` annotation (the annotation can't work with generics).
+  /// From a `Map<String, List<String>>` in `dynamic`'s clothing (JsonKey)
   static Map<OpenFoodFactsLanguage, List<String>>? fromJsonStringsListMap(
-      Map<String, List<String>>? map) {
-    return fromJsonMap(map);
+    dynamic map,
+  ) {
+    if (map == null) {
+      return null;
+    }
+    if (!(map is Map<String, dynamic>)) {
+      throw Exception('Expected type: Map<String, List<String>>');
+    }
+    final result = <OpenFoodFactsLanguage, List<String>>{};
+    for (final key in map.keys) {
+      result[LanguageHelper.fromJson(key)] = map[key]! as List<String>;
+    }
+    return result;
   }
 }
