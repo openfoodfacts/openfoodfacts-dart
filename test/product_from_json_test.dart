@@ -28,7 +28,6 @@ void main() {
     Map<String, dynamic> productMap = product.toJson();
     String encodedJson = jsonEncode(productMap);
     assert(encodedJson is String);
-    print("encodedJson: " + encodedJson);
     final Map<String, dynamic> decodedJson =
         json.decode(encodedJson) as Map<String, dynamic>;
     Product product2 = Product.fromJson(decodedJson);
