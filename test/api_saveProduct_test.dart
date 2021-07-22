@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:openfoodfacts/model/Additives.dart';
 import 'package:openfoodfacts/model/Nutriments.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
@@ -86,12 +88,18 @@ void main() {
 
     test('dont overwrite language', () async {
       String barcode = '4008391212596';
+      // Assign random product names, to make sure we won't fail to update the
+      // product and then read a previously written value
+      String frenchProductName = "Flocons d'epeautre au blé complet " +
+          Random().nextInt(100000).toString();
+      String germanProductName =
+          'Dinkelflakes' + Random().nextInt(100000).toString();
 
       // save french product name
       Product frenchProduct = Product(
         barcode: barcode,
         productNameInLanguages: {
-          OpenFoodFactsLanguage.FRENCH: "Flocons d'epeautre au blé complet"
+          OpenFoodFactsLanguage.FRENCH: frenchProductName
         },
         quantity: '500 g',
         brands: 'Seitenbacher',
@@ -109,7 +117,9 @@ void main() {
       // save german product name
       Product germanProduct = Product(
         barcode: barcode,
-        productNameInLanguages: {OpenFoodFactsLanguage.GERMAN: 'Dinkelflakes'},
+        productNameInLanguages: {
+          OpenFoodFactsLanguage.GERMAN: germanProductName
+        },
         quantity: '500 g',
         brands: 'Seitenbacher',
         lang: OpenFoodFactsLanguage.GERMAN,
@@ -121,7 +131,7 @@ void main() {
       expect(germanStatus.status, 1);
       expect(germanStatus.statusVerbose, 'fields saved');
 
-      // get french product
+      // get french fields for product
       ProductQueryConfiguration frenchConfig = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.FRENCH,
@@ -134,8 +144,9 @@ void main() {
           queryType: QueryType.TEST);
       assert(frenchResult.product != null);
       assert(frenchResult.product!.productName != null);
+      assert(frenchResult.product!.productName == frenchProductName);
 
-      // get german product
+      // get german fields for product
       ProductQueryConfiguration germanConfig = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -149,6 +160,25 @@ void main() {
 
       assert(germanResult.product != null);
       assert(germanResult.product!.productName != null);
+      assert(germanResult.product!.productName == germanProductName);
+
+      // get preferably French, then German fields for product
+      ProductQueryConfiguration frenchGermanConfig =
+          ProductQueryConfiguration(barcode, languages: [
+        OpenFoodFactsLanguage.FRENCH,
+        OpenFoodFactsLanguage.GERMAN,
+      ], fields: [
+        ProductField.NAME,
+        ProductField.BRANDS,
+        ProductField.QUANTITY
+      ]);
+      var frenchGermanResult = await OpenFoodAPIClient.getProduct(
+          frenchGermanConfig,
+          queryType: QueryType.TEST);
+
+      assert(frenchGermanResult.product != null);
+      assert(frenchGermanResult.product!.productName != null);
+      assert(frenchGermanResult.product!.productName == frenchProductName);
     });
 
     test('add new product test 2', () async {

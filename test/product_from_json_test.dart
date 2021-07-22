@@ -19,7 +19,7 @@ void main() {
       OpenFoodFactsLanguage.ENGLISH,
       OpenFoodFactsLanguage.FRENCH
     ], fields: [
-      ProductField.ALL
+      ProductField.ALL,
     ]);
     ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
         user: TestConstants.TEST_USER);

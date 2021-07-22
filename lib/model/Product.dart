@@ -359,6 +359,12 @@ class Product extends JsonObject {
 
   Map<String, String> toServerData() {
     final json = toJson();
+    return JsonObject.toDataStatic(json);
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    final json = _$ProductToJson(this);
 
     // Defensive keys copy to modify map while iterating
     final keys = json.keys.toList();
@@ -367,14 +373,6 @@ class Product extends JsonObject {
       // NOTE: '_tags_in_languages' are not supported because tags translation
       // is done automatically on the server.
       if (key.endsWith('_in_languages')) {
-        if (key.endsWith('_tags_in_languages')) {
-          throw StateError(
-              'Fields "SOMENAME_tags_in_languages" cannot be sent to the server. '
-              'Please send localized values either by "SOMENAME_in_languages" '
-              'field if it exists, or by "SOMENAME" field and '
-              'prepending language code to values, e.g.: '
-              '{"categories": "en:nuts, en:peanut"}');
-        }
         final value = json.remove(key) as Map<String, dynamic>;
         for (final entry in value.entries) {
           final langKey = entry.key;
@@ -389,11 +387,9 @@ class Product extends JsonObject {
         }
       }
     }
-    return JsonObject.toDataStatic(json);
-  }
 
-  @override
-  Map<String, dynamic> toJson() => _$ProductToJson(this);
+    return json;
+  }
 
   /// Returns all existing product attributes matching a list of attribute ids
   Map<String, Attribute> getAttributes(
