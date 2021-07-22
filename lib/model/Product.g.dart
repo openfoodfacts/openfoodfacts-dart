@@ -10,8 +10,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
   return Product(
     barcode: json['code'] as String?,
     productName: json['product_name'] as String?,
-    productNameInLanguages: LanguageHelper.fromJsonStringMap(
-        json['product_name_in_languages'] as Map<String, String>?),
+    productNameInLanguages:
+        LanguageHelper.fromJsonStringMap(json['product_name_in_languages']),
     brands: json['brands'] as String?,
     brandsTags: (json['brands_tags'] as List<dynamic>?)
         ?.map((e) => e as String)
@@ -21,7 +21,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
         ?.map((e) => e as String)
         .toList(),
     countriesTagsInLanguages: LanguageHelper.fromJsonStringsListMap(
-        json['countries_tags_in_languages'] as Map<String, List<String>>?),
+        json['countries_tags_in_languages']),
     lang: LanguageHelper.fromJson(json['lang'] as String?),
     quantity: json['quantity'] as String?,
     imgSmallUrl: json['image_small_url'] as String?,
@@ -44,13 +44,13 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
         ?.map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
         .toList(),
     ingredientsText: json['ingredients_text'] as String?,
-    ingredientsTextInLanguages: LanguageHelper.fromJsonStringMap(
-        json['ingredients_text_in_languages'] as Map<String, String>?),
+    ingredientsTextInLanguages:
+        LanguageHelper.fromJsonStringMap(json['ingredients_text_in_languages']),
     ingredientsTags: (json['ingredients_tags'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList(),
     ingredientsTagsInLanguages: LanguageHelper.fromJsonStringsListMap(
-        json['ingredients_tags_in_languages'] as Map<String, List<String>>?),
+        json['ingredients_tags_in_languages']),
     ingredientsAnalysisTags: IngredientsAnalysisTags.fromJson(
         json['ingredients_analysis_tags'] as List?),
     nutriments: json['nutriments'] == null
@@ -69,13 +69,13 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
         ?.map((e) => e as String)
         .toList(),
     categoriesTagsInLanguages: LanguageHelper.fromJsonStringsListMap(
-        json['categories_tags_in_languages'] as Map<String, List<String>>?),
+        json['categories_tags_in_languages']),
     labels: json['labels'] as String?,
     labelsTags: (json['labels_tags'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList(),
-    labelsTagsInLanguages: LanguageHelper.fromJsonStringsListMap(
-        json['labels_tags_in_languages'] as Map<String, List<String>>?),
+    labelsTagsInLanguages:
+        LanguageHelper.fromJsonStringsListMap(json['labels_tags_in_languages']),
     packaging: json['packaging'] as String?,
     packagingTags: (json['packaging_tags'] as List<dynamic>?)
         ?.map((e) => e as String)
