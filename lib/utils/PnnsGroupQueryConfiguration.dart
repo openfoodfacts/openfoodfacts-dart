@@ -2,8 +2,8 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 
-// TODO(monsieurtanuki): deprecated from 2021-07-13 (#92) because we can use [PnnsGroup2Filter] with [ProductSearchQueryConfiguration]; remove when old enough
-@deprecated
+// TODO: deprecated from 2021-07-13 (#92); remove when old enough
+@Deprecated('Use PnnsGroup2Filter with ProductSearchQueryConfiguration instead')
 class PnnsGroupQueryConfiguration extends AbstractQueryConfiguration {
   PnnsGroup2 group;
   int page;

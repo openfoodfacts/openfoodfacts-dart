@@ -35,7 +35,9 @@ class ProductHelper {
     }
   }
 
-  @deprecated
+  // TODO: deprecated from 2021-02-15 (#106); remove when old enough
+  @Deprecated(
+      'Useless now that we translate fields in a different way; just do not use')
   static void addTranslatedFields(Product product, Map<String, dynamic> source,
       OpenFoodFactsLanguage language) {
     product.categoriesTagsInLanguages ??= {};

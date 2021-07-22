@@ -62,7 +62,8 @@ class Product extends JsonObject {
 
   // Images
   @JsonKey(name: 'image_small_url', includeIfNull: false)
-  @Deprecated('imgSmallUrl is deprecated, use imageFrontSmallUrl instead')
+  // TODO: deprecated from 2021-04-06 (#152); remove when old enough
+  @Deprecated('Use imageFrontSmallUrl instead')
   String? imgSmallUrl;
 
   @JsonKey(name: 'image_front_url', includeIfNull: false)

@@ -228,8 +228,9 @@ class OpenFoodAPIClient {
     return result;
   }
 
-// TODO(monsieurtanuki): deprecated from 2021-07-13 (#92) because we can use [PnnsGroup2Filter] with [ProductSearchQueryConfiguration]; remove when old enough
-  @deprecated
+  // TODO: deprecated from 2021-07-13 (#92); remove when old enough
+  @Deprecated(
+      'Use PnnsGroup2Filter with ProductSearchQueryConfiguration instead')
   static Future<SearchResult> queryPnnsGroup(
       User user, PnnsGroupQueryConfiguration configuration,
       {QueryType queryType = QueryType.PROD}) async {

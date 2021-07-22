@@ -22,8 +22,8 @@ abstract class AbstractQueryConfiguration {
   /// for detailed explanation on how to work with multiple languages.
   List<OpenFoodFactsLanguage> languages;
 
-  /// Deprecated: please use [language] or [languages]
-  @deprecated
+  // TODO: deprecated from 2021-07-20 (#185); remove when old enough
+  @Deprecated('Use parameters language or languages instead')
   String? lc;
 
   String? cc;
