@@ -19,7 +19,7 @@ void main() {
       OpenFoodFactsLanguage.ENGLISH,
       OpenFoodFactsLanguage.FRENCH
     ], fields: [
-      ProductField.ALL
+      ProductField.ALL,
     ]);
     ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
         user: TestConstants.TEST_USER);
@@ -28,6 +28,7 @@ void main() {
     Map<String, dynamic> productMap = product.toJson();
     String encodedJson = jsonEncode(productMap);
     assert(encodedJson is String);
+    print("encodedJson: " + encodedJson);
     final Map<String, dynamic> decodedJson =
         json.decode(encodedJson) as Map<String, dynamic>;
     Product product2 = Product.fromJson(decodedJson);

@@ -360,7 +360,7 @@ class Product extends JsonObject {
   Map<String, String> toServerData() {
     final json = toJson();
 
-    // Defensive keys copy to modify map while iterating
+// Defensive keys copy to modify map while iterating
     final keys = json.keys.toList();
 
     for (final key in keys) {
@@ -389,11 +389,38 @@ class Product extends JsonObject {
         }
       }
     }
+
     return JsonObject.toDataStatic(json);
   }
 
   @override
-  Map<String, dynamic> toJson() => _$ProductToJson(this);
+  Map<String, dynamic> toJson() {
+    final json = _$ProductToJson(this);
+
+    // Defensive keys copy to modify map while iterating
+    final keys = json.keys.toList();
+
+    for (final key in keys) {
+      // NOTE: '_tags_in_languages' are not supported because tags translation
+      // is done automatically on the server.
+      if (key.endsWith('_in_languages')) {
+        final value = json.remove(key) as Map<String, dynamic>;
+        for (final entry in value.entries) {
+          final langKey = entry.key;
+          final lang = LanguageHelper.fromJson(langKey);
+          if (lang == OpenFoodFactsLanguage.UNDEFINED) {
+            throw StateError('Cannot send localized field without '
+                'a proper language. Received: $langKey');
+          }
+          final keyNoLangs = key.substring(0, key.indexOf('_in_languages'));
+          final realKey = '${keyNoLangs}_${lang.code}';
+          json[realKey] = entry.value;
+        }
+      }
+    }
+
+    return json;
+  }
 
   /// Returns all existing product attributes matching a list of attribute ids
   Map<String, Attribute> getAttributes(
