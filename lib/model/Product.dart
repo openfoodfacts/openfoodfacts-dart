@@ -308,7 +308,7 @@ class Product extends JsonObject {
       } else {
         // If the key ends with _[2 characters], it might be a language specific
         // field.
-        RegExp regexp = RegExp(r"_(\w\w)$");
+        RegExp regexp = RegExp(r'_(\w\w)$');
         if (regexp.hasMatch((key))) {
           if (key.startsWith('product_name_')) {
             OpenFoodFactsLanguage lang = _langFrom(key, 'product_name_');
