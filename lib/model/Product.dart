@@ -305,45 +305,52 @@ class Product extends JsonObject {
     for (final String key in json.keys) {
       if (key.contains('debug')) {
         continue;
-      } else if (key.startsWith('product_name_')) {
-        OpenFoodFactsLanguage lang = _langFrom(key, 'product_name_');
-        if (lang != OpenFoodFactsLanguage.UNDEFINED) {
-          result.productNameInLanguages ??= {};
-          result.productNameInLanguages![lang] = json[key];
-        }
-      } else if (key.startsWith('categories_tags_')) {
-        OpenFoodFactsLanguage lang = _langFrom(key, 'categories_tags_');
-        final values = _jsonValueToList(json[key]);
-        if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
-          result.categoriesTagsInLanguages ??= {};
-          result.categoriesTagsInLanguages![lang] = values;
-        }
-      } else if (key.startsWith('ingredients_tags_')) {
-        OpenFoodFactsLanguage lang = _langFrom(key, 'ingredients_tags_');
-        final values = _jsonValueToList(json[key]);
-        if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
-          result.ingredientsTagsInLanguages ??= {};
-          result.ingredientsTagsInLanguages![lang] = values;
-        }
-      } else if (key.startsWith('labels_tags_')) {
-        OpenFoodFactsLanguage lang = _langFrom(key, 'labels_tags_');
-        final values = _jsonValueToList(json[key]);
-        if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
-          result.labelsTagsInLanguages ??= {};
-          result.labelsTagsInLanguages![lang] = values;
-        }
-      } else if (key.startsWith('countries_tags_')) {
-        OpenFoodFactsLanguage lang = _langFrom(key, 'countries_tags_');
-        final values = _jsonValueToList(json[key]);
-        if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
-          result.countriesTagsInLanguages ??= {};
-          result.countriesTagsInLanguages![lang] = values;
-        }
-      } else if (key.startsWith('ingredients_text_')) {
-        OpenFoodFactsLanguage lang = _langFrom(key, 'ingredients_text_');
-        if (lang != OpenFoodFactsLanguage.UNDEFINED) {
-          result.ingredientsTextInLanguages ??= {};
-          result.ingredientsTextInLanguages![lang] = json[key];
+      } else {
+        // If the key ends with _[2 characters], it might be a language specific
+        // field.
+        RegExp regexp = RegExp(r"_(\w\w)$");
+        if (regexp.hasMatch((key))) {
+          if (key.startsWith('product_name_')) {
+            OpenFoodFactsLanguage lang = _langFrom(key, 'product_name_');
+            if (lang != OpenFoodFactsLanguage.UNDEFINED) {
+              result.productNameInLanguages ??= {};
+              result.productNameInLanguages![lang] = json[key];
+            }
+          } else if (key.startsWith('categories_tags_')) {
+            OpenFoodFactsLanguage lang = _langFrom(key, 'categories_tags_');
+            final values = _jsonValueToList(json[key]);
+            if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
+              result.categoriesTagsInLanguages ??= {};
+              result.categoriesTagsInLanguages![lang] = values;
+            }
+          } else if (key.startsWith('ingredients_tags_')) {
+            OpenFoodFactsLanguage lang = _langFrom(key, 'ingredients_tags_');
+            final values = _jsonValueToList(json[key]);
+            if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
+              result.ingredientsTagsInLanguages ??= {};
+              result.ingredientsTagsInLanguages![lang] = values;
+            }
+          } else if (key.startsWith('labels_tags_')) {
+            OpenFoodFactsLanguage lang = _langFrom(key, 'labels_tags_');
+            final values = _jsonValueToList(json[key]);
+            if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
+              result.labelsTagsInLanguages ??= {};
+              result.labelsTagsInLanguages![lang] = values;
+            }
+          } else if (key.startsWith('countries_tags_')) {
+            OpenFoodFactsLanguage lang = _langFrom(key, 'countries_tags_');
+            final values = _jsonValueToList(json[key]);
+            if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
+              result.countriesTagsInLanguages ??= {};
+              result.countriesTagsInLanguages![lang] = values;
+            }
+          } else if (key.startsWith('ingredients_text_')) {
+            OpenFoodFactsLanguage lang = _langFrom(key, 'ingredients_text_');
+            if (lang != OpenFoodFactsLanguage.UNDEFINED) {
+              result.ingredientsTextInLanguages ??= {};
+              result.ingredientsTextInLanguages![lang] = json[key];
+            }
+          }
         }
       }
     }
