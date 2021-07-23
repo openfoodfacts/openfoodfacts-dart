@@ -40,5 +40,27 @@ void main() {
     final Map<String, dynamic> decodedJson =
         json.decode(encodedJson) as Map<String, dynamic>;
     Product product = Product.fromJson(decodedJson);
+    expect(
+        product.categoriesTagsInLanguages,
+        equals({
+          OpenFoodFactsLanguage.FRENCH: [
+            'Aliments et boissons à base de végétaux',
+            'Aliments d\'origine végétale',
+            'Céréales et pommes de terre',
+            'Aliments à base de fruits et de légumes',
+            'Céréales et dérivés',
+            'Plats préparés',
+            'Sandwichs',
+            'Substituts de viande',
+            'Plats préparés d\'origine végétale',
+            'Céréales préparées',
+            'Steaks végétaux',
+            'Plats à base de boulgour',
+            'Plats préparés à faible teneur en matières grasses',
+            'Hamburgers végétariens',
+            'Galettes de céréales aux légumes',
+            'Plats-prepares-au-fromage'
+          ]
+        }));
   });
 }
