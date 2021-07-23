@@ -1,7 +1,7 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 
-// TODO(monsieurtanuki): deprecated from 2021-07-13 (#107) because in fact always JSON; remove when old enough
-@deprecated
+// TODO: deprecated from 2021-07-13 (#107); remove when old enough
+@Deprecated('Pointless because in fact always JSON; just do not use it anymore')
 class OutputFormat extends Parameter {
   @override
   String getName() => 'json';
@@ -14,8 +14,8 @@ class OutputFormat extends Parameter {
   const OutputFormat({this.format});
 }
 
-// TODO(monsieurtanuki): deprecated from 2021-07-13 (#107) because in fact always JSON; remove when old enough
-@deprecated
+// TODO: deprecated from 2021-07-13 (#107); remove when old enough
+@Deprecated('Pointless because in fact always JSON; just do not use it anymore')
 enum Format {
   JSON,
   XML,

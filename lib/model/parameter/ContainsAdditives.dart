@@ -1,8 +1,8 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 
+// TODO: deprecated from 2021-07-21 (#194); remove when old enough
 /// "Contains additives?" search API parameter
-/// Deprecated use [WithoutAdditives] instead
-@deprecated
+@Deprecated('Use WithoutAdditives instead')
 class ContainsAdditives extends Parameter {
   @override
   String getName() => 'additives';
