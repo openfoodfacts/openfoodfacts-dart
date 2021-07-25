@@ -448,7 +448,7 @@ class LanguageHelper {
     }
     final result = <OpenFoodFactsLanguage, List<String>>{};
     for (final key in map.keys) {
-      result[LanguageHelper.fromJson(key)] = map[key]! as List<String>;
+      result[LanguageHelper.fromJson(key)] = map[key]!.cast<String>();
     }
     return result;
   }

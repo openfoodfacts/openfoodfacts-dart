@@ -305,7 +305,15 @@ class Product extends JsonObject {
     for (final String key in json.keys) {
       if (key.contains('debug')) {
         continue;
-      } else if (key.startsWith('product_name_')) {
+      }
+      // If the JSON contained *_in_languages fields,
+      // _$ProductFromJson(json) already decoded them
+      if (key.endsWith('_in_languages')) {
+        continue;
+      }
+      // The OFF API returns fields like product_name_[2 letter language code]
+      // that we store in a more structured productNameInLanguages map
+      if (key.startsWith('product_name_')) {
         OpenFoodFactsLanguage lang = _langFrom(key, 'product_name_');
         if (lang != OpenFoodFactsLanguage.UNDEFINED) {
           result.productNameInLanguages ??= {};
