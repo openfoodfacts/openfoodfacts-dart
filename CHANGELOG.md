@@ -1,3 +1,5 @@
+## [1.3.2] - 25.07.2021
+- Fixed completely toJson and fromJson for the fields in multiple languages
 ## [1.3.1] - 22.07.2021
 - Fixed toJson and fromJson for the fields in multiple languages
 ## [1.3.0] - 21.07.2021
