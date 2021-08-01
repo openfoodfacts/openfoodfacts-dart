@@ -129,11 +129,9 @@ Nutriments _$NutrimentsFromJson(Map<String, dynamic> json) {
     cholesterolServing: JsonObject.parseDouble(json['cholesterol_serving']),
     cholesterolUnit:
         UnitHelper.stringToUnit(json['cholesterol_unit'] as String?),
-    alcohol: JsonObject.parseDouble(json['alcohol: % vol of alcohol_100g']),
-    alcoholServing:
-        JsonObject.parseDouble(json['alcohol: % vol of alcohol_serving']),
-    alcoholUnit: UnitHelper.stringToUnit(
-        json['alcohol: % vol of alcohol_unit'] as String?),
+    alcohol: JsonObject.parseDouble(json['alcohol_100g']),
+    alcoholServing: JsonObject.parseDouble(json['alcohol_serving']),
+    alcoholUnit: UnitHelper.stringToUnit(json['alcohol_unit'] as String?),
     butyricAcid: JsonObject.parseDouble(json['butyric-acid_100g']),
     butyricAcidServing: JsonObject.parseDouble(json['butyric-acid_serving']),
     butyricAcidUnit:
@@ -357,10 +355,9 @@ Map<String, dynamic> _$NutrimentsToJson(Nutriments instance) {
   writeNotNull('polyunsaturated_100g', instance.polyunsaturatedAcid);
   writeNotNull(
       'polyunsaturated_unit', _$UnitEnumMap[instance.polyunsaturatedUnit]);
-  writeNotNull('alcohol: % vol of alcohol_serving', instance.alcoholServing);
-  writeNotNull('alcohol: % vol of alcohol_100g', instance.alcohol);
-  writeNotNull(
-      'alcohol: % vol of alcohol_unit', _$UnitEnumMap[instance.alcoholUnit]);
+  writeNotNull('alcohol_serving', instance.alcoholServing);
+  writeNotNull('alcohol_100g', instance.alcohol);
+  writeNotNull('alcohol_unit', _$UnitEnumMap[instance.alcoholUnit]);
   writeNotNull('pantothenic-acid_serving', instance.pantothenicAcidServing);
   writeNotNull('pantothenic-acid_100g', instance.pantothenicAcid);
   writeNotNull(
