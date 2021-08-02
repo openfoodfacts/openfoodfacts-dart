@@ -6,12 +6,10 @@ part of 'Packaging.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Packaging _$PackagingFromJson(Map<String, dynamic> json) {
-  return Packaging(
-    score: JsonObject.parseDouble(json['score']),
-    value: JsonObject.parseDouble(json['value']),
-  );
-}
+Packaging _$PackagingFromJson(Map<String, dynamic> json) => Packaging(
+      score: JsonObject.parseDouble(json['score']),
+      value: JsonObject.parseDouble(json['value']),
+    );
 
 Map<String, dynamic> _$PackagingToJson(Packaging instance) {
   final val = <String, dynamic>{};

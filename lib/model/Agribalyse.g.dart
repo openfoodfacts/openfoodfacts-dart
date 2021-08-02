@@ -6,11 +6,9 @@ part of 'Agribalyse.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Agribalyse _$AgribalyseFromJson(Map<String, dynamic> json) {
-  return Agribalyse(
-    score: JsonObject.parseDouble(json['score']),
-  );
-}
+Agribalyse _$AgribalyseFromJson(Map<String, dynamic> json) => Agribalyse(
+      score: JsonObject.parseDouble(json['score']),
+    );
 
 Map<String, dynamic> _$AgribalyseToJson(Agribalyse instance) {
   final val = <String, dynamic>{};

@@ -6,17 +6,15 @@ part of 'SearchResult.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SearchResult _$SearchResultFromJson(Map<String, dynamic> json) {
-  return SearchResult(
-    page: JsonObject.parseInt(json['page']),
-    pageSize: JsonObject.parseInt(json['page_size']),
-    count: JsonObject.parseInt(json['count']),
-    skip: JsonObject.parseInt(json['skip']),
-    products: (json['products'] as List<dynamic>?)
-        ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+SearchResult _$SearchResultFromJson(Map<String, dynamic> json) => SearchResult(
+      page: JsonObject.parseInt(json['page']),
+      pageSize: JsonObject.parseInt(json['page_size']),
+      count: JsonObject.parseInt(json['count']),
+      skip: JsonObject.parseInt(json['skip']),
+      products: (json['products'] as List<dynamic>?)
+          ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$SearchResultToJson(SearchResult instance) {
   final val = <String, dynamic>{
