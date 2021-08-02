@@ -69,6 +69,8 @@ class OpenFoodAPIClient {
   static const String URI_PROD_HOST_ROBOTOFF = 'robotoff.openfoodfacts.org';
   static const String URI_TEST_HOST_ROBOTOFF = 'robotoff.openfoodfacts.net';
 
+  static UserAgent? userAgent;
+
   /// Add the given product to the database.
   /// By default the query will hit the PROD DB
   /// Returns a Status object as result.
@@ -136,7 +138,6 @@ class OpenFoodAPIClient {
     String barcode,
     OpenFoodFactsLanguage language, {
     User? user,
-    UserAgent? userAgent,
     QueryType queryType = QueryType.PROD,
   }) async {
     var productUri = Uri(
@@ -161,7 +162,6 @@ class OpenFoodAPIClient {
   static Future<ProductResult> getProduct(
       ProductQueryConfiguration configuration,
       {User? user,
-      UserAgent? userAgent,
       QueryType queryType = QueryType.PROD}) async {
     var productUri = Uri(
         scheme: URI_SCHEME,
@@ -193,7 +193,6 @@ class OpenFoodAPIClient {
   static Future<SearchResult> searchProducts(
     User? user,
     ProductSearchQueryConfiguration configuration, {
-    UserAgent? userAgent,
     QueryType queryType = QueryType.PROD,
   }) async {
     var queryParameters = configuration.getParametersMap();
@@ -218,7 +217,6 @@ class OpenFoodAPIClient {
   static Future<SearchResult> getProductList(
     User? user,
     ProductListQueryConfiguration configuration, {
-    UserAgent? userAgent,
     QueryType queryType = QueryType.PROD,
   }) async {
     final Uri uri = Uri(
@@ -244,7 +242,6 @@ class OpenFoodAPIClient {
   static Future<SearchResult> queryPnnsGroup(
     User user,
     PnnsGroupQueryConfiguration configuration, {
-    UserAgent? userAgent,
     QueryType queryType = QueryType.PROD,
   }) async {
     var queryParameters = configuration.getParametersMap();
@@ -282,7 +279,6 @@ class OpenFoodAPIClient {
       String? country,
       String? valueTag,
       String? serverDomain,
-      UserAgent? userAgent,
       QueryType queryType = QueryType.PROD}) async {
     final Map<String, String?> parameters = {};
 
@@ -320,7 +316,6 @@ class OpenFoodAPIClient {
   static Future<InsightsResult> getProductInsights(
     String barcode,
     User user, {
-    UserAgent? userAgent,
     QueryType queryType = QueryType.PROD,
   }) async {
     var insightsUri = Uri(
@@ -344,7 +339,6 @@ class OpenFoodAPIClient {
     String lang,
     User user, {
     int? count,
-    UserAgent? userAgent,
     QueryType queryType = QueryType.PROD,
   }) async {
     if (count == null || count <= 0) {
@@ -379,7 +373,6 @@ class OpenFoodAPIClient {
     User user, {
     int? count,
     required List<InsightType> types,
-    UserAgent? userAgent,
     QueryType queryType = QueryType.PROD,
   }) async {
     if (count == null || count <= 0) {
@@ -445,7 +438,6 @@ class OpenFoodAPIClient {
     String? ingredientName,
     Product? product,
     User? user,
-    UserAgent? userAgent,
     queryType = QueryType.PROD,
   }) async {
     Map<String, String?> spellingCorrectionParam;
@@ -488,7 +480,6 @@ class OpenFoodAPIClient {
     String barcode,
     OpenFoodFactsLanguage language, {
     OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
-    UserAgent? userAgent,
     QueryType queryType = QueryType.PROD,
   }) async {
     var ocrUri = Uri(
@@ -519,7 +510,6 @@ class OpenFoodAPIClient {
     TagType tagType, {
     String input = '',
     OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
-    UserAgent? userAgent,
     QueryType queryType = QueryType.PROD,
   }) async {
     var suggestionUri = Uri(
@@ -621,9 +611,8 @@ class OpenFoodAPIClient {
   /// Returns the Ecoscore description in HTML
   static Future<String?> getEcoscoreHtmlDescription(
     final String barcode,
-    final OpenFoodFactsLanguage language, {
-    UserAgent? userAgent,
-  }) async {
+    final OpenFoodFactsLanguage language,
+  ) async {
     const String FIELD = 'environment_infocard';
     final Uri uri = Uri(
       scheme: URI_SCHEME,

@@ -1,9 +1,5 @@
-import 'package:json_annotation/json_annotation.dart';
 import '../interface/JsonObject.dart';
 
-part 'UserAgent.g.dart';
-
-@JsonSerializable()
 class UserAgent extends JsonObject {
   final String? name;
   final String? version;
@@ -19,8 +15,11 @@ class UserAgent extends JsonObject {
     this.comment,
   });
 
-  factory UserAgent.fromJson(Map<String, dynamic> json) =>
-      _$UserAgentFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UserAgentToJson(this);
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'version': version,
+        'system': system,
+        'url': url,
+        'comment': comment,
+      };
 }
