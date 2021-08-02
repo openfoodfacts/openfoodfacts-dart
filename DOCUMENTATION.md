@@ -22,6 +22,15 @@ Jump to [**Object structures**](#objects-structures), [**Functions**](#functions
 
 This section details all the available fields in each class.
 
+#### User-Agent HTTP Header
+
+No authentication is required for read and search operations, however, you have to add a User-Agent
+HTTP Header with the name of your app, the version, system and a url (if any), not to be blocked by mistake.
+
+```dart
+OpenFoodAPIClient.userAgent = UserAgent(name: '', version: '', system:'', url:'', comment:'');
+```
+
 #### User
 This class handles user identification when writing into the database.
 
