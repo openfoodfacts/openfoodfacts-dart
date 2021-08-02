@@ -6,18 +6,17 @@ part of 'Ingredient.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Ingredient _$IngredientFromJson(Map<String, dynamic> json) {
-  return Ingredient(
-    rank: JsonObject.parseInt(json['rank']),
-    id: json['id'] as String?,
-    text: json['text'] as String?,
-    percent: JsonObject.parseDouble(json['percent']),
-    vegan: ingredientSpecialPropertyStatusFromJson(json['vegan']),
-    vegetarian: ingredientSpecialPropertyStatusFromJson(json['vegetarian']),
-    fromPalmOil: ingredientSpecialPropertyStatusFromJson(json['from_palm_oil']),
-    bold: json['bold'] as bool?,
-  );
-}
+Ingredient _$IngredientFromJson(Map<String, dynamic> json) => Ingredient(
+      rank: JsonObject.parseInt(json['rank']),
+      id: json['id'] as String?,
+      text: json['text'] as String?,
+      percent: JsonObject.parseDouble(json['percent']),
+      vegan: ingredientSpecialPropertyStatusFromJson(json['vegan']),
+      vegetarian: ingredientSpecialPropertyStatusFromJson(json['vegetarian']),
+      fromPalmOil:
+          ingredientSpecialPropertyStatusFromJson(json['from_palm_oil']),
+      bold: json['bold'] as bool? ?? false,
+    );
 
 Map<String, dynamic> _$IngredientToJson(Ingredient instance) {
   final val = <String, dynamic>{};

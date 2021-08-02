@@ -21,8 +21,10 @@ void main() {
     ], fields: [
       ProductField.ALL,
     ]);
-    ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
-        user: TestConstants.TEST_USER);
+    ProductResult result = await OpenFoodAPIClient.getProduct(
+      configurations,
+      user: TestConstants.TEST_USER,
+    );
     expect(result.status, 1);
     Product product = result.product!;
     Map<String, dynamic> productMap = product.toJson();
@@ -31,6 +33,7 @@ void main() {
     final Map<String, dynamic> decodedJson =
         json.decode(encodedJson) as Map<String, dynamic>;
     Product product2 = Product.fromJson(decodedJson);
+    expect(product.productName, equals(product2.productName));
   });
 
   test('Load product from JSON - multilingual categories', () async {

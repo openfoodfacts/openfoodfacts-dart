@@ -7,12 +7,11 @@ part of 'RobotoffQuestion.dart';
 // **************************************************************************
 
 RobotoffQuestionResult _$RobotoffQuestionResultFromJson(
-    Map<String, dynamic> json) {
-  return RobotoffQuestionResult(
-    status: json['status'] as String?,
-    questions: RobotoffQuestion.fromJson(json['questions'] as List),
-  );
-}
+        Map<String, dynamic> json) =>
+    RobotoffQuestionResult(
+      status: json['status'] as String?,
+      questions: RobotoffQuestion.fromJson(json['questions'] as List),
+    );
 
 Map<String, dynamic> _$RobotoffQuestionResultToJson(
     RobotoffQuestionResult instance) {
