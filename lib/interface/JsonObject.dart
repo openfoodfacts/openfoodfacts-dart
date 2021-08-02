@@ -59,4 +59,17 @@ abstract class JsonObject {
     });
     return result;
   }
+
+  String toValueString() {
+    return toValueStringStatic(toJson());
+  }
+
+  static String toValueStringStatic(Map<String, dynamic> json) {
+    String result = '';
+    for (MapEntry<String, dynamic> entry in json.entries) {
+      result = result + (entry.value != null ? ' - ${entry.value}' : '');
+    }
+
+    return result;
+  }
 }

@@ -5,6 +5,7 @@ import 'dart:async';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
+import 'package:openfoodfacts/model/UserAgent.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
@@ -132,16 +133,20 @@ class OpenFoodAPIClient {
   /// No replacing of '&quot;' with '"'.
   /// By default the query will hit the PROD DB
   static Future<ProductResult> getProductRaw(
-      String barcode, OpenFoodFactsLanguage language,
-      {User? user, QueryType queryType = QueryType.PROD}) async {
+    String barcode,
+    OpenFoodFactsLanguage language, {
+    User? user,
+    UserAgent? userAgent,
+    QueryType queryType = QueryType.PROD,
+  }) async {
     var productUri = Uri(
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
         path: 'api/v0/product/' + barcode + '.json',
         queryParameters: {'lc': language.code});
 
-    Response response = await HttpHelper()
-        .doGetRequest(productUri, user: user, queryType: queryType);
+    Response response = await HttpHelper().doGetRequest(productUri,
+        user: user, userAgent: userAgent, queryType: queryType);
     var result = ProductResult.fromJson(json.decode(response.body));
     return result;
   }
@@ -156,6 +161,7 @@ class OpenFoodAPIClient {
   static Future<ProductResult> getProduct(
       ProductQueryConfiguration configuration,
       {User? user,
+      UserAgent? userAgent,
       QueryType queryType = QueryType.PROD}) async {
     var productUri = Uri(
         scheme: URI_SCHEME,
@@ -163,8 +169,8 @@ class OpenFoodAPIClient {
         path: 'api/v0/product/${configuration.barcode}.json',
         queryParameters: configuration.getParametersMap());
 
-    Response response = await HttpHelper()
-        .doGetRequest(productUri, user: user, queryType: queryType);
+    Response response = await HttpHelper().doGetRequest(productUri,
+        user: user, userAgent: userAgent, queryType: queryType);
     final jsonStr = _replaceQuotes(response.body);
     ProductResult result = ProductResult.fromJson(jsonDecode(jsonStr));
 
@@ -186,7 +192,7 @@ class OpenFoodAPIClient {
   /// By default the query will hit the PROD DB
   static Future<SearchResult> searchProducts(
       User? user, ProductSearchQueryConfiguration configuration,
-      {QueryType queryType = QueryType.PROD}) async {
+      {UserAgent? userAgent, QueryType queryType = QueryType.PROD}) async {
     var queryParameters = configuration.getParametersMap();
 
     var searchUri = Uri(
@@ -195,8 +201,8 @@ class OpenFoodAPIClient {
         path: '/cgi/search.pl',
         queryParameters: queryParameters);
 
-    Response response = await HttpHelper()
-        .doGetRequest(searchUri, user: user, queryType: queryType);
+    Response response = await HttpHelper().doGetRequest(searchUri,
+        user: user, userAgent: userAgent, queryType: queryType);
     final jsonStr = _replaceQuotes(response.body);
     var result = SearchResult.fromJson(json.decode(jsonStr));
 
@@ -209,6 +215,7 @@ class OpenFoodAPIClient {
   static Future<SearchResult> getProductList(
     User? user,
     ProductListQueryConfiguration configuration, {
+    UserAgent? userAgent,
     QueryType queryType = QueryType.PROD,
   }) async {
     final Uri uri = Uri(
@@ -217,8 +224,8 @@ class OpenFoodAPIClient {
         path: 'products/${configuration.barcodes.join(',')}.json',
         queryParameters: configuration.getParametersMap());
 
-    final Response response =
-        await HttpHelper().doGetRequest(uri, user: user, queryType: queryType);
+    final Response response = await HttpHelper().doGetRequest(uri,
+        user: user, userAgent: userAgent, queryType: queryType);
 
     final String jsonStr = _replaceQuotes(response.body);
     final SearchResult result = SearchResult.fromJson(json.decode(jsonStr));
@@ -233,7 +240,7 @@ class OpenFoodAPIClient {
       'Use PnnsGroup2Filter with ProductSearchQueryConfiguration instead')
   static Future<SearchResult> queryPnnsGroup(
       User user, PnnsGroupQueryConfiguration configuration,
-      {QueryType queryType = QueryType.PROD}) async {
+      {UserAgent? userAgent, QueryType queryType = QueryType.PROD}) async {
     var queryParameters = configuration.getParametersMap();
 
     var searchUri = Uri(
@@ -242,8 +249,8 @@ class OpenFoodAPIClient {
         path: '/pnns-group-2/${configuration.group.id}/${configuration.page}',
         queryParameters: queryParameters);
 
-    Response response = await HttpHelper()
-        .doGetRequest(searchUri, user: user, queryType: queryType);
+    Response response = await HttpHelper().doGetRequest(searchUri,
+        user: user, userAgent: userAgent, queryType: queryType);
     final jsonStr = _replaceQuotes(response.body);
     var result = SearchResult.fromJson(json.decode(jsonStr));
 
@@ -269,6 +276,7 @@ class OpenFoodAPIClient {
       String? country,
       String? valueTag,
       String? serverDomain,
+      UserAgent? userAgent,
       QueryType queryType = QueryType.PROD}) async {
     final Map<String, String?> parameters = {};
 
@@ -294,8 +302,8 @@ class OpenFoodAPIClient {
       queryParameters: parameters,
     );
 
-    Response response = await HttpHelper()
-        .doGetRequest(insightUri, user: user, queryType: QueryType.PROD);
+    Response response = await HttpHelper().doGetRequest(insightUri,
+        user: user, userAgent: userAgent, queryType: QueryType.PROD);
     var result =
         InsightsResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
 
@@ -304,7 +312,7 @@ class OpenFoodAPIClient {
 
   /// By default the query will hit the PROD DB
   static Future<InsightsResult> getProductInsights(String barcode, User user,
-      {QueryType queryType = QueryType.PROD}) async {
+      {UserAgent? userAgent, QueryType queryType = QueryType.PROD}) async {
     var insightsUri = Uri(
       scheme: URI_SCHEME,
       host: queryType == QueryType.PROD
@@ -313,8 +321,8 @@ class OpenFoodAPIClient {
       path: 'api/v1/insights/$barcode',
     );
 
-    Response response = await HttpHelper()
-        .doGetRequest(insightsUri, user: user, queryType: QueryType.PROD);
+    Response response = await HttpHelper().doGetRequest(insightsUri,
+        user: user, userAgent: userAgent, queryType: QueryType.PROD);
 
     return InsightsResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
@@ -323,7 +331,9 @@ class OpenFoodAPIClient {
   /// By default the query will hit the PROD DB
   static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(
       String barcode, String lang, User user,
-      {int? count, QueryType queryType = QueryType.PROD}) async {
+      {int? count,
+      UserAgent? userAgent,
+      QueryType queryType = QueryType.PROD}) async {
     if (count == null || count <= 0) {
       count = 1;
     }
@@ -343,7 +353,7 @@ class OpenFoodAPIClient {
     );
 
     Response response = await HttpHelper().doGetRequest(robotoffQuestionUri,
-        user: user, queryType: QueryType.PROD);
+        user: user, userAgent: userAgent, queryType: QueryType.PROD);
     var result = RobotoffQuestionResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 
@@ -355,6 +365,7 @@ class OpenFoodAPIClient {
       String lang, User user,
       {int? count,
       required List<InsightType> types,
+      UserAgent? userAgent,
       QueryType queryType = QueryType.PROD}) async {
     if (count == null || count <= 0) {
       count = 1;
@@ -383,7 +394,7 @@ class OpenFoodAPIClient {
     );
 
     Response response = await HttpHelper().doGetRequest(robotoffQuestionUri,
-        user: user, queryType: QueryType.PROD);
+        user: user, userAgent: userAgent, queryType: QueryType.PROD);
     var result = RobotoffQuestionResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 
@@ -419,6 +430,7 @@ class OpenFoodAPIClient {
       {String? ingredientName,
       Product? product,
       User? user,
+      UserAgent? userAgent,
       queryType = QueryType.PROD}) async {
     Map<String, String?> spellingCorrectionParam;
 
@@ -443,7 +455,7 @@ class OpenFoodAPIClient {
         queryParameters: spellingCorrectionParam);
 
     Response response = await HttpHelper().doGetRequest(spellingCorrectionUri,
-        user: user, queryType: QueryType.PROD);
+        user: user, userAgent: userAgent, queryType: QueryType.PROD);
     SpellingCorrection result = SpellingCorrection.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 
@@ -458,6 +470,7 @@ class OpenFoodAPIClient {
   static Future<OcrIngredientsResult> extractIngredients(
       User user, String barcode, OpenFoodFactsLanguage language,
       {OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
+      UserAgent? userAgent,
       QueryType queryType = QueryType.PROD}) async {
     var ocrUri = Uri(
         scheme: URI_SCHEME,
@@ -470,8 +483,8 @@ class OpenFoodAPIClient {
           'ocr_engine': OcrField.GOOGLE_CLOUD_VISION.key
         });
 
-    Response response = await HttpHelper()
-        .doGetRequest(ocrUri, user: user, queryType: queryType);
+    Response response = await HttpHelper().doGetRequest(ocrUri,
+        user: user, userAgent: userAgent, queryType: queryType);
 
     OcrIngredientsResult result = OcrIngredientsResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
@@ -486,6 +499,7 @@ class OpenFoodAPIClient {
   static Future<List<dynamic>> getAutocompletedSuggestions(TagType tagType,
       {String input = '',
       OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
+      UserAgent? userAgent,
       QueryType queryType = QueryType.PROD}) async {
     var suggestionUri = Uri(
         scheme: URI_SCHEME,
@@ -497,8 +511,8 @@ class OpenFoodAPIClient {
           'lc': language.code,
         });
 
-    Response response =
-        await HttpHelper().doGetRequest(suggestionUri, queryType: queryType);
+    Response response = await HttpHelper().doGetRequest(suggestionUri,
+        userAgent: userAgent, queryType: queryType);
 
     return json.decode(response.body);
   }
@@ -585,9 +599,8 @@ class OpenFoodAPIClient {
 
   /// Returns the Ecoscore description in HTML
   static Future<String?> getEcoscoreHtmlDescription(
-    final String barcode,
-    final OpenFoodFactsLanguage language,
-  ) async {
+      final String barcode, final OpenFoodFactsLanguage language,
+      {UserAgent? userAgent}) async {
     const String FIELD = 'environment_infocard';
     final Uri uri = Uri(
       scheme: URI_SCHEME,
@@ -596,7 +609,8 @@ class OpenFoodAPIClient {
       queryParameters: <String, String>{'fields': FIELD},
     );
     try {
-      final Response response = await HttpHelper().doGetRequest(uri);
+      final Response response =
+          await HttpHelper().doGetRequest(uri, userAgent: userAgent);
       if (response.statusCode != 200) {
         return null;
       }
