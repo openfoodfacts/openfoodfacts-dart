@@ -130,7 +130,7 @@ List<String> convertFieldsToStrings(
 
   for (final field in fields) {
     if (fieldsInLanguages.contains(field)) {
-      if (languages.isEmpty == null) {
+      if (languages.isEmpty) {
         throw ArgumentError(
             'Cannot request in-lang field $field without language');
       }
