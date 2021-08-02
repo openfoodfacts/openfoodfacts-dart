@@ -60,6 +60,8 @@ abstract class JsonObject {
     return result;
   }
 
+  /// Returns all values as a String separated by a hyphen
+  /// value1 - value2 - value3
   String toValueString() {
     return toValueStringStatic(toJson());
   }
