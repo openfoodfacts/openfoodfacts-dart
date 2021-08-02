@@ -6,14 +6,14 @@ part of 'OriginsOfIngredients.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-OriginsOfIngredients _$OriginsOfIngredientsFromJson(Map<String, dynamic> json) {
-  return OriginsOfIngredients(
-    epiScore: JsonObject.parseDouble(json['epi_score']),
-    epiValue: JsonObject.parseDouble(json['epi_value']),
-    transportationScore: JsonObject.parseDouble(json['transportation_score']),
-    transportationValue: JsonObject.parseDouble(json['transportation_value']),
-  );
-}
+OriginsOfIngredients _$OriginsOfIngredientsFromJson(
+        Map<String, dynamic> json) =>
+    OriginsOfIngredients(
+      epiScore: JsonObject.parseDouble(json['epi_score']),
+      epiValue: JsonObject.parseDouble(json['epi_value']),
+      transportationScore: JsonObject.parseDouble(json['transportation_score']),
+      transportationValue: JsonObject.parseDouble(json['transportation_value']),
+    );
 
 Map<String, dynamic> _$OriginsOfIngredientsToJson(
     OriginsOfIngredients instance) {

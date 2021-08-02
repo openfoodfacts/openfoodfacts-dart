@@ -6,21 +6,21 @@ part of 'EcoscoreData.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-EcoscoreData _$EcoscoreDataFromJson(Map<String, dynamic> json) {
-  return EcoscoreData(
-    grade: json['grade'] as String?,
-    score: JsonObject.parseDouble(json['score']),
-    status: _$enumDecodeNullable(_$EcoscoreStatusEnumMap, json['status']),
-    agribalyse: json['agribalyse'] == null
-        ? null
-        : Agribalyse.fromJson(json['agribalyse'] as Map<String, dynamic>),
-    adjustments: json['adjustments'] == null
-        ? null
-        : EcoscoreAdjustments.fromJson(
-            json['adjustments'] as Map<String, dynamic>),
-    missingDataWarning: JsonObject.parseBool(json['missing_data_warning']),
-  );
-}
+EcoscoreData _$EcoscoreDataFromJson(Map<String, dynamic> json) => EcoscoreData(
+      grade: json['grade'] as String?,
+      score: JsonObject.parseDouble(json['score']),
+      status: _$enumDecodeNullable(_$EcoscoreStatusEnumMap, json['status']),
+      agribalyse: json['agribalyse'] == null
+          ? null
+          : Agribalyse.fromJson(json['agribalyse'] as Map<String, dynamic>),
+      adjustments: json['adjustments'] == null
+          ? null
+          : EcoscoreAdjustments.fromJson(
+              json['adjustments'] as Map<String, dynamic>),
+      missingDataWarning: json['missing_data_warning'] == null
+          ? false
+          : JsonObject.parseBool(json['missing_data_warning']),
+    );
 
 Map<String, dynamic> _$EcoscoreDataToJson(EcoscoreData instance) {
   final val = <String, dynamic>{};

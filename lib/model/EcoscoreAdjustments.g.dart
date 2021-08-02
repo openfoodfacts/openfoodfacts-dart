@@ -6,17 +6,16 @@ part of 'EcoscoreAdjustments.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-EcoscoreAdjustments _$EcoscoreAdjustmentsFromJson(Map<String, dynamic> json) {
-  return EcoscoreAdjustments(
-    packaging: json['packaging'] == null
-        ? null
-        : Packaging.fromJson(json['packaging'] as Map<String, dynamic>),
-    originsOfIngredients: json['origins_of_ingredients'] == null
-        ? null
-        : OriginsOfIngredients.fromJson(
-            json['origins_of_ingredients'] as Map<String, dynamic>),
-  );
-}
+EcoscoreAdjustments _$EcoscoreAdjustmentsFromJson(Map<String, dynamic> json) =>
+    EcoscoreAdjustments(
+      packaging: json['packaging'] == null
+          ? null
+          : Packaging.fromJson(json['packaging'] as Map<String, dynamic>),
+      originsOfIngredients: json['origins_of_ingredients'] == null
+          ? null
+          : OriginsOfIngredients.fromJson(
+              json['origins_of_ingredients'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$EcoscoreAdjustmentsToJson(EcoscoreAdjustments instance) {
   final val = <String, dynamic>{};
