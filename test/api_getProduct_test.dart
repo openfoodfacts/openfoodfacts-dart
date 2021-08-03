@@ -138,6 +138,31 @@ void main() {
       expect(result.product!.countries, 'United States');
     });
 
+    test('check alcohol data', () async {
+      const String barcode = '3119780259625';
+
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(barcode,
+              language: OpenFoodFactsLanguage.ENGLISH,
+              fields: [ProductField.ALL]);
+      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
+      expect(result.status, 1);
+      expect(result.barcode, barcode);
+      expect(result.product != null, true);
+      expect(result.product!.barcode, barcode);
+
+      // probably at least 4% vol
+      expect(result.product!.nutriments!.alcohol! >= 4, true);
+      // no reason why values should be different
+      expect(
+          result.product!.nutriments!.alcohol ==
+              result.product!.nutriments!.alcoholServing,
+          true);
+      // "% vol" is an unknown unit
+      expect(result.product!.nutriments!.alcoholUnit, Unit.UNKNOWN);
+    });
+
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',
         () async {
       String barcode = _BARCODE_DANISH_BUTTER_COOKIES;

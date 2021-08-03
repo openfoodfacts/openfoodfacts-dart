@@ -1,194 +1,566 @@
 /// Available languages
 enum OpenFoodFactsLanguage {
+  /// English
   ENGLISH,
+
+  /// Old Church Slavonic
   OLD_CHURCH_SLAVONIC,
+
+  /// Dzongkha
   DZONGKHA_LANGUAGE,
+
+  /// Japanese
   JAPANESE,
+
+  /// Malay
   MALAY,
+
+  /// Tagalog
   TAGALOG,
+
+  /// Moldovan
   MOLDOVAN,
+
+  /// Korean
   KOREAN,
+
+  /// Luba-Katanga
   LUBA_KATANGA_LANGUAGE,
+
+  /// Kazakh
   KAZAKH,
+
+  /// Quechua
   QUECHUA_LANGUAGES,
+
+  /// Ukrainian
   UKRAINIAN,
+
+  /// Occitan
   OCCITAN,
+
+  /// Bihari
   BIHARI_LANGUAGES,
+
+  /// South Ndebele
   SOUTHERN_NDEBELE,
+
+  /// Bokmal
   BOKMAL,
+
+  /// Komi
   KOMI,
+
+  /// Modern Greek
   MODERN_GREEK,
+
+  /// Fijian
   FIJIAN_LANGUAGE,
+
+  /// Zulu
   ZULU,
+
+  /// Ido
   IDO,
+
+  /// Khmer
   KHMER,
+
+  /// Sanskrit
   SANSKRIT,
+
+  /// Macedonian
   MACEDONIAN,
+
+  /// Sotho
   SOTHO,
+
+  /// Scottish Gaelic
   SCOTTISH_GAELIC,
+
+  /// Marathi
   MARATHI,
+
+  /// Nauruan
   NAURUAN,
+
+  /// Oromo
   OROMO,
+
+  /// Welsh
   WELSH,
+
+  /// Vietnamese
   VIETNAMESE,
+
+  /// Bislama
   BISLAMA,
+
+  /// Somali
   SOMALI,
+
+  /// Lithuanian
   LITHUANIAN,
+
+  /// Haitian Creole
   HAITIAN_CREOLE,
+
+  /// Malagasy
   MALAGASY,
+
+  /// Spanish
   SPANISH,
+
+  /// Danish
   DANISH,
+
+  /// Slovenian
   SLOVENE,
+
+  /// Icelandic
   ICELANDIC,
+
+  /// Estonian
   ESTONIAN,
+
+  /// Wolof
   WOLOF,
+
+  /// Hiri Motu
   HIRI_MOTU,
+
+  /// Tamil
   TAMIL,
+
+  /// Slovak
   SLOVAK,
+
+  /// Herero
   HERERO,
+
+  /// Italian
   ITALIAN,
+
+  /// Irish
   IRISH,
+
+  /// Shona
   SHONA,
+
+  /// Marshallese
   MARSHALLESE,
+
+  /// French
   FRENCH,
+
+  /// Aymara
   AYMARA,
+
+  /// Hebrew
   HEBREW,
+
+  /// Northern Sami
   NORTHERN_SAMI,
+
+  /// Bengali
   BENGALI,
+
+  /// Odia
   ODIA,
+
+  /// Malayalam
   MALAYALAM,
+
+  /// Dutch
   DUTCH,
+
+  /// Uyghur
   UYGHUR,
+
+  /// Serbian
   SERBIAN,
+
+  /// Tibetan
   TIBETAN_LANGUAGE,
+
+  /// Belarusian
   BELARUSIAN,
+
+  /// Samoan
   SAMOAN,
+
+  /// Punjabi
   PUNJABI,
+
+  /// Russian
   RUSSIAN,
+
+  /// Tahitian
   TAHITIAN,
+
+  /// Interlingua
   INTERLINGUA,
+
+  /// Afar
   AFAR,
+
+  /// Greenlandic
   GREENLANDIC,
+
+  /// Latin
   LATIN,
+
+  /// Chinese
   CHINESE,
+
+  /// Turkmen
   TURKMEN,
+
+  /// West Frisian
   WEST_FRISIAN,
+
+  /// Tsonga
   TSONGA,
+
+  /// Romansh
   ROMANSH,
+
+  /// Inupiaq
   INUPIAT_LANGUAGE,
+
+  /// Tajik
   TAJIK,
+
+  /// Burmese
   BURMESE,
+
+  /// Javanese
   JAVANESE,
+
+  /// Chechen
   CHECHEN,
+
+  /// Assamese
   ASSAMESE,
+
+  /// Unknown language
   UNKNOWN_LANGUAGE,
+
+  /// Arabic
   ARABIC,
+
+  /// Kinyarmanda
   KINYARWANDA,
+
+  /// Tonga
   TONGAN_LANGUAGE,
+
+  /// Church Slavonic
   CHURCH_SLAVONIC,
+
+  /// Sinhala
   SINHALA,
+
+  /// Armenian
   ARMENIAN,
+
+  /// Kurdish
   KURDISH,
+
+  /// Thai
   THAI,
+
+  /// Cree
   CREE,
+
+  /// Swahili
   SWAHILI,
+
+  /// Gujarati
   GUJARATI,
+
+  /// Persian
   PERSIAN,
+
+  /// Bosnian
   BOSNIAN,
+
+  /// Amharic
   AMHARIC,
+
+  /// Aragonese
   ARAGONESE,
+
+  /// Croatian
   CROATIAN,
+
+  /// Chewa
   CHEWA,
+
+  /// Zhuang
   ZHUANG_LANGUAGES,
+
+  /// Lingala
   LINGALA_LANGUAGE,
+
+  /// Bambara
   BAMBARA,
+
+  /// Limburgan
   LIMBURGISH_LANGUAGE,
+
+  /// Nuosu
   NUOSU_LANGUAGE,
+
+  /// Kwanyama
   KWANYAMA,
+
+  /// Kirundi
   KIRUNDI,
+
+  /// Ewe
   EWE,
+
+  /// Faorese
   FAROESE,
+
+  /// Sindhi
   SINDHI,
+
+  /// Corsican
   CORSICAN,
+
+  /// Kannada
   KANNADA,
+
+  /// Norwegian
   NORWEGIAN,
+
+  /// Sundanese
   SUNDANESE_LANGUAGE,
+
+  /// Georgian
   GEORGIAN,
+
+  /// Hausa
   HAUSA,
+
+  /// Tswana
   TSWANA,
+
+  /// Catalan
   CATALAN,
+
+  /// Ndonga
   NDONGA_DIALECT,
+
+  /// Igbo
   IGBO_LANGUAGE,
+
+  /// Afrikaans
   AFRIKAANS,
+
+  /// Polish
   POLISH,
+
+  /// Kashmiri
   KASHMIRI,
+
+  /// Maori
   MAORI,
+
+  /// Hungarian
   HUNGARIAN,
+
+  /// Breton
   BRETON,
+
+  /// Portuguese
   PORTUGUESE,
+
+  /// Bulgarian
   BULGARIAN,
+
+  /// Avestan
   AVESTAN,
+
+  /// Nepali
   NEPALI,
+
+  /// Twi
   TWI,
+
+  /// Uzbek
   UZBEK,
+
+  /// Chamorro
   CHAMORRO,
+
+  /// Guarani
   GUARANI,
+
+  /// Nynorsk
   NYNORSK,
+
+  /// Azerbaijani
   AZERBAIJANI,
+
+  /// Czech
   CZECH,
+
+  /// Navajo
   NAVAJO,
+
+  /// Finnish
   FINNISH,
+
+  /// Luxembourgish
   LUXEMBOURGISH,
+
+  /// Swedish
   SWEDISH,
+
+  /// Yiddish
   YIDDISH,
+
+  /// Inuktitut
   INUKTITUT,
+
+  /// Lao
   LAO,
+
+  /// Chuvash
   CHUVASH,
+
+  /// Maltese
   MALTESE,
+
+  /// Maldivian
   MALDIVIAN_LANGUAGE,
+
+  /// Interlingue
   INTERLINGUE,
+
+  /// Ossetian
   OSSETIAN,
+
+  /// Bashkir
   BASHKIR,
+
+  /// Ojibwe
   OJIBWE,
+
+  /// Kanuri
   KANURI,
+
+  /// Indonesian
   INDONESIAN,
+
+  /// Sardinian
   SARDINIAN_LANGUAGE,
+
+  /// Akan
   AKAN,
+
+  /// Manx
   MANX,
+
+  /// Turkish
   TURKISH,
+
+  /// Esperanto
   ESPERANTO,
+
+  /// Pashto
   PASHTO,
+
+  /// Kyrgyz
   KYRGYZ,
+
+  /// Volapuk
   VOLAPUK,
+
+  /// Avar
   AVAR,
+
+  /// Sango
   SANGO,
+
+  /// Venda
   VENDA,
+
+  /// Albanian
   ALBANIAN,
+
+  /// Basque
   BASQUE,
+
+  /// Fulah
   FULA_LANGUAGE,
+
+  /// German
   GERMAN,
+
+  /// Latvian
   LATVIAN,
+
+  /// Cornish
   CORNISH,
+
+  /// Pali
   PALI,
+
+  /// Tatar
   TATAR,
+
+  /// Romanian
   ROMANIAN,
+
+  /// Gikuyu
   GIKUYU,
+
+  /// Tigrinya
   TIGRINYA,
+
+  /// Galician
   GALICIAN,
+
+  /// Telugu
   TELUGU,
+
+  /// Hindi
   HINDI,
+
+  /// Kongo
   KONGO_LANGUAGE,
+
+  /// Xhosa
   XHOSA,
+
+  /// Swazi
   SWAZI,
+
+  /// Luganda
   LUGANDA,
+
+  /// Urdu
   URDU,
+
+  /// North Ndbele
   NORTHERN_NDEBELE_LANGUAGE,
+
+  /// Yoruba
   YORUBA,
+
+  /// World, as pseudo language
   WORLD,
+
+  /// Undefined language
   UNDEFINED
 }
 
 extension OpenFoodFactsLanguageExtension on OpenFoodFactsLanguage? {
+  /// ISO 639-1 for [OpenFoodFactsLanguage]s
   static const Map<OpenFoodFactsLanguage, String> _CODES = {
     OpenFoodFactsLanguage.ENGLISH: 'en',
     OpenFoodFactsLanguage.OLD_CHURCH_SLAVONIC: 'cu',
