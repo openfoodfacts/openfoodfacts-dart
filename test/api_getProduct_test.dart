@@ -1328,6 +1328,109 @@ void main() {
       expect(product.ingredientsText, equals('Mehl, wasser'));
     });
 
+    test('all-languages fields', () async {
+      String barcode = '2222222222226';
+
+      Product inputProduct = Product(
+        barcode: barcode,
+        lang: OpenFoodFactsLanguage.ENGLISH,
+        productNameInLanguages: {
+          OpenFoodFactsLanguage.ENGLISH: 'Pancakes',
+          OpenFoodFactsLanguage.RUSSIAN: 'Блинчики',
+          OpenFoodFactsLanguage.GERMAN: 'Pfannkuchen',
+        },
+        ingredientsTextInLanguages: {
+          OpenFoodFactsLanguage.ENGLISH: 'Flour, water',
+          OpenFoodFactsLanguage.GERMAN: 'Mehl, wasser',
+        },
+      );
+
+      await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, inputProduct,
+          queryType: QueryType.TEST);
+
+      // Request all available languages for the fields which allow it
+      final fields = [
+        ProductField.NAME_ALL_LANGUAGES,
+        ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
+      ];
+      ProductQueryConfiguration conf =
+          ProductQueryConfiguration(barcode, fields: fields);
+      ProductResult result = await OpenFoodAPIClient.getProduct(conf,
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
+      Product product = result.product!;
+
+      // Verify that all the available languages are obtained
+      expect(
+          product.productNameInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: 'Pancakes',
+            OpenFoodFactsLanguage.RUSSIAN: 'Блинчики',
+            OpenFoodFactsLanguage.GERMAN: 'Pfannkuchen',
+          }));
+      expect(
+          product.ingredientsTextInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: 'Flour, water',
+            OpenFoodFactsLanguage.GERMAN: 'Mehl, wasser',
+          }));
+    });
+
+    test(
+        'requesting all-langs and in-langs fields together does not break anything',
+        () async {
+      String barcode = '2222222222227';
+
+      Product inputProduct = Product(
+        barcode: barcode,
+        lang: OpenFoodFactsLanguage.ENGLISH,
+        productNameInLanguages: {
+          OpenFoodFactsLanguage.ENGLISH: 'Pancakes',
+          OpenFoodFactsLanguage.RUSSIAN: 'Блинчики',
+          OpenFoodFactsLanguage.GERMAN: 'Pfannkuchen',
+        },
+        ingredientsTextInLanguages: {
+          OpenFoodFactsLanguage.ENGLISH: 'Flour, water',
+          OpenFoodFactsLanguage.GERMAN: 'Mehl, wasser',
+        },
+      );
+
+      await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, inputProduct,
+          queryType: QueryType.TEST);
+
+      // Request both 'all-langs' and 'in-langs' fields types
+      final fields = [
+        ProductField.NAME_ALL_LANGUAGES,
+        ProductField.NAME_IN_LANGUAGES,
+        ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
+        ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+      ];
+      // For 'in-langs' fields specify not all of the available languages
+      ProductQueryConfiguration conf = ProductQueryConfiguration(barcode,
+          languages: [
+            OpenFoodFactsLanguage.RUSSIAN,
+            OpenFoodFactsLanguage.ENGLISH,
+          ],
+          fields: fields);
+      ProductResult result = await OpenFoodAPIClient.getProduct(conf,
+          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
+      Product product = result.product!;
+
+      // Verify that all the available languages are obtained
+      expect(
+          product.productNameInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: 'Pancakes',
+            OpenFoodFactsLanguage.RUSSIAN: 'Блинчики',
+            OpenFoodFactsLanguage.GERMAN: 'Pfannkuchen',
+          }));
+      expect(
+          product.ingredientsTextInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: 'Flour, water',
+            OpenFoodFactsLanguage.GERMAN: 'Mehl, wasser',
+          }));
+    });
+
     test('product with quotes', () async {
       String barcode = '2222222222223';
       Product product = Product(
