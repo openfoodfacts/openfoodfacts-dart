@@ -1,3 +1,4 @@
+import 'package:openfoodfacts/model/UserAgent.dart';
 import 'package:openfoodfacts/utils/UriReader.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
@@ -22,11 +23,18 @@ class HttpHelper {
   /// The data of the request (if any) has to be provided as parameter within the uri.
   /// The result of the request will be returned as string.
   /// By default the query will hit the PROD DB
-  Future<http.Response> doGetRequest(Uri uri,
-      {User? user, QueryType queryType = QueryType.PROD}) async {
+  Future<http.Response> doGetRequest(
+    Uri uri, {
+    User? user,
+    UserAgent? userAgent,
+    QueryType queryType = QueryType.PROD,
+  }) async {
     http.Response response = await http.get(uri,
-        headers: _buildHeaders(user,
-            isTestModeActive: queryType == QueryType.PROD ? false : true));
+        headers: _buildHeaders(
+          user: user,
+          userAgent: userAgent,
+          isTestModeActive: queryType == QueryType.PROD ? false : true,
+        ));
 
     return response;
   }
@@ -39,7 +47,8 @@ class HttpHelper {
       {QueryType queryType = QueryType.PROD}) async {
     http.Response response = await http.post(
       uri,
-      headers: _buildHeaders(user,
+      headers: _buildHeaders(
+          user: user,
           isTestModeActive: queryType == QueryType.PROD ? false : true),
       body: body,
     );
@@ -60,9 +69,10 @@ class HttpHelper {
     var request = http.MultipartRequest('POST', uri);
 
     request.headers.addAll(
-      _buildHeaders(user,
-              isTestModeActive: queryType == QueryType.PROD ? false : true)
-          as Map<String, String>,
+      _buildHeaders(
+        user: user,
+        isTestModeActive: queryType == QueryType.PROD ? false : true,
+      ) as Map<String, String>,
     );
 
     request.headers.addAll({'Content-Type': 'multipart/form-data'});
@@ -100,15 +110,18 @@ class HttpHelper {
 
   /// build the request headers
   /// By default isTestMode is false
-  Map<String, String>? _buildHeaders(User? user,
-      {bool isTestModeActive = false}) {
+  Map<String, String>? _buildHeaders({
+    User? user,
+    UserAgent? userAgent,
+    bool isTestModeActive = false,
+  }) {
     Map<String, String>? headers = {};
-    headers.addAll({'Accept': 'application/json'});
+
     headers.addAll({
-      'UserAgent':
-          (user != null && user.comment != null) ? user.comment! : USER_AGENT
+      'Accept': 'application/json',
+      'UserAgent': userAgent != null ? userAgent.toValueString() : USER_AGENT,
+      'From': (user != null) ? user.userId : FROM,
     });
-    headers.addAll({'From': (user != null) ? user.userId : FROM});
 
     if (isTestModeActive) {
       var token = 'Basic ' + base64Encode(utf8.encode('off:off'));

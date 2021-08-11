@@ -59,4 +59,21 @@ abstract class JsonObject {
     });
     return result;
   }
+
+  /// Returns all values as a String separated by a hyphen
+  /// value1 - value2 - value3
+  String toValueString() {
+    return toValueStringStatic(toJson());
+  }
+
+  /// Returns all values as a String separated by a hyphen
+  /// value1 - value2 - value3
+  static String toValueStringStatic(Map<String, dynamic> json) {
+    String result = '';
+    for (MapEntry<String, dynamic> entry in json.entries) {
+      result = result + (entry.value != null ? ' - ${entry.value}' : '');
+    }
+
+    return result;
+  }
 }
