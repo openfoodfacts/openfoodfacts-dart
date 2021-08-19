@@ -56,6 +56,7 @@
     <h5><span class="package-name">openfoodfacts</span> <span class="package-kind">package</span></h5>
     <ol>
       <li class="section-title">Libraries</li>
+      <li><a href="../utils_AbstractQueryConfiguration/utils_AbstractQueryConfiguration-library.html">AbstractQueryConfiguration</a></li>
       <li><a href="../model_Additives/model_Additives-library.html">Additives</a></li>
       <li><a href="../model_Agribalyse/model_Agribalyse-library.html">Agribalyse</a></li>
       <li><a href="../model_Allergens/model_Allergens-library.html">Allergens</a></li>
@@ -73,6 +74,7 @@
       <li><a href="../model_Ingredient/model_Ingredient-library.html">Ingredient</a></li>
       <li><a href="../model_IngredientsAnalysisTags/model_IngredientsAnalysisTags-library.html">IngredientsAnalysisTags</a></li>
       <li><a href="../model_Insight/model_Insight-library.html">Insight</a></li>
+      <li><a href="../utils_InvalidBarcodes/utils_InvalidBarcodes-library.html">InvalidBarcodes</a></li>
       <li><a href="../utils_JsonHelper/utils_JsonHelper-library.html">JsonHelper</a></li>
       <li><a href="../interface_JsonObject/interface_JsonObject-library.html">JsonObject</a></li>
       <li><a href="../utils_LanguageHelper/utils_LanguageHelper-library.html">LanguageHelper</a></li>
@@ -89,6 +91,7 @@
       <li><a href="../model_parameter_Page/model_parameter_Page-library.html">Page</a></li>
       <li><a href="../model_parameter_PageSize/model_parameter_PageSize-library.html">PageSize</a></li>
       <li><a href="../interface_Parameter/interface_Parameter-library.html">Parameter</a></li>
+      <li><a href="../model_parameter_PnnsGroup2Filter/model_parameter_PnnsGroup2Filter-library.html">PnnsGroup2Filter</a></li>
       <li><a href="../utils_PnnsGroupQueryConfiguration/utils_PnnsGroupQueryConfiguration-library.html">PnnsGroupQueryConfiguration</a></li>
       <li><a href="../utils_PnnsGroups/utils_PnnsGroups-library.html">PnnsGroups</a></li>
       <li><a href="../personalized_search_preference_importance/personalized_search_preference_importance-library.html">preference_importance</a></li>
@@ -98,6 +101,7 @@
       <li><a href="../utils_ProductFields/utils_ProductFields-library.html">ProductFields</a></li>
       <li><a href="../utils_ProductHelper/utils_ProductHelper-library.html">ProductHelper</a></li>
       <li><a href="../model_ProductImage/model_ProductImage-library.html">ProductImage</a></li>
+      <li><a href="../utils_ProductListQueryConfiguration/utils_ProductListQueryConfiguration-library.html">ProductListQueryConfiguration</a></li>
       <li><a href="../utils_ProductQueryConfigurations/utils_ProductQueryConfigurations-library.html">ProductQueryConfigurations</a></li>
       <li><a href="../model_ProductResult/model_ProductResult-library.html">ProductResult</a></li>
       <li><a href="../utils_ProductSearchQueryConfiguration/utils_ProductSearchQueryConfiguration-library.html">ProductSearchQueryConfiguration</a></li>
@@ -114,12 +118,15 @@
       <li><a href="../model_Status/model_Status-library.html">Status</a></li>
       <li><a href="../model_parameter_TagFilter/model_parameter_TagFilter-library.html">TagFilter</a></li>
       <li><a href="../model_TagI18N/model_TagI18N-library.html">TagI18N</a></li>
+      <li><a href="../utils_TagType/utils_TagType-library.html">TagType</a></li>
       <li><a href="../utils_UnitHelper/utils_UnitHelper-library.html">UnitHelper</a></li>
       <li><a href="../utils_UriReader/utils_UriReader-library.html">UriReader</a></li>
       <li><a href="../utils_UriReader_io/utils_UriReader_io-library.html">UriReader_io</a></li>
       <li><a href="../utils_UriReader_js/utils_UriReader_js-library.html">UriReader_js</a></li>
       <li><a href="../utils_UriReader_stub/utils_UriReader_stub-library.html">UriReader_stub</a></li>
       <li><a href="../model_User/model_User-library.html">User</a></li>
+      <li><a href="../model_UserAgent/model_UserAgent-library.html">UserAgent</a></li>
+      <li><a href="../model_parameter_WithoutAdditives/model_parameter_WithoutAdditives-library.html">WithoutAdditives</a></li>
 </ol>
 
   </div>
@@ -167,7 +174,7 @@
 
 </dt>
 <dd>
-   
+  Helper class related to product pictures 
 </dd>
 
         <dt id="Ingredient">
@@ -199,7 +206,7 @@
 
 </dt>
 <dd>
-   
+  Helper class around product field conversion to/from JSON 
 </dd>
 
         <dt id="LanguageHelper">
@@ -207,7 +214,7 @@
 
 </dt>
 <dd>
-   
+  Helper class around <a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a> 
 </dd>
 
         <dt id="NutrimentsHelper">
@@ -215,7 +222,7 @@
 
 </dt>
 <dd>
-   
+  Helper class for energy computations and checks 
 </dd>
 
         <dt id="OpenFoodAPIClient">
@@ -227,7 +234,7 @@
 </dd>
 
         <dt id="OutputFormat">
-  <span class="name "><a href="../model_parameter_OutputFormat/OutputFormat-class.html">OutputFormat</a></span> 
+  <span class="name deprecated"><a class="deprecated" href="../model_parameter_OutputFormat/OutputFormat-class.html">OutputFormat</a></span> 
 
 </dt>
 <dd>
@@ -239,7 +246,7 @@
 
 </dt>
 <dd>
-   
+  "Page number" search API parameter 
 </dd>
 
         <dt id="PageSize">
@@ -247,7 +254,7 @@
 
 </dt>
 <dd>
-   
+  "Page size" search API parameter 
 </dd>
 
         <dt id="Parameter">
@@ -255,7 +262,7 @@
 
 </dt>
 <dd>
-   
+  Abstract search API parameter, to be used in the search URI <a href="../interface_Parameter/Parameter-class.html">[...]</a>
 </dd>
 
         <dt id="Product">
@@ -263,7 +270,7 @@
 
 </dt>
 <dd>
-   
+  This class contains most of the data about a specific product. <a href="../model_Product/Product-class.html">[...]</a>
 </dd>
 
         <dt id="ProductHelper">
@@ -271,7 +278,7 @@
 
 </dt>
 <dd>
-   
+  Helper class around <a href="../model_Product/Product-class.html">Product</a> fields 
 </dd>
 
         <dt id="ProductImage">
@@ -288,7 +295,7 @@ Categorized by content type, size and language
 
 </dt>
 <dd>
-   
+  Query Configuration for single barcode 
 </dd>
 
         <dt id="ProductResult">
@@ -304,7 +311,7 @@ Categorized by content type, size and language
 
 </dt>
 <dd>
-   
+  Query Configuration for search parameters 
 </dd>
 
         <dt id="RobotoffQuestion">
@@ -332,7 +339,7 @@ Categorized by content type, size and language
 </dd>
 
         <dt id="SearchSimple">
-  <span class="name "><a href="../model_parameter_SearchSimple/SearchSimple-class.html">SearchSimple</a></span> 
+  <span class="name deprecated"><a class="deprecated" href="../model_parameter_SearchSimple/SearchSimple-class.html">SearchSimple</a></span> 
 
 </dt>
 <dd>
@@ -352,7 +359,7 @@ Categorized by content type, size and language
 
 </dt>
 <dd>
-   
+  Sort search API parameter 
 </dd>
 
         <dt id="SpellingCorrection">
@@ -467,14 +474,14 @@ Categorized by content type, size and language
 
       <dl class="callables">
         <dt id="convertFieldsToStrings" class="callable">
-  <span class="name"><a href="../utils_ProductFields/convertFieldsToStrings.html">convertFieldsToStrings</a></span><span class="signature">(<wbr><span class="parameter" id="convertFieldsToStrings-param-fields"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.3/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_ProductFields/ProductField-class.html">ProductField</a></span>&gt;</span></span> <span class="parameter-name">fields</span>, </span><span class="parameter" id="convertFieldsToStrings-param-language"><span class="type-annotation"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a>?</span> <span class="parameter-name">language</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.13.3/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.13.3/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  <span class="name"><a href="../utils_ProductFields/convertFieldsToStrings.html">convertFieldsToStrings</a></span><span class="signature">(<wbr><span class="parameter" id="convertFieldsToStrings-param-fields"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_ProductFields/ProductField-class.html">ProductField</a></span>&gt;</span></span> <span class="parameter-name">fields</span>, </span><span class="parameter" id="convertFieldsToStrings-param-languages"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>&gt;</span></span> <span class="parameter-name">languages</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span>&gt;</span></span>
   </span>
   
 
 </dt>
 <dd>
-  NOTE: if one of the fields is TRANSLATED and language is null -
+  NOTE: if one of the fields is IN_LANGUAGES and <code>languages</code> is empty -
 the function will throw. 
   
 
@@ -495,7 +502,7 @@ the function will throw.
 
         <dt id="ingredientSpecialPropertyStatusToJson" class="callable">
   <span class="name"><a href="../model_Ingredient/ingredientSpecialPropertyStatusToJson.html">ingredientSpecialPropertyStatusToJson</a></span><span class="signature">(<wbr><span class="parameter" id="ingredientSpecialPropertyStatusToJson-param-status"><span class="type-annotation"><a href="../model_Ingredient/IngredientSpecialPropertyStatus-class.html">IngredientSpecialPropertyStatus</a>?</span> <span class="parameter-name">status</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.13.3/dart-core/String-class.html">String</a>?</span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a>?</span>
   </span>
   
 
@@ -514,7 +521,7 @@ the function will throw.
 
       <dl>
         <dt id="Format">
-  <span class="name "><a href="../model_parameter_OutputFormat/Format-class.html">Format</a></span> 
+  <span class="name deprecated"><a class="deprecated" href="../model_parameter_OutputFormat/Format-class.html">Format</a></span> 
 
 </dt>
 <dd>
@@ -566,7 +573,7 @@ the function will throw.
 
 </dt>
 <dd>
-   
+  Energy units 
 </dd>
 
         <dt id="OpenFoodFactsLanguage">
@@ -574,7 +581,7 @@ the function will throw.
 
 </dt>
 <dd>
-   
+  Available languages 
 </dd>
 
         <dt id="ProductField">
@@ -582,7 +589,7 @@ the function will throw.
 
 </dt>
 <dd>
-   
+  Fields of a <a href="../model_Product/Product-class.html">Product</a> 
 </dd>
 
         <dt id="SortOption">
@@ -590,7 +597,7 @@ the function will throw.
 
 </dt>
 <dd>
-   
+  Possible sort options for search API 
 </dd>
 
       </dl>
@@ -615,7 +622,7 @@ the function will throw.
   <li><a href="../utils_LanguageHelper/LanguageHelper-class.html">LanguageHelper</a></li>
   <li><a href="../utils_NutrimentsHelper/NutrimentsHelper-class.html">NutrimentsHelper</a></li>
   <li><a href="../openfoodfacts/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
-  <li><a href="../model_parameter_OutputFormat/OutputFormat-class.html">OutputFormat</a></li>
+  <li><a class="deprecated" href="../model_parameter_OutputFormat/OutputFormat-class.html">OutputFormat</a></li>
   <li><a href="../model_parameter_Page/Page-class.html">Page</a></li>
   <li><a href="../model_parameter_PageSize/PageSize-class.html">PageSize</a></li>
   <li><a href="../interface_Parameter/Parameter-class.html">Parameter</a></li>
@@ -628,7 +635,7 @@ the function will throw.
   <li><a href="../model_RobotoffQuestion/RobotoffQuestion-class.html">RobotoffQuestion</a></li>
   <li><a href="../model_RobotoffQuestion/RobotoffQuestionResult-class.html">RobotoffQuestionResult</a></li>
   <li><a href="../model_SearchResult/SearchResult-class.html">SearchResult</a></li>
-  <li><a href="../model_parameter_SearchSimple/SearchSimple-class.html">SearchSimple</a></li>
+  <li><a class="deprecated" href="../model_parameter_SearchSimple/SearchSimple-class.html">SearchSimple</a></li>
   <li><a href="../model_SendImage/SendImage-class.html">SendImage</a></li>
   <li><a href="../model_parameter_SortBy/SortBy-class.html">SortBy</a></li>
   <li><a href="../model_SpellingCorrections/SpellingCorrection-class.html">SpellingCorrection</a></li>
@@ -654,7 +661,7 @@ the function will throw.
   <li><a href="../model_Ingredient/ingredientSpecialPropertyStatusToJson.html">ingredientSpecialPropertyStatusToJson</a></li>
 
   <li class="section-title"><a href="../openfoodfacts/openfoodfacts-library.html#enums">Enums</a></li>
-  <li><a href="../model_parameter_OutputFormat/Format-class.html">Format</a></li>
+  <li><a class="deprecated" href="../model_parameter_OutputFormat/Format-class.html">Format</a></li>
   <li><a href="../model_ProductImage/ImageField-class.html">ImageField</a></li>
   <li><a href="../model_ProductImage/ImageSize-class.html">ImageSize</a></li>
   <li><a href="../model_Ingredient/IngredientSpecialPropertyStatus-class.html">IngredientSpecialPropertyStatus</a></li>
@@ -675,7 +682,7 @@ the function will throw.
 <footer>
   <span class="no-break">
     openfoodfacts
-      1.1.0-beta
+      1.3.2
   </span>
 
   

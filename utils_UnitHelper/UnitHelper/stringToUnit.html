@@ -67,15 +67,15 @@
     <li class="section-title inherited">
       <a href="../../utils_UnitHelper/UnitHelper-class.html#instance-properties">Properties</a>
     </li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.3/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.3/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
     <li class="section-title inherited"><a href="../../utils_UnitHelper/UnitHelper-class.html#instance-methods">Methods</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.3/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.3/dart-core/Object/toString.html">toString</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/toString.html">toString</a></li>
 
     <li class="section-title inherited"><a href="../../utils_UnitHelper/UnitHelper-class.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.3/dart-core/Object/operator_equals.html">operator ==</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 
@@ -96,13 +96,16 @@
       
 
 <span class="returntype"><a href="../../utils_UnitHelper/Unit-class.html">Unit</a>?</span>
-<span class="name ">stringToUnit</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="stringToUnit-param-s"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.3/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">s</span></span></li>
+<span class="name ">stringToUnit</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="stringToUnit-param-s"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">s</span></span></li>
 </ol>)
 
       
 
     </section>
     
+<section class="desc markdown">
+  <p>Returns the <a href="../../utils_UnitHelper/Unit-class.html">Unit</a> described by <code>s</code></p>
+</section>
 
 
     
@@ -114,67 +117,14 @@
   }
 
   if (s[0] == String.fromCharCode(0x03BC)) {
-    String newS = s.substring(1);
-    switch (newS) {
-      case &#39;g&#39;:
-        return Unit.MICRO_G;
-      default:
-        return Unit.UNKNOWN;
+    &#47;&#47; greek letter mu
+    if (s.length &gt; 1 &amp;&amp; s.substring(1) == &#39;g&#39;) {
+      return Unit.MICRO_G;
     }
+    return Unit.UNKNOWN;
   }
 
-  switch (s) {
-    case &#39;kcal&#39;:
-      return Unit.KCAL;
-    case &#39;kCal&#39;:
-      return Unit.KCAL;
-    case &#39;KCal&#39;:
-      return Unit.KCAL;
-    case &#39;kj&#39;:
-      return Unit.KJ;
-    case &#39;Kj&#39;:
-      return Unit.KJ;
-    case &#39;kJ&#39;:
-      return Unit.KJ;
-    case &#39;KJ&#39;:
-      return Unit.KJ;
-    case &#39;g&#39;:
-      return Unit.G;
-    case &#39;G&#39;:
-      return Unit.G;
-    case &#39;mg&#39;:
-      return Unit.MILLI_G;
-    case &#39;milli-gram&#39;:
-      return Unit.MILLI_G;
-    case &#39;mG&#39;:
-      return Unit.MILLI_G;
-    case &#39;micro-gram&#39;:
-      return Unit.MICRO_G;
-    case &#39;ml&#39;:
-      return Unit.MILLI_L;
-    case &#39;mL&#39;:
-      return Unit.MILLI_L;
-    case &#39;Ml&#39;:
-      return Unit.MILLI_L;
-    case &#39;ML&#39;:
-      return Unit.MILLI_L;
-    case &#39;milli-liter&#39;:
-      return Unit.MILLI_L;
-    case &#39;liter&#39;:
-      return Unit.L;
-    case &#39;L&#39;:
-      return Unit.L;
-    case &#39;l&#39;:
-      return Unit.L;
-    case &#39;%&#39;:
-      return Unit.PERCENT;
-    case &#39;per cent&#39;:
-      return Unit.PERCENT;
-    case &#39;percent&#39;:
-      return Unit.PERCENT;
-    default:
-      return Unit.UNKNOWN;
-  }
+  return _UNITS[s] ?? Unit.UNKNOWN;
 }</code></pre>
 </section>
 
@@ -189,7 +139,7 @@
 <footer>
   <span class="no-break">
     openfoodfacts
-      1.1.0-beta
+      1.3.2
   </span>
 
   

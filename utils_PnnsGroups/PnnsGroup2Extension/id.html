@@ -87,97 +87,21 @@
 <section id="getter">
 
 <section class="multi-line-signature">
-  <span class="returntype"><a href="https://api.dart.dev/stable/2.13.3/dart-core/String-class.html">String</a></span>
+  <span class="returntype"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span>
   <span class="name ">id</span>
   
 
 </section>
 
 
+<section class="desc markdown">
+  <p>Returns the id of the subgroup</p>
+</section>
 
 
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">String get id {
-  switch (this) {
-    case PnnsGroup2.FRUIT_JUICES:
-      return &#39;fruit-juices&#39;;
-    case PnnsGroup2.SWEETENED_BEVERAGES:
-      return &#39;sweetened-beverages&#39;;
-    case PnnsGroup2.ALCOHOLIC_BEVERAGES:
-      return &#39;alcoholic-beverages&#39;;
-    case PnnsGroup2.UNSWEETENED_BEVERAGES:
-      return &#39;unsweetened-beverages&#39;;
-    case PnnsGroup2.ARTIFICIALLY_SWEETENED_BEVERAGES:
-      return &#39;artificially-sweetened-beverages&#39;;
-    case PnnsGroup2.WATERS_AND_FLAVORED_WATERS:
-      return &#39;waters-and-flavored-waters&#39;;
-    case PnnsGroup2.FRUIT_NECTARS:
-      return &#39;fruit-nectars&#39;;
-    case PnnsGroup2.TEAS_AND_HERBAL_TEAS_AND_COFFEES:
-      return &#39;teas-and-herbal-teas-and-coffees&#39;;
-    case PnnsGroup2.BREAKFAST_CEREALS:
-      return &#39;breakfast-cereals&#39;;
-    case PnnsGroup2.PASTRIES:
-      return &#39;pastries&#39;;
-    case PnnsGroup2.POTATOES:
-      return &#39;potatoes&#39;;
-    case PnnsGroup2.CEREALS:
-      return &#39;cereals&#39;;
-    case PnnsGroup2.BREAD:
-      return &#39;bread&#39;;
-    case PnnsGroup2.PIZZA_PIES_AND_QUICHE:
-      return &#39;pizza-pies-and-quiche&#39;;
-    case PnnsGroup2.SANDWICHES:
-      return &#39;sandwiches&#39;;
-    case PnnsGroup2.SOUPS:
-      return &#39;soups&#39;;
-    case PnnsGroup2.ONE_DISH_MEALS:
-      return &#39;one-dish-meals&#39;;
-    case PnnsGroup2.DRESSINGS_AND_SAUCES:
-      return &#39;dressings-and-sauces&#39;;
-    case PnnsGroup2.FATS:
-      return &#39;fats&#39;;
-    case PnnsGroup2.PROCESSED_MEAT:
-      return &#39;processed-meat&#39;;
-    case PnnsGroup2.MEAT:
-      return &#39;meat&#39;;
-    case PnnsGroup2.FISH_AND_SEAFOOD:
-      return &#39;fish-and-seafood&#39;;
-    case PnnsGroup2.OFFALS:
-      return &#39;offals&#39;;
-    case PnnsGroup2.FRUITS:
-      return &#39;fruits&#39;;
-    case PnnsGroup2.VEGETABLES:
-      return &#39;vegetables&#39;;
-    case PnnsGroup2.DRIED_FRUITS:
-      return &#39;dried-fruits&#39;;
-    case PnnsGroup2.NUTS:
-      return &#39;nuts&#39;;
-    case PnnsGroup2.LEGUMES:
-      return &#39;legumes&#39;;
-    case PnnsGroup2.MILK_AND_YOGURT:
-      return &#39;milk-and-yogurt&#39;;
-    case PnnsGroup2.DAIRY_DESSERTS:
-      return &#39;dairy-desserts&#39;;
-    case PnnsGroup2.CHEESE:
-      return &#39;cheese&#39;;
-    case PnnsGroup2.PLANT_BASED_MILK_SUBSTITUTES:
-      return &#39;plant-based-milk-substitutes&#39;;
-    case PnnsGroup2.APPETIZERS:
-      return &#39;appetizers&#39;;
-    case PnnsGroup2.SALTY_AND_FATTY_PRODUCTS:
-      return &#39;salty-and-fatty-products&#39;;
-    case PnnsGroup2.SWEETS:
-      return &#39;sweets&#39;;
-    case PnnsGroup2.CHOCOLATE_PRODUCTS:
-      return &#39;chocolate-products&#39;;
-    case PnnsGroup2.ICE_CREAM:
-      return &#39;ice-cream&#39;;
-    default:
-      return &#39;&#39;;
-  }
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">String get id =&gt; _IDS[this] ?? &#39;&#39;;</code></pre>
 </section>
 
 </section>
@@ -193,7 +117,7 @@
 <footer>
   <span class="no-break">
     openfoodfacts
-      1.1.0-beta
+      1.3.2
   </span>
 
   

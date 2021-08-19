@@ -87,7 +87,7 @@
       
 
 <span class="returntype"><a href="../../model_Insight/InsightType-class.html">InsightType</a></span>
-<span class="name ">getType</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getType-param-s"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.3/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">s</span></span></li>
+<span class="name ">getType</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getType-param-s"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">s</span></span></li>
 </ol>)
 
       
@@ -99,30 +99,10 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static InsightType getType(String? s) {
-  switch (s) {
-    case &#39;ingredient_spellcheck&#39;:
-      return InsightType.INGREDIENT_SPELLCHECK;
-    case &#39;packager_code&#39;:
-      return InsightType.PACKAGER_CODE;
-    case &#39;label&#39;:
-      return InsightType.LABEL;
-    case &#39;category&#39;:
-      return InsightType.CATEGORY;
-    case &#39;product_weight&#39;:
-      return InsightType.PRODUCT_WEIGHT;
-    case &#39;expiration_date&#39;:
-      return InsightType.EXPIRATION_DATE;
-    case &#39;brand&#39;:
-      return InsightType.BRAND;
-    case &#39;store&#39;:
-      return InsightType.STORE;
-    case &#39;nutrient&#39;:
-      return InsightType.NUTRIENT;
-    default:
-      return InsightType.UNDEFINED;
-  }
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">static InsightType getType(String? s) =&gt; InsightType.values.firstWhere(
+      (final InsightType key) =&gt; _VALUES[key] == s,
+      orElse: () =&gt; InsightType.UNDEFINED,
+    );</code></pre>
 </section>
 
 
@@ -136,7 +116,7 @@
 <footer>
   <span class="no-break">
     openfoodfacts
-      1.1.0-beta
+      1.3.2
   </span>
 
   

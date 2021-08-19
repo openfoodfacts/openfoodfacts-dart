@@ -87,7 +87,7 @@
       
 
 <span class="returntype"><a href="../../model_NutrientLevels/Level-class.html">Level</a></span>
-<span class="name ">getLevel</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getLevel-param-s"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.3/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">s</span></span></li>
+<span class="name ">getLevel</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getLevel-param-s"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">s</span></span></li>
 </ol>)
 
       
@@ -99,18 +99,10 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static Level getLevel(String? s) {
-  switch (s) {
-    case &#39;low&#39;:
-      return Level.LOW;
-    case &#39;moderate&#39;:
-      return Level.MODERATE;
-    case &#39;high&#39;:
-      return Level.HIGH;
-    default:
-      return Level.UNDEFINED;
-  }
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">static Level getLevel(String? s) =&gt; Level.values.firstWhere(
+      (final Level key) =&gt; _VALUES[key] == s,
+      orElse: () =&gt; Level.UNDEFINED,
+    );</code></pre>
 </section>
 
 
@@ -124,7 +116,7 @@
 <footer>
   <span class="no-break">
     openfoodfacts
-      1.1.0-beta
+      1.3.2
   </span>
 
   

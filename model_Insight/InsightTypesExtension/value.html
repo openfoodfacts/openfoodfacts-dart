@@ -88,7 +88,7 @@
 <section id="getter">
 
 <section class="multi-line-signature">
-  <span class="returntype"><a href="https://api.dart.dev/stable/2.13.3/dart-core/String-class.html">String</a>?</span>
+  <span class="returntype"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a>?</span>
   <span class="name ">value</span>
   
 
@@ -99,32 +99,7 @@
 
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">String? get value {
-  switch (this) {
-    case InsightType.INGREDIENT_SPELLCHECK:
-      return &#39;ingredient_spellcheck&#39;;
-    case InsightType.PACKAGER_CODE:
-      return &#39;packager_code&#39;;
-    case InsightType.LABEL:
-      return &#39;label&#39;;
-    case InsightType.CATEGORY:
-      return &#39;category&#39;;
-    case InsightType.PRODUCT_WEIGHT:
-      return &#39;product_weight&#39;;
-    case InsightType.EXPIRATION_DATE:
-      return &#39;expiration_date&#39;;
-    case InsightType.BRAND:
-      return &#39;brand&#39;;
-    case InsightType.STORE:
-      return &#39;store&#39;;
-    case InsightType.NUTRIENT:
-      return &#39;nutrient&#39;;
-    case InsightType.UNDEFINED:
-      return &#39;undefined&#39;;
-    default:
-      return null;
-  }
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">String? get value =&gt; _VALUES[this];</code></pre>
 </section>
 
 </section>
@@ -140,7 +115,7 @@
 <footer>
   <span class="no-break">
     openfoodfacts
-      1.1.0-beta
+      1.3.2
   </span>
 
   

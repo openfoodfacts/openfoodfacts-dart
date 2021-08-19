@@ -87,7 +87,7 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/2.13.3/dart-core/String-class.html">String</a></span>
+<span class="returntype"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span>
 <span class="name ">getValue</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getValue-param-field"><span class="type-annotation"><a href="../../model_ProductImage/ImageField-class.html">ImageField</a></span> <span class="parameter-name">field</span></span></li>
 </ol>)
 
@@ -100,21 +100,7 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static String getValue(ImageField field) {
-  switch (field) {
-    case ImageField.FRONT:
-      return &#39;front&#39;;
-    case ImageField.INGREDIENTS:
-      return &#39;ingredients&#39;;
-    case ImageField.NUTRITION:
-      return &#39;nutrition&#39;;
-    case ImageField.PACKAGING:
-      return &#39;packaging&#39;;
-    case ImageField.OTHER:
-    default:
-      return &#39;other&#39;;
-  }
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">static String getValue(ImageField field) =&gt; _VALUES[field] ?? &#39;other&#39;;</code></pre>
 </section>
 
 
@@ -128,7 +114,7 @@
 <footer>
   <span class="no-break">
     openfoodfacts
-      1.1.0-beta
+      1.3.2
   </span>
 
   

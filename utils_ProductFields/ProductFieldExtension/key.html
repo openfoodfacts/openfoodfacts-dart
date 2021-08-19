@@ -86,123 +86,21 @@
 <section id="getter">
 
 <section class="multi-line-signature">
-  <span class="returntype"><a href="https://api.dart.dev/stable/2.13.3/dart-core/String-class.html">String</a></span>
+  <span class="returntype"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span>
   <span class="name ">key</span>
   
 
 </section>
 
 
+<section class="desc markdown">
+  <p>Returns the key of the product field</p>
+</section>
 
 
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">String get key {
-  switch (this) {
-    case ProductField.BARCODE:
-      return &#39;code&#39;;
-    case ProductField.NAME:
-      return &#39;product_name&#39;;
-    case ProductField.NAME_TRANSLATED:
-      return &#39;product_name_&#39;;
-    case ProductField.GENERIC_NAME:
-      return &#39;generic_name&#39;;
-    case ProductField.BRANDS:
-      return &#39;brands&#39;;
-    case ProductField.BRANDS_TAGS:
-      return &#39;brands_tags&#39;;
-    case ProductField.COUNTRIES:
-      return &#39;countries&#39;;
-    case ProductField.COUNTRIES_TAGS:
-      return &#39;countries_tags&#39;;
-    case ProductField.COUNTRIES_TAGS_TRANSLATED:
-      return &#39;countries_tags_&#39;;
-    case ProductField.LANGUAGE:
-      return &#39;lang&#39;;
-    case ProductField.QUANTITY:
-      return &#39;quantity&#39;;
-    case ProductField.SERVING_SIZE:
-      return &#39;serving_size&#39;;
-    case ProductField.PACKAGING_QUANTITY:
-      return &#39;product_quantity&#39;;
-    case ProductField.FRONT_IMAGE:
-      return &#39;image_small_url&#39;;
-    case ProductField.IMAGE_FRONT_URL:
-      return &#39;image_front_url&#39;;
-    case ProductField.IMAGE_FRONT_SMALL_URL:
-      return &#39;image_front_small_url&#39;;
-    case ProductField.IMAGE_INGREDIENTS_URL:
-      return &#39;image_ingredients_url&#39;;
-    case ProductField.IMAGE_INGREDIENTS_SMALL_URL:
-      return &#39;image_ingredients_small_url&#39;;
-    case ProductField.IMAGE_NUTRITION_URL:
-      return &#39;image_nutrition_url&#39;;
-    case ProductField.IMAGE_NUTRITION_SMALL_URL:
-      return &#39;image_nutrition_small_url&#39;;
-    case ProductField.IMAGE_PACKAGING_URL:
-      return &#39;image_packaging_url&#39;;
-    case ProductField.IMAGE_PACKAGING_SMALL_URL:
-      return &#39;image_packaging_small_url&#39;;
-    case ProductField.SELECTED_IMAGE:
-      return &#39;selected_images&#39;;
-    case ProductField.IMAGES:
-      return &#39;images&#39;;
-    case ProductField.INGREDIENTS:
-      return &#39;ingredients&#39;;
-    case ProductField.INGREDIENTS_TAGS:
-      return &#39;ingredients_tags&#39;;
-    case ProductField.INGREDIENTS_TAGS_TRANSLATED:
-      return &#39;ingredients_tags_&#39;;
-    case ProductField.NUTRIMENTS:
-      return &#39;nutriments&#39;;
-    case ProductField.ADDITIVES:
-      return &#39;additives_tags&#39;;
-    case ProductField.NUTRIENT_LEVELS:
-      return &#39;nutrient_levels&#39;;
-    case ProductField.INGREDIENTS_TEXT:
-      return &#39;ingredients_text&#39;;
-    case ProductField.INGREDIENTS_TEXT_TRANSLATED:
-      return &#39;ingredients_text_&#39;;
-    case ProductField.NUTRIMENT_ENERGY_UNIT:
-      return &#39;nutriment_energy_unit&#39;;
-    case ProductField.NUTRIMENT_DATA_PER:
-      return &#39;nutrition_data_per&#39;;
-    case ProductField.NUTRISCORE:
-      return &#39;nutrition_grade_fr&#39;;
-    case ProductField.CATEGORIES:
-      return &#39;categories&#39;;
-    case ProductField.CATEGORIES_TAGS:
-      return &#39;categories_tags&#39;;
-    case ProductField.CATEGORIES_TAGS_TRANSLATED:
-      return &#39;categories_tags_&#39;;
-    case ProductField.LABELS_TAGS:
-      return &#39;labels_tags&#39;;
-    case ProductField.LABELS_TAGS_TRANSLATED:
-      return &#39;labels_tags_&#39;;
-    case ProductField.MISC_TAGS:
-      return &#39;misc&#39;;
-    case ProductField.STATES_TAGS:
-      return &#39;states_tags&#39;;
-    case ProductField.TRACES_TAGS:
-      return &#39;traces_tags&#39;;
-    case ProductField.INGREDIENTS_ANALYSIS_TAGS:
-      return &#39;ingredients_analysis_tags&#39;;
-    case ProductField.ALLERGENS:
-      return &#39;allergens_tags&#39;;
-    case ProductField.ENVIRONMENT_IMPACT_LEVELS:
-      return &#39;environment_impact_level_tags&#39;;
-    case ProductField.ATTRIBUTE_GROUPS:
-      return &#39;attribute_groups&#39;;
-    case ProductField.ECOSCORE_GRADE:
-      return &#39;ecoscore_grade&#39;;
-    case ProductField.ECOSCORE_SCORE:
-      return &#39;ecoscore_score&#39;;
-    case ProductField.ECOSCORE_DATA:
-      return &#39;ecoscore_data&#39;;
-    default:
-      return &#39;&#39;;
-  }
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">String get key =&gt; _KEYS[this] ?? &#39;&#39;;</code></pre>
 </section>
 
 </section>
@@ -218,7 +116,7 @@
 <footer>
   <span class="no-break">
     openfoodfacts
-      1.1.0-beta
+      1.3.2
   </span>
 
   

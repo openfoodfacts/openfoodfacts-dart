@@ -88,7 +88,7 @@
       
 
 <span class="returntype"><a href="../../model_ProductImage/ImageField-class.html">ImageField</a></span>
-<span class="name ">getType</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getType-param-s"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.3/dart-core/String-class.html">String</a></span> <span class="parameter-name">s</span></span></li>
+<span class="name ">getType</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getType-param-s"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">s</span></span></li>
 </ol>)
 
       
@@ -100,21 +100,10 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static ImageField getType(String s) {
-  switch (s.toLowerCase()) {
-    case &#39;front&#39;:
-      return ImageField.FRONT;
-    case &#39;ingredients&#39;:
-      return ImageField.INGREDIENTS;
-    case &#39;nutrition&#39;:
-      return ImageField.NUTRITION;
-    case &#39;packaging&#39;:
-      return ImageField.PACKAGING;
-    case &#39;other&#39;:
-    default:
-      return ImageField.OTHER;
-  }
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">static ImageField getType(String s) =&gt; ImageField.values.firstWhere(
+      (final ImageField key) =&gt; _VALUES[key] == s.toLowerCase(),
+      orElse: () =&gt; ImageField.OTHER,
+    );</code></pre>
 </section>
 
 
@@ -128,7 +117,7 @@
 <footer>
   <span class="no-break">
     openfoodfacts
-      1.1.0-beta
+      1.3.2
   </span>
 
   

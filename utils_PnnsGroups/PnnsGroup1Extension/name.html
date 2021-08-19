@@ -87,41 +87,21 @@
 <section id="getter">
 
 <section class="multi-line-signature">
-  <span class="returntype"><a href="https://api.dart.dev/stable/2.13.3/dart-core/String-class.html">String</a></span>
+  <span class="returntype"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span>
   <span class="name ">name</span>
   
 
 </section>
 
 
+<section class="desc markdown">
+  <p>Returns the name of the group, in English</p>
+</section>
 
 
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">String get name {
-  switch (this) {
-    case PnnsGroup1.BEVERAGES:
-      return &#39;Beverages&#39;;
-    case PnnsGroup1.CEREALS_AND_POTATOES:
-      return &#39;Cereals and potatoes&#39;;
-    case PnnsGroup1.COMPOSITE_FOODS:
-      return &#39;Composite foods&#39;;
-    case PnnsGroup1.FAT_AND_SAUCES:
-      return &#39;Fat and sauces&#39;;
-    case PnnsGroup1.FISH_MEAT_AND_EGGS:
-      return &#39;Fish, meat and eggs&#39;;
-    case PnnsGroup1.FRUITS_AND_VEGETABLES:
-      return &#39;Fruits and vegetables&#39;;
-    case PnnsGroup1.MILK_AND_DAIRIES:
-      return &#39;Milk and dairies&#39;;
-    case PnnsGroup1.SALTY_SNACKS:
-      return &#39;Salty snacks&#39;;
-    case PnnsGroup1.SUGARY_SNACKS:
-      return &#39;Sugary snacks&#39;;
-    default:
-      return &#39;PNNS group 1&#39;;
-  }
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">String get name =&gt; _NAMES[this] ?? &#39;PNNS group 1&#39;;</code></pre>
 </section>
 
 </section>
@@ -137,7 +117,7 @@
 <footer>
   <span class="no-break">
     openfoodfacts
-      1.1.0-beta
+      1.3.2
   </span>
 
   
