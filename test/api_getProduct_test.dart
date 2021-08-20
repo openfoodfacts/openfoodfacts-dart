@@ -662,6 +662,13 @@ void main() {
 
       group = result.product!.attributeGroups!
           .singleWhere((element) => element.id == 'labels');
+
+      final Set<ProductImprovement> improvements =
+          result.product!.getProductImprovements();
+      expect(improvements.contains(ProductImprovement.LABELS_TO_BE_COMPLETED),
+          false);
+      expect(improvements.contains(ProductImprovement.ORIGINS_TO_BE_COMPLETED),
+          false);
     });
 
     test('get product without setting OpenFoodFactsLanguage or ProductField; ',
@@ -818,6 +825,13 @@ void main() {
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
           'https://static.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
+
+      final Set<ProductImprovement> improvements =
+          result.product!.getProductImprovements();
+      expect(improvements.contains(ProductImprovement.LABELS_TO_BE_COMPLETED),
+          false);
+      expect(improvements.contains(ProductImprovement.ORIGINS_TO_BE_COMPLETED),
+          true);
     });
 
     test(
