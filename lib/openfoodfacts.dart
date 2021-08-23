@@ -200,11 +200,9 @@ class OpenFoodAPIClient {
     ProductSearchQueryConfiguration configuration, {
     QueryType queryType = QueryType.PROD,
   }) async {
-    var queryParameters = configuration.getParametersMap();
-
     var searchUri = Settings.getUri(
       path: '/cgi/search.pl',
-      queryParameters: queryParameters,
+      queryParameters: configuration.getParametersMap(),
       queryType: queryType,
     );
 
@@ -249,11 +247,9 @@ class OpenFoodAPIClient {
     PnnsGroupQueryConfiguration configuration, {
     QueryType queryType = QueryType.PROD,
   }) async {
-    var queryParameters = configuration.getParametersMap();
-
     var searchUri = Settings.getUri(
       path: '/pnns-group-2/${configuration.group.id}/${configuration.page}',
-      queryParameters: queryParameters,
+      queryParameters: configuration.getParametersMap(),
       queryType: queryType,
     );
 
