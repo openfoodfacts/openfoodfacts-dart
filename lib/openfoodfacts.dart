@@ -20,6 +20,7 @@ import 'model/SendImage.dart';
 import 'model/Product.dart';
 import 'model/ProductResult.dart';
 import 'model/SearchResult.dart';
+import 'model/Settings.dart';
 import 'model/SpellingCorrections.dart';
 import 'model/Status.dart';
 import 'model/User.dart';
@@ -77,16 +78,20 @@ class OpenFoodAPIClient {
   ///
   /// Please read the language mechanics explanation if you intend to display
   /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
-  static Future<Status> saveProduct(User user, Product product,
-      {QueryType queryType = QueryType.PROD}) async {
+  static Future<Status> saveProduct(
+    User user,
+    Product product, {
+    QueryType queryType = QueryType.PROD,
+  }) async {
     var parameterMap = <String, String>{};
     parameterMap.addAll(user.toData());
     parameterMap.addAll(product.toServerData());
 
-    var productUri = Uri(
-        scheme: URI_SCHEME,
-        host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
-        path: '/cgi/product_jqm2.pl');
+    var productUri = Settings.getUri(
+      path: '/cgi/product_jqm2.pl',
+      queryType: queryType,
+    );
+
     if (product.nutriments != null) {
       final Map<String, String> rawNutrients = product.nutriments!.toData();
       for (final MapEntry<String, String> entry in rawNutrients.entries) {
@@ -119,10 +124,10 @@ class OpenFoodAPIClient {
     dataMap.addAll(image.toData());
     fileMap.putIfAbsent(image.getImageDataKey(), () => image.imageUri);
 
-    var imageUri = Uri(
-        scheme: URI_SCHEME,
-        host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
-        path: '/cgi/product_image_upload.pl');
+    var imageUri = Settings.getUri(
+      path: '/cgi/product_image_upload.pl',
+      queryType: queryType,
+    );
 
     return await HttpHelper().doMultipartRequest(imageUri, dataMap,
         files: fileMap, user: user, queryType: queryType);
@@ -140,11 +145,11 @@ class OpenFoodAPIClient {
     User? user,
     QueryType queryType = QueryType.PROD,
   }) async {
-    var productUri = Uri(
-        scheme: URI_SCHEME,
-        host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
-        path: 'api/v0/product/' + barcode + '.json',
-        queryParameters: {'lc': language.code});
+    var productUri = Settings.getUri(
+      path: 'api/v0/product/' + barcode + '.json',
+      queryParameters: {'lc': language.code},
+      queryType: queryType,
+    );
 
     Response response = await HttpHelper().doGetRequest(productUri,
         user: user, userAgent: userAgent, queryType: queryType);
@@ -163,11 +168,11 @@ class OpenFoodAPIClient {
       ProductQueryConfiguration configuration,
       {User? user,
       QueryType queryType = QueryType.PROD}) async {
-    var productUri = Uri(
-        scheme: URI_SCHEME,
-        host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
-        path: 'api/v0/product/${configuration.barcode}.json',
-        queryParameters: configuration.getParametersMap());
+    var productUri = Settings.getUri(
+      path: 'api/v0/product/${configuration.barcode}.json',
+      queryParameters: configuration.getParametersMap(),
+      queryType: queryType,
+    );
 
     Response response = await HttpHelper().doGetRequest(productUri,
         user: user, userAgent: userAgent, queryType: queryType);
@@ -197,11 +202,11 @@ class OpenFoodAPIClient {
   }) async {
     var queryParameters = configuration.getParametersMap();
 
-    var searchUri = Uri(
-        scheme: URI_SCHEME,
-        host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
-        path: '/cgi/search.pl',
-        queryParameters: queryParameters);
+    var searchUri = Settings.getUri(
+      path: '/cgi/search.pl',
+      queryParameters: queryParameters,
+      queryType: queryType,
+    );
 
     Response response = await HttpHelper().doGetRequest(searchUri,
         user: user, userAgent: userAgent, queryType: queryType);
@@ -219,11 +224,11 @@ class OpenFoodAPIClient {
     ProductListQueryConfiguration configuration, {
     QueryType queryType = QueryType.PROD,
   }) async {
-    final Uri uri = Uri(
-        scheme: URI_SCHEME,
-        host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
-        path: 'products/${configuration.barcodes.join(',')}.json',
-        queryParameters: configuration.getParametersMap());
+    final Uri uri = Settings.getUri(
+      path: 'products/${configuration.barcodes.join(',')}.json',
+      queryParameters: configuration.getParametersMap(),
+      queryType: queryType,
+    );
 
     final Response response = await HttpHelper().doGetRequest(uri,
         user: user, userAgent: userAgent, queryType: queryType);
@@ -246,11 +251,11 @@ class OpenFoodAPIClient {
   }) async {
     var queryParameters = configuration.getParametersMap();
 
-    var searchUri = Uri(
-        scheme: URI_SCHEME,
-        host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
-        path: '/pnns-group-2/${configuration.group.id}/${configuration.page}',
-        queryParameters: queryParameters);
+    var searchUri = Settings.getUri(
+      path: '/pnns-group-2/${configuration.group.id}/${configuration.page}',
+      queryParameters: queryParameters,
+      queryType: queryType,
+    );
 
     Response response = await HttpHelper().doGetRequest(searchUri,
         user: user, userAgent: userAgent, queryType: queryType);
@@ -295,13 +300,10 @@ class OpenFoodAPIClient {
       parameters['server_domain'] = serverDomain;
     }
 
-    var insightUri = Uri(
-      scheme: URI_SCHEME,
-      host: queryType == QueryType.PROD
-          ? URI_PROD_HOST_ROBOTOFF
-          : URI_PROD_HOST_ROBOTOFF, // once the Robotoff is added to the test DB this can be changed to URI_TEST_HOST_ROBOTOFF
+    var insightUri = Settings.getRobotoffUri(
       path: 'api/v1/insights/random/',
       queryParameters: parameters,
+      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(insightUri,
@@ -318,12 +320,9 @@ class OpenFoodAPIClient {
     User user, {
     QueryType queryType = QueryType.PROD,
   }) async {
-    var insightsUri = Uri(
-      scheme: URI_SCHEME,
-      host: queryType == QueryType.PROD
-          ? URI_PROD_HOST_ROBOTOFF
-          : URI_PROD_HOST_ROBOTOFF, // once the Robotoff is added to the test DB this can be changed to URI_TEST_HOST_ROBOTOFF
+    var insightsUri = Settings.getRobotoffUri(
       path: 'api/v1/insights/$barcode',
+      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(insightsUri,
@@ -350,13 +349,10 @@ class OpenFoodAPIClient {
       'count': count.toString()
     };
 
-    var robotoffQuestionUri = Uri(
-      scheme: URI_SCHEME,
-      host: queryType == QueryType.PROD
-          ? URI_PROD_HOST_ROBOTOFF
-          : URI_PROD_HOST_ROBOTOFF, // once the Robotoff is added to the test DB this can be changed to URI_TEST_HOST_ROBOTOFF
+    var robotoffQuestionUri = Settings.getRobotoffUri(
       path: 'api/v1/questions/$barcode',
       queryParameters: parameters,
+      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(robotoffQuestionUri,
@@ -392,13 +388,10 @@ class OpenFoodAPIClient {
       'insight_types': parsedTypes.toString()
     };
 
-    var robotoffQuestionUri = Uri(
-      scheme: URI_SCHEME,
-      host: queryType == QueryType.PROD
-          ? URI_PROD_HOST_ROBOTOFF
-          : URI_PROD_HOST_ROBOTOFF, // once the Robotoff is added to the test DB this can be changed to URI_TEST_HOST_ROBOTOFF
+    var robotoffQuestionUri = Settings.getRobotoffUri(
       path: 'api/v1/questions/random',
       queryParameters: parameters,
+      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(robotoffQuestionUri,
@@ -413,12 +406,10 @@ class OpenFoodAPIClient {
   static Future<Status> postInsightAnnotation(
       String? insightId, InsightAnnotation annotation, User user,
       {bool update = false, queryType = QueryType.PROD}) async {
-    var insightUri = Uri(
-        scheme: URI_SCHEME,
-        host: queryType == QueryType.PROD
-            ? URI_PROD_HOST_ROBOTOFF
-            : URI_PROD_HOST_ROBOTOFF,
-        path: 'api/v1/insights/annotate');
+    var insightUri = Settings.getRobotoffUri(
+      path: 'api/v1/insights/annotate',
+      queryType: queryType,
+    );
 
     Map<String, String?> annotationData = {
       'insight_id': insightId,
@@ -454,13 +445,11 @@ class OpenFoodAPIClient {
       return null;
     }
 
-    var spellingCorrectionUri = Uri(
-        scheme: URI_SCHEME,
-        host: queryType == QueryType.PROD
-            ? URI_PROD_HOST_ROBOTOFF
-            : URI_PROD_HOST_ROBOTOFF, // once the Robotoff is added to the test DB this can be changed to URI_TEST_HOST_ROBOTOFF
-        path: 'api/v1/predict/ingredients/spellcheck',
-        queryParameters: spellingCorrectionParam);
+    var spellingCorrectionUri = Settings.getRobotoffUri(
+      path: 'api/v1/predict/ingredients/spellcheck',
+      queryParameters: spellingCorrectionParam,
+      queryType: queryType,
+    );
 
     Response response = await HttpHelper().doGetRequest(spellingCorrectionUri,
         user: user, userAgent: userAgent, queryType: QueryType.PROD);
@@ -482,16 +471,16 @@ class OpenFoodAPIClient {
     OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
     QueryType queryType = QueryType.PROD,
   }) async {
-    var ocrUri = Uri(
-        scheme: URI_SCHEME,
-        host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_PROD_HOST,
-        path: '/cgi/ingredients.pl',
-        queryParameters: {
-          'code': barcode,
-          'process_image': '1',
-          'id': 'ingredients_${language.code}',
-          'ocr_engine': OcrField.GOOGLE_CLOUD_VISION.key
-        });
+    var ocrUri = Settings.getUri(
+      path: '/cgi/ingredients.pl',
+      queryParameters: {
+        'code': barcode,
+        'process_image': '1',
+        'id': 'ingredients_${language.code}',
+        'ocr_engine': OcrField.GOOGLE_CLOUD_VISION.key
+      },
+      queryType: queryType,
+    );
 
     Response response = await HttpHelper().doGetRequest(ocrUri,
         user: user, userAgent: userAgent, queryType: queryType);
@@ -512,6 +501,7 @@ class OpenFoodAPIClient {
     OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
     QueryType queryType = QueryType.PROD,
   }) async {
+    //TODO: Switch to new function
     var suggestionUri = Uri(
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_PROD_HOST,
@@ -532,10 +522,9 @@ class OpenFoodAPIClient {
   /// Returns a bool if the login data of the provided user is correct
   static Future<bool> login(User user,
       {QueryType queryType = QueryType.PROD}) async {
-    var loginUri = Uri(
-      scheme: URI_SCHEME,
-      host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
+    var loginUri = Settings.getUri(
       path: '/cgi/auth.pl',
+      queryType: queryType,
     );
     Response response =
         await HttpHelper().doPostRequest(loginUri, user.toData(), user);
@@ -554,10 +543,9 @@ class OpenFoodAPIClient {
     bool newsletter = true,
     QueryType queryType = QueryType.PROD,
   }) async {
-    var registerUri = Uri(
-      scheme: URI_SCHEME,
-      host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
+    var registerUri = Settings.getUri(
       path: '/cgi/user.pl',
+      queryType: queryType,
     );
 
     Map<String, String> data = <String, String>{
@@ -608,6 +596,7 @@ class OpenFoodAPIClient {
     }
   }
 
+  //TODO: Add to new scheme
   /// Returns the Ecoscore description in HTML
   static Future<String?> getEcoscoreHtmlDescription(
     final String barcode,

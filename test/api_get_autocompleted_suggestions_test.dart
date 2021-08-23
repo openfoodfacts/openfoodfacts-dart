@@ -105,10 +105,12 @@ void main() {
     });
     test('Suggestions for state', () async {
       List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(TagType.STATES,
-              language: OpenFoodFactsLanguage.FRENCH,
-              input: 'b',
-              queryType: QueryType.TEST);
+          await OpenFoodAPIClient.getAutocompletedSuggestions(
+        TagType.STATES,
+        input: 'b',
+        language: OpenFoodFactsLanguage.FRENCH,
+        queryType: QueryType.TEST,
+      );
 
       expect(result, [
         'Code emballeur complété',
