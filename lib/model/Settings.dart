@@ -8,14 +8,7 @@ class Settings {
   static String uriTestHost = 'world.openfoodfacts.net';
 
   static String uriProdHostRobotoff = 'robotoff.openfoodfacts.org';
-  // once Robotoff is added to the test DB this can be changed
-  static String uriTestHostRobotoff = 'robotoff.openfoodfacts.org';
-
-  //TODO: Gloabal cc
-  //static String? cc;
-
-  //TODO: Deprecate old one
-  //static QueryType globalQueryType = QueryType.PROD;
+  static String uriTestHostRobotoff = 'robotoff.openfoodfacts.net';
 
   static Uri getUri({
     String? path,
