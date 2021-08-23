@@ -13,8 +13,12 @@ void main() {
     test('get questions for Noix de Saint-Jacques EN', () async {
       RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
-              '3274570800026', 'en', TestConstants.TEST_USER,
-              queryType: QueryType.PROD, count: 1);
+        '3274570800026',
+        'en',
+        TestConstants.TEST_USER,
+        queryType: QueryType.TEST,
+        count: 1,
+      );
 
       if (result.status != 'no_questions') {
         expect(result.status != null, true);

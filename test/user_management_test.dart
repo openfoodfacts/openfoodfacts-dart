@@ -17,8 +17,10 @@ void main() {
   });
 
   test('Login', () async {
-    bool response = await OpenFoodAPIClient.login(TestConstants.PROD_USER,
-        queryType: QueryType.PROD);
+    bool response = await OpenFoodAPIClient.login(
+      TestConstants.PROD_USER,
+      queryType: QueryType.PROD,
+    );
     expect(response, true);
   });
 }

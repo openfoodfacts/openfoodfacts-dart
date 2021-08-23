@@ -31,8 +31,10 @@ void main() {
               language: OpenFoodFactsLanguage.GERMAN);
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER, configuration,
-          queryType: QueryType.TEST);
+        TestConstants.TEST_USER,
+        configuration,
+        queryType: QueryType.TEST,
+      );
 
       expect(result.page, 1);
       expect(result.pageSize, 10);
