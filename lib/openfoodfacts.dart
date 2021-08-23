@@ -497,11 +497,9 @@ class OpenFoodAPIClient {
     OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
     QueryType queryType = QueryType.PROD,
   }) async {
-    //TODO: Switch to new function
-    var suggestionUri = Uri(
-        scheme: URI_SCHEME,
-        host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_PROD_HOST,
+    var suggestionUri = Settings.getUri(
         path: '/cgi/suggest.pl',
+        queryType: queryType,
         queryParameters: {
           'tagtype': tagType.key,
           'term': input,
