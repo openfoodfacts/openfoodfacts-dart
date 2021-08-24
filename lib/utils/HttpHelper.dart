@@ -1,3 +1,4 @@
+import 'package:openfoodfacts/model/OpenFoodAPISettings.dart';
 import 'package:openfoodfacts/model/UserAgent.dart';
 import 'package:openfoodfacts/utils/UriReader.dart';
 import 'package:path/path.dart';
@@ -27,14 +28,19 @@ class HttpHelper {
     Uri uri, {
     User? user,
     UserAgent? userAgent,
-    QueryType queryType = QueryType.PROD,
+    QueryType? queryType,
   }) async {
-    http.Response response = await http.get(uri,
-        headers: _buildHeaders(
-          user: user,
-          userAgent: userAgent,
-          isTestModeActive: queryType == QueryType.PROD ? false : true,
-        ));
+    http.Response response = await http.get(
+      uri,
+      headers: _buildHeaders(
+        user: user,
+        userAgent: userAgent,
+        isTestModeActive:
+            (queryType ?? OpenFoodAPISettings.globalQueryType) == QueryType.PROD
+                ? false
+                : true,
+      ),
+    );
 
     return response;
   }
@@ -44,12 +50,16 @@ class HttpHelper {
   /// The result of the request will be returned as string.
   Future<http.Response> doPostRequest(
       Uri uri, Map<String, String?> body, User user,
-      {QueryType queryType = QueryType.PROD}) async {
+      {QueryType? queryType}) async {
     http.Response response = await http.post(
       uri,
       headers: _buildHeaders(
           user: user,
-          isTestModeActive: queryType == QueryType.PROD ? false : true),
+          isTestModeActive:
+              (queryType ?? OpenFoodAPISettings.globalQueryType) ==
+                      QueryType.PROD
+                  ? false
+                  : true),
       body: body,
     );
     return response;
@@ -64,14 +74,17 @@ class HttpHelper {
     Map<String, String> body, {
     Map<String, Uri>? files,
     User? user,
-    QueryType queryType = QueryType.PROD,
+    QueryType? queryType,
   }) async {
     var request = http.MultipartRequest('POST', uri);
 
     request.headers.addAll(
       _buildHeaders(
         user: user,
-        isTestModeActive: queryType == QueryType.PROD ? false : true,
+        isTestModeActive:
+            (queryType ?? OpenFoodAPISettings.globalQueryType) == QueryType.PROD
+                ? false
+                : true,
       ) as Map<String, String>,
     );
 
