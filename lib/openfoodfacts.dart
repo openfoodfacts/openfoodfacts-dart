@@ -20,7 +20,7 @@ import 'model/SendImage.dart';
 import 'model/Product.dart';
 import 'model/ProductResult.dart';
 import 'model/SearchResult.dart';
-import 'model/Settings.dart';
+import 'model/OpenFoodAPISettings.dart';
 import 'model/SpellingCorrections.dart';
 import 'model/Status.dart';
 import 'model/User.dart';
@@ -80,9 +80,8 @@ class OpenFoodAPIClient {
     parameterMap.addAll(user.toData());
     parameterMap.addAll(product.toServerData());
 
-    var productUri = Settings.getUri(
+    var productUri = OpenFoodAPISettings.fromQueryType(queryType).getUri(
       path: '/cgi/product_jqm2.pl',
-      queryType: queryType,
     );
 
     if (product.nutriments != null) {
@@ -117,9 +116,8 @@ class OpenFoodAPIClient {
     dataMap.addAll(image.toData());
     fileMap.putIfAbsent(image.getImageDataKey(), () => image.imageUri);
 
-    var imageUri = Settings.getUri(
+    var imageUri = OpenFoodAPISettings.fromQueryType(queryType).getUri(
       path: '/cgi/product_image_upload.pl',
-      queryType: queryType,
     );
 
     return await HttpHelper().doMultipartRequest(imageUri, dataMap,
@@ -138,10 +136,9 @@ class OpenFoodAPIClient {
     User? user,
     QueryType queryType = QueryType.PROD,
   }) async {
-    var productUri = Settings.getUri(
+    var productUri = OpenFoodAPISettings.fromQueryType(queryType).getUri(
       path: 'api/v0/product/$barcode.json',
       queryParameters: {'lc': language.code},
-      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(productUri,
@@ -161,10 +158,9 @@ class OpenFoodAPIClient {
       ProductQueryConfiguration configuration,
       {User? user,
       QueryType queryType = QueryType.PROD}) async {
-    var productUri = Settings.getUri(
+    var productUri = OpenFoodAPISettings.fromQueryType(queryType).getUri(
       path: 'api/v0/product/${configuration.barcode}.json',
       queryParameters: configuration.getParametersMap(),
-      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(productUri,
@@ -193,10 +189,9 @@ class OpenFoodAPIClient {
     ProductSearchQueryConfiguration configuration, {
     QueryType queryType = QueryType.PROD,
   }) async {
-    var searchUri = Settings.getUri(
+    var searchUri = OpenFoodAPISettings.fromQueryType(queryType).getUri(
       path: '/cgi/search.pl',
       queryParameters: configuration.getParametersMap(),
-      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(searchUri,
@@ -215,10 +210,9 @@ class OpenFoodAPIClient {
     ProductListQueryConfiguration configuration, {
     QueryType queryType = QueryType.PROD,
   }) async {
-    final Uri uri = Settings.getUri(
+    final Uri uri = OpenFoodAPISettings.fromQueryType(queryType).getUri(
       path: 'products/${configuration.barcodes.join(',')}.json',
       queryParameters: configuration.getParametersMap(),
-      queryType: queryType,
     );
 
     final Response response = await HttpHelper().doGetRequest(uri,
@@ -240,10 +234,9 @@ class OpenFoodAPIClient {
     PnnsGroupQueryConfiguration configuration, {
     QueryType queryType = QueryType.PROD,
   }) async {
-    var searchUri = Settings.getUri(
+    var searchUri = OpenFoodAPISettings.fromQueryType(queryType).getUri(
       path: '/pnns-group-2/${configuration.group.id}/${configuration.page}',
       queryParameters: configuration.getParametersMap(),
-      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(searchUri,
@@ -289,10 +282,10 @@ class OpenFoodAPIClient {
       parameters['server_domain'] = serverDomain;
     }
 
-    var insightUri = Settings.getRobotoffUri(
+    var insightUri =
+        OpenFoodAPISettings.fromQueryType(queryType).getRobotoffUri(
       path: 'api/v1/insights/random/',
       queryParameters: parameters,
-      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(insightUri,
@@ -309,9 +302,9 @@ class OpenFoodAPIClient {
     User user, {
     QueryType queryType = QueryType.PROD,
   }) async {
-    var insightsUri = Settings.getRobotoffUri(
+    var insightsUri =
+        OpenFoodAPISettings.fromQueryType(queryType).getRobotoffUri(
       path: 'api/v1/insights/$barcode',
-      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(insightsUri,
@@ -338,10 +331,10 @@ class OpenFoodAPIClient {
       'count': count.toString()
     };
 
-    var robotoffQuestionUri = Settings.getRobotoffUri(
+    var robotoffQuestionUri =
+        OpenFoodAPISettings.fromQueryType(queryType).getRobotoffUri(
       path: 'api/v1/questions/$barcode',
       queryParameters: parameters,
-      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(robotoffQuestionUri,
@@ -377,10 +370,10 @@ class OpenFoodAPIClient {
       'insight_types': parsedTypes.toString()
     };
 
-    var robotoffQuestionUri = Settings.getRobotoffUri(
+    var robotoffQuestionUri =
+        OpenFoodAPISettings.fromQueryType(queryType).getRobotoffUri(
       path: 'api/v1/questions/random',
       queryParameters: parameters,
-      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(robotoffQuestionUri,
@@ -395,9 +388,9 @@ class OpenFoodAPIClient {
   static Future<Status> postInsightAnnotation(
       String? insightId, InsightAnnotation annotation, User user,
       {bool update = false, queryType = QueryType.PROD}) async {
-    var insightUri = Settings.getRobotoffUri(
+    var insightUri =
+        OpenFoodAPISettings.fromQueryType(queryType).getRobotoffUri(
       path: 'api/v1/insights/annotate',
-      queryType: queryType,
     );
 
     Map<String, String?> annotationData = {
@@ -434,10 +427,10 @@ class OpenFoodAPIClient {
       return null;
     }
 
-    var spellingCorrectionUri = Settings.getRobotoffUri(
+    var spellingCorrectionUri =
+        OpenFoodAPISettings.fromQueryType(queryType).getRobotoffUri(
       path: 'api/v1/predict/ingredients/spellcheck',
       queryParameters: spellingCorrectionParam,
-      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(spellingCorrectionUri,
@@ -460,7 +453,7 @@ class OpenFoodAPIClient {
     OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
     QueryType queryType = QueryType.PROD,
   }) async {
-    var ocrUri = Settings.getUri(
+    var ocrUri = OpenFoodAPISettings.fromQueryType(queryType).getUri(
       path: '/cgi/ingredients.pl',
       queryParameters: {
         'code': barcode,
@@ -468,7 +461,6 @@ class OpenFoodAPIClient {
         'id': 'ingredients_${language.code}',
         'ocr_engine': OcrField.GOOGLE_CLOUD_VISION.key
       },
-      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(ocrUri,
@@ -490,14 +482,12 @@ class OpenFoodAPIClient {
     OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
     QueryType queryType = QueryType.PROD,
   }) async {
-    var suggestionUri = Settings.getUri(
-        path: '/cgi/suggest.pl',
-        queryType: queryType,
-        queryParameters: {
-          'tagtype': tagType.key,
-          'term': input,
-          'lc': language.code,
-        });
+    var suggestionUri = OpenFoodAPISettings.fromQueryType(queryType)
+        .getUri(path: '/cgi/suggest.pl', queryParameters: {
+      'tagtype': tagType.key,
+      'term': input,
+      'lc': language.code,
+    });
 
     Response response = await HttpHelper().doGetRequest(suggestionUri,
         userAgent: userAgent, queryType: queryType);
@@ -509,9 +499,8 @@ class OpenFoodAPIClient {
   /// Returns a bool if the login data of the provided user is correct
   static Future<bool> login(User user,
       {QueryType queryType = QueryType.PROD}) async {
-    var loginUri = Settings.getUri(
+    var loginUri = OpenFoodAPISettings.fromQueryType(queryType).getUri(
       path: '/cgi/auth.pl',
-      queryType: queryType,
     );
     Response response =
         await HttpHelper().doPostRequest(loginUri, user.toData(), user);
@@ -530,9 +519,8 @@ class OpenFoodAPIClient {
     bool newsletter = true,
     QueryType queryType = QueryType.PROD,
   }) async {
-    var registerUri = Settings.getUri(
+    var registerUri = OpenFoodAPISettings.fromQueryType(queryType).getUri(
       path: '/cgi/user.pl',
-      queryType: queryType,
     );
 
     Map<String, String> data = <String, String>{
@@ -589,7 +577,7 @@ class OpenFoodAPIClient {
     final OpenFoodFactsLanguage language,
   ) async {
     const String FIELD = 'environment_infocard';
-    final Uri uri = Settings.getUri(
+    final Uri uri = OpenFoodAPISettings().getUri(
       path: '/api/v0/product/$barcode.json',
       queryParameters: <String, String>{
         'fields': FIELD,
