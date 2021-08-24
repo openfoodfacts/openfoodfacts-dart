@@ -63,13 +63,6 @@ export 'utils/ProductSearchQueryConfiguration.dart';
 
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
-  static const String URI_SCHEME = 'https';
-  static const String URI_PROD_HOST = 'world.openfoodfacts.org';
-  static const String URI_TEST_HOST = 'world.openfoodfacts.net';
-
-  static const String URI_PROD_HOST_ROBOTOFF = 'robotoff.openfoodfacts.org';
-  static const String URI_TEST_HOST_ROBOTOFF = 'robotoff.openfoodfacts.net';
-
   static UserAgent? userAgent;
 
   /// Add the given product to the database.
@@ -146,7 +139,7 @@ class OpenFoodAPIClient {
     QueryType queryType = QueryType.PROD,
   }) async {
     var productUri = Settings.getUri(
-      path: 'api/v0/product/' + barcode + '.json',
+      path: 'api/v0/product/$barcode.json',
       queryParameters: {'lc': language.code},
       queryType: queryType,
     );

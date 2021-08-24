@@ -557,7 +557,7 @@ void main() {
         'Albacore',
         'Alcohol',
         'Alcohol vinegar',
-        'Algae'
+        'Algae',
       ]);
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
