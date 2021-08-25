@@ -1,26 +1,31 @@
 import 'package:openfoodfacts/utils/QueryType.dart';
 
 class OpenFoodAPISettings {
-  static OpenFoodAPISettings? instance;
+  static OpenFoodAPISettings instance = OpenFoodAPISettings();
 
   OpenFoodAPISettings({
     this.scheme,
     this.host,
     this.robotoffHost,
+    this.globalQueryType = QueryType.PROD,
   });
 
   OpenFoodAPISettings.fromQueryType(final QueryType? queryType)
       : this(
-          scheme: _URI_SCHEME_HTTPS,
-          host: queryType == QueryType.PROD ? _URI_HOST_PROD : _URI_HOST_TEST,
-          robotoffHost: queryType == QueryType.PROD
-              ? _URI_ROBOTOFF_HOST_PROD
-              : _URI_ROBOTOFF_HOST_TEST,
+          scheme: instance.scheme ?? _URI_SCHEME_HTTPS,
+          host: (queryType ?? instance.globalQueryType) == QueryType.PROD
+              ? instance.host ?? _URI_HOST_PROD
+              : instance.host ?? _URI_HOST_TEST,
+          robotoffHost:
+              (queryType ?? instance.globalQueryType) == QueryType.PROD
+                  ? instance.robotoffHost ?? _URI_ROBOTOFF_HOST_PROD
+                  : instance.robotoffHost ?? _URI_ROBOTOFF_HOST_TEST,
         );
 
   final String? scheme;
   final String? host;
   final String? robotoffHost;
+  final QueryType globalQueryType;
 
   static const String _URI_SCHEME_HTTPS = 'https';
   static const String _URI_HOST_PROD = 'world.openfoodfacts.org';

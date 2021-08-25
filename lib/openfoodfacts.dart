@@ -577,7 +577,7 @@ class OpenFoodAPIClient {
     final OpenFoodFactsLanguage language,
   ) async {
     const String FIELD = 'environment_infocard';
-    final Uri uri = OpenFoodAPISettings().getUri(
+    final Uri uri = OpenFoodAPISettings.fromQueryType(null).getUri(
       path: '/api/v0/product/$barcode.json',
       queryParameters: <String, String>{
         'fields': FIELD,
