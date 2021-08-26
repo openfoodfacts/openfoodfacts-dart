@@ -59,7 +59,7 @@ void main() {
   });
 
   // Verify that one KnowledgePanelElement must have at least one element.
-  test('No KP Elements in JSON', () async {
+  test('No KP Element in JSON', () async {
     Map<String, dynamic> ecoScorePanel = {
       'id': 'kp_generic',
       'title': 'Eco details',
