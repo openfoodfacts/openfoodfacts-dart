@@ -35,7 +35,7 @@ void main() {
     final Map<String, dynamic> decodedJson =
         json.decode(encodedJson) as Map<String, dynamic>;
     KnowledgePanel kp = KnowledgePanel.fromJson(decodedJson);
-    expect(kp.level, equals(level.TRIVIA));
+    expect(kp.level, equals(Level.TRIVIA));
   });
 
   // Verify that one KnowledgePanelElement can only have one element at max.

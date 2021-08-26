@@ -88,6 +88,8 @@ enum DescriptionType {
 class DescriptionUnit extends JsonObject {
   // HTML description of one Knowledge Panel Unit.
   final String html;
+  // Type of description, Client may choose to display the description depending
+  // upon the type.
   final DescriptionType type;
 
   const DescriptionUnit({required this.html, required this.type});

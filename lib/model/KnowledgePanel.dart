@@ -5,6 +5,7 @@ import 'KnowledgePanelElement.dart';
 
 part 'KnowledgePanel.g.dart';
 
+// Level of this KnowledgePanel. Client may choose to display the panel based on the level.
 enum Level {
   TRIVIA,
   INFORMATIVE,
@@ -13,6 +14,7 @@ enum Level {
   ALERT,
 }
 
+// Grade of the product, only available for Score panels (Eco, nutri, nova).
 enum Grade {
   A,
   B,
@@ -38,7 +40,7 @@ class KnowledgePanel extends JsonObject {
   // URL of an icon representing the Panel.
   @JsonKey(name: 'icon_url')
   final String iconUrl;
-  // Level of level of this KnowledgePanel for the Product's eco details.
+  // Level of this KnowledgePanel. Client may choose to display the panel based on the level.
   final Level level;
   // KnowledgePanelElement is a single unit of KnowledgePanel that can be rendered
   // on the client.
