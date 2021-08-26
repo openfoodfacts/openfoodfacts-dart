@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../interface/JsonObject.dart';
-import 'Product.dart';
 
 part 'KnowledgePanelLayout.g.dart';
 
@@ -57,7 +56,7 @@ class KnowledgePanelElement extends JsonObject {
       _validatedKnowledgeElementPanelFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$KnowledgePanelElementToJson(this);
+  Map<String, dynamic> toJson() => _validatedKnowledgeElementToJson(this);
 
   static KnowledgePanelElement _validatedKnowledgeElementPanelFromJson(
       Map<String, dynamic> json) {
@@ -81,8 +80,8 @@ class KnowledgePanelElement extends JsonObject {
       aliveUnits++;
     }
     if (aliveUnits != 1) {
-      throw FormatException("Invalid Knowledge Panel format, "
-          "KnowledgePanelElement can only have one element set.");
+      throw FormatException('Invalid Knowledge Panel format, '
+          'KnowledgePanelElement can only have one element set.');
     }
     return element;
   }

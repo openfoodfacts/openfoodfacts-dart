@@ -7,19 +7,19 @@ void main() {
   // Verify that we can successfully load the Knowledge panel from a JSON string
   test('Load KP from JSON', () async {
     Map<String, dynamic> ecoScorePanel = {
-      "id": "kp_generic",
-      "title": "Eco details",
-      "relevance": "TRIVIAL",
-      "layout": {
-        "elements": [
+      'id': 'kp_generic',
+      'title': 'Eco details',
+      'relevance': 'TRIVIAL',
+      'layout': {
+        'elements': [
           {
-            "element_style": "CONTINUOUS",
-            "description_unit": {"html": "<p>Gods of hunger</p>"}
+            'element_style': 'CONTINUOUS',
+            'description_unit': {'html': '<p>Gods of hunger</p>'}
           },
           {
-            "element_style": "CONTINUOUS",
-            "image_unit": {
-              "url": "http://visual_depiction_of_hunger.com/image.jpg",
+            'element_style': 'CONTINUOUS',
+            'image_unit': {
+              'url': 'http://visual_depiction_of_hunger.com/image.jpg',
             },
           }
         ]
@@ -36,16 +36,16 @@ void main() {
   // Verify that one KnowledgePanelElement can only have one element at max.
   test('Multiple KP Elements in JSON', () async {
     Map<String, dynamic> ecoScorePanel = {
-      "id": "kp_generic",
-      "title": "Eco details",
-      "relevance": "TRIVIAL",
-      "layout": {
-        "elements": [
+      'id': 'kp_generic',
+      'title': 'Eco details',
+      'relevance': 'TRIVIAL',
+      'layout': {
+        'elements': [
           {
-            "element_style": "CONTINUOUS",
-            "description_unit": {"html": "<p>Gods of hunger</p>"},
-            "image_unit": {
-              "url": "http://visual_depiction_of_hunger.com/image.jpg",
+            'element_style': 'CONTINUOUS',
+            'description_unit': {'html': '<p>Gods of hunger</p>'},
+            'image_unit': {
+              'url': 'http://visual_depiction_of_hunger.com/image.jpg',
             },
           }
         ]
@@ -61,13 +61,13 @@ void main() {
   // Verify that one KnowledgePanelElement must have at least one element.
   test('No KP Elements in JSON', () async {
     Map<String, dynamic> ecoScorePanel = {
-      "id": "kp_generic",
-      "title": "Eco details",
-      "relevance": "TRIVIAL",
-      "layout": {
-        "elements": [
+      'id': 'kp_generic',
+      'title': 'Eco details',
+      'relevance': 'TRIVIAL',
+      'layout': {
+        'elements': [
           {
-            "element_style": "CONTINUOUS",
+            'element_style': 'CONTINUOUS',
           }
         ]
       }
