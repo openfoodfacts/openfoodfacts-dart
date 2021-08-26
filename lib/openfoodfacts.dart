@@ -135,11 +135,11 @@ class OpenFoodAPIClient {
   /// No replacing of '&quot;' with '"'.
   /// By default the query will hit the PROD DB
   static Future<ProductResult> getProductRaw(
-    String barcode,
-    OpenFoodFactsLanguage language, {
-    User? user,
-    QueryType queryType = QueryType.PROD,
-  }) async {
+      String barcode,
+      OpenFoodFactsLanguage language, {
+        User? user,
+        QueryType queryType = QueryType.PROD,
+      }) async {
     var productUri = Uri(
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
@@ -162,7 +162,7 @@ class OpenFoodAPIClient {
   static Future<ProductResult> getProduct(
       ProductQueryConfiguration configuration,
       {User? user,
-      QueryType queryType = QueryType.PROD}) async {
+        QueryType queryType = QueryType.PROD}) async {
     var productUri = Uri(
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
@@ -191,10 +191,10 @@ class OpenFoodAPIClient {
   /// Query the language specific host from OpenFoodFacts.
   /// By default the query will hit the PROD DB
   static Future<SearchResult> searchProducts(
-    User? user,
-    ProductSearchQueryConfiguration configuration, {
-    QueryType queryType = QueryType.PROD,
-  }) async {
+      User? user,
+      ProductSearchQueryConfiguration configuration, {
+        QueryType queryType = QueryType.PROD,
+      }) async {
     var queryParameters = configuration.getParametersMap();
 
     var searchUri = Uri(
@@ -215,10 +215,10 @@ class OpenFoodAPIClient {
 
   /// Search the OpenFoodFacts product database: multiple barcodes in input.
   static Future<SearchResult> getProductList(
-    User? user,
-    ProductListQueryConfiguration configuration, {
-    QueryType queryType = QueryType.PROD,
-  }) async {
+      User? user,
+      ProductListQueryConfiguration configuration, {
+        QueryType queryType = QueryType.PROD,
+      }) async {
     final Uri uri = Uri(
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_TEST_HOST,
@@ -240,10 +240,10 @@ class OpenFoodAPIClient {
   @Deprecated(
       'Use PnnsGroup2Filter with ProductSearchQueryConfiguration instead')
   static Future<SearchResult> queryPnnsGroup(
-    User user,
-    PnnsGroupQueryConfiguration configuration, {
-    QueryType queryType = QueryType.PROD,
-  }) async {
+      User user,
+      PnnsGroupQueryConfiguration configuration, {
+        QueryType queryType = QueryType.PROD,
+      }) async {
     var queryParameters = configuration.getParametersMap();
 
     var searchUri = Uri(
@@ -263,9 +263,9 @@ class OpenFoodAPIClient {
   }
 
   static void _removeImages(
-    final SearchResult searchResult,
-    final AbstractQueryConfiguration configuration,
-  ) {
+      final SearchResult searchResult,
+      final AbstractQueryConfiguration configuration,
+      ) {
     if (searchResult.products != null) {
       searchResult.products!.asMap().forEach((index, product) {
         ProductHelper.removeImages(product, configuration.language);
@@ -276,10 +276,10 @@ class OpenFoodAPIClient {
   /// By default the query will hit the PROD DB
   static Future<InsightsResult> getRandomInsight(User user,
       {InsightType? type,
-      String? country,
-      String? valueTag,
-      String? serverDomain,
-      QueryType queryType = QueryType.PROD}) async {
+        String? country,
+        String? valueTag,
+        String? serverDomain,
+        QueryType queryType = QueryType.PROD}) async {
     final Map<String, String?> parameters = {};
 
     if (type != null) {
@@ -307,17 +307,17 @@ class OpenFoodAPIClient {
     Response response = await HttpHelper().doGetRequest(insightUri,
         user: user, userAgent: userAgent, queryType: QueryType.PROD);
     var result =
-        InsightsResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+    InsightsResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
 
     return result;
   }
 
   /// By default the query will hit the PROD DB
   static Future<InsightsResult> getProductInsights(
-    String barcode,
-    User user, {
-    QueryType queryType = QueryType.PROD,
-  }) async {
+      String barcode,
+      User user, {
+        QueryType queryType = QueryType.PROD,
+      }) async {
     var insightsUri = Uri(
       scheme: URI_SCHEME,
       host: queryType == QueryType.PROD
@@ -335,12 +335,12 @@ class OpenFoodAPIClient {
 
   /// By default the query will hit the PROD DB
   static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(
-    String barcode,
-    String lang,
-    User user, {
-    int? count,
-    QueryType queryType = QueryType.PROD,
-  }) async {
+      String barcode,
+      String lang,
+      User user, {
+        int? count,
+        QueryType queryType = QueryType.PROD,
+      }) async {
     if (count == null || count <= 0) {
       count = 1;
     }
@@ -369,12 +369,12 @@ class OpenFoodAPIClient {
 
   /// By default the query will hit the PROD DB
   static Future<RobotoffQuestionResult> getRandomRobotoffQuestion(
-    String lang,
-    User user, {
-    int? count,
-    required List<InsightType> types,
-    QueryType queryType = QueryType.PROD,
-  }) async {
+      String lang,
+      User user, {
+        int? count,
+        required List<InsightType> types,
+        QueryType queryType = QueryType.PROD,
+      }) async {
     if (count == null || count <= 0) {
       count = 1;
     }
@@ -476,12 +476,12 @@ class OpenFoodAPIClient {
   /// By default the query will use the Google Cloud Vision.
   /// By default the query will hit the PROD DB
   static Future<OcrIngredientsResult> extractIngredients(
-    User user,
-    String barcode,
-    OpenFoodFactsLanguage language, {
-    OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
-    QueryType queryType = QueryType.PROD,
-  }) async {
+      User user,
+      String barcode,
+      OpenFoodFactsLanguage language, {
+        OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
+        QueryType queryType = QueryType.PROD,
+      }) async {
     var ocrUri = Uri(
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_PROD_HOST,
@@ -507,11 +507,11 @@ class OpenFoodAPIClient {
   /// Returns a List of suggestions
   /// By default the query will hit the PROD DB
   static Future<List<dynamic>> getAutocompletedSuggestions(
-    TagType tagType, {
-    String input = '',
-    OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
-    QueryType queryType = QueryType.PROD,
-  }) async {
+      TagType tagType, {
+        String input = '',
+        OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
+        QueryType queryType = QueryType.PROD,
+      }) async {
     var suggestionUri = Uri(
         scheme: URI_SCHEME,
         host: queryType == QueryType.PROD ? URI_PROD_HOST : URI_PROD_HOST,
@@ -538,7 +538,7 @@ class OpenFoodAPIClient {
       path: '/cgi/auth.pl',
     );
     Response response =
-        await HttpHelper().doPostRequest(loginUri, user.toData(), user);
+    await HttpHelper().doPostRequest(loginUri, user.toData(), user);
     return response.statusCode == 200;
   }
 
@@ -587,7 +587,7 @@ class OpenFoodAPIClient {
       return Status(
         status: 500,
         error:
-            'No response, open an issue here: https://github.com/openfoodfacts/openfoodfacts-dart/issues/new',
+        'No response, open an issue here: https://github.com/openfoodfacts/openfoodfacts-dart/issues/new',
       );
     } else if (status.body!.contains('loggedin')) {
       return Status(status: 201);
@@ -601,7 +601,7 @@ class OpenFoodAPIClient {
       return Status(
         status: 400,
         error:
-            'The e-mail address is already used by another user. Maybe you already have an account? You can reset the password of your other account.',
+        'The e-mail address is already used by another user. Maybe you already have an account? You can reset the password of your other account.',
       );
     } else {
       return Status(status: 400, error: 'Unrecognized request error');
