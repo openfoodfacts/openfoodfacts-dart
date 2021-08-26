@@ -14,9 +14,7 @@ void main() {
         "elements": [
           {
             "element_style": "CONTINUOUS",
-            "description_unit": {
-              "html": "<p>Gods of hunger</p>"
-            }
+            "description_unit": {"html": "<p>Gods of hunger</p>"}
           },
           {
             "element_style": "CONTINUOUS",
@@ -30,7 +28,7 @@ void main() {
     String encodedJson = jsonEncode(ecoScorePanel);
     assert(encodedJson is String);
     final Map<String, dynamic> decodedJson =
-      json.decode(encodedJson) as Map<String, dynamic>;
+        json.decode(encodedJson) as Map<String, dynamic>;
     KnowledgePanel kp = KnowledgePanel.fromJson(decodedJson);
     expect(kp.relevance, equals(Relevance.TRIVIAL));
   });
@@ -45,9 +43,7 @@ void main() {
         "elements": [
           {
             "element_style": "CONTINUOUS",
-            "description_unit": {
-              "html": "<p>Gods of hunger</p>"
-            },
+            "description_unit": {"html": "<p>Gods of hunger</p>"},
             "image_unit": {
               "url": "http://visual_depiction_of_hunger.com/image.jpg",
             },
@@ -58,7 +54,7 @@ void main() {
     String encodedJson = jsonEncode(ecoScorePanel);
     assert(encodedJson is String);
     final Map<String, dynamic> decodedJson =
-    json.decode(encodedJson) as Map<String, dynamic>;
+        json.decode(encodedJson) as Map<String, dynamic>;
     expect(() => KnowledgePanel.fromJson(decodedJson), throwsFormatException);
   });
 
@@ -79,7 +75,7 @@ void main() {
     String encodedJson = jsonEncode(ecoScorePanel);
     assert(encodedJson is String);
     final Map<String, dynamic> decodedJson =
-    json.decode(encodedJson) as Map<String, dynamic>;
+        json.decode(encodedJson) as Map<String, dynamic>;
     expect(() => KnowledgePanel.fromJson(decodedJson), throwsFormatException);
   });
 }

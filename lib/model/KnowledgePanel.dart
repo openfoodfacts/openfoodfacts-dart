@@ -22,9 +22,9 @@ class KnowledgePanel extends JsonObject {
 
   const KnowledgePanel(
       {required this.id,
-        required this.title,
-        required this.relevance,
-        required this.layout});
+      required this.title,
+      required this.relevance,
+      required this.layout});
 
   factory KnowledgePanel.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelFromJson(json);

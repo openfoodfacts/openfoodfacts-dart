@@ -8,8 +8,7 @@ part 'KnowledgePanelLayout.g.dart';
 class DescriptionUnit extends JsonObject {
   final String html;
 
-  const DescriptionUnit(
-      {required this.html});
+  const DescriptionUnit({required this.html});
 
   factory DescriptionUnit.fromJson(Map<String, dynamic> json) =>
       _$DescriptionUnitFromJson(json);
@@ -26,8 +25,7 @@ class ImageUnit extends JsonObject {
   @JsonKey(name: 'alt_text')
   final String? altText;
 
-  const ImageUnit(
-      {required this.url, this.width, this.height, this.altText});
+  const ImageUnit({required this.url, this.width, this.height, this.altText});
 
   factory ImageUnit.fromJson(Map<String, dynamic> json) =>
       _$ImageUnitFromJson(json);
@@ -61,21 +59,25 @@ class KnowledgePanelElement extends JsonObject {
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelElementToJson(this);
 
-  static KnowledgePanelElement _validatedKnowledgeElementPanelFromJson(Map<String, dynamic> json) {
+  static KnowledgePanelElement _validatedKnowledgeElementPanelFromJson(
+      Map<String, dynamic> json) {
     KnowledgePanelElement element = _$KnowledgePanelElementFromJson(json);
     return _validateKnowledgePanelElementsOneOf(element);
   }
 
-  static Map<String, dynamic> _validatedKnowledgeElementToJson(KnowledgePanelElement element) {
-    return _$KnowledgePanelElementToJson(_validateKnowledgePanelElementsOneOf(element));
+  static Map<String, dynamic> _validatedKnowledgeElementToJson(
+      KnowledgePanelElement element) {
+    return _$KnowledgePanelElementToJson(
+        _validateKnowledgePanelElementsOneOf(element));
   }
 
-  static KnowledgePanelElement _validateKnowledgePanelElementsOneOf(KnowledgePanelElement element) {
+  static KnowledgePanelElement _validateKnowledgePanelElementsOneOf(
+      KnowledgePanelElement element) {
     int aliveUnits = 0;
-    if (element.descriptionUnit != null ) {
+    if (element.descriptionUnit != null) {
       aliveUnits++;
     }
-    if (element.imageUnit != null ) {
+    if (element.imageUnit != null) {
       aliveUnits++;
     }
     if (aliveUnits != 1) {
@@ -90,8 +92,7 @@ class KnowledgePanelElement extends JsonObject {
 class KnowledgePanelLayout extends JsonObject {
   final List<KnowledgePanelElement> elements;
 
-  const KnowledgePanelLayout(
-      {required this.elements});
+  const KnowledgePanelLayout({required this.elements});
 
   factory KnowledgePanelLayout.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelLayoutFromJson(json);
