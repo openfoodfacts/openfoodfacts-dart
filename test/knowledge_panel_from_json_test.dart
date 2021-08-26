@@ -3,10 +3,8 @@ import 'dart:convert';
 import 'package:openfoodfacts/model/KnowledgePanel.dart';
 import 'package:test/test.dart';
 
-import 'test_constants.dart';
-
 void main() {
-  // Verify that we can save the product as a JSON string and then load it back
+  // Verify that we can successfully load the Knowledge panel from a JSON string
   test('Load KP from JSON', () async {
     Map<String, dynamic> ecoScorePanel = {
       "id": "kp_generic",

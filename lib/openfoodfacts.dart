@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'dart:async';
 
 import 'package:http/http.dart';
-import 'package:openfoodfacts/model/KnowledgePanel.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/model/UserAgent.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
@@ -635,23 +634,5 @@ class OpenFoodAPIClient {
     } catch (e) {
       return null;
     }
-  }
-
-  /// Fetches eco score related knowledge panels from the Backend. A knowledge
-  /// panel is a modular unit of information.
-  static Future<List<KnowledgePanel>> getEcoKnowledgePanels(
-      final String barcode,
-      final OpenFoodFactsLanguage language,
-      ) async {
-    Map<String, dynamic> ecoScorePanel = {
-      "id": "kp_generic",
-      "title": "Eco details",
-      "relevance": "TRIVIAL",
-      "layout": {
-        "elements": [{"element_style": "CONTINUOUS"}]
-
-      }
-    };
-    return [KnowledgePanel.fromJson(ecoScorePanel)];
   }
 }
