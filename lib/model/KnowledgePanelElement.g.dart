@@ -1,34 +1,10 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'KnowledgePanelLayout.dart';
+part of 'KnowledgePanelElement.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
-
-DescriptionUnit _$DescriptionUnitFromJson(Map<String, dynamic> json) =>
-    DescriptionUnit(
-      html: json['html'] as String,
-    );
-
-Map<String, dynamic> _$DescriptionUnitToJson(DescriptionUnit instance) =>
-    <String, dynamic>{
-      'html': instance.html,
-    };
-
-ImageUnit _$ImageUnitFromJson(Map<String, dynamic> json) => ImageUnit(
-      url: json['url'] as String,
-      width: json['width'] as int?,
-      height: json['height'] as int?,
-      altText: json['alt_text'] as String?,
-    );
-
-Map<String, dynamic> _$ImageUnitToJson(ImageUnit instance) => <String, dynamic>{
-      'url': instance.url,
-      'width': instance.width,
-      'height': instance.height,
-      'alt_text': instance.altText,
-    };
 
 KnowledgePanelElement _$KnowledgePanelElementFromJson(
         Map<String, dynamic> json) =>
@@ -82,16 +58,33 @@ const _$ElementStyleEnumMap = {
   ElementStyle.SEPARATE: 'SEPARATE',
 };
 
-KnowledgePanelLayout _$KnowledgePanelLayoutFromJson(
-        Map<String, dynamic> json) =>
-    KnowledgePanelLayout(
-      elements: (json['elements'] as List<dynamic>)
-          .map((e) => KnowledgePanelElement.fromJson(e as Map<String, dynamic>))
-          .toList(),
+DescriptionUnit _$DescriptionUnitFromJson(Map<String, dynamic> json) =>
+    DescriptionUnit(
+      html: json['html'] as String,
+      type: _$enumDecode(_$DescriptionTypeEnumMap, json['type']),
     );
 
-Map<String, dynamic> _$KnowledgePanelLayoutToJson(
-        KnowledgePanelLayout instance) =>
+Map<String, dynamic> _$DescriptionUnitToJson(DescriptionUnit instance) =>
     <String, dynamic>{
-      'elements': instance.elements,
+      'html': instance.html,
+      'type': _$DescriptionTypeEnumMap[instance.type],
+    };
+
+const _$DescriptionTypeEnumMap = {
+  DescriptionType.SUMMARY: 'SUMMARY',
+  DescriptionType.NOTES: 'NOTES',
+};
+
+ImageUnit _$ImageUnitFromJson(Map<String, dynamic> json) => ImageUnit(
+      url: json['url'] as String,
+      width: json['width'] as int?,
+      height: json['height'] as int?,
+      altText: json['alt_text'] as String?,
+    );
+
+Map<String, dynamic> _$ImageUnitToJson(ImageUnit instance) => <String, dynamic>{
+      'url': instance.url,
+      'width': instance.width,
+      'height': instance.height,
+      'alt_text': instance.altText,
     };

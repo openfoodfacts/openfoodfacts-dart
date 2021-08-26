@@ -1,22 +1,17 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../interface/JsonObject.dart';
 
-part 'KnowledgePanelLayout.g.dart';
+part 'KnowledgePanelElement.g.dart';
 
-// Layout detailing how the KnowledgePanel can be rendered on the client.
-@JsonSerializable()
-class KnowledgePanelLayout extends JsonObject {
-  // A layout composes of several KnowledgePanelElements. Each element is
-  // rendered on the Client, all elements together form the KnowledgePanel.
-  final List<KnowledgePanelElement> elements;
-
-  const KnowledgePanelLayout({required this.elements});
-
-  factory KnowledgePanelLayout.fromJson(Map<String, dynamic> json) =>
-      _$KnowledgePanelLayoutFromJson(json);
-
-  @override
-  Map<String, dynamic> toJson() => _$KnowledgePanelLayoutToJson(this);
+// ElementStyle tells the client how to display the element.
+enum ElementStyle {
+  // Continue laying out the element in order, render after the last rendered
+  // element.
+  CONTINUOUS,
+  // Display separately from the cluster of "continuous elements". Can be
+  // displayed on the left, bottom, right, top of the entire Panel. Up to the
+  // discretion of the client.
+  SEPARATE,
 }
 
 // KnowledgePanelElement is a single unit of KnowledgePanel that can be rendered
@@ -83,15 +78,9 @@ class KnowledgePanelElement extends JsonObject {
   }
 }
 
-// ElementStyle tells the client how to display the element.
-enum ElementStyle {
-  // Continue laying out the element in order, render after the last rendered
-  // element.
-  CONTINUOUS,
-  // Display separately from the cluster of "continuous elements". Can be
-  // displayed on the left, bottom, right, top of the entire Panel. Up to the
-  // discretion of the client.
-  SEPARATE,
+enum DescriptionType {
+  SUMMARY,
+  NOTES,
 }
 
 // Description of the Knowledge panel.
@@ -99,8 +88,9 @@ enum ElementStyle {
 class DescriptionUnit extends JsonObject {
   // HTML description of one Knowledge Panel Unit.
   final String html;
+  final DescriptionType type;
 
-  const DescriptionUnit({required this.html});
+  const DescriptionUnit({required this.html, required this.type});
 
   factory DescriptionUnit.fromJson(Map<String, dynamic> json) =>
       _$DescriptionUnitFromJson(json);

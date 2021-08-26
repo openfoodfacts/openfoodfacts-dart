@@ -8,48 +8,58 @@ void main() {
   test('Load KP from JSON', () async {
     Map<String, dynamic> ecoScorePanel = {
       'id': 'kp_generic',
+      'topics': ['Environment'],
       'title': 'Limos',
-      'relevance': 'TRIVIAL',
-      'layout': {
-        'elements': [
-          {
-            'element_style': 'CONTINUOUS',
-            'description_unit': {'html': '<p>Goddess of hunger</p>'}
+      'subtitle': 'Goddess of hunger',
+      'grade': 'D',
+      'icon_url': 'url',
+      'level': 'TRIVIA',
+      'elements': [
+        {
+          'element_style': 'CONTINUOUS',
+          'description_unit': {
+            'html': '<p>Goddess of hunger</p>',
+            'type': 'SUMMARY'
           },
-          {
-            'element_style': 'CONTINUOUS',
-            'image_unit': {
-              'url': 'http://visual_depiction_of_hunger.com/image.jpg',
-            },
-          }
-        ]
-      }
+        },
+        {
+          'element_style': 'CONTINUOUS',
+          'image_unit': {
+            'url': 'http://visual_depiction_of_hunger.com/image.jpg',
+          },
+        }
+      ]
     };
     String encodedJson = jsonEncode(ecoScorePanel);
     assert(encodedJson is String);
     final Map<String, dynamic> decodedJson =
         json.decode(encodedJson) as Map<String, dynamic>;
     KnowledgePanel kp = KnowledgePanel.fromJson(decodedJson);
-    expect(kp.relevance, equals(Relevance.TRIVIAL));
+    expect(kp.level, equals(level.TRIVIA));
   });
 
   // Verify that one KnowledgePanelElement can only have one element at max.
   test('Multiple KP Elements in JSON', () async {
     Map<String, dynamic> ecoScorePanel = {
       'id': 'kp_generic',
+      'topics': ['Environment'],
       'title': 'Limos',
-      'relevance': 'TRIVIAL',
-      'layout': {
-        'elements': [
-          {
-            'element_style': 'CONTINUOUS',
-            'description_unit': {'html': '<p>Goddess of hunger</p>'},
-            'image_unit': {
-              'url': 'http://visual_depiction_of_hunger.com/image.jpg',
-            },
-          }
-        ]
-      }
+      'subtitle': 'Goddess of hunger',
+      'grade': 'D',
+      'icon_url': 'url',
+      'level': 'TRIVIA',
+      'elements': [
+        {
+          'element_style': 'CONTINUOUS',
+          'description_unit': {
+            'html': '<p>Goddess of hunger</p>',
+            'type': 'SUMMARY'
+          },
+          'image_unit': {
+            'url': 'http://visual_depiction_of_hunger.com/image.jpg',
+          },
+        }
+      ]
     };
     String encodedJson = jsonEncode(ecoScorePanel);
     assert(encodedJson is String);
@@ -62,15 +72,17 @@ void main() {
   test('No KP Element in JSON', () async {
     Map<String, dynamic> ecoScorePanel = {
       'id': 'kp_generic',
-      'title': 'Eco details',
-      'relevance': 'TRIVIAL',
-      'layout': {
-        'elements': [
-          {
-            'element_style': 'CONTINUOUS',
-          }
-        ]
-      }
+      'topics': ['Environment'],
+      'title': 'Limos',
+      'subtitle': 'Goddess of hunger',
+      'grade': 'D',
+      'icon_url': 'url',
+      'level': 'TRIVIA',
+      'elements': [
+        {
+          'element_style': 'CONTINUOUS',
+        }
+      ]
     };
     String encodedJson = jsonEncode(ecoScorePanel);
     assert(encodedJson is String);

@@ -9,18 +9,28 @@ part of 'KnowledgePanel.dart';
 KnowledgePanel _$KnowledgePanelFromJson(Map<String, dynamic> json) =>
     KnowledgePanel(
       id: json['id'] as String,
+      topics:
+          (json['topics'] as List<dynamic>).map((e) => e as String).toList(),
       title: json['title'] as String,
-      relevance: _$enumDecode(_$RelevanceEnumMap, json['relevance']),
-      layout:
-          KnowledgePanelLayout.fromJson(json['layout'] as Map<String, dynamic>),
+      subtitle: json['subtitle'] as String,
+      iconUrl: json['icon_url'] as String,
+      level: _$enumDecode(_$LevelEnumMap, json['level']),
+      elements: (json['elements'] as List<dynamic>)
+          .map((e) => KnowledgePanelElement.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      grade: _$enumDecodeNullable(_$GradeEnumMap, json['grade']),
     );
 
 Map<String, dynamic> _$KnowledgePanelToJson(KnowledgePanel instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'topics': instance.topics,
       'title': instance.title,
-      'relevance': _$RelevanceEnumMap[instance.relevance],
-      'layout': instance.layout,
+      'subtitle': instance.subtitle,
+      'icon_url': instance.iconUrl,
+      'level': _$LevelEnumMap[instance.level],
+      'elements': instance.elements,
+      'grade': _$GradeEnumMap[instance.grade],
     };
 
 K _$enumDecode<K, V>(
@@ -49,10 +59,29 @@ K _$enumDecode<K, V>(
   ).key;
 }
 
-const _$RelevanceEnumMap = {
-  Relevance.TRIVIAL: 'TRIVIAL',
-  Relevance.INFORMATIVE: 'INFORMATIVE',
-  Relevance.HELPFUL: 'HELPFUL',
-  Relevance.WARNING: 'WARNING',
-  Relevance.ALERT: 'ALERT',
+const _$LevelEnumMap = {
+  Level.TRIVIA: 'TRIVIA',
+  Level.INFORMATIVE: 'INFORMATIVE',
+  Level.HELPFUL: 'HELPFUL',
+  Level.WARNING: 'WARNING',
+  Level.ALERT: 'ALERT',
+};
+
+K? _$enumDecodeNullable<K, V>(
+  Map<K, V> enumValues,
+  dynamic source, {
+  K? unknownValue,
+}) {
+  if (source == null) {
+    return null;
+  }
+  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
+}
+
+const _$GradeEnumMap = {
+  Grade.A: 'A',
+  Grade.B: 'B',
+  Grade.C: 'C',
+  Grade.D: 'D',
+  Grade.E: 'E',
 };
