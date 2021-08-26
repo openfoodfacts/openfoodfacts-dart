@@ -14,7 +14,7 @@ enum Level {
   ALERT,
 }
 
-// Grade of the product, only available for Score panels (Eco, nutri, nova).
+// Grade of the product, only available for Score panels (Eco or Nutri).
 enum Grade {
   A,
   B,
