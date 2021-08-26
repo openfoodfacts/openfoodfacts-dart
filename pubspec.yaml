@@ -7,7 +7,7 @@ environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  json_annotation: ^4.1.0
+  json_annotation: ^4.0.1
   http: ^0.13.3
   path: ^1.8.0
   image: ^3.0.2
