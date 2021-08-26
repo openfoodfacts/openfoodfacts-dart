@@ -8,13 +8,13 @@ void main() {
   test('Load KP from JSON', () async {
     Map<String, dynamic> ecoScorePanel = {
       'id': 'kp_generic',
-      'title': 'Eco details',
+      'title': 'Limos',
       'relevance': 'TRIVIAL',
       'layout': {
         'elements': [
           {
             'element_style': 'CONTINUOUS',
-            'description_unit': {'html': '<p>Gods of hunger</p>'}
+            'description_unit': {'html': '<p>Goddess of hunger</p>'}
           },
           {
             'element_style': 'CONTINUOUS',
@@ -37,13 +37,13 @@ void main() {
   test('Multiple KP Elements in JSON', () async {
     Map<String, dynamic> ecoScorePanel = {
       'id': 'kp_generic',
-      'title': 'Eco details',
+      'title': 'Limos',
       'relevance': 'TRIVIAL',
       'layout': {
         'elements': [
           {
             'element_style': 'CONTINUOUS',
-            'description_unit': {'html': '<p>Gods of hunger</p>'},
+            'description_unit': {'html': '<p>Goddess of hunger</p>'},
             'image_unit': {
               'url': 'http://visual_depiction_of_hunger.com/image.jpg',
             },
