@@ -7,6 +7,7 @@ part 'KnowledgePanelElement.g.dart';
 enum ElementStyle {
   /// Continue laying out the element in order, render after the last rendered element.
   CONTINUOUS,
+
   /// Display separately from the cluster of "continuous elements".
   ///
   /// Can be displayed on the left, bottom, right, top of the entire Panel.
@@ -82,6 +83,7 @@ class KnowledgePanelElement extends JsonObject {
 enum DescriptionType {
   /// The description summarizes the knowledge panel.
   SUMMARY,
+
   /// Disclaimer notes that the client may or may not choose to display.
   NOTES,
 }
@@ -91,6 +93,7 @@ enum DescriptionType {
 class DescriptionUnit extends JsonObject {
   /// HTML description of one Knowledge Panel Unit.
   final String html;
+
   /// Type of description, Client may choose to display the description depending
   /// upon the type.
   final DescriptionType type;
@@ -109,16 +112,19 @@ class DescriptionUnit extends JsonObject {
 class ImageUnit extends JsonObject {
   /// Url of the image.
   final String url;
+
   /// Width of the image.
   ///
   /// This is just a suggestion coming from the server, the client may choose to
   /// use its own dimensions for the image.
   final int? width;
+
   /// Height of the image.
   ///
   /// This is just a suggestion coming from the server, the client may choose to
   /// use its own dimensions for the image.
   final int? height;
+
   /// Alt Text of the image.
   @JsonKey(name: 'alt_text')
   final String? altText;

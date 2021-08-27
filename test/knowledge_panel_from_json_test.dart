@@ -56,7 +56,8 @@ void main() {
             'type': 'SUMMARY'
           },
           'image_unit': {
-            'url': 'https://static.openfoodfacts.org/images/attributes/no-peanuts.svg',
+            'url':
+                'https://static.openfoodfacts.org/images/attributes/no-peanuts.svg',
           },
         }
       ]
