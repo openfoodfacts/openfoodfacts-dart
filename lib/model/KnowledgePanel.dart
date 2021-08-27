@@ -35,7 +35,7 @@ class KnowledgePanel extends JsonObject {
   final String id;
   // The topics discussed in this knowledge panel, example: "Environment".
   final List<String> topics;
-  // Title of the panel. Example - "Eco score D".
+  // Title of the panel. Example - "Eco-Score D".
   final String title;
   // Subtitle of the panel. Example - "High environmental impact".
   final String subtitle;
