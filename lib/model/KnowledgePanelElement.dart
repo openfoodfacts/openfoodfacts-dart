@@ -107,7 +107,7 @@ class ImageUnit extends JsonObject {
   // Url of the image.
   final String url;
   // Width of the image, this is just a suggestion coming from the server, the
-  // client may choose to use it's own dimensions for the image.
+  // client may choose to use its own dimensions for the image.
   final int? width;
   // Height of the image, this is just a suggestion coming from the server, the
   // client may choose to use it's own dimensions for the image.
