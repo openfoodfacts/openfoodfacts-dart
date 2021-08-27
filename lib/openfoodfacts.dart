@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'dart:async';
 
 import 'package:http/http.dart';
-import 'package:openfoodfacts/model/KnowledgePanel.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/model/UserAgent.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
@@ -611,9 +610,9 @@ class OpenFoodAPIClient {
 
   /// Returns the Ecoscore description in HTML
   static Future<String?> getEcoscoreHtmlDescription(
-      final String barcode,
-      final OpenFoodFactsLanguage language,
-      ) async {
+    final String barcode,
+    final OpenFoodFactsLanguage language,
+  ) async {
     const String FIELD = 'environment_infocard';
     final Uri uri = Uri(
       scheme: URI_SCHEME,
@@ -623,16 +622,17 @@ class OpenFoodAPIClient {
     );
     try {
       final Response response =
-      await HttpHelper().doGetRequest(uri, userAgent: userAgent);
+          await HttpHelper().doGetRequest(uri, userAgent: userAgent);
       if (response.statusCode != 200) {
         return null;
       }
       final Map<String, dynamic> json =
-      jsonDecode(response.body) as Map<String, dynamic>;
+          jsonDecode(response.body) as Map<String, dynamic>;
       final Map<String, dynamic> productData =
-      json['product'] as Map<String, dynamic>;
+          json['product'] as Map<String, dynamic>;
       return productData[FIELD] as String?;
     } catch (e) {
       return null;
     }
   }
+}
