@@ -78,8 +78,11 @@ class KnowledgePanelElement extends JsonObject {
   }
 }
 
+// The type of description.
 enum DescriptionType {
+  // The description summarizes the knowledge panel.
   SUMMARY,
+  // These are notes that the client may or may not choose to display.
   NOTES,
 }
 
