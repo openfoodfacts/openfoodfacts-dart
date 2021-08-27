@@ -76,10 +76,7 @@ void main() {
       'grade': 'D',
       'icon_url': 'url',
       'level': 'TRIVIA',
-      'elements': [
-        {
-        }
-      ]
+      'elements': [{}]
     };
     String encodedJson = jsonEncode(ecoScorePanel);
     assert(encodedJson is String);
