@@ -16,14 +16,12 @@ void main() {
       'level': 'TRIVIA',
       'elements': [
         {
-          'element_style': 'CONTINUOUS',
           'description_unit': {
             'html': '<p>Goddess of hunger</p>',
             'type': 'SUMMARY'
           },
         },
         {
-          'element_style': 'CONTINUOUS',
           'image_unit': {
             'url': 'http://visual_depiction_of_hunger.com/image.jpg',
           },
@@ -50,7 +48,6 @@ void main() {
       'level': 'TRIVIA',
       'elements': [
         {
-          'element_style': 'CONTINUOUS',
           'description_unit': {
             'html': '<p>Goddess of hunger</p>',
             'type': 'SUMMARY'
@@ -81,7 +78,6 @@ void main() {
       'level': 'TRIVIA',
       'elements': [
         {
-          'element_style': 'CONTINUOUS',
         }
       ]
     };

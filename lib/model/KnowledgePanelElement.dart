@@ -3,18 +3,6 @@ import '../interface/JsonObject.dart';
 
 part 'KnowledgePanelElement.g.dart';
 
-/// ElementStyle tells the client how to display the element.
-enum ElementStyle {
-  /// Continue laying out the element in order, render after the last rendered element.
-  CONTINUOUS,
-
-  /// Display separately from the cluster of "continuous elements".
-  ///
-  /// Can be displayed on the left, bottom, right, top of the entire Panel.
-  /// Up to the discretion of the client.
-  SEPARATE,
-}
-
 /// KnowledgePanelElement is a single unit of KnowledgePanel that can be rendered on the client.
 ///
 /// An Element must contain exactly one unit of KnowledgePanel
@@ -22,12 +10,6 @@ enum ElementStyle {
 /// exception.
 @JsonSerializable()
 class KnowledgePanelElement extends JsonObject {
-  /// ElementStyle tells the client how to display the element, whether in
-  /// a continuous sequence after the last element that was rendered or
-  /// separately (left, bottom, right, top) as per the client's discretion.
-  @JsonKey(name: 'element_style')
-  final ElementStyle elementStyle;
-
   /// Description of the Knowledge panel.
   @JsonKey(name: 'description_unit')
   final DescriptionUnit? descriptionUnit;
