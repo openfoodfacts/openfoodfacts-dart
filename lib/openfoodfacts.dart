@@ -636,32 +636,3 @@ class OpenFoodAPIClient {
       return null;
     }
   }
-
-  /// Returns all Knowledge panels related to
-  static Future<List<KnowledgePanel>> getknowledgePanels(
-      final String barcode,
-      final OpenFoodFactsLanguage language,
-      ) async {
-    const String FIELD = 'environment_infocard';
-    final Uri uri = Uri(
-      scheme: URI_SCHEME,
-      host: 'world-${language.code}.openfoodfacts.org',
-      path: '/api/v0/product/$barcode.json',
-      queryParameters: <String, String>{'fields': FIELD},
-    );
-    try {
-      final Response response =
-      await HttpHelper().doGetRequest(uri, userAgent: userAgent);
-      if (response.statusCode != 200) {
-        return null;
-      }
-      final Map<String, dynamic> json =
-      jsonDecode(response.body) as Map<String, dynamic>;
-      final Map<String, dynamic> productData =
-      json['product'] as Map<String, dynamic>;
-      return productData[FIELD] as String?;
-    } catch (e) {
-      return null;
-    }
-  }
-}
