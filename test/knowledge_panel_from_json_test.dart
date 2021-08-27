@@ -56,7 +56,7 @@ void main() {
             'type': 'SUMMARY'
           },
           'image_unit': {
-            'url': 'http://visual_depiction_of_hunger.com/image.jpg',
+            'url': 'https://static.openfoodfacts.org/images/attributes/no-peanuts.svg',
           },
         }
       ]
