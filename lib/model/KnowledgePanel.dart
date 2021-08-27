@@ -14,7 +14,9 @@ enum Level {
   ALERT,
 }
 
-// Grade of the product, only available for Score panels (Eco or Nutri).
+// Grade of the panel, depicting the level of impact the product has on the
+// corresponding topic. Client can choose to color code the panel depending
+// on how good/bad the grade is.
 enum Grade {
   A,
   B,
@@ -46,7 +48,9 @@ class KnowledgePanel extends JsonObject {
   // KnowledgePanelElement is a single unit of KnowledgePanel that can be
   // rendered on the client.
   final List<KnowledgePanelElement> elements;
-  // Score panels have a grade associated with the Knowledge panel.
+  // Grade of the panel, depicting the level of impact the product has on the
+  // corresponding topic. Client can choose to color code the panel depending
+  // on how good/bad the grade is.
   // Scale: 'A' -> 'E'
   final Grade? grade;
 
