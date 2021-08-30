@@ -24,12 +24,12 @@ void main() {
             }
           },
           {
-            "element_type": "image",
-            "element": {
-              "url":
-                  "https://static.openfoodfacts.org/images/attributes/contains-nuts.png",
-              "width": 192,
-              "height": 192
+            'element_type': 'image',
+            'element': {
+              'url':
+                  'https://static.openfoodfacts.org/images/attributes/contains-nuts.png',
+              'width': 192,
+              'height': 192
             }
           }
         ]
