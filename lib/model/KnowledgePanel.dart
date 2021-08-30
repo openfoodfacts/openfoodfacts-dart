@@ -8,13 +8,13 @@ part 'KnowledgePanel.g.dart';
 /// Type of the KnowledgePanel.
 enum KnowledgePanelType {
   // Do you know types informative Knowledge Panels.
-  @JsonValue("doyouknow")
+  @JsonValue('doyouknow')
   DO_YOU_KNOW,
 // Knowledge Panel with ecoscore information.
-  @JsonValue("ecoscore")
+  @JsonValue('ecoscore')
   ECOSCORE,
 // Knowledge Panel with ecoscore LCA.
-  @JsonValue("ecoscore_lca")
+  @JsonValue('ecoscore_lca')
   ECOSCORE_LCA,
   UNKNOWN,
 }
@@ -23,15 +23,15 @@ enum KnowledgePanelType {
 ///
 /// Client may choose to display the panel based on the level.
 enum Level {
-  @JsonValue("trivia")
+  @JsonValue('trivia')
   TRIVIA,
-  @JsonValue("info")
+  @JsonValue('info')
   INFO,
-  @JsonValue("helpful")
+  @JsonValue('helpful')
   HELPFUL,
-  @JsonValue("warning")
+  @JsonValue('warning')
   WARNING,
-  @JsonValue("alert")
+  @JsonValue('alert')
   ALERT,
   UNKNOWN,
 }
@@ -63,19 +63,19 @@ class KnowledgePanel extends JsonObject {
   @JsonKey(unknownEnumValue: Level.UNKNOWN)
   final Level level;
 
-  /// The topics discussed in this knowledge panel, example: "Environment".
+  /// The topics discussed in this knowledge panel, example: 'Environment'.
   final List<String> topics;
 
-  /// Each KnowledgePanel has a unique id. Example - "ecoscore".
+  /// Each KnowledgePanel has a unique id. Example - 'ecoscore'.
 
-  /// Title of the panel. Example - "Eco-Score D".
+  /// Title of the panel. Example - 'Eco-Score D'.
   final String title;
 
   /// KnowledgePanelElement is a single unit of KnowledgePanel that can be
   /// rendered on the client.
   final List<KnowledgePanelElement> elements;
 
-  /// Subtitle of the panel. Example - "High environmental impact".
+  /// Subtitle of the panel. Example - 'High environmental impact'.
   final String? subtitle;
 
   /// URL of an icon representing the Panel.

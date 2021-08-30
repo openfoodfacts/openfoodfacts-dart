@@ -8,14 +8,14 @@ part 'KnowledgePanelElement.g.dart';
 /// The type of Knowledge panel text description.
 enum KnowledgePanelTextElementType {
   /// The description summarizes the knowledge panel.
-  @JsonValue("summary")
+  @JsonValue('summary')
   SUMMARY,
 
-  @JsonValue("warning")
+  @JsonValue('warning')
   WARNING,
 
   /// Disclaimer notes that the client may or may not choose to display.
-  @JsonValue("notes")
+  @JsonValue('notes')
   NOTES,
   UNKNOWN,
 }
@@ -123,18 +123,18 @@ class KnowledgePanelTableElement {
 /// The type of Knowledge panel.
 enum KnowledgePanelElementType {
   /// The description summarizes the knowledge panel.
-  @JsonValue("text")
+  @JsonValue('text')
   TEXT,
 
-  @JsonValue("image")
+  @JsonValue('image')
   IMAGE,
 
   /// Disclaimer notes that the client may or may not choose to display.
-  @JsonValue("panel")
+  @JsonValue('panel')
   PANEL,
 
   /// Disclaimer notes that the client may or may not choose to display.
-  @JsonValue("table")
+  @JsonValue('table')
   TABLE,
   UNKNOWN,
 }
@@ -198,7 +198,7 @@ class KnowledgePanelElement extends JsonObject {
             type: type,
             tableElement: KnowledgePanelTableElement.fromJson(json['element']));
       case KnowledgePanelElementType.UNKNOWN:
-        throw ArgumentError("Unknown element type");
+        throw ArgumentError('Unknown element type');
     }
   }
 }
