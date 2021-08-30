@@ -10,9 +10,11 @@ enum KnowledgePanelType {
   /// Do you know types informative Knowledge Panels.
   @JsonValue('doyouknow')
   DO_YOU_KNOW,
+
   /// Knowledge Panel with ecoscore information.
   @JsonValue('ecoscore')
   ECOSCORE,
+
   /// Knowledge Panel with ecoscore LCA.
   @JsonValue('ecoscore_lca')
   ECOSCORE_LCA,
