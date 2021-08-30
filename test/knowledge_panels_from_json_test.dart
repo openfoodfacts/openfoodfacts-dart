@@ -101,11 +101,7 @@ void main() {
         ]
       }
     };
-    String encodedJson = jsonEncode(panels);
-    assert(encodedJson is String);
-    final Map<String, dynamic> decodedJson =
-        json.decode(encodedJson) as Map<String, dynamic>;
-    KnowledgePanels kp = KnowledgePanels.fromJson(decodedJson);
+    KnowledgePanels kp = KnowledgePanels.fromJson(panels);
     expect(kp.panelIdToPanelMap.length, equals(3));
   });
 
@@ -130,10 +126,6 @@ void main() {
         ]
       },
     };
-    String encodedJson = jsonEncode(panels);
-    assert(encodedJson is String);
-    final Map<String, dynamic> decodedJson =
-        json.decode(encodedJson) as Map<String, dynamic>;
-    expect(() => KnowledgePanel.fromJson(decodedJson), throwsArgumentError);
+    expect(() => KnowledgePanel.fromJson(panels), throwsArgumentError);
   });
 }
