@@ -7,13 +7,13 @@ part 'KnowledgePanel.g.dart';
 
 /// Type of the KnowledgePanel.
 enum KnowledgePanelType {
-  // Do you know types informative Knowledge Panels.
+  /// Do you know types informative Knowledge Panels.
   @JsonValue('doyouknow')
   DO_YOU_KNOW,
-// Knowledge Panel with ecoscore information.
+  /// Knowledge Panel with ecoscore information.
   @JsonValue('ecoscore')
   ECOSCORE,
-// Knowledge Panel with ecoscore LCA.
+  /// Knowledge Panel with ecoscore LCA.
   @JsonValue('ecoscore_lca')
   ECOSCORE_LCA,
   UNKNOWN,
