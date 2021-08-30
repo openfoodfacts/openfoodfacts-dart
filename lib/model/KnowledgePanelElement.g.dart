@@ -52,6 +52,7 @@ const _$KnowledgePanelTextElementTypeEnumMap = {
   KnowledgePanelTextElementType.SUMMARY: 'summary',
   KnowledgePanelTextElementType.WARNING: 'warning',
   KnowledgePanelTextElementType.NOTES: 'notes',
+  KnowledgePanelTextElementType.DEFAULT: 'notes',
   KnowledgePanelTextElementType.UNKNOWN: 'UNKNOWN',
 };
 
@@ -85,6 +86,19 @@ Map<String, dynamic> _$KnowledgePanelPanelIdElementToJson(
       'panel_id': instance.panelId,
     };
 
+KnowledgePanelTableRowElement _$KnowledgePanelTableRowElementFromJson(
+        Map<String, dynamic> json) =>
+    KnowledgePanelTableRowElement(
+      values:
+          (json['values'] as List<dynamic>).map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$KnowledgePanelTableRowElementToJson(
+        KnowledgePanelTableRowElement instance) =>
+    <String, dynamic>{
+      'values': instance.values,
+    };
+
 KnowledgePanelTableElement _$KnowledgePanelTableElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTableElement(
@@ -94,7 +108,8 @@ KnowledgePanelTableElement _$KnowledgePanelTableElementFromJson(
       headers:
           (json['headers'] as List<dynamic>).map((e) => e as String).toList(),
       rows: (json['rows'] as List<dynamic>)
-          .map((e) => (e as List<dynamic>).map((e) => e as String).toList())
+          .map((e) =>
+              KnowledgePanelTableRowElement.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

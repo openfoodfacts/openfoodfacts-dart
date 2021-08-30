@@ -18,7 +18,7 @@ void main() {
           {
             'element_type': 'text',
             'element': {
-              'text_type': 'summary',
+              'text_type': 'default',
               'html':
                   'Cocoa beans were expensive and hard to come by after the second world war, so in Piedmont (Italy) where Pietro Ferrero created Nutella, they were replaced with hazelnuts to make <em>gianduja</em>, a mix of hazelnut paste and chocolate.'
             }
@@ -26,11 +26,12 @@ void main() {
           {
             "element_type": "image",
             "element": {
-              "url": "https://static.openfoodfacts.org/images/attributes/contains-nuts.png",
+              "url":
+                  "https://static.openfoodfacts.org/images/attributes/contains-nuts.png",
               "width": 192,
               "height": 192
             }
-           }
+          }
         ]
       },
       'ecoscore': {
@@ -97,12 +98,24 @@ void main() {
               'title': 'Details of the impacts by stages of the life cycle',
               'headers': ['Steps', 'Impact'],
               'rows': [
-                ['Agriculture', '82.7'],
-                ['Processing', '11.5'],
-                ['Packaging', '2.8'],
-                ['Transportation', '2.4'],
-                ['Distribution', '0.6'],
-                ['Consumption', '0.0']
+                {
+                  'values': ['Agriculture', '82.7'],
+                },
+                {
+                  'values': ['Processing', '11.5'],
+                },
+                {
+                  'values': ['Packaging', '2.8'],
+                },
+                {
+                  'values': ['Transportation', '2.4'],
+                },
+                {
+                  'values': ['Distribution', '0.6'],
+                },
+                {
+                  'values': ['Consumption', '0.0']
+                }
               ]
             }
           }

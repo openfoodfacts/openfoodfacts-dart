@@ -17,6 +17,10 @@ enum KnowledgePanelTextElementType {
   /// Disclaimer notes that the client may or may not choose to display.
   @JsonValue('notes')
   NOTES,
+
+  /// Default type of the text element, this is just a normal description.
+  @JsonValue('notes')
+  DEFAULT,
   UNKNOWN,
 }
 
@@ -78,7 +82,7 @@ class KnowledgePanelImageElement extends JsonObject {
 /// Knowledge panel itself, the KnowledgePanel can be found in the list of
 /// Knowledge panels using the id.
 @JsonSerializable()
-class KnowledgePanelPanelIdElement {
+class KnowledgePanelPanelIdElement extends JsonObject {
   @JsonKey(name: 'panel_id')
   final String panelId;
 
@@ -91,9 +95,23 @@ class KnowledgePanelPanelIdElement {
   Map<String, dynamic> toJson() => _$KnowledgePanelPanelIdElementToJson(this);
 }
 
+/// A table row inside Table element of KonwledgePanel
+@JsonSerializable()
+class KnowledgePanelTableRowElement extends JsonObject {
+  final List<String> values;
+
+  const KnowledgePanelTableRowElement({required this.values});
+
+  factory KnowledgePanelTableRowElement.fromJson(Map<String, dynamic> json) =>
+      _$KnowledgePanelTableRowElementFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$KnowledgePanelTableRowElementToJson(this);
+}
+
 /// Element representing a tabular data for the KnowledgePanel.
 @JsonSerializable()
-class KnowledgePanelTableElement {
+class KnowledgePanelTableElement extends JsonObject {
   @JsonKey(name: 'table_id')
   final String tableId;
 
@@ -104,7 +122,7 @@ class KnowledgePanelTableElement {
 
   final List<String> headers;
 
-  final List<List<String>> rows;
+  final List<KnowledgePanelTableRowElement> rows;
 
   const KnowledgePanelTableElement(
       {required this.tableId,
