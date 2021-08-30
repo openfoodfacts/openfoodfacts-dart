@@ -1,97 +1,50 @@
+import 'dart:ffi';
+
 import 'package:json_annotation/json_annotation.dart';
 import '../interface/JsonObject.dart';
 
 part 'KnowledgePanelElement.g.dart';
 
-/// KnowledgePanelElement is a single unit of KnowledgePanel that can be rendered on the client.
-///
-/// An Element must contain exactly one unit of KnowledgePanel
-/// (example: Description or Image), having more than one unit will cause an
-/// exception.
-@JsonSerializable()
-class KnowledgePanelElement extends JsonObject {
-  /// Description of the Knowledge panel.
-  @JsonKey(name: 'description_unit')
-  final DescriptionUnit? descriptionUnit;
-
-  /// Image that represents the KnowledgePanel.
-  @JsonKey(name: 'image_unit')
-  final ImageUnit? imageUnit;
-
-  const KnowledgePanelElement(
-      {required this.elementStyle, this.descriptionUnit, this.imageUnit});
-
-  factory KnowledgePanelElement.fromJson(Map<String, dynamic> json) =>
-      _validatedKnowledgeElementPanelFromJson(json);
-
-  @override
-  Map<String, dynamic> toJson() => _validatedKnowledgeElementToJson(this);
-
-  /// Convert json -> KnowledgePanelElement and validate that only one unit of
-  /// information is present in the KnowledgePanelElement.
-  static KnowledgePanelElement _validatedKnowledgeElementPanelFromJson(
-      Map<String, dynamic> json) {
-    KnowledgePanelElement element = _$KnowledgePanelElementFromJson(json);
-    return _validateKnowledgePanelElementsOneOf(element);
-  }
-
-  /// Validate that only one unit of information is present in the
-  /// KnowledgePanelElement and then convert KnowledgePanelElement -> json
-  static Map<String, dynamic> _validatedKnowledgeElementToJson(
-      KnowledgePanelElement element) {
-    return _$KnowledgePanelElementToJson(
-        _validateKnowledgePanelElementsOneOf(element));
-  }
-
-  /// Validate that only one unit of information is present in the KnowledgePanelElement
-  static KnowledgePanelElement _validateKnowledgePanelElementsOneOf(
-      KnowledgePanelElement element) {
-    int aliveUnits = 0;
-    if (element.descriptionUnit != null) {
-      aliveUnits++;
-    }
-    if (element.imageUnit != null) {
-      aliveUnits++;
-    }
-    if (aliveUnits != 1) {
-      throw FormatException('Invalid Knowledge Panel format, '
-          'KnowledgePanelElement can only have one element set.');
-    }
-    return element;
-  }
-}
-
-/// The type of Knowledge panel description.
-enum DescriptionType {
+/// The type of Knowledge panel text description.
+enum KnowledgePanelTextElementType {
   /// The description summarizes the knowledge panel.
+  @JsonValue("summary")
   SUMMARY,
 
+  @JsonValue("warning")
+  WARNING,
+
   /// Disclaimer notes that the client may or may not choose to display.
+  @JsonValue("notes")
   NOTES,
+  UNKNOWN,
 }
 
 /// Description element of the Knowledge panel.
 @JsonSerializable()
-class DescriptionUnit extends JsonObject {
+class KnowledgePanelTextElement extends JsonObject {
   /// HTML description of one Knowledge Panel Unit.
   final String html;
 
-  /// Type of description, Client may choose to display the description depending
-  /// upon the type.
-  final DescriptionType type;
+  /// Type of the text description, Client may choose to display the description
+  /// depending upon the type.
+  @JsonKey(
+      name: 'text_type',
+      unknownEnumValue: KnowledgePanelTextElementType.UNKNOWN)
+  final KnowledgePanelTextElementType type;
 
-  const DescriptionUnit({required this.html, required this.type});
+  const KnowledgePanelTextElement({required this.html, required this.type});
 
-  factory DescriptionUnit.fromJson(Map<String, dynamic> json) =>
-      _$DescriptionUnitFromJson(json);
+  factory KnowledgePanelTextElement.fromJson(Map<String, dynamic> json) =>
+      _$KnowledgePanelTextElementFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$DescriptionUnitToJson(this);
+  Map<String, dynamic> toJson() => _$KnowledgePanelTextElementToJson(this);
 }
 
 /// Image that represents the KnowledgePanel.
 @JsonSerializable()
-class ImageUnit extends JsonObject {
+class KnowledgePanelImageElement extends JsonObject {
   /// Url of the image.
   final String url;
 
@@ -111,11 +64,141 @@ class ImageUnit extends JsonObject {
   @JsonKey(name: 'alt_text')
   final String? altText;
 
-  const ImageUnit({required this.url, this.width, this.height, this.altText});
+  const KnowledgePanelImageElement(
+      {required this.url, this.width, this.height, this.altText});
 
-  factory ImageUnit.fromJson(Map<String, dynamic> json) =>
-      _$ImageUnitFromJson(json);
+  factory KnowledgePanelImageElement.fromJson(Map<String, dynamic> json) =>
+      _$KnowledgePanelImageElementFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$ImageUnitToJson(this);
+  Map<String, dynamic> toJson() => _$KnowledgePanelImageElementToJson(this);
+}
+
+/// Element representing a Panel Id of a KnowledgePanel. This element is a
+/// Knowledge panel itself, the KnowledgePanel can be found in the list of
+/// Knowledge panels using the id.
+@JsonSerializable()
+class KnowledgePanelPanelIdElement {
+  @JsonKey(name: 'panel_id')
+  final String panelId;
+
+  const KnowledgePanelPanelIdElement({required this.panelId});
+
+  factory KnowledgePanelPanelIdElement.fromJson(Map<String, dynamic> json) =>
+      _$KnowledgePanelPanelIdElementFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$KnowledgePanelPanelIdElementToJson(this);
+}
+
+/// Element representing a tabular data for the KnowledgePanel.
+@JsonSerializable()
+class KnowledgePanelTableElement {
+  @JsonKey(name: 'table_id')
+  final String tableId;
+
+  @JsonKey(name: 'table_type')
+  final String tableType;
+
+  final String title;
+
+  final List<String> headers;
+
+  final List<List<String>> rows;
+
+  const KnowledgePanelTableElement(
+      {required this.tableId,
+      required this.tableType,
+      required this.title,
+      required this.headers,
+      required this.rows});
+
+  factory KnowledgePanelTableElement.fromJson(Map<String, dynamic> json) =>
+      _$KnowledgePanelTableElementFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$KnowledgePanelTableElementToJson(this);
+}
+
+/// The type of Knowledge panel.
+enum KnowledgePanelElementType {
+  /// The description summarizes the knowledge panel.
+  @JsonValue("text")
+  TEXT,
+
+  @JsonValue("image")
+  IMAGE,
+
+  /// Disclaimer notes that the client may or may not choose to display.
+  @JsonValue("panel")
+  PANEL,
+
+  /// Disclaimer notes that the client may or may not choose to display.
+  @JsonValue("table")
+  TABLE,
+  UNKNOWN,
+}
+
+/// KnowledgePanelElement is a single unit of KnowledgePanel that can be rendered on the client.
+///
+/// An Element could be one of [{@code ]KnowledgePanelElementType].
+@JsonSerializable()
+class KnowledgePanelElement extends JsonObject {
+  /// Type of the text description, Client may choose to display the description
+  /// depending upon the type.
+  final KnowledgePanelElementType type;
+
+  /// Text description of the Knowledge panel.
+  final KnowledgePanelTextElement? textElement;
+
+  /// Image element of the Knowledge panel.
+  final KnowledgePanelImageElement? imageElement;
+
+  /// Id of a KnowledgePanel embedded inside [this] KnowledgePanel.
+  final KnowledgePanelPanelIdElement? panelIdElement;
+
+  /// Id of a KnowledgePanel embedded inside [this] KnowledgePanel.
+  final KnowledgePanelTableElement? tableElement;
+
+  const KnowledgePanelElement(
+      {required this.type,
+      this.textElement,
+      this.imageElement,
+      this.panelIdElement,
+      this.tableElement});
+
+  factory KnowledgePanelElement.fromJson(Map<String, dynamic> json) =>
+      _KnowledgePanelElementFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$KnowledgePanelElementToJson(this);
+
+  /// Convert json -> KnowledgePanelElement.
+  static KnowledgePanelElement _KnowledgePanelElementFromJson(
+      Map<String, dynamic> json) {
+    KnowledgePanelElementType type = _$enumDecode(
+        _$KnowledgePanelElementTypeEnumMap, json['element_type'],
+        unknownValue: KnowledgePanelElementType.UNKNOWN);
+    switch (type) {
+      case KnowledgePanelElementType.TEXT:
+        return KnowledgePanelElement(
+            type: type,
+            textElement: KnowledgePanelTextElement.fromJson(json['element']));
+      case KnowledgePanelElementType.IMAGE:
+        return KnowledgePanelElement(
+            type: type,
+            imageElement: KnowledgePanelImageElement.fromJson(json['element']));
+      case KnowledgePanelElementType.PANEL:
+        return KnowledgePanelElement(
+            type: type,
+            panelIdElement:
+                KnowledgePanelPanelIdElement.fromJson(json['element']));
+      case KnowledgePanelElementType.TABLE:
+        return KnowledgePanelElement(
+            type: type,
+            tableElement: KnowledgePanelTableElement.fromJson(json['element']));
+      case KnowledgePanelElementType.UNKNOWN:
+        throw ArgumentError("Unknown element type");
+    }
+  }
 }

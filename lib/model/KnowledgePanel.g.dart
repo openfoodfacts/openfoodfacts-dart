@@ -8,28 +8,30 @@ part of 'KnowledgePanel.dart';
 
 KnowledgePanel _$KnowledgePanelFromJson(Map<String, dynamic> json) =>
     KnowledgePanel(
-      id: json['id'] as String,
+      type: _$enumDecode(_$KnowledgePanelTypeEnumMap, json['type']),
+      level: _$enumDecode(_$LevelEnumMap, json['level'],
+          unknownValue: Level.UNKNOWN),
       topics:
           (json['topics'] as List<dynamic>).map((e) => e as String).toList(),
       title: json['title'] as String,
-      subtitle: json['subtitle'] as String,
-      iconUrl: json['icon_url'] as String,
-      level: _$enumDecode(_$LevelEnumMap, json['level']),
       elements: (json['elements'] as List<dynamic>)
           .map((e) => KnowledgePanelElement.fromJson(e as Map<String, dynamic>))
           .toList(),
-      grade: _$enumDecodeNullable(_$GradeEnumMap, json['grade']),
+      subtitle: json['subtitle'] as String?,
+      iconUrl: json['icon_url'] as String?,
+      grade: _$enumDecodeNullable(_$GradeEnumMap, json['grade'],
+          unknownValue: Grade.UNKNOWN),
     );
 
 Map<String, dynamic> _$KnowledgePanelToJson(KnowledgePanel instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'type': _$KnowledgePanelTypeEnumMap[instance.type],
+      'level': _$LevelEnumMap[instance.level],
       'topics': instance.topics,
       'title': instance.title,
+      'elements': instance.elements,
       'subtitle': instance.subtitle,
       'icon_url': instance.iconUrl,
-      'level': _$LevelEnumMap[instance.level],
-      'elements': instance.elements,
       'grade': _$GradeEnumMap[instance.grade],
     };
 
@@ -59,12 +61,20 @@ K _$enumDecode<K, V>(
   ).key;
 }
 
+const _$KnowledgePanelTypeEnumMap = {
+  KnowledgePanelType.DO_YOU_KNOW: 'doyouknow',
+  KnowledgePanelType.ECOSCORE: 'ecoscore',
+  KnowledgePanelType.ECOSCORE_LCA: 'ecoscore_lca',
+  KnowledgePanelType.UNKNOWN: 'UNKNOWN',
+};
+
 const _$LevelEnumMap = {
-  Level.TRIVIA: 'TRIVIA',
-  Level.INFORMATIVE: 'INFORMATIVE',
-  Level.HELPFUL: 'HELPFUL',
-  Level.WARNING: 'WARNING',
-  Level.ALERT: 'ALERT',
+  Level.TRIVIA: 'trivia',
+  Level.INFO: 'info',
+  Level.HELPFUL: 'helpful',
+  Level.WARNING: 'warning',
+  Level.ALERT: 'alert',
+  Level.UNKNOWN: 'UNKNOWN',
 };
 
 K? _$enumDecodeNullable<K, V>(
@@ -84,4 +94,5 @@ const _$GradeEnumMap = {
   Grade.C: 'C',
   Grade.D: 'D',
   Grade.E: 'E',
+  Grade.UNKNOWN: 'UNKNOWN',
 };
