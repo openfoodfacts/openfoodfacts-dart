@@ -94,16 +94,17 @@ class KnowledgePanel extends JsonObject {
   @JsonKey(unknownEnumValue: Grade.UNKNOWN)
   final Grade? grade;
 
-  const KnowledgePanel(
-      {required this.parent_panel_id,
-      required this.type,
-      required this.level,
-      required this.title,
-      required this.elements,
-      this.topics,
-      this.subtitle,
-      this.iconUrl,
-      this.grade});
+  const KnowledgePanel({
+    required this.parent_panel_id,
+    required this.type,
+    required this.level,
+    required this.title,
+    required this.elements,
+    this.topics,
+    this.subtitle,
+    this.iconUrl,
+    this.grade,
+  });
 
   factory KnowledgePanel.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelFromJson(json);

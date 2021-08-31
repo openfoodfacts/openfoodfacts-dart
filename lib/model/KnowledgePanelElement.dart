@@ -124,12 +124,13 @@ class KnowledgePanelTableElement extends JsonObject {
 
   final List<KnowledgePanelTableRowElement> rows;
 
-  const KnowledgePanelTableElement(
-      {required this.tableId,
-      required this.tableType,
-      required this.title,
-      required this.headers,
-      required this.rows});
+  const KnowledgePanelTableElement({
+    required this.tableId,
+    required this.tableType,
+    required this.title,
+    required this.headers,
+    required this.rows,
+  });
 
   factory KnowledgePanelTableElement.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelTableElementFromJson(json);
@@ -178,12 +179,13 @@ class KnowledgePanelElement extends JsonObject {
   /// Id of a KnowledgePanel embedded inside [this] KnowledgePanel.
   final KnowledgePanelTableElement? tableElement;
 
-  const KnowledgePanelElement(
-      {required this.type,
-      this.textElement,
-      this.imageElement,
-      this.panelIdElement,
-      this.tableElement});
+  const KnowledgePanelElement({
+    required this.type,
+    this.textElement,
+    this.imageElement,
+    this.panelIdElement,
+    this.tableElement,
+  });
 
   factory KnowledgePanelElement.fromJson(Map<String, dynamic> json) =>
       _KnowledgePanelElementFromJson(json);
