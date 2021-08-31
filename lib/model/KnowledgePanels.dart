@@ -1,6 +1,6 @@
 import 'package:openfoodfacts/model/KnowledgePanel.dart';
 
-/// An object containing all KnowledgePanels in the form of a [map].
+/// An object containing all KnowledgePanels in the form of a map.
 class KnowledgePanels {
   /// A map of the type: {"knowledge-panel-id": KnowledgePanel}
   final Map<String, KnowledgePanel> panelIdToPanelMap;
