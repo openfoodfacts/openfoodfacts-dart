@@ -9,6 +9,7 @@ void main() {
   test('Load KP from JSON', () async {
     Map<String, dynamic> panels = {
       'doyouknow_brands_nutella_423': {
+        'parent_panel_id': 'root',
         'type': 'doyouknow',
         'level': 'trivia',
         'topics': ['ingredients'],
@@ -35,6 +36,7 @@ void main() {
         ]
       },
       'ecoscore': {
+        'parent_panel_id': 'root',
         'type': 'ecoscore',
         'level': 'info',
         'topics': ['environment'],
@@ -75,6 +77,7 @@ void main() {
         ]
       },
       'ecoscore_lca': {
+        'parent_panel_id': 'ecoscore',
         'type': 'ecoscore_lca',
         'level': 'info',
         'topics': ['environment'],
@@ -99,22 +102,36 @@ void main() {
               'headers': ['Steps', 'Impact'],
               'rows': [
                 {
-                  'values': ['Agriculture', '82.7'],
+                  'id': 'agriculture',
+                  'icon_url':
+                      'https://static.openfoodfacts.org/images/icons/dist/agriculture.svg',
+                  'values': ['Agriculture', '82.7%'],
+                  'percent': 82.7
                 },
                 {
-                  'values': ['Processing', '11.5'],
+                  'id': 'processing',
+                  'values': ['Processing', '11.5%'],
+                  'percent': 11.5
                 },
                 {
-                  'values': ['Packaging', '2.8'],
+                  'id': 'packaging',
+                  'values': ['Packaging', '2.8%'],
+                  'percent': 2.8
                 },
                 {
-                  'values': ['Transportation', '2.4'],
+                  'id': 'transportation',
+                  'values': ['Transportation', '2.4%'],
+                  'percent': 2.4
                 },
                 {
-                  'values': ['Distribution', '0.6'],
+                  'id': 'distribution',
+                  'values': ['Distribution', '0.6%'],
+                  'percent': 0.6
                 },
                 {
-                  'values': ['Consumption', '0.0']
+                  'id': 'consumption',
+                  'values': ['Consumption', '0.0%'],
+                  'percent': 0
                 }
               ]
             }
@@ -130,6 +147,7 @@ void main() {
   test('Unknown Element in JSON', () async {
     Map<String, dynamic> panels = {
       'doyouknow_brands_nutella_423': {
+        'parent_panel_id': 'root',
         'type': 'doyouknow',
         'level': 'trivia',
         'topics': ['ingredients'],
@@ -147,6 +165,6 @@ void main() {
         ]
       },
     };
-    expect(() => KnowledgePanel.fromJson(panels), throwsArgumentError);
+    expect(() => KnowledgePanels.fromJson(panels), throwsArgumentError);
   });
 }

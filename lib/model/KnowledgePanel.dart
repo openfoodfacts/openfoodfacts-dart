@@ -58,6 +58,9 @@ enum Grade {
 // NOTE: This is WIP, do not use and expect changes.
 @JsonSerializable()
 class KnowledgePanel extends JsonObject {
+  /// Panel id of the parent panel.
+  final String parent_panel_id;
+
   final KnowledgePanelType type;
 
   /// Level of this KnowledgePanel. Client may choose to display the panel based
@@ -66,7 +69,7 @@ class KnowledgePanel extends JsonObject {
   final Level level;
 
   /// The topics discussed in this knowledge panel, example: 'Environment'.
-  final List<String> topics;
+  final List<String>? topics;
 
   /// Each KnowledgePanel has a unique id. Example - 'ecoscore'.
 
@@ -92,11 +95,12 @@ class KnowledgePanel extends JsonObject {
   final Grade? grade;
 
   const KnowledgePanel(
-      {required this.type,
+      {required this.parent_panel_id,
+      required this.type,
       required this.level,
-      required this.topics,
       required this.title,
       required this.elements,
+      this.topics,
       this.subtitle,
       this.iconUrl,
       this.grade});
