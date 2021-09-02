@@ -1,4 +1,3 @@
-import 'package:openfoodfacts/model/User.dart';
 import 'package:openfoodfacts/model/UserAgent.dart';
 
 import 'QueryType.dart';
