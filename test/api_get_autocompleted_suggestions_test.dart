@@ -1,4 +1,4 @@
-import 'package:openfoodfacts/model/OpenFoodAPISettings.dart';
+import 'package:openfoodfacts/utils/OpenFoodAPISettings.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';

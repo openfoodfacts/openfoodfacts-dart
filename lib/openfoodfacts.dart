@@ -20,7 +20,7 @@ import 'model/SendImage.dart';
 import 'model/Product.dart';
 import 'model/ProductResult.dart';
 import 'model/SearchResult.dart';
-import 'model/OpenFoodAPISettings.dart';
+import 'utils/OpenFoodAPISettings.dart';
 import 'model/SpellingCorrections.dart';
 import 'model/Status.dart';
 import 'model/User.dart';

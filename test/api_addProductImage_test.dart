@@ -1,4 +1,4 @@
-import 'package:openfoodfacts/model/OpenFoodAPISettings.dart';
+import 'package:openfoodfacts/utils/OpenFoodAPISettings.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/SendImage.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';

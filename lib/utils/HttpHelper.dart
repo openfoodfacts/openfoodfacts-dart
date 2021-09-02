@@ -1,4 +1,4 @@
-import 'package:openfoodfacts/model/OpenFoodAPISettings.dart';
+import 'package:openfoodfacts/utils/OpenFoodAPISettings.dart';
 import 'package:openfoodfacts/model/UserAgent.dart';
 import 'package:openfoodfacts/utils/UriReader.dart';
 import 'package:path/path.dart';
