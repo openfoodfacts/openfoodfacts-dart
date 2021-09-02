@@ -1,11 +1,12 @@
-import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 
 import 'QueryType.dart';
 
+///Helper class for constructing urls with the in the [OpenFoodAPIConfiguration] specified settings
 class UriHelper {
   UriHelper._();
 
+  ///Returns a OFF uri with the in the [OpenFoodAPIConfiguration] specified settings
   static Uri getUri({
     String? path,
     Map<String, dynamic>? queryParameters,
@@ -22,6 +23,7 @@ class UriHelper {
     );
   }
 
+  ///Returns a OFF-Robotoff uri with the in the [OpenFoodAPIConfiguration] specified settings
   static Uri getRobotoffUri({
     String? path,
     Map<String, dynamic>? queryParameters,
