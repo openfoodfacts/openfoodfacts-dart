@@ -1,12 +1,12 @@
 import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/model/Attribute.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
-import 'package:openfoodfacts/utils/OpenFoodAPISettings.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/utils/InvalidBarcodes.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
+import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductQueryConfigurations.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
@@ -29,7 +29,7 @@ void main() {
   const _BARCODE_UNKNOWN = '11111111111111111111111111';
   const _BARCODE_DANISH_BUTTER_COOKIES = '5701184005007';
 
-  OpenFoodAPISettings.globalQueryType = QueryType.TEST;
+  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
 
   group('$OpenFoodAPIClient get products', () {
     test('get product Coca Cola Light', () async {

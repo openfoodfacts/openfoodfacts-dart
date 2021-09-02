@@ -1,15 +1,15 @@
-import 'package:openfoodfacts/utils/OpenFoodAPISettings.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/SendImage.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/model/Status.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
+import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {
-  OpenFoodAPISettings.globalQueryType = QueryType.TEST;
+  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
 
   group('$OpenFoodAPIClient add product images', () {
     test('add front image test', () async {

@@ -1,4 +1,4 @@
-import 'package:openfoodfacts/utils/OpenFoodAPISettings.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/UserAgent.dart';
 import 'package:openfoodfacts/utils/UriReader.dart';
 import 'package:path/path.dart';
@@ -9,6 +9,7 @@ import 'dart:convert';
 
 import '../model/Status.dart';
 import '../model/User.dart';
+import 'OpenFoodAPIConfiguration.dart';
 import 'QueryType.dart';
 
 /// General functions for sending http requests (post, get, multipart, ...)
@@ -36,7 +37,8 @@ class HttpHelper {
         user: user,
         userAgent: userAgent,
         isTestModeActive:
-            (queryType ?? OpenFoodAPISettings.globalQueryType) == QueryType.PROD
+            (queryType ?? OpenFoodAPIConfiguration.globalQueryType) ==
+                    QueryType.PROD
                 ? false
                 : true,
       ),
@@ -56,7 +58,7 @@ class HttpHelper {
       headers: _buildHeaders(
           user: user,
           isTestModeActive:
-              (queryType ?? OpenFoodAPISettings.globalQueryType) ==
+              (queryType ?? OpenFoodAPIConfiguration.globalQueryType) ==
                       QueryType.PROD
                   ? false
                   : true),
@@ -82,7 +84,8 @@ class HttpHelper {
       _buildHeaders(
         user: user,
         isTestModeActive:
-            (queryType ?? OpenFoodAPISettings.globalQueryType) == QueryType.PROD
+            (queryType ?? OpenFoodAPIConfiguration.globalQueryType) ==
+                    QueryType.PROD
                 ? false
                 : true,
       ) as Map<String, String>,

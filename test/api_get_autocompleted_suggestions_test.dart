@@ -1,12 +1,12 @@
-import 'package:openfoodfacts/utils/OpenFoodAPISettings.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
+import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
 import 'package:test/test.dart';
 
 void main() {
-  OpenFoodAPISettings.globalQueryType = QueryType.TEST;
+  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
 
   group('$OpenFoodAPIClient Suggestions and autocompletion', () {
     test('Suggestions for countries', () async {
