@@ -711,10 +711,7 @@ void main() {
       ProductResult result = await OpenFoodAPIClient.getProduct(
         configurations,
         user: TestConstants.TEST_USER,
-        queryType: QueryType.PROD,
       );
-
-      expect(result.product!.toData(), ProductResult());
 
       expect(result.status, 1);
       expect(result.barcode, barcode);
@@ -725,7 +722,7 @@ void main() {
 
       expect(result.product!.ingredients != null, true);
       expect(result.product!.ingredients!.length, 7);
-      expect(result.product!.ingredients!.any((i) => i.text == 'e150d'), true);
+      expect(result.product!.ingredients!.any((i) => i.text == 'Aroma'), true);
 
       expect(result.product!.additives!.ids[0], 'en:e150d');
       expect(result.product!.additives!.names[0], 'E150d');
@@ -749,7 +746,7 @@ void main() {
                   image.size == ImageSize.DISPLAY &&
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
-          'https://static.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
+          'https://static.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
 
       //Get product without setting ProductField
       configurations = ProductQueryConfiguration(barcode,
