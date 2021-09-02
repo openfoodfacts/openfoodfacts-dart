@@ -19,14 +19,6 @@ part 'Product.g.dart';
 
 /// Possible improvements on a [Product] given its current data
 enum ProductImprovement {
-  /// * Possible message:
-  /// “The Eco-Score takes into account environmental labels. Please take them
-  /// into photo or edit the product so that they can be taken into account.”
-  /// * Asking your users for a photo should be enough.
-  /// * You can otherwise add toggles for explicit labels (please add a photo
-  /// of them to avoid mistakes)
-  LABELS_TO_BE_COMPLETED,
-
   /// Possible message:
   /// “The Eco-Score takes into account the origins of the ingredients.
   /// Please take them into a photo (ingredient list and/or any geographic claim
@@ -523,9 +515,6 @@ class Product extends JsonObject {
     final Set<ProductImprovement> result = {};
     if (statesTags == null) {
       return result;
-    }
-    if (statesTags!.contains('en:labels-to-be-completed')) {
-      result.add(ProductImprovement.LABELS_TO_BE_COMPLETED);
     }
     if (statesTags!.contains('en:origins-to-be-completed')) {
       result.add(ProductImprovement.ORIGINS_TO_BE_COMPLETED);

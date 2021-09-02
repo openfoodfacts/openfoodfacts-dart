@@ -665,8 +665,6 @@ void main() {
 
       final Set<ProductImprovement> improvements =
           result.product!.getProductImprovements();
-      expect(improvements.contains(ProductImprovement.LABELS_TO_BE_COMPLETED),
-          false);
       expect(improvements.contains(ProductImprovement.ORIGINS_TO_BE_COMPLETED),
           false);
     });
@@ -828,8 +826,6 @@ void main() {
 
       final Set<ProductImprovement> improvements =
           result.product!.getProductImprovements();
-      expect(improvements.contains(ProductImprovement.LABELS_TO_BE_COMPLETED),
-          false);
       expect(improvements.contains(ProductImprovement.ORIGINS_TO_BE_COMPLETED),
           true);
     });
