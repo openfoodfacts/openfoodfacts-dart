@@ -3,6 +3,7 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
+import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductQueryConfigurations.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
@@ -11,12 +12,16 @@ import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {
+  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+
   group('$OpenFoodAPIClient get raw products', () {
     test('get product test 1', () async {
       String barcode = '8008698011065';
       ProductResult result = await OpenFoodAPIClient.getProductRaw(
-          barcode, OpenFoodFactsLanguage.GERMAN,
-          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
+        barcode,
+        OpenFoodFactsLanguage.GERMAN,
+        user: TestConstants.TEST_USER,
+      );
 
       expect(result.status, 1);
       expect(result.barcode, barcode);
@@ -88,8 +93,10 @@ void main() {
           barcode,
           language: OpenFoodFactsLanguage.ENGLISH,
           fields: [ProductField.ALL]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
-          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
+      ProductResult result = await OpenFoodAPIClient.getProduct(
+        configurations,
+        user: TestConstants.TEST_USER,
+      );
       expect(result.status, 1);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
@@ -106,8 +113,10 @@ void main() {
       String barcode = '4388810057787';
 
       ProductResult result = await OpenFoodAPIClient.getProductRaw(
-          barcode, OpenFoodFactsLanguage.GERMAN,
-          user: TestConstants.TEST_USER, queryType: QueryType.TEST);
+        barcode,
+        OpenFoodFactsLanguage.GERMAN,
+        user: TestConstants.TEST_USER,
+      );
 
       expect(result.status, 1);
       expect(result.barcode, barcode);

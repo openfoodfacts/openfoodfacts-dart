@@ -1,17 +1,20 @@
 import 'package:openfoodfacts/model/Insight.dart';
 import 'package:openfoodfacts/model/RobotoffQuestion.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {
+  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+
   group('$OpenFoodAPIClient answer robotoff question', () {
     test('get questions for Noix de Saint-Jacques EN and answer', () async {
       RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
               '0080868000633', 'en', TestConstants.TEST_USER,
-              queryType: QueryType.TEST, count: 1);
+              count: 1);
 
       if (result.status == 'found') {
         Status postResult = await OpenFoodAPIClient.postInsightAnnotation(

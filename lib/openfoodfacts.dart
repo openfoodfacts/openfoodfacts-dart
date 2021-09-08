@@ -74,8 +74,7 @@ class OpenFoodAPIClient {
   static Future<Status> saveProduct(
     User user,
     Product product, {
-    @Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-        QueryType? queryType,
+    QueryType? queryType,
   }) async {
     var parameterMap = <String, String>{};
     parameterMap.addAll(user.toData());
@@ -113,10 +112,10 @@ class OpenFoodAPIClient {
   /// By default the query will hit the PROD DB
   /// Returns a Status object as result.
   static Future<Status> addProductImage(
-      User user,
-      SendImage image,
-      {@Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-          QueryType? queryType}) async {
+    User user,
+    SendImage image, {
+    QueryType? queryType,
+  }) async {
     var dataMap = <String, String>{};
     var fileMap = <String, Uri>{};
 
@@ -149,8 +148,7 @@ class OpenFoodAPIClient {
     String barcode,
     OpenFoodFactsLanguage language, {
     User? user,
-    @Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-        QueryType? queryType,
+    QueryType? queryType,
   }) async {
     var productUri = UriHelper.getUri(
       path: 'api/v0/product/$barcode.json',
@@ -176,10 +174,10 @@ class OpenFoodAPIClient {
   /// Please read the language mechanics explanation if you intend to show
   /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
   static Future<ProductResult> getProduct(
-      ProductQueryConfiguration configuration,
-      {User? user,
-      @Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-          QueryType? queryType}) async {
+    ProductQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) async {
     var productUri = UriHelper.getUri(
       path: 'api/v0/product/${configuration.barcode}.json',
       queryParameters: configuration.getParametersMap(),
@@ -217,8 +215,7 @@ class OpenFoodAPIClient {
   static Future<SearchResult> searchProducts(
     User? user,
     ProductSearchQueryConfiguration configuration, {
-    @Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-        QueryType? queryType,
+    QueryType? queryType,
   }) async {
     var searchUri = UriHelper.getUri(
       path: '/cgi/search.pl',
@@ -244,8 +241,7 @@ class OpenFoodAPIClient {
   static Future<SearchResult> getProductList(
     User? user,
     ProductListQueryConfiguration configuration, {
-    @Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-        QueryType? queryType,
+    QueryType? queryType,
   }) async {
     final Uri uri = UriHelper.getUri(
       path: 'products/${configuration.barcodes.join(',')}.json',
@@ -274,8 +270,7 @@ class OpenFoodAPIClient {
   static Future<SearchResult> queryPnnsGroup(
     User user,
     PnnsGroupQueryConfiguration configuration, {
-    @Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-        QueryType? queryType,
+    QueryType? queryType,
   }) async {
     var searchUri = UriHelper.getUri(
       path: '/pnns-group-2/${configuration.group.id}/${configuration.page}',
@@ -310,13 +305,13 @@ class OpenFoodAPIClient {
 
   /// By default the query will hit the PROD DB
   static Future<InsightsResult> getRandomInsight(
-      User user,
-      {InsightType? type,
-      String? country,
-      String? valueTag,
-      String? serverDomain,
-      @Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-          QueryType? queryType}) async {
+    User user, {
+    InsightType? type,
+    String? country,
+    String? valueTag,
+    String? serverDomain,
+    QueryType? queryType,
+  }) async {
     final Map<String, String?> parameters = {};
 
     if (type != null) {
@@ -352,8 +347,7 @@ class OpenFoodAPIClient {
   static Future<InsightsResult> getProductInsights(
     String barcode,
     User user, {
-    @Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-        QueryType? queryType,
+    QueryType? queryType,
   }) async {
     var insightsUri = UriHelper.getRobotoffUri(
       path: 'api/v1/insights/$barcode',
@@ -375,8 +369,7 @@ class OpenFoodAPIClient {
     String lang,
     User user, {
     int? count,
-    @Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-        QueryType? queryType,
+    QueryType? queryType,
   }) async {
     if (count == null || count <= 0) {
       count = 1;
@@ -409,8 +402,7 @@ class OpenFoodAPIClient {
     User user, {
     int? count,
     required List<InsightType> types,
-    @Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-        QueryType? queryType,
+    QueryType? queryType,
   }) async {
     if (count == null || count <= 0) {
       count = 1;
@@ -514,8 +506,7 @@ class OpenFoodAPIClient {
     String barcode,
     OpenFoodFactsLanguage language, {
     OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
-    @Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-        QueryType? queryType,
+    QueryType? queryType,
   }) async {
     var ocrUri = UriHelper.getUri(
       path: '/cgi/ingredients.pl',
@@ -549,8 +540,7 @@ class OpenFoodAPIClient {
     TagType tagType, {
     String input = '',
     OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
-    @Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-        QueryType? queryType,
+    QueryType? queryType,
   }) async {
     var suggestionUri = UriHelper.getUri(
         path: '/cgi/suggest.pl',
@@ -573,9 +563,9 @@ class OpenFoodAPIClient {
   /// Uses the auth.pl API to see if login was successful
   /// Returns a bool if the login data of the provided user is correct
   static Future<bool> login(
-      User user,
-      {@Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-          QueryType? queryType}) async {
+    User user, {
+    QueryType? queryType,
+  }) async {
     var loginUri = UriHelper.getUri(
       path: '/cgi/auth.pl',
       queryType: queryType,
@@ -595,8 +585,7 @@ class OpenFoodAPIClient {
     required String email,
     String? requested_org,
     bool newsletter = true,
-    @Deprecated('Use OpenFoodAPIConfiguration.globalQueryType instead')
-        QueryType? queryType,
+    QueryType? queryType,
   }) async {
     var registerUri = UriHelper.getUri(
       path: '/cgi/user.pl',

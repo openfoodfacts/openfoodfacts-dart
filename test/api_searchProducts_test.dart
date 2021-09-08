@@ -6,6 +6,7 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/SearchResult.dart';
 import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
+import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
@@ -16,6 +17,8 @@ import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {
+  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+
   group('$OpenFoodAPIClient search products', () {
     test('search favorite products', () async {
       var parameters = <Parameter>[
@@ -33,7 +36,6 @@ void main() {
       SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.TEST_USER,
         configuration,
-        queryType: QueryType.TEST,
       );
 
       expect(result.page, 1);
@@ -58,8 +60,9 @@ void main() {
               language: OpenFoodFactsLanguage.ENGLISH);
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER, configuration,
-          queryType: QueryType.TEST);
+        TestConstants.TEST_USER,
+        configuration,
+      );
 
       expect(result.page, 14);
       expect(result.pageSize, 3);
@@ -83,8 +86,9 @@ void main() {
               language: OpenFoodFactsLanguage.GERMAN);
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER, configuration,
-          queryType: QueryType.TEST);
+        TestConstants.TEST_USER,
+        configuration,
+      );
 
       expect(result.page, 16);
       expect(result.pageSize, 5);
@@ -110,7 +114,6 @@ void main() {
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.TEST_USER,
         configuration,
-        queryType: QueryType.TEST,
       );
 
       expect(result.page, 2);
@@ -145,7 +148,6 @@ void main() {
         final SearchResult result = await OpenFoodAPIClient.searchProducts(
           TestConstants.TEST_USER,
           configuration,
-          queryType: QueryType.TEST,
         );
 
         counts[withoutAdditives] = result.count!;
@@ -174,8 +176,9 @@ void main() {
               language: OpenFoodFactsLanguage.FRENCH);
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER, configuration,
-          queryType: QueryType.TEST);
+        TestConstants.TEST_USER,
+        configuration,
+      );
 
       expect(result.page, 5);
       expect(result.pageSize, 10);
@@ -196,8 +199,10 @@ void main() {
           lang: OpenFoodFactsLanguage.GERMAN,
           brands: 'Quoted Coca "Cola"');
 
-      await OpenFoodAPIClient.saveProduct(TestConstants.TEST_USER, product,
-          queryType: QueryType.TEST);
+      await OpenFoodAPIClient.saveProduct(
+        TestConstants.TEST_USER,
+        product,
+      );
 
       var parameters = <Parameter>[
         const Page(page: 1),
@@ -211,8 +216,9 @@ void main() {
               language: OpenFoodFactsLanguage.GERMAN);
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER, configuration,
-          queryType: QueryType.TEST);
+        TestConstants.TEST_USER,
+        configuration,
+      );
 
       expect(result.products!.length, 1);
       expect(result.products![0].productName, equals('Quoted Coca "cola"'));
@@ -280,7 +286,6 @@ void main() {
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.TEST_USER,
         configuration,
-        queryType: QueryType.TEST,
       );
 
       expect(result.page, 3);
