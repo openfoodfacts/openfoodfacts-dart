@@ -22,6 +22,7 @@ Nutriments _$NutrimentsFromJson(Map<String, dynamic> json) => Nutriments(
       fiberServing: JsonObject.parseDouble(json['fiber_serving']),
       sugarsServing: JsonObject.parseDouble(json['sugars_serving']),
       fatServing: JsonObject.parseDouble(json['fat_serving']),
+      fatUnit: UnitHelper.stringToUnit(json['fat_unit'] as String?),
       saturatedFatServing:
           JsonObject.parseDouble(json['saturated-fat_serving']),
       proteinsServing: JsonObject.parseDouble(json['proteins_serving']),
@@ -30,6 +31,8 @@ Nutriments _$NutrimentsFromJson(Map<String, dynamic> json) => Nutriments(
       energyServing: JsonObject.parseDouble(json['energy_serving']),
       carbohydratesServing:
           JsonObject.parseDouble(json['carbohydrates_serving']),
+      carbohydratesUnit:
+          UnitHelper.stringToUnit(json['carbohydrates_unit'] as String?),
       energyKcalUnit:
           UnitHelper.stringToUnit(json['energy-kcal_unit'] as String?),
       energyUnit: UnitHelper.stringToUnit(json['energy_unit'] as String?),
@@ -244,12 +247,14 @@ Map<String, dynamic> _$NutrimentsToJson(Nutriments instance) {
   writeNotNull('fiber_serving', instance.fiberServing);
   writeNotNull('sugars_serving', instance.sugarsServing);
   writeNotNull('fat_serving', instance.fatServing);
+  writeNotNull('fat_unit', _$UnitEnumMap[instance.fatUnit]);
   writeNotNull('saturated-fat_serving', instance.saturatedFatServing);
   writeNotNull('proteins_serving', instance.proteinsServing);
   writeNotNull('proteins_unit', _$UnitEnumMap[instance.proteinsUnit]);
   writeNotNull('nova-group_serving', instance.novaGroupServing);
   writeNotNull('energy_serving', instance.energyServing);
   writeNotNull('carbohydrates_serving', instance.carbohydratesServing);
+  writeNotNull('carbohydrates_unit', _$UnitEnumMap[instance.carbohydratesUnit]);
   writeNotNull('energy_unit', _$UnitEnumMap[instance.energyUnit]);
   writeNotNull('energy-kcal_unit', _$UnitEnumMap[instance.energyKcalUnit]);
   writeNotNull('caffeine_serving', instance.caffeineServing);
