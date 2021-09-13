@@ -110,7 +110,10 @@ class Nutriments extends JsonObject {
 
   /// Typical Unit for Fat
   @JsonKey(
-      name: 'fat_unit', includeIfNull: false, fromJson: UnitHelper.stringToUnit)
+      name: 'fat_unit',
+      includeIfNull: false,
+      toJson: UnitHelper.unitToString,
+      fromJson: UnitHelper.stringToUnit)
   Unit? fatUnit;
 
   /// Saturated Fats, in grams, per serving
@@ -131,6 +134,7 @@ class Nutriments extends JsonObject {
   @JsonKey(
       name: 'proteins_unit',
       includeIfNull: false,
+      toJson: UnitHelper.unitToString,
       fromJson: UnitHelper.stringToUnit)
   Unit? proteinsUnit;
 
@@ -159,6 +163,7 @@ class Nutriments extends JsonObject {
   @JsonKey(
       name: 'carbohydrates_unit',
       includeIfNull: false,
+      toJson: UnitHelper.unitToString,
       fromJson: UnitHelper.stringToUnit)
   Unit? carbohydratesUnit;
 

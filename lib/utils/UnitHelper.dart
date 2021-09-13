@@ -35,6 +35,19 @@ class UnitHelper {
     'μg': Unit.MICRO_G,
   };
 
+  static const _POSSIBLE_SPELLINGS = {
+    Unit.KCAL: 'kcal',
+    Unit.KJ: 'kj',
+    Unit.G: 'g',
+    Unit.MILLI_G: 'mg',
+    Unit.MICRO_G: 'micro-gram',
+    Unit.MILLI_L: 'ml',
+    Unit.L: 'liter',
+    Unit.PERCENT: 'percent',
+  };
+
+  static String? unitToString(Unit? unit) => _POSSIBLE_SPELLINGS[unit];
+
   /// Returns the [Unit] described by [s]
   static Unit? stringToUnit(String? s) {
     if (s == null || s.isEmpty) {

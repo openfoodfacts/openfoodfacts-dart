@@ -247,14 +247,15 @@ Map<String, dynamic> _$NutrimentsToJson(Nutriments instance) {
   writeNotNull('fiber_serving', instance.fiberServing);
   writeNotNull('sugars_serving', instance.sugarsServing);
   writeNotNull('fat_serving', instance.fatServing);
-  writeNotNull('fat_unit', _$UnitEnumMap[instance.fatUnit]);
+  writeNotNull('fat_unit', UnitHelper.unitToString(instance.fatUnit));
   writeNotNull('saturated-fat_serving', instance.saturatedFatServing);
   writeNotNull('proteins_serving', instance.proteinsServing);
-  writeNotNull('proteins_unit', _$UnitEnumMap[instance.proteinsUnit]);
+  writeNotNull('proteins_unit', UnitHelper.unitToString(instance.proteinsUnit));
   writeNotNull('nova-group_serving', instance.novaGroupServing);
   writeNotNull('energy_serving', instance.energyServing);
   writeNotNull('carbohydrates_serving', instance.carbohydratesServing);
-  writeNotNull('carbohydrates_unit', _$UnitEnumMap[instance.carbohydratesUnit]);
+  writeNotNull('carbohydrates_unit',
+      UnitHelper.unitToString(instance.carbohydratesUnit));
   writeNotNull('energy_unit', _$UnitEnumMap[instance.energyUnit]);
   writeNotNull('energy-kcal_unit', _$UnitEnumMap[instance.energyKcalUnit]);
   writeNotNull('caffeine_serving', instance.caffeineServing);
