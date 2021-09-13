@@ -1,15 +1,17 @@
+import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:test/test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'test_constants.dart';
 
 void main() {
+  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
+
   test('Create user', () async {
     Status response = await OpenFoodAPIClient.register(
       name: 'Irrelevant',
       user: TestConstants.PROD_USER,
       email: 'grumpf@gmx.de',
-      queryType: QueryType.PROD,
     );
     expect(response.status, 400);
     expect(
@@ -17,8 +19,9 @@ void main() {
   });
 
   test('Login', () async {
-    bool response = await OpenFoodAPIClient.login(TestConstants.PROD_USER,
-        queryType: QueryType.PROD);
+    bool response = await OpenFoodAPIClient.login(
+      TestConstants.PROD_USER,
+    );
     expect(response, true);
   });
 }
