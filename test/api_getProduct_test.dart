@@ -306,8 +306,8 @@ void main() {
         user: user,
         queryType: queryType,
       );
-      expect(result.product!.nutriments!.biotin, .0000165);
-      expect(result.product!.nutriments!.biotinUnit, Unit.MICRO_G);
+      expect(result.product!.nutriments!.biotin, 0.0);
+      expect(result.product!.nutriments!.biotinUnit, Unit.G);
       expect(result.product!.nutriments!.biotinServing, null);
 
       result = await OpenFoodAPIClient.getProduct(
