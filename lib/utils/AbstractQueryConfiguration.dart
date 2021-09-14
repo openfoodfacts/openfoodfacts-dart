@@ -1,4 +1,5 @@
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
+import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 
 /// Abstract Query Configuration, that helps build API URI
@@ -20,7 +21,7 @@ abstract class AbstractQueryConfiguration {
   ///
   /// Please see https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
   /// for detailed explanation on how to work with multiple languages.
-  List<OpenFoodFactsLanguage> languages;
+  List<OpenFoodFactsLanguage>? languages;
 
   // TODO: deprecated from 2021-07-20 (#185); remove when old enough
   @Deprecated('Use parameters language or languages instead')
@@ -31,23 +32,35 @@ abstract class AbstractQueryConfiguration {
 
   AbstractQueryConfiguration({
     this.language,
-    this.languages = const [],
+    this.languages,
     this.lc,
     this.cc,
     this.fields,
   }) {
     fields ??= [ProductField.ALL];
-    if ((language != null || lc != null) && languages.isNotEmpty) {
-      throw ArgumentError(
-          '[languages] cannot be used together with [language]/[lc]');
+    if (languages != null) {
+      if ((language != null || lc != null) && languages!.isNotEmpty) {
+        throw ArgumentError(
+            '[languages] cannot be used together with [language]/[lc]');
+      }
     }
   }
 
   /// Returns the corresponding API URI parameter map
   Map<String, String> getParametersMap() {
     final Map<String, String> result = {};
+    late List<OpenFoodFactsLanguage> languages;
 
-    final languages = language != null ? [language!] : this.languages.toList();
+    if (language != null) {
+      languages = [language!];
+    } else if (this.languages != null && this.languages!.isNotEmpty) {
+      languages = this.languages!.toList();
+    } else if (OpenFoodAPIConfiguration.globalLanguages != null) {
+      languages = OpenFoodAPIConfiguration.globalLanguages!;
+    } else {
+      languages = const <OpenFoodFactsLanguage>[];
+    }
+
     if (languages.isNotEmpty) {
       result.putIfAbsent('lc', () => languages.map((e) => e.code).join(','));
     } else if (lc != null) {

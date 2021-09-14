@@ -1,5 +1,6 @@
 import 'package:openfoodfacts/model/UserAgent.dart';
 
+import 'LanguageHelper.dart';
 import 'QueryType.dart';
 
 ///Allows to configure the behavior of the package,
@@ -28,4 +29,9 @@ class OpenFoodAPIConfiguration {
 
   ///Changes whether the requests sent by this package to the test or main server.
   static QueryType globalQueryType = QueryType.PROD;
+
+  ///A global way to specify the languages for queries, can be overwritten
+  /// for each individual request by specifying the languages in the
+  /// request configurations
+  static List<OpenFoodFactsLanguage>? globalLanguages;
 }
