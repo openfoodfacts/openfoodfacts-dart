@@ -32,6 +32,11 @@ class OpenFoodAPIConfiguration {
 
   ///A global way to specify the languages for queries, can be overwritten
   /// for each individual request by specifying the languages in the
-  /// request configurations
+  /// individual request configurations
   static List<OpenFoodFactsLanguage>? globalLanguages;
+
+  ///A global way to specify the country code for queries, can be overwritten
+  /// for each individual request by specifying the country code in the
+  /// individual request configurations
+  static String? globalCC;
 }

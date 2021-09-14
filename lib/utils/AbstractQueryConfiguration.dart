@@ -69,6 +69,8 @@ abstract class AbstractQueryConfiguration {
 
     if (cc != null) {
       result.putIfAbsent('cc', () => cc!);
+    } else if (OpenFoodAPIConfiguration.globalCC != null) {
+      result.putIfAbsent('cc', () => OpenFoodAPIConfiguration.globalCC!);
     }
 
     if (fields != null) {
