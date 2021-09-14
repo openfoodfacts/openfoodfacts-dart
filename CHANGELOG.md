@@ -4,7 +4,7 @@
 - Fix alchohol tags in the `Nutriments` class
 - Allow user agent to be passed via HTTP header
 - Introduce `OpenFoodAPISettings` to improve API configuration support
-- Fix write api for nutrient fields
+- Fix write API for nutrient fields
 - Add missing `carbohydratesUnit` and `fatUnit` fields in the `Nutriements` class
 ## [1.3.2] - 25.07.2021
 - Fixed completely toJson and fromJson for the fields in multiple languages
