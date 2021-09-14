@@ -1,3 +1,11 @@
+## [1.3.3] - 14.09.2021
+- Support for `KnowledgePanel`s
+- Add ability to request the `product_name_languages` and `ingredients_text_languages` fields
+- Fix alchohol tags in the `Nutriments` class
+- Allow user agent to be passed via HTTP header
+- Introduce `OpenFoodAPISettings` to improve API configuration support
+- Fix write api for nutrient fields
+- Add missing `carbohydratesUnit` and `fatUnit` fields in the `Nutriements` class
 ## [1.3.2] - 25.07.2021
 - Fixed completely toJson and fromJson for the fields in multiple languages
 ## [1.3.1] - 22.07.2021
