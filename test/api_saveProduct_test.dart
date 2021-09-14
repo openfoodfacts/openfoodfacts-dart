@@ -300,6 +300,8 @@ void main() {
           ['en:product-categories-test-1', 'en:product-categories-test-2']);
     });
 
+    Unit _getMassUnit(int i) => i == 1 ? Unit.MICRO_G : Unit.G;
+
     test('confirm that nutrient fields are saved', () async {
       const User USER = TestConstants.TEST_USER;
       const double ENERGY = 365;
@@ -312,12 +314,14 @@ void main() {
 
       for (int i = 1; i >= 0; i--) {
         final Nutriments nutriments = Nutriments(
-          energy: ENERGY + i,
-          energyUnit: Unit.KJ,
-          carbohydrates: CARBOHYDRATES + i,
-          proteins: PROTEINS + i,
-          fat: FAT + i,
-        );
+            energy: ENERGY + i,
+            energyUnit: Unit.KJ,
+            carbohydrates: CARBOHYDRATES + i,
+            carbohydratesUnit: _getMassUnit(i),
+            proteins: PROTEINS + i,
+            proteinsUnit: _getMassUnit(i),
+            fat: FAT + i,
+            fatUnit: _getMassUnit(i));
 
         final Product newProduct = Product(
           barcode: BARCODE,
@@ -353,8 +357,12 @@ void main() {
           if (searchedNutriments != null) {
             expect(searchedNutriments.energy, nutriments.energy);
             expect(searchedNutriments.carbohydrates, nutriments.carbohydrates);
+            expect(searchedNutriments.carbohydratesUnit,
+                nutriments.carbohydratesUnit);
             expect(searchedNutriments.proteins, nutriments.proteins);
+            expect(searchedNutriments.proteinsUnit, nutriments.proteinsUnit);
             expect(searchedNutriments.fat, nutriments.fat);
+            expect(searchedNutriments.fatUnit, nutriments.fatUnit);
           }
         }
       }
