@@ -49,20 +49,23 @@ abstract class AbstractQueryConfiguration {
   /// Returns the corresponding API URI parameter map
   Map<String, String> getParametersMap() {
     final Map<String, String> result = {};
-    late List<OpenFoodFactsLanguage> languages;
+
+    //the languages added to the query parameters, not named languages to avoid confusion
+    late final List<OpenFoodFactsLanguage> queryLanguages;
 
     if (language != null) {
-      languages = [language!];
-    } else if (this.languages != null && this.languages!.isNotEmpty) {
-      languages = this.languages!.toList();
+      queryLanguages = [language!];
+    } else if (languages != null) {
+      queryLanguages = languages!.toList();
     } else if (OpenFoodAPIConfiguration.globalLanguages != null) {
-      languages = OpenFoodAPIConfiguration.globalLanguages!;
+      queryLanguages = OpenFoodAPIConfiguration.globalLanguages!;
     } else {
-      languages = const <OpenFoodFactsLanguage>[];
+      queryLanguages = const <OpenFoodFactsLanguage>[];
     }
 
-    if (languages.isNotEmpty) {
-      result.putIfAbsent('lc', () => languages.map((e) => e.code).join(','));
+    if (queryLanguages.isNotEmpty) {
+      result.putIfAbsent(
+          'lc', () => queryLanguages.map((e) => e.code).join(','));
     } else if (lc != null) {
       result.putIfAbsent('lc', () => lc!);
     }
@@ -78,7 +81,7 @@ abstract class AbstractQueryConfiguration {
         (field) => field == ProductField.ALL,
       );
       if (!ignoreFieldsFilter) {
-        final fieldsStrings = convertFieldsToStrings(fields!, languages);
+        final fieldsStrings = convertFieldsToStrings(fields!, queryLanguages);
         result.putIfAbsent('fields', () => fieldsStrings.join(','));
       }
     }
