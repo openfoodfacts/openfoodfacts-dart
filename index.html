@@ -49,21 +49,25 @@
 <a href="https://pub.dev/packages/openfoodfacts/score"><img src="https://badges.bar/openfoodfacts/popularity" alt="popularity"></a>
 <a href="https://pub.dev/packages/openfoodfacts/score"><img src="https://badges.bar/openfoodfacts/pub%20points" alt="pub points"></a></p>
 <h1 id="open-food-facts---dart">Open Food Facts - Dart</h1>
-<p>Dart package for the Open Food Facts API. Easily access to more than 1.6 million products from all around the world.
+<p>Dart package for the Open Food Facts API. Easily access to more than 1.9 million products from all around the world.
 Open Food Facts is powered by contributors from around the world and is constantly growing thanks to them.</p>
+<h2 id="how-to-use-">How to use ?</h2>
+<p>You can find the full documentation here : <a href="https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md">Documentation</a>.
+You can find automated code documentation here:  <a href="https://openfoodfacts.github.io/openfoodfacts-dart/">Documentation</a>.</p>
 <h2 id="general-principles">General principles</h2>
 <ul>
 <li>You can look for information about products, including many useful computed values.</li>
 <li>If you can't get the information on a specific product, you can get your user to send photos and data, that will then be processed by Open Food Facts AI and contributors to get the computed result you want to show them.</li>
 <li>You can also implement the complete flow so that they get immediately the result with some effort on their side.</li>
 </ul>
-<h2 id="if-your-users-do-not-expect-a-specific-result-immediately-eg-inventory-apps">If your users do not expect a specific result immediately (eg. Inventory apps)</h2>
+<h2 id="contributing">Contributing</h2>
+<h3 id="if-your-users-do-not-expect-a-specific-result-immediately-eg-inventory-apps">If your users do not expect a specific result immediately (eg. Inventory apps)</h3>
 <ul>
 <li>Send photos (front/nutrition/ingredients/packaging): most painless thing for your users</li>
 <li>The Open Food Facts AI Robotoff will generate some derived data from the photos</li>
 <li>Overtime, other apps, and the Open Food Facts community will fill the data gaps</li>
 </ul>
-<h2 id="if-your-users-do-expect-a-result-immediately-eg-nutrition-apps-scoring-apps">If your users do expect a result immediately (eg Nutrition apps, Scoring apps…):</h2>
+<h3 id="if-your-users-do-expect-a-result-immediately-eg-nutrition-apps-scoring-apps">If your users do expect a result immediately (eg Nutrition apps, Scoring apps…):</h3>
 <ul>
 <li>Send nutrition facts + category &gt; get the Nutri-Score</li>
 <li>Send ingredients &gt; get the NOVA group (about food ultra-processing), additives, allergens, normalized ingredients, vegan, vegetarian…</li>
@@ -115,7 +119,6 @@ You can check the terms of use here : <a href="https://world.openfoodfacts.org/t
 <li><code>x</code> Extract ingredients from ingredients image: User can extract the ingredients text if it is missing</li>
 <li><code>x</code> Get the OCR of the ingredients photo (for validation purposes)</li>
 </ul>
-<h3 id="other">Other</h3>
 <h2 id="roadmap">Roadmap</h2>
 <p>List of new APIs to implement: <a href="https://github.com/openfoodfacts/api-documentation/issues">https://github.com/openfoodfacts/api-documentation/issues</a></p>
 <h3 id="read-2">READ</h3>
@@ -126,7 +129,7 @@ You can check the terms of use here : <a href="https://world.openfoodfacts.org/t
 <ul>
 <li><code> </code> Photo operations (rotate, crop, select, unselect with language awareness)</li>
 </ul>
-<h3 id="other-2">Other</h3>
+<h3 id="other">Other</h3>
 <h2 id="contribute">Contribute</h2>
 <p>There are many ways to contribute, and Open Food Facts has a lot of projects beside this package.
 Most of our operations are coordinated through our Slack which you can join here : <a href="https://openfoodfacts.slack.com">Open Food Facts Slack</a>.</p>
@@ -135,9 +138,6 @@ Most of our operations are coordinated through our Slack which you can join here
 <p>Execute the following command from the root of the repository to run the tests:</p>
 <pre class="language-dart"><code>dart test
 </code></pre>
-<h2 id="how-to-use-">How to use ?</h2>
-<p>You can find the full documentation here : <a href="https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md">Documentation</a>.
-You can find automated code documentation here:  <a href="https://openfoodfacts.github.io/openfoodfacts-dart/">Documentation</a>.</p>
 <h2 id="authors">Authors</h2>
 <ul>
 <li>Alexander Schacht - <a href="https://github.com/Grumpf86">Grumpf86</a></li>
