@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the uriScheme property from the OpenFoodAPIConfiguration class, for the Dart programming language.">
-  <title>uriScheme property - OpenFoodAPIConfiguration class - OpenFoodAPIConfiguration library - Dart API</title>
+  <meta name="description" content="API docs for the globalLanguages property from the OpenFoodAPIConfiguration class, for the Dart programming language.">
+  <title>globalLanguages property - OpenFoodAPIConfiguration class - OpenFoodAPIConfiguration library - Dart API</title>
 
 
   
@@ -32,9 +32,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../utils_OpenFoodAPIConfiguration/utils_OpenFoodAPIConfiguration-library.html">OpenFoodAPIConfiguration</a></li>
     <li><a href="../../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration-class.html">OpenFoodAPIConfiguration</a></li>
-    <li class="self-crumb">uriScheme property</li>
+    <li class="self-crumb">globalLanguages property</li>
   </ol>
-  <div class="self-name">uriScheme</div>
+  <div class="self-name">globalLanguages</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -45,25 +45,27 @@
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
-<h1><span class="kind-property">uriScheme</span> property 
+<h1><span class="kind-property">globalLanguages</span> property 
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
 </h1></div>
 
         <section class="multi-line-signature">
-          <a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a>
-          <span class="name ">uriScheme</span>
+          <a href="https://api.dart.dev/stable/2.14.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>&gt;</span>?
+          <span class="name ">globalLanguages</span>
           <div class="features">read / write</div>
 
         </section>
         
 <section class="desc markdown">
-  <p>change the uriScheme of the requests</p>
+  <p>A global way to specify the languages for queries, can be overwritten
+for each individual request by specifying the languages in the
+individual request configurations</p>
 </section>
 
         
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static String uriScheme = &#39;https&#39;;
+  <pre class="language-dart"><code class="language-dart">static List&lt;OpenFoodFactsLanguage&gt;? globalLanguages;
 
 </code></pre>
 </section>
@@ -82,7 +84,7 @@
   <li><a href="../../index.html">openfoodfacts</a></li>
   <li><a href="../../utils_OpenFoodAPIConfiguration/utils_OpenFoodAPIConfiguration-library.html">OpenFoodAPIConfiguration</a></li>
   <li><a href="../../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration-class.html">OpenFoodAPIConfiguration</a></li>
-  <li class="self-crumb">uriScheme property</li>
+  <li class="self-crumb">globalLanguages property</li>
 </ol>
 
 

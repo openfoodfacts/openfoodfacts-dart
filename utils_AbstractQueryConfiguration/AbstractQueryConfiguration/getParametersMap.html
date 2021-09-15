@@ -70,15 +70,30 @@
   <pre class="language-dart"><code class="language-dart">Map&lt;String, String&gt; getParametersMap() {
   final Map&lt;String, String&gt; result = {};
 
-  final languages = language != null ? [language!] : this.languages.toList();
-  if (languages.isNotEmpty) {
-    result.putIfAbsent(&#39;lc&#39;, () =&gt; languages.map((e) =&gt; e.code).join(&#39;,&#39;));
+  &#47;&#47;the languages added to the query parameters, not named languages to avoid confusion
+  late final List&lt;OpenFoodFactsLanguage&gt; queryLanguages;
+
+  if (language != null) {
+    queryLanguages = [language!];
+  } else if (languages != null) {
+    queryLanguages = languages!.toList();
+  } else if (OpenFoodAPIConfiguration.globalLanguages != null) {
+    queryLanguages = OpenFoodAPIConfiguration.globalLanguages!;
+  } else {
+    queryLanguages = const &lt;OpenFoodFactsLanguage&gt;[];
+  }
+
+  if (queryLanguages.isNotEmpty) {
+    result.putIfAbsent(
+        &#39;lc&#39;, () =&gt; queryLanguages.map((e) =&gt; e.code).join(&#39;,&#39;));
   } else if (lc != null) {
     result.putIfAbsent(&#39;lc&#39;, () =&gt; lc!);
   }
 
   if (cc != null) {
     result.putIfAbsent(&#39;cc&#39;, () =&gt; cc!);
+  } else if (OpenFoodAPIConfiguration.globalCC != null) {
+    result.putIfAbsent(&#39;cc&#39;, () =&gt; OpenFoodAPIConfiguration.globalCC!);
   }
 
   if (fields != null) {
@@ -86,7 +101,7 @@
       (field) =&gt; field == ProductField.ALL,
     );
     if (!ignoreFieldsFilter) {
-      final fieldsStrings = convertFieldsToStrings(fields!, languages);
+      final fieldsStrings = convertFieldsToStrings(fields!, queryLanguages);
       result.putIfAbsent(&#39;fields&#39;, () =&gt; fieldsStrings.join(&#39;,&#39;));
     }
   }
