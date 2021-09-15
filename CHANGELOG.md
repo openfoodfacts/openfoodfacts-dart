@@ -1,5 +1,4 @@
 ## [1.3.3] - 14.09.2021
-- Support for `KnowledgePanel`s
 - Add ability to request the `product_name_languages` and `ingredients_text_languages` fields
 - Fix alchohol tags in the `Nutriments` class
 - Allow user agent to be passed via HTTP header
