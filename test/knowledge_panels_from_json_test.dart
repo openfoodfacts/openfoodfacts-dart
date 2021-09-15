@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:openfoodfacts/model/KnowledgePanel.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:test/test.dart';
 
