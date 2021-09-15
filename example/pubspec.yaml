@@ -1,8 +1,7 @@
 name: example
 description: example for this dart API
 version: 0.0.2
-author: Alexander Schacht <grumpf@gmx.de>
-homepage: https://github.com/Grumpf86/openfoodfacts-dart
+homepage: https://github.com/openfoodfacts/openfoodfacts-dart
 publish_to: none
 
 environment:
