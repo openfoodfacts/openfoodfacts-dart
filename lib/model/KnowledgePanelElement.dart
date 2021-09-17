@@ -162,7 +162,7 @@ class KnowledgePanelTableElement extends JsonObject {
 
   final String title;
 
-  @JsonKey(name: "columns")
+  @JsonKey(name: 'columns')
   final List<KnowledgePanelTableColumnDescriptor> columnsDescriptor;
 
   final List<KnowledgePanelTableRowElement> rows;
