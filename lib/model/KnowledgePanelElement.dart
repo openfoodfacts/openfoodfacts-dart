@@ -218,6 +218,7 @@ class KnowledgePanelElement extends JsonObject {
   final KnowledgePanelImageElement? imageElement;
 
   /// Id of a KnowledgePanel embedded inside [this] KnowledgePanel.
+  @JsonValue('panel_element')
   final KnowledgePanelPanelIdElement? panelIdElement;
 
   /// Id of a KnowledgePanel embedded inside [this] KnowledgePanel.
