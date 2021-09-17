@@ -2,6 +2,7 @@ library openfoodfacts;
 
 import 'dart:convert';
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
@@ -699,8 +700,9 @@ class OpenFoodAPIClient {
       final Map<String, dynamic> knowledgePanelsJson =
           json['product'][KNOWLEDGE_PANELS_FIELD] as Map<String, dynamic>;
       return KnowledgePanels.fromJson(knowledgePanelsJson);
-    } catch (exception, stacktrace) {
-      print('Exception $exception has occurred.\nStacktrace: \n$stacktrace');
+    } catch (exception, stackTrace) {
+      // TODO(jasmeetsingh): Capture the exception in Sentry and don't log it here.
+      log('Exception $exception has occurred.\nStacktrace: \n$stackTrace');
       return KnowledgePanels.empty();
     }
   }
