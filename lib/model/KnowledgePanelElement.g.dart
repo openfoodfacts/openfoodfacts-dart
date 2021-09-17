@@ -106,8 +106,10 @@ KnowledgePanelTableRowElement _$KnowledgePanelTableRowElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTableRowElement(
       id: json['id'] as String,
-      values:
-          (json['values'] as List<dynamic>).map((e) => e as String).toList(),
+      values: (json['values'] as List<dynamic>)
+          .map((e) =>
+              KnowledgePanelTableCell.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$KnowledgePanelTableRowElementToJson(

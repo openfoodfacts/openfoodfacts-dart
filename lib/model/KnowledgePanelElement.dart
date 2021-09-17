@@ -93,6 +93,7 @@ class KnowledgePanelPanelIdElement extends JsonObject {
   Map<String, dynamic> toJson() => _$KnowledgePanelPanelIdElementToJson(this);
 }
 
+/// Provides the values for each table cell inside a KnowledgePanel table.
 @JsonSerializable()
 class KnowledgePanelTableCell extends JsonObject {
   @JsonKey(name: 'text')
@@ -118,7 +119,7 @@ class KnowledgePanelTableCell extends JsonObject {
 class KnowledgePanelTableRowElement extends JsonObject {
   final String id;
 
-  final List<String> values;
+  final List<KnowledgePanelTableCell> values;
 
   const KnowledgePanelTableRowElement({required this.id, required this.values});
 
@@ -129,6 +130,7 @@ class KnowledgePanelTableRowElement extends JsonObject {
   Map<String, dynamic> toJson() => _$KnowledgePanelTableRowElementToJson(this);
 }
 
+/// A descriptor that describes the type and label of each column.
 @JsonSerializable()
 class KnowledgePanelTableColumnDescriptor extends JsonObject {
   @JsonKey(name: 'text')
