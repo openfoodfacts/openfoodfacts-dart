@@ -17,6 +17,49 @@ import 'Nutriments.dart';
 
 part 'Product.g.dart';
 
+/// Possible improvements on a [Product] given its current data
+enum ProductImprovement {
+  /// Possible message:
+  /// “The Eco-Score takes into account the origins of the ingredients.
+  /// Please take them into a photo (ingredient list and/or any geographic claim
+  /// or edit the product so that they can be taken into account. If it is not
+  /// clear, you can contact the food producer.”
+  ORIGINS_TO_BE_COMPLETED,
+
+  /// We could not compute an Nutri-Score for this product. It might be that the
+  /// category is an exception. If you believe this is an error,
+  /// you can email contact@thenameofyourapp.org
+  /// List of exceptions:
+  /// https://www.santepubliquefrance.fr/content/download/150262/file/QR_scientifique_technique_150421.pdf
+  /// You can get states with
+  /// https://world.openfoodfacts.org/api/v0/product/3414280980209.json?fields=ecoscore_grade,states_tags
+  /// Add a message if we have a category but no nutrition
+  CATEGORIES_BUT_NO_NUTRISCORE,
+
+  /// Possible message: “Add nutrition facts to compute the Nutri-Score”
+  /// Add a one-click option to indicate no nutrition facts on the packaging
+  /// This product doesn't have nutrition facts
+  /// Add a message if we have nutrition but no category
+  ADD_NUTRITION_FACTS,
+
+  /// Possible message: “Add a category to compute the Nutri-Score”
+  /// Help the user add the category if it is missing
+  /// You can use our Robotoff API to get your users to validate a prediction
+  /// Robotoff Questions
+  /// Add a message if we have no category and no nutrition
+  ADD_CATEGORY,
+
+  /// Prompt: “Add nutrition facts and a category to compute the Nutri-Score”
+  /// Add a one-click option to indicate no nutrition facts on the packaging
+  /// This product doesn't have nutrition facts
+  /// Add a message if the nutrition image is missing
+  ADD_NUTRITION_FACTS_AND_CATEGORY,
+
+  /// Add a message if the nutrition image is obsolete using the image refresh API
+  /// https://github.com/openfoodfacts/api-documentation/issues/15
+  OBSOLETE_NUTRITION_IMAGE,
+}
+
 /// This class contains most of the data about a specific product.
 ///
 /// Please read the language mechanics explanation if you intend to display
@@ -459,6 +502,45 @@ class Product extends JsonObject {
         }
       }
     }
+    return result;
+  }
+
+  /// Returns all the potential improvements given the quality of the data
+  ///
+  /// For apps with contribution mode.
+  /// A typical use-case is to alert the end-users that they can improve
+  /// the quality of the OFF data by taking pictures (or something like that),
+  /// when displaying a [Product].
+  Set<ProductImprovement> getProductImprovements() {
+    final Set<ProductImprovement> result = {};
+    if (statesTags == null) {
+      return result;
+    }
+    if (statesTags!.contains('en:origins-to-be-completed')) {
+      result.add(ProductImprovement.ORIGINS_TO_BE_COMPLETED);
+    }
+    if (statesTags!.contains('en:categories-completed')) {
+      if (nutriscore == null) {
+        result.add(ProductImprovement.CATEGORIES_BUT_NO_NUTRISCORE);
+      }
+      if (statesTags!.contains('en:nutrition-facts-to-be-completed')) {
+        result.add(ProductImprovement.ADD_NUTRITION_FACTS);
+      }
+    }
+    if (statesTags!.contains('en:categories-to-be-completed')) {
+      if (statesTags!.contains('en:nutrition-facts-completed')) {
+        result.add(ProductImprovement.ADD_CATEGORY);
+      }
+      if (statesTags!.contains('en:nutrition-facts-to-be-completed')) {
+        result.add(ProductImprovement.ADD_NUTRITION_FACTS_AND_CATEGORY);
+      }
+    }
+    if (statesTags!.contains('en:nutrition-photo-to-be-selected') ||
+        statesTags!.contains('en:photos-to-be-uploaded')) {
+      result.add(ProductImprovement.OBSOLETE_NUTRITION_IMAGE);
+    }
+
+// TODO (Optional) Add Nutri-Score disclaimers cf. https://github.com/openfoodfacts/openfoodfacts-dart/issues/193
     return result;
   }
 }

@@ -1,3 +1,11 @@
+## [1.3.3] - 16.09.2021
+- Add ability to request the `product_name_languages` and `ingredients_text_languages` fields
+- Introduce `OpenFoodAPISettings` to improve API configuration support
+- Allow user agent to be passed via HTTP header
+- Added `getProductImprovements` to the product model
+- Add missing `carbohydratesUnit` and `fatUnit` fields in the `Nutriements` class
+- Fix alchohol tags in the `Nutriments` class
+- Fix write API for nutrient fields
 ## [1.3.2] - 25.07.2021
 - Fixed completely toJson and fromJson for the fields in multiple languages
 ## [1.3.1] - 22.07.2021

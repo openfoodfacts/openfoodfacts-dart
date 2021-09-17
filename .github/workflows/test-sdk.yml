@@ -3,10 +3,25 @@ name: test-sdk
 on: [push, pull_request]
 
 jobs:
-  build:
-    runs-on: ubuntu-20.04
+  #Prevents duplicate runs which cause conflicts on the test server
+  pre_job:
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
-    
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@master
+        with:
+          concurrent_skipping: 'same_content_newer'
+          skip_after_successful_duplicate: 'true'
+          paths_ignore: '["**/README.md"]'
+
+  main_job:
+    needs: pre_job
+    if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+
     - name: Chekout code
       uses: actions/checkout@v2
 
@@ -24,3 +39,4 @@ jobs:
 
     - name: Run tests
       run: dart test test/
+

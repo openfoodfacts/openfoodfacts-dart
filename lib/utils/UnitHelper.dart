@@ -3,6 +3,7 @@ enum Unit { KCAL, KJ, G, MILLI_G, MICRO_G, MILLI_L, L, PERCENT, UNKNOWN }
 
 /// Helper class for conversions to/from [Unit]
 class UnitHelper {
+  /// Maps a unit spelling to a [Unit]
   static const Map<String, Unit> _UNITS = {
     'kcal': Unit.KCAL,
     'kCal': Unit.KCAL,
@@ -35,6 +36,7 @@ class UnitHelper {
     'μg': Unit.MICRO_G,
   };
 
+  /// Maps a [Unit] to a unit spelling recognised by the write API
   static const _POSSIBLE_SPELLINGS = {
     Unit.KCAL: 'kcal',
     Unit.KJ: 'kj',
@@ -46,6 +48,7 @@ class UnitHelper {
     Unit.PERCENT: 'percent',
   };
 
+  /// Returns a unit spelling corresponding to the type of [unit]
   static String? unitToString(Unit? unit) => _POSSIBLE_SPELLINGS[unit];
 
   /// Returns the [Unit] described by [s]
