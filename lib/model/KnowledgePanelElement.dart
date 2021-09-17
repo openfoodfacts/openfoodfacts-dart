@@ -95,18 +95,60 @@ class KnowledgePanelPanelIdElement extends JsonObject {
   Map<String, dynamic> toJson() => _$KnowledgePanelPanelIdElementToJson(this);
 }
 
+@JsonSerializable()
+class KnowledgePanelTableCell extends JsonObject {
+  @JsonKey(name: 'text')
+  final String cellLabel;
+
+  final double? percent;
+
+  @JsonKey(name: 'icon_url')
+  final String? iconUrl;
+
+  const KnowledgePanelTableCell(
+      {required this.cellLabel, this.percent, this.iconUrl});
+
+  factory KnowledgePanelTableCell.fromJson(Map<String, dynamic> json) =>
+      _$KnowledgePanelTableCellFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$KnowledgePanelTableCellToJson(this);
+}
+
 /// A table row inside Table element of KonwledgePanel
 @JsonSerializable()
 class KnowledgePanelTableRowElement extends JsonObject {
+  final String id;
+
   final List<String> values;
 
-  const KnowledgePanelTableRowElement({required this.values});
+  const KnowledgePanelTableRowElement({required this.id, required this.values});
 
   factory KnowledgePanelTableRowElement.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelTableRowElementFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelTableRowElementToJson(this);
+}
+
+@JsonSerializable()
+class KnowledgePanelTableColumnDescriptor extends JsonObject {
+  @JsonKey(name: 'text')
+  final List<String> columnLabel;
+
+  @JsonKey(name: 'type')
+  final List<String> columnType;
+
+  const KnowledgePanelTableColumnDescriptor(
+      {required this.columnLabel, required this.columnType});
+
+  factory KnowledgePanelTableColumnDescriptor.fromJson(
+          Map<String, dynamic> json) =>
+      _$KnowledgePanelTableColumnDescriptorFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$KnowledgePanelTableColumnDescriptorToJson(this);
 }
 
 /// Element representing a tabular data for the KnowledgePanel.
@@ -120,7 +162,8 @@ class KnowledgePanelTableElement extends JsonObject {
 
   final String title;
 
-  final List<String> headers;
+  @JsonKey(name: "columns")
+  final List<KnowledgePanelTableColumnDescriptor> columnsDescriptor;
 
   final List<KnowledgePanelTableRowElement> rows;
 
@@ -128,7 +171,7 @@ class KnowledgePanelTableElement extends JsonObject {
     required this.tableId,
     required this.tableType,
     required this.title,
-    required this.headers,
+    required this.columnsDescriptor,
     required this.rows,
   });
 
@@ -165,6 +208,7 @@ enum KnowledgePanelElementType {
 class KnowledgePanelElement extends JsonObject {
   /// Type of the text description, Client may choose to display the description
   /// depending upon the type.
+  @JsonValue('element_type')
   final KnowledgePanelElementType type;
 
   /// Text description of the Knowledge panel.

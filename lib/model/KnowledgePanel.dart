@@ -12,8 +12,8 @@ enum KnowledgePanelType {
   DO_YOU_KNOW,
 
   /// Knowledge Panel with ecoscore information.
-  @JsonValue('ecoscore')
-  ECOSCORE,
+  @JsonValue('score')
+  SCORE,
 
   /// Knowledge Panel with ecoscore LCA.
   @JsonValue('ecoscore_lca')
