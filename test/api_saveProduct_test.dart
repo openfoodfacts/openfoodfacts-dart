@@ -232,7 +232,11 @@ void main() {
           lang: OpenFoodFactsLanguage.GERMAN,
           ingredientsText:
               'Säurungsmittel Citronensäure, Calciumcarbonat, Natriumhydrogencarbonat',
-          categories: 'Nahrungsergänzungsmittel, Vitamine');
+          categoriesTags: [
+            'en:dietary-supplements',
+            'en:vitamins',
+            'en:nahrungserganzungsmittel',
+          ]);
       Status status = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         product,
@@ -267,9 +271,12 @@ void main() {
     test('add new product test 6', () async {
       Product product = Product(
           barcode: '7340011364184',
-          categories: 'Product categories test 1,Product categories test 2',
+          categoriesTags: [
+            'en:product-categories-test-1',
+            'en:product-categories-test-2'
+          ],
           packaging: 'Product packaging test 1,Product packaging test 2',
-          labels: 'Product labels test 1,Product labels test 2');
+          labelsTags: ['en:product-labels-test-1', 'en:product-labels-test-2']);
 
       Status status = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
@@ -286,16 +293,12 @@ void main() {
         user: TestConstants.TEST_USER,
       );
 
-      expect(result.product!.labels,
-          'Product labels test 1,Product labels test 2');
       expect(result.product!.labelsTags,
           ['en:product-labels-test-1', 'en:product-labels-test-2']);
       expect(result.product!.packaging,
           'Product packaging test 1,Product packaging test 2');
       expect(result.product!.packagingTags,
           ['product-packaging-test-1', 'product-packaging-test-2']);
-      expect(result.product!.categories,
-          'Product categories test 1,Product categories test 2');
       expect(result.product!.categoriesTags,
           ['en:product-categories-test-1', 'en:product-categories-test-2']);
     });

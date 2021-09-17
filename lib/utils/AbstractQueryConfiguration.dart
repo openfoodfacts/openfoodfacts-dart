@@ -39,6 +39,7 @@ abstract class AbstractQueryConfiguration {
   }) {
     fields ??= [ProductField.ALL];
     if (languages != null) {
+      // ignore: deprecated_member_use_from_same_package
       if ((language != null || lc != null) && languages!.isNotEmpty) {
         throw ArgumentError(
             '[languages] cannot be used together with [language]/[lc]');
@@ -66,8 +67,12 @@ abstract class AbstractQueryConfiguration {
     if (queryLanguages.isNotEmpty) {
       result.putIfAbsent(
           'lc', () => queryLanguages.map((e) => e.code).join(','));
-    } else if (lc != null) {
-      result.putIfAbsent('lc', () => lc!);
+    } else {
+      // ignore: deprecated_member_use_from_same_package
+      if (lc != null) {
+        // ignore: deprecated_member_use_from_same_package
+        result.putIfAbsent('lc', () => lc!);
+      }
     }
 
     if (cc != null) {

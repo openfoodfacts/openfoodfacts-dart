@@ -9,6 +9,8 @@ enum ProductField {
   GENERIC_NAME,
   BRANDS,
   BRANDS_TAGS,
+// TODO: deprecated from 2021-09-16 (#237); remove when old enough
+  @deprecated
   COUNTRIES,
   COUNTRIES_TAGS,
   COUNTRIES_TAGS_IN_LANGUAGES,
@@ -39,6 +41,8 @@ enum ProductField {
   NUTRIMENT_ENERGY_UNIT,
   NUTRIMENT_DATA_PER,
   NUTRISCORE,
+// TODO: deprecated from 2021-09-16 (#237); remove when old enough
+  @deprecated
   CATEGORIES,
   CATEGORIES_TAGS,
   CATEGORIES_TAGS_IN_LANGUAGES,
@@ -66,6 +70,8 @@ extension ProductFieldExtension on ProductField {
     ProductField.GENERIC_NAME: 'generic_name',
     ProductField.BRANDS: 'brands',
     ProductField.BRANDS_TAGS: 'brands_tags',
+// TODO: deprecated from 2021-09-16 (#237); remove when old enough
+// ignore: deprecated_member_use_from_same_package
     ProductField.COUNTRIES: 'countries',
     ProductField.COUNTRIES_TAGS: 'countries_tags',
     ProductField.COUNTRIES_TAGS_IN_LANGUAGES: 'countries_tags_',
@@ -96,6 +102,8 @@ extension ProductFieldExtension on ProductField {
     ProductField.NUTRIMENT_ENERGY_UNIT: 'nutriment_energy_unit',
     ProductField.NUTRIMENT_DATA_PER: 'nutrition_data_per',
     ProductField.NUTRISCORE: 'nutrition_grade_fr',
+// TODO: deprecated from 2021-09-16 (#237); remove when old enough
+// ignore: deprecated_member_use_from_same_package
     ProductField.CATEGORIES: 'categories',
     ProductField.CATEGORIES_TAGS: 'categories_tags',
     ProductField.CATEGORIES_TAGS_IN_LANGUAGES: 'categories_tags_',

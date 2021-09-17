@@ -40,7 +40,7 @@ void main() {
         barcode: barcode,
         productName: 'Coca Cola Light',
         lang: OpenFoodFactsLanguage.GERMAN,
-        countries: 'Frankreich,Deutschland',
+        countriesTags: ['en:deutschland', 'en:frankreich'],
         brands: 'Coca Cola',
         nutrimentDataPer: 'serving',
         nutrimentEnergyUnit: 'kcal',
@@ -118,7 +118,8 @@ void main() {
 
       expect(result.product!.images != null, true);
       expect(result.product!.images!.length, 4);
-      expect(result.product!.countries, 'Frankreich,Deutschland');
+      expect(
+          result.product!.countriesTags, ['en:deutschland', 'en:frankreich']);
     });
 
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',
@@ -145,7 +146,7 @@ void main() {
       expect(result.product!.nutriments!.proteinsServing != null, true);
       expect(result.product!.nutriments!.fatServing != null, true);
 
-      expect(result.product!.countries, 'United States');
+      expect(result.product!.countriesTags, ['en:united-states']);
     });
 
     test('check alcohol data', () async {
@@ -618,7 +619,7 @@ void main() {
 
       configurations = ProductQueryConfiguration(barcode,
           language: OpenFoodFactsLanguage.GERMAN,
-          fields: [ProductField.NAME, ProductField.COUNTRIES]);
+          fields: [ProductField.NAME, ProductField.COUNTRIES_TAGS]);
       result = await OpenFoodAPIClient.getProduct(
         configurations,
         user: TestConstants.TEST_USER,
@@ -634,7 +635,7 @@ void main() {
       assert(result.product!.additives!.names.isEmpty);
       assert(result.product!.nutrientLevels!.levels.isEmpty);
       assert(result.product!.lang == OpenFoodFactsLanguage.UNDEFINED);
-      assert(result.product!.countries != null);
+      assert(result.product!.countriesTags != null);
 
       configurations = ProductQueryConfiguration(barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -994,8 +995,8 @@ void main() {
         ingredientsTextInLanguages: {
           OpenFoodFactsLanguage.ENGLISH: 'Flour, water'
         },
-        categories: 'Beverages',
-        countries: 'Russia',
+        categoriesTags: ['en:beverages'],
+        countriesTags: ['en:russia'],
       );
 
       await OpenFoodAPIClient.saveProduct(
@@ -1105,8 +1106,8 @@ void main() {
         ingredientsTextInLanguages: {
           OpenFoodFactsLanguage.ENGLISH: 'Flour, water'
         },
-        categories: 'Beverages',
-        countries: 'Russia',
+        categoriesTags: ['en:beverages'],
+        countriesTags: ['en:russia'],
       );
 
       Product russianInputProduct = Product(
@@ -1235,8 +1236,8 @@ void main() {
           OpenFoodFactsLanguage.RUSSIAN: 'Мука, вода',
           OpenFoodFactsLanguage.GERMAN: 'Mehl, wasser',
         },
-        categories: 'Beverages',
-        countries: 'Russia',
+        categoriesTags: ['en:beverages'],
+        countriesTags: ['en:russia'],
       );
 
       await OpenFoodAPIClient.saveProduct(

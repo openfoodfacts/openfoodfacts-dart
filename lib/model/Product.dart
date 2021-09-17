@@ -83,6 +83,8 @@ class Product extends JsonObject {
   @JsonKey(name: 'brands_tags', includeIfNull: false)
   List<String>? brandsTags;
 
+// TODO: deprecated from 2021-09-16 (#237); remove when old enough
+  @Deprecated('Use countriesTags or countriesTagsInLanguages instead.')
   @JsonKey(name: 'countries', includeIfNull: false)
   String? countries;
   @JsonKey(name: 'countries_tags', includeIfNull: false)
@@ -225,6 +227,8 @@ class Product extends JsonObject {
   @JsonKey(name: 'nutrition_grade_fr', includeIfNull: false)
   String? nutriscore;
 
+// TODO: deprecated from 2021-09-16 (#237); remove when old enough
+  @Deprecated('Use categoriesTags or categoriesTagsInLanguages instead.')
   @JsonKey(name: 'categories', includeIfNull: false)
   String? categories;
   @JsonKey(name: 'categories_tags', includeIfNull: false)
@@ -236,6 +240,8 @@ class Product extends JsonObject {
       includeIfNull: false)
   Map<OpenFoodFactsLanguage, List<String>>? categoriesTagsInLanguages;
 
+// TODO: deprecated from 2021-09-16 (#237); remove when old enough
+  @Deprecated('Use labelsTags or labelsTagsInLanguages instead.')
   @JsonKey(name: 'labels', includeIfNull: false)
   String? labels;
   @JsonKey(name: 'labels_tags', includeIfNull: false)
@@ -293,7 +299,7 @@ class Product extends JsonObject {
       this.productNameInLanguages,
       this.brands,
       this.brandsTags,
-      this.countries,
+      @deprecated this.countries,
       this.countriesTags,
       this.countriesTagsInLanguages,
       this.lang,
@@ -326,10 +332,10 @@ class Product extends JsonObject {
       this.nutrimentEnergyUnit,
       this.nutrimentDataPer,
       this.nutriscore,
-      this.categories,
+      @deprecated this.categories,
       this.categoriesTags,
       this.categoriesTagsInLanguages,
-      this.labels,
+      @deprecated this.labels,
       this.labelsTags,
       this.labelsTagsInLanguages,
       this.packaging,
