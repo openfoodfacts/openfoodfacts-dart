@@ -141,6 +141,7 @@ void main() {
         'Date limite à compléter',
         'Ingrédients à compléter',
         'Informations nutritionnelles à compléter',
+        'Origines à compléter',
         'Code emballeur à compléter',
         'Emballage à compléter',
         'Nom du produit à compléter',
@@ -234,30 +235,30 @@ void main() {
         'Migros "Aus der Region"',
         'Mit Vitaminen angereichert',
         'Mit Kalzium angereichert',
-        'Milch aus Frankreich',
-        'Mit wenig oder keinem Salz',
         'DLG Jährlich Prämiert',
+        'Für mehr Tierschutz',
+        'Für mehr Tierschutz 1 Stern',
+        'Für mehr Tierschutz 2 Sterne',
+        'Haltungsform',
+        'Haltungsform 1 Stallhaltung',
+        'Haltungsform 2 StallhaltungPlus',
+        'Haltungsform 3 Außenklima',
+        'Haltungsform 4 Premium',
         '100% Muskel',
         'In Australien gemacht',
+        'Belgische Familien Brauer',
         'Biodynamische Landwirtschaft',
         'Dynamitfischen',
         'Kalziumquelle',
-        'CO2-Emissionen',
+        'Carbon Trust CO2 Measured',
+        'Climate Neutral Ceritfied',
         'Enthält Milch',
         'Kormoranfischerei',
+        'Crossed Grain Symbol',
         'Demeter',
-        'Handelsmarken',
-        'ES-ECO-023-MA',
-        'ES-ECO-024-MU',
-        'Übermäßiger Konsum kann abführend wirken',
-        'FSC Mix',
-        'Reich an Kalzium',
-        'Hoher Omega-3-Gehalt',
-        'Falsche Nährwertangaben auf dem Etikett',
-        'Limitierte Sonderedition',
-        'Fettarm'
+        'Handelsmarken'
       ]);
-      expect(result.last, 'Fettarm');
+      expect(result.last, 'Handelsmarken');
     });
     test('Suggestions for categories', () async {
       List<dynamic> result =
@@ -316,6 +317,7 @@ void main() {
         'Viande',
         'Viande séparée mécaniquement de dinde',
         'Viande hachée de bœuf',
+        'Viande de porc hachée',
         'Viande de mouton',
         'Viande de porc',
         'Viande de volaille',
@@ -324,9 +326,8 @@ void main() {
         'Viande de renne',
         'Viandes de porc à l\'étouffée',
         'Viande de dinde',
-        'Viande de cuisse de dinde',
-        'Viande de veau',
         'Extrait de viande de bœuf',
+        'Arôme de viande',
         'Préparation de viande',
         'Bouillon de viande',
         'Boulette de viande'
@@ -381,6 +382,7 @@ void main() {
         'E948',
         'E949',
         'E953',
+        'E955',
         'E965'
       ]);
       expect(result.first, 'E904');
@@ -570,14 +572,14 @@ void main() {
         'Acidity regulator',
         'Acorn fed iberian pig',
         'Adenosine monophosphate',
+        'Advocaat',
         'Agave fibre',
         'Agave syrup',
         'Alaska pollock',
         'Alaskan Pollock fillet',
         'Albacore',
         'Alcohol',
-        'Alcohol vinegar',
-        'Algae',
+        'Alcohol vinegar'
       ]);
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
