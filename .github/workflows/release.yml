@@ -1,0 +1,69 @@
+name: Publish to Pub.dev
+
+on:
+  push:
+    branches:
+      - 'release-automation'
+      - master
+
+
+
+jobs:
+
+  # To not create a release when the current version is already on pub.dev
+  pre_job:
+    runs-on: ubuntu-latest
+    outputs:
+      localVersion: ${{ steps.version_check.outputs.localVersion }}
+      remoteVersion: ${{ steps.version_check.outputs.remoteVersion }}
+    steps:
+      - name: Chekout code
+        uses: actions/checkout@v2
+
+      - id: version_check
+        uses: k-paxian/dart-package-publisher@v1.3
+        id: pub-dev-release
+        with:
+            accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
+            refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
+            skipTests: true # Skip unit tests run
+            dryRunOnly: true # Perform dry run only, no real publishing
+
+  release:
+    needs: pre_job
+    if: ${{ needs.pre_job.outputs.localVersion != needs.pre_job.outputs.localVersion }}
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Chekout code
+      uses: actions/checkout@v2
+
+    - name: Setup Dart
+      uses: dart-lang/setup-dart@v1
+
+    - name: Install dependencies
+      run: dart pub get .
+
+    - name: Check for formatting issues (run "flutter format . ")
+      run: dart format .
+
+    - name: Analyze project
+      run: dart analyze .
+
+
+    - name: Release on pub.dev
+      uses: k-paxian/dart-package-publisher@v1.3
+      id: pub-dev-release
+      with:
+          accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
+          refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
+          dryRunOnly: true # Perform dry run only, no real publishing
+
+    - name: Create Github Release
+      uses: softprops/action-gh-release@v1
+      with:
+          draft: true
+          tag_name: ${{ needs.pre_job.outputs.localVersion }}
+          body: "Release notes: https://pub.dev/packages/openfoodfacts/changelog"
+
+
