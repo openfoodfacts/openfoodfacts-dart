@@ -22,7 +22,6 @@ jobs:
 
       - id: version_check
         uses: k-paxian/dart-package-publisher@v1.3
-        id: pub-dev-release
         with:
             accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
             refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
@@ -53,7 +52,6 @@ jobs:
 
     - name: Release on pub.dev
       uses: k-paxian/dart-package-publisher@v1.3
-      id: pub-dev-release
       with:
           accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
           refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
