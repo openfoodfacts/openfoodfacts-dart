@@ -102,6 +102,18 @@ class ProductPreferencesManager {
     return result;
   }
 
+  /// Returns whether an attribute is important as per the user preferences.
+  bool isAttributeImportant(String attributeId) {
+    final String importanceId = getImportanceIdForAttributeId(attributeId);
+    final int? importanceIndex =
+        _availablePreferenceImportances?.getImportanceIndex(importanceId);
+    if (importanceIndex == null || importanceIndex == 0) {
+      // Not important.
+      return false;
+    }
+    return true;
+  }
+
   PreferenceImportance? getPreferenceImportanceFromImportanceId(
     final String importanceId,
   ) {
