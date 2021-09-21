@@ -86,17 +86,51 @@ Map<String, dynamic> _$KnowledgePanelPanelIdElementToJson(
       'panel_id': instance.panelId,
     };
 
+KnowledgePanelTableCell _$KnowledgePanelTableCellFromJson(
+        Map<String, dynamic> json) =>
+    KnowledgePanelTableCell(
+      text: json['text'] as String,
+      percent: (json['percent'] as num?)?.toDouble(),
+      iconUrl: json['icon_url'] as String?,
+    );
+
+Map<String, dynamic> _$KnowledgePanelTableCellToJson(
+        KnowledgePanelTableCell instance) =>
+    <String, dynamic>{
+      'text': instance.text,
+      'percent': instance.percent,
+      'icon_url': instance.iconUrl,
+    };
+
 KnowledgePanelTableRowElement _$KnowledgePanelTableRowElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTableRowElement(
-      values:
-          (json['values'] as List<dynamic>).map((e) => e as String).toList(),
+      id: json['id'] as String,
+      values: (json['values'] as List<dynamic>)
+          .map((e) =>
+              KnowledgePanelTableCell.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$KnowledgePanelTableRowElementToJson(
         KnowledgePanelTableRowElement instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'values': instance.values,
+    };
+
+KnowledgePanelTableColumn _$KnowledgePanelTableColumnFromJson(
+        Map<String, dynamic> json) =>
+    KnowledgePanelTableColumn(
+      text: (json['text'] as List<dynamic>).map((e) => e as String).toList(),
+      type: (json['type'] as List<dynamic>).map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$KnowledgePanelTableColumnToJson(
+        KnowledgePanelTableColumn instance) =>
+    <String, dynamic>{
+      'text': instance.text,
+      'type': instance.type,
     };
 
 KnowledgePanelTableElement _$KnowledgePanelTableElementFromJson(
@@ -105,8 +139,10 @@ KnowledgePanelTableElement _$KnowledgePanelTableElementFromJson(
       tableId: json['table_id'] as String,
       tableType: json['table_type'] as String,
       title: json['title'] as String,
-      headers:
-          (json['headers'] as List<dynamic>).map((e) => e as String).toList(),
+      columnsDescriptor: (json['columns'] as List<dynamic>)
+          .map((e) =>
+              KnowledgePanelTableColumn.fromJson(e as Map<String, dynamic>))
+          .toList(),
       rows: (json['rows'] as List<dynamic>)
           .map((e) =>
               KnowledgePanelTableRowElement.fromJson(e as Map<String, dynamic>))
@@ -119,14 +155,15 @@ Map<String, dynamic> _$KnowledgePanelTableElementToJson(
       'table_id': instance.tableId,
       'table_type': instance.tableType,
       'title': instance.title,
-      'headers': instance.headers,
+      'columns': instance.columnsDescriptor,
       'rows': instance.rows,
     };
 
 KnowledgePanelElement _$KnowledgePanelElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelElement(
-      type: _$enumDecode(_$KnowledgePanelElementTypeEnumMap, json['type']),
+      elementType: _$enumDecode(
+          _$KnowledgePanelElementTypeEnumMap, json['element_type']),
       textElement: json['textElement'] == null
           ? null
           : KnowledgePanelTextElement.fromJson(
@@ -135,10 +172,10 @@ KnowledgePanelElement _$KnowledgePanelElementFromJson(
           ? null
           : KnowledgePanelImageElement.fromJson(
               json['imageElement'] as Map<String, dynamic>),
-      panelIdElement: json['panelIdElement'] == null
+      panelElement: json['panel_element'] == null
           ? null
           : KnowledgePanelPanelIdElement.fromJson(
-              json['panelIdElement'] as Map<String, dynamic>),
+              json['panel_element'] as Map<String, dynamic>),
       tableElement: json['tableElement'] == null
           ? null
           : KnowledgePanelTableElement.fromJson(
@@ -148,10 +185,10 @@ KnowledgePanelElement _$KnowledgePanelElementFromJson(
 Map<String, dynamic> _$KnowledgePanelElementToJson(
         KnowledgePanelElement instance) =>
     <String, dynamic>{
-      'type': _$KnowledgePanelElementTypeEnumMap[instance.type],
+      'element_type': _$KnowledgePanelElementTypeEnumMap[instance.elementType],
       'textElement': instance.textElement,
       'imageElement': instance.imageElement,
-      'panelIdElement': instance.panelIdElement,
+      'panel_element': instance.panelElement,
       'tableElement': instance.tableElement,
     };
 

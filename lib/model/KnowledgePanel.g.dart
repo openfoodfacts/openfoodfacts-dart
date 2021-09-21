@@ -65,7 +65,7 @@ K _$enumDecode<K, V>(
 
 const _$KnowledgePanelTypeEnumMap = {
   KnowledgePanelType.DO_YOU_KNOW: 'doyouknow',
-  KnowledgePanelType.ECOSCORE: 'ecoscore',
+  KnowledgePanelType.SCORE: 'score',
   KnowledgePanelType.ECOSCORE_LCA: 'ecoscore_lca',
   KnowledgePanelType.UNKNOWN: 'UNKNOWN',
 };
