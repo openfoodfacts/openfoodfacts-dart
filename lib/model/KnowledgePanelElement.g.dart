@@ -89,7 +89,7 @@ Map<String, dynamic> _$KnowledgePanelPanelIdElementToJson(
 KnowledgePanelTableCell _$KnowledgePanelTableCellFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTableCell(
-      cellLabel: json['text'] as String,
+      text: json['text'] as String,
       percent: (json['percent'] as num?)?.toDouble(),
       iconUrl: json['icon_url'] as String?,
     );
@@ -97,7 +97,7 @@ KnowledgePanelTableCell _$KnowledgePanelTableCellFromJson(
 Map<String, dynamic> _$KnowledgePanelTableCellToJson(
         KnowledgePanelTableCell instance) =>
     <String, dynamic>{
-      'text': instance.cellLabel,
+      'text': instance.text,
       'percent': instance.percent,
       'icon_url': instance.iconUrl,
     };
@@ -119,20 +119,18 @@ Map<String, dynamic> _$KnowledgePanelTableRowElementToJson(
       'values': instance.values,
     };
 
-KnowledgePanelTableColumnDescriptor
-    _$KnowledgePanelTableColumnDescriptorFromJson(Map<String, dynamic> json) =>
-        KnowledgePanelTableColumnDescriptor(
-          columnLabel:
-              (json['text'] as List<dynamic>).map((e) => e as String).toList(),
-          columnType:
-              (json['type'] as List<dynamic>).map((e) => e as String).toList(),
-        );
+KnowledgePanelTableColumn _$KnowledgePanelTableColumnFromJson(
+        Map<String, dynamic> json) =>
+    KnowledgePanelTableColumn(
+      text: (json['text'] as List<dynamic>).map((e) => e as String).toList(),
+      type: (json['type'] as List<dynamic>).map((e) => e as String).toList(),
+    );
 
-Map<String, dynamic> _$KnowledgePanelTableColumnDescriptorToJson(
-        KnowledgePanelTableColumnDescriptor instance) =>
+Map<String, dynamic> _$KnowledgePanelTableColumnToJson(
+        KnowledgePanelTableColumn instance) =>
     <String, dynamic>{
-      'text': instance.columnLabel,
-      'type': instance.columnType,
+      'text': instance.text,
+      'type': instance.type,
     };
 
 KnowledgePanelTableElement _$KnowledgePanelTableElementFromJson(
@@ -142,8 +140,8 @@ KnowledgePanelTableElement _$KnowledgePanelTableElementFromJson(
       tableType: json['table_type'] as String,
       title: json['title'] as String,
       columnsDescriptor: (json['columns'] as List<dynamic>)
-          .map((e) => KnowledgePanelTableColumnDescriptor.fromJson(
-              e as Map<String, dynamic>))
+          .map((e) =>
+              KnowledgePanelTableColumn.fromJson(e as Map<String, dynamic>))
           .toList(),
       rows: (json['rows'] as List<dynamic>)
           .map((e) =>
@@ -164,7 +162,8 @@ Map<String, dynamic> _$KnowledgePanelTableElementToJson(
 KnowledgePanelElement _$KnowledgePanelElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelElement(
-      type: _$enumDecode(_$KnowledgePanelElementTypeEnumMap, json['type']),
+      elementType: _$enumDecode(
+          _$KnowledgePanelElementTypeEnumMap, json['element_type']),
       textElement: json['textElement'] == null
           ? null
           : KnowledgePanelTextElement.fromJson(
@@ -173,10 +172,10 @@ KnowledgePanelElement _$KnowledgePanelElementFromJson(
           ? null
           : KnowledgePanelImageElement.fromJson(
               json['imageElement'] as Map<String, dynamic>),
-      panelIdElement: json['panelIdElement'] == null
+      panelElement: json['panel_element'] == null
           ? null
           : KnowledgePanelPanelIdElement.fromJson(
-              json['panelIdElement'] as Map<String, dynamic>),
+              json['panel_element'] as Map<String, dynamic>),
       tableElement: json['tableElement'] == null
           ? null
           : KnowledgePanelTableElement.fromJson(
@@ -186,10 +185,10 @@ KnowledgePanelElement _$KnowledgePanelElementFromJson(
 Map<String, dynamic> _$KnowledgePanelElementToJson(
         KnowledgePanelElement instance) =>
     <String, dynamic>{
-      'type': _$KnowledgePanelElementTypeEnumMap[instance.type],
+      'element_type': _$KnowledgePanelElementTypeEnumMap[instance.elementType],
       'textElement': instance.textElement,
       'imageElement': instance.imageElement,
-      'panelIdElement': instance.panelIdElement,
+      'panel_element': instance.panelElement,
       'tableElement': instance.tableElement,
     };
 
