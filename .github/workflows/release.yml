@@ -1,16 +1,18 @@
+# Automatically creates a new release for Pub.dev and a Github release if 
+# the current version in pubspec.yml does not match the latest version on pub.dev.
 name: Publish to Pub.dev
 
 on:
   push:
     branches:
-      - 'release-automation'
       - master
+      - 'release-automation'
 
 
 
 jobs:
 
-  # To not create a release when the current version is already on pub.dev
+  # To not create a new release when the current version is already on pub.dev
   pre_job:
     runs-on: ubuntu-latest
     outputs:
@@ -49,18 +51,17 @@ jobs:
     - name: Analyze project
       run: dart analyze .
 
-
     - name: Release on pub.dev
       uses: k-paxian/dart-package-publisher@v1.3
       with:
+          skipTests: true # Skip unit tests run
           accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
           refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
-          dryRunOnly: true # Perform dry run only, no real publishing
 
     - name: Create Github Release
       uses: softprops/action-gh-release@v1
       with:
-          draft: true
+          draft: false
           tag_name: ${{ needs.pre_job.outputs.localVersion }}
           body: "Release notes: https://pub.dev/packages/openfoodfacts/changelog"
 
