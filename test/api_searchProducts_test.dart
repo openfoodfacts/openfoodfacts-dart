@@ -289,9 +289,9 @@ void main() {
       );
 
       expect(result.page, 3);
-      expect(result.pageSize, 24);
+      expect(result.pageSize, 20);
       expect(result.products != null, true);
-      expect(result.products!.length, 24);
+      expect(result.products!.length, 20);
       expect(result.products![0].runtimeType, Product);
       expect(result.count! > 1500, true);
     });
