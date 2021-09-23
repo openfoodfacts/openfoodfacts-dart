@@ -107,7 +107,8 @@ class ProductPreferencesManager {
     final String importanceId = getImportanceIdForAttributeId(attributeId);
     final int? importanceIndex =
         _availablePreferenceImportances?.getImportanceIndex(importanceId);
-    if (importanceIndex == null || importanceIndex == 0) {
+    if (importanceIndex == null ||
+        importanceIndex == PreferenceImportance.INDEX_NOT_IMPORTANT) {
       // Not important.
       return false;
     }
