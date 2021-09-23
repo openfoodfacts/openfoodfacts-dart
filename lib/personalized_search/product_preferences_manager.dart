@@ -110,7 +110,9 @@ class ProductPreferencesManager {
     if (importanceIndex == null) {
       return null;
     }
-    return importanceIndex == PreferenceImportance.INDEX_NOT_IMPORTANT ? false : true;
+    return importanceIndex == PreferenceImportance.INDEX_NOT_IMPORTANT
+        ? false
+        : true;
   }
 
   PreferenceImportance? getPreferenceImportanceFromImportanceId(
