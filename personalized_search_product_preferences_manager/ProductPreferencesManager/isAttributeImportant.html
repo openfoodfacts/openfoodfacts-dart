@@ -52,7 +52,7 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/2.14.2/dart-core/bool-class.html">bool</a></span>
+<span class="returntype"><a href="https://api.dart.dev/stable/2.14.2/dart-core/bool-class.html">bool</a>?</span>
 <span class="name ">isAttributeImportant</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="isAttributeImportant-param-attributeId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">attributeId</span></span></li>
 </ol>)
 
@@ -68,16 +68,16 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">bool isAttributeImportant(String attributeId) {
+  <pre class="language-dart"><code class="language-dart">bool? isAttributeImportant(String attributeId) {
   final String importanceId = getImportanceIdForAttributeId(attributeId);
   final int? importanceIndex =
       _availablePreferenceImportances?.getImportanceIndex(importanceId);
-  if (importanceIndex == null ||
-      importanceIndex == PreferenceImportance.INDEX_NOT_IMPORTANT) {
-    &#47;&#47; Not important.
-    return false;
+  if (importanceIndex == null) {
+    return null;
   }
-  return true;
+  return importanceIndex == PreferenceImportance.INDEX_NOT_IMPORTANT
+      ? false
+      : true;
 }</code></pre>
 </section>
 
