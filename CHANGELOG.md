@@ -1,3 +1,5 @@
+## [1.3.4] - 24.09.2021
+- Add ability to check whether a product attribute is marked as important in user's personal preferences.
 ## [1.3.3] - 16.09.2021
 - Add ability to request the `product_name_languages` and `ingredients_text_languages` fields
 - Introduce `OpenFoodAPISettings` to improve API configuration support
