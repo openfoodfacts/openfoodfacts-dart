@@ -385,8 +385,7 @@ void main() {
         ),
         product,
       );
-      expect(status.status, -1);
-      assert(status.body!.contains('Incorrect user name or password'));
+      assert(status.isWrongUsernameOrPassword());
     });
   });
 }
