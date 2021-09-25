@@ -105,8 +105,15 @@ class OpenFoodAPIClient {
       user,
       queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
     );
-    var status = Status.fromJson(json.decode(response.body));
-    return status;
+    try {
+      return Status.fromJson(json.decode(response.body));
+    } catch (e) {
+      return Status(
+        body: response.body,
+        status: -1,
+        statusVerbose: e.toString(),
+      );
+    }
   }
 
   /// Send one image to the server.
