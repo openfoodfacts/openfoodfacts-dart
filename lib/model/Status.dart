@@ -58,6 +58,8 @@ class Status extends JsonObject {
     }
   }
 
+  /// Returns true if this [Status] is caused by wrong username or password,
+  /// false otherwise.
   bool isWrongUsernameOrPassword() =>
       statusVerbose == WRONG_USER_OR_PASSWORD_ERROR_MESSAGE;
 
