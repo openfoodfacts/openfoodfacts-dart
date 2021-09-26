@@ -89,8 +89,7 @@
   Response response = await HttpHelper().doPostRequest(
       insightUri, annotationData, user,
       queryType: QueryType.PROD);
-  var status = Status.fromJson(json.decode(response.body));
-  return status;
+  return Status.fromApiResponse(response.body);
 }</code></pre>
 </section>
 

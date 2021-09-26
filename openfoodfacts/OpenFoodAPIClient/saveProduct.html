@@ -106,8 +106,7 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
     user,
     queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
   );
-  var status = Status.fromJson(json.decode(response.body));
-  return status;
+  return Status.fromApiResponse(response.body);
 }</code></pre>
 </section>
 

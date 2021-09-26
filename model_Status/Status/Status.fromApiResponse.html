@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the status property from the Status class, for the Dart programming language.">
-  <title>status property - Status class - Status library - Dart API</title>
+  <meta name="description" content="API docs for the Status.fromApiResponse constructor from the Class Status class from the Status library, for the Dart programming language.">
+  <title>Status.fromApiResponse constructor - Status class - Status library - Dart API</title>
 
 
   
@@ -32,9 +32,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../model_Status/model_Status-library.html">Status</a></li>
     <li><a href="../../model_Status/Status-class.html">Status</a></li>
-    <li class="self-crumb">status property</li>
+    <li class="self-crumb">Status.fromApiResponse factory constructor</li>
   </ol>
-  <div class="self-name">status</div>
+  <div class="self-name">Status.fromApiResponse</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -45,24 +45,35 @@
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
-<h1><span class="kind-property">status</span> property 
+<h1><span class="kind-constructor">Status.fromApiResponse</span> constructor 
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
 </h1></div>
 
-        <section class="multi-line-signature">
-          dynamic
-          <span class="name ">status</span>
-          <div class="features">final</div>
+    <section class="multi-line-signature">
+      <span class="name ">Status.fromApiResponse</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="fromApiResponse-param-responseBody"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">responseBody</span></span></li>
+</ol>)
+    </section>
 
-        </section>
-        
+    
+<section class="desc markdown">
+  <p>Constructs a <a href="../../model_Status/Status-class.html">Status</a> from an API response</p>
+</section>
 
-        
+
+    
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">final status;
-
-</code></pre>
+  <pre class="language-dart"><code class="language-dart">factory Status.fromApiResponse(String responseBody) {
+  try {
+    return Status.fromJson(json.decode(responseBody));
+  } catch (e) {
+    return Status(
+      body: responseBody,
+      status: 400,
+      statusVerbose: _createStatusVerbose(responseBody, e),
+    );
+  }
+}</code></pre>
 </section>
 
 
@@ -79,7 +90,7 @@
   <li><a href="../../index.html">openfoodfacts</a></li>
   <li><a href="../../model_Status/model_Status-library.html">Status</a></li>
   <li><a href="../../model_Status/Status-class.html">Status</a></li>
-  <li class="self-crumb">status property</li>
+  <li class="self-crumb">Status.fromApiResponse factory constructor</li>
 </ol>
 
 
@@ -121,7 +132,7 @@
     <li><a href="../../model_Status/Status/WRONG_USER_OR_PASSWORD_ERROR_MESSAGE-constant.html">WRONG_USER_OR_PASSWORD_ERROR_MESSAGE</a></li>
 </ol>
 
-  </div><!--/.sidebar-offcanvas-->
+  </div><!--/.sidebar-offcanvas-left-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
   </div><!--/.sidebar-offcanvas-->
