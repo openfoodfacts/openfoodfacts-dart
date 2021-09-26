@@ -456,8 +456,7 @@ class OpenFoodAPIClient {
     Response response = await HttpHelper().doPostRequest(
         insightUri, annotationData, user,
         queryType: QueryType.PROD);
-    var status = Status.fromJson(json.decode(response.body));
-    return status;
+    return Status.fromApiResponse(response.body);
   }
 
   /// By default the query will hit the PROD DB

@@ -52,7 +52,7 @@ class Status extends JsonObject {
     } catch (e) {
       return Status(
         body: responseBody,
-        status: -1,
+        status: 400,
         statusVerbose: _createStatusVerbose(responseBody, e),
       );
     }
