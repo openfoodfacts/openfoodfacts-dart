@@ -73,6 +73,7 @@
 }) {
   fields ??= [ProductField.ALL];
   if (languages != null) {
+    &#47;&#47; ignore: deprecated_member_use_from_same_package
     if ((language != null || lc != null) &amp;&amp; languages!.isNotEmpty) {
       throw ArgumentError(
           &#39;[languages] cannot be used together with [language]&#47;[lc]&#39;);
@@ -140,7 +141,7 @@
 <footer>
   <span class="no-break">
     openfoodfacts
-      1.3.4
+      1.3.5
   </span>
 
   
