@@ -291,9 +291,7 @@ void main() {
       expect(result.product!.nutriments!.vitaminCUnit, Unit.MILLI_G);
     });
 
-    //TODO FIX
     test('get uncommon nutrients', () async {
-      // TODO: find a product with fluoride data and add it to that test
       // PROD data as of 2021-07-16
       const QueryType queryType = QueryType.PROD;
       const User user = TestConstants.PROD_USER;
