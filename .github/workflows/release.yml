@@ -31,7 +31,7 @@ jobs:
 
   release:
     needs: pre_job
-    if: ${{ needs.pre_job.outputs.localVersion != needs.pre_job.outputs.localVersion }}
+    if: ${{ needs.pre_job.outputs.localVersion != needs.pre_job.outputs.remoteVersion }}
     runs-on: ubuntu-latest
     steps:
 
