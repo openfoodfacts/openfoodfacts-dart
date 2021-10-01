@@ -2,8 +2,10 @@ library openfoodfacts;
 
 import 'dart:convert';
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:http/http.dart';
+import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
@@ -103,8 +105,7 @@ class OpenFoodAPIClient {
       user,
       queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
     );
-    var status = Status.fromJson(json.decode(response.body));
-    return status;
+    return Status.fromApiResponse(response.body);
   }
 
   /// Send one image to the server.
@@ -455,8 +456,7 @@ class OpenFoodAPIClient {
     Response response = await HttpHelper().doPostRequest(
         insightUri, annotationData, user,
         queryType: QueryType.PROD);
-    var status = Status.fromJson(json.decode(response.body));
-    return status;
+    return Status.fromApiResponse(response.body);
   }
 
   /// By default the query will hit the PROD DB
@@ -667,6 +667,41 @@ class OpenFoodAPIClient {
       return productData[FIELD] as String?;
     } catch (e) {
       return null;
+    }
+  }
+
+  /// Returns all KnowledgePanels for a product.
+  static Future<KnowledgePanels> getKnowledgePanels(
+    ProductQueryConfiguration configuration,
+    QueryType queryType,
+  ) async {
+    const String KNOWLEDGE_PANELS_FIELD = 'knowledge_panels';
+
+    var uri = UriHelper.getUri(
+      path: 'api/v2/product/${configuration.barcode}/',
+      queryType: queryType,
+      queryParameters: <String, String>{
+        'fields': KNOWLEDGE_PANELS_FIELD,
+        'lc': configuration.language!.code,
+        'cc': configuration.cc!,
+      },
+    );
+
+    try {
+      final Response response = await HttpHelper()
+          .doGetRequest(uri, userAgent: OpenFoodAPIConfiguration.userAgent);
+      if (response.statusCode != 200) {
+        return KnowledgePanels.empty();
+      }
+      final Map<String, dynamic> json =
+          jsonDecode(response.body) as Map<String, dynamic>;
+      final Map<String, dynamic> knowledgePanelsJson =
+          json['product'][KNOWLEDGE_PANELS_FIELD] as Map<String, dynamic>;
+      return KnowledgePanels.fromJson(knowledgePanelsJson);
+    } catch (exception, stackTrace) {
+      // TODO(jasmeetsingh): Capture the exception in Sentry and don't log it here.
+      log('Exception $exception has occurred.\nStacktrace: \n$stackTrace');
+      return KnowledgePanels.empty();
     }
   }
 }

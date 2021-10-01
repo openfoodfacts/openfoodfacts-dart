@@ -370,5 +370,25 @@ void main() {
         }
       }
     });
+
+    String _generateRandomString(int len) {
+      var r = Random();
+      return String.fromCharCodes(
+          List.generate(len, (index) => r.nextInt(33) + 89));
+    }
+
+    test('Invalid user saves product', () async {
+      Product product = Product(
+        barcode: '7340011364184',
+      );
+      Status status = await OpenFoodAPIClient.saveProduct(
+        User(
+          userId: 'invaliduser',
+          password: _generateRandomString(16),
+        ),
+        product,
+      );
+      assert(status.isWrongUsernameOrPassword());
+    });
   });
 }

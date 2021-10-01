@@ -13,4 +13,8 @@ class KnowledgePanels {
         (panelId) => map[panelId] = KnowledgePanel.fromJson(json[panelId]));
     return KnowledgePanels(panelIdToPanelMap: map);
   }
+
+  factory KnowledgePanels.empty() {
+    return KnowledgePanels(panelIdToPanelMap: {});
+  }
 }
