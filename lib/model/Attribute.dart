@@ -96,6 +96,13 @@ class Attribute extends JsonObject {
   static const String ATTRIBUTE_ECOSCORE = 'ecoscore';
   static const String ATTRIBUTE_FOREST_FOOTPRINT = 'forest_footprint';
 
+  /// Permanent attributes are always shown to the user, and user can't toggle
+  /// them off in their prefs.
+  static const List<String> PERMANENT_ATTRIBUTES = <String>[
+    Attribute.ATTRIBUTE_NUTRISCORE,
+    Attribute.ATTRIBUTE_ECOSCORE
+  ];
+
   final String? id;
   final String? name;
   final String? title;
