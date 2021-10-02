@@ -410,9 +410,9 @@ class OpenFoodAPIClient {
     }
 
     List<String?> typesValues = [];
-    types.forEach((t) {
+    for (var t in types) {
       typesValues.add(t.value);
-    });
+    }
 
     String parsedTypes = typesValues.join(',');
 
@@ -578,12 +578,12 @@ class OpenFoodAPIClient {
   /// Creates a new user
   /// Returns [Status.status] 201 = complete; 400 = wrong inputs + [Status.error]; 500 = server error;
   ///
-  /// When creating a [producer account](https://world.pro.openfoodfacts.org/) use [requested_org] to name the Producer or brand
+  /// When creating a [producer account](https://world.pro.openfoodfacts.org/) use [orgName] to name the Producer or brand
   static Future<Status> register({
     required User user,
     required String name,
     required String email,
-    String? requested_org,
+    String? orgName,
     bool newsletter = true,
     QueryType? queryType,
   }) async {
@@ -598,9 +598,9 @@ class OpenFoodAPIClient {
       'userid': user.userId,
       'password': user.password,
       'confirm_password': user.password,
-      if (requested_org != null) 'pro': 'on',
+      if (orgName != null) 'pro': 'on',
       'pro_checkbox': '1',
-      'requested_org': requested_org ?? ' ',
+      'requested_org': orgName ?? ' ',
       if (newsletter) 'newsletter': 'on',
       'action': 'process',
       'type': 'add',

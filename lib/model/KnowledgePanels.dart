@@ -9,8 +9,9 @@ class KnowledgePanels {
 
   factory KnowledgePanels.fromJson(Map<String, dynamic> json) {
     Map<String, KnowledgePanel> map = {};
-    json.keys.forEach(
-        (panelId) => map[panelId] = KnowledgePanel.fromJson(json[panelId]));
+    for (var panelId in json.keys) {
+      map[panelId] = KnowledgePanel.fromJson(json[panelId]);
+    }
     return KnowledgePanels(panelIdToPanelMap: map);
   }
 

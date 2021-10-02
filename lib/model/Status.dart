@@ -23,7 +23,7 @@ class Status extends JsonObject {
   final int? imageId;
 
   Status({
-    this.status,
+    required this.status,
     this.statusVerbose,
     this.body,
     this.error,
