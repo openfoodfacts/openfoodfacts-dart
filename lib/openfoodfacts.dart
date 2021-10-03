@@ -63,10 +63,6 @@ export 'utils/ProductHelper.dart';
 export 'utils/ProductQueryConfigurations.dart';
 export 'utils/ProductSearchQueryConfiguration.dart';
 
-void main() async {
-  await OpenFoodAPIClient.resetPassword('Marvinmoel05@gmail.com');
-}
-
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
   OpenFoodAPIClient._();
@@ -645,9 +641,10 @@ class OpenFoodAPIClient {
   }
 
   /// Uses reset_password.pl to send a password reset Email
-  /// [email] can also be the userid
+  /// needs only
+  /// Returns [Status.status] 200 = complete; 400 = wrong inputs or other error + [Status.error]; 500 = server error;
   static Future<Status> resetPassword(
-    String email, {
+    String emailOrUserID, {
     QueryType? queryType,
   }) async {
     var passwordResetUri = UriHelper.getUri(
@@ -656,7 +653,7 @@ class OpenFoodAPIClient {
     );
 
     Map<String, String> data = <String, String>{
-      'userid_or_email': email,
+      'userid_or_email': emailOrUserID,
       'action': 'process',
       'type': 'send_email',
       'submit': '.submit',
@@ -667,8 +664,26 @@ class OpenFoodAPIClient {
       data,
       queryType: queryType,
     );
-
-    return status;
+    if (status.body == null) {
+      return Status(
+        status: 500,
+        error:
+            'No response, open an issue here: https://github.com/openfoodfacts/openfoodfacts-dart/issues/new',
+      );
+    } else if (status.body!.contains('There is no account with this email')) {
+      return Status(
+        status: 400,
+        body: 'There is no account with this email',
+      );
+    } else if (status.body!.contains('has been sent to the e-mail address')) {
+      return Status(
+        status: 200,
+        body:
+            'An email with a link to reset your password has been sent to the e-mail address associated with your account.',
+      );
+    } else {
+      return status.copyWith(status: 400);
+    }
   }
 
   /// Returns the Ecoscore description in HTML
