@@ -63,6 +63,10 @@ export 'utils/ProductHelper.dart';
 export 'utils/ProductQueryConfigurations.dart';
 export 'utils/ProductSearchQueryConfiguration.dart';
 
+void main() async {
+  await OpenFoodAPIClient.resetPassword('Marvinmoel05@gmail.com');
+}
+
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
   OpenFoodAPIClient._();
@@ -638,6 +642,33 @@ class OpenFoodAPIClient {
     } else {
       return Status(status: 400, error: 'Unrecognized request error');
     }
+  }
+
+  /// Uses reset_password.pl to send a password reset Email
+  /// [email] can also be the userid
+  static Future<Status> resetPassword(
+    String email, {
+    QueryType? queryType,
+  }) async {
+    var passwordResetUri = UriHelper.getUri(
+      path: '/cgi/reset_password.pl',
+      queryType: queryType,
+    );
+
+    Map<String, String> data = <String, String>{
+      'userid_or_email': email,
+      'action': 'process',
+      'type': 'send_email',
+      'submit': '.submit',
+    };
+
+    Status status = await HttpHelper().doMultipartRequest(
+      passwordResetUri,
+      data,
+      queryType: queryType,
+    );
+
+    return status;
   }
 
   /// Returns the Ecoscore description in HTML
