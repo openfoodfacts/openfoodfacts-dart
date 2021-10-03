@@ -24,4 +24,11 @@ void main() {
     );
     expect(response, true);
   });
+
+  test('Reset password', () async {
+    Status status =
+        await OpenFoodAPIClient.resetPassword(TestConstants.TEST_USER.userId);
+
+    expect(status.status, 400);
+  });
 }
