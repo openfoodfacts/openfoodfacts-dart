@@ -59,7 +59,7 @@ enum Grade {
 @JsonSerializable()
 class KnowledgePanel extends JsonObject {
   /// Panel id of the parent panel.
-  final String parent_panel_id;
+  final String parentPanelId;
 
   final KnowledgePanelType type;
 
@@ -95,7 +95,7 @@ class KnowledgePanel extends JsonObject {
   final Grade? grade;
 
   const KnowledgePanel({
-    required this.parent_panel_id,
+    required this.parentPanelId,
     required this.type,
     required this.level,
     required this.title,
