@@ -59,9 +59,8 @@ enum Grade {
 @JsonSerializable()
 class KnowledgePanel extends JsonObject {
   /// Panel id of the parent panel.
-  //TODO:(jasmeet) edit name to match linting rules
-  //ignore: non_constant_identifier_names
-  final String parent_panel_id;
+  final String parentPanelId;
+
 
   final KnowledgePanelType type;
 
@@ -97,8 +96,7 @@ class KnowledgePanel extends JsonObject {
   final Grade? grade;
 
   const KnowledgePanel({
-    //ignore: non_constant_identifier_names
-    required this.parent_panel_id,
+    required this.parentPanelId,
     required this.type,
     required this.level,
     required this.title,

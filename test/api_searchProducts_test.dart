@@ -272,6 +272,54 @@ void main() {
       }
     });
 
+    test('multiple products and pagination', () async {
+      const BARCODES = [
+        '8024884500403',
+        '3263855093192',
+        '3045320001570',
+        '3021762383344',
+        '4008400402222',
+        '3330720237255',
+        '3608580823513',
+        '3700278403936',
+        '3302747010029',
+        '3608580823490',
+        '3250391660995',
+        '3760020506605',
+        '8722700202387',
+        '3330720237330',
+        '3535800940005',
+        '20000691',
+        '3270190127512',
+      ];
+
+      final obtainedBarcodes = <String>[];
+      var page = 1;
+      while (true) {
+        final configuration = ProductListQueryConfiguration(
+          BARCODES,
+          fields: [ProductField.BARCODE, ProductField.NAME],
+          language: OpenFoodFactsLanguage.FRENCH,
+          page: page,
+          pageSize: 5,
+          sortOption: SortOption.PRODUCT_NAME,
+        );
+
+        final result = await OpenFoodAPIClient.getProductList(
+            TestConstants.PROD_USER, configuration);
+        if (result.products == null || result.products!.isEmpty) {
+          break;
+        }
+        final newBarcodes = result.products!.map((e) => e.barcode!);
+        expect(newBarcodes.any(obtainedBarcodes.contains), isFalse);
+        obtainedBarcodes.addAll(newBarcodes);
+        page += 1;
+      }
+      // We want to test pagination mechanism so we expect >1 pages
+      expect(page, greaterThan(1));
+      expect(obtainedBarcodes.toSet(), equals(BARCODES.toSet()));
+    });
+
     test('query potatoes products', () async {
       final ProductSearchQueryConfiguration configuration =
           ProductSearchQueryConfiguration(

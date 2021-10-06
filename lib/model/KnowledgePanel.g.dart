@@ -8,7 +8,7 @@ part of 'KnowledgePanel.dart';
 
 KnowledgePanel _$KnowledgePanelFromJson(Map<String, dynamic> json) =>
     KnowledgePanel(
-      parent_panel_id: json['parent_panel_id'] as String,
+      parentPanelId: json['parentPanelId'] as String,
       type: _$enumDecode(_$KnowledgePanelTypeEnumMap, json['type']),
       level: _$enumDecode(_$LevelEnumMap, json['level'],
           unknownValue: Level.UNKNOWN),
@@ -26,7 +26,7 @@ KnowledgePanel _$KnowledgePanelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$KnowledgePanelToJson(KnowledgePanel instance) =>
     <String, dynamic>{
-      'parent_panel_id': instance.parent_panel_id,
+      'parentPanelId': instance.parentPanelId,
       'type': _$KnowledgePanelTypeEnumMap[instance.type],
       'level': _$LevelEnumMap[instance.level],
       'topics': instance.topics,

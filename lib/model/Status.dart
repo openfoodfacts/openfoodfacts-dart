@@ -30,6 +30,22 @@ class Status extends JsonObject {
     this.imageId,
   });
 
+  Status copyWith({
+    final dynamic status,
+    final String? statusVerbose,
+    final String? body,
+    final String? error,
+    final int? imageId,
+  }) {
+    return Status(
+      status: status ?? this.status,
+      statusVerbose: statusVerbose ?? this.statusVerbose,
+      body: body ?? this.body,
+      error: error ?? this.error,
+      imageId: imageId ?? this.imageId,
+    );
+  }
+
   factory Status.fromJson(Map<String, dynamic> json) => _$StatusFromJson(json);
 
   /// Creates a verbose status from an API response. In case this is not
