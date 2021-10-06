@@ -7,35 +7,35 @@ part 'KnowledgePanel.g.dart';
 
 /// Type of the KnowledgePanel.
 enum KnowledgePanelType {
-/// Do you know types informative Knowledge Panels.
-@JsonValue('doyouknow')
-DO_YOU_KNOW,
+  /// Do you know types informative Knowledge Panels.
+  @JsonValue('doyouknow')
+  DO_YOU_KNOW,
 
-/// Knowledge Panel with ecoscore information.
-@JsonValue('score')
-SCORE,
+  /// Knowledge Panel with ecoscore information.
+  @JsonValue('score')
+  SCORE,
 
-/// Knowledge Panel with ecoscore LCA.
-@JsonValue('ecoscore_lca')
-ECOSCORE_LCA,
-UNKNOWN,
+  /// Knowledge Panel with ecoscore LCA.
+  @JsonValue('ecoscore_lca')
+  ECOSCORE_LCA,
+  UNKNOWN,
 }
 
 /// Level of information conveyed by this KnowledgePanel.
 ///
 /// Client may choose to display the panel based on the level.
 enum Level {
-@JsonValue('trivia')
-TRIVIA,
-@JsonValue('info')
-INFO,
-@JsonValue('helpful')
-HELPFUL,
-@JsonValue('warning')
-WARNING,
-@JsonValue('alert')
-ALERT,
-UNKNOWN,
+  @JsonValue('trivia')
+  TRIVIA,
+  @JsonValue('info')
+  INFO,
+  @JsonValue('helpful')
+  HELPFUL,
+  @JsonValue('warning')
+  WARNING,
+  @JsonValue('alert')
+  ALERT,
+  UNKNOWN,
 }
 
 /// Grade of the panel, depicting the level of impact the product has on the
