@@ -62,6 +62,10 @@ class KnowledgePanel extends JsonObject {
   @JsonKey(name: 'parent_panel_id')
   final String parentPanelId;
 
+  /// Title of the KnowledgePanel.
+  @JsonKey(name: 'title_element')
+  final TitleElement titleElement;
+
   final KnowledgePanelType type;
 
   /// Level of this KnowledgePanel. Client may choose to display the panel based
@@ -85,6 +89,7 @@ class KnowledgePanel extends JsonObject {
 
   const KnowledgePanel({
     required this.parentPanelId,
+    required this.titleElement,
     required this.type,
     required this.level,
     required this.elements,
@@ -113,7 +118,11 @@ class TitleElement extends JsonObject {
   @JsonKey(name: 'icon_url')
   final String? iconUrl;
 
-  const TitleElement({required this.title, this.subtitle, this.iconUrl,});
+  const TitleElement({
+    required this.title,
+    this.subtitle,
+    this.iconUrl,
+  });
 
   factory TitleElement.fromJson(Map<String, dynamic> json) =>
       _$TitleElementFromJson(json);
