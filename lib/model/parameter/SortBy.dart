@@ -7,6 +7,7 @@ class SortBy extends Parameter {
     SortOption.CREATED: 'created_t',
     SortOption.EDIT: 'last_modified_t',
     SortOption.POPULARITY: 'unique_scans_n',
+    SortOption.NOTHING: 'nothing',
   };
 
   @override
@@ -26,4 +27,5 @@ enum SortOption {
   PRODUCT_NAME,
   CREATED,
   EDIT,
+  NOTHING,
 }
