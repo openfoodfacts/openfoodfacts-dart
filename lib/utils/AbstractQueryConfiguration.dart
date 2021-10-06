@@ -1,3 +1,5 @@
+import 'package:openfoodfacts/interface/Parameter.dart';
+import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
@@ -30,12 +32,15 @@ abstract class AbstractQueryConfiguration {
   String? cc;
   List<ProductField>? fields;
 
+  List<Parameter> additionalParameters;
+
   AbstractQueryConfiguration({
     this.language,
     this.languages,
     this.lc,
     this.cc,
     this.fields,
+    this.additionalParameters = const [],
   }) {
     fields ??= [ProductField.ALL];
     if (languages != null) {
@@ -86,6 +91,20 @@ abstract class AbstractQueryConfiguration {
       if (!ignoreFieldsFilter) {
         final fieldsStrings = convertFieldsToStrings(fields!, queryLanguages);
         result.putIfAbsent('fields', () => fieldsStrings.join(','));
+      }
+    }
+
+    int filterTagCount = 0;
+    for (final p in additionalParameters) {
+      if (p is TagFilter) {
+        TagFilter tf = p;
+        result.putIfAbsent('tagtype_$filterTagCount', () => tf.getTagType());
+        result.putIfAbsent(
+            'tag_contains_$filterTagCount', () => tf.getContains());
+        result.putIfAbsent('tag_$filterTagCount', () => tf.getTagName());
+        filterTagCount++;
+      } else {
+        result.putIfAbsent(p.getName(), () => p.getValue());
       }
     }
 
