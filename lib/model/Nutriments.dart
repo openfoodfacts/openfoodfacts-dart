@@ -65,6 +65,13 @@ class Nutriments extends JsonObject {
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? energyKcal;
+  
+  /// Energy, in kj, per serving
+  @JsonKey(
+      name: 'energy-kj',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? energyKj;
 
   /// Energy, in kcal, per 100 grams of food
   @JsonKey(
