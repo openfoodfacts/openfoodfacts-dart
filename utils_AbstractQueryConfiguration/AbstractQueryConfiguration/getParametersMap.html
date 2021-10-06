@@ -108,6 +108,20 @@
     }
   }
 
+  int filterTagCount = 0;
+  for (final p in additionalParameters) {
+    if (p is TagFilter) {
+      TagFilter tf = p;
+      result.putIfAbsent(&#39;tagtype_$filterTagCount&#39;, () =&gt; tf.getTagType());
+      result.putIfAbsent(
+          &#39;tag_contains_$filterTagCount&#39;, () =&gt; tf.getContains());
+      result.putIfAbsent(&#39;tag_$filterTagCount&#39;, () =&gt; tf.getTagName());
+      filterTagCount++;
+    } else {
+      result.putIfAbsent(p.getName(), () =&gt; p.getValue());
+    }
+  }
+
   return result;
 }</code></pre>
 </section>
@@ -140,6 +154,7 @@
     <li class="section-title">
       <a href="../../utils_AbstractQueryConfiguration/AbstractQueryConfiguration-class.html#instance-properties">Properties</a>
     </li>
+    <li><a href="../../utils_AbstractQueryConfiguration/AbstractQueryConfiguration/additionalParameters.html">additionalParameters</a></li>
     <li><a href="../../utils_AbstractQueryConfiguration/AbstractQueryConfiguration/cc.html">cc</a></li>
     <li><a href="../../utils_AbstractQueryConfiguration/AbstractQueryConfiguration/fields.html">fields</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.3/dart-core/Object/hashCode.html">hashCode</a></li>
