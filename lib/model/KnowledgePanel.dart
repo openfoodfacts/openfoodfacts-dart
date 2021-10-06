@@ -59,7 +59,12 @@ enum Grade {
 @JsonSerializable()
 class KnowledgePanel extends JsonObject {
   /// Panel id of the parent panel.
+  @JsonKey(name: 'parent_panel_id')
   final String parentPanelId;
+
+  /// Title of the KnowledgePanel.
+  @JsonKey(name: 'title_element')
+  final TitleElement titleElement;
 
   final KnowledgePanelType type;
 
@@ -71,21 +76,9 @@ class KnowledgePanel extends JsonObject {
   /// The topics discussed in this knowledge panel, example: 'Environment'.
   final List<String>? topics;
 
-  /// Each KnowledgePanel has a unique id. Example - 'ecoscore'.
-
-  /// Title of the panel. Example - 'Eco-Score D'.
-  final String title;
-
   /// KnowledgePanelElement is a single unit of KnowledgePanel that can be
   /// rendered on the client.
   final List<KnowledgePanelElement> elements;
-
-  /// Subtitle of the panel. Example - 'High environmental impact'.
-  final String? subtitle;
-
-  /// URL of an icon representing the Panel.
-  @JsonKey(name: 'icon_url')
-  final String? iconUrl;
 
   /// Grade of the panel, depicting the level of impact the product has for the
   /// corresponding topics. Client can choose to color code the panel depending
@@ -96,13 +89,11 @@ class KnowledgePanel extends JsonObject {
 
   const KnowledgePanel({
     required this.parentPanelId,
+    required this.titleElement,
     required this.type,
     required this.level,
-    required this.title,
     required this.elements,
     this.topics,
-    this.subtitle,
-    this.iconUrl,
     this.grade,
   });
 
@@ -111,4 +102,31 @@ class KnowledgePanel extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelToJson(this);
+}
+
+/// An element representing the title of the KnowledgePanel which could consist
+/// of a text title, subtitle and an icon.
+@JsonSerializable()
+class TitleElement extends JsonObject {
+  /// Title string of the panel. Example - 'Eco-Score D'.
+  final String title;
+
+  /// Subtitle of the panel. Example - 'High environmental impact'.
+  final String? subtitle;
+
+  /// URL of an icon representing the Panel.
+  @JsonKey(name: 'icon_url')
+  final String? iconUrl;
+
+  const TitleElement({
+    required this.title,
+    this.subtitle,
+    this.iconUrl,
+  });
+
+  factory TitleElement.fromJson(Map<String, dynamic> json) =>
+      _$TitleElementFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$TitleElementToJson(this);
 }
