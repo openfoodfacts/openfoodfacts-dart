@@ -54,8 +54,11 @@ enum Grade {
 /// Evaluation of the panel, depicting whether the content of the panel is
 /// good/bad/neutral for the topic to which the panel applies.
 enum Evaluation {
+  @JsonValue('good')
   GOOD,
+  @JsonValue('neutral')
   NEUTRAL,
+  @JsonValue('bad')
   BAD,
   UNKNOWN,
 }

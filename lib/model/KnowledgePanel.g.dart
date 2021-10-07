@@ -11,27 +11,30 @@ KnowledgePanel _$KnowledgePanelFromJson(Map<String, dynamic> json) =>
       parentPanelId: json['parent_panel_id'] as String,
       titleElement:
           TitleElement.fromJson(json['title_element'] as Map<String, dynamic>),
-      type: _$enumDecode(_$KnowledgePanelTypeEnumMap, json['type']),
       level: _$enumDecode(_$LevelEnumMap, json['level'],
           unknownValue: Level.UNKNOWN),
       elements: (json['elements'] as List<dynamic>)
           .map((e) => KnowledgePanelElement.fromJson(e as Map<String, dynamic>))
           .toList(),
+      type: _$enumDecodeNullable(_$KnowledgePanelTypeEnumMap, json['type']),
       topics:
           (json['topics'] as List<dynamic>?)?.map((e) => e as String).toList(),
       grade: _$enumDecodeNullable(_$GradeEnumMap, json['grade'],
           unknownValue: Grade.UNKNOWN),
+      evaluation: _$enumDecodeNullable(_$EvaluationEnumMap, json['evaluation'],
+          unknownValue: Evaluation.UNKNOWN),
     );
 
 Map<String, dynamic> _$KnowledgePanelToJson(KnowledgePanel instance) =>
     <String, dynamic>{
       'parent_panel_id': instance.parentPanelId,
       'title_element': instance.titleElement,
-      'type': _$KnowledgePanelTypeEnumMap[instance.type],
       'level': _$LevelEnumMap[instance.level],
-      'topics': instance.topics,
       'elements': instance.elements,
+      'type': _$KnowledgePanelTypeEnumMap[instance.type],
+      'topics': instance.topics,
       'grade': _$GradeEnumMap[instance.grade],
+      'evaluation': _$EvaluationEnumMap[instance.evaluation],
     };
 
 K _$enumDecode<K, V>(
@@ -60,13 +63,6 @@ K _$enumDecode<K, V>(
   ).key;
 }
 
-const _$KnowledgePanelTypeEnumMap = {
-  KnowledgePanelType.DO_YOU_KNOW: 'doyouknow',
-  KnowledgePanelType.SCORE: 'score',
-  KnowledgePanelType.ECOSCORE_LCA: 'ecoscore_lca',
-  KnowledgePanelType.UNKNOWN: 'UNKNOWN',
-};
-
 const _$LevelEnumMap = {
   Level.TRIVIA: 'trivia',
   Level.INFO: 'info',
@@ -87,6 +83,13 @@ K? _$enumDecodeNullable<K, V>(
   return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
+const _$KnowledgePanelTypeEnumMap = {
+  KnowledgePanelType.DO_YOU_KNOW: 'doyouknow',
+  KnowledgePanelType.SCORE: 'score',
+  KnowledgePanelType.ECOSCORE_LCA: 'ecoscore_lca',
+  KnowledgePanelType.UNKNOWN: 'UNKNOWN',
+};
+
 const _$GradeEnumMap = {
   Grade.A: 'A',
   Grade.B: 'B',
@@ -94,6 +97,13 @@ const _$GradeEnumMap = {
   Grade.D: 'D',
   Grade.E: 'E',
   Grade.UNKNOWN: 'UNKNOWN',
+};
+
+const _$EvaluationEnumMap = {
+  Evaluation.GOOD: 'good',
+  Evaluation.NEUTRAL: 'neutral',
+  Evaluation.BAD: 'bad',
+  Evaluation.UNKNOWN: 'UNKNOWN',
 };
 
 TitleElement _$TitleElementFromJson(Map<String, dynamic> json) => TitleElement(
