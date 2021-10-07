@@ -5,6 +5,8 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:http/http.dart';
+import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/model/Category.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
@@ -14,7 +16,8 @@ import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
-import 'package:openfoodfacts/utils/TagType.dart';
+import 'package:openfoodfacts/utils/TaxonomyType.dart';
+import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/UriHelper.dart';
 
 import 'model/Insight.dart';
@@ -37,6 +40,7 @@ export 'interface/Parameter.dart';
 export 'model/Additives.dart';
 export 'model/Ingredient.dart';
 export 'model/Insight.dart';
+export 'model/Category.dart';
 export 'model/Product.dart';
 export 'model/ProductImage.dart';
 export 'model/ProductResult.dart';
@@ -293,6 +297,38 @@ class OpenFoodAPIClient {
     return result;
   }
 
+  static Future<Map<String, T>?>
+      getTaxonomy<T extends JsonObject, F extends Enum>(
+    TaxonomyQueryConfiguration<T, F> configuration, {
+    User? user,
+    QueryType? queryType,
+  }) async {
+    final Uri uri = UriHelper.getUri(
+      path: 'api/v2/taxonomy',
+      queryParameters: configuration.getParametersMap(),
+      queryType: queryType,
+    );
+
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      user: user,
+      userAgent: OpenFoodAPIConfiguration.userAgent,
+      queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+    );
+
+    return configuration
+        .createFromJson(json.decode(_replaceQuotes(response.body)));
+  }
+
+  static Future<Map<String, Category>?> getCategories(
+    CategoryQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) {
+    return getTaxonomy<Category, CategoryField>(configuration,
+        user: user, queryType: queryType);
+  }
+
   static void _removeImages(
     final SearchResult searchResult,
     final AbstractQueryConfiguration configuration,
@@ -537,7 +573,7 @@ class OpenFoodAPIClient {
   /// Returns a List of suggestions
   /// By default the query will hit the PROD DB
   static Future<List<dynamic>> getAutocompletedSuggestions(
-    TagType tagType, {
+    TaxonomyType tagType, {
     String input = '',
     OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
     QueryType? queryType,
