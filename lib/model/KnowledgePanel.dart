@@ -51,6 +51,15 @@ enum Grade {
   UNKNOWN,
 }
 
+/// Evaluation of the panel, depicting whether the content of the panel is
+/// good/bad/neutral for the topic to which the panel applies.
+enum Evaluation {
+  GOOD,
+  NEUTRAL,
+  BAD,
+  UNKNOWN,
+}
+
 /// KnowledgePanels are a standardized and generic units of information that
 /// the client can display on the product page.
 ///
@@ -66,19 +75,19 @@ class KnowledgePanel extends JsonObject {
   @JsonKey(name: 'title_element')
   final TitleElement titleElement;
 
-  final KnowledgePanelType type;
-
   /// Level of this KnowledgePanel. Client may choose to display the panel based
   /// on the level.
   @JsonKey(unknownEnumValue: Level.UNKNOWN)
   final Level level;
 
-  /// The topics discussed in this knowledge panel, example: 'Environment'.
-  final List<String>? topics;
-
   /// KnowledgePanelElement is a single unit of KnowledgePanel that can be
   /// rendered on the client.
   final List<KnowledgePanelElement> elements;
+
+  final KnowledgePanelType? type;
+
+  /// The topics discussed in this knowledge panel, example: 'Environment'.
+  final List<String>? topics;
 
   /// Grade of the panel, depicting the level of impact the product has for the
   /// corresponding topics. Client can choose to color code the panel depending
@@ -87,14 +96,20 @@ class KnowledgePanel extends JsonObject {
   @JsonKey(unknownEnumValue: Grade.UNKNOWN)
   final Grade? grade;
 
+  /// Evaluation of the panel, depicting whether the content of the panel is
+  /// good/bad/neutral for the topic to which the panel applies.
+  @JsonKey(unknownEnumValue: Evaluation.UNKNOWN)
+  final Evaluation? evaluation;
+
   const KnowledgePanel({
     required this.parentPanelId,
     required this.titleElement,
-    required this.type,
     required this.level,
     required this.elements,
+    this.type,
     this.topics,
     this.grade,
+    this.evaluation,
   });
 
   factory KnowledgePanel.fromJson(Map<String, dynamic> json) =>
