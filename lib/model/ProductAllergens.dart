@@ -1,15 +1,15 @@
-class Allergens {
+class ProductAllergens {
   List<String> ids; // allergen id formatted as 'en:gluten'
   List<String> names; // allergen name formatted as 'gluten'
 
-  Allergens(this.ids, this.names);
+  ProductAllergens(this.ids, this.names);
 
-  static Allergens allergensFromJson(List<dynamic>? json) {
+  static ProductAllergens allergensFromJson(List<dynamic>? json) {
     List<String> ids = [];
     List<String> names = [];
 
     if (json == null) {
-      return Allergens(ids, names);
+      return ProductAllergens(ids, names);
     }
 
     for (int i = 0; i < json.length; i++) {
@@ -18,10 +18,10 @@ class Allergens {
       names.add(name);
     }
 
-    return Allergens(ids, names);
+    return ProductAllergens(ids, names);
   }
 
-  static List<String>? allergensToJson(Allergens? allergens) {
+  static List<String>? allergensToJson(ProductAllergens? allergens) {
     List<String> result = [];
 
     if (allergens == null) {

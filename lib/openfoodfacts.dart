@@ -8,6 +8,7 @@ import 'package:http/http.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/Allergen.dart';
 import 'package:openfoodfacts/model/Category.dart';
+import 'package:openfoodfacts/model/Ingredient.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
@@ -39,7 +40,7 @@ import 'utils/ProductSearchQueryConfiguration.dart';
 
 export 'interface/Parameter.dart';
 export 'model/Additives.dart';
-export 'model/Ingredient.dart';
+export 'model/ProductIngredient.dart';
 export 'model/Insight.dart';
 export 'model/Category.dart';
 export 'model/Product.dart';
@@ -350,6 +351,15 @@ class OpenFoodAPIClient {
     QueryType? queryType,
   }) {
     return getTaxonomy<Allergen, AllergenField>(configuration,
+        user: user, queryType: queryType);
+  }
+
+  static Future<Map<String, Ingredient>?> getIngredients(
+    IngredientQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) {
+    return getTaxonomy<Ingredient, IngredientField>(configuration,
         user: user, queryType: queryType);
   }
 

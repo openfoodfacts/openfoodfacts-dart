@@ -7,10 +7,10 @@ import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import '../interface/JsonObject.dart';
 import 'Additives.dart';
-import 'Allergens.dart';
+import 'ProductAllergens.dart';
 import 'EcoscoreData.dart';
 import 'EnvironmentImpactLevels.dart';
-import 'Ingredient.dart';
+import 'ProductIngredient.dart';
 import 'IngredientsAnalysisTags.dart';
 import 'NutrientLevels.dart';
 import 'Nutriments.dart';
@@ -159,7 +159,7 @@ class Product extends JsonObject {
       name: 'ingredients',
       includeIfNull: false,
       toJson: JsonHelper.ingredientsToJson)
-  List<Ingredient>? ingredients;
+  List<ProductIngredient>? ingredients;
 
   @JsonKey(name: 'ingredients_text', includeIfNull: false)
   String? ingredientsText;
@@ -207,9 +207,9 @@ class Product extends JsonObject {
   @JsonKey(
       name: 'allergens_tags',
       includeIfNull: false,
-      fromJson: Allergens.allergensFromJson,
-      toJson: Allergens.allergensToJson)
-  Allergens? allergens;
+      fromJson: ProductAllergens.allergensFromJson,
+      toJson: ProductAllergens.allergensToJson)
+  ProductAllergens? allergens;
 
   @JsonKey(
       name: 'nutrient_levels',

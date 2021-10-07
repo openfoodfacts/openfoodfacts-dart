@@ -881,9 +881,12 @@ void main() {
 
       final vegetableFat = result.product!.ingredients!
           .firstWhere((ingredient) => ingredient.text == 'Pflanzenfett');
-      expect(vegetableFat.vegan, IngredientSpecialPropertyStatus.POSITIVE);
-      expect(vegetableFat.vegetarian, IngredientSpecialPropertyStatus.POSITIVE);
-      expect(vegetableFat.fromPalmOil, IngredientSpecialPropertyStatus.MAYBE);
+      expect(
+          vegetableFat.vegan, ProductIngredientSpecialPropertyStatus.POSITIVE);
+      expect(vegetableFat.vegetarian,
+          ProductIngredientSpecialPropertyStatus.POSITIVE);
+      expect(vegetableFat.fromPalmOil,
+          ProductIngredientSpecialPropertyStatus.MAYBE);
     });
 
     test('matched product', () async {
