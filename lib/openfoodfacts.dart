@@ -305,12 +305,7 @@ class OpenFoodAPIClient {
     User? user,
     QueryType? queryType,
   }) async {
-    final Uri uri = UriHelper.getUri(
-      path: 'api/v2/taxonomy',
-      queryParameters: configuration.getParametersMap(),
-      queryType: queryType,
-    );
-
+    final Uri uri = configuration.getUri(queryType);
     final Response response = await HttpHelper().doGetRequest(
       uri,
       user: user,

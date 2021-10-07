@@ -1,7 +1,9 @@
 import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:openfoodfacts/utils/TaxonomyType.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
+import 'package:openfoodfacts/utils/UriHelper.dart';
 
 /// Abstract query configuration for taxonomies.
 ///
@@ -84,6 +86,14 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
       result.putIfAbsent(parameter.getName(), () => parameter.getValue());
     }
     return result;
+  }
+
+  Uri getUri([QueryType? queryType]) {
+    return UriHelper.getUri(
+      path: 'api/v2/taxonomy',
+      queryParameters: getParametersMap(),
+      queryType: queryType,
+    );
   }
 
   /// Returns the set of fields to ignore if specified in the [fields] parameter.

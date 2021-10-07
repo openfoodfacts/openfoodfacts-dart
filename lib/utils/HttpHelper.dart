@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 import 'package:openfoodfacts/model/UserAgent.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
@@ -12,9 +13,17 @@ import 'QueryType.dart';
 
 /// General functions for sending http requests (post, get, multipart, ...)
 class HttpHelper {
-  static final HttpHelper _singleton = HttpHelper._internal();
-  factory HttpHelper() => _singleton;
-  HttpHelper._internal();
+  /// Gets the instance
+  static HttpHelper get instance => _instance ??= HttpHelper.internal();
+  static HttpHelper? _instance;
+  @visibleForTesting
+  static set instance(HttpHelper value) => _instance = value;
+
+  factory HttpHelper() => instance;
+
+  @protected
+  /// A protected constructor to allow subclasses to create themselves.
+  HttpHelper.internal();
 
   static const String USER_AGENT = 'Dart API';
   static const String FROM = 'anonymous';
