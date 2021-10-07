@@ -22,6 +22,7 @@ class HttpHelper {
   factory HttpHelper() => instance;
 
   @protected
+
   /// A protected constructor to allow subclasses to create themselves.
   HttpHelper.internal();
 

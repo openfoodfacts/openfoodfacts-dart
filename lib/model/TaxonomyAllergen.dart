@@ -4,22 +4,23 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/TaxonomyType.dart';
 
-part 'Allergen.g.dart';
+part 'TaxonomyAllergen.g.dart';
 
-/// Fields of an [Allergen]
-enum AllergenField {
+/// Fields of an [TaxonomyAllergen]
+enum TaxonomyAllergenField {
   ALL,
   NAME,
   SYNONYMS,
   WIKIDATA,
 }
 
-extension AllergenFieldExtension on AllergenField {
-  static const Map<AllergenField, String> _KEYS = <AllergenField, String>{
-    AllergenField.ALL: 'all',
-    AllergenField.NAME: 'name',
-    AllergenField.SYNONYMS: 'synonyms',
-    AllergenField.WIKIDATA: 'wikidata',
+extension TaxonomyAllergenFieldExtension on TaxonomyAllergenField {
+  static const Map<TaxonomyAllergenField, String> _KEYS =
+      <TaxonomyAllergenField, String>{
+    TaxonomyAllergenField.ALL: 'all',
+    TaxonomyAllergenField.NAME: 'name',
+    TaxonomyAllergenField.SYNONYMS: 'synonyms',
+    TaxonomyAllergenField.WIKIDATA: 'wikidata',
   };
 
   /// Returns the key of the Allergen field
@@ -31,20 +32,20 @@ extension AllergenFieldExtension on AllergenField {
 /// See [OpenFoodAPIClient.getTaxonomy] for more details on how to retrieve one
 /// of these.
 @JsonSerializable()
-class Allergen extends JsonObject {
-  Allergen(
+class TaxonomyAllergen extends JsonObject {
+  TaxonomyAllergen(
     this.name,
     this.synonyms,
     this.wikidata,
   );
 
-  factory Allergen.fromJson(Map<String, dynamic> json) {
-    return _$AllergenFromJson(json);
+  factory TaxonomyAllergen.fromJson(Map<String, dynamic> json) {
+    return _$TaxonomyAllergenFromJson(json);
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return _$AllergenToJson(this);
+    return _$TaxonomyAllergenToJson(this);
   }
 
   @JsonKey(
@@ -73,13 +74,13 @@ class Allergen extends JsonObject {
   String toString() => toJson().toString();
 }
 
-class AllergenQueryConfiguration
-    extends TaxonomyQueryConfiguration<Allergen, AllergenField> {
-  AllergenQueryConfiguration({
+class TaxonomyAllergenQueryConfiguration extends TaxonomyQueryConfiguration<
+    TaxonomyAllergen, TaxonomyAllergenField> {
+  TaxonomyAllergenQueryConfiguration({
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages = const [],
     String? cc,
-    List<AllergenField> fields = const [],
+    List<TaxonomyAllergenField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
           TaxonomyType.ALLERGENS,
@@ -92,26 +93,29 @@ class AllergenQueryConfiguration
         );
 
   @override
-  Map<String, Allergen> convertResults(dynamic jsonData) {
+  Map<String, TaxonomyAllergen> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {
       return const {};
     }
-    return jsonData.map<String, Allergen>((String key, dynamic taxonomy) {
+    return jsonData
+        .map<String, TaxonomyAllergen>((String key, dynamic taxonomy) {
       if (taxonomy is! Map<String, dynamic>) {
         assert(false, 'Received JSON Allergen is not a Map');
-        return MapEntry(key, Allergen.fromJson({}));
+        return MapEntry(key, TaxonomyAllergen.fromJson({}));
       }
-      return MapEntry(key, Allergen.fromJson(taxonomy));
+      return MapEntry(key, TaxonomyAllergen.fromJson(taxonomy));
     });
   }
 
   @override
-  Set<AllergenField> get ignoredFields => const {AllergenField.ALL};
+  Set<TaxonomyAllergenField> get ignoredFields =>
+      const {TaxonomyAllergenField.ALL};
 
   @override
-  Iterable<String> convertFieldsToStrings(Iterable<AllergenField> fields) {
+  Iterable<String> convertFieldsToStrings(
+      Iterable<TaxonomyAllergenField> fields) {
     return fields
-        .where((AllergenField field) => !ignoredFields.contains(field))
-        .map<String>((AllergenField field) => field.key);
+        .where((TaxonomyAllergenField field) => !ignoredFields.contains(field))
+        .map<String>((TaxonomyAllergenField field) => field.key);
   }
 }

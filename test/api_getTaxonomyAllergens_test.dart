@@ -1,4 +1,4 @@
-import 'package:openfoodfacts/model/Allergen.dart';
+import 'package:openfoodfacts/model/TaxonomyAllergen.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
@@ -17,7 +17,7 @@ void main() {
     HttpHelper.instance = httpHelper;
   });
 
-  group('OpenFoodAPIClient getAllergens', () {
+  group('OpenFoodAPIClient getTaxonomyAllergens', () {
     test('get an allergen', () async {
       final String tag = 'en:gluten';
       Map<String, dynamic> expectedResponse = <String, dynamic>{
@@ -70,10 +70,11 @@ void main() {
           }
         }
       };
-      AllergenQueryConfiguration configuration = AllergenQueryConfiguration(
+      TaxonomyAllergenQueryConfiguration configuration =
+          TaxonomyAllergenQueryConfiguration(
         fields: [
-          AllergenField.NAME,
-          AllergenField.SYNONYMS,
+          TaxonomyAllergenField.NAME,
+          TaxonomyAllergenField.SYNONYMS,
         ],
         languages: [
           OpenFoodFactsLanguage.ENGLISH,
@@ -81,37 +82,44 @@ void main() {
         ],
         tags: <String>[tag],
       );
-      httpHelper.setResponse(configuration.getUri(), response: expectedResponse);
+      httpHelper.setResponse(configuration.getUri(),
+          response: expectedResponse);
 
-      Map<String, Allergen>? allergens = await OpenFoodAPIClient.getAllergens(
+      Map<String, TaxonomyAllergen>? allergens =
+          await OpenFoodAPIClient.getTaxonomyAllergens(
         configuration,
         user: TestConstants.TEST_USER,
       );
       expect(allergens, isNotNull);
       expect(allergens!.length, equals(1));
-      Allergen gluten = allergens[tag]!;
+      TaxonomyAllergen gluten = allergens[tag]!;
       expect(
           gluten.name![OpenFoodFactsLanguage.ENGLISH]!,
-          equals(
-              expectedResponse[tag][AllergenField.NAME.key][OpenFoodFactsLanguage.ENGLISH.code]));
-      expect(gluten.name![OpenFoodFactsLanguage.FRENCH]!,
-          equals(expectedResponse[tag][AllergenField.NAME.key][OpenFoodFactsLanguage.FRENCH.code]));
+          equals(expectedResponse[tag][TaxonomyAllergenField.NAME.key]
+              [OpenFoodFactsLanguage.ENGLISH.code]));
+      expect(
+          gluten.name![OpenFoodFactsLanguage.FRENCH]!,
+          equals(expectedResponse[tag][TaxonomyAllergenField.NAME.key]
+              [OpenFoodFactsLanguage.FRENCH.code]));
       expect(
           gluten.synonyms![OpenFoodFactsLanguage.ENGLISH]!,
-          equals(
-              expectedResponse[tag][AllergenField.SYNONYMS.key][OpenFoodFactsLanguage.ENGLISH.code]));
-      expect(gluten.synonyms![OpenFoodFactsLanguage.FRENCH]!,
-          equals(expectedResponse[tag][AllergenField.SYNONYMS.key][OpenFoodFactsLanguage.FRENCH.code]));
+          equals(expectedResponse[tag][TaxonomyAllergenField.SYNONYMS.key]
+              [OpenFoodFactsLanguage.ENGLISH.code]));
+      expect(
+          gluten.synonyms![OpenFoodFactsLanguage.FRENCH]!,
+          equals(expectedResponse[tag][TaxonomyAllergenField.SYNONYMS.key]
+              [OpenFoodFactsLanguage.FRENCH.code]));
     });
     test("get an allergen that doesn't exist", () async {
       final String tag = 'en:some_nonexistent_allergen';
       Map<String, dynamic> expectedResponse = <String, dynamic>{
         tag: {},
       };
-      AllergenQueryConfiguration configuration = AllergenQueryConfiguration(
+      TaxonomyAllergenQueryConfiguration configuration =
+          TaxonomyAllergenQueryConfiguration(
         fields: [
-          AllergenField.NAME,
-          AllergenField.SYNONYMS,
+          TaxonomyAllergenField.NAME,
+          TaxonomyAllergenField.SYNONYMS,
         ],
         languages: [
           OpenFoodFactsLanguage.ENGLISH,
@@ -119,9 +127,11 @@ void main() {
         ],
         tags: <String>[tag],
       );
-      httpHelper.setResponse(configuration.getUri(), response: expectedResponse);
+      httpHelper.setResponse(configuration.getUri(),
+          response: expectedResponse);
 
-      Map<String, Allergen>? categories = await OpenFoodAPIClient.getAllergens(
+      Map<String, TaxonomyAllergen>? categories =
+          await OpenFoodAPIClient.getTaxonomyAllergens(
         configuration,
         user: TestConstants.TEST_USER,
       );
@@ -179,10 +189,11 @@ void main() {
           }
         }
       };
-      AllergenQueryConfiguration configuration = AllergenQueryConfiguration(
+      TaxonomyAllergenQueryConfiguration configuration =
+          TaxonomyAllergenQueryConfiguration(
         fields: [
-          AllergenField.NAME,
-          AllergenField.SYNONYMS,
+          TaxonomyAllergenField.NAME,
+          TaxonomyAllergenField.SYNONYMS,
         ],
         languages: [
           OpenFoodFactsLanguage.ENGLISH,
@@ -190,27 +201,33 @@ void main() {
         ],
         tags: <String>['en:some_nonexistent_allergen', tag],
       );
-      httpHelper.setResponse(configuration.getUri(), response: expectedResponse);
+      httpHelper.setResponse(configuration.getUri(),
+          response: expectedResponse);
 
-      Map<String, Allergen>? allergens = await OpenFoodAPIClient.getAllergens(
+      Map<String, TaxonomyAllergen>? allergens =
+          await OpenFoodAPIClient.getTaxonomyAllergens(
         configuration,
         user: TestConstants.TEST_USER,
       );
       expect(allergens, isNotNull);
       expect(allergens!.length, equals(1));
-      Allergen gluten = allergens[tag]!;
+      TaxonomyAllergen gluten = allergens[tag]!;
       expect(
           gluten.name![OpenFoodFactsLanguage.ENGLISH]!,
-          equals(
-              expectedResponse[tag][AllergenField.NAME.key][OpenFoodFactsLanguage.ENGLISH.code]));
-      expect(gluten.name![OpenFoodFactsLanguage.FRENCH]!,
-          equals(expectedResponse[tag][AllergenField.NAME.key][OpenFoodFactsLanguage.FRENCH.code]));
+          equals(expectedResponse[tag][TaxonomyAllergenField.NAME.key]
+              [OpenFoodFactsLanguage.ENGLISH.code]));
+      expect(
+          gluten.name![OpenFoodFactsLanguage.FRENCH]!,
+          equals(expectedResponse[tag][TaxonomyAllergenField.NAME.key]
+              [OpenFoodFactsLanguage.FRENCH.code]));
       expect(
           gluten.synonyms![OpenFoodFactsLanguage.ENGLISH]!,
-          equals(
-              expectedResponse[tag][AllergenField.SYNONYMS.key][OpenFoodFactsLanguage.ENGLISH.code]));
-      expect(gluten.synonyms![OpenFoodFactsLanguage.FRENCH]!,
-          equals(expectedResponse[tag][AllergenField.SYNONYMS.key][OpenFoodFactsLanguage.FRENCH.code]));
+          equals(expectedResponse[tag][TaxonomyAllergenField.SYNONYMS.key]
+              [OpenFoodFactsLanguage.ENGLISH.code]));
+      expect(
+          gluten.synonyms![OpenFoodFactsLanguage.FRENCH]!,
+          equals(expectedResponse[tag][TaxonomyAllergenField.SYNONYMS.key]
+              [OpenFoodFactsLanguage.FRENCH.code]));
     });
   });
 }

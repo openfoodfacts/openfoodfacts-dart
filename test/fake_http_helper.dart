@@ -7,7 +7,8 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 
 class _Query {
-  _Query(Uri uri, {this.body = const {}, this.files = const {}}) : uri = uri.toString();
+  _Query(Uri uri, {this.body = const {}, this.files = const {}})
+      : uri = uri.toString();
 
   final String uri;
   final Map<String, String?> body;
@@ -41,7 +42,8 @@ class _Query {
   bool operator ==(Object other) {
     if (other is _Query) {
       return uri.toString() == other.uri.toString() &&
-          _deepBodyEqual(other.body) && _deepFilesEqual(other.files);
+          _deepBodyEqual(other.body) &&
+          _deepFilesEqual(other.files);
     }
     return false;
   }
@@ -72,7 +74,8 @@ class FakeHttpHelper extends HttpHelper {
     return http.Response(json.encode(responseJson), status);
   }
 
-  void setResponse(Uri request, {http.Response? httpResponse, Object? response, int status = 200}) {
+  void setResponse(Uri request,
+      {http.Response? httpResponse, Object? response, int status = 200}) {
     assert(httpResponse != null || response != null);
     _Query query = _Query(request);
     _responses[query] = httpResponse ?? buildResponse(response, status: status);
@@ -126,7 +129,8 @@ class FakeHttpHelper extends HttpHelper {
     return response;
   }
 
-  Future<http.Response> doPostRequest(Uri uri, Map<String, String?> body, User user,
+  Future<http.Response> doPostRequest(
+      Uri uri, Map<String, String?> body, User user,
       {QueryType? queryType}) async {
     final _Query query = _Query(uri, body: body);
     final http.Response response = _responses[query] ?? http404;
@@ -142,7 +146,8 @@ class FakeHttpHelper extends HttpHelper {
     QueryType? queryType,
   }) async {
     final _Query query = _Query(uri, body: body, files: files ?? const {});
-    final Status status = _multipartResponses[query] ?? Status.fromJson(const {});
+    final Status status =
+        _multipartResponses[query] ?? Status.fromJson(const {});
     _logRequest(uri, status: status);
     return status;
   }

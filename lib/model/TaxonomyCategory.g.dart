@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'Category.dart';
+part of 'TaxonomyCategory.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
+TaxonomyCategory _$TaxonomyCategoryFromJson(Map<String, dynamic> json) =>
+    TaxonomyCategory(
       LanguageHelper.fromJsonStringMap(json['agribalyse_food_code']),
       LanguageHelper.fromJsonStringMap(json['agribalyse_food_name']),
       LanguageHelper.fromJsonStringMap(json['agribalyse_proxy_food_code']),
@@ -39,7 +40,7 @@ Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
       LanguageHelper.fromJsonStringMap(json['wikidata_wikipedia_category']),
     );
 
-Map<String, dynamic> _$CategoryToJson(Category instance) {
+Map<String, dynamic> _$TaxonomyCategoryToJson(TaxonomyCategory instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

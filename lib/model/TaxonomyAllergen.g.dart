@@ -1,18 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'Allergen.dart';
+part of 'TaxonomyAllergen.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Allergen _$AllergenFromJson(Map<String, dynamic> json) => Allergen(
+TaxonomyAllergen _$TaxonomyAllergenFromJson(Map<String, dynamic> json) =>
+    TaxonomyAllergen(
       LanguageHelper.fromJsonStringMap(json['name']),
       LanguageHelper.fromJsonStringsListMap(json['synonyms']),
       LanguageHelper.fromJsonStringMap(json['wikidata']),
     );
 
-Map<String, dynamic> _$AllergenToJson(Allergen instance) {
+Map<String, dynamic> _$TaxonomyAllergenToJson(TaxonomyAllergen instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

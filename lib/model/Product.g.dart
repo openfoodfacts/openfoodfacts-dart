@@ -40,7 +40,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           JsonHelper.selectedImagesFromJson(json['selected_images'] as Map?),
       images: JsonHelper.imagesFromJson(json['images'] as Map?),
       ingredients: (json['ingredients'] as List<dynamic>?)
-          ?.map((e) => ProductIngredient.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
           .toList(),
       ingredientsText: json['ingredients_text'] as String?,
       ingredientsTextInLanguages: LanguageHelper.fromJsonStringMap(
@@ -58,8 +58,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       additives: Additives.additivesFromJson(json['additives_tags'] as List?),
       environmentImpactLevels: EnvironmentImpactLevels.fromJson(
           json['environment_impact_level_tags'] as List?),
-      allergens:
-          ProductAllergens.allergensFromJson(json['allergens_tags'] as List?),
+      allergens: Allergens.allergensFromJson(json['allergens_tags'] as List?),
       nutrientLevels: NutrientLevels.fromJson(json['nutrient_levels'] as Map?),
       nutrimentEnergyUnit: json['nutriment_energy_unit'] as String?,
       nutrimentDataPer: json['nutrition_data_per'] as String?,
@@ -155,8 +154,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('additives_tags', Additives.additivesToJson(instance.additives));
   writeNotNull('environment_impact_level_tags',
       EnvironmentImpactLevels.toJson(instance.environmentImpactLevels));
-  writeNotNull(
-      'allergens_tags', ProductAllergens.allergensToJson(instance.allergens));
+  writeNotNull('allergens_tags', Allergens.allergensToJson(instance.allergens));
   writeNotNull(
       'nutrient_levels', NutrientLevels.toJson(instance.nutrientLevels));
   writeNotNull('nutriment_energy_unit', instance.nutrimentEnergyUnit);

@@ -1,7 +1,7 @@
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
-import 'package:openfoodfacts/model/ProductIngredient.dart';
+import 'package:openfoodfacts/model/Ingredient.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 
 /// Helper class around product field conversion to/from JSON
@@ -121,16 +121,16 @@ class JsonHelper {
     }
   }
 
-  /// Returns a JSON map from [ProductIngredient]s
+  /// Returns a JSON map from [Ingredient]s
   static List<Map<String, dynamic>>? ingredientsToJson(
-      List<ProductIngredient>? ingredients) {
+      List<Ingredient>? ingredients) {
     if (ingredients == null || ingredients.isEmpty) {
       return null;
     }
 
     List<Map<String, dynamic>> result = [];
 
-    for (ProductIngredient ingredient in ingredients) {
+    for (Ingredient ingredient in ingredients) {
       result.add(ingredient.toJson());
     }
 

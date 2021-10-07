@@ -4,10 +4,10 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/TaxonomyType.dart';
 
-part 'Category.g.dart';
+part 'TaxonomyCategory.g.dart';
 
-/// Fields of a [Category]
-enum CategoryField {
+/// Fields of a [TaxonomyCategory]
+enum TaxonomyCategoryField {
   ALL,
   AGRIBALYSE_FOOD_CODE,
   AGRIBALYSE_FOOD_NAME,
@@ -40,39 +40,44 @@ enum CategoryField {
   WIKIDATA_WIKIPEDIA_CATEGORY,
 }
 
-extension CategoryFieldExtension on CategoryField {
-  static const Map<CategoryField, String> _KEYS = <CategoryField, String>{
-    CategoryField.ALL: 'all',
-    CategoryField.AGRIBALYSE_FOOD_CODE: 'agribalyse_food_code',
-    CategoryField.AGRIBALYSE_FOOD_NAME: 'agribalyse_food_name',
-    CategoryField.AGRIBALYSE_PROXY_FOOD_CODE: 'agribalyse_proxy_food_code',
-    CategoryField.AGRIBALYSE_PROXY_FOOD_NAME: 'agribalyse_proxy_food_name',
-    CategoryField.AGRIBALYSE_PROXY_NAME: 'agribalyse_proxy_name',
-    CategoryField.CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT:
+extension TaxonomyCategoryFieldExtension on TaxonomyCategoryField {
+  static const Map<TaxonomyCategoryField, String> _KEYS =
+      <TaxonomyCategoryField, String>{
+    TaxonomyCategoryField.ALL: 'all',
+    TaxonomyCategoryField.AGRIBALYSE_FOOD_CODE: 'agribalyse_food_code',
+    TaxonomyCategoryField.AGRIBALYSE_FOOD_NAME: 'agribalyse_food_name',
+    TaxonomyCategoryField.AGRIBALYSE_PROXY_FOOD_CODE:
+        'agribalyse_proxy_food_code',
+    TaxonomyCategoryField.AGRIBALYSE_PROXY_FOOD_NAME:
+        'agribalyse_proxy_food_name',
+    TaxonomyCategoryField.AGRIBALYSE_PROXY_NAME: 'agribalyse_proxy_name',
+    TaxonomyCategoryField.CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT:
         'carbon_footprint_fr_foodges_ingredient',
-    CategoryField.CHILDREN: 'children',
-    CategoryField.CIQUAL_FOOD_CODE: 'ciqual_food_code',
-    CategoryField.CIQUAL_FOOD_NAME: 'ciqual_food_name',
-    CategoryField.CIQUAL_PROXY_FOOD_CODE: 'ciqual_proxy_food_code',
-    CategoryField.CIQUAL_PROXY_FOOD_NAME: 'ciqual_proxy_food_name',
-    CategoryField.COUNTRY: 'country',
-    CategoryField.GRAPEVARIETY: 'grapevariety',
-    CategoryField.INSTANCEOF: 'instanceof',
-    CategoryField.NAME: 'name',
-    CategoryField.NOVA: 'nova',
-    CategoryField.OQALI_FAMILY: 'oqali_family',
-    CategoryField.ORIGINS: 'origins',
-    CategoryField.PARENTS: 'parents',
-    CategoryField.PNNS_GROUP_1: 'pnns_group_1',
-    CategoryField.PNNS_GROUP_2: 'pnns_group_2',
-    CategoryField.PROTECTED_NAME_FILE_NUMBER: 'protected_name_file_number',
-    CategoryField.PROTECTED_NAME_TYPE: 'protected_name_type',
-    CategoryField.REGION: 'region',
-    CategoryField.SEASON_IN_COUNTRY_FR: 'season_in_country_fr',
-    CategoryField.WHO_ID: 'who_id',
-    CategoryField.WIKIDATA: 'wikidata',
-    CategoryField.WIKIDATA_CATEGORY: 'wikidata_category',
-    CategoryField.WIKIDATA_WIKIPEDIA_CATEGORY: 'wikidata_wikipedia_category',
+    TaxonomyCategoryField.CHILDREN: 'children',
+    TaxonomyCategoryField.CIQUAL_FOOD_CODE: 'ciqual_food_code',
+    TaxonomyCategoryField.CIQUAL_FOOD_NAME: 'ciqual_food_name',
+    TaxonomyCategoryField.CIQUAL_PROXY_FOOD_CODE: 'ciqual_proxy_food_code',
+    TaxonomyCategoryField.CIQUAL_PROXY_FOOD_NAME: 'ciqual_proxy_food_name',
+    TaxonomyCategoryField.COUNTRY: 'country',
+    TaxonomyCategoryField.GRAPEVARIETY: 'grapevariety',
+    TaxonomyCategoryField.INSTANCEOF: 'instanceof',
+    TaxonomyCategoryField.NAME: 'name',
+    TaxonomyCategoryField.NOVA: 'nova',
+    TaxonomyCategoryField.OQALI_FAMILY: 'oqali_family',
+    TaxonomyCategoryField.ORIGINS: 'origins',
+    TaxonomyCategoryField.PARENTS: 'parents',
+    TaxonomyCategoryField.PNNS_GROUP_1: 'pnns_group_1',
+    TaxonomyCategoryField.PNNS_GROUP_2: 'pnns_group_2',
+    TaxonomyCategoryField.PROTECTED_NAME_FILE_NUMBER:
+        'protected_name_file_number',
+    TaxonomyCategoryField.PROTECTED_NAME_TYPE: 'protected_name_type',
+    TaxonomyCategoryField.REGION: 'region',
+    TaxonomyCategoryField.SEASON_IN_COUNTRY_FR: 'season_in_country_fr',
+    TaxonomyCategoryField.WHO_ID: 'who_id',
+    TaxonomyCategoryField.WIKIDATA: 'wikidata',
+    TaxonomyCategoryField.WIKIDATA_CATEGORY: 'wikidata_category',
+    TaxonomyCategoryField.WIKIDATA_WIKIPEDIA_CATEGORY:
+        'wikidata_wikipedia_category',
   };
 
   /// Returns the key of the Category field
@@ -84,8 +89,8 @@ extension CategoryFieldExtension on CategoryField {
 /// See [OpenFoodAPIClient.getTaxonomy] for more details on how to retrieve one
 /// of these.
 @JsonSerializable()
-class Category extends JsonObject {
-  Category(
+class TaxonomyCategory extends JsonObject {
+  TaxonomyCategory(
     this.agribalyseFoodCode,
     this.agribalyseFoodName,
     this.agribalyseProxyFoodCode,
@@ -117,13 +122,13 @@ class Category extends JsonObject {
     this.wikidataWikipediaCategory,
   );
 
-  factory Category.fromJson(Map<String, dynamic> json) {
-    return _$CategoryFromJson(json);
+  factory TaxonomyCategory.fromJson(Map<String, dynamic> json) {
+    return _$TaxonomyCategoryFromJson(json);
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return _$CategoryToJson(this);
+    return _$TaxonomyCategoryToJson(this);
   }
 
   @JsonKey(
@@ -324,14 +329,14 @@ class Category extends JsonObject {
   String toString() => toJson().toString();
 }
 
-class CategoryQueryConfiguration
-    extends TaxonomyQueryConfiguration<Category, CategoryField> {
-  CategoryQueryConfiguration({
+class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<
+    TaxonomyCategory, TaxonomyCategoryField> {
+  TaxonomyCategoryQueryConfiguration({
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages = const [],
     String? cc,
     bool includeChildren = false,
-    List<CategoryField> fields = const [],
+    List<TaxonomyCategoryField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
           TaxonomyType.CATEGORIES,
@@ -344,26 +349,29 @@ class CategoryQueryConfiguration
         );
 
   @override
-  Map<String, Category> convertResults(dynamic jsonData) {
+  Map<String, TaxonomyCategory> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {
       return const {};
     }
-    return jsonData.map<String, Category>((String key, dynamic taxonomy) {
+    return jsonData
+        .map<String, TaxonomyCategory>((String key, dynamic taxonomy) {
       if (taxonomy is! Map<String, dynamic>) {
         assert(false, 'Received JSON Category is not a Map');
-        return MapEntry(key, Category.fromJson({}));
+        return MapEntry(key, TaxonomyCategory.fromJson({}));
       }
-      return MapEntry(key, Category.fromJson(taxonomy));
+      return MapEntry(key, TaxonomyCategory.fromJson(taxonomy));
     });
   }
 
   @override
-  Set<CategoryField> get ignoredFields => const {CategoryField.ALL};
+  Set<TaxonomyCategoryField> get ignoredFields =>
+      const {TaxonomyCategoryField.ALL};
 
   @override
-  Iterable<String> convertFieldsToStrings(Iterable<CategoryField> fields) {
+  Iterable<String> convertFieldsToStrings(
+      Iterable<TaxonomyCategoryField> fields) {
     return fields
-        .where((CategoryField field) => !ignoredFields.contains(field))
-        .map<String>((CategoryField field) => field.key);
+        .where((TaxonomyCategoryField field) => !ignoredFields.contains(field))
+        .map<String>((TaxonomyCategoryField field) => field.key);
   }
 }

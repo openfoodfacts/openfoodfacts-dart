@@ -16,7 +16,7 @@ void main() {
     HttpHelper.instance = httpHelper;
   });
 
-  group('OpenFoodAPIClient getTaxonomy', () {
+  group('OpenFoodAPIClient getTaxonomyCategories', () {
     test('get a category', () async {
       final String tag = 'en:plain-crepes';
       Map<String, dynamic> expectedResponse = <String, dynamic>{
@@ -44,8 +44,8 @@ void main() {
       httpHelper.setResponse(configuration.getUri(),
           response: expectedResponse);
 
-      Map<String, TaxonomyCategory>? categories = await OpenFoodAPIClient
-          .getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(
+      Map<String, TaxonomyCategory>? categories =
+          await OpenFoodAPIClient.getTaxonomyCategories(
         configuration,
         user: TestConstants.TEST_USER,
       );
@@ -148,8 +148,8 @@ void main() {
       httpHelper.setResponse(configuration.getUri(),
           response: expectedResponse);
 
-      Map<String, TaxonomyCategory>? categories = await OpenFoodAPIClient
-          .getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(
+      Map<String, TaxonomyCategory>? categories =
+          await OpenFoodAPIClient.getTaxonomyCategories(
         configuration,
         user: TestConstants.TEST_USER,
       );
@@ -220,8 +220,8 @@ void main() {
       httpHelper.setResponse(configuration.getUri(),
           response: expectedResponse);
 
-      Map<String, TaxonomyCategory>? categories = await OpenFoodAPIClient
-          .getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(
+      Map<String, TaxonomyCategory>? categories =
+          await OpenFoodAPIClient.getTaxonomyCategories(
         configuration,
         user: TestConstants.TEST_USER,
       );
@@ -254,8 +254,8 @@ void main() {
       httpHelper.setResponse(configuration.getUri(),
           response: expectedResponse);
 
-      Map<String, TaxonomyCategory>? categories = await OpenFoodAPIClient
-          .getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(
+      Map<String, TaxonomyCategory>? categories =
+          await OpenFoodAPIClient.getTaxonomyCategories(
         configuration,
         user: TestConstants.TEST_USER,
       );

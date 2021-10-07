@@ -39,5 +39,4 @@ class OpenFoodAPIConfiguration {
   /// for each individual request by specifying the country code in the
   /// individual request configurations
   static String? globalCC;
-
 }

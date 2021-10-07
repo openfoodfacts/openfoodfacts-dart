@@ -6,9 +6,9 @@ import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
-import 'package:openfoodfacts/model/Allergen.dart';
-import 'package:openfoodfacts/model/Category.dart';
-import 'package:openfoodfacts/model/Ingredient.dart';
+import 'package:openfoodfacts/model/TaxonomyAllergen.dart';
+import 'package:openfoodfacts/model/TaxonomyCategory.dart';
+import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
@@ -40,9 +40,9 @@ import 'utils/ProductSearchQueryConfiguration.dart';
 
 export 'interface/Parameter.dart';
 export 'model/Additives.dart';
-export 'model/ProductIngredient.dart';
+export 'model/Ingredient.dart';
 export 'model/Insight.dart';
-export 'model/Category.dart';
+export 'model/TaxonomyCategory.dart';
 export 'model/Product.dart';
 export 'model/ProductImage.dart';
 export 'model/ProductResult.dart';
@@ -331,31 +331,33 @@ class OpenFoodAPIClient {
     return configuration.convertResults(decodedJson);
   }
 
-  static Future<Map<String, Category>?> getCategories(
-    CategoryQueryConfiguration configuration, {
+  static Future<Map<String, TaxonomyCategory>?> getTaxonomyCategories(
+    TaxonomyCategoryQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
   }) {
-    return getTaxonomy<Category, CategoryField>(configuration,
+    return getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(configuration,
         user: user, queryType: queryType);
   }
 
-  static Future<Map<String, Allergen>?> getAllergens(
-    AllergenQueryConfiguration configuration, {
+  static Future<Map<String, TaxonomyAllergen>?> getTaxonomyAllergens(
+    TaxonomyAllergenQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
   }) {
-    return getTaxonomy<Allergen, AllergenField>(configuration,
+    return getTaxonomy<TaxonomyAllergen, TaxonomyAllergenField>(configuration,
         user: user, queryType: queryType);
   }
 
-  static Future<Map<String, Ingredient>?> getIngredients(
-    IngredientQueryConfiguration configuration, {
+  static Future<Map<String, TaxonomyIngredient>?> getTaxonomyIngredients(
+    TaxonomyIngredientQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
   }) {
-    return getTaxonomy<Ingredient, IngredientField>(configuration,
-        user: user, queryType: queryType);
+    return getTaxonomy<TaxonomyIngredient, TaxonomyIngredientField>(
+        configuration,
+        user: user,
+        queryType: queryType);
   }
 
   static void _removeImages(

@@ -8,14 +8,14 @@ import 'package:openfoodfacts/utils/UriHelper.dart';
 /// Abstract query configuration for taxonomies.
 ///
 /// The type parameter "T" is the JsonObject that represents the Taxonomy (i.e.
-/// [Category]) and the type parameter "F" is the type enum that goes with that
+/// [TaxonomyCategory]) and the type parameter "F" is the type enum that goes with that
 /// taxonomy (i.e. [CategoryType]).
 ///
 /// See also [OpenFoodAPIClient.getTaxonomy], which takes this kind of query.
 ///
 /// Individual Taxonomies should implement a concrete subclass of this class to
 /// allow creating of the result data from json (See
-/// [CategoryQueryConfiguration] for an example).
+/// [TaxonomyCategoryQueryConfiguration] for an example).
 abstract class TaxonomyQueryConfiguration<T extends JsonObject,
     F extends Enum> {
   /// The [languages] field should be used to set the desired taxonomy
