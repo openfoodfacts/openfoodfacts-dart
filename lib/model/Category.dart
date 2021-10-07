@@ -319,6 +319,9 @@ class Category extends JsonObject {
     includeIfNull: false,
   )
   Map<OpenFoodFactsLanguage, String>? wikidataWikipediaCategory;
+
+  @override
+  String toString() => toJson().toString();
 }
 
 class CategoryQueryConfiguration
@@ -341,7 +344,7 @@ class CategoryQueryConfiguration
         );
 
   @override
-  Map<String, Category> createFromJson(dynamic jsonData) {
+  Map<String, Category> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {
       return const {};
     }

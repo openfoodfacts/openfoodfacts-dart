@@ -99,5 +99,43 @@ void main() {
         ]),
       );
     });
+    test("get a taxonomy that doesn't exist", () async {
+      CategoryQueryConfiguration configuration = CategoryQueryConfiguration(
+        fields: [CategoryField.NAME],
+        languages: [
+          OpenFoodFactsLanguage.ENGLISH,
+          OpenFoodFactsLanguage.FRENCH,
+        ],
+        tags: <String>['en:some_nonexistent_category'],
+      );
+
+      Map<String, Category>? categories =
+          await OpenFoodAPIClient.getTaxonomy<Category, CategoryField>(
+        configuration,
+        user: TestConstants.TEST_USER,
+      );
+
+      expect(categories, isNull);
+    });
+    test("get a taxonomy that doesn't exist with one that does.", () async {
+      CategoryQueryConfiguration configuration = CategoryQueryConfiguration(
+        fields: [CategoryField.NAME],
+        languages: [
+          OpenFoodFactsLanguage.ENGLISH,
+          OpenFoodFactsLanguage.FRENCH,
+        ],
+        tags: <String>['en:some_nonexistent_category', 'en:plain-crepes'],
+      );
+
+      Map<String, Category>? categories =
+          await OpenFoodAPIClient.getTaxonomy<Category, CategoryField>(
+        configuration,
+        user: TestConstants.TEST_USER,
+      );
+
+      expect(categories, isNotNull);
+      expect(categories!.length, equals(1));
+      expect(categories.keys, equals(['en:plain-crepes']));
+    });
   });
 }

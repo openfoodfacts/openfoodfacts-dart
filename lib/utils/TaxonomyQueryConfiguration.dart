@@ -95,7 +95,7 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
   /// Creates a map of the correct taxonomy type from the raw JSON data.
   ///
   /// Subclasses must implement this to return concrete taxonomy objects.
-  Map<String, T> createFromJson(dynamic jsonData);
+  Map<String, T> convertResults(dynamic jsonData);
 
   /// Converts the given list of fields to their corresponding query string
   /// values.

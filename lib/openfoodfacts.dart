@@ -6,6 +6,7 @@ import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/model/Allergen.dart';
 import 'package:openfoodfacts/model/Category.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
@@ -316,8 +317,22 @@ class OpenFoodAPIClient {
       queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
     );
 
-    return configuration
-        .createFromJson(json.decode(_replaceQuotes(response.body)));
+    Map<String, dynamic> decodedJson =
+        json.decode(_replaceQuotes(response.body))
+          ..removeWhere((String key, dynamic value) {
+            if (value is Map) {
+              return value.isEmpty;
+            }
+            if (value is List) {
+              return value.isEmpty;
+            }
+            return false;
+          });
+    if (decodedJson.isEmpty) {
+      // We requested something that doesn't have any results.
+      return null;
+    }
+    return configuration.convertResults(decodedJson);
   }
 
   static Future<Map<String, Category>?> getCategories(
@@ -326,6 +341,15 @@ class OpenFoodAPIClient {
     QueryType? queryType,
   }) {
     return getTaxonomy<Category, CategoryField>(configuration,
+        user: user, queryType: queryType);
+  }
+
+  static Future<Map<String, Allergen>?> getAllergens(
+    AllergenQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) {
+    return getTaxonomy<Allergen, AllergenField>(configuration,
         user: user, queryType: queryType);
   }
 
@@ -573,7 +597,7 @@ class OpenFoodAPIClient {
   /// Returns a List of suggestions
   /// By default the query will hit the PROD DB
   static Future<List<dynamic>> getAutocompletedSuggestions(
-    TaxonomyType tagType, {
+    TaxonomyType taxonomyType, {
     String input = '',
     OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
     QueryType? queryType,
@@ -582,7 +606,7 @@ class OpenFoodAPIClient {
         path: '/cgi/suggest.pl',
         queryType: queryType,
         queryParameters: {
-          'tagtype': tagType.key,
+          'tagtype': taxonomyType.key,
           'term': input,
           'lc': language.code,
         });

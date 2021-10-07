@@ -12,7 +12,7 @@ enum TaxonomyType {
 }
 
 extension TaxonomyTypeExtension on TaxonomyType {
-  static const Map<TaxonomyType, String> _TAGS = {
+  static const Map<TaxonomyType, String> _TAXONOMIES = {
     TaxonomyType.STATES: 'states',
     TaxonomyType.LABELS: 'labels',
     TaxonomyType.CATEGORIES: 'categories',
@@ -24,5 +24,5 @@ extension TaxonomyTypeExtension on TaxonomyType {
     TaxonomyType.LANGUAGES: 'languages',
     TaxonomyType.EMB_CODES: 'emb_codes',
   };
-  String get key => _TAGS[this] ?? '';
+  String get key => _TAXONOMIES[this] ?? '';
 }
