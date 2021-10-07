@@ -100,6 +100,8 @@ TitleElement _$TitleElementFromJson(Map<String, dynamic> json) => TitleElement(
       title: json['title'] as String,
       subtitle: json['subtitle'] as String?,
       iconUrl: json['icon_url'] as String?,
+      iconColorFromEvaluation:
+          json['icon_color_from_evaluation'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$TitleElementToJson(TitleElement instance) =>
@@ -107,4 +109,5 @@ Map<String, dynamic> _$TitleElementToJson(TitleElement instance) =>
       'title': instance.title,
       'subtitle': instance.subtitle,
       'icon_url': instance.iconUrl,
+      'icon_color_from_evaluation': instance.iconColorFromEvaluation,
     };

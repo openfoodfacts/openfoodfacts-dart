@@ -118,10 +118,14 @@ class TitleElement extends JsonObject {
   @JsonKey(name: 'icon_url')
   final String? iconUrl;
 
+  @JsonKey(name: 'icon_color_from_evaluation', defaultValue: false)
+  final bool? iconColorFromEvaluation;
+
   const TitleElement({
     required this.title,
     this.subtitle,
     this.iconUrl,
+    this.iconColorFromEvaluation,
   });
 
   factory TitleElement.fromJson(Map<String, dynamic> json) =>
