@@ -1,6 +1,6 @@
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
-import 'package:openfoodfacts/utils/TaxonomyType.dart';
+import 'package:openfoodfacts/utils/TagType.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/UriHelper.dart';
@@ -44,13 +44,13 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
   /// Additional parameters to add the to query.
   final List<Parameter> additionalParameters;
 
-  /// The type of taxonomy that this query should request.
-  final TaxonomyType taxonomyType;
+  /// The type of tags that this query should request a taxonomy for.
+  final TagType tagType;
 
   /// Allows subclasses to create a [TaxonomyQueryConfiguration] from the
   /// supplied parameters.
   TaxonomyQueryConfiguration(
-    this.taxonomyType,
+    this.tagType,
     this.tags, {
     List<OpenFoodFactsLanguage>? languages,
     this.cc,
@@ -66,7 +66,7 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
   Map<String, String> getParametersMap() {
     final Map<String, String> result = {};
 
-    result['type'] = taxonomyType.key;
+    result['type'] = tagType.key;
     result['tags'] = tags.join(',');
     result['include_children'] = includeChildren ? '1' : '0';
 

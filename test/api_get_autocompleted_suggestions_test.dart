@@ -1,7 +1,7 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
-import 'package:openfoodfacts/utils/TaxonomyType.dart';
+import 'package:openfoodfacts/utils/TagType.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -18,7 +18,7 @@ void main() {
     test('Suggestions for countries', () async {
       List<dynamic> result =
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.COUNTRIES,
+        TagType.COUNTRIES,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 't',
       );
@@ -26,7 +26,7 @@ void main() {
       _listContains(result, 't');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.COUNTRIES,
+        TagType.COUNTRIES,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'TUN',
       );
@@ -34,7 +34,7 @@ void main() {
       _listContains(result, 'tun');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.COUNTRIES,
+        TagType.COUNTRIES,
         language: OpenFoodFactsLanguage.ENGLISH,
         input: 'TUN',
       );
@@ -42,7 +42,7 @@ void main() {
       _listContains(result, 'tun');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.COUNTRIES,
+        TagType.COUNTRIES,
         language: OpenFoodFactsLanguage.ARABIC,
         input: 'تو',
       );
@@ -50,7 +50,7 @@ void main() {
       _listContains(result, 'تو');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.COUNTRIES,
+        TagType.COUNTRIES,
         language: OpenFoodFactsLanguage.GEORGIAN,
         input: 'TUN',
       );
@@ -59,12 +59,12 @@ void main() {
 
       expect(
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TaxonomyType.COUNTRIES,
+            TagType.COUNTRIES,
             language: OpenFoodFactsLanguage.FRENCH,
             input: 'TUN',
           ),
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TaxonomyType.COUNTRIES,
+            TagType.COUNTRIES,
             language: OpenFoodFactsLanguage.FRENCH,
             input: 'tun',
           ));
@@ -73,7 +73,7 @@ void main() {
     test('Suggestions for state', () async {
       List<dynamic> result =
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.STATES,
+        TagType.STATES,
         input: 'b',
         language: OpenFoodFactsLanguage.FRENCH,
       );
@@ -81,7 +81,7 @@ void main() {
       _listContains(result, 'b');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.STATES,
+        TagType.STATES,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'compléter',
       );
@@ -89,7 +89,7 @@ void main() {
       _listContains(result, 'compléter');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.STATES,
+        TagType.STATES,
         language: OpenFoodFactsLanguage.ENGLISH,
         input: 'h',
       );
@@ -97,7 +97,7 @@ void main() {
       _listContains(result, 'h');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.STATES,
+        TagType.STATES,
         language: OpenFoodFactsLanguage.ARABIC,
         input: 'غ',
       );
@@ -105,7 +105,7 @@ void main() {
       expect(result.isEmpty, true);
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.STATES,
+        TagType.STATES,
         language: OpenFoodFactsLanguage.GEORGIAN,
         input: 'M',
       );
@@ -114,12 +114,12 @@ void main() {
 
       expect(
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TaxonomyType.STATES,
+            TagType.STATES,
             language: OpenFoodFactsLanguage.ENGLISH,
             input: 'O',
           ),
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TaxonomyType.STATES,
+            TagType.STATES,
             language: OpenFoodFactsLanguage.ENGLISH,
             input: 'o',
           ));
@@ -127,7 +127,7 @@ void main() {
     test('Suggestions for language', () async {
       List<dynamic> result =
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.LANGUAGES,
+        TagType.LANGUAGES,
         language: OpenFoodFactsLanguage.GERMAN,
         input: 'bA',
       );
@@ -137,7 +137,7 @@ void main() {
     test('Suggestions for label', () async {
       List<dynamic> result =
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.LABELS,
+        TagType.LABELS,
         language: OpenFoodFactsLanguage.GERMAN,
         input: 'm',
       );
@@ -147,7 +147,7 @@ void main() {
     test('Suggestions for categories', () async {
       List<dynamic> result =
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.CATEGORIES,
+        TagType.CATEGORIES,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'compo',
       );
@@ -157,7 +157,7 @@ void main() {
     test('Suggestions for ingredients', () async {
       List<dynamic> result =
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.INGREDIENTS,
+        TagType.INGREDIENTS,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'vian',
       );
@@ -167,7 +167,7 @@ void main() {
     test('Suggestions for traces', () async {
       List<dynamic> result =
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.TRACES,
+        TagType.TRACES,
         language: OpenFoodFactsLanguage.ENGLISH,
         input: 'e',
       );
@@ -177,7 +177,7 @@ void main() {
     test('Suggestions for additives', () async {
       List<dynamic> result =
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.ADDITIVES,
+        TagType.ADDITIVES,
         language: OpenFoodFactsLanguage.RUSSIAN,
         input: 'e9',
       );
@@ -187,7 +187,7 @@ void main() {
     test('Suggestions for allergens', () async {
       List<dynamic> result =
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.ALLERGENS,
+        TagType.ALLERGENS,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'fRu',
       );
@@ -197,14 +197,14 @@ void main() {
     test('Suggestions for emb_code', () async {
       List<dynamic> result =
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.EMB_CODES,
+        TagType.EMB_CODES,
         input: 'fR',
       );
 
       _listContains(result, 'fr');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.EMB_CODES,
+        TagType.EMB_CODES,
         input: 'R',
       );
 
@@ -212,36 +212,36 @@ void main() {
 
       expect(
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TaxonomyType.EMB_CODES,
+            TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.ITALIAN,
             input: 'U',
           ),
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TaxonomyType.EMB_CODES,
+            TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.FRENCH,
             input: 'U',
           ));
 
       expect(
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TaxonomyType.EMB_CODES,
+            TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.GERMAN,
             input: 'C',
           ),
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TaxonomyType.EMB_CODES,
+            TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.ENGLISH,
             input: 'C',
           ));
 
       expect(
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TaxonomyType.EMB_CODES,
+            TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.JAPANESE,
             input: 'd',
           ),
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TaxonomyType.EMB_CODES,
+            TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.UKRAINIAN,
             input: 'D',
           ));
@@ -249,21 +249,21 @@ void main() {
     test('Suggestions empty fields', () async {
       List<dynamic> result =
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.ALLERGENS,
+        TagType.ALLERGENS,
         language: OpenFoodFactsLanguage.FRENCH,
       );
 
       expect(result, contains('Céleri'));
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.TRACES,
+        TagType.TRACES,
         language: OpenFoodFactsLanguage.ENGLISH,
       );
 
       expect(result, contains('Celery'));
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.INGREDIENTS,
+        TagType.INGREDIENTS,
         language: OpenFoodFactsLanguage.ENGLISH,
       );
 
@@ -274,17 +274,17 @@ void main() {
           ));
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TaxonomyType.INGREDIENTS,
+        TagType.INGREDIENTS,
         language: OpenFoodFactsLanguage.ENGLISH,
       );
 
       expect(
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TaxonomyType.INGREDIENTS,
+            TagType.INGREDIENTS,
             language: OpenFoodFactsLanguage.ENGLISH,
           ),
           await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TaxonomyType.INGREDIENTS,
+            TagType.INGREDIENTS,
           ));
     });
   });

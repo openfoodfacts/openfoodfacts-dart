@@ -18,7 +18,7 @@ import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
-import 'package:openfoodfacts/utils/TaxonomyType.dart';
+import 'package:openfoodfacts/utils/TagType.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/UriHelper.dart';
 
@@ -604,7 +604,7 @@ class OpenFoodAPIClient {
   /// Returns a List of suggestions
   /// By default the query will hit the PROD DB
   static Future<List<dynamic>> getAutocompletedSuggestions(
-    TaxonomyType taxonomyType, {
+    TagType taxonomyType, {
     String input = '',
     OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
     QueryType? queryType,

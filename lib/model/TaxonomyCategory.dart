@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
-import 'package:openfoodfacts/utils/TaxonomyType.dart';
+import 'package:openfoodfacts/utils/TagType.dart';
 
 part 'TaxonomyCategory.g.dart';
 
@@ -339,7 +339,7 @@ class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<
     List<TaxonomyCategoryField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
-          TaxonomyType.CATEGORIES,
+          TagType.CATEGORIES,
           tags,
           languages: languages,
           cc: cc,

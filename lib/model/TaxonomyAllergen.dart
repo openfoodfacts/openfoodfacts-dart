@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
-import 'package:openfoodfacts/utils/TaxonomyType.dart';
+import 'package:openfoodfacts/utils/TagType.dart';
 
 part 'TaxonomyAllergen.g.dart';
 
@@ -83,7 +83,7 @@ class TaxonomyAllergenQueryConfiguration extends TaxonomyQueryConfiguration<
     List<TaxonomyAllergenField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
-          TaxonomyType.ALLERGENS,
+          TagType.ALLERGENS,
           tags,
           languages: languages,
           cc: cc,

@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
-import 'package:openfoodfacts/utils/TaxonomyType.dart';
+import 'package:openfoodfacts/utils/TagType.dart';
 
 part 'TaxonomyIngredient.g.dart';
 
@@ -476,7 +476,7 @@ class TaxonomyIngredientQueryConfiguration extends TaxonomyQueryConfiguration<
     List<Parameter> additionalParameters = const [],
     bool includeChildren = false,
   }) : super(
-          TaxonomyType.INGREDIENTS,
+          TagType.INGREDIENTS,
           tags,
           languages: languages,
           cc: cc,
