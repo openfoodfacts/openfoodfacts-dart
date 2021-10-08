@@ -574,7 +574,7 @@ class OpenFoodAPIClient {
         await HttpHelper().doPostRequest(loginUri, user.toData(), user);
     return response.statusCode == 200;
   }
-  
+
   // TODO: deprecated from 2021-10-08 (#252); remove former name when old enough
   /// Creates a new user
   /// Returns [Status.status] 201 = complete; 400 = wrong inputs + [Status.error]; 500 = server error;
