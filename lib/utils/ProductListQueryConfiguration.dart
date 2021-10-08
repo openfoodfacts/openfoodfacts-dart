@@ -1,10 +1,5 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/model/parameter/Page.dart';
-import 'package:openfoodfacts/model/parameter/PageSize.dart';
-import 'package:openfoodfacts/model/parameter/SortBy.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
-import 'package:openfoodfacts/utils/LanguageHelper.dart';
-import 'package:openfoodfacts/utils/ProductFields.dart';
 
 /// Query Configuration for multiple barcodes
 class ProductListQueryConfiguration extends AbstractQueryConfiguration {

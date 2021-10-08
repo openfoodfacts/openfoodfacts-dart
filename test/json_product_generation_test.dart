@@ -5,12 +5,7 @@ import 'package:openfoodfacts/model/EcoscoreData.dart';
 import 'package:openfoodfacts/model/IngredientsAnalysisTags.dart';
 import 'package:openfoodfacts/model/OriginsOfIngredients.dart';
 import 'package:openfoodfacts/model/Packaging.dart';
-import 'package:openfoodfacts/model/Product.dart';
-import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/LanguageHelper.dart';
-import 'package:openfoodfacts/utils/ProductFields.dart';
-import 'package:openfoodfacts/utils/ProductQueryConfigurations.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';
@@ -27,8 +22,7 @@ void main() {
     expect(result.status, 1);
     Product product = result.product!;
     Map<String, dynamic> productMap = product.toJson();
-    String json = jsonEncode(productMap);
-    assert(json is String);
+    jsonEncode(productMap);
   });
 
   test('EcoscoreData JSON generation', () {
