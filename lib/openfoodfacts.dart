@@ -574,11 +574,12 @@ class OpenFoodAPIClient {
         await HttpHelper().doPostRequest(loginUri, user.toData(), user);
     return response.statusCode == 200;
   }
-
+  
+  // TODO: deprecated from 2021-10-08 (#252); remove former name when old enough
   /// Creates a new user
   /// Returns [Status.status] 201 = complete; 400 = wrong inputs + [Status.error]; 500 = server error;
   ///
-  /// When creating a [producer account](https://world.pro.openfoodfacts.org/) use [orgName] to name the Producer or brand
+  /// When creating a [producer account](https://world.pro.openfoodfacts.org/) use [orgName] (former requested_org) to name the Producer or brand
   static Future<Status> register({
     required User user,
     required String name,
