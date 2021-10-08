@@ -8,33 +8,33 @@ part of 'KnowledgePanel.dart';
 
 KnowledgePanel _$KnowledgePanelFromJson(Map<String, dynamic> json) =>
     KnowledgePanel(
-      parentPanelId: json['parentPanelId'] as String,
-      type: _$enumDecode(_$KnowledgePanelTypeEnumMap, json['type']),
+      parentPanelId: json['parent_panel_id'] as String,
+      titleElement:
+          TitleElement.fromJson(json['title_element'] as Map<String, dynamic>),
       level: _$enumDecode(_$LevelEnumMap, json['level'],
           unknownValue: Level.UNKNOWN),
-      title: json['title'] as String,
       elements: (json['elements'] as List<dynamic>)
           .map((e) => KnowledgePanelElement.fromJson(e as Map<String, dynamic>))
           .toList(),
+      type: _$enumDecodeNullable(_$KnowledgePanelTypeEnumMap, json['type']),
       topics:
           (json['topics'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      subtitle: json['subtitle'] as String?,
-      iconUrl: json['icon_url'] as String?,
       grade: _$enumDecodeNullable(_$GradeEnumMap, json['grade'],
           unknownValue: Grade.UNKNOWN),
+      evaluation: _$enumDecodeNullable(_$EvaluationEnumMap, json['evaluation'],
+          unknownValue: Evaluation.UNKNOWN),
     );
 
 Map<String, dynamic> _$KnowledgePanelToJson(KnowledgePanel instance) =>
     <String, dynamic>{
-      'parentPanelId': instance.parentPanelId,
-      'type': _$KnowledgePanelTypeEnumMap[instance.type],
+      'parent_panel_id': instance.parentPanelId,
+      'title_element': instance.titleElement,
       'level': _$LevelEnumMap[instance.level],
-      'topics': instance.topics,
-      'title': instance.title,
       'elements': instance.elements,
-      'subtitle': instance.subtitle,
-      'icon_url': instance.iconUrl,
+      'type': _$KnowledgePanelTypeEnumMap[instance.type],
+      'topics': instance.topics,
       'grade': _$GradeEnumMap[instance.grade],
+      'evaluation': _$EvaluationEnumMap[instance.evaluation],
     };
 
 K _$enumDecode<K, V>(
@@ -63,13 +63,6 @@ K _$enumDecode<K, V>(
   ).key;
 }
 
-const _$KnowledgePanelTypeEnumMap = {
-  KnowledgePanelType.DO_YOU_KNOW: 'doyouknow',
-  KnowledgePanelType.SCORE: 'score',
-  KnowledgePanelType.ECOSCORE_LCA: 'ecoscore_lca',
-  KnowledgePanelType.UNKNOWN: 'UNKNOWN',
-};
-
 const _$LevelEnumMap = {
   Level.TRIVIA: 'trivia',
   Level.INFO: 'info',
@@ -90,6 +83,13 @@ K? _$enumDecodeNullable<K, V>(
   return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
+const _$KnowledgePanelTypeEnumMap = {
+  KnowledgePanelType.DO_YOU_KNOW: 'doyouknow',
+  KnowledgePanelType.SCORE: 'score',
+  KnowledgePanelType.ECOSCORE_LCA: 'ecoscore_lca',
+  KnowledgePanelType.UNKNOWN: 'UNKNOWN',
+};
+
 const _$GradeEnumMap = {
   Grade.A: 'A',
   Grade.B: 'B',
@@ -98,3 +98,26 @@ const _$GradeEnumMap = {
   Grade.E: 'E',
   Grade.UNKNOWN: 'UNKNOWN',
 };
+
+const _$EvaluationEnumMap = {
+  Evaluation.GOOD: 'good',
+  Evaluation.NEUTRAL: 'neutral',
+  Evaluation.BAD: 'bad',
+  Evaluation.UNKNOWN: 'UNKNOWN',
+};
+
+TitleElement _$TitleElementFromJson(Map<String, dynamic> json) => TitleElement(
+      title: json['title'] as String,
+      subtitle: json['subtitle'] as String?,
+      iconUrl: json['icon_url'] as String?,
+      iconColorFromEvaluation:
+          json['icon_color_from_evaluation'] as bool? ?? false,
+    );
+
+Map<String, dynamic> _$TitleElementToJson(TitleElement instance) =>
+    <String, dynamic>{
+      'title': instance.title,
+      'subtitle': instance.subtitle,
+      'icon_url': instance.iconUrl,
+      'icon_color_from_evaluation': instance.iconColorFromEvaluation,
+    };
