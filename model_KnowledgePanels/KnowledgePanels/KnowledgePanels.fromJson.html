@@ -62,8 +62,9 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">factory KnowledgePanels.fromJson(Map&lt;String, dynamic&gt; json) {
   Map&lt;String, KnowledgePanel&gt; map = {};
-  json.keys.forEach(
-      (panelId) =&gt; map[panelId] = KnowledgePanel.fromJson(json[panelId]));
+  for (var panelId in json.keys) {
+    map[panelId] = KnowledgePanel.fromJson(json[panelId]);
+  }
   return KnowledgePanels(panelIdToPanelMap: map);
 }</code></pre>
 </section>

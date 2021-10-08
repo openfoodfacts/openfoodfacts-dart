@@ -68,11 +68,11 @@
   <pre class="language-dart"><code class="language-dart">static Map&lt;String, dynamic&gt; removeNullEntries(
     final Map&lt;String, dynamic&gt; input) {
   final Map&lt;String, dynamic&gt; result = {};
-  input.entries.forEach((element) {
+  for (var element in input.entries) {
     if (element.value != null) {
       result[element.key] = element.value;
     }
-  });
+  }
   return result;
 }</code></pre>
 </section>

@@ -74,7 +74,7 @@
   if (map == null) {
     return null;
   }
-  if (!(map is Map&lt;String, dynamic&gt;)) {
+  if (map is! Map&lt;String, dynamic&gt;) {
     throw Exception(&#39;Expected type: Map&lt;String, List&lt;String&gt;&gt;&#39;);
   }
   final result = &lt;OpenFoodFactsLanguage, List&lt;String&gt;&gt;{};

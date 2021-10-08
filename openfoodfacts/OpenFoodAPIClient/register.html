@@ -56,7 +56,7 @@
 <span class="name ">register</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="register-param-user">{<span>required</span> <span class="type-annotation"><a href="../../model_User/User-class.html">User</a></span> <span class="parameter-name">user</span>, </span></li>
 <li><span class="parameter" id="register-param-name"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.3/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span></li>
 <li><span class="parameter" id="register-param-email"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.3/dart-core/String-class.html">String</a></span> <span class="parameter-name">email</span>, </span></li>
-<li><span class="parameter" id="register-param-requested_org"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.3/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">requested_org</span>, </span></li>
+<li><span class="parameter" id="register-param-orgName"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.3/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">orgName</span>, </span></li>
 <li><span class="parameter" id="register-param-newsletter"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.3/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">newsletter</span> = <span class="default-value">true</span>, </span></li>
 <li><span class="parameter" id="register-param-queryType"><span class="type-annotation"><a href="../../utils_QueryType/QueryType-class.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
 </ol>)
@@ -68,7 +68,7 @@
 <section class="desc markdown">
   <p>Creates a new user
 Returns <a href="../../model_Status/Status/status.html">Status.status</a> 201 = complete; 400 = wrong inputs + <a href="../../model_Status/Status/error.html">Status.error</a>; 500 = server error;</p>
-<p>When creating a <a href="https://world.pro.openfoodfacts.org/">producer account</a> use <code>requested_org</code> to name the Producer or brand</p>
+<p>When creating a <a href="https://world.pro.openfoodfacts.org/">producer account</a> use <code>orgName</code> (former requested_org) to name the Producer or brand</p>
 </section>
 
 
@@ -79,7 +79,7 @@ Returns <a href="../../model_Status/Status/status.html">Status.status</a> 201 = 
   required User user,
   required String name,
   required String email,
-  String? requested_org,
+  String? orgName,
   bool newsletter = true,
   QueryType? queryType,
 }) async {
@@ -94,9 +94,9 @@ Returns <a href="../../model_Status/Status/status.html">Status.status</a> 201 = 
     &#39;userid&#39;: user.userId,
     &#39;password&#39;: user.password,
     &#39;confirm_password&#39;: user.password,
-    if (requested_org != null) &#39;pro&#39;: &#39;on&#39;,
+    if (orgName != null) &#39;pro&#39;: &#39;on&#39;,
     &#39;pro_checkbox&#39;: &#39;1&#39;,
-    &#39;requested_org&#39;: requested_org ?? &#39; &#39;,
+    &#39;requested_org&#39;: orgName ?? &#39; &#39;,
     if (newsletter) &#39;newsletter&#39;: &#39;on&#39;,
     &#39;action&#39;: &#39;process&#39;,
     &#39;type&#39;: &#39;add&#39;,

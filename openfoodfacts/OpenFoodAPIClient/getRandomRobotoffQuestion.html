@@ -84,9 +84,9 @@
   }
 
   List&lt;String?&gt; typesValues = [];
-  types.forEach((t) {
+  for (var t in types) {
     typesValues.add(t.value);
-  });
+  }
 
   String parsedTypes = typesValues.join(&#39;,&#39;);
 
