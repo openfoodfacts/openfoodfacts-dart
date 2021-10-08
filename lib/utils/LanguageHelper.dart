@@ -791,7 +791,7 @@ class LanguageHelper {
     if (map == null) {
       return null;
     }
-    if (!(map is Map<String, dynamic>)) {
+    if (map is! Map<String, dynamic>) {
       throw Exception('Expected type: Map<String, String>');
     }
     final result = <OpenFoodFactsLanguage, String>{};
@@ -815,7 +815,7 @@ class LanguageHelper {
     if (map == null) {
       return null;
     }
-    if (!(map is Map<String, dynamic>)) {
+    if (map is! Map<String, dynamic>) {
       throw Exception('Expected type: Map<String, List<String>>');
     }
     final result = <OpenFoodFactsLanguage, List<String>>{};

@@ -10,7 +10,7 @@ class Status extends JsonObject {
   static const WRONG_USER_OR_PASSWORD_ERROR_MESSAGE =
       'Incorrect user name or password';
 
-  final status;
+  final dynamic status;
 
   @JsonKey(name: 'status_verbose')
   final String? statusVerbose;
