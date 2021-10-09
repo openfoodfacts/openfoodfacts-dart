@@ -1,14 +1,12 @@
-import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:http/http.dart' as http;
 import 'package:openfoodfacts/model/UserAgent.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/UriReader.dart';
 import 'package:path/path.dart';
-import 'package:http/http.dart' as http;
 
 import 'dart:async';
 import 'dart:convert';
 
-import '../model/Status.dart';
-import '../model/User.dart';
 import 'OpenFoodAPIConfiguration.dart';
 import 'QueryType.dart';
 

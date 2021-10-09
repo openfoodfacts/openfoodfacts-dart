@@ -1,8 +1,5 @@
 import 'dart:async';
 
-import 'package:openfoodfacts/model/Insight.dart';
-import 'package:openfoodfacts/model/RobotoffQuestion.dart';
-import 'package:openfoodfacts/model/SpellingCorrections.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';

@@ -1,4 +1,4 @@
-include: package:pedantic/analysis_options.yaml
+include: package:lints/recommended.yaml
 
 analyzer:
   exclude:
@@ -10,3 +10,8 @@ analyzer:
     missing_required_param: warning
     missing_return: warning
     prefer_single_quotes: warning
+
+linter:
+  rules:
+    constant_identifier_names: false
+    file_names: false
