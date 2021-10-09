@@ -1,16 +1,11 @@
-import 'package:openfoodfacts/interface/Parameter.dart';
+import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
 import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 import 'package:openfoodfacts/model/parameter/WithoutAdditives.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/model/SearchResult.dart';
-import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
-import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
-import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
-import 'package:openfoodfacts/utils/ProductSearchQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:test/test.dart';
 

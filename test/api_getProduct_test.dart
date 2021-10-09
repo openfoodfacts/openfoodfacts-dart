@@ -1,18 +1,8 @@
-import 'package:openfoodfacts/model/AttributeGroup.dart';
+import 'package:http/http.dart' as http;
 import 'package:openfoodfacts/model/Attribute.dart';
+import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/model/ProductResult.dart';
-import 'package:openfoodfacts/model/ProductImage.dart';
-import 'package:openfoodfacts/utils/InvalidBarcodes.dart';
-import 'package:openfoodfacts/utils/LanguageHelper.dart';
-import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
-import 'package:openfoodfacts/utils/ProductFields.dart';
-import 'package:openfoodfacts/utils/ProductQueryConfigurations.dart';
-import 'package:openfoodfacts/utils/QueryType.dart';
-import 'package:openfoodfacts/utils/UnitHelper.dart';
-import 'package:test/test.dart';
-import 'package:http/http.dart' as http;
 import 'package:openfoodfacts/personalized_search/available_attribute_groups.dart';
 import 'package:openfoodfacts/personalized_search/available_preference_importances.dart';
 import 'package:openfoodfacts/personalized_search/available_product_preferences.dart';
@@ -20,6 +10,11 @@ import 'package:openfoodfacts/personalized_search/matched_product.dart';
 import 'package:openfoodfacts/personalized_search/preference_importance.dart';
 import 'package:openfoodfacts/personalized_search/product_preferences_manager.dart';
 import 'package:openfoodfacts/personalized_search/product_preferences_selection.dart';
+import 'package:openfoodfacts/utils/InvalidBarcodes.dart';
+import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
+import 'package:openfoodfacts/utils/QueryType.dart';
+import 'package:openfoodfacts/utils/UnitHelper.dart';
+import 'package:test/test.dart';
 
 import 'test_constants.dart';
 

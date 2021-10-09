@@ -1,8 +1,4 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/model/SendImage.dart';
-import 'package:openfoodfacts/model/ProductImage.dart';
-import 'package:openfoodfacts/model/Status.dart';
-import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:test/test.dart';

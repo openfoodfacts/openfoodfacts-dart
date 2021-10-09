@@ -52,11 +52,11 @@ abstract class JsonObject {
   static Map<String, dynamic> removeNullEntries(
       final Map<String, dynamic> input) {
     final Map<String, dynamic> result = {};
-    input.entries.forEach((element) {
+    for (var element in input.entries) {
       if (element.value != null) {
         result[element.key] = element.value;
       }
-    });
+    }
     return result;
   }
 
