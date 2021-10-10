@@ -1,3 +1,7 @@
+## [1.3.6] - 10.10.2021
+- Fix issue with `Nutriments` JSON conversion related to microgram units
+- Support password reset
+- Add `page`, `pageSize` and `sortOption` in `ProductListQueryConfiguration`
 ## [1.3.5] - 26.09.2021
 - Improve wrong username/password error messages in `Status`
 ## [1.3.4] - 24.09.2021
