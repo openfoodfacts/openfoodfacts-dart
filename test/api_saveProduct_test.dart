@@ -297,7 +297,27 @@ void main() {
           ['en:product-categories-test-1', 'en:product-categories-test-2']);
     });
 
-    Unit _getMassUnit(int i) => i == 1 ? Unit.MICRO_G : Unit.G;
+    Unit _getMassUnit(int i) => {
+          0: Unit.G,
+          1: Unit.MILLI_G,
+          2: Unit.MICRO_G,
+        }[i]!;
+
+    double _nutrientToGrams(double? nutrientValue, Unit? unit) {
+      if (nutrientValue == null) {
+        fail('Got unexpected nutriment value');
+      }
+      switch (unit) {
+        case Unit.G:
+          return nutrientValue;
+        case Unit.MILLI_G:
+          return 0.001 * nutrientValue;
+        case Unit.MICRO_G:
+          return 0.000001 * nutrientValue;
+        default:
+          fail('Got unexpected unit');
+      }
+    }
 
     test('confirm that nutrient fields are saved', () async {
       const User USER = TestConstants.TEST_USER;
@@ -309,7 +329,7 @@ void main() {
       const String PRODUCT_NAME = 'Chili beans';
       const String NUTRIMENT_DATA_PER = '100g';
 
-      for (int i = 1; i >= 0; i--) {
+      for (int i = 2; i >= 0; i--) {
         final Nutriments nutriments = Nutriments(
             energy: ENERGY + i,
             energyUnit: Unit.KJ,
@@ -340,6 +360,7 @@ void main() {
           OpenFoodFactsLanguage.ENGLISH,
           user: USER,
         );
+        const EPSILON = 0.000001;
 
         expect(result.status, 1);
         expect(result.barcode, BARCODE);
@@ -353,12 +374,26 @@ void main() {
           expect(searchedNutriments != null, true);
           if (searchedNutriments != null) {
             expect(searchedNutriments.energy, nutriments.energy);
-            expect(searchedNutriments.carbohydrates, nutriments.carbohydrates);
+            final expectedCarbs = _nutrientToGrams(
+              nutriments.carbohydrates,
+              nutriments.carbohydratesUnit,
+            );
+            expect(searchedNutriments.carbohydrates,
+                closeTo(expectedCarbs, EPSILON));
             expect(searchedNutriments.carbohydratesUnit,
                 nutriments.carbohydratesUnit);
-            expect(searchedNutriments.proteins, nutriments.proteins);
+            final expectedProteins = _nutrientToGrams(
+              nutriments.proteins,
+              nutriments.proteinsUnit,
+            );
+            expect(searchedNutriments.proteins,
+                closeTo(expectedProteins, EPSILON));
             expect(searchedNutriments.proteinsUnit, nutriments.proteinsUnit);
-            expect(searchedNutriments.fat, nutriments.fat);
+            final expectedFat = _nutrientToGrams(
+              nutriments.fat,
+              nutriments.fatUnit,
+            );
+            expect(searchedNutriments.fat, closeTo(expectedFat, EPSILON));
             expect(searchedNutriments.fatUnit, nutriments.fatUnit);
           }
         }
