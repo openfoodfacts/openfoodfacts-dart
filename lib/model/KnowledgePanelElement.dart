@@ -76,6 +76,25 @@ class KnowledgePanelImageElement extends JsonObject {
   Map<String, dynamic> toJson() => _$KnowledgePanelImageElementToJson(this);
 }
 
+/// Element representing a Panel group that contains 1+ KnowledgePanels.
+@JsonSerializable()
+class KnowledgePanelPanelGroupElement extends JsonObject {
+  final String title;
+
+  @JsonKey(name: 'panel_ids')
+  final List<String> panelIds;
+
+  const KnowledgePanelPanelGroupElement(
+      {required this.title, required this.panelIds});
+
+  factory KnowledgePanelPanelGroupElement.fromJson(Map<String, dynamic> json) =>
+      _$KnowledgePanelPanelGroupElementFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$KnowledgePanelPanelGroupElementToJson(this);
+}
+
 /// Element representing a Panel Id of a KnowledgePanel. This element is a
 /// Knowledge panel itself, the KnowledgePanel can be found in the list of
 /// Knowledge panels using the id.
@@ -190,6 +209,10 @@ enum KnowledgePanelElementType {
   PANEL,
 
   /// Disclaimer notes that the client may or may not choose to display.
+  @JsonValue('panel_group')
+  PANEL_GROUP,
+
+  /// Disclaimer notes that the client may or may not choose to display.
   @JsonValue('table')
   TABLE,
   UNKNOWN,
@@ -215,6 +238,9 @@ class KnowledgePanelElement extends JsonObject {
   @JsonKey(name: 'panel_element')
   final KnowledgePanelPanelIdElement? panelElement;
 
+  @JsonKey(name: 'panel_group')
+  final KnowledgePanelPanelGroupElement? panelGroupElement;
+
   /// Id of a KnowledgePanel embedded inside [this] KnowledgePanel.
   final KnowledgePanelTableElement? tableElement;
 
@@ -223,6 +249,7 @@ class KnowledgePanelElement extends JsonObject {
     this.textElement,
     this.imageElement,
     this.panelElement,
+    this.panelGroupElement,
     this.tableElement,
   });
 

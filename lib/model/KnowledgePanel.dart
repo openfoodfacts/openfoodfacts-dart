@@ -87,9 +87,6 @@ class KnowledgePanel extends JsonObject {
   /// rendered on the client.
   final List<KnowledgePanelElement> elements;
 
-  /// Name of the panel, can be displayed by the client if present.
-  final String? name;
-
   final KnowledgePanelType? type;
 
   /// The topics discussed in this knowledge panel, example: 'Environment'.
