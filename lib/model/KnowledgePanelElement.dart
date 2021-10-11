@@ -79,8 +79,10 @@ class KnowledgePanelImageElement extends JsonObject {
 /// Element representing a Panel group that contains 1+ KnowledgePanels.
 @JsonSerializable()
 class KnowledgePanelPanelGroupElement extends JsonObject {
+  /// Title of the panel group. Example: "Carbon Footprint" or "Labels" etc.
   final String title;
 
+  /// List of panel ids that belong to this panel group.
   @JsonKey(name: 'panel_ids')
   final List<String> panelIds;
 
