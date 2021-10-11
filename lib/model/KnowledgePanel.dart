@@ -109,7 +109,6 @@ class KnowledgePanel extends JsonObject {
     required this.titleElement,
     required this.level,
     required this.elements,
-    this.name,
     this.type,
     this.topics,
     this.grade,
