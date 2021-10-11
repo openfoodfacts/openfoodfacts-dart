@@ -206,15 +206,12 @@ enum KnowledgePanelElementType {
   @JsonValue('image')
   IMAGE,
 
-  /// Disclaimer notes that the client may or may not choose to display.
   @JsonValue('panel')
   PANEL,
 
-  /// Disclaimer notes that the client may or may not choose to display.
   @JsonValue('panel_group')
   PANEL_GROUP,
 
-  /// Disclaimer notes that the client may or may not choose to display.
   @JsonValue('table')
   TABLE,
   UNKNOWN,
