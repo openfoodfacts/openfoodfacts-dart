@@ -258,7 +258,6 @@ void main() {
         ],
         'evaluation': 'bad',
         'level': 'info',
-        'name': 'Carbon impact',
         'parent_panel_id': 'root',
         'title_element': {
           'icon_color_from_evaluation': true,
