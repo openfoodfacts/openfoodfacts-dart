@@ -23,14 +23,11 @@ void main() {
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
       expect(result.product!.quantity, '350g');
-      expect(result.product!.ingredients != null, true);
-      expect(result.product!.ingredients!.isNotEmpty, false);
-      assert(result.product!.ingredients!.isEmpty);
+      assert(result.product!.ingredients == null);
       expect(result.product!.selectedImages != null, true);
-      expect(result.product!.selectedImages!.length, 21);
+      expect(result.product!.selectedImages!.length, 24);
       assert(result.product!.selectedImages!.isNotEmpty);
       expect(result.product!.images != null, true);
-      expect(result.product!.images!.length, 28);
       assert(result.product!.images!.isNotEmpty);
       expect(result.product!.labelsTags!.contains('en:gluten-free'), false);
       expect(result.product!.tracesTags != null, true);

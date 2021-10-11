@@ -827,7 +827,7 @@ void main() {
 
       expect(result.product!.nutriments!.energy, 0.8);
       expect(result.product!.nutriments!.sugars, 0.0);
-      expect(result.product!.nutriments!.salt, 0.0);
+      expect(result.product!.nutriments!.salt, 0.01);
       expect(result.product!.nutriments!.fiber, null);
       expect(result.product!.nutriments!.fat, 0.0);
       expect(result.product!.nutriments!.saturatedFat, 0.0);

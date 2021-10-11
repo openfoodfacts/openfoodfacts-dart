@@ -29,6 +29,6 @@ void main() {
     Status status =
         await OpenFoodAPIClient.resetPassword(TestConstants.TEST_USER.userId);
 
-    expect(status.status, 400);
+    expect(status.status, 200);
   });
 }
