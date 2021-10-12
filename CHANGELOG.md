@@ -1,3 +1,5 @@
+## [1.3.7] - 12.10.2021
+- Update KnowledgePanel API to comply to the latest Backend changes.
 ## [1.3.6] - 10.10.2021
 - Fix issue with `Nutriments` JSON conversion related to microgram units
 - Support password reset
