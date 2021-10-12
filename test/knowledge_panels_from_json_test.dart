@@ -171,7 +171,7 @@ void main() {
             'element_type': 'text',
             'text_element': {
               'html':
-                  "\n                    <p>The carbon emission figure comes from ADEME's Agribalyse database, for the category: \n                    <a href=\'https://agribalyse.ademe.fr/app/aliments/31032\'>Chocolate spread with hazelnuts</a>\n                    </p>\n                    ",
+                  "\n                    <p>The carbon emission figure comes from ADEME's Agribalyse database, for the category: \n                    <a href='https://agribalyse.ademe.fr/app/aliments/31032'>Chocolate spread with hazelnuts</a>\n                    </p>\n                    ",
               'text_type': 'summary'
             }
           },
