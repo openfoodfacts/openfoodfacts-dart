@@ -74,6 +74,21 @@ Map<String, dynamic> _$KnowledgePanelImageElementToJson(
       'alt_text': instance.altText,
     };
 
+KnowledgePanelPanelGroupElement _$KnowledgePanelPanelGroupElementFromJson(
+        Map<String, dynamic> json) =>
+    KnowledgePanelPanelGroupElement(
+      title: json['title'] as String,
+      panelIds:
+          (json['panel_ids'] as List<dynamic>).map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$KnowledgePanelPanelGroupElementToJson(
+        KnowledgePanelPanelGroupElement instance) =>
+    <String, dynamic>{
+      'title': instance.title,
+      'panel_ids': instance.panelIds,
+    };
+
 KnowledgePanelPanelIdElement _$KnowledgePanelPanelIdElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelPanelIdElement(
@@ -176,6 +191,10 @@ KnowledgePanelElement _$KnowledgePanelElementFromJson(
           ? null
           : KnowledgePanelPanelIdElement.fromJson(
               json['panel_element'] as Map<String, dynamic>),
+      panelGroupElement: json['panel_group'] == null
+          ? null
+          : KnowledgePanelPanelGroupElement.fromJson(
+              json['panel_group'] as Map<String, dynamic>),
       tableElement: json['tableElement'] == null
           ? null
           : KnowledgePanelTableElement.fromJson(
@@ -189,6 +208,7 @@ Map<String, dynamic> _$KnowledgePanelElementToJson(
       'textElement': instance.textElement,
       'imageElement': instance.imageElement,
       'panel_element': instance.panelElement,
+      'panel_group': instance.panelGroupElement,
       'tableElement': instance.tableElement,
     };
 
@@ -196,6 +216,7 @@ const _$KnowledgePanelElementTypeEnumMap = {
   KnowledgePanelElementType.TEXT: 'text',
   KnowledgePanelElementType.IMAGE: 'image',
   KnowledgePanelElementType.PANEL: 'panel',
+  KnowledgePanelElementType.PANEL_GROUP: 'panel_group',
   KnowledgePanelElementType.TABLE: 'table',
   KnowledgePanelElementType.UNKNOWN: 'UNKNOWN',
 };

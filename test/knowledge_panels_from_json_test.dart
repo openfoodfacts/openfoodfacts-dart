@@ -171,7 +171,7 @@ void main() {
             'element_type': 'text',
             'text_element': {
               'html':
-                  "\n                    <p>The carbon emission figure comes from ADEME's Agribalyse database, for the category: \n                    <a href=\'https://agribalyse.ademe.fr/app/aliments/31032\'>Chocolate spread with hazelnuts</a>\n                    </p>\n                    ",
+                  "\n                    <p>The carbon emission figure comes from ADEME's Agribalyse database, for the category: \n                    <a href='https://agribalyse.ademe.fr/app/aliments/31032'>Chocolate spread with hazelnuts</a>\n                    </p>\n                    ",
               'text_type': 'summary'
             }
           },
@@ -258,7 +258,6 @@ void main() {
         ],
         'evaluation': 'bad',
         'level': 'info',
-        'name': 'Carbon impact',
         'parent_panel_id': 'root',
         'title_element': {
           'icon_color_from_evaluation': true,
