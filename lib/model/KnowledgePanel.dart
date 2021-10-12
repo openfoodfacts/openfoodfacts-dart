@@ -18,6 +18,10 @@ enum KnowledgePanelType {
   /// Knowledge Panel with ecoscore LCA.
   @JsonValue('ecoscore_lca')
   ECOSCORE_LCA,
+
+  /// Knowledge Panel which is rendered as a card on the UI.
+  @JsonValue('card')
+  CARD,
   UNKNOWN,
 }
 
@@ -108,7 +112,7 @@ class KnowledgePanel extends JsonObject {
     required this.parentPanelId,
     required this.titleElement,
     required this.level,
-    required this.elements,
+    this.elements,
     this.type,
     this.topics,
     this.grade,

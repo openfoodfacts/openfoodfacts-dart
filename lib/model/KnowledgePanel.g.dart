@@ -87,6 +87,7 @@ const _$KnowledgePanelTypeEnumMap = {
   KnowledgePanelType.DO_YOU_KNOW: 'doyouknow',
   KnowledgePanelType.SCORE: 'score',
   KnowledgePanelType.ECOSCORE_LCA: 'ecoscore_lca',
+  KnowledgePanelType.CARD: 'card',
   KnowledgePanelType.UNKNOWN: 'UNKNOWN',
 };
 

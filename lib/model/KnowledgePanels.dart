@@ -8,6 +8,7 @@ class KnowledgePanels {
   const KnowledgePanels({required this.panelIdToPanelMap});
 
   factory KnowledgePanels.fromJson(Map<String, dynamic> json) {
+    print(json);
     Map<String, KnowledgePanel> map = {};
     for (var panelId in json.keys) {
       map[panelId] = KnowledgePanel.fromJson(json[panelId]);
