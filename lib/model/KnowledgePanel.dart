@@ -89,7 +89,7 @@ class KnowledgePanel extends JsonObject {
 
   /// KnowledgePanelElement is a single unit of KnowledgePanel that can be
   /// rendered on the client.
-  final List<KnowledgePanelElement> elements;
+  final List<KnowledgePanelElement>? elements;
 
   final KnowledgePanelType? type;
 
