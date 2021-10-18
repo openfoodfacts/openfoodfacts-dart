@@ -5,6 +5,10 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:http/http.dart';
+import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/model/TaxonomyAllergen.dart';
+import 'package:openfoodfacts/model/TaxonomyCategory.dart';
+import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
@@ -15,6 +19,7 @@ import 'package:openfoodfacts/utils/PnnsGroups.dart';
 import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
+import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/UriHelper.dart';
 
 import 'model/Insight.dart';
@@ -37,6 +42,7 @@ export 'interface/Parameter.dart';
 export 'model/Additives.dart';
 export 'model/Ingredient.dart';
 export 'model/Insight.dart';
+export 'model/TaxonomyCategory.dart';
 export 'model/Product.dart';
 export 'model/ProductImage.dart';
 export 'model/ProductResult.dart';
@@ -293,6 +299,67 @@ class OpenFoodAPIClient {
     return result;
   }
 
+  static Future<Map<String, T>?>
+      getTaxonomy<T extends JsonObject, F extends Enum>(
+    TaxonomyQueryConfiguration<T, F> configuration, {
+    User? user,
+    QueryType? queryType,
+  }) async {
+    final Uri uri = configuration.getUri(queryType);
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      user: user,
+      userAgent: OpenFoodAPIConfiguration.userAgent,
+      queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+    );
+
+    Map<String, dynamic> decodedJson =
+        json.decode(_replaceQuotes(response.body))
+          ..removeWhere((String key, dynamic value) {
+            if (value is Map) {
+              return value.isEmpty;
+            }
+            if (value is List) {
+              return value.isEmpty;
+            }
+            return false;
+          });
+    if (decodedJson.isEmpty) {
+      // We requested something that doesn't have any results.
+      return null;
+    }
+    return configuration.convertResults(decodedJson);
+  }
+
+  static Future<Map<String, TaxonomyCategory>?> getTaxonomyCategories(
+    TaxonomyCategoryQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) {
+    return getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(configuration,
+        user: user, queryType: queryType);
+  }
+
+  static Future<Map<String, TaxonomyAllergen>?> getTaxonomyAllergens(
+    TaxonomyAllergenQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) {
+    return getTaxonomy<TaxonomyAllergen, TaxonomyAllergenField>(configuration,
+        user: user, queryType: queryType);
+  }
+
+  static Future<Map<String, TaxonomyIngredient>?> getTaxonomyIngredients(
+    TaxonomyIngredientQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) {
+    return getTaxonomy<TaxonomyIngredient, TaxonomyIngredientField>(
+        configuration,
+        user: user,
+        queryType: queryType);
+  }
+
   static void _removeImages(
     final SearchResult searchResult,
     final AbstractQueryConfiguration configuration,
@@ -537,7 +604,7 @@ class OpenFoodAPIClient {
   /// Returns a List of suggestions
   /// By default the query will hit the PROD DB
   static Future<List<dynamic>> getAutocompletedSuggestions(
-    TagType tagType, {
+    TagType taxonomyType, {
     String input = '',
     OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
     QueryType? queryType,
@@ -546,7 +613,7 @@ class OpenFoodAPIClient {
         path: '/cgi/suggest.pl',
         queryType: queryType,
         queryParameters: {
-          'tagtype': tagType.key,
+          'tagtype': taxonomyType.key,
           'term': input,
           'lc': language.code,
         });

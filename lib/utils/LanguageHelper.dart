@@ -816,7 +816,8 @@ class LanguageHelper {
       return null;
     }
     if (map is! Map<String, dynamic>) {
-      throw Exception('Expected type: Map<String, List<String>>');
+      throw Exception(
+          'Expected type: Map<String, List<String>>, got ${map.runtimeType}');
     }
     final result = <OpenFoodFactsLanguage, List<String>>{};
     for (final key in map.keys) {
