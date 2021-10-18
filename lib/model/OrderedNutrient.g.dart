@@ -12,7 +12,9 @@ OrderedNutrient _$OrderedNutrientFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       displayInEditForm: json['display_in_edit_form'] as bool,
       name: json['name'] as String?,
-      subNutrients: OrderedNutrient.fromJsonOrderedNutrients(json['nutrients']),
+      subNutrients: (json['nutrients'] as List<dynamic>?)
+          ?.map((e) => OrderedNutrient.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$OrderedNutrientToJson(OrderedNutrient instance) {
@@ -29,7 +31,6 @@ Map<String, dynamic> _$OrderedNutrientToJson(OrderedNutrient instance) {
   writeNotNull('name', instance.name);
   val['important'] = instance.important;
   val['display_in_edit_form'] = instance.displayInEditForm;
-  writeNotNull('nutrients',
-      OrderedNutrient.toJsonOrderedNutrients(instance.subNutrients));
+  writeNotNull('nutrients', instance.subNutrients);
   return val;
 }

@@ -11,22 +11,15 @@ part 'OrderedNutrients.g.dart';
 /// Compared to [OrderedNutrient], this is the root of the structure.
 @JsonSerializable()
 class OrderedNutrients extends JsonObject {
-  /// Most important nutrients
-  @JsonKey(
-      name: 'nutrients',
-      fromJson: OrderedNutrient.fromJsonOrderedNutrients,
-      toJson: OrderedNutrient.toJsonOrderedNutrients,
-      includeIfNull: false)
-  final List<OrderedNutrient>? subNutrients;
+  /// Most important nutrients (level 0 in the hierarchy)
+  @JsonKey()
+  final List<OrderedNutrient> nutrients;
 
-  OrderedNutrients({required this.subNutrients});
+  OrderedNutrients({required this.nutrients});
 
   factory OrderedNutrients.fromJson(Map<String, dynamic> json) =>
       _$OrderedNutrientsFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$OrderedNutrientsToJson(this);
-
-  @override
-  String toString() => toJson().toString();
 }

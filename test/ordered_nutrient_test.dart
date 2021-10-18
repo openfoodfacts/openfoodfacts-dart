@@ -15,6 +15,9 @@ void main() {
 
   group('$OpenFoodAPIClient ordered nutrients', () {
     test('find expected nutrients', () async {
+      // Very long list, experimentally created from the 3 initial URLs.
+      // Don't hesitate to edit this list if you have clear functional ideas
+      // about which nutrients should actually be there.
       const Set<String> expectedNutrients = {
         'alcohol',
         'alpha-linolenic-acid',
@@ -123,24 +126,6 @@ void main() {
         'zinc',
       };
 
-      /* debug function
-    void displayOrderedNutrients(
-      final List<OrderedNutrient>? list,
-      final int level, // 0 for OrderedNutrients.subNutrients
-    ) {
-      if (list == null) {
-        return;
-      }
-      final String prefix = '-' * level;
-      for (final OrderedNutrient item in list) {
-        print('$prefix${item.id}');
-        if (item.subNutrients != null) {
-          displayOrderedNutrients(item.subNutrients!, level + 1);
-        }
-      }
-    }
-     */
-
       const List<String> urls = [
         'https://fr.openfoodfacts.org/cgi/nutrients.pl',
         'https://us.openfoodfacts.org/cgi/nutrients.pl',
@@ -154,8 +139,7 @@ void main() {
             OrderedNutrients.fromJson(json);
         for (final String expectedNutrient in expectedNutrients) {
           expect(
-            _findOrderedNutrient(
-                orderedNutrients.subNutrients, expectedNutrient),
+            _findOrderedNutrient(orderedNutrients.nutrients, expectedNutrient),
             isNotNull,
             reason: 'Could not find $expectedNutrient in $url',
           );
@@ -177,7 +161,7 @@ void main() {
         final OrderedNutrients orderedNutrients =
             OrderedNutrients.fromJson(json);
         final OrderedNutrient? found =
-            _findOrderedNutrient(orderedNutrients.subNutrients, nutrientId);
+            _findOrderedNutrient(orderedNutrients.nutrients, nutrientId);
         expect(found, isNotNull);
         expect(found!.name, energies[url]);
       }

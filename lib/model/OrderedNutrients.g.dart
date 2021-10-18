@@ -8,19 +8,12 @@ part of 'OrderedNutrients.dart';
 
 OrderedNutrients _$OrderedNutrientsFromJson(Map<String, dynamic> json) =>
     OrderedNutrients(
-      subNutrients: OrderedNutrient.fromJsonOrderedNutrients(json['nutrients']),
+      nutrients: (json['nutrients'] as List<dynamic>)
+          .map((e) => OrderedNutrient.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
-Map<String, dynamic> _$OrderedNutrientsToJson(OrderedNutrients instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('nutrients',
-      OrderedNutrient.toJsonOrderedNutrients(instance.subNutrients));
-  return val;
-}
+Map<String, dynamic> _$OrderedNutrientsToJson(OrderedNutrients instance) =>
+    <String, dynamic>{
+      'nutrients': instance.nutrients,
+    };
