@@ -11,8 +11,8 @@ enum TagType {
   EMB_CODES
 }
 
-extension TagTypeExtension on TagType {
-  static const Map<TagType, String> _TAGS = {
+extension TaxonomyTypeExtension on TagType {
+  static const Map<TagType, String> _TAXONOMIES = {
     TagType.STATES: 'states',
     TagType.LABELS: 'labels',
     TagType.CATEGORIES: 'categories',
@@ -24,5 +24,5 @@ extension TagTypeExtension on TagType {
     TagType.LANGUAGES: 'languages',
     TagType.EMB_CODES: 'emb_codes',
   };
-  String get key => _TAGS[this] ?? '';
+  String get key => _TAXONOMIES[this] ?? '';
 }
