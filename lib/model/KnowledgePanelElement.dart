@@ -153,9 +153,9 @@ class KnowledgePanelTableRowElement extends JsonObject {
 /// A descriptor that describes the type and label of each column.
 @JsonSerializable()
 class KnowledgePanelTableColumn extends JsonObject {
-  final List<String> text;
+  final String text;
 
-  final List<String> type;
+  final String type;
 
   const KnowledgePanelTableColumn({required this.text, required this.type});
 
