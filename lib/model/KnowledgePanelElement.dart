@@ -175,7 +175,7 @@ class KnowledgePanelTableElement extends JsonObject {
   final String id;
 
   @JsonKey(name: 'type')
-  final String tableType;
+  final String type;
 
   final String title;
 
@@ -186,7 +186,7 @@ class KnowledgePanelTableElement extends JsonObject {
 
   const KnowledgePanelTableElement({
     required this.id,
-    required this.tableType,
+    required this.type,
     required this.title,
     required this.columns,
     required this.rows,
