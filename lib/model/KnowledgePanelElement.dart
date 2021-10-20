@@ -178,7 +178,7 @@ class KnowledgePanelTableElement extends JsonObject {
   final String title;
 
   @JsonKey(name: 'columns')
-  final List<KnowledgePanelTableColumn> column;
+  final List<KnowledgePanelTableColumn> columns;
 
   final List<KnowledgePanelTableRowElement> rows;
 
@@ -186,7 +186,7 @@ class KnowledgePanelTableElement extends JsonObject {
     required this.tableId,
     required this.tableType,
     required this.title,
-    required this.column,
+    required this.columns,
     required this.rows,
   });
 
