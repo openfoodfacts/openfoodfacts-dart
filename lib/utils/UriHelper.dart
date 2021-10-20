@@ -14,8 +14,7 @@ class UriHelper {
   }) {
     return Uri(
       scheme: OpenFoodAPIConfiguration.uriScheme,
-      host: (queryType ?? OpenFoodAPIConfiguration.globalQueryType) ==
-              QueryType.PROD
+      host: OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
           ? OpenFoodAPIConfiguration.uriProdHost
           : OpenFoodAPIConfiguration.uriTestHost,
       path: path,
@@ -31,8 +30,7 @@ class UriHelper {
   }) {
     return Uri(
       scheme: OpenFoodAPIConfiguration.uriScheme,
-      host: (queryType ?? OpenFoodAPIConfiguration.globalQueryType) ==
-              QueryType.PROD
+      host: OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
           ? OpenFoodAPIConfiguration.uriProdHostRobotoff
           : OpenFoodAPIConfiguration.uriTestHostRobotoff,
       path: path,
