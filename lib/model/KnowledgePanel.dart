@@ -87,6 +87,8 @@ class KnowledgePanel extends JsonObject {
   @JsonKey(unknownEnumValue: Level.UNKNOWN)
   final Level level;
 
+  final bool? expanded;
+
   /// KnowledgePanelElement is a single unit of KnowledgePanel that can be
   /// rendered on the client.
   final List<KnowledgePanelElement>? elements;
@@ -112,6 +114,7 @@ class KnowledgePanel extends JsonObject {
     required this.parentPanelId,
     required this.titleElement,
     required this.level,
+    this.expanded,
     this.elements,
     this.type,
     this.topics,
