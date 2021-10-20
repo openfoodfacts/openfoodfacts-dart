@@ -137,8 +137,8 @@ Map<String, dynamic> _$KnowledgePanelTableRowElementToJson(
 KnowledgePanelTableColumn _$KnowledgePanelTableColumnFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTableColumn(
-      text: (json['text'] as List<dynamic>).map((e) => e as String).toList(),
-      type: (json['type'] as List<dynamic>).map((e) => e as String).toList(),
+      text: json['text'] as String,
+      type: json['type'] as String,
     );
 
 Map<String, dynamic> _$KnowledgePanelTableColumnToJson(
@@ -154,7 +154,7 @@ KnowledgePanelTableElement _$KnowledgePanelTableElementFromJson(
       tableId: json['table_id'] as String,
       tableType: json['table_type'] as String,
       title: json['title'] as String,
-      columnsDescriptor: (json['columns'] as List<dynamic>)
+      columns: (json['columns'] as List<dynamic>)
           .map((e) =>
               KnowledgePanelTableColumn.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -170,7 +170,7 @@ Map<String, dynamic> _$KnowledgePanelTableElementToJson(
       'table_id': instance.tableId,
       'table_type': instance.tableType,
       'title': instance.title,
-      'columns': instance.columnsDescriptor,
+      'columns': instance.columns,
       'rows': instance.rows,
     };
 

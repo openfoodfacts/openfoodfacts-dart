@@ -153,9 +153,9 @@ class KnowledgePanelTableRowElement extends JsonObject {
 /// A descriptor that describes the type and label of each column.
 @JsonSerializable()
 class KnowledgePanelTableColumn extends JsonObject {
-  final List<String> text;
+  final String text;
 
-  final List<String> type;
+  final String type;
 
   const KnowledgePanelTableColumn({required this.text, required this.type});
 
@@ -178,7 +178,7 @@ class KnowledgePanelTableElement extends JsonObject {
   final String title;
 
   @JsonKey(name: 'columns')
-  final List<KnowledgePanelTableColumn> columnsDescriptor;
+  final List<KnowledgePanelTableColumn> columns;
 
   final List<KnowledgePanelTableRowElement> rows;
 
@@ -186,7 +186,7 @@ class KnowledgePanelTableElement extends JsonObject {
     required this.tableId,
     required this.tableType,
     required this.title,
-    required this.columnsDescriptor,
+    required this.columns,
     required this.rows,
   });
 
