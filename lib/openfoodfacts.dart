@@ -11,8 +11,10 @@ import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/model/TaxonomyAdditive.dart';
 import 'package:openfoodfacts/model/TaxonomyAllergen.dart';
 import 'package:openfoodfacts/model/TaxonomyCategory.dart';
+import 'package:openfoodfacts/model/TaxonomyCountry.dart';
 import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
 import 'package:openfoodfacts/model/TaxonomyLabel.dart';
+import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
@@ -343,10 +345,10 @@ class OpenFoodAPIClient {
   }
 
   static Future<Map<String, TaxonomyAdditive>?> getTaxonomyAdditives(
-      TaxonomyAdditiveQueryConfiguration configuration, {
-        User? user,
-        QueryType? queryType,
-      }) {
+    TaxonomyAdditiveQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) {
     return getTaxonomy<TaxonomyAdditive, TaxonomyAdditiveField>(configuration,
         user: user, queryType: queryType);
   }
@@ -357,6 +359,15 @@ class OpenFoodAPIClient {
     QueryType? queryType,
   }) {
     return getTaxonomy<TaxonomyAllergen, TaxonomyAllergenField>(configuration,
+        user: user, queryType: queryType);
+  }
+
+  static Future<Map<String, TaxonomyCountry>?> getTaxonomyCountries(
+    TaxonomyCountryQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) {
+    return getTaxonomy<TaxonomyCountry, TaxonomyCountryField>(configuration,
         user: user, queryType: queryType);
   }
 
@@ -377,6 +388,15 @@ class OpenFoodAPIClient {
     QueryType? queryType,
   }) {
     return getTaxonomy<TaxonomyLabel, TaxonomyLabelField>(configuration,
+        user: user, queryType: queryType);
+  }
+
+  static Future<Map<String, TaxonomyLanguage>?> getTaxonomyLanguages(
+    TaxonomyLanguageQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) {
+    return getTaxonomy<TaxonomyLanguage, TaxonomyLanguageField>(configuration,
         user: user, queryType: queryType);
   }
 

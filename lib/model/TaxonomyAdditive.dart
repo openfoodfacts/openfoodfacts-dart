@@ -44,7 +44,8 @@ extension TaxonomyAdditiveFieldExtension on TaxonomyAdditiveField {
     TaxonomyAdditiveField.ADDITIVES_CLASSES: 'additives_classes',
     TaxonomyAdditiveField.CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT:
         'carbon_footprint_fr_foodges_ingredient',
-    TaxonomyAdditiveField.CARBON_FOOTPRINT_FR_FOODGES_VALUE: 'carbon_footprint_fr_foodges_value',
+    TaxonomyAdditiveField.CARBON_FOOTPRINT_FR_FOODGES_VALUE:
+        'carbon_footprint_fr_foodges_value',
     TaxonomyAdditiveField.COLOUR_INDEX: 'colour_index',
     TaxonomyAdditiveField.COMMENT: 'comment',
     TaxonomyAdditiveField.DEFAULT_ADDITIVE_CLASS: 'default_additive_class',
@@ -53,7 +54,8 @@ extension TaxonomyAdditiveFieldExtension on TaxonomyAdditiveField {
     TaxonomyAdditiveField.EFSA: 'efsa',
     TaxonomyAdditiveField.EFSA_EVALUATION: 'efsa_evaluation',
     TaxonomyAdditiveField.EFSA_EVALUATION_ADI: 'efsa_evaluation_adi',
-    TaxonomyAdditiveField.EFSA_EVALUATION_ADI_ESTABLISHED: 'efsa_evaluation_adi_established',
+    TaxonomyAdditiveField.EFSA_EVALUATION_ADI_ESTABLISHED:
+        'efsa_evaluation_adi_established',
     TaxonomyAdditiveField.EFSA_EVALUATION_DATE: 'efsa_evaluation_date',
     TaxonomyAdditiveField.EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_ADI:
         'efsa_evaluation_exposure_95th_greater_than_adi',
@@ -63,8 +65,10 @@ extension TaxonomyAdditiveFieldExtension on TaxonomyAdditiveField {
         'efsa_evaluation_exposure_mean_greater_than_adi',
     TaxonomyAdditiveField.EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_NOAEL:
         'efsa_evaluation_exposure_mean_greater_than_noael',
-    TaxonomyAdditiveField.EFSA_EVALUATION_OVEREXPOSURE_RISK: 'efsa_evaluation_overexposure_risk',
-    TaxonomyAdditiveField.EFSA_EVALUATION_SAFETY_ASSESSED: 'efsa_evaluation_safety_assessed',
+    TaxonomyAdditiveField.EFSA_EVALUATION_OVEREXPOSURE_RISK:
+        'efsa_evaluation_overexposure_risk',
+    TaxonomyAdditiveField.EFSA_EVALUATION_SAFETY_ASSESSED:
+        'efsa_evaluation_safety_assessed',
     TaxonomyAdditiveField.EFSA_EVALUATION_URL: 'efsa_evaluation_url',
     TaxonomyAdditiveField.FROM_PALM_OIL: 'from_palm_oil',
     TaxonomyAdditiveField.MANDATORY_ADDITIVE_CLASS: 'mandatory_additive_class',
@@ -232,7 +236,8 @@ class TaxonomyAdditive extends JsonObject {
     toJson: LanguageHelper.toJsonStringMap,
     includeIfNull: false,
   )
-  Map<OpenFoodFactsLanguage, String>? efsaEvaluationExposure95thGreaterThanNoael;
+  Map<OpenFoodFactsLanguage, String>?
+      efsaEvaluationExposure95thGreaterThanNoael;
   @JsonKey(
     name: 'efsa_evaluation_exposure_mean_greater_than_adi',
     fromJson: LanguageHelper.fromJsonStringMap,
@@ -246,7 +251,8 @@ class TaxonomyAdditive extends JsonObject {
     toJson: LanguageHelper.toJsonStringMap,
     includeIfNull: false,
   )
-  Map<OpenFoodFactsLanguage, String>? efsaEvaluationExposureMeanGreaterThanNoael;
+  Map<OpenFoodFactsLanguage, String>?
+      efsaEvaluationExposureMeanGreaterThanNoael;
   @JsonKey(
     name: 'efsa_evaluation_overexposure_risk',
     fromJson: LanguageHelper.fromJsonStringMap,
@@ -324,8 +330,8 @@ class TaxonomyAdditive extends JsonObject {
   String toString() => toJson().toString();
 }
 
-class TaxonomyAdditiveQueryConfiguration
-    extends TaxonomyQueryConfiguration<TaxonomyAdditive, TaxonomyAdditiveField> {
+class TaxonomyAdditiveQueryConfiguration extends TaxonomyQueryConfiguration<
+    TaxonomyAdditive, TaxonomyAdditiveField> {
   TaxonomyAdditiveQueryConfiguration({
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages = const [],
@@ -347,7 +353,8 @@ class TaxonomyAdditiveQueryConfiguration
     if (jsonData is! Map<String, dynamic>) {
       return const {};
     }
-    return jsonData.map<String, TaxonomyAdditive>((String key, dynamic taxonomy) {
+    return jsonData
+        .map<String, TaxonomyAdditive>((String key, dynamic taxonomy) {
       if (taxonomy is! Map<String, dynamic>) {
         assert(false, 'Received JSON Additive is not a Map');
         return MapEntry(key, TaxonomyAdditive.fromJson({}));
@@ -357,10 +364,12 @@ class TaxonomyAdditiveQueryConfiguration
   }
 
   @override
-  Set<TaxonomyAdditiveField> get ignoredFields => const {TaxonomyAdditiveField.ALL};
+  Set<TaxonomyAdditiveField> get ignoredFields =>
+      const {TaxonomyAdditiveField.ALL};
 
   @override
-  Iterable<String> convertFieldsToStrings(Iterable<TaxonomyAdditiveField> fields) {
+  Iterable<String> convertFieldsToStrings(
+      Iterable<TaxonomyAdditiveField> fields) {
     return fields
         .where((TaxonomyAdditiveField field) => !ignoredFields.contains(field))
         .map<String>((TaxonomyAdditiveField field) => field.key);

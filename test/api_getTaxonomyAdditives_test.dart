@@ -48,7 +48,8 @@ void main() {
         'en': 'maybe',
       },
       'efsa_evaluation': {
-        'en': 'Scientific Opinion on the re-evaluation of polyoxyethylene sorbitan monolaurate -E 432- as food additives',
+        'en':
+            'Scientific Opinion on the re-evaluation of polyoxyethylene sorbitan monolaurate -E 432- as food additives',
       },
       'efsa_evaluation_url': {
         'en': 'http://dx.doi.org/10.2903/j.efsa.2015.4152',
@@ -62,13 +63,13 @@ void main() {
   });
 
   group('OpenFoodAPIClient getTaxonomyAdditives', () {
-    test('get a additive', () async {
+    test('get an additive', () async {
       final String tag = 'en:e436';
       TaxonomyAdditiveQueryConfiguration configuration =
           TaxonomyAdditiveQueryConfiguration(
         fields: [
           TaxonomyAdditiveField.NAME,
-          TaxonomyAdditiveField.VEGETARIAN,
+          TaxonomyAdditiveField.VEGAN,
         ],
         languages: [
           OpenFoodFactsLanguage.ENGLISH,
@@ -96,9 +97,9 @@ void main() {
           equals(expectedResponse[tag][TaxonomyAdditiveField.NAME.key]
               [OpenFoodFactsLanguage.FRENCH.code]));
       expect(
-          additive.wikidata![OpenFoodFactsLanguage.ENGLISH]!,
-          equals(expectedResponse[tag][TaxonomyAdditiveField.WIKIDATA.key]
-          [OpenFoodFactsLanguage.ENGLISH.code]));
+          additive.vegan![OpenFoodFactsLanguage.ENGLISH]!,
+          equals(expectedResponse[tag][TaxonomyAdditiveField.VEGAN.key]
+              [OpenFoodFactsLanguage.ENGLISH.code]));
     });
     test("get an additive that doesn't exist", () async {
       final String tag = 'en:some_nonexistent_additive';
@@ -132,7 +133,7 @@ void main() {
           TaxonomyAdditiveQueryConfiguration(
         fields: [
           TaxonomyAdditiveField.NAME,
-          TaxonomyAdditiveField.VEGETARIAN,
+          TaxonomyAdditiveField.VEGAN,
         ],
         languages: [
           OpenFoodFactsLanguage.ENGLISH,
@@ -161,8 +162,8 @@ void main() {
           equals(expectedResponse[tag][TaxonomyAdditiveField.NAME.key]
               [OpenFoodFactsLanguage.FRENCH.code]));
       expect(
-          additive.wikidata![OpenFoodFactsLanguage.ENGLISH]!,
-          equals(expectedResponse[tag][TaxonomyAdditiveField.WIKIDATA.key]
+          additive.vegan![OpenFoodFactsLanguage.ENGLISH]!,
+          equals(expectedResponse[tag][TaxonomyAdditiveField.VEGAN.key]
               [OpenFoodFactsLanguage.ENGLISH.code]));
     });
   });
