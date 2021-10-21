@@ -13,6 +13,7 @@ KnowledgePanel _$KnowledgePanelFromJson(Map<String, dynamic> json) =>
           TitleElement.fromJson(json['title_element'] as Map<String, dynamic>),
       level: _$enumDecode(_$LevelEnumMap, json['level'],
           unknownValue: Level.UNKNOWN),
+      expanded: json['expanded'] as bool?,
       elements: (json['elements'] as List<dynamic>?)
           ?.map(
               (e) => KnowledgePanelElement.fromJson(e as Map<String, dynamic>))
@@ -31,6 +32,7 @@ Map<String, dynamic> _$KnowledgePanelToJson(KnowledgePanel instance) =>
       'parent_panel_id': instance.parentPanelId,
       'title_element': instance.titleElement,
       'level': _$LevelEnumMap[instance.level],
+      'expanded': instance.expanded,
       'elements': instance.elements,
       'type': _$KnowledgePanelTypeEnumMap[instance.type],
       'topics': instance.topics,
