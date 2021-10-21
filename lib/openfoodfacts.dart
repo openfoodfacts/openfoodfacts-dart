@@ -6,12 +6,13 @@ import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
-import 'package:openfoodfacts/model/TaxonomyAllergen.dart';
-import 'package:openfoodfacts/model/TaxonomyCategory.dart';
-import 'package:openfoodfacts/model/TaxonomyLabel.dart';
-import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
+import 'package:openfoodfacts/model/TaxonomyAdditive.dart';
+import 'package:openfoodfacts/model/TaxonomyAllergen.dart';
+import 'package:openfoodfacts/model/TaxonomyCategory.dart';
+import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
+import 'package:openfoodfacts/model/TaxonomyLabel.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
@@ -338,6 +339,15 @@ class OpenFoodAPIClient {
     QueryType? queryType,
   }) {
     return getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(configuration,
+        user: user, queryType: queryType);
+  }
+
+  static Future<Map<String, TaxonomyAdditive>?> getTaxonomyAdditives(
+      TaxonomyAdditiveQueryConfiguration configuration, {
+        User? user,
+        QueryType? queryType,
+      }) {
+    return getTaxonomy<TaxonomyAdditive, TaxonomyAdditiveField>(configuration,
         user: user, queryType: queryType);
   }
 
