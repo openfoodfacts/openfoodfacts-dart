@@ -10,7 +10,7 @@ KnowledgePanelTextElement _$KnowledgePanelTextElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTextElement(
       html: json['html'] as String,
-      type: _$enumDecode(
+      type: _$enumDecodeNullable(
           _$KnowledgePanelTextElementTypeEnumMap, json['text_type'],
           unknownValue: KnowledgePanelTextElementType.UNKNOWN),
     );
@@ -46,6 +46,17 @@ K _$enumDecode<K, V>(
       return MapEntry(unknownValue, enumValues.values.first);
     },
   ).key;
+}
+
+K? _$enumDecodeNullable<K, V>(
+  Map<K, V> enumValues,
+  dynamic source, {
+  K? unknownValue,
+}) {
+  if (source == null) {
+    return null;
+  }
+  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
 const _$KnowledgePanelTextElementTypeEnumMap = {
@@ -107,6 +118,8 @@ KnowledgePanelTableCell _$KnowledgePanelTableCellFromJson(
       text: json['text'] as String,
       percent: (json['percent'] as num?)?.toDouble(),
       iconUrl: json['icon_url'] as String?,
+      evaluation: _$enumDecodeNullable(_$EvaluationEnumMap, json['evaluation'],
+          unknownValue: Evaluation.UNKNOWN),
     );
 
 Map<String, dynamic> _$KnowledgePanelTableCellToJson(
@@ -115,12 +128,19 @@ Map<String, dynamic> _$KnowledgePanelTableCellToJson(
       'text': instance.text,
       'percent': instance.percent,
       'icon_url': instance.iconUrl,
+      'evaluation': _$EvaluationEnumMap[instance.evaluation],
     };
+
+const _$EvaluationEnumMap = {
+  Evaluation.GOOD: 'good',
+  Evaluation.NEUTRAL: 'neutral',
+  Evaluation.BAD: 'bad',
+  Evaluation.UNKNOWN: 'UNKNOWN',
+};
 
 KnowledgePanelTableRowElement _$KnowledgePanelTableRowElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTableRowElement(
-      id: json['id'] as String,
       values: (json['values'] as List<dynamic>)
           .map((e) =>
               KnowledgePanelTableCell.fromJson(e as Map<String, dynamic>))
@@ -130,7 +150,6 @@ KnowledgePanelTableRowElement _$KnowledgePanelTableRowElementFromJson(
 Map<String, dynamic> _$KnowledgePanelTableRowElementToJson(
         KnowledgePanelTableRowElement instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'values': instance.values,
     };
 
@@ -151,8 +170,8 @@ Map<String, dynamic> _$KnowledgePanelTableColumnToJson(
 KnowledgePanelTableElement _$KnowledgePanelTableElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTableElement(
-      tableId: json['table_id'] as String,
-      tableType: json['table_type'] as String,
+      id: json['id'] as String,
+      type: json['type'] as String,
       title: json['title'] as String,
       columns: (json['columns'] as List<dynamic>)
           .map((e) =>
@@ -167,8 +186,8 @@ KnowledgePanelTableElement _$KnowledgePanelTableElementFromJson(
 Map<String, dynamic> _$KnowledgePanelTableElementToJson(
         KnowledgePanelTableElement instance) =>
     <String, dynamic>{
-      'table_id': instance.tableId,
-      'table_type': instance.tableType,
+      'id': instance.id,
+      'type': instance.type,
       'title': instance.title,
       'columns': instance.columns,
       'rows': instance.rows,
@@ -179,14 +198,14 @@ KnowledgePanelElement _$KnowledgePanelElementFromJson(
     KnowledgePanelElement(
       elementType: _$enumDecode(
           _$KnowledgePanelElementTypeEnumMap, json['element_type']),
-      textElement: json['textElement'] == null
+      textElement: json['text_element'] == null
           ? null
           : KnowledgePanelTextElement.fromJson(
-              json['textElement'] as Map<String, dynamic>),
-      imageElement: json['imageElement'] == null
+              json['text_element'] as Map<String, dynamic>),
+      imageElement: json['image_element'] == null
           ? null
           : KnowledgePanelImageElement.fromJson(
-              json['imageElement'] as Map<String, dynamic>),
+              json['image_element'] as Map<String, dynamic>),
       panelElement: json['panel_element'] == null
           ? null
           : KnowledgePanelPanelIdElement.fromJson(
@@ -195,21 +214,21 @@ KnowledgePanelElement _$KnowledgePanelElementFromJson(
           ? null
           : KnowledgePanelPanelGroupElement.fromJson(
               json['panel_group'] as Map<String, dynamic>),
-      tableElement: json['tableElement'] == null
+      tableElement: json['table_element'] == null
           ? null
           : KnowledgePanelTableElement.fromJson(
-              json['tableElement'] as Map<String, dynamic>),
+              json['table_element'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$KnowledgePanelElementToJson(
         KnowledgePanelElement instance) =>
     <String, dynamic>{
       'element_type': _$KnowledgePanelElementTypeEnumMap[instance.elementType],
-      'textElement': instance.textElement,
-      'imageElement': instance.imageElement,
+      'text_element': instance.textElement,
+      'image_element': instance.imageElement,
       'panel_element': instance.panelElement,
       'panel_group': instance.panelGroupElement,
-      'tableElement': instance.tableElement,
+      'table_element': instance.tableElement,
     };
 
 const _$KnowledgePanelElementTypeEnumMap = {
