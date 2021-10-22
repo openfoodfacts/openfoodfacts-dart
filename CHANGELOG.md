@@ -1,3 +1,5 @@
+## [1.3.8] - 22.10.2021
+- More updates to KnowledgePanel APIs
 ## [1.3.7] - 12.10.2021
 - Update KnowledgePanel API to comply to the latest Backend changes.
 ## [1.3.6] - 10.10.2021
