@@ -1,5 +1,32 @@
 ## [1.3.8] - 22.10.2021
 - More updates to KnowledgePanel APIs
+## [0.4.0](https://www.github.com/openfoodfacts/openfoodfacts-dart/compare/v0.3.15...v0.4.0) (2021-10-22)
+
+
+### Features
+
+* add agribalyse score to EcoscoreData ([#160](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/160)) ([4565f73](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/4565f73184bfbdcf3bc8f7117d840c9a9c698453))
+* add ecoscoreData.missingDataWarning field support ([e1ccb26](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/e1ccb26fcc9d1cbd82d146de48f6fed4ec1929f2))
+
+
+### Bug Fixes
+
+* add carbohydratesUnit and fatUnit in the Nutriments class ([8020b38](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/8020b38a8800e8b9fd1d0229131715061e621641))
+* address path warning in example/pubspec.yaml ([1a8e415](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/1a8e415bd895f595f500e4388301345c85e3091f))
+* clean up imports ([41af6dd](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/41af6ddc375bf3df05a5a99313b3124c016db59b))
+* failing test ([b256809](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/b256809fa93564b53a622fa973479fd1520f6a8c))
+* improve error messages when saving products ([e5f766d](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/e5f766d1808bf96d369e626c261d3e8a4115c750)), closes [#247](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/247)
+* make tests pass ([695c4cd](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/695c4cd27d8b50a883075812bb5f13730915dc4b))
+* no user is required when searching products ([136c7ed](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/136c7ed5d26f713c70ba2f4f8fcbbd0eef5dd3ab))
+* Nutriments JSON conversion bug related to micro gram unit ([#267](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/267)) ([9123647](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/9123647115e6a4df7fffbeeb697c204315e06ff7)), closes [#265](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/265)
+* relax and correct test assertions ([#266](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/266)) ([bde86da](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/bde86da2ef2cb3229cb48c097994842a300e2e37))
+* remove unused dependency, async_loader ([08d2d75](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/08d2d75d63f508e86cf56af7804b92658f4913e7))
+* test assertions ([ea9ef50](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/ea9ef5032edca135b36284604664f13be9848e9b))
+* test instructions ([6a339c9](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/6a339c9c790bce40bb8e9b545e4b201805c78910))
+* tweak handling of status codes based on PR feedback ([0324b91](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/0324b916e5ecd7b06b0532599f2eed3ac61c3212))
+* update expected test results. ([79714c3](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/79714c32e4c60a1d6f8c52deeec0c41b5288fa1c)), closes [#146](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/146)
+* write API for nutrient units ([3339810](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/3339810b43e3adcc76e27ffc444e3ee0fe144e40)), closes [#224](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/224)
+
 ## [1.3.7] - 12.10.2021
 - Update KnowledgePanel API to comply to the latest Backend changes.
 ## [1.3.6] - 10.10.2021
