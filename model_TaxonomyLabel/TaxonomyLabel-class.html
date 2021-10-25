@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the TaxonomyLabel class from the TaxonomyLabel library, for the Dart programming language.">
+  <title>TaxonomyLabel class - TaxonomyLabel library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">openfoodfacts</a></li>
+    <li><a href="../model_TaxonomyLabel/model_TaxonomyLabel-library.html">TaxonomyLabel</a></li>
+    <li class="self-crumb">TaxonomyLabel class</li>
+  </ol>
+  <div class="self-name">TaxonomyLabel</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-class">TaxonomyLabel</span> class 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>A JSON-serializable version of a Label taxonomy result.</p>
+<p>See <a href="../openfoodfacts/OpenFoodAPIClient/getTaxonomy.html">OpenFoodAPIClient.getTaxonomy</a> for more details on how to retrieve one
+of these.</p>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        <dt>Inheritance</dt>
+        <dd><ul class="gt-separated dark clazz-relationships">
+          <li><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object-class.html">Object</a></li>
+          <li><a href="../interface_JsonObject/JsonObject-class.html">JsonObject</a></li>
+          <li>TaxonomyLabel</li>
+        </ul></dd>
+
+
+
+
+
+        <dt>Annotations</dt>
+        <dd><ul class="annotation-list clazz-relationships">
+          <li>@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonSerializable-class.html">JsonSerializable</a>()</li>
+        </ul></dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="TaxonomyLabel" class="callable">
+          <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/TaxonomyLabel.html">TaxonomyLabel</a></span><span class="signature">(<span class="parameter" id="-param-authAddress"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">authAddress</span>, </span><span class="parameter" id="-param-authName"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">authName</span>, </span><span class="parameter" id="-param-authUrl"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">authUrl</span>, </span><span class="parameter" id="-param-categories"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">categories</span>, </span><span class="parameter" id="-param-children"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">children</span>, </span><span class="parameter" id="-param-countriesWhereSold"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">countriesWhereSold</span>, </span><span class="parameter" id="-param-country"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">country</span>, </span><span class="parameter" id="-param-description"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">description</span>, </span><span class="parameter" id="-param-euGroups"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">euGroups</span>, </span><span class="parameter" id="-param-exceptions"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">exceptions</span>, </span><span class="parameter" id="-param-image"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">image</span>, </span><span class="parameter" id="-param-images"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">images</span>, </span><span class="parameter" id="-param-ingredients"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">ingredients</span>, </span><span class="parameter" id="-param-labelCategories"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">labelCategories</span>, </span><span class="parameter" id="-param-manufacturingPlaces"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">manufacturingPlaces</span>, </span><span class="parameter" id="-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">name</span>, </span><span class="parameter" id="-param-opposite"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">opposite</span>, </span><span class="parameter" id="-param-origins"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">origins</span>, </span><span class="parameter" id="-param-packaging"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">packaging</span>, </span><span class="parameter" id="-param-packagingPlaces"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">packagingPlaces</span>, </span><span class="parameter" id="-param-parents"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">parents</span>, </span><span class="parameter" id="-param-protectedNameType"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">protectedNameType</span>, </span><span class="parameter" id="-param-stores"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">stores</span>, </span><span class="parameter" id="-param-wikidata"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">wikidata</span></span>)</span>
+        </dt>
+        <dd>
+           
+        </dd>
+        <dt id="TaxonomyLabel.fromJson" class="callable">
+          <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/TaxonomyLabel.fromJson.html">TaxonomyLabel.fromJson</a></span><span class="signature">(<span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span>)</span>
+        </dt>
+        <dd>
+           
+          <div class="constructor-modifier features">factory</div>
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="authAddress" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/authAddress.html">authAddress</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;auth_address&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="authName" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/authName.html">authName</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;auth_name&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="authUrl" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/authUrl.html">authUrl</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;auth_url&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="categories" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/categories.html">categories</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;categories&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="children" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/children.html">children</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;children&#39;, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="countriesWhereSold" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/countriesWhereSold.html">countriesWhereSold</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;countries_where_sold&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="country" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/country.html">country</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;country&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="description" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/description.html">description</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;description&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="euGroups" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/euGroups.html">euGroups</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;eu_groups&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="exceptions" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/exceptions.html">exceptions</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;exceptions&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd class="inherited">
+  The hash code for this object. <a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/hashCode.html">[...]</a>
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="image" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/image.html">image</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;image&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="images" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/images.html">images</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;images&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="ingredients" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/ingredients.html">ingredients</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;ingredients&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="labelCategories" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/labelCategories.html">labelCategories</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;label_categories&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="manufacturingPlaces" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/manufacturingPlaces.html">manufacturingPlaces</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;manufacturing_places&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="name" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/name.html">name</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;name&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="opposite" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/opposite.html">opposite</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;opposite&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="origins" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/origins.html">origins</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;origins&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="packaging" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/packaging.html">packaging</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;packaging&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="packagingPlaces" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/packagingPlaces.html">packagingPlaces</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;packaging_places&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="parents" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/parents.html">parents</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;parents&#39;, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="protectedNameType" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/protectedNameType.html">protectedNameType</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;protected_name_type&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Type-class.html">Type</a></span> 
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object. 
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="stores" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/stores.html">stores</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;stores&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+        <dt id="wikidata" class="property">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/wikidata.html">wikidata</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+   
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;wikidata&#39;, fromJson: LanguageHelper.fromJsonStringMap, toJson: LanguageHelper.toJsonStringMap, includeIfNull: false), read / write</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a non-existent method or property is accessed. <a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/noSuchMethod.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="toData" class="callable inherited">
+  <span class="name"><a href="../interface_JsonObject/JsonObject/toData.html">toData</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="toJson" class="callable">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/toJson.html">toJson</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+   
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="toString" class="callable">
+  <span class="name"><a href="../model_TaxonomyLabel/TaxonomyLabel/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  A string representation of this object. <a href="../model_TaxonomyLabel/TaxonomyLabel/toString.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="toValueString" class="callable inherited">
+  <span class="name"><a href="../interface_JsonObject/JsonObject/toValueString.html">toValueString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns all values as a String separated by a hyphen
+value1 - value2 - value3 
+  <div class="features">inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator. <a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/operator_equals.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../index.html">openfoodfacts</a></li>
+  <li><a href="../model_TaxonomyLabel/model_TaxonomyLabel-library.html">TaxonomyLabel</a></li>
+  <li class="self-crumb">TaxonomyLabel class</li>
+</ol>
+
+
+    <h5>TaxonomyLabel library</h5>
+    <ol>
+  <li class="section-title"><a href="../model_TaxonomyLabel/model_TaxonomyLabel-library.html#classes">Classes</a></li>
+  <li><a href="../model_TaxonomyLabel/TaxonomyLabel-class.html">TaxonomyLabel</a></li>
+  <li><a href="../model_TaxonomyLabel/TaxonomyLabelQueryConfiguration-class.html">TaxonomyLabelQueryConfiguration</a></li>
+
+  <li class="section-title"><a href="../model_TaxonomyLabel/model_TaxonomyLabel-library.html#extensions">Extensions</a></li>
+  <li><a href="../model_TaxonomyLabel/TaxonomyLabelFieldExtension.html">TaxonomyLabelFieldExtension</a></li>
+
+
+
+
+
+  <li class="section-title"><a href="../model_TaxonomyLabel/model_TaxonomyLabel-library.html#enums">Enums</a></li>
+  <li><a href="../model_TaxonomyLabel/TaxonomyLabelField-class.html">TaxonomyLabelField</a></li>
+
+
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+    <ol>
+
+    <li class="section-title"><a href="../model_TaxonomyLabel/TaxonomyLabel-class.html#constructors">Constructors</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/TaxonomyLabel.html">TaxonomyLabel</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/TaxonomyLabel.fromJson.html">fromJson</a></li>
+
+
+    <li class="section-title">
+      <a href="../model_TaxonomyLabel/TaxonomyLabel-class.html#instance-properties">Properties</a>
+    </li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/authAddress.html">authAddress</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/authName.html">authName</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/authUrl.html">authUrl</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/categories.html">categories</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/children.html">children</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/countriesWhereSold.html">countriesWhereSold</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/country.html">country</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/description.html">description</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/euGroups.html">euGroups</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/exceptions.html">exceptions</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/image.html">image</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/images.html">images</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/ingredients.html">ingredients</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/labelCategories.html">labelCategories</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/manufacturingPlaces.html">manufacturingPlaces</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/name.html">name</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/opposite.html">opposite</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/origins.html">origins</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/packaging.html">packaging</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/packagingPlaces.html">packagingPlaces</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/parents.html">parents</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/protectedNameType.html">protectedNameType</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/stores.html">stores</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/wikidata.html">wikidata</a></li>
+
+    <li class="section-title"><a href="../model_TaxonomyLabel/TaxonomyLabel-class.html#instance-methods">Methods</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="../interface_JsonObject/JsonObject/toData.html">toData</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/toJson.html">toJson</a></li>
+    <li><a href="../model_TaxonomyLabel/TaxonomyLabel/toString.html">toString</a></li>
+    <li class="inherited"><a href="../interface_JsonObject/JsonObject/toValueString.html">toValueString</a></li>
+
+    <li class="section-title inherited"><a href="../model_TaxonomyLabel/TaxonomyLabel-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    openfoodfacts
+      1.3.8
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/script.js?v1"></script>
+
+
+
+</body>
+
+</html>
+
