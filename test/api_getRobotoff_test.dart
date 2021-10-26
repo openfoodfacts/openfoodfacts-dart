@@ -15,7 +15,7 @@ void main() {
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
         '3274570800026',
         'en',
-        TestConstants.TEST_USER,
+        user: TestConstants.TEST_USER,
         count: 1,
       );
 
@@ -41,7 +41,7 @@ void main() {
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
         '3274570800026',
         'fr',
-        TestConstants.TEST_USER,
+        user: TestConstants.TEST_USER,
       );
 
       if (result.status != 'no_questions') {
