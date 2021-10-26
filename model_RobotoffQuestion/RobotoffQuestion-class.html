@@ -52,6 +52,25 @@
     
 
 
+    <section>
+      <dl class="dl-horizontal">
+        <dt>Inheritance</dt>
+        <dd><ul class="gt-separated dark clazz-relationships">
+          <li><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object-class.html">Object</a></li>
+          <li><a href="../interface_JsonObject/JsonObject-class.html">JsonObject</a></li>
+          <li>RobotoffQuestion</li>
+        </ul></dd>
+
+
+
+
+
+        <dt>Annotations</dt>
+        <dd><ul class="annotation-list clazz-relationships">
+          <li>@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonSerializable-class.html">JsonSerializable</a>()</li>
+        </ul></dd>
+      </dl>
+    </section>
 
     <section class="summary offset-anchor" id="constructors">
       <h2>Constructors</h2>
@@ -63,6 +82,13 @@
         <dd>
            
           <div class="constructor-modifier features">const</div>
+        </dd>
+        <dt id="RobotoffQuestion.fromJson" class="callable">
+          <span class="name"><a href="../model_RobotoffQuestion/RobotoffQuestion/RobotoffQuestion.fromJson.html">RobotoffQuestion.fromJson</a></span><span class="signature">(<span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span>)</span>
+        </dt>
+        <dd>
+           
+          <div class="constructor-modifier features">factory</div>
         </dd>
       </dl>
     </section>
@@ -122,7 +148,7 @@
 </dt>
 <dd>
    
-  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;insight_type&#39;), final</div>
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;insight_type&#39;, unknownEnumValue: InsightType.UNKNOWN), final</div>
 
 </dd>
 
@@ -173,7 +199,7 @@
       </dl>
     </section>
 
-    <section class="summary offset-anchor inherited" id="instance-methods">
+    <section class="summary offset-anchor" id="instance-methods">
       <h2>Methods</h2>
       <dl class="callables">
         <dt id="noSuchMethod" class="callable inherited">
@@ -189,6 +215,32 @@
 
 </dd>
 
+        <dt id="toData" class="callable inherited">
+  <span class="name"><a href="../interface_JsonObject/JsonObject/toData.html">toData</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="toJson" class="callable">
+  <span class="name"><a href="../model_RobotoffQuestion/RobotoffQuestion/toJson.html">toJson</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+   
+  <div class="features">override</div>
+
+</dd>
+
         <dt id="toString" class="callable inherited">
   <span class="name"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
     <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>
@@ -198,6 +250,20 @@
 </dt>
 <dd class="inherited">
   A string representation of this object. <a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/toString.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="toValueString" class="callable inherited">
+  <span class="name"><a href="../interface_JsonObject/JsonObject/toValueString.html">toValueString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns all values as a String separated by a hyphen
+value1 - value2 - value3 
   <div class="features">inherited</div>
 
 </dd>
@@ -225,37 +291,6 @@
     </section>
 
 
-    <section class="summary offset-anchor" id="static-methods">
-      <h2>Static Methods</h2>
-      <dl class="callables">
-        <dt id="fromJson" class="callable">
-  <span class="name"><a href="../model_RobotoffQuestion/RobotoffQuestion/fromJson.html">fromJson</a></span><span class="signature">(<wbr><span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a></span> <span class="parameter-name">json</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../model_RobotoffQuestion/RobotoffQuestion-class.html">RobotoffQuestion</a></span>&gt;</span></span>
-  </span>
-  
-
-</dt>
-<dd>
-   
-  
-
-</dd>
-
-        <dt id="toJson" class="callable">
-  <span class="name"><a href="../model_RobotoffQuestion/RobotoffQuestion/toJson.html">toJson</a></span><span class="signature">(<wbr><span class="parameter" id="toJson-param-questions"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../model_RobotoffQuestion/RobotoffQuestion-class.html">RobotoffQuestion</a></span>&gt;</span>?</span> <span class="parameter-name">questions</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
-  </span>
-  
-
-</dt>
-<dd>
-   
-  
-
-</dd>
-
-      </dl>
-    </section>
 
 
   </div> <!-- /.main-content -->
@@ -296,6 +331,7 @@
 
     <li class="section-title"><a href="../model_RobotoffQuestion/RobotoffQuestion-class.html#constructors">Constructors</a></li>
     <li><a href="../model_RobotoffQuestion/RobotoffQuestion/RobotoffQuestion.html">RobotoffQuestion</a></li>
+    <li><a href="../model_RobotoffQuestion/RobotoffQuestion/RobotoffQuestion.fromJson.html">fromJson</a></li>
 
 
     <li class="section-title">
@@ -311,18 +347,18 @@
     <li><a href="../model_RobotoffQuestion/RobotoffQuestion/type.html">type</a></li>
     <li><a href="../model_RobotoffQuestion/RobotoffQuestion/value.html">value</a></li>
 
-    <li class="section-title inherited"><a href="../model_RobotoffQuestion/RobotoffQuestion-class.html#instance-methods">Methods</a></li>
+    <li class="section-title"><a href="../model_RobotoffQuestion/RobotoffQuestion-class.html#instance-methods">Methods</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="../interface_JsonObject/JsonObject/toData.html">toData</a></li>
+    <li><a href="../model_RobotoffQuestion/RobotoffQuestion/toJson.html">toJson</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/toString.html">toString</a></li>
+    <li class="inherited"><a href="../interface_JsonObject/JsonObject/toValueString.html">toValueString</a></li>
 
     <li class="section-title inherited"><a href="../model_RobotoffQuestion/RobotoffQuestion-class.html#operators">Operators</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 
-    <li class="section-title"><a href="../model_RobotoffQuestion/RobotoffQuestion-class.html#static-methods">Static methods</a></li>
-    <li><a href="../model_RobotoffQuestion/RobotoffQuestion/fromJson.html">fromJson</a></li>
-    <li><a href="../model_RobotoffQuestion/RobotoffQuestion/toJson.html">toJson</a></li>
 
 </ol>
 
