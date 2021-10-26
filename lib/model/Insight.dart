@@ -15,16 +15,27 @@ extension InsightAnnotationExtension on InsightAnnotation {
 }
 
 enum InsightType {
+  @JsonValue('ingredient_spellcheck')
   INGREDIENT_SPELLCHECK,
+  @JsonValue('packager_code')
   PACKAGER_CODE,
+  @JsonValue('label')
   LABEL,
+  @JsonValue('category')
   CATEGORY,
+  @JsonValue('product_weight')
   PRODUCT_WEIGHT,
+  @JsonValue('expiration_date')
   EXPIRATION_DATE,
+  @JsonValue('brand')
   BRAND,
+  @JsonValue('store')
   STORE,
+  @JsonValue('nutrient')
   NUTRIENT,
-  UNDEFINED
+  @JsonValue('undefined')
+  UNDEFINED,
+  UNKNOWN
 }
 
 extension InsightTypesExtension on InsightType? {
