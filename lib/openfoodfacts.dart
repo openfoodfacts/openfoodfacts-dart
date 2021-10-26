@@ -8,6 +8,7 @@ import 'package:http/http.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/TaxonomyAllergen.dart';
 import 'package:openfoodfacts/model/TaxonomyCategory.dart';
+import 'package:openfoodfacts/model/TaxonomyLabel.dart';
 import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
@@ -358,6 +359,15 @@ class OpenFoodAPIClient {
         configuration,
         user: user,
         queryType: queryType);
+  }
+
+  static Future<Map<String, TaxonomyLabel>?> getTaxonomyLabels(
+    TaxonomyLabelQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) {
+    return getTaxonomy<TaxonomyLabel, TaxonomyLabelField>(configuration,
+        user: user, queryType: queryType);
   }
 
   static void _removeImages(
