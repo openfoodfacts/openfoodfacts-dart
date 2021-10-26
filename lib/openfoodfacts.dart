@@ -443,12 +443,12 @@ class OpenFoodAPIClient {
 
   /// By default the query will hit the PROD DB
   static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(
-      String barcode,
-      String lang, {
-        User? user,
-        int? count,
-        QueryType? queryType,
-      })  async {
+    String barcode,
+    String lang, {
+    User? user,
+    int? count,
+    QueryType? queryType,
+  }) async {
     if (count == null || count <= 0) {
       count = 1;
     }

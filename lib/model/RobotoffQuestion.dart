@@ -7,7 +7,7 @@ part 'RobotoffQuestion.g.dart';
 @JsonSerializable()
 class RobotoffQuestionResult extends JsonObject {
   final String? status;
-  @JsonKey(name: 'questions')
+
   final List<RobotoffQuestion>? questions;
 
   const RobotoffQuestionResult({this.status, this.questions});
@@ -41,10 +41,8 @@ class RobotoffQuestion extends JsonObject {
       this.insightType,
       this.imageUrl});
 
-  factory RobotoffQuestion.fromJson(Map<String, dynamic> json) {
-    print(json);
-    return _$RobotoffQuestionFromJson(json);
-  }
+  factory RobotoffQuestion.fromJson(Map<String, dynamic> json) =>
+      _$RobotoffQuestionFromJson(json);
 
   Map<String, dynamic> toJson() => _$RobotoffQuestionToJson(this);
 }
