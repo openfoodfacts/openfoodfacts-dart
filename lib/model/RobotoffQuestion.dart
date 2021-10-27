@@ -19,6 +19,12 @@ class RobotoffQuestionResult extends JsonObject {
   Map<String, dynamic> toJson() => _$RobotoffQuestionResultToJson(this);
 }
 
+@Jsonerializable()
+class RobotoffAnnotate extends JsonObject {
+  final String status;
+  final String description;
+}
+
 @JsonSerializable()
 class RobotoffQuestion extends JsonObject {
   final String? barcode;

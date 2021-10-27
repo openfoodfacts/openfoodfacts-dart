@@ -441,6 +441,41 @@ class OpenFoodAPIClient {
         json.decode(utf8.decode(response.bodyBytes)));
   }
 
+  static Future<RobotoffAnnotateResult> postRobotoffAnnotation({
+    @required User user,
+    @required String insightId,
+	@required int annotation,
+	bool? update = null,
+	Map<String, dynamic>? data = null,
+	QueryType? queryType = null,
+  }) async {
+    final Map<String, String> parameters = <String, String>{
+      'insight_id': insightId,
+      'annotation': annotation.toString()
+    };
+	if (update != null) {
+	  parameters['update'] = update! ? '1' : '0';
+	}
+	if (data != null) {
+	  parameters['data'] = json.encode(data!);
+	}
+
+    var robotoffAnnotateUri = UriHelper.getRobotoffUri(
+      path: 'api/v1/insights/annotate',
+      queryParameters: parameters,
+      queryType: queryType,
+    );
+
+    Response response = await HttpHelper().doPostRequest(robotoffAnnotateUri,
+        user: user,
+        userAgent: OpenFoodAPIConfiguration.userAgent,
+        queryType: QueryType.PROD);
+    var result = RobotoffAnnotateResult.fromJson(
+        json.decode(utf8.decode(response.bodyBytes)));
+
+    return result;
+  }
+
   /// By default the query will hit the PROD DB
   static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(
     String barcode,
