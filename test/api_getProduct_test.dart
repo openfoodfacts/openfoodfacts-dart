@@ -343,16 +343,16 @@ void main() {
         queryType: queryType,
       );
       expect(result.product!.nutriments!.chromium, .000002);
-      expect(result.product!.nutriments!.chromiumUnit, Unit.MICRO_G);
+      expect(result.product!.nutriments!.chromiumUnit, Unit.G);
       expect(result.product!.nutriments!.chromiumServing, .00001);
       expect(result.product!.nutriments!.iodine, .0000075);
-      expect(result.product!.nutriments!.iodineUnit, Unit.MICRO_G);
+      expect(result.product!.nutriments!.iodineUnit, Unit.G);
       expect(result.product!.nutriments!.iodineServing, .0000375);
       expect(result.product!.nutriments!.manganese, .0001);
-      expect(result.product!.nutriments!.manganeseUnit, Unit.MILLI_G);
+      expect(result.product!.nutriments!.manganeseUnit, Unit.G);
       expect(result.product!.nutriments!.manganeseServing, .0005);
       expect(result.product!.nutriments!.molybdenum, .000004);
-      expect(result.product!.nutriments!.molybdenumUnit, Unit.MICRO_G);
+      expect(result.product!.nutriments!.molybdenumUnit, Unit.G);
       expect(result.product!.nutriments!.molybdenumServing, .00002);
 
       result = await OpenFoodAPIClient.getProduct(
