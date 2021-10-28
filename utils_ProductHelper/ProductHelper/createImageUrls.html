@@ -54,7 +54,7 @@
 
 <span class="returntype">void</span>
 <span class="name ">createImageUrls</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="createImageUrls-param-product"><span class="type-annotation"><a href="../../model_Product/Product-class.html">Product</a></span> <span class="parameter-name">product</span>, </span></li>
-<li><span class="parameter" id="createImageUrls-param-queryType">{<span class="type-annotation"><a href="../../utils_QueryType/QueryType-class.html">QueryType</a></span> <span class="parameter-name">queryType</span> = <span class="default-value">QueryType.PROD</span>}</span></li>
+<li><span class="parameter" id="createImageUrls-param-queryType">{<span class="type-annotation"><a href="../../utils_QueryType/QueryType-class.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
 </ol>)
 
       
@@ -69,15 +69,20 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static void createImageUrls(Product product,
-    {QueryType queryType = QueryType.PROD}) {
+  <pre class="language-dart"><code class="language-dart">static void createImageUrls(
+  Product product, {
+  QueryType? queryType,
+}) {
   if (product.images == null) {
     return;
   }
 
   for (ProductImage image in product.images!) {
-    image.url =
-        ImageHelper.buildUrl(product.barcode, image, queryType: queryType);
+    image.url = ImageHelper.buildUrl(
+      product.barcode,
+      image,
+      queryType: OpenFoodAPIConfiguration.getQueryType(queryType),
+    );
   }
 }</code></pre>
 </section>

@@ -56,16 +56,13 @@
 <span class="name ">getIngredientSpellingCorrection</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getIngredientSpellingCorrection-param-ingredientName">{<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">ingredientName</span>, </span></li>
 <li><span class="parameter" id="getIngredientSpellingCorrection-param-product"><span class="type-annotation"><a href="../../model_Product/Product-class.html">Product</a>?</span> <span class="parameter-name">product</span>, </span></li>
 <li><span class="parameter" id="getIngredientSpellingCorrection-param-user"><span class="type-annotation"><a href="../../model_User/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span></li>
-<li><span class="parameter" id="getIngredientSpellingCorrection-param-queryType"><span class="type-annotation">dynamic</span> <span class="parameter-name">queryType</span> = <span class="default-value">QueryType.PROD</span>}</span></li>
+<li><span class="parameter" id="getIngredientSpellingCorrection-param-queryType"><span class="type-annotation"><a href="../../utils_QueryType/QueryType-class.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
 </ol>)
 
       
 
     </section>
     
-<section class="desc markdown">
-  <p>By default the query will hit the PROD DB</p>
-</section>
 
 
     
@@ -75,7 +72,7 @@
   String? ingredientName,
   Product? product,
   User? user,
-  queryType = QueryType.PROD,
+  QueryType? queryType,
 }) async {
   Map&lt;String, String?&gt; spellingCorrectionParam;
 
@@ -100,7 +97,7 @@
   Response response = await HttpHelper().doGetRequest(spellingCorrectionUri,
       user: user,
       userAgent: OpenFoodAPIConfiguration.userAgent,
-      queryType: QueryType.PROD);
+      queryType: queryType);
   SpellingCorrection result = SpellingCorrection.fromJson(
       json.decode(utf8.decode(response.bodyBytes)));
 

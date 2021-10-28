@@ -67,8 +67,7 @@
   <p>Give user suggestion based on autocompleted outputs
 The expected output language can be set otherwise English will be used by default
 The TagType is required
-Returns a List of suggestions
-By default the query will hit the PROD DB</p>
+Returns a List of suggestions</p>
 </section>
 
 
@@ -93,7 +92,7 @@ By default the query will hit the PROD DB</p>
   Response response = await HttpHelper().doGetRequest(
     suggestionUri,
     userAgent: OpenFoodAPIConfiguration.userAgent,
-    queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+    queryType: queryType,
   );
 
   return json.decode(response.body);

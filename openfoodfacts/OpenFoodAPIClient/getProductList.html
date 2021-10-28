@@ -85,7 +85,7 @@
     uri,
     user: user,
     userAgent: OpenFoodAPIConfiguration.userAgent,
-    queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+    queryType: queryType,
   );
 
   final String jsonStr = _replaceQuotes(response.body);

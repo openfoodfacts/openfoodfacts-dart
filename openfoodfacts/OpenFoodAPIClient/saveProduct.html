@@ -64,7 +64,6 @@
     
 <section class="desc markdown">
   <p>Add the given product to the database.
-By default the query will hit the PROD DB
 Returns a Status object as result.</p>
 <p>Please read the language mechanics explanation if you intend to display
 or update data in specific language: <a href="https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics">https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics</a></p>
@@ -104,7 +103,7 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
     productUri,
     parameterMap,
     user,
-    queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+    queryType: queryType,
   );
   return Status.fromApiResponse(response.body);
 }</code></pre>

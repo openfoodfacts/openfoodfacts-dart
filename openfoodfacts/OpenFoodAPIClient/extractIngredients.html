@@ -68,8 +68,7 @@
   <p>Extract the ingredients from image with the given parameters.
 The ingredients language should be given (ingredients_fr, ingredients_de, ingredients_en)
 Returns the ingredients using OCR.
-By default the query will use the Google Cloud Vision.
-By default the query will hit the PROD DB</p>
+By default the query will use the Google Cloud Vision.</p>
 </section>
 
 
@@ -98,7 +97,7 @@ By default the query will hit the PROD DB</p>
     ocrUri,
     user: user,
     userAgent: OpenFoodAPIConfiguration.userAgent,
-    queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+    queryType: queryType,
   );
 
   OcrIngredientsResult result = OcrIngredientsResult.fromJson(

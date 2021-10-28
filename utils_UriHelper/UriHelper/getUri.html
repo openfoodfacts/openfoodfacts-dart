@@ -77,8 +77,7 @@
 }) {
   return Uri(
     scheme: OpenFoodAPIConfiguration.uriScheme,
-    host: (queryType ?? OpenFoodAPIConfiguration.globalQueryType) ==
-            QueryType.PROD
+    host: OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
         ? OpenFoodAPIConfiguration.uriProdHost
         : OpenFoodAPIConfiguration.uriTestHost,
     path: path,

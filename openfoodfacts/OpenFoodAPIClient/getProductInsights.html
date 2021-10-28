@@ -62,9 +62,6 @@
 
     </section>
     
-<section class="desc markdown">
-  <p>By default the query will hit the PROD DB</p>
-</section>
 
 
     
@@ -83,7 +80,7 @@
   Response response = await HttpHelper().doGetRequest(insightsUri,
       user: user,
       userAgent: OpenFoodAPIConfiguration.userAgent,
-      queryType: QueryType.PROD);
+      queryType: queryType);
 
   return InsightsResult.fromJson(
       json.decode(utf8.decode(response.bodyBytes)));

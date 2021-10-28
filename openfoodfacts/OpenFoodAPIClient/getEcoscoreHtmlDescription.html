@@ -54,7 +54,8 @@
 
 <span class="returntype"><a href="https://api.dart.dev/stable/2.14.4/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a>?</span>&gt;</span></span>
 <span class="name ">getEcoscoreHtmlDescription</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getEcoscoreHtmlDescription-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, </span></li>
-<li><span class="parameter" id="getEcoscoreHtmlDescription-param-language"><span class="type-annotation"><a href="../../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span></span></li>
+<li><span class="parameter" id="getEcoscoreHtmlDescription-param-language"><span class="type-annotation"><a href="../../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span>, </span></li>
+<li><span class="parameter" id="getEcoscoreHtmlDescription-param-queryType">{<span class="type-annotation"><a href="../../utils_QueryType/QueryType-class.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
 </ol>)
 
       
@@ -71,11 +72,12 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static Future&lt;String?&gt; getEcoscoreHtmlDescription(
   final String barcode,
-  final OpenFoodFactsLanguage language,
-) async {
+  final OpenFoodFactsLanguage language, {
+  final QueryType? queryType,
+}) async {
   const String FIELD = &#39;environment_infocard&#39;;
   final Uri uri = UriHelper.getUri(
-    queryType: QueryType.PROD,
+    queryType: queryType,
     path: &#39;&#47;api&#47;v0&#47;product&#47;$barcode.json&#39;,
     queryParameters: &lt;String, String&gt;{
       &#39;fields&#39;: FIELD,

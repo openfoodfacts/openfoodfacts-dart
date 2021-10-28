@@ -106,7 +106,7 @@ Returns <a href="../../model_Status/Status/status.html">Status.status</a> 201 = 
   Status status = await HttpHelper().doMultipartRequest(
     registerUri,
     data,
-    queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+    queryType: queryType,
   );
 
   &#47;&#47;Since this is not a official endpoint the response code is always 200

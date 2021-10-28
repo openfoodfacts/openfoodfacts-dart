@@ -86,8 +86,7 @@ By default the query will hit the PROD DB</p>
       user: user,
       userAgent: userAgent,
       isTestModeActive:
-          (queryType ?? OpenFoodAPIConfiguration.globalQueryType) ==
-                  QueryType.PROD
+          OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
               ? false
               : true,
     ),

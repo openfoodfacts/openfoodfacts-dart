@@ -65,8 +65,7 @@
 <section class="desc markdown">
   <p>Returns the product for the given barcode.
 The ProductResult does not contain a product, if the product is not available.
-ingredients, images and product name will be prepared for the given language.
-By default the query will hit the PROD DB</p>
+ingredients, images and product name will be prepared for the given language.</p>
 <p>Please read the language mechanics explanation if you intend to show
 or update data in specific language: <a href="https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics">https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics</a></p>
 </section>
@@ -90,17 +89,14 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
     productUri,
     user: user,
     userAgent: OpenFoodAPIConfiguration.userAgent,
-    queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+    queryType: queryType,
   );
   final jsonStr = _replaceQuotes(response.body);
   ProductResult result = ProductResult.fromJson(jsonDecode(jsonStr));
 
   if (result.product != null) {
     ProductHelper.removeImages(result.product!, configuration.language);
-    ProductHelper.createImageUrls(
-      result.product!,
-      queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
-    );
+    ProductHelper.createImageUrls(result.product!, queryType: queryType);
   }
 
   return result;

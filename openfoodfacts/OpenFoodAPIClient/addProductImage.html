@@ -65,7 +65,6 @@
 <section class="desc markdown">
   <p>Send one image to the server.
 The image will be added to the product specified in the SendImage
-By default the query will hit the PROD DB
 Returns a Status object as result.</p>
 </section>
 
@@ -96,7 +95,7 @@ Returns a Status object as result.</p>
     dataMap,
     files: fileMap,
     user: user,
-    queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+    queryType: queryType,
   );
 }</code></pre>
 </section>

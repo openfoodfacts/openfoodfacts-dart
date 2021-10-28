@@ -57,16 +57,13 @@
 <li><span class="parameter" id="postInsightAnnotation-param-annotation"><span class="type-annotation"><a href="../../model_Insight/InsightAnnotation-class.html">InsightAnnotation</a></span> <span class="parameter-name">annotation</span>, </span></li>
 <li><span class="parameter" id="postInsightAnnotation-param-user"><span class="type-annotation"><a href="../../model_User/User-class.html">User</a></span> <span class="parameter-name">user</span>, </span></li>
 <li><span class="parameter" id="postInsightAnnotation-param-update">{<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">update</span> = <span class="default-value">false</span>, </span></li>
-<li><span class="parameter" id="postInsightAnnotation-param-queryType"><span class="type-annotation">dynamic</span> <span class="parameter-name">queryType</span> = <span class="default-value">QueryType.PROD</span>}</span></li>
+<li><span class="parameter" id="postInsightAnnotation-param-queryType"><span class="type-annotation"><a href="../../utils_QueryType/QueryType-class.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
 </ol>)
 
       
 
     </section>
     
-<section class="desc markdown">
-  <p>By default the query will hit the PROD DB</p>
-</section>
 
 
     
@@ -74,7 +71,7 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static Future&lt;Status&gt; postInsightAnnotation(
     String? insightId, InsightAnnotation annotation, User user,
-    {bool update = false, queryType = QueryType.PROD}) async {
+    {bool update = false, QueryType? queryType}) async {
   var insightUri = UriHelper.getRobotoffUri(
     path: &#39;api&#47;v1&#47;insights&#47;annotate&#39;,
     queryType: queryType,
@@ -87,8 +84,11 @@
   };
 
   Response response = await HttpHelper().doPostRequest(
-      insightUri, annotationData, user,
-      queryType: QueryType.PROD);
+    insightUri,
+    annotationData,
+    user,
+    queryType: queryType,
+  );
   return Status.fromApiResponse(response.body);
 }</code></pre>
 </section>

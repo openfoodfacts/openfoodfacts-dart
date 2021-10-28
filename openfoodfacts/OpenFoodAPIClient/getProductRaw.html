@@ -68,8 +68,7 @@
 The ProductResult does not contain a product, if the product is not available.
 No parsing of ingredients.
 No adjustment by language.
-No replacing of '"' with '"'.
-By default the query will hit the PROD DB</p>
+No replacing of '"' with '"'.</p>
 </section>
 
 
@@ -92,7 +91,7 @@ By default the query will hit the PROD DB</p>
     productUri,
     user: user,
     userAgent: OpenFoodAPIConfiguration.userAgent,
-    queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+    queryType: queryType,
   );
   var result = ProductResult.fromJson(json.decode(response.body));
   return result;

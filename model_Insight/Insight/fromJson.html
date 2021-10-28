@@ -52,8 +52,8 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../model_Insight/Insight-class.html">Insight</a></span>&gt;</span></span>
-<span class="name ">fromJson</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a></span> <span class="parameter-name">json</span></span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../model_Insight/Insight-class.html">Insight</a></span>&gt;</span>?</span>
+<span class="name ">fromJson</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="fromJson-param-json"><span class="type-annotation">dynamic</span> <span class="parameter-name">json</span></span></li>
 </ol>)
 
       
@@ -65,10 +65,12 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static List&lt;Insight&gt; fromJson(List&lt;dynamic&gt; json) {
+  <pre class="language-dart"><code class="language-dart">static List&lt;Insight&gt;? fromJson(dynamic json) {
+  if (json == null) {
+    return null;
+  }
   List&lt;Insight&gt; result = [];
-  for (Map&lt;String, dynamic&gt; jsonInsight
-      in json as Iterable&lt;Map&lt;String, dynamic&gt;&gt;) {
+  for (dynamic jsonInsight in json) {
     InsightType insightType =
         InsightTypesExtension.getType(jsonInsight[&#39;type&#39;]);
 

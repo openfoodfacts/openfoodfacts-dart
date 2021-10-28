@@ -88,8 +88,7 @@ As result a json object of the "type" Status is expected.</p>
     _buildHeaders(
       user: user,
       isTestModeActive:
-          (queryType ?? OpenFoodAPIConfiguration.globalQueryType) ==
-                  QueryType.PROD
+          OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
               ? false
               : true,
     ) as Map&lt;String, String&gt;,

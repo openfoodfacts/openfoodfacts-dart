@@ -65,8 +65,7 @@
 <section class="desc markdown">
   <p>Search the OpenFoodFacts product database with the given parameters.
 Returns the list of products as SearchResult.
-Query the language specific host from OpenFoodFacts.
-By default the query will hit the PROD DB</p>
+Query the language specific host from OpenFoodFacts.</p>
 </section>
 
 
@@ -88,7 +87,7 @@ By default the query will hit the PROD DB</p>
     searchUri,
     user: user,
     userAgent: OpenFoodAPIConfiguration.userAgent,
-    queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+    queryType: queryType,
   );
   final jsonStr = _replaceQuotes(response.body);
   var result = SearchResult.fromJson(json.decode(jsonStr));

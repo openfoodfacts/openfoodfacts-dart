@@ -64,9 +64,6 @@
 
     </section>
     
-<section class="desc markdown">
-  <p>By default the query will hit the PROD DB</p>
-</section>
 
 
     
@@ -97,7 +94,7 @@
   Response response = await HttpHelper().doGetRequest(robotoffQuestionUri,
       user: user,
       userAgent: OpenFoodAPIConfiguration.userAgent,
-      queryType: QueryType.PROD);
+      queryType: queryType);
   var result = RobotoffQuestionResult.fromJson(
       json.decode(utf8.decode(response.bodyBytes)));
 
