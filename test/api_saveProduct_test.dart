@@ -85,7 +85,11 @@ void main() {
       );
 
       testProductResult1(result2);
-    });
+    },
+        timeout: Timeout(
+          // this guy is rather slow
+          Duration(seconds: 90),
+        ));
 
     test('dont overwrite language', () async {
       String barcode = '4008391212596';
