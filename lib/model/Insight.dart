@@ -72,7 +72,7 @@ class InsightsResult extends JsonObject {
 
   const InsightsResult({this.status, this.insights});
 
-  factory InsightsResult.fromJson(Map<String, dynamic> json) =>
+  factory InsightsResult.fromJson(dynamic json) =>
       _$InsightsResultFromJson(json);
 
   @override
@@ -97,10 +97,12 @@ class Insight {
       this.model,
       this.confidence});
 
-  static List<Insight> fromJson(List<dynamic> json) {
+  static List<Insight>? fromJson(dynamic json) {
+    if (json == null) {
+      return null;
+    }
     List<Insight> result = [];
-    for (Map<String, dynamic> jsonInsight
-        in json as Iterable<Map<String, dynamic>>) {
+    for (dynamic jsonInsight in json) {
       InsightType insightType =
           InsightTypesExtension.getType(jsonInsight['type']);
 
