@@ -16,9 +16,8 @@ void main() {
 
       if (result.status == 'found') {
         Status postResult = await OpenFoodAPIClient.postInsightAnnotation(
-            result.questions![0].insightId,
-            InsightAnnotation.YES,
-            TestConstants.TEST_USER);
+            result.questions![0].insightId, InsightAnnotation.YES,
+            user: TestConstants.TEST_USER);
         expect(postResult.status, 'saved');
       }
     });

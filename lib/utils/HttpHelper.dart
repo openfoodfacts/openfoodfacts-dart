@@ -58,8 +58,11 @@ class HttpHelper {
   /// The data / body of the request has to be provided as map. (key, value)
   /// The result of the request will be returned as string.
   Future<http.Response> doPostRequest(
-      Uri uri, Map<String, String?> body, User user,
-      {QueryType? queryType}) async {
+    Uri uri,
+    Map<String, String?> body,
+    User? user, {
+    QueryType? queryType,
+  }) async {
     http.Response response = await http.post(
       uri,
       headers: _buildHeaders(

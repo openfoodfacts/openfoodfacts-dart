@@ -534,8 +534,13 @@ class OpenFoodAPIClient {
   }
 
   static Future<Status> postInsightAnnotation(
-      String? insightId, InsightAnnotation annotation, User user,
-      {bool update = false, QueryType? queryType}) async {
+    String? insightId,
+    InsightAnnotation annotation, {
+    User? user,
+    String? deviceId,
+    bool update = true,
+    queryType = QueryType.PROD,
+  }) async {
     var insightUri = UriHelper.getRobotoffUri(
       path: 'api/v1/insights/annotate',
       queryType: queryType,
@@ -546,6 +551,10 @@ class OpenFoodAPIClient {
       'annotation': annotation.value.toString(),
       'update': update ? '1' : '0'
     };
+
+    if (deviceId != null) {
+      annotationData['device_id'] = deviceId;
+    }
 
     Response response = await HttpHelper().doPostRequest(
       insightUri,
