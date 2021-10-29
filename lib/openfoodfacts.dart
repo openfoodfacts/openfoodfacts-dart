@@ -6,12 +6,15 @@ import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
-import 'package:openfoodfacts/model/TaxonomyAllergen.dart';
-import 'package:openfoodfacts/model/TaxonomyCategory.dart';
-import 'package:openfoodfacts/model/TaxonomyLabel.dart';
-import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
+import 'package:openfoodfacts/model/TaxonomyAdditive.dart';
+import 'package:openfoodfacts/model/TaxonomyAllergen.dart';
+import 'package:openfoodfacts/model/TaxonomyCategory.dart';
+import 'package:openfoodfacts/model/TaxonomyCountry.dart';
+import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
+import 'package:openfoodfacts/model/TaxonomyLabel.dart';
+import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
@@ -75,7 +78,6 @@ class OpenFoodAPIClient {
   OpenFoodAPIClient._();
 
   /// Add the given product to the database.
-  /// By default the query will hit the PROD DB
   /// Returns a Status object as result.
   ///
   /// Please read the language mechanics explanation if you intend to display
@@ -110,14 +112,13 @@ class OpenFoodAPIClient {
       productUri,
       parameterMap,
       user,
-      queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+      queryType: queryType,
     );
     return Status.fromApiResponse(response.body);
   }
 
   /// Send one image to the server.
   /// The image will be added to the product specified in the SendImage
-  /// By default the query will hit the PROD DB
   /// Returns a Status object as result.
   static Future<Status> addProductImage(
     User user,
@@ -142,7 +143,7 @@ class OpenFoodAPIClient {
       dataMap,
       files: fileMap,
       user: user,
-      queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+      queryType: queryType,
     );
   }
 
@@ -151,7 +152,6 @@ class OpenFoodAPIClient {
   /// No parsing of ingredients.
   /// No adjustment by language.
   /// No replacing of '&quot;' with '"'.
-  /// By default the query will hit the PROD DB
   static Future<ProductResult> getProductRaw(
     String barcode,
     OpenFoodFactsLanguage language, {
@@ -168,7 +168,7 @@ class OpenFoodAPIClient {
       productUri,
       user: user,
       userAgent: OpenFoodAPIConfiguration.userAgent,
-      queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+      queryType: queryType,
     );
     var result = ProductResult.fromJson(json.decode(response.body));
     return result;
@@ -177,7 +177,6 @@ class OpenFoodAPIClient {
   /// Returns the product for the given barcode.
   /// The ProductResult does not contain a product, if the product is not available.
   /// ingredients, images and product name will be prepared for the given language.
-  /// By default the query will hit the PROD DB
   ///
   /// Please read the language mechanics explanation if you intend to show
   /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
@@ -196,17 +195,14 @@ class OpenFoodAPIClient {
       productUri,
       user: user,
       userAgent: OpenFoodAPIConfiguration.userAgent,
-      queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+      queryType: queryType,
     );
     final jsonStr = _replaceQuotes(response.body);
     ProductResult result = ProductResult.fromJson(jsonDecode(jsonStr));
 
     if (result.product != null) {
       ProductHelper.removeImages(result.product!, configuration.language);
-      ProductHelper.createImageUrls(
-        result.product!,
-        queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
-      );
+      ProductHelper.createImageUrls(result.product!, queryType: queryType);
     }
 
     return result;
@@ -219,7 +215,6 @@ class OpenFoodAPIClient {
   /// Search the OpenFoodFacts product database with the given parameters.
   /// Returns the list of products as SearchResult.
   /// Query the language specific host from OpenFoodFacts.
-  /// By default the query will hit the PROD DB
   static Future<SearchResult> searchProducts(
     User? user,
     ProductSearchQueryConfiguration configuration, {
@@ -235,7 +230,7 @@ class OpenFoodAPIClient {
       searchUri,
       user: user,
       userAgent: OpenFoodAPIConfiguration.userAgent,
-      queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+      queryType: queryType,
     );
     final jsonStr = _replaceQuotes(response.body);
     var result = SearchResult.fromJson(json.decode(jsonStr));
@@ -261,7 +256,7 @@ class OpenFoodAPIClient {
       uri,
       user: user,
       userAgent: OpenFoodAPIConfiguration.userAgent,
-      queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+      queryType: queryType,
     );
 
     final String jsonStr = _replaceQuotes(response.body);
@@ -290,7 +285,7 @@ class OpenFoodAPIClient {
       searchUri,
       user: user,
       userAgent: OpenFoodAPIConfiguration.userAgent,
-      queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+      queryType: queryType,
     );
     final jsonStr = _replaceQuotes(response.body);
     var result = SearchResult.fromJson(json.decode(jsonStr));
@@ -311,7 +306,7 @@ class OpenFoodAPIClient {
       uri,
       user: user,
       userAgent: OpenFoodAPIConfiguration.userAgent,
-      queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+      queryType: queryType,
     );
 
     Map<String, dynamic> decodedJson =
@@ -341,12 +336,30 @@ class OpenFoodAPIClient {
         user: user, queryType: queryType);
   }
 
+  static Future<Map<String, TaxonomyAdditive>?> getTaxonomyAdditives(
+    TaxonomyAdditiveQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) {
+    return getTaxonomy<TaxonomyAdditive, TaxonomyAdditiveField>(configuration,
+        user: user, queryType: queryType);
+  }
+
   static Future<Map<String, TaxonomyAllergen>?> getTaxonomyAllergens(
     TaxonomyAllergenQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
   }) {
     return getTaxonomy<TaxonomyAllergen, TaxonomyAllergenField>(configuration,
+        user: user, queryType: queryType);
+  }
+
+  static Future<Map<String, TaxonomyCountry>?> getTaxonomyCountries(
+    TaxonomyCountryQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) {
+    return getTaxonomy<TaxonomyCountry, TaxonomyCountryField>(configuration,
         user: user, queryType: queryType);
   }
 
@@ -370,6 +383,15 @@ class OpenFoodAPIClient {
         user: user, queryType: queryType);
   }
 
+  static Future<Map<String, TaxonomyLanguage>?> getTaxonomyLanguages(
+    TaxonomyLanguageQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) {
+    return getTaxonomy<TaxonomyLanguage, TaxonomyLanguageField>(configuration,
+        user: user, queryType: queryType);
+  }
+
   static void _removeImages(
     final SearchResult searchResult,
     final AbstractQueryConfiguration configuration,
@@ -381,7 +403,6 @@ class OpenFoodAPIClient {
     }
   }
 
-  /// By default the query will hit the PROD DB
   static Future<InsightsResult> getRandomInsight(
     User user, {
     InsightType? type,
@@ -414,14 +435,13 @@ class OpenFoodAPIClient {
     Response response = await HttpHelper().doGetRequest(insightUri,
         user: user,
         userAgent: OpenFoodAPIConfiguration.userAgent,
-        queryType: QueryType.PROD);
+        queryType: queryType);
     var result =
         InsightsResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
 
     return result;
   }
 
-  /// By default the query will hit the PROD DB
   static Future<InsightsResult> getProductInsights(
     String barcode,
     User user, {
@@ -435,13 +455,12 @@ class OpenFoodAPIClient {
     Response response = await HttpHelper().doGetRequest(insightsUri,
         user: user,
         userAgent: OpenFoodAPIConfiguration.userAgent,
-        queryType: QueryType.PROD);
+        queryType: queryType);
 
     return InsightsResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
   }
 
-  /// By default the query will hit the PROD DB
   static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(
     String barcode,
     String lang, {
@@ -467,14 +486,13 @@ class OpenFoodAPIClient {
     Response response = await HttpHelper().doGetRequest(robotoffQuestionUri,
         user: user,
         userAgent: OpenFoodAPIConfiguration.userAgent,
-        queryType: QueryType.PROD);
+        queryType: queryType);
     var result = RobotoffQuestionResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 
     return result;
   }
 
-  /// By default the query will hit the PROD DB
   static Future<RobotoffQuestionResult> getRandomRobotoffQuestion(
     String lang,
     User user, {
@@ -508,14 +526,13 @@ class OpenFoodAPIClient {
     Response response = await HttpHelper().doGetRequest(robotoffQuestionUri,
         user: user,
         userAgent: OpenFoodAPIConfiguration.userAgent,
-        queryType: QueryType.PROD);
+        queryType: queryType);
     var result = RobotoffQuestionResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 
     return result;
   }
 
-  /// By default the query will hit the PROD DB
   static Future<Status> postInsightAnnotation(
     String? insightId,
     InsightAnnotation annotation, {
@@ -540,17 +557,19 @@ class OpenFoodAPIClient {
     }
 
     Response response = await HttpHelper().doPostRequest(
-        insightUri, annotationData, user,
-        queryType: QueryType.PROD);
+      insightUri,
+      annotationData,
+      user,
+      queryType: queryType,
+    );
     return Status.fromApiResponse(response.body);
   }
 
-  /// By default the query will hit the PROD DB
   static Future<SpellingCorrection?> getIngredientSpellingCorrection({
     String? ingredientName,
     Product? product,
     User? user,
-    queryType = QueryType.PROD,
+    QueryType? queryType,
   }) async {
     Map<String, String?> spellingCorrectionParam;
 
@@ -575,7 +594,7 @@ class OpenFoodAPIClient {
     Response response = await HttpHelper().doGetRequest(spellingCorrectionUri,
         user: user,
         userAgent: OpenFoodAPIConfiguration.userAgent,
-        queryType: QueryType.PROD);
+        queryType: queryType);
     SpellingCorrection result = SpellingCorrection.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 
@@ -586,7 +605,6 @@ class OpenFoodAPIClient {
   /// The ingredients language should be given (ingredients_fr, ingredients_de, ingredients_en)
   /// Returns the ingredients using OCR.
   /// By default the query will use the Google Cloud Vision.
-  /// By default the query will hit the PROD DB
   static Future<OcrIngredientsResult> extractIngredients(
     User user,
     String barcode,
@@ -609,7 +627,7 @@ class OpenFoodAPIClient {
       ocrUri,
       user: user,
       userAgent: OpenFoodAPIConfiguration.userAgent,
-      queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+      queryType: queryType,
     );
 
     OcrIngredientsResult result = OcrIngredientsResult.fromJson(
@@ -621,7 +639,6 @@ class OpenFoodAPIClient {
   /// The expected output language can be set otherwise English will be used by default
   /// The TagType is required
   /// Returns a List of suggestions
-  /// By default the query will hit the PROD DB
   static Future<List<dynamic>> getAutocompletedSuggestions(
     TagType taxonomyType, {
     String input = '',
@@ -640,7 +657,7 @@ class OpenFoodAPIClient {
     Response response = await HttpHelper().doGetRequest(
       suggestionUri,
       userAgent: OpenFoodAPIConfiguration.userAgent,
-      queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+      queryType: queryType,
     );
 
     return json.decode(response.body);
@@ -697,7 +714,7 @@ class OpenFoodAPIClient {
     Status status = await HttpHelper().doMultipartRequest(
       registerUri,
       data,
-      queryType: (queryType ?? OpenFoodAPIConfiguration.globalQueryType),
+      queryType: queryType,
     );
 
     //Since this is not a official endpoint the response code is always 200
@@ -776,11 +793,12 @@ class OpenFoodAPIClient {
   /// Returns the Ecoscore description in HTML
   static Future<String?> getEcoscoreHtmlDescription(
     final String barcode,
-    final OpenFoodFactsLanguage language,
-  ) async {
+    final OpenFoodFactsLanguage language, {
+    final QueryType? queryType,
+  }) async {
     const String FIELD = 'environment_infocard';
     final Uri uri = UriHelper.getUri(
-      queryType: QueryType.PROD,
+      queryType: queryType,
       path: '/api/v0/product/$barcode.json',
       queryParameters: <String, String>{
         'fields': FIELD,

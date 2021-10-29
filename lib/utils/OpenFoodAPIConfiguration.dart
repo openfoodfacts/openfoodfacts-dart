@@ -39,4 +39,8 @@ class OpenFoodAPIConfiguration {
   /// for each individual request by specifying the country code in the
   /// individual request configurations
   static String? globalCC;
+
+  ///Returns the [QueryType] to use, using a default value
+  static QueryType getQueryType(final QueryType? queryType) =>
+      queryType ?? globalQueryType;
 }

@@ -45,8 +45,7 @@ class HttpHelper {
         user: user,
         userAgent: userAgent,
         isTestModeActive:
-            (queryType ?? OpenFoodAPIConfiguration.globalQueryType) ==
-                    QueryType.PROD
+            OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
                 ? false
                 : true,
       ),
@@ -66,8 +65,7 @@ class HttpHelper {
       headers: _buildHeaders(
           user: user,
           isTestModeActive:
-              (queryType ?? OpenFoodAPIConfiguration.globalQueryType) ==
-                      QueryType.PROD
+              OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
                   ? false
                   : true),
       body: body,
@@ -92,8 +90,7 @@ class HttpHelper {
       _buildHeaders(
         user: user,
         isTestModeActive:
-            (queryType ?? OpenFoodAPIConfiguration.globalQueryType) ==
-                    QueryType.PROD
+            OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
                 ? false
                 : true,
       ) as Map<String, String>,

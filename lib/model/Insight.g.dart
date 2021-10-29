@@ -9,7 +9,7 @@ part of 'Insight.dart';
 InsightsResult _$InsightsResultFromJson(Map<String, dynamic> json) =>
     InsightsResult(
       status: json['status'] as String?,
-      insights: Insight.fromJson(json['insights'] as List),
+      insights: Insight.fromJson(json['insights']),
     );
 
 Map<String, dynamic> _$InsightsResultToJson(InsightsResult instance) {
