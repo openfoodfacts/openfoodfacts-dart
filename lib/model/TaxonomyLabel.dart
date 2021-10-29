@@ -292,6 +292,20 @@ class TaxonomyLabelQueryConfiguration
           additionalParameters: additionalParameters,
         );
 
+  TaxonomyLabelQueryConfiguration.roots({
+    List<OpenFoodFactsLanguage>? languages = const [],
+    String? cc,
+    List<TaxonomyLabelField> fields = const [],
+    List<Parameter> additionalParameters = const [],
+  }) : super.roots(
+          TagType.LABELS,
+          languages: languages,
+          cc: cc,
+          includeChildren: false,
+          fields: fields,
+          additionalParameters: additionalParameters,
+        );
+
   @override
   Map<String, TaxonomyLabel> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {

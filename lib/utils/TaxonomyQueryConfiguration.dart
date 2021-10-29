@@ -38,7 +38,9 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
   /// If empty, no results will be returned.
   final List<String> tags;
 
-  /// The desired taxonomy fields to retrieve. If empty, retrieve all fields.
+  /// If true, include the children of the requested tag in the results.
+  ///
+  /// Defaults to false.
   final bool includeChildren;
 
   /// Additional parameters to add the to query.
@@ -46,6 +48,9 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
 
   /// The type of tags that this query should request a taxonomy for.
   final TagType tagType;
+
+  // True if created via TaxonomyQueryConfiguration.roots.
+  final bool _isRootConfiguration;
 
   /// Allows subclasses to create a [TaxonomyQueryConfiguration] from the
   /// supplied parameters.
@@ -57,7 +62,21 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
     this.includeChildren = false,
     this.fields = const [],
     this.additionalParameters = const [],
-  }) : languages = languages ??
+  })  : _isRootConfiguration = false,
+        languages = languages ??
+            OpenFoodAPIConfiguration.globalLanguages ??
+            const <OpenFoodFactsLanguage>[];
+
+  TaxonomyQueryConfiguration.roots(
+    this.tagType, {
+    List<OpenFoodFactsLanguage>? languages,
+    this.cc,
+    this.includeChildren = false,
+    this.fields = const [],
+    this.additionalParameters = const [],
+  })  : _isRootConfiguration = true,
+        tags = const <String>[],
+        languages = languages ??
             OpenFoodAPIConfiguration.globalLanguages ??
             const <OpenFoodFactsLanguage>[];
 
@@ -67,7 +86,13 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
     final Map<String, String> result = {};
 
     result['type'] = tagType.key;
-    result['tags'] = tags.join(',');
+    if (_isRootConfiguration) {
+      result['include_root_entries'] = '1';
+    } else {
+      if (tags.isNotEmpty) {
+        result['tags'] = tags.join(',');
+      }
+    }
     result['include_children'] = includeChildren ? '1' : '0';
 
     if (languages.isNotEmpty) {
