@@ -78,7 +78,8 @@ supplied parameters.</p>
   this.includeChildren = false,
   this.fields = const [],
   this.additionalParameters = const [],
-}) : languages = languages ??
+})  : _isRootConfiguration = false,
+      languages = languages ??
           OpenFoodAPIConfiguration.globalLanguages ??
           const &lt;OpenFoodFactsLanguage&gt;[];</code></pre>
 </section>
@@ -106,6 +107,7 @@ supplied parameters.</p>
 
     <li class="section-title"><a href="../../utils_TaxonomyQueryConfiguration/TaxonomyQueryConfiguration-class.html#constructors">Constructors</a></li>
     <li><a href="../../utils_TaxonomyQueryConfiguration/TaxonomyQueryConfiguration/TaxonomyQueryConfiguration.html">TaxonomyQueryConfiguration</a></li>
+    <li><a href="../../utils_TaxonomyQueryConfiguration/TaxonomyQueryConfiguration/TaxonomyQueryConfiguration.roots.html">roots</a></li>
 
 
     <li class="section-title">

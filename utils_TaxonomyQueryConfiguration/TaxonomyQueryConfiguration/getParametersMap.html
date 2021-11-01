@@ -72,7 +72,13 @@
   final Map&lt;String, String&gt; result = {};
 
   result[&#39;type&#39;] = tagType.key;
-  result[&#39;tags&#39;] = tags.join(&#39;,&#39;);
+  if (_isRootConfiguration) {
+    result[&#39;include_root_entries&#39;] = &#39;1&#39;;
+  } else {
+    if (tags.isNotEmpty) {
+      result[&#39;tags&#39;] = tags.join(&#39;,&#39;);
+    }
+  }
   result[&#39;include_children&#39;] = includeChildren ? &#39;1&#39; : &#39;0&#39;;
 
   if (languages.isNotEmpty) {
@@ -117,6 +123,7 @@
 
     <li class="section-title"><a href="../../utils_TaxonomyQueryConfiguration/TaxonomyQueryConfiguration-class.html#constructors">Constructors</a></li>
     <li><a href="../../utils_TaxonomyQueryConfiguration/TaxonomyQueryConfiguration/TaxonomyQueryConfiguration.html">TaxonomyQueryConfiguration</a></li>
+    <li><a href="../../utils_TaxonomyQueryConfiguration/TaxonomyQueryConfiguration/TaxonomyQueryConfiguration.roots.html">roots</a></li>
 
 
     <li class="section-title">

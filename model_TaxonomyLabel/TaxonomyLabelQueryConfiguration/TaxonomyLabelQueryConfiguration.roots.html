@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the convertResults method from the TaxonomyLabelQueryConfiguration class, for the Dart programming language.">
-  <title>convertResults method - TaxonomyLabelQueryConfiguration class - TaxonomyLabel library - Dart API</title>
+  <meta name="description" content="API docs for the TaxonomyLabelQueryConfiguration.roots constructor from the Class TaxonomyLabelQueryConfiguration class from the TaxonomyLabel library, for the Dart programming language.">
+  <title>TaxonomyLabelQueryConfiguration.roots constructor - TaxonomyLabelQueryConfiguration class - TaxonomyLabel library - Dart API</title>
 
 
   
@@ -32,9 +32,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../model_TaxonomyLabel/model_TaxonomyLabel-library.html">TaxonomyLabel</a></li>
     <li><a href="../../model_TaxonomyLabel/TaxonomyLabelQueryConfiguration-class.html">TaxonomyLabelQueryConfiguration</a></li>
-    <li class="self-crumb">convertResults method</li>
+    <li class="self-crumb">TaxonomyLabelQueryConfiguration.roots constructor</li>
   </ol>
-  <div class="self-name">convertResults</div>
+  <div class="self-name">TaxonomyLabelQueryConfiguration.roots</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -45,48 +45,37 @@
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
-<h1><span class="kind-method">convertResults</span> method 
+<h1><span class="kind-constructor">TaxonomyLabelQueryConfiguration.roots</span> constructor 
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
 </h1></div>
 
     <section class="multi-line-signature">
-      
-<div>
-  <ol class="annotation-list">
-    <li>@<a href="https://api.dart.dev/stable/2.14.4/dart-core/override-constant.html">override</a></li>
-  </ol>
-</div>
-
-<span class="returntype"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="../../model_TaxonomyLabel/TaxonomyLabel-class.html">TaxonomyLabel</a></span>&gt;</span></span>
-<span class="name ">convertResults</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="convertResults-param-jsonData"><span class="type-annotation">dynamic</span> <span class="parameter-name">jsonData</span></span></li>
+      <span class="name ">TaxonomyLabelQueryConfiguration.roots</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="roots-param-languages">{<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>&gt;</span>?</span> <span class="parameter-name">languages</span> = <span class="default-value">const []</span>, </span></li>
+<li><span class="parameter" id="roots-param-cc"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">cc</span>, </span></li>
+<li><span class="parameter" id="roots-param-fields"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../model_TaxonomyLabel/TaxonomyLabelField-class.html">TaxonomyLabelField</a></span>&gt;</span></span> <span class="parameter-name">fields</span> = <span class="default-value">const []</span>, </span></li>
+<li><span class="parameter" id="roots-param-additionalParameters"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../interface_Parameter/Parameter-class.html">Parameter</a></span>&gt;</span></span> <span class="parameter-name">additionalParameters</span> = <span class="default-value">const []</span>}</span></li>
 </ol>)
-
-      <div class="features">override</div>
-
     </section>
+
     
-<section class="desc markdown">
-  <p>Creates a map of the correct taxonomy type from the raw JSON data.</p>
-<p>Subclasses must implement this to return concrete taxonomy objects.</p>
-</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@override
-Map&lt;String, TaxonomyLabel&gt; convertResults(dynamic jsonData) {
-  if (jsonData is! Map&lt;String, dynamic&gt;) {
-    return const {};
-  }
-  return jsonData.map&lt;String, TaxonomyLabel&gt;((String key, dynamic taxonomy) {
-    if (taxonomy is! Map&lt;String, dynamic&gt;) {
-      assert(false, &#39;Received JSON Label is not a Map&#39;);
-      return MapEntry(key, TaxonomyLabel.fromJson({}));
-    }
-    return MapEntry(key, TaxonomyLabel.fromJson(taxonomy));
-  });
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">TaxonomyLabelQueryConfiguration.roots({
+  List&lt;OpenFoodFactsLanguage&gt;? languages = const [],
+  String? cc,
+  List&lt;TaxonomyLabelField&gt; fields = const [],
+  List&lt;Parameter&gt; additionalParameters = const [],
+}) : super.roots(
+        TagType.LABELS,
+        languages: languages,
+        cc: cc,
+        includeChildren: false,
+        fields: fields,
+        additionalParameters: additionalParameters,
+      );</code></pre>
 </section>
 
 
@@ -103,7 +92,7 @@ Map&lt;String, TaxonomyLabel&gt; convertResults(dynamic jsonData) {
   <li><a href="../../index.html">openfoodfacts</a></li>
   <li><a href="../../model_TaxonomyLabel/model_TaxonomyLabel-library.html">TaxonomyLabel</a></li>
   <li><a href="../../model_TaxonomyLabel/TaxonomyLabelQueryConfiguration-class.html">TaxonomyLabelQueryConfiguration</a></li>
-  <li class="self-crumb">convertResults method</li>
+  <li class="self-crumb">TaxonomyLabelQueryConfiguration.roots constructor</li>
 </ol>
 
 
@@ -145,7 +134,7 @@ Map&lt;String, TaxonomyLabel&gt; convertResults(dynamic jsonData) {
 
 </ol>
 
-  </div><!--/.sidebar-offcanvas-->
+  </div><!--/.sidebar-offcanvas-left-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
   </div><!--/.sidebar-offcanvas-->
