@@ -35,7 +35,8 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
 
   /// The tags to request.
   ///
-  /// If empty, no results will be returned.
+  /// If empty, no results will be returned. This field is ignored if
+  /// [TaxonomyQueryConfiguration.roots] is used to create the configuration.
   final List<String> tags;
 
   /// If true, include the children of the requested tag in the results.
