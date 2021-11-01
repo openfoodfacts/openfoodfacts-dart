@@ -348,6 +348,21 @@ class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<
           additionalParameters: additionalParameters,
         );
 
+  TaxonomyCategoryQueryConfiguration.roots({
+    List<OpenFoodFactsLanguage>? languages = const [],
+    String? cc,
+    bool includeChildren = false,
+    List<TaxonomyCategoryField> fields = const [],
+    List<Parameter> additionalParameters = const [],
+  }) : super.roots(
+          TagType.CATEGORIES,
+          languages: languages,
+          cc: cc,
+          includeChildren: includeChildren,
+          fields: fields,
+          additionalParameters: additionalParameters,
+        );
+
   @override
   Map<String, TaxonomyCategory> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {

@@ -485,6 +485,21 @@ class TaxonomyIngredientQueryConfiguration extends TaxonomyQueryConfiguration<
           additionalParameters: additionalParameters,
         );
 
+  TaxonomyIngredientQueryConfiguration.roots({
+    List<OpenFoodFactsLanguage>? languages = const [],
+    String? cc,
+    List<TaxonomyIngredientField> fields = const [],
+    List<Parameter> additionalParameters = const [],
+    bool includeChildren = false,
+  }) : super.roots(
+          TagType.INGREDIENTS,
+          languages: languages,
+          cc: cc,
+          includeChildren: includeChildren,
+          fields: fields,
+          additionalParameters: additionalParameters,
+        );
+
   @override
   Map<String, TaxonomyIngredient> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {
