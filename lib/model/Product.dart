@@ -60,6 +60,30 @@ enum ProductImprovement {
   OBSOLETE_NUTRITION_IMAGE,
 }
 
+/// Category: what would this [ProductImprovement] help compute?
+enum ProductImprovementCategory {
+  /// Eco-Score category
+  ECO_SCORE,
+
+  /// Nutri-Score category
+  NUTRI_SCORE,
+}
+
+extension ProductImprovementExtension on ProductImprovement {
+  ProductImprovementCategory getCategory() {
+    switch (this) {
+      case ProductImprovement.ORIGINS_TO_BE_COMPLETED:
+        return ProductImprovementCategory.ECO_SCORE;
+      case ProductImprovement.CATEGORIES_BUT_NO_NUTRISCORE:
+      case ProductImprovement.ADD_NUTRITION_FACTS:
+      case ProductImprovement.ADD_CATEGORY:
+      case ProductImprovement.ADD_NUTRITION_FACTS_AND_CATEGORY:
+      case ProductImprovement.OBSOLETE_NUTRITION_IMAGE:
+        return ProductImprovementCategory.NUTRI_SCORE;
+    }
+  }
+}
+
 /// This class contains most of the data about a specific product.
 ///
 /// Please read the language mechanics explanation if you intend to display
