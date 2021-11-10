@@ -145,15 +145,14 @@ void main() {
       const Set<String> countries = {'fr', 'br', 'us'};
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.AFRIKAANS;
       for (final String country in countries) {
-        final OrderedNutrients? orderedNutrients =
+        final OrderedNutrients orderedNutrients =
             await OpenFoodAPIClient.getOrderedNutrients(
           cc: country,
           language: language,
         );
-        expect(orderedNutrients, isNotNull);
         for (final String expectedNutrient in expectedNutrients) {
           expect(
-            _findOrderedNutrient(orderedNutrients!.nutrients, expectedNutrient),
+            _findOrderedNutrient(orderedNutrients.nutrients, expectedNutrient),
             isNotNull,
             reason:
                 'Could not find nutrient $expectedNutrient for country $country',
@@ -173,14 +172,13 @@ void main() {
       const Set<String> countries = {'us', 'it', 'br'};
       for (final OpenFoodFactsLanguage language in energies.keys) {
         for (final String country in countries) {
-          final OrderedNutrients? orderedNutrients =
+          final OrderedNutrients orderedNutrients =
               await OpenFoodAPIClient.getOrderedNutrients(
             cc: country,
             language: language,
           );
-          expect(orderedNutrients, isNotNull);
           final OrderedNutrient? found =
-              _findOrderedNutrient(orderedNutrients!.nutrients, nutrientId);
+              _findOrderedNutrient(orderedNutrients.nutrients, nutrientId);
           expect(found, isNotNull);
           expect(found!.name, energies[language]);
         }

@@ -860,7 +860,7 @@ class OpenFoodAPIClient {
   /// Returns the nutrient hierarchy specific to a country, localized.
   ///
   /// [cc] is the country code, as ISO 3166-1 alpha-2
-  static Future<OrderedNutrients?> getOrderedNutrients({
+  static Future<OrderedNutrients> getOrderedNutrients({
     required final String cc,
     required final OpenFoodFactsLanguage language,
     final QueryType? queryType,
@@ -871,18 +871,14 @@ class OpenFoodAPIClient {
       queryParameters: <String, String>{'cc': cc, 'lc': language.code},
     );
 
-    try {
-      final Response response = await HttpHelper().doGetRequest(
-        uri,
-        userAgent: OpenFoodAPIConfiguration.userAgent,
-      );
-      if (response.statusCode != 200) {
-        return null;
-      }
-      final json = jsonDecode(response.body);
-      return OrderedNutrients.fromJson(json);
-    } catch (exception) {
-      return null;
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      userAgent: OpenFoodAPIConfiguration.userAgent,
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Could not retrieve ordered nutrients!');
     }
+    final json = jsonDecode(response.body);
+    return OrderedNutrients.fromJson(json);
   }
 }
