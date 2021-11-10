@@ -30,6 +30,7 @@ enum ProductField {
   INGREDIENTS,
   INGREDIENTS_TAGS,
   INGREDIENTS_TAGS_IN_LANGUAGES,
+  IMAGES_FRESHNESS_IN_LANGUAGES,
   NUTRIMENTS,
   ADDITIVES,
   NUTRIENT_LEVELS,
@@ -87,6 +88,7 @@ extension ProductFieldExtension on ProductField {
     ProductField.INGREDIENTS: 'ingredients',
     ProductField.INGREDIENTS_TAGS: 'ingredients_tags',
     ProductField.INGREDIENTS_TAGS_IN_LANGUAGES: 'ingredients_tags_',
+    ProductField.IMAGES_FRESHNESS_IN_LANGUAGES: 'images_to_update_',
     ProductField.NUTRIMENTS: 'nutriments',
     ProductField.ADDITIVES: 'additives_tags',
     ProductField.NUTRIENT_LEVELS: 'nutrient_levels',
@@ -130,6 +132,7 @@ List<String> convertFieldsToStrings(
     ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
     ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
     ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
+    ProductField.IMAGES_FRESHNESS_IN_LANGUAGES,
   ];
 
   for (final field in fields) {
