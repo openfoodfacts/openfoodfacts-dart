@@ -179,6 +179,13 @@ class Product extends JsonObject {
       includeIfNull: false)
   Map<OpenFoodFactsLanguage, List<String>>? ingredientsTagsInLanguages;
 
+  /// Images Freshness in seconds
+  ///
+  /// 0 seconds means we don't have the picture at all.
+  /// Read-only
+  /// cf. https://github.com/openfoodfacts/openfoodfacts-dart/issues/104
+  Map<OpenFoodFactsLanguage, Map<ImageField, int>>? imagesFreshnessInLanguages;
+
   @JsonKey(
       name: 'ingredients_analysis_tags',
       includeIfNull: false,
@@ -412,6 +419,16 @@ class Product extends JsonObject {
           result.ingredientsTagsInLanguages ??= {};
           result.ingredientsTagsInLanguages![lang] = values;
         }
+      } else if (key
+          .startsWith(ProductField.IMAGES_FRESHNESS_IN_LANGUAGES.key)) {
+        final OpenFoodFactsLanguage lang =
+            _langFrom(key, ProductField.IMAGES_FRESHNESS_IN_LANGUAGES.key);
+        if (lang != OpenFoodFactsLanguage.UNDEFINED) {
+          final Map<ImageField, int> values =
+              _jsonValueToImagesFreshness(json[key], lang);
+          result.imagesFreshnessInLanguages ??= {};
+          result.imagesFreshnessInLanguages![lang] = values;
+        }
       } else if (key.startsWith(ProductField.LABELS_TAGS_IN_LANGUAGES.key)) {
         OpenFoodFactsLanguage lang =
             _langFrom(key, ProductField.LABELS_TAGS_IN_LANGUAGES.key);
@@ -447,6 +464,18 @@ class Product extends JsonObject {
 
   static List<String>? _jsonValueToList(dynamic value) {
     return (value as List?)?.map((e) => e as String).toList();
+  }
+
+  static Map<ImageField, int> _jsonValueToImagesFreshness(
+      Map value, OpenFoodFactsLanguage language) {
+    final Map<ImageField, int> result = {};
+    for (final ImageField imageField in ImageField.values) {
+      final int? timestamp = value['${imageField.value}_${language.code}'];
+      if (timestamp != null) {
+        result[imageField] = timestamp;
+      }
+    }
+    return result;
   }
 
   Map<String, String> toServerData() {
