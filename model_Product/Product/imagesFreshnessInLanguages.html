@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the attributeGroups property from the Product class, for the Dart programming language.">
-  <title>attributeGroups property - Product class - Product library - Dart API</title>
+  <meta name="description" content="API docs for the imagesFreshnessInLanguages property from the Product class, for the Dart programming language.">
+  <title>imagesFreshnessInLanguages property - Product class - Product library - Dart API</title>
 
 
   
@@ -32,9 +32,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../model_Product/model_Product-library.html">Product</a></li>
     <li><a href="../../model_Product/Product-class.html">Product</a></li>
-    <li class="self-crumb">attributeGroups property</li>
+    <li class="self-crumb">imagesFreshnessInLanguages property</li>
   </ol>
-  <div class="self-name">attributeGroups</div>
+  <div class="self-name">imagesFreshnessInLanguages</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -45,26 +45,28 @@
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
-<h1><span class="kind-property">attributeGroups</span> property 
+<h1><span class="kind-property">imagesFreshnessInLanguages</span> property 
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
 </h1></div>
 
         <section class="multi-line-signature">
-          <a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../model_AttributeGroup/AttributeGroup-class.html">AttributeGroup</a></span>&gt;</span>?
-          <span class="name ">attributeGroups</span>
-          <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;attribute_groups&#39;, includeIfNull: false, toJson: JsonHelper.attributeGroupsToJson), read / write</div>
+          <a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../model_ProductImage/ImageField-class.html">ImageField</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.14.4/dart-core/int-class.html">int</a></span>&gt;</span></span>&gt;</span>?
+          <span class="name ">imagesFreshnessInLanguages</span>
+          <div class="features">read / write</div>
 
         </section>
         
+<section class="desc markdown">
+  <p>Images Freshness in seconds</p>
+<p>0 seconds means we don't have the picture at all.
+Read-only
+cf. <a href="https://github.com/openfoodfacts/openfoodfacts-dart/issues/104">https://github.com/openfoodfacts/openfoodfacts-dart/issues/104</a></p>
+</section>
 
         
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@JsonKey(
-    name: &#39;attribute_groups&#39;,
-    includeIfNull: false,
-    toJson: JsonHelper.attributeGroupsToJson)
-List&lt;AttributeGroup&gt;? attributeGroups;
+  <pre class="language-dart"><code class="language-dart">Map&lt;OpenFoodFactsLanguage, Map&lt;ImageField, int&gt;&gt;? imagesFreshnessInLanguages;
 
 </code></pre>
 </section>
@@ -83,7 +85,7 @@ List&lt;AttributeGroup&gt;? attributeGroups;
   <li><a href="../../index.html">openfoodfacts</a></li>
   <li><a href="../../model_Product/model_Product-library.html">Product</a></li>
   <li><a href="../../model_Product/Product-class.html">Product</a></li>
-  <li class="self-crumb">attributeGroups property</li>
+  <li class="self-crumb">imagesFreshnessInLanguages property</li>
 </ol>
 
 

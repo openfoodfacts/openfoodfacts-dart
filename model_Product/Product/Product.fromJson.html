@@ -128,6 +128,16 @@
         result.ingredientsTagsInLanguages ??= {};
         result.ingredientsTagsInLanguages![lang] = values;
       }
+    } else if (key
+        .startsWith(ProductField.IMAGES_FRESHNESS_IN_LANGUAGES.key)) {
+      final OpenFoodFactsLanguage lang =
+          _langFrom(key, ProductField.IMAGES_FRESHNESS_IN_LANGUAGES.key);
+      if (lang != OpenFoodFactsLanguage.UNDEFINED) {
+        final Map&lt;ImageField, int&gt; values =
+            _jsonValueToImagesFreshness(json[key], lang);
+        result.imagesFreshnessInLanguages ??= {};
+        result.imagesFreshnessInLanguages![lang] = values;
+      }
     } else if (key.startsWith(ProductField.LABELS_TAGS_IN_LANGUAGES.key)) {
       OpenFoodFactsLanguage lang =
           _langFrom(key, ProductField.LABELS_TAGS_IN_LANGUAGES.key);
@@ -213,6 +223,7 @@
     <li><a href="../../model_Product/Product/imagePackagingSmallUrl.html">imagePackagingSmallUrl</a></li>
     <li><a href="../../model_Product/Product/imagePackagingUrl.html">imagePackagingUrl</a></li>
     <li><a href="../../model_Product/Product/images.html">images</a></li>
+    <li><a href="../../model_Product/Product/imagesFreshnessInLanguages.html">imagesFreshnessInLanguages</a></li>
     <li><a class="deprecated" href="../../model_Product/Product/imgSmallUrl.html">imgSmallUrl</a></li>
     <li><a href="../../model_Product/Product/ingredients.html">ingredients</a></li>
     <li><a href="../../model_Product/Product/ingredientsAnalysisTags.html">ingredientsAnalysisTags</a></li>
