@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:openfoodfacts/model/KnowledgePanel.dart';
 import '../interface/JsonObject.dart';
 
 part 'KnowledgePanelElement.g.dart';
@@ -33,9 +34,9 @@ class KnowledgePanelTextElement extends JsonObject {
   @JsonKey(
       name: 'text_type',
       unknownEnumValue: KnowledgePanelTextElementType.UNKNOWN)
-  final KnowledgePanelTextElementType type;
+  final KnowledgePanelTextElementType? type;
 
-  const KnowledgePanelTextElement({required this.html, required this.type});
+  const KnowledgePanelTextElement({required this.html, this.type});
 
   factory KnowledgePanelTextElement.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelTextElementFromJson(json);
@@ -124,8 +125,12 @@ class KnowledgePanelTableCell extends JsonObject {
   @JsonKey(name: 'icon_url')
   final String? iconUrl;
 
+  /// Evaluation of the table cell.
+  @JsonKey(unknownEnumValue: Evaluation.UNKNOWN)
+  final Evaluation? evaluation;
+
   const KnowledgePanelTableCell(
-      {required this.text, this.percent, this.iconUrl});
+      {required this.text, this.percent, this.iconUrl, this.evaluation});
 
   factory KnowledgePanelTableCell.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelTableCellFromJson(json);
@@ -137,11 +142,9 @@ class KnowledgePanelTableCell extends JsonObject {
 /// A table row inside Table element of KonwledgePanel
 @JsonSerializable()
 class KnowledgePanelTableRowElement extends JsonObject {
-  final String id;
-
   final List<KnowledgePanelTableCell> values;
 
-  const KnowledgePanelTableRowElement({required this.id, required this.values});
+  const KnowledgePanelTableRowElement({required this.values});
 
   factory KnowledgePanelTableRowElement.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelTableRowElementFromJson(json);
@@ -153,9 +156,9 @@ class KnowledgePanelTableRowElement extends JsonObject {
 /// A descriptor that describes the type and label of each column.
 @JsonSerializable()
 class KnowledgePanelTableColumn extends JsonObject {
-  final List<String> text;
+  final String text;
 
-  final List<String> type;
+  final String type;
 
   const KnowledgePanelTableColumn({required this.text, required this.type});
 
@@ -169,24 +172,23 @@ class KnowledgePanelTableColumn extends JsonObject {
 /// Element representing a tabular data for the KnowledgePanel.
 @JsonSerializable()
 class KnowledgePanelTableElement extends JsonObject {
-  @JsonKey(name: 'table_id')
-  final String tableId;
+  final String id;
 
-  @JsonKey(name: 'table_type')
-  final String tableType;
+  @JsonKey(name: 'type')
+  final String type;
 
   final String title;
 
   @JsonKey(name: 'columns')
-  final List<KnowledgePanelTableColumn> columnsDescriptor;
+  final List<KnowledgePanelTableColumn> columns;
 
   final List<KnowledgePanelTableRowElement> rows;
 
   const KnowledgePanelTableElement({
-    required this.tableId,
-    required this.tableType,
+    required this.id,
+    required this.type,
     required this.title,
-    required this.columnsDescriptor,
+    required this.columns,
     required this.rows,
   });
 
@@ -228,9 +230,11 @@ class KnowledgePanelElement extends JsonObject {
   final KnowledgePanelElementType elementType;
 
   /// Text description of the Knowledge panel.
+  @JsonKey(name: 'text_element')
   final KnowledgePanelTextElement? textElement;
 
   /// Image element of the Knowledge panel.
+  @JsonKey(name: 'image_element')
   final KnowledgePanelImageElement? imageElement;
 
   /// Id of a KnowledgePanel embedded inside [this] KnowledgePanel.
@@ -241,6 +245,7 @@ class KnowledgePanelElement extends JsonObject {
   final KnowledgePanelPanelGroupElement? panelGroupElement;
 
   /// Id of a KnowledgePanel embedded inside [this] KnowledgePanel.
+  @JsonKey(name: 'table_element')
   final KnowledgePanelTableElement? tableElement;
 
   const KnowledgePanelElement({

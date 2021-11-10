@@ -149,7 +149,7 @@ void main() {
                   ]
                 }
               ],
-              'table_type': 'percents',
+              'type': 'percents',
               'title': 'Details of the impacts by stages of the life cycle'
             }
           }
@@ -251,7 +251,7 @@ void main() {
                   ]
                 }
               ],
-              'table_type': 'percents',
+              'type': 'percents',
               'title': 'Details of the impacts by stages of the life cycle'
             }
           }

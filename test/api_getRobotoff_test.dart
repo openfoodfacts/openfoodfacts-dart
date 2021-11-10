@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
@@ -15,12 +13,12 @@ void main() {
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
         '3274570800026',
         'en',
-        TestConstants.TEST_USER,
+        user: TestConstants.TEST_USER,
         count: 1,
       );
 
       if (result.status != 'no_questions') {
-        expect(result.status != null, true);
+        expect(result.status, isNotNull);
         expect(result.status, 'found');
         expect(result.questions!.length, 1);
         expect(result.questions![0].barcode, '3274570800026');
@@ -41,11 +39,11 @@ void main() {
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
         '3274570800026',
         'fr',
-        TestConstants.TEST_USER,
+        user: TestConstants.TEST_USER,
       );
 
       if (result.status != 'no_questions') {
-        expect(result.status != null, true);
+        expect(result.status, isNotNull);
         expect(result.status, 'found');
         expect(result.questions!.length, 1);
         expect(result.questions![0].barcode, '3274570800026');
@@ -67,13 +65,13 @@ void main() {
               'fr', TestConstants.TEST_USER,
               types: [InsightType.CATEGORY], count: 2);
 
-      expect(result.status != null, true);
+      expect(result.status, isNotNull);
       expect(result.status, 'found');
       expect(result.questions!.length, 2);
       expect(result.questions![0].insightType, InsightType.CATEGORY);
       expect(result.questions![1].insightType, InsightType.CATEGORY);
     });
-  }, skip: 'This Group of tests is unstable');
+  });
 
   group('$OpenFoodAPIClient get robotoff insights', () {
     test('get random insight', () async {
@@ -81,8 +79,28 @@ void main() {
           TestConstants.TEST_USER,
           type: InsightType.CATEGORY);
 
-      expect(result.status == null, true);
+      expect(result.status, isNull);
       expect(result.insights![0].type, InsightType.CATEGORY);
+      expect(result.insights![0].id, isNotNull);
+      expect(result.insights![0].barcode, isNotNull);
+      expect(result.insights![0].countries, isNotNull);
+      expect(result.insights![0].lang, isNotNull);
+      expect(result.insights![0].model, isNotNull);
+      // Actually, I stumbled across insights without confidence field...
+      //expect(result.insight.confidence, isNotNull);
+    });
+
+    test('get product insights PROD', () async {
+      // TODO(monsieurtanuki): to be removed when we have more a relevant test in QueryType.TEST
+      InsightsResult result = await OpenFoodAPIClient.getProductInsights(
+        '8025386005564',
+        TestConstants.TEST_USER,
+        queryType: QueryType.PROD,
+      );
+
+      expect(result.status, isNotNull);
+      expect(result.status, 'found');
+      expect(result.insights!.isNotEmpty, true);
       expect(result.insights![0].id != null, true);
       expect(result.insights![0].barcode != null, true);
       expect(result.insights![0].countries != null, true);
@@ -98,31 +116,25 @@ void main() {
         TestConstants.TEST_USER,
       );
 
-      expect(result.status != null, true);
-      expect(result.status, 'found');
-      expect(result.insights!.isNotEmpty, true);
-      expect(result.insights![0].id != null, true);
-      expect(result.insights![0].barcode != null, true);
-      expect(result.insights![0].countries != null, true);
-      expect(result.insights![0].lang != null, true);
-      expect(result.insights![0].model != null, true);
-      // Actually, I stumbled across insights without confidence field...
-      //expect(result.insight.confidence != null, true);
+      expect(result.status, isNotNull);
+      expect(result.status, 'no_insights');
+      expect(result.insights, isNull);
     });
-  }, skip: 'This Group of tests is unstable');
+  });
 
   group('$OpenFoodAPIClient get robotoff ingredient spelling corrections', () {
     test('get farine de blé spelling corrections', () async {
-      SpellingCorrection result =
-          await (OpenFoodAPIClient.getIngredientSpellingCorrection(
+      final SpellingCorrection? result =
+          await OpenFoodAPIClient.getIngredientSpellingCorrection(
         user: TestConstants.TEST_USER,
         ingredientName: 'fqrine de blé',
-      ) as FutureOr<SpellingCorrection>);
+      );
 
-      expect(result.corrected, 'farine de blé');
+      expect(result, isNotNull);
+      expect(result!.corrected, 'farine de blé');
       expect(result.input, 'fqrine de blé');
       expect(result.termCorrections!.length, 1);
-      expect(result.termCorrections![0].corrections, null);
+      expect(result.termCorrections![0].corrections, isNull);
     });
   }, skip: 'This Group of tests is unstable');
 }

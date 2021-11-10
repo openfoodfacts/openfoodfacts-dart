@@ -15,16 +15,27 @@ extension InsightAnnotationExtension on InsightAnnotation {
 }
 
 enum InsightType {
+  @JsonValue('ingredient_spellcheck')
   INGREDIENT_SPELLCHECK,
+  @JsonValue('packager_code')
   PACKAGER_CODE,
+  @JsonValue('label')
   LABEL,
+  @JsonValue('category')
   CATEGORY,
+  @JsonValue('product_weight')
   PRODUCT_WEIGHT,
+  @JsonValue('expiration_date')
   EXPIRATION_DATE,
+  @JsonValue('brand')
   BRAND,
+  @JsonValue('store')
   STORE,
+  @JsonValue('nutrient')
   NUTRIENT,
-  UNDEFINED
+  @JsonValue('undefined')
+  UNDEFINED,
+  UNKNOWN
 }
 
 extension InsightTypesExtension on InsightType? {
@@ -61,7 +72,7 @@ class InsightsResult extends JsonObject {
 
   const InsightsResult({this.status, this.insights});
 
-  factory InsightsResult.fromJson(Map<String, dynamic> json) =>
+  factory InsightsResult.fromJson(dynamic json) =>
       _$InsightsResultFromJson(json);
 
   @override
@@ -86,10 +97,12 @@ class Insight {
       this.model,
       this.confidence});
 
-  static List<Insight> fromJson(List<dynamic> json) {
+  static List<Insight>? fromJson(dynamic json) {
+    if (json == null) {
+      return null;
+    }
     List<Insight> result = [];
-    for (Map<String, dynamic> jsonInsight
-        in json as Iterable<Map<String, dynamic>>) {
+    for (dynamic jsonInsight in json) {
       InsightType insightType =
           InsightTypesExtension.getType(jsonInsight['type']);
 
