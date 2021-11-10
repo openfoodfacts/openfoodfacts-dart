@@ -1,17 +1,33 @@
-import 'dart:convert';
-
 import 'package:openfoodfacts/model/OrderedNutrient.dart';
 import 'package:openfoodfacts/model/OrderedNutrients.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:test/test.dart';
-import 'package:http/http.dart' as http;
-import 'package:openfoodfacts/utils/HttpHelper.dart';
 
 /// Tests related to [OrderedNutrient] and [OrderedNutrients]
 void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+
+  OrderedNutrient? _findOrderedNutrient(
+    final List<OrderedNutrient>? list,
+    final String nutrientId,
+  ) {
+    if (list == null) {
+      return null;
+    }
+    for (final OrderedNutrient item in list) {
+      if (item.id == nutrientId) {
+        return item;
+      }
+      final OrderedNutrient? found =
+          _findOrderedNutrient(item.subNutrients, nutrientId);
+      if (found != null) {
+        return found;
+      }
+    }
+    return null;
+  }
 
   group('$OpenFoodAPIClient ordered nutrients', () {
     test('find expected nutrients', () async {
@@ -126,22 +142,20 @@ void main() {
         'zinc',
       };
 
-      const List<String> urls = [
-        'https://fr.openfoodfacts.org/cgi/nutrients.pl',
-        'https://us.openfoodfacts.org/cgi/nutrients.pl',
-        'https://us-es.openfoodfacts.org/cgi/nutrients.pl',
-      ];
-      for (final String url in urls) {
-        final http.Response response =
-            await HttpHelper().doGetRequest(Uri.parse(url));
-        final json = jsonDecode(response.body);
+      const Set<String> countries = {'fr', 'br', 'us'};
+      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.AFRIKAANS;
+      for (final String country in countries) {
         final OrderedNutrients orderedNutrients =
-            OrderedNutrients.fromJson(json);
+            await OpenFoodAPIClient.getOrderedNutrients(
+          cc: country,
+          language: language,
+        );
         for (final String expectedNutrient in expectedNutrients) {
           expect(
             _findOrderedNutrient(orderedNutrients.nutrients, expectedNutrient),
             isNotNull,
-            reason: 'Could not find $expectedNutrient in $url',
+            reason:
+                'Could not find nutrient $expectedNutrient for country $country',
           );
         }
       }
@@ -149,42 +163,26 @@ void main() {
 
     test('check localized "energy"', () async {
       const String nutrientId = 'energy';
-      const Map<String, String> energies = {
-        'https://fr.openfoodfacts.org/cgi/nutrients.pl': 'Énergie',
-        'https://us.openfoodfacts.org/cgi/nutrients.pl': 'Energy',
-        'https://us-es.openfoodfacts.org/cgi/nutrients.pl': 'Energía',
+      const Map<OpenFoodFactsLanguage, String> energies = {
+        OpenFoodFactsLanguage.FRENCH: 'Énergie',
+        OpenFoodFactsLanguage.SPANISH: 'Energía',
+        OpenFoodFactsLanguage.ENGLISH: 'Energy',
+        OpenFoodFactsLanguage.PORTUGUESE: 'Energia',
       };
-      for (final String url in energies.keys) {
-        final http.Response response =
-            await HttpHelper().doGetRequest(Uri.parse(url));
-        final json = jsonDecode(response.body);
-        final OrderedNutrients orderedNutrients =
-            OrderedNutrients.fromJson(json);
-        final OrderedNutrient? found =
-            _findOrderedNutrient(orderedNutrients.nutrients, nutrientId);
-        expect(found, isNotNull);
-        expect(found!.name, energies[url]);
+      const Set<String> countries = {'us', 'it', 'br'};
+      for (final OpenFoodFactsLanguage language in energies.keys) {
+        for (final String country in countries) {
+          final OrderedNutrients orderedNutrients =
+              await OpenFoodAPIClient.getOrderedNutrients(
+            cc: country,
+            language: language,
+          );
+          final OrderedNutrient? found =
+              _findOrderedNutrient(orderedNutrients.nutrients, nutrientId);
+          expect(found, isNotNull);
+          expect(found!.name, energies[language]);
+        }
       }
     });
   });
-}
-
-OrderedNutrient? _findOrderedNutrient(
-  final List<OrderedNutrient>? list,
-  final String nutrientId,
-) {
-  if (list == null) {
-    return null;
-  }
-  for (final OrderedNutrient item in list) {
-    if (item.id == nutrientId) {
-      return item;
-    }
-    final OrderedNutrient? found =
-        _findOrderedNutrient(item.subNutrients, nutrientId);
-    if (found != null) {
-      return found;
-    }
-  }
-  return null;
 }

@@ -8,6 +8,7 @@ import 'package:http/http.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
+import 'package:openfoodfacts/model/OrderedNutrients.dart';
 import 'package:openfoodfacts/model/TaxonomyAdditive.dart';
 import 'package:openfoodfacts/model/TaxonomyAllergen.dart';
 import 'package:openfoodfacts/model/TaxonomyCategory.dart';
@@ -854,5 +855,30 @@ class OpenFoodAPIClient {
       log('Exception $exception has occurred.\nStacktrace: \n$stackTrace');
       return KnowledgePanels.empty();
     }
+  }
+
+  /// Returns the nutrient hierarchy specific to a country, localized.
+  ///
+  /// [cc] is the country code, as ISO 3166-1 alpha-2
+  static Future<OrderedNutrients> getOrderedNutrients({
+    required final String cc,
+    required final OpenFoodFactsLanguage language,
+    final QueryType? queryType,
+  }) async {
+    final Uri uri = UriHelper.getUri(
+      path: 'cgi/nutrients.pl',
+      queryType: queryType,
+      queryParameters: <String, String>{'cc': cc, 'lc': language.code},
+    );
+
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      userAgent: OpenFoodAPIConfiguration.userAgent,
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Could not retrieve ordered nutrients!');
+    }
+    final json = jsonDecode(response.body);
+    return OrderedNutrients.fromJson(json);
   }
 }
