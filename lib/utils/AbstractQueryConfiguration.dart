@@ -1,5 +1,6 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
+import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
@@ -29,7 +30,13 @@ abstract class AbstractQueryConfiguration {
   @Deprecated('Use parameters language or languages instead')
   String? lc;
 
+  // TODO: deprecated from 2021-11-15 (#233); remove when old enough
+  @Deprecated('Use parameter country instead')
   String? cc;
+
+  /// The country for this query, if any.
+  final OpenFoodFactsCountry? country;
+
   List<ProductField>? fields;
 
   List<Parameter> additionalParameters;
@@ -39,6 +46,7 @@ abstract class AbstractQueryConfiguration {
     this.languages,
     this.lc,
     this.cc,
+    this.country,
     this.fields,
     this.additionalParameters = const [],
   }) {
@@ -78,10 +86,9 @@ abstract class AbstractQueryConfiguration {
       result.putIfAbsent('lc', () => lc!);
     }
 
-    if (cc != null) {
-      result.putIfAbsent('cc', () => cc!);
-    } else if (OpenFoodAPIConfiguration.globalCC != null) {
-      result.putIfAbsent('cc', () => OpenFoodAPIConfiguration.globalCC!);
+    final String? countryCode = computeCountryCode();
+    if (countryCode != null) {
+      result.putIfAbsent('cc', () => countryCode);
     }
 
     if (fields != null) {
@@ -110,4 +117,8 @@ abstract class AbstractQueryConfiguration {
 
     return result;
   }
+
+  String? computeCountryCode() =>
+      // ignore: deprecated_member_use_from_same_package
+      OpenFoodAPIConfiguration.computeCountryCode(country, cc);
 }

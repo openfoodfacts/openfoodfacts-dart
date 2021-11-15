@@ -835,7 +835,7 @@ class OpenFoodAPIClient {
       queryParameters: <String, String>{
         'fields': KNOWLEDGE_PANELS_FIELD,
         'lc': configuration.language!.code,
-        'cc': configuration.cc!,
+        'cc': configuration.computeCountryCode()!,
       },
     );
 

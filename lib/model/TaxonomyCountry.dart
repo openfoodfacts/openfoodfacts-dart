@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
 
@@ -104,6 +105,7 @@ class TaxonomyCountryQueryConfiguration
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages = const [],
     String? cc,
+    OpenFoodFactsCountry? country,
     List<TaxonomyCountryField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
@@ -111,6 +113,7 @@ class TaxonomyCountryQueryConfiguration
           tags,
           languages: languages,
           cc: cc,
+          country: country,
           includeChildren: false,
           fields: fields,
           additionalParameters: additionalParameters,

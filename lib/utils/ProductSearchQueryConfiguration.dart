@@ -1,5 +1,6 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
+import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 
@@ -12,6 +13,7 @@ class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
     final List<OpenFoodFactsLanguage> languages = const [],
     final String? lc,
     final String? cc,
+    final OpenFoodFactsCountry? country,
     final List<ProductField>? fields,
     required List<Parameter> parametersList,
   }) : super(
@@ -19,6 +21,7 @@ class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
           languages: languages,
           lc: lc,
           cc: cc,
+          country: country,
           fields: fields,
           additionalParameters: parametersList,
         );

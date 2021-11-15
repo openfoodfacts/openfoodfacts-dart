@@ -1,5 +1,6 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
+import 'package:openfoodfacts/utils/CountryHelper.dart';
 
 /// Query Configuration for multiple barcodes
 class ProductListQueryConfiguration extends AbstractQueryConfiguration {
@@ -13,6 +14,7 @@ class ProductListQueryConfiguration extends AbstractQueryConfiguration {
     final List<OpenFoodFactsLanguage> languages = const [],
     final String? lc,
     final String? cc,
+    final OpenFoodFactsCountry? country,
     final List<ProductField>? fields,
     int? page,
     int? pageSize,
@@ -23,6 +25,7 @@ class ProductListQueryConfiguration extends AbstractQueryConfiguration {
           languages: languages,
           lc: lc,
           cc: cc,
+          country: country,
           fields: fields,
           additionalParameters:
               _convertToParametersList(page, pageSize, sortOption),
