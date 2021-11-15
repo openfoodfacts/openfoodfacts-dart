@@ -280,7 +280,7 @@ class TaxonomyLabelQueryConfiguration
   TaxonomyLabelQueryConfiguration({
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages = const [],
-    String? cc,
+    @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     List<TaxonomyLabelField> fields = const [],
     List<Parameter> additionalParameters = const [],
@@ -297,7 +297,7 @@ class TaxonomyLabelQueryConfiguration
 
   TaxonomyLabelQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages = const [],
-    String? cc,
+    @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     List<TaxonomyLabelField> fields = const [],
     List<Parameter> additionalParameters = const [],

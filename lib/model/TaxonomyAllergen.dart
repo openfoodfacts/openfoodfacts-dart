@@ -80,7 +80,7 @@ class TaxonomyAllergenQueryConfiguration extends TaxonomyQueryConfiguration<
   TaxonomyAllergenQueryConfiguration({
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages = const [],
-    String? cc,
+    @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     List<TaxonomyAllergenField> fields = const [],
     List<Parameter> additionalParameters = const [],

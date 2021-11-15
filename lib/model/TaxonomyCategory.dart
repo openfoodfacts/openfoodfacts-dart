@@ -335,7 +335,7 @@ class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<
   TaxonomyCategoryQueryConfiguration({
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages = const [],
-    String? cc,
+    @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     bool includeChildren = false,
     List<TaxonomyCategoryField> fields = const [],
@@ -353,7 +353,7 @@ class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<
 
   TaxonomyCategoryQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages = const [],
-    String? cc,
+    @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     bool includeChildren = false,
     List<TaxonomyCategoryField> fields = const [],

@@ -11,8 +11,9 @@ class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
   ProductSearchQueryConfiguration({
     final OpenFoodFactsLanguage? language,
     final List<OpenFoodFactsLanguage> languages = const [],
-    final String? lc,
-    final String? cc,
+    @Deprecated('Use parameters language or languages instead')
+        final String? lc,
+    @Deprecated('Use parameter country instead') final String? cc,
     final OpenFoodFactsCountry? country,
     final List<ProductField>? fields,
     required List<Parameter> parametersList,
