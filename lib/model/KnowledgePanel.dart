@@ -40,7 +40,7 @@ enum Grade {
 enum Evaluation {
   @JsonValue('good')
   GOOD,
-  @JsonValue('average')
+  @JsonValue('neutral')
   NEUTRAL,
   @JsonValue('average')
   AVERAGE,
