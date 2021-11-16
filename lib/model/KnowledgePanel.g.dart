@@ -83,6 +83,7 @@ const _$LevelEnumMap = {
 
 const _$EvaluationEnumMap = {
   Evaluation.GOOD: 'good',
+  Evaluation.NEUTRAL: 'average',
   Evaluation.AVERAGE: 'average',
   Evaluation.BAD: 'bad',
   Evaluation.UNKNOWN: 'UNKNOWN',

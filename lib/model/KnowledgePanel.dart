@@ -41,6 +41,8 @@ enum Evaluation {
   @JsonValue('good')
   GOOD,
   @JsonValue('average')
+  NEUTRAL,
+  @JsonValue('average')
   AVERAGE,
   @JsonValue('bad')
   BAD,
