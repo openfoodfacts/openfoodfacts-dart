@@ -132,6 +132,7 @@ Map<String, dynamic> _$KnowledgePanelTableCellToJson(
 
 const _$EvaluationEnumMap = {
   Evaluation.GOOD: 'good',
+  Evaluation.NEUTRAL: 'neutral',
   Evaluation.AVERAGE: 'average',
   Evaluation.BAD: 'bad',
   Evaluation.UNKNOWN: 'UNKNOWN',
