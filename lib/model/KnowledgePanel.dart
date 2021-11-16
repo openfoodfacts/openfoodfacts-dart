@@ -38,21 +38,21 @@ enum Grade {
 /// Evaluation of the panel, depicting whether the content of the panel is
 /// good/bad/neutral for the topic to which the panel applies.
 enum Evaluation {
-@JsonValue('good')
-GOOD,
-@JsonValue('average')
-AVERAGE,
-@JsonValue('bad')
-BAD,
-UNKNOWN,
+  @JsonValue('good')
+  GOOD,
+  @JsonValue('average')
+  AVERAGE,
+  @JsonValue('bad')
+  BAD,
+  UNKNOWN,
 }
 
 /// Type of title element.
 enum TitleElementType {
   // Title Element depicts a grade like 'Ecoscore' or 'Nutriscore'.
-@JsonValue('grade')
-GRADE,
-UNKNOWN,
+  @JsonValue('grade')
+  GRADE,
+  UNKNOWN,
 }
 
 /// KnowledgePanels are a standardized and generic units of information that

@@ -6,31 +6,31 @@ part 'KnowledgePanelElement.g.dart';
 
 /// The type of Knowledge panel text description.
 enum KnowledgePanelTextElementType {
-/// The description summarizes the knowledge panel.
-@JsonValue('summary')
-SUMMARY,
+  /// The description summarizes the knowledge panel.
+  @JsonValue('summary')
+  SUMMARY,
 
-@JsonValue('warning')
-WARNING,
+  @JsonValue('warning')
+  WARNING,
 
-/// Disclaimer notes that the client may or may not choose to display.
-@JsonValue('notes')
-NOTES,
+  /// Disclaimer notes that the client may or may not choose to display.
+  @JsonValue('notes')
+  NOTES,
 
-/// Default type of the text element, this is just a normal description.
-@JsonValue('notes')
-DEFAULT,
+  /// Default type of the text element, this is just a normal description.
+  @JsonValue('notes')
+  DEFAULT,
 }
 
 /// The type of Knowledge panel table column.
 enum KnowledgePanelColumnType {
-/// The column contains text elements.
-@JsonValue('text')
-TEXT,
+  /// The column contains text elements.
+  @JsonValue('text')
+  TEXT,
 
-/// The column has percentages.
-@JsonValue('percent')
-PERCENT,
+  /// The column has percentages.
+  @JsonValue('percent')
+  PERCENT,
 }
 
 /// Description element of the Knowledge panel.
@@ -168,8 +168,7 @@ class KnowledgePanelTableRowElement extends JsonObject {
 class KnowledgePanelTableColumn extends JsonObject {
   final String text;
 
-  @JsonKey(
-      unknownEnumValue: KnowledgePanelColumnType.TEXT)
+  @JsonKey(unknownEnumValue: KnowledgePanelColumnType.TEXT)
   final KnowledgePanelColumnType? type;
 
   const KnowledgePanelTableColumn({required this.text, required this.type});
