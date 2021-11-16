@@ -60,6 +60,30 @@ enum ProductImprovement {
   OBSOLETE_NUTRITION_IMAGE,
 }
 
+/// Category: what would this [ProductImprovement] help compute?
+enum ProductImprovementCategory {
+  /// Eco-Score category
+  ECO_SCORE,
+
+  /// Nutri-Score category
+  NUTRI_SCORE,
+}
+
+extension ProductImprovementExtension on ProductImprovement {
+  ProductImprovementCategory getCategory() {
+    switch (this) {
+      case ProductImprovement.ORIGINS_TO_BE_COMPLETED:
+        return ProductImprovementCategory.ECO_SCORE;
+      case ProductImprovement.CATEGORIES_BUT_NO_NUTRISCORE:
+      case ProductImprovement.ADD_NUTRITION_FACTS:
+      case ProductImprovement.ADD_CATEGORY:
+      case ProductImprovement.ADD_NUTRITION_FACTS_AND_CATEGORY:
+      case ProductImprovement.OBSOLETE_NUTRITION_IMAGE:
+        return ProductImprovementCategory.NUTRI_SCORE;
+    }
+  }
+}
+
 /// This class contains most of the data about a specific product.
 ///
 /// Please read the language mechanics explanation if you intend to display
@@ -178,6 +202,13 @@ class Product extends JsonObject {
       fromJson: LanguageHelper.fromJsonStringsListMap,
       includeIfNull: false)
   Map<OpenFoodFactsLanguage, List<String>>? ingredientsTagsInLanguages;
+
+  /// Images Freshness in seconds
+  ///
+  /// 0 seconds means we don't have the picture at all.
+  /// Read-only
+  /// cf. https://github.com/openfoodfacts/openfoodfacts-dart/issues/104
+  Map<OpenFoodFactsLanguage, Map<ImageField, int>>? imagesFreshnessInLanguages;
 
   @JsonKey(
       name: 'ingredients_analysis_tags',
@@ -412,6 +443,16 @@ class Product extends JsonObject {
           result.ingredientsTagsInLanguages ??= {};
           result.ingredientsTagsInLanguages![lang] = values;
         }
+      } else if (key
+          .startsWith(ProductField.IMAGES_FRESHNESS_IN_LANGUAGES.key)) {
+        final OpenFoodFactsLanguage lang =
+            _langFrom(key, ProductField.IMAGES_FRESHNESS_IN_LANGUAGES.key);
+        if (lang != OpenFoodFactsLanguage.UNDEFINED) {
+          final Map<ImageField, int> values =
+              _jsonValueToImagesFreshness(json[key], lang);
+          result.imagesFreshnessInLanguages ??= {};
+          result.imagesFreshnessInLanguages![lang] = values;
+        }
       } else if (key.startsWith(ProductField.LABELS_TAGS_IN_LANGUAGES.key)) {
         OpenFoodFactsLanguage lang =
             _langFrom(key, ProductField.LABELS_TAGS_IN_LANGUAGES.key);
@@ -447,6 +488,18 @@ class Product extends JsonObject {
 
   static List<String>? _jsonValueToList(dynamic value) {
     return (value as List?)?.map((e) => e as String).toList();
+  }
+
+  static Map<ImageField, int> _jsonValueToImagesFreshness(
+      Map value, OpenFoodFactsLanguage language) {
+    final Map<ImageField, int> result = {};
+    for (final ImageField imageField in ImageField.values) {
+      final int? timestamp = value['${imageField.value}_${language.code}'];
+      if (timestamp != null) {
+        result[imageField] = timestamp;
+      }
+    }
+    return result;
   }
 
   Map<String, String> toServerData() {

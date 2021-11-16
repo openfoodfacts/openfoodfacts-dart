@@ -17,6 +17,62 @@ void main() {
   });
 
   group('OpenFoodAPIClient getTaxonomyCategories', () {
+    test('get root categories', () async {
+      final String tag = 'en:plain-crepes';
+      Map<String, dynamic> expectedResponse = <String, dynamic>{
+        tag: {
+          'agribalyse_food_code': {'en': '23800'},
+          'children': ['en:refrigerated-plain-crepes'],
+          'name': {'en': 'Plain crepes', 'fr': 'Crêpe nature'},
+        }
+      };
+      TaxonomyCategoryQueryConfiguration configuration =
+          TaxonomyCategoryQueryConfiguration.roots(
+        fields: [
+          TaxonomyCategoryField.NAME,
+          TaxonomyCategoryField.CHILDREN,
+          TaxonomyCategoryField.PARENTS,
+          TaxonomyCategoryField.AGRIBALYSE_FOOD_CODE
+        ],
+        languages: [
+          OpenFoodFactsLanguage.ENGLISH,
+          OpenFoodFactsLanguage.FRENCH,
+        ],
+      );
+      httpHelper.setResponse(configuration.getUri(),
+          response: expectedResponse);
+
+      Map<String, TaxonomyCategory>? categories =
+          await OpenFoodAPIClient.getTaxonomyCategories(
+        configuration,
+        user: TestConstants.TEST_USER,
+      );
+      expect(categories, isNotNull);
+      expect(categories!.length, equals(1));
+      TaxonomyCategory crepes = categories[tag]!;
+      expect(
+          crepes.agribalyseFoodCode![OpenFoodFactsLanguage.ENGLISH]!,
+          equals(expectedResponse[tag]
+                  [TaxonomyCategoryField.AGRIBALYSE_FOOD_CODE.key]
+              [OpenFoodFactsLanguage.ENGLISH.code]));
+      expect(
+          crepes.children!.length,
+          equals(expectedResponse[tag][TaxonomyCategoryField.CHILDREN.key]
+              .length));
+      expect(
+          crepes.children!.first,
+          equals(
+              expectedResponse[tag][TaxonomyCategoryField.CHILDREN.key].first));
+      expect(crepes.parents, isNull);
+      expect(
+          crepes.name![OpenFoodFactsLanguage.ENGLISH]!,
+          equals(expectedResponse[tag][TaxonomyCategoryField.NAME.key]
+              [OpenFoodFactsLanguage.ENGLISH.code]));
+      expect(
+          crepes.name![OpenFoodFactsLanguage.FRENCH]!,
+          equals(expectedResponse[tag][TaxonomyCategoryField.NAME.key]
+              [OpenFoodFactsLanguage.FRENCH.code]));
+    });
     test('get a category', () async {
       final String tag = 'en:plain-crepes';
       Map<String, dynamic> expectedResponse = <String, dynamic>{

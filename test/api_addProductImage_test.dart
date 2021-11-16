@@ -24,7 +24,7 @@ void main() {
       expect(status.error, 'Dieses Foto wurde schon hochgeladen.');
     });
 
-    test('add ingredients image test', () async {
+    test('add ingredients image test 1', () async {
       SendImage image = SendImage(
         lang: OpenFoodFactsLanguage.ENGLISH,
         barcode: '0048151623426',
@@ -40,7 +40,8 @@ void main() {
       expect(status.error, 'This picture has already been sent.');
     });
 
-    test('add ingredients image test', () async {
+    // TODO(monsieurtanuki): test with a bigger pic used to crash (4000x3000, 2.5Mb)
+    test('add ingredients image test 2', () async {
       SendImage image = SendImage(
         lang: OpenFoodFactsLanguage.DANISH,
         barcode: '5722970900207',

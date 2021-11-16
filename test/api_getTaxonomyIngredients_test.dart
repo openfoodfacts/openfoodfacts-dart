@@ -18,6 +18,61 @@ void main() {
   });
 
   group('OpenFoodAPIClient getTaxonomyIngredients', () {
+    test('get an ingredient roots', () async {
+      final String tag = 'en:edamame';
+      Map<String, dynamic> expectedResponse = <String, dynamic>{
+        tag: {
+          'children': ['en:mukimame'],
+          'name': {'en': 'Edamame', 'fr': 'Edamame'},
+          'wikidata': {'en': 'Q1377879'}
+        }
+      };
+      TaxonomyIngredientQueryConfiguration configuration =
+          TaxonomyIngredientQueryConfiguration.roots(
+        fields: [
+          TaxonomyIngredientField.NAME,
+          TaxonomyIngredientField.CHILDREN,
+          TaxonomyIngredientField.PARENTS,
+          TaxonomyIngredientField.WIKIDATA,
+        ],
+        languages: [
+          OpenFoodFactsLanguage.ENGLISH,
+          OpenFoodFactsLanguage.FRENCH,
+        ],
+      );
+      httpHelper.setResponse(configuration.getUri(),
+          response: expectedResponse);
+
+      Map<String, TaxonomyIngredient>? ingredients =
+          await OpenFoodAPIClient.getTaxonomyIngredients(
+        configuration,
+        user: TestConstants.TEST_USER,
+      );
+      expect(ingredients, isNotNull);
+      expect(ingredients!.length, equals(1));
+      TaxonomyIngredient edamame = ingredients[tag]!;
+      expect(
+          edamame.wikidata![OpenFoodFactsLanguage.ENGLISH]!,
+          equals(expectedResponse[tag][TaxonomyIngredientField.WIKIDATA.key]
+              [OpenFoodFactsLanguage.ENGLISH.code]));
+      expect(
+          edamame.children!.length,
+          equals(expectedResponse[tag][TaxonomyIngredientField.CHILDREN.key]
+              .length));
+      expect(
+          edamame.children!.first,
+          equals(expectedResponse[tag][TaxonomyIngredientField.CHILDREN.key]
+              .first));
+      expect(edamame.parents, isNull);
+      expect(
+          edamame.name![OpenFoodFactsLanguage.ENGLISH]!,
+          equals(expectedResponse[tag][TaxonomyIngredientField.NAME.key]
+              [OpenFoodFactsLanguage.ENGLISH.code]));
+      expect(
+          edamame.name![OpenFoodFactsLanguage.FRENCH]!,
+          equals(expectedResponse[tag][TaxonomyIngredientField.NAME.key]
+              [OpenFoodFactsLanguage.FRENCH.code]));
+    });
     test('get an ingredient', () async {
       final String tag = 'en:edamame';
       Map<String, dynamic> expectedResponse = <String, dynamic>{

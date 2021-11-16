@@ -4,19 +4,14 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
 
-part 'TaxonomyIngredient.g.dart';
+part 'TaxonomyAdditive.g.dart';
 
-/// Fields of an [TaxonomyIngredient]
-enum TaxonomyIngredientField {
+/// Fields of an [TaxonomyAdditive]
+enum TaxonomyAdditiveField {
   ALL,
   ADDITIVES_CLASSES,
-  ALLERGENS,
-  BRIOCHE,
   CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT,
   CARBON_FOOTPRINT_FR_FOODGES_VALUE,
-  CHILDREN,
-  CIQUAL_FOOD_CODE,
-  CIQUAL_FOOD_NAME,
   COLOUR_INDEX,
   COMMENT,
   DEFAULT_ADDITIVE_CLASS,
@@ -35,101 +30,70 @@ enum TaxonomyIngredientField {
   EFSA_EVALUATION_SAFETY_ASSESSED,
   EFSA_EVALUATION_URL,
   FROM_PALM_OIL,
-  LIKELY_ALLERGENS,
   MANDATORY_ADDITIVE_CLASS,
   NAME,
-  NOVA,
-  NUTRISCORE_FRUITS_VEGETABLES_NUTS,
   ORGANIC_EU,
-  ORIGINS,
-  PARENTS,
-  PNNS_GROUP_2,
-  PROTECTED_NAME_TYPE,
-  REBLOCHON,
-  SYNONYMS,
   VEGAN,
   VEGETARIAN,
   WIKIDATA,
-  WIKTIONARY,
 }
 
-extension TaxonomyIngredientFieldExtension on TaxonomyIngredientField {
-  static const Map<TaxonomyIngredientField, String> _KEYS =
-      <TaxonomyIngredientField, String>{
-    TaxonomyIngredientField.ADDITIVES_CLASSES: 'additives_classes',
-    TaxonomyIngredientField.ALLERGENS: 'allergens',
-    TaxonomyIngredientField.BRIOCHE: 'brioche',
-    TaxonomyIngredientField.CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT:
+extension TaxonomyAdditiveFieldExtension on TaxonomyAdditiveField {
+  static const Map<TaxonomyAdditiveField, String> _KEYS = {
+    TaxonomyAdditiveField.ALL: 'all',
+    TaxonomyAdditiveField.ADDITIVES_CLASSES: 'additives_classes',
+    TaxonomyAdditiveField.CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT:
         'carbon_footprint_fr_foodges_ingredient',
-    TaxonomyIngredientField.CARBON_FOOTPRINT_FR_FOODGES_VALUE:
+    TaxonomyAdditiveField.CARBON_FOOTPRINT_FR_FOODGES_VALUE:
         'carbon_footprint_fr_foodges_value',
-    TaxonomyIngredientField.CHILDREN: 'children',
-    TaxonomyIngredientField.CIQUAL_FOOD_CODE: 'ciqual_food_code',
-    TaxonomyIngredientField.CIQUAL_FOOD_NAME: 'ciqual_food_name',
-    TaxonomyIngredientField.COLOUR_INDEX: 'colour_index',
-    TaxonomyIngredientField.COMMENT: 'comment',
-    TaxonomyIngredientField.DEFAULT_ADDITIVE_CLASS: 'default_additive_class',
-    TaxonomyIngredientField.DESCRIPTION: 'description',
-    TaxonomyIngredientField.E_NUMBER: 'e_number',
-    TaxonomyIngredientField.EFSA: 'efsa',
-    TaxonomyIngredientField.EFSA_EVALUATION: 'efsa_evaluation',
-    TaxonomyIngredientField.EFSA_EVALUATION_ADI: 'efsa_evaluation_adi',
-    TaxonomyIngredientField.EFSA_EVALUATION_ADI_ESTABLISHED:
+    TaxonomyAdditiveField.COLOUR_INDEX: 'colour_index',
+    TaxonomyAdditiveField.COMMENT: 'comment',
+    TaxonomyAdditiveField.DEFAULT_ADDITIVE_CLASS: 'default_additive_class',
+    TaxonomyAdditiveField.DESCRIPTION: 'description',
+    TaxonomyAdditiveField.E_NUMBER: 'e_number',
+    TaxonomyAdditiveField.EFSA: 'efsa',
+    TaxonomyAdditiveField.EFSA_EVALUATION: 'efsa_evaluation',
+    TaxonomyAdditiveField.EFSA_EVALUATION_ADI: 'efsa_evaluation_adi',
+    TaxonomyAdditiveField.EFSA_EVALUATION_ADI_ESTABLISHED:
         'efsa_evaluation_adi_established',
-    TaxonomyIngredientField.EFSA_EVALUATION_DATE: 'efsa_evaluation_date',
-    TaxonomyIngredientField.EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_ADI:
+    TaxonomyAdditiveField.EFSA_EVALUATION_DATE: 'efsa_evaluation_date',
+    TaxonomyAdditiveField.EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_ADI:
         'efsa_evaluation_exposure_95th_greater_than_adi',
-    TaxonomyIngredientField.EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_NOAEL:
+    TaxonomyAdditiveField.EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_NOAEL:
         'efsa_evaluation_exposure_95th_greater_than_noael',
-    TaxonomyIngredientField.EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_ADI:
+    TaxonomyAdditiveField.EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_ADI:
         'efsa_evaluation_exposure_mean_greater_than_adi',
-    TaxonomyIngredientField.EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_NOAEL:
+    TaxonomyAdditiveField.EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_NOAEL:
         'efsa_evaluation_exposure_mean_greater_than_noael',
-    TaxonomyIngredientField.EFSA_EVALUATION_OVEREXPOSURE_RISK:
+    TaxonomyAdditiveField.EFSA_EVALUATION_OVEREXPOSURE_RISK:
         'efsa_evaluation_overexposure_risk',
-    TaxonomyIngredientField.EFSA_EVALUATION_SAFETY_ASSESSED:
+    TaxonomyAdditiveField.EFSA_EVALUATION_SAFETY_ASSESSED:
         'efsa_evaluation_safety_assessed',
-    TaxonomyIngredientField.EFSA_EVALUATION_URL: 'efsa_evaluation_url',
-    TaxonomyIngredientField.FROM_PALM_OIL: 'from_palm_oil',
-    TaxonomyIngredientField.LIKELY_ALLERGENS: 'likely_allergens',
-    TaxonomyIngredientField.MANDATORY_ADDITIVE_CLASS:
-        'mandatory_additive_class',
-    TaxonomyIngredientField.NAME: 'name',
-    TaxonomyIngredientField.NOVA: 'nova',
-    TaxonomyIngredientField.NUTRISCORE_FRUITS_VEGETABLES_NUTS:
-        'nutriscore_fruits_vegetables_nuts',
-    TaxonomyIngredientField.ORGANIC_EU: 'organic_eu',
-    TaxonomyIngredientField.ORIGINS: 'origins',
-    TaxonomyIngredientField.PARENTS: 'parents',
-    TaxonomyIngredientField.PNNS_GROUP_2: 'pnns_group_2',
-    TaxonomyIngredientField.PROTECTED_NAME_TYPE: 'protected_name_type',
-    TaxonomyIngredientField.REBLOCHON: 'reblochon',
-    TaxonomyIngredientField.SYNONYMS: 'synonyms',
-    TaxonomyIngredientField.VEGAN: 'vegan',
-    TaxonomyIngredientField.VEGETARIAN: 'vegetarian',
-    TaxonomyIngredientField.WIKIDATA: 'wikidata',
-    TaxonomyIngredientField.WIKTIONARY: 'wiktionary',
+    TaxonomyAdditiveField.EFSA_EVALUATION_URL: 'efsa_evaluation_url',
+    TaxonomyAdditiveField.FROM_PALM_OIL: 'from_palm_oil',
+    TaxonomyAdditiveField.MANDATORY_ADDITIVE_CLASS: 'mandatory_additive_class',
+    TaxonomyAdditiveField.NAME: 'name',
+    TaxonomyAdditiveField.ORGANIC_EU: 'organic_eu',
+    TaxonomyAdditiveField.VEGAN: 'vegan',
+    TaxonomyAdditiveField.VEGETARIAN: 'vegetarian',
+    TaxonomyAdditiveField.WIKIDATA: 'wikidata',
   };
 
-  /// Returns the key of the Ingredient field
+  /// Returns the key of the Additive field
   String get key => _KEYS[this] ?? '';
 }
 
-/// A JSON-serializable version of a Ingredient taxonomy result.
+/// A JSON-serializable version of a Additive taxonomy result.
 ///
 /// See [OpenFoodAPIClient.getTaxonomy] for more details on how to retrieve one
 /// of these.
 @JsonSerializable()
-class TaxonomyIngredient extends JsonObject {
-  TaxonomyIngredient(
+class TaxonomyAdditive extends JsonObject {
+  TaxonomyAdditive(
     this.additivesClasses,
-    this.allergens,
-    this.brioche,
     this.carbonFootprintFrFoodgesIngredient,
     this.carbonFootprintFrFoodgesValue,
     this.children,
-    this.ciqualFoodCode,
-    this.ciqualFoodName,
     this.colourIndex,
     this.comment,
     this.defaultAdditiveClass,
@@ -140,39 +104,30 @@ class TaxonomyIngredient extends JsonObject {
     this.efsaEvaluationAdi,
     this.efsaEvaluationAdiEstablished,
     this.efsaEvaluationDate,
-    this.efsaEvaluationExposure95ThGreaterThanAdi,
-    this.efsaEvaluationExposure95ThGreaterThanNoael,
+    this.efsaEvaluationExposure95thGreaterThanAdi,
+    this.efsaEvaluationExposure95thGreaterThanNoael,
     this.efsaEvaluationExposureMeanGreaterThanAdi,
     this.efsaEvaluationExposureMeanGreaterThanNoael,
     this.efsaEvaluationOverexposureRisk,
     this.efsaEvaluationSafetyAssessed,
     this.efsaEvaluationUrl,
     this.fromPalmOil,
-    this.likelyAllergens,
     this.mandatoryAdditiveClass,
     this.name,
-    this.nova,
-    this.nutriscoreFruitsVegetablesNuts,
     this.organicEu,
-    this.origins,
     this.parents,
-    this.pnnsGroup2,
-    this.protectedNameType,
-    this.reblochon,
-    this.synonyms,
     this.vegan,
     this.vegetarian,
     this.wikidata,
-    this.wiktionary,
   );
 
-  factory TaxonomyIngredient.fromJson(Map<String, dynamic> json) {
-    return _$TaxonomyIngredientFromJson(json);
+  factory TaxonomyAdditive.fromJson(Map<String, dynamic> json) {
+    return _$TaxonomyAdditiveFromJson(json);
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return _$TaxonomyIngredientToJson(this);
+    return _$TaxonomyAdditiveToJson(this);
   }
 
   @JsonKey(
@@ -182,20 +137,6 @@ class TaxonomyIngredient extends JsonObject {
     includeIfNull: false,
   )
   Map<OpenFoodFactsLanguage, String>? additivesClasses;
-  @JsonKey(
-    name: 'allergens',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
-  Map<OpenFoodFactsLanguage, String>? allergens;
-  @JsonKey(
-    name: 'brioche',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
-  Map<OpenFoodFactsLanguage, String>? brioche;
   @JsonKey(
     name: 'carbon_footprint_fr_foodges_ingredient',
     fromJson: LanguageHelper.fromJsonStringMap,
@@ -212,20 +153,6 @@ class TaxonomyIngredient extends JsonObject {
   Map<OpenFoodFactsLanguage, String>? carbonFootprintFrFoodgesValue;
   @JsonKey(name: 'children', includeIfNull: false)
   List<String>? children;
-  @JsonKey(
-    name: 'ciqual_food_code',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
-  Map<OpenFoodFactsLanguage, String>? ciqualFoodCode;
-  @JsonKey(
-    name: 'ciqual_food_name',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
-  Map<OpenFoodFactsLanguage, String>? ciqualFoodName;
   @JsonKey(
     name: 'colour_index',
     fromJson: LanguageHelper.fromJsonStringMap,
@@ -297,20 +224,20 @@ class TaxonomyIngredient extends JsonObject {
   )
   Map<OpenFoodFactsLanguage, String>? efsaEvaluationDate;
   @JsonKey(
-    name: 'efsa_evaluation_exposure_95_th_greater_than_adi',
+    name: 'efsa_evaluation_exposure_95th_greater_than_adi',
     fromJson: LanguageHelper.fromJsonStringMap,
     toJson: LanguageHelper.toJsonStringMap,
     includeIfNull: false,
   )
-  Map<OpenFoodFactsLanguage, String>? efsaEvaluationExposure95ThGreaterThanAdi;
+  Map<OpenFoodFactsLanguage, String>? efsaEvaluationExposure95thGreaterThanAdi;
   @JsonKey(
-    name: 'efsa_evaluation_exposure_95_th_greater_than_noael',
+    name: 'efsa_evaluation_exposure_95th_greater_than_noael',
     fromJson: LanguageHelper.fromJsonStringMap,
     toJson: LanguageHelper.toJsonStringMap,
     includeIfNull: false,
   )
   Map<OpenFoodFactsLanguage, String>?
-      efsaEvaluationExposure95ThGreaterThanNoael;
+      efsaEvaluationExposure95thGreaterThanNoael;
   @JsonKey(
     name: 'efsa_evaluation_exposure_mean_greater_than_adi',
     fromJson: LanguageHelper.fromJsonStringMap,
@@ -355,13 +282,6 @@ class TaxonomyIngredient extends JsonObject {
   )
   Map<OpenFoodFactsLanguage, String>? fromPalmOil;
   @JsonKey(
-    name: 'likely_allergens',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
-  Map<OpenFoodFactsLanguage, String>? likelyAllergens;
-  @JsonKey(
     name: 'mandatory_additive_class',
     fromJson: LanguageHelper.fromJsonStringMap,
     toJson: LanguageHelper.toJsonStringMap,
@@ -376,63 +296,14 @@ class TaxonomyIngredient extends JsonObject {
   )
   Map<OpenFoodFactsLanguage, String>? name;
   @JsonKey(
-    name: 'nova',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
-  Map<OpenFoodFactsLanguage, String>? nova;
-  @JsonKey(
-    name: 'nutriscore_fruits_vegetables_nuts',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
-  Map<OpenFoodFactsLanguage, String>? nutriscoreFruitsVegetablesNuts;
-  @JsonKey(
     name: 'organic_eu',
     fromJson: LanguageHelper.fromJsonStringMap,
     toJson: LanguageHelper.toJsonStringMap,
     includeIfNull: false,
   )
   Map<OpenFoodFactsLanguage, String>? organicEu;
-  @JsonKey(
-    name: 'origins',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
-  Map<OpenFoodFactsLanguage, String>? origins;
   @JsonKey(name: 'parents', includeIfNull: false)
   List<String>? parents;
-  @JsonKey(
-    name: 'pnns_group_2',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
-  Map<OpenFoodFactsLanguage, String>? pnnsGroup2;
-  @JsonKey(
-    name: 'protected_name_type',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
-  Map<OpenFoodFactsLanguage, String>? protectedNameType;
-  @JsonKey(
-    name: 'reblochon',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
-  Map<OpenFoodFactsLanguage, String>? reblochon;
-  @JsonKey(
-    name: 'synonyms',
-    fromJson: LanguageHelper.fromJsonStringsListMap,
-    toJson: LanguageHelper.toJsonStringsListMap,
-    includeIfNull: false,
-  )
-  Map<OpenFoodFactsLanguage, List<String>>? synonyms;
   @JsonKey(
     name: 'vegan',
     fromJson: LanguageHelper.fromJsonStringMap,
@@ -454,77 +325,53 @@ class TaxonomyIngredient extends JsonObject {
     includeIfNull: false,
   )
   Map<OpenFoodFactsLanguage, String>? wikidata;
-  @JsonKey(
-    name: 'wiktionary',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
-  Map<OpenFoodFactsLanguage, String>? wiktionary;
 
   @override
   String toString() => toJson().toString();
 }
 
-class TaxonomyIngredientQueryConfiguration extends TaxonomyQueryConfiguration<
-    TaxonomyIngredient, TaxonomyIngredientField> {
-  TaxonomyIngredientQueryConfiguration({
+class TaxonomyAdditiveQueryConfiguration extends TaxonomyQueryConfiguration<
+    TaxonomyAdditive, TaxonomyAdditiveField> {
+  TaxonomyAdditiveQueryConfiguration({
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages = const [],
     String? cc,
-    List<TaxonomyIngredientField> fields = const [],
+    List<TaxonomyAdditiveField> fields = const [],
     List<Parameter> additionalParameters = const [],
-    bool includeChildren = false,
   }) : super(
-          TagType.INGREDIENTS,
+          TagType.LABELS,
           tags,
           languages: languages,
           cc: cc,
-          includeChildren: includeChildren,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
-
-  TaxonomyIngredientQueryConfiguration.roots({
-    List<OpenFoodFactsLanguage>? languages = const [],
-    String? cc,
-    List<TaxonomyIngredientField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-    bool includeChildren = false,
-  }) : super.roots(
-          TagType.INGREDIENTS,
-          languages: languages,
-          cc: cc,
-          includeChildren: includeChildren,
+          includeChildren: false,
           fields: fields,
           additionalParameters: additionalParameters,
         );
 
   @override
-  Map<String, TaxonomyIngredient> convertResults(dynamic jsonData) {
+  Map<String, TaxonomyAdditive> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {
       return const {};
     }
     return jsonData
-        .map<String, TaxonomyIngredient>((String key, dynamic taxonomy) {
+        .map<String, TaxonomyAdditive>((String key, dynamic taxonomy) {
       if (taxonomy is! Map<String, dynamic>) {
-        assert(false, 'Received JSON Ingredient is not a Map');
-        return MapEntry(key, TaxonomyIngredient.fromJson({}));
+        assert(false, 'Received JSON Additive is not a Map');
+        return MapEntry(key, TaxonomyAdditive.fromJson({}));
       }
-      return MapEntry(key, TaxonomyIngredient.fromJson(taxonomy));
+      return MapEntry(key, TaxonomyAdditive.fromJson(taxonomy));
     });
   }
 
   @override
-  Set<TaxonomyIngredientField> get ignoredFields =>
-      const {TaxonomyIngredientField.ALL};
+  Set<TaxonomyAdditiveField> get ignoredFields =>
+      const {TaxonomyAdditiveField.ALL};
 
   @override
   Iterable<String> convertFieldsToStrings(
-      Iterable<TaxonomyIngredientField> fields) {
+      Iterable<TaxonomyAdditiveField> fields) {
     return fields
-        .where(
-            (TaxonomyIngredientField field) => !ignoredFields.contains(field))
-        .map<String>((TaxonomyIngredientField field) => field.key);
+        .where((TaxonomyAdditiveField field) => !ignoredFields.contains(field))
+        .map<String>((TaxonomyAdditiveField field) => field.key);
   }
 }

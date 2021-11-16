@@ -85,7 +85,11 @@ void main() {
       );
 
       testProductResult1(result2);
-    });
+    },
+        timeout: Timeout(
+          // this guy is rather slow
+          Duration(seconds: 90),
+        ));
 
     test('dont overwrite language', () async {
       String barcode = '4008391212596';
@@ -144,9 +148,8 @@ void main() {
       var frenchResult = await OpenFoodAPIClient.getProduct(
         frenchConfig,
       );
-      assert(frenchResult.product != null);
-      assert(frenchResult.product!.productName != null);
-      assert(frenchResult.product!.productName == frenchProductName);
+      expect(frenchResult.product, isNotNull);
+      expect(frenchResult.product!.productName, frenchProductName);
 
       // get german fields for product
       ProductQueryConfiguration germanConfig = ProductQueryConfiguration(
@@ -161,9 +164,8 @@ void main() {
         germanConfig,
       );
 
-      assert(germanResult.product != null);
-      assert(germanResult.product!.productName != null);
-      assert(germanResult.product!.productName == germanProductName);
+      expect(germanResult.product, isNotNull);
+      expect(germanResult.product!.productName, germanProductName);
 
       // get preferably French, then German fields for product
       ProductQueryConfiguration frenchGermanConfig =
@@ -179,9 +181,8 @@ void main() {
         frenchGermanConfig,
       );
 
-      assert(frenchGermanResult.product != null);
-      assert(frenchGermanResult.product!.productName != null);
-      assert(frenchGermanResult.product!.productName == frenchProductName);
+      expect(frenchGermanResult.product, isNotNull);
+      expect(frenchGermanResult.product!.productName, frenchProductName);
     });
 
     test('add new product test 2', () async {
@@ -417,7 +418,7 @@ void main() {
         ),
         product,
       );
-      assert(status.isWrongUsernameOrPassword());
+      expect(status.isWrongUsernameOrPassword(), isTrue);
     });
   });
 }
