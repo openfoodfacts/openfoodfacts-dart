@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the KnowledgePanelType enum from the KnowledgePanel library, for the Dart programming language.">
-  <title>KnowledgePanelType enum - KnowledgePanel library - Dart API</title>
+  <meta name="description" content="API docs for the KnowledgePanelColumnType enum from the KnowledgePanelElement library, for the Dart programming language.">
+  <title>KnowledgePanelColumnType enum - KnowledgePanelElement library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <button id="sidenav-left-toggle" type="button">&nbsp;</button>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">openfoodfacts</a></li>
-    <li><a href="../model_KnowledgePanel/model_KnowledgePanel-library.html">KnowledgePanel</a></li>
-    <li class="self-crumb">KnowledgePanelType enum</li>
+    <li><a href="../model_KnowledgePanelElement/model_KnowledgePanelElement-library.html">KnowledgePanelElement</a></li>
+    <li class="self-crumb">KnowledgePanelColumnType enum</li>
   </ol>
-  <div class="self-name">KnowledgePanelType</div>
+  <div class="self-name">KnowledgePanelColumnType</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -44,14 +44,14 @@
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
-<h1><span class="kind-enum">KnowledgePanelType</span> enum 
+<h1><span class="kind-enum">KnowledgePanelColumnType</span> enum 
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
  
 </h1></div>
 
     
 <section class="desc markdown">
-  <p>Type of the KnowledgePanel.</p>
+  <p>The type of Knowledge panel table column.</p>
 </section>
 
 
@@ -74,84 +74,39 @@
       <h2>Constants</h2>
 
       <dl class="properties">
-        <dt id="CARD" class="constant">
-  <span class="name ">CARD</span>
-  <span class="signature">&#8594; const <a href="../model_KnowledgePanel/KnowledgePanelType-class.html">KnowledgePanelType</a></span>
+        <dt id="PERCENT" class="constant">
+  <span class="name ">PERCENT</span>
+  <span class="signature">&#8594; const <a href="../model_KnowledgePanelElement/KnowledgePanelColumnType-class.html">KnowledgePanelColumnType</a></span>
   
 
 </dt>
 <dd>
-  <p>Knowledge Panel which is rendered as a card on the UI.</p> 
-  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonValue-class.html">JsonValue</a>(&#39;card&#39;)</div>
+  <p>The column has percentages.</p> 
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonValue-class.html">JsonValue</a>(&#39;percent&#39;)</div>
 
   <div>
-    <span class="signature"><code>const KnowledgePanelType(3)</code></span>
+    <span class="signature"><code>const KnowledgePanelColumnType(1)</code></span>
   </div>
 </dd>
 
-        <dt id="DO_YOU_KNOW" class="constant">
-  <span class="name ">DO_YOU_KNOW</span>
-  <span class="signature">&#8594; const <a href="../model_KnowledgePanel/KnowledgePanelType-class.html">KnowledgePanelType</a></span>
+        <dt id="TEXT" class="constant">
+  <span class="name ">TEXT</span>
+  <span class="signature">&#8594; const <a href="../model_KnowledgePanelElement/KnowledgePanelColumnType-class.html">KnowledgePanelColumnType</a></span>
   
 
 </dt>
 <dd>
-  <p>Do you know types informative Knowledge Panels.</p> 
-  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonValue-class.html">JsonValue</a>(&#39;doyouknow&#39;)</div>
+  <p>The column contains text elements.</p> 
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonValue-class.html">JsonValue</a>(&#39;text&#39;)</div>
 
   <div>
-    <span class="signature"><code>const KnowledgePanelType(0)</code></span>
-  </div>
-</dd>
-
-        <dt id="ECOSCORE_LCA" class="constant">
-  <span class="name ">ECOSCORE_LCA</span>
-  <span class="signature">&#8594; const <a href="../model_KnowledgePanel/KnowledgePanelType-class.html">KnowledgePanelType</a></span>
-  
-
-</dt>
-<dd>
-  <p>Knowledge Panel with ecoscore LCA.</p> 
-  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonValue-class.html">JsonValue</a>(&#39;ecoscore_lca&#39;)</div>
-
-  <div>
-    <span class="signature"><code>const KnowledgePanelType(2)</code></span>
-  </div>
-</dd>
-
-        <dt id="SCORE" class="constant">
-  <span class="name ">SCORE</span>
-  <span class="signature">&#8594; const <a href="../model_KnowledgePanel/KnowledgePanelType-class.html">KnowledgePanelType</a></span>
-  
-
-</dt>
-<dd>
-  <p>Knowledge Panel with ecoscore information.</p> 
-  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonValue-class.html">JsonValue</a>(&#39;score&#39;)</div>
-
-  <div>
-    <span class="signature"><code>const KnowledgePanelType(1)</code></span>
-  </div>
-</dd>
-
-        <dt id="UNKNOWN" class="constant">
-  <span class="name ">UNKNOWN</span>
-  <span class="signature">&#8594; const <a href="../model_KnowledgePanel/KnowledgePanelType-class.html">KnowledgePanelType</a></span>
-  
-
-</dt>
-<dd>
-   
-  
-
-  <div>
-    <span class="signature"><code>const KnowledgePanelType(4)</code></span>
+    <span class="signature"><code>const KnowledgePanelColumnType(0)</code></span>
   </div>
 </dd>
 
         <dt id="values" class="constant">
   <span class="name ">values</span>
-  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../model_KnowledgePanel/KnowledgePanelType-class.html">KnowledgePanelType</a></span>&gt;</span></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/2.14.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../model_KnowledgePanelElement/KnowledgePanelColumnType-class.html">KnowledgePanelColumnType</a></span>&gt;</span></span>
   
 
 </dt>
@@ -160,7 +115,7 @@
   
 
   <div>
-    <span class="signature"><code>const List&lt;<wbr><span class="type-parameter">KnowledgePanelType</span>&gt;</code></span>
+    <span class="signature"><code>const List&lt;<wbr><span class="type-parameter">KnowledgePanelColumnType</span>&gt;</code></span>
   </div>
 </dd>
 
@@ -225,14 +180,14 @@
 </dd>
 
         <dt id="toString" class="callable">
-  <span class="name"><a href="../model_KnowledgePanel/KnowledgePanelType/toString.html">toString</a></span><span class="signature">(<wbr>)
+  <span class="name"><a href="../model_KnowledgePanelElement/KnowledgePanelColumnType/toString.html">toString</a></span><span class="signature">(<wbr>)
     <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>
   </span>
   
 
 </dt>
 <dd>
-  A string representation of this object. <a href="../model_KnowledgePanel/KnowledgePanelType/toString.html">[...]</a>
+  A string representation of this object. <a href="../model_KnowledgePanelElement/KnowledgePanelColumnType/toString.html">[...]</a>
   <div class="features">override</div>
 
 </dd>
@@ -271,27 +226,33 @@
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
   <li><a href="../index.html">openfoodfacts</a></li>
-  <li><a href="../model_KnowledgePanel/model_KnowledgePanel-library.html">KnowledgePanel</a></li>
-  <li class="self-crumb">KnowledgePanelType enum</li>
+  <li><a href="../model_KnowledgePanelElement/model_KnowledgePanelElement-library.html">KnowledgePanelElement</a></li>
+  <li class="self-crumb">KnowledgePanelColumnType enum</li>
 </ol>
 
 
-    <h5>KnowledgePanel library</h5>
+    <h5>KnowledgePanelElement library</h5>
     <ol>
-  <li class="section-title"><a href="../model_KnowledgePanel/model_KnowledgePanel-library.html#classes">Classes</a></li>
-  <li><a href="../model_KnowledgePanel/KnowledgePanel-class.html">KnowledgePanel</a></li>
-  <li><a href="../model_KnowledgePanel/TitleElement-class.html">TitleElement</a></li>
+  <li class="section-title"><a href="../model_KnowledgePanelElement/model_KnowledgePanelElement-library.html#classes">Classes</a></li>
+  <li><a href="../model_KnowledgePanelElement/KnowledgePanelElement-class.html">KnowledgePanelElement</a></li>
+  <li><a href="../model_KnowledgePanelElement/KnowledgePanelImageElement-class.html">KnowledgePanelImageElement</a></li>
+  <li><a href="../model_KnowledgePanelElement/KnowledgePanelPanelGroupElement-class.html">KnowledgePanelPanelGroupElement</a></li>
+  <li><a href="../model_KnowledgePanelElement/KnowledgePanelPanelIdElement-class.html">KnowledgePanelPanelIdElement</a></li>
+  <li><a href="../model_KnowledgePanelElement/KnowledgePanelTableCell-class.html">KnowledgePanelTableCell</a></li>
+  <li><a href="../model_KnowledgePanelElement/KnowledgePanelTableColumn-class.html">KnowledgePanelTableColumn</a></li>
+  <li><a href="../model_KnowledgePanelElement/KnowledgePanelTableElement-class.html">KnowledgePanelTableElement</a></li>
+  <li><a href="../model_KnowledgePanelElement/KnowledgePanelTableRowElement-class.html">KnowledgePanelTableRowElement</a></li>
+  <li><a href="../model_KnowledgePanelElement/KnowledgePanelTextElement-class.html">KnowledgePanelTextElement</a></li>
 
 
 
 
 
 
-  <li class="section-title"><a href="../model_KnowledgePanel/model_KnowledgePanel-library.html#enums">Enums</a></li>
-  <li><a href="../model_KnowledgePanel/Evaluation-class.html">Evaluation</a></li>
-  <li><a href="../model_KnowledgePanel/Grade-class.html">Grade</a></li>
-  <li><a href="../model_KnowledgePanel/KnowledgePanelType-class.html">KnowledgePanelType</a></li>
-  <li><a href="../model_KnowledgePanel/Level-class.html">Level</a></li>
+  <li class="section-title"><a href="../model_KnowledgePanelElement/model_KnowledgePanelElement-library.html#enums">Enums</a></li>
+  <li><a href="../model_KnowledgePanelElement/KnowledgePanelColumnType-class.html">KnowledgePanelColumnType</a></li>
+  <li><a href="../model_KnowledgePanelElement/KnowledgePanelElementType-class.html">KnowledgePanelElementType</a></li>
+  <li><a href="../model_KnowledgePanelElement/KnowledgePanelTextElementType-class.html">KnowledgePanelTextElementType</a></li>
 
 
 </ol>
@@ -302,26 +263,23 @@
     <ol>
 
 
-    <li class="section-title"><a href="../model_KnowledgePanel/KnowledgePanelType-class.html#constants">Constants</a></li>
-    <li>CARD</li>
-    <li>DO_YOU_KNOW</li>
-    <li>ECOSCORE_LCA</li>
-    <li>SCORE</li>
-    <li>UNKNOWN</li>
+    <li class="section-title"><a href="../model_KnowledgePanelElement/KnowledgePanelColumnType-class.html#constants">Constants</a></li>
+    <li>PERCENT</li>
+    <li>TEXT</li>
     <li>values</li>
 
     <li class="section-title">
-      <a href="../model_KnowledgePanel/KnowledgePanelType-class.html#instance-properties">Properties</a>
+      <a href="../model_KnowledgePanelElement/KnowledgePanelColumnType-class.html#instance-properties">Properties</a>
     </li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/hashCode.html">hashCode</a></li>
     <li>index</li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
-    <li class="section-title"><a href="../model_KnowledgePanel/KnowledgePanelType-class.html#instance-methods">Methods</a></li>
+    <li class="section-title"><a href="../model_KnowledgePanelElement/KnowledgePanelColumnType-class.html#instance-methods">Methods</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-    <li><a href="../model_KnowledgePanel/KnowledgePanelType/toString.html">toString</a></li>
+    <li><a href="../model_KnowledgePanelElement/KnowledgePanelColumnType/toString.html">toString</a></li>
 
-    <li class="section-title inherited"><a href="../model_KnowledgePanel/KnowledgePanelType-class.html#operators">Operators</a></li>
+    <li class="section-title inherited"><a href="../model_KnowledgePanelElement/KnowledgePanelColumnType-class.html#operators">Operators</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
