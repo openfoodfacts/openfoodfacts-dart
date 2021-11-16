@@ -64,7 +64,7 @@ enum TitleElementType {
 class KnowledgePanel extends JsonObject {
   /// Title of the KnowledgePanel.
   @JsonKey(name: 'title_element')
-  final TitleElement titleElement;
+  final TitleElement? titleElement;
 
   /// Level of this KnowledgePanel. Client may choose to display the panel based
   /// on the level.
@@ -86,7 +86,7 @@ class KnowledgePanel extends JsonObject {
   final Evaluation? evaluation;
 
   const KnowledgePanel({
-    required this.titleElement,
+    this.titleElement,
     this.level,
     this.expanded,
     this.elements,

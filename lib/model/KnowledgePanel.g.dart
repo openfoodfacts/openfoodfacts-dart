@@ -8,8 +8,10 @@ part of 'KnowledgePanel.dart';
 
 KnowledgePanel _$KnowledgePanelFromJson(Map<String, dynamic> json) =>
     KnowledgePanel(
-      titleElement:
-          TitleElement.fromJson(json['title_element'] as Map<String, dynamic>),
+      titleElement: json['title_element'] == null
+          ? null
+          : TitleElement.fromJson(
+              json['title_element'] as Map<String, dynamic>),
       level: _$enumDecodeNullable(_$LevelEnumMap, json['level'],
           unknownValue: Level.UNKNOWN),
       expanded: json['expanded'] as bool?,
