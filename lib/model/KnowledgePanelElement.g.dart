@@ -12,7 +12,7 @@ KnowledgePanelTextElement _$KnowledgePanelTextElementFromJson(
       html: json['html'] as String,
       type: _$enumDecodeNullable(
           _$KnowledgePanelTextElementTypeEnumMap, json['text_type'],
-          unknownValue: KnowledgePanelTextElementType.UNKNOWN),
+          unknownValue: KnowledgePanelTextElementType.DEFAULT),
     );
 
 Map<String, dynamic> _$KnowledgePanelTextElementToJson(
@@ -64,7 +64,6 @@ const _$KnowledgePanelTextElementTypeEnumMap = {
   KnowledgePanelTextElementType.WARNING: 'warning',
   KnowledgePanelTextElementType.NOTES: 'notes',
   KnowledgePanelTextElementType.DEFAULT: 'notes',
-  KnowledgePanelTextElementType.UNKNOWN: 'UNKNOWN',
 };
 
 KnowledgePanelImageElement _$KnowledgePanelImageElementFromJson(
@@ -133,7 +132,7 @@ Map<String, dynamic> _$KnowledgePanelTableCellToJson(
 
 const _$EvaluationEnumMap = {
   Evaluation.GOOD: 'good',
-  Evaluation.NEUTRAL: 'neutral',
+  Evaluation.AVERAGE: 'average',
   Evaluation.BAD: 'bad',
   Evaluation.UNKNOWN: 'UNKNOWN',
 };
@@ -157,21 +156,27 @@ KnowledgePanelTableColumn _$KnowledgePanelTableColumnFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTableColumn(
       text: json['text'] as String,
-      type: json['type'] as String,
+      type: _$enumDecodeNullable(
+          _$KnowledgePanelColumnTypeEnumMap, json['type'],
+          unknownValue: KnowledgePanelColumnType.TEXT),
     );
 
 Map<String, dynamic> _$KnowledgePanelTableColumnToJson(
         KnowledgePanelTableColumn instance) =>
     <String, dynamic>{
       'text': instance.text,
-      'type': instance.type,
+      'type': _$KnowledgePanelColumnTypeEnumMap[instance.type],
     };
+
+const _$KnowledgePanelColumnTypeEnumMap = {
+  KnowledgePanelColumnType.TEXT: 'text',
+  KnowledgePanelColumnType.PERCENT: 'percent',
+};
 
 KnowledgePanelTableElement _$KnowledgePanelTableElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTableElement(
       id: json['id'] as String,
-      type: json['type'] as String,
       title: json['title'] as String,
       columns: (json['columns'] as List<dynamic>)
           .map((e) =>
@@ -187,7 +192,6 @@ Map<String, dynamic> _$KnowledgePanelTableElementToJson(
         KnowledgePanelTableElement instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'type': instance.type,
       'title': instance.title,
       'columns': instance.columns,
       'rows': instance.rows,
@@ -210,10 +214,10 @@ KnowledgePanelElement _$KnowledgePanelElementFromJson(
           ? null
           : KnowledgePanelPanelIdElement.fromJson(
               json['panel_element'] as Map<String, dynamic>),
-      panelGroupElement: json['panel_group'] == null
+      panelGroupElement: json['panel_group_element'] == null
           ? null
           : KnowledgePanelPanelGroupElement.fromJson(
-              json['panel_group'] as Map<String, dynamic>),
+              json['panel_group_element'] as Map<String, dynamic>),
       tableElement: json['table_element'] == null
           ? null
           : KnowledgePanelTableElement.fromJson(
@@ -227,7 +231,7 @@ Map<String, dynamic> _$KnowledgePanelElementToJson(
       'text_element': instance.textElement,
       'image_element': instance.imageElement,
       'panel_element': instance.panelElement,
-      'panel_group': instance.panelGroupElement,
+      'panel_group_element': instance.panelGroupElement,
       'table_element': instance.tableElement,
     };
 

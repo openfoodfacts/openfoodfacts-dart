@@ -6,21 +6,31 @@ part 'KnowledgePanelElement.g.dart';
 
 /// The type of Knowledge panel text description.
 enum KnowledgePanelTextElementType {
-  /// The description summarizes the knowledge panel.
-  @JsonValue('summary')
-  SUMMARY,
+/// The description summarizes the knowledge panel.
+@JsonValue('summary')
+SUMMARY,
 
-  @JsonValue('warning')
-  WARNING,
+@JsonValue('warning')
+WARNING,
 
-  /// Disclaimer notes that the client may or may not choose to display.
-  @JsonValue('notes')
-  NOTES,
+/// Disclaimer notes that the client may or may not choose to display.
+@JsonValue('notes')
+NOTES,
 
-  /// Default type of the text element, this is just a normal description.
-  @JsonValue('notes')
-  DEFAULT,
-  UNKNOWN,
+/// Default type of the text element, this is just a normal description.
+@JsonValue('notes')
+DEFAULT,
+}
+
+/// The type of Knowledge panel table column.
+enum KnowledgePanelColumnType {
+/// The column contains text elements.
+@JsonValue('text')
+TEXT,
+
+/// The column has percentages.
+@JsonValue('percent')
+PERCENT,
 }
 
 /// Description element of the Knowledge panel.
@@ -33,7 +43,7 @@ class KnowledgePanelTextElement extends JsonObject {
   /// depending upon the type.
   @JsonKey(
       name: 'text_type',
-      unknownEnumValue: KnowledgePanelTextElementType.UNKNOWN)
+      unknownEnumValue: KnowledgePanelTextElementType.DEFAULT)
   final KnowledgePanelTextElementType? type;
 
   const KnowledgePanelTextElement({required this.html, this.type});
@@ -158,7 +168,9 @@ class KnowledgePanelTableRowElement extends JsonObject {
 class KnowledgePanelTableColumn extends JsonObject {
   final String text;
 
-  final String type;
+  @JsonKey(
+      unknownEnumValue: KnowledgePanelColumnType.TEXT)
+  final KnowledgePanelColumnType? type;
 
   const KnowledgePanelTableColumn({required this.text, required this.type});
 
@@ -174,9 +186,6 @@ class KnowledgePanelTableColumn extends JsonObject {
 class KnowledgePanelTableElement extends JsonObject {
   final String id;
 
-  @JsonKey(name: 'type')
-  final String type;
-
   final String title;
 
   @JsonKey(name: 'columns')
@@ -186,7 +195,6 @@ class KnowledgePanelTableElement extends JsonObject {
 
   const KnowledgePanelTableElement({
     required this.id,
-    required this.type,
     required this.title,
     required this.columns,
     required this.rows,
@@ -241,7 +249,7 @@ class KnowledgePanelElement extends JsonObject {
   @JsonKey(name: 'panel_element')
   final KnowledgePanelPanelIdElement? panelElement;
 
-  @JsonKey(name: 'panel_group')
+  @JsonKey(name: 'panel_group_element')
   final KnowledgePanelPanelGroupElement? panelGroupElement;
 
   /// Id of a KnowledgePanel embedded inside [this] KnowledgePanel.
