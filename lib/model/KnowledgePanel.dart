@@ -5,26 +5,6 @@ import 'KnowledgePanelElement.dart';
 
 part 'KnowledgePanel.g.dart';
 
-/// Type of the KnowledgePanel.
-enum KnowledgePanelType {
-  /// Do you know types informative Knowledge Panels.
-  @JsonValue('doyouknow')
-  DO_YOU_KNOW,
-
-  /// Knowledge Panel with ecoscore information.
-  @JsonValue('score')
-  SCORE,
-
-  /// Knowledge Panel with ecoscore LCA.
-  @JsonValue('ecoscore_lca')
-  ECOSCORE_LCA,
-
-  /// Knowledge Panel which is rendered as a card on the UI.
-  @JsonValue('card')
-  CARD,
-  UNKNOWN,
-}
-
 /// Level of information conveyed by this KnowledgePanel.
 ///
 /// Client may choose to display the panel based on the level.
@@ -62,8 +42,18 @@ enum Evaluation {
   GOOD,
   @JsonValue('neutral')
   NEUTRAL,
+  @JsonValue('average')
+  AVERAGE,
   @JsonValue('bad')
   BAD,
+  UNKNOWN,
+}
+
+/// Type of title element.
+enum TitleElementType {
+  // Title Element depicts a grade like 'Ecoscore' or 'Nutriscore'.
+  @JsonValue('grade')
+  GRADE,
   UNKNOWN,
 }
 
@@ -74,18 +64,14 @@ enum Evaluation {
 // NOTE: This is WIP, do not use and expect changes.
 @JsonSerializable()
 class KnowledgePanel extends JsonObject {
-  /// Panel id of the parent panel.
-  @JsonKey(name: 'parent_panel_id')
-  final String parentPanelId;
-
   /// Title of the KnowledgePanel.
   @JsonKey(name: 'title_element')
-  final TitleElement titleElement;
+  final TitleElement? titleElement;
 
   /// Level of this KnowledgePanel. Client may choose to display the panel based
   /// on the level.
   @JsonKey(unknownEnumValue: Level.UNKNOWN)
-  final Level level;
+  final Level? level;
 
   final bool? expanded;
 
@@ -93,17 +79,8 @@ class KnowledgePanel extends JsonObject {
   /// rendered on the client.
   final List<KnowledgePanelElement>? elements;
 
-  final KnowledgePanelType? type;
-
   /// The topics discussed in this knowledge panel, example: 'Environment'.
   final List<String>? topics;
-
-  /// Grade of the panel, depicting the level of impact the product has for the
-  /// corresponding topics. Client can choose to color code the panel depending
-  /// on how good/bad the grade is.
-  /// Scale: 'A' -> 'E'
-  @JsonKey(unknownEnumValue: Grade.UNKNOWN)
-  final Grade? grade;
 
   /// Evaluation of the panel, depicting whether the content of the panel is
   /// good/bad/neutral for the topic to which the panel applies.
@@ -111,14 +88,11 @@ class KnowledgePanel extends JsonObject {
   final Evaluation? evaluation;
 
   const KnowledgePanel({
-    required this.parentPanelId,
-    required this.titleElement,
-    required this.level,
+    this.titleElement,
+    this.level,
     this.expanded,
     this.elements,
-    this.type,
     this.topics,
-    this.grade,
     this.evaluation,
   });
 
@@ -139,6 +113,17 @@ class TitleElement extends JsonObject {
   /// Subtitle of the panel. Example - 'High environmental impact'.
   final String? subtitle;
 
+  /// Grade of the panel, depicting the level of impact the product has for the
+  /// corresponding topics. Client can choose to color code the panel depending
+  /// on how good/bad the grade is.
+  /// Scale: 'A' -> 'E'
+  @JsonKey(unknownEnumValue: Grade.UNKNOWN)
+  final Grade? grade;
+
+  /// Type of the TitleElement.
+  @JsonKey(unknownEnumValue: TitleElementType.UNKNOWN)
+  final TitleElementType? type;
+
   /// URL of an icon representing the Panel.
   @JsonKey(name: 'icon_url')
   final String? iconUrl;
@@ -152,6 +137,8 @@ class TitleElement extends JsonObject {
   const TitleElement({
     required this.title,
     this.subtitle,
+    this.grade,
+    this.type,
     this.iconUrl,
     this.iconColorFromEvaluation,
   });
