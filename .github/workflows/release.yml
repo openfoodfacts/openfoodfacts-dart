@@ -1,0 +1,41 @@
+ name: Release to pub.dev
+ on:
+   push:
+     branches:
+       - master
+ jobs:
+   release:
+     runs-on: ubuntu-latest
+     if: github.repository_owner  == 'openfoodfacts'
+     steps:
+        
+        - name: Release-Please
+          id: release
+          uses: GoogleCloudPlatform/release-please-action@v2
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            release-type: simple
+
+        - name: Chekout code
+          if: ${{ steps.release.outputs.release_created }}
+          uses: actions/checkout@v2
+
+        - name: Setup Dart
+          if: ${{ steps.release.outputs.release_created }}
+          uses: dart-lang/setup-dart@v1.3
+
+        - name: Install dependencies
+          if: ${{ steps.release.outputs.release_created }}
+          run: dart pub get .
+
+        - name: Set version
+          if: ${{ steps.release.outputs.release_created }}
+          run: pub global activate cider && cider version "${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}"
+
+        - name: Release on pub.dev
+          if: ${{ steps.release.outputs.release_created }}
+          uses: k-paxian/dart-package-publisher@v1.3
+          with:
+            skipTests: true  # skipping in favor of not breaking the workflow
+            format: true
+            credentialJson: ${{ secrets.PUB_DEV_CREDENTIALS_JSON }}
