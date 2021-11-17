@@ -1,13 +1,23 @@
-## [1.3.8] - 22.10.2021
-- More updates to KnowledgePanel APIs
+
 ### [1.3.9](https://www.github.com/openfoodfacts/openfoodfacts-dart/compare/v1.3.8...v1.3.9) (2021-11-17)
 
+### Features
+
+* Add a taxonomy API for labels ([#277](https://github.com/openfoodfacts/openfoodfacts-dart/pull/277)) 
+* Add additives, countries, and languages taxonomy APIs ([#278](https://github.com/openfoodfacts/openfoodfacts-dart/pull/278)) 
+* Add queries to get the roots from the server ([#287](https://github.com/openfoodfacts/openfoodfacts-dart/pull/287)) 
+* Add support for the new "Image Refresh" API ([#289](https://github.com/openfoodfacts/openfoodfacts-dart/pull/289)) 
+* Add nutrient order and list ([#272](https://github.com/openfoodfacts/openfoodfacts-dart/pull/272)) 
+* Added eco-score and nutri-score categories (ProductImprovement) ([#191](https://github.com/openfoodfacts/openfoodfacts-dart/pull/191)) 
 
 ### Bug Fixes
 
-* Delete release.yml + added needed package to pubspec ([#280](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/280)) ([a0f5c7c](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/a0f5c7c4d96588f6acc8e2b4f1a5606edf7178b9))
 * Update to latest KnowledgePanel API changes  ([#294](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/294)) ([5163db5](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/5163db593f89631e922c3c2085809ef60b3a42d9))
+* Add additives, countries, and languages taxonomy APIs ([#274](https://github.com/openfoodfacts/openfoodfacts-dart/pull/274)) 
+* Allow to send deviceId to InsightAnnotations API and allow anonymous user ([#286](https://github.com/openfoodfacts/openfoodfacts-dart/pull/286))  
 
+## [1.3.8] - 22.10.2021
+- More updates to KnowledgePanel APIs
 ## [1.3.7] - 12.10.2021
 - Update KnowledgePanel API to comply to the latest Backend changes.
 ## [1.3.6] - 10.10.2021
