@@ -1,5 +1,13 @@
 ## [1.3.8] - 22.10.2021
 - More updates to KnowledgePanel APIs
+### [1.3.9](https://www.github.com/openfoodfacts/openfoodfacts-dart/compare/v1.3.8...v1.3.9) (2021-11-17)
+
+
+### Bug Fixes
+
+* Delete release.yml + added needed package to pubspec ([#280](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/280)) ([a0f5c7c](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/a0f5c7c4d96588f6acc8e2b4f1a5606edf7178b9))
+* Update to latest KnowledgePanel API changes  ([#294](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/294)) ([5163db5](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/5163db593f89631e922c3c2085809ef60b3a42d9))
+
 ## [1.3.7] - 12.10.2021
 - Update KnowledgePanel API to comply to the latest Backend changes.
 ## [1.3.6] - 10.10.2021
