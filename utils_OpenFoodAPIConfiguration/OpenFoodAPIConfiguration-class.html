@@ -144,8 +144,21 @@ or to point the url to a self hosted instance of the backend.</p>
 
       <dl class="properties">
         <dt id="globalCC" class="property">
-  <span class="name"><a href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration/globalCC.html">globalCC</a></span>
+  <span class="name"><a class="deprecated" href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration/globalCC.html">globalCC</a></span>
   <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd>
+  A global way to specify the country code for queries, can be overwritten
+for each individual request by specifying the country code in the
+individual request configurations 
+  <div class="features">@<a href="https://api.dart.dev/stable/2.14.4/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use field globalCountry instead&#39;), read / write</div>
+
+</dd>
+
+        <dt id="globalCountry" class="property">
+  <span class="name"><a href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration/globalCountry.html">globalCountry</a></span>
+  <span class="signature">&#8596; <a href="../utils_CountryHelper/OpenFoodFactsCountry-class.html">OpenFoodFactsCountry</a>?</span> 
 
 </dt>
 <dd>
@@ -252,6 +265,19 @@ individual request configurations
     <section class="summary offset-anchor" id="static-methods">
       <h2>Static Methods</h2>
       <dl class="callables">
+        <dt id="computeCountryCode" class="callable">
+  <span class="name"><a href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration/computeCountryCode.html">computeCountryCode</a></span><span class="signature">(<wbr><span class="parameter" id="computeCountryCode-param-country"><span class="type-annotation"><a href="../utils_CountryHelper/OpenFoodFactsCountry-class.html">OpenFoodFactsCountry</a>?</span> <span class="parameter-name">country</span>, </span><span class="parameter" id="computeCountryCode-param-cc"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">cc</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the most relevant country code 
+  
+
+</dd>
+
         <dt id="getQueryType" class="callable">
   <span class="name"><a href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration/getQueryType.html">getQueryType</a></span><span class="signature">(<wbr><span class="parameter" id="getQueryType-param-queryType"><span class="type-annotation"><a href="../utils_QueryType/QueryType-class.html">QueryType</a>?</span> <span class="parameter-name">queryType</span></span>)
     <span class="returntype parameter">&#8594; <a href="../utils_QueryType/QueryType-class.html">QueryType</a></span>
@@ -321,7 +347,8 @@ individual request configurations
 
 
     <li class="section-title"><a href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration-class.html#static-properties">Static properties</a></li>
-    <li><a href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration/globalCC.html">globalCC</a></li>
+    <li><a class="deprecated" href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration/globalCC.html">globalCC</a></li>
+    <li><a href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration/globalCountry.html">globalCountry</a></li>
     <li><a href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration/globalLanguages.html">globalLanguages</a></li>
     <li><a href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration/globalQueryType.html">globalQueryType</a></li>
     <li><a href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration/uriProdHost.html">uriProdHost</a></li>
@@ -332,6 +359,7 @@ individual request configurations
     <li><a href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration/userAgent.html">userAgent</a></li>
 
     <li class="section-title"><a href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration-class.html#static-methods">Static methods</a></li>
+    <li><a href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration/computeCountryCode.html">computeCountryCode</a></li>
     <li><a href="../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration/getQueryType.html">getQueryType</a></li>
 
 </ol>

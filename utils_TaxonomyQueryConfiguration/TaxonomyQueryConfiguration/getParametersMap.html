@@ -86,7 +86,10 @@
         () =&gt; languages.map&lt;String&gt;((language) =&gt; language.code).join(&#39;,&#39;));
   }
 
-  result.putIfAbsent(&#39;cc&#39;, () =&gt; cc ?? OpenFoodAPIConfiguration.globalCC!);
+  result.putIfAbsent(
+      &#39;cc&#39;,
+      &#47;&#47; ignore: deprecated_member_use_from_same_package
+      () =&gt; OpenFoodAPIConfiguration.computeCountryCode(country, cc)!);
 
   if (fields.isNotEmpty) {
     final Iterable&lt;String&gt; fieldsStrings = convertFieldsToStrings(fields);
@@ -130,7 +133,8 @@
       <a href="../../utils_TaxonomyQueryConfiguration/TaxonomyQueryConfiguration-class.html#instance-properties">Properties</a>
     </li>
     <li><a href="../../utils_TaxonomyQueryConfiguration/TaxonomyQueryConfiguration/additionalParameters.html">additionalParameters</a></li>
-    <li><a href="../../utils_TaxonomyQueryConfiguration/TaxonomyQueryConfiguration/cc.html">cc</a></li>
+    <li><a class="deprecated" href="../../utils_TaxonomyQueryConfiguration/TaxonomyQueryConfiguration/cc.html">cc</a></li>
+    <li><a href="../../utils_TaxonomyQueryConfiguration/TaxonomyQueryConfiguration/country.html">country</a></li>
     <li><a href="../../utils_TaxonomyQueryConfiguration/TaxonomyQueryConfiguration/fields.html">fields</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/hashCode.html">hashCode</a></li>
     <li><a href="../../utils_TaxonomyQueryConfiguration/TaxonomyQueryConfiguration/ignoredFields.html">ignoredFields</a></li>
