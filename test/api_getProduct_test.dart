@@ -900,7 +900,8 @@ void main() {
           notify: () => refreshCounter++,
         ),
       );
-      const String languageCode = 'en';
+      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH;
+      final String languageCode = language.code;
       final String importanceUrl =
           AvailablePreferenceImportances.getUrl(languageCode);
       final String attributeGroupUrl =
@@ -923,7 +924,7 @@ void main() {
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
         barcode,
-        lc: languageCode,
+        language: language,
         fields: [ProductField.NAME, ProductField.ATTRIBUTE_GROUPS],
       );
       final ProductResult result = await OpenFoodAPIClient.getProduct(

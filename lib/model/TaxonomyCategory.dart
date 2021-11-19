@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
 
@@ -334,7 +335,8 @@ class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<
   TaxonomyCategoryQueryConfiguration({
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages = const [],
-    String? cc,
+    @Deprecated('Use parameter country instead') String? cc,
+    OpenFoodFactsCountry? country,
     bool includeChildren = false,
     List<TaxonomyCategoryField> fields = const [],
     List<Parameter> additionalParameters = const [],
@@ -343,6 +345,7 @@ class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<
           tags,
           languages: languages,
           cc: cc,
+          country: country,
           includeChildren: includeChildren,
           fields: fields,
           additionalParameters: additionalParameters,
@@ -350,7 +353,8 @@ class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<
 
   TaxonomyCategoryQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages = const [],
-    String? cc,
+    @Deprecated('Use parameter country instead') String? cc,
+    OpenFoodFactsCountry? country,
     bool includeChildren = false,
     List<TaxonomyCategoryField> fields = const [],
     List<Parameter> additionalParameters = const [],
@@ -358,6 +362,7 @@ class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<
           TagType.CATEGORIES,
           languages: languages,
           cc: cc,
+          country: country,
           includeChildren: includeChildren,
           fields: fields,
           additionalParameters: additionalParameters,
