@@ -826,7 +826,8 @@ extension OpenFoodFactsCoutryExtension on OpenFoodFactsCountry {
     OpenFoodFactsCountry.FAROE_ISLANDS: 'fo',
     OpenFoodFactsCountry.FRANCE: 'fr',
     OpenFoodFactsCountry.GABON: 'ga',
-    OpenFoodFactsCountry.UNITED_KINGDOM: 'gb',
+    // in OFF this is not 'gb'
+    OpenFoodFactsCountry.UNITED_KINGDOM: 'uk',
     OpenFoodFactsCountry.GRENADA: 'gd',
     OpenFoodFactsCountry.GEORGIA: 'ge',
     OpenFoodFactsCountry.FRENCH_GUIANA: 'gf',

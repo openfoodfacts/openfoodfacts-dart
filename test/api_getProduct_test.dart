@@ -10,6 +10,7 @@ import 'package:openfoodfacts/personalized_search/matched_product.dart';
 import 'package:openfoodfacts/personalized_search/preference_importance.dart';
 import 'package:openfoodfacts/personalized_search/product_preferences_manager.dart';
 import 'package:openfoodfacts/personalized_search/product_preferences_selection.dart';
+import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/InvalidBarcodes.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
@@ -1589,5 +1590,61 @@ void main() {
         }
       }
     }
+  });
+
+  test('get product uri', () async {
+    const String barcode = _BARCODE_DANISH_BUTTER_COOKIES;
+    expect(
+      OpenFoodAPIClient.getProductUri(
+        barcode,
+        language: OpenFoodFactsLanguage.SPANISH,
+        country: OpenFoodFactsCountry.GERMANY,
+        replaceSubdomain: true,
+      ).host,
+      'de-es.openfoodfacts.net',
+    );
+    expect(
+      OpenFoodAPIClient.getProductUri(
+        barcode,
+        language: OpenFoodFactsLanguage.SPANISH,
+        country: OpenFoodFactsCountry.GERMANY,
+        replaceSubdomain: false,
+      ).host,
+      'world.openfoodfacts.net',
+    );
+
+    OpenFoodAPIConfiguration.globalCountry =
+        OpenFoodFactsCountry.UNITED_KINGDOM;
+    expect(
+      OpenFoodAPIClient.getProductUri(barcode, replaceSubdomain: true).host,
+      'uk.openfoodfacts.net',
+    );
+    expect(
+      OpenFoodAPIClient.getProductUri(
+        barcode,
+        language: OpenFoodFactsLanguage.SPANISH,
+        country: OpenFoodFactsCountry.GERMANY,
+        replaceSubdomain: true,
+      ).host,
+      'de-es.openfoodfacts.net',
+    );
+
+    OpenFoodAPIConfiguration.globalLanguages = [
+      OpenFoodFactsLanguage.BRETON,
+      OpenFoodFactsLanguage.FRENCH
+    ];
+    expect(
+      OpenFoodAPIClient.getProductUri(barcode, replaceSubdomain: true).host,
+      'uk-br.openfoodfacts.net',
+    );
+    expect(
+      OpenFoodAPIClient.getProductUri(
+        barcode,
+        language: OpenFoodFactsLanguage.SPANISH,
+        country: OpenFoodFactsCountry.GERMANY,
+        replaceSubdomain: true,
+      ).host,
+      'de-es.openfoodfacts.net',
+    );
   });
 }
