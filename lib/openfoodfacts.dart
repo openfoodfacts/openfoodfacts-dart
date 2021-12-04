@@ -17,6 +17,7 @@ import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
 import 'package:openfoodfacts/model/TaxonomyLabel.dart';
 import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
+import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
@@ -211,6 +212,31 @@ class OpenFoodAPIClient {
 
   static String _replaceQuotes(String str) {
     return str.replaceAll('&quot;', '\\"');
+  }
+
+  /// Returns the URI to the product page on a website
+  ///
+  /// If the target website supports different domains for country + language,
+  /// [replaceSubdomain] should be set to true.
+  static Uri getProductUri(
+    final String barcode, {
+    final OpenFoodFactsLanguage? language,
+    final OpenFoodFactsCountry? country,
+    final QueryType? queryType,
+    required final bool replaceSubdomain,
+  }) {
+    final Uri uri = UriHelper.getUri(
+      path: 'product/$barcode',
+      queryType: queryType,
+    );
+    if (!replaceSubdomain) {
+      return uri;
+    }
+    return UriHelper.replaceSubdomain(
+      uri,
+      language: language,
+      country: country,
+    );
   }
 
   /// Search the OpenFoodFacts product database with the given parameters.
