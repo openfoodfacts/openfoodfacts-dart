@@ -91,17 +91,22 @@ void main() {
           Duration(seconds: 90),
         ));
 
+    String _getRandomTimestamp({int random = 100000}) =>
+        DateTime.now().toString() +
+        ' (' +
+        Random().nextInt(random).toString() +
+        ')';
+
     test('dont overwrite language', () async {
-      String barcode = '4008391212596';
+      const String barcode = '4008391212596';
       // Assign random product names, to make sure we won't fail to update the
       // product and then read a previously written value
-      String frenchProductName = "Flocons d'epeautre au blé complet " +
-          Random().nextInt(100000).toString();
-      String germanProductName =
-          'Dinkelflakes' + Random().nextInt(100000).toString();
+      final String frenchProductName =
+          "Flocons d'epeautre au blé complet " + _getRandomTimestamp();
+      final String germanProductName = 'Dinkelflakes' + _getRandomTimestamp();
 
       // save french product name
-      Product frenchProduct = Product(
+      final Product frenchProduct = Product(
         barcode: barcode,
         productNameInLanguages: {
           OpenFoodFactsLanguage.FRENCH: frenchProductName
@@ -111,7 +116,7 @@ void main() {
         lang: OpenFoodFactsLanguage.FRENCH,
       );
 
-      Status frenchStatus = await OpenFoodAPIClient.saveProduct(
+      final Status frenchStatus = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         frenchProduct,
       );
@@ -119,7 +124,7 @@ void main() {
       expect(frenchStatus.statusVerbose, 'fields saved');
 
       // save german product name
-      Product germanProduct = Product(
+      final Product germanProduct = Product(
         barcode: barcode,
         productNameInLanguages: {
           OpenFoodFactsLanguage.GERMAN: germanProductName
@@ -129,7 +134,7 @@ void main() {
         lang: OpenFoodFactsLanguage.GERMAN,
       );
 
-      Status germanStatus = await OpenFoodAPIClient.saveProduct(
+      final Status germanStatus = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         germanProduct,
       );
@@ -137,7 +142,7 @@ void main() {
       expect(germanStatus.statusVerbose, 'fields saved');
 
       // get french fields for product
-      ProductQueryConfiguration frenchConfig = ProductQueryConfiguration(
+      final ProductQueryConfiguration frenchConfig = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.FRENCH,
           fields: [
@@ -145,14 +150,14 @@ void main() {
             ProductField.BRANDS,
             ProductField.QUANTITY
           ]);
-      var frenchResult = await OpenFoodAPIClient.getProduct(
+      final frenchResult = await OpenFoodAPIClient.getProduct(
         frenchConfig,
       );
       expect(frenchResult.product, isNotNull);
       expect(frenchResult.product!.productName, frenchProductName);
 
       // get german fields for product
-      ProductQueryConfiguration germanConfig = ProductQueryConfiguration(
+      final ProductQueryConfiguration germanConfig = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
           fields: [
@@ -160,7 +165,7 @@ void main() {
             ProductField.BRANDS,
             ProductField.QUANTITY
           ]);
-      var germanResult = await OpenFoodAPIClient.getProduct(
+      final germanResult = await OpenFoodAPIClient.getProduct(
         germanConfig,
       );
 
@@ -168,7 +173,7 @@ void main() {
       expect(germanResult.product!.productName, germanProductName);
 
       // get preferably French, then German fields for product
-      ProductQueryConfiguration frenchGermanConfig =
+      final ProductQueryConfiguration frenchGermanConfig =
           ProductQueryConfiguration(barcode, languages: [
         OpenFoodFactsLanguage.FRENCH,
         OpenFoodFactsLanguage.GERMAN,
@@ -177,13 +182,17 @@ void main() {
         ProductField.BRANDS,
         ProductField.QUANTITY
       ]);
-      var frenchGermanResult = await OpenFoodAPIClient.getProduct(
+      final frenchGermanResult = await OpenFoodAPIClient.getProduct(
         frenchGermanConfig,
       );
 
       expect(frenchGermanResult.product, isNotNull);
       expect(frenchGermanResult.product!.productName, frenchProductName);
-    });
+    },
+        timeout: Timeout(
+          // this guy is rather slow
+          Duration(seconds: 90),
+        ));
 
     test('add new product test 2', () async {
       Product product = Product(
