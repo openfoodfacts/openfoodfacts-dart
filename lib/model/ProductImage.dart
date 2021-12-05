@@ -61,15 +61,62 @@ extension ImageSizeExtension on ImageSize? {
       );
 }
 
+enum ImageAngle {
+  NOON,
+  THREE_O_CLOCK,
+  SIX_O_CLOCK,
+  NINE_O_CLOCK,
+}
+
+extension ImageAngleExtension on ImageAngle {
+  static const Map<ImageAngle, int> _DEGREES_CLOCKWISE = {
+    ImageAngle.NOON: 0,
+    ImageAngle.THREE_O_CLOCK: 90,
+    ImageAngle.SIX_O_CLOCK: 180,
+    ImageAngle.NINE_O_CLOCK: 270,
+  };
+
+  String get degreesClockwise => _DEGREES_CLOCKWISE[this]?.toString() ?? '0';
+
+  static ImageAngle? fromInt(final int? angle) {
+    for (MapEntry<ImageAngle, int> entry in _DEGREES_CLOCKWISE.entries) {
+      if (entry.value == angle) {
+        return entry.key;
+      }
+    }
+    return null;
+  }
+}
+
 /// The url to a specific product image.
 /// Categorized by content type, size and language
 class ProductImage {
-  ProductImage(
-      {required this.field, this.size, this.language, this.url, this.rev});
+  ProductImage({
+    required this.field,
+    this.size,
+    this.language,
+    this.url,
+    this.rev,
+    this.imgid,
+    this.angle,
+  });
 
   final ImageField field;
   final ImageSize? size;
   final OpenFoodFactsLanguage? language;
   String? url;
   int? rev;
+  String? imgid;
+  ImageAngle? angle;
+
+  @override
+  String toString() => 'ProductImage('
+      '${field.value}'
+      ',size=${size?.value}]'
+      ',language=${language?.code}'
+      ',angle=${angle?.degreesClockwise}'
+      ',url=$url'
+      ',imgid=$imgid'
+      ',rev=$rev'
+      ')';
 }

@@ -81,6 +81,14 @@ class JsonHelper {
         // get the rev object
         var rev = JsonObject.parseInt(fieldObject['rev']);
 
+        // get the imgid
+        final String imgid = fieldObject['imgid'].toString();
+
+        // get the angle
+        final ImageAngle? angle = ImageAngleExtension.fromInt(
+          JsonObject.parseInt(fieldObject['angle']),
+        );
+
         // get the sizes object
         var sizesObject = fieldObject['sizes'] as Map<String, dynamic>?;
         if (sizesObject == null) continue;
@@ -91,8 +99,14 @@ class JsonHelper {
           var numberObject = sizesObject[number] as Map<String, dynamic>?;
           if (numberObject == null) continue;
 
-          var image =
-              ProductImage(field: field, size: size, language: lang, rev: rev);
+          var image = ProductImage(
+            field: field,
+            size: size,
+            language: lang,
+            rev: rev,
+            imgid: imgid,
+            angle: angle,
+          );
           imageList.add(image);
         }
       }

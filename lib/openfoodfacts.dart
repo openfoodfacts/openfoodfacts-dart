@@ -9,6 +9,7 @@ import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/model/OrderedNutrients.dart';
+import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/model/TaxonomyAdditive.dart';
 import 'package:openfoodfacts/model/TaxonomyAllergen.dart';
 import 'package:openfoodfacts/model/TaxonomyCategory.dart';
@@ -906,5 +907,71 @@ class OpenFoodAPIClient {
     }
     final json = jsonDecode(response.body);
     return OrderedNutrients.fromJson(json);
+  }
+
+  /// Sets the angle of a product image
+  ///
+  /// Returns the filename of the "display" picture after the operation,
+  /// or null if KO.
+  /// The parameter is an angle, not a rotation.
+  /// No extra rotation if the picture angle is already set to the same value.
+  static Future<String?> setProductImageAngle({
+    required final String barcode,
+    required final ImageField imageField,
+    required final OpenFoodFactsLanguage language,
+    required final String imgid,
+    required final ImageAngle angle,
+    final QueryType? queryType,
+  }) async =>
+      await _callProductImageCrop(
+        barcode: barcode,
+        imageField: imageField,
+        language: language,
+        imgid: imgid,
+        extraParameters: <String, String>{
+          'angle': angle.degreesClockwise,
+        },
+      );
+
+  /// Calls `cgi/product_image_crop.pl` on a [ProductImage].
+  ///
+  /// Returns the filename of the "display" picture after the operation,
+  /// or null if KO.
+  static Future<String?> _callProductImageCrop({
+    required final String barcode,
+    required final ImageField imageField,
+    required final OpenFoodFactsLanguage language,
+    required final String imgid,
+    required final Map<String, String> extraParameters,
+    final QueryType? queryType,
+  }) async {
+    final String id = '${imageField.value}_${language.code}';
+    final Map<String, String> queryParameters = <String, String>{
+      'code': barcode,
+      'id': id,
+      'imgid': imgid,
+    };
+    queryParameters.addAll(extraParameters);
+    final Uri uri = UriHelper.getUri(
+      path: 'cgi/product_image_crop.pl',
+      queryType: queryType,
+      queryParameters: queryParameters,
+    );
+
+    final Response response = await HttpHelper()
+        .doGetRequest(uri, userAgent: OpenFoodAPIConfiguration.userAgent);
+    if (response.statusCode != 200) {
+      return null;
+    }
+    final Map<String, dynamic> json =
+        jsonDecode(response.body) as Map<String, dynamic>;
+    if (json['status'] != 'status ok') {
+      return null;
+    }
+    if (json['imagefield'] != id) {
+      return null;
+    }
+    final Map<String, dynamic> images = json['image'];
+    return images['display_url'];
   }
 }
