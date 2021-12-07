@@ -46,6 +46,33 @@ void main() {
         await UriReader.instance!.readAsBytes(Uri.parse(url)),
       );
 
+  /// Returns the imgid, i.e. the unique id for (uploaded image x product)
+  ///
+  /// That imgid has only sense for this [barcode], and references the image
+  /// currently used as a base for this [imageField] and this [language].
+  Future<String?> _getImgid(
+    final String barcode,
+    final ImageField imageField,
+    final OpenFoodFactsLanguage language,
+  ) async {
+    final ProductQueryConfiguration configurations = ProductQueryConfiguration(
+      barcode,
+      fields: <ProductField>[ProductField.IMAGES],
+    );
+    final ProductResult result =
+        await OpenFoodAPIClient.getProduct(configurations);
+    expect(result.status, isNotNull);
+    expect(result.product!.images, isNotEmpty);
+
+    for (final ProductImage productImage in result.product!.images!) {
+      if (productImage.field == imageField ||
+          productImage.language == language) {
+        return productImage.imgid;
+      }
+    }
+    return null;
+  }
+
   group('$OpenFoodAPIClient add product images', () {
     // TODO(monsieurtanuki): test with big pic may crash (e.g. 4000x3000, 2.5Mb)
     test('add front image test', () async {
@@ -94,68 +121,79 @@ void main() {
   });
 
   group('$OpenFoodAPIClient modify product image', () {
-    String _getNewUrl(
-      final String originUrl,
-      final String newFilename,
-    ) =>
-        originUrl.substring(0, originUrl.lastIndexOf('/')) + '/' + newFilename;
-
     test('image angle', () async {
       const Set<ImageAngle> tiltedAngles = <ImageAngle>{
         ImageAngle.NINE_O_CLOCK,
         ImageAngle.THREE_O_CLOCK,
       };
-      final ProductQueryConfiguration configurations =
-          ProductQueryConfiguration(barcode);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
-        configurations,
-        user: TestConstants.TEST_USER,
-      );
-      expect(result.status, isNotNull);
-      expect(result.product!.images, isNotEmpty);
 
-      for (final ProductImage productImage in result.product!.images!) {
-        // restrict to the only case we care about
-        if (productImage.field != imageField ||
-            productImage.language != language ||
-            productImage.size != ImageSize.ORIGINAL) {
-          continue;
-        }
-        final String originUrl = productImage.url!;
-        final ImageAngle originAngle = productImage.angle ?? ImageAngle.NOON;
-        final List<int> originSize = await _getJpegUrlSize(originUrl);
-        final int originWidth = originSize[0];
-        final int originHeight = originSize[1];
-        for (final ImageAngle angle in ImageAngle.values) {
-          final String? result = await OpenFoodAPIClient.setProductImageAngle(
-            barcode: barcode,
-            imageField: imageField,
-            language: language,
-            imgid: productImage.imgid!,
-            angle: angle,
-          );
-          expect(result, isNotNull);
-          final String newUrl = _getNewUrl(originUrl, result!);
-          final List<int> newSize = await _getJpegUrlSize(newUrl);
-          final int newWidth = newSize[0];
-          final int newHeight = newSize[1];
-          late bool differentTilt;
-          if (tiltedAngles.contains(angle)) {
-            differentTilt = !tiltedAngles.contains(originAngle);
-          } else {
-            differentTilt = tiltedAngles.contains(originAngle);
-          }
-          late int check1;
-          late int check2;
-          if (differentTilt) {
-            check1 = newWidth * originWidth;
-            check2 = newHeight * originHeight;
-          } else {
-            check1 = newWidth * originHeight;
-            check2 = newHeight * originWidth;
-          }
-          expect(check1, check2);
-        }
+      final String? imgid = await _getImgid(barcode, imageField, language);
+      expect(imgid, isNotNull);
+
+      final String productImageRootUrl =
+          ImageHelper.getProductImageRootUrl(barcode);
+      final String uploadedImageUrl = '$productImageRootUrl/$imgid.jpg';
+      final List<int> uploadedSize = await _getJpegUrlSize(uploadedImageUrl);
+      final int uploadedWidth = uploadedSize[0];
+      final int uploadedHeight = uploadedSize[1];
+
+      for (final ImageAngle angle in ImageAngle.values) {
+        final String? newUrl = await OpenFoodAPIClient.setProductImageAngle(
+          barcode: barcode,
+          imageField: imageField,
+          language: language,
+          imgid: imgid!,
+          angle: angle,
+        );
+        expect(newUrl, isNotNull);
+
+        final List<int> newSize = await _getJpegUrlSize(newUrl!);
+        final int newWidth = newSize[0];
+        final int newHeight = newSize[1];
+
+        final bool tilted = tiltedAngles.contains(angle);
+        final int fullExpectedWidth = tilted ? uploadedHeight : uploadedWidth;
+        final int fullExpectedHeight = tilted ? uploadedWidth : uploadedHeight;
+
+        // checking the aspect ratio, using multiplication instead of division
+        final int check1 = newWidth * fullExpectedHeight;
+        final int check2 = newHeight * fullExpectedWidth;
+        expect(check1, check2);
+      }
+    },
+        timeout: Timeout(
+          // this guy is rather slow
+          Duration(seconds: 90),
+        ));
+
+    test('image crop', () async {
+      const int width = 50;
+      const int height = 300;
+      const int x1 = 10;
+      const int y1 = 20;
+
+      final String? imgid = await _getImgid(barcode, imageField, language);
+      expect(imgid, isNotNull);
+
+      for (final ImageAngle angle in ImageAngle.values) {
+        final String? newUrl = await OpenFoodAPIClient.setProductImageCrop(
+          barcode: barcode,
+          imageField: imageField,
+          language: language,
+          imgid: imgid!,
+          angle: angle,
+          x1: x1,
+          y1: y1,
+          x2: x1 + width,
+          y2: y1 + height,
+        );
+        expect(newUrl, isNotNull);
+
+        final List<int> newSize = await _getJpegUrlSize(newUrl!);
+        final int newWidth = newSize[0];
+        final int newHeight = newSize[1];
+        expect(newWidth, width);
+        expect(newHeight, height);
       }
     },
         timeout: Timeout(

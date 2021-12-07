@@ -99,24 +99,58 @@ class ProductImage {
     this.rev,
     this.imgid,
     this.angle,
+    this.coordinatesImageSize,
+    this.x1,
+    this.y1,
+    this.x2,
+    this.y2,
   });
 
   final ImageField field;
   final ImageSize? size;
   final OpenFoodFactsLanguage? language;
   String? url;
+
+  /// Revision number
   int? rev;
+
+  /// Uploaded image id (probably an `int`)
   String? imgid;
+
+  /// Image angle, compared to the uploaded image
   ImageAngle? angle;
 
+  /// On what size are the coordinates ([x1], ...)computed? 'full' or '400'
+  String? coordinatesImageSize;
+
+  /// Crop coordinate x1, compared to the uploaded image
+  int? x1;
+
+  /// Crop coordinate y1, compared to the uploaded image
+  int? y1;
+
+  /// Crop coordinate x2, compared to the uploaded image
+  int? x2;
+
+  /// Crop coordinate y2, compared to the uploaded image
+  int? y2;
+
   @override
-  String toString() => 'ProductImage('
-      '${field.value}'
-      ',size=${size?.value}]'
-      ',language=${language?.code}'
-      ',angle=${angle?.degreesClockwise}'
-      ',url=$url'
-      ',imgid=$imgid'
-      ',rev=$rev'
+  String toString() =>
+      'ProductImage('
+          '${field.value}' +
+      (size == null ? '' : ',size=${size.value}]') +
+      (language == null ? '' : ',language=${language.code}') +
+      (angle == null ? '' : ',angle=${angle!.degreesClockwise}') +
+      (url == null ? '' : ',url=$url') +
+      (imgid == null ? '' : ',imgid=$imgid') +
+      (rev == null ? '' : ',rev=$rev') +
+      (coordinatesImageSize == null
+          ? ''
+          : ',coordinatesImageSize=$coordinatesImageSize') +
+      (x1 == null ? '' : ',x1=$x1') +
+      (y1 == null ? '' : ',y1=$y1') +
+      (x2 == null ? '' : ',x2=$x2') +
+      (y2 == null ? '' : ',y2=$y2') +
       ')';
 }
