@@ -9,6 +9,7 @@ import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/model/OrderedNutrients.dart';
+import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/model/TaxonomyAdditive.dart';
 import 'package:openfoodfacts/model/TaxonomyAllergen.dart';
 import 'package:openfoodfacts/model/TaxonomyCategory.dart';
@@ -18,6 +19,7 @@ import 'package:openfoodfacts/model/TaxonomyLabel.dart';
 import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
+import 'package:openfoodfacts/utils/ImageHelper.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
@@ -906,5 +908,120 @@ class OpenFoodAPIClient {
     }
     final json = jsonDecode(response.body);
     return OrderedNutrients.fromJson(json);
+  }
+
+  /// Rotates a product image from an already uploaded image.
+  ///
+  /// "I want, for this [barcode], this [imageField] and this [language],
+  /// the image to be computed from the already uploaded image
+  /// referenced by [imgid], with a rotation of [angle].
+  ///
+  /// Returns the URL to the "display" picture after the operation.
+  /// Returns null if KO, but would probably throw an exception instead.
+  static Future<String?> setProductImageAngle({
+    required final String barcode,
+    required final ImageField imageField,
+    required final OpenFoodFactsLanguage language,
+    required final String imgid,
+    required final ImageAngle angle,
+    final QueryType? queryType,
+  }) async =>
+      await _callProductImageCrop(
+        barcode: barcode,
+        imageField: imageField,
+        language: language,
+        imgid: imgid,
+        extraParameters: <String, String>{
+          'angle': angle.degreesClockwise,
+        },
+      );
+
+  /// Crops a product image from an already uploaded image.
+  ///
+  /// "I want, for this [barcode], this [imageField] and this [language],
+  /// the image to be computed from the already uploaded image
+  /// referenced by [imgid], with a possible rotation of [angle] and then
+  /// a cropping on rectangle ([x1],[y1],[x2],[y2]), those coordinates
+  /// being taken from the uploaded image size.
+  ///
+  /// Returns the URL to the "display" picture after the operation.
+  /// Returns null if KO, but would probably throw an exception instead.
+  static Future<String?> setProductImageCrop({
+    required final String barcode,
+    required final ImageField imageField,
+    required final OpenFoodFactsLanguage language,
+    required final String imgid,
+    required final int x1,
+    required final int y1,
+    required final int x2,
+    required final int y2,
+    final ImageAngle angle = ImageAngle.NOON,
+    final QueryType? queryType,
+  }) async =>
+      await _callProductImageCrop(
+        barcode: barcode,
+        imageField: imageField,
+        language: language,
+        imgid: imgid,
+        extraParameters: <String, String>{
+          'x1': x1.toString(),
+          'y1': y1.toString(),
+          'x2': x2.toString(),
+          'y2': y2.toString(),
+          'angle': angle.degreesClockwise,
+          'coordinates_image_size': 'full',
+        },
+      );
+
+  /// Calls `cgi/product_image_crop.pl` on a [ProductImage].
+  ///
+  /// Returns the URL to the "display" picture after the operation.
+  /// Returns null if KO, but would probably throw an exception instead.
+  static Future<String?> _callProductImageCrop({
+    required final String barcode,
+    required final ImageField imageField,
+    required final OpenFoodFactsLanguage language,
+    required final String imgid,
+    required final Map<String, String> extraParameters,
+    final QueryType? queryType,
+  }) async {
+    final String id = '${imageField.value}_${language.code}';
+    final Map<String, String> queryParameters = <String, String>{
+      'code': barcode,
+      'id': id,
+      'imgid': imgid,
+    };
+    queryParameters.addAll(extraParameters);
+    final Uri uri = UriHelper.getUri(
+      path: 'cgi/product_image_crop.pl',
+      queryType: queryType,
+      queryParameters: queryParameters,
+    );
+
+    final Response response = await HttpHelper()
+        .doGetRequest(uri, userAgent: OpenFoodAPIConfiguration.userAgent);
+    if (response.statusCode != 200) {
+      throw Exception(
+          'Bad response (${response.statusCode}): ${response.body}');
+    }
+    final Map<String, dynamic> json =
+        jsonDecode(response.body) as Map<String, dynamic>;
+    final String status = json['status'];
+    if (status != 'status ok') {
+      throw Exception('Status not ok ($status)');
+    }
+    final String imagefield = json['imagefield'];
+    if (imagefield != id) {
+      throw Exception(
+          'Different imagefield: expected "$id", actual "$imageField"');
+    }
+    final Map<String, dynamic> images = json['image'];
+    final String? filename = images['display_url'];
+    if (filename == null) {
+      return null;
+    }
+    return ImageHelper.getProductImageRootUrl(barcode, queryType: queryType) +
+        '/' +
+        filename;
   }
 }
