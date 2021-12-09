@@ -62,7 +62,7 @@ Categorized by content type, size and language</p>
 
       <dl class="constructor-summary-list">
         <dt id="ProductImage" class="callable">
-          <span class="name"><a href="../model_ProductImage/ProductImage/ProductImage.html">ProductImage</a></span><span class="signature">(<span class="parameter" id="-param-field">{<span>required</span> <span class="type-annotation"><a href="../model_ProductImage/ImageField-class.html">ImageField</a></span> <span class="parameter-name">field</span>, </span><span class="parameter" id="-param-size"><span class="type-annotation"><a href="../model_ProductImage/ImageSize-class.html">ImageSize</a>?</span> <span class="parameter-name">size</span>, </span><span class="parameter" id="-param-language"><span class="type-annotation"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a>?</span> <span class="parameter-name">language</span>, </span><span class="parameter" id="-param-url"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">url</span>, </span><span class="parameter" id="-param-rev"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">rev</span>}</span>)</span>
+          <span class="name"><a href="../model_ProductImage/ProductImage/ProductImage.html">ProductImage</a></span><span class="signature">(<span class="parameter" id="-param-field">{<span>required</span> <span class="type-annotation"><a href="../model_ProductImage/ImageField.html">ImageField</a></span> <span class="parameter-name">field</span>, </span><span class="parameter" id="-param-size"><span class="type-annotation"><a href="../model_ProductImage/ImageSize.html">ImageSize</a>?</span> <span class="parameter-name">size</span>, </span><span class="parameter" id="-param-language"><span class="type-annotation"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a>?</span> <span class="parameter-name">language</span>, </span><span class="parameter" id="-param-url"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">url</span>, </span><span class="parameter" id="-param-rev"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">rev</span>, </span><span class="parameter" id="-param-imgid"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">imgid</span>, </span><span class="parameter" id="-param-angle"><span class="type-annotation"><a href="../model_ProductImage/ImageAngle.html">ImageAngle</a>?</span> <span class="parameter-name">angle</span>, </span><span class="parameter" id="-param-coordinatesImageSize"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">coordinatesImageSize</span>, </span><span class="parameter" id="-param-x1"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">x1</span>, </span><span class="parameter" id="-param-y1"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">y1</span>, </span><span class="parameter" id="-param-x2"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">x2</span>, </span><span class="parameter" id="-param-y2"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">y2</span>}</span>)</span>
         </dt>
         <dd>
            
@@ -74,9 +74,31 @@ Categorized by content type, size and language</p>
       <h2>Properties</h2>
 
       <dl class="properties">
+        <dt id="angle" class="property">
+  <span class="name"><a href="../model_ProductImage/ProductImage/angle.html">angle</a></span>
+  <span class="signature">&#8596; <a href="../model_ProductImage/ImageAngle.html">ImageAngle</a>?</span> 
+
+</dt>
+<dd>
+  Image angle, compared to the uploaded image 
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="coordinatesImageSize" class="property">
+  <span class="name"><a href="../model_ProductImage/ProductImage/coordinatesImageSize.html">coordinatesImageSize</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.15.0/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd>
+  On what size are the coordinates (<a href="../model_ProductImage/ProductImage/x1.html">x1</a>, ...)computed? 'full' or '400' 
+  <div class="features">read / write</div>
+
+</dd>
+
         <dt id="field" class="property">
   <span class="name"><a href="../model_ProductImage/ProductImage/field.html">field</a></span>
-  <span class="signature">&#8594; <a href="../model_ProductImage/ImageField-class.html">ImageField</a></span> 
+  <span class="signature">&#8594; <a href="../model_ProductImage/ImageField.html">ImageField</a></span> 
 
 </dt>
 <dd>
@@ -86,19 +108,30 @@ Categorized by content type, size and language</p>
 </dd>
 
         <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.15.0/dart-core/int-class.html">int</a></span> 
 
 </dt>
 <dd class="inherited">
-  The hash code for this object. <a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/hashCode.html">[...]</a>
+  The hash code for this object. <a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/hashCode.html">[...]</a>
   <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="imgid" class="property">
+  <span class="name"><a href="../model_ProductImage/ProductImage/imgid.html">imgid</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.15.0/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd>
+  Uploaded image id (probably an <code>int</code>) 
+  <div class="features">read / write</div>
 
 </dd>
 
         <dt id="language" class="property">
   <span class="name"><a href="../model_ProductImage/ProductImage/language.html">language</a></span>
-  <span class="signature">&#8594; <a href="../utils_LanguageHelper/OpenFoodFactsLanguage-class.html">OpenFoodFactsLanguage</a>?</span> 
+  <span class="signature">&#8594; <a href="../utils_LanguageHelper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a>?</span> 
 
 </dt>
 <dd>
@@ -109,18 +142,18 @@ Categorized by content type, size and language</p>
 
         <dt id="rev" class="property">
   <span class="name"><a href="../model_ProductImage/ProductImage/rev.html">rev</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/int-class.html">int</a>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.15.0/dart-core/int-class.html">int</a>?</span> 
 
 </dt>
 <dd>
-   
+  Revision number 
   <div class="features">read / write</div>
 
 </dd>
 
         <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/Type-class.html">Type</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.15.0/dart-core/Type-class.html">Type</a></span> 
 
 </dt>
 <dd class="inherited">
@@ -131,7 +164,7 @@ Categorized by content type, size and language</p>
 
         <dt id="size" class="property">
   <span class="name"><a href="../model_ProductImage/ProductImage/size.html">size</a></span>
-  <span class="signature">&#8594; <a href="../model_ProductImage/ImageSize-class.html">ImageSize</a>?</span> 
+  <span class="signature">&#8594; <a href="../model_ProductImage/ImageSize.html">ImageSize</a>?</span> 
 
 </dt>
 <dd>
@@ -142,7 +175,7 @@ Categorized by content type, size and language</p>
 
         <dt id="url" class="property">
   <span class="name"><a href="../model_ProductImage/ProductImage/url.html">url</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.15.0/dart-core/String-class.html">String</a>?</span> 
 
 </dt>
 <dd>
@@ -151,35 +184,79 @@ Categorized by content type, size and language</p>
 
 </dd>
 
+        <dt id="x1" class="property">
+  <span class="name"><a href="../model_ProductImage/ProductImage/x1.html">x1</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.15.0/dart-core/int-class.html">int</a>?</span> 
+
+</dt>
+<dd>
+  Crop coordinate x1, compared to the uploaded image 
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="x2" class="property">
+  <span class="name"><a href="../model_ProductImage/ProductImage/x2.html">x2</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.15.0/dart-core/int-class.html">int</a>?</span> 
+
+</dt>
+<dd>
+  Crop coordinate x2, compared to the uploaded image 
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="y1" class="property">
+  <span class="name"><a href="../model_ProductImage/ProductImage/y1.html">y1</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.15.0/dart-core/int-class.html">int</a>?</span> 
+
+</dt>
+<dd>
+  Crop coordinate y1, compared to the uploaded image 
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="y2" class="property">
+  <span class="name"><a href="../model_ProductImage/ProductImage/y2.html">y2</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.15.0/dart-core/int-class.html">int</a>?</span> 
+
+</dt>
+<dd>
+  Crop coordinate y2, compared to the uploaded image 
+  <div class="features">read / write</div>
+
+</dd>
+
       </dl>
     </section>
 
-    <section class="summary offset-anchor inherited" id="instance-methods">
+    <section class="summary offset-anchor" id="instance-methods">
       <h2>Methods</h2>
       <dl class="callables">
         <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+  <span class="name"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
 
 </dt>
 <dd class="inherited">
-  Invoked when a non-existent method or property is accessed. <a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/noSuchMethod.html">[...]</a>
+  Invoked when a non-existent method or property is accessed. <a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/noSuchMethod.html">[...]</a>
   <div class="features">inherited</div>
 
 </dd>
 
-        <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/String-class.html">String</a></span>
+        <dt id="toString" class="callable">
+  <span class="name"><a href="../model_ProductImage/ProductImage/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.0/dart-core/String-class.html">String</a></span>
   </span>
   
 
 </dt>
-<dd class="inherited">
-  A string representation of this object. <a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/toString.html">[...]</a>
-  <div class="features">inherited</div>
+<dd>
+  A string representation of this object. <a href="../model_ProductImage/ProductImage/toString.html">[...]</a>
+  <div class="features">override</div>
 
 </dd>
 
@@ -190,14 +267,14 @@ Categorized by content type, size and language</p>
       <h2>Operators</h2>
       <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.4/dart-core/bool-class.html">bool</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.0/dart-core/bool-class.html">bool</a></span>
   </span>
   
 
 </dt>
 <dd class="inherited">
-  The equality operator. <a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/operator_equals.html">[...]</a>
+  The equality operator. <a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/operator_equals.html">[...]</a>
   <div class="features">inherited</div>
 
 </dd>
@@ -230,6 +307,7 @@ Categorized by content type, size and language</p>
   <li><a href="../model_ProductImage/ProductImage-class.html">ProductImage</a></li>
 
   <li class="section-title"><a href="../model_ProductImage/model_ProductImage-library.html#extensions">Extensions</a></li>
+  <li><a href="../model_ProductImage/ImageAngleExtension.html">ImageAngleExtension</a></li>
   <li><a href="../model_ProductImage/ImageFieldExtension.html">ImageFieldExtension</a></li>
   <li><a href="../model_ProductImage/ImageSizeExtension.html">ImageSizeExtension</a></li>
 
@@ -238,8 +316,9 @@ Categorized by content type, size and language</p>
 
 
   <li class="section-title"><a href="../model_ProductImage/model_ProductImage-library.html#enums">Enums</a></li>
-  <li><a href="../model_ProductImage/ImageField-class.html">ImageField</a></li>
-  <li><a href="../model_ProductImage/ImageSize-class.html">ImageSize</a></li>
+  <li><a href="../model_ProductImage/ImageAngle.html">ImageAngle</a></li>
+  <li><a href="../model_ProductImage/ImageField.html">ImageField</a></li>
+  <li><a href="../model_ProductImage/ImageSize.html">ImageSize</a></li>
 
 
 </ol>
@@ -256,20 +335,27 @@ Categorized by content type, size and language</p>
     <li class="section-title">
       <a href="../model_ProductImage/ProductImage-class.html#instance-properties">Properties</a>
     </li>
+    <li><a href="../model_ProductImage/ProductImage/angle.html">angle</a></li>
+    <li><a href="../model_ProductImage/ProductImage/coordinatesImageSize.html">coordinatesImageSize</a></li>
     <li><a href="../model_ProductImage/ProductImage/field.html">field</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li><a href="../model_ProductImage/ProductImage/imgid.html">imgid</a></li>
     <li><a href="../model_ProductImage/ProductImage/language.html">language</a></li>
     <li><a href="../model_ProductImage/ProductImage/rev.html">rev</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/runtimeType.html">runtimeType</a></li>
     <li><a href="../model_ProductImage/ProductImage/size.html">size</a></li>
     <li><a href="../model_ProductImage/ProductImage/url.html">url</a></li>
+    <li><a href="../model_ProductImage/ProductImage/x1.html">x1</a></li>
+    <li><a href="../model_ProductImage/ProductImage/x2.html">x2</a></li>
+    <li><a href="../model_ProductImage/ProductImage/y1.html">y1</a></li>
+    <li><a href="../model_ProductImage/ProductImage/y2.html">y2</a></li>
 
-    <li class="section-title inherited"><a href="../model_ProductImage/ProductImage-class.html#instance-methods">Methods</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/toString.html">toString</a></li>
+    <li class="section-title"><a href="../model_ProductImage/ProductImage-class.html#instance-methods">Methods</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li><a href="../model_ProductImage/ProductImage/toString.html">toString</a></li>
 
     <li class="section-title inherited"><a href="../model_ProductImage/ProductImage-class.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.4/dart-core/Object/operator_equals.html">operator ==</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 
