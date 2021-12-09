@@ -61,10 +61,18 @@ extension ImageSizeExtension on ImageSize? {
       );
 }
 
+/// Angle for image rotation.
 enum ImageAngle {
+  /// Noon = no rotation
   NOON,
+
+  /// 3 o'clock
   THREE_O_CLOCK,
+
+  /// 6 o'clock
   SIX_O_CLOCK,
+
+  /// 9 o'clock
   NINE_O_CLOCK,
 }
 
@@ -78,9 +86,10 @@ extension ImageAngleExtension on ImageAngle {
 
   String get degreesClockwise => _DEGREES_CLOCKWISE[this]?.toString() ?? '0';
 
-  static ImageAngle? fromInt(final int? angle) {
-    for (MapEntry<ImageAngle, int> entry in _DEGREES_CLOCKWISE.entries) {
-      if (entry.value == angle) {
+  /// Returns the corresponding [ImageAngle], or null if not found.
+  static ImageAngle? fromInt(final int? clockwiseDegree) {
+    for (final MapEntry<ImageAngle, int> entry in _DEGREES_CLOCKWISE.entries) {
+      if (entry.value == clockwiseDegree) {
         return entry.key;
       }
     }
