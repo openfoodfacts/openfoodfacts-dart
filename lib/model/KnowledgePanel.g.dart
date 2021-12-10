@@ -83,7 +83,7 @@ const _$LevelEnumMap = {
 
 const _$EvaluationEnumMap = {
   Evaluation.GOOD: 'good',
-  Evaluation.NEUTRAL: 'average',
+  Evaluation.NEUTRAL: 'neutral',
   Evaluation.AVERAGE: 'average',
   Evaluation.BAD: 'bad',
   Evaluation.UNKNOWN: 'UNKNOWN',
@@ -112,11 +112,11 @@ Map<String, dynamic> _$TitleElementToJson(TitleElement instance) =>
     };
 
 const _$GradeEnumMap = {
-  Grade.A: 'A',
-  Grade.B: 'B',
-  Grade.C: 'C',
-  Grade.D: 'D',
-  Grade.E: 'E',
+  Grade.A: 'a',
+  Grade.B: 'b',
+  Grade.C: 'c',
+  Grade.D: 'd',
+  Grade.E: 'e',
   Grade.UNKNOWN: 'UNKNOWN',
 };
 

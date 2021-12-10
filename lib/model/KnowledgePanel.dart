@@ -27,10 +27,15 @@ enum Level {
 ///
 /// Client can choose to color code the panel depending on how good/bad the grade is.
 enum Grade {
+  @JsonValue('a')
   A,
+  @JsonValue('b')
   B,
+  @JsonValue('c')
   C,
+  @JsonValue('d')
   D,
+  @JsonValue('e')
   E,
   UNKNOWN,
 }
