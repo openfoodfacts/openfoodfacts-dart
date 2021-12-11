@@ -39,4 +39,4 @@
             EOF
 
         - name: Publish package
-          run: flutter pub publish --force
+          run: dart pub publish --force
