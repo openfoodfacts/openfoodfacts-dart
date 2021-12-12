@@ -1006,17 +1006,13 @@ extension OpenFoodFactsCoutryExtension on OpenFoodFactsCountry {
 
   bool containsCountryCode(String countryCode) =>
       _ISO_2_CODES.containsValue(countryCode);
+}
 
-  OpenFoodFactsCountry? fromCountryCode(String countryCode) {
-    OpenFoodFactsCountry? country;
-
-    _ISO_2_CODES.forEach((key, value) {
-      if (value == countryCode) {
-        country = key;
-        // Stopping the loop, there can only be one match
-        return;
-      }
-    });
-    return country;
-  }
+/// Helper class around [OpenFoodFactsCountry]
+class CountryHelper {
+  /// Converts an ISO 2 code into an [OpenFoodFactsCountry]
+  static OpenFoodFactsCountry? fromJson(String? code) =>
+      OpenFoodFactsCountry.values.firstWhere(
+        (final OpenFoodFactsCountry country) => country.iso2Code == code,
+      );
 }
