@@ -1013,6 +1013,7 @@ extension OpenFoodFactsCoutryExtension on OpenFoodFactsCountry {
     _ISO_2_CODES.forEach((key, value) {
       if (value == countryCode) {
         country = key;
+        // Stopping the loop, there can only be one match
         return;
       }
     });
