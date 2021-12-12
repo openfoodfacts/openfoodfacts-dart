@@ -1,7 +1,7 @@
 library openfoodfacts;
 
-import 'dart:convert';
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart';
@@ -31,15 +31,14 @@ import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/UriHelper.dart';
 
 import 'model/Insight.dart';
-import 'model/RobotoffQuestion.dart';
-import 'model/SendImage.dart';
 import 'model/Product.dart';
 import 'model/ProductResult.dart';
+import 'model/RobotoffQuestion.dart';
 import 'model/SearchResult.dart';
+import 'model/SendImage.dart';
 import 'model/SpellingCorrections.dart';
 import 'model/Status.dart';
 import 'model/User.dart';
-
 import 'utils/HttpHelper.dart';
 import 'utils/LanguageHelper.dart';
 import 'utils/ProductHelper.dart';
@@ -50,7 +49,6 @@ export 'interface/Parameter.dart';
 export 'model/Additives.dart';
 export 'model/Ingredient.dart';
 export 'model/Insight.dart';
-export 'model/TaxonomyCategory.dart';
 export 'model/Product.dart';
 export 'model/ProductImage.dart';
 export 'model/ProductResult.dart';
@@ -60,13 +58,13 @@ export 'model/SendImage.dart';
 export 'model/SpellingCorrections.dart';
 export 'model/Status.dart';
 export 'model/TagI18N.dart';
+export 'model/TaxonomyCategory.dart';
 export 'model/User.dart';
 export 'model/parameter/OutputFormat.dart';
 export 'model/parameter/Page.dart';
 export 'model/parameter/PageSize.dart';
 export 'model/parameter/SearchSimple.dart';
 export 'model/parameter/SortBy.dart';
-
 export 'utils/HttpHelper.dart';
 export 'utils/ImageHelper.dart';
 export 'utils/JsonHelper.dart';
