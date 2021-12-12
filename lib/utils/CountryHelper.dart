@@ -1003,9 +1003,6 @@ extension OpenFoodFactsCoutryExtension on OpenFoodFactsCountry {
   };
 
   String get iso2Code => _ISO_2_CODES[this]!;
-
-  bool containsCountryCode(String countryCode) =>
-      _ISO_2_CODES.containsValue(countryCode);
 }
 
 /// Helper class around [OpenFoodFactsCountry]
