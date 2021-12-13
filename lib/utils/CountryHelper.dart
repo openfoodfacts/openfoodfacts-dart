@@ -1008,8 +1008,15 @@ extension OpenFoodFactsCoutryExtension on OpenFoodFactsCountry {
 /// Helper class around [OpenFoodFactsCountry]
 class CountryHelper {
   /// Converts an ISO 2 code into an [OpenFoodFactsCountry]
-  static OpenFoodFactsCountry? fromJson(String? code) =>
-      OpenFoodFactsCountry.values.firstWhere(
-        (final OpenFoodFactsCountry country) => country.iso2Code == code,
-      );
+  static OpenFoodFactsCountry? fromJson(String? code) {
+    if (code == null) {
+      return null;
+    }
+    for (final OpenFoodFactsCountry key in OpenFoodFactsCountry.values) {
+      if (key.iso2Code == code) {
+        return key;
+      }
+    }
+    return null;
+  }
 }
