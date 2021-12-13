@@ -223,6 +223,9 @@ enum KnowledgePanelElementType {
 
   @JsonValue('table')
   TABLE,
+
+  @JsonValue('map')
+  MAP,
   UNKNOWN,
 }
 
@@ -233,7 +236,8 @@ enum KnowledgePanelElementType {
 class KnowledgePanelElement extends JsonObject {
   /// Type of the text description, Client may choose to display the description
   /// depending upon the type.
-  @JsonKey(name: 'element_type')
+  @JsonKey(
+      name: 'element_type', unknownEnumValue: KnowledgePanelElementType.UNKNOWN)
   final KnowledgePanelElementType elementType;
 
   /// Text description of the Knowledge panel.
