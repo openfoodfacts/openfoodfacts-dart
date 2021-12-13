@@ -1,4 +1,5 @@
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
+import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 
@@ -12,14 +13,17 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     this.barcode, {
     final OpenFoodFactsLanguage? language,
     final List<OpenFoodFactsLanguage> languages = const [],
-    final String? lc,
-    final String? cc,
+    @Deprecated('Use parameters language or languages instead')
+        final String? lc,
+    @Deprecated('Use parameter country instead') final String? cc,
+    final OpenFoodFactsCountry? country,
     final List<ProductField>? fields,
   }) : super(
           language: language,
           languages: languages,
           lc: lc,
           cc: cc,
+          country: country,
           fields: fields,
         );
 }

@@ -1,5 +1,6 @@
 import 'package:openfoodfacts/model/UserAgent.dart';
 
+import 'CountryHelper.dart';
 import 'LanguageHelper.dart';
 import 'QueryType.dart';
 
@@ -38,9 +39,38 @@ class OpenFoodAPIConfiguration {
   ///A global way to specify the country code for queries, can be overwritten
   /// for each individual request by specifying the country code in the
   /// individual request configurations
+  // TODO: deprecated from 2021-11-15 (#233); remove when old enough
+  @Deprecated('Use field globalCountry instead')
   static String? globalCC;
+
+  ///A global way to specify the country code for queries, can be overwritten
+  /// for each individual request by specifying the country code in the
+  /// individual request configurations
+  static OpenFoodFactsCountry? globalCountry;
 
   ///Returns the [QueryType] to use, using a default value
   static QueryType getQueryType(final QueryType? queryType) =>
       queryType ?? globalQueryType;
+
+  /// Returns the most relevant country code
+  static String? computeCountryCode(
+    final OpenFoodFactsCountry? country,
+    final String? cc,
+  ) {
+    if (country != null) {
+      return country.iso2Code;
+    }
+    if (globalCountry != null) {
+      return globalCountry!.iso2Code;
+    }
+    if (cc != null) {
+      return cc;
+    }
+    // ignore: deprecated_member_use_from_same_package
+    if (OpenFoodAPIConfiguration.globalCC != null) {
+      // ignore: deprecated_member_use_from_same_package
+      return OpenFoodAPIConfiguration.globalCC;
+    }
+    return null;
+  }
 }

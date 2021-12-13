@@ -1,5 +1,6 @@
 import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:test/test.dart';
@@ -9,7 +10,7 @@ import 'test_constants.dart';
 
 void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
-  OpenFoodAPIConfiguration.globalCC = 'fr';
+  OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
   late FakeHttpHelper httpHelper;
   final Map<String, dynamic> expectedResponse = <String, dynamic>{
     'en:afrikaans': {

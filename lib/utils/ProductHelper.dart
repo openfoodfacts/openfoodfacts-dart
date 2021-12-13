@@ -1,6 +1,5 @@
 import 'package:openfoodfacts/utils/ImageHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
-import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 
 import '../model/Product.dart';
@@ -36,7 +35,7 @@ class ProductHelper {
       image.url = ImageHelper.buildUrl(
         product.barcode,
         image,
-        queryType: OpenFoodAPIConfiguration.getQueryType(queryType),
+        queryType: queryType,
       );
     }
   }

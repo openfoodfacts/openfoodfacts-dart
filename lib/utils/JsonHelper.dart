@@ -72,14 +72,23 @@ class JsonHelper {
     for (var field in ImageField.values) {
       for (OpenFoodFactsLanguage lang in OpenFoodFactsLanguage.values) {
         // get the field object e.g. front_en
-        String fieldName = field.value + '_' + lang.code;
+        final String fieldName = field.value + '_' + lang.code;
         if (json[fieldName] == null) continue;
 
-        var fieldObject = json[fieldName] as Map<String, dynamic>?;
+        final fieldObject = json[fieldName] as Map<String, dynamic>?;
         if (fieldObject == null) continue;
 
-        // get the rev object
-        var rev = JsonObject.parseInt(fieldObject['rev']);
+        final rev = JsonObject.parseInt(fieldObject['rev']);
+        final String imgid = fieldObject['imgid'].toString();
+        final ImageAngle? angle = ImageAngleExtension.fromInt(
+          JsonObject.parseInt(fieldObject['angle']),
+        );
+        final String? coordinatesImageSize =
+            fieldObject['coordinates_image_size'];
+        final int? x1 = JsonObject.parseInt(fieldObject['x1']);
+        final int? y1 = JsonObject.parseInt(fieldObject['y1']);
+        final int? x2 = JsonObject.parseInt(fieldObject['x2']);
+        final int? y2 = JsonObject.parseInt(fieldObject['y2']);
 
         // get the sizes object
         var sizesObject = fieldObject['sizes'] as Map<String, dynamic>?;
@@ -91,8 +100,19 @@ class JsonHelper {
           var numberObject = sizesObject[number] as Map<String, dynamic>?;
           if (numberObject == null) continue;
 
-          var image =
-              ProductImage(field: field, size: size, language: lang, rev: rev);
+          var image = ProductImage(
+            field: field,
+            size: size,
+            language: lang,
+            rev: rev,
+            imgid: imgid,
+            angle: angle,
+            coordinatesImageSize: coordinatesImageSize,
+            x1: x1,
+            y1: y1,
+            x2: x2,
+            y2: y2,
+          );
           imageList.add(image);
         }
       }

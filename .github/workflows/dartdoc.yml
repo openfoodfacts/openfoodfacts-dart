@@ -15,7 +15,7 @@
             - name: Run Dartdoc
               run: dartdoc
             - name: Deploy API documentation to Github Pages
-              uses: JamesIves/github-pages-deploy-action@4.1.5
+              uses: JamesIves/github-pages-deploy-action@4.1.7
               with:
                 BRANCH: gh-pages
                 FOLDER: doc/api/

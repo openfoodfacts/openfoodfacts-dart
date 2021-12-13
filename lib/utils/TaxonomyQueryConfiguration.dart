@@ -1,4 +1,5 @@
 import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
@@ -28,7 +29,12 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
   final List<OpenFoodFactsLanguage> languages;
 
   /// The country code for this query, if any.
+  // TODO: deprecated from 2021-11-15 (#233); remove when old enough
+  @Deprecated('Use parameter country instead')
   final String? cc;
+
+  /// The country for this query, if any.
+  final OpenFoodFactsCountry? country;
 
   /// The desired taxonomy fields to retrieve. If empty, retrieve all fields.
   final List<F> fields;
@@ -60,6 +66,7 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
     this.tags, {
     List<OpenFoodFactsLanguage>? languages,
     this.cc,
+    this.country,
     this.includeChildren = false,
     this.fields = const [],
     this.additionalParameters = const [],
@@ -72,6 +79,7 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
     this.tagType, {
     List<OpenFoodFactsLanguage>? languages,
     this.cc,
+    this.country,
     this.includeChildren = false,
     this.fields = const [],
     this.additionalParameters = const [],
@@ -101,7 +109,10 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
           () => languages.map<String>((language) => language.code).join(','));
     }
 
-    result.putIfAbsent('cc', () => cc ?? OpenFoodAPIConfiguration.globalCC!);
+    result.putIfAbsent(
+        'cc',
+        // ignore: deprecated_member_use_from_same_package
+        () => OpenFoodAPIConfiguration.computeCountryCode(country, cc)!);
 
     if (fields.isNotEmpty) {
       final Iterable<String> fieldsStrings = convertFieldsToStrings(fields);
