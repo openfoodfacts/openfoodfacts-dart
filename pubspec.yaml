@@ -1,6 +1,6 @@
 name: openfoodfacts
 description: Dart package for the Open Food Facts API, a food products database made by everyone, for everyone.
-# This is automatically taken care of, no need to increase
+# The version is automatically, temporarily increased by the release workflow, changing it manually has no effect.
 version: 1.0.0
 homepage: https://github.com/openfoodfacts/openfoodfacts-dart
 
