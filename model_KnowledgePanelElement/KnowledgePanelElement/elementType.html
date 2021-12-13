@@ -52,7 +52,7 @@
         <section class="multi-line-signature">
           <a href="../../model_KnowledgePanelElement/KnowledgePanelElementType.html">KnowledgePanelElementType</a>
           <span class="name ">elementType</span>
-          <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;element_type&#39;), final</div>
+          <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;element_type&#39;, unknownEnumValue: KnowledgePanelElementType.UNKNOWN), final</div>
 
         </section>
         
@@ -64,7 +64,8 @@ depending upon the type.</p>
         
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@JsonKey(name: &#39;element_type&#39;)
+  <pre class="language-dart"><code class="language-dart">@JsonKey(
+    name: &#39;element_type&#39;, unknownEnumValue: KnowledgePanelElementType.UNKNOWN)
 final KnowledgePanelElementType elementType;
 
 </code></pre>
