@@ -202,7 +202,8 @@ KnowledgePanelElement _$KnowledgePanelElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelElement(
       elementType: _$enumDecode(
-          _$KnowledgePanelElementTypeEnumMap, json['element_type']),
+          _$KnowledgePanelElementTypeEnumMap, json['element_type'],
+          unknownValue: KnowledgePanelElementType.UNKNOWN),
       textElement: json['text_element'] == null
           ? null
           : KnowledgePanelTextElement.fromJson(
@@ -242,5 +243,6 @@ const _$KnowledgePanelElementTypeEnumMap = {
   KnowledgePanelElementType.PANEL: 'panel',
   KnowledgePanelElementType.PANEL_GROUP: 'panel_group',
   KnowledgePanelElementType.TABLE: 'table',
+  KnowledgePanelElementType.MAP: 'map',
   KnowledgePanelElementType.UNKNOWN: 'UNKNOWN',
 };
