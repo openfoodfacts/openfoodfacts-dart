@@ -32,10 +32,13 @@
           if: ${{ steps.release.outputs.release_created }}
           run: pub global activate cider && cider version "${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}"
 
-        - name: Release on pub.dev
+        - name: Setup credentials
           if: ${{ steps.release.outputs.release_created }}
-          uses: k-paxian/dart-package-publisher@v1.3
-          with:
-            skipTests: true  # skipping in favor of not breaking the workflow
-            format: true
-            credentialJson: ${{ secrets.PUB_DEV_CREDENTIALS_JSON }}
+          run: |
+            cat <<EOF > $PUB_CACHE/credentials.json
+            ${{ secrets.PUB_DEV_CREDENTIALS_JSON }}
+            EOF
+
+        - name: Publish package
+          if: ${{ steps.release.outputs.release_created }}
+          run: dart pub publish --force
