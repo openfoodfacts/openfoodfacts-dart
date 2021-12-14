@@ -422,33 +422,4 @@ void main() {
     KnowledgePanels kp = KnowledgePanels.fromJson(panels);
     expect(kp.panelIdToPanelMap.length, equals(8));
   });
-
-  // Verify that one KnowledgePanelElement must have a known KP element.
-  test('Unknown Element in JSON', () async {
-    Map<String, dynamic> panels = {
-      'doyouknow_brands_nutella_423': {
-        'parent_panel_id': 'root',
-        'type': 'doyouknow',
-        'level': 'trivia',
-        'topics': ['ingredients'],
-        'title_element': {
-          'icon_url':
-              '/images/lang/fr/labels/ab-agriculture-biologique.74x90.svg',
-          'title': 'Do you know why Nutella contains hazelnuts?',
-          'subtitle': 'It all started after the second world war...',
-        },
-        'elements': [
-          {
-            'element_type': 'unknown',
-            'element': {
-              'text_type': 'summary',
-              'html':
-                  'Cocoa beans were expensive and hard to come by after the second world war, so in Piedmont (Italy) where Pietro Ferrero created Nutella, they were replaced with hazelnuts to make <em>gianduja</em>, a mix of hazelnut paste and chocolate.'
-            }
-          }
-        ]
-      },
-    };
-    expect(() => KnowledgePanels.fromJson(panels), throwsArgumentError);
-  });
 }
