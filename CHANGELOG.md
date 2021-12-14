@@ -10,8 +10,6 @@
 ### Bug Fixes
 
 * Parsing of Grade Json field ([#311](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/311)) ([2da4d27](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/2da4d276d5e94d3a1d92a35105d8d1c4a287709c))
-* Release workflow ([#312](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/312)) ([68c61ba](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/68c61bad664186109f819c422d91866be907bd39))
-
 ## [1.5.0](https://www.github.com/openfoodfacts/openfoodfacts-dart/compare/v1.4.0...v1.5.0) (2021-12-09)
 
 ### Features
