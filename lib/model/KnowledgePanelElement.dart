@@ -180,6 +180,41 @@ class KnowledgePanelTableColumn extends JsonObject {
   Map<String, dynamic> toJson() => _$KnowledgePanelTableColumnToJson(this);
 }
 
+/// Element representing a map.
+@JsonSerializable()
+class KnowledgePanelMapElement extends JsonObject {
+  final List<Map<String, KnowledgePanelGeoLocationElement>> pointers;
+
+  const KnowledgePanelMapElement({
+    required this.pointers,
+  });
+
+  factory KnowledgePanelMapElement.fromJson(Map<String, dynamic> json) =>
+      _$KnowledgePanelMapElementFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$KnowledgePanelMapElementToJson(this);
+}
+
+/// Element representing a geo location on a map.
+@JsonSerializable()
+class KnowledgePanelGeoLocationElement extends JsonObject {
+  final double lat;
+  @JsonKey(name: 'lng')
+  final double long;
+
+  const KnowledgePanelGeoLocationElement({
+    required this.lat,
+    required this.long,
+  });
+
+  factory KnowledgePanelGeoLocationElement.fromJson(Map<String, dynamic> json) =>
+      _$KnowledgePanelGeoLocationElementFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$KnowledgePanelGeoLocationElementToJson(this);
+}
+
 /// Element representing a tabular data for the KnowledgePanel.
 @JsonSerializable()
 class KnowledgePanelTableElement extends JsonObject {
@@ -259,6 +294,10 @@ class KnowledgePanelElement extends JsonObject {
   @JsonKey(name: 'table_element')
   final KnowledgePanelTableElement? tableElement;
 
+  /// Map element embedded inside [this] KnowledgePanel.
+  @JsonKey(name: 'map_element')
+  final KnowledgePanelMapElement? mapElement;
+
   const KnowledgePanelElement({
     required this.elementType,
     this.textElement,
@@ -266,6 +305,7 @@ class KnowledgePanelElement extends JsonObject {
     this.panelElement,
     this.panelGroupElement,
     this.tableElement,
+    this.mapElement,
   });
 
   factory KnowledgePanelElement.fromJson(Map<String, dynamic> json) =>

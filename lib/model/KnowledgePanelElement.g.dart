@@ -174,6 +174,39 @@ const _$KnowledgePanelColumnTypeEnumMap = {
   KnowledgePanelColumnType.PERCENT: 'percent',
 };
 
+KnowledgePanelMapElement _$KnowledgePanelMapElementFromJson(
+        Map<String, dynamic> json) =>
+    KnowledgePanelMapElement(
+      pointers: (json['pointers'] as List<dynamic>)
+          .map((e) => (e as Map<String, dynamic>).map(
+                (k, e) => MapEntry(
+                    k,
+                    KnowledgePanelGeoLocationElement.fromJson(
+                        e as Map<String, dynamic>)),
+              ))
+          .toList(),
+    );
+
+Map<String, dynamic> _$KnowledgePanelMapElementToJson(
+        KnowledgePanelMapElement instance) =>
+    <String, dynamic>{
+      'pointers': instance.pointers,
+    };
+
+KnowledgePanelGeoLocationElement _$KnowledgePanelGeoLocationElementFromJson(
+        Map<String, dynamic> json) =>
+    KnowledgePanelGeoLocationElement(
+      lat: (json['lat'] as num).toDouble(),
+      long: (json['lng'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$KnowledgePanelGeoLocationElementToJson(
+        KnowledgePanelGeoLocationElement instance) =>
+    <String, dynamic>{
+      'lat': instance.lat,
+      'lng': instance.long,
+    };
+
 KnowledgePanelTableElement _$KnowledgePanelTableElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTableElement(
@@ -224,6 +257,10 @@ KnowledgePanelElement _$KnowledgePanelElementFromJson(
           ? null
           : KnowledgePanelTableElement.fromJson(
               json['table_element'] as Map<String, dynamic>),
+      mapElement: json['map_element'] == null
+          ? null
+          : KnowledgePanelMapElement.fromJson(
+              json['map_element'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$KnowledgePanelElementToJson(
@@ -235,6 +272,7 @@ Map<String, dynamic> _$KnowledgePanelElementToJson(
       'panel_element': instance.panelElement,
       'panel_group_element': instance.panelGroupElement,
       'table_element': instance.tableElement,
+      'map_element': instance.mapElement,
     };
 
 const _$KnowledgePanelElementTypeEnumMap = {
