@@ -200,5 +200,33 @@ void main() {
           // this guy is rather slow
           Duration(seconds: 90),
         ));
+
+    test('image unselect', () async {
+      const ImageField unselectedImageField = ImageField.INGREDIENTS;
+      await OpenFoodAPIClient.unselectProductImage(
+        barcode: barcode,
+        imageField: unselectedImageField,
+        language: language,
+      );
+
+      final ProductResult productResult = await OpenFoodAPIClient.getProduct(
+        ProductQueryConfiguration(
+          barcode,
+          fields: <ProductField>[ProductField.SELECTED_IMAGE],
+        ),
+      );
+      expect(productResult.product, isNotNull);
+      expect(productResult.product!.selectedImages, isNotNull);
+      for (final ProductImage productImage
+          in productResult.product!.selectedImages!) {
+        if (productImage.language == language) {
+          expect(productImage.field, isNot(unselectedImageField));
+        }
+      }
+    },
+        timeout: Timeout(
+          // this guy is rather slow
+          Duration(seconds: 90),
+        ));
   });
 }
