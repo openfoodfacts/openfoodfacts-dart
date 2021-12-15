@@ -10,6 +10,13 @@
 ### Bug Fixes
 
 * Parsing of Grade Json field ([#311](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/311)) ([2da4d27](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/2da4d276d5e94d3a1d92a35105d8d1c4a287709c))
+## [1.7.0](https://www.github.com/openfoodfacts/openfoodfacts-dart/compare/v1.6.0...v1.7.0) (2021-12-15)
+
+
+### Features
+
+* [#306](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/306) - unselect product image, added "user" parameter to WRITE methods ([#319](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/319)) ([1c82e33](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/1c82e33a313afd3c4908cf95f96d58f7f738ca1e))
+
 ## [1.5.0](https://www.github.com/openfoodfacts/openfoodfacts-dart/compare/v1.4.0...v1.5.0) (2021-12-09)
 
 ### Features
