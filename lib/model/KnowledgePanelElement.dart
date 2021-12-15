@@ -205,7 +205,6 @@ class KnowledgePanelGeoPointer extends JsonObject {
     this.geo,
   });
 
-
   factory KnowledgePanelGeoPointer.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelGeoPointerFromJson(json);
 
