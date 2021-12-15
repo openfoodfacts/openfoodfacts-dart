@@ -180,7 +180,7 @@ class KnowledgePanelTableColumn extends JsonObject {
   Map<String, dynamic> toJson() => _$KnowledgePanelTableColumnToJson(this);
 }
 
-/// Element representing a map.
+/// Element representing a world map.
 @JsonSerializable()
 class KnowledgePanelWorldMapElement extends JsonObject {
   final List<KnowledgePanelGeoPointer> pointers;
@@ -190,12 +190,13 @@ class KnowledgePanelWorldMapElement extends JsonObject {
   });
 
   factory KnowledgePanelWorldMapElement.fromJson(Map<String, dynamic> json) =>
-      _$KnowledgePanelMapElementFromJson(json);
+      _$KnowledgePanelWorldMapElementFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$KnowledgePanelMapElementToJson(this);
+  Map<String, dynamic> toJson() => _$KnowledgePanelWorldMapElementToJson(this);
 }
 
+/// Element representing a geo location of a map pointer.
 @JsonSerializable()
 class KnowledgePanelGeoPointer extends JsonObject {
   final KnowledgePanelLatLng? geo;
@@ -212,7 +213,7 @@ class KnowledgePanelGeoPointer extends JsonObject {
   Map<String, dynamic> toJson() => _$KnowledgePanelGeoPointerToJson(this);
 }
 
-/// Element representing a geo location on a map.
+/// Element representing a lat/long positioning of a map pointer.
 @JsonSerializable()
 class KnowledgePanelLatLng extends JsonObject {
   final double lat;
@@ -224,10 +225,10 @@ class KnowledgePanelLatLng extends JsonObject {
   });
 
   factory KnowledgePanelLatLng.fromJson(Map<String, dynamic> json) =>
-      _$KnowledgePanelGeoLocationElementFromJson(json);
+      _$KnowledgePanelLatLngFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$KnowledgePanelGeoLocationElementToJson(this);
+  Map<String, dynamic> toJson() => _$KnowledgePanelLatLngToJson(this);
 }
 
 /// Element representing a tabular data for the KnowledgePanel.
