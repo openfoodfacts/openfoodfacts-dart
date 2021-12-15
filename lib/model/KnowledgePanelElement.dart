@@ -200,12 +200,11 @@ class KnowledgePanelMapElement extends JsonObject {
 @JsonSerializable()
 class KnowledgePanelGeoLocationElement extends JsonObject {
   final double lat;
-  @JsonKey(name: 'lng')
-  final double long;
+  final double lng;
 
   const KnowledgePanelGeoLocationElement({
     required this.lat,
-    required this.long,
+    required this.lng,
   });
 
   factory KnowledgePanelGeoLocationElement.fromJson(Map<String, dynamic> json) =>
