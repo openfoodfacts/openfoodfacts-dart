@@ -52,12 +52,13 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/2.15.0/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.0/dart-core/String-class.html">String</a>?</span>&gt;</span></span>
-<span class="name ">setProductImageAngle</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="setProductImageAngle-param-barcode">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, </span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span>&gt;</span></span>
+<span class="name ">setProductImageAngle</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="setProductImageAngle-param-barcode">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, </span></li>
 <li><span class="parameter" id="setProductImageAngle-param-imageField"><span>required</span> <span class="type-annotation"><a href="../../model_ProductImage/ImageField.html">ImageField</a></span> <span class="parameter-name">imageField</span>, </span></li>
 <li><span class="parameter" id="setProductImageAngle-param-language"><span>required</span> <span class="type-annotation"><a href="../../utils_LanguageHelper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span>, </span></li>
-<li><span class="parameter" id="setProductImageAngle-param-imgid"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">imgid</span>, </span></li>
+<li><span class="parameter" id="setProductImageAngle-param-imgid"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">imgid</span>, </span></li>
 <li><span class="parameter" id="setProductImageAngle-param-angle"><span>required</span> <span class="type-annotation"><a href="../../model_ProductImage/ImageAngle.html">ImageAngle</a></span> <span class="parameter-name">angle</span>, </span></li>
+<li><span class="parameter" id="setProductImageAngle-param-user"><span>required</span> <span class="type-annotation"><a href="../../model_User/User-class.html">User</a></span> <span class="parameter-name">user</span>, </span></li>
 <li><span class="parameter" id="setProductImageAngle-param-queryType"><span class="type-annotation"><a href="../../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
 </ol>)
 
@@ -84,6 +85,7 @@ Returns null if KO, but would probably throw an exception instead.</p>
   required final OpenFoodFactsLanguage language,
   required final String imgid,
   required final ImageAngle angle,
+  required final User user,
   final QueryType? queryType,
 }) async =&gt;
     await _callProductImageCrop(
@@ -91,6 +93,7 @@ Returns null if KO, but would probably throw an exception instead.</p>
       imageField: imageField,
       language: language,
       imgid: imgid,
+      user: user,
       extraParameters: &lt;String, String&gt;{
         &#39;angle&#39;: angle.degreesClockwise,
       },
@@ -123,15 +126,15 @@ Returns null if KO, but would probably throw an exception instead.</p>
     <li class="section-title inherited">
       <a href="../../openfoodfacts/OpenFoodAPIClient-class.html#instance-properties">Properties</a>
     </li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
     <li class="section-title inherited"><a href="../../openfoodfacts/OpenFoodAPIClient-class.html#instance-methods">Methods</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/toString.html">toString</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/toString.html">toString</a></li>
 
     <li class="section-title inherited"><a href="../../openfoodfacts/OpenFoodAPIClient-class.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/operator_equals.html">operator ==</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 
@@ -168,6 +171,7 @@ Returns null if KO, but would probably throw an exception instead.</p>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/searchProducts.html">searchProducts</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/setProductImageAngle.html">setProductImageAngle</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/setProductImageCrop.html">setProductImageCrop</a></li>
+    <li><a href="../../openfoodfacts/OpenFoodAPIClient/unselectProductImage.html">unselectProductImage</a></li>
 
 </ol>
 

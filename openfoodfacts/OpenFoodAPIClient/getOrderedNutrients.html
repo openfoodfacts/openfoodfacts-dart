@@ -52,8 +52,8 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/2.15.0/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../model_OrderedNutrients/OrderedNutrients-class.html">OrderedNutrients</a></span>&gt;</span></span>
-<span class="name ">getOrderedNutrients</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getOrderedNutrients-param-cc">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">cc</span>, </span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../model_OrderedNutrients/OrderedNutrients-class.html">OrderedNutrients</a></span>&gt;</span></span>
+<span class="name ">getOrderedNutrients</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getOrderedNutrients-param-cc">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">cc</span>, </span></li>
 <li><span class="parameter" id="getOrderedNutrients-param-language"><span>required</span> <span class="type-annotation"><a href="../../utils_LanguageHelper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span>, </span></li>
 <li><span class="parameter" id="getOrderedNutrients-param-queryType"><span class="type-annotation"><a href="../../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
 </ol>)
@@ -85,6 +85,7 @@
   final Response response = await HttpHelper().doGetRequest(
     uri,
     userAgent: OpenFoodAPIConfiguration.userAgent,
+    queryType: queryType,
   );
   if (response.statusCode != 200) {
     throw Exception(&#39;Could not retrieve ordered nutrients!&#39;);
@@ -120,15 +121,15 @@
     <li class="section-title inherited">
       <a href="../../openfoodfacts/OpenFoodAPIClient-class.html#instance-properties">Properties</a>
     </li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
     <li class="section-title inherited"><a href="../../openfoodfacts/OpenFoodAPIClient-class.html#instance-methods">Methods</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/toString.html">toString</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/toString.html">toString</a></li>
 
     <li class="section-title inherited"><a href="../../openfoodfacts/OpenFoodAPIClient-class.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.0/dart-core/Object/operator_equals.html">operator ==</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 
@@ -165,6 +166,7 @@
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/searchProducts.html">searchProducts</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/setProductImageAngle.html">setProductImageAngle</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/setProductImageCrop.html">setProductImageCrop</a></li>
+    <li><a href="../../openfoodfacts/OpenFoodAPIClient/unselectProductImage.html">unselectProductImage</a></li>
 
 </ol>
 
