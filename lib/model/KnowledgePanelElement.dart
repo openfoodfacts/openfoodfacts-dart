@@ -182,32 +182,48 @@ class KnowledgePanelTableColumn extends JsonObject {
 
 /// Element representing a map.
 @JsonSerializable()
-class KnowledgePanelMapElement extends JsonObject {
-  final List<Map<String, KnowledgePanelGeoLocationElement>> pointers;
+class KnowledgePanelWorldMapElement extends JsonObject {
+  final List<KnowledgePanelGeoPointer> pointers;
 
-  const KnowledgePanelMapElement({
+  const KnowledgePanelWorldMapElement({
     required this.pointers,
   });
 
-  factory KnowledgePanelMapElement.fromJson(Map<String, dynamic> json) =>
+  factory KnowledgePanelWorldMapElement.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelMapElementFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelMapElementToJson(this);
 }
 
+@JsonSerializable()
+class KnowledgePanelGeoPointer extends JsonObject {
+  final KnowledgePanelLatLng? geo;
+
+  const KnowledgePanelGeoPointer({
+    this.geo,
+  });
+
+
+  factory KnowledgePanelGeoPointer.fromJson(Map<String, dynamic> json) =>
+      _$KnowledgePanelGeoPointerFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$KnowledgePanelGeoPointerToJson(this);
+}
+
 /// Element representing a geo location on a map.
 @JsonSerializable()
-class KnowledgePanelGeoLocationElement extends JsonObject {
+class KnowledgePanelLatLng extends JsonObject {
   final double lat;
   final double lng;
 
-  const KnowledgePanelGeoLocationElement({
+  const KnowledgePanelLatLng({
     required this.lat,
     required this.lng,
   });
 
-  factory KnowledgePanelGeoLocationElement.fromJson(Map<String, dynamic> json) =>
+  factory KnowledgePanelLatLng.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelGeoLocationElementFromJson(json);
 
   @override
@@ -295,7 +311,7 @@ class KnowledgePanelElement extends JsonObject {
 
   /// Map element embedded inside [this] KnowledgePanel.
   @JsonKey(name: 'map_element')
-  final KnowledgePanelMapElement? mapElement;
+  final KnowledgePanelWorldMapElement? mapElement;
 
   const KnowledgePanelElement({
     required this.elementType,

@@ -174,34 +174,44 @@ const _$KnowledgePanelColumnTypeEnumMap = {
   KnowledgePanelColumnType.PERCENT: 'percent',
 };
 
-KnowledgePanelMapElement _$KnowledgePanelMapElementFromJson(
+KnowledgePanelWorldMapElement _$KnowledgePanelWorldMapElementFromJson(
         Map<String, dynamic> json) =>
-    KnowledgePanelMapElement(
+    KnowledgePanelWorldMapElement(
       pointers: (json['pointers'] as List<dynamic>)
-          .map((e) => (e as Map<String, dynamic>).map(
-                (k, e) => MapEntry(
-                    k,
-                    KnowledgePanelGeoLocationElement.fromJson(
-                        e as Map<String, dynamic>)),
-              ))
+          .map((e) =>
+              KnowledgePanelGeoPointer.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$KnowledgePanelMapElementToJson(
-        KnowledgePanelMapElement instance) =>
+Map<String, dynamic> _$KnowledgePanelWorldMapElementToJson(
+        KnowledgePanelWorldMapElement instance) =>
     <String, dynamic>{
       'pointers': instance.pointers,
     };
 
-KnowledgePanelGeoLocationElement _$KnowledgePanelGeoLocationElementFromJson(
+KnowledgePanelGeoPointer _$KnowledgePanelGeoPointerFromJson(
         Map<String, dynamic> json) =>
-    KnowledgePanelGeoLocationElement(
+    KnowledgePanelGeoPointer(
+      geo: json['geo'] == null
+          ? null
+          : KnowledgePanelLatLng.fromJson(json['geo'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$KnowledgePanelGeoPointerToJson(
+        KnowledgePanelGeoPointer instance) =>
+    <String, dynamic>{
+      'geo': instance.geo,
+    };
+
+KnowledgePanelLatLng _$KnowledgePanelLatLngFromJson(
+        Map<String, dynamic> json) =>
+    KnowledgePanelLatLng(
       lat: (json['lat'] as num).toDouble(),
       lng: (json['lng'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$KnowledgePanelGeoLocationElementToJson(
-        KnowledgePanelGeoLocationElement instance) =>
+Map<String, dynamic> _$KnowledgePanelLatLngToJson(
+        KnowledgePanelLatLng instance) =>
     <String, dynamic>{
       'lat': instance.lat,
       'lng': instance.lng,
@@ -259,7 +269,7 @@ KnowledgePanelElement _$KnowledgePanelElementFromJson(
               json['table_element'] as Map<String, dynamic>),
       mapElement: json['map_element'] == null
           ? null
-          : KnowledgePanelMapElement.fromJson(
+          : KnowledgePanelWorldMapElement.fromJson(
               json['map_element'] as Map<String, dynamic>),
     );
 
