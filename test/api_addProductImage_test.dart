@@ -7,6 +7,7 @@ import 'test_constants.dart';
 
 void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+  const User user = TestConstants.TEST_USER;
 
   /// Common constants for several image operations
   const String barcode = '4250752200784';
@@ -83,7 +84,7 @@ void main() {
         imageUri: Uri.file('test/test_assets/front_de.jpg'),
       );
       final Status status = await OpenFoodAPIClient.addProductImage(
-        TestConstants.TEST_USER,
+        user,
         image,
       );
 
@@ -99,7 +100,7 @@ void main() {
         imageUri: Uri.file('test/test_assets/ingredients_en.jpg'),
       );
       Status status = await OpenFoodAPIClient.addProductImage(
-        TestConstants.TEST_USER,
+        user,
         image,
       );
 
@@ -113,7 +114,7 @@ void main() {
           ProductQueryConfiguration('7622210449283');
       final ProductResult result = await OpenFoodAPIClient.getProduct(
         configurations,
-        user: TestConstants.TEST_USER,
+        user: user,
       );
       expect(result.status, isNotNull);
       expect(result.product!.images, isNotEmpty);
@@ -140,6 +141,7 @@ void main() {
       for (final ImageAngle angle in ImageAngle.values) {
         final String? newUrl = await OpenFoodAPIClient.setProductImageAngle(
           barcode: barcode,
+          user: user,
           imageField: imageField,
           language: language,
           imgid: imgid!,
@@ -178,6 +180,7 @@ void main() {
       for (final ImageAngle angle in ImageAngle.values) {
         final String? newUrl = await OpenFoodAPIClient.setProductImageCrop(
           barcode: barcode,
+          user: user,
           imageField: imageField,
           language: language,
           imgid: imgid!,
@@ -194,6 +197,35 @@ void main() {
         final int newHeight = newSize[1];
         expect(newWidth, width);
         expect(newHeight, height);
+      }
+    },
+        timeout: Timeout(
+          // this guy is rather slow
+          Duration(seconds: 90),
+        ));
+
+    test('image unselect', () async {
+      const ImageField unselectedImageField = ImageField.INGREDIENTS;
+      await OpenFoodAPIClient.unselectProductImage(
+        barcode: barcode,
+        user: user,
+        imageField: unselectedImageField,
+        language: language,
+      );
+
+      final ProductResult productResult = await OpenFoodAPIClient.getProduct(
+        ProductQueryConfiguration(
+          barcode,
+          fields: <ProductField>[ProductField.SELECTED_IMAGE],
+        ),
+      );
+      expect(productResult.product, isNotNull);
+      expect(productResult.product!.selectedImages, isNotNull);
+      for (final ProductImage productImage
+          in productResult.product!.selectedImages!) {
+        if (productImage.language == language) {
+          expect(productImage.field, isNot(unselectedImageField));
+        }
       }
     },
         timeout: Timeout(
