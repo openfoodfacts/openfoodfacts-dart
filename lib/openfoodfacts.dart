@@ -459,10 +459,12 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
 
-    Response response = await HttpHelper().doGetRequest(insightUri,
-        user: user,
-        userAgent: OpenFoodAPIConfiguration.userAgent,
-        queryType: queryType);
+    Response response = await HttpHelper().doGetRequest(
+      insightUri,
+      user: user,
+      userAgent: OpenFoodAPIConfiguration.userAgent,
+      queryType: queryType,
+    );
     var result =
         InsightsResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
 
@@ -479,10 +481,12 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
 
-    Response response = await HttpHelper().doGetRequest(insightsUri,
-        user: user,
-        userAgent: OpenFoodAPIConfiguration.userAgent,
-        queryType: queryType);
+    Response response = await HttpHelper().doGetRequest(
+      insightsUri,
+      user: user,
+      userAgent: OpenFoodAPIConfiguration.userAgent,
+      queryType: queryType,
+    );
 
     return InsightsResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
@@ -510,10 +514,12 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
 
-    Response response = await HttpHelper().doGetRequest(robotoffQuestionUri,
-        user: user,
-        userAgent: OpenFoodAPIConfiguration.userAgent,
-        queryType: queryType);
+    Response response = await HttpHelper().doGetRequest(
+      robotoffQuestionUri,
+      user: user,
+      userAgent: OpenFoodAPIConfiguration.userAgent,
+      queryType: queryType,
+    );
     var result = RobotoffQuestionResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 
@@ -550,10 +556,12 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
 
-    Response response = await HttpHelper().doGetRequest(robotoffQuestionUri,
-        user: user,
-        userAgent: OpenFoodAPIConfiguration.userAgent,
-        queryType: queryType);
+    Response response = await HttpHelper().doGetRequest(
+      robotoffQuestionUri,
+      user: user,
+      userAgent: OpenFoodAPIConfiguration.userAgent,
+      queryType: queryType,
+    );
     var result = RobotoffQuestionResult.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 
@@ -618,10 +626,12 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
 
-    Response response = await HttpHelper().doGetRequest(spellingCorrectionUri,
-        user: user,
-        userAgent: OpenFoodAPIConfiguration.userAgent,
-        queryType: queryType);
+    Response response = await HttpHelper().doGetRequest(
+      spellingCorrectionUri,
+      user: user,
+      userAgent: OpenFoodAPIConfiguration.userAgent,
+      queryType: queryType,
+    );
     SpellingCorrection result = SpellingCorrection.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
 
@@ -700,8 +710,11 @@ class OpenFoodAPIClient {
       path: '/cgi/auth.pl',
       queryType: queryType,
     );
-    Response response =
-        await HttpHelper().doPostRequest(loginUri, user.toData(), user);
+    Response response = await HttpHelper().doPostRequest(
+      loginUri,
+      user.toData(),
+      user,
+    );
     return response.statusCode == 200;
   }
 
@@ -833,8 +846,11 @@ class OpenFoodAPIClient {
       },
     );
     try {
-      final Response response = await HttpHelper()
-          .doGetRequest(uri, userAgent: OpenFoodAPIConfiguration.userAgent);
+      final Response response = await HttpHelper().doGetRequest(
+        uri,
+        userAgent: OpenFoodAPIConfiguration.userAgent,
+        queryType: queryType,
+      );
       if (response.statusCode != 200) {
         return null;
       }
@@ -866,8 +882,11 @@ class OpenFoodAPIClient {
     );
 
     try {
-      final Response response = await HttpHelper()
-          .doGetRequest(uri, userAgent: OpenFoodAPIConfiguration.userAgent);
+      final Response response = await HttpHelper().doGetRequest(
+        uri,
+        userAgent: OpenFoodAPIConfiguration.userAgent,
+        queryType: queryType,
+      );
       if (response.statusCode != 200) {
         return KnowledgePanels.empty();
       }
@@ -900,6 +919,7 @@ class OpenFoodAPIClient {
     final Response response = await HttpHelper().doGetRequest(
       uri,
       userAgent: OpenFoodAPIConfiguration.userAgent,
+      queryType: queryType,
     );
     if (response.statusCode != 200) {
       throw Exception('Could not retrieve ordered nutrients!');
@@ -922,6 +942,7 @@ class OpenFoodAPIClient {
     required final OpenFoodFactsLanguage language,
     required final String imgid,
     required final ImageAngle angle,
+    required final User user,
     final QueryType? queryType,
   }) async =>
       await _callProductImageCrop(
@@ -929,6 +950,7 @@ class OpenFoodAPIClient {
         imageField: imageField,
         language: language,
         imgid: imgid,
+        user: user,
         extraParameters: <String, String>{
           'angle': angle.degreesClockwise,
         },
@@ -953,6 +975,7 @@ class OpenFoodAPIClient {
     required final int y1,
     required final int x2,
     required final int y2,
+    required final User user,
     final ImageAngle angle = ImageAngle.NOON,
     final QueryType? queryType,
   }) async =>
@@ -961,6 +984,7 @@ class OpenFoodAPIClient {
         imageField: imageField,
         language: language,
         imgid: imgid,
+        user: user,
         extraParameters: <String, String>{
           'x1': x1.toString(),
           'y1': y1.toString(),
@@ -981,6 +1005,7 @@ class OpenFoodAPIClient {
     required final OpenFoodFactsLanguage language,
     required final String imgid,
     required final Map<String, String> extraParameters,
+    required final User user,
     final QueryType? queryType,
   }) async {
     final String id = '${imageField.value}_${language.code}';
@@ -996,8 +1021,12 @@ class OpenFoodAPIClient {
       queryParameters: queryParameters,
     );
 
-    final Response response = await HttpHelper()
-        .doGetRequest(uri, userAgent: OpenFoodAPIConfiguration.userAgent);
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      user: user,
+      userAgent: OpenFoodAPIConfiguration.userAgent,
+      queryType: queryType,
+    );
     if (response.statusCode != 200) {
       throw Exception(
           'Bad response (${response.statusCode}): ${response.body}');
@@ -1021,5 +1050,52 @@ class OpenFoodAPIClient {
     return ImageHelper.getProductImageRootUrl(barcode, queryType: queryType) +
         '/' +
         filename;
+  }
+
+  /// Unselect a product image.
+  ///
+  /// Typically, after that the openfoodfacts web page will _not_ show
+  /// the image as selected for this product x imagefield x language anymore.
+  /// Throws an exception if not successful.
+  /// Will work OK even when there was no previous selected product image.
+  static Future<void> unselectProductImage({
+    required final String barcode,
+    required final ImageField imageField,
+    required final OpenFoodFactsLanguage language,
+    required final User user,
+    final QueryType? queryType,
+  }) async {
+    final String id = '${imageField.value}_${language.code}';
+    final Uri uri = UriHelper.getUri(
+      path: 'cgi/product_image_unselect.pl',
+      queryType: queryType,
+      queryParameters: <String, String>{'code': barcode, 'id': id},
+    );
+
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      user: user,
+      userAgent: OpenFoodAPIConfiguration.userAgent,
+      queryType: queryType,
+    );
+    if (response.statusCode != 200) {
+      throw Exception(
+          'Bad response (${response.statusCode}): ${response.body}');
+    }
+    final Map<String, dynamic> json =
+        jsonDecode(response.body) as Map<String, dynamic>;
+    final String status = json['status'];
+    if (status != 'status ok') {
+      throw Exception('Status not ok ($status)');
+    }
+    final int statusCode = json['status_code'];
+    if (statusCode != 0) {
+      throw Exception('Status Code not ok ($statusCode)');
+    }
+    final String imagefield = json['imagefield'];
+    if (imagefield != id) {
+      throw Exception(
+          'Different imagefield: expected "$id", actual "$imageField"');
+    }
   }
 }

@@ -148,7 +148,7 @@ class ProductImage {
   String toString() =>
       'ProductImage('
           '${field.value}' +
-      (size == null ? '' : ',size=${size.value}]') +
+      (size == null ? '' : ',size=${size.value}') +
       (language == null ? '' : ',language=${language.code}') +
       (angle == null ? '' : ',angle=${angle!.degreesClockwise}') +
       (url == null ? '' : ',url=$url') +
