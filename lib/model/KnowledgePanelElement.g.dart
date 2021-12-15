@@ -197,14 +197,14 @@ KnowledgePanelGeoLocationElement _$KnowledgePanelGeoLocationElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelGeoLocationElement(
       lat: (json['lat'] as num).toDouble(),
-      long: (json['lng'] as num).toDouble(),
+      lng: (json['lng'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$KnowledgePanelGeoLocationElementToJson(
         KnowledgePanelGeoLocationElement instance) =>
     <String, dynamic>{
       'lat': instance.lat,
-      'lng': instance.long,
+      'lng': instance.lng,
     };
 
 KnowledgePanelTableElement _$KnowledgePanelTableElementFromJson(
