@@ -174,6 +174,49 @@ const _$KnowledgePanelColumnTypeEnumMap = {
   KnowledgePanelColumnType.PERCENT: 'percent',
 };
 
+KnowledgePanelWorldMapElement _$KnowledgePanelWorldMapElementFromJson(
+        Map<String, dynamic> json) =>
+    KnowledgePanelWorldMapElement(
+      pointers: (json['pointers'] as List<dynamic>)
+          .map((e) =>
+              KnowledgePanelGeoPointer.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$KnowledgePanelWorldMapElementToJson(
+        KnowledgePanelWorldMapElement instance) =>
+    <String, dynamic>{
+      'pointers': instance.pointers,
+    };
+
+KnowledgePanelGeoPointer _$KnowledgePanelGeoPointerFromJson(
+        Map<String, dynamic> json) =>
+    KnowledgePanelGeoPointer(
+      geo: json['geo'] == null
+          ? null
+          : KnowledgePanelLatLng.fromJson(json['geo'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$KnowledgePanelGeoPointerToJson(
+        KnowledgePanelGeoPointer instance) =>
+    <String, dynamic>{
+      'geo': instance.geo,
+    };
+
+KnowledgePanelLatLng _$KnowledgePanelLatLngFromJson(
+        Map<String, dynamic> json) =>
+    KnowledgePanelLatLng(
+      lat: (json['lat'] as num).toDouble(),
+      lng: (json['lng'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$KnowledgePanelLatLngToJson(
+        KnowledgePanelLatLng instance) =>
+    <String, dynamic>{
+      'lat': instance.lat,
+      'lng': instance.lng,
+    };
+
 KnowledgePanelTableElement _$KnowledgePanelTableElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTableElement(
@@ -224,6 +267,10 @@ KnowledgePanelElement _$KnowledgePanelElementFromJson(
           ? null
           : KnowledgePanelTableElement.fromJson(
               json['table_element'] as Map<String, dynamic>),
+      mapElement: json['map_element'] == null
+          ? null
+          : KnowledgePanelWorldMapElement.fromJson(
+              json['map_element'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$KnowledgePanelElementToJson(
@@ -235,6 +282,7 @@ Map<String, dynamic> _$KnowledgePanelElementToJson(
       'panel_element': instance.panelElement,
       'panel_group_element': instance.panelGroupElement,
       'table_element': instance.tableElement,
+      'map_element': instance.mapElement,
     };
 
 const _$KnowledgePanelElementTypeEnumMap = {

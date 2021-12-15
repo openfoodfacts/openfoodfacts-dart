@@ -180,6 +180,56 @@ class KnowledgePanelTableColumn extends JsonObject {
   Map<String, dynamic> toJson() => _$KnowledgePanelTableColumnToJson(this);
 }
 
+/// Element representing a world map.
+@JsonSerializable()
+class KnowledgePanelWorldMapElement extends JsonObject {
+  final List<KnowledgePanelGeoPointer> pointers;
+
+  const KnowledgePanelWorldMapElement({
+    required this.pointers,
+  });
+
+  factory KnowledgePanelWorldMapElement.fromJson(Map<String, dynamic> json) =>
+      _$KnowledgePanelWorldMapElementFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$KnowledgePanelWorldMapElementToJson(this);
+}
+
+/// Element representing a geo location of a map pointer.
+@JsonSerializable()
+class KnowledgePanelGeoPointer extends JsonObject {
+  final KnowledgePanelLatLng? geo;
+
+  const KnowledgePanelGeoPointer({
+    this.geo,
+  });
+
+  factory KnowledgePanelGeoPointer.fromJson(Map<String, dynamic> json) =>
+      _$KnowledgePanelGeoPointerFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$KnowledgePanelGeoPointerToJson(this);
+}
+
+/// Element representing a lat/long positioning of a map pointer.
+@JsonSerializable()
+class KnowledgePanelLatLng extends JsonObject {
+  final double lat;
+  final double lng;
+
+  const KnowledgePanelLatLng({
+    required this.lat,
+    required this.lng,
+  });
+
+  factory KnowledgePanelLatLng.fromJson(Map<String, dynamic> json) =>
+      _$KnowledgePanelLatLngFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$KnowledgePanelLatLngToJson(this);
+}
+
 /// Element representing a tabular data for the KnowledgePanel.
 @JsonSerializable()
 class KnowledgePanelTableElement extends JsonObject {
@@ -259,6 +309,10 @@ class KnowledgePanelElement extends JsonObject {
   @JsonKey(name: 'table_element')
   final KnowledgePanelTableElement? tableElement;
 
+  /// Map element embedded inside [this] KnowledgePanel.
+  @JsonKey(name: 'map_element')
+  final KnowledgePanelWorldMapElement? mapElement;
+
   const KnowledgePanelElement({
     required this.elementType,
     this.textElement,
@@ -266,6 +320,7 @@ class KnowledgePanelElement extends JsonObject {
     this.panelElement,
     this.panelGroupElement,
     this.tableElement,
+    this.mapElement,
   });
 
   factory KnowledgePanelElement.fromJson(Map<String, dynamic> json) =>
