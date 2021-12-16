@@ -871,14 +871,18 @@ class OpenFoodAPIClient {
   ) async {
     const String KNOWLEDGE_PANELS_FIELD = 'knowledge_panels';
 
+    var queryParameters = <String, String>{
+      'fields': KNOWLEDGE_PANELS_FIELD,
+      'lc': configuration.language!.code,
+    };
+    String? cc = configuration.computeCountryCode();
+    if (cc != null) {
+      queryParameters.putIfAbsent('cc', () => cc);
+    }
     var uri = UriHelper.getUri(
       path: 'api/v2/product/${configuration.barcode}/',
       queryType: queryType,
-      queryParameters: <String, String>{
-        'fields': KNOWLEDGE_PANELS_FIELD,
-        'lc': configuration.language!.code,
-        'cc': configuration.computeCountryCode()!,
-      },
+      queryParameters: queryParameters,
     );
 
     try {
