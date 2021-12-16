@@ -875,8 +875,8 @@ class OpenFoodAPIClient {
       'fields': KNOWLEDGE_PANELS_FIELD,
       'lc': configuration.language!.code,
     };
-    String? cc =  configuration.computeCountryCode();
-    if (cc != null){
+    String? cc = configuration.computeCountryCode();
+    if (cc != null) {
       queryParameters.putIfAbsent('cc', () => cc);
     }
     var uri = UriHelper.getUri(
