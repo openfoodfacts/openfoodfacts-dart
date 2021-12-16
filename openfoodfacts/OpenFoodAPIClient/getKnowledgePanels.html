@@ -75,14 +75,18 @@
 ) async {
   const String KNOWLEDGE_PANELS_FIELD = &#39;knowledge_panels&#39;;
 
+  var queryParameters = &lt;String, String&gt;{
+    &#39;fields&#39;: KNOWLEDGE_PANELS_FIELD,
+    &#39;lc&#39;: configuration.language!.code,
+  };
+  String? cc = configuration.computeCountryCode();
+  if (cc != null) {
+    queryParameters.putIfAbsent(&#39;cc&#39;, () =&gt; cc);
+  }
   var uri = UriHelper.getUri(
     path: &#39;api&#47;v2&#47;product&#47;${configuration.barcode}&#47;&#39;,
     queryType: queryType,
-    queryParameters: &lt;String, String&gt;{
-      &#39;fields&#39;: KNOWLEDGE_PANELS_FIELD,
-      &#39;lc&#39;: configuration.language!.code,
-      &#39;cc&#39;: configuration.computeCountryCode()!,
-    },
+    queryParameters: queryParameters,
   );
 
   try {
