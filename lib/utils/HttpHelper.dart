@@ -1,12 +1,11 @@
-import 'package:meta/meta.dart';
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
-import 'package:openfoodfacts/model/UserAgent.dart';
+import 'package:meta/meta.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/UriReader.dart';
 import 'package:path/path.dart';
-
-import 'dart:async';
-import 'dart:convert';
 
 import 'OpenFoodAPIConfiguration.dart';
 import 'QueryType.dart';
@@ -36,14 +35,12 @@ class HttpHelper {
   Future<http.Response> doGetRequest(
     Uri uri, {
     User? user,
-    UserAgent? userAgent,
     QueryType? queryType,
   }) async {
     http.Response response = await http.get(
       uri,
       headers: _buildHeaders(
         user: user,
-        userAgent: userAgent,
         isTestModeActive:
             OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
                 ? false
@@ -136,14 +133,14 @@ class HttpHelper {
   /// By default isTestMode is false
   Map<String, String>? _buildHeaders({
     User? user,
-    UserAgent? userAgent,
     bool isTestModeActive = false,
   }) {
     Map<String, String>? headers = {};
 
     headers.addAll({
       'Accept': 'application/json',
-      'UserAgent': userAgent != null ? userAgent.toValueString() : USER_AGENT,
+      'UserAgent':
+          OpenFoodAPIConfiguration.userAgent?.toValueString() ?? USER_AGENT,
       'From': (user != null) ? user.userId : FROM,
     });
 
