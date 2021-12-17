@@ -1005,12 +1005,11 @@ extension OpenFoodFactsCoutryExtension on OpenFoodFactsCountry {
   String get iso2Code => _ISO_2_CODES[this]!;
 
   String toSanitizedString() {
-    final String countryName = toString()
-        .replaceAll('OpenFoodFactsCountry.', '')
-        .replaceAll('_', ' ');
-    return (countryName.isNotEmpty)
-        ? '${countryName[0].toUpperCase()}${countryName.substring(1).toLowerCase()}'
-        : countryName;
+    final String countryName =
+        toString().replaceAll('OpenFoodFactsCountry.', '').replaceAll('_', ' ');
+    return (countryName.isEmpty)
+        ? ''
+        : '${countryName[0].toUpperCase()}${countryName.substring(1).toLowerCase()}';
   }
 }
 
