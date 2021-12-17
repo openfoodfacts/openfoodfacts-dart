@@ -1003,6 +1003,16 @@ extension OpenFoodFactsCoutryExtension on OpenFoodFactsCountry {
   };
 
   String get iso2Code => _ISO_2_CODES[this]!;
+
+  String name() {
+    final String countryName = this
+        .toString()
+        .replaceAll('OpenFoodFactsCountry.', '')
+        .replaceAll('_', ' ');
+    return (countryName.isNotEmpty)
+        ? '${countryName[0].toUpperCase()}${countryName.substring(1).toLowerCase()}'
+        : countryName;
+  }
 }
 
 /// Helper class around [OpenFoodFactsCountry]
