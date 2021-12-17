@@ -1004,7 +1004,7 @@ extension OpenFoodFactsCoutryExtension on OpenFoodFactsCountry {
 
   String get iso2Code => _ISO_2_CODES[this]!;
 
-  String name() {
+  String toSanitizedString() {
     final String countryName = this
         .toString()
         .replaceAll('OpenFoodFactsCountry.', '')
