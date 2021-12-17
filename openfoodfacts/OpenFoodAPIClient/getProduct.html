@@ -88,7 +88,6 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
   Response response = await HttpHelper().doGetRequest(
     productUri,
     user: user,
-    userAgent: OpenFoodAPIConfiguration.userAgent,
     queryType: queryType,
   );
   final jsonStr = _replaceQuotes(response.body);

@@ -90,7 +90,6 @@ No replacing of '"' with '"'.</p>
   Response response = await HttpHelper().doGetRequest(
     productUri,
     user: user,
-    userAgent: OpenFoodAPIConfiguration.userAgent,
     queryType: queryType,
   );
   var result = ProductResult.fromJson(json.decode(response.body));

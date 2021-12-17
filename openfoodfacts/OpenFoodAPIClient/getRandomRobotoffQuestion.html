@@ -102,7 +102,6 @@
   Response response = await HttpHelper().doGetRequest(
     robotoffQuestionUri,
     user: user,
-    userAgent: OpenFoodAPIConfiguration.userAgent,
     queryType: queryType,
   );
   var result = RobotoffQuestionResult.fromJson(

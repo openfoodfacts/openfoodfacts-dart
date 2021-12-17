@@ -87,7 +87,6 @@
   try {
     final Response response = await HttpHelper().doGetRequest(
       uri,
-      userAgent: OpenFoodAPIConfiguration.userAgent,
       queryType: queryType,
     );
     if (response.statusCode != 200) {

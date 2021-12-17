@@ -97,7 +97,6 @@
   Response response = await HttpHelper().doGetRequest(
     spellingCorrectionUri,
     user: user,
-    userAgent: OpenFoodAPIConfiguration.userAgent,
     queryType: queryType,
   );
   SpellingCorrection result = SpellingCorrection.fromJson(

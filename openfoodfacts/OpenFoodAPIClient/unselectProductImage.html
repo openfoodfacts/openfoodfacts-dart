@@ -93,7 +93,6 @@ Will work OK even when there was no previous selected product image.</p>
   final Response response = await HttpHelper().doGetRequest(
     uri,
     user: user,
-    userAgent: OpenFoodAPIConfiguration.userAgent,
     queryType: queryType,
   );
   if (response.statusCode != 200) {

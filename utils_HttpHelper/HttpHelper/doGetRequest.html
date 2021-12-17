@@ -55,7 +55,6 @@
 <span class="returntype"><a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/http/0.13.4/http/Response-class.html">Response</a></span>&gt;</span></span>
 <span class="name ">doGetRequest</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="doGetRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span></li>
 <li><span class="parameter" id="doGetRequest-param-user">{<span class="type-annotation"><a href="../../model_User/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span></li>
-<li><span class="parameter" id="doGetRequest-param-userAgent"><span class="type-annotation"><a href="../../model_UserAgent/UserAgent-class.html">UserAgent</a>?</span> <span class="parameter-name">userAgent</span>, </span></li>
 <li><span class="parameter" id="doGetRequest-param-queryType"><span class="type-annotation"><a href="../../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
 </ol>)
 
@@ -77,14 +76,12 @@ By default the query will hit the PROD DB</p>
   <pre class="language-dart"><code class="language-dart">Future&lt;http.Response&gt; doGetRequest(
   Uri uri, {
   User? user,
-  UserAgent? userAgent,
   QueryType? queryType,
 }) async {
   http.Response response = await http.get(
     uri,
     headers: _buildHeaders(
       user: user,
-      userAgent: userAgent,
       isTestModeActive:
           OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
               ? false

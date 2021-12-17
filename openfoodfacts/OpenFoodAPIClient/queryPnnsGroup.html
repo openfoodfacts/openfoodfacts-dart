@@ -88,7 +88,6 @@ static Future&lt;SearchResult&gt; queryPnnsGroup(
   Response response = await HttpHelper().doGetRequest(
     searchUri,
     user: user,
-    userAgent: OpenFoodAPIConfiguration.userAgent,
     queryType: queryType,
   );
   final jsonStr = _replaceQuotes(response.body);
