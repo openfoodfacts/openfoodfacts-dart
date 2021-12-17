@@ -42,7 +42,7 @@ class HttpHelper {
     http.Response response = await http.get(
       uri,
       headers: _buildHeaders(
-        user: OpenFoodAPIConfiguration.getUser(user),
+        user: user,
         userAgent: userAgent,
         isTestModeActive:
             OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
@@ -66,7 +66,7 @@ class HttpHelper {
     http.Response response = await http.post(
       uri,
       headers: _buildHeaders(
-          user: OpenFoodAPIConfiguration.getUser(user),
+          user: user,
           isTestModeActive:
               OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
                   ? false
@@ -91,7 +91,7 @@ class HttpHelper {
 
     request.headers.addAll(
       _buildHeaders(
-        user: OpenFoodAPIConfiguration.getUser(user),
+        user: user,
         isTestModeActive:
             OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
                 ? false
@@ -144,7 +144,7 @@ class HttpHelper {
     headers.addAll({
       'Accept': 'application/json',
       'UserAgent': userAgent != null ? userAgent.toValueString() : USER_AGENT,
-      'From': (user != null) ? user.userId : FROM,
+      'From': OpenFoodAPIConfiguration.getUser(user)?.toValueString() ?? FROM,
     });
 
     if (isTestModeActive) {
