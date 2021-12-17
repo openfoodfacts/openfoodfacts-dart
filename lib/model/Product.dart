@@ -104,7 +104,7 @@ class Product extends JsonObject {
   Map<OpenFoodFactsLanguage, String>? productNameInLanguages;
 
   @JsonKey(name: 'generic_name')
-  String genericName;
+  String? genericName;
 
   @JsonKey(name: 'brands', includeIfNull: false)
   String? brands;
