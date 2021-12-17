@@ -1,10 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/model/Attribute.dart';
+import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/utils/JsonHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
+
 import '../interface/JsonObject.dart';
 import 'Additives.dart';
 import 'Allergens.dart';
@@ -101,6 +102,9 @@ class Product extends JsonObject {
       toJson: LanguageHelper.toJsonStringMap,
       includeIfNull: false)
   Map<OpenFoodFactsLanguage, String>? productNameInLanguages;
+
+  @JsonKey(name: 'generic_name')
+  String genericName;
 
   @JsonKey(name: 'brands', includeIfNull: false)
   String? brands;
@@ -322,6 +326,7 @@ class Product extends JsonObject {
       {this.barcode,
       this.productName,
       this.productNameInLanguages,
+      this.genericName,
       this.brands,
       this.brandsTags,
       this.countries,

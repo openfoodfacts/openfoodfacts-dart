@@ -11,6 +11,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       productName: json['product_name'] as String?,
       productNameInLanguages:
           LanguageHelper.fromJsonStringMap(json['product_name_in_languages']),
+      genericName: json['generic_name'] as String,
       brands: json['brands'] as String?,
       brandsTags: (json['brands_tags'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -124,6 +125,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('product_name', instance.productName);
   writeNotNull('product_name_in_languages',
       LanguageHelper.toJsonStringMap(instance.productNameInLanguages));
+  val['generic_name'] = instance.genericName;
   writeNotNull('brands', instance.brands);
   writeNotNull('brands_tags', instance.brandsTags);
   writeNotNull('countries', instance.countries);
