@@ -1,12 +1,12 @@
-import 'package:meta/meta.dart';
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+import 'package:meta/meta.dart';
 import 'package:openfoodfacts/model/UserAgent.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/UriReader.dart';
 import 'package:path/path.dart';
-
-import 'dart:async';
-import 'dart:convert';
 
 import 'OpenFoodAPIConfiguration.dart';
 import 'QueryType.dart';
@@ -42,7 +42,7 @@ class HttpHelper {
     http.Response response = await http.get(
       uri,
       headers: _buildHeaders(
-        user: user,
+        user: OpenFoodAPIConfiguration.getUser(user),
         userAgent: userAgent,
         isTestModeActive:
             OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
@@ -66,7 +66,7 @@ class HttpHelper {
     http.Response response = await http.post(
       uri,
       headers: _buildHeaders(
-          user: user,
+          user: OpenFoodAPIConfiguration.getUser(user),
           isTestModeActive:
               OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
                   ? false
@@ -91,7 +91,7 @@ class HttpHelper {
 
     request.headers.addAll(
       _buildHeaders(
-        user: user,
+        user: OpenFoodAPIConfiguration.getUser(user),
         isTestModeActive:
             OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
                 ? false
