@@ -127,7 +127,7 @@ class JsonHelper {
   }
 
   /// Returns a double from a JSON-encoded int or double
-  static double? servingQuantityFromJson(dynamic data) {
+  static double? quantityFromJson(dynamic data) {
     if (data == null || data is double) {
       return data;
     }

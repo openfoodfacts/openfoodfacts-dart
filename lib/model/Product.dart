@@ -166,14 +166,18 @@ class Product extends JsonObject {
   String? servingSize;
 
   @JsonKey(
-      name: 'serving_quantity',
-      fromJson: JsonHelper.servingQuantityFromJson,
-      toJson: jsonEncode,
-      includeIfNull: false)
+    name: 'serving_quantity',
+    fromJson: JsonHelper.quantityFromJson,
+    includeIfNull: false,
+  )
   double? servingQuantity;
 
-  @JsonKey(name: 'product_quantity', includeIfNull: false)
-  dynamic packagingQuantity;
+  @JsonKey(
+    name: 'product_quantity',
+    fromJson: JsonHelper.quantityFromJson,
+    includeIfNull: false,
+  )
+  double? packagingQuantity;
 
   /// cause nesting is sooo cool ;)
   @JsonKey(
