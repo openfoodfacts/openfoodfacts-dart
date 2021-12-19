@@ -91,19 +91,20 @@ void main() {
           Duration(seconds: 90),
         ));
 
-    String _getRandomTimestamp({int random = 100000}) =>
-        DateTime.now().toString() +
-        ' (' +
-        Random().nextInt(random).toString() +
-        ')';
+    /// Returns a timestamp up to the minute level.
+    String _getMinuteTimestamp() =>
+        DateTime.now().toIso8601String().substring(0, 16);
 
     test('dont overwrite language', () async {
       const String barcode = '4008391212596';
-      // Assign random product names, to make sure we won't fail to update the
-      // product and then read a previously written value
+      // Assign time-related product names, to make sure we won't fail to update
+      // the product and then read a previously written value.
+      // In github tests it looks like the same test is being run twice
+      // almost in parallel.
+      // If we stay at the minute level we're relatively safe.
       final String frenchProductName =
-          "Flocons d'epeautre au blé complet " + _getRandomTimestamp();
-      final String germanProductName = 'Dinkelflakes' + _getRandomTimestamp();
+          "Flocons d'epeautre au blé complet " + _getMinuteTimestamp();
+      final String germanProductName = 'Dinkelflakes' + _getMinuteTimestamp();
 
       // save french product name
       final Product frenchProduct = Product(
@@ -228,7 +229,11 @@ void main() {
 
       expect(status.status, 1);
       expect(status.statusVerbose, 'fields saved');
-    });
+    },
+        timeout: Timeout(
+          // this guy is rather slow
+          Duration(seconds: 90),
+        ));
 
     test('add new product test 4', () async {
       Product product = Product(
