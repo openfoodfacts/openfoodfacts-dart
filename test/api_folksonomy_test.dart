@@ -1,7 +1,3 @@
-import 'package:openfoodfacts/folksonomy.dart';
-import 'package:openfoodfacts/model/KeyStats.dart';
-import 'package:openfoodfacts/model/ProductStats.dart';
-import 'package:openfoodfacts/model/ProductTag.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
