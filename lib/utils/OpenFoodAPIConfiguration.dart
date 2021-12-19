@@ -1,3 +1,4 @@
+import 'package:openfoodfacts/model/User.dart';
 import 'package:openfoodfacts/model/UserAgent.dart';
 
 import 'CountryHelper.dart';
@@ -12,6 +13,9 @@ class OpenFoodAPIConfiguration {
 
   ///Defines a global userAgent to tell the backend the source of the request.
   static UserAgent? userAgent;
+
+  ///Defines a global user to avoid adding it to every request
+  static User? globalUser;
 
   ///change the uriScheme of the requests
   static String uriScheme = 'https';
@@ -51,6 +55,9 @@ class OpenFoodAPIConfiguration {
   ///Returns the [QueryType] to use, using a default value
   static QueryType getQueryType(final QueryType? queryType) =>
       queryType ?? globalQueryType;
+
+  ///Returns the [User] to use, using a default value
+  static User? getUser(final User? user) => user ?? globalUser;
 
   /// Returns the most relevant country code
   static String? computeCountryCode(
