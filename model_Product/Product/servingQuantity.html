@@ -52,7 +52,7 @@
         <section class="multi-line-signature">
           <a href="https://api.dart.dev/stable/2.15.1/dart-core/double-class.html">double</a>?
           <span class="name ">servingQuantity</span>
-          <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;serving_quantity&#39;, fromJson: JsonHelper.servingQuantityFromJson, includeIfNull: false), read / write</div>
+          <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.1.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;serving_quantity&#39;, fromJson: JsonHelper.quantityFromJson, includeIfNull: false), read / write</div>
 
         </section>
         
@@ -61,9 +61,10 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@JsonKey(
-    name: &#39;serving_quantity&#39;,
-    fromJson: JsonHelper.servingQuantityFromJson,
-    includeIfNull: false)
+  name: &#39;serving_quantity&#39;,
+  fromJson: JsonHelper.quantityFromJson,
+  includeIfNull: false,
+)
 double? servingQuantity;
 
 </code></pre>
@@ -114,6 +115,7 @@ double? servingQuantity;
     <li><a href="../../model_Product/Product/ecoscoreGrade.html">ecoscoreGrade</a></li>
     <li><a href="../../model_Product/Product/ecoscoreScore.html">ecoscoreScore</a></li>
     <li><a href="../../model_Product/Product/environmentImpactLevels.html">environmentImpactLevels</a></li>
+    <li><a href="../../model_Product/Product/genericName.html">genericName</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/hashCode.html">hashCode</a></li>
     <li><a href="../../model_Product/Product/imageFrontSmallUrl.html">imageFrontSmallUrl</a></li>
     <li><a href="../../model_Product/Product/imageFrontUrl.html">imageFrontUrl</a></li>
@@ -154,6 +156,7 @@ double? servingQuantity;
     <li><a href="../../model_Product/Product/servingQuantity.html">servingQuantity</a></li>
     <li><a href="../../model_Product/Product/servingSize.html">servingSize</a></li>
     <li><a href="../../model_Product/Product/statesTags.html">statesTags</a></li>
+    <li><a href="../../model_Product/Product/stores.html">stores</a></li>
     <li><a href="../../model_Product/Product/storesTags.html">storesTags</a></li>
     <li><a href="../../model_Product/Product/tracesTags.html">tracesTags</a></li>
 

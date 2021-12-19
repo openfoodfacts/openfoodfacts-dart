@@ -53,6 +53,7 @@
       <span class="name ">Product</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-barcode">{<span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">barcode</span>, </span></li>
 <li><span class="parameter" id="-param-productName"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">productName</span>, </span></li>
 <li><span class="parameter" id="-param-productNameInLanguages"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../utils_LanguageHelper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">productNameInLanguages</span>, </span></li>
+<li><span class="parameter" id="-param-genericName"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">genericName</span>, </span></li>
 <li><span class="parameter" id="-param-brands"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">brands</span>, </span></li>
 <li><span class="parameter" id="-param-brandsTags"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">brandsTags</span>, </span></li>
 <li><span class="parameter" id="-param-countries"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">countries</span>, </span></li>
@@ -71,7 +72,7 @@
 <li><span class="parameter" id="-param-imagePackagingSmallUrl"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">imagePackagingSmallUrl</span>, </span></li>
 <li><span class="parameter" id="-param-servingSize"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">servingSize</span>, </span></li>
 <li><span class="parameter" id="-param-servingQuantity"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/double-class.html">double</a>?</span> <span class="parameter-name">servingQuantity</span>, </span></li>
-<li><span class="parameter" id="-param-packagingQuantity"><span class="type-annotation">dynamic</span> <span class="parameter-name">packagingQuantity</span>, </span></li>
+<li><span class="parameter" id="-param-packagingQuantity"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/double-class.html">double</a>?</span> <span class="parameter-name">packagingQuantity</span>, </span></li>
 <li><span class="parameter" id="-param-selectedImages"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../model_ProductImage/ProductImage-class.html">ProductImage</a></span>&gt;</span>?</span> <span class="parameter-name">selectedImages</span>, </span></li>
 <li><span class="parameter" id="-param-images"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../model_ProductImage/ProductImage-class.html">ProductImage</a></span>&gt;</span>?</span> <span class="parameter-name">images</span>, </span></li>
 <li><span class="parameter" id="-param-ingredients"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../model_Ingredient/Ingredient-class.html">Ingredient</a></span>&gt;</span>?</span> <span class="parameter-name">ingredients</span>, </span></li>
@@ -100,6 +101,7 @@
 <li><span class="parameter" id="-param-statesTags"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">statesTags</span>, </span></li>
 <li><span class="parameter" id="-param-tracesTags"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">tracesTags</span>, </span></li>
 <li><span class="parameter" id="-param-storesTags"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">storesTags</span>, </span></li>
+<li><span class="parameter" id="-param-stores"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">stores</span>, </span></li>
 <li><span class="parameter" id="-param-attributeGroups"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../model_AttributeGroup/AttributeGroup-class.html">AttributeGroup</a></span>&gt;</span>?</span> <span class="parameter-name">attributeGroups</span>, </span></li>
 <li><span class="parameter" id="-param-lastModified"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">lastModified</span>, </span></li>
 <li><span class="parameter" id="-param-ecoscoreGrade"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">ecoscoreGrade</span>, </span></li>
@@ -118,6 +120,7 @@
     {this.barcode,
     this.productName,
     this.productNameInLanguages,
+    this.genericName,
     this.brands,
     this.brandsTags,
     this.countries,
@@ -165,6 +168,7 @@
     this.statesTags,
     this.tracesTags,
     this.storesTags,
+    this.stores,
     this.attributeGroups,
     this.lastModified,
     this.ecoscoreGrade,
@@ -217,6 +221,7 @@
     <li><a href="../../model_Product/Product/ecoscoreGrade.html">ecoscoreGrade</a></li>
     <li><a href="../../model_Product/Product/ecoscoreScore.html">ecoscoreScore</a></li>
     <li><a href="../../model_Product/Product/environmentImpactLevels.html">environmentImpactLevels</a></li>
+    <li><a href="../../model_Product/Product/genericName.html">genericName</a></li>
     <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/hashCode.html">hashCode</a></li>
     <li><a href="../../model_Product/Product/imageFrontSmallUrl.html">imageFrontSmallUrl</a></li>
     <li><a href="../../model_Product/Product/imageFrontUrl.html">imageFrontUrl</a></li>
@@ -257,6 +262,7 @@
     <li><a href="../../model_Product/Product/servingQuantity.html">servingQuantity</a></li>
     <li><a href="../../model_Product/Product/servingSize.html">servingSize</a></li>
     <li><a href="../../model_Product/Product/statesTags.html">statesTags</a></li>
+    <li><a href="../../model_Product/Product/stores.html">stores</a></li>
     <li><a href="../../model_Product/Product/storesTags.html">storesTags</a></li>
     <li><a href="../../model_Product/Product/tracesTags.html">tracesTags</a></li>
 
