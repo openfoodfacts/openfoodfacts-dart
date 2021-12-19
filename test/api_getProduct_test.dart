@@ -35,6 +35,7 @@ void main() {
       Product product = Product(
         barcode: barcode,
         productName: 'Coca Cola Light',
+        genericName: 'Softdrink',
         lang: OpenFoodFactsLanguage.GERMAN,
         countries: 'Frankreich,Deutschland',
         brands: 'Coca Cola',
@@ -76,6 +77,8 @@ void main() {
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
       expect(result.product!.lastModified != null, true);
+
+      expect(result.product!.genericName, 'Softdrink');
 
       // only german ingredients
       expect(result.product!.ingredientsText != null, true);
@@ -1646,5 +1649,49 @@ void main() {
       ).host,
       'de-es.openfoodfacts.net',
     );
+  });
+
+  test('get minified product', () async {
+    String barcode = '111111555555';
+
+    //First add the product to the Test DB
+    Product product = Product(
+      barcode: barcode,
+      lang: OpenFoodFactsLanguage.GERMAN,
+      genericName: 'Softdrink',
+      labels: 'MyTestLabel',
+      packaging: 'de:In einer Plastikflasche',
+      quantity: '5.5 Liter',
+    );
+
+    await OpenFoodAPIClient.saveProduct(
+      TestConstants.TEST_USER,
+      product,
+    );
+
+    ProductQueryConfiguration configurations = ProductQueryConfiguration(
+      barcode,
+      language: OpenFoodFactsLanguage.GERMAN,
+      fields: [
+        ProductField.GENERIC_NAME,
+        ProductField.LABELS,
+        ProductField.PACKAGING,
+        ProductField.PACKAGING_TAGS,
+        ProductField.QUANTITY,
+      ],
+    );
+
+    ProductResult result = await OpenFoodAPIClient.getProduct(
+      configurations,
+      user: TestConstants.TEST_USER,
+    );
+
+    expect(result.status, 1);
+    expect(result.product?.barcode, null);
+    expect(result.product?.genericName, 'Softdrink');
+    expect(result.product?.labels, 'MyTestLabel');
+    expect(result.product?.packaging, 'de:In einer Plastikflasche');
+    expect(result.product?.packagingTags, ['de-in-einer-plastikflasche']);
+    expect(result.product?.quantity, '5.5 Liter');
   });
 }

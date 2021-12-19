@@ -11,6 +11,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       productName: json['product_name'] as String?,
       productNameInLanguages:
           LanguageHelper.fromJsonStringMap(json['product_name_in_languages']),
+      genericName: json['generic_name'] as String?,
       brands: json['brands'] as String?,
       brandsTags: (json['brands_tags'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -90,6 +91,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       storesTags: (json['stores_tags'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      stores: json['stores'] as String?,
       attributeGroups: (json['attribute_groups'] as List<dynamic>?)
           ?.map((e) => AttributeGroup.fromJson(e))
           .toList(),
@@ -124,6 +126,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('product_name', instance.productName);
   writeNotNull('product_name_in_languages',
       LanguageHelper.toJsonStringMap(instance.productNameInLanguages));
+  writeNotNull('generic_name', instance.genericName);
   writeNotNull('brands', instance.brands);
   writeNotNull('brands_tags', instance.brandsTags);
   writeNotNull('countries', instance.countries);
@@ -143,7 +146,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('image_packaging_url', instance.imagePackagingUrl);
   writeNotNull('image_packaging_small_url', instance.imagePackagingSmallUrl);
   writeNotNull('serving_size', instance.servingSize);
-  writeNotNull('serving_quantity', instance.servingQuantity);
+  writeNotNull('serving_quantity', jsonEncode(instance.servingQuantity));
   writeNotNull('product_quantity', instance.packagingQuantity);
   writeNotNull('selected_images',
       JsonHelper.selectedImagesToJson(instance.selectedImages));
@@ -185,6 +188,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('states_tags', instance.statesTags);
   writeNotNull('traces_tags', instance.tracesTags);
   writeNotNull('stores_tags', instance.storesTags);
+  writeNotNull('stores', instance.stores);
   writeNotNull('attribute_groups',
       JsonHelper.attributeGroupsToJson(instance.attributeGroups));
   writeNotNull(

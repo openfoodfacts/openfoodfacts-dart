@@ -1,8 +1,8 @@
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/AttributeGroup.dart';
-import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/model/Ingredient.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
+import 'package:openfoodfacts/utils/LanguageHelper.dart';
 
 /// Helper class around product field conversion to/from JSON
 class JsonHelper {
@@ -127,7 +127,7 @@ class JsonHelper {
   }
 
   /// Returns a double from a JSON-encoded int or double
-  static double? servingQuantityFromJson(dynamic data) {
+  static double? quantityFromJson(dynamic data) {
     if (data == null || data is double) {
       return data;
     }

@@ -1,10 +1,13 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
-import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/model/Attribute.dart';
+import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/utils/JsonHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
+
 import '../interface/JsonObject.dart';
 import 'Additives.dart';
 import 'Allergens.dart';
@@ -102,6 +105,11 @@ class Product extends JsonObject {
       includeIfNull: false)
   Map<OpenFoodFactsLanguage, String>? productNameInLanguages;
 
+  ///Common name
+  ///Example: Chocolate bar with milk and hazelnuts
+  @JsonKey(name: 'generic_name', includeIfNull: false)
+  String? genericName;
+
   @JsonKey(name: 'brands', includeIfNull: false)
   String? brands;
   @JsonKey(name: 'brands_tags', includeIfNull: false)
@@ -156,13 +164,20 @@ class Product extends JsonObject {
 
   @JsonKey(name: 'serving_size', includeIfNull: false)
   String? servingSize;
+
   @JsonKey(
-      name: 'serving_quantity',
-      fromJson: JsonHelper.servingQuantityFromJson,
-      includeIfNull: false)
+    name: 'serving_quantity',
+    fromJson: JsonHelper.quantityFromJson,
+    includeIfNull: false,
+  )
   double? servingQuantity;
-  @JsonKey(name: 'product_quantity', includeIfNull: false)
-  dynamic packagingQuantity;
+
+  @JsonKey(
+    name: 'product_quantity',
+    fromJson: JsonHelper.quantityFromJson,
+    includeIfNull: false,
+  )
+  double? packagingQuantity;
 
   /// cause nesting is sooo cool ;)
   @JsonKey(
@@ -292,6 +307,9 @@ class Product extends JsonObject {
   @JsonKey(name: 'stores_tags', includeIfNull: false)
   List<String>? storesTags;
 
+  @JsonKey(name: 'stores', includeIfNull: false)
+  String? stores;
+
   @JsonKey(
       name: 'attribute_groups',
       includeIfNull: false,
@@ -322,6 +340,7 @@ class Product extends JsonObject {
       {this.barcode,
       this.productName,
       this.productNameInLanguages,
+      this.genericName,
       this.brands,
       this.brandsTags,
       this.countries,
@@ -369,6 +388,7 @@ class Product extends JsonObject {
       this.statesTags,
       this.tracesTags,
       this.storesTags,
+      this.stores,
       this.attributeGroups,
       this.lastModified,
       this.ecoscoreGrade,
