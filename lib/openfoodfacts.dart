@@ -45,13 +45,18 @@ import 'utils/ProductHelper.dart';
 import 'utils/ProductQueryConfigurations.dart';
 import 'utils/ProductSearchQueryConfiguration.dart';
 
+export 'folksonomy.dart';
 export 'interface/Parameter.dart';
 export 'model/Additives.dart';
 export 'model/Ingredient.dart';
 export 'model/Insight.dart';
+export 'model/KeyStats.dart';
 export 'model/Product.dart';
+// export 'model/ProductList.dart'; // not needed
 export 'model/ProductImage.dart';
 export 'model/ProductResult.dart';
+export 'model/ProductStats.dart';
+export 'model/ProductTag.dart';
 export 'model/RobotoffQuestion.dart';
 export 'model/SearchResult.dart';
 export 'model/SendImage.dart';

@@ -132,6 +132,46 @@ class HttpHelper {
     return status;
   }
 
+  /// Send a http DELETE request to the specified uri.
+  Future<http.Response> doDeleteRequest(
+    final Uri uri, {
+    final User? user,
+    final UserAgent? userAgent,
+    final QueryType? queryType,
+  }) async =>
+      await http.delete(
+        uri,
+        headers: _buildHeaders(
+          user: user,
+          userAgent: userAgent ?? OpenFoodAPIConfiguration.userAgent,
+          isTestModeActive:
+              OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+                  ? false
+                  : true,
+        ),
+      );
+
+  /// Send a http PUT request to the specified uri.
+  Future<http.Response> doPutRequest(
+    final Uri uri,
+    final String body, {
+    final User? user,
+    final UserAgent? userAgent,
+    final QueryType? queryType,
+  }) async =>
+      await http.put(
+        uri,
+        body: body,
+        headers: _buildHeaders(
+          user: user,
+          userAgent: userAgent ?? OpenFoodAPIConfiguration.userAgent,
+          isTestModeActive:
+              OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+                  ? false
+                  : true,
+        ),
+      );
+
   /// build the request headers
   /// By default isTestMode is false
   Map<String, String>? _buildHeaders({
