@@ -1,19 +1,16 @@
 github_actions:
 - .github/**/*
 
-github_actions:
-- .github/**/*
-
 test:
 - test/**/*
 
 knowledge panels:
 - lib/model/KnowledgePanel.g.dart
-lib/model/KnowledgePanelElement.g.dart
+- lib/model/KnowledgePanelElement.g.dart
 
 product:
 - lib/model/Product.dart
-lib/model/Product.g.dart
+- lib/model/Product.g.dart
 
 robotoff:
 - lib/model/RobotoffQuestion.g.dart
