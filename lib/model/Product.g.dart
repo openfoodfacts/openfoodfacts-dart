@@ -34,9 +34,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       imagePackagingUrl: json['image_packaging_url'] as String?,
       imagePackagingSmallUrl: json['image_packaging_small_url'] as String?,
       servingSize: json['serving_size'] as String?,
-      servingQuantity:
-          JsonHelper.servingQuantityFromJson(json['serving_quantity']),
-      packagingQuantity: json['product_quantity'],
+      servingQuantity: JsonHelper.quantityFromJson(json['serving_quantity']),
+      packagingQuantity: JsonHelper.quantityFromJson(json['product_quantity']),
       selectedImages:
           JsonHelper.selectedImagesFromJson(json['selected_images'] as Map?),
       images: JsonHelper.imagesFromJson(json['images'] as Map?),
@@ -146,7 +145,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('image_packaging_url', instance.imagePackagingUrl);
   writeNotNull('image_packaging_small_url', instance.imagePackagingSmallUrl);
   writeNotNull('serving_size', instance.servingSize);
-  writeNotNull('serving_quantity', jsonEncode(instance.servingQuantity));
+  writeNotNull('serving_quantity', instance.servingQuantity);
   writeNotNull('product_quantity', instance.packagingQuantity);
   writeNotNull('selected_images',
       JsonHelper.selectedImagesToJson(instance.selectedImages));
