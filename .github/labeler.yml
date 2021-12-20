@@ -1,0 +1,28 @@
+github_actions:
+- .github/**/*
+
+test:
+- test/**/*
+
+knowledge panels:
+- lib/model/KnowledgePanel.g.dart
+- lib/model/KnowledgePanelElement.g.dart
+
+product:
+- lib/model/Product.dart
+- lib/model/Product.g.dart
+
+robotoff:
+- lib/model/RobotoffQuestion.g.dart
+
+pubspec:
+- pubspec.yaml
+
+ecoscore:
+- lib/model/EcoscoreData.g.dart
+
+personalized search:
+- lib/personalized_search/**/*
+
+folksonomy:
+- lib/folksonomy.dart
