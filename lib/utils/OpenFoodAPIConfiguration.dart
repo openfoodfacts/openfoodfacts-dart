@@ -32,6 +32,13 @@ class OpenFoodAPIConfiguration {
   ///Uri host of the test requests to Robotoff
   static String uriTestHostRobotoff = 'robotoff.openfoodfacts.net';
 
+  ///Uri host of the Folksonomy requests to the backend, modify this to direct the request to a self-hosted instance.
+  static String uriProdHostFolksonomy = 'api.folksonomy.openfoodfacts.org';
+
+  ///Uri host of the test requests to Folksonomy
+  static String uriTestHostFolksonomy =
+      'api.folksonomy.openfoodfacts.net'; // TODO does not work
+
   ///Changes whether the requests sent by this package to the test or main server.
   static QueryType globalQueryType = QueryType.PROD;
 

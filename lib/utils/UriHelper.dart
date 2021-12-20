@@ -38,6 +38,21 @@ class UriHelper {
         queryParameters: queryParameters,
       );
 
+  ///Returns a OFF-Folksonomy uri with the in the [OpenFoodAPIConfiguration] specified settings
+  static Uri getFolksonomyUri({
+    required final String path,
+    final Map<String, dynamic>? queryParameters,
+    final QueryType? queryType,
+  }) =>
+      Uri(
+        scheme: OpenFoodAPIConfiguration.uriScheme,
+        host: OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+            ? OpenFoodAPIConfiguration.uriProdHostFolksonomy
+            : OpenFoodAPIConfiguration.uriTestHostFolksonomy,
+        path: path,
+        queryParameters: queryParameters,
+      );
+
   /// Replaces the subdomain of an URI with specific country and language
   ///
   /// For instance
