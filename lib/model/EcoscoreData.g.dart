@@ -9,7 +9,7 @@ part of 'EcoscoreData.dart';
 EcoscoreData _$EcoscoreDataFromJson(Map<String, dynamic> json) => EcoscoreData(
       grade: json['grade'] as String?,
       score: JsonObject.parseDouble(json['score']),
-      status: _$enumDecodeNullable(_$EcoscoreStatusEnumMap, json['status']),
+      status: $enumDecodeNullable(_$EcoscoreStatusEnumMap, json['status']),
       agribalyse: json['agribalyse'] == null
           ? null
           : Agribalyse.fromJson(json['agribalyse'] as Map<String, dynamic>),
@@ -38,43 +38,6 @@ Map<String, dynamic> _$EcoscoreDataToJson(EcoscoreData instance) {
   writeNotNull('adjustments', instance.adjustments?.toJson());
   val['missing_data_warning'] = instance.missingDataWarning;
   return val;
-}
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-K? _$enumDecodeNullable<K, V>(
-  Map<K, V> enumValues,
-  dynamic source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
 const _$EcoscoreStatusEnumMap = {
