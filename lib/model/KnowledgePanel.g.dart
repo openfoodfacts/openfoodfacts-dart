@@ -12,7 +12,7 @@ KnowledgePanel _$KnowledgePanelFromJson(Map<String, dynamic> json) =>
           ? null
           : TitleElement.fromJson(
               json['title_element'] as Map<String, dynamic>),
-      level: _$enumDecodeNullable(_$LevelEnumMap, json['level'],
+      level: $enumDecodeNullable(_$LevelEnumMap, json['level'],
           unknownValue: Level.UNKNOWN),
       expanded: json['expanded'] as bool?,
       elements: (json['elements'] as List<dynamic>?)
@@ -21,7 +21,7 @@ KnowledgePanel _$KnowledgePanelFromJson(Map<String, dynamic> json) =>
           .toList(),
       topics:
           (json['topics'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      evaluation: _$enumDecodeNullable(_$EvaluationEnumMap, json['evaluation'],
+      evaluation: $enumDecodeNullable(_$EvaluationEnumMap, json['evaluation'],
           unknownValue: Evaluation.UNKNOWN),
     );
 
@@ -34,43 +34,6 @@ Map<String, dynamic> _$KnowledgePanelToJson(KnowledgePanel instance) =>
       'topics': instance.topics,
       'evaluation': _$EvaluationEnumMap[instance.evaluation],
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-K? _$enumDecodeNullable<K, V>(
-  Map<K, V> enumValues,
-  dynamic source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
-}
 
 const _$LevelEnumMap = {
   Level.TRIVIA: 'trivia',
@@ -92,9 +55,9 @@ const _$EvaluationEnumMap = {
 TitleElement _$TitleElementFromJson(Map<String, dynamic> json) => TitleElement(
       title: json['title'] as String,
       subtitle: json['subtitle'] as String?,
-      grade: _$enumDecodeNullable(_$GradeEnumMap, json['grade'],
+      grade: $enumDecodeNullable(_$GradeEnumMap, json['grade'],
           unknownValue: Grade.UNKNOWN),
-      type: _$enumDecodeNullable(_$TitleElementTypeEnumMap, json['type'],
+      type: $enumDecodeNullable(_$TitleElementTypeEnumMap, json['type'],
           unknownValue: TitleElementType.UNKNOWN),
       iconUrl: json['icon_url'] as String?,
       iconColorFromEvaluation:

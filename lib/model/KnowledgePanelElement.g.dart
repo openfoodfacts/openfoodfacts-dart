@@ -10,7 +10,7 @@ KnowledgePanelTextElement _$KnowledgePanelTextElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTextElement(
       html: json['html'] as String,
-      type: _$enumDecodeNullable(
+      type: $enumDecodeNullable(
           _$KnowledgePanelTextElementTypeEnumMap, json['text_type'],
           unknownValue: KnowledgePanelTextElementType.DEFAULT),
     );
@@ -21,43 +21,6 @@ Map<String, dynamic> _$KnowledgePanelTextElementToJson(
       'html': instance.html,
       'text_type': _$KnowledgePanelTextElementTypeEnumMap[instance.type],
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-K? _$enumDecodeNullable<K, V>(
-  Map<K, V> enumValues,
-  dynamic source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
-}
 
 const _$KnowledgePanelTextElementTypeEnumMap = {
   KnowledgePanelTextElementType.SUMMARY: 'summary',
@@ -117,7 +80,7 @@ KnowledgePanelTableCell _$KnowledgePanelTableCellFromJson(
       text: json['text'] as String,
       percent: (json['percent'] as num?)?.toDouble(),
       iconUrl: json['icon_url'] as String?,
-      evaluation: _$enumDecodeNullable(_$EvaluationEnumMap, json['evaluation'],
+      evaluation: $enumDecodeNullable(_$EvaluationEnumMap, json['evaluation'],
           unknownValue: Evaluation.UNKNOWN),
     );
 
@@ -157,8 +120,7 @@ KnowledgePanelTableColumn _$KnowledgePanelTableColumnFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTableColumn(
       text: json['text'] as String,
-      type: _$enumDecodeNullable(
-          _$KnowledgePanelColumnTypeEnumMap, json['type'],
+      type: $enumDecodeNullable(_$KnowledgePanelColumnTypeEnumMap, json['type'],
           unknownValue: KnowledgePanelColumnType.TEXT),
     );
 
@@ -244,7 +206,7 @@ Map<String, dynamic> _$KnowledgePanelTableElementToJson(
 KnowledgePanelElement _$KnowledgePanelElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelElement(
-      elementType: _$enumDecode(
+      elementType: $enumDecode(
           _$KnowledgePanelElementTypeEnumMap, json['element_type'],
           unknownValue: KnowledgePanelElementType.UNKNOWN),
       textElement: json['text_element'] == null

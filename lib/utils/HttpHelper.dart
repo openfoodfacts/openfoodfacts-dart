@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
-import 'package:openfoodfacts/model/UserAgent.dart';
 
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/UriReader.dart';
