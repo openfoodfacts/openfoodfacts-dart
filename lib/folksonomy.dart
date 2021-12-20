@@ -31,7 +31,9 @@ class FolksonomyAPIClient {
     _checkResponse(response);
   }
 
-  /// Returns all the [ProductStats] with that tag key, or with tag key == value
+  /// Returns all the [ProductStats], with an optional filter.
+  ///
+  /// The result can be filtered with that [key], or with [key] = [value].
   static Future<List<ProductStats>> getProductStats({
     final String? key,
     final String? value,
@@ -63,6 +65,10 @@ class FolksonomyAPIClient {
     );
     _checkResponse(response);
     final List<ProductStats> result = <ProductStats>[];
+    if (response.body == 'null') {
+      // not found
+      return result;
+    }
     final List<dynamic> json = jsonDecode(response.body) as List<dynamic>;
     for (var element in json) {
       result.add(ProductStats.fromJson(element));
@@ -70,7 +76,7 @@ class FolksonomyAPIClient {
     return result;
   }
 
-  /// Returns all the products with that tag key.
+  /// Returns all the products with that [key].
   ///
   /// The key of the returned map is the barcode, the value is the tag value.
   static Future<Map<String, String>> getProducts({
@@ -111,7 +117,7 @@ class FolksonomyAPIClient {
 
   /// Returns all the [ProductTag]s for this product
   ///
-  /// The key of the returned map is the key.
+  /// The key of the returned map is the tag key.
   static Future<Map<String, ProductTag>> getProductTags({
     required final String barcode,
     final QueryType? queryType,
@@ -237,7 +243,7 @@ Future<void> deleteProductTag({
 }
  */
 
-  /// Folksonomy: returns the versions of [ProductTag] for this product and key.
+  /// Returns the versions of [ProductTag] for this [barcode] and [key].
   static Future<List<ProductTag>> getProductTagVersions({
     required final String barcode,
     required final String key,
@@ -323,11 +329,12 @@ Future<void> deleteProductTag({
   }
    */
 
+  /// Returns the list of tag keys with statistics.
   static Future<Map<String, KeyStats>> getKeys({
     final QueryType? queryType,
   }) async {
     final Map<String, String> parameters = <String, String>{};
-    /* TODO
+    /* TODO "The keys list can be restricted to private tags from some owner"
     if (owner != null) {
       parameters['owner'] = owner;
     }
@@ -363,9 +370,10 @@ Future<void> deleteProductTag({
     _checkResponse(response);
   }
 
+  /// Throws a detailed exception if relevant. Does nothing if [response] is OK.
   static void _checkResponse(final Response response) {
     if (response.statusCode != 200) {
-      print('ERROR: ${response.body}');
+      // TODO have a look at ValidationError in https://api.folksonomy.openfoodfacts.org/docs
       throw Exception('Wrong status code: ${response.statusCode}');
     }
   }

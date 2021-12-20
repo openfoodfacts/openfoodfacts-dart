@@ -8,59 +8,96 @@ void main() {
   // TODO have it working on TEST too
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
-  const String barcode = '9310036071174';
-  const String key = 'packaging:character:wikidata';
-  const String unknownBarcode = 'blablabla$barcode';
-  const String unknownKey = 'blablabla$key';
+  // of course we need to check that those 3 "known" guys combine well
+  const String knownBarcode = '9310036071174';
+  const String knownKey = 'packaging:character:wikidata';
+  const String knownValue = 'Q51785';
+
+  const String unknownBarcode = 'blablabla$knownBarcode';
+  const String unknownKey = 'blablabla$knownKey';
+  const String unknownValue = 'blablabla$knownValue';
+
   const List<Map<String, String>> unknownParameters = <Map<String, String>>[
-    {'barcode': unknownBarcode, 'key': key},
-    {'barcode': barcode, 'key': unknownKey},
+    {'barcode': unknownBarcode, 'key': knownKey},
+    {'barcode': knownBarcode, 'key': unknownKey},
   ];
 
-  void _checkProductTagList(
-    final Iterable<ProductTag> list,
-    final String expectedBarcode, {
-    final String? key,
-  }) {
+  /// Checks that all [ProductTag]s concern that [barcode], and [key] in option.
+  void _checkProductTagList(final Iterable<ProductTag> list) {
     bool found = false;
     for (var element in list) {
-      expect(element.barcode, barcode);
-      if (key != null) {
-        if (element.key == key) {
-          found = true;
-        }
+      expect(element.barcode, knownBarcode);
+      if (element.key == knownKey) {
+        found = true;
+        expect(element.value, knownValue);
       }
     }
-    expect(found, key != null);
+    expect(found, true);
+  }
+
+  /// Checks that all [ProductStats]s concern that [barcode], and [key] in option.
+  void _checkProductStatsList(final Iterable<ProductStats> list) {
+    bool foundBarcode = false;
+    for (final ProductStats productStats in list) {
+      if (productStats.barcode == knownBarcode) {
+        foundBarcode = true;
+        expect(productStats.numberOfKeys, greaterThanOrEqualTo(1));
+      }
+    }
+    expect(foundBarcode, true);
   }
 
   group('$OpenFoodAPIClient Folksonomy', () {
     test('hello', () async => await FolksonomyAPIClient.hello());
 
-    test('getProductStats', () async {
+    test('getProductStats - all', () async {
       final List<ProductStats> result =
           await FolksonomyAPIClient.getProductStats();
       expect(result, isNotEmpty);
-      bool foundBarcode = false;
-      for (final ProductStats productStats in result) {
-        if (productStats.barcode == barcode) {
-          foundBarcode = true;
-          expect(productStats.numberOfKeys, greaterThanOrEqualTo(1));
-        }
-      }
-      expect(foundBarcode, true);
+      _checkProductStatsList(result);
     });
 
-    test('getProducts - found', () async {
+    test('getProductStats - found', () async {
+      final List<ProductStats> result =
+          await FolksonomyAPIClient.getProductStats(key: knownKey);
+      expect(result, isNotEmpty);
+      _checkProductStatsList(result);
+    });
+
+    test('getProductStats - not found', () async {
+      final List<ProductStats> result =
+          await FolksonomyAPIClient.getProductStats(key: unknownKey);
+      expect(result, isEmpty);
+    });
+
+    test('getProducts - found key', () async {
       final Map<String, String> result = await FolksonomyAPIClient.getProducts(
-        key: key,
+        key: knownKey,
       );
       expect(result, isNotEmpty);
+      expect(result[knownBarcode], knownValue);
     });
 
-    test('getProducts - not found', () async {
+    test('getProducts - found key and value', () async {
+      final Map<String, String> result = await FolksonomyAPIClient.getProducts(
+        key: knownKey,
+        value: knownValue,
+      );
+      expect(result, isNotEmpty);
+      expect(result[knownBarcode], knownValue);
+    });
+
+    test('getProducts - not found key', () async {
       final Map<String, String> result = await FolksonomyAPIClient.getProducts(
         key: unknownKey,
+      );
+      expect(result, isEmpty);
+    });
+
+    test('getProducts - not found key and value', () async {
+      final Map<String, String> result = await FolksonomyAPIClient.getProducts(
+        key: knownKey,
+        value: unknownValue,
       );
       expect(result, isEmpty);
     });
@@ -68,10 +105,10 @@ void main() {
     test('getProductTags - found', () async {
       final Map<String, ProductTag> result =
           await FolksonomyAPIClient.getProductTags(
-        barcode: barcode,
+        barcode: knownBarcode,
       );
       expect(result, isNotEmpty);
-      _checkProductTagList(result.values, barcode);
+      _checkProductTagList(result.values);
     });
 
     test('getProductTags - not found', () async {
@@ -84,12 +121,12 @@ void main() {
 
     test('getProductTag - found', () async {
       final ProductTag? result = await FolksonomyAPIClient.getProductTag(
-        barcode: barcode,
-        key: key,
+        barcode: knownBarcode,
+        key: knownKey,
       );
       expect(result, isNotNull);
-      expect(result!.barcode, barcode);
-      expect(result.key, key);
+      expect(result!.barcode, knownBarcode);
+      expect(result.key, knownKey);
     });
 
     test('getProductTag - not found', () async {
@@ -105,11 +142,11 @@ void main() {
     test('getProductTagWithSubKeys - found', () async {
       final Map<String, ProductTag> result =
           await FolksonomyAPIClient.getProductTagWithSubKeys(
-        barcode: barcode,
-        key: key,
+        barcode: knownBarcode,
+        key: knownKey,
       );
       expect(result, isNotEmpty);
-      _checkProductTagList(result.values, barcode, key: key);
+      _checkProductTagList(result.values);
     });
 
     test('getProductTagWithSubKeys - not found', () async {
@@ -136,11 +173,11 @@ void main() {
     test('getProductTagVersions - found', () async {
       final List<ProductTag> result =
           await FolksonomyAPIClient.getProductTagVersions(
-        barcode: barcode,
-        key: key,
+        barcode: knownBarcode,
+        key: knownKey,
       );
       expect(result, isNotEmpty);
-      _checkProductTagList(result, barcode, key: key);
+      _checkProductTagList(result);
     });
 
     test('getProductTagVersions - not found', () async {
@@ -190,8 +227,8 @@ void main() {
 
     test('getKeys', () async {
       final Map<String, KeyStats> result = await FolksonomyAPIClient.getKeys();
-      final KeyStats keyStats = result[key]!;
-      expect(keyStats.key, key);
+      final KeyStats keyStats = result[knownKey]!;
+      expect(keyStats.key, knownKey);
       expect(keyStats.count, greaterThanOrEqualTo(1));
       expect(keyStats.values, greaterThanOrEqualTo(1));
     });
