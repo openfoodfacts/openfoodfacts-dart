@@ -61,7 +61,8 @@
     </section>
     
 <section class="desc markdown">
-  <p>Converts an ISO 2 code into an <a href="../../utils_CountryHelper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a></p>
+  <p>Converts an ISO 2 code into an <a href="../../utils_CountryHelper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a> (case-insensitive).</p>
+<p>E.g. 'fr' and 'FR' will give the same result: OpenFoodFactsCountry.FRANCE.</p>
 </section>
 
 
@@ -72,6 +73,7 @@
   if (code == null) {
     return null;
   }
+  code = code.toLowerCase();
   for (final OpenFoodFactsCountry key in OpenFoodFactsCountry.values) {
     if (key.iso2Code == code) {
       return key;
