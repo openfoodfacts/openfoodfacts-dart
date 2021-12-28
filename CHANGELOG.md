@@ -12,6 +12,13 @@
 * Added missing product fields to ProductField enum ([#331](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/331)) ([4bbd66c](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/4bbd66c4d5b1b6e9be460029598125e0e519e2f1))
 * Don't pass country code if it's null ([#324](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/324)) ([5f9447c](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/5f9447c474e1a8a5ea9dc18233b2df8374c7bd6c))
 
+### [1.8.1](https://www.github.com/openfoodfacts/openfoodfacts-dart/compare/v1.8.0...v1.8.1) (2021-12-28)
+
+
+### Bug Fixes
+
+* Lowercased country code ([#343](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/343)) ([bdf6451](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/bdf645197a81e40c357bd126e09986d195f96e05))
+
 ## [1.7.0](https://www.github.com/openfoodfacts/openfoodfacts-dart/compare/v1.6.0...v1.7.0) (2021-12-15)
 
 
