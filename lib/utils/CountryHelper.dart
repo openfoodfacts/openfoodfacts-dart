@@ -1007,11 +1007,14 @@ extension OpenFoodFactsCoutryExtension on OpenFoodFactsCountry {
 
 /// Helper class around [OpenFoodFactsCountry]
 class CountryHelper {
-  /// Converts an ISO 2 code into an [OpenFoodFactsCountry]
+  /// Converts an ISO 2 code into an [OpenFoodFactsCountry] (case-insensitive).
+  ///
+  /// E.g. 'fr' and 'FR' will give the same result: OpenFoodFactsCountry.FRANCE.
   static OpenFoodFactsCountry? fromJson(String? code) {
     if (code == null) {
       return null;
     }
+    code = code.toLowerCase();
     for (final OpenFoodFactsCountry key in OpenFoodFactsCountry.values) {
       if (key.iso2Code == code) {
         return key;

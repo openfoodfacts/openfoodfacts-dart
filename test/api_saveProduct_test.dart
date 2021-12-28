@@ -85,11 +85,7 @@ void main() {
       );
 
       testProductResult1(result2);
-    },
-        timeout: Timeout(
-          // this guy is rather slow
-          Duration(seconds: 90),
-        ));
+    });
 
     /// Returns a timestamp up to the minute level.
     String _getMinuteTimestamp() =>
@@ -189,11 +185,7 @@ void main() {
 
       expect(frenchGermanResult.product, isNotNull);
       expect(frenchGermanResult.product!.productName, frenchProductName);
-    },
-        timeout: Timeout(
-          // this guy is rather slow
-          Duration(seconds: 90),
-        ));
+    });
 
     test('add new product test 2', () async {
       Product product = Product(
@@ -229,11 +221,7 @@ void main() {
 
       expect(status.status, 1);
       expect(status.statusVerbose, 'fields saved');
-    },
-        timeout: Timeout(
-          // this guy is rather slow
-          Duration(seconds: 90),
-        ));
+    });
 
     test('add new product test 4', () async {
       Product product = Product(
@@ -434,5 +422,9 @@ void main() {
       );
       expect(status.isWrongUsernameOrPassword(), isTrue);
     });
-  });
+  },
+      timeout: Timeout(
+        // some tests can be slow here
+        Duration(seconds: 90),
+      ));
 }
