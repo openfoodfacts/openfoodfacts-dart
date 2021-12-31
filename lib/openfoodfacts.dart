@@ -9,6 +9,7 @@ import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/model/OrderedNutrients.dart';
+import 'package:openfoodfacts/model/ProductFreshness.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/model/TaxonomyAdditive.dart';
 import 'package:openfoodfacts/model/TaxonomyAllergen.dart';
@@ -23,6 +24,7 @@ import 'package:openfoodfacts/utils/ImageHelper.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
+import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
@@ -51,6 +53,7 @@ export 'model/Ingredient.dart';
 export 'model/Insight.dart';
 export 'model/KeyStats.dart';
 export 'model/Product.dart';
+export 'model/ProductFreshness.dart';
 // export 'model/ProductList.dart'; // not needed
 export 'model/ProductImage.dart';
 export 'model/ProductResult.dart';
@@ -291,6 +294,39 @@ class OpenFoodAPIClient {
 
     _removeImages(result, configuration);
 
+    return result;
+  }
+
+  /// Returns the [ProductFreshness] for all the [barcodes].
+  static Future<Map<String, ProductFreshness>> getProductFreshness({
+    required final List<String> barcodes,
+    final User? user,
+    final OpenFoodFactsLanguage? language,
+    final OpenFoodFactsCountry? country,
+    QueryType? queryType,
+  }) async {
+    final SearchResult searchResult = await getProductList(
+      user,
+      ProductListQueryConfiguration(
+        barcodes,
+        language: language,
+        country: country,
+        fields: [
+          ProductField.BARCODE,
+          ProductField.ECOSCORE_SCORE,
+          ProductField.NUTRISCORE,
+          ProductField.INGREDIENTS_TAGS,
+        ],
+      ),
+      queryType: queryType,
+    );
+    final Map<String, ProductFreshness> result = <String, ProductFreshness>{};
+    if (searchResult.products == null) {
+      return result;
+    }
+    for (final Product product in searchResult.products!) {
+      result[product.barcode!] = ProductFreshness.fromProduct(product);
+    }
     return result;
   }
 

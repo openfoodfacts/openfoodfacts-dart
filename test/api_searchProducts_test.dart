@@ -1,8 +1,10 @@
+import 'package:openfoodfacts/model/ProductFreshness.dart';
 import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
 import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 import 'package:openfoodfacts/model/parameter/WithoutAdditives.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
@@ -402,6 +404,47 @@ void main() {
         final String barcode = product.barcode!;
         expect(BARCODES.contains(barcode), barcode != UNKNOWN_BARCODE);
       }
+    });
+
+    test('product freshness', () async {
+      const String UNKNOWN_BARCODE = '1111111111111111111111111111111';
+      const List<String> BARCODES = [
+        '8024884500403',
+        '3263855093192',
+        '3045320001570',
+        '3021762383344',
+        '4008400402222',
+        '3330720237255',
+        '3608580823513',
+        '3700278403936',
+        '3302747010029',
+        '3608580823490',
+        '3250391660995',
+        '3760020506605',
+        '8722700202387',
+        '3330720237330',
+        '3535800940005',
+        '20000691',
+        '3270190127512',
+        UNKNOWN_BARCODE,
+      ];
+
+      final Map<String, ProductFreshness> result =
+          await OpenFoodAPIClient.getProductFreshness(
+        barcodes: BARCODES,
+        user: TestConstants.PROD_USER,
+        language: OpenFoodFactsLanguage.FRENCH,
+        country: OpenFoodFactsCountry.FRANCE,
+        queryType: QueryType.PROD,
+      );
+
+      int count = 0;
+      for (final MapEntry<String, ProductFreshness> entry in result.entries) {
+        count++;
+        expect(entry.key == UNKNOWN_BARCODE, false);
+        expect(entry.key, isIn(BARCODES));
+      }
+      expect(count, BARCODES.length - 1);
     });
 
     test('multiple products and pagination', () async {
