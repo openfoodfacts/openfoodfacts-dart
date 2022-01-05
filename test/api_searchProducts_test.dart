@@ -443,6 +443,7 @@ void main() {
         count++;
         expect(entry.key == UNKNOWN_BARCODE, false);
         expect(entry.key, isIn(BARCODES));
+        expect(entry.value.lastModified, isNotNull);
       }
       expect(count, BARCODES.length - 1);
     });

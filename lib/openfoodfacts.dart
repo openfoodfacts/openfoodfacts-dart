@@ -303,7 +303,7 @@ class OpenFoodAPIClient {
     final User? user,
     final OpenFoodFactsLanguage? language,
     final OpenFoodFactsCountry? country,
-    QueryType? queryType,
+    final QueryType? queryType,
   }) async {
     final SearchResult searchResult = await getProductList(
       user,
@@ -316,6 +316,8 @@ class OpenFoodAPIClient {
           ProductField.ECOSCORE_SCORE,
           ProductField.NUTRISCORE,
           ProductField.INGREDIENTS_TAGS,
+          ProductField.LAST_MODIFIED,
+          ProductField.STATES_TAGS,
         ],
       ),
       queryType: queryType,
