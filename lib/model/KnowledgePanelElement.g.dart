@@ -122,12 +122,20 @@ KnowledgePanelTableColumn _$KnowledgePanelTableColumnFromJson(
       text: json['text'] as String,
       type: $enumDecodeNullable(_$KnowledgePanelColumnTypeEnumMap, json['type'],
           unknownValue: KnowledgePanelColumnType.TEXT),
+      textForSmallScreens: json['text_for_small_screens'] as String?,
+      showByDefault: json['shown_by_default'] as bool?,
+      columnGroupId: json['column_group_id'] as String?,
+      style: json['style'] as String?,
     );
 
 Map<String, dynamic> _$KnowledgePanelTableColumnToJson(
         KnowledgePanelTableColumn instance) =>
     <String, dynamic>{
       'text': instance.text,
+      'text_for_small_screens': instance.textForSmallScreens,
+      'shown_by_default': instance.showByDefault,
+      'column_group_id': instance.columnGroupId,
+      'style': instance.style,
       'type': _$KnowledgePanelColumnTypeEnumMap[instance.type],
     };
 
