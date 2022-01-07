@@ -168,10 +168,28 @@ class KnowledgePanelTableRowElement extends JsonObject {
 class KnowledgePanelTableColumn extends JsonObject {
   final String text;
 
+  @JsonKey(name: 'text_for_small_screens')
+  final String? textForSmallScreens;
+
+  @JsonKey(name: 'shown_by_default')
+  final bool? showByDefault;
+
+  @JsonKey(name: 'column_group_id')
+  final String? columnGroupId;
+
+  final String? style;
+
   @JsonKey(unknownEnumValue: KnowledgePanelColumnType.TEXT)
   final KnowledgePanelColumnType? type;
 
-  const KnowledgePanelTableColumn({required this.text, required this.type});
+  const KnowledgePanelTableColumn({
+    required this.text,
+    required this.type,
+    this.textForSmallScreens,
+    this.showByDefault,
+    this.columnGroupId,
+    this.style,
+  });
 
   factory KnowledgePanelTableColumn.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelTableColumnFromJson(json);
