@@ -52,7 +52,7 @@
         <section class="multi-line-signature">
           <a href="../../utils_UnitHelper/Unit.html">Unit</a>?
           <span class="name ">docosahexaenoicAcidUnit</span>
-          <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.4.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;docosahexaenoic-acid_unit&#39;, includeIfNull: false, fromJson: UnitHelper.stringToUnit), read / write</div>
+          <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.4.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;docosahexaenoic-acid_unit&#39;, includeIfNull: false, toJson: UnitHelper.unitToString, fromJson: UnitHelper.stringToUnit), read / write</div>
 
         </section>
         
@@ -66,6 +66,7 @@
   <pre class="language-dart"><code class="language-dart">@JsonKey(
     name: &#39;docosahexaenoic-acid_unit&#39;,
     includeIfNull: false,
+    toJson: UnitHelper.unitToString,
     fromJson: UnitHelper.stringToUnit)
 Unit? docosahexaenoicAcidUnit;
 
