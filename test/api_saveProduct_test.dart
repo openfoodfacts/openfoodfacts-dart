@@ -328,6 +328,7 @@ void main() {
       const double CARBOHYDRATES = 12;
       const double PROTEINS = 6;
       const double FAT = 0.1;
+      const double VITAMIN_B12 = 0.15;
       const String BARCODE = '7340011364184';
       const String PRODUCT_NAME = 'Chili beans';
       const String NUTRIMENT_DATA_PER = '100g';
@@ -340,6 +341,8 @@ void main() {
             carbohydratesUnit: _getMassUnit(i),
             proteins: PROTEINS + i,
             proteinsUnit: _getMassUnit(i),
+            vitaminB12: VITAMIN_B12 + i,
+            vitaminB12Unit: _getMassUnit(i),
             fat: FAT + i,
             fatUnit: _getMassUnit(i));
 
@@ -398,6 +401,14 @@ void main() {
             );
             expect(searchedNutriments.fat, closeTo(expectedFat, EPSILON));
             expect(searchedNutriments.fatUnit, nutriments.fatUnit);
+            final expectedB12 = _nutrientToGrams(
+              nutriments.vitaminB12,
+              nutriments.vitaminB12Unit,
+            );
+            expect(
+                searchedNutriments.vitaminB12, closeTo(expectedB12, EPSILON));
+            expect(
+                searchedNutriments.vitaminB12Unit, nutriments.vitaminB12Unit);
           }
         }
       }
