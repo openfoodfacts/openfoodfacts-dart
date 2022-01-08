@@ -1,3 +1,27 @@
+### [1.9.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.9.0...v1.9.1) (2022-01-08)
+
+
+### Bug Fixes
+
+* [#357](https://github.com/openfoodfacts/openfoodfacts-dart/issues/357) - all `Unit`s are now correctly saved ([#358](https://github.com/openfoodfacts/openfoodfacts-dart/issues/358)) ([9eb2872](https://github.com/openfoodfacts/openfoodfacts-dart/commit/9eb2872b0754c193b0c07f66f2da0331e4ffc23b))
+
+
+## [1.9.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.8.1...v1.9.0) (2022-01-07)
+
+
+### Features
+
+* [#350](https://github.com/openfoodfacts/openfoodfacts-dart/issues/350) - new method getProductFreshness ([#351](https://github.com/openfoodfacts/openfoodfacts-dart/issues/351)) ([979c6af](https://github.com/openfoodfacts/openfoodfacts-dart/commit/979c6afca50aecfe58d0094f9873926dd0ce1fde))
+
+
+### [1.8.1](https://www.github.com/openfoodfacts/openfoodfacts-dart/compare/v1.8.0...v1.8.1) (2021-12-28)
+
+
+### Bug Fixes
+
+* Lowercased country code ([#343](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/343)) ([bdf6451](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/bdf645197a81e40c357bd126e09986d195f96e05))
+
+
 ## [1.8.0](https://www.github.com/openfoodfacts/openfoodfacts-dart/compare/v1.7.0...v1.8.0) (2021-12-20)
 
 
@@ -11,27 +35,6 @@
 
 * Added missing product fields to ProductField enum ([#331](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/331)) ([4bbd66c](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/4bbd66c4d5b1b6e9be460029598125e0e519e2f1))
 * Don't pass country code if it's null ([#324](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/324)) ([5f9447c](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/5f9447c474e1a8a5ea9dc18233b2df8374c7bd6c))
-
-### [1.9.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.9.0...v1.9.1) (2022-01-08)
-
-
-### Bug Fixes
-
-* [#357](https://github.com/openfoodfacts/openfoodfacts-dart/issues/357) - added forgotten "toJson: UnitHelper.unitToString"s (tons of them!) ([#358](https://github.com/openfoodfacts/openfoodfacts-dart/issues/358)) ([9eb2872](https://github.com/openfoodfacts/openfoodfacts-dart/commit/9eb2872b0754c193b0c07f66f2da0331e4ffc23b))
-
-## [1.9.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.8.1...v1.9.0) (2022-01-07)
-
-
-### Features
-
-* [#350](https://github.com/openfoodfacts/openfoodfacts-dart/issues/350) - new method getProductFreshness ([#351](https://github.com/openfoodfacts/openfoodfacts-dart/issues/351)) ([979c6af](https://github.com/openfoodfacts/openfoodfacts-dart/commit/979c6afca50aecfe58d0094f9873926dd0ce1fde))
-
-### [1.8.1](https://www.github.com/openfoodfacts/openfoodfacts-dart/compare/v1.8.0...v1.8.1) (2021-12-28)
-
-
-### Bug Fixes
-
-* Lowercased country code ([#343](https://www.github.com/openfoodfacts/openfoodfacts-dart/issues/343)) ([bdf6451](https://www.github.com/openfoodfacts/openfoodfacts-dart/commit/bdf645197a81e40c357bd126e09986d195f96e05))
 
 ## [1.7.0](https://www.github.com/openfoodfacts/openfoodfacts-dart/compare/v1.6.0...v1.7.0) (2021-12-15)
 
