@@ -940,11 +940,29 @@ class OpenFoodAPIClient {
     required final String cc,
     required final OpenFoodFactsLanguage language,
     final QueryType? queryType,
+  }) async =>
+      OrderedNutrients.fromJson(
+        jsonDecode(
+          await getOrderedNutrientsJsonString(
+            country: CountryHelper.fromJson(cc)!,
+            language: language,
+          ),
+        ),
+      );
+
+  /// Returns the nutrient hierarchy specific to a country, localized, as JSON
+  static Future<String> getOrderedNutrientsJsonString({
+    required final OpenFoodFactsCountry country,
+    required final OpenFoodFactsLanguage language,
+    final QueryType? queryType,
   }) async {
     final Uri uri = UriHelper.getUri(
       path: 'cgi/nutrients.pl',
       queryType: queryType,
-      queryParameters: <String, String>{'cc': cc, 'lc': language.code},
+      queryParameters: <String, String>{
+        'cc': country.iso2Code,
+        'lc': language.code,
+      },
     );
 
     final Response response = await HttpHelper().doGetRequest(
@@ -954,8 +972,7 @@ class OpenFoodAPIClient {
     if (response.statusCode != 200) {
       throw Exception('Could not retrieve ordered nutrients!');
     }
-    final json = jsonDecode(response.body);
-    return OrderedNutrients.fromJson(json);
+    return response.body;
   }
 
   /// Rotates a product image from an already uploaded image.
