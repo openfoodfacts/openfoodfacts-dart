@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the getTaxonomyAllergens method from the OpenFoodAPIClient class, for the Dart programming language.">
-  <title>getTaxonomyAllergens method - OpenFoodAPIClient class - openfoodfacts library - Dart API</title>
+  <meta name="description" content="API docs for the getOrderedNutrientsJsonString method from the OpenFoodAPIClient class, for the Dart programming language.">
+  <title>getOrderedNutrientsJsonString method - OpenFoodAPIClient class - openfoodfacts library - Dart API</title>
 
 
   
@@ -32,9 +32,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../openfoodfacts/openfoodfacts-library.html">openfoodfacts</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
-    <li class="self-crumb">getTaxonomyAllergens method</li>
+    <li class="self-crumb">getOrderedNutrientsJsonString method</li>
   </ol>
-  <div class="self-name">getTaxonomyAllergens</div>
+  <div class="self-name">getOrderedNutrientsJsonString</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -45,35 +45,53 @@
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
-<h1><span class="kind-method">getTaxonomyAllergens</span> method 
+<h1><span class="kind-method">getOrderedNutrientsJsonString</span> method 
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
 </h1></div>
 
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="../../model_TaxonomyAllergen/TaxonomyAllergen-class.html">TaxonomyAllergen</a></span>&gt;</span>?</span>&gt;</span></span>
-<span class="name ">getTaxonomyAllergens</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getTaxonomyAllergens-param-configuration"><span class="type-annotation"><a href="../../model_TaxonomyAllergen/TaxonomyAllergenQueryConfiguration-class.html">TaxonomyAllergenQueryConfiguration</a></span> <span class="parameter-name">configuration</span>, </span></li>
-<li><span class="parameter" id="getTaxonomyAllergens-param-user">{<span class="type-annotation"><a href="../../model_User/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span></li>
-<li><span class="parameter" id="getTaxonomyAllergens-param-queryType"><span class="type-annotation"><a href="../../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>&gt;</span></span>
+<span class="name ">getOrderedNutrientsJsonString</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getOrderedNutrientsJsonString-param-country">{<span>required</span> <span class="type-annotation"><a href="../../utils_CountryHelper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a></span> <span class="parameter-name">country</span>, </span></li>
+<li><span class="parameter" id="getOrderedNutrientsJsonString-param-language"><span>required</span> <span class="type-annotation"><a href="../../utils_LanguageHelper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span>, </span></li>
+<li><span class="parameter" id="getOrderedNutrientsJsonString-param-queryType"><span class="type-annotation"><a href="../../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
 </ol>)
 
       
 
     </section>
     
+<section class="desc markdown">
+  <p>Returns the nutrient hierarchy specific to a country, localized, as JSON</p>
+</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static Future&lt;Map&lt;String, TaxonomyAllergen&gt;?&gt; getTaxonomyAllergens(
-  TaxonomyAllergenQueryConfiguration configuration, {
-  User? user,
-  QueryType? queryType,
-}) {
-  return getTaxonomy&lt;TaxonomyAllergen, TaxonomyAllergenField&gt;(configuration,
-      user: user, queryType: queryType);
+  <pre class="language-dart"><code class="language-dart">static Future&lt;String&gt; getOrderedNutrientsJsonString({
+  required final OpenFoodFactsCountry country,
+  required final OpenFoodFactsLanguage language,
+  final QueryType? queryType,
+}) async {
+  final Uri uri = UriHelper.getUri(
+    path: &#39;cgi&#47;nutrients.pl&#39;,
+    queryType: queryType,
+    queryParameters: &lt;String, String&gt;{
+      &#39;cc&#39;: country.iso2Code,
+      &#39;lc&#39;: language.code,
+    },
+  );
+
+  final Response response = await HttpHelper().doGetRequest(
+    uri,
+    queryType: queryType,
+  );
+  if (response.statusCode != 200) {
+    throw Exception(&#39;Could not retrieve ordered nutrients!&#39;);
+  }
+  return response.body;
 }</code></pre>
 </section>
 
@@ -91,7 +109,7 @@
   <li><a href="../../index.html">openfoodfacts</a></li>
   <li><a href="../../openfoodfacts/openfoodfacts-library.html">openfoodfacts</a></li>
   <li><a href="../../openfoodfacts/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
-  <li class="self-crumb">getTaxonomyAllergens method</li>
+  <li class="self-crumb">getOrderedNutrientsJsonString method</li>
 </ol>
 
 

@@ -75,23 +75,15 @@
   required final String cc,
   required final OpenFoodFactsLanguage language,
   final QueryType? queryType,
-}) async {
-  final Uri uri = UriHelper.getUri(
-    path: &#39;cgi&#47;nutrients.pl&#39;,
-    queryType: queryType,
-    queryParameters: &lt;String, String&gt;{&#39;cc&#39;: cc, &#39;lc&#39;: language.code},
-  );
-
-  final Response response = await HttpHelper().doGetRequest(
-    uri,
-    queryType: queryType,
-  );
-  if (response.statusCode != 200) {
-    throw Exception(&#39;Could not retrieve ordered nutrients!&#39;);
-  }
-  final json = jsonDecode(response.body);
-  return OrderedNutrients.fromJson(json);
-}</code></pre>
+}) async =&gt;
+    OrderedNutrients.fromJson(
+      jsonDecode(
+        await getOrderedNutrientsJsonString(
+          country: CountryHelper.fromJson(cc)!,
+          language: language,
+        ),
+      ),
+    );</code></pre>
 </section>
 
 
@@ -140,6 +132,7 @@
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getIngredientSpellingCorrection.html">getIngredientSpellingCorrection</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getKnowledgePanels.html">getKnowledgePanels</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getOrderedNutrients.html">getOrderedNutrients</a></li>
+    <li><a href="../../openfoodfacts/OpenFoodAPIClient/getOrderedNutrientsJsonString.html">getOrderedNutrientsJsonString</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProduct.html">getProduct</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductFreshness.html">getProductFreshness</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductInsights.html">getProductInsights</a></li>
