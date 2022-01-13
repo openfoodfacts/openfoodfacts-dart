@@ -6,6 +6,13 @@
 * [#357](https://github.com/openfoodfacts/openfoodfacts-dart/issues/357) - all `Unit`s are now correctly saved ([#358](https://github.com/openfoodfacts/openfoodfacts-dart/issues/358)) ([9eb2872](https://github.com/openfoodfacts/openfoodfacts-dart/commit/9eb2872b0754c193b0c07f66f2da0331e4ffc23b))
 
 
+## [1.10.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.9.1...v1.10.0) (2022-01-13)
+
+
+### Features
+
+* new method "getOrderedNutrientsJsonString" ([#362](https://github.com/openfoodfacts/openfoodfacts-dart/issues/362)) ([516ccfa](https://github.com/openfoodfacts/openfoodfacts-dart/commit/516ccfa40063aa4d15d1e032438ea1073c945de6))
+
 ## [1.9.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.8.1...v1.9.0) (2022-01-07)
 
 
