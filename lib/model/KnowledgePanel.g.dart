@@ -23,6 +23,8 @@ KnowledgePanel _$KnowledgePanelFromJson(Map<String, dynamic> json) =>
           (json['topics'] as List<dynamic>?)?.map((e) => e as String).toList(),
       evaluation: $enumDecodeNullable(_$EvaluationEnumMap, json['evaluation'],
           unknownValue: Evaluation.UNKNOWN),
+      size: $enumDecodeNullable(_$SizeEnumMap, json['size'],
+          unknownValue: Size.UNKNOWN),
     );
 
 Map<String, dynamic> _$KnowledgePanelToJson(KnowledgePanel instance) =>
@@ -33,6 +35,7 @@ Map<String, dynamic> _$KnowledgePanelToJson(KnowledgePanel instance) =>
       'elements': instance.elements,
       'topics': instance.topics,
       'evaluation': _$EvaluationEnumMap[instance.evaluation],
+      'size': _$SizeEnumMap[instance.size],
     };
 
 const _$LevelEnumMap = {
@@ -50,6 +53,11 @@ const _$EvaluationEnumMap = {
   Evaluation.AVERAGE: 'average',
   Evaluation.BAD: 'bad',
   Evaluation.UNKNOWN: 'UNKNOWN',
+};
+
+const _$SizeEnumMap = {
+  Size.SMALL: 'small',
+  Size.UNKNOWN: 'UNKNOWN',
 };
 
 TitleElement _$TitleElementFromJson(Map<String, dynamic> json) => TitleElement(
