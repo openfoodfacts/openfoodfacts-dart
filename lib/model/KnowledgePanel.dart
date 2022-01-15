@@ -56,9 +56,17 @@ enum Evaluation {
 
 /// Type of title element.
 enum TitleElementType {
-  // Title Element depicts a grade like 'Ecoscore' or 'Nutriscore'.
+// Title Element depicts a grade like 'Ecoscore' or 'Nutriscore'.
   @JsonValue('grade')
   GRADE,
+  UNKNOWN,
+}
+
+/// Size of the KnowledgePanel, if small the client must display the panel in a
+/// compact size.
+enum Size {
+  @JsonValue('small')
+  SMALL,
   UNKNOWN,
 }
 
@@ -92,6 +100,11 @@ class KnowledgePanel extends JsonObject {
   @JsonKey(unknownEnumValue: Evaluation.UNKNOWN)
   final Evaluation? evaluation;
 
+  /// Size of the KnowledgePanel, if small the client must display the panel in a
+  /// compact size.
+  @JsonKey(unknownEnumValue: Size.UNKNOWN)
+  final Size? size;
+
   const KnowledgePanel({
     this.titleElement,
     this.level,
@@ -99,6 +112,7 @@ class KnowledgePanel extends JsonObject {
     this.elements,
     this.topics,
     this.evaluation,
+    this.size,
   });
 
   factory KnowledgePanel.fromJson(Map<String, dynamic> json) =>
