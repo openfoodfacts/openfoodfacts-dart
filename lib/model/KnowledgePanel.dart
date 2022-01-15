@@ -56,7 +56,7 @@ enum Evaluation {
 
 /// Type of title element.
 enum TitleElementType {
-// Title Element depicts a grade like 'Ecoscore' or 'Nutriscore'.
+  // Title Element depicts a grade like 'Eco-Score' or 'Nutri-Score'.
   @JsonValue('grade')
   GRADE,
   UNKNOWN,
