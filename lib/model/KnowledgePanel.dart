@@ -64,7 +64,7 @@ enum TitleElementType {
 
 /// Size of the KnowledgePanel, if small the client must display the panel in a
 /// compact size.
-enum Size {
+enum KnowledgePanelSize {
   @JsonValue('small')
   SMALL,
   UNKNOWN,
@@ -102,8 +102,8 @@ class KnowledgePanel extends JsonObject {
 
   /// Size of the KnowledgePanel, if small the client must display the panel in a
   /// compact size.
-  @JsonKey(unknownEnumValue: Size.UNKNOWN)
-  final Size? size;
+  @JsonKey(unknownEnumValue: KnowledgePanelSize.UNKNOWN)
+  final KnowledgePanelSize? size;
 
   const KnowledgePanel({
     this.titleElement,
