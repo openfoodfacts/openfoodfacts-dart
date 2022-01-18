@@ -8,16 +8,60 @@ import 'fake_http_helper.dart';
 import 'test_constants.dart';
 
 void main() {
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
-  OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
-  late FakeHttpHelper httpHelper;
+  group('OpenFoodAPIClient getTaxonomy using Test Server', () {
+    OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+    OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
 
-  setUp(() {
-    httpHelper = FakeHttpHelper();
-    HttpHelper.instance = httpHelper;
+    // To verify that the basic taxonomy API hasn't changed on the server.
+    test('actually fetch a taxonomy from the test server', () async {
+      final String tag = 'en:plain-crepes';
+      TaxonomyCategoryQueryConfiguration configuration =
+          TaxonomyCategoryQueryConfiguration(
+        fields: [
+          TaxonomyCategoryField.NAME,
+          TaxonomyCategoryField.CHILDREN,
+          TaxonomyCategoryField.PARENTS,
+          TaxonomyCategoryField.AGRIBALYSE_FOOD_CODE
+        ],
+        languages: [
+          OpenFoodFactsLanguage.ENGLISH,
+          OpenFoodFactsLanguage.FRENCH,
+        ],
+        tags: <String>[tag],
+      );
+      Map<String, TaxonomyCategory>? categories = await OpenFoodAPIClient
+          .getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(
+        configuration,
+        user: TestConstants.TEST_USER,
+      );
+      TaxonomyCategory expectedResponse =
+          TaxonomyCategory.fromJson(<String, dynamic>{
+        'agribalyse_food_code': {'en': '23800'},
+        'children': ['en:refrigerated-plain-crepes'],
+        'name': {'en': 'Plain crepes', 'fr': 'Crêpe nature'},
+        'parents': ['en:crepes'],
+      });
+      expect(categories, isNotNull);
+      expect(categories![tag], isNotNull);
+      expect(categories[tag]!.agribalyseFoodCode,
+          equals(expectedResponse.agribalyseFoodCode));
+      expect(categories[tag]!.children, equals(expectedResponse.children));
+      expect(categories[tag]!.name, equals(expectedResponse.name));
+      expect(categories[tag]!.parents, equals(expectedResponse.parents));
+    });
   });
-
   group('OpenFoodAPIClient getTaxonomy', () {
+    // These tests are all unit tests that don't actually fetch from anything
+    // from the test server.
+    OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+    OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
+    late FakeHttpHelper httpHelper;
+
+    setUp(() {
+      httpHelper = FakeHttpHelper();
+      HttpHelper.instance = httpHelper;
+    });
+
     test('get a category', () async {
       final String tag = 'en:plain-crepes';
       Map<String, dynamic> expectedResponse = <String, dynamic>{

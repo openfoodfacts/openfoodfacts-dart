@@ -94,7 +94,7 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
   Map<String, String> getParametersMap() {
     final Map<String, String> result = {};
 
-    result['type'] = tagType.key;
+    result['tagtype'] = tagType.key;
     if (_isRootConfiguration) {
       result['include_root_entries'] = '1';
     } else {
