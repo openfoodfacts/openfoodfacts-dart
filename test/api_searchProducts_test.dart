@@ -1,4 +1,3 @@
-import 'package:openfoodfacts/model/ProductFreshness.dart';
 import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
 import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
