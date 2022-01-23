@@ -14,6 +14,7 @@ import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/InvalidBarcodes.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
+import 'package:openfoodfacts/utils/TagType.dart';
 import 'package:openfoodfacts/utils/UnitHelper.dart';
 import 'package:test/test.dart';
 
@@ -1648,6 +1649,26 @@ void main() {
         replaceSubdomain: true,
       ).host,
       'de-es.openfoodfacts.net',
+    );
+  });
+
+  test('get crowdin uri', () async {
+    expect(
+      OpenFoodAPIClient.getCrowdinUri(
+        OpenFoodFactsLanguage.SPANISH,
+      ).toString(),
+      'https://crowdin.com/project/openfoodfacts/es',
+    );
+  });
+
+  test('get taxonomy translation uri', () async {
+    expect(
+      OpenFoodAPIClient.getTaxonomyTranslationUri(
+        TagType.CATEGORIES,
+        language: OpenFoodFactsLanguage.FRENCH,
+        replaceSubdomain: true,
+      ).toString(),
+      'https://world-fr.openfoodfacts.net/categories?translate=1',
     );
   });
 
