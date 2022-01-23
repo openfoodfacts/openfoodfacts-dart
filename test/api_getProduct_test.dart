@@ -1534,20 +1534,124 @@ void main() {
     });
 
     test('get ecoscore html description', () async {
-      final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
-      String? result;
-
-      result = await OpenFoodAPIClient.getEcoscoreHtmlDescription(
-        _BARCODE_DANISH_BUTTER_COOKIES,
-        language,
+      final ProductResult productResult = await OpenFoodAPIClient.getProduct(
+        ProductQueryConfiguration(
+          _BARCODE_DANISH_BUTTER_COOKIES,
+          language: OpenFoodFactsLanguage.FRENCH,
+          fields: <ProductField>[ProductField.ENVIRONMENT_INFOCARD],
+        ),
       );
-      assert(result != null);
+      expect(productResult.product!.environmentInfoCard, isNotNull);
+    });
 
-      result = await OpenFoodAPIClient.getEcoscoreHtmlDescription(
-        _BARCODE_UNKNOWN,
-        language,
+    test('get knowledge panels', () async {
+      const Set<String> someExpectedKeys = <String>{
+        'ecoscore',
+        'environment_card',
+        'health_card',
+        'ingredients',
+        'nutriscore',
+        'root',
+      };
+      final ProductResult productResult = await OpenFoodAPIClient.getProduct(
+        ProductQueryConfiguration(
+          _BARCODE_DANISH_BUTTER_COOKIES,
+          language: OpenFoodFactsLanguage.FRENCH,
+          fields: <ProductField>[ProductField.KNOWLEDGE_PANELS],
+        ),
       );
-      assert(result == null);
+      expect(productResult.product, isNotNull);
+      expect(productResult.product!.knowledgePanels, isNotNull);
+      expect(
+        productResult.product!.knowledgePanels!.panelIdToPanelMap.keys,
+        containsAll(someExpectedKeys),
+      );
+    });
+  });
+
+  group('$OpenFoodAPIClient test ingredients', () {
+    const String barcode = _BARCODE_DANISH_BUTTER_COOKIES;
+    // Ingredients for _BARCODE_DANISH_BUTTER_COOKIES
+    const List<String> expectedIngredientLabels = <String>[
+      'Buttergebäck',
+      'Zucker',
+      'Speisesalz',
+      'Backtriebmittel',
+      'Ammouniumhydrogencarbonat',
+      'Invertzuckersirup',
+      'natürliches Aroma',
+      'Schokolade Mürbegebäck',
+      'Pflanzenfett',
+      'Palm',
+      'Schokoladenstückchen',
+      'Kakaomasse',
+      'Kakaobutter',
+      'Emulgator',
+      'Lecithin',
+      'fettarmes Kakaopulver',
+      '_Weizenmehl_',
+      '_Butter_',
+    ];
+
+    /// Recursively adds [ingredient] labels to [labels].
+    ///
+    /// Works with flat and tree hierarchies.
+    void _addToIngredientLabels(
+      final List<Ingredient> ingredients,
+      final Set<String> labels,
+    ) {
+      for (final Ingredient ingredient in ingredients) {
+        labels.add(ingredient.text!);
+        if (ingredient.ingredients != null) {
+          _addToIngredientLabels(ingredient.ingredients!, labels);
+        }
+      }
+    }
+
+    test('get ingredients api.v0', () async {
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.INGREDIENTS],
+        version: ProductQueryVersion.V0,
+      );
+      final ProductResult result = await OpenFoodAPIClient.getProduct(
+        configurations,
+        user: TestConstants.TEST_USER,
+      );
+
+      expect(result.status, 1);
+      expect(result.product, isNotNull);
+      expect(result.product!.ingredients, isNotNull);
+      // in V0, everything is at the same level
+      expect(result.product!.ingredients!.length, 24);
+      final Set<String> ingredientLabels = <String>{};
+      _addToIngredientLabels(result.product!.ingredients!, ingredientLabels);
+      expect(ingredientLabels, containsAll(expectedIngredientLabels));
+    });
+
+    test('get ingredients api.v2', () async {
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.INGREDIENTS],
+        version: ProductQueryVersion.V2,
+      );
+      final ProductResult result = await OpenFoodAPIClient.getProduct(
+        configurations,
+        user: TestConstants.TEST_USER,
+      );
+
+      expect(result.status, 1);
+      expect(result.product, isNotNull);
+      expect(result.product!.ingredients, isNotNull);
+      // in V2, same ingredients but in a tree.
+      expect(result.product!.ingredients!.length, 9);
+      final Set<String> ingredientLabels = <String>{};
+      _addToIngredientLabels(result.product!.ingredients!, ingredientLabels);
+      expect(ingredientLabels, containsAll(expectedIngredientLabels));
     });
   });
 

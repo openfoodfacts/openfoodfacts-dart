@@ -167,19 +167,17 @@ class OpenFoodAPIClient {
     User? user,
     QueryType? queryType,
   }) async {
-    var productUri = UriHelper.getUri(
-      path: 'api/v0/product/$barcode.json',
-      queryParameters: {'lc': language.code},
-      queryType: queryType,
-    );
-
-    Response response = await HttpHelper().doGetRequest(
-      productUri,
+    final String productString = await getProductString(
+      ProductQueryConfiguration(
+        barcode,
+        language: language,
+        country: null,
+        fields: null,
+      ),
       user: user,
       queryType: queryType,
     );
-    var result = ProductResult.fromJson(json.decode(response.body));
-    return result;
+    return ProductResult.fromJson(json.decode(productString));
   }
 
   /// Returns the product for the given barcode.
@@ -193,26 +191,32 @@ class OpenFoodAPIClient {
     User? user,
     QueryType? queryType,
   }) async {
-    var productUri = UriHelper.getUri(
-      path: 'api/v0/product/${configuration.barcode}.json',
-      queryParameters: configuration.getParametersMap(),
-      queryType: queryType,
-    );
-
-    Response response = await HttpHelper().doGetRequest(
-      productUri,
+    final String productString = await getProductString(
+      configuration,
       user: user,
       queryType: queryType,
     );
-    final jsonStr = _replaceQuotes(response.body);
-    ProductResult result = ProductResult.fromJson(jsonDecode(jsonStr));
-
+    final String jsonStr = _replaceQuotes(productString);
+    final ProductResult result = ProductResult.fromJson(jsonDecode(jsonStr));
     if (result.product != null) {
       ProductHelper.removeImages(result.product!, configuration.language);
       ProductHelper.createImageUrls(result.product!, queryType: queryType);
     }
-
     return result;
+  }
+
+  /// Returns the response body of "get product" API for the given barcode.
+  static Future<String> getProductString(
+    final ProductQueryConfiguration configuration, {
+    final User? user,
+    final QueryType? queryType,
+  }) async {
+    final Response response = await HttpHelper().doGetRequest(
+      configuration.getUri(queryType: queryType),
+      user: user,
+      queryType: queryType,
+    );
+    return response.body;
   }
 
   static String _replaceQuotes(String str) {
@@ -860,72 +864,53 @@ class OpenFoodAPIClient {
   }
 
   /// Returns the Ecoscore description in HTML
+  // TODO: deprecated from 2022-01-22; remove when old enough
+  @Deprecated(
+      'Use getProduct with field [ProductField.ENVIRONMENT_INFOCARD] instead')
   static Future<String?> getEcoscoreHtmlDescription(
     final String barcode,
     final OpenFoodFactsLanguage language, {
     final QueryType? queryType,
   }) async {
-    const String FIELD = 'environment_infocard';
-    final Uri uri = UriHelper.getUri(
-      queryType: queryType,
-      path: '/api/v0/product/$barcode.json',
-      queryParameters: <String, String>{
-        'fields': FIELD,
-        'lc': language.code,
-      },
-    );
     try {
-      final Response response = await HttpHelper().doGetRequest(
-        uri,
+      final ProductResult productResult = await getProduct(
+        ProductQueryConfiguration(
+          barcode,
+          language: language,
+          country: null,
+          fields: [ProductField.ENVIRONMENT_INFOCARD],
+          version: ProductQueryVersion.V0,
+        ),
+        user: null,
         queryType: queryType,
       );
-      if (response.statusCode != 200) {
-        return null;
-      }
-      final Map<String, dynamic> json =
-          jsonDecode(response.body) as Map<String, dynamic>;
-      final Map<String, dynamic> productData =
-          json['product'] as Map<String, dynamic>;
-      return productData[FIELD] as String?;
+      return productResult.product?.environmentInfoCard;
     } catch (e) {
       return null;
     }
   }
 
   /// Returns all KnowledgePanels for a product.
+  // TODO: deprecated from 2022-01-22; remove when old enough
+  @Deprecated(
+      'Use getProduct with field [ProductField.KNOWLEDGE_PANELS] instead')
   static Future<KnowledgePanels> getKnowledgePanels(
     ProductQueryConfiguration configuration,
     QueryType queryType,
   ) async {
-    const String KNOWLEDGE_PANELS_FIELD = 'knowledge_panels';
-
-    var queryParameters = <String, String>{
-      'fields': KNOWLEDGE_PANELS_FIELD,
-      'lc': configuration.language!.code,
-    };
-    String? cc = configuration.computeCountryCode();
-    if (cc != null) {
-      queryParameters.putIfAbsent('cc', () => cc);
-    }
-    var uri = UriHelper.getUri(
-      path: 'api/v2/product/${configuration.barcode}/',
-      queryType: queryType,
-      queryParameters: queryParameters,
-    );
-
     try {
-      final Response response = await HttpHelper().doGetRequest(
-        uri,
+      final ProductResult productResult = await getProduct(
+        ProductQueryConfiguration(
+          configuration.barcode,
+          language: configuration.language,
+          country: configuration.country,
+          fields: [ProductField.KNOWLEDGE_PANELS],
+          version: ProductQueryVersion.V2,
+        ),
+        user: null,
         queryType: queryType,
       );
-      if (response.statusCode != 200) {
-        return KnowledgePanels.empty();
-      }
-      final Map<String, dynamic> json =
-          jsonDecode(response.body) as Map<String, dynamic>;
-      final Map<String, dynamic> knowledgePanelsJson =
-          json['product'][KNOWLEDGE_PANELS_FIELD] as Map<String, dynamic>;
-      return KnowledgePanels.fromJson(knowledgePanelsJson);
+      return productResult.product!.knowledgePanels!;
     } catch (exception, stackTrace) {
       // TODO(jasmeetsingh): Capture the exception in Sentry and don't log it here.
       log('Exception $exception has occurred.\nStacktrace: \n$stackTrace');

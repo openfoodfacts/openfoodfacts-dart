@@ -101,14 +101,18 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           ? null
           : EcoscoreData.fromJson(
               json['ecoscore_data'] as Map<String, dynamic>),
-    )..imagesFreshnessInLanguages =
+    )
+      ..imagesFreshnessInLanguages =
           (json['imagesFreshnessInLanguages'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(
             $enumDecode(_$OpenFoodFactsLanguageEnumMap, k),
             (e as Map<String, dynamic>).map(
               (k, e) => MapEntry($enumDecode(_$ImageFieldEnumMap, k), e as int),
             )),
-      );
+      )
+      ..knowledgePanels =
+          KnowledgePanels.fromJsonHelper(json['knowledge_panels'] as Map?)
+      ..environmentInfoCard = json['environment_infocard'] as String?;
 
 Map<String, dynamic> _$ProductToJson(Product instance) {
   final val = <String, dynamic>{
@@ -195,6 +199,9 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('ecoscore_score', instance.ecoscoreScore);
   writeNotNull(
       'ecoscore_data', EcoscoreData.toJsonHelper(instance.ecoscoreData));
+  writeNotNull('knowledge_panels',
+      KnowledgePanels.toJsonHelper(instance.knowledgePanels));
+  writeNotNull('environment_infocard', instance.environmentInfoCard);
   return val;
 }
 
