@@ -32,7 +32,7 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../openfoodfacts/openfoodfacts-library.html">openfoodfacts</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
-    <li class="self-crumb">getKnowledgePanels method</li>
+    <li class="self-crumb"><span class="deprecated">getKnowledgePanels</span> method</li>
   </ol>
   <div class="self-name">getKnowledgePanels</div>
   <form class="search navbar-right" role="search">
@@ -51,13 +51,18 @@
 
     <section class="multi-line-signature">
       
+<div>
+  <ol class="annotation-list">
+    <li>@<a href="https://api.dart.dev/stable/2.15.1/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use getProduct with field [ProductField.KNOWLEDGE_PANELS] instead&#39;)</li>
+  </ol>
+</div>
 
 <span class="returntype"><a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../model_KnowledgePanels/KnowledgePanels-class.html">KnowledgePanels</a></span>&gt;</span></span>
-<span class="name ">getKnowledgePanels</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getKnowledgePanels-param-configuration"><span class="type-annotation"><a href="../../utils_ProductQueryConfigurations/ProductQueryConfiguration-class.html">ProductQueryConfiguration</a></span> <span class="parameter-name">configuration</span>, </span></li>
+<span class="name deprecated">getKnowledgePanels</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getKnowledgePanels-param-configuration"><span class="type-annotation"><a href="../../utils_ProductQueryConfigurations/ProductQueryConfiguration-class.html">ProductQueryConfiguration</a></span> <span class="parameter-name">configuration</span>, </span></li>
 <li><span class="parameter" id="getKnowledgePanels-param-queryType"><span class="type-annotation"><a href="../../utils_QueryType/QueryType.html">QueryType</a></span> <span class="parameter-name">queryType</span></span></li>
 </ol>)
 
-      
+      <div class="features">@<a href="https://api.dart.dev/stable/2.15.1/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use getProduct with field [ProductField.KNOWLEDGE_PANELS] instead&#39;)</div>
 
     </section>
     
@@ -69,39 +74,26 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static Future&lt;KnowledgePanels&gt; getKnowledgePanels(
+  <pre class="language-dart"><code class="language-dart">&#47;&#47; TODO: deprecated from 2022-01-22; remove when old enough
+@Deprecated(
+    &#39;Use getProduct with field [ProductField.KNOWLEDGE_PANELS] instead&#39;)
+static Future&lt;KnowledgePanels&gt; getKnowledgePanels(
   ProductQueryConfiguration configuration,
   QueryType queryType,
 ) async {
-  const String KNOWLEDGE_PANELS_FIELD = &#39;knowledge_panels&#39;;
-
-  var queryParameters = &lt;String, String&gt;{
-    &#39;fields&#39;: KNOWLEDGE_PANELS_FIELD,
-    &#39;lc&#39;: configuration.language!.code,
-  };
-  String? cc = configuration.computeCountryCode();
-  if (cc != null) {
-    queryParameters.putIfAbsent(&#39;cc&#39;, () =&gt; cc);
-  }
-  var uri = UriHelper.getUri(
-    path: &#39;api&#47;v2&#47;product&#47;${configuration.barcode}&#47;&#39;,
-    queryType: queryType,
-    queryParameters: queryParameters,
-  );
-
   try {
-    final Response response = await HttpHelper().doGetRequest(
-      uri,
+    final ProductResult productResult = await getProduct(
+      ProductQueryConfiguration(
+        configuration.barcode,
+        language: configuration.language,
+        country: configuration.country,
+        fields: [ProductField.KNOWLEDGE_PANELS],
+        version: ProductQueryVersion.V2,
+      ),
+      user: null,
       queryType: queryType,
     );
-    if (response.statusCode != 200) {
-      return KnowledgePanels.empty();
-    }
-    final Map&lt;String, dynamic&gt; json =
-        jsonDecode(response.body) as Map&lt;String, dynamic&gt;;
-    final Map&lt;String, dynamic&gt; knowledgePanelsJson =
-        json[&#39;product&#39;][KNOWLEDGE_PANELS_FIELD] as Map&lt;String, dynamic&gt;;
-    return KnowledgePanels.fromJson(knowledgePanelsJson);
+    return productResult.product!.knowledgePanels!;
   } catch (exception, stackTrace) {
     &#47;&#47; TODO(jasmeetsingh): Capture the exception in Sentry and don&#39;t log it here.
     log(&#39;Exception $exception has occurred.\nStacktrace: \n$stackTrace&#39;);
@@ -124,7 +116,7 @@
   <li><a href="../../index.html">openfoodfacts</a></li>
   <li><a href="../../openfoodfacts/openfoodfacts-library.html">openfoodfacts</a></li>
   <li><a href="../../openfoodfacts/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
-  <li class="self-crumb">getKnowledgePanels method</li>
+  <li class="self-crumb"><span class="deprecated">getKnowledgePanels</span> method</li>
 </ol>
 
 
@@ -152,9 +144,9 @@
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/addProductImage.html">addProductImage</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/extractIngredients.html">extractIngredients</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getAutocompletedSuggestions.html">getAutocompletedSuggestions</a></li>
-    <li><a href="../../openfoodfacts/OpenFoodAPIClient/getEcoscoreHtmlDescription.html">getEcoscoreHtmlDescription</a></li>
+    <li><a class="deprecated" href="../../openfoodfacts/OpenFoodAPIClient/getEcoscoreHtmlDescription.html">getEcoscoreHtmlDescription</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getIngredientSpellingCorrection.html">getIngredientSpellingCorrection</a></li>
-    <li><a href="../../openfoodfacts/OpenFoodAPIClient/getKnowledgePanels.html">getKnowledgePanels</a></li>
+    <li><a class="deprecated" href="../../openfoodfacts/OpenFoodAPIClient/getKnowledgePanels.html">getKnowledgePanels</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getOrderedNutrients.html">getOrderedNutrients</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getOrderedNutrientsJsonString.html">getOrderedNutrientsJsonString</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProduct.html">getProduct</a></li>
@@ -162,6 +154,7 @@
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductInsights.html">getProductInsights</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductList.html">getProductList</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductRaw.html">getProductRaw</a></li>
+    <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductString.html">getProductString</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductUri.html">getProductUri</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getRandomInsight.html">getRandomInsight</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getRandomRobotoffQuestion.html">getRandomRobotoffQuestion</a></li>

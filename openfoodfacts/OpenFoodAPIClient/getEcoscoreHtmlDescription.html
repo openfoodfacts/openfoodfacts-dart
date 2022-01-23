@@ -32,7 +32,7 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../openfoodfacts/openfoodfacts-library.html">openfoodfacts</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
-    <li class="self-crumb">getEcoscoreHtmlDescription method</li>
+    <li class="self-crumb"><span class="deprecated">getEcoscoreHtmlDescription</span> method</li>
   </ol>
   <div class="self-name">getEcoscoreHtmlDescription</div>
   <form class="search navbar-right" role="search">
@@ -51,14 +51,19 @@
 
     <section class="multi-line-signature">
       
+<div>
+  <ol class="annotation-list">
+    <li>@<a href="https://api.dart.dev/stable/2.15.1/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use getProduct with field [ProductField.ENVIRONMENT_INFOCARD] instead&#39;)</li>
+  </ol>
+</div>
 
 <span class="returntype"><a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span>&gt;</span></span>
-<span class="name ">getEcoscoreHtmlDescription</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getEcoscoreHtmlDescription-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, </span></li>
+<span class="name deprecated">getEcoscoreHtmlDescription</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getEcoscoreHtmlDescription-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, </span></li>
 <li><span class="parameter" id="getEcoscoreHtmlDescription-param-language"><span class="type-annotation"><a href="../../utils_LanguageHelper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span>, </span></li>
 <li><span class="parameter" id="getEcoscoreHtmlDescription-param-queryType">{<span class="type-annotation"><a href="../../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
 </ol>)
 
-      
+      <div class="features">@<a href="https://api.dart.dev/stable/2.15.1/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use getProduct with field [ProductField.ENVIRONMENT_INFOCARD] instead&#39;)</div>
 
     </section>
     
@@ -70,33 +75,27 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static Future&lt;String?&gt; getEcoscoreHtmlDescription(
+  <pre class="language-dart"><code class="language-dart">&#47;&#47; TODO: deprecated from 2022-01-22; remove when old enough
+@Deprecated(
+    &#39;Use getProduct with field [ProductField.ENVIRONMENT_INFOCARD] instead&#39;)
+static Future&lt;String?&gt; getEcoscoreHtmlDescription(
   final String barcode,
   final OpenFoodFactsLanguage language, {
   final QueryType? queryType,
 }) async {
-  const String FIELD = &#39;environment_infocard&#39;;
-  final Uri uri = UriHelper.getUri(
-    queryType: queryType,
-    path: &#39;&#47;api&#47;v0&#47;product&#47;$barcode.json&#39;,
-    queryParameters: &lt;String, String&gt;{
-      &#39;fields&#39;: FIELD,
-      &#39;lc&#39;: language.code,
-    },
-  );
   try {
-    final Response response = await HttpHelper().doGetRequest(
-      uri,
+    final ProductResult productResult = await getProduct(
+      ProductQueryConfiguration(
+        barcode,
+        language: language,
+        country: null,
+        fields: [ProductField.ENVIRONMENT_INFOCARD],
+        version: ProductQueryVersion.V0,
+      ),
+      user: null,
       queryType: queryType,
     );
-    if (response.statusCode != 200) {
-      return null;
-    }
-    final Map&lt;String, dynamic&gt; json =
-        jsonDecode(response.body) as Map&lt;String, dynamic&gt;;
-    final Map&lt;String, dynamic&gt; productData =
-        json[&#39;product&#39;] as Map&lt;String, dynamic&gt;;
-    return productData[FIELD] as String?;
+    return productResult.product?.environmentInfoCard;
   } catch (e) {
     return null;
   }
@@ -117,7 +116,7 @@
   <li><a href="../../index.html">openfoodfacts</a></li>
   <li><a href="../../openfoodfacts/openfoodfacts-library.html">openfoodfacts</a></li>
   <li><a href="../../openfoodfacts/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
-  <li class="self-crumb">getEcoscoreHtmlDescription method</li>
+  <li class="self-crumb"><span class="deprecated">getEcoscoreHtmlDescription</span> method</li>
 </ol>
 
 
@@ -145,9 +144,9 @@
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/addProductImage.html">addProductImage</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/extractIngredients.html">extractIngredients</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getAutocompletedSuggestions.html">getAutocompletedSuggestions</a></li>
-    <li><a href="../../openfoodfacts/OpenFoodAPIClient/getEcoscoreHtmlDescription.html">getEcoscoreHtmlDescription</a></li>
+    <li><a class="deprecated" href="../../openfoodfacts/OpenFoodAPIClient/getEcoscoreHtmlDescription.html">getEcoscoreHtmlDescription</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getIngredientSpellingCorrection.html">getIngredientSpellingCorrection</a></li>
-    <li><a href="../../openfoodfacts/OpenFoodAPIClient/getKnowledgePanels.html">getKnowledgePanels</a></li>
+    <li><a class="deprecated" href="../../openfoodfacts/OpenFoodAPIClient/getKnowledgePanels.html">getKnowledgePanels</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getOrderedNutrients.html">getOrderedNutrients</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getOrderedNutrientsJsonString.html">getOrderedNutrientsJsonString</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProduct.html">getProduct</a></li>
@@ -155,6 +154,7 @@
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductInsights.html">getProductInsights</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductList.html">getProductList</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductRaw.html">getProductRaw</a></li>
+    <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductString.html">getProductString</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductUri.html">getProductUri</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getRandomInsight.html">getRandomInsight</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getRandomRobotoffQuestion.html">getRandomRobotoffQuestion</a></li>

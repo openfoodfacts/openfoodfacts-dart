@@ -81,19 +81,17 @@ No replacing of '"' with '"'.</p>
   User? user,
   QueryType? queryType,
 }) async {
-  var productUri = UriHelper.getUri(
-    path: &#39;api&#47;v0&#47;product&#47;$barcode.json&#39;,
-    queryParameters: {&#39;lc&#39;: language.code},
-    queryType: queryType,
-  );
-
-  Response response = await HttpHelper().doGetRequest(
-    productUri,
+  final String productString = await getProductString(
+    ProductQueryConfiguration(
+      barcode,
+      language: language,
+      country: null,
+      fields: null,
+    ),
     user: user,
     queryType: queryType,
   );
-  var result = ProductResult.fromJson(json.decode(response.body));
-  return result;
+  return ProductResult.fromJson(json.decode(productString));
 }</code></pre>
 </section>
 
@@ -139,9 +137,9 @@ No replacing of '"' with '"'.</p>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/addProductImage.html">addProductImage</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/extractIngredients.html">extractIngredients</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getAutocompletedSuggestions.html">getAutocompletedSuggestions</a></li>
-    <li><a href="../../openfoodfacts/OpenFoodAPIClient/getEcoscoreHtmlDescription.html">getEcoscoreHtmlDescription</a></li>
+    <li><a class="deprecated" href="../../openfoodfacts/OpenFoodAPIClient/getEcoscoreHtmlDescription.html">getEcoscoreHtmlDescription</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getIngredientSpellingCorrection.html">getIngredientSpellingCorrection</a></li>
-    <li><a href="../../openfoodfacts/OpenFoodAPIClient/getKnowledgePanels.html">getKnowledgePanels</a></li>
+    <li><a class="deprecated" href="../../openfoodfacts/OpenFoodAPIClient/getKnowledgePanels.html">getKnowledgePanels</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getOrderedNutrients.html">getOrderedNutrients</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getOrderedNutrientsJsonString.html">getOrderedNutrientsJsonString</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProduct.html">getProduct</a></li>
@@ -149,6 +147,7 @@ No replacing of '"' with '"'.</p>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductInsights.html">getProductInsights</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductList.html">getProductList</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductRaw.html">getProductRaw</a></li>
+    <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductString.html">getProductString</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductUri.html">getProductUri</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getRandomInsight.html">getRandomInsight</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getRandomRobotoffQuestion.html">getRandomRobotoffQuestion</a></li>

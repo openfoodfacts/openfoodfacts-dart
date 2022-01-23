@@ -79,25 +79,17 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
   User? user,
   QueryType? queryType,
 }) async {
-  var productUri = UriHelper.getUri(
-    path: &#39;api&#47;v0&#47;product&#47;${configuration.barcode}.json&#39;,
-    queryParameters: configuration.getParametersMap(),
-    queryType: queryType,
-  );
-
-  Response response = await HttpHelper().doGetRequest(
-    productUri,
+  final String productString = await getProductString(
+    configuration,
     user: user,
     queryType: queryType,
   );
-  final jsonStr = _replaceQuotes(response.body);
-  ProductResult result = ProductResult.fromJson(jsonDecode(jsonStr));
-
+  final String jsonStr = _replaceQuotes(productString);
+  final ProductResult result = ProductResult.fromJson(jsonDecode(jsonStr));
   if (result.product != null) {
     ProductHelper.removeImages(result.product!, configuration.language);
     ProductHelper.createImageUrls(result.product!, queryType: queryType);
   }
-
   return result;
 }</code></pre>
 </section>
@@ -144,9 +136,9 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/addProductImage.html">addProductImage</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/extractIngredients.html">extractIngredients</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getAutocompletedSuggestions.html">getAutocompletedSuggestions</a></li>
-    <li><a href="../../openfoodfacts/OpenFoodAPIClient/getEcoscoreHtmlDescription.html">getEcoscoreHtmlDescription</a></li>
+    <li><a class="deprecated" href="../../openfoodfacts/OpenFoodAPIClient/getEcoscoreHtmlDescription.html">getEcoscoreHtmlDescription</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getIngredientSpellingCorrection.html">getIngredientSpellingCorrection</a></li>
-    <li><a href="../../openfoodfacts/OpenFoodAPIClient/getKnowledgePanels.html">getKnowledgePanels</a></li>
+    <li><a class="deprecated" href="../../openfoodfacts/OpenFoodAPIClient/getKnowledgePanels.html">getKnowledgePanels</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getOrderedNutrients.html">getOrderedNutrients</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getOrderedNutrientsJsonString.html">getOrderedNutrientsJsonString</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProduct.html">getProduct</a></li>
@@ -154,6 +146,7 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductInsights.html">getProductInsights</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductList.html">getProductList</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductRaw.html">getProductRaw</a></li>
+    <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductString.html">getProductString</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getProductUri.html">getProductUri</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getRandomInsight.html">getRandomInsight</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/getRandomRobotoffQuestion.html">getRandomRobotoffQuestion</a></li>
