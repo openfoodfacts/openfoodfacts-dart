@@ -63,8 +63,9 @@
     </section>
     
 <section class="desc markdown">
-  <p>Replaces the subdomain of an URI with specific country and language</p>
-<p>For instance</p>
+  <p>Replaces the subdomain of an URI with specific country and language.</p>
+<p>Default language and country will be used as fallback, if available.
+For instance</p>
 <ul>
 <li><a href="https://world.xxx">https://world.xxx</a>... would be standard</li>
 <li><a href="https://world-fr.xxx">https://world-fr.xxx</a>... would be "standard country" in French</li>
@@ -81,26 +82,17 @@
   final Uri uri, {
   OpenFoodFactsLanguage? language,
   OpenFoodFactsCountry? country,
-}) {
-  final String initialSubdomain = uri.host.split(&#39;.&#39;)[0];
-  final String countryCode = country?.iso2Code ??
-      OpenFoodAPIConfiguration.globalCountry?.iso2Code ??
-      initialSubdomain;
-  final String? languageCode = language?.code ??
-      (OpenFoodAPIConfiguration.globalLanguages != null &amp;&amp;
-              OpenFoodAPIConfiguration.globalLanguages!.isNotEmpty
-          ? OpenFoodAPIConfiguration.globalLanguages![0].code
-          : null);
-  final String subdomain;
-  if (languageCode != null) {
-    subdomain = &#39;$countryCode-$languageCode&#39;;
-  } else {
-    subdomain = countryCode;
-  }
-  return uri.replace(
-    host: uri.host.replaceFirst(&#39;$initialSubdomain.&#39;, &#39;$subdomain.&#39;),
-  );
-}</code></pre>
+}) =&gt;
+    replaceSubdomainWithCodes(
+      uri,
+      languageCode: language?.code ??
+          (OpenFoodAPIConfiguration.globalLanguages != null &amp;&amp;
+                  OpenFoodAPIConfiguration.globalLanguages!.isNotEmpty
+              ? OpenFoodAPIConfiguration.globalLanguages![0].code
+              : null),
+      countryCode: country?.iso2Code ??
+          OpenFoodAPIConfiguration.globalCountry?.iso2Code,
+    );</code></pre>
 </section>
 
 
@@ -146,6 +138,7 @@
     <li><a href="../../utils_UriHelper/UriHelper/getRobotoffUri.html">getRobotoffUri</a></li>
     <li><a href="../../utils_UriHelper/UriHelper/getUri.html">getUri</a></li>
     <li><a href="../../utils_UriHelper/UriHelper/replaceSubdomain.html">replaceSubdomain</a></li>
+    <li><a href="../../utils_UriHelper/UriHelper/replaceSubdomainWithCodes.html">replaceSubdomainWithCodes</a></li>
 
 </ol>
 
