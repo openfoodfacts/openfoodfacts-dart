@@ -1615,7 +1615,7 @@ void main() {
         barcode,
         language: OpenFoodFactsLanguage.GERMAN,
         fields: [ProductField.INGREDIENTS],
-        version: ProductQueryVersion.V0,
+        version: ProductQueryVersion.v0(),
       );
       final ProductResult result = await OpenFoodAPIClient.getProduct(
         configurations,
@@ -1638,7 +1638,7 @@ void main() {
         barcode,
         language: OpenFoodFactsLanguage.GERMAN,
         fields: [ProductField.INGREDIENTS],
-        version: ProductQueryVersion.V2,
+        version: ProductQueryVersion.v2(),
       );
       final ProductResult result = await OpenFoodAPIClient.getProduct(
         configurations,
