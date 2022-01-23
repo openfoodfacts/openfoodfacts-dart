@@ -18,4 +18,24 @@ class KnowledgePanels {
   factory KnowledgePanels.empty() {
     return KnowledgePanels(panelIdToPanelMap: {});
   }
+
+  @override
+  String toString() => 'KnowledgePanels(map: $panelIdToPanelMap)';
+
+  static KnowledgePanels? fromJsonHelper(final Map? json) => json == null
+      ? null
+      : KnowledgePanels.fromJson(json as Map<String, dynamic>);
+
+  static Map<String, dynamic>? toJsonHelper(
+      final KnowledgePanels? knowledgePanels) {
+    final Map<String, dynamic> result = {};
+    if (knowledgePanels == null) {
+      return null;
+    }
+    for (final MapEntry<String, KnowledgePanel> entry
+        in knowledgePanels.panelIdToPanelMap.entries) {
+      result[entry.key] = entry.value.toJson();
+    }
+    return result;
+  }
 }

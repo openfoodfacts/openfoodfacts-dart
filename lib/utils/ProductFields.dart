@@ -62,6 +62,8 @@ enum ProductField {
   ECOSCORE_GRADE,
   ECOSCORE_SCORE,
   ECOSCORE_DATA,
+  KNOWLEDGE_PANELS,
+  ENVIRONMENT_INFOCARD,
   ALL
 }
 
@@ -127,6 +129,8 @@ extension ProductFieldExtension on ProductField {
     ProductField.ECOSCORE_GRADE: 'ecoscore_grade',
     ProductField.ECOSCORE_SCORE: 'ecoscore_score',
     ProductField.ECOSCORE_DATA: 'ecoscore_data',
+    ProductField.KNOWLEDGE_PANELS: 'knowledge_panels',
+    ProductField.ENVIRONMENT_INFOCARD: 'environment_infocard',
   };
 
   /// Returns the key of the product field

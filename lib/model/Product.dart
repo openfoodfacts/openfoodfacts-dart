@@ -5,6 +5,7 @@ import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/utils/JsonHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
+import 'package:openfoodfacts/model/KnowledgePanels.dart';
 
 import '../interface/JsonObject.dart';
 import 'Additives.dart';
@@ -333,6 +334,19 @@ class Product extends JsonObject {
       includeIfNull: false,
       toJson: EcoscoreData.toJsonHelper)
   EcoscoreData? ecoscoreData;
+
+  @JsonKey(
+      name: 'knowledge_panels',
+      includeIfNull: false,
+      fromJson: KnowledgePanels.fromJsonHelper,
+      toJson: KnowledgePanels.toJsonHelper)
+  KnowledgePanels? knowledgePanels;
+
+  @JsonKey(
+    name: 'environment_infocard',
+    includeIfNull: false,
+  )
+  String? environmentInfoCard;
 
   Product(
       {this.barcode,
