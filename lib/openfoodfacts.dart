@@ -246,6 +246,7 @@ class OpenFoodAPIClient {
 
   /// Returns the URI to the translation page for a taxonomy.
   ///
+  /// Not supported for EMB_CODES.
   /// If the target website supports different domains for country + language,
   /// [replaceSubdomain] should be set to true.
   static Uri getTaxonomyTranslationUri(
@@ -253,9 +254,11 @@ class OpenFoodAPIClient {
     required final OpenFoodFactsLanguage language,
     final OpenFoodFactsCountry? country,
     final QueryType? queryType,
-    required final bool replaceSubdomain,
+    final bool replaceSubdomain = true,
   }) {
-    // TODO(teolemon): does not work for emb_codes - what is the URI for them?
+    if (taxonomyTagType == TagType.EMB_CODES) {
+      throw Exception('No taxonomy translation for $taxonomyTagType');
+    }
     final Uri uri = UriHelper.getUri(
       path: taxonomyTagType.key,
       queryType: queryType,

@@ -1662,14 +1662,28 @@ void main() {
   });
 
   test('get taxonomy translation uri', () async {
-    expect(
-      OpenFoodAPIClient.getTaxonomyTranslationUri(
-        TagType.CATEGORIES,
-        language: OpenFoodFactsLanguage.FRENCH,
-        replaceSubdomain: true,
-      ).toString(),
-      'https://world-fr.openfoodfacts.net/categories?translate=1',
-    );
+    const List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
+      OpenFoodFactsLanguage.FRENCH,
+      OpenFoodFactsLanguage.ENGLISH,
+    ];
+    for (final OpenFoodFactsLanguage language in languages) {
+      for (final TagType tagType in TagType.values) {
+        try {
+          final String url = OpenFoodAPIClient.getTaxonomyTranslationUri(
+            tagType,
+            language: language,
+          ).toString();
+          expect(
+            url,
+            'https://world-${language.code}.openfoodfacts.net/'
+            '${tagType.key}'
+            '?translate=1',
+          );
+        } catch (e) {
+          expect(tagType, TagType.EMB_CODES);
+        }
+      }
+    }
   });
 
   test('get minified product', () async {
