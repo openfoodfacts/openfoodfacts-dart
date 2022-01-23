@@ -247,12 +247,11 @@ class OpenFoodAPIClient {
   /// Returns the URI to the translation page for a taxonomy.
   ///
   /// Not supported for EMB_CODES.
-  /// If the target website supports different domains for country + language,
+  /// If the target website supports different subdomains for language,
   /// [replaceSubdomain] should be set to true.
   static Uri getTaxonomyTranslationUri(
     final TagType taxonomyTagType, {
     required final OpenFoodFactsLanguage language,
-    final OpenFoodFactsCountry? country,
     final QueryType? queryType,
     final bool replaceSubdomain = true,
   }) {
@@ -267,10 +266,9 @@ class OpenFoodAPIClient {
     if (!replaceSubdomain) {
       return uri;
     }
-    return UriHelper.replaceSubdomain(
+    return UriHelper.replaceSubdomainWithCodes(
       uri,
-      language: language,
-      country: country,
+      languageCode: language.code,
     );
   }
 

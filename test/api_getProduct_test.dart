@@ -1680,9 +1680,7 @@ void main() {
             '?translate=1',
           );
         } catch (e) {
-          if (tagType != TagType.EMB_CODES) {
-            rethrow;
-          }
+          expect(tagType, TagType.EMB_CODES);
         }
       }
     }

@@ -53,8 +53,9 @@ class UriHelper {
         queryParameters: queryParameters,
       );
 
-  /// Replaces the subdomain of an URI with specific country and language
+  /// Replaces the subdomain of an URI with specific country and language.
   ///
+  /// Default language and country will be used as fallback, if available.
   /// For instance
   /// * https://world.xxx... would be standard
   /// * https://world-fr.xxx... would be "standard country" in French
@@ -64,16 +65,33 @@ class UriHelper {
     final Uri uri, {
     OpenFoodFactsLanguage? language,
     OpenFoodFactsCountry? country,
+  }) =>
+      replaceSubdomainWithCodes(
+        uri,
+        languageCode: language?.code ??
+            (OpenFoodAPIConfiguration.globalLanguages != null &&
+                    OpenFoodAPIConfiguration.globalLanguages!.isNotEmpty
+                ? OpenFoodAPIConfiguration.globalLanguages![0].code
+                : null),
+        countryCode: country?.iso2Code ??
+            OpenFoodAPIConfiguration.globalCountry?.iso2Code,
+      );
+
+  /// Replaces the subdomain of an URI with specific country and language.
+  ///
+  /// No default language nor country: null means no parameter.
+  /// For instance
+  /// * https://world.xxx... would be standard
+  /// * https://world-fr.xxx... would be "no country" in French
+  /// * https://fr.xxx... would be France
+  /// * https://fr-es.xxx... would be France in Spanish
+  static Uri replaceSubdomainWithCodes(
+    final Uri uri, {
+    final String? languageCode,
+    String? countryCode,
   }) {
     final String initialSubdomain = uri.host.split('.')[0];
-    final String countryCode = country?.iso2Code ??
-        OpenFoodAPIConfiguration.globalCountry?.iso2Code ??
-        initialSubdomain;
-    final String? languageCode = language?.code ??
-        (OpenFoodAPIConfiguration.globalLanguages != null &&
-                OpenFoodAPIConfiguration.globalLanguages!.isNotEmpty
-            ? OpenFoodAPIConfiguration.globalLanguages![0].code
-            : null);
+    countryCode = countryCode ?? initialSubdomain;
     final String subdomain;
     if (languageCode != null) {
       subdomain = '$countryCode-$languageCode';
