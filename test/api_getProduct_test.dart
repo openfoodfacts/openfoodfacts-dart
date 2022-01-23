@@ -14,6 +14,7 @@ import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/InvalidBarcodes.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
+import 'package:openfoodfacts/utils/TagType.dart';
 import 'package:openfoodfacts/utils/UnitHelper.dart';
 import 'package:test/test.dart';
 
@@ -1753,6 +1754,40 @@ void main() {
       ).host,
       'de-es.openfoodfacts.net',
     );
+  });
+
+  test('get crowdin uri', () async {
+    expect(
+      OpenFoodAPIClient.getCrowdinUri(
+        OpenFoodFactsLanguage.SPANISH,
+      ).toString(),
+      'https://crowdin.com/project/openfoodfacts/es',
+    );
+  });
+
+  test('get taxonomy translation uri', () async {
+    const List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
+      OpenFoodFactsLanguage.FRENCH,
+      OpenFoodFactsLanguage.ENGLISH,
+    ];
+    for (final OpenFoodFactsLanguage language in languages) {
+      for (final TagType tagType in TagType.values) {
+        try {
+          final String url = OpenFoodAPIClient.getTaxonomyTranslationUri(
+            tagType,
+            language: language,
+          ).toString();
+          expect(
+            url,
+            'https://world-${language.code}.openfoodfacts.net/'
+            '${tagType.key}'
+            '?translate=1',
+          );
+        } catch (e) {
+          expect(tagType, TagType.EMB_CODES);
+        }
+      }
+    }
   });
 
   test('get minified product', () async {

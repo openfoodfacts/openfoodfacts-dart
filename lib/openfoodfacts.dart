@@ -248,6 +248,38 @@ class OpenFoodAPIClient {
     );
   }
 
+  /// Returns the URI to the translation page for a taxonomy.
+  ///
+  /// Not supported for EMB_CODES.
+  /// If the target website supports different subdomains for language,
+  /// [replaceSubdomain] should be set to true.
+  static Uri getTaxonomyTranslationUri(
+    final TagType taxonomyTagType, {
+    required final OpenFoodFactsLanguage language,
+    final QueryType? queryType,
+    final bool replaceSubdomain = true,
+  }) {
+    if (taxonomyTagType == TagType.EMB_CODES) {
+      throw Exception('No taxonomy translation for $taxonomyTagType');
+    }
+    final Uri uri = UriHelper.getUri(
+      path: taxonomyTagType.key,
+      queryType: queryType,
+      queryParameters: {'translate': '1'},
+    );
+    if (!replaceSubdomain) {
+      return uri;
+    }
+    return UriHelper.replaceSubdomainWithCodes(
+      uri,
+      languageCode: language.code,
+    );
+  }
+
+  /// Returns the URI to the crowdin page for a [language].
+  static Uri getCrowdinUri(final OpenFoodFactsLanguage language) =>
+      Uri.parse('https://crowdin.com/project/openfoodfacts/${language.code}');
+
   /// Search the OpenFoodFacts product database with the given parameters.
   /// Returns the list of products as SearchResult.
   /// Query the language specific host from OpenFoodFacts.
