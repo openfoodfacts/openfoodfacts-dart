@@ -27,6 +27,7 @@ import 'package:openfoodfacts/utils/PnnsGroups.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
+import 'package:openfoodfacts/utils/SourceConfiguration.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/UriHelper.dart';
@@ -81,6 +82,7 @@ export 'utils/ProductFields.dart';
 export 'utils/ProductHelper.dart';
 export 'utils/ProductQueryConfigurations.dart';
 export 'utils/ProductSearchQueryConfiguration.dart';
+export 'utils/SourceConfiguration.dart';
 
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
@@ -92,15 +94,19 @@ class OpenFoodAPIClient {
   /// Please read the language mechanics explanation if you intend to display
   /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
   static Future<Status> saveProduct(
-    User user,
-    Product product, {
-    QueryType? queryType,
+    final User user,
+    final Product product, {
+    final QueryType? queryType,
+    final SourceConfiguration? sourceConfiguration,
   }) async {
-    var parameterMap = <String, String>{};
+    final Map<String, String> parameterMap = <String, String>{};
     parameterMap.addAll(user.toData());
     parameterMap.addAll(product.toServerData());
+    if (sourceConfiguration != null) {
+      parameterMap.addAll(sourceConfiguration.getParameters());
+    }
 
-    var productUri = UriHelper.getUri(
+    final Uri productUri = UriHelper.getUri(
       path: '/cgi/product_jqm2.pl',
       queryType: queryType,
     );
