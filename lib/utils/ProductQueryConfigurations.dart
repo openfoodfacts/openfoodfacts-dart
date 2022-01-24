@@ -9,10 +9,10 @@ import 'package:openfoodfacts/utils/UriHelper.dart';
 class ProductQueryVersion {
   const ProductQueryVersion(this.version);
 
-  const ProductQueryVersion.v0() : this(0);
-  const ProductQueryVersion.v2() : this(2);
-
   final int version;
+
+  static const ProductQueryVersion v0 = ProductQueryVersion(0);
+  static const ProductQueryVersion v2 = ProductQueryVersion(2);
 
   String getPath(final String barcode) {
     if (version == 0) {
@@ -31,7 +31,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
   /// parameter's description.
   ProductQueryConfiguration(
     this.barcode, {
-    this.version = const ProductQueryVersion.v0(),
+    this.version = ProductQueryVersion.v0,
     final OpenFoodFactsLanguage? language,
     final List<OpenFoodFactsLanguage> languages = const [],
     @Deprecated('Use parameters language or languages instead')
