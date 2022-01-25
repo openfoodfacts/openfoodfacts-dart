@@ -8,11 +8,16 @@ import 'QueryType.dart';
 class UriHelper {
   UriHelper._();
 
-  ///Returns a OFF uri with the in the [OpenFoodAPIConfiguration] specified settings
+  /// Returns a OFF uri with the [OpenFoodAPIConfiguration] specified settings
+  ///
+  /// Typical use-case of "[addUserAgentParameters] = false" is for other
+  /// request than GET, e.g. POST or MULTIPART, where we add the user agent
+  /// parameters in another part of the code.
   static Uri getUri({
     required final String path,
-    final Map<String, dynamic>? queryParameters,
+    final Map<String, String>? queryParameters,
     final QueryType? queryType,
+    final bool addUserAgentParameters = true,
   }) =>
       Uri(
         scheme: OpenFoodAPIConfiguration.uriScheme,
@@ -20,7 +25,9 @@ class UriHelper {
             ? OpenFoodAPIConfiguration.uriProdHost
             : OpenFoodAPIConfiguration.uriTestHost,
         path: path,
-        queryParameters: queryParameters,
+        queryParameters: addUserAgentParameters
+            ? HttpHelper.addUserAgentParameters(queryParameters)
+            : queryParameters,
       );
 
   ///Returns a OFF-Robotoff uri with the in the [OpenFoodAPIConfiguration] specified settings

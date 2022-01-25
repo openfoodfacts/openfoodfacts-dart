@@ -1,3 +1,4 @@
+import 'package:openfoodfacts/model/UserAgent.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:openfoodfacts/utils/UriHelper.dart';
@@ -7,104 +8,151 @@ void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   test('Get Uri', () {
+    OpenFoodAPIConfiguration.userAgent = null;
     Uri uri = UriHelper.getUri(
       path: '/test/test.pl',
     );
-    expect('https://world.openfoodfacts.org/test/test.pl', uri.toString());
+    expect(
+      uri.toString(),
+      'https://world.openfoodfacts.org/test/test.pl',
+    );
 
     Uri uri1 = UriHelper.getUri(
       path: '/test/test.pl',
-      queryParameters: <String, dynamic>{'test': 'true', 'queryType': 'PROD'},
+      queryParameters: <String, String>{'test': 'true', 'queryType': 'PROD'},
     );
     expect(
-      'https://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD',
       uri1.toString(),
+      'https://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD',
+    );
+  });
+
+  test('Get Uri with user agent', () {
+    const String name = 'UserAgentName';
+    const String version = '12';
+    OpenFoodAPIConfiguration.userAgent =
+        UserAgent(name: name, version: version);
+    Uri uri;
+
+    uri = UriHelper.getUri(
+      path: '/test/test.pl',
+    );
+    expect(
+      uri.toString(),
+      'https://world.openfoodfacts.org/test/test.pl?app_name=$name&app_version=$version',
+    );
+
+    uri = UriHelper.getUri(
+      path: '/test/test.pl',
+      queryParameters: <String, String>{'test': 'true', 'queryType': 'PROD'},
+    );
+    expect(
+      uri.toString(),
+      'https://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD&app_name=$name&app_version=$version',
+    );
+
+    uri = UriHelper.getUri(
+      path: '/test/test.pl',
+      addUserAgentParameters: false,
+    );
+    expect(
+      uri.toString(),
+      'https://world.openfoodfacts.org/test/test.pl',
+    );
+
+    uri = UriHelper.getUri(
+      path: '/test/test.pl',
+      queryParameters: <String, String>{'test': 'true', 'queryType': 'PROD'},
+      addUserAgentParameters: false,
+    );
+    expect(
+      uri.toString(),
+      'https://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD',
     );
   });
 
   test('Get Test Uri', () {
+    OpenFoodAPIConfiguration.userAgent = null;
     Uri uri = UriHelper.getUri(
       path: '/test/test.pl',
       queryType: QueryType.TEST,
     );
-    expect('https://world.openfoodfacts.net/test/test.pl', uri.toString());
+    expect(
+      uri.toString(),
+      'https://world.openfoodfacts.net/test/test.pl',
+    );
 
     Uri uri1 = UriHelper.getUri(
       path: '/test/test.pl',
       queryType: QueryType.TEST,
-      queryParameters: <String, dynamic>{'test': 'true', 'queryType': 'PROD'},
+      queryParameters: <String, String>{'test': 'true', 'queryType': 'PROD'},
     );
     expect(
-      'https://world.openfoodfacts.net/test/test.pl?test=true&queryType=PROD',
       uri1.toString(),
+      'https://world.openfoodfacts.net/test/test.pl?test=true&queryType=PROD',
     );
   });
 
   test('Get Robotoff Uri', () {
+    OpenFoodAPIConfiguration.userAgent = null;
     Uri uri = UriHelper.getRobotoffUri(
       path: '/test/test.pl',
     );
-    expect('https://robotoff.openfoodfacts.org/test/test.pl', uri.toString());
+    expect(
+      uri.toString(),
+      'https://robotoff.openfoodfacts.org/test/test.pl',
+    );
 
     Uri uri1 = UriHelper.getRobotoffUri(
       path: '/test/test.pl',
       queryParameters: <String, dynamic>{'test': 'true', 'queryType': 'PROD'},
     );
     expect(
-      'https://robotoff.openfoodfacts.org/test/test.pl?test=true&queryType=PROD',
       uri1.toString(),
+      'https://robotoff.openfoodfacts.org/test/test.pl?test=true&queryType=PROD',
     );
   });
 
   test('Get Robotoff Test Uri', () {
+    OpenFoodAPIConfiguration.userAgent = null;
     Uri uri = UriHelper.getRobotoffUri(
       path: '/test/test.pl',
       queryType: QueryType.TEST,
     );
-    expect('https://robotoff.openfoodfacts.net/test/test.pl', uri.toString());
+    expect(
+      uri.toString(),
+      'https://robotoff.openfoodfacts.net/test/test.pl',
+    );
 
     Uri uri1 = UriHelper.getRobotoffUri(
       path: '/test/test.pl',
       queryType: QueryType.TEST,
-      queryParameters: <String, dynamic>{'test': 'true', 'queryType': 'PROD'},
+      queryParameters: <String, String>{'test': 'true', 'queryType': 'PROD'},
     );
     expect(
+      uri1.toString(),
       'https://robotoff.openfoodfacts.net/test/test.pl?test=true&queryType=PROD',
-      uri1.toString(),
     );
   });
 
   test('Get Uri with different uriScheme', () {
+    OpenFoodAPIConfiguration.userAgent = null;
     OpenFoodAPIConfiguration.uriScheme = 'http';
     Uri uri = UriHelper.getUri(
       path: '/test/test.pl',
     );
-    expect('http://world.openfoodfacts.org/test/test.pl', uri.toString());
+    expect(
+      uri.toString(),
+      'http://world.openfoodfacts.org/test/test.pl',
+    );
 
     Uri uri1 = UriHelper.getUri(
       path: '/test/test.pl',
-      queryParameters: <String, dynamic>{'test': 'true', 'queryType': 'PROD'},
+      queryParameters: <String, String>{'test': 'true', 'queryType': 'PROD'},
     );
     expect(
-      'http://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD',
       uri1.toString(),
-    );
-  });
-
-  test('Get Uri with different uriScheme', () {
-    OpenFoodAPIConfiguration.uriScheme = 'http';
-    Uri uri = UriHelper.getUri(
-      path: '/test/test.pl',
-    );
-    expect('http://world.openfoodfacts.org/test/test.pl', uri.toString());
-
-    Uri uri1 = UriHelper.getUri(
-      path: '/test/test.pl',
-      queryParameters: <String, dynamic>{'test': 'true', 'queryType': 'PROD'},
-    );
-    expect(
       'http://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD',
-      uri1.toString(),
     );
   });
 }
