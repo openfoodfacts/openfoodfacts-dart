@@ -103,6 +103,7 @@ class OpenFoodAPIClient {
     var productUri = UriHelper.getUri(
       path: '/cgi/product_jqm2.pl',
       queryType: queryType,
+      addUserAgentParameters: false,
     );
 
     if (product.nutriments != null) {
@@ -145,6 +146,7 @@ class OpenFoodAPIClient {
     var imageUri = UriHelper.getUri(
       path: '/cgi/product_image_upload.pl',
       queryType: queryType,
+      addUserAgentParameters: false,
     );
 
     return await HttpHelper().doMultipartRequest(
@@ -266,6 +268,7 @@ class OpenFoodAPIClient {
       path: taxonomyTagType.key,
       queryType: queryType,
       queryParameters: {'translate': '1'},
+      addUserAgentParameters: false,
     );
     if (!replaceSubdomain) {
       return uri;
@@ -510,10 +513,10 @@ class OpenFoodAPIClient {
     String? serverDomain,
     QueryType? queryType,
   }) async {
-    final Map<String, String?> parameters = {};
+    final Map<String, String> parameters = {};
 
-    if (type != null) {
-      parameters['type'] = type.value;
+    if (type != null && type.value != null) {
+      parameters['type'] = type.value!;
     }
     if (country != null) {
       parameters['country'] = country;
@@ -649,11 +652,13 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
 
-    Map<String, String?> annotationData = {
-      'insight_id': insightId,
+    final Map<String, String> annotationData = {
       'annotation': annotation.value.toString(),
       'update': update ? '1' : '0'
     };
+    if (insightId != null) {
+      annotationData['insight_id'] = insightId;
+    }
 
     if (deviceId != null) {
       annotationData['device_id'] = deviceId;
@@ -674,15 +679,15 @@ class OpenFoodAPIClient {
     User? user,
     QueryType? queryType,
   }) async {
-    Map<String, String?> spellingCorrectionParam;
+    Map<String, String> spellingCorrectionParam;
 
     if (ingredientName != null) {
       spellingCorrectionParam = {
         'text': ingredientName,
       };
-    } else if (product != null) {
+    } else if (product != null && product.barcode != null) {
       spellingCorrectionParam = {
-        'barcode': product.barcode,
+        'barcode': product.barcode!,
       };
     } else {
       return null;
@@ -774,6 +779,7 @@ class OpenFoodAPIClient {
     var loginUri = UriHelper.getUri(
       path: '/cgi/auth.pl',
       queryType: queryType,
+      addUserAgentParameters: false,
     );
     Response response = await HttpHelper().doPostRequest(
       loginUri,
@@ -799,6 +805,7 @@ class OpenFoodAPIClient {
     var registerUri = UriHelper.getUri(
       path: '/cgi/user.pl',
       queryType: queryType,
+      addUserAgentParameters: false,
     );
 
     Map<String, String> data = <String, String>{
@@ -859,6 +866,7 @@ class OpenFoodAPIClient {
     var passwordResetUri = UriHelper.getUri(
       path: '/cgi/reset_password.pl',
       queryType: queryType,
+      addUserAgentParameters: false,
     );
 
     Map<String, String> data = <String, String>{
