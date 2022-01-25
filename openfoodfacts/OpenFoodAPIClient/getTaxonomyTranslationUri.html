@@ -87,6 +87,7 @@ If the target website supports different subdomains for language,
     path: taxonomyTagType.key,
     queryType: queryType,
     queryParameters: {&#39;translate&#39;: &#39;1&#39;},
+    addUserAgentParameters: false,
   );
   if (!replaceSubdomain) {
     return uri;

@@ -95,7 +95,7 @@ As result a json object of the "type" Status is expected.</p>
   );
 
   request.headers.addAll({&#39;Content-Type&#39;: &#39;multipart&#47;form-data&#39;});
-  request.fields.addAll(body);
+  request.fields.addAll(addUserAgentParameters(body)!);
 
   &#47;&#47; add all file entries to the request
   if (files != null) {
@@ -174,6 +174,8 @@ As result a json object of the "type" Status is expected.</p>
     <li class="section-title"><a href="../../utils_HttpHelper/HttpHelper-class.html#static-properties">Static properties</a></li>
     <li><a href="../../utils_HttpHelper/HttpHelper/instance.html">instance</a></li>
 
+    <li class="section-title"><a href="../../utils_HttpHelper/HttpHelper-class.html#static-methods">Static methods</a></li>
+    <li><a href="../../utils_HttpHelper/HttpHelper/addUserAgentParameters.html">addUserAgentParameters</a></li>
 
     <li class="section-title"><a href="../../utils_HttpHelper/HttpHelper-class.html#constants">Constants</a></li>
     <li><a href="../../utils_HttpHelper/HttpHelper/FROM-constant.html">FROM</a></li>

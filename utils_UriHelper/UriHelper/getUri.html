@@ -54,8 +54,9 @@
 
 <span class="returntype"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Uri-class.html">Uri</a></span>
 <span class="name ">getUri</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getUri-param-path">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, </span></li>
-<li><span class="parameter" id="getUri-param-queryParameters"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>?</span> <span class="parameter-name">queryParameters</span>, </span></li>
-<li><span class="parameter" id="getUri-param-queryType"><span class="type-annotation"><a href="../../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
+<li><span class="parameter" id="getUri-param-queryParameters"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">queryParameters</span>, </span></li>
+<li><span class="parameter" id="getUri-param-queryType"><span class="type-annotation"><a href="../../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>, </span></li>
+<li><span class="parameter" id="getUri-param-addUserAgentParameters"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">addUserAgentParameters</span> = <span class="default-value">true</span>}</span></li>
 </ol>)
 
       
@@ -63,7 +64,10 @@
     </section>
     
 <section class="desc markdown">
-  <p>Returns a OFF uri with the in the <a href="../../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration-class.html">OpenFoodAPIConfiguration</a> specified settings</p>
+  <p>Returns a OFF uri with the <a href="../../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration-class.html">OpenFoodAPIConfiguration</a> specified settings</p>
+<p>Typical use-case of "<code>addUserAgentParameters</code> = false" is for other
+request than GET, e.g. POST or MULTIPART, where we add the user agent
+parameters in another part of the code.</p>
 </section>
 
 
@@ -72,8 +76,9 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static Uri getUri({
   required final String path,
-  final Map&lt;String, dynamic&gt;? queryParameters,
+  final Map&lt;String, String&gt;? queryParameters,
   final QueryType? queryType,
+  final bool addUserAgentParameters = true,
 }) =&gt;
     Uri(
       scheme: OpenFoodAPIConfiguration.uriScheme,
@@ -81,7 +86,9 @@
           ? OpenFoodAPIConfiguration.uriProdHost
           : OpenFoodAPIConfiguration.uriTestHost,
       path: path,
-      queryParameters: queryParameters,
+      queryParameters: addUserAgentParameters
+          ? HttpHelper.addUserAgentParameters(queryParameters)
+          : queryParameters,
     );</code></pre>
 </section>
 

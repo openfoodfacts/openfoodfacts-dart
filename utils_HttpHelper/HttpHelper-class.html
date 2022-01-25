@@ -141,7 +141,7 @@ As result a json object of the "type" Status is expected.
 </dd>
 
         <dt id="doPostRequest" class="callable">
-  <span class="name"><a href="../utils_HttpHelper/HttpHelper/doPostRequest.html">doPostRequest</a></span><span class="signature">(<wbr><span class="parameter" id="doPostRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span><span class="parameter" id="doPostRequest-param-body"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span>&gt;</span></span> <span class="parameter-name">body</span>, </span><span class="parameter" id="doPostRequest-param-user"><span class="type-annotation"><a href="../model_User/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span><span class="parameter" id="doPostRequest-param-queryType">{<span class="type-annotation"><a href="../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span>)
+  <span class="name"><a href="../utils_HttpHelper/HttpHelper/doPostRequest.html">doPostRequest</a></span><span class="signature">(<wbr><span class="parameter" id="doPostRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span><span class="parameter" id="doPostRequest-param-body"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">body</span>, </span><span class="parameter" id="doPostRequest-param-user"><span class="type-annotation"><a href="../model_User/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span><span class="parameter" id="doPostRequest-param-queryType">{<span class="type-annotation"><a href="../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span>)
     <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/http/0.13.4/http/Response-class.html">Response</a></span>&gt;</span></span>
   </span>
   
@@ -221,6 +221,24 @@ The result of the request will be returned as string.
       </dl>
     </section>
 
+    <section class="summary offset-anchor" id="static-methods">
+      <h2>Static Methods</h2>
+      <dl class="callables">
+        <dt id="addUserAgentParameters" class="callable">
+  <span class="name"><a href="../utils_HttpHelper/HttpHelper/addUserAgentParameters.html">addUserAgentParameters</a></span><span class="signature">(<wbr><span class="parameter" id="addUserAgentParameters-param-map"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">map</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds user agent data to parameters, for statistics purpose 
+  
+
+</dd>
+
+      </dl>
+    </section>
 
     <section class="summary offset-anchor" id="constants">
       <h2>Constants</h2>
@@ -319,6 +337,8 @@ The result of the request will be returned as string.
     <li class="section-title"><a href="../utils_HttpHelper/HttpHelper-class.html#static-properties">Static properties</a></li>
     <li><a href="../utils_HttpHelper/HttpHelper/instance.html">instance</a></li>
 
+    <li class="section-title"><a href="../utils_HttpHelper/HttpHelper-class.html#static-methods">Static methods</a></li>
+    <li><a href="../utils_HttpHelper/HttpHelper/addUserAgentParameters.html">addUserAgentParameters</a></li>
 
     <li class="section-title"><a href="../utils_HttpHelper/HttpHelper-class.html#constants">Constants</a></li>
     <li><a href="../utils_HttpHelper/HttpHelper/FROM-constant.html">FROM</a></li>

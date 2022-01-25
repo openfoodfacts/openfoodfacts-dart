@@ -78,10 +78,10 @@
   String? serverDomain,
   QueryType? queryType,
 }) async {
-  final Map&lt;String, String?&gt; parameters = {};
+  final Map&lt;String, String&gt; parameters = {};
 
-  if (type != null) {
-    parameters[&#39;type&#39;] = type.value;
+  if (type != null &amp;&amp; type.value != null) {
+    parameters[&#39;type&#39;] = type.value!;
   }
   if (country != null) {
     parameters[&#39;country&#39;] = country;

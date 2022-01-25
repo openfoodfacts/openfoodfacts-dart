@@ -74,15 +74,15 @@
   User? user,
   QueryType? queryType,
 }) async {
-  Map&lt;String, String?&gt; spellingCorrectionParam;
+  Map&lt;String, String&gt; spellingCorrectionParam;
 
   if (ingredientName != null) {
     spellingCorrectionParam = {
       &#39;text&#39;: ingredientName,
     };
-  } else if (product != null) {
+  } else if (product != null &amp;&amp; product.barcode != null) {
     spellingCorrectionParam = {
-      &#39;barcode&#39;: product.barcode,
+      &#39;barcode&#39;: product.barcode!,
     };
   } else {
     return null;

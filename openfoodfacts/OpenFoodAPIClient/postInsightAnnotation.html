@@ -83,11 +83,13 @@
     queryType: queryType,
   );
 
-  Map&lt;String, String?&gt; annotationData = {
-    &#39;insight_id&#39;: insightId,
+  final Map&lt;String, String&gt; annotationData = {
     &#39;annotation&#39;: annotation.value.toString(),
     &#39;update&#39;: update ? &#39;1&#39; : &#39;0&#39;
   };
+  if (insightId != null) {
+    annotationData[&#39;insight_id&#39;] = insightId;
+  }
 
   if (deviceId != null) {
     annotationData[&#39;device_id&#39;] = deviceId;

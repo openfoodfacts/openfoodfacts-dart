@@ -86,6 +86,7 @@ Returns <a href="../../model_Status/Status/status.html">Status.status</a> 201 = 
   var registerUri = UriHelper.getUri(
     path: &#39;&#47;cgi&#47;user.pl&#39;,
     queryType: queryType,
+    addUserAgentParameters: false,
   );
 
   Map&lt;String, String&gt; data = &lt;String, String&gt;{

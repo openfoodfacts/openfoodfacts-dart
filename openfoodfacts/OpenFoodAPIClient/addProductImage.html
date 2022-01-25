@@ -88,6 +88,7 @@ Returns a Status object as result.</p>
   var imageUri = UriHelper.getUri(
     path: &#39;&#47;cgi&#47;product_image_upload.pl&#39;,
     queryType: queryType,
+    addUserAgentParameters: false,
   );
 
   return await HttpHelper().doMultipartRequest(
