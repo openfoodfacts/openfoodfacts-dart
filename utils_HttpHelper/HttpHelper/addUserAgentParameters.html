@@ -71,16 +71,17 @@
   <pre class="language-dart"><code class="language-dart">static Map&lt;String, String&gt;? addUserAgentParameters(
   Map&lt;String, String&gt;? map,
 ) {
-  if (OpenFoodAPIConfiguration.userAgent == null) {
-    return map;
-  }
-  if (OpenFoodAPIConfiguration.userAgent!.name != null) {
+  if (OpenFoodAPIConfiguration.userAgent?.name != null) {
     map ??= &lt;String, String&gt;{};
     map[&#39;app_name&#39;] = OpenFoodAPIConfiguration.userAgent!.name!;
   }
-  if (OpenFoodAPIConfiguration.userAgent!.version != null) {
+  if (OpenFoodAPIConfiguration.userAgent?.version != null) {
     map ??= &lt;String, String&gt;{};
     map[&#39;app_version&#39;] = OpenFoodAPIConfiguration.userAgent!.version!;
+  }
+  if (OpenFoodAPIConfiguration.uuid != null) {
+    map ??= &lt;String, String&gt;{};
+    map[&#39;app_uuid&#39;] = OpenFoodAPIConfiguration.uuid!;
   }
   return map;
 }</code></pre>
