@@ -9,6 +9,7 @@ void main() {
 
   test('Get Uri', () {
     OpenFoodAPIConfiguration.userAgent = null;
+    OpenFoodAPIConfiguration.uuid = null;
     Uri uri = UriHelper.getUri(
       path: '/test/test.pl',
     );
@@ -32,6 +33,7 @@ void main() {
     const String version = '12';
     OpenFoodAPIConfiguration.userAgent =
         UserAgent(name: name, version: version);
+    OpenFoodAPIConfiguration.uuid = null;
     Uri uri;
 
     uri = UriHelper.getUri(
@@ -71,8 +73,52 @@ void main() {
     );
   });
 
+  test('Get Uri with uuid', () {
+    const String uuid = 'uuidTest';
+    OpenFoodAPIConfiguration.userAgent = null;
+    OpenFoodAPIConfiguration.uuid = uuid;
+    Uri uri;
+
+    uri = UriHelper.getUri(
+      path: '/test/test.pl',
+    );
+    expect(
+      uri.toString(),
+      'https://world.openfoodfacts.org/test/test.pl?app_uuid=$uuid',
+    );
+
+    uri = UriHelper.getUri(
+      path: '/test/test.pl',
+      queryParameters: <String, String>{'test': 'true', 'queryType': 'PROD'},
+    );
+    expect(
+      uri.toString(),
+      'https://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD&app_uuid=$uuid',
+    );
+
+    uri = UriHelper.getUri(
+      path: '/test/test.pl',
+      addUserAgentParameters: false,
+    );
+    expect(
+      uri.toString(),
+      'https://world.openfoodfacts.org/test/test.pl',
+    );
+
+    uri = UriHelper.getUri(
+      path: '/test/test.pl',
+      queryParameters: <String, String>{'test': 'true', 'queryType': 'PROD'},
+      addUserAgentParameters: false,
+    );
+    expect(
+      uri.toString(),
+      'https://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD',
+    );
+  });
+
   test('Get Test Uri', () {
     OpenFoodAPIConfiguration.userAgent = null;
+    OpenFoodAPIConfiguration.uuid = null;
     Uri uri = UriHelper.getUri(
       path: '/test/test.pl',
       queryType: QueryType.TEST,
@@ -95,6 +141,7 @@ void main() {
 
   test('Get Robotoff Uri', () {
     OpenFoodAPIConfiguration.userAgent = null;
+    OpenFoodAPIConfiguration.uuid = null;
     Uri uri = UriHelper.getRobotoffUri(
       path: '/test/test.pl',
     );
@@ -115,6 +162,7 @@ void main() {
 
   test('Get Robotoff Test Uri', () {
     OpenFoodAPIConfiguration.userAgent = null;
+    OpenFoodAPIConfiguration.uuid = null;
     Uri uri = UriHelper.getRobotoffUri(
       path: '/test/test.pl',
       queryType: QueryType.TEST,
@@ -137,6 +185,7 @@ void main() {
 
   test('Get Uri with different uriScheme', () {
     OpenFoodAPIConfiguration.userAgent = null;
+    OpenFoodAPIConfiguration.uuid = null;
     OpenFoodAPIConfiguration.uriScheme = 'http';
     Uri uri = UriHelper.getUri(
       path: '/test/test.pl',
