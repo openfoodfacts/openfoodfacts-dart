@@ -14,6 +14,9 @@ class OpenFoodAPIConfiguration {
   ///Defines a global userAgent to tell the backend the source of the request.
   static UserAgent? userAgent;
 
+  ///Defines a global uuid to tell the backend the source of the request.
+  static String? uuid;
+
   ///Defines a global user to avoid adding it to every request
   static User? globalUser;
 
