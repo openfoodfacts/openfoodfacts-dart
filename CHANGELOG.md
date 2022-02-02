@@ -6,6 +6,17 @@
 * [#357](https://github.com/openfoodfacts/openfoodfacts-dart/issues/357) - all `Unit`s are now correctly saved ([#358](https://github.com/openfoodfacts/openfoodfacts-dart/issues/358)) ([9eb2872](https://github.com/openfoodfacts/openfoodfacts-dart/commit/9eb2872b0754c193b0c07f66f2da0331e4ffc23b))
 
 
+## [1.12.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.11.1...v1.12.0) (2022-02-02)
+
+
+### Features
+
+* [#348](https://github.com/openfoodfacts/openfoodfacts-dart/issues/348) - new methods getTaxonomyTranslationUri and getCrowdinUri ([#372](https://github.com/openfoodfacts/openfoodfacts-dart/issues/372)) ([057e0a3](https://github.com/openfoodfacts/openfoodfacts-dart/commit/057e0a30b6c824722c733c4d63ca63bd8cccc434))
+* [#369](https://github.com/openfoodfacts/openfoodfacts-dart/issues/369) - more flexibility for product query version ([#374](https://github.com/openfoodfacts/openfoodfacts-dart/issues/374)) ([51fdebc](https://github.com/openfoodfacts/openfoodfacts-dart/commit/51fdebcc46b0fea4bba69cef50817da9b0ef970f))
+* [#370](https://github.com/openfoodfacts/openfoodfacts-dart/issues/370) - added "uuid" to configuration ([#378](https://github.com/openfoodfacts/openfoodfacts-dart/issues/378)) ([2be52e0](https://github.com/openfoodfacts/openfoodfacts-dart/commit/2be52e064c42c460ca453461e1ebdaece5b58177))
+* [#370](https://github.com/openfoodfacts/openfoodfacts-dart/issues/370) - added app_name and app_version to http queries (as parameters) ([#376](https://github.com/openfoodfacts/openfoodfacts-dart/issues/376)) ([d4c6ef9](https://github.com/openfoodfacts/openfoodfacts-dart/commit/d4c6ef9f46eb8cf51e66d70f2b5838b8b8a8e12b))
+* new method getProductString, api V0 and V2, new product and ingredient fields ([#371](https://github.com/openfoodfacts/openfoodfacts-dart/issues/371)) ([82547f6](https://github.com/openfoodfacts/openfoodfacts-dart/commit/82547f63a3c4e59cd6f30c1c018cf5c8d13d0b45))
+
 ### [1.11.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.11.0...v1.11.1) (2022-01-16)
 
 
