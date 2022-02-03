@@ -61,6 +61,10 @@ class ProductHelper {
     product.ingredientsTextInLanguages![language] =
         source['ingredients_text_${language.code}'];
 
+    product.packagingTextInLanguages ??= {};
+    product.packagingTextInLanguages![language] =
+        source['packaging_text_${language.code}'];
+
     product.productNameInLanguages = {};
     product.productNameInLanguages![language] =
         source['product_name_${language.code}'];

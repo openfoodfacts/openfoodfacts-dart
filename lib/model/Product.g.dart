@@ -110,6 +110,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
               (k, e) => MapEntry($enumDecode(_$ImageFieldEnumMap, k), e as int),
             )),
       )
+      ..packagingTextInLanguages =
+          LanguageHelper.fromJsonStringMap(json['packaging_text_in_languages'])
       ..knowledgePanels =
           KnowledgePanels.fromJsonHelper(json['knowledge_panels'] as Map?)
       ..environmentInfoCard = json['environment_infocard'] as String?;
@@ -186,6 +188,8 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
       LanguageHelper.toJsonStringsListMap(instance.labelsTagsInLanguages));
   writeNotNull('packaging', instance.packaging);
   writeNotNull('packaging_tags', instance.packagingTags);
+  writeNotNull('packaging_text_in_languages',
+      LanguageHelper.toJsonStringMap(instance.packagingTextInLanguages));
   writeNotNull('misc', instance.miscTags);
   writeNotNull('states_tags', instance.statesTags);
   writeNotNull('traces_tags', instance.tracesTags);
