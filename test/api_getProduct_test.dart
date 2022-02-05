@@ -148,6 +148,31 @@ void main() {
       expect(result.product!.countries, 'United States');
     });
 
+    test('get packaging text in languages (Coca-Cola)', () async {
+      const String barcode = '5449000000996';
+      const List<OpenFoodFactsLanguage> languages = [
+        OpenFoodFactsLanguage.ENGLISH,
+        OpenFoodFactsLanguage.FRENCH,
+      ];
+
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        languages: languages,
+        fields: [ProductField.PACKAGING_TEXT_IN_LANGUAGES],
+      );
+      final ProductResult result = await OpenFoodAPIClient.getProduct(
+        configurations,
+        user: TestConstants.TEST_USER,
+      );
+      expect(result.status, 1);
+      expect(result.product, isNotNull);
+      expect(result.product!.packagingTextInLanguages, isNotNull);
+      for (final OpenFoodFactsLanguage language in languages) {
+        expect(result.product!.packagingTextInLanguages![language], isNotNull);
+      }
+    });
+
     test('check alcohol data', () async {
       const String barcode = '3119780259625';
 

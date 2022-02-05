@@ -296,6 +296,12 @@ class Product extends JsonObject {
   String? packaging;
   @JsonKey(name: 'packaging_tags', includeIfNull: false)
   List<String>? packagingTags;
+  @JsonKey(
+      name: 'packaging_text_in_languages',
+      fromJson: LanguageHelper.fromJsonStringMap,
+      toJson: LanguageHelper.toJsonStringMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, String>? packagingTextInLanguages;
 
   @JsonKey(name: 'misc', includeIfNull: false)
   List<String>? miscTags;
@@ -425,33 +431,28 @@ class Product extends JsonObject {
       // We store those values in a more structured maps like
       // [productNameInLanguages].
       if (key == ProductField.NAME_ALL_LANGUAGES.key) {
-        final langs = json[key];
-        if (langs is Map<String, dynamic>) {
+        final Map<OpenFoodFactsLanguage, String>? localized =
+            _getLocalizedStrings(json[key]);
+        if (localized != null) {
           result.productNameInLanguages ??= {};
-          for (final langValuePair in langs.entries) {
-            final lang = LanguageHelper.fromJson(langValuePair.key);
-            if (lang == OpenFoodFactsLanguage.UNDEFINED) {
-              continue;
-            }
-            final value = langValuePair.value;
-            result.productNameInLanguages![lang] = value.toString();
-          }
+          result.productNameInLanguages!.addAll(localized);
         }
       } else if (key == ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES.key) {
-        final langs = json[key];
-        if (langs is Map<String, dynamic>) {
+        final Map<OpenFoodFactsLanguage, String>? localized =
+            _getLocalizedStrings(json[key]);
+        if (localized != null) {
           result.ingredientsTextInLanguages ??= {};
-          for (final langValuePair in langs.entries) {
-            final lang = LanguageHelper.fromJson(langValuePair.key);
-            if (lang == OpenFoodFactsLanguage.UNDEFINED) {
-              continue;
-            }
-            final value = langValuePair.value;
-            result.ingredientsTextInLanguages![lang] = value.toString();
-          }
+          result.ingredientsTextInLanguages!.addAll(localized);
+        }
+      } else if (key == ProductField.PACKAGING_TEXT_ALL_LANGUAGES.key) {
+        final Map<OpenFoodFactsLanguage, String>? localized =
+            _getLocalizedStrings(json[key]);
+        if (localized != null) {
+          result.packagingTextInLanguages ??= {};
+          result.packagingTextInLanguages!.addAll(localized);
         }
       } else if (key.startsWith(ProductField.NAME_IN_LANGUAGES.key)) {
-        OpenFoodFactsLanguage lang =
+        final OpenFoodFactsLanguage lang =
             _langFrom(key, ProductField.NAME_IN_LANGUAGES.key);
         if (lang != OpenFoodFactsLanguage.UNDEFINED) {
           result.productNameInLanguages ??= {};
@@ -459,7 +460,7 @@ class Product extends JsonObject {
         }
       } else if (key
           .startsWith(ProductField.CATEGORIES_TAGS_IN_LANGUAGES.key)) {
-        OpenFoodFactsLanguage lang =
+        final OpenFoodFactsLanguage lang =
             _langFrom(key, ProductField.CATEGORIES_TAGS_IN_LANGUAGES.key);
         final values = _jsonValueToList(json[key]);
         if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
@@ -468,7 +469,7 @@ class Product extends JsonObject {
         }
       } else if (key
           .startsWith(ProductField.INGREDIENTS_TAGS_IN_LANGUAGES.key)) {
-        OpenFoodFactsLanguage lang =
+        final OpenFoodFactsLanguage lang =
             _langFrom(key, ProductField.INGREDIENTS_TAGS_IN_LANGUAGES.key);
         final values = _jsonValueToList(json[key]);
         if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
@@ -486,7 +487,7 @@ class Product extends JsonObject {
           result.imagesFreshnessInLanguages![lang] = values;
         }
       } else if (key.startsWith(ProductField.LABELS_TAGS_IN_LANGUAGES.key)) {
-        OpenFoodFactsLanguage lang =
+        final OpenFoodFactsLanguage lang =
             _langFrom(key, ProductField.LABELS_TAGS_IN_LANGUAGES.key);
         final values = _jsonValueToList(json[key]);
         if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
@@ -494,7 +495,7 @@ class Product extends JsonObject {
           result.labelsTagsInLanguages![lang] = values;
         }
       } else if (key.startsWith(ProductField.COUNTRIES_TAGS_IN_LANGUAGES.key)) {
-        OpenFoodFactsLanguage lang =
+        final OpenFoodFactsLanguage lang =
             _langFrom(key, ProductField.COUNTRIES_TAGS_IN_LANGUAGES.key);
         final values = _jsonValueToList(json[key]);
         if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
@@ -503,13 +504,39 @@ class Product extends JsonObject {
         }
       } else if (key
           .startsWith(ProductField.INGREDIENTS_TEXT_IN_LANGUAGES.key)) {
-        OpenFoodFactsLanguage lang =
+        final OpenFoodFactsLanguage lang =
             _langFrom(key, ProductField.INGREDIENTS_TEXT_IN_LANGUAGES.key);
         if (lang != OpenFoodFactsLanguage.UNDEFINED) {
           result.ingredientsTextInLanguages ??= {};
           result.ingredientsTextInLanguages![lang] = json[key];
         }
+      } else if (key.startsWith(ProductField.PACKAGING_TEXT_IN_LANGUAGES.key)) {
+        final OpenFoodFactsLanguage lang =
+            _langFrom(key, ProductField.PACKAGING_TEXT_IN_LANGUAGES.key);
+        if (lang != OpenFoodFactsLanguage.UNDEFINED) {
+          result.packagingTextInLanguages ??= {};
+          result.packagingTextInLanguages![lang] = json[key];
+        }
       }
+    }
+    return result;
+  }
+
+  static Map<OpenFoodFactsLanguage, String>? _getLocalizedStrings(
+    final dynamic langs,
+  ) {
+    Map<OpenFoodFactsLanguage, String>? result;
+    if (!langs is Map<String, dynamic>) {
+      return result;
+    }
+    for (final langValuePair in langs.entries) {
+      final lang = LanguageHelper.fromJson(langValuePair.key);
+      if (lang == OpenFoodFactsLanguage.UNDEFINED) {
+        continue;
+      }
+      final value = langValuePair.value;
+      result ??= <OpenFoodFactsLanguage, String>{};
+      result[lang] = value.toString();
     }
     return result;
   }
