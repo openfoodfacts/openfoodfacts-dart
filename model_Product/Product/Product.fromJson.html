@@ -50,7 +50,7 @@
 </h1></div>
 
     <section class="multi-line-signature">
-      <span class="name ">Product.fromJson</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span></li>
+      <span class="name ">Product.fromJson</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.16.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.16.0/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span></li>
 </ol>)
     </section>
 
@@ -78,33 +78,28 @@
     &#47;&#47; We store those values in a more structured maps like
     &#47;&#47; [productNameInLanguages].
     if (key == ProductField.NAME_ALL_LANGUAGES.key) {
-      final langs = json[key];
-      if (langs is Map&lt;String, dynamic&gt;) {
+      final Map&lt;OpenFoodFactsLanguage, String&gt;? localized =
+          _getLocalizedStrings(json[key]);
+      if (localized != null) {
         result.productNameInLanguages ??= {};
-        for (final langValuePair in langs.entries) {
-          final lang = LanguageHelper.fromJson(langValuePair.key);
-          if (lang == OpenFoodFactsLanguage.UNDEFINED) {
-            continue;
-          }
-          final value = langValuePair.value;
-          result.productNameInLanguages![lang] = value.toString();
-        }
+        result.productNameInLanguages!.addAll(localized);
       }
     } else if (key == ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES.key) {
-      final langs = json[key];
-      if (langs is Map&lt;String, dynamic&gt;) {
+      final Map&lt;OpenFoodFactsLanguage, String&gt;? localized =
+          _getLocalizedStrings(json[key]);
+      if (localized != null) {
         result.ingredientsTextInLanguages ??= {};
-        for (final langValuePair in langs.entries) {
-          final lang = LanguageHelper.fromJson(langValuePair.key);
-          if (lang == OpenFoodFactsLanguage.UNDEFINED) {
-            continue;
-          }
-          final value = langValuePair.value;
-          result.ingredientsTextInLanguages![lang] = value.toString();
-        }
+        result.ingredientsTextInLanguages!.addAll(localized);
+      }
+    } else if (key == ProductField.PACKAGING_TEXT_ALL_LANGUAGES.key) {
+      final Map&lt;OpenFoodFactsLanguage, String&gt;? localized =
+          _getLocalizedStrings(json[key]);
+      if (localized != null) {
+        result.packagingTextInLanguages ??= {};
+        result.packagingTextInLanguages!.addAll(localized);
       }
     } else if (key.startsWith(ProductField.NAME_IN_LANGUAGES.key)) {
-      OpenFoodFactsLanguage lang =
+      final OpenFoodFactsLanguage lang =
           _langFrom(key, ProductField.NAME_IN_LANGUAGES.key);
       if (lang != OpenFoodFactsLanguage.UNDEFINED) {
         result.productNameInLanguages ??= {};
@@ -112,7 +107,7 @@
       }
     } else if (key
         .startsWith(ProductField.CATEGORIES_TAGS_IN_LANGUAGES.key)) {
-      OpenFoodFactsLanguage lang =
+      final OpenFoodFactsLanguage lang =
           _langFrom(key, ProductField.CATEGORIES_TAGS_IN_LANGUAGES.key);
       final values = _jsonValueToList(json[key]);
       if (lang != OpenFoodFactsLanguage.UNDEFINED &amp;&amp; values != null) {
@@ -121,7 +116,7 @@
       }
     } else if (key
         .startsWith(ProductField.INGREDIENTS_TAGS_IN_LANGUAGES.key)) {
-      OpenFoodFactsLanguage lang =
+      final OpenFoodFactsLanguage lang =
           _langFrom(key, ProductField.INGREDIENTS_TAGS_IN_LANGUAGES.key);
       final values = _jsonValueToList(json[key]);
       if (lang != OpenFoodFactsLanguage.UNDEFINED &amp;&amp; values != null) {
@@ -139,7 +134,7 @@
         result.imagesFreshnessInLanguages![lang] = values;
       }
     } else if (key.startsWith(ProductField.LABELS_TAGS_IN_LANGUAGES.key)) {
-      OpenFoodFactsLanguage lang =
+      final OpenFoodFactsLanguage lang =
           _langFrom(key, ProductField.LABELS_TAGS_IN_LANGUAGES.key);
       final values = _jsonValueToList(json[key]);
       if (lang != OpenFoodFactsLanguage.UNDEFINED &amp;&amp; values != null) {
@@ -147,7 +142,7 @@
         result.labelsTagsInLanguages![lang] = values;
       }
     } else if (key.startsWith(ProductField.COUNTRIES_TAGS_IN_LANGUAGES.key)) {
-      OpenFoodFactsLanguage lang =
+      final OpenFoodFactsLanguage lang =
           _langFrom(key, ProductField.COUNTRIES_TAGS_IN_LANGUAGES.key);
       final values = _jsonValueToList(json[key]);
       if (lang != OpenFoodFactsLanguage.UNDEFINED &amp;&amp; values != null) {
@@ -156,11 +151,18 @@
       }
     } else if (key
         .startsWith(ProductField.INGREDIENTS_TEXT_IN_LANGUAGES.key)) {
-      OpenFoodFactsLanguage lang =
+      final OpenFoodFactsLanguage lang =
           _langFrom(key, ProductField.INGREDIENTS_TEXT_IN_LANGUAGES.key);
       if (lang != OpenFoodFactsLanguage.UNDEFINED) {
         result.ingredientsTextInLanguages ??= {};
         result.ingredientsTextInLanguages![lang] = json[key];
+      }
+    } else if (key.startsWith(ProductField.PACKAGING_TEXT_IN_LANGUAGES.key)) {
+      final OpenFoodFactsLanguage lang =
+          _langFrom(key, ProductField.PACKAGING_TEXT_IN_LANGUAGES.key);
+      if (lang != OpenFoodFactsLanguage.UNDEFINED) {
+        result.packagingTextInLanguages ??= {};
+        result.packagingTextInLanguages![lang] = json[key];
       }
     }
   }
@@ -215,7 +217,7 @@
     <li><a href="../../model_Product/Product/environmentImpactLevels.html">environmentImpactLevels</a></li>
     <li><a href="../../model_Product/Product/environmentInfoCard.html">environmentInfoCard</a></li>
     <li><a href="../../model_Product/Product/genericName.html">genericName</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.16.0/dart-core/Object/hashCode.html">hashCode</a></li>
     <li><a href="../../model_Product/Product/imageFrontSmallUrl.html">imageFrontSmallUrl</a></li>
     <li><a href="../../model_Product/Product/imageFrontUrl.html">imageFrontUrl</a></li>
     <li><a href="../../model_Product/Product/imageIngredientsSmallUrl.html">imageIngredientsSmallUrl</a></li>
@@ -248,10 +250,11 @@
     <li><a href="../../model_Product/Product/packaging.html">packaging</a></li>
     <li><a href="../../model_Product/Product/packagingQuantity.html">packagingQuantity</a></li>
     <li><a href="../../model_Product/Product/packagingTags.html">packagingTags</a></li>
+    <li><a href="../../model_Product/Product/packagingTextInLanguages.html">packagingTextInLanguages</a></li>
     <li><a href="../../model_Product/Product/productName.html">productName</a></li>
     <li><a href="../../model_Product/Product/productNameInLanguages.html">productNameInLanguages</a></li>
     <li><a href="../../model_Product/Product/quantity.html">quantity</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.16.0/dart-core/Object/runtimeType.html">runtimeType</a></li>
     <li><a href="../../model_Product/Product/selectedImages.html">selectedImages</a></li>
     <li><a href="../../model_Product/Product/servingQuantity.html">servingQuantity</a></li>
     <li><a href="../../model_Product/Product/servingSize.html">servingSize</a></li>
@@ -263,15 +266,15 @@
     <li class="section-title"><a href="../../model_Product/Product-class.html#instance-methods">Methods</a></li>
     <li><a href="../../model_Product/Product/getAttributes.html">getAttributes</a></li>
     <li><a href="../../model_Product/Product/getProductImprovements.html">getProductImprovements</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.16.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
     <li class="inherited"><a href="../../interface_JsonObject/JsonObject/toData.html">toData</a></li>
     <li><a href="../../model_Product/Product/toJson.html">toJson</a></li>
     <li><a href="../../model_Product/Product/toServerData.html">toServerData</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/toString.html">toString</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.16.0/dart-core/Object/toString.html">toString</a></li>
     <li class="inherited"><a href="../../interface_JsonObject/JsonObject/toValueString.html">toValueString</a></li>
 
     <li class="section-title inherited"><a href="../../model_Product/Product-class.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/operator_equals.html">operator ==</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.16.0/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 
