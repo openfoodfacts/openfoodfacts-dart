@@ -8,7 +8,7 @@ void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
 
   void _listContains(List<dynamic> result, String match) {
-    assert(result.isNotEmpty);
+    expect(result, isNotEmpty);
     for (dynamic e in result) {
       expect(e.toString().toLowerCase(), contains(match));
     }
@@ -193,6 +193,16 @@ void main() {
       );
 
       _listContains(result, 'fru');
+    });
+    test('Suggestions for packaging', () async {
+      final List<dynamic> result =
+          await OpenFoodAPIClient.getAutocompletedSuggestions(
+        TagType.PACKAGING,
+        language: OpenFoodFactsLanguage.FRENCH,
+        input: 'briq',
+      );
+
+      _listContains(result, 'briq');
     });
     test('Suggestions for emb_code', () async {
       List<dynamic> result =
