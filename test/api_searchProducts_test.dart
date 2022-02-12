@@ -191,9 +191,9 @@ void main() {
     });
 
     test('search products with filter on all tags (part 1)', () async {
+      // the barcode I had in mind is 3229820129488
       const String brands = 'Bjorg';
       const String categories = 'en:breakfast-cereals';
-      const String packaging = 'fr:Sachet';
       const String labels = 'en:organic';
       const String origins = 'en:european-union-and-non-european-union';
       const String manufacturingPlaces = 'Allemagne';
@@ -216,8 +216,6 @@ void main() {
             tagFilterType: TagFilterType.BRANDS, tagName: brands),
         TagFilter.fromType(
             tagFilterType: TagFilterType.CATEGORIES, tagName: categories),
-        TagFilter.fromType(
-            tagFilterType: TagFilterType.PACKAGING, tagName: packaging),
         TagFilter.fromType(
             tagFilterType: TagFilterType.LABELS, tagName: labels),
         TagFilter.fromType(
@@ -267,11 +265,10 @@ void main() {
       );
 
       expect(result.products, isNotNull);
-      expect(result.products!.length, greaterThan(0));
+      expect(result.products, isNotEmpty);
       for (final Product product in result.products!) {
         expect(product.brands!, brands);
         expect(product.categoriesTags, contains(categories));
-        expect(product.packaging, contains(packaging));
         expect(product.labelsTags, contains(labels));
         expect(product.storesTags, contains(stores));
         expect(product.countriesTags, contains(countries));
@@ -315,12 +312,39 @@ void main() {
         configuration,
       );
 
-      expect(result.products!.length, greaterThan(0));
-
       expect(result.products, isNotNull);
+      expect(result.products, isNotEmpty);
       for (final Product product in result.products!) {
         expect(product.additives!.ids, contains(additives));
         // TODO(monsieurtanuki): extract the emb_codes from the product, and compare it to the expected value
+      }
+    });
+
+    test('search products with filter on all tags (part 3)', () async {
+      // will probably be barcode 111111555555
+      const String packaging = 'de:in-einer-plastikflasche';
+
+      final parameters = <Parameter>[
+        TagFilter.fromType(
+            tagFilterType: TagFilterType.PACKAGING, tagName: packaging),
+      ];
+
+      final ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+        parametersList: parameters,
+        fields: [ProductField.ALL],
+        language: OpenFoodFactsLanguage.GERMAN,
+      );
+
+      final SearchResult result = await OpenFoodAPIClient.searchProducts(
+        TestConstants.TEST_USER,
+        configuration,
+      );
+
+      expect(result.products, isNotNull);
+      expect(result.products, isNotEmpty);
+      for (final Product product in result.products!) {
+        expect(product.packagingTags, contains(packaging));
       }
     });
 

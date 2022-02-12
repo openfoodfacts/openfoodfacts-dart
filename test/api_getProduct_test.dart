@@ -1855,7 +1855,7 @@ void main() {
     expect(result.product?.genericName, 'Softdrink');
     expect(result.product?.labels, 'MyTestLabel');
     expect(result.product?.packaging, 'de:In einer Plastikflasche');
-    expect(result.product?.packagingTags, ['de-in-einer-plastikflasche']);
+    expect(result.product?.packagingTags, ['de:in-einer-plastikflasche']);
     expect(result.product?.quantity, '5.5 Liter');
   });
 }
