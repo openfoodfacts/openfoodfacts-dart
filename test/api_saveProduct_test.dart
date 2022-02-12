@@ -293,7 +293,7 @@ void main() {
       expect(result.product!.packaging,
           'Product packaging test 1,Product packaging test 2');
       expect(result.product!.packagingTags,
-          ['product-packaging-test-1', 'product-packaging-test-2']);
+          ['en:product-packaging-test-1', 'en:product-packaging-test-2']);
       expect(result.product!.categories,
           'Product categories test 1,Product categories test 2');
       expect(result.product!.categoriesTags,

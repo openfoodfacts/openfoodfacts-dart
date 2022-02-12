@@ -526,7 +526,7 @@ class Product extends JsonObject {
     final dynamic langs,
   ) {
     Map<OpenFoodFactsLanguage, String>? result;
-    if (!langs is Map<String, dynamic>) {
+    if (langs is! Map<String, dynamic>) {
       return result;
     }
     for (final langValuePair in langs.entries) {

@@ -101,7 +101,7 @@ void main() {
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
 
-      expect(result.product!.productName, 'Elitess Still, Neutral');
+      expect(result.product!.productName, 'Wasser Elitess Still, Neutral');
 
       expect(result.product!.nutriments != null, true);
 
