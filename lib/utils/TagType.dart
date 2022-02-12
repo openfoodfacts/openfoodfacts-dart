@@ -8,6 +8,7 @@ enum TagType {
   TRACES,
   ADDITIVES,
   ALLERGENS,
+  PACKAGING,
   EMB_CODES
 }
 
@@ -21,6 +22,7 @@ extension TaxonomyTypeExtension on TagType {
     TagType.TRACES: 'traces',
     TagType.ADDITIVES: 'additives',
     TagType.ALLERGENS: 'allergens',
+    TagType.PACKAGING: 'packaging',
     TagType.LANGUAGES: 'languages',
     TagType.EMB_CODES: 'emb_codes',
   };
