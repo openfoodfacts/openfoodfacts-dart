@@ -145,7 +145,7 @@ class Nutriments extends JsonObject {
       fromJson: JsonObject.parseInt)
   int? novaGroupServing;
 
-  /// Caffeine, in grams, per serving
+  /// Energy, in kJ, per serving
   @JsonKey(
       name: 'energy_serving',
       includeIfNull: false,
@@ -993,14 +993,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? polyunsaturatedUnit;
 
-  /// Alcohol, in % vol
+  /// Alcohol, in % vol, per serving
   @JsonKey(
       name: 'alcohol_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? alcoholServing;
 
-  /// Alcohol, in % vol
+  /// Alcohol, in % vol, per 100g of food
   @JsonKey(
       name: 'alcohol_100g',
       includeIfNull: false,
@@ -1440,4 +1440,71 @@ class Nutriments extends JsonObject {
 
   static Map<String, dynamic> toJsonHelper(Nutriments? n) =>
       n != null ? _$NutrimentsToJson(n) : {};
+
+  /// Nutrient ids supported by [Nutriments].
+  ///
+  /// To be used when another source of nutrients (e.g. [OrderedNutrient])
+  /// has a broader list of nutrients - that we simply could not handle with
+  /// [Nutriments].
+  static const Set<String> supportedNutrientIds = <String>{
+    'salt',
+    'fiber',
+    'sugars',
+    'fat',
+    'saturated-fat',
+    'proteins',
+    'nova-group',
+    'energy',
+    'energy-kcal',
+    'carbohydrates',
+    'caffeine',
+    'calcium',
+    'iron',
+    'vitamin-c',
+    'magnesium',
+    'phosphorus',
+    'potassium',
+    'sodium',
+    'zinc',
+    'copper',
+    'selenium',
+    'vitamin-a',
+    'vitamin-e',
+    'vitamin-d',
+    'vitamin-b1',
+    'vitamin-b2',
+    'vitamin-pp',
+    'vitamin-b6',
+    'vitamin-b12',
+    'vitamin-b9',
+    'vitamin-k',
+    'cholesterol',
+    'butyric-acid',
+    'caproic-acid',
+    'caprylic-acid',
+    'capric-acid',
+    'lauric-acid',
+    'myristic-acid',
+    'palmitic-acid',
+    'stearic-acid',
+    'oleic-acid',
+    'linoleic-acid',
+    'docosahexaenoic-acid',
+    'eicosapentaenoic-acid',
+    'erucic-acid',
+    'monounsaturated',
+    'polyunsaturated',
+    'alcohol',
+    'pantothenic-acid',
+    'biotin',
+    'chloride',
+    'chromium',
+    'fluoride',
+    'iodine',
+    'manganese',
+    'molybdenum',
+    'omega-3-fat',
+    'omega-6-fat',
+    'trans-fat',
+  };
 }
