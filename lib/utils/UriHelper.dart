@@ -60,6 +60,21 @@ class UriHelper {
         queryParameters: queryParameters,
       );
 
+  ///Returns a OFF-Events uri with the in the [OpenFoodAPIConfiguration] specified settings
+  static Uri getEventsUri({
+    required final String path,
+    final Map<String, dynamic>? queryParameters,
+    final QueryType? queryType,
+  }) =>
+      Uri(
+        scheme: OpenFoodAPIConfiguration.uriScheme,
+        host: OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+            ? OpenFoodAPIConfiguration.uriProdHostEvents
+            : OpenFoodAPIConfiguration.uriTestHostEvents,
+        path: path,
+        queryParameters: queryParameters,
+      );
+
   /// Replaces the subdomain of an URI with specific country and language.
   ///
   /// Default language and country will be used as fallback, if available.

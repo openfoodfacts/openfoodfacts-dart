@@ -46,12 +46,17 @@ import 'utils/ProductHelper.dart';
 import 'utils/ProductQueryConfigurations.dart';
 import 'utils/ProductSearchQueryConfiguration.dart';
 
+export 'events.dart';
 export 'folksonomy.dart';
 export 'interface/Parameter.dart';
 export 'model/Additives.dart';
+export 'model/BadgeBase.dart';
+export 'model/EventCreate.dart';
+export 'model/EventsBase.dart';
 export 'model/Ingredient.dart';
 export 'model/Insight.dart';
 export 'model/KeyStats.dart';
+export 'model/LeaderboardEntry.dart';
 export 'model/Product.dart';
 export 'model/ProductFreshness.dart';
 // export 'model/ProductList.dart'; // not needed

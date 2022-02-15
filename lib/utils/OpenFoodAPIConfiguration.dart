@@ -42,6 +42,12 @@ class OpenFoodAPIConfiguration {
   static String uriTestHostFolksonomy =
       'api.folksonomy.openfoodfacts.net'; // TODO does not work
 
+  ///Uri host of the Events requests to the backend, modify this to direct the request to a self-hosted instance.
+  static String uriProdHostEvents = 'events.openfoodfacts.org';
+
+  ///Uri host of the test requests to Events
+  static String uriTestHostEvents = 'events.openfoodfacts.net';
+
   ///Changes whether the requests sent by this package to the test or main server.
   static QueryType globalQueryType = QueryType.PROD;
 
