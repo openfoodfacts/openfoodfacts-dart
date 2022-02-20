@@ -47,6 +47,8 @@ You can check the terms of use here : [Terms of use](https://world.openfoodfacts
 - [x] Eco-Score, Nutri-Score, NOVA groups
 - [x] Translated, high-level and customizable product information (Attributes)
 - [x] Product completion status
+- [x] Folksonomy Engine (custom properties for products)
+- [x] Open Food Facts Events (Gamification)
 
 ### PERSONALIZATION
 - [x] Recommended Daily Intakes
@@ -64,12 +66,11 @@ You can check the terms of use here : [Terms of use](https://world.openfoodfacts
 - [x] Send images
 - [x] User comments and auth
 - [x] Anonymous photo upload
-
+- [x] Photo operations (rotate, crop, select, unselect with language awareness)
 ### ML
 - [x] Robotoff support
 - [x] Extract ingredients from ingredients image: User can extract the ingredients text if it is missing
 - [x] Get the OCR of the ingredients photo (for validation purposes)
-
 
 ## Roadmap
 List of new APIs to implement: https://github.com/openfoodfacts/api-documentation/issues
@@ -78,7 +79,6 @@ List of new APIs to implement: https://github.com/openfoodfacts/api-documentatio
 - [ ] ???
 
 ### WRITE
-- [ ] Photo operations (rotate, crop, select, unselect with language awareness)
 
 ### Other
 
@@ -95,7 +95,6 @@ Execute the following command from the root of the repository to run the tests:
 ```
 dart test
 ```
-
 
 ## Authors
 * Alexander Schacht - [Grumpf86](https://github.com/Grumpf86)
