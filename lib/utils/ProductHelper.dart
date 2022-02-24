@@ -39,38 +39,4 @@ class ProductHelper {
       );
     }
   }
-
-  // TODO: deprecated from 2021-02-15 (#106); remove when old enough
-  @Deprecated(
-      'Useless now that we translate fields in a different way; just do not use')
-  static void addTranslatedFields(Product product, Map<String, dynamic> source,
-      OpenFoodFactsLanguage language) {
-    product.categoriesTagsInLanguages ??= {};
-    product.categoriesTagsInLanguages![language] =
-        source['categories_tags_${language.code}'];
-
-    product.labelsTagsInLanguages ??= {};
-    product.labelsTagsInLanguages![language] =
-        source['labels_tags_${language.code}'];
-
-    product.ingredientsTagsInLanguages ??= {};
-    product.ingredientsTagsInLanguages![language] =
-        source['ingredients_tags_${language.code}'];
-
-    product.ingredientsTextInLanguages ??= {};
-    product.ingredientsTextInLanguages![language] =
-        source['ingredients_text_${language.code}'];
-
-    product.packagingTextInLanguages ??= {};
-    product.packagingTextInLanguages![language] =
-        source['packaging_text_${language.code}'];
-
-    product.productNameInLanguages = {};
-    product.productNameInLanguages![language] =
-        source['product_name_${language.code}'];
-
-    product.countriesTagsInLanguages = {};
-    product.countriesTagsInLanguages![language] =
-        source['countries_tags_${language.code}'];
-  }
 }
