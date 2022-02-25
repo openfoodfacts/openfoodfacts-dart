@@ -9,105 +9,84 @@ import 'test_constants.dart';
 void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
+  Future<void> _test(
+    final String barcode,
+    final OpenFoodFactsLanguage language,
+    final OcrField ocrField,
+  ) async {
+    final OcrIngredientsResult response =
+        await OpenFoodAPIClient.extractIngredients(
+      TestConstants.PROD_USER,
+      barcode,
+      language,
+      ocrField: ocrField,
+    );
+
+    expect(response.status, 0);
+    expect(response.ingredientsTextFromImage!.isNotEmpty, true);
+  }
+
+  const String _frenchBarcode = '5449000227959';
+  const String _englishBarcode = '0041220576920';
+  const String _germanBarcode = '5701184005007';
+
   group('$OpenFoodAPIClient Extract Ingredients from images', () {
-    test('Extract Ingredients using Default OCR', () async {
-      OcrIngredientsResult response =
-          await OpenFoodAPIClient.extractIngredients(
-        TestConstants.PROD_USER,
-        '5449000227959',
+    test('Extract Ingredients using Google Vision Cloud (French)', () async {
+      _test(
+        _frenchBarcode,
         OpenFoodFactsLanguage.FRENCH,
+        OcrField.GOOGLE_CLOUD_VISION,
       );
-
-      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
-
-      response = await OpenFoodAPIClient.extractIngredients(
-        TestConstants.PROD_USER,
-        '0041220576920',
-        OpenFoodFactsLanguage.ENGLISH,
-      );
-
-      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
-
-      response = await OpenFoodAPIClient.extractIngredients(
-        TestConstants.PROD_USER,
-        '5701184005007',
-        OpenFoodFactsLanguage.GERMAN,
-      );
-
-      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
     });
-    test('Extract Ingredients using Google Vision Cloud', () async {
-      OcrIngredientsResult response =
-          await OpenFoodAPIClient.extractIngredients(
-        TestConstants.PROD_USER,
-        '5449000227959',
-        OpenFoodFactsLanguage.FRENCH,
-        ocrField: OcrField.GOOGLE_CLOUD_VISION,
-      );
 
-      expect(response.status, 0);
-      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
-
-      response = await OpenFoodAPIClient.extractIngredients(
-        TestConstants.PROD_USER,
-        '0041220576920',
+    test('Extract Ingredients using Google Vision Cloud (English)', () async {
+      _test(
+        _englishBarcode,
         OpenFoodFactsLanguage.ENGLISH,
-        ocrField: OcrField.GOOGLE_CLOUD_VISION,
+        OcrField.GOOGLE_CLOUD_VISION,
       );
-
-      expect(response.status, 0);
-      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
-
-      response = await OpenFoodAPIClient.extractIngredients(
-        TestConstants.PROD_USER,
-        '5701184005007',
-        OpenFoodFactsLanguage.GERMAN,
-        ocrField: OcrField.GOOGLE_CLOUD_VISION,
-      );
-
-      expect(response.status, 0);
-      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
     });
-    test('Extract Ingredients using Tesseract', () async {
-      OcrIngredientsResult response =
-          await OpenFoodAPIClient.extractIngredients(
-        TestConstants.PROD_USER,
-        '5449000227959',
-        OpenFoodFactsLanguage.FRENCH,
-        ocrField: OcrField.TESSERACT,
-      );
 
-      expect(response.status, 0);
-      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
-
-      response = await OpenFoodAPIClient.extractIngredients(
-        TestConstants.PROD_USER,
-        '0041220576920',
-        OpenFoodFactsLanguage.ENGLISH,
-        ocrField: OcrField.TESSERACT,
-      );
-
-      expect(response.status, 0);
-      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
-
-      response = await OpenFoodAPIClient.extractIngredients(
-        TestConstants.PROD_USER,
-        '5701184005007',
+    test('Extract Ingredients using Google Vision Cloud (German)', () async {
+      _test(
+        _germanBarcode,
         OpenFoodFactsLanguage.GERMAN,
-        ocrField: OcrField.TESSERACT,
+        OcrField.GOOGLE_CLOUD_VISION,
       );
+    });
 
-      expect(response.status, 0);
-      expect(response.ingredientsTextFromImage!.isNotEmpty, true);
+    test('Extract Ingredients using Tesseract (French)', () async {
+      _test(
+        _frenchBarcode,
+        OpenFoodFactsLanguage.FRENCH,
+        OcrField.TESSERACT,
+      );
+    });
+
+    test('Extract Ingredients using Tesseract (English)', () async {
+      _test(
+        _englishBarcode,
+        OpenFoodFactsLanguage.ENGLISH,
+        OcrField.TESSERACT,
+      );
+    });
+
+    test('Extract Ingredients using Tesseract (German)', () async {
+      _test(
+        _germanBarcode,
+        OpenFoodFactsLanguage.GERMAN,
+        OcrField.TESSERACT,
+      );
     });
 
     test('Add ingredients image to OFF server and then extract the text',
         () async {
+      const String barcode = '3613042717385';
       SendImage image = SendImage(
         lang: OpenFoodFactsLanguage.FRENCH,
-        barcode: '3613042717385',
+        barcode: barcode,
         imageField: ImageField.INGREDIENTS,
-        imageUri: Uri.file('test/test_assets/ingredient_3613042717385.jpg'),
+        imageUri: Uri.file('test/test_assets/ingredient_$barcode.jpg'),
       );
       await OpenFoodAPIClient.addProductImage(
         TestConstants.PROD_USER,
@@ -117,7 +96,7 @@ void main() {
       OcrIngredientsResult ocrResponse =
           await OpenFoodAPIClient.extractIngredients(
         TestConstants.PROD_USER,
-        '3613042717385',
+        barcode,
         OpenFoodFactsLanguage.FRENCH,
       );
 
@@ -128,7 +107,7 @@ void main() {
       Status saveStatus = await OpenFoodAPIClient.saveProduct(
         TestConstants.PROD_USER,
         Product(
-            barcode: '3613042717385',
+            barcode: barcode,
             ingredientsText: ocrResponse.ingredientsTextFromImage),
       );
       expect(saveStatus.status, 1);
@@ -136,7 +115,7 @@ void main() {
 
       //Get The saved product's ingredients from the server
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          '3613042717385',
+          barcode,
           language: OpenFoodFactsLanguage.FRENCH,
           fields: [
             ProductField.INGREDIENTS_TEXT,
