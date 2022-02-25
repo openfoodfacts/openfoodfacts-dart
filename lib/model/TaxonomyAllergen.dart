@@ -75,11 +75,13 @@ class TaxonomyAllergen extends JsonObject {
   String toString() => toJson().toString();
 }
 
+/// Configuration for allergens API query.
 class TaxonomyAllergenQueryConfiguration extends TaxonomyQueryConfiguration<
     TaxonomyAllergen, TaxonomyAllergenField> {
+  /// Configuration to get the allergens that match the [tags].
   TaxonomyAllergenQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages = const [],
+    List<OpenFoodFactsLanguage>? languages,
     @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     List<TaxonomyAllergenField> fields = const [],
@@ -90,7 +92,20 @@ class TaxonomyAllergenQueryConfiguration extends TaxonomyQueryConfiguration<
           languages: languages,
           cc: cc,
           country: country,
-          includeChildren: false,
+          fields: fields,
+          additionalParameters: additionalParameters,
+        );
+
+  /// Configuration to get ALL the allergens.
+  TaxonomyAllergenQueryConfiguration.all({
+    final List<OpenFoodFactsLanguage>? languages,
+    final OpenFoodFactsCountry? country,
+    final List<TaxonomyAllergenField> fields = const [],
+    final List<Parameter> additionalParameters = const [],
+  }) : super.roots(
+          TagType.ALLERGENS,
+          languages: languages,
+          country: country,
           fields: fields,
           additionalParameters: additionalParameters,
         );

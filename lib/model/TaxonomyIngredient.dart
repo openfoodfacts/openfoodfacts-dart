@@ -471,7 +471,7 @@ class TaxonomyIngredientQueryConfiguration extends TaxonomyQueryConfiguration<
     TaxonomyIngredient, TaxonomyIngredientField> {
   TaxonomyIngredientQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages = const [],
+    List<OpenFoodFactsLanguage>? languages,
     @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     List<TaxonomyIngredientField> fields = const [],
@@ -489,7 +489,7 @@ class TaxonomyIngredientQueryConfiguration extends TaxonomyQueryConfiguration<
         );
 
   TaxonomyIngredientQueryConfiguration.roots({
-    List<OpenFoodFactsLanguage>? languages = const [],
+    List<OpenFoodFactsLanguage>? languages,
     @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     List<TaxonomyIngredientField> fields = const [],
