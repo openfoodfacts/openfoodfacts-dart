@@ -331,22 +331,40 @@ class TaxonomyAdditive extends JsonObject {
   String toString() => toJson().toString();
 }
 
+/// Configuration to get additives
 class TaxonomyAdditiveQueryConfiguration extends TaxonomyQueryConfiguration<
     TaxonomyAdditive, TaxonomyAdditiveField> {
+  /// Configuration to get additives from their tags
   TaxonomyAdditiveQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages = const [],
+    List<OpenFoodFactsLanguage>? languages,
     @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     List<TaxonomyAdditiveField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
-          TagType.LABELS,
+          TagType.ADDITIVES,
           tags,
           languages: languages,
           cc: cc,
           country: country,
           includeChildren: false,
+          fields: fields,
+          additionalParameters: additionalParameters,
+        );
+
+  /// Configuration to get the root additives
+  TaxonomyAdditiveQueryConfiguration.roots({
+    final List<OpenFoodFactsLanguage>? languages,
+    final OpenFoodFactsCountry? country,
+    final bool includeChildren = false,
+    final List<TaxonomyAdditiveField> fields = const [],
+    final List<Parameter> additionalParameters = const [],
+  }) : super.roots(
+          TagType.ADDITIVES,
+          languages: languages,
+          country: country,
+          includeChildren: includeChildren,
           fields: fields,
           additionalParameters: additionalParameters,
         );

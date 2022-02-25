@@ -36,11 +36,9 @@ extension TaxonomyLanguageFieldExtension on TaxonomyLanguageField {
 @JsonSerializable()
 class TaxonomyLanguage extends JsonObject {
   TaxonomyLanguage(
-    this.children,
     this.languageCode2,
     this.languageCode3,
     this.name,
-    this.parents,
     this.wikidata,
   );
 
@@ -53,8 +51,6 @@ class TaxonomyLanguage extends JsonObject {
     return _$TaxonomyLanguageToJson(this);
   }
 
-  @JsonKey(name: 'children', includeIfNull: false)
-  List<String>? children;
   @JsonKey(
     name: 'language_code_2',
     fromJson: LanguageHelper.fromJsonStringMap,
@@ -76,8 +72,6 @@ class TaxonomyLanguage extends JsonObject {
     includeIfNull: false,
   )
   Map<OpenFoodFactsLanguage, String>? name;
-  @JsonKey(name: 'parents', includeIfNull: false)
-  List<String>? parents;
   @JsonKey(
     name: 'wikidata',
     fromJson: LanguageHelper.fromJsonStringMap,
@@ -90,22 +84,37 @@ class TaxonomyLanguage extends JsonObject {
   String toString() => toJson().toString();
 }
 
+/// Configuration for languages API query.
 class TaxonomyLanguageQueryConfiguration extends TaxonomyQueryConfiguration<
     TaxonomyLanguage, TaxonomyLanguageField> {
+  /// Configuration to get the languages that match the [tags].
   TaxonomyLanguageQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages = const [],
+    List<OpenFoodFactsLanguage>? languages,
     @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     List<TaxonomyLanguageField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
-          TagType.LABELS,
+          TagType.LANGUAGES,
           tags,
           languages: languages,
           cc: cc,
           country: country,
-          includeChildren: false,
+          fields: fields,
+          additionalParameters: additionalParameters,
+        );
+
+  /// Configuration to get ALL the languages.
+  TaxonomyLanguageQueryConfiguration.all({
+    List<OpenFoodFactsLanguage>? languages,
+    OpenFoodFactsCountry? country,
+    List<TaxonomyLanguageField> fields = const [],
+    List<Parameter> additionalParameters = const [],
+  }) : super.roots(
+          TagType.LANGUAGES,
+          languages: languages,
+          country: country,
           fields: fields,
           additionalParameters: additionalParameters,
         );

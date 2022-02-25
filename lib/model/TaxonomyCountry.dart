@@ -99,22 +99,38 @@ class TaxonomyCountry extends JsonObject {
   String toString() => toJson().toString();
 }
 
+/// Configuration for countries API query.
 class TaxonomyCountryQueryConfiguration
     extends TaxonomyQueryConfiguration<TaxonomyCountry, TaxonomyCountryField> {
+  /// Configuration to get the countries that match the [tags].
   TaxonomyCountryQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages = const [],
+    List<OpenFoodFactsLanguage>? languages,
     @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     List<TaxonomyCountryField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
-          TagType.LABELS,
+          TagType.COUNTRIES,
           tags,
           languages: languages,
           cc: cc,
           country: country,
           includeChildren: false,
+          fields: fields,
+          additionalParameters: additionalParameters,
+        );
+
+  /// Configuration to get ALL the countries.
+  TaxonomyCountryQueryConfiguration.all({
+    List<OpenFoodFactsLanguage>? languages,
+    OpenFoodFactsCountry? country,
+    List<TaxonomyCountryField> fields = const [],
+    List<Parameter> additionalParameters = const [],
+  }) : super.roots(
+          TagType.COUNTRIES,
+          languages: languages,
+          country: country,
           fields: fields,
           additionalParameters: additionalParameters,
         );
