@@ -434,7 +434,7 @@ void main() {
       expect(status.isWrongUsernameOrPassword(), isTrue);
     });
 
-    // cf. https://github.com/openfoodfacts/smooth-app/pull/1142
+    // TODO(monsieurtanuki): to be fixed, cf. https://github.com/openfoodfacts/smooth-app/pull/1142
     test(
       'Nutrition update issue',
       () async {
