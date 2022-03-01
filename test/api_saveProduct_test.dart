@@ -433,7 +433,53 @@ void main() {
       );
       expect(status.isWrongUsernameOrPassword(), isTrue);
     });
+
+    // cf. https://github.com/openfoodfacts/smooth-app/pull/1142
+    test('Nutrition update issue', () async {
+      const String barcode = '7300400481588'; // Wasa
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.FRENCH,
+        fields: [ProductField.ALL],
+      );
+
+      // Step 1: get the product
+      ProductResult result = await OpenFoodAPIClient.getProduct(
+        configurations,
+        user: TestConstants.TEST_USER,
+      );
+      expect(result.status, 1);
+      expect(result.product, isNotNull);
+      expect(result.product!.nutriments, isNotNull);
+      final double? initialMagnesium = result.product!.nutriments!.magnesium;
+      expect(initialMagnesium, isNotNull); // in real life: 200mg = 0.2
+
+      // Step 2: save the slightly altered product
+      final double nextMagnesium = initialMagnesium! + .001;
+      result.product!.nutriments!.magnesium = nextMagnesium;
+      final Product savedProduct = Product(barcode: barcode);
+      savedProduct.nutriments = result.product!.nutriments;
+      final Status status = await OpenFoodAPIClient.saveProduct(
+        TestConstants.TEST_USER,
+        savedProduct,
+      );
+      expect(status.status, 1);
+      expect(status.error, null);
+
+      // Step 3: check if the value was correctly saved
+      result = await OpenFoodAPIClient.getProduct(
+        configurations,
+        user: TestConstants.TEST_USER,
+      );
+      expect(result.status, 1);
+      expect(result.product, isNotNull);
+      expect(result.product!.nutriments, isNotNull);
+      final double? latestMagnesium = result.product!.nutriments!.magnesium;
+      expect(latestMagnesium, nextMagnesium);
+    });
   },
+      skip: 'To be fixed',
       timeout: Timeout(
         // some tests can be slow here
         Duration(seconds: 90),
