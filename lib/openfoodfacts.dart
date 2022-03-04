@@ -18,6 +18,7 @@ import 'package:openfoodfacts/model/TaxonomyCountry.dart';
 import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
 import 'package:openfoodfacts/model/TaxonomyLabel.dart';
 import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
+import 'package:openfoodfacts/model/TaxonomyPackaging.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/ImageHelper.dart';
@@ -71,6 +72,7 @@ export 'model/SpellingCorrections.dart';
 export 'model/Status.dart';
 export 'model/TagI18N.dart';
 export 'model/TaxonomyCategory.dart';
+export 'model/TaxonomyPackaging.dart';
 export 'model/User.dart';
 export 'model/parameter/OutputFormat.dart';
 export 'model/parameter/Page.dart';
@@ -498,6 +500,17 @@ class OpenFoodAPIClient {
     return getTaxonomy<TaxonomyLanguage, TaxonomyLanguageField>(configuration,
         user: user, queryType: queryType);
   }
+
+  static Future<Map<String, TaxonomyPackaging>?> getTaxonomyPackagings(
+    final TaxonomyPackagingQueryConfiguration configuration, {
+    final User? user,
+    final QueryType? queryType,
+  }) =>
+      getTaxonomy<TaxonomyPackaging, TaxonomyPackagingField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
 
   static void _removeImages(
     final SearchResult searchResult,
