@@ -506,6 +506,19 @@ No replacing of '"' with '"'.
 
 </dd>
 
+        <dt id="getTaxonomyPackagings" class="callable">
+  <span class="name"><a href="../openfoodfacts/OpenFoodAPIClient/getTaxonomyPackagings.html">getTaxonomyPackagings</a></span><span class="signature">(<wbr><span class="parameter" id="getTaxonomyPackagings-param-configuration"><span class="type-annotation"><a href="../model_TaxonomyPackaging/TaxonomyPackagingQueryConfiguration-class.html">TaxonomyPackagingQueryConfiguration</a></span> <span class="parameter-name">configuration</span>, </span><span class="parameter" id="getTaxonomyPackagings-param-user">{<span class="type-annotation"><a href="../model_User/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span><span class="parameter" id="getTaxonomyPackagings-param-queryType"><span class="type-annotation"><a href="../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.16.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.16.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.16.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="../model_TaxonomyPackaging/TaxonomyPackaging-class.html">TaxonomyPackaging</a></span>&gt;</span>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+   
+  
+
+</dd>
+
         <dt id="getTaxonomyTranslationUri" class="callable">
   <span class="name"><a href="../openfoodfacts/OpenFoodAPIClient/getTaxonomyTranslationUri.html">getTaxonomyTranslationUri</a></span><span class="signature">(<wbr><span class="parameter" id="getTaxonomyTranslationUri-param-taxonomyTagType"><span class="type-annotation"><a href="../utils_TagType/TagType.html">TagType</a></span> <span class="parameter-name">taxonomyTagType</span>, </span><span class="parameter" id="getTaxonomyTranslationUri-param-language">{<span>required</span> <span class="type-annotation"><a href="../utils_LanguageHelper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span>, </span><span class="parameter" id="getTaxonomyTranslationUri-param-queryType"><span class="type-annotation"><a href="../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>, </span><span class="parameter" id="getTaxonomyTranslationUri-param-replaceSubdomain"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.16.1/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">replaceSubdomain</span> = <span class="default-value">true</span>}</span>)
     <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.16.1/dart-core/Uri-class.html">Uri</a></span>
@@ -722,6 +735,8 @@ Query the language specific host from OpenFoodFacts.
   <li><a href="../model_TagI18N/TagI18N-class.html">TagI18N</a></li>
   <li><a href="../model_TaxonomyCategory/TaxonomyCategory-class.html">TaxonomyCategory</a></li>
   <li><a href="../model_TaxonomyCategory/TaxonomyCategoryQueryConfiguration-class.html">TaxonomyCategoryQueryConfiguration</a></li>
+  <li><a href="../model_TaxonomyPackaging/TaxonomyPackaging-class.html">TaxonomyPackaging</a></li>
+  <li><a href="../model_TaxonomyPackaging/TaxonomyPackagingQueryConfiguration-class.html">TaxonomyPackagingQueryConfiguration</a></li>
   <li><a href="../model_SpellingCorrections/TermCorrections-class.html">TermCorrections</a></li>
   <li><a href="../model_User/User-class.html">User</a></li>
 
@@ -735,6 +750,7 @@ Query the language specific host from OpenFoodFacts.
   <li><a href="../utils_ProductFields/ProductFieldExtension.html">ProductFieldExtension</a></li>
   <li><a href="../model_Product/ProductImprovementExtension.html">ProductImprovementExtension</a></li>
   <li><a href="../model_TaxonomyCategory/TaxonomyCategoryFieldExtension.html">TaxonomyCategoryFieldExtension</a></li>
+  <li><a href="../model_TaxonomyPackaging/TaxonomyPackagingFieldExtension.html">TaxonomyPackagingFieldExtension</a></li>
 
 
 
@@ -759,6 +775,7 @@ Query the language specific host from OpenFoodFacts.
   <li><a href="../model_Product/ProductImprovementCategory.html">ProductImprovementCategory</a></li>
   <li><a href="../model_parameter_SortBy/SortOption.html">SortOption</a></li>
   <li><a href="../model_TaxonomyCategory/TaxonomyCategoryField.html">TaxonomyCategoryField</a></li>
+  <li><a href="../model_TaxonomyPackaging/TaxonomyPackagingField.html">TaxonomyPackagingField</a></li>
 
 
 </ol>
@@ -813,6 +830,7 @@ Query the language specific host from OpenFoodFacts.
     <li><a href="../openfoodfacts/OpenFoodAPIClient/getTaxonomyIngredients.html">getTaxonomyIngredients</a></li>
     <li><a href="../openfoodfacts/OpenFoodAPIClient/getTaxonomyLabels.html">getTaxonomyLabels</a></li>
     <li><a href="../openfoodfacts/OpenFoodAPIClient/getTaxonomyLanguages.html">getTaxonomyLanguages</a></li>
+    <li><a href="../openfoodfacts/OpenFoodAPIClient/getTaxonomyPackagings.html">getTaxonomyPackagings</a></li>
     <li><a href="../openfoodfacts/OpenFoodAPIClient/getTaxonomyTranslationUri.html">getTaxonomyTranslationUri</a></li>
     <li><a href="../openfoodfacts/OpenFoodAPIClient/login.html">login</a></li>
     <li><a href="../openfoodfacts/OpenFoodAPIClient/postInsightAnnotation.html">postInsightAnnotation</a></li>
