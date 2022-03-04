@@ -6,6 +6,23 @@
 * [#357](https://github.com/openfoodfacts/openfoodfacts-dart/issues/357) - all `Unit`s are now correctly saved ([#358](https://github.com/openfoodfacts/openfoodfacts-dart/issues/358)) ([9eb2872](https://github.com/openfoodfacts/openfoodfacts-dart/commit/9eb2872b0754c193b0c07f66f2da0331e4ffc23b))
 
 
+## [1.13.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.12.0...v1.13.0) (2022-03-04)
+
+
+### Features
+
+* [#349](https://github.com/openfoodfacts/openfoodfacts-dart/issues/349) - added support for Events API ([#386](https://github.com/openfoodfacts/openfoodfacts-dart/issues/386)) ([ea79ad0](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ea79ad0f3283c50ba54e1767bcece5761c57f939))
+* [#379](https://github.com/openfoodfacts/openfoodfacts-dart/issues/379) - added packaging_text_XX ([#380](https://github.com/openfoodfacts/openfoodfacts-dart/issues/380)) ([cf492c5](https://github.com/openfoodfacts/openfoodfacts-dart/commit/cf492c54275424c184457884e951289512de3591))
+* [#382](https://github.com/openfoodfacts/openfoodfacts-dart/issues/382) - added a "packaging" tag type ([#383](https://github.com/openfoodfacts/openfoodfacts-dart/issues/383)) ([4479956](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4479956ddf9c1ab97ef5214562a162dd7138a6ac))
+* [#394](https://github.com/openfoodfacts/openfoodfacts-dart/issues/394) - additional "root" and "all" configurations for taxonomies ([#396](https://github.com/openfoodfacts/openfoodfacts-dart/issues/396)) ([4686ddb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4686ddbfffe4f063a2e259718386f689471e09dd))
+* [#401](https://github.com/openfoodfacts/openfoodfacts-dart/issues/401) - added packaging taxonomy ([#402](https://github.com/openfoodfacts/openfoodfacts-dart/issues/402)) ([c7dbebe](https://github.com/openfoodfacts/openfoodfacts-dart/commit/c7dbebec0b16026eae2f646cf36d1f34ea35c9f9))
+* added the set of nutrient ids supported by Nutriments. ([#385](https://github.com/openfoodfacts/openfoodfacts-dart/issues/385)) ([bf9f79b](https://github.com/openfoodfacts/openfoodfacts-dart/commit/bf9f79bb12254efb255c9a43c46f6f76c583f32b))
+
+
+### Bug Fixes
+
+* successful unit tests ([#384](https://github.com/openfoodfacts/openfoodfacts-dart/issues/384)) ([ba2b731](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ba2b7311546400401c6ed8cb6370a2316e4fd690))
+
 ## [1.12.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.11.1...v1.12.0) (2022-02-02)
 
 
