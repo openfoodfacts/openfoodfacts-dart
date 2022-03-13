@@ -172,7 +172,11 @@ void main() {
             'text_element': {
               'html':
                   "\n                    <p>The carbon emission figure comes from ADEME's Agribalyse database, for the category: \n                    <a href='https://agribalyse.ademe.fr/app/aliments/31032'>Chocolate spread with hazelnuts</a>\n                    </p>\n                    ",
-              'text_type': 'summary'
+              'text_type': 'summary',
+              'source_language': 'English',
+              'source_lc': 'en',
+              'source_text': 'Wikipedia',
+              'source_url': 'https://en.wikipedia.org/wiki/Sodium acetate'
             }
           },
           {

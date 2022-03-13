@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/model/KnowledgePanel.dart';
+
 import '../interface/JsonObject.dart';
 
 part 'KnowledgePanelElement.g.dart';
@@ -9,7 +10,6 @@ enum KnowledgePanelTextElementType {
   /// The description summarizes the knowledge panel.
   @JsonValue('summary')
   SUMMARY,
-
   @JsonValue('warning')
   WARNING,
 
@@ -33,6 +33,10 @@ enum KnowledgePanelColumnType {
   PERCENT,
 }
 
+Object? test(Map map, String str) {
+  return null;
+}
+
 /// Description element of the Knowledge panel.
 @JsonSerializable()
 class KnowledgePanelTextElement extends JsonObject {
@@ -46,7 +50,29 @@ class KnowledgePanelTextElement extends JsonObject {
       unknownEnumValue: KnowledgePanelTextElementType.DEFAULT)
   final KnowledgePanelTextElementType? type;
 
-  const KnowledgePanelTextElement({required this.html, this.type});
+  /// Human readable source language (eg: "English")
+  @JsonKey(name: 'source_language')
+  final String? sourceLanguage;
+
+  /// Source locale name (eg: "en")
+  @JsonKey(name: 'source_lc')
+  final String? sourceLocale;
+
+  /// Name of the source (eg: "Wikipedia")
+  @JsonKey(name: 'source_text')
+  final String? sourceText;
+
+  /// Link to the source (eg: "https://en.wikipedia.org/wiki/Sodium acetate")
+  @JsonKey(name: 'source_url')
+  final String? sourceUrl;
+
+  const KnowledgePanelTextElement(
+      {required this.html,
+      this.type,
+      this.sourceLanguage,
+      this.sourceLocale,
+      this.sourceText,
+      this.sourceUrl});
 
   factory KnowledgePanelTextElement.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelTextElementFromJson(json);
@@ -279,19 +305,14 @@ enum KnowledgePanelElementType {
   /// The description summarizes the knowledge panel.
   @JsonValue('text')
   TEXT,
-
   @JsonValue('image')
   IMAGE,
-
   @JsonValue('panel')
   PANEL,
-
   @JsonValue('panel_group')
   PANEL_GROUP,
-
   @JsonValue('table')
   TABLE,
-
   @JsonValue('map')
   MAP,
   UNKNOWN,
