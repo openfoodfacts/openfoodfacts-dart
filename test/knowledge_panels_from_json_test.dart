@@ -439,7 +439,7 @@ void main() {
             'element_type': 'text',
             'text_element': {
               'html':
-              '<strong>Sodium acetate:</strong> Sodium acetate, CH3COONa, also abbreviated NaOAc, is the sodium salt of acetic acid. This colorless deliquescent salt has a wide range of uses.',
+                  '<strong>Sodium acetate:</strong> Sodium acetate, CH3COONa, also abbreviated NaOAc, is the sodium salt of acetic acid. This colorless deliquescent salt has a wide range of uses.',
               'source_language': 'English',
               'source_lc': 'en',
               'source_text': 'Wikipedia',
@@ -470,23 +470,19 @@ void main() {
       isNotNull,
     );
     expect(
-      kp.panelIdToPanelMap[id]!.elements!.first.textElement!
-          .sourceLanguage,
+      kp.panelIdToPanelMap[id]!.elements!.first.textElement!.sourceLanguage,
       equals('English'),
     );
     expect(
-      kp.panelIdToPanelMap[id]!.elements!.first.textElement!
-          .sourceLocale,
+      kp.panelIdToPanelMap[id]!.elements!.first.textElement!.sourceLocale,
       equals('en'),
     );
     expect(
-      kp.panelIdToPanelMap[id]!.elements!.first.textElement!
-          .sourceText,
+      kp.panelIdToPanelMap[id]!.elements!.first.textElement!.sourceText,
       equals('Wikipedia'),
     );
     expect(
-      kp.panelIdToPanelMap[id]!.elements!.first.textElement!
-          .sourceUrl,
+      kp.panelIdToPanelMap[id]!.elements!.first.textElement!.sourceUrl,
       equals('https://en.wikipedia.org/wiki/Sodium acetate'),
     );
   });
