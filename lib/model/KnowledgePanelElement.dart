@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/model/KnowledgePanel.dart';
-
 import '../interface/JsonObject.dart';
 
 part 'KnowledgePanelElement.g.dart';
@@ -10,6 +9,7 @@ enum KnowledgePanelTextElementType {
   /// The description summarizes the knowledge panel.
   @JsonValue('summary')
   SUMMARY,
+
   @JsonValue('warning')
   WARNING,
 
@@ -31,10 +31,6 @@ enum KnowledgePanelColumnType {
   /// The column has percentages.
   @JsonValue('percent')
   PERCENT,
-}
-
-Object? test(Map map, String str) {
-  return null;
 }
 
 /// Description element of the Knowledge panel.
@@ -66,13 +62,14 @@ class KnowledgePanelTextElement extends JsonObject {
   @JsonKey(name: 'source_url')
   final String? sourceUrl;
 
-  const KnowledgePanelTextElement(
-      {required this.html,
-      this.type,
-      this.sourceLanguage,
-      this.sourceLocale,
-      this.sourceText,
-      this.sourceUrl});
+  const KnowledgePanelTextElement({
+    required this.html,
+    this.type,
+    this.sourceLanguage,
+    this.sourceLocale,
+    this.sourceText,
+    this.sourceUrl,
+  });
 
   factory KnowledgePanelTextElement.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelTextElementFromJson(json);
@@ -305,14 +302,19 @@ enum KnowledgePanelElementType {
   /// The description summarizes the knowledge panel.
   @JsonValue('text')
   TEXT,
+
   @JsonValue('image')
   IMAGE,
+
   @JsonValue('panel')
   PANEL,
+
   @JsonValue('panel_group')
   PANEL_GROUP,
+
   @JsonValue('table')
   TABLE,
+
   @JsonValue('map')
   MAP,
   UNKNOWN,
