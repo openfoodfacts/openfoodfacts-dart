@@ -15,6 +15,8 @@ enum TaxonomyCountryField {
   LANGUAGES,
   NAME,
   OFFICIAL_COUNTRY_CODE_2,
+  SYNONYMS,
+  WIKIDATA,
 }
 
 extension TaxonomyCountryFieldExtension on TaxonomyCountryField {
@@ -25,6 +27,8 @@ extension TaxonomyCountryFieldExtension on TaxonomyCountryField {
     TaxonomyCountryField.LANGUAGES: 'languages',
     TaxonomyCountryField.NAME: 'name',
     TaxonomyCountryField.OFFICIAL_COUNTRY_CODE_2: 'official_country_code_2',
+    TaxonomyCountryField.SYNONYMS: 'synonyms',
+    TaxonomyCountryField.WIKIDATA: 'wikidata',
   };
 
   /// Returns the key of the Country field
@@ -37,15 +41,7 @@ extension TaxonomyCountryFieldExtension on TaxonomyCountryField {
 /// of these.
 @JsonSerializable()
 class TaxonomyCountry extends JsonObject {
-  TaxonomyCountry(
-    this.children,
-    this.countryCode2,
-    this.countryCode3,
-    this.languages,
-    this.name,
-    this.officialCountryCode2,
-    this.parents,
-  );
+  TaxonomyCountry();
 
   factory TaxonomyCountry.fromJson(Map<String, dynamic> json) {
     return _$TaxonomyCountryFromJson(json);
@@ -56,45 +52,45 @@ class TaxonomyCountry extends JsonObject {
     return _$TaxonomyCountryToJson(this);
   }
 
-  @JsonKey(name: 'children', includeIfNull: false)
-  List<String>? children;
   @JsonKey(
     name: 'country_code_2',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
+    fromJson: LanguageHelper.fromJsonStringMapIsoUnique,
     includeIfNull: false,
   )
-  Map<OpenFoodFactsLanguage, String>? countryCode2;
+  String? countryCode2;
   @JsonKey(
     name: 'country_code_3',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
+    fromJson: LanguageHelper.fromJsonStringMapIsoUnique,
     includeIfNull: false,
   )
-  Map<OpenFoodFactsLanguage, String>? countryCode3;
+  String? countryCode3;
   @JsonKey(
-    name: 'languages',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
+    name: 'language_codes',
+    fromJson: LanguageHelper.fromJsonStringMapIsoList,
     includeIfNull: false,
   )
-  Map<OpenFoodFactsLanguage, String>? languages;
+  List<OpenFoodFactsLanguage>? languages;
   @JsonKey(
-    name: 'name',
     fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
     includeIfNull: false,
   )
   Map<OpenFoodFactsLanguage, String>? name;
   @JsonKey(
-    name: 'official_country_code_2',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
+    fromJson: LanguageHelper.fromJsonStringMapList,
     includeIfNull: false,
   )
-  Map<OpenFoodFactsLanguage, String>? officialCountryCode2;
-  @JsonKey(name: 'parents', includeIfNull: false)
-  List<String>? parents;
+  Map<OpenFoodFactsLanguage, List<String>>? synonyms;
+  @JsonKey(
+    fromJson: LanguageHelper.fromJsonStringMapIsoUnique,
+    includeIfNull: false,
+  )
+  String? wikidata;
+  @JsonKey(
+    name: 'official_country_code_2',
+    fromJson: LanguageHelper.fromJsonStringMapIsoUnique,
+    includeIfNull: false,
+  )
+  String? officialCountryCode2;
   @override
   String toString() => toJson().toString();
 }

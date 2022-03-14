@@ -21,6 +21,9 @@ enum OpenFoodFactsLanguage {
   /// Moldovan
   MOLDOVAN,
 
+  /// Mongolian
+  MONGOLIAN,
+
   /// Korean
   KOREAN,
 
@@ -569,6 +572,7 @@ extension OpenFoodFactsLanguageExtension on OpenFoodFactsLanguage? {
     OpenFoodFactsLanguage.MALAY: 'ms',
     OpenFoodFactsLanguage.TAGALOG: 'tl',
     OpenFoodFactsLanguage.MOLDOVAN: 'mo',
+    OpenFoodFactsLanguage.MONGOLIAN: 'mn',
     OpenFoodFactsLanguage.KOREAN: 'ko',
     OpenFoodFactsLanguage.LUBA_KATANGA_LANGUAGE: 'lu',
     OpenFoodFactsLanguage.KAZAKH: 'kk',
@@ -797,6 +801,69 @@ class LanguageHelper {
     final result = <OpenFoodFactsLanguage, String>{};
     for (final key in map.keys) {
       result[LanguageHelper.fromJson(key)] = map[key]! as String;
+    }
+    return result;
+  }
+
+  /// From a `Map<String, String>` in `dynamic`'s clothing (JsonKey annotation)
+  static Map<OpenFoodFactsLanguage, List<String>>? fromJsonStringMapList(
+      dynamic map) {
+    if (map == null) {
+      return null;
+    }
+    if (map is! Map<String, dynamic>) {
+      throw Exception('Expected type: Map<String, List<String>>: $map');
+    }
+    final result = <OpenFoodFactsLanguage, List<String>>{};
+    for (final key in map.keys) {
+      final List<String> list = <String>[];
+      for (final item in map[key]! as List<dynamic>) {
+        list.add(item as String);
+      }
+      result[LanguageHelper.fromJson(key)] = list;
+    }
+    return result;
+  }
+
+  /// Special case for ISO codes that should be unique for all languages.
+  ///
+  /// e.g. "country_code_2": {"en": "BY"} will return 'BY'.
+  /// From a `Map<String, String>` in `dynamic`'s clothing (JsonKey annotation)
+  static String? fromJsonStringMapIsoUnique(dynamic map) {
+    if (map == null) {
+      return null;
+    }
+    if (map is! Map<String, dynamic>) {
+      throw Exception('Expected type: Map<String, String>');
+    }
+    for (final value in map.values) {
+      return value! as String;
+    }
+    return null;
+  }
+
+  /// Special case for ISO codes that should be unique for all languages.
+  ///
+  /// e.g. "language_codes": {"en":"nl,fr"} will return
+  /// [OpenFoodFactsLanguage.DUTCH, OpenFoodFactsLanguage.FRENCH]
+  /// From a `Map<String, String>` in `dynamic`'s clothing (JsonKey annotation)
+  static List<OpenFoodFactsLanguage>? fromJsonStringMapIsoList(dynamic map) {
+    if (map == null) {
+      return null;
+    }
+    if (map is! Map<String, dynamic>) {
+      throw Exception('Expected type: Map<String, String>');
+    }
+    final result = <OpenFoodFactsLanguage>[];
+    for (final value in map.values) {
+      final String list = value! as String;
+      if (list.isEmpty) {
+        continue;
+      }
+      final List<String> languages = list.split(',');
+      for (final String language in languages) {
+        result.add(LanguageHelper.fromJson(language));
+      }
     }
     return result;
   }

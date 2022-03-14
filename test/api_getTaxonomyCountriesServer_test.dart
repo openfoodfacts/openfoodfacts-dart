@@ -18,9 +18,24 @@ void main() {
   ];
 
   const String _knownTag = 'en:gambia';
+  const String _expectedCountryCode2 = 'GM';
+  const String _expectedCountryCode3 = 'GMB';
+  const List<OpenFoodFactsLanguage> _expectedLanguages =
+      <OpenFoodFactsLanguage>[OpenFoodFactsLanguage.ENGLISH];
+  const String _expectedNameFrench = 'Gambie';
+  const String _expectedNameEnglish = 'Gambia';
   const String _unknownTag = 'en:some_nonexistent_country';
 
-  group('OpenFoodAPIClient getTaxonomyCountries', () {
+  group('OpenFoodAPIClient getTaxonomyCountries SERVER', () {
+    void _checkKnown(final TaxonomyCountry country) {
+      expect(
+          country.name![OpenFoodFactsLanguage.ENGLISH]!, _expectedNameEnglish);
+      expect(country.name![OpenFoodFactsLanguage.FRENCH]!, _expectedNameFrench);
+      expect(country.languages, _expectedLanguages);
+      expect(country.countryCode2, _expectedCountryCode2);
+      expect(country.countryCode3, _expectedCountryCode3);
+    }
+
     test(
       'get all countries',
       () async {
@@ -30,6 +45,46 @@ void main() {
         );
         expect(countries, isNotNull);
         expect(countries!.length, greaterThan(250)); // was 268 on 2022-03-13
+        int countWikidata = 0;
+        int countCode2 = 0;
+        int countCode3 = 0;
+        int countOfficialCode2 = 0;
+        int countWithLanguages = 0;
+        int countUnknownLanguages = 0;
+        for (final String key in countries.keys) {
+          final TaxonomyCountry country = countries[key]!;
+          if (key == _knownTag) {
+            _checkKnown(country);
+          }
+          expect(country.name, isNotNull);
+          expect(country.synonyms, isNotNull);
+          if (country.wikidata != null) {
+            countWikidata++;
+          }
+          if (country.countryCode2 != null) {
+            countCode2++;
+          }
+          if (country.countryCode3 != null) {
+            countCode3++;
+          }
+          if (country.officialCountryCode2 != null) {
+            countOfficialCode2++;
+          }
+          if (country.languages != null && country.languages!.isNotEmpty) {
+            countWithLanguages++;
+            for (final OpenFoodFactsLanguage language in country.languages!) {
+              if (language == OpenFoodFactsLanguage.UNDEFINED) {
+                countUnknownLanguages++;
+              }
+            }
+          }
+        }
+        expect(countWikidata, greaterThan(30)); // was 40 on 2022-03-14
+        expect(countCode2, greaterThan(240)); // was 253 on 2022-03-14
+        expect(countCode3, greaterThan(240)); // was 250 on 2022-03-14
+        expect(countOfficialCode2, lessThan(10)); // was 1 on 2022-03-14
+        expect(countWithLanguages, greaterThan(200)); // was 235 on 2022-03-14
+        expect(countUnknownLanguages, lessThan(10)); // was 4 on 2022-03-14
       },
     );
 
@@ -41,16 +96,15 @@ void main() {
       expect(countries, isNotNull);
       expect(countries!.length, equals(1));
       final TaxonomyCountry country = countries[_knownTag]!;
-      expect(country.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
-      expect(country.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
+      _checkKnown(country);
     });
 
     test("get a country that doesn't exist", () async {
-      final Map<String, TaxonomyCountry>? categories =
+      final Map<String, TaxonomyCountry>? countries =
           await OpenFoodAPIClient.getTaxonomyCountries(
         TaxonomyCountryQueryConfiguration(tags: <String>[_unknownTag]),
       );
-      expect(categories, isNull);
+      expect(countries, isNull);
     });
 
     test("get a country that doesn't exist with one that does", () async {
@@ -63,8 +117,7 @@ void main() {
       expect(countries, isNotNull);
       expect(countries!.length, equals(1));
       final TaxonomyCountry country = countries[_knownTag]!;
-      expect(country.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
-      expect(country.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
+      _checkKnown(country);
     });
   });
 }

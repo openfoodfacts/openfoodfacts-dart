@@ -225,6 +225,7 @@ const _$OpenFoodFactsLanguageEnumMap = {
   OpenFoodFactsLanguage.MALAY: 'MALAY',
   OpenFoodFactsLanguage.TAGALOG: 'TAGALOG',
   OpenFoodFactsLanguage.MOLDOVAN: 'MOLDOVAN',
+  OpenFoodFactsLanguage.MONGOLIAN: 'MONGOLIAN',
   OpenFoodFactsLanguage.KOREAN: 'KOREAN',
   OpenFoodFactsLanguage.LUBA_KATANGA_LANGUAGE: 'LUBA_KATANGA_LANGUAGE',
   OpenFoodFactsLanguage.KAZAKH: 'KAZAKH',
