@@ -21,16 +21,17 @@ void main() {
   const String _unknownTag = 'en:some_nonexistent_country';
 
   group('OpenFoodAPIClient getTaxonomyCountries', () {
-    test('get all countries', () async {
-      final Map<String, TaxonomyCountry>? countries =
-          await OpenFoodAPIClient.getTaxonomyCountries(
-        TaxonomyCountryQueryConfiguration.all(),
-      );
-      expect(countries, isNotNull);
-      expect(countries!.length, greaterThan(100));
-    },
-        skip:
-            'to be fixed on the server side'); // TODO(stephanegigandet): to be fixed on the server side
+    test(
+      'get all countries',
+      () async {
+        final Map<String, TaxonomyCountry>? countries =
+            await OpenFoodAPIClient.getTaxonomyCountries(
+          TaxonomyCountryQueryConfiguration.all(),
+        );
+        expect(countries, isNotNull);
+        expect(countries!.length, greaterThan(250)); // was 268 on 2022-03-13
+      },
+    );
 
     test('get a country', () async {
       final Map<String, TaxonomyCountry>? countries =
@@ -42,7 +43,6 @@ void main() {
       final TaxonomyCountry country = countries[_knownTag]!;
       expect(country.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
       expect(country.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
-      expect(country.languages![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
     });
 
     test("get a country that doesn't exist", () async {
@@ -65,7 +65,6 @@ void main() {
       final TaxonomyCountry country = countries[_knownTag]!;
       expect(country.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
       expect(country.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
-      expect(country.languages![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
     });
   });
 }
