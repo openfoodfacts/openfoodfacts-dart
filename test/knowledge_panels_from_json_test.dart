@@ -1,3 +1,4 @@
+import 'package:openfoodfacts/model/KnowledgePanelElement.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:test/test.dart';
 
@@ -172,7 +173,11 @@ void main() {
             'text_element': {
               'html':
                   "\n                    <p>The carbon emission figure comes from ADEME's Agribalyse database, for the category: \n                    <a href='https://agribalyse.ademe.fr/app/aliments/31032'>Chocolate spread with hazelnuts</a>\n                    </p>\n                    ",
-              'text_type': 'summary'
+              'text_type': 'summary',
+              'source_language': 'English',
+              'source_lc': 'en',
+              'source_text': 'Wikipedia',
+              'source_url': 'https://en.wikipedia.org/wiki/Sodium acetate'
             }
           },
           {
@@ -421,5 +426,64 @@ void main() {
     };
     KnowledgePanels kp = KnowledgePanels.fromJson(panels);
     expect(kp.panelIdToPanelMap.length, equals(8));
+  });
+
+  // Ensure that a "text_element" with some sources data is well parsed
+  test('Load knowledge panel JSON with a text element', () {
+    final String id = 'additive_en:e262';
+
+    final Map<String, dynamic> jsonData = <String, dynamic>{
+      id: {
+        'elements': [
+          {
+            'element_type': 'text',
+            'text_element': {
+              'html':
+                  '<strong>Sodium acetate:</strong> Sodium acetate, CH3COONa, also abbreviated NaOAc, is the sodium salt of acetic acid. This colorless deliquescent salt has a wide range of uses.',
+              'source_language': 'English',
+              'source_lc': 'en',
+              'source_text': 'Wikipedia',
+              'source_url': 'https://en.wikipedia.org/wiki/Sodium acetate'
+            }
+          }
+        ],
+        'level': 'info',
+        'size': 'small',
+        'title_element': {'title': 'E262 - Sodium acetates'},
+        'topics': ['health']
+      },
+    };
+
+    KnowledgePanels kp = KnowledgePanels.fromJson(jsonData);
+    expect(kp.panelIdToPanelMap.length, equals(1));
+
+    expect(
+      kp.panelIdToPanelMap[id]!.elements!.length,
+      equals(1),
+    );
+    expect(
+      kp.panelIdToPanelMap[id]!.elements!.first.elementType,
+      equals(KnowledgePanelElementType.TEXT),
+    );
+    expect(
+      kp.panelIdToPanelMap[id]!.elements!.first.textElement,
+      isNotNull,
+    );
+    expect(
+      kp.panelIdToPanelMap[id]!.elements!.first.textElement!.sourceLanguage,
+      equals('English'),
+    );
+    expect(
+      kp.panelIdToPanelMap[id]!.elements!.first.textElement!.sourceLocale,
+      equals('en'),
+    );
+    expect(
+      kp.panelIdToPanelMap[id]!.elements!.first.textElement!.sourceText,
+      equals('Wikipedia'),
+    );
+    expect(
+      kp.panelIdToPanelMap[id]!.elements!.first.textElement!.sourceUrl,
+      equals('https://en.wikipedia.org/wiki/Sodium acetate'),
+    );
   });
 }

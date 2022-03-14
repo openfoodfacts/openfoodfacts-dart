@@ -46,7 +46,30 @@ class KnowledgePanelTextElement extends JsonObject {
       unknownEnumValue: KnowledgePanelTextElementType.DEFAULT)
   final KnowledgePanelTextElementType? type;
 
-  const KnowledgePanelTextElement({required this.html, this.type});
+  /// Human readable source language (eg: "English")
+  @JsonKey(name: 'source_language')
+  final String? sourceLanguage;
+
+  /// Source locale name (eg: "en")
+  @JsonKey(name: 'source_lc')
+  final String? sourceLocale;
+
+  /// Name of the source (eg: "Wikipedia")
+  @JsonKey(name: 'source_text')
+  final String? sourceText;
+
+  /// Link to the source (eg: "https://en.wikipedia.org/wiki/Sodium acetate")
+  @JsonKey(name: 'source_url')
+  final String? sourceUrl;
+
+  const KnowledgePanelTextElement({
+    required this.html,
+    this.type,
+    this.sourceLanguage,
+    this.sourceLocale,
+    this.sourceText,
+    this.sourceUrl,
+  });
 
   factory KnowledgePanelTextElement.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelTextElementFromJson(json);
