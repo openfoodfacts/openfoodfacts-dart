@@ -324,14 +324,14 @@ class OpenFoodAPIClient {
     QueryType? queryType,
   }) async {
     final Uri uri = UriHelper.getUri(
-      path: 'products/${configuration.barcodes.join(',')}.json',
-      queryParameters: configuration.getParametersMap(),
+      path: 'api/v2/search/',
       queryType: queryType,
     );
 
-    final Response response = await HttpHelper().doGetRequest(
+    final Response response = await HttpHelper().doPostRequest(
       uri,
-      user: user,
+      configuration.getParametersMap(),
+      user,
       queryType: queryType,
     );
 

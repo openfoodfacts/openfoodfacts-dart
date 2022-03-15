@@ -16,6 +16,28 @@ void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
 
   group('$OpenFoodAPIClient search products', () {
+    const String UNKNOWN_BARCODE = '1111111111111111111111111111111';
+    const List<String> BARCODES = [
+      '8024884500403',
+      '3263855093192',
+      '3045320001570',
+      '3021762383344',
+      '4008400402222',
+      '3330720237255',
+      '3608580823513',
+      '3700278403936',
+      '3302747010029',
+      '3608580823490',
+      '3250391660995',
+      '3760020506605',
+      '8722700202387',
+      '3330720237330',
+      '3535800940005',
+      '20000691',
+      '3270190127512',
+      UNKNOWN_BARCODE,
+    ];
+
     test('search favorite products', () async {
       final parameters = <Parameter>[
         const Page(page: 1),
@@ -383,28 +405,6 @@ void main() {
     });
 
     test('multiple products', () async {
-      const String UNKNOWN_BARCODE = '1111111111111111111111111111111';
-      const List<String> BARCODES = [
-        '8024884500403',
-        '3263855093192',
-        '3045320001570',
-        '3021762383344',
-        '4008400402222',
-        '3330720237255',
-        '3608580823513',
-        '3700278403936',
-        '3302747010029',
-        '3608580823490',
-        '3250391660995',
-        '3760020506605',
-        '8722700202387',
-        '3330720237330',
-        '3535800940005',
-        '20000691',
-        '3270190127512',
-        UNKNOWN_BARCODE,
-      ];
-
       final ProductListQueryConfiguration configuration =
           ProductListQueryConfiguration(
         BARCODES,
@@ -430,28 +430,6 @@ void main() {
     });
 
     test('product freshness', () async {
-      const String UNKNOWN_BARCODE = '1111111111111111111111111111111';
-      const List<String> BARCODES = [
-        '8024884500403',
-        '3263855093192',
-        '3045320001570',
-        '3021762383344',
-        '4008400402222',
-        '3330720237255',
-        '3608580823513',
-        '3700278403936',
-        '3302747010029',
-        '3608580823490',
-        '3250391660995',
-        '3760020506605',
-        '8722700202387',
-        '3330720237330',
-        '3535800940005',
-        '20000691',
-        '3270190127512',
-        UNKNOWN_BARCODE,
-      ];
-
       final Map<String, ProductFreshness> result =
           await OpenFoodAPIClient.getProductFreshness(
         barcodes: BARCODES,
@@ -472,26 +450,6 @@ void main() {
     });
 
     test('multiple products and pagination', () async {
-      const BARCODES = [
-        '8024884500403',
-        '3263855093192',
-        '3045320001570',
-        '3021762383344',
-        '4008400402222',
-        '3330720237255',
-        '3608580823513',
-        '3700278403936',
-        '3302747010029',
-        '3608580823490',
-        '3250391660995',
-        '3760020506605',
-        '8722700202387',
-        '3330720237330',
-        '3535800940005',
-        '20000691',
-        '3270190127512',
-      ];
-
       final obtainedBarcodes = <String>[];
       var page = 1;
       while (true) {
@@ -516,7 +474,9 @@ void main() {
       }
       // We want to test pagination mechanism so we expect >1 pages
       expect(page, greaterThan(1));
-      expect(obtainedBarcodes.toSet(), BARCODES.toSet());
+      final Set<String> knownBarcodes = BARCODES.toSet();
+      knownBarcodes.remove(UNKNOWN_BARCODE);
+      expect(obtainedBarcodes.toSet(), knownBarcodes);
     });
 
     test('query potatoes products', () async {
@@ -541,6 +501,34 @@ void main() {
       expect(result.products!.length, 24);
       expect(result.products![0].runtimeType, Product);
       expect(result.count, greaterThan(1500));
+    });
+
+    test('many many products', () async {
+      final List<String> manyBarcodes = <String>[];
+      // for a GET, the limit seems to be around 8000 characters
+      // but here we don't care anymore as now it's a POST
+      for (int i = 0; i < 100; i++) {
+        manyBarcodes.addAll(BARCODES);
+      }
+
+      final ProductListQueryConfiguration configuration =
+          ProductListQueryConfiguration(
+        manyBarcodes,
+        fields: [ProductField.BARCODE, ProductField.NAME],
+        language: OpenFoodFactsLanguage.FRENCH,
+      );
+
+      final SearchResult result = await OpenFoodAPIClient.getProductList(
+        TestConstants.PROD_USER,
+        configuration,
+        queryType: QueryType.PROD,
+      );
+
+      expect(result.page, 1);
+      expect(result.pageSize, 24);
+      expect(result.count, BARCODES.length - 1);
+      expect(result.products, isNotNull);
+      expect(result.products!.length, BARCODES.length - 1);
     });
   });
 }
