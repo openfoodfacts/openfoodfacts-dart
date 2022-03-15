@@ -76,14 +76,14 @@
   QueryType? queryType,
 }) async {
   final Uri uri = UriHelper.getUri(
-    path: &#39;products&#47;${configuration.barcodes.join(&#39;,&#39;)}.json&#39;,
-    queryParameters: configuration.getParametersMap(),
+    path: &#39;api&#47;v2&#47;search&#47;&#39;,
     queryType: queryType,
   );
 
-  final Response response = await HttpHelper().doGetRequest(
+  final Response response = await HttpHelper().doPostRequest(
     uri,
-    user: user,
+    configuration.getParametersMap(),
+    user,
     queryType: queryType,
   );
 
