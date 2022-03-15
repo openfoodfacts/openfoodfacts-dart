@@ -12,15 +12,29 @@ void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
   OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
   late FakeHttpHelper httpHelper;
+
+  const String _knownTag = 'en:gambia';
+  const String _expectedCountryCode2 = 'GM';
+  const String _expectedCountryCode3 = 'GMB';
+  const List<OpenFoodFactsLanguage> _expectedLanguages =
+      <OpenFoodFactsLanguage>[OpenFoodFactsLanguage.ENGLISH];
+  const String _expectedNameFrench = 'Gambie';
+  const String _expectedNameEnglish = 'Gambia';
+  const String _unknownTag = 'en:some_nonexistent_country';
+
   final Map<String, dynamic> expectedResponse = <String, dynamic>{
-    "en:gambia": {
+    _knownTag: {
       "name": {
-        "en": "Gambia",
-        "fr": "Gambie",
+        "en": _expectedNameEnglish,
+        "fr": _expectedNameFrench,
       },
-      "country_code_3": {"en": "GMB"},
-      "languages": {"en": "en"},
-      "country_code_2": {"en": "GM"}
+      "synonyms": {
+        "en": ["Gambia", "Republic of the Gambia", "the Gambia", "GM", "GMB"],
+        "fr": ["Gambie"]
+      },
+      "country_code_3": {"en": _expectedCountryCode3},
+      "language_codes": {"en": _expectedLanguages[0].code},
+      "country_code_2": {"en": _expectedCountryCode2}
     },
   };
 
@@ -30,8 +44,17 @@ void main() {
   });
 
   group('OpenFoodAPIClient getTaxonomyCountries', () {
+    void _checkGambia(final TaxonomyCountry country, final String tag) {
+      expect(
+          country.name![OpenFoodFactsLanguage.ENGLISH], _expectedNameEnglish);
+      expect(country.name![OpenFoodFactsLanguage.FRENCH], _expectedNameFrench);
+      expect(country.languages, _expectedLanguages);
+      expect(country.countryCode2, _expectedCountryCode2);
+      expect(country.countryCode3, _expectedCountryCode3);
+    }
+
     test('get a country', () async {
-      final String tag = 'en:gambia';
+      final String tag = _knownTag;
       TaxonomyCountryQueryConfiguration configuration =
           TaxonomyCountryQueryConfiguration(
         fields: [
@@ -54,22 +77,11 @@ void main() {
       );
       expect(countries, isNotNull);
       expect(countries!.length, equals(1));
-      TaxonomyCountry country = countries[tag]!;
-      expect(
-          country.name![OpenFoodFactsLanguage.ENGLISH]!,
-          equals(expectedResponse[tag][TaxonomyCountryField.NAME.key]
-              [OpenFoodFactsLanguage.ENGLISH.code]));
-      expect(
-          country.name![OpenFoodFactsLanguage.FRENCH]!,
-          equals(expectedResponse[tag][TaxonomyCountryField.NAME.key]
-              [OpenFoodFactsLanguage.FRENCH.code]));
-      expect(
-          country.languages![OpenFoodFactsLanguage.ENGLISH]!,
-          equals(expectedResponse[tag][TaxonomyCountryField.LANGUAGES.key]
-              [OpenFoodFactsLanguage.ENGLISH.code]));
+      final TaxonomyCountry country = countries[tag]!;
+      _checkGambia(country, tag);
     });
     test("get a country that doesn't exist", () async {
-      final String tag = 'en:some_nonexistent_country';
+      final String tag = _unknownTag;
       Map<String, dynamic> expectedResponse = <String, dynamic>{
         tag: {},
       };
@@ -95,7 +107,7 @@ void main() {
       expect(categories, isNull);
     });
     test("get a country that doesn't exist with one that does", () async {
-      final String tag = 'en:gambia';
+      final String tag = _knownTag;
       TaxonomyCountryQueryConfiguration configuration =
           TaxonomyCountryQueryConfiguration(
         fields: [
@@ -106,7 +118,7 @@ void main() {
           OpenFoodFactsLanguage.ENGLISH,
           OpenFoodFactsLanguage.FRENCH,
         ],
-        tags: <String>['en:some_nonexistent_country', tag],
+        tags: <String>[_unknownTag, tag],
       );
       httpHelper.setResponse(configuration.getUri(),
           response: expectedResponse);
@@ -119,19 +131,8 @@ void main() {
       expect(countries, isNotNull);
 
       expect(countries!.length, equals(1));
-      TaxonomyCountry country = countries[tag]!;
-      expect(
-          country.name![OpenFoodFactsLanguage.ENGLISH]!,
-          equals(expectedResponse[tag][TaxonomyCountryField.NAME.key]
-              [OpenFoodFactsLanguage.ENGLISH.code]));
-      expect(
-          country.name![OpenFoodFactsLanguage.FRENCH]!,
-          equals(expectedResponse[tag][TaxonomyCountryField.NAME.key]
-              [OpenFoodFactsLanguage.FRENCH.code]));
-      expect(
-          country.languages![OpenFoodFactsLanguage.ENGLISH]!,
-          equals(expectedResponse[tag][TaxonomyCountryField.LANGUAGES.key]
-              [OpenFoodFactsLanguage.ENGLISH.code]));
+      final TaxonomyCountry country = countries[tag]!;
+      _checkGambia(country, tag);
     });
   });
 }
