@@ -1,3 +1,20 @@
+# Changelog
+
+## [1.14.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.13.0...v1.14.0) (2022-03-15)
+
+
+### Features
+
+* [#410](https://github.com/openfoodfacts/openfoodfacts-dart/issues/410) - refactored TaxonomyCountry with simplified fields ([#412](https://github.com/openfoodfacts/openfoodfacts-dart/issues/412)) ([dc77db3](https://github.com/openfoodfacts/openfoodfacts-dart/commit/dc77db313af4fa93e21aa4edc7ed7181a4e15e3b))
+* Support for source fields in the Knowledge panel API ([#409](https://github.com/openfoodfacts/openfoodfacts-dart/issues/409)) ([6a065fd](https://github.com/openfoodfacts/openfoodfacts-dart/commit/6a065fdbd1834239758c4548566bc105a8034810))
+
+
+### Bug Fixes
+
+* [#407](https://github.com/openfoodfacts/openfoodfacts-dart/issues/407) - getProductList now works with unlimited number of barcodes ([#413](https://github.com/openfoodfacts/openfoodfacts-dart/issues/413)) ([fd7ddbc](https://github.com/openfoodfacts/openfoodfacts-dart/commit/fd7ddbc99e5517c383d02dd45764f655bf8c95fa))
+* [#410](https://github.com/openfoodfacts/openfoodfacts-dart/issues/410) - removed failing tests about TaxonomyCountry ([#411](https://github.com/openfoodfacts/openfoodfacts-dart/issues/411)) ([25f7a4b](https://github.com/openfoodfacts/openfoodfacts-dart/commit/25f7a4bbfc176028965de75f1ba255cd130b2a4f))
+* changelog order ([#405](https://github.com/openfoodfacts/openfoodfacts-dart/issues/405)) ([ca4669c](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ca4669cb801621cb05e840ac6f0671d8a2b3418d))
+
 ## [1.13.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.12.0...v1.13.0) (2022-03-04)
 
 
