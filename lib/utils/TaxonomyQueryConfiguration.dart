@@ -133,6 +133,13 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
     );
   }
 
+  Uri getPostUri([QueryType? queryType]) {
+    return UriHelper.getPostUri(
+      path: 'api/v2/taxonomy',
+      queryType: queryType,
+    );
+  }
+
   /// Returns the set of fields to ignore if specified in the [fields] parameter.
   ///
   /// This typically includes the `ALL` field, and any others that have a meta
