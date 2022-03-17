@@ -110,7 +110,6 @@ class OpenFoodAPIClient {
     var productUri = UriHelper.getPostUri(
       path: '/cgi/product_jqm2.pl',
       queryType: queryType,
-      addUserAgentParameters: false,
     );
 
     if (product.nutriments != null) {
@@ -302,7 +301,6 @@ class OpenFoodAPIClient {
     var searchUri = UriHelper.getPostUri(
       path: '/cgi/search.pl',
       queryType: queryType,
-      addUserAgentParameters: false,
     );
 
     Response response = await HttpHelper().doPostRequest(
@@ -328,7 +326,6 @@ class OpenFoodAPIClient {
     final Uri uri = UriHelper.getPostUri(
       path: 'api/v2/search/',
       queryType: queryType,
-      addUserAgentParameters: false,
     );
 
     final Response response = await HttpHelper().doPostRequest(
@@ -392,7 +389,6 @@ class OpenFoodAPIClient {
     var searchUri = UriHelper.getPostUri(
       path: '/pnns-group-2/${configuration.group.id}/${configuration.page}',
       queryType: queryType,
-      addUserAgentParameters: false,
     );
 
     Response response = await HttpHelper().doPostRequest(
@@ -415,11 +411,10 @@ class OpenFoodAPIClient {
     User? user,
     QueryType? queryType,
   }) async {
-    final Uri uri = configuration.getPostUri(queryType);
-    final Response response = await HttpHelper().doPostRequest(
+    final Uri uri = configuration.getUri(queryType);
+    final Response response = await HttpHelper().doGetRequest(
       uri,
-      configuration.getParametersMap(),
-      user,
+      user: user,
       queryType: queryType,
     );
 
@@ -556,10 +551,9 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
 
-    Response response = await HttpHelper().doPostRequest(
+    Response response = await HttpHelper().doGetRequest(
       insightUri,
-      parameters,
-      user,
+      user: user,
       queryType: queryType,
     );
     var result =
@@ -578,10 +572,9 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
 
-    Response response = await HttpHelper().doPostRequest(
+    Response response = await HttpHelper().doGetRequest(
       insightsUri,
-      {},
-      user,
+      user: user,
       queryType: queryType,
     );
 
@@ -607,13 +600,13 @@ class OpenFoodAPIClient {
 
     var robotoffQuestionUri = UriHelper.getRobotoffUri(
       path: 'api/v1/questions/$barcode',
+      queryParameters: parameters,
       queryType: queryType,
     );
 
-    Response response = await HttpHelper().doPostRequest(
+    Response response = await HttpHelper().doGetRequest(
       robotoffQuestionUri,
-      parameters,
-      user,
+      user: user,
       queryType: queryType,
     );
     var result = RobotoffQuestionResult.fromJson(
@@ -648,13 +641,13 @@ class OpenFoodAPIClient {
 
     var robotoffQuestionUri = UriHelper.getRobotoffUri(
       path: 'api/v1/questions/random',
+      queryParameters: parameters,
       queryType: queryType,
     );
 
-    Response response = await HttpHelper().doPostRequest(
+    Response response = await HttpHelper().doGetRequest(
       robotoffQuestionUri,
-      parameters,
-      user,
+      user: user,
       queryType: queryType,
     );
     var result = RobotoffQuestionResult.fromJson(
@@ -748,7 +741,6 @@ class OpenFoodAPIClient {
     var ocrUri = UriHelper.getPostUri(
       path: '/cgi/ingredients.pl',
       queryType: queryType,
-      addUserAgentParameters: false,
     );
     Map<String, String> queryParameters = <String, String>{
       'code': barcode,
@@ -781,7 +773,6 @@ class OpenFoodAPIClient {
     var suggestionUri = UriHelper.getPostUri(
       path: '/cgi/suggest.pl',
       queryType: queryType,
-      addUserAgentParameters: false,
     );
     Map<String, String> queryParamater = <String, String>{
       'tagtype': taxonomyType.key,
@@ -808,7 +799,6 @@ class OpenFoodAPIClient {
     var loginUri = UriHelper.getPostUri(
       path: '/cgi/auth.pl',
       queryType: queryType,
-      addUserAgentParameters: false,
     );
     Response response = await HttpHelper().doPostRequest(
       loginUri,
@@ -1013,7 +1003,6 @@ class OpenFoodAPIClient {
     final Uri uri = UriHelper.getPostUri(
       path: 'cgi/nutrients.pl',
       queryType: queryType,
-      addUserAgentParameters: false,
     );
     Map<String, String> queryParameters = <String, String>{
       'cc': country.iso2Code,
@@ -1121,7 +1110,6 @@ class OpenFoodAPIClient {
     final Uri uri = UriHelper.getPostUri(
       path: 'cgi/product_image_crop.pl',
       queryType: queryType,
-      addUserAgentParameters: false,
     );
 
     final Response response = await HttpHelper().doPostRequest(
@@ -1172,7 +1160,6 @@ class OpenFoodAPIClient {
     final Uri uri = UriHelper.getPostUri(
       path: 'cgi/product_image_unselect.pl',
       queryType: queryType,
-      addUserAgentParameters: false,
     );
     final Map<String, String> queryParameters = <String, String>{
       'code': barcode,
