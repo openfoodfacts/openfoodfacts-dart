@@ -18,7 +18,7 @@
 
         - name: Chekout code
           if: ${{ steps.release.outputs.release_created }}
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
 
         - name: Setup Dart
           if: ${{ steps.release.outputs.release_created }}
