@@ -33,15 +33,8 @@ class UriHelper {
   static Uri getPostUri({
     required final String path,
     final QueryType? queryType,
-    final bool addUserAgentParameters = false,
   }) =>
-      Uri(
-        scheme: OpenFoodAPIConfiguration.uriScheme,
-        host: OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-            ? OpenFoodAPIConfiguration.uriProdHost
-            : OpenFoodAPIConfiguration.uriTestHost,
-        path: path,
-      );
+      getUri(path: path, queryType: queryType, addUserAgentParameters: false);
 
   ///Returns a OFF-Robotoff uri with the in the [OpenFoodAPIConfiguration] specified settings
   static Uri getRobotoffUri({
