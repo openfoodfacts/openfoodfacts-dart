@@ -75,17 +75,7 @@
   ProductListQueryConfiguration configuration, {
   QueryType? queryType,
 }) async {
-  final Uri uri = UriHelper.getPostUri(
-    path: &#39;api&#47;v2&#47;search&#47;&#39;,
-    queryType: queryType,
-  );
-
-  final Response response = await HttpHelper().doPostRequest(
-    uri,
-    configuration.getParametersMap(),
-    user,
-    queryType: queryType,
-  );
+  final Response response = await configuration.getResponse(user, queryType);
 
   final String jsonStr = _replaceQuotes(response.body);
   final SearchResult result = SearchResult.fromJson(json.decode(jsonStr));

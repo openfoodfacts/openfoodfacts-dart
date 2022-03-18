@@ -77,17 +77,7 @@ Query the language specific host from OpenFoodFacts.</p>
   ProductSearchQueryConfiguration configuration, {
   QueryType? queryType,
 }) async {
-  var searchUri = UriHelper.getPostUri(
-    path: &#39;&#47;cgi&#47;search.pl&#39;,
-    queryType: queryType,
-  );
-
-  Response response = await HttpHelper().doPostRequest(
-    searchUri,
-    configuration.getParametersMap(),
-    user,
-    queryType: queryType,
-  );
+  final Response response = await configuration.getResponse(user, queryType);
   final jsonStr = _replaceQuotes(response.body);
   var result = SearchResult.fromJson(json.decode(jsonStr));
 

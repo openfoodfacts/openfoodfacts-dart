@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the computeCountryCode method from the AbstractQueryConfiguration class, for the Dart programming language.">
-  <title>computeCountryCode method - AbstractQueryConfiguration class - AbstractQueryConfiguration library - Dart API</title>
+  <meta name="description" content="API docs for the getResponse method from the AbstractQueryConfiguration class, for the Dart programming language.">
+  <title>getResponse method - AbstractQueryConfiguration class - AbstractQueryConfiguration library - Dart API</title>
 
 
   
@@ -32,9 +32,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../utils_AbstractQueryConfiguration/utils_AbstractQueryConfiguration-library.html">AbstractQueryConfiguration</a></li>
     <li><a href="../../utils_AbstractQueryConfiguration/AbstractQueryConfiguration-class.html">AbstractQueryConfiguration</a></li>
-    <li class="self-crumb">computeCountryCode method</li>
+    <li class="self-crumb">getResponse method</li>
   </ol>
-  <div class="self-name">computeCountryCode</div>
+  <div class="self-name">getResponse</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -45,15 +45,17 @@
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
-<h1><span class="kind-method">computeCountryCode</span> method 
+<h1><span class="kind-method">getResponse</span> method 
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
 </h1></div>
 
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/2.16.1/dart-core/String-class.html">String</a>?</span>
-<span class="name ">computeCountryCode</span>(<wbr>)
+<span class="returntype"><a href="https://api.dart.dev/stable/2.16.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/http/0.13.4/http/Response-class.html">Response</a></span>&gt;</span></span>
+<span class="name ">getResponse</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getResponse-param-user"><span class="type-annotation"><a href="../../model_User/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span></li>
+<li><span class="parameter" id="getResponse-param-queryType"><span class="type-annotation"><a href="../../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span></span></li>
+</ol>)
 
       
 
@@ -64,9 +66,19 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">String? computeCountryCode() =&gt;
-    &#47;&#47; ignore: deprecated_member_use_from_same_package
-    OpenFoodAPIConfiguration.computeCountryCode(country, cc);</code></pre>
+  <pre class="language-dart"><code class="language-dart">Future&lt;Response&gt; getResponse(
+  final User? user,
+  final QueryType? queryType,
+) async =&gt;
+    await HttpHelper().doPostRequest(
+      UriHelper.getPostUri(
+        path: getUriPath(),
+        queryType: queryType,
+      ),
+      getParametersMap(),
+      user,
+      queryType: queryType,
+    );</code></pre>
 </section>
 
 
@@ -83,7 +95,7 @@
   <li><a href="../../index.html">openfoodfacts</a></li>
   <li><a href="../../utils_AbstractQueryConfiguration/utils_AbstractQueryConfiguration-library.html">AbstractQueryConfiguration</a></li>
   <li><a href="../../utils_AbstractQueryConfiguration/AbstractQueryConfiguration-class.html">AbstractQueryConfiguration</a></li>
-  <li class="self-crumb">computeCountryCode method</li>
+  <li class="self-crumb">getResponse method</li>
 </ol>
 
 
