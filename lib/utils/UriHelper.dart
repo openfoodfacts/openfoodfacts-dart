@@ -30,6 +30,12 @@ class UriHelper {
             : queryParameters,
       );
 
+  static Uri getPostUri({
+    required final String path,
+    final QueryType? queryType,
+  }) =>
+      getUri(path: path, queryType: queryType, addUserAgentParameters: false);
+
   ///Returns a OFF-Robotoff uri with the in the [OpenFoodAPIConfiguration] specified settings
   static Uri getRobotoffUri({
     required final String path,

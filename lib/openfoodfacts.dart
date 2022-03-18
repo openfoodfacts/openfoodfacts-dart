@@ -107,10 +107,9 @@ class OpenFoodAPIClient {
     parameterMap.addAll(user.toData());
     parameterMap.addAll(product.toServerData());
 
-    var productUri = UriHelper.getUri(
+    var productUri = UriHelper.getPostUri(
       path: '/cgi/product_jqm2.pl',
       queryType: queryType,
-      addUserAgentParameters: false,
     );
 
     if (product.nutriments != null) {
@@ -220,9 +219,10 @@ class OpenFoodAPIClient {
     final User? user,
     final QueryType? queryType,
   }) async {
-    final Response response = await HttpHelper().doGetRequest(
+    final Response response = await HttpHelper().doPostRequest(
       configuration.getUri(queryType: queryType),
-      user: user,
+      configuration.getParametersMap(),
+      user,
       queryType: queryType,
     );
     return response.body;
@@ -298,15 +298,15 @@ class OpenFoodAPIClient {
     ProductSearchQueryConfiguration configuration, {
     QueryType? queryType,
   }) async {
-    var searchUri = UriHelper.getUri(
+    var searchUri = UriHelper.getPostUri(
       path: '/cgi/search.pl',
-      queryParameters: configuration.getParametersMap(),
       queryType: queryType,
     );
 
-    Response response = await HttpHelper().doGetRequest(
+    Response response = await HttpHelper().doPostRequest(
       searchUri,
-      user: user,
+      configuration.getParametersMap(),
+      user,
       queryType: queryType,
     );
     final jsonStr = _replaceQuotes(response.body);
@@ -323,7 +323,7 @@ class OpenFoodAPIClient {
     ProductListQueryConfiguration configuration, {
     QueryType? queryType,
   }) async {
-    final Uri uri = UriHelper.getUri(
+    final Uri uri = UriHelper.getPostUri(
       path: 'api/v2/search/',
       queryType: queryType,
     );
@@ -386,15 +386,15 @@ class OpenFoodAPIClient {
     PnnsGroupQueryConfiguration configuration, {
     QueryType? queryType,
   }) async {
-    var searchUri = UriHelper.getUri(
+    var searchUri = UriHelper.getPostUri(
       path: '/pnns-group-2/${configuration.group.id}/${configuration.page}',
-      queryParameters: configuration.getParametersMap(),
       queryType: queryType,
     );
 
-    Response response = await HttpHelper().doGetRequest(
+    Response response = await HttpHelper().doPostRequest(
       searchUri,
-      user: user,
+      configuration.getParametersMap(),
+      user,
       queryType: queryType,
     );
     final jsonStr = _replaceQuotes(response.body);
@@ -548,7 +548,6 @@ class OpenFoodAPIClient {
 
     var insightUri = UriHelper.getRobotoffUri(
       path: 'api/v1/insights/random/',
-      queryParameters: parameters,
       queryType: queryType,
     );
 
@@ -713,13 +712,13 @@ class OpenFoodAPIClient {
 
     var spellingCorrectionUri = UriHelper.getRobotoffUri(
       path: 'api/v1/predict/ingredients/spellcheck',
-      queryParameters: spellingCorrectionParam,
       queryType: queryType,
     );
 
-    Response response = await HttpHelper().doGetRequest(
+    Response response = await HttpHelper().doPostRequest(
       spellingCorrectionUri,
-      user: user,
+      spellingCorrectionParam,
+      user,
       queryType: queryType,
     );
     SpellingCorrection result = SpellingCorrection.fromJson(
@@ -739,20 +738,20 @@ class OpenFoodAPIClient {
     OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
     QueryType? queryType,
   }) async {
-    var ocrUri = UriHelper.getUri(
+    var ocrUri = UriHelper.getPostUri(
       path: '/cgi/ingredients.pl',
-      queryParameters: {
-        'code': barcode,
-        'process_image': '1',
-        'id': 'ingredients_${language.code}',
-        'ocr_engine': OcrField.GOOGLE_CLOUD_VISION.key
-      },
       queryType: queryType,
     );
-
-    Response response = await HttpHelper().doGetRequest(
+    Map<String, String> queryParameters = <String, String>{
+      'code': barcode,
+      'process_image': '1',
+      'id': 'ingredients_${language.code}',
+      'ocr_engine': OcrField.GOOGLE_CLOUD_VISION.key
+    };
+    Response response = await HttpHelper().doPostRequest(
       ocrUri,
-      user: user,
+      queryParameters,
+      user,
       queryType: queryType,
     );
 
@@ -771,17 +770,20 @@ class OpenFoodAPIClient {
     OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
     QueryType? queryType,
   }) async {
-    var suggestionUri = UriHelper.getUri(
-        path: '/cgi/suggest.pl',
-        queryType: queryType,
-        queryParameters: {
-          'tagtype': taxonomyType.key,
-          'term': input,
-          'lc': language.code,
-        });
+    var suggestionUri = UriHelper.getPostUri(
+      path: '/cgi/suggest.pl',
+      queryType: queryType,
+    );
+    Map<String, String> queryParamater = <String, String>{
+      'tagtype': taxonomyType.key,
+      'term': input,
+      'lc': language.code,
+    };
 
-    Response response = await HttpHelper().doGetRequest(
+    Response response = await HttpHelper().doPostRequest(
       suggestionUri,
+      queryParamater,
+      null,
       queryType: queryType,
     );
 
@@ -794,10 +796,9 @@ class OpenFoodAPIClient {
     User user, {
     QueryType? queryType,
   }) async {
-    var loginUri = UriHelper.getUri(
+    var loginUri = UriHelper.getPostUri(
       path: '/cgi/auth.pl',
       queryType: queryType,
-      addUserAgentParameters: false,
     );
     Response response = await HttpHelper().doPostRequest(
       loginUri,
@@ -999,17 +1000,18 @@ class OpenFoodAPIClient {
     required final OpenFoodFactsLanguage language,
     final QueryType? queryType,
   }) async {
-    final Uri uri = UriHelper.getUri(
+    final Uri uri = UriHelper.getPostUri(
       path: 'cgi/nutrients.pl',
       queryType: queryType,
-      queryParameters: <String, String>{
-        'cc': country.iso2Code,
-        'lc': language.code,
-      },
     );
-
-    final Response response = await HttpHelper().doGetRequest(
+    Map<String, String> queryParameters = <String, String>{
+      'cc': country.iso2Code,
+      'lc': language.code,
+    };
+    final Response response = await HttpHelper().doPostRequest(
       uri,
+      queryParameters,
+      null,
       queryType: queryType,
     );
     if (response.statusCode != 200) {
@@ -1105,15 +1107,15 @@ class OpenFoodAPIClient {
       'imgid': imgid,
     };
     queryParameters.addAll(extraParameters);
-    final Uri uri = UriHelper.getUri(
+    final Uri uri = UriHelper.getPostUri(
       path: 'cgi/product_image_crop.pl',
       queryType: queryType,
-      queryParameters: queryParameters,
     );
 
-    final Response response = await HttpHelper().doGetRequest(
+    final Response response = await HttpHelper().doPostRequest(
       uri,
-      user: user,
+      queryParameters,
+      user,
       queryType: queryType,
     );
     if (response.statusCode != 200) {
@@ -1155,15 +1157,19 @@ class OpenFoodAPIClient {
     final QueryType? queryType,
   }) async {
     final String id = '${imageField.value}_${language.code}';
-    final Uri uri = UriHelper.getUri(
+    final Uri uri = UriHelper.getPostUri(
       path: 'cgi/product_image_unselect.pl',
       queryType: queryType,
-      queryParameters: <String, String>{'code': barcode, 'id': id},
     );
+    final Map<String, String> queryParameters = <String, String>{
+      'code': barcode,
+      'id': id,
+    };
 
-    final Response response = await HttpHelper().doGetRequest(
+    final Response response = await HttpHelper().doPostRequest(
       uri,
-      user: user,
+      queryParameters,
+      user,
       queryType: queryType,
     );
     if (response.statusCode != 200) {
