@@ -24,7 +24,6 @@ import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/ImageHelper.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
-import 'package:openfoodfacts/utils/PnnsGroups.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
@@ -219,12 +218,7 @@ class OpenFoodAPIClient {
     final User? user,
     final QueryType? queryType,
   }) async {
-    final Response response = await HttpHelper().doPostRequest(
-      configuration.getUri(queryType: queryType),
-      configuration.getParametersMap(),
-      user,
-      queryType: queryType,
-    );
+    final Response response = await configuration.getResponse(user, queryType);
     return response.body;
   }
 
@@ -298,17 +292,7 @@ class OpenFoodAPIClient {
     ProductSearchQueryConfiguration configuration, {
     QueryType? queryType,
   }) async {
-    var searchUri = UriHelper.getPostUri(
-      path: '/cgi/search.pl',
-      queryType: queryType,
-    );
-
-    Response response = await HttpHelper().doPostRequest(
-      searchUri,
-      configuration.getParametersMap(),
-      user,
-      queryType: queryType,
-    );
+    final Response response = await configuration.getResponse(user, queryType);
     final jsonStr = _replaceQuotes(response.body);
     var result = SearchResult.fromJson(json.decode(jsonStr));
 
@@ -323,17 +307,7 @@ class OpenFoodAPIClient {
     ProductListQueryConfiguration configuration, {
     QueryType? queryType,
   }) async {
-    final Uri uri = UriHelper.getPostUri(
-      path: 'api/v2/search/',
-      queryType: queryType,
-    );
-
-    final Response response = await HttpHelper().doPostRequest(
-      uri,
-      configuration.getParametersMap(),
-      user,
-      queryType: queryType,
-    );
+    final Response response = await configuration.getResponse(user, queryType);
 
     final String jsonStr = _replaceQuotes(response.body);
     final SearchResult result = SearchResult.fromJson(json.decode(jsonStr));
@@ -386,17 +360,7 @@ class OpenFoodAPIClient {
     PnnsGroupQueryConfiguration configuration, {
     QueryType? queryType,
   }) async {
-    var searchUri = UriHelper.getPostUri(
-      path: '/pnns-group-2/${configuration.group.id}/${configuration.page}',
-      queryType: queryType,
-    );
-
-    Response response = await HttpHelper().doPostRequest(
-      searchUri,
-      configuration.getParametersMap(),
-      user,
-      queryType: queryType,
-    );
+    final Response response = await configuration.getResponse(user, queryType);
     final jsonStr = _replaceQuotes(response.body);
     var result = SearchResult.fromJson(json.decode(jsonStr));
 

@@ -45,4 +45,7 @@ class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
     result.putIfAbsent('json', () => '1');
     return result;
   }
+
+  @override
+  String getUriPath() => '/cgi/search.pl';
 }

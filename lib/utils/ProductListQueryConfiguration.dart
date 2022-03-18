@@ -55,4 +55,7 @@ class ProductListQueryConfiguration extends AbstractQueryConfiguration {
 
     return result;
   }
+
+  @override
+  String getUriPath() => 'api/v2/search/';
 }
