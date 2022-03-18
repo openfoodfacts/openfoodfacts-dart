@@ -82,20 +82,20 @@ By default the query will use the Google Cloud Vision.</p>
   OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
   QueryType? queryType,
 }) async {
-  var ocrUri = UriHelper.getUri(
+  var ocrUri = UriHelper.getPostUri(
     path: &#39;&#47;cgi&#47;ingredients.pl&#39;,
-    queryParameters: {
-      &#39;code&#39;: barcode,
-      &#39;process_image&#39;: &#39;1&#39;,
-      &#39;id&#39;: &#39;ingredients_${language.code}&#39;,
-      &#39;ocr_engine&#39;: OcrField.GOOGLE_CLOUD_VISION.key
-    },
     queryType: queryType,
   );
-
-  Response response = await HttpHelper().doGetRequest(
+  Map&lt;String, String&gt; queryParameters = &lt;String, String&gt;{
+    &#39;code&#39;: barcode,
+    &#39;process_image&#39;: &#39;1&#39;,
+    &#39;id&#39;: &#39;ingredients_${language.code}&#39;,
+    &#39;ocr_engine&#39;: OcrField.GOOGLE_CLOUD_VISION.key
+  };
+  Response response = await HttpHelper().doPostRequest(
     ocrUri,
-    user: user,
+    queryParameters,
+    user,
     queryType: queryType,
   );
 

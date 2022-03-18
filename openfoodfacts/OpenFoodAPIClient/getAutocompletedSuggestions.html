@@ -80,17 +80,20 @@ Returns a List of suggestions</p>
   OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
   QueryType? queryType,
 }) async {
-  var suggestionUri = UriHelper.getUri(
-      path: &#39;&#47;cgi&#47;suggest.pl&#39;,
-      queryType: queryType,
-      queryParameters: {
-        &#39;tagtype&#39;: taxonomyType.key,
-        &#39;term&#39;: input,
-        &#39;lc&#39;: language.code,
-      });
+  var suggestionUri = UriHelper.getPostUri(
+    path: &#39;&#47;cgi&#47;suggest.pl&#39;,
+    queryType: queryType,
+  );
+  Map&lt;String, String&gt; queryParamater = &lt;String, String&gt;{
+    &#39;tagtype&#39;: taxonomyType.key,
+    &#39;term&#39;: input,
+    &#39;lc&#39;: language.code,
+  };
 
-  Response response = await HttpHelper().doGetRequest(
+  Response response = await HttpHelper().doPostRequest(
     suggestionUri,
+    queryParamater,
+    null,
     queryType: queryType,
   );
 

@@ -75,9 +75,10 @@
   final User? user,
   final QueryType? queryType,
 }) async {
-  final Response response = await HttpHelper().doGetRequest(
+  final Response response = await HttpHelper().doPostRequest(
     configuration.getUri(queryType: queryType),
-    user: user,
+    configuration.getParametersMap(),
+    user,
     queryType: queryType,
   );
   return response.body;

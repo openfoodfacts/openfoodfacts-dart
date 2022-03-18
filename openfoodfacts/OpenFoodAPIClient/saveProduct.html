@@ -82,10 +82,9 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
   parameterMap.addAll(user.toData());
   parameterMap.addAll(product.toServerData());
 
-  var productUri = UriHelper.getUri(
+  var productUri = UriHelper.getPostUri(
     path: &#39;&#47;cgi&#47;product_jqm2.pl&#39;,
     queryType: queryType,
-    addUserAgentParameters: false,
   );
 
   if (product.nutriments != null) {

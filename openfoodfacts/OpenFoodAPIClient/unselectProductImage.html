@@ -84,15 +84,19 @@ Will work OK even when there was no previous selected product image.</p>
   final QueryType? queryType,
 }) async {
   final String id = &#39;${imageField.value}_${language.code}&#39;;
-  final Uri uri = UriHelper.getUri(
+  final Uri uri = UriHelper.getPostUri(
     path: &#39;cgi&#47;product_image_unselect.pl&#39;,
     queryType: queryType,
-    queryParameters: &lt;String, String&gt;{&#39;code&#39;: barcode, &#39;id&#39;: id},
   );
+  final Map&lt;String, String&gt; queryParameters = &lt;String, String&gt;{
+    &#39;code&#39;: barcode,
+    &#39;id&#39;: id,
+  };
 
-  final Response response = await HttpHelper().doGetRequest(
+  final Response response = await HttpHelper().doPostRequest(
     uri,
-    user: user,
+    queryParameters,
+    user,
     queryType: queryType,
   );
   if (response.statusCode != 200) {

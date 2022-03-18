@@ -74,10 +74,9 @@ Returns a bool if the login data of the provided user is correct</p>
   User user, {
   QueryType? queryType,
 }) async {
-  var loginUri = UriHelper.getUri(
+  var loginUri = UriHelper.getPostUri(
     path: &#39;&#47;cgi&#47;auth.pl&#39;,
     queryType: queryType,
-    addUserAgentParameters: false,
   );
   Response response = await HttpHelper().doPostRequest(
     loginUri,

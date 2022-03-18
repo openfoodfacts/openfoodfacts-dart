@@ -75,17 +75,18 @@
   required final OpenFoodFactsLanguage language,
   final QueryType? queryType,
 }) async {
-  final Uri uri = UriHelper.getUri(
+  final Uri uri = UriHelper.getPostUri(
     path: &#39;cgi&#47;nutrients.pl&#39;,
     queryType: queryType,
-    queryParameters: &lt;String, String&gt;{
-      &#39;cc&#39;: country.iso2Code,
-      &#39;lc&#39;: language.code,
-    },
   );
-
-  final Response response = await HttpHelper().doGetRequest(
+  Map&lt;String, String&gt; queryParameters = &lt;String, String&gt;{
+    &#39;cc&#39;: country.iso2Code,
+    &#39;lc&#39;: language.code,
+  };
+  final Response response = await HttpHelper().doPostRequest(
     uri,
+    queryParameters,
+    null,
     queryType: queryType,
   );
   if (response.statusCode != 200) {

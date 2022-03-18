@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the getFolksonomyUri method from the UriHelper class, for the Dart programming language.">
-  <title>getFolksonomyUri method - UriHelper class - UriHelper library - Dart API</title>
+  <meta name="description" content="API docs for the getPostUri method from the UriHelper class, for the Dart programming language.">
+  <title>getPostUri method - UriHelper class - UriHelper library - Dart API</title>
 
 
   
@@ -32,9 +32,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../utils_UriHelper/utils_UriHelper-library.html">UriHelper</a></li>
     <li><a href="../../utils_UriHelper/UriHelper-class.html">UriHelper</a></li>
-    <li class="self-crumb">getFolksonomyUri method</li>
+    <li class="self-crumb">getPostUri method</li>
   </ol>
-  <div class="self-name">getFolksonomyUri</div>
+  <div class="self-name">getPostUri</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -45,7 +45,7 @@
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
-<h1><span class="kind-method">getFolksonomyUri</span> method 
+<h1><span class="kind-method">getPostUri</span> method 
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
 </h1></div>
 
@@ -53,36 +53,24 @@
       
 
 <span class="returntype"><a href="https://api.dart.dev/stable/2.16.1/dart-core/Uri-class.html">Uri</a></span>
-<span class="name ">getFolksonomyUri</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getFolksonomyUri-param-path">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.16.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, </span></li>
-<li><span class="parameter" id="getFolksonomyUri-param-queryParameters"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.16.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.16.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>?</span> <span class="parameter-name">queryParameters</span>, </span></li>
-<li><span class="parameter" id="getFolksonomyUri-param-queryType"><span class="type-annotation"><a href="../../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
+<span class="name ">getPostUri</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getPostUri-param-path">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.16.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, </span></li>
+<li><span class="parameter" id="getPostUri-param-queryType"><span class="type-annotation"><a href="../../utils_QueryType/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
 </ol>)
 
       
 
     </section>
     
-<section class="desc markdown">
-  <p>Returns a OFF-Folksonomy uri with the in the <a href="../../utils_OpenFoodAPIConfiguration/OpenFoodAPIConfiguration-class.html">OpenFoodAPIConfiguration</a> specified settings</p>
-</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static Uri getFolksonomyUri({
+  <pre class="language-dart"><code class="language-dart">static Uri getPostUri({
   required final String path,
-  final Map&lt;String, dynamic&gt;? queryParameters,
   final QueryType? queryType,
 }) =&gt;
-    Uri(
-      scheme: OpenFoodAPIConfiguration.uriScheme,
-      host: OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-          ? OpenFoodAPIConfiguration.uriProdHostFolksonomy
-          : OpenFoodAPIConfiguration.uriTestHostFolksonomy,
-      path: path,
-      queryParameters: queryParameters,
-    );</code></pre>
+    getUri(path: path, queryType: queryType, addUserAgentParameters: false);</code></pre>
 </section>
 
 
@@ -99,7 +87,7 @@
   <li><a href="../../index.html">openfoodfacts</a></li>
   <li><a href="../../utils_UriHelper/utils_UriHelper-library.html">UriHelper</a></li>
   <li><a href="../../utils_UriHelper/UriHelper-class.html">UriHelper</a></li>
-  <li class="self-crumb">getFolksonomyUri method</li>
+  <li class="self-crumb">getPostUri method</li>
 </ol>
 
 

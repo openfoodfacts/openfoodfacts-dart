@@ -79,15 +79,15 @@ static Future&lt;SearchResult&gt; queryPnnsGroup(
   PnnsGroupQueryConfiguration configuration, {
   QueryType? queryType,
 }) async {
-  var searchUri = UriHelper.getUri(
+  var searchUri = UriHelper.getPostUri(
     path: &#39;&#47;pnns-group-2&#47;${configuration.group.id}&#47;${configuration.page}&#39;,
-    queryParameters: configuration.getParametersMap(),
     queryType: queryType,
   );
 
-  Response response = await HttpHelper().doGetRequest(
+  Response response = await HttpHelper().doPostRequest(
     searchUri,
-    user: user,
+    configuration.getParametersMap(),
+    user,
     queryType: queryType,
   );
   final jsonStr = _replaceQuotes(response.body);

@@ -90,13 +90,13 @@
 
   var spellingCorrectionUri = UriHelper.getRobotoffUri(
     path: &#39;api&#47;v1&#47;predict&#47;ingredients&#47;spellcheck&#39;,
-    queryParameters: spellingCorrectionParam,
     queryType: queryType,
   );
 
-  Response response = await HttpHelper().doGetRequest(
+  Response response = await HttpHelper().doPostRequest(
     spellingCorrectionUri,
-    user: user,
+    spellingCorrectionParam,
+    user,
     queryType: queryType,
   );
   SpellingCorrection result = SpellingCorrection.fromJson(
