@@ -2,8 +2,6 @@ import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
-import 'package:openfoodfacts/utils/QueryType.dart';
-import 'package:openfoodfacts/utils/UriHelper.dart';
 
 /// Query version for single barcode
 class ProductQueryVersion {
@@ -48,9 +46,6 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
           fields: fields,
         );
 
-  Uri getUri({final QueryType? queryType}) => UriHelper.getUri(
-        path: version.getPath(barcode),
-        queryParameters: getParametersMap(),
-        queryType: queryType,
-      );
+  @override
+  String getUriPath() => version.getPath(barcode);
 }

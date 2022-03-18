@@ -44,4 +44,7 @@ class PnnsGroupQueryConfiguration extends AbstractQueryConfiguration {
 
     return result;
   }
+
+  @override
+  String getUriPath() => '/pnns-group-2/${group.id}/$page';
 }

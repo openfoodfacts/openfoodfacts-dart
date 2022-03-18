@@ -1,9 +1,15 @@
+import 'package:http/http.dart';
+import 'package:meta/meta.dart';
 import 'package:openfoodfacts/interface/Parameter.dart';
+import 'package:openfoodfacts/model/User.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
+import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
+import 'package:openfoodfacts/utils/QueryType.dart';
+import 'package:openfoodfacts/utils/UriHelper.dart';
 
 /// Abstract Query Configuration, that helps build API URI
 abstract class AbstractQueryConfiguration {
@@ -121,4 +127,21 @@ abstract class AbstractQueryConfiguration {
   String? computeCountryCode() =>
       // ignore: deprecated_member_use_from_same_package
       OpenFoodAPIConfiguration.computeCountryCode(country, cc);
+
+  @protected
+  String getUriPath();
+
+  Future<Response> getResponse(
+    final User? user,
+    final QueryType? queryType,
+  ) async =>
+      await HttpHelper().doPostRequest(
+        UriHelper.getPostUri(
+          path: getUriPath(),
+          queryType: queryType,
+        ),
+        getParametersMap(),
+        user,
+        queryType: queryType,
+      );
 }
