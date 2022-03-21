@@ -27,15 +27,15 @@ class OpenFoodAPIConfiguration {
   static String uriProdHost = 'world.openfoodfacts.org';
 
   ///Uri host of the test requests to the backend
-  static String uriTestHost = 'world.openfoodfacts.net';
+  static String uriTestHost = 'world.openfoodfacts.dev';
 
   ///Url base for images in prod: needs to match the domain of uriProdHost
-  static String ImageProdUrlBase =
+  static String imageProdUrlBase =
       'https://static.openfoodfacts.org/images/products/';
 
   ///Url base for images in test: needs to match the domain of uriTestHost
-  static String ImageTestUrlBase =
-      'https://off:off@static.openfoodfacts.net/images/products/';
+  static String imageTestUrlBase =
+      'https://off:off@static.openfoodfacts.dev/images/products/';
 
   ///Uri host of the Robotoff requests to the backend, modify this to direct the request to a self-hosted instance.
   static String uriProdHostRobotoff = 'robotoff.openfoodfacts.org';

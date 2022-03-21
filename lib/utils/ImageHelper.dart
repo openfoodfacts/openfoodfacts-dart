@@ -76,7 +76,7 @@ class ImageHelper {
     }
 
     return OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-        ? OpenFoodAPIConfiguration.ImageProdUrlBase + barcodeUrl
-        : OpenFoodAPIConfiguration.ImageTestUrlBase + barcodeUrl;
+        ? OpenFoodAPIConfiguration.imageProdUrlBase + barcodeUrl
+        : OpenFoodAPIConfiguration.imageTestUrlBase + barcodeUrl;
   }
 }

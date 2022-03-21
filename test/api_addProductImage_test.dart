@@ -17,8 +17,7 @@ void main() {
 
   /// Use a random barcode so that we can create a new product
   /// and really upload images
-  var r = Random();
-  String barcode = (50000000000000 + r.nextInt(100000000)).toString();
+  String barcode = (50000000000000 + Random().nextInt(100000000)).toString();
 
   /// Returns the width and height (pixels) and size (bytes) of JPEG data
   ///
