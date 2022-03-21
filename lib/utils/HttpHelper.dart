@@ -80,6 +80,9 @@ class HttpHelper {
     User? user, {
     QueryType? queryType,
   }) async {
+    if (user != null) {
+      body.addAll(user.toData());
+    }
     http.Response response = await http.post(
       uri,
       headers: _buildHeaders(
@@ -118,6 +121,9 @@ class HttpHelper {
 
     request.headers.addAll({'Content-Type': 'multipart/form-data'});
     request.fields.addAll(addUserAgentParameters(body)!);
+    if (user != null) {
+      request.fields.addAll(user.toData());
+    }
 
     // add all file entries to the request
     if (files != null) {

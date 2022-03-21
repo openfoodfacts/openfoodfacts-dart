@@ -143,8 +143,6 @@ class OpenFoodAPIClient {
     var dataMap = <String, String>{};
     var fileMap = <String, Uri>{};
 
-    // Images can be sent anonymously
-    dataMap.addAll(user.toData());
     dataMap.addAll(image.toData());
     fileMap.putIfAbsent(image.getImageDataKey(), () => image.imageUri);
 
