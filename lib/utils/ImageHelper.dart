@@ -7,10 +7,6 @@ import 'LanguageHelper.dart';
 /// Helper class related to product pictures
 class ImageHelper {
   static const int MAX_IMAGE_SIZE = 2048;
-  static const String IMAGE_PROD_URL_BASE =
-      'https://static.openfoodfacts.org/images/products/';
-  static const String IMAGE_TEST_URL_BASE =
-      'https://static.openfoodfacts.net/images/products/';
 
   /// Returns a copy of the [image] with its bigger size GTE [maxsize]
   static Image resize(Image image, {int maxSize = MAX_IMAGE_SIZE}) {
@@ -80,7 +76,7 @@ class ImageHelper {
     }
 
     return OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-        ? IMAGE_PROD_URL_BASE + barcodeUrl
-        : IMAGE_TEST_URL_BASE + barcodeUrl;
+        ? OpenFoodAPIConfiguration.ImageProdUrlBase + barcodeUrl
+        : OpenFoodAPIConfiguration.ImageTestUrlBase + barcodeUrl;
   }
 }
