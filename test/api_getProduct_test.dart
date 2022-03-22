@@ -1858,4 +1858,57 @@ void main() {
     expect(result.product?.packagingTags, ['de:in-einer-plastikflasche']);
     expect(result.product?.quantity, '5.5 Liter');
   });
+
+  group('no nutrition data', () {
+    test('Null value', () async {
+      const String barcode = '4260633610236';
+
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        fields: [ProductField.NO_NUTRITION_DATA],
+      );
+
+      final ProductResult result = await OpenFoodAPIClient.getProduct(
+        configurations,
+        user: TestConstants.TEST_USER,
+      );
+
+      expect(result.product?.noNutritionData, isFalse);
+    });
+
+    test('Empty value', () async {
+      const String barcode = '5449000000996';
+
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        fields: [ProductField.NO_NUTRITION_DATA],
+      );
+
+      final ProductResult result = await OpenFoodAPIClient.getProduct(
+        configurations,
+        user: TestConstants.TEST_USER,
+      );
+
+      expect(result.product?.noNutritionData, isFalse);
+    });
+
+    test('Correct value', () async {
+      const String barcode = '5214001936069';
+
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        fields: [ProductField.NO_NUTRITION_DATA],
+      );
+
+      final ProductResult result = await OpenFoodAPIClient.getProduct(
+        configurations,
+        user: TestConstants.TEST_USER,
+      );
+
+      expect(result.product?.noNutritionData, isTrue);
+    });
+  });
 }

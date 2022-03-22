@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/model/Attribute.dart';
 import 'package:openfoodfacts/model/AttributeGroup.dart';
+import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/utils/JsonHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
-import 'package:openfoodfacts/model/KnowledgePanels.dart';
 
 import '../interface/JsonObject.dart';
 import 'Additives.dart';
@@ -231,6 +231,13 @@ class Product extends JsonObject {
       toJson: IngredientsAnalysisTags.toJson)
   IngredientsAnalysisTags? ingredientsAnalysisTags;
 
+  // If this field is true, [nutriments] should be null
+  @JsonKey(
+      name: 'no_nutrition_data',
+      toJson: JsonHelper.checkboxToJSON,
+      fromJson: JsonHelper.checkboxFromJSON)
+  bool? noNutritionData;
+
   @JsonKey(
       name: 'nutriments', includeIfNull: false, toJson: Nutriments.toJsonHelper)
   Nutriments? nutriments;
@@ -386,6 +393,7 @@ class Product extends JsonObject {
       this.ingredientsTags,
       this.ingredientsTagsInLanguages,
       this.ingredientsAnalysisTags,
+      this.noNutritionData,
       this.nutriments,
       this.additives,
       this.environmentImpactLevels,
@@ -590,6 +598,12 @@ class Product extends JsonObject {
           json[realKey] = entry.value;
         }
       }
+    }
+
+    if (noNutritionData == true && nutriments?.hasData == true) {
+      throw StateError(
+        'If \'noNutritionData\' is true, no \'nutriments\' should be provided!',
+      );
     }
 
     return json;

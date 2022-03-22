@@ -52,6 +52,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           json['ingredients_tags_in_languages']),
       ingredientsAnalysisTags: IngredientsAnalysisTags.fromJson(
           json['ingredients_analysis_tags'] as List?),
+      noNutritionData: JsonHelper.checkboxFromJSON(json['no_nutrition_data']),
       nutriments: json['nutriments'] == null
           ? null
           : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
@@ -168,6 +169,8 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
           e.map((k, e) => MapEntry(_$ImageFieldEnumMap[k], e))));
   writeNotNull('ingredients_analysis_tags',
       IngredientsAnalysisTags.toJson(instance.ingredientsAnalysisTags));
+  val['no_nutrition_data'] =
+      JsonHelper.checkboxToJSON(instance.noNutritionData);
   writeNotNull('nutriments', Nutriments.toJsonHelper(instance.nutriments));
   writeNotNull('additives_tags', Additives.additivesToJson(instance.additives));
   writeNotNull('environment_impact_level_tags',

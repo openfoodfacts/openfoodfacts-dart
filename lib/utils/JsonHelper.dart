@@ -201,4 +201,17 @@ class JsonHelper {
   /// Returns a [DateTime] from a JSON-encoded String (e.g. '2021-10-29T11:00:56.177379')
   static DateTime? nullableStringTimestampToDate(dynamic json) =>
       json == null ? null : stringTimestampToDate(json);
+
+  static bool checkboxFromJSON(dynamic jsonValue) {
+    return jsonValue is String && jsonValue.trim().toLowerCase() == 'on';
+  }
+
+  static String checkboxToJSON(dynamic value) {
+    if (value == true ||
+        (value is String && value.trim().toLowerCase() == 'on')) {
+      return 'on';
+    } else {
+      return 'off';
+    }
+  }
 }
