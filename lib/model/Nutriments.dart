@@ -66,6 +66,11 @@ class Nutriments extends JsonObject {
       fromJson: JsonObject.parseDouble)
   double? energyKcal;
 
+  /// Energy, in kj, per serving
+  @JsonKey(
+      name: 'energy-kj', includeIfNull: false, fromJson: JsonObject.parseDouble)
+  double? energyKj;
+
   /// Energy, in kcal, per 100 grams of food
   @JsonKey(
       name: 'energy-kcal_100g',
@@ -1267,6 +1272,7 @@ class Nutriments extends JsonObject {
     this.novaGroup,
     this.energy,
     this.energyKcal,
+    this.energyKj,
     this.energyKcal100g,
     this.carbohydrates,
     this.saltServing,
