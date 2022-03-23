@@ -1,4 +1,5 @@
 import 'package:image/image.dart';
+import 'package:path/path.dart' as path;
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import '../model/ProductImage.dart';
@@ -64,19 +65,21 @@ class ImageHelper {
     final String barcode, {
     final QueryType? queryType,
   }) {
-    final String barcodeUrl;
+    final String barcodePath;
     if (barcode.length >= 9) {
       var p1 = barcode.substring(0, 3);
       var p2 = barcode.substring(3, 6);
       var p3 = barcode.substring(6, 9);
       var p4 = barcode.length >= 10 ? barcode.substring(9) : '';
-      barcodeUrl = p1 + '/' + p2 + '/' + p3 + '/' + p4;
+      barcodePath = p1 + '/' + p2 + '/' + p3 + '/' + p4;
     } else {
-      barcodeUrl = barcode;
+      barcodePath = barcode;
     }
 
-    return OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-        ? OpenFoodAPIConfiguration.imageProdUrlBase + barcodeUrl
-        : OpenFoodAPIConfiguration.imageTestUrlBase + barcodeUrl;
+    return path.join(
+        (OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+            ? OpenFoodAPIConfiguration.imageProdUrlBase
+            : OpenFoodAPIConfiguration.imageTestUrlBase),
+        barcodePath);
   }
 }

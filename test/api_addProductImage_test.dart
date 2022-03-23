@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:math' as math;
 
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
@@ -17,7 +17,8 @@ void main() {
 
   /// Use a random barcode so that we can create a new product
   /// and really upload images
-  String barcode = (50000000000000 + Random().nextInt(100000000)).toString();
+  String barcode =
+      (50000000000000 + math.Random().nextInt(100000000)).toString();
 
   /// Returns the width and height (pixels) and size (bytes) of JPEG data
   ///
