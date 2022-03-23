@@ -79,6 +79,9 @@ The result of the request will be returned as string.</p>
   User? user, {
   QueryType? queryType,
 }) async {
+  if (user != null) {
+    body.addAll(user.toData());
+  }
   http.Response response = await http.post(
     uri,
     headers: _buildHeaders(

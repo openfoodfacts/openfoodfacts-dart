@@ -96,6 +96,9 @@ As result a json object of the "type" Status is expected.</p>
 
   request.headers.addAll({&#39;Content-Type&#39;: &#39;multipart&#47;form-data&#39;});
   request.fields.addAll(addUserAgentParameters(body)!);
+  if (user != null) {
+    request.fields.addAll(user.toData());
+  }
 
   &#47;&#47; add all file entries to the request
   if (files != null) {

@@ -80,8 +80,6 @@ Returns a Status object as result.</p>
   var dataMap = &lt;String, String&gt;{};
   var fileMap = &lt;String, Uri&gt;{};
 
-  &#47;&#47; Images can be sent anonymously
-  dataMap.addAll(user.toData());
   dataMap.addAll(image.toData());
   fileMap.putIfAbsent(image.getImageDataKey(), () =&gt; image.imageUri);
 
