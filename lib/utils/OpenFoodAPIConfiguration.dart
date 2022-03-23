@@ -35,7 +35,7 @@ class OpenFoodAPIConfiguration {
 
   ///Url base for images in test: needs to match the domain of uriTestHost
   static String imageTestUrlBase =
-      'https://off:off@static.openfoodfacts.net/images/products/';
+      'https://static.openfoodfacts.net/images/products/';
 
   ///Uri host of the Robotoff requests to the backend, modify this to direct the request to a self-hosted instance.
   static String uriProdHostRobotoff = 'robotoff.openfoodfacts.org';
