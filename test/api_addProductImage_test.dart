@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
@@ -10,9 +12,13 @@ void main() {
   const User user = TestConstants.TEST_USER;
 
   /// Common constants for several image operations
-  const String barcode = '4250752200784';
   const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.GERMAN;
   const ImageField imageField = ImageField.FRONT;
+
+  /// Use a random barcode so that we can create a new product
+  /// and really upload images
+  String barcode =
+      (50000000000000 + math.Random().nextInt(100000000)).toString();
 
   /// Returns the width and height (pixels) and size (bytes) of JPEG data
   ///
@@ -88,14 +94,28 @@ void main() {
         image,
       );
 
-      expect(status.status, 'status not ok');
-      expect(status.error, 'Dieses Foto wurde schon hochgeladen.');
+      expect(status.status, 'status ok');
     });
 
     test('add ingredients image test', () async {
       SendImage image = SendImage(
         lang: OpenFoodFactsLanguage.ENGLISH,
-        barcode: '0048151623426',
+        barcode: barcode,
+        imageField: ImageField.INGREDIENTS,
+        imageUri: Uri.file('test/test_assets/ingredients_en.jpg'),
+      );
+      Status status = await OpenFoodAPIClient.addProductImage(
+        user,
+        image,
+      );
+
+      expect(status.status, 'status ok');
+    });
+
+    test('add ingredients image test: resend same image', () async {
+      SendImage image = SendImage(
+        lang: OpenFoodFactsLanguage.ENGLISH,
+        barcode: barcode,
         imageField: ImageField.INGREDIENTS,
         imageUri: Uri.file('test/test_assets/ingredients_en.jpg'),
       );
@@ -111,13 +131,18 @@ void main() {
     test('read image', () async {
       //Get product without setting ProductField
       final ProductQueryConfiguration configurations =
-          ProductQueryConfiguration('7622210449283');
+          ProductQueryConfiguration(barcode);
       final ProductResult result = await OpenFoodAPIClient.getProduct(
         configurations,
         user: user,
       );
       expect(result.status, isNotNull);
       expect(result.product!.images, isNotEmpty);
+
+      // Note: product!.images contains only selected images with a ImageField
+      // the openfoodfacts-dart SDK currently does not support accessing
+      // the list of uploaded images with the uploader user id and uploaded_t
+      // timestamp.
     });
   });
 

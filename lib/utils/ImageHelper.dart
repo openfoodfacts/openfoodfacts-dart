@@ -1,4 +1,5 @@
 import 'package:image/image.dart';
+import 'package:path/path.dart' as path;
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import '../model/ProductImage.dart';
@@ -7,10 +8,6 @@ import 'LanguageHelper.dart';
 /// Helper class related to product pictures
 class ImageHelper {
   static const int MAX_IMAGE_SIZE = 2048;
-  static const String IMAGE_PROD_URL_BASE =
-      'https://static.openfoodfacts.org/images/products/';
-  static const String IMAGE_TEST_URL_BASE =
-      'https://static.openfoodfacts.net/images/products/';
 
   /// Returns a copy of the [image] with its bigger size GTE [maxsize]
   static Image resize(Image image, {int maxSize = MAX_IMAGE_SIZE}) {
@@ -68,19 +65,21 @@ class ImageHelper {
     final String barcode, {
     final QueryType? queryType,
   }) {
-    final String barcodeUrl;
+    final String barcodePath;
     if (barcode.length >= 9) {
       var p1 = barcode.substring(0, 3);
       var p2 = barcode.substring(3, 6);
       var p3 = barcode.substring(6, 9);
       var p4 = barcode.length >= 10 ? barcode.substring(9) : '';
-      barcodeUrl = p1 + '/' + p2 + '/' + p3 + '/' + p4;
+      barcodePath = p1 + '/' + p2 + '/' + p3 + '/' + p4;
     } else {
-      barcodeUrl = barcode;
+      barcodePath = barcode;
     }
 
-    return OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-        ? IMAGE_PROD_URL_BASE + barcodeUrl
-        : IMAGE_TEST_URL_BASE + barcodeUrl;
+    return path.join(
+        (OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+            ? OpenFoodAPIConfiguration.imageProdUrlBase
+            : OpenFoodAPIConfiguration.imageTestUrlBase),
+        barcodePath);
   }
 }
