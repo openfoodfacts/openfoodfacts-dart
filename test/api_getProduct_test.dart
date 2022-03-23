@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:openfoodfacts/model/Attribute.dart';
 import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
+import 'package:openfoodfacts/model/Nutriments.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/personalized_search/available_attribute_groups.dart';
 import 'package:openfoodfacts/personalized_search/available_preference_importances.dart';
@@ -1860,13 +1861,27 @@ void main() {
   });
 
   group('no nutrition data', () {
+    const String barcode = '111111555555';
+
+    uploadProduct({required bool? noNutritionData}) =>
+        OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER,
+          Product(
+            barcode: barcode,
+            noNutritionData: noNutritionData,
+            nutriments: noNutritionData != true ? Nutriments(salt: 10.0) : null,
+          ),
+        );
+
     test('Null value', () async {
-      const String barcode = '4260633610236';
+      await uploadProduct(noNutritionData: null);
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
         barcode,
-        fields: [ProductField.NO_NUTRITION_DATA],
+        fields: [
+          ProductField.NO_NUTRITION_DATA,
+        ],
       );
 
       final ProductResult result = await OpenFoodAPIClient.getProduct(
@@ -1878,12 +1893,14 @@ void main() {
     });
 
     test('Empty value', () async {
-      const String barcode = '5449000000996';
+      await uploadProduct(noNutritionData: false);
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
         barcode,
-        fields: [ProductField.NO_NUTRITION_DATA],
+        fields: [
+          ProductField.NO_NUTRITION_DATA,
+        ],
       );
 
       final ProductResult result = await OpenFoodAPIClient.getProduct(
@@ -1895,12 +1912,16 @@ void main() {
     });
 
     test('Correct value', () async {
+      await uploadProduct(noNutritionData: true);
+
       const String barcode = '5214001936069';
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
         barcode,
-        fields: [ProductField.NO_NUTRITION_DATA],
+        fields: [
+          ProductField.NO_NUTRITION_DATA,
+        ],
       );
 
       final ProductResult result = await OpenFoodAPIClient.getProduct(
