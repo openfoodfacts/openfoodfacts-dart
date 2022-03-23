@@ -74,20 +74,22 @@
   final String barcode, {
   final QueryType? queryType,
 }) {
-  final String barcodeUrl;
+  final String barcodePath;
   if (barcode.length &gt;= 9) {
     var p1 = barcode.substring(0, 3);
     var p2 = barcode.substring(3, 6);
     var p3 = barcode.substring(6, 9);
     var p4 = barcode.length &gt;= 10 ? barcode.substring(9) : &#39;&#39;;
-    barcodeUrl = p1 + &#39;&#47;&#39; + p2 + &#39;&#47;&#39; + p3 + &#39;&#47;&#39; + p4;
+    barcodePath = p1 + &#39;&#47;&#39; + p2 + &#39;&#47;&#39; + p3 + &#39;&#47;&#39; + p4;
   } else {
-    barcodeUrl = barcode;
+    barcodePath = barcode;
   }
 
-  return OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-      ? IMAGE_PROD_URL_BASE + barcodeUrl
-      : IMAGE_TEST_URL_BASE + barcodeUrl;
+  return path.join(
+      (OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+          ? OpenFoodAPIConfiguration.imageProdUrlBase
+          : OpenFoodAPIConfiguration.imageTestUrlBase),
+      barcodePath);
 }</code></pre>
 </section>
 
@@ -138,8 +140,6 @@
     <li><a href="../../utils_ImageHelper/ImageHelper/resize.html">resize</a></li>
 
     <li class="section-title"><a href="../../utils_ImageHelper/ImageHelper-class.html#constants">Constants</a></li>
-    <li><a href="../../utils_ImageHelper/ImageHelper/IMAGE_PROD_URL_BASE-constant.html">IMAGE_PROD_URL_BASE</a></li>
-    <li><a href="../../utils_ImageHelper/ImageHelper/IMAGE_TEST_URL_BASE-constant.html">IMAGE_TEST_URL_BASE</a></li>
     <li><a href="../../utils_ImageHelper/ImageHelper/MAX_IMAGE_SIZE-constant.html">MAX_IMAGE_SIZE</a></li>
 </ol>
 
