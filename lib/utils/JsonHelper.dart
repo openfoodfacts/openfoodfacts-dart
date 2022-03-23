@@ -206,12 +206,14 @@ class JsonHelper {
     return jsonValue is String && jsonValue.trim().toLowerCase() == 'on';
   }
 
-  static String checkboxToJSON(dynamic value) {
-    if (value == true ||
+  static String? checkboxToJSON(dynamic value) {
+    if (value == null) {
+      return null;
+    } else if (value == true ||
         (value is String && value.trim().toLowerCase() == 'on')) {
       return 'on';
     } else {
-      return 'off';
+      return '';
     }
   }
 }
