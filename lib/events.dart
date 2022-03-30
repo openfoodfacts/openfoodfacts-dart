@@ -3,10 +3,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/model/BadgeBase.dart';
-import 'package:openfoodfacts/model/EventCreate.dart';
 import 'package:openfoodfacts/model/EventsBase.dart';
 import 'package:openfoodfacts/model/LeaderboardEntry.dart';
-import 'package:openfoodfacts/model/User.dart';
 
 import 'utils/HttpHelper.dart';
 import 'utils/QueryType.dart';
@@ -172,24 +170,6 @@ class EventsAPIClient {
       result.add(LeaderboardEntry.fromJson(element));
     }
     return result;
-  }
-
-  /// Adds an event.
-  static Future<void> createEvent({
-    required final EventCreate eventCreate,
-    required final User user,
-    final QueryType? queryType,
-  }) async {
-    final Response response = await HttpHelper().doPostRequest(
-      UriHelper.getEventsUri(
-        path: '/events',
-        queryType: queryType,
-      ),
-      eventCreate.toData(),
-      user,
-      queryType: queryType,
-    );
-    _checkResponse(response);
   }
 
   /// Throws a detailed exception if relevant. Does nothing if [response] is OK.

@@ -179,16 +179,5 @@ void main() {
       expect(knownSum, knownTotal);
       expect(nullSum, nullTotal);
     });
-
-    /* TODO(monsieurtanuki): make it work!
-    test('createEvent', () async {
-      await EventsAPIClient.createEvent(
-        user: TestConstants.TEST_USER,
-        eventCreate: EventCreate(
-          eventType: 'product_scanned',
-        ),
-      );
-    });
-    */
   });
 }
