@@ -79,7 +79,8 @@ void main() {
           TestConstants.TEST_USER,
           type: InsightType.CATEGORY);
 
-      expect(result.status, isNull);
+      expect(result.status, isNotNull);
+      expect(result.status, 'found');
       expect(result.insights![0].type, InsightType.CATEGORY);
       expect(result.insights![0].id, isNotNull);
       expect(result.insights![0].barcode, isNotNull);
