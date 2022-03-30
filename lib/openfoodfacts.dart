@@ -51,7 +51,6 @@ export 'folksonomy.dart';
 export 'interface/Parameter.dart';
 export 'model/Additives.dart';
 export 'model/BadgeBase.dart';
-export 'model/EventCreate.dart';
 export 'model/EventsBase.dart';
 export 'model/Ingredient.dart';
 export 'model/Insight.dart';
