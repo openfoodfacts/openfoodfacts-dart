@@ -52,10 +52,6 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           json['ingredients_tags_in_languages']),
       ingredientsAnalysisTags: IngredientsAnalysisTags.fromJson(
           json['ingredients_analysis_tags'] as List?),
-      noNutritionData: JsonHelper.checkboxFromJSON(json['no_nutrition_data']),
-      nutriments: json['nutriments'] == null
-          ? null
-          : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
       additives: Additives.additivesFromJson(json['additives_tags'] as List?),
       environmentImpactLevels: EnvironmentImpactLevels.fromJson(
           json['environment_impact_level_tags'] as List?),
@@ -102,6 +98,10 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           ? null
           : EcoscoreData.fromJson(
               json['ecoscore_data'] as Map<String, dynamic>),
+      nutriments: json['nutriments'] == null
+          ? null
+          : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
+      noNutritionData: JsonHelper.checkboxFromJSON(json['no_nutrition_data']),
     )
       ..imagesFreshnessInLanguages =
           (json['imagesFreshnessInLanguages'] as Map<String, dynamic>?)?.map(
@@ -169,9 +169,6 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
           e.map((k, e) => MapEntry(_$ImageFieldEnumMap[k], e))));
   writeNotNull('ingredients_analysis_tags',
       IngredientsAnalysisTags.toJson(instance.ingredientsAnalysisTags));
-  val['no_nutrition_data'] =
-      JsonHelper.checkboxToJSON(instance.noNutritionData);
-  writeNotNull('nutriments', Nutriments.toJsonHelper(instance.nutriments));
   writeNotNull('additives_tags', Additives.additivesToJson(instance.additives));
   writeNotNull('environment_impact_level_tags',
       EnvironmentImpactLevels.toJson(instance.environmentImpactLevels));
@@ -209,6 +206,9 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('knowledge_panels',
       KnowledgePanels.toJsonHelper(instance.knowledgePanels));
   writeNotNull('environment_infocard', instance.environmentInfoCard);
+  val['no_nutrition_data'] =
+      JsonHelper.checkboxToJSON(instance.noNutritionData);
+  writeNotNull('nutriments', Nutriments.toJsonHelper(instance.nutriments));
   return val;
 }
 

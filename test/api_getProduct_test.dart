@@ -1861,6 +1861,7 @@ void main() {
   });
 
   group('no nutrition data', () {
+    // This is barcode refers to a test product
     const String barcode = '111111555555';
 
     uploadProduct({required bool? noNutritionData}) =>
@@ -1873,8 +1874,8 @@ void main() {
           ),
         );
 
-    test('Null value', () async {
-      await uploadProduct(noNutritionData: null);
+    test('With nutriments', () async {
+      await uploadProduct(noNutritionData: true);
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
@@ -1889,10 +1890,11 @@ void main() {
         user: TestConstants.TEST_USER,
       );
 
-      expect(result.product?.noNutritionData, isFalse);
+      expect(result.product?.noNutritionData, isTrue);
+      expect(result.product?.nutriments, isNull);
     });
 
-    test('Empty value', () async {
+    test('No nutrition data', () async {
       await uploadProduct(noNutritionData: false);
 
       final ProductQueryConfiguration configurations =
@@ -1909,27 +1911,7 @@ void main() {
       );
 
       expect(result.product?.noNutritionData, isFalse);
-    });
-
-    test('Correct value', () async {
-      await uploadProduct(noNutritionData: true);
-
-      const String barcode = '5214001936069';
-
-      final ProductQueryConfiguration configurations =
-          ProductQueryConfiguration(
-        barcode,
-        fields: [
-          ProductField.NO_NUTRITION_DATA,
-        ],
-      );
-
-      final ProductResult result = await OpenFoodAPIClient.getProduct(
-        configurations,
-        user: TestConstants.TEST_USER,
-      );
-
-      expect(result.product?.noNutritionData, isTrue);
+      expect(result.product?.nutriments, isNotNull);
     });
   });
 }

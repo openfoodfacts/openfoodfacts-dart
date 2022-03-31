@@ -231,16 +231,17 @@ class Product extends JsonObject {
       toJson: IngredientsAnalysisTags.toJson)
   IngredientsAnalysisTags? ingredientsAnalysisTags;
 
-  // If this field is true, [nutriments] should be null
-  @JsonKey(
-      name: 'no_nutrition_data',
-      toJson: JsonHelper.checkboxToJSON,
-      fromJson: JsonHelper.checkboxFromJSON)
-  bool? noNutritionData;
+  /// When no nutrition data is true, nutriments are always null
+  /// This logic is handled by the getters/setters of [noNutritionData] and
+  /// [nutriments]
+  @JsonKey(ignore: true)
+  bool? _noNutritionData;
 
-  @JsonKey(
-      name: 'nutriments', includeIfNull: false, toJson: Nutriments.toJsonHelper)
-  Nutriments? nutriments;
+  /// When nutriments are not null, no nutrition data can't be true
+  /// This logic is handled by the getters/setters of [noNutritionData] and
+  /// [nutriments]
+  @JsonKey(ignore: true)
+  Nutriments? _nutriments;
 
   @JsonKey(
       name: 'additives_tags',
@@ -393,8 +394,6 @@ class Product extends JsonObject {
       this.ingredientsTags,
       this.ingredientsTagsInLanguages,
       this.ingredientsAnalysisTags,
-      this.noNutritionData,
-      this.nutriments,
       this.additives,
       this.environmentImpactLevels,
       this.allergens,
@@ -419,7 +418,11 @@ class Product extends JsonObject {
       this.lastModified,
       this.ecoscoreGrade,
       this.ecoscoreScore,
-      this.ecoscoreData});
+      this.ecoscoreData,
+      Nutriments? nutriments,
+      bool? noNutritionData})
+      : _nutriments = nutriments,
+        _noNutritionData = noNutritionData;
 
   factory Product.fromJson(Map<String, dynamic> json) {
     final Product result = _$ProductFromJson(json);
@@ -600,12 +603,6 @@ class Product extends JsonObject {
       }
     }
 
-    if (noNutritionData == true && nutriments?.hasData == true) {
-      throw StateError(
-        'If \'noNutritionData\' is true, no \'nutriments\' should be provided!',
-      );
-    }
-
     return json;
   }
 
@@ -668,5 +665,29 @@ class Product extends JsonObject {
 
 // TODO (Optional) Add Nutri-Score disclaimers cf. https://github.com/openfoodfacts/openfoodfacts-dart/issues/193
     return result;
+  }
+
+  @JsonKey(
+      name: 'no_nutrition_data',
+      toJson: JsonHelper.checkboxToJSON,
+      fromJson: JsonHelper.checkboxFromJSON)
+  bool get noNutritionData => _noNutritionData ?? _nutriments == null;
+
+  set noNutritionData(bool? noNutritionData) {
+    if (_noNutritionData == true) {
+      _nutriments = null;
+    }
+    _noNutritionData = noNutritionData;
+  }
+
+  @JsonKey(
+      name: 'nutriments', includeIfNull: false, toJson: Nutriments.toJsonHelper)
+  Nutriments? get nutriments => _noNutritionData == true ? null : _nutriments;
+
+  set nutriments(Nutriments? nutriments) {
+    if (nutriments != null) {
+      _noNutritionData = false;
+    }
+    _nutriments = nutriments;
   }
 }
