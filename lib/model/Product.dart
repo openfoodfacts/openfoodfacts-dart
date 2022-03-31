@@ -685,9 +685,7 @@ class Product extends JsonObject {
   Nutriments? get nutriments => _noNutritionData == true ? null : _nutriments;
 
   set nutriments(Nutriments? nutriments) {
-    if (nutriments != null) {
-      _noNutritionData = false;
-    }
+    _noNutritionData = nutriments == null;
     _nutriments = nutriments;
   }
 }
