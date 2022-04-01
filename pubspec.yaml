@@ -20,3 +20,4 @@ dev_dependencies:
   json_serializable: ^6.1.4
   lints: ^1.0.1
   test: ^1.20.0
+  coverage: ^1.2.0
