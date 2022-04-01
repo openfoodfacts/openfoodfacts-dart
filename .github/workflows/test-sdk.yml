@@ -30,7 +30,7 @@ jobs:
       - name: Collect coverage
         run: dart pub run coverage:format_coverage --lcov --in ./.cov --out coverage.lcov
 
-      - name: Collect code coverage
+      - name: Upload code coverage to codecov
         uses: codecov/codecov-action@v2
         with:
           files: ./coverage.lcov
