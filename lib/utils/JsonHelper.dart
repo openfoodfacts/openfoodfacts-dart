@@ -202,18 +202,22 @@ class JsonHelper {
   static DateTime? nullableStringTimestampToDate(dynamic json) =>
       json == null ? null : stringTimestampToDate(json);
 
+  static const String checkboxOnValue = 'on';
+  static const String checkboxOffValue = '';
+
   static bool checkboxFromJSON(dynamic jsonValue) {
-    return jsonValue is String && jsonValue.trim().toLowerCase() == 'on';
+    return jsonValue is String &&
+        jsonValue.trim().toLowerCase() == checkboxOnValue;
   }
 
   static String? checkboxToJSON(dynamic value) {
     if (value == null) {
       return null;
     } else if (value == true ||
-        (value is String && value.trim().toLowerCase() == 'on')) {
-      return 'on';
+        (value is String && value.trim().toLowerCase() == checkboxOnValue)) {
+      return checkboxOnValue;
     } else {
-      return '';
+      return checkboxOffValue;
     }
   }
 }

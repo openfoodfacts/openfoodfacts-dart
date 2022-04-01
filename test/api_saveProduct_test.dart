@@ -489,18 +489,38 @@ void main() {
         Duration(seconds: 90),
       ));
 
-  test('No nutrition data with nutriments', () async {
-    Product product = Product(
-        noNutritionData: true,
-        nutriments: Nutriments(
-          salt: 1.0,
-        ));
+  group('No nutrition data', () {
+    test('No nutrition data with nutriments', () async {
+      Product product = Product(
+          noNutritionData: true,
+          nutriments: Nutriments(
+            salt: 1.0,
+          ));
 
-    expect(
-        () async => await OpenFoodAPIClient.saveProduct(
-              TestConstants.TEST_USER,
-              product,
-            ),
-        throwsA(TypeMatcher<StateError>()));
+      expect(product.noNutritionData, isTrue);
+      expect(product.nutriments, isNull);
+
+      var serverData = product.toServerData();
+      expect(serverData[ProductField.NO_NUTRITION_DATA.key],
+          equals(JsonHelper.checkboxOnValue));
+      expect(serverData[ProductField.NUTRIMENTS.key], equals('{}'));
+    });
+
+    test('Nutriments', () async {
+      Product product = Product(
+          nutriments: Nutriments(
+        salt: 1.0,
+      ));
+
+      expect(product.noNutritionData, isFalse);
+      expect(product.nutriments, isNotNull);
+
+      var serverData = product.toServerData();
+      expect(
+        serverData[ProductField.NO_NUTRITION_DATA.key],
+        equals(JsonHelper.checkboxOffValue),
+      );
+      expect(serverData[ProductField.NUTRIMENTS.key], isNotEmpty);
+    });
   });
 }
