@@ -1874,7 +1874,7 @@ void main() {
           ),
         );
 
-    test('With nutriments', () async {
+    test('Without nutriments', () async {
       await uploadProduct(noNutritionData: true);
 
       final ProductQueryConfiguration configurations =
@@ -1894,7 +1894,7 @@ void main() {
       expect(result.product?.nutriments, isNull);
     });
 
-    test('No nutrition data', () async {
+    test('With nutriments', () async {
       await uploadProduct(noNutritionData: false);
 
       final ProductQueryConfiguration configurations =
@@ -1902,6 +1902,7 @@ void main() {
         barcode,
         fields: [
           ProductField.NO_NUTRITION_DATA,
+          ProductField.NUTRIMENTS,
         ],
       );
 
