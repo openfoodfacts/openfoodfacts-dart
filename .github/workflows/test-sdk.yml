@@ -26,5 +26,12 @@ jobs:
       run: dart analyze
 
     - name: Run tests
-      run: dart test test/
+      run: dart test test/ --coverage=./cov
+
+    - name: Collect code coverage
+      uses: codecov/codecov-action@v2
+      with:
+        directory: ./cov
+        fail_ci_if_error: true
+        verbose: true
 
