@@ -11,68 +11,104 @@ void main() {
 
   group('$OpenFoodAPIClient add product fields', () {
     const String barcode = '0048151623426';
-    const String initialBrand = 'Golden Cookies';
-    const List<String> additionalBrands = <String>['djobi', 'djoba'];
+    const List<String> additionalValues = <String>['djobi', 'djoba'];
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH;
+    const User user = TestConstants.TEST_USER;
+    const Timeout timeout = Timeout(Duration(seconds: 90));
 
-    test('add brand', () async {
-      late Status status;
-      late Product product;
-      late ProductResult productResult;
-      final ProductQueryConfiguration configurations =
-          ProductQueryConfiguration(
+    void _checkStatus(final Status status) {
+      expect(status.status, 1);
+      expect(status.statusVerbose, 'fields saved');
+    }
+
+    String? _getValue(
+      final AddableProductField field,
+      final Product product,
+    ) {
+      switch (field) {
+        case AddableProductField.BRANDS:
+          return product.brands;
+        case AddableProductField.COUNTRIES:
+          return product.countries;
+        case AddableProductField.STORES:
+          return product.stores;
+      }
+    }
+
+    Future<void> _checkValue(
+      final AddableProductField field,
+      final String expectedValue,
+    ) async {
+      final ProductQueryConfiguration configuration = ProductQueryConfiguration(
         barcode,
         language: language,
         fields: [ProductField.ALL],
       );
 
-      // brands from scratch
-      product = Product(
-        barcode: barcode,
-        lang: OpenFoodFactsLanguage.ENGLISH,
-        brands: initialBrand,
-      );
-      status = await OpenFoodAPIClient.saveProduct(
-        TestConstants.TEST_USER,
-        product,
-      );
-      expect(status.status, 1);
-      expect(status.statusVerbose, 'fields saved');
-
-      // cumulative list of brands
-      String expectedBrands = initialBrand;
-
-      productResult = await OpenFoodAPIClient.getProduct(
-        configurations,
-        user: TestConstants.TEST_USER,
+      final ProductResult productResult = await OpenFoodAPIClient.getProduct(
+        configuration,
+        user: user,
       );
       expect(productResult.product, isNotNull);
-      expect(productResult.product!.brands, expectedBrands);
+      final String? actualValue = _getValue(field, productResult.product!);
+      expect(actualValue, equalsIgnoringCase(expectedValue));
+    }
 
-      for (final String additionalBrand in additionalBrands) {
-        expectedBrands += ', $additionalBrand';
+    Future<void> _checkAddableField(
+      final AddableProductField field,
+      final Product initialProduct,
+    ) async {
+      late Status status;
+      late Product product;
+
+      // from scratch
+      product = initialProduct;
+      status = await OpenFoodAPIClient.saveProduct(user, product);
+      _checkStatus(status);
+
+      // cumulative list
+      String expectedValue = _getValue(field, product)!;
+
+      await _checkValue(field, expectedValue);
+
+      for (final String additionalValue in additionalValues) {
+        expectedValue += ', $additionalValue';
 
         status = await OpenFoodAPIClient.addProductFields(
-          TestConstants.TEST_USER,
+          user,
           barcode,
-          <AddableProductField, String>{
-            AddableProductField.BRANDS: additionalBrand,
-          },
+          <AddableProductField, String>{field: additionalValue},
         );
-        expect(status.status, 1);
-        expect(status.statusVerbose, 'fields saved');
+        _checkStatus(status);
 
-        productResult = await OpenFoodAPIClient.getProduct(
-          configurations,
-          user: TestConstants.TEST_USER,
-        );
-        expect(productResult.product, isNotNull);
-        expect(productResult.product!.brands, expectedBrands);
+        await _checkValue(field, expectedValue);
       }
-    });
-  },
-      timeout: Timeout(
-        // some tests can be slow here
-        Duration(seconds: 90),
-      ));
+    }
+
+    test(
+        'add brand',
+        () async => _checkAddableField(
+              AddableProductField.BRANDS,
+              Product(
+                  barcode: barcode, lang: language, brands: 'Golden Cookies'),
+            ),
+        timeout: timeout);
+
+    test(
+        'add country',
+        () async => _checkAddableField(
+              AddableProductField.COUNTRIES,
+              Product(
+                  barcode: barcode, lang: language, countries: 'United States'),
+            ),
+        timeout: timeout);
+
+    test(
+        'add stores',
+        () async => _checkAddableField(
+              AddableProductField.STORES,
+              Product(barcode: barcode, lang: language, stores: 'Intermarché'),
+            ),
+        timeout: timeout);
+  });
 }

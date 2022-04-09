@@ -13,5 +13,5 @@ extension AddableProductFieldExtension on AddableProductField {
   };
 
   /// Returns the key of the product field
-  String get addableKey => _KEYS[this] ?? '';
+  String get addableKey => _KEYS[this]!;
 }

@@ -141,7 +141,7 @@ class OpenFoodAPIClient {
     QueryType? queryType,
   }) async {
     if (map.isEmpty) {
-      throw Exception('Empty map');
+      throw Exception('Please add at least one AddableProductField');
     }
 
     final Map<String, String> parameterMap = <String, String>{};
