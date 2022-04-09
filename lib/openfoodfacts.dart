@@ -20,6 +20,7 @@ import 'package:openfoodfacts/model/TaxonomyLabel.dart';
 import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
 import 'package:openfoodfacts/model/TaxonomyPackaging.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
+import 'package:openfoodfacts/utils/AddableProductFields.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/ImageHelper.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
@@ -124,6 +125,37 @@ class OpenFoodAPIClient {
     parameterMap.remove('nutriments');
     final Response response = await HttpHelper().doPostRequest(
       productUri,
+      parameterMap,
+      user,
+      queryType: queryType,
+    );
+    return Status.fromApiResponse(response.body);
+  }
+
+  /// Add the given product to the database.
+  /// Returns a Status object as result.
+  static Future<Status> addProductFields(
+    final User user,
+    final String barcode,
+    final Map<AddableProductField, String> map, {
+    QueryType? queryType,
+  }) async {
+    if (map.isEmpty) {
+      throw Exception('Empty map');
+    }
+
+    final Map<String, String> parameterMap = <String, String>{};
+    parameterMap.addAll(user.toData());
+    parameterMap['code'] = barcode;
+    for (final MapEntry<AddableProductField, String> entry in map.entries) {
+      parameterMap[entry.key.addableKey] = entry.value;
+    }
+
+    final Response response = await HttpHelper().doPostRequest(
+      UriHelper.getPostUri(
+        path: '/cgi/product_jqm2.pl',
+        queryType: queryType,
+      ),
       parameterMap,
       user,
       queryType: queryType,
