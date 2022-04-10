@@ -501,8 +501,11 @@ void main() {
       expect(product.nutriments, isNull);
 
       var serverData = product.toServerData();
-      expect(serverData[ProductField.NO_NUTRITION_DATA.key],
-          equals(JsonHelper.checkboxOnValue));
+      expect(
+          JsonHelper.checkboxFromJSON(
+            serverData[ProductField.NO_NUTRITION_DATA.key],
+          ),
+          isTrue);
       expect(serverData[ProductField.NUTRIMENTS.key], equals('{}'));
     });
 
@@ -517,9 +520,10 @@ void main() {
 
       var serverData = product.toServerData();
       expect(
-        serverData[ProductField.NO_NUTRITION_DATA.key],
-        equals(JsonHelper.checkboxOffValue),
-      );
+          JsonHelper.checkboxFromJSON(
+            serverData[ProductField.NO_NUTRITION_DATA.key],
+          ),
+          isFalse);
       expect(serverData[ProductField.NUTRIMENTS.key], isNotEmpty);
     });
   });

@@ -1864,7 +1864,7 @@ void main() {
     // This is barcode refers to a test product
     const String barcode = '111111555555';
 
-    uploadProduct({required bool? noNutritionData}) =>
+    Future<Status> uploadProduct({required bool noNutritionData}) =>
         OpenFoodAPIClient.saveProduct(
           TestConstants.TEST_USER,
           Product(
@@ -1882,6 +1882,7 @@ void main() {
         barcode,
         fields: [
           ProductField.NO_NUTRITION_DATA,
+          ProductField.NUTRIMENTS,
         ],
       );
 
@@ -1890,8 +1891,8 @@ void main() {
         user: TestConstants.TEST_USER,
       );
 
-      expect(result.product?.noNutritionData, isTrue);
-      expect(result.product?.nutriments, isNull);
+      expect(result.product!.noNutritionData, isTrue);
+      expect(result.product!.nutriments, isNull);
     });
 
     test('With nutriments', () async {
@@ -1911,8 +1912,8 @@ void main() {
         user: TestConstants.TEST_USER,
       );
 
-      expect(result.product?.noNutritionData, isFalse);
-      expect(result.product?.nutriments, isNotNull);
+      expect(result.product!.noNutritionData, isFalse);
+      expect(result.product!.nutriments, isNotNull);
     });
   });
 }
