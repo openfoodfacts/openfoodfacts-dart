@@ -499,14 +499,6 @@ void main() {
 
       expect(product.noNutritionData, isTrue);
       expect(product.nutriments, isNull);
-
-      var serverData = product.toServerData();
-      expect(
-          JsonHelper.checkboxFromJSON(
-            serverData[ProductField.NO_NUTRITION_DATA.key],
-          ),
-          isTrue);
-      expect(serverData[ProductField.NUTRIMENTS.key], equals('{}'));
     });
 
     test('Nutriments', () async {
@@ -517,14 +509,6 @@ void main() {
 
       expect(product.noNutritionData, isFalse);
       expect(product.nutriments, isNotNull);
-
-      var serverData = product.toServerData();
-      expect(
-          JsonHelper.checkboxFromJSON(
-            serverData[ProductField.NO_NUTRITION_DATA.key],
-          ),
-          isFalse);
-      expect(serverData[ProductField.NUTRIMENTS.key], isNotEmpty);
     });
   });
 }
