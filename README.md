@@ -8,7 +8,7 @@ Dart package for the Open Food Facts API. Easily access to more than 1.9 million
 Open Food Facts is powered by contributors from around the world and is constantly growing thanks to them.
 
 ## How to use ?
-You can find the full documentation here : [Documentation](https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md).
+You can find the full documentation here: [Documentation](https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md).
 You can find automated code documentation here:  [Documentation](https://openfoodfacts.github.io/openfoodfacts-dart/).
 
 ## General principles
@@ -95,6 +95,22 @@ Execute the following command from the root of the repository to run the tests:
 ```
 dart test
 ```
+
+## Applications using this SDK
+
+### Official application
+
+**Smoothie** is the official developed by Open Food Facts, which will soon be released on Android and iOS. The source code is also available on [GitHub](https://github.com/openfoodfacts/smooth-app).
+
+### Third party applications
+
+Feel free to open a PR to add your application in this list.
+
+- **Glutten Scan**. [Android](https://play.google.com/store/apps/details?id=com.healthyfood.gluten_free_app) / [iOS](https://apps.apple.com/ch/app/gluten-scanner/id1540660083)
+- **Halal & Healthy**. [Android](https://play.google.com/store/apps/details?id=com.TagIn.Tech.handh) / [iOS](https://apps.apple.com/ch/app/halal-healthy/id1603051382)
+- **Fitness Tracker**. [Android](https://play.google.com/store/apps/details?id=dk.cepk.fitness_tracker)
+
+
 
 ## Authors
 * Alexander Schacht - [Grumpf86](https://github.com/Grumpf86)
