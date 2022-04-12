@@ -1,4 +1,5 @@
 version: 2
+enable-beta-ecosystems: true
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -7,7 +8,7 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
-  - package-ecosystem: "dart"
+  - package-ecosystem: "pub"
     directory: "/"
     schedule:
       interval: "daily"
