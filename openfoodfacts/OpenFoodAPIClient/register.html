@@ -83,6 +83,12 @@ Returns <a href="../../model_Status/Status/status.html">Status.status</a> 201 = 
   bool newsletter = true,
   QueryType? queryType,
 }) async {
+  if (name.length &gt; USER_NAME_MAX_LENGTH) {
+    throw ArgumentError(
+      &#39;A username may not exceed $USER_NAME_MAX_LENGTH characters!&#39;,
+    );
+  }
+
   var registerUri = UriHelper.getUri(
     path: &#39;&#47;cgi&#47;user.pl&#39;,
     queryType: queryType,
@@ -217,6 +223,8 @@ Returns <a href="../../model_Status/Status/status.html">Status.status</a> 201 = 
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/setProductImageCrop.html">setProductImageCrop</a></li>
     <li><a href="../../openfoodfacts/OpenFoodAPIClient/unselectProductImage.html">unselectProductImage</a></li>
 
+    <li class="section-title"><a href="../../openfoodfacts/OpenFoodAPIClient-class.html#constants">Constants</a></li>
+    <li><a href="../../openfoodfacts/OpenFoodAPIClient/USER_NAME_MAX_LENGTH-constant.html">USER_NAME_MAX_LENGTH</a></li>
 </ol>
 
   </div><!--/.sidebar-offcanvas-->
