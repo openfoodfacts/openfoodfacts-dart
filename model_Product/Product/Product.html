@@ -81,7 +81,6 @@
 <li><span class="parameter" id="-param-ingredientsTags"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.16.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.16.2/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">ingredientsTags</span>, </span></li>
 <li><span class="parameter" id="-param-ingredientsTagsInLanguages"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.16.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../utils_LanguageHelper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.16.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.16.2/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span>?</span> <span class="parameter-name">ingredientsTagsInLanguages</span>, </span></li>
 <li><span class="parameter" id="-param-ingredientsAnalysisTags"><span class="type-annotation"><a href="../../model_IngredientsAnalysisTags/IngredientsAnalysisTags-class.html">IngredientsAnalysisTags</a>?</span> <span class="parameter-name">ingredientsAnalysisTags</span>, </span></li>
-<li><span class="parameter" id="-param-nutriments"><span class="type-annotation"><a href="../../model_Nutriments/Nutriments-class.html">Nutriments</a>?</span> <span class="parameter-name">nutriments</span>, </span></li>
 <li><span class="parameter" id="-param-additives"><span class="type-annotation"><a href="../../model_Additives/Additives-class.html">Additives</a>?</span> <span class="parameter-name">additives</span>, </span></li>
 <li><span class="parameter" id="-param-environmentImpactLevels"><span class="type-annotation"><a href="../../model_EnvironmentImpactLevels/EnvironmentImpactLevels-class.html">EnvironmentImpactLevels</a>?</span> <span class="parameter-name">environmentImpactLevels</span>, </span></li>
 <li><span class="parameter" id="-param-allergens"><span class="type-annotation"><a href="../../model_Allergens/Allergens-class.html">Allergens</a>?</span> <span class="parameter-name">allergens</span>, </span></li>
@@ -106,7 +105,9 @@
 <li><span class="parameter" id="-param-lastModified"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.16.2/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">lastModified</span>, </span></li>
 <li><span class="parameter" id="-param-ecoscoreGrade"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.16.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">ecoscoreGrade</span>, </span></li>
 <li><span class="parameter" id="-param-ecoscoreScore"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.16.2/dart-core/double-class.html">double</a>?</span> <span class="parameter-name">ecoscoreScore</span>, </span></li>
-<li><span class="parameter" id="-param-ecoscoreData"><span class="type-annotation"><a href="../../model_EcoscoreData/EcoscoreData-class.html">EcoscoreData</a>?</span> <span class="parameter-name">ecoscoreData</span>}</span></li>
+<li><span class="parameter" id="-param-ecoscoreData"><span class="type-annotation"><a href="../../model_EcoscoreData/EcoscoreData-class.html">EcoscoreData</a>?</span> <span class="parameter-name">ecoscoreData</span>, </span></li>
+<li><span class="parameter" id="-param-nutriments"><span class="type-annotation"><a href="../../model_Nutriments/Nutriments-class.html">Nutriments</a>?</span> <span class="parameter-name">nutriments</span>, </span></li>
+<li><span class="parameter" id="-param-noNutritionData"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.16.2/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">noNutritionData</span>}</span></li>
 </ol>)
     </section>
 
@@ -148,7 +149,6 @@
     this.ingredientsTags,
     this.ingredientsTagsInLanguages,
     this.ingredientsAnalysisTags,
-    this.nutriments,
     this.additives,
     this.environmentImpactLevels,
     this.allergens,
@@ -173,7 +173,11 @@
     this.lastModified,
     this.ecoscoreGrade,
     this.ecoscoreScore,
-    this.ecoscoreData});</code></pre>
+    this.ecoscoreData,
+    Nutriments? nutriments,
+    bool? noNutritionData})
+    : _nutriments = nutriments,
+      _noNutritionData = noNutritionData;</code></pre>
 </section>
 
 
@@ -248,6 +252,7 @@
     <li><a href="../../model_Product/Product/lang.html">lang</a></li>
     <li><a href="../../model_Product/Product/lastModified.html">lastModified</a></li>
     <li><a href="../../model_Product/Product/miscTags.html">miscTags</a></li>
+    <li><a href="../../model_Product/Product/noNutritionData.html">noNutritionData</a></li>
     <li><a href="../../model_Product/Product/nutrientLevels.html">nutrientLevels</a></li>
     <li><a href="../../model_Product/Product/nutrimentDataPer.html">nutrimentDataPer</a></li>
     <li><a href="../../model_Product/Product/nutrimentEnergyUnit.html">nutrimentEnergyUnit</a></li>

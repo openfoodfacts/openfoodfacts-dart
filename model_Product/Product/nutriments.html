@@ -49,24 +49,54 @@
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
 </h1></div>
 
-        <section class="multi-line-signature">
-          <a href="../../model_Nutriments/Nutriments-class.html">Nutriments</a>?
-          <span class="name ">nutriments</span>
-          <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.4.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;nutriments&#39;, includeIfNull: false, toJson: Nutriments.toJsonHelper), read / write</div>
-
-        </section>
-        
 
         
+<section id="getter">
+
+<section class="multi-line-signature">
+  <span class="returntype"><a href="../../model_Nutriments/Nutriments-class.html">Nutriments</a>?</span>
+  <span class="name ">nutriments</span>
+  <div class="features">@<a href="https://pub.dev/documentation/json_annotation/4.4.0/json_annotation/JsonKey-class.html">JsonKey</a>(name: &#39;nutriments&#39;, includeIfNull: false, toJson: Nutriments.toJsonHelper)</div>
+
+</section>
+
+
+
+
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@JsonKey(
     name: &#39;nutriments&#39;, includeIfNull: false, toJson: Nutriments.toJsonHelper)
-Nutriments? nutriments;
-
-</code></pre>
+Nutriments? get nutriments =&gt; _noNutritionData == true ? null : _nutriments;</code></pre>
 </section>
 
+</section>
+
+
+        
+<section id="setter">
+
+<section class="multi-line-signature">
+  <span class="returntype">void</span>
+  <span class="name ">nutriments=</span><span class="signature">(<wbr><span class="parameter" id="nutriments=-param-nutriments"><span class="type-annotation"><a href="../../model_Nutriments/Nutriments-class.html">Nutriments</a>?</span> <span class="parameter-name">nutriments</span></span>)</span>
+  
+
+</section>
+
+
+
+
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">set nutriments(Nutriments? nutriments) {
+  if (nutriments == null) {
+    _noNutritionData = true;
+  }
+  _nutriments = nutriments;
+}</code></pre>
+</section>
+
+</section>
 
   </div> <!-- /.main-content -->
 
@@ -139,6 +169,7 @@ Nutriments? nutriments;
     <li><a href="../../model_Product/Product/lang.html">lang</a></li>
     <li><a href="../../model_Product/Product/lastModified.html">lastModified</a></li>
     <li><a href="../../model_Product/Product/miscTags.html">miscTags</a></li>
+    <li><a href="../../model_Product/Product/noNutritionData.html">noNutritionData</a></li>
     <li><a href="../../model_Product/Product/nutrientLevels.html">nutrientLevels</a></li>
     <li><a href="../../model_Product/Product/nutrimentDataPer.html">nutrimentDataPer</a></li>
     <li><a href="../../model_Product/Product/nutrimentEnergyUnit.html">nutrimentEnergyUnit</a></li>
