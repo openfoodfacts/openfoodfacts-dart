@@ -95,127 +95,73 @@ class Product extends JsonObject {
   @JsonKey(name: 'code')
   String? barcode;
 
-  @JsonKey(
-    name: 'product_name',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'product_name', includeIfNull: false)
   String? productName;
   @JsonKey(
-    name: 'product_name_in_languages',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
+      name: 'product_name_in_languages',
+      fromJson: LanguageHelper.fromJsonStringMap,
+      toJson: LanguageHelper.toJsonStringMap,
+      includeIfNull: false)
   Map<OpenFoodFactsLanguage, String>? productNameInLanguages;
 
   ///Common name
   ///Example: Chocolate bar with milk and hazelnuts
-  @JsonKey(
-    name: 'generic_name',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'generic_name', includeIfNull: false)
   String? genericName;
 
-  @JsonKey(
-    name: 'brands',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'brands', includeIfNull: false)
   String? brands;
-  @JsonKey(
-    name: 'brands_tags',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'brands_tags', includeIfNull: false)
   List<String>? brandsTags;
 
-  @JsonKey(
-    name: 'countries',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'countries', includeIfNull: false)
   String? countries;
-  @JsonKey(
-    name: 'countries_tags',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'countries_tags', includeIfNull: false)
   List<String>? countriesTags;
   @JsonKey(
-    name: 'countries_tags_in_languages',
-    toJson: LanguageHelper.toJsonStringsListMap,
-    fromJson: LanguageHelper.fromJsonStringsListMap,
-    includeIfNull: false,
-  )
+      name: 'countries_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
   Map<OpenFoodFactsLanguage, List<String>>? countriesTagsInLanguages;
 
   @JsonKey(
-    name: 'lang',
-    toJson: LanguageHelper.toJson,
-    fromJson: LanguageHelper.fromJson,
-    includeIfNull: false,
-  )
+      name: 'lang',
+      toJson: LanguageHelper.toJson,
+      fromJson: LanguageHelper.fromJson,
+      includeIfNull: false)
   OpenFoodFactsLanguage? lang;
 
-  @JsonKey(
-    name: 'quantity',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'quantity', includeIfNull: false)
   String? quantity;
 
   // Images
-  @JsonKey(
-    name: 'image_small_url',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'image_small_url', includeIfNull: false)
   // TODO: deprecated from 2021-04-06 (#152); remove when old enough
   @Deprecated('Use imageFrontSmallUrl instead')
   String? imgSmallUrl;
 
-  @JsonKey(
-    name: 'image_front_url',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'image_front_url', includeIfNull: false)
   String? imageFrontUrl;
-  @JsonKey(
-    name: 'image_front_small_url',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'image_front_small_url', includeIfNull: false)
   String? imageFrontSmallUrl;
 
-  @JsonKey(
-    name: 'image_ingredients_url',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'image_ingredients_url', includeIfNull: false)
   String? imageIngredientsUrl;
-  @JsonKey(
-    name: 'image_ingredients_small_url',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'image_ingredients_small_url', includeIfNull: false)
   String? imageIngredientsSmallUrl;
 
-  @JsonKey(
-    name: 'image_nutrition_url',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'image_nutrition_url', includeIfNull: false)
   String? imageNutritionUrl;
-  @JsonKey(
-    name: 'image_nutrition_small_url',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'image_nutrition_small_url', includeIfNull: false)
   String? imageNutritionSmallUrl;
 
-  @JsonKey(
-    name: 'image_packaging_url',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'image_packaging_url', includeIfNull: false)
   String? imagePackagingUrl;
-  @JsonKey(
-    name: 'image_packaging_small_url',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'image_packaging_small_url', includeIfNull: false)
   String? imagePackagingSmallUrl;
 
-  @JsonKey(
-    name: 'serving_size',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'serving_size', includeIfNull: false)
   String? servingSize;
 
   @JsonKey(
@@ -234,52 +180,41 @@ class Product extends JsonObject {
 
   /// cause nesting is sooo cool ;)
   @JsonKey(
-    name: 'selected_images',
-    includeIfNull: false,
-    fromJson: JsonHelper.selectedImagesFromJson,
-    toJson: JsonHelper.selectedImagesToJson,
-  )
+      name: 'selected_images',
+      includeIfNull: false,
+      fromJson: JsonHelper.selectedImagesFromJson,
+      toJson: JsonHelper.selectedImagesToJson)
   List<ProductImage>? selectedImages;
 
   @JsonKey(
-    name: 'images',
-    includeIfNull: false,
-    fromJson: JsonHelper.imagesFromJson,
-    toJson: JsonHelper.imagesToJson,
-  )
+      name: 'images',
+      includeIfNull: false,
+      fromJson: JsonHelper.imagesFromJson,
+      toJson: JsonHelper.imagesToJson)
   List<ProductImage>? images;
 
   @JsonKey(
-    name: 'ingredients',
-    includeIfNull: false,
-    toJson: JsonHelper.ingredientsToJson,
-  )
+      name: 'ingredients',
+      includeIfNull: false,
+      toJson: JsonHelper.ingredientsToJson)
   List<Ingredient>? ingredients;
 
-  @JsonKey(
-    name: 'ingredients_text',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'ingredients_text', includeIfNull: false)
   String? ingredientsText;
   @JsonKey(
-    name: 'ingredients_text_in_languages',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
+      name: 'ingredients_text_in_languages',
+      fromJson: LanguageHelper.fromJsonStringMap,
+      toJson: LanguageHelper.toJsonStringMap,
+      includeIfNull: false)
   Map<OpenFoodFactsLanguage, String>? ingredientsTextInLanguages;
 
-  @JsonKey(
-    name: 'ingredients_tags',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'ingredients_tags', includeIfNull: false)
   List<String>? ingredientsTags;
   @JsonKey(
-    name: 'ingredients_tags_in_languages',
-    toJson: LanguageHelper.toJsonStringsListMap,
-    fromJson: LanguageHelper.fromJsonStringsListMap,
-    includeIfNull: false,
-  )
+      name: 'ingredients_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
   Map<OpenFoodFactsLanguage, List<String>>? ingredientsTagsInLanguages;
 
   /// Images Freshness in seconds
@@ -290,197 +225,135 @@ class Product extends JsonObject {
   Map<OpenFoodFactsLanguage, Map<ImageField, int>>? imagesFreshnessInLanguages;
 
   @JsonKey(
-    name: 'ingredients_analysis_tags',
-    includeIfNull: false,
-    fromJson: IngredientsAnalysisTags.fromJson,
-    toJson: IngredientsAnalysisTags.toJson,
-  )
+      name: 'ingredients_analysis_tags',
+      includeIfNull: false,
+      fromJson: IngredientsAnalysisTags.fromJson,
+      toJson: IngredientsAnalysisTags.toJson)
   IngredientsAnalysisTags? ingredientsAnalysisTags;
 
-  /// When "no nutrition data" is [true], nutriments are always null
+  /// When no nutrition data is true, nutriments are always null
   /// This logic is handled by the getters/setters of [noNutritionData] and
   /// [nutriments]
-  @JsonKey(
-    ignore: true,
-  )
+  @JsonKey(ignore: true)
   bool? _noNutritionData;
 
-  /// When nutriments are not null, "no nutrition data" can't be [true]
+  /// When nutriments are not null, no nutrition data can't be true
   /// This logic is handled by the getters/setters of [noNutritionData] and
   /// [nutriments]
-  @JsonKey(
-    ignore: true,
-  )
+  @JsonKey(ignore: true)
   Nutriments? _nutriments;
 
   @JsonKey(
-    name: 'additives_tags',
-    includeIfNull: false,
-    fromJson: Additives.additivesFromJson,
-    toJson: Additives.additivesToJson,
-  )
+      name: 'additives_tags',
+      includeIfNull: false,
+      fromJson: Additives.additivesFromJson,
+      toJson: Additives.additivesToJson)
   Additives? additives;
 
   @JsonKey(
-    name: 'environment_impact_level_tags',
-    includeIfNull: false,
-    fromJson: EnvironmentImpactLevels.fromJson,
-    toJson: EnvironmentImpactLevels.toJson,
-  )
+      name: 'environment_impact_level_tags',
+      includeIfNull: false,
+      fromJson: EnvironmentImpactLevels.fromJson,
+      toJson: EnvironmentImpactLevels.toJson)
   EnvironmentImpactLevels? environmentImpactLevels;
 
   @JsonKey(
-    name: 'allergens_tags',
-    includeIfNull: false,
-    fromJson: Allergens.allergensFromJson,
-    toJson: Allergens.allergensToJson,
-  )
+      name: 'allergens_tags',
+      includeIfNull: false,
+      fromJson: Allergens.allergensFromJson,
+      toJson: Allergens.allergensToJson)
   Allergens? allergens;
 
   @JsonKey(
-    name: 'nutrient_levels',
-    includeIfNull: false,
-    fromJson: NutrientLevels.fromJson,
-    toJson: NutrientLevels.toJson,
-  )
+      name: 'nutrient_levels',
+      includeIfNull: false,
+      fromJson: NutrientLevels.fromJson,
+      toJson: NutrientLevels.toJson)
   NutrientLevels? nutrientLevels;
 
-  @JsonKey(
-    name: 'nutriment_energy_unit',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'nutriment_energy_unit', includeIfNull: false)
   String? nutrimentEnergyUnit;
-  @JsonKey(
-    name: 'nutrition_data_per',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'nutrition_data_per', includeIfNull: false)
   String? nutrimentDataPer;
-  @JsonKey(
-    name: 'nutrition_grade_fr',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'nutrition_grade_fr', includeIfNull: false)
   String? nutriscore;
 
-  @JsonKey(
-    name: 'categories',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'categories', includeIfNull: false)
   String? categories;
-  @JsonKey(
-    name: 'categories_tags',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'categories_tags', includeIfNull: false)
   List<String>? categoriesTags;
   @JsonKey(
-    name: 'categories_tags_in_languages',
-    toJson: LanguageHelper.toJsonStringsListMap,
-    fromJson: LanguageHelper.fromJsonStringsListMap,
-    includeIfNull: false,
-  )
+      name: 'categories_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
   Map<OpenFoodFactsLanguage, List<String>>? categoriesTagsInLanguages;
 
-  @JsonKey(
-    name: 'labels',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'labels', includeIfNull: false)
   String? labels;
-  @JsonKey(
-    name: 'labels_tags',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'labels_tags', includeIfNull: false)
   List<String>? labelsTags;
   @JsonKey(
-    name: 'labels_tags_in_languages',
-    toJson: LanguageHelper.toJsonStringsListMap,
-    fromJson: LanguageHelper.fromJsonStringsListMap,
-    includeIfNull: false,
-  )
+      name: 'labels_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
   Map<OpenFoodFactsLanguage, List<String>>? labelsTagsInLanguages;
 
-  @JsonKey(
-    name: 'packaging',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'packaging', includeIfNull: false)
   String? packaging;
-  @JsonKey(
-    name: 'packaging_tags',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'packaging_tags', includeIfNull: false)
   List<String>? packagingTags;
   @JsonKey(
-    name: 'packaging_text_in_languages',
-    fromJson: LanguageHelper.fromJsonStringMap,
-    toJson: LanguageHelper.toJsonStringMap,
-    includeIfNull: false,
-  )
+      name: 'packaging_text_in_languages',
+      fromJson: LanguageHelper.fromJsonStringMap,
+      toJson: LanguageHelper.toJsonStringMap,
+      includeIfNull: false)
   Map<OpenFoodFactsLanguage, String>? packagingTextInLanguages;
 
-  @JsonKey(
-    name: 'misc',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'misc', includeIfNull: false)
   List<String>? miscTags;
-  @JsonKey(
-    name: 'states_tags',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'states_tags', includeIfNull: false)
   List<String>? statesTags;
-  @JsonKey(
-    name: 'traces_tags',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'traces_tags', includeIfNull: false)
   List<String>? tracesTags;
-  @JsonKey(
-    name: 'stores_tags',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'stores_tags', includeIfNull: false)
   List<String>? storesTags;
 
-  @JsonKey(
-    name: 'stores',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'stores', includeIfNull: false)
   String? stores;
 
   @JsonKey(
-    name: 'attribute_groups',
-    includeIfNull: false,
-    toJson: JsonHelper.attributeGroupsToJson,
-  )
+      name: 'attribute_groups',
+      includeIfNull: false,
+      toJson: JsonHelper.attributeGroupsToJson)
   List<AttributeGroup>? attributeGroups;
 
   @JsonKey(
-    name: 'last_modified_t',
-    includeIfNull: false,
-    fromJson: JsonHelper.timestampToDate,
-    toJson: JsonHelper.dateToTimestamp,
-  )
+      name: 'last_modified_t',
+      includeIfNull: false,
+      fromJson: JsonHelper.timestampToDate,
+      toJson: JsonHelper.dateToTimestamp)
   DateTime? lastModified;
 
-  @JsonKey(
-    name: 'ecoscore_grade',
-    includeIfNull: false,
-  )
+  @JsonKey(name: 'ecoscore_grade', includeIfNull: false)
   String? ecoscoreGrade;
   @JsonKey(
-    name: 'ecoscore_score',
-    includeIfNull: false,
-    fromJson: JsonObject.parseDouble,
-  )
+      name: 'ecoscore_score',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
   double? ecoscoreScore;
   @JsonKey(
-    name: 'ecoscore_data',
-    includeIfNull: false,
-    toJson: EcoscoreData.toJsonHelper,
-  )
+      name: 'ecoscore_data',
+      includeIfNull: false,
+      toJson: EcoscoreData.toJsonHelper)
   EcoscoreData? ecoscoreData;
 
   @JsonKey(
-    name: 'knowledge_panels',
-    includeIfNull: false,
-    fromJson: KnowledgePanels.fromJsonHelper,
-    toJson: KnowledgePanels.toJsonHelper,
-  )
+      name: 'knowledge_panels',
+      includeIfNull: false,
+      fromJson: KnowledgePanels.fromJsonHelper,
+      toJson: KnowledgePanels.toJsonHelper)
   KnowledgePanels? knowledgePanels;
 
   @JsonKey(
@@ -683,21 +556,12 @@ class Product extends JsonObject {
     return LanguageHelper.fromJson(key.substring(prefix.length));
   }
 
-  static List<String>? _jsonValueToList(
-    dynamic value,
-  ) {
-    return (value as List?)
-        ?.map((
-          e,
-        ) =>
-            e as String)
-        .toList();
+  static List<String>? _jsonValueToList(dynamic value) {
+    return (value as List?)?.map((e) => e as String).toList();
   }
 
   static Map<ImageField, int> _jsonValueToImagesFreshness(
-    Map value,
-    OpenFoodFactsLanguage language,
-  ) {
+      Map value, OpenFoodFactsLanguage language) {
     final Map<ImageField, int> result = {};
     for (final ImageField imageField in ImageField.values) {
       final int? timestamp = value['${imageField.value}_${language.code}'];
@@ -826,10 +690,7 @@ class Product extends JsonObject {
   }
 
   @JsonKey(
-    name: 'nutriments',
-    includeIfNull: false,
-    toJson: Nutriments.toJsonHelper,
-  )
+      name: 'nutriments', includeIfNull: false, toJson: Nutriments.toJsonHelper)
   Nutriments? get nutriments => _noNutritionData == true ? null : _nutriments;
 
   set nutriments(Nutriments? nutriments) {
