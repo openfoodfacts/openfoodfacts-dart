@@ -84,7 +84,7 @@ class JsonHelper {
           JsonObject.parseInt(fieldObject['angle']),
         );
         final String? coordinatesImageSize =
-            fieldObject['coordinates_image_size']?.toString();
+            fieldObject['coordinates_image_size'];
         final int? x1 = JsonObject.parseInt(fieldObject['x1']);
         final int? y1 = JsonObject.parseInt(fieldObject['y1']);
         final int? x2 = JsonObject.parseInt(fieldObject['x2']);
