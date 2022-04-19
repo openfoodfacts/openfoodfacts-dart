@@ -88,7 +88,7 @@
         JsonObject.parseInt(fieldObject[&#39;angle&#39;]),
       );
       final String? coordinatesImageSize =
-          fieldObject[&#39;coordinates_image_size&#39;];
+          fieldObject[&#39;coordinates_image_size&#39;]?.toString();
       final int? x1 = JsonObject.parseInt(fieldObject[&#39;x1&#39;]);
       final int? y1 = JsonObject.parseInt(fieldObject[&#39;y1&#39;]);
       final int? x2 = JsonObject.parseInt(fieldObject[&#39;x2&#39;]);
