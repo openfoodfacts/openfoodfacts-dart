@@ -136,11 +136,6 @@ class Product extends JsonObject {
   String? quantity;
 
   // Images
-  @JsonKey(name: 'image_small_url', includeIfNull: false)
-  // TODO: deprecated from 2021-04-06 (#152); remove when old enough
-  @Deprecated('Use imageFrontSmallUrl instead')
-  String? imgSmallUrl;
-
   @JsonKey(name: 'image_front_url', includeIfNull: false)
   String? imageFrontUrl;
   @JsonKey(name: 'image_front_small_url', includeIfNull: false)
@@ -374,7 +369,6 @@ class Product extends JsonObject {
       this.countriesTagsInLanguages,
       this.lang,
       this.quantity,
-      this.imgSmallUrl,
       this.imageFrontUrl,
       this.imageFrontSmallUrl,
       this.imageIngredientsUrl,
