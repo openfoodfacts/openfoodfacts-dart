@@ -40,7 +40,7 @@ void main() {
 
     test('search favorite products', () async {
       final parameters = <Parameter>[
-        const Page(page: 1),
+        const PageNumber(page: 1),
         const PageSize(size: 10),
         const SortBy(option: SortOption.POPULARITY)
       ];
@@ -66,7 +66,7 @@ void main() {
 
     test('search favorite products EN', () async {
       final parameters = <Parameter>[
-        const Page(page: 14),
+        const PageNumber(page: 14),
         const PageSize(size: 3),
         const SortBy(option: SortOption.EDIT)
       ];
@@ -92,7 +92,7 @@ void main() {
 
     test('type bug : ingredient percent int vs String ', () async {
       final parameters = <Parameter>[
-        const Page(page: 16),
+        const PageNumber(page: 16),
         const PageSize(size: 5),
         const SortBy(option: SortOption.POPULARITY)
       ];
@@ -118,7 +118,7 @@ void main() {
 
     test('search products by keywords', () async {
       final List<Parameter> parameters = <Parameter>[
-        const Page(page: 2),
+        const PageNumber(page: 2),
         const PageSize(size: 10),
         const SearchTerms(terms: ['Kiwi'])
       ];
@@ -176,7 +176,7 @@ void main() {
 
     test('search products with filter on tags', () async {
       final parameters = <Parameter>[
-        const Page(page: 5),
+        const PageNumber(page: 5),
         const PageSize(size: 10),
         const SortBy(option: SortOption.PRODUCT_NAME),
         TagFilter.fromType(
@@ -384,7 +384,7 @@ void main() {
       );
 
       final parameters = <Parameter>[
-        const Page(page: 1),
+        const PageNumber(page: 1),
         const SearchTerms(terms: ['Quoted Coca "Cola"']),
       ];
 
@@ -486,7 +486,7 @@ void main() {
         fields: [ProductField.ALL],
         parametersList: [
           PnnsGroup2Filter(pnnsGroup2: PnnsGroup2.POTATOES),
-          Page(page: 3),
+          PageNumber(page: 3),
         ],
       );
 
