@@ -116,7 +116,7 @@ void main() {
       expect(result.count, greaterThan(30000));
     });
 
-    test('search products by keywords', () async {
+    test('search products by keywords 1', () async {
       final List<Parameter> parameters = <Parameter>[
         const Page(page: 2),
         const PageSize(size: 10),
@@ -140,6 +140,32 @@ void main() {
       expect(result.products!.length, 10);
       expect(result.products![0].runtimeType, Product);
       expect(result.count, greaterThan(900));
+    });
+
+    // Additional test with image field for testing [coordinates_image_size] conversion
+    // c.f. https://github.com/openfoodfacts/openfoodfacts-dart/issues/440
+    test('search products by keywords 2', () async {
+      final List<Parameter> parameters = <Parameter>[
+        const Page(page: 1),
+        const PageSize(size: 10),
+        const SortBy(option: SortOption.POPULARITY),
+        SearchTerms(terms: ['vitamin']),
+      ];
+
+      final ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+        parametersList: parameters,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: <ProductField>[ProductField.IMAGES],
+      );
+
+      SearchResult result = await OpenFoodAPIClient.searchProducts(
+        null,
+        configuration,
+        queryType: QueryType.PROD,
+      );
+
+      expect(result.products, isNotEmpty);
     });
 
     test('search products filter additives', () async {
