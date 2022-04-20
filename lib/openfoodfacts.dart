@@ -624,7 +624,7 @@ class OpenFoodAPIClient {
     User? user,
     String? deviceId,
     bool update = true,
-    queryType = QueryType.PROD,
+    final QueryType? queryType,
   }) async {
     var insightUri = UriHelper.getRobotoffUri(
       path: 'api/v1/insights/annotate',
