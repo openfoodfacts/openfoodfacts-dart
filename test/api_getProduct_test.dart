@@ -715,6 +715,7 @@ void main() {
       assert(nutritionalQuality[2].id == 'low_fat');
       assert(nutritionalQuality[3].id == 'low_sugars');
       assert(nutritionalQuality[4].id == 'low_saturated_fat');
+      assert(nutritionalQuality.first.panelID == 'nutriscore');
 
       group = result.product!.attributeGroups!
           .singleWhere((element) => element.id == 'processing');
