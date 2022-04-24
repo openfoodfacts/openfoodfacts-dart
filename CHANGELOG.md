@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.15.0...v1.16.0) (2022-04-23)
+
+
+### Features
+
+* Expose to Attribute related Knowledge-panel panelID ([#456](https://github.com/openfoodfacts/openfoodfacts-dart/issues/456)) ([f49a94c](https://github.com/openfoodfacts/openfoodfacts-dart/commit/f49a94c3c495c13c30f0eddce4260915bae1380c))
+
 ## [1.15.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.14.0...v1.15.0) (2022-04-19)
 
 
