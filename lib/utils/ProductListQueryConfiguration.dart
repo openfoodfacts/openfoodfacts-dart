@@ -36,7 +36,7 @@ class ProductListQueryConfiguration extends AbstractQueryConfiguration {
       int? page, int? pageSize, SortOption? sortOption) {
     final result = <Parameter>[];
     if (page != null) {
-      result.add(Page(page: page));
+      result.add(PageNumber(page: page));
     }
     if (pageSize != null) {
       result.add(PageSize(size: pageSize));

@@ -74,6 +74,7 @@ export 'model/TaxonomyPackaging.dart';
 export 'model/User.dart';
 export 'model/parameter/OutputFormat.dart';
 export 'model/parameter/Page.dart';
+export 'model/parameter/PageNumber.dart';
 export 'model/parameter/PageSize.dart';
 export 'model/parameter/SearchSimple.dart';
 export 'model/parameter/SortBy.dart';
@@ -623,7 +624,7 @@ class OpenFoodAPIClient {
     User? user,
     String? deviceId,
     bool update = true,
-    queryType = QueryType.PROD,
+    final QueryType? queryType,
   }) async {
     var insightUri = UriHelper.getRobotoffUri(
       path: 'api/v1/insights/annotate',
@@ -769,6 +770,9 @@ class OpenFoodAPIClient {
     return response.statusCode == 200;
   }
 
+  /// A username may not exceed 20 characters
+  static const USER_NAME_MAX_LENGTH = 20;
+
   // TODO: deprecated from 2021-10-08 (#252); remove former name when old enough
   /// Creates a new user
   /// Returns [Status.status] 201 = complete; 400 = wrong inputs + [Status.error]; 500 = server error;
@@ -782,6 +786,12 @@ class OpenFoodAPIClient {
     bool newsletter = true,
     QueryType? queryType,
   }) async {
+    if (name.length > USER_NAME_MAX_LENGTH) {
+      throw ArgumentError(
+        'A username may not exceed $USER_NAME_MAX_LENGTH characters!',
+      );
+    }
+
     var registerUri = UriHelper.getUri(
       path: '/cgi/user.pl',
       queryType: queryType,

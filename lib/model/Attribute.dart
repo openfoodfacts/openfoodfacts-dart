@@ -13,6 +13,7 @@ class Attribute extends JsonObject {
     this.descriptionShort,
     this.match,
     this.status,
+    this.panelId,
   });
 
   factory Attribute.fromJson(dynamic json) => Attribute(
@@ -27,6 +28,7 @@ class Attribute extends JsonObject {
         descriptionShort: json[_JSON_TAG_DESCRIPTION_SHORT] as String?,
         match: JsonObject.parseDouble(json[_JSON_TAG_MATCH]),
         status: json[_JSON_TAG_STATUS] as String?,
+        panelId: json[_JSON_TAG_PANEL_ID] as String?,
       );
 
   @override
@@ -42,6 +44,7 @@ class Attribute extends JsonObject {
         _JSON_TAG_DESCRIPTION_SHORT: descriptionShort,
         _JSON_TAG_MATCH: match,
         _JSON_TAG_STATUS: status,
+        _JSON_TAG_PANEL_ID: panelId,
       });
 
   static const String _JSON_TAG_ID = 'id';
@@ -55,6 +58,7 @@ class Attribute extends JsonObject {
   static const String _JSON_TAG_DESCRIPTION_SHORT = 'description_short';
   static const String _JSON_TAG_MATCH = 'match';
   static const String _JSON_TAG_STATUS = 'status';
+  static const String _JSON_TAG_PANEL_ID = 'panel_id';
 
   static const String STATUS_UNKNOWN = 'unknown';
   static const String STATUS_KNOWN = 'known';
@@ -107,6 +111,7 @@ class Attribute extends JsonObject {
   final String? descriptionShort;
   final double? match;
   final String? status;
+  final String? panelId;
 
   @override
   String toString() => 'Attribute(${toJson()})';

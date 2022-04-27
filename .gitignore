@@ -24,6 +24,9 @@ ios/
 *.ipr
 .idea/
 
+# VSCode
+.vscode/
+
 # eclipse project file
 .settings/
 .classpath

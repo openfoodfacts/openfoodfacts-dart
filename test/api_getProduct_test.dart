@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:openfoodfacts/model/Attribute.dart';
 import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
+import 'package:openfoodfacts/model/Nutriments.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/personalized_search/available_attribute_groups.dart';
 import 'package:openfoodfacts/personalized_search/available_preference_importances.dart';
@@ -714,6 +715,7 @@ void main() {
       assert(nutritionalQuality[2].id == 'low_fat');
       assert(nutritionalQuality[3].id == 'low_sugars');
       assert(nutritionalQuality[4].id == 'low_saturated_fat');
+      assert(nutritionalQuality.first.panelId == 'nutriscore');
 
       group = result.product!.attributeGroups!
           .singleWhere((element) => element.id == 'processing');
@@ -1857,5 +1859,62 @@ void main() {
     expect(result.product?.packaging, 'de:In einer Plastikflasche');
     expect(result.product?.packagingTags, ['de:in-einer-plastikflasche']);
     expect(result.product?.quantity, '5.5 Liter');
+  });
+
+  group('no nutrition data', () {
+    // This is barcode refers to a test product
+    const String barcode = '111111555555';
+
+    Future<Status> uploadProduct({required bool noNutritionData}) =>
+        OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER,
+          Product(
+            barcode: barcode,
+            noNutritionData: noNutritionData,
+            nutriments: noNutritionData != true ? Nutriments(salt: 10.0) : null,
+          ),
+        );
+
+    test('Without nutriments', () async {
+      await uploadProduct(noNutritionData: true);
+
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        fields: [
+          ProductField.NO_NUTRITION_DATA,
+          ProductField.NUTRIMENTS,
+        ],
+      );
+
+      final ProductResult result = await OpenFoodAPIClient.getProduct(
+        configurations,
+        user: TestConstants.TEST_USER,
+      );
+
+      expect(result.product!.noNutritionData, isTrue);
+      expect(result.product!.nutriments, isNull);
+    });
+
+    test('With nutriments', () async {
+      await uploadProduct(noNutritionData: false);
+
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        fields: [
+          ProductField.NO_NUTRITION_DATA,
+          ProductField.NUTRIMENTS,
+        ],
+      );
+
+      final ProductResult result = await OpenFoodAPIClient.getProduct(
+        configurations,
+        user: TestConstants.TEST_USER,
+      );
+
+      expect(result.product!.noNutritionData, isFalse);
+      expect(result.product!.nutriments, isNotNull);
+    });
   });
 }

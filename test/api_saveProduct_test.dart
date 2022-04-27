@@ -6,6 +6,7 @@ import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:openfoodfacts/utils/UnitHelper.dart';
 import 'package:test/test.dart';
+
 import 'test_constants.dart';
 
 void main() {
@@ -487,4 +488,27 @@ void main() {
         // some tests can be slow here
         Duration(seconds: 90),
       ));
+
+  group('No nutrition data', () {
+    test('No nutrition data with nutriments', () async {
+      Product product = Product(
+          noNutritionData: true,
+          nutriments: Nutriments(
+            salt: 1.0,
+          ));
+
+      expect(product.noNutritionData, isTrue);
+      expect(product.nutriments, isNull);
+    });
+
+    test('Nutriments', () async {
+      Product product = Product(
+          nutriments: Nutriments(
+        salt: 1.0,
+      ));
+
+      expect(product.noNutritionData, isFalse);
+      expect(product.nutriments, isNotNull);
+    });
+  });
 }

@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/model/Attribute.dart';
 import 'package:openfoodfacts/model/AttributeGroup.dart';
+import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
 import 'package:openfoodfacts/utils/JsonHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
-import 'package:openfoodfacts/model/KnowledgePanels.dart';
 
 import '../interface/JsonObject.dart';
 import 'Additives.dart';
@@ -136,11 +136,6 @@ class Product extends JsonObject {
   String? quantity;
 
   // Images
-  @JsonKey(name: 'image_small_url', includeIfNull: false)
-  // TODO: deprecated from 2021-04-06 (#152); remove when old enough
-  @Deprecated('Use imageFrontSmallUrl instead')
-  String? imgSmallUrl;
-
   @JsonKey(name: 'image_front_url', includeIfNull: false)
   String? imageFrontUrl;
   @JsonKey(name: 'image_front_small_url', includeIfNull: false)
@@ -231,9 +226,17 @@ class Product extends JsonObject {
       toJson: IngredientsAnalysisTags.toJson)
   IngredientsAnalysisTags? ingredientsAnalysisTags;
 
-  @JsonKey(
-      name: 'nutriments', includeIfNull: false, toJson: Nutriments.toJsonHelper)
-  Nutriments? nutriments;
+  /// When no nutrition data is true, nutriments are always null
+  /// This logic is handled by the getters/setters of [noNutritionData] and
+  /// [nutriments]
+  @JsonKey(ignore: true)
+  bool? _noNutritionData;
+
+  /// When nutriments are not null, no nutrition data can't be true
+  /// This logic is handled by the getters/setters of [noNutritionData] and
+  /// [nutriments]
+  @JsonKey(ignore: true)
+  Nutriments? _nutriments;
 
   @JsonKey(
       name: 'additives_tags',
@@ -366,7 +369,6 @@ class Product extends JsonObject {
       this.countriesTagsInLanguages,
       this.lang,
       this.quantity,
-      this.imgSmallUrl,
       this.imageFrontUrl,
       this.imageFrontSmallUrl,
       this.imageIngredientsUrl,
@@ -386,7 +388,6 @@ class Product extends JsonObject {
       this.ingredientsTags,
       this.ingredientsTagsInLanguages,
       this.ingredientsAnalysisTags,
-      this.nutriments,
       this.additives,
       this.environmentImpactLevels,
       this.allergens,
@@ -411,7 +412,11 @@ class Product extends JsonObject {
       this.lastModified,
       this.ecoscoreGrade,
       this.ecoscoreScore,
-      this.ecoscoreData});
+      this.ecoscoreData,
+      Nutriments? nutriments,
+      bool? noNutritionData})
+      : _nutriments = nutriments,
+        _noNutritionData = noNutritionData;
 
   factory Product.fromJson(Map<String, dynamic> json) {
     final Product result = _$ProductFromJson(json);
@@ -654,5 +659,38 @@ class Product extends JsonObject {
 
 // TODO (Optional) Add Nutri-Score disclaimers cf. https://github.com/openfoodfacts/openfoodfacts-dart/issues/193
     return result;
+  }
+
+  @JsonKey(
+    name: 'no_nutrition_data',
+    toJson: JsonHelper.checkboxToJSON,
+    fromJson: JsonHelper.checkboxFromJSON,
+  )
+  bool? get noNutritionData {
+    if (_noNutritionData != null) {
+      return _noNutritionData!;
+    } else if (_nutriments != null) {
+      return false;
+    } else {
+      return null;
+    }
+  }
+
+  set noNutritionData(bool? noNutritionData) {
+    if (_noNutritionData == true) {
+      _nutriments = null;
+    }
+    _noNutritionData = noNutritionData;
+  }
+
+  @JsonKey(
+      name: 'nutriments', includeIfNull: false, toJson: Nutriments.toJsonHelper)
+  Nutriments? get nutriments => _noNutritionData == true ? null : _nutriments;
+
+  set nutriments(Nutriments? nutriments) {
+    if (nutriments == null) {
+      _noNutritionData = true;
+    }
+    _nutriments = nutriments;
   }
 }

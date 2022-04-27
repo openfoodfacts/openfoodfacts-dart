@@ -84,7 +84,7 @@ class JsonHelper {
           JsonObject.parseInt(fieldObject['angle']),
         );
         final String? coordinatesImageSize =
-            fieldObject['coordinates_image_size'];
+            fieldObject['coordinates_image_size']?.toString();
         final int? x1 = JsonObject.parseInt(fieldObject['x1']);
         final int? y1 = JsonObject.parseInt(fieldObject['y1']);
         final int? x2 = JsonObject.parseInt(fieldObject['x2']);
@@ -201,4 +201,23 @@ class JsonHelper {
   /// Returns a [DateTime] from a JSON-encoded String (e.g. '2021-10-29T11:00:56.177379')
   static DateTime? nullableStringTimestampToDate(dynamic json) =>
       json == null ? null : stringTimestampToDate(json);
+
+  static const String _checkboxOnValue = 'on';
+  static const String _checkboxOffValue = '';
+
+  static bool checkboxFromJSON(dynamic jsonValue) {
+    return jsonValue is String &&
+        jsonValue.trim().toLowerCase() == _checkboxOnValue;
+  }
+
+  static String? checkboxToJSON(dynamic value) {
+    if (value == null) {
+      return null;
+    } else if (value == true ||
+        (value is String && value.trim().toLowerCase() == _checkboxOnValue)) {
+      return _checkboxOnValue;
+    } else {
+      return _checkboxOffValue;
+    }
+  }
 }

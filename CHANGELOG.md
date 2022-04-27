@@ -1,5 +1,35 @@
 # Changelog
 
+## [1.16.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.15.0...v1.16.0) (2022-04-23)
+
+
+### Features
+
+* Expose to Attribute related Knowledge-panel panelID ([#456](https://github.com/openfoodfacts/openfoodfacts-dart/issues/456)) ([f49a94c](https://github.com/openfoodfacts/openfoodfacts-dart/commit/f49a94c3c495c13c30f0eddce4260915bae1380c))
+
+## [1.15.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.14.0...v1.15.0) (2022-04-19)
+
+
+### Features
+
+* Barcodes validation for EAN8 & EAN13 ([#444](https://github.com/openfoodfacts/openfoodfacts-dart/issues/444)) ([0d3ac02](https://github.com/openfoodfacts/openfoodfacts-dart/commit/0d3ac02a1c38a0f46f78ed4facd20a93ac70bf80))
+* README.md with a list of known apps using the SDK ([#435](https://github.com/openfoodfacts/openfoodfacts-dart/issues/435)) ([c25dece](https://github.com/openfoodfacts/openfoodfacts-dart/commit/c25dece238e2cfdb36cba54b998ac3da259297f3))
+* Support for Product - No nutrition data field ([#423](https://github.com/openfoodfacts/openfoodfacts-dart/issues/423)) ([c6ace40](https://github.com/openfoodfacts/openfoodfacts-dart/commit/c6ace40ebd216ce5029c41831ac8dde3dad38777))
+* Username max length ([#442](https://github.com/openfoodfacts/openfoodfacts-dart/issues/442)) ([14eaec0](https://github.com/openfoodfacts/openfoodfacts-dart/commit/14eaec0f5fa7799095cdb749a845f7f17b897e23))
+
+
+### Bug Fixes
+
+* [#241](https://github.com/openfoodfacts/openfoodfacts-dart/issues/241) Added "energy-kj" ([#418](https://github.com/openfoodfacts/openfoodfacts-dart/issues/418)) ([3f55bfa](https://github.com/openfoodfacts/openfoodfacts-dart/commit/3f55bfaf9a80274c2ba3845f4b3c1ea7d6c31dde))
+* [#349](https://github.com/openfoodfacts/openfoodfacts-dart/issues/349) - removed irrelevant "create event" classes and methods ([#424](https://github.com/openfoodfacts/openfoodfacts-dart/issues/424)) ([242c944](https://github.com/openfoodfacts/openfoodfacts-dart/commit/242c94443971fd00bfea8488b72edb139be6d7ce))
+* [#414](https://github.com/openfoodfacts/openfoodfacts-dart/issues/414) -  changed get request to post ([#415](https://github.com/openfoodfacts/openfoodfacts-dart/issues/415)) ([e478837](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e4788373a3c41d0b1e6278f53f14f750250f34a4))
+* [#447](https://github.com/openfoodfacts/openfoodfacts-dart/issues/447) - new class "PageNumber" replacing  ambiguous "Page" parameter ([#449](https://github.com/openfoodfacts/openfoodfacts-dart/issues/449)) ([584dbcc](https://github.com/openfoodfacts/openfoodfacts-dart/commit/584dbcc34d52d49c5652b3ddec7a163b0811466d))
+* actually upload an image on a random product ([#419](https://github.com/openfoodfacts/openfoodfacts-dart/issues/419)) ([bad6238](https://github.com/openfoodfacts/openfoodfacts-dart/commit/bad62386f39a991f6e269e3842dc8e089eaa0aec))
+* coordinates_image_size is no subtype of String ([#443](https://github.com/openfoodfacts/openfoodfacts-dart/issues/443)) ([9a66b95](https://github.com/openfoodfacts/openfoodfacts-dart/commit/9a66b95ed3ba3c98bdf4bd01ce035949a0cba9d5))
+* getProductRaw tests ([#428](https://github.com/openfoodfacts/openfoodfacts-dart/issues/428)) ([e92a169](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e92a169e10c8c01efa46c0cf36b3debdd20afb1b))
+* Removed deprecated Product field imgSmallUrl ([#448](https://github.com/openfoodfacts/openfoodfacts-dart/issues/448)) ([8bb9d97](https://github.com/openfoodfacts/openfoodfacts-dart/commit/8bb9d9765a9c28d70be32625a0ef2a10d74d9632))
+* send user credentials in POST requests, fixes [#420](https://github.com/openfoodfacts/openfoodfacts-dart/issues/420) ([#421](https://github.com/openfoodfacts/openfoodfacts-dart/issues/421)) ([0be7396](https://github.com/openfoodfacts/openfoodfacts-dart/commit/0be7396510a2b70cc2a15dae0429cfef030d807f))
+
 ## [1.14.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.13.0...v1.14.0) (2022-03-15)
 
 

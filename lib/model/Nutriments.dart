@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/utils/UnitHelper.dart';
+
 import '../interface/JsonObject.dart';
 
 part 'Nutriments.g.dart';

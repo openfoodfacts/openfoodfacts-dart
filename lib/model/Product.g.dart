@@ -24,7 +24,6 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           json['countries_tags_in_languages']),
       lang: LanguageHelper.fromJson(json['lang'] as String?),
       quantity: json['quantity'] as String?,
-      imgSmallUrl: json['image_small_url'] as String?,
       imageFrontUrl: json['image_front_url'] as String?,
       imageFrontSmallUrl: json['image_front_small_url'] as String?,
       imageIngredientsUrl: json['image_ingredients_url'] as String?,
@@ -52,9 +51,6 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           json['ingredients_tags_in_languages']),
       ingredientsAnalysisTags: IngredientsAnalysisTags.fromJson(
           json['ingredients_analysis_tags'] as List?),
-      nutriments: json['nutriments'] == null
-          ? null
-          : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
       additives: Additives.additivesFromJson(json['additives_tags'] as List?),
       environmentImpactLevels: EnvironmentImpactLevels.fromJson(
           json['environment_impact_level_tags'] as List?),
@@ -101,6 +97,10 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           ? null
           : EcoscoreData.fromJson(
               json['ecoscore_data'] as Map<String, dynamic>),
+      nutriments: json['nutriments'] == null
+          ? null
+          : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
+      noNutritionData: JsonHelper.checkboxFromJSON(json['no_nutrition_data']),
     )
       ..imagesFreshnessInLanguages =
           (json['imagesFreshnessInLanguages'] as Map<String, dynamic>?)?.map(
@@ -139,7 +139,6 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
       LanguageHelper.toJsonStringsListMap(instance.countriesTagsInLanguages));
   writeNotNull('lang', LanguageHelper.toJson(instance.lang));
   writeNotNull('quantity', instance.quantity);
-  writeNotNull('image_small_url', instance.imgSmallUrl);
   writeNotNull('image_front_url', instance.imageFrontUrl);
   writeNotNull('image_front_small_url', instance.imageFrontSmallUrl);
   writeNotNull('image_ingredients_url', instance.imageIngredientsUrl);
@@ -168,7 +167,6 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
           e.map((k, e) => MapEntry(_$ImageFieldEnumMap[k], e))));
   writeNotNull('ingredients_analysis_tags',
       IngredientsAnalysisTags.toJson(instance.ingredientsAnalysisTags));
-  writeNotNull('nutriments', Nutriments.toJsonHelper(instance.nutriments));
   writeNotNull('additives_tags', Additives.additivesToJson(instance.additives));
   writeNotNull('environment_impact_level_tags',
       EnvironmentImpactLevels.toJson(instance.environmentImpactLevels));
@@ -206,6 +204,9 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('knowledge_panels',
       KnowledgePanels.toJsonHelper(instance.knowledgePanels));
   writeNotNull('environment_infocard', instance.environmentInfoCard);
+  val['no_nutrition_data'] =
+      JsonHelper.checkboxToJSON(instance.noNutritionData);
+  writeNotNull('nutriments', Nutriments.toJsonHelper(instance.nutriments));
   return val;
 }
 
