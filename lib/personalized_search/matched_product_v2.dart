@@ -12,22 +12,22 @@ import 'package:openfoodfacts/personalized_search/product_preferences_manager.da
 
 enum MatchedProductStatusV2 {
   /// Very good match (very good score)
-  VERY_GOOD,
+  VERY_GOOD_MATCH,
 
   /// Good match (good score)
-  GOOD,
+  GOOD_MATCH,
 
   /// Poor match (poor score)
-  POOR,
+  POOR_MATCH,
 
   /// Unknown match (at least 50% unknown attributes or one mandatory unknown)
-  UNKNOWN,
+  UNKNOWN_MATCH,
 
   /// May not match (at least one mandatory attribute that may not match)
-  MAY,
+  MAY_NOT_MATCH,
 
   /// Does not match (at least one mandatory attribute that does not match)
-  NO,
+  DOES_NOT_MATCH,
 }
 
 class MatchedProductV2 {
@@ -41,7 +41,7 @@ class MatchedProductV2 {
     final List<AttributeGroup>? attributeGroups = product.attributeGroups;
     if (attributeGroups == null) {
       // the product does not have the attribute_groups field
-      _status = MatchedProductStatusV2.UNKNOWN;
+      _status = MatchedProductStatusV2.UNKNOWN_MATCH;
       _debug = "no attribute_groups";
       return;
     }
@@ -105,23 +105,23 @@ class MatchedProductV2 {
     if (doesNotMatch) {
       // Set score to 0 for products that do not match
       _score = 0;
-      _status = MatchedProductStatusV2.NO;
+      _status = MatchedProductStatusV2.DOES_NOT_MATCH;
     } else if (mayNotMatch) {
-      _status = MatchedProductStatusV2.MAY;
+      _status = MatchedProductStatusV2.MAY_NOT_MATCH;
     } else if (isUnknown) {
-      _status = MatchedProductStatusV2.UNKNOWN;
+      _status = MatchedProductStatusV2.UNKNOWN_MATCH;
     }
     // If too many attributes are unknown, set an unknown match
     else if (sumOfFactorsForUnknownAttributes >= sumOfFactors / 2) {
-      _status = MatchedProductStatusV2.UNKNOWN;
+      _status = MatchedProductStatusV2.UNKNOWN_MATCH;
     }
     // If the product matches, check how well it matches user preferences
     else if (score >= 75) {
-      _status = MatchedProductStatusV2.VERY_GOOD;
+      _status = MatchedProductStatusV2.VERY_GOOD_MATCH;
     } else if (score >= 50) {
-      _status = MatchedProductStatusV2.GOOD;
+      _status = MatchedProductStatusV2.GOOD_MATCH;
     } else {
-      _status = MatchedProductStatusV2.POOR;
+      _status = MatchedProductStatusV2.POOR_MATCH;
     }
   }
 
@@ -166,8 +166,8 @@ class MatchedProductV2 {
           return compare;
         }
         // Matching products second
-        compare = (b.status == MatchedProductStatusV2.NO ? 0 : 1) -
-            (a.status == MatchedProductStatusV2.NO ? 0 : 1);
+        compare = (b.status == MatchedProductStatusV2.DOES_NOT_MATCH ? 0 : 1) -
+            (a.status == MatchedProductStatusV2.DOES_NOT_MATCH ? 0 : 1);
         if (compare != 0) {
           return compare;
         }

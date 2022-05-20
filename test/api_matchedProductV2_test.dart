@@ -98,18 +98,20 @@ void main() {
         _BARCODE_POULET,
       ];
       final Map<String, _Score> expectedScores = <String, _Score>{
-        _BARCODE_KNACKI: _Score(100, MatchedProductStatusV2.VERY_GOOD),
-        _BARCODE_CORDONBLEU: _Score(100, MatchedProductStatusV2.VERY_GOOD),
-        _BARCODE_ORIENTALES: _Score(100, MatchedProductStatusV2.VERY_GOOD),
-        _BARCODE_HACK: _Score(100, MatchedProductStatusV2.VERY_GOOD),
-        _BARCODE_SCHNITZEL: _Score(100, MatchedProductStatusV2.VERY_GOOD),
-        _BARCODE_CHIPOLATA: _Score(50, MatchedProductStatusV2.MAY),
-        _BARCODE_FLEISCHWURST: _Score(0, MatchedProductStatusV2.UNKNOWN),
-        _BARCODE_POULET: _Score(0, MatchedProductStatusV2.UNKNOWN),
-        _BARCODE_SAUCISSON: _Score(0, MatchedProductStatusV2.NO),
-        _BARCODE_PIZZA: _Score(0, MatchedProductStatusV2.NO),
-        _BARCODE_ARDECHE: _Score(0, MatchedProductStatusV2.NO),
-        _BARCODE_CHORIZO: _Score(0, MatchedProductStatusV2.NO),
+        _BARCODE_KNACKI: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+        _BARCODE_CORDONBLEU:
+            _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+        _BARCODE_ORIENTALES:
+            _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+        _BARCODE_HACK: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+        _BARCODE_SCHNITZEL: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+        _BARCODE_CHIPOLATA: _Score(50, MatchedProductStatusV2.MAY_NOT_MATCH),
+        _BARCODE_FLEISCHWURST: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
+        _BARCODE_POULET: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
+        _BARCODE_SAUCISSON: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
+        _BARCODE_PIZZA: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
+        _BARCODE_ARDECHE: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
+        _BARCODE_CHORIZO: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
       };
       final List<String> expectedBarcodeOrder = <String>[
         _BARCODE_KNACKI,
