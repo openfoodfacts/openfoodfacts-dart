@@ -353,9 +353,9 @@ void main() {
         user: user,
         queryType: queryType,
       );
-      expect(result.product!.nutriments!.chloride, .015);
+      expect(result.product!.nutriments!.chloride, .0015);
       expect(result.product!.nutriments!.chlorideUnit, Unit.MILLI_G);
-      expect(result.product!.nutriments!.chlorideServing, .15);
+      expect(result.product!.nutriments!.chlorideServing, .015);
 
       result = await OpenFoodAPIClient.getProduct(
         ProductQueryConfiguration(
