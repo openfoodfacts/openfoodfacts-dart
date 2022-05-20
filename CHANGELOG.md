@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.17.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.16.0...v1.17.0) (2022-05-20)
+
+
+### Features
+
+* [#466](https://github.com/openfoodfacts/openfoodfacts-dart/issues/466) - matched product v2 ([#467](https://github.com/openfoodfacts/openfoodfacts-dart/issues/467)) ([4ec6ee4](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4ec6ee4dc0aeb1c2b96764fbbe518ddfb94cf491))
+
 ## [1.16.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.15.0...v1.16.0) (2022-04-23)
 
 
