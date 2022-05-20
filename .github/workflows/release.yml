@@ -30,7 +30,7 @@
 
         - name: Set version
           if: ${{ steps.release.outputs.release_created }}
-          run: pub global activate cider && cider version "${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}"
+          run: dart pub global activate cider && cider version "${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}"
 
         - name: Setup credentials
           if: ${{ steps.release.outputs.release_created }}
