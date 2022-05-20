@@ -146,7 +146,7 @@ void main() {
     // c.f. https://github.com/openfoodfacts/openfoodfacts-dart/issues/440
     test('search products by keywords 2', () async {
       final List<Parameter> parameters = <Parameter>[
-        const Page(page: 1),
+        const PageNumber(page: 1),
         const PageSize(size: 10),
         const SortBy(option: SortOption.POPULARITY),
         SearchTerms(terms: ['vitamin']),
