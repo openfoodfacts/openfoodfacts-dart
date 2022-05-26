@@ -167,7 +167,7 @@ class HttpHelper {
       'Accept': 'application/json',
       'UserAgent':
           OpenFoodAPIConfiguration.userAgent?.toValueString() ?? USER_AGENT,
-      'From': OpenFoodAPIConfiguration.getUser(user)?.toValueString() ?? FROM,
+      'From': OpenFoodAPIConfiguration.getUser(user)?.userId ?? FROM,
     });
 
     if (isTestModeActive) {
