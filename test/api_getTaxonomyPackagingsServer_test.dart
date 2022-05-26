@@ -16,8 +16,8 @@ void main() {
     OpenFoodFactsLanguage.FRENCH,
   ];
 
-  const String _knownRootTag = 'en:brick';
-  const String _unknownTag = 'en:some_nonexistent_packaging';
+  const String knownRootTag = 'en:brick';
+  const String unknownTag = 'en:some_nonexistent_packaging';
 
   void _checkKnownPackaging(final TaxonomyPackaging packaging) {
     expect(packaging.name, isNotNull);
@@ -40,8 +40,8 @@ void main() {
       expect(packagings, isNotNull);
       expect(packagings, isNotEmpty);
       expect(packagings!.length, greaterThan(100)); // was 122 on 2022-03-03
-      expect(packagings[_knownRootTag], isNotNull);
-      _checkKnownPackaging(packagings[_knownRootTag]!);
+      expect(packagings[knownRootTag], isNotNull);
+      _checkKnownPackaging(packagings[knownRootTag]!);
       for (final TaxonomyPackaging packaging in packagings.values) {
         // we expect no parents for the roots packaging
         expect(packaging.parents, isNull);
@@ -51,18 +51,18 @@ void main() {
     test('get a packaging', () async {
       final Map<String, TaxonomyPackaging>? packagings =
           await OpenFoodAPIClient.getTaxonomyPackagings(
-        TaxonomyPackagingQueryConfiguration(tags: <String>[_knownRootTag]),
+        TaxonomyPackagingQueryConfiguration(tags: <String>[knownRootTag]),
       );
       expect(packagings, isNotNull);
       expect(packagings!.length, equals(1));
-      expect(packagings[_knownRootTag], isNotNull);
-      _checkKnownPackaging(packagings[_knownRootTag]!);
+      expect(packagings[knownRootTag], isNotNull);
+      _checkKnownPackaging(packagings[knownRootTag]!);
     });
 
     test("get a packaging that doesn't exist", () async {
       final Map<String, TaxonomyPackaging>? packagings =
           await OpenFoodAPIClient.getTaxonomyPackagings(
-        TaxonomyPackagingQueryConfiguration(tags: <String>[_unknownTag]),
+        TaxonomyPackagingQueryConfiguration(tags: <String>[unknownTag]),
       );
       expect(packagings, isNull);
     });
@@ -71,13 +71,13 @@ void main() {
       final Map<String, TaxonomyPackaging>? packagings =
           await OpenFoodAPIClient.getTaxonomyPackagings(
         TaxonomyPackagingQueryConfiguration(
-          tags: <String>[_unknownTag, _knownRootTag],
+          tags: <String>[unknownTag, knownRootTag],
         ),
       );
       expect(packagings, isNotNull);
       expect(packagings!.length, equals(1));
-      expect(packagings[_knownRootTag], isNotNull);
-      _checkKnownPackaging(packagings[_knownRootTag]!);
+      expect(packagings[knownRootTag], isNotNull);
+      _checkKnownPackaging(packagings[knownRootTag]!);
     });
 
     /// Recursively gets all the tree.

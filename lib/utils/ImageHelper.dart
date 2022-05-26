@@ -34,29 +34,13 @@ class ImageHelper {
   }) =>
       barcode == null
           ? null
-          : getProductImageRootUrl(barcode, queryType: queryType) +
-              '/' +
-              image.field.value +
-              '_' +
-              image.language.code +
-              '.' +
-              image.rev.toString() +
-              '.' +
-              image.size.toNumber() +
-              '.jpg';
+          : '${getProductImageRootUrl(barcode, queryType: queryType)}/${image.field.value}_${image.language.code}.${image.rev}.${image.size.toNumber()}.jpg';
 
   /// Returns the product image filename
   ///
   /// E.g. "front_fr.4.100.jpg"
   static String getProductImageFilename(final ProductImage image) =>
-      image.field.value +
-      '_' +
-      image.language.code +
-      '.' +
-      image.rev.toString() +
-      '.' +
-      image.size.toNumber() +
-      '.jpg';
+      '${image.field.value}_${image.language.code}.${image.rev}.${image.size.toNumber()}.jpg';
 
   /// Returns the web folder of the product images (without trailing '/')
   ///
@@ -71,7 +55,7 @@ class ImageHelper {
       var p2 = barcode.substring(3, 6);
       var p3 = barcode.substring(6, 9);
       var p4 = barcode.length >= 10 ? barcode.substring(9) : '';
-      barcodePath = p1 + '/' + p2 + '/' + p3 + '/' + p4;
+      barcodePath = '$p1/$p2/$p3/$p4';
     } else {
       barcodePath = barcode;
     }

@@ -15,10 +15,10 @@ import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {
-  const int _HTTP_OK = 200;
+  const int HTTP_OK = 200;
 
-  const _BARCODE_UNKNOWN = '11111111111111111111111111';
-  const _BARCODE_DANISH_BUTTER_COOKIES = '5701184005007';
+  const BARCODE_UNKNOWN = '11111111111111111111111111';
+  const BARCODE_DANISH_BUTTER_COOKIES = '5701184005007';
 
   OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
 
@@ -196,7 +196,7 @@ void main() {
 
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',
         () async {
-      String barcode = _BARCODE_DANISH_BUTTER_COOKIES;
+      String barcode = BARCODE_DANISH_BUTTER_COOKIES;
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -525,7 +525,7 @@ void main() {
     });
 
     test('product not available', () async {
-      String barcode = _BARCODE_UNKNOWN;
+      String barcode = BARCODE_UNKNOWN;
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -894,7 +894,7 @@ void main() {
     test(
         'vegan, vegetarian and palm oil ingredients of Danish Butter Cookies & Chocolate Chip Cookies',
         () async {
-      String barcode = _BARCODE_DANISH_BUTTER_COOKIES;
+      String barcode = BARCODE_DANISH_BUTTER_COOKIES;
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -1467,7 +1467,7 @@ void main() {
     test('get ecoscore html description', () async {
       final ProductResult productResult = await OpenFoodAPIClient.getProduct(
         ProductQueryConfiguration(
-          _BARCODE_DANISH_BUTTER_COOKIES,
+          BARCODE_DANISH_BUTTER_COOKIES,
           language: OpenFoodFactsLanguage.FRENCH,
           fields: <ProductField>[ProductField.ENVIRONMENT_INFOCARD],
         ),
@@ -1486,7 +1486,7 @@ void main() {
       };
       final ProductResult productResult = await OpenFoodAPIClient.getProduct(
         ProductQueryConfiguration(
-          _BARCODE_DANISH_BUTTER_COOKIES,
+          BARCODE_DANISH_BUTTER_COOKIES,
           language: OpenFoodFactsLanguage.FRENCH,
           fields: <ProductField>[ProductField.KNOWLEDGE_PANELS],
         ),
@@ -1501,7 +1501,7 @@ void main() {
   });
 
   group('$OpenFoodAPIClient test ingredients', () {
-    const String barcode = _BARCODE_DANISH_BUTTER_COOKIES;
+    const String barcode = BARCODE_DANISH_BUTTER_COOKIES;
     // Ingredients for _BARCODE_DANISH_BUTTER_COOKIES
     const List<String> expectedIngredientLabels = <String>[
       'Buttergebäck',
@@ -1589,16 +1589,16 @@ void main() {
   test('get invalid barcodes', () async {
     final String url = InvalidBarcodes.getUrl();
     final http.Response response = await http.get(Uri.parse(url));
-    expect(response.statusCode, _HTTP_OK);
+    expect(response.statusCode, HTTP_OK);
     final String jsonString = response.body;
     InvalidBarcodes invalidBarcodes =
         InvalidBarcodes.loadFromJSONString(jsonString);
     assert(invalidBarcodes.isBlacklisted('15600703'));
-    assert(!invalidBarcodes.isBlacklisted(_BARCODE_DANISH_BUTTER_COOKIES));
+    assert(!invalidBarcodes.isBlacklisted(BARCODE_DANISH_BUTTER_COOKIES));
 
     invalidBarcodes = InvalidBarcodes.base();
     assert(invalidBarcodes.isBlacklisted('15600703'));
-    assert(!invalidBarcodes.isBlacklisted(_BARCODE_DANISH_BUTTER_COOKIES));
+    assert(!invalidBarcodes.isBlacklisted(BARCODE_DANISH_BUTTER_COOKIES));
   });
 
   test('get images freshness', () async {
@@ -1610,7 +1610,7 @@ void main() {
     ];
     final ProductResult productResult = await OpenFoodAPIClient.getProduct(
       ProductQueryConfiguration(
-        _BARCODE_DANISH_BUTTER_COOKIES,
+        BARCODE_DANISH_BUTTER_COOKIES,
         languages: languages,
         fields: [ProductField.IMAGES_FRESHNESS_IN_LANGUAGES],
       ),
@@ -1631,7 +1631,7 @@ void main() {
   });
 
   test('get product uri', () async {
-    const String barcode = _BARCODE_DANISH_BUTTER_COOKIES;
+    const String barcode = BARCODE_DANISH_BUTTER_COOKIES;
     expect(
       OpenFoodAPIClient.getProductUri(
         barcode,

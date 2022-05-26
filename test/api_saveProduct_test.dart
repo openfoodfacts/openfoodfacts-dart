@@ -100,8 +100,8 @@ void main() {
       // almost in parallel.
       // If we stay at the minute level we're relatively safe.
       final String frenchProductName =
-          "Flocons d'epeautre au blé complet " + _getMinuteTimestamp();
-      final String germanProductName = 'Dinkelflakes' + _getMinuteTimestamp();
+          "Flocons d'epeautre au blé complet ${_getMinuteTimestamp()}";
+      final String germanProductName = 'Dinkelflakes${_getMinuteTimestamp()}';
 
       // save french product name
       final Product frenchProduct = Product(

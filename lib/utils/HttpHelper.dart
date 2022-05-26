@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
-
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/UriReader.dart';
 import 'package:path/path.dart';
@@ -171,7 +170,7 @@ class HttpHelper {
     });
 
     if (isTestModeActive) {
-      var token = 'Basic ' + base64Encode(utf8.encode('off:off'));
+      var token = 'Basic ${base64Encode(utf8.encode('off:off'))}';
       headers.addAll({'authorization': token});
     }
     return headers;

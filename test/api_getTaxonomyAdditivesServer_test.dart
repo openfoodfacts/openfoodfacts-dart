@@ -17,8 +17,8 @@ void main() {
     OpenFoodFactsLanguage.FRENCH,
   ];
 
-  const String _knownTag = 'en:e436';
-  const String _unknownTag = 'en:some_nonexistent_additive';
+  const String knownTag = 'en:e436';
+  const String unknownTag = 'en:some_nonexistent_additive';
 
   group('OpenFoodAPIClient getTaxonomyAdditives', () {
     test('get root additives', () async {
@@ -34,12 +34,12 @@ void main() {
       final Map<String, TaxonomyAdditive>? additives =
           await OpenFoodAPIClient.getTaxonomyAdditives(
         TaxonomyAdditiveQueryConfiguration(
-          tags: <String>[_knownTag],
+          tags: <String>[knownTag],
         ),
       );
       expect(additives, isNotNull);
       expect(additives!.length, equals(1));
-      final TaxonomyAdditive additive = additives[_knownTag]!;
+      final TaxonomyAdditive additive = additives[knownTag]!;
       expect(additive.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
       expect(additive.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
       expect(additive.vegan![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
@@ -49,7 +49,7 @@ void main() {
       final Map<String, TaxonomyAdditive>? categories =
           await OpenFoodAPIClient.getTaxonomyAdditives(
         TaxonomyAdditiveQueryConfiguration(
-          tags: <String>[_unknownTag],
+          tags: <String>[unknownTag],
         ),
       );
       expect(categories, isNull);
@@ -59,12 +59,12 @@ void main() {
       final Map<String, TaxonomyAdditive>? additives =
           await OpenFoodAPIClient.getTaxonomyAdditives(
         TaxonomyAdditiveQueryConfiguration(
-          tags: <String>[_unknownTag, _knownTag],
+          tags: <String>[unknownTag, knownTag],
         ),
       );
       expect(additives, isNotNull);
       expect(additives!.length, equals(1));
-      final TaxonomyAdditive additive = additives[_knownTag]!;
+      final TaxonomyAdditive additive = additives[knownTag]!;
       expect(additive.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
       expect(additive.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
       expect(additive.vegan![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);

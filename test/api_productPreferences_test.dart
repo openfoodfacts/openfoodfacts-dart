@@ -17,7 +17,7 @@ import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {
-  const int _HTTP_OK = 200;
+  const int HTTP_OK = 200;
 
   const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
@@ -48,10 +48,10 @@ void main() {
           AvailableAttributeGroups.getUrl(languageCode);
       http.Response response;
       response = await http.get(Uri.parse(importanceUrl));
-      expect(response.statusCode, _HTTP_OK);
+      expect(response.statusCode, HTTP_OK);
       final String preferenceImportancesString = response.body;
       response = await http.get(Uri.parse(attributeGroupUrl));
-      expect(response.statusCode, _HTTP_OK);
+      expect(response.statusCode, HTTP_OK);
       final String attributeGroupsString = response.body;
       manager.availableProductPreferences =
           AvailableProductPreferences.loadFromJSONStrings(

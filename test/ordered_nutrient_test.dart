@@ -14,7 +14,7 @@ void main() {
   // Very long list, experimentally created from the 3 initial URLs.
   // Don't hesitate to edit this list if you have clear functional ideas
   // about which nutrients should actually be there.
-  const Set<String> _expectedNutrients = {
+  const Set<String> expectedNutrients = {
     'alcohol',
     'alpha-linolenic-acid',
     'arachidic-acid',
@@ -146,7 +146,7 @@ void main() {
     final OrderedNutrients orderedNutrients,
     final OpenFoodFactsCountry country,
   ) {
-    for (final String expectedNutrient in _expectedNutrients) {
+    for (final String expectedNutrient in expectedNutrients) {
       expect(
         _findOrderedNutrient(orderedNutrients.nutrients, expectedNutrient),
         isNotNull,
