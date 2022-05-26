@@ -1109,9 +1109,7 @@ class OpenFoodAPIClient {
     if (filename == null) {
       return null;
     }
-    return ImageHelper.getProductImageRootUrl(barcode, queryType: queryType) +
-        '/' +
-        filename;
+    return '${ImageHelper.getProductImageRootUrl(barcode, queryType: queryType)}/$filename';
   }
 
   /// Unselect a product image.

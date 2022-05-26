@@ -17,23 +17,24 @@ void main() {
     OpenFoodFactsLanguage.FRENCH,
   ];
 
-  const String _knownTag = 'en:gambia';
-  const String _expectedCountryCode2 = 'GM';
-  const String _expectedCountryCode3 = 'GMB';
-  const List<OpenFoodFactsLanguage> _expectedLanguages =
-      <OpenFoodFactsLanguage>[OpenFoodFactsLanguage.ENGLISH];
-  const String _expectedNameFrench = 'Gambie';
-  const String _expectedNameEnglish = 'Gambia';
-  const String _unknownTag = 'en:some_nonexistent_country';
+  const String knownTag = 'en:gambia';
+  const String expectedCountryCode2 = 'GM';
+  const String expectedCountryCode3 = 'GMB';
+  const List<OpenFoodFactsLanguage> expectedLanguages = <OpenFoodFactsLanguage>[
+    OpenFoodFactsLanguage.ENGLISH
+  ];
+  const String expectedNameFrench = 'Gambie';
+  const String expectedNameEnglish = 'Gambia';
+  const String unknownTag = 'en:some_nonexistent_country';
 
   group('OpenFoodAPIClient getTaxonomyCountries SERVER', () {
     void _checkKnown(final TaxonomyCountry country) {
       expect(
-          country.name![OpenFoodFactsLanguage.ENGLISH]!, _expectedNameEnglish);
-      expect(country.name![OpenFoodFactsLanguage.FRENCH]!, _expectedNameFrench);
-      expect(country.languages, _expectedLanguages);
-      expect(country.countryCode2, _expectedCountryCode2);
-      expect(country.countryCode3, _expectedCountryCode3);
+          country.name![OpenFoodFactsLanguage.ENGLISH]!, expectedNameEnglish);
+      expect(country.name![OpenFoodFactsLanguage.FRENCH]!, expectedNameFrench);
+      expect(country.languages, expectedLanguages);
+      expect(country.countryCode2, expectedCountryCode2);
+      expect(country.countryCode3, expectedCountryCode3);
     }
 
     test(
@@ -53,7 +54,7 @@ void main() {
         int countUnknownLanguages = 0;
         for (final String key in countries.keys) {
           final TaxonomyCountry country = countries[key]!;
-          if (key == _knownTag) {
+          if (key == knownTag) {
             _checkKnown(country);
           }
           expect(country.name, isNotNull);
@@ -91,18 +92,18 @@ void main() {
     test('get a country', () async {
       final Map<String, TaxonomyCountry>? countries =
           await OpenFoodAPIClient.getTaxonomyCountries(
-        TaxonomyCountryQueryConfiguration(tags: <String>[_knownTag]),
+        TaxonomyCountryQueryConfiguration(tags: <String>[knownTag]),
       );
       expect(countries, isNotNull);
       expect(countries!.length, equals(1));
-      final TaxonomyCountry country = countries[_knownTag]!;
+      final TaxonomyCountry country = countries[knownTag]!;
       _checkKnown(country);
     });
 
     test("get a country that doesn't exist", () async {
       final Map<String, TaxonomyCountry>? countries =
           await OpenFoodAPIClient.getTaxonomyCountries(
-        TaxonomyCountryQueryConfiguration(tags: <String>[_unknownTag]),
+        TaxonomyCountryQueryConfiguration(tags: <String>[unknownTag]),
       );
       expect(countries, isNull);
     });
@@ -111,12 +112,12 @@ void main() {
       final Map<String, TaxonomyCountry>? countries =
           await OpenFoodAPIClient.getTaxonomyCountries(
         TaxonomyCountryQueryConfiguration(
-          tags: <String>[_unknownTag, _knownTag],
+          tags: <String>[unknownTag, knownTag],
         ),
       );
       expect(countries, isNotNull);
       expect(countries!.length, equals(1));
-      final TaxonomyCountry country = countries[_knownTag]!;
+      final TaxonomyCountry country = countries[knownTag]!;
       _checkKnown(country);
     });
   });

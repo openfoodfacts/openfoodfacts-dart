@@ -24,7 +24,7 @@ class _Score {
 }
 
 void main() {
-  const int _HTTP_OK = 200;
+  const int HTTP_OK = 200;
 
   const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
@@ -32,18 +32,18 @@ void main() {
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
   OpenFoodAPIConfiguration.globalLanguages = <OpenFoodFactsLanguage>[language];
 
-  const String _BARCODE_KNACKI = '7613035937420';
-  const String _BARCODE_CORDONBLEU = '4000405005026';
-  const String _BARCODE_ORIENTALES = '4032277007211';
-  const String _BARCODE_HACK = '7613037672756';
-  const String _BARCODE_SCHNITZEL = '4061458069878';
-  const String _BARCODE_CHIPOLATA = '3770016162098';
-  const String _BARCODE_FLEISCHWURST = '4003171036379';
-  const String _BARCODE_POULET = '40897837';
-  const String _BARCODE_SAUCISSON = '20045456';
-  const String _BARCODE_PIZZA = '4260414150470';
-  const String _BARCODE_ARDECHE = '20712570';
-  const String _BARCODE_CHORIZO = '8480000591074';
+  const String BARCODE_KNACKI = '7613035937420';
+  const String BARCODE_CORDONBLEU = '4000405005026';
+  const String BARCODE_ORIENTALES = '4032277007211';
+  const String BARCODE_HACK = '7613037672756';
+  const String BARCODE_SCHNITZEL = '4061458069878';
+  const String BARCODE_CHIPOLATA = '3770016162098';
+  const String BARCODE_FLEISCHWURST = '4003171036379';
+  const String BARCODE_POULET = '40897837';
+  const String BARCODE_SAUCISSON = '20045456';
+  const String BARCODE_PIZZA = '4260414150470';
+  const String BARCODE_ARDECHE = '20712570';
+  const String BARCODE_CHORIZO = '8480000591074';
 
   /// Tests around Matched Product v2.
   group('$OpenFoodAPIClient matched product v2', () {
@@ -68,10 +68,10 @@ void main() {
           AvailableAttributeGroups.getUrl(languageCode);
       http.Response response;
       response = await http.get(Uri.parse(importanceUrl));
-      expect(response.statusCode, _HTTP_OK);
+      expect(response.statusCode, HTTP_OK);
       final String preferenceImportancesString = response.body;
       response = await http.get(Uri.parse(attributeGroupUrl));
-      expect(response.statusCode, _HTTP_OK);
+      expect(response.statusCode, HTTP_OK);
       final String attributeGroupsString = response.body;
       manager.availableProductPreferences =
           AvailableProductPreferences.loadFromJSONStrings(
@@ -84,48 +84,46 @@ void main() {
       );
 
       final List<String> inputBarcodes = <String>[
-        _BARCODE_CHIPOLATA,
-        _BARCODE_FLEISCHWURST,
-        _BARCODE_KNACKI,
-        _BARCODE_CORDONBLEU,
-        _BARCODE_SAUCISSON,
-        _BARCODE_PIZZA,
-        _BARCODE_ORIENTALES,
-        _BARCODE_ARDECHE,
-        _BARCODE_HACK,
-        _BARCODE_CHORIZO,
-        _BARCODE_SCHNITZEL,
-        _BARCODE_POULET,
+        BARCODE_CHIPOLATA,
+        BARCODE_FLEISCHWURST,
+        BARCODE_KNACKI,
+        BARCODE_CORDONBLEU,
+        BARCODE_SAUCISSON,
+        BARCODE_PIZZA,
+        BARCODE_ORIENTALES,
+        BARCODE_ARDECHE,
+        BARCODE_HACK,
+        BARCODE_CHORIZO,
+        BARCODE_SCHNITZEL,
+        BARCODE_POULET,
       ];
       final Map<String, _Score> expectedScores = <String, _Score>{
-        _BARCODE_KNACKI: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
-        _BARCODE_CORDONBLEU:
-            _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
-        _BARCODE_ORIENTALES:
-            _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
-        _BARCODE_HACK: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
-        _BARCODE_SCHNITZEL: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
-        _BARCODE_CHIPOLATA: _Score(50, MatchedProductStatusV2.MAY_NOT_MATCH),
-        _BARCODE_FLEISCHWURST: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
-        _BARCODE_POULET: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
-        _BARCODE_SAUCISSON: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
-        _BARCODE_PIZZA: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
-        _BARCODE_ARDECHE: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
-        _BARCODE_CHORIZO: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
+        BARCODE_KNACKI: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+        BARCODE_CORDONBLEU: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+        BARCODE_ORIENTALES: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+        BARCODE_HACK: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+        BARCODE_SCHNITZEL: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+        BARCODE_CHIPOLATA: _Score(50, MatchedProductStatusV2.MAY_NOT_MATCH),
+        BARCODE_FLEISCHWURST: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
+        BARCODE_POULET: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
+        BARCODE_SAUCISSON: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
+        BARCODE_PIZZA: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
+        BARCODE_ARDECHE: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
+        BARCODE_CHORIZO: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
       };
       final List<String> expectedBarcodeOrder = <String>[
-        _BARCODE_KNACKI,
-        _BARCODE_CORDONBLEU,
-        _BARCODE_ORIENTALES,
-        _BARCODE_HACK,
-        _BARCODE_SCHNITZEL,
-        _BARCODE_CHIPOLATA,
-        _BARCODE_FLEISCHWURST,
-        _BARCODE_POULET,
-        _BARCODE_SAUCISSON,
-        _BARCODE_PIZZA,
-        _BARCODE_ARDECHE,
-        _BARCODE_CHORIZO,
+        BARCODE_KNACKI,
+        BARCODE_CORDONBLEU,
+        BARCODE_ORIENTALES,
+        BARCODE_HACK,
+        BARCODE_SCHNITZEL,
+        BARCODE_CHIPOLATA,
+        BARCODE_FLEISCHWURST,
+        BARCODE_POULET,
+        BARCODE_SAUCISSON,
+        BARCODE_PIZZA,
+        BARCODE_ARDECHE,
+        BARCODE_CHORIZO,
       ];
 
       final SearchResult result = await OpenFoodAPIClient.getProductList(

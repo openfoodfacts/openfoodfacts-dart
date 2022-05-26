@@ -72,7 +72,7 @@ class JsonHelper {
     for (var field in ImageField.values) {
       for (OpenFoodFactsLanguage lang in OpenFoodFactsLanguage.values) {
         // get the field object e.g. front_en
-        final String fieldName = field.value + '_' + lang.code;
+        final String fieldName = '${field.value}_${lang.code}';
         if (json[fieldName] == null) continue;
 
         final fieldObject = json[fieldName] as Map<String, dynamic>?;
