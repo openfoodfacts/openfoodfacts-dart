@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.17.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.17.0...v1.17.1) (2022-05-26)
+
+
+### Bug Fixes
+
+* fix: Server not recognizing user additions ([#472](https://github.com/openfoodfacts/openfoodfacts-dart/issues/472)) ([52473d7](https://github.com/openfoodfacts/openfoodfacts-dart/commit/52473d7b673c5d5a7d1964fde0336ae270120c22))
+
 ## [1.17.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.16.0...v1.17.0) (2022-05-20)
 
 
