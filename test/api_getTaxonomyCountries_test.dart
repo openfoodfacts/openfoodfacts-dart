@@ -16,8 +16,9 @@ void main() {
   const String knownTag = 'en:gambia';
   const String expectedCountryCode2 = 'GM';
   const String expectedCountryCode3 = 'GMB';
-  const List<OpenFoodFactsLanguage> expectedLanguages =
-      <OpenFoodFactsLanguage>[OpenFoodFactsLanguage.ENGLISH];
+  const List<OpenFoodFactsLanguage> expectedLanguages = <OpenFoodFactsLanguage>[
+    OpenFoodFactsLanguage.ENGLISH
+  ];
   const String expectedNameFrench = 'Gambie';
   const String expectedNameEnglish = 'Gambia';
   const String unknownTag = 'en:some_nonexistent_country';
@@ -45,8 +46,7 @@ void main() {
 
   group('OpenFoodAPIClient getTaxonomyCountries', () {
     void _checkGambia(final TaxonomyCountry country, final String tag) {
-      expect(
-          country.name![OpenFoodFactsLanguage.ENGLISH], expectedNameEnglish);
+      expect(country.name![OpenFoodFactsLanguage.ENGLISH], expectedNameEnglish);
       expect(country.name![OpenFoodFactsLanguage.FRENCH], expectedNameFrench);
       expect(country.languages, expectedLanguages);
       expect(country.countryCode2, expectedCountryCode2);

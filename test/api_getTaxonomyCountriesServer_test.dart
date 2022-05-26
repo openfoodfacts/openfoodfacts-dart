@@ -20,8 +20,9 @@ void main() {
   const String knownTag = 'en:gambia';
   const String expectedCountryCode2 = 'GM';
   const String expectedCountryCode3 = 'GMB';
-  const List<OpenFoodFactsLanguage> expectedLanguages =
-      <OpenFoodFactsLanguage>[OpenFoodFactsLanguage.ENGLISH];
+  const List<OpenFoodFactsLanguage> expectedLanguages = <OpenFoodFactsLanguage>[
+    OpenFoodFactsLanguage.ENGLISH
+  ];
   const String expectedNameFrench = 'Gambie';
   const String expectedNameEnglish = 'Gambia';
   const String unknownTag = 'en:some_nonexistent_country';
