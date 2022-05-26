@@ -5,8 +5,7 @@
 
 ### Bug Fixes
 
-* Auto release ([#469](https://github.com/openfoodfacts/openfoodfacts-dart/issues/469)) ([cf91874](https://github.com/openfoodfacts/openfoodfacts-dart/commit/cf91874f3e1b5f352d70da9e293ac3311e03cebb))
-* Just send user id in from header ([#472](https://github.com/openfoodfacts/openfoodfacts-dart/issues/472)) ([52473d7](https://github.com/openfoodfacts/openfoodfacts-dart/commit/52473d7b673c5d5a7d1964fde0336ae270120c22))
+* fix: Server not recognizing user additions ([#472](https://github.com/openfoodfacts/openfoodfacts-dart/issues/472)) ([52473d7](https://github.com/openfoodfacts/openfoodfacts-dart/commit/52473d7b673c5d5a7d1964fde0336ae270120c22))
 
 ## [1.17.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.16.0...v1.17.0) (2022-05-20)
 
