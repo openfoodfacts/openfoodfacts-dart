@@ -110,6 +110,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
               (k, e) => MapEntry($enumDecode(_$ImageFieldEnumMap, k), e as int),
             )),
       )
+      ..comparedToCategory = json['compared_to_category'] as String?
       ..packagingTextInLanguages =
           LanguageHelper.fromJsonStringMap(json['packaging_text_in_languages'])
       ..knowledgePanels =
@@ -176,6 +177,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('nutriment_energy_unit', instance.nutrimentEnergyUnit);
   writeNotNull('nutrition_data_per', instance.nutrimentDataPer);
   writeNotNull('nutrition_grade_fr', instance.nutriscore);
+  writeNotNull('compared_to_category', instance.comparedToCategory);
   writeNotNull('categories', instance.categories);
   writeNotNull('categories_tags', instance.categoriesTags);
   writeNotNull('categories_tags_in_languages',
