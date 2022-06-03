@@ -1764,6 +1764,23 @@ void main() {
     expect(result.product?.quantity, '5.5 Liter');
   });
 
+  test('get new product fields', () async {
+    final ProductQueryConfiguration configuration = ProductQueryConfiguration(
+      BARCODE_DANISH_BUTTER_COOKIES,
+      fields: [
+        ProductField.COMPARED_TO_CATEGORY,
+      ],
+    );
+
+    final ProductResult result = await OpenFoodAPIClient.getProduct(
+      configuration,
+    );
+
+    expect(result.status, 1);
+    expect(result.product, isNotNull);
+    expect(result.product!.comparedToCategory, isNotNull);
+  });
+
   group('no nutrition data', () {
     // This is barcode refers to a test product
     const String barcode = '111111555555';

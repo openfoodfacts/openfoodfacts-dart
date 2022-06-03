@@ -273,6 +273,8 @@ class Product extends JsonObject {
   @JsonKey(name: 'nutrition_grade_fr', includeIfNull: false)
   String? nutriscore;
 
+  @JsonKey(name: 'compared_to_category', includeIfNull: false)
+  String? comparedToCategory;
   @JsonKey(name: 'categories', includeIfNull: false)
   String? categories;
   @JsonKey(name: 'categories_tags', includeIfNull: false)
