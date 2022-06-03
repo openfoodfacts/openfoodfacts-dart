@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.18.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.17.1...v1.18.0) (2022-06-03)
+
+
+### Features
+
+* new product field comparedToCategory ([#474](https://github.com/openfoodfacts/openfoodfacts-dart/issues/474)) ([1d59448](https://github.com/openfoodfacts/openfoodfacts-dart/commit/1d594488784692f8a330770e208b8dc75d08fab6))
+
 ### [1.17.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.17.0...v1.17.1) (2022-05-26)
 
 
