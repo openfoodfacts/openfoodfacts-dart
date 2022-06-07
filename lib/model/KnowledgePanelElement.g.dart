@@ -199,7 +199,7 @@ KnowledgePanelTableElement _$KnowledgePanelTableElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelTableElement(
       id: json['id'] as String,
-      title: json['title'] as String?,
+      title: json['title'] as String,
       columns: (json['columns'] as List<dynamic>)
           .map((e) =>
               KnowledgePanelTableColumn.fromJson(e as Map<String, dynamic>))

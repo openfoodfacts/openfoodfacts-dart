@@ -276,7 +276,7 @@ class KnowledgePanelLatLng extends JsonObject {
 class KnowledgePanelTableElement extends JsonObject {
   final String id;
 
-  final String? title;
+  final String title;
 
   @JsonKey(name: 'columns')
   final List<KnowledgePanelTableColumn> columns;
