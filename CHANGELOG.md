@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.18.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.18.0...v1.18.1) (2022-06-07)
+
+
+### Bug Fixes
+
+* [#477](https://github.com/openfoodfacts/openfoodfacts-dart/issues/477) - title is now optional in knowledge panel element ([#479](https://github.com/openfoodfacts/openfoodfacts-dart/issues/479)) ([4e7ffb2](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4e7ffb2f4fca53b64c43f2c55f32895b6f068d30))
+
 ## [1.18.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.17.1...v1.18.0) (2022-06-03)
 
 
