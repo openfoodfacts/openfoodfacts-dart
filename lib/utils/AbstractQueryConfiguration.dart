@@ -43,6 +43,9 @@ abstract class AbstractQueryConfiguration {
   /// The country for this query, if any.
   final OpenFoodFactsCountry? country;
 
+  /// What fields of sometimes really large products you need.
+  /// If you for example only pass [ProductField.BARCODE], you will only get the barcode
+  /// Use [ProductField.ALL] or leave empty to get all fields.
   List<ProductField>? fields;
 
   List<Parameter> additionalParameters;

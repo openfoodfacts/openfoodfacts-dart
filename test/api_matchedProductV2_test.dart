@@ -141,8 +141,8 @@ void main() {
       // sorting them again by the input order
       products.sort(
         (final Product a, final Product b) => inputBarcodes
-            .indexOf(a.barcode!)
-            .compareTo(inputBarcodes.indexOf(b.barcode!)),
+            .indexOf(a.barcode)
+            .compareTo(inputBarcodes.indexOf(b.barcode)),
       );
       expect(products.length, inputBarcodes.length);
 

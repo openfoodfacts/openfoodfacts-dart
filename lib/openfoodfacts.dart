@@ -345,7 +345,7 @@ class OpenFoodAPIClient {
       return result;
     }
     for (final Product product in searchResult.products!) {
-      result[product.barcode!] = ProductFreshness.fromProduct(product);
+      result[product.barcode] = ProductFreshness.fromProduct(product);
     }
     return result;
   }
@@ -664,9 +664,9 @@ class OpenFoodAPIClient {
       spellingCorrectionParam = {
         'text': ingredientName,
       };
-    } else if (product != null && product.barcode != null) {
+    } else if (product != null) {
       spellingCorrectionParam = {
-        'barcode': product.barcode!,
+        'barcode': product.barcode,
       };
     } else {
       return null;

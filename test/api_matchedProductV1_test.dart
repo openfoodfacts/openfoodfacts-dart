@@ -60,7 +60,11 @@ void main() {
           ProductQueryConfiguration(
         barcode,
         language: language,
-        fields: [ProductField.NAME, ProductField.ATTRIBUTE_GROUPS],
+        fields: [
+          ProductField.BARCODE,
+          ProductField.NAME,
+          ProductField.ATTRIBUTE_GROUPS,
+        ],
       );
       final ProductResult result = await OpenFoodAPIClient.getProduct(
         configurations,

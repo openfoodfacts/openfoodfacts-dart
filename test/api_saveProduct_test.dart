@@ -492,10 +492,12 @@ void main() {
   group('No nutrition data', () {
     test('No nutrition data with nutriments', () async {
       Product product = Product(
-          noNutritionData: true,
-          nutriments: Nutriments(
-            salt: 1.0,
-          ));
+        barcode: '',
+        noNutritionData: true,
+        nutriments: Nutriments(
+          salt: 1.0,
+        ),
+      );
 
       expect(product.noNutritionData, isTrue);
       expect(product.nutriments, isNull);
@@ -503,9 +505,11 @@ void main() {
 
     test('Nutriments', () async {
       Product product = Product(
-          nutriments: Nutriments(
-        salt: 1.0,
-      ));
+        barcode: '',
+        nutriments: Nutriments(
+          salt: 1.0,
+        ),
+      );
 
       expect(product.noNutritionData, isFalse);
       expect(product.nutriments, isNotNull);

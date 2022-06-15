@@ -176,5 +176,9 @@ List<String> convertFieldsToStrings(
     }
   }
 
+  if (!fieldsStrings.contains(ProductField.BARCODE.key)) {
+    fieldsStrings.add(ProductField.BARCODE.key);
+  }
+
   return fieldsStrings;
 }

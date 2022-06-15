@@ -1802,6 +1802,7 @@ void main() {
           ProductQueryConfiguration(
         barcode,
         fields: [
+          ProductField.BARCODE,
           ProductField.NO_NUTRITION_DATA,
           ProductField.NUTRIMENTS,
         ],

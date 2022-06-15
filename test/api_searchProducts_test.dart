@@ -450,7 +450,7 @@ void main() {
       expect(result.products, isNotNull);
       expect(result.products!.length, BARCODES.length - 1);
       for (final Product product in result.products!) {
-        final String barcode = product.barcode!;
+        final String barcode = product.barcode;
         expect(BARCODES.contains(barcode), barcode != UNKNOWN_BARCODE);
       }
     });
@@ -493,7 +493,7 @@ void main() {
         if (result.products == null || result.products!.isEmpty) {
           break;
         }
-        final newBarcodes = result.products!.map((e) => e.barcode!);
+        final newBarcodes = result.products!.map((e) => e.barcode);
         expect(newBarcodes.any(obtainedBarcodes.contains), isFalse);
         obtainedBarcodes.addAll(newBarcodes);
         page += 1;

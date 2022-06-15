@@ -77,7 +77,7 @@ Product _createProductWithEcoscoreData() {
       score: 1.2,
       status: EcoscoreStatus.KNOWN,
       adjustments: adjustments);
-  final product = Product(productName: 'TestProduct');
+  final product = Product(barcode: '', productName: 'TestProduct');
   product.ecoscoreData = ecoscoreData;
   return product;
 }

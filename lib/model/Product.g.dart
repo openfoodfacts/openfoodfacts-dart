@@ -7,7 +7,7 @@ part of 'Product.dart';
 // **************************************************************************
 
 Product _$ProductFromJson(Map<String, dynamic> json) => Product(
-      barcode: json['code'] as String?,
+      barcode: json['code'] as String,
       productName: json['product_name'] as String?,
       productNameInLanguages:
           LanguageHelper.fromJsonStringMap(json['product_name_in_languages']),
