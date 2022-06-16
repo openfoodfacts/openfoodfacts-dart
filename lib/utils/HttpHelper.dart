@@ -44,6 +44,14 @@ class HttpHelper {
       map ??= <String, String>{};
       map['app_uuid'] = OpenFoodAPIConfiguration.uuid!;
     }
+    if (OpenFoodAPIConfiguration.userAgent?.system != null) {
+      map ??= <String, String>{};
+      map['app_platform'] = OpenFoodAPIConfiguration.userAgent?.system ?? '';
+    }
+    if (OpenFoodAPIConfiguration.userAgent?.comment != null) {
+      map ??= <String, String>{};
+      map['comment'] = OpenFoodAPIConfiguration.userAgent?.comment ?? '';
+    }
     return map;
   }
 
