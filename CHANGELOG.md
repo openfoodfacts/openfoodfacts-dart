@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.18.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.18.1...v1.18.2) (2022-06-17)
+
+
+### Bug Fixes
+
+* [#482](https://github.com/openfoodfacts/openfoodfacts-dart/issues/482) add user agent parameters ([#484](https://github.com/openfoodfacts/openfoodfacts-dart/issues/484)) ([61d3ef7](https://github.com/openfoodfacts/openfoodfacts-dart/commit/61d3ef7f307c4ff7d2edb1e84926a9700274377a))
+
 ## [1.18.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.18.0...v1.18.1) (2022-06-07)
 
 
