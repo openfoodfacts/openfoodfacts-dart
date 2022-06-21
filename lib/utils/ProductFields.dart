@@ -68,6 +68,8 @@ enum ProductField {
   ECOSCORE_DATA,
   KNOWLEDGE_PANELS,
   ENVIRONMENT_INFOCARD,
+  EMB_CODES,
+  MANUFACTURING_PLACES,
   ALL
 }
 
@@ -139,6 +141,8 @@ extension ProductFieldExtension on ProductField {
     ProductField.ECOSCORE_DATA: 'ecoscore_data',
     ProductField.KNOWLEDGE_PANELS: 'knowledge_panels',
     ProductField.ENVIRONMENT_INFOCARD: 'environment_infocard',
+    ProductField.EMB_CODES: 'emb_codes',
+    ProductField.MANUFACTURING_PLACES: 'manufacturing_places',
   };
 
   /// Returns the key of the product field
