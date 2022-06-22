@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.19.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.18.2...v1.19.0) (2022-06-22)
+
+
+### Features
+
+* [#481](https://github.com/openfoodfacts/openfoodfacts-dart/issues/481) - added product fields embCodes and manufacturingPlaces ([#490](https://github.com/openfoodfacts/openfoodfacts-dart/issues/490)) ([a30e7a5](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a30e7a55074a26a1a28ecc07b59284c4138369fa))
+* saveProduct with language and country ([#491](https://github.com/openfoodfacts/openfoodfacts-dart/issues/491)) ([6e7d60e](https://github.com/openfoodfacts/openfoodfacts-dart/commit/6e7d60eb5eee08937ebbe91d18702f3e2a90e984))
+
 ## [1.18.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.18.1...v1.18.2) (2022-06-17)
 
 
