@@ -98,13 +98,21 @@ class OpenFoodAPIClient {
   /// Please read the language mechanics explanation if you intend to display
   /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
   static Future<Status> saveProduct(
-    User user,
-    Product product, {
-    QueryType? queryType,
+    final User user,
+    final Product product, {
+    final QueryType? queryType,
+    final OpenFoodFactsCountry? country,
+    final OpenFoodFactsLanguage? language,
   }) async {
-    var parameterMap = <String, String>{};
+    final Map<String, String> parameterMap = <String, String>{};
     parameterMap.addAll(user.toData());
     parameterMap.addAll(product.toServerData());
+    if (language != null) {
+      parameterMap['lc'] = language.code;
+    }
+    if (country != null) {
+      parameterMap['cc'] = country.iso2Code;
+    }
 
     var productUri = UriHelper.getPostUri(
       path: '/cgi/product_jqm2.pl',
