@@ -722,33 +722,32 @@ class OpenFoodAPIClient {
     return result;
   }
 
-  /// Give user suggestion based on autocompleted outputs
-  /// The expected output language can be set otherwise English will be used by default
-  /// The TagType is required
-  /// Returns a List of suggestions
+  /// Returns suggestions.
+  ///
+  /// The [limit] has a max value of 400 on the server side.
   static Future<List<dynamic>> getAutocompletedSuggestions(
-    TagType taxonomyType, {
-    String input = '',
-    OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
-    QueryType? queryType,
+    final TagType taxonomyType, {
+    final String input = '',
+    final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
+    final QueryType? queryType,
+    final int limit = 25,
   }) async {
-    var suggestionUri = UriHelper.getPostUri(
+    final Uri uri = UriHelper.getPostUri(
       path: '/cgi/suggest.pl',
       queryType: queryType,
     );
-    Map<String, String> queryParamater = <String, String>{
+    final Map<String, String> queryParameters = <String, String>{
       'tagtype': taxonomyType.key,
       'term': input,
       'lc': language.code,
+      'limit': limit.toString(),
     };
-
-    Response response = await HttpHelper().doPostRequest(
-      suggestionUri,
-      queryParamater,
+    final Response response = await HttpHelper().doPostRequest(
+      uri,
+      queryParameters,
       null,
       queryType: queryType,
     );
-
     return json.decode(response.body);
   }
 
