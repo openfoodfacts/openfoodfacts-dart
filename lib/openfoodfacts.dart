@@ -294,34 +294,32 @@ class OpenFoodAPIClient {
   /// Returns the list of products as SearchResult.
   /// Query the language specific host from OpenFoodFacts.
   static Future<SearchResult> searchProducts(
-    User? user,
-    ProductSearchQueryConfiguration configuration, {
-    QueryType? queryType,
+    final User? user,
+    final ProductSearchQueryConfiguration configuration, {
+    final QueryType? queryType,
+  }) async =>
+      getProducts(user, configuration, queryType: queryType);
+
+  /// Returns products searched according to a [configuration].
+  static Future<SearchResult> getProducts(
+    final User? user,
+    final AbstractQueryConfiguration configuration, {
+    final QueryType? queryType,
   }) async {
     final Response response = await configuration.getResponse(user, queryType);
-    final jsonStr = _replaceQuotes(response.body);
-    var result = SearchResult.fromJson(json.decode(jsonStr));
-
+    final String jsonStr = _replaceQuotes(response.body);
+    final SearchResult result = SearchResult.fromJson(json.decode(jsonStr));
     _removeImages(result, configuration);
-
     return result;
   }
 
   /// Search the OpenFoodFacts product database: multiple barcodes in input.
   static Future<SearchResult> getProductList(
-    User? user,
-    ProductListQueryConfiguration configuration, {
-    QueryType? queryType,
-  }) async {
-    final Response response = await configuration.getResponse(user, queryType);
-
-    final String jsonStr = _replaceQuotes(response.body);
-    final SearchResult result = SearchResult.fromJson(json.decode(jsonStr));
-
-    _removeImages(result, configuration);
-
-    return result;
-  }
+    final User? user,
+    final ProductListQueryConfiguration configuration, {
+    final QueryType? queryType,
+  }) async =>
+      getProducts(user, configuration, queryType: queryType);
 
   /// Returns the [ProductFreshness] for all the [barcodes].
   static Future<Map<String, ProductFreshness>> getProductFreshness({
@@ -365,15 +363,8 @@ class OpenFoodAPIClient {
     User user,
     PnnsGroupQueryConfiguration configuration, {
     QueryType? queryType,
-  }) async {
-    final Response response = await configuration.getResponse(user, queryType);
-    final jsonStr = _replaceQuotes(response.body);
-    var result = SearchResult.fromJson(json.decode(jsonStr));
-
-    _removeImages(result, configuration);
-
-    return result;
-  }
+  }) async =>
+      getProducts(user, configuration, queryType: queryType);
 
   static Future<Map<String, T>?>
       getTaxonomy<T extends JsonObject, F extends Enum>(
