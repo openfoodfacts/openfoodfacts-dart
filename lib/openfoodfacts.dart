@@ -8,6 +8,7 @@ import 'package:http/http.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
+import 'package:openfoodfacts/model/OcrPackagingResult.dart';
 import 'package:openfoodfacts/model/OrderedNutrients.dart';
 import 'package:openfoodfacts/model/ProductFreshness.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
@@ -699,26 +700,54 @@ class OpenFoodAPIClient {
     OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
     QueryType? queryType,
   }) async {
-    var ocrUri = UriHelper.getPostUri(
+    final Uri uri = UriHelper.getPostUri(
       path: '/cgi/ingredients.pl',
       queryType: queryType,
     );
-    Map<String, String> queryParameters = <String, String>{
+    final Map<String, String> queryParameters = <String, String>{
       'code': barcode,
       'process_image': '1',
       'id': 'ingredients_${language.code}',
-      'ocr_engine': OcrField.GOOGLE_CLOUD_VISION.key
+      'ocr_engine': ocrField.key
     };
-    Response response = await HttpHelper().doPostRequest(
-      ocrUri,
+    final Response response = await HttpHelper().doPostRequest(
+      uri,
       queryParameters,
       user,
       queryType: queryType,
     );
+    return OcrIngredientsResult.fromJson(
+      json.decode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>,
+    );
+  }
 
-    OcrIngredientsResult result = OcrIngredientsResult.fromJson(
-        json.decode(utf8.decode(response.bodyBytes)));
-    return result;
+  /// Extracts the text from packaging image with OCR.
+  static Future<OcrPackagingResult> extractPackaging(
+    final User user,
+    final String barcode,
+    final OpenFoodFactsLanguage language, {
+    final OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
+    final QueryType? queryType,
+  }) async {
+    final Uri uri = UriHelper.getPostUri(
+      path: '/cgi/packaging.pl',
+      queryType: queryType,
+    );
+    final Map<String, String> queryParameters = <String, String>{
+      'code': barcode,
+      'process_image': '1',
+      'id': 'packaging_${language.code}',
+      'ocr_engine': ocrField.key
+    };
+    final Response response = await HttpHelper().doPostRequest(
+      uri,
+      queryParameters,
+      user,
+      queryType: queryType,
+    );
+    return OcrPackagingResult.fromJson(
+      json.decode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>,
+    );
   }
 
   /// Returns suggestions.
