@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.20.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.19.0...v1.20.0) (2022-06-29)
+
+
+### Features
+
+* [#465](https://github.com/openfoodfacts/openfoodfacts-dart/issues/465) - new "limit" parameter for autocomplete suggestions ([#498](https://github.com/openfoodfacts/openfoodfacts-dart/issues/498)) ([4fd1f75](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4fd1f75bb75114aea3e26d67fb41c8e4ad0575da))
+* [#488](https://github.com/openfoodfacts/openfoodfacts-dart/issues/488) - new user-related queries ([#499](https://github.com/openfoodfacts/openfoodfacts-dart/issues/499)) ([1ee5184](https://github.com/openfoodfacts/openfoodfacts-dart/commit/1ee51841c9dc640809cb8be09c47ee0bd602276a))
+* [#494](https://github.com/openfoodfacts/openfoodfacts-dart/issues/494) - added OCR for packaging ([#497](https://github.com/openfoodfacts/openfoodfacts-dart/issues/497)) ([4c14abb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4c14abbbb2453e057453dcd60a761728b7addb1a))
+* [#495](https://github.com/openfoodfacts/openfoodfacts-dart/issues/495) - new "action" element for knowledge panels ([#496](https://github.com/openfoodfacts/openfoodfacts-dart/issues/496)) ([317bee4](https://github.com/openfoodfacts/openfoodfacts-dart/commit/317bee49cf2e5915f3347f942b8e5514cbd832ea))
+
 ## [1.19.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.18.2...v1.19.0) (2022-06-22)
 
 
