@@ -8,6 +8,7 @@ import 'package:http/http.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
+import 'package:openfoodfacts/model/OcrPackagingResult.dart';
 import 'package:openfoodfacts/model/OrderedNutrients.dart';
 import 'package:openfoodfacts/model/ProductFreshness.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
@@ -98,13 +99,21 @@ class OpenFoodAPIClient {
   /// Please read the language mechanics explanation if you intend to display
   /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
   static Future<Status> saveProduct(
-    User user,
-    Product product, {
-    QueryType? queryType,
+    final User user,
+    final Product product, {
+    final QueryType? queryType,
+    final OpenFoodFactsCountry? country,
+    final OpenFoodFactsLanguage? language,
   }) async {
-    var parameterMap = <String, String>{};
+    final Map<String, String> parameterMap = <String, String>{};
     parameterMap.addAll(user.toData());
     parameterMap.addAll(product.toServerData());
+    if (language != null) {
+      parameterMap['lc'] = language.code;
+    }
+    if (country != null) {
+      parameterMap['cc'] = country.iso2Code;
+    }
 
     var productUri = UriHelper.getPostUri(
       path: '/cgi/product_jqm2.pl',
@@ -286,34 +295,32 @@ class OpenFoodAPIClient {
   /// Returns the list of products as SearchResult.
   /// Query the language specific host from OpenFoodFacts.
   static Future<SearchResult> searchProducts(
-    User? user,
-    ProductSearchQueryConfiguration configuration, {
-    QueryType? queryType,
+    final User? user,
+    final ProductSearchQueryConfiguration configuration, {
+    final QueryType? queryType,
+  }) async =>
+      getProducts(user, configuration, queryType: queryType);
+
+  /// Returns products searched according to a [configuration].
+  static Future<SearchResult> getProducts(
+    final User? user,
+    final AbstractQueryConfiguration configuration, {
+    final QueryType? queryType,
   }) async {
     final Response response = await configuration.getResponse(user, queryType);
-    final jsonStr = _replaceQuotes(response.body);
-    var result = SearchResult.fromJson(json.decode(jsonStr));
-
+    final String jsonStr = _replaceQuotes(response.body);
+    final SearchResult result = SearchResult.fromJson(json.decode(jsonStr));
     _removeImages(result, configuration);
-
     return result;
   }
 
   /// Search the OpenFoodFacts product database: multiple barcodes in input.
   static Future<SearchResult> getProductList(
-    User? user,
-    ProductListQueryConfiguration configuration, {
-    QueryType? queryType,
-  }) async {
-    final Response response = await configuration.getResponse(user, queryType);
-
-    final String jsonStr = _replaceQuotes(response.body);
-    final SearchResult result = SearchResult.fromJson(json.decode(jsonStr));
-
-    _removeImages(result, configuration);
-
-    return result;
-  }
+    final User? user,
+    final ProductListQueryConfiguration configuration, {
+    final QueryType? queryType,
+  }) async =>
+      getProducts(user, configuration, queryType: queryType);
 
   /// Returns the [ProductFreshness] for all the [barcodes].
   static Future<Map<String, ProductFreshness>> getProductFreshness({
@@ -357,15 +364,8 @@ class OpenFoodAPIClient {
     User user,
     PnnsGroupQueryConfiguration configuration, {
     QueryType? queryType,
-  }) async {
-    final Response response = await configuration.getResponse(user, queryType);
-    final jsonStr = _replaceQuotes(response.body);
-    var result = SearchResult.fromJson(json.decode(jsonStr));
-
-    _removeImages(result, configuration);
-
-    return result;
-  }
+  }) async =>
+      getProducts(user, configuration, queryType: queryType);
 
   static Future<Map<String, T>?>
       getTaxonomy<T extends JsonObject, F extends Enum>(
@@ -700,55 +700,82 @@ class OpenFoodAPIClient {
     OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
     QueryType? queryType,
   }) async {
-    var ocrUri = UriHelper.getPostUri(
+    final Uri uri = UriHelper.getPostUri(
       path: '/cgi/ingredients.pl',
       queryType: queryType,
     );
-    Map<String, String> queryParameters = <String, String>{
+    final Map<String, String> queryParameters = <String, String>{
       'code': barcode,
       'process_image': '1',
       'id': 'ingredients_${language.code}',
-      'ocr_engine': OcrField.GOOGLE_CLOUD_VISION.key
+      'ocr_engine': ocrField.key
     };
-    Response response = await HttpHelper().doPostRequest(
-      ocrUri,
+    final Response response = await HttpHelper().doPostRequest(
+      uri,
       queryParameters,
       user,
       queryType: queryType,
     );
-
-    OcrIngredientsResult result = OcrIngredientsResult.fromJson(
-        json.decode(utf8.decode(response.bodyBytes)));
-    return result;
+    return OcrIngredientsResult.fromJson(
+      json.decode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>,
+    );
   }
 
-  /// Give user suggestion based on autocompleted outputs
-  /// The expected output language can be set otherwise English will be used by default
-  /// The TagType is required
-  /// Returns a List of suggestions
-  static Future<List<dynamic>> getAutocompletedSuggestions(
-    TagType taxonomyType, {
-    String input = '',
-    OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
-    QueryType? queryType,
+  /// Extracts the text from packaging image with OCR.
+  static Future<OcrPackagingResult> extractPackaging(
+    final User user,
+    final String barcode,
+    final OpenFoodFactsLanguage language, {
+    final OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
+    final QueryType? queryType,
   }) async {
-    var suggestionUri = UriHelper.getPostUri(
+    final Uri uri = UriHelper.getPostUri(
+      path: '/cgi/packaging.pl',
+      queryType: queryType,
+    );
+    final Map<String, String> queryParameters = <String, String>{
+      'code': barcode,
+      'process_image': '1',
+      'id': 'packaging_${language.code}',
+      'ocr_engine': ocrField.key
+    };
+    final Response response = await HttpHelper().doPostRequest(
+      uri,
+      queryParameters,
+      user,
+      queryType: queryType,
+    );
+    return OcrPackagingResult.fromJson(
+      json.decode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>,
+    );
+  }
+
+  /// Returns suggestions.
+  ///
+  /// The [limit] has a max value of 400 on the server side.
+  static Future<List<dynamic>> getAutocompletedSuggestions(
+    final TagType taxonomyType, {
+    final String input = '',
+    final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
+    final QueryType? queryType,
+    final int limit = 25,
+  }) async {
+    final Uri uri = UriHelper.getPostUri(
       path: '/cgi/suggest.pl',
       queryType: queryType,
     );
-    Map<String, String> queryParamater = <String, String>{
+    final Map<String, String> queryParameters = <String, String>{
       'tagtype': taxonomyType.key,
       'term': input,
       'lc': language.code,
+      'limit': limit.toString(),
     };
-
-    Response response = await HttpHelper().doPostRequest(
-      suggestionUri,
-      queryParamater,
+    final Response response = await HttpHelper().doPostRequest(
+      uri,
+      queryParameters,
       null,
       queryType: queryType,
     );
-
     return json.decode(response.body);
   }
 

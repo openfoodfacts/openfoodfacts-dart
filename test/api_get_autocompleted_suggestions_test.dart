@@ -153,6 +153,15 @@ void main() {
       );
 
       _listContains(result, 'compo');
+
+      result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+        TagType.CATEGORIES,
+        language: OpenFoodFactsLanguage.FRENCH,
+        input: 'soja',
+        limit: 1000,
+      );
+      expect(result.length, greaterThan(40)); // 20220626: 51 items
+      _listContains(result, 'soja');
     });
     test('Suggestions for ingredients', () async {
       List<dynamic> result =

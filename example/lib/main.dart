@@ -15,7 +15,7 @@ Future<Product?> getProduct() async {
   if (result.status == 1) {
     return result.product;
   } else {
-    throw Exception('product not found, please insert data for ' + barcode);
+    throw Exception('product not found, please insert data for $barcode');
   }
 }
 

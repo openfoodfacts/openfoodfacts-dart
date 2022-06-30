@@ -297,6 +297,36 @@ class KnowledgePanelTableElement extends JsonObject {
   Map<String, dynamic> toJson() => _$KnowledgePanelTableElementToJson(this);
 }
 
+/// "Contribute action" element of the Knowledge panel.
+@JsonSerializable()
+class KnowledgePanelActionElement extends JsonObject {
+  /// Possible needed contribute action: add categories.
+  static const String ACTION_ADD_CATEGORIES = 'add_categories';
+
+  /// Possible needed contribute action: add ingredients text.
+  static const String ACTION_ADD_INGREDIENTS_TEXT = 'add_ingredients_text';
+
+  /// Possible needed contribute action: add nutrition facts.
+  static const String ACTION_ADD_NUTRITION_FACTS = 'add_nutrition_facts';
+
+  /// HTML description.
+  final String html;
+
+  /// Needed contribute actions, e.g. [ACTION_ADD_CATEGORIES].
+  final List<String> actions;
+
+  const KnowledgePanelActionElement({
+    required this.html,
+    required this.actions,
+  });
+
+  factory KnowledgePanelActionElement.fromJson(Map<String, dynamic> json) =>
+      _$KnowledgePanelActionElementFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$KnowledgePanelActionElementToJson(this);
+}
+
 /// The type of Knowledge panel.
 enum KnowledgePanelElementType {
   /// The description summarizes the knowledge panel.
@@ -315,6 +345,9 @@ enum KnowledgePanelElementType {
   @JsonValue('table')
   TABLE,
 
+  @JsonValue('action')
+  ACTION,
+
   @JsonValue('map')
   MAP,
   UNKNOWN,
@@ -325,8 +358,9 @@ enum KnowledgePanelElementType {
 /// An Element could be one of [{@code ]KnowledgePanelElementType].
 @JsonSerializable()
 class KnowledgePanelElement extends JsonObject {
-  /// Type of the text description, Client may choose to display the description
-  /// depending upon the type.
+  /// Type of the text description.
+  ///
+  /// Client may choose to display the description depending upon the type.
   @JsonKey(
       name: 'element_type', unknownEnumValue: KnowledgePanelElementType.UNKNOWN)
   final KnowledgePanelElementType elementType;
@@ -354,6 +388,10 @@ class KnowledgePanelElement extends JsonObject {
   @JsonKey(name: 'map_element')
   final KnowledgePanelWorldMapElement? mapElement;
 
+  /// "Contribute action" element.
+  @JsonKey(name: 'action_element')
+  final KnowledgePanelActionElement? actionElement;
+
   const KnowledgePanelElement({
     required this.elementType,
     this.textElement,
@@ -362,6 +400,7 @@ class KnowledgePanelElement extends JsonObject {
     this.panelGroupElement,
     this.tableElement,
     this.mapElement,
+    this.actionElement,
   });
 
   factory KnowledgePanelElement.fromJson(Map<String, dynamic> json) =>
