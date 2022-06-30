@@ -219,6 +219,21 @@ Map<String, dynamic> _$KnowledgePanelTableElementToJson(
       'rows': instance.rows,
     };
 
+KnowledgePanelActionElement _$KnowledgePanelActionElementFromJson(
+        Map<String, dynamic> json) =>
+    KnowledgePanelActionElement(
+      html: json['html'] as String,
+      actions:
+          (json['actions'] as List<dynamic>).map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$KnowledgePanelActionElementToJson(
+        KnowledgePanelActionElement instance) =>
+    <String, dynamic>{
+      'html': instance.html,
+      'actions': instance.actions,
+    };
+
 KnowledgePanelElement _$KnowledgePanelElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelElement(
@@ -249,6 +264,10 @@ KnowledgePanelElement _$KnowledgePanelElementFromJson(
           ? null
           : KnowledgePanelWorldMapElement.fromJson(
               json['map_element'] as Map<String, dynamic>),
+      actionElement: json['action_element'] == null
+          ? null
+          : KnowledgePanelActionElement.fromJson(
+              json['action_element'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$KnowledgePanelElementToJson(
@@ -261,6 +280,7 @@ Map<String, dynamic> _$KnowledgePanelElementToJson(
       'panel_group_element': instance.panelGroupElement,
       'table_element': instance.tableElement,
       'map_element': instance.mapElement,
+      'action_element': instance.actionElement,
     };
 
 const _$KnowledgePanelElementTypeEnumMap = {
@@ -269,6 +289,7 @@ const _$KnowledgePanelElementTypeEnumMap = {
   KnowledgePanelElementType.PANEL: 'panel',
   KnowledgePanelElementType.PANEL_GROUP: 'panel_group',
   KnowledgePanelElementType.TABLE: 'table',
+  KnowledgePanelElementType.ACTION: 'action',
   KnowledgePanelElementType.MAP: 'map',
   KnowledgePanelElementType.UNKNOWN: 'UNKNOWN',
 };

@@ -359,6 +359,12 @@ class Product extends JsonObject {
   )
   String? environmentInfoCard;
 
+  @JsonKey(name: 'emb_codes', includeIfNull: false)
+  String? embCodes;
+
+  @JsonKey(name: 'manufacturing_places', includeIfNull: false)
+  String? manufacturingPlaces;
+
   Product(
       {this.barcode,
       this.productName,
