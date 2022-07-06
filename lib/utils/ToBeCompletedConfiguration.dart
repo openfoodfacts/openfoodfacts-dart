@@ -35,5 +35,12 @@ class ToBeCompletedQueryConfiguration extends AbstractQueryConfiguration {
   }
 
   @override
-  String getUriPath() => '/state/to-be-completed.json';
+  Map<String, String> getParametersMap() {
+    final Map<String, String> parameters = super.getParametersMap();
+    parameters['states_tags'] = 'en:to-be-completed';
+    return parameters;
+  }
+
+  @override
+  String getUriPath() => '/api/v2/search';
 }

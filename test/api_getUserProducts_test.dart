@@ -12,36 +12,91 @@ void main() {
 
   group('$OpenFoodAPIClient get user products', () {
     const String userId = 'monsieurtanuki';
+    const int pageSize = 100; // should be big enough to get everything on page1
 
-    test('all types', () async {
-      const int pageSize = 100;
-      final Map<UserProductSearchType, int> minimumResultLength =
-          <UserProductSearchType, int>{
-        UserProductSearchType.CONTRIBUTOR: 2, // as of 20220626
-        UserProductSearchType.INFORMER: 56, // as of 20220626
-        UserProductSearchType.PHOTOGRAPHER: 44, // as of 20220626
-        UserProductSearchType.TO_BE_COMPLETED: 0, // you never know...
-      };
-      for (final MapEntry<UserProductSearchType, int> entry
-          in minimumResultLength.entries) {
-        final UserProductSearchQueryConfiguration configuration =
-            UserProductSearchQueryConfiguration(
-          type: entry.key,
-          userId: userId,
-          pageSize: pageSize,
-        );
+    Future<int> _getCount(
+      final UserProductSearchType type,
+      final OpenFoodFactsLanguage language,
+    ) async {
+      final String reason = '($language, $type)';
+      final UserProductSearchQueryConfiguration configuration =
+          UserProductSearchQueryConfiguration(
+        type: type,
+        userId: userId,
+        pageSize: pageSize,
+        language: language,
+      );
 
-        final SearchResult result = await OpenFoodAPIClient.getProducts(
+      final SearchResult result;
+      try {
+        result = await OpenFoodAPIClient.getProducts(
           OpenFoodAPIConfiguration.globalUser,
           configuration,
           queryType: OpenFoodAPIConfiguration.globalQueryType,
         );
-
-        expect(result.page, 1); // default
-        expect(result.pageSize, pageSize);
-        expect(result.products, isNotNull);
-        expect(result.products!.length, greaterThanOrEqualTo(entry.value));
+      } catch (e) {
+        fail('Could not retrieve data for $reason: $e');
       }
-    });
+      expect(result.page, 1, reason: reason); // default
+      expect(result.pageSize, pageSize, reason: reason);
+      expect(result.products, isNotNull, reason: reason);
+      expect(result.products!.length, result.count, reason: reason);
+      return result.count!;
+    }
+
+    Future<int> _getCountForAllLanguages(
+      final UserProductSearchType type,
+    ) async {
+      final List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
+        OpenFoodFactsLanguage.ENGLISH,
+        OpenFoodFactsLanguage.FRENCH,
+        OpenFoodFactsLanguage.ITALIAN,
+      ];
+      int? result;
+      for (final OpenFoodFactsLanguage language in languages) {
+        final int count = await _getCount(type, language);
+        if (result != null) {
+          expect(count, result, reason: language.toString());
+        }
+        result = count;
+      }
+      return result!;
+    }
+
+    Future<void> _checkTypeCount(
+      final UserProductSearchType type,
+      final int minimalExpectedCount,
+    ) async {
+      final int count = await _getCountForAllLanguages(type);
+      expect(count, greaterThanOrEqualTo(minimalExpectedCount));
+    }
+
+    test(
+      'contributor',
+      () async => _checkTypeCount(
+          UserProductSearchType.CONTRIBUTOR, 2) // as of 20220706
+      ,
+    );
+
+    test(
+      'informer',
+      () async =>
+          _checkTypeCount(UserProductSearchType.INFORMER, 56) // as of 20220706
+      ,
+    );
+
+    test(
+      'photographer',
+      () async => _checkTypeCount(
+          UserProductSearchType.PHOTOGRAPHER, 44) // as of 20220706
+      ,
+    );
+
+    test(
+      'to be completed',
+      () async => _checkTypeCount(
+          UserProductSearchType.TO_BE_COMPLETED, 0) // you never know...
+      ,
+    );
   });
 }
