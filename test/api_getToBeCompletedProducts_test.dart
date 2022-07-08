@@ -22,6 +22,10 @@ void main() {
           ToBeCompletedQueryConfiguration(
         country: country,
         language: language,
+        fields: [
+          ProductField.BARCODE,
+          ProductField.STATES_TAGS,
+        ],
       );
 
       final SearchResult result;
@@ -36,6 +40,10 @@ void main() {
       }
       expect(result.page, 1, reason: reason); // default
       expect(result.products, isNotNull, reason: reason);
+      for (final Product product in result.products!) {
+        expect(product.statesTags, isNotNull);
+        expect(product.statesTags!, contains('en:to-be-completed'));
+      }
       return result.count!;
     }
 
