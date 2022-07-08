@@ -41,6 +41,21 @@ class UserProductSearchQueryConfiguration extends AbstractQueryConfiguration {
 
   @override
   String getUriPath() => type.getPath(userId);
+
+  @override
+  Map<String, String> getParametersMap() {
+    final Map<String, String> parameters = super.getParametersMap();
+    String? tmp;
+    tmp = type.getUserTag();
+    if (tmp != null) {
+      parameters[tmp] = userId;
+    }
+    tmp = type.getStateTag();
+    if (tmp != null) {
+      parameters['states_tags'] = tmp;
+    }
+    return parameters;
+  }
 }
 
 /// Types of user-related searches.
@@ -63,13 +78,35 @@ extension UserProductSearchTypeExtension on UserProductSearchType {
   String getPath(final String userId) {
     switch (this) {
       case UserProductSearchType.CONTRIBUTOR:
-        return '/contributor/$userId.json';
+        return '/contributor/$userId.json'; // TODO(monsieurtanuki): use '/api/v2/search' instead
       case UserProductSearchType.INFORMER:
-        return '/informer/$userId.json';
       case UserProductSearchType.PHOTOGRAPHER:
-        return '/photographer/$userId.json';
       case UserProductSearchType.TO_BE_COMPLETED:
-        return '/informer/$userId/state/to-be-completed.json';
+        return '/api/v2/search';
+    }
+  }
+
+  String? getUserTag() {
+    switch (this) {
+      case UserProductSearchType.CONTRIBUTOR:
+        return null;
+      case UserProductSearchType.PHOTOGRAPHER:
+        return 'photographers_tags';
+      case UserProductSearchType.INFORMER:
+        return 'informers_tags';
+      case UserProductSearchType.TO_BE_COMPLETED:
+        return 'informers_tags';
+    }
+  }
+
+  String? getStateTag() {
+    switch (this) {
+      case UserProductSearchType.CONTRIBUTOR:
+      case UserProductSearchType.PHOTOGRAPHER:
+      case UserProductSearchType.INFORMER:
+        return null;
+      case UserProductSearchType.TO_BE_COMPLETED:
+        return 'en:to-be-completed';
     }
   }
 }

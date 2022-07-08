@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.21.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.20.0...v1.21.0) (2022-07-06)
+
+
+### Features
+
+* [#503](https://github.com/openfoodfacts/openfoodfacts-dart/issues/503) - added the "all to-be-completed products" configuration ([#504](https://github.com/openfoodfacts/openfoodfacts-dart/issues/504)) ([b7c16ed](https://github.com/openfoodfacts/openfoodfacts-dart/commit/b7c16ed6e7c8167552bc6753bdce3882c3e53507))
+
+
+### Bug Fixes
+
+* toBeCompleted - fixed uri and parameters for to be completed and user queries ([#506](https://github.com/openfoodfacts/openfoodfacts-dart/issues/506)) ([67e2137](https://github.com/openfoodfacts/openfoodfacts-dart/commit/67e2137a934f3cdf65046ebdaa6ae5ca98791827))
+
 ## [1.20.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.19.0...v1.20.0) (2022-06-29)
 
 
