@@ -117,7 +117,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           KnowledgePanels.fromJsonHelper(json['knowledge_panels'] as Map?)
       ..environmentInfoCard = json['environment_infocard'] as String?
       ..embCodes = json['emb_codes'] as String?
-      ..manufacturingPlaces = json['manufacturing_places'] as String?;
+      ..manufacturingPlaces = json['manufacturing_places'] as String?
+      ..origins = json['origins'] as String?;
 
 Map<String, dynamic> _$ProductToJson(Product instance) {
   final val = <String, dynamic>{
@@ -210,6 +211,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('environment_infocard', instance.environmentInfoCard);
   writeNotNull('emb_codes', instance.embCodes);
   writeNotNull('manufacturing_places', instance.manufacturingPlaces);
+  writeNotNull('origins', instance.origins);
   val['no_nutrition_data'] =
       JsonHelper.checkboxToJSON(instance.noNutritionData);
   writeNotNull('nutriments', Nutriments.toJsonHelper(instance.nutriments));
