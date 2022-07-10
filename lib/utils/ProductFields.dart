@@ -70,6 +70,7 @@ enum ProductField {
   ENVIRONMENT_INFOCARD,
   EMB_CODES,
   MANUFACTURING_PLACES,
+  ORIGINS,
   ALL
 }
 
@@ -143,6 +144,7 @@ extension ProductFieldExtension on ProductField {
     ProductField.ENVIRONMENT_INFOCARD: 'environment_infocard',
     ProductField.EMB_CODES: 'emb_codes',
     ProductField.MANUFACTURING_PLACES: 'manufacturing_places',
+    ProductField.ORIGINS: 'origins',
   };
 
   /// Returns the key of the product field

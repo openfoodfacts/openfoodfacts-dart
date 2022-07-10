@@ -365,6 +365,9 @@ class Product extends JsonObject {
   @JsonKey(name: 'manufacturing_places', includeIfNull: false)
   String? manufacturingPlaces;
 
+  @JsonKey(name: 'origins', includeIfNull: false)
+  String? origins;
+
   Product(
       {this.barcode,
       this.productName,
