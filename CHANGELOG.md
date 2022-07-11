@@ -1,5 +1,82 @@
 # Changelog
 
+## [1.22.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.21.0...v1.22.0) (2022-07-10)
+
+
+### Features
+
+* added "origins" field to product ([#509](https://github.com/openfoodfacts/openfoodfacts-dart/issues/509)) ([4b62004](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4b62004068b56a2ed124b7763e0b205185af50c3))
+
+
+### Bug Fixes
+
+* toBeCompleted - additional tests regarding the retrieved state tags ([#508](https://github.com/openfoodfacts/openfoodfacts-dart/issues/508)) ([ae1b8bc](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ae1b8bc359fbaf6cd3e7ff44796a95c79d5245ec))
+
+## [1.21.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.20.0...v1.21.0) (2022-07-06)
+
+
+### Features
+
+* [#503](https://github.com/openfoodfacts/openfoodfacts-dart/issues/503) - added the "all to-be-completed products" configuration ([#504](https://github.com/openfoodfacts/openfoodfacts-dart/issues/504)) ([b7c16ed](https://github.com/openfoodfacts/openfoodfacts-dart/commit/b7c16ed6e7c8167552bc6753bdce3882c3e53507))
+
+
+### Bug Fixes
+
+* toBeCompleted - fixed uri and parameters for to be completed and user queries ([#506](https://github.com/openfoodfacts/openfoodfacts-dart/issues/506)) ([67e2137](https://github.com/openfoodfacts/openfoodfacts-dart/commit/67e2137a934f3cdf65046ebdaa6ae5ca98791827))
+
+## [1.20.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.19.0...v1.20.0) (2022-06-29)
+
+
+### Features
+
+* [#465](https://github.com/openfoodfacts/openfoodfacts-dart/issues/465) - new "limit" parameter for autocomplete suggestions ([#498](https://github.com/openfoodfacts/openfoodfacts-dart/issues/498)) ([4fd1f75](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4fd1f75bb75114aea3e26d67fb41c8e4ad0575da))
+* [#488](https://github.com/openfoodfacts/openfoodfacts-dart/issues/488) - new user-related queries ([#499](https://github.com/openfoodfacts/openfoodfacts-dart/issues/499)) ([1ee5184](https://github.com/openfoodfacts/openfoodfacts-dart/commit/1ee51841c9dc640809cb8be09c47ee0bd602276a))
+* [#494](https://github.com/openfoodfacts/openfoodfacts-dart/issues/494) - added OCR for packaging ([#497](https://github.com/openfoodfacts/openfoodfacts-dart/issues/497)) ([4c14abb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4c14abbbb2453e057453dcd60a761728b7addb1a))
+* [#495](https://github.com/openfoodfacts/openfoodfacts-dart/issues/495) - new "action" element for knowledge panels ([#496](https://github.com/openfoodfacts/openfoodfacts-dart/issues/496)) ([317bee4](https://github.com/openfoodfacts/openfoodfacts-dart/commit/317bee49cf2e5915f3347f942b8e5514cbd832ea))
+
+## [1.19.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.18.2...v1.19.0) (2022-06-22)
+
+
+### Features
+
+* [#481](https://github.com/openfoodfacts/openfoodfacts-dart/issues/481) - added product fields embCodes and manufacturingPlaces ([#490](https://github.com/openfoodfacts/openfoodfacts-dart/issues/490)) ([a30e7a5](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a30e7a55074a26a1a28ecc07b59284c4138369fa))
+* saveProduct with language and country ([#491](https://github.com/openfoodfacts/openfoodfacts-dart/issues/491)) ([6e7d60e](https://github.com/openfoodfacts/openfoodfacts-dart/commit/6e7d60eb5eee08937ebbe91d18702f3e2a90e984))
+
+## [1.18.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.18.1...v1.18.2) (2022-06-17)
+
+
+### Bug Fixes
+
+* [#482](https://github.com/openfoodfacts/openfoodfacts-dart/issues/482) add user agent parameters ([#484](https://github.com/openfoodfacts/openfoodfacts-dart/issues/484)) ([61d3ef7](https://github.com/openfoodfacts/openfoodfacts-dart/commit/61d3ef7f307c4ff7d2edb1e84926a9700274377a))
+
+## [1.18.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.18.0...v1.18.1) (2022-06-07)
+
+
+### Bug Fixes
+
+* [#477](https://github.com/openfoodfacts/openfoodfacts-dart/issues/477) - title is now optional in knowledge panel element ([#479](https://github.com/openfoodfacts/openfoodfacts-dart/issues/479)) ([4e7ffb2](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4e7ffb2f4fca53b64c43f2c55f32895b6f068d30))
+
+## [1.18.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.17.1...v1.18.0) (2022-06-03)
+
+
+### Features
+
+* new product field comparedToCategory ([#474](https://github.com/openfoodfacts/openfoodfacts-dart/issues/474)) ([1d59448](https://github.com/openfoodfacts/openfoodfacts-dart/commit/1d594488784692f8a330770e208b8dc75d08fab6))
+
+### [1.17.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.17.0...v1.17.1) (2022-05-26)
+
+
+### Bug Fixes
+
+* fix: Server not recognizing user additions ([#472](https://github.com/openfoodfacts/openfoodfacts-dart/issues/472)) ([52473d7](https://github.com/openfoodfacts/openfoodfacts-dart/commit/52473d7b673c5d5a7d1964fde0336ae270120c22))
+
+## [1.17.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.16.0...v1.17.0) (2022-05-20)
+
+
+### Features
+
+* [#466](https://github.com/openfoodfacts/openfoodfacts-dart/issues/466) - matched product v2 ([#467](https://github.com/openfoodfacts/openfoodfacts-dart/issues/467)) ([4ec6ee4](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4ec6ee4dc0aeb1c2b96764fbbe518ddfb94cf491))
+
 ## [1.16.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.15.0...v1.16.0) (2022-04-23)
 
 

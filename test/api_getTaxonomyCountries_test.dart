@@ -13,28 +13,29 @@ void main() {
   OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
   late FakeHttpHelper httpHelper;
 
-  const String _knownTag = 'en:gambia';
-  const String _expectedCountryCode2 = 'GM';
-  const String _expectedCountryCode3 = 'GMB';
-  const List<OpenFoodFactsLanguage> _expectedLanguages =
-      <OpenFoodFactsLanguage>[OpenFoodFactsLanguage.ENGLISH];
-  const String _expectedNameFrench = 'Gambie';
-  const String _expectedNameEnglish = 'Gambia';
-  const String _unknownTag = 'en:some_nonexistent_country';
+  const String knownTag = 'en:gambia';
+  const String expectedCountryCode2 = 'GM';
+  const String expectedCountryCode3 = 'GMB';
+  const List<OpenFoodFactsLanguage> expectedLanguages = <OpenFoodFactsLanguage>[
+    OpenFoodFactsLanguage.ENGLISH
+  ];
+  const String expectedNameFrench = 'Gambie';
+  const String expectedNameEnglish = 'Gambia';
+  const String unknownTag = 'en:some_nonexistent_country';
 
   final Map<String, dynamic> expectedResponse = <String, dynamic>{
-    _knownTag: {
+    knownTag: {
       "name": {
-        "en": _expectedNameEnglish,
-        "fr": _expectedNameFrench,
+        "en": expectedNameEnglish,
+        "fr": expectedNameFrench,
       },
       "synonyms": {
         "en": ["Gambia", "Republic of the Gambia", "the Gambia", "GM", "GMB"],
         "fr": ["Gambie"]
       },
-      "country_code_3": {"en": _expectedCountryCode3},
-      "language_codes": {"en": _expectedLanguages[0].code},
-      "country_code_2": {"en": _expectedCountryCode2}
+      "country_code_3": {"en": expectedCountryCode3},
+      "language_codes": {"en": expectedLanguages[0].code},
+      "country_code_2": {"en": expectedCountryCode2}
     },
   };
 
@@ -45,16 +46,15 @@ void main() {
 
   group('OpenFoodAPIClient getTaxonomyCountries', () {
     void _checkGambia(final TaxonomyCountry country, final String tag) {
-      expect(
-          country.name![OpenFoodFactsLanguage.ENGLISH], _expectedNameEnglish);
-      expect(country.name![OpenFoodFactsLanguage.FRENCH], _expectedNameFrench);
-      expect(country.languages, _expectedLanguages);
-      expect(country.countryCode2, _expectedCountryCode2);
-      expect(country.countryCode3, _expectedCountryCode3);
+      expect(country.name![OpenFoodFactsLanguage.ENGLISH], expectedNameEnglish);
+      expect(country.name![OpenFoodFactsLanguage.FRENCH], expectedNameFrench);
+      expect(country.languages, expectedLanguages);
+      expect(country.countryCode2, expectedCountryCode2);
+      expect(country.countryCode3, expectedCountryCode3);
     }
 
     test('get a country', () async {
-      final String tag = _knownTag;
+      final String tag = knownTag;
       TaxonomyCountryQueryConfiguration configuration =
           TaxonomyCountryQueryConfiguration(
         fields: [
@@ -81,7 +81,7 @@ void main() {
       _checkGambia(country, tag);
     });
     test("get a country that doesn't exist", () async {
-      final String tag = _unknownTag;
+      final String tag = unknownTag;
       Map<String, dynamic> expectedResponse = <String, dynamic>{
         tag: {},
       };
@@ -107,7 +107,7 @@ void main() {
       expect(categories, isNull);
     });
     test("get a country that doesn't exist with one that does", () async {
-      final String tag = _knownTag;
+      final String tag = knownTag;
       TaxonomyCountryQueryConfiguration configuration =
           TaxonomyCountryQueryConfiguration(
         fields: [
@@ -118,7 +118,7 @@ void main() {
           OpenFoodFactsLanguage.ENGLISH,
           OpenFoodFactsLanguage.FRENCH,
         ],
-        tags: <String>[_unknownTag, tag],
+        tags: <String>[unknownTag, tag],
       );
       httpHelper.setResponse(configuration.getUri(),
           response: expectedResponse);

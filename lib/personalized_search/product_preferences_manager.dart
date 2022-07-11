@@ -102,6 +102,28 @@ class ProductPreferencesManager {
     return result;
   }
 
+  /// Returns all the attributes that match an importance.
+  List<String> getAttributeIdsWithImportance(final String importanceId) {
+    final List<String> result = <String>[];
+    if (attributeGroups == null) {
+      return result;
+    }
+    for (final AttributeGroup attributeGroup in attributeGroups!) {
+      if (attributeGroup.attributes == null) {
+        continue;
+      }
+      for (final Attribute attribute in attributeGroup.attributes!) {
+        final String attributeId = attribute.id!;
+        final String foundImportanceId =
+            getImportanceIdForAttributeId(attributeId);
+        if (importanceId == foundImportanceId) {
+          result.add(attributeId);
+        }
+      }
+    }
+    return result;
+  }
+
   /// Returns whether an attribute is important as per the user preferences.
   bool? isAttributeImportant(String attributeId) {
     final String importanceId = getImportanceIdForAttributeId(attributeId);
@@ -117,11 +139,10 @@ class ProductPreferencesManager {
 
   PreferenceImportance? getPreferenceImportanceFromImportanceId(
     final String importanceId,
-  ) {
-    return _availablePreferenceImportances?.getPreferenceImportance(
-      importanceId,
-    );
-  }
+  ) =>
+      _availablePreferenceImportances?.getPreferenceImportance(
+        importanceId,
+      );
 
   int? getImportanceIndex(final String importanceId) =>
       _availablePreferenceImportances?.getImportanceIndex(
@@ -130,6 +151,7 @@ class ProductPreferencesManager {
 
   void notify() => _productPreferencesSelection.notify();
 
+  /// Clears all the attributes: sets all of them to "not important".
   Future<void> clearImportances({final bool notifyListeners = true}) async {
     if (attributeGroups != null) {
       for (final AttributeGroup attributeGroup in attributeGroups!) {

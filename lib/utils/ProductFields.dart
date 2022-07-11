@@ -42,6 +42,7 @@ enum ProductField {
   NUTRIMENT_ENERGY_UNIT,
   NUTRIMENT_DATA_PER,
   NUTRISCORE,
+  COMPARED_TO_CATEGORY,
   CATEGORIES,
   CATEGORIES_TAGS,
   CATEGORIES_TAGS_IN_LANGUAGES,
@@ -67,6 +68,9 @@ enum ProductField {
   ECOSCORE_DATA,
   KNOWLEDGE_PANELS,
   ENVIRONMENT_INFOCARD,
+  EMB_CODES,
+  MANUFACTURING_PLACES,
+  ORIGINS,
   ALL
 }
 
@@ -117,6 +121,7 @@ extension ProductFieldExtension on ProductField {
     ProductField.CATEGORIES: 'categories',
     ProductField.CATEGORIES_TAGS: 'categories_tags',
     ProductField.CATEGORIES_TAGS_IN_LANGUAGES: 'categories_tags_',
+    ProductField.COMPARED_TO_CATEGORY: 'compared_to_category',
     ProductField.LABELS: 'labels',
     ProductField.LABELS_TAGS: 'labels_tags',
     ProductField.LABELS_TAGS_IN_LANGUAGES: 'labels_tags_',
@@ -137,6 +142,9 @@ extension ProductFieldExtension on ProductField {
     ProductField.ECOSCORE_DATA: 'ecoscore_data',
     ProductField.KNOWLEDGE_PANELS: 'knowledge_panels',
     ProductField.ENVIRONMENT_INFOCARD: 'environment_infocard',
+    ProductField.EMB_CODES: 'emb_codes',
+    ProductField.MANUFACTURING_PLACES: 'manufacturing_places',
+    ProductField.ORIGINS: 'origins',
   };
 
   /// Returns the key of the product field

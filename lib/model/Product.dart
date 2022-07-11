@@ -273,6 +273,8 @@ class Product extends JsonObject {
   @JsonKey(name: 'nutrition_grade_fr', includeIfNull: false)
   String? nutriscore;
 
+  @JsonKey(name: 'compared_to_category', includeIfNull: false)
+  String? comparedToCategory;
   @JsonKey(name: 'categories', includeIfNull: false)
   String? categories;
   @JsonKey(name: 'categories_tags', includeIfNull: false)
@@ -356,6 +358,15 @@ class Product extends JsonObject {
     includeIfNull: false,
   )
   String? environmentInfoCard;
+
+  @JsonKey(name: 'emb_codes', includeIfNull: false)
+  String? embCodes;
+
+  @JsonKey(name: 'manufacturing_places', includeIfNull: false)
+  String? manufacturingPlaces;
+
+  @JsonKey(name: 'origins', includeIfNull: false)
+  String? origins;
 
   Product(
       {this.barcode,

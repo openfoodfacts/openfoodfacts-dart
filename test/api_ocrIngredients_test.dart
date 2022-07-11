@@ -26,14 +26,14 @@ void main() {
     expect(response.ingredientsTextFromImage!.isNotEmpty, true);
   }
 
-  const String _frenchBarcode = '5449000227959';
-  const String _englishBarcode = '0041220576920';
-  const String _germanBarcode = '5701184005007';
+  const String frenchBarcode = '5449000227959';
+  const String englishBarcode = '0041220576920';
+  const String germanBarcode = '5701184005007';
 
   group('$OpenFoodAPIClient Extract Ingredients from images', () {
     test('Extract Ingredients using Google Vision Cloud (French)', () async {
       _test(
-        _frenchBarcode,
+        frenchBarcode,
         OpenFoodFactsLanguage.FRENCH,
         OcrField.GOOGLE_CLOUD_VISION,
       );
@@ -41,7 +41,7 @@ void main() {
 
     test('Extract Ingredients using Google Vision Cloud (English)', () async {
       _test(
-        _englishBarcode,
+        englishBarcode,
         OpenFoodFactsLanguage.ENGLISH,
         OcrField.GOOGLE_CLOUD_VISION,
       );
@@ -49,7 +49,7 @@ void main() {
 
     test('Extract Ingredients using Google Vision Cloud (German)', () async {
       _test(
-        _germanBarcode,
+        germanBarcode,
         OpenFoodFactsLanguage.GERMAN,
         OcrField.GOOGLE_CLOUD_VISION,
       );
@@ -57,7 +57,7 @@ void main() {
 
     test('Extract Ingredients using Tesseract (French)', () async {
       _test(
-        _frenchBarcode,
+        frenchBarcode,
         OpenFoodFactsLanguage.FRENCH,
         OcrField.TESSERACT,
       );
@@ -65,7 +65,7 @@ void main() {
 
     test('Extract Ingredients using Tesseract (English)', () async {
       _test(
-        _englishBarcode,
+        englishBarcode,
         OpenFoodFactsLanguage.ENGLISH,
         OcrField.TESSERACT,
       );
@@ -73,7 +73,7 @@ void main() {
 
     test('Extract Ingredients using Tesseract (German)', () async {
       _test(
-        _germanBarcode,
+        germanBarcode,
         OpenFoodFactsLanguage.GERMAN,
         OcrField.TESSERACT,
       );

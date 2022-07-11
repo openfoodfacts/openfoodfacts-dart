@@ -146,20 +146,5 @@ class ProductImage {
 
   @override
   String toString() =>
-      'ProductImage('
-          '${field.value}' +
-      (size == null ? '' : ',size=${size.value}') +
-      (language == null ? '' : ',language=${language.code}') +
-      (angle == null ? '' : ',angle=${angle!.degreesClockwise}') +
-      (url == null ? '' : ',url=$url') +
-      (imgid == null ? '' : ',imgid=$imgid') +
-      (rev == null ? '' : ',rev=$rev') +
-      (coordinatesImageSize == null
-          ? ''
-          : ',coordinatesImageSize=$coordinatesImageSize') +
-      (x1 == null ? '' : ',x1=$x1') +
-      (y1 == null ? '' : ',y1=$y1') +
-      (x2 == null ? '' : ',x2=$x2') +
-      (y2 == null ? '' : ',y2=$y2') +
-      ')';
+      'ProductImage(${field.value}${size == null ? '' : ',size=${size.value}'}${language == null ? '' : ',language=${language.code}'}${angle == null ? '' : ',angle=${angle!.degreesClockwise}'}${url == null ? '' : ',url=$url'}${imgid == null ? '' : ',imgid=$imgid'}${rev == null ? '' : ',rev=$rev'}${coordinatesImageSize == null ? '' : ',coordinatesImageSize=$coordinatesImageSize'}${x1 == null ? '' : ',x1=$x1'}${y1 == null ? '' : ',y1=$y1'}${x2 == null ? '' : ',x2=$x2'}${y2 == null ? '' : ',y2=$y2'})';
 }

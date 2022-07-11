@@ -14,10 +14,8 @@ class Additives {
 
     for (int i = 0; i < json.length; i++) {
       ids.add(json[i].toString());
-      String name = 'E' +
-          json[i]
-              .toString()
-              .substring(4); // remove the 'en:' header and Capitalize the 'E'.
+      String name =
+          'E${json[i].toString().substring(4)}'; // remove the 'en:' header and Capitalize the 'E'.
       names.add(name);
     }
 

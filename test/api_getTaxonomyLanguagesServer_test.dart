@@ -17,8 +17,8 @@ void main() {
     OpenFoodFactsLanguage.FRENCH,
   ];
 
-  const String _knownTag = 'en:afrikaans';
-  const String _unknownTag = 'en:some_nonexistent_language';
+  const String knownTag = 'en:afrikaans';
+  const String unknownTag = 'en:some_nonexistent_language';
 
   group('OpenFoodAPIClient getTaxonomyLanguages (server)', () {
     test("get all languages", () async {
@@ -28,17 +28,17 @@ void main() {
       );
       expect(languages, isNotNull);
       expect(languages!.length, greaterThan(150)); // was 186 on 2022-02-25
-      expect(languages[_knownTag], isNotNull);
+      expect(languages[knownTag], isNotNull);
     });
 
     test('get a language', () async {
       final Map<String, TaxonomyLanguage>? languages =
           await OpenFoodAPIClient.getTaxonomyLanguages(
-        TaxonomyLanguageQueryConfiguration(tags: <String>[_knownTag]),
+        TaxonomyLanguageQueryConfiguration(tags: <String>[knownTag]),
       );
       expect(languages, isNotNull);
       expect(languages!.length, equals(1));
-      final TaxonomyLanguage language = languages[_knownTag]!;
+      final TaxonomyLanguage language = languages[knownTag]!;
       expect(language.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
       expect(language.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
       expect(language.wikidata![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
@@ -47,7 +47,7 @@ void main() {
     test("get a language that doesn't exist", () async {
       final Map<String, TaxonomyLanguage>? categories =
           await OpenFoodAPIClient.getTaxonomyLanguages(
-        TaxonomyLanguageQueryConfiguration(tags: <String>[_unknownTag]),
+        TaxonomyLanguageQueryConfiguration(tags: <String>[unknownTag]),
       );
       expect(categories, isNull);
     });
@@ -56,12 +56,12 @@ void main() {
       final Map<String, TaxonomyLanguage>? languages =
           await OpenFoodAPIClient.getTaxonomyLanguages(
         TaxonomyLanguageQueryConfiguration(
-          tags: <String>[_unknownTag, _knownTag],
+          tags: <String>[unknownTag, knownTag],
         ),
       );
       expect(languages, isNotNull);
       expect(languages!.length, equals(1));
-      final TaxonomyLanguage language = languages[_knownTag]!;
+      final TaxonomyLanguage language = languages[knownTag]!;
       expect(language.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
       expect(language.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
       expect(language.wikidata![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
