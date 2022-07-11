@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.22.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.21.0...v1.22.0) (2022-07-10)
+
+
+### Features
+
+* added "origins" field to product ([#509](https://github.com/openfoodfacts/openfoodfacts-dart/issues/509)) ([4b62004](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4b62004068b56a2ed124b7763e0b205185af50c3))
+
+
+### Bug Fixes
+
+* toBeCompleted - additional tests regarding the retrieved state tags ([#508](https://github.com/openfoodfacts/openfoodfacts-dart/issues/508)) ([ae1b8bc](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ae1b8bc359fbaf6cd3e7ff44796a95c79d5245ec))
+
 ## [1.21.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.20.0...v1.21.0) (2022-07-06)
 
 
