@@ -59,8 +59,7 @@ class SignUpStatus extends Status {
     return null;
   }
 
-  /// Since this is not a official endpoint, we must parse
-  /// the content of the page
+  /// Try to extract the error from the HTML… or will return the [body] otherwise
   static String? _extractErrorFromHTMLBody(String? body) {
     if (body == null || body.isEmpty) {
       return null;
@@ -79,7 +78,7 @@ class SignUpStatus extends Status {
       return body.substring(startIndex + startLine.length, endIndex);
     }
 
-    return null;
+    return body;
   }
 
   /// Lists of errors sent by the server
