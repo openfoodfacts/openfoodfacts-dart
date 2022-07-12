@@ -56,7 +56,7 @@ class SignUpStatus extends Status {
       }
     }
 
-    return SignUpStatusError.UNKNOWN;
+    return null;
   }
 
   /// Try to extract the error from the HTML… or will return the [body] otherwise
