@@ -16,8 +16,9 @@ void main() {
 
     Future<int> _getCount(
       final UserProductSearchType type,
-      final OpenFoodFactsLanguage language,
-    ) async {
+      final OpenFoodFactsLanguage language, {
+      final void Function(Product)? additionalCheck,
+    }) async {
       final String reason = '($language, $type)';
       final UserProductSearchQueryConfiguration configuration =
           UserProductSearchQueryConfiguration(
@@ -25,6 +26,10 @@ void main() {
         userId: userId,
         pageSize: pageSize,
         language: language,
+        fields: [
+          ProductField.BARCODE,
+          ProductField.STATES_TAGS,
+        ],
       );
 
       final SearchResult result;
@@ -41,12 +46,18 @@ void main() {
       expect(result.pageSize, pageSize, reason: reason);
       expect(result.products, isNotNull, reason: reason);
       expect(result.products!.length, result.count, reason: reason);
+      if (additionalCheck != null) {
+        for (final Product product in result.products!) {
+          additionalCheck(product);
+        }
+      }
       return result.count!;
     }
 
     Future<int> _getCountForAllLanguages(
-      final UserProductSearchType type,
-    ) async {
+      final UserProductSearchType type, {
+      final void Function(Product)? additionalCheck,
+    }) async {
       final List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
         OpenFoodFactsLanguage.ENGLISH,
         OpenFoodFactsLanguage.FRENCH,
@@ -54,7 +65,11 @@ void main() {
       ];
       int? result;
       for (final OpenFoodFactsLanguage language in languages) {
-        final int count = await _getCount(type, language);
+        final int count = await _getCount(
+          type,
+          language,
+          additionalCheck: additionalCheck,
+        );
         if (result != null) {
           expect(count, result, reason: language.toString());
         }
@@ -65,9 +80,13 @@ void main() {
 
     Future<void> _checkTypeCount(
       final UserProductSearchType type,
-      final int minimalExpectedCount,
-    ) async {
-      final int count = await _getCountForAllLanguages(type);
+      final int minimalExpectedCount, {
+      final void Function(Product)? additionalCheck,
+    }) async {
+      final int count = await _getCountForAllLanguages(
+        type,
+        additionalCheck: additionalCheck,
+      );
       expect(count, greaterThanOrEqualTo(minimalExpectedCount));
     }
 
@@ -95,8 +114,11 @@ void main() {
     test(
       'to be completed',
       () async => _checkTypeCount(
-          UserProductSearchType.TO_BE_COMPLETED, 0) // you never know...
-      ,
+          UserProductSearchType.TO_BE_COMPLETED, 0, // you never know...
+          additionalCheck: (final Product product) {
+        expect(product.statesTags, isNotNull);
+        expect(product.statesTags, contains('en:to-be-completed'));
+      }),
     );
   });
 }
