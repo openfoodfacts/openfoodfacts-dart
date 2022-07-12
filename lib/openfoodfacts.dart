@@ -847,9 +847,6 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
 
-    status.body?.indexOf(
-        '<!-- start templates/web/common/includes/error_list.tt.html -->');
-
     return SignUpStatus(status);
   }
 
