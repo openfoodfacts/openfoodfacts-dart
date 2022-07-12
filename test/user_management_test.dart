@@ -1,3 +1,4 @@
+import 'package:openfoodfacts/model/SignUpStatus.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
@@ -29,14 +30,13 @@ void main() {
     });
 
     test('Create existing user', () async {
-      Status response = await OpenFoodAPIClient.register(
+      SignUpStatus response = await OpenFoodAPIClient.register(
         name: 'Irrelevant',
         user: user,
         email: email,
       );
       expect(response.status, 400);
-      expect(response.error,
-          'This username already exists, please choose another.');
+      expect(response.statusError, SignUpStatusError.USERNAME_ALREADY_USED);
     });
   });
 
