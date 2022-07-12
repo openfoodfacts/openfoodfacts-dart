@@ -32,10 +32,6 @@ abstract class AbstractQueryConfiguration {
   /// for detailed explanation on how to work with multiple languages.
   List<OpenFoodFactsLanguage>? languages;
 
-  // TODO: deprecated from 2021-07-20 (#185); remove when old enough
-  @Deprecated('Use parameters language or languages instead')
-  String? lc;
-
   // TODO: deprecated from 2021-11-15 (#233); remove when old enough
   @Deprecated('Use parameter country instead')
   String? cc;
@@ -50,7 +46,6 @@ abstract class AbstractQueryConfiguration {
   AbstractQueryConfiguration({
     this.language,
     this.languages,
-    this.lc,
     this.cc,
     this.country,
     this.fields,
@@ -58,10 +53,9 @@ abstract class AbstractQueryConfiguration {
   }) {
     fields ??= [ProductField.ALL];
     if (languages != null) {
-      // ignore: deprecated_member_use_from_same_package
-      if ((language != null || lc != null) && languages!.isNotEmpty) {
+      if (language != null && languages!.isNotEmpty) {
         throw ArgumentError(
-            '[languages] cannot be used together with [language]/[lc]');
+            '[languages] cannot be used together with [language]');
       }
     }
   }
@@ -86,10 +80,6 @@ abstract class AbstractQueryConfiguration {
     if (queryLanguages.isNotEmpty) {
       result.putIfAbsent(
           'lc', () => queryLanguages.map((e) => e.code).join(','));
-      // ignore: deprecated_member_use_from_same_package
-    } else if (lc != null) {
-      // ignore: deprecated_member_use_from_same_package
-      result.putIfAbsent('lc', () => lc!);
     }
 
     final String? countryCode = computeCountryCode();

@@ -24,7 +24,6 @@ import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/ImageHelper.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
-import 'package:openfoodfacts/utils/PnnsGroupQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
@@ -73,11 +72,9 @@ export 'model/TagI18N.dart';
 export 'model/TaxonomyCategory.dart';
 export 'model/TaxonomyPackaging.dart';
 export 'model/User.dart';
-export 'model/parameter/OutputFormat.dart';
 export 'model/parameter/Page.dart';
 export 'model/parameter/PageNumber.dart';
 export 'model/parameter/PageSize.dart';
-export 'model/parameter/SearchSimple.dart';
 export 'model/parameter/SortBy.dart';
 export 'utils/HttpHelper.dart';
 export 'utils/ImageHelper.dart';
@@ -356,16 +353,6 @@ class OpenFoodAPIClient {
     }
     return result;
   }
-
-  // TODO: deprecated from 2021-07-13 (#92); remove when old enough
-  @Deprecated(
-      'Use PnnsGroup2Filter with ProductSearchQueryConfiguration instead')
-  static Future<SearchResult> queryPnnsGroup(
-    User user,
-    PnnsGroupQueryConfiguration configuration, {
-    QueryType? queryType,
-  }) async =>
-      getProducts(user, configuration, queryType: queryType);
 
   static Future<Map<String, T>?>
       getTaxonomy<T extends JsonObject, F extends Enum>(

@@ -36,7 +36,7 @@ class InvalidBarcodes {
   static String getUrl() =>
       'https://world.openfoodfacts.org/data/invalid-barcodes.json';
 
-  // TODO: values from URL as of 2021-07-20; check for changes once in a while
+  // TODO: values from URL as of 2022-07-12; check for changes once in a while
   static const List<String> _INVALID_BARCODES = [
     '323673',
     '2575405',
