@@ -12,8 +12,6 @@ class ProductListQueryConfiguration extends AbstractQueryConfiguration {
     this.barcodes, {
     final OpenFoodFactsLanguage? language,
     final List<OpenFoodFactsLanguage> languages = const [],
-    @Deprecated('Use parameters language or languages instead')
-        final String? lc,
     @Deprecated('Use parameter country instead') final String? cc,
     final OpenFoodFactsCountry? country,
     final List<ProductField>? fields,
@@ -24,7 +22,6 @@ class ProductListQueryConfiguration extends AbstractQueryConfiguration {
         super(
           language: language,
           languages: languages,
-          lc: lc,
           cc: cc,
           country: country,
           fields: fields,

@@ -428,7 +428,11 @@ void main() {
       expect(result.products!.length, 1);
       expect(result.products![0].productName, 'Quoted Coca "cola"');
       expect(result.products![0].brands, 'Quoted Coca "Cola"');
-    });
+    },
+        timeout: Timeout(
+          // some tests can be slow here
+          Duration(seconds: 90),
+        ));
 
     test('multiple products', () async {
       final ProductListQueryConfiguration configuration =

@@ -435,11 +435,10 @@ void main() {
       expect(status.isWrongUsernameOrPassword(), isTrue);
     });
 
-    // TODO(monsieurtanuki): to be fixed, cf. https://github.com/openfoodfacts/smooth-app/pull/1142
     test(
-      'Nutrition update issue',
+      'get+update+get calcium',
       () async {
-        const String barcode = '7300400481588'; // Wasa
+        const String barcode = '3273220180259'; // Soy milk
         final ProductQueryConfiguration configurations =
             ProductQueryConfiguration(
           barcode,
@@ -455,12 +454,14 @@ void main() {
         expect(result.status, 1);
         expect(result.product, isNotNull);
         expect(result.product!.nutriments, isNotNull);
-        final double? initialMagnesium = result.product!.nutriments!.magnesium;
-        expect(initialMagnesium, isNotNull); // in real life: 200mg = 0.2
+        final double? initialValue = result.product!.nutriments!.calcium;
+        expect(initialValue, isNotNull); // in real life: 120mg
 
         // Step 2: save the slightly altered product
-        final double nextMagnesium = initialMagnesium! + .001;
-        result.product!.nutriments!.magnesium = nextMagnesium;
+        final double nextValue = initialValue! + .001;
+        result.product!.nutriments!.calcium = nextValue;
+        result.product!.nutriments!.calciumUnit = Unit.G;
+
         final Product savedProduct = Product(barcode: barcode);
         savedProduct.nutriments = result.product!.nutriments;
         final Status status = await OpenFoodAPIClient.saveProduct(
@@ -478,10 +479,9 @@ void main() {
         expect(result.status, 1);
         expect(result.product, isNotNull);
         expect(result.product!.nutriments, isNotNull);
-        final double? latestMagnesium = result.product!.nutriments!.magnesium;
-        expect(latestMagnesium, nextMagnesium);
+        final double? latestValue = result.product!.nutriments!.calcium;
+        expect(latestValue, nextValue);
       },
-      skip: 'To be fixed',
     );
   },
       timeout: Timeout(

@@ -26,9 +26,9 @@ void main() {
     expect(response.ingredientsTextFromImage!.isNotEmpty, true);
   }
 
-  const String frenchBarcode = '5449000227959';
+  const String frenchBarcode = '7300400481588';
   const String englishBarcode = '0041220576920';
-  const String germanBarcode = '5701184005007';
+  const String germanBarcode = '4260107223344';
 
   group('$OpenFoodAPIClient Extract Ingredients from images', () {
     test('Extract Ingredients using Google Vision Cloud (French)', () async {
@@ -128,5 +128,9 @@ void main() {
       expect(ocrResponse.ingredientsTextFromImage,
           result.product!.ingredientsText);
     });
-  });
+  },
+      timeout: Timeout(
+        // some tests can be slow here
+        Duration(seconds: 90),
+      ));
 }

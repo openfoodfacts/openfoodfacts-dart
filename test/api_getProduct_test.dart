@@ -1462,7 +1462,11 @@ void main() {
 
       expect(result.product!.productName, equals('Quoted Coca "cola"'));
       expect(result.product!.brands, equals('Quoted Coca "Cola"'));
-    });
+    },
+        timeout: Timeout(
+          // some tests can be slow here
+          Duration(seconds: 90),
+        ));
 
     test('get ecoscore html description', () async {
       final ProductResult productResult = await OpenFoodAPIClient.getProduct(
