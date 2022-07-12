@@ -1,5 +1,10 @@
-import 'package:openfoodfacts/model/Status.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 
+/// The response from a call to the [OpenFoodAPIClient.register] method
+/// The [status] may be:
+/// - 201: Account created + user logged in
+/// - 400: An error occurred - see [statusError] for more information
+/// - 500: Unknown error
 class SignUpStatus extends Status {
   final SignUpStatusError? statusError;
 
@@ -18,8 +23,6 @@ class SignUpStatus extends Status {
           imageId: imageId,
         );
 
-  // Sentences are available in
-  // [https://github.com/openfoodfacts/openfoodfacts-translations/blob/main/openfoodfacts-web/openfoodfacts-web-fr.po]
   factory SignUpStatus(Status status) {
     if (status.body == null) {
       return SignUpStatus._(
@@ -32,54 +35,87 @@ class SignUpStatus extends Status {
       return SignUpStatus._(
         status: 201,
       );
-    } else if (status.body!
-        .contains('This username already exists, please choose another.')) {
-      return SignUpStatus._(
-        status: 400,
-        statusError: SignUpStatusError.USERNAME_ALREADY_USED,
-        error: 'This username already exists, please choose another.',
-      );
-    } else if (status.body!.contains('The e-mail address is already used.')) {
-      return SignUpStatus._(
-        status: 400,
-        statusError: SignUpStatusError.EMAIL_ALREADY_USED,
-        error:
-            'The e-mail address is already used by another user. Maybe you already have an account? You can reset the password of your other account.',
-      );
-    } else if (status.body!
-            .contains('The password needs to be a least 6 characters long.') ||
-        status.body!.contains(
-            'The password and confirmation password are different.')) {
-      return SignUpStatus._(
-        status: 400,
-        statusError: SignUpStatusError.INVALID_PASSWORD,
-        error:
-            'The e-mail address is already used by another user. Maybe you already have an account? You can reset the password of your other account.',
-      );
-    } else if (status.body!.contains(
-        'The user name must contain only unaccented letters, digits and dashes.')) {
-      return SignUpStatus._(
-        status: 400,
-        statusError: SignUpStatusError.INVALID_USERNAME,
-        error:
-            'The e-mail address is already used by another user. Maybe you already have an account? You can reset the password of your other account.',
-      );
     } else {
       return SignUpStatus._(
         status: 400,
-        statusError: SignUpStatusError.UNKNOWN,
-        error: 'Unrecognized request error',
+        statusError: _errorTexts.contains(status.body),
+        error: _extractErrorFromHTMLBody(status.body),
       );
     }
   }
+
+  /// Since this is not a official endpoint, we must parse
+  /// the content of the page
+  static String? _extractErrorFromHTMLBody(String? body) {
+    if (body == null || body.isEmpty) {
+      return null;
+    }
+
+    /// Errors are displayed between two specific "templates" in HTML
+    final String startLine =
+        '<!-- start templates/web/common/includes/error_list.tt.html -->';
+    final String endLine =
+        '<!-- end templates/web/common/includes/error_list.tt.html -->';
+
+    final int startIndex = body.indexOf(startLine);
+    final int endIndex = body.indexOf(endLine);
+
+    if (startIndex != -1 && endIndex != 1) {
+      return body.substring(startIndex + startLine.length, endIndex);
+    }
+
+    return null;
+  }
+
+  /// Lists of errors sent by the server
+  /// Sentences are available in
+  /// [https://github.com/openfoodfacts/openfoodfacts-translations/blob/main/openfoodfacts-web/openfoodfacts-web-fr.po]
+  static const Map<String, SignUpStatusError> _errorTexts =
+      <String, SignUpStatusError>{
+    'This username already exists, please choose another.':
+        SignUpStatusError.USERNAME_ALREADY_USED,
+    'The e-mail address is already used.': SignUpStatusError.EMAIL_ALREADY_USED,
+    'The password needs to be a least 6 characters long.':
+        SignUpStatusError.INVALID_PASSWORD,
+    'The password and confirmation password are different.':
+        SignUpStatusError.INVALID_PASSWORD,
+    'The user name must contain only unaccented letters, digits and dashes.':
+        SignUpStatusError.INVALID_USERNAME,
+  };
 }
 
+/// A list of errors returned by the server
 enum SignUpStatusError {
-  EMPTY_EMAIL,
+  /// The email provided is already used by another user
   EMAIL_ALREADY_USED,
-  EMPTY_USERNAME,
+
+  /// The username provided is already used by another user
   USERNAME_ALREADY_USED,
+
+  /// The username is invalid (empty or with invalid characters)
+  /// Only unaccented letters, digits and dashes are accepted
   INVALID_USERNAME,
+
+  /// The password is incorrect (too short)
   INVALID_PASSWORD,
+
+  /// Generic error
   UNKNOWN,
+}
+
+extension _InternalMapExtension<A> on Map<String, A> {
+  /// A find method for [Map], but based on [String] [contains]
+  A? contains(String? value) {
+    if (value == null) {
+      return null;
+    }
+
+    for (String key in keys) {
+      if (key.contains(value)) {
+        return this[key];
+      }
+    }
+
+    return null;
+  }
 }

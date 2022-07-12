@@ -847,10 +847,10 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
 
-    return SignUpStatus(status);
+    status.body?.indexOf(
+        '<!-- start templates/web/common/includes/error_list.tt.html -->');
 
-    //Since this is not a official endpoint the response code is always 200
-    //Here we check the response body for certain keyword to find out if the registration was complete
+    return SignUpStatus(status);
   }
 
   /// Uses reset_password.pl to send a password reset Email
