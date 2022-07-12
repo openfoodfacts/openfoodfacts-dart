@@ -38,7 +38,7 @@ class SignUpStatus extends Status {
     } else {
       return SignUpStatus._(
         status: 400,
-        statusError: _findErrorInMap(status.body) ?? SignUpStatusError.UNKNOWN,
+        statusError: _findErrorInMap(status.body),
         error: _extractErrorFromHTMLBody(status.body),
       );
     }
