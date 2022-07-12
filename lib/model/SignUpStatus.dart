@@ -52,9 +52,9 @@ class SignUpStatus extends Status {
     }
 
     /// Errors are displayed between two specific "templates" in HTML
-    final String startLine =
+    const String startLine =
         '<!-- start templates/web/common/includes/error_list.tt.html -->';
-    final String endLine =
+    const String endLine =
         '<!-- end templates/web/common/includes/error_list.tt.html -->';
 
     final int startIndex = body.indexOf(startLine);
