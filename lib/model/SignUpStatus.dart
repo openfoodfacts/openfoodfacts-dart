@@ -45,7 +45,7 @@ class SignUpStatus extends Status {
   }
 
   /// [_errorTexts] have values where have to call the [contains] method
-  static SignUpStatusError _findErrorInMap(String? sentence) {
+  static SignUpStatusError? _findErrorInMap(String? sentence) {
     if (sentence == null) {
       return null;
     }
