@@ -38,10 +38,25 @@ class SignUpStatus extends Status {
     } else {
       return SignUpStatus._(
         status: 400,
-        statusError: _errorTexts.contains(status.body),
+        statusError: _findErrorInMap(status.body) ?? SignUpStatusError.UNKNOWN,
         error: _extractErrorFromHTMLBody(status.body),
       );
     }
+  }
+
+  /// [_errorTexts] have values where have to call the [contains] method
+  static _findErrorInMap(String? sentence) {
+    if (sentence == null) {
+      return null;
+    }
+
+    for (String errorLabel in _errorTexts.keys) {
+      if (sentence.contains(errorLabel)) {
+        return _errorTexts[errorLabel];
+      }
+    }
+
+    return null;
   }
 
   /// Since this is not a official endpoint, we must parse
@@ -101,21 +116,4 @@ enum SignUpStatusError {
 
   /// Generic error
   UNKNOWN,
-}
-
-extension _InternalMapExtension<A> on Map<String, A> {
-  /// A find method for [Map], but based on [String] [contains]
-  A? contains(String? value) {
-    if (value == null) {
-      return null;
-    }
-
-    for (String key in keys) {
-      if (key.contains(value)) {
-        return this[key];
-      }
-    }
-
-    return null;
-  }
 }
