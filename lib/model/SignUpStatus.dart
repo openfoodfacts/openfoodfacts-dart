@@ -6,7 +6,8 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 /// - 400: An error occurred - see [statusError] for more information
 /// - 500: Unknown error
 class SignUpStatus extends Status {
-  final SignUpStatusError? statusError;
+  /// A list of errors returned by the server
+  final Iterable<SignUpStatusError>? statusErrors;
 
   SignUpStatus._({
     dynamic status,
@@ -14,7 +15,7 @@ class SignUpStatus extends Status {
     String? body,
     String? error,
     int? imageId,
-    this.statusError,
+    this.statusErrors,
   }) : super(
           status: status,
           statusVerbose: statusVerbose,
@@ -27,7 +28,7 @@ class SignUpStatus extends Status {
     if (status.body == null) {
       return SignUpStatus._(
         status: 500,
-        statusError: SignUpStatusError.UNKNOWN,
+        statusErrors: {SignUpStatusError.UNKNOWN},
         error:
             'No response, open an issue here: https://github.com/openfoodfacts/openfoodfacts-dart/issues/new',
       );
@@ -38,25 +39,28 @@ class SignUpStatus extends Status {
     } else {
       return SignUpStatus._(
         status: 400,
-        statusError: _findErrorInMap(status.body) ?? SignUpStatusError.UNKNOWN,
+        statusErrors:
+            _findErrorsInMap(status.body) ?? {SignUpStatusError.UNKNOWN},
         error: _extractErrorFromHTMLBody(status.body),
       );
     }
   }
 
-  /// [_errorTexts] have values where have to call the [contains] method
-  static SignUpStatusError? _findErrorInMap(String? sentence) {
+  /// [_errorTexts] should be called with the [contains] method
+  static Iterable<SignUpStatusError>? _findErrorsInMap(String? sentence) {
     if (sentence == null) {
       return null;
     }
 
+    final Set<SignUpStatusError> errors = {};
+
     for (String errorLabel in _errorTexts.keys) {
       if (sentence.contains(errorLabel)) {
-        return _errorTexts[errorLabel];
+        errors.add(_errorTexts[errorLabel]!);
       }
     }
 
-    return null;
+    return errors.isEmpty ? null : errors;
   }
 
   /// Try to extract the error from the HTML… or will return the [body] otherwise
@@ -86,9 +90,10 @@ class SignUpStatus extends Status {
   /// [https://github.com/openfoodfacts/openfoodfacts-translations/blob/main/openfoodfacts-web/openfoodfacts-web-fr.po]
   static const Map<String, SignUpStatusError> _errorTexts =
       <String, SignUpStatusError>{
+    'The e-mail address is already used by another user.':
+        SignUpStatusError.EMAIL_ALREADY_USED,
     'This username already exists, please choose another.':
         SignUpStatusError.USERNAME_ALREADY_USED,
-    'The e-mail address is already used.': SignUpStatusError.EMAIL_ALREADY_USED,
     'The password needs to be a least 6 characters long.':
         SignUpStatusError.INVALID_PASSWORD,
     'The password and confirmation password are different.':
