@@ -12,6 +12,7 @@ import 'package:openfoodfacts/model/OcrPackagingResult.dart';
 import 'package:openfoodfacts/model/OrderedNutrients.dart';
 import 'package:openfoodfacts/model/ProductFreshness.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
+import 'package:openfoodfacts/model/SignUpStatus.dart';
 import 'package:openfoodfacts/model/TaxonomyAdditive.dart';
 import 'package:openfoodfacts/model/TaxonomyAllergen.dart';
 import 'package:openfoodfacts/model/TaxonomyCategory.dart';
@@ -792,7 +793,7 @@ class OpenFoodAPIClient {
   /// Returns [Status.status] 201 = complete; 400 = wrong inputs + [Status.error]; 500 = server error;
   ///
   /// When creating a [producer account](https://world.pro.openfoodfacts.org/) use [orgName] (former requested_org) to name the Producer or brand
-  static Future<Status> register({
+  static Future<SignUpStatus> register({
     required User user,
     required String name,
     required String email,
@@ -833,31 +834,7 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
 
-    //Since this is not a official endpoint the response code is always 200
-    //Here we check the response body for certain keyword to find out if the registration was complete
-    if (status.body == null) {
-      return Status(
-        status: 500,
-        error:
-            'No response, open an issue here: https://github.com/openfoodfacts/openfoodfacts-dart/issues/new',
-      );
-    } else if (status.body!.contains('loggedin')) {
-      return Status(status: 201);
-    } else if (status.body!
-        .contains('This username already exists, please choose another.')) {
-      return Status(
-        status: 400,
-        error: 'This username already exists, please choose another.',
-      );
-    } else if (status.body!.contains('The e-mail address is already used.')) {
-      return Status(
-        status: 400,
-        error:
-            'The e-mail address is already used by another user. Maybe you already have an account? You can reset the password of your other account.',
-      );
-    } else {
-      return Status(status: 400, error: 'Unrecognized request error');
-    }
+    return SignUpStatus(status);
   }
 
   /// Uses reset_password.pl to send a password reset Email

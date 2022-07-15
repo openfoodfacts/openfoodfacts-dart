@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:openfoodfacts/model/SignUpStatus.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
@@ -29,14 +32,30 @@ void main() {
     });
 
     test('Create existing user', () async {
-      Status response = await OpenFoodAPIClient.register(
+      SignUpStatus response = await OpenFoodAPIClient.register(
         name: 'Irrelevant',
         user: user,
         email: email,
       );
       expect(response.status, 400);
-      expect(response.error,
-          'This username already exists, please choose another.');
+      expect(
+        response.statusErrors!
+            .contains(SignUpStatusError.USERNAME_ALREADY_USED),
+        isTrue,
+      );
+    });
+
+    test('Create an user with an existing email', () async {
+      SignUpStatus response = await OpenFoodAPIClient.register(
+        name: _generateRandomString(OpenFoodAPIClient.USER_NAME_MAX_LENGTH),
+        user: user,
+        email: 'test@test.com',
+      );
+      expect(response.status, 400);
+      expect(
+        response.statusErrors!.contains(SignUpStatusError.EMAIL_ALREADY_USED),
+        isTrue,
+      );
     });
   });
 
@@ -53,4 +72,10 @@ void main() {
 
     expect(status.status, 200);
   });
+}
+
+String _generateRandomString(int length) {
+  final Random r = Random();
+  return String.fromCharCodes(
+      List.generate(length, (index) => r.nextInt(26) + 65));
 }
