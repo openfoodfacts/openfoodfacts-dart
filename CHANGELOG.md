@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.23.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.22.0...v1.23.0) (2022-07-15)
+
+
+### Features
+
+* Improvements for Sign up errors ([#511](https://github.com/openfoodfacts/openfoodfacts-dart/issues/511)) ([ebc5ff5](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ebc5ff50ba13b5151adac1bf1be7148b641898e5))
+
+
+### Bug Fixes
+
+* summer cleaning ([#512](https://github.com/openfoodfacts/openfoodfacts-dart/issues/512)) ([e6108dc](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e6108dc145d92af5a4b3ac3a4085047335d8e425))
+
 ## [1.22.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.21.0...v1.22.0) (2022-07-10)
 
 
