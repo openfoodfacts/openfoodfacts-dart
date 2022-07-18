@@ -1,5 +1,4 @@
 import 'package:http/http.dart';
-import 'package:meta/meta.dart';
 import 'package:openfoodfacts/interface/Parameter.dart';
 import 'package:openfoodfacts/model/User.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
@@ -118,7 +117,6 @@ abstract class AbstractQueryConfiguration {
       // ignore: deprecated_member_use_from_same_package
       OpenFoodAPIConfiguration.computeCountryCode(country, cc);
 
-  @protected
   String getUriPath();
 
   Future<Response> getResponse(

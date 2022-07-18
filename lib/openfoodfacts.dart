@@ -307,7 +307,20 @@ class OpenFoodAPIClient {
   }) async {
     final Response response = await configuration.getResponse(user, queryType);
     final String jsonStr = _replaceQuotes(response.body);
-    final SearchResult result = SearchResult.fromJson(json.decode(jsonStr));
+    final SearchResult result;
+    try {
+      result = SearchResult.fromJson(json.decode(jsonStr));
+    } on FormatException {
+      if (jsonStr.allMatches('/cgi/reset_password.pl').length == 3) {
+        throw FormatException(
+          'Format error, likely a wrong username or password',
+        );
+      }
+      throw FormatException(
+        'Received a non json response, open a issue under https://github.com/openfoodfacts/openfoodfacts-dart',
+      );
+    }
+
     _removeImages(result, configuration);
     return result;
   }
