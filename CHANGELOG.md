@@ -10,7 +10,7 @@
 
 ### Bug Fixes
 
-* summer cleaning ([#512](https://github.com/openfoodfacts/openfoodfacts-dart/issues/512)) ([e6108dc](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e6108dc145d92af5a4b3ac3a4085047335d8e425))
+* Removed over a year old deprecated methods/parameters ([#512](https://github.com/openfoodfacts/openfoodfacts-dart/issues/512)) ([e6108dc](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e6108dc145d92af5a4b3ac3a4085047335d8e425))
 
 ## [1.22.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.21.0...v1.22.0) (2022-07-10)
 
