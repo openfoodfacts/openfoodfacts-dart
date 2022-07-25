@@ -9,6 +9,7 @@ class SortBy extends Parameter {
     SortOption.POPULARITY: 'unique_scans_n',
     SortOption.NOTHING: 'nothing',
     SortOption.ECOSCORE: 'ecoscore_score',
+    SortOption.NUTRISCORE: 'nutriscore_score',
   };
 
   @override
@@ -30,4 +31,5 @@ enum SortOption {
   EDIT,
   NOTHING,
   ECOSCORE,
+  NUTRISCORE,
 }
