@@ -1,5 +1,9 @@
+import 'dart:math';
+
+import 'package:openfoodfacts/model/State.dart';
 import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
 import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
+import 'package:openfoodfacts/model/parameter/StatesTagsParameter.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 import 'package:openfoodfacts/model/parameter/WithoutAdditives.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
@@ -561,4 +565,123 @@ void main() {
       expect(result.products!.length, BARCODES.length - 1);
     });
   });
+
+  group(
+      '$OpenFoodAPIClient search products with completed/to-be-completed states',
+      () {
+    /// Returns the total number of products, and checks the states.
+    Future<int> _checkStatesTags(
+      final StatesTagsParameter statesTagsParameter,
+    ) async {
+      final List<Parameter> parameters = <Parameter>[
+        const PageNumber(page: 1),
+        const PageSize(size: 100),
+        statesTagsParameter,
+      ];
+
+      final ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+        parametersList: parameters,
+        fields: [ProductField.BARCODE, ProductField.STATES_TAGS],
+        language: OpenFoodFactsLanguage.FRENCH,
+        country: OpenFoodFactsCountry.FRANCE,
+      );
+
+      final SearchResult result = await OpenFoodAPIClient.searchProducts(
+        TestConstants.PROD_USER,
+        configuration,
+        queryType: QueryType.PROD,
+      );
+
+      expect(result.count, isNotNull);
+
+      expect(result.products, isNotNull);
+      for (final Product product in result.products!) {
+        expect(product.statesTags, isNotNull);
+        for (final MapEntry<State, bool> item
+            in statesTagsParameter.completed.entries) {
+          if (item.value) {
+            expect(product.statesTags, contains(item.key.completedTag));
+          } else {
+            expect(product.statesTags, contains(item.key.toBeCompletedTag));
+          }
+        }
+      }
+
+      return result.count!;
+    }
+
+    /// Returns random and different int's.
+    List<int> _getRandomInts({
+      required int count,
+      required final int max,
+    }) {
+      final Random random = Random();
+      final List<int> result = <int>[];
+      if (count > max) {
+        count = max;
+      }
+      for (int i = 0; i < count; i++) {
+        int index = random.nextInt(max);
+        while (result.contains(index)) {
+          index = (index + 1) % max;
+        }
+        result.add(index);
+      }
+      return result;
+    }
+
+    test('check products with "completed" states tags', () async {
+      for (final State state in State.values) {
+        final int count = await _checkStatesTags(
+          StatesTagsParameter(completed: {state: true}),
+        );
+        expect(count, greaterThan(0));
+      }
+    });
+
+    test('check products with "to-be-completed" states tags', () async {
+      for (final State state in State.values) {
+        final int count = await _checkStatesTags(
+          StatesTagsParameter(completed: {state: false}),
+        );
+        expect(count, greaterThan(0));
+      }
+    });
+
+    test('check products with 2 random states tags', () async {
+      final List<int> indices = _getRandomInts(
+        count: 2,
+        max: State.values.length,
+      );
+      final State state1 = State.values[indices[0]];
+      final State state2 = State.values[indices[1]];
+      final Random random = Random();
+      final bool completed1 = random.nextBool();
+      final bool completed2 = random.nextBool();
+      final int count1 = await _checkStatesTags(
+        StatesTagsParameter(completed: {
+          state1: completed1,
+        }),
+      );
+      final int count2 = await _checkStatesTags(
+        StatesTagsParameter(completed: {
+          state2: completed2,
+        }),
+      );
+      final int countBoth = await _checkStatesTags(
+        StatesTagsParameter(completed: {
+          state1: completed1,
+          state2: completed2,
+        }),
+      );
+      // it's an AND: with both conditions we always get less results.
+      expect(countBoth, lessThanOrEqualTo(count1));
+      expect(countBoth, lessThanOrEqualTo(count2));
+    });
+  },
+      timeout: Timeout(
+        // some tests can be slow here
+        Duration(seconds: 300),
+      ));
 }
