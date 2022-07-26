@@ -48,7 +48,7 @@ class ProductListQueryConfiguration extends AbstractQueryConfiguration {
   Map<String, String> getParametersMap() {
     final Map<String, String> result = super.getParametersMap();
 
-    result['code'] = '${barcodes.join(',')}.json';
+    result['code'] = barcodes.join(',');
 
     return result;
   }
