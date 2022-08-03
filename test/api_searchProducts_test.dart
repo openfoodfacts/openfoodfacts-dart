@@ -42,6 +42,87 @@ void main() {
       UNKNOWN_BARCODE,
     ];
 
+    /// Checks that all the sort options return different orders but same count.
+    ///
+    /// We can relatively assume that the top 100 pizzas in France are in
+    /// different orders.
+    test('search with all sort-by options', () async {
+      final Map<SortOption?, List<String>> previousValues =
+          <SortOption?, List<String>>{};
+      int? checkCount;
+      final List<SortOption?> sortOptions = <SortOption?>[];
+      sortOptions.addAll(SortOption.values);
+      sortOptions.add(null);
+      for (final SortOption? currentOption in sortOptions) {
+        final List<Parameter> parameters = <Parameter>[
+          const SearchTerms(terms: ['pizza']),
+          const PageNumber(page: 1),
+          const PageSize(size: 100),
+          if (currentOption != null) SortBy(option: currentOption)
+        ];
+
+        final SearchResult result = await OpenFoodAPIClient.searchProducts(
+          TestConstants.PROD_USER,
+          ProductSearchQueryConfiguration(
+            parametersList: parameters,
+            fields: [ProductField.BARCODE],
+            language: OpenFoodFactsLanguage.FRENCH,
+            country: OpenFoodFactsCountry.FRANCE,
+          ),
+          queryType: QueryType.PROD,
+        );
+
+        expect(result.products, isNotNull);
+        final List<String> barcodes = <String>[];
+        for (final Product product in result.products!) {
+          barcodes.add(product.barcode!);
+        }
+
+        for (final SortOption? previousOption in previousValues.keys) {
+          final Matcher matcher = equals(previousValues[previousOption]);
+          // special case: NOTHING and EDIT seem to be the same.
+          if ((previousOption == SortOption.NOTHING &&
+                  currentOption == SortOption.EDIT) ||
+              (previousOption == SortOption.EDIT &&
+                  currentOption == SortOption.NOTHING)) {
+            expect(
+              barcodes,
+              matcher,
+              reason:
+                  'Should be identical for $currentOption and $previousOption',
+            );
+          }
+          // special case: POPULARITY and no sort option seem to be the same.
+          else if ((previousOption == null &&
+                  currentOption == SortOption.POPULARITY) ||
+              (previousOption == SortOption.POPULARITY &&
+                  currentOption == null)) {
+            expect(
+              barcodes,
+              matcher,
+              reason:
+                  'Should be identical for $currentOption and $previousOption',
+            );
+          } else {
+            expect(
+              barcodes,
+              isNot(matcher),
+              reason:
+                  'Should be different for $currentOption and $previousOption',
+            );
+          }
+        }
+        previousValues[currentOption] = barcodes;
+
+        expect(result.count, isNotNull);
+        if (checkCount == null) {
+          checkCount = result.count; // first value
+        } else {
+          expect(result.count, checkCount); // check if same value
+        }
+      }
+    });
+
     test('search favorite products', () async {
       final parameters = <Parameter>[
         const PageNumber(page: 1),
@@ -590,7 +671,7 @@ void main() {
         language: OpenFoodFactsLanguage.FRENCH,
       );
 
-      final SearchResult result = await OpenFoodAPIClient.getProductList(
+      final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
         configuration,
         queryType: QueryType.PROD,
@@ -640,7 +721,7 @@ void main() {
           sortOption: SortOption.PRODUCT_NAME,
         );
 
-        final result = await OpenFoodAPIClient.getProductList(
+        final result = await OpenFoodAPIClient.searchProducts(
             TestConstants.PROD_USER, configuration);
         if (result.products == null || result.products!.isEmpty) {
           break;
@@ -696,7 +777,7 @@ void main() {
         language: OpenFoodFactsLanguage.FRENCH,
       );
 
-      final SearchResult result = await OpenFoodAPIClient.getProductList(
+      final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
         configuration,
         queryType: QueryType.PROD,
