@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:openfoodfacts/model/Attribute.dart';
+import 'package:openfoodfacts/model/parameter/Barcodes.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/personalized_search/available_attribute_groups.dart';
 import 'package:openfoodfacts/personalized_search/available_preference_importances.dart';
@@ -10,7 +11,6 @@ import 'package:openfoodfacts/personalized_search/product_preferences_manager.da
 import 'package:openfoodfacts/personalized_search/product_preferences_selection.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
-import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:test/test.dart';
 
@@ -128,8 +128,8 @@ void main() {
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         OpenFoodAPIConfiguration.globalUser,
-        ProductListQueryConfiguration(
-          inputBarcodes,
+        ProductSearchQueryConfiguration(
+          parametersList: [Barcodes.list(inputBarcodes)],
           language: language,
           fields: [ProductField.BARCODE, ProductField.ATTRIBUTE_GROUPS],
         ),

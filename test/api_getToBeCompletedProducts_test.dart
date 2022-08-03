@@ -1,13 +1,14 @@
+import 'package:openfoodfacts/model/State.dart';
+import 'package:openfoodfacts/model/parameter/StatesTagsParameter.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
-import 'package:openfoodfacts/utils/ToBeCompletedConfiguration.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';
 
-/// Integration tests related to [ToBeCompletedQueryConfiguration]
+/// Integration tests related to the "to-be-completed" products
 void main() {
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
@@ -18,13 +19,16 @@ void main() {
       final OpenFoodFactsLanguage language,
     ) async {
       final String reason = '($country, $language)';
-      final ToBeCompletedQueryConfiguration configuration =
-          ToBeCompletedQueryConfiguration(
+      final ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
         country: country,
         language: language,
         fields: [
           ProductField.BARCODE,
           ProductField.STATES_TAGS,
+        ],
+        parametersList: [
+          StatesTagsParameter(map: {State.COMPLETED: false}),
         ],
       );
 

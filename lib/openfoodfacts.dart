@@ -21,12 +21,14 @@ import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
 import 'package:openfoodfacts/model/TaxonomyLabel.dart';
 import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
 import 'package:openfoodfacts/model/TaxonomyPackaging.dart';
+import 'package:openfoodfacts/model/parameter/Barcodes.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/ImageHelper.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
+import 'package:openfoodfacts/utils/ProductSearchQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
@@ -334,8 +336,8 @@ class OpenFoodAPIClient {
   }) async {
     final SearchResult searchResult = await searchProducts(
       user,
-      ProductListQueryConfiguration(
-        barcodes,
+      ProductSearchQueryConfiguration(
+        parametersList: [Barcodes.list(barcodes)],
         language: language,
         country: country,
         fields: [
