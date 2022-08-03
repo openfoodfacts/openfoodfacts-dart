@@ -1766,7 +1766,11 @@ void main() {
     expect(result.product?.packaging, 'de:In einer Plastikflasche');
     expect(result.product?.packagingTags, ['de:in-einer-plastikflasche']);
     expect(result.product?.quantity, '5.5 Liter');
-  });
+  },
+      timeout: Timeout(
+        // some tests can be slow here
+        Duration(seconds: 90),
+      ));
 
   test('get new product fields', () async {
     final ProductQueryConfiguration configuration = ProductQueryConfiguration(
