@@ -523,7 +523,7 @@ void main() {
         language: OpenFoodFactsLanguage.FRENCH,
       );
 
-      final SearchResult result = await OpenFoodAPIClient.getProductList(
+      final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
         configuration,
         queryType: QueryType.PROD,
@@ -573,7 +573,7 @@ void main() {
           sortOption: SortOption.PRODUCT_NAME,
         );
 
-        final result = await OpenFoodAPIClient.getProductList(
+        final result = await OpenFoodAPIClient.searchProducts(
             TestConstants.PROD_USER, configuration);
         if (result.products == null || result.products!.isEmpty) {
           break;
@@ -629,7 +629,7 @@ void main() {
         language: OpenFoodFactsLanguage.FRENCH,
       );
 
-      final SearchResult result = await OpenFoodAPIClient.getProductList(
+      final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
         configuration,
         queryType: QueryType.PROD,

@@ -126,7 +126,7 @@ void main() {
         BARCODE_CHORIZO,
       ];
 
-      final SearchResult result = await OpenFoodAPIClient.getProductList(
+      final SearchResult result = await OpenFoodAPIClient.searchProducts(
         OpenFoodAPIConfiguration.globalUser,
         ProductListQueryConfiguration(
           inputBarcodes,
