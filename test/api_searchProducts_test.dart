@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:openfoodfacts/model/Allergens.dart';
+import 'package:openfoodfacts/model/parameter/AllergensParameter.dart';
 import 'package:openfoodfacts/model/State.dart';
 import 'package:openfoodfacts/model/IngredientsAnalysisTags.dart';
 import 'package:openfoodfacts/model/parameter/IngredientsAnalysisParameter.dart';
@@ -793,6 +795,174 @@ void main() {
     });
   });
 
+  /// Returns random and different int's.
+  List<int> _getRandomInts({
+    required int count,
+    required final int max,
+  }) {
+    final Random random = Random();
+    final List<int> result = <int>[];
+    if (count > max) {
+      count = max;
+    }
+    for (int i = 0; i < count; i++) {
+      int index = random.nextInt(max);
+      while (result.contains(index)) {
+        index = (index + 1) % max;
+      }
+      result.add(index);
+    }
+    return result;
+  }
+
+  group('$OpenFoodAPIClient search products with/without allergens', () {
+    /// Returns the total number of products, and checks the allergens.
+    Future<int> _checkAllergens(
+      final AllergensParameter allergensParameter,
+    ) async {
+      final List<Parameter> parameters = <Parameter>[
+        const PageNumber(page: 1),
+        const PageSize(size: 100),
+        allergensParameter,
+      ];
+
+      final ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+        parametersList: parameters,
+        fields: [ProductField.BARCODE, ProductField.ALLERGENS],
+        language: OpenFoodFactsLanguage.FRENCH,
+        country: OpenFoodFactsCountry.FRANCE,
+      );
+
+      final SearchResult result = await OpenFoodAPIClient.searchProducts(
+        TestConstants.PROD_USER,
+        configuration,
+        queryType: QueryType.PROD,
+      );
+
+      expect(result.count, isNotNull);
+
+      expect(result.products, isNotNull);
+      for (final Product product in result.products!) {
+        expect(product.allergens, isNotNull);
+        if (allergensParameter.include != null &&
+            allergensParameter.include!.isNotEmpty) {
+          expect(product.allergens!.ids, isNotNull);
+          for (final AllergensTag tag in allergensParameter.include!) {
+            expect(product.allergens!.ids, contains(tag.tag));
+          }
+        }
+        if (allergensParameter.exclude != null &&
+            allergensParameter.exclude!.isNotEmpty) {
+          expect(product.allergens!.ids, isNotNull);
+          for (final AllergensTag tag in allergensParameter.exclude!) {
+            expect(product.allergens!.ids, isNot(contains(tag.tag)));
+          }
+        }
+      }
+
+      return result.count!;
+    }
+
+    test('check products with allergens', () async {
+      for (final AllergensTag tag in AllergensTag.values) {
+        final int count = await _checkAllergens(
+          AllergensParameter(include: [tag]),
+        );
+        expect(count, greaterThan(0));
+      }
+    });
+
+    test('check products without allergens', () async {
+      for (final AllergensTag tag in AllergensTag.values) {
+        final int count = await _checkAllergens(
+          AllergensParameter(exclude: [tag]),
+        );
+        expect(count, greaterThan(0));
+      }
+    });
+
+    test('check products with and without the same allergens', () async {
+      for (final AllergensTag tag in AllergensTag.values) {
+        final int count = await _checkAllergens(
+          AllergensParameter(include: [tag], exclude: [tag]),
+        );
+        // it's an AND: with both conditions we always get 0 products.
+        expect(count, 0);
+      }
+    });
+
+    test('check products with random 2 allergens', () async {
+      final List<int> indices = _getRandomInts(
+        count: 2,
+        max: AllergensTag.values.length,
+      );
+      final int count1 = await _checkAllergens(
+        AllergensParameter(
+          include: [
+            AllergensTag.values[indices[0]],
+          ],
+        ),
+      );
+      final int count2 = await _checkAllergens(
+        AllergensParameter(
+          include: [
+            AllergensTag.values[indices[1]],
+          ],
+        ),
+      );
+      final int countBoth = await _checkAllergens(
+        AllergensParameter(
+          include: [
+            AllergensTag.values[indices[0]],
+            AllergensTag.values[indices[1]],
+          ],
+        ),
+      );
+      // it's an AND: with both conditions we always get less results.
+      expect(countBoth, lessThanOrEqualTo(count1));
+      expect(countBoth, lessThanOrEqualTo(count2));
+    });
+
+    test('check products with and without random 2 allergens', () async {
+      final List<int> indices = _getRandomInts(
+        count: 2,
+        max: AllergensTag.values.length,
+      );
+      final int count1 = await _checkAllergens(
+        AllergensParameter(
+          include: [
+            AllergensTag.values[indices[0]],
+          ],
+        ),
+      );
+      final int count2 = await _checkAllergens(
+        AllergensParameter(
+          exclude: [
+            AllergensTag.values[indices[1]],
+          ],
+        ),
+      );
+      final int countBoth = await _checkAllergens(
+        AllergensParameter(
+          include: [
+            AllergensTag.values[indices[0]],
+          ],
+          exclude: [
+            AllergensTag.values[indices[1]],
+          ],
+        ),
+      );
+      // it's an AND: with both conditions we always get less results.
+      expect(countBoth, lessThanOrEqualTo(count1));
+      expect(countBoth, lessThanOrEqualTo(count2));
+    });
+  },
+      timeout: Timeout(
+        // some tests can be slow here
+        Duration(seconds: 300),
+      ));
+
   group(
       '$OpenFoodAPIClient search products with completed/to-be-completed states',
       () {
@@ -836,26 +1006,6 @@ void main() {
       }
 
       return result.count!;
-    }
-
-    /// Returns random and different int's.
-    List<int> _getRandomInts({
-      required int count,
-      required final int max,
-    }) {
-      final Random random = Random();
-      final List<int> result = <int>[];
-      if (count > max) {
-        count = max;
-      }
-      for (int i = 0; i < count; i++) {
-        int index = random.nextInt(max);
-        while (result.contains(index)) {
-          index = (index + 1) % max;
-        }
-        result.add(index);
-      }
-      return result;
     }
 
     test('check products with "completed" states tags', () async {
