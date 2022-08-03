@@ -2,8 +2,12 @@ import 'dart:math';
 
 import 'package:openfoodfacts/model/Allergens.dart';
 import 'package:openfoodfacts/model/parameter/AllergensParameter.dart';
+import 'package:openfoodfacts/model/State.dart';
+import 'package:openfoodfacts/model/IngredientsAnalysisTags.dart';
+import 'package:openfoodfacts/model/parameter/IngredientsAnalysisParameter.dart';
 import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
 import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
+import 'package:openfoodfacts/model/parameter/StatesTagsParameter.dart';
 import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 import 'package:openfoodfacts/model/parameter/WithoutAdditives.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
@@ -41,6 +45,87 @@ void main() {
       '3270190127512',
       UNKNOWN_BARCODE,
     ];
+
+    /// Checks that all the sort options return different orders but same count.
+    ///
+    /// We can relatively assume that the top 100 pizzas in France are in
+    /// different orders.
+    test('search with all sort-by options', () async {
+      final Map<SortOption?, List<String>> previousValues =
+          <SortOption?, List<String>>{};
+      int? checkCount;
+      final List<SortOption?> sortOptions = <SortOption?>[];
+      sortOptions.addAll(SortOption.values);
+      sortOptions.add(null);
+      for (final SortOption? currentOption in sortOptions) {
+        final List<Parameter> parameters = <Parameter>[
+          const SearchTerms(terms: ['pizza']),
+          const PageNumber(page: 1),
+          const PageSize(size: 100),
+          if (currentOption != null) SortBy(option: currentOption)
+        ];
+
+        final SearchResult result = await OpenFoodAPIClient.searchProducts(
+          TestConstants.PROD_USER,
+          ProductSearchQueryConfiguration(
+            parametersList: parameters,
+            fields: [ProductField.BARCODE],
+            language: OpenFoodFactsLanguage.FRENCH,
+            country: OpenFoodFactsCountry.FRANCE,
+          ),
+          queryType: QueryType.PROD,
+        );
+
+        expect(result.products, isNotNull);
+        final List<String> barcodes = <String>[];
+        for (final Product product in result.products!) {
+          barcodes.add(product.barcode!);
+        }
+
+        for (final SortOption? previousOption in previousValues.keys) {
+          final Matcher matcher = equals(previousValues[previousOption]);
+          // special case: NOTHING and EDIT seem to be the same.
+          if ((previousOption == SortOption.NOTHING &&
+                  currentOption == SortOption.EDIT) ||
+              (previousOption == SortOption.EDIT &&
+                  currentOption == SortOption.NOTHING)) {
+            expect(
+              barcodes,
+              matcher,
+              reason:
+                  'Should be identical for $currentOption and $previousOption',
+            );
+          }
+          // special case: POPULARITY and no sort option seem to be the same.
+          else if ((previousOption == null &&
+                  currentOption == SortOption.POPULARITY) ||
+              (previousOption == SortOption.POPULARITY &&
+                  currentOption == null)) {
+            expect(
+              barcodes,
+              matcher,
+              reason:
+                  'Should be identical for $currentOption and $previousOption',
+            );
+          } else {
+            expect(
+              barcodes,
+              isNot(matcher),
+              reason:
+                  'Should be different for $currentOption and $previousOption',
+            );
+          }
+        }
+        previousValues[currentOption] = barcodes;
+
+        expect(result.count, isNotNull);
+        if (checkCount == null) {
+          checkCount = result.count; // first value
+        } else {
+          expect(result.count, checkCount); // check if same value
+        }
+      }
+    });
 
     test('search favorite products', () async {
       final parameters = <Parameter>[
@@ -93,6 +178,150 @@ void main() {
       expect(result.products![0].runtimeType, Product);
       expect(result.count, greaterThan(30000));
     });
+
+    /// Returns the total number of products, and checks if the statuses match.
+    Future<int?> _checkIngredientsAnalysis(
+      final VeganStatus? veganStatus,
+      final VegetarianStatus? vegetarianStatus,
+      final PalmOilFreeStatus? palmOilFreeStatus,
+    ) async {
+      if (veganStatus == null &&
+          vegetarianStatus == null &&
+          palmOilFreeStatus == null) {
+        return null;
+      }
+
+      final List<Parameter> parameters = <Parameter>[
+        const PageNumber(page: 1),
+        const PageSize(size: 100),
+        IngredientsAnalysisParameter(
+          veganStatus: veganStatus,
+          vegetarianStatus: vegetarianStatus,
+          palmOilFreeStatus: palmOilFreeStatus,
+        ),
+      ];
+
+      final ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+        parametersList: parameters,
+        fields: [
+          ProductField.BARCODE,
+          ProductField.INGREDIENTS_ANALYSIS_TAGS,
+        ],
+        language: OpenFoodFactsLanguage.FRENCH,
+        country: OpenFoodFactsCountry.FRANCE,
+      );
+
+      final SearchResult result = await OpenFoodAPIClient.searchProducts(
+        TestConstants.PROD_USER,
+        configuration,
+        queryType: QueryType.PROD,
+      );
+
+      expect(result.products, isNotNull);
+      for (final Product product in result.products!) {
+        if (veganStatus != null) {
+          expect(
+            product.ingredientsAnalysisTags!.veganStatus,
+            veganStatus,
+          );
+        }
+        if (vegetarianStatus != null) {
+          expect(
+            product.ingredientsAnalysisTags!.vegetarianStatus,
+            vegetarianStatus,
+          );
+        }
+        if (palmOilFreeStatus != null) {
+          expect(
+            product.ingredientsAnalysisTags!.palmOilFreeStatus,
+            palmOilFreeStatus,
+          );
+        }
+      }
+      return result.count!;
+    }
+
+    test('check vegan search', () async {
+      for (final VeganStatus status in VeganStatus.values) {
+        await _checkIngredientsAnalysis(status, null, null);
+      }
+    },
+        timeout: Timeout(
+          // some tests can be slow here
+          Duration(seconds: 90),
+        ));
+
+    test('check vegetarian search', () async {
+      for (final VegetarianStatus status in VegetarianStatus.values) {
+        await _checkIngredientsAnalysis(null, status, null);
+      }
+    },
+        timeout: Timeout(
+          // some tests can be slow here
+          Duration(seconds: 90),
+        ));
+
+    test('check palm oil search', () async {
+      for (final PalmOilFreeStatus status in PalmOilFreeStatus.values) {
+        await _checkIngredientsAnalysis(null, null, status);
+      }
+    },
+        timeout: Timeout(
+          // some tests can be slow here
+          Duration(seconds: 90),
+        ));
+
+    test('check random vegan+vegetarian+palm oil search', () async {
+      final Random random = Random();
+      final int veganIndex = random.nextInt(VeganStatus.values.length);
+      final int vegetarianIndex =
+          random.nextInt(VegetarianStatus.values.length);
+      final int palmOilFreeIndex =
+          random.nextInt(PalmOilFreeStatus.values.length);
+      await _checkIngredientsAnalysis(
+        VeganStatus.values[veganIndex],
+        VegetarianStatus.values[vegetarianIndex],
+        PalmOilFreeStatus.values[palmOilFreeIndex],
+      );
+    },
+        timeout: Timeout(
+          // some tests can be slow here
+          Duration(seconds: 90),
+        ));
+
+    /// If you know it's not vegetarian, then it can't be vegan at all.
+    test('check vegan/vegetarian consistency', () async {
+      const VegetarianStatus nonVegetarian = VegetarianStatus.NON_VEGETARIAN;
+      expect(
+        await _checkIngredientsAnalysis(
+          VeganStatus.VEGAN,
+          nonVegetarian,
+          null,
+        ),
+        0,
+      );
+      expect(
+        await _checkIngredientsAnalysis(
+          VeganStatus.MAYBE_VEGAN,
+          nonVegetarian,
+          null,
+        ),
+        0,
+      );
+      expect(
+        await _checkIngredientsAnalysis(
+          VeganStatus.VEGAN_STATUS_UNKNOWN,
+          nonVegetarian,
+          null,
+        ),
+        0,
+      );
+    },
+        timeout: Timeout(
+          // some tests can be slow here
+          Duration(seconds: 90),
+        ));
 
     test('type bug : ingredient percent int vs String ', () async {
       final parameters = <Parameter>[
@@ -446,7 +675,7 @@ void main() {
         language: OpenFoodFactsLanguage.FRENCH,
       );
 
-      final SearchResult result = await OpenFoodAPIClient.getProductList(
+      final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
         configuration,
         queryType: QueryType.PROD,
@@ -496,7 +725,7 @@ void main() {
           sortOption: SortOption.PRODUCT_NAME,
         );
 
-        final result = await OpenFoodAPIClient.getProductList(
+        final result = await OpenFoodAPIClient.searchProducts(
             TestConstants.PROD_USER, configuration);
         if (result.products == null || result.products!.isEmpty) {
           break;
@@ -552,7 +781,7 @@ void main() {
         language: OpenFoodFactsLanguage.FRENCH,
       );
 
-      final SearchResult result = await OpenFoodAPIClient.getProductList(
+      final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
         configuration,
         queryType: QueryType.PROD,
@@ -565,6 +794,26 @@ void main() {
       expect(result.products!.length, BARCODES.length - 1);
     });
   });
+
+  /// Returns random and different int's.
+  List<int> _getRandomInts({
+    required int count,
+    required final int max,
+  }) {
+    final Random random = Random();
+    final List<int> result = <int>[];
+    if (count > max) {
+      count = max;
+    }
+    for (int i = 0; i < count; i++) {
+      int index = random.nextInt(max);
+      while (result.contains(index)) {
+        index = (index + 1) % max;
+      }
+      result.add(index);
+    }
+    return result;
+  }
 
   group('$OpenFoodAPIClient search products with/without allergens', () {
     /// Returns the total number of products, and checks the allergens.
@@ -613,26 +862,6 @@ void main() {
       }
 
       return result.count!;
-    }
-
-    /// Returns random and different int's.
-    List<int> _getRandomInts({
-      required int count,
-      required final int max,
-    }) {
-      final Random random = Random();
-      final List<int> result = <int>[];
-      if (count > max) {
-        count = max;
-      }
-      for (int i = 0; i < count; i++) {
-        int index = random.nextInt(max);
-        while (result.contains(index)) {
-          index = (index + 1) % max;
-        }
-        result.add(index);
-      }
-      return result;
     }
 
     test('check products with allergens', () async {
@@ -731,6 +960,105 @@ void main() {
   },
       timeout: Timeout(
         // some tests can be slow here
-        Duration(seconds: 240),
+        Duration(seconds: 300),
+      ));
+
+  group(
+      '$OpenFoodAPIClient search products with completed/to-be-completed states',
+      () {
+    /// Returns the total number of products, and checks the states.
+    Future<int> _checkStatesTags(
+      final StatesTagsParameter statesTagsParameter,
+    ) async {
+      final List<Parameter> parameters = <Parameter>[
+        const PageNumber(page: 1),
+        const PageSize(size: 100),
+        statesTagsParameter,
+      ];
+
+      final ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+        parametersList: parameters,
+        fields: [ProductField.BARCODE, ProductField.STATES_TAGS],
+        language: OpenFoodFactsLanguage.FRENCH,
+        country: OpenFoodFactsCountry.FRANCE,
+      );
+
+      final SearchResult result = await OpenFoodAPIClient.searchProducts(
+        TestConstants.PROD_USER,
+        configuration,
+        queryType: QueryType.PROD,
+      );
+
+      expect(result.count, isNotNull);
+
+      expect(result.products, isNotNull);
+      for (final Product product in result.products!) {
+        expect(product.statesTags, isNotNull);
+        for (final MapEntry<State, bool> item
+            in statesTagsParameter.completed.entries) {
+          if (item.value) {
+            expect(product.statesTags, contains(item.key.completedTag));
+          } else {
+            expect(product.statesTags, contains(item.key.toBeCompletedTag));
+          }
+        }
+      }
+
+      return result.count!;
+    }
+
+    test('check products with "completed" states tags', () async {
+      for (final State state in State.values) {
+        final int count = await _checkStatesTags(
+          StatesTagsParameter(completed: {state: true}),
+        );
+        expect(count, greaterThan(0));
+      }
+    });
+
+    test('check products with "to-be-completed" states tags', () async {
+      for (final State state in State.values) {
+        final int count = await _checkStatesTags(
+          StatesTagsParameter(completed: {state: false}),
+        );
+        expect(count, greaterThan(0));
+      }
+    });
+
+    test('check products with 2 random states tags', () async {
+      final List<int> indices = _getRandomInts(
+        count: 2,
+        max: State.values.length,
+      );
+      final State state1 = State.values[indices[0]];
+      final State state2 = State.values[indices[1]];
+      final Random random = Random();
+      final bool completed1 = random.nextBool();
+      final bool completed2 = random.nextBool();
+      final int count1 = await _checkStatesTags(
+        StatesTagsParameter(completed: {
+          state1: completed1,
+        }),
+      );
+      final int count2 = await _checkStatesTags(
+        StatesTagsParameter(completed: {
+          state2: completed2,
+        }),
+      );
+      final int countBoth = await _checkStatesTags(
+        StatesTagsParameter(completed: {
+          state1: completed1,
+          state2: completed2,
+        }),
+      );
+      // it's an AND: with both conditions we always get less results.
+      expect(countBoth, lessThanOrEqualTo(count1));
+      expect(countBoth, lessThanOrEqualTo(count2));
+    });
+  },
+      timeout: Timeout(
+        // some tests can be slow here
+        Duration(seconds: 300),
       ));
 }
