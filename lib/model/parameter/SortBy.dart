@@ -8,6 +8,8 @@ class SortBy extends Parameter {
     SortOption.EDIT: 'last_modified_t',
     SortOption.POPULARITY: 'unique_scans_n',
     SortOption.NOTHING: 'nothing',
+    SortOption.ECOSCORE: 'ecoscore_score',
+    SortOption.NUTRISCORE: 'nutriscore_score',
   };
 
   @override
@@ -28,4 +30,6 @@ enum SortOption {
   CREATED,
   EDIT,
   NOTHING,
+  ECOSCORE,
+  NUTRISCORE,
 }

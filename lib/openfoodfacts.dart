@@ -45,7 +45,6 @@ import 'utils/HttpHelper.dart';
 import 'utils/LanguageHelper.dart';
 import 'utils/ProductHelper.dart';
 import 'utils/ProductQueryConfigurations.dart';
-import 'utils/ProductSearchQueryConfiguration.dart';
 
 export 'events.dart';
 export 'folksonomy.dart';
@@ -294,14 +293,6 @@ class OpenFoodAPIClient {
   /// Query the language specific host from OpenFoodFacts.
   static Future<SearchResult> searchProducts(
     final User? user,
-    final ProductSearchQueryConfiguration configuration, {
-    final QueryType? queryType,
-  }) async =>
-      getProducts(user, configuration, queryType: queryType);
-
-  /// Returns products searched according to a [configuration].
-  static Future<SearchResult> getProducts(
-    final User? user,
     final AbstractQueryConfiguration configuration, {
     final QueryType? queryType,
   }) async {
@@ -312,7 +303,20 @@ class OpenFoodAPIClient {
     return result;
   }
 
+  /// Returns products searched according to a [configuration].
+  // TODO: deprecated from 2022-07-26; remove when old enough
+  @Deprecated('Use searchProducts instead')
+  static Future<SearchResult> getProducts(
+    final User? user,
+    final AbstractQueryConfiguration configuration, {
+    final QueryType? queryType,
+  }) async =>
+      searchProducts(user, configuration, queryType: queryType);
+
   /// Search the OpenFoodFacts product database: multiple barcodes in input.
+  // TODO: deprecated from 2022-07-26; remove when old enough
+  @Deprecated(
+      'Use method searchProducts with ProductListQueryConfiguration instead')
   static Future<SearchResult> getProductList(
     final User? user,
     final ProductListQueryConfiguration configuration, {
@@ -328,7 +332,7 @@ class OpenFoodAPIClient {
     final OpenFoodFactsCountry? country,
     final QueryType? queryType,
   }) async {
-    final SearchResult searchResult = await getProductList(
+    final SearchResult searchResult = await searchProducts(
       user,
       ProductListQueryConfiguration(
         barcodes,

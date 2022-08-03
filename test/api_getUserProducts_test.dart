@@ -34,7 +34,7 @@ void main() {
 
       final SearchResult result;
       try {
-        result = await OpenFoodAPIClient.getProducts(
+        result = await OpenFoodAPIClient.searchProducts(
           OpenFoodAPIConfiguration.globalUser,
           configuration,
           queryType: OpenFoodAPIConfiguration.globalQueryType,
