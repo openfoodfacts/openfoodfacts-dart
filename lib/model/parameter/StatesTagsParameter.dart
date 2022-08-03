@@ -1,7 +1,7 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 import 'package:openfoodfacts/model/State.dart';
 
-/// States Tags as completed or to-be-completed. Filter combo mode is 'AND'.
+/// States Tags as completed or to-be-completed.
 class StatesTagsParameter extends Parameter {
   @override
   String getName() => 'states_tags';
@@ -18,6 +18,8 @@ class StatesTagsParameter extends Parameter {
   }
 
   /// [State]s to be considered as completed (true) or to-be-completed (false).
+  ///
+  /// When we have several items, the results returned use a logical AND.
   final Map<State, bool> completed;
 
   StatesTagsParameter({required this.completed});
