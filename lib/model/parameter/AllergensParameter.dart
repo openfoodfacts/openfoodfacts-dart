@@ -1,7 +1,9 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 import 'package:openfoodfacts/model/Allergens.dart';
 
-/// List of allergens to filter in and out. Filter combo mode is 'AND'.
+/// List of allergens to filter in and out.
+///
+/// When we have several items, the results returned use a logical AND.
 class AllergensParameter extends Parameter {
   @override
   String getName() => 'allergens_tags';
