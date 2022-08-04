@@ -4,7 +4,7 @@ import 'package:openfoodfacts/model/Allergens.dart';
 import 'package:openfoodfacts/model/parameter/AllergensParameter.dart';
 import 'package:openfoodfacts/model/State.dart';
 import 'package:openfoodfacts/model/IngredientsAnalysisTags.dart';
-import 'package:openfoodfacts/model/parameter/Barcodes.dart';
+import 'package:openfoodfacts/model/parameter/BarcodeParameter.dart';
 import 'package:openfoodfacts/model/parameter/IngredientsAnalysisParameter.dart';
 import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
 import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
@@ -670,7 +670,7 @@ void main() {
     test('multiple products', () async {
       final ProductSearchQueryConfiguration configuration =
           ProductSearchQueryConfiguration(
-        parametersList: [Barcodes.list(BARCODES)],
+        parametersList: [BarcodeParameter.list(BARCODES)],
         fields: [ProductField.BARCODE, ProductField.NAME],
         language: OpenFoodFactsLanguage.FRENCH,
       );
@@ -718,7 +718,7 @@ void main() {
       while (true) {
         final configuration = ProductSearchQueryConfiguration(
           parametersList: [
-            Barcodes.list(BARCODES),
+            BarcodeParameter.list(BARCODES),
             PageNumber(page: page),
             PageSize(size: 5),
             SortBy(option: SortOption.PRODUCT_NAME),
@@ -778,7 +778,7 @@ void main() {
 
       final ProductSearchQueryConfiguration configuration =
           ProductSearchQueryConfiguration(
-        parametersList: [Barcodes.list(manyBarcodes)],
+        parametersList: [BarcodeParameter.list(manyBarcodes)],
         fields: [ProductField.BARCODE, ProductField.NAME],
         language: OpenFoodFactsLanguage.FRENCH,
       );

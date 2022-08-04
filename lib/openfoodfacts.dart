@@ -21,7 +21,7 @@ import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
 import 'package:openfoodfacts/model/TaxonomyLabel.dart';
 import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
 import 'package:openfoodfacts/model/TaxonomyPackaging.dart';
-import 'package:openfoodfacts/model/parameter/Barcodes.dart';
+import 'package:openfoodfacts/model/parameter/BarcodeParameter.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/ImageHelper.dart';
@@ -337,7 +337,7 @@ class OpenFoodAPIClient {
     final SearchResult searchResult = await searchProducts(
       user,
       ProductSearchQueryConfiguration(
-        parametersList: [Barcodes.list(barcodes)],
+        parametersList: [BarcodeParameter.list(barcodes)],
         language: language,
         country: country,
         fields: [

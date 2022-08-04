@@ -1,7 +1,7 @@
 import 'package:openfoodfacts/interface/Parameter.dart';
 
 /// "Barcodes" search API parameter.
-class Barcodes extends Parameter {
+class BarcodeParameter extends Parameter {
   @override
   String getName() => 'code';
 
@@ -10,7 +10,7 @@ class Barcodes extends Parameter {
 
   final List<String> codes;
 
-  Barcodes(final String code) : this.list([code]);
+  BarcodeParameter(final String code) : this.list([code]);
 
-  const Barcodes.list(this.codes);
+  const BarcodeParameter.list(this.codes);
 }
