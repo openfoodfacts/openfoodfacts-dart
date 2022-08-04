@@ -3,6 +3,9 @@ import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 
 /// Query Configuration for all the to-be-completed products.
+// TODO: deprecated from 2022-08-03; remove when old enough
+@Deprecated(
+    'Use ProductSearchQueryConfiguration with StatesTagsParameter instead')
 class ToBeCompletedQueryConfiguration extends AbstractQueryConfiguration {
   ToBeCompletedQueryConfiguration({
     final OpenFoodFactsLanguage? language,

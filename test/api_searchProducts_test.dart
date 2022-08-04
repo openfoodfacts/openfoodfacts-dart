@@ -4,6 +4,7 @@ import 'package:openfoodfacts/model/Allergens.dart';
 import 'package:openfoodfacts/model/parameter/AllergensParameter.dart';
 import 'package:openfoodfacts/model/State.dart';
 import 'package:openfoodfacts/model/IngredientsAnalysisTags.dart';
+import 'package:openfoodfacts/model/parameter/BarcodeParameter.dart';
 import 'package:openfoodfacts/model/parameter/IngredientsAnalysisParameter.dart';
 import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
 import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
@@ -14,7 +15,6 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
-import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:test/test.dart';
 
@@ -320,7 +320,7 @@ void main() {
     },
         timeout: Timeout(
           // some tests can be slow here
-          Duration(seconds: 90),
+          Duration(seconds: 300),
         ));
 
     test('type bug : ingredient percent int vs String ', () async {
@@ -668,9 +668,9 @@ void main() {
         ));
 
     test('multiple products', () async {
-      final ProductListQueryConfiguration configuration =
-          ProductListQueryConfiguration(
-        BARCODES,
+      final ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+        parametersList: [BarcodeParameter.list(BARCODES)],
         fields: [ProductField.BARCODE, ProductField.NAME],
         language: OpenFoodFactsLanguage.FRENCH,
       );
@@ -716,13 +716,15 @@ void main() {
       final obtainedBarcodes = <String>[];
       var page = 1;
       while (true) {
-        final configuration = ProductListQueryConfiguration(
-          BARCODES,
+        final configuration = ProductSearchQueryConfiguration(
+          parametersList: [
+            BarcodeParameter.list(BARCODES),
+            PageNumber(page: page),
+            PageSize(size: 5),
+            SortBy(option: SortOption.PRODUCT_NAME),
+          ],
           fields: [ProductField.BARCODE, ProductField.NAME],
           language: OpenFoodFactsLanguage.FRENCH,
-          page: page,
-          pageSize: 5,
-          sortOption: SortOption.PRODUCT_NAME,
         );
 
         final result = await OpenFoodAPIClient.searchProducts(
@@ -774,9 +776,9 @@ void main() {
         manyBarcodes.addAll(BARCODES);
       }
 
-      final ProductListQueryConfiguration configuration =
-          ProductListQueryConfiguration(
-        manyBarcodes,
+      final ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+        parametersList: [BarcodeParameter.list(manyBarcodes)],
         fields: [ProductField.BARCODE, ProductField.NAME],
         language: OpenFoodFactsLanguage.FRENCH,
       );
@@ -845,18 +847,13 @@ void main() {
       expect(result.products, isNotNull);
       for (final Product product in result.products!) {
         expect(product.allergens, isNotNull);
-        if (allergensParameter.include != null &&
-            allergensParameter.include!.isNotEmpty) {
-          expect(product.allergens!.ids, isNotNull);
-          for (final AllergensTag tag in allergensParameter.include!) {
-            expect(product.allergens!.ids, contains(tag.tag));
-          }
-        }
-        if (allergensParameter.exclude != null &&
-            allergensParameter.exclude!.isNotEmpty) {
-          expect(product.allergens!.ids, isNotNull);
-          for (final AllergensTag tag in allergensParameter.exclude!) {
-            expect(product.allergens!.ids, isNot(contains(tag.tag)));
+        expect(product.allergens!.ids, isNotNull);
+        for (final MapEntry<AllergensTag, bool> item
+            in allergensParameter.map.entries) {
+          if (item.value) {
+            expect(product.allergens!.ids, contains(item.key.tag));
+          } else {
+            expect(product.allergens!.ids, isNot(contains(item.key.tag)));
           }
         }
       }
@@ -867,7 +864,7 @@ void main() {
     test('check products with allergens', () async {
       for (final AllergensTag tag in AllergensTag.values) {
         final int count = await _checkAllergens(
-          AllergensParameter(include: [tag]),
+          AllergensParameter(map: {tag: true}),
         );
         expect(count, greaterThan(0));
       }
@@ -876,19 +873,9 @@ void main() {
     test('check products without allergens', () async {
       for (final AllergensTag tag in AllergensTag.values) {
         final int count = await _checkAllergens(
-          AllergensParameter(exclude: [tag]),
+          AllergensParameter(map: {tag: false}),
         );
         expect(count, greaterThan(0));
-      }
-    });
-
-    test('check products with and without the same allergens', () async {
-      for (final AllergensTag tag in AllergensTag.values) {
-        final int count = await _checkAllergens(
-          AllergensParameter(include: [tag], exclude: [tag]),
-        );
-        // it's an AND: with both conditions we always get 0 products.
-        expect(count, 0);
       }
     });
 
@@ -897,27 +884,16 @@ void main() {
         count: 2,
         max: AllergensTag.values.length,
       );
+      final AllergensTag tag1 = AllergensTag.values[indices[0]];
+      final AllergensTag tag2 = AllergensTag.values[indices[1]];
       final int count1 = await _checkAllergens(
-        AllergensParameter(
-          include: [
-            AllergensTag.values[indices[0]],
-          ],
-        ),
+        AllergensParameter(map: {tag1: true}),
       );
       final int count2 = await _checkAllergens(
-        AllergensParameter(
-          include: [
-            AllergensTag.values[indices[1]],
-          ],
-        ),
+        AllergensParameter(map: {tag2: true}),
       );
       final int countBoth = await _checkAllergens(
-        AllergensParameter(
-          include: [
-            AllergensTag.values[indices[0]],
-            AllergensTag.values[indices[1]],
-          ],
-        ),
+        AllergensParameter(map: {tag1: true, tag2: true}),
       );
       // it's an AND: with both conditions we always get less results.
       expect(countBoth, lessThanOrEqualTo(count1));
@@ -929,29 +905,16 @@ void main() {
         count: 2,
         max: AllergensTag.values.length,
       );
+      final AllergensTag tag1 = AllergensTag.values[indices[0]];
+      final AllergensTag tag2 = AllergensTag.values[indices[1]];
       final int count1 = await _checkAllergens(
-        AllergensParameter(
-          include: [
-            AllergensTag.values[indices[0]],
-          ],
-        ),
+        AllergensParameter(map: {tag1: true}),
       );
       final int count2 = await _checkAllergens(
-        AllergensParameter(
-          exclude: [
-            AllergensTag.values[indices[1]],
-          ],
-        ),
+        AllergensParameter(map: {tag2: false}),
       );
       final int countBoth = await _checkAllergens(
-        AllergensParameter(
-          include: [
-            AllergensTag.values[indices[0]],
-          ],
-          exclude: [
-            AllergensTag.values[indices[1]],
-          ],
-        ),
+        AllergensParameter(map: {tag1: true, tag2: false}),
       );
       // it's an AND: with both conditions we always get less results.
       expect(countBoth, lessThanOrEqualTo(count1));
@@ -996,7 +959,7 @@ void main() {
       for (final Product product in result.products!) {
         expect(product.statesTags, isNotNull);
         for (final MapEntry<State, bool> item
-            in statesTagsParameter.completed.entries) {
+            in statesTagsParameter.map.entries) {
           if (item.value) {
             expect(product.statesTags, contains(item.key.completedTag));
           } else {
@@ -1011,7 +974,7 @@ void main() {
     test('check products with "completed" states tags', () async {
       for (final State state in State.values) {
         final int count = await _checkStatesTags(
-          StatesTagsParameter(completed: {state: true}),
+          StatesTagsParameter(map: {state: true}),
         );
         expect(count, greaterThan(0));
       }
@@ -1020,7 +983,7 @@ void main() {
     test('check products with "to-be-completed" states tags', () async {
       for (final State state in State.values) {
         final int count = await _checkStatesTags(
-          StatesTagsParameter(completed: {state: false}),
+          StatesTagsParameter(map: {state: false}),
         );
         expect(count, greaterThan(0));
       }
@@ -1037,17 +1000,17 @@ void main() {
       final bool completed1 = random.nextBool();
       final bool completed2 = random.nextBool();
       final int count1 = await _checkStatesTags(
-        StatesTagsParameter(completed: {
+        StatesTagsParameter(map: {
           state1: completed1,
         }),
       );
       final int count2 = await _checkStatesTags(
-        StatesTagsParameter(completed: {
+        StatesTagsParameter(map: {
           state2: completed2,
         }),
       );
       final int countBoth = await _checkStatesTags(
-        StatesTagsParameter(completed: {
+        StatesTagsParameter(map: {
           state1: completed1,
           state2: completed2,
         }),

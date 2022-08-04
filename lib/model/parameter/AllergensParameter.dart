@@ -1,31 +1,17 @@
-import 'package:openfoodfacts/interface/Parameter.dart';
 import 'package:openfoodfacts/model/Allergens.dart';
+import 'package:openfoodfacts/model/parameter/BoolMapParameter.dart';
 
 /// List of allergens to filter in and out.
 ///
 /// When we have several items, the results returned use a logical AND.
-class AllergensParameter extends Parameter {
+class AllergensParameter extends BoolMapParameter<AllergensTag> {
   @override
   String getName() => 'allergens_tags';
 
   @override
-  String getValue() {
-    final List<String> result = <String>[];
-    if (include != null) {
-      for (final AllergensTag value in include!) {
-        result.add(value.tag);
-      }
-    }
-    if (exclude != null) {
-      for (final AllergensTag value in exclude!) {
-        result.add('-${value.tag}');
-      }
-    }
-    return result.join(',');
-  }
+  String getTag(final AllergensTag key, final bool value) =>
+      value ? key.tag : '-${key.tag}';
 
-  final Iterable<AllergensTag>? include;
-  final Iterable<AllergensTag>? exclude;
-
-  const AllergensParameter({this.include, this.exclude});
+  const AllergensParameter({required final Map<AllergensTag, bool> map})
+      : super(map: map);
 }

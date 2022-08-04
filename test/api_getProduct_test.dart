@@ -1502,7 +1502,11 @@ void main() {
         containsAll(someExpectedKeys),
       );
     });
-  });
+  },
+      timeout: Timeout(
+        // some tests can be slow here
+        Duration(seconds: 300),
+      ));
 
   group('$OpenFoodAPIClient test ingredients', () {
     const String barcode = BARCODE_DANISH_BUTTER_COOKIES;
