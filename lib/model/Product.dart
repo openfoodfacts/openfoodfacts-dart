@@ -368,6 +368,9 @@ class Product extends JsonObject {
   @JsonKey(name: 'origins', includeIfNull: false)
   String? origins;
 
+  @JsonKey(name: 'nova_group', includeIfNull: false)
+  int? novaGroup;
+
   Product(
       {this.barcode,
       this.productName,
