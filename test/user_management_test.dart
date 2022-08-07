@@ -6,71 +6,52 @@ import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:test/test.dart';
 
-import 'test_constants.dart';
-
 void main() {
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
+  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
 
   group('Create user', () {
-    final User user = TestConstants.PROD_USER;
-    final String email = 'grumpf@gmx.de';
+    test('Login', () async {
+      late String email;
+      late String name;
+      String password = "ThisIsThePassword";
 
-    test('Create a user with a long username', () async {
-      String randomUserName = List.filled(
-        OpenFoodAPIClient.USER_NAME_MAX_LENGTH + 1,
-        'A',
-      ).join();
+      bool shouldRetry = true;
+      int counter = 0;
+      const int max_tries = 1;
 
-      expect(
-        OpenFoodAPIClient.register(
-          name: randomUserName,
-          user: user,
+      while (shouldRetry && counter < max_tries) {
+        print("Try $counter");
+
+        counter++;
+        name = _generateRandomString(10);
+        email = "$name@gmail.com";
+
+        print(name);
+        print(email);
+
+        SignUpStatus response = await OpenFoodAPIClient.register(
+          user: User(userId: name, password: password),
+          name: name,
           email: email,
-        ),
-        throwsArgumentError,
+          queryType: QueryType.TEST,
+          newsletter: false,
+        );
+
+        print(response.status);
+        print(response.statusErrors);
+        print(response.error);
+
+        if (response.status == 201) {
+          shouldRetry = false;
+        }
+      }
+
+      bool response = await OpenFoodAPIClient.login(
+        User(userId: name, password: password),
+        queryType: QueryType.TEST,
       );
+      expect(response, true);
     });
-
-    test('Create existing user', () async {
-      SignUpStatus response = await OpenFoodAPIClient.register(
-        name: 'Irrelevant',
-        user: user,
-        email: email,
-      );
-      expect(response.status, 400);
-      expect(
-        response.statusErrors!
-            .contains(SignUpStatusError.USERNAME_ALREADY_USED),
-        isTrue,
-      );
-    });
-
-    test('Create an user with an existing email', () async {
-      SignUpStatus response = await OpenFoodAPIClient.register(
-        name: _generateRandomString(OpenFoodAPIClient.USER_NAME_MAX_LENGTH),
-        user: user,
-        email: 'test@test.com',
-      );
-      expect(response.status, 400);
-      expect(
-        response.statusErrors!.contains(SignUpStatusError.EMAIL_ALREADY_USED),
-        isTrue,
-      );
-    });
-  });
-
-  test('Login', () async {
-    bool response = await OpenFoodAPIClient.login(
-      TestConstants.PROD_USER,
-    );
-    expect(response, true);
-  });
-
-  test('Reset password', () async {
-    Status status =
-        await OpenFoodAPIClient.resetPassword(TestConstants.TEST_USER.userId);
-
-    expect(status.status, 200);
   });
 }
 
