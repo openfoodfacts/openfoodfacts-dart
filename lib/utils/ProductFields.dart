@@ -71,6 +71,7 @@ enum ProductField {
   EMB_CODES,
   MANUFACTURING_PLACES,
   ORIGINS,
+  NOVA_GROUP,
   ALL
 }
 
@@ -145,6 +146,7 @@ extension ProductFieldExtension on ProductField {
     ProductField.EMB_CODES: 'emb_codes',
     ProductField.MANUFACTURING_PLACES: 'manufacturing_places',
     ProductField.ORIGINS: 'origins',
+    ProductField.NOVA_GROUP: 'nova_group',
   };
 
   /// Returns the key of the product field
