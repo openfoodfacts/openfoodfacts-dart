@@ -118,7 +118,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       ..environmentInfoCard = json['environment_infocard'] as String?
       ..embCodes = json['emb_codes'] as String?
       ..manufacturingPlaces = json['manufacturing_places'] as String?
-      ..origins = json['origins'] as String?;
+      ..origins = json['origins'] as String?
+      ..novaGroup = json['nova_group'] as int?;
 
 Map<String, dynamic> _$ProductToJson(Product instance) {
   final val = <String, dynamic>{
@@ -167,8 +168,8 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('ingredients_tags_in_languages',
       LanguageHelper.toJsonStringsListMap(instance.ingredientsTagsInLanguages));
   val['imagesFreshnessInLanguages'] = instance.imagesFreshnessInLanguages?.map(
-      (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k],
-          e.map((k, e) => MapEntry(_$ImageFieldEnumMap[k], e))));
+      (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!,
+          e.map((k, e) => MapEntry(_$ImageFieldEnumMap[k]!, e))));
   writeNotNull('ingredients_analysis_tags',
       IngredientsAnalysisTags.toJson(instance.ingredientsAnalysisTags));
   writeNotNull('additives_tags', Additives.additivesToJson(instance.additives));
@@ -212,6 +213,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('emb_codes', instance.embCodes);
   writeNotNull('manufacturing_places', instance.manufacturingPlaces);
   writeNotNull('origins', instance.origins);
+  writeNotNull('nova_group', instance.novaGroup);
   val['no_nutrition_data'] =
       JsonHelper.checkboxToJSON(instance.noNutritionData);
   writeNotNull('nutriments', Nutriments.toJsonHelper(instance.nutriments));

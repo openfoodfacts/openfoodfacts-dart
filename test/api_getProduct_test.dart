@@ -103,7 +103,7 @@ void main() {
       expect(result.product!.ingredients!.any((i) => i.text == 'Aroma Koffein'),
           true);
 
-      assert(result.product!.selectedImages!.isNotEmpty);
+      expect(result.product!.selectedImages!, isNotEmpty);
 
       expect(result.product!.additives!.ids[0], 'en:e150d');
       expect(result.product!.additives!.names[0], 'E150d');
@@ -285,6 +285,7 @@ void main() {
       expect(result.product!.nutriments!.saturatedFat, 15.0);
       expect(result.product!.nutriments!.proteins, 5.3);
       expect(result.product!.nutriments!.novaGroup, 4);
+      expect(result.product!.novaGroup, 4);
     });
 
     test('get product Dole Packaged Foods Company 100% pineapple juice',
@@ -519,6 +520,7 @@ void main() {
       expect(result.product!.nutriments!.saturatedFat, 0.0);
       expect(result.product!.nutriments!.proteins, 0.6);
       expect(result.product!.nutriments!.novaGroup, 3);
+      expect(result.product!.novaGroup, 3);
       expect(result.product!.storesTags!.length, 1);
 
       expect(result.product!.countriesTags, ['en:france']);
@@ -534,7 +536,7 @@ void main() {
         configurations,
         user: TestConstants.TEST_USER,
       );
-      assert(result.product == null);
+      expect(result.product, isNull);
     });
 
     test('product ingredients', () async {
@@ -548,8 +550,8 @@ void main() {
         user: TestConstants.TEST_USER,
       );
 
-      assert(result.product != null);
-      assert(result.product!.ingredientsText != null);
+      expect(result.product, isNotNull);
+      expect(result.product!.ingredientsText, isNotNull);
     });
 
     test('product ecoscore', () async {
@@ -567,12 +569,12 @@ void main() {
         user: TestConstants.TEST_USER,
       );
 
-      assert(result.product != null);
-      assert(result.product!.ecoscoreGrade != null);
-      assert(result.product!.ecoscoreScore != null);
-      assert(result.product!.ecoscoreData!.agribalyse != null);
-      assert(result.product!.ecoscoreData!.adjustments != null);
-      assert(result.product!.ecoscoreData!.missingDataWarning == false);
+      expect(result.product, isNotNull);
+      expect(result.product!.ecoscoreGrade, isNotNull);
+      expect(result.product!.ecoscoreScore, isNotNull);
+      expect(result.product!.ecoscoreData!.agribalyse, isNotNull);
+      expect(result.product!.ecoscoreData!.adjustments, isNotNull);
+      expect(result.product!.ecoscoreData!.missingDataWarning, isFalse);
     });
 
     test('product environment impact levels', () async {
@@ -586,10 +588,9 @@ void main() {
         user: TestConstants.TEST_USER,
       );
 
-      assert(result.product != null);
-      assert(result.product!.environmentImpactLevels != null);
-      assert(
-          result.product!.environmentImpactLevels!.levels.first == Level.HIGH);
+      expect(result.product, isNotNull);
+      expect(result.product!.environmentImpactLevels, isNotNull);
+      expect(result.product!.environmentImpactLevels!.levels.first, Level.HIGH);
     });
 
     test('product fields', () async {
@@ -603,16 +604,16 @@ void main() {
         user: TestConstants.TEST_USER,
       );
 
-      assert(result.product != null);
-      assert(result.product!.productName != null);
-      assert(result.product!.brandsTags != null);
-      assert(result.product!.ingredients == null);
-      assert(result.product!.ingredientsText == null);
-      assert(result.product!.productNameInLanguages == null);
-      assert(result.product!.additives!.ids.isEmpty);
-      assert(result.product!.additives!.names.isEmpty);
-      assert(result.product!.nutrientLevels!.levels.isEmpty);
-      assert(result.product!.lang == OpenFoodFactsLanguage.UNDEFINED);
+      expect(result.product, isNotNull);
+      expect(result.product!.productName, isNotNull);
+      expect(result.product!.brandsTags, isNotNull);
+      expect(result.product!.ingredients, isNull);
+      expect(result.product!.ingredientsText, isNull);
+      expect(result.product!.productNameInLanguages, isNull);
+      expect(result.product!.additives!.ids, isEmpty);
+      expect(result.product!.additives!.names, isEmpty);
+      expect(result.product!.nutrientLevels!.levels, isEmpty);
+      expect(result.product!.lang, OpenFoodFactsLanguage.UNDEFINED);
 
       configurations = ProductQueryConfiguration(barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -622,16 +623,16 @@ void main() {
         user: TestConstants.TEST_USER,
       );
 
-      assert(result.product != null);
-      assert(result.product!.productName != null);
-      assert(result.product!.brandsTags == null);
-      assert(result.product!.ingredients == null);
-      assert(result.product!.ingredientsText == null);
-      assert(result.product!.productNameInLanguages == null);
-      assert(result.product!.additives!.ids.isEmpty);
-      assert(result.product!.additives!.names.isEmpty);
-      assert(result.product!.nutrientLevels!.levels.isEmpty);
-      assert(result.product!.lang == OpenFoodFactsLanguage.ENGLISH);
+      expect(result.product, isNotNull);
+      expect(result.product!.productName, isNotNull);
+      expect(result.product!.brandsTags, isNull);
+      expect(result.product!.ingredients, isNull);
+      expect(result.product!.ingredientsText, isNull);
+      expect(result.product!.productNameInLanguages, isNull);
+      expect(result.product!.additives!.ids, isEmpty);
+      expect(result.product!.additives!.names, isEmpty);
+      expect(result.product!.nutrientLevels!.levels, isEmpty);
+      expect(result.product!.lang, OpenFoodFactsLanguage.ENGLISH);
 
       configurations = ProductQueryConfiguration(barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -641,17 +642,17 @@ void main() {
         user: TestConstants.TEST_USER,
       );
 
-      assert(result.product != null);
-      assert(result.product!.productName != null);
-      assert(result.product!.brandsTags == null);
-      assert(result.product!.ingredients == null);
-      assert(result.product!.ingredientsText == null);
-      assert(result.product!.productNameInLanguages == null);
-      assert(result.product!.additives!.ids.isEmpty);
-      assert(result.product!.additives!.names.isEmpty);
-      assert(result.product!.nutrientLevels!.levels.isEmpty);
-      assert(result.product!.lang == OpenFoodFactsLanguage.UNDEFINED);
-      assert(result.product!.countries != null);
+      expect(result.product, isNotNull);
+      expect(result.product!.productName, isNotNull);
+      expect(result.product!.brandsTags, isNull);
+      expect(result.product!.ingredients, isNull);
+      expect(result.product!.ingredientsText, isNull);
+      expect(result.product!.productNameInLanguages, isNull);
+      expect(result.product!.additives!.ids, isEmpty);
+      expect(result.product!.additives!.names, isEmpty);
+      expect(result.product!.nutrientLevels!.levels, isEmpty);
+      expect(result.product!.lang, OpenFoodFactsLanguage.UNDEFINED);
+      expect(result.product!.countries, isNotNull);
 
       configurations = ProductQueryConfiguration(barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -661,17 +662,17 @@ void main() {
         user: TestConstants.TEST_USER,
       );
 
-      assert(result.product != null);
-      assert(result.product!.productName != null);
-      assert(result.product!.brandsTags == null);
-      assert(result.product!.ingredients == null);
-      assert(result.product!.ingredientsText == null);
-      assert(result.product!.productNameInLanguages == null);
-      assert(result.product!.additives!.ids.isEmpty);
-      assert(result.product!.additives!.names.isEmpty);
-      assert(result.product!.nutrientLevels!.levels.isEmpty);
-      assert(result.product!.lang == OpenFoodFactsLanguage.UNDEFINED);
-      assert(result.product!.countriesTags != null);
+      expect(result.product, isNotNull);
+      expect(result.product!.productName, isNotNull);
+      expect(result.product!.brandsTags, isNull);
+      expect(result.product!.ingredients, isNull);
+      expect(result.product!.ingredientsText, isNull);
+      expect(result.product!.productNameInLanguages, isNull);
+      expect(result.product!.additives!.ids, isEmpty);
+      expect(result.product!.additives!.names, isEmpty);
+      expect(result.product!.nutrientLevels!.levels, isEmpty);
+      expect(result.product!.lang, OpenFoodFactsLanguage.UNDEFINED);
+      expect(result.product!.countriesTags, isNotNull);
     });
 
     test('attribute groups', () async {
@@ -685,35 +686,35 @@ void main() {
         user: TestConstants.TEST_USER,
       );
 
-      assert(result.product != null);
-      assert(result.product!.productName != null);
-      assert(result.product!.attributeGroups != null);
+      expect(result.product, isNotNull);
+      expect(result.product!.productName, isNotNull);
+      expect(result.product!.attributeGroups, isNotNull);
 
       AttributeGroup group;
 
       group = result.product!.attributeGroups!
           .singleWhere((element) => element.id == 'nutritional_quality');
       final List<Attribute> nutritionalQuality = group.attributes!;
-      assert(nutritionalQuality.first.id == 'nutriscore');
-      assert(nutritionalQuality.first.settingName == null);
-      assert(nutritionalQuality.first.settingNote == null);
-      assert(nutritionalQuality.first.description == '');
-      assert(nutritionalQuality.first.descriptionShort ==
+      expect(nutritionalQuality.first.id, 'nutriscore');
+      expect(nutritionalQuality.first.settingName, isNull);
+      expect(nutritionalQuality.first.settingNote, isNull);
+      expect(nutritionalQuality.first.description, '');
+      expect(nutritionalQuality.first.descriptionShort,
           'Poor nutritional quality');
-      assert(nutritionalQuality.first.title == 'Nutri-Score D');
-      assert(nutritionalQuality.first.name == 'Nutri-Score');
-      assert(nutritionalQuality.first.match! > 31);
-      assert(nutritionalQuality.first.status == 'known');
-      assert(nutritionalQuality[1].id == 'low_salt');
-      assert(nutritionalQuality[2].id == 'low_fat');
-      assert(nutritionalQuality[3].id == 'low_sugars');
-      assert(nutritionalQuality[4].id == 'low_saturated_fat');
-      assert(nutritionalQuality.first.panelId == 'nutriscore');
+      expect(nutritionalQuality.first.title, 'Nutri-Score D');
+      expect(nutritionalQuality.first.name, 'Nutri-Score');
+      expect(nutritionalQuality.first.match, greaterThan(31));
+      expect(nutritionalQuality.first.status, 'known');
+      expect(nutritionalQuality[1].id, 'low_salt');
+      expect(nutritionalQuality[2].id, 'low_fat');
+      expect(nutritionalQuality[3].id, 'low_sugars');
+      expect(nutritionalQuality[4].id, 'low_saturated_fat');
+      expect(nutritionalQuality.first.panelId, 'nutriscore');
 
       group = result.product!.attributeGroups!
           .singleWhere((element) => element.id == 'processing');
       final List<Attribute> processing = group.attributes!;
-      assert(processing.first.id == 'nova');
+      expect(processing.first.id, 'nova');
 
       group = result.product!.attributeGroups!
           .singleWhere((element) => element.id == 'labels');
@@ -858,8 +859,9 @@ void main() {
       expect(result.product!.nutriments!.saturatedFat, 0.0);
       expect(result.product!.nutriments!.proteins, 0.0);
       expect(result.product!.nutriments!.novaGroup, 4);
-      assert(result.product!.nutriments!.fatServing != null);
-      expect(result.product!.nutriments!.carbohydratesServing == null, false);
+      expect(result.product!.novaGroup, 4);
+      expect(result.product!.nutriments!.fatServing, isNotNull);
+      expect(result.product!.nutriments!.carbohydratesServing, isNotNull);
 
       expect(result.product!.additives!.ids[0], 'en:e150d');
       expect(result.product!.additives!.names[0], 'E150d');
@@ -1601,12 +1603,14 @@ void main() {
     final String jsonString = response.body;
     InvalidBarcodes invalidBarcodes =
         InvalidBarcodes.loadFromJSONString(jsonString);
-    assert(invalidBarcodes.isBlacklisted('15600703'));
-    assert(!invalidBarcodes.isBlacklisted(BARCODE_DANISH_BUTTER_COOKIES));
+    expect(invalidBarcodes.isBlacklisted('15600703'), isTrue);
+    expect(
+        invalidBarcodes.isBlacklisted(BARCODE_DANISH_BUTTER_COOKIES), isFalse);
 
     invalidBarcodes = InvalidBarcodes.base();
-    assert(invalidBarcodes.isBlacklisted('15600703'));
-    assert(!invalidBarcodes.isBlacklisted(BARCODE_DANISH_BUTTER_COOKIES));
+    expect(invalidBarcodes.isBlacklisted('15600703'), isTrue);
+    expect(
+        invalidBarcodes.isBlacklisted(BARCODE_DANISH_BUTTER_COOKIES), isFalse);
   });
 
   test('get images freshness', () async {

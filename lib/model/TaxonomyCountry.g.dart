@@ -34,16 +34,16 @@ Map<String, dynamic> _$TaxonomyCountryToJson(TaxonomyCountry instance) {
   writeNotNull(
       'language_codes',
       instance.languages
-          ?.map((e) => _$OpenFoodFactsLanguageEnumMap[e])
+          ?.map((e) => _$OpenFoodFactsLanguageEnumMap[e]!)
           .toList());
   writeNotNull(
       'name',
       instance.name
-          ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k], e)));
+          ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e)));
   writeNotNull(
       'synonyms',
       instance.synonyms
-          ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k], e)));
+          ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e)));
   writeNotNull('wikidata', instance.wikidata);
   writeNotNull('official_country_code_2', instance.officialCountryCode2);
   return val;
