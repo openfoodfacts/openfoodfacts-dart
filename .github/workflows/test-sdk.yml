@@ -1,4 +1,4 @@
-name: test-sdk
+name: Run sdk tests
 
 on: 
   push:
