@@ -779,16 +779,17 @@ class OpenFoodAPIClient {
     User user, {
     QueryType? queryType,
   }) async {
-    var loginUri = UriHelper.getPostUri(
+    final Uri loginUri = UriHelper.getPostUri(
       path: '/cgi/auth.pl',
       queryType: queryType,
     );
-    Response response = await HttpHelper().doPostRequest(
+    final Response response = await HttpHelper().doPostRequest(
       loginUri,
       user.toData(),
       user,
     );
-    return response.statusCode == 200;
+    // TODO(monsieurtanuki): refactor as something more refined
+    return response.statusCode == 200 && response.body == "";
   }
 
   /// A username may not exceed 20 characters
