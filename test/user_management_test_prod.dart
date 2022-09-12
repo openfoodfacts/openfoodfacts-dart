@@ -11,7 +11,7 @@ import 'test_constants.dart';
 void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
-  group('Create user', () {
+  group('Create existing user', () {
     final User user = TestConstants.PROD_USER;
     final String email = 'grumpf@gmx.de';
 

@@ -787,6 +787,7 @@ class OpenFoodAPIClient {
       loginUri,
       user.toData(),
       user,
+      queryType: queryType,
     );
     // TODO(monsieurtanuki): refactor as something more refined
     return response.statusCode == 200 && response.body == "";
