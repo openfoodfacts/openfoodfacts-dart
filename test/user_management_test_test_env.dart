@@ -43,7 +43,7 @@ void main() {
         queryType: user_test_queryType,
       );
       expect(response, true);
-      print('Creating a account and logging in worked in $counter tries');
+      print('Creating a account and logging in worked in $counter trie(s)');
     });
   });
 }
