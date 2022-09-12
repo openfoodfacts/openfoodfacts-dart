@@ -32,26 +32,27 @@ class HttpHelper {
   static Map<String, String>? addUserAgentParameters(
     Map<String, String>? map,
   ) {
+    map ??= <String, String>{};
     if (OpenFoodAPIConfiguration.userAgent?.name != null) {
-      map ??= <String, String>{};
       map['app_name'] = OpenFoodAPIConfiguration.userAgent!.name!;
     }
     if (OpenFoodAPIConfiguration.userAgent?.version != null) {
-      map ??= <String, String>{};
       map['app_version'] = OpenFoodAPIConfiguration.userAgent!.version!;
     }
     if (OpenFoodAPIConfiguration.uuid != null) {
-      map ??= <String, String>{};
       map['app_uuid'] = OpenFoodAPIConfiguration.uuid!;
     }
     if (OpenFoodAPIConfiguration.userAgent?.system != null) {
-      map ??= <String, String>{};
       map['app_platform'] = OpenFoodAPIConfiguration.userAgent?.system ?? '';
     }
     if (OpenFoodAPIConfiguration.userAgent?.comment != null) {
-      map ??= <String, String>{};
       map['comment'] = OpenFoodAPIConfiguration.userAgent?.comment ?? '';
     }
+
+    if (map.isEmpty) {
+      return null;
+    }
+
     return map;
   }
 
