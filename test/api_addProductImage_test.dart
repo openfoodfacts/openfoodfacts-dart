@@ -111,7 +111,7 @@ void main() {
       );
 
       expect(status.status, 'status ok');
-    }, skip: 'Currently not working');
+    });
 
     test('add ingredients image test: resend same image', () async {
       SendImage image = SendImage(
@@ -127,7 +127,7 @@ void main() {
 
       expect(status.status, 'status not ok');
       expect(status.error, 'This picture has already been sent.');
-    });
+    }, skip: 'Currently not working');
 
     test('read image', () async {
       //Get product without setting ProductField
