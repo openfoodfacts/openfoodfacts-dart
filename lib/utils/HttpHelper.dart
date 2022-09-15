@@ -48,6 +48,11 @@ class HttpHelper {
     if (OpenFoodAPIConfiguration.userAgent?.comment != null) {
       map['comment'] = OpenFoodAPIConfiguration.userAgent?.comment ?? '';
     }
+
+    if (map.isEmpty) {
+      return null;
+    }
+
     return map;
   }
 

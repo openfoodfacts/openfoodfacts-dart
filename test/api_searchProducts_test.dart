@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:openfoodfacts/model/Allergens.dart';
-import 'package:openfoodfacts/model/parameter/AllergensParameter.dart';
-import 'package:openfoodfacts/model/State.dart';
 import 'package:openfoodfacts/model/IngredientsAnalysisTags.dart';
+import 'package:openfoodfacts/model/State.dart';
+import 'package:openfoodfacts/model/parameter/AllergensParameter.dart';
 import 'package:openfoodfacts/model/parameter/BarcodeParameter.dart';
 import 'package:openfoodfacts/model/parameter/IngredientsAnalysisParameter.dart';
 import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
@@ -1009,15 +1009,18 @@ void main() {
           state2: completed2,
         }),
       );
+
+      final Map<State, bool> map = <State, bool>{
+        state1: completed1,
+        state2: completed2,
+      };
+
       final int countBoth = await _checkStatesTags(
-        StatesTagsParameter(map: {
-          state1: completed1,
-          state2: completed2,
-        }),
+        StatesTagsParameter(map: map),
       );
       // it's an AND: with both conditions we always get less results.
-      expect(countBoth, lessThanOrEqualTo(count1));
-      expect(countBoth, lessThanOrEqualTo(count2));
+      expect(countBoth, lessThanOrEqualTo(count1), reason: map.toString());
+      expect(countBoth, lessThanOrEqualTo(count2), reason: map.toString());
     });
   },
       timeout: Timeout(
