@@ -136,6 +136,7 @@ class OpenFoodAPIClient {
       parameterMap,
       user,
       queryType: queryType,
+      addCredentialsToBody: true,
     );
     return Status.fromApiResponse(response.body);
   }
@@ -642,6 +643,7 @@ class OpenFoodAPIClient {
       annotationData,
       user,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
     return Status.fromApiResponse(response.body);
   }
@@ -676,6 +678,7 @@ class OpenFoodAPIClient {
       spellingCorrectionParam,
       user,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
     SpellingCorrection result = SpellingCorrection.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
@@ -709,6 +712,7 @@ class OpenFoodAPIClient {
       queryParameters,
       user,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
     return OcrIngredientsResult.fromJson(
       json.decode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>,
@@ -738,6 +742,7 @@ class OpenFoodAPIClient {
       queryParameters,
       user,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
     return OcrPackagingResult.fromJson(
       json.decode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>,
@@ -769,6 +774,7 @@ class OpenFoodAPIClient {
       queryParameters,
       null,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
     return json.decode(response.body);
   }
@@ -785,9 +791,10 @@ class OpenFoodAPIClient {
     );
     final Response response = await HttpHelper().doPostRequest(
       loginUri,
-      user.toData(),
+      <String, String>{},
       user,
       queryType: queryType,
+      addCredentialsToBody: true,
     );
     // TODO(monsieurtanuki): refactor as something more refined
     return response.statusCode == 200 && response.body == "";
@@ -983,6 +990,7 @@ class OpenFoodAPIClient {
       queryParameters,
       null,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
     if (response.statusCode != 200) {
       throw Exception('Could not retrieve ordered nutrients!');
@@ -1087,6 +1095,7 @@ class OpenFoodAPIClient {
       queryParameters,
       user,
       queryType: queryType,
+      addCredentialsToBody: true,
     );
     if (response.statusCode != 200) {
       throw Exception(
@@ -1139,6 +1148,7 @@ class OpenFoodAPIClient {
       queryParameters,
       user,
       queryType: queryType,
+      addCredentialsToBody: true,
     );
     if (response.statusCode != 200) {
       throw Exception(

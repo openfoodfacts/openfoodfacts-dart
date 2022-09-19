@@ -87,9 +87,12 @@ class HttpHelper {
     Map<String, String> body,
     User? user, {
     QueryType? queryType,
+    required bool addCredentialsToBody,
   }) async {
-    if (user != null) {
-      body.addAll(user.toData());
+    if (addCredentialsToBody) {
+      if (user != null) {
+        body.addAll(user.toData());
+      }
     }
 
     http.Response response = await http.post(
