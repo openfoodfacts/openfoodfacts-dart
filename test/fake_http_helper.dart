@@ -130,8 +130,12 @@ class FakeHttpHelper extends HttpHelper {
   }
 
   Future<http.Response> doPostRequest(
-      Uri uri, Map<String, String?> body, User? user,
-      {QueryType? queryType}) async {
+    Uri uri,
+    Map<String, String?> body,
+    User? user, {
+    QueryType? queryType,
+    required bool addCredentialsToBody,
+  }) async {
     final _Query query = _Query(uri, body: body);
     final http.Response response = _responses[query] ?? http404;
     _logRequest(uri, response: response);

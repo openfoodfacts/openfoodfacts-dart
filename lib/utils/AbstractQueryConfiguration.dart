@@ -133,5 +133,6 @@ abstract class AbstractQueryConfiguration {
         getParametersMap(),
         user,
         queryType: queryType,
+        addCredentialsToBody: false,
       );
 }
