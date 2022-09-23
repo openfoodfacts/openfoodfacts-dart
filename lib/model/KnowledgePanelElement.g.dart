@@ -273,7 +273,7 @@ KnowledgePanelElement _$KnowledgePanelElementFromJson(
 Map<String, dynamic> _$KnowledgePanelElementToJson(
         KnowledgePanelElement instance) =>
     <String, dynamic>{
-      'element_type': _$KnowledgePanelElementTypeEnumMap[instance.elementType],
+      'element_type': _$KnowledgePanelElementTypeEnumMap[instance.elementType]!,
       'text_element': instance.textElement,
       'image_element': instance.imageElement,
       'panel_element': instance.panelElement,

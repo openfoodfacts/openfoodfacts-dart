@@ -1,5 +1,35 @@
 # Changelog
 
+## [1.24.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.23.0...v1.24.0) (2022-08-15)
+
+
+### Features
+
+* [#516](https://github.com/openfoodfacts/openfoodfacts-dart/issues/516) - API v2 for multi barcode search ([#533](https://github.com/openfoodfacts/openfoodfacts-dart/issues/533)) ([2961310](https://github.com/openfoodfacts/openfoodfacts-dart/commit/296131080fdf8ef2087463bc00ec86c1d27a60e3))
+* [#517](https://github.com/openfoodfacts/openfoodfacts-dart/issues/517) - added ECOSCORE and NUTRISCORE sort-by options ([#522](https://github.com/openfoodfacts/openfoodfacts-dart/issues/522)) ([a39ba24](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a39ba24b6a9daac6e36669b559891a536fcd27bf))
+* [#524](https://github.com/openfoodfacts/openfoodfacts-dart/issues/524) - added ingredients analysis tags (vegan, vegetarian, palm oil free) ([#525](https://github.com/openfoodfacts/openfoodfacts-dart/issues/525)) ([645d903](https://github.com/openfoodfacts/openfoodfacts-dart/commit/645d9036b8619dd3c4d0f3f95b315d6bc1bc886d))
+* [#526](https://github.com/openfoodfacts/openfoodfacts-dart/issues/526) - new AllergensParameter search filter ([#527](https://github.com/openfoodfacts/openfoodfacts-dart/issues/527)) ([3872351](https://github.com/openfoodfacts/openfoodfacts-dart/commit/387235177fd4007b8d6bc7bb644060bbc9634032))
+* [#531](https://github.com/openfoodfacts/openfoodfacts-dart/issues/531) - new StatesTagsParameter search filter ([#532](https://github.com/openfoodfacts/openfoodfacts-dart/issues/532)) ([0fcd95d](https://github.com/openfoodfacts/openfoodfacts-dart/commit/0fcd95d826251f4a8121d6ba0fb286770b8e2395))
+* new "Barcodes" parameter; deprecated configurations ([#538](https://github.com/openfoodfacts/openfoodfacts-dart/issues/538)) ([582775b](https://github.com/openfoodfacts/openfoodfacts-dart/commit/582775b77cd3a11c80a663b54e7bf8032178bde8))
+* new field Product.novaGroup ([#540](https://github.com/openfoodfacts/openfoodfacts-dart/issues/540)) ([325c1e5](https://github.com/openfoodfacts/openfoodfacts-dart/commit/325c1e5b17dcc4b8d704964f36f346857213fdaa))
+
+
+### Bug Fixes
+
+* login ([#544](https://github.com/openfoodfacts/openfoodfacts-dart/issues/544)) ([1cd6feb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/1cd6feb9fdd388f003215e5741690ccbc7afef7b))
+
+## [1.23.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.22.0...v1.23.0) (2022-07-15)
+
+
+### Features
+
+* Improvements for Sign up errors ([#511](https://github.com/openfoodfacts/openfoodfacts-dart/issues/511)) ([ebc5ff5](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ebc5ff50ba13b5151adac1bf1be7148b641898e5))
+
+
+### Bug Fixes
+
+* Removed over a year old deprecated methods/parameters ([#512](https://github.com/openfoodfacts/openfoodfacts-dart/issues/512)) ([e6108dc](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e6108dc145d92af5a4b3ac3a4085047335d8e425))
+
 ## [1.22.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.21.0...v1.22.0) (2022-07-10)
 
 

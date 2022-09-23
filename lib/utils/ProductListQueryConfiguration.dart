@@ -3,6 +3,8 @@ import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 
 /// Query Configuration for multiple barcodes
+// TODO: deprecated from 2022-08-03; remove when old enough
+@Deprecated('Use ProductSearchQueryConfiguration with Barcodes instead')
 class ProductListQueryConfiguration extends AbstractQueryConfiguration {
   final List<String> barcodes;
 
@@ -48,7 +50,7 @@ class ProductListQueryConfiguration extends AbstractQueryConfiguration {
   Map<String, String> getParametersMap() {
     final Map<String, String> result = super.getParametersMap();
 
-    result['code'] = '${barcodes.join(',')}.json';
+    result['code'] = barcodes.join(',');
 
     return result;
   }

@@ -21,12 +21,14 @@ import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
 import 'package:openfoodfacts/model/TaxonomyLabel.dart';
 import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
 import 'package:openfoodfacts/model/TaxonomyPackaging.dart';
+import 'package:openfoodfacts/model/parameter/BarcodeParameter.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/ImageHelper.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
 import 'package:openfoodfacts/utils/ProductListQueryConfiguration.dart';
+import 'package:openfoodfacts/utils/ProductSearchQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
@@ -45,7 +47,6 @@ import 'utils/HttpHelper.dart';
 import 'utils/LanguageHelper.dart';
 import 'utils/ProductHelper.dart';
 import 'utils/ProductQueryConfigurations.dart';
-import 'utils/ProductSearchQueryConfiguration.dart';
 
 export 'events.dart';
 export 'folksonomy.dart';
@@ -135,6 +136,7 @@ class OpenFoodAPIClient {
       parameterMap,
       user,
       queryType: queryType,
+      addCredentialsToBody: true,
     );
     return Status.fromApiResponse(response.body);
   }
@@ -294,14 +296,6 @@ class OpenFoodAPIClient {
   /// Query the language specific host from OpenFoodFacts.
   static Future<SearchResult> searchProducts(
     final User? user,
-    final ProductSearchQueryConfiguration configuration, {
-    final QueryType? queryType,
-  }) async =>
-      getProducts(user, configuration, queryType: queryType);
-
-  /// Returns products searched according to a [configuration].
-  static Future<SearchResult> getProducts(
-    final User? user,
     final AbstractQueryConfiguration configuration, {
     final QueryType? queryType,
   }) async {
@@ -325,7 +319,20 @@ class OpenFoodAPIClient {
     return result;
   }
 
+  /// Returns products searched according to a [configuration].
+  // TODO: deprecated from 2022-07-26; remove when old enough
+  @Deprecated('Use searchProducts instead')
+  static Future<SearchResult> getProducts(
+    final User? user,
+    final AbstractQueryConfiguration configuration, {
+    final QueryType? queryType,
+  }) async =>
+      searchProducts(user, configuration, queryType: queryType);
+
   /// Search the OpenFoodFacts product database: multiple barcodes in input.
+  // TODO: deprecated from 2022-07-26; remove when old enough
+  @Deprecated(
+      'Use method searchProducts with ProductListQueryConfiguration instead')
   static Future<SearchResult> getProductList(
     final User? user,
     final ProductListQueryConfiguration configuration, {
@@ -341,10 +348,10 @@ class OpenFoodAPIClient {
     final OpenFoodFactsCountry? country,
     final QueryType? queryType,
   }) async {
-    final SearchResult searchResult = await getProductList(
+    final SearchResult searchResult = await searchProducts(
       user,
-      ProductListQueryConfiguration(
-        barcodes,
+      ProductSearchQueryConfiguration(
+        parametersList: [BarcodeParameter.list(barcodes)],
         language: language,
         country: country,
         fields: [
@@ -374,11 +381,13 @@ class OpenFoodAPIClient {
     User? user,
     QueryType? queryType,
   }) async {
-    final Uri uri = configuration.getUri(queryType);
-    final Response response = await HttpHelper().doGetRequest(
+    final Uri uri = configuration.getPostUri(queryType);
+    final Response response = await HttpHelper().doPostRequest(
       uri,
-      user: user,
+      configuration.getParametersMap(),
+      user,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
 
     Map<String, dynamic> decodedJson =
@@ -649,6 +658,7 @@ class OpenFoodAPIClient {
       annotationData,
       user,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
     return Status.fromApiResponse(response.body);
   }
@@ -683,6 +693,7 @@ class OpenFoodAPIClient {
       spellingCorrectionParam,
       user,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
     SpellingCorrection result = SpellingCorrection.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));
@@ -716,6 +727,7 @@ class OpenFoodAPIClient {
       queryParameters,
       user,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
     return OcrIngredientsResult.fromJson(
       json.decode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>,
@@ -745,6 +757,7 @@ class OpenFoodAPIClient {
       queryParameters,
       user,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
     return OcrPackagingResult.fromJson(
       json.decode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>,
@@ -776,6 +789,7 @@ class OpenFoodAPIClient {
       queryParameters,
       null,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
     return json.decode(response.body);
   }
@@ -786,16 +800,19 @@ class OpenFoodAPIClient {
     User user, {
     QueryType? queryType,
   }) async {
-    var loginUri = UriHelper.getPostUri(
+    final Uri loginUri = UriHelper.getPostUri(
       path: '/cgi/auth.pl',
       queryType: queryType,
     );
-    Response response = await HttpHelper().doPostRequest(
+    final Response response = await HttpHelper().doPostRequest(
       loginUri,
-      user.toData(),
+      <String, String>{},
       user,
+      queryType: queryType,
+      addCredentialsToBody: true,
     );
-    return response.statusCode == 200;
+    // TODO(monsieurtanuki): refactor as something more refined
+    return response.statusCode == 200 && response.body == "";
   }
 
   /// A username may not exceed 20 characters
@@ -988,6 +1005,7 @@ class OpenFoodAPIClient {
       queryParameters,
       null,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
     if (response.statusCode != 200) {
       throw Exception('Could not retrieve ordered nutrients!');
@@ -1092,6 +1110,7 @@ class OpenFoodAPIClient {
       queryParameters,
       user,
       queryType: queryType,
+      addCredentialsToBody: true,
     );
     if (response.statusCode != 200) {
       throw Exception(
@@ -1144,6 +1163,7 @@ class OpenFoodAPIClient {
       queryParameters,
       user,
       queryType: queryType,
+      addCredentialsToBody: true,
     );
     if (response.statusCode != 200) {
       throw Exception(

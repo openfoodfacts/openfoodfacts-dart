@@ -1,5 +1,4 @@
 import 'package:image/image.dart';
-import 'package:path/path.dart' as path;
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import '../model/ProductImage.dart';
@@ -7,9 +6,13 @@ import 'LanguageHelper.dart';
 
 /// Helper class related to product pictures
 class ImageHelper {
+  // TODO: deprecated from 2022-08-18; remove when old enough
+  @Deprecated('Use 2048 instead')
   static const int MAX_IMAGE_SIZE = 2048;
 
   /// Returns a copy of the [image] with its bigger size GTE [maxsize]
+  // TODO: deprecated from 2022-08-18; remove when old enough, and pubspec.yaml's dependency on "image" too
+  @Deprecated('Use copyResize from package image instead')
   static Image resize(Image image, {int maxSize = MAX_IMAGE_SIZE}) {
     // check if the image is already small enough
     if (image.width <= maxSize || image.height <= maxSize) {
@@ -60,10 +63,11 @@ class ImageHelper {
       barcodePath = barcode;
     }
 
-    return path.join(
-        (OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+    final String root =
+        OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
             ? OpenFoodAPIConfiguration.imageProdUrlBase
-            : OpenFoodAPIConfiguration.imageTestUrlBase),
-        barcodePath);
+            : OpenFoodAPIConfiguration.imageTestUrlBase;
+    final String separator = root.endsWith('/') ? '' : '/';
+    return '$root$separator$barcodePath';
   }
 }
