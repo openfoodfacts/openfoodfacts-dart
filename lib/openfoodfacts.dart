@@ -368,11 +368,13 @@ class OpenFoodAPIClient {
     User? user,
     QueryType? queryType,
   }) async {
-    final Uri uri = configuration.getUri(queryType);
-    final Response response = await HttpHelper().doGetRequest(
+    final Uri uri = configuration.getPostUri(queryType);
+    final Response response = await HttpHelper().doPostRequest(
       uri,
-      user: user,
+      configuration.getParametersMap(),
+      user,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
 
     Map<String, dynamic> decodedJson =

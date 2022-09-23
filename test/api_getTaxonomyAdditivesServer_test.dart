@@ -20,6 +20,12 @@ void main() {
   const String knownTag = 'en:e436';
   const String unknownTag = 'en:some_nonexistent_additive';
 
+  void _checkKnown(final TaxonomyAdditive additive) {
+    expect(additive.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
+    expect(additive.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
+    expect(additive.vegan![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
+  }
+
   group('OpenFoodAPIClient getTaxonomyAdditives', () {
     test('get root additives', () async {
       final Map<String, TaxonomyAdditive>? additives =
@@ -40,9 +46,7 @@ void main() {
       expect(additives, isNotNull);
       expect(additives!.length, equals(1));
       final TaxonomyAdditive additive = additives[knownTag]!;
-      expect(additive.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
-      expect(additive.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
-      expect(additive.vegan![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
+      _checkKnown(additive);
     });
 
     test("get an additive that doesn't exist", () async {
@@ -65,9 +69,7 @@ void main() {
       expect(additives, isNotNull);
       expect(additives!.length, equals(1));
       final TaxonomyAdditive additive = additives[knownTag]!;
-      expect(additive.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
-      expect(additive.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
-      expect(additive.vegan![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
+      _checkKnown(additive);
     });
   });
 }

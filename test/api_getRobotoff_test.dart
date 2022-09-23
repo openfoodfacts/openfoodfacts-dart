@@ -91,9 +91,15 @@ void main() {
       //expect(result.insight.confidence, isNotNull);
     });
 
-    test('get product insights PROD', () async {
-      // TODO(monsieurtanuki): to be removed when we have more a relevant test in QueryType.TEST
-      final String barcode = '4008400402222';
+    test('get product insights (found)', () async {
+      final InsightsResult result1 = await OpenFoodAPIClient.getRandomInsight(
+        TestConstants.PROD_USER,
+        type: InsightType.CATEGORY,
+        queryType: QueryType.PROD,
+      );
+
+      final String barcode = result1.insights![0].barcode!;
+
       final InsightsResult result = await OpenFoodAPIClient.getProductInsights(
         barcode,
         TestConstants.PROD_USER,
@@ -104,18 +110,15 @@ void main() {
       expect(result.status, 'found');
       expect(result.insights!, isNotEmpty);
       expect(result.insights![0].id, isNotNull);
-      expect(result.insights![0].barcode, isNotNull);
       expect(result.insights![0].barcode, barcode);
-      expect(result.insights![0].countries, isNotNull);
-      expect(result.insights![0].lang, isNull);
-      expect(result.insights![0].model, isNull);
-      expect(result.insights![0].confidence, isNull);
     });
 
-    test('get product insights', () async {
+    test('get product insights (none)', () async {
+      const String fakeBarcode = '3615';
       InsightsResult result = await OpenFoodAPIClient.getProductInsights(
-        '8025386005564',
-        TestConstants.TEST_USER,
+        fakeBarcode,
+        TestConstants.PROD_USER,
+        queryType: QueryType.PROD,
       );
 
       expect(result.status, isNotNull);
