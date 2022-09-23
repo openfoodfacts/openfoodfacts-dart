@@ -17,6 +17,15 @@ void main() {
     OpenFoodFactsLanguage.FRENCH,
   ];
 
+  const String knownTag = 'en:gluten';
+  const String unknownTag = 'en:some_nonexistent_label';
+
+  void _checkKnown(final TaxonomyAllergen allergen) {
+    expect(allergen.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
+    expect(allergen.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
+    expect(allergen.wikidata![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
+  }
+
   group('OpenFoodAPIClient getTaxonomyAllergens', () {
     test('get all allergens', () async {
       final Map<String, TaxonomyAllergen>? allergens =
@@ -29,6 +38,38 @@ void main() {
         expect(allergen.name, isNotEmpty);
         expect(allergen.synonyms, isNotEmpty);
       }
+    });
+
+    test('get an allergen', () async {
+      final Map<String, TaxonomyAllergen>? allergens =
+          await OpenFoodAPIClient.getTaxonomyAllergens(
+        TaxonomyAllergenQueryConfiguration(tags: <String>[knownTag]),
+      );
+      expect(allergens, isNotNull);
+      expect(allergens!.length, 1);
+      final TaxonomyAllergen allergen = allergens[knownTag]!;
+      _checkKnown(allergen);
+    });
+
+    test("get an allergen that doesn't exist", () async {
+      final Map<String, TaxonomyAllergen>? allergens =
+          await OpenFoodAPIClient.getTaxonomyAllergens(
+        TaxonomyAllergenQueryConfiguration(tags: <String>[unknownTag]),
+      );
+      expect(allergens, isNull);
+    });
+
+    test("get an allergen that doesn't exist with one that does", () async {
+      final Map<String, TaxonomyAllergen>? allergens =
+          await OpenFoodAPIClient.getTaxonomyAllergens(
+        TaxonomyAllergenQueryConfiguration(
+          tags: <String>[unknownTag, knownTag],
+        ),
+      );
+      expect(allergens, isNotNull);
+      expect(allergens!.length, 1);
+      final TaxonomyAllergen allergen = allergens[knownTag]!;
+      _checkKnown(allergen);
     });
   });
 }

@@ -91,30 +91,34 @@ void main() {
       //expect(result.insight.confidence, isNotNull);
     });
 
-    test('get product insights PROD', () async {
-      // TODO(monsieurtanuki): to be removed when we have more a relevant test in QueryType.TEST
-      InsightsResult result = await OpenFoodAPIClient.getProductInsights(
-        '8025386005564',
-        TestConstants.TEST_USER,
+    test('get product insights (found)', () async {
+      final InsightsResult result1 = await OpenFoodAPIClient.getRandomInsight(
+        TestConstants.PROD_USER,
+        type: InsightType.CATEGORY,
+        queryType: QueryType.PROD,
+      );
+
+      final String barcode = result1.insights![0].barcode!;
+
+      final InsightsResult result = await OpenFoodAPIClient.getProductInsights(
+        barcode,
+        TestConstants.PROD_USER,
         queryType: QueryType.PROD,
       );
 
       expect(result.status, isNotNull);
       expect(result.status, 'found');
-      expect(result.insights!.isNotEmpty, true);
-      expect(result.insights![0].id != null, true);
-      expect(result.insights![0].barcode != null, true);
-      expect(result.insights![0].countries != null, true);
-      expect(result.insights![0].lang != null, true);
-      expect(result.insights![0].model != null, true);
-      // Actually, I stumbled across insights without confidence field...
-      //expect(result.insight.confidence != null, true);
+      expect(result.insights!, isNotEmpty);
+      expect(result.insights![0].id, isNotNull);
+      expect(result.insights![0].barcode, barcode);
     });
 
-    test('get product insights', () async {
+    test('get product insights (none)', () async {
+      const String fakeBarcode = '3615';
       InsightsResult result = await OpenFoodAPIClient.getProductInsights(
-        '8025386005564',
-        TestConstants.TEST_USER,
+        fakeBarcode,
+        TestConstants.PROD_USER,
+        queryType: QueryType.PROD,
       );
 
       expect(result.status, isNotNull);
