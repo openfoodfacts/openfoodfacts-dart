@@ -374,6 +374,7 @@ class OpenFoodAPIClient {
       configuration.getParametersMap(),
       user,
       queryType: queryType,
+      addCredentialsToBody: false,
     );
 
     Map<String, dynamic> decodedJson =
