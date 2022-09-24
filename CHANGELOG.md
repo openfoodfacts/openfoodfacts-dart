@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.25.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.24.0...v1.25.0) (2022-09-23)
+
+
+### Features
+
+* [#560](https://github.com/openfoodfacts/openfoodfacts-dart/issues/560) - optionally adding user credentials for POST requests ([#561](https://github.com/openfoodfacts/openfoodfacts-dart/issues/561)) ([d5cd14c](https://github.com/openfoodfacts/openfoodfacts-dart/commit/d5cd14cf3ee710f9045110c34e1ce1180bdddb8e))
+* add funding links ([#547](https://github.com/openfoodfacts/openfoodfacts-dart/issues/547)) ([e52018a](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e52018a39ef026fe62f76e44905693ada416addf))
+
+
+### Bug Fixes
+
+* imageHelper - minor fix about Windows; deprecated methods ([#545](https://github.com/openfoodfacts/openfoodfacts-dart/issues/545)) ([eb0ac81](https://github.com/openfoodfacts/openfoodfacts-dart/commit/eb0ac81e65b285f88854d44ee6eaa3f5367b0776))
+* integration tests around "getTaxonomy" ([#563](https://github.com/openfoodfacts/openfoodfacts-dart/issues/563)) ([a826add](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a826add65c6b993f748b2874ef501a5efc900497))
+
 ## [1.24.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.23.0...v1.24.0) (2022-08-15)
 
 
