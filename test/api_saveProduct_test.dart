@@ -46,7 +46,7 @@ void main() {
           lang: OpenFoodFactsLanguage.ENGLISH,
           brands: 'Golden Cookies',
           nutrimentEnergyUnit: 'kJ',
-          nutrimentDataPer: 'serving',
+          nutrimentDataPer: Product.nutrimentPerServing,
           ingredientsText:
               'fortified wheat flour, chocolate chips (25%), sugar, palm oil,  golden syrup, whey and whey derivatives (milk), raising agents, salt, flavouring',
           nutriments: Nutriments(novaGroup: 4),
@@ -253,7 +253,7 @@ void main() {
       Product product = Product(
           barcode: '7340011364184',
           productName: 'Chili beans',
-          nutrimentDataPer: '100g',
+          nutrimentDataPer: Product.nutrimentPer100g,
           nutriments: nutriments);
 
       Status status = await OpenFoodAPIClient.saveProduct(
@@ -332,7 +332,7 @@ void main() {
       const double VITAMIN_B12 = 0.15;
       const String BARCODE = '7340011364184';
       const String PRODUCT_NAME = 'Chili beans';
-      const String NUTRIMENT_DATA_PER = '100g';
+      const String NUTRIMENT_DATA_PER = Product.nutrimentPer100g;
 
       for (int i = 2; i >= 0; i--) {
         final Nutriments nutriments = Nutriments(
