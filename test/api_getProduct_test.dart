@@ -34,7 +34,7 @@ void main() {
         lang: OpenFoodFactsLanguage.GERMAN,
         countries: 'Frankreich,Deutschland',
         brands: 'Coca Cola',
-        nutrimentDataPer: 'serving',
+        nutrimentDataPer: Product.nutrimentPerServing,
         nutrimentEnergyUnit: 'kcal',
         servingSize: '100g',
         ingredientsText:
@@ -1496,6 +1496,8 @@ void main() {
           language: OpenFoodFactsLanguage.FRENCH,
           fields: <ProductField>[ProductField.KNOWLEDGE_PANELS],
         ),
+        queryType: QueryType.PROD,
+        user: TestConstants.PROD_USER,
       );
       expect(productResult.product, isNotNull);
       expect(productResult.product!.knowledgePanels, isNotNull);

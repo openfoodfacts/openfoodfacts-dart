@@ -92,6 +92,12 @@ extension ProductImprovementExtension on ProductImprovement {
 /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
 @JsonSerializable()
 class Product extends JsonObject {
+  /// Typical value for [nutrimentDataPer]: nutrition values are per 100g.
+  static const String nutrimentPer100g = '100g';
+
+  /// Typical value for [nutrimentDataPer]: nutrition values are per serving.
+  static const String nutrimentPerServing = 'serving';
+
   @JsonKey(name: 'code')
   String? barcode;
 
@@ -268,6 +274,21 @@ class Product extends JsonObject {
 
   @JsonKey(name: 'nutriment_energy_unit', includeIfNull: false)
   String? nutrimentEnergyUnit;
+
+  /// Is the "nutrition data for product as sold" in the nutriment fields?
+  ///
+  /// Most of the time, it will be true, e.g. if we type in nutrient data
+  /// reading the product packaging.
+  @JsonKey(
+    name: 'nutrition_data',
+    toJson: JsonHelper.checkboxToJSON,
+    fromJson: JsonHelper.checkboxFromJSON,
+  )
+  bool? nutritionData;
+
+  /// Size of the product sample for "nutrition data for product as sold".
+  ///
+  /// Typical values: [nutrimentPer100g] or [nutrimentPerServing].
   @JsonKey(name: 'nutrition_data_per', includeIfNull: false)
   String? nutrimentDataPer;
   @JsonKey(name: 'nutrition_grade_fr', includeIfNull: false)

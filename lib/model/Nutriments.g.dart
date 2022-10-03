@@ -222,7 +222,10 @@ Nutriments _$NutrimentsFromJson(Map<String, dynamic> json) => Nutriments(
       stearicAcidServing: JsonObject.parseDouble(json['stearic-acid_serving']),
       stearicAcidUnit:
           UnitHelper.stringToUnit(json['stearic-acid_unit'] as String?),
-    );
+    )
+      ..energyKcalServing = JsonObject.parseDouble(json['energy-kcal_serving'])
+      ..energyKjServing = JsonObject.parseDouble(json['energy-kj_serving'])
+      ..energyKj100g = JsonObject.parseDouble(json['energy-kj_100g']);
 
 Map<String, dynamic> _$NutrimentsToJson(Nutriments instance) {
   final val = <String, dynamic>{};
@@ -242,7 +245,10 @@ Map<String, dynamic> _$NutrimentsToJson(Nutriments instance) {
   writeNotNull('nova-group_100g', instance.novaGroup);
   writeNotNull('energy_100g', instance.energy);
   writeNotNull('energy-kcal', instance.energyKcal);
+  writeNotNull('energy-kcal_serving', instance.energyKcalServing);
   writeNotNull('energy-kj', instance.energyKj);
+  writeNotNull('energy-kj_serving', instance.energyKjServing);
+  writeNotNull('energy-kj_100g', instance.energyKj100g);
   writeNotNull('energy-kcal_100g', instance.energyKcal100g);
   writeNotNull('carbohydrates_100g', instance.carbohydrates);
   writeNotNull('salt_serving', instance.saltServing);
