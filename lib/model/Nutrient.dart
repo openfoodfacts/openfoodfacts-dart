@@ -141,7 +141,8 @@ enum Nutrient {
   polyunsaturatedFat,
 
   /// Alcohol
-  alcohol, // pct
+  alcohol,
+
   /// Pantothenic Acid
   pantothenicAcid,
 
@@ -220,77 +221,65 @@ extension NutrientExtension on Nutrient {
   };
 
   /// Default units for nutrients.
-  static const Map<Unit, Set<Nutrient>> _defaultUnits = <Unit, Set<Nutrient>>{
-    Unit.KCAL: <Nutrient>{
-      Nutrient.energyKCal,
-    },
-    Unit.KJ: <Nutrient>{
-      Nutrient.energyKJ,
-    },
-    Unit.PERCENT: <Nutrient>{
-      Nutrient.alcohol,
-    },
-    Unit.MILLI_G: <Nutrient>{
-      Nutrient.calcium,
-      Nutrient.iron,
-      Nutrient.vitaminC,
-      Nutrient.magnesium,
-      Nutrient.phosphorus,
-      Nutrient.potassium,
-      Nutrient.zinc,
-      Nutrient.copper,
-      Nutrient.vitaminE,
-      Nutrient.vitaminB1,
-      Nutrient.vitaminB2,
-      Nutrient.vitaminPP,
-      Nutrient.vitaminB6,
-      Nutrient.cholesterol,
-      Nutrient.pantothenicAcid,
-      Nutrient.chloride,
-      Nutrient.fluoride,
-      Nutrient.manganese,
-      Nutrient.omega3,
-      Nutrient.omega6,
-    },
-    Unit.G: <Nutrient>{
-      Nutrient.salt,
-      Nutrient.sodium,
-      Nutrient.fiber,
-      Nutrient.sugars,
-      Nutrient.fat,
-      Nutrient.saturatedFat,
-      Nutrient.proteins,
-      Nutrient.carbohydrates,
-      Nutrient.caffeine,
-      Nutrient.butyricAcid,
-      Nutrient.caproicAcid,
-      Nutrient.caprylicAcid,
-      Nutrient.capricAcid,
-      Nutrient.lauricAcid,
-      Nutrient.myristicAcid,
-      Nutrient.palmiticAcid,
-      Nutrient.stearicAcid,
-      Nutrient.oleicAcid,
-      Nutrient.linoleicAcid,
-      Nutrient.docosahexaenoicAcid,
-      Nutrient.eicosapentaenoicAcid,
-      Nutrient.erucicAcid,
-      Nutrient.monounsaturatedFat,
-      Nutrient.polyunsaturatedFat,
-      Nutrient.transFat,
-    },
-    Unit.MICRO_G: <Nutrient>{
-      Nutrient.selenium,
-      Nutrient.vitaminA,
-      Nutrient.vitaminD,
-      Nutrient.vitaminB12,
-      Nutrient.vitaminB9,
-      Nutrient.vitaminK,
-      Nutrient.biotin,
-      Nutrient.chromium,
-      Nutrient.iodine,
-      Nutrient.molybdenum,
-    },
+  static const Map<Nutrient, Unit> _defaultUnits = <Nutrient, Unit>{
+    Nutrient.salt: Unit.G,
+    Nutrient.sodium: Unit.G,
+    Nutrient.fiber: Unit.G,
+    Nutrient.sugars: Unit.G,
+    Nutrient.fat: Unit.G,
+    Nutrient.saturatedFat: Unit.G,
+    Nutrient.proteins: Unit.G,
+    Nutrient.energyKCal: Unit.KCAL,
+    Nutrient.energyKJ: Unit.KJ,
+    Nutrient.carbohydrates: Unit.G,
+    Nutrient.caffeine: Unit.G,
+    Nutrient.calcium: Unit.MILLI_G,
+    Nutrient.iron: Unit.MILLI_G,
+    Nutrient.vitaminC: Unit.MILLI_G,
+    Nutrient.magnesium: Unit.MILLI_G,
+    Nutrient.phosphorus: Unit.MILLI_G,
+    Nutrient.potassium: Unit.MILLI_G,
+    Nutrient.zinc: Unit.MILLI_G,
+    Nutrient.copper: Unit.MILLI_G,
+    Nutrient.selenium: Unit.MICRO_G,
+    Nutrient.vitaminA: Unit.MICRO_G,
+    Nutrient.vitaminE: Unit.MILLI_G,
+    Nutrient.vitaminD: Unit.MICRO_G,
+    Nutrient.vitaminB1: Unit.MILLI_G,
+    Nutrient.vitaminB2: Unit.MILLI_G,
+    Nutrient.vitaminPP: Unit.MILLI_G,
+    Nutrient.vitaminB6: Unit.MILLI_G,
+    Nutrient.vitaminB12: Unit.MICRO_G,
+    Nutrient.vitaminB9: Unit.MICRO_G,
+    Nutrient.vitaminK: Unit.MICRO_G,
+    Nutrient.cholesterol: Unit.MILLI_G,
+    Nutrient.butyricAcid: Unit.G,
+    Nutrient.caproicAcid: Unit.G,
+    Nutrient.caprylicAcid: Unit.G,
+    Nutrient.capricAcid: Unit.G,
+    Nutrient.lauricAcid: Unit.G,
+    Nutrient.myristicAcid: Unit.G,
+    Nutrient.palmiticAcid: Unit.G,
+    Nutrient.stearicAcid: Unit.G,
+    Nutrient.oleicAcid: Unit.G,
+    Nutrient.linoleicAcid: Unit.G,
+    Nutrient.docosahexaenoicAcid: Unit.G,
+    Nutrient.eicosapentaenoicAcid: Unit.G,
+    Nutrient.erucicAcid: Unit.G,
+    Nutrient.monounsaturatedFat: Unit.G,
+    Nutrient.polyunsaturatedFat: Unit.G,
+    Nutrient.alcohol: Unit.PERCENT,
+    Nutrient.pantothenicAcid: Unit.MILLI_G,
+    Nutrient.biotin: Unit.MICRO_G,
+    Nutrient.chloride: Unit.MILLI_G,
+    Nutrient.chromium: Unit.MICRO_G,
+    Nutrient.fluoride: Unit.MILLI_G,
+    Nutrient.iodine: Unit.MICRO_G,
+    Nutrient.manganese: Unit.MILLI_G,
+    Nutrient.molybdenum: Unit.MICRO_G,
+    Nutrient.omega3: Unit.MILLI_G,
+    Nutrient.omega6: Unit.MILLI_G,
+    Nutrient.transFat: Unit.G,
   };
 
   /// Returns the tag used in [Nutriments]'s map.
@@ -298,12 +287,5 @@ extension NutrientExtension on Nutrient {
       _specialNutrientTags[this] ?? toString().replaceFirst('Nutrient.', '');
 
   /// Returns the default unit of values.
-  Unit? get defaultUnit {
-    for (final MapEntry<Unit, Set<Nutrient>> entry in _defaultUnits.entries) {
-      if (entry.value.contains(this)) {
-        return entry.key;
-      }
-    }
-    return null;
-  }
+  Unit? get defaultUnit => _defaultUnits[this];
 }
