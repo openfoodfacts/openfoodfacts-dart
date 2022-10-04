@@ -1,10 +1,11 @@
 import 'dart:math';
 
+import 'package:openfoodfacts/model/Nutrient.dart';
 import 'package:openfoodfacts/model/Nutriments.dart';
+import 'package:openfoodfacts/model/PerSize.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
-import 'package:openfoodfacts/utils/UnitHelper.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';
@@ -32,8 +33,6 @@ void main() {
 
       expect(result.product!.servingSize != null, true);
       expect(result.product!.servingSize, servingSize_1);
-
-      expect(result.product!.nutriments!.novaGroup, 4);
     }
 
     test('save product test, set serving-size', () async {
@@ -46,10 +45,10 @@ void main() {
           lang: OpenFoodFactsLanguage.ENGLISH,
           brands: 'Golden Cookies',
           nutrimentEnergyUnit: 'kJ',
-          nutrimentDataPer: Product.nutrimentPerServing,
+          nutrimentDataPer: PerSize.serving.tag,
           ingredientsText:
               'fortified wheat flour, chocolate chips (25%), sugar, palm oil,  golden syrup, whey and whey derivatives (milk), raising agents, salt, flavouring',
-          nutriments: Nutriments(novaGroup: 4),
+          nutriments: Nutriments.empty(),
           additives: Additives(['en:e150d'], ['E150d']));
       Status status = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
@@ -244,16 +243,17 @@ void main() {
     });
 
     test('add new product test 5', () async {
-      var nutriments = Nutriments();
-      nutriments.energy = 365;
-      nutriments.carbohydrates = 12;
-      nutriments.proteins = 6;
-      nutriments.fat = 0.1;
+      const PerSize perSize = PerSize.oneHundredGrams;
+      final Nutriments nutriments = Nutriments.empty()
+        ..setValue(Nutrient.carbohydrates, perSize, 12)
+        ..setValue(Nutrient.proteins, perSize, 6)
+        ..setValue(Nutrient.fat, perSize, 0.1)
+        ..setValue(Nutrient.energyKJ, perSize, 365);
 
       Product product = Product(
           barcode: '7340011364184',
           productName: 'Chili beans',
-          nutrimentDataPer: Product.nutrimentPer100g,
+          nutrimentDataPer: PerSize.oneHundredGrams.tag,
           nutriments: nutriments);
 
       Status status = await OpenFoodAPIClient.saveProduct(
@@ -301,28 +301,6 @@ void main() {
           ['en:product-categories-test-1', 'en:product-categories-test-2']);
     }, skip: 'Works randomly');
 
-    Unit _getMassUnit(int i) => {
-          0: Unit.G,
-          1: Unit.MILLI_G,
-          2: Unit.MICRO_G,
-        }[i]!;
-
-    double _nutrientToGrams(double? nutrientValue, Unit? unit) {
-      if (nutrientValue == null) {
-        fail('Got unexpected nutriment value');
-      }
-      switch (unit) {
-        case Unit.G:
-          return nutrientValue;
-        case Unit.MILLI_G:
-          return 0.001 * nutrientValue;
-        case Unit.MICRO_G:
-          return 0.000001 * nutrientValue;
-        default:
-          fail('Got unexpected unit');
-      }
-    }
-
     test('confirm that nutrient fields are saved', () async {
       const User USER = TestConstants.TEST_USER;
       const double ENERGY = 365;
@@ -332,25 +310,21 @@ void main() {
       const double VITAMIN_B12 = 0.15;
       const String BARCODE = '7340011364184';
       const String PRODUCT_NAME = 'Chili beans';
-      const String NUTRIMENT_DATA_PER = Product.nutrimentPer100g;
+      final String nutrimentDataPer = PerSize.oneHundredGrams.tag;
 
+      const PerSize perSize = PerSize.oneHundredGrams;
       for (int i = 2; i >= 0; i--) {
-        final Nutriments nutriments = Nutriments(
-            energy: ENERGY + i,
-            energyUnit: Unit.KJ,
-            carbohydrates: CARBOHYDRATES + i,
-            carbohydratesUnit: _getMassUnit(i),
-            proteins: PROTEINS + i,
-            proteinsUnit: _getMassUnit(i),
-            vitaminB12: VITAMIN_B12 + i,
-            vitaminB12Unit: _getMassUnit(i),
-            fat: FAT + i,
-            fatUnit: _getMassUnit(i));
+        final Nutriments nutriments = Nutriments.empty()
+          ..setValue(Nutrient.energyKJ, perSize, ENERGY + i)
+          ..setValue(Nutrient.carbohydrates, perSize, CARBOHYDRATES + i)
+          ..setValue(Nutrient.proteins, perSize, PROTEINS + i)
+          ..setValue(Nutrient.vitaminB12, perSize, VITAMIN_B12 + i)
+          ..setValue(Nutrient.fat, perSize, FAT + i);
 
         final Product newProduct = Product(
           barcode: BARCODE,
           productName: PRODUCT_NAME,
-          nutrimentDataPer: NUTRIMENT_DATA_PER,
+          nutrimentDataPer: nutrimentDataPer,
           nutriments: nutriments,
         );
 
@@ -367,7 +341,6 @@ void main() {
           OpenFoodFactsLanguage.ENGLISH,
           user: USER,
         );
-        const EPSILON = 0.000001;
 
         expect(result.status, 1);
         expect(result.barcode, BARCODE);
@@ -376,40 +349,24 @@ void main() {
         if (searchedProduct != null) {
           expect(searchedProduct.barcode, BARCODE);
           expect(searchedProduct.productName, PRODUCT_NAME);
-          expect(searchedProduct.nutrimentDataPer, NUTRIMENT_DATA_PER);
+          expect(searchedProduct.nutrimentDataPer, nutrimentDataPer);
           var searchedNutriments = searchedProduct.nutriments;
-          expect(searchedNutriments != null, true);
+          expect(searchedNutriments, isNotNull);
           if (searchedNutriments != null) {
-            expect(searchedNutriments.energy, nutriments.energy);
-            final expectedCarbs = _nutrientToGrams(
-              nutriments.carbohydrates,
-              nutriments.carbohydratesUnit,
-            );
-            expect(searchedNutriments.carbohydrates,
-                closeTo(expectedCarbs, EPSILON));
-            expect(searchedNutriments.carbohydratesUnit,
-                nutriments.carbohydratesUnit);
-            final expectedProteins = _nutrientToGrams(
-              nutriments.proteins,
-              nutriments.proteinsUnit,
-            );
-            expect(searchedNutriments.proteins,
-                closeTo(expectedProteins, EPSILON));
-            expect(searchedNutriments.proteinsUnit, nutriments.proteinsUnit);
-            final expectedFat = _nutrientToGrams(
-              nutriments.fat,
-              nutriments.fatUnit,
-            );
-            expect(searchedNutriments.fat, closeTo(expectedFat, EPSILON));
-            expect(searchedNutriments.fatUnit, nutriments.fatUnit);
-            final expectedB12 = _nutrientToGrams(
-              nutriments.vitaminB12,
-              nutriments.vitaminB12Unit,
-            );
-            expect(
-                searchedNutriments.vitaminB12, closeTo(expectedB12, EPSILON));
-            expect(
-                searchedNutriments.vitaminB12Unit, nutriments.vitaminB12Unit);
+            final List<Nutrient> nutrients = <Nutrient>[
+              Nutrient.energyKJ,
+              Nutrient.carbohydrates,
+              Nutrient.proteins,
+              Nutrient.fat,
+              Nutrient.vitaminB12,
+            ];
+            for (final Nutrient nutrient in nutrients) {
+              expect(
+                searchedNutriments.getValue(nutrient, perSize),
+                nutriments.getValue(nutrient, perSize),
+                reason: 'should be the same values for $nutrient',
+              );
+            }
           }
         }
       }
@@ -454,16 +411,18 @@ void main() {
         expect(result.status, 1);
         expect(result.product, isNotNull);
         expect(result.product!.nutriments, isNotNull);
-        final double? initialValue = result.product!.nutriments!.calcium;
+        final Nutriments nutriments = result.product!.nutriments!;
+        const PerSize perSize = PerSize.oneHundredGrams;
+        final double? initialValue =
+            nutriments.getValue(Nutrient.calcium, perSize);
         expect(initialValue, isNotNull); // in real life: 120mg
 
         // Step 2: save the slightly altered product
         final double nextValue = initialValue! + .001;
-        result.product!.nutriments!.calcium = nextValue;
-        result.product!.nutriments!.calciumUnit = Unit.G;
+        nutriments.setValue(Nutrient.calcium, perSize, nextValue);
 
         final Product savedProduct = Product(barcode: barcode);
-        savedProduct.nutriments = result.product!.nutriments;
+        savedProduct.nutriments = nutriments;
         final Status status = await OpenFoodAPIClient.saveProduct(
           TestConstants.TEST_USER,
           savedProduct,
@@ -479,7 +438,8 @@ void main() {
         expect(result.status, 1);
         expect(result.product, isNotNull);
         expect(result.product!.nutriments, isNotNull);
-        final double? latestValue = result.product!.nutriments!.calcium;
+        final double? latestValue =
+            result.product!.nutriments!.getValue(Nutrient.calcium, perSize);
         expect(latestValue, nextValue);
       },
     );
@@ -493,9 +453,8 @@ void main() {
     test('No nutrition data with nutriments', () async {
       Product product = Product(
           noNutritionData: true,
-          nutriments: Nutriments(
-            salt: 1.0,
-          ));
+          nutriments: Nutriments.empty()
+              .setValue(Nutrient.salt, PerSize.oneHundredGrams, 1.0));
 
       expect(product.noNutritionData, isTrue);
       expect(product.nutriments, isNull);
@@ -503,9 +462,8 @@ void main() {
 
     test('Nutriments', () async {
       Product product = Product(
-          nutriments: Nutriments(
-        salt: 1.0,
-      ));
+          nutriments: Nutriments.empty()
+            ..setValue(Nutrient.salt, PerSize.oneHundredGrams, 1.0));
 
       expect(product.noNutritionData, isFalse);
       expect(product.nutriments, isNotNull);

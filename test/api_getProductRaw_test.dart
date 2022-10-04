@@ -1,4 +1,7 @@
+import 'package:openfoodfacts/model/Nutrient.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
+import 'package:openfoodfacts/model/Nutriments.dart';
+import 'package:openfoodfacts/model/PerSize.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
@@ -34,15 +37,16 @@ void main() {
       expect(result.product!.tracesTags!, contains('en:lupin'));
 
       expect(result.product!.nutriments, isNotNull);
+      final Nutriments nutriments = result.product!.nutriments!;
 
-      expect(result.product!.nutriments!.energy, 1099.0);
-      expect(result.product!.nutriments!.sugars, 0.9);
-      expect(result.product!.nutriments!.salt, 1.0);
-      expect(result.product!.nutriments!.fiber, 8.8);
-      expect(result.product!.nutriments!.fat, 9.2);
-      expect(result.product!.nutriments!.saturatedFat, 1.1);
-      expect(result.product!.nutriments!.proteins, 4.5);
-      expect(result.product!.nutriments!.novaGroup, isNull);
+      const PerSize perSize = PerSize.oneHundredGrams;
+      expect(nutriments.getValue(Nutrient.energyKJ, perSize), 1099.0);
+      expect(nutriments.getValue(Nutrient.sugars, perSize), 0.9);
+      expect(nutriments.getValue(Nutrient.salt, perSize), 1.0);
+      expect(nutriments.getValue(Nutrient.fiber, perSize), 8.8);
+      expect(nutriments.getValue(Nutrient.fat, perSize), 9.2);
+      expect(nutriments.getValue(Nutrient.saturatedFat, perSize), 1.1);
+      expect(nutriments.getValue(Nutrient.proteins, perSize), 4.5);
 
       expect(result.product!.additives!.ids, isEmpty);
 
@@ -83,12 +87,15 @@ void main() {
       expect(result.barcode, barcode);
       expect(result.product, isNotNull);
       expect(result.product!.barcode, barcode);
+      expect(result.product!.nutriments, isNotNull);
+      final Nutriments nutriments = result.product!.nutriments!;
 
-      expect(result.product!.nutriments!.carbohydratesServing, isNotNull);
-      expect(result.product!.nutriments!.proteinsServing, isNotNull);
-      expect(result.product!.nutriments!.saltServing, isNotNull);
-      expect(result.product!.nutriments!.proteinsServing, isNotNull);
-      expect(result.product!.nutriments!.fatServing, isNotNull);
+      const PerSize perSize = PerSize.serving;
+      expect(nutriments.getValue(Nutrient.carbohydrates, perSize), isNotNull);
+      expect(nutriments.getValue(Nutrient.proteins, perSize), isNotNull);
+      expect(nutriments.getValue(Nutrient.salt, perSize), isNotNull);
+      expect(nutriments.getValue(Nutrient.proteins, perSize), isNotNull);
+      expect(nutriments.getValue(Nutrient.fat, perSize), isNotNull);
     });
 
     test('get product test 2', () async {
@@ -107,16 +114,17 @@ void main() {
       expect(result.product!.productName, 'Wasser Elitess Still, Neutral');
 
       expect(result.product!.nutriments, isNotNull);
+      final Nutriments nutriments = result.product!.nutriments!;
 
-      expect(result.product!.nutriments!.energy, 0.0);
-      expect(result.product!.nutriments!.sugars, 0.0);
-      expect(result.product!.nutriments!.salt, 0.0);
-      expect(result.product!.nutriments!.fiber, isNull);
-      expect(result.product!.nutriments!.fat, 0.0);
-      expect(result.product!.nutriments!.saturatedFat, 0.0);
-      expect(result.product!.nutriments!.proteins, 0.0);
-      expect(result.product!.nutriments!.novaGroup, 1);
-      expect(result.product!.nutriments!.fatServing, isNull);
+      const PerSize perSize = PerSize.oneHundredGrams;
+      expect(nutriments.getComputedKJ(perSize), 0.0);
+      expect(nutriments.getValue(Nutrient.sugars, perSize), 0.0);
+      expect(nutriments.getValue(Nutrient.salt, perSize), 0.0);
+      expect(nutriments.getValue(Nutrient.fiber, perSize), isNull);
+      expect(nutriments.getValue(Nutrient.fat, perSize), 0.0);
+      expect(nutriments.getValue(Nutrient.saturatedFat, perSize), 0.0);
+      expect(nutriments.getValue(Nutrient.proteins, perSize), 0.0);
+      expect(nutriments.getValue(Nutrient.fat, PerSize.serving), isNull);
     });
   });
 }

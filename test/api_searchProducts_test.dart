@@ -125,7 +125,11 @@ void main() {
           expect(result.count, checkCount); // check if same value
         }
       }
-    });
+    },
+        timeout: Timeout(
+          // some tests can be slow here
+          Duration(seconds: 90),
+        ));
 
     test('search favorite products', () async {
       final parameters = <Parameter>[
@@ -558,7 +562,6 @@ void main() {
         expect(product.nutriscore!.toUpperCase(), nutritionGrades);
         expect(product.statesTags, contains(states));
         expect(product.ingredientsTags, contains(ingredients));
-        expect(product.nutriments!.novaGroup, novaGroup);
         expect(product.lang.code, lang);
         // TODO(monsieurtanuki): extract the origins, manufactoringPlaces, purchasePlaces, languages, creator and editors from the product, and compare them to expected values
       }
