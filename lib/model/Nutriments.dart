@@ -5,109 +5,131 @@ import '../interface/JsonObject.dart';
 
 part 'Nutriments.g.dart';
 
+// TODO(monsieurtanuki); make some fields read-only, like Units and nova.
 /// Values in nutrients
 @JsonSerializable()
 class Nutriments extends JsonObject {
-  /// Salt, in grams, per 100 grams of food
+  /// Salt, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'salt_100g', includeIfNull: false, fromJson: JsonObject.parseDouble)
   double? salt;
 
-  /// Fibers, in grams, per 100 grams of food
+  /// Fibers, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'fiber_100g',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? fiber;
 
-  /// Sugars, in grams, per 100 grams of food
+  /// Sugars, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'sugars_100g',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? sugars;
 
-  /// Fats, in grams, per 100 grams of food
+  /// Fats, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'fat_100g', includeIfNull: false, fromJson: JsonObject.parseDouble)
   double? fat;
 
-  /// Saturated Fats, in grams, per 100 grams of food
+  /// Saturated Fats, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'saturated-fat_100g',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? saturatedFat;
 
-  /// Proteins, in grams, per 100 grams of food
+  /// Proteins, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'proteins_100g',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? proteins;
 
-  /// Nova Group
+  /// Nova Group per 100g (?)
   @JsonKey(
       name: 'nova-group_100g',
       includeIfNull: false,
       fromJson: JsonObject.parseInt)
   int? novaGroup;
 
-  /// Energy, in kJ, per 100 grams of food
+  /// Energy (?), in kJ, per 100 grams of product as sold
   @JsonKey(
       name: 'energy_100g',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? energy;
 
-  /// Energy, in kcal, per serving
+  /// Energy, in kcal (?)
   @JsonKey(
       name: 'energy-kcal',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? energyKcal;
 
-  /// Energy, in kj, per serving
+  /// Energy, in kcal, per serving of product as sold
+  @JsonKey(
+      name: 'energy-kcal_serving',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? energyKcalServing;
+
+  /// Energy, in kj (?)
   @JsonKey(
       name: 'energy-kj', includeIfNull: false, fromJson: JsonObject.parseDouble)
   double? energyKj;
 
-  /// Energy, in kcal, per 100 grams of food
+  /// Energy, in kj, per serving of product as sold
+  @JsonKey(
+      name: 'energy-kj_serving',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? energyKjServing;
+
+  /// Energy, in kj, per 100 grams of product as sold
+  @JsonKey(
+      name: 'energy-kj_100g',
+      includeIfNull: false,
+      fromJson: JsonObject.parseDouble)
+  double? energyKj100g;
+
+  /// Energy, in kcal, per 100 grams of product as sold
   @JsonKey(
       name: 'energy-kcal_100g',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? energyKcal100g;
 
-  /// Carbohydrates, in grams, per 100 grams of food
+  /// Carbohydrates, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'carbohydrates_100g',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? carbohydrates;
 
-  /// Salt, in grams, per serving
+  /// Salt, in grams, per serving of product as sold
   @JsonKey(
       name: 'salt_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? saltServing;
 
-  /// Fibers, in grams, per serving
+  /// Fibers, in grams, per serving of product as sold
   @JsonKey(
       name: 'fiber_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? fiberServing;
 
-  /// Sugars, in grams, per serving
+  /// Sugars, in grams, per serving of product as sold
   @JsonKey(
       name: 'sugars_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? sugarsServing;
 
-  /// Fats, in grams, per serving
+  /// Fats, in grams, per serving of product as sold
   @JsonKey(
       name: 'fat_serving',
       includeIfNull: false,
@@ -122,21 +144,21 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? fatUnit;
 
-  /// Saturated Fats, in grams, per serving
+  /// Saturated Fats, in grams, per serving of product as sold
   @JsonKey(
       name: 'saturated-fat_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? saturatedFatServing;
 
-  /// Proteins, in grams, per serving
+  /// Proteins, in grams, per serving of product as sold
   @JsonKey(
       name: 'proteins_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? proteinsServing;
 
-  /// Typical Unit for Proteins
+  /// Typical Unit for Proteins (probably [Unit.G])
   @JsonKey(
       name: 'proteins_unit',
       includeIfNull: false,
@@ -144,21 +166,21 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? proteinsUnit;
 
-  /// Nova Group
+  /// Nova Group per serving (?)
   @JsonKey(
       name: 'nova-group_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseInt)
   int? novaGroupServing;
 
-  /// Energy, in kJ, per serving
+  /// Energy, in kJ, per serving of product as sold
   @JsonKey(
       name: 'energy_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? energyServing;
 
-  /// Carbohydrates, in grams, per serving
+  /// Carbohydrates, in grams, per serving of product as sold
   @JsonKey(
       name: 'carbohydrates_serving',
       includeIfNull: false,
@@ -173,7 +195,7 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? carbohydratesUnit;
 
-  /// Typical Unit for Energy (probably [Unit.KJ]
+  /// Typical Unit for Energy (probably [Unit.KJ])
   @JsonKey(
       name: 'energy_unit',
       includeIfNull: false,
@@ -181,7 +203,7 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? energyUnit;
 
-  /// Typical Unit for Energy (probably [Unit.KCAL]
+  /// Typical Unit for Energy kcal (probably [Unit.KCAL])
   @JsonKey(
       name: 'energy-kcal_unit',
       includeIfNull: false,
@@ -189,14 +211,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? energyKcalUnit;
 
-  /// Caffeine, in grams, per serving
+  /// Caffeine, in grams, per serving of product as sold
   @JsonKey(
       name: 'caffeine_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? caffeineServing;
 
-  /// Caffeine, in grams, per 100 grams of food
+  /// Caffeine, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'caffeine_100g',
       includeIfNull: false,
@@ -211,14 +233,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? caffeineUnit;
 
-  /// Calcium, in grams, per serving
+  /// Calcium, in grams, per serving of product as sold
   @JsonKey(
       name: 'calcium_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? calciumServing;
 
-  /// Calcium, in grams, per 100 grams of food
+  /// Calcium, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'calcium_100g',
       includeIfNull: false,
@@ -233,14 +255,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? calciumUnit;
 
-  /// Iron, in grams, per serving
+  /// Iron, in grams, per serving of product as sold
   @JsonKey(
       name: 'iron_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? ironServing;
 
-  /// Iron, in grams, per 100 grams of food
+  /// Iron, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'iron_100g', includeIfNull: false, fromJson: JsonObject.parseDouble)
   double? iron;
@@ -253,14 +275,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? ironUnit;
 
-  /// Vitamin C, in grams, per serving
+  /// Vitamin C, in grams, per serving of product as sold
   @JsonKey(
       name: 'vitamin-c_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? vitaminCServing;
 
-  /// Vitamin C, in grams, per 100 grams of food
+  /// Vitamin C, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'vitamin-c_100g',
       includeIfNull: false,
@@ -275,14 +297,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? vitaminCUnit;
 
-  /// Magnesium, in grams, per serving
+  /// Magnesium, in grams, per serving of product as sold
   @JsonKey(
       name: 'magnesium_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? magnesiumServing;
 
-  /// Magnesium, in grams, per 100 grams of food
+  /// Magnesium, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'magnesium_100g',
       includeIfNull: false,
@@ -297,14 +319,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? magnesiumUnit;
 
-  /// Phosphorus, in grams, per serving
+  /// Phosphorus, in grams, per serving of product as sold
   @JsonKey(
       name: 'phosphorus_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? phosphorusServing;
 
-  /// Phosphorus, in grams, per 100 grams of food
+  /// Phosphorus, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'phosphorus_100g',
       includeIfNull: false,
@@ -319,14 +341,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? phosphorusUnit;
 
-  /// Potassium, in grams, per serving
+  /// Potassium, in grams, per serving of product as sold
   @JsonKey(
       name: 'potassium_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? potassiumServing;
 
-  /// Potassium, in grams, per 100 grams of food
+  /// Potassium, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'potassium_100g',
       includeIfNull: false,
@@ -341,14 +363,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? potassiumUnit;
 
-  /// Sodium, in grams, per serving
+  /// Sodium, in grams, per serving of product as sold
   @JsonKey(
       name: 'sodium_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? sodiumServing;
 
-  /// Sodium, in grams, per 100 grams of food
+  /// Sodium, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'sodium_100g',
       includeIfNull: false,
@@ -363,14 +385,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? sodiumUnit;
 
-  /// Zinc, in grams, per serving
+  /// Zinc, in grams, per serving of product as sold
   @JsonKey(
       name: 'zinc_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? zincServing;
 
-  /// Zinc, in grams, per 100 grams of food
+  /// Zinc, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'zinc_100g', includeIfNull: false, fromJson: JsonObject.parseDouble)
   double? zinc;
@@ -383,14 +405,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? zincUnit;
 
-  /// Copper, in grams, per serving
+  /// Copper, in grams, per serving of product as sold
   @JsonKey(
       name: 'copper_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? copperServing;
 
-  /// Copper, in grams, per 100 grams of food
+  /// Copper, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'copper_100g',
       includeIfNull: false,
@@ -405,14 +427,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? copperUnit;
 
-  /// Selenium, in grams, per serving
+  /// Selenium, in grams, per serving of product as sold
   @JsonKey(
       name: 'selenium_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? seleniumServing;
 
-  /// Selenium, in grams, per 100 grams of food
+  /// Selenium, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'selenium_100g',
       includeIfNull: false,
@@ -427,14 +449,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? seleniumUnit;
 
-  /// Vitamin A, in grams, per serving
+  /// Vitamin A, in grams, per serving of product as sold
   @JsonKey(
       name: 'vitamin-a_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? vitaminAServing;
 
-  /// Vitamin A, in grams, per 100 grams of food
+  /// Vitamin A, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'vitamin-a_100g',
       includeIfNull: false,
@@ -449,14 +471,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? vitaminAUnit;
 
-  /// Vitamin E, in grams, per serving
+  /// Vitamin E, in grams, per serving of product as sold
   @JsonKey(
       name: 'vitamin-e_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? vitaminEServing;
 
-  /// Vitamin E, in grams, per 100 grams of food
+  /// Vitamin E, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'vitamin-e_100g',
       includeIfNull: false,
@@ -471,14 +493,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? vitaminEUnit;
 
-  /// Vitamin D, in grams, per serving
+  /// Vitamin D, in grams, per serving of product as sold
   @JsonKey(
       name: 'vitamin-d_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? vitaminDServing;
 
-  /// Vitamin D, in grams, per 100 grams of food
+  /// Vitamin D, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'vitamin-d_100g',
       includeIfNull: false,
@@ -493,14 +515,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? vitaminDUnit;
 
-  /// Vitamin B1, in grams, per serving
+  /// Vitamin B1, in grams, per serving of product as sold
   @JsonKey(
       name: 'vitamin-b1_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? vitaminB1Serving;
 
-  /// Vitamin B1, in grams, per 100 grams of food
+  /// Vitamin B1, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'vitamin-b1_100g',
       includeIfNull: false,
@@ -515,14 +537,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? vitaminB1Unit;
 
-  /// Vitamin B2, in grams, per serving
+  /// Vitamin B2, in grams, per serving of product as sold
   @JsonKey(
       name: 'vitamin-b2_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? vitaminB2Serving;
 
-  /// Vitamin B2, in grams, per 100 grams of food
+  /// Vitamin B2, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'vitamin-b2_100g',
       includeIfNull: false,
@@ -537,14 +559,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? vitaminB2Unit;
 
-  /// Vitamin PP, in grams, per serving
+  /// Vitamin PP, in grams, per serving of product as sold
   @JsonKey(
       name: 'vitamin-pp_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? vitaminPPServing;
 
-  /// Vitamin PP, in grams, per 100 grams of food
+  /// Vitamin PP, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'vitamin-pp_100g',
       includeIfNull: false,
@@ -559,14 +581,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? vitaminPPUnit;
 
-  /// Vitamin B6, in grams, per serving
+  /// Vitamin B6, in grams, per serving of product as sold
   @JsonKey(
       name: 'vitamin-b6_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? vitaminB6Serving;
 
-  /// Vitamin B6, in grams, per 100 grams of food
+  /// Vitamin B6, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'vitamin-b6_100g',
       includeIfNull: false,
@@ -581,14 +603,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? vitaminB6Unit;
 
-  /// Vitamin B12, in grams, per serving
+  /// Vitamin B12, in grams, per serving of product as sold
   @JsonKey(
       name: 'vitamin-b12_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? vitaminB12Serving;
 
-  /// Vitamin B12, in grams, per 100 grams of food
+  /// Vitamin B12, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'vitamin-b12_100g',
       includeIfNull: false,
@@ -603,14 +625,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? vitaminB12Unit;
 
-  /// Vitamin B9, in grams, per serving
+  /// Vitamin B9, in grams, per serving of product as sold
   @JsonKey(
       name: 'vitamin-b9_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? vitaminB9Serving;
 
-  /// Vitamin B9, in grams, per 100 grams of food
+  /// Vitamin B9, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'vitamin-b9_100g',
       includeIfNull: false,
@@ -625,14 +647,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? vitaminB9Unit;
 
-  /// Vitamin K, in grams, per serving
+  /// Vitamin K, in grams, per serving of product as sold
   @JsonKey(
       name: 'vitamin-k_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? vitaminKServing;
 
-  /// Vitamin K, in grams, per 100 grams of food
+  /// Vitamin K, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'vitamin-k_100g',
       includeIfNull: false,
@@ -647,14 +669,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? vitaminKUnit;
 
-  /// Cholesterol, in grams, per serving
+  /// Cholesterol, in grams, per serving of product as sold
   @JsonKey(
       name: 'cholesterol_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? cholesterolServing;
 
-  /// Cholesterol, in grams, per 100 grams of food
+  /// Cholesterol, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'cholesterol_100g',
       includeIfNull: false,
@@ -669,14 +691,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? cholesterolUnit;
 
-  /// Butyric Acid, in grams, per serving
+  /// Butyric Acid, in grams, per serving of product as sold
   @JsonKey(
       name: 'butyric-acid_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? butyricAcidServing;
 
-  /// Butyric Acid, in grams, per 100 grams of food
+  /// Butyric Acid, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'butyric-acid_100g',
       includeIfNull: false,
@@ -691,14 +713,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? butyricAcidUnit;
 
-  /// Caproic Acid, in grams, per serving
+  /// Caproic Acid, in grams, per serving of product as sold
   @JsonKey(
       name: 'caproic-acid_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? caproicAcidServing;
 
-  /// Caproic Acid, in grams, per 100 grams of food
+  /// Caproic Acid, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'caproic-acid_100g',
       includeIfNull: false,
@@ -713,14 +735,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? caproicAcidUnit;
 
-  /// Caprylic Acid, in grams, per serving
+  /// Caprylic Acid, in grams, per serving of product as sold
   @JsonKey(
       name: 'caprylic-acid_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? caprylicAcidServing;
 
-  /// Caprylic Acid, in grams, per 100 grams of food
+  /// Caprylic Acid, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'caprylic-acid_100g',
       includeIfNull: false,
@@ -735,14 +757,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? caprylicAcidUnit;
 
-  /// Capric Acid, in grams, per serving
+  /// Capric Acid, in grams, per serving of product as sold
   @JsonKey(
       name: 'capric-acid_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? capricAcidServing;
 
-  /// Capric Acid, in grams, per 100 grams of food
+  /// Capric Acid, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'capric-acid_100g',
       includeIfNull: false,
@@ -757,14 +779,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? capricAcidUnit;
 
-  /// Lauric Acid, in grams, per serving
+  /// Lauric Acid, in grams, per serving of product as sold
   @JsonKey(
       name: 'lauric-acid_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? lauricAcidServing;
 
-  /// Lauric Acid, in grams, per 100 grams of food
+  /// Lauric Acid, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'lauric-acid_100g',
       includeIfNull: false,
@@ -779,14 +801,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? lauricAcidUnit;
 
-  /// Myristic Acid, in grams, per serving
+  /// Myristic Acid, in grams, per serving of product as sold
   @JsonKey(
       name: 'myristic-acid_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? myristicAcidServing;
 
-  /// Myristic Acid, in grams, per 100 grams of food
+  /// Myristic Acid, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'myristic-acid_100g',
       includeIfNull: false,
@@ -801,14 +823,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? myristicAcidUnit;
 
-  /// Palmitic Acid, in grams, per serving
+  /// Palmitic Acid, in grams, per serving of product as sold
   @JsonKey(
       name: 'palmitic-acid_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? palmiticAcidServing;
 
-  /// Palmitic Acid, in grams, per 100 grams of food
+  /// Palmitic Acid, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'palmitic-acid_100g',
       includeIfNull: false,
@@ -823,14 +845,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? palmiticAcidUnit;
 
-  /// Stearic Acid, in grams, per serving
+  /// Stearic Acid, in grams, per serving of product as sold
   @JsonKey(
       name: 'stearic-acid_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? stearicAcidServing;
 
-  /// Stearic Acid, in grams, per 100 grams of food
+  /// Stearic Acid, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'stearic-acid_100g',
       includeIfNull: false,
@@ -845,14 +867,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? stearicAcidUnit;
 
-  /// Oleic Acid, in grams, per serving
+  /// Oleic Acid, in grams, per serving of product as sold
   @JsonKey(
       name: 'oleic-acid_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? oleicAcidServing;
 
-  /// Oleic Acid, in grams, per 100 grams of food
+  /// Oleic Acid, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'oleic-acid_100g',
       includeIfNull: false,
@@ -867,14 +889,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? oleicAcidUnit;
 
-  /// Linoleic Acid, in grams, per serving
+  /// Linoleic Acid, in grams, per serving of product as sold
   @JsonKey(
       name: 'linoleic-acid_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? linoleicAcidServing;
 
-  /// Linoleic Acid, in grams, per 100 grams of food
+  /// Linoleic Acid, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'linoleic-acid_100g',
       includeIfNull: false,
@@ -889,14 +911,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? linoleicAcidUnit;
 
-  /// Docosahexaenoic Acid, in grams, per serving
+  /// Docosahexaenoic Acid, in grams, per serving of product as sold
   @JsonKey(
       name: 'docosahexaenoic-acid_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? docosahexaenoicAcidServing;
 
-  /// Docosahexaenoic Acid, in grams, per 100 grams of food
+  /// Docosahexaenoic Acid, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'docosahexaenoic-acid_100g',
       includeIfNull: false,
@@ -911,14 +933,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? docosahexaenoicAcidUnit;
 
-  /// Eicosapentaenoic Acid, in grams, per serving
+  /// Eicosapentaenoic Acid, in grams, per serving of product as sold
   @JsonKey(
       name: 'eicosapentaenoic-acid_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? eicosapentaenoicAcidServing;
 
-  /// Eicosapentaenoic Acid, in grams, per 100 grams of food
+  /// Eicosapentaenoic Acid, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'eicosapentaenoic-acid_100g',
       includeIfNull: false,
@@ -933,14 +955,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? eicosapentaenoicAcidUnit;
 
-  /// Erucic Acid, in grams, per serving
+  /// Erucic Acid, in grams, per serving of product as sold
   @JsonKey(
       name: 'erucic-acid_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? erucicAcidServing;
 
-  /// Erucic Acid, in grams, per 100 grams of food
+  /// Erucic Acid, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'erucic-acid_100g',
       includeIfNull: false,
@@ -955,14 +977,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? erucicAcidUnit;
 
-  /// Monounsaturated Fats, in grams, per serving
+  /// Monounsaturated Fats, in grams, per serving of product as sold
   @JsonKey(
       name: 'monounsaturated_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? monounsaturatedServing;
 
-  /// Monounsaturated Fats, in grams, per 100 grams of food
+  /// Monounsaturated Fats, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'monounsaturated_100g',
       includeIfNull: false,
@@ -977,14 +999,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? monounsaturatedUnit;
 
-  /// Polyunsaturated Fats, in grams, per serving
+  /// Polyunsaturated Fats, in grams, per serving of product as sold
   @JsonKey(
       name: 'polyunsaturated_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? polyunsaturatedServing;
 
-  /// Polyunsaturated Fats, in grams, per 100 grams of food
+  /// Polyunsaturated Fats, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'polyunsaturated_100g',
       includeIfNull: false,
@@ -999,14 +1021,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? polyunsaturatedUnit;
 
-  /// Alcohol, in % vol, per serving
+  /// Alcohol, in % vol, per serving of product as sold
   @JsonKey(
       name: 'alcohol_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? alcoholServing;
 
-  /// Alcohol, in % vol, per 100g of food
+  /// Alcohol, in % vol, per 100g of product as sold
   @JsonKey(
       name: 'alcohol_100g',
       includeIfNull: false,
@@ -1021,14 +1043,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? alcoholUnit;
 
-  /// Pantothenic Acid, in grams, per serving
+  /// Pantothenic Acid, in grams, per serving of product as sold
   @JsonKey(
       name: 'pantothenic-acid_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? pantothenicAcidServing;
 
-  /// Pantothenic Acid, in grams, per 100 grams of food
+  /// Pantothenic Acid, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'pantothenic-acid_100g',
       includeIfNull: false,
@@ -1043,14 +1065,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? pantothenicAcidUnit;
 
-  /// Biotin, in grams, per serving
+  /// Biotin, in grams, per serving of product as sold
   @JsonKey(
       name: 'biotin_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? biotinServing;
 
-  /// Biotin, in grams, per 100 grams of food
+  /// Biotin, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'biotin_100g',
       includeIfNull: false,
@@ -1065,14 +1087,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? biotinUnit;
 
-  /// Chloride, in grams, per serving
+  /// Chloride, in grams, per serving of product as sold
   @JsonKey(
       name: 'chloride_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? chlorideServing;
 
-  /// Chloride, in grams, per 100 grams of food
+  /// Chloride, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'chloride_100g',
       includeIfNull: false,
@@ -1087,14 +1109,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? chlorideUnit;
 
-  /// Chromium, in grams, per serving
+  /// Chromium, in grams, per serving of product as sold
   @JsonKey(
       name: 'chromium_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? chromiumServing;
 
-  /// Chromium, in grams, per 100 grams of food
+  /// Chromium, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'chromium_100g',
       includeIfNull: false,
@@ -1109,14 +1131,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? chromiumUnit;
 
-  /// Fluoride, in grams, per serving
+  /// Fluoride, in grams, per serving of product as sold
   @JsonKey(
       name: 'fluoride_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? fluorideServing;
 
-  /// Fluoride, in grams, per 100 grams of food
+  /// Fluoride, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'fluoride_100g',
       includeIfNull: false,
@@ -1131,14 +1153,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? fluorideUnit;
 
-  /// Iodine, in grams, per serving
+  /// Iodine, in grams, per serving of product as sold
   @JsonKey(
       name: 'iodine_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? iodineServing;
 
-  /// Iodine, in grams, per 100 grams of food
+  /// Iodine, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'iodine_100g',
       includeIfNull: false,
@@ -1153,14 +1175,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? iodineUnit;
 
-  /// Manganese, in grams, per serving
+  /// Manganese, in grams, per serving of product as sold
   @JsonKey(
       name: 'manganese_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? manganeseServing;
 
-  /// Manganese, in grams, per 100 grams of food
+  /// Manganese, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'manganese_100g',
       includeIfNull: false,
@@ -1175,14 +1197,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? manganeseUnit;
 
-  /// Molybdenum, in grams, per serving
+  /// Molybdenum, in grams, per serving of product as sold
   @JsonKey(
       name: 'molybdenum_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? molybdenumServing;
 
-  /// Molybdenum, in grams, per 100 grams of food
+  /// Molybdenum, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'molybdenum_100g',
       includeIfNull: false,
@@ -1197,14 +1219,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? molybdenumUnit;
 
-  /// Omega 3, in grams, per serving
+  /// Omega 3, in grams, per serving of product as sold
   @JsonKey(
       name: 'omega-3-fat_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? omega3FatServing;
 
-  /// Omega 3, in grams, per 100 grams of food
+  /// Omega 3, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'omega-3-fat_100g',
       includeIfNull: false,
@@ -1219,14 +1241,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? omega3FatUnit;
 
-  /// Omega 6, in grams, per serving
+  /// Omega 6, in grams, per serving of product as sold
   @JsonKey(
       name: 'omega-6-fat_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? omega6FatServing;
 
-  /// Omega 6, in grams, per 100 grams of food
+  /// Omega 6, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'omega-6-fat_100g',
       includeIfNull: false,
@@ -1241,14 +1263,14 @@ class Nutriments extends JsonObject {
       fromJson: UnitHelper.stringToUnit)
   Unit? omega6FatUnit;
 
-  /// Trans Fats, in grams, per serving
+  /// Trans Fats, in grams, per serving of product as sold
   @JsonKey(
       name: 'trans-fat_serving',
       includeIfNull: false,
       fromJson: JsonObject.parseDouble)
   double? transFatServing;
 
-  /// Trans Fats, in grams, per 100 grams of food
+  /// Trans Fats, in grams, per 100 grams of product as sold
   @JsonKey(
       name: 'trans-fat_100g',
       includeIfNull: false,
