@@ -1932,5 +1932,5 @@ void main() {
       expect(result.product!.noNutritionData, isFalse);
       expect(result.product!.nutriments, isNotNull);
     });
-  });
+  }, timeout: Timeout(Duration(seconds: 90)));
 }

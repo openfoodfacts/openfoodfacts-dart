@@ -956,8 +956,6 @@ void main() {
         queryType: QueryType.PROD,
       );
 
-      expect(result.count, isNotNull);
-
       expect(result.products, isNotNull);
       for (final Product product in result.products!) {
         expect(product.statesTags, isNotNull);
@@ -971,7 +969,7 @@ void main() {
         }
       }
 
-      return result.count!;
+      return result.count ?? 0;
     }
 
     test('check products with "completed" states tags', () async {
