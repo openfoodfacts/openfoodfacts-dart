@@ -52,7 +52,7 @@ class Nutriments extends JsonObject {
 
   dynamic _getDynamicValue(final String tag) => _map[tag];
 
-  /// Returns the value in grams of that [nutrient] for that [perSize].
+  /// Sets the value in grams of that [nutrient] for that [perSize].
   ///
   /// It won't be grams for very specific nutrients, like [Nutrient.alcohol].
   Nutriments setValue(
