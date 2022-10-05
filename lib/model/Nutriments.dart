@@ -36,7 +36,7 @@ class Nutriments extends JsonObject {
     final Nutrient nutrient,
     final PerSize perSize,
   ) =>
-      '${nutrient.tag}_${perSize.tag}';
+      '${nutrient.offTag}_${perSize.offTag}';
 
   /// Returns the value in grams of that [nutrient] for that [perSize].
   ///
@@ -70,8 +70,8 @@ class Nutriments extends JsonObject {
   }
 
   /// Returns the default [Unit] of that [nutrient].
-  @Deprecated('Use nutrient.defaultUnit instead')
-  Unit? getUnit(final Nutrient nutrient) => nutrient.defaultUnit;
+  @Deprecated('Use nutrient.typicalUnit instead')
+  Unit? getUnit(final Nutrient nutrient) => nutrient.typicalUnit;
 
   double? getComputedKJ(final PerSize perSize) {
     double? result;
@@ -132,7 +132,7 @@ class Nutriments extends JsonObject {
   /// Nova Group
   @Deprecated('Use Product.novaGroup instead')
   int? get novaGroup =>
-      JsonObject.parseInt(_map['nova-group_${PerSize.oneHundredGrams.tag}']);
+      JsonObject.parseInt(_map['nova-group_${PerSize.oneHundredGrams.offTag}']);
   @Deprecated('Useless, nova is read-only here')
   set novaGroup(final int? value) {}
 

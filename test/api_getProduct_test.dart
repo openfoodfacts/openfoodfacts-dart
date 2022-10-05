@@ -35,7 +35,7 @@ void main() {
         lang: OpenFoodFactsLanguage.GERMAN,
         countries: 'Frankreich,Deutschland',
         brands: 'Coca Cola',
-        nutrimentDataPer: PerSize.serving.tag,
+        nutrimentDataPer: PerSize.serving.offTag,
         nutrimentEnergyUnit: 'kcal',
         servingSize: '100g',
         ingredientsText:

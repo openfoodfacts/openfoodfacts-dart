@@ -1,291 +1,190 @@
+import 'package:openfoodfacts/model/OffTagged.dart';
 import 'package:openfoodfacts/utils/UnitHelper.dart';
 
 /// Nutrient
-enum Nutrient {
+enum Nutrient implements OffTagged {
   /// Salt
-  salt,
+  salt(typicalUnit: Unit.G, offTag: 'salt'),
 
   /// Sodium
-  sodium,
+  sodium(typicalUnit: Unit.G, offTag: 'sodium'),
 
   /// Fibers
-  fiber,
+  fiber(typicalUnit: Unit.G, offTag: 'fiber'),
 
   /// Sugars
-  sugars,
+  sugars(typicalUnit: Unit.G, offTag: 'sugars'),
 
   /// Fats
-  fat,
+  fat(typicalUnit: Unit.G, offTag: 'fat'),
 
   /// Saturated Fats
-  saturatedFat,
+  saturatedFat(typicalUnit: Unit.G, offTag: 'saturated-fat'),
 
   /// Proteins
-  proteins,
+  proteins(typicalUnit: Unit.G, offTag: 'proteins'),
 
   /// Energy in kcal
-  energyKCal,
+  energyKCal(typicalUnit: Unit.KCAL, offTag: 'energy-kcal'),
 
   /// Energy in kj
-  energyKJ,
+  energyKJ(typicalUnit: Unit.KJ, offTag: 'energy-kj'),
 
   /// Carbohydrates
-  carbohydrates,
+  carbohydrates(typicalUnit: Unit.G, offTag: 'carbohydrates'),
 
   /// Caffeine
-  caffeine,
+  caffeine(typicalUnit: Unit.G, offTag: 'caffeine'),
 
   /// Calcium
-  calcium,
+  calcium(typicalUnit: Unit.MILLI_G, offTag: 'calcium'),
 
   /// Iron
-  iron,
+  iron(typicalUnit: Unit.MILLI_G, offTag: 'iron'),
 
   /// Vitamin C
-  vitaminC,
+  vitaminC(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-c'),
 
   /// Magnesium
-  magnesium,
+  magnesium(typicalUnit: Unit.MILLI_G, offTag: 'magnesium'),
 
   /// Phosphorus
-  phosphorus,
+  phosphorus(typicalUnit: Unit.MILLI_G, offTag: 'phosphorus'),
 
   /// Potassium
-  potassium,
+  potassium(typicalUnit: Unit.MILLI_G, offTag: 'potassium'),
 
   /// Zinc
-  zinc,
+  zinc(typicalUnit: Unit.MILLI_G, offTag: 'zinc'),
 
   /// Copper
-  copper,
+  copper(typicalUnit: Unit.MILLI_G, offTag: 'copper'),
 
   /// Selenium
-  selenium,
+  selenium(typicalUnit: Unit.MICRO_G, offTag: 'selenium'),
 
   /// Vitamin A
-  vitaminA,
+  vitaminA(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-a'),
 
   /// Vitamin E
-  vitaminE,
+  vitaminE(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-e'),
 
   /// Vitamin D
-  vitaminD,
+  vitaminD(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-d'),
 
   /// Vitamin B1
-  vitaminB1,
+  vitaminB1(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-b1'),
 
   /// Vitamin B2
-  vitaminB2,
+  vitaminB2(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-b2'),
 
   /// Vitamin PP
-  vitaminPP,
+  vitaminPP(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-pp'),
 
   /// Vitamin B6
-  vitaminB6,
+  vitaminB6(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-b6'),
 
   /// Vitamin B12
-  vitaminB12,
+  vitaminB12(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-b12'),
 
   /// Vitamin B9
-  vitaminB9,
+  vitaminB9(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-b9'),
 
   /// Vitamin K
-  vitaminK,
+  vitaminK(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-k'),
 
   /// Cholesterol
-  cholesterol,
+  cholesterol(typicalUnit: Unit.MILLI_G, offTag: 'cholesterol'),
 
   /// Butyric Acid
-  butyricAcid,
+  butyricAcid(typicalUnit: Unit.G, offTag: 'butyric-acid'),
 
   /// Caproic Acid
-  caproicAcid,
+  caproicAcid(typicalUnit: Unit.G, offTag: 'caproic-acid'),
 
   /// Caprylic Acid
-  caprylicAcid,
+  caprylicAcid(typicalUnit: Unit.G, offTag: 'caprylic-acid'),
 
   /// Capric Acid
-  capricAcid,
+  capricAcid(typicalUnit: Unit.G, offTag: 'capric-acid'),
 
   /// Lauric Acid
-  lauricAcid,
+  lauricAcid(typicalUnit: Unit.G, offTag: 'lauric-acid'),
 
   /// Myristic Acid
-  myristicAcid,
+  myristicAcid(typicalUnit: Unit.G, offTag: 'myristic-acid'),
 
   /// Palmitic Acid
-  palmiticAcid,
+  palmiticAcid(typicalUnit: Unit.G, offTag: 'palmitic-acid'),
 
   /// Stearic Acid
-  stearicAcid,
+  stearicAcid(typicalUnit: Unit.G, offTag: 'stearic-acid'),
 
   /// Oleic Acid
-  oleicAcid,
+  oleicAcid(typicalUnit: Unit.G, offTag: 'oleic-acid'),
 
   /// Linoleic Acid
-  linoleicAcid,
+  linoleicAcid(typicalUnit: Unit.G, offTag: 'linoleic-acid'),
 
   /// Docosahexaenoic Acid
-  docosahexaenoicAcid,
+  docosahexaenoicAcid(typicalUnit: Unit.G, offTag: 'docosahexaenoic-acid'),
 
   /// Eicosapentaenoic Acid
-  eicosapentaenoicAcid,
+  eicosapentaenoicAcid(typicalUnit: Unit.G, offTag: 'eicosapentaenoic-acid'),
 
   /// Erucic Acid
-  erucicAcid,
+  erucicAcid(typicalUnit: Unit.G, offTag: 'erucic-acid'),
 
   /// Monounsaturated Fats
-  monounsaturatedFat,
+  monounsaturatedFat(typicalUnit: Unit.G, offTag: 'monounsaturated'),
 
   /// Polyunsaturated Fats
-  polyunsaturatedFat,
+  polyunsaturatedFat(typicalUnit: Unit.G, offTag: 'polyunsaturated'),
 
   /// Alcohol
-  alcohol,
+  alcohol(typicalUnit: Unit.PERCENT, offTag: 'alcohol'),
 
   /// Pantothenic Acid
-  pantothenicAcid,
+  pantothenicAcid(typicalUnit: Unit.MILLI_G, offTag: 'pantothenic-acid'),
 
   /// Biotin
-  biotin,
+  biotin(typicalUnit: Unit.MICRO_G, offTag: 'biotin'),
 
   /// Chloride
-  chloride,
+  chloride(typicalUnit: Unit.MILLI_G, offTag: 'chloride'),
 
   /// Chromium
-  chromium,
+  chromium(typicalUnit: Unit.MICRO_G, offTag: 'chromium'),
 
   /// Fluoride
-  fluoride,
+  fluoride(typicalUnit: Unit.MILLI_G, offTag: 'fluoride'),
 
   /// Iodine
-  iodine,
+  iodine(typicalUnit: Unit.MICRO_G, offTag: 'iodine'),
 
   /// Manganese
-  manganese,
+  manganese(typicalUnit: Unit.MILLI_G, offTag: 'manganese'),
 
   /// Molybdenum
-  molybdenum,
+  molybdenum(typicalUnit: Unit.MICRO_G, offTag: 'molybdenum'),
 
   /// Omega 3
-  omega3,
+  omega3(typicalUnit: Unit.MILLI_G, offTag: 'omega-3-fat'),
 
   /// Omega 6
-  omega6,
+  omega6(typicalUnit: Unit.MILLI_G, offTag: 'omega-6-fat'),
 
   /// Trans Fats
-  transFat,
-}
+  transFat(typicalUnit: Unit.G, offTag: 'trans-fat');
 
-/// Helper class around [Nutrient].
-extension NutrientExtension on Nutrient {
-  /// Tags for nutrients, in the cases when the labels are different.
-  ///
-  /// E.g.:
-  /// * 'saturated-fat' and [saturatedFat] - not the same, we need an entry here
-  /// * 'iron' and [iron] - same label, we don't need an entry here
-  static const Map<Nutrient, String> _specialNutrientTags = <Nutrient, String>{
-    Nutrient.saturatedFat: 'saturated-fat',
-    Nutrient.energyKCal: 'energy-kcal',
-    Nutrient.energyKJ: 'energy-kj',
-    Nutrient.vitaminC: 'vitamin-c',
-    Nutrient.vitaminA: 'vitamin-a',
-    Nutrient.vitaminE: 'vitamin-e',
-    Nutrient.vitaminD: 'vitamin-d',
-    Nutrient.vitaminB1: 'vitamin-b1',
-    Nutrient.vitaminB2: 'vitamin-b2',
-    Nutrient.vitaminPP: 'vitamin-pp',
-    Nutrient.vitaminB6: 'vitamin-b6',
-    Nutrient.vitaminB12: 'vitamin-b12',
-    Nutrient.vitaminB9: 'vitamin-b9',
-    Nutrient.vitaminK: 'vitamin-k',
-    Nutrient.butyricAcid: 'butyric-acid',
-    Nutrient.caproicAcid: 'caproic-acid',
-    Nutrient.caprylicAcid: 'caprylic-acid',
-    Nutrient.capricAcid: 'capric-acid',
-    Nutrient.lauricAcid: 'lauric-acid',
-    Nutrient.myristicAcid: 'myristic-acid',
-    Nutrient.palmiticAcid: 'palmitic-acid',
-    Nutrient.stearicAcid: 'stearic-acid',
-    Nutrient.oleicAcid: 'oleic-acid',
-    Nutrient.linoleicAcid: 'linoleic-acid',
-    Nutrient.docosahexaenoicAcid: 'docosahexaenoic-acid',
-    Nutrient.eicosapentaenoicAcid: 'eicosapentaenoic-acid',
-    Nutrient.erucicAcid: 'erucic-acid',
-    Nutrient.monounsaturatedFat: 'monounsaturated',
-    Nutrient.polyunsaturatedFat: 'polyunsaturated',
-    Nutrient.pantothenicAcid: 'pantothenic-acid',
-    Nutrient.omega3: 'omega-3-fat',
-    Nutrient.omega6: 'omega-6-fat',
-    Nutrient.transFat: 'trans-fat',
-  };
+  const Nutrient({
+    required this.typicalUnit,
+    required this.offTag,
+  });
 
-  /// Default units for nutrients.
-  static const Map<Nutrient, Unit> _defaultUnits = <Nutrient, Unit>{
-    Nutrient.salt: Unit.G,
-    Nutrient.sodium: Unit.G,
-    Nutrient.fiber: Unit.G,
-    Nutrient.sugars: Unit.G,
-    Nutrient.fat: Unit.G,
-    Nutrient.saturatedFat: Unit.G,
-    Nutrient.proteins: Unit.G,
-    Nutrient.energyKCal: Unit.KCAL,
-    Nutrient.energyKJ: Unit.KJ,
-    Nutrient.carbohydrates: Unit.G,
-    Nutrient.caffeine: Unit.G,
-    Nutrient.calcium: Unit.MILLI_G,
-    Nutrient.iron: Unit.MILLI_G,
-    Nutrient.vitaminC: Unit.MILLI_G,
-    Nutrient.magnesium: Unit.MILLI_G,
-    Nutrient.phosphorus: Unit.MILLI_G,
-    Nutrient.potassium: Unit.MILLI_G,
-    Nutrient.zinc: Unit.MILLI_G,
-    Nutrient.copper: Unit.MILLI_G,
-    Nutrient.selenium: Unit.MICRO_G,
-    Nutrient.vitaminA: Unit.MICRO_G,
-    Nutrient.vitaminE: Unit.MILLI_G,
-    Nutrient.vitaminD: Unit.MICRO_G,
-    Nutrient.vitaminB1: Unit.MILLI_G,
-    Nutrient.vitaminB2: Unit.MILLI_G,
-    Nutrient.vitaminPP: Unit.MILLI_G,
-    Nutrient.vitaminB6: Unit.MILLI_G,
-    Nutrient.vitaminB12: Unit.MICRO_G,
-    Nutrient.vitaminB9: Unit.MICRO_G,
-    Nutrient.vitaminK: Unit.MICRO_G,
-    Nutrient.cholesterol: Unit.MILLI_G,
-    Nutrient.butyricAcid: Unit.G,
-    Nutrient.caproicAcid: Unit.G,
-    Nutrient.caprylicAcid: Unit.G,
-    Nutrient.capricAcid: Unit.G,
-    Nutrient.lauricAcid: Unit.G,
-    Nutrient.myristicAcid: Unit.G,
-    Nutrient.palmiticAcid: Unit.G,
-    Nutrient.stearicAcid: Unit.G,
-    Nutrient.oleicAcid: Unit.G,
-    Nutrient.linoleicAcid: Unit.G,
-    Nutrient.docosahexaenoicAcid: Unit.G,
-    Nutrient.eicosapentaenoicAcid: Unit.G,
-    Nutrient.erucicAcid: Unit.G,
-    Nutrient.monounsaturatedFat: Unit.G,
-    Nutrient.polyunsaturatedFat: Unit.G,
-    Nutrient.alcohol: Unit.PERCENT,
-    Nutrient.pantothenicAcid: Unit.MILLI_G,
-    Nutrient.biotin: Unit.MICRO_G,
-    Nutrient.chloride: Unit.MILLI_G,
-    Nutrient.chromium: Unit.MICRO_G,
-    Nutrient.fluoride: Unit.MILLI_G,
-    Nutrient.iodine: Unit.MICRO_G,
-    Nutrient.manganese: Unit.MILLI_G,
-    Nutrient.molybdenum: Unit.MICRO_G,
-    Nutrient.omega3: Unit.MILLI_G,
-    Nutrient.omega6: Unit.MILLI_G,
-    Nutrient.transFat: Unit.G,
-  };
+  /// Typical unit. An educated guess only: may differ according to countries.
+  final Unit typicalUnit;
 
-  /// Returns the tag used in [Nutriments]'s map.
-  String get tag =>
-      _specialNutrientTags[this] ?? toString().replaceFirst('Nutrient.', '');
-
-  /// Returns the default unit of values.
-  Unit? get defaultUnit => _defaultUnits[this];
+  @override
+  final String offTag;
 }

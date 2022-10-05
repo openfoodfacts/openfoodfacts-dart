@@ -1,21 +1,17 @@
+import 'package:openfoodfacts/model/OffTagged.dart';
+
 /// Used for nutrient values: for which size of the product?
-enum PerSize {
+enum PerSize implements OffTagged {
   /// Per serving of product
-  serving,
+  serving(offTag: 'serving'),
 
   /// Per 100 grams of product
-  oneHundredGrams,
-}
+  oneHundredGrams(offTag: '100g');
 
-/// Helper class around [PerSize].
-extension PerSizeExtension on PerSize {
-  /// Returns the tag used in [Nutriments]'s map.
-  String get tag {
-    switch (this) {
-      case PerSize.serving:
-        return 'serving';
-      case PerSize.oneHundredGrams:
-        return '100g';
-    }
-  }
+  const PerSize({
+    required this.offTag,
+  });
+
+  @override
+  final String offTag;
 }
