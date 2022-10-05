@@ -450,7 +450,7 @@ Like that:
         expect(result.product!.nutriments, isNotNull);
         final double? latestValue =
             result.product!.nutriments!.getValue(Nutrient.calcium, perSize);
-        expect(latestValue, nextValue);
+        expect(latestValue, closeTo(nextValue, 1E-12));
       },
     );
   },
