@@ -243,7 +243,7 @@ void main() {
           );
         }
       }
-      return result.count!;
+      return result.count;
     }
 
     test('check vegan search', () async {
