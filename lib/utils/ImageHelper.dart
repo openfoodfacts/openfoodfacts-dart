@@ -27,50 +27,31 @@ class ImageHelper {
     }
   }
 
-  /// Returns the product [image] full url, or null if [barcode] is null.
+  /// Returns the [image] full url - for a specific [imageSize] if needed.
   ///
+  /// Returns null is [barcode] is null.
   /// E.g. "https://static.openfoodfacts.org/images/products/359/671/046/2858/front_fr.4.100.jpg"
   static String? buildUrl(
     final String? barcode,
     final ProductImage image, {
+    final ImageSize? imageSize,
     final QueryType? queryType,
   }) =>
       barcode == null
           ? null
-          : buildUrlForImageSize(
-              barcode,
-              image,
-              image.size,
-              queryType: queryType,
-            );
+          : '${getProductImageRootUrl(barcode, queryType: queryType)}'
+              '/'
+              '${getProductImageFilename(image, imageSize: imageSize)}';
 
-  /// Returns the product [image] full url according to a specific [imageSize].
+  /// Returns the [image] filename - for a specific [imageSize] if needed.
   ///
-  /// E.g. "https://static.openfoodfacts.org/images/products/359/671/046/2858/front_fr.4.full.jpg"
-  static String buildUrlForImageSize(
-    final String barcode,
-    final ProductImage image,
-    final ImageSize? imageSize, {
-    final QueryType? queryType,
-  }) =>
-      '${getProductImageRootUrl(barcode, queryType: queryType)}'
-      '/'
-      '${getProductImageFilenameForImageSize(image, imageSize)}';
-
-  /// Returns the product [image] filename according to its image size.
-  ///
+  /// By default uses the own [image]'s size field.
   /// E.g. "front_fr.4.100.jpg"
-  static String getProductImageFilename(final ProductImage image) =>
-      getProductImageFilenameForImageSize(image, image.size);
-
-  /// Returns the product [image] filename according to a specific [imageSize].
-  ///
-  /// E.g. "front_fr.4.200.jpg"
-  static String getProductImageFilenameForImageSize(
-    final ProductImage image,
+  static String getProductImageFilename(
+    final ProductImage image, {
     final ImageSize? imageSize,
-  ) =>
-      '${image.field.value}_${image.language.code}.${image.rev}.${imageSize.toNumber()}.jpg';
+  }) =>
+      '${image.field.value}_${image.language.code}.${image.rev}.${(imageSize ?? image.size).toNumber()}.jpg';
 
   /// Returns the web folder of the product images (without trailing '/')
   ///
