@@ -27,7 +27,7 @@ class ImageHelper {
     }
   }
 
-  /// Returns the product image full url, or null if [barcode] is null
+  /// Returns the product [image] full url, or null if [barcode] is null.
   ///
   /// E.g. "https://static.openfoodfacts.org/images/products/359/671/046/2858/front_fr.4.100.jpg"
   static String? buildUrl(
@@ -37,13 +37,40 @@ class ImageHelper {
   }) =>
       barcode == null
           ? null
-          : '${getProductImageRootUrl(barcode, queryType: queryType)}/${image.field.value}_${image.language.code}.${image.rev}.${image.size.toNumber()}.jpg';
+          : buildUrlForImageSize(
+              barcode,
+              image,
+              image.size,
+              queryType: queryType,
+            );
 
-  /// Returns the product image filename
+  /// Returns the product [image] full url according to a specific [imageSize].
+  ///
+  /// E.g. "https://static.openfoodfacts.org/images/products/359/671/046/2858/front_fr.4.full.jpg"
+  static String buildUrlForImageSize(
+    final String barcode,
+    final ProductImage image,
+    final ImageSize? imageSize, {
+    final QueryType? queryType,
+  }) =>
+      '${getProductImageRootUrl(barcode, queryType: queryType)}'
+      '/'
+      '${getProductImageFilenameForImageSize(image, imageSize)}';
+
+  /// Returns the product [image] filename according to its image size.
   ///
   /// E.g. "front_fr.4.100.jpg"
   static String getProductImageFilename(final ProductImage image) =>
-      '${image.field.value}_${image.language.code}.${image.rev}.${image.size.toNumber()}.jpg';
+      getProductImageFilenameForImageSize(image, image.size);
+
+  /// Returns the product [image] filename according to a specific [imageSize].
+  ///
+  /// E.g. "front_fr.4.200.jpg"
+  static String getProductImageFilenameForImageSize(
+    final ProductImage image,
+    final ImageSize? imageSize,
+  ) =>
+      '${image.field.value}_${image.language.code}.${image.rev}.${imageSize.toNumber()}.jpg';
 
   /// Returns the web folder of the product images (without trailing '/')
   ///
@@ -57,8 +84,12 @@ class ImageHelper {
       var p1 = barcode.substring(0, 3);
       var p2 = barcode.substring(3, 6);
       var p3 = barcode.substring(6, 9);
-      var p4 = barcode.length >= 10 ? barcode.substring(9) : '';
-      barcodePath = '$p1/$p2/$p3/$p4';
+      if (barcode.length == 9) {
+        barcodePath = '$p1/$p2/$p3';
+      } else {
+        var p4 = barcode.substring(9);
+        barcodePath = '$p1/$p2/$p3/$p4';
+      }
     } else {
       barcodePath = barcode;
     }
