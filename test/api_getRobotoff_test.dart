@@ -75,9 +75,11 @@ void main() {
 
   group('$OpenFoodAPIClient get robotoff insights', () {
     test('get random insight', () async {
-      InsightsResult result = await OpenFoodAPIClient.getRandomInsight(
-          TestConstants.TEST_USER,
-          type: InsightType.CATEGORY);
+      final InsightsResult result = await OpenFoodAPIClient.getRandomInsight(
+        TestConstants.PROD_USER,
+        type: InsightType.CATEGORY,
+        queryType: QueryType.PROD,
+      );
 
       expect(result.status, isNotNull);
       expect(result.status, 'found');
