@@ -58,7 +58,7 @@ Map<String, dynamic> _$KnowledgePanelImageElementToJson(
 KnowledgePanelPanelGroupElement _$KnowledgePanelPanelGroupElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelPanelGroupElement(
-      title: json['title'] as String,
+      title: json['title'] as String?,
       panelIds:
           (json['panel_ids'] as List<dynamic>).map((e) => e as String).toList(),
     );
