@@ -578,7 +578,7 @@ class OpenFoodAPIClient {
     String lang,
     User user, {
     int? count,
-    required List<InsightType> types,
+    List<InsightType>? types,
     QueryType? queryType,
   }) async {
     if (count == null || count <= 0) {
@@ -586,10 +586,12 @@ class OpenFoodAPIClient {
     }
 
     final List<String> typesValues = [];
-    for (final InsightType t in types) {
-      final String? value = t.value;
-      if (value != null) {
-        typesValues.add(value);
+    if (types != null) {
+      for (final InsightType t in types) {
+        final String? value = t.value;
+        if (value != null) {
+          typesValues.add(value);
+        }
       }
     }
 

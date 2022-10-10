@@ -82,7 +82,6 @@ void main() {
           await OpenFoodAPIClient.getRandomRobotoffQuestion(
         'fr',
         TestConstants.PROD_USER,
-        types: [],
         count: 2,
         queryType: QueryType.PROD,
       );
