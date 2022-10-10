@@ -186,7 +186,17 @@ void main() {
 
       expect(frenchGermanResult.product, isNotNull);
       expect(frenchGermanResult.product!.productName, frenchProductName);
-    });
+    }, skip: 'Too often 504 Gateway Time-out');
+/*
+Like that:
+<html>
+<head><title>504 Gateway Time-out</title></head>
+<body>
+<center><h1>504 Gateway Time-out</h1></center>
+<hr><center>nginx/1.23.1</center>
+</body>
+</html>
+ */
 
     test('add new product test 2', () async {
       Product product = Product(
@@ -480,7 +490,7 @@ void main() {
         expect(result.product, isNotNull);
         expect(result.product!.nutriments, isNotNull);
         final double? latestValue = result.product!.nutriments!.calcium;
-        expect(latestValue, nextValue);
+        expect(latestValue, closeTo(nextValue, 1E-12));
       },
     );
   },
