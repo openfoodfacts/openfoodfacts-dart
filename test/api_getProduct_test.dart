@@ -1832,7 +1832,7 @@ void main() {
 
       expect(result.product!.noNutritionData, isTrue);
       expect(result.product!.nutriments, isNull);
-    });
+    }, skip: 'Random results');
 
     test('With nutriments', () async {
       await uploadProduct(noNutritionData: false);
@@ -1854,5 +1854,5 @@ void main() {
       expect(result.product!.noNutritionData, isFalse);
       expect(result.product!.nutriments, isNotNull);
     });
-  });
+  }, timeout: Timeout(Duration(seconds: 90)));
 }
