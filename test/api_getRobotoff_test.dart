@@ -59,17 +59,36 @@ void main() {
       }
     });
 
-    test('get 2 random questions', () async {
-      RobotoffQuestionResult result =
+    test('get 2 random questions with types', () async {
+      const InsightType type = InsightType.CATEGORY;
+      final RobotoffQuestionResult result =
           await OpenFoodAPIClient.getRandomRobotoffQuestion(
-              'fr', TestConstants.TEST_USER,
-              types: [InsightType.CATEGORY], count: 2);
+        'fr',
+        TestConstants.PROD_USER,
+        types: [type],
+        count: 2,
+        queryType: QueryType.PROD,
+      );
 
       expect(result.status, isNotNull);
       expect(result.status, 'found');
       expect(result.questions!.length, 2);
-      expect(result.questions![0].insightType, InsightType.CATEGORY);
-      expect(result.questions![1].insightType, InsightType.CATEGORY);
+      expect(result.questions![0].insightType, type);
+      expect(result.questions![1].insightType, type);
+    });
+
+    test('get 2 random questions with no specific type', () async {
+      final RobotoffQuestionResult result =
+          await OpenFoodAPIClient.getRandomRobotoffQuestion(
+        'fr',
+        TestConstants.PROD_USER,
+        count: 2,
+        queryType: QueryType.PROD,
+      );
+
+      expect(result.status, isNotNull);
+      expect(result.status, 'found');
+      expect(result.questions!.length, 2);
     });
   });
 

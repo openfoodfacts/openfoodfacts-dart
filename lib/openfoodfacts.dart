@@ -579,24 +579,27 @@ class OpenFoodAPIClient {
     String lang,
     User user, {
     int? count,
-    required List<InsightType> types,
+    List<InsightType>? types,
     QueryType? queryType,
   }) async {
     if (count == null || count <= 0) {
       count = 1;
     }
 
-    List<String?> typesValues = [];
-    for (var t in types) {
-      typesValues.add(t.value);
+    final List<String> typesValues = [];
+    if (types != null) {
+      for (final InsightType t in types) {
+        final String? value = t.value;
+        if (value != null) {
+          typesValues.add(value);
+        }
+      }
     }
-
-    String parsedTypes = typesValues.join(',');
 
     final Map<String, String> parameters = <String, String>{
       'lang': lang,
       'count': count.toString(),
-      'insight_types': parsedTypes.toString()
+      if (typesValues.isNotEmpty) 'insight_types': typesValues.join(',')
     };
 
     var robotoffQuestionUri = UriHelper.getRobotoffUri(
