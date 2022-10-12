@@ -1,60 +1,37 @@
+import 'package:openfoodfacts/model/Nutrient.dart';
 import 'package:openfoodfacts/model/Nutriments.dart';
+import 'package:openfoodfacts/model/PerSize.dart';
 
 /// Energy units
+@Deprecated('Use Unit instead')
 enum NormalizedEnergyUnit { kCal, kJ, undefined }
 
 // TODO: rename as NormalizedEnergyHelper or fix typo as NutrientHelper
 /// Helper class for energy computations and checks
 class NutrimentsHelper {
-  // Normalizes the energy unit as it is pretty fragmented.
-  // Removed as now energy is always in kJ
-  /*static NormalizedEnergyUnit normalizeEnergyUnit(String unit) {
-    var unitLowerCase = unit != null ? unit.toLowerCase() : null;
-    switch (unitLowerCase) {
-      case "kj":
-        return NormalizedEnergyUnit.kJ;
-        break;
-      case "kcal":
-        return NormalizedEnergyUnit.kCal;
-        break;
-      default:
-        return NormalizedEnergyUnit.undefined;
-        break;
-    }
-  }*/
+  static const double _kcalToKJFactor = 4.1868;
+
+  static double fromKCalToKJ(final double kCal) => kCal * _kcalToKJFactor;
+
+  static double fromKJtoKCal(final double kJ) => kJ / _kcalToKJFactor;
 
   /// Gets the energy value (stored in kJ) converted in kCal.
-  static double getEnergyAsKCal(Nutriments nutriments) {
-    return (nutriments.energy! * 0.2388);
-  }
-
-  // Gets the energy value converted in kJ if necessary.
-  // Removed as now energy is always in kJ
-  /*static double getEnergyAsKJ(Nutriments nutriments) {
-    switch (normalizeEnergyUnit(nutriments.energyUnit)) {
-      case NormalizedEnergyUnit.kCal:
-        return (nutriments.energy * 4.1868);
-        break;
-      case NormalizedEnergyUnit.kJ:
-        return nutriments.energy;
-        break;
-      case NormalizedEnergyUnit.undefined:
-        return null;
-        break;
-      default:
-        return null;
-        break;
-    }
-  }*/
+  @Deprecated(
+      'Use nutriments.energyKCal or fromKJtoKCal and nutriments.energyKJ instead')
+  static double getEnergyAsKCal(Nutriments nutriments) =>
+      fromKJtoKCal(nutriments.energy!);
 
   /// Calculates the energy for 100g in kJ.
   /// ! should be used cautiously (might not be displayed to the end user) !
   /// source : https://en.wikipedia.org/wiki/Food_energy
-  static double? calculateEnergy(Nutriments nutriments) {
-    double? fat = nutriments.fat;
-    double? carbs = nutriments.carbohydrates;
-    double? proteins = nutriments.proteins;
-    double? fiber = nutriments.fiber;
+  static double? calculateEnergy(
+    Nutriments nutriments, {
+    PerSize perSize = PerSize.oneHundredGrams,
+  }) {
+    double? fat = nutriments.getValue(Nutrient.fat, perSize);
+    double? carbs = nutriments.getValue(Nutrient.carbohydrates, perSize);
+    double? proteins = nutriments.getValue(Nutrient.proteins, perSize);
+    double? fiber = nutriments.getValue(Nutrient.fiber, perSize);
 
     if (fat == null || carbs == null || proteins == null || fiber == null) {
       return null;
@@ -67,8 +44,11 @@ class NutrimentsHelper {
   /// a use case for this is before saving a product, check if the values aren't
   /// incoherent.
   static bool checkEnergyCoherence(
-      Nutriments nutriments, double marginPercentage) {
-    double statedEnergy = nutriments.energy!;
+    Nutriments nutriments,
+    double marginPercentage, {
+    PerSize perSize = PerSize.oneHundredGrams,
+  }) {
+    final double statedEnergy = nutriments.getComputedKJ(perSize)!;
 
     double lowLimit =
         statedEnergy - (statedEnergy * (marginPercentage / 100.0));

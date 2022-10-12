@@ -508,6 +508,7 @@ class OpenFoodAPIClient {
     var insightUri = UriHelper.getRobotoffUri(
       path: 'api/v1/insights/random/',
       queryType: queryType,
+      queryParameters: parameters,
     );
 
     Response response = await HttpHelper().doGetRequest(

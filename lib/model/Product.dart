@@ -92,12 +92,6 @@ extension ProductImprovementExtension on ProductImprovement {
 /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
 @JsonSerializable()
 class Product extends JsonObject {
-  /// Typical value for [nutrimentDataPer]: nutrition values are per 100g.
-  static const String nutrimentPer100g = '100g';
-
-  /// Typical value for [nutrimentDataPer]: nutrition values are per serving.
-  static const String nutrimentPerServing = 'serving';
-
   @JsonKey(name: 'code')
   String? barcode;
 

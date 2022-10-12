@@ -1,15 +1,16 @@
 import 'package:http/http.dart' as http;
 import 'package:openfoodfacts/model/Attribute.dart';
 import 'package:openfoodfacts/model/AttributeGroup.dart';
+import 'package:openfoodfacts/model/Nutrient.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/model/Nutriments.dart';
+import 'package:openfoodfacts/model/PerSize.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/InvalidBarcodes.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
-import 'package:openfoodfacts/utils/UnitHelper.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';
@@ -34,7 +35,7 @@ void main() {
         lang: OpenFoodFactsLanguage.GERMAN,
         countries: 'Frankreich,Deutschland',
         brands: 'Coca Cola',
-        nutrimentDataPer: Product.nutrimentPerServing,
+        nutrimentDataPer: PerSize.serving.offTag,
         nutrimentEnergyUnit: 'kcal',
         servingSize: '100g',
         ingredientsText:
@@ -133,11 +134,13 @@ void main() {
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
 
-      expect(result.product!.nutriments!.carbohydratesServing != null, true);
-      expect(result.product!.nutriments!.proteinsServing != null, true);
-      expect(result.product!.nutriments!.saltServing != null, true);
-      expect(result.product!.nutriments!.proteinsServing != null, true);
-      expect(result.product!.nutriments!.fatServing != null, true);
+      expect(result.product!.nutriments, isNotNull);
+      final Nutriments nutriments = result.product!.nutriments!;
+      const PerSize perSize = PerSize.serving;
+      expect(nutriments.getValue(Nutrient.carbohydrates, perSize), isNotNull);
+      expect(nutriments.getValue(Nutrient.proteins, perSize), isNotNull);
+      expect(nutriments.getValue(Nutrient.salt, perSize), isNotNull);
+      expect(nutriments.getValue(Nutrient.fat, perSize), isNotNull);
 
       expect(result.product!.countries, 'United States');
     });
@@ -183,15 +186,20 @@ void main() {
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
 
+      const Nutrient alcohol = Nutrient.alcohol;
+      expect(result.product!.nutriments, isNotNull);
+      final Nutriments nutriments = result.product!.nutriments!;
+
       // probably at least 4% vol
-      expect(result.product!.nutriments!.alcohol! >= 4, true);
+      expect(
+        nutriments.getValue(alcohol, PerSize.oneHundredGrams),
+        greaterThanOrEqualTo(4),
+      );
       // no reason why values should be different
       expect(
-          result.product!.nutriments!.alcohol ==
-              result.product!.nutriments!.alcoholServing,
-          true);
-      // "% vol" is an unknown unit
-      expect(result.product!.nutriments!.alcoholUnit, Unit.UNKNOWN);
+        nutriments.getValue(alcohol, PerSize.serving),
+        nutriments.getValue(alcohol, PerSize.oneHundredGrams),
+      );
     });
 
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',
@@ -273,18 +281,19 @@ void main() {
 
       expect(result.product!.nutriscore, 'e');
 
-      expect(result.product!.nutriments != null, true);
+      expect(result.product!.nutriments, isNotNull);
+      final Nutriments nutriments = result.product!.nutriments!;
 
-      expect(result.product!.environmentImpactLevels == null, true);
+      expect(result.product!.environmentImpactLevels, isNull);
 
-      expect(result.product!.nutriments!.energy, 2125.0);
-      expect(result.product!.nutriments!.sugars, 28.0);
-      expect(result.product!.nutriments!.salt, 0.3);
-      expect(result.product!.nutriments!.fiber, null);
-      expect(result.product!.nutriments!.fat, 25.0);
-      expect(result.product!.nutriments!.saturatedFat, 15.0);
-      expect(result.product!.nutriments!.proteins, 5.3);
-      expect(result.product!.nutriments!.novaGroup, 4);
+      const PerSize perSize = PerSize.oneHundredGrams;
+      expect(nutriments.getValue(Nutrient.energyKJ, perSize), 2125.0);
+      expect(nutriments.getValue(Nutrient.sugars, perSize), 28.0);
+      expect(nutriments.getValue(Nutrient.salt, perSize), 0.3);
+      expect(nutriments.getValue(Nutrient.fiber, perSize), isNull);
+      expect(nutriments.getValue(Nutrient.fat, perSize), 25.0);
+      expect(nutriments.getValue(Nutrient.saturatedFat, perSize), 15.0);
+      expect(nutriments.getValue(Nutrient.proteins, perSize), 5.3);
       expect(result.product!.novaGroup, 4);
     });
 
@@ -305,10 +314,12 @@ void main() {
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
 
-      expect(result.product!.nutriments!.iron, 0.00041);
-      expect(result.product!.nutriments!.ironUnit, Unit.MILLI_G);
-      expect(result.product!.nutriments!.vitaminC, 0.0339);
-      expect(result.product!.nutriments!.vitaminCUnit, Unit.MILLI_G);
+      expect(result.product!.nutriments, isNotNull);
+      final Nutriments nutriments = result.product!.nutriments!;
+      const PerSize perSize = PerSize.oneHundredGrams;
+
+      expect(nutriments.getValue(Nutrient.iron, perSize), 0.00041);
+      expect(nutriments.getValue(Nutrient.vitaminC, perSize), 0.0339);
     });
 
     test('get uncommon nutrients', () async {
@@ -318,6 +329,7 @@ void main() {
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
       const List<ProductField> fields = [ProductField.NUTRIMENTS];
       ProductResult result;
+      late Nutriments nutriments;
 
       result = await OpenFoodAPIClient.getProduct(
         ProductQueryConfiguration(
@@ -328,9 +340,16 @@ void main() {
         user: user,
         queryType: queryType,
       );
-      expect(result.product!.nutriments!.pantothenicAcid, .0042);
-      expect(result.product!.nutriments!.pantothenicAcidUnit, Unit.MILLI_G);
-      expect(result.product!.nutriments!.pantothenicAcidServing, null);
+      expect(result.product!.nutriments, isNotNull);
+      nutriments = result.product!.nutriments!;
+      expect(
+        nutriments.getValue(Nutrient.pantothenicAcid, PerSize.oneHundredGrams),
+        .0042,
+      );
+      expect(
+        nutriments.getValue(Nutrient.pantothenicAcid, PerSize.serving),
+        isNull,
+      );
 
       result = await OpenFoodAPIClient.getProduct(
         ProductQueryConfiguration(
@@ -341,9 +360,13 @@ void main() {
         user: user,
         queryType: queryType,
       );
-      expect(result.product!.nutriments!.biotin, 0.0);
-      expect(result.product!.nutriments!.biotinUnit, Unit.G);
-      expect(result.product!.nutriments!.biotinServing, null);
+      expect(result.product!.nutriments, isNotNull);
+      nutriments = result.product!.nutriments!;
+      expect(
+        nutriments.getValue(Nutrient.biotin, PerSize.oneHundredGrams),
+        0.0,
+      );
+      expect(nutriments.getValue(Nutrient.biotin, PerSize.serving), isNull);
 
       result = await OpenFoodAPIClient.getProduct(
         ProductQueryConfiguration(
@@ -354,9 +377,16 @@ void main() {
         user: user,
         queryType: queryType,
       );
-      expect(result.product!.nutriments!.chloride, .0015);
-      expect(result.product!.nutriments!.chlorideUnit, Unit.MILLI_G);
-      expect(result.product!.nutriments!.chlorideServing, .015);
+      expect(result.product!.nutriments, isNotNull);
+      nutriments = result.product!.nutriments!;
+      expect(
+        nutriments.getValue(Nutrient.chloride, PerSize.oneHundredGrams),
+        .0015,
+      );
+      expect(
+        nutriments.getValue(Nutrient.chloride, PerSize.serving),
+        .015,
+      );
 
       result = await OpenFoodAPIClient.getProduct(
         ProductQueryConfiguration(
@@ -367,18 +397,40 @@ void main() {
         user: user,
         queryType: queryType,
       );
-      expect(result.product!.nutriments!.chromium, .000002);
-      expect(result.product!.nutriments!.chromiumUnit, Unit.G);
-      expect(result.product!.nutriments!.chromiumServing, .00001);
-      expect(result.product!.nutriments!.iodine, .0000075);
-      expect(result.product!.nutriments!.iodineUnit, Unit.G);
-      expect(result.product!.nutriments!.iodineServing, .0000375);
-      expect(result.product!.nutriments!.manganese, .0001);
-      expect(result.product!.nutriments!.manganeseUnit, Unit.G);
-      expect(result.product!.nutriments!.manganeseServing, .0005);
-      expect(result.product!.nutriments!.molybdenum, .000004);
-      expect(result.product!.nutriments!.molybdenumUnit, Unit.G);
-      expect(result.product!.nutriments!.molybdenumServing, .00002);
+      expect(result.product!.nutriments, isNotNull);
+      nutriments = result.product!.nutriments!;
+      expect(
+        nutriments.getValue(Nutrient.chromium, PerSize.oneHundredGrams),
+        .000002,
+      );
+      expect(
+        nutriments.getValue(Nutrient.chromium, PerSize.serving),
+        .00001,
+      );
+      expect(
+        nutriments.getValue(Nutrient.iodine, PerSize.oneHundredGrams),
+        .0000075,
+      );
+      expect(
+        nutriments.getValue(Nutrient.iodine, PerSize.serving),
+        .0000375,
+      );
+      expect(
+        nutriments.getValue(Nutrient.manganese, PerSize.oneHundredGrams),
+        .0001,
+      );
+      expect(
+        nutriments.getValue(Nutrient.manganese, PerSize.serving),
+        .0005,
+      );
+      expect(
+        nutriments.getValue(Nutrient.molybdenum, PerSize.oneHundredGrams),
+        .000004,
+      );
+      expect(
+        nutriments.getValue(Nutrient.molybdenum, PerSize.serving),
+        .00002,
+      );
 
       result = await OpenFoodAPIClient.getProduct(
         ProductQueryConfiguration(
@@ -389,12 +441,24 @@ void main() {
         user: user,
         queryType: queryType,
       );
-      expect(result.product!.nutriments!.omega3Fat, 4);
-      expect(result.product!.nutriments!.omega3FatUnit, Unit.G);
-      expect(result.product!.nutriments!.omega3FatServing, 4);
-      expect(result.product!.nutriments!.omega6Fat, 9.1);
-      expect(result.product!.nutriments!.omega6FatUnit, Unit.G);
-      expect(result.product!.nutriments!.omega6FatServing, 9.1);
+      expect(result.product!.nutriments, isNotNull);
+      nutriments = result.product!.nutriments!;
+      expect(
+        nutriments.getValue(Nutrient.omega3, PerSize.oneHundredGrams),
+        4,
+      );
+      expect(
+        nutriments.getValue(Nutrient.omega3, PerSize.serving),
+        4,
+      );
+      expect(
+        nutriments.getValue(Nutrient.omega6, PerSize.oneHundredGrams),
+        9.1,
+      );
+      expect(
+        nutriments.getValue(Nutrient.omega6, PerSize.serving),
+        9.1,
+      );
 
       result = await OpenFoodAPIClient.getProduct(
         ProductQueryConfiguration(
@@ -405,9 +469,16 @@ void main() {
         user: user,
         queryType: queryType,
       );
-      expect(result.product!.nutriments!.transFat, 0.1);
-      expect(result.product!.nutriments!.transFatUnit, Unit.G);
-      expect(result.product!.nutriments!.transFatServing, 0.05);
+      expect(result.product!.nutriments, isNotNull);
+      nutriments = result.product!.nutriments!;
+      expect(
+        nutriments.getValue(Nutrient.transFat, PerSize.oneHundredGrams),
+        0.1,
+      );
+      expect(
+        nutriments.getValue(Nutrient.transFat, PerSize.serving),
+        0.05,
+      );
     });
 
     test('get product Confiture Rhubarbe Fraises extra', () async {
@@ -506,20 +577,22 @@ void main() {
 
       expect(result.product!.allergens!.ids.length, 0);
 
-      expect(result.product!.nutriments != null, true);
+      expect(result.product!.nutriments, isNotNull);
+      final Nutriments nutriments = result.product!.nutriments!;
+      const PerSize perSize = PerSize.oneHundredGrams;
 
-      expect(result.product!.nutriments!.energy, 1081.0);
-      expect(result.product!.nutriments!.sugars, 57.0);
-      expect(result.product!.nutriments!.salt, 0.06);
+      expect(nutriments.getValue(Nutrient.energyKJ, perSize), 1081.0);
+      expect(nutriments.getValue(Nutrient.sugars, perSize), 57.0);
+      expect(nutriments.getValue(Nutrient.salt, perSize), 0.06);
 
       //This field does not exist on the product 20004361
       // (Seems that the product was updated in meantime)
       //expect(result.product.nutriments.fiber, 1.1);
 
-      expect(result.product!.nutriments!.fat, 0.0);
-      expect(result.product!.nutriments!.saturatedFat, 0.0);
-      expect(result.product!.nutriments!.proteins, 0.6);
-      expect(result.product!.nutriments!.novaGroup, 3);
+      expect(nutriments.getValue(Nutrient.fat, perSize), 0.0);
+      expect(nutriments.getValue(Nutrient.saturatedFat, perSize), 0.0);
+      expect(nutriments.getValue(Nutrient.proteins, perSize), 0.6);
+
       expect(result.product!.novaGroup, 3);
       expect(result.product!.storesTags!.length, 1);
 
@@ -849,19 +922,21 @@ void main() {
 
       expect(result.product!.selectedImages!.length, 15);
 
-      expect(result.product!.nutriments != null, true);
+      expect(result.product!.nutriments, isNotNull);
+      final Nutriments nutriments = result.product!.nutriments!;
+      const PerSize perSize = PerSize.oneHundredGrams;
 
-      expect(result.product!.nutriments!.energy, 0.8);
-      expect(result.product!.nutriments!.sugars, 0.0);
-      expect(result.product!.nutriments!.salt, 0.01);
-      expect(result.product!.nutriments!.fiber, null);
-      expect(result.product!.nutriments!.fat, 0.0);
-      expect(result.product!.nutriments!.saturatedFat, 0.0);
-      expect(result.product!.nutriments!.proteins, 0.0);
-      expect(result.product!.nutriments!.novaGroup, 4);
+      expect(nutriments.getValue(Nutrient.energyKJ, perSize), 0.8);
+      expect(nutriments.getValue(Nutrient.sugars, perSize), 0.0);
+      expect(nutriments.getValue(Nutrient.salt, perSize), 0.01);
+      expect(nutriments.getValue(Nutrient.fiber, perSize), isNull);
+      expect(nutriments.getValue(Nutrient.fat, perSize), 0.0);
+      expect(nutriments.getValue(Nutrient.saturatedFat, perSize), 0.0);
+      expect(nutriments.getValue(Nutrient.proteins, perSize), 0.0);
       expect(result.product!.novaGroup, 4);
-      expect(result.product!.nutriments!.fatServing, isNotNull);
-      expect(result.product!.nutriments!.carbohydratesServing, isNotNull);
+      expect(nutriments.getValue(Nutrient.fat, PerSize.serving), isNotNull);
+      expect(nutriments.getValue(Nutrient.carbohydrates, PerSize.serving),
+          isNotNull);
 
       expect(result.product!.additives!.ids[0], 'en:e150d');
       expect(result.product!.additives!.names[0], 'E150d');
@@ -1809,11 +1884,14 @@ void main() {
           Product(
             barcode: barcode,
             noNutritionData: noNutritionData,
-            nutriments: noNutritionData != true ? Nutriments(salt: 10.0) : null,
+            nutriments: noNutritionData != true
+                ? (Nutriments.empty()
+                  ..setValue(Nutrient.salt, PerSize.oneHundredGrams, 10.0))
+                : null,
           ),
         );
 
-    test('Without nutriments', () async {
+    test('FABRICE Without nutriments', () async {
       await uploadProduct(noNutritionData: true);
 
       final ProductQueryConfiguration configurations =
