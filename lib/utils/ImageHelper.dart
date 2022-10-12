@@ -27,23 +27,31 @@ class ImageHelper {
     }
   }
 
-  /// Returns the product image full url, or null if [barcode] is null
+  /// Returns the [image] full url - for a specific [imageSize] if needed.
   ///
+  /// Returns null is [barcode] is null.
   /// E.g. "https://static.openfoodfacts.org/images/products/359/671/046/2858/front_fr.4.100.jpg"
   static String? buildUrl(
     final String? barcode,
     final ProductImage image, {
+    final ImageSize? imageSize,
     final QueryType? queryType,
   }) =>
       barcode == null
           ? null
-          : '${getProductImageRootUrl(barcode, queryType: queryType)}/${image.field.value}_${image.language.code}.${image.rev}.${image.size.toNumber()}.jpg';
+          : '${getProductImageRootUrl(barcode, queryType: queryType)}'
+              '/'
+              '${getProductImageFilename(image, imageSize: imageSize)}';
 
-  /// Returns the product image filename
+  /// Returns the [image] filename - for a specific [imageSize] if needed.
   ///
+  /// By default uses the own [image]'s size field.
   /// E.g. "front_fr.4.100.jpg"
-  static String getProductImageFilename(final ProductImage image) =>
-      '${image.field.value}_${image.language.code}.${image.rev}.${image.size.toNumber()}.jpg';
+  static String getProductImageFilename(
+    final ProductImage image, {
+    final ImageSize? imageSize,
+  }) =>
+      '${image.field.value}_${image.language.code}.${image.rev}.${(imageSize ?? image.size).toNumber()}.jpg';
 
   /// Returns the web folder of the product images (without trailing '/')
   ///
@@ -57,8 +65,12 @@ class ImageHelper {
       var p1 = barcode.substring(0, 3);
       var p2 = barcode.substring(3, 6);
       var p3 = barcode.substring(6, 9);
-      var p4 = barcode.length >= 10 ? barcode.substring(9) : '';
-      barcodePath = '$p1/$p2/$p3/$p4';
+      if (barcode.length == 9) {
+        barcodePath = '$p1/$p2/$p3';
+      } else {
+        var p4 = barcode.substring(9);
+        barcodePath = '$p1/$p2/$p3/$p4';
+      }
     } else {
       barcodePath = barcode;
     }
