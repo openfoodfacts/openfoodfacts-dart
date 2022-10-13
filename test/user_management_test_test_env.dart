@@ -46,7 +46,7 @@ void main() {
         queryType: user_test_queryType,
       );
       expect(status, isNotNull);
-      expect(status!.ok, isTrue);
+      expect(status!.successful, isTrue);
       expect(status.userId, userId);
       expect(status.userName, name);
       expect(status.userEmail, email);

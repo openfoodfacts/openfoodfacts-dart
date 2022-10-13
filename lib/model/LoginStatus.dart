@@ -42,7 +42,7 @@ class LoginStatus {
       );
 
   /// Was the login successful?
-  bool get ok => status == 1;
+  bool get successful => status == 1;
 
   @override
   String toString() => 'LoginStatus('

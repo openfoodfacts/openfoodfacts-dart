@@ -65,7 +65,7 @@ void main() {
       TestConstants.PROD_USER,
     );
     expect(status, isNotNull);
-    expect(status!.ok, isTrue);
+    expect(status!.successful, isTrue);
     expect(status.userId, TestConstants.PROD_USER.userId);
   });
 

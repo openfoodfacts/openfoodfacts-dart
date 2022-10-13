@@ -56,7 +56,7 @@ void main() {
       int? checkCount;
       final List<SortOption?> sortOptions = <SortOption?>[];
       sortOptions.addAll(SortOption.values);
-      sortOptions.add(null);
+      sortOptions.remove(SortOption.NOTHING);
       for (final SortOption? currentOption in sortOptions) {
         final List<Parameter> parameters = <Parameter>[
           const SearchTerms(terms: ['pizza']),

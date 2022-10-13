@@ -793,21 +793,8 @@ class OpenFoodAPIClient {
   static Future<bool> login(
     User user, {
     QueryType? queryType,
-  }) async {
-    final Uri loginUri = UriHelper.getPostUri(
-      path: '/cgi/auth.pl',
-      queryType: queryType,
-    );
-    final Response response = await HttpHelper().doPostRequest(
-      loginUri,
-      <String, String>{'body': '0'},
-      user,
-      queryType: queryType,
-      addCredentialsToBody: true,
-    );
-    // TODO(monsieurtanuki): refactor as something more refined
-    return response.statusCode == 200 && response.body == "";
-  }
+  }) async =>
+      (await login2(user, queryType: queryType))?.successful ?? false;
 
   /// Logs in and returns data about the user if relevant.
   ///
