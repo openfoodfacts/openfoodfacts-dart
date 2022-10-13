@@ -7,6 +7,7 @@ import 'dart:developer';
 import 'package:http/http.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
+import 'package:openfoodfacts/model/LoginStatus.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
 import 'package:openfoodfacts/model/OcrPackagingResult.dart';
 import 'package:openfoodfacts/model/OrderedNutrients.dart';
@@ -787,23 +788,36 @@ class OpenFoodAPIClient {
 
   /// Uses the auth.pl API to see if login was successful
   /// Returns a bool if the login data of the provided user is correct
+  // TODO: deprecated from 2022-10-12; remove when old enough
+  @Deprecated('Use login2 instead')
   static Future<bool> login(
     User user, {
     QueryType? queryType,
+  }) async =>
+      (await login2(user, queryType: queryType))?.successful ?? false;
+
+  /// Logs in and returns data about the user if relevant.
+  ///
+  /// Returns null if connection issue.
+  static Future<LoginStatus?> login2(
+    final User user, {
+    final QueryType? queryType,
   }) async {
-    final Uri loginUri = UriHelper.getPostUri(
+    final Uri uri = UriHelper.getPostUri(
       path: '/cgi/auth.pl',
       queryType: queryType,
     );
     final Response response = await HttpHelper().doPostRequest(
-      loginUri,
-      <String, String>{},
+      uri,
+      <String, String>{'body': '1'},
       user,
       queryType: queryType,
       addCredentialsToBody: true,
     );
-    // TODO(monsieurtanuki): refactor as something more refined
-    return response.statusCode == 200 && response.body == "";
+    if (response.statusCode != 200) {
+      return null;
+    }
+    return LoginStatus.fromJson(jsonDecode(response.body));
   }
 
   /// A username may not exceed 20 characters

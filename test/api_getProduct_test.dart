@@ -1891,7 +1891,7 @@ void main() {
           ),
         );
 
-    test('FABRICE Without nutriments', () async {
+    test('Without nutriments', () async {
       await uploadProduct(noNutritionData: true);
 
       final ProductQueryConfiguration configurations =
