@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.26.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.25.0...v1.26.0) (2022-10-13)
+
+
+### Features
+
+* [#566](https://github.com/openfoodfacts/openfoodfacts-dart/issues/566) - refactored Nutriments as Map with new Nutrient class ([#570](https://github.com/openfoodfacts/openfoodfacts-dart/issues/570)) ([d30108f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/d30108f6c73402773868b80333635ca18bfca1df))
+* [#573](https://github.com/openfoodfacts/openfoodfacts-dart/issues/573) - getRandomRobotoffQuestion with optional insight types ([#574](https://github.com/openfoodfacts/openfoodfacts-dart/issues/574)) ([c8692c1](https://github.com/openfoodfacts/openfoodfacts-dart/commit/c8692c1a9cee9daf6de89b96b12c2d80161d3c2d))
+* [#579](https://github.com/openfoodfacts/openfoodfacts-dart/issues/579) - new method to log in, that returns data about user ([#583](https://github.com/openfoodfacts/openfoodfacts-dart/issues/583)) ([7994f45](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7994f45d8936a6833dfa733c255851b9518d3f65))
+
+
+### Bug Fixes
+
+* [#565](https://github.com/openfoodfacts/openfoodfacts-dart/issues/565) - added 'nutrition_data' flag and energy fields ([#568](https://github.com/openfoodfacts/openfoodfacts-dart/issues/568)) ([bbb149f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/bbb149f26d16385e34e4e7dfee92c05947f9ca29))
+* ImageHelper - new methods with ImageSize parameters + minor fix ([#572](https://github.com/openfoodfacts/openfoodfacts-dart/issues/572)) ([24ec991](https://github.com/openfoodfacts/openfoodfacts-dart/commit/24ec991f29962af05aa1fe4313cd6648da7d8d84))
+* KP panel groups sometimes have null title ([#576](https://github.com/openfoodfacts/openfoodfacts-dart/issues/576)) ([bf66f28](https://github.com/openfoodfacts/openfoodfacts-dart/commit/bf66f285856546329353547422bd96aaa1ac163a))
+* make GitHub Projects more resilient ([#558](https://github.com/openfoodfacts/openfoodfacts-dart/issues/558)) ([fe319e0](https://github.com/openfoodfacts/openfoodfacts-dart/commit/fe319e09f1d5866685681d965b249d2a6d1ffc8d))
+
 ## [1.25.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.24.0...v1.25.0) (2022-09-23)
 
 
