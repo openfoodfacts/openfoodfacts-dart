@@ -37,8 +37,8 @@ class LoginStatus {
         status: JsonObject.parseInt(json['status'])!,
         statusVerbose: json['status_verbose'] as String,
         userId: json['user_id'] as String?,
-        userEmail: json['user']['email'] as String?,
-        userName: json['user']['name'] as String?,
+        userEmail: json['user']?['email'] as String?,
+        userName: json['user']?['name'] as String?,
       );
 
   /// Was the login successful?
