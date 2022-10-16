@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.26.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.26.0...v1.26.1) (2022-10-16)
+
+
+### Bug Fixes
+
+* Also return [LoginStatus] when not logged in ([#585](https://github.com/openfoodfacts/openfoodfacts-dart/issues/585)) ([e97f877](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e97f877ade72389e2d3f5b4d8053710d0a5ea236))
+
 ## [1.26.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.25.0...v1.26.0) (2022-10-13)
 
 
