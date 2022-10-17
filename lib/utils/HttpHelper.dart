@@ -89,9 +89,9 @@ class HttpHelper {
     QueryType? queryType,
     required bool addCredentialsToBody,
 
-    /// Typically used for Robotoff,
+    /// Please only use for Robotoff,
     /// See: https://github.com/openfoodfacts/openfoodfacts-dart/issues/553#issuecomment-1269810032
-    /// User or globalUser needed
+    /// User or globalUser needed, blocks [QueryType.TEST] queries outside of Robotoff
     bool addCredentialsToHeader = false,
   }) async {
     if (addCredentialsToBody) {
@@ -180,9 +180,9 @@ class HttpHelper {
     User? user,
     bool isTestModeActive = false,
 
-    /// Typically used for Robotoff,
+    /// Please only use for Robotoff,
     /// See: https://github.com/openfoodfacts/openfoodfacts-dart/issues/553#issuecomment-1269810032
-    /// User or globalUser needed
+    /// User or globalUser needed, blocks the auth for [isTestModeActive]
     bool addCredentialsToHeader = false,
   }) {
     Map<String, String>? headers = {};
