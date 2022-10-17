@@ -199,7 +199,7 @@ class HttpHelper {
       headers.addAll({'authorization': token});
     }
 
-    if (addCredentialsToHeader && user != null && !isTestModeActive) {
+    if (addCredentialsToHeader && user != null) {
       final String? userId = OpenFoodAPIConfiguration.getUser(user)?.userId;
       final String? password = OpenFoodAPIConfiguration.getUser(user)?.password;
       var token = 'basic ${base64Encode(utf8.encode('$userId:$password'))}';
