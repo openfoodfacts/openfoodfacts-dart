@@ -88,6 +88,11 @@ class HttpHelper {
     User? user, {
     QueryType? queryType,
     required bool addCredentialsToBody,
+
+    /// Typically used for Robotoff,
+    /// See: https://github.com/openfoodfacts/openfoodfacts-dart/issues/553#issuecomment-1269810032
+    /// User or globalUser needed
+    bool addCredentialsToHeader = false,
   }) async {
     if (addCredentialsToBody) {
       if (user != null) {
@@ -98,11 +103,13 @@ class HttpHelper {
     http.Response response = await http.post(
       uri,
       headers: _buildHeaders(
-          user: user,
-          isTestModeActive:
-              OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-                  ? false
-                  : true),
+        user: user,
+        isTestModeActive:
+            OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+                ? false
+                : true,
+        addCredentialsToHeader: addCredentialsToHeader,
+      ),
       body: addUserAgentParameters(body),
     );
     return response;
@@ -172,6 +179,11 @@ class HttpHelper {
   Map<String, String>? _buildHeaders({
     User? user,
     bool isTestModeActive = false,
+
+    /// Typically used for Robotoff,
+    /// See: https://github.com/openfoodfacts/openfoodfacts-dart/issues/553#issuecomment-1269810032
+    /// User or globalUser needed
+    bool addCredentialsToHeader = false,
   }) {
     Map<String, String>? headers = {};
 
@@ -182,9 +194,16 @@ class HttpHelper {
       'From': OpenFoodAPIConfiguration.getUser(user)?.userId ?? FROM,
     });
 
-    if (isTestModeActive) {
+    if (isTestModeActive && !addCredentialsToHeader) {
       var token = 'Basic ${base64Encode(utf8.encode('off:off'))}';
       headers.addAll({'authorization': token});
+    }
+
+    if (addCredentialsToHeader && user != null && !isTestModeActive) {
+      final String? userId = OpenFoodAPIConfiguration.getUser(user)?.userId;
+      final String? password = OpenFoodAPIConfiguration.getUser(user)?.password;
+      var token = 'basic ${base64Encode(utf8.encode('$userId:$password'))}';
+      headers.addAll({'Authorization': token});
     }
     return headers;
   }
