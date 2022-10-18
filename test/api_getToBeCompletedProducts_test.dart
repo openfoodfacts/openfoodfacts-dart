@@ -14,7 +14,7 @@ void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   group('$OpenFoodAPIClient get all to-be-completed products', () {
-    Future<int> _getCount(
+    Future<int> getCount(
       final OpenFoodFactsCountry country,
       final OpenFoodFactsLanguage language,
     ) async {
@@ -51,7 +51,7 @@ void main() {
       return result.count!;
     }
 
-    Future<int> _getCountForAllLanguages(
+    Future<int> getCountForAllLanguages(
       final OpenFoodFactsCountry country,
     ) async {
       final List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
@@ -61,7 +61,7 @@ void main() {
       ];
       int? result;
       for (final OpenFoodFactsLanguage language in languages) {
-        final int count = await _getCount(country, language);
+        final int count = await getCount(country, language);
         if (result != null) {
           expect(count, result, reason: language.toString());
         }
@@ -70,29 +70,29 @@ void main() {
       return result!;
     }
 
-    Future<void> _checkTypeCount(
+    Future<void> checkTypeCount(
       final OpenFoodFactsCountry country,
       final int minimalExpectedCount,
     ) async {
-      final int count = await _getCountForAllLanguages(country);
+      final int count = await getCountForAllLanguages(country);
       expect(count, greaterThanOrEqualTo(minimalExpectedCount));
     }
 
     test(
         'in France',
-        () async => _checkTypeCount(
+        () async => checkTypeCount(
             OpenFoodFactsCountry.FRANCE, 800000) // 20220706: was 910148
         );
 
     test(
         'in Italy',
-        () async => _checkTypeCount(
+        () async => checkTypeCount(
             OpenFoodFactsCountry.ITALY, 100000) // 20220706: was 171488
         );
 
     test(
         'in Spain',
-        () async => _checkTypeCount(
+        () async => checkTypeCount(
             OpenFoodFactsCountry.SPAIN, 200000) // 20220706: was 272194
         );
   });

@@ -14,7 +14,7 @@ void main() {
     const String userId = 'monsieurtanuki';
     const int pageSize = 100; // should be big enough to get everything on page1
 
-    Future<int> _getCount(
+    Future<int> getCount(
       final UserProductSearchType type,
       final OpenFoodFactsLanguage language, {
       final void Function(Product)? additionalCheck,
@@ -54,7 +54,7 @@ void main() {
       return result.count!;
     }
 
-    Future<int> _getCountForAllLanguages(
+    Future<int> getCountForAllLanguages(
       final UserProductSearchType type, {
       final void Function(Product)? additionalCheck,
     }) async {
@@ -65,7 +65,7 @@ void main() {
       ];
       int? result;
       for (final OpenFoodFactsLanguage language in languages) {
-        final int count = await _getCount(
+        final int count = await getCount(
           type,
           language,
           additionalCheck: additionalCheck,
@@ -78,12 +78,12 @@ void main() {
       return result!;
     }
 
-    Future<void> _checkTypeCount(
+    Future<void> checkTypeCount(
       final UserProductSearchType type,
       final int minimalExpectedCount, {
       final void Function(Product)? additionalCheck,
     }) async {
-      final int count = await _getCountForAllLanguages(
+      final int count = await getCountForAllLanguages(
         type,
         additionalCheck: additionalCheck,
       );
@@ -92,28 +92,28 @@ void main() {
 
     test(
       'contributor',
-      () async => _checkTypeCount(
-          UserProductSearchType.CONTRIBUTOR, 2) // as of 20220706
+      () async =>
+          checkTypeCount(UserProductSearchType.CONTRIBUTOR, 2) // as of 20220706
       ,
     );
 
     test(
       'informer',
       () async =>
-          _checkTypeCount(UserProductSearchType.INFORMER, 56) // as of 20220706
+          checkTypeCount(UserProductSearchType.INFORMER, 56) // as of 20220706
       ,
     );
 
     test(
       'photographer',
-      () async => _checkTypeCount(
+      () async => checkTypeCount(
           UserProductSearchType.PHOTOGRAPHER, 44) // as of 20220706
       ,
     );
 
     test(
       'to be completed',
-      () async => _checkTypeCount(
+      () async => checkTypeCount(
           UserProductSearchType.TO_BE_COMPLETED, 0, // you never know...
           additionalCheck: (final Product product) {
         expect(product.statesTags, isNotNull);

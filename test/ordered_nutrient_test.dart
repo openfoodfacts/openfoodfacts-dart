@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:openfoodfacts/model/OrderedNutrient.dart';
 import 'package:openfoodfacts/model/OrderedNutrients.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
@@ -122,7 +123,7 @@ void main() {
     'zinc',
   };
 
-  OrderedNutrient? _findOrderedNutrient(
+  OrderedNutrient? findOrderedNutrient(
     final List<OrderedNutrient>? list,
     final String nutrientId,
   ) {
@@ -134,7 +135,7 @@ void main() {
         return item;
       }
       final OrderedNutrient? found =
-          _findOrderedNutrient(item.subNutrients, nutrientId);
+          findOrderedNutrient(item.subNutrients, nutrientId);
       if (found != null) {
         return found;
       }
@@ -142,13 +143,13 @@ void main() {
     return null;
   }
 
-  void _checkNutrients(
+  void checkNutrients(
     final OrderedNutrients orderedNutrients,
     final OpenFoodFactsCountry country,
   ) {
     for (final String expectedNutrient in expectedNutrients) {
       expect(
-        _findOrderedNutrient(orderedNutrients.nutrients, expectedNutrient),
+        findOrderedNutrient(orderedNutrients.nutrients, expectedNutrient),
         isNotNull,
         reason:
             'Could not find nutrient $expectedNutrient for country $country',
@@ -165,14 +166,14 @@ void main() {
       };
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.AFRIKAANS;
       for (final OpenFoodFactsCountry country in countries) {
-        _checkNutrients(
+        checkNutrients(
           await OpenFoodAPIClient.getOrderedNutrients(
             cc: country.iso2Code,
             language: language,
           ),
           country,
         );
-        _checkNutrients(
+        checkNutrients(
           OrderedNutrients.fromJson(
             jsonDecode(
               await OpenFoodAPIClient.getOrderedNutrientsJsonString(
@@ -203,7 +204,7 @@ void main() {
             language: language,
           );
           final OrderedNutrient? found =
-              _findOrderedNutrient(orderedNutrients.nutrients, nutrientId);
+              findOrderedNutrient(orderedNutrients.nutrients, nutrientId);
           expect(found, isNotNull);
           expect(found!.name, energies[language]);
         }

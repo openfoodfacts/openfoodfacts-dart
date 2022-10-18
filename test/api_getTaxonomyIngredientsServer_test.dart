@@ -25,7 +25,7 @@ void main() {
     TaxonomyIngredientField.PARENTS,
     TaxonomyIngredientField.WIKIDATA,
   ];
-  void _checkKnown(final TaxonomyIngredient ingredient) {
+  void checkKnown(final TaxonomyIngredient ingredient) {
     // for knownTag
     expect(ingredient.children, isNotEmpty); // probably 'en:mukimame'
     expect(ingredient.name![OpenFoodFactsLanguage.ENGLISH],
@@ -62,7 +62,7 @@ void main() {
       expect(ingredients, isNotNull);
       expect(ingredients!.length, 1);
       final TaxonomyIngredient ingredient = ingredients[knownTag]!;
-      _checkKnown(ingredient);
+      checkKnown(ingredient);
     });
 
     test("get an ingredient that doesn't exist", () async {
@@ -87,7 +87,7 @@ void main() {
       expect(ingredients, isNotNull);
       expect(ingredients!.length, 1);
       final TaxonomyIngredient ingredient = ingredients[knownTag]!;
-      _checkKnown(ingredient);
+      checkKnown(ingredient);
     });
   });
 }

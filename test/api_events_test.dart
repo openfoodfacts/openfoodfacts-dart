@@ -23,7 +23,7 @@ void main() {
     'translation_added',
   };
 
-  void _checkEventsBase(final Iterable<EventsBase> list) {
+  void checkEventsBase(final Iterable<EventsBase> list) {
     expect(list, isNotEmpty);
     bool withTimestamps = false;
     bool withBarcodes = false;
@@ -49,7 +49,7 @@ void main() {
     expect(withPoints, isTrue);
   }
 
-  void _checkEventsCount(final Map<String, int> map, final bool isEmpty) {
+  void checkEventsCount(final Map<String, int> map, final bool isEmpty) {
     expect(map, isNotEmpty);
 
     expect(map.keys.length, typicalEventTypes.length);
@@ -70,7 +70,7 @@ void main() {
     expect(allZeros, isEmpty);
   }
 
-  void _checkBadgeBase(final Iterable<BadgeBase> list) {
+  void checkBadgeBase(final Iterable<BadgeBase> list) {
     expect(list, isNotEmpty);
     bool withUserIds = false;
     for (final BadgeBase badgeBase in list) {
@@ -81,7 +81,7 @@ void main() {
     expect(withUserIds, isTrue);
   }
 
-  int? _getLeaderboardScore(
+  int? getLeaderboardScore(
     final String? userId,
     final List<LeaderboardEntry> list,
   ) {
@@ -96,13 +96,13 @@ void main() {
   group('$OpenFoodAPIClient Events API', () {
     test('getEvents - all', () async {
       final List<EventsBase> result = await EventsAPIClient.getEvents();
-      _checkEventsBase(result);
+      checkEventsBase(result);
     });
 
     test('getEvents - known user', () async {
       final List<EventsBase> result =
           await EventsAPIClient.getEvents(userId: knownUserId);
-      _checkEventsBase(result);
+      checkEventsBase(result);
     });
 
     test('getEvents - unknown user', () async {
@@ -113,30 +113,30 @@ void main() {
 
     test('getEventsCount - all', () async {
       final Map<String, int> result = await EventsAPIClient.getEventsCount();
-      _checkEventsCount(result, false);
+      checkEventsCount(result, false);
     });
 
     test('getEventsCount - known user', () async {
       final Map<String, int> result =
           await EventsAPIClient.getEventsCount(userId: knownUserId);
-      _checkEventsCount(result, false);
+      checkEventsCount(result, false);
     });
 
     test('getEventsCount - unknown user', () async {
       final Map<String, int> result =
           await EventsAPIClient.getEventsCount(userId: unknownUserId);
-      _checkEventsCount(result, true);
+      checkEventsCount(result, true);
     });
 
     test('getBadges - all', () async {
       final List<BadgeBase> result = await EventsAPIClient.getBadges();
-      _checkBadgeBase(result);
+      checkBadgeBase(result);
     });
 
     test('getBadges - known user', () async {
       final List<BadgeBase> result =
           await EventsAPIClient.getBadges(userId: knownUserId);
-      _checkBadgeBase(result);
+      checkBadgeBase(result);
     });
 
     test('getBadges - unknown user', () async {
@@ -164,17 +164,17 @@ void main() {
     test('getLeaderboard', () async {
       final List<LeaderboardEntry> result =
           await EventsAPIClient.getLeaderboard();
-      final int knownTotal = _getLeaderboardScore(knownUserId, result)!;
-      final int nullTotal = _getLeaderboardScore(null, result)!;
-      expect(_getLeaderboardScore(unknownUserId, result), isNull);
+      final int knownTotal = getLeaderboardScore(knownUserId, result)!;
+      final int nullTotal = getLeaderboardScore(null, result)!;
+      expect(getLeaderboardScore(unknownUserId, result), isNull);
       int knownSum = 0;
       int nullSum = 0;
       for (final String eventType in typicalEventTypes) {
         final List<LeaderboardEntry> result =
             await EventsAPIClient.getLeaderboard(eventType: eventType);
-        knownSum += _getLeaderboardScore(knownUserId, result) ?? 0;
-        nullSum += _getLeaderboardScore(null, result) ?? 0;
-        expect(_getLeaderboardScore(unknownUserId, result), isNull);
+        knownSum += getLeaderboardScore(knownUserId, result) ?? 0;
+        nullSum += getLeaderboardScore(null, result) ?? 0;
+        expect(getLeaderboardScore(unknownUserId, result), isNull);
       }
       expect(knownSum, knownTotal);
       expect(nullSum, nullTotal);

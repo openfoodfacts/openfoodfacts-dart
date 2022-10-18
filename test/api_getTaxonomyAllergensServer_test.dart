@@ -20,7 +20,7 @@ void main() {
   const String knownTag = 'en:gluten';
   const String unknownTag = 'en:some_nonexistent_label';
 
-  void _checkKnown(final TaxonomyAllergen allergen) {
+  void checkKnown(final TaxonomyAllergen allergen) {
     expect(allergen.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
     expect(allergen.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
     expect(allergen.wikidata![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
@@ -48,7 +48,7 @@ void main() {
       expect(allergens, isNotNull);
       expect(allergens!.length, 1);
       final TaxonomyAllergen allergen = allergens[knownTag]!;
-      _checkKnown(allergen);
+      checkKnown(allergen);
     });
 
     test("get an allergen that doesn't exist", () async {
@@ -69,7 +69,7 @@ void main() {
       expect(allergens, isNotNull);
       expect(allergens!.length, 1);
       final TaxonomyAllergen allergen = allergens[knownTag]!;
-      _checkKnown(allergen);
+      checkKnown(allergen);
     });
   });
 }

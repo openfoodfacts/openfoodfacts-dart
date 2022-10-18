@@ -19,7 +19,7 @@ void main() {
   const String knownRootTag = 'en:brick';
   const String unknownTag = 'en:some_nonexistent_packaging';
 
-  void _checkKnownPackaging(final TaxonomyPackaging packaging) {
+  void checkKnownPackaging(final TaxonomyPackaging packaging) {
     expect(packaging.name, isNotNull);
     expect(packaging.name, isNotEmpty);
     expect(packaging.synonyms, isNotNull);
@@ -41,7 +41,7 @@ void main() {
       expect(packagings, isNotEmpty);
       expect(packagings!.length, greaterThan(100)); // was 122 on 2022-03-03
       expect(packagings[knownRootTag], isNotNull);
-      _checkKnownPackaging(packagings[knownRootTag]!);
+      checkKnownPackaging(packagings[knownRootTag]!);
       for (final TaxonomyPackaging packaging in packagings.values) {
         // we expect no parents for the roots packaging
         expect(packaging.parents, isNull);
@@ -56,7 +56,7 @@ void main() {
       expect(packagings, isNotNull);
       expect(packagings!.length, equals(1));
       expect(packagings[knownRootTag], isNotNull);
-      _checkKnownPackaging(packagings[knownRootTag]!);
+      checkKnownPackaging(packagings[knownRootTag]!);
     });
 
     test("get a packaging that doesn't exist", () async {
@@ -77,13 +77,13 @@ void main() {
       expect(packagings, isNotNull);
       expect(packagings!.length, equals(1));
       expect(packagings[knownRootTag], isNotNull);
-      _checkKnownPackaging(packagings[knownRootTag]!);
+      checkKnownPackaging(packagings[knownRootTag]!);
     });
 
     /// Recursively gets all the tree.
     ///
     /// At the end, [knowItems] will contain everything.
-    Future<int> _recursiveGet(
+    Future<int> recursiveGet(
       final Map<String, TaxonomyPackaging> soFar,
       final List<String> children,
     ) async {
@@ -107,7 +107,7 @@ void main() {
       if (grandChildren.isEmpty) {
         return 1;
       }
-      return 1 + await _recursiveGet(soFar, grandChildren);
+      return 1 + await recursiveGet(soFar, grandChildren);
     }
 
     test("get recursive packagings", () async {
@@ -124,7 +124,7 @@ void main() {
         }
       }
 
-      final int maxLevel = await _recursiveGet(roots, children);
+      final int maxLevel = await recursiveGet(roots, children);
       expect(maxLevel, lessThanOrEqualTo(5)); // was 3 on 2022-03-03
       expect(roots.length, greaterThan(150)); // was 187 on 2022-03-03
     });

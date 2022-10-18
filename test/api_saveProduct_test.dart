@@ -88,7 +88,7 @@ void main() {
     }, skip: 'Random results');
 
     /// Returns a timestamp up to the minute level.
-    String _getMinuteTimestamp() =>
+    String getMinuteTimestamp() =>
         DateTime.now().toIso8601String().substring(0, 16);
 
     test('dont overwrite language', () async {
@@ -99,8 +99,8 @@ void main() {
       // almost in parallel.
       // If we stay at the minute level we're relatively safe.
       final String frenchProductName =
-          "Flocons d'epeautre au blé complet ${_getMinuteTimestamp()}";
-      final String germanProductName = 'Dinkelflakes${_getMinuteTimestamp()}';
+          "Flocons d'epeautre au blé complet ${getMinuteTimestamp()}";
+      final String germanProductName = 'Dinkelflakes${getMinuteTimestamp()}';
 
       // save french product name
       final Product frenchProduct = Product(
@@ -382,7 +382,7 @@ Like that:
       }
     }, skip: 'Works randomly');
 
-    String _generateRandomString(int len) {
+    String generateRandomString(int len) {
       var r = Random();
       return String.fromCharCodes(
           List.generate(len, (index) => r.nextInt(33) + 89));
@@ -395,7 +395,7 @@ Like that:
       Status status = await OpenFoodAPIClient.saveProduct(
         User(
           userId: 'invaliduser',
-          password: _generateRandomString(16),
+          password: generateRandomString(16),
         ),
         product,
       );

@@ -1614,14 +1614,14 @@ void main() {
     /// Recursively adds [ingredient] labels to [labels].
     ///
     /// Works with flat and tree hierarchies.
-    void _addToIngredientLabels(
+    void addToIngredientLabels(
       final List<Ingredient> ingredients,
       final Set<String> labels,
     ) {
       for (final Ingredient ingredient in ingredients) {
         labels.add(ingredient.text!);
         if (ingredient.ingredients != null) {
-          _addToIngredientLabels(ingredient.ingredients!, labels);
+          addToIngredientLabels(ingredient.ingredients!, labels);
         }
       }
     }
@@ -1645,7 +1645,7 @@ void main() {
       // in V0, everything is at the same level
       expect(result.product!.ingredients!.length, 24);
       final Set<String> ingredientLabels = <String>{};
-      _addToIngredientLabels(result.product!.ingredients!, ingredientLabels);
+      addToIngredientLabels(result.product!.ingredients!, ingredientLabels);
       expect(ingredientLabels, containsAll(expectedIngredientLabels));
     });
 
@@ -1668,7 +1668,7 @@ void main() {
       // in V2, same ingredients but in a tree.
       expect(result.product!.ingredients!.length, 9);
       final Set<String> ingredientLabels = <String>{};
-      _addToIngredientLabels(result.product!.ingredients!, ingredientLabels);
+      addToIngredientLabels(result.product!.ingredients!, ingredientLabels);
       expect(ingredientLabels, containsAll(expectedIngredientLabels));
     });
   });
