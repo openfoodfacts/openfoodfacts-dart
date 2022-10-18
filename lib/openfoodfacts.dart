@@ -816,10 +816,11 @@ class OpenFoodAPIClient {
       queryType: queryType,
       addCredentialsToBody: true,
     );
-    if (response.statusCode != 200) {
-      return null;
+    if (response.statusCode == 200 || response.statusCode == 403) {
+      return LoginStatus.fromJson(jsonDecode(response.body));
     }
-    return LoginStatus.fromJson(jsonDecode(response.body));
+
+    return null;
   }
 
   /// A username may not exceed 20 characters

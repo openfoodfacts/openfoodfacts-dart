@@ -52,6 +52,15 @@ void main() {
       expect(status.userEmail, email);
       print('Creating a account and logging in worked in $counter trie(s)');
     });
+
+    test('Login with invalid credentials', () async {
+      final LoginStatus? status = await OpenFoodAPIClient.login2(
+        User(userId: '123', password: '123'),
+        queryType: user_test_queryType,
+      );
+      expect(status?.successful, false);
+      expect(status?.statusVerbose, 'user not signed-in');
+    });
   });
 }
 
