@@ -41,9 +41,7 @@ class KnowledgePanelTextElement extends JsonObject {
 
   /// Type of the text description, Client may choose to display the description
   /// depending upon the type.
-  @JsonKey(
-      name: 'text_type',
-      unknownEnumValue: KnowledgePanelTextElementType.DEFAULT)
+  @JsonKey(unknownEnumValue: KnowledgePanelTextElementType.DEFAULT)
   final KnowledgePanelTextElementType? type;
 
   /// Human readable source language (eg: "English")
