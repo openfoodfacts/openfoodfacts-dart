@@ -11,7 +11,7 @@ KnowledgePanelTextElement _$KnowledgePanelTextElementFromJson(
     KnowledgePanelTextElement(
       html: json['html'] as String,
       type: $enumDecodeNullable(
-          _$KnowledgePanelTextElementTypeEnumMap, json['text_type'],
+          _$KnowledgePanelTextElementTypeEnumMap, json['type'],
           unknownValue: KnowledgePanelTextElementType.DEFAULT),
       sourceLanguage: json['source_language'] as String?,
       sourceLocale: json['source_lc'] as String?,
@@ -23,7 +23,7 @@ Map<String, dynamic> _$KnowledgePanelTextElementToJson(
         KnowledgePanelTextElement instance) =>
     <String, dynamic>{
       'html': instance.html,
-      'text_type': _$KnowledgePanelTextElementTypeEnumMap[instance.type],
+      'type': _$KnowledgePanelTextElementTypeEnumMap[instance.type],
       'source_language': instance.sourceLanguage,
       'source_lc': instance.sourceLocale,
       'source_text': instance.sourceText,
