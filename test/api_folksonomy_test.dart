@@ -23,7 +23,7 @@ void main() {
   ];
 
   /// Checks that all [ProductTag]s concern that [barcode], and [key] in option.
-  void _checkProductTagList(final Iterable<ProductTag> list) {
+  void checkProductTagList(final Iterable<ProductTag> list) {
     bool found = false;
     for (var element in list) {
       expect(element.barcode, knownBarcode);
@@ -36,7 +36,7 @@ void main() {
   }
 
   /// Checks that all [ProductStats]s concern that [barcode], and [key] in option.
-  void _checkProductStatsList(final Iterable<ProductStats> list) {
+  void checkProductStatsList(final Iterable<ProductStats> list) {
     bool foundBarcode = false;
     for (final ProductStats productStats in list) {
       if (productStats.barcode == knownBarcode) {
@@ -54,14 +54,14 @@ void main() {
       final List<ProductStats> result =
           await FolksonomyAPIClient.getProductStats();
       expect(result, isNotEmpty);
-      _checkProductStatsList(result);
+      checkProductStatsList(result);
     });
 
     test('getProductStats - found', () async {
       final List<ProductStats> result =
           await FolksonomyAPIClient.getProductStats(key: knownKey);
       expect(result, isNotEmpty);
-      _checkProductStatsList(result);
+      checkProductStatsList(result);
     });
 
     test('getProductStats - not found', () async {
@@ -108,7 +108,7 @@ void main() {
         barcode: knownBarcode,
       );
       expect(result, isNotEmpty);
-      _checkProductTagList(result.values);
+      checkProductTagList(result.values);
     });
 
     test('getProductTags - not found', () async {
@@ -146,7 +146,7 @@ void main() {
         key: knownKey,
       );
       expect(result, isNotEmpty);
-      _checkProductTagList(result.values);
+      checkProductTagList(result.values);
     });
 
     test('getProductTagWithSubKeys - not found', () async {
@@ -177,7 +177,7 @@ void main() {
         key: knownKey,
       );
       expect(result, isNotEmpty);
-      _checkProductTagList(result);
+      checkProductTagList(result);
     });
 
     test('getProductTagVersions - not found', () async {

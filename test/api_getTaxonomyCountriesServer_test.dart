@@ -28,7 +28,7 @@ void main() {
   const String unknownTag = 'en:some_nonexistent_country';
 
   group('OpenFoodAPIClient getTaxonomyCountries SERVER', () {
-    void _checkKnown(final TaxonomyCountry country) {
+    void checkKnown(final TaxonomyCountry country) {
       expect(
           country.name![OpenFoodFactsLanguage.ENGLISH]!, expectedNameEnglish);
       expect(country.name![OpenFoodFactsLanguage.FRENCH]!, expectedNameFrench);
@@ -55,7 +55,7 @@ void main() {
         for (final String key in countries.keys) {
           final TaxonomyCountry country = countries[key]!;
           if (key == knownTag) {
-            _checkKnown(country);
+            checkKnown(country);
           }
           expect(country.name, isNotNull);
           expect(country.synonyms, isNotNull);
@@ -97,7 +97,7 @@ void main() {
       expect(countries, isNotNull);
       expect(countries!.length, equals(1));
       final TaxonomyCountry country = countries[knownTag]!;
-      _checkKnown(country);
+      checkKnown(country);
     });
 
     test("get a country that doesn't exist", () async {
@@ -118,7 +118,7 @@ void main() {
       expect(countries, isNotNull);
       expect(countries!.length, equals(1));
       final TaxonomyCountry country = countries[knownTag]!;
-      _checkKnown(country);
+      checkKnown(country);
     });
   });
 }

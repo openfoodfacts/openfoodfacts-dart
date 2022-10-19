@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
 
-  void _listContains(List<dynamic> result, String match) {
+  void listContains(List<dynamic> result, String match) {
     expect(result, isNotEmpty);
     for (dynamic e in result) {
       expect(e.toString().toLowerCase(), contains(match));
@@ -23,7 +23,7 @@ void main() {
         input: 't',
       );
 
-      _listContains(result, 't');
+      listContains(result, 't');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
         TagType.COUNTRIES,
@@ -31,7 +31,7 @@ void main() {
         input: 'TUN',
       );
 
-      _listContains(result, 'tun');
+      listContains(result, 'tun');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
         TagType.COUNTRIES,
@@ -39,7 +39,7 @@ void main() {
         input: 'TUN',
       );
 
-      _listContains(result, 'tun');
+      listContains(result, 'tun');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
         TagType.COUNTRIES,
@@ -47,7 +47,7 @@ void main() {
         input: 'تو',
       );
 
-      _listContains(result, 'تو');
+      listContains(result, 'تو');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
         TagType.COUNTRIES,
@@ -78,7 +78,7 @@ void main() {
         language: OpenFoodFactsLanguage.FRENCH,
       );
 
-      _listContains(result, 'b');
+      listContains(result, 'b');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
         TagType.STATES,
@@ -86,7 +86,7 @@ void main() {
         input: 'compléter',
       );
 
-      _listContains(result, 'compléter');
+      listContains(result, 'compléter');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
         TagType.STATES,
@@ -94,7 +94,7 @@ void main() {
         input: 'h',
       );
 
-      _listContains(result, 'h');
+      listContains(result, 'h');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
         TagType.STATES,
@@ -132,7 +132,7 @@ void main() {
         input: 'bA',
       );
 
-      _listContains(result, 'ba');
+      listContains(result, 'ba');
     });
     test('Suggestions for label', () async {
       List<dynamic> result =
@@ -142,7 +142,7 @@ void main() {
         input: 'm',
       );
 
-      _listContains(result, 'm');
+      listContains(result, 'm');
     });
     test('Suggestions for categories', () async {
       List<dynamic> result =
@@ -152,7 +152,7 @@ void main() {
         input: 'compo',
       );
 
-      _listContains(result, 'compo');
+      listContains(result, 'compo');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
         TagType.CATEGORIES,
@@ -161,7 +161,7 @@ void main() {
         limit: 1000,
       );
       expect(result.length, greaterThan(40)); // 20220626: 51 items
-      _listContains(result, 'soja');
+      listContains(result, 'soja');
     });
     test('Suggestions for ingredients', () async {
       List<dynamic> result =
@@ -171,7 +171,7 @@ void main() {
         input: 'vian',
       );
 
-      _listContains(result, 'vian');
+      listContains(result, 'vian');
     });
     test('Suggestions for traces', () async {
       List<dynamic> result =
@@ -181,7 +181,7 @@ void main() {
         input: 'e',
       );
 
-      _listContains(result, 'e');
+      listContains(result, 'e');
     });
     test('Suggestions for additives', () async {
       List<dynamic> result =
@@ -191,7 +191,7 @@ void main() {
         input: 'e9',
       );
 
-      _listContains(result, 'e9');
+      listContains(result, 'e9');
     });
     test('Suggestions for allergens', () async {
       List<dynamic> result =
@@ -201,7 +201,7 @@ void main() {
         input: 'fRu',
       );
 
-      _listContains(result, 'fru');
+      listContains(result, 'fru');
     });
     test('Suggestions for packaging', () async {
       final List<dynamic> result =
@@ -211,7 +211,7 @@ void main() {
         input: 'briq',
       );
 
-      _listContains(result, 'briq');
+      listContains(result, 'briq');
     });
     test('Suggestions for emb_code', () async {
       List<dynamic> result =
@@ -220,14 +220,14 @@ void main() {
         input: 'fR',
       );
 
-      _listContains(result, 'fr');
+      listContains(result, 'fr');
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
         TagType.EMB_CODES,
         input: 'R',
       );
 
-      _listContains(result, 'r');
+      listContains(result, 'r');
 
       expect(
           await OpenFoodAPIClient.getAutocompletedSuggestions(

@@ -184,7 +184,7 @@ void main() {
     });
 
     /// Returns the total number of products, and checks if the statuses match.
-    Future<int?> _checkIngredientsAnalysis(
+    Future<int?> checkIngredientsAnalysis(
       final VeganStatus? veganStatus,
       final VegetarianStatus? vegetarianStatus,
       final PalmOilFreeStatus? palmOilFreeStatus,
@@ -248,7 +248,7 @@ void main() {
 
     test('check vegan search', () async {
       for (final VeganStatus status in VeganStatus.values) {
-        await _checkIngredientsAnalysis(status, null, null);
+        await checkIngredientsAnalysis(status, null, null);
       }
     },
         timeout: Timeout(
@@ -258,7 +258,7 @@ void main() {
 
     test('check vegetarian search', () async {
       for (final VegetarianStatus status in VegetarianStatus.values) {
-        await _checkIngredientsAnalysis(null, status, null);
+        await checkIngredientsAnalysis(null, status, null);
       }
     },
         timeout: Timeout(
@@ -268,7 +268,7 @@ void main() {
 
     test('check palm oil search', () async {
       for (final PalmOilFreeStatus status in PalmOilFreeStatus.values) {
-        await _checkIngredientsAnalysis(null, null, status);
+        await checkIngredientsAnalysis(null, null, status);
       }
     },
         timeout: Timeout(
@@ -283,7 +283,7 @@ void main() {
           random.nextInt(VegetarianStatus.values.length);
       final int palmOilFreeIndex =
           random.nextInt(PalmOilFreeStatus.values.length);
-      await _checkIngredientsAnalysis(
+      await checkIngredientsAnalysis(
         VeganStatus.values[veganIndex],
         VegetarianStatus.values[vegetarianIndex],
         PalmOilFreeStatus.values[palmOilFreeIndex],
@@ -298,7 +298,7 @@ void main() {
     test('check vegan/vegetarian consistency', () async {
       const VegetarianStatus nonVegetarian = VegetarianStatus.NON_VEGETARIAN;
       expect(
-        await _checkIngredientsAnalysis(
+        await checkIngredientsAnalysis(
           VeganStatus.VEGAN,
           nonVegetarian,
           null,
@@ -306,7 +306,7 @@ void main() {
         0,
       );
       expect(
-        await _checkIngredientsAnalysis(
+        await checkIngredientsAnalysis(
           VeganStatus.MAYBE_VEGAN,
           nonVegetarian,
           null,
@@ -314,7 +314,7 @@ void main() {
         0,
       );
       expect(
-        await _checkIngredientsAnalysis(
+        await checkIngredientsAnalysis(
           VeganStatus.VEGAN_STATUS_UNKNOWN,
           nonVegetarian,
           null,
@@ -801,7 +801,7 @@ void main() {
   });
 
   /// Returns random and different int's.
-  List<int> _getRandomInts({
+  List<int> getRandomInts({
     required int count,
     required final int max,
   }) {
@@ -822,7 +822,7 @@ void main() {
 
   group('$OpenFoodAPIClient search products with/without allergens', () {
     /// Returns the total number of products, and checks the allergens.
-    Future<int> _checkAllergens(
+    Future<int> checkAllergens(
       final AllergensParameter allergensParameter,
     ) async {
       final List<Parameter> parameters = <Parameter>[
@@ -864,7 +864,7 @@ void main() {
 
     test('check products with allergens', () async {
       for (final AllergensTag tag in AllergensTag.values) {
-        final int count = await _checkAllergens(
+        final int count = await checkAllergens(
           AllergensParameter(map: {tag: true}),
         );
         expect(count, greaterThan(0));
@@ -873,7 +873,7 @@ void main() {
 
     test('check products without allergens', () async {
       for (final AllergensTag tag in AllergensTag.values) {
-        final int count = await _checkAllergens(
+        final int count = await checkAllergens(
           AllergensParameter(map: {tag: false}),
         );
         expect(count, greaterThan(0));
@@ -881,19 +881,19 @@ void main() {
     });
 
     test('check products with random 2 allergens', () async {
-      final List<int> indices = _getRandomInts(
+      final List<int> indices = getRandomInts(
         count: 2,
         max: AllergensTag.values.length,
       );
       final AllergensTag tag1 = AllergensTag.values[indices[0]];
       final AllergensTag tag2 = AllergensTag.values[indices[1]];
-      final int count1 = await _checkAllergens(
+      final int count1 = await checkAllergens(
         AllergensParameter(map: {tag1: true}),
       );
-      final int count2 = await _checkAllergens(
+      final int count2 = await checkAllergens(
         AllergensParameter(map: {tag2: true}),
       );
-      final int countBoth = await _checkAllergens(
+      final int countBoth = await checkAllergens(
         AllergensParameter(map: {tag1: true, tag2: true}),
       );
       // it's an AND: with both conditions we always get less results.
@@ -902,19 +902,19 @@ void main() {
     });
 
     test('check products with and without random 2 allergens', () async {
-      final List<int> indices = _getRandomInts(
+      final List<int> indices = getRandomInts(
         count: 2,
         max: AllergensTag.values.length,
       );
       final AllergensTag tag1 = AllergensTag.values[indices[0]];
       final AllergensTag tag2 = AllergensTag.values[indices[1]];
-      final int count1 = await _checkAllergens(
+      final int count1 = await checkAllergens(
         AllergensParameter(map: {tag1: true}),
       );
-      final int count2 = await _checkAllergens(
+      final int count2 = await checkAllergens(
         AllergensParameter(map: {tag2: false}),
       );
-      final int countBoth = await _checkAllergens(
+      final int countBoth = await checkAllergens(
         AllergensParameter(map: {tag1: true, tag2: false}),
       );
       // it's an AND: with both conditions we always get less results.
@@ -931,7 +931,7 @@ void main() {
       '$OpenFoodAPIClient search products with completed/to-be-completed states',
       () {
     /// Returns the total number of products, and checks the states.
-    Future<int> _checkStatesTags(
+    Future<int> checkStatesTags(
       final StatesTagsParameter statesTagsParameter,
     ) async {
       final List<Parameter> parameters = <Parameter>[
@@ -972,7 +972,7 @@ void main() {
 
     test('check products with "completed" states tags', () async {
       for (final State state in State.values) {
-        final int count = await _checkStatesTags(
+        final int count = await checkStatesTags(
           StatesTagsParameter(map: {state: true}),
         );
         expect(count, greaterThan(0));
@@ -981,7 +981,7 @@ void main() {
 
     test('check products with "to-be-completed" states tags', () async {
       for (final State state in State.values) {
-        final int count = await _checkStatesTags(
+        final int count = await checkStatesTags(
           StatesTagsParameter(map: {state: false}),
         );
         expect(count, greaterThan(0));
@@ -989,7 +989,7 @@ void main() {
     });
 
     test('check products with 2 random states tags', () async {
-      final List<int> indices = _getRandomInts(
+      final List<int> indices = getRandomInts(
         count: 2,
         max: State.values.length,
       );
@@ -998,12 +998,12 @@ void main() {
       final Random random = Random();
       final bool completed1 = random.nextBool();
       final bool completed2 = random.nextBool();
-      final int count1 = await _checkStatesTags(
+      final int count1 = await checkStatesTags(
         StatesTagsParameter(map: {
           state1: completed1,
         }),
       );
-      final int count2 = await _checkStatesTags(
+      final int count2 = await checkStatesTags(
         StatesTagsParameter(map: {
           state2: completed2,
         }),
@@ -1014,7 +1014,7 @@ void main() {
         state2: completed2,
       };
 
-      final int countBoth = await _checkStatesTags(
+      final int countBoth = await checkStatesTags(
         StatesTagsParameter(map: map),
       );
       // it's an AND: with both conditions we always get less results.

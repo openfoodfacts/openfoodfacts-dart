@@ -4,12 +4,13 @@ import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:test/test.dart';
+
 import 'test_constants.dart';
 
 void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
-  Future<void> _test(
+  Future<void> doTest(
     final String barcode,
     final OpenFoodFactsLanguage language,
     final OcrField ocrField,
@@ -32,7 +33,7 @@ void main() {
 
   group('$OpenFoodAPIClient Extract Ingredients from images', () {
     test('Extract Ingredients using Google Vision Cloud (French)', () async {
-      _test(
+      doTest(
         frenchBarcode,
         OpenFoodFactsLanguage.FRENCH,
         OcrField.GOOGLE_CLOUD_VISION,
@@ -40,7 +41,7 @@ void main() {
     });
 
     test('Extract Ingredients using Google Vision Cloud (English)', () async {
-      _test(
+      doTest(
         englishBarcode,
         OpenFoodFactsLanguage.ENGLISH,
         OcrField.GOOGLE_CLOUD_VISION,
@@ -48,7 +49,7 @@ void main() {
     });
 
     test('Extract Ingredients using Google Vision Cloud (German)', () async {
-      _test(
+      doTest(
         germanBarcode,
         OpenFoodFactsLanguage.GERMAN,
         OcrField.GOOGLE_CLOUD_VISION,
@@ -56,7 +57,7 @@ void main() {
     });
 
     test('Extract Ingredients using Tesseract (French)', () async {
-      _test(
+      doTest(
         frenchBarcode,
         OpenFoodFactsLanguage.FRENCH,
         OcrField.TESSERACT,
@@ -64,7 +65,7 @@ void main() {
     });
 
     test('Extract Ingredients using Tesseract (English)', () async {
-      _test(
+      doTest(
         englishBarcode,
         OpenFoodFactsLanguage.ENGLISH,
         OcrField.TESSERACT,
@@ -72,7 +73,7 @@ void main() {
     });
 
     test('Extract Ingredients using Tesseract (German)', () async {
-      _test(
+      doTest(
         germanBarcode,
         OpenFoodFactsLanguage.GERMAN,
         OcrField.TESSERACT,

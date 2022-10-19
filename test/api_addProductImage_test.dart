@@ -28,7 +28,7 @@ void main() {
   /// * index 1: image height in pixels
   /// * index 2: file size in bytes
   /// Inspiration found in https://github.com/CaiJingLong/dart_image_size_getter
-  List<int> _getJpegSize(final List<int> data) {
+  List<int> getJpegSize(final List<int> data) {
     int start = 2;
     while (true) {
       if (data[start] != 0xFF) {
@@ -50,7 +50,7 @@ void main() {
   }
 
   /// Returns the width and height (pixels) and size (bytes) of a JPEG URL file
-  Future<List<int>> _getJpegUrlSize(final String url) async => _getJpegSize(
+  Future<List<int>> getJpegUrlSize(final String url) async => getJpegSize(
         await UriReader.instance!.readAsBytes(Uri.parse(url)),
       );
 
@@ -58,7 +58,7 @@ void main() {
   ///
   /// That imgid has only sense for this [barcode], and references the image
   /// currently used as a base for this [imageField] and this [language].
-  Future<String?> _getImgid(
+  Future<String?> getImgid(
     final String barcode,
     final ImageField imageField,
     final OpenFoodFactsLanguage language,
@@ -154,13 +154,13 @@ void main() {
         ImageAngle.THREE_O_CLOCK,
       };
 
-      final String? imgid = await _getImgid(barcode, imageField, language);
+      final String? imgid = await getImgid(barcode, imageField, language);
       expect(imgid, isNotNull);
 
       final String productImageRootUrl =
           ImageHelper.getProductImageRootUrl(barcode);
       final String uploadedImageUrl = '$productImageRootUrl/$imgid.jpg';
-      final List<int> uploadedSize = await _getJpegUrlSize(uploadedImageUrl);
+      final List<int> uploadedSize = await getJpegUrlSize(uploadedImageUrl);
       final int uploadedWidth = uploadedSize[0];
       final int uploadedHeight = uploadedSize[1];
 
@@ -175,7 +175,7 @@ void main() {
         );
         expect(newUrl, isNotNull);
 
-        final List<int> newSize = await _getJpegUrlSize(newUrl!);
+        final List<int> newSize = await getJpegUrlSize(newUrl!);
         final int newWidth = newSize[0];
         final int newHeight = newSize[1];
 
@@ -200,7 +200,7 @@ void main() {
       const int x1 = 10;
       const int y1 = 20;
 
-      final String? imgid = await _getImgid(barcode, imageField, language);
+      final String? imgid = await getImgid(barcode, imageField, language);
       expect(imgid, isNotNull);
 
       for (final ImageAngle angle in ImageAngle.values) {
@@ -218,7 +218,7 @@ void main() {
         );
         expect(newUrl, isNotNull);
 
-        final List<int> newSize = await _getJpegUrlSize(newUrl!);
+        final List<int> newSize = await getJpegUrlSize(newUrl!);
         final int newWidth = newSize[0];
         final int newHeight = newSize[1];
         expect(newWidth, width);
