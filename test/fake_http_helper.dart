@@ -135,6 +135,7 @@ class FakeHttpHelper extends HttpHelper {
     User? user, {
     QueryType? queryType,
     required bool addCredentialsToBody,
+    bool addCredentialsToHeader = false,
   }) async {
     final _Query query = _Query(uri, body: body);
     final http.Response response = _responses[query] ?? http404;

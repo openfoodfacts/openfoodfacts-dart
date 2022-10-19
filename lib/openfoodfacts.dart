@@ -651,6 +651,7 @@ class OpenFoodAPIClient {
       user,
       queryType: queryType,
       addCredentialsToBody: false,
+      addCredentialsToHeader: true,
     );
     return Status.fromApiResponse(response.body);
   }
@@ -686,6 +687,7 @@ class OpenFoodAPIClient {
       user,
       queryType: queryType,
       addCredentialsToBody: false,
+      addCredentialsToHeader: true,
     );
     SpellingCorrection result = SpellingCorrection.fromJson(
         json.decode(utf8.decode(response.bodyBytes)));

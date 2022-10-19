@@ -82,12 +82,17 @@ class HttpHelper {
   /// Send a http post request to the specified uri.
   /// The data / body of the request has to be provided as map. (key, value)
   /// The result of the request will be returned as string.
+  ///
+  /// [addCredentialsToBody] should be only use for Robotoff,
+  /// See: https://github.com/openfoodfacts/openfoodfacts-dart/issues/553#issuecomment-1269810032
+  /// When using [addCredentialsToBody] a User or globalUser needed, blocks [QueryType.TEST] authentication
   Future<http.Response> doPostRequest(
     Uri uri,
     Map<String, String> body,
     User? user, {
     QueryType? queryType,
     required bool addCredentialsToBody,
+    bool addCredentialsToHeader = false,
   }) async {
     if (addCredentialsToBody) {
       if (user != null) {
@@ -98,11 +103,13 @@ class HttpHelper {
     http.Response response = await http.post(
       uri,
       headers: _buildHeaders(
-          user: user,
-          isTestModeActive:
-              OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-                  ? false
-                  : true),
+        user: user,
+        isTestModeActive:
+            OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+                ? false
+                : true,
+        addCredentialsToHeader: addCredentialsToHeader,
+      ),
       body: addUserAgentParameters(body),
     );
     return response;
@@ -169,9 +176,11 @@ class HttpHelper {
 
   /// build the request headers
   /// By default isTestMode is false
+  /// Note: [addCredentialsToHeader] and [isTestModeActive] exclude each other
   Map<String, String>? _buildHeaders({
     User? user,
     bool isTestModeActive = false,
+    bool addCredentialsToHeader = false,
   }) {
     Map<String, String>? headers = {};
 
@@ -182,9 +191,17 @@ class HttpHelper {
       'From': OpenFoodAPIConfiguration.getUser(user)?.userId ?? FROM,
     });
 
-    if (isTestModeActive) {
+    if (isTestModeActive && !addCredentialsToHeader) {
       var token = 'Basic ${base64Encode(utf8.encode('off:off'))}';
-      headers.addAll({'authorization': token});
+      headers.addAll({'Authorization': token});
+    }
+
+    if (addCredentialsToHeader) {
+      final User? myUser = OpenFoodAPIConfiguration.getUser(user);
+      final String? userId = myUser?.userId;
+      final String? password = myUser?.password;
+      var token = 'Basic ${base64Encode(utf8.encode('$userId:$password'))}';
+      headers.addAll({'Authorization': token});
     }
     return headers;
   }
