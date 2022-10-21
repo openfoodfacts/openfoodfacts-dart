@@ -14,4 +14,8 @@ enum PerSize implements OffTagged {
 
   @override
   final String offTag;
+
+  /// Returns the first [PerSize] that matches the [offTag].
+  static PerSize? fromOffTag(final String? offTag) =>
+      OffTagged.fromOffTag(offTag, PerSize.values) as PerSize?;
 }

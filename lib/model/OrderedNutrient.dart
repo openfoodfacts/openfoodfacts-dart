@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:openfoodfacts/model/Nutrient.dart';
 import '../interface/JsonObject.dart';
 
 part 'OrderedNutrient.g.dart';
@@ -41,4 +42,6 @@ class OrderedNutrient extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$OrderedNutrientToJson(this);
+
+  Nutrient? get nutrient => Nutrient.fromOffTag(id);
 }

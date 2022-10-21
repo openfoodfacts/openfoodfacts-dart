@@ -14,23 +14,31 @@ class Nutriments extends JsonObject {
 
   /// Nutrient map with start values from [map].
   Nutriments._fromMap(final Map<String, dynamic> map) {
-    _map.addAll(map);
     for (final Nutrient nutrient in Nutrient.values) {
       for (final PerSize perSize in PerSize.values) {
-        // just checking
         final String tag = _getTag(nutrient, perSize);
         try {
-          _getValue(tag);
+          final double? value = JsonObject.parseDouble(map[tag]);
+          if (value != null) {
+            _map[tag] = value;
+          } else if (map.containsKey(tag)) {
+            // typical case when null means something: to erase a value
+            _map[tag] = null;
+          }
         } catch (e) {
           throw Exception(
-            'Could not parse the value for $nutrient and $perSize: ${_getDynamicValue(tag)}',
+            'Could not parse the value for $nutrient and $perSize: ${map[tag]}',
           );
         }
       }
     }
   }
 
-  final Map<String, dynamic> _map = <String, dynamic>{};
+  /// Nutrient values.
+  ///
+  /// It is useful to store null values: this way we can make the difference
+  /// between totally unknown values and values that have been erased.
+  final Map<String, double?> _map = <String, double?>{};
 
   String _getTag(
     final Nutrient nutrient,
@@ -41,16 +49,8 @@ class Nutriments extends JsonObject {
   /// Returns the value in grams of that [nutrient] for that [perSize].
   ///
   /// It won't be grams for very specific nutrients, like [Nutrient.alcohol].
-  double? getValue(
-    final Nutrient nutrient,
-    final PerSize perSize,
-  ) =>
-      _getValue(_getTag(nutrient, perSize));
-
-  double? _getValue(final String tag) =>
-      JsonObject.parseDouble(_getDynamicValue(tag));
-
-  dynamic _getDynamicValue(final String tag) => _map[tag];
+  double? getValue(final Nutrient nutrient, final PerSize perSize) =>
+      _map[_getTag(nutrient, perSize)];
 
   /// Sets the value in grams of that [nutrient] for that [perSize].
   ///
@@ -60,12 +60,7 @@ class Nutriments extends JsonObject {
     final PerSize perSize,
     final double? value,
   ) {
-    final String tag = _getTag(nutrient, perSize);
-    if (value == null) {
-      _map.remove(tag);
-    } else {
-      _map[tag] = value;
-    }
+    _map[_getTag(nutrient, perSize)] = value;
     return this;
   }
 
@@ -1670,28 +1665,29 @@ class Nutriments extends JsonObject {
   factory Nutriments.fromJson(Map<String, dynamic> json) =>
       Nutriments._fromMap(json);
 
+  /// Returns a JSON version of the [Nutriments].
+  ///
+  /// When we want to erase a value, we need to set the value to `''`.
+  /// If we put `null` instead the server will interpret it as `0`.
+  /// If we don't set a value the server will keep the previous value.
   @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> result = <String, dynamic>{};
-
-    void writeNotNull(String key, dynamic value) {
-      if (value != null) {
-        result[key] = value;
-      }
-    }
-
     for (final Nutrient nutrient in Nutrient.values) {
       for (final PerSize perSize in PerSize.values) {
-        writeNotNull(
-          _getTag(nutrient, perSize),
-          getValue(nutrient, perSize),
-        );
+        final String tag = _getTag(nutrient, perSize);
+        final double? value = _map[tag];
+        if (value != null) {
+          result[tag] = value;
+        } else if (_map.containsKey(tag)) {
+          result[tag] = '';
+        }
       }
     }
     return result;
   }
 
-  static Map<String, dynamic> toJsonHelper(Nutriments? n) => n?._map ?? {};
+  static Map<String, dynamic> toJsonHelper(Nutriments? n) => n?.toJson() ?? {};
 
   /// Nutrient ids supported by [Nutriments].
   ///

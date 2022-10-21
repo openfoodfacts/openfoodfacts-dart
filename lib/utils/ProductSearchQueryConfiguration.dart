@@ -28,7 +28,7 @@ class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
     List<String> result = [];
 
     for (ProductField field in fields!) {
-      result.add(field.key);
+      result.add(field.offTag);
     }
 
     return result;

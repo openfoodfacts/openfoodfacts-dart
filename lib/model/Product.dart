@@ -464,89 +464,91 @@ class Product extends JsonObject {
       // (`product_name_[2 letter language code]`).
       // We store those values in a more structured maps like
       // [productNameInLanguages].
-      if (key == ProductField.NAME_ALL_LANGUAGES.key) {
+      if (key == ProductField.NAME_ALL_LANGUAGES.offTag) {
         final Map<OpenFoodFactsLanguage, String>? localized =
             _getLocalizedStrings(json[key]);
         if (localized != null) {
           result.productNameInLanguages ??= {};
           result.productNameInLanguages!.addAll(localized);
         }
-      } else if (key == ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES.key) {
+      } else if (key == ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES.offTag) {
         final Map<OpenFoodFactsLanguage, String>? localized =
             _getLocalizedStrings(json[key]);
         if (localized != null) {
           result.ingredientsTextInLanguages ??= {};
           result.ingredientsTextInLanguages!.addAll(localized);
         }
-      } else if (key == ProductField.PACKAGING_TEXT_ALL_LANGUAGES.key) {
+      } else if (key == ProductField.PACKAGING_TEXT_ALL_LANGUAGES.offTag) {
         final Map<OpenFoodFactsLanguage, String>? localized =
             _getLocalizedStrings(json[key]);
         if (localized != null) {
           result.packagingTextInLanguages ??= {};
           result.packagingTextInLanguages!.addAll(localized);
         }
-      } else if (key.startsWith(ProductField.NAME_IN_LANGUAGES.key)) {
+      } else if (key.startsWith(ProductField.NAME_IN_LANGUAGES.offTag)) {
         final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.NAME_IN_LANGUAGES.key);
+            _langFrom(key, ProductField.NAME_IN_LANGUAGES.offTag);
         if (lang != OpenFoodFactsLanguage.UNDEFINED) {
           result.productNameInLanguages ??= {};
           result.productNameInLanguages![lang] = json[key];
         }
       } else if (key
-          .startsWith(ProductField.CATEGORIES_TAGS_IN_LANGUAGES.key)) {
+          .startsWith(ProductField.CATEGORIES_TAGS_IN_LANGUAGES.offTag)) {
         final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.CATEGORIES_TAGS_IN_LANGUAGES.key);
+            _langFrom(key, ProductField.CATEGORIES_TAGS_IN_LANGUAGES.offTag);
         final values = _jsonValueToList(json[key]);
         if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
           result.categoriesTagsInLanguages ??= {};
           result.categoriesTagsInLanguages![lang] = values;
         }
       } else if (key
-          .startsWith(ProductField.INGREDIENTS_TAGS_IN_LANGUAGES.key)) {
+          .startsWith(ProductField.INGREDIENTS_TAGS_IN_LANGUAGES.offTag)) {
         final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.INGREDIENTS_TAGS_IN_LANGUAGES.key);
+            _langFrom(key, ProductField.INGREDIENTS_TAGS_IN_LANGUAGES.offTag);
         final values = _jsonValueToList(json[key]);
         if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
           result.ingredientsTagsInLanguages ??= {};
           result.ingredientsTagsInLanguages![lang] = values;
         }
       } else if (key
-          .startsWith(ProductField.IMAGES_FRESHNESS_IN_LANGUAGES.key)) {
+          .startsWith(ProductField.IMAGES_FRESHNESS_IN_LANGUAGES.offTag)) {
         final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.IMAGES_FRESHNESS_IN_LANGUAGES.key);
+            _langFrom(key, ProductField.IMAGES_FRESHNESS_IN_LANGUAGES.offTag);
         if (lang != OpenFoodFactsLanguage.UNDEFINED) {
           final Map<ImageField, int> values =
               _jsonValueToImagesFreshness(json[key], lang);
           result.imagesFreshnessInLanguages ??= {};
           result.imagesFreshnessInLanguages![lang] = values;
         }
-      } else if (key.startsWith(ProductField.LABELS_TAGS_IN_LANGUAGES.key)) {
+      } else if (key.startsWith(ProductField.LABELS_TAGS_IN_LANGUAGES.offTag)) {
         final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.LABELS_TAGS_IN_LANGUAGES.key);
+            _langFrom(key, ProductField.LABELS_TAGS_IN_LANGUAGES.offTag);
         final values = _jsonValueToList(json[key]);
         if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
           result.labelsTagsInLanguages ??= {};
           result.labelsTagsInLanguages![lang] = values;
         }
-      } else if (key.startsWith(ProductField.COUNTRIES_TAGS_IN_LANGUAGES.key)) {
+      } else if (key
+          .startsWith(ProductField.COUNTRIES_TAGS_IN_LANGUAGES.offTag)) {
         final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.COUNTRIES_TAGS_IN_LANGUAGES.key);
+            _langFrom(key, ProductField.COUNTRIES_TAGS_IN_LANGUAGES.offTag);
         final values = _jsonValueToList(json[key]);
         if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
           result.countriesTagsInLanguages ??= {};
           result.countriesTagsInLanguages![lang] = values;
         }
       } else if (key
-          .startsWith(ProductField.INGREDIENTS_TEXT_IN_LANGUAGES.key)) {
+          .startsWith(ProductField.INGREDIENTS_TEXT_IN_LANGUAGES.offTag)) {
         final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.INGREDIENTS_TEXT_IN_LANGUAGES.key);
+            _langFrom(key, ProductField.INGREDIENTS_TEXT_IN_LANGUAGES.offTag);
         if (lang != OpenFoodFactsLanguage.UNDEFINED) {
           result.ingredientsTextInLanguages ??= {};
           result.ingredientsTextInLanguages![lang] = json[key];
         }
-      } else if (key.startsWith(ProductField.PACKAGING_TEXT_IN_LANGUAGES.key)) {
+      } else if (key
+          .startsWith(ProductField.PACKAGING_TEXT_IN_LANGUAGES.offTag)) {
         final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.PACKAGING_TEXT_IN_LANGUAGES.key);
+            _langFrom(key, ProductField.PACKAGING_TEXT_IN_LANGUAGES.offTag);
         if (lang != OpenFoodFactsLanguage.UNDEFINED) {
           result.packagingTextInLanguages ??= {};
           result.packagingTextInLanguages![lang] = json[key];
