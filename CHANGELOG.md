@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.26.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.26.1...v1.26.2) (2022-10-23)
+
+
+### Bug Fixes
+
+* [#565](https://github.com/openfoodfacts/openfoodfacts-dart/issues/565) - added product field "nutrition data", better null value management ([#595](https://github.com/openfoodfacts/openfoodfacts-dart/issues/595)) ([6e2df43](https://github.com/openfoodfacts/openfoodfacts-dart/commit/6e2df43ecd626ba2c8e9f3fadf1b9f637bf82b34))
+* [#592](https://github.com/openfoodfacts/openfoodfacts-dart/issues/592) - KnowledgePanelTextElement - 'type' instead of 'text_type' ([#593](https://github.com/openfoodfacts/openfoodfacts-dart/issues/593)) ([10f51cc](https://github.com/openfoodfacts/openfoodfacts-dart/commit/10f51cc835dbb0b1a200ed7851ef228c26a05d97))
+* Sending credentials to robotff ([#590](https://github.com/openfoodfacts/openfoodfacts-dart/issues/590)) ([2b09926](https://github.com/openfoodfacts/openfoodfacts-dart/commit/2b099261197b7a0d0cf8e42ccea4d66fddf4a960))
+
 ## [1.26.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.26.0...v1.26.1) (2022-10-16)
 
 
