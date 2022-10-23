@@ -15,59 +15,97 @@ void main() {
   }
 
   group('$OpenFoodAPIClient Suggestions and autocompletion', () {
-    test('Suggestions for countries', () async {
-      List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TagType.COUNTRIES,
-        language: OpenFoodFactsLanguage.FRENCH,
-        input: 't',
-      );
+    test('Suggestions for countries and origins', () async {
+      late List<dynamic> result;
 
-      listContains(result, 't');
+      final List<TagType> tagTypes = <TagType>[
+        TagType.COUNTRIES,
+        TagType.ORIGINS,
+      ];
+      for (final TagType tagType in tagTypes) {
+        result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+          tagType,
+          language: OpenFoodFactsLanguage.FRENCH,
+          input: 't',
+        );
+        listContains(result, 't');
+
+        result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+          tagType,
+          language: OpenFoodFactsLanguage.FRENCH,
+          input: 'TUN',
+        );
+        listContains(result, 'tun');
+
+        result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+          tagType,
+          language: OpenFoodFactsLanguage.ENGLISH,
+          input: 'TUN',
+        );
+        listContains(result, 'tun');
+
+        result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+          tagType,
+          language: OpenFoodFactsLanguage.ARABIC,
+          input: 'تو',
+        );
+        listContains(result, 'تو');
+
+        result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+          tagType,
+          language: OpenFoodFactsLanguage.GEORGIAN,
+          input: 'TUN',
+        );
+        expect(result, isEmpty);
+
+        expect(
+            await OpenFoodAPIClient.getAutocompletedSuggestions(
+              tagType,
+              language: OpenFoodFactsLanguage.FRENCH,
+              input: 'TUN',
+            ),
+            await OpenFoodAPIClient.getAutocompletedSuggestions(
+              tagType,
+              language: OpenFoodFactsLanguage.FRENCH,
+              input: 'tun',
+            ));
+      }
+    });
+
+    test('Suggestions for countries only', () async {
+      late List<dynamic> result;
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
         TagType.COUNTRIES,
         language: OpenFoodFactsLanguage.FRENCH,
-        input: 'TUN',
+        input: 'provence',
       );
+      expect(result, isEmpty); // "provence" is not a country
+    });
 
-      listContains(result, 'tun');
+    test('Suggestions for origins only', () async {
+      late List<dynamic> result;
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TagType.COUNTRIES,
-        language: OpenFoodFactsLanguage.ENGLISH,
-        input: 'TUN',
+        TagType.ORIGINS,
+        language: OpenFoodFactsLanguage.FRENCH,
+        input: 'provence',
       );
-
-      listContains(result, 'tun');
+      expect(result, isNotEmpty);
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TagType.COUNTRIES,
-        language: OpenFoodFactsLanguage.ARABIC,
-        input: 'تو',
+        TagType.ORIGINS,
+        language: OpenFoodFactsLanguage.FRENCH,
+        input: 'prove',
       );
-
-      listContains(result, 'تو');
+      expect(result, isNotEmpty);
 
       result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TagType.COUNTRIES,
-        language: OpenFoodFactsLanguage.GEORGIAN,
-        input: 'TUN',
+        TagType.ORIGINS,
+        language: OpenFoodFactsLanguage.FRENCH,
+        input: 'pyré',
       );
-
-      expect(result.isEmpty, true);
-
-      expect(
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TagType.COUNTRIES,
-            language: OpenFoodFactsLanguage.FRENCH,
-            input: 'TUN',
-          ),
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TagType.COUNTRIES,
-            language: OpenFoodFactsLanguage.FRENCH,
-            input: 'tun',
-          ));
+      expect(result, isNotEmpty); // something about Pyrénées
     });
 
     test('Suggestions for state', () async {

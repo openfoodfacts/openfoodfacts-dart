@@ -1799,7 +1799,7 @@ void main() {
           expect(
             url,
             'https://world-${language.code}.openfoodfacts.net/'
-            '${tagType.key}'
+            '${tagType.offTag}'
             '?translate=1',
           );
         } catch (e) {
