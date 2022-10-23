@@ -187,4 +187,8 @@ enum Nutrient implements OffTagged {
 
   @override
   final String offTag;
+
+  /// Returns the first [Nutrient] that matches the [offTag].
+  static Nutrient? fromOffTag(final String? offTag) =>
+      OffTagged.fromOffTag(offTag, Nutrient.values) as Nutrient?;
 }

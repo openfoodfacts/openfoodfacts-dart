@@ -205,7 +205,10 @@ class JsonHelper {
   static const String _checkboxOnValue = 'on';
   static const String _checkboxOffValue = '';
 
-  static bool checkboxFromJSON(dynamic jsonValue) {
+  static bool? checkboxFromJSON(dynamic jsonValue) {
+    if (jsonValue == null) {
+      return null;
+    }
     return jsonValue is String &&
         jsonValue.trim().toLowerCase() == _checkboxOnValue;
   }
