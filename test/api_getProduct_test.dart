@@ -1829,20 +1829,33 @@ void main() {
       ));
 
   test('get new product fields', () async {
-    final ProductQueryConfiguration configuration = ProductQueryConfiguration(
+    late ProductQueryConfiguration configuration;
+    late ProductResult result;
+
+    configuration = ProductQueryConfiguration(
       BARCODE_DANISH_BUTTER_COOKIES,
-      fields: [
-        ProductField.COMPARED_TO_CATEGORY,
-      ],
+      fields: [ProductField.COMPARED_TO_CATEGORY],
     );
-
-    final ProductResult result = await OpenFoodAPIClient.getProduct(
+    result = await OpenFoodAPIClient.getProduct(
       configuration,
+      queryType: QueryType.PROD,
     );
-
     expect(result.status, 1);
     expect(result.product, isNotNull);
     expect(result.product!.comparedToCategory, isNotNull);
+
+    configuration = ProductQueryConfiguration(
+      '7300400481588',
+      fields: [ProductField.WEBSITE],
+    );
+    result = await OpenFoodAPIClient.getProduct(
+      configuration,
+      queryType: QueryType.PROD,
+    );
+    expect(result.status, 1);
+    expect(result.product, isNotNull);
+    expect(result.product!.website, isNotNull);
+    expect(result.product!.website, isNotEmpty);
   });
 
   group('no nutrition data', () {

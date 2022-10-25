@@ -390,6 +390,10 @@ class Product extends JsonObject {
   @JsonKey(name: 'nova_group', includeIfNull: false)
   int? novaGroup;
 
+  /// Link to the product page on the official site of the producer
+  @JsonKey(name: 'link', includeIfNull: false)
+  String? website;
+
   Product(
       {this.barcode,
       this.productName,

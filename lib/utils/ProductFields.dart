@@ -78,6 +78,7 @@ enum ProductField implements OffTagged {
   MANUFACTURING_PLACES(offTag: 'manufacturing_places'),
   ORIGINS(offTag: 'origins'),
   NOVA_GROUP(offTag: 'nova_group'),
+  WEBSITE(offTag: 'link'),
   ALL(offTag: '');
 
   const ProductField({
