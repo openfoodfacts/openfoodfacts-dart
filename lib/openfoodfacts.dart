@@ -924,8 +924,7 @@ class OpenFoodAPIClient {
 
   /// Returns the Ecoscore description in HTML
   // TODO: deprecated from 2022-01-22; remove when old enough
-  @Deprecated(
-      'Use getProduct with field [ProductField.ENVIRONMENT_INFOCARD] instead')
+  @Deprecated('Use getProduct with ecoscore fields instead')
   static Future<String?> getEcoscoreHtmlDescription(
     final String barcode,
     final OpenFoodFactsLanguage language, {

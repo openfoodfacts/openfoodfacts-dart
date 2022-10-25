@@ -284,8 +284,6 @@ void main() {
       expect(result.product!.nutriments, isNotNull);
       final Nutriments nutriments = result.product!.nutriments!;
 
-      expect(result.product!.environmentImpactLevels, isNull);
-
       const PerSize perSize = PerSize.oneHundredGrams;
       expect(nutriments.getValue(Nutrient.energyKJ, perSize), 2125.0);
       expect(nutriments.getValue(Nutrient.sugars, perSize), 28.0);
@@ -648,22 +646,6 @@ void main() {
       expect(result.product!.ecoscoreData!.agribalyse, isNotNull);
       expect(result.product!.ecoscoreData!.adjustments, isNotNull);
       expect(result.product!.ecoscoreData!.missingDataWarning, isFalse);
-    });
-
-    test('product environment impact levels', () async {
-      String barcode = '7613331814562';
-      ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.ENGLISH,
-          fields: [ProductField.ENVIRONMENT_IMPACT_LEVELS]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
-        configurations,
-        user: TestConstants.TEST_USER,
-      );
-
-      expect(result.product, isNotNull);
-      expect(result.product!.environmentImpactLevels, isNotNull);
-      expect(result.product!.environmentImpactLevels!.levels.first, Level.HIGH);
     });
 
     test('product fields', () async {
@@ -1544,17 +1526,6 @@ void main() {
           // some tests can be slow here
           Duration(seconds: 90),
         ));
-
-    test('get ecoscore html description', () async {
-      final ProductResult productResult = await OpenFoodAPIClient.getProduct(
-        ProductQueryConfiguration(
-          BARCODE_DANISH_BUTTER_COOKIES,
-          language: OpenFoodFactsLanguage.FRENCH,
-          fields: <ProductField>[ProductField.ENVIRONMENT_INFOCARD],
-        ),
-      );
-      expect(productResult.product!.environmentInfoCard, isNotNull);
-    });
 
     test('get knowledge panels', () async {
       const Set<String> someExpectedKeys = <String>{
