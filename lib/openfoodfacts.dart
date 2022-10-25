@@ -274,7 +274,7 @@ class OpenFoodAPIClient {
       throw Exception('No taxonomy translation for $taxonomyTagType');
     }
     final Uri uri = UriHelper.getUri(
-      path: taxonomyTagType.key,
+      path: taxonomyTagType.offTag,
       queryType: queryType,
       queryParameters: {'translate': '1'},
       addUserAgentParameters: false,
@@ -773,7 +773,7 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
     final Map<String, String> queryParameters = <String, String>{
-      'tagtype': taxonomyType.key,
+      'tagtype': taxonomyType.offTag,
       'term': input,
       'lc': language.code,
       'limit': limit.toString(),

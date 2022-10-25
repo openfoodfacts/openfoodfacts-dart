@@ -1,30 +1,31 @@
-enum TagType {
-  STATES,
-  LANGUAGES,
-  LABELS,
-  CATEGORIES,
-  COUNTRIES,
-  INGREDIENTS,
-  TRACES,
-  ADDITIVES,
-  ALLERGENS,
-  PACKAGING,
-  EMB_CODES
-}
+import 'package:openfoodfacts/model/OffTagged.dart';
 
-extension TaxonomyTypeExtension on TagType {
-  static const Map<TagType, String> _TAXONOMIES = {
-    TagType.STATES: 'states',
-    TagType.LABELS: 'labels',
-    TagType.CATEGORIES: 'categories',
-    TagType.COUNTRIES: 'countries',
-    TagType.INGREDIENTS: 'ingredients',
-    TagType.TRACES: 'traces',
-    TagType.ADDITIVES: 'additives',
-    TagType.ALLERGENS: 'allergens',
-    TagType.PACKAGING: 'packaging',
-    TagType.LANGUAGES: 'languages',
-    TagType.EMB_CODES: 'emb_codes',
-  };
-  String get key => _TAXONOMIES[this] ?? '';
+enum TagType implements OffTagged {
+  STATES(offTag: 'states'),
+  LANGUAGES(offTag: 'languages'),
+  LABELS(offTag: 'labels'),
+  CATEGORIES(offTag: 'categories'),
+  COUNTRIES(offTag: 'countries'),
+  INGREDIENTS(offTag: 'ingredients'),
+  TRACES(offTag: 'traces'),
+  ADDITIVES(offTag: 'additives'),
+  ALLERGENS(offTag: 'allergens'),
+  PACKAGING(offTag: 'packaging'),
+  ORIGINS(offTag: 'origins'),
+  EMB_CODES(offTag: 'emb_codes');
+
+  const TagType({
+    required this.offTag,
+  });
+
+  @override
+  final String offTag;
+
+  /// Returns the first [TagType] that matches the [offTag].
+  static TagType? fromOffTag(final String? offTag) =>
+      OffTagged.fromOffTag(offTag, TagType.values) as TagType?;
+
+  // TODO: deprecated from 2022-10-23; remove when old enough
+  @Deprecated('Use offTag instead')
+  String get key => offTag;
 }
