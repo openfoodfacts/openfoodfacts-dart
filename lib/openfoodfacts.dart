@@ -248,6 +248,7 @@ class OpenFoodAPIClient {
     final Uri uri = UriHelper.getUri(
       path: 'product/$barcode',
       queryType: queryType,
+      addUserAgentParameters: false,
     );
     if (!replaceSubdomain) {
       return uri;

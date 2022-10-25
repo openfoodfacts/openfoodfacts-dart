@@ -1692,6 +1692,8 @@ void main() {
 
   test('get product uri', () async {
     const String barcode = BARCODE_DANISH_BUTTER_COOKIES;
+    OpenFoodAPIConfiguration.uuid = 'Should not appear in the url';
+
     expect(
       OpenFoodAPIClient.getProductUri(
         barcode,
@@ -1741,8 +1743,9 @@ void main() {
         language: OpenFoodFactsLanguage.SPANISH,
         country: OpenFoodFactsCountry.GERMANY,
         replaceSubdomain: true,
-      ).host,
-      'de-es.openfoodfacts.net',
+        queryType: QueryType.PROD,
+      ).toString(),
+      'https://de-es.openfoodfacts.org/product/$barcode',
     );
   });
 
