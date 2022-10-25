@@ -245,6 +245,8 @@ class Product extends JsonObject {
       toJson: Additives.additivesToJson)
   Additives? additives;
 
+  // TODO: deprecated from 2022-10-25; remove when old enough
+  @Deprecated('Use ecoscore fields instead')
   @JsonKey(
       name: 'environment_impact_level_tags',
       includeIfNull: false,
@@ -368,6 +370,8 @@ class Product extends JsonObject {
       toJson: KnowledgePanels.toJsonHelper)
   KnowledgePanels? knowledgePanels;
 
+  // TODO: deprecated from 2022-10-25; remove when old enough
+  @Deprecated('Use ecoscore fields instead')
   @JsonKey(
     name: 'environment_infocard',
     includeIfNull: false,
