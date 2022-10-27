@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.27.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.26.2...v1.27.0) (2022-10-25)
+
+
+### Features
+
+* [#596](https://github.com/openfoodfacts/openfoodfacts-dart/issues/596) - implemented autocomplete for ORIGINS ([#597](https://github.com/openfoodfacts/openfoodfacts-dart/issues/597)) ([f39e398](https://github.com/openfoodfacts/openfoodfacts-dart/commit/f39e398a30e4f484230580fea053235957156e0d))
+* [#602](https://github.com/openfoodfacts/openfoodfacts-dart/issues/602) - added the "website" product field ([#603](https://github.com/openfoodfacts/openfoodfacts-dart/issues/603)) ([e9fe00a](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e9fe00ab947b91fe690705959ad38f951e020eb3))
+
+
+### Bug Fixes
+
+* [#507](https://github.com/openfoodfacts/openfoodfacts-dart/issues/507) - no more parameters in product URI ([#601](https://github.com/openfoodfacts/openfoodfacts-dart/issues/601)) ([313fd28](https://github.com/openfoodfacts/openfoodfacts-dart/commit/313fd28e39fdaeab5ed8dbaaa8eb4d49ed3f2908))
+* [#598](https://github.com/openfoodfacts/openfoodfacts-dart/issues/598) - deprecated 2 "environment" fields ([#600](https://github.com/openfoodfacts/openfoodfacts-dart/issues/600)) ([5cb3ea3](https://github.com/openfoodfacts/openfoodfacts-dart/commit/5cb3ea3eaec51db77f7ee8b1f7f1efc591baef7f))
+
 ## [1.26.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.26.1...v1.26.2) (2022-10-23)
 
 
