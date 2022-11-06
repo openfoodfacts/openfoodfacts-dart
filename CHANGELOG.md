@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.27.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.27.0...v1.27.1) (2022-11-06)
+
+
+### Bug Fixes
+
+* Added response for incorrect email ([#604](https://github.com/openfoodfacts/openfoodfacts-dart/issues/604)) ([663a461](https://github.com/openfoodfacts/openfoodfacts-dart/commit/663a461d03881abc021d5efa5578edfa8786c4b7))
+
 ## [1.27.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.26.2...v1.27.0) (2022-10-25)
 
 
