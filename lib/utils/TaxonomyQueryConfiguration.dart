@@ -28,11 +28,6 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
   /// for detailed explanation on how to work with multiple languages.
   final List<OpenFoodFactsLanguage> languages;
 
-  /// The country code for this query, if any.
-  // TODO: deprecated from 2021-11-15 (#233); remove when old enough
-  @Deprecated('Use parameter country instead')
-  final String? cc;
-
   /// The country for this query, if any.
   final OpenFoodFactsCountry? country;
 
@@ -65,7 +60,6 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
     this.tagType,
     this.tags, {
     List<OpenFoodFactsLanguage>? languages,
-    this.cc,
     this.country,
     this.includeChildren = false,
     this.fields = const [],
@@ -78,7 +72,6 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
   TaxonomyQueryConfiguration.roots(
     this.tagType, {
     List<OpenFoodFactsLanguage>? languages,
-    this.cc,
     this.country,
     this.includeChildren = false,
     this.fields = const [],
@@ -109,10 +102,8 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
           () => languages.map<String>((language) => language.code).join(','));
     }
 
-    result.putIfAbsent(
-        'cc',
-        // ignore: deprecated_member_use_from_same_package
-        () => OpenFoodAPIConfiguration.computeCountryCode(country, cc)!);
+    result.putIfAbsent('cc',
+        () => OpenFoodAPIConfiguration.computeCountryCode(country, null)!);
 
     if (fields.isNotEmpty) {
       final Iterable<String> fieldsStrings = convertFieldsToStrings(fields);

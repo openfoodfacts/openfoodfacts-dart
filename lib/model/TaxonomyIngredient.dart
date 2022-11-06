@@ -472,7 +472,6 @@ class TaxonomyIngredientQueryConfiguration extends TaxonomyQueryConfiguration<
   TaxonomyIngredientQueryConfiguration({
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages,
-    @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     List<TaxonomyIngredientField> fields = const [],
     List<Parameter> additionalParameters = const [],
@@ -481,7 +480,6 @@ class TaxonomyIngredientQueryConfiguration extends TaxonomyQueryConfiguration<
           TagType.INGREDIENTS,
           tags,
           languages: languages,
-          cc: cc,
           country: country,
           includeChildren: includeChildren,
           fields: fields,
@@ -490,7 +488,6 @@ class TaxonomyIngredientQueryConfiguration extends TaxonomyQueryConfiguration<
 
   TaxonomyIngredientQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages,
-    @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     List<TaxonomyIngredientField> fields = const [],
     List<Parameter> additionalParameters = const [],
@@ -498,7 +495,6 @@ class TaxonomyIngredientQueryConfiguration extends TaxonomyQueryConfiguration<
   }) : super.roots(
           TagType.INGREDIENTS,
           languages: languages,
-          cc: cc,
           country: country,
           includeChildren: includeChildren,
           fields: fields,
