@@ -90,6 +90,7 @@ class SignUpStatus extends Status {
   /// [https://github.com/openfoodfacts/openfoodfacts-translations/blob/main/openfoodfacts-web/openfoodfacts-web-fr.po]
   static const Map<String, SignUpStatusError> _errorTexts =
       <String, SignUpStatusError>{
+    'Incorrect e-mail address provided.': SignUpStatusError.INCORRECT_EMAIL,
     'The e-mail address is already used by another user.':
         SignUpStatusError.EMAIL_ALREADY_USED,
     'This username already exists, please choose another.':
@@ -105,6 +106,9 @@ class SignUpStatus extends Status {
 
 /// A list of errors returned by the server
 enum SignUpStatusError {
+  /// The email provided is incorrect
+  INCORRECT_EMAIL,
+
   /// The email provided is already used by another user
   EMAIL_ALREADY_USED,
 
