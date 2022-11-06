@@ -91,7 +91,6 @@ class TaxonomyLanguageQueryConfiguration extends TaxonomyQueryConfiguration<
   TaxonomyLanguageQueryConfiguration({
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages,
-    @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     List<TaxonomyLanguageField> fields = const [],
     List<Parameter> additionalParameters = const [],
@@ -99,7 +98,6 @@ class TaxonomyLanguageQueryConfiguration extends TaxonomyQueryConfiguration<
           TagType.LANGUAGES,
           tags,
           languages: languages,
-          cc: cc,
           country: country,
           fields: fields,
           additionalParameters: additionalParameters,

@@ -338,7 +338,6 @@ class TaxonomyAdditiveQueryConfiguration extends TaxonomyQueryConfiguration<
   TaxonomyAdditiveQueryConfiguration({
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages,
-    @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     List<TaxonomyAdditiveField> fields = const [],
     List<Parameter> additionalParameters = const [],
@@ -346,7 +345,6 @@ class TaxonomyAdditiveQueryConfiguration extends TaxonomyQueryConfiguration<
           TagType.ADDITIVES,
           tags,
           languages: languages,
-          cc: cc,
           country: country,
           includeChildren: false,
           fields: fields,

@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/model/OffTagged.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
@@ -8,31 +9,24 @@ import 'package:openfoodfacts/utils/TagType.dart';
 part 'TaxonomyCountry.g.dart';
 
 /// Fields of an [TaxonomyCountry]
-enum TaxonomyCountryField {
-  ALL,
-  COUNTRY_CODE_2,
-  COUNTRY_CODE_3,
-  LANGUAGES,
-  NAME,
-  OFFICIAL_COUNTRY_CODE_2,
-  SYNONYMS,
-  WIKIDATA,
-}
+enum TaxonomyCountryField implements OffTagged {
+  ALL(offTag: 'all'),
+  COUNTRY_CODE_2(offTag: 'country_code_2'),
+  COUNTRY_CODE_3(offTag: 'country_code_3'),
+  LANGUAGES(offTag: 'languages'),
+  NAME(offTag: 'name'),
+  OFFICIAL_COUNTRY_CODE_2(offTag: 'official_country_code_2'),
+  SYNONYMS(offTag: 'synonyms'),
+  WIKIDATA(offTag: 'wikidata');
 
-extension TaxonomyCountryFieldExtension on TaxonomyCountryField {
-  static const Map<TaxonomyCountryField, String> _KEYS = {
-    TaxonomyCountryField.ALL: 'all',
-    TaxonomyCountryField.COUNTRY_CODE_2: 'country_code_2',
-    TaxonomyCountryField.COUNTRY_CODE_3: 'country_code_3',
-    TaxonomyCountryField.LANGUAGES: 'languages',
-    TaxonomyCountryField.NAME: 'name',
-    TaxonomyCountryField.OFFICIAL_COUNTRY_CODE_2: 'official_country_code_2',
-    TaxonomyCountryField.SYNONYMS: 'synonyms',
-    TaxonomyCountryField.WIKIDATA: 'wikidata',
-  };
+  const TaxonomyCountryField({required this.offTag});
 
-  /// Returns the key of the Country field
-  String get key => _KEYS[this] ?? '';
+  @override
+  final String offTag;
+
+  // TODO: deprecated from 2022-11-06; remove when old enough
+  @Deprecated('Use offTag instead')
+  String get key => offTag;
 }
 
 /// A JSON-serializable version of a Country taxonomy result.
@@ -102,7 +96,6 @@ class TaxonomyCountryQueryConfiguration
   TaxonomyCountryQueryConfiguration({
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages,
-    @Deprecated('Use parameter country instead') String? cc,
     OpenFoodFactsCountry? country,
     List<TaxonomyCountryField> fields = const [],
     List<Parameter> additionalParameters = const [],
@@ -110,7 +103,6 @@ class TaxonomyCountryQueryConfiguration
           TagType.COUNTRIES,
           tags,
           languages: languages,
-          cc: cc,
           country: country,
           includeChildren: false,
           fields: fields,
@@ -155,6 +147,6 @@ class TaxonomyCountryQueryConfiguration
       Iterable<TaxonomyCountryField> fields) {
     return fields
         .where((TaxonomyCountryField field) => !ignoredFields.contains(field))
-        .map<String>((TaxonomyCountryField field) => field.key);
+        .map<String>((TaxonomyCountryField field) => field.offTag);
   }
 }

@@ -32,13 +32,11 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     this.version = ProductQueryVersion.v0,
     final OpenFoodFactsLanguage? language,
     final List<OpenFoodFactsLanguage> languages = const [],
-    @Deprecated('Use parameter country instead') final String? cc,
     final OpenFoodFactsCountry? country,
     final List<ProductField>? fields,
   }) : super(
           language: language,
           languages: languages,
-          cc: cc,
           country: country,
           fields: fields,
         );

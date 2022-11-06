@@ -32,10 +32,6 @@ abstract class AbstractQueryConfiguration {
   /// for detailed explanation on how to work with multiple languages.
   List<OpenFoodFactsLanguage>? languages;
 
-  // TODO: deprecated from 2021-11-15 (#233); remove when old enough
-  @Deprecated('Use parameter country instead')
-  String? cc;
-
   /// The country for this query, if any.
   final OpenFoodFactsCountry? country;
 
@@ -46,7 +42,6 @@ abstract class AbstractQueryConfiguration {
   AbstractQueryConfiguration({
     this.language,
     this.languages,
-    this.cc,
     this.country,
     this.fields,
     this.additionalParameters = const [],
@@ -115,8 +110,7 @@ abstract class AbstractQueryConfiguration {
   }
 
   String? computeCountryCode() =>
-      // ignore: deprecated_member_use_from_same_package
-      OpenFoodAPIConfiguration.computeCountryCode(country, cc);
+      OpenFoodAPIConfiguration.computeCountryCode(country, null);
 
   @protected
   String getUriPath();
