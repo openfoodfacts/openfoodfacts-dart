@@ -28,6 +28,7 @@ void main() {
   const Set<String> expectedParents = <String>{
     'en:united-kingdom',
   };
+  const String knownRootTag = 'en:france';
   const String unknownTag = 'en:some_nonexistent_thing';
 
   group('OpenFoodAPIClient getTaxonomyOrigins SERVER', () {
@@ -80,7 +81,7 @@ void main() {
       expect(values, isNotNull);
       expect(values!.length, greaterThan(250)); // was 288 on 2022-11-06
       expect(values[unknownTag], isNull);
-      expect(values['en:france'], isNotNull);
+      expect(values[knownRootTag], isNotNull);
     });
   });
 }

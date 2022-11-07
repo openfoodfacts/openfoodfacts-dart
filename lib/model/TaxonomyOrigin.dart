@@ -46,7 +46,7 @@ class TaxonomyOrigin extends JsonObject {
   @JsonKey(fromJson: LanguageHelper.fromJsonStringMapList, includeIfNull: false)
   Map<OpenFoodFactsLanguage, List<String>>? synonyms;
 
-  /// Parents of the origin (like, France is the parent of Aquitaine).
+  /// Children of the origin (like, Aquitaine is a child of France).
   ///
   /// In real life the field is rarely populated.
   /// Stats on 2022-11-06: 16/369 origins have children.
