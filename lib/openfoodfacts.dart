@@ -21,6 +21,7 @@ import 'package:openfoodfacts/model/TaxonomyCountry.dart';
 import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
 import 'package:openfoodfacts/model/TaxonomyLabel.dart';
 import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
+import 'package:openfoodfacts/model/TaxonomyOrigin.dart';
 import 'package:openfoodfacts/model/TaxonomyPackaging.dart';
 import 'package:openfoodfacts/model/parameter/BarcodeParameter.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
@@ -401,66 +402,78 @@ class OpenFoodAPIClient {
     TaxonomyCategoryQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
-  }) {
-    return getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(configuration,
-        user: user, queryType: queryType);
-  }
+  }) =>
+      getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyAdditive>?> getTaxonomyAdditives(
     TaxonomyAdditiveQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
-  }) {
-    return getTaxonomy<TaxonomyAdditive, TaxonomyAdditiveField>(configuration,
-        user: user, queryType: queryType);
-  }
+  }) =>
+      getTaxonomy<TaxonomyAdditive, TaxonomyAdditiveField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyAllergen>?> getTaxonomyAllergens(
     TaxonomyAllergenQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
-  }) {
-    return getTaxonomy<TaxonomyAllergen, TaxonomyAllergenField>(configuration,
-        user: user, queryType: queryType);
-  }
+  }) =>
+      getTaxonomy<TaxonomyAllergen, TaxonomyAllergenField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyCountry>?> getTaxonomyCountries(
     TaxonomyCountryQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
-  }) {
-    return getTaxonomy<TaxonomyCountry, TaxonomyCountryField>(configuration,
-        user: user, queryType: queryType);
-  }
+  }) =>
+      getTaxonomy<TaxonomyCountry, TaxonomyCountryField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyIngredient>?> getTaxonomyIngredients(
     TaxonomyIngredientQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
-  }) {
-    return getTaxonomy<TaxonomyIngredient, TaxonomyIngredientField>(
+  }) =>
+      getTaxonomy<TaxonomyIngredient, TaxonomyIngredientField>(
         configuration,
         user: user,
-        queryType: queryType);
-  }
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyLabel>?> getTaxonomyLabels(
     TaxonomyLabelQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
-  }) {
-    return getTaxonomy<TaxonomyLabel, TaxonomyLabelField>(configuration,
-        user: user, queryType: queryType);
-  }
+  }) =>
+      getTaxonomy<TaxonomyLabel, TaxonomyLabelField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyLanguage>?> getTaxonomyLanguages(
     TaxonomyLanguageQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
-  }) {
-    return getTaxonomy<TaxonomyLanguage, TaxonomyLanguageField>(configuration,
-        user: user, queryType: queryType);
-  }
+  }) =>
+      getTaxonomy<TaxonomyLanguage, TaxonomyLanguageField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyPackaging>?> getTaxonomyPackagings(
     final TaxonomyPackagingQueryConfiguration configuration, {
@@ -468,6 +481,17 @@ class OpenFoodAPIClient {
     final QueryType? queryType,
   }) =>
       getTaxonomy<TaxonomyPackaging, TaxonomyPackagingField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
+
+  static Future<Map<String, TaxonomyOrigin>?> getTaxonomyOrigins(
+    TaxonomyOriginQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) =>
+      getTaxonomy<TaxonomyOrigin, TaxonomyOriginField>(
         configuration,
         user: user,
         queryType: queryType,
