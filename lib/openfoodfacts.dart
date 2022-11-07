@@ -23,6 +23,8 @@ import 'package:openfoodfacts/model/TaxonomyLabel.dart';
 import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
 import 'package:openfoodfacts/model/TaxonomyOrigin.dart';
 import 'package:openfoodfacts/model/TaxonomyPackaging.dart';
+import 'package:openfoodfacts/model/TaxonomyPackagingMaterial.dart';
+import 'package:openfoodfacts/model/TaxonomyPackagingShape.dart';
 import 'package:openfoodfacts/model/parameter/BarcodeParameter.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
@@ -397,6 +399,30 @@ class OpenFoodAPIClient {
     }
     return configuration.convertResults(decodedJson);
   }
+
+  static Future<Map<String, TaxonomyPackagingShape>?>
+      getTaxonomyPackagingShapes(
+    TaxonomyPackagingShapeQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) =>
+          getTaxonomy<TaxonomyPackagingShape, TaxonomyPackagingShapeField>(
+            configuration,
+            user: user,
+            queryType: queryType,
+          );
+
+  static Future<
+      Map<String, TaxonomyPackagingMaterial>?> getTaxonomyPackagingMaterials(
+    TaxonomyPackagingMaterialQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) =>
+      getTaxonomy<TaxonomyPackagingMaterial, TaxonomyPackagingMaterialField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyCategory>?> getTaxonomyCategories(
     TaxonomyCategoryQueryConfiguration configuration, {
