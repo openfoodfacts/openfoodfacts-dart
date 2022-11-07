@@ -12,6 +12,8 @@ enum TagType implements OffTagged {
   ALLERGENS(offTag: 'allergens'),
   PACKAGING(offTag: 'packaging'),
   ORIGINS(offTag: 'origins'),
+  PACKAGING_SHAPES(offTag: 'packaging_shapes'),
+  PACKAGING_MATERIALS(offTag: 'packaging_materials'),
   EMB_CODES(offTag: 'emb_codes');
 
   const TagType({
