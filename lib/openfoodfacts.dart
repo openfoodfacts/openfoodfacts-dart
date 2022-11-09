@@ -24,6 +24,7 @@ import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
 import 'package:openfoodfacts/model/TaxonomyOrigin.dart';
 import 'package:openfoodfacts/model/TaxonomyPackaging.dart';
 import 'package:openfoodfacts/model/TaxonomyPackagingMaterial.dart';
+import 'package:openfoodfacts/model/TaxonomyPackagingRecycling.dart';
 import 'package:openfoodfacts/model/TaxonomyPackagingShape.dart';
 import 'package:openfoodfacts/model/parameter/BarcodeParameter.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
@@ -419,6 +420,18 @@ class OpenFoodAPIClient {
     QueryType? queryType,
   }) =>
       getTaxonomy<TaxonomyPackagingMaterial, TaxonomyPackagingMaterialField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
+
+  static Future<
+      Map<String, TaxonomyPackagingRecycling>?> getTaxonomyPackagingRecycling(
+    TaxonomyPackagingRecyclingQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) =>
+      getTaxonomy<TaxonomyPackagingRecycling, TaxonomyPackagingRecyclingField>(
         configuration,
         user: user,
         queryType: queryType,
