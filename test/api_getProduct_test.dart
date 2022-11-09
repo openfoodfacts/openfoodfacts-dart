@@ -25,10 +25,23 @@ void main() {
 
   group('$OpenFoodAPIClient get products', () {
     test('get product Coca Cola Light', () async {
-      String barcode = '1111111111111';
+      const String barcode = '1111111111111';
+      const List<String> ingredientsText = <String>[
+        'Wasser',
+        'Kohlensäure',
+        'e150d',
+        'Citronensäure',
+        'Phosphorsäure',
+        'Süßungsmittel',
+        'Natriumcyclamat',
+        'Acesulfam K',
+        'Aroma',
+        'Aroma Koffein',
+        'Aspartam',
+      ];
 
       //First add the product to the Test DB
-      Product product = Product(
+      final Product inputProduct = Product(
         barcode: barcode,
         productName: 'Coca Cola Light',
         genericName: 'Softdrink',
@@ -38,17 +51,16 @@ void main() {
         nutrimentDataPer: PerSize.serving.offTag,
         nutrimentEnergyUnit: 'kcal',
         servingSize: '100g',
-        ingredientsText:
-            'Wasser, Kohlensäure, e150d, Citronensäure,  Phosphorsäure, Süßungsmittel, Natriumcyclamat, Acesulfam K, Aroma, Aroma Koffein, Aspartam',
+        ingredientsText: ingredientsText.join(', '),
         additives: Additives(['en:e150d, en:e950'], ['E150d, E950']),
       );
 
       await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
-        product,
+        inputProduct,
       );
 
-      SendImage fontImage = SendImage(
+      final SendImage fontImage = SendImage(
         lang: OpenFoodFactsLanguage.GERMAN,
         barcode: barcode,
         imageField: ImageField.FRONT,
@@ -59,61 +71,45 @@ void main() {
         fontImage,
       );
 
-      ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.GERMAN,
-          fields: [ProductField.ALL]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.ALL],
+      );
+      final ProductResult result = await OpenFoodAPIClient.getProduct(
         configurations,
         user: TestConstants.TEST_USER,
       );
 
       expect(result.status, 1);
       expect(result.barcode, barcode);
-      expect(result.product != null, true);
-      expect(result.product!.barcode, barcode);
-      expect(result.product!.lastModified != null, true);
+      expect(result.product, isNotNull);
+      final Product product = result.product!;
+      expect(product.barcode, barcode);
+      expect(product.lastModified, isNotNull);
 
-      expect(result.product!.genericName, 'Softdrink');
+      expect(product.genericName, 'Softdrink');
 
       // only german ingredients
-      expect(result.product!.ingredientsText != null, true);
+      expect(product.ingredientsText, isNotNull);
 
-      expect(result.product!.ingredients != null, true);
-      expect(result.product!.ingredients!.length, 11);
+      expect(product.ingredients, isNotNull);
+      expect(product.ingredients!.length, ingredientsText.length);
+      for (final String ingredient in ingredientsText) {
+        expect(product.ingredients!.any((i) => i.text == ingredient), true);
+      }
 
-      expect(result.product!.ingredients!.any((i) => i.text == 'Wasser'), true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Kohlensäure'),
-          true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'e150d'), true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Citronensäure'),
-          true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Phosphorsäure'),
-          true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Süßungsmittel'),
-          true);
+      expect(product.selectedImages!, isNotEmpty);
 
-      expect(
-          result.product!.ingredients!.any((i) => i.text == 'Natriumcyclamat'),
-          true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Acesulfam K'),
-          true);
-      expect(
-          result.product!.ingredients!.any((i) => i.text == 'Aspartam'), true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Aroma'), true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Aroma Koffein'),
-          true);
+      expect(product.additives!.ids[0], 'en:e150d');
+      expect(product.additives!.names[0], 'E150d');
+      expect(product.additives!.ids[4], 'en:e950');
+      expect(product.additives!.names[4], 'E950');
 
-      expect(result.product!.selectedImages!, isNotEmpty);
-
-      expect(result.product!.additives!.ids[0], 'en:e150d');
-      expect(result.product!.additives!.names[0], 'E150d');
-      expect(result.product!.additives!.ids[4], 'en:e950');
-      expect(result.product!.additives!.names[4], 'E950');
-
-      expect(result.product!.images != null, true);
-      expect(result.product!.images!.length, 4);
-      expect(result.product!.countries, 'Frankreich,Deutschland');
+      expect(product.images, isNotNull);
+      expect(product.images!.length, 4);
+      expect(product.countries, 'Frankreich,Deutschland');
     });
 
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',
