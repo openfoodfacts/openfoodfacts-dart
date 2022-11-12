@@ -269,6 +269,15 @@ void main() {
       );
       listContains(result, 'carton');
     });
+    test('Suggestions for packaging_recycling', () async {
+      final List<dynamic> result =
+          await OpenFoodAPIClient.getAutocompletedSuggestions(
+        TagType.PACKAGING_RECYCLING,
+        language: OpenFoodFactsLanguage.FRENCH,
+        input: 'conten',
+      );
+      listContains(result, 'conteneur');
+    });
     test('Suggestions for emb_code', () async {
       List<dynamic> result =
           await OpenFoodAPIClient.getAutocompletedSuggestions(
