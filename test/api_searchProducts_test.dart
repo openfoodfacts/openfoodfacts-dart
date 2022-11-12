@@ -852,9 +852,9 @@ void main() {
         for (final MapEntry<AllergensTag, bool> item
             in allergensParameter.map.entries) {
           if (item.value) {
-            expect(product.allergens!.ids, contains(item.key.tag));
+            expect(product.allergens!.ids, contains(item.key.offTag));
           } else {
-            expect(product.allergens!.ids, isNot(contains(item.key.tag)));
+            expect(product.allergens!.ids, isNot(contains(item.key.offTag)));
           }
         }
       }

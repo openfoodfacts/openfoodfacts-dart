@@ -10,13 +10,13 @@ class IngredientsAnalysisParameter extends Parameter {
   String getValue() {
     final List<String> result = <String>[];
     if (veganStatus != null) {
-      result.add(veganStatus!.tag);
+      result.add(veganStatus!.offTag);
     }
     if (vegetarianStatus != null) {
-      result.add(vegetarianStatus!.tag);
+      result.add(vegetarianStatus!.offTag);
     }
     if (palmOilFreeStatus != null) {
-      result.add(palmOilFreeStatus!.tag);
+      result.add(palmOilFreeStatus!.offTag);
     }
     if (result.isEmpty) {
       return '';

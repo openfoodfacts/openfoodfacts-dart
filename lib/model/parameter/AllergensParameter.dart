@@ -10,7 +10,7 @@ class AllergensParameter extends BoolMapParameter<AllergensTag> {
 
   @override
   String getTag(final AllergensTag key, final bool value) =>
-      value ? key.tag : '-${key.tag}';
+      value ? key.offTag : '-${key.offTag}';
 
   const AllergensParameter({required final Map<AllergensTag, bool> map})
       : super(map: map);
