@@ -22,6 +22,7 @@ void main() {
   const String expectedNameEnglish = 'Return to store';
   const Set<String> expectedChildren = <String>{
     'en:return-pet-bottle-to-store',
+    'en:deposit-refunds',
   };
   const Set<String> expectedParents = <String>{
     'en:recycle',
@@ -33,7 +34,7 @@ void main() {
   };
   const String unknownTag = 'en:some_nonexistent_thing';
 
-  group('FABRICE OpenFoodAPIClient getTaxonomyPackagingRecycling SERVER', () {
+  group('OpenFoodAPIClient getTaxonomyPackagingRecycling SERVER', () {
     void checkKnown(final TaxonomyPackagingRecycling value) {
       expect(value.name![OpenFoodFactsLanguage.ENGLISH]!, expectedNameEnglish);
       expect(value.name![OpenFoodFactsLanguage.FRENCH]!, expectedNameFrench);
