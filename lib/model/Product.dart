@@ -26,7 +26,7 @@ enum ProductImprovement {
   /// Please take them into a photo (ingredient list and/or any geographic claim
   /// or edit the product so that they can be taken into account. If it is not
   /// clear, you can contact the food producer.”
-  ORIGINS_TO_BE_COMPLETED,
+  ORIGINS_TO_BE_COMPLETED(category: ProductImprovementCategory.ECO_SCORE),
 
   /// We could not compute an Nutri-Score for this product. It might be that the
   /// category is an exception. If you believe this is an error,
@@ -36,30 +36,42 @@ enum ProductImprovement {
   /// You can get states with
   /// https://world.openfoodfacts.org/api/v0/product/3414280980209.json?fields=ecoscore_grade,states_tags
   /// Add a message if we have a category but no nutrition
-  CATEGORIES_BUT_NO_NUTRISCORE,
+  CATEGORIES_BUT_NO_NUTRISCORE(
+      category: ProductImprovementCategory.NUTRI_SCORE),
 
   /// Possible message: “Add nutrition facts to compute the Nutri-Score”
   /// Add a one-click option to indicate no nutrition facts on the packaging
   /// This product doesn't have nutrition facts
   /// Add a message if we have nutrition but no category
-  ADD_NUTRITION_FACTS,
+  ADD_NUTRITION_FACTS(category: ProductImprovementCategory.NUTRI_SCORE),
 
   /// Possible message: “Add a category to compute the Nutri-Score”
   /// Help the user add the category if it is missing
   /// You can use our Robotoff API to get your users to validate a prediction
   /// Robotoff Questions
   /// Add a message if we have no category and no nutrition
-  ADD_CATEGORY,
+  ADD_CATEGORY(category: ProductImprovementCategory.NUTRI_SCORE),
 
   /// Prompt: “Add nutrition facts and a category to compute the Nutri-Score”
   /// Add a one-click option to indicate no nutrition facts on the packaging
   /// This product doesn't have nutrition facts
   /// Add a message if the nutrition image is missing
-  ADD_NUTRITION_FACTS_AND_CATEGORY,
+  ADD_NUTRITION_FACTS_AND_CATEGORY(
+      category: ProductImprovementCategory.NUTRI_SCORE),
 
   /// Add a message if the nutrition image is obsolete using the image refresh API
   /// https://github.com/openfoodfacts/api-documentation/issues/15
-  OBSOLETE_NUTRITION_IMAGE,
+  OBSOLETE_NUTRITION_IMAGE(category: ProductImprovementCategory.NUTRI_SCORE);
+
+  const ProductImprovement({
+    required this.category,
+  });
+
+  final ProductImprovementCategory category;
+
+  // TODO: deprecated from 2022-11-12; remove when old enough
+  @Deprecated('Use caegory instead')
+  ProductImprovementCategory getCategory() => category;
 }
 
 /// Category: what would this [ProductImprovement] help compute?
@@ -69,21 +81,6 @@ enum ProductImprovementCategory {
 
   /// Nutri-Score category
   NUTRI_SCORE,
-}
-
-extension ProductImprovementExtension on ProductImprovement {
-  ProductImprovementCategory getCategory() {
-    switch (this) {
-      case ProductImprovement.ORIGINS_TO_BE_COMPLETED:
-        return ProductImprovementCategory.ECO_SCORE;
-      case ProductImprovement.CATEGORIES_BUT_NO_NUTRISCORE:
-      case ProductImprovement.ADD_NUTRITION_FACTS:
-      case ProductImprovement.ADD_CATEGORY:
-      case ProductImprovement.ADD_NUTRITION_FACTS_AND_CATEGORY:
-      case ProductImprovement.OBSOLETE_NUTRITION_IMAGE:
-        return ProductImprovementCategory.NUTRI_SCORE;
-    }
-  }
 }
 
 /// This class contains most of the data about a specific product.

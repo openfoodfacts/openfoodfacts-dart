@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/model/OffTagged.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
@@ -8,80 +9,53 @@ import 'package:openfoodfacts/utils/TagType.dart';
 part 'TaxonomyAdditive.g.dart';
 
 /// Fields of an [TaxonomyAdditive]
-enum TaxonomyAdditiveField {
-  ALL,
-  ADDITIVES_CLASSES,
-  CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT,
-  CARBON_FOOTPRINT_FR_FOODGES_VALUE,
-  COLOUR_INDEX,
-  COMMENT,
-  DEFAULT_ADDITIVE_CLASS,
-  DESCRIPTION,
-  E_NUMBER,
-  EFSA,
-  EFSA_EVALUATION,
-  EFSA_EVALUATION_ADI,
-  EFSA_EVALUATION_ADI_ESTABLISHED,
-  EFSA_EVALUATION_DATE,
-  EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_ADI,
-  EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_NOAEL,
-  EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_ADI,
-  EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_NOAEL,
-  EFSA_EVALUATION_OVEREXPOSURE_RISK,
-  EFSA_EVALUATION_SAFETY_ASSESSED,
-  EFSA_EVALUATION_URL,
-  FROM_PALM_OIL,
-  MANDATORY_ADDITIVE_CLASS,
-  NAME,
-  ORGANIC_EU,
-  VEGAN,
-  VEGETARIAN,
-  WIKIDATA,
-}
+enum TaxonomyAdditiveField implements OffTagged {
+  ALL(offTag: 'all'),
+  ADDITIVES_CLASSES(offTag: 'additives_classes'),
+  CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT(
+      offTag: 'carbon_footprint_fr_foodges_ingredient'),
+  CARBON_FOOTPRINT_FR_FOODGES_VALUE(
+      offTag: 'carbon_footprint_fr_foodges_value'),
+  COLOUR_INDEX(offTag: 'colour_index'),
+  COMMENT(offTag: 'comment'),
+  DEFAULT_ADDITIVE_CLASS(offTag: 'default_additive_class'),
+  DESCRIPTION(offTag: 'description'),
+  E_NUMBER(offTag: 'e_number'),
+  EFSA(offTag: 'efsa'),
+  EFSA_EVALUATION(offTag: 'efsa_evaluation'),
+  EFSA_EVALUATION_ADI(offTag: 'efsa_evaluation_adi'),
+  EFSA_EVALUATION_ADI_ESTABLISHED(offTag: 'efsa_evaluation_adi_established'),
+  EFSA_EVALUATION_DATE(offTag: 'efsa_evaluation_date'),
+  EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_ADI(
+      offTag: 'efsa_evaluation_exposure_95th_greater_than_adi'),
+  EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_NOAEL(
+      offTag: 'efsa_evaluation_exposure_95th_greater_than_noael'),
+  EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_ADI(
+      offTag: 'efsa_evaluation_exposure_mean_greater_than_adi'),
+  EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_NOAEL(
+      offTag: 'efsa_evaluation_exposure_mean_greater_than_noael'),
+  EFSA_EVALUATION_OVEREXPOSURE_RISK(
+      offTag: 'efsa_evaluation_overexposure_risk'),
+  EFSA_EVALUATION_SAFETY_ASSESSED(offTag: 'efsa_evaluation_safety_assessed'),
+  EFSA_EVALUATION_URL(offTag: 'efsa_evaluation_url'),
+  FROM_PALM_OIL(offTag: 'from_palm_oil'),
+  MANDATORY_ADDITIVE_CLASS(offTag: 'mandatory_additive_class'),
+  NAME(offTag: 'name'),
+  ORGANIC_EU(offTag: 'organic_eu'),
+  VEGAN(offTag: 'vegan'),
+  VEGETARIAN(offTag: 'vegetarian'),
+  WIKIDATA(offTag: 'wikidata');
 
-extension TaxonomyAdditiveFieldExtension on TaxonomyAdditiveField {
-  static const Map<TaxonomyAdditiveField, String> _KEYS = {
-    TaxonomyAdditiveField.ALL: 'all',
-    TaxonomyAdditiveField.ADDITIVES_CLASSES: 'additives_classes',
-    TaxonomyAdditiveField.CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT:
-        'carbon_footprint_fr_foodges_ingredient',
-    TaxonomyAdditiveField.CARBON_FOOTPRINT_FR_FOODGES_VALUE:
-        'carbon_footprint_fr_foodges_value',
-    TaxonomyAdditiveField.COLOUR_INDEX: 'colour_index',
-    TaxonomyAdditiveField.COMMENT: 'comment',
-    TaxonomyAdditiveField.DEFAULT_ADDITIVE_CLASS: 'default_additive_class',
-    TaxonomyAdditiveField.DESCRIPTION: 'description',
-    TaxonomyAdditiveField.E_NUMBER: 'e_number',
-    TaxonomyAdditiveField.EFSA: 'efsa',
-    TaxonomyAdditiveField.EFSA_EVALUATION: 'efsa_evaluation',
-    TaxonomyAdditiveField.EFSA_EVALUATION_ADI: 'efsa_evaluation_adi',
-    TaxonomyAdditiveField.EFSA_EVALUATION_ADI_ESTABLISHED:
-        'efsa_evaluation_adi_established',
-    TaxonomyAdditiveField.EFSA_EVALUATION_DATE: 'efsa_evaluation_date',
-    TaxonomyAdditiveField.EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_ADI:
-        'efsa_evaluation_exposure_95th_greater_than_adi',
-    TaxonomyAdditiveField.EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_NOAEL:
-        'efsa_evaluation_exposure_95th_greater_than_noael',
-    TaxonomyAdditiveField.EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_ADI:
-        'efsa_evaluation_exposure_mean_greater_than_adi',
-    TaxonomyAdditiveField.EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_NOAEL:
-        'efsa_evaluation_exposure_mean_greater_than_noael',
-    TaxonomyAdditiveField.EFSA_EVALUATION_OVEREXPOSURE_RISK:
-        'efsa_evaluation_overexposure_risk',
-    TaxonomyAdditiveField.EFSA_EVALUATION_SAFETY_ASSESSED:
-        'efsa_evaluation_safety_assessed',
-    TaxonomyAdditiveField.EFSA_EVALUATION_URL: 'efsa_evaluation_url',
-    TaxonomyAdditiveField.FROM_PALM_OIL: 'from_palm_oil',
-    TaxonomyAdditiveField.MANDATORY_ADDITIVE_CLASS: 'mandatory_additive_class',
-    TaxonomyAdditiveField.NAME: 'name',
-    TaxonomyAdditiveField.ORGANIC_EU: 'organic_eu',
-    TaxonomyAdditiveField.VEGAN: 'vegan',
-    TaxonomyAdditiveField.VEGETARIAN: 'vegetarian',
-    TaxonomyAdditiveField.WIKIDATA: 'wikidata',
-  };
+  const TaxonomyAdditiveField({
+    required this.offTag,
+  });
 
-  /// Returns the key of the Additive field
-  String get key => _KEYS[this] ?? '';
+  @override
+  final String offTag;
+
+  // TODO: deprecated from 2022-11-12; remove when old enough
+  @Deprecated('Use offTag instead')
+  String get key => offTag;
 }
 
 /// A JSON-serializable version of a Additive taxonomy result.
@@ -391,6 +365,6 @@ class TaxonomyAdditiveQueryConfiguration extends TaxonomyQueryConfiguration<
       Iterable<TaxonomyAdditiveField> fields) {
     return fields
         .where((TaxonomyAdditiveField field) => !ignoredFields.contains(field))
-        .map<String>((TaxonomyAdditiveField field) => field.key);
+        .map<String>((TaxonomyAdditiveField field) => field.offTag);
   }
 }

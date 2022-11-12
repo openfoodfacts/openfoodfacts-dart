@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/model/OffTagged.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
@@ -8,24 +9,22 @@ import 'package:openfoodfacts/utils/TagType.dart';
 part 'TaxonomyAllergen.g.dart';
 
 /// Fields of an [TaxonomyAllergen]
-enum TaxonomyAllergenField {
-  ALL,
-  NAME,
-  SYNONYMS,
-  WIKIDATA,
-}
+enum TaxonomyAllergenField implements OffTagged {
+  ALL(offTag: 'all'),
+  NAME(offTag: 'name'),
+  SYNONYMS(offTag: 'synonyms'),
+  WIKIDATA(offTag: 'wikidata');
 
-extension TaxonomyAllergenFieldExtension on TaxonomyAllergenField {
-  static const Map<TaxonomyAllergenField, String> _KEYS =
-      <TaxonomyAllergenField, String>{
-    TaxonomyAllergenField.ALL: 'all',
-    TaxonomyAllergenField.NAME: 'name',
-    TaxonomyAllergenField.SYNONYMS: 'synonyms',
-    TaxonomyAllergenField.WIKIDATA: 'wikidata',
-  };
+  const TaxonomyAllergenField({
+    required this.offTag,
+  });
 
-  /// Returns the key of the Allergen field
-  String get key => _KEYS[this] ?? '';
+  @override
+  final String offTag;
+
+  // TODO: deprecated from 2022-11-12; remove when old enough
+  @Deprecated('Use offTag instead')
+  String get key => offTag;
 }
 
 /// A JSON-serializable version of a Allergen taxonomy result.
@@ -132,6 +131,6 @@ class TaxonomyAllergenQueryConfiguration extends TaxonomyQueryConfiguration<
       Iterable<TaxonomyAllergenField> fields) {
     return fields
         .where((TaxonomyAllergenField field) => !ignoredFields.contains(field))
-        .map<String>((TaxonomyAllergenField field) => field.key);
+        .map<String>((TaxonomyAllergenField field) => field.offTag);
   }
 }

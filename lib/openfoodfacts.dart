@@ -778,7 +778,7 @@ class OpenFoodAPIClient {
       'code': barcode,
       'process_image': '1',
       'id': 'ingredients_${language.code}',
-      'ocr_engine': ocrField.key
+      'ocr_engine': ocrField.offTag
     };
     final Response response = await HttpHelper().doPostRequest(
       uri,
@@ -808,7 +808,7 @@ class OpenFoodAPIClient {
       'code': barcode,
       'process_image': '1',
       'id': 'packaging_${language.code}',
-      'ocr_engine': ocrField.key
+      'ocr_engine': ocrField.offTag
     };
     final Response response = await HttpHelper().doPostRequest(
       uri,
