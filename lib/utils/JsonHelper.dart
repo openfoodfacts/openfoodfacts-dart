@@ -15,21 +15,33 @@ class JsonHelper {
       for (var size in ImageSize.values) {
         for (OpenFoodFactsLanguage lang in OpenFoodFactsLanguage.values) {
           // use the field to get the size
-          if (json[field.value] == null) continue;
-          var sizeJson = json[field.value] as Map<String, dynamic>?;
+          if (json[field.offTag] == null) {
+            continue;
+          }
+          var sizeJson = json[field.offTag] as Map<String, dynamic>?;
 
           // use the size to get the language
-          if (sizeJson == null) continue;
-          var langJson = sizeJson[size.value] as Map<String, dynamic>?;
+          if (sizeJson == null) {
+            continue;
+          }
+          var langJson = sizeJson[size.offTag] as Map<String, dynamic>?;
 
           // use the language to get the url
-          if (langJson == null) continue;
-          var url = langJson[lang.code] as String?;
+          if (langJson == null) {
+            continue;
+          }
+          var url = langJson[lang.offTag] as String?;
 
           // use the url to build the image
-          if (url == null) continue;
-          var image =
-              ProductImage(field: field, size: size, language: lang, url: url);
+          if (url == null) {
+            continue;
+          }
+          var image = ProductImage(
+            field: field,
+            size: size,
+            language: lang,
+            url: url,
+          );
 
           imageList.add(image);
         }
@@ -55,9 +67,9 @@ class JsonHelper {
             sizeMap[image.language.code] = image.url;
           }
         }
-        fieldMap[size.value] = sizeMap;
+        fieldMap[size.offTag] = sizeMap;
       }
-      result[field.value] = fieldMap;
+      result[field.offTag] = fieldMap;
     }
 
     return result;
@@ -72,7 +84,7 @@ class JsonHelper {
     for (var field in ImageField.values) {
       for (OpenFoodFactsLanguage lang in OpenFoodFactsLanguage.values) {
         // get the field object e.g. front_en
-        final String fieldName = '${field.value}_${lang.code}';
+        final String fieldName = '${field.offTag}_${lang.offTag}';
         if (json[fieldName] == null) continue;
 
         final fieldObject = json[fieldName] as Map<String, dynamic>?;
@@ -96,7 +108,7 @@ class JsonHelper {
 
         // get each number object (e.g. 200)
         for (var size in ImageSize.values) {
-          var number = size.toNumber();
+          var number = size.number;
           var numberObject = sizesObject[number] as Map<String, dynamic>?;
           if (numberObject == null) continue;
 

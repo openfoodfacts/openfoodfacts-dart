@@ -74,7 +74,7 @@ abstract class AbstractQueryConfiguration {
 
     if (queryLanguages.isNotEmpty) {
       result.putIfAbsent(
-          'lc', () => queryLanguages.map((e) => e.code).join(','));
+          'lc', () => queryLanguages.map((e) => e.offTag).join(','));
     }
 
     final String? countryCode = computeCountryCode();

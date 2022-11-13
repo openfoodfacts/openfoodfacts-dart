@@ -1,19 +1,27 @@
-enum Level { LOW, MODERATE, HIGH, UNDEFINED }
+import 'package:openfoodfacts/model/OffTagged.dart';
+
+enum Level implements OffTagged {
+  LOW(offTag: 'low'),
+  MODERATE(offTag: 'moderate'),
+  HIGH(offTag: 'high'),
+  UNDEFINED(offTag: 'undefined');
+
+  const Level({
+    required this.offTag,
+  });
+
+  @override
+  final String offTag;
+
+  /// Returns the first [Level] that matches the [offTag].
+  static Level? fromOffTag(final String? offTag) =>
+      OffTagged.fromOffTag(offTag, Level.values) as Level?;
+}
 
 extension LevelExtension on Level? {
-  static const Map<Level, String> _VALUES = {
-    Level.LOW: 'low',
-    Level.MODERATE: 'moderate',
-    Level.HIGH: 'high',
-    Level.UNDEFINED: 'undefined',
-  };
+  String get value => (this ?? Level.UNDEFINED).offTag;
 
-  String get value => _VALUES[this] ?? 'undefined';
-
-  static Level getLevel(String? s) => Level.values.firstWhere(
-        (final Level key) => _VALUES[key] == s,
-        orElse: () => Level.UNDEFINED,
-      );
+  static Level getLevel(String? s) => Level.fromOffTag(s) ?? Level.UNDEFINED;
 }
 
 class NutrientLevels {

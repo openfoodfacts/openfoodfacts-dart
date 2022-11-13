@@ -117,7 +117,7 @@ List<String> convertFieldsToStrings(
             'Cannot request in-lang field $field without language');
       }
       for (final language in languages) {
-        fieldsStrings.add('${field.offTag}${language.code}');
+        fieldsStrings.add('${field.offTag}${language.offTag}');
       }
     } else {
       fieldsStrings.add(field.offTag);

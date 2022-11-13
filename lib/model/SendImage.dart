@@ -22,17 +22,17 @@ class SendImage extends JsonObject {
 
   /// the json key depending on the image field of this object.
   String getImageDataKey() {
-    String imageDataKey = 'imgupload_${imageField.value}';
+    String imageDataKey = 'imgupload_${imageField.offTag}';
     if (lang != null) {
-      imageDataKey += '_${lang.code}';
+      imageDataKey += '_${lang!.offTag}';
     }
     return imageDataKey;
   }
 
   String _getImageFieldWithLang() {
-    String imageFieldWithLang = imageField.value;
+    String imageFieldWithLang = imageField.offTag;
     if (lang != null) {
-      imageFieldWithLang += '_${lang.code}';
+      imageFieldWithLang += '_${lang!.offTag}';
     }
     return imageFieldWithLang;
   }

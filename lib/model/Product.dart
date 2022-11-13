@@ -594,7 +594,7 @@ class Product extends JsonObject {
       Map value, OpenFoodFactsLanguage language) {
     final Map<ImageField, int> result = {};
     for (final ImageField imageField in ImageField.values) {
-      final int? timestamp = value['${imageField.value}_${language.code}'];
+      final int? timestamp = value['${imageField.offTag}_${language.offTag}'];
       if (timestamp != null) {
         result[imageField] = timestamp;
       }
@@ -627,7 +627,7 @@ class Product extends JsonObject {
                 'a proper language. Received: $langKey');
           }
           final keyNoLangs = key.substring(0, key.indexOf('_in_languages'));
-          final realKey = '${keyNoLangs}_${lang.code}';
+          final realKey = '${keyNoLangs}_${lang.offTag}';
           json[realKey] = entry.value;
         }
       }

@@ -51,7 +51,10 @@ class ImageHelper {
     final ProductImage image, {
     final ImageSize? imageSize,
   }) =>
-      '${image.field.value}_${image.language.code}.${image.rev}.${(imageSize ?? image.size).toNumber()}.jpg';
+      '${image.field.offTag}_${image.language.code}'
+      '.${image.rev}'
+      '.${((imageSize ?? image.size) ?? ImageSize.UNKNOWN).number}'
+      '.jpg';
 
   /// Returns the web folder of the product images (without trailing '/')
   ///

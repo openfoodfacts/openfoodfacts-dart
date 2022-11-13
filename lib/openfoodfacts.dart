@@ -113,10 +113,10 @@ class OpenFoodAPIClient {
     parameterMap.addAll(user.toData());
     parameterMap.addAll(product.toServerData());
     if (language != null) {
-      parameterMap['lc'] = language.code;
+      parameterMap['lc'] = language.offTag;
     }
     if (country != null) {
-      parameterMap['cc'] = country.iso2Code;
+      parameterMap['cc'] = country.offTag;
     }
 
     var productUri = UriHelper.getPostUri(
@@ -289,13 +289,13 @@ class OpenFoodAPIClient {
     }
     return UriHelper.replaceSubdomainWithCodes(
       uri,
-      languageCode: language.code,
+      languageCode: language.offTag,
     );
   }
 
   /// Returns the URI to the crowdin page for a [language].
   static Uri getCrowdinUri(final OpenFoodFactsLanguage language) =>
-      Uri.parse('https://crowdin.com/project/openfoodfacts/${language.code}');
+      Uri.parse('https://crowdin.com/project/openfoodfacts/${language.offTag}');
 
   /// Search the OpenFoodFacts product database with the given parameters.
   /// Returns the list of products as SearchResult.
@@ -777,7 +777,7 @@ class OpenFoodAPIClient {
     final Map<String, String> queryParameters = <String, String>{
       'code': barcode,
       'process_image': '1',
-      'id': 'ingredients_${language.code}',
+      'id': 'ingredients_${language.offTag}',
       'ocr_engine': ocrField.offTag
     };
     final Response response = await HttpHelper().doPostRequest(
@@ -807,7 +807,7 @@ class OpenFoodAPIClient {
     final Map<String, String> queryParameters = <String, String>{
       'code': barcode,
       'process_image': '1',
-      'id': 'packaging_${language.code}',
+      'id': 'packaging_${language.offTag}',
       'ocr_engine': ocrField.offTag
     };
     final Response response = await HttpHelper().doPostRequest(
@@ -839,7 +839,7 @@ class OpenFoodAPIClient {
     final Map<String, String> queryParameters = <String, String>{
       'tagtype': taxonomyType.offTag,
       'term': input,
-      'lc': language.code,
+      'lc': language.offTag,
       'limit': limit.toString(),
     };
     final Response response = await HttpHelper().doPostRequest(
@@ -1068,8 +1068,8 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
     Map<String, String> queryParameters = <String, String>{
-      'cc': country.iso2Code,
-      'lc': language.code,
+      'cc': country.offTag,
+      'lc': language.offTag,
     };
     final Response response = await HttpHelper().doPostRequest(
       uri,
@@ -1164,7 +1164,7 @@ class OpenFoodAPIClient {
     required final User user,
     final QueryType? queryType,
   }) async {
-    final String id = '${imageField.value}_${language.code}';
+    final String id = '${imageField.offTag}_${language.offTag}';
     final Map<String, String> queryParameters = <String, String>{
       'code': barcode,
       'id': id,
@@ -1219,7 +1219,7 @@ class OpenFoodAPIClient {
     required final User user,
     final QueryType? queryType,
   }) async {
-    final String id = '${imageField.value}_${language.code}';
+    final String id = '${imageField.offTag}_${language.offTag}';
     final Uri uri = UriHelper.getPostUri(
       path: 'cgi/product_image_unselect.pl',
       queryType: queryType,
