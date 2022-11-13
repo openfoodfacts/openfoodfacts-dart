@@ -99,7 +99,7 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
 
     if (languages.isNotEmpty) {
       result.putIfAbsent('lc',
-          () => languages.map<String>((language) => language.code).join(','));
+          () => languages.map<String>((language) => language.offTag).join(','));
     }
 
     result.putIfAbsent('cc',

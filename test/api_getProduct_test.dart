@@ -1768,7 +1768,7 @@ void main() {
           ).toString();
           expect(
             url,
-            'https://world-${language.code}.openfoodfacts.net/'
+            'https://world-${language.offTag}.openfoodfacts.net/'
             '${tagType.offTag}'
             '?translate=1',
           );

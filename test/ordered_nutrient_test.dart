@@ -168,7 +168,7 @@ void main() {
       for (final OpenFoodFactsCountry country in countries) {
         checkNutrients(
           await OpenFoodAPIClient.getOrderedNutrients(
-            cc: country.iso2Code,
+            cc: country.offTag,
             language: language,
           ),
           country,
