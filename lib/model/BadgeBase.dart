@@ -1,9 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
+
 import '../interface/JsonObject.dart';
 
 part 'BadgeBase.g.dart';
 
 /// Events API: badge.
+@CopyWith()
 @JsonSerializable()
 class BadgeBase extends JsonObject {
   @JsonKey(name: 'user_id')

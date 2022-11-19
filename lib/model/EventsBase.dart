@@ -1,10 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:openfoodfacts/utils/JsonHelper.dart';
+
 import '../interface/JsonObject.dart';
 
 part 'EventsBase.g.dart';
 
 /// Events API: event.
+@CopyWith()
 @JsonSerializable()
 class EventsBase extends JsonObject {
   @JsonKey(name: 'event_type')

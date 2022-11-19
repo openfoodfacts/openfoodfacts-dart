@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
+
 import '../interface/JsonObject.dart';
 import 'OrderedNutrient.dart';
 
@@ -9,6 +11,7 @@ part 'OrderedNutrients.g.dart';
 /// cf. https://github.com/openfoodfacts/openfoodfacts-dart/issues/210
 /// Example in https://fr.openfoodfacts.org/cgi/nutrients.pl
 /// Compared to [OrderedNutrient], this is the root of the structure.
+@CopyWith()
 @JsonSerializable()
 class OrderedNutrients extends JsonObject {
   /// Most important nutrients (level 0 in the hierarchy)

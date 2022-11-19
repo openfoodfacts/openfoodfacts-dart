@@ -1,10 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:openfoodfacts/utils/JsonHelper.dart';
+
 import '../interface/JsonObject.dart';
 
 part 'ProductStats.g.dart';
 
 /// Folksonomy: statistics about the tag keys on a product.
+@CopyWith()
 @JsonSerializable()
 class ProductStats extends JsonObject {
   @JsonKey(name: 'product')

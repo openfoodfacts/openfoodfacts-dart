@@ -3,18 +3,114 @@
 part of 'TaxonomyPackagingShape.dart';
 
 // **************************************************************************
+// CopyWithGenerator
+// **************************************************************************
+
+abstract class _$TaxonomyPackagingShapeCWProxy {
+  TaxonomyPackagingShape children(List<String>? children);
+
+  TaxonomyPackagingShape name(Map<OpenFoodFactsLanguage, String>? name);
+
+  TaxonomyPackagingShape parents(List<String>? parents);
+
+  TaxonomyPackagingShape synonyms(
+      Map<OpenFoodFactsLanguage, List<String>>? synonyms);
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TaxonomyPackagingShape(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// TaxonomyPackagingShape(...).copyWith(id: 12, name: "My name")
+  /// ````
+  TaxonomyPackagingShape call({
+    List<String>? children,
+    Map<OpenFoodFactsLanguage, String>? name,
+    List<String>? parents,
+    Map<OpenFoodFactsLanguage, List<String>>? synonyms,
+  });
+}
+
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfTaxonomyPackagingShape.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfTaxonomyPackagingShape.copyWith.fieldName(...)`
+class _$TaxonomyPackagingShapeCWProxyImpl
+    implements _$TaxonomyPackagingShapeCWProxy {
+  final TaxonomyPackagingShape _value;
+
+  const _$TaxonomyPackagingShapeCWProxyImpl(this._value);
+
+  @override
+  TaxonomyPackagingShape children(List<String>? children) =>
+      this(children: children);
+
+  @override
+  TaxonomyPackagingShape name(Map<OpenFoodFactsLanguage, String>? name) =>
+      this(name: name);
+
+  @override
+  TaxonomyPackagingShape parents(List<String>? parents) =>
+      this(parents: parents);
+
+  @override
+  TaxonomyPackagingShape synonyms(
+          Map<OpenFoodFactsLanguage, List<String>>? synonyms) =>
+      this(synonyms: synonyms);
+
+  @override
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TaxonomyPackagingShape(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// TaxonomyPackagingShape(...).copyWith(id: 12, name: "My name")
+  /// ````
+  TaxonomyPackagingShape call({
+    Object? children = const $CopyWithPlaceholder(),
+    Object? name = const $CopyWithPlaceholder(),
+    Object? parents = const $CopyWithPlaceholder(),
+    Object? synonyms = const $CopyWithPlaceholder(),
+  }) {
+    return TaxonomyPackagingShape(
+      children: children == const $CopyWithPlaceholder()
+          ? _value.children
+          // ignore: cast_nullable_to_non_nullable
+          : children as List<String>?,
+      name: name == const $CopyWithPlaceholder()
+          ? _value.name
+          // ignore: cast_nullable_to_non_nullable
+          : name as Map<OpenFoodFactsLanguage, String>?,
+      parents: parents == const $CopyWithPlaceholder()
+          ? _value.parents
+          // ignore: cast_nullable_to_non_nullable
+          : parents as List<String>?,
+      synonyms: synonyms == const $CopyWithPlaceholder()
+          ? _value.synonyms
+          // ignore: cast_nullable_to_non_nullable
+          : synonyms as Map<OpenFoodFactsLanguage, List<String>>?,
+    );
+  }
+}
+
+extension $TaxonomyPackagingShapeCopyWith on TaxonomyPackagingShape {
+  /// Returns a callable class that can be used as follows: `instanceOfTaxonomyPackagingShape.copyWith(...)` or like so:`instanceOfTaxonomyPackagingShape.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
+  _$TaxonomyPackagingShapeCWProxy get copyWith =>
+      _$TaxonomyPackagingShapeCWProxyImpl(this);
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
 TaxonomyPackagingShape _$TaxonomyPackagingShapeFromJson(
         Map<String, dynamic> json) =>
-    TaxonomyPackagingShape()
-      ..name = LanguageHelper.fromJsonStringMap(json['name'])
-      ..synonyms = LanguageHelper.fromJsonStringMapList(json['synonyms'])
-      ..children =
-          (json['children'] as List<dynamic>?)?.map((e) => e as String).toList()
-      ..parents =
-          (json['parents'] as List<dynamic>?)?.map((e) => e as String).toList();
+    TaxonomyPackagingShape(
+      name: LanguageHelper.fromJsonStringMap(json['name']),
+      synonyms: LanguageHelper.fromJsonStringMapList(json['synonyms']),
+      children: (json['children'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      parents:
+          (json['parents'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    );
 
 Map<String, dynamic> _$TaxonomyPackagingShapeToJson(
     TaxonomyPackagingShape instance) {

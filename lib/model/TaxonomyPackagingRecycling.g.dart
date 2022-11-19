@@ -3,20 +3,142 @@
 part of 'TaxonomyPackagingRecycling.dart';
 
 // **************************************************************************
+// CopyWithGenerator
+// **************************************************************************
+
+abstract class _$TaxonomyPackagingRecyclingCWProxy {
+  TaxonomyPackagingRecycling children(List<String>? children);
+
+  TaxonomyPackagingRecycling material(
+      Map<OpenFoodFactsLanguage, String>? material);
+
+  TaxonomyPackagingRecycling name(Map<OpenFoodFactsLanguage, String>? name);
+
+  TaxonomyPackagingRecycling parents(List<String>? parents);
+
+  TaxonomyPackagingRecycling shape(Map<OpenFoodFactsLanguage, String>? shape);
+
+  TaxonomyPackagingRecycling synonyms(
+      Map<OpenFoodFactsLanguage, List<String>>? synonyms);
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TaxonomyPackagingRecycling(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// TaxonomyPackagingRecycling(...).copyWith(id: 12, name: "My name")
+  /// ````
+  TaxonomyPackagingRecycling call({
+    List<String>? children,
+    Map<OpenFoodFactsLanguage, String>? material,
+    Map<OpenFoodFactsLanguage, String>? name,
+    List<String>? parents,
+    Map<OpenFoodFactsLanguage, String>? shape,
+    Map<OpenFoodFactsLanguage, List<String>>? synonyms,
+  });
+}
+
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfTaxonomyPackagingRecycling.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfTaxonomyPackagingRecycling.copyWith.fieldName(...)`
+class _$TaxonomyPackagingRecyclingCWProxyImpl
+    implements _$TaxonomyPackagingRecyclingCWProxy {
+  final TaxonomyPackagingRecycling _value;
+
+  const _$TaxonomyPackagingRecyclingCWProxyImpl(this._value);
+
+  @override
+  TaxonomyPackagingRecycling children(List<String>? children) =>
+      this(children: children);
+
+  @override
+  TaxonomyPackagingRecycling material(
+          Map<OpenFoodFactsLanguage, String>? material) =>
+      this(material: material);
+
+  @override
+  TaxonomyPackagingRecycling name(Map<OpenFoodFactsLanguage, String>? name) =>
+      this(name: name);
+
+  @override
+  TaxonomyPackagingRecycling parents(List<String>? parents) =>
+      this(parents: parents);
+
+  @override
+  TaxonomyPackagingRecycling shape(Map<OpenFoodFactsLanguage, String>? shape) =>
+      this(shape: shape);
+
+  @override
+  TaxonomyPackagingRecycling synonyms(
+          Map<OpenFoodFactsLanguage, List<String>>? synonyms) =>
+      this(synonyms: synonyms);
+
+  @override
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TaxonomyPackagingRecycling(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// TaxonomyPackagingRecycling(...).copyWith(id: 12, name: "My name")
+  /// ````
+  TaxonomyPackagingRecycling call({
+    Object? children = const $CopyWithPlaceholder(),
+    Object? material = const $CopyWithPlaceholder(),
+    Object? name = const $CopyWithPlaceholder(),
+    Object? parents = const $CopyWithPlaceholder(),
+    Object? shape = const $CopyWithPlaceholder(),
+    Object? synonyms = const $CopyWithPlaceholder(),
+  }) {
+    return TaxonomyPackagingRecycling(
+      children: children == const $CopyWithPlaceholder()
+          ? _value.children
+          // ignore: cast_nullable_to_non_nullable
+          : children as List<String>?,
+      material: material == const $CopyWithPlaceholder()
+          ? _value.material
+          // ignore: cast_nullable_to_non_nullable
+          : material as Map<OpenFoodFactsLanguage, String>?,
+      name: name == const $CopyWithPlaceholder()
+          ? _value.name
+          // ignore: cast_nullable_to_non_nullable
+          : name as Map<OpenFoodFactsLanguage, String>?,
+      parents: parents == const $CopyWithPlaceholder()
+          ? _value.parents
+          // ignore: cast_nullable_to_non_nullable
+          : parents as List<String>?,
+      shape: shape == const $CopyWithPlaceholder()
+          ? _value.shape
+          // ignore: cast_nullable_to_non_nullable
+          : shape as Map<OpenFoodFactsLanguage, String>?,
+      synonyms: synonyms == const $CopyWithPlaceholder()
+          ? _value.synonyms
+          // ignore: cast_nullable_to_non_nullable
+          : synonyms as Map<OpenFoodFactsLanguage, List<String>>?,
+    );
+  }
+}
+
+extension $TaxonomyPackagingRecyclingCopyWith on TaxonomyPackagingRecycling {
+  /// Returns a callable class that can be used as follows: `instanceOfTaxonomyPackagingRecycling.copyWith(...)` or like so:`instanceOfTaxonomyPackagingRecycling.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
+  _$TaxonomyPackagingRecyclingCWProxy get copyWith =>
+      _$TaxonomyPackagingRecyclingCWProxyImpl(this);
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
 TaxonomyPackagingRecycling _$TaxonomyPackagingRecyclingFromJson(
         Map<String, dynamic> json) =>
-    TaxonomyPackagingRecycling()
-      ..name = LanguageHelper.fromJsonStringMap(json['name'])
-      ..synonyms = LanguageHelper.fromJsonStringMapList(json['synonyms'])
-      ..shape = LanguageHelper.fromJsonStringMap(json['shape'])
-      ..material = LanguageHelper.fromJsonStringMap(json['material'])
-      ..children =
-          (json['children'] as List<dynamic>?)?.map((e) => e as String).toList()
-      ..parents =
-          (json['parents'] as List<dynamic>?)?.map((e) => e as String).toList();
+    TaxonomyPackagingRecycling(
+      name: LanguageHelper.fromJsonStringMap(json['name']),
+      synonyms: LanguageHelper.fromJsonStringMapList(json['synonyms']),
+      shape: LanguageHelper.fromJsonStringMap(json['shape']),
+      material: LanguageHelper.fromJsonStringMap(json['material']),
+      children: (json['children'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      parents:
+          (json['parents'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    );
 
 Map<String, dynamic> _$TaxonomyPackagingRecyclingToJson(
     TaxonomyPackagingRecycling instance) {

@@ -1,10 +1,11 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/OffTagged.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
-import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
+import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 
 part 'TaxonomyPackagingRecycling.g.dart';
 
@@ -28,9 +29,17 @@ enum TaxonomyPackagingRecyclingField implements OffTagged {
 ///
 /// See [OpenFoodAPIClient.getTaxonomy] for more details on how to retrieve one
 /// of these.
+@CopyWith()
 @JsonSerializable()
 class TaxonomyPackagingRecycling extends JsonObject {
-  TaxonomyPackagingRecycling();
+  TaxonomyPackagingRecycling({
+    this.name,
+    this.synonyms,
+    this.shape,
+    this.material,
+    this.children,
+    this.parents,
+  });
 
   factory TaxonomyPackagingRecycling.fromJson(Map<String, dynamic> json) =>
       _$TaxonomyPackagingRecyclingFromJson(json);

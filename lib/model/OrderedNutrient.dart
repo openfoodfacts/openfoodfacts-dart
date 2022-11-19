@@ -1,5 +1,7 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/model/Nutrient.dart';
+
 import '../interface/JsonObject.dart';
 
 part 'OrderedNutrient.g.dart';
@@ -9,6 +11,7 @@ part 'OrderedNutrient.g.dart';
 /// cf. https://github.com/openfoodfacts/openfoodfacts-dart/issues/210
 /// Example in https://fr.openfoodfacts.org/cgi/nutrients.pl
 /// To be compared to [OrderedNutrients], which is the root of the structure.
+@CopyWith()
 @JsonSerializable(includeIfNull: false)
 class OrderedNutrient extends JsonObject {
   /// Nutrient ID (e.g. 'energy-kcal')

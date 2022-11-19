@@ -1,9 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
+
 import '../interface/JsonObject.dart';
 
 part 'OcrIngredientsResult.g.dart';
 
 /// Result from OCR applied to ingredients.
+@CopyWith()
 @JsonSerializable()
 class OcrIngredientsResult extends JsonObject {
   const OcrIngredientsResult({

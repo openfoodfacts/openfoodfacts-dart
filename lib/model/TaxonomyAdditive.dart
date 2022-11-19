@@ -1,10 +1,11 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/OffTagged.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
-import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
+import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 
 part 'TaxonomyAdditive.g.dart';
 
@@ -62,9 +63,10 @@ enum TaxonomyAdditiveField implements OffTagged {
 ///
 /// See [OpenFoodAPIClient.getTaxonomy] for more details on how to retrieve one
 /// of these.
+@CopyWith()
 @JsonSerializable()
 class TaxonomyAdditive extends JsonObject {
-  TaxonomyAdditive(
+  TaxonomyAdditive({
     this.additivesClasses,
     this.carbonFootprintFrFoodgesIngredient,
     this.carbonFootprintFrFoodgesValue,
@@ -94,7 +96,7 @@ class TaxonomyAdditive extends JsonObject {
     this.vegan,
     this.vegetarian,
     this.wikidata,
-  );
+  });
 
   factory TaxonomyAdditive.fromJson(Map<String, dynamic> json) {
     return _$TaxonomyAdditiveFromJson(json);

@@ -1,3 +1,4 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/model/Attribute.dart';
 import 'package:openfoodfacts/model/AttributeGroup.dart';
@@ -87,6 +88,7 @@ enum ProductImprovementCategory {
 ///
 /// Please read the language mechanics explanation if you intend to display
 /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
+@CopyWith()
 @JsonSerializable()
 class Product extends JsonObject {
   @JsonKey(name: 'code')

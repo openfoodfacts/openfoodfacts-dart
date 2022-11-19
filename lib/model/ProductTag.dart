@@ -1,10 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:openfoodfacts/utils/JsonHelper.dart';
+
 import '../interface/JsonObject.dart';
 
 part 'ProductTag.g.dart';
 
 /// Folksonomy product tag: for this barcode, that value is set for that key.
+@CopyWith()
 @JsonSerializable()
 class ProductTag extends JsonObject {
   @JsonKey(name: 'product')

@@ -1,9 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
+
 import '../interface/JsonObject.dart';
 import 'Product.dart';
 
 part 'SearchResult.g.dart';
 
+@CopyWith()
 @JsonSerializable()
 class SearchResult extends JsonObject {
   @JsonKey(name: 'page', fromJson: JsonObject.parseInt)

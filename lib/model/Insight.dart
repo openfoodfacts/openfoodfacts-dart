@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 
 part 'Insight.g.dart';
@@ -60,6 +61,7 @@ extension InsightTypesExtension on InsightType? {
       );
 }
 
+@CopyWith()
 @JsonSerializable()
 class InsightsResult extends JsonObject {
   final String? status;

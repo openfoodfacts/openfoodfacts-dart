@@ -1,4 +1,6 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 import '../interface/JsonObject.dart';
 import 'Agribalyse.dart';
 import 'EcoscoreAdjustments.dart';
@@ -12,6 +14,7 @@ enum EcoscoreStatus {
   UNKNOWN
 }
 
+@CopyWith()
 @JsonSerializable(explicitToJson: true)
 class EcoscoreData extends JsonObject {
   @JsonKey(includeIfNull: false)

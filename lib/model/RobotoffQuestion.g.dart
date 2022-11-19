@@ -3,6 +3,189 @@
 part of 'RobotoffQuestion.dart';
 
 // **************************************************************************
+// CopyWithGenerator
+// **************************************************************************
+
+abstract class _$RobotoffQuestionResultCWProxy {
+  RobotoffQuestionResult questions(List<RobotoffQuestion>? questions);
+
+  RobotoffQuestionResult status(String? status);
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `RobotoffQuestionResult(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// RobotoffQuestionResult(...).copyWith(id: 12, name: "My name")
+  /// ````
+  RobotoffQuestionResult call({
+    List<RobotoffQuestion>? questions,
+    String? status,
+  });
+}
+
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfRobotoffQuestionResult.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfRobotoffQuestionResult.copyWith.fieldName(...)`
+class _$RobotoffQuestionResultCWProxyImpl
+    implements _$RobotoffQuestionResultCWProxy {
+  final RobotoffQuestionResult _value;
+
+  const _$RobotoffQuestionResultCWProxyImpl(this._value);
+
+  @override
+  RobotoffQuestionResult questions(List<RobotoffQuestion>? questions) =>
+      this(questions: questions);
+
+  @override
+  RobotoffQuestionResult status(String? status) => this(status: status);
+
+  @override
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `RobotoffQuestionResult(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// RobotoffQuestionResult(...).copyWith(id: 12, name: "My name")
+  /// ````
+  RobotoffQuestionResult call({
+    Object? questions = const $CopyWithPlaceholder(),
+    Object? status = const $CopyWithPlaceholder(),
+  }) {
+    return RobotoffQuestionResult(
+      questions: questions == const $CopyWithPlaceholder()
+          ? _value.questions
+          // ignore: cast_nullable_to_non_nullable
+          : questions as List<RobotoffQuestion>?,
+      status: status == const $CopyWithPlaceholder()
+          ? _value.status
+          // ignore: cast_nullable_to_non_nullable
+          : status as String?,
+    );
+  }
+}
+
+extension $RobotoffQuestionResultCopyWith on RobotoffQuestionResult {
+  /// Returns a callable class that can be used as follows: `instanceOfRobotoffQuestionResult.copyWith(...)` or like so:`instanceOfRobotoffQuestionResult.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
+  _$RobotoffQuestionResultCWProxy get copyWith =>
+      _$RobotoffQuestionResultCWProxyImpl(this);
+}
+
+abstract class _$RobotoffQuestionCWProxy {
+  RobotoffQuestion barcode(String? barcode);
+
+  RobotoffQuestion imageUrl(String? imageUrl);
+
+  RobotoffQuestion insightId(String? insightId);
+
+  RobotoffQuestion insightType(InsightType? insightType);
+
+  RobotoffQuestion question(String? question);
+
+  RobotoffQuestion type(String? type);
+
+  RobotoffQuestion value(String? value);
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `RobotoffQuestion(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// RobotoffQuestion(...).copyWith(id: 12, name: "My name")
+  /// ````
+  RobotoffQuestion call({
+    String? barcode,
+    String? imageUrl,
+    String? insightId,
+    InsightType? insightType,
+    String? question,
+    String? type,
+    String? value,
+  });
+}
+
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfRobotoffQuestion.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfRobotoffQuestion.copyWith.fieldName(...)`
+class _$RobotoffQuestionCWProxyImpl implements _$RobotoffQuestionCWProxy {
+  final RobotoffQuestion _value;
+
+  const _$RobotoffQuestionCWProxyImpl(this._value);
+
+  @override
+  RobotoffQuestion barcode(String? barcode) => this(barcode: barcode);
+
+  @override
+  RobotoffQuestion imageUrl(String? imageUrl) => this(imageUrl: imageUrl);
+
+  @override
+  RobotoffQuestion insightId(String? insightId) => this(insightId: insightId);
+
+  @override
+  RobotoffQuestion insightType(InsightType? insightType) =>
+      this(insightType: insightType);
+
+  @override
+  RobotoffQuestion question(String? question) => this(question: question);
+
+  @override
+  RobotoffQuestion type(String? type) => this(type: type);
+
+  @override
+  RobotoffQuestion value(String? value) => this(value: value);
+
+  @override
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `RobotoffQuestion(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// RobotoffQuestion(...).copyWith(id: 12, name: "My name")
+  /// ````
+  RobotoffQuestion call({
+    Object? barcode = const $CopyWithPlaceholder(),
+    Object? imageUrl = const $CopyWithPlaceholder(),
+    Object? insightId = const $CopyWithPlaceholder(),
+    Object? insightType = const $CopyWithPlaceholder(),
+    Object? question = const $CopyWithPlaceholder(),
+    Object? type = const $CopyWithPlaceholder(),
+    Object? value = const $CopyWithPlaceholder(),
+  }) {
+    return RobotoffQuestion(
+      barcode: barcode == const $CopyWithPlaceholder()
+          ? _value.barcode
+          // ignore: cast_nullable_to_non_nullable
+          : barcode as String?,
+      imageUrl: imageUrl == const $CopyWithPlaceholder()
+          ? _value.imageUrl
+          // ignore: cast_nullable_to_non_nullable
+          : imageUrl as String?,
+      insightId: insightId == const $CopyWithPlaceholder()
+          ? _value.insightId
+          // ignore: cast_nullable_to_non_nullable
+          : insightId as String?,
+      insightType: insightType == const $CopyWithPlaceholder()
+          ? _value.insightType
+          // ignore: cast_nullable_to_non_nullable
+          : insightType as InsightType?,
+      question: question == const $CopyWithPlaceholder()
+          ? _value.question
+          // ignore: cast_nullable_to_non_nullable
+          : question as String?,
+      type: type == const $CopyWithPlaceholder()
+          ? _value.type
+          // ignore: cast_nullable_to_non_nullable
+          : type as String?,
+      value: value == const $CopyWithPlaceholder()
+          ? _value.value
+          // ignore: cast_nullable_to_non_nullable
+          : value as String?,
+    );
+  }
+}
+
+extension $RobotoffQuestionCopyWith on RobotoffQuestion {
+  /// Returns a callable class that can be used as follows: `instanceOfRobotoffQuestion.copyWith(...)` or like so:`instanceOfRobotoffQuestion.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
+  _$RobotoffQuestionCWProxy get copyWith => _$RobotoffQuestionCWProxyImpl(this);
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

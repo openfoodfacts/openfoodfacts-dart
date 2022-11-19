@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 import '../interface/JsonObject.dart';
 
 part 'Status.g.dart';
 
+@CopyWith()
 @JsonSerializable()
 class Status extends JsonObject {
   static const WRONG_USER_OR_PASSWORD_ERROR_MESSAGE =

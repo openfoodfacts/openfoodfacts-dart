@@ -1,10 +1,11 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/OffTagged.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
-import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
+import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 
 part 'TaxonomyLabel.g.dart';
 
@@ -52,9 +53,10 @@ enum TaxonomyLabelField implements OffTagged {
 ///
 /// See [OpenFoodAPIClient.getTaxonomy] for more details on how to retrieve one
 /// of these.
+@CopyWith()
 @JsonSerializable()
 class TaxonomyLabel extends JsonObject {
-  TaxonomyLabel(
+  TaxonomyLabel({
     this.authAddress,
     this.authName,
     this.authUrl,
@@ -79,7 +81,7 @@ class TaxonomyLabel extends JsonObject {
     this.protectedNameType,
     this.stores,
     this.wikidata,
-  );
+  });
 
   factory TaxonomyLabel.fromJson(Map<String, dynamic> json) {
     return _$TaxonomyLabelFromJson(json);

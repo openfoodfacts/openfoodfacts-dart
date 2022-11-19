@@ -1,10 +1,11 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
 import 'package:openfoodfacts/model/OffTagged.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
-import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
+import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
 
 part 'TaxonomyOrigin.g.dart';
 
@@ -26,9 +27,15 @@ enum TaxonomyOriginField implements OffTagged {
 ///
 /// See [OpenFoodAPIClient.getTaxonomy] for more details on how to retrieve one
 /// of these.
+@CopyWith()
 @JsonSerializable()
 class TaxonomyOrigin extends JsonObject {
-  TaxonomyOrigin();
+  TaxonomyOrigin({
+    this.name,
+    this.synonyms,
+    this.children,
+    this.parents,
+  });
 
   factory TaxonomyOrigin.fromJson(Map<String, dynamic> json) =>
       _$TaxonomyOriginFromJson(json);

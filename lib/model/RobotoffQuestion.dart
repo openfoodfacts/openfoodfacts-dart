@@ -1,9 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:openfoodfacts/model/Insight.dart';
+
 import '../interface/JsonObject.dart';
 
 part 'RobotoffQuestion.g.dart';
 
+@CopyWith()
 @JsonSerializable()
 class RobotoffQuestionResult extends JsonObject {
   final String? status;
@@ -19,6 +22,7 @@ class RobotoffQuestionResult extends JsonObject {
   Map<String, dynamic> toJson() => _$RobotoffQuestionResultToJson(this);
 }
 
+@CopyWith()
 @JsonSerializable()
 class RobotoffQuestion extends JsonObject {
   final String? barcode;

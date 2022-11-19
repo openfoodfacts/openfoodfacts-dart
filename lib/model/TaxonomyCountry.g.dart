@@ -3,22 +3,149 @@
 part of 'TaxonomyCountry.dart';
 
 // **************************************************************************
+// CopyWithGenerator
+// **************************************************************************
+
+abstract class _$TaxonomyCountryCWProxy {
+  TaxonomyCountry countryCode2(String? countryCode2);
+
+  TaxonomyCountry countryCode3(String? countryCode3);
+
+  TaxonomyCountry languages(List<OpenFoodFactsLanguage>? languages);
+
+  TaxonomyCountry name(Map<OpenFoodFactsLanguage, String>? name);
+
+  TaxonomyCountry officialCountryCode2(String? officialCountryCode2);
+
+  TaxonomyCountry synonyms(Map<OpenFoodFactsLanguage, List<String>>? synonyms);
+
+  TaxonomyCountry wikidata(String? wikidata);
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TaxonomyCountry(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// TaxonomyCountry(...).copyWith(id: 12, name: "My name")
+  /// ````
+  TaxonomyCountry call({
+    String? countryCode2,
+    String? countryCode3,
+    List<OpenFoodFactsLanguage>? languages,
+    Map<OpenFoodFactsLanguage, String>? name,
+    String? officialCountryCode2,
+    Map<OpenFoodFactsLanguage, List<String>>? synonyms,
+    String? wikidata,
+  });
+}
+
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfTaxonomyCountry.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfTaxonomyCountry.copyWith.fieldName(...)`
+class _$TaxonomyCountryCWProxyImpl implements _$TaxonomyCountryCWProxy {
+  final TaxonomyCountry _value;
+
+  const _$TaxonomyCountryCWProxyImpl(this._value);
+
+  @override
+  TaxonomyCountry countryCode2(String? countryCode2) =>
+      this(countryCode2: countryCode2);
+
+  @override
+  TaxonomyCountry countryCode3(String? countryCode3) =>
+      this(countryCode3: countryCode3);
+
+  @override
+  TaxonomyCountry languages(List<OpenFoodFactsLanguage>? languages) =>
+      this(languages: languages);
+
+  @override
+  TaxonomyCountry name(Map<OpenFoodFactsLanguage, String>? name) =>
+      this(name: name);
+
+  @override
+  TaxonomyCountry officialCountryCode2(String? officialCountryCode2) =>
+      this(officialCountryCode2: officialCountryCode2);
+
+  @override
+  TaxonomyCountry synonyms(
+          Map<OpenFoodFactsLanguage, List<String>>? synonyms) =>
+      this(synonyms: synonyms);
+
+  @override
+  TaxonomyCountry wikidata(String? wikidata) => this(wikidata: wikidata);
+
+  @override
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TaxonomyCountry(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// TaxonomyCountry(...).copyWith(id: 12, name: "My name")
+  /// ````
+  TaxonomyCountry call({
+    Object? countryCode2 = const $CopyWithPlaceholder(),
+    Object? countryCode3 = const $CopyWithPlaceholder(),
+    Object? languages = const $CopyWithPlaceholder(),
+    Object? name = const $CopyWithPlaceholder(),
+    Object? officialCountryCode2 = const $CopyWithPlaceholder(),
+    Object? synonyms = const $CopyWithPlaceholder(),
+    Object? wikidata = const $CopyWithPlaceholder(),
+  }) {
+    return TaxonomyCountry(
+      countryCode2: countryCode2 == const $CopyWithPlaceholder()
+          ? _value.countryCode2
+          // ignore: cast_nullable_to_non_nullable
+          : countryCode2 as String?,
+      countryCode3: countryCode3 == const $CopyWithPlaceholder()
+          ? _value.countryCode3
+          // ignore: cast_nullable_to_non_nullable
+          : countryCode3 as String?,
+      languages: languages == const $CopyWithPlaceholder()
+          ? _value.languages
+          // ignore: cast_nullable_to_non_nullable
+          : languages as List<OpenFoodFactsLanguage>?,
+      name: name == const $CopyWithPlaceholder()
+          ? _value.name
+          // ignore: cast_nullable_to_non_nullable
+          : name as Map<OpenFoodFactsLanguage, String>?,
+      officialCountryCode2: officialCountryCode2 == const $CopyWithPlaceholder()
+          ? _value.officialCountryCode2
+          // ignore: cast_nullable_to_non_nullable
+          : officialCountryCode2 as String?,
+      synonyms: synonyms == const $CopyWithPlaceholder()
+          ? _value.synonyms
+          // ignore: cast_nullable_to_non_nullable
+          : synonyms as Map<OpenFoodFactsLanguage, List<String>>?,
+      wikidata: wikidata == const $CopyWithPlaceholder()
+          ? _value.wikidata
+          // ignore: cast_nullable_to_non_nullable
+          : wikidata as String?,
+    );
+  }
+}
+
+extension $TaxonomyCountryCopyWith on TaxonomyCountry {
+  /// Returns a callable class that can be used as follows: `instanceOfTaxonomyCountry.copyWith(...)` or like so:`instanceOfTaxonomyCountry.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
+  _$TaxonomyCountryCWProxy get copyWith => _$TaxonomyCountryCWProxyImpl(this);
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
 TaxonomyCountry _$TaxonomyCountryFromJson(Map<String, dynamic> json) =>
-    TaxonomyCountry()
-      ..countryCode2 =
-          LanguageHelper.fromJsonStringMapIsoUnique(json['country_code_2'])
-      ..countryCode3 =
-          LanguageHelper.fromJsonStringMapIsoUnique(json['country_code_3'])
-      ..languages =
-          LanguageHelper.fromJsonStringMapIsoList(json['language_codes'])
-      ..name = LanguageHelper.fromJsonStringMap(json['name'])
-      ..synonyms = LanguageHelper.fromJsonStringMapList(json['synonyms'])
-      ..wikidata = LanguageHelper.fromJsonStringMapIsoUnique(json['wikidata'])
-      ..officialCountryCode2 = LanguageHelper.fromJsonStringMapIsoUnique(
-          json['official_country_code_2']);
+    TaxonomyCountry(
+      countryCode2:
+          LanguageHelper.fromJsonStringMapIsoUnique(json['country_code_2']),
+      countryCode3:
+          LanguageHelper.fromJsonStringMapIsoUnique(json['country_code_3']),
+      languages:
+          LanguageHelper.fromJsonStringMapIsoList(json['language_codes']),
+      name: LanguageHelper.fromJsonStringMap(json['name']),
+      synonyms: LanguageHelper.fromJsonStringMapList(json['synonyms']),
+      wikidata: LanguageHelper.fromJsonStringMapIsoUnique(json['wikidata']),
+      officialCountryCode2: LanguageHelper.fromJsonStringMapIsoUnique(
+          json['official_country_code_2']),
+    );
 
 Map<String, dynamic> _$TaxonomyCountryToJson(TaxonomyCountry instance) {
   final val = <String, dynamic>{};

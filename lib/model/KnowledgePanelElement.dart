@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:openfoodfacts/model/KnowledgePanel.dart';
+
 import '../interface/JsonObject.dart';
 
 part 'KnowledgePanelElement.g.dart';
@@ -34,6 +36,7 @@ enum KnowledgePanelColumnType {
 }
 
 /// Description element of the Knowledge panel.
+@CopyWith()
 @JsonSerializable()
 class KnowledgePanelTextElement extends JsonObject {
   /// HTML description of one Knowledge Panel Unit.
@@ -77,6 +80,7 @@ class KnowledgePanelTextElement extends JsonObject {
 }
 
 /// Image that represents the KnowledgePanel.
+@CopyWith()
 @JsonSerializable()
 class KnowledgePanelImageElement extends JsonObject {
   /// Url of the image.
@@ -109,6 +113,7 @@ class KnowledgePanelImageElement extends JsonObject {
 }
 
 /// Element representing a Panel group that contains 1+ KnowledgePanels.
+@CopyWith()
 @JsonSerializable()
 class KnowledgePanelPanelGroupElement extends JsonObject {
   /// Title of the panel group. Example: "Carbon Footprint" or "Labels" etc.
@@ -132,6 +137,7 @@ class KnowledgePanelPanelGroupElement extends JsonObject {
 /// Element representing a Panel Id of a KnowledgePanel. This element is a
 /// Knowledge panel itself, the KnowledgePanel can be found in the list of
 /// Knowledge panels using the id.
+@CopyWith()
 @JsonSerializable()
 class KnowledgePanelPanelIdElement extends JsonObject {
   @JsonKey(name: 'panel_id')
@@ -147,6 +153,7 @@ class KnowledgePanelPanelIdElement extends JsonObject {
 }
 
 /// Provides the values for each table cell inside a KnowledgePanel table.
+@CopyWith()
 @JsonSerializable()
 class KnowledgePanelTableCell extends JsonObject {
   final String text;
@@ -171,6 +178,7 @@ class KnowledgePanelTableCell extends JsonObject {
 }
 
 /// A table row inside Table element of KonwledgePanel
+@CopyWith()
 @JsonSerializable()
 class KnowledgePanelTableRowElement extends JsonObject {
   final List<KnowledgePanelTableCell> values;
@@ -185,6 +193,7 @@ class KnowledgePanelTableRowElement extends JsonObject {
 }
 
 /// A descriptor that describes the type and label of each column.
+@CopyWith()
 @JsonSerializable()
 class KnowledgePanelTableColumn extends JsonObject {
   final String text;
@@ -220,6 +229,7 @@ class KnowledgePanelTableColumn extends JsonObject {
 }
 
 /// Element representing a world map.
+@CopyWith()
 @JsonSerializable()
 class KnowledgePanelWorldMapElement extends JsonObject {
   final List<KnowledgePanelGeoPointer> pointers;
@@ -236,6 +246,7 @@ class KnowledgePanelWorldMapElement extends JsonObject {
 }
 
 /// Element representing a geo location of a map pointer.
+@CopyWith()
 @JsonSerializable()
 class KnowledgePanelGeoPointer extends JsonObject {
   final KnowledgePanelLatLng? geo;
@@ -252,6 +263,7 @@ class KnowledgePanelGeoPointer extends JsonObject {
 }
 
 /// Element representing a lat/long positioning of a map pointer.
+@CopyWith()
 @JsonSerializable()
 class KnowledgePanelLatLng extends JsonObject {
   final double lat;
@@ -270,6 +282,7 @@ class KnowledgePanelLatLng extends JsonObject {
 }
 
 /// Element representing a tabular data for the KnowledgePanel.
+@CopyWith()
 @JsonSerializable()
 class KnowledgePanelTableElement extends JsonObject {
   final String id;
@@ -296,6 +309,7 @@ class KnowledgePanelTableElement extends JsonObject {
 }
 
 /// "Contribute action" element of the Knowledge panel.
+@CopyWith()
 @JsonSerializable()
 class KnowledgePanelActionElement extends JsonObject {
   /// Possible needed contribute action: add categories.
@@ -354,6 +368,7 @@ enum KnowledgePanelElementType {
 /// KnowledgePanelElement is a single unit of KnowledgePanel that can be rendered on the client.
 ///
 /// An Element could be one of [{@code ]KnowledgePanelElementType].
+@CopyWith()
 @JsonSerializable()
 class KnowledgePanelElement extends JsonObject {
   /// Type of the text description.

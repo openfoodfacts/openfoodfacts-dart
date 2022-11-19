@@ -1,10 +1,13 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 import '../interface/JsonObject.dart';
 import 'OriginsOfIngredients.dart';
 import 'Packaging.dart';
 
 part 'EcoscoreAdjustments.g.dart';
 
+@CopyWith()
 @JsonSerializable(explicitToJson: true)
 class EcoscoreAdjustments extends JsonObject {
   @JsonKey(includeIfNull: false)

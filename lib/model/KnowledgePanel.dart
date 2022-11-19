@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../interface/JsonObject.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
 
+import '../interface/JsonObject.dart';
 import 'KnowledgePanelElement.dart';
 
 part 'KnowledgePanel.g.dart';
@@ -75,6 +76,7 @@ enum KnowledgePanelSize {
 ///
 /// See http://shorturl.at/oxRS9 for details.
 // NOTE: This is WIP, do not use and expect changes.
+@CopyWith()
 @JsonSerializable()
 class KnowledgePanel extends JsonObject {
   /// Title of the KnowledgePanel.
@@ -124,6 +126,7 @@ class KnowledgePanel extends JsonObject {
 
 /// An element representing the title of the KnowledgePanel which could consist
 /// of a text title, subtitle and an icon.
+@CopyWith()
 @JsonSerializable()
 class TitleElement extends JsonObject {
   /// Title string of the panel. Example - 'Eco-Score D'.

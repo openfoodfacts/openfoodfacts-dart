@@ -1,9 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
+
 import '../interface/JsonObject.dart';
 
 part 'ProductList.g.dart';
 
 /// Folksonomy: current value for a product and a tag key.
+@CopyWith()
 @JsonSerializable()
 class ProductList extends JsonObject {
   @JsonKey(name: 'product')

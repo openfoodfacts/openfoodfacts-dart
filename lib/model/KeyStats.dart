@@ -1,9 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
+
 import '../interface/JsonObject.dart';
 
 part 'KeyStats.g.dart';
 
 /// Folksonomy: statistics around a tag key.
+@CopyWith()
 @JsonSerializable()
 class KeyStats extends JsonObject {
   @JsonKey(name: 'k')
