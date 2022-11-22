@@ -147,20 +147,4 @@ void main() {
       expect(result.insights, isNull);
     });
   });
-
-  group('$OpenFoodAPIClient get robotoff ingredient spelling corrections', () {
-    test('get farine de blé spelling corrections', () async {
-      final SpellingCorrection? result =
-          await OpenFoodAPIClient.getIngredientSpellingCorrection(
-        user: TestConstants.TEST_USER,
-        ingredientName: 'fqrine de blé',
-      );
-
-      expect(result, isNotNull);
-      expect(result!.corrected, 'farine de blé');
-      expect(result.input, 'fqrine de blé');
-      expect(result.termCorrections!.length, 1);
-      expect(result.termCorrections![0].corrections, isNull);
-    });
-  }, skip: 'This Group of tests is unstable');
 }
