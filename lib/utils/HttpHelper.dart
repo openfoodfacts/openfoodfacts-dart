@@ -174,9 +174,9 @@ class HttpHelper {
     return status;
   }
 
-  /// build the request headers
-  /// By default isTestMode is false
-  /// Note: [addCredentialsToHeader] and [isTestModeActive] exclude each other
+  /// Returns the request headers.
+  ///
+  /// Note: [addCredentialsToHeader] and [isTestModeActive] exclude each other.
   Map<String, String>? _buildHeaders({
     User? user,
     bool isTestModeActive = false,
@@ -198,10 +198,12 @@ class HttpHelper {
 
     if (addCredentialsToHeader) {
       final User? myUser = OpenFoodAPIConfiguration.getUser(user);
-      final String? userId = myUser?.userId;
-      final String? password = myUser?.password;
-      var token = 'Basic ${base64Encode(utf8.encode('$userId:$password'))}';
-      headers.addAll({'Authorization': token});
+      if (myUser != null) {
+        final String userId = myUser.userId;
+        final String password = myUser.password;
+        var token = 'Basic ${base64Encode(utf8.encode('$userId:$password'))}';
+        headers.addAll({'Authorization': token});
+      }
     }
     return headers;
   }
