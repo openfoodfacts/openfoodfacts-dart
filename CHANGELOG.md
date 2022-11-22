@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.28.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.27.1...v1.28.0) (2022-11-22)
+
+
+### Features
+
+* [#596](https://github.com/openfoodfacts/openfoodfacts-dart/issues/596) - added Origin Taxonomy ([#608](https://github.com/openfoodfacts/openfoodfacts-dart/issues/608)) ([bfe0f11](https://github.com/openfoodfacts/openfoodfacts-dart/commit/bfe0f1171b6f3a2b12d6d93a6613ced1ed2543d5))
+* [#605](https://github.com/openfoodfacts/openfoodfacts-dart/issues/605) - taxonomy - support of packaging materials and shapes ([#610](https://github.com/openfoodfacts/openfoodfacts-dart/issues/610)) ([43f83a9](https://github.com/openfoodfacts/openfoodfacts-dart/commit/43f83a97749442548cf68f5b1e0791483367431f))
+* [#614](https://github.com/openfoodfacts/openfoodfacts-dart/issues/614) - taxonomy - support of packaging recycling ([#615](https://github.com/openfoodfacts/openfoodfacts-dart/issues/615)) ([716db4d](https://github.com/openfoodfacts/openfoodfacts-dart/commit/716db4d0cec3373de1250fe383c79b142f189b93))
+
+
+### Bug Fixes
+
+* [#223](https://github.com/openfoodfacts/openfoodfacts-dart/issues/223) - deprecated method getIngredientSpellingCorrection ([#627](https://github.com/openfoodfacts/openfoodfacts-dart/issues/627)) ([9da441f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/9da441f4e930dd74ebff3547ed6ea1858403cf68))
+* [#571](https://github.com/openfoodfacts/openfoodfacts-dart/issues/571) - last step of migration of enums to dart 2.17 ([#623](https://github.com/openfoodfacts/openfoodfacts-dart/issues/623)) ([cc1b388](https://github.com/openfoodfacts/openfoodfacts-dart/commit/cc1b388e726d8d2e3ea1883afdb5cdbadc7b66a8))
+* [#571](https://github.com/openfoodfacts/openfoodfacts-dart/issues/571) - new enum upgrades to dart 2.17 ([#621](https://github.com/openfoodfacts/openfoodfacts-dart/issues/621)) ([dc2dfc3](https://github.com/openfoodfacts/openfoodfacts-dart/commit/dc2dfc3ebc72ff99529335926fab17fd49e9390e))
+* [#609](https://github.com/openfoodfacts/openfoodfacts-dart/issues/609) - fix of failed getProduct integration test ([#616](https://github.com/openfoodfacts/openfoodfacts-dart/issues/616)) ([067752e](https://github.com/openfoodfacts/openfoodfacts-dart/commit/067752e5630413de25ad6b869205b58dcb1a8e1c))
+* [#625](https://github.com/openfoodfacts/openfoodfacts-dart/issues/625) - no user credentials in header if null ([#626](https://github.com/openfoodfacts/openfoodfacts-dart/issues/626)) ([8566fcf](https://github.com/openfoodfacts/openfoodfacts-dart/commit/8566fcfcdd2c67f0ee6914048dbf84f8ce50d67e))
+* integrationTest with packaging recycling ([#622](https://github.com/openfoodfacts/openfoodfacts-dart/issues/622)) ([98a3deb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/98a3debca5a05bbcda05d492753336f85c403930))
+
 ## [1.27.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.27.0...v1.27.1) (2022-11-06)
 
 
