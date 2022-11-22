@@ -720,6 +720,7 @@ class OpenFoodAPIClient {
     return Status.fromApiResponse(response.body);
   }
 
+  // TODO: deprecated from 2022-11-22; remove when old enough
   @Deprecated('Unstable version, do not use and wait for the next version')
   static Future<SpellingCorrection?> getIngredientSpellingCorrection({
     String? ingredientName,
