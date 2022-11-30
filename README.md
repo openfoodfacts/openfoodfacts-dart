@@ -1,7 +1,10 @@
 ![Pub Version](https://img.shields.io/pub/v/openfoodfacts?&colorB=green)
-[![likes](https://badges.bar/openfoodfacts/likes)](https://pub.dev/packages/openfoodfacts/score)
-[![popularity](https://badges.bar/openfoodfacts/popularity)](https://pub.dev/packages/openfoodfacts/score)
-[![pub points](https://badges.bar/openfoodfacts/pub%20points)](https://pub.dev/packages/openfoodfacts/score)
+[![Run sdk tests](https://github.com/openfoodfacts/openfoodfacts-dart/actions/workflows/test-sdk.yml/badge.svg)](https://github.com/openfoodfacts/openfoodfacts-dart/actions/workflows/test-sdk.yml)
+[![likes](https://img.shields.io/pub/likes/openfoodfacts?logo=dart)](https://pub.dev/packages/openfoodfacts/score)
+[![popularity](https://img.shields.io/pub/popularity/openfoodfacts?logo=dart)](https://pub.dev/packages/openfoodfacts/score)
+[![pub points](https://img.shields.io/pub/points/openfoodfacts?logo=dart)](https://pub.dev/packages/openfoodfacts/score)
+
+
 
 # Open Food Facts - Dart
 Dart package for the Open Food Facts API. Easily access to more than 1.9 million products from all around the world.
