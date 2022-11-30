@@ -73,7 +73,8 @@ You can check the terms of use here : [Terms of use](https://world.openfoodfacts
 - [x] Get the OCR of the ingredients photo (for validation purposes)
 
 ## Roadmap
-List of new APIs to implement: https://github.com/openfoodfacts/api-documentation/issues
+- List of new APIs to implement: https://github.com/openfoodfacts/api-documentation/issues
+- New OpenAPI documentation: https://openfoodfacts.github.io/openfoodfacts-server/reference/api/
 
 ### READ
 - [ ] ???
