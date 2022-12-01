@@ -1,4 +1,5 @@
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
+import 'package:openfoodfacts/model/ProductResultV3.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OcrField.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
@@ -116,12 +117,12 @@ void main() {
 
       //Get The saved product's ingredients from the server
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.FRENCH,
-          fields: [
-            ProductField.INGREDIENTS_TEXT,
-          ]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+        barcode,
+        language: OpenFoodFactsLanguage.FRENCH,
+        fields: [ProductField.INGREDIENTS_TEXT],
+        version: ProductQueryVersion.v3,
+      );
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.PROD_USER,
       );

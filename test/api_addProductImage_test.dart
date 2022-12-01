@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:openfoodfacts/model/ProductResultV3.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
@@ -66,9 +67,10 @@ void main() {
     final ProductQueryConfiguration configurations = ProductQueryConfiguration(
       barcode,
       fields: <ProductField>[ProductField.IMAGES],
+      version: ProductQueryVersion.v3,
     );
-    final ProductResult result =
-        await OpenFoodAPIClient.getProduct(configurations);
+    final ProductResultV3 result =
+        await OpenFoodAPIClient.getProductV3(configurations);
     expect(result.status, isNotNull);
     expect(result.product!.images, isNotEmpty);
 
@@ -132,8 +134,11 @@ void main() {
     test('read image', () async {
       //Get product without setting ProductField
       final ProductQueryConfiguration configurations =
-          ProductQueryConfiguration(barcode);
-      final ProductResult result = await OpenFoodAPIClient.getProduct(
+          ProductQueryConfiguration(
+        barcode,
+        version: ProductQueryVersion.v3,
+      );
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: user,
       );
@@ -239,10 +244,12 @@ void main() {
         language: language,
       );
 
-      final ProductResult productResult = await OpenFoodAPIClient.getProduct(
+      final ProductResultV3 productResult =
+          await OpenFoodAPIClient.getProductV3(
         ProductQueryConfiguration(
           barcode,
           fields: <ProductField>[ProductField.SELECTED_IMAGE],
+          version: ProductQueryVersion.v3,
         ),
       );
       expect(productResult.product, isNotNull);

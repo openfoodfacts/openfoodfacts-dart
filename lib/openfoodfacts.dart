@@ -6,6 +6,7 @@ import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/model/ProductResultV3.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/LoginStatus.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
@@ -180,6 +181,8 @@ class OpenFoodAPIClient {
   /// No parsing of ingredients.
   /// No adjustment by language.
   /// No replacing of '&quot;' with '"'.
+// TODO: deprecated from 2022-12-01; remove when old enough
+  @Deprecated('Use getProductV3 instead')
   static Future<ProductResult> getProductRaw(
     String barcode,
     OpenFoodFactsLanguage language, {
@@ -205,11 +208,16 @@ class OpenFoodAPIClient {
   ///
   /// Please read the language mechanics explanation if you intend to show
   /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
+// TODO: deprecated from 2022-12-01; remove when old enough
+  @Deprecated('Use getProductV3 instead')
   static Future<ProductResult> getProduct(
     ProductQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
   }) async {
+    if (configuration.matchesV3()) {
+      Exception("The configuration must not match V3!");
+    }
     final String productString = await getProductString(
       configuration,
       user: user,
@@ -217,6 +225,35 @@ class OpenFoodAPIClient {
     );
     final String jsonStr = _replaceQuotes(productString);
     final ProductResult result = ProductResult.fromJson(jsonDecode(jsonStr));
+    if (result.product != null) {
+      ProductHelper.removeImages(result.product!, configuration.language);
+      ProductHelper.createImageUrls(result.product!, queryType: queryType);
+    }
+    return result;
+  }
+
+  /// Returns the product for the given barcode.
+  /// The ProductResult does not contain a product, if the product is not available.
+  /// ingredients, images and product name will be prepared for the given language.
+  ///
+  /// Please read the language mechanics explanation if you intend to show
+  /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
+  static Future<ProductResultV3> getProductV3(
+    ProductQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) async {
+    if (!configuration.matchesV3()) {
+      Exception("The configuration must match V3!");
+    }
+    final String productString = await getProductString(
+      configuration,
+      user: user,
+      queryType: queryType,
+    );
+    final String jsonStr = _replaceQuotes(productString);
+    final ProductResultV3 result =
+        ProductResultV3.fromJson(jsonDecode(jsonStr));
     if (result.product != null) {
       ProductHelper.removeImages(result.product!, configuration.language);
       ProductHelper.createImageUrls(result.product!, queryType: queryType);

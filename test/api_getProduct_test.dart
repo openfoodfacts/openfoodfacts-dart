@@ -5,6 +5,7 @@ import 'package:openfoodfacts/model/Nutrient.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/model/Nutriments.dart';
 import 'package:openfoodfacts/model/PerSize.dart';
+import 'package:openfoodfacts/model/ProductResultV3.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/InvalidBarcodes.dart';
@@ -22,6 +23,36 @@ void main() {
   const BARCODE_DANISH_BUTTER_COOKIES = '5701184005007';
 
   OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+
+  void _findExpectedIngredients(
+    final List<Ingredient> ingredients,
+    final List<String> labels,
+  ) {
+    bool foundIngredient(
+      final String label,
+      final List<Ingredient> ingredients,
+    ) {
+      for (final Ingredient ingredient in ingredients) {
+        if (ingredient.text == label) {
+          return true;
+        }
+        if (ingredient.ingredients != null) {
+          if (foundIngredient(label, ingredient.ingredients!)) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+
+    for (final String label in labels) {
+      expect(
+        foundIngredient(label, ingredients),
+        true,
+        reason: 'Could not find ingredient "$label"',
+      );
+    }
+  }
 
   group('$OpenFoodAPIClient get products', () {
     test('get product Coca Cola Light', () async {
@@ -76,13 +107,14 @@ void main() {
         barcode,
         language: OpenFoodFactsLanguage.GERMAN,
         fields: [ProductField.ALL],
+        version: ProductQueryVersion.v3,
       );
-      final ProductResult result = await OpenFoodAPIClient.getProduct(
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
 
-      expect(result.status, 1);
+      expect(result.status, ProductResultV3.statusSuccess);
       expect(result.barcode, barcode);
       expect(result.product, isNotNull);
       final Product product = result.product!;
@@ -117,17 +149,20 @@ void main() {
       //Refactor the test once the issue  #48 is fixed
       String barcode = '0028400047685';
 
-      ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.ENGLISH,
-          fields: [ProductField.ALL]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.ALL],
+        version: ProductQueryVersion.v3,
+      );
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
-      expect(result.status, 1);
+      expect(result.status, ProductResultV3.statusSuccess);
       expect(result.barcode, barcode);
-      expect(result.product != null, true);
+      expect(result.product, isNotNull);
       expect(result.product!.barcode, barcode);
 
       expect(result.product!.nutriments, isNotNull);
@@ -153,12 +188,13 @@ void main() {
         barcode,
         languages: languages,
         fields: [ProductField.PACKAGING_TEXT_IN_LANGUAGES],
+        version: ProductQueryVersion.v3,
       );
-      final ProductResult result = await OpenFoodAPIClient.getProduct(
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
-      expect(result.status, 1);
+      expect(result.status, ProductResultV3.statusSuccess);
       expect(result.product, isNotNull);
       expect(result.product!.packagingTextInLanguages, isNotNull);
       for (final OpenFoodFactsLanguage language in languages) {
@@ -170,14 +206,17 @@ void main() {
       const String barcode = '3119780259625';
 
       final ProductQueryConfiguration configurations =
-          ProductQueryConfiguration(barcode,
-              language: OpenFoodFactsLanguage.ENGLISH,
-              fields: [ProductField.ALL]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+          ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.ALL],
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
-      expect(result.status, 1);
+      expect(result.status, ProductResultV3.statusSuccess);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
@@ -200,78 +239,54 @@ void main() {
 
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',
         () async {
-      String barcode = BARCODE_DANISH_BUTTER_COOKIES;
-      ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.GERMAN,
-          fields: [ProductField.ALL]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+      const String barcode = BARCODE_DANISH_BUTTER_COOKIES;
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.ALL],
+        version: ProductQueryVersion.v3,
+      );
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
 
-      expect(result.status, 1);
+      expect(result.status, ProductResultV3.statusSuccess);
       expect(result.barcode, barcode);
-      expect(result.product != null, true);
+      expect(result.product, isNotNull);
       expect(result.product!.barcode, barcode);
       expect(result.product!.brandsTags![0], 'kelsin');
 
       // only german ingredients
-      expect(result.product!.ingredientsText != null, true);
+      expect(result.product!.ingredientsText, isNotNull);
 
-      expect(result.product!.ingredients != null, true);
-      expect(result.product!.ingredients!.length, 24);
+      expect(result.product!.ingredients, isNotNull);
+      expect(result.product!.ingredients!.length, 9);
 
-      expect(result.product!.ingredients!.any((i) => i.text == 'Buttergebäck'),
-          true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Weizenmehl'),
-          false);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Zucker'), true);
-      expect(
-          result.product!.ingredients!.any((i) => i.text == 'Butter'), false);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Speisesalz'),
-          true);
-
-      expect(
-          result.product!.ingredients!.any((i) => i.text == 'Backtriebmittel'),
-          true);
-      expect(
-          result.product!.ingredients!
-              .any((i) => i.text == 'Ammouniumhydrogencarbonat'),
-          true);
-      expect(
-          result.product!.ingredients!
-              .any((i) => i.text == 'Invertzuckersirup'),
-          true);
-      expect(
-          result.product!.ingredients!
-              .any((i) => i.text == 'natürliches Aroma'),
-          true);
-      expect(
-          result.product!.ingredients!
-              .any((i) => i.text == 'Schokolade Mürbegebäck'),
-          true);
-
-      expect(result.product!.ingredients!.any((i) => i.text == 'Pflanzenfett'),
-          true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Palm'), true);
-      expect(
-          result.product!.ingredients!
-              .any((i) => i.text == 'Schokoladenstückchen'),
-          true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Kakaomasse'),
-          true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Kakaobutter'),
-          true);
-
-      expect(
-          result.product!.ingredients!.any((i) => i.text == 'Emulgator'), true);
-      expect(
-          result.product!.ingredients!.any((i) => i.text == 'Lecithin'), true);
-      expect(
-          result.product!.ingredients!
-              .any((i) => i.text == 'fettarmes Kakaopulver'),
-          true);
+      _findExpectedIngredients(
+        result.product!.ingredients!,
+        [
+          'Buttergebäck',
+          '_Weizenmehl_',
+          'Zucker',
+          '_Butter_',
+          'Speisesalz',
+          'Backtriebmittel',
+          'Ammouniumhydrogencarbonat',
+          'Invertzuckersirup',
+          'natürliches Aroma',
+          'Schokolade Mürbegebäck',
+          'Pflanzenfett',
+          'Palm',
+          'Schokoladenstückchen',
+          'Kakaomasse',
+          'Kakaobutter',
+          'Emulgator',
+          'Lecithin',
+          'fettarmes Kakaopulver',
+        ],
+      );
 
       expect(result.product!.selectedImages!.length, 9);
 
@@ -295,15 +310,17 @@ void main() {
         () async {
       String barcode = '0038900009472';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.ENGLISH,
-          fields: [ProductField.ALL]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+        barcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.ALL],
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
 
-      expect(result.status, 1);
+      expect(result.status, ProductResultV3.statusSuccess);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
@@ -322,14 +339,15 @@ void main() {
       const User user = TestConstants.PROD_USER;
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
       const List<ProductField> fields = [ProductField.NUTRIMENTS];
-      ProductResult result;
+      ProductResultV3 result;
       late Nutriments nutriments;
 
-      result = await OpenFoodAPIClient.getProduct(
+      result = await OpenFoodAPIClient.getProductV3(
         ProductQueryConfiguration(
           '5060517883638',
           language: language,
           fields: fields,
+          version: ProductQueryVersion.v3,
         ),
         user: user,
         queryType: queryType,
@@ -345,11 +363,12 @@ void main() {
         isNull,
       );
 
-      result = await OpenFoodAPIClient.getProduct(
+      result = await OpenFoodAPIClient.getProductV3(
         ProductQueryConfiguration(
           '7612100018477',
           language: language,
           fields: fields,
+          version: ProductQueryVersion.v3,
         ),
         user: user,
         queryType: queryType,
@@ -362,11 +381,12 @@ void main() {
       );
       expect(nutriments.getValue(Nutrient.biotin, PerSize.serving), isNull);
 
-      result = await OpenFoodAPIClient.getProduct(
+      result = await OpenFoodAPIClient.getProductV3(
         ProductQueryConfiguration(
           '3057640257773',
           language: language,
           fields: fields,
+          version: ProductQueryVersion.v3,
         ),
         user: user,
         queryType: queryType,
@@ -382,11 +402,12 @@ void main() {
         .015,
       );
 
-      result = await OpenFoodAPIClient.getProduct(
+      result = await OpenFoodAPIClient.getProductV3(
         ProductQueryConfiguration(
           '4260556630007',
           language: language,
           fields: fields,
+          version: ProductQueryVersion.v3,
         ),
         user: user,
         queryType: queryType,
@@ -426,11 +447,12 @@ void main() {
         .00002,
       );
 
-      result = await OpenFoodAPIClient.getProduct(
+      result = await OpenFoodAPIClient.getProductV3(
         ProductQueryConfiguration(
           '3155251205319',
           language: language,
           fields: fields,
+          version: ProductQueryVersion.v3,
         ),
         user: user,
         queryType: queryType,
@@ -454,11 +476,12 @@ void main() {
         9.1,
       );
 
-      result = await OpenFoodAPIClient.getProduct(
+      result = await OpenFoodAPIClient.getProductV3(
         ProductQueryConfiguration(
           '5000159461122',
           language: language,
           fields: fields,
+          version: ProductQueryVersion.v3,
         ),
         user: user,
         queryType: queryType,
@@ -478,15 +501,17 @@ void main() {
     test('get product Confiture Rhubarbe Fraises extra', () async {
       String barcode = '3301595000305';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.FRENCH,
-          fields: [ProductField.ALL]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+        barcode,
+        language: OpenFoodFactsLanguage.FRENCH,
+        fields: [ProductField.ALL],
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
 
-      expect(result.status, 1);
+      expect(result.status, ProductResultV3.statusSuccess);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
@@ -596,10 +621,12 @@ void main() {
     test('product not available', () async {
       String barcode = BARCODE_UNKNOWN;
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.GERMAN,
-          fields: [ProductField.ALL]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.ALL],
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
@@ -609,10 +636,12 @@ void main() {
     test('product ingredients', () async {
       String barcode = '4316268596299';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.GERMAN,
-          fields: [ProductField.ALL]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.ALL],
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
@@ -624,14 +653,16 @@ void main() {
     test('product ecoscore', () async {
       String barcode = '3229820129488';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.ENGLISH,
-          fields: [
-            ProductField.ECOSCORE_GRADE,
-            ProductField.ECOSCORE_SCORE,
-            ProductField.ECOSCORE_DATA
-          ]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+        barcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [
+          ProductField.ECOSCORE_GRADE,
+          ProductField.ECOSCORE_SCORE,
+          ProductField.ECOSCORE_DATA
+        ],
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
@@ -647,10 +678,12 @@ void main() {
     test('product fields', () async {
       String barcode = '20004361';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.GERMAN,
-          fields: [ProductField.NAME, ProductField.BRANDS_TAGS]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.NAME, ProductField.BRANDS_TAGS],
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
@@ -666,10 +699,13 @@ void main() {
       expect(result.product!.nutrientLevels!.levels, isEmpty);
       expect(result.product!.lang, OpenFoodFactsLanguage.UNDEFINED);
 
-      configurations = ProductQueryConfiguration(barcode,
-          language: OpenFoodFactsLanguage.GERMAN,
-          fields: [ProductField.NAME, ProductField.LANGUAGE]);
-      result = await OpenFoodAPIClient.getProduct(
+      configurations = ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.NAME, ProductField.LANGUAGE],
+        version: ProductQueryVersion.v3,
+      );
+      result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
@@ -685,10 +721,13 @@ void main() {
       expect(result.product!.nutrientLevels!.levels, isEmpty);
       expect(result.product!.lang, OpenFoodFactsLanguage.ENGLISH);
 
-      configurations = ProductQueryConfiguration(barcode,
-          language: OpenFoodFactsLanguage.GERMAN,
-          fields: [ProductField.NAME, ProductField.COUNTRIES]);
-      result = await OpenFoodAPIClient.getProduct(
+      configurations = ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.NAME, ProductField.COUNTRIES],
+        version: ProductQueryVersion.v3,
+      );
+      result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
@@ -705,10 +744,13 @@ void main() {
       expect(result.product!.lang, OpenFoodFactsLanguage.UNDEFINED);
       expect(result.product!.countries, isNotNull);
 
-      configurations = ProductQueryConfiguration(barcode,
-          language: OpenFoodFactsLanguage.GERMAN,
-          fields: [ProductField.NAME, ProductField.COUNTRIES_TAGS]);
-      result = await OpenFoodAPIClient.getProduct(
+      configurations = ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.NAME, ProductField.COUNTRIES_TAGS],
+        version: ProductQueryVersion.v3,
+      );
+      result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
@@ -729,10 +771,12 @@ void main() {
     test('attribute groups', () async {
       String barcode = '3700214614266';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.ENGLISH,
-          fields: [ProductField.NAME, ProductField.ATTRIBUTE_GROUPS]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+        barcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.NAME, ProductField.ATTRIBUTE_GROUPS],
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
@@ -781,14 +825,16 @@ void main() {
       String barcode = '5000112548167';
 
       //Get product without setting OpenFoodFactsLanguage or ProductField
-      ProductQueryConfiguration configurations =
-          ProductQueryConfiguration(barcode);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+        barcode,
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
 
-      expect(result.status, 1);
+      expect(result.status, ProductResultV3.statusSuccess);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product!.barcode, barcode);
@@ -796,8 +842,8 @@ void main() {
       expect(result.product!.ingredientsText != null, true);
 
       expect(result.product!.ingredients != null, true);
-      expect(result.product!.ingredients!.length, 13);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Aroma'), true);
+      expect(result.product!.ingredients!.length, 7);
+      _findExpectedIngredients(result.product!.ingredients!, ['Aroma']);
 
       expect(result.product!.additives!.ids[0], 'en:e150d');
       expect(result.product!.additives!.names[0], 'E150d');
@@ -824,27 +870,34 @@ void main() {
           'https://static.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
 
       //Get product without setting ProductField
-      configurations = ProductQueryConfiguration(barcode,
-          language: OpenFoodFactsLanguage.GERMAN);
-      result = await OpenFoodAPIClient.getProduct(
+      configurations = ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        version: ProductQueryVersion.v3,
+      );
+      result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
 
-      expect(result.status, 1);
+      expect(result.status, ProductResultV3.statusSuccess);
       expect(result.barcode, barcode);
-      expect(result.product != null, true);
+      expect(result.product, isNotNull);
       expect(result.product!.barcode, barcode);
-      expect(result.product!.lastModified != null, true);
+      expect(result.product!.lastModified, isNotNull);
 
-      expect(result.product!.ingredientsText != null, true);
+      expect(result.product!.ingredientsText, isNotNull);
 
-      expect(result.product!.ingredients != null, true);
-      expect(result.product!.ingredients!.length, 13);
+      expect(result.product!.ingredients, isNotNull);
+      expect(result.product!.ingredients!.length, 7);
 
-      expect(result.product!.ingredients!.any((i) => i.text == 'Wasser'), true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Kohlensäure'),
-          true);
+      _findExpectedIngredients(
+        result.product!.ingredients!,
+        [
+          'Wasser',
+          'Kohlensäure',
+        ],
+      );
 
       expect(result.product!.additives!.ids[0], 'en:e150d');
       expect(result.product!.additives!.names[0], 'E150d');
@@ -871,32 +924,37 @@ void main() {
           'https://static.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
 
       //Get product without setting OpenFoodFactsLanguage
-      configurations =
-          ProductQueryConfiguration(barcode, fields: [ProductField.ALL]);
-      result = await OpenFoodAPIClient.getProduct(
+      configurations = ProductQueryConfiguration(
+        barcode,
+        fields: [ProductField.ALL],
+        version: ProductQueryVersion.v3,
+      );
+      result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
 
-      expect(result.status, 1);
+      expect(result.status, ProductResultV3.statusSuccess);
       expect(result.barcode, barcode);
-      expect(result.product != null, true);
+      expect(result.product, isNotNull);
       expect(result.product!.barcode, barcode);
-      expect(result.product!.lastModified != null, true);
+      expect(result.product!.lastModified, isNotNull);
 
-      expect(result.product!.ingredientsText != null, true);
+      expect(result.product!.ingredientsText, isNotNull);
 
-      expect(result.product!.ingredients != null, true);
-      expect(result.product!.ingredients!.length, 13);
+      expect(result.product!.ingredients, isNotNull);
+      expect(result.product!.ingredients!.length, 7);
 
-      expect(result.product!.ingredients!.any((i) => i.text == 'Wasser'), true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Kohlensäure'),
-          true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Süßungsmittel'),
-          true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Aroma'), true);
-      expect(result.product!.ingredients!.any((i) => i.text == 'Aroma Koffein'),
-          true);
+      _findExpectedIngredients(
+        result.product!.ingredients!,
+        [
+          'Wasser',
+          'Kohlensäure',
+          'Süßungsmittel',
+          'Aroma',
+          'Aroma Koffein',
+        ],
+      );
 
       expect(result.product!.selectedImages!.length, 15);
 
@@ -929,7 +987,7 @@ void main() {
           result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
           Level.LOW);
 
-      expect(result.product!.images != null, true);
+      expect(result.product!.images, isNotNull);
       expect(result.product!.images!.length, 20);
       expect(
           result.product!.images!
@@ -951,10 +1009,12 @@ void main() {
         () async {
       String barcode = BARCODE_DANISH_BUTTER_COOKIES;
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.GERMAN,
-          fields: [ProductField.ALL]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.ALL],
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
@@ -1000,14 +1060,22 @@ void main() {
         ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
       ];
 
-      ProductQueryConfiguration englishConf = ProductQueryConfiguration(barcode,
-          language: OpenFoodFactsLanguage.ENGLISH, fields: fields);
-      ProductQueryConfiguration russianConf = ProductQueryConfiguration(barcode,
-          language: OpenFoodFactsLanguage.RUSSIAN, fields: fields);
+      ProductQueryConfiguration englishConf = ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: fields,
+        version: ProductQueryVersion.v3,
+      );
+      ProductQueryConfiguration russianConf = ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.RUSSIAN,
+        fields: fields,
+        version: ProductQueryVersion.v3,
+      );
 
       // English!
 
-      ProductResult englishResult = await OpenFoodAPIClient.getProduct(
+      ProductResultV3 englishResult = await OpenFoodAPIClient.getProductV3(
         englishConf,
         user: TestConstants.TEST_USER,
       );
@@ -1044,7 +1112,7 @@ void main() {
 
       // Russian!
 
-      ProductResult russianResult = await OpenFoodAPIClient.getProduct(
+      ProductResultV3 russianResult = await OpenFoodAPIClient.getProductV3(
         russianConf,
         user: TestConstants.TEST_USER,
       );
@@ -1123,14 +1191,22 @@ void main() {
         ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
       ];
 
-      ProductQueryConfiguration englishConf = ProductQueryConfiguration(barcode,
-          language: OpenFoodFactsLanguage.ENGLISH, fields: fields);
-      ProductQueryConfiguration russianConf = ProductQueryConfiguration(barcode,
-          language: OpenFoodFactsLanguage.RUSSIAN, fields: fields);
+      ProductQueryConfiguration englishConf = ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: fields,
+        version: ProductQueryVersion.v3,
+      );
+      ProductQueryConfiguration russianConf = ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.RUSSIAN,
+        fields: fields,
+        version: ProductQueryVersion.v3,
+      );
 
       // English!
 
-      ProductResult englishResult = await OpenFoodAPIClient.getProduct(
+      ProductResultV3 englishResult = await OpenFoodAPIClient.getProductV3(
         englishConf,
         user: TestConstants.TEST_USER,
       );
@@ -1167,7 +1243,7 @@ void main() {
 
       // Russian!
 
-      ProductResult russianResult = await OpenFoodAPIClient.getProduct(
+      ProductResultV3 russianResult = await OpenFoodAPIClient.getProductV3(
         russianConf,
         user: TestConstants.TEST_USER,
       );
@@ -1241,15 +1317,18 @@ void main() {
         ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
       ];
 
-      ProductQueryConfiguration conf = ProductQueryConfiguration(barcode,
-          languages: [
-            OpenFoodFactsLanguage.ENGLISH,
-            OpenFoodFactsLanguage.RUSSIAN,
-            OpenFoodFactsLanguage.GERMAN
-          ],
-          fields: fields);
+      ProductQueryConfiguration conf = ProductQueryConfiguration(
+        barcode,
+        languages: [
+          OpenFoodFactsLanguage.ENGLISH,
+          OpenFoodFactsLanguage.RUSSIAN,
+          OpenFoodFactsLanguage.GERMAN
+        ],
+        fields: fields,
+        version: ProductQueryVersion.v3,
+      );
 
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         conf,
         user: TestConstants.TEST_USER,
       );
@@ -1329,14 +1408,17 @@ void main() {
       ];
 
       // English first
-      ProductQueryConfiguration conf = ProductQueryConfiguration(barcode,
-          languages: [
-            OpenFoodFactsLanguage.ENGLISH,
-            OpenFoodFactsLanguage.RUSSIAN,
-            OpenFoodFactsLanguage.GERMAN,
-          ],
-          fields: fields);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+      ProductQueryConfiguration conf = ProductQueryConfiguration(
+        barcode,
+        languages: [
+          OpenFoodFactsLanguage.ENGLISH,
+          OpenFoodFactsLanguage.RUSSIAN,
+          OpenFoodFactsLanguage.GERMAN,
+        ],
+        fields: fields,
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         conf,
         user: TestConstants.TEST_USER,
       );
@@ -1346,14 +1428,17 @@ void main() {
       expect(product.ingredientsText, equals('Flour, water'));
 
       // German first
-      conf = ProductQueryConfiguration(barcode,
-          languages: [
-            OpenFoodFactsLanguage.GERMAN,
-            OpenFoodFactsLanguage.RUSSIAN,
-            OpenFoodFactsLanguage.ENGLISH,
-          ],
-          fields: fields);
-      result = await OpenFoodAPIClient.getProduct(
+      conf = ProductQueryConfiguration(
+        barcode,
+        languages: [
+          OpenFoodFactsLanguage.GERMAN,
+          OpenFoodFactsLanguage.RUSSIAN,
+          OpenFoodFactsLanguage.ENGLISH,
+        ],
+        fields: fields,
+        version: ProductQueryVersion.v3,
+      );
+      result = await OpenFoodAPIClient.getProductV3(
         conf,
         user: TestConstants.TEST_USER,
       );
@@ -1363,14 +1448,17 @@ void main() {
       expect(product.ingredientsText, equals('Mehl, wasser'));
 
       // Russian first
-      conf = ProductQueryConfiguration(barcode,
-          languages: [
-            OpenFoodFactsLanguage.RUSSIAN,
-            OpenFoodFactsLanguage.GERMAN,
-            OpenFoodFactsLanguage.ENGLISH,
-          ],
-          fields: fields);
-      result = await OpenFoodAPIClient.getProduct(
+      conf = ProductQueryConfiguration(
+        barcode,
+        languages: [
+          OpenFoodFactsLanguage.RUSSIAN,
+          OpenFoodFactsLanguage.GERMAN,
+          OpenFoodFactsLanguage.ENGLISH,
+        ],
+        fields: fields,
+        version: ProductQueryVersion.v3,
+      );
+      result = await OpenFoodAPIClient.getProductV3(
         conf,
         user: TestConstants.TEST_USER,
       );
@@ -1409,9 +1497,12 @@ void main() {
         ProductField.NAME_ALL_LANGUAGES,
         ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
       ];
-      ProductQueryConfiguration conf =
-          ProductQueryConfiguration(barcode, fields: fields);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+      ProductQueryConfiguration conf = ProductQueryConfiguration(
+        barcode,
+        fields: fields,
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         conf,
         user: TestConstants.TEST_USER,
       );
@@ -1465,13 +1556,16 @@ void main() {
         ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
       ];
       // For 'in-langs' fields specify not all of the available languages
-      ProductQueryConfiguration conf = ProductQueryConfiguration(barcode,
-          languages: [
-            OpenFoodFactsLanguage.RUSSIAN,
-            OpenFoodFactsLanguage.ENGLISH,
-          ],
-          fields: fields);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+      ProductQueryConfiguration conf = ProductQueryConfiguration(
+        barcode,
+        languages: [
+          OpenFoodFactsLanguage.RUSSIAN,
+          OpenFoodFactsLanguage.ENGLISH,
+        ],
+        fields: fields,
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         conf,
         user: TestConstants.TEST_USER,
       );
@@ -1507,10 +1601,12 @@ void main() {
       );
 
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.GERMAN,
-          fields: [ProductField.ALL]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.ALL],
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
@@ -1532,11 +1628,13 @@ void main() {
         'nutriscore',
         'root',
       };
-      final ProductResult productResult = await OpenFoodAPIClient.getProduct(
+      final ProductResultV3 productResult =
+          await OpenFoodAPIClient.getProductV3(
         ProductQueryConfiguration(
           BARCODE_DANISH_BUTTER_COOKIES,
           language: OpenFoodFactsLanguage.FRENCH,
           fields: <ProductField>[ProductField.KNOWLEDGE_PANELS],
+          version: ProductQueryVersion.v3,
         ),
         queryType: QueryType.PROD,
         user: TestConstants.PROD_USER,
@@ -1553,92 +1651,6 @@ void main() {
         // some tests can be slow here
         Duration(seconds: 300),
       ));
-
-  group('$OpenFoodAPIClient test ingredients', () {
-    const String barcode = BARCODE_DANISH_BUTTER_COOKIES;
-    // Ingredients for _BARCODE_DANISH_BUTTER_COOKIES
-    const List<String> expectedIngredientLabels = <String>[
-      'Buttergebäck',
-      'Zucker',
-      'Speisesalz',
-      'Backtriebmittel',
-      'Ammouniumhydrogencarbonat',
-      'Invertzuckersirup',
-      'natürliches Aroma',
-      'Schokolade Mürbegebäck',
-      'Pflanzenfett',
-      'Palm',
-      'Schokoladenstückchen',
-      'Kakaomasse',
-      'Kakaobutter',
-      'Emulgator',
-      'Lecithin',
-      'fettarmes Kakaopulver',
-      '_Weizenmehl_',
-      '_Butter_',
-    ];
-
-    /// Recursively adds [ingredient] labels to [labels].
-    ///
-    /// Works with flat and tree hierarchies.
-    void addToIngredientLabels(
-      final List<Ingredient> ingredients,
-      final Set<String> labels,
-    ) {
-      for (final Ingredient ingredient in ingredients) {
-        labels.add(ingredient.text!);
-        if (ingredient.ingredients != null) {
-          addToIngredientLabels(ingredient.ingredients!, labels);
-        }
-      }
-    }
-
-    test('get ingredients api.v0', () async {
-      final ProductQueryConfiguration configurations =
-          ProductQueryConfiguration(
-        barcode,
-        language: OpenFoodFactsLanguage.GERMAN,
-        fields: [ProductField.INGREDIENTS],
-        version: ProductQueryVersion.v0,
-      );
-      final ProductResult result = await OpenFoodAPIClient.getProduct(
-        configurations,
-        user: TestConstants.TEST_USER,
-      );
-
-      expect(result.status, 1);
-      expect(result.product, isNotNull);
-      expect(result.product!.ingredients, isNotNull);
-      // in V0, everything is at the same level
-      expect(result.product!.ingredients!.length, 24);
-      final Set<String> ingredientLabels = <String>{};
-      addToIngredientLabels(result.product!.ingredients!, ingredientLabels);
-      expect(ingredientLabels, containsAll(expectedIngredientLabels));
-    });
-
-    test('get ingredients api.v2', () async {
-      final ProductQueryConfiguration configurations =
-          ProductQueryConfiguration(
-        barcode,
-        language: OpenFoodFactsLanguage.GERMAN,
-        fields: [ProductField.INGREDIENTS],
-        version: ProductQueryVersion.v2,
-      );
-      final ProductResult result = await OpenFoodAPIClient.getProduct(
-        configurations,
-        user: TestConstants.TEST_USER,
-      );
-
-      expect(result.status, 1);
-      expect(result.product, isNotNull);
-      expect(result.product!.ingredients, isNotNull);
-      // in V2, same ingredients but in a tree.
-      expect(result.product!.ingredients!.length, 9);
-      final Set<String> ingredientLabels = <String>{};
-      addToIngredientLabels(result.product!.ingredients!, ingredientLabels);
-      expect(ingredientLabels, containsAll(expectedIngredientLabels));
-    });
-  });
 
   test('get invalid barcodes', () async {
     final String url = InvalidBarcodes.getUrl();
@@ -1664,11 +1676,12 @@ void main() {
       OpenFoodFactsLanguage.GERMAN,
       OpenFoodFactsLanguage.FRENCH,
     ];
-    final ProductResult productResult = await OpenFoodAPIClient.getProduct(
+    final ProductResultV3 productResult = await OpenFoodAPIClient.getProductV3(
       ProductQueryConfiguration(
         BARCODE_DANISH_BUTTER_COOKIES,
         languages: languages,
         fields: [ProductField.IMAGES_FRESHNESS_IN_LANGUAGES],
+        version: ProductQueryVersion.v3,
       ),
     );
     final Product product = productResult.product!;
@@ -1807,14 +1820,15 @@ void main() {
         ProductField.PACKAGING_TAGS,
         ProductField.QUANTITY,
       ],
+      version: ProductQueryVersion.v3,
     );
 
-    ProductResult result = await OpenFoodAPIClient.getProduct(
+    final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
       configurations,
       user: TestConstants.TEST_USER,
     );
 
-    expect(result.status, 1);
+    expect(result.status, ProductResultV3.statusSuccess);
     expect(result.product?.barcode, null);
     expect(result.product?.genericName, 'Softdrink');
     expect(result.product?.labels, 'MyTestLabel');
@@ -1829,29 +1843,31 @@ void main() {
 
   test('get new product fields', () async {
     late ProductQueryConfiguration configuration;
-    late ProductResult result;
+    late ProductResultV3 result;
 
     configuration = ProductQueryConfiguration(
       BARCODE_DANISH_BUTTER_COOKIES,
       fields: [ProductField.COMPARED_TO_CATEGORY],
+      version: ProductQueryVersion.v3,
     );
-    result = await OpenFoodAPIClient.getProduct(
+    result = await OpenFoodAPIClient.getProductV3(
       configuration,
       queryType: QueryType.PROD,
     );
-    expect(result.status, 1);
+    expect(result.status, ProductResultV3.statusSuccess);
     expect(result.product, isNotNull);
     expect(result.product!.comparedToCategory, isNotNull);
 
     configuration = ProductQueryConfiguration(
       '7300400481588',
       fields: [ProductField.WEBSITE],
+      version: ProductQueryVersion.v3,
     );
-    result = await OpenFoodAPIClient.getProduct(
+    result = await OpenFoodAPIClient.getProductV3(
       configuration,
       queryType: QueryType.PROD,
     );
-    expect(result.status, 1);
+    expect(result.status, ProductResultV3.statusSuccess);
     expect(result.product, isNotNull);
     expect(result.product!.website, isNotNull);
     expect(result.product!.website, isNotEmpty);
@@ -1884,9 +1900,10 @@ void main() {
           ProductField.NO_NUTRITION_DATA,
           ProductField.NUTRIMENTS,
         ],
+        version: ProductQueryVersion.v3,
       );
 
-      final ProductResult result = await OpenFoodAPIClient.getProduct(
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
@@ -1905,9 +1922,10 @@ void main() {
           ProductField.NO_NUTRITION_DATA,
           ProductField.NUTRIMENTS,
         ],
+        version: ProductQueryVersion.v3,
       );
 
-      final ProductResult result = await OpenFoodAPIClient.getProduct(
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );

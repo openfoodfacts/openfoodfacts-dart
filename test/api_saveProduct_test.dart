@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:openfoodfacts/model/Nutrient.dart';
 import 'package:openfoodfacts/model/Nutriments.dart';
 import 'package:openfoodfacts/model/PerSize.dart';
+import 'package:openfoodfacts/model/ProductResultV3.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
@@ -19,19 +20,19 @@ void main() {
     String servingSize_1 = '100g';
     double servingQuantity_1 = 100;
 
-    void testProductResult1(ProductResult result) {
-      expect(result.status, 1);
+    void testProductResult1(ProductResultV3 result) {
+      expect(result.status, ProductResultV3.statusSuccess);
       expect(result.barcode, barcode_1);
-      expect(result.product != null, true);
+      expect(result.product, isNotNull);
       expect(result.product!.barcode, barcode_1);
 
-      expect(result.product!.quantity != null, true);
+      expect(result.product!.quantity, isNotNull);
       expect(result.product!.quantity, quantity_1);
 
-      expect(result.product!.servingQuantity != null, true);
+      expect(result.product!.servingQuantity, isNotNull);
       expect(result.product!.servingQuantity, servingQuantity_1);
 
-      expect(result.product!.servingSize != null, true);
+      expect(result.product!.servingSize, isNotNull);
       expect(result.product!.servingSize, servingSize_1);
     }
 
@@ -59,10 +60,12 @@ void main() {
       expect(status.statusVerbose, 'fields saved');
 
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
-          barcode_1,
-          language: OpenFoodFactsLanguage.ENGLISH,
-          fields: [ProductField.ALL]);
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+        barcode_1,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.ALL],
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
@@ -79,7 +82,7 @@ void main() {
       expect(status2.status, 1);
       expect(status2.statusVerbose, 'fields saved');
 
-      ProductResult result2 = await OpenFoodAPIClient.getProduct(
+      ProductResultV3 result2 = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
@@ -140,14 +143,16 @@ void main() {
 
       // get french fields for product
       final ProductQueryConfiguration frenchConfig = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.FRENCH,
-          fields: [
-            ProductField.NAME,
-            ProductField.BRANDS,
-            ProductField.QUANTITY
-          ]);
-      final frenchResult = await OpenFoodAPIClient.getProduct(
+        barcode,
+        language: OpenFoodFactsLanguage.FRENCH,
+        fields: [
+          ProductField.NAME,
+          ProductField.BRANDS,
+          ProductField.QUANTITY,
+        ],
+        version: ProductQueryVersion.v3,
+      );
+      final frenchResult = await OpenFoodAPIClient.getProductV3(
         frenchConfig,
       );
       expect(frenchResult.product, isNotNull);
@@ -155,14 +160,12 @@ void main() {
 
       // get german fields for product
       final ProductQueryConfiguration germanConfig = ProductQueryConfiguration(
-          barcode,
-          language: OpenFoodFactsLanguage.GERMAN,
-          fields: [
-            ProductField.NAME,
-            ProductField.BRANDS,
-            ProductField.QUANTITY
-          ]);
-      final germanResult = await OpenFoodAPIClient.getProduct(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.NAME, ProductField.BRANDS, ProductField.QUANTITY],
+        version: ProductQueryVersion.v3,
+      );
+      final germanResult = await OpenFoodAPIClient.getProductV3(
         germanConfig,
       );
 
@@ -171,15 +174,16 @@ void main() {
 
       // get preferably French, then German fields for product
       final ProductQueryConfiguration frenchGermanConfig =
-          ProductQueryConfiguration(barcode, languages: [
-        OpenFoodFactsLanguage.FRENCH,
-        OpenFoodFactsLanguage.GERMAN,
-      ], fields: [
-        ProductField.NAME,
-        ProductField.BRANDS,
-        ProductField.QUANTITY
-      ]);
-      final frenchGermanResult = await OpenFoodAPIClient.getProduct(
+          ProductQueryConfiguration(
+        barcode,
+        languages: [
+          OpenFoodFactsLanguage.FRENCH,
+          OpenFoodFactsLanguage.GERMAN,
+        ],
+        fields: [ProductField.NAME, ProductField.BRANDS, ProductField.QUANTITY],
+        version: ProductQueryVersion.v3,
+      );
+      final frenchGermanResult = await OpenFoodAPIClient.getProductV3(
         frenchGermanConfig,
       );
 
@@ -290,9 +294,11 @@ Like that:
       expect(status.status, 1);
       expect(status.statusVerbose, 'fields saved');
 
-      ProductQueryConfiguration configurations =
-          ProductQueryConfiguration('7340011364184');
-      ProductResult result = await OpenFoodAPIClient.getProduct(
+      ProductQueryConfiguration configurations = ProductQueryConfiguration(
+        '7340011364184',
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
@@ -346,13 +352,16 @@ Like that:
         expect(status.status, 1);
         expect(status.statusVerbose, 'fields saved');
 
-        final ProductResult result = await OpenFoodAPIClient.getProductRaw(
-          BARCODE,
-          OpenFoodFactsLanguage.ENGLISH,
+        final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+          ProductQueryConfiguration(
+            BARCODE,
+            language: OpenFoodFactsLanguage.ENGLISH,
+            version: ProductQueryVersion.v3,
+          ),
           user: USER,
         );
 
-        expect(result.status, 1);
+        expect(result.status, ProductResultV3.statusSuccess);
         expect(result.barcode, BARCODE);
         final Product? searchedProduct = result.product;
         expect(searchedProduct != null, true);
@@ -411,14 +420,15 @@ Like that:
           barcode,
           language: OpenFoodFactsLanguage.FRENCH,
           fields: [ProductField.ALL],
+          version: ProductQueryVersion.v3,
         );
 
         // Step 1: get the product
-        ProductResult result = await OpenFoodAPIClient.getProduct(
+        ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
           configurations,
           user: TestConstants.TEST_USER,
         );
-        expect(result.status, 1);
+        expect(result.status, ProductResultV3.statusSuccess);
         expect(result.product, isNotNull);
         expect(result.product!.nutriments, isNotNull);
         final Nutriments nutriments = result.product!.nutriments!;
@@ -441,11 +451,11 @@ Like that:
         expect(status.error, null);
 
         // Step 3: check if the value was correctly saved
-        result = await OpenFoodAPIClient.getProduct(
+        result = await OpenFoodAPIClient.getProductV3(
           configurations,
           user: TestConstants.TEST_USER,
         );
-        expect(result.status, 1);
+        expect(result.status, ProductResultV3.statusSuccess);
         expect(result.product, isNotNull);
         expect(result.product!.nutriments, isNotNull);
         final double? latestValue =
