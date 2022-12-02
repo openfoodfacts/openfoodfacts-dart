@@ -4,6 +4,8 @@ import 'Product.dart';
 
 part 'ProductResult.g.dart';
 
+// TODO: deprecated from 2022-12-01; remove when old enough
+@Deprecated('Use ProductResultV3 instead')
 @JsonSerializable()
 class ProductResult extends JsonObject {
   final int? status;
