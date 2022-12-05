@@ -1871,6 +1871,52 @@ void main() {
     expect(result.product, isNotNull);
     expect(result.product!.website, isNotNull);
     expect(result.product!.website, isNotEmpty);
+
+    configuration = ProductQueryConfiguration(
+      '3033710065066',
+      fields: [
+        ProductField.LAST_CHECKED,
+        ProductField.LAST_CHECKER,
+        ProductField.LAST_MODIFIED,
+        ProductField.LAST_MODIFIER,
+        ProductField.CREATED,
+        ProductField.CREATOR,
+        ProductField.EDITORS,
+      ],
+      version: ProductQueryVersion.v3,
+    );
+    result = await OpenFoodAPIClient.getProductV3(
+      configuration,
+      queryType: QueryType.PROD,
+    );
+    expect(result.status, ProductResultV3.statusSuccess);
+    expect(result.product, isNotNull);
+    expect(result.product!.lastModified, isNotNull);
+    expect(
+      JsonHelper.dateToTimestamp(result.product!.lastModified),
+      greaterThanOrEqualTo(1667683782),
+    ); // value on 2022-12-05
+    expect(result.product!.lastModifiedBy, isNotNull);
+    expect(result.product!.lastModifiedBy, isNotEmpty);
+    expect(result.product!.lastChecked, isNotNull);
+    expect(
+      JsonHelper.dateToTimestamp(result.product!.lastChecked),
+      greaterThanOrEqualTo(1541687984),
+    ); // value on 2022-12-05
+    expect(result.product!.lastChecker, isNotNull);
+    expect(result.product!.lastChecker, isNotEmpty);
+    expect(result.product!.created, isNotNull);
+    expect(
+      JsonHelper.dateToTimestamp(result.product!.created),
+      greaterThanOrEqualTo(1340658486),
+    ); // value on 2022-12-05
+    expect(result.product!.creator, isNotNull);
+    expect(result.product!.creator, isNotEmpty);
+    expect(result.product!.editors, isNotNull);
+    expect(
+      result.product!.editors!.length,
+      greaterThanOrEqualTo(59),
+    ); // value on 2022-12-05
   });
 
   group('no nutrition data', () {

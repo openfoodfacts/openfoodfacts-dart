@@ -340,12 +340,45 @@ class Product extends JsonObject {
       toJson: JsonHelper.attributeGroupsToJson)
   List<AttributeGroup>? attributeGroups;
 
+  /// Latest modification timestamp. Read-only.
   @JsonKey(
       name: 'last_modified_t',
       includeIfNull: false,
       fromJson: JsonHelper.timestampToDate,
       toJson: JsonHelper.dateToTimestamp)
   DateTime? lastModified;
+
+  /// Latest modification user id. Read-only.
+  @JsonKey(name: 'last_modified_by', includeIfNull: false)
+  String? lastModifiedBy;
+
+  /// Last check timestamp. Read-only.
+  @JsonKey(
+      name: 'last_checked_t',
+      includeIfNull: false,
+      fromJson: JsonHelper.timestampToDate,
+      toJson: JsonHelper.dateToTimestamp)
+  DateTime? lastChecked;
+
+  /// Last check user id. Read-only.
+  @JsonKey(name: 'last_checker', includeIfNull: false)
+  String? lastChecker;
+
+  /// Creation timestamp. Read-only.
+  @JsonKey(
+      name: 'created_t',
+      includeIfNull: false,
+      fromJson: JsonHelper.timestampToDate,
+      toJson: JsonHelper.dateToTimestamp)
+  DateTime? created;
+
+  /// Creation user id. Read-only.
+  @JsonKey(includeIfNull: false)
+  String? creator;
+
+  /// Editors. Read-only.
+  @JsonKey(name: 'editors_tags', includeIfNull: false)
+  List<String>? editors;
 
   @JsonKey(name: 'ecoscore_grade', includeIfNull: false)
   String? ecoscoreGrade;
