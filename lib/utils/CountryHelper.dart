@@ -1,1008 +1,771 @@
+import 'package:openfoodfacts/model/OffTagged.dart';
+
 /// Countries, cf. https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-enum OpenFoodFactsCountry {
+enum OpenFoodFactsCountry implements OffTagged {
   /// Andorra
-  ANDORRA,
+  ANDORRA(offTag: 'ad'),
 
   /// United Arab Emirates
-  UNITED_ARAB_EMIRATES,
+  UNITED_ARAB_EMIRATES(offTag: 'ae'),
 
   /// Afghanistan
-  AFGHANISTAN,
+  AFGHANISTAN(offTag: 'af'),
 
   /// Antigua and Barbuda
-  ANTIGUA_AND_BARBUDA,
+  ANTIGUA_AND_BARBUDA(offTag: 'ag'),
 
   /// Anguilla
-  ANGUILLA,
+  ANGUILLA(offTag: 'ai'),
 
   /// Albania
-  ALBANIA,
+  ALBANIA(offTag: 'al'),
 
   /// Armenia
-  ARMENIA,
+  ARMENIA(offTag: 'am'),
 
   /// Angola
-  ANGOLA,
+  ANGOLA(offTag: 'ao'),
 
   /// Antarctica
-  ANTARCTICA,
+  ANTARCTICA(offTag: 'aq'),
 
   /// Argentina
-  ARGENTINA,
+  ARGENTINA(offTag: 'ar'),
 
   /// American Samoa
-  AMERICAN_SAMOA,
+  AMERICAN_SAMOA(offTag: 'as'),
 
   /// Austria
-  AUSTRIA,
+  AUSTRIA(offTag: 'at'),
 
   /// Australia
-  AUSTRALIA,
+  AUSTRALIA(offTag: 'au'),
 
   /// Aruba
-  ARUBA,
+  ARUBA(offTag: 'aw'),
 
   /// Åland Islands
-  ALAND_ISLANDS,
+  ALAND_ISLANDS(offTag: 'ax'),
 
   /// Azerbaijan
-  AZERBAIJAN,
+  AZERBAIJAN(offTag: 'az'),
 
   /// Bosnia and Herzegovina
-  BOSNIA_AND_HERZEGOVINA,
+  BOSNIA_AND_HERZEGOVINA(offTag: 'ba'),
 
   /// Barbados
-  BARBADOS,
+  BARBADOS(offTag: 'bb'),
 
   /// Bangladesh
-  BANGLADESH,
+  BANGLADESH(offTag: 'bd'),
 
   /// Belgium
-  BELGIUM,
+  BELGIUM(offTag: 'be'),
 
   /// Burkina Faso
-  BURKINA_FASO,
+  BURKINA_FASO(offTag: 'bf'),
 
   /// Bulgaria
-  BULGARIA,
+  BULGARIA(offTag: 'bg'),
 
   /// Bahrain
-  BAHRAIN,
+  BAHRAIN(offTag: 'bh'),
 
   /// Burundi
-  BURUNDI,
+  BURUNDI(offTag: 'bi'),
 
   /// Benin
-  BENIN,
+  BENIN(offTag: 'bj'),
 
   /// Saint Barthélemy
-  SAINT_BARTHELEMY,
+  SAINT_BARTHELEMY(offTag: 'bl'),
 
   /// Bermuda
-  BERMUDA,
+  BERMUDA(offTag: 'bm'),
 
   /// Brunei Darussalam
-  BRUNEI_DARUSSALAM,
+  BRUNEI_DARUSSALAM(offTag: 'bn'),
 
   /// Bolivia (Plurinational State of)
-  BOLIVIA,
+  BOLIVIA(offTag: 'bo'),
 
   /// Bonaire, Sint Eustatius and Saba
-  BONAIRE,
+  BONAIRE(offTag: 'bq'),
 
   /// Brazil
-  BRAZIL,
+  BRAZIL(offTag: 'br'),
 
   /// Bahamas
-  BAHAMAS,
+  BAHAMAS(offTag: 'bs'),
 
   /// Bhutan
-  BHUTAN,
+  BHUTAN(offTag: 'bt'),
 
   /// Bouvet Island
-  BOUVET_ISLAND,
+  BOUVET_ISLAND(offTag: 'bv'),
 
   /// Botswana
-  BOTSWANA,
+  BOTSWANA(offTag: 'bw'),
 
   /// Belarus
-  BELARUS,
+  BELARUS(offTag: 'by'),
 
   /// Belize
-  BELIZE,
+  BELIZE(offTag: 'bz'),
 
   /// Canada
-  CANADA,
+  CANADA(offTag: 'ca'),
 
   /// Cocos (Keeling) Islands
-  COCOS_ISLANDS,
+  COCOS_ISLANDS(offTag: 'cc'),
 
   /// Congo, Democratic Republic of the
-  DEMOCRATIC_REPUBLIC_OF_THE_CONGO,
+  DEMOCRATIC_REPUBLIC_OF_THE_CONGO(offTag: 'cd'),
 
   /// Central African Republic
-  CENTRAL_AFRICAN_REPUBLIC,
+  CENTRAL_AFRICAN_REPUBLIC(offTag: 'cf'),
 
   /// Congo
-  CONGO,
+  CONGO(offTag: 'cg'),
 
   /// Switzerland
-  SWITZERLAND,
+  SWITZERLAND(offTag: 'ch'),
 
   /// Côte d'Ivoire
-  COTE_D_IVOIRE,
+  COTE_D_IVOIRE(offTag: 'ci'),
 
   /// Cook Islands
-  COOK_ISLANDS,
+  COOK_ISLANDS(offTag: 'ck'),
 
   /// Chile
-  CHILE,
+  CHILE(offTag: 'cl'),
 
   /// Cameroon
-  CAMEROON,
+  CAMEROON(offTag: 'cm'),
 
   /// China
-  CHINA,
+  CHINA(offTag: 'cn'),
 
   /// Colombia
-  COLOMBIA,
+  COLOMBIA(offTag: 'co'),
 
   /// Costa Rica
-  COSTA_RICA,
+  COSTA_RICA(offTag: 'cr'),
 
   /// Cuba
-  CUBA,
+  CUBA(offTag: 'cu'),
 
   /// Cabo Verde
-  CABO_VERDE,
+  CABO_VERDE(offTag: 'cv'),
 
   /// Curaçao
-  CURACAO,
+  CURACAO(offTag: 'cw'),
 
   /// Christmas Island
-  CHRISTMAS_ISLAND,
+  CHRISTMAS_ISLAND(offTag: 'cx'),
 
   ///Cyprus
-  CYPRUS,
+  CYPRUS(offTag: 'cy'),
 
   /// Czechia
-  CZECHIA,
+  CZECHIA(offTag: 'cz'),
 
   /// Germany
-  GERMANY,
+  GERMANY(offTag: 'de'),
 
   /// Djibouti
-  DJIBOUTI,
+  DJIBOUTI(offTag: 'dj'),
 
   /// Denmark
-  DENMARK,
+  DENMARK(offTag: 'dk'),
 
   /// Dominica
-  DOMINICA,
+  DOMINICA(offTag: 'dm'),
 
   /// Dominican Republic
-  DOMINICAN_REPUBLIC,
+  DOMINICAN_REPUBLIC(offTag: 'do'),
 
   /// Algeria
-  ALGERIA,
+  ALGERIA(offTag: 'dz'),
 
   /// Ecuador
-  ECUADOR,
+  ECUADOR(offTag: 'ec'),
 
   /// Estonia
-  ESTONIA,
+  ESTONIA(offTag: 'ee'),
 
   /// Egypt
-  EGYPT,
+  EGYPT(offTag: 'eg'),
 
   /// Western Sahara
-  WESTERN_SAHARA,
+  WESTERN_SAHARA(offTag: 'eh'),
 
   /// Eritrea
-  ERITREA,
+  ERITREA(offTag: 'er'),
 
   /// Spain
-  SPAIN,
+  SPAIN(offTag: 'es'),
 
   /// Ethiopia
-  ETHIOPIA,
+  ETHIOPIA(offTag: 'et'),
 
   /// Finland
-  FINLAND,
+  FINLAND(offTag: 'fi'),
 
   /// Fiji
-  FIJI,
+  FIJI(offTag: 'fj'),
 
   /// Falkland Islands (Malvinas)
-  FALKLAND_ISLANDS,
+  FALKLAND_ISLANDS(offTag: 'fk'),
 
   /// Micronesia (Federated States of)
-  MICRONESIA,
+  MICRONESIA(offTag: 'fm'),
 
   /// Faroe Islands
-  FAROE_ISLANDS,
+  FAROE_ISLANDS(offTag: 'fo'),
 
   /// France
-  FRANCE,
+  FRANCE(offTag: 'fr'),
 
   /// Gabon
-  GABON,
+  GABON(offTag: 'ga'),
 
   /// United Kingdom of Great Britain and Northern Ireland
-  UNITED_KINGDOM,
+  // in OFF this is not 'gb'
+  UNITED_KINGDOM(offTag: 'uk'),
 
   /// Grenada
-  GRENADA,
+  GRENADA(offTag: 'gd'),
 
   /// Georgia
-  GEORGIA,
+  GEORGIA(offTag: 'ge'),
 
   /// French Guiana
-  FRENCH_GUIANA,
+  FRENCH_GUIANA(offTag: 'gf'),
 
   /// Guernsey
-  GUERNSEY,
+  GUERNSEY(offTag: 'gg'),
 
   /// Ghana
-  GHANA,
+  GHANA(offTag: 'gh'),
 
   /// Gibraltar
-  GIBRALTAR,
+  GIBRALTAR(offTag: 'gi'),
 
   /// Greenland
-  GREENLAND,
+  GREENLAND(offTag: 'gl'),
 
   /// Gambia
-  GAMBIA,
+  GAMBIA(offTag: 'gm'),
 
   /// Guinea
-  GUINEA,
+  GUINEA(offTag: 'gn'),
 
   /// Guadeloupe
-  GUADELOUPE,
+  GUADELOUPE(offTag: 'gp'),
 
   /// Equatorial Guinea
-  EQUATORIAL_GUINEA,
+  EQUATORIAL_GUINEA(offTag: 'gq'),
 
   /// Greece
-  GREECE,
+  GREECE(offTag: 'gr'),
 
   /// South Georgia and the South Sandwich Islands
-  SOUTH_GEORGIA,
+  SOUTH_GEORGIA(offTag: 'gs'),
 
   /// Guatemala
-  GUATEMALA,
+  GUATEMALA(offTag: 'gt'),
 
   /// Guam
-  GUAM,
+  GUAM(offTag: 'gu'),
 
   /// Guinea-Bissau
-  GUINEA_BISSAU,
+  GUINEA_BISSAU(offTag: 'gw'),
 
   /// Guyana
-  GUYANA,
+  GUYANA(offTag: 'gy'),
 
   /// Hong Kong
-  HONG_KONG,
+  HONG_KONG(offTag: 'hk'),
 
   /// Heard Island and McDonald Islands
-  HEARD_ISLAND,
+  HEARD_ISLAND(offTag: 'hm'),
 
   /// Honduras
-  HONDURAS,
+  HONDURAS(offTag: 'hn'),
 
   /// Croatia
-  CROATIA,
+  CROATIA(offTag: 'hr'),
 
   /// Haiti
-  HAITI,
+  HAITI(offTag: 'ht'),
 
   /// Hungary
-  HUNGARY,
+  HUNGARY(offTag: 'hu'),
 
   /// Indonesia
-  INDONESIA,
+  INDONESIA(offTag: 'id'),
 
   /// Ireland
-  IRELAND,
+  IRELAND(offTag: 'ie'),
 
   /// Israel
-  ISRAEL,
+  ISRAEL(offTag: 'il'),
 
   /// Isle of Man
-  ISLE_OF_MAN,
+  ISLE_OF_MAN(offTag: 'im'),
 
   /// India
-  INDIA,
+  INDIA(offTag: 'in'),
 
   /// British Indian Ocean Territory
-  BRITISH_INDIAN_OCEAN_TERRITORY,
+  BRITISH_INDIAN_OCEAN_TERRITORY(offTag: 'io'),
 
   /// Iraq
-  IRAQ,
+  IRAQ(offTag: 'iq'),
 
   /// Iran (Islamic Republic of)
-  IRAN,
+  IRAN(offTag: 'ir'),
 
   /// Iceland
-  ICELAND,
+  ICELAND(offTag: 'is'),
 
   /// Italy
-  ITALY,
+  ITALY(offTag: 'it'),
 
   /// Jersey
-  JERSEY,
+  JERSEY(offTag: 'je'),
 
   /// Jamaica
-  JAMAICA,
+  JAMAICA(offTag: 'jm'),
 
   /// Jordan
-  JORDAN,
+  JORDAN(offTag: 'jo'),
 
   /// Japan
-  JAPAN,
+  JAPAN(offTag: 'jp'),
 
   /// Kenya
-  KENYA,
+  KENYA(offTag: 'ke'),
 
   /// Kyrgyzstan
-  KYRGYZSTAN,
+  KYRGYZSTAN(offTag: 'kg'),
 
   /// Cambodia
-  CAMBODIA,
+  CAMBODIA(offTag: 'kh'),
 
   /// Kiribati
-  KIRIBATI,
+  KIRIBATI(offTag: 'ki'),
 
   /// Comoros
-  COMOROS,
+  COMOROS(offTag: 'km'),
 
   /// Saint Kitts and Nevis
-  SAINT_KITTS_AND_NEVIS,
+  SAINT_KITTS_AND_NEVIS(offTag: 'kn'),
 
   /// Korea (Democratic People's Republic of)
-  NORTH_KOREA,
+  NORTH_KOREA(offTag: 'kp'),
 
   /// Korea, Republic of
-  SOUTH_KOREA,
+  SOUTH_KOREA(offTag: 'kr'),
 
   /// Kuwait
-  KUWAIT,
+  KUWAIT(offTag: 'kw'),
 
   /// Cayman Islands
-  CAYMAN_ISLANDS,
+  CAYMAN_ISLANDS(offTag: 'ky'),
 
   /// Kazakhstan
-  KAZAKHSTAN,
+  KAZAKHSTAN(offTag: 'kz'),
 
   /// Lao People's Democratic Republic
-  LAOS,
+  LAOS(offTag: 'la'),
 
   /// Lebanon
-  LEBANON,
+  LEBANON(offTag: 'lb'),
 
   /// Saint Lucia
-  SAINT_LUCIA,
+  SAINT_LUCIA(offTag: 'lc'),
 
   /// Liechtenstein
-  LIECHTENSTEIN,
+  LIECHTENSTEIN(offTag: 'li'),
 
   /// Sri Lanka
-  SRI_LANKA,
+  SRI_LANKA(offTag: 'lk'),
 
   /// Liberia
-  LIBERIA,
+  LIBERIA(offTag: 'lr'),
 
   /// Lesotho
-  LESOTHO,
+  LESOTHO(offTag: 'ls'),
 
   /// Lithuania
-  LITHUANIA,
+  LITHUANIA(offTag: 'lt'),
 
   /// Luxembourg
-  LUXEMBOURG,
+  LUXEMBOURG(offTag: 'lu'),
 
   /// Latvia
-  LATVIA,
+  LATVIA(offTag: 'lv'),
 
   /// Libya
-  LIBYA,
+  LIBYA(offTag: 'ly'),
 
   /// Morocco
-  MOROCCO,
+  MOROCCO(offTag: 'ma'),
 
   /// Monaco
-  MONACO,
+  MONACO(offTag: 'mc'),
 
   /// Moldova, Republic of
-  MOLDOVA,
+  MOLDOVA(offTag: 'md'),
 
   /// Montenegro
-  MONTENEGRO,
+  MONTENEGRO(offTag: 'me'),
 
   /// Saint Martin (French part)
-  SAINT_MARTIN,
+  SAINT_MARTIN(offTag: 'mf'),
 
   /// Madagascar
-  MADAGASCAR,
+  MADAGASCAR(offTag: 'mg'),
 
   /// Marshall Islands
-  MARSHALL_ISLANDS,
+  MARSHALL_ISLANDS(offTag: 'mh'),
 
   /// North Macedonia
-  NORTH_MACEDONIA,
+  NORTH_MACEDONIA(offTag: 'mk'),
 
   /// Mali
-  MALI,
+  MALI(offTag: 'ml'),
 
   /// Myanmar
-  MYANMAR,
+  MYANMAR(offTag: 'mm'),
 
   /// Mongolia
-  MONGOLIA,
+  MONGOLIA(offTag: 'mn'),
 
   /// Macao
-  MACAO,
+  MACAO(offTag: 'mo'),
 
   /// Northern Mariana Islands
-  NORTHERN_MARIANA_ISLANDS,
+  NORTHERN_MARIANA_ISLANDS(offTag: 'mp'),
 
   /// Martinique
-  MARTINIQUE,
+  MARTINIQUE(offTag: 'mq'),
 
   /// Mauritania
-  MAURITANIA,
+  MAURITANIA(offTag: 'mr'),
 
   /// Montserrat
-  MONTSERRAT,
+  MONTSERRAT(offTag: 'ms'),
 
   /// Malta
-  MALTA,
+  MALTA(offTag: 'mt'),
 
   /// Mauritius
-  MAURITIUS,
+  MAURITIUS(offTag: 'mu'),
 
   /// Maldives
-  MALDIVES,
+  MALDIVES(offTag: 'mv'),
 
   /// Malawi
-  MALAWI,
+  MALAWI(offTag: 'mw'),
 
   /// Mexico
-  MEXICO,
+  MEXICO(offTag: 'mx'),
 
   /// Malaysia
-  MALAYSIA,
+  MALAYSIA(offTag: 'my'),
 
   /// Mozambique
-  MOZAMBIQUE,
+  MOZAMBIQUE(offTag: 'mz'),
 
   /// Namibia
-  NAMIBIA,
+  NAMIBIA(offTag: 'na'),
 
   /// New Caledonia
-  NEW_CALEDONIA,
+  NEW_CALEDONIA(offTag: 'nc'),
 
   /// Niger
-  NIGER,
+  NIGER(offTag: 'ne'),
 
   /// Norfolk Island
-  NORFOLK_ISLAND,
+  NORFOLK_ISLAND(offTag: 'nf'),
 
   /// Nigeria
-  NIGERIA,
+  NIGERIA(offTag: 'ng'),
 
   /// Nicaragua
-  NICARAGUA,
+  NICARAGUA(offTag: 'ni'),
 
   /// Netherlands
-  NETHERLANDS,
+  NETHERLANDS(offTag: 'nl'),
 
   /// Norway
-  NORWAY,
+  NORWAY(offTag: 'no'),
 
   /// Nepal
-  NEPAL,
+  NEPAL(offTag: 'np'),
 
   /// Nauru
-  NAURU,
+  NAURU(offTag: 'nr'),
 
   /// Niue
-  NIUE,
+  NIUE(offTag: 'nu'),
 
   /// New Zealand
-  NEW_ZEALAND,
+  NEW_ZEALAND(offTag: 'nz'),
 
   /// Oman
-  OMAN,
+  OMAN(offTag: 'om'),
 
   /// Panama
-  PANAMA,
+  PANAMA(offTag: 'pa'),
 
   /// Peru
-  PERU,
+  PERU(offTag: 'pe'),
 
   /// French Polynesia
-  FRENCH_POLYNESIA,
+  FRENCH_POLYNESIA(offTag: 'pf'),
 
   /// Papua New Guinea
-  PAPUA_NEW_GUINEA,
+  PAPUA_NEW_GUINEA(offTag: 'pg'),
 
   /// Philippines
-  PHILIPPINES,
+  PHILIPPINES(offTag: 'ph'),
 
   /// Pakistan
-  PAKISTAN,
+  PAKISTAN(offTag: 'pk'),
 
   /// Poland
-  POLAND,
+  POLAND(offTag: 'pl'),
 
   /// Saint Pierre and Miquelon
-  SAINT_PIERRE_AND_MIQUELON,
+  SAINT_PIERRE_AND_MIQUELON(offTag: 'pm'),
 
   /// Pitcairn
-  PITCAIRN,
+  PITCAIRN(offTag: 'pn'),
 
   /// Puerto Rico
-  PUERTO_RICO,
+  PUERTO_RICO(offTag: 'pr'),
 
   /// Palestine, State of
-  PALESTINE,
+  PALESTINE(offTag: 'ps'),
 
   /// Portugal
-  PORTUGAL,
+  PORTUGAL(offTag: 'pt'),
 
   /// Palau
-  PALAU,
+  PALAU(offTag: 'pw'),
 
   /// Paraguay
-  PARAGUAY,
+  PARAGUAY(offTag: 'py'),
 
   /// Qatar
-  QATAR,
+  QATAR(offTag: 'qa'),
 
   /// Réunion
-  REUNION,
+  REUNION(offTag: 're'),
 
   /// Romania
-  ROMANIA,
+  ROMANIA(offTag: 'ro'),
 
   /// Serbia
-  SERBIA,
+  SERBIA(offTag: 'rs'),
 
   /// Russian Federation
-  RUSSIA,
+  RUSSIA(offTag: 'ru'),
 
   /// Rwanda
-  RWANDA,
+  RWANDA(offTag: 'rw'),
 
   /// Saudi Arabia
-  SAUDI_ARABIA,
+  SAUDI_ARABIA(offTag: 'sa'),
 
   /// Solomon Islands
-  SOLOMON_ISLANDS,
+  SOLOMON_ISLANDS(offTag: 'sb'),
 
   /// Seychelles
-  SEYCHELLES,
+  SEYCHELLES(offTag: 'sc'),
 
   /// Sudan
-  SUDAN,
+  SUDAN(offTag: 'sd'),
 
   /// Sweden
-  SWEDEN,
+  SWEDEN(offTag: 'se'),
 
   /// Singapore
-  SINGAPORE,
+  SINGAPORE(offTag: 'sg'),
 
   /// Saint Helena, Ascension and Tristan da Cunha
-  SAINT_HELENA,
+  SAINT_HELENA(offTag: 'sh'),
 
   /// Slovenia
-  SLOVENIA,
+  SLOVENIA(offTag: 'si'),
 
   /// Svalbard and Jan Mayen
-  SVALBARD_AND_JAN_MAYEN,
+  SVALBARD_AND_JAN_MAYEN(offTag: 'sj'),
 
   /// Slovakia
-  SLOVAKIA,
+  SLOVAKIA(offTag: 'sk'),
 
   /// Sierra Leone
-  SIERRA_LEONE,
+  SIERRA_LEONE(offTag: 'sl'),
 
   /// San Marino
-  SAN_MARINO,
+  SAN_MARINO(offTag: 'sm'),
 
   /// Senegal
-  SENEGAL,
+  SENEGAL(offTag: 'sn'),
 
   /// Somalia
-  SOMALIA,
+  SOMALIA(offTag: 'so'),
 
   /// Suriname
-  SURINAME,
+  SURINAME(offTag: 'sr'),
 
   /// South Sudan
-  SOUTH_SUDAN,
+  SOUTH_SUDAN(offTag: 'ss'),
 
   /// Sao Tome and Principe
-  SAO_TOME_AND_PRINCIPE,
+  SAO_TOME_AND_PRINCIPE(offTag: 'st'),
 
   /// El Salvador
-  EL_SALVADOR,
+  EL_SALVADOR(offTag: 'sv'),
 
   /// Sint Maarten (Dutch part)
-  SINT_MAARTEN,
+  SINT_MAARTEN(offTag: 'sx'),
 
   /// Syrian Arab Republic
-  SYRIA,
+  SYRIA(offTag: 'sy'),
 
   /// Eswatini
-  ESWATINI,
+  ESWATINI(offTag: 'sz'),
 
   /// Turks and Caicos Islands
-  TURKS_AND_CAICOS_ISLANDS,
+  TURKS_AND_CAICOS_ISLANDS(offTag: 'tc'),
 
   /// Chad
-  CHAD,
+  CHAD(offTag: 'td'),
 
   /// French Southern Territories
-  FRENCH_SOUTHERN_TERRITORIES,
+  FRENCH_SOUTHERN_TERRITORIES(offTag: 'tf'),
 
   /// Togo
-  TOGO,
+  TOGO(offTag: 'tg'),
 
   /// Thailand
-  THAILAND,
+  THAILAND(offTag: 'th'),
 
   /// Tajikistan
-  TAJIKISTAN,
+  TAJIKISTAN(offTag: 'tj'),
 
   /// Tokelau
-  TOKELAU,
+  TOKELAU(offTag: 'tk'),
 
   /// Timor-Leste
-  TIMOR_LESTE,
+  TIMOR_LESTE(offTag: 'tl'),
 
   /// Turkmenistan
-  TURKMENISTAN,
+  TURKMENISTAN(offTag: 'tm'),
 
   /// Tunisia
-  TUNISIA,
+  TUNISIA(offTag: 'tn'),
 
   /// Tonga
-  TONGA,
+  TONGA(offTag: 'to'),
 
   /// Turkey
-  TURKEY,
+  TURKEY(offTag: 'tr'),
 
   /// Trinidad and Tobago
-  TRINIDAD_AND_TOBAGO,
+  TRINIDAD_AND_TOBAGO(offTag: 'tt'),
 
   /// Tuvalu
-  TUVALU,
+  TUVALU(offTag: 'tv'),
 
   /// Taiwan, Province of China
-  TAIWAN,
+  TAIWAN(offTag: 'tw'),
 
   /// Tanzania, United Republic of
-  TANZANIA,
+  TANZANIA(offTag: 'tz'),
 
   /// Ukraine
-  UKRAINE,
+  UKRAINE(offTag: 'ua'),
 
   /// Uganda
-  UGANDA,
+  UGANDA(offTag: 'ug'),
 
   /// United States Minor Outlying Islands
-  UNITED_STATES_MINOR_OUTLYING_ISLANDS,
+  UNITED_STATES_MINOR_OUTLYING_ISLANDS(offTag: 'um'),
 
   /// United States of America
-  USA,
+  USA(offTag: 'us'),
 
   /// Uruguay
-  URUGUAY,
+  URUGUAY(offTag: 'uy'),
 
   /// Uzbekistan
-  UZBEKISTAN,
+  UZBEKISTAN(offTag: 'uz'),
 
   /// Holy See
-  HOLY_SEE,
+  HOLY_SEE(offTag: 'va'),
 
   /// Saint Vincent and the Grenadines
-  SAINT_VINCENT_AND_THE_GRENADINES,
+  SAINT_VINCENT_AND_THE_GRENADINES(offTag: 'vc'),
 
   /// Venezuela (Bolivarian Republic of)
-  VENEZUELA,
+  VENEZUELA(offTag: 've'),
 
   /// Virgin Islands (British)
-  BRITISH_VIRGIN_ISLANDS,
+  BRITISH_VIRGIN_ISLANDS(offTag: 'vg'),
 
   /// Virgin Islands (U.S.)
-  US_VIRGIN_ISLANDS,
+  US_VIRGIN_ISLANDS(offTag: 'vi'),
 
   /// Viet Nam
-  VIET_NAM,
+  VIET_NAM(offTag: 'vn'),
 
   /// Vanuatu
-  VANUATU,
+  VANUATU(offTag: 'vu'),
 
   /// Wallis and Futuna
-  WALLIS_AND_FUTUNA,
+  WALLIS_AND_FUTUNA(offTag: 'wf'),
 
   /// Samoa
-  SAMOA,
+  SAMOA(offTag: 'ws'),
 
   /// Yemen
-  YEMEN,
+  YEMEN(offTag: 'ye'),
 
   /// Mayotte
-  MAYOTTE,
+  MAYOTTE(offTag: 'yt'),
 
   /// South Africa
-  SOUTH_AFRICA,
+  SOUTH_AFRICA(offTag: 'za'),
 
   /// Zambia
-  ZAMBIA,
+  ZAMBIA(offTag: 'zm'),
 
   /// Zimbabwe
-  ZIMBABWE,
-}
+  ZIMBABWE(offTag: 'zw');
 
-extension OpenFoodFactsCoutryExtension on OpenFoodFactsCountry {
-  static const Map<OpenFoodFactsCountry, String> _ISO_2_CODES = {
-    OpenFoodFactsCountry.ANDORRA: 'ad',
-    OpenFoodFactsCountry.UNITED_ARAB_EMIRATES: 'ae',
-    OpenFoodFactsCountry.AFGHANISTAN: 'af',
-    OpenFoodFactsCountry.ANTIGUA_AND_BARBUDA: 'ag',
-    OpenFoodFactsCountry.ANGUILLA: 'ai',
-    OpenFoodFactsCountry.ALBANIA: 'al',
-    OpenFoodFactsCountry.ARMENIA: 'am',
-    OpenFoodFactsCountry.ANGOLA: 'ao',
-    OpenFoodFactsCountry.ANTARCTICA: 'aq',
-    OpenFoodFactsCountry.ARGENTINA: 'ar',
-    OpenFoodFactsCountry.AMERICAN_SAMOA: 'as',
-    OpenFoodFactsCountry.AUSTRIA: 'at',
-    OpenFoodFactsCountry.AUSTRALIA: 'au',
-    OpenFoodFactsCountry.ARUBA: 'aw',
-    OpenFoodFactsCountry.ALAND_ISLANDS: 'ax',
-    OpenFoodFactsCountry.AZERBAIJAN: 'az',
-    OpenFoodFactsCountry.BOSNIA_AND_HERZEGOVINA: 'ba',
-    OpenFoodFactsCountry.BARBADOS: 'bb',
-    OpenFoodFactsCountry.BANGLADESH: 'bd',
-    OpenFoodFactsCountry.BELGIUM: 'be',
-    OpenFoodFactsCountry.BURKINA_FASO: 'bf',
-    OpenFoodFactsCountry.BULGARIA: 'bg',
-    OpenFoodFactsCountry.BAHRAIN: 'bh',
-    OpenFoodFactsCountry.BURUNDI: 'bi',
-    OpenFoodFactsCountry.BENIN: 'bj',
-    OpenFoodFactsCountry.SAINT_BARTHELEMY: 'bl',
-    OpenFoodFactsCountry.BERMUDA: 'bm',
-    OpenFoodFactsCountry.BRUNEI_DARUSSALAM: 'bn',
-    OpenFoodFactsCountry.BOLIVIA: 'bo',
-    OpenFoodFactsCountry.BONAIRE: 'bq',
-    OpenFoodFactsCountry.BRAZIL: 'br',
-    OpenFoodFactsCountry.BAHAMAS: 'bs',
-    OpenFoodFactsCountry.BHUTAN: 'bt',
-    OpenFoodFactsCountry.BOUVET_ISLAND: 'bv',
-    OpenFoodFactsCountry.BOTSWANA: 'bw',
-    OpenFoodFactsCountry.BELARUS: 'by',
-    OpenFoodFactsCountry.BELIZE: 'bz',
-    OpenFoodFactsCountry.CANADA: 'ca',
-    OpenFoodFactsCountry.COCOS_ISLANDS: 'cc',
-    OpenFoodFactsCountry.DEMOCRATIC_REPUBLIC_OF_THE_CONGO: 'cd',
-    OpenFoodFactsCountry.CENTRAL_AFRICAN_REPUBLIC: 'cf',
-    OpenFoodFactsCountry.CONGO: 'cg',
-    OpenFoodFactsCountry.SWITZERLAND: 'ch',
-    OpenFoodFactsCountry.COTE_D_IVOIRE: 'ci',
-    OpenFoodFactsCountry.COOK_ISLANDS: 'ck',
-    OpenFoodFactsCountry.CHILE: 'cl',
-    OpenFoodFactsCountry.CAMEROON: 'cm',
-    OpenFoodFactsCountry.CHINA: 'cn',
-    OpenFoodFactsCountry.COLOMBIA: 'co',
-    OpenFoodFactsCountry.COSTA_RICA: 'cr',
-    OpenFoodFactsCountry.CUBA: 'cu',
-    OpenFoodFactsCountry.CABO_VERDE: 'cv',
-    OpenFoodFactsCountry.CURACAO: 'cw',
-    OpenFoodFactsCountry.CHRISTMAS_ISLAND: 'cx',
-    OpenFoodFactsCountry.CYPRUS: 'cy',
-    OpenFoodFactsCountry.CZECHIA: 'cz',
-    OpenFoodFactsCountry.GERMANY: 'de',
-    OpenFoodFactsCountry.DJIBOUTI: 'dj',
-    OpenFoodFactsCountry.DENMARK: 'dk',
-    OpenFoodFactsCountry.DOMINICA: 'dm',
-    OpenFoodFactsCountry.DOMINICAN_REPUBLIC: 'do',
-    OpenFoodFactsCountry.ALGERIA: 'dz',
-    OpenFoodFactsCountry.ECUADOR: 'ec',
-    OpenFoodFactsCountry.ESTONIA: 'ee',
-    OpenFoodFactsCountry.EGYPT: 'eg',
-    OpenFoodFactsCountry.WESTERN_SAHARA: 'eh',
-    OpenFoodFactsCountry.ERITREA: 'er',
-    OpenFoodFactsCountry.SPAIN: 'es',
-    OpenFoodFactsCountry.ETHIOPIA: 'et',
-    OpenFoodFactsCountry.FINLAND: 'fi',
-    OpenFoodFactsCountry.FIJI: 'fj',
-    OpenFoodFactsCountry.FALKLAND_ISLANDS: 'fk',
-    OpenFoodFactsCountry.MICRONESIA: 'fm',
-    OpenFoodFactsCountry.FAROE_ISLANDS: 'fo',
-    OpenFoodFactsCountry.FRANCE: 'fr',
-    OpenFoodFactsCountry.GABON: 'ga',
-    // in OFF this is not 'gb'
-    OpenFoodFactsCountry.UNITED_KINGDOM: 'uk',
-    OpenFoodFactsCountry.GRENADA: 'gd',
-    OpenFoodFactsCountry.GEORGIA: 'ge',
-    OpenFoodFactsCountry.FRENCH_GUIANA: 'gf',
-    OpenFoodFactsCountry.GUERNSEY: 'gg',
-    OpenFoodFactsCountry.GHANA: 'gh',
-    OpenFoodFactsCountry.GIBRALTAR: 'gi',
-    OpenFoodFactsCountry.GREENLAND: 'gl',
-    OpenFoodFactsCountry.GAMBIA: 'gm',
-    OpenFoodFactsCountry.GUINEA: 'gn',
-    OpenFoodFactsCountry.GUADELOUPE: 'gp',
-    OpenFoodFactsCountry.EQUATORIAL_GUINEA: 'gq',
-    OpenFoodFactsCountry.GREECE: 'gr',
-    OpenFoodFactsCountry.SOUTH_GEORGIA: 'gs',
-    OpenFoodFactsCountry.GUATEMALA: 'gt',
-    OpenFoodFactsCountry.GUAM: 'gu',
-    OpenFoodFactsCountry.GUINEA_BISSAU: 'gw',
-    OpenFoodFactsCountry.GUYANA: 'gy',
-    OpenFoodFactsCountry.HONG_KONG: 'hk',
-    OpenFoodFactsCountry.HEARD_ISLAND: 'hm',
-    OpenFoodFactsCountry.HONDURAS: 'hn',
-    OpenFoodFactsCountry.CROATIA: 'hr',
-    OpenFoodFactsCountry.HAITI: 'ht',
-    OpenFoodFactsCountry.HUNGARY: 'hu',
-    OpenFoodFactsCountry.INDONESIA: 'id',
-    OpenFoodFactsCountry.IRELAND: 'ie',
-    OpenFoodFactsCountry.ISRAEL: 'il',
-    OpenFoodFactsCountry.ISLE_OF_MAN: 'im',
-    OpenFoodFactsCountry.INDIA: 'in',
-    OpenFoodFactsCountry.BRITISH_INDIAN_OCEAN_TERRITORY: 'io',
-    OpenFoodFactsCountry.IRAQ: 'iq',
-    OpenFoodFactsCountry.IRAN: 'ir',
-    OpenFoodFactsCountry.ICELAND: 'is',
-    OpenFoodFactsCountry.ITALY: 'it',
-    OpenFoodFactsCountry.JERSEY: 'je',
-    OpenFoodFactsCountry.JAMAICA: 'jm',
-    OpenFoodFactsCountry.JORDAN: 'jo',
-    OpenFoodFactsCountry.JAPAN: 'jp',
-    OpenFoodFactsCountry.KENYA: 'ke',
-    OpenFoodFactsCountry.KYRGYZSTAN: 'kg',
-    OpenFoodFactsCountry.CAMBODIA: 'kh',
-    OpenFoodFactsCountry.KIRIBATI: 'ki',
-    OpenFoodFactsCountry.COMOROS: 'km',
-    OpenFoodFactsCountry.SAINT_KITTS_AND_NEVIS: 'kn',
-    OpenFoodFactsCountry.NORTH_KOREA: 'kp',
-    OpenFoodFactsCountry.SOUTH_KOREA: 'kr',
-    OpenFoodFactsCountry.KUWAIT: 'kw',
-    OpenFoodFactsCountry.CAYMAN_ISLANDS: 'ky',
-    OpenFoodFactsCountry.KAZAKHSTAN: 'kz',
-    OpenFoodFactsCountry.LAOS: 'la',
-    OpenFoodFactsCountry.LEBANON: 'lb',
-    OpenFoodFactsCountry.SAINT_LUCIA: 'lc',
-    OpenFoodFactsCountry.LIECHTENSTEIN: 'li',
-    OpenFoodFactsCountry.SRI_LANKA: 'lk',
-    OpenFoodFactsCountry.LIBERIA: 'lr',
-    OpenFoodFactsCountry.LESOTHO: 'ls',
-    OpenFoodFactsCountry.LITHUANIA: 'lt',
-    OpenFoodFactsCountry.LUXEMBOURG: 'lu',
-    OpenFoodFactsCountry.LATVIA: 'lv',
-    OpenFoodFactsCountry.LIBYA: 'ly',
-    OpenFoodFactsCountry.MOROCCO: 'ma',
-    OpenFoodFactsCountry.MONACO: 'mc',
-    OpenFoodFactsCountry.MOLDOVA: 'md',
-    OpenFoodFactsCountry.MONTENEGRO: 'me',
-    OpenFoodFactsCountry.SAINT_MARTIN: 'mf',
-    OpenFoodFactsCountry.MADAGASCAR: 'mg',
-    OpenFoodFactsCountry.MARSHALL_ISLANDS: 'mh',
-    OpenFoodFactsCountry.NORTH_MACEDONIA: 'mk',
-    OpenFoodFactsCountry.MALI: 'ml',
-    OpenFoodFactsCountry.MYANMAR: 'mm',
-    OpenFoodFactsCountry.MONGOLIA: 'mn',
-    OpenFoodFactsCountry.MACAO: 'mo',
-    OpenFoodFactsCountry.NORTHERN_MARIANA_ISLANDS: 'mp',
-    OpenFoodFactsCountry.MARTINIQUE: 'mq',
-    OpenFoodFactsCountry.MAURITANIA: 'mr',
-    OpenFoodFactsCountry.MONTSERRAT: 'ms',
-    OpenFoodFactsCountry.MALTA: 'mt',
-    OpenFoodFactsCountry.MAURITIUS: 'mu',
-    OpenFoodFactsCountry.MALDIVES: 'mv',
-    OpenFoodFactsCountry.MALAWI: 'mw',
-    OpenFoodFactsCountry.MEXICO: 'mx',
-    OpenFoodFactsCountry.MALAYSIA: 'my',
-    OpenFoodFactsCountry.MOZAMBIQUE: 'mz',
-    OpenFoodFactsCountry.NAMIBIA: 'na',
-    OpenFoodFactsCountry.NEW_CALEDONIA: 'nc',
-    OpenFoodFactsCountry.NIGER: 'ne',
-    OpenFoodFactsCountry.NORFOLK_ISLAND: 'nf',
-    OpenFoodFactsCountry.NIGERIA: 'ng',
-    OpenFoodFactsCountry.NICARAGUA: 'ni',
-    OpenFoodFactsCountry.NETHERLANDS: 'nl',
-    OpenFoodFactsCountry.NORWAY: 'no',
-    OpenFoodFactsCountry.NEPAL: 'np',
-    OpenFoodFactsCountry.NAURU: 'nr',
-    OpenFoodFactsCountry.NIUE: 'nu',
-    OpenFoodFactsCountry.NEW_ZEALAND: 'nz',
-    OpenFoodFactsCountry.OMAN: 'om',
-    OpenFoodFactsCountry.PANAMA: 'pa',
-    OpenFoodFactsCountry.PERU: 'pe',
-    OpenFoodFactsCountry.FRENCH_POLYNESIA: 'pf',
-    OpenFoodFactsCountry.PAPUA_NEW_GUINEA: 'pg',
-    OpenFoodFactsCountry.PHILIPPINES: 'ph',
-    OpenFoodFactsCountry.PAKISTAN: 'pk',
-    OpenFoodFactsCountry.POLAND: 'pl',
-    OpenFoodFactsCountry.SAINT_PIERRE_AND_MIQUELON: 'pm',
-    OpenFoodFactsCountry.PITCAIRN: 'pn',
-    OpenFoodFactsCountry.PUERTO_RICO: 'pr',
-    OpenFoodFactsCountry.PALESTINE: 'ps',
-    OpenFoodFactsCountry.PORTUGAL: 'pt',
-    OpenFoodFactsCountry.PALAU: 'pw',
-    OpenFoodFactsCountry.PARAGUAY: 'py',
-    OpenFoodFactsCountry.QATAR: 'qa',
-    OpenFoodFactsCountry.REUNION: 're',
-    OpenFoodFactsCountry.ROMANIA: 'ro',
-    OpenFoodFactsCountry.SERBIA: 'rs',
-    OpenFoodFactsCountry.RUSSIA: 'ru',
-    OpenFoodFactsCountry.RWANDA: 'rw',
-    OpenFoodFactsCountry.SAUDI_ARABIA: 'sa',
-    OpenFoodFactsCountry.SOLOMON_ISLANDS: 'sb',
-    OpenFoodFactsCountry.SEYCHELLES: 'sc',
-    OpenFoodFactsCountry.SUDAN: 'sd',
-    OpenFoodFactsCountry.SWEDEN: 'se',
-    OpenFoodFactsCountry.SINGAPORE: 'sg',
-    OpenFoodFactsCountry.SAINT_HELENA: 'sh',
-    OpenFoodFactsCountry.SLOVENIA: 'si',
-    OpenFoodFactsCountry.SVALBARD_AND_JAN_MAYEN: 'sj',
-    OpenFoodFactsCountry.SLOVAKIA: 'sk',
-    OpenFoodFactsCountry.SIERRA_LEONE: 'sl',
-    OpenFoodFactsCountry.SAN_MARINO: 'sm',
-    OpenFoodFactsCountry.SENEGAL: 'sn',
-    OpenFoodFactsCountry.SOMALIA: 'so',
-    OpenFoodFactsCountry.SURINAME: 'sr',
-    OpenFoodFactsCountry.SOUTH_SUDAN: 'ss',
-    OpenFoodFactsCountry.SAO_TOME_AND_PRINCIPE: 'st',
-    OpenFoodFactsCountry.EL_SALVADOR: 'sv',
-    OpenFoodFactsCountry.SINT_MAARTEN: 'sx',
-    OpenFoodFactsCountry.SYRIA: 'sy',
-    OpenFoodFactsCountry.ESWATINI: 'sz',
-    OpenFoodFactsCountry.TURKS_AND_CAICOS_ISLANDS: 'tc',
-    OpenFoodFactsCountry.CHAD: 'td',
-    OpenFoodFactsCountry.FRENCH_SOUTHERN_TERRITORIES: 'tf',
-    OpenFoodFactsCountry.TOGO: 'tg',
-    OpenFoodFactsCountry.THAILAND: 'th',
-    OpenFoodFactsCountry.TAJIKISTAN: 'tj',
-    OpenFoodFactsCountry.TOKELAU: 'tk',
-    OpenFoodFactsCountry.TIMOR_LESTE: 'tl',
-    OpenFoodFactsCountry.TURKMENISTAN: 'tm',
-    OpenFoodFactsCountry.TUNISIA: 'tn',
-    OpenFoodFactsCountry.TONGA: 'to',
-    OpenFoodFactsCountry.TURKEY: 'tr',
-    OpenFoodFactsCountry.TRINIDAD_AND_TOBAGO: 'tt',
-    OpenFoodFactsCountry.TUVALU: 'tv',
-    OpenFoodFactsCountry.TAIWAN: 'tw',
-    OpenFoodFactsCountry.TANZANIA: 'tz',
-    OpenFoodFactsCountry.UKRAINE: 'ua',
-    OpenFoodFactsCountry.UGANDA: 'ug',
-    OpenFoodFactsCountry.UNITED_STATES_MINOR_OUTLYING_ISLANDS: 'um',
-    OpenFoodFactsCountry.USA: 'us',
-    OpenFoodFactsCountry.URUGUAY: 'uy',
-    OpenFoodFactsCountry.UZBEKISTAN: 'uz',
-    OpenFoodFactsCountry.HOLY_SEE: 'va',
-    OpenFoodFactsCountry.SAINT_VINCENT_AND_THE_GRENADINES: 'vc',
-    OpenFoodFactsCountry.VENEZUELA: 've',
-    OpenFoodFactsCountry.BRITISH_VIRGIN_ISLANDS: 'vg',
-    OpenFoodFactsCountry.US_VIRGIN_ISLANDS: 'vi',
-    OpenFoodFactsCountry.VIET_NAM: 'vn',
-    OpenFoodFactsCountry.VANUATU: 'vu',
-    OpenFoodFactsCountry.WALLIS_AND_FUTUNA: 'wf',
-    OpenFoodFactsCountry.SAMOA: 'ws',
-    OpenFoodFactsCountry.YEMEN: 'ye',
-    OpenFoodFactsCountry.MAYOTTE: 'yt',
-    OpenFoodFactsCountry.SOUTH_AFRICA: 'za',
-    OpenFoodFactsCountry.ZAMBIA: 'zm',
-    OpenFoodFactsCountry.ZIMBABWE: 'zw',
-  };
+  const OpenFoodFactsCountry({
+    required this.offTag,
+  });
 
-  String get iso2Code => _ISO_2_CODES[this]!;
+  /// Lowercase ISO 639-1, except for [UNITED_KINGDOM].
+  @override
+  final String offTag;
+
+  /// Returns the first [OpenFoodFactsCountry] that matches the [offTag].
+  static OpenFoodFactsCountry? fromOffTag(final String? offTag) =>
+      OffTagged.fromOffTag(offTag, OpenFoodFactsCountry.values)
+          as OpenFoodFactsCountry?;
+
+  // TODO: deprecated from 2022-11-13; remove when old enough
+  @Deprecated('Use offTag instead')
+  String get iso2Code => offTag;
 }
 
 /// Helper class around [OpenFoodFactsCountry]
@@ -1014,12 +777,6 @@ class CountryHelper {
     if (code == null) {
       return null;
     }
-    code = code.toLowerCase();
-    for (final OpenFoodFactsCountry key in OpenFoodFactsCountry.values) {
-      if (key.iso2Code == code) {
-        return key;
-      }
-    }
-    return null;
+    return OpenFoodFactsCountry.fromOffTag(code.toLowerCase());
   }
 }

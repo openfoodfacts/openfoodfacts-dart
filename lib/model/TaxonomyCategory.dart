@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/model/OffTagged.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
@@ -8,81 +9,49 @@ import 'package:openfoodfacts/utils/TagType.dart';
 part 'TaxonomyCategory.g.dart';
 
 /// Fields of a [TaxonomyCategory]
-enum TaxonomyCategoryField {
-  ALL,
-  AGRIBALYSE_FOOD_CODE,
-  AGRIBALYSE_FOOD_NAME,
-  AGRIBALYSE_PROXY_FOOD_CODE,
-  AGRIBALYSE_PROXY_FOOD_NAME,
-  AGRIBALYSE_PROXY_NAME,
-  CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT,
-  CHILDREN,
-  CIQUAL_FOOD_CODE,
-  CIQUAL_FOOD_NAME,
-  CIQUAL_PROXY_FOOD_CODE,
-  CIQUAL_PROXY_FOOD_NAME,
-  COUNTRY,
-  GRAPEVARIETY,
-  INSTANCEOF,
-  NAME,
-  NOVA,
-  OQALI_FAMILY,
-  ORIGINS,
-  PARENTS,
-  PNNS_GROUP_1,
-  PNNS_GROUP_2,
-  PROTECTED_NAME_FILE_NUMBER,
-  PROTECTED_NAME_TYPE,
-  REGION,
-  SEASON_IN_COUNTRY_FR,
-  WHO_ID,
-  WIKIDATA,
-  WIKIDATA_CATEGORY,
-  WIKIDATA_WIKIPEDIA_CATEGORY,
-}
+enum TaxonomyCategoryField implements OffTagged {
+  ALL(offTag: 'all'),
+  AGRIBALYSE_FOOD_CODE(offTag: 'agribalyse_food_code'),
+  AGRIBALYSE_FOOD_NAME(offTag: 'agribalyse_food_name'),
+  AGRIBALYSE_PROXY_FOOD_CODE(offTag: 'agribalyse_proxy_food_code'),
+  AGRIBALYSE_PROXY_FOOD_NAME(offTag: 'agribalyse_proxy_food_name'),
+  AGRIBALYSE_PROXY_NAME(offTag: 'agribalyse_proxy_name'),
+  CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT(
+      offTag: 'carbon_footprint_fr_foodges_ingredient'),
+  CHILDREN(offTag: 'children'),
+  CIQUAL_FOOD_CODE(offTag: 'ciqual_food_code'),
+  CIQUAL_FOOD_NAME(offTag: 'ciqual_food_name'),
+  CIQUAL_PROXY_FOOD_CODE(offTag: 'ciqual_proxy_food_code'),
+  CIQUAL_PROXY_FOOD_NAME(offTag: 'ciqual_proxy_food_name'),
+  COUNTRY(offTag: 'country'),
+  GRAPEVARIETY(offTag: 'grapevariety'),
+  INSTANCEOF(offTag: 'instanceof'),
+  NAME(offTag: 'name'),
+  NOVA(offTag: 'nova'),
+  OQALI_FAMILY(offTag: 'oqali_family'),
+  ORIGINS(offTag: 'origins'),
+  PARENTS(offTag: 'parents'),
+  PNNS_GROUP_1(offTag: 'pnns_group_1'),
+  PNNS_GROUP_2(offTag: 'pnns_group_2'),
+  PROTECTED_NAME_FILE_NUMBER(offTag: 'protected_name_file_number'),
+  PROTECTED_NAME_TYPE(offTag: 'protected_name_type'),
+  REGION(offTag: 'region'),
+  SEASON_IN_COUNTRY_FR(offTag: 'season_in_country_fr'),
+  WHO_ID(offTag: 'who_id'),
+  WIKIDATA(offTag: 'wikidata'),
+  WIKIDATA_CATEGORY(offTag: 'wikidata_category'),
+  WIKIDATA_WIKIPEDIA_CATEGORY(offTag: 'wikidata_wikipedia_category');
 
-extension TaxonomyCategoryFieldExtension on TaxonomyCategoryField {
-  static const Map<TaxonomyCategoryField, String> _KEYS =
-      <TaxonomyCategoryField, String>{
-    TaxonomyCategoryField.ALL: 'all',
-    TaxonomyCategoryField.AGRIBALYSE_FOOD_CODE: 'agribalyse_food_code',
-    TaxonomyCategoryField.AGRIBALYSE_FOOD_NAME: 'agribalyse_food_name',
-    TaxonomyCategoryField.AGRIBALYSE_PROXY_FOOD_CODE:
-        'agribalyse_proxy_food_code',
-    TaxonomyCategoryField.AGRIBALYSE_PROXY_FOOD_NAME:
-        'agribalyse_proxy_food_name',
-    TaxonomyCategoryField.AGRIBALYSE_PROXY_NAME: 'agribalyse_proxy_name',
-    TaxonomyCategoryField.CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT:
-        'carbon_footprint_fr_foodges_ingredient',
-    TaxonomyCategoryField.CHILDREN: 'children',
-    TaxonomyCategoryField.CIQUAL_FOOD_CODE: 'ciqual_food_code',
-    TaxonomyCategoryField.CIQUAL_FOOD_NAME: 'ciqual_food_name',
-    TaxonomyCategoryField.CIQUAL_PROXY_FOOD_CODE: 'ciqual_proxy_food_code',
-    TaxonomyCategoryField.CIQUAL_PROXY_FOOD_NAME: 'ciqual_proxy_food_name',
-    TaxonomyCategoryField.COUNTRY: 'country',
-    TaxonomyCategoryField.GRAPEVARIETY: 'grapevariety',
-    TaxonomyCategoryField.INSTANCEOF: 'instanceof',
-    TaxonomyCategoryField.NAME: 'name',
-    TaxonomyCategoryField.NOVA: 'nova',
-    TaxonomyCategoryField.OQALI_FAMILY: 'oqali_family',
-    TaxonomyCategoryField.ORIGINS: 'origins',
-    TaxonomyCategoryField.PARENTS: 'parents',
-    TaxonomyCategoryField.PNNS_GROUP_1: 'pnns_group_1',
-    TaxonomyCategoryField.PNNS_GROUP_2: 'pnns_group_2',
-    TaxonomyCategoryField.PROTECTED_NAME_FILE_NUMBER:
-        'protected_name_file_number',
-    TaxonomyCategoryField.PROTECTED_NAME_TYPE: 'protected_name_type',
-    TaxonomyCategoryField.REGION: 'region',
-    TaxonomyCategoryField.SEASON_IN_COUNTRY_FR: 'season_in_country_fr',
-    TaxonomyCategoryField.WHO_ID: 'who_id',
-    TaxonomyCategoryField.WIKIDATA: 'wikidata',
-    TaxonomyCategoryField.WIKIDATA_CATEGORY: 'wikidata_category',
-    TaxonomyCategoryField.WIKIDATA_WIKIPEDIA_CATEGORY:
-        'wikidata_wikipedia_category',
-  };
+  const TaxonomyCategoryField({
+    required this.offTag,
+  });
 
-  /// Returns the key of the Category field
-  String get key => _KEYS[this] ?? '';
+  @override
+  final String offTag;
+
+  // TODO: deprecated from 2022-11-12; remove when old enough
+  @Deprecated('Use offTag instead')
+  String get key => offTag;
 }
 
 /// A JSON-serializable version of a category taxonomy result.
@@ -388,6 +357,6 @@ class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<
       Iterable<TaxonomyCategoryField> fields) {
     return fields
         .where((TaxonomyCategoryField field) => !ignoredFields.contains(field))
-        .map<String>((TaxonomyCategoryField field) => field.key);
+        .map<String>((TaxonomyCategoryField field) => field.offTag);
   }
 }

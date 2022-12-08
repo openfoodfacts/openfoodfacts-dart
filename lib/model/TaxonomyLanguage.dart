@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/model/OffTagged.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
@@ -8,25 +9,23 @@ import 'package:openfoodfacts/utils/TagType.dart';
 part 'TaxonomyLanguage.g.dart';
 
 /// Fields of an [TaxonomyLanguage]
-enum TaxonomyLanguageField {
-  ALL,
-  LANGUAGE_CODE_2,
-  LANGUAGE_CODE_3,
-  NAME,
-  WIKIDATA,
-}
+enum TaxonomyLanguageField implements OffTagged {
+  ALL(offTag: 'all'),
+  LANGUAGE_CODE_2(offTag: 'language_code_2'),
+  LANGUAGE_CODE_3(offTag: 'language_code_3'),
+  NAME(offTag: 'name'),
+  WIKIDATA(offTag: 'wikidata');
 
-extension TaxonomyLanguageFieldExtension on TaxonomyLanguageField {
-  static const Map<TaxonomyLanguageField, String> _KEYS = {
-    TaxonomyLanguageField.ALL: 'all',
-    TaxonomyLanguageField.LANGUAGE_CODE_2: 'language_code_2',
-    TaxonomyLanguageField.LANGUAGE_CODE_3: 'language_code_3',
-    TaxonomyLanguageField.NAME: 'name',
-    TaxonomyLanguageField.WIKIDATA: 'wikidata',
-  };
+  const TaxonomyLanguageField({
+    required this.offTag,
+  });
 
-  /// Returns the key of the Language field
-  String get key => _KEYS[this] ?? '';
+  @override
+  final String offTag;
+
+  // TODO: deprecated from 2022-11-12; remove when old enough
+  @Deprecated('Use offTag instead')
+  String get key => offTag;
 }
 
 /// A JSON-serializable version of a Language taxonomy result.
@@ -141,6 +140,6 @@ class TaxonomyLanguageQueryConfiguration extends TaxonomyQueryConfiguration<
       Iterable<TaxonomyLanguageField> fields) {
     return fields
         .where((TaxonomyLanguageField field) => !ignoredFields.contains(field))
-        .map<String>((TaxonomyLanguageField field) => field.key);
+        .map<String>((TaxonomyLanguageField field) => field.offTag);
   }
 }

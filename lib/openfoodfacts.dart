@@ -6,6 +6,7 @@ import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/model/ProductResultV3.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/LoginStatus.dart';
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
@@ -21,7 +22,11 @@ import 'package:openfoodfacts/model/TaxonomyCountry.dart';
 import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
 import 'package:openfoodfacts/model/TaxonomyLabel.dart';
 import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
+import 'package:openfoodfacts/model/TaxonomyOrigin.dart';
 import 'package:openfoodfacts/model/TaxonomyPackaging.dart';
+import 'package:openfoodfacts/model/TaxonomyPackagingMaterial.dart';
+import 'package:openfoodfacts/model/TaxonomyPackagingRecycling.dart';
+import 'package:openfoodfacts/model/TaxonomyPackagingShape.dart';
 import 'package:openfoodfacts/model/parameter/BarcodeParameter.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
@@ -109,10 +114,10 @@ class OpenFoodAPIClient {
     parameterMap.addAll(user.toData());
     parameterMap.addAll(product.toServerData());
     if (language != null) {
-      parameterMap['lc'] = language.code;
+      parameterMap['lc'] = language.offTag;
     }
     if (country != null) {
-      parameterMap['cc'] = country.iso2Code;
+      parameterMap['cc'] = country.offTag;
     }
 
     var productUri = UriHelper.getPostUri(
@@ -176,6 +181,8 @@ class OpenFoodAPIClient {
   /// No parsing of ingredients.
   /// No adjustment by language.
   /// No replacing of '&quot;' with '"'.
+// TODO: deprecated from 2022-12-01; remove when old enough
+  @Deprecated('Use getProductV3 instead')
   static Future<ProductResult> getProductRaw(
     String barcode,
     OpenFoodFactsLanguage language, {
@@ -201,11 +208,16 @@ class OpenFoodAPIClient {
   ///
   /// Please read the language mechanics explanation if you intend to show
   /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
+// TODO: deprecated from 2022-12-01; remove when old enough
+  @Deprecated('Use getProductV3 instead')
   static Future<ProductResult> getProduct(
     ProductQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
   }) async {
+    if (configuration.matchesV3()) {
+      Exception("The configuration must not match V3!");
+    }
     final String productString = await getProductString(
       configuration,
       user: user,
@@ -213,6 +225,35 @@ class OpenFoodAPIClient {
     );
     final String jsonStr = _replaceQuotes(productString);
     final ProductResult result = ProductResult.fromJson(jsonDecode(jsonStr));
+    if (result.product != null) {
+      ProductHelper.removeImages(result.product!, configuration.language);
+      ProductHelper.createImageUrls(result.product!, queryType: queryType);
+    }
+    return result;
+  }
+
+  /// Returns the product for the given barcode.
+  /// The ProductResult does not contain a product, if the product is not available.
+  /// ingredients, images and product name will be prepared for the given language.
+  ///
+  /// Please read the language mechanics explanation if you intend to show
+  /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
+  static Future<ProductResultV3> getProductV3(
+    ProductQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) async {
+    if (!configuration.matchesV3()) {
+      Exception("The configuration must match V3!");
+    }
+    final String productString = await getProductString(
+      configuration,
+      user: user,
+      queryType: queryType,
+    );
+    final String jsonStr = _replaceQuotes(productString);
+    final ProductResultV3 result =
+        ProductResultV3.fromJson(jsonDecode(jsonStr));
     if (result.product != null) {
       ProductHelper.removeImages(result.product!, configuration.language);
       ProductHelper.createImageUrls(result.product!, queryType: queryType);
@@ -285,13 +326,13 @@ class OpenFoodAPIClient {
     }
     return UriHelper.replaceSubdomainWithCodes(
       uri,
-      languageCode: language.code,
+      languageCode: language.offTag,
     );
   }
 
   /// Returns the URI to the crowdin page for a [language].
   static Uri getCrowdinUri(final OpenFoodFactsLanguage language) =>
-      Uri.parse('https://crowdin.com/project/openfoodfacts/${language.code}');
+      Uri.parse('https://crowdin.com/project/openfoodfacts/${language.offTag}');
 
   /// Search the OpenFoodFacts product database with the given parameters.
   /// Returns the list of products as SearchResult.
@@ -397,70 +438,118 @@ class OpenFoodAPIClient {
     return configuration.convertResults(decodedJson);
   }
 
+  static Future<Map<String, TaxonomyPackagingShape>?>
+      getTaxonomyPackagingShapes(
+    TaxonomyPackagingShapeQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) =>
+          getTaxonomy<TaxonomyPackagingShape, TaxonomyPackagingShapeField>(
+            configuration,
+            user: user,
+            queryType: queryType,
+          );
+
+  static Future<
+      Map<String, TaxonomyPackagingMaterial>?> getTaxonomyPackagingMaterials(
+    TaxonomyPackagingMaterialQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) =>
+      getTaxonomy<TaxonomyPackagingMaterial, TaxonomyPackagingMaterialField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
+
+  static Future<
+      Map<String, TaxonomyPackagingRecycling>?> getTaxonomyPackagingRecycling(
+    TaxonomyPackagingRecyclingQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) =>
+      getTaxonomy<TaxonomyPackagingRecycling, TaxonomyPackagingRecyclingField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
+
   static Future<Map<String, TaxonomyCategory>?> getTaxonomyCategories(
     TaxonomyCategoryQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
-  }) {
-    return getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(configuration,
-        user: user, queryType: queryType);
-  }
+  }) =>
+      getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyAdditive>?> getTaxonomyAdditives(
     TaxonomyAdditiveQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
-  }) {
-    return getTaxonomy<TaxonomyAdditive, TaxonomyAdditiveField>(configuration,
-        user: user, queryType: queryType);
-  }
+  }) =>
+      getTaxonomy<TaxonomyAdditive, TaxonomyAdditiveField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyAllergen>?> getTaxonomyAllergens(
     TaxonomyAllergenQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
-  }) {
-    return getTaxonomy<TaxonomyAllergen, TaxonomyAllergenField>(configuration,
-        user: user, queryType: queryType);
-  }
+  }) =>
+      getTaxonomy<TaxonomyAllergen, TaxonomyAllergenField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyCountry>?> getTaxonomyCountries(
     TaxonomyCountryQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
-  }) {
-    return getTaxonomy<TaxonomyCountry, TaxonomyCountryField>(configuration,
-        user: user, queryType: queryType);
-  }
+  }) =>
+      getTaxonomy<TaxonomyCountry, TaxonomyCountryField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyIngredient>?> getTaxonomyIngredients(
     TaxonomyIngredientQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
-  }) {
-    return getTaxonomy<TaxonomyIngredient, TaxonomyIngredientField>(
+  }) =>
+      getTaxonomy<TaxonomyIngredient, TaxonomyIngredientField>(
         configuration,
         user: user,
-        queryType: queryType);
-  }
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyLabel>?> getTaxonomyLabels(
     TaxonomyLabelQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
-  }) {
-    return getTaxonomy<TaxonomyLabel, TaxonomyLabelField>(configuration,
-        user: user, queryType: queryType);
-  }
+  }) =>
+      getTaxonomy<TaxonomyLabel, TaxonomyLabelField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyLanguage>?> getTaxonomyLanguages(
     TaxonomyLanguageQueryConfiguration configuration, {
     User? user,
     QueryType? queryType,
-  }) {
-    return getTaxonomy<TaxonomyLanguage, TaxonomyLanguageField>(configuration,
-        user: user, queryType: queryType);
-  }
+  }) =>
+      getTaxonomy<TaxonomyLanguage, TaxonomyLanguageField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
 
   static Future<Map<String, TaxonomyPackaging>?> getTaxonomyPackagings(
     final TaxonomyPackagingQueryConfiguration configuration, {
@@ -468,6 +557,17 @@ class OpenFoodAPIClient {
     final QueryType? queryType,
   }) =>
       getTaxonomy<TaxonomyPackaging, TaxonomyPackagingField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
+
+  static Future<Map<String, TaxonomyOrigin>?> getTaxonomyOrigins(
+    TaxonomyOriginQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) =>
+      getTaxonomy<TaxonomyOrigin, TaxonomyOriginField>(
         configuration,
         user: user,
         queryType: queryType,
@@ -657,6 +757,8 @@ class OpenFoodAPIClient {
     return Status.fromApiResponse(response.body);
   }
 
+  // TODO: deprecated from 2022-11-22; remove when old enough
+  @Deprecated('Unstable version, do not use and wait for the next version')
   static Future<SpellingCorrection?> getIngredientSpellingCorrection({
     String? ingredientName,
     Product? product,
@@ -714,8 +816,8 @@ class OpenFoodAPIClient {
     final Map<String, String> queryParameters = <String, String>{
       'code': barcode,
       'process_image': '1',
-      'id': 'ingredients_${language.code}',
-      'ocr_engine': ocrField.key
+      'id': 'ingredients_${language.offTag}',
+      'ocr_engine': ocrField.offTag
     };
     final Response response = await HttpHelper().doPostRequest(
       uri,
@@ -744,8 +846,8 @@ class OpenFoodAPIClient {
     final Map<String, String> queryParameters = <String, String>{
       'code': barcode,
       'process_image': '1',
-      'id': 'packaging_${language.code}',
-      'ocr_engine': ocrField.key
+      'id': 'packaging_${language.offTag}',
+      'ocr_engine': ocrField.offTag
     };
     final Response response = await HttpHelper().doPostRequest(
       uri,
@@ -776,7 +878,7 @@ class OpenFoodAPIClient {
     final Map<String, String> queryParameters = <String, String>{
       'tagtype': taxonomyType.offTag,
       'term': input,
-      'lc': language.code,
+      'lc': language.offTag,
       'limit': limit.toString(),
     };
     final Response response = await HttpHelper().doPostRequest(
@@ -1005,8 +1107,8 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
     Map<String, String> queryParameters = <String, String>{
-      'cc': country.iso2Code,
-      'lc': language.code,
+      'cc': country.offTag,
+      'lc': language.offTag,
     };
     final Response response = await HttpHelper().doPostRequest(
       uri,
@@ -1101,7 +1203,7 @@ class OpenFoodAPIClient {
     required final User user,
     final QueryType? queryType,
   }) async {
-    final String id = '${imageField.value}_${language.code}';
+    final String id = '${imageField.offTag}_${language.offTag}';
     final Map<String, String> queryParameters = <String, String>{
       'code': barcode,
       'id': id,
@@ -1156,7 +1258,7 @@ class OpenFoodAPIClient {
     required final User user,
     final QueryType? queryType,
   }) async {
-    final String id = '${imageField.value}_${language.code}';
+    final String id = '${imageField.offTag}_${language.offTag}';
     final Uri uri = UriHelper.getPostUri(
       path: 'cgi/product_image_unselect.pl',
       queryType: queryType,

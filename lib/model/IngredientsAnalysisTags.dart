@@ -1,52 +1,57 @@
-enum VeganStatus {
-  VEGAN,
-  NON_VEGAN,
-  MAYBE_VEGAN,
-  VEGAN_STATUS_UNKNOWN,
+import 'package:openfoodfacts/model/OffTagged.dart';
+
+enum VeganStatus implements OffTagged {
+  VEGAN(offTag: 'en:vegan'),
+  NON_VEGAN(offTag: 'en:non-vegan'),
+  MAYBE_VEGAN(offTag: 'en:maybe-vegan'),
+  VEGAN_STATUS_UNKNOWN(offTag: 'en:vegan-status-unknown');
+
+  const VeganStatus({
+    required this.offTag,
+  });
+
+  @override
+  final String offTag;
+
+  // TODO: deprecated from 2022-11-12; remove when old enough
+  @Deprecated('Use offTag instead')
+  String get tag => offTag;
 }
 
-extension VeganStatusExtension on VeganStatus {
-  static const Map<VeganStatus, String> _tags = {
-    VeganStatus.VEGAN: 'en:vegan',
-    VeganStatus.NON_VEGAN: 'en:non-vegan',
-    VeganStatus.MAYBE_VEGAN: 'en:maybe-vegan',
-    VeganStatus.VEGAN_STATUS_UNKNOWN: 'en:vegan-status-unknown',
-  };
-  String get tag => _tags[this]!;
+enum VegetarianStatus implements OffTagged {
+  VEGETARIAN(offTag: 'en:vegetarian'),
+  NON_VEGETARIAN(offTag: 'en:non-vegetarian'),
+  MAYBE_VEGETARIAN(offTag: 'en:maybe-vegetarian'),
+  VEGETARIAN_STATUS_UNKNOWN(offTag: 'en:vegetarian-status-unknown');
+
+  const VegetarianStatus({
+    required this.offTag,
+  });
+
+  @override
+  final String offTag;
+
+  // TODO: deprecated from 2022-11-12; remove when old enough
+  @Deprecated('Use offTag instead')
+  String get tag => offTag;
 }
 
-enum VegetarianStatus {
-  VEGETARIAN,
-  NON_VEGETARIAN,
-  MAYBE_VEGETARIAN,
-  VEGETARIAN_STATUS_UNKNOWN,
-}
+enum PalmOilFreeStatus implements OffTagged {
+  PALM_OIL_FREE(offTag: 'en:palm-oil-free'),
+  PALM_OIL(offTag: 'en:palm-oil'),
+  MAY_CONTAIN_PALM_OIL(offTag: 'en:may-contain-palm-oil'),
+  PALM_OIL_CONTENT_UNKNOWN(offTag: 'en:palm-oil-content-unknown');
 
-extension VegetarianStatusExtension on VegetarianStatus {
-  static const Map<VegetarianStatus, String> _tags = {
-    VegetarianStatus.VEGETARIAN: 'en:vegetarian',
-    VegetarianStatus.NON_VEGETARIAN: 'en:non-vegetarian',
-    VegetarianStatus.MAYBE_VEGETARIAN: 'en:maybe-vegetarian',
-    VegetarianStatus.VEGETARIAN_STATUS_UNKNOWN: 'en:vegetarian-status-unknown',
-  };
-  String get tag => _tags[this]!;
-}
+  const PalmOilFreeStatus({
+    required this.offTag,
+  });
 
-enum PalmOilFreeStatus {
-  PALM_OIL_FREE,
-  PALM_OIL,
-  MAY_CONTAIN_PALM_OIL,
-  PALM_OIL_CONTENT_UNKNOWN,
-}
+  @override
+  final String offTag;
 
-extension PalmOilFreeStatusExtension on PalmOilFreeStatus {
-  static const Map<PalmOilFreeStatus, String> _tags = {
-    PalmOilFreeStatus.PALM_OIL_FREE: 'en:palm-oil-free',
-    PalmOilFreeStatus.PALM_OIL: 'en:palm-oil',
-    PalmOilFreeStatus.MAY_CONTAIN_PALM_OIL: 'en:may-contain-palm-oil',
-    PalmOilFreeStatus.PALM_OIL_CONTENT_UNKNOWN: 'en:palm-oil-content-unknown',
-  };
-  String get tag => _tags[this]!;
+  // TODO: deprecated from 2022-11-12; remove when old enough
+  @Deprecated('Use offTag instead')
+  String get tag => offTag;
 }
 
 class IngredientsAnalysisTags {
@@ -58,7 +63,7 @@ class IngredientsAnalysisTags {
 
   static VeganStatus? _getVeganStatus(List<dynamic> data) {
     for (final VeganStatus status in VeganStatus.values) {
-      if (data.contains(status.tag)) {
+      if (data.contains(status.offTag)) {
         return status;
       }
     }
@@ -67,7 +72,7 @@ class IngredientsAnalysisTags {
 
   static VegetarianStatus? _getVegetarianStatus(List<dynamic> data) {
     for (final VegetarianStatus status in VegetarianStatus.values) {
-      if (data.contains(status.tag)) {
+      if (data.contains(status.offTag)) {
         return status;
       }
     }
@@ -76,7 +81,7 @@ class IngredientsAnalysisTags {
 
   static PalmOilFreeStatus? _getPalmOilFreeStatus(List<dynamic> data) {
     for (final PalmOilFreeStatus status in PalmOilFreeStatus.values) {
-      if (data.contains(status.tag)) {
+      if (data.contains(status.offTag)) {
         return status;
       }
     }
@@ -99,13 +104,13 @@ class IngredientsAnalysisTags {
     }
 
     if (ingredientsAnalysisTags.veganStatus != null) {
-      result.add(ingredientsAnalysisTags.veganStatus!.tag);
+      result.add(ingredientsAnalysisTags.veganStatus!.offTag);
     }
     if (ingredientsAnalysisTags.vegetarianStatus != null) {
-      result.add(ingredientsAnalysisTags.vegetarianStatus!.tag);
+      result.add(ingredientsAnalysisTags.vegetarianStatus!.offTag);
     }
     if (ingredientsAnalysisTags.palmOilFreeStatus != null) {
-      result.add(ingredientsAnalysisTags.palmOilFreeStatus!.tag);
+      result.add(ingredientsAnalysisTags.palmOilFreeStatus!.offTag);
     }
 
     return result;

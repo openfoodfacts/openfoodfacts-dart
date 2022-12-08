@@ -82,10 +82,10 @@ class OpenFoodAPIConfiguration {
     final String? cc,
   ) {
     if (country != null) {
-      return country.iso2Code;
+      return country.offTag;
     }
     if (globalCountry != null) {
-      return globalCountry!.iso2Code;
+      return globalCountry!.offTag;
     }
     if (cc != null) {
       return cc;

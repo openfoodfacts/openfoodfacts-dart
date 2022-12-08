@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/model/OffTagged.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
@@ -8,36 +9,32 @@ import 'package:openfoodfacts/utils/TagType.dart';
 part 'TaxonomyPackaging.g.dart';
 
 /// Fields of an [TaxonomyPackaging]
-enum TaxonomyPackagingField {
-  ALL,
-  NAME,
-  SYNONYMS,
-  WIKIDATA,
-  CHILDREN,
-  PARENTS,
+enum TaxonomyPackagingField implements OffTagged {
+  ALL(offTag: 'all'),
+  NAME(offTag: 'name'),
+  SYNONYMS(offTag: 'synonyms'),
+  WIKIDATA(offTag: 'wikidata'),
+  CHILDREN(offTag: 'children'),
+  PARENTS(offTag: 'parents');
   //PACKAGING_MATERIALS, only 4/122 found for roots
+  //TaxonomyPackagingField.PACKAGING_MATERIALS: 'packaging_materials',
   //NON_RECYCLABLE_AND_NOT_BIODEGRADABLE, only 4/122 found for roots
+  //TaxonomyPackagingField.NON_RECYCLABLE_AND_NOT_BIODEGRADABLE:'non_recyclable_and_non_biodegradable',
   //WEIGHT, only 4/122 found for roots
+  //TaxonomyPackagingField.WEIGHT: 'weight',
   //PACKAGING_SHAPE, only 2/122 found for roots
-}
+  //TaxonomyPackagingField.PACKAGING_SHAPE:'packaging_shapes',
 
-extension TaxonomyPackagingFieldExtension on TaxonomyPackagingField {
-  static const Map<TaxonomyPackagingField, String> _KEYS =
-      <TaxonomyPackagingField, String>{
-    TaxonomyPackagingField.ALL: 'all',
-    TaxonomyPackagingField.NAME: 'name',
-    TaxonomyPackagingField.SYNONYMS: 'synonyms',
-    TaxonomyPackagingField.WIKIDATA: 'wikidata',
-    TaxonomyPackagingField.CHILDREN: 'children',
-    TaxonomyPackagingField.PARENTS: 'parents',
-    //TaxonomyPackagingField.PACKAGING_MATERIALS: 'packaging_materials',
-    //TaxonomyPackagingField.NON_RECYCLABLE_AND_NOT_BIODEGRADABLE:'non_recyclable_and_non_biodegradable',
-    //TaxonomyPackagingField.WEIGHT: 'weight',
-    //TaxonomyPackagingField.PACKAGING_SHAPE:'packaging_shapes',
-  };
+  const TaxonomyPackagingField({
+    required this.offTag,
+  });
 
-  /// Returns the key of the Packaging field
-  String get key => _KEYS[this] ?? '';
+  @override
+  final String offTag;
+
+  // TODO: deprecated from 2022-11-12; remove when old enough
+  @Deprecated('Use offTag instead')
+  String get key => offTag;
 }
 
 /// A JSON-serializable version of a Packaging taxonomy result.
@@ -143,5 +140,5 @@ class TaxonomyPackagingQueryConfiguration extends TaxonomyQueryConfiguration<
       fields
           .where(
               (TaxonomyPackagingField field) => !ignoredFields.contains(field))
-          .map<String>((TaxonomyPackagingField field) => field.key);
+          .map<String>((TaxonomyPackagingField field) => field.offTag);
 }

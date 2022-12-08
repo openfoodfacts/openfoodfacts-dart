@@ -1,40 +1,32 @@
-/// Main allergens.
-enum AllergensTag {
-  GLUTEN,
-  MILK,
-  EGGS,
-  NUTS,
-  PEANUTS,
-  SESAME_SEEDS,
-  SOYBEANS,
-  CELERY,
-  MUSTARD,
-  LUPIN,
-  FISH,
-  CRUSTACEANS,
-  MOLLUSCS,
-  SULPHUR_DIOXIDE_AND_SULPHITES,
-}
+import 'package:openfoodfacts/model/OffTagged.dart';
 
-extension AllergensTagExtension on AllergensTag {
-  static const Map<AllergensTag, String> _tags = <AllergensTag, String>{
-    AllergensTag.GLUTEN: 'en:gluten',
-    AllergensTag.MILK: 'en:milk',
-    AllergensTag.EGGS: 'en:eggs',
-    AllergensTag.NUTS: 'en:nuts',
-    AllergensTag.PEANUTS: 'en:peanuts',
-    AllergensTag.SESAME_SEEDS: 'en:sesame-seeds',
-    AllergensTag.SOYBEANS: 'en:soybeans',
-    AllergensTag.CELERY: 'en:celery',
-    AllergensTag.MUSTARD: 'en:mustard',
-    AllergensTag.LUPIN: 'en:lupin',
-    AllergensTag.FISH: 'en:fish',
-    AllergensTag.CRUSTACEANS: 'en:crustaceans',
-    AllergensTag.MOLLUSCS: 'en:molluscs',
-    AllergensTag.SULPHUR_DIOXIDE_AND_SULPHITES:
-        'en:sulphur-dioxide-and-sulphites',
-  };
-  String get tag => _tags[this]!;
+/// Main allergens.
+enum AllergensTag implements OffTagged {
+  GLUTEN(offTag: 'en:gluten'),
+  MILK(offTag: 'en:milk'),
+  EGGS(offTag: 'en:eggs'),
+  NUTS(offTag: 'en:nuts'),
+  PEANUTS(offTag: 'en:peanuts'),
+  SESAME_SEEDS(offTag: 'en:sesame-seeds'),
+  SOYBEANS(offTag: 'en:soybeans'),
+  CELERY(offTag: 'en:celery'),
+  MUSTARD(offTag: 'en:mustard'),
+  LUPIN(offTag: 'en:lupin'),
+  FISH(offTag: 'en:fish'),
+  CRUSTACEANS(offTag: 'en:crustaceans'),
+  MOLLUSCS(offTag: 'en:molluscs'),
+  SULPHUR_DIOXIDE_AND_SULPHITES(offTag: 'en:sulphur-dioxide-and-sulphites');
+
+  const AllergensTag({
+    required this.offTag,
+  });
+
+  @override
+  final String offTag;
+
+  // TODO: deprecated from 2022-11-12; remove when old enough
+  @Deprecated('Use offTag instead')
+  String get tag => offTag;
 }
 
 /// List of known allergens for a [Product].

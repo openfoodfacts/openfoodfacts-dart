@@ -101,8 +101,8 @@ class UriHelper {
                     OpenFoodAPIConfiguration.globalLanguages!.isNotEmpty
                 ? OpenFoodAPIConfiguration.globalLanguages![0].code
                 : null),
-        countryCode: country?.iso2Code ??
-            OpenFoodAPIConfiguration.globalCountry?.iso2Code,
+        countryCode:
+            country?.offTag ?? OpenFoodAPIConfiguration.globalCountry?.offTag,
       );
 
   /// Replaces the subdomain of an URI with specific country and language.

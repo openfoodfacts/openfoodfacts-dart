@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:openfoodfacts/model/OcrIngredientsResult.dart';
+import 'package:openfoodfacts/model/ProductResultV3.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/TagType.dart';
 
@@ -8,11 +9,16 @@ import 'package:openfoodfacts/utils/TagType.dart';
 Future<Product?> getProduct() async {
   var barcode = '0048151623426';
 
-  ProductQueryConfiguration configuration = ProductQueryConfiguration(barcode,
-      language: OpenFoodFactsLanguage.GERMAN, fields: [ProductField.ALL]);
-  ProductResult result = await OpenFoodAPIClient.getProduct(configuration);
+  final ProductQueryConfiguration configuration = ProductQueryConfiguration(
+    barcode,
+    language: OpenFoodFactsLanguage.GERMAN,
+    fields: [ProductField.ALL],
+    version: ProductQueryVersion.v3,
+  );
+  final ProductResultV3 result =
+      await OpenFoodAPIClient.getProductV3(configuration);
 
-  if (result.status == 1) {
+  if (result.status == ProductResultV3.statusSuccess) {
     return result.product;
   } else {
     throw Exception('product not found, please insert data for $barcode');
@@ -120,16 +126,20 @@ void saveAndExtractIngredient() async {
   }
 
   //Get The saved product's ingredients from the server
-  ProductQueryConfiguration configurations = ProductQueryConfiguration(
-      '3613042717385',
-      language: OpenFoodFactsLanguage.FRENCH,
-      fields: [
-        ProductField.INGREDIENTS_TEXT,
-      ]);
-  ProductResult productResult =
-      await OpenFoodAPIClient.getProduct(configurations, user: myUser);
+  final ProductQueryConfiguration configurations = ProductQueryConfiguration(
+    '3613042717385',
+    language: OpenFoodFactsLanguage.FRENCH,
+    fields: [
+      ProductField.INGREDIENTS_TEXT,
+    ],
+    version: ProductQueryVersion.v3,
+  );
+  final ProductResultV3 productResult = await OpenFoodAPIClient.getProductV3(
+    configurations,
+    user: myUser,
+  );
 
-  if (productResult.status != 1) {
+  if (productResult.status != ProductResultV3.statusSuccess) {
     throw Exception('product not found, please insert data for 3613042717385');
   }
 }

@@ -5,7 +5,7 @@ import 'package:openfoodfacts/utils/TagType.dart';
 import 'package:test/test.dart';
 
 void main() {
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   void listContains(List<dynamic> result, String match) {
     expect(result, isNotEmpty);
@@ -250,6 +250,33 @@ void main() {
       );
 
       listContains(result, 'briq');
+    });
+    test('Suggestions for packaging_shapes', () async {
+      final List<dynamic> result =
+          await OpenFoodAPIClient.getAutocompletedSuggestions(
+        TagType.PACKAGING_SHAPES,
+        language: OpenFoodFactsLanguage.FRENCH,
+        input: 'bido',
+      );
+      listContains(result, 'bidon');
+    });
+    test('Suggestions for packaging_materials', () async {
+      final List<dynamic> result =
+          await OpenFoodAPIClient.getAutocompletedSuggestions(
+        TagType.PACKAGING_MATERIALS,
+        language: OpenFoodFactsLanguage.FRENCH,
+        input: 'carto',
+      );
+      listContains(result, 'carton');
+    });
+    test('Suggestions for packaging_recycling', () async {
+      final List<dynamic> result =
+          await OpenFoodAPIClient.getAutocompletedSuggestions(
+        TagType.PACKAGING_RECYCLING,
+        language: OpenFoodFactsLanguage.FRENCH,
+        input: 'conten',
+      );
+      listContains(result, 'conteneur');
     });
     test('Suggestions for emb_code', () async {
       List<dynamic> result =

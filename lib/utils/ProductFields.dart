@@ -67,6 +67,12 @@ enum ProductField implements OffTagged {
   ENVIRONMENT_IMPACT_LEVELS(offTag: 'environment_impact_level_tags'),
   ATTRIBUTE_GROUPS(offTag: 'attribute_groups'),
   LAST_MODIFIED(offTag: 'last_modified_t'),
+  LAST_MODIFIER(offTag: 'last_modified_by'),
+  LAST_CHECKED(offTag: 'last_checked_t'),
+  LAST_CHECKER(offTag: 'last_checker'),
+  CREATED(offTag: 'created_t'),
+  CREATOR(offTag: 'creator'),
+  EDITORS(offTag: 'editors_tags'),
   ECOSCORE_GRADE(offTag: 'ecoscore_grade'),
   ECOSCORE_SCORE(offTag: 'ecoscore_score'),
   ECOSCORE_DATA(offTag: 'ecoscore_data'),
@@ -117,7 +123,7 @@ List<String> convertFieldsToStrings(
             'Cannot request in-lang field $field without language');
       }
       for (final language in languages) {
-        fieldsStrings.add('${field.offTag}${language.code}');
+        fieldsStrings.add('${field.offTag}${language.offTag}');
       }
     } else {
       fieldsStrings.add(field.offTag);

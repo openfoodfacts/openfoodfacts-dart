@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:openfoodfacts/model/ProductResultV3.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
@@ -9,18 +10,17 @@ void main() {
   // Verify that we can save the product as a JSON string and then load it back
   test('Load product from JSON', () async {
     String barcode = '0030000010204';
-    ProductQueryConfiguration configurations =
-        ProductQueryConfiguration(barcode, languages: [
-      OpenFoodFactsLanguage.ENGLISH,
-      OpenFoodFactsLanguage.FRENCH
-    ], fields: [
-      ProductField.ALL,
-    ]);
-    ProductResult result = await OpenFoodAPIClient.getProduct(
+    ProductQueryConfiguration configurations = ProductQueryConfiguration(
+      barcode,
+      languages: [OpenFoodFactsLanguage.ENGLISH, OpenFoodFactsLanguage.FRENCH],
+      fields: [ProductField.ALL],
+      version: ProductQueryVersion.v3,
+    );
+    ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
       configurations,
       user: TestConstants.TEST_USER,
     );
-    expect(result.status, 1);
+    expect(result.status, ProductResultV3.statusSuccess);
     Product product = result.product!;
     Map<String, dynamic> productMap = product.toJson();
     String encodedJson = jsonEncode(productMap);

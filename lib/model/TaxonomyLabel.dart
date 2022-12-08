@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/model/OffTagged.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/TaxonomyQueryConfiguration.dart';
@@ -8,66 +9,43 @@ import 'package:openfoodfacts/utils/TagType.dart';
 part 'TaxonomyLabel.g.dart';
 
 /// Fields of an [TaxonomyLabel]
-enum TaxonomyLabelField {
-  ALL,
-  AUTH_ADDRESS,
-  AUTH_NAME,
-  AUTH_URL,
-  CATEGORIES,
-  CHILDREN,
-  COUNTRIES_WHERE_SOLD,
-  COUNTRY,
-  DESCRIPTION,
-  EU_GROUPS,
-  EXCEPTIONS,
-  IMAGE,
-  IMAGES,
-  INGREDIENTS,
-  LABEL_CATEGORIES,
-  MANUFACTURING_PLACES,
-  NAME,
-  OPPOSITE,
-  ORIGINS,
-  PACKAGING,
-  PACKAGING_PLACES,
-  PARENTS,
-  PROTECTED_NAME_TYPE,
-  STORES,
-  WIKIDATA,
-}
+enum TaxonomyLabelField implements OffTagged {
+  ALL(offTag: 'all'),
+  AUTH_ADDRESS(offTag: 'auth_address'),
+  AUTH_NAME(offTag: 'auth_name'),
+  AUTH_URL(offTag: 'auth_url'),
+  CATEGORIES(offTag: 'categories'),
+  CHILDREN(offTag: 'children'),
+  COUNTRIES_WHERE_SOLD(offTag: 'countries_where_sold'),
+  COUNTRY(offTag: 'country'),
+  DESCRIPTION(offTag: 'description'),
+  EU_GROUPS(offTag: 'eu_groups'),
+  EXCEPTIONS(offTag: 'exceptions'),
+  IMAGE(offTag: 'image'),
+  IMAGES(offTag: 'images'),
+  INGREDIENTS(offTag: 'ingredients'),
+  LABEL_CATEGORIES(offTag: 'label_categories'),
+  MANUFACTURING_PLACES(offTag: 'manufacturing_places'),
+  NAME(offTag: 'name'),
+  OPPOSITE(offTag: 'opposite'),
+  ORIGINS(offTag: 'origins'),
+  PACKAGING(offTag: 'packaging'),
+  PACKAGING_PLACES(offTag: 'packaging_places'),
+  PARENTS(offTag: 'parents'),
+  PROTECTED_NAME_TYPE(offTag: 'protected_name_type'),
+  STORES(offTag: 'stores'),
+  WIKIDATA(offTag: 'wikidata');
 
-extension TaxonomyLabelFieldExtension on TaxonomyLabelField {
-  static const Map<TaxonomyLabelField, String> _KEYS =
-      <TaxonomyLabelField, String>{
-    TaxonomyLabelField.ALL: 'all',
-    TaxonomyLabelField.AUTH_ADDRESS: 'auth_address',
-    TaxonomyLabelField.AUTH_NAME: 'auth_name',
-    TaxonomyLabelField.AUTH_URL: 'auth_url',
-    TaxonomyLabelField.CATEGORIES: 'categories',
-    TaxonomyLabelField.CHILDREN: 'children',
-    TaxonomyLabelField.COUNTRIES_WHERE_SOLD: 'countries_where_sold',
-    TaxonomyLabelField.COUNTRY: 'country',
-    TaxonomyLabelField.DESCRIPTION: 'description',
-    TaxonomyLabelField.EU_GROUPS: 'eu_groups',
-    TaxonomyLabelField.EXCEPTIONS: 'exceptions',
-    TaxonomyLabelField.IMAGE: 'image',
-    TaxonomyLabelField.IMAGES: 'images',
-    TaxonomyLabelField.INGREDIENTS: 'ingredients',
-    TaxonomyLabelField.LABEL_CATEGORIES: 'label_categories',
-    TaxonomyLabelField.MANUFACTURING_PLACES: 'manufacturing_places',
-    TaxonomyLabelField.NAME: 'name',
-    TaxonomyLabelField.OPPOSITE: 'opposite',
-    TaxonomyLabelField.ORIGINS: 'origins',
-    TaxonomyLabelField.PACKAGING: 'packaging',
-    TaxonomyLabelField.PACKAGING_PLACES: 'packaging_places',
-    TaxonomyLabelField.PARENTS: 'parents',
-    TaxonomyLabelField.PROTECTED_NAME_TYPE: 'protected_name_type',
-    TaxonomyLabelField.STORES: 'stores',
-    TaxonomyLabelField.WIKIDATA: 'wikidata',
-  };
+  const TaxonomyLabelField({
+    required this.offTag,
+  });
 
-  /// Returns the key of the Label field
-  String get key => _KEYS[this] ?? '';
+  @override
+  final String offTag;
+
+  // TODO: deprecated from 2022-11-12; remove when old enough
+  @Deprecated('Use offTag instead')
+  String get key => offTag;
 }
 
 /// A JSON-serializable version of a Label taxonomy result.
@@ -328,6 +306,6 @@ class TaxonomyLabelQueryConfiguration
   Iterable<String> convertFieldsToStrings(Iterable<TaxonomyLabelField> fields) {
     return fields
         .where((TaxonomyLabelField field) => !ignoredFields.contains(field))
-        .map<String>((TaxonomyLabelField field) => field.key);
+        .map<String>((TaxonomyLabelField field) => field.offTag);
   }
 }

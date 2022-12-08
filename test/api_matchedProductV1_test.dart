@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:openfoodfacts/model/Attribute.dart';
+import 'package:openfoodfacts/model/ProductResultV3.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/personalized_search/available_attribute_groups.dart';
 import 'package:openfoodfacts/personalized_search/available_preference_importances.dart';
@@ -61,12 +62,13 @@ void main() {
         barcode,
         language: language,
         fields: [ProductField.NAME, ProductField.ATTRIBUTE_GROUPS],
+        version: ProductQueryVersion.v3,
       );
-      final ProductResult result = await OpenFoodAPIClient.getProduct(
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
       );
-      expect(result.status, 1);
+      expect(result.status, ProductResultV3.statusSuccess);
       expect(result.barcode, barcode);
 
       final String attributeId1 = Attribute.ATTRIBUTE_NUTRISCORE;

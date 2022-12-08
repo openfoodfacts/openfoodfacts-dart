@@ -1,62 +1,83 @@
+import 'package:openfoodfacts/model/OffTagged.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 
-enum ImageField { FRONT, INGREDIENTS, NUTRITION, PACKAGING, OTHER }
+enum ImageField implements OffTagged {
+  FRONT(offTag: 'front'),
+  INGREDIENTS(offTag: 'ingredients'),
+  NUTRITION(offTag: 'nutrition'),
+  PACKAGING(offTag: 'packaging'),
+  OTHER(offTag: 'other');
 
-extension ImageFieldExtension on ImageField {
-  static const Map<ImageField, String> _VALUES = {
-    ImageField.FRONT: 'front',
-    ImageField.INGREDIENTS: 'ingredients',
-    ImageField.NUTRITION: 'nutrition',
-    ImageField.PACKAGING: 'packaging',
-    ImageField.OTHER: 'other',
-  };
+  const ImageField({
+    required this.offTag,
+  });
 
-  String get value => getValue(this);
+  @override
+  final String offTag;
 
-  static String getValue(ImageField field) => _VALUES[field] ?? 'other';
+  /// Returns the first [ImageField] that matches the [offTag].
+  static ImageField? fromOffTag(final String? offTag) =>
+      OffTagged.fromOffTag(offTag, ImageField.values) as ImageField?;
 
-  static ImageField getType(String s) => ImageField.values.firstWhere(
-        (final ImageField key) => _VALUES[key] == s.toLowerCase(),
-        orElse: () => ImageField.OTHER,
-      );
+  // TODO: deprecated from 2022-11-13; remove when old enough
+  @Deprecated('Use field.offTag instead')
+  String get value => offTag;
 }
 
-enum ImageSize {
-  THUMB, // width and height <= 100 px
-  SMALL, // width and height <= 200 px
-  DISPLAY, // width and height <= 400 px
-  ORIGINAL, // width and height: as uploaded
-  UNKNOWN, // size not available
+extension ImageFieldExtension on ImageField {
+  // TODO: deprecated from 2022-11-13; remove when old enough
+  @Deprecated('Use field.offTag instead')
+  static String getValue(ImageField field) => field.offTag;
+
+  // TODO: deprecated from 2022-11-13; remove when old enough
+  @Deprecated('Use ImageField.fromOffTag instead')
+  static ImageField getType(String s) =>
+      ImageField.fromOffTag(s.toLowerCase()) ?? ImageField.OTHER;
+}
+
+enum ImageSize implements OffTagged {
+  /// Width and height <= 100 px
+  THUMB(offTag: 'thumb', number: '100'),
+
+  /// Width and height <= 200 px
+  SMALL(offTag: 'small', number: '200'),
+
+  /// Width and height <= 400 px
+  DISPLAY(offTag: 'display', number: '400'),
+
+  /// Width and height: as uploaded
+  ORIGINAL(offTag: 'original', number: 'full'),
+
+  /// Size not available
+  UNKNOWN(offTag: 'unknown', number: 'unknown');
+
+  const ImageSize({
+    required this.offTag,
+    required this.number,
+  });
+
+  @override
+  final String offTag;
+
+  final String number;
 }
 
 extension ImageSizeExtension on ImageSize? {
-  static const Map<ImageSize, String> _VALUES = {
-    ImageSize.THUMB: 'thumb',
-    ImageSize.SMALL: 'small',
-    ImageSize.DISPLAY: 'display',
-    ImageSize.ORIGINAL: 'original',
-    ImageSize.UNKNOWN: 'unknown',
-  };
+  // TODO: deprecated from 2022-11-13; remove when old enough
+  @Deprecated('Use offTag instead')
+  String get value => (this ?? ImageSize.UNKNOWN).offTag;
 
-  static const Map<ImageSize, String> _NUMBERS = {
-    ImageSize.THUMB: '100',
-    ImageSize.SMALL: '200',
-    ImageSize.DISPLAY: '400',
-    ImageSize.ORIGINAL: 'full',
-    ImageSize.UNKNOWN: 'unknown',
-  };
-
-  String get value => _VALUES[this] ?? 'unknown';
-
-  String toNumber() => _NUMBERS[this] ?? 'unknown';
+  // TODO: deprecated from 2022-11-13; remove when old enough
+  @Deprecated('Use number instead')
+  String toNumber() => (this ?? ImageSize.UNKNOWN).number;
 
   static ImageSize getType(String s) => ImageSize.values.firstWhere(
-        (final ImageSize key) => _VALUES[key] == s.toLowerCase(),
+        (final ImageSize key) => key.offTag == s.toLowerCase(),
         orElse: () => ImageSize.UNKNOWN,
       );
 
   static ImageSize fromNumber(String s) => ImageSize.values.firstWhere(
-        (final ImageSize key) => _NUMBERS[key] == s,
+        (final ImageSize key) => key.number == s,
         orElse: () => ImageSize.UNKNOWN,
       );
 }
@@ -64,33 +85,33 @@ extension ImageSizeExtension on ImageSize? {
 /// Angle for image rotation.
 enum ImageAngle {
   /// Noon = no rotation
-  NOON,
+  NOON(degree: 0),
 
   /// 3 o'clock
-  THREE_O_CLOCK,
+  THREE_O_CLOCK(degree: 90),
 
   /// 6 o'clock
-  SIX_O_CLOCK,
+  SIX_O_CLOCK(degree: 180),
 
   /// 9 o'clock
-  NINE_O_CLOCK,
+  NINE_O_CLOCK(degree: 270);
+
+  const ImageAngle({
+    required this.degree,
+  });
+
+  /// Degree clockwise.
+  final int degree;
+
+  String get degreesClockwise => degree.toString();
 }
 
 extension ImageAngleExtension on ImageAngle {
-  static const Map<ImageAngle, int> _DEGREES_CLOCKWISE = {
-    ImageAngle.NOON: 0,
-    ImageAngle.THREE_O_CLOCK: 90,
-    ImageAngle.SIX_O_CLOCK: 180,
-    ImageAngle.NINE_O_CLOCK: 270,
-  };
-
-  String get degreesClockwise => _DEGREES_CLOCKWISE[this]?.toString() ?? '0';
-
   /// Returns the corresponding [ImageAngle], or null if not found.
   static ImageAngle? fromInt(final int? clockwiseDegree) {
-    for (final MapEntry<ImageAngle, int> entry in _DEGREES_CLOCKWISE.entries) {
-      if (entry.value == clockwiseDegree) {
-        return entry.key;
+    for (final ImageAngle imageAngle in ImageAngle.values) {
+      if (imageAngle.degree == clockwiseDegree) {
+        return imageAngle;
       }
     }
     return null;
@@ -145,6 +166,18 @@ class ProductImage {
   int? y2;
 
   @override
-  String toString() =>
-      'ProductImage(${field.value}${size == null ? '' : ',size=${size.value}'}${language == null ? '' : ',language=${language.code}'}${angle == null ? '' : ',angle=${angle!.degreesClockwise}'}${url == null ? '' : ',url=$url'}${imgid == null ? '' : ',imgid=$imgid'}${rev == null ? '' : ',rev=$rev'}${coordinatesImageSize == null ? '' : ',coordinatesImageSize=$coordinatesImageSize'}${x1 == null ? '' : ',x1=$x1'}${y1 == null ? '' : ',y1=$y1'}${x2 == null ? '' : ',x2=$x2'}${y2 == null ? '' : ',y2=$y2'})';
+  String toString() => 'ProductImage('
+      '${field.offTag}'
+      '${size == null ? '' : ',size=${size!.offTag}'}'
+      '${language == null ? '' : ',language=${language.code}'}'
+      '${angle == null ? '' : ',angle=${angle!.degreesClockwise}'}'
+      '${url == null ? '' : ',url=$url'}'
+      '${imgid == null ? '' : ',imgid=$imgid'}'
+      '${rev == null ? '' : ',rev=$rev'}'
+      '${coordinatesImageSize == null ? '' : ',coordinatesImageSize=$coordinatesImageSize'}'
+      '${x1 == null ? '' : ',x1=$x1'}'
+      '${y1 == null ? '' : ',y1=$y1'}'
+      '${x2 == null ? '' : ',x2=$x2'}'
+      '${y2 == null ? '' : ',y2=$y2'}'
+      ')';
 }

@@ -114,6 +114,14 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       ..comparedToCategory = json['compared_to_category'] as String?
       ..packagingTextInLanguages =
           LanguageHelper.fromJsonStringMap(json['packaging_text_in_languages'])
+      ..lastModifiedBy = json['last_modified_by'] as String?
+      ..lastChecked = JsonHelper.timestampToDate(json['last_checked_t'])
+      ..lastChecker = json['last_checker'] as String?
+      ..created = JsonHelper.timestampToDate(json['created_t'])
+      ..creator = json['creator'] as String?
+      ..editors = (json['editors_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
       ..knowledgePanels =
           KnowledgePanels.fromJsonHelper(json['knowledge_panels'] as Map?)
       ..environmentInfoCard = json['environment_infocard'] as String?
@@ -206,6 +214,13 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
       JsonHelper.attributeGroupsToJson(instance.attributeGroups));
   writeNotNull(
       'last_modified_t', JsonHelper.dateToTimestamp(instance.lastModified));
+  writeNotNull('last_modified_by', instance.lastModifiedBy);
+  writeNotNull(
+      'last_checked_t', JsonHelper.dateToTimestamp(instance.lastChecked));
+  writeNotNull('last_checker', instance.lastChecker);
+  writeNotNull('created_t', JsonHelper.dateToTimestamp(instance.created));
+  writeNotNull('creator', instance.creator);
+  writeNotNull('editors_tags', instance.editors);
   writeNotNull('ecoscore_grade', instance.ecoscoreGrade);
   writeNotNull('ecoscore_score', instance.ecoscoreScore);
   writeNotNull(

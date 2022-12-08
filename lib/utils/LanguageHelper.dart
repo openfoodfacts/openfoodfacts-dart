@@ -1,765 +1,590 @@
+import 'package:openfoodfacts/model/OffTagged.dart';
+
 /// Available languages
-enum OpenFoodFactsLanguage {
+enum OpenFoodFactsLanguage implements OffTagged {
   /// English
-  ENGLISH,
+  ENGLISH(offTag: 'en'),
 
   /// Old Church Slavonic
-  OLD_CHURCH_SLAVONIC,
+  OLD_CHURCH_SLAVONIC(offTag: 'cu'),
 
   /// Dzongkha
-  DZONGKHA_LANGUAGE,
+  DZONGKHA_LANGUAGE(offTag: 'dz'),
 
   /// Japanese
-  JAPANESE,
+  JAPANESE(offTag: 'ja'),
 
   /// Malay
-  MALAY,
+  MALAY(offTag: 'ms'),
 
   /// Tagalog
-  TAGALOG,
+  TAGALOG(offTag: 'tl'),
 
   /// Moldovan
-  MOLDOVAN,
+  MOLDOVAN(offTag: 'mo'),
 
   /// Mongolian
-  MONGOLIAN,
+  MONGOLIAN(offTag: 'mn'),
 
   /// Korean
-  KOREAN,
+  KOREAN(offTag: 'ko'),
 
   /// Luba-Katanga
-  LUBA_KATANGA_LANGUAGE,
+  LUBA_KATANGA_LANGUAGE(offTag: 'lu'),
 
   /// Kazakh
-  KAZAKH,
+  KAZAKH(offTag: 'kk'),
 
   /// Quechua
-  QUECHUA_LANGUAGES,
+  QUECHUA_LANGUAGES(offTag: 'qu'),
 
   /// Ukrainian
-  UKRAINIAN,
+  UKRAINIAN(offTag: 'uk'),
 
   /// Occitan
-  OCCITAN,
+  OCCITAN(offTag: 'oc'),
 
   /// Bihari
-  BIHARI_LANGUAGES,
+  BIHARI_LANGUAGES(offTag: 'bh'),
 
   /// South Ndebele
-  SOUTHERN_NDEBELE,
+  SOUTHERN_NDEBELE(offTag: 'nr'),
 
   /// Bokmal
-  BOKMAL,
+  BOKMAL(offTag: 'nb'),
 
   /// Komi
-  KOMI,
+  KOMI(offTag: 'kv'),
 
   /// Modern Greek
-  MODERN_GREEK,
+  MODERN_GREEK(offTag: 'el'),
 
   /// Fijian
-  FIJIAN_LANGUAGE,
+  FIJIAN_LANGUAGE(offTag: 'fj'),
 
   /// Zulu
-  ZULU,
+  ZULU(offTag: 'zu'),
 
   /// Ido
-  IDO,
+  IDO(offTag: 'io'),
 
   /// Khmer
-  KHMER,
+  KHMER(offTag: 'km'),
 
   /// Sanskrit
-  SANSKRIT,
+  SANSKRIT(offTag: 'sa'),
 
   /// Macedonian
-  MACEDONIAN,
+  MACEDONIAN(offTag: 'mk'),
 
   /// Sotho
-  SOTHO,
+  SOTHO(offTag: 'st'),
 
   /// Scottish Gaelic
-  SCOTTISH_GAELIC,
+  SCOTTISH_GAELIC(offTag: 'gd'),
 
   /// Marathi
-  MARATHI,
+  MARATHI(offTag: 'mr'),
 
   /// Nauruan
-  NAURUAN,
+  NAURUAN(offTag: 'na'),
 
   /// Oromo
-  OROMO,
+  OROMO(offTag: 'om'),
 
   /// Welsh
-  WELSH,
+  WELSH(offTag: 'cy'),
 
   /// Vietnamese
-  VIETNAMESE,
+  VIETNAMESE(offTag: 'vi'),
 
   /// Bislama
-  BISLAMA,
+  BISLAMA(offTag: 'bi'),
 
   /// Somali
-  SOMALI,
+  SOMALI(offTag: 'so'),
 
   /// Lithuanian
-  LITHUANIAN,
+  LITHUANIAN(offTag: 'lt'),
 
   /// Haitian Creole
-  HAITIAN_CREOLE,
+  HAITIAN_CREOLE(offTag: 'ht'),
 
   /// Malagasy
-  MALAGASY,
+  MALAGASY(offTag: 'mg'),
 
   /// Spanish
-  SPANISH,
+  SPANISH(offTag: 'es'),
 
   /// Danish
-  DANISH,
+  DANISH(offTag: 'da'),
 
   /// Slovenian
-  SLOVENE,
+  SLOVENE(offTag: 'sl'),
 
   /// Icelandic
-  ICELANDIC,
+  ICELANDIC(offTag: 'is'),
 
   /// Estonian
-  ESTONIAN,
+  ESTONIAN(offTag: 'et'),
 
   /// Wolof
-  WOLOF,
+  WOLOF(offTag: 'wo'),
 
   /// Hiri Motu
-  HIRI_MOTU,
+  HIRI_MOTU(offTag: 'ho'),
 
   /// Tamil
-  TAMIL,
+  TAMIL(offTag: 'ta'),
 
   /// Slovak
-  SLOVAK,
+  SLOVAK(offTag: 'sk'),
 
   /// Herero
-  HERERO,
+  HERERO(offTag: 'hz'),
 
   /// Italian
-  ITALIAN,
+  ITALIAN(offTag: 'it'),
 
   /// Irish
-  IRISH,
+  IRISH(offTag: 'ga'),
 
   /// Shona
-  SHONA,
+  SHONA(offTag: 'sn'),
 
   /// Marshallese
-  MARSHALLESE,
+  MARSHALLESE(offTag: 'mh'),
 
   /// French
-  FRENCH,
+  FRENCH(offTag: 'fr'),
 
   /// Aymara
-  AYMARA,
+  AYMARA(offTag: 'ay'),
 
   /// Hebrew
-  HEBREW,
+  HEBREW(offTag: 'he'),
 
   /// Northern Sami
-  NORTHERN_SAMI,
+  NORTHERN_SAMI(offTag: 'se'),
 
   /// Bengali
-  BENGALI,
+  BENGALI(offTag: 'bn'),
 
   /// Odia
-  ODIA,
+  ODIA(offTag: 'or'),
 
   /// Malayalam
-  MALAYALAM,
+  MALAYALAM(offTag: 'ml'),
 
   /// Dutch
-  DUTCH,
+  DUTCH(offTag: 'nl'),
 
   /// Uyghur
-  UYGHUR,
+  UYGHUR(offTag: 'ug'),
 
   /// Serbian
-  SERBIAN,
+  SERBIAN(offTag: 'sr'),
 
   /// Tibetan
-  TIBETAN_LANGUAGE,
+  TIBETAN_LANGUAGE(offTag: 'bo'),
 
   /// Belarusian
-  BELARUSIAN,
+  BELARUSIAN(offTag: 'be'),
 
   /// Samoan
-  SAMOAN,
+  SAMOAN(offTag: 'sm'),
 
   /// Punjabi
-  PUNJABI,
+  PUNJABI(offTag: 'pa'),
 
   /// Russian
-  RUSSIAN,
+  RUSSIAN(offTag: 'ru'),
 
   /// Tahitian
-  TAHITIAN,
+  TAHITIAN(offTag: 'ty'),
 
   /// Interlingua
-  INTERLINGUA,
+  INTERLINGUA(offTag: 'ia'),
 
   /// Afar
-  AFAR,
+  AFAR(offTag: 'aa'),
 
   /// Greenlandic
-  GREENLANDIC,
+  GREENLANDIC(offTag: 'kl'),
 
   /// Latin
-  LATIN,
+  LATIN(offTag: 'la'),
 
   /// Chinese
-  CHINESE,
+  CHINESE(offTag: 'zh'),
 
   /// Turkmen
-  TURKMEN,
+  TURKMEN(offTag: 'tk'),
 
   /// West Frisian
-  WEST_FRISIAN,
+  WEST_FRISIAN(offTag: 'fy'),
 
   /// Tsonga
-  TSONGA,
+  TSONGA(offTag: 'ts'),
 
   /// Romansh
-  ROMANSH,
+  ROMANSH(offTag: 'rm'),
 
   /// Inupiaq
-  INUPIAT_LANGUAGE,
+  INUPIAT_LANGUAGE(offTag: 'ik'),
 
   /// Tajik
-  TAJIK,
+  TAJIK(offTag: 'tg'),
 
   /// Burmese
-  BURMESE,
+  BURMESE(offTag: 'my'),
 
   /// Javanese
-  JAVANESE,
+  JAVANESE(offTag: 'jv'),
 
   /// Chechen
-  CHECHEN,
+  CHECHEN(offTag: 'ce'),
 
   /// Assamese
-  ASSAMESE,
+  ASSAMESE(offTag: 'as'),
 
   /// Unknown language
-  UNKNOWN_LANGUAGE,
+  UNKNOWN_LANGUAGE(offTag: 'xx'),
 
   /// Arabic
-  ARABIC,
+  ARABIC(offTag: 'ar'),
 
   /// Kinyarmanda
-  KINYARWANDA,
+  KINYARWANDA(offTag: 'rw'),
 
   /// Tonga
-  TONGAN_LANGUAGE,
+  TONGAN_LANGUAGE(offTag: 'to'),
 
   /// Church Slavonic
-  CHURCH_SLAVONIC,
+  // same as OLD_CHURCH_SLAVONIC
+  CHURCH_SLAVONIC(offTag: 'cu'),
 
   /// Sinhala
-  SINHALA,
+  SINHALA(offTag: 'si'),
 
   /// Armenian
-  ARMENIAN,
+  ARMENIAN(offTag: 'hy'),
 
   /// Kurdish
-  KURDISH,
+  KURDISH(offTag: 'ku'),
 
   /// Thai
-  THAI,
+  THAI(offTag: 'th'),
 
   /// Cree
-  CREE,
+  CREE(offTag: 'cr'),
 
   /// Swahili
-  SWAHILI,
+  SWAHILI(offTag: 'sw'),
 
   /// Gujarati
-  GUJARATI,
+  GUJARATI(offTag: 'gu'),
 
   /// Persian
-  PERSIAN,
+  PERSIAN(offTag: 'fa'),
 
   /// Bosnian
-  BOSNIAN,
+  BOSNIAN(offTag: 'bs'),
 
   /// Amharic
-  AMHARIC,
+  AMHARIC(offTag: 'am'),
 
   /// Aragonese
-  ARAGONESE,
+  ARAGONESE(offTag: 'an'),
 
   /// Croatian
-  CROATIAN,
+  CROATIAN(offTag: 'hr'),
 
   /// Chewa
-  CHEWA,
+  CHEWA(offTag: 'ny'),
 
   /// Zhuang
-  ZHUANG_LANGUAGES,
+  ZHUANG_LANGUAGES(offTag: 'za'),
 
   /// Lingala
-  LINGALA_LANGUAGE,
+  LINGALA_LANGUAGE(offTag: 'ln'),
 
   /// Bambara
-  BAMBARA,
+  BAMBARA(offTag: 'bm'),
 
   /// Limburgan
-  LIMBURGISH_LANGUAGE,
+  LIMBURGISH_LANGUAGE(offTag: 'li'),
 
   /// Nuosu
-  NUOSU_LANGUAGE,
+  NUOSU_LANGUAGE(offTag: 'ii'),
 
   /// Kwanyama
-  KWANYAMA,
+  KWANYAMA(offTag: 'kj'),
 
   /// Kirundi
-  KIRUNDI,
+  KIRUNDI(offTag: 'rn'),
 
   /// Ewe
-  EWE,
+  EWE(offTag: 'ee'),
 
   /// Faorese
-  FAROESE,
+  FAROESE(offTag: 'fo'),
 
   /// Sindhi
-  SINDHI,
+  SINDHI(offTag: 'sd'),
 
   /// Corsican
-  CORSICAN,
+  CORSICAN(offTag: 'co'),
 
   /// Kannada
-  KANNADA,
+  KANNADA(offTag: 'kn'),
 
   /// Norwegian
-  NORWEGIAN,
+  NORWEGIAN(offTag: 'no'),
 
   /// Sundanese
-  SUNDANESE_LANGUAGE,
+  SUNDANESE_LANGUAGE(offTag: 'su'),
 
   /// Georgian
-  GEORGIAN,
+  GEORGIAN(offTag: 'ka'),
 
   /// Hausa
-  HAUSA,
+  HAUSA(offTag: 'ha'),
 
   /// Tswana
-  TSWANA,
+  TSWANA(offTag: 'tn'),
 
   /// Catalan
-  CATALAN,
+  CATALAN(offTag: 'ca'),
 
   /// Ndonga
-  NDONGA_DIALECT,
+  NDONGA_DIALECT(offTag: 'ng'),
 
   /// Igbo
-  IGBO_LANGUAGE,
+  IGBO_LANGUAGE(offTag: 'ig'),
 
   /// Afrikaans
-  AFRIKAANS,
+  AFRIKAANS(offTag: 'af'),
 
   /// Polish
-  POLISH,
+  POLISH(offTag: 'pl'),
 
   /// Kashmiri
-  KASHMIRI,
+  KASHMIRI(offTag: 'ks'),
 
   /// Maori
-  MAORI,
+  MAORI(offTag: 'mi'),
 
   /// Hungarian
-  HUNGARIAN,
+  HUNGARIAN(offTag: 'hu'),
 
   /// Breton
-  BRETON,
+  BRETON(offTag: 'br'),
 
   /// Portuguese
-  PORTUGUESE,
+  PORTUGUESE(offTag: 'pt'),
 
   /// Bulgarian
-  BULGARIAN,
+  BULGARIAN(offTag: 'bg'),
 
   /// Avestan
-  AVESTAN,
+  AVESTAN(offTag: 'ae'),
 
   /// Nepali
-  NEPALI,
+  NEPALI(offTag: 'ne'),
 
   /// Twi
-  TWI,
+  TWI(offTag: 'tw'),
 
   /// Uzbek
-  UZBEK,
+  UZBEK(offTag: 'uz'),
 
   /// Chamorro
-  CHAMORRO,
+  CHAMORRO(offTag: 'ch'),
 
   /// Guarani
-  GUARANI,
+  GUARANI(offTag: 'gn'),
 
   /// Nynorsk
-  NYNORSK,
+  NYNORSK(offTag: 'nn'),
 
   /// Azerbaijani
-  AZERBAIJANI,
+  AZERBAIJANI(offTag: 'az'),
 
   /// Czech
-  CZECH,
+  CZECH(offTag: 'cs'),
 
   /// Navajo
-  NAVAJO,
+  NAVAJO(offTag: 'nv'),
 
   /// Finnish
-  FINNISH,
+  FINNISH(offTag: 'fi'),
 
   /// Luxembourgish
-  LUXEMBOURGISH,
+  LUXEMBOURGISH(offTag: 'lb'),
 
   /// Swedish
-  SWEDISH,
+  SWEDISH(offTag: 'sv'),
 
   /// Yiddish
-  YIDDISH,
+  YIDDISH(offTag: 'yi'),
 
   /// Inuktitut
-  INUKTITUT,
+  INUKTITUT(offTag: 'iu'),
 
   /// Lao
-  LAO,
+  LAO(offTag: 'lo'),
 
   /// Chuvash
-  CHUVASH,
+  CHUVASH(offTag: 'cv'),
 
   /// Maltese
-  MALTESE,
+  MALTESE(offTag: 'mt'),
 
   /// Maldivian
-  MALDIVIAN_LANGUAGE,
+  MALDIVIAN_LANGUAGE(offTag: 'dv'),
 
   /// Interlingue
-  INTERLINGUE,
+  INTERLINGUE(offTag: 'ie'),
 
   /// Ossetian
-  OSSETIAN,
+  OSSETIAN(offTag: 'os'),
 
   /// Bashkir
-  BASHKIR,
+  BASHKIR(offTag: 'ba'),
 
   /// Ojibwe
-  OJIBWE,
+  OJIBWE(offTag: 'oj'),
 
   /// Kanuri
-  KANURI,
+  KANURI(offTag: 'kr'),
 
   /// Indonesian
-  INDONESIAN,
+  INDONESIAN(offTag: 'id'),
 
   /// Sardinian
-  SARDINIAN_LANGUAGE,
+  SARDINIAN_LANGUAGE(offTag: 'sc'),
 
   /// Akan
-  AKAN,
+  AKAN(offTag: 'ak'),
 
   /// Manx
-  MANX,
+  MANX(offTag: 'gv'),
 
   /// Turkish
-  TURKISH,
+  TURKISH(offTag: 'tr'),
 
   /// Esperanto
-  ESPERANTO,
+  ESPERANTO(offTag: 'eo'),
 
   /// Pashto
-  PASHTO,
+  PASHTO(offTag: 'ps'),
 
   /// Kyrgyz
-  KYRGYZ,
+  KYRGYZ(offTag: 'ky'),
 
   /// Volapuk
-  VOLAPUK,
+  VOLAPUK(offTag: 'vo'),
 
   /// Avar
-  AVAR,
+  AVAR(offTag: 'av'),
 
   /// Sango
-  SANGO,
+  SANGO(offTag: 'sg'),
 
   /// Venda
-  VENDA,
+  VENDA(offTag: 've'),
 
   /// Albanian
-  ALBANIAN,
+  ALBANIAN(offTag: 'sq'),
 
   /// Basque
-  BASQUE,
+  BASQUE(offTag: 'eu'),
 
   /// Fulah
-  FULA_LANGUAGE,
+  FULA_LANGUAGE(offTag: 'ff'),
 
   /// German
-  GERMAN,
+  GERMAN(offTag: 'de'),
 
   /// Latvian
-  LATVIAN,
+  LATVIAN(offTag: 'lv'),
 
   /// Cornish
-  CORNISH,
+  CORNISH(offTag: 'kw'),
 
   /// Pali
-  PALI,
+  PALI(offTag: 'pi'),
 
   /// Tatar
-  TATAR,
+  TATAR(offTag: 'tt'),
 
   /// Romanian
-  ROMANIAN,
+  ROMANIAN(offTag: 'ro'),
 
   /// Gikuyu
-  GIKUYU,
+  GIKUYU(offTag: 'ki'),
 
   /// Tigrinya
-  TIGRINYA,
+  TIGRINYA(offTag: 'ti'),
 
   /// Galician
-  GALICIAN,
+  GALICIAN(offTag: 'gl'),
 
   /// Telugu
-  TELUGU,
+  TELUGU(offTag: 'te'),
 
   /// Hindi
-  HINDI,
+  HINDI(offTag: 'hi'),
 
   /// Kongo
-  KONGO_LANGUAGE,
+  KONGO_LANGUAGE(offTag: 'kg'),
 
   /// Xhosa
-  XHOSA,
+  XHOSA(offTag: 'xh'),
 
   /// Swazi
-  SWAZI,
+  SWAZI(offTag: 'ss'),
 
   /// Luganda
-  LUGANDA,
+  LUGANDA(offTag: 'lg'),
 
   /// Urdu
-  URDU,
+  URDU(offTag: 'ur'),
 
   /// North Ndbele
-  NORTHERN_NDEBELE_LANGUAGE,
+  NORTHERN_NDEBELE_LANGUAGE(offTag: 'nd'),
 
   /// Yoruba
-  YORUBA,
+  YORUBA(offTag: 'yo'),
 
   /// World, as pseudo language
-  WORLD,
+  WORLD(offTag: 'world'),
 
   /// Undefined language
-  UNDEFINED
+  UNDEFINED(offTag: '-');
+
+  const OpenFoodFactsLanguage({
+    required this.offTag,
+  });
+
+  /// ISO 639-1
+  @override
+  final String offTag;
+
+  /// Returns the first [OpenFoodFactsLanguage] that matches the [offTag].
+  static OpenFoodFactsLanguage? fromOffTag(final String? offTag) =>
+      OffTagged.fromOffTag(offTag, OpenFoodFactsLanguage.values)
+          as OpenFoodFactsLanguage?;
 }
 
 extension OpenFoodFactsLanguageExtension on OpenFoodFactsLanguage? {
-  /// ISO 639-1 for [OpenFoodFactsLanguage]s
-  static const Map<OpenFoodFactsLanguage, String> _CODES = {
-    OpenFoodFactsLanguage.ENGLISH: 'en',
-    OpenFoodFactsLanguage.OLD_CHURCH_SLAVONIC: 'cu',
-    OpenFoodFactsLanguage.DZONGKHA_LANGUAGE: 'dz',
-    OpenFoodFactsLanguage.JAPANESE: 'ja',
-    OpenFoodFactsLanguage.MALAY: 'ms',
-    OpenFoodFactsLanguage.TAGALOG: 'tl',
-    OpenFoodFactsLanguage.MOLDOVAN: 'mo',
-    OpenFoodFactsLanguage.MONGOLIAN: 'mn',
-    OpenFoodFactsLanguage.KOREAN: 'ko',
-    OpenFoodFactsLanguage.LUBA_KATANGA_LANGUAGE: 'lu',
-    OpenFoodFactsLanguage.KAZAKH: 'kk',
-    OpenFoodFactsLanguage.QUECHUA_LANGUAGES: 'qu',
-    OpenFoodFactsLanguage.UKRAINIAN: 'uk',
-    OpenFoodFactsLanguage.OCCITAN: 'oc',
-    OpenFoodFactsLanguage.BIHARI_LANGUAGES: 'bh',
-    OpenFoodFactsLanguage.SOUTHERN_NDEBELE: 'nr',
-    OpenFoodFactsLanguage.BOKMAL: 'nb',
-    OpenFoodFactsLanguage.KOMI: 'kv',
-    OpenFoodFactsLanguage.MODERN_GREEK: 'el',
-    OpenFoodFactsLanguage.FIJIAN_LANGUAGE: 'fj',
-    OpenFoodFactsLanguage.ZULU: 'zu',
-    OpenFoodFactsLanguage.IDO: 'io',
-    OpenFoodFactsLanguage.KHMER: 'km',
-    OpenFoodFactsLanguage.SANSKRIT: 'sa',
-    OpenFoodFactsLanguage.MACEDONIAN: 'mk',
-    OpenFoodFactsLanguage.SOTHO: 'st',
-    OpenFoodFactsLanguage.SCOTTISH_GAELIC: 'gd',
-    OpenFoodFactsLanguage.MARATHI: 'mr',
-    OpenFoodFactsLanguage.NAURUAN: 'na',
-    OpenFoodFactsLanguage.OROMO: 'om',
-    OpenFoodFactsLanguage.WELSH: 'cy',
-    OpenFoodFactsLanguage.VIETNAMESE: 'vi',
-    OpenFoodFactsLanguage.BISLAMA: 'bi',
-    OpenFoodFactsLanguage.SOMALI: 'so',
-    OpenFoodFactsLanguage.LITHUANIAN: 'lt',
-    OpenFoodFactsLanguage.HAITIAN_CREOLE: 'ht',
-    OpenFoodFactsLanguage.MALAGASY: 'mg',
-    OpenFoodFactsLanguage.SPANISH: 'es',
-    OpenFoodFactsLanguage.DANISH: 'da',
-    OpenFoodFactsLanguage.SLOVENE: 'sl',
-    OpenFoodFactsLanguage.ICELANDIC: 'is',
-    OpenFoodFactsLanguage.ESTONIAN: 'et',
-    OpenFoodFactsLanguage.WOLOF: 'wo',
-    OpenFoodFactsLanguage.HIRI_MOTU: 'ho',
-    OpenFoodFactsLanguage.TAMIL: 'ta',
-    OpenFoodFactsLanguage.SLOVAK: 'sk',
-    OpenFoodFactsLanguage.HERERO: 'hz',
-    OpenFoodFactsLanguage.ITALIAN: 'it',
-    OpenFoodFactsLanguage.IRISH: 'ga',
-    OpenFoodFactsLanguage.SHONA: 'sn',
-    OpenFoodFactsLanguage.MARSHALLESE: 'mh',
-    OpenFoodFactsLanguage.FRENCH: 'fr',
-    OpenFoodFactsLanguage.AYMARA: 'ay',
-    OpenFoodFactsLanguage.HEBREW: 'he',
-    OpenFoodFactsLanguage.NORTHERN_SAMI: 'se',
-    OpenFoodFactsLanguage.BENGALI: 'bn',
-    OpenFoodFactsLanguage.ODIA: 'or',
-    OpenFoodFactsLanguage.MALAYALAM: 'ml',
-    OpenFoodFactsLanguage.DUTCH: 'nl',
-    OpenFoodFactsLanguage.UYGHUR: 'ug',
-    OpenFoodFactsLanguage.SERBIAN: 'sr',
-    OpenFoodFactsLanguage.TIBETAN_LANGUAGE: 'bo',
-    OpenFoodFactsLanguage.BELARUSIAN: 'be',
-    OpenFoodFactsLanguage.SAMOAN: 'sm',
-    OpenFoodFactsLanguage.PUNJABI: 'pa',
-    OpenFoodFactsLanguage.RUSSIAN: 'ru',
-    OpenFoodFactsLanguage.TAHITIAN: 'ty',
-    OpenFoodFactsLanguage.INTERLINGUA: 'ia',
-    OpenFoodFactsLanguage.AFAR: 'aa',
-    OpenFoodFactsLanguage.GREENLANDIC: 'kl',
-    OpenFoodFactsLanguage.LATIN: 'la',
-    OpenFoodFactsLanguage.CHINESE: 'zh',
-    OpenFoodFactsLanguage.TURKMEN: 'tk',
-    OpenFoodFactsLanguage.WEST_FRISIAN: 'fy',
-    OpenFoodFactsLanguage.TSONGA: 'ts',
-    OpenFoodFactsLanguage.ROMANSH: 'rm',
-    OpenFoodFactsLanguage.INUPIAT_LANGUAGE: 'ik',
-    OpenFoodFactsLanguage.TAJIK: 'tg',
-    OpenFoodFactsLanguage.BURMESE: 'my',
-    OpenFoodFactsLanguage.JAVANESE: 'jv',
-    OpenFoodFactsLanguage.CHECHEN: 'ce',
-    OpenFoodFactsLanguage.ASSAMESE: 'as',
-    OpenFoodFactsLanguage.UNKNOWN_LANGUAGE: 'xx',
-    OpenFoodFactsLanguage.ARABIC: 'ar',
-    OpenFoodFactsLanguage.KINYARWANDA: 'rw',
-    OpenFoodFactsLanguage.TONGAN_LANGUAGE: 'to',
-    OpenFoodFactsLanguage.CHURCH_SLAVONIC: 'cu',
-    OpenFoodFactsLanguage.SINHALA: 'si',
-    OpenFoodFactsLanguage.ARMENIAN: 'hy',
-    OpenFoodFactsLanguage.KURDISH: 'ku',
-    OpenFoodFactsLanguage.THAI: 'th',
-    OpenFoodFactsLanguage.CREE: 'cr',
-    OpenFoodFactsLanguage.SWAHILI: 'sw',
-    OpenFoodFactsLanguage.GUJARATI: 'gu',
-    OpenFoodFactsLanguage.PERSIAN: 'fa',
-    OpenFoodFactsLanguage.BOSNIAN: 'bs',
-    OpenFoodFactsLanguage.AMHARIC: 'am',
-    OpenFoodFactsLanguage.ARAGONESE: 'an',
-    OpenFoodFactsLanguage.CROATIAN: 'hr',
-    OpenFoodFactsLanguage.CHEWA: 'ny',
-    OpenFoodFactsLanguage.ZHUANG_LANGUAGES: 'za',
-    OpenFoodFactsLanguage.LINGALA_LANGUAGE: 'ln',
-    OpenFoodFactsLanguage.BAMBARA: 'bm',
-    OpenFoodFactsLanguage.LIMBURGISH_LANGUAGE: 'li',
-    OpenFoodFactsLanguage.NUOSU_LANGUAGE: 'ii',
-    OpenFoodFactsLanguage.KWANYAMA: 'kj',
-    OpenFoodFactsLanguage.KIRUNDI: 'rn',
-    OpenFoodFactsLanguage.EWE: 'ee',
-    OpenFoodFactsLanguage.FAROESE: 'fo',
-    OpenFoodFactsLanguage.SINDHI: 'sd',
-    OpenFoodFactsLanguage.CORSICAN: 'co',
-    OpenFoodFactsLanguage.KANNADA: 'kn',
-    OpenFoodFactsLanguage.NORWEGIAN: 'no',
-    OpenFoodFactsLanguage.SUNDANESE_LANGUAGE: 'su',
-    OpenFoodFactsLanguage.GEORGIAN: 'ka',
-    OpenFoodFactsLanguage.HAUSA: 'ha',
-    OpenFoodFactsLanguage.TSWANA: 'tn',
-    OpenFoodFactsLanguage.CATALAN: 'ca',
-    OpenFoodFactsLanguage.NDONGA_DIALECT: 'ng',
-    OpenFoodFactsLanguage.IGBO_LANGUAGE: 'ig',
-    OpenFoodFactsLanguage.AFRIKAANS: 'af',
-    OpenFoodFactsLanguage.POLISH: 'pl',
-    OpenFoodFactsLanguage.KASHMIRI: 'ks',
-    OpenFoodFactsLanguage.MAORI: 'mi',
-    OpenFoodFactsLanguage.HUNGARIAN: 'hu',
-    OpenFoodFactsLanguage.BRETON: 'br',
-    OpenFoodFactsLanguage.PORTUGUESE: 'pt',
-    OpenFoodFactsLanguage.BULGARIAN: 'bg',
-    OpenFoodFactsLanguage.AVESTAN: 'ae',
-    OpenFoodFactsLanguage.NEPALI: 'ne',
-    OpenFoodFactsLanguage.TWI: 'tw',
-    OpenFoodFactsLanguage.UZBEK: 'uz',
-    OpenFoodFactsLanguage.CHAMORRO: 'ch',
-    OpenFoodFactsLanguage.GUARANI: 'gn',
-    OpenFoodFactsLanguage.NYNORSK: 'nn',
-    OpenFoodFactsLanguage.AZERBAIJANI: 'az',
-    OpenFoodFactsLanguage.CZECH: 'cs',
-    OpenFoodFactsLanguage.NAVAJO: 'nv',
-    OpenFoodFactsLanguage.FINNISH: 'fi',
-    OpenFoodFactsLanguage.LUXEMBOURGISH: 'lb',
-    OpenFoodFactsLanguage.SWEDISH: 'sv',
-    OpenFoodFactsLanguage.YIDDISH: 'yi',
-    OpenFoodFactsLanguage.INUKTITUT: 'iu',
-    OpenFoodFactsLanguage.LAO: 'lo',
-    OpenFoodFactsLanguage.CHUVASH: 'cv',
-    OpenFoodFactsLanguage.MALTESE: 'mt',
-    OpenFoodFactsLanguage.MALDIVIAN_LANGUAGE: 'dv',
-    OpenFoodFactsLanguage.INTERLINGUE: 'ie',
-    OpenFoodFactsLanguage.OSSETIAN: 'os',
-    OpenFoodFactsLanguage.BASHKIR: 'ba',
-    OpenFoodFactsLanguage.OJIBWE: 'oj',
-    OpenFoodFactsLanguage.KANURI: 'kr',
-    OpenFoodFactsLanguage.INDONESIAN: 'id',
-    OpenFoodFactsLanguage.SARDINIAN_LANGUAGE: 'sc',
-    OpenFoodFactsLanguage.AKAN: 'ak',
-    OpenFoodFactsLanguage.MANX: 'gv',
-    OpenFoodFactsLanguage.TURKISH: 'tr',
-    OpenFoodFactsLanguage.ESPERANTO: 'eo',
-    OpenFoodFactsLanguage.PASHTO: 'ps',
-    OpenFoodFactsLanguage.KYRGYZ: 'ky',
-    OpenFoodFactsLanguage.VOLAPUK: 'vo',
-    OpenFoodFactsLanguage.AVAR: 'av',
-    OpenFoodFactsLanguage.SANGO: 'sg',
-    OpenFoodFactsLanguage.VENDA: 've',
-    OpenFoodFactsLanguage.ALBANIAN: 'sq',
-    OpenFoodFactsLanguage.BASQUE: 'eu',
-    OpenFoodFactsLanguage.FULA_LANGUAGE: 'ff',
-    OpenFoodFactsLanguage.GERMAN: 'de',
-    OpenFoodFactsLanguage.LATVIAN: 'lv',
-    OpenFoodFactsLanguage.CORNISH: 'kw',
-    OpenFoodFactsLanguage.PALI: 'pi',
-    OpenFoodFactsLanguage.TATAR: 'tt',
-    OpenFoodFactsLanguage.ROMANIAN: 'ro',
-    OpenFoodFactsLanguage.GIKUYU: 'ki',
-    OpenFoodFactsLanguage.TIGRINYA: 'ti',
-    OpenFoodFactsLanguage.GALICIAN: 'gl',
-    OpenFoodFactsLanguage.TELUGU: 'te',
-    OpenFoodFactsLanguage.HINDI: 'hi',
-    OpenFoodFactsLanguage.KONGO_LANGUAGE: 'kg',
-    OpenFoodFactsLanguage.XHOSA: 'xh',
-    OpenFoodFactsLanguage.SWAZI: 'ss',
-    OpenFoodFactsLanguage.LUGANDA: 'lg',
-    OpenFoodFactsLanguage.URDU: 'ur',
-    OpenFoodFactsLanguage.NORTHERN_NDEBELE_LANGUAGE: 'nd',
-    OpenFoodFactsLanguage.YORUBA: 'yo',
-    OpenFoodFactsLanguage.WORLD: 'world',
-    OpenFoodFactsLanguage.UNDEFINED: '-',
-  };
-
   /// Returns the corresponding ISO-639-1 code
   ///
   /// Won't return 2 characters for special cases like
   /// * [OpenFoodFactsLanguage.WORLD]
   /// * [OpenFoodFactsLanguage.UNDEFINED]
-  String get code => _CODES[this] ?? '-';
+  String get code => this?.offTag ?? '-';
 }
 
 /// Helper class around [OpenFoodFactsLanguage]
@@ -769,10 +594,7 @@ class LanguageHelper {
 
   /// Converts an ISO-639-1 code into an [OpenFoodFactsLanguage]
   static OpenFoodFactsLanguage fromJson(String? code) =>
-      OpenFoodFactsLanguage.values.firstWhere(
-        (final OpenFoodFactsLanguage language) => language.code == code,
-        orElse: () => OpenFoodFactsLanguage.UNDEFINED,
-      );
+      OpenFoodFactsLanguage.fromOffTag(code) ?? OpenFoodFactsLanguage.UNDEFINED;
 
   /// Converts a Map with [OpenFoodFactsLanguage] into
   /// a map with ISO-639-1 codes.
@@ -780,7 +602,7 @@ class LanguageHelper {
     if (map == null) {
       return null;
     }
-    return map.map((key, value) => MapEntry(key.code, value));
+    return map.map((key, value) => MapEntry(key.offTag, value));
   }
 
   /// Helper function without generic types. Needed for the
