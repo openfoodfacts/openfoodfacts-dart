@@ -93,7 +93,7 @@ void main() {
   });
 
   group('$OpenFoodAPIClient get robotoff insights', () {
-    test('FABRICE get random insight', () async {
+    test('get random insight', () async {
       final InsightsResult result = await OpenFoodAPIClient.getRandomInsight(
         TestConstants.PROD_USER,
         type: InsightType.CATEGORY,
