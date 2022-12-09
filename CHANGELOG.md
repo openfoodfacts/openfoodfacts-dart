@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.29.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.28.0...v1.29.0) (2022-12-09)
+
+
+### Features
+
+* 618 - added 6 contribution fields ([#636](https://github.com/openfoodfacts/openfoodfacts-dart/issues/636)) ([fcfa446](https://github.com/openfoodfacts/openfoodfacts-dart/commit/fcfa4469d9c563c25d89596b72bfeca5a5c61f50))
+* API V3 now supported for "get product" ([#633](https://github.com/openfoodfacts/openfoodfacts-dart/issues/633)) ([e118386](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e118386dcce75cd877ed13873136c421dfe50b09))
+
+
+### Bug Fixes
+
+* 575 - less expected populated fields from Robotoff ([#639](https://github.com/openfoodfacts/openfoodfacts-dart/issues/639)) ([88edf86](https://github.com/openfoodfacts/openfoodfacts-dart/commit/88edf86683e804be38e67a2f62e37f94cc686412))
+* Fix Badges ([#632](https://github.com/openfoodfacts/openfoodfacts-dart/issues/632)) ([27f1d87](https://github.com/openfoodfacts/openfoodfacts-dart/commit/27f1d87cb5d0bf3218df86d69334e7d96cc5d4ef))
+
 ## [1.28.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.27.1...v1.28.0) (2022-11-22)
 
 
