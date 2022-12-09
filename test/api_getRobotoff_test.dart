@@ -93,7 +93,7 @@ void main() {
   });
 
   group('$OpenFoodAPIClient get robotoff insights', () {
-    test('get random insight', () async {
+    test('FABRICE get random insight', () async {
       final InsightsResult result = await OpenFoodAPIClient.getRandomInsight(
         TestConstants.PROD_USER,
         type: InsightType.CATEGORY,
@@ -105,11 +105,6 @@ void main() {
       expect(result.insights![0].type, InsightType.CATEGORY);
       expect(result.insights![0].id, isNotNull);
       expect(result.insights![0].barcode, isNotNull);
-      expect(result.insights![0].countries, isNotNull);
-      expect(result.insights![0].lang, isNotNull);
-      //expect(result.insights![0].model, isNotNull);
-      // Actually, I stumbled across insights without confidence field...
-      //expect(result.insight.confidence, isNotNull);
     });
 
     test('get product insights (found)', () async {
