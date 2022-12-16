@@ -103,7 +103,7 @@ void main() {
         BARCODE_ORIENTALES: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
         BARCODE_HACK: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
         BARCODE_SCHNITZEL: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
-        BARCODE_CHIPOLATA: _Score(50, MatchedProductStatusV2.MAY_NOT_MATCH),
+        BARCODE_CHIPOLATA: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
         BARCODE_FLEISCHWURST: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
         BARCODE_POULET: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
         BARCODE_SAUCISSON: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
