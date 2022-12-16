@@ -18,6 +18,7 @@ class UriHelper {
     final Map<String, String>? queryParameters,
     final QueryType? queryType,
     final bool addUserAgentParameters = true,
+    final String? userInfo,
   }) =>
       Uri(
         scheme: OpenFoodAPIConfiguration.uriScheme,
@@ -28,6 +29,7 @@ class UriHelper {
         queryParameters: addUserAgentParameters
             ? HttpHelper.addUserAgentParameters(queryParameters)
             : queryParameters,
+        userInfo: userInfo,
       );
 
   static Uri getPostUri({
@@ -35,6 +37,20 @@ class UriHelper {
     final QueryType? queryType,
   }) =>
       getUri(path: path, queryType: queryType, addUserAgentParameters: false);
+
+  static Uri getPatchUri({
+    required final String path,
+    final QueryType? queryType,
+  }) =>
+      getUri(
+        path: path,
+        queryType: queryType,
+        addUserAgentParameters: false,
+        userInfo:
+            OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+                ? null
+                : HttpHelper.userInfoForTest,
+      );
 
   ///Returns a OFF-Robotoff uri with the in the [OpenFoodAPIConfiguration] specified settings
   static Uri getRobotoffUri({

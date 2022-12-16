@@ -1,11 +1,14 @@
 import 'package:http/http.dart' as http;
 import 'package:openfoodfacts/model/Attribute.dart';
 import 'package:openfoodfacts/model/AttributeGroup.dart';
+import 'package:openfoodfacts/model/LocalizedTag.dart';
 import 'package:openfoodfacts/model/Nutrient.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/model/Nutriments.dart';
 import 'package:openfoodfacts/model/PerSize.dart';
 import 'package:openfoodfacts/model/ProductResultV3.dart';
+import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
+import 'package:openfoodfacts/model/ProductPackaging.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
 import 'package:openfoodfacts/utils/InvalidBarcodes.dart';
@@ -1801,7 +1804,6 @@ void main() {
       lang: OpenFoodFactsLanguage.GERMAN,
       genericName: 'Softdrink',
       labels: 'MyTestLabel',
-      packaging: 'de:In einer Plastikflasche',
       quantity: '5.5 Liter',
     );
 
@@ -1816,8 +1818,6 @@ void main() {
       fields: [
         ProductField.GENERIC_NAME,
         ProductField.LABELS,
-        ProductField.PACKAGING,
-        ProductField.PACKAGING_TAGS,
         ProductField.QUANTITY,
       ],
       version: ProductQueryVersion.v3,
@@ -1832,8 +1832,6 @@ void main() {
     expect(result.product?.barcode, null);
     expect(result.product?.genericName, 'Softdrink');
     expect(result.product?.labels, 'MyTestLabel');
-    expect(result.product?.packaging, 'de:In einer Plastikflasche');
-    expect(result.product?.packagingTags, ['de:in-einer-plastikflasche']);
     expect(result.product?.quantity, '5.5 Liter');
   },
       timeout: Timeout(
@@ -1917,6 +1915,137 @@ void main() {
       result.product!.editors!.length,
       greaterThanOrEqualTo(59),
     ); // value on 2022-12-05
+  });
+
+  test('get new packagings field', () async {
+    const String barcode = '3661344723290';
+    const String searchTerms = 'skyr les 2 vaches';
+    const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+    const ProductQueryVersion version = ProductQueryVersion.v3;
+    const QueryType queryType = QueryType.PROD;
+    const User user = TestConstants.PROD_USER;
+
+    late ProductResultV3 productResult;
+    late SearchResult searchResult;
+
+    void checkProduct(final Product product) {
+      void checkLocalizedTag(final LocalizedTag? tag) {
+        expect(tag, isNotNull);
+        expect(tag!.id, isNotNull);
+        expect(tag.lcName, isNotNull);
+      }
+
+      expect(product.packagings, isNotNull);
+      expect(product.packagings!.length, 3);
+      for (final ProductPackaging packaging in product.packagings!) {
+        checkLocalizedTag(packaging.shape);
+        checkLocalizedTag(packaging.material);
+        checkLocalizedTag(packaging.recycling);
+        expect(packaging.recycling!.id, 'en:recycle');
+      }
+    }
+
+    // checking PACKAGINGS as a single field on a barcode search
+    productResult = await OpenFoodAPIClient.getProductV3(
+      ProductQueryConfiguration(
+        barcode,
+        fields: [ProductField.PACKAGINGS],
+        language: language,
+        version: version,
+      ),
+      queryType: queryType,
+      user: user,
+    );
+    expect(productResult.status, ProductResultV3.statusSuccess);
+    expect(productResult.product, isNotNull);
+    checkProduct(productResult.product!);
+
+    // checking PACKAGINGS as a part of ALL fields on a barcode search
+    productResult = await OpenFoodAPIClient.getProductV3(
+      ProductQueryConfiguration(
+        barcode,
+        fields: [ProductField.ALL],
+        language: language,
+        version: version,
+      ),
+      queryType: queryType,
+      user: user,
+    );
+    expect(productResult.status, ProductResultV3.statusSuccess);
+    expect(productResult.product, isNotNull);
+    checkProduct(productResult.product!);
+
+    late bool found;
+    // checking PACKAGINGS as a single field on a search query
+    searchResult = await OpenFoodAPIClient.searchProducts(
+      user,
+      ProductSearchQueryConfiguration(
+        parametersList: [
+          SearchTerms(terms: [searchTerms])
+        ],
+        fields: [ProductField.PACKAGINGS, ProductField.BARCODE],
+        language: language,
+        version: version,
+      ),
+      queryType: queryType,
+    );
+    expect(searchResult.products, isNotNull);
+    expect(searchResult.products, isNotEmpty);
+    found = false;
+    for (final Product product in searchResult.products!) {
+      if (product.barcode != barcode) {
+        continue;
+      }
+      found = true;
+      checkProduct(product);
+    }
+    expect(found, isTrue);
+
+    // checking PACKAGINGS as a part of ALL fields on a search query
+    searchResult = await OpenFoodAPIClient.searchProducts(
+      user,
+      ProductSearchQueryConfiguration(
+        parametersList: [
+          SearchTerms(terms: [searchTerms])
+        ],
+        fields: [ProductField.ALL],
+        language: language,
+        version: version,
+      ),
+      queryType: queryType,
+    );
+    expect(searchResult.products, isNotNull);
+    expect(searchResult.products, isNotEmpty);
+    found = false;
+    for (final Product product in searchResult.products!) {
+      if (product.barcode != barcode) {
+        continue;
+      }
+      found = true;
+      checkProduct(product);
+    }
+    expect(found, isTrue);
+
+    // checking PACKAGINGS as a part of RAW fields on a search query
+    try {
+      searchResult = await OpenFoodAPIClient.searchProducts(
+        user,
+        ProductSearchQueryConfiguration(
+          parametersList: [
+            SearchTerms(terms: [searchTerms])
+          ],
+          fields: [ProductField.RAW],
+          language: language,
+          version: version,
+        ),
+        queryType: queryType,
+      );
+    } catch (e) {
+      // In RAW mode the packagings are mere String's instead of LocalizedTag's.
+      // Therefore we expect an Exception.
+      return;
+    }
+    fail('On Raw');
   });
 
   group('no nutrition data', () {

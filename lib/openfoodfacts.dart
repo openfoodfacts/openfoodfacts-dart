@@ -6,6 +6,7 @@ import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/interface/JsonObject.dart';
+import 'package:openfoodfacts/model/ProductPackaging.dart';
 import 'package:openfoodfacts/model/ProductResultV3.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/LoginStatus.dart';
@@ -145,6 +146,48 @@ class OpenFoodAPIClient {
       addCredentialsToBody: true,
     );
     return Status.fromApiResponse(response.body);
+  }
+
+  /// Temporary: saves product packagings V3 style.
+  ///
+  /// For the moment that's the only field supported in WRITE by API V3.
+  /// Long term target is of course more something like [saveProduct].
+  static Future<ProductResultV3> temporarySaveProductV3(
+    final User user,
+    final String barcode, {
+    final List<ProductPackaging>? packagings,
+    final QueryType? queryType,
+    final OpenFoodFactsCountry? country,
+    final OpenFoodFactsLanguage? language,
+  }) async {
+    final Map<String, dynamic> parameterMap = <String, dynamic>{};
+    parameterMap.addAll(user.toData());
+    if (packagings == null) {
+      // For the moment it's the only purpose of this method: saving packagings.
+      throw Exception('packagings cannot be null');
+    }
+    parameterMap['product'] = {};
+    parameterMap['product']['packagings'] = packagings;
+    if (language != null) {
+      parameterMap['lc'] = language.offTag;
+      parameterMap['tags_lc'] = language.offTag;
+    }
+    if (country != null) {
+      parameterMap['cc'] = country.offTag;
+    }
+
+    var productUri = UriHelper.getPatchUri(
+      path: '/api/v3/product/$barcode',
+      queryType: queryType,
+    );
+
+    final Response response = await HttpHelper().doPatchRequest(
+      productUri,
+      parameterMap,
+      user,
+      queryType: queryType,
+    );
+    return ProductResultV3.fromJson(jsonDecode(response.body));
   }
 
   /// Send one image to the server.

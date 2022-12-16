@@ -1,8 +1,6 @@
-import 'package:openfoodfacts/interface/Parameter.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/AbstractQueryConfiguration.dart';
 import 'package:openfoodfacts/utils/CountryHelper.dart';
-import 'package:openfoodfacts/utils/LanguageHelper.dart';
-import 'package:openfoodfacts/utils/ProductFields.dart';
 
 /// Query Configuration for search parameters
 class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
@@ -14,6 +12,7 @@ class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
     final OpenFoodFactsCountry? country,
     final List<ProductField>? fields,
     required List<Parameter> parametersList,
+    this.version = ProductQueryVersion.v3,
   }) : super(
           language: language,
           languages: languages,
@@ -21,6 +20,8 @@ class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
           fields: fields,
           additionalParameters: parametersList,
         );
+
+  final ProductQueryVersion version;
 
   List<String> getFieldsKeys() {
     List<String> result = [];
@@ -38,6 +39,7 @@ class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
     result.putIfAbsent('search_terms', () => '');
     // explicit json output
     result.putIfAbsent('json', () => '1');
+    result.putIfAbsent('api_version', () => '${version.version}');
     return result;
   }
 
