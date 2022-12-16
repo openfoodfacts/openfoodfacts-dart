@@ -51,7 +51,10 @@ enum ProductField implements OffTagged {
   LABELS(offTag: 'labels'),
   LABELS_TAGS(offTag: 'labels_tags'),
   LABELS_TAGS_IN_LANGUAGES(offTag: 'labels_tags_'),
+  // TODO: deprecated from 2022-12-16; remove when old enough
+  @Deprecated('Use packagingS field instead')
   PACKAGING(offTag: 'packaging'),
+  PACKAGINGS(offTag: 'packagings'),
   PACKAGING_TAGS(offTag: 'packaging_tags'),
   PACKAGING_TEXT_IN_LANGUAGES(offTag: 'packaging_text_'),
   PACKAGING_TEXT_ALL_LANGUAGES(offTag: 'packaging_text_languages'),
@@ -85,6 +88,9 @@ enum ProductField implements OffTagged {
   ORIGINS(offTag: 'origins'),
   NOVA_GROUP(offTag: 'nova_group'),
   WEBSITE(offTag: 'link'),
+
+  /// All data as RAW from the server. E.g. packagings are only Strings there.
+  RAW(offTag: 'raw'),
   ALL(offTag: '');
 
   const ProductField({

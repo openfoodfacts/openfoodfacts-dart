@@ -3,6 +3,7 @@ import 'package:openfoodfacts/model/Attribute.dart';
 import 'package:openfoodfacts/model/AttributeGroup.dart';
 import 'package:openfoodfacts/model/KnowledgePanels.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
+import 'package:openfoodfacts/model/ProductPackaging.dart';
 import 'package:openfoodfacts/utils/JsonHelper.dart';
 import 'package:openfoodfacts/utils/LanguageHelper.dart';
 import 'package:openfoodfacts/utils/ProductFields.dart';
@@ -311,8 +312,14 @@ class Product extends JsonObject {
       includeIfNull: false)
   Map<OpenFoodFactsLanguage, List<String>>? labelsTagsInLanguages;
 
+  // TODO: deprecated from 2022-12-16; remove when old enough
+  @Deprecated('User packagingS instead')
   @JsonKey(name: 'packaging', includeIfNull: false)
   String? packaging;
+
+  @JsonKey(name: 'packagings', includeIfNull: false)
+  List<ProductPackaging>? packagings;
+
   @JsonKey(name: 'packaging_tags', includeIfNull: false)
   List<String>? packagingTags;
   @JsonKey(
@@ -468,7 +475,8 @@ class Product extends JsonObject {
       this.labels,
       this.labelsTags,
       this.labelsTagsInLanguages,
-      this.packaging,
+      // TODO: deprecated from 2022-12-16; remove when old enough
+      @Deprecated('Use packagingS field instead') this.packaging,
       this.packagingTags,
       this.miscTags,
       this.statesTags,

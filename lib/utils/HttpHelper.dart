@@ -29,10 +29,10 @@ class HttpHelper {
   static const String FROM = 'anonymous';
 
   /// Adds user agent data to parameters, for statistics purpose
-  static Map<String, String>? addUserAgentParameters(
-    Map<String, String>? map,
+  static Map<String, dynamic>? addUserAgentParameters(
+    Map<String, dynamic>? map,
   ) {
-    map ??= <String, String>{};
+    map ??= <String, dynamic>{};
     if (OpenFoodAPIConfiguration.userAgent?.name != null) {
       map['app_name'] = OpenFoodAPIConfiguration.userAgent!.name!;
     }
@@ -70,9 +70,7 @@ class HttpHelper {
       headers: _buildHeaders(
         user: user,
         isTestModeActive:
-            OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-                ? false
-                : true,
+            OpenFoodAPIConfiguration.getQueryType(queryType) != QueryType.PROD,
       ),
     );
 
@@ -105,15 +103,36 @@ class HttpHelper {
       headers: _buildHeaders(
         user: user,
         isTestModeActive:
-            OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-                ? false
-                : true,
+            OpenFoodAPIConfiguration.getQueryType(queryType) != QueryType.PROD,
         addCredentialsToHeader: addCredentialsToHeader,
       ),
       body: addUserAgentParameters(body),
     );
     return response;
   }
+
+  static const String userInfoForTest = 'off:off';
+
+  /// Send a http PATCH request to the specified uri.
+  ///
+  /// The data / body of the request has to be provided as map. (key, value)
+  /// The result of the request will be returned as string.
+  Future<http.Response> doPatchRequest(
+    final Uri uri,
+    final Map<String, dynamic> body,
+    final User? user, {
+    final QueryType? queryType,
+  }) async =>
+      http.patch(
+        uri,
+        headers: _buildHeaders(
+          user: user,
+          isTestModeActive: OpenFoodAPIConfiguration.getQueryType(queryType) !=
+              QueryType.PROD,
+          addCredentialsToHeader: false,
+        ),
+        body: jsonEncode(addUserAgentParameters(body)),
+      );
 
   /// Send a multipart post request to the specified uri.
   /// The data / body of the request has to be provided as map. (key, value)
@@ -132,14 +151,13 @@ class HttpHelper {
       _buildHeaders(
         user: user,
         isTestModeActive:
-            OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-                ? false
-                : true,
+            OpenFoodAPIConfiguration.getQueryType(queryType) != QueryType.PROD,
       ) as Map<String, String>,
     );
 
     request.headers.addAll({'Content-Type': 'multipart/form-data'});
-    request.fields.addAll(addUserAgentParameters(body)!);
+    addUserAgentParameters(body);
+    request.fields.addAll(body);
     if (user != null) {
       request.fields.addAll(user.toData());
     }
@@ -192,7 +210,7 @@ class HttpHelper {
     });
 
     if (isTestModeActive && !addCredentialsToHeader) {
-      var token = 'Basic ${base64Encode(utf8.encode('off:off'))}';
+      var token = 'Basic ${base64Encode(utf8.encode(userInfoForTest))}';
       headers.addAll({'Authorization': token});
     }
 

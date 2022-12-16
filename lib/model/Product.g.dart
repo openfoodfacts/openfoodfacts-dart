@@ -112,6 +112,9 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       )
       ..nutritionData = JsonHelper.checkboxFromJSON(json['nutrition_data'])
       ..comparedToCategory = json['compared_to_category'] as String?
+      ..packagings = (json['packagings'] as List<dynamic>?)
+          ?.map((e) => ProductPackaging.fromJson(e))
+          .toList()
       ..packagingTextInLanguages =
           LanguageHelper.fromJsonStringMap(json['packaging_text_in_languages'])
       ..lastModifiedBy = json['last_modified_by'] as String?
@@ -202,6 +205,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('labels_tags_in_languages',
       LanguageHelper.toJsonStringsListMap(instance.labelsTagsInLanguages));
   writeNotNull('packaging', instance.packaging);
+  writeNotNull('packagings', instance.packagings);
   writeNotNull('packaging_tags', instance.packagingTags);
   writeNotNull('packaging_text_in_languages',
       LanguageHelper.toJsonStringMap(instance.packagingTextInLanguages));

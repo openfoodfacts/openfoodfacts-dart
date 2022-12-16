@@ -216,7 +216,7 @@ Like that:
 
       expect(status.status, 1);
       expect(status.statusVerbose, 'fields saved');
-    });
+    }, skip: 'Too often 504 Gateway Time-out');
 
     test('add new product test 3', () async {
       Product product = Product(
@@ -283,7 +283,6 @@ Like that:
       Product product = Product(
           barcode: '7340011364184',
           categories: 'Product categories test 1,Product categories test 2',
-          packaging: 'Product packaging test 1,Product packaging test 2',
           labels: 'Product labels test 1,Product labels test 2');
 
       Status status = await OpenFoodAPIClient.saveProduct(
@@ -307,10 +306,6 @@ Like that:
           'Product labels test 1,Product labels test 2');
       expect(result.product!.labelsTags,
           ['en:product-labels-test-1', 'en:product-labels-test-2']);
-      expect(result.product!.packaging,
-          'Product packaging test 1,Product packaging test 2');
-      expect(result.product!.packagingTags,
-          ['en:product-packaging-test-1', 'en:product-packaging-test-2']);
       expect(result.product!.categories,
           'Product categories test 1,Product categories test 2');
       expect(result.product!.categoriesTags,
