@@ -95,5 +95,9 @@ void main() {
         () async => checkTypeCount(
             OpenFoodFactsCountry.SPAIN, 200000) // 20220706: was 272194
         );
-  });
+  },
+      timeout: Timeout(
+        // some tests can be slow here
+        Duration(seconds: 90),
+      ));
 }
