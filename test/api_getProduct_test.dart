@@ -1921,6 +1921,7 @@ void main() {
     const String barcode = '3661344723290';
     const String searchTerms = 'skyr les 2 vaches';
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+    const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
     const ProductQueryVersion version = ProductQueryVersion.v3;
     const QueryType queryType = QueryType.PROD;
     const User user = TestConstants.PROD_USER;
@@ -1951,6 +1952,7 @@ void main() {
         barcode,
         fields: [ProductField.PACKAGINGS],
         language: language,
+        country: country,
         version: version,
       ),
       queryType: queryType,
@@ -1966,6 +1968,7 @@ void main() {
         barcode,
         fields: [ProductField.ALL],
         language: language,
+        country: country,
         version: version,
       ),
       queryType: queryType,
@@ -1985,6 +1988,7 @@ void main() {
         ],
         fields: [ProductField.PACKAGINGS, ProductField.BARCODE],
         language: language,
+        country: country,
         version: version,
       ),
       queryType: queryType,
@@ -2010,6 +2014,7 @@ void main() {
         ],
         fields: [ProductField.ALL],
         language: language,
+        country: country,
         version: version,
       ),
       queryType: queryType,
@@ -2036,6 +2041,7 @@ void main() {
           ],
           fields: [ProductField.RAW],
           language: language,
+          country: country,
           version: version,
         ),
         queryType: queryType,
