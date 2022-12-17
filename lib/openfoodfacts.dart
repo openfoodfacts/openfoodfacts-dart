@@ -23,6 +23,7 @@ import 'package:openfoodfacts/model/TaxonomyCountry.dart';
 import 'package:openfoodfacts/model/TaxonomyIngredient.dart';
 import 'package:openfoodfacts/model/TaxonomyLabel.dart';
 import 'package:openfoodfacts/model/TaxonomyLanguage.dart';
+import 'package:openfoodfacts/model/TaxonomyNova.dart';
 import 'package:openfoodfacts/model/TaxonomyOrigin.dart';
 import 'package:openfoodfacts/model/TaxonomyPackaging.dart';
 import 'package:openfoodfacts/model/TaxonomyPackagingMaterial.dart';
@@ -512,6 +513,17 @@ class OpenFoodAPIClient {
     QueryType? queryType,
   }) =>
       getTaxonomy<TaxonomyPackagingRecycling, TaxonomyPackagingRecyclingField>(
+        configuration,
+        user: user,
+        queryType: queryType,
+      );
+
+  static Future<Map<String, TaxonomyNova>?> getTaxonomyNova(
+    TaxonomyNovaQueryConfiguration configuration, {
+    User? user,
+    QueryType? queryType,
+  }) =>
+      getTaxonomy<TaxonomyNova, TaxonomyNovaField>(
         configuration,
         user: user,
         queryType: queryType,
