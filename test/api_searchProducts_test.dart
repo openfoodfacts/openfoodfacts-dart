@@ -989,6 +989,36 @@ void main() {
     });
 
     test('check products with 2 random states tags', () async {
+      Future<void> checkExpectations(
+        final State state1,
+        final bool completed1,
+        final State state2,
+        final bool completed2,
+      ) async {
+        final int count1 = await checkStatesTags(
+          StatesTagsParameter(map: {
+            state1: completed1,
+          }),
+        );
+        final int count2 = await checkStatesTags(
+          StatesTagsParameter(map: {
+            state2: completed2,
+          }),
+        );
+
+        final Map<State, bool> map = <State, bool>{
+          state1: completed1,
+          state2: completed2,
+        };
+
+        final int countBoth = await checkStatesTags(
+          StatesTagsParameter(map: map),
+        );
+        // it's an AND: with both conditions we always get less results.
+        expect(countBoth, lessThanOrEqualTo(count1), reason: map.toString());
+        expect(countBoth, lessThanOrEqualTo(count2), reason: map.toString());
+      }
+
       final List<int> indices = getRandomInts(
         count: 2,
         max: State.values.length,
@@ -998,28 +1028,7 @@ void main() {
       final Random random = Random();
       final bool completed1 = random.nextBool();
       final bool completed2 = random.nextBool();
-      final int count1 = await checkStatesTags(
-        StatesTagsParameter(map: {
-          state1: completed1,
-        }),
-      );
-      final int count2 = await checkStatesTags(
-        StatesTagsParameter(map: {
-          state2: completed2,
-        }),
-      );
-
-      final Map<State, bool> map = <State, bool>{
-        state1: completed1,
-        state2: completed2,
-      };
-
-      final int countBoth = await checkStatesTags(
-        StatesTagsParameter(map: map),
-      );
-      // it's an AND: with both conditions we always get less results.
-      expect(countBoth, lessThanOrEqualTo(count1), reason: map.toString());
-      expect(countBoth, lessThanOrEqualTo(count2), reason: map.toString());
+      await checkExpectations(state1, completed1, state2, completed2);
     });
   },
       timeout: Timeout(

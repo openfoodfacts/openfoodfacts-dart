@@ -15,6 +15,7 @@ enum TagType implements OffTagged {
   PACKAGING_SHAPES(offTag: 'packaging_shapes'),
   PACKAGING_MATERIALS(offTag: 'packaging_materials'),
   PACKAGING_RECYCLING(offTag: 'packaging_recycling'),
+  NOVA(offTag: 'nova_groups'),
   EMB_CODES(offTag: 'emb_codes');
 
   const TagType({
