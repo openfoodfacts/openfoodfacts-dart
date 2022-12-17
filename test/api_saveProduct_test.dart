@@ -235,7 +235,7 @@ Like that:
 
       expect(status.status, 1);
       expect(status.statusVerbose, 'fields saved');
-    }, skip: 'Works randomly');
+    }, skip: 'Too often 504 Gateway Time-out');
 
     test('add new product test 4', () async {
       Product product = Product(
@@ -254,7 +254,7 @@ Like that:
 
       expect(status.status, 1);
       expect(status.statusVerbose, 'fields saved');
-    });
+    }, skip: 'Too often 504 Gateway Time-out');
 
     test('add new product test 5', () async {
       const PerSize perSize = PerSize.oneHundredGrams;
