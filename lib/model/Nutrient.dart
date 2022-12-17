@@ -189,6 +189,10 @@ enum Nutrient implements OffTagged {
   final String offTag;
 
   /// Returns the first [Nutrient] that matches the [offTag].
-  static Nutrient? fromOffTag(final String? offTag) =>
-      OffTagged.fromOffTag(offTag, Nutrient.values) as Nutrient?;
+  ///
+  /// Special case for [offTag] 'energy', which can be found in
+  /// [OrderedNutrient], and is a duplicate of 'energy-kj'.
+  static Nutrient? fromOffTag(final String? offTag) => offTag == 'energy'
+      ? Nutrient.energyKJ
+      : OffTagged.fromOffTag(offTag, Nutrient.values) as Nutrient?;
 }
