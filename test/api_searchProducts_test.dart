@@ -21,7 +21,8 @@ import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
+  OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
 
   group('$OpenFoodAPIClient search products', () {
     const String UNKNOWN_BARCODE = '1111111111111111111111111111111';
@@ -73,7 +74,6 @@ void main() {
             language: OpenFoodFactsLanguage.FRENCH,
             country: OpenFoodFactsCountry.FRANCE,
           ),
-          queryType: QueryType.PROD,
         );
 
         expect(result.products, isNotNull);
@@ -145,7 +145,7 @@ void main() {
               language: OpenFoodFactsLanguage.GERMAN);
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
-        TestConstants.TEST_USER,
+        TestConstants.PROD_USER,
         configuration,
       );
 
@@ -171,7 +171,7 @@ void main() {
               language: OpenFoodFactsLanguage.ENGLISH);
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
-        TestConstants.TEST_USER,
+        TestConstants.PROD_USER,
         configuration,
       );
 
@@ -219,7 +219,6 @@ void main() {
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
         configuration,
-        queryType: QueryType.PROD,
       );
 
       expect(result.products, isNotNull);
@@ -341,7 +340,7 @@ void main() {
               language: OpenFoodFactsLanguage.GERMAN);
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
-        TestConstants.TEST_USER,
+        TestConstants.PROD_USER,
         configuration,
       );
 
@@ -367,7 +366,7 @@ void main() {
               language: OpenFoodFactsLanguage.FRENCH);
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
-        TestConstants.TEST_USER,
+        TestConstants.PROD_USER,
         configuration,
       );
 
@@ -399,7 +398,6 @@ void main() {
       SearchResult result = await OpenFoodAPIClient.searchProducts(
         null,
         configuration,
-        queryType: QueryType.PROD,
       );
 
       expect(result.products, isNotEmpty);
@@ -427,7 +425,7 @@ void main() {
         );
 
         final SearchResult result = await OpenFoodAPIClient.searchProducts(
-          TestConstants.TEST_USER,
+          TestConstants.PROD_USER,
           configuration,
         );
 
@@ -461,7 +459,7 @@ void main() {
               language: OpenFoodFactsLanguage.FRENCH);
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
-        TestConstants.TEST_USER,
+        TestConstants.PROD_USER,
         configuration,
       );
 
@@ -545,7 +543,7 @@ void main() {
       );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
-        TestConstants.TEST_USER,
+        TestConstants.PROD_USER,
         configuration,
       );
 
@@ -592,7 +590,7 @@ void main() {
       );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
-        TestConstants.TEST_USER,
+        TestConstants.PROD_USER,
         configuration,
       );
 
@@ -605,7 +603,7 @@ void main() {
     });
 
     test('search products with filter on all tags (part 3)', () async {
-      // will probably be barcode 111111555555
+      // will probably be barcode 111111555555, only in TEST env
       const String packaging = 'de:in-einer-plastikflasche';
 
       final parameters = <Parameter>[
@@ -623,6 +621,7 @@ void main() {
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.TEST_USER,
         configuration,
+        queryType: QueryType.TEST,
       );
 
       expect(result.products, isNotNull);
@@ -633,6 +632,7 @@ void main() {
     });
 
     test('search products with quotes', () async {
+      // explicitly on TEST
       const String barcode = '2222222222223';
       final Product product = Product(
           barcode: barcode,
@@ -643,6 +643,7 @@ void main() {
       await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         product,
+        queryType: QueryType.TEST,
       );
 
       final parameters = <Parameter>[
@@ -659,6 +660,7 @@ void main() {
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.TEST_USER,
         configuration,
+        queryType: QueryType.TEST,
       );
 
       expect(result.products!.length, 1);
@@ -681,7 +683,6 @@ void main() {
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
         configuration,
-        queryType: QueryType.PROD,
       );
 
       expect(result.page, 1);
@@ -702,7 +703,6 @@ void main() {
         user: TestConstants.PROD_USER,
         language: OpenFoodFactsLanguage.FRENCH,
         country: OpenFoodFactsCountry.FRANCE,
-        queryType: QueryType.PROD,
       );
 
       int count = 0;
@@ -759,7 +759,7 @@ void main() {
       );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
-        TestConstants.TEST_USER,
+        TestConstants.PROD_USER,
         configuration,
       );
 
@@ -789,7 +789,6 @@ void main() {
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
         configuration,
-        queryType: QueryType.PROD,
       );
 
       expect(result.page, 1);
@@ -798,7 +797,53 @@ void main() {
       expect(result.products, isNotNull);
       expect(result.products!.length, BARCODES.length - 1);
     });
-  });
+
+    test('nova filter', () async {
+      // approximated min counts
+      const Map<int, int> novaMinCounts = <int, int>{
+        1: 25000, // was 28437 on 2022-12-19
+        2: 20000, // was 21124 on 2022-12-19
+        3: 50000, // was 52603 on 2022-12-19
+        4: 140000, // was 149003 on 2022-12-19
+      };
+
+      // single filters
+      for (final int novaGroup in novaMinCounts.keys) {
+        final SearchResult result = await OpenFoodAPIClient.searchProducts(
+          TestConstants.PROD_USER,
+          ProductSearchQueryConfiguration(
+            parametersList: <Parameter>[
+              TagFilter.fromType(
+                tagFilterType: TagFilterType.NOVA_GROUPS,
+                tagName: '$novaGroup',
+              ),
+            ],
+            fields: [ProductField.BARCODE, ProductField.NOVA_GROUP],
+            language: OpenFoodFactsLanguage.FRENCH,
+            country: OpenFoodFactsCountry.FRANCE,
+            version: ProductQueryVersion.v3,
+          ),
+        );
+
+        expect(result.page, 1);
+        expect(result.pageSize, 24);
+        expect(
+          result.count,
+          greaterThanOrEqualTo(novaMinCounts[novaGroup]!),
+          reason: 'Not enough values for nova group $novaGroup',
+        );
+        expect(result.products, isNotNull);
+        expect(result.products!.length, 24);
+        for (final Product product in result.products!) {
+          expect(product.novaGroup, novaGroup);
+        }
+      }
+    });
+  },
+      timeout: Timeout(
+        // some tests can be slow here
+        Duration(seconds: 90),
+      ));
 
   /// Returns random and different int's.
   List<int> getRandomInts({
@@ -842,7 +887,6 @@ void main() {
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
         configuration,
-        queryType: QueryType.PROD,
       );
 
       expect(result.products, isNotNull);
@@ -951,7 +995,6 @@ void main() {
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
         configuration,
-        queryType: QueryType.PROD,
       );
 
       expect(result.products, isNotNull);
