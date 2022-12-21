@@ -748,6 +748,8 @@ class Product extends JsonObject {
       return _noNutritionData!;
     } else if (_nutriments != null) {
       return false;
+    } else if (_nutriments == null) {
+      return true;
     } else {
       return null;
     }
