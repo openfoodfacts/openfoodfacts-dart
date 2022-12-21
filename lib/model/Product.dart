@@ -743,16 +743,11 @@ class Product extends JsonObject {
     toJson: JsonHelper.checkboxToJSON,
     fromJson: JsonHelper.checkboxFromJSON,
   )
-  bool? get noNutritionData {
+  bool get noNutritionData {
     if (_noNutritionData != null) {
       return _noNutritionData!;
-    } else if (_nutriments != null) {
-      return false;
-    } else if (_nutriments == null) {
-      return true;
-    } else {
-      return null;
     }
+    return _nutriments == null;
   }
 
   set noNutritionData(bool? noNutritionData) {
