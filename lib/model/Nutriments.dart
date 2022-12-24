@@ -40,6 +40,7 @@ class Nutriments extends JsonObject {
   /// between totally unknown values and values that have been erased.
   final Map<String, double?> _map = <String, double?>{};
 
+  /// Returns the map key for that [nutrient] and that [perSize].
   String _getTag(
     final Nutrient nutrient,
     final PerSize perSize,
@@ -64,10 +65,31 @@ class Nutriments extends JsonObject {
     return this;
   }
 
+  /// Returns true if there are no populated nutrients at all.
+  ///
+  /// Default case: a nutrient with a null value is considered "populated".
+  /// If [isNullEmpty] is true, a null value is a non populated value, and a
+  /// [Nutriments] with only null values would be considered empty.
+  bool isEmpty({final bool isNullEmpty = false}) {
+    if (_map.isEmpty) {
+      return true;
+    }
+    if (!isNullEmpty) {
+      return false;
+    }
+    for (final double? value in _map.values) {
+      if (value != null) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   /// Returns the default [Unit] of that [nutrient].
   @Deprecated('Use nutrient.typicalUnit instead')
   Unit? getUnit(final Nutrient nutrient) => nutrient.typicalUnit;
 
+  /// Returns the energy in kJ for that [perSize], direct or computed from kcal.
   double? getComputedKJ(final PerSize perSize) {
     double? result;
     result = getValue(Nutrient.energyKJ, perSize);
