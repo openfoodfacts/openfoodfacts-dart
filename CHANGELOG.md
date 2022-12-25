@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.30.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.29.0...v1.30.0) (2022-12-25)
+
+
+### Features
+
+* 539 - specific test for nova group filter ([#646](https://github.com/openfoodfacts/openfoodfacts-dart/issues/646)) ([44dfd2d](https://github.com/openfoodfacts/openfoodfacts-dart/commit/44dfd2da8025e480b0c0f7ec486184476f13c134))
+* 539 - taxonomy for Nova groups ([#645](https://github.com/openfoodfacts/openfoodfacts-dart/issues/645)) ([5bf2959](https://github.com/openfoodfacts/openfoodfacts-dart/commit/5bf2959ab40f3e157b1dd4cf3e01b8248601a443))
+* 548 - License "refactoring" ([#642](https://github.com/openfoodfacts/openfoodfacts-dart/issues/642)) ([18f5c6f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/18f5c6f9b37b308ac8e0991c50fb57b738867007))
+* 617 - new "save packagings V3" feature ([#640](https://github.com/openfoodfacts/openfoodfacts-dart/issues/640)) ([55ffbf2](https://github.com/openfoodfacts/openfoodfacts-dart/commit/55ffbf23f7e2ec757e8324d38da9fdaaeb8f7f1f))
+* 648 - new method "Nutriments.isEmpty" ([#649](https://github.com/openfoodfacts/openfoodfacts-dart/issues/649)) ([d04e9eb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/d04e9eb0be3cc34322ebb3e8d3dfd2c8cc6dfdb8))
+
+
+### Bug Fixes
+
+* 634 - mapped tag 'energy' to Nutrient energyKj. ([#644](https://github.com/openfoodfacts/openfoodfacts-dart/issues/644)) ([3957139](https://github.com/openfoodfacts/openfoodfacts-dart/commit/39571396d36385a16aa636a7b400c8ed69eb3dc7))
+
 ## [1.29.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.28.0...v1.29.0) (2022-12-09)
 
 
