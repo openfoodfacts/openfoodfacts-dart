@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.30.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.30.0...v1.30.1) (2022-12-25)
+
+
+### Bug Fixes
+
+* 548 - "LICENSE" refactoring ([#651](https://github.com/openfoodfacts/openfoodfacts-dart/issues/651)) ([ce2b531](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ce2b53103f6916bf0e46aab661c603195e6b364e))
+
 ## [1.30.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.29.0...v1.30.0) (2022-12-25)
 
 
