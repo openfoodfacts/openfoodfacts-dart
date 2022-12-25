@@ -2114,5 +2114,23 @@ void main() {
       expect(result.product!.noNutritionData, isFalse);
       expect(result.product!.nutriments, isNotNull);
     });
+
+    test('Empty nutriments', () async {
+      final Nutriments nutriments = Nutriments.empty();
+
+      expect(nutriments.isEmpty(), isTrue);
+      expect(nutriments.isEmpty(isNullEmpty: true), isTrue);
+      expect(nutriments.isEmpty(isNullEmpty: false), isTrue);
+
+      nutriments.setValue(Nutrient.calcium, PerSize.oneHundredGrams, 12);
+      expect(nutriments.isEmpty(), isFalse);
+      expect(nutriments.isEmpty(isNullEmpty: true), isFalse);
+      expect(nutriments.isEmpty(isNullEmpty: false), isFalse);
+
+      nutriments.setValue(Nutrient.calcium, PerSize.oneHundredGrams, null);
+      expect(nutriments.isEmpty(), isFalse);
+      expect(nutriments.isEmpty(isNullEmpty: true), isTrue);
+      expect(nutriments.isEmpty(isNullEmpty: false), isFalse);
+    });
   }, timeout: Timeout(Duration(seconds: 90)));
 }
