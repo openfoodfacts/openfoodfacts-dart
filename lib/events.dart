@@ -2,13 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:openfoodfacts/model/BadgeBase.dart';
-import 'package:openfoodfacts/model/EventsBase.dart';
-import 'package:openfoodfacts/model/LeaderboardEntry.dart';
+import 'package:openfoodfacts/model/badge_base.dart';
+import 'package:openfoodfacts/model/events_base.dart';
+import 'package:openfoodfacts/model/leaderboard_entry.dart';
 
-import 'utils/HttpHelper.dart';
-import 'utils/QueryType.dart';
-import 'utils/UriHelper.dart';
+import 'utils/http_helper.dart';
+import 'utils/query_type.dart';
+import 'utils/uri_helper.dart';
 
 /// Client calls of the Events API (Open Food Facts).
 ///

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:openfoodfacts/model/AttributeGroup.dart';
+import 'package:openfoodfacts/model/attribute_group.dart';
 
 /// Referential of attribute groups, with loader.
 class AvailableAttributeGroups {

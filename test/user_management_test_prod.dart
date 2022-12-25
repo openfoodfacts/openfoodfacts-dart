@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:openfoodfacts/model/LoginStatus.dart';
-import 'package:openfoodfacts/model/SignUpStatus.dart';
+import 'package:openfoodfacts/model/login_status.dart';
+import 'package:openfoodfacts/model/sign_up_status.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
-import 'package:openfoodfacts/utils/QueryType.dart';
+import 'package:openfoodfacts/utils/open_food_api_configuration.dart';
+import 'package:openfoodfacts/utils/query_type.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';

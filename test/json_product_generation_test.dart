@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:openfoodfacts/model/EcoscoreAdjustments.dart';
-import 'package:openfoodfacts/model/EcoscoreData.dart';
-import 'package:openfoodfacts/model/IngredientsAnalysisTags.dart';
-import 'package:openfoodfacts/model/OriginsOfIngredients.dart';
-import 'package:openfoodfacts/model/Packaging.dart';
-import 'package:openfoodfacts/model/ProductResultV3.dart';
+import 'package:openfoodfacts/model/ecoscore_adjustments.dart';
+import 'package:openfoodfacts/model/ecoscore_data.dart';
+import 'package:openfoodfacts/model/ingredients_analysis_tags.dart';
+import 'package:openfoodfacts/model/origins_of_ingredients.dart';
+import 'package:openfoodfacts/model/packaging.dart';
+import 'package:openfoodfacts/model/product_result_v3.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 

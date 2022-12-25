@@ -3,13 +3,13 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 
-import 'model/KeyStats.dart';
-import 'model/ProductList.dart';
-import 'model/ProductStats.dart';
-import 'model/ProductTag.dart';
-import 'utils/HttpHelper.dart';
-import 'utils/QueryType.dart';
-import 'utils/UriHelper.dart';
+import 'model/key_stats.dart';
+import 'model/product_list.dart';
+import 'model/product_stats.dart';
+import 'model/product_tag.dart';
+import 'utils/http_helper.dart';
+import 'utils/query_type.dart';
+import 'utils/uri_helper.dart';
 
 /// Client calls of the Folksonomy API (Open Food Facts)
 ///
