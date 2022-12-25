@@ -1,6 +1,6 @@
-import 'package:openfoodfacts/model/Attribute.dart';
-import 'package:openfoodfacts/model/AttributeGroup.dart';
-import 'package:openfoodfacts/model/Product.dart';
+import 'package:openfoodfacts/model/attribute.dart';
+import 'package:openfoodfacts/model/attribute_group.dart';
+import 'package:openfoodfacts/model/product.dart';
 import 'package:openfoodfacts/personalized_search/preference_importance.dart';
 import 'package:openfoodfacts/personalized_search/product_preferences_manager.dart';
 

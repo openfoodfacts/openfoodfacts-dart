@@ -5,21 +5,21 @@ test:
 - test/**/*
 
 knowledge panels:
-- lib/model/KnowledgePanel.g.dart
-- lib/model/KnowledgePanelElement.g.dart
+- lib/model/knowledge_panel.g.dart
+- lib/model/knowledge_panel_element.g.dart
 
 product:
-- lib/model/Product.dart
-- lib/model/Product.g.dart
+- lib/model/product.dart
+- lib/model/product.g.dart
 
 robotoff:
-- lib/model/RobotoffQuestion.g.dart
+- lib/model/robotoff_question.g.dart
 
 pubspec:
 - pubspec.yaml
 
 ecoscore:
-- lib/model/EcoscoreData.g.dart
+- lib/model/ecoscore_data.g.dart
 
 personalized search:
 - lib/personalized_search/**/*
