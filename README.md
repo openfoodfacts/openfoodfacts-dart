@@ -19,6 +19,20 @@ You can find automated code documentation here:  [Documentation](https://openfoo
 - If you can't get the information on a specific product, you can get your user to send photos and data, that will then be processed by Open Food Facts AI and contributors to get the computed result you want to show them.
 - You can also implement the complete flow so that they get immediately the result with some effort on their side.
 
+## Main fixes to apply when dealing with 2.x.x breaking changes.
+
+* Now the only entry point is `import 'package:openfoodfacts/openfoodfacts.dart';`
+  * replace all your instances of `import 'package:openfoodfacts/...';` with a single `import 'package:openfoodfacts/openfoodfacts.dart';` 
+* If you used `State` from `product_state.dart`, you have to rename it to `ProductState`
+* If you used `Level` from `nutrient_levels.dart`, you have to rename it to `NutrientLevel`
+* Removed deprecated classes:
+  * `Page`
+  * `ProductListQueryConfiguration`
+  * `ToBeCompletedConfiguration`
+* Removed deprecated fields and methods in `Nutriments`
+  * _all_ the single nutrient value _fields_ were removed - use `getValue` and `setValue` instead
+  * instead of `getUnit` use `nutrient.typicalUnit`
+
 ## Contributing 
 
 ### If your users do not expect a specific result immediately (eg. Inventory apps)

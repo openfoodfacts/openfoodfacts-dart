@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'package:http/http.dart';
 import 'interface/json_object.dart';
 import 'model/product_packaging.dart';
 import 'model/product_result_v3.dart';
-import 'model/knowledge_panels.dart';
 import 'model/login_status.dart';
 import 'model/ocr_ingredients_result.dart';
 import 'model/ocr_packaging_result.dart';
@@ -41,7 +39,6 @@ import 'utils/country_helper.dart';
 import 'utils/image_helper.dart';
 import 'utils/ocr_field.dart';
 import 'utils/product_fields.dart';
-import 'utils/product_list_query_configuration.dart';
 import 'utils/product_search_query_configuration.dart';
 import 'utils/query_type.dart';
 import 'utils/tag_type.dart';
@@ -348,27 +345,6 @@ class OpenFoodAPIClient {
     _removeImages(result, configuration);
     return result;
   }
-
-  /// Returns products searched according to a [configuration].
-  // TODO: deprecated from 2022-07-26; remove when old enough
-  @Deprecated('Use searchProducts instead')
-  static Future<SearchResult> getProducts(
-    final User? user,
-    final AbstractQueryConfiguration configuration, {
-    final QueryType? queryType,
-  }) async =>
-      searchProducts(user, configuration, queryType: queryType);
-
-  /// Search the OpenFoodFacts product database: multiple barcodes in input.
-  // TODO: deprecated from 2022-07-26; remove when old enough
-  @Deprecated(
-      'Use method searchProducts with ProductListQueryConfiguration instead')
-  static Future<SearchResult> getProductList(
-    final User? user,
-    final ProductListQueryConfiguration configuration, {
-    final QueryType? queryType,
-  }) async =>
-      getProducts(user, configuration, queryType: queryType);
 
   /// Returns the [ProductFreshness] for all the [barcodes].
   static Future<Map<String, ProductFreshness>> getProductFreshness({
@@ -940,7 +916,6 @@ class OpenFoodAPIClient {
   /// A username may not exceed 20 characters
   static const USER_NAME_MAX_LENGTH = 20;
 
-  // TODO: deprecated from 2021-10-08 (#252); remove former name when old enough
   /// Creates a new user
   /// Returns [Status.status] 201 = complete; 400 = wrong inputs + [Status.error]; 500 = server error;
   ///
@@ -1033,60 +1008,6 @@ class OpenFoodAPIClient {
       );
     } else {
       return status.copyWith(status: 400);
-    }
-  }
-
-  /// Returns the Ecoscore description in HTML
-  // TODO: deprecated from 2022-01-22; remove when old enough
-  @Deprecated('Use getProduct with ecoscore fields instead')
-  static Future<String?> getEcoscoreHtmlDescription(
-    final String barcode,
-    final OpenFoodFactsLanguage language, {
-    final QueryType? queryType,
-  }) async {
-    try {
-      final ProductResult productResult = await getProduct(
-        ProductQueryConfiguration(
-          barcode,
-          language: language,
-          country: null,
-          fields: [ProductField.ENVIRONMENT_INFOCARD],
-          version: ProductQueryVersion.v0,
-        ),
-        user: null,
-        queryType: queryType,
-      );
-      return productResult.product?.environmentInfoCard;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  /// Returns all KnowledgePanels for a product.
-  // TODO: deprecated from 2022-01-22; remove when old enough
-  @Deprecated(
-      'Use getProduct with field [ProductField.KNOWLEDGE_PANELS] instead')
-  static Future<KnowledgePanels> getKnowledgePanels(
-    ProductQueryConfiguration configuration,
-    QueryType queryType,
-  ) async {
-    try {
-      final ProductResult productResult = await getProduct(
-        ProductQueryConfiguration(
-          configuration.barcode,
-          language: configuration.language,
-          country: configuration.country,
-          fields: [ProductField.KNOWLEDGE_PANELS],
-          version: ProductQueryVersion.v2,
-        ),
-        user: null,
-        queryType: queryType,
-      );
-      return productResult.product!.knowledgePanels!;
-    } catch (exception, stackTrace) {
-      // TODO(jasmeetsingh): Capture the exception in Sentry and don't log it here.
-      log('Exception $exception has occurred.\nStacktrace: \n$stackTrace');
-      return KnowledgePanels.empty();
     }
   }
 

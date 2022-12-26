@@ -155,7 +155,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('countries_tags', instance.countriesTags);
   writeNotNull('countries_tags_in_languages',
       LanguageHelper.toJsonStringsListMap(instance.countriesTagsInLanguages));
-  writeNotNull('lang', LanguageHelper.toJson(instance.lang));
+  val['lang'] = LanguageHelper.toJson(instance.lang);
   writeNotNull('quantity', instance.quantity);
   writeNotNull('image_front_url', instance.imageFrontUrl);
   writeNotNull('image_front_small_url', instance.imageFrontSmallUrl);
@@ -169,9 +169,9 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('serving_size', instance.servingSize);
   writeNotNull('serving_quantity', instance.servingQuantity);
   writeNotNull('product_quantity', instance.packagingQuantity);
-  writeNotNull('selected_images',
-      JsonHelper.selectedImagesToJson(instance.selectedImages));
-  writeNotNull('images', JsonHelper.imagesToJson(instance.images));
+  val['selected_images'] =
+      JsonHelper.selectedImagesToJson(instance.selectedImages);
+  val['images'] = JsonHelper.imagesToJson(instance.images);
   writeNotNull(
       'ingredients', JsonHelper.ingredientsToJson(instance.ingredients));
   writeNotNull('ingredients_text', instance.ingredientsText);
@@ -183,8 +183,8 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   val['imagesFreshnessInLanguages'] = instance.imagesFreshnessInLanguages?.map(
       (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!,
           e.map((k, e) => MapEntry(_$ImageFieldEnumMap[k]!, e))));
-  writeNotNull('ingredients_analysis_tags',
-      IngredientsAnalysisTags.toJson(instance.ingredientsAnalysisTags));
+  val['ingredients_analysis_tags'] =
+      IngredientsAnalysisTags.toJson(instance.ingredientsAnalysisTags);
   writeNotNull('additives_tags', Additives.additivesToJson(instance.additives));
   writeNotNull('environment_impact_level_tags',
       EnvironmentImpactLevels.toJson(instance.environmentImpactLevels));
@@ -239,7 +239,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('link', instance.website);
   val['no_nutrition_data'] =
       JsonHelper.checkboxToJSON(instance.noNutritionData);
-  writeNotNull('nutriments', Nutriments.toJsonHelper(instance.nutriments));
+  val['nutriments'] = Nutriments.toJsonHelper(instance.nutriments);
   return val;
 }
 
