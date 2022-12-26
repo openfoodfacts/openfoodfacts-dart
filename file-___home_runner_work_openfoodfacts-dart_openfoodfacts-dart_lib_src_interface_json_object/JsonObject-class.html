@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the JsonObject class from the json_object library, for the Dart programming language.">
+  <title>JsonObject class - json_object library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">openfoodfacts</a></li>
+    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object-library.html">json_object</a></li>
+    <li class="self-crumb">JsonObject abstract class</li>
+  </ol>
+  <div class="self-name">JsonObject</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-class">JsonObject</span> class 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>interface class for all serializable json model objects.</p>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+        
+
+        <dt>Implementers</dt>
+        <dd><ul class="comma-separated clazz-relationships">
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_agribalyse/Agribalyse-class.html">Agribalyse</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_attribute/Attribute-class.html">Attribute</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_attribute_group/AttributeGroup-class.html">AttributeGroup</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_badge_base/BadgeBase-class.html">BadgeBase</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_spelling_corrections/Correction-class.html">Correction</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ecoscore_adjustments/EcoscoreAdjustments-class.html">EcoscoreAdjustments</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ecoscore_data/EcoscoreData-class.html">EcoscoreData</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_events_base/EventsBase-class.html">EventsBase</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient/Ingredient-class.html">Ingredient</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/InsightsResult-class.html">InsightsResult</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_key_stats/KeyStats-class.html">KeyStats</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/KnowledgePanel-class.html">KnowledgePanel</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelActionElement-class.html">KnowledgePanelActionElement</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelElement-class.html">KnowledgePanelElement</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelGeoPointer-class.html">KnowledgePanelGeoPointer</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelImageElement-class.html">KnowledgePanelImageElement</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelLatLng-class.html">KnowledgePanelLatLng</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelPanelGroupElement-class.html">KnowledgePanelPanelGroupElement</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelPanelIdElement-class.html">KnowledgePanelPanelIdElement</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTableCell-class.html">KnowledgePanelTableCell</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTableColumn-class.html">KnowledgePanelTableColumn</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTableElement-class.html">KnowledgePanelTableElement</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTableRowElement-class.html">KnowledgePanelTableRowElement</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTextElement-class.html">KnowledgePanelTextElement</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelWorldMapElement-class.html">KnowledgePanelWorldMapElement</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_leaderboard_entry/LeaderboardEntry-class.html">LeaderboardEntry</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_localized_tag/LocalizedTag-class.html">LocalizedTag</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/Nutriments-class.html">Nutriments</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ocr_ingredients_result/OcrIngredientsResult-class.html">OcrIngredientsResult</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ocr_packaging_result/OcrPackagingResult-class.html">OcrPackagingResult</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrient/OrderedNutrient-class.html">OrderedNutrient</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrients/OrderedNutrients-class.html">OrderedNutrients</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_origins_of_ingredients/OriginsOfIngredients-class.html">OriginsOfIngredients</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_packaging/Packaging-class.html">Packaging</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product-class.html">Product</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_list/ProductList-class.html">ProductList</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_packaging/ProductPackaging-class.html">ProductPackaging</a></li>
+          <li><a class="deprecated" href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_result/ProductResult-class.html">ProductResult</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_result_field/ProductResultField-class.html">ProductResultField</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_result_field_answer/ProductResultFieldAnswer-class.html">ProductResultFieldAnswer</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_result_v3/ProductResultV3-class.html">ProductResultV3</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_stats/ProductStats-class.html">ProductStats</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_tag/ProductTag-class.html">ProductTag</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_robotoff_question/RobotoffQuestion-class.html">RobotoffQuestion</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_robotoff_question/RobotoffQuestionResult-class.html">RobotoffQuestionResult</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_search_result/SearchResult-class.html">SearchResult</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_send_image/SendImage-class.html">SendImage</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_spelling_corrections/SpellingCorrection-class.html">SpellingCorrection</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_status/Status-class.html">Status</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive-class.html">TaxonomyAdditive</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_allergen/TaxonomyAllergen-class.html">TaxonomyAllergen</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory-class.html">TaxonomyCategory</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_country/TaxonomyCountry-class.html">TaxonomyCountry</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_ingredient/TaxonomyIngredient-class.html">TaxonomyIngredient</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_label/TaxonomyLabel-class.html">TaxonomyLabel</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_language/TaxonomyLanguage-class.html">TaxonomyLanguage</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_nova/TaxonomyNova-class.html">TaxonomyNova</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_origin/TaxonomyOrigin-class.html">TaxonomyOrigin</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging/TaxonomyPackaging-class.html">TaxonomyPackaging</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_material/TaxonomyPackagingMaterial-class.html">TaxonomyPackagingMaterial</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_recycling/TaxonomyPackagingRecycling-class.html">TaxonomyPackagingRecycling</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_shape/TaxonomyPackagingShape-class.html">TaxonomyPackagingShape</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_spelling_corrections/TermCorrections-class.html">TermCorrections</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement-class.html">TitleElement</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user_agent/UserAgent-class.html">UserAgent</a></li>
+        </ul></dd>
+
+
+        
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+
+    <dl class="constructor-summary-list">
+        <dt id="JsonObject" class="callable">
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/JsonObject.html">JsonObject</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          
+            <div class="constructor-modifier features">const</div>
+        </dd>
+    </dl>
+  </section>
+
+    <section class="summary offset-anchor inherited" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/Type-class.html">Type</a></span> 
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a non-existent method or property is accessed.
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="toData" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toData.html">toData</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="toJson" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toJson.html">toJson</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="toValueString" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toValueString.html">toValueString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns all values as a String separated by a hyphen
+value1 - value2 - value3
+  
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features">inherited</div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+  <section class="summary offset-anchor" id="static-methods">
+    <h2>Static Methods</h2>
+    <dl class="callables">
+        <dt id="parseBool" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/parseBool.html">parseBool</a></span><span class="signature">(<wbr><span class="parameter" id="parseBool-param-json"><span class="type-annotation">dynamic</span> <span class="parameter-name">json</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="parseDouble" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/parseDouble.html">parseDouble</a></span><span class="signature">(<wbr><span class="parameter" id="parseDouble-param-json"><span class="type-annotation">dynamic</span> <span class="parameter-name">json</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/double-class.html">double</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="parseInt" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/parseInt.html">parseInt</a></span><span class="signature">(<wbr><span class="parameter" id="parseInt-param-json"><span class="type-annotation">dynamic</span> <span class="parameter-name">json</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="removeNullEntries" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/removeNullEntries.html">removeNullEntries</a></span><span class="signature">(<wbr><span class="parameter" id="removeNullEntries-param-input"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">input</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="toDataStatic" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toDataStatic.html">toDataStatic</a></span><span class="signature">(<wbr><span class="parameter" id="toDataStatic-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="toValueStringStatic" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toValueStringStatic.html">toValueStringStatic</a></span><span class="signature">(<wbr><span class="parameter" id="toValueStringStatic-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns all values as a String separated by a hyphen
+value1 - value2 - value3
+  
+
+</dd>
+
+    </dl>
+  </section>
+    
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../index.html">openfoodfacts</a></li>
+  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object-library.html">json_object</a></li>
+  <li class="self-crumb">JsonObject abstract class</li>
+</ol>
+
+
+    <h5>json_object library</h5>
+    <ol>
+  <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object-library.html#classes">Classes</a></li>
+  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject-class.html">JsonObject</a></li>
+
+
+
+
+
+
+
+
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+    <ol>
+
+        <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject-class.html#constructors">Constructors</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/JsonObject.html">JsonObject</a></li>
+
+
+    <li class="section-title inherited">
+      <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject-class.html#instance-properties">Properties</a>
+    </li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/runtimeType.html">runtimeType</a></li>
+
+    <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject-class.html#instance-methods">Methods</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toData.html">toData</a></li>
+    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toJson.html">toJson</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/toString.html">toString</a></li>
+    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toValueString.html">toValueString</a></li>
+
+    <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+
+        <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject-class.html#static-methods">Static methods</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/parseBool.html">parseBool</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/parseDouble.html">parseDouble</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/parseInt.html">parseInt</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/removeNullEntries.html">removeNullEntries</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toDataStatic.html">toDataStatic</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toValueStringStatic.html">toValueStringStatic</a></li>
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    openfoodfacts
+      1.0.0
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

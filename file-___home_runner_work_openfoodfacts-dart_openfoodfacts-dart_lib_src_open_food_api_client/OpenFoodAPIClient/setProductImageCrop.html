@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the setProductImageCrop method from the OpenFoodAPIClient class, for the Dart programming language.">
+  <title>setProductImageCrop method - OpenFoodAPIClient class - open_food_api_client library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../" data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">openfoodfacts</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client-library.html">open_food_api_client</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
+    <li class="self-crumb">setProductImageCrop method</li>
+  </ol>
+  <div class="self-name">setProductImageCrop</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-method">setProductImageCrop</span> method 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+
+<span class="returntype"><a href="https://api.dart.dev/stable/2.18.6/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a>?</span>&gt;</span></span>
+<span class="name ">setProductImageCrop</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="setProductImageCrop-param-barcode">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, </span></li>
+<li><span class="parameter" id="setProductImageCrop-param-imageField"><span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageField.html">ImageField</a></span> <span class="parameter-name">imageField</span>, </span></li>
+<li><span class="parameter" id="setProductImageCrop-param-language"><span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span>, </span></li>
+<li><span class="parameter" id="setProductImageCrop-param-imgid"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span> <span class="parameter-name">imgid</span>, </span></li>
+<li><span class="parameter" id="setProductImageCrop-param-x1"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a></span> <span class="parameter-name">x1</span>, </span></li>
+<li><span class="parameter" id="setProductImageCrop-param-y1"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a></span> <span class="parameter-name">y1</span>, </span></li>
+<li><span class="parameter" id="setProductImageCrop-param-x2"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a></span> <span class="parameter-name">x2</span>, </span></li>
+<li><span class="parameter" id="setProductImageCrop-param-y2"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a></span> <span class="parameter-name">y2</span>, </span></li>
+<li><span class="parameter" id="setProductImageCrop-param-user"><span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a></span> <span class="parameter-name">user</span>, </span></li>
+<li><span class="parameter" id="setProductImageCrop-param-angle"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageAngle.html">ImageAngle</a></span> <span class="parameter-name">angle</span> = <span class="default-value">ImageAngle.NOON</span>, </span></li>
+<li><span class="parameter" id="setProductImageCrop-param-queryType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Crops a product image from an already uploaded image.</p>
+<p>"I want, for this <code>barcode</code>, this <code>imageField</code> and this <code>language</code>,
+the image to be computed from the already uploaded image
+referenced by <code>imgid</code>, with a possible rotation of <code>angle</code> and then
+a cropping on rectangle (<code>x1</code>,<code>y1</code>,<code>x2</code>,<code>y2</code>), those coordinates
+being taken from the uploaded image size.</p>
+<p>Returns the URL to the "display" picture after the operation.
+Returns null if KO, but would probably throw an exception instead.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">static Future&lt;String?&gt; setProductImageCrop({
+  required final String barcode,
+  required final ImageField imageField,
+  required final OpenFoodFactsLanguage language,
+  required final String imgid,
+  required final int x1,
+  required final int y1,
+  required final int x2,
+  required final int y2,
+  required final User user,
+  final ImageAngle angle = ImageAngle.NOON,
+  final QueryType? queryType,
+}) async =&gt;
+    await _callProductImageCrop(
+      barcode: barcode,
+      imageField: imageField,
+      language: language,
+      imgid: imgid,
+      user: user,
+      extraParameters: &lt;String, String&gt;{
+        &#39;x1&#39;: x1.toString(),
+        &#39;y1&#39;: y1.toString(),
+        &#39;x2&#39;: x2.toString(),
+        &#39;y2&#39;: y2.toString(),
+        &#39;angle&#39;: angle.degreesClockwise,
+        &#39;coordinates_image_size&#39;: &#39;full&#39;,
+      },
+    );</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../../index.html">openfoodfacts</a></li>
+  <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client-library.html">open_food_api_client</a></li>
+  <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
+  <li class="self-crumb">setProductImageCrop method</li>
+</ol>
+
+
+    <h5>OpenFoodAPIClient class</h5>
+    <ol>
+
+
+
+    <li class="section-title inherited">
+      <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html#instance-properties">Properties</a>
+    </li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/runtimeType.html">runtimeType</a></li>
+
+    <li class="section-title inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html#instance-methods">Methods</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/toString.html">toString</a></li>
+
+    <li class="section-title inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+
+        <li class="section-title"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html#static-methods">Static methods</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/addProductImage.html">addProductImage</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/extractIngredients.html">extractIngredients</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/extractPackaging.html">extractPackaging</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getAutocompletedSuggestions.html">getAutocompletedSuggestions</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getCrowdinUri.html">getCrowdinUri</a></li>
+          <li><a class="deprecated" href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getIngredientSpellingCorrection.html">getIngredientSpellingCorrection</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getOrderedNutrients.html">getOrderedNutrients</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getOrderedNutrientsJsonString.html">getOrderedNutrientsJsonString</a></li>
+          <li><a class="deprecated" href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getProduct.html">getProduct</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getProductFreshness.html">getProductFreshness</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getProductInsights.html">getProductInsights</a></li>
+          <li><a class="deprecated" href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getProductRaw.html">getProductRaw</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getProductString.html">getProductString</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getProductUri.html">getProductUri</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getProductV3.html">getProductV3</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getRandomInsight.html">getRandomInsight</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getRandomRobotoffQuestion.html">getRandomRobotoffQuestion</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getRobotoffQuestionsForProduct.html">getRobotoffQuestionsForProduct</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomy.html">getTaxonomy</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyAdditives.html">getTaxonomyAdditives</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyAllergens.html">getTaxonomyAllergens</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyCategories.html">getTaxonomyCategories</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyCountries.html">getTaxonomyCountries</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyIngredients.html">getTaxonomyIngredients</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyLabels.html">getTaxonomyLabels</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyLanguages.html">getTaxonomyLanguages</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyNova.html">getTaxonomyNova</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyOrigins.html">getTaxonomyOrigins</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyPackagingMaterials.html">getTaxonomyPackagingMaterials</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyPackagingRecycling.html">getTaxonomyPackagingRecycling</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyPackagings.html">getTaxonomyPackagings</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyPackagingShapes.html">getTaxonomyPackagingShapes</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyTranslationUri.html">getTaxonomyTranslationUri</a></li>
+          <li><a class="deprecated" href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/login.html">login</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/login2.html">login2</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/postInsightAnnotation.html">postInsightAnnotation</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/register.html">register</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/resetPassword.html">resetPassword</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/saveProduct.html">saveProduct</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/searchProducts.html">searchProducts</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/setProductImageAngle.html">setProductImageAngle</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/setProductImageCrop.html">setProductImageCrop</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/temporarySaveProductV3.html">temporarySaveProductV3</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/unselectProductImage.html">unselectProductImage</a></li>
+
+        <li class="section-title"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html#constants">Constants</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/USER_NAME_MAX_LENGTH-constant.html">USER_NAME_MAX_LENGTH</a></li>
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    openfoodfacts
+      1.0.0
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

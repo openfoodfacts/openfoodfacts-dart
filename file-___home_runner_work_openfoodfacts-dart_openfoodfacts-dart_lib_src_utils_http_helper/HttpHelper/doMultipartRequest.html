@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the doMultipartRequest method from the HttpHelper class, for the Dart programming language.">
+  <title>doMultipartRequest method - HttpHelper class - http_helper library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../" data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">openfoodfacts</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper-library.html">http_helper</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html">HttpHelper</a></li>
+    <li class="self-crumb">doMultipartRequest method</li>
+  </ol>
+  <div class="self-name">doMultipartRequest</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-method">doMultipartRequest</span> method 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+
+<span class="returntype"><a href="https://api.dart.dev/stable/2.18.6/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_status/Status-class.html">Status</a></span>&gt;</span></span>
+<span class="name ">doMultipartRequest</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="doMultipartRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span></li>
+<li><span class="parameter" id="doMultipartRequest-param-body"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">body</span>, </span></li>
+<li><span class="parameter" id="doMultipartRequest-param-files">{<span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Uri-class.html">Uri</a></span>&gt;</span>?</span> <span class="parameter-name">files</span>, </span></li>
+<li><span class="parameter" id="doMultipartRequest-param-user"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span></li>
+<li><span class="parameter" id="doMultipartRequest-param-queryType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Send a multipart post request to the specified uri.
+The data / body of the request has to be provided as map. (key, value)
+The files to send have to be provided as map containing the source file uri.
+As result a json object of the "type" Status is expected.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">Future&lt;Status&gt; doMultipartRequest(
+  Uri uri,
+  Map&lt;String, String&gt; body, {
+  Map&lt;String, Uri&gt;? files,
+  User? user,
+  QueryType? queryType,
+}) async {
+  var request = http.MultipartRequest(&#39;POST&#39;, uri);
+
+  request.headers.addAll(
+    _buildHeaders(
+      user: user,
+      isTestModeActive:
+          OpenFoodAPIConfiguration.getQueryType(queryType) != QueryType.PROD,
+    ) as Map&lt;String, String&gt;,
+  );
+
+  request.headers.addAll({&#39;Content-Type&#39;: &#39;multipart&#47;form-data&#39;});
+  addUserAgentParameters(body);
+  request.fields.addAll(body);
+  if (user != null) {
+    request.fields.addAll(user.toData());
+  }
+
+  &#47;&#47; add all file entries to the request
+  if (files != null) {
+    for (MapEntry&lt;String, Uri&gt; entry in files.entries) {
+      List&lt;int&gt; fileBytes =
+          await UriReader.instance!.readAsBytes(entry.value);
+      var multipartFile = http.MultipartFile.fromBytes(entry.key, fileBytes,
+          filename: basename(entry.value.toString()));
+      request.files.add(multipartFile);
+    }
+  }
+
+  &#47;&#47; get the response status
+  Status status = await request.send().then((response) {
+    if (response.statusCode == 200) {
+      return response.stream.first.then((responseBody) {
+        try {
+          return Status.fromJson(json.decode(utf8.decode(responseBody)));
+        } catch (e) {
+          &#47;&#47;When the server returns html instead of json
+          return Status(status: 200, body: utf8.decode(responseBody));
+        }
+      });
+    } else {
+      return Status(
+          status: response.statusCode, error: response.reasonPhrase);
+    }
+  });
+  return status;
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../../index.html">openfoodfacts</a></li>
+  <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper-library.html">http_helper</a></li>
+  <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html">HttpHelper</a></li>
+  <li class="self-crumb">doMultipartRequest method</li>
+</ol>
+
+
+    <h5>HttpHelper class</h5>
+    <ol>
+
+        <li class="section-title"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html#constructors">Constructors</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/HttpHelper.html">HttpHelper</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/HttpHelper.internal.html">internal</a></li>
+
+
+    <li class="section-title inherited">
+      <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html#instance-properties">Properties</a>
+    </li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/runtimeType.html">runtimeType</a></li>
+
+    <li class="section-title"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html#instance-methods">Methods</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doGetRequest.html">doGetRequest</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doMultipartRequest.html">doMultipartRequest</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doPatchRequest.html">doPatchRequest</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doPostRequest.html">doPostRequest</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/toString.html">toString</a></li>
+
+    <li class="section-title inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+        <li class="section-title"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html#static-properties">Static properties</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/instance.html">instance</a></li>
+
+        <li class="section-title"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html#static-methods">Static methods</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/addUserAgentParameters.html">addUserAgentParameters</a></li>
+
+        <li class="section-title"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html#constants">Constants</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/FROM-constant.html">FROM</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/USER_AGENT-constant.html">USER_AGENT</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/userInfoForTest-constant.html">userInfoForTest</a></li>
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    openfoodfacts
+      1.0.0
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+
