@@ -71,7 +71,7 @@ enum ProductImprovement {
   final ProductImprovementCategory category;
 
   // TODO: deprecated from 2022-11-12; remove when old enough
-  @Deprecated('Use caegory instead')
+  @Deprecated('Use category instead')
   ProductImprovementCategory getCategory() => category;
 }
 

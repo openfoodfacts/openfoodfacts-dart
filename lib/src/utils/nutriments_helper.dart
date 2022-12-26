@@ -2,10 +2,6 @@ import '../model/nutrient.dart';
 import '../model/nutriments.dart';
 import '../model/per_size.dart';
 
-/// Energy units
-@Deprecated('Use Unit instead')
-enum NormalizedEnergyUnit { kCal, kJ, undefined }
-
 // TODO: rename as NormalizedEnergyHelper or fix typo as NutrientHelper
 /// Helper class for energy computations and checks
 class NutrimentsHelper {
@@ -14,12 +10,6 @@ class NutrimentsHelper {
   static double fromKCalToKJ(final double kCal) => kCal * _kcalToKJFactor;
 
   static double fromKJtoKCal(final double kJ) => kJ / _kcalToKJFactor;
-
-  /// Gets the energy value (stored in kJ) converted in kCal.
-  @Deprecated(
-      'Use nutriments.energyKCal or fromKJtoKCal and nutriments.energyKJ instead')
-  static double getEnergyAsKCal(Nutriments nutriments) =>
-      fromKJtoKCal(nutriments.energy!);
 
   /// Calculates the energy for 100g in kJ.
   /// ! should be used cautiously (might not be displayed to the end user) !

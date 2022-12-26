@@ -1,4 +1,3 @@
-import 'package:image/image.dart';
 import 'open_food_api_configuration.dart';
 import 'query_type.dart';
 import 'language_helper.dart';
@@ -6,27 +5,6 @@ import '../model/product_image.dart';
 
 /// Helper class related to product pictures
 class ImageHelper {
-  // TODO: deprecated from 2022-08-18; remove when old enough
-  @Deprecated('Use 2048 instead')
-  static const int MAX_IMAGE_SIZE = 2048;
-
-  /// Returns a copy of the [image] with its bigger size GTE [maxsize]
-  // TODO: deprecated from 2022-08-18; remove when old enough, and pubspec.yaml's dependency on "image" too
-  @Deprecated('Use copyResize from package image instead')
-  static Image resize(Image image, {int maxSize = MAX_IMAGE_SIZE}) {
-    // check if the image is already small enough
-    if (image.width <= maxSize || image.height <= maxSize) {
-      return image;
-    }
-
-    // resize the image
-    if (image.width > image.height) {
-      return copyResize(image, width: maxSize);
-    } else {
-      return copyResize(image, height: maxSize);
-    }
-  }
-
   /// Returns the [image] full url - for a specific [imageSize] if needed.
   ///
   /// Returns null is [barcode] is null.

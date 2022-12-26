@@ -69,7 +69,6 @@ export 'src/model/user_agent.dart';
 export 'src/model/parameter/allergens_parameter.dart';
 export 'src/model/parameter/barcode_parameter.dart';
 export 'src/model/parameter/ingredients_analysis_parameter.dart';
-export 'src/model/parameter/page.dart';
 export 'src/model/parameter/page_number.dart';
 export 'src/model/parameter/page_size.dart';
 export 'src/model/parameter/pnns_group2_filter.dart';

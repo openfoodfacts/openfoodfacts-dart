@@ -12,17 +12,8 @@ InsightsResult _$InsightsResultFromJson(Map<String, dynamic> json) =>
       insights: Insight.fromJson(json['insights']),
     );
 
-Map<String, dynamic> _$InsightsResultToJson(InsightsResult instance) {
-  final val = <String, dynamic>{
-    'status': instance.status,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('insights', Insight.toJson(instance.insights));
-  return val;
-}
+Map<String, dynamic> _$InsightsResultToJson(InsightsResult instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'insights': Insight.toJson(instance.insights),
+    };
