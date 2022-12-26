@@ -11,7 +11,7 @@ jobs:
           contents: write
         if: github.repository_owner  == 'openfoodfacts'
         steps:
-        - name: Chekout code
+        - name: Checkout code
           uses: actions/checkout@v3
 
         - name: Setup Dart
