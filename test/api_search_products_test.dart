@@ -1,21 +1,6 @@
 import 'dart:math';
 
-import 'package:openfoodfacts/model/allergens.dart';
-import 'package:openfoodfacts/model/ingredients_analysis_tags.dart';
-import 'package:openfoodfacts/model/state.dart';
-import 'package:openfoodfacts/model/parameter/allergens_parameter.dart';
-import 'package:openfoodfacts/model/parameter/barcode_parameter.dart';
-import 'package:openfoodfacts/model/parameter/ingredients_analysis_parameter.dart';
-import 'package:openfoodfacts/model/parameter/pnns_group2_filter.dart';
-import 'package:openfoodfacts/model/parameter/search_terms.dart';
-import 'package:openfoodfacts/model/parameter/states_tags_parameter.dart';
-import 'package:openfoodfacts/model/parameter/tag_filter.dart';
-import 'package:openfoodfacts/model/parameter/without_additives.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/country_helper.dart';
-import 'package:openfoodfacts/utils/open_food_api_configuration.dart';
-import 'package:openfoodfacts/utils/pnns_groups.dart';
-import 'package:openfoodfacts/utils/query_type.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';
@@ -1000,7 +985,7 @@ void main() {
       expect(result.products, isNotNull);
       for (final Product product in result.products!) {
         expect(product.statesTags, isNotNull);
-        for (final MapEntry<State, bool> item
+        for (final MapEntry<ProductState, bool> item
             in statesTagsParameter.map.entries) {
           if (item.value) {
             expect(product.statesTags, contains(item.key.completedTag));
@@ -1014,7 +999,7 @@ void main() {
     }
 
     test('check products with "completed" states tags', () async {
-      for (final State state in State.values) {
+      for (final ProductState state in ProductState.values) {
         final int count = await checkStatesTags(
           StatesTagsParameter(map: {state: true}),
         );
@@ -1023,7 +1008,7 @@ void main() {
     });
 
     test('check products with "to-be-completed" states tags', () async {
-      for (final State state in State.values) {
+      for (final ProductState state in ProductState.values) {
         final int count = await checkStatesTags(
           StatesTagsParameter(map: {state: false}),
         );
@@ -1033,9 +1018,9 @@ void main() {
 
     test('check products with 2 random states tags', () async {
       Future<void> checkExpectations(
-        final State state1,
+        final ProductState state1,
         final bool completed1,
-        final State state2,
+        final ProductState state2,
         final bool completed2,
       ) async {
         final int count1 = await checkStatesTags(
@@ -1049,7 +1034,7 @@ void main() {
           }),
         );
 
-        final Map<State, bool> map = <State, bool>{
+        final Map<ProductState, bool> map = <ProductState, bool>{
           state1: completed1,
           state2: completed2,
         };
@@ -1064,10 +1049,10 @@ void main() {
 
       final List<int> indices = getRandomInts(
         count: 2,
-        max: State.values.length,
+        max: ProductState.values.length,
       );
-      final State state1 = State.values[indices[0]];
-      final State state2 = State.values[indices[1]];
+      final ProductState state1 = ProductState.values[indices[0]];
+      final ProductState state2 = ProductState.values[indices[1]];
       final Random random = Random();
       final bool completed1 = random.nextBool();
       final bool completed2 = random.nextBool();

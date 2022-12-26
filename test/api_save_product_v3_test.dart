@@ -1,11 +1,4 @@
-import 'package:openfoodfacts/model/localized_tag.dart';
-import 'package:openfoodfacts/model/product_packaging.dart';
-import 'package:openfoodfacts/model/product_result_field_answer.dart';
-import 'package:openfoodfacts/model/product_result_v3.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/country_helper.dart';
-import 'package:openfoodfacts/utils/open_food_api_configuration.dart';
-import 'package:openfoodfacts/utils/query_type.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';

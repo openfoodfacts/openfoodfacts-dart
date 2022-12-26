@@ -1,5 +1,4 @@
-import 'package:openfoodfacts/model/recommended_daily_intake.dart';
-import 'package:openfoodfacts/utils/unit_helper.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
 void main() {

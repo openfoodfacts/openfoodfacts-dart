@@ -1,17 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:openfoodfacts/model/attribute.dart';
-import 'package:openfoodfacts/model/parameter/barcode_parameter.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/personalized_search/available_attribute_groups.dart';
-import 'package:openfoodfacts/personalized_search/available_preference_importances.dart';
-import 'package:openfoodfacts/personalized_search/available_product_preferences.dart';
-import 'package:openfoodfacts/personalized_search/matched_product_v2.dart';
-import 'package:openfoodfacts/personalized_search/preference_importance.dart';
-import 'package:openfoodfacts/personalized_search/product_preferences_manager.dart';
-import 'package:openfoodfacts/personalized_search/product_preferences_selection.dart';
-import 'package:openfoodfacts/utils/country_helper.dart';
-import 'package:openfoodfacts/utils/open_food_api_configuration.dart';
-import 'package:openfoodfacts/utils/query_type.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';

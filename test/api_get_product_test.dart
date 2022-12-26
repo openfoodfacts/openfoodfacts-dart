@@ -1,20 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:openfoodfacts/model/attribute.dart';
-import 'package:openfoodfacts/model/attribute_group.dart';
-import 'package:openfoodfacts/model/localized_tag.dart';
-import 'package:openfoodfacts/model/nutrient.dart';
-import 'package:openfoodfacts/model/nutrient_levels.dart';
-import 'package:openfoodfacts/model/nutriments.dart';
-import 'package:openfoodfacts/model/per_size.dart';
-import 'package:openfoodfacts/model/product_result_v3.dart';
-import 'package:openfoodfacts/model/parameter/search_terms.dart';
-import 'package:openfoodfacts/model/product_packaging.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/country_helper.dart';
-import 'package:openfoodfacts/utils/invalid_barcodes.dart';
-import 'package:openfoodfacts/utils/open_food_api_configuration.dart';
-import 'package:openfoodfacts/utils/query_type.dart';
-import 'package:openfoodfacts/utils/tag_type.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';
@@ -856,10 +841,10 @@ void main() {
       expect(
           result
               .product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SUGARS],
-          Level.LOW);
+          NutrientLevel.LOW);
       expect(
           result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
-          Level.LOW);
+          NutrientLevel.LOW);
 
       expect(result.product!.images != null, true);
       expect(result.product!.images!.length, 20);
@@ -910,10 +895,10 @@ void main() {
       expect(
           result
               .product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SUGARS],
-          Level.LOW);
+          NutrientLevel.LOW);
       expect(
           result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
-          Level.LOW);
+          NutrientLevel.LOW);
 
       expect(result.product!.images != null, true);
       expect(result.product!.images!.length, 20);
@@ -985,10 +970,10 @@ void main() {
       expect(
           result
               .product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SUGARS],
-          Level.LOW);
+          NutrientLevel.LOW);
       expect(
           result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
-          Level.LOW);
+          NutrientLevel.LOW);
 
       expect(result.product!.images, isNotNull);
       expect(result.product!.images!.length, 20);

@@ -1,7 +1,4 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/open_food_api_configuration.dart';
-import 'package:openfoodfacts/utils/query_type.dart';
-import 'package:openfoodfacts/utils/tag_type.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -1,8 +1,4 @@
-import 'package:openfoodfacts/model/taxonomy_nova.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/country_helper.dart';
-import 'package:openfoodfacts/utils/open_food_api_configuration.dart';
-import 'package:openfoodfacts/utils/query_type.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';
