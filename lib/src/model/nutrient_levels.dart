@@ -21,7 +21,8 @@ enum NutrientLevel implements OffTagged {
 extension NutrientLevelExtension on NutrientLevel? {
   String get value => (this ?? NutrientLevel.UNDEFINED).offTag;
 
-  static NutrientLevel getLevel(String? s) => NutrientLevel.fromOffTag(s) ?? NutrientLevel.UNDEFINED;
+  static NutrientLevel getLevel(String? s) =>
+      NutrientLevel.fromOffTag(s) ?? NutrientLevel.UNDEFINED;
 }
 
 class NutrientLevels {
