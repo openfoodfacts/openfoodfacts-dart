@@ -1,4 +1,4 @@
-import 'package:openfoodfacts/model/user.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 
 class TestConstants {
   static const User TEST_USER = User(

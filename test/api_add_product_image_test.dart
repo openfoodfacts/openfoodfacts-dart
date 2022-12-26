@@ -1,10 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:openfoodfacts/model/product_result_v3.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/open_food_api_configuration.dart';
-import 'package:openfoodfacts/utils/query_type.dart';
-import 'package:openfoodfacts/utils/uri_reader.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';

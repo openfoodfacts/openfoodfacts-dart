@@ -1,11 +1,6 @@
 import 'dart:convert';
 
-import 'package:openfoodfacts/model/ordered_nutrient.dart';
-import 'package:openfoodfacts/model/ordered_nutrients.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/country_helper.dart';
-import 'package:openfoodfacts/utils/open_food_api_configuration.dart';
-import 'package:openfoodfacts/utils/query_type.dart';
 import 'package:test/test.dart';
 
 /// Tests related to [OrderedNutrient] and [OrderedNutrients]

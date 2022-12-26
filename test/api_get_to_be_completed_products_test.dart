@@ -1,9 +1,4 @@
-import 'package:openfoodfacts/model/state.dart';
-import 'package:openfoodfacts/model/parameter/states_tags_parameter.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/country_helper.dart';
-import 'package:openfoodfacts/utils/open_food_api_configuration.dart';
-import 'package:openfoodfacts/utils/query_type.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';
@@ -28,7 +23,7 @@ void main() {
           ProductField.STATES_TAGS,
         ],
         parametersList: [
-          StatesTagsParameter(map: {State.COMPLETED: false}),
+          StatesTagsParameter(map: {ProductState.COMPLETED: false}),
         ],
       );
 
