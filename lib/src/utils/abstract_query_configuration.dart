@@ -1,8 +1,9 @@
 import 'package:http/http.dart';
 import 'package:meta/meta.dart';
+
 import '../interface/parameter.dart';
-import '../model/user.dart';
 import '../model/parameter/tag_filter.dart';
+import '../model/user.dart';
 import '../utils/country_helper.dart';
 import '../utils/http_helper.dart';
 import '../utils/language_helper.dart';
@@ -35,6 +36,31 @@ abstract class AbstractQueryConfiguration {
   /// The country for this query, if any.
   final OpenFoodFactsCountry? country;
 
+  /// Highly recommended, with the [ProductField] list you can specify which data
+  /// the result should contain. This results in faster response times and less
+  /// data usage.
+  ///
+  /// Not specifying anything returns all available data.
+  ///
+  /// ```dart
+  ///    ProductQueryConfiguration config = ProductQueryConfiguration(
+  ///     '5449000131805',
+  ///     fields: [ProductField.ALL],
+  ///   );
+  ///   ProductResultV3 product = await OpenFoodAPIClient.getProductV3(config);
+  ///
+  ///   print(product.product?.productName); // Coca Cola Zero
+  ///   print(product.product?.brands); // Coca-Cola
+  ///
+  ///   ProductQueryConfiguration config = ProductQueryConfiguration(
+  ///     '5449000131805',
+  ///     fields: [ProductField.BRANDS],
+  ///   );
+  ///   ProductResultV3 product = await OpenFoodAPIClient.getProductV3(config);
+  ///
+  ///   print(product.product?.productName); // null
+  ///   print(product.product?.brands); // Coca-Cola
+  ///
   List<ProductField>? fields;
 
   List<Parameter> additionalParameters;

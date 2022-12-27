@@ -163,7 +163,7 @@ void main() {
       for (final OpenFoodFactsCountry country in countries) {
         checkNutrients(
           await OpenFoodAPIClient.getOrderedNutrients(
-            cc: country.offTag,
+            country: country,
             language: language,
           ),
           country,
@@ -195,7 +195,7 @@ void main() {
         for (final String country in countries) {
           final OrderedNutrients orderedNutrients =
               await OpenFoodAPIClient.getOrderedNutrients(
-            cc: country,
+            country: CountryHelper.fromJson(country)!,
             language: language,
           );
           final OrderedNutrient? found =

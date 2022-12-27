@@ -1,6 +1,6 @@
 import '../model/off_tagged.dart';
 
-/// Available languages
+/// Available languages in open food facts
 enum OpenFoodFactsLanguage implements OffTagged {
   /// English
   ENGLISH(offTag: 'en'),

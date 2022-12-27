@@ -1,6 +1,7 @@
 import '../model/off_tagged.dart';
 
-/// Countries, cf. https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+/// Countries used by open food facts as ISO 3166-1 alpha-2
+/// cf. https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 enum OpenFoodFactsCountry implements OffTagged {
   /// Andorra
   ANDORRA(offTag: 'ad'),

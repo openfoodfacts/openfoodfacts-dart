@@ -1,6 +1,20 @@
 import '../utils/recommended_daily_intake_helper.dart';
 import '../utils/unit_helper.dart';
 
+/// Returns the by the EU recommended intake amount of
+/// - energy
+/// - fat
+/// - protein
+/// - vitamins
+/// - mineral
+///
+/// ```dart
+///   IntakeRecommendation vitB12 =
+///       RecommendedDailyIntake.getRecommendedDailyIntakes().vitaminB12;
+///   print(vitB12.value); // 2.5
+///   print(vitB12.unit); // Micro g
+/// ```
+///
 class RecommendedDailyIntake {
   RecommendedDailyIntake(
       this.energyKcal,
@@ -115,6 +129,7 @@ class RecommendedDailyIntake {
   final IntakeRecommendation iodine;
 
   // The plugin is unable to access the assets/json/recommended_daily_intakes_source _eu.json file. Looking for a fix.
+  // TODO(x): Fix
   /*static Future<Map<String, dynamic>> _loadRecommendationAsset() async {
     String jsonString = await rootBundle.loadString('assets/json/recommended_daily_intakes_source _eu.json');
     return await json.decode(jsonString);
