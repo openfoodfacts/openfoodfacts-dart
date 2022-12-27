@@ -1,30 +1,24 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
 
 void main() async {
-  User offUser = User(userId: 'username or email', password: 'password');
+  User myUser = User(userId: "username", password: "secret_password");
 
-  SignUpStatus status = await OpenFoodAPIClient.register(
-    user: offUser,
-    name: 'Namer',
-    email: 'email',
+  String barcode = "0000000000000";
+
+  SendImage image = SendImage(
+    lang: OpenFoodFactsLanguage.FRENCH,
+    barcode: barcode,
+    imageField: ImageField.FRONT,
+    imageUri: Uri.parse("path_to_my_image"),
   );
 
-  if (status.status == 201) {
-    print('Yeah account created');
-    OpenFoodAPIConfiguration.globalUser = offUser;
-  } else {
-    print('Error: ${status.error}');
+  Status status = await OpenFoodAPIClient.addProductImage(myUser, image);
+
+  if (status.status != 1) {
+    print(
+        "An error occured while sending the picture : ${status.statusVerbose}");
+    return;
   }
 
-/*
-  UserProductSearchQueryConfiguration configuration1 =
-      UserProductSearchQueryConfiguration(
-    type: UserProductSearchType.PHOTOGRAPHER,
-    userId: '',
-  );
-
-  SearchResult result = await OpenFoodAPIClient.searchProducts(
-    User(userId: '', password: ''),
-    configuration1,
-  );*/
+  print("Upload was successful");
 }

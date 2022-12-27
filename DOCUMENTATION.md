@@ -8,109 +8,8 @@ Open Food Facts is an open and crowdsourced database that contains various infor
 
 You are free to use the API but also contribute to it, the products list is constantly growing thanks to the many awesome contributors we have, and your help is more than welcomed.
 
-## How does it work ?
 
-We use the ability of the Open Food Facts API to return products results in Json, we then generate easily understandable objects structures to make it simple for you to use.
-
-This plugin also allows you to edit a product or upload a new one to Open Food Facts. Using the same simple product structure you can create a product object or edit an existing one and send it to the API using a single function.
-
-#### OpenFoodFactsLanguage
-This enum contains all the supported languages (180+) and allows an easy and reliable language selection.
-You can find the full list of available languages here : [Open Food Facts Languages](https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/lib/utils/LanguageHelper.dart).
-
-
-### Functions
-
-
-
-
-#### Edit or Add a product to Open Food Facts
-This functions sends a [product](#product) to the API in order to be written into the database. The result is a [Status](#status).
-
-```dart
-Parameters : User user, ProductSearchQueryConfigurations config
-
-Status result = await OpenFoodAPIClient.searchProducts(TestConstants.TEST_USER, configuration);
-```
-See the [example](#example-4--send-a-product-to-open-food-facts)
-
-#### Send a picture for an existing product to Open Food Facts
-This function allows you to send a [picture](#productimage) linked to an existing [product](#product) in the database.
-
-```dart
-Parameters : User user, ProductImage image
-
-Status result = await OpenFoodAPIClient.addProductImage(user, image);
-```
-See the [example](#example-5--upload-an-image-for-a-given-product)
-
-
-
-When creating a [producer account](https://world.pro.openfoodfacts.org/) use `requested_org` to name the Producer or brand
-
-Possible `status.status` responses:
-
-| Code                   | Meaning       |
-| :--------------------- | ------------- |
-| 201                    | User created  |
-| 400 (+ `status.error`) | Request error |
-| 500                    | Server error  |
-
-### Examples
-
-
-#### Example 4 : Send a product to Open Food Facts
-
-```dart
-User myUser = User("Myself", "secret_password");
-
-Product newProduct = Product(
-    barcode: "0000000000000",
-    productName: "Example Product",
-    quantity: "200g",
-    brands: "Example Brand",
-    lang: "fr",
-    ingredientsText: "Ingredient 1, Ingredient 2, Ingredient 3",
-    categories: "Category 1, Category 2"
-    ...
-);
-
-Status result = await OpenFoodAPIClient.saveProduct(myUser, newProduct);
-
-if(result.status != 1) {
-	print("An error occured while sending the product : ${result.statusVerbose}");
-    return;
-}
-
-print("Upload was successful");
-```
-
-#### Example 5 : Upload an image for a given product
-
-```dart
-User myUser = User("Myself", "secret_password");
-
-String barcode = "0000000000000";
-
-SendImage image = new SendImage(
-    lang: "fr",
-    barcode: barcode,
-    imageField: ProductImage.FIELD_FRONT,
-    imageUri: Uri.parse("path_to_my_image"),
-);
-
-
-Status status = await OpenFoodAPIClient.addProductImage(myUser, image);
-
-if(result.status != 1) {
-	print("An error occured while sending the picture : ${result.statusVerbose}");
-    return;
-}
-
-print("Upload was successful");
-```
-
-## Notes on languages mechanics.
+## Notes on languages mechanics
 
 TL;DR: use the "..InLanguages" fields if you intend to display products data in
 specific language(s). You __must__ use the "..InLanguages" fields if you intend
@@ -119,7 +18,7 @@ overwriting proper-language data with improper-language data.
 
 See detailed explanation and examples below.
 
-### Detailed explanation of languages mechanics.
+### Detailed explanation of languages mechanics
 
 Most of end-user facing apps want to display products data to a user in
 the language(s) the user understands.
@@ -175,12 +74,14 @@ Here's how the described above types of fields work in combinations:
 
 Those 4 combinations can be observed "in the wild" by
 executing next request:
+```
 https://world.openfoodfacts.org/api/v2/product/3017620422003?lc=de&fields=product_name,product_name_de,countries_tags,countries_tags_de
+```
 
 As you can see, the multilingual values should be prefered in most cases
 when product's data is displayed to a user.
 
-#### Example: display a product in German language or rollback to default.
+#### Example: display a product in German language or rollback to default
 
 ```dart
 final conf = ProductQueryConfiguration(
@@ -194,7 +95,7 @@ var name = product.productName ?? 'No name';
 _displayProductName(name);
 ```
 
-#### Example: display a product in German language, or in Russian, or rollback to default.
+#### Example: display a product in German language, or in Russian, or rollback to default
 
 ```dart
 final conf = ProductQueryConfiguration(
@@ -210,7 +111,7 @@ name ??= 'No name';
 _displayProductName(name);
 ```
 
-#### Example: display product categories in German language.
+#### Example: display product categories in German language
 
 ```dart
 final conf = ProductQueryConfiguration(

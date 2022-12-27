@@ -16,6 +16,30 @@ class OpenFoodAPIClient {
   ///
   /// Please read the language mechanics explanation if you intend to display
   /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
+  ///
+  /// ```dart
+  ///   User myUser = User(userId: "username", password: "secret_password");
+  ///
+  ///   Product newProduct = Product(
+  ///       barcode: "0000000000000",
+  ///       productName: "Example Product",
+  ///       quantity: "200g",
+  ///       brands: "Example Brand",
+  ///       lang: OpenFoodFactsLanguage.FRENCH,
+  ///       ingredientsText: "Ingredient 1, Ingredient 2, Ingredient 3",
+  ///       categories: "Category 1, Category 2"
+  ///       ...
+  ///   );
+  ///
+  ///   Status result = await OpenFoodAPIClient.saveProduct(myUser, newProduct);
+  ///
+  ///   if(result.status != 1) {
+  ///     print("An error occured while sending the product : ${result.statusVerbose}");
+  ///     return;
+  ///   }
+  ///
+  ///   print("Upload was successful");
+  /// ```
   static Future<Status> saveProduct(
     final User user,
     final Product product, {
@@ -105,6 +129,29 @@ class OpenFoodAPIClient {
   /// Send one image to the server.
   /// The image will be added to the product specified in the SendImage
   /// Returns a Status object as result.
+  ///
+  /// ```dart
+  ///   User myUser = User(userId: "username", password: "secret_password");
+  ///
+  ///   String barcode = "0000000000000";
+  ///
+  ///   SendImage image = SendImage(
+  ///     lang: OpenFoodFactsLanguage.FRENCH,
+  ///     barcode: barcode,
+  ///     imageField: ImageField.FRONT,
+  ///     imageUri: Uri.parse("path_to_my_image"),
+  ///   );
+  ///
+  ///   Status status = await OpenFoodAPIClient.addProductImage(myUser, image);
+  ///
+  ///   if (status.status != 1) {
+  ///     print(
+  ///         "An error occured while sending the picture : ${status.statusVerbose}");
+  ///     return;
+  ///   }
+  ///
+  ///   print("Upload was successful");
+  /// ```
   static Future<Status> addProductImage(
     User user,
     SendImage image, {
@@ -430,6 +477,8 @@ class OpenFoodAPIClient {
     return result;
   }
 
+  //TODO(x): Add taxonomy documentation
+
   static Future<Map<String, T>?>
       getTaxonomy<T extends JsonObject, F extends Enum>(
     TaxonomyQueryConfiguration<T, F> configuration, {
@@ -619,6 +668,8 @@ class OpenFoodAPIClient {
       });
     }
   }
+
+  //TODO(x): Add comments for robotoff
 
   static Future<InsightsResult> getRandomInsight(
     User user, {
@@ -1231,7 +1282,7 @@ class OpenFoodAPIClient {
         },
       );
 
-  /// Crops a product image from an already uploaded image.
+  /// Crops an already uploaded image.
   ///
   /// "I want, for this [barcode], this [imageField] and this [language],
   /// the image to be computed from the already uploaded image

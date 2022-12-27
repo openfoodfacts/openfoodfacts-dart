@@ -6,6 +6,24 @@ import 'language_helper.dart';
 import 'product_fields.dart';
 
 /// Query Configuration for user-related searches.
+/// Get products a user created, photographed,
+///
+/// ```dart
+///   UserProductSearchQueryConfiguration configuration =
+///       UserProductSearchQueryConfiguration(
+///     // Products user photographed
+///     type: UserProductSearchType.PHOTOGRAPHER,
+///     userId: '',
+///   );
+///
+///   SearchResult result = await OpenFoodAPIClient.searchProducts(
+///     User(userId: '', password: ''),
+///     configuration,
+///   );
+///
+///   print(result.count);
+/// ´´´
+///
 class UserProductSearchQueryConfiguration extends AbstractQueryConfiguration {
   UserProductSearchQueryConfiguration({
     required this.type,
