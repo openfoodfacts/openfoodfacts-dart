@@ -8,7 +8,6 @@ Open Food Facts is an open and crowdsourced database that contains various infor
 
 You are free to use the API but also contribute to it, the products list is constantly growing thanks to the many awesome contributors we have, and your help is more than welcomed.
 
-
 ## Notes on languages mechanics
 
 TL;DR: use the "..InLanguages" fields if you intend to display products data in
@@ -30,6 +29,7 @@ Here are main concepts.
 
 Products in Open Food Facts can have some of their fields in multiple
 languages. Such fields are of 2 types:
+
 1. Text fields with info taken directly from product packaging
    (like product name and ingredients list). Such fields generally are
    not touched by the backend and are stored in the DB exactly as they
@@ -41,6 +41,7 @@ languages. Such fields are of 2 types:
 
 In addition to that, fields of the [Product] class with multilingual
 support also are of 2 types:
+
 1. Fields with simple value (e.g. [Product.productName]).
 2. Fields with multilingual values (e.g. [Product.productNameInLanguages]).
 
@@ -54,6 +55,7 @@ language.
 Let's say you want a product to be displayed in German and
 so you've set the value of [AbstractQueryConfiguration.language] to German.
 Here's how the described above types of fields work in combinations:
+
 1. 1-1 (packaging info + simple value).
    Fields like [Product.productName] will be in German if the German
    versions of them are available in OFF.
@@ -74,7 +76,8 @@ Here's how the described above types of fields work in combinations:
 
 Those 4 combinations can be observed "in the wild" by
 executing next request:
-```
+
+```url
 https://world.openfoodfacts.org/api/v2/product/3017620422003?lc=de&fields=product_name,product_name_de,countries_tags,countries_tags_de
 ```
 
@@ -127,7 +130,7 @@ categories = categories.where((c) => !c.startsWith(RegExp('\w+:')));
 _displayProductCategories(categories);
 ```
 
-#### Example: update German product categories.
+#### Example: update German product categories
 
 ```dart
 final conf = ProductQueryConfiguration(

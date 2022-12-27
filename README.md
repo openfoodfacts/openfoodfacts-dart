@@ -62,7 +62,7 @@ OpenFoodAPIConfiguration.globalLanguages = <OpenFoodFactsLanguage>[
 OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
 ```
 
-All possible configurations can be found [here](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_open_food_api_configuration/OpenFoodAPIConfiguration-class.html)
+All possible configurations can be found [here](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_open_food_api_configuration/OpenFoodAPIConfiguration-class.html).
 
 ### Features
 
