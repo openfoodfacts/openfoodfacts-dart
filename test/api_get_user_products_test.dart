@@ -10,23 +10,32 @@ void main() {
   group('$OpenFoodAPIClient get user products', () {
     const String userId = 'monsieurtanuki';
     const int pageSize = 100; // should be big enough to get everything on page1
+    final String toBeCompletedTag = ProductState.COMPLETED.toBeCompletedTag;
 
     Future<int> getCount(
-      final UserProductSearchType type,
-      final OpenFoodFactsLanguage language, {
+      final TagFilterType type,
+      final OpenFoodFactsLanguage language,
+      final bool toBeCompleted, {
       final void Function(Product)? additionalCheck,
     }) async {
       final String reason = '($language, $type)';
-      final UserProductSearchQueryConfiguration configuration =
-          UserProductSearchQueryConfiguration(
-        type: type,
-        userId: userId,
-        pageSize: pageSize,
+      final ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+        parametersList: [
+          TagFilter.fromType(tagFilterType: type, tagName: userId),
+          PageSize(size: pageSize),
+          if (toBeCompleted)
+            TagFilter.fromType(
+              tagFilterType: TagFilterType.STATES,
+              tagName: toBeCompletedTag,
+            ),
+        ],
         language: language,
         fields: [
           ProductField.BARCODE,
           ProductField.STATES_TAGS,
         ],
+        version: ProductQueryVersion.v3,
       );
 
       final SearchResult result;
@@ -52,7 +61,8 @@ void main() {
     }
 
     Future<int> getCountForAllLanguages(
-      final UserProductSearchType type, {
+      final TagFilterType type,
+      final bool toBeCompleted, {
       final void Function(Product)? additionalCheck,
     }) async {
       final List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
@@ -65,6 +75,7 @@ void main() {
         final int count = await getCount(
           type,
           language,
+          toBeCompleted,
           additionalCheck: additionalCheck,
         );
         if (result != null) {
@@ -76,12 +87,14 @@ void main() {
     }
 
     Future<void> checkTypeCount(
-      final UserProductSearchType type,
+      final TagFilterType type,
       final int minimalExpectedCount, {
       final void Function(Product)? additionalCheck,
+      final bool toBeCompleted = false,
     }) async {
       final int count = await getCountForAllLanguages(
         type,
+        toBeCompleted,
         additionalCheck: additionalCheck,
       );
       expect(count, greaterThanOrEqualTo(minimalExpectedCount));
@@ -89,33 +102,34 @@ void main() {
 
     test(
       'contributor',
-      () async =>
-          checkTypeCount(UserProductSearchType.CONTRIBUTOR, 2) // as of 20220706
+      () async => checkTypeCount(TagFilterType.CREATOR, 2) // as of 20221229
       ,
     );
 
     test(
       'informer',
       () async =>
-          checkTypeCount(UserProductSearchType.INFORMER, 56) // as of 20220706
+          await checkTypeCount(TagFilterType.INFORMERS, 73) // as of 20221229
       ,
     );
 
     test(
       'photographer',
-      () async => checkTypeCount(
-          UserProductSearchType.PHOTOGRAPHER, 44) // as of 20220706
+      () async =>
+          checkTypeCount(TagFilterType.PHOTOGRAPHERS, 48) // as of 20221229
       ,
     );
 
     test(
       'to be completed',
       () async => checkTypeCount(
-          UserProductSearchType.TO_BE_COMPLETED, 0, // you never know...
-          additionalCheck: (final Product product) {
-        expect(product.statesTags, isNotNull);
-        expect(product.statesTags, contains('en:to-be-completed'));
-      }),
+        TagFilterType.INFORMERS, 0, // you never know...
+        toBeCompleted: true,
+        additionalCheck: (final Product product) {
+          expect(product.statesTags, isNotNull);
+          expect(product.statesTags, contains(toBeCompletedTag));
+        },
+      ),
     );
   });
 }
