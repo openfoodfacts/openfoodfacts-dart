@@ -192,6 +192,7 @@ class OpenFoodAPIClient {
         language: language,
         country: null,
         fields: null,
+        version: ProductQueryVersion.v3,
       ),
       user: user,
       queryType: queryType,
@@ -349,6 +350,7 @@ class OpenFoodAPIClient {
   /// Returns the [ProductFreshness] for all the [barcodes].
   static Future<Map<String, ProductFreshness>> getProductFreshness({
     required final List<String> barcodes,
+    required final ProductQueryVersion version,
     final User? user,
     final OpenFoodFactsLanguage? language,
     final OpenFoodFactsCountry? country,
@@ -368,6 +370,7 @@ class OpenFoodAPIClient {
           ProductField.LAST_MODIFIED,
           ProductField.STATES_TAGS,
         ],
+        version: version,
       ),
       queryType: queryType,
     );

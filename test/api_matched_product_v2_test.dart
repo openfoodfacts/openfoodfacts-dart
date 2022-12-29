@@ -120,6 +120,7 @@ void main() {
           parametersList: [BarcodeParameter.list(inputBarcodes)],
           language: language,
           fields: [ProductField.BARCODE, ProductField.ATTRIBUTE_GROUPS],
+          version: ProductQueryVersion.v3,
         ),
       );
       expect(result.count, expectedScores.keys.length);
