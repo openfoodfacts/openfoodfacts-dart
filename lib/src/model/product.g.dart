@@ -115,6 +115,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       ..packagings = (json['packagings'] as List<dynamic>?)
           ?.map((e) => ProductPackaging.fromJson(e))
           .toList()
+      ..packagingsComplete =
+          JsonHelper.boolFromJSON(json['packagings_complete'])
       ..packagingTextInLanguages =
           LanguageHelper.fromJsonStringMap(json['packaging_text_in_languages'])
       ..lastModifiedBy = json['last_modified_by'] as String?
@@ -206,6 +208,8 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
       LanguageHelper.toJsonStringsListMap(instance.labelsTagsInLanguages));
   writeNotNull('packaging', instance.packaging);
   writeNotNull('packagings', instance.packagings);
+  val['packagings_complete'] =
+      JsonHelper.boolToJSON(instance.packagingsComplete);
   writeNotNull('packaging_tags', instance.packagingTags);
   writeNotNull('packaging_text_in_languages',
       LanguageHelper.toJsonStringMap(instance.packagingTextInLanguages));

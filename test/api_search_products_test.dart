@@ -809,12 +809,14 @@ void main() {
     });
 
     test('nova filter', () async {
-      // approximated min counts
+      // Approximated min counts for POLAND
+      // There were too many results for FRANCE, and that made the server crash.
+      // There are far less results for POLAND, which is OK for these tests.
       const Map<int, int> novaMinCounts = <int, int>{
-        1: 25000, // was 28437 on 2022-12-19
-        2: 20000, // was 21124 on 2022-12-19
-        3: 50000, // was 52603 on 2022-12-19
-        4: 140000, // was 149003 on 2022-12-19
+        1: 400, // was 541 on 2022-12-31
+        2: 100, // was 126 on 2022-12-31
+        3: 750, // was 1015 on 2022-12-31
+        4: 2500, // was 3064 on 2022-12-31
       };
 
       // single filters
@@ -830,7 +832,7 @@ void main() {
             ],
             fields: [ProductField.BARCODE, ProductField.NOVA_GROUP],
             language: OpenFoodFactsLanguage.FRENCH,
-            country: OpenFoodFactsCountry.FRANCE,
+            country: OpenFoodFactsCountry.POLAND,
             version: ProductQueryVersion.v3,
           ),
         );
