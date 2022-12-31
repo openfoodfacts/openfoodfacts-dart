@@ -55,6 +55,7 @@
 <span class="name ">temporarySaveProductV3</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="temporarySaveProductV3-param-user"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a></span> <span class="parameter-name">user</span>, </span></li>
 <li><span class="parameter" id="temporarySaveProductV3-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, </span></li>
 <li><span class="parameter" id="temporarySaveProductV3-param-packagings">{<span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_packaging/ProductPackaging-class.html">ProductPackaging</a></span>&gt;</span>?</span> <span class="parameter-name">packagings</span>, </span></li>
+<li><span class="parameter" id="temporarySaveProductV3-param-packagingsComplete"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">packagingsComplete</span>, </span></li>
 <li><span class="parameter" id="temporarySaveProductV3-param-queryType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>, </span></li>
 <li><span class="parameter" id="temporarySaveProductV3-param-country"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a>?</span> <span class="parameter-name">country</span>, </span></li>
 <li><span class="parameter" id="temporarySaveProductV3-param-language"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a>?</span> <span class="parameter-name">language</span>}</span></li>
@@ -78,18 +79,26 @@ Long term target is of course more something like <a href="../../file-___home_ru
   final User user,
   final String barcode, {
   final List&lt;ProductPackaging&gt;? packagings,
+  final bool? packagingsComplete,
   final QueryType? queryType,
   final OpenFoodFactsCountry? country,
   final OpenFoodFactsLanguage? language,
 }) async {
   final Map&lt;String, dynamic&gt; parameterMap = &lt;String, dynamic&gt;{};
   parameterMap.addAll(user.toData());
-  if (packagings == null) {
-    &#47;&#47; For the moment it&#39;s the only purpose of this method: saving packagings.
-    throw Exception(&#39;packagings cannot be null&#39;);
+  if (packagings == null &amp;&amp; packagingsComplete == null) {
+    &#47;&#47; For the moment there are limited fields concerned.
+    throw Exception(&#39;At least one V3 field must be populated.&#39;);
   }
-  parameterMap[&#39;product&#39;] = {};
-  parameterMap[&#39;product&#39;][&#39;packagings&#39;] = packagings;
+  const String productTag = &#39;product&#39;;
+  parameterMap[productTag] = {};
+  if (packagings != null) {
+    parameterMap[productTag][ProductField.PACKAGINGS.offTag] = packagings;
+  }
+  if (packagingsComplete != null) {
+    parameterMap[productTag][ProductField.PACKAGINGS_COMPLETE.offTag] =
+        packagingsComplete;
+  }
   if (language != null) {
     parameterMap[&#39;lc&#39;] = language.offTag;
     parameterMap[&#39;tags_lc&#39;] = language.offTag;
