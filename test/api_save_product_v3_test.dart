@@ -15,12 +15,18 @@ void main() {
     test('save packagings with unknown recycling', () async {
       // Here we put an unknown recycling label, and we expect related warnings.
       const String unknownRecycling = 'recyKKlage';
+      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+      const int numberOfUnits = 12;
+      const String quantityPerUnit = '50cl';
+      const double weightMeasured = 250;
       final List<ProductPackaging> inputPackagings = [
         ProductPackaging()
           ..shape = (LocalizedTag()..lcName = 'bouteille')
           ..material = (LocalizedTag()..lcName = 'verre')
           ..recycling = (LocalizedTag()..lcName = unknownRecycling)
-          ..numberOfUnits = 12,
+          ..numberOfUnits = numberOfUnits
+          ..quantityPerUnit = quantityPerUnit
+          ..weightMeasured = weightMeasured,
       ];
       final ProductResultV3 status =
           await OpenFoodAPIClient.temporarySaveProductV3(
@@ -37,6 +43,17 @@ void main() {
       expect(status.result, isNull); // result is null for UPDATE queries
       expect(status.barcode, barcode);
       expect(status.product, isNotNull);
+
+      expect(status.product!.packagings, isNotNull);
+      final List<ProductPackaging> packagings = status.product!.packagings!;
+      expect(packagings, hasLength(1));
+      final ProductPackaging packaging = packagings.first;
+      expect(packaging.shape, isNotNull);
+      expect(packaging.material, isNotNull);
+      expect(packaging.recycling, isNotNull);
+      expect(packaging.numberOfUnits, numberOfUnits);
+      expect(packaging.quantityPerUnit, quantityPerUnit);
+      expect(packaging.weightMeasured, weightMeasured);
 
       expect(status.warnings, isNotEmpty);
       expect(status.warnings, hasLength(1));
