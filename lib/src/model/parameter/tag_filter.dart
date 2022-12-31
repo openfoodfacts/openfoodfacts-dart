@@ -21,8 +21,16 @@ enum TagFilterType implements OffTagged {
   INGREDIENTS(offTag: 'ingredients'),
   NOVA_GROUPS(offTag: 'nova_groups'),
   LANGUAGES(offTag: 'languages'),
+
+  /// User who created this product
   CREATOR(offTag: 'creator'),
   EDITORS(offTag: 'editors'),
+
+  /// User who photographed for this product
+  PHOTOGRAPHERS(offTag: 'photographers'),
+
+  /// Users who contributed to this product
+  INFORMERS(offTag: 'informers'),
   LANG(offTag: 'lang');
 
   const TagFilterType({
