@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the numberOfUnits property from the ProductPackaging class, for the Dart programming language.">
-  <title>numberOfUnits property - ProductPackaging class - product_packaging library - Dart API</title>
+  <meta name="description" content="API docs for the weightMeasured property from the ProductPackaging class, for the Dart programming language.">
+  <title>weightMeasured property - ProductPackaging class - product_packaging library - Dart API</title>
 
 
   
@@ -31,9 +31,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_packaging/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_packaging-library.html">product_packaging</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_packaging/ProductPackaging-class.html">ProductPackaging</a></li>
-    <li class="self-crumb">numberOfUnits property</li>
+    <li class="self-crumb">weightMeasured property</li>
   </ol>
-  <div class="self-name">numberOfUnits</div>
+  <div class="self-name">weightMeasured</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -44,31 +44,33 @@
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
-<h1><span class="kind-property">numberOfUnits</span> property 
+<h1><span class="kind-property">weightMeasured</span> property 
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
 </h1></div>
 
         <section class="multi-line-signature">
-          <a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a>?
-          <span class="name ">numberOfUnits</span>
+          <a href="https://api.dart.dev/stable/2.18.6/dart-core/double-class.html">double</a>?
+          <span class="name ">weightMeasured</span>
           <div class="features">read / write</div>
 
         </section>
         
 <section class="desc markdown">
-  <p>Number of units of this component contained in the product.</p>
-<p>E.g. 6 for a pack of 6 bottles.</p>
+  <p>Weight in grams as measured by a user of one unit of the empty component.</p>
+<p>E.g. for a 6 pack of 1.5l water bottles, it might be 30, the weight in
+grams of 1 empty water bottle without its cap which is a different
+component.</p>
 </section>
 
         
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@JsonKey(
-  name: &#39;number_of_units&#39;,
+  name: &#39;weight_measured&#39;,
   includeIfNull: false,
-  fromJson: JsonObject.parseInt,
+  fromJson: JsonObject.parseDouble,
 )
-int? numberOfUnits;
+double? weightMeasured;
 
 </code></pre>
 </section>
@@ -87,7 +89,7 @@ int? numberOfUnits;
   <li><a href="../../index.html">openfoodfacts</a></li>
   <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_packaging/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_packaging-library.html">product_packaging</a></li>
   <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_packaging/ProductPackaging-class.html">ProductPackaging</a></li>
-  <li class="self-crumb">numberOfUnits property</li>
+  <li class="self-crumb">weightMeasured property</li>
 </ol>
 
 
