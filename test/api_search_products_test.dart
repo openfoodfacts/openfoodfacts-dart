@@ -8,6 +8,7 @@ import 'test_constants.dart';
 void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
+  const ProductQueryVersion version = ProductQueryVersion.v3;
 
   group('$OpenFoodAPIClient search products', () {
     const String UNKNOWN_BARCODE = '1111111111111111111111111111111';
@@ -58,6 +59,7 @@ void main() {
             fields: [ProductField.BARCODE],
             language: OpenFoodFactsLanguage.FRENCH,
             country: OpenFoodFactsCountry.FRANCE,
+            version: version,
           ),
         );
 
@@ -125,9 +127,11 @@ void main() {
 
       final ProductSearchQueryConfiguration configuration =
           ProductSearchQueryConfiguration(
-              parametersList: parameters,
-              fields: [ProductField.ALL],
-              language: OpenFoodFactsLanguage.GERMAN);
+        parametersList: parameters,
+        fields: [ProductField.ALL],
+        language: OpenFoodFactsLanguage.GERMAN,
+        version: version,
+      );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
@@ -151,9 +155,11 @@ void main() {
 
       final ProductSearchQueryConfiguration configuration =
           ProductSearchQueryConfiguration(
-              parametersList: parameters,
-              fields: [ProductField.ALL],
-              language: OpenFoodFactsLanguage.ENGLISH);
+        parametersList: parameters,
+        fields: [ProductField.ALL],
+        language: OpenFoodFactsLanguage.ENGLISH,
+        version: version,
+      );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
@@ -199,6 +205,7 @@ void main() {
         ],
         language: OpenFoodFactsLanguage.FRENCH,
         country: OpenFoodFactsCountry.FRANCE,
+        version: version,
       );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
@@ -320,9 +327,11 @@ void main() {
 
       final ProductSearchQueryConfiguration configuration =
           ProductSearchQueryConfiguration(
-              parametersList: parameters,
-              fields: [ProductField.ALL],
-              language: OpenFoodFactsLanguage.GERMAN);
+        parametersList: parameters,
+        fields: [ProductField.ALL],
+        language: OpenFoodFactsLanguage.GERMAN,
+        version: version,
+      );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
@@ -346,9 +355,11 @@ void main() {
 
       final ProductSearchQueryConfiguration configuration =
           ProductSearchQueryConfiguration(
-              parametersList: parameters,
-              fields: [ProductField.BARCODE],
-              language: OpenFoodFactsLanguage.FRENCH);
+        parametersList: parameters,
+        fields: [ProductField.BARCODE],
+        language: OpenFoodFactsLanguage.FRENCH,
+        version: version,
+      );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
@@ -378,6 +389,7 @@ void main() {
         parametersList: parameters,
         language: OpenFoodFactsLanguage.GERMAN,
         fields: <ProductField>[ProductField.IMAGES],
+        version: version,
       );
 
       SearchResult result = await OpenFoodAPIClient.searchProducts(
@@ -407,6 +419,7 @@ void main() {
           parametersList: parameters,
           fields: [ProductField.BARCODE],
           language: OpenFoodFactsLanguage.FRENCH,
+          version: version,
         );
 
         final SearchResult result = await OpenFoodAPIClient.searchProducts(
@@ -439,9 +452,11 @@ void main() {
 
       final ProductSearchQueryConfiguration configuration =
           ProductSearchQueryConfiguration(
-              parametersList: parameters,
-              fields: [ProductField.ALL],
-              language: OpenFoodFactsLanguage.FRENCH);
+        parametersList: parameters,
+        fields: [ProductField.ALL],
+        language: OpenFoodFactsLanguage.FRENCH,
+        version: version,
+      );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
@@ -525,6 +540,7 @@ void main() {
         parametersList: parameters,
         fields: [ProductField.ALL],
         language: OpenFoodFactsLanguage.FRENCH,
+        version: version,
       );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
@@ -572,6 +588,7 @@ void main() {
         parametersList: parameters,
         fields: [ProductField.ALL],
         language: OpenFoodFactsLanguage.FRENCH,
+        version: version,
       );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
@@ -601,6 +618,7 @@ void main() {
         parametersList: parameters,
         fields: [ProductField.ALL],
         language: OpenFoodFactsLanguage.GERMAN,
+        version: version,
       );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
@@ -638,9 +656,11 @@ void main() {
 
       final ProductSearchQueryConfiguration configuration =
           ProductSearchQueryConfiguration(
-              parametersList: parameters,
-              fields: [ProductField.ALL],
-              language: OpenFoodFactsLanguage.GERMAN);
+        parametersList: parameters,
+        fields: [ProductField.ALL],
+        language: OpenFoodFactsLanguage.GERMAN,
+        version: version,
+      );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.TEST_USER,
@@ -663,6 +683,7 @@ void main() {
         parametersList: [BarcodeParameter.list(BARCODES)],
         fields: [ProductField.BARCODE, ProductField.NAME],
         language: OpenFoodFactsLanguage.FRENCH,
+        version: version,
       );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
@@ -688,6 +709,7 @@ void main() {
         user: TestConstants.PROD_USER,
         language: OpenFoodFactsLanguage.FRENCH,
         country: OpenFoodFactsCountry.FRANCE,
+        version: version,
       );
 
       int count = 0;
@@ -713,6 +735,7 @@ void main() {
           ],
           fields: [ProductField.BARCODE, ProductField.NAME],
           language: OpenFoodFactsLanguage.FRENCH,
+          version: version,
         );
 
         final result = await OpenFoodAPIClient.searchProducts(
@@ -741,6 +764,7 @@ void main() {
           PnnsGroup2Filter(pnnsGroup2: PnnsGroup2.POTATOES),
           PageNumber(page: 3),
         ],
+        version: version,
       );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
@@ -769,6 +793,7 @@ void main() {
         parametersList: [BarcodeParameter.list(manyBarcodes)],
         fields: [ProductField.BARCODE, ProductField.NAME],
         language: OpenFoodFactsLanguage.FRENCH,
+        version: version,
       );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
@@ -869,6 +894,7 @@ void main() {
         fields: [ProductField.BARCODE, ProductField.ALLERGENS],
         language: OpenFoodFactsLanguage.FRENCH,
         country: OpenFoodFactsCountry.FRANCE,
+        version: version,
       );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
@@ -977,6 +1003,7 @@ void main() {
         fields: [ProductField.BARCODE, ProductField.STATES_TAGS],
         language: OpenFoodFactsLanguage.FRENCH,
         country: OpenFoodFactsCountry.FRANCE,
+        version: version,
       );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(

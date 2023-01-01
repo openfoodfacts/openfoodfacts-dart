@@ -25,6 +25,7 @@ void main() {
         parametersList: [
           StatesTagsParameter(map: {ProductState.COMPLETED: false}),
         ],
+        version: ProductQueryVersion.v3,
       );
 
       final SearchResult result;
