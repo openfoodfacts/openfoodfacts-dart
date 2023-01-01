@@ -1,4 +1,4 @@
-import 'package:openfoodfacts/utils/BarcodesValidator.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
 void main() {

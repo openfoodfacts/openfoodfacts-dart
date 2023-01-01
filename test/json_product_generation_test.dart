@@ -1,11 +1,5 @@
 import 'dart:convert';
 
-import 'package:openfoodfacts/model/EcoscoreAdjustments.dart';
-import 'package:openfoodfacts/model/EcoscoreData.dart';
-import 'package:openfoodfacts/model/IngredientsAnalysisTags.dart';
-import 'package:openfoodfacts/model/OriginsOfIngredients.dart';
-import 'package:openfoodfacts/model/Packaging.dart';
-import 'package:openfoodfacts/model/ProductResultV3.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 

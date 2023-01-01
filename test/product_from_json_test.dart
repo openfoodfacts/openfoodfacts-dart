@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:openfoodfacts/model/ProductResultV3.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 

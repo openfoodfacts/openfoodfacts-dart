@@ -1,7 +1,4 @@
-import 'package:openfoodfacts/model/UserAgent.dart';
-import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
-import 'package:openfoodfacts/utils/QueryType.dart';
-import 'package:openfoodfacts/utils/UriHelper.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
 void main() {

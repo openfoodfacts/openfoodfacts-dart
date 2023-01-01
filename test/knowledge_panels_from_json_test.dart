@@ -1,5 +1,4 @@
-import 'package:openfoodfacts/model/KnowledgePanelElement.dart';
-import 'package:openfoodfacts/model/KnowledgePanels.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
 void main() {
