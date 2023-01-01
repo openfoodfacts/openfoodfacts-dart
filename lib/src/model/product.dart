@@ -485,6 +485,7 @@ class Product extends JsonObject {
       this.labelsTagsInLanguages,
       // TODO: deprecated from 2022-12-16; remove when old enough
       @Deprecated('Use packagingS field instead') this.packaging,
+      this.packagings,
       this.packagingTags,
       this.miscTags,
       this.statesTags,

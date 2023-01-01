@@ -245,6 +245,11 @@ void main() {
       expect(result.product, isNotNull);
       expect(result.product!.barcode, barcode);
       expect(result.product!.brandsTags![0], 'kelsin');
+      print(result.product!.packagings![0].toString());
+      expect(result.product!.packagings![0].material!.id, 'en:metal');
+      expect(result.product!.packagings![0].material!.lcName, 'Metall');
+      expect(result.product!.packagings![0].shape!.id, 'en:can');
+      expect(result.product!.packagings![0].shape!.lcName, 'Dose');
 
       // only german ingredients
       expect(result.product!.ingredientsText, isNotNull);

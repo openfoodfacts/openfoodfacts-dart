@@ -72,6 +72,9 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       labelsTagsInLanguages: LanguageHelper.fromJsonStringsListMap(
           json['labels_tags_in_languages']),
       packaging: json['packaging'] as String?,
+      packagings: (json['packagings'] as List<dynamic>?)
+          ?.map((e) => ProductPackaging.fromJson(e))
+          .toList(),
       packagingTags: (json['packaging_tags'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
@@ -112,9 +115,6 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       )
       ..nutritionData = JsonHelper.checkboxFromJSON(json['nutrition_data'])
       ..comparedToCategory = json['compared_to_category'] as String?
-      ..packagings = (json['packagings'] as List<dynamic>?)
-          ?.map((e) => ProductPackaging.fromJson(e))
-          .toList()
       ..packagingsComplete =
           JsonHelper.boolFromJSON(json['packagings_complete'])
       ..packagingTextInLanguages =
