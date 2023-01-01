@@ -1,5 +1,115 @@
 # Changelog
 
+## [1.30.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.30.0...v1.30.1) (2022-12-25)
+
+
+### Bug Fixes
+
+* 548 - "LICENSE" refactoring ([#651](https://github.com/openfoodfacts/openfoodfacts-dart/issues/651)) ([ce2b531](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ce2b53103f6916bf0e46aab661c603195e6b364e))
+
+## [1.30.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.29.0...v1.30.0) (2022-12-25)
+
+
+### Features
+
+* 539 - specific test for nova group filter ([#646](https://github.com/openfoodfacts/openfoodfacts-dart/issues/646)) ([44dfd2d](https://github.com/openfoodfacts/openfoodfacts-dart/commit/44dfd2da8025e480b0c0f7ec486184476f13c134))
+* 539 - taxonomy for Nova groups ([#645](https://github.com/openfoodfacts/openfoodfacts-dart/issues/645)) ([5bf2959](https://github.com/openfoodfacts/openfoodfacts-dart/commit/5bf2959ab40f3e157b1dd4cf3e01b8248601a443))
+* 548 - License "refactoring" ([#642](https://github.com/openfoodfacts/openfoodfacts-dart/issues/642)) ([18f5c6f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/18f5c6f9b37b308ac8e0991c50fb57b738867007))
+* 617 - new "save packagings V3" feature ([#640](https://github.com/openfoodfacts/openfoodfacts-dart/issues/640)) ([55ffbf2](https://github.com/openfoodfacts/openfoodfacts-dart/commit/55ffbf23f7e2ec757e8324d38da9fdaaeb8f7f1f))
+* 648 - new method "Nutriments.isEmpty" ([#649](https://github.com/openfoodfacts/openfoodfacts-dart/issues/649)) ([d04e9eb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/d04e9eb0be3cc34322ebb3e8d3dfd2c8cc6dfdb8))
+
+
+### Bug Fixes
+
+* 634 - mapped tag 'energy' to Nutrient energyKj. ([#644](https://github.com/openfoodfacts/openfoodfacts-dart/issues/644)) ([3957139](https://github.com/openfoodfacts/openfoodfacts-dart/commit/39571396d36385a16aa636a7b400c8ed69eb3dc7))
+
+## [1.29.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.28.0...v1.29.0) (2022-12-09)
+
+
+### Features
+
+* 618 - added 6 contribution fields ([#636](https://github.com/openfoodfacts/openfoodfacts-dart/issues/636)) ([fcfa446](https://github.com/openfoodfacts/openfoodfacts-dart/commit/fcfa4469d9c563c25d89596b72bfeca5a5c61f50))
+* API V3 now supported for "get product" ([#633](https://github.com/openfoodfacts/openfoodfacts-dart/issues/633)) ([e118386](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e118386dcce75cd877ed13873136c421dfe50b09))
+
+
+### Bug Fixes
+
+* 575 - less expected populated fields from Robotoff ([#639](https://github.com/openfoodfacts/openfoodfacts-dart/issues/639)) ([88edf86](https://github.com/openfoodfacts/openfoodfacts-dart/commit/88edf86683e804be38e67a2f62e37f94cc686412))
+* Fix Badges ([#632](https://github.com/openfoodfacts/openfoodfacts-dart/issues/632)) ([27f1d87](https://github.com/openfoodfacts/openfoodfacts-dart/commit/27f1d87cb5d0bf3218df86d69334e7d96cc5d4ef))
+
+## [1.28.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.27.1...v1.28.0) (2022-11-22)
+
+
+### Features
+
+* [#596](https://github.com/openfoodfacts/openfoodfacts-dart/issues/596) - added Origin Taxonomy ([#608](https://github.com/openfoodfacts/openfoodfacts-dart/issues/608)) ([bfe0f11](https://github.com/openfoodfacts/openfoodfacts-dart/commit/bfe0f1171b6f3a2b12d6d93a6613ced1ed2543d5))
+* [#605](https://github.com/openfoodfacts/openfoodfacts-dart/issues/605) - taxonomy - support of packaging materials and shapes ([#610](https://github.com/openfoodfacts/openfoodfacts-dart/issues/610)) ([43f83a9](https://github.com/openfoodfacts/openfoodfacts-dart/commit/43f83a97749442548cf68f5b1e0791483367431f))
+* [#614](https://github.com/openfoodfacts/openfoodfacts-dart/issues/614) - taxonomy - support of packaging recycling ([#615](https://github.com/openfoodfacts/openfoodfacts-dart/issues/615)) ([716db4d](https://github.com/openfoodfacts/openfoodfacts-dart/commit/716db4d0cec3373de1250fe383c79b142f189b93))
+
+
+### Bug Fixes
+
+* [#223](https://github.com/openfoodfacts/openfoodfacts-dart/issues/223) - deprecated method getIngredientSpellingCorrection ([#627](https://github.com/openfoodfacts/openfoodfacts-dart/issues/627)) ([9da441f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/9da441f4e930dd74ebff3547ed6ea1858403cf68))
+* [#571](https://github.com/openfoodfacts/openfoodfacts-dart/issues/571) - last step of migration of enums to dart 2.17 ([#623](https://github.com/openfoodfacts/openfoodfacts-dart/issues/623)) ([cc1b388](https://github.com/openfoodfacts/openfoodfacts-dart/commit/cc1b388e726d8d2e3ea1883afdb5cdbadc7b66a8))
+* [#571](https://github.com/openfoodfacts/openfoodfacts-dart/issues/571) - new enum upgrades to dart 2.17 ([#621](https://github.com/openfoodfacts/openfoodfacts-dart/issues/621)) ([dc2dfc3](https://github.com/openfoodfacts/openfoodfacts-dart/commit/dc2dfc3ebc72ff99529335926fab17fd49e9390e))
+* [#609](https://github.com/openfoodfacts/openfoodfacts-dart/issues/609) - fix of failed getProduct integration test ([#616](https://github.com/openfoodfacts/openfoodfacts-dart/issues/616)) ([067752e](https://github.com/openfoodfacts/openfoodfacts-dart/commit/067752e5630413de25ad6b869205b58dcb1a8e1c))
+* [#625](https://github.com/openfoodfacts/openfoodfacts-dart/issues/625) - no user credentials in header if null ([#626](https://github.com/openfoodfacts/openfoodfacts-dart/issues/626)) ([8566fcf](https://github.com/openfoodfacts/openfoodfacts-dart/commit/8566fcfcdd2c67f0ee6914048dbf84f8ce50d67e))
+* integrationTest with packaging recycling ([#622](https://github.com/openfoodfacts/openfoodfacts-dart/issues/622)) ([98a3deb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/98a3debca5a05bbcda05d492753336f85c403930))
+
+## [1.27.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.27.0...v1.27.1) (2022-11-06)
+
+
+### Bug Fixes
+
+* Added response for incorrect email ([#604](https://github.com/openfoodfacts/openfoodfacts-dart/issues/604)) ([663a461](https://github.com/openfoodfacts/openfoodfacts-dart/commit/663a461d03881abc021d5efa5578edfa8786c4b7))
+
+## [1.27.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.26.2...v1.27.0) (2022-10-25)
+
+
+### Features
+
+* [#596](https://github.com/openfoodfacts/openfoodfacts-dart/issues/596) - implemented autocomplete for ORIGINS ([#597](https://github.com/openfoodfacts/openfoodfacts-dart/issues/597)) ([f39e398](https://github.com/openfoodfacts/openfoodfacts-dart/commit/f39e398a30e4f484230580fea053235957156e0d))
+* [#602](https://github.com/openfoodfacts/openfoodfacts-dart/issues/602) - added the "website" product field ([#603](https://github.com/openfoodfacts/openfoodfacts-dart/issues/603)) ([e9fe00a](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e9fe00ab947b91fe690705959ad38f951e020eb3))
+
+
+### Bug Fixes
+
+* [#507](https://github.com/openfoodfacts/openfoodfacts-dart/issues/507) - no more parameters in product URI ([#601](https://github.com/openfoodfacts/openfoodfacts-dart/issues/601)) ([313fd28](https://github.com/openfoodfacts/openfoodfacts-dart/commit/313fd28e39fdaeab5ed8dbaaa8eb4d49ed3f2908))
+* [#598](https://github.com/openfoodfacts/openfoodfacts-dart/issues/598) - deprecated 2 "environment" fields ([#600](https://github.com/openfoodfacts/openfoodfacts-dart/issues/600)) ([5cb3ea3](https://github.com/openfoodfacts/openfoodfacts-dart/commit/5cb3ea3eaec51db77f7ee8b1f7f1efc591baef7f))
+
+## [1.26.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.26.1...v1.26.2) (2022-10-23)
+
+
+### Bug Fixes
+
+* [#565](https://github.com/openfoodfacts/openfoodfacts-dart/issues/565) - added product field "nutrition data", better null value management ([#595](https://github.com/openfoodfacts/openfoodfacts-dart/issues/595)) ([6e2df43](https://github.com/openfoodfacts/openfoodfacts-dart/commit/6e2df43ecd626ba2c8e9f3fadf1b9f637bf82b34))
+* [#592](https://github.com/openfoodfacts/openfoodfacts-dart/issues/592) - KnowledgePanelTextElement - 'type' instead of 'text_type' ([#593](https://github.com/openfoodfacts/openfoodfacts-dart/issues/593)) ([10f51cc](https://github.com/openfoodfacts/openfoodfacts-dart/commit/10f51cc835dbb0b1a200ed7851ef228c26a05d97))
+* Sending credentials to robotff ([#590](https://github.com/openfoodfacts/openfoodfacts-dart/issues/590)) ([2b09926](https://github.com/openfoodfacts/openfoodfacts-dart/commit/2b099261197b7a0d0cf8e42ccea4d66fddf4a960))
+
+## [1.26.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.26.0...v1.26.1) (2022-10-16)
+
+
+### Bug Fixes
+
+* Also return [LoginStatus] when not logged in ([#585](https://github.com/openfoodfacts/openfoodfacts-dart/issues/585)) ([e97f877](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e97f877ade72389e2d3f5b4d8053710d0a5ea236))
+
+## [1.26.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.25.0...v1.26.0) (2022-10-13)
+
+
+### Features
+
+* [#566](https://github.com/openfoodfacts/openfoodfacts-dart/issues/566) - refactored Nutriments as Map with new Nutrient class ([#570](https://github.com/openfoodfacts/openfoodfacts-dart/issues/570)) ([d30108f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/d30108f6c73402773868b80333635ca18bfca1df))
+* [#573](https://github.com/openfoodfacts/openfoodfacts-dart/issues/573) - getRandomRobotoffQuestion with optional insight types ([#574](https://github.com/openfoodfacts/openfoodfacts-dart/issues/574)) ([c8692c1](https://github.com/openfoodfacts/openfoodfacts-dart/commit/c8692c1a9cee9daf6de89b96b12c2d80161d3c2d))
+* [#579](https://github.com/openfoodfacts/openfoodfacts-dart/issues/579) - new method to log in, that returns data about user ([#583](https://github.com/openfoodfacts/openfoodfacts-dart/issues/583)) ([7994f45](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7994f45d8936a6833dfa733c255851b9518d3f65))
+
+
+### Bug Fixes
+
+* [#565](https://github.com/openfoodfacts/openfoodfacts-dart/issues/565) - added 'nutrition_data' flag and energy fields ([#568](https://github.com/openfoodfacts/openfoodfacts-dart/issues/568)) ([bbb149f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/bbb149f26d16385e34e4e7dfee92c05947f9ca29))
+* ImageHelper - new methods with ImageSize parameters + minor fix ([#572](https://github.com/openfoodfacts/openfoodfacts-dart/issues/572)) ([24ec991](https://github.com/openfoodfacts/openfoodfacts-dart/commit/24ec991f29962af05aa1fe4313cd6648da7d8d84))
+* KP panel groups sometimes have null title ([#576](https://github.com/openfoodfacts/openfoodfacts-dart/issues/576)) ([bf66f28](https://github.com/openfoodfacts/openfoodfacts-dart/commit/bf66f285856546329353547422bd96aaa1ac163a))
+* make GitHub Projects more resilient ([#558](https://github.com/openfoodfacts/openfoodfacts-dart/issues/558)) ([fe319e0](https://github.com/openfoodfacts/openfoodfacts-dart/commit/fe319e09f1d5866685681d965b249d2a6d1ffc8d))
+
 ## [1.25.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.24.0...v1.25.0) (2022-09-23)
 
 

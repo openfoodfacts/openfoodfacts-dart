@@ -1,9 +1,6 @@
 import 'dart:math';
 
-import 'package:openfoodfacts/model/SignUpStatus.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
-import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';
@@ -60,10 +57,12 @@ void main() {
   });
 
   test('Login', () async {
-    bool response = await OpenFoodAPIClient.login(
+    final LoginStatus? status = await OpenFoodAPIClient.login2(
       TestConstants.PROD_USER,
     );
-    expect(response, true);
+    expect(status, isNotNull);
+    expect(status!.successful, isTrue);
+    expect(status.userId, TestConstants.PROD_USER.userId);
   });
 
   test('Reset password', () async {

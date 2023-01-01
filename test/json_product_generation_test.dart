@@ -1,10 +1,5 @@
 import 'dart:convert';
 
-import 'package:openfoodfacts/model/EcoscoreAdjustments.dart';
-import 'package:openfoodfacts/model/EcoscoreData.dart';
-import 'package:openfoodfacts/model/IngredientsAnalysisTags.dart';
-import 'package:openfoodfacts/model/OriginsOfIngredients.dart';
-import 'package:openfoodfacts/model/Packaging.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
@@ -14,12 +9,16 @@ void main() {
   test('Generate JSON - database example', () async {
     String barcode = '0030000010204';
     ProductQueryConfiguration configurations = ProductQueryConfiguration(
-        barcode,
-        language: OpenFoodFactsLanguage.ENGLISH,
-        fields: [ProductField.ALL]);
-    ProductResult result = await OpenFoodAPIClient.getProduct(configurations,
-        user: TestConstants.TEST_USER);
-    expect(result.status, 1);
+      barcode,
+      language: OpenFoodFactsLanguage.ENGLISH,
+      fields: [ProductField.ALL],
+      version: ProductQueryVersion.v3,
+    );
+    ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+      configurations,
+      user: TestConstants.TEST_USER,
+    );
+    expect(result.status, ProductResultV3.statusSuccess);
     Product product = result.product!;
     Map<String, dynamic> productMap = product.toJson();
     jsonEncode(productMap);
@@ -49,17 +48,17 @@ void main() {
     ];
     IngredientsAnalysisTags ingredientsAnalysisTags =
         IngredientsAnalysisTags(data);
-    assert(ingredientsAnalysisTags.vegetarianStatus ==
-        VegetarianStatus.VEGETARIAN);
-    assert(ingredientsAnalysisTags.veganStatus == VeganStatus.NON_VEGAN);
-    assert(ingredientsAnalysisTags.palmOilFreeStatus ==
+    expect(
+        ingredientsAnalysisTags.vegetarianStatus, VegetarianStatus.VEGETARIAN);
+    expect(ingredientsAnalysisTags.veganStatus, VeganStatus.NON_VEGAN);
+    expect(ingredientsAnalysisTags.palmOilFreeStatus,
         PalmOilFreeStatus.PALM_OIL_CONTENT_UNKNOWN);
 
     List<String> jsonStrings =
         IngredientsAnalysisTags.toJson(ingredientsAnalysisTags);
-    assert(jsonStrings[0] == 'en:non-vegan');
-    assert(jsonStrings[1] == 'en:vegetarian');
-    assert(jsonStrings[2] == 'en:palm-oil-content-unknown');
+    expect(jsonStrings[0], 'en:non-vegan');
+    expect(jsonStrings[1], 'en:vegetarian');
+    expect(jsonStrings[2], 'en:palm-oil-content-unknown');
   });
 }
 

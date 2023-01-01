@@ -1,5 +1,4 @@
-import 'package:openfoodfacts/model/KnowledgePanelElement.dart';
-import 'package:openfoodfacts/model/KnowledgePanels.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -71,7 +70,7 @@ void main() {
             'text_element': {
               'html':
                   '\n                    <p>Agribalyse category: \n                    <a href=\'https://www.ecoscore_data.agribalyse.fr/app/aliments/31032\'>Chocolate spread with hazelnuts</a>\n                    </p>\n                    <ul>\n                        <li>\n                            PEF environmental score: 0.74\n                            (the lower the score, the lower the impact)\n                        </li>\n                        <li>\n                            including impact on climate change: 9.87\n                            kg CO2 eq/kg of product\n                        </li>\n                    </ul>\n                    ',
-              'text_type': 'summary'
+              'type': 'summary'
             }
           },
           {
@@ -173,7 +172,7 @@ void main() {
             'text_element': {
               'html':
                   "\n                    <p>The carbon emission figure comes from ADEME's Agribalyse database, for the category: \n                    <a href='https://agribalyse.ademe.fr/app/aliments/31032'>Chocolate spread with hazelnuts</a>\n                    </p>\n                    ",
-              'text_type': 'summary',
+              'type': 'summary',
               'source_language': 'English',
               'source_lc': 'en',
               'source_text': 'Wikipedia',
@@ -365,7 +364,7 @@ void main() {
             'text_element': {
               'html':
                   '\n                    <p>[give more details here]</p> \n                    ',
-              'text_type': 'summary'
+              'type': 'summary'
             }
           }
         ],

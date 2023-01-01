@@ -1,7 +1,10 @@
 ![Pub Version](https://img.shields.io/pub/v/openfoodfacts?&colorB=green)
-[![likes](https://badges.bar/openfoodfacts/likes)](https://pub.dev/packages/openfoodfacts/score)
-[![popularity](https://badges.bar/openfoodfacts/popularity)](https://pub.dev/packages/openfoodfacts/score)
-[![pub points](https://badges.bar/openfoodfacts/pub%20points)](https://pub.dev/packages/openfoodfacts/score)
+[![Run sdk tests](https://github.com/openfoodfacts/openfoodfacts-dart/actions/workflows/test-sdk.yml/badge.svg)](https://github.com/openfoodfacts/openfoodfacts-dart/actions/workflows/test-sdk.yml)
+[![likes](https://img.shields.io/pub/likes/openfoodfacts?logo=dart)](https://pub.dev/packages/openfoodfacts/score)
+[![popularity](https://img.shields.io/pub/popularity/openfoodfacts?logo=dart)](https://pub.dev/packages/openfoodfacts/score)
+[![pub points](https://img.shields.io/pub/points/openfoodfacts?logo=dart)](https://pub.dev/packages/openfoodfacts/score)
+
+
 
 # Open Food Facts - Dart
 Dart package for the Open Food Facts API. Easily access to more than 1.9 million products from all around the world.
@@ -15,6 +18,20 @@ You can find automated code documentation here:  [Documentation](https://openfoo
 - You can look for information about products, including many useful computed values. 
 - If you can't get the information on a specific product, you can get your user to send photos and data, that will then be processed by Open Food Facts AI and contributors to get the computed result you want to show them.
 - You can also implement the complete flow so that they get immediately the result with some effort on their side.
+
+## Main fixes to apply when dealing with 2.x.x breaking changes.
+
+* Now the only entry point is `import 'package:openfoodfacts/openfoodfacts.dart';`
+  * replace all your instances of `import 'package:openfoodfacts/...';` with a single `import 'package:openfoodfacts/openfoodfacts.dart';` 
+* If you used `State` from `product_state.dart`, you have to rename it to `ProductState`
+* If you used `Level` from `nutrient_levels.dart`, you have to rename it to `NutrientLevel`
+* Removed deprecated classes:
+  * `Page`
+  * `ProductListQueryConfiguration`
+  * `ToBeCompletedConfiguration`
+* Removed deprecated fields and methods in `Nutriments`
+  * _all_ the single nutrient value _fields_ were removed - use `getValue` and `setValue` instead
+  * instead of `getUnit` use `nutrient.typicalUnit`
 
 ## Contributing 
 
@@ -73,7 +90,8 @@ You can check the terms of use here : [Terms of use](https://world.openfoodfacts
 - [x] Get the OCR of the ingredients photo (for validation purposes)
 
 ## Roadmap
-List of new APIs to implement: https://github.com/openfoodfacts/api-documentation/issues
+- List of new APIs to implement: https://github.com/openfoodfacts/api-documentation/issues
+- New OpenAPI documentation: https://openfoodfacts.github.io/openfoodfacts-server/reference/api/
 
 ### READ
 - [ ] ???

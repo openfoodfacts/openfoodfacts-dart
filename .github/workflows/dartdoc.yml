@@ -1,0 +1,27 @@
+name: GitHub Pages Deploy Action
+on:
+    push:
+        branches:
+           - "master"
+jobs:
+    deploy-pages:
+        name: Deploy to GitHub Pages
+        runs-on: ubuntu-latest
+        permissions:
+          contents: write
+        if: github.repository_owner  == 'openfoodfacts'
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+
+        - name: Setup Dart
+          uses: dart-lang/setup-dart@v1
+
+        - name: Run Dartdoc
+          run: dart doc .
+
+        - name: Deploy API documentation to Github Pages
+          uses: JamesIves/github-pages-deploy-action@v4.4.1
+          with:
+            BRANCH: gh-pages
+            FOLDER: doc/api/

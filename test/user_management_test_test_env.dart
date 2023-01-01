@@ -1,8 +1,6 @@
 import 'dart:math';
 
-import 'package:openfoodfacts/model/SignUpStatus.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -10,6 +8,7 @@ void main() {
 
   group('Create user', () {
     test('Create user', () async {
+      late String userId;
       late String email;
       late String name;
       String password = "ThisIsThePassword";
@@ -20,13 +19,14 @@ void main() {
 
       while (shouldRetry && counter < max_tries) {
         counter++;
-        name = _generateRandomString(10);
-        email = "$name@gmail.com";
+        userId = _generateRandomString(10);
+        name = 'M. $userId';
+        email = "$userId@gmail.com";
 
         print(name);
 
         SignUpStatus response = await OpenFoodAPIClient.register(
-          user: User(userId: name, password: password),
+          user: User(userId: userId, password: password),
           name: name,
           email: email,
           queryType: user_test_queryType,
@@ -38,12 +38,25 @@ void main() {
         }
       }
 
-      bool response = await OpenFoodAPIClient.login(
-        User(userId: name, password: password),
+      final LoginStatus? status = await OpenFoodAPIClient.login2(
+        User(userId: userId, password: password),
         queryType: user_test_queryType,
       );
-      expect(response, true);
+      expect(status, isNotNull);
+      expect(status!.successful, isTrue);
+      expect(status.userId, userId);
+      expect(status.userName, name);
+      expect(status.userEmail, email);
       print('Creating a account and logging in worked in $counter trie(s)');
+    });
+
+    test('Login with invalid credentials', () async {
+      final LoginStatus? status = await OpenFoodAPIClient.login2(
+        User(userId: '123', password: '123'),
+        queryType: user_test_queryType,
+      );
+      expect(status?.successful, false);
+      expect(status?.statusVerbose, 'user not signed-in');
     });
   });
 }
