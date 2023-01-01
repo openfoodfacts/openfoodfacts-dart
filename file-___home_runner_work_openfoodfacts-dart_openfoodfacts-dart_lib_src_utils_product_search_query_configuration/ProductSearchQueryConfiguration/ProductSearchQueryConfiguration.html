@@ -54,7 +54,7 @@
 <li><span class="parameter" id="-param-country"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a>?</span> <span class="parameter-name">country</span>, </span></li>
 <li><span class="parameter" id="-param-fields"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>&gt;</span>?</span> <span class="parameter-name">fields</span>, </span></li>
 <li><span class="parameter" id="-param-parametersList"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_parameter/Parameter-class.html">Parameter</a></span>&gt;</span></span> <span class="parameter-name">parametersList</span>, </span></li>
-<li><span class="parameter" id="-param-version"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryVersion-class.html">ProductQueryVersion</a></span> <span class="parameter-name">version</span> = <span class="default-value">ProductQueryVersion.v3</span>}</span></li>
+<li><span class="parameter" id="-param-version"><span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryVersion-class.html">ProductQueryVersion</a></span> <span class="parameter-name">version</span>}</span></li>
 </ol>)
     </section>
 
@@ -74,7 +74,7 @@ parameter's description.</p>
   final OpenFoodFactsCountry? country,
   final List&lt;ProductField&gt;? fields,
   required List&lt;Parameter&gt; parametersList,
-  this.version = ProductQueryVersion.v3,
+  required final this.version,
 }) : super(
         language: language,
         languages: languages,

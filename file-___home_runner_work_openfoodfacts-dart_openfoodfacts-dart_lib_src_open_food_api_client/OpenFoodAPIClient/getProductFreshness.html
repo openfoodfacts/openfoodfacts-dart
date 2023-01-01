@@ -53,6 +53,7 @@
 
 <span class="returntype"><a href="https://api.dart.dev/stable/2.18.6/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_freshness/ProductFreshness-class.html">ProductFreshness</a></span>&gt;</span></span>&gt;</span></span>
 <span class="name ">getProductFreshness</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getProductFreshness-param-barcodes">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">barcodes</span>, </span></li>
+<li><span class="parameter" id="getProductFreshness-param-version"><span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryVersion-class.html">ProductQueryVersion</a></span> <span class="parameter-name">version</span>, </span></li>
 <li><span class="parameter" id="getProductFreshness-param-user"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span></li>
 <li><span class="parameter" id="getProductFreshness-param-language"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a>?</span> <span class="parameter-name">language</span>, </span></li>
 <li><span class="parameter" id="getProductFreshness-param-country"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a>?</span> <span class="parameter-name">country</span>, </span></li>
@@ -73,6 +74,7 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static Future&lt;Map&lt;String, ProductFreshness&gt;&gt; getProductFreshness({
   required final List&lt;String&gt; barcodes,
+  required final ProductQueryVersion version,
   final User? user,
   final OpenFoodFactsLanguage? language,
   final OpenFoodFactsCountry? country,
@@ -92,6 +94,7 @@
         ProductField.LAST_MODIFIED,
         ProductField.STATES_TAGS,
       ],
+      version: version,
     ),
     queryType: queryType,
   );
