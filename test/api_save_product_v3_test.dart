@@ -9,24 +9,31 @@ void main() {
 
   group('$OpenFoodAPIClient save product V3', () {
     const String barcode = '12345678';
+    const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+    const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
 
     test('save packagings with unknown recycling', () async {
       // Here we put an unknown recycling label, and we expect related warnings.
       const String unknownRecycling = 'recyKKlage';
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+      const int numberOfUnits = 12;
+      const String quantityPerUnit = '50cl';
+      const double weightMeasured = 250;
       final List<ProductPackaging> inputPackagings = [
         ProductPackaging()
           ..shape = (LocalizedTag()..lcName = 'bouteille')
           ..material = (LocalizedTag()..lcName = 'verre')
           ..recycling = (LocalizedTag()..lcName = unknownRecycling)
-          ..numberOfUnits = 12,
+          ..numberOfUnits = numberOfUnits
+          ..quantityPerUnit = quantityPerUnit
+          ..weightMeasured = weightMeasured,
       ];
       final ProductResultV3 status =
           await OpenFoodAPIClient.temporarySaveProductV3(
         TestConstants.TEST_USER,
         barcode,
         queryType: QueryType.TEST,
-        country: OpenFoodFactsCountry.FRANCE,
+        country: country,
         language: language,
         packagings: inputPackagings,
       );
@@ -36,6 +43,17 @@ void main() {
       expect(status.result, isNull); // result is null for UPDATE queries
       expect(status.barcode, barcode);
       expect(status.product, isNotNull);
+
+      expect(status.product!.packagings, isNotNull);
+      final List<ProductPackaging> packagings = status.product!.packagings!;
+      expect(packagings, hasLength(1));
+      final ProductPackaging packaging = packagings.first;
+      expect(packaging.shape, isNotNull);
+      expect(packaging.material, isNotNull);
+      expect(packaging.recycling, isNotNull);
+      expect(packaging.numberOfUnits, numberOfUnits);
+      expect(packaging.quantityPerUnit, quantityPerUnit);
+      expect(packaging.weightMeasured, weightMeasured);
 
       expect(status.warnings, isNotEmpty);
       expect(status.warnings, hasLength(1));
@@ -52,6 +70,51 @@ void main() {
       expect(answer.field, isNotNull);
       expect(answer.field!.id, 'recycling');
       expect(answer.field!.value, '${language.offTag}:$unknownRecycling');
+    });
+
+    test('save packagings_complete', () async {
+      final List<bool> values = [false, true, false];
+      for (final bool value in values) {
+        final ProductResultV3 writeStatus =
+            await OpenFoodAPIClient.temporarySaveProductV3(
+          TestConstants.TEST_USER,
+          barcode,
+          queryType: QueryType.TEST,
+          country: country,
+          language: language,
+          packagingsComplete: value,
+        );
+
+        expect(writeStatus.status, ProductResultV3.statusSuccess);
+        expect(writeStatus.errors, isEmpty);
+        expect(writeStatus.result, isNull); // result is null for UPDATE queries
+        expect(writeStatus.barcode, barcode);
+        expect(writeStatus.product, isNotNull);
+        expect(writeStatus.product!.packagingsComplete, value);
+
+        // checking again...
+        final ProductResultV3 readStatus = await OpenFoodAPIClient.getProductV3(
+          ProductQueryConfiguration(
+            barcode,
+            language: language,
+            country: country,
+            version: ProductQueryVersion.v3,
+            fields: [
+              ProductField.BARCODE,
+              ProductField.PACKAGINGS_COMPLETE,
+            ],
+          ),
+          user: TestConstants.TEST_USER,
+        );
+
+        expect(readStatus.status, ProductResultV3.statusSuccess);
+        expect(readStatus.errors, isEmpty);
+        expect(readStatus.result, isNotNull);
+        expect(readStatus.result!.id, ProductResultV3.resultProductFound);
+        expect(readStatus.barcode, barcode);
+        expect(readStatus.product, isNotNull);
+        expect(readStatus.product!.packagingsComplete, value);
+      }
     });
   },
       timeout: Timeout(
