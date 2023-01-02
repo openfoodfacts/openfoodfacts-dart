@@ -71,7 +71,7 @@ Code examples for the following tasks:
 #### Reading data
 
 - [Querying a product](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getProductV3.html)
-- [Recommended Daily Intakes](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_recommended_daily_intake/RecommendedDailyIntake-class.html)
+- [Recommended Daily Intakes](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/RecommendedDailyIntake/getRecommendedDailyIntakes.html)
 - Search for products
   - [By name](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/searchProducts.html)
   - [By brand, stores, ingredients,](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/searchProducts.html) [All filter](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_tag_filter/TagFilterType.html)

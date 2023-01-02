@@ -26,7 +26,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
   /// The barcode from the desired product
   final String barcode;
 
-  /// The API version to use. Leave default unless a special version is required
+  /// The API version
   final ProductQueryVersion version;
 
   /// See [AbstractQueryConfiguration.languages] for
@@ -54,7 +54,6 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
 
   /// Performs the query, do not use directly please use
   /// [OpenFoodAPIClient.getProductV3] instead
-  @override
   Future<Response> getResponse(
     final User? user,
     final QueryType? queryType,

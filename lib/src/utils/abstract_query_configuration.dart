@@ -36,8 +36,10 @@ abstract class AbstractQueryConfiguration {
   /// The country for this query, if any.
   final OpenFoodFactsCountry? country;
 
-  /// Highly recommended, with the [ProductField] list you can specify which data
-  /// the result should contain. This results in faster response times and less
+  /// Defines which [ProductField]s are retrieved. All not mentioned fields
+  /// will be null.
+  ///
+  /// Highly recommended, this results in faster response times and less
   /// data usage.
   ///
   /// Not specifying anything returns all available data.

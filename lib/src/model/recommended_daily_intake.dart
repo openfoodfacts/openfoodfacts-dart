@@ -1,20 +1,9 @@
 import '../utils/recommended_daily_intake_helper.dart';
 import '../utils/unit_helper.dart';
 
-/// Returns the by the EU recommended intake amount of
-/// - energy
-/// - fat
-/// - protein
-/// - vitamins
-/// - mineral
-///
-/// ```dart
-///   IntakeRecommendation vitB12 =
-///       RecommendedDailyIntake.getRecommendedDailyIntakes().vitaminB12;
-///   print(vitB12.value); // 2.5
-///   print(vitB12.unit); // Micro g
-/// ```
-///
+// TODO(x): Refactor to Nutrients
+
+/// Recommended daily intake amounts
 class RecommendedDailyIntake {
   RecommendedDailyIntake(
       this.energyKcal,
@@ -135,6 +124,15 @@ class RecommendedDailyIntake {
     return await json.decode(jsonString);
   }*/
 
+  /// Returns the by the EU recommended intake amount of nutrients
+  ///
+  /// ```dart
+  ///   IntakeRecommendation vitB12 =
+  ///       RecommendedDailyIntake.getRecommendedDailyIntakes().vitaminB12;
+  ///   print(vitB12.value); // 2.5
+  ///   print(vitB12.unit); // Micro g
+  /// ```
+  ///
   static RecommendedDailyIntake getRecommendedDailyIntakes() {
     //return RecommendedDailyIntake.fromJson(await _loadRecommendationAsset());
     return RecommendedDailyIntake.fromJson(

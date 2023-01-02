@@ -2,17 +2,60 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:openfoodfacts/openfoodfacts.dart';
 
 import 'interface/json_object.dart';
+import 'model/insight.dart';
+import 'model/login_status.dart';
+import 'model/ocr_ingredients_result.dart';
+import 'model/ocr_packaging_result.dart';
+import 'model/ordered_nutrients.dart';
+import 'model/parameter/barcode_parameter.dart';
+import 'model/product.dart';
+import 'model/product_freshness.dart';
+import 'model/product_image.dart';
+import 'model/product_packaging.dart';
+import 'model/product_result.dart';
+import 'model/product_result_v3.dart';
+import 'model/robotoff_question.dart';
+import 'model/search_result.dart';
+import 'model/send_image.dart';
+import 'model/sign_up_status.dart';
+import 'model/spelling_corrections.dart';
+import 'model/status.dart';
+import 'model/taxonomy_additive.dart';
+import 'model/taxonomy_allergen.dart';
+import 'model/taxonomy_category.dart';
+import 'model/taxonomy_country.dart';
+import 'model/taxonomy_ingredient.dart';
+import 'model/taxonomy_label.dart';
+import 'model/taxonomy_language.dart';
+import 'model/taxonomy_nova.dart';
+import 'model/taxonomy_origin.dart';
+import 'model/taxonomy_packaging.dart';
+import 'model/taxonomy_packaging_material.dart';
+import 'model/taxonomy_packaging_recycling.dart';
+import 'model/taxonomy_packaging_shape.dart';
+import 'model/user.dart';
+import 'utils/abstract_query_configuration.dart';
+import 'utils/country_helper.dart';
+import 'utils/http_helper.dart';
+import 'utils/image_helper.dart';
+import 'utils/language_helper.dart';
+import 'utils/ocr_field.dart';
+import 'utils/product_fields.dart';
+import 'utils/product_helper.dart';
+import 'utils/product_query_configurations.dart';
+import 'utils/product_search_query_configuration.dart';
+import 'utils/query_type.dart';
+import 'utils/tag_type.dart';
 import 'utils/taxonomy_query_configuration.dart';
+import 'utils/uri_helper.dart';
 
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
   OpenFoodAPIClient._();
 
   /// Add the given product to the database.
-  /// Returns a [Status] as result.
   ///
   /// Please read the language mechanics explanation if you intend to display
   /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
@@ -84,7 +127,7 @@ class OpenFoodAPIClient {
     return Status.fromApiResponse(response.body);
   }
 
-  /// Temporary: saves product packaging's V3 style.
+  /// Temporary: saves product packagings V3 style.
   ///
   /// For the moment that's the only field supported in WRITE by API V3.
   /// Long term target is of course more something like [saveProduct].
@@ -234,8 +277,7 @@ class OpenFoodAPIClient {
     return result;
   }
 
-  /// Returns the [ProductResultV3] for a given barcode.
-  /// The ProductResult does not contain a product, if the product is not available.
+  /// The [ProductResultV3] does not contain a product, if the product is not available.
   /// ingredients, images and product name will be prepared for the given language.
   ///
   /// Example:
@@ -886,9 +928,8 @@ class OpenFoodAPIClient {
   }
 
   /// Extract the ingredients from image with the given parameters.
-  /// The ingredient's language should be given (ingredients_fr, ingredients_de, ingredients_en)
-  /// Returns the ingredients using OCR.
-  /// By default, the query will use the Google Cloud Vision.
+  /// The ingredients' language should be given (ingredients_fr, ingredients_de, ingredients_en)
+  ///
   /// Uses an already uploaded ingredients image.
   ///
   /// Please only use if you have before uploaded a new ingredients image
@@ -1210,16 +1251,14 @@ class OpenFoodAPIClient {
   ///   print(orderedNutrients.nutrients[10].name); // Vitamin A
   /// ```
   static Future<OrderedNutrients> getOrderedNutrients({
-    required final OpenFoodFactsCountry country,
-    @Deprecated('Please use [country] instead, feel free to use [CountryHelper.fromJson(cc)] to get the OpenFoodFactsCountry from a country code')
-        final String? cc,
+    required final String? cc,
     required final OpenFoodFactsLanguage language,
     final QueryType? queryType,
   }) async =>
       OrderedNutrients.fromJson(
         jsonDecode(
           await getOrderedNutrientsJsonString(
-            country: cc == null ? country : CountryHelper.fromJson(cc)!,
+            country: CountryHelper.fromJson(cc)!,
             language: language,
           ),
         ),
