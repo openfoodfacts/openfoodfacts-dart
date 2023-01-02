@@ -80,6 +80,7 @@ class _EANValidator extends _AbstractBarcodeValidator {
     return true;
   }
 
+  @override
   int _weightedValue(int charValue, int leftPos, int rightPos) {
     int weight = _POSITION_WEIGHT[rightPos % 2];
     return charValue * weight;
