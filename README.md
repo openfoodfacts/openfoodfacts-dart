@@ -70,66 +70,66 @@ Code examples for the following tasks:
 
 #### Reading data
 
-- [Querying a product](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getProductV3.html)
+- [Querying a product](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getProductV3.html)
 - [Recommended Daily Intakes](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/RecommendedDailyIntake/getRecommendedDailyIntakes.html)
 - Search for products
-  - [By name](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/searchProducts.html)
-  - [By brand, stores, ingredients,](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/searchProducts.html) [All filter](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_tag_filter/TagFilterType.html)
-  - [By category](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/searchProducts.html) ([Pnns2](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html))
-  - [By vegan, vegetarian or/and palm oil status](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/searchProducts.html)
+  - [By name](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html)
+  - [By brand, stores, ingredients,](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html) [All filter](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_tag_filter/TagFilterType.html)
+  - [By category](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html) ([Pnns2](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html))
+  - [By vegan, vegetarian or/and palm oil status](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html)
     <!-- TODO: Add detailed description for Personalized search -->
-- [Autocompletion for user inputs](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getAutocompletedSuggestions.html), by giving suggestions for (Labels, categories, ingredients, additives, traces and other [TagType's](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_tag_type/TagType.html))
-- [Get the nutrient hierarchy specific to a country, localized](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getOrderedNutrients.html)
-- [Get product freshness](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getProductFreshness.html)
+- [Autocompletion for user inputs](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getAutocompletedSuggestions.html), by giving suggestions for (Labels, categories, ingredients, additives, traces and other [TagType's](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_tag_type/TagType.html))
+- [Get the nutrient hierarchy specific to a country, localized](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getOrderedNutrients.html)
+- [Get product freshness](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getProductFreshness.html)
 - [Notes on advanced languages mechanics](https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#notes-on-languages-mechanics)
 
 #### Writing data
 
 - [Managing user accounts guide (Read this first)](#handle-open-food-facts-accounts)
-  - [Let your users login](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/login2.html)
-  - [Let your users register on Open Food Facts](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/register.html)
-  - [Reset user password](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/resetPassword.html)
+  - [Let your users login](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/login2.html)
+  - [Let your users register on Open Food Facts](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/register.html)
+  - [Reset user password](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/resetPassword.html)
   - [Get contribution data about a user](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration-class.html)
-- [Save product to Open Food Facts (edit or add)](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/saveProduct.html)
+- [Save product to Open Food Facts (edit or add)](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/saveProduct.html)
 - Images
-  - [Send images](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/addProductImage.html)
-  - [rotate](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/setProductImageAngle.html)
-  - [crop](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/setProductImageCrop.html)
+  - [Send images](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/addProductImage.html)
+  - [rotate](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/setProductImageAngle.html)
+  - [crop](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/setProductImageCrop.html)
   - select, unselect with language awareness
-  - [extract Ingredients](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/extractIngredients.html)
-  - [extract Packaging](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/extractPackaging.html)
+  - [extract Ingredients](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/extractIngredients.html)
+  - [extract Packaging](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/extractPackaging.html)
 
 #### Robotoff support
 
 [Robotoff](https://openfoodfacts.github.io/robotoff/) it the Open Food Facts AI which analyze every new pictures to extract new data.
 
 - get Insights
-  - [random](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getRandomInsight.html)
-  - [for a product](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getProductInsights.html)
+  - [random](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getRandomInsight.html)
+  - [for a product](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getProductInsights.html)
 - get Questions to confirm
-  - [random](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getRandomRobotoffQuestion.html)
-  - [for a product](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getRobotoffQuestionsForProduct.html)
-- [post Insight Annotation](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/postInsightAnnotation.html)
+  - [random](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getRandomRobotoffQuestion.html)
+  - [for a product](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getRobotoffQuestionsForProduct.html)
+- [post Insight Annotation](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/postInsightAnnotation.html)
 
 #### Folksonomy Engine
 
 [Folksonomy](https://wiki.openfoodfacts.org/Folksonomy_Engine) is adding several kinds of new individual data properties to Open Food Facts or Open Products Facts.
 
-- [get Taxonomy Packagings](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyPackagings.html)
-- [get Taxonomy Packaging Shapes](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyPackagingShapes.html)
-- [get Taxonomy Packaging Materials](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyPackagingMaterials.html)
-- [get Taxonomy Packaging Recycling](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyPackagingRecycling.html)
-- [get Taxonomy Nova](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyNova.html)
-- [get Taxonomy Categories](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyCategories.html)
-- [get Taxonomy Additives](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyAdditives.html)
-- [get Taxonomy Allergens](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyAllergens.html)
-- [get Taxonomy Countries](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyCountries.html)
-- [get Taxonomy Ingredients](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyLabels.html)
-- [get Taxonomy Labels](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyLabels.html)
-- [get Taxonomy Languages](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyLanguages.html)
-- [get Taxonomy Origins](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyOrigins.html)
-- [get general Taxonomy](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomy.html)
-- [get taxonomy translation uri](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyTranslationUri.html)
+- [get Taxonomy Packagings](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyPackagings.html)
+- [get Taxonomy Packaging Shapes](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyPackagingShapes.html)
+- [get Taxonomy Packaging Materials](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyPackagingMaterials.html)
+- [get Taxonomy Packaging Recycling](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyPackagingRecycling.html)
+- [get Taxonomy Nova](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyNova.html)
+- [get Taxonomy Categories](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyCategories.html)
+- [get Taxonomy Additives](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyAdditives.html)
+- [get Taxonomy Allergens](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyAllergens.html)
+- [get Taxonomy Countries](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyCountries.html)
+- [get Taxonomy Ingredients](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyLabels.html)
+- [get Taxonomy Labels](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyLabels.html)
+- [get Taxonomy Languages](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyLanguages.html)
+- [get Taxonomy Origins](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyOrigins.html)
+- [get general Taxonomy](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomy.html)
+- [get taxonomy translation uri](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyTranslationUri.html)
 
 ## Contributing data
 
@@ -155,7 +155,7 @@ For the user to be taken into account you have mount a global user at one point 
 
 Regardless if you are using a global app or accounts per user. After mounting this, the user will be added to queries where the user can be attributed.
 
-Some methods in [OpenFoodAPIClient](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html) require to pass a `User`, there you can access the before mounted user with:
+Some methods in [OpenFoodAPIClient](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient-class.html) require to pass a `User`, there you can access the before mounted user with:
 
 ```dart
  OpenFoodAPIClient.thisNeedsAnUser(
@@ -166,9 +166,9 @@ Some methods in [OpenFoodAPIClient](https://openfoodfacts.github.io/openfoodfact
 
 Further examples:
 
-- [Create users](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/register.html)
-- [Check if the user credentials are correct](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/login2.html)
-- [Request a password reset email](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/resetPassword.html)
+- [Create users](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/register.html)
+- [Check if the user credentials are correct](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/login2.html)
+- [Request a password reset email](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/resetPassword.html)
 
 ### If your users do not expect a specific result immediately (eg. Inventory apps)
 
