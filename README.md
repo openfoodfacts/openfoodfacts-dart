@@ -62,7 +62,7 @@ OpenFoodAPIConfiguration.globalLanguages = <OpenFoodFactsLanguage>[
 OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
 ```
 
-All possible configurations can be found [here](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_open_food_api_configuration/OpenFoodAPIConfiguration-class.html).
+All possible configurations can be found [here](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIConfiguration-class.html).
 
 ### Features
 
@@ -74,11 +74,11 @@ Code examples for the following tasks:
 - [Recommended Daily Intakes](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/RecommendedDailyIntake/getRecommendedDailyIntakes.html)
 - Search for products
   - [By name](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html)
-  - [By brand, stores, ingredients,](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html) [All filter](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_tag_filter/TagFilterType.html)
-  - [By category](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html) ([Pnns2](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html))
+  - [By brand, stores, ingredients,](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html) [All filter](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/TagFilterType.html)
+  - [By category](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html) ([Pnns2](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/PnnsGroup2.html))
   - [By vegan, vegetarian or/and palm oil status](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html)
     <!-- TODO: Add detailed description for Personalized search -->
-- [Autocompletion for user inputs](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getAutocompletedSuggestions.html), by giving suggestions for (Labels, categories, ingredients, additives, traces and other [TagType's](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_tag_type/TagType.html))
+- [Autocompletion for user inputs](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getAutocompletedSuggestions.html), by giving suggestions for (Labels, categories, ingredients, additives, traces and other [TagType's](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/TagType.html))
 - [Get the nutrient hierarchy specific to a country, localized](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getOrderedNutrients.html)
 - [Get product freshness](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getProductFreshness.html)
 - [Notes on advanced languages mechanics](https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#notes-on-languages-mechanics)
@@ -89,7 +89,7 @@ Code examples for the following tasks:
   - [Let your users login](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/login2.html)
   - [Let your users register on Open Food Facts](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/register.html)
   - [Reset user password](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/resetPassword.html)
-  - [Get contribution data about a user](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration-class.html)
+  - [Get contribution data about a user](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/UserProductSearchQueryConfiguration-class.html)
 - [Save product to Open Food Facts (edit or add)](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/saveProduct.html)
 - Images
   - [Send images](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/addProductImage.html)
@@ -141,7 +141,7 @@ There are multiple ways to handle user accounts:
 1. Let your users login / create Open Food Facts user accounts (Recommended)
 2. Create a global user for your app through which all requests run
 
-Currently there is no OAuth workflow, therefor a user is just a [User](https://openfoodfacts.github.io/openfoodfacts-dart/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html) object in this package.
+Currently there is no OAuth workflow, therefor a user is just a [User](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/User-class.html) object in this package.
 So you need to get the username as well as the password from the users and store it somewhere save. For Flutter apps we recommend using the [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage) package
 
 For the user to be taken into account you have mount a global user at one point in your app lifecycle:
@@ -190,7 +190,7 @@ You can check the terms of use here : [Terms of use](https://world.openfoodfacts
 ## Useful recourses
 
 - List of new APIs to implement: <https://github.com/openfoodfacts/api-documentation/issues>
-- New OpenAPI documentation: <https://openfoodfacts.github.io/openfoodfacts-server/reference/api/>
+- New OpenAPI documentation: <https://pub.dev/documentation/openfoodfacts/latest/index.html>
 - Most of our operations are coordinated through our Slack which you can join here : [Open Food Facts Slack](https://openfoodfacts.slack.com).
 
 ## Contribute to the package
