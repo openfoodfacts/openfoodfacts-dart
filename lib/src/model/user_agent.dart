@@ -15,6 +15,7 @@ class UserAgent extends JsonObject {
     this.comment,
   });
 
+  @override
   Map<String, dynamic> toJson() => {
         'name': name,
         'version': version,

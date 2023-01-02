@@ -44,5 +44,6 @@ class RobotoffQuestion extends JsonObject {
   factory RobotoffQuestion.fromJson(Map<String, dynamic> json) =>
       _$RobotoffQuestionFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$RobotoffQuestionToJson(this);
 }
