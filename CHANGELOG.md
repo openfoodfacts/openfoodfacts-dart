@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.0.0...v2.0.1) (2023-01-03)
+
+
+### Bug Fixes
+
+* 643 - updated the copyright year in the LICENSE ([#672](https://github.com/openfoodfacts/openfoodfacts-dart/issues/672)) ([a34ab62](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a34ab62be4df426baff858f091d30ae8f0f3c789))
+
 ## [2.0.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.30.1...v2.0.0) (2023-01-01)
 
 
