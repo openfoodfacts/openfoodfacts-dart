@@ -1,5 +1,12 @@
 import 'package:http/http.dart';
-import 'package:openfoodfacts/openfoodfacts.dart';
+import 'abstract_query_configuration.dart';
+import 'country_helper.dart';
+import 'http_helper.dart';
+import 'language_helper.dart';
+import 'product_fields.dart';
+import 'query_type.dart';
+import 'uri_helper.dart';
+import '../model/user.dart';
 
 /// Api version for product queries
 class ProductQueryVersion {
@@ -48,12 +55,10 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
   /// If the provided [ProductQueryVersion] matches the API V3 requirements
   bool matchesV3() => version.matchesV3();
 
-  /// Returns the relative path for the json data on the server
   @override
   String getUriPath() => version.getPath(barcode);
 
-  /// Performs the query, do not use directly please use
-  /// [OpenFoodAPIClient.getProductV3] instead
+  @override
   Future<Response> getResponse(
     final User? user,
     final QueryType? queryType,

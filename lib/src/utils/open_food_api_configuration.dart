@@ -5,6 +5,7 @@ import 'language_helper.dart';
 import 'query_type.dart';
 
 /// Allows to configure the behavior of the package.
+///
 /// All of the values are static, they only need to be set once at the
 /// beginning of the lifecycle of the app. They can be changed at any
 /// point later. Some methods allow to pass configurations which can be

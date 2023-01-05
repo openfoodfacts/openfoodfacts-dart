@@ -145,6 +145,8 @@ abstract class AbstractQueryConfiguration {
   @protected
   String getUriPath();
 
+  /// Performs the query, do not use directly please use
+  /// dedicates methods in [OpenFoodAPIClient]
   Future<Response> getResponse(
     final User? user,
     final QueryType? queryType,
