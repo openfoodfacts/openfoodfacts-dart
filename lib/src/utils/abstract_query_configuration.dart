@@ -36,13 +36,13 @@ abstract class AbstractQueryConfiguration {
   /// The country for this query, if any.
   final OpenFoodFactsCountry? country;
 
-  /// Defines which [ProductField]s are retrieved. All not mentioned fields
-  /// will be null.
+  /// Defines which [ProductField]s are retrieved.
   ///
-  /// Highly recommended, this results in faster response times and less
-  /// data usage.
-  ///
-  /// Not specifying anything returns all available data.
+  /// All not mentioned fields will be null in [Product].
+  /// Not specifying anything returns all available data (except
+  /// Knowledge Panels).
+  /// It's highly recommended to populate this field. This results in faster
+  /// response times and less data usage.
   ///
   /// ```dart
   ///    ProductQueryConfiguration config = ProductQueryConfiguration(

@@ -28,7 +28,7 @@ class ProductQueryVersion {
   bool matchesV3() => version >= 3;
 }
 
-/// Query Configuration for single product
+/// Query Configuration for single barcode
 class ProductQueryConfiguration extends AbstractQueryConfiguration {
   /// The barcode from the desired product
   final String barcode;
