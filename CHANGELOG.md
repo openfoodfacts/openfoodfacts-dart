@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.1.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.0.1...v2.1.0) (2023-01-05)
+
+
+### Features
+
+* Start new documentation ([#663](https://github.com/openfoodfacts/openfoodfacts-dart/issues/663)) ([7d12409](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7d124091488698cc975d26550869f14604d9bbfb))
+
+
+### Bug Fixes
+
+* docs for user data query ([#680](https://github.com/openfoodfacts/openfoodfacts-dart/issues/680)) ([fcb0fc7](https://github.com/openfoodfacts/openfoodfacts-dart/commit/fcb0fc7156aa149cc6b6183e2528c6e602ab36e0))
+* fixed lint error ([#674](https://github.com/openfoodfacts/openfoodfacts-dart/issues/674)) ([c947420](https://github.com/openfoodfacts/openfoodfacts-dart/commit/c94742001d627823afc2c841697f4d1d46540522))
+
 ## [2.0.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.0.0...v2.0.1) (2023-01-03)
 
 
