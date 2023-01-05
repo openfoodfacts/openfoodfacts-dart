@@ -503,7 +503,7 @@ class OpenFoodAPIClient {
   ///
   /// Where type is:
   ///   - [TagFilterType.CREATOR]
-  ///   - [TagFilterType.EDITORS]
+  ///   - [TagFilterType.INFORMERS]
   ///   - [TagFilterType.PHOTOGRAPHERS]
   ///
   static Future<SearchResult> searchProducts(
