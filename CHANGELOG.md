@@ -5,7 +5,7 @@
 
 ### Features
 
-* Start new documentation ([#663](https://github.com/openfoodfacts/openfoodfacts-dart/issues/663)) ([7d12409](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7d124091488698cc975d26550869f14604d9bbfb))
+* Start new documentation ([Check out here](https://github.com/openfoodfacts/openfoodfacts-dart#readme)) ([#663](https://github.com/openfoodfacts/openfoodfacts-dart/issues/663)) ([7d12409](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7d124091488698cc975d26550869f14604d9bbfb))
 
 
 ### Bug Fixes
