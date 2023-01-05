@@ -8,7 +8,7 @@ import 'query_type.dart';
 import 'uri_helper.dart';
 import '../model/user.dart';
 
-/// Query version for single barcode
+/// Api version for product queries
 class ProductQueryVersion {
   const ProductQueryVersion(this.version);
 
@@ -36,7 +36,10 @@ class ProductQueryVersion {
 
 /// Query Configuration for single barcode
 class ProductQueryConfiguration extends AbstractQueryConfiguration {
+  /// The barcode from the desired product
   final String barcode;
+
+  /// The API version
   final ProductQueryVersion version;
 
   /// See [AbstractQueryConfiguration.languages] for
@@ -55,6 +58,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
           fields: fields,
         );
 
+  /// If the provided [ProductQueryVersion] matches the API V3 requirements
   bool matchesV3() => version.matchesV3();
 
   @override

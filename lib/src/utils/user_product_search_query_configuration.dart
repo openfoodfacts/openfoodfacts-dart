@@ -8,7 +8,26 @@ import 'language_helper.dart';
 import 'product_fields.dart';
 
 // TODO: deprecated from 2022-12-29; remove when old enough
-/// Query Configuration for user-related searches.
+/// Get products a user created, photographed,
+///
+/// Deprecated, use standard queries instead
+///
+/// ```dart
+///   UserProductSearchQueryConfiguration configuration =
+///       UserProductSearchQueryConfiguration(
+///     // Products user photographed
+///     type: UserProductSearchType.PHOTOGRAPHER,
+///     userId: '',
+///   );
+///
+///   SearchResult result = await OpenFoodAPIClient.searchProducts(
+///     User(userId: '', password: ''),
+///     configuration,
+///   );
+///
+///   print(result.count);
+/// ´´´
+///
 @Deprecated('Use standard queries instead')
 class UserProductSearchQueryConfiguration extends AbstractQueryConfiguration {
   UserProductSearchQueryConfiguration({

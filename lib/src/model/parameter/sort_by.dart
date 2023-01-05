@@ -20,7 +20,7 @@ class SortBy extends Parameter {
 
   final SortOption? option;
 
-  const SortBy({this.option});
+  const SortBy({required this.option});
 }
 
 /// Possible sort options for search API

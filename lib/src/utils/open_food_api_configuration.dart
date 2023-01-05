@@ -1,12 +1,36 @@
+import '../model/user.dart';
+import '../model/user_agent.dart';
 import 'country_helper.dart';
 import 'language_helper.dart';
 import 'query_type.dart';
-import '../model/user.dart';
-import '../model/user_agent.dart';
 
-///Allows to configure the behavior of the package,
-///for example to set a global [UserAgent]
-///or to point the url to a self hosted instance of the backend.
+/// Allows to configure the behavior of the package.
+///
+/// All of the values are static, they only need to be set once at the
+/// beginning of the lifecycle of the app. They can be changed at any
+/// point later. Some methods allow to pass configurations which can be
+/// also set here, in these cases, the most local value is used.
+/// E.g.
+///
+/// ```dart
+///   OpenFoodAPIConfiguration.globalLanguages = <OpenFoodFactsLanguage>[
+///     OpenFoodFactsLanguage.ENGLISH,
+///   ];
+///
+///   // Uses german
+///   OpenFoodAPIClient.getProductUri(
+///     '0000000',
+///     language: OpenFoodFactsLanguage.GERMAN,
+///     ....
+///   );
+///
+///   // Uses english again
+///   OpenFoodAPIClient.getProductUri(
+///       '0000000',
+///       ....
+///   );
+/// ```
+///
 class OpenFoodAPIConfiguration {
   OpenFoodAPIConfiguration._();
 

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
+
 import '../interface/json_object.dart';
 
 part 'status.g.dart';
@@ -10,6 +11,7 @@ class Status extends JsonObject {
   static const WRONG_USER_OR_PASSWORD_ERROR_MESSAGE =
       'Incorrect user name or password';
 
+  /// Commonly 1 = ok, 0 = failed
   final dynamic status;
 
   @JsonKey(name: 'status_verbose')

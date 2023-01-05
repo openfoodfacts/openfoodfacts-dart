@@ -1,16 +1,27 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:http/http.dart';
+
 import 'interface/json_object.dart';
-import 'model/product_packaging.dart';
-import 'model/product_result_v3.dart';
+import 'model/insight.dart';
 import 'model/login_status.dart';
 import 'model/ocr_ingredients_result.dart';
 import 'model/ocr_packaging_result.dart';
 import 'model/ordered_nutrients.dart';
+import 'model/parameter/barcode_parameter.dart';
+import 'model/product.dart';
 import 'model/product_freshness.dart';
 import 'model/product_image.dart';
+import 'model/product_packaging.dart';
+import 'model/product_result.dart';
+import 'model/product_result_v3.dart';
+import 'model/robotoff_question.dart';
+import 'model/search_result.dart';
+import 'model/send_image.dart';
 import 'model/sign_up_status.dart';
+import 'model/spelling_corrections.dart';
+import 'model/status.dart';
 import 'model/taxonomy_additive.dart';
 import 'model/taxonomy_allergen.dart';
 import 'model/taxonomy_category.dart';
@@ -24,40 +35,54 @@ import 'model/taxonomy_packaging.dart';
 import 'model/taxonomy_packaging_material.dart';
 import 'model/taxonomy_packaging_recycling.dart';
 import 'model/taxonomy_packaging_shape.dart';
-import 'model/parameter/barcode_parameter.dart';
-import 'model/insight.dart';
-import 'model/product.dart';
-import 'model/product_result.dart';
-import 'model/robotoff_question.dart';
-import 'model/search_result.dart';
-import 'model/send_image.dart';
-import 'model/spelling_corrections.dart';
-import 'model/status.dart';
 import 'model/user.dart';
 import 'utils/abstract_query_configuration.dart';
 import 'utils/country_helper.dart';
+import 'utils/http_helper.dart';
 import 'utils/image_helper.dart';
+import 'utils/language_helper.dart';
 import 'utils/ocr_field.dart';
 import 'utils/product_fields.dart';
+import 'utils/product_helper.dart';
+import 'utils/product_query_configurations.dart';
 import 'utils/product_search_query_configuration.dart';
 import 'utils/query_type.dart';
 import 'utils/tag_type.dart';
 import 'utils/taxonomy_query_configuration.dart';
 import 'utils/uri_helper.dart';
-import 'utils/http_helper.dart';
-import 'utils/language_helper.dart';
-import 'utils/product_helper.dart';
-import 'utils/product_query_configurations.dart';
 
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
   OpenFoodAPIClient._();
 
   /// Add the given product to the database.
-  /// Returns a Status object as result.
   ///
   /// Please read the language mechanics explanation if you intend to display
   /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
+  ///
+  /// ```dart
+  ///   User myUser = User(userId: "username", password: "secret_password");
+  ///
+  ///   Product newProduct = Product(
+  ///       barcode: "0000000000000",
+  ///       productName: "Example Product",
+  ///       quantity: "200g",
+  ///       brands: "Example Brand",
+  ///       lang: OpenFoodFactsLanguage.FRENCH,
+  ///       ingredientsText: "Ingredient 1, Ingredient 2, Ingredient 3",
+  ///       categories: "Category 1, Category 2"
+  ///       ...
+  ///   );
+  ///
+  ///   Status result = await OpenFoodAPIClient.saveProduct(myUser, newProduct);
+  ///
+  ///   if(result.status != 1) {
+  ///     print("An error occured while sending the product : ${result.statusVerbose}");
+  ///     return;
+  ///   }
+  ///
+  ///   print("Upload was successful");
+  /// ```
   static Future<Status> saveProduct(
     final User user,
     final Product product, {
@@ -155,6 +180,29 @@ class OpenFoodAPIClient {
   /// Send one image to the server.
   /// The image will be added to the product specified in the SendImage
   /// Returns a Status object as result.
+  ///
+  /// ```dart
+  ///   User myUser = User(userId: "username", password: "secret_password");
+  ///
+  ///   String barcode = "0000000000000";
+  ///
+  ///   SendImage image = SendImage(
+  ///     lang: OpenFoodFactsLanguage.FRENCH,
+  ///     barcode: barcode,
+  ///     imageField: ImageField.FRONT,
+  ///     imageUri: Uri.parse("path_to_my_image"),
+  ///   );
+  ///
+  ///   Status status = await OpenFoodAPIClient.addProductImage(myUser, image);
+  ///
+  ///   if (status.status != 1) {
+  ///     print(
+  ///         "An error occured while sending the picture : ${status.statusVerbose}");
+  ///     return;
+  ///   }
+  ///
+  ///   print("Upload was successful");
+  /// ```
   static Future<Status> addProductImage(
     User user,
     SendImage image, {
@@ -238,12 +286,37 @@ class OpenFoodAPIClient {
     return result;
   }
 
-  /// Returns the product for the given barcode.
-  /// The ProductResult does not contain a product, if the product is not available.
+  /// The [ProductResultV3] does not contain a product, if the product is not available.
   /// ingredients, images and product name will be prepared for the given language.
   ///
-  /// Please read the language mechanics explanation if you intend to show
-  /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
+  /// Example:
+  /// ``` dart
+  ///   ProductQueryConfiguration config = ProductQueryConfiguration(
+  ///     '5449000131805',
+  ///     version: ProductQueryVersion.v3,
+  ///   );
+  ///   ProductResultV3 product = await OpenFoodAPIClient.getProductV3(config);
+  ///   print(product.product?.productName); // Coca Cola Zero
+  ///   print(product.product?.brands); // Coca-Cola
+  ///   print(product.product?.quantity); // 330ml
+  ///   print(product.product?.nutriments?.getValue(Nutrient.salt, PerSize.oneHundredGrams)); // 0.0212
+  ///   print(product.product?.additives?.names); // [E150d, E338, E950, E951]
+  ///   print(product.product?.allergens?.names); // []
+  /// ```
+  ///
+  ///  This product contains:
+  ///   - Product images (Product image by field, size and language, current fields are: Front, Ingredients, Nutrition, Packaging)
+  ///   - Additives, Allergens, Environment impact, Ingredient analysis, Nutrient levels, Nutrition facts (incl. micro-nutrients)
+  ///   - Language dependant fields (like ingredients, product name, packaging text)
+  ///   - Eco-Score, Nutri-Score, NOVA groups
+  ///   - Translated, high-level and customizable product information (Attributes)
+  ///   - Product completion status
+  ///
+  ///  A detailed list of all returned data can be found in [Product].
+  ///
+  /// Using the [ProductQueryConfiguration] you can specify more query parameters
+  /// like for example the language to query.
+  ///
   static Future<ProductResultV3> getProductV3(
     ProductQueryConfiguration configuration, {
     User? user,
@@ -277,6 +350,8 @@ class OpenFoodAPIClient {
     return response.body;
   }
 
+  /// Replaces all html special entity quotes using normal quotes,
+  /// to be called after every query which receives data from the server.
   static String _replaceQuotes(String str) {
     return str.replaceAll('&quot;', '\\"');
   }
@@ -337,12 +412,75 @@ class OpenFoodAPIClient {
   }
 
   /// Returns the URI to the crowdin page for a [language].
+  /// Crowdin is used in used in the official open food facts app for
+  /// translating the app
   static Uri getCrowdinUri(final OpenFoodFactsLanguage language) =>
       Uri.parse('https://crowdin.com/project/openfoodfacts/${language.offTag}');
 
   /// Search the OpenFoodFacts product database with the given parameters.
   /// Returns the list of products as SearchResult.
   /// Query the language specific host from OpenFoodFacts.
+  ///
+  /// ```dart
+  ///   ProductSearchQueryConfiguration configuration =
+  ///       ProductSearchQueryConfiguration(
+  ///     parametersList: <Parameter>[
+  ///        ...(insert parameter's from below here)
+  ///     ],
+  ///   );
+  ///
+  ///   SearchResult result = await OpenFoodAPIClient.searchProducts(
+  ///     User(userId: '', password: ''),
+  ///     configuration,
+  ///   );
+  ///
+  ///   print(result.products?[0].productName);
+  /// ```
+  ///
+  /// Possible parameters are:
+  ///
+  /// By name:
+  /// ```dart
+  /// SearchTerms(terms: ['Nutella']),
+  /// ```
+  ///
+  /// Without additives:
+  /// ```dart
+  /// WithoutAdditives()
+  /// ```
+  ///
+  /// By brand, stores, ingredients, other [TagFilterType]:
+  /// ```dart
+  /// TagFilter.fromType(
+  ///   tagFilterType: TagFilterType.BRANDS,
+  ///   tagName: 'Coca-cola',
+  /// ),
+  /// ```
+  ///
+  /// By category ([PnnsGroup2]):
+  /// ```dart
+  /// PnnsGroup2Filter(pnnsGroup2: PnnsGroup2.POTATOES),
+  /// ```
+  ///
+  /// By [VeganStatus], [VegetarianStatus] or/and [PalmOilFreeStatus]:
+  /// ```dart
+  /// IngredientsAnalysisParameter(veganStatus: VeganStatus.VEGAN),
+  /// ```
+  ///
+  /// You can sort the [SortOption] criteria:
+  /// ```dart
+  /// SortBy(option: SortOption.POPULARITY),
+  /// ```
+  ///
+  /// Limit the amount of products per query
+  /// ```dart
+  /// PageSize(size: 5),
+  /// ´´´
+  ///
+  /// And query more products
+  /// ```
+  /// PageNumber(page: 2),
+  /// ```
   static Future<SearchResult> searchProducts(
     final User? user,
     final AbstractQueryConfiguration configuration, {
@@ -391,6 +529,8 @@ class OpenFoodAPIClient {
     }
     return result;
   }
+
+  //TODO(x): Add taxonomy documentation
 
   static Future<Map<String, T>?>
       getTaxonomy<T extends JsonObject, F extends Enum>(
@@ -581,6 +721,8 @@ class OpenFoodAPIClient {
       });
     }
   }
+
+  //TODO(x): Add comments for robotoff
 
   static Future<InsightsResult> getRandomInsight(
     User user, {
@@ -797,9 +939,24 @@ class OpenFoodAPIClient {
   }
 
   /// Extract the ingredients from image with the given parameters.
-  /// The ingredients language should be given (ingredients_fr, ingredients_de, ingredients_en)
-  /// Returns the ingredients using OCR.
-  /// By default the query will use the Google Cloud Vision.
+  /// The ingredients' language should be given (ingredients_fr, ingredients_de, ingredients_en)
+  ///
+  /// Uses an already uploaded ingredients image.
+  ///
+  /// Please only use if you have before uploaded a new ingredients image
+  /// or if there is already an ingredients image but no extracted ingredients.
+  ///
+  ///  ```dart
+  ///   User user = User(userId: '', password: '');
+  ///
+  ///   OcrIngredientsResult result = await OpenFoodAPIClient.extractIngredients(
+  ///     user,
+  ///     '3274080005003',
+  ///     OpenFoodFactsLanguage.FRENCH,
+  ///   );
+  ///
+  ///   print(result.ingredientsTextFromImage); // EAU DE SOURCE DE LA DOYE BOUTEILIF Moll
+  ///  ´´´
   static Future<OcrIngredientsResult> extractIngredients(
     User user,
     String barcode,
@@ -830,6 +987,21 @@ class OpenFoodAPIClient {
   }
 
   /// Extracts the text from packaging image with OCR.
+  ///
+  /// Uses already uploaded images
+  /// [language] should be the language of the text on the product
+  ///
+  /// ```dart
+  ///   User user = User(userId: '', password: '');
+  ///
+  ///   OcrPackagingResult result = await OpenFoodAPIClient.extractPackaging(
+  ///     user,
+  ///     '3274080005003',
+  ///     OpenFoodFactsLanguage.ENGLISH,
+  ///   );
+  ///
+  ///   print(result.textFromImage); // SPRING WATER LE AUSE MGL Bicarbonates...
+  /// ```
   static Future<OcrPackagingResult> extractPackaging(
     final User user,
     final String barcode,
@@ -862,6 +1034,16 @@ class OpenFoodAPIClient {
   /// Returns suggestions.
   ///
   /// The [limit] has a max value of 400 on the server side.
+  ///
+  /// ```dart
+  ///   List<dynamic> suggestions =
+  ///       await OpenFoodAPIClient.getAutocompletedSuggestions(
+  ///     TagType.CATEGORIES,
+  ///     input: 'Mil',
+  ///   );
+  ///
+  ///   print(suggestions); // [Milk drinks fermented with Bifidus, Milk drinks fermented with L casei, Milk jams]
+  /// ```
   static Future<List<dynamic>> getAutocompletedSuggestions(
     final TagType taxonomyType, {
     final String input = '',
@@ -902,6 +1084,29 @@ class OpenFoodAPIClient {
   /// Logs in and returns data about the user if relevant.
   ///
   /// Returns null if connection issue.
+  ///
+  /// ```dart
+  ///   User offUser = User(userId: 'username or email', password: 'password');
+  ///
+  ///   LoginStatus? status = await OpenFoodAPIClient.login2(offUser);
+  ///
+  ///   if (status == null) {
+  ///     throw Exception('Network error');
+  ///   }
+  ///   print(status.successful);
+  ///   print(status.userId);
+  ///   print(status.userEmail);
+  ///   print(status.userName);
+  ///
+  ///   if (status.successful) {
+  ///     print('Logged in');
+  ///     OpenFoodAPIConfiguration.globalUser = offUser;
+  ///     //Store offUser in storage
+  ///   } else if (!status.successful) {
+  ///     print('Error, wrong credentials ${status.statusVerbose}');
+  ///   }
+  ///```
+  ///
   static Future<LoginStatus?> login2(
     final User user, {
     final QueryType? queryType,
@@ -928,9 +1133,31 @@ class OpenFoodAPIClient {
   static const USER_NAME_MAX_LENGTH = 20;
 
   /// Creates a new user
+  ///
+  /// Possible `status.status` responses:
+  ///
   /// Returns [Status.status] 201 = complete; 400 = wrong inputs + [Status.error]; 500 = server error;
   ///
+  /// [name] may not exceed  [OpenFoodAPIClient.USER_NAME_MAX_LENGTH]
+  ///
   /// When creating a [producer account](https://world.pro.openfoodfacts.org/) use [orgName] (former requested_org) to name the Producer or brand
+  /// ```dart
+  ///   User offUser = User(userId: 'username or email', password: 'password');
+  ///
+  ///   SignUpStatus status = await OpenFoodAPIClient.register(
+  ///     user: offUser,
+  ///     name: 'Namer',
+  ///     email: 'email',
+  ///   );
+  ///
+  ///   if (status.status == 201) {
+  ///     print('Yeah account created');
+  ///     OpenFoodAPIConfiguration.globalUser = offUser;
+  ///   } else {
+  ///     print('Error: ${status.error}');
+  ///  }
+  /// ```
+  ///
   static Future<SignUpStatus> register({
     required User user,
     required String name,
@@ -1023,10 +1250,19 @@ class OpenFoodAPIClient {
   }
 
   /// Returns the nutrient hierarchy specific to a country, localized.
+  /// ```dart
+  ///   OrderedNutrients orderedNutrients =
+  ///       await OpenFoodAPIClient.getOrderedNutrients(
+  ///     country: OpenFoodFactsCountry.GERMANY,
+  ///     language: OpenFoodFactsLanguage.ENGLISH,
+  ///   );
   ///
-  /// [cc] is the country code, as ISO 3166-1 alpha-2
+  ///   print(orderedNutrients.nutrients[0].name);  // Energy (kJ)
+  ///   print(orderedNutrients.nutrients[5].name);  // Fiber
+  ///   print(orderedNutrients.nutrients[10].name); // Vitamin A
+  /// ```
   static Future<OrderedNutrients> getOrderedNutrients({
-    required final String cc,
+    required final String? cc,
     required final OpenFoodFactsLanguage language,
     final QueryType? queryType,
   }) async =>
@@ -1040,6 +1276,8 @@ class OpenFoodAPIClient {
       );
 
   /// Returns the nutrient hierarchy specific to a country, localized, as JSON
+  /// Use [OpenFoodAPIClient.getOrderedNutrients] to get them as a
+  /// [OrderedNutrient] object.
   static Future<String> getOrderedNutrientsJsonString({
     required final OpenFoodFactsCountry country,
     required final OpenFoodFactsLanguage language,
@@ -1094,7 +1332,7 @@ class OpenFoodAPIClient {
         },
       );
 
-  /// Crops a product image from an already uploaded image.
+  /// Crops an already uploaded image.
   ///
   /// "I want, for this [barcode], this [imageField] and this [language],
   /// the image to be computed from the already uploaded image
