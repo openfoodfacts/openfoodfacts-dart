@@ -290,7 +290,7 @@ class OpenFoodAPIClient {
   /// ingredients, images and product name will be prepared for the given language.
   ///
   /// Example:
-  /// ``` dart
+  /// ```dart
   ///   ProductQueryConfiguration config = ProductQueryConfiguration(
   ///     '5449000131805',
   ///     version: ProductQueryVersion.v3,
@@ -481,6 +481,31 @@ class OpenFoodAPIClient {
   /// ```
   /// PageNumber(page: 2),
   /// ```
+  ///
+  /// -------
+  ///
+  /// Search for products related to a user
+  ///
+  /// ```dart
+  ///       final ProductSearchQueryConfiguration configuration =
+  ///           ProductSearchQueryConfiguration(
+  ///         parametersList: [
+  ///           TagFilter.fromType(tagFilterType: type, tagName: userId),
+  ///         ],
+  ///         language: language,
+  ///         fields: [
+  ///           ProductField.BARCODE,
+  ///           ProductField.STATES_TAGS,
+  ///         ],
+  ///         version: ProductQueryVersion.v3,
+  ///       );
+  /// ```
+  ///
+  /// Where type is:
+  ///   - [TagFilterType.CREATOR]
+  ///   - [TagFilterType.EDITORS]
+  ///   - [TagFilterType.PHOTOGRAPHERS]
+  ///
   static Future<SearchResult> searchProducts(
     final User? user,
     final AbstractQueryConfiguration configuration, {
