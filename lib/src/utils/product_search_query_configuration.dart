@@ -15,7 +15,7 @@ class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
     final OpenFoodFactsCountry? country,
     final List<ProductField>? fields,
     required List<Parameter> parametersList,
-    required final this.version,
+    required this.version,
   }) : super(
           language: language,
           languages: languages,
