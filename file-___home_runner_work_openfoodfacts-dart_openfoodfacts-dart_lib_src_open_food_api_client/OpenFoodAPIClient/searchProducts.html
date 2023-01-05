@@ -65,6 +65,50 @@
   <p>Search the OpenFoodFacts product database with the given parameters.
 Returns the list of products as SearchResult.
 Query the language specific host from OpenFoodFacts.</p>
+<pre class="language-dart"><code class="language-dart">  ProductSearchQueryConfiguration configuration =
+      ProductSearchQueryConfiguration(
+    parametersList: &lt;Parameter&gt;[
+       ...(insert parameter's from below here)
+    ],
+  );
+
+  SearchResult result = await OpenFoodAPIClient.searchProducts(
+    User(userId: '', password: ''),
+    configuration,
+  );
+
+  print(result.products?[0].productName);
+</code></pre>
+<p>Possible parameters are:</p>
+<p>By name:</p>
+<pre class="language-dart"><code class="language-dart">SearchTerms(terms: ['Nutella']),
+</code></pre>
+<p>Without additives:</p>
+<pre class="language-dart"><code class="language-dart">WithoutAdditives()
+</code></pre>
+<p>By brand, stores, ingredients, other <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_tag_filter/TagFilterType.html">TagFilterType</a>:</p>
+<pre class="language-dart"><code class="language-dart">TagFilter.fromType(
+  tagFilterType: TagFilterType.BRANDS,
+  tagName: 'Coca-cola',
+),
+</code></pre>
+<p>By category (<a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html">PnnsGroup2</a>):</p>
+<pre class="language-dart"><code class="language-dart">PnnsGroup2Filter(pnnsGroup2: PnnsGroup2.POTATOES),
+</code></pre>
+<p>By <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredients_analysis_tags/VeganStatus.html">VeganStatus</a>, <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredients_analysis_tags/VegetarianStatus.html">VegetarianStatus</a> or/and <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredients_analysis_tags/PalmOilFreeStatus.html">PalmOilFreeStatus</a>:</p>
+<pre class="language-dart"><code class="language-dart">IngredientsAnalysisParameter(veganStatus: VeganStatus.VEGAN),
+</code></pre>
+<p>You can sort the <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_sort_by/SortOption.html">SortOption</a> criteria:</p>
+<pre class="language-dart"><code class="language-dart">SortBy(option: SortOption.POPULARITY),
+</code></pre>
+<p>Limit the amount of products per query</p>
+<pre class="language-dart"><code class="language-dart">PageSize(size: 5),
+´´´
+
+And query more products
+</code></pre>
+<p>PageNumber(page: 2),</p>
+<pre class="language-dart"><code></code></pre>
 </section>
 
 

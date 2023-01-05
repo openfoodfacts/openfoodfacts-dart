@@ -43,24 +43,23 @@
   <div id="dartdoc-main-content" class="main-content">
       
 <section class="desc markdown">
-  <p><img src="https://img.shields.io/pub/v/openfoodfacts?&amp;colorB=green" alt="Pub Version">
+  <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://static.openfoodfacts.org/images/logos/off-logo-horizontal-dark.png?refresh_github_cache=1">
+  <source media="(prefers-color-scheme: light)" srcset="https://static.openfoodfacts.org/images/logos/off-logo-horizontal-light.png?refresh_github_cache=1">
+  <img height="48" src="https://static.openfoodfacts.org/images/logos/off-logo-horizontal-light.svg">
+</picture>
+<h1 id="open-food-facts---dart">Open Food Facts - Dart</h1>
+<p><img src="https://img.shields.io/pub/v/openfoodfacts?&amp;colorB=green" alt="Pub Version">
 <a href="https://github.com/openfoodfacts/openfoodfacts-dart/actions/workflows/test-sdk.yml"><img src="https://github.com/openfoodfacts/openfoodfacts-dart/actions/workflows/test-sdk.yml/badge.svg" alt="Run sdk tests"></a>
 <a href="https://pub.dev/packages/openfoodfacts/score"><img src="https://img.shields.io/pub/likes/openfoodfacts?logo=dart" alt="likes"></a>
 <a href="https://pub.dev/packages/openfoodfacts/score"><img src="https://img.shields.io/pub/popularity/openfoodfacts?logo=dart" alt="popularity"></a>
 <a href="https://pub.dev/packages/openfoodfacts/score"><img src="https://img.shields.io/pub/points/openfoodfacts?logo=dart" alt="pub points"></a></p>
-<h1 id="open-food-facts---dart">Open Food Facts - Dart</h1>
-<p>Dart package for the Open Food Facts API. Easily access to more than 1.9 million products from all around the world.
+<p>Dart package for the <a href="https://world.openfoodfacts.org/">Open Food Facts</a> API. Free and Easy access to more than 2.7 million food products information from all around the world.
 Open Food Facts is powered by contributors from around the world and is constantly growing thanks to them.</p>
-<h2 id="how-to-use-">How to use ?</h2>
-<p>You can find the full documentation here: <a href="https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md">Documentation</a>.
-You can find automated code documentation here:  <a href="https://openfoodfacts.github.io/openfoodfacts-dart/">Documentation</a>.</p>
-<h2 id="general-principles">General principles</h2>
-<ul>
-<li>You can look for information about products, including many useful computed values.</li>
-<li>If you can't get the information on a specific product, you can get your user to send photos and data, that will then be processed by Open Food Facts AI and contributors to get the computed result you want to show them.</li>
-<li>You can also implement the complete flow so that they get immediately the result with some effort on their side.</li>
-</ul>
-<h2 id="main-fixes-to-apply-when-dealing-with-2xx-breaking-changes">Main fixes to apply when dealing with 2.x.x breaking changes.</h2>
+<h2 id="general-principles-how-does-it-work-">General principles, how does it work ?</h2>
+<p>We use the ability of the Open Food Facts API to return products results in Json, we then generate easily understandable objects structures to make it simple for you to use.</p>
+<p>This plugin also allows you to edit a product or upload a new one to Open Food Facts. Using the same simple product structure you can create a product object or edit an existing one and send it to the API using a single function.</p>
+<h2 id="migrating-from-1xx-to-2xx-breaking-changes">Migrating from 1.x.x to 2.x.x (breaking changes)</h2>
 <ul>
 <li>Now the only entry point is <code>import 'package:openfoodfacts/openfoodfacts.dart';</code>
 <ul>
@@ -83,86 +82,163 @@ You can find automated code documentation here:  <a href="https://openfoodfacts.
 </ul>
 </li>
 </ul>
-<h2 id="contributing">Contributing</h2>
+<h2 id="usage">Usage</h2>
+<h3 id="installation">Installation</h3>
+<p>Follow the installing instructions on <a href="https://pub.dev/packages/openfoodfacts/install">pub.dev</a>.</p>
+<h3 id="how-to-authenticate">How to authenticate</h3>
+<p>For most queries no authentication is required! :)
+Though we recommend to set a User-Agent to not to be blocked by mistake.</p>
+<h3 id="setup-optional">Setup (Optional)</h3>
+<p>At the beginning of the app you can define some global settings so that they don't need to be specified in each query. You can override these static values at any time in the app lifecycle.</p>
+<pre class="language-dart"><code class="language-dart">import 'package:openfoodfacts/openfoodfacts.dart';
+
+OpenFoodAPIConfiguration.userAgent = UserAgent(name: 'Your app name', url: 'Your url, if applicable');
+
+OpenFoodAPIConfiguration.globalLanguages = &lt;OpenFoodFactsLanguage&gt;[
+  OpenFoodFactsLanguage.ENGLISH
+];
+
+OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
+</code></pre>
+<p>All possible configurations can be found <a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIConfiguration-class.html">here</a>.</p>
+<h3 id="features">Features</h3>
+<p>Code examples for the following tasks:</p>
+<h4 id="reading-data">Reading data</h4>
+<ul>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getProductV3.html">Querying a product</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/RecommendedDailyIntake/getRecommendedDailyIntakes.html">Recommended Daily Intakes</a></li>
+<li>Search for products
+<ul>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html">By name</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html">By brand, stores, ingredients,</a> <a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/TagFilterType.html">All filter</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html">By category</a> (<a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/PnnsGroup2.html">Pnns2</a>)</li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html">By vegan, vegetarian or/and palm oil status</a><!-- TODO: Add detailed description for Personalized search --></li>
+</ul>
+</li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getAutocompletedSuggestions.html">Autocompletion for user inputs</a>, by giving suggestions for (Labels, categories, ingredients, additives, traces and other <a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/TagType.html">TagType's</a>)</li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getOrderedNutrients.html">Get the nutrient hierarchy specific to a country, localized</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getProductFreshness.html">Get product freshness</a></li>
+<li><a href="https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#notes-on-languages-mechanics">Notes on advanced languages mechanics</a></li>
+</ul>
+<h4 id="writing-data">Writing data</h4>
+<ul>
+<li><a href="#handle-open-food-facts-accounts">Managing user accounts guide (Read this first)</a>
+<ul>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/login2.html">Let your users login</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/register.html">Let your users register on Open Food Facts</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/resetPassword.html">Reset user password</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/UserProductSearchQueryConfiguration-class.html">Get contribution data about a user</a></li>
+</ul>
+</li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/saveProduct.html">Save product to Open Food Facts (edit or add)</a></li>
+<li>Images
+<ul>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/addProductImage.html">Send images</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/setProductImageAngle.html">rotate</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/setProductImageCrop.html">crop</a></li>
+<li>select, unselect with language awareness</li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/extractIngredients.html">extract Ingredients</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/extractPackaging.html">extract Packaging</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="robotoff-support">Robotoff support</h4>
+<p><a href="https://openfoodfacts.github.io/robotoff/">Robotoff</a> it the Open Food Facts AI which analyze every new pictures to extract new data.</p>
+<ul>
+<li>get Insights
+<ul>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getRandomInsight.html">random</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getProductInsights.html">for a product</a></li>
+</ul>
+</li>
+<li>get Questions to confirm
+<ul>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getRandomRobotoffQuestion.html">random</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getRobotoffQuestionsForProduct.html">for a product</a></li>
+</ul>
+</li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/postInsightAnnotation.html">post Insight Annotation</a></li>
+</ul>
+<h4 id="folksonomy-engine">Folksonomy Engine</h4>
+<p><a href="https://wiki.openfoodfacts.org/Folksonomy_Engine">Folksonomy</a> is adding several kinds of new individual data properties to Open Food Facts or Open Products Facts.</p>
+<ul>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyPackagings.html">get Taxonomy Packagings</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyPackagingShapes.html">get Taxonomy Packaging Shapes</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyPackagingMaterials.html">get Taxonomy Packaging Materials</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyPackagingRecycling.html">get Taxonomy Packaging Recycling</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyNova.html">get Taxonomy Nova</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyCategories.html">get Taxonomy Categories</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyAdditives.html">get Taxonomy Additives</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyAllergens.html">get Taxonomy Allergens</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyCountries.html">get Taxonomy Countries</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyLabels.html">get Taxonomy Ingredients</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyLabels.html">get Taxonomy Labels</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyLanguages.html">get Taxonomy Languages</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyOrigins.html">get Taxonomy Origins</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomy.html">get general Taxonomy</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getTaxonomyTranslationUri.html">get taxonomy translation uri</a></li>
+</ul>
+<h2 id="contributing-data">Contributing data</h2>
+<h3 id="handle-open-food-facts-accounts">Handle Open Food Facts accounts</h3>
+<p>Some queries which modify or enter data need a user account to validate this request.
+There are multiple ways to handle user accounts:</p>
+<ol>
+<li>Let your users login / create Open Food Facts user accounts (Recommended)</li>
+<li>Create a global user for your app through which all requests run</li>
+</ol>
+<p>Currently there is no OAuth workflow, therefor a user is just a <a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/User-class.html">User</a> object in this package.
+So you need to get the username as well as the password from the users and store it somewhere save. For Flutter apps we recommend using the <a href="https://pub.dev/packages/flutter_secure_storage">flutter_secure_storage</a> package</p>
+<p>For the user to be taken into account you have mount a global user at one point in your app lifecycle:</p>
+<pre class="language-dart"><code class="language-dart">  OpenFoodAPIConfiguration.globalUser = User(
+    userId: 'myUsername',
+    password: 'myPassword',
+  );
+</code></pre>
+<p>Regardless if you are using a global app or accounts per user. After mounting this, the user will be added to queries where the user can be attributed.</p>
+<p>Some methods in <a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a> require to pass a <code>User</code>, there you can access the before mounted user with:</p>
+<pre class="language-dart"><code class="language-dart"> OpenFoodAPIClient.thisNeedsAnUser(
+  user: OpenFoodAPIConfiguration.globalUser,
+  ...
+ );
+</code></pre>
+<p>Further examples:</p>
+<ul>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/register.html">Create users</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/login2.html">Check if the user credentials are correct</a></li>
+<li><a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/resetPassword.html">Request a password reset email</a></li>
+</ul>
 <h3 id="if-your-users-do-not-expect-a-specific-result-immediately-eg-inventory-apps">If your users do not expect a specific result immediately (eg. Inventory apps)</h3>
 <ul>
 <li>Send photos (front/nutrition/ingredients/packaging): most painless thing for your users</li>
 <li>The Open Food Facts AI Robotoff will generate some derived data from the photos</li>
 <li>Overtime, other apps, and the Open Food Facts community will fill the data gaps</li>
 </ul>
-<h3 id="if-your-users-do-expect-a-result-immediately-eg-nutrition-apps-scoring-apps">If your users do expect a result immediately (eg Nutrition apps, Scoring apps…):</h3>
+<h3 id="if-your-users-do-expect-a-result-immediately-eg-nutrition-apps-scoring-apps">If your users do expect a result immediately (eg Nutrition apps, Scoring apps…)</h3>
 <ul>
 <li>Send nutrition facts + category &gt; get the Nutri-Score</li>
 <li>Send ingredients &gt; get the NOVA group (about food ultra-processing), additives, allergens, normalized ingredients, vegan, vegetarian…</li>
 <li>Send category (strict minimum) + labels + origins of ingredients + packaging (photo and text) &gt; get the Eco-Score (about environmental impact)</li>
 </ul>
-<h2 id="open-data-licence">Open Data Licence</h2>
+<h2 id="open-data-license">Open Data License</h2>
 <p>The database in under the OdBL. This means attributing the source and also contributing back any additions (photos, data), which this package makes easy to do.
 You can check the terms of use here : <a href="https://world.openfoodfacts.org/terms-of-use">Terms of use</a>.</p>
-<h2 id="list-of-current-features">List of current features</h2>
-<h3 id="general">GENERAL</h3>
+<h2 id="useful-recourses">Useful recourses</h2>
 <ul>
-<li><code>x</code> Multilingual (180 languages are supported)</li>
-<li><code>x</code> Create users</li>
-<li><code>x</code> Check if users exist</li>
+<li>List of new APIs to implement: <a href="https://github.com/openfoodfacts/api-documentation/issues">github.com/openfoodfacts/api-documentation/issues</a></li>
+<li>New OpenAPI documentation: <a href="https://pub.dev/documentation/openfoodfacts/latest/index.html">pub.dev/documentation/openfoodfacts/latest/index.html</a></li>
+<li>Most of our operations are coordinated through our Slack which you can join here : <a href="https://openfoodfacts.slack.com">Open Food Facts Slack</a>.</li>
 </ul>
-<h3 id="read">READ</h3>
+<h2 id="contribute-to-the-package">Contribute to the package</h2>
+<p>If found a bug or missing features in this package, please open an issue for it.</p>
 <ul>
-<li><code>x</code> Product: you can retrieve information about products</li>
-<li><code>x</code> Product images (get product image by field, size and language, current fields are: Front, Ingredients, Nutrition, Packaging)</li>
-<li><code>x</code> Additives, Allergens, Environment impact, Ingredient analysis, Nutrient levels, Nutrition facts (incl. micro-nutrients)</li>
-<li><code>x</code> Language dependant fields (like ingredients, product name, packaging text)</li>
-<li><code>x</code> Eco-Score, Nutri-Score, NOVA groups</li>
-<li><code>x</code> Translated, high-level and customizable product information (Attributes)</li>
-<li><code>x</code> Product completion status</li>
-<li><code>x</code> Folksonomy Engine (custom properties for products)</li>
-<li><code>x</code> Open Food Facts Events (Gamification)</li>
+<li>Issue Tracker: github.com/openfoodfacts/openfoodfacts-dart/issues</li>
+<li>Source Code: github.com/openfoodfacts/openfoodfacts-dart</li>
 </ul>
-<h3 id="personalization">PERSONALIZATION</h3>
-<ul>
-<li><code>x</code> Recommended Daily Intakes</li>
-<li><code>x</code> Translated, high-level and customizable product information (Attributes)</li>
-<li><code>x</code> Autocompleting for the user inputs, by giving suggestions for (Labels, categories, ingredients, additives, traces ...)</li>
-</ul>
-<h3 id="search">SEARCH</h3>
-<ul>
-<li><code>x</code> search products by tags</li>
-<li><code>x</code> search products with / without additives</li>
-<li><code>x</code> search products with keywords</li>
-<li><code>x</code> Personalized search</li>
-</ul>
-<h3 id="write">WRITE</h3>
-<ul>
-<li><code>x</code> Save product to Open Food Facts</li>
-<li><code>x</code> Send images</li>
-<li><code>x</code> User comments and auth</li>
-<li><code>x</code> Anonymous photo upload</li>
-<li><code>x</code> Photo operations (rotate, crop, select, unselect with language awareness)</li>
-</ul>
-<h3 id="ml">ML</h3>
-<ul>
-<li><code>x</code> Robotoff support</li>
-<li><code>x</code> Extract ingredients from ingredients image: User can extract the ingredients text if it is missing</li>
-<li><code>x</code> Get the OCR of the ingredients photo (for validation purposes)</li>
-</ul>
-<h2 id="roadmap">Roadmap</h2>
-<ul>
-<li>List of new APIs to implement: <a href="https://github.com/openfoodfacts/api-documentation/issues">https://github.com/openfoodfacts/api-documentation/issues</a></li>
-<li>New OpenAPI documentation: <a href="https://openfoodfacts.github.io/openfoodfacts-server/reference/api/">https://openfoodfacts.github.io/openfoodfacts-server/reference/api/</a></li>
-</ul>
-<h3 id="read-2">READ</h3>
-<ul>
-<li><code> </code> ???</li>
-</ul>
-<h3 id="write-2">WRITE</h3>
-<h3 id="other">Other</h3>
-<h2 id="contribute">Contribute</h2>
-<p>There are many ways to contribute, and Open Food Facts has a lot of projects beside this package.
-Most of our operations are coordinated through our Slack which you can join here : <a href="https://openfoodfacts.slack.com">Open Food Facts Slack</a>.</p>
-<p>Regarding this package, we accept pull requests as well feature requests.</p>
+<h2 id="support">Support</h2>
+<p>If you are having issues, that go beyond the scope of this package, please write to us on <a href="https://openfoodfacts.slack.com">Slack</a> or send us an email at contact@openfoodfacts.org</p>
 <h3 id="testing">Testing</h3>
 <p>Execute the following command from the root of the repository to run the tests:</p>
-<pre class="language-dart"><code>dart test
+<pre class="language-shell"><code class="language-shell">dart test
 </code></pre>
 <h2 id="applications-using-this-sdk">Applications using this SDK</h2>
 <h3 id="official-application">Official application</h3>
@@ -173,16 +249,12 @@ Most of our operations are coordinated through our Slack which you can join here
 <li><strong>Glutten Scan</strong>. <a href="https://play.google.com/store/apps/details?id=com.healthyfood.gluten_free_app">Android</a> / <a href="https://apps.apple.com/ch/app/gluten-scanner/id1540660083">iOS</a></li>
 <li><strong>Halal &amp; Healthy</strong>. <a href="https://play.google.com/store/apps/details?id=com.TagIn.Tech.handh">Android</a> / <a href="https://apps.apple.com/ch/app/halal-healthy/id1603051382">iOS</a></li>
 <li><strong>Fitness Tracker</strong>. <a href="https://play.google.com/store/apps/details?id=dk.cepk.fitness_tracker">Android</a></li>
+<li><a href="https://github.com/openfoodfacts/openfoodfacts-dart/network/dependents">All public repositories using this package</a></li>
 </ul>
 <h2 id="authors">Authors</h2>
-<ul>
-<li>Alexander Schacht - <a href="https://github.com/Grumpf86">Grumpf86</a></li>
-<li>Primaël Quémerais - <a href="https://gitlab.com/Reefind">Reefind</a></li>
-<li>Marcus Cantu - <a href="https://github.com/Cantum2">Cantum2</a></li>
-<li>Adrien Faure - <a href="https://github.com/adfaure">Adfaure</a></li>
-<li>Peter Tran-Jørgensen - <a href="https://github.com/peterwvj">peterwvj</a></li>
-<li>Mohamed Boussaid - <a href="https://github.com/MohamedFBoussaid">MohamedFBoussaid</a></li>
-</ul>
+<p>Thanks to <a href="https://github.com/Grumpf86">Alexander Schacht</a> and <a href="https://github.com/PrimaelQuemerais">Primaël Quémerais</a> for the initial creation of this package.</p>
+<h2 id="contributors">Contributors</h2>
+<p><a href="https://github.com/openfoodfacts/openfoodfacts-dart/graphs/contributors"><img src="https://contrib.rocks/image?repo=openfoodfacts/openfoodfacts-dart" alt="Drag Racing"></a></p>
 </section>
 
 

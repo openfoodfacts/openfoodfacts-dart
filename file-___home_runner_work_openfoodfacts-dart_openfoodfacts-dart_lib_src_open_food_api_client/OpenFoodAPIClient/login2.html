@@ -63,6 +63,26 @@
 <section class="desc markdown">
   <p>Logs in and returns data about the user if relevant.</p>
 <p>Returns null if connection issue.</p>
+<pre class="language-dart"><code class="language-dart">  User offUser = User(userId: 'username or email', password: 'password');
+
+  LoginStatus? status = await OpenFoodAPIClient.login2(offUser);
+
+  if (status == null) {
+    throw Exception('Network error');
+  }
+  print(status.successful);
+  print(status.userId);
+  print(status.userEmail);
+  print(status.userName);
+
+  if (status.successful) {
+    print('Logged in');
+    OpenFoodAPIConfiguration.globalUser = offUser;
+    //Store offUser in storage
+  } else if (!status.successful) {
+    print('Error, wrong credentials ${status.statusVerbose}');
+  }
+</code></pre>
 </section>
 
 

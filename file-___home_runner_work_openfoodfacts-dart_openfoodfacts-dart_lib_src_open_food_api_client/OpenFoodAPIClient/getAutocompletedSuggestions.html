@@ -66,6 +66,14 @@
 <section class="desc markdown">
   <p>Returns suggestions.</p>
 <p>The <code>limit</code> has a max value of 400 on the server side.</p>
+<pre class="language-dart"><code class="language-dart">  List&lt;dynamic&gt; suggestions =
+      await OpenFoodAPIClient.getAutocompletedSuggestions(
+    TagType.CATEGORIES,
+    input: 'Mil',
+  );
+
+  print(suggestions); // [Milk drinks fermented with Bifidus, Milk drinks fermented with L casei, Milk jams]
+</code></pre>
 </section>
 
 

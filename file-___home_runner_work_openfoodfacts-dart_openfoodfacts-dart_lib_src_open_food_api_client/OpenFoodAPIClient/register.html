@@ -65,9 +65,26 @@
     </section>
     
 <section class="desc markdown">
-  <p>Creates a new user
-Returns <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_status/Status/status.html">Status.status</a> 201 = complete; 400 = wrong inputs + <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_status/Status/error.html">Status.error</a>; 500 = server error;</p>
+  <p>Creates a new user</p>
+<p>Possible <code>status.status</code> responses:</p>
+<p>Returns <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_status/Status/status.html">Status.status</a> 201 = complete; 400 = wrong inputs + <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_status/Status/error.html">Status.error</a>; 500 = server error;</p>
+<p><code>name</code> may not exceed  <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/USER_NAME_MAX_LENGTH-constant.html">OpenFoodAPIClient.USER_NAME_MAX_LENGTH</a></p>
 <p>When creating a <a href="https://world.pro.openfoodfacts.org/">producer account</a> use <code>orgName</code> (former requested_org) to name the Producer or brand</p>
+<pre class="language-dart"><code class="language-dart">  User offUser = User(userId: 'username or email', password: 'password');
+
+  SignUpStatus status = await OpenFoodAPIClient.register(
+    user: offUser,
+    name: 'Namer',
+    email: 'email',
+  );
+
+  if (status.status == 201) {
+    print('Yeah account created');
+    OpenFoodAPIConfiguration.globalUser = offUser;
+  } else {
+    print('Error: ${status.error}');
+ }
+</code></pre>
 </section>
 
 

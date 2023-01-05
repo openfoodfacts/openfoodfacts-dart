@@ -50,7 +50,23 @@
 
     
 <section class="desc markdown">
-  <p>Query Configuration for user-related searches.</p>
+  <p>Get products a user created, photographed,</p>
+<p>Deprecated, use standard queries instead</p>
+<pre class="language-dart"><code class="language-dart">  UserProductSearchQueryConfiguration configuration =
+      UserProductSearchQueryConfiguration(
+    // Products user photographed
+    type: UserProductSearchType.PHOTOGRAPHER,
+    userId: '',
+  );
+
+  SearchResult result = await OpenFoodAPIClient.searchProducts(
+    User(userId: '', password: ''),
+    configuration,
+  );
+
+  print(result.count);
+´´´
+</code></pre>
 </section>
 
 
@@ -127,7 +143,7 @@
 
 </dt>
 <dd class="inherited">
-  
+  Defines which <code>ProductField</code>s are retrieved.
   <div class="features">read / write, inherited</div>
 
 </dd>
@@ -244,7 +260,8 @@ with fields in multiple languages. I.e.:
 
 </dt>
 <dd class="inherited">
-  
+  Performs the query, do not use directly please use
+dedicates methods in <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a>
   <div class="features">inherited</div>
 
 </dd>

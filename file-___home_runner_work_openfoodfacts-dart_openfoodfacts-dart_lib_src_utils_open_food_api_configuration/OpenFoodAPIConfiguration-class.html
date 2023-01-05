@@ -50,9 +50,29 @@
 
     
 <section class="desc markdown">
-  <p>Allows to configure the behavior of the package,
-for example to set a global <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user_agent/UserAgent-class.html">UserAgent</a>
-or to point the url to a self hosted instance of the backend.</p>
+  <p>Allows to configure the behavior of the package.</p>
+<p>All of the values are static, they only need to be set once at the
+beginning of the lifecycle of the app. They can be changed at any
+point later. Some methods allow to pass configurations which can be
+also set here, in these cases, the most local value is used.
+E.g.</p>
+<pre class="language-dart"><code class="language-dart">  OpenFoodAPIConfiguration.globalLanguages = &lt;OpenFoodFactsLanguage&gt;[
+    OpenFoodFactsLanguage.ENGLISH,
+  ];
+
+  // Uses german
+  OpenFoodAPIClient.getProductUri(
+    '0000000',
+    language: OpenFoodFactsLanguage.GERMAN,
+    ....
+  );
+
+  // Uses english again
+  OpenFoodAPIClient.getProductUri(
+      '0000000',
+      ....
+  );
+</code></pre>
 </section>
 
 

@@ -55,6 +55,32 @@
 
         </section>
         
+<section class="desc markdown">
+  <p>Defines which <code>ProductField</code>s are retrieved.</p>
+<p>All not mentioned fields will be null in <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product-class.html">Product</a>.
+Not specifying anything returns all available data (except
+Knowledge Panels).
+It's highly recommended to populate this field. This results in faster
+response times and less data usage.</p>
+<pre class="language-dart"><code class="language-dart">   ProductQueryConfiguration config = ProductQueryConfiguration(
+    '5449000131805',
+    fields: [ProductField.ALL],
+  );
+  ProductResultV3 product = await OpenFoodAPIClient.getProductV3(config);
+
+  print(product.product?.productName); // Coca Cola Zero
+  print(product.product?.brands); // Coca-Cola
+
+  ProductQueryConfiguration config = ProductQueryConfiguration(
+    '5449000131805',
+    fields: [ProductField.BRANDS],
+  );
+  ProductResultV3 product = await OpenFoodAPIClient.getProductV3(config);
+
+  print(product.product?.productName); // null
+  print(product.product?.brands); // Coca-Cola
+</code></pre>
+</section>
 
         
 <section class="summary source-code" id="source">

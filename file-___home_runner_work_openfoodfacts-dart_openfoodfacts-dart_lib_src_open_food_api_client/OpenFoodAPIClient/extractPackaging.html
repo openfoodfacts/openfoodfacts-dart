@@ -65,6 +65,18 @@
     
 <section class="desc markdown">
   <p>Extracts the text from packaging image with OCR.</p>
+<p>Uses already uploaded images
+<code>language</code> should be the language of the text on the product</p>
+<pre class="language-dart"><code class="language-dart">  User user = User(userId: '', password: '');
+
+  OcrPackagingResult result = await OpenFoodAPIClient.extractPackaging(
+    user,
+    '3274080005003',
+    OpenFoodFactsLanguage.ENGLISH,
+  );
+
+  print(result.textFromImage); // SPRING WATER LE AUSE MGL Bicarbonates...
+</code></pre>
 </section>
 
 

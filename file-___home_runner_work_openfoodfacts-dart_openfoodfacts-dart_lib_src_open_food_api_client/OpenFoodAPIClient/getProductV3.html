@@ -62,11 +62,33 @@
     </section>
     
 <section class="desc markdown">
-  <p>Returns the product for the given barcode.
-The ProductResult does not contain a product, if the product is not available.
+  <p>The <code>ProductResultV3</code> does not contain a product, if the product is not available.
 ingredients, images and product name will be prepared for the given language.</p>
-<p>Please read the language mechanics explanation if you intend to show
-or update data in specific language: <a href="https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics">https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics</a></p>
+<p>Example:</p>
+<pre class="language-dart"><code class="language-dart">  ProductQueryConfiguration config = ProductQueryConfiguration(
+    '5449000131805',
+    version: ProductQueryVersion.v3,
+  );
+  ProductResultV3 product = await OpenFoodAPIClient.getProductV3(config);
+  print(product.product?.productName); // Coca Cola Zero
+  print(product.product?.brands); // Coca-Cola
+  print(product.product?.quantity); // 330ml
+  print(product.product?.nutriments?.getValue(Nutrient.salt, PerSize.oneHundredGrams)); // 0.0212
+  print(product.product?.additives?.names); // [E150d, E338, E950, E951]
+  print(product.product?.allergens?.names); // []
+</code></pre>
+<p>This product contains:</p>
+<ul>
+<li>Product images (Product image by field, size and language, current fields are: Front, Ingredients, Nutrition, Packaging)</li>
+<li>Additives, Allergens, Environment impact, Ingredient analysis, Nutrient levels, Nutrition facts (incl. micro-nutrients)</li>
+<li>Language dependant fields (like ingredients, product name, packaging text)</li>
+<li>Eco-Score, Nutri-Score, NOVA groups</li>
+<li>Translated, high-level and customizable product information (Attributes)</li>
+<li>Product completion status</li>
+</ul>
+<p>A detailed list of all returned data can be found in <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product-class.html">Product</a>.</p>
+<p>Using the <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryConfiguration-class.html">ProductQueryConfiguration</a> you can specify more query parameters
+like for example the language to query.</p>
 </section>
 
 

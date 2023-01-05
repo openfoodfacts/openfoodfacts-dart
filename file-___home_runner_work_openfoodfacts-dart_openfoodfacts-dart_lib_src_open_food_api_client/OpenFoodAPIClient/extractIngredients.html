@@ -65,9 +65,21 @@
     
 <section class="desc markdown">
   <p>Extract the ingredients from image with the given parameters.
-The ingredients language should be given (ingredients_fr, ingredients_de, ingredients_en)
-Returns the ingredients using OCR.
-By default the query will use the Google Cloud Vision.</p>
+The ingredients' language should be given (ingredients_fr, ingredients_de, ingredients_en)</p>
+<p>Uses an already uploaded ingredients image.</p>
+<p>Please only use if you have before uploaded a new ingredients image
+or if there is already an ingredients image but no extracted ingredients.</p>
+<pre class="language-dart"><code class="language-dart">  User user = User(userId: '', password: '');
+
+  OcrIngredientsResult result = await OpenFoodAPIClient.extractIngredients(
+    user,
+    '3274080005003',
+    OpenFoodFactsLanguage.FRENCH,
+  );
+
+  print(result.ingredientsTextFromImage); // EAU DE SOURCE DE LA DOYE BOUTEILIF Moll
+ ´´´
+</code></pre>
 </section>
 
 
