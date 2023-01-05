@@ -108,7 +108,31 @@ Query the language specific host from OpenFoodFacts.</p>
 And query more products
 </code></pre>
 <p>PageNumber(page: 2),</p>
-<pre class="language-dart"><code></code></pre>
+<pre class="language-dart"><code>
+-------
+
+Search for products related to a user
+
+</code></pre>
+<pre class="language-dart"><code>  final ProductSearchQueryConfiguration configuration =
+      ProductSearchQueryConfiguration(
+    parametersList: [
+      TagFilter.fromType(tagFilterType: type, tagName: userId),
+    ],
+    language: language,
+    fields: [
+      ProductField.BARCODE,
+      ProductField.STATES_TAGS,
+    ],
+    version: ProductQueryVersion.v3,
+  );
+</code></pre>
+<pre class="language-dart"><code>
+Where type is:
+  - [TagFilterType.CREATOR]
+  - [TagFilterType.INFORMERS]
+  - [TagFilterType.PHOTOGRAPHERS]
+</code></pre>
 </section>
 
 
