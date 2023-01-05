@@ -217,6 +217,7 @@ class JsonHelper {
   static const String _checkboxOnValue = 'on';
   static const String _checkboxOffValue = '';
 
+  /// Returns a bool from ''/'on' conversion.
   static bool? checkboxFromJSON(dynamic jsonValue) {
     if (jsonValue == null) {
       return null;
@@ -225,6 +226,7 @@ class JsonHelper {
         jsonValue.trim().toLowerCase() == _checkboxOnValue;
   }
 
+  /// Returns a bool to ''/'on' conversion.
   static String? checkboxToJSON(dynamic value) {
     if (value == null) {
       return null;
@@ -234,5 +236,24 @@ class JsonHelper {
     } else {
       return _checkboxOffValue;
     }
+  }
+
+  /// Returns a bool from 0/1 conversion.
+  static bool? boolFromJSON(dynamic jsonValue) {
+    if (jsonValue == null) {
+      return null;
+    }
+    return jsonValue == 1;
+  }
+
+  /// Returns a bool to 0/1 conversion.
+  static int? boolToJSON(dynamic value) {
+    if (value == null) {
+      return null;
+    }
+    if (value == true || value == 1) {
+      return 1;
+    }
+    return 0;
   }
 }

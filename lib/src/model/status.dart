@@ -81,5 +81,6 @@ class Status extends JsonObject {
   bool isWrongUsernameOrPassword() =>
       statusVerbose == WRONG_USER_OR_PASSWORD_ERROR_MESSAGE;
 
+  @override
   Map<String, dynamic> toJson() => _$StatusToJson(this);
 }

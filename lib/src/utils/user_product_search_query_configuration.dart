@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use_from_same_package
+
 import '../interface/parameter.dart';
 import '../model/parameter/page_number.dart';
 import '../model/parameter/page_size.dart';
@@ -5,8 +7,10 @@ import 'abstract_query_configuration.dart';
 import 'language_helper.dart';
 import 'product_fields.dart';
 
-/// Query Configuration for user-related searches.
+// TODO: deprecated from 2022-12-29; remove when old enough
 /// Get products a user created, photographed,
+///
+/// Deprecated, use standard queries instead
 ///
 /// ```dart
 ///   UserProductSearchQueryConfiguration configuration =
@@ -24,6 +28,7 @@ import 'product_fields.dart';
 ///   print(result.count);
 /// ´´´
 ///
+@Deprecated('Use standard queries instead')
 class UserProductSearchQueryConfiguration extends AbstractQueryConfiguration {
   UserProductSearchQueryConfiguration({
     required this.type,
@@ -76,21 +81,29 @@ class UserProductSearchQueryConfiguration extends AbstractQueryConfiguration {
   }
 }
 
+// TODO: deprecated from 2022-12-29; remove when old enough
 /// Types of user-related searches.
+@Deprecated('Use standard queries instead')
 enum UserProductSearchType {
   /// Where the user created the product.
+  @Deprecated('Use a standard query with TagFilterType.CREATOR instead')
   CONTRIBUTOR,
 
   /// Where the user edited the product.
+  @Deprecated('Use a standard query with TagFilterType.INFORMERS instead')
   INFORMER,
 
   /// Where the user photographed the product.
+  @Deprecated('Use a standard query with TagFilterType.PHOTOGRAPHERS instead')
   PHOTOGRAPHER,
 
   /// Where the user edited a product that still needs to be completed.
+  @Deprecated(
+      'Use a standard query with TagFilterType.INFORMERS and TagFilterType.STATES=ProductState.COMPLETED.toBeCompletedTag instead')
   TO_BE_COMPLETED,
 }
 
+// TODO: deprecated from 2022-12-29; remove when old enough
 extension UserProductSearchTypeExtension on UserProductSearchType {
   /// Returns the URI path for the search.
   String getPath(final String userId) {

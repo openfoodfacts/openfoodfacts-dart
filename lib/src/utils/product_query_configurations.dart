@@ -14,8 +14,14 @@ class ProductQueryVersion {
 
   final int version;
 
+  // TODO: deprecated from 2022-12-29; remove when old enough
+  @Deprecated('Use v3 instead')
   static const ProductQueryVersion v0 = ProductQueryVersion(0);
+
+  // TODO: deprecated from 2022-12-29; remove when old enough
+  @Deprecated('Use v3 instead')
   static const ProductQueryVersion v2 = ProductQueryVersion(2);
+
   static const ProductQueryVersion v3 = ProductQueryVersion(3);
 
   String getPath(final String barcode) {
@@ -40,7 +46,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
   /// parameter's description.
   ProductQueryConfiguration(
     this.barcode, {
-    this.version = ProductQueryVersion.v0,
+    required this.version,
     final OpenFoodFactsLanguage? language,
     final List<OpenFoodFactsLanguage> languages = const [],
     final OpenFoodFactsCountry? country,

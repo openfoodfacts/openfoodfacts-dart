@@ -1,3 +1,6 @@
+// ignore_for_file: deprecated_member_use_from_same_package
+// That's a bit ugly, but we need the previous line in order to pass the pub.dev
+// tests, so put that line back after code generation.
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'product.dart';
@@ -115,6 +118,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       ..packagings = (json['packagings'] as List<dynamic>?)
           ?.map((e) => ProductPackaging.fromJson(e))
           .toList()
+      ..packagingsComplete =
+          JsonHelper.boolFromJSON(json['packagings_complete'])
       ..packagingTextInLanguages =
           LanguageHelper.fromJsonStringMap(json['packaging_text_in_languages'])
       ..lastModifiedBy = json['last_modified_by'] as String?
@@ -206,6 +211,8 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
       LanguageHelper.toJsonStringsListMap(instance.labelsTagsInLanguages));
   writeNotNull('packaging', instance.packaging);
   writeNotNull('packagings', instance.packagings);
+  val['packagings_complete'] =
+      JsonHelper.boolToJSON(instance.packagingsComplete);
   writeNotNull('packaging_tags', instance.packagingTags);
   writeNotNull('packaging_text_in_languages',
       LanguageHelper.toJsonStringMap(instance.packagingTextInLanguages));

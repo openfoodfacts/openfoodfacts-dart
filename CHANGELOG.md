@@ -1,5 +1,41 @@
 # Changelog
 
+## [2.0.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.0.0...v2.0.1) (2023-01-03)
+
+
+### Bug Fixes
+
+* 643 - updated the copyright year in the LICENSE ([#672](https://github.com/openfoodfacts/openfoodfacts-dart/issues/672)) ([a34ab62](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a34ab62be4df426baff858f091d30ae8f0f3c789))
+
+## [2.0.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.30.1...v2.0.0) (2023-01-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* 658 - api version is now required for barcode and search queries ([#667](https://github.com/openfoodfacts/openfoodfacts-dart/issues/667))
+* 450 - finalizing the breaking changes ([#656](https://github.com/openfoodfacts/openfoodfacts-dart/issues/656))
+* 450 - import only "openfoodfacts.dart"; all code in "src" folder ([#655](https://github.com/openfoodfacts/openfoodfacts-dart/issues/655))
+* 450 - Name source files using "lowercase_with_underscores" ([#653](https://github.com/openfoodfacts/openfoodfacts-dart/issues/653))
+
+### Features
+
+* 450 - import only "openfoodfacts.dart"; all code in "src" folder ([#655](https://github.com/openfoodfacts/openfoodfacts-dart/issues/655)) ([d05d49c](https://github.com/openfoodfacts/openfoodfacts-dart/commit/d05d49c9d058591e8f6b97530e1ce91e8b7b03b8))
+* 450 - Name source files using "lowercase_with_underscores" ([#653](https://github.com/openfoodfacts/openfoodfacts-dart/issues/653)) ([cc4eb2c](https://github.com/openfoodfacts/openfoodfacts-dart/commit/cc4eb2cd2fffb88945270b74ab08334f74667354))
+* 659 - support of product field "packagingsComplete" ([#664](https://github.com/openfoodfacts/openfoodfacts-dart/issues/664)) ([ddd61a3](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ddd61a37662936798951ca82e37ba0f40ca23c51))
+* 662 - new packaging fields "quantityPerUnit" and weightMeasured" ([#665](https://github.com/openfoodfacts/openfoodfacts-dart/issues/665)) ([c5335b7](https://github.com/openfoodfacts/openfoodfacts-dart/commit/c5335b7b404dc0b48dd1e0eea73aa39b8942a0de))
+
+
+### Bug Fixes
+
+* 617 - user related queries now support api v3 ([#666](https://github.com/openfoodfacts/openfoodfacts-dart/issues/666)) ([11f678a](https://github.com/openfoodfacts/openfoodfacts-dart/commit/11f678a2c4377d347e1575d2b604929c5e2b3275))
+* 650 - less server demanding nova integration test ([#668](https://github.com/openfoodfacts/openfoodfacts-dart/issues/668)) ([b6379ce](https://github.com/openfoodfacts/openfoodfacts-dart/commit/b6379ce90bbfce994102c7dcd96632139f3959dc))
+
+
+### Code Refactoring
+
+* 450 - finalizing the breaking changes ([#656](https://github.com/openfoodfacts/openfoodfacts-dart/issues/656)) ([c8e8e37](https://github.com/openfoodfacts/openfoodfacts-dart/commit/c8e8e373fee914b397eee6c8764bd094f9f086b1))
+* 658 - api version is now required for barcode and search queries ([#667](https://github.com/openfoodfacts/openfoodfacts-dart/issues/667)) ([c7f3b1d](https://github.com/openfoodfacts/openfoodfacts-dart/commit/c7f3b1daeded3c4eb8429657b94aadd0de086290))
+
 ## [1.30.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v1.30.0...v1.30.1) (2022-12-25)
 
 

@@ -55,6 +55,7 @@ enum ProductField implements OffTagged {
   @Deprecated('Use packagingS field instead')
   PACKAGING(offTag: 'packaging'),
   PACKAGINGS(offTag: 'packagings'),
+  PACKAGINGS_COMPLETE(offTag: 'packagings_complete'),
   PACKAGING_TAGS(offTag: 'packaging_tags'),
   PACKAGING_TEXT_IN_LANGUAGES(offTag: 'packaging_text_'),
   PACKAGING_TEXT_ALL_LANGUAGES(offTag: 'packaging_text_languages'),

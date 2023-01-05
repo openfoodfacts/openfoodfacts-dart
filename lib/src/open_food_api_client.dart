@@ -135,18 +135,26 @@ class OpenFoodAPIClient {
     final User user,
     final String barcode, {
     final List<ProductPackaging>? packagings,
+    final bool? packagingsComplete,
     final QueryType? queryType,
     final OpenFoodFactsCountry? country,
     final OpenFoodFactsLanguage? language,
   }) async {
     final Map<String, dynamic> parameterMap = <String, dynamic>{};
     parameterMap.addAll(user.toData());
-    if (packagings == null) {
-      // For the moment it's the only purpose of this method: saving packagings.
-      throw Exception('packagings cannot be null');
+    if (packagings == null && packagingsComplete == null) {
+      // For the moment there are limited fields concerned.
+      throw Exception('At least one V3 field must be populated.');
     }
-    parameterMap['product'] = {};
-    parameterMap['product']['packagings'] = packagings;
+    const String productTag = 'product';
+    parameterMap[productTag] = {};
+    if (packagings != null) {
+      parameterMap[productTag][ProductField.PACKAGINGS.offTag] = packagings;
+    }
+    if (packagingsComplete != null) {
+      parameterMap[productTag][ProductField.PACKAGINGS_COMPLETE.offTag] =
+          packagingsComplete;
+    }
     if (language != null) {
       parameterMap['lc'] = language.offTag;
       parameterMap['tags_lc'] = language.offTag;
@@ -240,6 +248,7 @@ class OpenFoodAPIClient {
         language: language,
         country: null,
         fields: null,
+        version: ProductQueryVersion.v3,
       ),
       user: user,
       queryType: queryType,
@@ -487,6 +496,7 @@ class OpenFoodAPIClient {
   /// Returns the [ProductFreshness] for all the [barcodes].
   static Future<Map<String, ProductFreshness>> getProductFreshness({
     required final List<String> barcodes,
+    required final ProductQueryVersion version,
     final User? user,
     final OpenFoodFactsLanguage? language,
     final OpenFoodFactsCountry? country,
@@ -506,6 +516,7 @@ class OpenFoodAPIClient {
           ProductField.LAST_MODIFIED,
           ProductField.STATES_TAGS,
         ],
+        version: version,
       ),
       queryType: queryType,
     );
