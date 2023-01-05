@@ -89,7 +89,7 @@ Code examples for the following tasks:
   - [Let your users login](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/login2.html)
   - [Let your users register on Open Food Facts](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/register.html)
   - [Reset user password](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/resetPassword.html)
-  - [Get contribution data about a user](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/UserProductSearchQueryConfiguration-class.html)
+  - [Get contribution data about a user](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html)
 - [Save product to Open Food Facts (edit or add)](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/saveProduct.html)
 - Images
   - [Send images](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/addProductImage.html)
