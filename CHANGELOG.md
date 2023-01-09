@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.1.0...v2.1.1) (2023-01-09)
+
+
+### Bug Fixes
+
+* more read-only tests on PROD env ([#683](https://github.com/openfoodfacts/openfoodfacts-dart/issues/683)) ([cd5cf06](https://github.com/openfoodfacts/openfoodfacts-dart/commit/cd5cf06835f9bc129fb3b78a24c336f5f9f970b6))
+
 ## [2.1.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.0.1...v2.1.0) (2023-01-05)
 
 
