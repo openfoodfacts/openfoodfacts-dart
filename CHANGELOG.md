@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.1.1...v2.1.2) (2023-01-09)
+
+
+### Bug Fixes
+
+* correct spelling of User-Agent ([#686](https://github.com/openfoodfacts/openfoodfacts-dart/issues/686)) ([67f1583](https://github.com/openfoodfacts/openfoodfacts-dart/commit/67f15830fb5340998b092a277736750430437e4d))
+
 ## [2.1.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.1.0...v2.1.1) (2023-01-09)
 
 
