@@ -7,7 +7,7 @@ import 'test_constants.dart';
 void main() {
   const int HTTP_OK = 200;
 
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   /// Tests around Matched Product v1.
   group('$OpenFoodAPIClient matched product v1', () {
@@ -55,7 +55,7 @@ void main() {
       );
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
-        user: TestConstants.TEST_USER,
+        user: TestConstants.PROD_USER,
       );
       expect(result.status, ProductResultV3.statusSuccess);
       expect(result.barcode, barcode);
