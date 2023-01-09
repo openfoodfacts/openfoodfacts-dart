@@ -214,6 +214,9 @@ void main() {
       );
 
       expect(result.products, isNotNull);
+      if (result.count == null) {
+        expect(result.products!.length, 0);
+      }
       for (final Product product in result.products!) {
         if (veganStatus != null) {
           expect(
@@ -234,7 +237,7 @@ void main() {
           );
         }
       }
-      return result.count;
+      return result.count ?? 0;
     }
 
     test('check vegan search', () async {
