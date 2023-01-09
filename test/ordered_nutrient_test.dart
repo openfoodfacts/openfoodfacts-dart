@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 
 /// Tests related to [OrderedNutrient] and [OrderedNutrients]
 void main() {
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   // Very long list, experimentally created from the 3 initial URLs.
   // Don't hesitate to edit this list if you have clear functional ideas

@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   group('$OpenFoodAPIClient get robotoff questions', () {
     test('get questions for Noix de Saint-Jacques EN', () async {
@@ -11,7 +11,7 @@ void main() {
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
         '3274570800026',
         'en',
-        user: TestConstants.TEST_USER,
+        user: TestConstants.PROD_USER,
         count: 1,
       );
 
@@ -37,7 +37,7 @@ void main() {
           await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
         '3274570800026',
         'fr',
-        user: TestConstants.TEST_USER,
+        user: TestConstants.PROD_USER,
       );
 
       if (result.status != 'no_questions') {
@@ -65,7 +65,6 @@ void main() {
         TestConstants.PROD_USER,
         types: [type],
         count: 2,
-        queryType: QueryType.PROD,
       );
 
       expect(result.status, isNotNull);
@@ -81,7 +80,6 @@ void main() {
         'fr',
         TestConstants.PROD_USER,
         count: 2,
-        queryType: QueryType.PROD,
       );
 
       expect(result.status, isNotNull);
@@ -95,7 +93,6 @@ void main() {
       final InsightsResult result = await OpenFoodAPIClient.getRandomInsight(
         TestConstants.PROD_USER,
         type: InsightType.CATEGORY,
-        queryType: QueryType.PROD,
       );
 
       expect(result.status, isNotNull);
@@ -109,7 +106,6 @@ void main() {
       final InsightsResult result1 = await OpenFoodAPIClient.getRandomInsight(
         TestConstants.PROD_USER,
         type: InsightType.CATEGORY,
-        queryType: QueryType.PROD,
       );
 
       final String barcode = result1.insights![0].barcode!;
@@ -117,7 +113,6 @@ void main() {
       final InsightsResult result = await OpenFoodAPIClient.getProductInsights(
         barcode,
         TestConstants.PROD_USER,
-        queryType: QueryType.PROD,
       );
 
       expect(result.status, isNotNull);
@@ -132,7 +127,6 @@ void main() {
       InsightsResult result = await OpenFoodAPIClient.getProductInsights(
         fakeBarcode,
         TestConstants.PROD_USER,
-        queryType: QueryType.PROD,
       );
 
       expect(result.status, isNotNull);
