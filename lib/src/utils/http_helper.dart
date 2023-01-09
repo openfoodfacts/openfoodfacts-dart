@@ -203,7 +203,7 @@ class HttpHelper {
 
     headers.addAll({
       'Accept': 'application/json',
-      'UserAgent':
+      'User-Agent':
           OpenFoodAPIConfiguration.userAgent?.toValueString() ?? USER_AGENT,
       'From': OpenFoodAPIConfiguration.getUser(user)?.userId ?? FROM,
     });
