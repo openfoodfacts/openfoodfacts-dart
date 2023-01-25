@@ -21,6 +21,18 @@ class ImageHelper {
               '/'
               '${getProductImageFilename(image, imageSize: imageSize)}';
 
+  /// Returns the [image] full url for an uploaded image.
+  ///
+  /// E.g. "https://static.openfoodfacts.org/images/products/359/671/046/2858/1.jpg"
+  static String getUploadedImageUrl(
+    final String barcode,
+    final int imageId, {
+    final QueryType? queryType,
+  }) =>
+      '${getProductImageRootUrl(barcode, queryType: queryType)}'
+      '/'
+      '$imageId.jpg';
+
   /// Returns the [image] filename - for a specific [imageSize] if needed.
   ///
   /// By default uses the own [image]'s size field.

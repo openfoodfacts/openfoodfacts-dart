@@ -340,6 +340,42 @@ class OpenFoodAPIClient {
     return result;
   }
 
+  /// Returns the ids of all uploaded images for that product.
+  ///
+  /// To be used in combination with [ImageHelper.getUploadedImageUrl].
+  /// Does not depend on language or country.
+  static Future<List<int>> getProductImageIds(
+    final String barcode, {
+    final User? user,
+    final QueryType? queryType,
+  }) async {
+    final ProductQueryConfiguration configuration = ProductQueryConfiguration(
+      barcode,
+      version: ProductQueryVersion.v3,
+      fields: <ProductField>[ProductField.IMAGES],
+    );
+    final String productString = await getProductString(
+      configuration,
+      user: user,
+      queryType: queryType,
+    );
+    final String jsonStr = _replaceQuotes(productString);
+    final json = jsonDecode(jsonStr);
+    if (json['status'] != 'success') {
+      throw Exception('Error: ${json['status']}');
+    }
+    final Map<String, dynamic> images = json['product']['images'];
+    final List<int> result = <int>[];
+    for (final String key in images.keys) {
+      final int? value = int.tryParse(key);
+      if (value != null) {
+        result.add(value);
+      }
+    }
+    result.sort();
+    return result;
+  }
+
   /// Returns the response body of "get product" API for the given barcode.
   static Future<String> getProductString(
     final ProductQueryConfiguration configuration, {
