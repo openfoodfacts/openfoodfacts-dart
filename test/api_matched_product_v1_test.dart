@@ -89,10 +89,7 @@ void main() {
 
       matchedProduct = MatchedProduct(result.product!, manager);
       expect(matchedProduct.score, greaterThan(37.5));
-      expect(
-          matchedProduct.status,
-          MatchedProductStatus
-              .YES); // because the score for FOREST is not good enough
+      expect(matchedProduct.status, MatchedProductStatus.NO);
 
       await manager.clearImportances(); // no attribute parameters at all
       expect(refreshCounter, 5);

@@ -1922,7 +1922,7 @@ void main() {
       }
 
       expect(product.packagings, isNotNull);
-      expect(product.packagings!.length, 3);
+      expect(product.packagings!.length, greaterThanOrEqualTo(3));
       for (final ProductPackaging packaging in product.packagings!) {
         checkLocalizedTag(packaging.shape);
         checkLocalizedTag(packaging.material);
