@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.1.2...v2.2.0) (2023-01-26)
+
+
+### Features
+
+* 688 - new method "getProductImageIds" ([#689](https://github.com/openfoodfacts/openfoodfacts-dart/issues/689)) ([71e4067](https://github.com/openfoodfacts/openfoodfacts-dart/commit/71e40678ccdfbf4dd375d96b568dc7775b5bbb0c))
+
 ## [2.1.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.1.1...v2.1.2) (2023-01-09)
 
 
