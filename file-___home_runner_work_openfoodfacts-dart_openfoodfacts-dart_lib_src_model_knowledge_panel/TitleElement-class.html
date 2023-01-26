@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
@@ -21,12 +21,12 @@
 </head>
 
 
-<body data-base-href="../" data-using-base-href="false">
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
 
 <div id="overlay-under-drawer"></div>
 
 <header id="title">
-  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">openfoodfacts</a></li>
     <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel-library.html">knowledge_panel</a></li>
@@ -36,10 +36,16 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span class="material-symbols-outlined">
+        brightness_4
+      </span>
+    </label>
+  </div>
 </header>
-
 <main>
-
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
@@ -61,7 +67,7 @@ of a text title, subtitle and an icon.</p>
   <dt>Inheritance</dt>
   <dd>
     <ul class="gt-separated dark clazz-relationships">
-      <li><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object-class.html">Object</a></li>
+      <li><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object-class.html">Object</a></li>
         <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject-class.html">JsonObject</a></li>
       <li>TitleElement</li>
     </ul>
@@ -73,6 +79,8 @@ of a text title, subtitle and an icon.</p>
 
 
         
+
+
       </dl>
     </section>
 
@@ -82,14 +90,14 @@ of a text title, subtitle and an icon.</p>
 
     <dl class="constructor-summary-list">
         <dt id="TitleElement" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/TitleElement.html">TitleElement</a></span><span class="signature">(<span class="parameter" id="-param-title">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span> <span class="parameter-name">title</span>, </span><span class="parameter" id="-param-subtitle"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">subtitle</span>, </span><span class="parameter" id="-param-grade"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/Grade.html">Grade</a>?</span> <span class="parameter-name">grade</span>, </span><span class="parameter" id="-param-type"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElementType.html">TitleElementType</a>?</span> <span class="parameter-name">type</span>, </span><span class="parameter" id="-param-iconUrl"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">iconUrl</span>, </span><span class="parameter" id="-param-iconColorFromEvaluation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">iconColorFromEvaluation</span>}</span>)</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/TitleElement.html">TitleElement</a></span><span class="signature">(<span class="parameter" id="-param-title">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">title</span>, </span><span class="parameter" id="-param-subtitle"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">subtitle</span>, </span><span class="parameter" id="-param-grade"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/Grade.html">Grade</a>?</span> <span class="parameter-name">grade</span>, </span><span class="parameter" id="-param-type"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElementType.html">TitleElementType</a>?</span> <span class="parameter-name">type</span>, </span><span class="parameter" id="-param-iconUrl"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">iconUrl</span>, </span><span class="parameter" id="-param-iconColorFromEvaluation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">iconColorFromEvaluation</span>}</span>)</span>
         </dt>
         <dd>
           
             <div class="constructor-modifier features">const</div>
         </dd>
         <dt id="TitleElement.fromJson" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/TitleElement.fromJson.html">TitleElement.fromJson</a></span><span class="signature">(<span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span>)</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/TitleElement.fromJson.html">TitleElement.fromJson</a></span><span class="signature">(<span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span>)</span>
         </dt>
         <dd>
           
@@ -112,75 +120,75 @@ of a text title, subtitle and an icon.</p>
 corresponding topics. Client can choose to color code the panel depending
 on how good/bad the grade is.
 Scale: 'A' -&gt; 'E'
-  <div class="features">final</div>
+  <div class="features"><span class="feature">final</span></div>
 
 </dd>
 
         <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/int-class.html">int</a></span> 
 
 </dt>
 <dd class="inherited">
   The hash code for this object.
-  <div class="features">read-only, inherited</div>
+  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="iconColorFromEvaluation" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/iconColorFromEvaluation.html">iconColorFromEvaluation</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/bool-class.html">bool</a>?</span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/bool-class.html">bool</a>?</span> 
 
 </dt>
 <dd>
   If true, the icon can be tinted with a color (red/green/yellow/whatever)
 in accordance with the <code>evaluation</code> of the knowledge panel as per the
 client's discretion.
-  <div class="features">final</div>
+  <div class="features"><span class="feature">final</span></div>
 
 </dd>
 
         <dt id="iconUrl" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/iconUrl.html">iconUrl</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a>?</span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a>?</span> 
 
 </dt>
 <dd>
   URL of an icon representing the Panel.
-  <div class="features">final</div>
+  <div class="features"><span class="feature">final</span></div>
 
 </dd>
 
         <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/Type-class.html">Type</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/Type-class.html">Type</a></span> 
 
 </dt>
 <dd class="inherited">
   A representation of the runtime type of the object.
-  <div class="features">read-only, inherited</div>
+  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="subtitle" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/subtitle.html">subtitle</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a>?</span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a>?</span> 
 
 </dt>
 <dd>
   Subtitle of the panel. Example - 'High environmental impact'.
-  <div class="features">final</div>
+  <div class="features"><span class="feature">final</span></div>
 
 </dd>
 
         <dt id="title" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/title.html">title</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span> 
 
 </dt>
 <dd>
   Title string of the panel. Example - 'Eco-Score D'.
-  <div class="features">final</div>
+  <div class="features"><span class="feature">final</span></div>
 
 </dd>
 
@@ -191,7 +199,7 @@ client's discretion.
 </dt>
 <dd>
   Type of the TitleElement.
-  <div class="features">final</div>
+  <div class="features"><span class="feature">final</span></div>
 
 </dd>
 
@@ -205,7 +213,7 @@ client's discretion.
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
@@ -213,52 +221,52 @@ client's discretion.
 </dt>
 <dd class="inherited">
   Invoked when a non-existent method or property is accessed.
-  <div class="features">inherited</div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="toData" class="callable inherited">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toData.html">toData</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>&gt;</span></span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span>&gt;</span></span>
   </span>
   
 
 </dt>
 <dd class="inherited">
   
-  <div class="features">inherited</div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="toJson" class="callable">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/toJson.html">toJson</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
   </span>
   
 
 </dt>
 <dd>
   
-  <div class="features">override</div>
+  <div class="features"><span class="feature">override</span></div>
 
 </dd>
 
         <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span>
   </span>
   
 
 </dt>
 <dd class="inherited">
   A string representation of this object.
-  <div class="features">inherited</div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="toValueString" class="callable inherited">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toValueString.html">toValueString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span>
   </span>
   
 
@@ -266,7 +274,7 @@ client's discretion.
 <dd class="inherited">
   Returns all values as a String separated by a hyphen
 value1 - value2 - value3
-  <div class="features">inherited</div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -279,15 +287,15 @@ value1 - value2 - value3
     <h2>Operators</h2>
     <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/bool-class.html">bool</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/bool-class.html">bool</a></span>
   </span>
   
 
 </dt>
 <dd class="inherited">
   The equality operator.
-  <div class="features">inherited</div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -316,21 +324,21 @@ value1 - value2 - value3
 
     <h5>knowledge_panel library</h5>
     <ol>
-  <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel-library.html#classes">Classes</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/KnowledgePanel-class.html">KnowledgePanel</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement-class.html">TitleElement</a></li>
+      <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel-library.html#classes">Classes</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/KnowledgePanel-class.html">KnowledgePanel</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement-class.html">TitleElement</a></li>
 
 
 
 
 
 
-  <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel-library.html#enums">Enums</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/Evaluation.html">Evaluation</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/Grade.html">Grade</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/KnowledgePanelSize.html">KnowledgePanelSize</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/Level.html">Level</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElementType.html">TitleElementType</a></li>
+      <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel-library.html#enums">Enums</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/Evaluation.html">Evaluation</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/Grade.html">Grade</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/KnowledgePanelSize.html">KnowledgePanelSize</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/Level.html">Level</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElementType.html">TitleElementType</a></li>
 
 
 </ol>
@@ -345,27 +353,27 @@ value1 - value2 - value3
           <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/TitleElement.fromJson.html">fromJson</a></li>
 
 
-    <li class="section-title">
-      <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement-class.html#instance-properties">Properties</a>
-    </li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/grade.html">grade</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/iconColorFromEvaluation.html">iconColorFromEvaluation</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/iconUrl.html">iconUrl</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/runtimeType.html">runtimeType</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/subtitle.html">subtitle</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/title.html">title</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/type.html">type</a></li>
+        <li class="section-title">
+          <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement-class.html#instance-properties">Properties</a>
+        </li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/grade.html">grade</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/hashCode.html">hashCode</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/iconColorFromEvaluation.html">iconColorFromEvaluation</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/iconUrl.html">iconUrl</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/runtimeType.html">runtimeType</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/subtitle.html">subtitle</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/title.html">title</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/type.html">type</a></li>
 
-    <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement-class.html#instance-methods">Methods</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-    <li class="inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toData.html">toData</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/toJson.html">toJson</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/toString.html">toString</a></li>
-    <li class="inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toValueString.html">toValueString</a></li>
+        <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement-class.html#instance-methods">Methods</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+          <li class="inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toData.html">toData</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement/toJson.html">toJson</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/toString.html">toString</a></li>
+          <li class="inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toValueString.html">toValueString</a></li>
 
-    <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement-class.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/operator_equals.html">operator ==</a></li>
+        <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement-class.html#operators">Operators</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 

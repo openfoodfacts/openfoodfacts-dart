@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../../static-assets/github.css?v1">
   <link rel="stylesheet" href="../../static-assets/styles.css?v1">
@@ -21,12 +21,12 @@
 </head>
 
 
-<body data-base-href="../../" data-using-base-href="false">
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
 
 <div id="overlay-under-drawer"></div>
 
 <header id="title">
-  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive-library.html">taxonomy_additive</a></li>
@@ -37,10 +37,16 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span class="material-symbols-outlined">
+        brightness_4
+      </span>
+    </label>
+  </div>
 </header>
-
 <main>
-
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
@@ -49,9 +55,10 @@
 </h1></div>
 
         <section class="multi-line-signature">
-          <a href="https://api.dart.dev/stable/2.18.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>&gt;</span>?
+          
+          <a href="https://api.dart.dev/stable/2.19.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span>&gt;</span>?
           <span class="name ">organicEu</span>
-          <div class="features">read / write</div>
+          <div class="features"><span class="feature">read / write</span></div>
 
         </section>
         
@@ -65,9 +72,7 @@
   toJson: LanguageHelper.toJsonStringMap,
   includeIfNull: false,
 )
-Map&lt;OpenFoodFactsLanguage, String&gt;? organicEu;
-
-</code></pre>
+Map&lt;OpenFoodFactsLanguage, String&gt;? organicEu;</code></pre>
 </section>
 
 
@@ -96,50 +101,50 @@ Map&lt;OpenFoodFactsLanguage, String&gt;? organicEu;
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/TaxonomyAdditive.fromJson.html">fromJson</a></li>
 
 
-    <li class="section-title">
-      <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive-class.html#instance-properties">Properties</a>
-    </li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/additivesClasses.html">additivesClasses</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/carbonFootprintFrFoodgesIngredient.html">carbonFootprintFrFoodgesIngredient</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/carbonFootprintFrFoodgesValue.html">carbonFootprintFrFoodgesValue</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/children.html">children</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/colourIndex.html">colourIndex</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/comment.html">comment</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/defaultAdditiveClass.html">defaultAdditiveClass</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/description.html">description</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsa.html">efsa</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluation.html">efsaEvaluation</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationAdi.html">efsaEvaluationAdi</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationAdiEstablished.html">efsaEvaluationAdiEstablished</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationDate.html">efsaEvaluationDate</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationExposure95thGreaterThanAdi.html">efsaEvaluationExposure95thGreaterThanAdi</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationExposure95thGreaterThanNoael.html">efsaEvaluationExposure95thGreaterThanNoael</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationExposureMeanGreaterThanAdi.html">efsaEvaluationExposureMeanGreaterThanAdi</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationExposureMeanGreaterThanNoael.html">efsaEvaluationExposureMeanGreaterThanNoael</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationOverexposureRisk.html">efsaEvaluationOverexposureRisk</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationSafetyAssessed.html">efsaEvaluationSafetyAssessed</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationUrl.html">efsaEvaluationUrl</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/eNumber.html">eNumber</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/fromPalmOil.html">fromPalmOil</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/mandatoryAdditiveClass.html">mandatoryAdditiveClass</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/name.html">name</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/organicEu.html">organicEu</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/parents.html">parents</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/runtimeType.html">runtimeType</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/vegan.html">vegan</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/vegetarian.html">vegetarian</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/wikidata.html">wikidata</a></li>
+        <li class="section-title">
+          <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive-class.html#instance-properties">Properties</a>
+        </li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/additivesClasses.html">additivesClasses</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/carbonFootprintFrFoodgesIngredient.html">carbonFootprintFrFoodgesIngredient</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/carbonFootprintFrFoodgesValue.html">carbonFootprintFrFoodgesValue</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/children.html">children</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/colourIndex.html">colourIndex</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/comment.html">comment</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/defaultAdditiveClass.html">defaultAdditiveClass</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/description.html">description</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsa.html">efsa</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluation.html">efsaEvaluation</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationAdi.html">efsaEvaluationAdi</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationAdiEstablished.html">efsaEvaluationAdiEstablished</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationDate.html">efsaEvaluationDate</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationExposure95thGreaterThanAdi.html">efsaEvaluationExposure95thGreaterThanAdi</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationExposure95thGreaterThanNoael.html">efsaEvaluationExposure95thGreaterThanNoael</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationExposureMeanGreaterThanAdi.html">efsaEvaluationExposureMeanGreaterThanAdi</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationExposureMeanGreaterThanNoael.html">efsaEvaluationExposureMeanGreaterThanNoael</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationOverexposureRisk.html">efsaEvaluationOverexposureRisk</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationSafetyAssessed.html">efsaEvaluationSafetyAssessed</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/efsaEvaluationUrl.html">efsaEvaluationUrl</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/eNumber.html">eNumber</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/fromPalmOil.html">fromPalmOil</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/hashCode.html">hashCode</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/mandatoryAdditiveClass.html">mandatoryAdditiveClass</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/name.html">name</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/organicEu.html">organicEu</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/parents.html">parents</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/runtimeType.html">runtimeType</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/vegan.html">vegan</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/vegetarian.html">vegetarian</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/wikidata.html">wikidata</a></li>
 
-    <li class="section-title"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive-class.html#instance-methods">Methods</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-    <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toData.html">toData</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/toJson.html">toJson</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/toString.html">toString</a></li>
-    <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toValueString.html">toValueString</a></li>
+        <li class="section-title"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive-class.html#instance-methods">Methods</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+          <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toData.html">toData</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/toJson.html">toJson</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive/toString.html">toString</a></li>
+          <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toValueString.html">toValueString</a></li>
 
-    <li class="section-title inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive-class.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/operator_equals.html">operator ==</a></li>
+        <li class="section-title inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive-class.html#operators">Operators</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 

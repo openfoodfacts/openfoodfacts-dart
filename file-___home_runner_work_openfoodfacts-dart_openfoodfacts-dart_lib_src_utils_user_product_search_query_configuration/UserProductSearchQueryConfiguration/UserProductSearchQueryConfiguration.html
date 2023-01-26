@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../../static-assets/github.css?v1">
   <link rel="stylesheet" href="../../static-assets/styles.css?v1">
@@ -21,12 +21,12 @@
 </head>
 
 
-<body data-base-href="../../" data-using-base-href="false">
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
 
 <div id="overlay-under-drawer"></div>
 
 <header id="title">
-  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration-library.html">user_product_search_query_configuration</a></li>
@@ -37,10 +37,16 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span class="material-symbols-outlined">
+        brightness_4
+      </span>
+    </label>
+  </div>
 </header>
-
 <main>
-
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
@@ -49,13 +55,14 @@
 </h1></div>
 
     <section class="multi-line-signature">
+      
       <span class="name ">UserProductSearchQueryConfiguration</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-type">{<span>required</span> <span class="type-annotation"><a class="deprecated" href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchType.html">UserProductSearchType</a></span> <span class="parameter-name">type</span>, </span></li>
-<li><span class="parameter" id="-param-userId"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span> <span class="parameter-name">userId</span>, </span></li>
+<li><span class="parameter" id="-param-userId"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">userId</span>, </span></li>
 <li><span class="parameter" id="-param-language"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a>?</span> <span class="parameter-name">language</span>, </span></li>
-<li><span class="parameter" id="-param-languages"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>&gt;</span></span> <span class="parameter-name">languages</span> = <span class="default-value">const []</span>, </span></li>
-<li><span class="parameter" id="-param-fields"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>&gt;</span>?</span> <span class="parameter-name">fields</span>, </span></li>
-<li><span class="parameter" id="-param-pageNumber"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">pageNumber</span>, </span></li>
-<li><span class="parameter" id="-param-pageSize"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">pageSize</span>}</span></li>
+<li><span class="parameter" id="-param-languages"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>&gt;</span></span> <span class="parameter-name">languages</span> = <span class="default-value">const []</span>, </span></li>
+<li><span class="parameter" id="-param-fields"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>&gt;</span>?</span> <span class="parameter-name">fields</span>, </span></li>
+<li><span class="parameter" id="-param-pageNumber"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">pageNumber</span>, </span></li>
+<li><span class="parameter" id="-param-pageSize"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">pageSize</span>}</span></li>
 </ol>)
     </section>
 
@@ -106,29 +113,29 @@
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration/UserProductSearchQueryConfiguration.html">UserProductSearchQueryConfiguration</a></li>
 
 
-    <li class="section-title">
-      <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration-class.html#instance-properties">Properties</a>
-    </li>
-    <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/additionalParameters.html">additionalParameters</a></li>
-    <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/country.html">country</a></li>
-    <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/fields.html">fields</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/language.html">language</a></li>
-    <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/languages.html">languages</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/runtimeType.html">runtimeType</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration/type.html">type</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration/userId.html">userId</a></li>
+        <li class="section-title">
+          <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration-class.html#instance-properties">Properties</a>
+        </li>
+          <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/additionalParameters.html">additionalParameters</a></li>
+          <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/country.html">country</a></li>
+          <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/fields.html">fields</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/hashCode.html">hashCode</a></li>
+          <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/language.html">language</a></li>
+          <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/languages.html">languages</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/runtimeType.html">runtimeType</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration/type.html">type</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration/userId.html">userId</a></li>
 
-    <li class="section-title"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration-class.html#instance-methods">Methods</a></li>
-    <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/computeCountryCode.html">computeCountryCode</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration/getParametersMap.html">getParametersMap</a></li>
-    <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/getResponse.html">getResponse</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration/getUriPath.html">getUriPath</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/toString.html">toString</a></li>
+        <li class="section-title"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration-class.html#instance-methods">Methods</a></li>
+          <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/computeCountryCode.html">computeCountryCode</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration/getParametersMap.html">getParametersMap</a></li>
+          <li class="inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/getResponse.html">getResponse</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration/getUriPath.html">getUriPath</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/toString.html">toString</a></li>
 
-    <li class="section-title inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration-class.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/operator_equals.html">operator ==</a></li>
+        <li class="section-title inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration-class.html#operators">Operators</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 

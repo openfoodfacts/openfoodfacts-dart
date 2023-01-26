@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
@@ -21,12 +21,12 @@
 </head>
 
 
-<body data-base-href="../" data-using-base-href="false">
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
 
 <div id="overlay-under-drawer"></div>
 
 <header id="title">
-  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">openfoodfacts</a></li>
     <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper-library.html">country_helper</a></li>
@@ -36,10 +36,16 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span class="material-symbols-outlined">
+        brightness_4
+      </span>
+    </label>
+  </div>
 </header>
-
 <main>
-
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
@@ -66,8 +72,8 @@
   <dt>Inheritance</dt>
   <dd>
     <ul class="gt-separated dark eNum-relationships">
-      <li><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object-class.html">Object</a></li>
-        <li><a href="https://api.dart.dev/stable/2.18.6/dart-core/Enum-class.html">Enum</a></li>
+      <li><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object-class.html">Object</a></li>
+        <li><a href="https://api.dart.dev/stable/2.19.0/dart-core/Enum-class.html">Enum</a></li>
       <li>OpenFoodFactsCountry</li>
     </ul>
   </dd>
@@ -81,6 +87,8 @@
   </dd>
         
         
+
+
       </dl>
     </section>
 
@@ -90,7 +98,7 @@
 
     <dl class="constructor-summary-list">
         <dt id="OpenFoodFactsCountry" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a></span><span class="signature">(<span class="parameter" id="-param-offTag">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span> <span class="parameter-name">offTag</span>}</span>)</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a></span><span class="signature">(<span class="parameter" id="-param-offTag">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">offTag</span>}</span>)</span>
         </dt>
         <dd>
           
@@ -113,9 +121,9 @@
   <p>Andorra</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ad&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ad&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="UNITED_ARAB_EMIRATES" class="constant">
@@ -128,9 +136,9 @@
   <p>United Arab Emirates</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ae&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ae&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="AFGHANISTAN" class="constant">
@@ -143,9 +151,9 @@
   <p>Afghanistan</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;af&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;af&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ANTIGUA_AND_BARBUDA" class="constant">
@@ -158,9 +166,9 @@
   <p>Antigua and Barbuda</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ag&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ag&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ANGUILLA" class="constant">
@@ -173,9 +181,9 @@
   <p>Anguilla</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ai&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ai&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ALBANIA" class="constant">
@@ -188,9 +196,9 @@
   <p>Albania</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;al&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;al&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ARMENIA" class="constant">
@@ -203,9 +211,9 @@
   <p>Armenia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;am&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;am&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ANGOLA" class="constant">
@@ -218,9 +226,9 @@
   <p>Angola</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ao&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ao&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ANTARCTICA" class="constant">
@@ -233,9 +241,9 @@
   <p>Antarctica</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;aq&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;aq&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ARGENTINA" class="constant">
@@ -248,9 +256,9 @@
   <p>Argentina</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ar&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ar&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="AMERICAN_SAMOA" class="constant">
@@ -263,9 +271,9 @@
   <p>American Samoa</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;as&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;as&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="AUSTRIA" class="constant">
@@ -278,9 +286,9 @@
   <p>Austria</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;at&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;at&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="AUSTRALIA" class="constant">
@@ -293,9 +301,9 @@
   <p>Australia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;au&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;au&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ARUBA" class="constant">
@@ -308,9 +316,9 @@
   <p>Aruba</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;aw&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;aw&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ALAND_ISLANDS" class="constant">
@@ -323,9 +331,9 @@
   <p>Åland Islands</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ax&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ax&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="AZERBAIJAN" class="constant">
@@ -338,9 +346,9 @@
   <p>Azerbaijan</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;az&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;az&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BOSNIA_AND_HERZEGOVINA" class="constant">
@@ -353,9 +361,9 @@
   <p>Bosnia and Herzegovina</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ba&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ba&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BARBADOS" class="constant">
@@ -368,9 +376,9 @@
   <p>Barbados</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bb&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bb&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BANGLADESH" class="constant">
@@ -383,9 +391,9 @@
   <p>Bangladesh</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bd&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bd&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BELGIUM" class="constant">
@@ -398,9 +406,9 @@
   <p>Belgium</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;be&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;be&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BURKINA_FASO" class="constant">
@@ -413,9 +421,9 @@
   <p>Burkina Faso</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bf&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bf&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BULGARIA" class="constant">
@@ -428,9 +436,9 @@
   <p>Bulgaria</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bg&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bg&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BAHRAIN" class="constant">
@@ -443,9 +451,9 @@
   <p>Bahrain</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bh&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bh&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BURUNDI" class="constant">
@@ -458,9 +466,9 @@
   <p>Burundi</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bi&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bi&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BENIN" class="constant">
@@ -473,9 +481,9 @@
   <p>Benin</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bj&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bj&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SAINT_BARTHELEMY" class="constant">
@@ -488,9 +496,9 @@
   <p>Saint Barthélemy</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bl&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bl&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BERMUDA" class="constant">
@@ -503,9 +511,9 @@
   <p>Bermuda</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bm&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bm&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BRUNEI_DARUSSALAM" class="constant">
@@ -518,9 +526,9 @@
   <p>Brunei Darussalam</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bn&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bn&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BOLIVIA" class="constant">
@@ -533,9 +541,9 @@
   <p>Bolivia (Plurinational State of)</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bo&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bo&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BONAIRE" class="constant">
@@ -548,9 +556,9 @@
   <p>Bonaire, Sint Eustatius and Saba</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bq&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bq&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BRAZIL" class="constant">
@@ -563,9 +571,9 @@
   <p>Brazil</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;br&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;br&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BAHAMAS" class="constant">
@@ -578,9 +586,9 @@
   <p>Bahamas</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bs&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bs&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BHUTAN" class="constant">
@@ -593,9 +601,9 @@
   <p>Bhutan</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bt&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bt&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BOUVET_ISLAND" class="constant">
@@ -608,9 +616,9 @@
   <p>Bouvet Island</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bv&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bv&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BOTSWANA" class="constant">
@@ -623,9 +631,9 @@
   <p>Botswana</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bw&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bw&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BELARUS" class="constant">
@@ -638,9 +646,9 @@
   <p>Belarus</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;by&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;by&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BELIZE" class="constant">
@@ -653,9 +661,9 @@
   <p>Belize</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bz&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;bz&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CANADA" class="constant">
@@ -668,9 +676,9 @@
   <p>Canada</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ca&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ca&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="COCOS_ISLANDS" class="constant">
@@ -683,9 +691,9 @@
   <p>Cocos (Keeling) Islands</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cc&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cc&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="DEMOCRATIC_REPUBLIC_OF_THE_CONGO" class="constant">
@@ -698,9 +706,9 @@
   <p>Congo, Democratic Republic of the</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cd&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cd&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CENTRAL_AFRICAN_REPUBLIC" class="constant">
@@ -713,9 +721,9 @@
   <p>Central African Republic</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cf&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cf&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CONGO" class="constant">
@@ -728,9 +736,9 @@
   <p>Congo</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cg&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cg&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SWITZERLAND" class="constant">
@@ -743,9 +751,9 @@
   <p>Switzerland</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ch&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ch&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="COTE_D_IVOIRE" class="constant">
@@ -758,9 +766,9 @@
   <p>Côte d'Ivoire</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ci&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ci&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="COOK_ISLANDS" class="constant">
@@ -773,9 +781,9 @@
   <p>Cook Islands</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ck&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ck&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CHILE" class="constant">
@@ -788,9 +796,9 @@
   <p>Chile</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cl&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cl&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CAMEROON" class="constant">
@@ -803,9 +811,9 @@
   <p>Cameroon</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cm&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cm&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CHINA" class="constant">
@@ -818,9 +826,9 @@
   <p>China</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cn&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cn&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="COLOMBIA" class="constant">
@@ -833,9 +841,9 @@
   <p>Colombia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;co&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;co&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="COSTA_RICA" class="constant">
@@ -848,9 +856,9 @@
   <p>Costa Rica</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cr&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cr&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CUBA" class="constant">
@@ -863,9 +871,9 @@
   <p>Cuba</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cu&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cu&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CABO_VERDE" class="constant">
@@ -878,9 +886,9 @@
   <p>Cabo Verde</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cv&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cv&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CURACAO" class="constant">
@@ -893,9 +901,9 @@
   <p>Curaçao</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cw&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cw&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CHRISTMAS_ISLAND" class="constant">
@@ -908,9 +916,9 @@
   <p>Christmas Island</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cx&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cx&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CYPRUS" class="constant">
@@ -923,9 +931,9 @@
   <p>Cyprus</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cy&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cy&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CZECHIA" class="constant">
@@ -938,9 +946,9 @@
   <p>Czechia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cz&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;cz&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GERMANY" class="constant">
@@ -953,9 +961,9 @@
   <p>Germany</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;de&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;de&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="DJIBOUTI" class="constant">
@@ -968,9 +976,9 @@
   <p>Djibouti</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;dj&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;dj&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="DENMARK" class="constant">
@@ -983,9 +991,9 @@
   <p>Denmark</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;dk&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;dk&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="DOMINICA" class="constant">
@@ -998,9 +1006,9 @@
   <p>Dominica</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;dm&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;dm&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="DOMINICAN_REPUBLIC" class="constant">
@@ -1013,9 +1021,9 @@
   <p>Dominican Republic</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;do&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;do&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ALGERIA" class="constant">
@@ -1028,9 +1036,9 @@
   <p>Algeria</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;dz&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;dz&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ECUADOR" class="constant">
@@ -1043,9 +1051,9 @@
   <p>Ecuador</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ec&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ec&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ESTONIA" class="constant">
@@ -1058,9 +1066,9 @@
   <p>Estonia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ee&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ee&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="EGYPT" class="constant">
@@ -1073,9 +1081,9 @@
   <p>Egypt</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;eg&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;eg&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="WESTERN_SAHARA" class="constant">
@@ -1088,9 +1096,9 @@
   <p>Western Sahara</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;eh&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;eh&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ERITREA" class="constant">
@@ -1103,9 +1111,9 @@
   <p>Eritrea</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;er&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;er&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SPAIN" class="constant">
@@ -1118,9 +1126,9 @@
   <p>Spain</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;es&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;es&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ETHIOPIA" class="constant">
@@ -1133,9 +1141,9 @@
   <p>Ethiopia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;et&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;et&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="FINLAND" class="constant">
@@ -1148,9 +1156,9 @@
   <p>Finland</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;fi&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;fi&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="FIJI" class="constant">
@@ -1163,9 +1171,9 @@
   <p>Fiji</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;fj&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;fj&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="FALKLAND_ISLANDS" class="constant">
@@ -1178,9 +1186,9 @@
   <p>Falkland Islands (Malvinas)</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;fk&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;fk&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MICRONESIA" class="constant">
@@ -1193,9 +1201,9 @@
   <p>Micronesia (Federated States of)</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;fm&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;fm&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="FAROE_ISLANDS" class="constant">
@@ -1208,9 +1216,9 @@
   <p>Faroe Islands</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;fo&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;fo&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="FRANCE" class="constant">
@@ -1223,9 +1231,9 @@
   <p>France</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;fr&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;fr&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GABON" class="constant">
@@ -1238,9 +1246,9 @@
   <p>Gabon</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ga&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ga&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="UNITED_KINGDOM" class="constant">
@@ -1253,9 +1261,9 @@
   <p>United Kingdom of Great Britain and Northern Ireland</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;uk&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;uk&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GRENADA" class="constant">
@@ -1268,9 +1276,9 @@
   <p>Grenada</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gd&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gd&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GEORGIA" class="constant">
@@ -1283,9 +1291,9 @@
   <p>Georgia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ge&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ge&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="FRENCH_GUIANA" class="constant">
@@ -1298,9 +1306,9 @@
   <p>French Guiana</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gf&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gf&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GUERNSEY" class="constant">
@@ -1313,9 +1321,9 @@
   <p>Guernsey</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gg&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gg&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GHANA" class="constant">
@@ -1328,9 +1336,9 @@
   <p>Ghana</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gh&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gh&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GIBRALTAR" class="constant">
@@ -1343,9 +1351,9 @@
   <p>Gibraltar</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gi&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gi&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GREENLAND" class="constant">
@@ -1358,9 +1366,9 @@
   <p>Greenland</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gl&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gl&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GAMBIA" class="constant">
@@ -1373,9 +1381,9 @@
   <p>Gambia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gm&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gm&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GUINEA" class="constant">
@@ -1388,9 +1396,9 @@
   <p>Guinea</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gn&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gn&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GUADELOUPE" class="constant">
@@ -1403,9 +1411,9 @@
   <p>Guadeloupe</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gp&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gp&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="EQUATORIAL_GUINEA" class="constant">
@@ -1418,9 +1426,9 @@
   <p>Equatorial Guinea</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gq&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gq&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GREECE" class="constant">
@@ -1433,9 +1441,9 @@
   <p>Greece</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gr&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gr&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SOUTH_GEORGIA" class="constant">
@@ -1448,9 +1456,9 @@
   <p>South Georgia and the South Sandwich Islands</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gs&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gs&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GUATEMALA" class="constant">
@@ -1463,9 +1471,9 @@
   <p>Guatemala</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gt&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gt&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GUAM" class="constant">
@@ -1478,9 +1486,9 @@
   <p>Guam</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gu&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gu&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GUINEA_BISSAU" class="constant">
@@ -1493,9 +1501,9 @@
   <p>Guinea-Bissau</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gw&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gw&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="GUYANA" class="constant">
@@ -1508,9 +1516,9 @@
   <p>Guyana</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gy&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;gy&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="HONG_KONG" class="constant">
@@ -1523,9 +1531,9 @@
   <p>Hong Kong</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;hk&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;hk&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="HEARD_ISLAND" class="constant">
@@ -1538,9 +1546,9 @@
   <p>Heard Island and McDonald Islands</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;hm&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;hm&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="HONDURAS" class="constant">
@@ -1553,9 +1561,9 @@
   <p>Honduras</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;hn&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;hn&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CROATIA" class="constant">
@@ -1568,9 +1576,9 @@
   <p>Croatia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;hr&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;hr&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="HAITI" class="constant">
@@ -1583,9 +1591,9 @@
   <p>Haiti</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ht&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ht&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="HUNGARY" class="constant">
@@ -1598,9 +1606,9 @@
   <p>Hungary</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;hu&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;hu&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="INDONESIA" class="constant">
@@ -1613,9 +1621,9 @@
   <p>Indonesia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;id&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;id&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="IRELAND" class="constant">
@@ -1628,9 +1636,9 @@
   <p>Ireland</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ie&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ie&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ISRAEL" class="constant">
@@ -1643,9 +1651,9 @@
   <p>Israel</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;il&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;il&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ISLE_OF_MAN" class="constant">
@@ -1658,9 +1666,9 @@
   <p>Isle of Man</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;im&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;im&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="INDIA" class="constant">
@@ -1673,9 +1681,9 @@
   <p>India</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;in&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;in&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BRITISH_INDIAN_OCEAN_TERRITORY" class="constant">
@@ -1688,9 +1696,9 @@
   <p>British Indian Ocean Territory</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;io&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;io&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="IRAQ" class="constant">
@@ -1703,9 +1711,9 @@
   <p>Iraq</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;iq&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;iq&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="IRAN" class="constant">
@@ -1718,9 +1726,9 @@
   <p>Iran (Islamic Republic of)</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ir&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ir&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ICELAND" class="constant">
@@ -1733,9 +1741,9 @@
   <p>Iceland</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;is&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;is&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ITALY" class="constant">
@@ -1748,9 +1756,9 @@
   <p>Italy</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;it&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;it&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="JERSEY" class="constant">
@@ -1763,9 +1771,9 @@
   <p>Jersey</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;je&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;je&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="JAMAICA" class="constant">
@@ -1778,9 +1786,9 @@
   <p>Jamaica</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;jm&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;jm&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="JORDAN" class="constant">
@@ -1793,9 +1801,9 @@
   <p>Jordan</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;jo&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;jo&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="JAPAN" class="constant">
@@ -1808,9 +1816,9 @@
   <p>Japan</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;jp&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;jp&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="KENYA" class="constant">
@@ -1823,9 +1831,9 @@
   <p>Kenya</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ke&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ke&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="KYRGYZSTAN" class="constant">
@@ -1838,9 +1846,9 @@
   <p>Kyrgyzstan</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;kg&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;kg&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CAMBODIA" class="constant">
@@ -1853,9 +1861,9 @@
   <p>Cambodia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;kh&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;kh&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="KIRIBATI" class="constant">
@@ -1868,9 +1876,9 @@
   <p>Kiribati</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ki&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ki&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="COMOROS" class="constant">
@@ -1883,9 +1891,9 @@
   <p>Comoros</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;km&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;km&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SAINT_KITTS_AND_NEVIS" class="constant">
@@ -1898,9 +1906,9 @@
   <p>Saint Kitts and Nevis</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;kn&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;kn&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NORTH_KOREA" class="constant">
@@ -1913,9 +1921,9 @@
   <p>Korea (Democratic People's Republic of)</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;kp&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;kp&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SOUTH_KOREA" class="constant">
@@ -1928,9 +1936,9 @@
   <p>Korea, Republic of</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;kr&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;kr&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="KUWAIT" class="constant">
@@ -1943,9 +1951,9 @@
   <p>Kuwait</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;kw&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;kw&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CAYMAN_ISLANDS" class="constant">
@@ -1958,9 +1966,9 @@
   <p>Cayman Islands</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ky&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ky&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="KAZAKHSTAN" class="constant">
@@ -1973,9 +1981,9 @@
   <p>Kazakhstan</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;kz&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;kz&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="LAOS" class="constant">
@@ -1988,9 +1996,9 @@
   <p>Lao People's Democratic Republic</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;la&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;la&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="LEBANON" class="constant">
@@ -2003,9 +2011,9 @@
   <p>Lebanon</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;lb&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;lb&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SAINT_LUCIA" class="constant">
@@ -2018,9 +2026,9 @@
   <p>Saint Lucia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;lc&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;lc&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="LIECHTENSTEIN" class="constant">
@@ -2033,9 +2041,9 @@
   <p>Liechtenstein</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;li&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;li&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SRI_LANKA" class="constant">
@@ -2048,9 +2056,9 @@
   <p>Sri Lanka</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;lk&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;lk&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="LIBERIA" class="constant">
@@ -2063,9 +2071,9 @@
   <p>Liberia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;lr&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;lr&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="LESOTHO" class="constant">
@@ -2078,9 +2086,9 @@
   <p>Lesotho</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ls&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ls&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="LITHUANIA" class="constant">
@@ -2093,9 +2101,9 @@
   <p>Lithuania</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;lt&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;lt&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="LUXEMBOURG" class="constant">
@@ -2108,9 +2116,9 @@
   <p>Luxembourg</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;lu&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;lu&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="LATVIA" class="constant">
@@ -2123,9 +2131,9 @@
   <p>Latvia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;lv&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;lv&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="LIBYA" class="constant">
@@ -2138,9 +2146,9 @@
   <p>Libya</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ly&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ly&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MOROCCO" class="constant">
@@ -2153,9 +2161,9 @@
   <p>Morocco</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ma&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ma&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MONACO" class="constant">
@@ -2168,9 +2176,9 @@
   <p>Monaco</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mc&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mc&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MOLDOVA" class="constant">
@@ -2183,9 +2191,9 @@
   <p>Moldova, Republic of</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;md&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;md&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MONTENEGRO" class="constant">
@@ -2198,9 +2206,9 @@
   <p>Montenegro</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;me&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;me&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SAINT_MARTIN" class="constant">
@@ -2213,9 +2221,9 @@
   <p>Saint Martin (French part)</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mf&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mf&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MADAGASCAR" class="constant">
@@ -2228,9 +2236,9 @@
   <p>Madagascar</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mg&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mg&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MARSHALL_ISLANDS" class="constant">
@@ -2243,9 +2251,9 @@
   <p>Marshall Islands</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mh&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mh&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NORTH_MACEDONIA" class="constant">
@@ -2258,9 +2266,9 @@
   <p>North Macedonia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mk&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mk&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MALI" class="constant">
@@ -2273,9 +2281,9 @@
   <p>Mali</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ml&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ml&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MYANMAR" class="constant">
@@ -2288,9 +2296,9 @@
   <p>Myanmar</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mm&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mm&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MONGOLIA" class="constant">
@@ -2303,9 +2311,9 @@
   <p>Mongolia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mn&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mn&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MACAO" class="constant">
@@ -2318,9 +2326,9 @@
   <p>Macao</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mo&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mo&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NORTHERN_MARIANA_ISLANDS" class="constant">
@@ -2333,9 +2341,9 @@
   <p>Northern Mariana Islands</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mp&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mp&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MARTINIQUE" class="constant">
@@ -2348,9 +2356,9 @@
   <p>Martinique</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mq&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mq&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MAURITANIA" class="constant">
@@ -2363,9 +2371,9 @@
   <p>Mauritania</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mr&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mr&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MONTSERRAT" class="constant">
@@ -2378,9 +2386,9 @@
   <p>Montserrat</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ms&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ms&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MALTA" class="constant">
@@ -2393,9 +2401,9 @@
   <p>Malta</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mt&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mt&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MAURITIUS" class="constant">
@@ -2408,9 +2416,9 @@
   <p>Mauritius</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mu&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mu&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MALDIVES" class="constant">
@@ -2423,9 +2431,9 @@
   <p>Maldives</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mv&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mv&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MALAWI" class="constant">
@@ -2438,9 +2446,9 @@
   <p>Malawi</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mw&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mw&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MEXICO" class="constant">
@@ -2453,9 +2461,9 @@
   <p>Mexico</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mx&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mx&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MALAYSIA" class="constant">
@@ -2468,9 +2476,9 @@
   <p>Malaysia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;my&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;my&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MOZAMBIQUE" class="constant">
@@ -2483,9 +2491,9 @@
   <p>Mozambique</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mz&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;mz&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NAMIBIA" class="constant">
@@ -2498,9 +2506,9 @@
   <p>Namibia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;na&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;na&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NEW_CALEDONIA" class="constant">
@@ -2513,9 +2521,9 @@
   <p>New Caledonia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;nc&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;nc&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NIGER" class="constant">
@@ -2528,9 +2536,9 @@
   <p>Niger</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ne&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ne&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NORFOLK_ISLAND" class="constant">
@@ -2543,9 +2551,9 @@
   <p>Norfolk Island</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;nf&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;nf&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NIGERIA" class="constant">
@@ -2558,9 +2566,9 @@
   <p>Nigeria</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ng&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ng&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NICARAGUA" class="constant">
@@ -2573,9 +2581,9 @@
   <p>Nicaragua</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ni&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ni&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NETHERLANDS" class="constant">
@@ -2588,9 +2596,9 @@
   <p>Netherlands</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;nl&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;nl&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NORWAY" class="constant">
@@ -2603,9 +2611,9 @@
   <p>Norway</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;no&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;no&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NEPAL" class="constant">
@@ -2618,9 +2626,9 @@
   <p>Nepal</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;np&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;np&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NAURU" class="constant">
@@ -2633,9 +2641,9 @@
   <p>Nauru</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;nr&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;nr&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NIUE" class="constant">
@@ -2648,9 +2656,9 @@
   <p>Niue</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;nu&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;nu&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="NEW_ZEALAND" class="constant">
@@ -2663,9 +2671,9 @@
   <p>New Zealand</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;nz&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;nz&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="OMAN" class="constant">
@@ -2678,9 +2686,9 @@
   <p>Oman</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;om&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;om&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="PANAMA" class="constant">
@@ -2693,9 +2701,9 @@
   <p>Panama</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pa&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pa&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="PERU" class="constant">
@@ -2708,9 +2716,9 @@
   <p>Peru</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pe&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pe&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="FRENCH_POLYNESIA" class="constant">
@@ -2723,9 +2731,9 @@
   <p>French Polynesia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pf&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pf&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="PAPUA_NEW_GUINEA" class="constant">
@@ -2738,9 +2746,9 @@
   <p>Papua New Guinea</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pg&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pg&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="PHILIPPINES" class="constant">
@@ -2753,9 +2761,9 @@
   <p>Philippines</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ph&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ph&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="PAKISTAN" class="constant">
@@ -2768,9 +2776,9 @@
   <p>Pakistan</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pk&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pk&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="POLAND" class="constant">
@@ -2783,9 +2791,9 @@
   <p>Poland</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pl&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pl&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SAINT_PIERRE_AND_MIQUELON" class="constant">
@@ -2798,9 +2806,9 @@
   <p>Saint Pierre and Miquelon</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pm&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pm&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="PITCAIRN" class="constant">
@@ -2813,9 +2821,9 @@
   <p>Pitcairn</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pn&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pn&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="PUERTO_RICO" class="constant">
@@ -2828,9 +2836,9 @@
   <p>Puerto Rico</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pr&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pr&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="PALESTINE" class="constant">
@@ -2843,9 +2851,9 @@
   <p>Palestine, State of</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ps&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ps&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="PORTUGAL" class="constant">
@@ -2858,9 +2866,9 @@
   <p>Portugal</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pt&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pt&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="PALAU" class="constant">
@@ -2873,9 +2881,9 @@
   <p>Palau</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pw&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;pw&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="PARAGUAY" class="constant">
@@ -2888,9 +2896,9 @@
   <p>Paraguay</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;py&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;py&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="QATAR" class="constant">
@@ -2903,9 +2911,9 @@
   <p>Qatar</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;qa&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;qa&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="REUNION" class="constant">
@@ -2918,9 +2926,9 @@
   <p>Réunion</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;re&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;re&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ROMANIA" class="constant">
@@ -2933,9 +2941,9 @@
   <p>Romania</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ro&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ro&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SERBIA" class="constant">
@@ -2948,9 +2956,9 @@
   <p>Serbia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;rs&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;rs&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="RUSSIA" class="constant">
@@ -2963,9 +2971,9 @@
   <p>Russian Federation</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ru&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ru&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="RWANDA" class="constant">
@@ -2978,9 +2986,9 @@
   <p>Rwanda</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;rw&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;rw&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SAUDI_ARABIA" class="constant">
@@ -2993,9 +3001,9 @@
   <p>Saudi Arabia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sa&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sa&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SOLOMON_ISLANDS" class="constant">
@@ -3008,9 +3016,9 @@
   <p>Solomon Islands</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sb&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sb&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SEYCHELLES" class="constant">
@@ -3023,9 +3031,9 @@
   <p>Seychelles</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sc&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sc&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SUDAN" class="constant">
@@ -3038,9 +3046,9 @@
   <p>Sudan</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sd&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sd&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SWEDEN" class="constant">
@@ -3053,9 +3061,9 @@
   <p>Sweden</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;se&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;se&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SINGAPORE" class="constant">
@@ -3068,9 +3076,9 @@
   <p>Singapore</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sg&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sg&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SAINT_HELENA" class="constant">
@@ -3083,9 +3091,9 @@
   <p>Saint Helena, Ascension and Tristan da Cunha</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sh&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sh&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SLOVENIA" class="constant">
@@ -3098,9 +3106,9 @@
   <p>Slovenia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;si&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;si&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SVALBARD_AND_JAN_MAYEN" class="constant">
@@ -3113,9 +3121,9 @@
   <p>Svalbard and Jan Mayen</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sj&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sj&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SLOVAKIA" class="constant">
@@ -3128,9 +3136,9 @@
   <p>Slovakia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sk&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sk&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SIERRA_LEONE" class="constant">
@@ -3143,9 +3151,9 @@
   <p>Sierra Leone</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sl&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sl&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SAN_MARINO" class="constant">
@@ -3158,9 +3166,9 @@
   <p>San Marino</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sm&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sm&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SENEGAL" class="constant">
@@ -3173,9 +3181,9 @@
   <p>Senegal</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sn&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sn&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SOMALIA" class="constant">
@@ -3188,9 +3196,9 @@
   <p>Somalia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;so&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;so&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SURINAME" class="constant">
@@ -3203,9 +3211,9 @@
   <p>Suriname</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sr&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sr&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SOUTH_SUDAN" class="constant">
@@ -3218,9 +3226,9 @@
   <p>South Sudan</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ss&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ss&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SAO_TOME_AND_PRINCIPE" class="constant">
@@ -3233,9 +3241,9 @@
   <p>Sao Tome and Principe</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;st&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;st&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="EL_SALVADOR" class="constant">
@@ -3248,9 +3256,9 @@
   <p>El Salvador</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sv&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sv&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SINT_MAARTEN" class="constant">
@@ -3263,9 +3271,9 @@
   <p>Sint Maarten (Dutch part)</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sx&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sx&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SYRIA" class="constant">
@@ -3278,9 +3286,9 @@
   <p>Syrian Arab Republic</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sy&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sy&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ESWATINI" class="constant">
@@ -3293,9 +3301,9 @@
   <p>Eswatini</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sz&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;sz&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="TURKS_AND_CAICOS_ISLANDS" class="constant">
@@ -3308,9 +3316,9 @@
   <p>Turks and Caicos Islands</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tc&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tc&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="CHAD" class="constant">
@@ -3323,9 +3331,9 @@
   <p>Chad</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;td&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;td&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="FRENCH_SOUTHERN_TERRITORIES" class="constant">
@@ -3338,9 +3346,9 @@
   <p>French Southern Territories</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tf&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tf&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="TOGO" class="constant">
@@ -3353,9 +3361,9 @@
   <p>Togo</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tg&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tg&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="THAILAND" class="constant">
@@ -3368,9 +3376,9 @@
   <p>Thailand</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;th&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;th&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="TAJIKISTAN" class="constant">
@@ -3383,9 +3391,9 @@
   <p>Tajikistan</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tj&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tj&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="TOKELAU" class="constant">
@@ -3398,9 +3406,9 @@
   <p>Tokelau</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tk&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tk&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="TIMOR_LESTE" class="constant">
@@ -3413,9 +3421,9 @@
   <p>Timor-Leste</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tl&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tl&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="TURKMENISTAN" class="constant">
@@ -3428,9 +3436,9 @@
   <p>Turkmenistan</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tm&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tm&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="TUNISIA" class="constant">
@@ -3443,9 +3451,9 @@
   <p>Tunisia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tn&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tn&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="TONGA" class="constant">
@@ -3458,9 +3466,9 @@
   <p>Tonga</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;to&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;to&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="TURKEY" class="constant">
@@ -3473,9 +3481,9 @@
   <p>Turkey</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tr&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tr&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="TRINIDAD_AND_TOBAGO" class="constant">
@@ -3488,9 +3496,9 @@
   <p>Trinidad and Tobago</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tt&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tt&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="TUVALU" class="constant">
@@ -3503,9 +3511,9 @@
   <p>Tuvalu</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tv&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tv&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="TAIWAN" class="constant">
@@ -3518,9 +3526,9 @@
   <p>Taiwan, Province of China</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tw&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tw&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="TANZANIA" class="constant">
@@ -3533,9 +3541,9 @@
   <p>Tanzania, United Republic of</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tz&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;tz&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="UKRAINE" class="constant">
@@ -3548,9 +3556,9 @@
   <p>Ukraine</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ua&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ua&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="UGANDA" class="constant">
@@ -3563,9 +3571,9 @@
   <p>Uganda</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ug&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ug&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="UNITED_STATES_MINOR_OUTLYING_ISLANDS" class="constant">
@@ -3578,9 +3586,9 @@
   <p>United States Minor Outlying Islands</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;um&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;um&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="USA" class="constant">
@@ -3593,9 +3601,9 @@
   <p>United States of America</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;us&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;us&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="URUGUAY" class="constant">
@@ -3608,9 +3616,9 @@
   <p>Uruguay</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;uy&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;uy&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="UZBEKISTAN" class="constant">
@@ -3623,9 +3631,9 @@
   <p>Uzbekistan</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;uz&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;uz&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="HOLY_SEE" class="constant">
@@ -3638,9 +3646,9 @@
   <p>Holy See</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;va&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;va&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SAINT_VINCENT_AND_THE_GRENADINES" class="constant">
@@ -3653,9 +3661,9 @@
   <p>Saint Vincent and the Grenadines</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;vc&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;vc&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="VENEZUELA" class="constant">
@@ -3668,9 +3676,9 @@
   <p>Venezuela (Bolivarian Republic of)</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ve&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ve&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="BRITISH_VIRGIN_ISLANDS" class="constant">
@@ -3683,9 +3691,9 @@
   <p>Virgin Islands (British)</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;vg&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;vg&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="US_VIRGIN_ISLANDS" class="constant">
@@ -3698,9 +3706,9 @@
   <p>Virgin Islands (U.S.)</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;vi&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;vi&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="VIET_NAM" class="constant">
@@ -3713,9 +3721,9 @@
   <p>Viet Nam</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;vn&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;vn&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="VANUATU" class="constant">
@@ -3728,9 +3736,9 @@
   <p>Vanuatu</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;vu&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;vu&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="WALLIS_AND_FUTUNA" class="constant">
@@ -3743,9 +3751,9 @@
   <p>Wallis and Futuna</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;wf&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;wf&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SAMOA" class="constant">
@@ -3758,9 +3766,9 @@
   <p>Samoa</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ws&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ws&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="YEMEN" class="constant">
@@ -3773,9 +3781,9 @@
   <p>Yemen</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ye&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;ye&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="MAYOTTE" class="constant">
@@ -3788,9 +3796,9 @@
   <p>Mayotte</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;yt&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;yt&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="SOUTH_AFRICA" class="constant">
@@ -3803,9 +3811,9 @@
   <p>South Africa</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;za&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;za&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ZAMBIA" class="constant">
@@ -3818,9 +3826,9 @@
   <p>Zambia</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;zm&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;zm&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="ZIMBABWE" class="constant">
@@ -3833,9 +3841,9 @@
   <p>Zimbabwe</p>
   
 
-  <div>
-    <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;zw&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>OpenFoodFactsCountry(offTag: &#39;zw&#39;)</code></span>
+    </div>
 </dd>
 
       </dl>
@@ -3850,57 +3858,57 @@
 
       <dl class="properties">
         <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/int-class.html">int</a></span> 
 
 </dt>
 <dd class="inherited">
   The hash code for this object.
-  <div class="features">read-only, inherited</div>
+  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="index" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Enum/index.html">index</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Enum/index.html">index</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/int-class.html">int</a></span> 
 
 </dt>
 <dd class="inherited">
   A numeric identifier for the enumerated value.
-  <div class="features">read-only, inherited</div>
+  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="iso2Code" class="property">
   <span class="name"><a class="deprecated" href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry/iso2Code.html">iso2Code</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span> 
 
 </dt>
 <dd>
   
-  <div class="features">@<a href="https://api.dart.dev/stable/2.18.6/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use offTag instead&#39;), read-only</div>
+  <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
 
         <dt id="offTag" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry/offTag.html">offTag</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span> 
 
 </dt>
 <dd>
   Lowercase ISO 639-1, except for <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">UNITED_KINGDOM</a>.
-  <div class="features">final</div>
+  <div class="features"><span class="feature">final</span></div>
 
 </dd>
 
         <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/Type-class.html">Type</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/Type-class.html">Type</a></span> 
 
 </dt>
 <dd class="inherited">
   A representation of the runtime type of the object.
-  <div class="features">read-only, inherited</div>
+  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -3914,7 +3922,7 @@
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
@@ -3922,20 +3930,20 @@
 </dt>
 <dd class="inherited">
   Invoked when a non-existent method or property is accessed.
-  <div class="features">inherited</div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span>
   </span>
   
 
 </dt>
 <dd class="inherited">
   A string representation of this object.
-  <div class="features">inherited</div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -3948,15 +3956,15 @@
     <h2>Operators</h2>
     <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/bool-class.html">bool</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/bool-class.html">bool</a></span>
   </span>
   
 
 </dt>
 <dd class="inherited">
   The equality operator.
-  <div class="features">inherited</div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -3968,7 +3976,7 @@
     <h2>Static Methods</h2>
     <dl class="callables">
         <dt id="fromOffTag" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry/fromOffTag.html">fromOffTag</a></span><span class="signature">(<wbr><span class="parameter" id="fromOffTag-param-offTag"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">offTag</span></span>)
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry/fromOffTag.html">fromOffTag</a></span><span class="signature">(<wbr><span class="parameter" id="fromOffTag-param-offTag"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">offTag</span></span>)
     <span class="returntype parameter">&#8594; <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a>?</span>
   </span>
   
@@ -3976,7 +3984,7 @@
 </dt>
 <dd>
   Returns the first <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a> that matches the <code>offTag</code>.
-  <div class="features">override</div>
+  <div class="features"><span class="feature">override</span></div>
 
 </dd>
 
@@ -3990,7 +3998,7 @@
     <dl class="properties">
         <dt id="values" class="constant">
     <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry/values-constant.html">values</a></span>
-  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/2.18.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a></span>&gt;</span></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/2.19.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a></span>&gt;</span></span>
   
 
 </dt>
@@ -3998,9 +4006,9 @@
   A constant List of the values in this enum, in order of their declaration.
   
 
-  <div>
-    <span class="signature"><code>[ANDORRA, UNITED_ARAB_EMIRATES, AFGHANISTAN, ANTIGUA_AND_BARBUDA, ANGUILLA, ALBANIA, ARMENIA, ANGOLA, ANTARCTICA, ARGENTINA, AMERICAN_SAMOA, AUSTRIA, AUSTRALIA, ARUBA, ALAND_ISLANDS, AZERBAIJAN, BOSNI…</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>[ANDORRA, UNITED_ARAB_EMIRATES, AFGHANISTAN, ANTIGUA_AND_BARBUDA, ANGUILLA, ALBANIA, ARMENIA, ANGOLA, ANTARCTICA, ARGENTINA, AMERICAN_SAMOA, AUSTRIA, AUSTRALIA, ARUBA, ALAND_ISLANDS, AZERBAIJAN, BOSNI…</code></span>
+    </div>
 </dd>
 
     </dl>
@@ -4023,16 +4031,16 @@
 
     <h5>country_helper library</h5>
     <ol>
-  <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper-library.html#classes">Classes</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/CountryHelper-class.html">CountryHelper</a></li>
+      <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper-library.html#classes">Classes</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/CountryHelper-class.html">CountryHelper</a></li>
 
 
 
 
 
 
-  <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper-library.html#enums">Enums</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a></li>
+      <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper-library.html#enums">Enums</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a></li>
 
 
 </ol>
@@ -4045,272 +4053,272 @@
         <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#constructors">Constructors</a></li>
           <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a></li>
 
-    <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#values">Values</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ANDORRA">ANDORRA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#UNITED_ARAB_EMIRATES">UNITED_ARAB_EMIRATES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#AFGHANISTAN">AFGHANISTAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ANTIGUA_AND_BARBUDA">ANTIGUA_AND_BARBUDA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ANGUILLA">ANGUILLA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ALBANIA">ALBANIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ARMENIA">ARMENIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ANGOLA">ANGOLA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ANTARCTICA">ANTARCTICA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ARGENTINA">ARGENTINA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#AMERICAN_SAMOA">AMERICAN_SAMOA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#AUSTRIA">AUSTRIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#AUSTRALIA">AUSTRALIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ARUBA">ARUBA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ALAND_ISLANDS">ALAND_ISLANDS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#AZERBAIJAN">AZERBAIJAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BOSNIA_AND_HERZEGOVINA">BOSNIA_AND_HERZEGOVINA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BARBADOS">BARBADOS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BANGLADESH">BANGLADESH</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BELGIUM">BELGIUM</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BURKINA_FASO">BURKINA_FASO</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BULGARIA">BULGARIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BAHRAIN">BAHRAIN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BURUNDI">BURUNDI</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BENIN">BENIN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAINT_BARTHELEMY">SAINT_BARTHELEMY</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BERMUDA">BERMUDA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BRUNEI_DARUSSALAM">BRUNEI_DARUSSALAM</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BOLIVIA">BOLIVIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BONAIRE">BONAIRE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BRAZIL">BRAZIL</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BAHAMAS">BAHAMAS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BHUTAN">BHUTAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BOUVET_ISLAND">BOUVET_ISLAND</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BOTSWANA">BOTSWANA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BELARUS">BELARUS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BELIZE">BELIZE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CANADA">CANADA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#COCOS_ISLANDS">COCOS_ISLANDS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#DEMOCRATIC_REPUBLIC_OF_THE_CONGO">DEMOCRATIC_REPUBLIC_OF_THE_CONGO</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CENTRAL_AFRICAN_REPUBLIC">CENTRAL_AFRICAN_REPUBLIC</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CONGO">CONGO</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SWITZERLAND">SWITZERLAND</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#COTE_D_IVOIRE">COTE_D_IVOIRE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#COOK_ISLANDS">COOK_ISLANDS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CHILE">CHILE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CAMEROON">CAMEROON</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CHINA">CHINA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#COLOMBIA">COLOMBIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#COSTA_RICA">COSTA_RICA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CUBA">CUBA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CABO_VERDE">CABO_VERDE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CURACAO">CURACAO</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CHRISTMAS_ISLAND">CHRISTMAS_ISLAND</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CYPRUS">CYPRUS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CZECHIA">CZECHIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GERMANY">GERMANY</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#DJIBOUTI">DJIBOUTI</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#DENMARK">DENMARK</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#DOMINICA">DOMINICA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#DOMINICAN_REPUBLIC">DOMINICAN_REPUBLIC</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ALGERIA">ALGERIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ECUADOR">ECUADOR</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ESTONIA">ESTONIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#EGYPT">EGYPT</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#WESTERN_SAHARA">WESTERN_SAHARA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ERITREA">ERITREA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SPAIN">SPAIN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ETHIOPIA">ETHIOPIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FINLAND">FINLAND</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FIJI">FIJI</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FALKLAND_ISLANDS">FALKLAND_ISLANDS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MICRONESIA">MICRONESIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FAROE_ISLANDS">FAROE_ISLANDS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FRANCE">FRANCE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GABON">GABON</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#UNITED_KINGDOM">UNITED_KINGDOM</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GRENADA">GRENADA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GEORGIA">GEORGIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FRENCH_GUIANA">FRENCH_GUIANA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GUERNSEY">GUERNSEY</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GHANA">GHANA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GIBRALTAR">GIBRALTAR</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GREENLAND">GREENLAND</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GAMBIA">GAMBIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GUINEA">GUINEA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GUADELOUPE">GUADELOUPE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#EQUATORIAL_GUINEA">EQUATORIAL_GUINEA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GREECE">GREECE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SOUTH_GEORGIA">SOUTH_GEORGIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GUATEMALA">GUATEMALA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GUAM">GUAM</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GUINEA_BISSAU">GUINEA_BISSAU</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GUYANA">GUYANA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#HONG_KONG">HONG_KONG</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#HEARD_ISLAND">HEARD_ISLAND</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#HONDURAS">HONDURAS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CROATIA">CROATIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#HAITI">HAITI</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#HUNGARY">HUNGARY</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#INDONESIA">INDONESIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#IRELAND">IRELAND</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ISRAEL">ISRAEL</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ISLE_OF_MAN">ISLE_OF_MAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#INDIA">INDIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BRITISH_INDIAN_OCEAN_TERRITORY">BRITISH_INDIAN_OCEAN_TERRITORY</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#IRAQ">IRAQ</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#IRAN">IRAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ICELAND">ICELAND</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ITALY">ITALY</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#JERSEY">JERSEY</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#JAMAICA">JAMAICA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#JORDAN">JORDAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#JAPAN">JAPAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#KENYA">KENYA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#KYRGYZSTAN">KYRGYZSTAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CAMBODIA">CAMBODIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#KIRIBATI">KIRIBATI</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#COMOROS">COMOROS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAINT_KITTS_AND_NEVIS">SAINT_KITTS_AND_NEVIS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NORTH_KOREA">NORTH_KOREA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SOUTH_KOREA">SOUTH_KOREA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#KUWAIT">KUWAIT</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CAYMAN_ISLANDS">CAYMAN_ISLANDS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#KAZAKHSTAN">KAZAKHSTAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LAOS">LAOS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LEBANON">LEBANON</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAINT_LUCIA">SAINT_LUCIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LIECHTENSTEIN">LIECHTENSTEIN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SRI_LANKA">SRI_LANKA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LIBERIA">LIBERIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LESOTHO">LESOTHO</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LITHUANIA">LITHUANIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LUXEMBOURG">LUXEMBOURG</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LATVIA">LATVIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LIBYA">LIBYA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MOROCCO">MOROCCO</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MONACO">MONACO</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MOLDOVA">MOLDOVA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MONTENEGRO">MONTENEGRO</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAINT_MARTIN">SAINT_MARTIN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MADAGASCAR">MADAGASCAR</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MARSHALL_ISLANDS">MARSHALL_ISLANDS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NORTH_MACEDONIA">NORTH_MACEDONIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MALI">MALI</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MYANMAR">MYANMAR</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MONGOLIA">MONGOLIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MACAO">MACAO</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NORTHERN_MARIANA_ISLANDS">NORTHERN_MARIANA_ISLANDS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MARTINIQUE">MARTINIQUE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MAURITANIA">MAURITANIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MONTSERRAT">MONTSERRAT</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MALTA">MALTA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MAURITIUS">MAURITIUS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MALDIVES">MALDIVES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MALAWI">MALAWI</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MEXICO">MEXICO</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MALAYSIA">MALAYSIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MOZAMBIQUE">MOZAMBIQUE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NAMIBIA">NAMIBIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NEW_CALEDONIA">NEW_CALEDONIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NIGER">NIGER</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NORFOLK_ISLAND">NORFOLK_ISLAND</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NIGERIA">NIGERIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NICARAGUA">NICARAGUA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NETHERLANDS">NETHERLANDS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NORWAY">NORWAY</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NEPAL">NEPAL</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NAURU">NAURU</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NIUE">NIUE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NEW_ZEALAND">NEW_ZEALAND</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#OMAN">OMAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PANAMA">PANAMA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PERU">PERU</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FRENCH_POLYNESIA">FRENCH_POLYNESIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PAPUA_NEW_GUINEA">PAPUA_NEW_GUINEA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PHILIPPINES">PHILIPPINES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PAKISTAN">PAKISTAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#POLAND">POLAND</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAINT_PIERRE_AND_MIQUELON">SAINT_PIERRE_AND_MIQUELON</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PITCAIRN">PITCAIRN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PUERTO_RICO">PUERTO_RICO</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PALESTINE">PALESTINE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PORTUGAL">PORTUGAL</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PALAU">PALAU</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PARAGUAY">PARAGUAY</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#QATAR">QATAR</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#REUNION">REUNION</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ROMANIA">ROMANIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SERBIA">SERBIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#RUSSIA">RUSSIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#RWANDA">RWANDA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAUDI_ARABIA">SAUDI_ARABIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SOLOMON_ISLANDS">SOLOMON_ISLANDS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SEYCHELLES">SEYCHELLES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SUDAN">SUDAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SWEDEN">SWEDEN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SINGAPORE">SINGAPORE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAINT_HELENA">SAINT_HELENA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SLOVENIA">SLOVENIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SVALBARD_AND_JAN_MAYEN">SVALBARD_AND_JAN_MAYEN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SLOVAKIA">SLOVAKIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SIERRA_LEONE">SIERRA_LEONE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAN_MARINO">SAN_MARINO</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SENEGAL">SENEGAL</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SOMALIA">SOMALIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SURINAME">SURINAME</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SOUTH_SUDAN">SOUTH_SUDAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAO_TOME_AND_PRINCIPE">SAO_TOME_AND_PRINCIPE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#EL_SALVADOR">EL_SALVADOR</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SINT_MAARTEN">SINT_MAARTEN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SYRIA">SYRIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ESWATINI">ESWATINI</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TURKS_AND_CAICOS_ISLANDS">TURKS_AND_CAICOS_ISLANDS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CHAD">CHAD</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FRENCH_SOUTHERN_TERRITORIES">FRENCH_SOUTHERN_TERRITORIES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TOGO">TOGO</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#THAILAND">THAILAND</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TAJIKISTAN">TAJIKISTAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TOKELAU">TOKELAU</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TIMOR_LESTE">TIMOR_LESTE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TURKMENISTAN">TURKMENISTAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TUNISIA">TUNISIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TONGA">TONGA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TURKEY">TURKEY</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TRINIDAD_AND_TOBAGO">TRINIDAD_AND_TOBAGO</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TUVALU">TUVALU</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TAIWAN">TAIWAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TANZANIA">TANZANIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#UKRAINE">UKRAINE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#UGANDA">UGANDA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#UNITED_STATES_MINOR_OUTLYING_ISLANDS">UNITED_STATES_MINOR_OUTLYING_ISLANDS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#USA">USA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#URUGUAY">URUGUAY</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#UZBEKISTAN">UZBEKISTAN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#HOLY_SEE">HOLY_SEE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAINT_VINCENT_AND_THE_GRENADINES">SAINT_VINCENT_AND_THE_GRENADINES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#VENEZUELA">VENEZUELA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BRITISH_VIRGIN_ISLANDS">BRITISH_VIRGIN_ISLANDS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#US_VIRGIN_ISLANDS">US_VIRGIN_ISLANDS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#VIET_NAM">VIET_NAM</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#VANUATU">VANUATU</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#WALLIS_AND_FUTUNA">WALLIS_AND_FUTUNA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAMOA">SAMOA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#YEMEN">YEMEN</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MAYOTTE">MAYOTTE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SOUTH_AFRICA">SOUTH_AFRICA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ZAMBIA">ZAMBIA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ZIMBABWE">ZIMBABWE</a></li>
+        <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#values">Values</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ANDORRA">ANDORRA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#UNITED_ARAB_EMIRATES">UNITED_ARAB_EMIRATES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#AFGHANISTAN">AFGHANISTAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ANTIGUA_AND_BARBUDA">ANTIGUA_AND_BARBUDA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ANGUILLA">ANGUILLA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ALBANIA">ALBANIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ARMENIA">ARMENIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ANGOLA">ANGOLA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ANTARCTICA">ANTARCTICA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ARGENTINA">ARGENTINA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#AMERICAN_SAMOA">AMERICAN_SAMOA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#AUSTRIA">AUSTRIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#AUSTRALIA">AUSTRALIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ARUBA">ARUBA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ALAND_ISLANDS">ALAND_ISLANDS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#AZERBAIJAN">AZERBAIJAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BOSNIA_AND_HERZEGOVINA">BOSNIA_AND_HERZEGOVINA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BARBADOS">BARBADOS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BANGLADESH">BANGLADESH</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BELGIUM">BELGIUM</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BURKINA_FASO">BURKINA_FASO</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BULGARIA">BULGARIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BAHRAIN">BAHRAIN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BURUNDI">BURUNDI</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BENIN">BENIN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAINT_BARTHELEMY">SAINT_BARTHELEMY</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BERMUDA">BERMUDA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BRUNEI_DARUSSALAM">BRUNEI_DARUSSALAM</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BOLIVIA">BOLIVIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BONAIRE">BONAIRE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BRAZIL">BRAZIL</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BAHAMAS">BAHAMAS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BHUTAN">BHUTAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BOUVET_ISLAND">BOUVET_ISLAND</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BOTSWANA">BOTSWANA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BELARUS">BELARUS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BELIZE">BELIZE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CANADA">CANADA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#COCOS_ISLANDS">COCOS_ISLANDS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#DEMOCRATIC_REPUBLIC_OF_THE_CONGO">DEMOCRATIC_REPUBLIC_OF_THE_CONGO</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CENTRAL_AFRICAN_REPUBLIC">CENTRAL_AFRICAN_REPUBLIC</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CONGO">CONGO</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SWITZERLAND">SWITZERLAND</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#COTE_D_IVOIRE">COTE_D_IVOIRE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#COOK_ISLANDS">COOK_ISLANDS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CHILE">CHILE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CAMEROON">CAMEROON</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CHINA">CHINA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#COLOMBIA">COLOMBIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#COSTA_RICA">COSTA_RICA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CUBA">CUBA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CABO_VERDE">CABO_VERDE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CURACAO">CURACAO</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CHRISTMAS_ISLAND">CHRISTMAS_ISLAND</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CYPRUS">CYPRUS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CZECHIA">CZECHIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GERMANY">GERMANY</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#DJIBOUTI">DJIBOUTI</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#DENMARK">DENMARK</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#DOMINICA">DOMINICA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#DOMINICAN_REPUBLIC">DOMINICAN_REPUBLIC</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ALGERIA">ALGERIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ECUADOR">ECUADOR</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ESTONIA">ESTONIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#EGYPT">EGYPT</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#WESTERN_SAHARA">WESTERN_SAHARA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ERITREA">ERITREA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SPAIN">SPAIN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ETHIOPIA">ETHIOPIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FINLAND">FINLAND</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FIJI">FIJI</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FALKLAND_ISLANDS">FALKLAND_ISLANDS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MICRONESIA">MICRONESIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FAROE_ISLANDS">FAROE_ISLANDS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FRANCE">FRANCE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GABON">GABON</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#UNITED_KINGDOM">UNITED_KINGDOM</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GRENADA">GRENADA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GEORGIA">GEORGIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FRENCH_GUIANA">FRENCH_GUIANA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GUERNSEY">GUERNSEY</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GHANA">GHANA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GIBRALTAR">GIBRALTAR</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GREENLAND">GREENLAND</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GAMBIA">GAMBIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GUINEA">GUINEA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GUADELOUPE">GUADELOUPE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#EQUATORIAL_GUINEA">EQUATORIAL_GUINEA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GREECE">GREECE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SOUTH_GEORGIA">SOUTH_GEORGIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GUATEMALA">GUATEMALA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GUAM">GUAM</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GUINEA_BISSAU">GUINEA_BISSAU</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#GUYANA">GUYANA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#HONG_KONG">HONG_KONG</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#HEARD_ISLAND">HEARD_ISLAND</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#HONDURAS">HONDURAS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CROATIA">CROATIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#HAITI">HAITI</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#HUNGARY">HUNGARY</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#INDONESIA">INDONESIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#IRELAND">IRELAND</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ISRAEL">ISRAEL</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ISLE_OF_MAN">ISLE_OF_MAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#INDIA">INDIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BRITISH_INDIAN_OCEAN_TERRITORY">BRITISH_INDIAN_OCEAN_TERRITORY</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#IRAQ">IRAQ</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#IRAN">IRAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ICELAND">ICELAND</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ITALY">ITALY</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#JERSEY">JERSEY</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#JAMAICA">JAMAICA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#JORDAN">JORDAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#JAPAN">JAPAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#KENYA">KENYA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#KYRGYZSTAN">KYRGYZSTAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CAMBODIA">CAMBODIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#KIRIBATI">KIRIBATI</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#COMOROS">COMOROS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAINT_KITTS_AND_NEVIS">SAINT_KITTS_AND_NEVIS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NORTH_KOREA">NORTH_KOREA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SOUTH_KOREA">SOUTH_KOREA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#KUWAIT">KUWAIT</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CAYMAN_ISLANDS">CAYMAN_ISLANDS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#KAZAKHSTAN">KAZAKHSTAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LAOS">LAOS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LEBANON">LEBANON</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAINT_LUCIA">SAINT_LUCIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LIECHTENSTEIN">LIECHTENSTEIN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SRI_LANKA">SRI_LANKA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LIBERIA">LIBERIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LESOTHO">LESOTHO</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LITHUANIA">LITHUANIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LUXEMBOURG">LUXEMBOURG</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LATVIA">LATVIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#LIBYA">LIBYA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MOROCCO">MOROCCO</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MONACO">MONACO</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MOLDOVA">MOLDOVA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MONTENEGRO">MONTENEGRO</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAINT_MARTIN">SAINT_MARTIN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MADAGASCAR">MADAGASCAR</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MARSHALL_ISLANDS">MARSHALL_ISLANDS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NORTH_MACEDONIA">NORTH_MACEDONIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MALI">MALI</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MYANMAR">MYANMAR</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MONGOLIA">MONGOLIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MACAO">MACAO</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NORTHERN_MARIANA_ISLANDS">NORTHERN_MARIANA_ISLANDS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MARTINIQUE">MARTINIQUE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MAURITANIA">MAURITANIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MONTSERRAT">MONTSERRAT</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MALTA">MALTA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MAURITIUS">MAURITIUS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MALDIVES">MALDIVES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MALAWI">MALAWI</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MEXICO">MEXICO</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MALAYSIA">MALAYSIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MOZAMBIQUE">MOZAMBIQUE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NAMIBIA">NAMIBIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NEW_CALEDONIA">NEW_CALEDONIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NIGER">NIGER</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NORFOLK_ISLAND">NORFOLK_ISLAND</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NIGERIA">NIGERIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NICARAGUA">NICARAGUA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NETHERLANDS">NETHERLANDS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NORWAY">NORWAY</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NEPAL">NEPAL</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NAURU">NAURU</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NIUE">NIUE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#NEW_ZEALAND">NEW_ZEALAND</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#OMAN">OMAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PANAMA">PANAMA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PERU">PERU</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FRENCH_POLYNESIA">FRENCH_POLYNESIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PAPUA_NEW_GUINEA">PAPUA_NEW_GUINEA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PHILIPPINES">PHILIPPINES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PAKISTAN">PAKISTAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#POLAND">POLAND</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAINT_PIERRE_AND_MIQUELON">SAINT_PIERRE_AND_MIQUELON</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PITCAIRN">PITCAIRN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PUERTO_RICO">PUERTO_RICO</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PALESTINE">PALESTINE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PORTUGAL">PORTUGAL</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PALAU">PALAU</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#PARAGUAY">PARAGUAY</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#QATAR">QATAR</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#REUNION">REUNION</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ROMANIA">ROMANIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SERBIA">SERBIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#RUSSIA">RUSSIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#RWANDA">RWANDA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAUDI_ARABIA">SAUDI_ARABIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SOLOMON_ISLANDS">SOLOMON_ISLANDS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SEYCHELLES">SEYCHELLES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SUDAN">SUDAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SWEDEN">SWEDEN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SINGAPORE">SINGAPORE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAINT_HELENA">SAINT_HELENA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SLOVENIA">SLOVENIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SVALBARD_AND_JAN_MAYEN">SVALBARD_AND_JAN_MAYEN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SLOVAKIA">SLOVAKIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SIERRA_LEONE">SIERRA_LEONE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAN_MARINO">SAN_MARINO</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SENEGAL">SENEGAL</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SOMALIA">SOMALIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SURINAME">SURINAME</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SOUTH_SUDAN">SOUTH_SUDAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAO_TOME_AND_PRINCIPE">SAO_TOME_AND_PRINCIPE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#EL_SALVADOR">EL_SALVADOR</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SINT_MAARTEN">SINT_MAARTEN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SYRIA">SYRIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ESWATINI">ESWATINI</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TURKS_AND_CAICOS_ISLANDS">TURKS_AND_CAICOS_ISLANDS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#CHAD">CHAD</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#FRENCH_SOUTHERN_TERRITORIES">FRENCH_SOUTHERN_TERRITORIES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TOGO">TOGO</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#THAILAND">THAILAND</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TAJIKISTAN">TAJIKISTAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TOKELAU">TOKELAU</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TIMOR_LESTE">TIMOR_LESTE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TURKMENISTAN">TURKMENISTAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TUNISIA">TUNISIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TONGA">TONGA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TURKEY">TURKEY</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TRINIDAD_AND_TOBAGO">TRINIDAD_AND_TOBAGO</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TUVALU">TUVALU</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TAIWAN">TAIWAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#TANZANIA">TANZANIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#UKRAINE">UKRAINE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#UGANDA">UGANDA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#UNITED_STATES_MINOR_OUTLYING_ISLANDS">UNITED_STATES_MINOR_OUTLYING_ISLANDS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#USA">USA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#URUGUAY">URUGUAY</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#UZBEKISTAN">UZBEKISTAN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#HOLY_SEE">HOLY_SEE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAINT_VINCENT_AND_THE_GRENADINES">SAINT_VINCENT_AND_THE_GRENADINES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#VENEZUELA">VENEZUELA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#BRITISH_VIRGIN_ISLANDS">BRITISH_VIRGIN_ISLANDS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#US_VIRGIN_ISLANDS">US_VIRGIN_ISLANDS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#VIET_NAM">VIET_NAM</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#VANUATU">VANUATU</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#WALLIS_AND_FUTUNA">WALLIS_AND_FUTUNA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SAMOA">SAMOA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#YEMEN">YEMEN</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#MAYOTTE">MAYOTTE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#SOUTH_AFRICA">SOUTH_AFRICA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ZAMBIA">ZAMBIA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#ZIMBABWE">ZIMBABWE</a></li>
 
-    <li class="section-title">
-      <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#instance-properties">Properties</a>
-    </li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Enum/index.html">index</a></li>
-    <li><a class="deprecated" href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry/iso2Code.html">iso2Code</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry/offTag.html">offTag</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/runtimeType.html">runtimeType</a></li>
+        <li class="section-title">
+          <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#instance-properties">Properties</a>
+        </li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/hashCode.html">hashCode</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Enum/index.html">index</a></li>
+          <li><a class="deprecated" href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry/iso2Code.html">iso2Code</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry/offTag.html">offTag</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
-    <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#instance-methods">Methods</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/toString.html">toString</a></li>
+        <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#instance-methods">Methods</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/toString.html">toString</a></li>
 
-    <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/operator_equals.html">operator ==</a></li>
+        <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html#operators">Operators</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 

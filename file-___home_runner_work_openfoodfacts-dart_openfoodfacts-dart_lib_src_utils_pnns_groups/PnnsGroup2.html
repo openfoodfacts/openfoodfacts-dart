@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
@@ -21,12 +21,12 @@
 </head>
 
 
-<body data-base-href="../" data-using-base-href="false">
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
 
 <div id="overlay-under-drawer"></div>
 
 <header id="title">
-  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">openfoodfacts</a></li>
     <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups-library.html">pnns_groups</a></li>
@@ -36,10 +36,16 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span class="material-symbols-outlined">
+        brightness_4
+      </span>
+    </label>
+  </div>
 </header>
-
 <main>
-
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
@@ -65,8 +71,8 @@
   <dt>Inheritance</dt>
   <dd>
     <ul class="gt-separated dark eNum-relationships">
-      <li><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object-class.html">Object</a></li>
-        <li><a href="https://api.dart.dev/stable/2.18.6/dart-core/Enum-class.html">Enum</a></li>
+      <li><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object-class.html">Object</a></li>
+        <li><a href="https://api.dart.dev/stable/2.19.0/dart-core/Enum-class.html">Enum</a></li>
       <li>PnnsGroup2</li>
     </ul>
   </dd>
@@ -74,6 +80,8 @@
         
         
         
+
+
       </dl>
     </section>
 
@@ -106,9 +114,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="SWEETENED_BEVERAGES" class="constant">
@@ -121,9 +126,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="ALCOHOLIC_BEVERAGES" class="constant">
@@ -136,9 +138,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="UNSWEETENED_BEVERAGES" class="constant">
@@ -151,9 +150,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="ARTIFICIALLY_SWEETENED_BEVERAGES" class="constant">
@@ -166,9 +162,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="WATERS_AND_FLAVORED_WATERS" class="constant">
@@ -181,9 +174,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="FRUIT_NECTARS" class="constant">
@@ -196,9 +186,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="TEAS_AND_HERBAL_TEAS_AND_COFFEES" class="constant">
@@ -211,9 +198,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="BREAKFAST_CEREALS" class="constant">
@@ -226,9 +210,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="PASTRIES" class="constant">
@@ -241,9 +222,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="POTATOES" class="constant">
@@ -256,9 +234,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="CEREALS" class="constant">
@@ -271,9 +246,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="BREAD" class="constant">
@@ -286,9 +258,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="PIZZA_PIES_AND_QUICHE" class="constant">
@@ -301,9 +270,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="SANDWICHES" class="constant">
@@ -316,9 +282,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="SOUPS" class="constant">
@@ -331,9 +294,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="ONE_DISH_MEALS" class="constant">
@@ -346,9 +306,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="DRESSINGS_AND_SAUCES" class="constant">
@@ -361,9 +318,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="FATS" class="constant">
@@ -376,9 +330,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="PROCESSED_MEAT" class="constant">
@@ -391,9 +342,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="MEAT" class="constant">
@@ -406,9 +354,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="FISH_AND_SEAFOOD" class="constant">
@@ -421,9 +366,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="OFFALS" class="constant">
@@ -436,9 +378,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="FRUITS" class="constant">
@@ -451,9 +390,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="VEGETABLES" class="constant">
@@ -466,9 +402,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="DRIED_FRUITS" class="constant">
@@ -481,9 +414,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="NUTS" class="constant">
@@ -496,9 +426,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="LEGUMES" class="constant">
@@ -511,9 +438,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="MILK_AND_YOGURT" class="constant">
@@ -526,9 +450,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="DAIRY_DESSERTS" class="constant">
@@ -541,9 +462,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="CHEESE" class="constant">
@@ -556,9 +474,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="PLANT_BASED_MILK_SUBSTITUTES" class="constant">
@@ -571,9 +486,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="APPETIZERS" class="constant">
@@ -586,9 +498,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="SALTY_AND_FATTY_PRODUCTS" class="constant">
@@ -601,9 +510,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="SWEETS" class="constant">
@@ -616,9 +522,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="CHOCOLATE_PRODUCTS" class="constant">
@@ -631,9 +534,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
           <dt id="ICE_CREAM" class="constant">
@@ -646,9 +546,6 @@
   
   
 
-  <div>
-    <span class="signature"><code>PnnsGroup2()</code></span>
-  </div>
 </dd>
 
       </dl>
@@ -663,35 +560,35 @@
 
       <dl class="properties">
         <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/int-class.html">int</a></span> 
 
 </dt>
 <dd class="inherited">
   The hash code for this object.
-  <div class="features">read-only, inherited</div>
+  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="index" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Enum/index.html">index</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Enum/index.html">index</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/int-class.html">int</a></span> 
 
 </dt>
 <dd class="inherited">
   A numeric identifier for the enumerated value.
-  <div class="features">read-only, inherited</div>
+  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/Type-class.html">Type</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/Type-class.html">Type</a></span> 
 
 </dt>
 <dd class="inherited">
   A representation of the runtime type of the object.
-  <div class="features">read-only, inherited</div>
+  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -705,7 +602,7 @@
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
@@ -713,20 +610,20 @@
 </dt>
 <dd class="inherited">
   Invoked when a non-existent method or property is accessed.
-  <div class="features">inherited</div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span>
   </span>
   
 
 </dt>
 <dd class="inherited">
   A string representation of this object.
-  <div class="features">inherited</div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -739,15 +636,15 @@
     <h2>Operators</h2>
     <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/bool-class.html">bool</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/bool-class.html">bool</a></span>
   </span>
   
 
 </dt>
 <dd class="inherited">
   The equality operator.
-  <div class="features">inherited</div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -763,7 +660,7 @@
     <dl class="properties">
         <dt id="values" class="constant">
     <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2/values-constant.html">values</a></span>
-  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/2.18.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html">PnnsGroup2</a></span>&gt;</span></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/2.19.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html">PnnsGroup2</a></span>&gt;</span></span>
   
 
 </dt>
@@ -771,9 +668,9 @@
   A constant List of the values in this enum, in order of their declaration.
   
 
-  <div>
-    <span class="signature"><code>[FRUIT_JUICES, SWEETENED_BEVERAGES, ALCOHOLIC_BEVERAGES, UNSWEETENED_BEVERAGES, ARTIFICIALLY_SWEETENED_BEVERAGES, WATERS_AND_FLAVORED_WATERS, FRUIT_NECTARS, TEAS_AND_HERBAL_TEAS_AND_COFFEES, BREAKFAST…</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>[FRUIT_JUICES, SWEETENED_BEVERAGES, ALCOHOLIC_BEVERAGES, UNSWEETENED_BEVERAGES, ARTIFICIALLY_SWEETENED_BEVERAGES, WATERS_AND_FLAVORED_WATERS, FRUIT_NECTARS, TEAS_AND_HERBAL_TEAS_AND_COFFEES, BREAKFAST…</code></span>
+    </div>
 </dd>
 
     </dl>
@@ -797,17 +694,17 @@
     <h5>pnns_groups library</h5>
     <ol>
 
-  <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups-library.html#extensions">Extensions</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup1Extension.html">PnnsGroup1Extension</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2Extension.html">PnnsGroup2Extension</a></li>
+      <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups-library.html#extensions">Extensions</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup1Extension.html">PnnsGroup1Extension</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2Extension.html">PnnsGroup2Extension</a></li>
 
 
 
 
 
-  <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups-library.html#enums">Enums</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup1.html">PnnsGroup1</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html">PnnsGroup2</a></li>
+      <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups-library.html#enums">Enums</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup1.html">PnnsGroup1</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html">PnnsGroup2</a></li>
 
 
 </ol>
@@ -820,58 +717,58 @@
         <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#constructors">Constructors</a></li>
           <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2/PnnsGroup2.html">PnnsGroup2</a></li>
 
-    <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#values">Values</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#FRUIT_JUICES">FRUIT_JUICES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#SWEETENED_BEVERAGES">SWEETENED_BEVERAGES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#ALCOHOLIC_BEVERAGES">ALCOHOLIC_BEVERAGES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#UNSWEETENED_BEVERAGES">UNSWEETENED_BEVERAGES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#ARTIFICIALLY_SWEETENED_BEVERAGES">ARTIFICIALLY_SWEETENED_BEVERAGES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#WATERS_AND_FLAVORED_WATERS">WATERS_AND_FLAVORED_WATERS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#FRUIT_NECTARS">FRUIT_NECTARS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#TEAS_AND_HERBAL_TEAS_AND_COFFEES">TEAS_AND_HERBAL_TEAS_AND_COFFEES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#BREAKFAST_CEREALS">BREAKFAST_CEREALS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#PASTRIES">PASTRIES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#POTATOES">POTATOES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#CEREALS">CEREALS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#BREAD">BREAD</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#PIZZA_PIES_AND_QUICHE">PIZZA_PIES_AND_QUICHE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#SANDWICHES">SANDWICHES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#SOUPS">SOUPS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#ONE_DISH_MEALS">ONE_DISH_MEALS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#DRESSINGS_AND_SAUCES">DRESSINGS_AND_SAUCES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#FATS">FATS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#PROCESSED_MEAT">PROCESSED_MEAT</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#MEAT">MEAT</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#FISH_AND_SEAFOOD">FISH_AND_SEAFOOD</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#OFFALS">OFFALS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#FRUITS">FRUITS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#VEGETABLES">VEGETABLES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#DRIED_FRUITS">DRIED_FRUITS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#NUTS">NUTS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#LEGUMES">LEGUMES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#MILK_AND_YOGURT">MILK_AND_YOGURT</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#DAIRY_DESSERTS">DAIRY_DESSERTS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#CHEESE">CHEESE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#PLANT_BASED_MILK_SUBSTITUTES">PLANT_BASED_MILK_SUBSTITUTES</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#APPETIZERS">APPETIZERS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#SALTY_AND_FATTY_PRODUCTS">SALTY_AND_FATTY_PRODUCTS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#SWEETS">SWEETS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#CHOCOLATE_PRODUCTS">CHOCOLATE_PRODUCTS</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#ICE_CREAM">ICE_CREAM</a></li>
+        <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#values">Values</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#FRUIT_JUICES">FRUIT_JUICES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#SWEETENED_BEVERAGES">SWEETENED_BEVERAGES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#ALCOHOLIC_BEVERAGES">ALCOHOLIC_BEVERAGES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#UNSWEETENED_BEVERAGES">UNSWEETENED_BEVERAGES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#ARTIFICIALLY_SWEETENED_BEVERAGES">ARTIFICIALLY_SWEETENED_BEVERAGES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#WATERS_AND_FLAVORED_WATERS">WATERS_AND_FLAVORED_WATERS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#FRUIT_NECTARS">FRUIT_NECTARS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#TEAS_AND_HERBAL_TEAS_AND_COFFEES">TEAS_AND_HERBAL_TEAS_AND_COFFEES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#BREAKFAST_CEREALS">BREAKFAST_CEREALS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#PASTRIES">PASTRIES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#POTATOES">POTATOES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#CEREALS">CEREALS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#BREAD">BREAD</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#PIZZA_PIES_AND_QUICHE">PIZZA_PIES_AND_QUICHE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#SANDWICHES">SANDWICHES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#SOUPS">SOUPS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#ONE_DISH_MEALS">ONE_DISH_MEALS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#DRESSINGS_AND_SAUCES">DRESSINGS_AND_SAUCES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#FATS">FATS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#PROCESSED_MEAT">PROCESSED_MEAT</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#MEAT">MEAT</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#FISH_AND_SEAFOOD">FISH_AND_SEAFOOD</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#OFFALS">OFFALS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#FRUITS">FRUITS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#VEGETABLES">VEGETABLES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#DRIED_FRUITS">DRIED_FRUITS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#NUTS">NUTS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#LEGUMES">LEGUMES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#MILK_AND_YOGURT">MILK_AND_YOGURT</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#DAIRY_DESSERTS">DAIRY_DESSERTS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#CHEESE">CHEESE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#PLANT_BASED_MILK_SUBSTITUTES">PLANT_BASED_MILK_SUBSTITUTES</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#APPETIZERS">APPETIZERS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#SALTY_AND_FATTY_PRODUCTS">SALTY_AND_FATTY_PRODUCTS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#SWEETS">SWEETS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#CHOCOLATE_PRODUCTS">CHOCOLATE_PRODUCTS</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#ICE_CREAM">ICE_CREAM</a></li>
 
-    <li class="section-title inherited">
-      <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#instance-properties">Properties</a>
-    </li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Enum/index.html">index</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/runtimeType.html">runtimeType</a></li>
+        <li class="section-title inherited">
+          <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#instance-properties">Properties</a>
+        </li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/hashCode.html">hashCode</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Enum/index.html">index</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
-    <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#instance-methods">Methods</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/toString.html">toString</a></li>
+        <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#instance-methods">Methods</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/toString.html">toString</a></li>
 
-    <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/operator_equals.html">operator ==</a></li>
+        <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html#operators">Operators</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 

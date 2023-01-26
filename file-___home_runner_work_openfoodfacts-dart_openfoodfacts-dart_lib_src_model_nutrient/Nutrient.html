@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
@@ -21,12 +21,12 @@
 </head>
 
 
-<body data-base-href="../" data-using-base-href="false">
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
 
 <div id="overlay-under-drawer"></div>
 
 <header id="title">
-  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">openfoodfacts</a></li>
     <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient-library.html">nutrient</a></li>
@@ -36,10 +36,16 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span class="material-symbols-outlined">
+        brightness_4
+      </span>
+    </label>
+  </div>
 </header>
-
 <main>
-
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
@@ -65,8 +71,8 @@
   <dt>Inheritance</dt>
   <dd>
     <ul class="gt-separated dark eNum-relationships">
-      <li><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object-class.html">Object</a></li>
-        <li><a href="https://api.dart.dev/stable/2.18.6/dart-core/Enum-class.html">Enum</a></li>
+      <li><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object-class.html">Object</a></li>
+        <li><a href="https://api.dart.dev/stable/2.19.0/dart-core/Enum-class.html">Enum</a></li>
       <li>Nutrient</li>
     </ul>
   </dd>
@@ -80,6 +86,8 @@
   </dd>
         
         
+
+
       </dl>
     </section>
 
@@ -89,7 +97,7 @@
 
     <dl class="constructor-summary-list">
         <dt id="Nutrient" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/Nutrient.html">Nutrient</a></span><span class="signature">(<span class="parameter" id="-param-typicalUnit">{<span>required</span> <span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/Unit.html">Unit</a></span> <span class="parameter-name">typicalUnit</span>, </span><span class="parameter" id="-param-offTag"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span> <span class="parameter-name">offTag</span>}</span>)</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/Nutrient.html">Nutrient</a></span><span class="signature">(<span class="parameter" id="-param-typicalUnit">{<span>required</span> <span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/Unit.html">Unit</a></span> <span class="parameter-name">typicalUnit</span>, </span><span class="parameter" id="-param-offTag"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">offTag</span>}</span>)</span>
         </dt>
         <dd>
           
@@ -112,9 +120,9 @@
   <p>Salt</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;salt&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;salt&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="sodium" class="constant">
@@ -127,9 +135,9 @@
   <p>Sodium</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;sodium&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;sodium&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="fiber" class="constant">
@@ -142,9 +150,9 @@
   <p>Fibers</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;fiber&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;fiber&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="sugars" class="constant">
@@ -157,9 +165,9 @@
   <p>Sugars</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;sugars&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;sugars&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="fat" class="constant">
@@ -172,9 +180,9 @@
   <p>Fats</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;fat&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;fat&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="saturatedFat" class="constant">
@@ -187,9 +195,9 @@
   <p>Saturated Fats</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;saturated-fat&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;saturated-fat&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="proteins" class="constant">
@@ -202,9 +210,9 @@
   <p>Proteins</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;proteins&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;proteins&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="energyKCal" class="constant">
@@ -217,9 +225,9 @@
   <p>Energy in kcal</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.KCAL, offTag: &#39;energy-kcal&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.KCAL, offTag: &#39;energy-kcal&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="energyKJ" class="constant">
@@ -232,9 +240,9 @@
   <p>Energy in kj</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.KJ, offTag: &#39;energy-kj&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.KJ, offTag: &#39;energy-kj&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="carbohydrates" class="constant">
@@ -247,9 +255,9 @@
   <p>Carbohydrates</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;carbohydrates&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;carbohydrates&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="caffeine" class="constant">
@@ -262,9 +270,9 @@
   <p>Caffeine</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;caffeine&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;caffeine&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="calcium" class="constant">
@@ -277,9 +285,9 @@
   <p>Calcium</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;calcium&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;calcium&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="iron" class="constant">
@@ -292,9 +300,9 @@
   <p>Iron</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;iron&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;iron&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="vitaminC" class="constant">
@@ -307,9 +315,9 @@
   <p>Vitamin C</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-c&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-c&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="magnesium" class="constant">
@@ -322,9 +330,9 @@
   <p>Magnesium</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;magnesium&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;magnesium&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="phosphorus" class="constant">
@@ -337,9 +345,9 @@
   <p>Phosphorus</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;phosphorus&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;phosphorus&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="potassium" class="constant">
@@ -352,9 +360,9 @@
   <p>Potassium</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;potassium&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;potassium&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="zinc" class="constant">
@@ -367,9 +375,9 @@
   <p>Zinc</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;zinc&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;zinc&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="copper" class="constant">
@@ -382,9 +390,9 @@
   <p>Copper</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;copper&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;copper&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="selenium" class="constant">
@@ -397,9 +405,9 @@
   <p>Selenium</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;selenium&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;selenium&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="vitaminA" class="constant">
@@ -412,9 +420,9 @@
   <p>Vitamin A</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-a&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-a&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="vitaminE" class="constant">
@@ -427,9 +435,9 @@
   <p>Vitamin E</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-e&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-e&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="vitaminD" class="constant">
@@ -442,9 +450,9 @@
   <p>Vitamin D</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-d&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-d&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="vitaminB1" class="constant">
@@ -457,9 +465,9 @@
   <p>Vitamin B1</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-b1&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-b1&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="vitaminB2" class="constant">
@@ -472,9 +480,9 @@
   <p>Vitamin B2</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-b2&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-b2&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="vitaminPP" class="constant">
@@ -487,9 +495,9 @@
   <p>Vitamin PP</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-pp&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-pp&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="vitaminB6" class="constant">
@@ -502,9 +510,9 @@
   <p>Vitamin B6</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-b6&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-b6&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="vitaminB12" class="constant">
@@ -517,9 +525,9 @@
   <p>Vitamin B12</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-b12&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-b12&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="vitaminB9" class="constant">
@@ -532,9 +540,9 @@
   <p>Vitamin B9</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-b9&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-b9&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="vitaminK" class="constant">
@@ -547,9 +555,9 @@
   <p>Vitamin K</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-k&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-k&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="cholesterol" class="constant">
@@ -562,9 +570,9 @@
   <p>Cholesterol</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;cholesterol&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;cholesterol&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="butyricAcid" class="constant">
@@ -577,9 +585,9 @@
   <p>Butyric Acid</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;butyric-acid&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;butyric-acid&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="caproicAcid" class="constant">
@@ -592,9 +600,9 @@
   <p>Caproic Acid</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;caproic-acid&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;caproic-acid&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="caprylicAcid" class="constant">
@@ -607,9 +615,9 @@
   <p>Caprylic Acid</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;caprylic-acid&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;caprylic-acid&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="capricAcid" class="constant">
@@ -622,9 +630,9 @@
   <p>Capric Acid</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;capric-acid&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;capric-acid&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="lauricAcid" class="constant">
@@ -637,9 +645,9 @@
   <p>Lauric Acid</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;lauric-acid&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;lauric-acid&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="myristicAcid" class="constant">
@@ -652,9 +660,9 @@
   <p>Myristic Acid</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;myristic-acid&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;myristic-acid&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="palmiticAcid" class="constant">
@@ -667,9 +675,9 @@
   <p>Palmitic Acid</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;palmitic-acid&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;palmitic-acid&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="stearicAcid" class="constant">
@@ -682,9 +690,9 @@
   <p>Stearic Acid</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;stearic-acid&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;stearic-acid&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="oleicAcid" class="constant">
@@ -697,9 +705,9 @@
   <p>Oleic Acid</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;oleic-acid&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;oleic-acid&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="linoleicAcid" class="constant">
@@ -712,9 +720,9 @@
   <p>Linoleic Acid</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;linoleic-acid&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;linoleic-acid&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="docosahexaenoicAcid" class="constant">
@@ -727,9 +735,9 @@
   <p>Docosahexaenoic Acid</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;docosahexaenoic-acid&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;docosahexaenoic-acid&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="eicosapentaenoicAcid" class="constant">
@@ -742,9 +750,9 @@
   <p>Eicosapentaenoic Acid</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;eicosapentaenoic-acid&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;eicosapentaenoic-acid&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="erucicAcid" class="constant">
@@ -757,9 +765,9 @@
   <p>Erucic Acid</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;erucic-acid&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;erucic-acid&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="monounsaturatedFat" class="constant">
@@ -772,9 +780,9 @@
   <p>Monounsaturated Fats</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;monounsaturated&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;monounsaturated&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="polyunsaturatedFat" class="constant">
@@ -787,9 +795,9 @@
   <p>Polyunsaturated Fats</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;polyunsaturated&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;polyunsaturated&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="alcohol" class="constant">
@@ -802,9 +810,9 @@
   <p>Alcohol</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.PERCENT, offTag: &#39;alcohol&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.PERCENT, offTag: &#39;alcohol&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="pantothenicAcid" class="constant">
@@ -817,9 +825,9 @@
   <p>Pantothenic Acid</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;pantothenic-acid&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;pantothenic-acid&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="biotin" class="constant">
@@ -832,9 +840,9 @@
   <p>Biotin</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;biotin&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;biotin&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="chloride" class="constant">
@@ -847,9 +855,9 @@
   <p>Chloride</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;chloride&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;chloride&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="chromium" class="constant">
@@ -862,9 +870,9 @@
   <p>Chromium</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;chromium&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;chromium&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="fluoride" class="constant">
@@ -877,9 +885,9 @@
   <p>Fluoride</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;fluoride&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;fluoride&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="iodine" class="constant">
@@ -892,9 +900,9 @@
   <p>Iodine</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;iodine&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;iodine&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="manganese" class="constant">
@@ -907,9 +915,9 @@
   <p>Manganese</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;manganese&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;manganese&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="molybdenum" class="constant">
@@ -922,9 +930,9 @@
   <p>Molybdenum</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;molybdenum&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;molybdenum&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="omega3" class="constant">
@@ -937,9 +945,9 @@
   <p>Omega 3</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;omega-3-fat&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;omega-3-fat&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="omega6" class="constant">
@@ -952,9 +960,9 @@
   <p>Omega 6</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;omega-6-fat&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;omega-6-fat&#39;)</code></span>
+    </div>
 </dd>
 
           <dt id="transFat" class="constant">
@@ -967,9 +975,9 @@
   <p>Trans Fats</p>
   
 
-  <div>
-    <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;trans-fat&#39;)</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;trans-fat&#39;)</code></span>
+    </div>
 </dd>
 
       </dl>
@@ -984,46 +992,46 @@
 
       <dl class="properties">
         <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/int-class.html">int</a></span> 
 
 </dt>
 <dd class="inherited">
   The hash code for this object.
-  <div class="features">read-only, inherited</div>
+  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="index" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Enum/index.html">index</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Enum/index.html">index</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/int-class.html">int</a></span> 
 
 </dt>
 <dd class="inherited">
   A numeric identifier for the enumerated value.
-  <div class="features">read-only, inherited</div>
+  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="offTag" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/offTag.html">offTag</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span> 
 
 </dt>
 <dd>
   Identifying tag used in the rest of OFF.
-  <div class="features">final</div>
+  <div class="features"><span class="feature">final</span></div>
 
 </dd>
 
         <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/Type-class.html">Type</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/Type-class.html">Type</a></span> 
 
 </dt>
 <dd class="inherited">
   A representation of the runtime type of the object.
-  <div class="features">read-only, inherited</div>
+  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -1034,7 +1042,7 @@
 </dt>
 <dd>
   Typical unit. An educated guess only: may differ according to countries.
-  <div class="features">final</div>
+  <div class="features"><span class="feature">final</span></div>
 
 </dd>
 
@@ -1048,7 +1056,7 @@
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
@@ -1056,20 +1064,20 @@
 </dt>
 <dd class="inherited">
   Invoked when a non-existent method or property is accessed.
-  <div class="features">inherited</div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span>
   </span>
   
 
 </dt>
 <dd class="inherited">
   A string representation of this object.
-  <div class="features">inherited</div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -1082,15 +1090,15 @@
     <h2>Operators</h2>
     <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/bool-class.html">bool</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/bool-class.html">bool</a></span>
   </span>
   
 
 </dt>
 <dd class="inherited">
   The equality operator.
-  <div class="features">inherited</div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -1102,7 +1110,7 @@
     <h2>Static Methods</h2>
     <dl class="callables">
         <dt id="fromOffTag" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/fromOffTag.html">fromOffTag</a></span><span class="signature">(<wbr><span class="parameter" id="fromOffTag-param-offTag"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">offTag</span></span>)
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/fromOffTag.html">fromOffTag</a></span><span class="signature">(<wbr><span class="parameter" id="fromOffTag-param-offTag"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">offTag</span></span>)
     <span class="returntype parameter">&#8594; <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a>?</span>
   </span>
   
@@ -1110,7 +1118,7 @@
 </dt>
 <dd>
   Returns the first <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a> that matches the <code>offTag</code>.
-  <div class="features">override</div>
+  <div class="features"><span class="feature">override</span></div>
 
 </dd>
 
@@ -1124,7 +1132,7 @@
     <dl class="properties">
         <dt id="values" class="constant">
     <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/values-constant.html">values</a></span>
-  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/2.18.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>&gt;</span></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/2.19.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>&gt;</span></span>
   
 
 </dt>
@@ -1132,9 +1140,9 @@
   A constant List of the values in this enum, in order of their declaration.
   
 
-  <div>
-    <span class="signature"><code>[salt, sodium, fiber, sugars, fat, saturatedFat, proteins, energyKCal, energyKJ, carbohydrates, caffeine, calcium, iron, vitaminC, magnesium, phosphorus, potassium, zinc, copper, selenium, vitaminA, v…</code></span>
-  </div>
+    <div>
+      <span class="signature"><code>[salt, sodium, fiber, sugars, fat, saturatedFat, proteins, energyKCal, energyKJ, carbohydrates, caffeine, calcium, iron, vitaminC, magnesium, phosphorus, potassium, zinc, copper, selenium, vitaminA, v…</code></span>
+    </div>
 </dd>
 
     </dl>
@@ -1163,8 +1171,8 @@
 
 
 
-  <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient-library.html#enums">Enums</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></li>
+      <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient-library.html#enums">Enums</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></li>
 
 
 </ol>
@@ -1177,81 +1185,81 @@
         <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#constructors">Constructors</a></li>
           <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/Nutrient.html">Nutrient</a></li>
 
-    <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#values">Values</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#salt">salt</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#sodium">sodium</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#fiber">fiber</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#sugars">sugars</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#fat">fat</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#saturatedFat">saturatedFat</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#proteins">proteins</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#energyKCal">energyKCal</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#energyKJ">energyKJ</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#carbohydrates">carbohydrates</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#caffeine">caffeine</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#calcium">calcium</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#iron">iron</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminC">vitaminC</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#magnesium">magnesium</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#phosphorus">phosphorus</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#potassium">potassium</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#zinc">zinc</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#copper">copper</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#selenium">selenium</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminA">vitaminA</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminE">vitaminE</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminD">vitaminD</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminB1">vitaminB1</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminB2">vitaminB2</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminPP">vitaminPP</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminB6">vitaminB6</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminB12">vitaminB12</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminB9">vitaminB9</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminK">vitaminK</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#cholesterol">cholesterol</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#butyricAcid">butyricAcid</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#caproicAcid">caproicAcid</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#caprylicAcid">caprylicAcid</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#capricAcid">capricAcid</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#lauricAcid">lauricAcid</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#myristicAcid">myristicAcid</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#palmiticAcid">palmiticAcid</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#stearicAcid">stearicAcid</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#oleicAcid">oleicAcid</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#linoleicAcid">linoleicAcid</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#docosahexaenoicAcid">docosahexaenoicAcid</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#eicosapentaenoicAcid">eicosapentaenoicAcid</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#erucicAcid">erucicAcid</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#monounsaturatedFat">monounsaturatedFat</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#polyunsaturatedFat">polyunsaturatedFat</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#alcohol">alcohol</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#pantothenicAcid">pantothenicAcid</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#biotin">biotin</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#chloride">chloride</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#chromium">chromium</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#fluoride">fluoride</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#iodine">iodine</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#manganese">manganese</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#molybdenum">molybdenum</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#omega3">omega3</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#omega6">omega6</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#transFat">transFat</a></li>
+        <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#values">Values</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#salt">salt</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#sodium">sodium</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#fiber">fiber</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#sugars">sugars</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#fat">fat</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#saturatedFat">saturatedFat</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#proteins">proteins</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#energyKCal">energyKCal</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#energyKJ">energyKJ</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#carbohydrates">carbohydrates</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#caffeine">caffeine</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#calcium">calcium</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#iron">iron</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminC">vitaminC</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#magnesium">magnesium</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#phosphorus">phosphorus</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#potassium">potassium</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#zinc">zinc</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#copper">copper</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#selenium">selenium</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminA">vitaminA</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminE">vitaminE</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminD">vitaminD</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminB1">vitaminB1</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminB2">vitaminB2</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminPP">vitaminPP</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminB6">vitaminB6</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminB12">vitaminB12</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminB9">vitaminB9</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#vitaminK">vitaminK</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#cholesterol">cholesterol</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#butyricAcid">butyricAcid</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#caproicAcid">caproicAcid</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#caprylicAcid">caprylicAcid</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#capricAcid">capricAcid</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#lauricAcid">lauricAcid</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#myristicAcid">myristicAcid</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#palmiticAcid">palmiticAcid</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#stearicAcid">stearicAcid</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#oleicAcid">oleicAcid</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#linoleicAcid">linoleicAcid</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#docosahexaenoicAcid">docosahexaenoicAcid</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#eicosapentaenoicAcid">eicosapentaenoicAcid</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#erucicAcid">erucicAcid</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#monounsaturatedFat">monounsaturatedFat</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#polyunsaturatedFat">polyunsaturatedFat</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#alcohol">alcohol</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#pantothenicAcid">pantothenicAcid</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#biotin">biotin</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#chloride">chloride</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#chromium">chromium</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#fluoride">fluoride</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#iodine">iodine</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#manganese">manganese</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#molybdenum">molybdenum</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#omega3">omega3</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#omega6">omega6</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#transFat">transFat</a></li>
 
-    <li class="section-title">
-      <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#instance-properties">Properties</a>
-    </li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Enum/index.html">index</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/offTag.html">offTag</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/runtimeType.html">runtimeType</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/typicalUnit.html">typicalUnit</a></li>
+        <li class="section-title">
+          <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#instance-properties">Properties</a>
+        </li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/hashCode.html">hashCode</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Enum/index.html">index</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/offTag.html">offTag</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/runtimeType.html">runtimeType</a></li>
+          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/typicalUnit.html">typicalUnit</a></li>
 
-    <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#instance-methods">Methods</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/toString.html">toString</a></li>
+        <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#instance-methods">Methods</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/toString.html">toString</a></li>
 
-    <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.18.6/dart-core/Object/operator_equals.html">operator ==</a></li>
+        <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html#operators">Operators</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 

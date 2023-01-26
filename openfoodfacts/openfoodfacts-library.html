@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
@@ -21,12 +21,12 @@
 </head>
 
 
-<body data-base-href="../" data-using-base-href="false">
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
 
 <div id="overlay-under-drawer"></div>
 
 <header id="title">
-  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">openfoodfacts</a></li>
     <li class="self-crumb">openfoodfacts library</li>
@@ -35,12 +35,19 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span class="material-symbols-outlined">
+        brightness_4
+      </span>
+    </label>
+  </div>
 </header>
-
 <main>
 
-
   <div id="dartdoc-main-content" class="main-content">
+    
       <div>
 <h1><span class="kind-library">openfoodfacts</span> library 
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
@@ -1209,8 +1216,8 @@ of a text title, subtitle and an icon.
 
       <dl class="callables">
         <dt id="convertFieldsToStrings" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/convertFieldsToStrings.html">convertFieldsToStrings</a></span><span class="signature">(<wbr><span class="parameter" id="convertFieldsToStrings-param-fields"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>&gt;</span></span> <span class="parameter-name">fields</span>, </span><span class="parameter" id="convertFieldsToStrings-param-languages"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.18.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>&gt;</span></span> <span class="parameter-name">languages</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/convertFieldsToStrings.html">convertFieldsToStrings</a></span><span class="signature">(<wbr><span class="parameter" id="convertFieldsToStrings-param-fields"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>&gt;</span></span> <span class="parameter-name">fields</span>, </span><span class="parameter" id="convertFieldsToStrings-param-languages"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>&gt;</span></span> <span class="parameter-name">languages</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span>&gt;</span></span>
   </span>
   
 
@@ -1237,7 +1244,7 @@ the function will throw.
 
         <dt id="ingredientSpecialPropertyStatusToJson" class="callable">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient/ingredientSpecialPropertyStatusToJson.html">ingredientSpecialPropertyStatusToJson</a></span><span class="signature">(<wbr><span class="parameter" id="ingredientSpecialPropertyStatusToJson-param-status"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient/IngredientSpecialPropertyStatus.html">IngredientSpecialPropertyStatus</a>?</span> <span class="parameter-name">status</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.18.6/dart-core/String-class.html">String</a>?</span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a>?</span>
   </span>
   
 
@@ -1829,212 +1836,212 @@ compact size.
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
     <h5>openfoodfacts library</h5>
     <ol>
-  <li class="section-title"><a href="../openfoodfacts/openfoodfacts-library.html#classes">Classes</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration-class.html">AbstractQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_additives/Additives-class.html">Additives</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/Allergens-class.html">Allergens</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_allergens_parameter/AllergensParameter-class.html">AllergensParameter</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_attribute/Attribute-class.html">Attribute</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_attribute_group/AttributeGroup-class.html">AttributeGroup</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_available_attribute_groups/AvailableAttributeGroups-class.html">AvailableAttributeGroups</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_available_preference_importances/AvailablePreferenceImportances-class.html">AvailablePreferenceImportances</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_available_product_preferences/AvailableProductPreferences-class.html">AvailableProductPreferences</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_badge_base/BadgeBase-class.html">BadgeBase</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_barcode_parameter/BarcodeParameter-class.html">BarcodeParameter</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_barcodes_validator/BarcodeValidator-class.html">BarcodeValidator</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_spelling_corrections/Correction-class.html">Correction</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/CountryHelper-class.html">CountryHelper</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ecoscore_adjustments/EcoscoreAdjustments-class.html">EcoscoreAdjustments</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ecoscore_data/EcoscoreData-class.html">EcoscoreData</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_events/EventsAPIClient-class.html">EventsAPIClient</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_events_base/EventsBase-class.html">EventsBase</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_folksonomy/FolksonomyAPIClient-class.html">FolksonomyAPIClient</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html">HttpHelper</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/ImageHelper-class.html">ImageHelper</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient/Ingredient-class.html">Ingredient</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_ingredients_analysis_parameter/IngredientsAnalysisParameter-class.html">IngredientsAnalysisParameter</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredients_analysis_tags/IngredientsAnalysisTags-class.html">IngredientsAnalysisTags</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/Insight-class.html">Insight</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/InsightsResult-class.html">InsightsResult</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_recommended_daily_intake/IntakeRecommendation-class.html">IntakeRecommendation</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_invalid_barcodes/InvalidBarcodes-class.html">InvalidBarcodes</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_json_helper/JsonHelper-class.html">JsonHelper</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_key_stats/KeyStats-class.html">KeyStats</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/KnowledgePanel-class.html">KnowledgePanel</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelActionElement-class.html">KnowledgePanelActionElement</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelElement-class.html">KnowledgePanelElement</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelGeoPointer-class.html">KnowledgePanelGeoPointer</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelImageElement-class.html">KnowledgePanelImageElement</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelLatLng-class.html">KnowledgePanelLatLng</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelPanelGroupElement-class.html">KnowledgePanelPanelGroupElement</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelPanelIdElement-class.html">KnowledgePanelPanelIdElement</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panels/KnowledgePanels-class.html">KnowledgePanels</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTableCell-class.html">KnowledgePanelTableCell</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTableColumn-class.html">KnowledgePanelTableColumn</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTableElement-class.html">KnowledgePanelTableElement</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTableRowElement-class.html">KnowledgePanelTableRowElement</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTextElement-class.html">KnowledgePanelTextElement</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelWorldMapElement-class.html">KnowledgePanelWorldMapElement</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/LanguageHelper-class.html">LanguageHelper</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_leaderboard_entry/LeaderboardEntry-class.html">LeaderboardEntry</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_localized_tag/LocalizedTag-class.html">LocalizedTag</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_login_status/LoginStatus-class.html">LoginStatus</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct-class.html">MatchedProduct</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product_v2/MatchedProductV2-class.html">MatchedProductV2</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient_levels/NutrientLevels-class.html">NutrientLevels</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/Nutriments-class.html">Nutriments</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_nutriments_helper/NutrimentsHelper-class.html">NutrimentsHelper</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ocr_ingredients_result/OcrIngredientsResult-class.html">OcrIngredientsResult</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ocr_packaging_result/OcrPackagingResult-class.html">OcrPackagingResult</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_open_food_api_configuration/OpenFoodAPIConfiguration-class.html">OpenFoodAPIConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrient/OrderedNutrient-class.html">OrderedNutrient</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrients/OrderedNutrients-class.html">OrderedNutrients</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_origins_of_ingredients/OriginsOfIngredients-class.html">OriginsOfIngredients</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_packaging/Packaging-class.html">Packaging</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_page_number/PageNumber-class.html">PageNumber</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_page_size/PageSize-class.html">PageSize</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_parameter/Parameter-class.html">Parameter</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_pnns_group2_filter/PnnsGroup2Filter-class.html">PnnsGroup2Filter</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_preference_importance/PreferenceImportance-class.html">PreferenceImportance</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product-class.html">Product</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_freshness/ProductFreshness-class.html">ProductFreshness</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_helper/ProductHelper-class.html">ProductHelper</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage-class.html">ProductImage</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_packaging/ProductPackaging-class.html">ProductPackaging</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_product_preferences_manager/ProductPreferencesManager-class.html">ProductPreferencesManager</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_product_preferences_selection/ProductPreferencesSelection-class.html">ProductPreferencesSelection</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryConfiguration-class.html">ProductQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryVersion-class.html">ProductQueryVersion</a></li>
-  <li><a class="deprecated" href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_result/ProductResult-class.html">ProductResult</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_result_field_answer/ProductResultFieldAnswer-class.html">ProductResultFieldAnswer</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_result_v3/ProductResultV3-class.html">ProductResultV3</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_search_query_configuration/ProductSearchQueryConfiguration-class.html">ProductSearchQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_stats/ProductStats-class.html">ProductStats</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_tag/ProductTag-class.html">ProductTag</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_recommended_daily_intake/RecommendedDailyIntake-class.html">RecommendedDailyIntake</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_robotoff_question/RobotoffQuestion-class.html">RobotoffQuestion</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_robotoff_question/RobotoffQuestionResult-class.html">RobotoffQuestionResult</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_search_result/SearchResult-class.html">SearchResult</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_search_terms/SearchTerms-class.html">SearchTerms</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_send_image/SendImage-class.html">SendImage</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_sign_up_status/SignUpStatus-class.html">SignUpStatus</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_sort_by/SortBy-class.html">SortBy</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_spelling_corrections/SpellingCorrection-class.html">SpellingCorrection</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_states_tags_parameter/StatesTagsParameter-class.html">StatesTagsParameter</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_status/Status-class.html">Status</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_tag_filter/TagFilter-class.html">TagFilter</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_tag_i18n/TagI18N-class.html">TagI18N</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive-class.html">TaxonomyAdditive</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditiveQueryConfiguration-class.html">TaxonomyAdditiveQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_allergen/TaxonomyAllergen-class.html">TaxonomyAllergen</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_allergen/TaxonomyAllergenQueryConfiguration-class.html">TaxonomyAllergenQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory-class.html">TaxonomyCategory</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategoryQueryConfiguration-class.html">TaxonomyCategoryQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_country/TaxonomyCountry-class.html">TaxonomyCountry</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_country/TaxonomyCountryQueryConfiguration-class.html">TaxonomyCountryQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_ingredient/TaxonomyIngredient-class.html">TaxonomyIngredient</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_ingredient/TaxonomyIngredientQueryConfiguration-class.html">TaxonomyIngredientQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_label/TaxonomyLabel-class.html">TaxonomyLabel</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_label/TaxonomyLabelQueryConfiguration-class.html">TaxonomyLabelQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_language/TaxonomyLanguage-class.html">TaxonomyLanguage</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_language/TaxonomyLanguageQueryConfiguration-class.html">TaxonomyLanguageQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_nova/TaxonomyNova-class.html">TaxonomyNova</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_nova/TaxonomyNovaQueryConfiguration-class.html">TaxonomyNovaQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_origin/TaxonomyOrigin-class.html">TaxonomyOrigin</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_origin/TaxonomyOriginQueryConfiguration-class.html">TaxonomyOriginQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging/TaxonomyPackaging-class.html">TaxonomyPackaging</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_material/TaxonomyPackagingMaterial-class.html">TaxonomyPackagingMaterial</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_material/TaxonomyPackagingMaterialQueryConfiguration-class.html">TaxonomyPackagingMaterialQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging/TaxonomyPackagingQueryConfiguration-class.html">TaxonomyPackagingQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_recycling/TaxonomyPackagingRecycling-class.html">TaxonomyPackagingRecycling</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_recycling/TaxonomyPackagingRecyclingQueryConfiguration-class.html">TaxonomyPackagingRecyclingQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_shape/TaxonomyPackagingShape-class.html">TaxonomyPackagingShape</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_shape/TaxonomyPackagingShapeQueryConfiguration-class.html">TaxonomyPackagingShapeQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_spelling_corrections/TermCorrections-class.html">TermCorrections</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement-class.html">TitleElement</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/UnitHelper-class.html">UnitHelper</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriHelper-class.html">UriHelper</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_reader/UriReader-class.html">UriReader</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user_agent/UserAgent-class.html">UserAgent</a></li>
-  <li><a class="deprecated" href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration-class.html">UserProductSearchQueryConfiguration</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_without_additives/WithoutAdditives-class.html">WithoutAdditives</a></li>
+      <li class="section-title"><a href="../openfoodfacts/openfoodfacts-library.html#classes">Classes</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration-class.html">AbstractQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_additives/Additives-class.html">Additives</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/Allergens-class.html">Allergens</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_allergens_parameter/AllergensParameter-class.html">AllergensParameter</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_attribute/Attribute-class.html">Attribute</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_attribute_group/AttributeGroup-class.html">AttributeGroup</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_available_attribute_groups/AvailableAttributeGroups-class.html">AvailableAttributeGroups</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_available_preference_importances/AvailablePreferenceImportances-class.html">AvailablePreferenceImportances</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_available_product_preferences/AvailableProductPreferences-class.html">AvailableProductPreferences</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_badge_base/BadgeBase-class.html">BadgeBase</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_barcode_parameter/BarcodeParameter-class.html">BarcodeParameter</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_barcodes_validator/BarcodeValidator-class.html">BarcodeValidator</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_spelling_corrections/Correction-class.html">Correction</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/CountryHelper-class.html">CountryHelper</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ecoscore_adjustments/EcoscoreAdjustments-class.html">EcoscoreAdjustments</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ecoscore_data/EcoscoreData-class.html">EcoscoreData</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_events/EventsAPIClient-class.html">EventsAPIClient</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_events_base/EventsBase-class.html">EventsBase</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_folksonomy/FolksonomyAPIClient-class.html">FolksonomyAPIClient</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html">HttpHelper</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/ImageHelper-class.html">ImageHelper</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient/Ingredient-class.html">Ingredient</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_ingredients_analysis_parameter/IngredientsAnalysisParameter-class.html">IngredientsAnalysisParameter</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredients_analysis_tags/IngredientsAnalysisTags-class.html">IngredientsAnalysisTags</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/Insight-class.html">Insight</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/InsightsResult-class.html">InsightsResult</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_recommended_daily_intake/IntakeRecommendation-class.html">IntakeRecommendation</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_invalid_barcodes/InvalidBarcodes-class.html">InvalidBarcodes</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_json_helper/JsonHelper-class.html">JsonHelper</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_key_stats/KeyStats-class.html">KeyStats</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/KnowledgePanel-class.html">KnowledgePanel</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelActionElement-class.html">KnowledgePanelActionElement</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelElement-class.html">KnowledgePanelElement</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelGeoPointer-class.html">KnowledgePanelGeoPointer</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelImageElement-class.html">KnowledgePanelImageElement</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelLatLng-class.html">KnowledgePanelLatLng</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelPanelGroupElement-class.html">KnowledgePanelPanelGroupElement</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelPanelIdElement-class.html">KnowledgePanelPanelIdElement</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panels/KnowledgePanels-class.html">KnowledgePanels</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTableCell-class.html">KnowledgePanelTableCell</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTableColumn-class.html">KnowledgePanelTableColumn</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTableElement-class.html">KnowledgePanelTableElement</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTableRowElement-class.html">KnowledgePanelTableRowElement</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTextElement-class.html">KnowledgePanelTextElement</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelWorldMapElement-class.html">KnowledgePanelWorldMapElement</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/LanguageHelper-class.html">LanguageHelper</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_leaderboard_entry/LeaderboardEntry-class.html">LeaderboardEntry</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_localized_tag/LocalizedTag-class.html">LocalizedTag</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_login_status/LoginStatus-class.html">LoginStatus</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct-class.html">MatchedProduct</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product_v2/MatchedProductV2-class.html">MatchedProductV2</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient_levels/NutrientLevels-class.html">NutrientLevels</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/Nutriments-class.html">Nutriments</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_nutriments_helper/NutrimentsHelper-class.html">NutrimentsHelper</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ocr_ingredients_result/OcrIngredientsResult-class.html">OcrIngredientsResult</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ocr_packaging_result/OcrPackagingResult-class.html">OcrPackagingResult</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_open_food_api_configuration/OpenFoodAPIConfiguration-class.html">OpenFoodAPIConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrient/OrderedNutrient-class.html">OrderedNutrient</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrients/OrderedNutrients-class.html">OrderedNutrients</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_origins_of_ingredients/OriginsOfIngredients-class.html">OriginsOfIngredients</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_packaging/Packaging-class.html">Packaging</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_page_number/PageNumber-class.html">PageNumber</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_page_size/PageSize-class.html">PageSize</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_parameter/Parameter-class.html">Parameter</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_pnns_group2_filter/PnnsGroup2Filter-class.html">PnnsGroup2Filter</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_preference_importance/PreferenceImportance-class.html">PreferenceImportance</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product-class.html">Product</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_freshness/ProductFreshness-class.html">ProductFreshness</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_helper/ProductHelper-class.html">ProductHelper</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage-class.html">ProductImage</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_packaging/ProductPackaging-class.html">ProductPackaging</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_product_preferences_manager/ProductPreferencesManager-class.html">ProductPreferencesManager</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_product_preferences_selection/ProductPreferencesSelection-class.html">ProductPreferencesSelection</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryConfiguration-class.html">ProductQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryVersion-class.html">ProductQueryVersion</a></li>
+        <li><a class="deprecated" href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_result/ProductResult-class.html">ProductResult</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_result_field_answer/ProductResultFieldAnswer-class.html">ProductResultFieldAnswer</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_result_v3/ProductResultV3-class.html">ProductResultV3</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_search_query_configuration/ProductSearchQueryConfiguration-class.html">ProductSearchQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_stats/ProductStats-class.html">ProductStats</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_tag/ProductTag-class.html">ProductTag</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_recommended_daily_intake/RecommendedDailyIntake-class.html">RecommendedDailyIntake</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_robotoff_question/RobotoffQuestion-class.html">RobotoffQuestion</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_robotoff_question/RobotoffQuestionResult-class.html">RobotoffQuestionResult</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_search_result/SearchResult-class.html">SearchResult</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_search_terms/SearchTerms-class.html">SearchTerms</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_send_image/SendImage-class.html">SendImage</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_sign_up_status/SignUpStatus-class.html">SignUpStatus</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_sort_by/SortBy-class.html">SortBy</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_spelling_corrections/SpellingCorrection-class.html">SpellingCorrection</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_states_tags_parameter/StatesTagsParameter-class.html">StatesTagsParameter</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_status/Status-class.html">Status</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_tag_filter/TagFilter-class.html">TagFilter</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_tag_i18n/TagI18N-class.html">TagI18N</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditive-class.html">TaxonomyAdditive</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditiveQueryConfiguration-class.html">TaxonomyAdditiveQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_allergen/TaxonomyAllergen-class.html">TaxonomyAllergen</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_allergen/TaxonomyAllergenQueryConfiguration-class.html">TaxonomyAllergenQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory-class.html">TaxonomyCategory</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategoryQueryConfiguration-class.html">TaxonomyCategoryQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_country/TaxonomyCountry-class.html">TaxonomyCountry</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_country/TaxonomyCountryQueryConfiguration-class.html">TaxonomyCountryQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_ingredient/TaxonomyIngredient-class.html">TaxonomyIngredient</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_ingredient/TaxonomyIngredientQueryConfiguration-class.html">TaxonomyIngredientQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_label/TaxonomyLabel-class.html">TaxonomyLabel</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_label/TaxonomyLabelQueryConfiguration-class.html">TaxonomyLabelQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_language/TaxonomyLanguage-class.html">TaxonomyLanguage</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_language/TaxonomyLanguageQueryConfiguration-class.html">TaxonomyLanguageQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_nova/TaxonomyNova-class.html">TaxonomyNova</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_nova/TaxonomyNovaQueryConfiguration-class.html">TaxonomyNovaQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_origin/TaxonomyOrigin-class.html">TaxonomyOrigin</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_origin/TaxonomyOriginQueryConfiguration-class.html">TaxonomyOriginQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging/TaxonomyPackaging-class.html">TaxonomyPackaging</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_material/TaxonomyPackagingMaterial-class.html">TaxonomyPackagingMaterial</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_material/TaxonomyPackagingMaterialQueryConfiguration-class.html">TaxonomyPackagingMaterialQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging/TaxonomyPackagingQueryConfiguration-class.html">TaxonomyPackagingQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_recycling/TaxonomyPackagingRecycling-class.html">TaxonomyPackagingRecycling</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_recycling/TaxonomyPackagingRecyclingQueryConfiguration-class.html">TaxonomyPackagingRecyclingQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_shape/TaxonomyPackagingShape-class.html">TaxonomyPackagingShape</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_shape/TaxonomyPackagingShapeQueryConfiguration-class.html">TaxonomyPackagingShapeQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_spelling_corrections/TermCorrections-class.html">TermCorrections</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElement-class.html">TitleElement</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/UnitHelper-class.html">UnitHelper</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriHelper-class.html">UriHelper</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_reader/UriReader-class.html">UriReader</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user_agent/UserAgent-class.html">UserAgent</a></li>
+        <li><a class="deprecated" href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchQueryConfiguration-class.html">UserProductSearchQueryConfiguration</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_without_additives/WithoutAdditives-class.html">WithoutAdditives</a></li>
 
-  <li class="section-title"><a href="../openfoodfacts/openfoodfacts-library.html#extensions">Extensions</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageAngleExtension.html">ImageAngleExtension</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageFieldExtension.html">ImageFieldExtension</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageSizeExtension.html">ImageSizeExtension</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/InsightAnnotationExtension.html">InsightAnnotationExtension</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/InsightTypesExtension.html">InsightTypesExtension</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient_levels/NutrientLevelExtension.html">NutrientLevelExtension</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguageExtension.html">OpenFoodFactsLanguageExtension</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup1Extension.html">PnnsGroup1Extension</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2Extension.html">PnnsGroup2Extension</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchTypeExtension.html">UserProductSearchTypeExtension</a></li>
-
-
+      <li class="section-title"><a href="../openfoodfacts/openfoodfacts-library.html#extensions">Extensions</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageAngleExtension.html">ImageAngleExtension</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageFieldExtension.html">ImageFieldExtension</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageSizeExtension.html">ImageSizeExtension</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/InsightAnnotationExtension.html">InsightAnnotationExtension</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/InsightTypesExtension.html">InsightTypesExtension</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient_levels/NutrientLevelExtension.html">NutrientLevelExtension</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguageExtension.html">OpenFoodFactsLanguageExtension</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup1Extension.html">PnnsGroup1Extension</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2Extension.html">PnnsGroup2Extension</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchTypeExtension.html">UserProductSearchTypeExtension</a></li>
 
 
-  <li class="section-title"><a href="../openfoodfacts/openfoodfacts-library.html#functions">Functions</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/convertFieldsToStrings.html">convertFieldsToStrings</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient/ingredientSpecialPropertyStatusFromJson.html">ingredientSpecialPropertyStatusFromJson</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient/ingredientSpecialPropertyStatusToJson.html">ingredientSpecialPropertyStatusToJson</a></li>
 
-  <li class="section-title"><a href="../openfoodfacts/openfoodfacts-library.html#enums">Enums</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ecoscore_data/EcoscoreStatus.html">EcoscoreStatus</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/Evaluation.html">Evaluation</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/Grade.html">Grade</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageAngle.html">ImageAngle</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageField.html">ImageField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageSize.html">ImageSize</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient/IngredientSpecialPropertyStatus.html">IngredientSpecialPropertyStatus</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/InsightAnnotation.html">InsightAnnotation</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/InsightType.html">InsightType</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelColumnType.html">KnowledgePanelColumnType</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelElementType.html">KnowledgePanelElementType</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/KnowledgePanelSize.html">KnowledgePanelSize</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTextElementType.html">KnowledgePanelTextElementType</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/Level.html">Level</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProductStatus.html">MatchedProductStatus</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product_v2/MatchedProductStatusV2.html">MatchedProductStatusV2</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient_levels/NutrientLevel.html">NutrientLevel</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_ocr_field/OcrField.html">OcrField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredients_analysis_tags/PalmOilFreeStatus.html">PalmOilFreeStatus</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_per_size/PerSize.html">PerSize</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup1.html">PnnsGroup1</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html">PnnsGroup2</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/ProductImprovement.html">ProductImprovement</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/ProductImprovementCategory.html">ProductImprovementCategory</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_sign_up_status/SignUpStatusError.html">SignUpStatusError</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_sort_by/SortOption.html">SortOption</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_tag_filter/TagFilterType.html">TagFilterType</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_tag_type/TagType.html">TagType</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditiveField.html">TaxonomyAdditiveField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_allergen/TaxonomyAllergenField.html">TaxonomyAllergenField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategoryField.html">TaxonomyCategoryField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_country/TaxonomyCountryField.html">TaxonomyCountryField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_ingredient/TaxonomyIngredientField.html">TaxonomyIngredientField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_label/TaxonomyLabelField.html">TaxonomyLabelField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_language/TaxonomyLanguageField.html">TaxonomyLanguageField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_nova/TaxonomyNovaField.html">TaxonomyNovaField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_origin/TaxonomyOriginField.html">TaxonomyOriginField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging/TaxonomyPackagingField.html">TaxonomyPackagingField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_material/TaxonomyPackagingMaterialField.html">TaxonomyPackagingMaterialField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_recycling/TaxonomyPackagingRecyclingField.html">TaxonomyPackagingRecyclingField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_shape/TaxonomyPackagingShapeField.html">TaxonomyPackagingShapeField</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElementType.html">TitleElementType</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/Unit.html">Unit</a></li>
-  <li><a class="deprecated" href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchType.html">UserProductSearchType</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredients_analysis_tags/VeganStatus.html">VeganStatus</a></li>
-  <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredients_analysis_tags/VegetarianStatus.html">VegetarianStatus</a></li>
+
+      <li class="section-title"><a href="../openfoodfacts/openfoodfacts-library.html#functions">Functions</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/convertFieldsToStrings.html">convertFieldsToStrings</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient/ingredientSpecialPropertyStatusFromJson.html">ingredientSpecialPropertyStatusFromJson</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient/ingredientSpecialPropertyStatusToJson.html">ingredientSpecialPropertyStatusToJson</a></li>
+
+      <li class="section-title"><a href="../openfoodfacts/openfoodfacts-library.html#enums">Enums</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ecoscore_data/EcoscoreStatus.html">EcoscoreStatus</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/Evaluation.html">Evaluation</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/Grade.html">Grade</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageAngle.html">ImageAngle</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageField.html">ImageField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageSize.html">ImageSize</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient/IngredientSpecialPropertyStatus.html">IngredientSpecialPropertyStatus</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/InsightAnnotation.html">InsightAnnotation</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/InsightType.html">InsightType</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelColumnType.html">KnowledgePanelColumnType</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelElementType.html">KnowledgePanelElementType</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/KnowledgePanelSize.html">KnowledgePanelSize</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTextElementType.html">KnowledgePanelTextElementType</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/Level.html">Level</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProductStatus.html">MatchedProductStatus</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product_v2/MatchedProductStatusV2.html">MatchedProductStatusV2</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient_levels/NutrientLevel.html">NutrientLevel</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_ocr_field/OcrField.html">OcrField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredients_analysis_tags/PalmOilFreeStatus.html">PalmOilFreeStatus</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_per_size/PerSize.html">PerSize</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup1.html">PnnsGroup1</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_pnns_groups/PnnsGroup2.html">PnnsGroup2</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/ProductImprovement.html">ProductImprovement</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/ProductImprovementCategory.html">ProductImprovementCategory</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_sign_up_status/SignUpStatusError.html">SignUpStatusError</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_sort_by/SortOption.html">SortOption</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_tag_filter/TagFilterType.html">TagFilterType</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_tag_type/TagType.html">TagType</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_additive/TaxonomyAdditiveField.html">TaxonomyAdditiveField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_allergen/TaxonomyAllergenField.html">TaxonomyAllergenField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategoryField.html">TaxonomyCategoryField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_country/TaxonomyCountryField.html">TaxonomyCountryField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_ingredient/TaxonomyIngredientField.html">TaxonomyIngredientField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_label/TaxonomyLabelField.html">TaxonomyLabelField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_language/TaxonomyLanguageField.html">TaxonomyLanguageField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_nova/TaxonomyNovaField.html">TaxonomyNovaField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_origin/TaxonomyOriginField.html">TaxonomyOriginField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging/TaxonomyPackagingField.html">TaxonomyPackagingField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_material/TaxonomyPackagingMaterialField.html">TaxonomyPackagingMaterialField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_recycling/TaxonomyPackagingRecyclingField.html">TaxonomyPackagingRecyclingField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging_shape/TaxonomyPackagingShapeField.html">TaxonomyPackagingShapeField</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel/TitleElementType.html">TitleElementType</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/Unit.html">Unit</a></li>
+        <li><a class="deprecated" href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_user_product_search_query_configuration/UserProductSearchType.html">UserProductSearchType</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredients_analysis_tags/VeganStatus.html">VeganStatus</a></li>
+        <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredients_analysis_tags/VegetarianStatus.html">VegetarianStatus</a></li>
 
 
 </ol>
