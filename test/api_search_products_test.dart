@@ -491,7 +491,7 @@ void main() {
       const String nutritionGrades = 'A';
       const String states = 'en:nutrition-facts-completed';
       const String ingredients = 'en:cereal';
-      const int novaGroup = 1;
+      const int novaGroup = 3;
       const String languages = 'ar';
       const String creator = 'sebleouf';
       const String editors = 'foodrepo';
@@ -565,6 +565,7 @@ void main() {
         expect(product.statesTags, contains(states));
         expect(product.ingredientsTags, contains(ingredients));
         expect(product.lang.code, lang);
+        expect(product.novaGroup, novaGroup);
         // TODO(monsieurtanuki): extract the origins, manufactoringPlaces, purchasePlaces, languages, creator and editors from the product, and compare them to expected values
       }
     });

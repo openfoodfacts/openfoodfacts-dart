@@ -21,6 +21,19 @@ class ImageHelper {
               '/'
               '${getProductImageFilename(image, imageSize: imageSize)}';
 
+  /// Returns the [image] full url for an uploaded image.
+  ///
+  /// E.g. "https://static.openfoodfacts.org/images/products/359/671/046/2858/1.400.jpg"
+  static String getUploadedImageUrl(
+    final String barcode,
+    final int imageId,
+    final ImageSize imageSize, {
+    final QueryType? queryType,
+  }) =>
+      '${getProductImageRootUrl(barcode, queryType: queryType)}'
+      '/'
+      '${_getUploadedImageFilename(imageId, imageSize)}';
+
   /// Returns the [image] filename - for a specific [imageSize] if needed.
   ///
   /// By default uses the own [image]'s size field.
@@ -33,6 +46,26 @@ class ImageHelper {
       '.${image.rev}'
       '.${((imageSize ?? image.size) ?? ImageSize.UNKNOWN).number}'
       '.jpg';
+
+  /// Returns the filename of an uploaded image.
+  static String _getUploadedImageFilename(
+    final int imageId,
+    final ImageSize imageSize,
+  ) {
+    switch (imageSize) {
+      case ImageSize.THUMB:
+      case ImageSize.DISPLAY:
+        // adapted size
+        return '$imageId.${imageSize.number}.jpg';
+      case ImageSize.SMALL:
+        // not available, we take the best other choice instead
+        return '$imageId.${ImageSize.DISPLAY.number}.jpg';
+      case ImageSize.ORIGINAL:
+      case ImageSize.UNKNOWN:
+        // full size
+        return '$imageId.jpg';
+    }
+  }
 
   /// Returns the web folder of the product images (without trailing '/')
   ///

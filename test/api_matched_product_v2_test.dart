@@ -26,7 +26,7 @@ void main() {
   const String BARCODE_HACK = '7613037672756';
   const String BARCODE_SCHNITZEL = '4061458069878';
   const String BARCODE_CHIPOLATA = '3770016162098';
-  const String BARCODE_FLEISCHWURST = '4003171036379';
+  const String BARCODE_FLEISCHWURST = '4003171036379'; // now veggie!
   const String BARCODE_POULET = '40897837';
   const String BARCODE_SAUCISSON = '20045456';
   const String BARCODE_PIZZA = '4260414150470';
@@ -92,7 +92,8 @@ void main() {
         BARCODE_HACK: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
         BARCODE_SCHNITZEL: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
         BARCODE_CHIPOLATA: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
-        BARCODE_FLEISCHWURST: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
+        BARCODE_FLEISCHWURST:
+            _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
         BARCODE_POULET: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
         BARCODE_SAUCISSON: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
         BARCODE_PIZZA: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
@@ -100,13 +101,13 @@ void main() {
         BARCODE_CHORIZO: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
       };
       final List<String> expectedBarcodeOrder = <String>[
+        BARCODE_FLEISCHWURST,
         BARCODE_KNACKI,
         BARCODE_CORDONBLEU,
         BARCODE_ORIENTALES,
         BARCODE_HACK,
         BARCODE_SCHNITZEL,
         BARCODE_CHIPOLATA,
-        BARCODE_FLEISCHWURST,
         BARCODE_POULET,
         BARCODE_SAUCISSON,
         BARCODE_PIZZA,
