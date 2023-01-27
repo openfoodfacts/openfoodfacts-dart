@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.2.0...v2.2.1) (2023-01-27)
+
+
+### Bug Fixes
+
+* 691 - implemented "imagesToJson" ([#693](https://github.com/openfoodfacts/openfoodfacts-dart/issues/693)) ([316b19d](https://github.com/openfoodfacts/openfoodfacts-dart/commit/316b19d2e5f0de51ee74c87e732fece171120082))
+
 ## [2.2.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.1.2...v2.2.0) (2023-01-26)
 
 
