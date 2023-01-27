@@ -71,7 +71,79 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static Map&lt;String, dynamic&gt; imagesToJson(List&lt;ProductImage&gt;? images) {
-  return {};
+  final Map&lt;String, dynamic&gt; result = &lt;String, dynamic&gt;{};
+  if (images == null || images.isEmpty) {
+    return result;
+  }
+  &#47;&#47; grouped by &quot;front_fr&quot;-like keys
+  final Map&lt;String, List&lt;ProductImage&gt;&gt; sorted =
+      &lt;String, List&lt;ProductImage&gt;&gt;{};
+  for (final ProductImage productImage in images) {
+    if (productImage.language == null) {
+      continue;
+    }
+    final String key =
+        &#39;${productImage.field.offTag}_${productImage.language!.offTag}&#39;;
+    List&lt;ProductImage&gt;? items = sorted[key];
+    if (items == null) {
+      items = &lt;ProductImage&gt;[];
+      sorted[key] = items;
+    }
+    items.add(productImage);
+  }
+  for (final MapEntry&lt;String, List&lt;ProductImage&gt;&gt; entry in sorted.entries) {
+    final String key = entry.key;
+    final List&lt;ProductImage&gt; list = entry.value;
+    if (list.isEmpty) {
+      &#47;&#47; very unlikely
+      continue;
+    }
+    final Map&lt;String, dynamic&gt; item = &lt;String, dynamic&gt;{};
+    item[&#39;sizes&#39;] = &lt;String, Map&lt;String, int&gt;&gt;{};
+    bool first = true;
+    for (final ProductImage productImage in list) {
+      if (productImage.size == null) {
+        continue;
+      }
+      final Map&lt;String, int&gt; size = &lt;String, int&gt;{};
+      if (productImage.width != null) {
+        size[&#39;w&#39;] = productImage.width!;
+      }
+      if (productImage.height != null) {
+        size[&#39;h&#39;] = productImage.height!;
+      }
+      item[&#39;sizes&#39;]![productImage.size!.number] = size;
+      if (first) {
+        first = false;
+        if (productImage.rev != null) {
+          item[&#39;rev&#39;] = productImage.rev.toString();
+        }
+        if (productImage.imgid != null) {
+          item[&#39;imgid&#39;] = productImage.imgid;
+        }
+        if (productImage.angle != null) {
+          item[&#39;angle&#39;] = productImage.angle!.degree.toString();
+        }
+        if (productImage.coordinatesImageSize != null) {
+          item[&#39;coordinates_image_size&#39;] = productImage.coordinatesImageSize;
+        }
+        if (productImage.x1 != null) {
+          item[&#39;x1&#39;] = productImage.x1;
+        }
+        if (productImage.y1 != null) {
+          item[&#39;y1&#39;] = productImage.y1;
+        }
+        if (productImage.x2 != null) {
+          item[&#39;x2&#39;] = productImage.x2;
+        }
+        if (productImage.y2 != null) {
+          item[&#39;y2&#39;] = productImage.y2;
+        }
+      }
+    }
+    result[key] = item;
+  }
+  return result;
 }</code></pre>
 </section>
 

@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the size property from the ProductImage class, for the Dart programming language.">
-  <title>size property - ProductImage class - product_image library - Dart API</title>
+  <meta name="description" content="API docs for the hashCode property from the ProductImage class, for the Dart programming language.">
+  <title>hashCode property - ProductImage class - product_image library - Dart API</title>
 
 
   
@@ -31,9 +31,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image-library.html">product_image</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage-class.html">ProductImage</a></li>
-    <li class="self-crumb">size property</li>
+    <li class="self-crumb">hashCode property</li>
   </ol>
-  <div class="self-name">size</div>
+  <div class="self-name">hashCode</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -50,23 +50,65 @@
 
   <div id="dartdoc-main-content" class="main-content">
       <div>
-<h1><span class="kind-property">size</span> property 
+<h1><span class="kind-property">hashCode</span> property 
     <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
 </h1></div>
 
-        <section class="multi-line-signature">
-          
-          <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageSize.html">ImageSize</a>?
-          <span class="name ">size</span>
-          <div class="features"><span class="feature">final</span></div>
-
-        </section>
-        
 
         
+<section id="getter">
+
+<section class="multi-line-signature">
+  
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/2.19.0/dart-core/override-constant.html">override</a></li>
+    </ol>
+  </div>
+  <span class="returntype"><a href="https://api.dart.dev/stable/2.19.0/dart-core/int-class.html">int</a></span>
+  <span class="name ">hashCode</span>
+  <div class="features"><span class="feature">override</span></div>
+
+</section>
+
+
+<section class="desc markdown">
+  <p>The hash code for this object.</p>
+<p>A hash code is a single integer which represents the state of the object
+that affects <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage/operator_equals.html">operator ==</a> comparisons.</p>
+<p>All objects have hash codes.
+The default hash code implemented by <a href="https://api.dart.dev/stable/2.19.0/dart-core/Object-class.html">Object</a>
+represents only the identity of the object,
+the same way as the default <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage/operator_equals.html">operator ==</a> implementation only considers objects
+equal if they are identical (see <a href="https://api.dart.dev/stable/2.19.0/dart-core/identityHashCode.html">identityHashCode</a>).</p>
+<p>If <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage/operator_equals.html">operator ==</a> is overridden to use the object state instead,
+the hash code must also be changed to represent that state,
+otherwise the object cannot be used in hash based data structures
+like the default <a href="https://api.dart.dev/stable/2.19.0/dart-core/Set-class.html">Set</a> and <a href="https://api.dart.dev/stable/2.19.0/dart-core/Map-class.html">Map</a> implementations.</p>
+<p>Hash codes must be the same for objects that are equal to each other
+according to <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage/operator_equals.html">operator ==</a>.
+The hash code of an object should only change if the object changes
+in a way that affects equality.
+There are no further requirements for the hash codes.
+They need not be consistent between executions of the same program
+and there are no distribution guarantees.</p>
+<p>Objects that are not equal are allowed to have the same hash code.
+It is even technically allowed that all instances have the same hash code,
+but if clashes happen too often,
+it may reduce the efficiency of hash-based data structures
+like <a href="https://api.dart.dev/stable/2.19.0/dart-collection/HashSet-class.html">HashSet</a> or <a href="https://api.dart.dev/stable/2.19.0/dart-collection/HashMap-class.html">HashMap</a>.</p>
+<p>If a subclass overrides <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage/hashCode.html">hashCode</a>, it should override the
+<a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage/operator_equals.html">operator ==</a> operator as well to maintain consistency.</p>
+</section>
+
+
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">final ImageSize? size;</code></pre>
+  <pre class="language-dart"><code class="language-dart">@override
+int get hashCode =&gt;
+    &#39;${field.offTag}_${language?.code}_${size?.offTag}&#39;.hashCode;</code></pre>
+</section>
+
 </section>
 
 
@@ -83,7 +125,7 @@
   <li><a href="../../index.html">openfoodfacts</a></li>
   <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image-library.html">product_image</a></li>
   <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage-class.html">ProductImage</a></li>
-  <li class="self-crumb">size property</li>
+  <li class="self-crumb">hashCode property</li>
 </ol>
 
 

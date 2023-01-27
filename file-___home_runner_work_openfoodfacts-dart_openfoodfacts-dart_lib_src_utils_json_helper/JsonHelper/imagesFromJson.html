@@ -66,7 +66,9 @@
     </section>
     
 <section class="desc markdown">
-  <p>Returns <code>ProductImage</code>s from a JSON map for "Images"</p>
+  <p>Returns <code>ProductImage</code>s from a JSON map for "Images".</p>
+<p>For historical reasons we keep only the 4 main images here, on all sizes
+and languages.</p>
 </section>
 
 
@@ -78,52 +80,77 @@
 
   var imageList = &lt;ProductImage&gt;[];
 
-  for (var field in ImageField.values) {
-    for (OpenFoodFactsLanguage lang in OpenFoodFactsLanguage.values) {
-      &#47;&#47; get the field object e.g. front_en
-      final String fieldName = &#39;${field.offTag}_${lang.offTag}&#39;;
-      if (json[fieldName] == null) continue;
+  for (final String key in json.keys) {
+    final int? imageId = int.tryParse(key);
+    if (imageId != null) {
+      &#47;&#47; we can expect integer (imageIds) and String (field + language)
+      &#47;&#47; here we ignore imageIds.
+      continue;
+    }
+    final List&lt;String&gt; values = key.split(&#39;_&#39;);
+    if (values.length != 2) {
+      &#47;&#47; we expect field + &#39;_&#39; + language
+      continue;
+    }
+    final String fieldString = values[0];
+    final ImageField? field = ImageField.fromOffTag(fieldString);
+    if (field == null) {
+      continue;
+    }
+    final String languageString = values[1];
+    final OpenFoodFactsLanguage? lang =
+        OpenFoodFactsLanguage.fromOffTag(languageString);
+    if (lang == null) {
+      continue;
+    }
 
-      final fieldObject = json[fieldName] as Map&lt;String, dynamic&gt;?;
-      if (fieldObject == null) continue;
+    final Map&lt;String, dynamic&gt; fieldObject = json[key];
 
-      final rev = JsonObject.parseInt(fieldObject[&#39;rev&#39;]);
-      final String imgid = fieldObject[&#39;imgid&#39;].toString();
-      final ImageAngle? angle = ImageAngleExtension.fromInt(
-        JsonObject.parseInt(fieldObject[&#39;angle&#39;]),
-      );
-      final String? coordinatesImageSize =
-          fieldObject[&#39;coordinates_image_size&#39;]?.toString();
-      final int? x1 = JsonObject.parseInt(fieldObject[&#39;x1&#39;]);
-      final int? y1 = JsonObject.parseInt(fieldObject[&#39;y1&#39;]);
-      final int? x2 = JsonObject.parseInt(fieldObject[&#39;x2&#39;]);
-      final int? y2 = JsonObject.parseInt(fieldObject[&#39;y2&#39;]);
+    &#47;&#47; get the sizes object
+    var sizesObject = fieldObject[&#39;sizes&#39;] as Map&lt;String, dynamic&gt;?;
+    if (sizesObject == null) {
+      continue;
+    }
 
-      &#47;&#47; get the sizes object
-      var sizesObject = fieldObject[&#39;sizes&#39;] as Map&lt;String, dynamic&gt;?;
-      if (sizesObject == null) continue;
+    final rev = JsonObject.parseInt(fieldObject[&#39;rev&#39;]);
+    final String imgid = fieldObject[&#39;imgid&#39;].toString();
+    final ImageAngle? angle = ImageAngleExtension.fromInt(
+      JsonObject.parseInt(fieldObject[&#39;angle&#39;]),
+    );
+    final String? coordinatesImageSize =
+        fieldObject[&#39;coordinates_image_size&#39;]?.toString();
+    final int? x1 = JsonObject.parseInt(fieldObject[&#39;x1&#39;]);
+    final int? y1 = JsonObject.parseInt(fieldObject[&#39;y1&#39;]);
+    final int? x2 = JsonObject.parseInt(fieldObject[&#39;x2&#39;]);
+    final int? y2 = JsonObject.parseInt(fieldObject[&#39;y2&#39;]);
 
-      &#47;&#47; get each number object (e.g. 200)
-      for (var size in ImageSize.values) {
-        var number = size.number;
-        var numberObject = sizesObject[number] as Map&lt;String, dynamic&gt;?;
-        if (numberObject == null) continue;
-
-        var image = ProductImage(
-          field: field,
-          size: size,
-          language: lang,
-          rev: rev,
-          imgid: imgid,
-          angle: angle,
-          coordinatesImageSize: coordinatesImageSize,
-          x1: x1,
-          y1: y1,
-          x2: x2,
-          y2: y2,
-        );
-        imageList.add(image);
+    &#47;&#47; get each number object (e.g. 200)
+    for (var size in ImageSize.values) {
+      var number = size.number;
+      var numberObject = sizesObject[number] as Map&lt;String, dynamic&gt;?;
+      if (numberObject == null) {
+        continue;
       }
+      final int? width = JsonObject.parseInt(numberObject[&#39;w&#39;]);
+      final int? height = JsonObject.parseInt(numberObject[&#39;h&#39;]);
+
+      &#47;&#47; TODO(monsieurtanuki): add field &quot;url&quot;?
+      var image = ProductImage(
+        field: field,
+        size: size,
+        language: lang,
+        rev: rev,
+        imgid: imgid,
+        angle: angle,
+        coordinatesImageSize: coordinatesImageSize,
+        x1: x1,
+        y1: y1,
+        x2: x2,
+        y2: y2,
+        width: width,
+        height: height,
+      );
+      imageList.add(image);
     }
   }
 
