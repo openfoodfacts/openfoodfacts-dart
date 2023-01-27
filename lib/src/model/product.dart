@@ -224,16 +224,18 @@ class Product extends JsonObject {
       toJson: IngredientsAnalysisTags.toJson)
   IngredientsAnalysisTags? ingredientsAnalysisTags;
 
-  /// When no nutrition data is true, nutriments are always null
+  /// When no nutrition data is true, nutriments are always null.
+  ///
   /// This logic is handled by the getters/setters of [noNutritionData] and
-  /// [nutriments]
-  @JsonKey(ignore: true)
+  /// [nutriments].
+  /// This field is therefore not populated directly by json.
   bool? _noNutritionData;
 
-  /// When nutriments are not null, no nutrition data can't be true
+  /// When nutriments are not null, no nutrition data can't be true.
+  ///
   /// This logic is handled by the getters/setters of [noNutritionData] and
   /// [nutriments]
-  @JsonKey(ignore: true)
+  /// This field is therefore not populated directly by json.
   Nutriments? _nutriments;
 
   @JsonKey(
