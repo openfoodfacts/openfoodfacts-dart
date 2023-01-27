@@ -1089,9 +1089,13 @@ void main() {
       final Random random = Random();
       final bool completed1 = random.nextBool();
       final bool completed2 = random.nextBool();
+      // TODO(monsieurtanuki): sometimes fails because of bad luck
+      // by the time the second count is retrieved, the first count changed too,
+      // if we are unlucky.
       await checkExpectations(state1, completed1, state2, completed2);
     });
   },
+      skip: 'Sometimes fails because of bad-luck',
       timeout: Timeout(
         // some tests can be slow here
         Duration(seconds: 300),

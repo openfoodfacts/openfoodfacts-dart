@@ -134,6 +134,8 @@ class ProductImage {
     this.y1,
     this.x2,
     this.y2,
+    this.width,
+    this.height,
   });
 
   final ImageField field;
@@ -165,6 +167,12 @@ class ProductImage {
   /// Crop coordinate y2, compared to the uploaded image
   int? y2;
 
+  /// Image width.
+  int? width;
+
+  /// Image height.
+  int? height;
+
   @override
   String toString() => 'ProductImage('
       '${field.offTag}'
@@ -179,5 +187,36 @@ class ProductImage {
       '${y1 == null ? '' : ',y1=$y1'}'
       '${x2 == null ? '' : ',x2=$x2'}'
       '${y2 == null ? '' : ',y2=$y2'}'
+      '${width == null ? '' : ',width=$width'}'
+      '${height == null ? '' : ',height=$height'}'
       ')';
+
+  @override
+  int get hashCode =>
+      '${field.offTag}_${language?.code}_${size?.offTag}'.hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
+    return other is ProductImage &&
+        other.field == field &&
+        other.size == size &&
+        other.language == language &&
+        other.url == url &&
+        other.rev == rev &&
+        other.imgid == imgid &&
+        other.angle == angle &&
+        other.coordinatesImageSize == coordinatesImageSize &&
+        other.x1 == x1 &&
+        other.y1 == y1 &&
+        other.x2 == x2 &&
+        other.y2 == y2 &&
+        other.width == width &&
+        other.height == height;
+  }
 }

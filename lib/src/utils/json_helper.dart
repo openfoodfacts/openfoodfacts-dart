@@ -75,67 +75,166 @@ class JsonHelper {
     return result;
   }
 
-  /// Returns [ProductImage]s from a JSON map for "Images"
+  /// Returns [ProductImage]s from a JSON map for "Images".
+  ///
+  /// For historical reasons we keep only the 4 main images here, on all sizes
+  /// and languages.
   static List<ProductImage>? imagesFromJson(Map? json) {
     if (json == null) return null;
 
     var imageList = <ProductImage>[];
 
-    for (var field in ImageField.values) {
-      for (OpenFoodFactsLanguage lang in OpenFoodFactsLanguage.values) {
-        // get the field object e.g. front_en
-        final String fieldName = '${field.offTag}_${lang.offTag}';
-        if (json[fieldName] == null) continue;
+    for (final String key in json.keys) {
+      final int? imageId = int.tryParse(key);
+      if (imageId != null) {
+        // we can expect integer (imageIds) and String (field + language)
+        // here we ignore imageIds.
+        continue;
+      }
+      final List<String> values = key.split('_');
+      if (values.length != 2) {
+        // we expect field + '_' + language
+        continue;
+      }
+      final String fieldString = values[0];
+      final ImageField? field = ImageField.fromOffTag(fieldString);
+      if (field == null) {
+        continue;
+      }
+      final String languageString = values[1];
+      final OpenFoodFactsLanguage? lang =
+          OpenFoodFactsLanguage.fromOffTag(languageString);
+      if (lang == null) {
+        continue;
+      }
 
-        final fieldObject = json[fieldName] as Map<String, dynamic>?;
-        if (fieldObject == null) continue;
+      final Map<String, dynamic> fieldObject = json[key];
 
-        final rev = JsonObject.parseInt(fieldObject['rev']);
-        final String imgid = fieldObject['imgid'].toString();
-        final ImageAngle? angle = ImageAngleExtension.fromInt(
-          JsonObject.parseInt(fieldObject['angle']),
-        );
-        final String? coordinatesImageSize =
-            fieldObject['coordinates_image_size']?.toString();
-        final int? x1 = JsonObject.parseInt(fieldObject['x1']);
-        final int? y1 = JsonObject.parseInt(fieldObject['y1']);
-        final int? x2 = JsonObject.parseInt(fieldObject['x2']);
-        final int? y2 = JsonObject.parseInt(fieldObject['y2']);
+      // get the sizes object
+      var sizesObject = fieldObject['sizes'] as Map<String, dynamic>?;
+      if (sizesObject == null) {
+        continue;
+      }
 
-        // get the sizes object
-        var sizesObject = fieldObject['sizes'] as Map<String, dynamic>?;
-        if (sizesObject == null) continue;
+      final rev = JsonObject.parseInt(fieldObject['rev']);
+      final String imgid = fieldObject['imgid'].toString();
+      final ImageAngle? angle = ImageAngleExtension.fromInt(
+        JsonObject.parseInt(fieldObject['angle']),
+      );
+      final String? coordinatesImageSize =
+          fieldObject['coordinates_image_size']?.toString();
+      final int? x1 = JsonObject.parseInt(fieldObject['x1']);
+      final int? y1 = JsonObject.parseInt(fieldObject['y1']);
+      final int? x2 = JsonObject.parseInt(fieldObject['x2']);
+      final int? y2 = JsonObject.parseInt(fieldObject['y2']);
 
-        // get each number object (e.g. 200)
-        for (var size in ImageSize.values) {
-          var number = size.number;
-          var numberObject = sizesObject[number] as Map<String, dynamic>?;
-          if (numberObject == null) continue;
-
-          var image = ProductImage(
-            field: field,
-            size: size,
-            language: lang,
-            rev: rev,
-            imgid: imgid,
-            angle: angle,
-            coordinatesImageSize: coordinatesImageSize,
-            x1: x1,
-            y1: y1,
-            x2: x2,
-            y2: y2,
-          );
-          imageList.add(image);
+      // get each number object (e.g. 200)
+      for (var size in ImageSize.values) {
+        var number = size.number;
+        var numberObject = sizesObject[number] as Map<String, dynamic>?;
+        if (numberObject == null) {
+          continue;
         }
+        final int? width = JsonObject.parseInt(numberObject['w']);
+        final int? height = JsonObject.parseInt(numberObject['h']);
+
+        // TODO(monsieurtanuki): add field "url"?
+        var image = ProductImage(
+          field: field,
+          size: size,
+          language: lang,
+          rev: rev,
+          imgid: imgid,
+          angle: angle,
+          coordinatesImageSize: coordinatesImageSize,
+          x1: x1,
+          y1: y1,
+          x2: x2,
+          y2: y2,
+          width: width,
+          height: height,
+        );
+        imageList.add(image);
       }
     }
 
     return imageList;
   }
 
-  // TODO(monsieurtanuki): not implemented and needed, yet.
   static Map<String, dynamic> imagesToJson(List<ProductImage>? images) {
-    return {};
+    final Map<String, dynamic> result = <String, dynamic>{};
+    if (images == null || images.isEmpty) {
+      return result;
+    }
+    // grouped by "front_fr"-like keys
+    final Map<String, List<ProductImage>> sorted =
+        <String, List<ProductImage>>{};
+    for (final ProductImage productImage in images) {
+      if (productImage.language == null) {
+        continue;
+      }
+      final String key =
+          '${productImage.field.offTag}_${productImage.language!.offTag}';
+      List<ProductImage>? items = sorted[key];
+      if (items == null) {
+        items = <ProductImage>[];
+        sorted[key] = items;
+      }
+      items.add(productImage);
+    }
+    for (final MapEntry<String, List<ProductImage>> entry in sorted.entries) {
+      final String key = entry.key;
+      final List<ProductImage> list = entry.value;
+      if (list.isEmpty) {
+        // very unlikely
+        continue;
+      }
+      final Map<String, dynamic> item = <String, dynamic>{};
+      item['sizes'] = <String, Map<String, int>>{};
+      bool first = true;
+      for (final ProductImage productImage in list) {
+        if (productImage.size == null) {
+          continue;
+        }
+        final Map<String, int> size = <String, int>{};
+        if (productImage.width != null) {
+          size['w'] = productImage.width!;
+        }
+        if (productImage.height != null) {
+          size['h'] = productImage.height!;
+        }
+        item['sizes']![productImage.size!.number] = size;
+        if (first) {
+          first = false;
+          if (productImage.rev != null) {
+            item['rev'] = productImage.rev.toString();
+          }
+          if (productImage.imgid != null) {
+            item['imgid'] = productImage.imgid;
+          }
+          if (productImage.angle != null) {
+            item['angle'] = productImage.angle!.degree.toString();
+          }
+          if (productImage.coordinatesImageSize != null) {
+            item['coordinates_image_size'] = productImage.coordinatesImageSize;
+          }
+          if (productImage.x1 != null) {
+            item['x1'] = productImage.x1;
+          }
+          if (productImage.y1 != null) {
+            item['y1'] = productImage.y1;
+          }
+          if (productImage.x2 != null) {
+            item['x2'] = productImage.x2;
+          }
+          if (productImage.y2 != null) {
+            item['y2'] = productImage.y2;
+          }
+        }
+      }
+      result[key] = item;
+    }
+    return result;
   }
 
   /// Returns a double from a JSON-encoded int or double
