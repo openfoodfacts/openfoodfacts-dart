@@ -1105,6 +1105,8 @@ class OpenFoodAPIClient {
   ///
   ///   print(suggestions); // [Milk drinks fermented with Bifidus, Milk drinks fermented with L casei, Milk jams]
   /// ```
+  // TODO: deprecated from 2023-02-01; remove when old enough
+  @Deprecated('Use getSuggestions instead')
   static Future<List<dynamic>> getAutocompletedSuggestions(
     final TagType taxonomyType, {
     final String input = '',
@@ -1130,6 +1132,47 @@ class OpenFoodAPIClient {
       addCredentialsToBody: false,
     );
     return json.decode(response.body);
+  }
+
+  /// cf. https://openfoodfacts.github.io/openfoodfacts-server/reference/api-v3/#get-/api/v3/taxonomy_suggestions
+  static Future<List<String>> getSuggestions(
+    final TagType taxonomyType, {
+    final String input = '',
+    required final OpenFoodFactsLanguage language,
+    final OpenFoodFactsCountry? country,
+    final String? categories,
+    final String? shape,
+    final int limit = 25,
+    final QueryType? queryType,
+    final User? user,
+  }) async {
+    final Map<String, String> queryParameters = <String, String>{
+      'tagtype': taxonomyType.offTag,
+      'lc': language.offTag,
+      'string': input,
+      if (country != null) 'cc': country.offTag,
+      if (categories != null) 'categories': categories,
+      if (shape != null) 'shape': shape,
+      'limit': limit.toString(),
+    };
+    final Uri uri = UriHelper.getUri(
+      path: '/api/v3/taxonomy_suggestions',
+      queryType: queryType,
+      queryParameters: queryParameters,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      user: user,
+      queryType: queryType,
+    );
+    final Map<String, dynamic> map = json.decode(response.body);
+    final List<String> result = <String>[];
+    if (map['suggestions'] != null) {
+      for (dynamic value in map['suggestions']) {
+        result.add(value.toString());
+      }
+    }
+    return result;
   }
 
   /// Uses the auth.pl API to see if login was successful
