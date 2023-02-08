@@ -147,6 +147,6 @@ void saveAndExtractIngredient() async {
 /// The TagType
 void getSuggestions() async {
   // The result will be a List<dynamic> that can be parsed
-  await OpenFoodAPIClient.getAutocompletedSuggestions(TagType.COUNTRIES,
+  await OpenFoodAPIClient.getSuggestions(TagType.COUNTRIES,
       input: 'Tun', language: OpenFoodFactsLanguage.FRENCH);
 }

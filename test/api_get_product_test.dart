@@ -12,7 +12,7 @@ void main() {
 
   OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
 
-  void _findExpectedIngredients(
+  void findExpectedIngredients(
     final List<Ingredient> ingredients,
     final List<String> labels,
   ) {
@@ -252,7 +252,7 @@ void main() {
       expect(result.product!.ingredients, isNotNull);
       expect(result.product!.ingredients!.length, 9);
 
-      _findExpectedIngredients(
+      findExpectedIngredients(
         result.product!.ingredients!,
         [
           'Buttergebäck',
@@ -831,7 +831,7 @@ void main() {
 
       expect(result.product!.ingredients != null, true);
       expect(result.product!.ingredients!.length, 7);
-      _findExpectedIngredients(result.product!.ingredients!, ['Aroma']);
+      findExpectedIngredients(result.product!.ingredients!, ['Aroma']);
 
       expect(result.product!.additives!.ids[0], 'en:e150d');
       expect(result.product!.additives!.names[0], 'E150d');
@@ -879,7 +879,7 @@ void main() {
       expect(result.product!.ingredients, isNotNull);
       expect(result.product!.ingredients!.length, 7);
 
-      _findExpectedIngredients(
+      findExpectedIngredients(
         result.product!.ingredients!,
         [
           'Wasser',
@@ -933,7 +933,7 @@ void main() {
       expect(result.product!.ingredients, isNotNull);
       expect(result.product!.ingredients!.length, 7);
 
-      _findExpectedIngredients(
+      findExpectedIngredients(
         result.product!.ingredients!,
         [
           'Wasser',

@@ -1,56 +1,93 @@
-// ignore_for_file: deprecated_member_use_from_same_package
-
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
+/// Integration tests about the V3 suggestions.
 void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
-  void listContains(List<dynamic> result, String match) {
-    expect(result, isNotEmpty);
-    for (dynamic e in result) {
-      expect(e.toString().toLowerCase(), contains(match));
+  /// Checks if all items contain the [substring].
+  void listContains(final List<String> list, final String substring) {
+    expect(list, isNotEmpty);
+    for (final String item in list) {
+      expect(item.toString().toLowerCase(), contains(substring));
     }
   }
 
-  group('$OpenFoodAPIClient Suggestions and autocompletion', () {
+  /// Checks if a list is not sorted alphabetically.
+  ///
+  /// Which is the case for shapes and materials, where the results are sorted
+  /// by relevancy.
+  void checkNotSortedList(final List<String> list) {
+    final List<String> sorted = List<String>.from(list);
+    sorted.sort();
+    expect(list, isNot(orderedEquals(sorted)));
+  }
+
+  group('$OpenFoodAPIClient Suggestions and autocompletion V3 (packaging)', () {
+    test('Suggestions for packaging_shapes', () async {
+      final List<String> result = await OpenFoodAPIClient.getSuggestions(
+        TagType.PACKAGING_SHAPES,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        input: '',
+        country: OpenFoodFactsCountry.USA,
+        categories: 'Pizza',
+      );
+      expect(result, contains('Box'));
+      checkNotSortedList(result);
+    });
+
+    test('Suggestions for packaging_materials', () async {
+      final List<String> result = await OpenFoodAPIClient.getSuggestions(
+        TagType.PACKAGING_MATERIALS,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        input: 's',
+        country: OpenFoodFactsCountry.UNITED_KINGDOM,
+        categories: 'Beer',
+        shape: 'Bottle',
+      );
+      expect(result, contains('Glass'));
+      checkNotSortedList(result);
+    });
+  });
+
+  group('$OpenFoodAPIClient Suggestions and autocompletion V3', () {
     test('Suggestions for countries and origins', () async {
-      late List<dynamic> result;
+      late List<String> result;
 
       final List<TagType> tagTypes = <TagType>[
         TagType.COUNTRIES,
         TagType.ORIGINS,
       ];
       for (final TagType tagType in tagTypes) {
-        result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+        result = await OpenFoodAPIClient.getSuggestions(
           tagType,
           language: OpenFoodFactsLanguage.FRENCH,
           input: 't',
         );
         listContains(result, 't');
 
-        result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+        result = await OpenFoodAPIClient.getSuggestions(
           tagType,
           language: OpenFoodFactsLanguage.FRENCH,
           input: 'TUN',
         );
         listContains(result, 'tun');
 
-        result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+        result = await OpenFoodAPIClient.getSuggestions(
           tagType,
           language: OpenFoodFactsLanguage.ENGLISH,
           input: 'TUN',
         );
         listContains(result, 'tun');
 
-        result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+        result = await OpenFoodAPIClient.getSuggestions(
           tagType,
           language: OpenFoodFactsLanguage.ARABIC,
           input: 'تو',
         );
         listContains(result, 'تو');
 
-        result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+        result = await OpenFoodAPIClient.getSuggestions(
           tagType,
           language: OpenFoodFactsLanguage.GEORGIAN,
           input: 'TUN',
@@ -58,12 +95,12 @@ void main() {
         expect(result, isEmpty);
 
         expect(
-            await OpenFoodAPIClient.getAutocompletedSuggestions(
+            await OpenFoodAPIClient.getSuggestions(
               tagType,
               language: OpenFoodFactsLanguage.FRENCH,
               input: 'TUN',
             ),
-            await OpenFoodAPIClient.getAutocompletedSuggestions(
+            await OpenFoodAPIClient.getSuggestions(
               tagType,
               language: OpenFoodFactsLanguage.FRENCH,
               input: 'tun',
@@ -72,9 +109,9 @@ void main() {
     });
 
     test('Suggestions for countries only', () async {
-      late List<dynamic> result;
+      late List<String> result;
 
-      result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+      result = await OpenFoodAPIClient.getSuggestions(
         TagType.COUNTRIES,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'provence',
@@ -83,23 +120,23 @@ void main() {
     });
 
     test('Suggestions for origins only', () async {
-      late List<dynamic> result;
+      late List<String> result;
 
-      result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+      result = await OpenFoodAPIClient.getSuggestions(
         TagType.ORIGINS,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'provence',
       );
       expect(result, isNotEmpty);
 
-      result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+      result = await OpenFoodAPIClient.getSuggestions(
         TagType.ORIGINS,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'prove',
       );
       expect(result, isNotEmpty);
 
-      result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+      result = await OpenFoodAPIClient.getSuggestions(
         TagType.ORIGINS,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'pyré',
@@ -108,8 +145,7 @@ void main() {
     });
 
     test('Suggestions for state', () async {
-      List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+      List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.STATES,
         input: 'b',
         language: OpenFoodFactsLanguage.FRENCH,
@@ -117,7 +153,7 @@ void main() {
 
       listContains(result, 'b');
 
-      result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+      result = await OpenFoodAPIClient.getSuggestions(
         TagType.STATES,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'compléter',
@@ -125,7 +161,7 @@ void main() {
 
       listContains(result, 'compléter');
 
-      result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+      result = await OpenFoodAPIClient.getSuggestions(
         TagType.STATES,
         language: OpenFoodFactsLanguage.ENGLISH,
         input: 'h',
@@ -133,7 +169,7 @@ void main() {
 
       listContains(result, 'h');
 
-      result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+      result = await OpenFoodAPIClient.getSuggestions(
         TagType.STATES,
         language: OpenFoodFactsLanguage.ARABIC,
         input: 'غ',
@@ -141,7 +177,7 @@ void main() {
 
       expect(result.isEmpty, true);
 
-      result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+      result = await OpenFoodAPIClient.getSuggestions(
         TagType.STATES,
         language: OpenFoodFactsLanguage.GEORGIAN,
         input: 'M',
@@ -150,20 +186,19 @@ void main() {
       expect(result.isEmpty, true);
 
       expect(
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+          await OpenFoodAPIClient.getSuggestions(
             TagType.STATES,
             language: OpenFoodFactsLanguage.ENGLISH,
             input: 'O',
           ),
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+          await OpenFoodAPIClient.getSuggestions(
             TagType.STATES,
             language: OpenFoodFactsLanguage.ENGLISH,
             input: 'o',
           ));
     });
     test('Suggestions for language', () async {
-      List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+      List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.LANGUAGES,
         language: OpenFoodFactsLanguage.GERMAN,
         input: 'bA',
@@ -172,8 +207,7 @@ void main() {
       listContains(result, 'ba');
     });
     test('Suggestions for label', () async {
-      List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+      List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.LABELS,
         language: OpenFoodFactsLanguage.GERMAN,
         input: 'm',
@@ -182,8 +216,7 @@ void main() {
       listContains(result, 'm');
     });
     test('Suggestions for categories', () async {
-      List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+      List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.CATEGORIES,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'compo',
@@ -191,7 +224,7 @@ void main() {
 
       listContains(result, 'compo');
 
-      result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+      result = await OpenFoodAPIClient.getSuggestions(
         TagType.CATEGORIES,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'soja',
@@ -201,8 +234,7 @@ void main() {
       listContains(result, 'soja');
     });
     test('Suggestions for ingredients', () async {
-      List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+      List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.INGREDIENTS,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'vian',
@@ -211,8 +243,7 @@ void main() {
       listContains(result, 'vian');
     });
     test('Suggestions for traces', () async {
-      List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+      List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.TRACES,
         language: OpenFoodFactsLanguage.ENGLISH,
         input: 'e',
@@ -221,8 +252,7 @@ void main() {
       listContains(result, 'e');
     });
     test('Suggestions for additives', () async {
-      List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+      List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.ADDITIVES,
         language: OpenFoodFactsLanguage.RUSSIAN,
         input: 'e9',
@@ -231,8 +261,7 @@ void main() {
       listContains(result, 'e9');
     });
     test('Suggestions for allergens', () async {
-      List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+      List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.ALLERGENS,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'fRu',
@@ -241,8 +270,7 @@ void main() {
       listContains(result, 'fru');
     });
     test('Suggestions for packaging', () async {
-      final List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+      final List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.PACKAGING,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'briq',
@@ -251,8 +279,7 @@ void main() {
       listContains(result, 'briq');
     });
     test('Suggestions for packaging_shapes', () async {
-      final List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+      final List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.PACKAGING_SHAPES,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'bido',
@@ -260,8 +287,7 @@ void main() {
       listContains(result, 'bidon');
     });
     test('Suggestions for packaging_materials', () async {
-      final List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+      final List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.PACKAGING_MATERIALS,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'carto',
@@ -269,8 +295,7 @@ void main() {
       listContains(result, 'carton');
     });
     test('Suggestions for packaging_recycling', () async {
-      final List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+      final List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.PACKAGING_RECYCLING,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'conten',
@@ -278,97 +303,79 @@ void main() {
       listContains(result, 'conteneur');
     });
     test('Suggestions for emb_code', () async {
-      List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+      List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.EMB_CODES,
+        language: OpenFoodFactsLanguage.FRENCH,
         input: 'fR',
       );
 
       listContains(result, 'fr');
 
-      result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+      result = await OpenFoodAPIClient.getSuggestions(
         TagType.EMB_CODES,
+        language: OpenFoodFactsLanguage.FRENCH,
         input: 'R',
       );
 
       listContains(result, 'r');
 
       expect(
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+          await OpenFoodAPIClient.getSuggestions(
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.ITALIAN,
             input: 'U',
           ),
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+          await OpenFoodAPIClient.getSuggestions(
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.FRENCH,
             input: 'U',
           ));
 
       expect(
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+          await OpenFoodAPIClient.getSuggestions(
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.GERMAN,
             input: 'C',
           ),
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+          await OpenFoodAPIClient.getSuggestions(
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.ENGLISH,
             input: 'C',
           ));
 
       expect(
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+          await OpenFoodAPIClient.getSuggestions(
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.JAPANESE,
             input: 'd',
           ),
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+          await OpenFoodAPIClient.getSuggestions(
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.UKRAINIAN,
             input: 'D',
           ));
     });
     test('Suggestions empty fields', () async {
-      List<dynamic> result =
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
+      List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.ALLERGENS,
         language: OpenFoodFactsLanguage.FRENCH,
       );
 
       expect(result, contains('Céleri'));
 
-      result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+      result = await OpenFoodAPIClient.getSuggestions(
         TagType.TRACES,
         language: OpenFoodFactsLanguage.ENGLISH,
       );
 
       expect(result, contains('Celery'));
 
-      result = await OpenFoodAPIClient.getAutocompletedSuggestions(
+      result = await OpenFoodAPIClient.getSuggestions(
         TagType.INGREDIENTS,
         language: OpenFoodFactsLanguage.ENGLISH,
       );
 
-      expect(
-          result,
-          contains(
-            'Absinthe',
-          ));
-
-      result = await OpenFoodAPIClient.getAutocompletedSuggestions(
-        TagType.INGREDIENTS,
-        language: OpenFoodFactsLanguage.ENGLISH,
-      );
-
-      expect(
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TagType.INGREDIENTS,
-            language: OpenFoodFactsLanguage.ENGLISH,
-          ),
-          await OpenFoodAPIClient.getAutocompletedSuggestions(
-            TagType.INGREDIENTS,
-          ));
+      expect(result, contains('Absinthe'));
     });
   });
 }
