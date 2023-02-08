@@ -78,7 +78,7 @@ Code examples for the following tasks:
   - [By category](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html) ([Pnns2](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/PnnsGroup2.html))
   - [By vegan, vegetarian or/and palm oil status](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/searchProducts.html)
     <!-- TODO: Add detailed description for Personalized search -->
-- [Autocompletion for user inputs](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getAutocompletedSuggestions.html), by giving suggestions for (Labels, categories, ingredients, additives, traces and other [TagType's](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/TagType.html))
+- [Autocompletion for user inputs](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getSuggestions.html), by giving suggestions for (Labels, categories, ingredients, additives, traces and other [TagType's](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/TagType.html))
 - [Get the nutrient hierarchy specific to a country, localized](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getOrderedNutrients.html)
 - [Get product freshness](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIClient/getProductFreshness.html)
 - [Notes on advanced languages mechanics](https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#notes-on-languages-mechanics)
