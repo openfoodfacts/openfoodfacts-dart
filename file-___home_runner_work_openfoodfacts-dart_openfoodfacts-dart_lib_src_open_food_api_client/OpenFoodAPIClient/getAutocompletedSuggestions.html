@@ -31,7 +31,7 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client-library.html">open_food_api_client</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
-    <li class="self-crumb">getAutocompletedSuggestions static method</li>
+    <li class="self-crumb"><span class="deprecated">getAutocompletedSuggestions</span> static method</li>
   </ol>
   <div class="self-name">getAutocompletedSuggestions</div>
   <form class="search navbar-right" role="search">
@@ -56,13 +56,18 @@
 
     <section class="multi-line-signature">
       
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/2.19.2/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use getSuggestions instead&#39;)</li>
+    </ol>
+  </div>
 
-<span class="returntype"><a href="https://api.dart.dev/stable/2.19.0/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.0/dart-core/List-class.html">List</a></span>&gt;</span></span>
-<span class="name ">getAutocompletedSuggestions</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getAutocompletedSuggestions-param-taxonomyType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_tag_type/TagType.html">TagType</a></span> <span class="parameter-name">taxonomyType</span>, </span></li>
-<li><span class="parameter" id="getAutocompletedSuggestions-param-input">{<span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">input</span> = <span class="default-value">&#39;&#39;</span>, </span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/2.19.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.2/dart-core/List-class.html">List</a></span>&gt;</span></span>
+<span class="name deprecated">getAutocompletedSuggestions</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getAutocompletedSuggestions-param-taxonomyType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_tag_type/TagType.html">TagType</a></span> <span class="parameter-name">taxonomyType</span>, </span></li>
+<li><span class="parameter" id="getAutocompletedSuggestions-param-input">{<span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">input</span> = <span class="default-value">&#39;&#39;</span>, </span></li>
 <li><span class="parameter" id="getAutocompletedSuggestions-param-language"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span> = <span class="default-value">OpenFoodFactsLanguage.ENGLISH</span>, </span></li>
 <li><span class="parameter" id="getAutocompletedSuggestions-param-queryType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>, </span></li>
-<li><span class="parameter" id="getAutocompletedSuggestions-param-limit"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.0/dart-core/int-class.html">int</a></span> <span class="parameter-name">limit</span> = <span class="default-value">25</span>}</span></li>
+<li><span class="parameter" id="getAutocompletedSuggestions-param-limit"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">limit</span> = <span class="default-value">25</span>}</span></li>
 </ol>)
 
       
@@ -86,7 +91,9 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static Future&lt;List&lt;dynamic&gt;&gt; getAutocompletedSuggestions(
+  <pre class="language-dart"><code class="language-dart">&#47;&#47; TODO: deprecated from 2023-02-01; remove when old enough
+@Deprecated(&#39;Use getSuggestions instead&#39;)
+static Future&lt;List&lt;dynamic&gt;&gt; getAutocompletedSuggestions(
   final TagType taxonomyType, {
   final String input = &#39;&#39;,
   final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
@@ -128,7 +135,7 @@
   <li><a href="../../index.html">openfoodfacts</a></li>
   <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client-library.html">open_food_api_client</a></li>
   <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
-  <li class="self-crumb">getAutocompletedSuggestions static method</li>
+  <li class="self-crumb"><span class="deprecated">getAutocompletedSuggestions</span> static method</li>
 </ol>
 
 
@@ -140,15 +147,15 @@
         <li class="section-title inherited">
           <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html#instance-properties">Properties</a>
         </li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/hashCode.html">hashCode</a></li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/runtimeType.html">runtimeType</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.2/dart-core/Object/hashCode.html">hashCode</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.2/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
         <li class="section-title inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html#instance-methods">Methods</a></li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/toString.html">toString</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.2/dart-core/Object/toString.html">toString</a></li>
 
         <li class="section-title inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html#operators">Operators</a></li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.0/dart-core/Object/operator_equals.html">operator ==</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.2/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 
@@ -156,7 +163,7 @@
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/addProductImage.html">addProductImage</a></li>
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/extractIngredients.html">extractIngredients</a></li>
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/extractPackaging.html">extractPackaging</a></li>
-          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getAutocompletedSuggestions.html">getAutocompletedSuggestions</a></li>
+          <li><a class="deprecated" href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getAutocompletedSuggestions.html">getAutocompletedSuggestions</a></li>
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getCrowdinUri.html">getCrowdinUri</a></li>
           <li><a class="deprecated" href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getIngredientSpellingCorrection.html">getIngredientSpellingCorrection</a></li>
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getOrderedNutrients.html">getOrderedNutrients</a></li>
@@ -172,6 +179,7 @@
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getRandomInsight.html">getRandomInsight</a></li>
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getRandomRobotoffQuestion.html">getRandomRobotoffQuestion</a></li>
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getRobotoffQuestionsForProduct.html">getRobotoffQuestionsForProduct</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getSuggestions.html">getSuggestions</a></li>
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomy.html">getTaxonomy</a></li>
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyAdditives.html">getTaxonomyAdditives</a></li>
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/getTaxonomyAllergens.html">getTaxonomyAllergens</a></li>
