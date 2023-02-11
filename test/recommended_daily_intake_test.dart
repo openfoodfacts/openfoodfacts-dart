@@ -1,7 +1,11 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
+import 'test_constants.dart';
+
 void main() {
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
+
   group('Get Recommendations', () {
     test('Get', () {
       RecommendedDailyIntake rdi =

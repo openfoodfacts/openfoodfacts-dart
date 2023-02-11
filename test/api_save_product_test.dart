@@ -6,6 +6,7 @@ import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
 
   group('$OpenFoodAPIClient add new products', () {

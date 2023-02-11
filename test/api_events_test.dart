@@ -1,8 +1,11 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
+import 'test_constants.dart';
+
 /// Tests around Events API.
 void main() {
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
 
   const String knownUserId = 'ocervell';

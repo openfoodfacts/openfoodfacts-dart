@@ -3,7 +3,10 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
+import 'test_constants.dart';
+
 void main() {
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   void listContains(List<dynamic> result, String match) {
