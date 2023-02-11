@@ -30,11 +30,14 @@ enum MatchedProductStatusV2 {
   DOES_NOT_MATCH,
 }
 
-class MatchedProductV2 {
-  MatchedProductV2(
-    this.product,
+/// Score of a product according to preferences.
+///
+/// For performance reasons we store just the barcode, not the product.
+class MatchedScoreV2 {
+  MatchedScoreV2(
+    final Product product,
     final ProductPreferencesManager productPreferencesManager,
-  ) {
+  ) : barcode = product.barcode! {
     _score = 0;
     _debug = '';
 
@@ -42,7 +45,7 @@ class MatchedProductV2 {
     if (attributeGroups == null) {
       // the product does not have the attribute_groups field
       _status = MatchedProductStatusV2.UNKNOWN_MATCH;
-      _debug = "no attribute_groups";
+      _debug = 'no attribute_groups';
       return;
     }
 
@@ -125,7 +128,7 @@ class MatchedProductV2 {
     }
   }
 
-  final Product product;
+  final String barcode;
   double _score = 0;
   late MatchedProductStatusV2 _status;
   String _debug = '';
@@ -145,20 +148,13 @@ class MatchedProductV2 {
     PreferenceImportance.ID_NOT_IMPORTANT: 0,
   };
 
-  static List<MatchedProductV2> sort(
-    final List<Product> products,
-    final ProductPreferencesManager productPreferencesManager,
-  ) {
-    final List<MatchedProductV2> result = <MatchedProductV2>[];
+  static void sort(final List<MatchedScoreV2> scores) {
     int i = 0;
-    for (final Product product in products) {
-      final MatchedProductV2 matchedProduct =
-          MatchedProductV2(product, productPreferencesManager);
-      matchedProduct._initialOrder = i++;
-      result.add(matchedProduct);
+    for (final MatchedScoreV2 score in scores) {
+      score._initialOrder = i++;
     }
-    result.sort(
-      (MatchedProductV2 a, MatchedProductV2 b) {
+    scores.sort(
+      (MatchedScoreV2 a, MatchedScoreV2 b) {
         late int compare;
         // Highest score first
         compare = b.score.compareTo(a.score);
@@ -175,6 +171,27 @@ class MatchedProductV2 {
         return a._initialOrder.compareTo(b._initialOrder);
       },
     );
-    return result;
+  }
+}
+
+/// Score of a product according to preferences, with a [Product] field.
+class MatchedProductV2 extends MatchedScoreV2 {
+  MatchedProductV2(
+    this.product,
+    final ProductPreferencesManager productPreferencesManager,
+  ) : super(product, productPreferencesManager);
+
+  final Product product;
+
+  static List<MatchedProductV2> sort(
+    final List<Product> products,
+    final ProductPreferencesManager productPreferencesManager,
+  ) {
+    final List<MatchedProductV2> scores = <MatchedProductV2>[];
+    for (final Product product in products) {
+      scores.add(MatchedProductV2(product, productPreferencesManager));
+    }
+    MatchedScoreV2.sort(scores);
+    return scores;
   }
 }
