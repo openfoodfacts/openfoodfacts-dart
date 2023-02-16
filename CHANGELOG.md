@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.2.1...v2.3.0) (2023-02-16)
+
+
+### Features
+
+* 695 - New API V3 suggestions for taxonomies ([#696](https://github.com/openfoodfacts/openfoodfacts-dart/issues/696)) ([c0ffe94](https://github.com/openfoodfacts/openfoodfacts-dart/commit/c0ffe9412f0ab3da411c0dbcbd33c15e589d3bfe))
+* 699 - new class MatchedScoreV2 with better perf than MatchedProductV2 ([#702](https://github.com/openfoodfacts/openfoodfacts-dart/issues/702)) ([5a3dba9](https://github.com/openfoodfacts/openfoodfacts-dart/commit/5a3dba918df6a424832069123bcca97e20ea23f0))
+
 ## [2.2.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.2.0...v2.2.1) (2023-01-27)
 
 
