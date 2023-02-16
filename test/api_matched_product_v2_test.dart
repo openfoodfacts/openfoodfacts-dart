@@ -34,120 +34,152 @@ void main() {
   const String BARCODE_ARDECHE = '20712570';
   const String BARCODE_CHORIZO = '8480000591074';
 
+  final List<String> inputBarcodes = <String>[
+    BARCODE_CHIPOLATA,
+    BARCODE_FLEISCHWURST,
+    BARCODE_KNACKI,
+    BARCODE_CORDONBLEU,
+    BARCODE_SAUCISSON,
+    BARCODE_PIZZA,
+    BARCODE_ORIENTALES,
+    BARCODE_ARDECHE,
+    BARCODE_HACK,
+    BARCODE_CHORIZO,
+    BARCODE_SCHNITZEL,
+    BARCODE_POULET,
+  ];
+  final Map<String, _Score> expectedScores = <String, _Score>{
+    BARCODE_KNACKI: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+    BARCODE_CORDONBLEU: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+    BARCODE_ORIENTALES: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+    BARCODE_HACK: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+    BARCODE_SCHNITZEL: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+    BARCODE_CHIPOLATA: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
+    BARCODE_FLEISCHWURST: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
+    BARCODE_POULET: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
+    BARCODE_SAUCISSON: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
+    BARCODE_PIZZA: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
+    BARCODE_ARDECHE: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
+    BARCODE_CHORIZO: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
+  };
+  final List<String> expectedBarcodeOrder = <String>[
+    BARCODE_FLEISCHWURST,
+    BARCODE_KNACKI,
+    BARCODE_CORDONBLEU,
+    BARCODE_ORIENTALES,
+    BARCODE_HACK,
+    BARCODE_SCHNITZEL,
+    BARCODE_CHIPOLATA,
+    BARCODE_POULET,
+    BARCODE_SAUCISSON,
+    BARCODE_PIZZA,
+    BARCODE_ARDECHE,
+    BARCODE_CHORIZO,
+  ];
+
+  Future<List<Product>> downloadProducts() async {
+    final SearchResult result = await OpenFoodAPIClient.searchProducts(
+      OpenFoodAPIConfiguration.globalUser,
+      ProductSearchQueryConfiguration(
+        parametersList: [BarcodeParameter.list(inputBarcodes)],
+        language: language,
+        fields: [ProductField.BARCODE, ProductField.ATTRIBUTE_GROUPS],
+        version: ProductQueryVersion.v3,
+      ),
+    );
+    expect(result.count, expectedScores.keys.length);
+    expect(result.page, 1);
+    expect(result.products, isNotNull);
+    final List<Product> products = result.products!;
+    // sorting them again by the input order
+    products.sort(
+      (final Product a, final Product b) => inputBarcodes
+          .indexOf(a.barcode!)
+          .compareTo(inputBarcodes.indexOf(b.barcode!)),
+    );
+    expect(products.length, inputBarcodes.length);
+    return products;
+  }
+
+  Future<ProductPreferencesManager> getManager() async {
+    final Map<String, String> attributeImportances = {};
+    final ProductPreferencesManager manager = ProductPreferencesManager(
+      ProductPreferencesSelection(
+        setImportance: (String attributeId, String importanceIndex) async {
+          attributeImportances[attributeId] = importanceIndex;
+        },
+        getImportance: (String attributeId) =>
+            attributeImportances[attributeId] ??
+            PreferenceImportance.ID_NOT_IMPORTANT,
+      ),
+    );
+    final String languageCode = language.code;
+    final String importanceUrl =
+        AvailablePreferenceImportances.getUrl(languageCode);
+    final String attributeGroupUrl =
+        AvailableAttributeGroups.getUrl(languageCode);
+    http.Response response;
+    response = await http.get(Uri.parse(importanceUrl));
+    expect(response.statusCode, HTTP_OK);
+    final String preferenceImportancesString = response.body;
+    response = await http.get(Uri.parse(attributeGroupUrl));
+    expect(response.statusCode, HTTP_OK);
+    final String attributeGroupsString = response.body;
+    manager.availableProductPreferences =
+        AvailableProductPreferences.loadFromJSONStrings(
+      preferenceImportancesString: preferenceImportancesString,
+      attributeGroupsString: attributeGroupsString,
+    );
+    await manager.setImportance(
+      Attribute.ATTRIBUTE_VEGETARIAN,
+      PreferenceImportance.ID_MANDATORY,
+    );
+    return manager;
+  }
+
   /// Tests around Matched Product v2.
   group('$OpenFoodAPIClient matched product v2', () {
     test('matched product', () async {
-      final Map<String, String> attributeImportances = {};
-      int refreshCounter = 0;
-      final ProductPreferencesManager manager = ProductPreferencesManager(
-        ProductPreferencesSelection(
-          setImportance: (String attributeId, String importanceIndex) async {
-            attributeImportances[attributeId] = importanceIndex;
-          },
-          getImportance: (String attributeId) =>
-              attributeImportances[attributeId] ??
-              PreferenceImportance.ID_NOT_IMPORTANT,
-          notify: () => refreshCounter++,
-        ),
-      );
-      final String languageCode = language.code;
-      final String importanceUrl =
-          AvailablePreferenceImportances.getUrl(languageCode);
-      final String attributeGroupUrl =
-          AvailableAttributeGroups.getUrl(languageCode);
-      http.Response response;
-      response = await http.get(Uri.parse(importanceUrl));
-      expect(response.statusCode, HTTP_OK);
-      final String preferenceImportancesString = response.body;
-      response = await http.get(Uri.parse(attributeGroupUrl));
-      expect(response.statusCode, HTTP_OK);
-      final String attributeGroupsString = response.body;
-      manager.availableProductPreferences =
-          AvailableProductPreferences.loadFromJSONStrings(
-        preferenceImportancesString: preferenceImportancesString,
-        attributeGroupsString: attributeGroupsString,
-      );
-      await manager.setImportance(
-        Attribute.ATTRIBUTE_VEGETARIAN,
-        PreferenceImportance.ID_MANDATORY,
-      );
+      final ProductPreferencesManager manager = await getManager();
 
-      final List<String> inputBarcodes = <String>[
-        BARCODE_CHIPOLATA,
-        BARCODE_FLEISCHWURST,
-        BARCODE_KNACKI,
-        BARCODE_CORDONBLEU,
-        BARCODE_SAUCISSON,
-        BARCODE_PIZZA,
-        BARCODE_ORIENTALES,
-        BARCODE_ARDECHE,
-        BARCODE_HACK,
-        BARCODE_CHORIZO,
-        BARCODE_SCHNITZEL,
-        BARCODE_POULET,
-      ];
-      final Map<String, _Score> expectedScores = <String, _Score>{
-        BARCODE_KNACKI: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
-        BARCODE_CORDONBLEU: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
-        BARCODE_ORIENTALES: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
-        BARCODE_HACK: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
-        BARCODE_SCHNITZEL: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
-        BARCODE_CHIPOLATA: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
-        BARCODE_FLEISCHWURST:
-            _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
-        BARCODE_POULET: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
-        BARCODE_SAUCISSON: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
-        BARCODE_PIZZA: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
-        BARCODE_ARDECHE: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
-        BARCODE_CHORIZO: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
-      };
-      final List<String> expectedBarcodeOrder = <String>[
-        BARCODE_FLEISCHWURST,
-        BARCODE_KNACKI,
-        BARCODE_CORDONBLEU,
-        BARCODE_ORIENTALES,
-        BARCODE_HACK,
-        BARCODE_SCHNITZEL,
-        BARCODE_CHIPOLATA,
-        BARCODE_POULET,
-        BARCODE_SAUCISSON,
-        BARCODE_PIZZA,
-        BARCODE_ARDECHE,
-        BARCODE_CHORIZO,
-      ];
-
-      final SearchResult result = await OpenFoodAPIClient.searchProducts(
-        OpenFoodAPIConfiguration.globalUser,
-        ProductSearchQueryConfiguration(
-          parametersList: [BarcodeParameter.list(inputBarcodes)],
-          language: language,
-          fields: [ProductField.BARCODE, ProductField.ATTRIBUTE_GROUPS],
-          version: ProductQueryVersion.v3,
-        ),
-      );
-      expect(result.count, expectedScores.keys.length);
-      expect(result.page, 1);
-      expect(result.products, isNotNull);
-      final List<Product> products = result.products!;
-      // sorting them again by the input order
-      products.sort(
-        (final Product a, final Product b) => inputBarcodes
-            .indexOf(a.barcode!)
-            .compareTo(inputBarcodes.indexOf(b.barcode!)),
-      );
-      expect(products.length, inputBarcodes.length);
+      final List<Product> products = await downloadProducts();
 
       final List<MatchedProductV2> actuals =
           MatchedProductV2.sort(products, manager);
+
       expect(actuals.length, expectedBarcodeOrder.length);
       for (int i = 0; i < actuals.length; i++) {
-        final MatchedProductV2 matchedProduct = actuals[i];
+        final MatchedProductV2 matched = actuals[i];
         final String barcode = expectedBarcodeOrder[i];
-        expect(matchedProduct.product.barcode, barcode);
+        expect(matched.product.barcode, barcode);
+        expect(matched.barcode, barcode);
         expect(expectedScores[barcode], isNotNull);
         final _Score score = expectedScores[barcode]!;
-        expect(matchedProduct.status, score.status);
-        expect(matchedProduct.score, score.score);
+        expect(matched.status, score.status);
+        expect(matched.score, score.score);
+      }
+    });
+
+    test('matched score', () async {
+      final ProductPreferencesManager manager = await getManager();
+
+      final List<Product> products = await downloadProducts();
+
+      final List<MatchedScoreV2> actuals = <MatchedScoreV2>[];
+      for (final Product product in products) {
+        actuals.add(MatchedScoreV2(product, manager));
+      }
+      MatchedScoreV2.sort(actuals);
+
+      expect(actuals.length, expectedBarcodeOrder.length);
+      for (int i = 0; i < actuals.length; i++) {
+        final MatchedScoreV2 matched = actuals[i];
+        final String barcode = expectedBarcodeOrder[i];
+        expect(matched.barcode, barcode);
+        expect(expectedScores[barcode], isNotNull);
+        final _Score score = expectedScores[barcode]!;
+        expect(matched.status, score.status);
+        expect(matched.score, score.score);
       }
     });
   });
