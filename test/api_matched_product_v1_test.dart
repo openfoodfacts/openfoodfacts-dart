@@ -7,6 +7,7 @@ import 'test_constants.dart';
 void main() {
   const int HTTP_OK = 200;
 
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   /// Tests around Matched Product v1.

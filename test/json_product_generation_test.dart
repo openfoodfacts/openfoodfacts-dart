@@ -6,6 +6,8 @@ import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
+
   test('Generate JSON - database example', () async {
     String barcode = '0030000010204';
     ProductQueryConfiguration configurations = ProductQueryConfiguration(

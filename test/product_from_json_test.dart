@@ -6,6 +6,8 @@ import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
+
   // Verify that we can save the product as a JSON string and then load it back
   test('Load product from JSON', () async {
     String barcode = '0030000010204';

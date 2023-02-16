@@ -1,7 +1,11 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
+import 'test_constants.dart';
+
 void main() {
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
+
   group('EAN8', () {
     test('Valid EAN8 barcodes', () {
       expect(BarcodeValidator.isValid("12345670"), true);

@@ -3,7 +3,10 @@ import 'dart:math';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
+import 'test_constants.dart';
+
 void main() {
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   const QueryType user_test_queryType = QueryType.TEST;
 
   group('Create user', () {

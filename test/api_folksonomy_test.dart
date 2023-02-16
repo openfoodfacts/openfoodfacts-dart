@@ -1,9 +1,12 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
+import 'test_constants.dart';
+
 /// Tests around folksonomy
 void main() {
   // TODO have it working on TEST too
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   // of course we need to check that those 3 "known" guys combine well
