@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
+import 'test_constants.dart';
+
 /// Tests related to [OrderedNutrient] and [OrderedNutrients]
 void main() {
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   // Very long list, experimentally created from the 3 initial URLs.

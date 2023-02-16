@@ -1,6 +1,10 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
 
 class TestConstants {
+  static const UserAgent TEST_USER_AGENT = UserAgent(
+    name: 'off-dart integration tests',
+  );
+
   static const User TEST_USER = User(
     userId: 'openfoodfacts-dart',
     password: 'iloveflutter',

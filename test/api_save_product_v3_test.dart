@@ -5,6 +5,7 @@ import 'test_constants.dart';
 
 /// Integration tests around the "save packagings V3" feature.
 void main() {
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
 
   group('$OpenFoodAPIClient save product V3', () {

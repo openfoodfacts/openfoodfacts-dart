@@ -10,6 +10,7 @@ void main() {
   const BARCODE_UNKNOWN = '11111111111111111111111111';
   const BARCODE_DANISH_BUTTER_COOKIES = '5701184005007';
 
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
 
   void findExpectedIngredients(

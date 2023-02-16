@@ -1,9 +1,12 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
+import 'test_constants.dart';
+
 void main() {
   const BARCODE_DANISH_BUTTER_COOKIES = '5701184005007';
 
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   group('$OpenFoodAPIClient json to/from conversions', () {

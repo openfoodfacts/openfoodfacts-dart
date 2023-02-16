@@ -15,6 +15,7 @@ void main() {
   const int HTTP_OK = 200;
 
   const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
   OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
