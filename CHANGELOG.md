@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.3.0...v2.3.1) (2023-02-18)
+
+
+### Bug Fixes
+
+* rollback to dart 2.17 / flutter 3.0.5 ([#705](https://github.com/openfoodfacts/openfoodfacts-dart/issues/705)) ([5c15fd0](https://github.com/openfoodfacts/openfoodfacts-dart/commit/5c15fd04f58d4169eaa2650f74b72fef70ede697))
+
 ## [2.3.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.2.1...v2.3.0) (2023-02-16)
 
 
