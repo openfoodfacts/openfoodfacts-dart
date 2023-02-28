@@ -369,6 +369,34 @@ class Product extends JsonObject {
   @JsonKey(name: 'last_modified_by', includeIfNull: false)
   String? lastModifiedBy;
 
+  /// Last image timestamp. Read-only.
+  @JsonKey(
+      name: 'last_image_t',
+      includeIfNull: false,
+      fromJson: JsonHelper.timestampToDate,
+      toJson: JsonHelper.dateToTimestamp)
+  DateTime? lastImage;
+
+  /// Last editor id. Read-only.
+  @JsonKey(name: 'last_editor', includeIfNull: false)
+  String? lastEditor;
+
+  /// Entry dates tags. Read-only.
+  @JsonKey(name: 'entry_dates_tags', includeIfNull: false)
+  List<String>? entryDates;
+
+  /// Last check dates tags. Read-only.
+  @JsonKey(name: 'last_check_dates_tags', includeIfNull: false)
+  List<String>? lastCheckDates;
+
+  /// Last edit dates tags. Read-only.
+  @JsonKey(name: 'last_edit_dates_tags', includeIfNull: false)
+  List<String>? lastEditDates;
+
+  /// Last image dates tags. Read-only.
+  @JsonKey(name: 'last_image_dates_tags', includeIfNull: false)
+  List<String>? lastImageDates;
+
   /// Last check timestamp. Read-only.
   @JsonKey(
       name: 'last_checked_t',

@@ -123,6 +123,20 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       ..packagingTextInLanguages =
           LanguageHelper.fromJsonStringMap(json['packaging_text_in_languages'])
       ..lastModifiedBy = json['last_modified_by'] as String?
+      ..lastImage = JsonHelper.timestampToDate(json['last_image_t'])
+      ..lastEditor = json['last_editor'] as String?
+      ..entryDates = (json['entry_dates_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
+      ..lastCheckDates = (json['last_check_dates_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
+      ..lastEditDates = (json['last_edit_dates_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
+      ..lastImageDates = (json['last_image_dates_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
       ..lastChecked = JsonHelper.timestampToDate(json['last_checked_t'])
       ..lastChecker = json['last_checker'] as String?
       ..created = JsonHelper.timestampToDate(json['created_t'])
@@ -226,6 +240,12 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull(
       'last_modified_t', JsonHelper.dateToTimestamp(instance.lastModified));
   writeNotNull('last_modified_by', instance.lastModifiedBy);
+  writeNotNull('last_image_t', JsonHelper.dateToTimestamp(instance.lastImage));
+  writeNotNull('last_editor', instance.lastEditor);
+  writeNotNull('entry_dates_tags', instance.entryDates);
+  writeNotNull('last_check_dates_tags', instance.lastCheckDates);
+  writeNotNull('last_edit_dates_tags', instance.lastEditDates);
+  writeNotNull('last_image_dates_tags', instance.lastImageDates);
   writeNotNull(
       'last_checked_t', JsonHelper.dateToTimestamp(instance.lastChecked));
   writeNotNull('last_checker', instance.lastChecker);
