@@ -11,6 +11,9 @@ void main() {
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
   const ProductQueryVersion version = ProductQueryVersion.v3;
 
+  // additional parameter for faster response time
+  const Parameter optimParameter = SearchTerms(terms: ['pizza']);
+
   group('$OpenFoodAPIClient search products', () {
     const String UNKNOWN_BARCODE = '1111111111111111111111111111111';
     const List<String> BARCODES = [
@@ -195,6 +198,7 @@ void main() {
           vegetarianStatus: vegetarianStatus,
           palmOilFreeStatus: palmOilFreeStatus,
         ),
+        optimParameter,
       ];
 
       final ProductSearchQueryConfiguration configuration =
@@ -891,6 +895,7 @@ void main() {
         const PageNumber(page: 1),
         const PageSize(size: 100),
         allergensParameter,
+        optimParameter,
       ];
 
       final ProductSearchQueryConfiguration configuration =
@@ -1000,6 +1005,7 @@ void main() {
         const PageNumber(page: 1),
         const PageSize(size: 100),
         statesTagsParameter,
+        optimParameter,
       ];
 
       final ProductSearchQueryConfiguration configuration =
