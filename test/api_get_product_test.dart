@@ -1866,6 +1866,12 @@ void main() {
         ProductField.CREATED,
         ProductField.CREATOR,
         ProductField.EDITORS,
+        ProductField.LAST_EDITOR,
+        ProductField.LAST_IMAGE,
+        ProductField.ENTRY_DATES,
+        ProductField.LAST_CHECK_DATES,
+        ProductField.LAST_EDIT_DATES,
+        ProductField.LAST_IMAGE_DATES,
       ],
       version: ProductQueryVersion.v3,
     );
@@ -1878,29 +1884,43 @@ void main() {
     expect(result.product!.lastModified, isNotNull);
     expect(
       JsonHelper.dateToTimestamp(result.product!.lastModified),
-      greaterThanOrEqualTo(1667683782),
-    ); // value on 2022-12-05
+      greaterThanOrEqualTo(1677130480),
+    ); // value on 2023-02-28
     expect(result.product!.lastModifiedBy, isNotNull);
     expect(result.product!.lastModifiedBy, isNotEmpty);
     expect(result.product!.lastChecked, isNotNull);
     expect(
       JsonHelper.dateToTimestamp(result.product!.lastChecked),
       greaterThanOrEqualTo(1541687984),
-    ); // value on 2022-12-05
+    ); // value on 2023-02-28
     expect(result.product!.lastChecker, isNotNull);
     expect(result.product!.lastChecker, isNotEmpty);
     expect(result.product!.created, isNotNull);
     expect(
       JsonHelper.dateToTimestamp(result.product!.created),
-      greaterThanOrEqualTo(1340658486),
-    ); // value on 2022-12-05
+      1340658486,
+    ); // value on 2023-02-28
     expect(result.product!.creator, isNotNull);
     expect(result.product!.creator, isNotEmpty);
     expect(result.product!.editors, isNotNull);
     expect(
       result.product!.editors!.length,
-      greaterThanOrEqualTo(59),
-    ); // value on 2022-12-05
+      greaterThanOrEqualTo(60),
+    ); // value on 2023-02-28
+    expect(result.product!.lastEditor, isNotNull);
+    expect(result.product!.lastEditor, isNotEmpty);
+    expect(
+      JsonHelper.dateToTimestamp(result.product!.lastImage),
+      greaterThanOrEqualTo(1640852418),
+    ); // value on 2023-02-28
+    expect(result.product!.lastImageDates, isNotNull);
+    expect(result.product!.lastImageDates, hasLength(3));
+    expect(result.product!.lastEditDates, isNotNull);
+    expect(result.product!.lastEditDates, hasLength(3));
+    expect(result.product!.lastCheckDates, isNotNull);
+    expect(result.product!.lastCheckDates, hasLength(3));
+    expect(result.product!.entryDates, isNotNull);
+    expect(result.product!.entryDates, hasLength(3));
   });
 
   test('get new packagings field', () async {
