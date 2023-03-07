@@ -880,7 +880,7 @@ class OpenFoodAPIClient {
 
   static Future<RobotoffQuestionResult> getRandomRobotoffQuestion(
     String lang,
-    User user, {
+    User? user, {
     int? count,
     List<InsightType>? types,
     QueryType? queryType,
