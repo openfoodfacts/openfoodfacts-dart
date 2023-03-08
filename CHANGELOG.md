@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.4.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.3.1...v2.4.0) (2023-03-08)
+
+
+### Features
+
+* 557 - added 6 product fields ([#709](https://github.com/openfoodfacts/openfoodfacts-dart/issues/709)) ([2cb48b1](https://github.com/openfoodfacts/openfoodfacts-dart/commit/2cb48b1da481435b3cbdd75c470522c7b9c187f2))
+
+
+### Bug Fixes
+
+* 712 - optional User parameter for get random robotoff questions ([#713](https://github.com/openfoodfacts/openfoodfacts-dart/issues/713)) ([8ff23d2](https://github.com/openfoodfacts/openfoodfacts-dart/commit/8ff23d2bc2242b83e94b5cc3f60b28da373eb7d2))
+
 ## [2.3.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.3.0...v2.3.1) (2023-02-18)
 
 
