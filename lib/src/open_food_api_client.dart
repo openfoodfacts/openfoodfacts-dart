@@ -1135,6 +1135,8 @@ class OpenFoodAPIClient {
   }
 
   /// cf. https://openfoodfacts.github.io/openfoodfacts-server/reference/api-v3/#get-/api/v3/taxonomy_suggestions
+  ///
+  /// Consider using [SuggestionManager].
   static Future<List<String>> getSuggestions(
     final TagType taxonomyType, {
     final String input = '',
