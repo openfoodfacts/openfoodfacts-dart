@@ -237,6 +237,10 @@ class HttpHelper {
       if (string.startsWith('<html>')) {
         throw Exception('JSON expected, html found: ${string.split('\n')[1]}');
       }
+      if (string.startsWith('<h1>Software error:</h1>')) {
+        throw Exception(
+            'JSON expected, software error found: ${string.split('\n')[1]}');
+      }
       rethrow;
     }
   }
