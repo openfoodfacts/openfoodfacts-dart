@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
@@ -173,7 +171,7 @@ void main() {
         );
         checkNutrients(
           OrderedNutrients.fromJson(
-            jsonDecode(
+            HttpHelper().jsonDecode(
               await OpenFoodAPIClient.getOrderedNutrientsJsonString(
                 country: country,
                 language: language,

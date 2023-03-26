@@ -1,4 +1,4 @@
-import 'dart:convert';
+import 'http_helper.dart';
 
 /// Invalid barcode blacklist
 ///
@@ -12,7 +12,7 @@ import 'dart:convert';
 class InvalidBarcodes {
   /// JSON load constructor; may throw an exception.
   InvalidBarcodes.loadFromJSONString(final String jsonString) {
-    final List<dynamic> inputJson = json.decode(jsonString);
+    final List<dynamic> inputJson = HttpHelper().jsonDecode(jsonString);
     for (final dynamic item in inputJson) {
       _barcodes.add(item as String);
     }

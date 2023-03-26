@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'model/badge_base.dart';
@@ -47,7 +46,8 @@ class EventsAPIClient {
     );
     _checkResponse(response);
     final List<EventsBase> result = <EventsBase>[];
-    final List<dynamic> json = jsonDecode(response.body) as List<dynamic>;
+    final List<dynamic> json =
+        HttpHelper().jsonDecode(response.body) as List<dynamic>;
     for (var element in json) {
       result.add(EventsBase.fromJson(element));
     }
@@ -78,7 +78,7 @@ class EventsAPIClient {
     _checkResponse(response);
     final Map<String, int> result = <String, int>{};
     final Map<String, dynamic> json =
-        jsonDecode(response.body) as Map<String, dynamic>;
+        HttpHelper().jsonDecode(response.body) as Map<String, dynamic>;
     for (final String key in json.keys) {
       result[key] = json[key] as int;
     }
@@ -112,7 +112,7 @@ class EventsAPIClient {
     );
     _checkResponse(response);
     final Map<String, dynamic> json =
-        jsonDecode(response.body) as Map<String, dynamic>;
+        HttpHelper().jsonDecode(response.body) as Map<String, dynamic>;
     return json['score'] as int;
   }
 
@@ -139,7 +139,8 @@ class EventsAPIClient {
     );
     _checkResponse(response);
     final List<BadgeBase> result = <BadgeBase>[];
-    final List<dynamic> json = jsonDecode(response.body) as List<dynamic>;
+    final List<dynamic> json =
+        HttpHelper().jsonDecode(response.body) as List<dynamic>;
     for (var element in json) {
       result.add(BadgeBase.fromJson(element));
     }
@@ -165,7 +166,8 @@ class EventsAPIClient {
     );
     _checkResponse(response);
     final List<LeaderboardEntry> result = <LeaderboardEntry>[];
-    final List<dynamic> json = jsonDecode(response.body) as List<dynamic>;
+    final List<dynamic> json =
+        HttpHelper().jsonDecode(response.body) as List<dynamic>;
     for (var element in json) {
       result.add(LeaderboardEntry.fromJson(element));
     }
@@ -179,7 +181,7 @@ class EventsAPIClient {
       String? exception;
       try {
         final Map<String, dynamic> json =
-            jsonDecode(response.body) as Map<String, dynamic>;
+            HttpHelper().jsonDecode(response.body) as Map<String, dynamic>;
         exception = json['detail'];
       } catch (e) {
         //

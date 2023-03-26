@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:json_annotation/json_annotation.dart';
 
 import '../interface/json_object.dart';
+import '../utils/http_helper.dart';
 
 part 'status.g.dart';
 
@@ -66,7 +65,7 @@ class Status extends JsonObject {
   /// Constructs a [Status] from an API response
   factory Status.fromApiResponse(String responseBody) {
     try {
-      return Status.fromJson(json.decode(responseBody));
+      return Status.fromJson(HttpHelper().jsonDecode(responseBody));
     } catch (e) {
       return Status(
         body: responseBody,

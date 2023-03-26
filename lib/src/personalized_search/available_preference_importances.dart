@@ -1,5 +1,5 @@
-import 'dart:convert';
 import 'preference_importance.dart';
+import '../utils/http_helper.dart';
 
 /// Referential of preference importance, with loader.
 class AvailablePreferenceImportances {
@@ -11,7 +11,8 @@ class AvailablePreferenceImportances {
     final Map<String, PreferenceImportance> preferenceImportances =
         <String, PreferenceImportance>{};
     final Map<String, int> importancesReverseIds = <String, int>{};
-    final dynamic inputJson = json.decode(preferenceImportancesString);
+    final dynamic inputJson =
+        HttpHelper().jsonDecode(preferenceImportancesString);
     for (final dynamic item in inputJson as List<dynamic>) {
       final PreferenceImportance preferenceImportance =
           PreferenceImportance.fromJson(item);
