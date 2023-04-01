@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:http/http.dart';
 
@@ -69,7 +68,8 @@ class FolksonomyAPIClient {
       // not found
       return result;
     }
-    final List<dynamic> json = jsonDecode(response.body) as List<dynamic>;
+    final List<dynamic> json =
+        HttpHelper().jsonDecode(response.body) as List<dynamic>;
     for (var element in json) {
       result.add(ProductStats.fromJson(element));
     }
@@ -104,7 +104,8 @@ class FolksonomyAPIClient {
     );
     _checkResponse(response);
     final Map<String, String> result = <String, String>{};
-    final List<dynamic> json = jsonDecode(response.body) as List<dynamic>;
+    final List<dynamic> json =
+        HttpHelper().jsonDecode(response.body) as List<dynamic>;
     for (var element in json) {
       final ProductList productList = ProductList.fromJson(element);
       if (productList.key != key) {
@@ -142,7 +143,8 @@ class FolksonomyAPIClient {
       // not found
       return result;
     }
-    final List<dynamic> json = jsonDecode(response.body) as List<dynamic>;
+    final List<dynamic> json =
+        HttpHelper().jsonDecode(response.body) as List<dynamic>;
     for (var element in json) {
       final ProductTag productTag = ProductTag.fromJson(element);
       result[productTag.key] = productTag;
@@ -178,7 +180,7 @@ class FolksonomyAPIClient {
       return null;
     }
     final Map<String, dynamic> json =
-        jsonDecode(response.body) as Map<String, dynamic>;
+        HttpHelper().jsonDecode(response.body) as Map<String, dynamic>;
     return ProductTag.fromJson(json);
   }
 
@@ -210,7 +212,8 @@ class FolksonomyAPIClient {
       // not found
       return result;
     }
-    final List<dynamic> json = jsonDecode(response.body) as List<dynamic>;
+    final List<dynamic> json =
+        HttpHelper().jsonDecode(response.body) as List<dynamic>;
     for (var element in json) {
       final ProductTag productTag = ProductTag.fromJson(element);
       result[productTag.key] = productTag;
@@ -269,7 +272,8 @@ Future<void> deleteProductTag({
       // not found
       return result;
     }
-    final List<dynamic> json = jsonDecode(response.body) as List<dynamic>;
+    final List<dynamic> json =
+        HttpHelper().jsonDecode(response.body) as List<dynamic>;
     for (var element in json) {
       result.add(ProductTag.fromJson(element));
     }
@@ -349,7 +353,8 @@ Future<void> deleteProductTag({
     );
     _checkResponse(response);
     final Map<String, KeyStats> result = <String, KeyStats>{};
-    final List<dynamic> json = jsonDecode(response.body) as List<dynamic>;
+    final List<dynamic> json =
+        HttpHelper().jsonDecode(response.body) as List<dynamic>;
     for (var element in json) {
       final KeyStats item = KeyStats.fromJson(element);
       result[item.key] = item;

@@ -174,7 +174,7 @@ class OpenFoodAPIClient {
       user,
       queryType: queryType,
     );
-    return ProductResultV3.fromJson(jsonDecode(response.body));
+    return ProductResultV3.fromJson(HttpHelper().jsonDecode(response.body));
   }
 
   /// Send one image to the server.
@@ -253,7 +253,7 @@ class OpenFoodAPIClient {
       user: user,
       queryType: queryType,
     );
-    return ProductResult.fromJson(json.decode(productString));
+    return ProductResult.fromJson(HttpHelper().jsonDecode(productString));
   }
 
   /// Returns the product for the given barcode.
@@ -278,7 +278,9 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
     final String jsonStr = _replaceQuotes(productString);
-    final ProductResult result = ProductResult.fromJson(jsonDecode(jsonStr));
+    final ProductResult result = ProductResult.fromJson(
+      HttpHelper().jsonDecode(jsonStr),
+    );
     if (result.product != null) {
       ProductHelper.removeImages(result.product!, configuration.language);
       ProductHelper.createImageUrls(result.product!, queryType: queryType);
@@ -331,8 +333,9 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
     final String jsonStr = _replaceQuotes(productString);
-    final ProductResultV3 result =
-        ProductResultV3.fromJson(jsonDecode(jsonStr));
+    final ProductResultV3 result = ProductResultV3.fromJson(
+      HttpHelper().jsonDecode(jsonStr),
+    );
     if (result.product != null) {
       ProductHelper.removeImages(result.product!, configuration.language);
       ProductHelper.createImageUrls(result.product!, queryType: queryType);
@@ -360,7 +363,7 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
     final String jsonStr = _replaceQuotes(productString);
-    final json = jsonDecode(jsonStr);
+    final json = HttpHelper().jsonDecode(jsonStr);
     if (json['status'] != 'success') {
       throw Exception('Error: ${json['status']}');
     }
@@ -549,7 +552,9 @@ class OpenFoodAPIClient {
   }) async {
     final Response response = await configuration.getResponse(user, queryType);
     final String jsonStr = _replaceQuotes(response.body);
-    final SearchResult result = SearchResult.fromJson(json.decode(jsonStr));
+    final SearchResult result = SearchResult.fromJson(
+      HttpHelper().jsonDecode(jsonStr),
+    );
     _removeImages(result, configuration);
     return result;
   }
@@ -609,7 +614,7 @@ class OpenFoodAPIClient {
     );
 
     Map<String, dynamic> decodedJson =
-        json.decode(_replaceQuotes(response.body))
+        HttpHelper().jsonDecode(_replaceQuotes(response.body))
           ..removeWhere((String key, dynamic value) {
             if (value is Map) {
               return value.isEmpty;
@@ -819,8 +824,9 @@ class OpenFoodAPIClient {
       user: user,
       queryType: queryType,
     );
-    var result =
-        InsightsResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+    var result = InsightsResult.fromJson(
+      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
+    );
 
     return result;
   }
@@ -842,7 +848,8 @@ class OpenFoodAPIClient {
     );
 
     return InsightsResult.fromJson(
-        json.decode(utf8.decode(response.bodyBytes)));
+      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
+    );
   }
 
   static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(
@@ -873,7 +880,8 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
     var result = RobotoffQuestionResult.fromJson(
-        json.decode(utf8.decode(response.bodyBytes)));
+      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
+    );
 
     return result;
   }
@@ -917,7 +925,8 @@ class OpenFoodAPIClient {
       queryType: queryType,
     );
     var result = RobotoffQuestionResult.fromJson(
-        json.decode(utf8.decode(response.bodyBytes)));
+      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
+    );
 
     return result;
   }
@@ -994,7 +1003,8 @@ class OpenFoodAPIClient {
       addCredentialsToHeader: true,
     );
     SpellingCorrection result = SpellingCorrection.fromJson(
-        json.decode(utf8.decode(response.bodyBytes)));
+      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
+    );
 
     return result;
   }
@@ -1043,7 +1053,8 @@ class OpenFoodAPIClient {
       addCredentialsToBody: false,
     );
     return OcrIngredientsResult.fromJson(
-      json.decode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>,
+      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes))
+          as Map<String, dynamic>,
     );
   }
 
@@ -1088,7 +1099,8 @@ class OpenFoodAPIClient {
       addCredentialsToBody: false,
     );
     return OcrPackagingResult.fromJson(
-      json.decode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>,
+      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes))
+          as Map<String, dynamic>,
     );
   }
 
@@ -1131,10 +1143,12 @@ class OpenFoodAPIClient {
       queryType: queryType,
       addCredentialsToBody: false,
     );
-    return json.decode(response.body);
+    return HttpHelper().jsonDecode(response.body);
   }
 
   /// cf. https://openfoodfacts.github.io/openfoodfacts-server/reference/api-v3/#get-/api/v3/taxonomy_suggestions
+  ///
+  /// Consider using [SuggestionManager].
   static Future<List<String>> getSuggestions(
     final TagType taxonomyType, {
     final String input = '',
@@ -1165,7 +1179,7 @@ class OpenFoodAPIClient {
       user: user,
       queryType: queryType,
     );
-    final Map<String, dynamic> map = json.decode(response.body);
+    final Map<String, dynamic> map = HttpHelper().jsonDecode(response.body);
     final List<String> result = <String>[];
     if (map['suggestions'] != null) {
       for (dynamic value in map['suggestions']) {
@@ -1227,7 +1241,7 @@ class OpenFoodAPIClient {
       addCredentialsToBody: true,
     );
     if (response.statusCode == 200 || response.statusCode == 403) {
-      return LoginStatus.fromJson(jsonDecode(response.body));
+      return LoginStatus.fromJson(HttpHelper().jsonDecode(response.body));
     }
 
     return null;
@@ -1371,7 +1385,7 @@ class OpenFoodAPIClient {
     final QueryType? queryType,
   }) async =>
       OrderedNutrients.fromJson(
-        jsonDecode(
+        HttpHelper().jsonDecode(
           await getOrderedNutrientsJsonString(
             country: CountryHelper.fromJson(cc)!,
             language: language,
@@ -1512,7 +1526,7 @@ class OpenFoodAPIClient {
           'Bad response (${response.statusCode}): ${response.body}');
     }
     final Map<String, dynamic> json =
-        jsonDecode(response.body) as Map<String, dynamic>;
+        HttpHelper().jsonDecode(response.body) as Map<String, dynamic>;
     final String status = json['status'];
     if (status != 'status ok') {
       throw Exception('Status not ok ($status)');
@@ -1565,7 +1579,7 @@ class OpenFoodAPIClient {
           'Bad response (${response.statusCode}): ${response.body}');
     }
     final Map<String, dynamic> json =
-        jsonDecode(response.body) as Map<String, dynamic>;
+        HttpHelper().jsonDecode(response.body) as Map<String, dynamic>;
     final String status = json['status'];
     if (status != 'status ok') {
       throw Exception('Status not ok ($status)');

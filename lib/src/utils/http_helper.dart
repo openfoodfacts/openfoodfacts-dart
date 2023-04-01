@@ -177,7 +177,7 @@ class HttpHelper {
       if (response.statusCode == 200) {
         return response.stream.first.then((responseBody) {
           try {
-            return Status.fromJson(json.decode(utf8.decode(responseBody)));
+            return Status.fromJson(jsonDecode(utf8.decode(responseBody)));
           } catch (e) {
             //When the server returns html instead of json
             return Status(status: 200, body: utf8.decode(responseBody));
@@ -223,5 +223,25 @@ class HttpHelper {
       }
     }
     return headers;
+  }
+
+  /// "Normal" json.decode, with an additional "html" exception.
+  ///
+  /// Typically, when the OFF server is not happy, it returns an html page.
+  /// With this method we display the html page title instead of just a
+  /// "it's not a json" exception.
+  dynamic jsonDecode(final String string) {
+    try {
+      return json.decode(string);
+    } catch (e) {
+      if (string.startsWith('<html>')) {
+        throw Exception('JSON expected, html found: ${string.split('\n')[1]}');
+      }
+      if (string.startsWith('<h1>Software error:</h1>')) {
+        throw Exception(
+            'JSON expected, software error found: ${string.split('\n')[1]}');
+      }
+      rethrow;
+    }
   }
 }

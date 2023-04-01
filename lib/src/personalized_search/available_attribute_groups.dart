@@ -1,5 +1,5 @@
-import 'dart:convert';
 import '../model/attribute_group.dart';
+import '../utils/http_helper.dart';
 
 /// Referential of attribute groups, with loader.
 class AvailableAttributeGroups {
@@ -7,7 +7,7 @@ class AvailableAttributeGroups {
   AvailableAttributeGroups.loadFromJSONString(
     final String attributeGroupsString,
   ) {
-    final dynamic inputJson = json.decode(attributeGroupsString);
+    final dynamic inputJson = HttpHelper().jsonDecode(attributeGroupsString);
     final List<AttributeGroup> attributeGroups = <AttributeGroup>[];
     for (final dynamic item in inputJson as List<dynamic>) {
       attributeGroups.add(AttributeGroup.fromJson(item));

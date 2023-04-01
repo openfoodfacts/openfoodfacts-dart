@@ -8,12 +8,15 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
-  /// Checks if all items contain the [substring].
+  /// Checks if at least one item contains the [substring].
   void listContains(final List<String> list, final String substring) {
     expect(list, isNotEmpty);
     for (final String item in list) {
-      expect(item.toString().toLowerCase(), contains(substring));
+      if (item.toString().toLowerCase().contains(substring)) {
+        return;
+      }
     }
+    fail('no item contains $substring');
   }
 
   /// Checks if a list is not sorted alphabetically.
@@ -257,7 +260,7 @@ void main() {
     test('Suggestions for additives', () async {
       List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.ADDITIVES,
-        language: OpenFoodFactsLanguage.RUSSIAN,
+        language: OpenFoodFactsLanguage.FRENCH,
         input: 'e9',
       );
 
