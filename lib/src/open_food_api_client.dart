@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 
 import 'interface/json_object.dart';
 import 'model/insight.dart';
@@ -788,8 +789,9 @@ class OpenFoodAPIClient {
     }
   }
 
-  //TODO(x): Add comments for robotoff
+  //TODO : Remove Robotoff APIs From here
 
+  @Deprecated('Use [RobotOffApiClient.getRandomInsight] Instead')
   static Future<InsightsResult> getRandomInsight(
     User user, {
     InsightType? type,
@@ -797,140 +799,45 @@ class OpenFoodAPIClient {
     String? valueTag,
     String? serverDomain,
     QueryType? queryType,
-  }) async {
-    final Map<String, String> parameters = {};
+  }) =>
+      RobotoffApiClient.getRandomInsights(user,
+          type: type,
+          country: country,
+          valueTag: valueTag,
+          serverDomain: serverDomain,
+          queryType: queryType);
 
-    if (type != null && type.value != null) {
-      parameters['type'] = type.value!;
-    }
-    if (country != null) {
-      parameters['country'] = country;
-    }
-    if (valueTag != null) {
-      parameters['value_tag'] = valueTag;
-    }
-    if (serverDomain != null) {
-      parameters['server_domain'] = serverDomain;
-    }
-
-    var insightUri = UriHelper.getRobotoffUri(
-      path: 'api/v1/insights/random/',
-      queryType: queryType,
-      queryParameters: parameters,
-    );
-
-    Response response = await HttpHelper().doGetRequest(
-      insightUri,
-      user: user,
-      queryType: queryType,
-    );
-    var result = InsightsResult.fromJson(
-      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
-    );
-
-    return result;
-  }
-
+  @Deprecated('Use [RobotOffApiClient.getProductInsights] Instead')
   static Future<InsightsResult> getProductInsights(
     String barcode,
     User user, {
     QueryType? queryType,
-  }) async {
-    var insightsUri = UriHelper.getRobotoffUri(
-      path: 'api/v1/insights/$barcode',
-      queryType: queryType,
-    );
+  }) =>
+      RobotoffApiClient.getProductInsights(barcode, user, queryType: queryType);
 
-    Response response = await HttpHelper().doGetRequest(
-      insightsUri,
-      user: user,
-      queryType: queryType,
-    );
-
-    return InsightsResult.fromJson(
-      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
-    );
-  }
-
+  @Deprecated('Use [RobotOffApiClient.getProductQuestions] Instead')
   static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(
     String barcode,
     String lang, {
     User? user,
     int? count,
     QueryType? queryType,
-  }) async {
-    if (count == null || count <= 0) {
-      count = 1;
-    }
+  }) =>
+      RobotoffApiClient.getProductQuestions(barcode, lang,
+          user: user, count: count, queryType: queryType);
 
-    final Map<String, String> parameters = <String, String>{
-      'lang': lang,
-      'count': count.toString()
-    };
-
-    var robotoffQuestionUri = UriHelper.getRobotoffUri(
-      path: 'api/v1/questions/$barcode',
-      queryParameters: parameters,
-      queryType: queryType,
-    );
-
-    Response response = await HttpHelper().doGetRequest(
-      robotoffQuestionUri,
-      user: user,
-      queryType: queryType,
-    );
-    var result = RobotoffQuestionResult.fromJson(
-      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
-    );
-
-    return result;
-  }
-
+  @Deprecated('Use [RobotOffApiClient.getRandomQuestions] Instead')
   static Future<RobotoffQuestionResult> getRandomRobotoffQuestion(
     String lang,
     User? user, {
     int? count,
     List<InsightType>? types,
     QueryType? queryType,
-  }) async {
-    if (count == null || count <= 0) {
-      count = 1;
-    }
+  }) =>
+      RobotoffApiClient.getRandomQuestions(lang, user,
+          count: count, types: types, queryType: queryType);
 
-    final List<String> typesValues = [];
-    if (types != null) {
-      for (final InsightType t in types) {
-        final String? value = t.value;
-        if (value != null) {
-          typesValues.add(value);
-        }
-      }
-    }
-
-    final Map<String, String> parameters = <String, String>{
-      'lang': lang,
-      'count': count.toString(),
-      if (typesValues.isNotEmpty) 'insight_types': typesValues.join(',')
-    };
-
-    var robotoffQuestionUri = UriHelper.getRobotoffUri(
-      path: 'api/v1/questions/random',
-      queryParameters: parameters,
-      queryType: queryType,
-    );
-
-    Response response = await HttpHelper().doGetRequest(
-      robotoffQuestionUri,
-      user: user,
-      queryType: queryType,
-    );
-    var result = RobotoffQuestionResult.fromJson(
-      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
-    );
-
-    return result;
-  }
-
+  @Deprecated('Use [RobotOffApiClient.postInsightAnnotation] Instead')
   static Future<Status> postInsightAnnotation(
     String? insightId,
     InsightAnnotation annotation, {
@@ -938,34 +845,9 @@ class OpenFoodAPIClient {
     String? deviceId,
     bool update = true,
     final QueryType? queryType,
-  }) async {
-    var insightUri = UriHelper.getRobotoffUri(
-      path: 'api/v1/insights/annotate',
-      queryType: queryType,
-    );
-
-    final Map<String, String> annotationData = {
-      'annotation': annotation.value.toString(),
-      'update': update ? '1' : '0'
-    };
-    if (insightId != null) {
-      annotationData['insight_id'] = insightId;
-    }
-
-    if (deviceId != null) {
-      annotationData['device_id'] = deviceId;
-    }
-
-    Response response = await HttpHelper().doPostRequest(
-      insightUri,
-      annotationData,
-      user,
-      queryType: queryType,
-      addCredentialsToBody: false,
-      addCredentialsToHeader: true,
-    );
-    return Status.fromApiResponse(response.body);
-  }
+  }) =>
+      RobotoffApiClient.postInsightAnnotation(insightId, annotation,
+          user: user, deviceId: deviceId, update: update, queryType: queryType);
 
   // TODO: deprecated from 2022-11-22; remove when old enough
   @Deprecated('Unstable version, do not use and wait for the next version')
