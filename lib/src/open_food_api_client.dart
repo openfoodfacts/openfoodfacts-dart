@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:openfoodfacts/openfoodfacts.dart';
 
 import 'interface/json_object.dart';
 import 'model/insight.dart';
@@ -37,6 +36,7 @@ import 'model/taxonomy_packaging_material.dart';
 import 'model/taxonomy_packaging_recycling.dart';
 import 'model/taxonomy_packaging_shape.dart';
 import 'model/user.dart';
+import 'robot_off_api_client.dart';
 import 'utils/abstract_query_configuration.dart';
 import 'utils/country_helper.dart';
 import 'utils/http_helper.dart';
@@ -789,9 +789,8 @@ class OpenFoodAPIClient {
     }
   }
 
-  //TODO : Remove Robotoff APIs From here
-
-  @Deprecated('Use [RobotOffApiClient.getRandomInsight] Instead')
+  //TODO: deprecated from 2023-04-05; remove when old enough
+  @Deprecated('Use [RobotOffAPIClient.getRandomInsight] Instead')
   static Future<InsightsResult> getRandomInsight(
     User user, {
     InsightType? type,
@@ -800,22 +799,24 @@ class OpenFoodAPIClient {
     String? serverDomain,
     QueryType? queryType,
   }) =>
-      RobotoffApiClient.getRandomInsights(
+      RobotOffAPIClient.getRandomInsights(
           type: type,
           country: OpenFoodFactsCountry.fromOffTag(country),
           valueTag: valueTag,
           serverDomain: serverDomain,
           queryType: queryType);
 
-  @Deprecated('Use [RobotOffApiClient.getProductInsights] Instead')
+  //TODO: deprecated from 2023-04-05; remove when old enough
+  @Deprecated('Use [RobotOffAPIClient.getProductInsights] Instead')
   static Future<InsightsResult> getProductInsights(
     String barcode,
     User user, {
     QueryType? queryType,
   }) =>
-      RobotoffApiClient.getProductInsights(barcode, queryType: queryType);
+      RobotOffAPIClient.getProductInsights(barcode, queryType: queryType);
 
-  @Deprecated('Use [RobotOffApiClient.getProductQuestions] Instead')
+  //TODO: deprecated from 2023-04-05; remove when old enough
+  @Deprecated('Use [RobotOffAPIClient.getProductQuestions] Instead')
   static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(
     String barcode,
     String lang, {
@@ -823,10 +824,16 @@ class OpenFoodAPIClient {
     int? count,
     QueryType? queryType,
   }) =>
-      RobotoffApiClient.getProductQuestions(barcode, lang,
-          user: user, count: count, queryType: queryType);
+      RobotOffAPIClient.getProductQuestions(
+          barcode,
+          OpenFoodFactsLanguage.fromOffTag(lang) ??
+              OpenFoodFactsLanguage.ENGLISH,
+          user: user,
+          count: count,
+          queryType: queryType);
 
-  @Deprecated('Use [RobotOffApiClient.getRandomQuestions] Instead')
+  //TODO: deprecated from 2023-04-05; remove when old enough
+  @Deprecated('Use [RobotOffAPIClient.getRandomQuestions] Instead')
   static Future<RobotoffQuestionResult> getRandomRobotoffQuestion(
     String lang,
     User? user, {
@@ -834,11 +841,16 @@ class OpenFoodAPIClient {
     List<InsightType>? types,
     QueryType? queryType,
   }) =>
-      RobotoffApiClient.getRandomQuestions(
-          OpenFoodFactsLanguage.fromOffTag(lang), user,
-          count: count, types: types, queryType: queryType);
+      RobotOffAPIClient.getRandomQuestions(
+          OpenFoodFactsLanguage.fromOffTag(lang) ??
+              OpenFoodFactsLanguage.ENGLISH,
+          user,
+          count: count,
+          types: types,
+          queryType: queryType);
 
-  @Deprecated('Use [RobotOffApiClient.postInsightAnnotation] Instead')
+  //TODO: deprecated from 2023-04-05; remove when old enough
+  @Deprecated('Use [RobotOffAPIClient.postInsightAnnotation] Instead')
   static Future<Status> postInsightAnnotation(
     String? insightId,
     InsightAnnotation annotation, {
@@ -847,7 +859,7 @@ class OpenFoodAPIClient {
     bool update = true,
     final QueryType? queryType,
   }) =>
-      RobotoffApiClient.postInsightAnnotation(insightId, annotation,
+      RobotOffAPIClient.postInsightAnnotation(insightId, annotation,
           deviceId: deviceId, update: update, queryType: queryType);
 
   /// Extract the ingredients from image with the given parameters.

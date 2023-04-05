@@ -1,12 +1,19 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:openfoodfacts/openfoodfacts.dart';
 
-class RobotoffApiClient {
-  RobotoffApiClient._();
+import 'model/insight.dart';
+import 'model/robotoff_question.dart';
+import 'model/status.dart';
+import 'model/user.dart';
+import 'utils/country_helper.dart';
+import 'utils/http_helper.dart';
+import 'utils/language_helper.dart';
+import 'utils/query_type.dart';
+import 'utils/uri_helper.dart';
 
-  //TODO(x): Add comments for robotoff APIs
+class RobotOffAPIClient {
+  RobotOffAPIClient._();
 
   static Future<InsightsResult> getRandomInsights({
     InsightType? type,
@@ -68,7 +75,7 @@ class RobotoffApiClient {
 
   static Future<RobotoffQuestionResult> getProductQuestions(
     String barcode,
-    String lang, {
+    OpenFoodFactsLanguage language, {
     User? user,
     int? count,
     QueryType? queryType,
@@ -78,7 +85,7 @@ class RobotoffApiClient {
     }
 
     final Map<String, String> parameters = <String, String>{
-      'lang': lang,
+      'lang': language.code,
       'count': count.toString()
     };
 
@@ -101,7 +108,7 @@ class RobotoffApiClient {
   }
 
   static Future<RobotoffQuestionResult> getRandomQuestions(
-    OpenFoodFactsLanguage? lang,
+    OpenFoodFactsLanguage language,
     User? user, {
     int? count,
     List<InsightType>? types,
@@ -122,7 +129,7 @@ class RobotoffApiClient {
     }
 
     final Map<String, String> parameters = <String, String>{
-      'lang': lang?.code ?? OpenFoodFactsLanguage.ENGLISH.code,
+      'lang': language.code,
       'count': count.toString(),
       if (typesValues.isNotEmpty) 'insight_types': typesValues.join(',')
     };
