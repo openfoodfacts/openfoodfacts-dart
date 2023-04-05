@@ -9,9 +9,9 @@ void main() {
   group('$OpenFoodAPIClient get robotoff questions', () {
     test('get questions for Noix de Saint-Jacques EN', () async {
       RobotoffQuestionResult result =
-          await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
+          await RobotOffAPIClient.getProductQuestions(
         '3274570800026',
-        'en',
+        OpenFoodFactsLanguage.ENGLISH,
         user: TestConstants.PROD_USER,
         count: 1,
       );
@@ -35,9 +35,9 @@ void main() {
 
     test('get questions for Noix de Saint-Jacques FR', () async {
       RobotoffQuestionResult result =
-          await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
+          await RobotOffAPIClient.getProductQuestions(
         '3274570800026',
-        'fr',
+        OpenFoodFactsLanguage.FRENCH,
         user: TestConstants.PROD_USER,
       );
 
@@ -61,8 +61,8 @@ void main() {
     test('get 2 random questions with types', () async {
       const InsightType type = InsightType.CATEGORY;
       final RobotoffQuestionResult result =
-          await OpenFoodAPIClient.getRandomRobotoffQuestion(
-        'fr',
+          await RobotOffAPIClient.getRandomQuestions(
+        OpenFoodFactsLanguage.FRENCH,
         TestConstants.PROD_USER,
         types: [type],
         count: 2,
@@ -77,8 +77,8 @@ void main() {
 
     test('get 2 random questions with no specific type', () async {
       final RobotoffQuestionResult result =
-          await OpenFoodAPIClient.getRandomRobotoffQuestion(
-        'fr',
+          await RobotOffAPIClient.getRandomQuestions(
+        OpenFoodFactsLanguage.FRENCH,
         TestConstants.PROD_USER,
         count: 2,
       );
@@ -91,8 +91,7 @@ void main() {
 
   group('$OpenFoodAPIClient get robotoff insights', () {
     test('get random insight', () async {
-      final InsightsResult result = await OpenFoodAPIClient.getRandomInsight(
-        TestConstants.PROD_USER,
+      final InsightsResult result = await RobotOffAPIClient.getRandomInsights(
         type: InsightType.CATEGORY,
       );
 
@@ -104,16 +103,14 @@ void main() {
     });
 
     test('get product insights (found)', () async {
-      final InsightsResult result1 = await OpenFoodAPIClient.getRandomInsight(
-        TestConstants.PROD_USER,
+      final InsightsResult result1 = await RobotOffAPIClient.getRandomInsights(
         type: InsightType.CATEGORY,
       );
 
       final String barcode = result1.insights![0].barcode!;
 
-      final InsightsResult result = await OpenFoodAPIClient.getProductInsights(
+      final InsightsResult result = await RobotOffAPIClient.getProductInsights(
         barcode,
-        TestConstants.PROD_USER,
       );
 
       expect(result.status, isNotNull);
@@ -125,9 +122,8 @@ void main() {
 
     test('get product insights (none)', () async {
       const String fakeBarcode = '3615';
-      InsightsResult result = await OpenFoodAPIClient.getProductInsights(
+      InsightsResult result = await RobotOffAPIClient.getProductInsights(
         fakeBarcode,
-        TestConstants.PROD_USER,
       );
 
       expect(result.status, isNotNull);

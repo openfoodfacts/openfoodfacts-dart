@@ -9,14 +9,18 @@ void main() {
   group('$OpenFoodAPIClient answer robotoff question', () {
     test('get questions for Noix de Saint-Jacques EN and answer', () async {
       RobotoffQuestionResult result =
-          await OpenFoodAPIClient.getRobotoffQuestionsForProduct(
-              '0080868000633', 'en',
-              user: TestConstants.TEST_USER, count: 1);
+          await RobotOffAPIClient.getProductQuestions(
+        '0080868000633',
+        OpenFoodFactsLanguage.ENGLISH,
+        user: TestConstants.TEST_USER,
+        count: 1,
+      );
 
       if (result.status == 'found') {
-        Status postResult = await OpenFoodAPIClient.postInsightAnnotation(
-            result.questions![0].insightId, InsightAnnotation.YES,
-            user: TestConstants.TEST_USER);
+        Status postResult = await RobotOffAPIClient.postInsightAnnotation(
+          result.questions![0].insightId,
+          InsightAnnotation.YES,
+        );
         expect(postResult.status, 'saved');
       }
     });
