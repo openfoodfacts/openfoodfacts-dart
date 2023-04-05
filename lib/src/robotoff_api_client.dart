@@ -8,10 +8,9 @@ class RobotoffApiClient {
 
   //TODO(x): Add comments for robotoff APIs
 
-  static Future<InsightsResult> getRandomInsights(
-    User user, {
+  static Future<InsightsResult> getRandomInsights({
     InsightType? type,
-    String? country,
+    OpenFoodFactsCountry? country,
     String? valueTag,
     String? serverDomain,
     QueryType? queryType,
@@ -22,7 +21,7 @@ class RobotoffApiClient {
       parameters['type'] = type.value!;
     }
     if (country != null) {
-      parameters['country'] = country;
+      parameters['country'] = country.offTag;
     }
     if (valueTag != null) {
       parameters['value_tag'] = valueTag;
@@ -39,7 +38,6 @@ class RobotoffApiClient {
 
     Response response = await HttpHelper().doGetRequest(
       insightUri,
-      user: user,
       queryType: queryType,
     );
     var result = InsightsResult.fromJson(
@@ -50,8 +48,7 @@ class RobotoffApiClient {
   }
 
   static Future<InsightsResult> getProductInsights(
-    String barcode,
-    User user, {
+    String barcode, {
     QueryType? queryType,
   }) async {
     var insightsUri = UriHelper.getRobotoffUri(
@@ -61,7 +58,6 @@ class RobotoffApiClient {
 
     Response response = await HttpHelper().doGetRequest(
       insightsUri,
-      user: user,
       queryType: queryType,
     );
 
@@ -105,7 +101,7 @@ class RobotoffApiClient {
   }
 
   static Future<RobotoffQuestionResult> getRandomQuestions(
-    String lang,
+    OpenFoodFactsLanguage? lang,
     User? user, {
     int? count,
     List<InsightType>? types,
@@ -126,7 +122,7 @@ class RobotoffApiClient {
     }
 
     final Map<String, String> parameters = <String, String>{
-      'lang': lang,
+      'lang': lang?.code ?? OpenFoodFactsLanguage.ENGLISH.code,
       'count': count.toString(),
       if (typesValues.isNotEmpty) 'insight_types': typesValues.join(',')
     };
@@ -152,7 +148,6 @@ class RobotoffApiClient {
   static Future<Status> postInsightAnnotation(
     String? insightId,
     InsightAnnotation annotation, {
-    User? user,
     String? deviceId,
     bool update = true,
     final QueryType? queryType,
@@ -177,53 +172,11 @@ class RobotoffApiClient {
     Response response = await HttpHelper().doPostRequest(
       insightUri,
       annotationData,
-      user,
+      null,
       queryType: queryType,
       addCredentialsToBody: false,
       addCredentialsToHeader: true,
     );
     return Status.fromApiResponse(response.body);
-  }
-
-  // TODO: deprecated from 2022-11-22; remove when old enough
-  @Deprecated('Unstable version, do not use and wait for the next version')
-  static Future<SpellingCorrection?> getIngredientSpellingCorrection({
-    String? ingredientName,
-    Product? product,
-    User? user,
-    QueryType? queryType,
-  }) async {
-    Map<String, String> spellingCorrectionParam;
-
-    if (ingredientName != null) {
-      spellingCorrectionParam = {
-        'text': ingredientName,
-      };
-    } else if (product != null && product.barcode != null) {
-      spellingCorrectionParam = {
-        'barcode': product.barcode!,
-      };
-    } else {
-      return null;
-    }
-
-    var spellingCorrectionUri = UriHelper.getRobotoffUri(
-      path: 'api/v1/predict/ingredients/spellcheck',
-      queryType: queryType,
-    );
-
-    Response response = await HttpHelper().doPostRequest(
-      spellingCorrectionUri,
-      spellingCorrectionParam,
-      user,
-      queryType: queryType,
-      addCredentialsToBody: false,
-      addCredentialsToHeader: true,
-    );
-    SpellingCorrection result = SpellingCorrection.fromJson(
-      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
-    );
-
-    return result;
   }
 }

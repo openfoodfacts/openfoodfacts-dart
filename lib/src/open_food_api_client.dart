@@ -800,9 +800,9 @@ class OpenFoodAPIClient {
     String? serverDomain,
     QueryType? queryType,
   }) =>
-      RobotoffApiClient.getRandomInsights(user,
+      RobotoffApiClient.getRandomInsights(
           type: type,
-          country: country,
+          country: OpenFoodFactsCountry.fromOffTag(country),
           valueTag: valueTag,
           serverDomain: serverDomain,
           queryType: queryType);
@@ -813,7 +813,7 @@ class OpenFoodAPIClient {
     User user, {
     QueryType? queryType,
   }) =>
-      RobotoffApiClient.getProductInsights(barcode, user, queryType: queryType);
+      RobotoffApiClient.getProductInsights(barcode, queryType: queryType);
 
   @Deprecated('Use [RobotOffApiClient.getProductQuestions] Instead')
   static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(
@@ -834,7 +834,8 @@ class OpenFoodAPIClient {
     List<InsightType>? types,
     QueryType? queryType,
   }) =>
-      RobotoffApiClient.getRandomQuestions(lang, user,
+      RobotoffApiClient.getRandomQuestions(
+          OpenFoodFactsLanguage.fromOffTag(lang), user,
           count: count, types: types, queryType: queryType);
 
   @Deprecated('Use [RobotOffApiClient.postInsightAnnotation] Instead')
@@ -847,49 +848,7 @@ class OpenFoodAPIClient {
     final QueryType? queryType,
   }) =>
       RobotoffApiClient.postInsightAnnotation(insightId, annotation,
-          user: user, deviceId: deviceId, update: update, queryType: queryType);
-
-  // TODO: deprecated from 2022-11-22; remove when old enough
-  @Deprecated('Unstable version, do not use and wait for the next version')
-  static Future<SpellingCorrection?> getIngredientSpellingCorrection({
-    String? ingredientName,
-    Product? product,
-    User? user,
-    QueryType? queryType,
-  }) async {
-    Map<String, String> spellingCorrectionParam;
-
-    if (ingredientName != null) {
-      spellingCorrectionParam = {
-        'text': ingredientName,
-      };
-    } else if (product != null && product.barcode != null) {
-      spellingCorrectionParam = {
-        'barcode': product.barcode!,
-      };
-    } else {
-      return null;
-    }
-
-    var spellingCorrectionUri = UriHelper.getRobotoffUri(
-      path: 'api/v1/predict/ingredients/spellcheck',
-      queryType: queryType,
-    );
-
-    Response response = await HttpHelper().doPostRequest(
-      spellingCorrectionUri,
-      spellingCorrectionParam,
-      user,
-      queryType: queryType,
-      addCredentialsToBody: false,
-      addCredentialsToHeader: true,
-    );
-    SpellingCorrection result = SpellingCorrection.fromJson(
-      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
-    );
-
-    return result;
-  }
+          deviceId: deviceId, update: update, queryType: queryType);
 
   /// Extract the ingredients from image with the given parameters.
   /// The ingredients' language should be given (ingredients_fr, ingredients_de, ingredients_en)
