@@ -107,4 +107,5 @@ export 'src/utils/tag_type.dart';
 export 'src/utils/unit_helper.dart';
 export 'src/utils/uri_helper.dart';
 export 'src/utils/uri_reader.dart';
+export 'src/robot_off_api_client.dart';
 export 'src/utils/user_product_search_query_configuration.dart';
