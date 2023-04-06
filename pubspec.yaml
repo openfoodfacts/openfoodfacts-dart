@@ -10,7 +10,7 @@ environment:
 dependencies:
   json_annotation: ^4.7.0
   http: ^0.13.5
-  path: ^1.8.3
+  path: ^1.8.2 # 1.8.2 for flutter_test as of 2023-04-06
   meta: ^1.8.0
 
 dev_dependencies:
