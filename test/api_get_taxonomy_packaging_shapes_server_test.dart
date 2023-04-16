@@ -22,7 +22,7 @@ void main() {
     'en:teaspoon',
   };
   const Set<String> expectedParents = <String>{
-    'en:eating-utensils',
+    'en:cutlery',
   };
   const String knownRootTag = 'en:box';
   const String unknownTag = 'en:some_nonexistent_thing';
