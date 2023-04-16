@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.5.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.4.0...v2.5.0) (2023-04-16)
+
+
+### Features
+
+* 719 - Suggestion Manager with suggestions for the latest input ([#720](https://github.com/openfoodfacts/openfoodfacts-dart/issues/720)) ([5a31a09](https://github.com/openfoodfacts/openfoodfacts-dart/commit/5a31a09e43d9291a071cc51d4bf885f6655e76a9))
+
+
+### Bug Fixes
+
+* 715 - downgraded "path" in order to match "flutter_test" ([#725](https://github.com/openfoodfacts/openfoodfacts-dart/issues/725)) ([58d9a10](https://github.com/openfoodfacts/openfoodfacts-dart/commit/58d9a10dffc07f17bc9368fe345f5266631a0218))
+* Refactor Robotoff methods ([#723](https://github.com/openfoodfacts/openfoodfacts-dart/issues/723)) ([7a71cbb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7a71cbb4e4cbfb0e4575f706265699f8302e923a))
+* robotoff deprecated method calls in tests ([#724](https://github.com/openfoodfacts/openfoodfacts-dart/issues/724)) ([1cc8f18](https://github.com/openfoodfacts/openfoodfacts-dart/commit/1cc8f18d1d85230bfd88b1a91f43384b45dccd26))
+
 ## [2.4.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.3.1...v2.4.0) (2023-03-08)
 
 
