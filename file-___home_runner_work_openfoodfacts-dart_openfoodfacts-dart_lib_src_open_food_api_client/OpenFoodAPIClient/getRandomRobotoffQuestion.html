@@ -87,7 +87,7 @@ static Future&lt;RobotoffQuestionResult&gt; getRandomRobotoffQuestion(
   List&lt;InsightType&gt;? types,
   QueryType? queryType,
 }) =&gt;
-    RobotOffAPIClient.getRandomQuestions(
+    RobotoffAPIClient.getRandomQuestions(
         OpenFoodFactsLanguage.fromOffTag(lang) ??
             OpenFoodFactsLanguage.ENGLISH,
         user,

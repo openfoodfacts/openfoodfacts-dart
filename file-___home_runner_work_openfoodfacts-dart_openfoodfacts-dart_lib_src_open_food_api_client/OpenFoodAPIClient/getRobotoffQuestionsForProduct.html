@@ -87,7 +87,7 @@ static Future&lt;RobotoffQuestionResult&gt; getRobotoffQuestionsForProduct(
   int? count,
   QueryType? queryType,
 }) =&gt;
-    RobotOffAPIClient.getProductQuestions(
+    RobotoffAPIClient.getProductQuestions(
         barcode,
         OpenFoodFactsLanguage.fromOffTag(lang) ??
             OpenFoodFactsLanguage.ENGLISH,
