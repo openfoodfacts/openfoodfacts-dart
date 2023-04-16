@@ -9,7 +9,7 @@ void main() {
   group('$OpenFoodAPIClient get robotoff questions', () {
     test('get questions for Noix de Saint-Jacques EN', () async {
       RobotoffQuestionResult result =
-          await RobotOffAPIClient.getProductQuestions(
+          await RobotoffAPIClient.getProductQuestions(
         '3274570800026',
         OpenFoodFactsLanguage.ENGLISH,
         user: TestConstants.PROD_USER,
@@ -35,7 +35,7 @@ void main() {
 
     test('get questions for Noix de Saint-Jacques FR', () async {
       RobotoffQuestionResult result =
-          await RobotOffAPIClient.getProductQuestions(
+          await RobotoffAPIClient.getProductQuestions(
         '3274570800026',
         OpenFoodFactsLanguage.FRENCH,
         user: TestConstants.PROD_USER,
@@ -61,7 +61,7 @@ void main() {
     test('get 2 random questions with types', () async {
       const InsightType type = InsightType.CATEGORY;
       final RobotoffQuestionResult result =
-          await RobotOffAPIClient.getRandomQuestions(
+          await RobotoffAPIClient.getRandomQuestions(
         OpenFoodFactsLanguage.FRENCH,
         TestConstants.PROD_USER,
         types: [type],
@@ -77,7 +77,7 @@ void main() {
 
     test('get 2 random questions with no specific type', () async {
       final RobotoffQuestionResult result =
-          await RobotOffAPIClient.getRandomQuestions(
+          await RobotoffAPIClient.getRandomQuestions(
         OpenFoodFactsLanguage.FRENCH,
         TestConstants.PROD_USER,
         count: 2,
@@ -91,7 +91,7 @@ void main() {
 
   group('$OpenFoodAPIClient get robotoff insights', () {
     test('get random insight', () async {
-      final InsightsResult result = await RobotOffAPIClient.getRandomInsights(
+      final InsightsResult result = await RobotoffAPIClient.getRandomInsights(
         type: InsightType.CATEGORY,
       );
 
@@ -103,13 +103,13 @@ void main() {
     });
 
     test('get product insights (found)', () async {
-      final InsightsResult result1 = await RobotOffAPIClient.getRandomInsights(
+      final InsightsResult result1 = await RobotoffAPIClient.getRandomInsights(
         type: InsightType.CATEGORY,
       );
 
       final String barcode = result1.insights![0].barcode!;
 
-      final InsightsResult result = await RobotOffAPIClient.getProductInsights(
+      final InsightsResult result = await RobotoffAPIClient.getProductInsights(
         barcode,
       );
 
@@ -122,7 +122,7 @@ void main() {
 
     test('get product insights (none)', () async {
       const String fakeBarcode = '3615';
-      InsightsResult result = await RobotOffAPIClient.getProductInsights(
+      InsightsResult result = await RobotoffAPIClient.getProductInsights(
         fakeBarcode,
       );
 

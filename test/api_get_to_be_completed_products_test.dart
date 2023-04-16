@@ -10,7 +10,7 @@ void main() {
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   group('$OpenFoodAPIClient get all to-be-completed products', () {
-    Future<int> getCount(
+    Future<int?> getCount(
       final OpenFoodFactsCountry country,
       final OpenFoodFactsLanguage language,
     ) async {
@@ -45,7 +45,7 @@ void main() {
         expect(product.statesTags, isNotNull);
         expect(product.statesTags!, contains('en:to-be-completed'));
       }
-      return result.count!;
+      return result.count;
     }
 
     Future<int> getCountForAllLanguages(
@@ -58,7 +58,7 @@ void main() {
       ];
       int? result;
       for (final OpenFoodFactsLanguage language in languages) {
-        final int count = await getCount(country, language);
+        final int? count = await getCount(country, language);
         if (result != null) {
           expect(count, result, reason: language.toString());
         }

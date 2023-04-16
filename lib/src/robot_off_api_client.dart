@@ -12,8 +12,8 @@ import 'utils/language_helper.dart';
 import 'utils/query_type.dart';
 import 'utils/uri_helper.dart';
 
-class RobotOffAPIClient {
-  RobotOffAPIClient._();
+class RobotoffAPIClient {
+  RobotoffAPIClient._();
 
   static Future<InsightsResult> getRandomInsights({
     InsightType? type,

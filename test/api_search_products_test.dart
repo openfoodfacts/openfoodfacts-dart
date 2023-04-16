@@ -614,8 +614,7 @@ void main() {
     });
 
     test('search products with filter on all tags (part 3)', () async {
-      // will probably be barcode 111111555555, only in TEST env
-      const String packaging = 'de:in-einer-plastikflasche';
+      const String packaging = 'de:plastikflasche';
 
       final parameters = <Parameter>[
         TagFilter.fromType(
@@ -631,9 +630,9 @@ void main() {
       );
 
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
-        TestConstants.TEST_USER,
+        TestConstants.PROD_USER,
         configuration,
-        queryType: QueryType.TEST,
+        queryType: QueryType.PROD,
       );
 
       expect(result.products, isNotNull);
@@ -681,6 +680,7 @@ void main() {
       expect(result.products![0].productName, 'Quoted Coca "cola"');
       expect(result.products![0].brands, 'Quoted Coca "Cola"');
     },
+        skip: 'Avoiding tests on TEST env',
         timeout: Timeout(
           // some tests can be slow here
           Duration(seconds: 90),

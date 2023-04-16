@@ -20,7 +20,6 @@ import 'model/robotoff_question.dart';
 import 'model/search_result.dart';
 import 'model/send_image.dart';
 import 'model/sign_up_status.dart';
-import 'model/spelling_corrections.dart';
 import 'model/status.dart';
 import 'model/taxonomy_additive.dart';
 import 'model/taxonomy_allergen.dart';
@@ -799,7 +798,7 @@ class OpenFoodAPIClient {
     String? serverDomain,
     QueryType? queryType,
   }) =>
-      RobotOffAPIClient.getRandomInsights(
+      RobotoffAPIClient.getRandomInsights(
           type: type,
           country: OpenFoodFactsCountry.fromOffTag(country),
           valueTag: valueTag,
@@ -813,7 +812,7 @@ class OpenFoodAPIClient {
     User user, {
     QueryType? queryType,
   }) =>
-      RobotOffAPIClient.getProductInsights(barcode, queryType: queryType);
+      RobotoffAPIClient.getProductInsights(barcode, queryType: queryType);
 
   //TODO: deprecated from 2023-04-05; remove when old enough
   @Deprecated('Use [RobotOffAPIClient.getProductQuestions] Instead')
@@ -824,7 +823,7 @@ class OpenFoodAPIClient {
     int? count,
     QueryType? queryType,
   }) =>
-      RobotOffAPIClient.getProductQuestions(
+      RobotoffAPIClient.getProductQuestions(
           barcode,
           OpenFoodFactsLanguage.fromOffTag(lang) ??
               OpenFoodFactsLanguage.ENGLISH,
@@ -841,7 +840,7 @@ class OpenFoodAPIClient {
     List<InsightType>? types,
     QueryType? queryType,
   }) =>
-      RobotOffAPIClient.getRandomQuestions(
+      RobotoffAPIClient.getRandomQuestions(
           OpenFoodFactsLanguage.fromOffTag(lang) ??
               OpenFoodFactsLanguage.ENGLISH,
           user,
@@ -859,7 +858,7 @@ class OpenFoodAPIClient {
     bool update = true,
     final QueryType? queryType,
   }) =>
-      RobotOffAPIClient.postInsightAnnotation(insightId, annotation,
+      RobotoffAPIClient.postInsightAnnotation(insightId, annotation,
           deviceId: deviceId, update: update, queryType: queryType);
 
   /// Extract the ingredients from image with the given parameters.
