@@ -136,10 +136,10 @@ enum Nutrient implements OffTagged {
   erucicAcid(typicalUnit: Unit.G, offTag: 'erucic-acid'),
 
   /// Monounsaturated Fats
-  monounsaturatedFat(typicalUnit: Unit.G, offTag: 'monounsaturated'),
+  monounsaturatedFat(typicalUnit: Unit.G, offTag: 'monounsaturated-fat'),
 
   /// Polyunsaturated Fats
-  polyunsaturatedFat(typicalUnit: Unit.G, offTag: 'polyunsaturated'),
+  polyunsaturatedFat(typicalUnit: Unit.G, offTag: 'polyunsaturated-fat'),
 
   /// Alcohol
   alcohol(typicalUnit: Unit.PERCENT, offTag: 'alcohol'),
