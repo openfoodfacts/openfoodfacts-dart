@@ -39,8 +39,11 @@
   <div class="toggle" id="theme-button">
     <label for="theme">
       <input type="checkbox" id="theme" value="light-theme">
-      <span class="material-symbols-outlined">
+      <span id="dark-theme-button" class="material-symbols-outlined">
         brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
       </span>
     </label>
   </div>
@@ -50,7 +53,6 @@
   <div id="dartdoc-main-content" class="main-content">
       <div>
 <h1><span class="kind-class">HttpHelper</span> class 
-    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
  
 </h1></div>
 
@@ -87,8 +89,8 @@
 
       <dl class="properties">
         <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.6/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.0.1/dart-core/int-class.html">int</a></span> 
 
 </dt>
 <dd class="inherited">
@@ -98,8 +100,8 @@
 </dd>
 
         <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.19.6/dart-core/Type-class.html">Type</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.0.1/dart-core/Type-class.html">Type</a></span> 
 
 </dt>
 <dd class="inherited">
@@ -118,8 +120,8 @@
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="doGetRequest" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doGetRequest.html">doGetRequest</a></span><span class="signature">(<wbr><span class="parameter" id="doGetRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span><span class="parameter" id="doGetRequest-param-user">{<span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span><span class="parameter" id="doGetRequest-param-queryType"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.6/dart-async/Future-class.html">Future</a></span>
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doGetRequest.html">doGetRequest</a></span><span class="signature">(<wbr><span class="parameter" id="doGetRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span><span class="parameter" id="doGetRequest-param-user">{<span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span><span class="parameter" id="doGetRequest-param-queryType"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.0.1/dart-async/Future-class.html">Future</a></span>
   </span>
   
 
@@ -134,8 +136,8 @@ By default the query will hit the PROD DB
 </dd>
 
         <dt id="doMultipartRequest" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doMultipartRequest.html">doMultipartRequest</a></span><span class="signature">(<wbr><span class="parameter" id="doMultipartRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span><span class="parameter" id="doMultipartRequest-param-body"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.6/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">body</span>, </span><span class="parameter" id="doMultipartRequest-param-files">{<span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Uri-class.html">Uri</a></span>&gt;</span>?</span> <span class="parameter-name">files</span>, </span><span class="parameter" id="doMultipartRequest-param-user"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span><span class="parameter" id="doMultipartRequest-param-queryType"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.6/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_status/Status-class.html">Status</a></span>&gt;</span></span>
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doMultipartRequest.html">doMultipartRequest</a></span><span class="signature">(<wbr><span class="parameter" id="doMultipartRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span><span class="parameter" id="doMultipartRequest-param-body"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.0.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.0.1/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">body</span>, </span><span class="parameter" id="doMultipartRequest-param-files">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.0.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Uri-class.html">Uri</a></span>&gt;</span>?</span> <span class="parameter-name">files</span>, </span><span class="parameter" id="doMultipartRequest-param-user"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span><span class="parameter" id="doMultipartRequest-param-queryType"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.0.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_status/Status-class.html">Status</a></span>&gt;</span></span>
   </span>
   
 
@@ -150,8 +152,8 @@ As result a json object of the "type" Status is expected.
 </dd>
 
         <dt id="doPatchRequest" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doPatchRequest.html">doPatchRequest</a></span><span class="signature">(<wbr><span class="parameter" id="doPatchRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span><span class="parameter" id="doPatchRequest-param-body"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">body</span>, </span><span class="parameter" id="doPatchRequest-param-user"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span><span class="parameter" id="doPatchRequest-param-queryType">{<span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.6/dart-async/Future-class.html">Future</a></span>
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doPatchRequest.html">doPatchRequest</a></span><span class="signature">(<wbr><span class="parameter" id="doPatchRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span><span class="parameter" id="doPatchRequest-param-body"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.0.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">body</span>, </span><span class="parameter" id="doPatchRequest-param-user"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span><span class="parameter" id="doPatchRequest-param-queryType">{<span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.0.1/dart-async/Future-class.html">Future</a></span>
   </span>
   
 
@@ -163,8 +165,8 @@ As result a json object of the "type" Status is expected.
 </dd>
 
         <dt id="doPostRequest" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doPostRequest.html">doPostRequest</a></span><span class="signature">(<wbr><span class="parameter" id="doPostRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span><span class="parameter" id="doPostRequest-param-body"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.6/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">body</span>, </span><span class="parameter" id="doPostRequest-param-user"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span><span class="parameter" id="doPostRequest-param-queryType">{<span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>, </span><span class="parameter" id="doPostRequest-param-addCredentialsToBody"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.6/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">addCredentialsToBody</span>, </span><span class="parameter" id="doPostRequest-param-addCredentialsToHeader"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.6/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">addCredentialsToHeader</span> = <span class="default-value">false</span>}</span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.6/dart-async/Future-class.html">Future</a></span>
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doPostRequest.html">doPostRequest</a></span><span class="signature">(<wbr><span class="parameter" id="doPostRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span><span class="parameter" id="doPostRequest-param-body"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.0.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.0.1/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">body</span>, </span><span class="parameter" id="doPostRequest-param-user"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span><span class="parameter" id="doPostRequest-param-queryType">{<span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>, </span><span class="parameter" id="doPostRequest-param-addCredentialsToBody"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.1/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">addCredentialsToBody</span>, </span><span class="parameter" id="doPostRequest-param-addCredentialsToHeader"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.1/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">addCredentialsToHeader</span> = <span class="default-value">false</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.0.1/dart-async/Future-class.html">Future</a></span>
   </span>
   
 
@@ -178,7 +180,7 @@ The result of the request will be returned as string.
 </dd>
 
         <dt id="jsonDecode" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/jsonDecode.html">jsonDecode</a></span><span class="signature">(<wbr><span class="parameter" id="jsonDecode-param-string"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.6/dart-core/String-class.html">String</a></span> <span class="parameter-name">string</span></span>)
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/jsonDecode.html">jsonDecode</a></span><span class="signature">(<wbr><span class="parameter" id="jsonDecode-param-string"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">string</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
@@ -191,21 +193,21 @@ The result of the request will be returned as string.
 </dd>
 
         <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+  <span class="name"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
 
 </dt>
 <dd class="inherited">
-  Invoked when a non-existent method or property is accessed.
+  Invoked when a nonexistent method or property is accessed.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.6/dart-core/String-class.html">String</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.0.1/dart-core/String-class.html">String</a></span>
   </span>
   
 
@@ -225,8 +227,8 @@ The result of the request will be returned as string.
     <h2>Operators</h2>
     <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.6/dart-core/bool-class.html">bool</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.0.1/dart-core/bool-class.html">bool</a></span>
   </span>
   
 
@@ -262,8 +264,8 @@ The result of the request will be returned as string.
     <h2>Static Methods</h2>
     <dl class="callables">
         <dt id="addUserAgentParameters" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/addUserAgentParameters.html">addUserAgentParameters</a></span><span class="signature">(<wbr><span class="parameter" id="addUserAgentParameters-param-map"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>?</span> <span class="parameter-name">map</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.19.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.19.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>?</span>
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/addUserAgentParameters.html">addUserAgentParameters</a></span><span class="signature">(<wbr><span class="parameter" id="addUserAgentParameters-param-map"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.0.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>?</span> <span class="parameter-name">map</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.0.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.0.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>?</span>
   </span>
   
 
@@ -284,7 +286,7 @@ The result of the request will be returned as string.
     <dl class="properties">
         <dt id="FROM" class="constant">
     <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/FROM-constant.html">FROM</a></span>
-  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/2.19.6/dart-core/String-class.html">String</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.0.1/dart-core/String-class.html">String</a></span>
   
 
 </dt>
@@ -299,7 +301,7 @@ The result of the request will be returned as string.
 
         <dt id="USER_AGENT" class="constant">
     <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/USER_AGENT-constant.html">USER_AGENT</a></span>
-  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/2.19.6/dart-core/String-class.html">String</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.0.1/dart-core/String-class.html">String</a></span>
   
 
 </dt>
@@ -314,7 +316,7 @@ The result of the request will be returned as string.
 
         <dt id="userInfoForTest" class="constant">
     <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/userInfoForTest-constant.html">userInfoForTest</a></span>
-  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/2.19.6/dart-core/String-class.html">String</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.0.1/dart-core/String-class.html">String</a></span>
   
 
 </dt>
@@ -373,8 +375,8 @@ The result of the request will be returned as string.
         <li class="section-title inherited">
           <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html#instance-properties">Properties</a>
         </li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Object/hashCode.html">hashCode</a></li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Object/runtimeType.html">runtimeType</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Object/hashCode.html">hashCode</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
         <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html#instance-methods">Methods</a></li>
           <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doGetRequest.html">doGetRequest</a></li>
@@ -382,11 +384,11 @@ The result of the request will be returned as string.
           <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doPatchRequest.html">doPatchRequest</a></li>
           <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/doPostRequest.html">doPostRequest</a></li>
           <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper/jsonDecode.html">jsonDecode</a></li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Object/toString.html">toString</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Object/toString.html">toString</a></li>
 
         <li class="section-title inherited"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html#operators">Operators</a></li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/2.19.6/dart-core/Object/operator_equals.html">operator ==</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/stable/3.0.1/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
         <li class="section-title"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html#static-properties">Static properties</a></li>
