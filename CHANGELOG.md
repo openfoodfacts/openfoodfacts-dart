@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.5.1
+## [2.5.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.5.0...v2.5.1) (2023-05-21)
 
 
 ### Bug Fixes
