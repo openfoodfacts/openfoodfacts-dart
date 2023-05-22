@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.5.0...v2.5.1) (2023-05-21)
+
+
+### Bug Fixes
+
+* typo for mono and poly unsaturated fat tags ([#732](https://github.com/openfoodfacts/openfoodfacts-dart/issues/732)) ([04b0f16](https://github.com/openfoodfacts/openfoodfacts-dart/commit/04b0f16b855fbdf3d52794756e139519ee4bc1c5))
+
 ## [2.5.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.4.0...v2.5.0) (2023-04-16)
 
 
