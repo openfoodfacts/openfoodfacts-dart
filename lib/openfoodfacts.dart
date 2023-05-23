@@ -16,6 +16,7 @@ export 'src/model/ingredients_analysis_tags.dart';
 export 'src/model/insight.dart';
 export 'src/model/key_stats.dart';
 export 'src/model/knowledge_panel.dart';
+export 'src/model/knowledge_panel_action.dart';
 export 'src/model/knowledge_panel_element.dart';
 export 'src/model/knowledge_panels.dart';
 export 'src/model/leaderboard_entry.dart';
