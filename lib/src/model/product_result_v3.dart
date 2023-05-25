@@ -27,8 +27,8 @@ class ProductResultV3 extends JsonObject {
   /// Status.
   ///
   /// Typical values: [statusFailure], [statusWarning] or [statusSuccess]
-  @JsonKey(includeIfNull: false)
-  String? status;
+  @JsonKey(includeIfNull: false, unknownEnumValue: ProductResultStatus.unKnown)
+  ProductResultStatus? status;
 
   /// Errors.
   ///
@@ -46,13 +46,16 @@ class ProductResultV3 extends JsonObject {
   Product? product;
 
   /// Possible value for [status]: the operation failed.
-  static const String statusFailure = 'failure';
+  static ProductResultStatus statusFailure =
+      ProductResultStatus.failure; //'failure';
 
   /// Possible value for [status]: the operation succeeded with warnings.
-  static const String statusWarning = 'success_with_warnings';
+  static ProductResultStatus statusWarning =
+      ProductResultStatus.successWarnings; //'success_with_warnings';
 
   /// Possible value for [status]: the operation succeeded.
-  static const String statusSuccess = 'success';
+  static ProductResultStatus statusSuccess =
+      ProductResultStatus.success; //'success';
 
   /// Possible value for [result.id]: product found
   static const String resultProductFound = 'product_found';
@@ -84,4 +87,19 @@ class ProductResultV3 extends JsonObject {
     }
     return result;
   }
+}
+
+enum ProductResultStatus {
+  @JsonValue('success')
+  success('success'),
+  @JsonValue('success_with_warnings')
+  successWarnings('success_with_warnings'),
+  @JsonValue('failure')
+  failure('failure'),
+  @JsonValue('unknown_status')
+  unKnown('unknown_status');
+
+  const ProductResultStatus(this.value);
+
+  final String value;
 }

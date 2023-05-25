@@ -12,7 +12,9 @@ ProductResultV3 _$ProductResultV3FromJson(Map<String, dynamic> json) =>
       ..result = json['result'] == null
           ? null
           : LocalizedTag.fromJson(json['result'] as Map<String, dynamic>)
-      ..status = json['status'] as String?
+      ..status = $enumDecodeNullable(
+          _$ProductResultStatusEnumMap, json['status'],
+          unknownValue: ProductResultStatus.unKnown)
       ..errors = ProductResultV3._fromJsonListAnswerForField(json['errors'])
       ..warnings = ProductResultV3._fromJsonListAnswerForField(json['warnings'])
       ..product = json['product'] == null
@@ -30,9 +32,16 @@ Map<String, dynamic> _$ProductResultV3ToJson(ProductResultV3 instance) {
 
   writeNotNull('code', instance.barcode);
   writeNotNull('result', instance.result);
-  writeNotNull('status', instance.status);
+  writeNotNull('status', _$ProductResultStatusEnumMap[instance.status]);
   writeNotNull('errors', instance.errors);
   writeNotNull('warnings', instance.warnings);
   writeNotNull('product', instance.product);
   return val;
 }
+
+const _$ProductResultStatusEnumMap = {
+  ProductResultStatus.success: 'success',
+  ProductResultStatus.successWarnings: 'success_with_warnings',
+  ProductResultStatus.failure: 'failure',
+  ProductResultStatus.unKnown: 'unknown_status',
+};
