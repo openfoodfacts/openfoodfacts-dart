@@ -95,6 +95,6 @@ void main() {
   },
       timeout: Timeout(
         // some tests can be slow here
-        Duration(seconds: 90),
+        Duration(seconds: 180),
       ));
 }

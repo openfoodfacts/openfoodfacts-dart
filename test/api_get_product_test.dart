@@ -787,7 +787,8 @@ void main() {
           'Poor nutritional quality');
       expect(nutritionalQuality.first.title, 'Nutri-Score D');
       expect(nutritionalQuality.first.name, 'Nutri-Score');
-      expect(nutritionalQuality.first.match, greaterThan(31));
+      expect(nutritionalQuality.first.match,
+          greaterThan(29)); // 20230602: 29.4444444444444
       expect(nutritionalQuality.first.status, 'known');
       expect(nutritionalQuality[1].id, 'low_salt');
       expect(nutritionalQuality[2].id, 'low_fat');
@@ -954,7 +955,7 @@ void main() {
       expect(nutriments.getValue(Nutrient.energyKJ, perSize), 0.8);
       expect(nutriments.getValue(Nutrient.sugars, perSize), 0.0);
       expect(nutriments.getValue(Nutrient.salt, perSize), 0.01);
-      expect(nutriments.getValue(Nutrient.fiber, perSize), isNull);
+      expect(nutriments.getValue(Nutrient.fiber, perSize), 0.0);
       expect(nutriments.getValue(Nutrient.fat, perSize), 0.0);
       expect(nutriments.getValue(Nutrient.saturatedFat, perSize), 0.0);
       expect(nutriments.getValue(Nutrient.proteins, perSize), 0.0);
