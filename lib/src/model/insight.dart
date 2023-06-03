@@ -3,15 +3,14 @@ import '../interface/json_object.dart';
 
 part 'insight.g.dart';
 
-enum InsightAnnotation { YES, NO, MAYBE }
+enum InsightAnnotation {
+  YES(1),
+  NO(0),
+  MAYBE(-1);
 
-extension InsightAnnotationExtension on InsightAnnotation {
-  static const Map<InsightAnnotation, int> _VALUES = {
-    InsightAnnotation.YES: 1,
-    InsightAnnotation.NO: 0,
-    InsightAnnotation.MAYBE: -1,
-  };
-  int get value => _VALUES[this] ?? -1;
+  const InsightAnnotation(this.value);
+
+  final int value;
 }
 
 enum InsightType {
