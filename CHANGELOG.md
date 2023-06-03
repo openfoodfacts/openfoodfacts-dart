@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.5.1...v2.5.2) (2023-06-03)
+
+
+### Bug Fixes
+
+* "InsightAnnotation" with better enum syntax ([#737](https://github.com/openfoodfacts/openfoodfacts-dart/issues/737)) ([30601b1](https://github.com/openfoodfacts/openfoodfacts-dart/commit/30601b19bd321c2d35ea1cf4745fc542aa96bc8c))
+
 ## [2.5.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.5.0...v2.5.1) (2023-05-21)
 
 
