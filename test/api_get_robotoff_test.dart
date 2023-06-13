@@ -58,29 +58,35 @@ void main() {
       }
     });
 
-    test('get 2 random questions with types', () async {
+    test('get popular questions with types', () async {
       const InsightType type = InsightType.CATEGORY;
+      const int numQuestions = 10;
       final RobotoffQuestionResult result =
-          await RobotoffAPIClient.getRandomQuestions(
-        OpenFoodFactsLanguage.FRENCH,
-        TestConstants.PROD_USER,
-        types: [type],
-        count: 2,
+          await RobotoffAPIClient.getQuestions(
+        OpenFoodFactsLanguage.GERMAN,
+        user: TestConstants.PROD_USER,
+        insightTypes: [type],
+        count: numQuestions,
+        country: OpenFoodFactsCountry.GERMANY,
+        questionOrder: RobotoffQuestionOrder.popularity,
       );
 
       expect(result.status, isNotNull);
       expect(result.status, 'found');
-      expect(result.questions!.length, 2);
-      expect(result.questions![0].insightType, type);
-      expect(result.questions![1].insightType, type);
+      expect(result.questions, isNotNull);
+      expect(result.questions!.length, numQuestions);
+      for (final RobotoffQuestion question in result.questions!) {
+        expect(question.insightType, type);
+      }
     });
 
     test('get 2 random questions with no specific type', () async {
       final RobotoffQuestionResult result =
-          await RobotoffAPIClient.getRandomQuestions(
+          await RobotoffAPIClient.getQuestions(
         OpenFoodFactsLanguage.FRENCH,
-        TestConstants.PROD_USER,
+        user: TestConstants.PROD_USER,
         count: 2,
+        questionOrder: RobotoffQuestionOrder.random,
       );
 
       expect(result.status, isNotNull);
@@ -93,6 +99,7 @@ void main() {
     test('get random insight', () async {
       final InsightsResult result = await RobotoffAPIClient.getRandomInsights(
         type: InsightType.CATEGORY,
+        country: OpenFoodFactsCountry.FRANCE,
       );
 
       expect(result.status, isNotNull);
