@@ -103,6 +103,8 @@ export 'src/utils/product_helper.dart';
 export 'src/utils/product_query_configurations.dart';
 export 'src/utils/product_search_query_configuration.dart';
 export 'src/utils/query_type.dart';
+export 'src/model/robotoff_question_order.dart';
+export 'src/utils/server_type.dart';
 export 'src/utils/suggestion_manager.dart';
 export 'src/utils/tag_type.dart';
 export 'src/utils/unit_helper.dart';

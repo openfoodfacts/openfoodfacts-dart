@@ -10,7 +10,9 @@ import 'utils/country_helper.dart';
 import 'utils/http_helper.dart';
 import 'utils/language_helper.dart';
 import 'utils/query_type.dart';
+import 'model/robotoff_question_order.dart';
 import 'utils/uri_helper.dart';
+import 'utils/server_type.dart';
 
 class RobotoffAPIClient {
   RobotoffAPIClient._();
@@ -19,23 +21,19 @@ class RobotoffAPIClient {
     InsightType? type,
     OpenFoodFactsCountry? country,
     String? valueTag,
-    String? serverDomain,
+    // TODO: deprecated from 2023-06-13; remove when old enough
+    @Deprecated('Not used anymore') String? serverDomain,
+    ServerType? serverType,
+    int? count,
     QueryType? queryType,
   }) async {
-    final Map<String, String> parameters = {};
-
-    if (type != null && type.value != null) {
-      parameters['type'] = type.value!;
-    }
-    if (country != null) {
-      parameters['country'] = country.offTag;
-    }
-    if (valueTag != null) {
-      parameters['value_tag'] = valueTag;
-    }
-    if (serverDomain != null) {
-      parameters['server_domain'] = serverDomain;
-    }
+    final Map<String, String> parameters = {
+      if (type != null) 'type': type.offTag,
+      if (country != null) 'country': _getLousyCountryTag(country),
+      if (valueTag != null) 'value_tag': valueTag,
+      if (count != null) 'count': count.toString(),
+      if (serverType != null) 'server_type': serverType.offTag,
+    };
 
     var insightUri = UriHelper.getRobotoffUri(
       path: 'api/v1/insights/random/',
@@ -56,11 +54,17 @@ class RobotoffAPIClient {
 
   static Future<InsightsResult> getProductInsights(
     String barcode, {
+    ServerType? serverType,
     QueryType? queryType,
   }) async {
+    final Map<String, String> parameters = <String, String>{
+      if (serverType != null) 'server_type': serverType.offTag,
+    };
+
     var insightsUri = UriHelper.getRobotoffUri(
       path: 'api/v1/insights/$barcode',
       queryType: queryType,
+      queryParameters: parameters,
     );
 
     Response response = await HttpHelper().doGetRequest(
@@ -78,15 +82,13 @@ class RobotoffAPIClient {
     OpenFoodFactsLanguage language, {
     User? user,
     int? count,
+    ServerType? serverType,
     QueryType? queryType,
   }) async {
-    if (count == null || count <= 0) {
-      count = 1;
-    }
-
     final Map<String, String> parameters = <String, String>{
       'lang': language.code,
-      'count': count.toString()
+      if (count != null) 'count': count.toString(),
+      if (serverType != null) 'server_type': serverType.offTag,
     };
 
     var robotoffQuestionUri = UriHelper.getRobotoffUri(
@@ -107,6 +109,8 @@ class RobotoffAPIClient {
     return result;
   }
 
+  // TODO: deprecated from 2023-06-13; remove when old enough
+  @Deprecated('Use getQuestions instead')
   static Future<RobotoffQuestionResult> getRandomQuestions(
     OpenFoodFactsLanguage language,
     User? user, {
@@ -150,6 +154,120 @@ class RobotoffAPIClient {
     );
 
     return result;
+  }
+
+  /// cf. https://openfoodfacts.github.io/robotoff/references/api/#tag/Questions/paths/~1questions/get
+  static Future<RobotoffQuestionResult> getQuestions(
+    OpenFoodFactsLanguage language, {
+    User? user,
+    int? count,
+    int? page,
+    List<InsightType>? insightTypes,
+    OpenFoodFactsCountry? country,
+    List<String>? brands,
+    RobotoffQuestionOrder? questionOrder,
+    ServerType? serverType,
+    String? valueTag,
+    QueryType? queryType,
+  }) async {
+    final List<String> insightValues = [];
+    if (insightTypes != null) {
+      for (final InsightType insightType in insightTypes) {
+        insightValues.add(insightType.offTag);
+      }
+    }
+
+    final Map<String, String> parameters = <String, String>{
+      'lang': language.code,
+      if (count != null) 'count': count.toString(),
+      if (page != null) 'page': page.toString(),
+      if (serverType != null) 'server_type': serverType.offTag,
+      if (insightValues.isNotEmpty) 'insight_types': insightValues.join(','),
+      if (brands?.isNotEmpty == true) 'brands': brands!.join(','),
+      if (questionOrder != null) 'order_by': questionOrder.offTag,
+      if (country != null) 'country': _getLousyCountryTag(country),
+      if (valueTag != null) 'value_tag': valueTag,
+    };
+
+    var robotoffQuestionUri = UriHelper.getRobotoffUri(
+      path: 'api/v1/questions',
+      queryParameters: parameters,
+      queryType: queryType,
+    );
+
+    final Response response = await HttpHelper().doGetRequest(
+      robotoffQuestionUri,
+      user: user,
+      queryType: queryType,
+    );
+    return RobotoffQuestionResult.fromJson(
+      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
+    );
+  }
+
+  /// Lousy conversion from a country to a country tag.
+  ///
+  /// In a near future, we should be able to get rid of this method, and pass
+  /// directly the country (offTag).
+  /// There are some countries for which I don't know if the country tag is
+  /// misspelled or just if there are no data for this country.
+  static String _getLousyCountryTag(final OpenFoodFactsCountry country) {
+    switch (country) {
+      case OpenFoodFactsCountry.BRUNEI_DARUSSALAM:
+        return 'en:brunei';
+      case OpenFoodFactsCountry.CZECHIA:
+        return 'en:czech-republic';
+      case OpenFoodFactsCountry.USA:
+        return 'en:united-states';
+      case OpenFoodFactsCountry.VIET_NAM:
+        return 'en:vietnam';
+      // from there I cannot say if the spelling is correct...
+      case OpenFoodFactsCountry.ANTARCTICA:
+      case OpenFoodFactsCountry.SAINT_BARTHELEMY:
+      case OpenFoodFactsCountry.BAHAMAS:
+      case OpenFoodFactsCountry.BHUTAN:
+      case OpenFoodFactsCountry.BOUVET_ISLAND:
+      case OpenFoodFactsCountry.COCOS_ISLANDS:
+      case OpenFoodFactsCountry.CONGO:
+      case OpenFoodFactsCountry.CABO_VERDE:
+      case OpenFoodFactsCountry.CHRISTMAS_ISLAND:
+      case OpenFoodFactsCountry.WESTERN_SAHARA:
+      case OpenFoodFactsCountry.FALKLAND_ISLANDS:
+      case OpenFoodFactsCountry.MICRONESIA:
+      case OpenFoodFactsCountry.SOUTH_GEORGIA:
+      case OpenFoodFactsCountry.GUINEA_BISSAU:
+      case OpenFoodFactsCountry.HEARD_ISLAND:
+      case OpenFoodFactsCountry.BRITISH_INDIAN_OCEAN_TERRITORY:
+      case OpenFoodFactsCountry.KIRIBATI:
+      case OpenFoodFactsCountry.NORTH_KOREA:
+      case OpenFoodFactsCountry.LAOS:
+      case OpenFoodFactsCountry.LESOTHO:
+      case OpenFoodFactsCountry.MACAO:
+      case OpenFoodFactsCountry.NORFOLK_ISLAND:
+      case OpenFoodFactsCountry.NAURU:
+      case OpenFoodFactsCountry.NIUE:
+      case OpenFoodFactsCountry.PITCAIRN:
+      case OpenFoodFactsCountry.PALESTINE:
+      case OpenFoodFactsCountry.SUDAN:
+      case OpenFoodFactsCountry.SAINT_HELENA:
+      case OpenFoodFactsCountry.SVALBARD_AND_JAN_MAYEN:
+      case OpenFoodFactsCountry.SAO_TOME_AND_PRINCIPE:
+      case OpenFoodFactsCountry.ESWATINI:
+      case OpenFoodFactsCountry.FRENCH_SOUTHERN_TERRITORIES:
+      case OpenFoodFactsCountry.TAJIKISTAN:
+      case OpenFoodFactsCountry.TOKELAU:
+      case OpenFoodFactsCountry.TIMOR_LESTE:
+      case OpenFoodFactsCountry.TURKMENISTAN:
+      case OpenFoodFactsCountry.TONGA:
+      case OpenFoodFactsCountry.TUVALU:
+      case OpenFoodFactsCountry.UNITED_STATES_MINOR_OUTLYING_ISLANDS:
+      case OpenFoodFactsCountry.HOLY_SEE:
+      case OpenFoodFactsCountry.US_VIRGIN_ISLANDS:
+      case OpenFoodFactsCountry.SAMOA:
+      default:
+        // works in most cases
+        return 'en:${country.name.toLowerCase().replaceAll('_', '-')}';
+    }
   }
 
   static Future<Status> postInsightAnnotation(
