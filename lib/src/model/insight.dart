@@ -1,63 +1,65 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'off_tagged.dart';
 import '../interface/json_object.dart';
 
 part 'insight.g.dart';
 
-enum InsightAnnotation { YES, NO, MAYBE }
+enum InsightAnnotation {
+  YES(1),
+  NO(0),
+  MAYBE(-1);
 
-extension InsightAnnotationExtension on InsightAnnotation {
-  static const Map<InsightAnnotation, int> _VALUES = {
-    InsightAnnotation.YES: 1,
-    InsightAnnotation.NO: 0,
-    InsightAnnotation.MAYBE: -1,
-  };
-  int get value => _VALUES[this] ?? -1;
+  const InsightAnnotation(this.value);
+
+  final int value;
 }
 
-enum InsightType {
+enum InsightType implements OffTagged {
   @JsonValue('ingredient_spellcheck')
-  INGREDIENT_SPELLCHECK,
+  INGREDIENT_SPELLCHECK(offTag: 'ingredient_spellcheck'),
   @JsonValue('packager_code')
-  PACKAGER_CODE,
+  PACKAGER_CODE(offTag: 'packager_code'),
   @JsonValue('label')
-  LABEL,
+  LABEL(offTag: 'label'),
   @JsonValue('category')
-  CATEGORY,
+  CATEGORY(offTag: 'category'),
   @JsonValue('product_weight')
-  PRODUCT_WEIGHT,
+  PRODUCT_WEIGHT(offTag: 'product_weight'),
   @JsonValue('expiration_date')
-  EXPIRATION_DATE,
+  EXPIRATION_DATE(offTag: 'expiration_date'),
   @JsonValue('brand')
-  BRAND,
+  BRAND(offTag: 'brand'),
   @JsonValue('store')
-  STORE,
+  STORE(offTag: 'store'),
   @JsonValue('nutrient')
-  NUTRIENT,
+  NUTRIENT(offTag: 'nutrient'),
   @JsonValue('undefined')
-  UNDEFINED,
-  UNKNOWN
+  UNDEFINED(offTag: 'undefined'),
+  UNKNOWN(offTag: 'UNKNOWN');
+
+  const InsightType({
+    required this.offTag,
+  });
+
+  @override
+  final String offTag;
+
+  /// Returns the first [InsightType] that matches the [offTag].
+  static InsightType? fromOffTag(final String? offTag) =>
+      OffTagged.fromOffTag(offTag, InsightType.values) as InsightType?;
 }
 
+// TODO: deprecated from 2023-06-13; remove when old enough
+@Deprecated('Use directly InsightType instead')
 extension InsightTypesExtension on InsightType? {
-  static const Map<InsightType, String> _VALUES = {
-    InsightType.INGREDIENT_SPELLCHECK: 'ingredient_spellcheck',
-    InsightType.PACKAGER_CODE: 'packager_code',
-    InsightType.LABEL: 'label',
-    InsightType.CATEGORY: 'category',
-    InsightType.PRODUCT_WEIGHT: 'product_weight',
-    InsightType.EXPIRATION_DATE: 'expiration_date',
-    InsightType.BRAND: 'brand',
-    InsightType.STORE: 'store',
-    InsightType.NUTRIENT: 'nutrient',
-    InsightType.UNDEFINED: 'undefined',
-  };
+  // TODO: deprecated from 2023-06-13; remove when old enough
+  @Deprecated('Use offTag instead')
+  String? get value => this?.offTag;
 
-  String? get value => _VALUES[this];
-
-  static InsightType getType(String? s) => InsightType.values.firstWhere(
-        (final InsightType key) => _VALUES[key] == s,
-        orElse: () => InsightType.UNDEFINED,
-      );
+  // TODO: deprecated from 2023-06-13; remove when old enough
+  @Deprecated('Use InsightType.fromOffTag instead')
+  static InsightType getType(String? s) =>
+      InsightType.fromOffTag(s) ?? InsightType.UNDEFINED;
 }
 
 @JsonSerializable()
@@ -103,8 +105,8 @@ class Insight {
     }
     List<Insight> result = [];
     for (dynamic jsonInsight in json) {
-      InsightType insightType =
-          InsightTypesExtension.getType(jsonInsight['type']);
+      final InsightType insightType =
+          InsightType.fromOffTag(jsonInsight['type']) ?? InsightType.UNDEFINED;
 
       result.add(Insight(
           id: jsonInsight['id'],
@@ -127,7 +129,7 @@ class Insight {
       Map<String, dynamic> jsonInsight = {};
 
       jsonInsight['id'] = insight.id;
-      jsonInsight['type'] = insight.type.value;
+      jsonInsight['type'] = insight.type?.offTag;
       jsonInsight['barcode'] = insight.barcode;
       jsonInsight['countries'] = insight.countries;
       jsonInsight['lang'] = insight.lang;
