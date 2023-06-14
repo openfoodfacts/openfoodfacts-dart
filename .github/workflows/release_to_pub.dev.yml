@@ -1,0 +1,16 @@
+# A CI configuration to auto-publish pub packages.
+# https://github.com/dart-lang/ecosystem/tree/main/pkgs/firehose
+# https://github.com/dart-lang/ecosystem/wiki/Publishing-automation
+
+name: Publish
+
+on:
+  pull_request:
+    branches: [ master ]
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  push:
+    tags: [ 'v[0-9]+.[0-9]+.[0-9]+' ]
+
+jobs:
+  publish:
+    uses: dart-lang/ecosystem/.github/workflows/publish.yaml@main
