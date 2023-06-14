@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.5.2...v2.6.0) (2023-06-14)
+
+
+### Features
+
+* 741 - new parameters for Robotoff ([#743](https://github.com/openfoodfacts/openfoodfacts-dart/issues/743)) ([77c01de](https://github.com/openfoodfacts/openfoodfacts-dart/commit/77c01de3efdceceee63e95d8a7bd8872bea36563))
+
 ## [2.5.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.5.1...v2.5.2) (2023-06-03)
 
 
