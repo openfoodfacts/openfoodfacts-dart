@@ -4,15 +4,15 @@ import 'package:http/http.dart';
 
 import 'model/insight.dart';
 import 'model/robotoff_question.dart';
+import 'model/robotoff_question_order.dart';
 import 'model/status.dart';
 import 'model/user.dart';
 import 'utils/country_helper.dart';
 import 'utils/http_helper.dart';
 import 'utils/language_helper.dart';
 import 'utils/query_type.dart';
-import 'model/robotoff_question_order.dart';
-import 'utils/uri_helper.dart';
 import 'utils/server_type.dart';
+import 'utils/uri_helper.dart';
 
 class RobotoffAPIClient {
   RobotoffAPIClient._();
@@ -84,11 +84,15 @@ class RobotoffAPIClient {
     int? count,
     ServerType? serverType,
     QueryType? queryType,
+    List<InsightType>? insightTypes,
   }) async {
     final Map<String, String> parameters = <String, String>{
       'lang': language.code,
       if (count != null) 'count': count.toString(),
       if (serverType != null) 'server_type': serverType.offTag,
+      if (insightTypes != null)
+        'insight_types':
+            insightTypes.map((InsightType type) => type.offTag).join(','),
     };
 
     var robotoffQuestionUri = UriHelper.getRobotoffUri(

@@ -1,5 +1,6 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
+
 import 'test_constants.dart';
 
 void main() {
@@ -55,6 +56,22 @@ void main() {
         expect(result.questions![0].insightType, InsightType.CATEGORY);
         expect(result.questions![0].imageUrl,
             'https://static.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg');
+      }
+    });
+
+    test('get questions with a given insight type', () async {
+      RobotoffQuestionResult result =
+          await RobotoffAPIClient.getProductQuestions(
+        '3270160471966',
+        OpenFoodFactsLanguage.FRENCH,
+        user: TestConstants.PROD_USER,
+        insightTypes: [InsightType.CATEGORY],
+      );
+
+      if (result.status != 'no_questions') {
+        for (RobotoffQuestion question in result.questions!) {
+          expect(question.insightType, InsightType.CATEGORY);
+        }
       }
     });
 
