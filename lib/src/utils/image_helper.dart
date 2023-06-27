@@ -14,12 +14,20 @@ class ImageHelper {
     final ProductImage image, {
     final ImageSize? imageSize,
     final QueryType? queryType,
+    final String? root,
   }) =>
       barcode == null
           ? null
-          : '${getProductImageRootUrl(barcode, queryType: queryType)}'
+          : '${getProductImageRootUrl(
+              barcode,
+              queryType: queryType,
+              root: root,
+            )}'
               '/'
-              '${getProductImageFilename(image, imageSize: imageSize)}';
+              '${getProductImageFilename(
+              image,
+              imageSize: imageSize,
+            )}';
 
   /// Returns the [image] full url for an uploaded image.
   ///
@@ -67,33 +75,39 @@ class ImageHelper {
     }
   }
 
+  /// Returns the barcode sub-folder (without trailing '/').
+  ///
+  /// For instance:
+  /// * `12345678` for barcode `12345678`
+  /// * `123/456/789` for barcode `123456789`
+  /// * `123/456/789/0` for barcode `1234567890`
+  /// * `123/456/789/0123` for barcode `1234567890123`
+  static String getBarcodeSubPath(final String barcode) {
+    if (barcode.length < 9) {
+      return barcode;
+    }
+    final String p1 = barcode.substring(0, 3);
+    final String p2 = barcode.substring(3, 6);
+    final String p3 = barcode.substring(6, 9);
+    if (barcode.length == 9) {
+      return '$p1/$p2/$p3';
+    }
+    final String p4 = barcode.substring(9);
+    return '$p1/$p2/$p3/$p4';
+  }
+
   /// Returns the web folder of the product images (without trailing '/')
   ///
   /// E.g. "https://static.openfoodfacts.org/images/products/359/671/046/2858"
   static String getProductImageRootUrl(
     final String barcode, {
     final QueryType? queryType,
+    String? root,
   }) {
-    final String barcodePath;
-    if (barcode.length >= 9) {
-      var p1 = barcode.substring(0, 3);
-      var p2 = barcode.substring(3, 6);
-      var p3 = barcode.substring(6, 9);
-      if (barcode.length == 9) {
-        barcodePath = '$p1/$p2/$p3';
-      } else {
-        var p4 = barcode.substring(9);
-        barcodePath = '$p1/$p2/$p3/$p4';
-      }
-    } else {
-      barcodePath = barcode;
-    }
-
-    final String root =
-        OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-            ? OpenFoodAPIConfiguration.imageProdUrlBase
-            : OpenFoodAPIConfiguration.imageTestUrlBase;
+    root ??= OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+        ? OpenFoodAPIConfiguration.imageProdUrlBase
+        : OpenFoodAPIConfiguration.imageTestUrlBase;
     final String separator = root.endsWith('/') ? '' : '/';
-    return '$root$separator$barcodePath';
+    return '$root$separator${getBarcodeSubPath(barcode)}';
   }
 }
