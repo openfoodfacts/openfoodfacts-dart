@@ -59,18 +59,40 @@ void main() {
       }
     });
 
-    test('get questions with a given insight type', () async {
-      RobotoffQuestionResult result =
-          await RobotoffAPIClient.getProductQuestions(
-        '3270160471966',
-        OpenFoodFactsLanguage.FRENCH,
-        user: TestConstants.PROD_USER,
-        insightTypes: [InsightType.CATEGORY],
+    test('Find questions by insight type', () async {
+      // Let's find 5 products with questions
+      final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH;
+      final User user = TestConstants.PROD_USER;
+
+      final RobotoffQuestionResult productsWithQuestions =
+          await RobotoffAPIClient.getQuestions(
+        language,
+        user: user,
+        count: 5,
       );
 
-      if (result.status != 'no_questions') {
-        for (RobotoffQuestion question in result.questions!) {
-          expect(question.insightType, InsightType.CATEGORY);
+      // For each question, check if we can get it with [getProductQuestions]
+      // with the given insight type
+      if (productsWithQuestions.questions?.isNotEmpty == true) {
+        for (RobotoffQuestion question in productsWithQuestions.questions!) {
+          if (question.insightType != null) {
+            final InsightType insightType = question.insightType!;
+
+            final RobotoffQuestionResult result =
+                await RobotoffAPIClient.getProductQuestions(
+              question.barcode!,
+              language,
+              user: user,
+              insightTypes: [insightType],
+            );
+
+            int count = result.questions!
+                .where((RobotoffQuestion productQuestion) =>
+                    productQuestion.insightType == insightType)
+                .length;
+
+            expect(count, greaterThan(0));
+          }
         }
       }
     });
