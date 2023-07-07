@@ -1,5 +1,6 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
+
 import 'test_constants.dart';
 
 void main() {
@@ -55,6 +56,44 @@ void main() {
         expect(result.questions![0].insightType, InsightType.CATEGORY);
         expect(result.questions![0].imageUrl,
             'https://static.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg');
+      }
+    });
+
+    test('Find questions by insight type', () async {
+      // Let's find 5 products with questions
+      final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH;
+      final User user = TestConstants.PROD_USER;
+
+      final RobotoffQuestionResult productsWithQuestions =
+          await RobotoffAPIClient.getQuestions(
+        language,
+        user: user,
+        count: 5,
+      );
+
+      // For each question, check if we can get it with [getProductQuestions]
+      // with the given insight type
+      if (productsWithQuestions.questions?.isNotEmpty == true) {
+        for (RobotoffQuestion question in productsWithQuestions.questions!) {
+          if (question.insightType != null) {
+            final InsightType insightType = question.insightType!;
+
+            final RobotoffQuestionResult result =
+                await RobotoffAPIClient.getProductQuestions(
+              question.barcode!,
+              language,
+              user: user,
+              insightTypes: [insightType],
+            );
+
+            int count = result.questions!
+                .where((RobotoffQuestion productQuestion) =>
+                    productQuestion.insightType == insightType)
+                .length;
+
+            expect(count, greaterThan(0));
+          }
+        }
       }
     });
 
