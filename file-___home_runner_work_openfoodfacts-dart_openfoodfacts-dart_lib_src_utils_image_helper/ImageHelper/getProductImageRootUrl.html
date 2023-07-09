@@ -61,7 +61,8 @@
 
 <span class="returntype"><a href="https://api.dart.dev/stable/3.0.5/dart-core/String-class.html">String</a></span>
 <span class="name ">getProductImageRootUrl</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getProductImageRootUrl-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.5/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, </span></li>
-<li><span class="parameter" id="getProductImageRootUrl-param-queryType">{<span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
+<li><span class="parameter" id="getProductImageRootUrl-param-queryType">{<span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>, </span></li>
+<li><span class="parameter" id="getProductImageRootUrl-param-root"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.0.5/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">root</span>}</span></li>
 </ol>)
 
       
@@ -80,28 +81,13 @@
   <pre class="language-dart"><code class="language-dart">static String getProductImageRootUrl(
   final String barcode, {
   final QueryType? queryType,
+  String? root,
 }) {
-  final String barcodePath;
-  if (barcode.length &gt;= 9) {
-    var p1 = barcode.substring(0, 3);
-    var p2 = barcode.substring(3, 6);
-    var p3 = barcode.substring(6, 9);
-    if (barcode.length == 9) {
-      barcodePath = &#39;$p1&#47;$p2&#47;$p3&#39;;
-    } else {
-      var p4 = barcode.substring(9);
-      barcodePath = &#39;$p1&#47;$p2&#47;$p3&#47;$p4&#39;;
-    }
-  } else {
-    barcodePath = barcode;
-  }
-
-  final String root =
-      OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-          ? OpenFoodAPIConfiguration.imageProdUrlBase
-          : OpenFoodAPIConfiguration.imageTestUrlBase;
+  root ??= OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+      ? OpenFoodAPIConfiguration.imageProdUrlBase
+      : OpenFoodAPIConfiguration.imageTestUrlBase;
   final String separator = root.endsWith(&#39;&#47;&#39;) ? &#39;&#39; : &#39;&#47;&#39;;
-  return &#39;$root$separator$barcodePath&#39;;
+  return &#39;$root$separator${getBarcodeSubPath(barcode)}&#39;;
 }</code></pre>
 </section>
 
@@ -147,6 +133,7 @@
 
         <li class="section-title"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/ImageHelper-class.html#static-methods">Static methods</a></li>
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/ImageHelper/buildUrl.html">buildUrl</a></li>
+          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/ImageHelper/getBarcodeSubPath.html">getBarcodeSubPath</a></li>
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/ImageHelper/getProductImageFilename.html">getProductImageFilename</a></li>
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/ImageHelper/getProductImageRootUrl.html">getProductImageRootUrl</a></li>
           <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/ImageHelper/getUploadedImageUrl.html">getUploadedImageUrl</a></li>
