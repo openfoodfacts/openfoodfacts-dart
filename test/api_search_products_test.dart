@@ -818,14 +818,15 @@ void main() {
     });
 
     test('nova filter', () async {
-      // Approximated min counts for POLAND
+      const int pageSize = 24;
+      // Approximated min counts for FRANCE / Carrefour
       // There were too many results for FRANCE, and that made the server crash.
-      // There are far less results for POLAND, which is OK for these tests.
+      // That's why we add a filter on STORES.
       const Map<int, int> novaMinCounts = <int, int>{
-        1: 400, // was 541 on 2022-12-31
-        2: 100, // was 126 on 2022-12-31
-        3: 750, // was 1015 on 2022-12-31
-        4: 2500, // was 3064 on 2022-12-31
+        1: 2000, // was 2138 on 2023-07-09
+        2: 400, // was 460 on 2023-07-09
+        3: 4000, // was 4301 on 2023-07-09
+        4: 10000, // was 10973 on 2023-07-09
       };
 
       // single filters
@@ -838,23 +839,28 @@ void main() {
                 tagFilterType: TagFilterType.NOVA_GROUPS,
                 tagName: '$novaGroup',
               ),
+              TagFilter.fromType(
+                tagFilterType: TagFilterType.STORES,
+                tagName: 'Carrefour',
+              ),
+              PageSize(size: pageSize),
             ],
             fields: [ProductField.BARCODE, ProductField.NOVA_GROUP],
             language: OpenFoodFactsLanguage.FRENCH,
-            country: OpenFoodFactsCountry.POLAND,
+            country: OpenFoodFactsCountry.FRANCE,
             version: ProductQueryVersion.v3,
           ),
         );
 
         expect(result.page, 1);
-        expect(result.pageSize, 24);
+        expect(result.pageSize, pageSize);
         expect(
           result.count,
           greaterThanOrEqualTo(novaMinCounts[novaGroup]!),
           reason: 'Not enough values for nova group $novaGroup',
         );
         expect(result.products, isNotNull);
-        expect(result.products!.length, 24);
+        expect(result.products!.length, pageSize);
         for (final Product product in result.products!) {
           expect(product.novaGroup, novaGroup);
         }
