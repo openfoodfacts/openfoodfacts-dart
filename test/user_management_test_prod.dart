@@ -9,7 +9,8 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
-  group('Create existing user', () {
+  group('Create existing user (without specifying a country, nor a language)',
+      () {
     final User user = TestConstants.PROD_USER;
     final String email = 'grumpf@gmx.de';
 
@@ -48,6 +49,62 @@ void main() {
         name: _generateRandomString(OpenFoodAPIClient.USER_NAME_MAX_LENGTH),
         user: user,
         email: 'test@test.com',
+      );
+      expect(response.status, 400);
+      expect(
+        response.statusErrors!.contains(SignUpStatusError.EMAIL_ALREADY_USED),
+        isTrue,
+      );
+    });
+  });
+
+  group('Create existing user by forcing a country + language', () {
+    final User user = TestConstants.PROD_USER;
+    final String email = 'grumpf@gmx.de';
+    final OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
+    final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+
+    test('Create a FR-fr user with a long username', () async {
+      String randomUserName = List.filled(
+        OpenFoodAPIClient.USER_NAME_MAX_LENGTH + 1,
+        'A',
+      ).join();
+
+      expect(
+        OpenFoodAPIClient.register(
+          name: randomUserName,
+          user: user,
+          email: email,
+          country: country,
+          language: language,
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('Create an existing FR-fr user', () async {
+      SignUpStatus response = await OpenFoodAPIClient.register(
+        name: 'Irrelevant',
+        user: user,
+        email: email,
+        country: country,
+        language: language,
+      );
+      expect(response.status, 400);
+      expect(
+        response.statusErrors!
+            .contains(SignUpStatusError.USERNAME_ALREADY_USED),
+        isTrue,
+      );
+    });
+
+    test('Create a FR-fr user with an existing email', () async {
+      SignUpStatus response = await OpenFoodAPIClient.register(
+        name: _generateRandomString(OpenFoodAPIClient.USER_NAME_MAX_LENGTH),
+        user: user,
+        email: 'test@test.com',
+        country: country,
+        language: language,
       );
       expect(response.status, 400);
       expect(
