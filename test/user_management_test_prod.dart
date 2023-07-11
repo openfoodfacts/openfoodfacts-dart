@@ -92,8 +92,8 @@ void main() {
       );
       expect(response.status, 400);
       expect(
-        response.statusErrors!
-            .contains(SignUpStatusError.USERNAME_ALREADY_USED),
+        response.error!.contains(
+            'Ce nom d\'utilisateur existe déjà, choisissez en un autre.'),
         isTrue,
       );
     });
@@ -108,7 +108,8 @@ void main() {
       );
       expect(response.status, 400);
       expect(
-        response.statusErrors!.contains(SignUpStatusError.EMAIL_ALREADY_USED),
+        response.error!.contains(
+            'Ce nom d\'utilisateur existe déjà, choisissez en un autre.'),
         isTrue,
       );
     });
