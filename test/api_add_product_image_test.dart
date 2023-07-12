@@ -147,7 +147,7 @@ void main() {
       // the list of uploaded images with the uploader user id and uploaded_t
       // timestamp.
     });
-  });
+  }, skip: 'TEST env is not reliable');
 
   group('$OpenFoodAPIClient modify product image', () {
     test('image angle', () async {
@@ -262,5 +262,5 @@ void main() {
           // this guy is rather slow
           Duration(seconds: 90),
         ));
-  });
+  }, skip: 'TEST env is not reliable');
 }

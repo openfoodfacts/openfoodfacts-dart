@@ -13,6 +13,7 @@ void main() {
     Future<int?> getCount(
       final OpenFoodFactsCountry country,
       final OpenFoodFactsLanguage language,
+      final String store,
     ) async {
       final String reason = '($country, $language)';
       final ProductSearchQueryConfiguration configuration =
@@ -25,6 +26,10 @@ void main() {
         ],
         parametersList: [
           StatesTagsParameter(map: {ProductState.COMPLETED: false}),
+          TagFilter.fromType(
+            tagFilterType: TagFilterType.STORES,
+            tagName: store,
+          ),
         ],
         version: ProductQueryVersion.v3,
       );
@@ -50,6 +55,7 @@ void main() {
 
     Future<int> getCountForAllLanguages(
       final OpenFoodFactsCountry country,
+      final String store,
     ) async {
       final List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
         OpenFoodFactsLanguage.ENGLISH,
@@ -58,7 +64,7 @@ void main() {
       ];
       int? result;
       for (final OpenFoodFactsLanguage language in languages) {
-        final int? count = await getCount(country, language);
+        final int? count = await getCount(country, language, store);
         if (result != null) {
           expect(count, result, reason: language.toString());
         }
@@ -69,29 +75,39 @@ void main() {
 
     Future<void> checkTypeCount(
       final OpenFoodFactsCountry country,
+      final String store,
       final int minimalExpectedCount,
     ) async {
-      final int count = await getCountForAllLanguages(country);
+      final int count = await getCountForAllLanguages(country, store);
       expect(count, greaterThanOrEqualTo(minimalExpectedCount));
     }
 
     test(
         'in France',
         () async => checkTypeCount(
-            OpenFoodFactsCountry.FRANCE, 800000) // 20220706: was 910148
-        );
+              OpenFoodFactsCountry.FRANCE,
+              'Carrefour',
+              // 2023-07-09: was 23054
+              20000,
+            ));
 
     test(
         'in Italy',
         () async => checkTypeCount(
-            OpenFoodFactsCountry.ITALY, 100000) // 20220706: was 171488
-        );
+              OpenFoodFactsCountry.ITALY,
+              'Carrefour',
+              // 2023-07-09: was 2394
+              1500,
+            ));
 
     test(
         'in Spain',
         () async => checkTypeCount(
-            OpenFoodFactsCountry.SPAIN, 200000) // 20220706: was 272194
-        );
+              OpenFoodFactsCountry.SPAIN,
+              'El Corte Inglès',
+              // 2023-07-09: was 608
+              500,
+            ));
   },
       timeout: Timeout(
         // some tests can be slow here

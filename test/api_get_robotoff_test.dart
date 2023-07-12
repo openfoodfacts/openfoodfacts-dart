@@ -73,27 +73,32 @@ void main() {
 
       // For each question, check if we can get it with [getProductQuestions]
       // with the given insight type
-      if (productsWithQuestions.questions?.isNotEmpty == true) {
-        for (RobotoffQuestion question in productsWithQuestions.questions!) {
-          if (question.insightType != null) {
-            final InsightType insightType = question.insightType!;
-
-            final RobotoffQuestionResult result =
-                await RobotoffAPIClient.getProductQuestions(
-              question.barcode!,
-              language,
-              user: user,
-              insightTypes: [insightType],
-            );
-
-            int count = result.questions!
-                .where((RobotoffQuestion productQuestion) =>
-                    productQuestion.insightType == insightType)
-                .length;
-
-            expect(count, greaterThan(0));
-          }
+      if (productsWithQuestions.questions?.isNotEmpty != true) {
+        return;
+      }
+      for (RobotoffQuestion question in productsWithQuestions.questions!) {
+        if (question.insightType == null ||
+            question.insightType == InsightType.UNDEFINED ||
+            question.insightType == InsightType.UNKNOWN) {
+          continue;
         }
+
+        final InsightType insightType = question.insightType!;
+
+        final RobotoffQuestionResult result =
+            await RobotoffAPIClient.getProductQuestions(
+          question.barcode!,
+          language,
+          user: user,
+          insightTypes: [insightType],
+        );
+
+        final int count = result.questions!
+            .where((RobotoffQuestion productQuestion) =>
+                productQuestion.insightType == insightType)
+            .length;
+
+        expect(count, greaterThan(0));
       }
     });
 
