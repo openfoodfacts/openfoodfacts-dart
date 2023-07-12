@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.7.0...v2.7.1) (2023-07-12)
+
+
+### Bug Fixes
+
+* fixed unit tests ([#755](https://github.com/openfoodfacts/openfoodfacts-dart/issues/755)) ([60bd0ee](https://github.com/openfoodfacts/openfoodfacts-dart/commit/60bd0ee49a0e5fa6279a2f0a0135d43e155f9711))
+
 ## [2.7.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.6.0...v2.7.0) (2023-07-12)
 
 
