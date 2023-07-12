@@ -1134,6 +1134,8 @@ class OpenFoodAPIClient {
     required String email,
     String? orgName,
     bool newsletter = true,
+    final OpenFoodFactsLanguage? language,
+    final OpenFoodFactsCountry? country,
     QueryType? queryType,
   }) async {
     if (name.length > USER_NAME_MAX_LENGTH) {
@@ -1142,11 +1144,19 @@ class OpenFoodAPIClient {
       );
     }
 
-    var registerUri = UriHelper.getUri(
+    Uri registerUri = UriHelper.getUri(
       path: '/cgi/user.pl',
       queryType: queryType,
       addUserAgentParameters: false,
     );
+
+    if (language != null || country != null) {
+      registerUri = UriHelper.replaceSubdomain(
+        registerUri,
+        language: language,
+        country: country,
+      );
+    }
 
     Map<String, String> data = <String, String>{
       'name': name,
