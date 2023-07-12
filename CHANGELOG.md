@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.7.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.6.0...v2.7.0) (2023-07-12)
+
+
+### Features
+
+* Allow to pass `insight_types` to `api/v1/questions/$barcode` ([#748](https://github.com/openfoodfacts/openfoodfacts-dart/issues/748)) ([cf9dd14](https://github.com/openfoodfacts/openfoodfacts-dart/commit/cf9dd14edf7a3a81f695ec6aa5b5d9ce919fd2c6))
+* Allow to pass a country and/or a language to the `register` user method ([#754](https://github.com/openfoodfacts/openfoodfacts-dart/issues/754)) ([05c5c12](https://github.com/openfoodfacts/openfoodfacts-dart/commit/05c5c126f9c1fe79599ffc44cc1abbeb48d47a94))
+
+
+### Bug Fixes
+
+* get user products tests ([#749](https://github.com/openfoodfacts/openfoodfacts-dart/issues/749)) ([38c4695](https://github.com/openfoodfacts/openfoodfacts-dart/commit/38c4695b3a6460cdcacc93e86507e41c826d5737))
+* ImageHelper refactoring ([#751](https://github.com/openfoodfacts/openfoodfacts-dart/issues/751)) ([ce3f319](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ce3f319588ae896ae753e3c40b92983855582393))
+
 ## [2.6.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.5.2...v2.6.0) (2023-06-14)
 
 
