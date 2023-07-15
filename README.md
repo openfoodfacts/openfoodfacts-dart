@@ -6,7 +6,7 @@
 
 # Open Food Facts - Dart
 
-![Pub Version](https://img.shields.io/pub/v/openfoodfacts?&colorB=green)
+[![Pub Version](https://img.shields.io/pub/v/openfoodfacts?&colorB=green)](https://pub.dev/packages/openfoodfacts)
 [![Run sdk tests](https://github.com/openfoodfacts/openfoodfacts-dart/actions/workflows/test-sdk.yml/badge.svg)](https://github.com/openfoodfacts/openfoodfacts-dart/actions/workflows/test-sdk.yml)
 [![likes](https://img.shields.io/pub/likes/openfoodfacts?logo=dart)](https://pub.dev/packages/openfoodfacts/score)
 [![popularity](https://img.shields.io/pub/popularity/openfoodfacts?logo=dart)](https://pub.dev/packages/openfoodfacts/score)
