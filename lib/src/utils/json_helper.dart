@@ -1,3 +1,5 @@
+import 'package:openfoodfacts/openfoodfacts.dart';
+
 import '../model/attribute_group.dart';
 import '../model/ingredient.dart';
 import '../model/product_image.dart';
@@ -263,6 +265,22 @@ class JsonHelper {
 
     for (Ingredient ingredient in ingredients) {
       result.add(ingredient.toJson());
+    }
+
+    return result;
+  }
+
+  /// Returns a JSON map from [ProductPackaging]s
+  static List<Map<String, dynamic>>? productPackagingsToJson(
+      List<ProductPackaging>? packagings) {
+    if (packagings == null || packagings.isEmpty) {
+      return null;
+    }
+
+    List<Map<String, dynamic>> result = [];
+
+    for (ProductPackaging p in packagings) {
+      result.add(p.toJson());
     }
 
     return result;

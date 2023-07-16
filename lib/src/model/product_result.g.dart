@@ -1,6 +1,3 @@
-// ignore_for_file: deprecated_member_use_from_same_package
-// That's a bit ugly, but we need the previous line in order to pass the pub.dev
-// tests, so put that line back after code generation.
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'product_result.dart';
