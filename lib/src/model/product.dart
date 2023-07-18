@@ -320,9 +320,10 @@ class Product extends JsonObject {
   String? packaging;
 
   @JsonKey(
-      name: 'packagings',
-      includeIfNull: false,
-      toJson: JsonHelper.productPackagingsToJson)
+    name: 'packagings',
+    includeIfNull: false,
+    toJson: JsonHelper.productPackagingsToJson,
+  )
   List<ProductPackaging>? packagings;
 
   /// Is the "packagings" complete?

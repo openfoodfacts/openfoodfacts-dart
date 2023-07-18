@@ -13,7 +13,7 @@ void main() {
       expect(productRestored.productName, productName);
     } catch (e, s) {
       print(s);
-      fail('Could not restore Product from JSON ${e.toString()}');
+      fail('Could not restore Product from JSON $e');
     }
   });
 }
