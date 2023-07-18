@@ -1,9 +1,8 @@
-import 'package:openfoodfacts/openfoodfacts.dart';
-
+import '../interface/json_object.dart';
 import '../model/attribute_group.dart';
 import '../model/ingredient.dart';
 import '../model/product_image.dart';
-import '../interface/json_object.dart';
+import '../model/product_packaging.dart';
 import '../utils/language_helper.dart';
 
 /// Helper class around product field conversion to/from JSON

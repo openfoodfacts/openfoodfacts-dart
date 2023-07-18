@@ -6,14 +6,13 @@ void main() {
     final testProduct = Product();
     const productName = 'Orange';
     testProduct.productName = productName;
-    testProduct.packagings = [ProductPackaging()..quantityPerUnit = '75cl'];
+    const expectedQuantity = '75cl';
+    testProduct.packagings = [
+      ProductPackaging()..quantityPerUnit = expectedQuantity
+    ];
     final productJson = testProduct.toJson();
-    try {
-      final productRestored = Product.fromJson(productJson);
-      expect(productRestored.productName, productName);
-    } catch (e, s) {
-      print(s);
-      fail('Could not restore Product from JSON $e');
-    }
+    final productRestored = Product.fromJson(productJson);
+    expect(productRestored.productName, productName);
+    expect(productRestored.packagings!.first.quantityPerUnit, expectedQuantity);
   });
 }
