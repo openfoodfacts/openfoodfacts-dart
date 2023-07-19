@@ -91,7 +91,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           .toList(),
       stores: json['stores'] as String?,
       attributeGroups: (json['attribute_groups'] as List<dynamic>?)
-          ?.map((e) => AttributeGroup.fromJson(e))
+          ?.map(AttributeGroup.fromJson)
           .toList(),
       lastModified: JsonHelper.timestampToDate(json['last_modified_t']),
       ecoscoreGrade: json['ecoscore_grade'] as String?,
@@ -116,7 +116,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       ..nutritionData = JsonHelper.checkboxFromJSON(json['nutrition_data'])
       ..comparedToCategory = json['compared_to_category'] as String?
       ..packagings = (json['packagings'] as List<dynamic>?)
-          ?.map((e) => ProductPackaging.fromJson(e))
+          ?.map(ProductPackaging.fromJson)
           .toList()
       ..packagingsComplete =
           JsonHelper.boolFromJSON(json['packagings_complete'])
@@ -224,7 +224,8 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('labels_tags_in_languages',
       LanguageHelper.toJsonStringsListMap(instance.labelsTagsInLanguages));
   writeNotNull('packaging', instance.packaging);
-  writeNotNull('packagings', instance.packagings);
+  writeNotNull(
+      'packagings', JsonHelper.productPackagingsToJson(instance.packagings));
   val['packagings_complete'] =
       JsonHelper.boolToJSON(instance.packagingsComplete);
   writeNotNull('packaging_tags', instance.packagingTags);
