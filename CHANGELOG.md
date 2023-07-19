@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.7.1...v2.7.2) (2023-07-19)
+
+
+### Bug Fixes
+
+* issue with JSON conversion of packagings data ([#762](https://github.com/openfoodfacts/openfoodfacts-dart/issues/762)) ([01c1d7b](https://github.com/openfoodfacts/openfoodfacts-dart/commit/01c1d7b29da50dbaf17a0a375a54c34e7eee30a4))
+
 ## [2.7.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.7.0...v2.7.1) (2023-07-12)
 
 
