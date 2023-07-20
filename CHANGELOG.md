@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.3](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.7.2...v2.7.3) (2023-07-20)
+
+
+### Bug Fixes
+
+* issue with converting LocalizedTags to JSON ([#766](https://github.com/openfoodfacts/openfoodfacts-dart/issues/766)) ([80c3ddb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/80c3ddb3b5fa68643b36b685a80ce01f13130f5b))
+
 ## [2.7.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.7.1...v2.7.2) (2023-07-19)
 
 
