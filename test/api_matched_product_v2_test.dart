@@ -54,7 +54,7 @@ void main() {
     BARCODE_ORIENTALES: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
     BARCODE_HACK: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
     BARCODE_SCHNITZEL: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
-    BARCODE_CHIPOLATA: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
+    BARCODE_CHIPOLATA: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
     BARCODE_FLEISCHWURST: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
     BARCODE_POULET: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
     BARCODE_SAUCISSON: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
@@ -63,13 +63,13 @@ void main() {
     BARCODE_CHORIZO: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
   };
   final List<String> expectedBarcodeOrder = <String>[
+    BARCODE_CHIPOLATA,
     BARCODE_FLEISCHWURST,
     BARCODE_KNACKI,
     BARCODE_CORDONBLEU,
     BARCODE_ORIENTALES,
     BARCODE_HACK,
     BARCODE_SCHNITZEL,
-    BARCODE_CHIPOLATA,
     BARCODE_POULET,
     BARCODE_SAUCISSON,
     BARCODE_PIZZA,
