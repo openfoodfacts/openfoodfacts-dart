@@ -1,22 +1,22 @@
 name: openfoodfacts
 description: Dart package for the Open Food Facts API, a food products database made by everyone, for everyone.
 # The version is automatically, temporarily increased by the release workflow, changing it manually has no effect.
-version: 2.7.1
+version: 2.7.4
 homepage: https://github.com/openfoodfacts/openfoodfacts-dart
 
 environment:
-  sdk: '>=2.17.0 <3.0.0'
+  sdk: '>=2.17.0 <4.0.0'
 
 dependencies:
-  json_annotation: ^4.7.0
-  http: ^0.13.5
+  json_annotation: ^4.8.1
+  http: '>=0.13.5 <2.0.0'
   path: ^1.8.2 # 1.8.2 for flutter_test as of 2023-04-06
   meta: ^1.8.0
 
 dev_dependencies:
-  analyzer: ^4.7.0
-  build_runner: ^2.3.0
-  json_serializable: ^6.5.4
+  analyzer: ^6.0.0
+  build_runner: ^2.4.6
+  json_serializable: ^6.7.1
   lints: ^2.0.1
   test: ^1.21.4
   coverage: ^1.6.2

@@ -319,7 +319,11 @@ class Product extends JsonObject {
   @JsonKey(name: 'packaging', includeIfNull: false)
   String? packaging;
 
-  @JsonKey(name: 'packagings', includeIfNull: false)
+  @JsonKey(
+    name: 'packagings',
+    includeIfNull: false,
+    toJson: JsonHelper.productPackagingsToJson,
+  )
   List<ProductPackaging>? packagings;
 
   /// Is the "packagings" complete?

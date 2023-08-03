@@ -1148,15 +1148,12 @@ void main() {
     expect(result.product!.entryDates, hasLength(3));
   });
 
-  test('get new packagings field', () async {
+  group('$OpenFoodAPIClient get new packagings field', () {
     const String barcode = '3661344723290';
     const String searchTerms = 'skyr les 2 vaches';
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
     const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
     const ProductQueryVersion version = ProductQueryVersion.v3;
-
-    late ProductResultV3 productResult;
-    late SearchResult searchResult;
 
     void checkProduct(final Product product) {
       void checkLocalizedTag(final LocalizedTag? tag) {
@@ -1175,104 +1172,110 @@ void main() {
       }
     }
 
-    // checking PACKAGINGS as a single field on a barcode search
-    productResult = await OpenFoodAPIClient.getProductV3(
-      ProductQueryConfiguration(
-        barcode,
-        fields: [ProductField.PACKAGINGS],
-        language: language,
-        country: country,
-        version: version,
-      ),
-    );
-    expect(productResult.status, ProductResultV3.statusSuccess);
-    expect(productResult.product, isNotNull);
-    checkProduct(productResult.product!);
-
-    // checking PACKAGINGS as a part of ALL fields on a barcode search
-    productResult = await OpenFoodAPIClient.getProductV3(
-      ProductQueryConfiguration(
-        barcode,
-        fields: [ProductField.ALL],
-        language: language,
-        country: country,
-        version: version,
-      ),
-    );
-    expect(productResult.status, ProductResultV3.statusSuccess);
-    expect(productResult.product, isNotNull);
-    checkProduct(productResult.product!);
-
-    late bool found;
-    // checking PACKAGINGS as a single field on a search query
-    searchResult = await OpenFoodAPIClient.searchProducts(
-      null,
-      ProductSearchQueryConfiguration(
-        parametersList: [
-          SearchTerms(terms: [searchTerms])
-        ],
-        fields: [ProductField.PACKAGINGS, ProductField.BARCODE],
-        language: language,
-        country: country,
-        version: version,
-      ),
-    );
-    expect(searchResult.products, isNotNull);
-    expect(searchResult.products, isNotEmpty);
-    found = false;
-    for (final Product product in searchResult.products!) {
-      if (product.barcode != barcode) {
-        continue;
-      }
-      found = true;
-      checkProduct(product);
-    }
-    expect(found, isTrue);
-
-    // checking PACKAGINGS as a part of ALL fields on a search query
-    searchResult = await OpenFoodAPIClient.searchProducts(
-      null,
-      ProductSearchQueryConfiguration(
-        parametersList: [
-          SearchTerms(terms: [searchTerms])
-        ],
-        fields: [ProductField.ALL],
-        language: language,
-        country: country,
-        version: version,
-      ),
-    );
-    expect(searchResult.products, isNotNull);
-    expect(searchResult.products, isNotEmpty);
-    found = false;
-    for (final Product product in searchResult.products!) {
-      if (product.barcode != barcode) {
-        continue;
-      }
-      found = true;
-      checkProduct(product);
-    }
-    expect(found, isTrue);
-
-    // checking PACKAGINGS as a part of RAW fields on a search query
-    try {
-      searchResult = await OpenFoodAPIClient.searchProducts(
-        null,
-        ProductSearchQueryConfiguration(
-          parametersList: [
-            SearchTerms(terms: [searchTerms])
-          ],
-          fields: [ProductField.RAW],
+    test('as a single field on a barcode search', () async {
+      final ProductResultV3 productResult =
+          await OpenFoodAPIClient.getProductV3(
+        ProductQueryConfiguration(
+          barcode,
+          fields: [ProductField.PACKAGINGS],
           language: language,
           country: country,
           version: version,
         ),
       );
-    } catch (e) {
-      // In RAW mode the packagings are mere String's instead of LocalizedTag's.
-      // Therefore we expect an Exception.
-      return;
-    }
-    fail('On Raw');
+      expect(productResult.status, ProductResultV3.statusSuccess);
+      expect(productResult.product, isNotNull);
+      checkProduct(productResult.product!);
+    });
+
+    test('as a part of ALL fields on a barcode search', () async {
+      final ProductResultV3 productResult =
+          await OpenFoodAPIClient.getProductV3(
+        ProductQueryConfiguration(
+          barcode,
+          fields: [ProductField.ALL],
+          language: language,
+          country: country,
+          version: version,
+        ),
+      );
+      expect(productResult.status, ProductResultV3.statusSuccess);
+      expect(productResult.product, isNotNull);
+      checkProduct(productResult.product!);
+    });
+
+    test('as a single field on a search query', () async {
+      final SearchResult searchResult = await OpenFoodAPIClient.searchProducts(
+        null,
+        ProductSearchQueryConfiguration(
+          parametersList: [
+            SearchTerms(terms: [searchTerms])
+          ],
+          fields: [ProductField.PACKAGINGS, ProductField.BARCODE],
+          language: language,
+          country: country,
+          version: version,
+        ),
+      );
+      expect(searchResult.products, isNotNull);
+      expect(searchResult.products, isNotEmpty);
+      bool found = false;
+      for (final Product product in searchResult.products!) {
+        if (product.barcode != barcode) {
+          continue;
+        }
+        found = true;
+        checkProduct(product);
+      }
+      expect(found, isTrue);
+    });
+
+    test('as a part of ALL fields on a search query', () async {
+      final SearchResult searchResult = await OpenFoodAPIClient.searchProducts(
+        null,
+        ProductSearchQueryConfiguration(
+          parametersList: [
+            SearchTerms(terms: [searchTerms])
+          ],
+          fields: [ProductField.ALL],
+          language: language,
+          country: country,
+          version: version,
+        ),
+      );
+      expect(searchResult.products, isNotNull);
+      expect(searchResult.products, isNotEmpty);
+      bool found = false;
+      for (final Product product in searchResult.products!) {
+        if (product.barcode != barcode) {
+          continue;
+        }
+        found = true;
+        checkProduct(product);
+      }
+      expect(found, isTrue);
+    });
+
+    test('as a part of RAW fields on a search query', () async {
+      try {
+        await OpenFoodAPIClient.searchProducts(
+          null,
+          ProductSearchQueryConfiguration(
+            parametersList: [
+              SearchTerms(terms: [searchTerms])
+            ],
+            fields: [ProductField.RAW],
+            language: language,
+            country: country,
+            version: version,
+          ),
+        );
+      } catch (e) {
+        // In RAW mode the packagings are mere String's instead of LocalizedTag's.
+        // Therefore we expect an Exception.
+        return;
+      }
+      fail('On Raw');
+    });
   });
 }

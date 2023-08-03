@@ -25,6 +25,9 @@ class LocalizedTag extends JsonObject {
   factory LocalizedTag.fromJson(Map<String, dynamic> json) =>
       _$LocalizedTagFromJson(json);
 
+  static Map<String, dynamic> objToJson(LocalizedTag? tag) =>
+      tag != null ? tag.toJson() : {};
+
   @override
   Map<String, dynamic> toJson() => _$LocalizedTagToJson(this);
 

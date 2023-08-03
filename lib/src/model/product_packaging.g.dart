@@ -22,7 +22,11 @@ ProductPackaging _$ProductPackagingFromJson(Map<String, dynamic> json) =>
       ..weightMeasured = JsonObject.parseDouble(json['weight_measured']);
 
 Map<String, dynamic> _$ProductPackagingToJson(ProductPackaging instance) {
-  final val = <String, dynamic>{};
+  final val = <String, dynamic>{
+    'shape': LocalizedTag.objToJson(instance.shape),
+    'material': LocalizedTag.objToJson(instance.material),
+    'recycling': LocalizedTag.objToJson(instance.recycling),
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -30,9 +34,6 @@ Map<String, dynamic> _$ProductPackagingToJson(ProductPackaging instance) {
     }
   }
 
-  writeNotNull('shape', instance.shape);
-  writeNotNull('material', instance.material);
-  writeNotNull('recycling', instance.recycling);
   writeNotNull('number_of_units', instance.numberOfUnits);
   writeNotNull('quantity_per_unit', instance.quantityPerUnit);
   writeNotNull('weight_measured', instance.weightMeasured);

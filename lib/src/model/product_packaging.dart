@@ -8,15 +8,24 @@ part 'product_packaging.g.dart';
 @JsonSerializable()
 class ProductPackaging extends JsonObject {
   /// Shape, canonicalized using [TaxonomyPackagingShape].
-  @JsonKey(includeIfNull: false)
+  @JsonKey(
+    includeIfNull: false,
+    toJson: LocalizedTag.objToJson,
+  )
   LocalizedTag? shape;
 
   /// Material, canonicalized using [TaxonomyPackagingMaterial].
-  @JsonKey(includeIfNull: false)
+  @JsonKey(
+    includeIfNull: false,
+    toJson: LocalizedTag.objToJson,
+  )
   LocalizedTag? material;
 
   /// Recycling status, canonicalized using [TaxonomyPackagingRecycling].
-  @JsonKey(includeIfNull: false)
+  @JsonKey(
+    includeIfNull: false,
+    toJson: LocalizedTag.objToJson,
+  )
   LocalizedTag? recycling;
 
   /// Number of units of this component contained in the product.

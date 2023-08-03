@@ -71,7 +71,7 @@ void main() {
       expect(answer.field, isNotNull);
       expect(answer.field!.id, 'recycling');
       expect(answer.field!.value, '${language.offTag}:$unknownRecycling');
-    }, skip: 'Avoiding tests on TEST env');
+    });
 
     test('save packagings_complete', () async {
       final List<bool> values = [false, true, false];
@@ -117,9 +117,5 @@ void main() {
         expect(readStatus.product!.packagingsComplete, value);
       }
     });
-  },
-      timeout: Timeout(
-        // some tests can be slow here
-        Duration(seconds: 90),
-      ));
+  }, skip: 'Avoiding tests on TEST env');
 }

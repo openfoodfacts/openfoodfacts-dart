@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.7.4](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.7.3...v2.7.4) (2023-08-03)
+
+
+### Bug Fixes
+
+* 764 - upgraded sdk and http dependency ([#770](https://github.com/openfoodfacts/openfoodfacts-dart/issues/770)) ([adcd147](https://github.com/openfoodfacts/openfoodfacts-dart/commit/adcd147b22181847b5f4fcab38b4b1dc56250af5))
+
+## [2.7.3](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.7.2...v2.7.3) (2023-07-20)
+
+
+### Bug Fixes
+
+* issue with converting LocalizedTags to JSON ([#766](https://github.com/openfoodfacts/openfoodfacts-dart/issues/766)) ([80c3ddb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/80c3ddb3b5fa68643b36b685a80ce01f13130f5b))
+
+## [2.7.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.7.1...v2.7.2) (2023-07-19)
+
+
+### Bug Fixes
+
+* issue with JSON conversion of packagings data ([#762](https://github.com/openfoodfacts/openfoodfacts-dart/issues/762)) ([01c1d7b](https://github.com/openfoodfacts/openfoodfacts-dart/commit/01c1d7b29da50dbaf17a0a375a54c34e7eee30a4))
+
 ## [2.7.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.7.0...v2.7.1) (2023-07-12)
 
 
