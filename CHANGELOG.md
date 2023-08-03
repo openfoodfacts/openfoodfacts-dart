@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.4](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.7.3...v2.7.4) (2023-08-03)
+
+
+### Bug Fixes
+
+* 764 - upgraded sdk and http dependency ([#770](https://github.com/openfoodfacts/openfoodfacts-dart/issues/770)) ([adcd147](https://github.com/openfoodfacts/openfoodfacts-dart/commit/adcd147b22181847b5f4fcab38b4b1dc56250af5))
+
 ## [2.7.3](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.7.2...v2.7.3) (2023-07-20)
 
 
