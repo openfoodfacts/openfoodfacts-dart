@@ -3,6 +3,8 @@ github_actions:
 
 test:
 - test/**/*
+- test/api_getTaxonomyPackagingMaterialsServer_test.dart
+- test/api_getTaxonomyPackagingShapesServer_test.dart
 
 knowledge panels:
 - lib/model/knowledge_panel.g.dart
@@ -26,3 +28,11 @@ personalized search:
 
 folksonomy:
 - lib/folksonomy.dart
+
+packaging:
+- lib/model/TaxonomyPackagingMaterial.dart
+- lib/model/TaxonomyPackagingMaterial.g.dart
+- lib/model/TaxonomyPackagingShape.dart
+- lib/model/TaxonomyPackagingShape.g.dart
+- test/api_getTaxonomyPackagingMaterialsServer_test.dart
+- test/api_getTaxonomyPackagingShapesServer_test.dart
