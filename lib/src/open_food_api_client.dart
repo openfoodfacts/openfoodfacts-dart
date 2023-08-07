@@ -1199,7 +1199,7 @@ class OpenFoodAPIClient {
       'userid_or_email': emailOrUserID,
       'action': 'process',
       'type': 'send_email',
-      'submit': '.submit',
+      '.submit': 'Submit',
     };
 
     Status status = await HttpHelper().doMultipartRequest(
