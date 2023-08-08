@@ -1138,7 +1138,7 @@ class OpenFoodAPIClient {
     final OpenFoodFactsCountry? country,
     QueryType? queryType,
   }) async {
-    if (name.length > USER_NAME_MAX_LENGTH) {
+    if (user.userId.length > USER_NAME_MAX_LENGTH) {
       throw ArgumentError(
         'A username may not exceed $USER_NAME_MAX_LENGTH characters!',
       );
