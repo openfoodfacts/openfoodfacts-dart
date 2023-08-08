@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.8.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.7.4...v2.8.0) (2023-08-08)
+
+
+### Features
+
+* Registration/Password lost: better catch 504 errors from the server ([#777](https://github.com/openfoodfacts/openfoodfacts-dart/issues/777)) ([8cd4a35](https://github.com/openfoodfacts/openfoodfacts-dart/commit/8cd4a35c6f97678a0647f2c3b262df4ef11ca77c))
+
+
+### Bug Fixes
+
+* password reset not working ([#774](https://github.com/openfoodfacts/openfoodfacts-dart/issues/774)) ([8792510](https://github.com/openfoodfacts/openfoodfacts-dart/commit/8792510b1898302c49955131fd34164887ca2296))
+
 ## [2.7.4](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.7.3...v2.7.4) (2023-08-03)
 
 
