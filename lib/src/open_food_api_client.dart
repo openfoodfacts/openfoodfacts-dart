@@ -1224,7 +1224,7 @@ class OpenFoodAPIClient {
         body:
             'An email with a link to reset your password has been sent to the e-mail address associated with your account.',
       );
-    } else if (status.status is int && status.status != 500) {
+    } else if (status.status is int && status.status < 500) {
       return status.copyWith(status: 400);
     } else {
       /// Trigger real 5xx errors
