@@ -101,6 +101,7 @@ class SignUpStatus extends Status {
         SignUpStatusError.INVALID_PASSWORD,
     'The user name must contain only unaccented letters, digits and dashes.':
         SignUpStatusError.INVALID_USERNAME,
+    '504 Gateway Time-out': SignUpStatusError.SERVER_BUSY,
   };
 }
 
@@ -121,6 +122,9 @@ enum SignUpStatusError {
 
   /// The password is incorrect (too short)
   INVALID_PASSWORD,
+
+  /// When the server is down (504 Gateway timeout)
+  SERVER_BUSY,
 
   /// Generic error
   UNKNOWN,
