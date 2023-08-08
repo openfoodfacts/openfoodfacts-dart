@@ -1184,7 +1184,12 @@ class OpenFoodAPIClient {
 
   /// Uses reset_password.pl to send a password reset Email
   /// needs only
-  /// Returns [Status.status] 200 = complete; 400 = wrong inputs or other error + [Status.error]; 500 = server error;
+  /// Returns [Status.status]
+  /// - 200 = complete;
+  /// - 400 = wrong inputs or other error + [Status.error];
+  /// Note: for this particular case, the error may be parsed from the website
+  /// (if called from a non-English env)
+  /// - 500 = server error;
   static Future<Status> resetPassword(
     String emailOrUserID, {
     QueryType? queryType,
@@ -1225,7 +1230,29 @@ class OpenFoodAPIClient {
             'An email with a link to reset your password has been sent to the e-mail address associated with your account.',
       );
     } else {
-      return status.copyWith(status: 400);
+      final String? errorMessage;
+
+      /// Let's try to parse the website with the content between <li></li> tags
+      final Iterable<RegExpMatch> allMatches =
+          RegExp('(<li class="error">)(.*?)(</li>)').allMatches(status.error!);
+      if (allMatches.isNotEmpty) {
+        final StringBuffer buffer = StringBuffer();
+        for (final RegExpMatch match in allMatches) {
+          if (buffer.isNotEmpty) {
+            buffer.write('\n\n');
+          }
+
+          buffer.write(match.group(2));
+        }
+        errorMessage = buffer.toString();
+      } else {
+        errorMessage = status.error;
+      }
+
+      return Status(
+        status: 400,
+        body: errorMessage,
+      );
     }
   }
 
