@@ -111,7 +111,7 @@
   final OpenFoodFactsCountry? country,
   QueryType? queryType,
 }) async {
-  if (name.length &gt; USER_NAME_MAX_LENGTH) {
+  if (user.userId.length &gt; USER_NAME_MAX_LENGTH) {
     throw ArgumentError(
       &#39;A username may not exceed $USER_NAME_MAX_LENGTH characters!&#39;,
     );
