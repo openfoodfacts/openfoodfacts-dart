@@ -1,19 +1,22 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 import 'package:path/path.dart';
+
+import '../model/status.dart';
+import '../model/user.dart';
 import 'open_food_api_configuration.dart';
 import 'query_type.dart';
 import 'uri_reader.dart';
-import '../model/status.dart';
-import '../model/user.dart';
 
 /// General functions for sending http requests (post, get, multipart, ...)
 class HttpHelper {
   /// Gets the instance
   static HttpHelper get instance => _instance ??= HttpHelper.internal();
   static HttpHelper? _instance;
+
   @visibleForTesting
   static set instance(HttpHelper value) => _instance = value;
 
@@ -173,22 +176,32 @@ class HttpHelper {
     }
 
     // get the response status
-    Status status = await request.send().then((response) {
-      if (response.statusCode == 200) {
-        return response.stream.first.then((responseBody) {
-          try {
-            return Status.fromJson(jsonDecode(utf8.decode(responseBody)));
-          } catch (e) {
-            //When the server returns html instead of json
-            return Status(status: 200, body: utf8.decode(responseBody));
-          }
-        });
-      } else {
-        return Status(
-            status: response.statusCode, error: response.reasonPhrase);
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      String responseBody = await _extractResponseAsString(response);
+      try {
+        return Status.fromJson(jsonDecode(responseBody));
+      } catch (e) {
+        //When the server returns html instead of JSON
+        return Status(status: 200, body: responseBody);
       }
-    });
-    return status;
+    } else {
+      return Status(
+        status: response.statusCode,
+        error: response.reasonPhrase,
+      );
+    }
+  }
+
+  Future<String> _extractResponseAsString(
+      http.StreamedResponse response) async {
+    final Completer<String> completer = Completer<String>();
+    final StringBuffer contents = StringBuffer();
+    response.stream.transform(utf8.decoder).listen((data) {
+      contents.write(data);
+    }, onDone: () => completer.complete(contents.toString()));
+    return completer.future;
   }
 
   /// Returns the request headers.
