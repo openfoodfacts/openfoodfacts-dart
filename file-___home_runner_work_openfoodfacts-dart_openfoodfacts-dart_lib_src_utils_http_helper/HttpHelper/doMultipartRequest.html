@@ -118,22 +118,22 @@ As result a json object of the "type" Status is expected.</p>
   }
 
   &#47;&#47; get the response status
-  Status status = await request.send().then((response) {
-    if (response.statusCode == 200) {
-      return response.stream.first.then((responseBody) {
-        try {
-          return Status.fromJson(jsonDecode(utf8.decode(responseBody)));
-        } catch (e) {
-          &#47;&#47;When the server returns html instead of json
-          return Status(status: 200, body: utf8.decode(responseBody));
-        }
-      });
-    } else {
-      return Status(
-          status: response.statusCode, error: response.reasonPhrase);
+  http.StreamedResponse response = await request.send();
+
+  if (response.statusCode == 200) {
+    String responseBody = await _extractResponseAsString(response);
+    try {
+      return Status.fromJson(jsonDecode(responseBody));
+    } catch (e) {
+      &#47;&#47;When the server returns html instead of JSON
+      return Status(status: 200, body: responseBody);
     }
-  });
-  return status;
+  } else {
+    return Status(
+      status: response.statusCode,
+      error: response.reasonPhrase,
+    );
+  }
 }</code></pre>
 </section>
 
