@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.8.0...v2.9.0) (2023-08-09)
+
+
+### Features
+
+* Multipart requests: ensure to always get the full response ([#779](https://github.com/openfoodfacts/openfoodfacts-dart/issues/779)) ([e53c7fd](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e53c7fd91d67712f065be54974d09b8ded8b912c))
+
 ## [2.8.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.7.4...v2.8.0) (2023-08-08)
 
 
