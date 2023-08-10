@@ -1128,6 +1128,9 @@ class OpenFoodAPIClient {
   ///  }
   /// ```
   ///
+  /// If the user wants to receive the [newsletter], by default it will be in
+  /// English. If you want to change this behavior, please provide a [language]
+  /// and/or a [country] for a localized content.
   static Future<SignUpStatus> register({
     required User user,
     required String name,
@@ -1185,15 +1188,28 @@ class OpenFoodAPIClient {
   /// Uses reset_password.pl to send a password reset Email
   /// needs only
   /// Returns [Status.status] 200 = complete; 400 = wrong inputs or other error + [Status.error]; 500 = server error;
+  ///
+  /// By default the email will be sent in English, please provide a [language]
+  /// and/or a [country] to have a localized content
   static Future<Status> resetPassword(
     String emailOrUserID, {
     QueryType? queryType,
+    final OpenFoodFactsLanguage? language,
+    final OpenFoodFactsCountry? country,
   }) async {
     var passwordResetUri = UriHelper.getUri(
       path: '/cgi/reset_password.pl',
       queryType: queryType,
       addUserAgentParameters: false,
     );
+
+    if (language != null || country != null) {
+      passwordResetUri = UriHelper.replaceSubdomain(
+        passwordResetUri,
+        language: language,
+        country: country,
+      );
+    }
 
     Map<String, String> data = <String, String>{
       'userid_or_email': emailOrUserID,
