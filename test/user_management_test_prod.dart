@@ -130,6 +130,19 @@ void main() {
 
     expect(status.status, 200);
   });
+
+  test('Reset password in French', () async {
+    Status status = await OpenFoodAPIClient.resetPassword(
+      TestConstants.TEST_USER.userId,
+      language: OpenFoodFactsLanguage.FRENCH,
+    );
+
+    expect(
+      status.body!,
+      contains(
+          'Un e-mail avec un lien pour vous permettre de changer le mot de passe a été envoyé'),
+    );
+  });
 }
 
 String _generateRandomString(int length) {
