@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.10.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.9.0...v2.10.0) (2023-08-12)
+
+
+### Features
+
+* Reset password: allow to receive "translated" email ([#781](https://github.com/openfoodfacts/openfoodfacts-dart/issues/781)) ([a82a699](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a82a699110f79a0fc0ab70d9d1267d5cdd6332dc))
+
+
+### Bug Fixes
+
+* unit test values ([#783](https://github.com/openfoodfacts/openfoodfacts-dart/issues/783)) ([61c1ec1](https://github.com/openfoodfacts/openfoodfacts-dart/commit/61c1ec17903775e6873d917a85e3da0bdeff71e6))
+
 ## [2.9.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.8.0...v2.9.0) (2023-08-09)
 
 
