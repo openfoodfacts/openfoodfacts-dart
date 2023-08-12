@@ -87,8 +87,8 @@ void main() {
         () async => checkTypeCount(
               OpenFoodFactsCountry.FRANCE,
               'Carrefour',
-              // 2023-07-09: was 23054
-              20000,
+              // 2023-08-12: was 14778
+              10000,
             ));
 
     test(

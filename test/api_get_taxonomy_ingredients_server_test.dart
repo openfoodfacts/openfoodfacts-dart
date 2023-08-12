@@ -41,7 +41,7 @@ void main() {
         TaxonomyIngredientQueryConfiguration.roots(fields: fields),
       );
       expect(ingredients, isNotNull);
-      expect(ingredients!.length, greaterThan(800)); // was 816 on 2022-09-23
+      expect(ingredients!.length, greaterThan(700)); // was 795 on 2023-08-12
       for (final TaxonomyIngredient ingredient in ingredients.values) {
         // no parents for roots
         expect(ingredient.parents, isNull);
