@@ -32,12 +32,26 @@ enum MatchedProductStatusV2 {
 
 /// Score of a product according to preferences.
 ///
-/// For performance reasons we store just the barcode, not the product.
+/// For performance (memory) reasons we store just the barcode, not the product.
+/// For performance (memory) reasons we store explanations only if needed.
+/// Typical usage of explanations:
+/// * if status is [MatchedProductStatusV2.UNKNOWN_MATCH]
+///   * first check - it's because there were unknown mandatory attributes,
+///   listed in [unknownMandatoryAttributes] (check if not null).
+///   * or it's because there were too many unknown attributes, listed in
+///   [unknownAttributes] (check if not null).
+///   * or it's because there is no data in the product (if both
+///   [unknownMandatoryAttributes] and [unknownAttributes] are null).
+/// * if status is [MatchedProductStatusV2.MAY_NOT_MATCH]
+///   * the problematic attributes are listed in [mayNotMatchAttributes].
+/// * if status is [MatchedProductStatusV2.DOES_NOT_MATCH]
+///   * the problematic attributes are listed in [doesNotMatchAttributes].
 class MatchedScoreV2 {
   MatchedScoreV2(
     final Product product,
-    final ProductPreferencesManager productPreferencesManager,
-  ) : barcode = product.barcode! {
+    final ProductPreferencesManager productPreferencesManager, {
+    final bool withExplanations = false,
+  }) : barcode = product.barcode! {
     _score = 0;
     _debug = '';
 
@@ -76,8 +90,16 @@ class MatchedScoreV2 {
 
         if (attribute.status == Attribute.STATUS_UNKNOWN) {
           sumOfFactorsForUnknownAttributes += factor;
+          if (withExplanations) {
+            _unknownAttributes ??= <Attribute>[];
+            _unknownAttributes!.add(attribute);
+          }
           if (importanceId == PreferenceImportance.ID_MANDATORY) {
             isUnknown = true;
+            if (withExplanations) {
+              _unknownMandatoryAttributes ??= <Attribute>[];
+              _unknownMandatoryAttributes!.add(attribute);
+            }
           }
         } else {
           _score += match * factor;
@@ -87,10 +109,18 @@ class MatchedScoreV2 {
             if (match <= 10) {
               // Mandatory attribute with a very bad score (e.g. contains an allergen) -> status: does not match
               doesNotMatch = true;
+              if (withExplanations) {
+                _doesNotMatchAttributes ??= <Attribute>[];
+                _doesNotMatchAttributes!.add(attribute);
+              }
             }
             // Mandatory attribute with a bad score (e.g. may contain traces of an allergen) -> status: may not match
             else if (match <= 50) {
               mayNotMatch = true;
+              if (withExplanations) {
+                _mayNotMatchAttributes ??= <Attribute>[];
+                _mayNotMatchAttributes!.add(attribute);
+              }
             }
           }
         }
@@ -133,12 +163,41 @@ class MatchedScoreV2 {
   late MatchedProductStatusV2 _status;
   String _debug = '';
   int _initialOrder = 0;
+  List<Attribute>? _unknownAttributes;
+  List<Attribute>? _unknownMandatoryAttributes;
+  List<Attribute>? _doesNotMatchAttributes;
+  List<Attribute>? _mayNotMatchAttributes;
 
   double get score => _score;
 
   MatchedProductStatusV2 get status => _status;
 
   String get debug => _debug;
+
+  /// List of attributes that potentially provoked an "unknown match".
+  ///
+  /// Will be null if "withExplanations" is false, or if there were no related
+  /// attributes.
+  List<Attribute>? get unknownAttributes => _unknownAttributes;
+
+  /// List of mandatory attributes that provoked an "unknown match".
+  ///
+  /// Will be null if "withExplanations" is false, or if there were no related
+  /// attributes.
+  List<Attribute>? get unknownMandatoryAttributes =>
+      _unknownMandatoryAttributes;
+
+  /// List of attributes that provoked a "does not match".
+  ///
+  /// Will be null if "withExplanations" is false, or if there were no related
+  /// attributes.
+  List<Attribute>? get doesNotMatchAttributes => _doesNotMatchAttributes;
+
+  /// List of attributes that provoked a "may not match".
+  ///
+  /// Will be null if "withExplanations" is false, or if there were no related
+  /// attributes.
+  List<Attribute>? get mayNotMatchAttributes => _mayNotMatchAttributes;
 
   /// Weights for score
   static const Map<String, int> _preferencesFactors = <String, int>{

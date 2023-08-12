@@ -1,5 +1,6 @@
 import 'preference_importance.dart';
 import '../utils/http_helper.dart';
+import '../utils/language_helper.dart';
 
 /// Referential of preference importance, with loader.
 class AvailablePreferenceImportances {
@@ -43,8 +44,14 @@ class AvailablePreferenceImportances {
 
   /// Where a localized JSON file can be found.
   /// [languageCode] is a 2-letter language code.
+  // TODO: deprecated from 2023-08-12; remove when old enough
+  @Deprecated('Use getLocalizedUrl instead')
   static String getUrl(final String languageCode) =>
       'https://world.openfoodfacts.org/api/v2/preferences?lc=$languageCode';
+
+  /// Where a localized JSON file can be found.
+  static String getLocalizedUrl(final OpenFoodFactsLanguage language) =>
+      'https://world.openfoodfacts.org/api/v2/preferences?lc=${language.code}';
 
   /// Returns the index of an importance.
   ///

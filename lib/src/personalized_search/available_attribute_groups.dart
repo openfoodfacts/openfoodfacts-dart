@@ -1,5 +1,6 @@
 import '../model/attribute_group.dart';
 import '../utils/http_helper.dart';
+import '../utils/language_helper.dart';
 
 /// Referential of attribute groups, with loader.
 class AvailableAttributeGroups {
@@ -25,6 +26,12 @@ class AvailableAttributeGroups {
 
   /// Where a localized JSON file can be found.
   /// [languageCode] is a 2-letter language code.
+  // TODO: deprecated from 2023-08-12; remove when old enough
+  @Deprecated('Use getLocalizedUrl instead')
   static String getUrl(final String languageCode) =>
       'https://world.openfoodfacts.org/api/v2/attribute_groups?lc=$languageCode';
+
+  /// Where a localized JSON file can be found.
+  static String getLocalizedUrl(final OpenFoodFactsLanguage language) =>
+      'https://world.openfoodfacts.org/api/v2/attribute_groups?lc=${language.code}';
 }

@@ -32,11 +32,10 @@ void main() {
           notify: () => refreshCounter++,
         ),
       );
-      final String languageCode = language.code;
       final String importanceUrl =
-          AvailablePreferenceImportances.getUrl(languageCode);
+          AvailablePreferenceImportances.getLocalizedUrl(language);
       final String attributeGroupUrl =
-          AvailableAttributeGroups.getUrl(languageCode);
+          AvailableAttributeGroups.getLocalizedUrl(language);
       http.Response response;
       response = await http.get(Uri.parse(importanceUrl));
       expect(response.statusCode, HTTP_OK);

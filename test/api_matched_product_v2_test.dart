@@ -14,12 +14,18 @@ class _Score {
 void main() {
   const int HTTP_OK = 200;
 
-  const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+  late OpenFoodFactsLanguage language;
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
   OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
-  OpenFoodAPIConfiguration.globalLanguages = <OpenFoodFactsLanguage>[language];
+
+  void setLanguage(final OpenFoodFactsLanguage newLanguage) {
+    language = newLanguage;
+    OpenFoodAPIConfiguration.globalLanguages = <OpenFoodFactsLanguage>[
+      language
+    ];
+  }
 
   const String BARCODE_KNACKI = '7613035937420';
   const String BARCODE_CORDONBLEU = '4000405005026';
@@ -113,11 +119,10 @@ void main() {
             PreferenceImportance.ID_NOT_IMPORTANT,
       ),
     );
-    final String languageCode = language.code;
     final String importanceUrl =
-        AvailablePreferenceImportances.getUrl(languageCode);
+        AvailablePreferenceImportances.getLocalizedUrl(language);
     final String attributeGroupUrl =
-        AvailableAttributeGroups.getUrl(languageCode);
+        AvailableAttributeGroups.getLocalizedUrl(language);
     http.Response response;
     response = await http.get(Uri.parse(importanceUrl));
     expect(response.statusCode, HTTP_OK);
@@ -140,6 +145,8 @@ void main() {
   /// Tests around Matched Product v2.
   group('$OpenFoodAPIClient matched product v2', () {
     test('matched product', () async {
+      setLanguage(OpenFoodFactsLanguage.FRENCH);
+
       final ProductPreferencesManager manager = await getManager();
 
       final List<Product> products = await downloadProducts();
@@ -157,10 +164,17 @@ void main() {
         final _Score score = expectedScores[barcode]!;
         expect(matched.status, score.status);
         expect(matched.score, score.score);
+        // we didn't ask explicitly for explanations
+        expect(matched.mayNotMatchAttributes, isNull);
+        expect(matched.doesNotMatchAttributes, isNull);
+        expect(matched.unknownMandatoryAttributes, isNull);
+        expect(matched.unknownAttributes, isNull);
       }
     });
 
     test('matched score', () async {
+      setLanguage(OpenFoodFactsLanguage.FRENCH);
+
       final ProductPreferencesManager manager = await getManager();
 
       final List<Product> products = await downloadProducts();
@@ -180,7 +194,84 @@ void main() {
         final _Score score = expectedScores[barcode]!;
         expect(matched.status, score.status);
         expect(matched.score, score.score);
+        // we didn't ask explicitly for explanations
+        expect(matched.mayNotMatchAttributes, isNull);
+        expect(matched.doesNotMatchAttributes, isNull);
+        expect(matched.unknownMandatoryAttributes, isNull);
+        expect(matched.unknownAttributes, isNull);
       }
     });
+
+    Future<void> checkExplanations(
+      final OpenFoodFactsLanguage language,
+      final String unknownMatchLabel,
+      final String doesNotMatchLabel,
+    ) async {
+      setLanguage(language);
+
+      final ProductPreferencesManager manager = await getManager();
+
+      final List<Product> products = await downloadProducts();
+
+      final List<MatchedScoreV2> actuals = <MatchedScoreV2>[];
+      for (final Product product in products) {
+        actuals.add(
+          MatchedScoreV2(
+            product,
+            manager,
+            // explicitly asking for explanations
+            withExplanations: true,
+          ),
+        );
+      }
+
+      for (final MatchedScoreV2 matched in actuals) {
+        switch (matched.status) {
+          case MatchedProductStatusV2.UNKNOWN_MATCH:
+            expect(matched.unknownMandatoryAttributes, hasLength(1));
+            expect(
+              matched.unknownMandatoryAttributes!.first.title,
+              unknownMatchLabel,
+            );
+            expect(matched.unknownAttributes, hasLength(1));
+            expect(
+              matched.unknownAttributes!.first.title,
+              unknownMatchLabel,
+            );
+            break;
+          case MatchedProductStatusV2.DOES_NOT_MATCH:
+            expect(matched.doesNotMatchAttributes, hasLength(1));
+            expect(
+              matched.doesNotMatchAttributes!.first.title,
+              doesNotMatchLabel,
+            );
+            break;
+          case MatchedProductStatusV2.VERY_GOOD_MATCH:
+            break;
+          case MatchedProductStatusV2.GOOD_MATCH:
+          case MatchedProductStatusV2.POOR_MATCH:
+          case MatchedProductStatusV2.MAY_NOT_MATCH:
+            fail('Unexpected status: ${matched.status}');
+        }
+      }
+    }
+
+    test(
+      'score explanations FR',
+      () async => checkExplanations(
+        OpenFoodFactsLanguage.FRENCH,
+        'Caractère végétarien inconnu',
+        'Non végétarien',
+      ),
+    );
+
+    test(
+      'score explanations EN',
+      () async => checkExplanations(
+        OpenFoodFactsLanguage.ENGLISH,
+        'Vegetarian status unknown',
+        'Non-vegetarian',
+      ),
+    );
   });
 }
