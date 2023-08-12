@@ -823,10 +823,10 @@ void main() {
       // There were too many results for FRANCE, and that made the server crash.
       // That's why we add a filter on STORES.
       const Map<int, int> novaMinCounts = <int, int>{
-        1: 2000, // was 2138 on 2023-07-09
-        2: 400, // was 460 on 2023-07-09
-        3: 4000, // was 4301 on 2023-07-09
-        4: 10000, // was 10973 on 2023-07-09
+        1: 1500, // was 1777 on 2023-08-12
+        2: 300, // was 352 on 2023-08-12
+        3: 3000, // was 3654 on 2023-08-12
+        4: 7000, // was 8558 on 2023-08-12
       };
 
       // single filters
