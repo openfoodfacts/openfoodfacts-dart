@@ -51,7 +51,11 @@
 </header>
 <main>
 
-  <div id="dartdoc-main-content" class="main-content">
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product&#47;MatchedProduct-class-sidebar.html"
+      data-below-sidebar="">
       <div>
 <h1><span class="kind-constructor">MatchedProduct</span> constructor 
 </h1></div>
@@ -69,102 +73,29 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">MatchedProduct(
-  this.product,
-  final ProductPreferencesManager productPreferencesManager,
-) {
-  final List&lt;AttributeGroup&gt;? attributeGroups = product.attributeGroups;
-  if (attributeGroups == null) {
-    _status = null;
-    return;
-  }
-  _status = MatchedProductStatus.YES;
-  for (final AttributeGroup group in attributeGroups) {
-    if (group.attributes != null) {
-      for (final Attribute attribute in group.attributes!) {
-        final PreferenceImportance? preferenceImportance =
-            productPreferencesManager.getPreferenceImportanceFromImportanceId(
-          productPreferencesManager.getImportanceIdForAttributeId(
-            attribute.id!,
-          ),
-        );
-        if (preferenceImportance != null) {
-          final String? importanceId = preferenceImportance.id;
-          final int factor = preferenceImportance.factor ?? 0;
-          final int? minimalMatch = preferenceImportance.minimalMatch;
-          if (importanceId == null || factor == 0) {
-            _debug += &#39;${attribute.id} $importanceId\n&#39;;
-          } else {
-            if (attribute.status == Attribute.STATUS_UNKNOWN) {
-              if (_status == MatchedProductStatus.YES) {
-                _status = MatchedProductStatus.UNKNOWN;
-              }
-            } else {
-              _debug +=
-                  &#39;${attribute.id} $importanceId - match: ${attribute.match}\n&#39;;
-              _score += (attribute.match ?? 0) * factor;
-              if (minimalMatch != null &amp;&amp;
-                  (attribute.match ?? 0) &lt;= minimalMatch) {
-                _status = MatchedProductStatus.NO;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">MatchedProduct</code></pre>
 </section>
 
 
   </div> <!-- /.main-content -->
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    <header id="header-search-sidebar" class="hidden-l">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
   <form class="search-sidebar" role="search">
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
 </header>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-  <li><a href="../../index.html">openfoodfacts</a></li>
-  <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product-library.html">matched_product</a></li>
-  <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct-class.html">MatchedProduct</a></li>
-  <li class="self-crumb">MatchedProduct constructor</li>
+    <li><a href="../../index.html">openfoodfacts</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product-library.html">matched_product</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct-class.html">MatchedProduct</a></li>
+    <li class="self-crumb">MatchedProduct constructor</li>
 </ol>
 
 
     <h5>MatchedProduct class</h5>
-    <ol>
-
-        <li class="section-title"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct-class.html#constructors">Constructors</a></li>
-          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct/MatchedProduct.html">MatchedProduct</a></li>
-
-
-        <li class="section-title">
-          <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct-class.html#instance-properties">Properties</a>
-        </li>
-          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct/debug.html">debug</a></li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/3.0.7/dart-core/Object/hashCode.html">hashCode</a></li>
-          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct/product.html">product</a></li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/3.0.7/dart-core/Object/runtimeType.html">runtimeType</a></li>
-          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct/score.html">score</a></li>
-          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct/status.html">status</a></li>
-
-        <li class="section-title inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct-class.html#instance-methods">Methods</a></li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/3.0.7/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/3.0.7/dart-core/Object/toString.html">toString</a></li>
-
-        <li class="section-title inherited"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct-class.html#operators">Operators</a></li>
-          <li class="inherited"><a href="https://api.dart.dev/stable/3.0.7/dart-core/Object/operator_equals.html">operator ==</a></li>
-
-
-
-        <li class="section-title"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct-class.html#static-methods">Static methods</a></li>
-          <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct/sort.html">sort</a></li>
-
-</ol>
-
   </div><!--/.sidebar-offcanvas-left-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
