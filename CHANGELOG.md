@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.10.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.10.0...v2.10.1) (2023-08-17)
+
+
+### Bug Fixes
+
+* reset password checks with languages ([#787](https://github.com/openfoodfacts/openfoodfacts-dart/issues/787)) ([0fee449](https://github.com/openfoodfacts/openfoodfacts-dart/commit/0fee44994f1e236748ccec989f87053b5011e972))
+
 ## [2.10.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.9.0...v2.10.0) (2023-08-12)
 
 
