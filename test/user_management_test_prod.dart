@@ -124,24 +124,62 @@ void main() {
     expect(status.userId, TestConstants.PROD_USER.userId);
   });
 
-  test('Reset password', () async {
-    Status status =
-        await OpenFoodAPIClient.resetPassword(TestConstants.TEST_USER.userId);
+  group('reset password', () {
+    final String existingUser = TestConstants.TEST_USER.userId;
+    final String notExistingUser =
+        '${TestConstants.TEST_USER.userId}...@comfjdklf';
+    const int okStatus = 200;
+    const int koStatus = 400;
 
-    expect(status.status, 200);
-  });
+    test('Reset password for existing user (no country, no language)',
+        () async {
+      final Status status = await OpenFoodAPIClient.resetPassword(
+        existingUser,
+      );
+      expect(status.status, okStatus);
+    });
 
-  test('Reset password in French', () async {
-    Status status = await OpenFoodAPIClient.resetPassword(
-      TestConstants.TEST_USER.userId,
-      language: OpenFoodFactsLanguage.FRENCH,
-    );
+    test('Reset password for not existing user (no country, no language)',
+        () async {
+      final Status status = await OpenFoodAPIClient.resetPassword(
+        notExistingUser,
+      );
+      expect(status.status, koStatus);
+    });
 
-    expect(
-      status.body!,
-      contains(
-          'Un e-mail avec un lien pour vous permettre de changer le mot de passe a été envoyé'),
-    );
+    test('Reset password in French for existing user', () async {
+      final Status status = await OpenFoodAPIClient.resetPassword(
+        existingUser,
+        language: OpenFoodFactsLanguage.FRENCH,
+      );
+      expect(status.status, okStatus);
+    });
+
+    test('Reset password in French for not existing user', () async {
+      final Status status = await OpenFoodAPIClient.resetPassword(
+        notExistingUser,
+        language: OpenFoodFactsLanguage.FRENCH,
+      );
+      expect(status.status, koStatus);
+    });
+
+    test('Reset password in BE_nl for existing user', () async {
+      final Status status = await OpenFoodAPIClient.resetPassword(
+        existingUser,
+        language: OpenFoodFactsLanguage.DUTCH,
+        country: OpenFoodFactsCountry.BELGIUM,
+      );
+      expect(status.status, okStatus);
+    });
+
+    test('Reset password in BE_nl for not existing user', () async {
+      final Status status = await OpenFoodAPIClient.resetPassword(
+        notExistingUser,
+        language: OpenFoodFactsLanguage.DUTCH,
+        country: OpenFoodFactsCountry.BELGIUM,
+      );
+      expect(status.status, koStatus);
+    });
   });
 }
 

@@ -1186,8 +1186,10 @@ class OpenFoodAPIClient {
   }
 
   /// Uses reset_password.pl to send a password reset Email
-  /// needs only
-  /// Returns [Status.status] 200 = complete; 400 = wrong inputs or other error + [Status.error]; 500 = server error;
+  ///
+  /// Returns a [Status]
+  /// * if [Status.status] == 200, that's OK
+  /// * if [Status.status] == 400, wrong inputs or other error
   ///
   /// By default the email will be sent in English, please provide a [language]
   /// and/or a [country] to have a localized content
@@ -1197,7 +1199,7 @@ class OpenFoodAPIClient {
     final OpenFoodFactsLanguage? language,
     final OpenFoodFactsCountry? country,
   }) async {
-    var passwordResetUri = UriHelper.getUri(
+    Uri passwordResetUri = UriHelper.getUri(
       path: '/cgi/reset_password.pl',
       queryType: queryType,
       addUserAgentParameters: false,
@@ -1211,14 +1213,14 @@ class OpenFoodAPIClient {
       );
     }
 
-    Map<String, String> data = <String, String>{
+    final Map<String, String> data = <String, String>{
       'userid_or_email': emailOrUserID,
       'action': 'process',
       'type': 'send_email',
       '.submit': 'Submit',
     };
 
-    Status status = await HttpHelper().doMultipartRequest(
+    final Status status = await HttpHelper().doMultipartRequest(
       passwordResetUri,
       data,
       queryType: queryType,
@@ -1229,23 +1231,32 @@ class OpenFoodAPIClient {
         error:
             'No response, open an issue here: https://github.com/openfoodfacts/openfoodfacts-dart/issues/new',
       );
-    } else if (status.body!.contains('There is no account with this email')) {
-      return Status(
-        status: 400,
-        body: 'There is no account with this email',
-      );
-    } else if (status.body!.contains('has been sent to the e-mail address')) {
-      return Status(
-        status: 200,
-        body:
-            'An email with a link to reset your password has been sent to the e-mail address associated with your account.',
-      );
-    } else if (status.status is int && status.status < 500) {
-      return status.copyWith(status: 400);
-    } else {
-      /// Trigger real 5xx errors
-      return status;
     }
+    // Possible strings found in the resulting html.
+    // Basically, if we see explicit errors or an html form, it's not good.
+    const List<String> errors = <String>[
+      // display of single errors
+      '<li class="error">',
+      // display of errors: start
+      '<!-- start templates/web/common/includes/error_list.tt.html -->',
+      // display of errors: end
+      '<!-- end templates/web/common/includes/error_list.tt.html -->',
+      // html label for user form field
+      '<label for="userid_or_email">',
+      // html form
+      '<form method="post" action="/cgi/reset_password.pl" enctype="multipart/form-data">',
+    ];
+    for (final String error in errors) {
+      if (status.body!.contains(error)) {
+        return Status(
+          status: 400,
+          // I know, that's a bit bold to say so.
+          body: 'There is no account with this email',
+        );
+      }
+    }
+    // if we're lucky, we'll have a 200 status.
+    return status;
   }
 
   /// Returns the nutrient hierarchy specific to a country, localized.
