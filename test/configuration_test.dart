@@ -4,19 +4,36 @@ import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {
-  OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
+  setUp(() {
+    OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
+    OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
+  });
+
+  test('Get Uri with no user agent', () {
+    OpenFoodAPIConfiguration.userAgent = null;
+
+    expect(
+      () => UriHelper.getUri(
+        path: '/test/test.pl',
+      ),
+      throwsA(
+        const TypeMatcher<AssertionError>(),
+      ),
+    );
+  });
 
   test('Get Uri', () {
-    OpenFoodAPIConfiguration.userAgent = null;
     OpenFoodAPIConfiguration.uuid = null;
+
     Uri uri = UriHelper.getUri(
       path: '/test/test.pl',
     );
+
     expect(
-      uri.toString(),
-      'https://world.openfoodfacts.org/test/test.pl',
+      uri.replace(query: '').toString(),
+      'https://world.openfoodfacts.org/test/test.pl?',
     );
+    expect(uri.queryParameters, HttpHelper.addUserAgentParameters(null));
 
     Uri uri1 = UriHelper.getUri(
       path: '/test/test.pl',
@@ -24,7 +41,7 @@ void main() {
     );
     expect(
       uri1.toString(),
-      'https://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD',
+      'https://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD&$_appName',
     );
   });
 
@@ -75,7 +92,6 @@ void main() {
 
   test('Get Uri with uuid', () {
     const String uuid = 'uuidTest';
-    OpenFoodAPIConfiguration.userAgent = null;
     OpenFoodAPIConfiguration.uuid = uuid;
     Uri uri;
 
@@ -84,7 +100,7 @@ void main() {
     );
     expect(
       uri.toString(),
-      'https://world.openfoodfacts.org/test/test.pl?app_uuid=$uuid',
+      'https://world.openfoodfacts.org/test/test.pl?$_appName&app_uuid=$uuid',
     );
 
     uri = UriHelper.getUri(
@@ -93,7 +109,7 @@ void main() {
     );
     expect(
       uri.toString(),
-      'https://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD&app_uuid=$uuid',
+      'https://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD&$_appName&app_uuid=$uuid',
     );
 
     uri = UriHelper.getUri(
@@ -117,7 +133,6 @@ void main() {
   });
 
   test('Get Test Uri', () {
-    OpenFoodAPIConfiguration.userAgent = null;
     OpenFoodAPIConfiguration.uuid = null;
     Uri uri = UriHelper.getUri(
       path: '/test/test.pl',
@@ -125,7 +140,7 @@ void main() {
     );
     expect(
       uri.toString(),
-      'https://world.openfoodfacts.net/test/test.pl',
+      'https://world.openfoodfacts.net/test/test.pl?$_appName',
     );
 
     Uri uri1 = UriHelper.getUri(
@@ -135,7 +150,7 @@ void main() {
     );
     expect(
       uri1.toString(),
-      'https://world.openfoodfacts.net/test/test.pl?test=true&queryType=PROD',
+      'https://world.openfoodfacts.net/test/test.pl?test=true&queryType=PROD&$_appName',
     );
   });
 
@@ -184,7 +199,6 @@ void main() {
   });
 
   test('Get Uri with different uriScheme', () {
-    OpenFoodAPIConfiguration.userAgent = null;
     OpenFoodAPIConfiguration.uuid = null;
     OpenFoodAPIConfiguration.uriScheme = 'http';
     Uri uri = UriHelper.getUri(
@@ -192,7 +206,7 @@ void main() {
     );
     expect(
       uri.toString(),
-      'http://world.openfoodfacts.org/test/test.pl',
+      'http://world.openfoodfacts.org/test/test.pl?$_appName',
     );
 
     Uri uri1 = UriHelper.getUri(
@@ -201,7 +215,13 @@ void main() {
     );
     expect(
       uri1.toString(),
-      'http://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD',
+      'http://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD&$_appName',
     );
   });
 }
+
+String get _appName =>
+    'app_name=${OpenFoodAPIConfiguration.userAgent!.name.replaceAll(
+      ' ',
+      '+',
+    )}';
