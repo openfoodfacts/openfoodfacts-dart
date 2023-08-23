@@ -17,7 +17,7 @@ void main() {
         path: '/test/test.pl',
       ),
       throwsA(
-        const TypeMatcher<AssertionError>(),
+        const TypeMatcher<Exception>(),
       ),
     );
   });
@@ -41,7 +41,7 @@ void main() {
     );
     expect(
       uri1.toString(),
-      'https://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD&$_appName',
+      'https://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD&$_appNameValue',
     );
   });
 
@@ -100,7 +100,7 @@ void main() {
     );
     expect(
       uri.toString(),
-      'https://world.openfoodfacts.org/test/test.pl?$_appName&app_uuid=$uuid',
+      'https://world.openfoodfacts.org/test/test.pl?$_appNameValue&app_uuid=$uuid',
     );
 
     uri = UriHelper.getUri(
@@ -109,7 +109,7 @@ void main() {
     );
     expect(
       uri.toString(),
-      'https://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD&$_appName&app_uuid=$uuid',
+      'https://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD&$_appNameValue&app_uuid=$uuid',
     );
 
     uri = UriHelper.getUri(
@@ -140,7 +140,7 @@ void main() {
     );
     expect(
       uri.toString(),
-      'https://world.openfoodfacts.net/test/test.pl?$_appName',
+      'https://world.openfoodfacts.net/test/test.pl?$_appNameValue',
     );
 
     Uri uri1 = UriHelper.getUri(
@@ -150,7 +150,7 @@ void main() {
     );
     expect(
       uri1.toString(),
-      'https://world.openfoodfacts.net/test/test.pl?test=true&queryType=PROD&$_appName',
+      'https://world.openfoodfacts.net/test/test.pl?test=true&queryType=PROD&$_appNameValue',
     );
   });
 
@@ -206,7 +206,7 @@ void main() {
     );
     expect(
       uri.toString(),
-      'http://world.openfoodfacts.org/test/test.pl?$_appName',
+      'http://world.openfoodfacts.org/test/test.pl?$_appNameValue',
     );
 
     Uri uri1 = UriHelper.getUri(
@@ -215,13 +215,14 @@ void main() {
     );
     expect(
       uri1.toString(),
-      'http://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD&$_appName',
+      'http://world.openfoodfacts.org/test/test.pl?test=true&queryType=PROD&$_appNameValue',
     );
   });
 }
 
-String get _appName =>
-    'app_name=${OpenFoodAPIConfiguration.userAgent!.name.replaceAll(
-      ' ',
-      '+',
+String get _appNameValue => 'app_name=${Uri.encodeFull(
+      OpenFoodAPIConfiguration.userAgent!.name.replaceAll(
+        ' ',
+        '+',
+      ),
     )}';

@@ -33,11 +33,9 @@ class HttpHelper {
   static Map<String, dynamic> addUserAgentParameters(
     Map<String, dynamic>? map,
   ) {
-    assert(
-      OpenFoodAPIConfiguration.userAgent != null,
-      'A User-Agent must be set before calling this method',
-    );
-
+    if (OpenFoodAPIConfiguration.userAgent == null) {
+      throw Exception('A User-Agent must be set before calling this method');
+    }
     map ??= <String, dynamic>{};
     map['app_name'] = OpenFoodAPIConfiguration.userAgent!.name;
 

@@ -16,13 +16,13 @@ class UserAgent extends JsonObject {
   /// Additional information about your application
   final String? comment;
 
-  const UserAgent({
+  UserAgent({
     required this.name,
     this.version,
     this.system,
     this.url,
     this.comment,
-  }) : assert(name.length > 1, 'A non empty name is required');
+  }) : assert(name.trim().length > 1, 'A non empty name is required');
 
   @override
   Map<String, dynamic> toJson() => {
