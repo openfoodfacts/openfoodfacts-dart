@@ -220,9 +220,8 @@ void main() {
   });
 }
 
-String get _appNameValue => 'app_name=${Uri.encodeComponent(
-      OpenFoodAPIConfiguration.userAgent!.name.replaceAll(
-        ' ',
-        '+',
-      ),
+String get _appNameValue =>
+    'app_name=${OpenFoodAPIConfiguration.userAgent!.name.replaceAll(
+      ' ',
+      '+',
     )}';
