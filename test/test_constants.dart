@@ -2,7 +2,7 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 
 class TestConstants {
   // ignore: non_constant_identifier_names
-  static UserAgent TEST_USER_AGENT = UserAgent(
+  static final UserAgent TEST_USER_AGENT = UserAgent(
     name: 'off-dart integration tests',
   );
 
