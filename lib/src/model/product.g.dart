@@ -1,6 +1,3 @@
-// ignore_for_file: deprecated_member_use_from_same_package
-// That's a bit ugly, but we need the previous line in order to pass the pub.dev
-// tests, so put that line back after code generation.
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'product.dart';
@@ -55,8 +52,6 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       ingredientsAnalysisTags: IngredientsAnalysisTags.fromJson(
           json['ingredients_analysis_tags'] as List?),
       additives: Additives.additivesFromJson(json['additives_tags'] as List?),
-      environmentImpactLevels: EnvironmentImpactLevels.fromJson(
-          json['environment_impact_level_tags'] as List?),
       allergens: Allergens.allergensFromJson(json['allergens_tags'] as List?),
       nutrientLevels: NutrientLevels.fromJson(json['nutrient_levels'] as Map?),
       nutrimentEnergyUnit: json['nutriment_energy_unit'] as String?,
@@ -146,7 +141,6 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           .toList()
       ..knowledgePanels =
           KnowledgePanels.fromJsonHelper(json['knowledge_panels'] as Map?)
-      ..environmentInfoCard = json['environment_infocard'] as String?
       ..embCodes = json['emb_codes'] as String?
       ..manufacturingPlaces = json['manufacturing_places'] as String?
       ..origins = json['origins'] as String?
@@ -205,8 +199,6 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   val['ingredients_analysis_tags'] =
       IngredientsAnalysisTags.toJson(instance.ingredientsAnalysisTags);
   writeNotNull('additives_tags', Additives.additivesToJson(instance.additives));
-  writeNotNull('environment_impact_level_tags',
-      EnvironmentImpactLevels.toJson(instance.environmentImpactLevels));
   writeNotNull('allergens_tags', Allergens.allergensToJson(instance.allergens));
   writeNotNull(
       'nutrient_levels', NutrientLevels.toJson(instance.nutrientLevels));
@@ -259,7 +251,6 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
       'ecoscore_data', EcoscoreData.toJsonHelper(instance.ecoscoreData));
   writeNotNull('knowledge_panels',
       KnowledgePanels.toJsonHelper(instance.knowledgePanels));
-  writeNotNull('environment_infocard', instance.environmentInfoCard);
   writeNotNull('emb_codes', instance.embCodes);
   writeNotNull('manufacturing_places', instance.manufacturingPlaces);
   writeNotNull('origins', instance.origins);

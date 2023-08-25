@@ -12,10 +12,6 @@ enum VeganStatus implements OffTagged {
 
   @override
   final String offTag;
-
-  // TODO: deprecated from 2022-11-12; remove when old enough
-  @Deprecated('Use offTag instead')
-  String get tag => offTag;
 }
 
 enum VegetarianStatus implements OffTagged {
@@ -30,10 +26,6 @@ enum VegetarianStatus implements OffTagged {
 
   @override
   final String offTag;
-
-  // TODO: deprecated from 2022-11-12; remove when old enough
-  @Deprecated('Use offTag instead')
-  String get tag => offTag;
 }
 
 enum PalmOilFreeStatus implements OffTagged {
@@ -48,10 +40,6 @@ enum PalmOilFreeStatus implements OffTagged {
 
   @override
   final String offTag;
-
-  // TODO: deprecated from 2022-11-12; remove when old enough
-  @Deprecated('Use offTag instead')
-  String get tag => offTag;
 }
 
 class IngredientsAnalysisTags {

@@ -21,8 +21,6 @@ class RobotoffAPIClient {
     InsightType? type,
     OpenFoodFactsCountry? country,
     String? valueTag,
-    // TODO: deprecated from 2023-06-13; remove when old enough
-    @Deprecated('Not used anymore') String? serverDomain,
     ServerType? serverType,
     int? count,
     QueryType? queryType,
@@ -97,53 +95,6 @@ class RobotoffAPIClient {
 
     var robotoffQuestionUri = UriHelper.getRobotoffUri(
       path: 'api/v1/questions/$barcode',
-      queryParameters: parameters,
-      queryType: queryType,
-    );
-
-    Response response = await HttpHelper().doGetRequest(
-      robotoffQuestionUri,
-      user: user,
-      queryType: queryType,
-    );
-    var result = RobotoffQuestionResult.fromJson(
-      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
-    );
-
-    return result;
-  }
-
-  // TODO: deprecated from 2023-06-13; remove when old enough
-  @Deprecated('Use getQuestions instead')
-  static Future<RobotoffQuestionResult> getRandomQuestions(
-    OpenFoodFactsLanguage language,
-    User? user, {
-    int? count,
-    List<InsightType>? types,
-    QueryType? queryType,
-  }) async {
-    if (count == null || count <= 0) {
-      count = 1;
-    }
-
-    final List<String> typesValues = [];
-    if (types != null) {
-      for (final InsightType t in types) {
-        final String? value = t.value;
-        if (value != null) {
-          typesValues.add(value);
-        }
-      }
-    }
-
-    final Map<String, String> parameters = <String, String>{
-      'lang': language.code,
-      'count': count.toString(),
-      if (typesValues.isNotEmpty) 'insight_types': typesValues.join(',')
-    };
-
-    var robotoffQuestionUri = UriHelper.getRobotoffUri(
-      path: 'api/v1/questions/random',
       queryParameters: parameters,
       queryType: queryType,
     );

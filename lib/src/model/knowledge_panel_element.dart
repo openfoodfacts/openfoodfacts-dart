@@ -298,21 +298,6 @@ class KnowledgePanelTableElement extends JsonObject {
 /// "Contribute action" element of the Knowledge panel.
 @JsonSerializable()
 class KnowledgePanelActionElement extends JsonObject {
-  /// Possible needed contribute action: add categories.
-  // TODO: deprecated from 2023-05-13; remove when old enough
-  @Deprecated('Use KnowledgePanelAction instead')
-  static const String ACTION_ADD_CATEGORIES = 'add_categories';
-
-  /// Possible needed contribute action: add ingredients text.
-  // TODO: deprecated from 2023-05-13; remove when old enough
-  @Deprecated('Use KnowledgePanelAction instead')
-  static const String ACTION_ADD_INGREDIENTS_TEXT = 'add_ingredients_text';
-
-  /// Possible needed contribute action: add nutrition facts.
-  // TODO: deprecated from 2023-05-13; remove when old enough
-  @Deprecated('Use KnowledgePanelAction instead')
-  static const String ACTION_ADD_NUTRITION_FACTS = 'add_nutrition_facts';
-
   /// HTML description.
   final String html;
 
