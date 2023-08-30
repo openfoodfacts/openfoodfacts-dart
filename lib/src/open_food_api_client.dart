@@ -789,23 +789,6 @@ class OpenFoodAPIClient {
   }
 
   //TODO: deprecated from 2023-04-05; remove when old enough
-  @Deprecated('Use [RobotOffAPIClient.getRandomInsight] Instead')
-  static Future<InsightsResult> getRandomInsight(
-    User user, {
-    InsightType? type,
-    String? country,
-    String? valueTag,
-    String? serverDomain,
-    QueryType? queryType,
-  }) =>
-      RobotoffAPIClient.getRandomInsights(
-          type: type,
-          country: OpenFoodFactsCountry.fromOffTag(country),
-          valueTag: valueTag,
-          serverDomain: serverDomain,
-          queryType: queryType);
-
-  //TODO: deprecated from 2023-04-05; remove when old enough
   @Deprecated('Use [RobotOffAPIClient.getProductInsights] Instead')
   static Future<InsightsResult> getProductInsights(
     String barcode,

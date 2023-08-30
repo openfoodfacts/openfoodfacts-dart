@@ -103,25 +103,60 @@ void main() {
     });
 
     test('get popular questions with types', () async {
-      const InsightType type = InsightType.CATEGORY;
-      const int numQuestions = 10;
-      final RobotoffQuestionResult result =
-          await RobotoffAPIClient.getQuestions(
-        OpenFoodFactsLanguage.GERMAN,
-        user: TestConstants.PROD_USER,
-        insightTypes: [type],
-        count: numQuestions,
-        country: OpenFoodFactsCountry.GERMANY,
-        questionOrder: RobotoffQuestionOrder.popularity,
-      );
+      Future<List<RobotoffQuestion>> getTopPopularQuestions(
+        final OpenFoodFactsCountry country,
+      ) async {
+        const InsightType type = InsightType.CATEGORY;
+        const int numQuestions = 10;
+        final RobotoffQuestionResult result =
+            await RobotoffAPIClient.getQuestions(
+          OpenFoodFactsLanguage.GERMAN,
+          user: TestConstants.PROD_USER,
+          insightTypes: [type],
+          count: numQuestions,
+          countries: <OpenFoodFactsCountry>[country],
+          questionOrder: RobotoffQuestionOrder.popularity,
+        );
 
-      expect(result.status, isNotNull);
-      expect(result.status, 'found');
-      expect(result.questions, isNotNull);
-      expect(result.questions!.length, numQuestions);
-      for (final RobotoffQuestion question in result.questions!) {
-        expect(question.insightType, type);
+        expect(result.status, isNotNull);
+        expect(result.status, 'found');
+        expect(result.questions, isNotNull);
+        expect(result.questions!.length, numQuestions);
+        for (final RobotoffQuestion question in result.questions!) {
+          expect(question.insightType, type);
+        }
+        return result.questions!;
       }
+
+      List<RobotoffQuestion> questions;
+
+      questions = await getTopPopularQuestions(
+        OpenFoodFactsCountry.GERMANY,
+      );
+      final List<String> germanBarcodes1 = <String>[];
+      for (final RobotoffQuestion question in questions) {
+        germanBarcodes1.add(question.barcode!);
+      }
+
+      questions = await getTopPopularQuestions(
+        OpenFoodFactsCountry.GERMANY,
+      );
+      final List<String> germanBarcodes2 = <String>[];
+      for (final RobotoffQuestion question in questions) {
+        germanBarcodes2.add(question.barcode!);
+      }
+      // highly probable
+      expect(germanBarcodes2, germanBarcodes1);
+
+      questions = await getTopPopularQuestions(
+        OpenFoodFactsCountry.FRANCE,
+      );
+      final List<String> frenchBarcodes1 = <String>[];
+      for (final RobotoffQuestion question in questions) {
+        frenchBarcodes1.add(question.barcode!);
+      }
+      // highly probable
+      expect(germanBarcodes2, isNot(frenchBarcodes1));
     });
 
     test('get 2 random questions with no specific type', () async {
@@ -143,7 +178,7 @@ void main() {
     test('get random insight', () async {
       final InsightsResult result = await RobotoffAPIClient.getRandomInsights(
         type: InsightType.CATEGORY,
-        country: OpenFoodFactsCountry.FRANCE,
+        countries: <OpenFoodFactsCountry>[OpenFoodFactsCountry.FRANCE],
       );
 
       expect(result.status, isNotNull);
