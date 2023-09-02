@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 import 'interface/json_object.dart';
-import 'model/insight.dart';
 import 'model/login_status.dart';
 import 'model/ocr_ingredients_result.dart';
 import 'model/ocr_packaging_result.dart';
@@ -14,9 +13,7 @@ import 'model/product.dart';
 import 'model/product_freshness.dart';
 import 'model/product_image.dart';
 import 'model/product_packaging.dart';
-import 'model/product_result.dart';
 import 'model/product_result_v3.dart';
-import 'model/robotoff_question.dart';
 import 'model/search_result.dart';
 import 'model/send_image.dart';
 import 'model/sign_up_status.dart';
@@ -35,7 +32,6 @@ import 'model/taxonomy_packaging_material.dart';
 import 'model/taxonomy_packaging_recycling.dart';
 import 'model/taxonomy_packaging_shape.dart';
 import 'model/user.dart';
-import 'robot_off_api_client.dart';
 import 'utils/abstract_query_configuration.dart';
 import 'utils/country_helper.dart';
 import 'utils/http_helper.dart';
@@ -227,65 +223,6 @@ class OpenFoodAPIClient {
       user: user,
       queryType: queryType,
     );
-  }
-
-  /// Returns the product for the given barcode.
-  /// The ProductResult does not contain a product, if the product is not available.
-  /// No parsing of ingredients.
-  /// No adjustment by language.
-  /// No replacing of '&quot;' with '"'.
-// TODO: deprecated from 2022-12-01; remove when old enough
-  @Deprecated('Use getProductV3 instead')
-  static Future<ProductResult> getProductRaw(
-    String barcode,
-    OpenFoodFactsLanguage language, {
-    User? user,
-    QueryType? queryType,
-  }) async {
-    final String productString = await getProductString(
-      ProductQueryConfiguration(
-        barcode,
-        language: language,
-        country: null,
-        fields: null,
-        version: ProductQueryVersion.v3,
-      ),
-      user: user,
-      queryType: queryType,
-    );
-    return ProductResult.fromJson(HttpHelper().jsonDecode(productString));
-  }
-
-  /// Returns the product for the given barcode.
-  /// The ProductResult does not contain a product, if the product is not available.
-  /// ingredients, images and product name will be prepared for the given language.
-  ///
-  /// Please read the language mechanics explanation if you intend to show
-  /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
-// TODO: deprecated from 2022-12-01; remove when old enough
-  @Deprecated('Use getProductV3 instead')
-  static Future<ProductResult> getProduct(
-    ProductQueryConfiguration configuration, {
-    User? user,
-    QueryType? queryType,
-  }) async {
-    if (configuration.matchesV3()) {
-      Exception("The configuration must not match V3!");
-    }
-    final String productString = await getProductString(
-      configuration,
-      user: user,
-      queryType: queryType,
-    );
-    final String jsonStr = _replaceQuotes(productString);
-    final ProductResult result = ProductResult.fromJson(
-      HttpHelper().jsonDecode(jsonStr),
-    );
-    if (result.product != null) {
-      ProductHelper.removeImages(result.product!, configuration.language);
-      ProductHelper.createImageUrls(result.product!, queryType: queryType);
-    }
-    return result;
   }
 
   /// The [ProductResultV3] does not contain a product, if the product is not available.
@@ -788,62 +725,6 @@ class OpenFoodAPIClient {
     }
   }
 
-  //TODO: deprecated from 2023-04-05; remove when old enough
-  @Deprecated('Use [RobotOffAPIClient.getProductInsights] Instead')
-  static Future<InsightsResult> getProductInsights(
-    String barcode,
-    User user, {
-    QueryType? queryType,
-  }) =>
-      RobotoffAPIClient.getProductInsights(barcode, queryType: queryType);
-
-  //TODO: deprecated from 2023-04-05; remove when old enough
-  @Deprecated('Use [RobotOffAPIClient.getProductQuestions] Instead')
-  static Future<RobotoffQuestionResult> getRobotoffQuestionsForProduct(
-    String barcode,
-    String lang, {
-    User? user,
-    int? count,
-    QueryType? queryType,
-  }) =>
-      RobotoffAPIClient.getProductQuestions(
-          barcode,
-          OpenFoodFactsLanguage.fromOffTag(lang) ??
-              OpenFoodFactsLanguage.ENGLISH,
-          user: user,
-          count: count,
-          queryType: queryType);
-
-  //TODO: deprecated from 2023-04-05; remove when old enough
-  @Deprecated('Use [RobotOffAPIClient.getRandomQuestions] Instead')
-  static Future<RobotoffQuestionResult> getRandomRobotoffQuestion(
-    String lang,
-    User? user, {
-    int? count,
-    List<InsightType>? types,
-    QueryType? queryType,
-  }) =>
-      RobotoffAPIClient.getRandomQuestions(
-          OpenFoodFactsLanguage.fromOffTag(lang) ??
-              OpenFoodFactsLanguage.ENGLISH,
-          user,
-          count: count,
-          types: types,
-          queryType: queryType);
-
-  //TODO: deprecated from 2023-04-05; remove when old enough
-  @Deprecated('Use [RobotOffAPIClient.postInsightAnnotation] Instead')
-  static Future<Status> postInsightAnnotation(
-    String? insightId,
-    InsightAnnotation annotation, {
-    User? user,
-    String? deviceId,
-    bool update = true,
-    final QueryType? queryType,
-  }) =>
-      RobotoffAPIClient.postInsightAnnotation(insightId, annotation,
-          deviceId: deviceId, update: update, queryType: queryType);
-
   /// Extract the ingredients from image with the given parameters.
   /// The ingredients' language should be given (ingredients_fr, ingredients_de, ingredients_en)
   ///
@@ -939,48 +820,6 @@ class OpenFoodAPIClient {
     );
   }
 
-  /// Returns suggestions.
-  ///
-  /// The [limit] has a max value of 400 on the server side.
-  ///
-  /// ```dart
-  ///   List<dynamic> suggestions =
-  ///       await OpenFoodAPIClient.getAutocompletedSuggestions(
-  ///     TagType.CATEGORIES,
-  ///     input: 'Mil',
-  ///   );
-  ///
-  ///   print(suggestions); // [Milk drinks fermented with Bifidus, Milk drinks fermented with L casei, Milk jams]
-  /// ```
-  // TODO: deprecated from 2023-02-01; remove when old enough
-  @Deprecated('Use getSuggestions instead')
-  static Future<List<dynamic>> getAutocompletedSuggestions(
-    final TagType taxonomyType, {
-    final String input = '',
-    final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH,
-    final QueryType? queryType,
-    final int limit = 25,
-  }) async {
-    final Uri uri = UriHelper.getPostUri(
-      path: '/cgi/suggest.pl',
-      queryType: queryType,
-    );
-    final Map<String, String> queryParameters = <String, String>{
-      'tagtype': taxonomyType.offTag,
-      'term': input,
-      'lc': language.offTag,
-      'limit': limit.toString(),
-    };
-    final Response response = await HttpHelper().doPostRequest(
-      uri,
-      queryParameters,
-      null,
-      queryType: queryType,
-      addCredentialsToBody: false,
-    );
-    return HttpHelper().jsonDecode(response.body);
-  }
-
   /// cf. https://openfoodfacts.github.io/openfoodfacts-server/reference/api-v3/#get-/api/v3/taxonomy_suggestions
   ///
   /// Consider using [SuggestionManager].
@@ -1023,16 +862,6 @@ class OpenFoodAPIClient {
     }
     return result;
   }
-
-  /// Uses the auth.pl API to see if login was successful
-  /// Returns a bool if the login data of the provided user is correct
-  // TODO: deprecated from 2022-10-12; remove when old enough
-  @Deprecated('Use login2 instead')
-  static Future<bool> login(
-    User user, {
-    QueryType? queryType,
-  }) async =>
-      (await login2(user, queryType: queryType))?.successful ?? false;
 
   /// Logs in and returns data about the user if relevant.
   ///

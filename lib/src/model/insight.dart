@@ -49,19 +49,6 @@ enum InsightType implements OffTagged {
       OffTagged.fromOffTag(offTag, InsightType.values) as InsightType?;
 }
 
-// TODO: deprecated from 2023-06-13; remove when old enough
-@Deprecated('Use directly InsightType instead')
-extension InsightTypesExtension on InsightType? {
-  // TODO: deprecated from 2023-06-13; remove when old enough
-  @Deprecated('Use offTag instead')
-  String? get value => this?.offTag;
-
-  // TODO: deprecated from 2023-06-13; remove when old enough
-  @Deprecated('Use InsightType.fromOffTag instead')
-  static InsightType getType(String? s) =>
-      InsightType.fromOffTag(s) ?? InsightType.UNDEFINED;
-}
-
 @JsonSerializable()
 class InsightsResult extends JsonObject {
   final String? status;

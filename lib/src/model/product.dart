@@ -5,7 +5,6 @@ import 'allergens.dart';
 import 'attribute.dart';
 import 'attribute_group.dart';
 import 'ecoscore_data.dart';
-import 'environment_impact_levels.dart';
 import 'ingredient.dart';
 import 'ingredients_analysis_tags.dart';
 import 'knowledge_panels.dart';
@@ -69,10 +68,6 @@ enum ProductImprovement {
   });
 
   final ProductImprovementCategory category;
-
-  // TODO: deprecated from 2022-11-12; remove when old enough
-  @Deprecated('Use category instead')
-  ProductImprovementCategory getCategory() => category;
 }
 
 /// Category: what would this [ProductImprovement] help compute?
@@ -245,15 +240,6 @@ class Product extends JsonObject {
       toJson: Additives.additivesToJson)
   Additives? additives;
 
-  // TODO: deprecated from 2022-10-25; remove when old enough
-  @Deprecated('Use ecoscore fields instead')
-  @JsonKey(
-      name: 'environment_impact_level_tags',
-      includeIfNull: false,
-      fromJson: EnvironmentImpactLevels.fromJson,
-      toJson: EnvironmentImpactLevels.toJson)
-  EnvironmentImpactLevels? environmentImpactLevels;
-
   @JsonKey(
       name: 'allergens_tags',
       includeIfNull: false,
@@ -314,8 +300,6 @@ class Product extends JsonObject {
       includeIfNull: false)
   Map<OpenFoodFactsLanguage, List<String>>? labelsTagsInLanguages;
 
-  // TODO: deprecated from 2022-12-16; remove when old enough
-  @Deprecated('User packagingS instead')
   @JsonKey(name: 'packaging', includeIfNull: false)
   String? packaging;
 
@@ -449,14 +433,6 @@ class Product extends JsonObject {
       toJson: KnowledgePanels.toJsonHelper)
   KnowledgePanels? knowledgePanels;
 
-  // TODO: deprecated from 2022-10-25; remove when old enough
-  @Deprecated('Use ecoscore fields instead')
-  @JsonKey(
-    name: 'environment_infocard',
-    includeIfNull: false,
-  )
-  String? environmentInfoCard;
-
   @JsonKey(name: 'emb_codes', includeIfNull: false)
   String? embCodes;
 
@@ -505,7 +481,6 @@ class Product extends JsonObject {
       this.ingredientsTagsInLanguages,
       this.ingredientsAnalysisTags,
       this.additives,
-      this.environmentImpactLevels,
       this.allergens,
       this.nutrientLevels,
       this.nutrimentEnergyUnit,
@@ -517,8 +492,7 @@ class Product extends JsonObject {
       this.labels,
       this.labelsTags,
       this.labelsTagsInLanguages,
-      // TODO: deprecated from 2022-12-16; remove when old enough
-      @Deprecated('Use packagingS field instead') this.packaging,
+      this.packaging,
       this.packagingTags,
       this.miscTags,
       this.statesTags,
