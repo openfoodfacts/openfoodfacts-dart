@@ -19,7 +19,7 @@ class RobotoffAPIClient {
 
   static Future<InsightsResult> getRandomInsights({
     InsightType? type,
-    OpenFoodFactsCountry? country,
+    Iterable<OpenFoodFactsCountry>? countries,
     String? valueTag,
     ServerType? serverType,
     int? count,
@@ -27,7 +27,8 @@ class RobotoffAPIClient {
   }) async {
     final Map<String, String> parameters = {
       if (type != null) 'type': type.offTag,
-      if (country != null) 'country': _getLousyCountryTag(country),
+      if (countries?.isNotEmpty == true)
+        'countries': _getCountryList(countries!),
       if (valueTag != null) 'value_tag': valueTag,
       if (count != null) 'count': count.toString(),
       if (serverType != null) 'server_type': serverType.offTag,
@@ -118,7 +119,7 @@ class RobotoffAPIClient {
     int? count,
     int? page,
     List<InsightType>? insightTypes,
-    OpenFoodFactsCountry? country,
+    Iterable<OpenFoodFactsCountry>? countries,
     List<String>? brands,
     RobotoffQuestionOrder? questionOrder,
     ServerType? serverType,
@@ -140,7 +141,8 @@ class RobotoffAPIClient {
       if (insightValues.isNotEmpty) 'insight_types': insightValues.join(','),
       if (brands?.isNotEmpty == true) 'brands': brands!.join(','),
       if (questionOrder != null) 'order_by': questionOrder.offTag,
-      if (country != null) 'country': _getLousyCountryTag(country),
+      if (countries?.isNotEmpty == true)
+        'countries': _getCountryList(countries!),
       if (valueTag != null) 'value_tag': valueTag,
     };
 
@@ -158,71 +160,6 @@ class RobotoffAPIClient {
     return RobotoffQuestionResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
     );
-  }
-
-  /// Lousy conversion from a country to a country tag.
-  ///
-  /// In a near future, we should be able to get rid of this method, and pass
-  /// directly the country (offTag).
-  /// There are some countries for which I don't know if the country tag is
-  /// misspelled or just if there are no data for this country.
-  static String _getLousyCountryTag(final OpenFoodFactsCountry country) {
-    switch (country) {
-      case OpenFoodFactsCountry.BRUNEI_DARUSSALAM:
-        return 'en:brunei';
-      case OpenFoodFactsCountry.CZECHIA:
-        return 'en:czech-republic';
-      case OpenFoodFactsCountry.USA:
-        return 'en:united-states';
-      case OpenFoodFactsCountry.VIET_NAM:
-        return 'en:vietnam';
-      // from there I cannot say if the spelling is correct...
-      case OpenFoodFactsCountry.ANTARCTICA:
-      case OpenFoodFactsCountry.SAINT_BARTHELEMY:
-      case OpenFoodFactsCountry.BAHAMAS:
-      case OpenFoodFactsCountry.BHUTAN:
-      case OpenFoodFactsCountry.BOUVET_ISLAND:
-      case OpenFoodFactsCountry.COCOS_ISLANDS:
-      case OpenFoodFactsCountry.CONGO:
-      case OpenFoodFactsCountry.CABO_VERDE:
-      case OpenFoodFactsCountry.CHRISTMAS_ISLAND:
-      case OpenFoodFactsCountry.WESTERN_SAHARA:
-      case OpenFoodFactsCountry.FALKLAND_ISLANDS:
-      case OpenFoodFactsCountry.MICRONESIA:
-      case OpenFoodFactsCountry.SOUTH_GEORGIA:
-      case OpenFoodFactsCountry.GUINEA_BISSAU:
-      case OpenFoodFactsCountry.HEARD_ISLAND:
-      case OpenFoodFactsCountry.BRITISH_INDIAN_OCEAN_TERRITORY:
-      case OpenFoodFactsCountry.KIRIBATI:
-      case OpenFoodFactsCountry.NORTH_KOREA:
-      case OpenFoodFactsCountry.LAOS:
-      case OpenFoodFactsCountry.LESOTHO:
-      case OpenFoodFactsCountry.MACAO:
-      case OpenFoodFactsCountry.NORFOLK_ISLAND:
-      case OpenFoodFactsCountry.NAURU:
-      case OpenFoodFactsCountry.NIUE:
-      case OpenFoodFactsCountry.PITCAIRN:
-      case OpenFoodFactsCountry.PALESTINE:
-      case OpenFoodFactsCountry.SUDAN:
-      case OpenFoodFactsCountry.SAINT_HELENA:
-      case OpenFoodFactsCountry.SVALBARD_AND_JAN_MAYEN:
-      case OpenFoodFactsCountry.SAO_TOME_AND_PRINCIPE:
-      case OpenFoodFactsCountry.ESWATINI:
-      case OpenFoodFactsCountry.FRENCH_SOUTHERN_TERRITORIES:
-      case OpenFoodFactsCountry.TAJIKISTAN:
-      case OpenFoodFactsCountry.TOKELAU:
-      case OpenFoodFactsCountry.TIMOR_LESTE:
-      case OpenFoodFactsCountry.TURKMENISTAN:
-      case OpenFoodFactsCountry.TONGA:
-      case OpenFoodFactsCountry.TUVALU:
-      case OpenFoodFactsCountry.UNITED_STATES_MINOR_OUTLYING_ISLANDS:
-      case OpenFoodFactsCountry.HOLY_SEE:
-      case OpenFoodFactsCountry.US_VIRGIN_ISLANDS:
-      case OpenFoodFactsCountry.SAMOA:
-      default:
-        // works in most cases
-        return 'en:${country.name.toLowerCase().replaceAll('_', '-')}';
-    }
   }
 
   static Future<Status> postInsightAnnotation(
@@ -258,5 +195,16 @@ class RobotoffAPIClient {
       addCredentialsToHeader: true,
     );
     return Status.fromApiResponse(response.body);
+  }
+
+  /// Returns a list of country as comma-separated 2-letter codes
+  static String _getCountryList(
+    final Iterable<OpenFoodFactsCountry> countries,
+  ) {
+    final List<String> result = <String>[];
+    for (final OpenFoodFactsCountry country in countries) {
+      result.add(country.offTag);
+    }
+    return result.join(',');
   }
 }
