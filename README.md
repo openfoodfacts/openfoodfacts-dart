@@ -23,7 +23,7 @@ This plugin also allows you to edit a product or upload a new one to Open Food F
 
 ## Migrating from 2.x.x to 3.x.x (breaking changes)
 
-Starting with version 2.11, we now enforce all clients to provide a valid user agent.
+Starting with version 3.0.0, we now enforce all clients to provide a valid user agent.
 For this, please ensure to set the SDK before using any other functionality:
 
 ```dart
