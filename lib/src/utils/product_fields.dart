@@ -51,8 +51,6 @@ enum ProductField implements OffTagged {
   LABELS(offTag: 'labels'),
   LABELS_TAGS(offTag: 'labels_tags'),
   LABELS_TAGS_IN_LANGUAGES(offTag: 'labels_tags_'),
-  // TODO: deprecated from 2022-12-16; remove when old enough
-  @Deprecated('Use packagingS field instead')
   PACKAGING(offTag: 'packaging'),
   PACKAGINGS(offTag: 'packagings'),
   PACKAGINGS_COMPLETE(offTag: 'packagings_complete'),
@@ -66,9 +64,6 @@ enum ProductField implements OffTagged {
   STORES(offTag: 'stores'),
   INGREDIENTS_ANALYSIS_TAGS(offTag: 'ingredients_analysis_tags'),
   ALLERGENS(offTag: 'allergens_tags'),
-  // TODO: deprecated from 2022-10-25; remove when old enough
-  @Deprecated('Use ecoscore fields instead')
-  ENVIRONMENT_IMPACT_LEVELS(offTag: 'environment_impact_level_tags'),
   ATTRIBUTE_GROUPS(offTag: 'attribute_groups'),
   LAST_MODIFIED(offTag: 'last_modified_t'),
   LAST_MODIFIER(offTag: 'last_modified_by'),
@@ -87,9 +82,6 @@ enum ProductField implements OffTagged {
   ECOSCORE_SCORE(offTag: 'ecoscore_score'),
   ECOSCORE_DATA(offTag: 'ecoscore_data'),
   KNOWLEDGE_PANELS(offTag: 'knowledge_panels'),
-  // TODO: deprecated from 2022-10-25; remove when old enough
-  @Deprecated('Use ecoscore fields instead')
-  ENVIRONMENT_INFOCARD(offTag: 'environment_infocard'),
   EMB_CODES(offTag: 'emb_codes'),
   MANUFACTURING_PLACES(offTag: 'manufacturing_places'),
   ORIGINS(offTag: 'origins'),
@@ -106,10 +98,6 @@ enum ProductField implements OffTagged {
 
   @override
   final String offTag;
-
-  // TODO: deprecated from 2022-10-19; remove when old enough
-  @Deprecated('Use offTag instead')
-  String get key => offTag;
 }
 
 /// NOTE: if one of the fields is IN_LANGUAGES and [languages] is empty -

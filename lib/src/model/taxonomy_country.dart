@@ -24,10 +24,6 @@ enum TaxonomyCountryField implements OffTagged {
 
   @override
   final String offTag;
-
-  // TODO: deprecated from 2022-11-06; remove when old enough
-  @Deprecated('Use offTag instead')
-  String get key => offTag;
 }
 
 /// A JSON-serializable version of a Country taxonomy result.

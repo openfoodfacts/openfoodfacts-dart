@@ -23,10 +23,6 @@ enum AllergensTag implements OffTagged {
 
   @override
   final String offTag;
-
-  // TODO: deprecated from 2022-11-12; remove when old enough
-  @Deprecated('Use offTag instead')
-  String get tag => offTag;
 }
 
 /// List of known allergens for a [Product].

@@ -28,8 +28,4 @@ enum TagType implements OffTagged {
   /// Returns the first [TagType] that matches the [offTag].
   static TagType? fromOffTag(final String? offTag) =>
       OffTagged.fromOffTag(offTag, TagType.values) as TagType?;
-
-  // TODO: deprecated from 2022-10-23; remove when old enough
-  @Deprecated('Use offTag instead')
-  String get key => offTag;
 }

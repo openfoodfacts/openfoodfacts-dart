@@ -18,21 +18,6 @@ enum ImageField implements OffTagged {
   /// Returns the first [ImageField] that matches the [offTag].
   static ImageField? fromOffTag(final String? offTag) =>
       OffTagged.fromOffTag(offTag, ImageField.values) as ImageField?;
-
-  // TODO: deprecated from 2022-11-13; remove when old enough
-  @Deprecated('Use field.offTag instead')
-  String get value => offTag;
-}
-
-extension ImageFieldExtension on ImageField {
-  // TODO: deprecated from 2022-11-13; remove when old enough
-  @Deprecated('Use field.offTag instead')
-  static String getValue(ImageField field) => field.offTag;
-
-  // TODO: deprecated from 2022-11-13; remove when old enough
-  @Deprecated('Use ImageField.fromOffTag instead')
-  static ImageField getType(String s) =>
-      ImageField.fromOffTag(s.toLowerCase()) ?? ImageField.OTHER;
 }
 
 enum ImageSize implements OffTagged {
@@ -63,14 +48,6 @@ enum ImageSize implements OffTagged {
 }
 
 extension ImageSizeExtension on ImageSize? {
-  // TODO: deprecated from 2022-11-13; remove when old enough
-  @Deprecated('Use offTag instead')
-  String get value => (this ?? ImageSize.UNKNOWN).offTag;
-
-  // TODO: deprecated from 2022-11-13; remove when old enough
-  @Deprecated('Use number instead')
-  String toNumber() => (this ?? ImageSize.UNKNOWN).number;
-
   static ImageSize getType(String s) => ImageSize.values.firstWhere(
         (final ImageSize key) => key.offTag == s.toLowerCase(),
         orElse: () => ImageSize.UNKNOWN,

@@ -764,10 +764,6 @@ enum OpenFoodFactsCountry implements OffTagged {
   static OpenFoodFactsCountry? fromOffTag(final String? offTag) =>
       OffTagged.fromOffTag(offTag, OpenFoodFactsCountry.values)
           as OpenFoodFactsCountry?;
-
-  // TODO: deprecated from 2022-11-13; remove when old enough
-  @Deprecated('Use offTag instead')
-  String get iso2Code => offTag;
 }
 
 /// Helper class around [OpenFoodFactsCountry]
