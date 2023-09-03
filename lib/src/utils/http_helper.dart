@@ -211,10 +211,9 @@ class HttpHelper {
   }) {
     Map<String, String>? headers = {};
 
-    assert(
-      OpenFoodAPIConfiguration.userAgent != null,
-      'A User-Agent must be set before calling this method',
-    );
+    if (OpenFoodAPIConfiguration.userAgent == null) {
+      throw Exception('A User-Agent must be set before calling this method');
+    }
 
     headers.addAll({
       'Accept': 'application/json',
