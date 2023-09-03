@@ -27,17 +27,18 @@ class HttpHelper {
   /// A protected constructor to allow subclasses to create themselves.
   HttpHelper.internal();
 
-  static const String USER_AGENT = 'Dart API';
   static const String FROM = 'anonymous';
 
   /// Adds user agent data to parameters, for statistics purpose
-  static Map<String, dynamic>? addUserAgentParameters(
+  static Map<String, dynamic> addUserAgentParameters(
     Map<String, dynamic>? map,
   ) {
-    map ??= <String, dynamic>{};
-    if (OpenFoodAPIConfiguration.userAgent?.name != null) {
-      map['app_name'] = OpenFoodAPIConfiguration.userAgent!.name!;
+    if (OpenFoodAPIConfiguration.userAgent == null) {
+      throw Exception('A User-Agent must be set before calling this method');
     }
+    map ??= <String, dynamic>{};
+    map['app_name'] = OpenFoodAPIConfiguration.userAgent!.name;
+
     if (OpenFoodAPIConfiguration.userAgent?.version != null) {
       map['app_version'] = OpenFoodAPIConfiguration.userAgent!.version!;
     }
@@ -49,10 +50,6 @@ class HttpHelper {
     }
     if (OpenFoodAPIConfiguration.userAgent?.comment != null) {
       map['comment'] = OpenFoodAPIConfiguration.userAgent?.comment ?? '';
-    }
-
-    if (map.isEmpty) {
-      return null;
     }
 
     return map;
@@ -214,10 +211,13 @@ class HttpHelper {
   }) {
     Map<String, String>? headers = {};
 
+    if (OpenFoodAPIConfiguration.userAgent == null) {
+      throw Exception('A User-Agent must be set before calling this method');
+    }
+
     headers.addAll({
       'Accept': 'application/json',
-      'User-Agent':
-          OpenFoodAPIConfiguration.userAgent?.toValueString() ?? USER_AGENT,
+      'User-Agent': OpenFoodAPIConfiguration.userAgent!.toValueString(),
       'From': OpenFoodAPIConfiguration.getUser(user)?.userId ?? FROM,
     });
 
