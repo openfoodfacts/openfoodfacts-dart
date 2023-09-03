@@ -21,7 +21,7 @@ We use the ability of the Open Food Facts API to return products results in JSON
 
 This plugin also allows you to edit a product or upload a new one to Open Food Facts. Using the same simple product structure you can create a product object or edit an existing one and send it to the API using a single function.
 
-## Migration to >= 2.11.x
+## Migrating from 2.x.x to 3.x.x (breaking changes)
 
 Starting with version 2.11, we now enforce all clients to provide a valid user agent.
 For this, please ensure to set the SDK before using any other functionality:
