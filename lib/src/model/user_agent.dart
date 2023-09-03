@@ -22,7 +22,11 @@ class UserAgent extends JsonObject {
     this.system,
     this.url,
     this.comment,
-  }) : assert(name.trim().length > 1, 'A non empty name is required');
+  }) {
+    if (name.trim().isEmpty) {
+      throw Exception('A non empty name is required');
+    }
+  }
 
   @override
   Map<String, dynamic> toJson() => {
