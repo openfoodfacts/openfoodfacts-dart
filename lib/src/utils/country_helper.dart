@@ -761,20 +761,12 @@ enum OpenFoodFactsCountry implements OffTagged {
   final String offTag;
 
   /// Returns the first [OpenFoodFactsCountry] that matches the [offTag].
-  static OpenFoodFactsCountry? fromOffTag(final String? offTag) =>
-      OffTagged.fromOffTag(offTag, OpenFoodFactsCountry.values)
-          as OpenFoodFactsCountry?;
-}
-
-/// Helper class around [OpenFoodFactsCountry]
-class CountryHelper {
-  /// Converts an ISO 2 code into an [OpenFoodFactsCountry] (case-insensitive).
-  ///
-  /// E.g. 'fr' and 'FR' will give the same result: OpenFoodFactsCountry.FRANCE.
-  static OpenFoodFactsCountry? fromJson(String? code) {
-    if (code == null) {
-      return null;
+  static OpenFoodFactsCountry? fromOffTag(final String? offTag) {
+    // special case as we use 'uk' in off-dart
+    if (offTag == 'gb') {
+      return OpenFoodFactsCountry.UNITED_KINGDOM;
     }
-    return OpenFoodFactsCountry.fromOffTag(code.toLowerCase());
+    return OffTagged.fromOffTag(offTag, OpenFoodFactsCountry.values)
+        as OpenFoodFactsCountry?;
   }
 }

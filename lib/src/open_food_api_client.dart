@@ -1084,14 +1084,14 @@ class OpenFoodAPIClient {
   ///   print(orderedNutrients.nutrients[10].name); // Vitamin A
   /// ```
   static Future<OrderedNutrients> getOrderedNutrients({
-    required final String? cc,
+    required final OpenFoodFactsCountry country,
     required final OpenFoodFactsLanguage language,
     final QueryType? queryType,
   }) async =>
       OrderedNutrients.fromJson(
         HttpHelper().jsonDecode(
           await getOrderedNutrientsJsonString(
-            country: CountryHelper.fromJson(cc)!,
+            country: country,
             language: language,
           ),
         ),
