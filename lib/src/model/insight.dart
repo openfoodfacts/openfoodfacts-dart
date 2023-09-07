@@ -12,6 +12,15 @@ enum InsightAnnotation {
   const InsightAnnotation(this.value);
 
   final int value;
+
+  static InsightAnnotation? fromInt(final int annotation) {
+    for (final InsightAnnotation insightAnnotation in values) {
+      if (insightAnnotation.value == annotation) {
+        return insightAnnotation;
+      }
+    }
+    return null;
+  }
 }
 
 enum InsightType implements OffTagged {
