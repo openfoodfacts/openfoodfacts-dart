@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the getUri method from the UriHelper class, for the Dart programming language.">
-  <title>getUri method - UriHelper class - uri_helper library - Dart API</title>
+  <meta name="description" content="API docs for the getUriHost method from the UriHelper class, for the Dart programming language.">
+  <title>getUriHost method - UriHelper class - uri_helper library - Dart API</title>
 
 
   
@@ -31,9 +31,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper-library.html">uri_helper</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriHelper-class.html">UriHelper</a></li>
-    <li class="self-crumb">getUri static method</li>
+    <li class="self-crumb">getUriHost static method</li>
   </ol>
-  <div class="self-name">getUri</div>
+  <div class="self-name">getUriHost</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -57,51 +57,29 @@
       data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper&#47;UriHelper-class-sidebar.html"
       data-below-sidebar="">
       <div>
-<h1><span class="kind-method">getUri</span> static method 
+<h1><span class="kind-method">getUriHost</span> static method 
 </h1></div>
 
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.1.1/dart-core/Uri-class.html">Uri</a></span>
-<span class="name ">getUri</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getUri-param-path">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, </span></li>
-<li><span class="parameter" id="getUri-param-queryParameters"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">queryParameters</span>, </span></li>
-<li><span class="parameter" id="getUri-param-queryType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>, </span></li>
-<li><span class="parameter" id="getUri-param-addUserAgentParameters"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">addUserAgentParameters</span> = <span class="default-value">true</span>, </span></li>
-<li><span class="parameter" id="getUri-param-userInfo"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">userInfo</span>}</span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a></span>
+<span class="name ">getUriHost</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getUriHost-param-queryType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span></span></li>
 </ol>)
 
       
 
     </section>
     
-<section class="desc markdown">
-  <p>Returns a OFF uri with the <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_open_food_api_configuration/OpenFoodAPIConfiguration-class.html">OpenFoodAPIConfiguration</a> specified settings</p>
-<p>Typical use-case of "<code>addUserAgentParameters</code> = false" is for other
-request than GET, e.g. POST or MULTIPART, where we add the user agent
-parameters in another part of the code.</p>
-</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static Uri getUri({
-  required final String path,
-  final Map&lt;String, String&gt;? queryParameters,
-  final QueryType? queryType,
-  final bool addUserAgentParameters = true,
-  final String? userInfo,
-}) =&gt;
-    Uri(
-      scheme: OpenFoodAPIConfiguration.uriScheme,
-      host: getUriHost(queryType),
-      path: path,
-      queryParameters: addUserAgentParameters
-          ? HttpHelper.addUserAgentParameters(queryParameters)
-          : queryParameters,
-      userInfo: userInfo,
-    );</code></pre>
+  <pre class="language-dart"><code class="language-dart">static String getUriHost(final QueryType? queryType) =&gt;
+    OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+        ? OpenFoodAPIConfiguration.uriProdHost
+        : OpenFoodAPIConfiguration.uriTestHost;</code></pre>
 </section>
 
 
@@ -119,7 +97,7 @@ parameters in another part of the code.</p>
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper-library.html">uri_helper</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriHelper-class.html">UriHelper</a></li>
-    <li class="self-crumb">getUri static method</li>
+    <li class="self-crumb">getUriHost static method</li>
 </ol>
 
 
