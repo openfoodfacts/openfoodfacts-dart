@@ -20,4 +20,8 @@ enum ServerType implements OffTagged {
 
   @override
   final String offTag;
+
+  /// Returns the [ServerType] that matches the [offTag].
+  static ServerType? fromOffTag(final String? offTag) =>
+      OffTagged.fromOffTag(offTag, ServerType.values) as ServerType?;
 }
