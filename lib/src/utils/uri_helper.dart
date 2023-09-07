@@ -23,15 +23,18 @@ class UriHelper {
   }) =>
       Uri(
         scheme: OpenFoodAPIConfiguration.uriScheme,
-        host: OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-            ? OpenFoodAPIConfiguration.uriProdHost
-            : OpenFoodAPIConfiguration.uriTestHost,
+        host: getUriHost(queryType),
         path: path,
         queryParameters: addUserAgentParameters
             ? HttpHelper.addUserAgentParameters(queryParameters)
             : queryParameters,
         userInfo: userInfo,
       );
+
+  static String getUriHost(final QueryType? queryType) =>
+      OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
+          ? OpenFoodAPIConfiguration.uriProdHost
+          : OpenFoodAPIConfiguration.uriTestHost;
 
   static Uri getPostUri({
     required final String path,
