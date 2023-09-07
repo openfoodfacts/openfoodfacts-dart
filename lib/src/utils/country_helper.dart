@@ -760,8 +760,12 @@ enum OpenFoodFactsCountry implements OffTagged {
   @override
   final String offTag;
 
-  /// Returns the first [OpenFoodFactsCountry] that matches the [offTag].
-  static OpenFoodFactsCountry? fromOffTag(final String? offTag) {
+  /// Returns the [OpenFoodFactsCountry] that matches the [offTag].
+  ///
+  /// Case-insensitive.
+  /// Special case: "uk" and "gb" both mean United Kingdom.
+  static OpenFoodFactsCountry? fromOffTag(String? offTag) {
+    offTag = offTag?.toLowerCase();
     // special case as we use 'uk' in off-dart
     if (offTag == 'gb') {
       return OpenFoodFactsCountry.UNITED_KINGDOM;
