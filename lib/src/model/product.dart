@@ -693,7 +693,7 @@ class Product extends JsonObject {
     return json;
   }
 
-  /// Returns all existing product attributes matching a list of attribute ids
+  /// Returns all existing product attributes matching a list of attribute ids.
   Map<String, Attribute> getAttributes(
     final List<String> attributeIds,
   ) {
@@ -713,6 +713,16 @@ class Product extends JsonObject {
       }
     }
     return result;
+  }
+
+  /// Returns the product attribute matching an attribute id.
+  Attribute? getAttribute(
+    final String attributeId,
+  ) {
+    final Map<String, Attribute> attributes = getAttributes(
+      <String>[attributeId],
+    );
+    return attributes[attributeId];
   }
 
   /// Returns all the potential improvements given the quality of the data
