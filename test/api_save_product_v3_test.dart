@@ -6,7 +6,7 @@ import 'test_constants.dart';
 /// Integration tests around the "save packagings V3" feature.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+  const UriProductHelper uriHelper = uriHelperFoodTest;
 
   group('$OpenFoodAPIClient save product V3', () {
     const String barcode = '12345678';
@@ -33,7 +33,7 @@ void main() {
           await OpenFoodAPIClient.temporarySaveProductV3(
         TestConstants.TEST_USER,
         barcode,
-        queryType: QueryType.TEST,
+        uriHelper: uriHelper,
         country: country,
         language: language,
         packagings: inputPackagings,
@@ -80,7 +80,7 @@ void main() {
             await OpenFoodAPIClient.temporarySaveProductV3(
           TestConstants.TEST_USER,
           barcode,
-          queryType: QueryType.TEST,
+          uriHelper: uriHelper,
           country: country,
           language: language,
           packagingsComplete: value,
@@ -106,6 +106,7 @@ void main() {
             ],
           ),
           user: TestConstants.TEST_USER,
+          uriHelper: uriHelper,
         );
 
         expect(readStatus.status, ProductResultV3.statusSuccess);

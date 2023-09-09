@@ -1,6 +1,6 @@
 import 'image_helper.dart';
 import 'language_helper.dart';
-import 'query_type.dart';
+import 'uri_helper.dart';
 import '../model/product.dart';
 import '../model/product_image.dart';
 
@@ -24,7 +24,7 @@ class ProductHelper {
   /// Generates a image url for each product image entry
   static void createImageUrls(
     Product product, {
-    QueryType? queryType,
+    required UriProductHelper uriHelper,
   }) {
     if (product.images == null) {
       return;
@@ -34,7 +34,7 @@ class ProductHelper {
       image.url = ImageHelper.buildUrl(
         product.barcode,
         image,
-        queryType: queryType,
+        uriHelper: uriHelper,
       );
     }
   }

@@ -4,13 +4,12 @@ import 'package:meta/meta.dart';
 import '../interface/parameter.dart';
 import '../model/parameter/tag_filter.dart';
 import '../model/user.dart';
-import '../utils/country_helper.dart';
-import '../utils/http_helper.dart';
-import '../utils/language_helper.dart';
-import '../utils/open_food_api_configuration.dart';
-import '../utils/product_fields.dart';
-import '../utils/query_type.dart';
-import '../utils/uri_helper.dart';
+import 'country_helper.dart';
+import 'http_helper.dart';
+import 'language_helper.dart';
+import 'open_food_api_configuration.dart';
+import 'product_fields.dart';
+import 'uri_helper.dart';
 
 /// Abstract Query Configuration, that helps build API URI
 abstract class AbstractQueryConfiguration {
@@ -149,16 +148,15 @@ abstract class AbstractQueryConfiguration {
   /// dedicates methods in [OpenFoodAPIClient]
   Future<Response> getResponse(
     final User? user,
-    final QueryType? queryType,
+    final UriProductHelper uriHelper,
   ) async =>
-      await HttpHelper().doPostRequest(
-        UriHelper.getPostUri(
+      HttpHelper().doPostRequest(
+        uriHelper.getPostUri(
           path: getUriPath(),
-          queryType: queryType,
         ),
         getParametersMap(),
         user,
-        queryType: queryType,
+        uriHelper: uriHelper,
         addCredentialsToBody: false,
       );
 }

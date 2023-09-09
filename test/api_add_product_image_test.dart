@@ -7,7 +7,7 @@ import 'test_constants.dart';
 
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+  const UriProductHelper uriHelper = uriHelperFoodTest;
   const User user = TestConstants.TEST_USER;
 
   /// Common constants for several image operations
@@ -66,8 +66,10 @@ void main() {
       fields: <ProductField>[ProductField.IMAGES],
       version: ProductQueryVersion.v3,
     );
-    final ProductResultV3 result =
-        await OpenFoodAPIClient.getProductV3(configurations);
+    final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+      configurations,
+      uriHelper: uriHelper,
+    );
     expect(result.status, isNotNull);
     expect(result.product!.images, isNotEmpty);
 
@@ -92,6 +94,7 @@ void main() {
       final Status status = await OpenFoodAPIClient.addProductImage(
         user,
         image,
+        uriHelper: uriHelper,
       );
 
       expect(status.status, 'status ok');
@@ -107,6 +110,7 @@ void main() {
       Status status = await OpenFoodAPIClient.addProductImage(
         user,
         image,
+        uriHelper: uriHelper,
       );
 
       expect(status.status, 'status ok');
@@ -122,6 +126,7 @@ void main() {
       Status status = await OpenFoodAPIClient.addProductImage(
         user,
         image,
+        uriHelper: uriHelper,
       );
 
       expect(status.status, 'status not ok');
@@ -138,6 +143,7 @@ void main() {
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: user,
+        uriHelper: uriHelper,
       );
       expect(result.status, isNotNull);
       expect(result.product!.images, isNotEmpty);
@@ -159,8 +165,10 @@ void main() {
       final String? imgid = await getImgid(barcode, imageField, language);
       expect(imgid, isNotNull);
 
-      final String productImageRootUrl =
-          ImageHelper.getProductImageRootUrl(barcode);
+      final String productImageRootUrl = ImageHelper.getProductImageRootUrl(
+        barcode,
+        root: uriHelper.imageUrlBase,
+      );
       final String uploadedImageUrl = '$productImageRootUrl/$imgid.jpg';
       final List<int> uploadedSize = await getJpegUrlSize(uploadedImageUrl);
       final int uploadedWidth = uploadedSize[0];
@@ -174,6 +182,7 @@ void main() {
           language: language,
           imgid: imgid!,
           angle: angle,
+          uriHelper: uriHelper,
         );
         expect(newUrl, isNotNull);
 
@@ -217,6 +226,7 @@ void main() {
           y1: y1,
           x2: x1 + width,
           y2: y1 + height,
+          uriHelper: uriHelper,
         );
         expect(newUrl, isNotNull);
 
@@ -239,6 +249,7 @@ void main() {
         user: user,
         imageField: unselectedImageField,
         language: language,
+        uriHelper: uriHelper,
       );
 
       final ProductResultV3 productResult =
@@ -248,6 +259,7 @@ void main() {
           fields: <ProductField>[ProductField.SELECTED_IMAGE],
           version: ProductQueryVersion.v3,
         ),
+        uriHelper: uriHelper,
       );
       expect(productResult.product, isNotNull);
       expect(productResult.product!.selectedImages, isNotNull);

@@ -7,7 +7,6 @@ import 'test_constants.dart';
 
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   group('Create existing user (without specifying a country, nor a language)',
       () {

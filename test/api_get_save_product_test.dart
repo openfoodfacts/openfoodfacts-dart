@@ -7,7 +7,7 @@ import 'test_constants.dart';
 /// Therefore, in TEST env.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+  const UriProductHelper uriHelper = uriHelperFoodTest;
 
   // Returns a book barcode (978...), that cannot be confused with food.
   String getBookBarcode(final int index) => '${9780000000000 + index}';
@@ -47,6 +47,7 @@ void main() {
       await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         inputProduct,
+        uriHelper: uriHelper,
       );
 
       final SendImage fontImage = SendImage(
@@ -58,6 +59,7 @@ void main() {
       await OpenFoodAPIClient.addProductImage(
         TestConstants.TEST_USER,
         fontImage,
+        uriHelper: uriHelper,
       );
 
       final ProductQueryConfiguration configurations =
@@ -69,6 +71,7 @@ void main() {
       );
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
+        uriHelper: uriHelper,
       );
 
       expect(result.status, ProductResultV3.statusSuccess);
@@ -120,6 +123,7 @@ void main() {
       await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         englishInputProduct,
+        uriHelper: uriHelper,
       );
 
       final fields = [
@@ -152,6 +156,7 @@ void main() {
 
       ProductResultV3 englishResult = await OpenFoodAPIClient.getProductV3(
         englishConf,
+        uriHelper: uriHelper,
       );
       Product englishProduct = englishResult.product!;
 
@@ -188,6 +193,7 @@ void main() {
 
       ProductResultV3 russianResult = await OpenFoodAPIClient.getProductV3(
         russianConf,
+        uriHelper: uriHelper,
       );
       Product russianProduct = russianResult.product!;
 
@@ -245,10 +251,12 @@ void main() {
       await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         englishInputProduct,
+        uriHelper: uriHelper,
       );
       await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         russianInputProduct,
+        uriHelper: uriHelper,
       );
 
       final fields = [
@@ -281,6 +289,7 @@ void main() {
 
       ProductResultV3 englishResult = await OpenFoodAPIClient.getProductV3(
         englishConf,
+        uriHelper: uriHelper,
       );
       Product englishProduct = englishResult.product!;
 
@@ -317,6 +326,7 @@ void main() {
 
       ProductResultV3 russianResult = await OpenFoodAPIClient.getProductV3(
         russianConf,
+        uriHelper: uriHelper,
       );
       Product russianProduct = russianResult.product!;
 
@@ -373,6 +383,7 @@ void main() {
       await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         inputProduct,
+        uriHelper: uriHelper,
       );
 
       final fields = [
@@ -401,6 +412,7 @@ void main() {
 
       ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         conf,
+        uriHelper: uriHelper,
       );
       Product product = result.product!;
 
@@ -470,6 +482,7 @@ void main() {
       await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         inputProduct,
+        uriHelper: uriHelper,
       );
 
       final fields = [
@@ -490,6 +503,7 @@ void main() {
       );
       ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         conf,
+        uriHelper: uriHelper,
       );
       Product product = result.product!;
       // English was of highest priority so English texts are expected
@@ -509,6 +523,7 @@ void main() {
       );
       result = await OpenFoodAPIClient.getProductV3(
         conf,
+        uriHelper: uriHelper,
       );
       product = result.product!;
       // German was of highest priority so German texts are expected
@@ -528,6 +543,7 @@ void main() {
       );
       result = await OpenFoodAPIClient.getProductV3(
         conf,
+        uriHelper: uriHelper,
       );
       product = result.product!;
       // Russian was of highest priority so Russian _name_ is expected...
@@ -557,6 +573,7 @@ void main() {
       await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         inputProduct,
+        uriHelper: uriHelper,
       );
 
       // Request all available languages for the fields which allow it
@@ -571,6 +588,7 @@ void main() {
       );
       ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         conf,
+        uriHelper: uriHelper,
       );
       Product product = result.product!;
 
@@ -612,6 +630,7 @@ void main() {
       await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         inputProduct,
+        uriHelper: uriHelper,
       );
 
       // Request both 'all-langs' and 'in-langs' fields types
@@ -633,6 +652,7 @@ void main() {
       );
       ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         conf,
+        uriHelper: uriHelper,
       );
       Product product = result.product!;
 
@@ -666,6 +686,7 @@ void main() {
         await OpenFoodAPIClient.saveProduct(
           TestConstants.TEST_USER,
           product,
+          uriHelper: uriHelper,
         );
 
         ProductQueryConfiguration configurations = ProductQueryConfiguration(
@@ -676,6 +697,7 @@ void main() {
         );
         ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
           configurations,
+          uriHelper: uriHelper,
         );
 
         expect(result.product!.productName, equals('Quoted Coca "cola"'));
@@ -703,6 +725,7 @@ void main() {
     await OpenFoodAPIClient.saveProduct(
       TestConstants.TEST_USER,
       product,
+      uriHelper: uriHelper,
     );
 
     ProductQueryConfiguration configurations = ProductQueryConfiguration(
@@ -718,6 +741,7 @@ void main() {
 
     final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
       configurations,
+      uriHelper: uriHelper,
     );
 
     expect(result.status, ProductResultV3.statusSuccess);
@@ -746,6 +770,7 @@ void main() {
                   ..setValue(Nutrient.salt, PerSize.oneHundredGrams, 10.0))
                 : null,
           ),
+          uriHelper: uriHelper,
         );
 
     test('Without nutriments', () async {
@@ -763,6 +788,7 @@ void main() {
 
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
+        uriHelper: uriHelper,
       );
 
       expect(result.product!.noNutritionData, isTrue);
@@ -784,6 +810,7 @@ void main() {
 
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
+        uriHelper: uriHelper,
       );
 
       expect(result.product!.noNutritionData, isFalse);

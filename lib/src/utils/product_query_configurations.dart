@@ -4,7 +4,6 @@ import 'country_helper.dart';
 import 'http_helper.dart';
 import 'language_helper.dart';
 import 'product_fields.dart';
-import 'query_type.dart';
 import 'uri_helper.dart';
 import '../model/user.dart';
 
@@ -59,27 +58,25 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
   @override
   Future<Response> getResponse(
     final User? user,
-    final QueryType? queryType,
+    final UriProductHelper uriHelper,
   ) async {
     if (version == ProductQueryVersion.v3) {
       return await HttpHelper().doGetRequest(
-        UriHelper.getUri(
+        uriHelper.getUri(
           path: getUriPath(),
-          queryType: queryType,
           queryParameters: getParametersMap(),
         ),
         user: user,
-        queryType: queryType,
+        uriHelper: uriHelper,
       );
     }
     return await HttpHelper().doPostRequest(
-      UriHelper.getPostUri(
+      uriHelper.getPostUri(
         path: getUriPath(),
-        queryType: queryType,
       ),
       getParametersMap(),
       user,
-      queryType: queryType,
+      uriHelper: uriHelper,
       addCredentialsToBody: false,
     );
   }

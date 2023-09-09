@@ -6,7 +6,7 @@ import 'test_constants.dart';
 /// Tests around Events API.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+  const UriHelper uriHelper = uriHelperEventsTest;
 
   const String knownUserId = 'ocervell';
   const String unknownUserId = "o' * cervell";
@@ -96,67 +96,95 @@ void main() {
 
   group('$OpenFoodAPIClient Events API', () {
     test('getEvents - all', () async {
-      final List<EventsBase> result = await EventsAPIClient.getEvents();
+      final List<EventsBase> result = await EventsAPIClient.getEvents(
+        uriHelper: uriHelper,
+      );
       checkEventsBase(result);
     });
 
     test('getEvents - known user', () async {
-      final List<EventsBase> result =
-          await EventsAPIClient.getEvents(userId: knownUserId);
+      final List<EventsBase> result = await EventsAPIClient.getEvents(
+        userId: knownUserId,
+        uriHelper: uriHelper,
+      );
       checkEventsBase(result);
     });
 
     test('getEvents - unknown user', () async {
-      final List<EventsBase> result =
-          await EventsAPIClient.getEvents(userId: unknownUserId);
+      final List<EventsBase> result = await EventsAPIClient.getEvents(
+        userId: unknownUserId,
+        uriHelper: uriHelper,
+      );
       expect(result, isEmpty);
     });
 
     test('getEventsCount - all', () async {
-      final Map<String, int> result = await EventsAPIClient.getEventsCount();
+      final Map<String, int> result = await EventsAPIClient.getEventsCount(
+        uriHelper: uriHelper,
+      );
       checkEventsCount(result, false);
     });
 
     test('getEventsCount - known user', () async {
-      final Map<String, int> result =
-          await EventsAPIClient.getEventsCount(userId: knownUserId);
+      final Map<String, int> result = await EventsAPIClient.getEventsCount(
+        userId: knownUserId,
+        uriHelper: uriHelper,
+      );
       checkEventsCount(result, false);
     });
 
     test('getEventsCount - unknown user', () async {
-      final Map<String, int> result =
-          await EventsAPIClient.getEventsCount(userId: unknownUserId);
+      final Map<String, int> result = await EventsAPIClient.getEventsCount(
+        userId: unknownUserId,
+        uriHelper: uriHelper,
+      );
       checkEventsCount(result, true);
     });
 
     test('getBadges - all', () async {
-      final List<BadgeBase> result = await EventsAPIClient.getBadges();
+      final List<BadgeBase> result = await EventsAPIClient.getBadges(
+        uriHelper: uriHelper,
+      );
       checkBadgeBase(result);
     });
 
     test('getBadges - known user', () async {
-      final List<BadgeBase> result =
-          await EventsAPIClient.getBadges(userId: knownUserId);
+      final List<BadgeBase> result = await EventsAPIClient.getBadges(
+        userId: knownUserId,
+        uriHelper: uriHelper,
+      );
       checkBadgeBase(result);
     });
 
     test('getBadges - unknown user', () async {
-      final List<BadgeBase> result =
-          await EventsAPIClient.getBadges(userId: unknownUserId);
+      final List<BadgeBase> result = await EventsAPIClient.getBadges(
+        userId: unknownUserId,
+        uriHelper: uriHelper,
+      );
       expect(result, isEmpty);
     });
 
     test('getScores', () async {
-      final int unknown =
-          await EventsAPIClient.getScores(userId: unknownUserId);
+      final int unknown = await EventsAPIClient.getScores(
+        userId: unknownUserId,
+        uriHelper: uriHelper,
+      );
       expect(unknown, 0);
 
-      final int all = await EventsAPIClient.getScores();
-      final int known = await EventsAPIClient.getScores(userId: knownUserId);
+      final int all = await EventsAPIClient.getScores(
+        uriHelper: uriHelper,
+      );
+      final int known = await EventsAPIClient.getScores(
+        userId: knownUserId,
+        uriHelper: uriHelper,
+      );
       expect(known, lessThanOrEqualTo(all));
       int sum = 0;
       for (final String eventType in typicalEventTypes) {
-        final int score = await EventsAPIClient.getScores(eventType: eventType);
+        final int score = await EventsAPIClient.getScores(
+          eventType: eventType,
+          uriHelper: uriHelper,
+        );
         sum += score;
       }
       expect(sum, all);
@@ -164,7 +192,9 @@ void main() {
 
     test('getLeaderboard', () async {
       final List<LeaderboardEntry> result =
-          await EventsAPIClient.getLeaderboard();
+          await EventsAPIClient.getLeaderboard(
+        uriHelper: uriHelper,
+      );
       final int knownTotal = getLeaderboardScore(knownUserId, result)!;
       final int nullTotal = getLeaderboardScore(null, result)!;
       expect(getLeaderboardScore(unknownUserId, result), isNull);
@@ -172,7 +202,10 @@ void main() {
       int nullSum = 0;
       for (final String eventType in typicalEventTypes) {
         final List<LeaderboardEntry> result =
-            await EventsAPIClient.getLeaderboard(eventType: eventType);
+            await EventsAPIClient.getLeaderboard(
+          eventType: eventType,
+          uriHelper: uriHelper,
+        );
         knownSum += getLeaderboardScore(knownUserId, result) ?? 0;
         nullSum += getLeaderboardScore(null, result) ?? 0;
         expect(getLeaderboardScore(unknownUserId, result), isNull);

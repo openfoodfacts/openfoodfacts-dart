@@ -3,102 +3,47 @@ import 'http_helper.dart';
 import 'language_helper.dart';
 import 'open_food_api_configuration.dart';
 
-import 'query_type.dart';
-
 ///Helper class for constructing urls with the in the [OpenFoodAPIConfiguration] specified settings
 class UriHelper {
-  UriHelper._();
+  const UriHelper({
+    required this.host,
+    this.scheme = 'https',
+    this.isTestMode = false,
+    this.defaultAddUserAgentParameters = false,
+  });
+
+  final String host;
+  final String scheme;
+  final bool isTestMode;
+  final bool defaultAddUserAgentParameters;
 
   /// Returns a OFF uri with the [OpenFoodAPIConfiguration] specified settings
   ///
   /// Typical use-case of "[addUserAgentParameters] = false" is for other
   /// request than GET, e.g. POST or MULTIPART, where we add the user agent
   /// parameters in another part of the code.
-  static Uri getUri({
+  Uri getUri({
     required final String path,
-    final Map<String, String>? queryParameters,
-    final QueryType? queryType,
-    final bool addUserAgentParameters = true,
+    final Map<String, dynamic>? queryParameters,
+    final bool? addUserAgentParameters,
     final String? userInfo,
   }) =>
       Uri(
-        scheme: OpenFoodAPIConfiguration.uriScheme,
-        host: getUriHost(queryType),
+        scheme: scheme,
+        host: host,
         path: path,
-        queryParameters: addUserAgentParameters
+        queryParameters: addUserAgentParameters ?? defaultAddUserAgentParameters
             ? HttpHelper.addUserAgentParameters(queryParameters)
             : queryParameters,
         userInfo: userInfo,
       );
 
-  static String getUriHost(final QueryType? queryType) =>
-      OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-          ? OpenFoodAPIConfiguration.uriProdHost
-          : OpenFoodAPIConfiguration.uriTestHost;
-
-  static Uri getPostUri({
+  Uri getPostUri({
     required final String path,
-    final QueryType? queryType,
-  }) =>
-      getUri(path: path, queryType: queryType, addUserAgentParameters: false);
-
-  static Uri getPatchUri({
-    required final String path,
-    final QueryType? queryType,
   }) =>
       getUri(
         path: path,
-        queryType: queryType,
         addUserAgentParameters: false,
-        userInfo:
-            OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-                ? null
-                : HttpHelper.userInfoForTest,
-      );
-
-  ///Returns a OFF-Robotoff uri with the in the [OpenFoodAPIConfiguration] specified settings
-  static Uri getRobotoffUri({
-    required final String path,
-    final Map<String, dynamic>? queryParameters,
-    final QueryType? queryType,
-  }) =>
-      Uri(
-        scheme: OpenFoodAPIConfiguration.uriScheme,
-        host: OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-            ? OpenFoodAPIConfiguration.uriProdHostRobotoff
-            : OpenFoodAPIConfiguration.uriTestHostRobotoff,
-        path: path,
-        queryParameters: queryParameters,
-      );
-
-  ///Returns a OFF-Folksonomy uri with the in the [OpenFoodAPIConfiguration] specified settings
-  static Uri getFolksonomyUri({
-    required final String path,
-    final Map<String, dynamic>? queryParameters,
-    final QueryType? queryType,
-  }) =>
-      Uri(
-        scheme: OpenFoodAPIConfiguration.uriScheme,
-        host: OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-            ? OpenFoodAPIConfiguration.uriProdHostFolksonomy
-            : OpenFoodAPIConfiguration.uriTestHostFolksonomy,
-        path: path,
-        queryParameters: queryParameters,
-      );
-
-  ///Returns a OFF-Events uri with the in the [OpenFoodAPIConfiguration] specified settings
-  static Uri getEventsUri({
-    required final String path,
-    final Map<String, dynamic>? queryParameters,
-    final QueryType? queryType,
-  }) =>
-      Uri(
-        scheme: OpenFoodAPIConfiguration.uriScheme,
-        host: OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-            ? OpenFoodAPIConfiguration.uriProdHostEvents
-            : OpenFoodAPIConfiguration.uriTestHostEvents,
-        path: path,
-        queryParameters: queryParameters,
       );
 
   /// Replaces the subdomain of an URI with specific country and language.
@@ -150,4 +95,30 @@ class UriHelper {
       host: uri.host.replaceFirst('$initialSubdomain.', '$subdomain.'),
     );
   }
+}
+
+/// [UriHelper] specific for products (e.g. off, obf, opf, opff).
+class UriProductHelper extends UriHelper {
+  const UriProductHelper({
+    required super.host,
+    super.scheme = 'https',
+    super.isTestMode = false,
+    this.userInfoForPatch,
+    required this.imageUrlBase,
+    super.defaultAddUserAgentParameters = true,
+  });
+
+  final String? userInfoForPatch;
+
+  /// Url base for images: needs to match more or less scheme and host.
+  final String imageUrlBase;
+
+  Uri getPatchUri({
+    required final String path,
+  }) =>
+      getUri(
+        path: path,
+        addUserAgentParameters: false,
+        userInfo: userInfoForPatch,
+      );
 }

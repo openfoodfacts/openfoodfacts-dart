@@ -6,7 +6,6 @@ import 'test_constants.dart';
 /// Integration tests about the V3 suggestions.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   /// Checks if at least one item contains the [substring].
   void listContains(final List<String> list, final String substring) {

@@ -7,7 +7,7 @@ import 'test_constants.dart';
 
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.TEST;
+  const UriProductHelper uriHelper = uriHelperFoodTest;
 
   group('$OpenFoodAPIClient add new products', () {
     String barcode_1 = '0048151623426';
@@ -49,6 +49,7 @@ void main() {
       Status status = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         product,
+        uriHelper: uriHelper,
       );
 
       expect(status.status, 1);
@@ -63,6 +64,7 @@ void main() {
       ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
+        uriHelper: uriHelper,
       );
 
       testProductResult1(result);
@@ -73,6 +75,7 @@ void main() {
       Status status2 = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         product2,
+        uriHelper: uriHelper,
       );
       expect(status2.status, 1);
       expect(status2.statusVerbose, 'fields saved');
@@ -80,6 +83,7 @@ void main() {
       ProductResultV3 result2 = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
+        uriHelper: uriHelper,
       );
 
       testProductResult1(result2);
@@ -114,6 +118,7 @@ void main() {
       final Status frenchStatus = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         frenchProduct,
+        uriHelper: uriHelper,
       );
       expect(frenchStatus.status, 1);
       expect(frenchStatus.statusVerbose, 'fields saved');
@@ -132,6 +137,7 @@ void main() {
       final Status germanStatus = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         germanProduct,
+        uriHelper: uriHelper,
       );
       expect(germanStatus.status, 1);
       expect(germanStatus.statusVerbose, 'fields saved');
@@ -149,6 +155,7 @@ void main() {
       );
       final frenchResult = await OpenFoodAPIClient.getProductV3(
         frenchConfig,
+        uriHelper: uriHelper,
       );
       expect(frenchResult.product, isNotNull);
       expect(frenchResult.product!.productName, frenchProductName);
@@ -162,6 +169,7 @@ void main() {
       );
       final germanResult = await OpenFoodAPIClient.getProductV3(
         germanConfig,
+        uriHelper: uriHelper,
       );
 
       expect(germanResult.product, isNotNull);
@@ -180,6 +188,7 @@ void main() {
       );
       final frenchGermanResult = await OpenFoodAPIClient.getProductV3(
         frenchGermanConfig,
+        uriHelper: uriHelper,
       );
 
       expect(frenchGermanResult.product, isNotNull);
@@ -207,6 +216,7 @@ Like that:
       Status status = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         product,
+        uriHelper: uriHelper,
       );
 
       expect(status.status, 1);
@@ -226,6 +236,7 @@ Like that:
       Status status = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         product,
+        uriHelper: uriHelper,
       );
 
       expect(status.status, 1);
@@ -245,6 +256,7 @@ Like that:
       Status status = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         product,
+        uriHelper: uriHelper,
       );
 
       expect(status.status, 1);
@@ -268,6 +280,7 @@ Like that:
       Status status = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         product,
+        uriHelper: uriHelper,
       );
 
       expect(status.status, 1);
@@ -283,6 +296,7 @@ Like that:
       Status status = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         product,
+        uriHelper: uriHelper,
       );
 
       expect(status.status, 1);
@@ -295,6 +309,7 @@ Like that:
       ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.TEST_USER,
+        uriHelper: uriHelper,
       );
 
       expect(result.product!.labels,
@@ -337,6 +352,7 @@ Like that:
         final Status status = await OpenFoodAPIClient.saveProduct(
           USER,
           newProduct,
+          uriHelper: uriHelper,
         );
 
         expect(status.status, 1);
@@ -349,6 +365,7 @@ Like that:
             version: ProductQueryVersion.v3,
           ),
           user: USER,
+          uriHelper: uriHelper,
         );
 
         expect(result.status, ProductResultV3.statusSuccess);
@@ -397,6 +414,7 @@ Like that:
           password: generateRandomString(16),
         ),
         product,
+        uriHelper: uriHelper,
       );
       expect(status.isWrongUsernameOrPassword(), isTrue);
     });
@@ -417,6 +435,7 @@ Like that:
         ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
           configurations,
           user: TestConstants.TEST_USER,
+          uriHelper: uriHelper,
         );
         expect(result.status, ProductResultV3.statusSuccess);
         expect(result.product, isNotNull);
@@ -436,6 +455,7 @@ Like that:
         final Status status = await OpenFoodAPIClient.saveProduct(
           TestConstants.TEST_USER,
           savedProduct,
+          uriHelper: uriHelper,
         );
         expect(status.status, 1);
         expect(status.error, null);
@@ -444,6 +464,7 @@ Like that:
         result = await OpenFoodAPIClient.getProductV3(
           configurations,
           user: TestConstants.TEST_USER,
+          uriHelper: uriHelper,
         );
         expect(result.status, ProductResultV3.statusSuccess);
         expect(result.product, isNotNull);

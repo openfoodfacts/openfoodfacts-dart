@@ -7,7 +7,6 @@ import 'test_constants.dart';
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   group('$OpenFoodAPIClient get all to-be-completed products', () {
     Future<int?> getCount(
@@ -39,7 +38,6 @@ void main() {
         result = await OpenFoodAPIClient.searchProducts(
           OpenFoodAPIConfiguration.globalUser,
           configuration,
-          queryType: OpenFoodAPIConfiguration.globalQueryType,
         );
       } catch (e) {
         fail('Could not retrieve data for $reason: $e');
