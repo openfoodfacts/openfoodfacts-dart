@@ -63,15 +63,15 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.1.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.1.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.1.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.1.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span>
 <span class="name ">getSuggestions</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getSuggestions-param-taxonomyType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_tag_type/TagType.html">TagType</a></span> <span class="parameter-name">taxonomyType</span>, </span></li>
-<li><span class="parameter" id="getSuggestions-param-input">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">input</span> = <span class="default-value">&#39;&#39;</span>, </span></li>
+<li><span class="parameter" id="getSuggestions-param-input">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">input</span> = <span class="default-value">&#39;&#39;</span>, </span></li>
 <li><span class="parameter" id="getSuggestions-param-language"><span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span>, </span></li>
 <li><span class="parameter" id="getSuggestions-param-country"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a>?</span> <span class="parameter-name">country</span>, </span></li>
-<li><span class="parameter" id="getSuggestions-param-categories"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">categories</span>, </span></li>
-<li><span class="parameter" id="getSuggestions-param-shape"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">shape</span>, </span></li>
-<li><span class="parameter" id="getSuggestions-param-limit"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/int-class.html">int</a></span> <span class="parameter-name">limit</span> = <span class="default-value">25</span>, </span></li>
-<li><span class="parameter" id="getSuggestions-param-queryType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>, </span></li>
+<li><span class="parameter" id="getSuggestions-param-categories"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">categories</span>, </span></li>
+<li><span class="parameter" id="getSuggestions-param-shape"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">shape</span>, </span></li>
+<li><span class="parameter" id="getSuggestions-param-limit"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">limit</span> = <span class="default-value">25</span>, </span></li>
+<li><span class="parameter" id="getSuggestions-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>, </span></li>
 <li><span class="parameter" id="getSuggestions-param-user"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>}</span></li>
 </ol>)
 
@@ -96,7 +96,7 @@
   final String? categories,
   final String? shape,
   final int limit = 25,
-  final QueryType? queryType,
+  final UriProductHelper uriHelper = uriHelperFoodProd,
   final User? user,
 }) async {
   final Map&lt;String, String&gt; queryParameters = &lt;String, String&gt;{
@@ -108,15 +108,14 @@
     if (shape != null) &#39;shape&#39;: shape,
     &#39;limit&#39;: limit.toString(),
   };
-  final Uri uri = UriHelper.getUri(
+  final Uri uri = uriHelper.getUri(
     path: &#39;&#47;api&#47;v3&#47;taxonomy_suggestions&#39;,
-    queryType: queryType,
     queryParameters: queryParameters,
   );
   final Response response = await HttpHelper().doGetRequest(
     uri,
     user: user,
-    queryType: queryType,
+    uriHelper: uriHelper,
   );
   final Map&lt;String, dynamic&gt; map = HttpHelper().jsonDecode(response.body);
   final List&lt;String&gt; result = &lt;String&gt;[];

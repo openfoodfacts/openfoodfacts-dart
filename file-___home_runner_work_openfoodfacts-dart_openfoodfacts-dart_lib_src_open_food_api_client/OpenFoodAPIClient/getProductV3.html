@@ -63,10 +63,10 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.1.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_result_v3/ProductResultV3-class.html">ProductResultV3</a></span>&gt;</span></span>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.1.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_result_v3/ProductResultV3-class.html">ProductResultV3</a></span>&gt;</span></span>
 <span class="name ">getProductV3</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getProductV3-param-configuration"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryConfiguration-class.html">ProductQueryConfiguration</a></span> <span class="parameter-name">configuration</span>, </span></li>
 <li><span class="parameter" id="getProductV3-param-user">{<span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span></li>
-<li><span class="parameter" id="getProductV3-param-queryType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
+<li><span class="parameter" id="getProductV3-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>}</span></li>
 </ol>)
 
       
@@ -110,7 +110,7 @@ like for example the language to query.</p>
   <pre class="language-dart"><code class="language-dart">static Future&lt;ProductResultV3&gt; getProductV3(
   ProductQueryConfiguration configuration, {
   User? user,
-  QueryType? queryType,
+  final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
   if (!configuration.matchesV3()) {
     Exception(&quot;The configuration must match V3!&quot;);
@@ -118,7 +118,7 @@ like for example the language to query.</p>
   final String productString = await getProductString(
     configuration,
     user: user,
-    queryType: queryType,
+    uriHelper: uriHelper,
   );
   final String jsonStr = _replaceQuotes(productString);
   final ProductResultV3 result = ProductResultV3.fromJson(
@@ -126,7 +126,7 @@ like for example the language to query.</p>
   );
   if (result.product != null) {
     ProductHelper.removeImages(result.product!, configuration.language);
-    ProductHelper.createImageUrls(result.product!, queryType: queryType);
+    ProductHelper.createImageUrls(result.product!, uriHelper: uriHelper);
   }
   return result;
 }</code></pre>

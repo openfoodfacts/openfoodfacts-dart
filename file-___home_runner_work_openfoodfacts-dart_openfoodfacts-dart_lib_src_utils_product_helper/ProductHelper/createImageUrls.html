@@ -65,7 +65,7 @@
 
 <span class="returntype">void</span>
 <span class="name ">createImageUrls</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="createImageUrls-param-product"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product-class.html">Product</a></span> <span class="parameter-name">product</span>, </span></li>
-<li><span class="parameter" id="createImageUrls-param-queryType">{<span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
+<li><span class="parameter" id="createImageUrls-param-uriHelper">{<span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span>}</span></li>
 </ol>)
 
       
@@ -82,7 +82,7 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static void createImageUrls(
   Product product, {
-  QueryType? queryType,
+  required UriProductHelper uriHelper,
 }) {
   if (product.images == null) {
     return;
@@ -92,7 +92,7 @@
     image.url = ImageHelper.buildUrl(
       product.barcode,
       image,
-      queryType: queryType,
+      uriHelper: uriHelper,
     );
   }
 }</code></pre>

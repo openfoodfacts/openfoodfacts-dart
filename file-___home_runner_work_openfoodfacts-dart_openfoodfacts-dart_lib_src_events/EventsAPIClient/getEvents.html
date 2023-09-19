@@ -63,12 +63,12 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.1.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.1.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_events_base/EventsBase-class.html">EventsBase</a></span>&gt;</span></span>&gt;</span></span>
-<span class="name ">getEvents</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getEvents-param-userId">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">userId</span>, </span></li>
-<li><span class="parameter" id="getEvents-param-deviceId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">deviceId</span>, </span></li>
-<li><span class="parameter" id="getEvents-param-skip"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">skip</span>, </span></li>
-<li><span class="parameter" id="getEvents-param-limit"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">limit</span>, </span></li>
-<li><span class="parameter" id="getEvents-param-queryType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>}</span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.1.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.1.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_events_base/EventsBase-class.html">EventsBase</a></span>&gt;</span></span>&gt;</span></span>
+<span class="name ">getEvents</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getEvents-param-userId">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">userId</span>, </span></li>
+<li><span class="parameter" id="getEvents-param-deviceId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">deviceId</span>, </span></li>
+<li><span class="parameter" id="getEvents-param-skip"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">skip</span>, </span></li>
+<li><span class="parameter" id="getEvents-param-limit"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">limit</span>, </span></li>
+<li><span class="parameter" id="getEvents-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriHelper-class.html">UriHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperEventsProd</span>}</span></li>
 </ol>)
 
       
@@ -88,7 +88,7 @@
   final String? deviceId,
   final int? skip,
   final int? limit,
-  final QueryType? queryType,
+  final UriHelper uriHelper = uriHelperEventsProd,
 }) async {
   final Map&lt;String, String&gt; parameters = &lt;String, String&gt;{};
   if (userId != null) {
@@ -104,12 +104,11 @@
     parameters[&#39;limit&#39;] = limit.toString();
   }
   final Response response = await HttpHelper().doGetRequest(
-    UriHelper.getEventsUri(
+    uriHelper.getUri(
       path: &#39;&#47;events&#39;,
       queryParameters: parameters,
-      queryType: queryType,
     ),
-    queryType: queryType,
+    uriHelper: uriHelper,
   );
   _checkResponse(response);
   final List&lt;EventsBase&gt; result = &lt;EventsBase&gt;[];

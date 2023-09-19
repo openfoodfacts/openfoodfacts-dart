@@ -63,12 +63,12 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a>?</span>
-<span class="name ">buildUrl</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="buildUrl-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">barcode</span>, </span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a>?</span>
+<span class="name ">buildUrl</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="buildUrl-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">barcode</span>, </span></li>
 <li><span class="parameter" id="buildUrl-param-image"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage-class.html">ProductImage</a></span> <span class="parameter-name">image</span>, </span></li>
 <li><span class="parameter" id="buildUrl-param-imageSize">{<span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageSize.html">ImageSize</a>?</span> <span class="parameter-name">imageSize</span>, </span></li>
-<li><span class="parameter" id="buildUrl-param-queryType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>, </span></li>
-<li><span class="parameter" id="buildUrl-param-root"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">root</span>}</span></li>
+<li><span class="parameter" id="buildUrl-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>, </span></li>
+<li><span class="parameter" id="buildUrl-param-root"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">root</span>}</span></li>
 </ol>)
 
       
@@ -89,14 +89,14 @@ E.g. "https://static.openfoodfacts.org/images/products/359/671/046/2858/front_fr
   final String? barcode,
   final ProductImage image, {
   final ImageSize? imageSize,
-  final QueryType? queryType,
+  final UriProductHelper uriHelper = uriHelperFoodProd,
   final String? root,
 }) =&gt;
     barcode == null
         ? null
         : &#39;${getProductImageRootUrl(
             barcode,
-            queryType: queryType,
+            uriHelper: uriHelper,
             root: root,
           )}&#39;
             &#39;&#47;&#39;

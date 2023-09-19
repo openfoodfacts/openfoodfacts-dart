@@ -63,10 +63,10 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a></span>
-<span class="name ">getProductImageRootUrl</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getProductImageRootUrl-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, </span></li>
-<li><span class="parameter" id="getProductImageRootUrl-param-queryType">{<span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_query_type/QueryType.html">QueryType</a>?</span> <span class="parameter-name">queryType</span>, </span></li>
-<li><span class="parameter" id="getProductImageRootUrl-param-root"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">root</span>}</span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a></span>
+<span class="name ">getProductImageRootUrl</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getProductImageRootUrl-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, </span></li>
+<li><span class="parameter" id="getProductImageRootUrl-param-uriHelper">{<span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>, </span></li>
+<li><span class="parameter" id="getProductImageRootUrl-param-root"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">root</span>}</span></li>
 </ol>)
 
       
@@ -84,12 +84,10 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static String getProductImageRootUrl(
   final String barcode, {
-  final QueryType? queryType,
+  final UriProductHelper uriHelper = uriHelperFoodProd,
   String? root,
 }) {
-  root ??= OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-      ? OpenFoodAPIConfiguration.imageProdUrlBase
-      : OpenFoodAPIConfiguration.imageTestUrlBase;
+  root ??= uriHelper.imageUrlBase;
   final String separator = root.endsWith(&#39;&#47;&#39;) ? &#39;&#39; : &#39;&#47;&#39;;
   return &#39;$root$separator${getBarcodeSubPath(barcode)}&#39;;
 }</code></pre>
