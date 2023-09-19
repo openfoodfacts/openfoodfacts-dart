@@ -26,7 +26,6 @@ class _SuggestionManagerTest extends SuggestionManager {
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   const TagType tagType = TagType.COUNTRIES;
   const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;

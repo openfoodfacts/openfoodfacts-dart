@@ -6,7 +6,6 @@ import 'test_constants.dart';
 /// Integration test about packaging materials.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
   OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
   OpenFoodAPIConfiguration.globalLanguages = [

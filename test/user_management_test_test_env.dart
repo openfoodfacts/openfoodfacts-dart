@@ -7,7 +7,7 @@ import 'test_constants.dart';
 
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  const QueryType user_test_queryType = QueryType.TEST;
+  const UriProductHelper uriHelper = uriHelperFoodTest;
 
   group('Create user', () {
     test('Create user', () async {
@@ -32,7 +32,7 @@ void main() {
           user: User(userId: userId, password: password),
           name: name,
           email: email,
-          queryType: user_test_queryType,
+          uriHelper: uriHelper,
           newsletter: false,
         );
 
@@ -43,7 +43,7 @@ void main() {
 
       final LoginStatus? status = await OpenFoodAPIClient.login2(
         User(userId: userId, password: password),
-        queryType: user_test_queryType,
+        uriHelper: uriHelper,
       );
       expect(status, isNotNull);
       expect(status!.successful, isTrue);
@@ -56,7 +56,7 @@ void main() {
     test('Login with invalid credentials', () async {
       final LoginStatus? status = await OpenFoodAPIClient.login2(
         User(userId: '123', password: '123'),
-        queryType: user_test_queryType,
+        uriHelper: uriHelper,
       );
       expect(status?.successful, false);
       expect(status?.statusVerbose, 'user not signed-in');

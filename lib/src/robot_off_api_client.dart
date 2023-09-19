@@ -10,7 +10,7 @@ import 'model/user.dart';
 import 'utils/country_helper.dart';
 import 'utils/http_helper.dart';
 import 'utils/language_helper.dart';
-import 'utils/query_type.dart';
+import 'utils/open_food_api_configuration.dart';
 import 'utils/server_type.dart';
 import 'utils/uri_helper.dart';
 
@@ -23,7 +23,7 @@ class RobotoffAPIClient {
     String? valueTag,
     ServerType? serverType,
     int? count,
-    QueryType? queryType,
+    final UriHelper uriHelper = uriHelperRobotoffProd,
   }) async {
     final Map<String, String> parameters = {
       if (type != null) 'type': type.offTag,
@@ -34,15 +34,14 @@ class RobotoffAPIClient {
       if (serverType != null) 'server_type': serverType.offTag,
     };
 
-    var insightUri = UriHelper.getRobotoffUri(
+    var insightUri = uriHelper.getUri(
       path: 'api/v1/insights/random/',
-      queryType: queryType,
       queryParameters: parameters,
     );
 
     Response response = await HttpHelper().doGetRequest(
       insightUri,
-      queryType: queryType,
+      uriHelper: uriHelper,
     );
     var result = InsightsResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
@@ -54,21 +53,20 @@ class RobotoffAPIClient {
   static Future<InsightsResult> getProductInsights(
     String barcode, {
     ServerType? serverType,
-    QueryType? queryType,
+    final UriHelper uriHelper = uriHelperRobotoffProd,
   }) async {
     final Map<String, String> parameters = <String, String>{
       if (serverType != null) 'server_type': serverType.offTag,
     };
 
-    var insightsUri = UriHelper.getRobotoffUri(
+    var insightsUri = uriHelper.getUri(
       path: 'api/v1/insights/$barcode',
-      queryType: queryType,
       queryParameters: parameters,
     );
 
     Response response = await HttpHelper().doGetRequest(
       insightsUri,
-      queryType: queryType,
+      uriHelper: uriHelper,
     );
 
     return InsightsResult.fromJson(
@@ -82,7 +80,7 @@ class RobotoffAPIClient {
     User? user,
     int? count,
     ServerType? serverType,
-    QueryType? queryType,
+    final UriHelper uriHelper = uriHelperRobotoffProd,
     List<InsightType>? insightTypes,
   }) async {
     final Map<String, String> parameters = <String, String>{
@@ -94,16 +92,15 @@ class RobotoffAPIClient {
             insightTypes.map((InsightType type) => type.offTag).join(','),
     };
 
-    var robotoffQuestionUri = UriHelper.getRobotoffUri(
+    var robotoffQuestionUri = uriHelper.getUri(
       path: 'api/v1/questions/$barcode',
       queryParameters: parameters,
-      queryType: queryType,
     );
 
     Response response = await HttpHelper().doGetRequest(
       robotoffQuestionUri,
       user: user,
-      queryType: queryType,
+      uriHelper: uriHelper,
     );
     var result = RobotoffQuestionResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
@@ -124,7 +121,7 @@ class RobotoffAPIClient {
     RobotoffQuestionOrder? questionOrder,
     ServerType? serverType,
     String? valueTag,
-    QueryType? queryType,
+    final UriHelper uriHelper = uriHelperRobotoffProd,
   }) async {
     final List<String> insightValues = [];
     if (insightTypes != null) {
@@ -146,16 +143,15 @@ class RobotoffAPIClient {
       if (valueTag != null) 'value_tag': valueTag,
     };
 
-    var robotoffQuestionUri = UriHelper.getRobotoffUri(
+    var robotoffQuestionUri = uriHelper.getUri(
       path: 'api/v1/questions',
       queryParameters: parameters,
-      queryType: queryType,
     );
 
     final Response response = await HttpHelper().doGetRequest(
       robotoffQuestionUri,
       user: user,
-      queryType: queryType,
+      uriHelper: uriHelper,
     );
     return RobotoffQuestionResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
@@ -167,11 +163,10 @@ class RobotoffAPIClient {
     InsightAnnotation annotation, {
     String? deviceId,
     bool update = true,
-    final QueryType? queryType,
+    final UriHelper uriHelper = uriHelperRobotoffProd,
   }) async {
-    var insightUri = UriHelper.getRobotoffUri(
+    var insightUri = uriHelper.getUri(
       path: 'api/v1/insights/annotate',
-      queryType: queryType,
     );
 
     final Map<String, String> annotationData = {
@@ -190,7 +185,7 @@ class RobotoffAPIClient {
       insightUri,
       annotationData,
       null,
-      queryType: queryType,
+      uriHelper: uriHelper,
       addCredentialsToBody: false,
       addCredentialsToHeader: true,
     );

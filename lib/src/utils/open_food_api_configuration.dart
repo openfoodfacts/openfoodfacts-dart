@@ -1,8 +1,9 @@
 import '../model/user.dart';
 import '../model/user_agent.dart';
 import 'country_helper.dart';
+import 'http_helper.dart';
 import 'language_helper.dart';
-import 'query_type.dart';
+import 'uri_helper.dart';
 
 /// Allows to configure the behavior of the package.
 ///
@@ -43,45 +44,6 @@ class OpenFoodAPIConfiguration {
   ///Defines a global user to avoid adding it to every request
   static User? globalUser;
 
-  ///change the uriScheme of the requests
-  static String uriScheme = 'https';
-
-  ///Uri host of the main requests to the backend, modify this to direct the request to a self-hosted instance.
-  static String uriProdHost = 'world.openfoodfacts.org';
-
-  ///Uri host of the test requests to the backend
-  static String uriTestHost = 'world.openfoodfacts.net';
-
-  ///Url base for images in prod: needs to match the domain of uriProdHost
-  static String imageProdUrlBase =
-      'https://static.openfoodfacts.org/images/products/';
-
-  ///Url base for images in test: needs to match the domain of uriTestHost
-  static String imageTestUrlBase =
-      'https://static.openfoodfacts.net/images/products/';
-
-  ///Uri host of the Robotoff requests to the backend, modify this to direct the request to a self-hosted instance.
-  static String uriProdHostRobotoff = 'robotoff.openfoodfacts.org';
-
-  ///Uri host of the test requests to Robotoff
-  static String uriTestHostRobotoff = 'robotoff.openfoodfacts.net';
-
-  ///Uri host of the Folksonomy requests to the backend, modify this to direct the request to a self-hosted instance.
-  static String uriProdHostFolksonomy = 'api.folksonomy.openfoodfacts.org';
-
-  ///Uri host of the test requests to Folksonomy
-  static String uriTestHostFolksonomy =
-      'api.folksonomy.openfoodfacts.net'; // TODO does not work
-
-  ///Uri host of the Events requests to the backend, modify this to direct the request to a self-hosted instance.
-  static String uriProdHostEvents = 'events.openfoodfacts.org';
-
-  ///Uri host of the test requests to Events
-  static String uriTestHostEvents = 'events.openfoodfacts.net';
-
-  ///Changes whether the requests sent by this package to the test or main server.
-  static QueryType globalQueryType = QueryType.PROD;
-
   ///A global way to specify the languages for queries, can be overwritten
   /// for each individual request by specifying the languages in the
   /// individual request configurations
@@ -91,10 +53,6 @@ class OpenFoodAPIConfiguration {
   /// for each individual request by specifying the country code in the
   /// individual request configurations
   static OpenFoodFactsCountry? globalCountry;
-
-  ///Returns the [QueryType] to use, using a default value
-  static QueryType getQueryType(final QueryType? queryType) =>
-      queryType ?? globalQueryType;
 
   ///Returns the [User] to use, using a default value
   static User? getUser(final User? user) => user ?? globalUser;
@@ -116,3 +74,50 @@ class OpenFoodAPIConfiguration {
     return null;
   }
 }
+
+/// Uri of the main requests to the backend (OFF).
+const UriProductHelper uriHelperFoodProd = UriProductHelper(
+  host: 'world.openfoodfacts.org',
+  imageUrlBase: 'https://static.openfoodfacts.org/images/products/',
+);
+
+/// Uri of the test requests to the backend (OFF).
+const UriProductHelper uriHelperFoodTest = UriProductHelper(
+  host: 'world.openfoodfacts.net',
+  userInfoForPatch: HttpHelper.userInfoForTest,
+  isTestMode: true,
+  imageUrlBase: 'https://static.openfoodfacts.net/images/products/',
+);
+
+/// Uri of the main requests to the backend (RobotOff).
+const UriHelper uriHelperRobotoffProd = UriHelper(
+  host: 'robotoff.openfoodfacts.org',
+);
+
+/// Uri of the test requests to the backend (RobotOff).
+const UriHelper uriHelperRobotoffTest = UriHelper(
+  host: 'robotoff.openfoodfacts.net',
+  isTestMode: true,
+);
+
+/// Uri of the main requests to the backend (Folksonomy).
+const UriHelper uriHelperFolksonomyProd = UriHelper(
+  host: 'api.folksonomy.openfoodfacts.org',
+);
+
+/// Uri of the test requests to the backend (Folksonomy) - does not work :-(
+const UriHelper uriHelperFolksonomyTest = UriHelper(
+  host: 'api.folksonomy.openfoodfacts.net',
+  isTestMode: true,
+);
+
+/// Uri of the main requests to the backend (Events).
+const UriHelper uriHelperEventsProd = UriHelper(
+  host: 'events.openfoodfacts.org',
+);
+
+/// Uri of the test requests to the backend (Events).
+const UriHelper uriHelperEventsTest = UriHelper(
+  host: 'events.openfoodfacts.net',
+  isTestMode: true,
+);

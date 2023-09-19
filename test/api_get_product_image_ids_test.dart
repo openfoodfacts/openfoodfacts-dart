@@ -11,7 +11,6 @@ void main() {
     final List<int> result = await OpenFoodAPIClient.getProductImageIds(
       barcode,
       user: TestConstants.PROD_USER,
-      queryType: QueryType.PROD,
     );
     expect(result.length, greaterThanOrEqualTo(34)); // was 34 on 2023-01-25
   });

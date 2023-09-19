@@ -6,7 +6,8 @@ import '../model/user.dart';
 import '../open_food_api_client.dart';
 import 'country_helper.dart';
 import 'language_helper.dart';
-import 'query_type.dart';
+import 'open_food_api_configuration.dart';
+import 'uri_helper.dart';
 import 'tag_type.dart';
 
 /// Manager that returns the suggestions for the latest input.
@@ -25,7 +26,7 @@ class SuggestionManager {
     this.categories,
     this.shape,
     this.limit = 25,
-    this.queryType,
+    this.uriHelper = uriHelperFoodProd,
     this.user,
   });
 
@@ -35,7 +36,7 @@ class SuggestionManager {
   final String? categories;
   final String? shape;
   final int limit;
-  final QueryType? queryType;
+  final UriProductHelper uriHelper;
   final User? user;
 
   final List<String> _inputs = <String>[];
@@ -59,7 +60,7 @@ class SuggestionManager {
       categories: categories,
       shape: shape,
       limit: limit,
-      queryType: queryType,
+      uriHelper: uriHelper,
       user: user,
     );
     // meanwhile there might have been some calls to this method, adding inputs.

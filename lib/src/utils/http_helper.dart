@@ -8,7 +8,7 @@ import 'package:path/path.dart';
 import '../model/status.dart';
 import '../model/user.dart';
 import 'open_food_api_configuration.dart';
-import 'query_type.dart';
+import 'uri_helper.dart';
 import 'uri_reader.dart';
 
 /// General functions for sending http requests (post, get, multipart, ...)
@@ -62,14 +62,13 @@ class HttpHelper {
   Future<http.Response> doGetRequest(
     Uri uri, {
     User? user,
-    QueryType? queryType,
+    required final UriHelper uriHelper,
   }) async {
     http.Response response = await http.get(
       uri,
       headers: _buildHeaders(
         user: user,
-        isTestModeActive:
-            OpenFoodAPIConfiguration.getQueryType(queryType) != QueryType.PROD,
+        uriHelper: uriHelper,
       ),
     );
 
@@ -87,7 +86,7 @@ class HttpHelper {
     Uri uri,
     Map<String, String> body,
     User? user, {
-    QueryType? queryType,
+    required final UriHelper uriHelper,
     required bool addCredentialsToBody,
     bool addCredentialsToHeader = false,
   }) async {
@@ -101,8 +100,7 @@ class HttpHelper {
       uri,
       headers: _buildHeaders(
         user: user,
-        isTestModeActive:
-            OpenFoodAPIConfiguration.getQueryType(queryType) != QueryType.PROD,
+        uriHelper: uriHelper,
         addCredentialsToHeader: addCredentialsToHeader,
       ),
       body: addUserAgentParameters(body),
@@ -120,14 +118,13 @@ class HttpHelper {
     final Uri uri,
     final Map<String, dynamic> body,
     final User? user, {
-    final QueryType? queryType,
+    required final UriHelper uriHelper,
   }) async =>
       http.patch(
         uri,
         headers: _buildHeaders(
           user: user,
-          isTestModeActive: OpenFoodAPIConfiguration.getQueryType(queryType) !=
-              QueryType.PROD,
+          uriHelper: uriHelper,
           addCredentialsToHeader: false,
         ),
         body: jsonEncode(addUserAgentParameters(body)),
@@ -142,15 +139,14 @@ class HttpHelper {
     Map<String, String> body, {
     Map<String, Uri>? files,
     User? user,
-    QueryType? queryType,
+    required final UriHelper uriHelper,
   }) async {
     var request = http.MultipartRequest('POST', uri);
 
     request.headers.addAll(
       _buildHeaders(
         user: user,
-        isTestModeActive:
-            OpenFoodAPIConfiguration.getQueryType(queryType) != QueryType.PROD,
+        uriHelper: uriHelper,
       ) as Map<String, String>,
     );
 
@@ -206,7 +202,7 @@ class HttpHelper {
   /// Note: [addCredentialsToHeader] and [isTestModeActive] exclude each other.
   Map<String, String>? _buildHeaders({
     User? user,
-    bool isTestModeActive = false,
+    required final UriHelper uriHelper,
     bool addCredentialsToHeader = false,
   }) {
     Map<String, String>? headers = {};
@@ -221,6 +217,7 @@ class HttpHelper {
       'From': OpenFoodAPIConfiguration.getUser(user)?.userId ?? FROM,
     });
 
+    final bool isTestModeActive = uriHelper.isTestMode;
     if (isTestModeActive && !addCredentialsToHeader) {
       var token = 'Basic ${base64Encode(utf8.encode(userInfoForTest))}';
       headers.addAll({'Authorization': token});

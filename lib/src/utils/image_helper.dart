@@ -1,6 +1,6 @@
-import 'open_food_api_configuration.dart';
-import 'query_type.dart';
 import 'language_helper.dart';
+import 'open_food_api_configuration.dart';
+import 'uri_helper.dart';
 import '../model/product_image.dart';
 
 /// Helper class related to product pictures
@@ -19,14 +19,14 @@ class ImageHelper {
     final String? barcode,
     final ProductImage image, {
     final ImageSize? imageSize,
-    final QueryType? queryType,
+    final UriProductHelper uriHelper = uriHelperFoodProd,
     final String? root,
   }) =>
       barcode == null
           ? null
           : '${getProductImageRootUrl(
               barcode,
-              queryType: queryType,
+              uriHelper: uriHelper,
               root: root,
             )}'
               '/'
@@ -42,9 +42,9 @@ class ImageHelper {
     final String barcode,
     final int imageId,
     final ImageSize imageSize, {
-    final QueryType? queryType,
+    final UriProductHelper uriHelper = uriHelperFoodProd,
   }) =>
-      '${getProductImageRootUrl(barcode, queryType: queryType)}'
+      '${getProductImageRootUrl(barcode, uriHelper: uriHelper)}'
       '/'
       '${_getUploadedImageFilename(imageId, imageSize)}';
 
@@ -107,12 +107,10 @@ class ImageHelper {
   /// E.g. "https://static.openfoodfacts.org/images/products/359/671/046/2858"
   static String getProductImageRootUrl(
     final String barcode, {
-    final QueryType? queryType,
+    final UriProductHelper uriHelper = uriHelperFoodProd,
     String? root,
   }) {
-    root ??= OpenFoodAPIConfiguration.getQueryType(queryType) == QueryType.PROD
-        ? OpenFoodAPIConfiguration.imageProdUrlBase
-        : OpenFoodAPIConfiguration.imageTestUrlBase;
+    root ??= uriHelper.imageUrlBase;
     final String separator = root.endsWith('/') ? '' : '/';
     return '$root$separator${getBarcodeSubPath(barcode)}';
   }

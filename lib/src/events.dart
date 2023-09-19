@@ -6,7 +6,7 @@ import 'model/events_base.dart';
 import 'model/leaderboard_entry.dart';
 
 import 'utils/http_helper.dart';
-import 'utils/query_type.dart';
+import 'utils/open_food_api_configuration.dart';
 import 'utils/uri_helper.dart';
 
 /// Client calls of the Events API (Open Food Facts).
@@ -21,7 +21,7 @@ class EventsAPIClient {
     final String? deviceId,
     final int? skip,
     final int? limit,
-    final QueryType? queryType,
+    final UriHelper uriHelper = uriHelperEventsProd,
   }) async {
     final Map<String, String> parameters = <String, String>{};
     if (userId != null) {
@@ -37,12 +37,11 @@ class EventsAPIClient {
       parameters['limit'] = limit.toString();
     }
     final Response response = await HttpHelper().doGetRequest(
-      UriHelper.getEventsUri(
+      uriHelper.getUri(
         path: '/events',
         queryParameters: parameters,
-        queryType: queryType,
       ),
-      queryType: queryType,
+      uriHelper: uriHelper,
     );
     _checkResponse(response);
     final List<EventsBase> result = <EventsBase>[];
@@ -58,7 +57,7 @@ class EventsAPIClient {
   static Future<Map<String, int>> getEventsCount({
     final String? userId,
     final String? deviceId,
-    final QueryType? queryType,
+    final UriHelper uriHelper = uriHelperEventsProd,
   }) async {
     final Map<String, String> parameters = <String, String>{};
     if (userId != null) {
@@ -68,12 +67,11 @@ class EventsAPIClient {
       parameters['device_id'] = deviceId;
     }
     final Response response = await HttpHelper().doGetRequest(
-      UriHelper.getEventsUri(
+      uriHelper.getUri(
         path: '/events/count',
         queryParameters: parameters,
-        queryType: queryType,
       ),
-      queryType: queryType,
+      uriHelper: uriHelper,
     );
     _checkResponse(response);
     final Map<String, int> result = <String, int>{};
@@ -90,7 +88,7 @@ class EventsAPIClient {
     final String? userId,
     final String? deviceId,
     final String? eventType,
-    final QueryType? queryType,
+    final UriHelper uriHelper = uriHelperEventsProd,
   }) async {
     final Map<String, String> parameters = <String, String>{};
     if (userId != null) {
@@ -103,12 +101,11 @@ class EventsAPIClient {
       parameters['event_type'] = eventType;
     }
     final Response response = await HttpHelper().doGetRequest(
-      UriHelper.getEventsUri(
+      uriHelper.getUri(
         path: '/scores',
         queryParameters: parameters,
-        queryType: queryType,
       ),
-      queryType: queryType,
+      uriHelper: uriHelper,
     );
     _checkResponse(response);
     final Map<String, dynamic> json =
@@ -120,7 +117,7 @@ class EventsAPIClient {
   static Future<List<BadgeBase>> getBadges({
     final String? userId,
     final String? deviceId,
-    final QueryType? queryType,
+    final UriHelper uriHelper = uriHelperEventsProd,
   }) async {
     final Map<String, String> parameters = <String, String>{};
     if (userId != null) {
@@ -130,12 +127,11 @@ class EventsAPIClient {
       parameters['device_id'] = deviceId;
     }
     final Response response = await HttpHelper().doGetRequest(
-      UriHelper.getEventsUri(
+      uriHelper.getUri(
         path: '/badges',
         queryParameters: parameters,
-        queryType: queryType,
       ),
-      queryType: queryType,
+      uriHelper: uriHelper,
     );
     _checkResponse(response);
     final List<BadgeBase> result = <BadgeBase>[];
@@ -150,19 +146,18 @@ class EventsAPIClient {
   /// Returns all the [LeaderboardEntry], with optional filters.
   static Future<List<LeaderboardEntry>> getLeaderboard({
     final String? eventType,
-    final QueryType? queryType,
+    final UriHelper uriHelper = uriHelperEventsProd,
   }) async {
     final Map<String, String> parameters = <String, String>{};
     if (eventType != null) {
       parameters['event_type'] = eventType;
     }
     final Response response = await HttpHelper().doGetRequest(
-      UriHelper.getEventsUri(
+      uriHelper.getUri(
         path: '/leaderboard',
         queryParameters: parameters,
-        queryType: queryType,
       ),
-      queryType: queryType,
+      uriHelper: uriHelper,
     );
     _checkResponse(response);
     final List<LeaderboardEntry> result = <LeaderboardEntry>[];

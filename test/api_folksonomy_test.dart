@@ -7,7 +7,6 @@ import 'test_constants.dart';
 void main() {
   // TODO have it working on TEST too
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
 
   // of course we need to check that those 3 "known" guys combine well
   const String knownBarcode = '9310036071174';

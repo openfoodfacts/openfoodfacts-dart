@@ -7,7 +7,6 @@ import 'test_constants.dart';
 
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalQueryType = QueryType.PROD;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
   const ProductQueryVersion version = ProductQueryVersion.v3;
 
@@ -632,7 +631,6 @@ void main() {
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.PROD_USER,
         configuration,
-        queryType: QueryType.PROD,
       );
 
       expect(result.products, isNotNull);
@@ -654,7 +652,7 @@ void main() {
       await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         product,
-        queryType: QueryType.TEST,
+        uriHelper: uriHelperFoodTest,
       );
 
       final parameters = <Parameter>[
@@ -673,7 +671,7 @@ void main() {
       final SearchResult result = await OpenFoodAPIClient.searchProducts(
         TestConstants.TEST_USER,
         configuration,
-        queryType: QueryType.TEST,
+        uriHelper: uriHelperFoodTest,
       );
 
       expect(result.products!.length, 1);

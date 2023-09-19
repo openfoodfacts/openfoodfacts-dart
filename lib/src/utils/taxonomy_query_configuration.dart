@@ -2,7 +2,6 @@ import '../interface/json_object.dart';
 import '../interface/parameter.dart';
 import 'country_helper.dart';
 import 'language_helper.dart';
-import 'query_type.dart';
 import 'tag_type.dart';
 import 'open_food_api_configuration.dart';
 import 'uri_helper.dart';
@@ -117,20 +116,9 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
     return result;
   }
 
-  Uri getUri([QueryType? queryType]) {
-    return UriHelper.getUri(
-      path: 'api/v2/taxonomy',
-      queryParameters: getParametersMap(),
-      queryType: queryType,
-    );
-  }
-
-  Uri getPostUri([QueryType? queryType]) {
-    return UriHelper.getPostUri(
-      path: 'api/v2/taxonomy',
-      queryType: queryType,
-    );
-  }
+  Uri getPostUri(final UriProductHelper uriHelper) => uriHelper.getPostUri(
+        path: 'api/v2/taxonomy',
+      );
 
   /// Returns the set of fields to ignore if specified in the [fields] parameter.
   ///
