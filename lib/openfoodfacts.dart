@@ -28,6 +28,7 @@ export 'src/model/nutriments.dart';
 // export 'src/model/product_list.dart'; // not needed
 export 'src/model/ocr_ingredients_result.dart';
 export 'src/model/ocr_packaging_result.dart';
+export 'src/model/old_product_result.dart';
 export 'src/model/ordered_nutrient.dart';
 export 'src/model/ordered_nutrients.dart';
 export 'src/model/origins_of_ingredients.dart';
