@@ -138,8 +138,8 @@ class JsonHelper {
         }
         final int? width = JsonObject.parseInt(numberObject['w']);
         final int? height = JsonObject.parseInt(numberObject['h']);
+        final String? url = numberObject['url'];
 
-        // TODO(monsieurtanuki): add field "url"?
         var image = ProductImage(
           field: field,
           size: size,
@@ -154,6 +154,7 @@ class JsonHelper {
           y2: y2,
           width: width,
           height: height,
+          url: url,
         );
         imageList.add(image);
       }
@@ -191,18 +192,21 @@ class JsonHelper {
         continue;
       }
       final Map<String, dynamic> item = <String, dynamic>{};
-      item['sizes'] = <String, Map<String, int>>{};
+      item['sizes'] = <String, Map<String, dynamic>>{};
       bool first = true;
       for (final ProductImage productImage in list) {
         if (productImage.size == null) {
           continue;
         }
-        final Map<String, int> size = <String, int>{};
+        final Map<String, dynamic> size = <String, dynamic>{};
         if (productImage.width != null) {
           size['w'] = productImage.width!;
         }
         if (productImage.height != null) {
           size['h'] = productImage.height!;
+        }
+        if (productImage.url != null) {
+          size['url'] = productImage.url!;
         }
         item['sizes']![productImage.size!.number] = size;
         if (first) {
