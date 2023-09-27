@@ -14,6 +14,10 @@ import 'uri_helper.dart';
 /// E.g.
 ///
 /// ```dart
+///   OpenFoodAPIConfiguration.userAgent = UserAgent(
+///     name: '<Name of your app>',
+///   );
+///
 ///   OpenFoodAPIConfiguration.globalLanguages = <OpenFoodFactsLanguage>[
 ///     OpenFoodFactsLanguage.ENGLISH,
 ///   ];
@@ -77,16 +81,14 @@ class OpenFoodAPIConfiguration {
 
 /// Uri of the main requests to the backend (OFF).
 const UriProductHelper uriHelperFoodProd = UriProductHelper(
-  host: 'world.openfoodfacts.org',
-  imageUrlBase: 'https://static.openfoodfacts.org/images/products/',
+  domain: 'openfoodfacts.org',
 );
 
 /// Uri of the test requests to the backend (OFF).
 const UriProductHelper uriHelperFoodTest = UriProductHelper(
-  host: 'world.openfoodfacts.net',
+  domain: 'openfoodfacts.net',
   userInfoForPatch: HttpHelper.userInfoForTest,
   isTestMode: true,
-  imageUrlBase: 'https://static.openfoodfacts.net/images/products/',
 );
 
 /// Uri of the main requests to the backend (RobotOff).

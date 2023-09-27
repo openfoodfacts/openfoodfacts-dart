@@ -8,16 +8,13 @@ void main() {
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
 
   const UriProductHelper uriHelperBeautyProd = UriProductHelper(
-    host: 'world.openbeautyfacts.org',
-    imageUrlBase: 'https://static.openbeautyfacts.org/images/products/',
+    domain: 'openbeautyfacts.org',
   );
   const UriProductHelper uriHelperProductsProd = UriProductHelper(
-    host: 'world.openproductsfacts.org',
-    imageUrlBase: 'https://static.openproductsfacts.org/images/products/',
+    domain: 'openproductsfacts.org',
   );
   const UriProductHelper uriHelperPetFoodProd = UriProductHelper(
-    host: 'world.openpetfoodfacts.org',
-    imageUrlBase: 'https://static.openpetfoodfacts.org/images/products/',
+    domain: 'openpetfoodfacts.org',
   );
 
   const String beautyBarcode = '4056489234692';

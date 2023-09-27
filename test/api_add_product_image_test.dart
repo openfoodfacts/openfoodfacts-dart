@@ -165,9 +165,8 @@ void main() {
       final String? imgid = await getImgid(barcode, imageField, language);
       expect(imgid, isNotNull);
 
-      final String productImageRootUrl = ImageHelper.getProductImageRootUrl(
+      final String productImageRootUrl = uriHelper.getProductImageRootUrl(
         barcode,
-        root: uriHelper.imageUrlBase,
       );
       final String uploadedImageUrl = '$productImageRootUrl/$imgid.jpg';
       final List<int> uploadedSize = await getJpegUrlSize(uploadedImageUrl);

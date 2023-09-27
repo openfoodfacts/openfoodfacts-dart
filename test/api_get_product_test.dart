@@ -726,7 +726,7 @@ void main() {
                   image.size == ImageSize.DISPLAY &&
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
-          'https://static.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
+          'https://images.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
 
       //Get product without setting ProductField
       configurations = ProductQueryConfiguration(
@@ -779,7 +779,7 @@ void main() {
                   image.size == ImageSize.DISPLAY &&
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
-          'https://static.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
+          'https://images.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
 
       //Get product without setting OpenFoodFactsLanguage
       configurations = ProductQueryConfiguration(
@@ -853,7 +853,7 @@ void main() {
                   image.size == ImageSize.DISPLAY &&
                   image.language == OpenFoodFactsLanguage.GERMAN)
               .url,
-          'https://static.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
+          'https://images.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
 
       final Set<ProductImprovement> improvements =
           result.product!.getProductImprovements();
