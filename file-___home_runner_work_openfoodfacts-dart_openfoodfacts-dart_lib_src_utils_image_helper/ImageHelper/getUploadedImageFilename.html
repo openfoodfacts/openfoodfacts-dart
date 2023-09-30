@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the buildUrl method from the ImageHelper class, for the Dart programming language.">
-  <title>buildUrl method - ImageHelper class - image_helper library - Dart API</title>
+  <meta name="description" content="API docs for the getUploadedImageFilename method from the ImageHelper class, for the Dart programming language.">
+  <title>getUploadedImageFilename method - ImageHelper class - image_helper library - Dart API</title>
 
 
   
@@ -31,9 +31,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper-library.html">image_helper</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/ImageHelper-class.html">ImageHelper</a></li>
-    <li class="self-crumb">buildUrl static method</li>
+    <li class="self-crumb">getUploadedImageFilename static method</li>
   </ol>
-  <div class="self-name">buildUrl</div>
+  <div class="self-name">getUploadedImageFilename</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -57,18 +57,15 @@
       data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper&#47;ImageHelper-class-sidebar.html"
       data-below-sidebar="">
       <div>
-<h1><span class="kind-method">buildUrl</span> static method 
+<h1><span class="kind-method">getUploadedImageFilename</span> static method 
 </h1></div>
 
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a>?</span>
-<span class="name ">buildUrl</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="buildUrl-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">barcode</span>, </span></li>
-<li><span class="parameter" id="buildUrl-param-image"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage-class.html">ProductImage</a></span> <span class="parameter-name">image</span>, </span></li>
-<li><span class="parameter" id="buildUrl-param-imageSize">{<span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageSize.html">ImageSize</a>?</span> <span class="parameter-name">imageSize</span>, </span></li>
-<li><span class="parameter" id="buildUrl-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>, </span></li>
-<li><span class="parameter" id="buildUrl-param-root"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">root</span>}</span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.1.3/dart-core/String-class.html">String</a></span>
+<span class="name ">getUploadedImageFilename</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getUploadedImageFilename-param-imageId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.3/dart-core/int-class.html">int</a></span> <span class="parameter-name">imageId</span>, </span></li>
+<li><span class="parameter" id="getUploadedImageFilename-param-imageSize"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageSize.html">ImageSize</a></span> <span class="parameter-name">imageSize</span></span></li>
 </ol>)
 
       
@@ -76,34 +73,32 @@
     </section>
     
 <section class="desc markdown">
-  <p>Returns the <code>image</code> full url - for a specific <code>imageSize</code> if needed.</p>
-<p>Returns null is <code>barcode</code> is null.
-E.g. "https://static.openfoodfacts.org/images/products/359/671/046/2858/front_fr.4.100.jpg"</p>
+  <p>Returns the filename of an uploaded image.</p>
+<p>cf. <a href="https://github.com/openfoodfacts/smooth-app/issues/3065">https://github.com/openfoodfacts/smooth-app/issues/3065</a></p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static String? buildUrl(
-  final String? barcode,
-  final ProductImage image, {
-  final ImageSize? imageSize,
-  final UriProductHelper uriHelper = uriHelperFoodProd,
-  final String? root,
-}) =&gt;
-    barcode == null
-        ? null
-        : &#39;${getProductImageRootUrl(
-            barcode,
-            uriHelper: uriHelper,
-            root: root,
-          )}&#39;
-            &#39;&#47;&#39;
-            &#39;${getProductImageFilename(
-            image,
-            imageSize: imageSize,
-          )}&#39;;</code></pre>
+  <pre class="language-dart"><code class="language-dart">static String getUploadedImageFilename(
+  final int imageId,
+  final ImageSize imageSize,
+) {
+  switch (imageSize) {
+    case ImageSize.THUMB:
+    case ImageSize.DISPLAY:
+      &#47;&#47; adapted size
+      return &#39;$imageId.${imageSize.number}.jpg&#39;;
+    case ImageSize.SMALL:
+      &#47;&#47; not available, we take the best other choice instead
+      return &#39;$imageId.${ImageSize.DISPLAY.number}.jpg&#39;;
+    case ImageSize.ORIGINAL:
+    case ImageSize.UNKNOWN:
+      &#47;&#47; full size
+      return &#39;$imageId.jpg&#39;;
+  }
+}</code></pre>
 </section>
 
 
@@ -121,7 +116,7 @@ E.g. "https://static.openfoodfacts.org/images/products/359/671/046/2858/front_fr
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper-library.html">image_helper</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/ImageHelper-class.html">ImageHelper</a></li>
-    <li class="self-crumb">buildUrl static method</li>
+    <li class="self-crumb">getUploadedImageFilename static method</li>
 </ol>
 
 

@@ -69,12 +69,37 @@ Open Food Facts is powered by contributors from around the world and is constant
 <p>We use the ability of the Open Food Facts API to return products results in JSON, we then generate easily understandable objects structures to make it simple for you to use.</p>
 <p>This plugin also allows you to edit a product or upload a new one to Open Food Facts. Using the same simple product structure you can create a product object or edit an existing one and send it to the API using a single function.</p>
 <h2 id="migrating-from-2xx-to-3xx-breaking-changes">Migrating from 2.x.x to 3.x.x (breaking changes)</h2>
-<p>Starting with version 3.0.0, we now enforce all clients to provide a valid user agent.
-For this, please ensure to set the SDK before using any other functionality:</p>
+<ul>
+<li>Starting with version 3.0.0, we now enforce all clients to provide a valid user agent.
+For this, please ensure to set the SDK before using any other functionality:</li>
+</ul>
 <pre class="language-dart"><code class="language-dart">OpenFoodAPIConfiguration.userAgent = UserAgent(
   name: '&lt;Name of your app&gt;',
 );
 </code></pre>
+<ul>
+<li>
+<p><code>QueryType</code> has been deleted. Now, for API calls you have to provide a <code>UriProductHelper</code> parameter. By default it will point you to openfoodfacts/prod.</p>
+</li>
+<li>
+<p>For <code>RobotoffAPIClient.getRandomInsights</code> and <code>RobotoffAPIClient.getQuestions</code>, a list of countries instead of a single country as parameter.</p>
+</li>
+<li>
+<p>Use <code>OpenFoodFactsCountry.fromOffTag</code> instead of <code>CountryHelper.fromJson</code>.</p>
+</li>
+<li>
+<p><code>OpenFoodAPIClient.getOrderedNutrients</code> now uses a <code>OpenFoodFactsCountry</code> parameter instead of a 2-letter country code.</p>
+</li>
+<li>
+<p>Methods <code>getProductImageRootUrl</code> and <code>getBarcodeSubPath</code> are moved to <code>UriProductHelper</code> from <code>ImageHelper</code></p>
+</li>
+<li>
+<p>Method <code>buildUrl</code> renamed as <code>getLocalizedProductImageUrl</code> in <code>ImageHelper</code></p>
+</li>
+<li>
+<p>Removal of deprecated code.</p>
+</li>
+</ul>
 <h2 id="migrating-from-1xx-to-2xx-breaking-changes">Migrating from 1.x.x to 2.x.x (breaking changes)</h2>
 <ul>
 <li>Now the only entry point is <code>import 'package:openfoodfacts/openfoodfacts.dart';</code>
