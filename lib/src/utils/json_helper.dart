@@ -138,8 +138,8 @@ class JsonHelper {
         }
         final int? width = JsonObject.parseInt(numberObject['w']);
         final int? height = JsonObject.parseInt(numberObject['h']);
+        final String? url = numberObject['url'];
 
-        // TODO(monsieurtanuki): add field "url"?
         var image = ProductImage(
           field: field,
           size: size,
@@ -154,6 +154,7 @@ class JsonHelper {
           y2: y2,
           width: width,
           height: height,
+          url: url,
         );
         imageList.add(image);
       }
@@ -191,18 +192,21 @@ class JsonHelper {
         continue;
       }
       final Map<String, dynamic> item = <String, dynamic>{};
-      item['sizes'] = <String, Map<String, int>>{};
+      item['sizes'] = <String, Map<String, Object>>{};
       bool first = true;
       for (final ProductImage productImage in list) {
         if (productImage.size == null) {
           continue;
         }
-        final Map<String, int> size = <String, int>{};
+        final Map<String, Object> size = <String, Object>{};
         if (productImage.width != null) {
           size['w'] = productImage.width!;
         }
         if (productImage.height != null) {
           size['h'] = productImage.height!;
+        }
+        if (productImage.url != null) {
+          size['url'] = productImage.url!;
         }
         item['sizes']![productImage.size!.number] = size;
         if (first) {
@@ -211,25 +215,25 @@ class JsonHelper {
             item['rev'] = productImage.rev.toString();
           }
           if (productImage.imgid != null) {
-            item['imgid'] = productImage.imgid;
+            item['imgid'] = productImage.imgid!;
           }
           if (productImage.angle != null) {
             item['angle'] = productImage.angle!.degree.toString();
           }
           if (productImage.coordinatesImageSize != null) {
-            item['coordinates_image_size'] = productImage.coordinatesImageSize;
+            item['coordinates_image_size'] = productImage.coordinatesImageSize!;
           }
           if (productImage.x1 != null) {
-            item['x1'] = productImage.x1;
+            item['x1'] = productImage.x1!;
           }
           if (productImage.y1 != null) {
-            item['y1'] = productImage.y1;
+            item['y1'] = productImage.y1!;
           }
           if (productImage.x2 != null) {
-            item['x2'] = productImage.x2;
+            item['x2'] = productImage.x2!;
           }
           if (productImage.y2 != null) {
-            item['y2'] = productImage.y2;
+            item['y2'] = productImage.y2!;
           }
         }
       }

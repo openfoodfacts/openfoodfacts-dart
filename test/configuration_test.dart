@@ -197,9 +197,8 @@ void main() {
   test('Get Uri with different uriScheme', () {
     OpenFoodAPIConfiguration.uuid = null;
     final UriProductHelper uriHelper = UriProductHelper(
-      host: 'world.openfoodfacts.org',
+      domain: 'openfoodfacts.org',
       scheme: 'http',
-      imageUrlBase: 'whatever',
     );
     final Uri uri = uriHelper.getUri(
       path: '/test/test.pl',

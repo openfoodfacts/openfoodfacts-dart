@@ -23,7 +23,7 @@ This plugin also allows you to edit a product or upload a new one to Open Food F
 
 ## Migrating from 2.x.x to 3.x.x (breaking changes)
 
-Starting with version 3.0.0, we now enforce all clients to provide a valid user agent.
+- Starting with version 3.0.0, we now enforce all clients to provide a valid user agent.
 For this, please ensure to set the SDK before using any other functionality:
 
 ```dart
@@ -31,6 +31,20 @@ OpenFoodAPIConfiguration.userAgent = UserAgent(
   name: '<Name of your app>',
 );
 ```
+
+- `QueryType` has been deleted. Now, for API calls you have to provide a `UriProductHelper` parameter. By default it will point you to openfoodfacts/prod.
+
+- For `RobotoffAPIClient.getRandomInsights` and `RobotoffAPIClient.getQuestions`, a list of countries instead of a single country as parameter.
+
+- Use `OpenFoodFactsCountry.fromOffTag` instead of `CountryHelper.fromJson`.
+
+- `OpenFoodAPIClient.getOrderedNutrients` now uses a `OpenFoodFactsCountry` parameter instead of a 2-letter country code.
+
+- Methods `getProductImageRootUrl` and `getBarcodeSubPath` are moved to `UriProductHelper` from `ImageHelper`
+
+- Method `buildUrl` renamed as `getLocalizedProductImageUrl` in `ImageHelper`
+
+- Removal of deprecated code.
 
 ## Migrating from 1.x.x to 2.x.x (breaking changes)
 

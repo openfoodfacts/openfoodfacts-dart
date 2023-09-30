@@ -14,7 +14,7 @@ void main() {
           await OpenFoodAPIClient.getProductV3(
         ProductQueryConfiguration(
           BARCODE_DANISH_BUTTER_COOKIES,
-          fields: [ProductField.IMAGES],
+          fields: [ProductField.IMAGES, ProductField.BARCODE],
           version: ProductQueryVersion.v3,
         ),
       );

@@ -100,18 +100,19 @@ class UriHelper {
 /// [UriHelper] specific for products (e.g. off, obf, opf, opff).
 class UriProductHelper extends UriHelper {
   const UriProductHelper({
-    required super.host,
+    required this.domain,
     super.scheme = 'https',
     super.isTestMode = false,
     this.userInfoForPatch,
-    required this.imageUrlBase,
     super.defaultAddUserAgentParameters = true,
-  });
+  }) : super(host: 'world.$domain');
 
   final String? userInfoForPatch;
 
-  /// Url base for images: needs to match more or less scheme and host.
-  final String imageUrlBase;
+  final String domain;
+
+  /// Returns the product images folder (without trailing '/').
+  String getImageUrlBase() => '$scheme://images.$domain/images/products';
 
   Uri getPatchUri({
     required final String path,
@@ -121,4 +122,31 @@ class UriProductHelper extends UriHelper {
         addUserAgentParameters: false,
         userInfo: userInfoForPatch,
       );
+
+  /// Returns the web folder of the product images (without trailing '/')
+  ///
+  /// E.g. "https://images.openfoodfacts.org/images/products/359/671/046/2858"
+  String getProductImageRootUrl(final String barcode) =>
+      '${getImageUrlBase()}/${getBarcodeSubPath(barcode)}';
+
+  /// Returns the barcode sub-folder (without trailing '/').
+  ///
+  /// For instance:
+  /// * `12345678` for barcode `12345678`
+  /// * `123/456/789` for barcode `123456789`
+  /// * `123/456/789/0` for barcode `1234567890`
+  /// * `123/456/789/0123` for barcode `1234567890123`
+  static String getBarcodeSubPath(final String barcode) {
+    if (barcode.length < 9) {
+      return barcode;
+    }
+    final String p1 = barcode.substring(0, 3);
+    final String p2 = barcode.substring(3, 6);
+    final String p3 = barcode.substring(6, 9);
+    if (barcode.length == 9) {
+      return '$p1/$p2/$p3';
+    }
+    final String p4 = barcode.substring(9);
+    return '$p1/$p2/$p3/$p4';
+  }
 }

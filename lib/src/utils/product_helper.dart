@@ -30,9 +30,13 @@ class ProductHelper {
       return;
     }
 
+    if (product.barcode == null) {
+      return;
+    }
+
     for (ProductImage image in product.images!) {
-      image.url = ImageHelper.buildUrl(
-        product.barcode,
+      image.url = ImageHelper.getLocalizedProductImageUrl(
+        product.barcode!,
         image,
         uriHelper: uriHelper,
       );

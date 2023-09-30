@@ -1263,7 +1263,7 @@ class OpenFoodAPIClient {
     if (filename == null) {
       return null;
     }
-    return '${ImageHelper.getProductImageRootUrl(barcode, root: uriHelper.imageUrlBase)}/$filename';
+    return '${uriHelper.getProductImageRootUrl(barcode)}/$filename';
   }
 
   /// Unselect a product image.
