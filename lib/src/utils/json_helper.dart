@@ -192,13 +192,13 @@ class JsonHelper {
         continue;
       }
       final Map<String, dynamic> item = <String, dynamic>{};
-      item['sizes'] = <String, Map<String, dynamic>>{};
+      item['sizes'] = <String, Map<String, Object>>{};
       bool first = true;
       for (final ProductImage productImage in list) {
         if (productImage.size == null) {
           continue;
         }
-        final Map<String, dynamic> size = <String, dynamic>{};
+        final Map<String, Object> size = <String, Object>{};
         if (productImage.width != null) {
           size['w'] = productImage.width!;
         }
@@ -215,25 +215,25 @@ class JsonHelper {
             item['rev'] = productImage.rev.toString();
           }
           if (productImage.imgid != null) {
-            item['imgid'] = productImage.imgid;
+            item['imgid'] = productImage.imgid!;
           }
           if (productImage.angle != null) {
             item['angle'] = productImage.angle!.degree.toString();
           }
           if (productImage.coordinatesImageSize != null) {
-            item['coordinates_image_size'] = productImage.coordinatesImageSize;
+            item['coordinates_image_size'] = productImage.coordinatesImageSize!;
           }
           if (productImage.x1 != null) {
-            item['x1'] = productImage.x1;
+            item['x1'] = productImage.x1!;
           }
           if (productImage.y1 != null) {
-            item['y1'] = productImage.y1;
+            item['y1'] = productImage.y1!;
           }
           if (productImage.x2 != null) {
-            item['x2'] = productImage.x2;
+            item['x2'] = productImage.x2!;
           }
           if (productImage.y2 != null) {
-            item['y2'] = productImage.y2;
+            item['y2'] = productImage.y2!;
           }
         }
       }
