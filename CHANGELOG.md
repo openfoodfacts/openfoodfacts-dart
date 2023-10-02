@@ -1,5 +1,34 @@
 # Changelog
 
+## [3.0.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.10.1...v3.0.0) (2023-09-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* 801 - more url flexibility with non static UriHelper ([#803](https://github.com/openfoodfacts/openfoodfacts-dart/issues/803))
+* fix for the uk/gb country code case ([#795](https://github.com/openfoodfacts/openfoodfacts-dart/issues/795))
+* A valid user agent is now required ([#790](https://github.com/openfoodfacts/openfoodfacts-dart/issues/790))
+* removed deprecated code ([#791](https://github.com/openfoodfacts/openfoodfacts-dart/issues/791))
+* 742 - robotoff - countries instead of country ([#792](https://github.com/openfoodfacts/openfoodfacts-dart/issues/792))
+
+### Features
+
+* 69 - method to get a server type from its off tag ([#796](https://github.com/openfoodfacts/openfoodfacts-dart/issues/796)) ([0bd8f90](https://github.com/openfoodfacts/openfoodfacts-dart/commit/0bd8f90484ce1aa6d054162ffc9ddbacf1cc0029))
+* 801 - more url flexibility with non static UriHelper ([#803](https://github.com/openfoodfacts/openfoodfacts-dart/issues/803)) ([7753cb0](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7753cb063e04b923a7d7f5fa0d54a9a2b3f7575f))
+* 802 - new "get product" method specific to OBF OPF OPFF ([#806](https://github.com/openfoodfacts/openfoodfacts-dart/issues/806)) ([e824de2](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e824de2d334ab99e3d214759314970ffcb9c0644))
+* A valid user agent is now required ([#790](https://github.com/openfoodfacts/openfoodfacts-dart/issues/790)) ([a26ec2a](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a26ec2adaf5b7a1773b9c93ccf7b5e274b6100c5))
+* insight - method to get an insight annotation from an int value ([#797](https://github.com/openfoodfacts/openfoodfacts-dart/issues/797)) ([fdc6381](https://github.com/openfoodfacts/openfoodfacts-dart/commit/fdc638151753ab64ed2d8dd497b7794c5563c4f5))
+* method to get the Uri host (e.g. for ping) ([#800](https://github.com/openfoodfacts/openfoodfacts-dart/issues/800)) ([081f0b9](https://github.com/openfoodfacts/openfoodfacts-dart/commit/081f0b9921ee0128cf7b91c8525fc1599f3d9a76))
+* product "getAttribute" method ([#799](https://github.com/openfoodfacts/openfoodfacts-dart/issues/799)) ([a179dc5](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a179dc516ad1dcc75eda4f70eb4d86a535cdbcfa))
+* specified minimum size for uploaded images (for pre-checks) ([#798](https://github.com/openfoodfacts/openfoodfacts-dart/issues/798)) ([3cf14f2](https://github.com/openfoodfacts/openfoodfacts-dart/commit/3cf14f2c624a97c3c67b4d7c379d93f0915042bd))
+
+
+### Bug Fixes
+
+* 742 - robotoff - countries instead of country ([#792](https://github.com/openfoodfacts/openfoodfacts-dart/issues/792)) ([8582519](https://github.com/openfoodfacts/openfoodfacts-dart/commit/8582519b3dcc8e7341ab46ebb4d5c1adf95cef6b))
+* fix for the uk/gb country code case ([#795](https://github.com/openfoodfacts/openfoodfacts-dart/issues/795)) ([fc2e907](https://github.com/openfoodfacts/openfoodfacts-dart/commit/fc2e907a6217bad13522438a5eb30b2d74413c07))
+* removed deprecated code ([#791](https://github.com/openfoodfacts/openfoodfacts-dart/issues/791)) ([8d01168](https://github.com/openfoodfacts/openfoodfacts-dart/commit/8d011687036e0b3ae622c0a354cefbc6c39a27f3))
+
 ## [2.10.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.10.0...v2.10.1) (2023-08-17)
 
 
