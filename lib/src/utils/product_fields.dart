@@ -10,6 +10,7 @@ enum ProductField implements OffTagged {
   GENERIC_NAME(offTag: 'generic_name'),
   BRANDS(offTag: 'brands'),
   BRANDS_TAGS(offTag: 'brands_tags'),
+  BRANDS_TAGS_IN_LANGUAGES(offTag: 'brands_tags_'),
   COUNTRIES(offTag: 'countries'),
   COUNTRIES_TAGS(offTag: 'countries_tags'),
   COUNTRIES_TAGS_IN_LANGUAGES(offTag: 'countries_tags_'),
@@ -57,12 +58,17 @@ enum ProductField implements OffTagged {
   PACKAGING_TAGS(offTag: 'packaging_tags'),
   PACKAGING_TEXT_IN_LANGUAGES(offTag: 'packaging_text_'),
   PACKAGING_TEXT_ALL_LANGUAGES(offTag: 'packaging_text_languages'),
-  MISC_TAGS(offTag: 'misc'),
+  MISC_TAGS(offTag: 'misc_tags'),
+  MISC_TAGS_IN_LANGUAGES(offTag: 'misc_tags_'),
   STATES_TAGS(offTag: 'states_tags'),
+  STATES_TAGS_IN_LANGUAGES(offTag: 'states_tags_'),
   TRACES_TAGS(offTag: 'traces_tags'),
+  TRACES_TAGS_IN_LANGUAGES(offTag: 'traces_tags_'),
   STORES_TAGS(offTag: 'stores_tags'),
+  STORES_TAGS_IN_LANGUAGES(offTag: 'stores_tags_'),
   STORES(offTag: 'stores'),
   INGREDIENTS_ANALYSIS_TAGS(offTag: 'ingredients_analysis_tags'),
+  INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES(offTag: 'ingredients_analysis_tags_'),
   ALLERGENS(offTag: 'allergens_tags'),
   ATTRIBUTE_GROUPS(offTag: 'attribute_groups'),
   LAST_MODIFIED(offTag: 'last_modified_t'),
@@ -100,22 +106,34 @@ enum ProductField implements OffTagged {
   final String offTag;
 }
 
+const Set<ProductField> fieldsInLanguages = {
+  ProductField.NAME_IN_LANGUAGES,
+  ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+  ProductField.PACKAGING_TEXT_IN_LANGUAGES,
+  ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
+  ProductField.TRACES_TAGS_IN_LANGUAGES,
+  ProductField.STORES_TAGS_IN_LANGUAGES,
+  ProductField.STATES_TAGS_IN_LANGUAGES,
+  ProductField.BRANDS_TAGS_IN_LANGUAGES,
+  ProductField.MISC_TAGS_IN_LANGUAGES,
+  ProductField.INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES,
+  ProductField.LABELS_TAGS_IN_LANGUAGES,
+  ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
+  ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
+  ProductField.IMAGES_FRESHNESS_IN_LANGUAGES,
+};
+
+const Set<ProductField> fieldsAllLanguages = {
+  ProductField.NAME_ALL_LANGUAGES,
+  ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
+  ProductField.PACKAGING_TEXT_ALL_LANGUAGES,
+};
+
 /// NOTE: if one of the fields is IN_LANGUAGES and [languages] is empty -
 /// the function will throw.
 List<String> convertFieldsToStrings(
     List<ProductField> fields, List<OpenFoodFactsLanguage> languages) {
   final fieldsStrings = <String>[];
-
-  const fieldsInLanguages = [
-    ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
-    ProductField.LABELS_TAGS_IN_LANGUAGES,
-    ProductField.NAME_IN_LANGUAGES,
-    ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
-    ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
-    ProductField.PACKAGING_TEXT_IN_LANGUAGES,
-    ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
-    ProductField.IMAGES_FRESHNESS_IN_LANGUAGES,
-  ];
 
   for (final field in fields) {
     if (fieldsInLanguages.contains(field)) {

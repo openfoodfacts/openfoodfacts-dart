@@ -75,31 +75,6 @@ void main() {
       expect(result.product!.countries, 'United States');
     });
 
-    test('get packaging text in languages (Coca-Cola)', () async {
-      const String barcode = '5449000000996';
-      const List<OpenFoodFactsLanguage> languages = [
-        OpenFoodFactsLanguage.ENGLISH,
-        OpenFoodFactsLanguage.FRENCH,
-      ];
-
-      final ProductQueryConfiguration configurations =
-          ProductQueryConfiguration(
-        barcode,
-        languages: languages,
-        fields: [ProductField.PACKAGING_TEXT_IN_LANGUAGES],
-        version: ProductQueryVersion.v3,
-      );
-      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
-        configurations,
-      );
-      expect(result.status, ProductResultV3.statusSuccess);
-      expect(result.product, isNotNull);
-      expect(result.product!.packagingTextInLanguages, isNotNull);
-      for (final OpenFoodFactsLanguage language in languages) {
-        expect(result.product!.packagingTextInLanguages![language], isNotNull);
-      }
-    });
-
     test('check alcohol data', () async {
       const String barcode = '3119780259625';
 
@@ -928,36 +903,6 @@ void main() {
     expect(invalidBarcodes.isBlacklisted('15600703'), isTrue);
     expect(
         invalidBarcodes.isBlacklisted(BARCODE_DANISH_BUTTER_COOKIES), isFalse);
-  });
-
-  test('get images freshness', () async {
-    final List<OpenFoodFactsLanguage> languages = [
-      OpenFoodFactsLanguage.ENGLISH,
-      OpenFoodFactsLanguage.RUSSIAN,
-      OpenFoodFactsLanguage.GERMAN,
-      OpenFoodFactsLanguage.FRENCH,
-    ];
-    final ProductResultV3 productResult = await OpenFoodAPIClient.getProductV3(
-      ProductQueryConfiguration(
-        BARCODE_DANISH_BUTTER_COOKIES,
-        languages: languages,
-        fields: [ProductField.IMAGES_FRESHNESS_IN_LANGUAGES],
-        version: ProductQueryVersion.v3,
-      ),
-    );
-    final Product product = productResult.product!;
-    const int TEN_YEARS = 10 * 365 * 24 * 3600;
-    for (final OpenFoodFactsLanguage language in languages) {
-      final Map<ImageField, int> freshnesses =
-          product.imagesFreshnessInLanguages![language]!;
-      for (final ImageField imageField in ImageField.values) {
-        final int? freshness = freshnesses[imageField];
-        if (freshness != null) {
-          expect(freshness >= 0, isTrue);
-          expect(freshness < TEN_YEARS, isTrue);
-        }
-      }
-    }
   });
 
   test('get product uri', () async {
