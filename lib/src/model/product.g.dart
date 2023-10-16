@@ -73,8 +73,9 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       packagingTags: (json['packaging_tags'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      miscTags:
-          (json['misc'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      miscTags: (json['misc_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       statesTags: (json['states_tags'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
@@ -100,6 +101,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
       noNutritionData: JsonHelper.checkboxFromJSON(json['no_nutrition_data']),
     )
+      ..brandsTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
+          json['brands_tags_in_languages'])
       ..imagesFreshnessInLanguages =
           (json['imagesFreshnessInLanguages'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(
@@ -108,6 +111,9 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
               (k, e) => MapEntry($enumDecode(_$ImageFieldEnumMap, k), e as int),
             )),
       )
+      ..ingredientsAnalysisTagsInLanguages =
+          LanguageHelper.fromJsonStringsListMap(
+              json['ingredients_analysis_tags_in_languages'])
       ..nutritionData = JsonHelper.checkboxFromJSON(json['nutrition_data'])
       ..comparedToCategory = json['compared_to_category'] as String?
       ..packagings = (json['packagings'] as List<dynamic>?)
@@ -117,6 +123,14 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           JsonHelper.boolFromJSON(json['packagings_complete'])
       ..packagingTextInLanguages =
           LanguageHelper.fromJsonStringMap(json['packaging_text_in_languages'])
+      ..miscTagsInLanguages =
+          LanguageHelper.fromJsonStringsListMap(json['misc_tags_in_languages'])
+      ..statesTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
+          json['states_tags_in_languages'])
+      ..tracesTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
+          json['traces_tags_in_languages'])
+      ..storesTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
+          json['stores_tags_in_languages'])
       ..lastModifiedBy = json['last_modified_by'] as String?
       ..lastImage = JsonHelper.timestampToDate(json['last_image_t'])
       ..lastEditor = json['last_editor'] as String?
@@ -164,6 +178,8 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('generic_name', instance.genericName);
   writeNotNull('brands', instance.brands);
   writeNotNull('brands_tags', instance.brandsTags);
+  writeNotNull('brands_tags_in_languages',
+      LanguageHelper.toJsonStringsListMap(instance.brandsTagsInLanguages));
   writeNotNull('countries', instance.countries);
   writeNotNull('countries_tags', instance.countriesTags);
   writeNotNull('countries_tags_in_languages',
@@ -198,6 +214,10 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
           e.map((k, e) => MapEntry(_$ImageFieldEnumMap[k]!, e))));
   val['ingredients_analysis_tags'] =
       IngredientsAnalysisTags.toJson(instance.ingredientsAnalysisTags);
+  writeNotNull(
+      'ingredients_analysis_tags_in_languages',
+      LanguageHelper.toJsonStringsListMap(
+          instance.ingredientsAnalysisTagsInLanguages));
   writeNotNull('additives_tags', Additives.additivesToJson(instance.additives));
   writeNotNull('allergens_tags', Allergens.allergensToJson(instance.allergens));
   writeNotNull(
@@ -223,10 +243,18 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('packaging_tags', instance.packagingTags);
   writeNotNull('packaging_text_in_languages',
       LanguageHelper.toJsonStringMap(instance.packagingTextInLanguages));
-  writeNotNull('misc', instance.miscTags);
+  writeNotNull('misc_tags', instance.miscTags);
+  writeNotNull('misc_tags_in_languages',
+      LanguageHelper.toJsonStringsListMap(instance.miscTagsInLanguages));
   writeNotNull('states_tags', instance.statesTags);
+  writeNotNull('states_tags_in_languages',
+      LanguageHelper.toJsonStringsListMap(instance.statesTagsInLanguages));
   writeNotNull('traces_tags', instance.tracesTags);
+  writeNotNull('traces_tags_in_languages',
+      LanguageHelper.toJsonStringsListMap(instance.tracesTagsInLanguages));
   writeNotNull('stores_tags', instance.storesTags);
+  writeNotNull('stores_tags_in_languages',
+      LanguageHelper.toJsonStringsListMap(instance.storesTagsInLanguages));
   writeNotNull('stores', instance.stores);
   writeNotNull('attribute_groups',
       JsonHelper.attributeGroupsToJson(instance.attributeGroups));

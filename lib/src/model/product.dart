@@ -106,6 +106,12 @@ class Product extends JsonObject {
   String? brands;
   @JsonKey(name: 'brands_tags', includeIfNull: false)
   List<String>? brandsTags;
+  @JsonKey(
+      name: 'brands_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, List<String>>? brandsTagsInLanguages;
 
   @JsonKey(name: 'countries', includeIfNull: false)
   String? countries;
@@ -218,6 +224,12 @@ class Product extends JsonObject {
       fromJson: IngredientsAnalysisTags.fromJson,
       toJson: IngredientsAnalysisTags.toJson)
   IngredientsAnalysisTags? ingredientsAnalysisTags;
+  @JsonKey(
+      name: 'ingredients_analysis_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, List<String>>? ingredientsAnalysisTagsInLanguages;
 
   /// When no nutrition data is true, nutriments are always null.
   ///
@@ -327,15 +339,41 @@ class Product extends JsonObject {
       includeIfNull: false)
   Map<OpenFoodFactsLanguage, String>? packagingTextInLanguages;
 
-  @JsonKey(name: 'misc', includeIfNull: false)
+  @JsonKey(name: 'misc_tags', includeIfNull: false)
   List<String>? miscTags;
+  @JsonKey(
+      name: 'misc_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, List<String>>? miscTagsInLanguages;
+
   @JsonKey(name: 'states_tags', includeIfNull: false)
   List<String>? statesTags;
+  @JsonKey(
+      name: 'states_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, List<String>>? statesTagsInLanguages;
+
   @JsonKey(name: 'traces_tags', includeIfNull: false)
   List<String>? tracesTags;
+  @JsonKey(
+      name: 'traces_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, List<String>>? tracesTagsInLanguages;
+
   @JsonKey(name: 'stores_tags', includeIfNull: false)
   List<String>? storesTags;
-
+  @JsonKey(
+      name: 'stores_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, List<String>>? storesTagsInLanguages;
   @JsonKey(name: 'stores', includeIfNull: false)
   String? stores;
 
@@ -511,6 +549,140 @@ class Product extends JsonObject {
 
   factory Product.fromJson(Map<String, dynamic> json) {
     final Product result = _$ProductFromJson(json);
+
+    void setLanguageString(
+      final ProductField productField,
+      final OpenFoodFactsLanguage language,
+      final String label,
+    ) {
+      switch (productField) {
+        case ProductField.NAME_IN_LANGUAGES:
+        case ProductField.NAME_ALL_LANGUAGES:
+          result.productNameInLanguages ??= {};
+          result.productNameInLanguages![language] = label;
+          break;
+        case ProductField.INGREDIENTS_TEXT_IN_LANGUAGES:
+        case ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES:
+          result.ingredientsTextInLanguages ??= {};
+          result.ingredientsTextInLanguages![language] = label;
+          break;
+        case ProductField.PACKAGING_TEXT_IN_LANGUAGES:
+        case ProductField.PACKAGING_TEXT_ALL_LANGUAGES:
+          result.packagingTextInLanguages ??= {};
+          result.packagingTextInLanguages![language] = label;
+          break;
+        default:
+          // not supposed to be called with other ProductField values.
+          assert(false);
+      }
+    }
+
+    void setLanguageListString(
+      final ProductField productField,
+      final OpenFoodFactsLanguage language,
+      final Map<String, dynamic> json,
+      final String key,
+    ) {
+      final List<String>? labels = _jsonValueToList(json[key]);
+      if (labels == null) {
+        return;
+      }
+      switch (productField) {
+        case ProductField.CATEGORIES_TAGS_IN_LANGUAGES:
+          result.categoriesTagsInLanguages ??= {};
+          result.categoriesTagsInLanguages![language] = labels;
+          break;
+        case ProductField.TRACES_TAGS_IN_LANGUAGES:
+          result.tracesTagsInLanguages ??= {};
+          result.tracesTagsInLanguages![language] = labels;
+          break;
+        case ProductField.BRANDS_TAGS_IN_LANGUAGES:
+          result.brandsTagsInLanguages ??= {};
+          result.brandsTagsInLanguages![language] = labels;
+          break;
+        case ProductField.STATES_TAGS_IN_LANGUAGES:
+          result.statesTagsInLanguages ??= {};
+          result.statesTagsInLanguages![language] = labels;
+          break;
+        case ProductField.STORES_TAGS_IN_LANGUAGES:
+          result.storesTagsInLanguages ??= {};
+          result.storesTagsInLanguages![language] = labels;
+          break;
+        case ProductField.MISC_TAGS_IN_LANGUAGES:
+          result.miscTagsInLanguages ??= {};
+          result.miscTagsInLanguages![language] = labels;
+          break;
+        case ProductField.INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES:
+          result.ingredientsAnalysisTagsInLanguages ??= {};
+          result.ingredientsAnalysisTagsInLanguages![language] = labels;
+          break;
+        case ProductField.INGREDIENTS_TAGS_IN_LANGUAGES:
+          result.ingredientsTagsInLanguages ??= {};
+          result.ingredientsTagsInLanguages![language] = labels;
+          break;
+        case ProductField.LABELS_TAGS_IN_LANGUAGES:
+          result.labelsTagsInLanguages ??= {};
+          result.labelsTagsInLanguages![language] = labels;
+          break;
+        case ProductField.COUNTRIES_TAGS_IN_LANGUAGES:
+          result.countriesTagsInLanguages ??= {};
+          result.countriesTagsInLanguages![language] = labels;
+          break;
+        default:
+          // not supposed to be called with other ProductField values.
+          assert(false);
+      }
+    }
+
+    void addInLanguagesData(
+      final ProductField productField,
+      final OpenFoodFactsLanguage language,
+      final Map<String, dynamic> json,
+      final String key,
+    ) {
+      switch (productField) {
+        case ProductField.NAME_IN_LANGUAGES:
+        case ProductField.INGREDIENTS_TEXT_IN_LANGUAGES:
+        case ProductField.PACKAGING_TEXT_IN_LANGUAGES:
+          setLanguageString(productField, language, json[key]);
+          return;
+        case ProductField.CATEGORIES_TAGS_IN_LANGUAGES:
+        case ProductField.TRACES_TAGS_IN_LANGUAGES:
+        case ProductField.BRANDS_TAGS_IN_LANGUAGES:
+        case ProductField.STATES_TAGS_IN_LANGUAGES:
+        case ProductField.STORES_TAGS_IN_LANGUAGES:
+        case ProductField.MISC_TAGS_IN_LANGUAGES:
+        case ProductField.INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES:
+        case ProductField.INGREDIENTS_TAGS_IN_LANGUAGES:
+        case ProductField.LABELS_TAGS_IN_LANGUAGES:
+        case ProductField.COUNTRIES_TAGS_IN_LANGUAGES:
+          setLanguageListString(productField, language, json, key);
+          return;
+        case ProductField.IMAGES_FRESHNESS_IN_LANGUAGES:
+          final Map<ImageField, int> values =
+              _jsonValueToImagesFreshness(json[key], language);
+          result.imagesFreshnessInLanguages ??= {};
+          result.imagesFreshnessInLanguages![language] = values;
+          return;
+        default:
+          if (fieldsInLanguages.contains(productField)) {
+            throw Exception('Unhandled in-languages case for $productField');
+          }
+      }
+    }
+
+    ProductField? extractProductField(
+      final String key,
+      final Iterable<ProductField> iterable,
+    ) {
+      for (final ProductField productField in iterable) {
+        if (key.startsWith(productField.offTag)) {
+          return productField;
+        }
+      }
+      return null;
+    }
+
     for (final String key in json.keys) {
       if (key.contains('debug')) {
         continue;
@@ -526,95 +698,28 @@ class Product extends JsonObject {
       // (`product_name_[2 letter language code]`).
       // We store those values in a more structured maps like
       // [productNameInLanguages].
-      if (key == ProductField.NAME_ALL_LANGUAGES.offTag) {
+
+      ProductField? productField = extractProductField(key, fieldsAllLanguages);
+      if (productField != null) {
         final Map<OpenFoodFactsLanguage, String>? localized =
             _getLocalizedStrings(json[key]);
         if (localized != null) {
-          result.productNameInLanguages ??= {};
-          result.productNameInLanguages!.addAll(localized);
+          for (final MapEntry<OpenFoodFactsLanguage, String> entry
+              in localized.entries) {
+            setLanguageString(productField, entry.key, entry.value);
+          }
         }
-      } else if (key == ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES.offTag) {
-        final Map<OpenFoodFactsLanguage, String>? localized =
-            _getLocalizedStrings(json[key]);
-        if (localized != null) {
-          result.ingredientsTextInLanguages ??= {};
-          result.ingredientsTextInLanguages!.addAll(localized);
+        continue;
+      }
+
+      productField = extractProductField(key, fieldsInLanguages);
+      if (productField != null) {
+        final OpenFoodFactsLanguage language =
+            _langFrom(key, productField.offTag);
+        if (language != OpenFoodFactsLanguage.UNDEFINED) {
+          addInLanguagesData(productField, language, json, key);
         }
-      } else if (key == ProductField.PACKAGING_TEXT_ALL_LANGUAGES.offTag) {
-        final Map<OpenFoodFactsLanguage, String>? localized =
-            _getLocalizedStrings(json[key]);
-        if (localized != null) {
-          result.packagingTextInLanguages ??= {};
-          result.packagingTextInLanguages!.addAll(localized);
-        }
-      } else if (key.startsWith(ProductField.NAME_IN_LANGUAGES.offTag)) {
-        final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.NAME_IN_LANGUAGES.offTag);
-        if (lang != OpenFoodFactsLanguage.UNDEFINED) {
-          result.productNameInLanguages ??= {};
-          result.productNameInLanguages![lang] = json[key];
-        }
-      } else if (key
-          .startsWith(ProductField.CATEGORIES_TAGS_IN_LANGUAGES.offTag)) {
-        final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.CATEGORIES_TAGS_IN_LANGUAGES.offTag);
-        final values = _jsonValueToList(json[key]);
-        if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
-          result.categoriesTagsInLanguages ??= {};
-          result.categoriesTagsInLanguages![lang] = values;
-        }
-      } else if (key
-          .startsWith(ProductField.INGREDIENTS_TAGS_IN_LANGUAGES.offTag)) {
-        final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.INGREDIENTS_TAGS_IN_LANGUAGES.offTag);
-        final values = _jsonValueToList(json[key]);
-        if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
-          result.ingredientsTagsInLanguages ??= {};
-          result.ingredientsTagsInLanguages![lang] = values;
-        }
-      } else if (key
-          .startsWith(ProductField.IMAGES_FRESHNESS_IN_LANGUAGES.offTag)) {
-        final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.IMAGES_FRESHNESS_IN_LANGUAGES.offTag);
-        if (lang != OpenFoodFactsLanguage.UNDEFINED) {
-          final Map<ImageField, int> values =
-              _jsonValueToImagesFreshness(json[key], lang);
-          result.imagesFreshnessInLanguages ??= {};
-          result.imagesFreshnessInLanguages![lang] = values;
-        }
-      } else if (key.startsWith(ProductField.LABELS_TAGS_IN_LANGUAGES.offTag)) {
-        final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.LABELS_TAGS_IN_LANGUAGES.offTag);
-        final values = _jsonValueToList(json[key]);
-        if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
-          result.labelsTagsInLanguages ??= {};
-          result.labelsTagsInLanguages![lang] = values;
-        }
-      } else if (key
-          .startsWith(ProductField.COUNTRIES_TAGS_IN_LANGUAGES.offTag)) {
-        final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.COUNTRIES_TAGS_IN_LANGUAGES.offTag);
-        final values = _jsonValueToList(json[key]);
-        if (lang != OpenFoodFactsLanguage.UNDEFINED && values != null) {
-          result.countriesTagsInLanguages ??= {};
-          result.countriesTagsInLanguages![lang] = values;
-        }
-      } else if (key
-          .startsWith(ProductField.INGREDIENTS_TEXT_IN_LANGUAGES.offTag)) {
-        final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.INGREDIENTS_TEXT_IN_LANGUAGES.offTag);
-        if (lang != OpenFoodFactsLanguage.UNDEFINED) {
-          result.ingredientsTextInLanguages ??= {};
-          result.ingredientsTextInLanguages![lang] = json[key];
-        }
-      } else if (key
-          .startsWith(ProductField.PACKAGING_TEXT_IN_LANGUAGES.offTag)) {
-        final OpenFoodFactsLanguage lang =
-            _langFrom(key, ProductField.PACKAGING_TEXT_IN_LANGUAGES.offTag);
-        if (lang != OpenFoodFactsLanguage.UNDEFINED) {
-          result.packagingTextInLanguages ??= {};
-          result.packagingTextInLanguages![lang] = json[key];
-        }
+        continue;
       }
     }
     return result;
