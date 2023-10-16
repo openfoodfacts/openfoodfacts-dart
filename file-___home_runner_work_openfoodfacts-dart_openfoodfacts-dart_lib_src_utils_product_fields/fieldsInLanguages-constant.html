@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the convertFieldsToStrings function from the product_fields library, for the Dart programming language.">
-  <title>convertFieldsToStrings function - product_fields library - Dart API</title>
+  <meta name="description" content="API docs for the fieldsInLanguages constant from the product_fields library, for the Dart programming language.">
+  <title>fieldsInLanguages constant - product_fields library - Dart API</title>
 
 
   
@@ -30,9 +30,9 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">openfoodfacts</a></li>
     <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields-library.html">product_fields</a></li>
-    <li class="self-crumb">convertFieldsToStrings function</li>
+    <li class="self-crumb">fieldsInLanguages constant</li>
   </ol>
-  <div class="self-name">convertFieldsToStrings</div>
+  <div class="self-name">fieldsInLanguages</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -56,52 +56,40 @@
       data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields&#47;file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields-library-sidebar.html"
       data-below-sidebar="">
       <div>
-<h1><span class="kind-function">convertFieldsToStrings</span> function 
+<h1><span class="kind-top-level-property">fieldsInLanguages</span> top-level constant 
  
 </h1></div>
 
-    <section class="multi-line-signature">
+        <section class="multi-line-signature">
+          
+          <a href="https://api.dart.dev/stable/3.1.3/dart-core/Set-class.html">Set</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>&gt;</span>
+          const <span class="name ">fieldsInLanguages</span>
+          
+
+        </section>
         
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.1.3/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.1.3/dart-core/String-class.html">String</a></span>&gt;</span></span>
-<span class="name ">convertFieldsToStrings</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="convertFieldsToStrings-param-fields"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.3/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>&gt;</span></span> <span class="parameter-name">fields</span>, </span></li>
-<li><span class="parameter" id="convertFieldsToStrings-param-languages"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.3/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>&gt;</span></span> <span class="parameter-name">languages</span></span></li>
-</ol>)
-
         
-
-    </section>
-    
-<section class="desc markdown">
-  <p>NOTE: if one of the fields is IN_LANGUAGES and <code>languages</code> is empty -
-the function will throw.</p>
-</section>
-
-
-    
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">List&lt;String&gt; convertFieldsToStrings(
-    List&lt;ProductField&gt; fields, List&lt;OpenFoodFactsLanguage&gt; languages) {
-  final fieldsStrings = &lt;String&gt;[];
-
-  for (final field in fields) {
-    if (fieldsInLanguages.contains(field)) {
-      if (languages.isEmpty) {
-        throw ArgumentError(
-            &#39;Cannot request in-lang field $field without language&#39;);
-      }
-      for (final language in languages) {
-        fieldsStrings.add(&#39;${field.offTag}${language.offTag}&#39;);
-      }
-    } else {
-      fieldsStrings.add(field.offTag);
-    }
-  }
-
-  return fieldsStrings;
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">const Set&lt;ProductField&gt; fieldsInLanguages = {
+  ProductField.NAME_IN_LANGUAGES,
+  ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+  ProductField.PACKAGING_TEXT_IN_LANGUAGES,
+  ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
+  ProductField.TRACES_TAGS_IN_LANGUAGES,
+  ProductField.STORES_TAGS_IN_LANGUAGES,
+  ProductField.STATES_TAGS_IN_LANGUAGES,
+  ProductField.BRANDS_TAGS_IN_LANGUAGES,
+  ProductField.MISC_TAGS_IN_LANGUAGES,
+  ProductField.INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES,
+  ProductField.LABELS_TAGS_IN_LANGUAGES,
+  ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
+  ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
+  ProductField.IMAGES_FRESHNESS_IN_LANGUAGES,
+};</code></pre>
 </section>
+
 
 
   </div> <!-- /.main-content -->
@@ -117,7 +105,7 @@ the function will throw.</p>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../index.html">openfoodfacts</a></li>
     <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields-library.html">product_fields</a></li>
-    <li class="self-crumb">convertFieldsToStrings function</li>
+    <li class="self-crumb">fieldsInLanguages constant</li>
 </ol>
 
 
