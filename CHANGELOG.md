@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.0.0...v3.1.0) (2023-10-28)
+
+
+### Features
+
+* 810 - 6 new localized product fields ([#811](https://github.com/openfoodfacts/openfoodfacts-dart/issues/811)) ([df85a38](https://github.com/openfoodfacts/openfoodfacts-dart/commit/df85a38fac6bf9a7fac047d227a05af09d91ebff))
+
+
+### Bug Fixes
+
+* 816 - use localized versions of productName and ingredientsText ([#817](https://github.com/openfoodfacts/openfoodfacts-dart/issues/817)) ([60f7d1e](https://github.com/openfoodfacts/openfoodfacts-dart/commit/60f7d1eb9679e226ec1f56e53ba6d4966bfa93f4))
+
 ## [3.0.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v2.10.1...v3.0.0) (2023-09-30)
 
 
