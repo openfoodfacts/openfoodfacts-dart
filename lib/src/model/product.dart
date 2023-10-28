@@ -85,11 +85,17 @@ enum ProductImprovementCategory {
 /// or update data in specific language: https://github.com/openfoodfacts/openfoodfacts-dart/blob/master/DOCUMENTATION.md#about-languages-mechanics
 @JsonSerializable()
 class Product extends JsonObject {
+  /// Barcode of the product. Will very very very often be not null.
   @JsonKey(name: 'code')
   String? barcode;
 
+  /// Product name, either set directly or taken from one of the localizations.
+  ///
+  /// Rather use [productNameInLanguages] instead.
   @JsonKey(name: 'product_name', includeIfNull: false)
   String? productName;
+
+  /// Localized product name.
   @JsonKey(
       name: 'product_name_in_languages',
       fromJson: LanguageHelper.fromJsonStringMap,
@@ -193,8 +199,13 @@ class Product extends JsonObject {
       toJson: JsonHelper.ingredientsToJson)
   List<Ingredient>? ingredients;
 
+  /// Ingredients, either set directly or taken from one of the localizations.
+  ///
+  /// Rather use [ingredientsTextInLanguages] instead.
   @JsonKey(name: 'ingredients_text', includeIfNull: false)
   String? ingredientsText;
+
+  /// Localized ingredients.
   @JsonKey(
       name: 'ingredients_text_in_languages',
       fromJson: LanguageHelper.fromJsonStringMap,
