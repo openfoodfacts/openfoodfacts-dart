@@ -1,9 +1,6 @@
 import 'package:http/http.dart';
 import 'abstract_query_configuration.dart';
-import 'country_helper.dart';
 import 'http_helper.dart';
-import 'language_helper.dart';
-import 'product_fields.dart';
 import 'uri_helper.dart';
 import '../model/user.dart';
 
@@ -38,16 +35,11 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
   ProductQueryConfiguration(
     this.barcode, {
     required this.version,
-    final OpenFoodFactsLanguage? language,
-    final List<OpenFoodFactsLanguage> languages = const [],
-    final OpenFoodFactsCountry? country,
-    final List<ProductField>? fields,
-  }) : super(
-          language: language,
-          languages: languages,
-          country: country,
-          fields: fields,
-        );
+    super.language,
+    super.languages,
+    super.country,
+    super.fields,
+  });
 
   /// If the provided [ProductQueryVersion] matches the API V3 requirements
   bool matchesV3() => version.matchesV3();

@@ -10,6 +10,5 @@ class StatesTagsParameter extends BoolMapParameter<ProductState> {
   String getTag(final ProductState key, final bool value) =>
       value ? key.completedTag : key.toBeCompletedTag;
 
-  StatesTagsParameter({required final Map<ProductState, bool> map})
-      : super(map: map);
+  const StatesTagsParameter({required super.map});
 }
