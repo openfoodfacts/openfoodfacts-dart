@@ -10,6 +10,7 @@ SearchResult _$SearchResultFromJson(Map<String, dynamic> json) => SearchResult(
       page: JsonObject.parseInt(json['page']),
       pageSize: JsonObject.parseInt(json['page_size']),
       count: JsonObject.parseInt(json['count']),
+      pageCount: JsonObject.parseInt(json['page_count']),
       skip: JsonObject.parseInt(json['skip']),
       products: (json['products'] as List<dynamic>?)
           ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
@@ -21,6 +22,7 @@ Map<String, dynamic> _$SearchResultToJson(SearchResult instance) {
     'page': instance.page,
     'page_size': instance.pageSize,
     'count': instance.count,
+    'page_count': instance.pageCount,
     'skip': instance.skip,
   };
 
