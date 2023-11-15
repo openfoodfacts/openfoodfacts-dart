@@ -56,5 +56,5 @@ class AvailablePreferenceImportances {
   /// Returns the importance from its id.
   PreferenceImportance? getPreferenceImportance(final String importanceId) =>
       _preferenceImportances?[importanceId] ??
-      _preferenceImportances?[PreferenceImportance.INDEX_NOT_IMPORTANT];
+      _preferenceImportances?[PreferenceImportance.ID_NOT_IMPORTANT];
 }

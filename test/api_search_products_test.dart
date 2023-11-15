@@ -785,7 +785,7 @@ void main() {
       expect(result.products!.length, 24);
       expect(result.products![0].runtimeType, Product);
       expect(result.count, greaterThan(1500));
-    });
+    }, skip: 'Temporarily not working (server issue)');
 
     test('many many products', () async {
       final List<String> manyBarcodes = <String>[];
