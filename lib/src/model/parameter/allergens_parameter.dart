@@ -12,6 +12,5 @@ class AllergensParameter extends BoolMapParameter<AllergensTag> {
   String getTag(final AllergensTag key, final bool value) =>
       value ? key.offTag : '-${key.offTag}';
 
-  const AllergensParameter({required final Map<AllergensTag, bool> map})
-      : super(map: map);
+  const AllergensParameter({required super.map});
 }
