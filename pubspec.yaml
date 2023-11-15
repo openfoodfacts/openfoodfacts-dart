@@ -24,3 +24,12 @@ dev_dependencies:
 funding:
   - "https://donate.openfoodfacts.org/"
   - "https://opencollective.com/openfoodfacts-server"
+
+topics:
+  - nutriscore
+  - ecoscore
+  - allergies
+  - nutrition
+  - carbonfootprint
+  - food
+  - ingredients
