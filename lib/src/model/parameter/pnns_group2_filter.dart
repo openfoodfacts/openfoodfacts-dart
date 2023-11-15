@@ -7,7 +7,7 @@ class PnnsGroup2Filter extends Parameter {
   String getName() => 'pnns_groups_2_tags';
 
   @override
-  String getValue() => pnnsGroup2.id;
+  String getValue() => pnnsGroup2.offTag;
 
   final PnnsGroup2 pnnsGroup2;
 
