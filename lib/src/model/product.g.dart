@@ -101,6 +101,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
       noNutritionData: JsonHelper.checkboxFromJSON(json['no_nutrition_data']),
     )
+      ..genericNameInLanguages =
+          LanguageHelper.fromJsonStringMap(json['generic_name_in_languages'])
       ..brandsTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
           json['brands_tags_in_languages'])
       ..imagesFreshnessInLanguages =
@@ -176,6 +178,8 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('product_name_in_languages',
       LanguageHelper.toJsonStringMap(instance.productNameInLanguages));
   writeNotNull('generic_name', instance.genericName);
+  writeNotNull('generic_name_in_languages',
+      LanguageHelper.toJsonStringMap(instance.genericNameInLanguages));
   writeNotNull('brands', instance.brands);
   writeNotNull('brands_tags', instance.brandsTags);
   writeNotNull('brands_tags_in_languages',
