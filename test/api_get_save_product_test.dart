@@ -34,6 +34,8 @@ void main() {
   group('$OpenFoodAPIClient get-save products', () {
     test('get product Coca Cola Light', () async {
       final String barcode = getBookBarcode(0);
+      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.GERMAN;
+      const String genericName = 'Softdrink';
       const List<String> ingredientsText = <String>[
         'Wasser',
         'Kohlensäure',
@@ -52,7 +54,7 @@ void main() {
       final Product inputProduct = Product(
         barcode: barcode,
         productName: 'Coca Cola Light',
-        genericName: 'Softdrink',
+        genericName: genericName,
         countries: 'Frankreich,Deutschland',
         brands: 'Coca Cola',
         nutrimentDataPer: PerSize.serving.offTag,
@@ -66,10 +68,11 @@ void main() {
         TestConstants.TEST_USER,
         inputProduct,
         uriHelper: uriHelper,
+        language: language,
       );
 
       final SendImage fontImage = SendImage(
-        lang: OpenFoodFactsLanguage.GERMAN,
+        lang: language,
         barcode: barcode,
         imageField: ImageField.FRONT,
         imageUri: Uri.file('test/test_assets/front_coca_light_de.jpg'),
@@ -83,7 +86,7 @@ void main() {
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
         barcode,
-        language: OpenFoodFactsLanguage.GERMAN,
+        language: language,
         fields: [ProductField.ALL],
         version: ProductQueryVersion.v3,
       );
@@ -99,7 +102,9 @@ void main() {
       expect(product.barcode, barcode);
       expect(product.lastModified, isNotNull);
 
-      expect(product.genericName, 'Softdrink');
+      expect(product.genericName, genericName);
+      expect(product.genericNameInLanguages, isNotNull);
+      expect(product.genericNameInLanguages![language], genericName);
 
       expect(product.ingredients, isNotNull);
       expect(product.ingredients!.length, ingredientsText.length);

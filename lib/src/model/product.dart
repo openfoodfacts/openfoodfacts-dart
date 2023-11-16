@@ -103,10 +103,17 @@ class Product extends JsonObject {
       includeIfNull: false)
   Map<OpenFoodFactsLanguage, String>? productNameInLanguages;
 
-  ///Common name
-  ///Example: Chocolate bar with milk and hazelnuts
+  /// Common name. Example: "Chocolate bar with milk and hazelnuts".
   @JsonKey(name: 'generic_name', includeIfNull: false)
   String? genericName;
+
+  /// Localized common name.
+  @JsonKey(
+      name: 'generic_name_in_languages',
+      fromJson: LanguageHelper.fromJsonStringMap,
+      toJson: LanguageHelper.toJsonStringMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, String>? genericNameInLanguages;
 
   @JsonKey(name: 'brands', includeIfNull: false)
   String? brands;
@@ -572,6 +579,11 @@ class Product extends JsonObject {
           result.productNameInLanguages ??= {};
           result.productNameInLanguages![language] = label;
           break;
+        case ProductField.GENERIC_NAME_IN_LANGUAGES:
+        case ProductField.GENERIC_NAME_ALL_LANGUAGES:
+          result.genericNameInLanguages ??= {};
+          result.genericNameInLanguages![language] = label;
+          break;
         case ProductField.INGREDIENTS_TEXT_IN_LANGUAGES:
         case ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES:
           result.ingredientsTextInLanguages ??= {};
@@ -653,6 +665,7 @@ class Product extends JsonObject {
     ) {
       switch (productField) {
         case ProductField.NAME_IN_LANGUAGES:
+        case ProductField.GENERIC_NAME_IN_LANGUAGES:
         case ProductField.INGREDIENTS_TEXT_IN_LANGUAGES:
         case ProductField.PACKAGING_TEXT_IN_LANGUAGES:
           setLanguageString(productField, language, json[key]);
