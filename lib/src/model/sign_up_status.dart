@@ -10,19 +10,10 @@ class SignUpStatus extends Status {
   final Iterable<SignUpStatusError>? statusErrors;
 
   SignUpStatus._({
-    dynamic status,
-    String? statusVerbose,
-    String? body,
-    String? error,
-    int? imageId,
+    super.status,
+    super.error,
     this.statusErrors,
-  }) : super(
-          status: status,
-          statusVerbose: statusVerbose,
-          body: body,
-          error: error,
-          imageId: imageId,
-        );
+  });
 
   factory SignUpStatus(Status status) {
     if (status.body == null) {

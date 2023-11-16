@@ -51,13 +51,13 @@ void main() {
       expect(result.page, 1, reason: reason); // default
       expect(result.pageSize, pageSize, reason: reason);
       expect(result.products, isNotNull, reason: reason);
-      expect(result.products!.length, result.count, reason: reason);
+      expect(result.products!.length, result.pageCount, reason: reason);
       if (additionalCheck != null) {
         for (final Product product in result.products!) {
           additionalCheck(product);
         }
       }
-      return result.count!;
+      return result.pageCount!;
     }
 
     Future<int> getCountForAllLanguages(

@@ -15,6 +15,9 @@ class SearchResult extends JsonObject {
   @JsonKey(name: 'count', fromJson: JsonObject.parseInt)
   final int? count;
 
+  @JsonKey(name: 'page_count', fromJson: JsonObject.parseInt)
+  final int? pageCount;
+
   @JsonKey(name: 'skip', fromJson: JsonObject.parseInt)
   final int? skip;
 
@@ -25,6 +28,7 @@ class SearchResult extends JsonObject {
     this.page,
     this.pageSize,
     this.count,
+    this.pageCount,
     this.skip,
     this.products,
   });
