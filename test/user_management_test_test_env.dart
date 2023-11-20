@@ -61,6 +61,15 @@ void main() {
       expect(status?.successful, false);
       expect(status?.statusVerbose, 'user not signed-in');
     });
+
+    test('Login with problematic charset', () async {
+      final LoginStatus? status = await OpenFoodAPIClient.login2(
+        User(userId: 'លីវយី', password: ''),
+        uriHelper: uriHelper,
+      );
+      expect(status?.successful, false);
+      expect(status?.statusVerbose, 'user not signed-in');
+    });
   });
 }
 

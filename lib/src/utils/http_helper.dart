@@ -96,7 +96,7 @@ class HttpHelper {
       }
     }
 
-    http.Response response = await http.post(
+    return http.post(
       uri,
       headers: _buildHeaders(
         user: user,
@@ -105,7 +105,6 @@ class HttpHelper {
       ),
       body: addUserAgentParameters(body),
     );
-    return response;
   }
 
   static const String userInfoForTest = 'off:off';
@@ -214,7 +213,9 @@ class HttpHelper {
     headers.addAll({
       'Accept': 'application/json',
       'User-Agent': OpenFoodAPIConfiguration.userAgent!.toValueString(),
-      'From': OpenFoodAPIConfiguration.getUser(user)?.userId ?? FROM,
+      'From': _getSafeString(
+        OpenFoodAPIConfiguration.getUser(user)?.userId ?? FROM,
+      ),
     });
 
     final bool isTestModeActive = uriHelper.isTestMode;
@@ -253,5 +254,28 @@ class HttpHelper {
       }
       rethrow;
     }
+  }
+
+  /// Returns true if the [input] string is ISO-8859-1 encoded.
+  static bool _isIso88591(final String input) {
+    try {
+      latin1.encode(input);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Returns the [input] string if ISO-8859-1 encoded, or a safer version of it
+  ///
+  /// Used for HTTP headers, that do not accept any other charset.
+  /// Here instead of encoding systematically, we keep ISO-8859-1 inputs and
+  /// only encode the other "problematic" inputs.
+  /// cf. https://github.com/openfoodfacts/openfoodfacts-dart/issues/829
+  static String _getSafeString(final String input) {
+    if (_isIso88591(input)) {
+      return input;
+    }
+    return base64Encode(utf8.encode(input));
   }
 }
