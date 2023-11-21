@@ -1,38 +1,44 @@
-github_actions:
+GitHub Actions:
 - .github/**/*
 
-test:
+🧪 Tests:
 - test/**/*
 - test/api_getTaxonomyPackagingMaterialsServer_test.dart
 - test/api_getTaxonomyPackagingShapesServer_test.dart
 
-knowledge panels:
+📖 Knowledge panels:
 - lib/model/knowledge_panel.g.dart
 - lib/model/knowledge_panel_element.g.dart
 
-product:
+Product:
 - lib/model/product.dart
 - lib/model/product.g.dart
 
-robotoff:
+Robotoff:
 - lib/model/robotoff_question.g.dart
 
 pubspec:
 - pubspec.yaml
 
-ecoscore:
+Eco-Score:
 - lib/model/ecoscore_data.g.dart
 
-personalized search:
+Personalized search:
 - lib/personalized_search/**/*
 
-folksonomy:
+Folksonomy Engine:
 - lib/folksonomy.dart
 
-packaging:
+📦 Packaging:
 - lib/model/TaxonomyPackagingMaterial.dart
 - lib/model/TaxonomyPackagingMaterial.g.dart
 - lib/model/TaxonomyPackagingShape.dart
 - lib/model/TaxonomyPackagingShape.g.dart
 - test/api_getTaxonomyPackagingMaterialsServer_test.dart
 - test/api_getTaxonomyPackagingShapesServer_test.dart
+
+📜 Open Food Facts Events:
+- lib/src/events.dart
+
+OxF:
+- lib/src/utils/server_type.dart
