@@ -14,13 +14,13 @@ Product:
 - lib/model/product.dart
 - lib/model/product.g.dart
 
-Robotoff:
+🤖 Robotoff:
 - lib/model/robotoff_question.g.dart
 
 pubspec:
 - pubspec.yaml
 
-Eco-Score:
+🌱 Eco-Score:
 - lib/model/ecoscore_data.g.dart
 
 Personalized search:
