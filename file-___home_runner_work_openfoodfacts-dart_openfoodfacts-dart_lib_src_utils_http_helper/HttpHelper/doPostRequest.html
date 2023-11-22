@@ -103,7 +103,7 @@ When using <code>addCredentialsToBody</code> a User or globalUser needed, blocks
     }
   }
 
-  http.Response response = await http.post(
+  return http.post(
     uri,
     headers: _buildHeaders(
       user: user,
@@ -112,7 +112,6 @@ When using <code>addCredentialsToBody</code> a User or globalUser needed, blocks
     ),
     body: addUserAgentParameters(body),
   );
-  return response;
 }</code></pre>
 </section>
 
