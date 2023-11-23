@@ -27,10 +27,11 @@ class UriHelper {
     final Map<String, dynamic>? queryParameters,
     final bool? addUserAgentParameters,
     final String? userInfo,
+    final String? forcedHost,
   }) =>
       Uri(
         scheme: scheme,
-        host: host,
+        host: forcedHost ?? host,
         path: path,
         queryParameters: addUserAgentParameters ?? defaultAddUserAgentParameters
             ? HttpHelper.addUserAgentParameters(queryParameters)
@@ -113,6 +114,8 @@ class UriProductHelper extends UriHelper {
 
   /// Returns the product images folder (without trailing '/').
   String getImageUrlBase() => '$scheme://images.$domain/images/products';
+
+  String getHost(final String subdomain) => '$subdomain.$domain';
 
   Uri getPatchUri({
     required final String path,
