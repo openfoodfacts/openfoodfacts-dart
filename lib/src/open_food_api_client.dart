@@ -1056,9 +1056,8 @@ class OpenFoodAPIClient {
     );
     if (status.body == null) {
       return Status(
-        status: 500,
-        error:
-            'No response, open an issue here: https://github.com/openfoodfacts/openfoodfacts-dart/issues/new',
+        status: Status.serverErrorStatus,
+        error: Status.serverErrorInEnglish,
       );
     }
     // Possible strings found in the resulting html.
