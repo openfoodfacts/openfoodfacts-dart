@@ -7,8 +7,21 @@ part 'status.g.dart';
 
 @JsonSerializable()
 class Status extends JsonObject {
+  // TODO: deprecated from 2023-11-24; remove when old enough
+  @Deprecated('Use wrongUserOrPasswordErrorMessage instead')
   static const WRONG_USER_OR_PASSWORD_ERROR_MESSAGE =
+      wrongUserOrPasswordErrorMessage;
+
+  static const wrongUserOrPasswordErrorMessage =
       'Incorrect user name or password';
+
+  static const String openNewIssueUrl =
+      'https://github.com/openfoodfacts/openfoodfacts-dart/issues/new';
+
+  static const String serverErrorInEnglish =
+      'No response, open an issue here: $openNewIssueUrl';
+
+  static const int serverErrorStatus = 500;
 
   /// Commonly 1 = ok, 0 = failed
   final dynamic status;
@@ -54,8 +67,8 @@ class Status extends JsonObject {
   /// exception.
   static String _createStatusVerbose(String responseBody, Object exception) {
     String statusVerbose;
-    if (responseBody.contains(WRONG_USER_OR_PASSWORD_ERROR_MESSAGE)) {
-      statusVerbose = WRONG_USER_OR_PASSWORD_ERROR_MESSAGE;
+    if (responseBody.contains(wrongUserOrPasswordErrorMessage)) {
+      statusVerbose = wrongUserOrPasswordErrorMessage;
     } else {
       statusVerbose = exception.toString();
     }
@@ -78,8 +91,10 @@ class Status extends JsonObject {
   /// Returns true if this [Status] is caused by wrong username or password,
   /// false otherwise.
   bool isWrongUsernameOrPassword() =>
-      statusVerbose == WRONG_USER_OR_PASSWORD_ERROR_MESSAGE;
+      statusVerbose == wrongUserOrPasswordErrorMessage;
 
   @override
   Map<String, dynamic> toJson() => _$StatusToJson(this);
+
+  bool shouldOpenNewIssue() => status == serverErrorStatus;
 }

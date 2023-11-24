@@ -18,10 +18,9 @@ class SignUpStatus extends Status {
   factory SignUpStatus(Status status) {
     if (status.body == null) {
       return SignUpStatus._(
-        status: 500,
+        status: Status.serverErrorStatus,
         statusErrors: {SignUpStatusError.UNKNOWN},
-        error:
-            'No response, open an issue here: https://github.com/openfoodfacts/openfoodfacts-dart/issues/new',
+        error: Status.serverErrorInEnglish,
       );
     } else if (status.body!.contains('loggedin')) {
       return SignUpStatus._(
