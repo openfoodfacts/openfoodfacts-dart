@@ -62,6 +62,7 @@ void main() {
         OpenFoodFactsLanguage.FRENCH,
         OcrField.TESSERACT,
       ),
+      skip: 'Server error',
     );
 
     test(
@@ -80,6 +81,7 @@ void main() {
         OpenFoodFactsLanguage.GERMAN,
         OcrField.TESSERACT,
       ),
+      skip: 'Server error',
     );
 
     test('Add ingredients image to OFF server and then extract the text',
