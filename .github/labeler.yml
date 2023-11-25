@@ -42,3 +42,8 @@ Folksonomy Engine:
 
 OxF:
 - lib/src/utils/server_type.dart
+
+🖼️ Images:
+- lib/src/model/product_image.dart
+- lib/src/utils/image_helper.dart
+- test/api_get_product_image_ids_test.dart
