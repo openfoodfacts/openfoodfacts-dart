@@ -309,6 +309,8 @@ class OpenFoodAPIClient {
   ///
   /// To be used in combination with [ImageHelper.getUploadedImageUrl].
   /// Does not depend on language or country.
+  // TODO: deprecated from 2023-11-25; remove when old enough
+  @Deprecated('Use product field "images" instead')
   static Future<List<int>> getProductImageIds(
     final String barcode, {
     final User? user,

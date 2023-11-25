@@ -196,9 +196,32 @@ class Product extends JsonObject {
   @JsonKey(
       name: 'images',
       includeIfNull: false,
-      fromJson: JsonHelper.imagesFromJson,
-      toJson: JsonHelper.imagesToJson)
+      fromJson: JsonHelper.allImagesFromJson,
+      toJson: JsonHelper.allImagesToJson)
+
+  /// All images in bulk. Will include "main" images and "raw" images.
+  ///
+  /// See also [getRawImages] and [getMainImages].
   List<ProductImage>? images;
+
+  /// "Raw" (uploaded) images, like "picture 12" for "400" size.
+  List<ProductImage>? getRawImages() => _getImageSubset(false);
+
+  /// "Main" images, like "front" picture for "French" and "400" size.
+  List<ProductImage>? getMainImages() => _getImageSubset(true);
+
+  List<ProductImage>? _getImageSubset(final bool isMain) {
+    if (images == null) {
+      return null;
+    }
+    final List<ProductImage> result = <ProductImage>[];
+    for (final ProductImage productImage in images!) {
+      if (productImage.isMain == isMain) {
+        result.add(productImage);
+      }
+    }
+    return result;
+  }
 
   @JsonKey(
       name: 'ingredients',
