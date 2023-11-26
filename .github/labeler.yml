@@ -7,33 +7,33 @@ GitHub Actions:
 - test/api_getTaxonomyPackagingShapesServer_test.dart
 
 📖 Knowledge panels:
-- lib/model/knowledge_panel.g.dart
-- lib/model/knowledge_panel_element.g.dart
+- lib/src/model/knowledge_panel.g.dart
+- lib/src/model/knowledge_panel_element.g.dart
 
 Product:
-- lib/model/product.dart
-- lib/model/product.g.dart
+- lib/src/model/product.dart
+- lib/src/model/product.g.dart
 
 🤖 Robotoff:
-- lib/model/robotoff_question.g.dart
+- lib/src/model/robotoff_question.g.dart
 
 pubspec:
 - pubspec.yaml
 
 🌱 Eco-Score:
-- lib/model/ecoscore_data.g.dart
+- lib/src/model/ecoscore_data.g.dart
 
 Personalized search:
-- lib/personalized_search/**/*
+- lib/src/personalized_search/**/*
 
 Folksonomy Engine:
-- lib/folksonomy.dart
+- lib/src/folksonomy.dart
 
 📦 Packaging:
-- lib/model/TaxonomyPackagingMaterial.dart
-- lib/model/TaxonomyPackagingMaterial.g.dart
-- lib/model/TaxonomyPackagingShape.dart
-- lib/model/TaxonomyPackagingShape.g.dart
+- lib/src/model/TaxonomyPackagingMaterial.dart
+- lib/src/model/TaxonomyPackagingMaterial.g.dart
+- lib/src/model/TaxonomyPackagingShape.dart
+- lib/src/model/TaxonomyPackagingShape.g.dart
 - test/api_getTaxonomyPackagingMaterialsServer_test.dart
 - test/api_getTaxonomyPackagingShapesServer_test.dart
 
