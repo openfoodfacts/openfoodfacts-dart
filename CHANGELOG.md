@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.2.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.1.0...v3.2.0) (2023-11-28)
+
+
+### Features
+
+* 620 - autocomplete for all taxonomy names and fuzziness levels ([#835](https://github.com/openfoodfacts/openfoodfacts-dart/issues/835)) ([046c418](https://github.com/openfoodfacts/openfoodfacts-dart/commit/046c4189a116fdd20b2e2100def665f07094a786))
+* 620 - Elastic Search autocomplete for categories ([#834](https://github.com/openfoodfacts/openfoodfacts-dart/issues/834)) ([1672f1a](https://github.com/openfoodfacts/openfoodfacts-dart/commit/1672f1a01fc8055866ee30b1594940fda589d10b))
+* 836 - localizable and clickable server error ([#837](https://github.com/openfoodfacts/openfoodfacts-dart/issues/837)) ([a40101c](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a40101c2b0c0b8aefe2f761bf4718be31022c84b))
+* new field pageCount for searchResult ([#823](https://github.com/openfoodfacts/openfoodfacts-dart/issues/823)) ([1d88bbf](https://github.com/openfoodfacts/openfoodfacts-dart/commit/1d88bbfac3411bfe150745034a4e28067628ac0f))
+* new localized product fields for generic name ([#828](https://github.com/openfoodfacts/openfoodfacts-dart/issues/828)) ([a98cfcb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a98cfcb3d1e127b5a57d6a7e70db163906ac2661))
+
+
+### Bug Fixes
+
+* 829 - no more crash if the user name is not ASCII/ISO-8859-1 ([#830](https://github.com/openfoodfacts/openfoodfacts-dart/issues/830)) ([8a23aee](https://github.com/openfoodfacts/openfoodfacts-dart/commit/8a23aeef41307fd85d5f119da0fd60470b6d39db))
+
 ## [3.1.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.0.0...v3.1.0) (2023-10-28)
 
 
