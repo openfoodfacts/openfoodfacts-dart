@@ -515,12 +515,19 @@ void main() {
       expect(result.product!.ecoscoreData!.missingDataWarning, isFalse);
     });
 
-    test('product fields', () async {
-      String barcode = '20004361';
+    test('FABRICE product fields', () async {
+      const String barcode = '7300400481588';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
         barcode,
         language: OpenFoodFactsLanguage.GERMAN,
-        fields: [ProductField.NAME, ProductField.BRANDS_TAGS],
+        fields: [
+          ProductField.NAME,
+          ProductField.BRANDS_TAGS,
+          ProductField.ABBREVIATED_NAME,
+          ProductField.ABBREVIATED_NAME_ALL_LANGUAGES,
+          ProductField.BRANDS,
+          ProductField.QUANTITY,
+        ],
         version: ProductQueryVersion.v3,
       );
       ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
@@ -537,6 +544,18 @@ void main() {
       expect(result.product!.additives!.names, isEmpty);
       expect(result.product!.nutrientLevels!.levels, isEmpty);
       expect(result.product!.lang, OpenFoodFactsLanguage.UNDEFINED);
+      expect(result.product!.abbreviatedName, isNotNull);
+      expect(result.product!.abbreviatedNameInLanguages, isNotNull);
+      expect(
+        result
+            .product!.abbreviatedNameInLanguages![OpenFoodFactsLanguage.FRENCH],
+        isNotNull,
+      );
+      expect(result.product!.brands, isNotNull);
+      expect(result.product!.quantity, isNotNull);
+      print('q=${result.product!.quantity}');
+      print(
+          'fdhjkfhd: ${result.product!.getProductNameBrandQuantity(OpenFoodFactsLanguage.FRENCH, '; ')}');
 
       configurations = ProductQueryConfiguration(
         barcode,
