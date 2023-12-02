@@ -515,7 +515,7 @@ void main() {
       expect(result.product!.ecoscoreData!.missingDataWarning, isFalse);
     });
 
-    test('FABRICE product fields', () async {
+    test('product fields', () async {
       const String barcode = '7300400481588';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
         barcode,
@@ -553,9 +553,6 @@ void main() {
       );
       expect(result.product!.brands, isNotNull);
       expect(result.product!.quantity, isNotNull);
-      print('q=${result.product!.quantity}');
-      print(
-          'fdhjkfhd: ${result.product!.getProductNameBrandQuantity(OpenFoodFactsLanguage.FRENCH, '; ')}');
 
       configurations = ProductQueryConfiguration(
         barcode,
