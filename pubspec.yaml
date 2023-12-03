@@ -25,11 +25,11 @@ funding:
   - "https://donate.openfoodfacts.org/"
   - "https://opencollective.com/openfoodfacts-server"
 
+# 5 topics max
+# cf. https://dart.dev/tools/pub/pubspec#topics
 topics:
   - nutriscore
   - ecoscore
-  - allergies
   - nutrition
-  - carbonfootprint
   - food
   - ingredients
