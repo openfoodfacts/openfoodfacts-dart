@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.2.0...v3.2.1) (2023-12-03)
+
+
+### Bug Fixes
+
+* 5 topics ([#846](https://github.com/openfoodfacts/openfoodfacts-dart/issues/846)) ([44812d4](https://github.com/openfoodfacts/openfoodfacts-dart/commit/44812d485cca0bc989e8e7dd8bf1c432a1e91c3e))
+
 ## [3.2.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.1.0...v3.2.0) (2023-11-28)
 
 
