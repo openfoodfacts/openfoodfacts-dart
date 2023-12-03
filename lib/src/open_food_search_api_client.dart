@@ -23,6 +23,9 @@ class OpenFoodSearchAPIClient {
   static String _getHost(final UriProductHelper uriHelper) =>
       uriHelper.getHost(_subdomain);
 
+  /// Returns a list of suggestions.
+  ///
+  /// /!\ For brands, language must be English.
   static Future<AutocompleteSearchResult> autocomplete({
     required String query,
     required final List<TaxonomyName> taxonomyNames,
