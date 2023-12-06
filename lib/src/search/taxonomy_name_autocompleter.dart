@@ -3,7 +3,6 @@ import 'dart:async';
 import '../model/user.dart';
 import '../open_food_search_api_client.dart';
 import '../utils/autocompleter.dart';
-import '../utils/country_helper.dart';
 import '../utils/language_helper.dart';
 import '../utils/open_food_api_configuration.dart';
 import '../utils/uri_helper.dart';
@@ -17,7 +16,6 @@ class TaxonomyNameAutocompleter implements Autocompleter {
   const TaxonomyNameAutocompleter({
     required this.taxonomyNames,
     required this.language,
-    this.country,
     this.limit = 25,
     this.uriHelper = uriHelperFoodProd,
     this.user,
@@ -26,7 +24,6 @@ class TaxonomyNameAutocompleter implements Autocompleter {
 
   final List<TaxonomyName> taxonomyNames;
   final OpenFoodFactsLanguage language;
-  final OpenFoodFactsCountry? country;
   final int limit;
   final UriProductHelper uriHelper;
   final User? user;
