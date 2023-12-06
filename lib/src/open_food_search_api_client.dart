@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart';
@@ -8,7 +7,7 @@ import 'utils/http_helper.dart';
 import 'utils/language_helper.dart';
 import 'utils/open_food_api_configuration.dart';
 import 'search/autocomplete_search_result.dart';
-import 'search/fuzziness_level.dart';
+import 'search/fuzziness.dart';
 import 'search/taxonomy_name.dart';
 import 'utils/uri_helper.dart';
 
