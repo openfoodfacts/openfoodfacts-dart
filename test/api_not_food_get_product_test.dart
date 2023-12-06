@@ -17,7 +17,7 @@ void main() {
     domain: 'openpetfoodfacts.org',
   );
 
-  const String beautyBarcode = '4056489234692';
+  const String beautyBarcode = '3600550964738';
   const String productsBarcode = '7898927451035';
   const String petFoodBarcode = '3564700266809';
 
@@ -31,7 +31,7 @@ void main() {
           ProductQueryConfiguration(
         barcode,
         language: OpenFoodFactsLanguage.ENGLISH,
-        fields: [ProductField.ALL],
+        fields: [ProductField.BARCODE],
         version: ProductQueryVersion(2),
       );
       final OldProductResult result = await OpenFoodAPIClient.getOldProduct(
