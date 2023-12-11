@@ -68,4 +68,14 @@ class Allergens {
 
     return result;
   }
+
+  Allergens copyWith({
+    List<String>? ids,
+    List<String>? names,
+  }) {
+    return Allergens(
+      ids ?? this.ids,
+      names ?? this.names,
+    );
+  }
 }

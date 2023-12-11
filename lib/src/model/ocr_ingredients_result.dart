@@ -25,4 +25,18 @@ class OcrIngredientsResult extends JsonObject {
 
   @JsonKey(name: 'ingredients_text_from_image')
   final String? ingredientsTextFromImage;
+
+  OcrIngredientsResult copyWith({
+    int? status,
+    String? ingredientsTextFromImageOrig,
+    String? ingredientsTextFromImage,
+  }) {
+    return OcrIngredientsResult(
+      status: status ?? this.status,
+      ingredientsTextFromImageOrig:
+          ingredientsTextFromImageOrig ?? this.ingredientsTextFromImageOrig,
+      ingredientsTextFromImage:
+          ingredientsTextFromImage ?? this.ingredientsTextFromImage,
+    );
+  }
 }

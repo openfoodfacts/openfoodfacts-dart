@@ -120,4 +120,6 @@ class TaxonomyPackagingShapeQueryConfiguration
           .where((TaxonomyPackagingShapeField field) =>
               !ignoredFields.contains(field))
           .map<String>((TaxonomyPackagingShapeField field) => field.offTag);
+
+
 }

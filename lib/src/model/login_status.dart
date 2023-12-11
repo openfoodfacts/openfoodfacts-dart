@@ -52,4 +52,20 @@ class LoginStatus {
       '${userEmail == null ? '' : ',userEmail:$userEmail'}'
       '${userName == null ? '' : ',userName:$userName'}'
       ')';
+
+  LoginStatus copyWith({
+    int? status,
+    String? statusVerbose,
+    String? userEmail,
+    String? userName,
+    String? userId,
+  }) {
+    return LoginStatus(
+      status: status ?? this.status,
+      statusVerbose: statusVerbose ?? this.statusVerbose,
+      userEmail: userEmail ?? this.userEmail,
+      userName: userName ?? this.userName,
+      userId: userId ?? this.userId,
+    );
+  }
 }

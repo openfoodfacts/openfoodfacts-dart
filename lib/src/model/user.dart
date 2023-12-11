@@ -23,4 +23,16 @@ class User extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$UserToJson(this);
+
+  User copyWith({
+    String? comment,
+    String? userId,
+    String? password,
+  }) {
+    return User(
+      comment: comment ?? this.comment,
+      userId: userId ?? this.userId,
+      password: password ?? this.password,
+    );
+  }
 }

@@ -42,4 +42,26 @@ class ProductTag extends JsonObject {
 
   @override
   String toString() => toJson().toString();
+
+  ProductTag copyWith({
+    String? barcode,
+    String? key,
+    String? value,
+    String? owner,
+    int? version,
+    String? editor,
+    DateTime? lastEdit,
+    String? comment,
+  }) {
+    return ProductTag(
+      barcode: barcode ?? this.barcode,
+      key: key ?? this.key,
+      value: value ?? this.value,
+      owner: owner ?? this.owner,
+      version: version ?? this.version,
+      editor: editor ?? this.editor,
+      lastEdit: lastEdit ?? this.lastEdit,
+      comment: comment ?? this.comment,
+    );
+  }
 }

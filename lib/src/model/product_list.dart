@@ -27,4 +27,16 @@ class ProductList extends JsonObject {
 
   @override
   String toString() => toJson().toString();
+
+  ProductList copyWith({
+    String? barcode,
+    String? key,
+    String? value,
+  }) {
+    return ProductList(
+      barcode: barcode ?? this.barcode,
+      key: key ?? this.key,
+      value: value ?? this.value,
+    );
+  }
 }

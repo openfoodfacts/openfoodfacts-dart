@@ -300,6 +300,79 @@ class TaxonomyAdditive extends JsonObject {
 
   @override
   String toString() => toJson().toString();
+
+  TaxonomyAdditive copyWith({
+    Map<OpenFoodFactsLanguage, String>? additivesClasses,
+    Map<OpenFoodFactsLanguage, String>? carbonFootprintFrFoodgesIngredient,
+    Map<OpenFoodFactsLanguage, String>? carbonFootprintFrFoodgesValue,
+    List<String>? children,
+    Map<OpenFoodFactsLanguage, String>? colourIndex,
+    Map<OpenFoodFactsLanguage, String>? comment,
+    Map<OpenFoodFactsLanguage, String>? defaultAdditiveClass,
+    Map<OpenFoodFactsLanguage, String>? description,
+    Map<OpenFoodFactsLanguage, String>? eNumber,
+    Map<OpenFoodFactsLanguage, String>? efsa,
+    Map<OpenFoodFactsLanguage, String>? efsaEvaluation,
+    Map<OpenFoodFactsLanguage, String>? efsaEvaluationAdi,
+    Map<OpenFoodFactsLanguage, String>? efsaEvaluationAdiEstablished,
+    Map<OpenFoodFactsLanguage, String>? efsaEvaluationDate,
+    Map<OpenFoodFactsLanguage, String>?
+        efsaEvaluationExposure95thGreaterThanAdi,
+    Map<OpenFoodFactsLanguage, String>?
+        efsaEvaluationExposure95thGreaterThanNoael,
+    Map<OpenFoodFactsLanguage, String>?
+        efsaEvaluationExposureMeanGreaterThanAdi,
+    Map<OpenFoodFactsLanguage, String>?
+        efsaEvaluationExposureMeanGreaterThanNoael,
+    Map<OpenFoodFactsLanguage, String>? efsaEvaluationOverexposureRisk,
+    Map<OpenFoodFactsLanguage, String>? efsaEvaluationSafetyAssessed,
+    Map<OpenFoodFactsLanguage, String>? efsaEvaluationUrl,
+    Map<OpenFoodFactsLanguage, String>? fromPalmOil,
+    Map<OpenFoodFactsLanguage, String>? mandatoryAdditiveClass,
+    Map<OpenFoodFactsLanguage, String>? name,
+    Map<OpenFoodFactsLanguage, String>? organicEu,
+    List<String>? parents,
+    Map<OpenFoodFactsLanguage, String>? vegan,
+    Map<OpenFoodFactsLanguage, String>? vegetarian,
+    Map<OpenFoodFactsLanguage, String>? wikidata,
+  }) {
+    return TaxonomyAdditive(
+      additivesClasses ?? this.additivesClasses,
+      carbonFootprintFrFoodgesIngredient ??
+          this.carbonFootprintFrFoodgesIngredient,
+      carbonFootprintFrFoodgesValue ?? this.carbonFootprintFrFoodgesValue,
+      children ?? this.children,
+      colourIndex ?? this.colourIndex,
+      comment ?? this.comment,
+      defaultAdditiveClass ?? this.defaultAdditiveClass,
+      description ?? this.description,
+      eNumber ?? this.eNumber,
+      efsa ?? this.efsa,
+      efsaEvaluation ?? this.efsaEvaluation,
+      efsaEvaluationAdi ?? this.efsaEvaluationAdi,
+      efsaEvaluationAdiEstablished ?? this.efsaEvaluationAdiEstablished,
+      efsaEvaluationDate ?? this.efsaEvaluationDate,
+      efsaEvaluationExposure95thGreaterThanAdi ??
+          this.efsaEvaluationExposure95thGreaterThanAdi,
+      efsaEvaluationExposure95thGreaterThanNoael ??
+          this.efsaEvaluationExposure95thGreaterThanNoael,
+      efsaEvaluationExposureMeanGreaterThanAdi ??
+          this.efsaEvaluationExposureMeanGreaterThanAdi,
+      efsaEvaluationExposureMeanGreaterThanNoael ??
+          this.efsaEvaluationExposureMeanGreaterThanNoael,
+      efsaEvaluationOverexposureRisk ?? this.efsaEvaluationOverexposureRisk,
+      efsaEvaluationSafetyAssessed ?? this.efsaEvaluationSafetyAssessed,
+      efsaEvaluationUrl ?? this.efsaEvaluationUrl,
+      fromPalmOil ?? this.fromPalmOil,
+      mandatoryAdditiveClass ?? this.mandatoryAdditiveClass,
+      name ?? this.name,
+      organicEu ?? this.organicEu,
+      parents ?? this.parents,
+      vegan ?? this.vegan,
+      vegetarian ?? this.vegetarian,
+      wikidata ?? this.wikidata,
+    );
+  }
 }
 
 /// Configuration to get additives

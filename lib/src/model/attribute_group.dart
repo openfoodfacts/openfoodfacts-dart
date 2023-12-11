@@ -50,6 +50,21 @@ class AttributeGroup extends JsonObject {
     return result;
   }
 
+
+  AttributeGroup copyWith({
+    String? id,
+    String? name,
+    String? warning,
+    List<Attribute>? attributes,
+  }) {
+    return AttributeGroup(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      warning: warning ?? this.warning,
+      attributes: attributes ?? this.attributes,
+    );
+  }
+
   static const String ATTRIBUTE_GROUP_NUTRITIONAL_QUALITY =
       'nutritional_quality';
   static const String ATTRIBUTE_GROUP_PROCESSING = 'processing';

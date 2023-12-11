@@ -17,6 +17,16 @@ class RobotoffQuestionResult extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$RobotoffQuestionResultToJson(this);
+
+  RobotoffQuestionResult copyWith({
+    String? status,
+    List<RobotoffQuestion>? questions,
+  }) {
+    return RobotoffQuestionResult(
+      status: status ?? this.status,
+      questions: questions ?? this.questions,
+    );
+  }
 }
 
 @JsonSerializable()
@@ -46,4 +56,24 @@ class RobotoffQuestion extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$RobotoffQuestionToJson(this);
+
+  RobotoffQuestion copyWith({
+    String? barcode,
+    String? type,
+    String? value,
+    String? question,
+    String? insightId,
+    InsightType? insightType,
+    String? imageUrl,
+  }) {
+    return RobotoffQuestion(
+      barcode: barcode ?? this.barcode,
+      type: type ?? this.type,
+      value: value ?? this.value,
+      question: question ?? this.question,
+      insightId: insightId ?? this.insightId,
+      insightType: insightType ?? this.insightType,
+      imageUrl: imageUrl ?? this.imageUrl,
+    );
+  }
 }

@@ -38,4 +38,20 @@ class ProductFreshness {
       ','
       'improvements:$improvements'
       ')';
+
+  ProductFreshness copyWith({
+    bool? isEcoscoreReady,
+    bool? isNutriscoreReady,
+    bool? isIngredientsReady,
+    DateTime? lastModified,
+    Set<ProductImprovement>? improvements,
+  }) {
+    return ProductFreshness._(
+      isEcoscoreReady: isEcoscoreReady ?? this.isEcoscoreReady,
+      isNutriscoreReady: isNutriscoreReady ?? this.isNutriscoreReady,
+      isIngredientsReady: isIngredientsReady ?? this.isIngredientsReady,
+      lastModified: lastModified ?? this.lastModified,
+      improvements: improvements ?? this.improvements,
+    );
+  }
 }

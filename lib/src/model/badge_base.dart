@@ -32,4 +32,16 @@ class BadgeBase extends JsonObject {
       ', level: $level'
       '${userId == null ? '' : ', userId: $userId'}'
       ')';
+
+  BadgeBase copyWith({
+    String? userId,
+    String? badgeName,
+    int? level,
+  }) {
+    return BadgeBase(
+      userId: userId ?? this.userId,
+      badgeName: badgeName ?? this.badgeName,
+      level: level ?? this.level,
+    );
+  }
 }

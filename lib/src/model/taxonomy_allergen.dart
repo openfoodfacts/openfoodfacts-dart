@@ -69,6 +69,18 @@ class TaxonomyAllergen extends JsonObject {
 
   @override
   String toString() => toJson().toString();
+
+  TaxonomyAllergen copyWith({
+    Map<OpenFoodFactsLanguage, String>? name,
+    Map<OpenFoodFactsLanguage, List<String>>? synonyms,
+    Map<OpenFoodFactsLanguage, String>? wikidata,
+  }) {
+    return TaxonomyAllergen(
+      name ?? this.name,
+      synonyms ?? this.synonyms,
+      wikidata ?? this.wikidata,
+    );
+  }
 }
 
 /// Configuration for allergens API query.

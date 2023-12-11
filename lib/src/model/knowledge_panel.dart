@@ -120,6 +120,26 @@ class KnowledgePanel extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelToJson(this);
+
+  KnowledgePanel copyWith({
+    TitleElement? titleElement,
+    Level? level,
+    bool? expanded,
+    List<KnowledgePanelElement>? elements,
+    List<String>? topics,
+    final Evaluation? evaluation,
+    final KnowledgePanelSize? size,
+  }) {
+    return KnowledgePanel(
+      titleElement: titleElement ?? this.titleElement,
+      level: level ?? this.level,
+      expanded: expanded ?? this.expanded,
+      elements: elements ?? this.elements,
+      topics: topics ?? this.topics,
+      evaluation: evaluation ?? this.evaluation,
+      size: size ?? this.size,
+    );
+  }
 }
 
 /// An element representing the title of the KnowledgePanel which could consist
@@ -167,4 +187,23 @@ class TitleElement extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$TitleElementToJson(this);
+
+  TitleElement copyWith({
+    String? title,
+    String? subtitle,
+    final Grade? grade,
+    final TitleElementType? type,
+    final String? iconUrl,
+    final bool? iconColorFromEvaluation,
+  }) {
+    return TitleElement(
+      title: title ?? this.title,
+      subtitle: subtitle ?? this.subtitle,
+      grade: grade ?? this.grade,
+      type: type ?? this.type,
+      iconUrl: iconUrl ?? this.iconUrl,
+      iconColorFromEvaluation:
+          iconColorFromEvaluation ?? this.iconColorFromEvaluation,
+    );
+  }
 }

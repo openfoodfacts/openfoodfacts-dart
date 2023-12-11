@@ -196,4 +196,38 @@ class ProductImage {
         other.width == width &&
         other.height == height;
   }
+
+  ProductImage copyWith({
+    ImageField? field,
+    ImageSize? size,
+    OpenFoodFactsLanguage? language,
+    String? url,
+    int? rev,
+    String? imgid,
+    ImageAngle? angle,
+    String? coordinatesImageSize,
+    int? x1,
+    int? y1,
+    int? x2,
+    int? y2,
+    int? width,
+    int? height,
+  }) {
+    return ProductImage(
+      field: field ?? this.field,
+      size: size ?? this.size,
+      language: language ?? this.language,
+      url: url ?? this.url,
+      rev: rev ?? this.rev,
+      imgid: imgid ?? this.imgid,
+      angle: angle ?? this.angle,
+      coordinatesImageSize: coordinatesImageSize ?? this.coordinatesImageSize,
+      x1: x1 ?? this.x1,
+      y1: y1 ?? this.y1,
+      x2: x2 ?? this.x2,
+      y2: y2 ?? this.y2,
+      width: width ?? this.width,
+      height: height ?? this.height,
+    );
+  }
 }

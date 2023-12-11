@@ -27,4 +27,16 @@ class KeyStats extends JsonObject {
 
   @override
   String toString() => toJson().toString();
+
+  KeyStats copyWith({
+    String? key,
+    int? count,
+    int? values,
+  }) {
+    return KeyStats(
+      key: key ?? this.key,
+      count: count ?? this.count,
+      values: values ?? this.values,
+    );
+  }
 }

@@ -420,6 +420,105 @@ class TaxonomyIngredient extends JsonObject {
 
   @override
   String toString() => toJson().toString();
+
+  TaxonomyIngredient copyWith({
+    Map<OpenFoodFactsLanguage, String>? additivesClasses,
+    Map<OpenFoodFactsLanguage, String>? allergens,
+    Map<OpenFoodFactsLanguage, String>? brioche,
+    Map<OpenFoodFactsLanguage, String>? carbonFootprintFrFoodgesIngredient,
+    Map<OpenFoodFactsLanguage, String>? carbonFootprintFrFoodgesValue,
+    List<String>? children,
+    Map<OpenFoodFactsLanguage, String>? ciqualFoodCode,
+    Map<OpenFoodFactsLanguage, String>? ciqualFoodName,
+    Map<OpenFoodFactsLanguage, String>? colourIndex,
+    Map<OpenFoodFactsLanguage, String>? comment,
+    Map<OpenFoodFactsLanguage, String>? defaultAdditiveClass,
+    Map<OpenFoodFactsLanguage, String>? description,
+    Map<OpenFoodFactsLanguage, String>? eNumber,
+    Map<OpenFoodFactsLanguage, String>? efsa,
+    Map<OpenFoodFactsLanguage, String>? efsaEvaluation,
+    Map<OpenFoodFactsLanguage, String>? efsaEvaluationAdi,
+    Map<OpenFoodFactsLanguage, String>? efsaEvaluationAdiEstablished,
+    Map<OpenFoodFactsLanguage, String>? efsaEvaluationDate,
+    Map<OpenFoodFactsLanguage, String>?
+        efsaEvaluationExposure95ThGreaterThanAdi,
+    Map<OpenFoodFactsLanguage, String>?
+        efsaEvaluationExposure95ThGreaterThanNoael,
+    Map<OpenFoodFactsLanguage, String>?
+        efsaEvaluationExposureMeanGreaterThanAdi,
+    Map<OpenFoodFactsLanguage, String>?
+        efsaEvaluationExposureMeanGreaterThanNoael,
+    Map<OpenFoodFactsLanguage, String>? efsaEvaluationOverexposureRisk,
+    Map<OpenFoodFactsLanguage, String>? efsaEvaluationSafetyAssessed,
+    Map<OpenFoodFactsLanguage, String>? efsaEvaluationUrl,
+    Map<OpenFoodFactsLanguage, String>? fromPalmOil,
+    Map<OpenFoodFactsLanguage, String>? likelyAllergens,
+    Map<OpenFoodFactsLanguage, String>? mandatoryAdditiveClass,
+    Map<OpenFoodFactsLanguage, String>? name,
+    Map<OpenFoodFactsLanguage, String>? nova,
+    Map<OpenFoodFactsLanguage, String>? nutriscoreFruitsVegetablesNuts,
+    Map<OpenFoodFactsLanguage, String>? organicEu,
+    Map<OpenFoodFactsLanguage, String>? origins,
+    List<String>? parents,
+    Map<OpenFoodFactsLanguage, String>? pnnsGroup2,
+    Map<OpenFoodFactsLanguage, String>? protectedNameType,
+    Map<OpenFoodFactsLanguage, String>? reblochon,
+    Map<OpenFoodFactsLanguage, List<String>>? synonyms,
+    Map<OpenFoodFactsLanguage, String>? vegan,
+    Map<OpenFoodFactsLanguage, String>? vegetarian,
+    Map<OpenFoodFactsLanguage, String>? wikidata,
+    Map<OpenFoodFactsLanguage, String>? wiktionary,
+  }) {
+    return TaxonomyIngredient(
+      additivesClasses ?? this.additivesClasses,
+      allergens ?? this.allergens,
+      brioche ?? this.brioche,
+      carbonFootprintFrFoodgesIngredient ??
+          this.carbonFootprintFrFoodgesIngredient,
+      carbonFootprintFrFoodgesValue ?? this.carbonFootprintFrFoodgesValue,
+      children ?? this.children,
+      ciqualFoodCode ?? this.ciqualFoodCode,
+      ciqualFoodName ?? this.ciqualFoodName,
+      colourIndex ?? this.colourIndex,
+      comment ?? this.comment,
+      defaultAdditiveClass ?? this.defaultAdditiveClass,
+      description ?? this.description,
+      eNumber ?? this.eNumber,
+      efsa ?? this.efsa,
+      efsaEvaluation ?? this.efsaEvaluation,
+      efsaEvaluationAdi ?? this.efsaEvaluationAdi,
+      efsaEvaluationAdiEstablished ?? this.efsaEvaluationAdiEstablished,
+      efsaEvaluationDate ?? this.efsaEvaluationDate,
+      efsaEvaluationExposure95ThGreaterThanAdi ??
+          this.efsaEvaluationExposure95ThGreaterThanAdi,
+      efsaEvaluationExposure95ThGreaterThanNoael ??
+          this.efsaEvaluationExposure95ThGreaterThanNoael,
+      efsaEvaluationExposureMeanGreaterThanAdi ??
+          this.efsaEvaluationExposureMeanGreaterThanAdi,
+      efsaEvaluationExposureMeanGreaterThanNoael ??
+          this.efsaEvaluationExposureMeanGreaterThanNoael,
+      efsaEvaluationOverexposureRisk ?? this.efsaEvaluationOverexposureRisk,
+      efsaEvaluationSafetyAssessed ?? this.efsaEvaluationSafetyAssessed,
+      efsaEvaluationUrl ?? this.efsaEvaluationUrl,
+      fromPalmOil ?? this.fromPalmOil,
+      likelyAllergens ?? this.likelyAllergens,
+      mandatoryAdditiveClass ?? this.mandatoryAdditiveClass,
+      name ?? this.name,
+      nova ?? this.nova,
+      nutriscoreFruitsVegetablesNuts ?? this.nutriscoreFruitsVegetablesNuts,
+      organicEu ?? this.organicEu,
+      origins ?? this.origins,
+      parents ?? this.parents,
+      pnnsGroup2 ?? this.pnnsGroup2,
+      protectedNameType ?? this.protectedNameType,
+      reblochon ?? this.reblochon,
+      synonyms ?? this.synonyms,
+      vegan ?? this.vegan,
+      vegetarian ?? this.vegetarian,
+      wikidata ?? this.wikidata,
+      wiktionary ?? this.wiktionary,
+    );
+  }
 }
 
 class TaxonomyIngredientQueryConfiguration extends TaxonomyQueryConfiguration<

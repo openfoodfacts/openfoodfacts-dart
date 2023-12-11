@@ -27,4 +27,14 @@ class LeaderboardEntry extends JsonObject {
   String toString() => 'LeaderboardEntry(score: $score'
       '${userId == null ? ', no user id' : ', userId: $userId'}'
       ')';
+
+  LeaderboardEntry copyWith({
+    String? userId,
+    int? score,
+  }) {
+    return LeaderboardEntry(
+      userId: userId ?? this.userId,
+      score: score ?? this.score,
+    );
+  }
 }

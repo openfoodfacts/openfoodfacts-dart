@@ -115,4 +115,34 @@ class Attribute extends JsonObject {
 
   @override
   String toString() => 'Attribute(${toJson()})';
+
+  Attribute copyWith({
+    String? id,
+    String? name,
+    String? title,
+    String? iconUrl,
+    String? defaultF,
+    String? settingNote,
+    String? settingName,
+    String? description,
+    String? descriptionShort,
+    double? match,
+    String? status,
+    String? panelId,
+  }) {
+    return Attribute(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      title: title ?? this.title,
+      iconUrl: iconUrl ?? this.iconUrl,
+      defaultF: defaultF ?? this.defaultF,
+      settingNote: settingNote ?? this.settingNote,
+      settingName: settingName ?? this.settingName,
+      description: description ?? this.description,
+      descriptionShort: descriptionShort ?? this.descriptionShort,
+      match: match ?? this.match,
+      status: status ?? this.status,
+      panelId: panelId ?? this.panelId,
+    );
+  }
 }
