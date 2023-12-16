@@ -102,7 +102,10 @@ Does not depend on language or country.</p>
   final json = HttpHelper().jsonDecode(jsonStr);
   if (json[&#39;status&#39;] != &#39;success&#39;) {
     throw Exception(&#39;Error: ${json[&#39;status&#39;]}&#39;);
+  } else if (json[&#39;product&#39;][&#39;images&#39;] == null) {
+    return &lt;int&gt;[];
   }
+
   final Map&lt;String, dynamic&gt; images = json[&#39;product&#39;][&#39;images&#39;];
   final List&lt;int&gt; result = &lt;int&gt;[];
   for (final String key in images.keys) {
