@@ -47,3 +47,8 @@ OxF:
 - lib/src/model/product_image.dart
 - lib/src/utils/image_helper.dart
 - test/api_get_product_image_ids_test.dart
+
+💰 Prices:
+- lib/src/prices/*.dart
+- lib/src/open_prices_api_client.dart
+- test/api_prices_*.dart
