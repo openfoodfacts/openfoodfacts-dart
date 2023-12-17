@@ -14,4 +14,13 @@ void main() {
     );
     expect(result.length, greaterThanOrEqualTo(34)); // was 34 on 2023-01-25
   });
+
+  test('get product image ids without any image', () async {
+    const String barcode = '98765432186';
+    final List<int> result = await OpenFoodAPIClient.getProductImageIds(
+      barcode,
+      user: TestConstants.PROD_USER,
+    );
+    expect(result.length, greaterThanOrEqualTo(0));
+  });
 }
