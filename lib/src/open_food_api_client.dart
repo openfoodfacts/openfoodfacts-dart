@@ -330,7 +330,10 @@ class OpenFoodAPIClient {
     final json = HttpHelper().jsonDecode(jsonStr);
     if (json['status'] != 'success') {
       throw Exception('Error: ${json['status']}');
+    } else if (json['product']['images'] == null) {
+      return <int>[];
     }
+
     final Map<String, dynamic> images = json['product']['images'];
     final List<int> result = <int>[];
     for (final String key in images.keys) {
