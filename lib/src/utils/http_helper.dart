@@ -69,6 +69,7 @@ class HttpHelper {
       headers: _buildHeaders(
         user: user,
         uriHelper: uriHelper,
+        addCredentialsToHeader: false,
       ),
     );
 
@@ -146,6 +147,7 @@ class HttpHelper {
       _buildHeaders(
         user: user,
         uriHelper: uriHelper,
+        addCredentialsToHeader: false,
       ) as Map<String, String>,
     );
 
@@ -202,7 +204,7 @@ class HttpHelper {
   Map<String, String>? _buildHeaders({
     User? user,
     required final UriHelper uriHelper,
-    bool addCredentialsToHeader = false,
+    required bool addCredentialsToHeader,
   }) {
     Map<String, String>? headers = {};
 
@@ -255,6 +257,10 @@ class HttpHelper {
       rethrow;
     }
   }
+
+  /// json.decode, with utf8 conversion and additional "html" exception.
+  dynamic jsonDecodeUtf8(final http.Response response) =>
+      jsonDecode(utf8.decode(response.bodyBytes));
 
   /// Returns true if the [input] string is ISO-8859-1 encoded.
   static bool _isIso88591(final String input) {
