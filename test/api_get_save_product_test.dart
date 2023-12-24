@@ -120,7 +120,9 @@ void main() {
       expect(product.additives!.names[4], 'E950');
 
       expect(product.images, isNotNull);
-      expect(product.images!.length, 4);
+      expect(product.images!, hasLength(7));
+      expect(product.getRawImages(), hasLength(3));
+      expect(product.getMainImages(), hasLength(4));
       expect(product.countries, 'Frankreich,Deutschland');
     });
 

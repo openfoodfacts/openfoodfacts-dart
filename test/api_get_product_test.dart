@@ -657,26 +657,26 @@ void main() {
 
     test('get product without setting OpenFoodFactsLanguage or ProductField; ',
         () async {
-      String barcode = '5000112548167';
+      const String barcode = '5000112548167';
+      const int numberOfImages = 53; // was 53 in 20231125
 
       //Get product without setting OpenFoodFactsLanguage or ProductField
-      ProductQueryConfiguration configurations = ProductQueryConfiguration(
-        barcode,
-        version: ProductQueryVersion.v3,
-      );
       ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
-        configurations,
+        ProductQueryConfiguration(
+          barcode,
+          version: ProductQueryVersion.v3,
+        ),
       );
 
       expect(result.status, ProductResultV3.statusSuccess);
       expect(result.barcode, barcode);
-      expect(result.product != null, true);
+      expect(result.product, isNotNull);
       expect(result.product!.barcode, barcode);
-      expect(result.product!.lastModified != null, true);
-      expect(result.product!.ingredientsText != null, true);
+      expect(result.product!.lastModified, isNotNull);
+      expect(result.product!.ingredientsText, isNotNull);
 
-      expect(result.product!.ingredients != null, true);
-      expect(result.product!.ingredients!.length, 7);
+      expect(result.product!.ingredients, isNotNull);
+      expect(result.product!.ingredients, hasLength(7));
       findExpectedIngredients(result.product!.ingredients!, ['Aroma']);
 
       expect(result.product!.additives!.ids[0], 'en:e150d');
@@ -692,8 +692,9 @@ void main() {
           result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
           NutrientLevel.LOW);
 
-      expect(result.product!.images != null, true);
-      expect(result.product!.images!.length, 20);
+      expect(result.product!.images, isNotNull);
+      expect(
+          result.product!.images!.length, greaterThanOrEqualTo(numberOfImages));
       expect(
           result.product!.images!
               .singleWhere((image) =>
@@ -704,13 +705,12 @@ void main() {
           'https://images.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
 
       //Get product without setting ProductField
-      configurations = ProductQueryConfiguration(
-        barcode,
-        language: OpenFoodFactsLanguage.GERMAN,
-        version: ProductQueryVersion.v3,
-      );
       result = await OpenFoodAPIClient.getProductV3(
-        configurations,
+        ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.GERMAN,
+          version: ProductQueryVersion.v3,
+        ),
       );
 
       expect(result.status, ProductResultV3.statusSuccess);
@@ -722,7 +722,7 @@ void main() {
       expect(result.product!.ingredientsText, isNotNull);
 
       expect(result.product!.ingredients, isNotNull);
-      expect(result.product!.ingredients!.length, 7);
+      expect(result.product!.ingredients, hasLength(7));
 
       findExpectedIngredients(
         result.product!.ingredients!,
@@ -745,8 +745,9 @@ void main() {
           result.product!.nutrientLevels!.levels[NutrientLevels.NUTRIENT_SALT],
           NutrientLevel.LOW);
 
-      expect(result.product!.images != null, true);
-      expect(result.product!.images!.length, 20);
+      expect(result.product!.images, isNotNull);
+      expect(
+          result.product!.images!.length, greaterThanOrEqualTo(numberOfImages));
       expect(
           result.product!.images!
               .singleWhere((image) =>
@@ -757,13 +758,12 @@ void main() {
           'https://images.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg');
 
       //Get product without setting OpenFoodFactsLanguage
-      configurations = ProductQueryConfiguration(
-        barcode,
-        fields: [ProductField.ALL],
-        version: ProductQueryVersion.v3,
-      );
       result = await OpenFoodAPIClient.getProductV3(
-        configurations,
+        ProductQueryConfiguration(
+          barcode,
+          fields: [ProductField.ALL],
+          version: ProductQueryVersion.v3,
+        ),
       );
 
       expect(result.status, ProductResultV3.statusSuccess);
@@ -775,7 +775,7 @@ void main() {
       expect(result.product!.ingredientsText, isNotNull);
 
       expect(result.product!.ingredients, isNotNull);
-      expect(result.product!.ingredients!.length, 7);
+      expect(result.product!.ingredients, hasLength(7));
 
       findExpectedIngredients(
         result.product!.ingredients!,
@@ -788,7 +788,7 @@ void main() {
         ],
       );
 
-      expect(result.product!.selectedImages!.length, 15);
+      expect(result.product!.selectedImages, hasLength(15));
 
       expect(result.product!.nutriments, isNotNull);
       final Nutriments nutriments = result.product!.nutriments!;
@@ -820,7 +820,7 @@ void main() {
           NutrientLevel.LOW);
 
       expect(result.product!.images, isNotNull);
-      expect(result.product!.images!.length, 20);
+      expect(result.product!.images, hasLength(numberOfImages));
       expect(
           result.product!.images!
               .singleWhere((image) =>
