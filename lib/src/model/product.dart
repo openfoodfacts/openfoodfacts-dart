@@ -204,10 +204,13 @@ class Product extends JsonObject {
   /// See also [getRawImages] and [getMainImages].
   List<ProductImage>? images;
 
-  /// "Raw" (uploaded) images, like "picture 12" for "400" size.
+  /// "Raw" (uploaded) images: for example "picture 12" resized to "400" size.
   List<ProductImage>? getRawImages() => _getImageSubset(false);
 
-  /// "Main" images, like "front" picture for "French" and "400" size.
+  /// "Main" images: the selected images for certain criteria.
+  ///
+  /// For example the "front" picture in "French"
+  /// Images may be returned in multiple sizes
   List<ProductImage>? getMainImages() => _getImageSubset(true);
 
   List<ProductImage>? _getImageSubset(final bool isMain) {

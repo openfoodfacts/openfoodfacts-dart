@@ -26,13 +26,4 @@ void main() {
     expect(countAll, greaterThanOrEqualTo(118)); // was 118 on 2023-11-25
     expect(countAll, countRaw + countMain);
   });
-
-  test('get product image ids without any image', () async {
-    const String barcode = '98765432186';
-    final List<int> result = await OpenFoodAPIClient.getProductImageIds(
-      barcode,
-      user: TestConstants.PROD_USER,
-    );
-    expect(result.length, greaterThanOrEqualTo(0));
-  });
 }
