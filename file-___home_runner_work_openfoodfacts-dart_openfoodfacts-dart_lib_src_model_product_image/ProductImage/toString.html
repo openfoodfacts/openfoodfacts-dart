@@ -94,7 +94,7 @@ mainly for debugging or logging.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 String toString() =&gt; &#39;ProductImage(&#39;
-    &#39;${field.offTag}&#39;
+    &#39;${field == null ? &#39;&#39; : &#39;field=${field!.offTag}&#39;}&#39;
     &#39;${size == null ? &#39;&#39; : &#39;,size=${size!.offTag}&#39;}&#39;
     &#39;${language == null ? &#39;&#39; : &#39;,language=${language.code}&#39;}&#39;
     &#39;${angle == null ? &#39;&#39; : &#39;,angle=${angle!.degreesClockwise}&#39;}&#39;

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the allImagesFromJson method from the JsonHelper class, for the Dart programming language.">
+  <title>allImagesFromJson method - JsonHelper class - json_helper library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">openfoodfacts</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_json_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_json_helper-library.html">json_helper</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_json_helper/JsonHelper-class.html">JsonHelper</a></li>
+    <li class="self-crumb">allImagesFromJson static method</li>
+  </ol>
+  <div class="self-name">allImagesFromJson</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_json_helper&#47;JsonHelper-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-method">allImagesFromJson</span> static method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+
+<span class="returntype"><a href="https://api.dart.dev/stable/3.2.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage-class.html">ProductImage</a></span>&gt;</span>?</span>
+<span class="name ">allImagesFromJson</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="allImagesFromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/Map-class.html">Map</a>?</span> <span class="parameter-name">json</span>, </span></li>
+<li><span class="parameter" id="allImagesFromJson-param-onlyMain">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">onlyMain</span> = <span class="default-value">false</span>}</span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Returns <code>ProductImage</code>s from a JSON map for "Images".</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">static List&lt;ProductImage&gt;? allImagesFromJson(
+  Map? json, {
+  final bool onlyMain = false,
+}) {
+  if (json == null) return null;
+
+  var imageList = &lt;ProductImage&gt;[];
+
+  for (final String key in json.keys) {
+    ImageField? field;
+    OpenFoodFactsLanguage? lang;
+    final int? imageId = int.tryParse(key);
+    if (imageId != null) {
+      &#47;&#47; the key is an int: it&#39;s a &quot;raw&quot; image
+      if (onlyMain) {
+        continue;
+      }
+    } else {
+      &#47;&#47; we expect field + &#39;_&#39; + language: it&#39;s a &quot;main&quot; image
+      final List&lt;String&gt; values = key.split(&#39;_&#39;);
+      if (values.length != 2) {
+        continue;
+      }
+      final String fieldString = values[0];
+      field = ImageField.fromOffTag(fieldString);
+      if (field == null) {
+        continue;
+      }
+      final String languageString = values[1];
+      lang = OpenFoodFactsLanguage.fromOffTag(languageString);
+      if (lang == null) {
+        continue;
+      }
+    }
+
+    final Map&lt;String, dynamic&gt; fieldObject = json[key];
+
+    &#47;&#47; get the sizes object
+    var sizesObject = fieldObject[&#39;sizes&#39;] as Map&lt;String, dynamic&gt;?;
+    if (sizesObject == null) {
+      continue;
+    }
+
+    if (imageId != null) {
+      &#47;&#47; get each number object (e.g. 200)
+      for (var size in ImageSize.values) {
+        var number = size.number;
+        var numberObject = sizesObject[number] as Map&lt;String, dynamic&gt;?;
+        if (numberObject == null) {
+          continue;
+        }
+        imageList.add(
+          ProductImage.raw(
+            size: size,
+            imgid: imageId.toString(),
+            width: JsonObject.parseInt(numberObject[&#39;w&#39;]),
+            height: JsonObject.parseInt(numberObject[&#39;h&#39;]),
+            url: numberObject[&#39;url&#39;],
+          ),
+        );
+      }
+      continue;
+    }
+
+    final rev = JsonObject.parseInt(fieldObject[&#39;rev&#39;]);
+    final String imgid = fieldObject[&#39;imgid&#39;].toString();
+    final ImageAngle? angle = ImageAngleExtension.fromInt(
+      JsonObject.parseInt(fieldObject[&#39;angle&#39;]),
+    );
+    final String? coordinatesImageSize =
+        fieldObject[&#39;coordinates_image_size&#39;]?.toString();
+    final int? x1 = JsonObject.parseInt(fieldObject[&#39;x1&#39;]);
+    final int? y1 = JsonObject.parseInt(fieldObject[&#39;y1&#39;]);
+    final int? x2 = JsonObject.parseInt(fieldObject[&#39;x2&#39;]);
+    final int? y2 = JsonObject.parseInt(fieldObject[&#39;y2&#39;]);
+
+    &#47;&#47; get each number object (e.g. 200)
+    for (var size in ImageSize.values) {
+      var number = size.number;
+      var numberObject = sizesObject[number] as Map&lt;String, dynamic&gt;?;
+      if (numberObject == null) {
+        continue;
+      }
+      final int? width = JsonObject.parseInt(numberObject[&#39;w&#39;]);
+      final int? height = JsonObject.parseInt(numberObject[&#39;h&#39;]);
+      final String? url = numberObject[&#39;url&#39;];
+
+      var image = ProductImage(
+        field: field!,
+        size: size,
+        language: lang!,
+        rev: rev,
+        imgid: imgid,
+        angle: angle,
+        coordinatesImageSize: coordinatesImageSize,
+        x1: x1,
+        y1: y1,
+        x2: x2,
+        y2: y2,
+        width: width,
+        height: height,
+        url: url,
+      );
+      imageList.add(image);
+    }
+  }
+
+  return imageList;
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">openfoodfacts</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_json_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_json_helper-library.html">json_helper</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_json_helper/JsonHelper-class.html">JsonHelper</a></li>
+    <li class="self-crumb">allImagesFromJson static method</li>
+</ol>
+
+
+    <h5>JsonHelper class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    openfoodfacts
+      3.2.1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

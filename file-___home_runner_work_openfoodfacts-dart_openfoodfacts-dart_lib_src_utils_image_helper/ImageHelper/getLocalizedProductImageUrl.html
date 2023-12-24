@@ -31,7 +31,7 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper-library.html">image_helper</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/ImageHelper-class.html">ImageHelper</a></li>
-    <li class="self-crumb">getLocalizedProductImageUrl static method</li>
+    <li class="self-crumb"><span class="deprecated">getLocalizedProductImageUrl</span> static method</li>
   </ol>
   <div class="self-name">getLocalizedProductImageUrl</div>
   <form class="search navbar-right" role="search">
@@ -62,9 +62,14 @@
 
     <section class="multi-line-signature">
       
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.2.4/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use ProductImage.getUrl instead&#39;)</li>
+    </ol>
+  </div>
 
 <span class="returntype"><a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a></span>
-<span class="name ">getLocalizedProductImageUrl</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getLocalizedProductImageUrl-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, </span></li>
+<span class="name deprecated">getLocalizedProductImageUrl</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getLocalizedProductImageUrl-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, </span></li>
 <li><span class="parameter" id="getLocalizedProductImageUrl-param-image"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage-class.html">ProductImage</a></span> <span class="parameter-name">image</span>, </span></li>
 <li><span class="parameter" id="getLocalizedProductImageUrl-param-imageSize">{<span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageSize.html">ImageSize</a>?</span> <span class="parameter-name">imageSize</span>, </span></li>
 <li><span class="parameter" id="getLocalizedProductImageUrl-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>}</span></li>
@@ -83,18 +88,15 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static String getLocalizedProductImageUrl(
+  <pre class="language-dart"><code class="language-dart">&#47;&#47; TODO: deprecated from 2023-11-25; remove when old enough
+@Deprecated(&#39;Use ProductImage.getUrl instead&#39;)
+static String getLocalizedProductImageUrl(
   final String barcode,
   final ProductImage image, {
   final ImageSize? imageSize,
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) =&gt;
-    &#39;${uriHelper.getProductImageRootUrl(barcode)}&#39;
-    &#39;&#47;&#39;
-    &#39;${getProductImageFilename(
-      image,
-      imageSize: imageSize,
-    )}&#39;;</code></pre>
+    image.getUrl(barcode, uriHelper: uriHelper, imageSize: imageSize);</code></pre>
 </section>
 
 
@@ -112,7 +114,7 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper-library.html">image_helper</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/ImageHelper-class.html">ImageHelper</a></li>
-    <li class="self-crumb">getLocalizedProductImageUrl static method</li>
+    <li class="self-crumb"><span class="deprecated">getLocalizedProductImageUrl</span> static method</li>
 </ol>
 
 

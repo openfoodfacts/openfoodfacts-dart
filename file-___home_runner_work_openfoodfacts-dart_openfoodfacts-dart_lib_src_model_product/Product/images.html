@@ -68,6 +68,10 @@
 
         </section>
         
+<section class="desc markdown">
+  <p>All images in bulk. Will include "main" images and "raw" images.</p>
+<p>See also <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product/getRawImages.html">getRawImages</a> and <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product/getMainImages.html">getMainImages</a>.</p>
+</section>
 
         
 <section class="summary source-code" id="source">
@@ -75,8 +79,12 @@
   <pre class="language-dart"><code class="language-dart">@JsonKey(
     name: &#39;images&#39;,
     includeIfNull: false,
-    fromJson: JsonHelper.imagesFromJson,
-    toJson: JsonHelper.imagesToJson)
+    fromJson: JsonHelper.allImagesFromJson,
+    toJson: JsonHelper.allImagesToJson)
+
+&#47;&#47;&#47; All images in bulk. Will include &quot;main&quot; images and &quot;raw&quot; images.
+&#47;&#47;&#47;
+&#47;&#47;&#47; See also [getRawImages] and [getMainImages].
 List&lt;ProductImage&gt;? images;</code></pre>
 </section>
 

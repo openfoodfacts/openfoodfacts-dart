@@ -485,7 +485,7 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
 
 </dt>
 <dd>
-  
+  All images in bulk. Will include "main" images and "raw" images.
   <div class="features"><span class="feature">getter/setter pair</span></div>
 
 </dd>
@@ -1130,6 +1130,19 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
 
 </dd>
 
+        <dt id="getMainImages" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product/getMainImages.html">getMainImages</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.2.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage-class.html">ProductImage</a></span>&gt;</span>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  "Main" images: the selected images for certain criteria.
+  
+
+</dd>
+
         <dt id="getProductImprovements" class="callable">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product/getProductImprovements.html">getProductImprovements</a></span><span class="signature">(<wbr>)
     <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.2.4/dart-core/Set-class.html">Set</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/ProductImprovement.html">ProductImprovement</a></span>&gt;</span></span>
@@ -1139,6 +1152,19 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
 </dt>
 <dd>
   Returns all the potential improvements given the quality of the data
+  
+
+</dd>
+
+        <dt id="getRawImages" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product/getRawImages.html">getRawImages</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.2.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage-class.html">ProductImage</a></span>&gt;</span>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  "Raw" (uploaded) images: for example "picture 12" resized to "400" size.
   
 
 </dd>

@@ -62,8 +62,13 @@
 
     
 <section class="desc markdown">
-  <p>The url to a specific product image.
-Categorized by content type, size and language</p>
+  <p>Product image. Can be "main" (e.g. "front_fr") or "raw" (e.g. "picture #9").</p>
+<p>For "main" images the key is field + language + size.
+For "raw" images the key is the imgid + size.</p>
+<p>We have limited data for "raw" images, like "this is the nth image for this
+product".
+We have more data for "main" images, like "we built this image from that raw
+image with this crop parameters and angle".</p>
 </section>
 
 
@@ -74,7 +79,13 @@ Categorized by content type, size and language</p>
 
     <dl class="constructor-summary-list">
         <dt id="ProductImage" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage/ProductImage.html">ProductImage</a></span><span class="signature">(<span class="parameter" id="-param-field">{<span>required</span> <span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageField.html">ImageField</a></span> <span class="parameter-name">field</span>, </span><span class="parameter" id="-param-size"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageSize.html">ImageSize</a>?</span> <span class="parameter-name">size</span>, </span><span class="parameter" id="-param-language"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a>?</span> <span class="parameter-name">language</span>, </span><span class="parameter" id="-param-url"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">url</span>, </span><span class="parameter" id="-param-rev"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">rev</span>, </span><span class="parameter" id="-param-imgid"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">imgid</span>, </span><span class="parameter" id="-param-angle"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageAngle.html">ImageAngle</a>?</span> <span class="parameter-name">angle</span>, </span><span class="parameter" id="-param-coordinatesImageSize"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">coordinatesImageSize</span>, </span><span class="parameter" id="-param-x1"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">x1</span>, </span><span class="parameter" id="-param-y1"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">y1</span>, </span><span class="parameter" id="-param-x2"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">x2</span>, </span><span class="parameter" id="-param-y2"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">y2</span>, </span><span class="parameter" id="-param-width"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">width</span>, </span><span class="parameter" id="-param-height"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">height</span>}</span>)</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage/ProductImage.html">ProductImage</a></span><span class="signature">(<span class="parameter" id="-param-field">{<span>required</span> <span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageField.html">ImageField</a></span> <span class="parameter-name">field</span>, </span><span class="parameter" id="-param-size"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageSize.html">ImageSize</a>?</span> <span class="parameter-name">size</span>, </span><span class="parameter" id="-param-language"><span>required</span> <span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span>, </span><span class="parameter" id="-param-url"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">url</span>, </span><span class="parameter" id="-param-rev"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">rev</span>, </span><span class="parameter" id="-param-imgid"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">imgid</span>, </span><span class="parameter" id="-param-angle"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageAngle.html">ImageAngle</a>?</span> <span class="parameter-name">angle</span>, </span><span class="parameter" id="-param-coordinatesImageSize"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">coordinatesImageSize</span>, </span><span class="parameter" id="-param-x1"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">x1</span>, </span><span class="parameter" id="-param-y1"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">y1</span>, </span><span class="parameter" id="-param-x2"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">x2</span>, </span><span class="parameter" id="-param-y2"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">y2</span>, </span><span class="parameter" id="-param-width"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">width</span>, </span><span class="parameter" id="-param-height"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">height</span>}</span>)</span>
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="ProductImage.raw" class="callable">
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage/ProductImage.raw.html">ProductImage.raw</a></span><span class="signature">(<span class="parameter" id="raw-param-size">{<span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageSize.html">ImageSize</a>?</span> <span class="parameter-name">size</span>, </span><span class="parameter" id="raw-param-url"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">url</span>, </span><span class="parameter" id="raw-param-imgid"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">imgid</span>, </span><span class="parameter" id="raw-param-width"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">width</span>, </span><span class="parameter" id="raw-param-height"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">height</span>}</span>)</span>
         </dt>
         <dd>
           
@@ -110,7 +121,7 @@ Categorized by content type, size and language</p>
 
         <dt id="field" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage/field.html">field</a></span>
-  <span class="signature">&#8594; <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageField.html">ImageField</a></span> 
+  <span class="signature">&#8594; <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageField.html">ImageField</a>?</span> 
 
 </dt>
 <dd>
@@ -149,6 +160,17 @@ Categorized by content type, size and language</p>
 <dd>
   Uploaded image id (probably an <code>int</code>)
   <div class="features"><span class="feature">getter/setter pair</span></div>
+
+</dd>
+
+        <dt id="isMain" class="property">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage/isMain.html">isMain</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.2.4/dart-core/bool-class.html">bool</a></span> 
+
+</dt>
+<dd>
+  
+  <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
 
@@ -271,6 +293,32 @@ Categorized by content type, size and language</p>
       id="instance-methods">
     <h2>Methods</h2>
     <dl class="callables">
+        <dt id="getUrl" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage/getUrl.html">getUrl</a></span><span class="signature">(<wbr><span class="parameter" id="getUrl-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, </span><span class="parameter" id="getUrl-param-imageSize">{<span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageSize.html">ImageSize</a>?</span> <span class="parameter-name">imageSize</span>, </span><span class="parameter" id="getUrl-param-uriHelper"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the url to display this image.
+  
+
+</dd>
+
+        <dt id="getUrlFilename" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage/getUrlFilename.html">getUrlFilename</a></span><span class="signature">(<wbr><span class="parameter" id="getUrlFilename-param-imageSize">{<span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ImageSize.html">ImageSize</a>?</span> <span class="parameter-name">imageSize</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.2.4/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns just the filename of the url to display this image.
+  
+
+</dd>
+
         <dt id="noSuchMethod" class="callable inherited">
   <span class="name"><a href="https://api.dart.dev/stable/3.2.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
