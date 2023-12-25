@@ -11,7 +11,7 @@
 
 ### Bug Fixes
 
-* If `product -&gt; images` is `null`, `getProductImageIds`shouldn't crash ([#857](https://github.com/openfoodfacts/openfoodfacts-dart/issues/857)) ([02abab3](https://github.com/openfoodfacts/openfoodfacts-dart/commit/02abab364146cd8493f941ac861db907cf301359))
+* If `product.images` is `null`, `getProductImageIds`shouldn't crash ([#857](https://github.com/openfoodfacts/openfoodfacts-dart/issues/857)) ([02abab3](https://github.com/openfoodfacts/openfoodfacts-dart/commit/02abab364146cd8493f941ac861db907cf301359))
 * unit test with updated expected values ([#858](https://github.com/openfoodfacts/openfoodfacts-dart/issues/858)) ([0482f63](https://github.com/openfoodfacts/openfoodfacts-dart/commit/0482f6342ea96f44cd988b44e82c20a3aeffbcff))
 
 ## [3.2.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.2.0...v3.2.1) (2023-12-03)
