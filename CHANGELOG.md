@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.3.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.2.1...v3.3.0) (2023-12-24)
+
+
+### Features
+
+* 831 - Open Prices API - "get prices" ([#845](https://github.com/openfoodfacts/openfoodfacts-dart/issues/845)) ([eaeb1aa](https://github.com/openfoodfacts/openfoodfacts-dart/commit/eaeb1aa3abd427e524c1f85b560b97921fdfab05))
+* simplified access to raw product images ([#839](https://github.com/openfoodfacts/openfoodfacts-dart/issues/839)) ([3350251](https://github.com/openfoodfacts/openfoodfacts-dart/commit/3350251481d17fccbd6b60ba8a8c95f021da6f10))
+
+
+### Bug Fixes
+
+* If `product.images` is `null`, `getProductImageIds`shouldn't crash ([#857](https://github.com/openfoodfacts/openfoodfacts-dart/issues/857)) ([02abab3](https://github.com/openfoodfacts/openfoodfacts-dart/commit/02abab364146cd8493f941ac861db907cf301359))
+* unit test with updated expected values ([#858](https://github.com/openfoodfacts/openfoodfacts-dart/issues/858)) ([0482f63](https://github.com/openfoodfacts/openfoodfacts-dart/commit/0482f6342ea96f44cd988b44e82c20a3aeffbcff))
+
 ## [3.2.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.2.0...v3.2.1) (2023-12-03)
 
 
