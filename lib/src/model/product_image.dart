@@ -1,5 +1,7 @@
 import 'off_tagged.dart';
 import '../utils/language_helper.dart';
+import '../utils/open_food_api_configuration.dart';
+import '../utils/uri_helper.dart';
 
 enum ImageField implements OffTagged {
   FRONT(offTag: 'front'),
@@ -95,13 +97,20 @@ extension ImageAngleExtension on ImageAngle {
   }
 }
 
-/// The url to a specific product image.
-/// Categorized by content type, size and language
+/// Product image. Can be "main" (e.g. "front_fr") or "raw" (e.g. "picture #9").
+///
+/// For "main" images the key is field + language + size.
+/// For "raw" images the key is the imgid + size.
+///
+/// We have limited data for "raw" images, like "this is the nth image for this
+/// product".
+/// We have more data for "main" images, like "we built this image from that raw
+/// image with this crop parameters and angle".
 class ProductImage {
   ProductImage({
-    required this.field,
+    required ImageField this.field,
     this.size,
-    this.language,
+    required OpenFoodFactsLanguage this.language,
     this.url,
     this.rev,
     this.imgid,
@@ -115,7 +124,16 @@ class ProductImage {
     this.height,
   });
 
-  final ImageField field;
+  ProductImage.raw({
+    this.size,
+    this.url,
+    required String this.imgid,
+    this.width,
+    this.height,
+  })  : language = null,
+        field = null;
+
+  final ImageField? field;
   final ImageSize? size;
   final OpenFoodFactsLanguage? language;
   String? url;
@@ -150,9 +168,66 @@ class ProductImage {
   /// Image height.
   int? height;
 
+  bool get isMain => field != null && language != null;
+
+  /// Returns the url to display this image.
+  ///
+  /// cf. https://github.com/openfoodfacts/smooth-app/issues/3065
+  String getUrl(
+    final String barcode, {
+    final ImageSize? imageSize,
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) =>
+      '${uriHelper.getProductImageRootUrl(barcode)}'
+      '/'
+      '${getUrlFilename(imageSize: imageSize)}';
+
+  /// Returns just the filename of the url to display this image.
+  ///
+  /// See also [getUrl].
+  String getUrlFilename({
+    final ImageSize? imageSize,
+  }) {
+    final ImageSize bestImageSize = imageSize ?? size ?? ImageSize.UNKNOWN;
+    return isMain
+        ? _getMainUrlFilename(bestImageSize)
+        : _getRawUrlFilename(bestImageSize);
+  }
+
+  /// Returns just the filename of the url to display this "main" image.
+  ///
+  /// By default uses the own [image]'s size field.
+  /// E.g. "front_fr.4.100.jpg"
+  /// cf. https://github.com/openfoodfacts/smooth-app/issues/3065
+  String _getMainUrlFilename(final ImageSize imageSize) =>
+      '${field!.offTag}_${language.code}'
+      '.$rev'
+      '.${imageSize.number}'
+      '.jpg';
+
+  /// Returns just the filename of the url to display this "raw" image.
+  ///
+  /// By default uses the own [image]'s size field.
+  /// E.g. "7.100.jpg"
+  String _getRawUrlFilename(final ImageSize imageSize) {
+    switch (imageSize) {
+      case ImageSize.THUMB:
+      case ImageSize.DISPLAY:
+        // adapted size
+        return '$imgid.${imageSize.number}.jpg';
+      case ImageSize.SMALL:
+        // not available, we take the best other choice instead
+        return '$imgid.${ImageSize.DISPLAY.number}.jpg';
+      case ImageSize.ORIGINAL:
+      case ImageSize.UNKNOWN:
+        // full size
+        return '$imgid.jpg';
+    }
+  }
+
   @override
   String toString() => 'ProductImage('
-      '${field.offTag}'
+      '${field == null ? '' : 'field=${field!.offTag}'}'
       '${size == null ? '' : ',size=${size!.offTag}'}'
       '${language == null ? '' : ',language=${language.code}'}'
       '${angle == null ? '' : ',angle=${angle!.degreesClockwise}'}'
@@ -168,9 +243,11 @@ class ProductImage {
       '${height == null ? '' : ',height=$height'}'
       ')';
 
+  String get _key =>
+      '${field?.offTag}_${language?.code}_${size?.offTag}_$imgid';
+
   @override
-  int get hashCode =>
-      '${field.offTag}_${language?.code}_${size?.offTag}'.hashCode;
+  int get hashCode => _key.hashCode;
 
   @override
   bool operator ==(Object other) {

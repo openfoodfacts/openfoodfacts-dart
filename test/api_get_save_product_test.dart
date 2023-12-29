@@ -31,8 +31,40 @@ void main() {
   const String russianIngredientsAll = 'Мука, вода';
   const List<String> russianIngredientsSplit = <String>['Мука', 'Вода'];
 
+  /// Returns true if the (TEST) server is in a good mood.
+  ///
+  /// Will return false if the server is NOT in a good mood, with an explicit
+  /// "Bad gateway" exception that condemns the whole purpose of those tests.
+  /// No need to run tests in that case, and we're not here to check if the
+  /// TEST server works but only if OUR CODE works.
+  /// May also throw an exception.
+  Future<bool> checkServer() async {
+    try {
+      await OpenFoodAPIClient.getProductV3(
+        ProductQueryConfiguration(
+          '7300400481588',
+          fields: [ProductField.BARCODE],
+          version: ProductQueryVersion.v3,
+        ),
+        uriHelper: uriHelper,
+      );
+      return true;
+    } catch (e) {
+      const String badGatewayError =
+          'Exception: JSON expected, html found: <head><title>502 Bad Gateway</title></head>';
+      if (e.toString().contains(badGatewayError)) {
+        return false;
+      }
+      rethrow;
+    }
+  }
+
   group('$OpenFoodAPIClient get-save products', () {
     test('get product Coca Cola Light', () async {
+      if (!await checkServer()) {
+        return;
+      }
+
       final String barcode = getBookBarcode(0);
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.GERMAN;
       const String genericName = 'Softdrink';
@@ -120,13 +152,19 @@ void main() {
       expect(product.additives!.names[4], 'E950');
 
       expect(product.images, isNotNull);
-      expect(product.images!.length, 4);
+      expect(product.images!, hasLength(7));
+      expect(product.getRawImages(), hasLength(3));
+      expect(product.getMainImages(), hasLength(4));
       expect(product.countries, 'Frankreich,Deutschland');
     });
 
     test(
         'localized fields when a product is not available in a second language',
         () async {
+      if (!await checkServer()) {
+        return;
+      }
+
       const String barcode = '3333333333333';
 
       final Product englishInputProduct = Product(
@@ -247,6 +285,10 @@ void main() {
 
     test('localized fields when a product is available in a second language',
         () async {
+      if (!await checkServer()) {
+        return;
+      }
+
       const String barcode = '2222222222222';
 
       final Product englishInputProduct = Product(
@@ -384,6 +426,10 @@ void main() {
     });
 
     test('multiple languages and in-languages fields', () async {
+      if (!await checkServer()) {
+        return;
+      }
+
       const String barcode = '2222222222224';
 
       final Product inputProduct = Product(
@@ -483,6 +529,10 @@ void main() {
     });
 
     test('all-languages fields', () async {
+      if (!await checkServer()) {
+        return;
+      }
+
       const String barcode = '2222222222226';
 
       final Product inputProduct = Product(
@@ -539,6 +589,10 @@ void main() {
     test(
         'requesting all-langs and in-langs fields together does not break anything',
         () async {
+      if (!await checkServer()) {
+        return;
+      }
+
       const String barcode = '2222222222227';
 
       final Product inputProduct = Product(
@@ -602,6 +656,10 @@ void main() {
     test(
       'product with quotes',
       () async {
+        if (!await checkServer()) {
+          return;
+        }
+
         const String barcode = '2222222222223';
         const String productName = 'Quoted Coca "cola"';
         const String brands = 'Quoted Coca "Cola"';
@@ -640,6 +698,10 @@ void main() {
       ));
 
   test('get minified product', () async {
+    if (!await checkServer()) {
+      return;
+    }
+
     const String barcode = '111111555555';
     const String genericName = 'Softdrink';
     const String labels = 'MyTestLabel';
@@ -705,6 +767,10 @@ void main() {
         );
 
     test('Without nutriments', () async {
+      if (!await checkServer()) {
+        return;
+      }
+
       await uploadProduct(noNutritionData: true);
 
       final ProductQueryConfiguration configurations =
@@ -727,6 +793,10 @@ void main() {
     }, skip: 'Random results');
 
     test('With nutriments', () async {
+      if (!await checkServer()) {
+        return;
+      }
+
       await uploadProduct(noNutritionData: false);
 
       final ProductQueryConfiguration configurations =

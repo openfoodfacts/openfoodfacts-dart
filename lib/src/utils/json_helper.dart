@@ -80,33 +80,47 @@ class JsonHelper {
   ///
   /// For historical reasons we keep only the 4 main images here, on all sizes
   /// and languages.
-  static List<ProductImage>? imagesFromJson(Map? json) {
+  // TODO: deprecated from 2023-11-25; remove when old enough
+  @Deprecated('Use allImagesFromJson instead')
+  static List<ProductImage>? imagesFromJson(Map? json) => allImagesFromJson(
+        json,
+        onlyMain: true,
+      );
+
+  /// Returns [ProductImage]s from a JSON map for "Images".
+  static List<ProductImage>? allImagesFromJson(
+    Map? json, {
+    final bool onlyMain = false,
+  }) {
     if (json == null) return null;
 
     var imageList = <ProductImage>[];
 
     for (final String key in json.keys) {
+      ImageField? field;
+      OpenFoodFactsLanguage? lang;
       final int? imageId = int.tryParse(key);
       if (imageId != null) {
-        // we can expect integer (imageIds) and String (field + language)
-        // here we ignore imageIds.
-        continue;
-      }
-      final List<String> values = key.split('_');
-      if (values.length != 2) {
-        // we expect field + '_' + language
-        continue;
-      }
-      final String fieldString = values[0];
-      final ImageField? field = ImageField.fromOffTag(fieldString);
-      if (field == null) {
-        continue;
-      }
-      final String languageString = values[1];
-      final OpenFoodFactsLanguage? lang =
-          OpenFoodFactsLanguage.fromOffTag(languageString);
-      if (lang == null) {
-        continue;
+        // the key is an int: it's a "raw" image
+        if (onlyMain) {
+          continue;
+        }
+      } else {
+        // we expect field + '_' + language: it's a "main" image
+        final List<String> values = key.split('_');
+        if (values.length != 2) {
+          continue;
+        }
+        final String fieldString = values[0];
+        field = ImageField.fromOffTag(fieldString);
+        if (field == null) {
+          continue;
+        }
+        final String languageString = values[1];
+        lang = OpenFoodFactsLanguage.fromOffTag(languageString);
+        if (lang == null) {
+          continue;
+        }
       }
 
       final Map<String, dynamic> fieldObject = json[key];
@@ -114,6 +128,27 @@ class JsonHelper {
       // get the sizes object
       var sizesObject = fieldObject['sizes'] as Map<String, dynamic>?;
       if (sizesObject == null) {
+        continue;
+      }
+
+      if (imageId != null) {
+        // get each number object (e.g. 200)
+        for (var size in ImageSize.values) {
+          var number = size.number;
+          var numberObject = sizesObject[number] as Map<String, dynamic>?;
+          if (numberObject == null) {
+            continue;
+          }
+          imageList.add(
+            ProductImage.raw(
+              size: size,
+              imgid: imageId.toString(),
+              width: JsonObject.parseInt(numberObject['w']),
+              height: JsonObject.parseInt(numberObject['h']),
+              url: numberObject['url'],
+            ),
+          );
+        }
         continue;
       }
 
@@ -141,9 +176,9 @@ class JsonHelper {
         final String? url = numberObject['url'];
 
         var image = ProductImage(
-          field: field,
+          field: field!,
           size: size,
-          language: lang,
+          language: lang!,
           rev: rev,
           imgid: imgid,
           angle: angle,
@@ -163,20 +198,37 @@ class JsonHelper {
     return imageList;
   }
 
-  static Map<String, dynamic> imagesToJson(List<ProductImage>? images) {
+  // TODO: deprecated from 2023-11-25; remove when old enough
+  @Deprecated('Use allImagesToJson instead')
+  static Map<String, dynamic> imagesToJson(List<ProductImage>? images) =>
+      allImagesToJson(
+        images,
+        onlyMain: true,
+      );
+
+  static Map<String, dynamic> allImagesToJson(
+    final List<ProductImage>? images, {
+    final bool onlyMain = false,
+  }) {
     final Map<String, dynamic> result = <String, dynamic>{};
     if (images == null || images.isEmpty) {
       return result;
     }
-    // grouped by "front_fr"-like keys
+    // grouped by "front_fr"-like or int keys
     final Map<String, List<ProductImage>> sorted =
         <String, List<ProductImage>>{};
     for (final ProductImage productImage in images) {
-      if (productImage.language == null) {
-        continue;
+      final String key;
+      if (productImage.language != null && productImage.field != null) {
+        // it's a "main" image
+        key = '${productImage.field!.offTag}_${productImage.language!.offTag}';
+      } else {
+        // it's a "raw" image
+        if (onlyMain) {
+          continue;
+        }
+        key = productImage.imgid!.toString();
       }
-      final String key =
-          '${productImage.field.offTag}_${productImage.language!.offTag}';
       List<ProductImage>? items = sorted[key];
       if (items == null) {
         items = <ProductImage>[];
@@ -211,29 +263,32 @@ class JsonHelper {
         item['sizes']![productImage.size!.number] = size;
         if (first) {
           first = false;
-          if (productImage.rev != null) {
-            item['rev'] = productImage.rev.toString();
-          }
-          if (productImage.imgid != null) {
-            item['imgid'] = productImage.imgid!;
-          }
-          if (productImage.angle != null) {
-            item['angle'] = productImage.angle!.degree.toString();
-          }
-          if (productImage.coordinatesImageSize != null) {
-            item['coordinates_image_size'] = productImage.coordinatesImageSize!;
-          }
-          if (productImage.x1 != null) {
-            item['x1'] = productImage.x1!;
-          }
-          if (productImage.y1 != null) {
-            item['y1'] = productImage.y1!;
-          }
-          if (productImage.x2 != null) {
-            item['x2'] = productImage.x2!;
-          }
-          if (productImage.y2 != null) {
-            item['y2'] = productImage.y2!;
+          if (productImage.isMain) {
+            if (productImage.rev != null) {
+              item['rev'] = productImage.rev.toString();
+            }
+            if (productImage.imgid != null) {
+              item['imgid'] = productImage.imgid!;
+            }
+            if (productImage.angle != null) {
+              item['angle'] = productImage.angle!.degree.toString();
+            }
+            if (productImage.coordinatesImageSize != null) {
+              item['coordinates_image_size'] =
+                  productImage.coordinatesImageSize!;
+            }
+            if (productImage.x1 != null) {
+              item['x1'] = productImage.x1!;
+            }
+            if (productImage.y1 != null) {
+              item['y1'] = productImage.y1!;
+            }
+            if (productImage.x2 != null) {
+              item['x2'] = productImage.x2!;
+            }
+            if (productImage.y2 != null) {
+              item['y2'] = productImage.y2!;
+            }
           }
         }
       }
