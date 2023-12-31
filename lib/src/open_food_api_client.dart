@@ -297,7 +297,7 @@ class OpenFoodAPIClient {
     );
     final String jsonStr = _replaceQuotes(productString);
     final OldProductResult result =
-        OldProductResult.fromJson(jsonDecode(jsonStr));
+        OldProductResult.fromJson(HttpHelper().jsonDecode(jsonStr));
     if (result.product != null) {
       ProductHelper.removeImages(result.product!, configuration.language);
       ProductHelper.createImageUrls(result.product!, uriHelper: uriHelper);

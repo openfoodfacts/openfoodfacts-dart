@@ -22,7 +22,7 @@ void main() {
   const String petFoodBarcode = '3564700266809';
 
   group('$OpenFoodAPIClient get not food products', () {
-    Future<Product?> findProduct(
+    Future<void> findProduct(
       final String barcode,
       final UriProductHelper uriHelper,
       final bool shouldBeThere,
@@ -34,28 +34,35 @@ void main() {
         fields: [ProductField.BARCODE],
         version: ProductQueryVersion(2),
       );
-      final OldProductResult result = await OpenFoodAPIClient.getOldProduct(
-        configurations,
-        uriHelper: uriHelper,
-      );
-      if (shouldBeThere) {
-        expect(result.status, 1);
-        expect(result.barcode, barcode);
-        expect(result.product, isNotNull);
-        expect(result.product!.barcode, barcode);
-      } else {
-        expect(result.status, 0);
-        expect(result.barcode, barcode);
-        expect(result.product, isNull);
+      try {
+        final OldProductResult result = await OpenFoodAPIClient.getOldProduct(
+          configurations,
+          uriHelper: uriHelper,
+        );
+        if (shouldBeThere) {
+          expect(result.status, 1);
+          expect(result.barcode, barcode);
+          expect(result.product, isNotNull);
+          expect(result.product!.barcode, barcode);
+        } else {
+          expect(result.status, 0);
+          expect(result.barcode, barcode);
+          expect(result.product, isNull);
+        }
+      } catch (e) {
+        const String badGatewayError =
+            'Exception: JSON expected, html found: <head><title>504 Gateway Time-out</title></head>';
+        if (e.toString().contains(badGatewayError)) {
+          return;
+        }
+        rethrow;
       }
-      return result.product;
     }
 
     test('get beauty product', () async {
       final String barcode = beautyBarcode;
       await findProduct(barcode, uriHelperBeautyProd, true);
       await findProduct(barcode, uriHelperProductsProd, false);
-      await findProduct(barcode, uriHelperPetFoodProd, false);
       await findProduct(barcode, uriHelperPetFoodProd, false);
       await findProduct(barcode, uriHelperFoodProd, false);
     });
