@@ -1,4 +1,3 @@
-import 'image_helper.dart';
 import 'language_helper.dart';
 import 'uri_helper.dart';
 import '../model/product.dart';
@@ -35,11 +34,7 @@ class ProductHelper {
     }
 
     for (ProductImage image in product.images!) {
-      image.url = ImageHelper.getLocalizedProductImageUrl(
-        product.barcode!,
-        image,
-        uriHelper: uriHelper,
-      );
+      image.url = image.getUrl(product.barcode!, uriHelper: uriHelper);
     }
   }
 }

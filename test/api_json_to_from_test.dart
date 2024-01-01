@@ -20,26 +20,58 @@ void main() {
       );
       expect(productResult.product, isNotNull);
 
-      final List<ProductImage>? images = productResult.product!.images;
-      expect(images, isNotNull);
-      expect(images, isNotEmpty);
+      void checkImages(final List<ProductImage>? images) {
+        expect(images, isNotNull);
+        expect(images, isNotEmpty);
 
-      final List<ProductImage>? imagesBackAndForth = JsonHelper.imagesFromJson(
-        JsonHelper.imagesToJson(images),
-      );
-      expect(imagesBackAndForth, isNotNull);
-      expect(imagesBackAndForth, isNotEmpty);
+        final List<ProductImage>? imagesBackAndForth =
+            JsonHelper.allImagesFromJson(
+          JsonHelper.allImagesToJson(images),
+        );
+        expect(imagesBackAndForth, isNotNull);
+        expect(imagesBackAndForth, isNotEmpty);
 
-      expect(imagesBackAndForth!.length, images!.length);
-      for (final ProductImage productImage1 in images) {
-        int count = 0;
-        for (final ProductImage productImage2 in imagesBackAndForth) {
-          if (productImage1 == productImage2) {
-            count++;
+        expect(imagesBackAndForth!.length, images!.length);
+        for (final ProductImage productImage1 in images) {
+          int count = 0;
+          for (final ProductImage productImage2 in imagesBackAndForth) {
+            if (productImage1 == productImage2) {
+              count++;
+            }
           }
+          expect(count, 1);
         }
-        expect(count, 1);
       }
+
+      checkImages(productResult.product!.images);
+      checkImages(productResult.product!.getMainImages());
+      checkImages(productResult.product!.getRawImages());
+
+      int countMain = 0;
+      int countRaw = 0;
+      for (final ProductImage productImage in productResult.product!.images!) {
+        if (productImage.isMain) {
+          countMain++;
+        } else {
+          countRaw++;
+        }
+      }
+
+      int count = 0;
+      for (final ProductImage productImage
+          in productResult.product!.getMainImages()!) {
+        expect(productImage.isMain, true);
+        count++;
+      }
+      expect(count, countMain);
+
+      count = 0;
+      for (final ProductImage productImage
+          in productResult.product!.getRawImages()!) {
+        expect(productImage.isMain, false);
+        count++;
+      }
+      expect(count, countRaw);
     });
   });
 }
