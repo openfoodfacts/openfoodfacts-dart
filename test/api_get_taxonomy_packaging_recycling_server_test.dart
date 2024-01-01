@@ -27,9 +27,6 @@ void main() {
     'en:discard',
     'en:recycle',
     'en:reuse',
-    'es:ecoponto-amarelo',
-    'es:ecoponto-azul',
-    'es:ecoponto-verde',
   };
   const String unknownTag = 'en:some_nonexistent_thing';
 

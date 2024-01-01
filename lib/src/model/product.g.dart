@@ -37,7 +37,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       packagingQuantity: JsonHelper.quantityFromJson(json['product_quantity']),
       selectedImages:
           JsonHelper.selectedImagesFromJson(json['selected_images'] as Map?),
-      images: JsonHelper.imagesFromJson(json['images'] as Map?),
+      images: JsonHelper.allImagesFromJson(json['images'] as Map?),
       ingredients: (json['ingredients'] as List<dynamic>?)
           ?.map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -210,7 +210,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('product_quantity', instance.packagingQuantity);
   val['selected_images'] =
       JsonHelper.selectedImagesToJson(instance.selectedImages);
-  val['images'] = JsonHelper.imagesToJson(instance.images);
+  val['images'] = JsonHelper.allImagesToJson(instance.images);
   writeNotNull(
       'ingredients', JsonHelper.ingredientsToJson(instance.ingredients));
   writeNotNull('ingredients_text', instance.ingredientsText);
