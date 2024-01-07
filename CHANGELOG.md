@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.3.0...v3.3.1) (2024-01-07)
+
+
+### Bug Fixes
+
+* 862 - added 18 nutrients ([#863](https://github.com/openfoodfacts/openfoodfacts-dart/issues/863)) ([dff0535](https://github.com/openfoodfacts/openfoodfacts-dart/commit/dff0535810baa74a97be278dfd19ff8d732d3145))
+
 ## [3.3.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.2.1...v3.3.0) (2023-12-24)
 
 
