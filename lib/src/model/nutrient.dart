@@ -174,6 +174,61 @@ enum Nutrient implements OffTagged {
   /// Omega 6
   omega6(typicalUnit: Unit.MILLI_G, offTag: 'omega-6-fat'),
 
+  /// Omega 9
+  omega9(typicalUnit: Unit.MILLI_G, offTag: 'omega-9-fat'),
+
+  /// ß-Carotene
+  betaCarotene(typicalUnit: Unit.G, offTag: 'beta-carotene'),
+
+  /// Bicarbonate
+  bicarbonate(typicalUnit: Unit.MILLI_G, offTag: 'bicarbonate'),
+
+  /// Sugar Alcohol (polyol)
+  sugarAlcohol(typicalUnit: Unit.G, offTag: 'polyols'),
+
+  /// Alpha Linolenic Acid
+  alphaLinolenicAcid(typicalUnit: Unit.G, offTag: 'alpha-linolenic-acid'),
+
+  /// Arachidic Acid
+  arachidicAcid(typicalUnit: Unit.G, offTag: 'arachidic-acid'),
+
+  /// Arachidonic Acid
+  arachidonicAcid(typicalUnit: Unit.G, offTag: 'arachidonic-acid'),
+
+  /// Behenic Acid
+  behenicAcid(typicalUnit: Unit.G, offTag: 'behenic-acid'),
+
+  /// Cerotic Acid
+  ceroticAcid(typicalUnit: Unit.G, offTag: 'cerotic-acid'),
+
+  /// Dihomo-Gamma-Linolenic Acid
+  dihomoGammaLinolenicAcid(
+      typicalUnit: Unit.G, offTag: 'dihomo-gamma-linolenic-acid'),
+
+  /// Elaidic Acid
+  elaidicAcid(typicalUnit: Unit.G, offTag: 'elaidic-acid'),
+
+  /// Gamma-Linolenic Acid
+  gammaLinolenicAcid(typicalUnit: Unit.G, offTag: 'gamma-linolenic-acid'),
+
+  /// Gondoic Acid (11-Eicosenoic acid)
+  gondoicAcid(typicalUnit: Unit.G, offTag: 'gondoic-acid'),
+
+  /// Lignoceric Acid
+  lignocericAcid(typicalUnit: Unit.G, offTag: 'lignoceric-acid'),
+
+  /// Mead Acid
+  meadAcid(typicalUnit: Unit.G, offTag: 'mead-acid'),
+
+  /// Melissic Acid
+  melissicAcid(typicalUnit: Unit.G, offTag: 'melissic-acid'),
+
+  /// Montanic Acid
+  montanicAcid(typicalUnit: Unit.G, offTag: 'montanic-acid'),
+
+  /// Nervonic Acid
+  nervonicAcid(typicalUnit: Unit.G, offTag: 'nervonic-acid'),
+
   /// Trans Fats
   transFat(typicalUnit: Unit.G, offTag: 'trans-fat');
 
