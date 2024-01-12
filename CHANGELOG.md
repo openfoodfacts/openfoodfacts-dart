@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.3.1...v3.3.2) (2024-01-12)
+
+
+### Bug Fixes
+
+* unit test value + better json decode ([#865](https://github.com/openfoodfacts/openfoodfacts-dart/issues/865)) ([565c0fa](https://github.com/openfoodfacts/openfoodfacts-dart/commit/565c0fa3b2b859dcef282eb19336a8897c591c63))
+
 ## [3.3.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.3.0...v3.3.1) (2024-01-07)
 
 
