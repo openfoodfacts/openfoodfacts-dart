@@ -93,6 +93,19 @@ With this method we display the html page title instead of just a
       throw Exception(
           &#39;JSON expected, software error found: ${string.split(&#39;\n&#39;)[1]}&#39;);
     }
+    if (string.startsWith(&#39;&lt;!DOCTYPE html&gt;&#39;)) {
+      const String titleOpen = &#39;&lt;title&gt;&#39;;
+      const String titleClose = &#39;&lt;&#47;title&gt;&#39;;
+      int pos1 = string.indexOf(titleOpen);
+      if (pos1 &gt;= 0) {
+        pos1 += titleOpen.length;
+        final int pos2 = string.indexOf(titleClose);
+        if (pos2 &gt;= 0 &amp;&amp; pos1 &lt; pos2) {
+          throw Exception(
+              &#39;JSON expected, server error found: ${string.substring(pos1, pos2)}&#39;);
+        }
+      }
+    }
     rethrow;
   }
 }</code></pre>
