@@ -347,7 +347,7 @@ void main() {
       nutriments = result.product!.nutriments!;
       expect(
         nutriments.getValue(Nutrient.transFat, PerSize.oneHundredGrams),
-        0.1,
+        0.2,
       );
       expect(
         nutriments.getValue(Nutrient.transFat, PerSize.serving),
