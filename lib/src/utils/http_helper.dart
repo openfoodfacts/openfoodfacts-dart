@@ -254,6 +254,19 @@ class HttpHelper {
         throw Exception(
             'JSON expected, software error found: ${string.split('\n')[1]}');
       }
+      if (string.startsWith('<!DOCTYPE html>')) {
+        const String titleOpen = '<title>';
+        const String titleClose = '</title>';
+        int pos1 = string.indexOf(titleOpen);
+        if (pos1 >= 0) {
+          pos1 += titleOpen.length;
+          final int pos2 = string.indexOf(titleClose);
+          if (pos2 >= 0 && pos1 < pos2) {
+            throw Exception(
+                'JSON expected, server error found: ${string.substring(pos1, pos2)}');
+          }
+        }
+      }
       rethrow;
     }
   }
