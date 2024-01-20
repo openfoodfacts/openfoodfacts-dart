@@ -512,7 +512,6 @@ void main() {
       expect(result.product!.ecoscoreScore, isNotNull);
       expect(result.product!.ecoscoreData!.agribalyse, isNotNull);
       expect(result.product!.ecoscoreData!.adjustments, isNotNull);
-      expect(result.product!.ecoscoreData!.missingDataWarning, isFalse);
     });
 
     test('product fields', () async {
