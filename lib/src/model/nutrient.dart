@@ -15,6 +15,9 @@ enum Nutrient implements OffTagged {
   /// Sugars
   sugars(typicalUnit: Unit.G, offTag: 'sugars'),
 
+  /// Added Sugars
+  addedSugars(typicalUnit: Unit.G, offTag: 'added-sugars'),
+
   /// Fats
   fat(typicalUnit: Unit.G, offTag: 'fat'),
 
