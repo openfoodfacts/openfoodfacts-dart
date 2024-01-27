@@ -250,6 +250,7 @@ Feel [free to open a PR to add your application in this list](https://github.com
 - **Glutten Scan**. [Android](https://play.google.com/store/apps/details?id=com.healthyfood.gluten_free_app) / [iOS](https://apps.apple.com/ch/app/gluten-scanner/id1540660083)
 - **Halal & Healthy**. [Android](https://play.google.com/store/apps/details?id=com.TagIn.Tech.handh) / [iOS](https://apps.apple.com/ch/app/halal-healthy/id1603051382)
 - **Fitness Tracker**. [Android](https://play.google.com/store/apps/details?id=dk.cepk.fitness_tracker)
+- **Ethical Scanner**. [Android](https://play.google.com/store/apps/details?id=com.turskyi.ethical_scanner)
 - [All public repositories using this package](https://github.com/openfoodfacts/openfoodfacts-dart/network/dependents)
   
 ## Authors
