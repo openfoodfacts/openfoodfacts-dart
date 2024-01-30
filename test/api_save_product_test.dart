@@ -420,8 +420,8 @@ Like that:
           barcode: BARCODE,
           productName: PRODUCT_NAME,
           nutrimentDataPer: nutrimentDataPer,
-          servingSize: "20g",
-          servingQuantity: 20,
+          servingSize: "30g",
+          servingQuantity: 30,
           nutriments: nutriments,
         );
 
