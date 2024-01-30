@@ -35,4 +35,14 @@ class Additives {
 
     return result;
   }
+
+  Additives copyWith({
+    List<String>? ids,
+    List<String>? names,
+  }) {
+    return Additives(
+      ids ?? this.ids,
+      names ?? this.names,
+    );
+  }
 }

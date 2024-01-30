@@ -84,6 +84,32 @@ class Ingredient extends JsonObject {
       '${bold == null ? '' : ',bold=$bold'}'
       '${ingredients == null ? '' : ',ingredients=$ingredients'}'
       ')';
+
+  Ingredient copyWith({
+    int? rank,
+    String? id,
+    String? text,
+    double? percent,
+    double? percentEstimate,
+    IngredientSpecialPropertyStatus? vegan,
+    IngredientSpecialPropertyStatus? vegetarian,
+    IngredientSpecialPropertyStatus? fromPalmOil,
+    List<Ingredient>? ingredients,
+    bool? bold,
+  }) {
+    return Ingredient(
+      rank: rank ?? this.rank,
+      id: id ?? this.id,
+      text: text ?? this.text,
+      percent: percent ?? this.percent,
+      percentEstimate: percentEstimate ?? this.percentEstimate,
+      vegan: vegan ?? this.vegan,
+      vegetarian: vegetarian ?? this.vegetarian,
+      fromPalmOil: fromPalmOil ?? this.fromPalmOil,
+      ingredients: ingredients ?? this.ingredients,
+      bold: bold ?? this.bold,
+    );
+  }
 }
 
 const Map<IngredientSpecialPropertyStatus, String> _MAP = {

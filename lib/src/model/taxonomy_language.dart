@@ -78,6 +78,20 @@ class TaxonomyLanguage extends JsonObject {
 
   @override
   String toString() => toJson().toString();
+
+  TaxonomyLanguage copyWith({
+    Map<OpenFoodFactsLanguage, String>? languageCode2,
+    Map<OpenFoodFactsLanguage, String>? languageCode3,
+    Map<OpenFoodFactsLanguage, String>? name,
+    Map<OpenFoodFactsLanguage, String>? wikidata,
+  }) {
+    return TaxonomyLanguage(
+      languageCode2 ?? this.languageCode2,
+      languageCode3 ?? this.languageCode3,
+      name ?? this.name,
+      wikidata ?? this.wikidata,
+    );
+  }
 }
 
 /// Configuration for languages API query.

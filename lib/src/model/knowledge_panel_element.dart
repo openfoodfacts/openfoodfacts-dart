@@ -74,6 +74,24 @@ class KnowledgePanelTextElement extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelTextElementToJson(this);
+
+  KnowledgePanelTextElement copyWith({
+    String? html,
+    KnowledgePanelTextElementType? type,
+    String? sourceLanguage,
+    String? sourceLocale,
+    String? sourceText,
+    String? sourceUrl,
+  }) {
+    return KnowledgePanelTextElement(
+      html: html ?? this.html,
+      type: type ?? this.type,
+      sourceLanguage: sourceLanguage ?? this.sourceLanguage,
+      sourceLocale: sourceLocale ?? this.sourceLocale,
+      sourceText: sourceText ?? this.sourceText,
+      sourceUrl: sourceUrl ?? this.sourceUrl,
+    );
+  }
 }
 
 /// Image that represents the KnowledgePanel.
@@ -106,6 +124,20 @@ class KnowledgePanelImageElement extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelImageElementToJson(this);
+
+  KnowledgePanelImageElement copyWith({
+    String? url,
+    int? width,
+    int? height,
+    String? altText,
+  }) {
+    return KnowledgePanelImageElement(
+      url: url ?? this.url,
+      width: width ?? this.width,
+      height: height ?? this.height,
+      altText: altText ?? this.altText,
+    );
+  }
 }
 
 /// Element representing a Panel group that contains 1+ KnowledgePanels.
@@ -127,6 +159,16 @@ class KnowledgePanelPanelGroupElement extends JsonObject {
   @override
   Map<String, dynamic> toJson() =>
       _$KnowledgePanelPanelGroupElementToJson(this);
+
+  KnowledgePanelPanelGroupElement copyWith({
+    String? title,
+    List<String>? panelIds,
+  }) {
+    return KnowledgePanelPanelGroupElement(
+      title: title ?? this.title,
+      panelIds: panelIds ?? this.panelIds,
+    );
+  }
 }
 
 /// Element representing a Panel Id of a KnowledgePanel. This element is a
@@ -144,6 +186,14 @@ class KnowledgePanelPanelIdElement extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelPanelIdElementToJson(this);
+
+  KnowledgePanelPanelIdElement copyWith({
+    String? panelId,
+  }) {
+    return KnowledgePanelPanelIdElement(
+      panelId: panelId ?? this.panelId,
+    );
+  }
 }
 
 /// Provides the values for each table cell inside a KnowledgePanel table.
@@ -168,6 +218,20 @@ class KnowledgePanelTableCell extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelTableCellToJson(this);
+
+  KnowledgePanelTableCell copyWith({
+     String? text,
+     double? percent,
+    String? iconUrl,
+    Evaluation? evaluation,
+  }) {
+    return KnowledgePanelTableCell(
+      text: text ?? this.text,
+      percent: percent ?? this.percent,
+      iconUrl: iconUrl ?? this.iconUrl,
+      evaluation: evaluation ?? this.evaluation,
+    );
+  }
 }
 
 /// A table row inside Table element of KonwledgePanel
@@ -182,6 +246,14 @@ class KnowledgePanelTableRowElement extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelTableRowElementToJson(this);
+
+  KnowledgePanelTableRowElement copyWith({
+    List<KnowledgePanelTableCell>? values,
+  }) {
+    return KnowledgePanelTableRowElement(
+      values: values ?? this.values,
+    );
+  }
 }
 
 /// A descriptor that describes the type and label of each column.
@@ -217,6 +289,24 @@ class KnowledgePanelTableColumn extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelTableColumnToJson(this);
+
+  KnowledgePanelTableColumn copyWith({
+    String? text,
+    String? textForSmallScreens,
+    bool? showByDefault,
+    String? columnGroupId,
+    final String? style,
+    final KnowledgePanelColumnType? type,
+  }) {
+    return KnowledgePanelTableColumn(
+      text: text ?? this.text,
+      textForSmallScreens: textForSmallScreens ?? this.textForSmallScreens,
+      showByDefault: showByDefault ?? this.showByDefault,
+      columnGroupId: columnGroupId ?? this.columnGroupId,
+      style: style ?? this.style,
+      type: type ?? this.type,
+    );
+  }
 }
 
 /// Element representing a world map.
@@ -233,6 +323,14 @@ class KnowledgePanelWorldMapElement extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelWorldMapElementToJson(this);
+
+  KnowledgePanelWorldMapElement copyWith({
+    List<KnowledgePanelGeoPointer>? pointers,
+  }) {
+    return KnowledgePanelWorldMapElement(
+      pointers: pointers ?? this.pointers,
+    );
+  }
 }
 
 /// Element representing a geo location of a map pointer.
@@ -249,6 +347,14 @@ class KnowledgePanelGeoPointer extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelGeoPointerToJson(this);
+
+  KnowledgePanelGeoPointer copyWith({
+    KnowledgePanelLatLng? geo,
+  }) {
+    return KnowledgePanelGeoPointer(
+      geo: geo ?? this.geo,
+    );
+  }
 }
 
 /// Element representing a lat/long positioning of a map pointer.
@@ -267,6 +373,16 @@ class KnowledgePanelLatLng extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelLatLngToJson(this);
+
+  KnowledgePanelLatLng copyWith({
+    double? lat,
+    double? lng,
+  }) {
+    return KnowledgePanelLatLng(
+      lat: lat ?? this.lat,
+      lng: lng ?? this.lng,
+    );
+  }
 }
 
 /// Element representing a tabular data for the KnowledgePanel.
@@ -293,6 +409,20 @@ class KnowledgePanelTableElement extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelTableElementToJson(this);
+
+  KnowledgePanelTableElement copyWith({
+    String? id,
+    String? title,
+    List<KnowledgePanelTableColumn>? columns,
+    List<KnowledgePanelTableRowElement>? rows,
+  }) {
+    return KnowledgePanelTableElement(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      columns: columns ?? this.columns,
+      rows: rows ?? this.rows,
+    );
+  }
 }
 
 /// "Contribute action" element of the Knowledge panel.
@@ -314,6 +444,16 @@ class KnowledgePanelActionElement extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelActionElementToJson(this);
+
+  KnowledgePanelActionElement copyWith({
+    String? html,
+    List<String>? actions,
+  }) {
+    return KnowledgePanelActionElement(
+      html: html ?? this.html,
+      actions: actions ?? this.actions,
+    );
+  }
 }
 
 /// The type of Knowledge panel.
@@ -397,4 +537,26 @@ class KnowledgePanelElement extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$KnowledgePanelElementToJson(this);
+
+  KnowledgePanelElement copyWith({
+    KnowledgePanelElementType? elementType,
+    KnowledgePanelTextElement? textElement,
+    KnowledgePanelImageElement? imageElement,
+    KnowledgePanelPanelIdElement? panelElement,
+    KnowledgePanelPanelGroupElement? panelGroupElement,
+    KnowledgePanelTableElement? tableElement,
+    KnowledgePanelWorldMapElement? mapElement,
+    KnowledgePanelActionElement? actionElement,
+  }) {
+    return KnowledgePanelElement(
+      elementType: elementType ?? this.elementType,
+      textElement: textElement ?? this.textElement,
+      imageElement: imageElement ?? this.imageElement,
+      panelElement: panelElement ?? this.panelElement,
+      panelGroupElement: panelGroupElement ?? this.panelGroupElement,
+      tableElement: tableElement ?? this.tableElement,
+      mapElement: mapElement ?? this.mapElement,
+      actionElement: actionElement ?? this.actionElement,
+    );
+  }
 }

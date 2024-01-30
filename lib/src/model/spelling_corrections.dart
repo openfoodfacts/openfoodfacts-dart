@@ -35,6 +35,16 @@ class TermCorrections extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$TermCorrectionsToJson(this);
+
+  TermCorrections copyWith({
+    List<Correction>? corrections,
+    double? score,
+  }) {
+    return TermCorrections(
+      corrections ?? this.corrections,
+      score ?? this.score,
+    );
+  }
 }
 
 @JsonSerializable()
@@ -58,4 +68,20 @@ class Correction extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$CorrectionToJson(this);
+
+  Correction copyWith({
+    String? correction,
+    String? original,
+    int? startOffset,
+    int? endOffset,
+    bool? isValid,
+  }) {
+    return Correction(
+      correction ?? this.correction,
+      original ?? this.original,
+      startOffset ?? this.startOffset,
+      endOffset ?? this.endOffset,
+      isValid ?? this.isValid,
+    );
+  }
 }

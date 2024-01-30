@@ -75,6 +75,16 @@ class InsightsResult extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$InsightsResultToJson(this);
+
+  InsightsResult copyWith({
+    String? status,
+    List<Insight>? insights,
+  }) {
+    return InsightsResult(
+      status: status ?? this.status,
+      insights: insights ?? this.insights,
+    );
+  }
 }
 
 class Insight {
@@ -136,5 +146,25 @@ class Insight {
     }
 
     return result;
+  }
+
+  Insight copyWith({
+    String? id,
+    InsightType? type,
+    String? barcode,
+     List<dynamic>? countries,
+    String? lang,
+    String? model,
+    double? confidence,
+  }) {
+    return Insight(
+      id: id ?? this.id,
+      type: type ?? this.type,
+      barcode: barcode ?? this.barcode,
+      countries: countries ?? this.countries,
+      lang: lang ?? this.lang,
+      model: model ?? this.model,
+      confidence: confidence ?? this.confidence,
+    );
   }
 }

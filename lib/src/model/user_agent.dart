@@ -36,4 +36,20 @@ class UserAgent extends JsonObject {
         'url': url,
         'comment': comment,
       };
+
+  UserAgent copyWith({
+    String? name,
+    String? version,
+    String? system,
+    String? url,
+    String? comment,
+  }) {
+    return UserAgent(
+      name: name ?? this.name,
+      version: version ?? this.version,
+      system: system ?? this.system,
+      url: url ?? this.url,
+      comment: comment ?? this.comment,
+    );
+  }
 }

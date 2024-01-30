@@ -46,4 +46,22 @@ class EcoscoreData extends JsonObject {
   Map<String, dynamic> toJson() => _$EcoscoreDataToJson(this);
 
   static Map<String, dynamic>? toJsonHelper(EcoscoreData? d) => d?.toJson();
+
+  EcoscoreData copyWith({
+    String? grade,
+    double? score,
+    EcoscoreStatus? status,
+    Agribalyse? agribalyse,
+    EcoscoreAdjustments? adjustments,
+    bool? missingDataWarning,
+  }) {
+    return EcoscoreData(
+      grade: grade ?? this.grade,
+      score: score ?? this.score,
+      status: status ?? this.status,
+      agribalyse: agribalyse ?? this.agribalyse,
+      adjustments: adjustments ?? this.adjustments,
+      missingDataWarning: missingDataWarning ?? this.missingDataWarning,
+    );
+  }
 }

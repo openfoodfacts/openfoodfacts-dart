@@ -15,4 +15,12 @@ class Agribalyse extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$AgribalyseToJson(this);
+
+  Agribalyse copyWith({
+    double? score,
+  }) {
+    return Agribalyse(
+      score: score ?? this.score,
+    );
+  }
 }

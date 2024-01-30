@@ -34,4 +34,18 @@ class ProductStats extends JsonObject {
 
   @override
   String toString() => toJson().toString();
+
+  ProductStats copyWith({
+    String? barcode,
+    int? numberOfKeys,
+    int? numberOfEditors,
+    DateTime? lastEdit,
+  }) {
+    return ProductStats(
+      barcode: barcode ?? this.barcode,
+      numberOfKeys: numberOfKeys ?? this.numberOfKeys,
+      numberOfEditors: numberOfEditors ?? this.numberOfEditors,
+      lastEdit: lastEdit ?? this.lastEdit,
+    );
+  }
 }

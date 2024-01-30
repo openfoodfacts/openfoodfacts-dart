@@ -19,4 +19,14 @@ class EcoscoreAdjustments extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$EcoscoreAdjustmentsToJson(this);
+
+  EcoscoreAdjustments copyWith({
+    Packaging? packaging,
+    OriginsOfIngredients? originsOfIngredients,
+  }) {
+    return EcoscoreAdjustments(
+      packaging: packaging ?? this.packaging,
+      originsOfIngredients: originsOfIngredients ?? this.originsOfIngredients,
+    );
+  }
 }

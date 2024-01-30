@@ -97,4 +97,5 @@ class Status extends JsonObject {
   Map<String, dynamic> toJson() => _$StatusToJson(this);
 
   bool shouldOpenNewIssue() => status == serverErrorStatus;
+
 }

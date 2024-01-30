@@ -25,4 +25,16 @@ class OcrPackagingResult extends JsonObject {
 
   @JsonKey(name: 'packaging_text_from_image')
   final String? textFromImage;
+
+  OcrPackagingResult copyWith({
+    int? status,
+    String? textFromImageOrig,
+    String? textFromImage,
+  }) {
+    return OcrPackagingResult(
+      status: status ?? this.status,
+      textFromImageOrig: textFromImageOrig ?? this.textFromImageOrig,
+      textFromImage: textFromImage ?? this.textFromImage,
+    );
+  }
 }

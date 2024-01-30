@@ -43,4 +43,20 @@ class EventsBase extends JsonObject {
       '${barcode == null ? '' : ', barcode: $barcode'}'
       '${points == null ? '' : ', points: $points'}'
       ')';
+
+  EventsBase copyWith({
+    String? eventType,
+    DateTime? timestamp,
+    String? userId,
+    String? barcode,
+    int? points,
+  }) {
+    return EventsBase(
+      eventType: eventType ?? this.eventType,
+      timestamp: timestamp ?? this.timestamp,
+      userId: userId ?? this.userId,
+      barcode: barcode ?? this.barcode,
+      points: points ?? this.points,
+    );
+  }
 }

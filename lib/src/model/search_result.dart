@@ -38,4 +38,22 @@ class SearchResult extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$SearchResultToJson(this);
+
+  SearchResult copyWith({
+    int? page,
+    int? pageSize,
+    int? count,
+    int? pageCount,
+    int? skip,
+    List<Product>? products,
+  }) {
+    return SearchResult(
+      page: page ?? this.page,
+      pageSize: pageSize ?? this.pageSize,
+      count: count ?? this.count,
+      pageCount: pageCount ?? this.pageCount,
+      skip: skip ?? this.skip,
+      products: products ?? this.products,
+    );
+  }
 }

@@ -248,6 +248,60 @@ class TaxonomyLabel extends JsonObject {
 
   @override
   String toString() => toJson().toString();
+
+  TaxonomyLabel copyWith({
+    Map<OpenFoodFactsLanguage, String>? authAddress,
+    Map<OpenFoodFactsLanguage, String>? authName,
+    Map<OpenFoodFactsLanguage, String>? authUrl,
+    Map<OpenFoodFactsLanguage, String>? categories,
+    Map<OpenFoodFactsLanguage, String>? countriesWhereSold,
+    List<String>? children,
+    Map<OpenFoodFactsLanguage, String>? country,
+    Map<OpenFoodFactsLanguage, String>? description,
+    Map<OpenFoodFactsLanguage, String>? euGroups,
+    Map<OpenFoodFactsLanguage, String>? exceptions,
+    Map<OpenFoodFactsLanguage, String>? image,
+    Map<OpenFoodFactsLanguage, String>? images,
+    Map<OpenFoodFactsLanguage, String>? ingredients,
+    Map<OpenFoodFactsLanguage, String>? labelCategories,
+    Map<OpenFoodFactsLanguage, String>? manufacturingPlaces,
+    Map<OpenFoodFactsLanguage, String>? name,
+    Map<OpenFoodFactsLanguage, String>? opposite,
+    Map<OpenFoodFactsLanguage, String>? origins,
+    Map<OpenFoodFactsLanguage, String>? packaging,
+    Map<OpenFoodFactsLanguage, String>? packagingPlaces,
+    List<String>? parents,
+    Map<OpenFoodFactsLanguage, String>? protectedNameType,
+    Map<OpenFoodFactsLanguage, String>? stores,
+    Map<OpenFoodFactsLanguage, String>? wikidata,
+  }) {
+    return TaxonomyLabel(
+      authAddress ?? this.authAddress,
+      authName ?? this.authName,
+      authUrl ?? this.authUrl,
+      categories ?? this.categories,
+      children ?? this.children,
+      countriesWhereSold ?? this.countriesWhereSold,
+      country ?? this.country,
+      description ?? this.description,
+      euGroups ?? this.euGroups,
+      exceptions ?? this.exceptions,
+      image ?? this.image,
+      images ?? this.images,
+      ingredients ?? this.ingredients,
+      labelCategories ?? this.labelCategories,
+      manufacturingPlaces ?? this.manufacturingPlaces,
+      name ?? this.name,
+      opposite ?? this.opposite,
+      origins ?? this.origins,
+      packaging ?? this.packaging,
+      packagingPlaces ?? this.packagingPlaces,
+      parents ?? this.parents,
+      protectedNameType ?? this.protectedNameType,
+      stores ?? this.stores,
+      wikidata ?? this.wikidata,
+    );
+  }
 }
 
 class TaxonomyLabelQueryConfiguration

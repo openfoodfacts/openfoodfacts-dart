@@ -294,6 +294,71 @@ class TaxonomyCategory extends JsonObject {
 
   @override
   String toString() => toJson().toString();
+
+  TaxonomyCategory copyWith({
+    Map<OpenFoodFactsLanguage, String>? agribalyseFoodCode,
+    Map<OpenFoodFactsLanguage, String>? agribalyseFoodName,
+    Map<OpenFoodFactsLanguage, String>? agribalyseProxyFoodCode,
+    Map<OpenFoodFactsLanguage, String>? agribalyseProxyFoodName,
+    Map<OpenFoodFactsLanguage, String>? agribalyseProxyName,
+    Map<OpenFoodFactsLanguage, String>? carbonFootprintFrFoodgesIngredient,
+    List<String>? children,
+    Map<OpenFoodFactsLanguage, String>? ciqualFoodCode,
+    Map<OpenFoodFactsLanguage, String>? ciqualFoodName,
+    Map<OpenFoodFactsLanguage, String>? ciqualProxyFoodCode,
+    Map<OpenFoodFactsLanguage, String>? ciqualProxyFoodName,
+    Map<OpenFoodFactsLanguage, String>? country,
+    Map<OpenFoodFactsLanguage, String>? grapevariety,
+    Map<OpenFoodFactsLanguage, String>? instanceof,
+    Map<OpenFoodFactsLanguage, String>? name,
+    Map<OpenFoodFactsLanguage, String>? nova,
+    Map<OpenFoodFactsLanguage, String>? oqaliFamily,
+    Map<OpenFoodFactsLanguage, String>? origins,
+    List<String>? parents,
+    Map<OpenFoodFactsLanguage, String>? pnnsGroup1,
+    Map<OpenFoodFactsLanguage, String>? pnnsGroup2,
+    Map<OpenFoodFactsLanguage, String>? protectedNameFileNumber,
+    Map<OpenFoodFactsLanguage, String>? protectedNameType,
+    Map<OpenFoodFactsLanguage, String>? region,
+    Map<OpenFoodFactsLanguage, String>? seasonInCountryFr,
+    Map<OpenFoodFactsLanguage, String>? whoId,
+    Map<OpenFoodFactsLanguage, String>? wikidata,
+    Map<OpenFoodFactsLanguage, String>? wikidataCategory,
+    Map<OpenFoodFactsLanguage, String>? wikidataWikipediaCategory,
+  }) {
+    return TaxonomyCategory(
+      agribalyseFoodCode ?? this.agribalyseFoodCode,
+      agribalyseFoodName ?? this.agribalyseFoodName,
+      agribalyseProxyFoodCode ?? this.agribalyseProxyFoodCode,
+      agribalyseProxyFoodName ?? this.agribalyseProxyFoodName,
+      agribalyseProxyName ?? this.agribalyseProxyName,
+      carbonFootprintFrFoodgesIngredient ??
+          this.carbonFootprintFrFoodgesIngredient,
+      children ?? this.children,
+      ciqualFoodCode ?? this.ciqualFoodCode,
+      ciqualFoodName ?? this.ciqualFoodName,
+      ciqualProxyFoodCode ?? this.ciqualProxyFoodCode,
+      ciqualProxyFoodName ?? this.ciqualProxyFoodName,
+      country ?? this.country,
+      grapevariety ?? this.grapevariety,
+      instanceof ?? this.instanceof,
+      name ?? this.name,
+      nova ?? this.nova,
+      oqaliFamily ?? this.oqaliFamily,
+      origins ?? this.origins,
+      parents ?? this.parents,
+      pnnsGroup1 ?? this.pnnsGroup1,
+      pnnsGroup2 ?? this.pnnsGroup2,
+      protectedNameFileNumber ?? this.protectedNameFileNumber,
+      protectedNameType ?? this.protectedNameType,
+      region ?? this.region,
+      seasonInCountryFr ?? this.seasonInCountryFr,
+      whoId ?? this.whoId,
+      wikidata ?? this.wikidata,
+      wikidataCategory ?? this.wikidataCategory,
+      wikidataWikipediaCategory ?? this.wikidataWikipediaCategory,
+    );
+  }
 }
 
 class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<

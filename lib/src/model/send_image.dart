@@ -44,4 +44,18 @@ class SendImage extends JsonObject {
       'imagefield': _getImageFieldWithLang(),
     };
   }
+
+  SendImage copyWith({
+    OpenFoodFactsLanguage? lang,
+    Uri? imageUri,
+    String? barcode,
+    ImageField? imageField,
+  }) {
+    return SendImage(
+      lang: lang ?? this.lang,
+      imageUri: imageUri ?? this.imageUri,
+      barcode: barcode ?? this.barcode,
+      imageField: imageField ?? this.imageField,
+    );
+  }
 }
