@@ -329,70 +329,85 @@ Like that:
       const double PROTEINS = 6;
       const double FAT = 0.1;
       const double VITAMIN_B12 = 0.15;
+      final List<Nutrient> nutrients = <Nutrient>[
+        Nutrient.energyKJ,
+        Nutrient.carbohydrates,
+        Nutrient.proteins,
+        Nutrient.fat,
+        Nutrient.vitaminB12,
+      ];
+
       const String BARCODE = '7340011364184';
       const String PRODUCT_NAME = 'Chili beans';
-      final String nutrimentDataPer = PerSize.oneHundredGrams.offTag;
+      for (final option in PerSize.values) {
+        final String nutrimentDataPer = option.offTag;
 
-      const PerSize perSize = PerSize.oneHundredGrams;
-      for (int i = 2; i >= 0; i--) {
-        final Nutriments nutriments = Nutriments.empty()
-          ..setValue(Nutrient.energyKJ, perSize, ENERGY + i)
-          ..setValue(Nutrient.carbohydrates, perSize, CARBOHYDRATES + i)
-          ..setValue(Nutrient.proteins, perSize, PROTEINS + i)
-          ..setValue(Nutrient.vitaminB12, perSize, VITAMIN_B12 + i)
-          ..setValue(Nutrient.fat, perSize, FAT + i);
+        PerSize perSize = option;
+        for (int i = 0; i <= 2; i++) {
+          final Nutriments nutriments = Nutriments.empty()
+            ..setValue(Nutrient.energyKJ, perSize, ENERGY + i)
+            ..setValue(Nutrient.carbohydrates, perSize, CARBOHYDRATES + i)
+            ..setValue(Nutrient.proteins, perSize, PROTEINS + i)
+            ..setValue(Nutrient.vitaminB12, perSize, VITAMIN_B12 + i)
+            ..setValue(Nutrient.fat, perSize, FAT + i);
 
-        final Product newProduct = Product(
-          barcode: BARCODE,
-          productName: PRODUCT_NAME,
-          nutrimentDataPer: nutrimentDataPer,
-          nutriments: nutriments,
-        );
+          final Product newProduct = Product(
+            barcode: BARCODE,
+            productName: PRODUCT_NAME,
+            nutrimentDataPer: nutrimentDataPer,
+            servingSize: "30g",
+            nutriments: nutriments,
+          );
 
-        final Status status = await OpenFoodAPIClient.saveProduct(
-          USER,
-          newProduct,
-          uriHelper: uriHelper,
-        );
+          final Status status = await OpenFoodAPIClient.saveProduct(
+            USER,
+            newProduct,
+            uriHelper: uriHelper,
+          );
 
-        expect(status.status, 1);
-        expect(status.statusVerbose, 'fields saved');
+          expect(status.status, 1);
+          expect(status.statusVerbose, 'fields saved');
 
-        final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
-          ProductQueryConfiguration(
-            BARCODE,
-            language: OpenFoodFactsLanguage.ENGLISH,
-            version: ProductQueryVersion.v3,
-          ),
-          user: USER,
-          uriHelper: uriHelper,
-        );
+          final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+            ProductQueryConfiguration(
+              BARCODE,
+              language: OpenFoodFactsLanguage.ENGLISH,
+              version: ProductQueryVersion.v3,
+            ),
+            user: USER,
+            uriHelper: uriHelper,
+          );
 
-        expect(result.status, ProductResultV3.statusSuccess);
-        expect(result.barcode, BARCODE);
-        final Product? searchedProduct = result.product;
-        expect(searchedProduct != null, true);
-        if (searchedProduct != null) {
+          expect(result.status, ProductResultV3.statusSuccess);
+          expect(result.barcode, BARCODE);
+
+          final Product? searchedProduct = result.product;
+          if (searchedProduct == null) {
+            fail('Saved product not found');
+          }
+
           expect(searchedProduct.barcode, BARCODE);
           expect(searchedProduct.productName, PRODUCT_NAME);
           expect(searchedProduct.nutrimentDataPer, nutrimentDataPer);
-          var searchedNutriments = searchedProduct.nutriments;
+
+          final searchedNutriments = searchedProduct.nutriments;
           expect(searchedNutriments, isNotNull);
-          if (searchedNutriments != null) {
-            final List<Nutrient> nutrients = <Nutrient>[
-              Nutrient.energyKJ,
-              Nutrient.carbohydrates,
-              Nutrient.proteins,
-              Nutrient.fat,
-              Nutrient.vitaminB12,
-            ];
-            for (final Nutrient nutrient in nutrients) {
-              expect(
-                searchedNutriments.getValue(nutrient, perSize),
-                nutriments.getValue(nutrient, perSize),
-                reason: 'should be the same values for $nutrient',
-              );
-            }
+          if (searchedNutriments == null) {
+            fail('Nutrients are null');
+          }
+          for (final Nutrient nutrient in nutrients) {
+            final double? actual =
+                searchedNutriments.getValue(nutrient, option);
+            expect(
+              actual,
+              isNotNull,
+              reason: 'should not be null for $nutrient',
+            );
+            expect(
+              searchedNutriments.getValue(nutrient, perSize),
+              nutriments.getValue(nutrient, perSize),
+              reason: 'should be the same values for $nutrient',
+            );
           }
         }
       }
@@ -406,20 +421,18 @@ Like that:
       const double FAT = 0.1;
       const String BARCODE = '01234567891';
       const String PRODUCT_NAME = 'Test Food';
-      final String nutrimentDataPer = PerSize.serving.offTag;
 
-      const PerSize perSize = PerSize.serving;
-      for (int i = 2; i >= 0; i--) {
+      for (final option in PerSize.values) {
         final Nutriments nutriments = Nutriments.empty()
-          ..setValue(Nutrient.energyKJ, perSize, ENERGY + i)
-          ..setValue(Nutrient.carbohydrates, perSize, CARBOHYDRATES + i)
-          ..setValue(Nutrient.proteins, perSize, PROTEINS + i)
-          ..setValue(Nutrient.fat, perSize, FAT + i);
+          ..setValue(Nutrient.energyKJ, option, ENERGY)
+          ..setValue(Nutrient.carbohydrates, option, CARBOHYDRATES)
+          ..setValue(Nutrient.proteins, option, PROTEINS)
+          ..setValue(Nutrient.fat, option, FAT);
 
         final Product newProduct = Product(
           barcode: BARCODE,
           productName: PRODUCT_NAME,
-          nutrimentDataPer: nutrimentDataPer,
+          nutrimentDataPer: option.offTag,
           servingSize: "30g",
           servingQuantity: 30,
           nutriments: nutriments,
@@ -447,28 +460,34 @@ Like that:
         expect(result.status, ProductResultV3.statusSuccess);
         expect(result.barcode, BARCODE);
         final Product? searchedProduct = result.product;
-        expect(searchedProduct != null, true);
-        if (searchedProduct != null) {
-          expect(searchedProduct.barcode, BARCODE);
-          expect(searchedProduct.productName, PRODUCT_NAME);
-          expect(searchedProduct.nutrimentDataPer, nutrimentDataPer);
-          var searchedNutriments = searchedProduct.nutriments;
-          expect(searchedNutriments, isNotNull);
-          if (searchedNutriments != null) {
-            final List<Nutrient> nutrients = <Nutrient>[
-              Nutrient.energyKJ,
-              Nutrient.carbohydrates,
-              Nutrient.proteins,
-              Nutrient.fat,
-              Nutrient.vitaminB12,
-            ];
-            for (final Nutrient nutrient in nutrients) {
-              expect(
-                searchedNutriments.getValue(nutrient, perSize),
-                nutriments.getValue(nutrient, perSize),
-                reason: 'should be the same values for $nutrient',
-              );
-            }
+        if (searchedProduct == null) {
+          fail('Saved product not found');
+        }
+        expect(searchedProduct.barcode, BARCODE);
+        expect(searchedProduct.productName, PRODUCT_NAME);
+        expect(searchedProduct.nutrimentDataPer, option.offTag);
+        var searchedNutriments = searchedProduct.nutriments;
+        expect(searchedNutriments, isNotNull);
+        if (searchedNutriments != null) {
+          final List<Nutrient> nutrients = <Nutrient>[
+            Nutrient.energyKJ,
+            Nutrient.carbohydrates,
+            Nutrient.proteins,
+            Nutrient.fat,
+          ];
+          for (final Nutrient nutrient in nutrients) {
+            final double? actual =
+                searchedNutriments.getValue(nutrient, option);
+            expect(
+              actual,
+              isNotNull,
+              reason: 'should not be null for $nutrient',
+            );
+            expect(
+              actual,
+              nutriments.getValue(nutrient, option),
+              reason: 'should be the same values for $nutrient',
+            );
           }
         }
       }
