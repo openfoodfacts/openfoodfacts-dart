@@ -109,6 +109,10 @@ class OpenFoodAPIClient {
         if (pos != -1) {
           key = key.substring(0, pos);
         }
+        final servingPost = key.indexOf('_serving');
+        if (servingPost != -1) {
+          key = key.substring(0, servingPost);
+        }
         parameterMap[key] = entry.value;
       }
     }

@@ -398,13 +398,13 @@ Like that:
       }
     }, skip: 'Works randomly');
 
-    test('Serving Size Does Not Save', () async {
+    test('Test saving food with PerSize.serving Nutrients', () async {
       const User USER = TestConstants.TEST_USER;
       const double ENERGY = 365;
       const double CARBOHYDRATES = 12;
       const double PROTEINS = 6;
       const double FAT = 0.1;
-      const String BARCODE = '01234567890';
+      const String BARCODE = '01234567891';
       const String PRODUCT_NAME = 'Test Food';
       final String nutrimentDataPer = PerSize.serving.offTag;
 
