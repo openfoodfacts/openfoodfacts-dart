@@ -398,6 +398,82 @@ Like that:
       }
     }, skip: 'Works randomly');
 
+    test('Serving Size Does Not Save', () async {
+      const User USER = TestConstants.TEST_USER;
+      const double ENERGY = 365;
+      const double CARBOHYDRATES = 12;
+      const double PROTEINS = 6;
+      const double FAT = 0.1;
+      const String BARCODE = '01234567890';
+      const String PRODUCT_NAME = 'Test Food';
+      final String nutrimentDataPer = PerSize.serving.offTag;
+
+      const PerSize perSize = PerSize.serving;
+      for (int i = 2; i >= 0; i--) {
+        final Nutriments nutriments = Nutriments.empty()
+          ..setValue(Nutrient.energyKJ, perSize, ENERGY + i)
+          ..setValue(Nutrient.carbohydrates, perSize, CARBOHYDRATES + i)
+          ..setValue(Nutrient.proteins, perSize, PROTEINS + i)
+          ..setValue(Nutrient.fat, perSize, FAT + i);
+
+        final Product newProduct = Product(
+          barcode: BARCODE,
+          productName: PRODUCT_NAME,
+          nutrimentDataPer: nutrimentDataPer,
+          servingSize: "20g",
+          servingQuantity: 20,
+          nutriments: nutriments,
+        );
+
+        final Status status = await OpenFoodAPIClient.saveProduct(
+          USER,
+          newProduct,
+          uriHelper: uriHelper,
+        );
+
+        expect(status.status, 1);
+        expect(status.statusVerbose, 'fields saved');
+
+        final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+          ProductQueryConfiguration(
+            BARCODE,
+            language: OpenFoodFactsLanguage.ENGLISH,
+            version: ProductQueryVersion.v3,
+          ),
+          user: USER,
+          uriHelper: uriHelper,
+        );
+
+        expect(result.status, ProductResultV3.statusSuccess);
+        expect(result.barcode, BARCODE);
+        final Product? searchedProduct = result.product;
+        expect(searchedProduct != null, true);
+        if (searchedProduct != null) {
+          expect(searchedProduct.barcode, BARCODE);
+          expect(searchedProduct.productName, PRODUCT_NAME);
+          expect(searchedProduct.nutrimentDataPer, nutrimentDataPer);
+          var searchedNutriments = searchedProduct.nutriments;
+          expect(searchedNutriments, isNotNull);
+          if (searchedNutriments != null) {
+            final List<Nutrient> nutrients = <Nutrient>[
+              Nutrient.energyKJ,
+              Nutrient.carbohydrates,
+              Nutrient.proteins,
+              Nutrient.fat,
+              Nutrient.vitaminB12,
+            ];
+            for (final Nutrient nutrient in nutrients) {
+              expect(
+                searchedNutriments.getValue(nutrient, perSize),
+                nutriments.getValue(nutrient, perSize),
+                reason: 'should be the same values for $nutrient',
+              );
+            }
+          }
+        }
+      }
+    });
+
     String generateRandomString(int len) {
       var r = Random();
       return String.fromCharCodes(
