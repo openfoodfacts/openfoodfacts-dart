@@ -339,10 +339,8 @@ Like that:
 
       const String BARCODE = '7340011364184';
       const String PRODUCT_NAME = 'Chili beans';
-      for (final option in PerSize.values) {
-        final String nutrimentDataPer = option.offTag;
-
-        PerSize perSize = option;
+      for (final PerSize perSize in PerSize.values) {
+        final String nutrimentDataPer = perSize.offTag;
         for (int i = 0; i <= 2; i++) {
           final Nutriments nutriments = Nutriments.empty()
             ..setValue(Nutrient.energyKJ, perSize, ENERGY + i)
