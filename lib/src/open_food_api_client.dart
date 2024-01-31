@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:openfoodfacts/openfoodfacts.dart';
+import 'model/per_size.dart';
 
 import 'interface/json_object.dart';
 import 'model/login_status.dart';
