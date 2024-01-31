@@ -132,9 +132,11 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
     final Map&lt;String, String&gt; rawNutrients = product.nutriments!.toData();
     for (final MapEntry&lt;String, String&gt; entry in rawNutrients.entries) {
       String key = &#39;nutriment_${entry.key}&#39;;
-      final int pos = key.indexOf(&#39;_100g&#39;);
-      if (pos != -1) {
-        key = key.substring(0, pos);
+      for (final option in PerSize.values) {
+        final int pos = key.indexOf(&#39;_${option.offTag}&#39;);
+        if (pos != -1) {
+          key = key.substring(0, pos);
+        }
       }
       parameterMap[key] = entry.value;
     }
