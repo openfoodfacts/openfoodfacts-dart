@@ -395,14 +395,14 @@ Like that:
           }
           for (final Nutrient nutrient in nutrients) {
             final double? actual =
-                searchedNutriments.getValue(nutrient, option);
+                searchedNutriments.getValue(nutrient, perSize);
             expect(
               actual,
               isNotNull,
               reason: 'should not be null for $nutrient',
             );
             expect(
-              searchedNutriments.getValue(nutrient, perSize),
+              actual,
               nutriments.getValue(nutrient, perSize),
               reason: 'should be the same values for $nutrient',
             );
