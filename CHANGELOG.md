@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.3.3](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.3.2...v3.3.3) (2024-01-31)
+
+
+### Bug Fixes
+
+* nutriment persize serving ([#873](https://github.com/openfoodfacts/openfoodfacts-dart/issues/873)) ([31f9fab](https://github.com/openfoodfacts/openfoodfacts-dart/commit/31f9fab611e58e130739a81a28b7536aff863679))
+* added `added-sugars` nutrient ([#862](https://github.com/openfoodfacts/openfoodfacts-dart/issues/862))
+
 ## [3.3.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.3.1...v3.3.2) (2024-01-12)
 
 
