@@ -5,10 +5,9 @@ import 'package:test/test.dart';
 
 import 'test_constants.dart';
 
-class _SuggestionManagerTest extends SuggestionManager {
+class _SuggestionManagerTest extends AutocompleteManager {
   _SuggestionManagerTest(
-    super.taxonomyType, {
-    required super.language,
+    super.autocompleter, {
     required this.milliSecondWaits,
   });
 
@@ -25,7 +24,7 @@ class _SuggestionManagerTest extends SuggestionManager {
 
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
+  OpenFoodAPIConfiguration.globalUser = TestConstants.TEST_USER;
 
   const TagType tagType = TagType.COUNTRIES;
   const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
@@ -36,17 +35,12 @@ void main() {
   const String input2 = 'fr';
 
   Future<List<String>> getSlowSuggestions(
-    final TagType tagType, {
+    final Autocompleter autoCompleter, {
     required final int milliseconds,
-    required final OpenFoodFactsLanguage language,
     required final String input,
   }) async {
     await Future.delayed(Duration(milliseconds: milliseconds));
-    return OpenFoodAPIClient.getSuggestions(
-      tagType,
-      language: language,
-      input: input,
-    );
+    return autoCompleter.getSuggestions(input);
   }
 
   /// Returns the result of the longest future.
@@ -70,19 +64,15 @@ void main() {
   }
 
   group('$OpenFoodAPIClient suggestion manager', () {
-    test('countries', () async {
-      final SuggestionManager manager = SuggestionManager(
-        tagType,
-        language: language,
-      );
+    Future<void> testToto(final Autocompleter autocompleter) async {
+      final AutocompleteManager manager = AutocompleteManager(autocompleter);
       final List<String> countries1 = await manager.getSuggestions(input1);
       final List<String> countries2 = await manager.getSuggestions(input2);
       expect(countries1, isNot(equals(countries2)));
 
       // Here we have the second call that takes longer (at least starts later).
-      final SuggestionManager fastThenSlowManager = _SuggestionManagerTest(
-        tagType,
-        language: language,
+      final AutocompleteManager fastThenSlowManager = _SuggestionManagerTest(
+        autocompleter,
         // the second will start later
         milliSecondWaits: <int>[0, millisecondsWait],
       );
@@ -95,9 +85,8 @@ void main() {
       expect(countriesFastThenSlow, countries2);
 
       // Here we have the first call that takes longer (at least starts later).
-      final SuggestionManager slowThenFastManager = _SuggestionManagerTest(
-        tagType,
-        language: language,
+      final AutocompleteManager slowThenFastManager = _SuggestionManagerTest(
+        autocompleter,
         // the first will start later
         milliSecondWaits: <int>[millisecondsWait, 0],
       );
@@ -114,19 +103,36 @@ void main() {
       final List<String> countriesNormal = await last(
         [
           getSlowSuggestions(
-            tagType,
-            language: language,
+            autocompleter,
             input: input1,
             milliseconds: millisecondsWait,
           ),
-          OpenFoodAPIClient.getSuggestions(
-            tagType,
-            language: language,
-            input: input2,
-          ),
+          autocompleter.getSuggestions(input2),
         ],
       );
       expect(countriesNormal, countries1);
-    });
+    }
+
+    test(
+      'countries as TagType',
+      () async => testToto(
+        TagTypeAutocompleter(
+          tagType: tagType,
+          language: language,
+          uriHelper: uriHelperFoodTest,
+        ),
+      ),
+    );
+
+    test(
+      'countries as TaxonomyName',
+      () async => testToto(
+        TaxonomyNameAutocompleter(
+          taxonomyNames: <TaxonomyName>[TaxonomyName.country],
+          language: language,
+          uriHelper: uriHelperFoodTest,
+        ),
+      ),
+    );
   });
 }
