@@ -6,8 +6,6 @@ import 'test_constants.dart';
 /// Tests around the Elastic Search API.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  // TODO(monsieurtanuki): test in PROD when available.
-  const UriProductHelper uriHelper = uriHelperFoodTest;
 
   group(
     '$OpenFoodSearchAPIClient autocomplete',
@@ -31,7 +29,6 @@ void main() {
             query: 'pizza',
             taxonomyNames: <TaxonomyName>[taxonomyName],
             language: language,
-            uriHelper: uriHelper,
             size: maxSize,
           );
           basicTest(result);
@@ -52,7 +49,6 @@ void main() {
             query: 'pifsehjfsjkvnskjvbehjszza',
             taxonomyNames: <TaxonomyName>[taxonomyName],
             language: language,
-            uriHelper: uriHelper,
             size: maxSize,
           );
           basicTest(result);
@@ -77,7 +73,6 @@ void main() {
               query: inputValue,
               taxonomyNames: <TaxonomyName>[taxonomyName],
               language: language,
-              uriHelper: uriHelper,
               size: maxSize,
               // supposed to fix the typo (if relevant)
               fuzziness: inputs[inputValue]!,
@@ -108,7 +103,6 @@ void main() {
           query: query,
           taxonomyNames: <TaxonomyName>[taxonomyName],
           language: language,
-          uriHelper: uriHelper,
           size: maxSize,
           fuzziness: Fuzziness.none,
         );
@@ -130,14 +124,15 @@ void main() {
         () async {
           await simpleTest(TaxonomyName.category, 'sky', 'Skyr nature');
           await simpleTest(TaxonomyName.label, 'fsc', 'FSC Mix');
-          await simpleTest(TaxonomyName.additive, 'E10', 'E104');
+          await simpleTest(TaxonomyName.additive, 'E100', 'E1001');
           await simpleTest(TaxonomyName.allergen, 'mouta', 'moutarde');
           await simpleTest(TaxonomyName.aminoAcid, 'L-argin', 'L-arginine');
           await simpleTest(TaxonomyName.country, 'fra', 'France');
           await simpleTest(
-              TaxonomyName.dataQuality,
-              'Valeur nutritionnelle 3800',
-              'Valeur nutritionnelle supérieure à 3800 - Energie');
+            TaxonomyName.dataQuality,
+            'Valeur nutritionnelle',
+            'Valeur nutritionnelle supérieure à 3800 - Energie',
+          );
           await simpleTest(
               TaxonomyName.foodGroup, 'fromage per', 'Fromage persillé');
           await simpleTest(TaxonomyName.improvement, 'Nutrition - Hau',
@@ -164,9 +159,8 @@ void main() {
           await simpleTest(
               TaxonomyName.packagingRecycling, 'compost', 'Compostable');
           await simpleTest(TaxonomyName.packagingShape, 'boute', 'Bouteille');
-          await simpleTest(
-              TaxonomyName.periodsAfterOpening, '2 jours', '21 jours');
-          await simpleTest(TaxonomyName.preservation, 'fra', 'Frais');
+          await simpleTest(TaxonomyName.periodsAfterOpening, '21', '21 mois');
+          await simpleTest(TaxonomyName.preservation, 'cons', 'Conserve');
           await simpleTest(TaxonomyName.state, 'emball', 'Emballage complété');
           await simpleTest(TaxonomyName.vitamin, 'b', 'b12');
           await simpleTest(TaxonomyName.brand, 'carref', 'Carrefour',
