@@ -62,53 +62,30 @@
 
     <section class="multi-line-signature">
       
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.2.6/dart-core/override-constant.html">override</a></li>
+    </ol>
+  </div>
 
 <span class="returntype"><a href="https://api.dart.dev/stable/3.2.6/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.2.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.2.6/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span>
 <span class="name ">getSuggestions</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getSuggestions-param-input"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/String-class.html">String</a></span> <span class="parameter-name">input</span></span></li>
 </ol>)
 
-      
+      <div class="features"><span class="feature">override</span></div>
 
     </section>
     
-<section class="desc markdown">
-  <p>Returns suggestions about the latest input.</p>
-</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;String&gt;&gt; getSuggestions(
+  <pre class="language-dart"><code class="language-dart">@override
+Future&lt;List&lt;String&gt;&gt; getSuggestions(
   final String input,
-) async {
-  _inputs.add(input);
-  final List&lt;String&gt;? cached = _cache[input];
-  if (cached != null) {
-    return cached;
-  }
-  await waitForTestPurpose();
-  _cache[input] = await OpenFoodAPIClient.getSuggestions(
-    taxonomyType,
-    input: input,
-    language: language,
-    country: country,
-    categories: categories,
-    shape: shape,
-    limit: limit,
-    uriHelper: uriHelper,
-    user: user,
-  );
-  &#47;&#47; meanwhile there might have been some calls to this method, adding inputs.
-  for (final String latestInput in _inputs.reversed) {
-    final List&lt;String&gt;? cached = _cache[latestInput];
-    if (cached != null) {
-      return cached;
-    }
-  }
-  &#47;&#47; not supposed to happen, as we should have downloaded for &quot;input&quot;.
-  return &lt;String&gt;[];
-}</code></pre>
+) async =&gt;
+    manager.getSuggestions(input);</code></pre>
 </section>
 
 
