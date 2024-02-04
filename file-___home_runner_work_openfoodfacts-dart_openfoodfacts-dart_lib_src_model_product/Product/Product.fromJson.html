@@ -91,6 +91,11 @@
         result.genericNameInLanguages ??= {};
         result.genericNameInLanguages![language] = label;
         break;
+      case ProductField.ABBREVIATED_NAME_IN_LANGUAGES:
+      case ProductField.ABBREVIATED_NAME_ALL_LANGUAGES:
+        result.abbreviatedNameInLanguages ??= {};
+        result.abbreviatedNameInLanguages![language] = label;
+        break;
       case ProductField.INGREDIENTS_TEXT_IN_LANGUAGES:
       case ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES:
         result.ingredientsTextInLanguages ??= {};
@@ -173,6 +178,7 @@
     switch (productField) {
       case ProductField.NAME_IN_LANGUAGES:
       case ProductField.GENERIC_NAME_IN_LANGUAGES:
+      case ProductField.ABBREVIATED_NAME_IN_LANGUAGES:
       case ProductField.INGREDIENTS_TEXT_IN_LANGUAGES:
       case ProductField.PACKAGING_TEXT_IN_LANGUAGES:
         setLanguageString(productField, language, json[key]);
