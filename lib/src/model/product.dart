@@ -543,6 +543,13 @@ class Product extends JsonObject {
   @JsonKey(name: 'link', includeIfNull: false)
   String? website;
 
+  /// Is the product obsolete?
+  @JsonKey(
+    toJson: JsonHelper.checkboxToJSON,
+    fromJson: JsonHelper.checkboxFromJSON,
+  )
+  bool? obsolete;
+
   Product(
       {this.barcode,
       this.productName,
