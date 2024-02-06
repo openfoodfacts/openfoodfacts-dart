@@ -1042,6 +1042,32 @@ void main() {
     expect(result.product!.website, isNotEmpty);
 
     configuration = ProductQueryConfiguration(
+      '8076809517881',
+      fields: [ProductField.OBSOLETE],
+      version: ProductQueryVersion.v3,
+    );
+    result = await OpenFoodAPIClient.getProductV3(
+      configuration,
+    );
+    expect(result.status, ProductResultV3.statusSuccess);
+    expect(result.product, isNotNull);
+    expect(result.product!.obsolete, isNotNull);
+    expect(result.product!.obsolete, isTrue);
+
+    configuration = ProductQueryConfiguration(
+      '7300400481588',
+      fields: [ProductField.OBSOLETE],
+      version: ProductQueryVersion.v3,
+    );
+    result = await OpenFoodAPIClient.getProductV3(
+      configuration,
+    );
+    expect(result.status, ProductResultV3.statusSuccess);
+    expect(result.product, isNotNull);
+    expect(result.product!.obsolete, isNotNull);
+    expect(result.product!.obsolete, isFalse);
+
+    configuration = ProductQueryConfiguration(
       '3033710065066',
       fields: [
         ProductField.LAST_CHECKED,

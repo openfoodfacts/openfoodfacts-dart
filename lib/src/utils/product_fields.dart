@@ -98,6 +98,7 @@ enum ProductField implements OffTagged {
   ORIGINS(offTag: 'origins'),
   NOVA_GROUP(offTag: 'nova_group'),
   WEBSITE(offTag: 'link'),
+  OBSOLETE(offTag: 'obsolete'),
 
   /// All data as RAW from the server. E.g. packagings are only Strings there.
   RAW(offTag: 'raw'),
