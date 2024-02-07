@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.4.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.3.3...v3.4.0) (2024-02-06)
+
+
+### Features
+
+* 773 - new method "getProductNameBrandQuantity" ([#844](https://github.com/openfoodfacts/openfoodfacts-dart/issues/844)) ([2167bf9](https://github.com/openfoodfacts/openfoodfacts-dart/commit/2167bf9087c3583f5aaa35116705ff09647b5573))
+* 878 - added the "obsolete" product field ([#879](https://github.com/openfoodfacts/openfoodfacts-dart/issues/879)) ([4cc49cd](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4cc49cd67cb6b7f98291f86888deee85def9a60e))
+* autocomplete manager for both TagTypes and TaxonomyNames ([#851](https://github.com/openfoodfacts/openfoodfacts-dart/issues/851)) ([6bb8deb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/6bb8deb543adc45031e2de749060267174c48b7a))
+
+
+### Bug Fixes
+
+* unit tests about autocomplete ([#868](https://github.com/openfoodfacts/openfoodfacts-dart/issues/868)) ([7a1f4e6](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7a1f4e639573e182e2a1dff5098e5741d7fc057c))
+
 ## [3.3.3](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.3.2...v3.3.3) (2024-01-31)
 
 

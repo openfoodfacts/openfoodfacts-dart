@@ -103,6 +103,9 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
     )
       ..genericNameInLanguages =
           LanguageHelper.fromJsonStringMap(json['generic_name_in_languages'])
+      ..abbreviatedName = json['abbreviated_product_name'] as String?
+      ..abbreviatedNameInLanguages = LanguageHelper.fromJsonStringMap(
+          json['abbreviated_product_name_in_languages'])
       ..brandsTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
           json['brands_tags_in_languages'])
       ..imagesFreshnessInLanguages =
@@ -161,7 +164,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       ..manufacturingPlaces = json['manufacturing_places'] as String?
       ..origins = json['origins'] as String?
       ..novaGroup = json['nova_group'] as int?
-      ..website = json['link'] as String?;
+      ..website = json['link'] as String?
+      ..obsolete = JsonHelper.checkboxFromJSON(json['obsolete']);
 
 Map<String, dynamic> _$ProductToJson(Product instance) {
   final val = <String, dynamic>{
@@ -180,6 +184,9 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('generic_name', instance.genericName);
   writeNotNull('generic_name_in_languages',
       LanguageHelper.toJsonStringMap(instance.genericNameInLanguages));
+  writeNotNull('abbreviated_product_name', instance.abbreviatedName);
+  writeNotNull('abbreviated_product_name_in_languages',
+      LanguageHelper.toJsonStringMap(instance.abbreviatedNameInLanguages));
   writeNotNull('brands', instance.brands);
   writeNotNull('brands_tags', instance.brandsTags);
   writeNotNull('brands_tags_in_languages',
@@ -288,6 +295,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('origins', instance.origins);
   writeNotNull('nova_group', instance.novaGroup);
   writeNotNull('link', instance.website);
+  val['obsolete'] = JsonHelper.checkboxToJSON(instance.obsolete);
   val['no_nutrition_data'] =
       JsonHelper.checkboxToJSON(instance.noNutritionData);
   val['nutriments'] = Nutriments.toJsonHelper(instance.nutriments);
