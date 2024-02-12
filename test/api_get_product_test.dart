@@ -148,8 +148,7 @@ void main() {
           'Invertzuckersirup',
           'natürliches Aroma',
           'Schokolade Mürbegebäck',
-          'Pflanzenfett',
-          'Palm',
+          'PflanzenPalmfett',
           'Schokoladenstückchen',
           'Kakaomasse',
           'Kakaobutter',
@@ -854,22 +853,21 @@ void main() {
     test(
         'vegan, vegetarian and palm oil ingredients of Danish Butter Cookies & Chocolate Chip Cookies',
         () async {
-      String barcode = BARCODE_DANISH_BUTTER_COOKIES;
-      ProductQueryConfiguration configurations = ProductQueryConfiguration(
-        barcode,
-        language: OpenFoodFactsLanguage.GERMAN,
-        fields: [ProductField.ALL],
-        version: ProductQueryVersion.v3,
-      );
-      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
-        configurations,
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+        ProductQueryConfiguration(
+          '3017620429484',
+          language: OpenFoodFactsLanguage.FRENCH,
+          fields: [ProductField.ALL],
+          version: ProductQueryVersion.v3,
+        ),
       );
 
-      final vegetableFat = result.product!.ingredients!
-          .firstWhere((ingredient) => ingredient.text == 'Pflanzenfett');
-      expect(vegetableFat.vegan, IngredientSpecialPropertyStatus.POSITIVE);
-      expect(vegetableFat.vegetarian, IngredientSpecialPropertyStatus.POSITIVE);
-      expect(vegetableFat.fromPalmOil, IngredientSpecialPropertyStatus.MAYBE);
+      final Ingredient ingredient = result.product!.ingredients!.firstWhere(
+        (ingredient) => ingredient.text == 'huile de palme',
+      );
+      expect(ingredient.vegan, IngredientSpecialPropertyStatus.POSITIVE);
+      expect(ingredient.vegetarian, IngredientSpecialPropertyStatus.POSITIVE);
+      expect(ingredient.fromPalmOil, IngredientSpecialPropertyStatus.POSITIVE);
     });
 
     test('get knowledge panels', () async {
