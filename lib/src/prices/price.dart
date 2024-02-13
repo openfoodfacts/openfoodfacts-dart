@@ -40,15 +40,15 @@ class Price extends JsonObject {
   /// If the price is about a barcode-less product, it must be the price per
   /// kilogram or per liter.
   @JsonKey()
-  num? price;
+  late num price;
 
   /// Currency of the price.
   @JsonKey()
-  Currency? currency;
+  late Currency currency;
 
   /// ID of the location in OpenStreetMap: the store where the product was bought.
   @JsonKey(name: 'location_osm_id')
-  int? locationOSMId;
+  late int locationOSMId;
 
   /// Type of the OpenStreetMap location object.
   ///
@@ -56,11 +56,11 @@ class Price extends JsonObject {
   /// It is necessary to be able to fetch the correct information about the
   /// store using the ID.
   @JsonKey(name: 'location_osm_type')
-  LocationOSMType? locationOSMType;
+  late LocationOSMType locationOSMType;
 
   /// Date when the product was bought.
   @JsonKey(fromJson: JsonHelper.stringTimestampToDate)
-  DateTime? date;
+  late DateTime date;
 
   /// ID of the proof, if any.
   ///
@@ -77,7 +77,7 @@ class Price extends JsonObject {
   int? locationId;
 
   @JsonKey(fromJson: JsonHelper.stringTimestampToDate)
-  DateTime? created;
+  late DateTime created;
 
   Price();
 
