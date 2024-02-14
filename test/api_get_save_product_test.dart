@@ -50,9 +50,7 @@ void main() {
       );
       return true;
     } catch (e) {
-      const String badGatewayError =
-          'Exception: JSON expected, html found: <head><title>502 Bad Gateway</title></head>';
-      if (e.toString().contains(badGatewayError)) {
+      if (e.toString().contains(TestConstants.badGatewayError)) {
         return false;
       }
       rethrow;
