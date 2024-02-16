@@ -282,7 +282,7 @@ class OpenPricesAPIClient {
   }
 
   /// Deletes a price.
-  ///
+  /// A user can delete only owned prices.
   /// Returns true if successful.
   static Future<MaybeError<bool>> deletePrice({
     required final int priceId,
