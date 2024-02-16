@@ -354,7 +354,7 @@ class OpenPricesAPIClient {
   }
 
   /// Deletes a proof.
-  ///
+  /// A user can delete only owned proofs. Can delete only proofs that are not associated with prices. A moderator can delete not owned proofs.
   /// Returns true if successful.
   static Future<MaybeError<bool>> deleteProof({
     required final int proofId,
