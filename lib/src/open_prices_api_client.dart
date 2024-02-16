@@ -157,6 +157,13 @@ class OpenPricesAPIClient {
   }
 
   /// Authentication: provide username/password and get a bearer token in return.
+  ///
+  /// [username]: Open Food Facts user_id (not email)
+  /// [password]: user password (clear text, but HTTPS encrypted)
+  /// A token is returned. If the set_cookie parameter is set to 1, the token is also set as a cookie named "session" in the response.
+  /// To authenticate, you can either:
+  /// - use the Authorization header with the Bearer scheme, e.g.: "Authorization: bearer token"
+  /// - use the session cookie, e.g.: "Cookie: session=token"
   static Future<MaybeError<String>> getAuthenticationToken({
     required final String username,
     required final String password,
