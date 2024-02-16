@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 
@@ -56,13 +57,14 @@ class HttpHelper {
   }
 
   /// Send a http get request to the specified uri.
-  /// The data of the request (if any) has to be provided as parameter within the uri.
-  /// The result of the request will be returned as string.
-  /// By default the query will hit the PROD DB
+  ///
+  /// The data of the request (if any) has to be provided as parameter within
+  /// the uri.
   Future<http.Response> doGetRequest(
     Uri uri, {
     User? user,
     required final UriHelper uriHelper,
+    final String? bearerToken,
   }) async {
     http.Response response = await http.get(
       uri,
@@ -70,6 +72,7 @@ class HttpHelper {
         user: user,
         uriHelper: uriHelper,
         addCredentialsToHeader: false,
+        bearerToken: bearerToken,
       ),
     );
 
@@ -77,6 +80,7 @@ class HttpHelper {
   }
 
   /// Send a http post request to the specified uri.
+  ///
   /// The data / body of the request has to be provided as map. (key, value)
   /// The result of the request will be returned as string.
   ///
@@ -107,6 +111,36 @@ class HttpHelper {
       body: addUserAgentParameters(body),
     );
   }
+
+  /// Sends an http DELETE request to the specified uri.
+  Future<http.Response> doDeleteRequest(
+    Uri uri, {
+    User? user,
+    required final UriHelper uriHelper,
+    final String? bearerToken,
+  }) async =>
+      http.delete(
+        uri,
+        headers: _buildHeaders(
+          user: user,
+          uriHelper: uriHelper,
+          addCredentialsToHeader: false,
+          bearerToken: bearerToken,
+        ),
+      );
+
+  /// Sends an http POST request to the specified uri with a JSON body.
+  Future<http.Response> doPostJsonRequest(
+    final Uri uri,
+    final String jsonBody, {
+    required final UriHelper uriHelper,
+    required final String bearerToken,
+  }) async =>
+      http.post(
+        uri,
+        headers: _getBearerHeader(bearerToken),
+        body: jsonBody,
+      );
 
   static const String userInfoForTest = 'off:off';
 
@@ -173,7 +207,7 @@ class HttpHelper {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      String responseBody = await _extractResponseAsString(response);
+      String responseBody = await extractResponseAsString(response);
       try {
         return Status.fromJson(jsonDecode(responseBody));
       } catch (e) {
@@ -188,8 +222,7 @@ class HttpHelper {
     }
   }
 
-  Future<String> _extractResponseAsString(
-      http.StreamedResponse response) async {
+  Future<String> extractResponseAsString(http.StreamedResponse response) async {
     final Completer<String> completer = Completer<String>();
     final StringBuffer contents = StringBuffer();
     response.stream.transform(utf8.decoder).listen((data) {
@@ -201,11 +234,27 @@ class HttpHelper {
   /// Returns the request headers.
   ///
   /// Note: [addCredentialsToHeader] and [isTestModeActive] exclude each other.
+  Map<String, String>? _getBearerHeader(
+    final String bearerToken,
+  ) =>
+      <String, String>{
+        'Authorization': 'bearer $bearerToken',
+        'Content-Type': 'application/json',
+      };
+
+  /// Returns the request headers.
+  ///
+  /// Note: [addCredentialsToHeader] and [isTestModeActive] exclude each other.
   Map<String, String>? _buildHeaders({
     User? user,
     required final UriHelper uriHelper,
     required bool addCredentialsToHeader,
+    final String? bearerToken,
   }) {
+    if (bearerToken != null) {
+      return _getBearerHeader(bearerToken);
+    }
+
     Map<String, String>? headers = {};
 
     if (OpenFoodAPIConfiguration.userAgent == null) {
@@ -296,5 +345,24 @@ class HttpHelper {
       return input;
     }
     return base64Encode(utf8.encode(input));
+  }
+
+  /// Returns the probable media type associated to that filename.
+  MediaType? imagineMediaType(final String filename) {
+    String ext = extension(filename);
+    if (ext.isEmpty) {
+      return null;
+    }
+    ext = ext.substring(1).toLowerCase();
+    switch (ext) {
+      case 'jpg':
+      case 'jpeg':
+        return MediaType('image', 'jpeg');
+      case 'png':
+        return MediaType('image', 'png');
+      case 'webp':
+        return MediaType('image', 'webp');
+    }
+    return null;
   }
 }

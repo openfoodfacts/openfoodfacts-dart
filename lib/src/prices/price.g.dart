@@ -8,34 +8,54 @@ part of 'price.dart';
 
 Price _$PriceFromJson(Map<String, dynamic> json) => Price()
   ..productCode = json['product_code'] as String?
+  ..productName = json['product_name'] as String?
   ..categoryTag = json['category_tag'] as String?
   ..labelsTags =
       (json['labels_tags'] as List<dynamic>?)?.map((e) => e as String).toList()
+  ..originsTags =
+      (json['origins_tags'] as List<dynamic>?)?.map((e) => e as String).toList()
   ..price = json['price'] as num
+  ..priceIsDiscounted = json['price_is_discounted'] as bool?
+  ..priceWithoutDiscount = json['price_without_discount'] as num?
+  ..pricePer = $enumDecodeNullable(_$PricePerEnumMap, json['price_per'])
   ..currency = $enumDecode(_$CurrencyEnumMap, json['currency'])
   ..locationOSMId = json['location_osm_id'] as int
   ..locationOSMType =
       $enumDecode(_$LocationOSMTypeEnumMap, json['location_osm_type'])
   ..date = JsonHelper.stringTimestampToDate(json['date'])
   ..proofId = json['proof_id'] as int?
+  ..id = json['id'] as int
   ..productId = json['product_id'] as int?
   ..locationId = json['location_id'] as int?
+  ..owner = json['owner'] as String
   ..created = JsonHelper.stringTimestampToDate(json['created']);
 
 Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
       'product_code': instance.productCode,
+      'product_name': instance.productName,
       'category_tag': instance.categoryTag,
       'labels_tags': instance.labelsTags,
+      'origins_tags': instance.originsTags,
       'price': instance.price,
+      'price_is_discounted': instance.priceIsDiscounted,
+      'price_without_discount': instance.priceWithoutDiscount,
+      'price_per': _$PricePerEnumMap[instance.pricePer],
       'currency': _$CurrencyEnumMap[instance.currency]!,
       'location_osm_id': instance.locationOSMId,
       'location_osm_type': _$LocationOSMTypeEnumMap[instance.locationOSMType]!,
       'date': instance.date.toIso8601String(),
       'proof_id': instance.proofId,
+      'id': instance.id,
       'product_id': instance.productId,
       'location_id': instance.locationId,
+      'owner': instance.owner,
       'created': instance.created.toIso8601String(),
     };
+
+const _$PricePerEnumMap = {
+  PricePer.unit: 'UNIT',
+  PricePer.kilogram: 'KILOGRAM',
+};
 
 const _$CurrencyEnumMap = {
   Currency.ADP: 'ADP',
