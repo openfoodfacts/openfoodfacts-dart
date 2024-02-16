@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">openfoodfacts</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element-library.html">knowledge_panel_element</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element-library.html">src&#47;model&#47;knowledge_panel_element.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelTableColumn-class.html">KnowledgePanelTableColumn</a></li>
     <li class="self-crumb">KnowledgePanelTableColumn const constructor</li>
   </ol>
@@ -62,12 +62,12 @@
 
     <section class="multi-line-signature">
       const
-      <span class="name ">KnowledgePanelTableColumn</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-text">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/String-class.html">String</a></span> <span class="parameter-name">text</span>, </span></li>
+      <span class="name ">KnowledgePanelTableColumn</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-text">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">text</span>, </span></li>
 <li><span class="parameter" id="-param-type"><span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_knowledge_panel_element/KnowledgePanelColumnType.html">KnowledgePanelColumnType</a>?</span> <span class="parameter-name">type</span>, </span></li>
-<li><span class="parameter" id="-param-textForSmallScreens"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">textForSmallScreens</span>, </span></li>
-<li><span class="parameter" id="-param-showByDefault"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">showByDefault</span>, </span></li>
-<li><span class="parameter" id="-param-columnGroupId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">columnGroupId</span>, </span></li>
-<li><span class="parameter" id="-param-style"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">style</span>}</span></li>
+<li><span class="parameter" id="-param-textForSmallScreens"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">textForSmallScreens</span>, </span></li>
+<li><span class="parameter" id="-param-showByDefault"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">showByDefault</span>, </span></li>
+<li><span class="parameter" id="-param-columnGroupId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">columnGroupId</span>, </span></li>
+<li><span class="parameter" id="-param-style"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">style</span>}</span></li>
 </ol>)
     </section>
 
@@ -77,7 +77,14 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">const KnowledgePanelTableColumn</code></pre>
+  <pre class="language-dart"><code class="language-dart">const KnowledgePanelTableColumn({
+  required this.text,
+  required this.type,
+  this.textForSmallScreens,
+  this.showByDefault,
+  this.columnGroupId,
+  this.style,
+});</code></pre>
 </section>
 
 

@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">openfoodfacts</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_search_taxonomy_name_autocompleter/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_search_taxonomy_name_autocompleter-library.html">taxonomy_name_autocompleter</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_search_taxonomy_name_autocompleter/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_search_taxonomy_name_autocompleter-library.html">src&#47;search&#47;taxonomy_name_autocompleter.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_search_taxonomy_name_autocompleter/TaxonomyNameAutocompleter-class.html">TaxonomyNameAutocompleter</a></li>
     <li class="self-crumb">TaxonomyNameAutocompleter const constructor</li>
   </ol>
@@ -62,9 +62,9 @@
 
     <section class="multi-line-signature">
       const
-      <span class="name ">TaxonomyNameAutocompleter</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-taxonomyNames">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_search_taxonomy_name/TaxonomyName.html">TaxonomyName</a></span>&gt;</span></span> <span class="parameter-name">taxonomyNames</span>, </span></li>
+      <span class="name ">TaxonomyNameAutocompleter</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-taxonomyNames">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_search_taxonomy_name/TaxonomyName.html">TaxonomyName</a></span>&gt;</span></span> <span class="parameter-name">taxonomyNames</span>, </span></li>
 <li><span class="parameter" id="-param-language"><span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span>, </span></li>
-<li><span class="parameter" id="-param-limit"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/int-class.html">int</a></span> <span class="parameter-name">limit</span> = <span class="default-value">25</span>, </span></li>
+<li><span class="parameter" id="-param-limit"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/int-class.html">int</a></span> <span class="parameter-name">limit</span> = <span class="default-value">25</span>, </span></li>
 <li><span class="parameter" id="-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>, </span></li>
 <li><span class="parameter" id="-param-user"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span></li>
 <li><span class="parameter" id="-param-fuzziness"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_search_fuzziness/Fuzziness.html">Fuzziness</a></span> <span class="parameter-name">fuzziness</span> = <span class="default-value">Fuzziness.none</span>}</span></li>
@@ -77,7 +77,14 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">const TaxonomyNameAutocompleter</code></pre>
+  <pre class="language-dart"><code class="language-dart">const TaxonomyNameAutocompleter({
+  required this.taxonomyNames,
+  required this.language,
+  this.limit = 25,
+  this.uriHelper = uriHelperFoodProd,
+  this.user,
+  this.fuzziness = Fuzziness.none,
+});</code></pre>
 </section>
 
 

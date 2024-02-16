@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">openfoodfacts</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper-library.html">http_helper</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper-library.html">src&#47;utils&#47;http_helper.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html">HttpHelper</a></li>
     <li class="self-crumb">doGetRequest method</li>
   </ol>
@@ -63,10 +63,11 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.2.6/dart-async/Future-class.html">Future</a></span>
-<span class="name ">doGetRequest</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="doGetRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.3.0/dart-async/Future-class.html">Future</a></span>
+<span class="name ">doGetRequest</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="doGetRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span></li>
 <li><span class="parameter" id="doGetRequest-param-user">{<span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span></li>
-<li><span class="parameter" id="doGetRequest-param-uriHelper"><span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriHelper-class.html">UriHelper</a></span> <span class="parameter-name">uriHelper</span>}</span></li>
+<li><span class="parameter" id="doGetRequest-param-uriHelper"><span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriHelper-class.html">UriHelper</a></span> <span class="parameter-name">uriHelper</span>, </span></li>
+<li><span class="parameter" id="doGetRequest-param-bearerToken"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">bearerToken</span>}</span></li>
 </ol>)
 
       
@@ -74,10 +75,9 @@
     </section>
     
 <section class="desc markdown">
-  <p>Send a http get request to the specified uri.
-The data of the request (if any) has to be provided as parameter within the uri.
-The result of the request will be returned as string.
-By default the query will hit the PROD DB</p>
+  <p>Send a http get request to the specified uri.</p>
+<p>The data of the request (if any) has to be provided as parameter within
+the uri.</p>
 </section>
 
 
@@ -88,6 +88,7 @@ By default the query will hit the PROD DB</p>
   Uri uri, {
   User? user,
   required final UriHelper uriHelper,
+  final String? bearerToken,
 }) async {
   http.Response response = await http.get(
     uri,
@@ -95,6 +96,7 @@ By default the query will hit the PROD DB</p>
       user: user,
       uriHelper: uriHelper,
       addCredentialsToHeader: false,
+      bearerToken: bearerToken,
     ),
   );
 

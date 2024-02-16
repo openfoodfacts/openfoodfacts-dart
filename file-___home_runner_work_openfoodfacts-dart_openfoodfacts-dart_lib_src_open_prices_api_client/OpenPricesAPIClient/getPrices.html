@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">openfoodfacts</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_prices_api_client/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_prices_api_client-library.html">open_prices_api_client</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_prices_api_client/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_prices_api_client-library.html">src&#47;open_prices_api_client.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_prices_api_client/OpenPricesAPIClient-class.html">OpenPricesAPIClient</a></li>
     <li class="self-crumb">getPrices static method</li>
   </ol>
@@ -63,9 +63,20 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.2.6/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_prices_results/GetPricesResults-class.html">GetPricesResults</a></span>&gt;</span></span>
-<span class="name ">getPrices</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getPrices-param-pageSize">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">pageSize</span>, </span></li>
-<li><span class="parameter" id="getPrices-param-pageNumber"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">pageNumber</span>, </span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.3.0/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_prices_results/GetPricesResults-class.html">GetPricesResults</a></span>&gt;</span></span>
+<span class="name ">getPrices</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getPrices-param-productCode">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">productCode</span>, </span></li>
+<li><span class="parameter" id="getPrices-param-locationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">locationId</span>, </span></li>
+<li><span class="parameter" id="getPrices-param-owner"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">owner</span>, </span></li>
+<li><span class="parameter" id="getPrices-param-locationOSMId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">locationOSMId</span>, </span></li>
+<li><span class="parameter" id="getPrices-param-locationOSMType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_location_osm_type/LocationOSMType.html">LocationOSMType</a>?</span> <span class="parameter-name">locationOSMType</span>, </span></li>
+<li><span class="parameter" id="getPrices-param-currency"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_currency/Currency.html">Currency</a>?</span> <span class="parameter-name">currency</span>, </span></li>
+<li><span class="parameter" id="getPrices-param-date"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">date</span>, </span></li>
+<li><span class="parameter" id="getPrices-param-dateGt"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">dateGt</span>, </span></li>
+<li><span class="parameter" id="getPrices-param-dateGte"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">dateGte</span>, </span></li>
+<li><span class="parameter" id="getPrices-param-dateLt"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">dateLt</span>, </span></li>
+<li><span class="parameter" id="getPrices-param-dateLte"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">dateLte</span>, </span></li>
+<li><span class="parameter" id="getPrices-param-pageSize"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">pageSize</span>, </span></li>
+<li><span class="parameter" id="getPrices-param-pageNumber"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">pageNumber</span>, </span></li>
 <li><span class="parameter" id="getPrices-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>}</span></li>
 </ol>)
 
@@ -73,9 +84,6 @@
 
     </section>
     
-<section class="desc markdown">
-  <p>cf. <a href="https://prices.openfoodfacts.org/docs#/default/get_price_api_v1_prices_get">https://prices.openfoodfacts.org/docs#/default/get_price_api_v1_prices_get</a></p>
-</section>
 
 
     
@@ -83,6 +91,17 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static Future&lt;GetPricesResults&gt; getPrices({
   &#47;&#47; TODO(monsieurtanuki): add all parameters
+  final String? productCode,
+  final int? locationId,
+  final String? owner,
+  final int? locationOSMId,
+  final LocationOSMType? locationOSMType,
+  final Currency? currency,
+  final DateTime? date,
+  final DateTime? dateGt,
+  final DateTime? dateGte,
+  final DateTime? dateLt,
+  final DateTime? dateLte,
   final int? pageSize,
   final int? pageNumber,
   final UriProductHelper uriHelper = uriHelperFoodProd,
@@ -90,6 +109,18 @@
   final Uri uri = uriHelper.getUri(
     path: &#39;&#47;api&#47;v1&#47;prices&#39;,
     queryParameters: &lt;String, String&gt;{
+      if (productCode != null) &#39;product_code&#39;: productCode,
+      if (locationId != null) &#39;location_id&#39;: locationId.toString(),
+      if (owner != null) &#39;owner&#39;: owner,
+      if (locationOSMId != null) &#39;location_osm_id&#39;: locationOSMId.toString(),
+      if (locationOSMType != null)
+        &#39;location_osm_type&#39;: locationOSMType.offTag,
+      if (currency != null) &#39;currency&#39;: currency.name,
+      if (date != null) &#39;date&#39;: _formatDate(date),
+      if (dateGt != null) &#39;date__gt&#39;: _formatDate(dateGt),
+      if (dateGte != null) &#39;date__gte&#39;: _formatDate(dateGte),
+      if (dateLt != null) &#39;date__lt&#39;: _formatDate(dateLt),
+      if (dateLte != null) &#39;date__lte&#39;: _formatDate(dateLte),
       if (pageNumber != null) &#39;page&#39;: pageNumber.toString(),
       if (pageSize != null) &#39;size&#39;: pageSize.toString(),
     },

@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">openfoodfacts</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper-library.html">http_helper</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper-library.html">src&#47;utils&#47;http_helper.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/HttpHelper-class.html">HttpHelper</a></li>
     <li class="self-crumb">doPostRequest method</li>
   </ol>
@@ -63,13 +63,13 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.2.6/dart-async/Future-class.html">Future</a></span>
-<span class="name ">doPostRequest</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="doPostRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span></li>
-<li><span class="parameter" id="doPostRequest-param-body"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.2.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.2.6/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">body</span>, </span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.3.0/dart-async/Future-class.html">Future</a></span>
+<span class="name ">doPostRequest</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="doPostRequest-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">uri</span>, </span></li>
+<li><span class="parameter" id="doPostRequest-param-body"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.0/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.0/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">body</span>, </span></li>
 <li><span class="parameter" id="doPostRequest-param-user"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span></li>
 <li><span class="parameter" id="doPostRequest-param-uriHelper">{<span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriHelper-class.html">UriHelper</a></span> <span class="parameter-name">uriHelper</span>, </span></li>
-<li><span class="parameter" id="doPostRequest-param-addCredentialsToBody"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">addCredentialsToBody</span>, </span></li>
-<li><span class="parameter" id="doPostRequest-param-addCredentialsToHeader"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">addCredentialsToHeader</span> = <span class="default-value">false</span>}</span></li>
+<li><span class="parameter" id="doPostRequest-param-addCredentialsToBody"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">addCredentialsToBody</span>, </span></li>
+<li><span class="parameter" id="doPostRequest-param-addCredentialsToHeader"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">addCredentialsToHeader</span> = <span class="default-value">false</span>}</span></li>
 </ol>)
 
       
@@ -77,8 +77,8 @@
     </section>
     
 <section class="desc markdown">
-  <p>Send a http post request to the specified uri.
-The data / body of the request has to be provided as map. (key, value)
+  <p>Send a http post request to the specified uri.</p>
+<p>The data / body of the request has to be provided as map. (key, value)
 The result of the request will be returned as string.</p>
 <p><code>addCredentialsToBody</code> should be only use for Robotoff,
 See: <a href="https://github.com/openfoodfacts/openfoodfacts-dart/issues/553#issuecomment-1269810032">https://github.com/openfoodfacts/openfoodfacts-dart/issues/553#issuecomment-1269810032</a>

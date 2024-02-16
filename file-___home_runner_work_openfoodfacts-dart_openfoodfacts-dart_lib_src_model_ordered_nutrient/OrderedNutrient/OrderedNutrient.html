@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">openfoodfacts</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrient/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrient-library.html">ordered_nutrient</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrient/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrient-library.html">src&#47;model&#47;ordered_nutrient.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrient/OrderedNutrient-class.html">OrderedNutrient</a></li>
     <li class="self-crumb">OrderedNutrient constructor</li>
   </ol>
@@ -62,11 +62,11 @@
 
     <section class="multi-line-signature">
       
-      <span class="name ">OrderedNutrient</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-important">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">important</span>, </span></li>
-<li><span class="parameter" id="-param-id"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/String-class.html">String</a></span> <span class="parameter-name">id</span>, </span></li>
-<li><span class="parameter" id="-param-displayInEditForm"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">displayInEditForm</span>, </span></li>
-<li><span class="parameter" id="-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">name</span>, </span></li>
-<li><span class="parameter" id="-param-subNutrients"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.2.6/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrient/OrderedNutrient-class.html">OrderedNutrient</a></span>&gt;</span>?</span> <span class="parameter-name">subNutrients</span>}</span></li>
+      <span class="name ">OrderedNutrient</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-important">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">important</span>, </span></li>
+<li><span class="parameter" id="-param-id"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">id</span>, </span></li>
+<li><span class="parameter" id="-param-displayInEditForm"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">displayInEditForm</span>, </span></li>
+<li><span class="parameter" id="-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">name</span>, </span></li>
+<li><span class="parameter" id="-param-subNutrients"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrient/OrderedNutrient-class.html">OrderedNutrient</a></span>&gt;</span>?</span> <span class="parameter-name">subNutrients</span>}</span></li>
 </ol>)
     </section>
 
@@ -76,7 +76,13 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">OrderedNutrient</code></pre>
+  <pre class="language-dart"><code class="language-dart">OrderedNutrient({
+  required this.important,
+  required this.id,
+  required this.displayInEditForm,
+  this.name,
+  this.subNutrients,
+});</code></pre>
 </section>
 
 

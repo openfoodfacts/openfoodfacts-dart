@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">openfoodfacts</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_sign_up_status/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_sign_up_status-library.html">sign_up_status</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_sign_up_status/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_sign_up_status-library.html">src&#47;model&#47;sign_up_status.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_sign_up_status/SignUpStatus-class.html">SignUpStatus</a></li>
     <li class="self-crumb">SignUpStatus factory constructor</li>
   </ol>
@@ -72,7 +72,26 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">factory SignUpStatus</code></pre>
+  <pre class="language-dart"><code class="language-dart">factory SignUpStatus(Status status) {
+  if (status.body == null) {
+    return SignUpStatus._(
+      status: Status.serverErrorStatus,
+      statusErrors: {SignUpStatusError.UNKNOWN},
+      error: Status.serverErrorInEnglish,
+    );
+  } else if (status.body!.contains(&#39;loggedin&#39;)) {
+    return SignUpStatus._(
+      status: 201,
+    );
+  } else {
+    return SignUpStatus._(
+      status: 400,
+      statusErrors:
+          _findErrorsInMap(status.body) ?? {SignUpStatusError.UNKNOWN},
+      error: _extractErrorFromHTMLBody(status.body),
+    );
+  }
+}</code></pre>
 </section>
 
 

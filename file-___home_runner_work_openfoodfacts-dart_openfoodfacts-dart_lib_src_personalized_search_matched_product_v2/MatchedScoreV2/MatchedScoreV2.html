@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">openfoodfacts</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product_v2/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product_v2-library.html">matched_product_v2</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product_v2/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product_v2-library.html">src&#47;personalized_search&#47;matched_product_v2.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product_v2/MatchedScoreV2-class.html">MatchedScoreV2</a></li>
     <li class="self-crumb">MatchedScoreV2 constructor</li>
   </ol>
@@ -73,7 +73,99 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">MatchedScoreV2</code></pre>
+  <pre class="language-dart"><code class="language-dart">MatchedScoreV2(
+  final Product product,
+  final ProductPreferencesManager productPreferencesManager,
+) : barcode = product.barcode! {
+  _score = 0;
+  _debug = &#39;&#39;;
+
+  final List&lt;AttributeGroup&gt;? attributeGroups = product.attributeGroups;
+  if (attributeGroups == null) {
+    &#47;&#47; the product does not have the attribute_groups field
+    _status = MatchedProductStatusV2.UNKNOWN_MATCH;
+    _debug = &#39;no attribute_groups&#39;;
+    return;
+  }
+
+  int sumOfFactors = 0;
+  int sumOfFactorsForUnknownAttributes = 0;
+  bool mayNotMatch = false;
+  bool doesNotMatch = false;
+  bool isUnknown = false;
+
+  for (final AttributeGroup group in attributeGroups) {
+    if (group.attributes == null) {
+      continue;
+    }
+    for (final Attribute attribute in group.attributes!) {
+      final String attributeId = attribute.id!;
+      final double match = attribute.match ?? 0;
+      final String importanceId = productPreferencesManager
+          .getImportanceIdForAttributeId(attributeId);
+
+      if (importanceId == PreferenceImportance.ID_NOT_IMPORTANT) {
+        &#47;&#47; Ignore attribute
+        _debug += &#39;$attributeId $importanceId\n&#39;;
+        continue;
+      }
+
+      final int factor = _preferencesFactors[importanceId]!;
+      sumOfFactors += factor;
+
+      if (attribute.status == Attribute.STATUS_UNKNOWN) {
+        sumOfFactorsForUnknownAttributes += factor;
+        if (importanceId == PreferenceImportance.ID_MANDATORY) {
+          isUnknown = true;
+        }
+      } else {
+        _score += match * factor;
+        _debug += &#39;$attributeId $importanceId - match: $match\n&#39;;
+
+        if (importanceId == PreferenceImportance.ID_MANDATORY) {
+          if (match &lt;= 10) {
+            &#47;&#47; Mandatory attribute with a very bad score (e.g. contains an allergen) -&gt; status: does not match
+            doesNotMatch = true;
+          }
+          &#47;&#47; Mandatory attribute with a bad score (e.g. may contain traces of an allergen) -&gt; status: may not match
+          else if (match &lt;= 50) {
+            mayNotMatch = true;
+          }
+        }
+      }
+    }
+  }
+
+  &#47;&#47; Normalize the score from 0 to 100
+  if (sumOfFactors == 0) {
+    _score = 0;
+  } else {
+    _score &#47;= sumOfFactors;
+  }
+
+  &#47;&#47; If one of the attributes does not match, the product does not match
+  if (doesNotMatch) {
+    &#47;&#47; Set score to 0 for products that do not match
+    _score = 0;
+    _status = MatchedProductStatusV2.DOES_NOT_MATCH;
+  } else if (mayNotMatch) {
+    _status = MatchedProductStatusV2.MAY_NOT_MATCH;
+  } else if (isUnknown) {
+    _status = MatchedProductStatusV2.UNKNOWN_MATCH;
+  }
+  &#47;&#47; If too many attributes are unknown, set an unknown match
+  else if (sumOfFactorsForUnknownAttributes &gt;= sumOfFactors &#47; 2) {
+    _status = MatchedProductStatusV2.UNKNOWN_MATCH;
+  }
+  &#47;&#47; If the product matches, check how well it matches user preferences
+  else if (score &gt;= 75) {
+    _status = MatchedProductStatusV2.VERY_GOOD_MATCH;
+  } else if (score &gt;= 50) {
+    _status = MatchedProductStatusV2.GOOD_MATCH;
+  } else {
+    _status = MatchedProductStatusV2.POOR_MATCH;
+  }
+}</code></pre>
 </section>
 
 

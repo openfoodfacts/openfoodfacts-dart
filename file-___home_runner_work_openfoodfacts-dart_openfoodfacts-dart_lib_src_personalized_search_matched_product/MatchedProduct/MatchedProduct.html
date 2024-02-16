@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">openfoodfacts</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product-library.html">matched_product</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product-library.html">src&#47;personalized_search&#47;matched_product.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_personalized_search_matched_product/MatchedProduct-class.html">MatchedProduct</a></li>
     <li class="self-crumb">MatchedProduct constructor</li>
   </ol>
@@ -73,7 +73,51 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">MatchedProduct</code></pre>
+  <pre class="language-dart"><code class="language-dart">MatchedProduct(
+  this.product,
+  final ProductPreferencesManager productPreferencesManager,
+) {
+  final List&lt;AttributeGroup&gt;? attributeGroups = product.attributeGroups;
+  if (attributeGroups == null) {
+    _status = null;
+    return;
+  }
+  _status = MatchedProductStatus.YES;
+  for (final AttributeGroup group in attributeGroups) {
+    if (group.attributes != null) {
+      for (final Attribute attribute in group.attributes!) {
+        final PreferenceImportance? preferenceImportance =
+            productPreferencesManager.getPreferenceImportanceFromImportanceId(
+          productPreferencesManager.getImportanceIdForAttributeId(
+            attribute.id!,
+          ),
+        );
+        if (preferenceImportance != null) {
+          final String? importanceId = preferenceImportance.id;
+          final int factor = preferenceImportance.factor ?? 0;
+          final int? minimalMatch = preferenceImportance.minimalMatch;
+          if (importanceId == null || factor == 0) {
+            _debug += &#39;${attribute.id} $importanceId\n&#39;;
+          } else {
+            if (attribute.status == Attribute.STATUS_UNKNOWN) {
+              if (_status == MatchedProductStatus.YES) {
+                _status = MatchedProductStatus.UNKNOWN;
+              }
+            } else {
+              _debug +=
+                  &#39;${attribute.id} $importanceId - match: ${attribute.match}\n&#39;;
+              _score += (attribute.match ?? 0) * factor;
+              if (minimalMatch != null &amp;&amp;
+                  (attribute.match ?? 0) &lt;= minimalMatch) {
+                _status = MatchedProductStatus.NO;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
 </section>
 
 
