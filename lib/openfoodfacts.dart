@@ -89,6 +89,9 @@ export 'src/personalized_search/preference_importance.dart';
 export 'src/personalized_search/product_preferences_manager.dart';
 export 'src/personalized_search/product_preferences_selection.dart';
 export 'src/prices/currency.dart';
+// export 'src/prices/get_parameters_helper.dart'; // uncomment if really needed
+export 'src/prices/get_prices_order.dart';
+export 'src/prices/get_prices_parameters.dart';
 export 'src/prices/get_prices_result.dart';
 export 'src/prices/get_prices_results.dart';
 export 'src/prices/location.dart';

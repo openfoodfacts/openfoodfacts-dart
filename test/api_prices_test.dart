@@ -158,11 +158,18 @@ void main() {
     test('get prices', () async {
       const int pageNumber = 1;
       const int pageSize = 20;
-      final GetPricesResults results;
+
+      // oldest first
+      GetPricesParameters parameters = GetPricesParameters()
+        ..getPricesOrder = <GetPricesOrder>[
+          GetPricesOrder(field: GetPricesOrderField.created, ascending: true),
+        ]
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber;
+      GetPricesResults results;
       try {
         results = await OpenPricesAPIClient.getPrices(
-          pageSize: pageSize,
-          pageNumber: pageNumber,
+          parameters,
           uriHelper: uriHelper,
         );
       } catch (e) {
@@ -172,7 +179,7 @@ void main() {
         rethrow;
       }
       expect(results.result, isNotNull);
-      final GetPricesResult result = results.result!;
+      GetPricesResult result = results.result!;
       expect(result.pageSize, pageSize);
       expect(result.pageNumber, pageNumber);
       expect(result.total, isNotNull);
@@ -187,9 +194,91 @@ void main() {
         }
         expect(price.price, greaterThan(0));
         expect(price.locationOSMId, greaterThan(0));
+        expect(price.currency, isNotNull);
+        expect(price.price, isNotNull);
       }
-    });
+      final DateTime oldestDate = result.items!.first.created;
 
+      // newest first
+      parameters = GetPricesParameters()
+        ..getPricesOrder = <GetPricesOrder>[
+          GetPricesOrder(field: GetPricesOrderField.created, ascending: false),
+        ]
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber;
+      try {
+        results = await OpenPricesAPIClient.getPrices(
+          parameters,
+          uriHelper: uriHelper,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(results.result, isNotNull);
+      result = results.result!;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.numberOfPages, (result.total! / result.pageSize!).ceil());
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(pageSize));
+      for (final Price price in result.items!) {
+        if (price.productCode == null) {
+          expect(price.categoryTag, isNotNull);
+        } else {
+          expect(price.categoryTag, isNull);
+        }
+        expect(price.price, greaterThan(0));
+        expect(price.locationOSMId, greaterThan(0));
+        expect(price.currency, isNotNull);
+        expect(price.price, isNotNull);
+      }
+      final DateTime newestDate = result.items!.first.created;
+
+      expect(
+        newestDate.millisecondsSinceEpoch,
+        greaterThan(oldestDate.millisecondsSinceEpoch),
+      );
+
+      // Trying to get the same single result, from an item.
+      final Price price = result.items!.first;
+      parameters = GetPricesParameters()
+        ..productCode = price.productCode
+        ..productId = price.productId
+        ..productIdIsNull = price.productId == null
+        ..categoryTag = price.categoryTag
+        ..labelsTagsLike = price.labelsTags?.join(', ')
+        ..originsTagsLike = price.originsTags?.join(', ')
+        ..locationOSMId = price.locationOSMId
+        ..locationOSMType = price.locationOSMType
+        ..locationId = price.locationId
+        ..currency = price.currency
+        ..date = price.date
+        ..dateGt = null
+        ..dateGte = price.date
+        ..dateLt = null
+        ..dateLte = price.date
+        ..owner = price.owner
+        ..createdGte = price.created
+        ..getPricesOrder = null
+        ..pageNumber = pageNumber
+        ..pageSize = pageSize;
+      results = await OpenPricesAPIClient.getPrices(
+        parameters,
+        uriHelper: uriHelper,
+      );
+      expect(results.result, isNotNull);
+      result = results.result!;
+      expect(result.total, 1);
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(1));
+    });
+  });
+
+  group('$OpenPricesAPIClient Locations', () {
     test('get existing location', () async {
       const int locationId = 1;
       final Location? location = await OpenPricesAPIClient.getLocation(
