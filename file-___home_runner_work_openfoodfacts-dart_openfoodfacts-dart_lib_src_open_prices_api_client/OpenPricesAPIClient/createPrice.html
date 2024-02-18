@@ -120,7 +120,7 @@
   body.write(&#39;&quot;currency&quot;: &quot;${price.currency.name}&quot;,&#39;);
   body.write(&#39;&quot;location_osm_id&quot;: ${price.locationOSMId},&#39;);
   body.write(&#39;&quot;location_osm_type&quot;: &quot;${price.locationOSMType.offTag}&quot;,&#39;);
-  body.write(&#39;&quot;date&quot;: &quot;${_formatDate(price.date)}&quot;&#39;);
+  body.write(&#39;&quot;date&quot;: &quot;${GetParametersHelper.formatDate(price.date)}&quot;&#39;);
   body.write(&#39;}&#39;);
   final Response response = await HttpHelper().doPostJsonRequest(
     uri,
