@@ -6,11 +6,11 @@ import 'package:path/path.dart';
 import 'prices/maybe_error.dart';
 import 'prices/price.dart';
 import 'prices/proof.dart';
-import 'prices/currency.dart';
+import 'prices/get_parameters_helper.dart';
+import 'prices/get_prices_parameters.dart';
 import 'prices/get_prices_result.dart';
 import 'prices/get_prices_results.dart';
 import 'prices/location.dart';
-import 'prices/location_osm_type.dart';
 import 'prices/price_product.dart';
 import 'prices/proof_type.dart';
 import 'prices/session.dart';
@@ -29,14 +29,6 @@ class OpenPricesAPIClient {
   /// Status when the server is running (cf. [getStatus]).
   static const String statusRunning = 'running';
 
-  /// Formats a date as DateFormat('yyyy-MM-dd') but without the `intl` package.
-  static String _formatDate(final DateTime date) =>
-      '${date.year.toString().padLeft(4, '0')}'
-      '-'
-      '${date.month.toString().padLeft(2, '0')}'
-      '-'
-      '${date.day.toString().padLeft(2, '0')}';
-
   /// Subdomain of the Prices API.
   static const String _subdomain = 'prices';
 
@@ -44,46 +36,20 @@ class OpenPricesAPIClient {
   static String _getHost(final UriProductHelper uriHelper) =>
       uriHelper.getHost(_subdomain);
 
-  static Future<GetPricesResults> getPrices({
-    // TODO(monsieurtanuki): add all parameters
-    final String? productCode,
-    final int? locationId,
-    final String? owner,
-    final int? locationOSMId,
-    final LocationOSMType? locationOSMType,
-    final Currency? currency,
-    final DateTime? date,
-    final DateTime? dateGt,
-    final DateTime? dateGte,
-    final DateTime? dateLt,
-    final DateTime? dateLte,
-    final int? pageSize,
-    final int? pageNumber,
+  static Future<GetPricesResults> getPrices(
+    final GetPricesParameters parameters, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
   }) async {
     final Uri uri = uriHelper.getUri(
       path: '/api/v1/prices',
-      queryParameters: <String, String>{
-        if (productCode != null) 'product_code': productCode,
-        if (locationId != null) 'location_id': locationId.toString(),
-        if (owner != null) 'owner': owner,
-        if (locationOSMId != null) 'location_osm_id': locationOSMId.toString(),
-        if (locationOSMType != null)
-          'location_osm_type': locationOSMType.offTag,
-        if (currency != null) 'currency': currency.name,
-        if (date != null) 'date': _formatDate(date),
-        if (dateGt != null) 'date__gt': _formatDate(dateGt),
-        if (dateGte != null) 'date__gte': _formatDate(dateGte),
-        if (dateLt != null) 'date__lt': _formatDate(dateLt),
-        if (dateLte != null) 'date__lte': _formatDate(dateLte),
-        if (pageNumber != null) 'page': pageNumber.toString(),
-        if (pageSize != null) 'size': pageSize.toString(),
-      },
+      queryParameters: parameters.getQueryParameters(),
       forcedHost: _getHost(uriHelper),
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
       uriHelper: uriHelper,
+      bearerToken: bearerToken,
     );
     dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
     if (response.statusCode == 200) {
@@ -273,7 +239,7 @@ class OpenPricesAPIClient {
     body.write('"currency": "${price.currency.name}",');
     body.write('"location_osm_id": ${price.locationOSMId},');
     body.write('"location_osm_type": "${price.locationOSMType.offTag}",');
-    body.write('"date": "${_formatDate(price.date)}"');
+    body.write('"date": "${GetParametersHelper.formatDate(price.date)}"');
     body.write('}');
     final Response response = await HttpHelper().doPostJsonRequest(
       uri,
