@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'model/per_size.dart';
 
 import 'interface/json_object.dart';
 import 'model/login_status.dart';
@@ -105,9 +106,11 @@ class OpenFoodAPIClient {
       final Map<String, String> rawNutrients = product.nutriments!.toData();
       for (final MapEntry<String, String> entry in rawNutrients.entries) {
         String key = 'nutriment_${entry.key}';
-        final int pos = key.indexOf('_100g');
-        if (pos != -1) {
-          key = key.substring(0, pos);
+        for (final option in PerSize.values) {
+          final int pos = key.indexOf('_${option.offTag}');
+          if (pos != -1) {
+            key = key.substring(0, pos);
+          }
         }
         parameterMap[key] = entry.value;
       }

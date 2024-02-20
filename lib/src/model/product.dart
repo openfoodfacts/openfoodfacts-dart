@@ -115,6 +115,18 @@ class Product extends JsonObject {
       includeIfNull: false)
   Map<OpenFoodFactsLanguage, String>? genericNameInLanguages;
 
+  /// Abbreviated product name.
+  @JsonKey(name: 'abbreviated_product_name', includeIfNull: false)
+  String? abbreviatedName;
+
+  /// Localized abbreviated product name.
+  @JsonKey(
+      name: 'abbreviated_product_name_in_languages',
+      fromJson: LanguageHelper.fromJsonStringMap,
+      toJson: LanguageHelper.toJsonStringMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, String>? abbreviatedNameInLanguages;
+
   @JsonKey(name: 'brands', includeIfNull: false)
   String? brands;
   @JsonKey(name: 'brands_tags', includeIfNull: false)
@@ -531,6 +543,13 @@ class Product extends JsonObject {
   @JsonKey(name: 'link', includeIfNull: false)
   String? website;
 
+  /// Is the product obsolete?
+  @JsonKey(
+    toJson: JsonHelper.checkboxToJSON,
+    fromJson: JsonHelper.checkboxFromJSON,
+  )
+  bool? obsolete;
+
   Product(
       {this.barcode,
       this.productName,
@@ -609,6 +628,11 @@ class Product extends JsonObject {
         case ProductField.GENERIC_NAME_ALL_LANGUAGES:
           result.genericNameInLanguages ??= {};
           result.genericNameInLanguages![language] = label;
+          break;
+        case ProductField.ABBREVIATED_NAME_IN_LANGUAGES:
+        case ProductField.ABBREVIATED_NAME_ALL_LANGUAGES:
+          result.abbreviatedNameInLanguages ??= {};
+          result.abbreviatedNameInLanguages![language] = label;
           break;
         case ProductField.INGREDIENTS_TEXT_IN_LANGUAGES:
         case ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES:
@@ -692,6 +716,7 @@ class Product extends JsonObject {
       switch (productField) {
         case ProductField.NAME_IN_LANGUAGES:
         case ProductField.GENERIC_NAME_IN_LANGUAGES:
+        case ProductField.ABBREVIATED_NAME_IN_LANGUAGES:
         case ProductField.INGREDIENTS_TEXT_IN_LANGUAGES:
         case ProductField.PACKAGING_TEXT_IN_LANGUAGES:
           setLanguageString(productField, language, json[key]);
@@ -950,5 +975,76 @@ class Product extends JsonObject {
       _noNutritionData = true;
     }
     _nutriments = nutriments;
+  }
+
+  /// Returns the best version of a product name.
+  ///
+  /// cf. openfoodfacts-server/lib/ProductOpener/Products.pm
+  String getBestProductName(final OpenFoodFactsLanguage language) {
+    String? tmp;
+    if ((tmp = productNameInLanguages?[language])?.isNotEmpty == true) {
+      return tmp!;
+    }
+    if ((tmp = productName)?.isNotEmpty == true) {
+      return tmp!;
+    }
+    if ((tmp = genericNameInLanguages?[language])?.isNotEmpty == true) {
+      return tmp!;
+    }
+    if ((tmp = genericName)?.isNotEmpty == true) {
+      return tmp!;
+    }
+    if ((tmp = abbreviatedNameInLanguages?[language])?.isNotEmpty == true) {
+      return tmp!;
+    }
+    if ((tmp = abbreviatedName)?.isNotEmpty == true) {
+      return tmp!;
+    }
+    return '';
+  }
+
+  /// Returns the first of all brands.
+  String? getFirstBrand() {
+    if (brands == null) {
+      return null;
+    }
+    final List<String> items = brands!.split(',');
+    if (items.isEmpty) {
+      return null;
+    }
+    return items.first;
+  }
+
+  /// Returns a combo of the best product name and the first brand.
+  ///
+  /// cf. openfoodfacts-server/lib/ProductOpener/Products.pm
+  String getProductNameBrand(
+    final OpenFoodFactsLanguage language,
+    final String separator,
+  ) {
+    final String bestProductName = getBestProductName(language);
+    final String? firstBrand = getFirstBrand();
+    if (firstBrand == null) {
+      return bestProductName;
+    }
+    return '$bestProductName$separator$firstBrand';
+  }
+
+  /// Returns a combo of best product name, first brand and quantity.
+  ///
+  /// cf. openfoodfacts-server/lib/ProductOpener/Products.pm
+  String getProductNameBrandQuantity(
+    final OpenFoodFactsLanguage language,
+    final String separator,
+  ) {
+    final String productNameBrand = getProductNameBrand(language, separator);
+    if (quantity?.isNotEmpty != true) {
+      return productNameBrand;
+    }
+    if (productNameBrand.contains(quantity!)) {
+      return productNameBrand;
+    }
+    // quantity: put non breaking spaces between numbers and units
+    return '$productNameBrand$separator${quantity!.replaceAll(' ', '\u{00A0}')}';
   }
 }

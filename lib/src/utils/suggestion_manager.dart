@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:meta/meta.dart';
-
 import '../model/user.dart';
-import '../open_food_api_client.dart';
+import 'autocomplete_manager.dart';
+import 'autocompleter.dart';
 import 'country_helper.dart';
 import 'language_helper.dart';
 import 'open_food_api_configuration.dart';
 import 'uri_helper.dart';
 import 'tag_type.dart';
+import 'tag_type_autocompleter.dart';
 
 /// Manager that returns the suggestions for the latest input.
 ///
@@ -18,63 +18,36 @@ import 'tag_type.dart';
 /// connection reasons? The autocomplete widget will get the second suggestions,
 /// then the first suggestions will override them.
 /// And the user should get the suggestions that match the latest input.
-class SuggestionManager {
+// TODO: deprecated from 2023-12-06; remove when old enough
+@Deprecated('Use TagTypeAutocompleter and AutocompleteManager instead')
+class SuggestionManager implements Autocompleter {
   SuggestionManager(
-    this.taxonomyType, {
-    required this.language,
-    this.country,
-    this.categories,
-    this.shape,
-    this.limit = 25,
-    this.uriHelper = uriHelperFoodProd,
-    this.user,
-  });
+    final TagType taxonomyType, {
+    required final OpenFoodFactsLanguage language,
+    final OpenFoodFactsCountry? country,
+    final String? categories,
+    final String? shape,
+    final int limit = 25,
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+    final User? user,
+  }) : manager = AutocompleteManager(
+          TagTypeAutocompleter(
+            tagType: taxonomyType,
+            language: language,
+            country: country,
+            categories: categories,
+            shape: shape,
+            limit: limit,
+            uriHelper: uriHelper,
+            user: user,
+          ),
+        );
 
-  final TagType taxonomyType;
-  final OpenFoodFactsLanguage language;
-  final OpenFoodFactsCountry? country;
-  final String? categories;
-  final String? shape;
-  final int limit;
-  final UriProductHelper uriHelper;
-  final User? user;
+  final AutocompleteManager manager;
 
-  final List<String> _inputs = <String>[];
-  final Map<String, List<String>> _cache = <String, List<String>>{};
-
-  /// Returns suggestions about the latest input.
+  @override
   Future<List<String>> getSuggestions(
     final String input,
-  ) async {
-    _inputs.add(input);
-    final List<String>? cached = _cache[input];
-    if (cached != null) {
-      return cached;
-    }
-    await waitForTestPurpose();
-    _cache[input] = await OpenFoodAPIClient.getSuggestions(
-      taxonomyType,
-      input: input,
-      language: language,
-      country: country,
-      categories: categories,
-      shape: shape,
-      limit: limit,
-      uriHelper: uriHelper,
-      user: user,
-    );
-    // meanwhile there might have been some calls to this method, adding inputs.
-    for (final String latestInput in _inputs.reversed) {
-      final List<String>? cached = _cache[latestInput];
-      if (cached != null) {
-        return cached;
-      }
-    }
-    // not supposed to happen, as we should have downloaded for "input".
-    return <String>[];
-  }
-
-  @protected
-  @visibleForTesting
-  Future<void> waitForTestPurpose() async {}
+  ) async =>
+      manager.getSuggestions(input);
 }

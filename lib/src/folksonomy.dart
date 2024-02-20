@@ -169,7 +169,11 @@ class FolksonomyAPIClient {
       ),
       uriHelper: uriHelper,
     );
-    _checkResponse(response);
+    // may return 404 (and "null") when not found.
+    _checkResponse(
+      response,
+      authorizedStatus: <int>[200, 404],
+    );
     if (response.body == 'null') {
       // not found
       return null;
@@ -367,8 +371,11 @@ Future<void> deleteProductTag({
   }
 
   /// Throws a detailed exception if relevant. Does nothing if [response] is OK.
-  static void _checkResponse(final Response response) {
-    if (response.statusCode != 200) {
+  static void _checkResponse(
+    final Response response, {
+    final List<int> authorizedStatus = const <int>[200],
+  }) {
+    if (!authorizedStatus.contains(response.statusCode)) {
       // TODO have a look at ValidationError in https://api.folksonomy.openfoodfacts.org/docs
       throw Exception('Wrong status code: ${response.statusCode}');
     }

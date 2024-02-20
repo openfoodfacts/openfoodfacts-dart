@@ -17,4 +17,7 @@ class TestConstants {
     password: 'takeitorleaveit',
     comment: 'dart API test',
   );
+
+  static const String badGatewayError =
+      'Exception: JSON expected, html found: <head><title>502 Bad Gateway</title></head>';
 }

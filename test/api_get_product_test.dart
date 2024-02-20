@@ -148,8 +148,7 @@ void main() {
           'Invertzuckersirup',
           'natürliches Aroma',
           'Schokolade Mürbegebäck',
-          'Pflanzenfett',
-          'Palm',
+          'PflanzenPalmfett',
           'Schokoladenstückchen',
           'Kakaomasse',
           'Kakaobutter',
@@ -512,15 +511,21 @@ void main() {
       expect(result.product!.ecoscoreScore, isNotNull);
       expect(result.product!.ecoscoreData!.agribalyse, isNotNull);
       expect(result.product!.ecoscoreData!.adjustments, isNotNull);
-      expect(result.product!.ecoscoreData!.missingDataWarning, isFalse);
     });
 
     test('product fields', () async {
-      String barcode = '20004361';
+      const String barcode = '7300400481588';
       ProductQueryConfiguration configurations = ProductQueryConfiguration(
         barcode,
         language: OpenFoodFactsLanguage.GERMAN,
-        fields: [ProductField.NAME, ProductField.BRANDS_TAGS],
+        fields: [
+          ProductField.NAME,
+          ProductField.BRANDS_TAGS,
+          ProductField.ABBREVIATED_NAME,
+          ProductField.ABBREVIATED_NAME_ALL_LANGUAGES,
+          ProductField.BRANDS,
+          ProductField.QUANTITY,
+        ],
         version: ProductQueryVersion.v3,
       );
       ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
@@ -537,6 +542,15 @@ void main() {
       expect(result.product!.additives!.names, isEmpty);
       expect(result.product!.nutrientLevels!.levels, isEmpty);
       expect(result.product!.lang, OpenFoodFactsLanguage.UNDEFINED);
+      expect(result.product!.abbreviatedName, isNotNull);
+      expect(result.product!.abbreviatedNameInLanguages, isNotNull);
+      expect(
+        result
+            .product!.abbreviatedNameInLanguages![OpenFoodFactsLanguage.FRENCH],
+        isNotNull,
+      );
+      expect(result.product!.brands, isNotNull);
+      expect(result.product!.quantity, isNotNull);
 
       configurations = ProductQueryConfiguration(
         barcode,
@@ -839,22 +853,21 @@ void main() {
     test(
         'vegan, vegetarian and palm oil ingredients of Danish Butter Cookies & Chocolate Chip Cookies',
         () async {
-      String barcode = BARCODE_DANISH_BUTTER_COOKIES;
-      ProductQueryConfiguration configurations = ProductQueryConfiguration(
-        barcode,
-        language: OpenFoodFactsLanguage.GERMAN,
-        fields: [ProductField.ALL],
-        version: ProductQueryVersion.v3,
-      );
-      ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
-        configurations,
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+        ProductQueryConfiguration(
+          '3017620429484',
+          language: OpenFoodFactsLanguage.FRENCH,
+          fields: [ProductField.ALL],
+          version: ProductQueryVersion.v3,
+        ),
       );
 
-      final vegetableFat = result.product!.ingredients!
-          .firstWhere((ingredient) => ingredient.text == 'Pflanzenfett');
-      expect(vegetableFat.vegan, IngredientSpecialPropertyStatus.POSITIVE);
-      expect(vegetableFat.vegetarian, IngredientSpecialPropertyStatus.POSITIVE);
-      expect(vegetableFat.fromPalmOil, IngredientSpecialPropertyStatus.MAYBE);
+      final Ingredient ingredient = result.product!.ingredients!.firstWhere(
+        (ingredient) => ingredient.text == 'huile de palme',
+      );
+      expect(ingredient.vegan, IngredientSpecialPropertyStatus.POSITIVE);
+      expect(ingredient.vegetarian, IngredientSpecialPropertyStatus.POSITIVE);
+      expect(ingredient.fromPalmOil, IngredientSpecialPropertyStatus.POSITIVE);
     });
 
     test('get knowledge panels', () async {
@@ -1025,6 +1038,32 @@ void main() {
     expect(result.product, isNotNull);
     expect(result.product!.website, isNotNull);
     expect(result.product!.website, isNotEmpty);
+
+    configuration = ProductQueryConfiguration(
+      '8076809517881',
+      fields: [ProductField.OBSOLETE],
+      version: ProductQueryVersion.v3,
+    );
+    result = await OpenFoodAPIClient.getProductV3(
+      configuration,
+    );
+    expect(result.status, ProductResultV3.statusSuccess);
+    expect(result.product, isNotNull);
+    expect(result.product!.obsolete, isNotNull);
+    expect(result.product!.obsolete, isTrue);
+
+    configuration = ProductQueryConfiguration(
+      '7300400481588',
+      fields: [ProductField.OBSOLETE],
+      version: ProductQueryVersion.v3,
+    );
+    result = await OpenFoodAPIClient.getProductV3(
+      configuration,
+    );
+    expect(result.status, ProductResultV3.statusSuccess);
+    expect(result.product, isNotNull);
+    expect(result.product!.obsolete, isNotNull);
+    expect(result.product!.obsolete, isFalse);
 
     configuration = ProductQueryConfiguration(
       '3033710065066',

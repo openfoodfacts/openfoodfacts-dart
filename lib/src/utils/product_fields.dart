@@ -10,6 +10,9 @@ enum ProductField implements OffTagged {
   GENERIC_NAME(offTag: 'generic_name'),
   GENERIC_NAME_IN_LANGUAGES(offTag: 'generic_name_'),
   GENERIC_NAME_ALL_LANGUAGES(offTag: 'generic_name_languages'),
+  ABBREVIATED_NAME(offTag: 'abbreviated_product_name'),
+  ABBREVIATED_NAME_IN_LANGUAGES(offTag: 'abbreviated_product_name_'),
+  ABBREVIATED_NAME_ALL_LANGUAGES(offTag: 'abbreviated_product_name_languages'),
   BRANDS(offTag: 'brands'),
   BRANDS_TAGS(offTag: 'brands_tags'),
   BRANDS_TAGS_IN_LANGUAGES(offTag: 'brands_tags_'),
@@ -95,6 +98,7 @@ enum ProductField implements OffTagged {
   ORIGINS(offTag: 'origins'),
   NOVA_GROUP(offTag: 'nova_group'),
   WEBSITE(offTag: 'link'),
+  OBSOLETE(offTag: 'obsolete'),
 
   /// All data as RAW from the server. E.g. packagings are only Strings there.
   RAW(offTag: 'raw'),
@@ -111,6 +115,7 @@ enum ProductField implements OffTagged {
 const Set<ProductField> fieldsInLanguages = {
   ProductField.NAME_IN_LANGUAGES,
   ProductField.GENERIC_NAME_IN_LANGUAGES,
+  ProductField.ABBREVIATED_NAME_IN_LANGUAGES,
   ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
   ProductField.PACKAGING_TEXT_IN_LANGUAGES,
   ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
@@ -129,6 +134,7 @@ const Set<ProductField> fieldsInLanguages = {
 const Set<ProductField> fieldsAllLanguages = {
   ProductField.NAME_ALL_LANGUAGES,
   ProductField.GENERIC_NAME_ALL_LANGUAGES,
+  ProductField.ABBREVIATED_NAME_ALL_LANGUAGES,
   ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
   ProductField.PACKAGING_TEXT_ALL_LANGUAGES,
 };
