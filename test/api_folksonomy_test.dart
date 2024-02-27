@@ -9,9 +9,10 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
 
   // of course we need to check that those 3 "known" guys combine well
-  const String knownBarcode = '9310036071174';
-  const String knownKey = 'packaging:character:wikidata';
-  const String knownValue = 'Q51785';
+  // cf. https://api.folksonomy.openfoodfacts.org/docs
+  const String knownBarcode = '8025386009180';
+  const String knownKey = 'producer_data_issue';
+  const String knownValue = 'proteins too large for category';
 
   const String unknownBarcode = 'blablabla$knownBarcode';
   const String unknownKey = 'blablabla$knownKey';
