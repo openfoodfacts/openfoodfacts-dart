@@ -8,9 +8,10 @@ void main() {
 
   group('$OpenFoodAPIClient get robotoff questions', () {
     test('get questions for Noix de Saint-Jacques EN', () async {
-      RobotoffQuestionResult result =
+      const String barcode = '3274570800026';
+      final RobotoffQuestionResult result =
           await RobotoffAPIClient.getProductQuestions(
-        '3274570800026',
+        barcode,
         OpenFoodFactsLanguage.ENGLISH,
         user: TestConstants.PROD_USER,
         count: 1,
@@ -20,23 +21,24 @@ void main() {
         expect(result.status, isNotNull);
         expect(result.status, 'found');
         expect(result.questions!.length, 1);
-        expect(result.questions![0].barcode, '3274570800026');
+        expect(result.questions![0].barcode, barcode);
         expect(result.questions![0].type, 'add-binary');
-        expect(result.questions![0].value, 'Scallop');
+        expect(result.questions![0].value, 'Mollusc');
         expect(result.questions![0].question,
             'Does the product belong to this category?');
         expect(result.questions![0].insightId,
-            '5cac03bc-a5a7-4ec2-a548-17fd9319fee7');
+            'a919d649-2d3b-4da3-a123-5c3191d5c41c');
         expect(result.questions![0].insightType, InsightType.CATEGORY);
         expect(result.questions![0].imageUrl,
-            'https://static.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg');
+            'https://images.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg');
       }
     });
 
     test('get questions for Noix de Saint-Jacques FR', () async {
-      RobotoffQuestionResult result =
+      const String barcode = '3274570800026';
+      final RobotoffQuestionResult result =
           await RobotoffAPIClient.getProductQuestions(
-        '3274570800026',
+        barcode,
         OpenFoodFactsLanguage.FRENCH,
         user: TestConstants.PROD_USER,
       );
@@ -45,16 +47,16 @@ void main() {
         expect(result.status, isNotNull);
         expect(result.status, 'found');
         expect(result.questions!.length, 1);
-        expect(result.questions![0].barcode, '3274570800026');
+        expect(result.questions![0].barcode, barcode);
         expect(result.questions![0].type, 'add-binary');
-        expect(result.questions![0].value, 'Noix de Saint-Jacques');
+        expect(result.questions![0].value, 'Mollusques');
         expect(result.questions![0].question,
             'Le produit appartient-il à cette catégorie ?');
         expect(result.questions![0].insightId,
-            '5cac03bc-a5a7-4ec2-a548-17fd9319fee7');
+            'a919d649-2d3b-4da3-a123-5c3191d5c41c');
         expect(result.questions![0].insightType, InsightType.CATEGORY);
         expect(result.questions![0].imageUrl,
-            'https://static.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg');
+            'https://images.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg');
       }
     });
 
