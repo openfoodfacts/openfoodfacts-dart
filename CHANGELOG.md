@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.5.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.4.0...v3.5.0) (2024-03-12)
+
+
+### Features
+
+* 831 - more parameters for the "get prices" API query ([#886](https://github.com/openfoodfacts/openfoodfacts-dart/issues/886)) ([820d145](https://github.com/openfoodfacts/openfoodfacts-dart/commit/820d145ca11d1a36ecbc800d61ce0a866aee78a1))
+* 831 - new price methods like add price and upload proof ([#884](https://github.com/openfoodfacts/openfoodfacts-dart/issues/884)) ([7615fcb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7615fcb4c787f685169b7b2e9ef624ba064cdb6a))
+* 831 - Prices getLocation, getPriceProduct, getStatus methods ([#855](https://github.com/openfoodfacts/openfoodfacts-dart/issues/855)) ([e18080b](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e18080bdd1bbe17da4bbd1857dc3e2240abff388))
+
+
+### Bug Fixes
+
+* folksonomy getProductTag may return 404 ([#881](https://github.com/openfoodfacts/openfoodfacts-dart/issues/881)) ([990cc67](https://github.com/openfoodfacts/openfoodfacts-dart/commit/990cc6707e80b9a89cbc822b6949b08fb8e2fa29))
+
 ## [3.4.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.3.3...v3.4.0) (2024-02-06)
 
 
