@@ -87,6 +87,25 @@ class JsonHelper {
         onlyMain: true,
       );
 
+  // only for main images
+  static const String _ALL_IMAGES_TAG_REVISION = 'rev';
+  static const String _ALL_IMAGES_TAG_ANGLE = 'angle';
+  static const String _ALL_IMAGES_TAG_COORDINATES = 'coordinates_image_size';
+  static const String _ALL_IMAGES_TAG_X1 = 'x1';
+  static const String _ALL_IMAGES_TAG_Y1 = 'y1';
+  static const String _ALL_IMAGES_TAG_X2 = 'x2';
+  static const String _ALL_IMAGES_TAG_Y2 = 'y2';
+
+  // only for raw images
+  static const String _ALL_IMAGES_TAG_UPLOADED = 'uploaded_t';
+
+  // common to main and raw images
+  static const String _ALL_IMAGES_TAG_IMAGE_ID = 'imgid';
+  static const String _ALL_IMAGES_TAG_WIDTH = 'w';
+  static const String _ALL_IMAGES_TAG_HEIGHT = 'h';
+  static const String _ALL_IMAGES_TAG_SIZES = 'sizes';
+  static const String _ALL_IMAGES_TAG_URL = 'url';
+
   /// Returns [ProductImage]s from a JSON map for "Images".
   static List<ProductImage>? allImagesFromJson(
     Map? json, {
@@ -126,12 +145,14 @@ class JsonHelper {
       final Map<String, dynamic> fieldObject = json[key];
 
       // get the sizes object
-      var sizesObject = fieldObject['sizes'] as Map<String, dynamic>?;
+      final Map<String, dynamic>? sizesObject =
+          fieldObject[_ALL_IMAGES_TAG_SIZES] as Map<String, dynamic>?;
       if (sizesObject == null) {
         continue;
       }
 
       if (imageId != null) {
+        final int? uploaded = fieldObject[_ALL_IMAGES_TAG_UPLOADED] as int?;
         // get each number object (e.g. 200)
         for (var size in ImageSize.values) {
           var number = size.number;
@@ -143,26 +164,28 @@ class JsonHelper {
             ProductImage.raw(
               size: size,
               imgid: imageId.toString(),
-              width: JsonObject.parseInt(numberObject['w']),
-              height: JsonObject.parseInt(numberObject['h']),
-              url: numberObject['url'],
+              width: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_WIDTH]),
+              height: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]),
+              url: numberObject[_ALL_IMAGES_TAG_URL],
+              uploaded: uploaded,
             ),
           );
         }
         continue;
       }
 
-      final rev = JsonObject.parseInt(fieldObject['rev']);
-      final String imgid = fieldObject['imgid'].toString();
+      final int? rev =
+          JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_REVISION]);
+      final String imgid = fieldObject[_ALL_IMAGES_TAG_IMAGE_ID].toString();
       final ImageAngle? angle = ImageAngleExtension.fromInt(
-        JsonObject.parseInt(fieldObject['angle']),
+        JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_ANGLE]),
       );
       final String? coordinatesImageSize =
-          fieldObject['coordinates_image_size']?.toString();
-      final int? x1 = JsonObject.parseInt(fieldObject['x1']);
-      final int? y1 = JsonObject.parseInt(fieldObject['y1']);
-      final int? x2 = JsonObject.parseInt(fieldObject['x2']);
-      final int? y2 = JsonObject.parseInt(fieldObject['y2']);
+          fieldObject[_ALL_IMAGES_TAG_COORDINATES]?.toString();
+      final int? x1 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_X1]);
+      final int? y1 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_Y1]);
+      final int? x2 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_X2]);
+      final int? y2 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_Y2]);
 
       // get each number object (e.g. 200)
       for (var size in ImageSize.values) {
@@ -171,9 +194,11 @@ class JsonHelper {
         if (numberObject == null) {
           continue;
         }
-        final int? width = JsonObject.parseInt(numberObject['w']);
-        final int? height = JsonObject.parseInt(numberObject['h']);
-        final String? url = numberObject['url'];
+        final int? width =
+            JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_WIDTH]);
+        final int? height =
+            JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]);
+        final String? url = numberObject[_ALL_IMAGES_TAG_URL];
 
         var image = ProductImage(
           field: field!,
@@ -244,7 +269,7 @@ class JsonHelper {
         continue;
       }
       final Map<String, dynamic> item = <String, dynamic>{};
-      item['sizes'] = <String, Map<String, Object>>{};
+      item[_ALL_IMAGES_TAG_SIZES] = <String, Map<String, Object>>{};
       bool first = true;
       for (final ProductImage productImage in list) {
         if (productImage.size == null) {
@@ -252,42 +277,47 @@ class JsonHelper {
         }
         final Map<String, Object> size = <String, Object>{};
         if (productImage.width != null) {
-          size['w'] = productImage.width!;
+          size[_ALL_IMAGES_TAG_WIDTH] = productImage.width!;
         }
         if (productImage.height != null) {
-          size['h'] = productImage.height!;
+          size[_ALL_IMAGES_TAG_HEIGHT] = productImage.height!;
         }
         if (productImage.url != null) {
-          size['url'] = productImage.url!;
+          size[_ALL_IMAGES_TAG_URL] = productImage.url!;
         }
-        item['sizes']![productImage.size!.number] = size;
+        item[_ALL_IMAGES_TAG_SIZES]![productImage.size!.number] = size;
         if (first) {
           first = false;
-          if (productImage.isMain) {
+          if (!productImage.isMain) {
+            if (productImage.uploaded != null) {
+              item[_ALL_IMAGES_TAG_UPLOADED] = productImage.uploaded;
+            }
+          } else {
             if (productImage.rev != null) {
-              item['rev'] = productImage.rev.toString();
+              item[_ALL_IMAGES_TAG_REVISION] = productImage.rev.toString();
             }
             if (productImage.imgid != null) {
-              item['imgid'] = productImage.imgid!;
+              item[_ALL_IMAGES_TAG_IMAGE_ID] = productImage.imgid!;
             }
             if (productImage.angle != null) {
-              item['angle'] = productImage.angle!.degree.toString();
+              item[_ALL_IMAGES_TAG_ANGLE] =
+                  productImage.angle!.degree.toString();
             }
             if (productImage.coordinatesImageSize != null) {
-              item['coordinates_image_size'] =
+              item[_ALL_IMAGES_TAG_COORDINATES] =
                   productImage.coordinatesImageSize!;
             }
             if (productImage.x1 != null) {
-              item['x1'] = productImage.x1!;
+              item[_ALL_IMAGES_TAG_X1] = productImage.x1!;
             }
             if (productImage.y1 != null) {
-              item['y1'] = productImage.y1!;
+              item[_ALL_IMAGES_TAG_Y1] = productImage.y1!;
             }
             if (productImage.x2 != null) {
-              item['x2'] = productImage.x2!;
+              item[_ALL_IMAGES_TAG_X2] = productImage.x2!;
             }
             if (productImage.y2 != null) {
-              item['y2'] = productImage.y2!;
+              item[_ALL_IMAGES_TAG_Y2] = productImage.y2!;
             }
           }
         }
