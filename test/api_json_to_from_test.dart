@@ -37,6 +37,7 @@ void main() {
           for (final ProductImage productImage2 in imagesBackAndForth) {
             if (productImage1 == productImage2) {
               count++;
+              expect(productImage1.toString(), productImage2.toString());
             }
           }
           expect(count, 1);
@@ -61,6 +62,7 @@ void main() {
       for (final ProductImage productImage
           in productResult.product!.getMainImages()!) {
         expect(productImage.isMain, true);
+        expect(productImage.uploaded, isNull);
         count++;
       }
       expect(count, countMain);
@@ -69,6 +71,7 @@ void main() {
       for (final ProductImage productImage
           in productResult.product!.getRawImages()!) {
         expect(productImage.isMain, false);
+        expect(productImage.uploaded, isNotNull);
         count++;
       }
       expect(count, countRaw);

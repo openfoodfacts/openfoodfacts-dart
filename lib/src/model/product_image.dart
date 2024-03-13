@@ -130,6 +130,7 @@ class ProductImage {
     required String this.imgid,
     this.width,
     this.height,
+    this.uploaded,
   })  : language = null,
         field = null;
 
@@ -137,6 +138,9 @@ class ProductImage {
   final ImageSize? size;
   final OpenFoodFactsLanguage? language;
   String? url;
+
+  /// Upload timestamp, for uploaded images only, in seconds since Unix Epoch.
+  int? uploaded;
 
   /// Revision number
   int? rev;
@@ -232,6 +236,7 @@ class ProductImage {
       '${language == null ? '' : ',language=${language.code}'}'
       '${angle == null ? '' : ',angle=${angle!.degreesClockwise}'}'
       '${url == null ? '' : ',url=$url'}'
+      '${uploaded == null ? '' : ',uploaded=$uploaded'}'
       '${imgid == null ? '' : ',imgid=$imgid'}'
       '${rev == null ? '' : ',rev=$rev'}'
       '${coordinatesImageSize == null ? '' : ',coordinatesImageSize=$coordinatesImageSize'}'
@@ -262,6 +267,7 @@ class ProductImage {
         other.size == size &&
         other.language == language &&
         other.url == url &&
+        other.uploaded == uploaded &&
         other.rev == rev &&
         other.imgid == imgid &&
         other.angle == angle &&
