@@ -152,7 +152,8 @@ class JsonHelper {
       }
 
       if (imageId != null) {
-        final int? uploaded = fieldObject[_ALL_IMAGES_TAG_UPLOADED] as int?;
+        final DateTime? uploaded =
+            timestampToDate(fieldObject[_ALL_IMAGES_TAG_UPLOADED]);
         // get each number object (e.g. 200)
         for (var size in ImageSize.values) {
           var number = size.number;
@@ -290,7 +291,8 @@ class JsonHelper {
           first = false;
           if (!productImage.isMain) {
             if (productImage.uploaded != null) {
-              item[_ALL_IMAGES_TAG_UPLOADED] = productImage.uploaded;
+              item[_ALL_IMAGES_TAG_UPLOADED] =
+                  dateToTimestamp(productImage.uploaded);
             }
           } else {
             if (productImage.rev != null) {

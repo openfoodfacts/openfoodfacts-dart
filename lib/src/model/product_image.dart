@@ -140,7 +140,7 @@ class ProductImage {
   String? url;
 
   /// Upload timestamp, for uploaded images only, in seconds since Unix Epoch.
-  int? uploaded;
+  DateTime? uploaded;
 
   /// Revision number
   int? rev;
