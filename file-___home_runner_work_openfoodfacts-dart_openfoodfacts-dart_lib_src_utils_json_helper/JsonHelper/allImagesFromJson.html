@@ -118,12 +118,15 @@
     final Map&lt;String, dynamic&gt; fieldObject = json[key];
 
     &#47;&#47; get the sizes object
-    var sizesObject = fieldObject[&#39;sizes&#39;] as Map&lt;String, dynamic&gt;?;
+    final Map&lt;String, dynamic&gt;? sizesObject =
+        fieldObject[_ALL_IMAGES_TAG_SIZES] as Map&lt;String, dynamic&gt;?;
     if (sizesObject == null) {
       continue;
     }
 
     if (imageId != null) {
+      final DateTime? uploaded =
+          timestampToDate(fieldObject[_ALL_IMAGES_TAG_UPLOADED]);
       &#47;&#47; get each number object (e.g. 200)
       for (var size in ImageSize.values) {
         var number = size.number;
@@ -135,26 +138,28 @@
           ProductImage.raw(
             size: size,
             imgid: imageId.toString(),
-            width: JsonObject.parseInt(numberObject[&#39;w&#39;]),
-            height: JsonObject.parseInt(numberObject[&#39;h&#39;]),
-            url: numberObject[&#39;url&#39;],
+            width: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_WIDTH]),
+            height: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]),
+            url: numberObject[_ALL_IMAGES_TAG_URL],
+            uploaded: uploaded,
           ),
         );
       }
       continue;
     }
 
-    final rev = JsonObject.parseInt(fieldObject[&#39;rev&#39;]);
-    final String imgid = fieldObject[&#39;imgid&#39;].toString();
+    final int? rev =
+        JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_REVISION]);
+    final String imgid = fieldObject[_ALL_IMAGES_TAG_IMAGE_ID].toString();
     final ImageAngle? angle = ImageAngleExtension.fromInt(
-      JsonObject.parseInt(fieldObject[&#39;angle&#39;]),
+      JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_ANGLE]),
     );
     final String? coordinatesImageSize =
-        fieldObject[&#39;coordinates_image_size&#39;]?.toString();
-    final int? x1 = JsonObject.parseInt(fieldObject[&#39;x1&#39;]);
-    final int? y1 = JsonObject.parseInt(fieldObject[&#39;y1&#39;]);
-    final int? x2 = JsonObject.parseInt(fieldObject[&#39;x2&#39;]);
-    final int? y2 = JsonObject.parseInt(fieldObject[&#39;y2&#39;]);
+        fieldObject[_ALL_IMAGES_TAG_COORDINATES]?.toString();
+    final int? x1 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_X1]);
+    final int? y1 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_Y1]);
+    final int? x2 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_X2]);
+    final int? y2 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_Y2]);
 
     &#47;&#47; get each number object (e.g. 200)
     for (var size in ImageSize.values) {
@@ -163,9 +168,11 @@
       if (numberObject == null) {
         continue;
       }
-      final int? width = JsonObject.parseInt(numberObject[&#39;w&#39;]);
-      final int? height = JsonObject.parseInt(numberObject[&#39;h&#39;]);
-      final String? url = numberObject[&#39;url&#39;];
+      final int? width =
+          JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_WIDTH]);
+      final int? height =
+          JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]);
+      final String? url = numberObject[_ALL_IMAGES_TAG_URL];
 
       var image = ProductImage(
         field: field!,

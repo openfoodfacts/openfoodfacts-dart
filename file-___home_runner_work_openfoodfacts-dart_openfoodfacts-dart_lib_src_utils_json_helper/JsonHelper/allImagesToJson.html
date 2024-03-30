@@ -115,7 +115,7 @@
       continue;
     }
     final Map&lt;String, dynamic&gt; item = &lt;String, dynamic&gt;{};
-    item[&#39;sizes&#39;] = &lt;String, Map&lt;String, Object&gt;&gt;{};
+    item[_ALL_IMAGES_TAG_SIZES] = &lt;String, Map&lt;String, Object&gt;&gt;{};
     bool first = true;
     for (final ProductImage productImage in list) {
       if (productImage.size == null) {
@@ -123,42 +123,48 @@
       }
       final Map&lt;String, Object&gt; size = &lt;String, Object&gt;{};
       if (productImage.width != null) {
-        size[&#39;w&#39;] = productImage.width!;
+        size[_ALL_IMAGES_TAG_WIDTH] = productImage.width!;
       }
       if (productImage.height != null) {
-        size[&#39;h&#39;] = productImage.height!;
+        size[_ALL_IMAGES_TAG_HEIGHT] = productImage.height!;
       }
       if (productImage.url != null) {
-        size[&#39;url&#39;] = productImage.url!;
+        size[_ALL_IMAGES_TAG_URL] = productImage.url!;
       }
-      item[&#39;sizes&#39;]![productImage.size!.number] = size;
+      item[_ALL_IMAGES_TAG_SIZES]![productImage.size!.number] = size;
       if (first) {
         first = false;
-        if (productImage.isMain) {
+        if (!productImage.isMain) {
+          if (productImage.uploaded != null) {
+            item[_ALL_IMAGES_TAG_UPLOADED] =
+                dateToTimestamp(productImage.uploaded);
+          }
+        } else {
           if (productImage.rev != null) {
-            item[&#39;rev&#39;] = productImage.rev.toString();
+            item[_ALL_IMAGES_TAG_REVISION] = productImage.rev.toString();
           }
           if (productImage.imgid != null) {
-            item[&#39;imgid&#39;] = productImage.imgid!;
+            item[_ALL_IMAGES_TAG_IMAGE_ID] = productImage.imgid!;
           }
           if (productImage.angle != null) {
-            item[&#39;angle&#39;] = productImage.angle!.degree.toString();
+            item[_ALL_IMAGES_TAG_ANGLE] =
+                productImage.angle!.degree.toString();
           }
           if (productImage.coordinatesImageSize != null) {
-            item[&#39;coordinates_image_size&#39;] =
+            item[_ALL_IMAGES_TAG_COORDINATES] =
                 productImage.coordinatesImageSize!;
           }
           if (productImage.x1 != null) {
-            item[&#39;x1&#39;] = productImage.x1!;
+            item[_ALL_IMAGES_TAG_X1] = productImage.x1!;
           }
           if (productImage.y1 != null) {
-            item[&#39;y1&#39;] = productImage.y1!;
+            item[_ALL_IMAGES_TAG_Y1] = productImage.y1!;
           }
           if (productImage.x2 != null) {
-            item[&#39;x2&#39;] = productImage.x2!;
+            item[_ALL_IMAGES_TAG_X2] = productImage.x2!;
           }
           if (productImage.y2 != null) {
-            item[&#39;y2&#39;] = productImage.y2!;
+            item[_ALL_IMAGES_TAG_Y2] = productImage.y2!;
           }
         }
       }
