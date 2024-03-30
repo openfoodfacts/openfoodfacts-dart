@@ -1028,7 +1028,10 @@ void main() {
 
     configuration = ProductQueryConfiguration(
       '7300400481588',
-      fields: [ProductField.WEBSITE],
+      fields: [
+        ProductField.WEBSITE,
+        ProductField.EXPIRATION_DATE,
+      ],
       version: ProductQueryVersion.v3,
     );
     result = await OpenFoodAPIClient.getProductV3(
@@ -1038,6 +1041,8 @@ void main() {
     expect(result.product, isNotNull);
     expect(result.product!.website, isNotNull);
     expect(result.product!.website, isNotEmpty);
+    expect(result.product!.expirationDate, isNotNull);
+    expect(result.product!.expirationDate, isNotEmpty);
 
     configuration = ProductQueryConfiguration(
       '8076809517881',

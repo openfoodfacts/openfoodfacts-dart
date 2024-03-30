@@ -550,6 +550,10 @@ class Product extends JsonObject {
   )
   bool? obsolete;
 
+  /// Expiration date / best before. Just a string, no format control.
+  @JsonKey(name: 'expiration_date', includeIfNull: false)
+  String? expirationDate;
+
   Product(
       {this.barcode,
       this.productName,
