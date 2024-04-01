@@ -6,15 +6,16 @@ import 'package:path/path.dart';
 import 'prices/maybe_error.dart';
 import 'prices/price.dart';
 import 'prices/proof.dart';
+import 'prices/get_locations_parameters.dart';
+import 'prices/get_locations_result.dart';
 import 'prices/get_parameters_helper.dart';
 import 'prices/get_prices_parameters.dart';
 import 'prices/get_prices_result.dart';
-import 'prices/get_prices_results.dart';
 import 'prices/location.dart';
+import 'prices/location_osm_type.dart';
 import 'prices/price_product.dart';
 import 'prices/proof_type.dart';
 import 'prices/session.dart';
-import 'prices/validation_errors.dart';
 import 'utils/http_helper.dart';
 import 'utils/open_food_api_configuration.dart';
 import 'utils/uri_helper.dart';
@@ -36,7 +37,7 @@ class OpenPricesAPIClient {
   static String _getHost(final UriProductHelper uriHelper) =>
       uriHelper.getHost(_subdomain);
 
-  static Future<GetPricesResults> getPrices(
+  static Future<MaybeError<GetPricesResult>> getPrices(
     final GetPricesParameters parameters, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final String? bearerToken,
@@ -51,14 +52,72 @@ class OpenPricesAPIClient {
       uriHelper: uriHelper,
       bearerToken: bearerToken,
     );
-    dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
     if (response.statusCode == 200) {
-      return GetPricesResults.result(GetPricesResult.fromJson(decodedResponse));
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<GetPricesResult>.value(
+          GetPricesResult.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        //
+      }
     }
-    return GetPricesResults.error(ValidationErrors.fromJson(decodedResponse));
+    return MaybeError<GetPricesResult>.responseError(response);
   }
 
-  static Future<Location?> getLocation(
+  static Future<MaybeError<Location>> getOSMLocation({
+    required final int locationOSMId,
+    required final LocationOSMType locationOSMType,
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Uri uri = uriHelper.getUri(
+      path: '/api/v1/locations/osm/${locationOSMType.offTag}/$locationOSMId',
+      forcedHost: _getHost(uriHelper),
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<Location>.value(Location.fromJson(decodedResponse));
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<Location>.responseError(response);
+  }
+
+  static Future<MaybeError<GetLocationsResult>> getLocations(
+    final GetLocationsParameters parameters, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
+  }) async {
+    final Uri uri = uriHelper.getUri(
+      path: '/api/v1/locations',
+      queryParameters: parameters.getQueryParameters(),
+      forcedHost: _getHost(uriHelper),
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<GetLocationsResult>.value(
+          GetLocationsResult.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<GetLocationsResult>.responseError(response);
+  }
+
+  static Future<MaybeError<Location>> getLocation(
     final int locationId, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
@@ -70,14 +129,18 @@ class OpenPricesAPIClient {
       uri,
       uriHelper: uriHelper,
     );
-    dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
     if (response.statusCode == 200) {
-      return Location.fromJson(decodedResponse);
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<Location>.value(Location.fromJson(decodedResponse));
+      } catch (e) {
+        //
+      }
     }
-    return null;
+    return MaybeError<Location>.responseError(response);
   }
 
-  static Future<PriceProduct?> getPriceProduct(
+  static Future<MaybeError<PriceProduct>> getPriceProductById(
     final int productId, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
@@ -89,11 +152,42 @@ class OpenPricesAPIClient {
       uri,
       uriHelper: uriHelper,
     );
-    dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
     if (response.statusCode == 200) {
-      return PriceProduct.fromJson(decodedResponse);
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<PriceProduct>.value(
+          PriceProduct.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        //
+      }
     }
-    return null;
+    return MaybeError<PriceProduct>.responseError(response);
+  }
+
+  static Future<MaybeError<PriceProduct>> getPriceProductByCode(
+    final String productCode, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Uri uri = uriHelper.getUri(
+      path: '/api/v1/products/code/$productCode',
+      forcedHost: _getHost(uriHelper),
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<PriceProduct>.value(
+          PriceProduct.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<PriceProduct>.responseError(response);
   }
 
   /// Returns the status of the server.
@@ -147,9 +241,13 @@ class OpenPricesAPIClient {
         'password': password,
       },
     );
-    dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
     if (response.statusCode == 200) {
-      return MaybeError<String>.value(decodedResponse['access_token']);
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<String>.value(decodedResponse['access_token']);
+      } catch (e) {
+        //
+      }
     }
     return MaybeError<String>.responseError(response);
   }
@@ -168,9 +266,13 @@ class OpenPricesAPIClient {
       uriHelper: uriHelper,
       bearerToken: bearerToken,
     );
-    final Map<String, dynamic> json = HttpHelper().jsonDecodeUtf8(response);
     if (response.statusCode == 200) {
-      return MaybeError<Session>.value(Session.fromJson(json));
+      try {
+        final Map<String, dynamic> json = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<Session>.value(Session.fromJson(json));
+      } catch (e) {
+        //
+      }
     }
     return MaybeError<Session>.responseError(response);
   }
@@ -247,9 +349,13 @@ class OpenPricesAPIClient {
       uriHelper: uriHelper,
       bearerToken: bearerToken,
     );
-    final Map<String, dynamic> json = HttpHelper().jsonDecodeUtf8(response);
     if (response.statusCode == 201) {
-      return MaybeError<Price>.value(Price.fromJson(json));
+      try {
+        final Map<String, dynamic> json = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<Price>.value(Price.fromJson(json));
+      } catch (e) {
+        //
+      }
     }
     return MaybeError<Price>.responseError(response);
   }
@@ -317,8 +423,12 @@ class OpenPricesAPIClient {
       response,
     );
     if (response.statusCode == 201) {
-      final Map<String, dynamic> json = HttpHelper().jsonDecode(responseBody);
-      return MaybeError<Proof>.value(Proof.fromJson(json));
+      try {
+        final Map<String, dynamic> json = HttpHelper().jsonDecode(responseBody);
+        return MaybeError<Proof>.value(Proof.fromJson(json));
+      } catch (e) {
+        //
+      }
     }
     return MaybeError<Proof>.error(
       error: responseBody,

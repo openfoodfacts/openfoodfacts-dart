@@ -1,6 +1,7 @@
 import 'currency.dart';
 import 'get_parameters_helper.dart';
 import 'get_prices_order.dart';
+import 'order_by.dart';
 import 'location_osm_type.dart';
 
 /// Parameters for the "get prices" API query.
@@ -24,7 +25,7 @@ class GetPricesParameters extends GetParametersHelper {
   DateTime? dateLte;
   String? owner;
   DateTime? createdGte;
-  List<GetPricesOrder>? getPricesOrder;
+  List<OrderBy<GetPricesOrderField>>? orderBy;
 
   @override
   Map<String, String> getQueryParameters() {
@@ -46,9 +47,9 @@ class GetPricesParameters extends GetParametersHelper {
     addNonNullDate(dateLte, 'date__lte', dayOnly: true);
     addNonNullString(owner, 'owner');
     addNonNullDate(createdGte, 'created__gte', dayOnly: false);
-    if (getPricesOrder != null) {
+    if (orderBy != null) {
       final List<String> orders = <String>[];
-      for (final GetPricesOrder order in getPricesOrder!) {
+      for (final OrderBy order in orderBy!) {
         orders.add(order.offTag);
       }
       if (orders.isNotEmpty) {

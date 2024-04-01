@@ -159,16 +159,18 @@ void main() {
       const int pageNumber = 1;
       const int pageSize = 20;
 
+      late GetPricesResult result;
+
       // oldest first
       GetPricesParameters parameters = GetPricesParameters()
-        ..getPricesOrder = <GetPricesOrder>[
-          GetPricesOrder(field: GetPricesOrderField.created, ascending: true),
+        ..orderBy = <OrderBy<GetPricesOrderField>>[
+          OrderBy(field: GetPricesOrderField.created, ascending: true),
         ]
         ..pageSize = pageSize
         ..pageNumber = pageNumber;
-      GetPricesResults results;
+      MaybeError<GetPricesResult> maybeResults;
       try {
-        results = await OpenPricesAPIClient.getPrices(
+        maybeResults = await OpenPricesAPIClient.getPrices(
           parameters,
           uriHelper: uriHelper,
         );
@@ -178,8 +180,8 @@ void main() {
         }
         rethrow;
       }
-      expect(results.result, isNotNull);
-      GetPricesResult result = results.result!;
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
       expect(result.pageSize, pageSize);
       expect(result.pageNumber, pageNumber);
       expect(result.total, isNotNull);
@@ -201,13 +203,13 @@ void main() {
 
       // newest first
       parameters = GetPricesParameters()
-        ..getPricesOrder = <GetPricesOrder>[
-          GetPricesOrder(field: GetPricesOrderField.created, ascending: false),
+        ..orderBy = <OrderBy<GetPricesOrderField>>[
+          OrderBy(field: GetPricesOrderField.created, ascending: false),
         ]
         ..pageSize = pageSize
         ..pageNumber = pageNumber;
       try {
-        results = await OpenPricesAPIClient.getPrices(
+        maybeResults = await OpenPricesAPIClient.getPrices(
           parameters,
           uriHelper: uriHelper,
         );
@@ -217,8 +219,8 @@ void main() {
         }
         rethrow;
       }
-      expect(results.result, isNotNull);
-      result = results.result!;
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
       expect(result.pageSize, pageSize);
       expect(result.pageNumber, pageNumber);
       expect(result.total, isNotNull);
@@ -263,15 +265,15 @@ void main() {
         ..dateLte = price.date
         ..owner = price.owner
         ..createdGte = price.created
-        ..getPricesOrder = null
+        ..orderBy = null
         ..pageNumber = pageNumber
         ..pageSize = pageSize;
-      results = await OpenPricesAPIClient.getPrices(
+      maybeResults = await OpenPricesAPIClient.getPrices(
         parameters,
         uriHelper: uriHelper,
       );
-      expect(results.result, isNotNull);
-      result = results.result!;
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
       expect(result.total, 1);
       expect(result.items, isNotNull);
       expect(result.items, hasLength(1));
@@ -281,44 +283,209 @@ void main() {
   group('$OpenPricesAPIClient Locations', () {
     test('get existing location', () async {
       const int locationId = 1;
-      final Location? location = await OpenPricesAPIClient.getLocation(
+      final MaybeError<Location> maybeLocation =
+          await OpenPricesAPIClient.getLocation(
         locationId,
         uriHelper: uriHelper,
       );
-      expect(location, isNotNull);
-      expect(location!.locationId, locationId);
+      expect(maybeLocation.isError, isFalse);
+      final Location location = maybeLocation.value;
+      expect(location.locationId, locationId);
       expect(location.osmId, greaterThan(0));
       expect(location.type, isNotNull);
+
+      final MaybeError<Location> maybeSameOSMLocation =
+          await OpenPricesAPIClient.getOSMLocation(
+        locationOSMType: location.type,
+        locationOSMId: location.osmId,
+        uriHelper: uriHelper,
+      );
+      expect(maybeSameOSMLocation.isError, isFalse);
+      final Location sameOSMLocation = maybeSameOSMLocation.value;
+      expect(sameOSMLocation.locationId, location.locationId);
+      expect(sameOSMLocation.osmId, location.osmId);
+      expect(sameOSMLocation.type, location.type);
     });
 
     test('get non-existing location', () async {
-      final Location? location = await OpenPricesAPIClient.getLocation(
-        -1,
+      const int locationId = -1;
+      final MaybeError<Location> location =
+          await OpenPricesAPIClient.getLocation(
+        locationId,
         uriHelper: uriHelper,
       );
-      expect(location, isNull);
+      expect(location.isError, isTrue);
+      expect(
+        location.detailError,
+        'Location with id $locationId not found',
+      );
     });
 
-    test('get existing product', () async {
+    test('get non-existing OSM location', () async {
+      const int locationOSMId = -1;
+      const LocationOSMType locationOSMType = LocationOSMType.way;
+      final MaybeError<Location> location =
+          await OpenPricesAPIClient.getOSMLocation(
+        locationOSMId: locationOSMId,
+        locationOSMType: LocationOSMType.way,
+        uriHelper: uriHelper,
+      );
+      expect(location.isError, isTrue);
+      expect(
+        location.detailError,
+        'Location with type ${locationOSMType.offTag} & id $locationOSMId not found',
+      );
+    });
+
+    test('get locations', () async {
+      const int pageNumber = 1;
+      const int pageSize = 20;
+
+      late GetLocationsResult result;
+
+      // oldest first
+      GetLocationsParameters parameters = GetLocationsParameters()
+        ..orderBy = <OrderBy<GetLocationsOrderField>>[
+          OrderBy(field: GetLocationsOrderField.created, ascending: true),
+        ]
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber;
+      MaybeError<GetLocationsResult> maybeResults;
+      try {
+        maybeResults = await OpenPricesAPIClient.getLocations(
+          parameters,
+          uriHelper: uriHelper,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.numberOfPages, (result.total! / result.pageSize!).ceil());
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(pageSize));
+      final DateTime oldestDate = result.items!.first.created;
+
+      // newest first
+      parameters = GetLocationsParameters()
+        ..orderBy = <OrderBy<GetLocationsOrderField>>[
+          OrderBy(field: GetLocationsOrderField.created, ascending: false),
+        ]
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber;
+      try {
+        maybeResults = await OpenPricesAPIClient.getLocations(
+          parameters,
+          uriHelper: uriHelper,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.numberOfPages, (result.total! / result.pageSize!).ceil());
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(pageSize));
+      final DateTime newestDate = result.items!.first.created;
+
+      expect(
+        newestDate.millisecondsSinceEpoch,
+        greaterThan(oldestDate.millisecondsSinceEpoch),
+      );
+
+      parameters = GetLocationsParameters()
+        ..osmNameLike = 'Monoprix'
+        ..osmCityLike = 'Grenoble'
+        ..osmPostcodeLike = '38000'
+        ..osmCountryLike = 'France';
+      maybeResults = await OpenPricesAPIClient.getLocations(
+        parameters,
+        uriHelper: uriHelper,
+      );
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.total, greaterThanOrEqualTo(1));
+      expect(result.items, isNotNull);
+
+      const String city = 'Grenoble';
+      parameters = GetLocationsParameters()..osmCityLike = city;
+      maybeResults = await OpenPricesAPIClient.getLocations(
+        parameters,
+        uriHelper: uriHelper,
+      );
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.total, greaterThanOrEqualTo(1));
+      expect(result.items, isNotNull);
+    });
+  });
+
+  group('$OpenPricesAPIClient Products', () {
+    test('get existing product by ID', () async {
       const int productId = 1;
-      final PriceProduct? priceProduct =
-          await OpenPricesAPIClient.getPriceProduct(
+      final MaybeError<PriceProduct> maybePriceProduct =
+          await OpenPricesAPIClient.getPriceProductById(
         productId,
         uriHelper: uriHelper,
       );
-      expect(priceProduct, isNotNull);
-      expect(priceProduct!.productId, productId);
+      expect(maybePriceProduct.isError, isFalse);
+      final PriceProduct priceProduct = maybePriceProduct.value;
+      expect(priceProduct.productId, productId);
       expect(priceProduct.code.length, greaterThanOrEqualTo(1));
       expect(priceProduct.created, isNotNull);
     });
 
-    test('get non-existing product', () async {
-      final PriceProduct? priceProduct =
-          await OpenPricesAPIClient.getPriceProduct(
-        -1,
+    test('get non-existing product by ID', () async {
+      const int productId = -1;
+      final MaybeError<PriceProduct> maybePriceProduct =
+          await OpenPricesAPIClient.getPriceProductById(
+        productId,
         uriHelper: uriHelper,
       );
-      expect(priceProduct, isNull);
+      expect(maybePriceProduct.isError, isTrue);
+      expect(
+        maybePriceProduct.detailError,
+        'Product with id $productId not found',
+      );
+    });
+
+    test('get existing product by CODE', () async {
+      const String productCode = '3760121210609';
+      final MaybeError<PriceProduct> maybePriceProduct =
+          await OpenPricesAPIClient.getPriceProductByCode(
+        productCode,
+        uriHelper: uriHelper,
+      );
+      expect(maybePriceProduct.isError, isFalse);
+      final PriceProduct priceProduct = maybePriceProduct.value;
+      expect(priceProduct.code, productCode);
+      expect(priceProduct.created, isNotNull);
+    });
+
+    test('get non-existing product by CODE', () async {
+      const String productCode = 'not a code';
+      final MaybeError<PriceProduct> maybePriceProduct =
+          await OpenPricesAPIClient.getPriceProductByCode(
+        productCode,
+        uriHelper: uriHelper,
+      );
+      expect(maybePriceProduct.isError, isTrue);
+      expect(
+        maybePriceProduct.detailError,
+        'Product with code $productCode not found',
+      );
     });
   });
 
