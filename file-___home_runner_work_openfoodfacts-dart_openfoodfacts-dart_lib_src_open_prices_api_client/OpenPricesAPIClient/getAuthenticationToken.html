@@ -107,9 +107,13 @@ To authenticate, you can either:</p>
       &#39;password&#39;: password,
     },
   );
-  dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
   if (response.statusCode == 200) {
-    return MaybeError&lt;String&gt;.value(decodedResponse[&#39;access_token&#39;]);
+    try {
+      final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+      return MaybeError&lt;String&gt;.value(decodedResponse[&#39;access_token&#39;]);
+    } catch (e) {
+      &#47;&#47;
+    }
   }
   return MaybeError&lt;String&gt;.responseError(response);
 }</code></pre>

@@ -249,12 +249,20 @@
   Client calls of the Folksonomy API (Open Food Facts)
 </dd>
 
-        <dt id="GetPricesOrder">
-  <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_prices_order/GetPricesOrder-class.html">GetPricesOrder</a></span> 
+        <dt id="GetLocationsParameters">
+  <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_locations_parameters/GetLocationsParameters-class.html">GetLocationsParameters</a></span> 
 
 </dt>
 <dd>
-  Order clause for "get prices".
+  Parameters for the "get locations" API query.
+</dd>
+
+        <dt id="GetLocationsResult">
+  <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_locations_result/GetLocationsResult-class.html">GetLocationsResult</a></span> 
+
+</dt>
+<dd>
+  List of location objects returned by the "get locations" method.
 </dd>
 
         <dt id="GetPricesParameters">
@@ -271,14 +279,6 @@
 </dt>
 <dd>
   List of price objects returned by the "get prices" method.
-</dd>
-
-        <dt id="GetPricesResults">
-  <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_prices_results/GetPricesResults-class.html">GetPricesResults</a></span> 
-
-</dt>
-<dd>
-  Either successful "get prices" result, or request validation errors.
 </dd>
 
         <dt id="HttpHelper">
@@ -642,6 +642,22 @@ Knowledge panels using the id.
 </dt>
 <dd>
   Client calls of the Open Prices API.
+</dd>
+
+        <dt id="OrderBy">
+  <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_order_by/OrderBy-class.html">OrderBy</a><span class="signature">&lt;<wbr><span class="type-parameter">T extends <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_order_by/OrderByField-class.html">OrderByField</a></span>&gt;</span></span> 
+
+</dt>
+<dd>
+  "Order by" clause for "get list" methods (e.g. "get prices")
+</dd>
+
+        <dt id="OrderByField">
+  <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_order_by/OrderByField-class.html">OrderByField</a></span> 
+
+</dt>
+<dd>
+  "Order by" field for "get list" methods (e.g. "get prices")
 </dd>
 
         <dt id="OrderedNutrient">
@@ -1271,22 +1287,6 @@ of a text title, subtitle and an icon.
   
 </dd>
 
-        <dt id="ValidationError">
-  <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_validation_error/ValidationError-class.html">ValidationError</a></span> 
-
-</dt>
-<dd>
-  Single API request validation error.
-</dd>
-
-        <dt id="ValidationErrors">
-  <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_validation_errors/ValidationErrors-class.html">ValidationErrors</a></span> 
-
-</dt>
-<dd>
-  List of single API request validation errors.
-</dd>
-
         <dt id="WithoutAdditives">
   <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_without_additives/WithoutAdditives-class.html">WithoutAdditives</a></span> 
 
@@ -1561,6 +1561,14 @@ good/bad/neutral for the topic to which the panel applies.
 </dt>
 <dd>
   Fuzziness Level for Elastic Search API.
+</dd>
+
+        <dt id="GetLocationsOrderField">
+  <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_locations_order/GetLocationsOrderField.html">GetLocationsOrderField</a></span> 
+
+</dt>
+<dd>
+  Field for the "order by" clause of "get locations".
 </dd>
 
         <dt id="GetPricesOrderField">
@@ -2063,11 +2071,13 @@ compact size.
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_events_base/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_events_base-library.html">src/model/events_base</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_folksonomy/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_folksonomy-library.html">src/folksonomy</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_search_fuzziness/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_search_fuzziness-library.html">src/search/fuzziness</a></li>
+      <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_locations_order/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_locations_order-library.html">src/prices/get_locations_order</a></li>
+      <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_locations_parameters/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_locations_parameters-library.html">src/prices/get_locations_parameters</a></li>
+      <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_locations_result/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_locations_result-library.html">src/prices/get_locations_result</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper-library.html">src/prices/get_parameters_helper</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_prices_order/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_prices_order-library.html">src/prices/get_prices_order</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_prices_parameters/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_prices_parameters-library.html">src/prices/get_prices_parameters</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_prices_result/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_prices_result-library.html">src/prices/get_prices_result</a></li>
-      <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_prices_results/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_prices_results-library.html">src/prices/get_prices_results</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_http_helper-library.html">src/utils/http_helper</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_image_helper-library.html">src/utils/image_helper</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient-library.html">src/model/ingredient</a></li>
@@ -2105,6 +2115,7 @@ compact size.
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_search_api_client/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_search_api_client-library.html">src/open_food_search_api_client</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_prices_api_client/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_prices_api_client-library.html">src/open_prices_api_client</a></li>
       <li><a href="../openfoodfacts/openfoodfacts-library.html">openfoodfacts</a></li>
+      <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_order_by/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_order_by-library.html">src/prices/order_by</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrient/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrient-library.html">src/model/ordered_nutrient</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrients/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrients-library.html">src/model/ordered_nutrients</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_origins_of_ingredients/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_origins_of_ingredients-library.html">src/model/origins_of_ingredients</a></li>
@@ -2180,8 +2191,6 @@ compact size.
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_reader_stub/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_reader_stub-library.html">src/utils/uri_reader_stub</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user-library.html">src/model/user</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user_agent/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user_agent-library.html">src/model/user_agent</a></li>
-      <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_validation_error/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_validation_error-library.html">src/prices/validation_error</a></li>
-      <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_validation_errors/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_validation_errors-library.html">src/prices/validation_errors</a></li>
       <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_without_additives/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_parameter_without_additives-library.html">src/model/parameter/without_additives</a></li>
 </ol>
 

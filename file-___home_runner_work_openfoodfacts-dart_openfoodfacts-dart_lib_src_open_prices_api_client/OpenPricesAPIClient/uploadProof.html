@@ -121,8 +121,12 @@
     response,
   );
   if (response.statusCode == 201) {
-    final Map&lt;String, dynamic&gt; json = HttpHelper().jsonDecode(responseBody);
-    return MaybeError&lt;Proof&gt;.value(Proof.fromJson(json));
+    try {
+      final Map&lt;String, dynamic&gt; json = HttpHelper().jsonDecode(responseBody);
+      return MaybeError&lt;Proof&gt;.value(Proof.fromJson(json));
+    } catch (e) {
+      &#47;&#47;
+    }
   }
   return MaybeError&lt;Proof&gt;.error(
     error: responseBody,

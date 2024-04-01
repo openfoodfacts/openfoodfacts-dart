@@ -63,7 +63,7 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.3.3/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_location/Location-class.html">Location</a>?</span>&gt;</span></span>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.3.3/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_maybe_error/MaybeError-class.html">MaybeError</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_location/Location-class.html">Location</a></span>&gt;</span></span>&gt;</span></span>
 <span class="name ">getLocation</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getLocation-param-locationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.3/dart-core/int-class.html">int</a></span> <span class="parameter-name">locationId</span>, </span></li>
 <li><span class="parameter" id="getLocation-param-uriHelper">{<span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>}</span></li>
 </ol>)
@@ -77,7 +77,7 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static Future&lt;Location?&gt; getLocation(
+  <pre class="language-dart"><code class="language-dart">static Future&lt;MaybeError&lt;Location&gt;&gt; getLocation(
   final int locationId, {
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
@@ -89,11 +89,15 @@
     uri,
     uriHelper: uriHelper,
   );
-  dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
   if (response.statusCode == 200) {
-    return Location.fromJson(decodedResponse);
+    try {
+      final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+      return MaybeError&lt;Location&gt;.value(Location.fromJson(decodedResponse));
+    } catch (e) {
+      &#47;&#47;
+    }
   }
-  return null;
+  return MaybeError&lt;Location&gt;.responseError(response);
 }</code></pre>
 </section>
 

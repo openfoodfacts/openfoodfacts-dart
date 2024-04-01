@@ -103,9 +103,9 @@ Map&lt;String, String&gt; getQueryParameters() {
   addNonNullDate(dateLte, &#39;date__lte&#39;, dayOnly: true);
   addNonNullString(owner, &#39;owner&#39;);
   addNonNullDate(createdGte, &#39;created__gte&#39;, dayOnly: false);
-  if (getPricesOrder != null) {
+  if (orderBy != null) {
     final List&lt;String&gt; orders = &lt;String&gt;[];
-    for (final GetPricesOrder order in getPricesOrder!) {
+    for (final OrderBy order in orderBy!) {
       orders.add(order.offTag);
     }
     if (orders.isNotEmpty) {

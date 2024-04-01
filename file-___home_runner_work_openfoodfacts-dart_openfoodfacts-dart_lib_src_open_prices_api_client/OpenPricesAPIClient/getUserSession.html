@@ -93,9 +93,13 @@
     uriHelper: uriHelper,
     bearerToken: bearerToken,
   );
-  final Map&lt;String, dynamic&gt; json = HttpHelper().jsonDecodeUtf8(response);
   if (response.statusCode == 200) {
-    return MaybeError&lt;Session&gt;.value(Session.fromJson(json));
+    try {
+      final Map&lt;String, dynamic&gt; json = HttpHelper().jsonDecodeUtf8(response);
+      return MaybeError&lt;Session&gt;.value(Session.fromJson(json));
+    } catch (e) {
+      &#47;&#47;
+    }
   }
   return MaybeError&lt;Session&gt;.responseError(response);
 }</code></pre>
