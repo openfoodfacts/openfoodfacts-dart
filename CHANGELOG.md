@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.5.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.4.0...v3.5.0) (2024-04-07)
+
+
+### Features
+
+* 831 - latest "prices" API changes ([#897](https://github.com/openfoodfacts/openfoodfacts-dart/issues/897)) ([88dada6](https://github.com/openfoodfacts/openfoodfacts-dart/commit/88dada65a91474e334568baa5217c100166ef07a))
+* 831 - more parameters for the "get prices" API query ([#886](https://github.com/openfoodfacts/openfoodfacts-dart/issues/886)) ([820d145](https://github.com/openfoodfacts/openfoodfacts-dart/commit/820d145ca11d1a36ecbc800d61ce0a866aee78a1))
+* 831 - new price methods like add price and upload proof ([#884](https://github.com/openfoodfacts/openfoodfacts-dart/issues/884)) ([7615fcb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7615fcb4c787f685169b7b2e9ef624ba064cdb6a))
+* 831 - Prices getLocation, getPriceProduct, getStatus methods ([#855](https://github.com/openfoodfacts/openfoodfacts-dart/issues/855)) ([e18080b](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e18080bdd1bbe17da4bbd1857dc3e2240abff388))
+* 891 - new "uploaded timestamp" field for raw images ([#892](https://github.com/openfoodfacts/openfoodfacts-dart/issues/892)) ([56446da](https://github.com/openfoodfacts/openfoodfacts-dart/commit/56446dab9b9eaac15528668476a1a08bdb0cf7f9))
+* 895 - added product field `'expiration_date'` ([#898](https://github.com/openfoodfacts/openfoodfacts-dart/issues/898)) ([7ec0a7e](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7ec0a7e7d80ff4d31d624d8221580027c501b350))
+
+
+### Bug Fixes
+
+* folksonomy getProductTag may return 404 ([#881](https://github.com/openfoodfacts/openfoodfacts-dart/issues/881)) ([990cc67](https://github.com/openfoodfacts/openfoodfacts-dart/commit/990cc6707e80b9a89cbc822b6949b08fb8e2fa29))
+* new format for the labeler ([#899](https://github.com/openfoodfacts/openfoodfacts-dart/issues/899)) ([d3ca5ea](https://github.com/openfoodfacts/openfoodfacts-dart/commit/d3ca5ea328cd6387c0213f574753ca3e52677f99))
+* unit tests around category "beverages" ([#896](https://github.com/openfoodfacts/openfoodfacts-dart/issues/896)) ([40e8966](https://github.com/openfoodfacts/openfoodfacts-dart/commit/40e89666b70eb64de81c28e34d488bf16e7a9e96))
+
 ## [3.4.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.3.3...v3.4.0) (2024-02-06)
 
 
