@@ -1,54 +1,68 @@
 GitHub Actions:
-- .github/**/*
+- changed-files:
+  - any-glob-to-any-file: '.github/**/*'
 
 🧪 Tests:
-- test/**/*
-- test/api_getTaxonomyPackagingMaterialsServer_test.dart
-- test/api_getTaxonomyPackagingShapesServer_test.dart
+- changed-files:
+  - any-glob-to-any-file: 'test/**/*'
+  - any-glob-to-any-file: 'test/api_getTaxonomyPackagingMaterialsServer_test.dart'
+  - any-glob-to-any-file: 'test/api_getTaxonomyPackagingShapesServer_test.dart'
 
 📖 Knowledge panels:
-- lib/src/model/knowledge_panel.g.dart
-- lib/src/model/knowledge_panel_element.g.dart
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/knowledge_panel.g.dart'
+  - any-glob-to-any-file: 'lib/src/model/knowledge_panel_element.g.dart'
 
 Product:
-- lib/src/model/product.dart
-- lib/src/model/product.g.dart
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/product.dart'
+  - any-glob-to-any-file: 'lib/src/model/product.g.dart'
 
 🤖 Robotoff:
-- lib/src/model/robotoff_question.g.dart
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/robotoff_question.g.dart'
 
 pubspec:
-- pubspec.yaml
+- changed-files:
+  - any-glob-to-any-file: 'pubspec.yaml'
 
 🌱 Eco-Score:
-- lib/src/model/ecoscore_data.g.dart
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/ecoscore_data.g.dart'
 
 Personalized search:
-- lib/src/personalized_search/**/*
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/personalized_search/**/*'
 
 Folksonomy Engine:
-- lib/src/folksonomy.dart
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/folksonomy.dart'
 
 📦 Packaging:
-- lib/src/model/TaxonomyPackagingMaterial.dart
-- lib/src/model/TaxonomyPackagingMaterial.g.dart
-- lib/src/model/TaxonomyPackagingShape.dart
-- lib/src/model/TaxonomyPackagingShape.g.dart
-- test/api_getTaxonomyPackagingMaterialsServer_test.dart
-- test/api_getTaxonomyPackagingShapesServer_test.dart
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/TaxonomyPackagingMaterial.dart'
+  - any-glob-to-any-file: 'lib/src/model/TaxonomyPackagingMaterial.g.dart'
+  - any-glob-to-any-file: 'lib/src/model/TaxonomyPackagingShape.dart'
+  - any-glob-to-any-file: 'lib/src/model/TaxonomyPackagingShape.g.dart'
+  - any-glob-to-any-file: 'test/api_getTaxonomyPackagingMaterialsServer_test.dart'
+  - any-glob-to-any-file: 'test/api_getTaxonomyPackagingShapesServer_test.dart'
 
 📜 Open Food Facts Events:
-- lib/src/events.dart
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/events.dart'
 
 OxF:
-- lib/src/utils/server_type.dart
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/utils/server_type.dart'
 
 🖼️ Images:
-- lib/src/model/product_image.dart
-- lib/src/utils/image_helper.dart
-- test/api_get_product_image_ids_test.dart
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/product_image.dart'
+  - any-glob-to-any-file: 'lib/src/utils/image_helper.dart'
+  - any-glob-to-any-file: 'test/api_get_product_image_ids_test.dart'
 
 💰 Prices:
-- lib/src/prices/*.dart
-- lib/src/open_prices_api_client.dart
-- test/api_prices_*.dart
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/prices/*.dart'
+  - any-glob-to-any-file: 'lib/src/open_prices_api_client.dart'
+  - any-glob-to-any-file: 'test/api_prices_*.dart'
