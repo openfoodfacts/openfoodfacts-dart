@@ -299,13 +299,13 @@ class KnowledgePanelTableElement extends JsonObject {
 @JsonSerializable()
 class KnowledgePanelActionElement extends JsonObject {
   /// HTML description.
-  final String html;
+  final String? html;
 
   /// Needed contribute actions, as [KnowledgePanelAction.addCategories.offTag].
   final List<String> actions;
 
   const KnowledgePanelActionElement({
-    required this.html,
+    this.html,
     required this.actions,
   });
 
