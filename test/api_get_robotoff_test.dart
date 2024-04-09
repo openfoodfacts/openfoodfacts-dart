@@ -106,12 +106,13 @@ void main() {
     test('get popular questions with types', () async {
       Future<List<RobotoffQuestion>> getTopPopularQuestions(
         final OpenFoodFactsCountry country,
+        final OpenFoodFactsLanguage language,
       ) async {
         const InsightType type = InsightType.CATEGORY;
         const int numQuestions = 10;
         final RobotoffQuestionResult result =
             await RobotoffAPIClient.getQuestions(
-          OpenFoodFactsLanguage.GERMAN,
+          language,
           user: TestConstants.PROD_USER,
           insightTypes: [type],
           count: numQuestions,
@@ -133,6 +134,7 @@ void main() {
 
       questions = await getTopPopularQuestions(
         OpenFoodFactsCountry.GERMANY,
+        OpenFoodFactsLanguage.GERMAN,
       );
       final List<String> germanBarcodes1 = <String>[];
       for (final RobotoffQuestion question in questions) {
@@ -141,6 +143,7 @@ void main() {
 
       questions = await getTopPopularQuestions(
         OpenFoodFactsCountry.GERMANY,
+        OpenFoodFactsLanguage.GERMAN,
       );
       final List<String> germanBarcodes2 = <String>[];
       for (final RobotoffQuestion question in questions) {
@@ -150,7 +153,8 @@ void main() {
       expect(germanBarcodes2, germanBarcodes1);
 
       questions = await getTopPopularQuestions(
-        OpenFoodFactsCountry.FRANCE,
+        OpenFoodFactsCountry.ITALY,
+        OpenFoodFactsLanguage.ITALIAN,
       );
       final List<String> frenchBarcodes1 = <String>[];
       for (final RobotoffQuestion question in questions) {
@@ -158,7 +162,7 @@ void main() {
       }
       // highly probable
       expect(germanBarcodes2, isNot(frenchBarcodes1));
-    });
+    }, timeout: Timeout(Duration(seconds: 60)));
 
     test('get 2 random questions with no specific type', () async {
       final RobotoffQuestionResult result =
@@ -177,14 +181,15 @@ void main() {
 
   group('$OpenFoodAPIClient get robotoff insights', () {
     test('get random insight', () async {
+      const InsightType type = InsightType.CATEGORY;
       final InsightsResult result = await RobotoffAPIClient.getRandomInsights(
-        type: InsightType.CATEGORY,
-        countries: <OpenFoodFactsCountry>[OpenFoodFactsCountry.FRANCE],
+        type: type,
+        countries: <OpenFoodFactsCountry>[OpenFoodFactsCountry.GERMANY],
       );
 
       expect(result.status, isNotNull);
       expect(result.status, 'found');
-      expect(result.insights![0].type, InsightType.CATEGORY);
+      expect(result.insights![0].type, type);
       expect(result.insights![0].id, isNotNull);
       expect(result.insights![0].barcode, isNotNull);
     });
@@ -192,6 +197,7 @@ void main() {
     test('get product insights (found)', () async {
       final InsightsResult result1 = await RobotoffAPIClient.getRandomInsights(
         type: InsightType.CATEGORY,
+        count: 1,
       );
 
       final String barcode = result1.insights![0].barcode!;

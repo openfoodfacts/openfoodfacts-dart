@@ -14,6 +14,7 @@ import 'utils/open_food_api_configuration.dart';
 import 'utils/server_type.dart';
 import 'utils/uri_helper.dart';
 
+/// cf. https://openfoodfacts.github.io/robotoff/references/api/
 class RobotoffAPIClient {
   RobotoffAPIClient._();
 

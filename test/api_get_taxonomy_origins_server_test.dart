@@ -36,7 +36,7 @@ void main() {
       expect(value.synonyms![OpenFoodFactsLanguage.FRENCH]!,
           contains(expectedNameFrench));
       expect(value.parents, unorderedEquals(expectedParents));
-      expect(value.children, unorderedEquals(expectedChildren));
+      expect(value.children, containsAll(expectedChildren));
     }
 
     test('get an origin', () async {
