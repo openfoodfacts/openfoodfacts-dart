@@ -121,6 +121,11 @@ void main() {
     expect(status, isNotNull);
     expect(status!.successful, isTrue);
     expect(status.userId, TestConstants.PROD_USER.userId);
+    expect(status.userName, 'Alexander Schacht (TIOLI)');
+    expect(status.preferredLanguage, isNull);
+    expect(status.country, isNull);
+    expect(status.isAdmin, isFalse);
+    expect(status.isModerator, isFalse);
   });
 
   group('reset password', () {
