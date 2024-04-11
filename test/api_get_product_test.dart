@@ -985,6 +985,23 @@ void main() {
     );
   });
 
+  test('FABRICE get localized country names', () async {
+    final List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
+      OpenFoodFactsLanguage.FRENCH,
+      OpenFoodFactsLanguage.ENGLISH,
+      OpenFoodFactsLanguage.GERMAN,
+    ];
+    for (final OpenFoodFactsLanguage language in languages) {
+      final Map<OpenFoodFactsCountry, String> localizedCountries =
+          await OpenFoodAPIClient.getLocalizedCountryNames(language);
+      expect(
+        localizedCountries.length,
+        OpenFoodFactsCountry.values.length,
+        reason: 'Missing country localizations for ${language.offTag}',
+      );
+    }
+  });
+
   test('get taxonomy translation uri', () async {
     const List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
       OpenFoodFactsLanguage.FRENCH,
