@@ -985,7 +985,7 @@ void main() {
     );
   });
 
-  test('FABRICE get localized country names', () async {
+  test('get localized country names', () async {
     final List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
       OpenFoodFactsLanguage.FRENCH,
       OpenFoodFactsLanguage.ENGLISH,
