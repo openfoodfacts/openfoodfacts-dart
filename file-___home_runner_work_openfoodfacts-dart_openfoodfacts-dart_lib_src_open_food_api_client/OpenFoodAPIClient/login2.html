@@ -116,7 +116,10 @@
     addCredentialsToBody: true,
   );
   if (response.statusCode == 200 || response.statusCode == 403) {
-    return LoginStatus.fromJson(HttpHelper().jsonDecode(response.body));
+    return LoginStatus.fromJson(
+      HttpHelper().jsonDecode(response.body),
+      response.headers,
+    );
   }
 
   return null;
