@@ -25,6 +25,7 @@ class LoginStatus {
     this.userEmail,
     this.userName,
     this.userId,
+    this.cookie,
   });
 
   final int status;
@@ -33,12 +34,19 @@ class LoginStatus {
   final String? userName;
   final String? userId;
 
-  factory LoginStatus.fromJson(Map<String, dynamic> json) => LoginStatus(
+  /// The cookie is necessary for some GET requests that require an
+  /// authenticated user.
+  final String? cookie;
+
+  factory LoginStatus.fromJson(Map<String, dynamic> json,
+          [Map<String, String>? headers]) =>
+      LoginStatus(
         status: JsonObject.parseInt(json['status'])!,
         statusVerbose: json['status_verbose'] as String,
         userId: json['user_id'] as String?,
         userEmail: json['user']?['email'] as String?,
         userName: json['user']?['name'] as String?,
+        cookie: headers?['set-cookie'],
       );
 
   /// Was the login successful?
@@ -51,5 +59,6 @@ class LoginStatus {
       '${userId == null ? '' : ',userId:$userId'}'
       '${userEmail == null ? '' : ',userEmail:$userEmail'}'
       '${userName == null ? '' : ',userName:$userName'}'
+      '${cookie == null ? '' : ',cookie:$cookie'}'
       ')';
 }
