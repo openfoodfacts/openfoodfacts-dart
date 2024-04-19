@@ -65,6 +65,7 @@ class HttpHelper {
     User? user,
     required final UriHelper uriHelper,
     final String? bearerToken,
+    final bool addCookiesToHeader = false,
   }) async {
     http.Response response = await http.get(
       uri,
@@ -73,6 +74,7 @@ class HttpHelper {
         uriHelper: uriHelper,
         addCredentialsToHeader: false,
         bearerToken: bearerToken,
+        addCookieToHeader: addCookiesToHeader,
       ),
     );
 
