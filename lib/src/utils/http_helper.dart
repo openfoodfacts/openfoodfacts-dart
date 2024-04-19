@@ -250,6 +250,7 @@ class HttpHelper {
     required final UriHelper uriHelper,
     required bool addCredentialsToHeader,
     final String? bearerToken,
+    final bool addCookieToHeader = false,
   }) {
     if (bearerToken != null) {
       return _getBearerHeader(bearerToken);
@@ -284,6 +285,14 @@ class HttpHelper {
         headers.addAll({'Authorization': token});
       }
     }
+    if (addCookieToHeader) {
+      if (user?.cookie == null) {
+        throw Exception('A cookie must be set before calling this method');
+      }
+
+      headers['Cookie'] = user!.cookie!;
+    }
+
     return headers;
   }
 
