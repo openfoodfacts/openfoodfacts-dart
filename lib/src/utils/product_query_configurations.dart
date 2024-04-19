@@ -1,8 +1,9 @@
 import 'package:http/http.dart';
+
+import '../model/user.dart';
 import 'abstract_query_configuration.dart';
 import 'http_helper.dart';
 import 'uri_helper.dart';
-import '../model/user.dart';
 
 /// Api version for product queries
 class ProductQueryVersion {
@@ -60,6 +61,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
         ),
         user: user,
         uriHelper: uriHelper,
+        addCookiesToHeader: true,
       );
     }
     return await HttpHelper().doPostRequest(
