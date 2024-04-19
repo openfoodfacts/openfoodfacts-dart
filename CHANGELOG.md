@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.6.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.5.0...v3.6.0) (2024-04-19)
+
+
+### Features
+
+* Allow to receive a cookie and send it later ([#911](https://github.com/openfoodfacts/openfoodfacts-dart/issues/911)) ([ff9c7a8](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ff9c7a88fd04c402f32edebadc9f95ffafb03b7f))
+
+
+### Bug Fixes
+
+* auth label ([#912](https://github.com/openfoodfacts/openfoodfacts-dart/issues/912)) ([ceed92f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ceed92f20af5eb4e5e0b0dd409db79ad79d6e0e8))
+
 ## [3.5.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.4.0...v3.5.0) (2024-04-07)
 
 
