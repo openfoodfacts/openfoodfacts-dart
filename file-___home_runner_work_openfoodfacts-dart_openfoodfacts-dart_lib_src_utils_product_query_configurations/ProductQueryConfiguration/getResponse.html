@@ -99,6 +99,7 @@ Future&lt;Response&gt; getResponse(
       ),
       user: user,
       uriHelper: uriHelper,
+      addCookiesToHeader: true,
     );
   }
   return await HttpHelper().doPostRequest(
