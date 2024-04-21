@@ -62,7 +62,7 @@ class LoginStatus {
       userName: details?['name'] as String?,
       preferredLanguage:
           OpenFoodFactsLanguage.fromOffTag(details?['preferred_language']),
-      country: OpenFoodFactsCountry.fromOffTag(details?['country']),
+      country: OpenFoodFactsCountry.fromOffTag(details?['cc']),
       isModerator: JsonHelper.boolFromJSON(details?['moderator']),
       isAdmin: JsonHelper.boolFromJSON(details?['admin']),
       cookie: headers?['set-cookie'],
