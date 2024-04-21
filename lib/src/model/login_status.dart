@@ -33,6 +33,7 @@ class LoginStatus {
     this.country,
     this.isModerator,
     this.isAdmin,
+    this.cookie,
   });
 
   final int status;
@@ -47,8 +48,12 @@ class LoginStatus {
   final bool? isModerator;
   final bool? isAdmin;
 
-  factory LoginStatus.fromJson(Map<String, dynamic> json) {
-    print('json: $json');
+  /// The cookie is necessary for some GET requests that require an
+  /// authenticated user.
+  final String? cookie;
+
+  factory LoginStatus.fromJson(Map<String, dynamic> json,
+      [Map<String, String>? headers]) {
     final details = json['user'];
     return LoginStatus(
       status: JsonObject.parseInt(json['status'])!,
@@ -60,6 +65,7 @@ class LoginStatus {
       country: OpenFoodFactsCountry.fromOffTag(details?['country']),
       isModerator: JsonHelper.boolFromJSON(details?['moderator']),
       isAdmin: JsonHelper.boolFromJSON(details?['admin']),
+      cookie: headers?['set-cookie'],
     );
   }
 
@@ -76,5 +82,6 @@ class LoginStatus {
       '${country == null ? '' : ',country:$country'}'
       '${isAdmin == null ? '' : ',isAdmin:$isAdmin'}'
       '${isModerator == null ? '' : ',isModerator:$isModerator'}'
+      '${cookie == null ? '' : ',cookie:$cookie'}'
       ')';
 }
