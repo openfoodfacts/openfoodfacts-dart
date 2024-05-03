@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.6.1...v3.7.0) (2024-05-03)
+
+
+### Features
+
+* 919 - new field KnowledgePanelImageElement.link_url ([#920](https://github.com/openfoodfacts/openfoodfacts-dart/issues/920)) ([a161516](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a161516cc209ea55d911e702a6573bb880879661))
+
 ## [3.6.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.6.0...v3.6.1) (2024-04-23)
 
 
