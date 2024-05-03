@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.6.0...v3.6.1) (2024-04-23)
+
+
+### Bug Fixes
+
+* trigger release please ([#917](https://github.com/openfoodfacts/openfoodfacts-dart/issues/917)) ([7a7f1dd](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7a7f1ddfb8e073a675f555f69985a8e4cde4a33b))
+
 ## [3.6.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.5.0...v3.6.0) (2024-04-19)
 
 

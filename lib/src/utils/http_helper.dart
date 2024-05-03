@@ -287,11 +287,7 @@ class HttpHelper {
         headers.addAll({'Authorization': token});
       }
     }
-    if (addCookieToHeader) {
-      if (user?.cookie == null) {
-        throw Exception('A cookie must be set before calling this method');
-      }
-
+    if (addCookieToHeader && user?.cookie != null) {
       headers['Cookie'] = user!.cookie!;
     }
 
