@@ -763,7 +763,7 @@ enum OpenFoodFactsCountry implements OffTagged {
   final String offTag;
 
   // TODO(monsieurtanuki): remove ANTARCTICA, with no products and no currency?
-  /// Country most probably and up-to-date currency.
+  /// Country most probable and up-to-date currency.
   final Currency? currency;
 
   /// Returns the [OpenFoodFactsCountry] that matches the [offTag].
