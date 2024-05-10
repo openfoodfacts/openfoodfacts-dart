@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.7.0...v3.8.0) (2024-05-10)
+
+
+### Features
+
+* 922 - default currency for each country ([#923](https://github.com/openfoodfacts/openfoodfacts-dart/issues/923)) ([37fd612](https://github.com/openfoodfacts/openfoodfacts-dart/commit/37fd6122cbc16a7b8922f269da920169c1ada976))
+
 ## [3.7.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.6.1...v3.7.0) (2024-05-03)
 
 
