@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'model/per_size.dart';
 
 import 'interface/json_object.dart';
 import 'model/login_status.dart';
@@ -11,6 +10,7 @@ import 'model/ocr_packaging_result.dart';
 import 'model/old_product_result.dart';
 import 'model/ordered_nutrients.dart';
 import 'model/parameter/barcode_parameter.dart';
+import 'model/per_size.dart';
 import 'model/product.dart';
 import 'model/product_freshness.dart';
 import 'model/product_image.dart';
@@ -932,7 +932,10 @@ class OpenFoodAPIClient {
       addCredentialsToBody: true,
     );
     if (response.statusCode == 200 || response.statusCode == 403) {
-      return LoginStatus.fromJson(HttpHelper().jsonDecode(response.body));
+      return LoginStatus.fromJson(
+        HttpHelper().jsonDecode(response.body),
+        response.headers,
+      );
     }
 
     return null;
