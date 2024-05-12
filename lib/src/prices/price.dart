@@ -1,8 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'currency.dart';
+import 'location.dart';
 import 'location_osm_type.dart';
 import 'price_per.dart';
+import 'price_product.dart';
+import 'proof.dart';
 import '../interface/json_object.dart';
 import '../utils/json_helper.dart';
 
@@ -111,6 +114,18 @@ class Price extends JsonObject {
 
   @JsonKey(name: 'location_id')
   int? locationId;
+
+  /// Proof.
+  @JsonKey()
+  Proof? proof;
+
+  /// Location.
+  @JsonKey()
+  Location? location;
+
+  /// Product.
+  @JsonKey()
+  PriceProduct? product;
 
   /// Owner.
   @JsonKey()

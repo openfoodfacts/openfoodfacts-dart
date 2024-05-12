@@ -8,19 +8,19 @@ environment:
   sdk: '>=2.17.0 <4.0.0'
 
 dependencies:
-  json_annotation: ^4.8.1
+  json_annotation: ^4.9.0
   http: '>=0.13.5 <2.0.0'
   http_parser: ^4.0.2
-  path: ^1.8.2 # 1.8.2 for flutter_test as of 2023-04-06
+  path: ^1.9.0
   meta: ^1.8.0
 
 dev_dependencies:
-  analyzer: ^6.0.0
-  build_runner: ^2.4.6
-  json_serializable: ^6.7.1
+  analyzer: ^6.2.0
+  build_runner: ^2.4.9
+  json_serializable: ^6.8.0
   lints: ">=3.0.0 <5.0.0"
-  test: ^1.21.4
-  coverage: ^1.6.2
+  test: ^1.25.5
+  coverage: ^1.8.0
 
 funding:
   - "https://donate.openfoodfacts.org/"

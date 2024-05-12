@@ -1,13 +1,12 @@
 import 'currency.dart';
 import 'get_parameters_helper.dart';
 import 'get_prices_order.dart';
-import 'order_by.dart';
 import 'location_osm_type.dart';
 
 /// Parameters for the "get prices" API query.
 ///
 /// cf. https://prices.openfoodfacts.org/api/docs
-class GetPricesParameters extends GetParametersHelper {
+class GetPricesParameters extends GetParametersHelper<GetPricesOrderField> {
   String? productCode;
   int? productId;
   bool? productIdIsNull;
@@ -25,7 +24,6 @@ class GetPricesParameters extends GetParametersHelper {
   DateTime? dateLte;
   String? owner;
   DateTime? createdGte;
-  List<OrderBy<GetPricesOrderField>>? orderBy;
 
   @override
   Map<String, String> getQueryParameters() {
@@ -47,15 +45,6 @@ class GetPricesParameters extends GetParametersHelper {
     addNonNullDate(dateLte, 'date__lte', dayOnly: true);
     addNonNullString(owner, 'owner');
     addNonNullDate(createdGte, 'created__gte', dayOnly: false);
-    if (orderBy != null) {
-      final List<String> orders = <String>[];
-      for (final OrderBy order in orderBy!) {
-        orders.add(order.offTag);
-      }
-      if (orders.isNotEmpty) {
-        addNonNullString(orders.join(','), 'order_by');
-      }
-    }
     return result;
   }
 }
