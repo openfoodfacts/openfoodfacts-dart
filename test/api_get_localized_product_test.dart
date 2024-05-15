@@ -93,6 +93,8 @@ void main() {
           ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
           // tags
           ProductField.CATEGORIES_TAGS,
+          ProductField.ADDITIVES,
+          ProductField.ALLERGENS,
           ProductField.TRACES_TAGS,
           ProductField.STORES_TAGS,
           ProductField.STATES_TAGS,
@@ -148,7 +150,7 @@ void main() {
         }
       }
 
-      void checkIngredientAnaysisTags(
+      void checkIngredientAnalysisTags(
         final IngredientsAnalysisTags? tags,
         final Map<OpenFoodFactsLanguage, List<String>>? tagsInLanguages,
         final ProductField productField,
@@ -225,7 +227,7 @@ void main() {
         product.miscTagsInLanguages,
         ProductField.MISC_TAGS_IN_LANGUAGES,
       );
-      checkIngredientAnaysisTags(
+      checkIngredientAnalysisTags(
         product.ingredientsAnalysisTags,
         product.ingredientsAnalysisTagsInLanguages,
         ProductField.INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES,
