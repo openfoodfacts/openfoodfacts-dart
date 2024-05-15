@@ -80,6 +80,8 @@ void main() {
         fields: [
           // tags in languages
           ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
+          ProductField.ADDITIVES_TAGS_IN_LANGUAGES,
+          ProductField.ALLERGENS_TAGS_IN_LANGUAGES,
           ProductField.TRACES_TAGS_IN_LANGUAGES,
           ProductField.STORES_TAGS_IN_LANGUAGES,
           ProductField.STATES_TAGS_IN_LANGUAGES,
@@ -186,6 +188,17 @@ void main() {
         product.categoriesTags,
         product.categoriesTagsInLanguages,
         ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
+      );
+      check(
+        product.additives?.ids ?? [],
+        product.additivesTagsInLanguages,
+        ProductField.ADDITIVES_TAGS_IN_LANGUAGES,
+      );
+      check(
+        // note that the test product has no allergens
+        product.allergens?.ids ?? [],
+        product.allergensTagsInLanguages,
+        ProductField.ALLERGENS_TAGS_IN_LANGUAGES,
       );
       check(
         product.tracesTags,
