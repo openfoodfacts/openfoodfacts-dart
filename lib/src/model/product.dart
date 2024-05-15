@@ -307,7 +307,7 @@ class Product extends JsonObject {
       fromJson: Additives.additivesFromJson,
       toJson: Additives.additivesToJson)
   Additives? additives;
-    @JsonKey(
+  @JsonKey(
       name: 'additives_tags_in_languages',
       toJson: LanguageHelper.toJsonStringsListMap,
       fromJson: LanguageHelper.fromJsonStringsListMap,
