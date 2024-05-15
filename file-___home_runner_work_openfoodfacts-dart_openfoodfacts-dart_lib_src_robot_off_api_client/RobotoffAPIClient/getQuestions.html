@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../../static-assets/github.css?v1">
   <link rel="stylesheet" href="../../static-assets/styles.css?v1">
@@ -37,43 +37,43 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button">
+  <div class="toggle" id="theme-button" title="Toggle brightness">
     <label for="theme">
       <input type="checkbox" id="theme" value="light-theme">
       <span id="dark-theme-button" class="material-symbols-outlined">
-        brightness_4
+        dark_mode
       </span>
       <span id="light-theme-button" class="material-symbols-outlined">
-        brightness_5
+        light_mode
       </span>
     </label>
   </div>
 </header>
 <main>
 
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_robot_off_api_client&#47;RobotoffAPIClient-class-sidebar.html"
-      data-below-sidebar="">
-      <div>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_robot_off_api_client&#47;RobotoffAPIClient-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
 <h1><span class="kind-method">getQuestions</span> static method 
 </h1></div>
 
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.3.4/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_robotoff_question/RobotoffQuestionResult-class.html">RobotoffQuestionResult</a></span>&gt;</span></span>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.4.0/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_robotoff_question/RobotoffQuestionResult-class.html">RobotoffQuestionResult</a></span>&gt;</span></span>
 <span class="name ">getQuestions</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getQuestions-param-language"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span>, </span></li>
 <li><span class="parameter" id="getQuestions-param-user">{<span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span></li>
-<li><span class="parameter" id="getQuestions-param-count"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">count</span>, </span></li>
-<li><span class="parameter" id="getQuestions-param-page"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">page</span>, </span></li>
-<li><span class="parameter" id="getQuestions-param-insightTypes"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/InsightType.html">InsightType</a></span>&gt;</span>?</span> <span class="parameter-name">insightTypes</span>, </span></li>
-<li><span class="parameter" id="getQuestions-param-countries"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a></span>&gt;</span>?</span> <span class="parameter-name">countries</span>, </span></li>
-<li><span class="parameter" id="getQuestions-param-brands"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">brands</span>, </span></li>
+<li><span class="parameter" id="getQuestions-param-count"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">count</span>, </span></li>
+<li><span class="parameter" id="getQuestions-param-page"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">page</span>, </span></li>
+<li><span class="parameter" id="getQuestions-param-insightTypes"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_insight/InsightType.html">InsightType</a></span>&gt;</span>?</span> <span class="parameter-name">insightTypes</span>, </span></li>
+<li><span class="parameter" id="getQuestions-param-countries"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a></span>&gt;</span>?</span> <span class="parameter-name">countries</span>, </span></li>
+<li><span class="parameter" id="getQuestions-param-brands"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">brands</span>, </span></li>
 <li><span class="parameter" id="getQuestions-param-questionOrder"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_robotoff_question_order/RobotoffQuestionOrder.html">RobotoffQuestionOrder</a>?</span> <span class="parameter-name">questionOrder</span>, </span></li>
 <li><span class="parameter" id="getQuestions-param-serverType"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_server_type/ServerType.html">ServerType</a>?</span> <span class="parameter-name">serverType</span>, </span></li>
-<li><span class="parameter" id="getQuestions-param-valueTag"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">valueTag</span>, </span></li>
+<li><span class="parameter" id="getQuestions-param-valueTag"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">valueTag</span>, </span></li>
 <li><span class="parameter" id="getQuestions-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriHelper-class.html">UriHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperRobotoffProd</span>}</span></li>
 </ol>)
 
@@ -162,7 +162,7 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!--/.sidebar-offcanvas-->
+</div><!--/.sidebar-offcanvas-->
 
 </main>
 

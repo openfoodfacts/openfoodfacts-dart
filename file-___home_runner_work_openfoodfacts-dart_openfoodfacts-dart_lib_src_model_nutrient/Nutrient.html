@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
@@ -36,34 +36,34 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button">
+  <div class="toggle" id="theme-button" title="Toggle brightness">
     <label for="theme">
       <input type="checkbox" id="theme" value="light-theme">
       <span id="dark-theme-button" class="material-symbols-outlined">
-        brightness_4
+        dark_mode
       </span>
       <span id="light-theme-button" class="material-symbols-outlined">
-        brightness_5
+        light_mode
       </span>
     </label>
   </div>
 </header>
 <main>
 
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient&#47;file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient-library-sidebar.html"
-      data-below-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient&#47;Nutrient-enum-sidebar.html">
-      <div>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient&#47;file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient-library-sidebar.html"
+    data-below-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient&#47;Nutrient-enum-sidebar.html">
+    <div>
 
-        <h1>
-          <span class="kind-enum">Nutrient</span>
-          enum 
+      <h1>
+        <span class="kind-enum">Nutrient</span>
+        enum 
  
 
-        </h1>
-      </div>
+      </h1>
+    </div>
 
     
 <section class="desc markdown">
@@ -71,31 +71,31 @@
 </section>
 
 
-    <section>
-      <dl class="dl-horizontal">
-        
+      <section>
+        <dl class="dl-horizontal">
+          
   <dt>Inheritance</dt>
   <dd>
     <ul class="gt-separated dark eNum-relationships">
-      <li><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object-class.html">Object</a></li>
-        <li><a href="https://api.dart.dev/stable/3.3.4/dart-core/Enum-class.html">Enum</a></li>
+      <li><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object-class.html">Object</a></li>
+        <li><a href="https://api.dart.dev/stable/3.4.0/dart-core/Enum-class.html">Enum</a></li>
       <li>Nutrient</li>
     </ul>
   </dd>
 
-        
+          
   <dt>Implemented types</dt>
   <dd>
     <ul class="comma-separated eNum-relationships">
         <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_off_tagged/OffTagged-class.html">OffTagged</a></li>
     </ul>
   </dd>
-        
-        
+          
+          
 
 
-      </dl>
-    </section>
+        </dl>
+      </section>
 
     
   <section class="summary offset-anchor" id="constructors">
@@ -103,7 +103,7 @@
 
     <dl class="constructor-summary-list">
         <dt id="Nutrient" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/Nutrient.html">Nutrient</a></span><span class="signature">(<span class="parameter" id="-param-typicalUnit">{<span>required</span> <span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/Unit.html">Unit</a></span> <span class="parameter-name">typicalUnit</span>, </span><span class="parameter" id="-param-offTag"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">offTag</span>}</span>)</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/Nutrient.html">Nutrient</a></span><span class="signature">(<span class="parameter" id="-param-typicalUnit">{<span>required</span> <span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/Unit.html">Unit</a></span> <span class="parameter-name">typicalUnit</span>, </span><span class="parameter" id="-param-offTag"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">offTag</span>}</span>)</span>
         </dt>
         <dd>
           
@@ -112,11 +112,11 @@
     </dl>
   </section>
 
-    <section class="summary offset-anchor" id="values">
-      <h2>Values</h2>
+      <section class="summary offset-anchor" id="values">
+        <h2>Values</h2>
 
-      <dl class="properties">
-          <dt id="salt" class="constant">
+        <dl class="properties">
+            <dt id="salt" class="constant">
     <span class="name ">salt</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -127,11 +127,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;salt&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;salt&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="sodium" class="constant">
+            <dt id="sodium" class="constant">
     <span class="name ">sodium</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -142,11 +142,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;sodium&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;sodium&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="fiber" class="constant">
+            <dt id="fiber" class="constant">
     <span class="name ">fiber</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -157,11 +157,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;fiber&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;fiber&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="sugars" class="constant">
+            <dt id="sugars" class="constant">
     <span class="name ">sugars</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -172,11 +172,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;sugars&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;sugars&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="addedSugars" class="constant">
+            <dt id="addedSugars" class="constant">
     <span class="name ">addedSugars</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -187,11 +187,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;added-sugars&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;added-sugars&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="fat" class="constant">
+            <dt id="fat" class="constant">
     <span class="name ">fat</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -202,11 +202,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;fat&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;fat&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="saturatedFat" class="constant">
+            <dt id="saturatedFat" class="constant">
     <span class="name ">saturatedFat</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -217,11 +217,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;saturated-fat&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;saturated-fat&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="proteins" class="constant">
+            <dt id="proteins" class="constant">
     <span class="name ">proteins</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -232,11 +232,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;proteins&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;proteins&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="energyKCal" class="constant">
+            <dt id="energyKCal" class="constant">
     <span class="name ">energyKCal</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -247,11 +247,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.KCAL, offTag: &#39;energy-kcal&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.KCAL, offTag: &#39;energy-kcal&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="energyKJ" class="constant">
+            <dt id="energyKJ" class="constant">
     <span class="name ">energyKJ</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -262,11 +262,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.KJ, offTag: &#39;energy-kj&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.KJ, offTag: &#39;energy-kj&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="carbohydrates" class="constant">
+            <dt id="carbohydrates" class="constant">
     <span class="name ">carbohydrates</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -277,11 +277,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;carbohydrates&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;carbohydrates&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="caffeine" class="constant">
+            <dt id="caffeine" class="constant">
     <span class="name ">caffeine</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -292,11 +292,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;caffeine&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;caffeine&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="calcium" class="constant">
+            <dt id="calcium" class="constant">
     <span class="name ">calcium</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -307,11 +307,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;calcium&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;calcium&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="iron" class="constant">
+            <dt id="iron" class="constant">
     <span class="name ">iron</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -322,11 +322,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;iron&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;iron&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="vitaminC" class="constant">
+            <dt id="vitaminC" class="constant">
     <span class="name ">vitaminC</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -337,11 +337,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-c&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-c&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="magnesium" class="constant">
+            <dt id="magnesium" class="constant">
     <span class="name ">magnesium</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -352,11 +352,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;magnesium&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;magnesium&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="phosphorus" class="constant">
+            <dt id="phosphorus" class="constant">
     <span class="name ">phosphorus</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -367,11 +367,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;phosphorus&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;phosphorus&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="potassium" class="constant">
+            <dt id="potassium" class="constant">
     <span class="name ">potassium</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -382,11 +382,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;potassium&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;potassium&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="zinc" class="constant">
+            <dt id="zinc" class="constant">
     <span class="name ">zinc</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -397,11 +397,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;zinc&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;zinc&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="copper" class="constant">
+            <dt id="copper" class="constant">
     <span class="name ">copper</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -412,11 +412,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;copper&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;copper&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="selenium" class="constant">
+            <dt id="selenium" class="constant">
     <span class="name ">selenium</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -427,11 +427,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;selenium&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;selenium&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="vitaminA" class="constant">
+            <dt id="vitaminA" class="constant">
     <span class="name ">vitaminA</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -442,11 +442,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-a&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-a&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="vitaminE" class="constant">
+            <dt id="vitaminE" class="constant">
     <span class="name ">vitaminE</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -457,11 +457,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-e&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-e&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="vitaminD" class="constant">
+            <dt id="vitaminD" class="constant">
     <span class="name ">vitaminD</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -472,11 +472,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-d&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-d&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="vitaminB1" class="constant">
+            <dt id="vitaminB1" class="constant">
     <span class="name ">vitaminB1</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -487,11 +487,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-b1&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-b1&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="vitaminB2" class="constant">
+            <dt id="vitaminB2" class="constant">
     <span class="name ">vitaminB2</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -502,11 +502,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-b2&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-b2&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="vitaminPP" class="constant">
+            <dt id="vitaminPP" class="constant">
     <span class="name ">vitaminPP</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -517,11 +517,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-pp&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-pp&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="vitaminB6" class="constant">
+            <dt id="vitaminB6" class="constant">
     <span class="name ">vitaminB6</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -532,11 +532,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-b6&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-b6&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="vitaminB12" class="constant">
+            <dt id="vitaminB12" class="constant">
     <span class="name ">vitaminB12</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -547,11 +547,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-b12&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-b12&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="vitaminB9" class="constant">
+            <dt id="vitaminB9" class="constant">
     <span class="name ">vitaminB9</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -562,11 +562,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-b9&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-b9&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="vitaminK" class="constant">
+            <dt id="vitaminK" class="constant">
     <span class="name ">vitaminK</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -577,11 +577,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-k&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-k&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="cholesterol" class="constant">
+            <dt id="cholesterol" class="constant">
     <span class="name ">cholesterol</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -592,11 +592,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;cholesterol&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;cholesterol&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="butyricAcid" class="constant">
+            <dt id="butyricAcid" class="constant">
     <span class="name ">butyricAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -607,11 +607,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;butyric-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;butyric-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="caproicAcid" class="constant">
+            <dt id="caproicAcid" class="constant">
     <span class="name ">caproicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -622,11 +622,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;caproic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;caproic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="caprylicAcid" class="constant">
+            <dt id="caprylicAcid" class="constant">
     <span class="name ">caprylicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -637,11 +637,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;caprylic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;caprylic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="capricAcid" class="constant">
+            <dt id="capricAcid" class="constant">
     <span class="name ">capricAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -652,11 +652,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;capric-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;capric-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="lauricAcid" class="constant">
+            <dt id="lauricAcid" class="constant">
     <span class="name ">lauricAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -667,11 +667,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;lauric-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;lauric-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="myristicAcid" class="constant">
+            <dt id="myristicAcid" class="constant">
     <span class="name ">myristicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -682,11 +682,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;myristic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;myristic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="palmiticAcid" class="constant">
+            <dt id="palmiticAcid" class="constant">
     <span class="name ">palmiticAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -697,11 +697,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;palmitic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;palmitic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="stearicAcid" class="constant">
+            <dt id="stearicAcid" class="constant">
     <span class="name ">stearicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -712,11 +712,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;stearic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;stearic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="oleicAcid" class="constant">
+            <dt id="oleicAcid" class="constant">
     <span class="name ">oleicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -727,11 +727,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;oleic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;oleic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="linoleicAcid" class="constant">
+            <dt id="linoleicAcid" class="constant">
     <span class="name ">linoleicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -742,11 +742,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;linoleic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;linoleic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="docosahexaenoicAcid" class="constant">
+            <dt id="docosahexaenoicAcid" class="constant">
     <span class="name ">docosahexaenoicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -757,11 +757,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;docosahexaenoic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;docosahexaenoic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="eicosapentaenoicAcid" class="constant">
+            <dt id="eicosapentaenoicAcid" class="constant">
     <span class="name ">eicosapentaenoicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -772,11 +772,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;eicosapentaenoic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;eicosapentaenoic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="erucicAcid" class="constant">
+            <dt id="erucicAcid" class="constant">
     <span class="name ">erucicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -787,11 +787,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;erucic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;erucic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="monounsaturatedFat" class="constant">
+            <dt id="monounsaturatedFat" class="constant">
     <span class="name ">monounsaturatedFat</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -802,11 +802,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;monounsaturated-fat&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;monounsaturated-fat&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="polyunsaturatedFat" class="constant">
+            <dt id="polyunsaturatedFat" class="constant">
     <span class="name ">polyunsaturatedFat</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -817,11 +817,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;polyunsaturated-fat&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;polyunsaturated-fat&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="alcohol" class="constant">
+            <dt id="alcohol" class="constant">
     <span class="name ">alcohol</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -832,11 +832,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.PERCENT, offTag: &#39;alcohol&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.PERCENT, offTag: &#39;alcohol&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="pantothenicAcid" class="constant">
+            <dt id="pantothenicAcid" class="constant">
     <span class="name ">pantothenicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -847,11 +847,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;pantothenic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;pantothenic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="biotin" class="constant">
+            <dt id="biotin" class="constant">
     <span class="name ">biotin</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -862,11 +862,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;biotin&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;biotin&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="chloride" class="constant">
+            <dt id="chloride" class="constant">
     <span class="name ">chloride</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -877,11 +877,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;chloride&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;chloride&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="chromium" class="constant">
+            <dt id="chromium" class="constant">
     <span class="name ">chromium</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -892,11 +892,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;chromium&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;chromium&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="fluoride" class="constant">
+            <dt id="fluoride" class="constant">
     <span class="name ">fluoride</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -907,11 +907,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;fluoride&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;fluoride&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="iodine" class="constant">
+            <dt id="iodine" class="constant">
     <span class="name ">iodine</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -922,11 +922,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;iodine&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;iodine&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="manganese" class="constant">
+            <dt id="manganese" class="constant">
     <span class="name ">manganese</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -937,11 +937,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;manganese&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;manganese&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="molybdenum" class="constant">
+            <dt id="molybdenum" class="constant">
     <span class="name ">molybdenum</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -952,11 +952,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;molybdenum&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;molybdenum&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="omega3" class="constant">
+            <dt id="omega3" class="constant">
     <span class="name ">omega3</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -967,11 +967,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;omega-3-fat&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;omega-3-fat&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="omega6" class="constant">
+            <dt id="omega6" class="constant">
     <span class="name ">omega6</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -982,11 +982,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;omega-6-fat&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;omega-6-fat&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="omega9" class="constant">
+            <dt id="omega9" class="constant">
     <span class="name ">omega9</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -997,11 +997,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;omega-9-fat&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;omega-9-fat&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="betaCarotene" class="constant">
+            <dt id="betaCarotene" class="constant">
     <span class="name ">betaCarotene</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1012,11 +1012,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;beta-carotene&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;beta-carotene&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="bicarbonate" class="constant">
+            <dt id="bicarbonate" class="constant">
     <span class="name ">bicarbonate</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1027,11 +1027,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;bicarbonate&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;bicarbonate&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="sugarAlcohol" class="constant">
+            <dt id="sugarAlcohol" class="constant">
     <span class="name ">sugarAlcohol</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1042,11 +1042,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;polyols&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;polyols&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="alphaLinolenicAcid" class="constant">
+            <dt id="alphaLinolenicAcid" class="constant">
     <span class="name ">alphaLinolenicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1057,11 +1057,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;alpha-linolenic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;alpha-linolenic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="arachidicAcid" class="constant">
+            <dt id="arachidicAcid" class="constant">
     <span class="name ">arachidicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1072,11 +1072,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;arachidic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;arachidic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="arachidonicAcid" class="constant">
+            <dt id="arachidonicAcid" class="constant">
     <span class="name ">arachidonicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1087,11 +1087,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;arachidonic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;arachidonic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="behenicAcid" class="constant">
+            <dt id="behenicAcid" class="constant">
     <span class="name ">behenicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1102,11 +1102,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;behenic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;behenic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="ceroticAcid" class="constant">
+            <dt id="ceroticAcid" class="constant">
     <span class="name ">ceroticAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1117,11 +1117,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;cerotic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;cerotic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="dihomoGammaLinolenicAcid" class="constant">
+            <dt id="dihomoGammaLinolenicAcid" class="constant">
     <span class="name ">dihomoGammaLinolenicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1132,11 +1132,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;dihomo-gamma-linolenic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;dihomo-gamma-linolenic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="elaidicAcid" class="constant">
+            <dt id="elaidicAcid" class="constant">
     <span class="name ">elaidicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1147,11 +1147,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;elaidic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;elaidic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="gammaLinolenicAcid" class="constant">
+            <dt id="gammaLinolenicAcid" class="constant">
     <span class="name ">gammaLinolenicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1162,11 +1162,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;gamma-linolenic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;gamma-linolenic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="gondoicAcid" class="constant">
+            <dt id="gondoicAcid" class="constant">
     <span class="name ">gondoicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1177,11 +1177,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;gondoic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;gondoic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="lignocericAcid" class="constant">
+            <dt id="lignocericAcid" class="constant">
     <span class="name ">lignocericAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1192,11 +1192,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;lignoceric-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;lignoceric-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="meadAcid" class="constant">
+            <dt id="meadAcid" class="constant">
     <span class="name ">meadAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1207,11 +1207,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;mead-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;mead-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="melissicAcid" class="constant">
+            <dt id="melissicAcid" class="constant">
     <span class="name ">melissicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1222,11 +1222,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;melissic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;melissic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="montanicAcid" class="constant">
+            <dt id="montanicAcid" class="constant">
     <span class="name ">montanicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1237,11 +1237,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;montanic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;montanic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="nervonicAcid" class="constant">
+            <dt id="nervonicAcid" class="constant">
     <span class="name ">nervonicAcid</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1252,11 +1252,11 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;nervonic-acid&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;nervonic-acid&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="transFat" class="constant">
+            <dt id="transFat" class="constant">
     <span class="name ">transFat</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>
   
@@ -1267,24 +1267,23 @@
   
 
     <div>
-      <span class="signature"><code>Nutrient(typicalUnit: Unit.G, offTag: &#39;trans-fat&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;trans-fat&#39;)</code></span>
     </div>
 </dd>
 
-      </dl>
-    </section>
+        </dl>
+      </section>
 
-    <section
-        class="
-          summary
-          offset-anchor"
-        id="instance-properties">
-      <h2>Properties</h2>
-
-      <dl class="properties">
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
         <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -1294,8 +1293,9 @@
 </dd>
 
         <dt id="index" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Enum/index.html">index</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Enum/index.html">index</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -1306,7 +1306,8 @@
 
         <dt id="offTag" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/offTag.html">offTag</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>
+  
 
 </dt>
 <dd>
@@ -1316,8 +1317,9 @@
 </dd>
 
         <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Type-class.html">Type</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Type-class.html">Type</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -1328,7 +1330,8 @@
 
         <dt id="typicalUnit" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/typicalUnit.html">typicalUnit</a></span>
-  <span class="signature">&#8594; <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/Unit.html">Unit</a></span> 
+  <span class="signature">&#8594; <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/Unit.html">Unit</a></span>
+  
 
 </dt>
 <dd>
@@ -1337,9 +1340,8 @@
 
 </dd>
 
-      </dl>
-    </section>
-
+    </dl>
+  </section>
     
   <section
       class="summary offset-anchor inherited"
@@ -1347,7 +1349,7 @@
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
@@ -1360,8 +1362,8 @@
 </dd>
 
         <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>
   </span>
   
 
@@ -1381,8 +1383,8 @@
     <h2>Operators</h2>
     <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/bool-class.html">bool</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/bool-class.html">bool</a></span>
   </span>
   
 
@@ -1401,7 +1403,7 @@
     <h2>Static Methods</h2>
     <dl class="callables">
         <dt id="fromOffTag" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/fromOffTag.html">fromOffTag</a></span><span class="signature">(<wbr><span class="parameter" id="fromOffTag-param-offTag"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">offTag</span></span>)
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/fromOffTag.html">fromOffTag</a></span><span class="signature">(<wbr><span class="parameter" id="fromOffTag-param-offTag"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">offTag</span></span>)
     <span class="returntype parameter">&#8594; <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a>?</span>
   </span>
   
@@ -1423,7 +1425,7 @@
     <dl class="properties">
         <dt id="values" class="constant">
     <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/values-constant.html">values</a></span>
-  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.3.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>&gt;</span></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.4.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span>&gt;</span></span>
   
 
 </dt>
@@ -1435,10 +1437,10 @@
 
     </dl>
   </section>
-  </div><!-- /.main-content -->
+</div><!-- /.main-content -->
 
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+  <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
   <form class="search-sidebar" role="search">
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
@@ -1452,12 +1454,12 @@
 </ol>
 
 
-    <h5>nutrient library</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div>
+  <h5>nutrient library</h5>
+  <div id="dartdoc-sidebar-left-content"></div>
+</div>
 
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!-- /.sidebar-offcanvas -->
+<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!-- /.sidebar-offcanvas -->
 
 </main>
 

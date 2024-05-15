@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
@@ -36,26 +36,26 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button">
+  <div class="toggle" id="theme-button" title="Toggle brightness">
     <label for="theme">
       <input type="checkbox" id="theme" value="light-theme">
       <span id="dark-theme-button" class="material-symbols-outlined">
-        brightness_4
+        dark_mode
       </span>
       <span id="light-theme-button" class="material-symbols-outlined">
-        brightness_5
+        light_mode
       </span>
     </label>
   </div>
 </header>
 <main>
 
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category&#47;file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category-library-sidebar.html"
-      data-below-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category&#47;TaxonomyCategory-class-sidebar.html">
-      <div>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category&#47;file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category-library-sidebar.html"
+    data-below-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category&#47;TaxonomyCategory-class-sidebar.html">
+    <div>
 <h1><span class="kind-class">TaxonomyCategory</span> class 
  
 </h1></div>
@@ -74,7 +74,7 @@ of these.</p>
   <dt>Inheritance</dt>
   <dd>
     <ul class="gt-separated dark clazz-relationships">
-      <li><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object-class.html">Object</a></li>
+      <li><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object-class.html">Object</a></li>
         <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject-class.html">JsonObject</a></li>
       <li>TaxonomyCategory</li>
     </ul>
@@ -97,13 +97,13 @@ of these.</p>
 
     <dl class="constructor-summary-list">
         <dt id="TaxonomyCategory" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/TaxonomyCategory.html">TaxonomyCategory</a></span><span class="signature">(<span class="parameter" id="-param-agribalyseFoodCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">agribalyseFoodCode</span>, </span><span class="parameter" id="-param-agribalyseFoodName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">agribalyseFoodName</span>, </span><span class="parameter" id="-param-agribalyseProxyFoodCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">agribalyseProxyFoodCode</span>, </span><span class="parameter" id="-param-agribalyseProxyFoodName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">agribalyseProxyFoodName</span>, </span><span class="parameter" id="-param-agribalyseProxyName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">agribalyseProxyName</span>, </span><span class="parameter" id="-param-carbonFootprintFrFoodgesIngredient"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">carbonFootprintFrFoodgesIngredient</span>, </span><span class="parameter" id="-param-children"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">children</span>, </span><span class="parameter" id="-param-ciqualFoodCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">ciqualFoodCode</span>, </span><span class="parameter" id="-param-ciqualFoodName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">ciqualFoodName</span>, </span><span class="parameter" id="-param-ciqualProxyFoodCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">ciqualProxyFoodCode</span>, </span><span class="parameter" id="-param-ciqualProxyFoodName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">ciqualProxyFoodName</span>, </span><span class="parameter" id="-param-country"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">country</span>, </span><span class="parameter" id="-param-grapevariety"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">grapevariety</span>, </span><span class="parameter" id="-param-instanceof"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">instanceof</span>, </span><span class="parameter" id="-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">name</span>, </span><span class="parameter" id="-param-nova"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">nova</span>, </span><span class="parameter" id="-param-oqaliFamily"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">oqaliFamily</span>, </span><span class="parameter" id="-param-origins"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">origins</span>, </span><span class="parameter" id="-param-parents"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">parents</span>, </span><span class="parameter" id="-param-pnnsGroup1"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">pnnsGroup1</span>, </span><span class="parameter" id="-param-pnnsGroup2"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">pnnsGroup2</span>, </span><span class="parameter" id="-param-protectedNameFileNumber"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">protectedNameFileNumber</span>, </span><span class="parameter" id="-param-protectedNameType"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">protectedNameType</span>, </span><span class="parameter" id="-param-region"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">region</span>, </span><span class="parameter" id="-param-seasonInCountryFr"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">seasonInCountryFr</span>, </span><span class="parameter" id="-param-whoId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">whoId</span>, </span><span class="parameter" id="-param-wikidata"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">wikidata</span>, </span><span class="parameter" id="-param-wikidataCategory"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">wikidataCategory</span>, </span><span class="parameter" id="-param-wikidataWikipediaCategory"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">wikidataWikipediaCategory</span></span>)</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/TaxonomyCategory.html">TaxonomyCategory</a></span><span class="signature">(<span class="parameter" id="-param-agribalyseFoodCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">agribalyseFoodCode</span>, </span><span class="parameter" id="-param-agribalyseFoodName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">agribalyseFoodName</span>, </span><span class="parameter" id="-param-agribalyseProxyFoodCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">agribalyseProxyFoodCode</span>, </span><span class="parameter" id="-param-agribalyseProxyFoodName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">agribalyseProxyFoodName</span>, </span><span class="parameter" id="-param-agribalyseProxyName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">agribalyseProxyName</span>, </span><span class="parameter" id="-param-carbonFootprintFrFoodgesIngredient"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">carbonFootprintFrFoodgesIngredient</span>, </span><span class="parameter" id="-param-children"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">children</span>, </span><span class="parameter" id="-param-ciqualFoodCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">ciqualFoodCode</span>, </span><span class="parameter" id="-param-ciqualFoodName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">ciqualFoodName</span>, </span><span class="parameter" id="-param-ciqualProxyFoodCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">ciqualProxyFoodCode</span>, </span><span class="parameter" id="-param-ciqualProxyFoodName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">ciqualProxyFoodName</span>, </span><span class="parameter" id="-param-country"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">country</span>, </span><span class="parameter" id="-param-grapevariety"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">grapevariety</span>, </span><span class="parameter" id="-param-instanceof"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">instanceof</span>, </span><span class="parameter" id="-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">name</span>, </span><span class="parameter" id="-param-nova"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">nova</span>, </span><span class="parameter" id="-param-oqaliFamily"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">oqaliFamily</span>, </span><span class="parameter" id="-param-origins"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">origins</span>, </span><span class="parameter" id="-param-parents"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">parents</span>, </span><span class="parameter" id="-param-pnnsGroup1"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">pnnsGroup1</span>, </span><span class="parameter" id="-param-pnnsGroup2"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">pnnsGroup2</span>, </span><span class="parameter" id="-param-protectedNameFileNumber"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">protectedNameFileNumber</span>, </span><span class="parameter" id="-param-protectedNameType"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">protectedNameType</span>, </span><span class="parameter" id="-param-region"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">region</span>, </span><span class="parameter" id="-param-seasonInCountryFr"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">seasonInCountryFr</span>, </span><span class="parameter" id="-param-whoId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">whoId</span>, </span><span class="parameter" id="-param-wikidata"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">wikidata</span>, </span><span class="parameter" id="-param-wikidataCategory"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">wikidataCategory</span>, </span><span class="parameter" id="-param-wikidataWikipediaCategory"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">wikidataWikipediaCategory</span></span>)</span>
         </dt>
         <dd>
           
         </dd>
         <dt id="TaxonomyCategory.fromJson" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/TaxonomyCategory.fromJson.html">TaxonomyCategory.fromJson</a></span><span class="signature">(<span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span>)</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/TaxonomyCategory.fromJson.html">TaxonomyCategory.fromJson</a></span><span class="signature">(<span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span>)</span>
         </dt>
         <dd>
           
@@ -111,14 +111,16 @@ of these.</p>
         </dd>
     </dl>
   </section>
-
-    <section class="summary offset-anchor" id="instance-properties">
-      <h2>Properties</h2>
-
-      <dl class="properties">
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
         <dt id="agribalyseFoodCode" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/agribalyseFoodCode.html">agribalyseFoodCode</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -129,7 +131,8 @@ of these.</p>
 
         <dt id="agribalyseFoodName" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/agribalyseFoodName.html">agribalyseFoodName</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -140,7 +143,8 @@ of these.</p>
 
         <dt id="agribalyseProxyFoodCode" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/agribalyseProxyFoodCode.html">agribalyseProxyFoodCode</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -151,7 +155,8 @@ of these.</p>
 
         <dt id="agribalyseProxyFoodName" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/agribalyseProxyFoodName.html">agribalyseProxyFoodName</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -162,7 +167,8 @@ of these.</p>
 
         <dt id="agribalyseProxyName" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/agribalyseProxyName.html">agribalyseProxyName</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -173,7 +179,8 @@ of these.</p>
 
         <dt id="carbonFootprintFrFoodgesIngredient" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/carbonFootprintFrFoodgesIngredient.html">carbonFootprintFrFoodgesIngredient</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -184,7 +191,8 @@ of these.</p>
 
         <dt id="children" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/children.html">children</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -195,7 +203,8 @@ of these.</p>
 
         <dt id="ciqualFoodCode" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/ciqualFoodCode.html">ciqualFoodCode</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -206,7 +215,8 @@ of these.</p>
 
         <dt id="ciqualFoodName" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/ciqualFoodName.html">ciqualFoodName</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -217,7 +227,8 @@ of these.</p>
 
         <dt id="ciqualProxyFoodCode" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/ciqualProxyFoodCode.html">ciqualProxyFoodCode</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -228,7 +239,8 @@ of these.</p>
 
         <dt id="ciqualProxyFoodName" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/ciqualProxyFoodName.html">ciqualProxyFoodName</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -239,7 +251,8 @@ of these.</p>
 
         <dt id="country" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/country.html">country</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -250,7 +263,8 @@ of these.</p>
 
         <dt id="grapevariety" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/grapevariety.html">grapevariety</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -260,8 +274,9 @@ of these.</p>
 </dd>
 
         <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -272,7 +287,8 @@ of these.</p>
 
         <dt id="instanceof" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/instanceof.html">instanceof</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -283,7 +299,8 @@ of these.</p>
 
         <dt id="name" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/name.html">name</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -294,7 +311,8 @@ of these.</p>
 
         <dt id="nova" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/nova.html">nova</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -305,7 +323,8 @@ of these.</p>
 
         <dt id="oqaliFamily" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/oqaliFamily.html">oqaliFamily</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -316,7 +335,8 @@ of these.</p>
 
         <dt id="origins" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/origins.html">origins</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -327,7 +347,8 @@ of these.</p>
 
         <dt id="parents" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/parents.html">parents</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -338,7 +359,8 @@ of these.</p>
 
         <dt id="pnnsGroup1" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/pnnsGroup1.html">pnnsGroup1</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -349,7 +371,8 @@ of these.</p>
 
         <dt id="pnnsGroup2" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/pnnsGroup2.html">pnnsGroup2</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -360,7 +383,8 @@ of these.</p>
 
         <dt id="protectedNameFileNumber" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/protectedNameFileNumber.html">protectedNameFileNumber</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -371,7 +395,8 @@ of these.</p>
 
         <dt id="protectedNameType" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/protectedNameType.html">protectedNameType</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -382,7 +407,8 @@ of these.</p>
 
         <dt id="region" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/region.html">region</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -392,8 +418,9 @@ of these.</p>
 </dd>
 
         <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Type-class.html">Type</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Type-class.html">Type</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -404,7 +431,8 @@ of these.</p>
 
         <dt id="seasonInCountryFr" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/seasonInCountryFr.html">seasonInCountryFr</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -415,7 +443,8 @@ of these.</p>
 
         <dt id="whoId" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/whoId.html">whoId</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -426,7 +455,8 @@ of these.</p>
 
         <dt id="wikidata" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/wikidata.html">wikidata</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -437,7 +467,8 @@ of these.</p>
 
         <dt id="wikidataCategory" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/wikidataCategory.html">wikidataCategory</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -448,7 +479,8 @@ of these.</p>
 
         <dt id="wikidataWikipediaCategory" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/wikidataWikipediaCategory.html">wikidataWikipediaCategory</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  
 
 </dt>
 <dd>
@@ -457,9 +489,8 @@ of these.</p>
 
 </dd>
 
-      </dl>
-    </section>
-
+    </dl>
+  </section>
     
   <section
       class="summary offset-anchor"
@@ -467,7 +498,7 @@ of these.</p>
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
@@ -481,7 +512,7 @@ of these.</p>
 
         <dt id="toData" class="callable inherited">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toData.html">toData</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span></span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span></span>
   </span>
   
 
@@ -494,7 +525,7 @@ of these.</p>
 
         <dt id="toJson" class="callable">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/toJson.html">toJson</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
   </span>
   
 
@@ -507,7 +538,7 @@ of these.</p>
 
         <dt id="toString" class="callable">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_category/TaxonomyCategory/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>
   </span>
   
 
@@ -520,7 +551,7 @@ of these.</p>
 
         <dt id="toValueString" class="callable inherited">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_interface_json_object/JsonObject/toValueString.html">toValueString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>
   </span>
   
 
@@ -541,8 +572,8 @@ value1 - value2 - value3
     <h2>Operators</h2>
     <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/bool-class.html">bool</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/bool-class.html">bool</a></span>
   </span>
   
 

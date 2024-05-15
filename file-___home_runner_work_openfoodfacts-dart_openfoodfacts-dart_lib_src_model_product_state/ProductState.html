@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
@@ -36,34 +36,34 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button">
+  <div class="toggle" id="theme-button" title="Toggle brightness">
     <label for="theme">
       <input type="checkbox" id="theme" value="light-theme">
       <span id="dark-theme-button" class="material-symbols-outlined">
-        brightness_4
+        dark_mode
       </span>
       <span id="light-theme-button" class="material-symbols-outlined">
-        brightness_5
+        light_mode
       </span>
     </label>
   </div>
 </header>
 <main>
 
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state&#47;file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state-library-sidebar.html"
-      data-below-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state&#47;ProductState-enum-sidebar.html">
-      <div>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state&#47;file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state-library-sidebar.html"
+    data-below-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state&#47;ProductState-enum-sidebar.html">
+    <div>
 
-        <h1>
-          <span class="kind-enum">ProductState</span>
-          enum 
+      <h1>
+        <span class="kind-enum">ProductState</span>
+        enum 
  
 
-        </h1>
-      </div>
+      </h1>
+    </div>
 
     
 <section class="desc markdown">
@@ -72,25 +72,25 @@
 </section>
 
 
-    <section>
-      <dl class="dl-horizontal">
-        
+      <section>
+        <dl class="dl-horizontal">
+          
   <dt>Inheritance</dt>
   <dd>
     <ul class="gt-separated dark eNum-relationships">
-      <li><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object-class.html">Object</a></li>
-        <li><a href="https://api.dart.dev/stable/3.3.4/dart-core/Enum-class.html">Enum</a></li>
+      <li><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object-class.html">Object</a></li>
+        <li><a href="https://api.dart.dev/stable/3.4.0/dart-core/Enum-class.html">Enum</a></li>
       <li>ProductState</li>
     </ul>
   </dd>
 
-        
-        
-        
+          
+          
+          
 
 
-      </dl>
-    </section>
+        </dl>
+      </section>
 
     
   <section class="summary offset-anchor" id="constructors">
@@ -98,28 +98,28 @@
 
     <dl class="constructor-summary-list">
         <dt id="ProductState" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState/ProductState.html">ProductState</a></span><span class="signature">(<span class="parameter" id="-param-completedTag">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">completedTag</span>, </span><span class="parameter" id="-param-toBeCompletedTag"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">toBeCompletedTag</span>}</span>)</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState/ProductState.html">ProductState</a></span><span class="signature">(<span class="parameter" id="-param-completedTag">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">completedTag</span>, </span><span class="parameter" id="-param-toBeCompletedTag"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">toBeCompletedTag</span>}</span>)</span>
         </dt>
         <dd>
           Special case where we need the tag values as we cannot build them.
             <div class="constructor-modifier features">const</div>
         </dd>
         <dt id="ProductState.completed" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState/ProductState.completed.html">ProductState.completed</a></span><span class="signature">(<span class="parameter" id="completed-param-tag">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">tag</span>}</span>)</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState/ProductState.completed.html">ProductState.completed</a></span><span class="signature">(<span class="parameter" id="completed-param-tag">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">tag</span>}</span>)</span>
         </dt>
         <dd>
           Simple case where we can build the tag values, for 'completed'.
             <div class="constructor-modifier features">const</div>
         </dd>
         <dt id="ProductState.selected" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState/ProductState.selected.html">ProductState.selected</a></span><span class="signature">(<span class="parameter" id="selected-param-tag">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">tag</span>}</span>)</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState/ProductState.selected.html">ProductState.selected</a></span><span class="signature">(<span class="parameter" id="selected-param-tag">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">tag</span>}</span>)</span>
         </dt>
         <dd>
           Simple case where we can build the tag values, for 'selected'.
             <div class="constructor-modifier features">const</div>
         </dd>
         <dt id="ProductState.simple" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState/ProductState.simple.html">ProductState.simple</a></span><span class="signature">(<span class="parameter" id="simple-param-tag">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">tag</span>, </span><span class="parameter" id="simple-param-action"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">action</span>}</span>)</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState/ProductState.simple.html">ProductState.simple</a></span><span class="signature">(<span class="parameter" id="simple-param-tag">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">tag</span>, </span><span class="parameter" id="simple-param-action"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">action</span>}</span>)</span>
         </dt>
         <dd>
           Simple case where we can build the tag values.
@@ -128,11 +128,11 @@
     </dl>
   </section>
 
-    <section class="summary offset-anchor" id="values">
-      <h2>Values</h2>
+      <section class="summary offset-anchor" id="values">
+        <h2>Values</h2>
 
-      <dl class="properties">
-          <dt id="CHECKED" class="constant">
+        <dl class="properties">
+            <dt id="CHECKED" class="constant">
     <span class="name ">CHECKED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -143,11 +143,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState(completedTag: &#39;en:checked&#39;, toBeCompletedTag: &#39;en:to-be-checked&#39;)</code></span>
+      <span class="signature"><code>const ProductState(completedTag: &#39;en:checked&#39;, toBeCompletedTag: &#39;en:to-be-checked&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="COMPLETED" class="constant">
+            <dt id="COMPLETED" class="constant">
     <span class="name ">COMPLETED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -158,11 +158,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState(completedTag: &#39;en:complete&#39;, toBeCompletedTag: &#39;en:to-be-completed&#39;)</code></span>
+      <span class="signature"><code>const ProductState(completedTag: &#39;en:complete&#39;, toBeCompletedTag: &#39;en:to-be-completed&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="NUTRITION_FACTS_COMPLETED" class="constant">
+            <dt id="NUTRITION_FACTS_COMPLETED" class="constant">
     <span class="name ">NUTRITION_FACTS_COMPLETED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -173,11 +173,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.completed(tag: &#39;en:nutrition-facts&#39;)</code></span>
+      <span class="signature"><code>const ProductState.completed(tag: &#39;en:nutrition-facts&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="INGREDIENTS_COMPLETED" class="constant">
+            <dt id="INGREDIENTS_COMPLETED" class="constant">
     <span class="name ">INGREDIENTS_COMPLETED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -188,11 +188,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.completed(tag: &#39;en:ingredients&#39;)</code></span>
+      <span class="signature"><code>const ProductState.completed(tag: &#39;en:ingredients&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="EXPIRATION_DATE_COMPLETED" class="constant">
+            <dt id="EXPIRATION_DATE_COMPLETED" class="constant">
     <span class="name ">EXPIRATION_DATE_COMPLETED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -203,11 +203,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.completed(tag: &#39;en:expiration-date&#39;)</code></span>
+      <span class="signature"><code>const ProductState.completed(tag: &#39;en:expiration-date&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="PACKAGING_CODE_COMPLETED" class="constant">
+            <dt id="PACKAGING_CODE_COMPLETED" class="constant">
     <span class="name ">PACKAGING_CODE_COMPLETED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -218,11 +218,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.completed(tag: &#39;en:packaging-code&#39;)</code></span>
+      <span class="signature"><code>const ProductState.completed(tag: &#39;en:packaging-code&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="CHARACTERISTICS_COMPLETED" class="constant">
+            <dt id="CHARACTERISTICS_COMPLETED" class="constant">
     <span class="name ">CHARACTERISTICS_COMPLETED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -233,11 +233,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.completed(tag: &#39;en:characteristics&#39;)</code></span>
+      <span class="signature"><code>const ProductState.completed(tag: &#39;en:characteristics&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="ORIGINS_COMPLETED" class="constant">
+            <dt id="ORIGINS_COMPLETED" class="constant">
     <span class="name ">ORIGINS_COMPLETED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -248,11 +248,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.completed(tag: &#39;en:origins&#39;)</code></span>
+      <span class="signature"><code>const ProductState.completed(tag: &#39;en:origins&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="CATEGORIES_COMPLETED" class="constant">
+            <dt id="CATEGORIES_COMPLETED" class="constant">
     <span class="name ">CATEGORIES_COMPLETED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -263,11 +263,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.completed(tag: &#39;en:categories&#39;)</code></span>
+      <span class="signature"><code>const ProductState.completed(tag: &#39;en:categories&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="BRANDS_COMPLETED" class="constant">
+            <dt id="BRANDS_COMPLETED" class="constant">
     <span class="name ">BRANDS_COMPLETED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -278,11 +278,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.completed(tag: &#39;en:brands&#39;)</code></span>
+      <span class="signature"><code>const ProductState.completed(tag: &#39;en:brands&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="PACKAGING_COMPLETED" class="constant">
+            <dt id="PACKAGING_COMPLETED" class="constant">
     <span class="name ">PACKAGING_COMPLETED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -293,11 +293,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.completed(tag: &#39;en:packaging&#39;)</code></span>
+      <span class="signature"><code>const ProductState.completed(tag: &#39;en:packaging&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="QUANTITY_COMPLETED" class="constant">
+            <dt id="QUANTITY_COMPLETED" class="constant">
     <span class="name ">QUANTITY_COMPLETED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -308,11 +308,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.completed(tag: &#39;en:quantity&#39;)</code></span>
+      <span class="signature"><code>const ProductState.completed(tag: &#39;en:quantity&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="PRODUCT_NAME_COMPLETED" class="constant">
+            <dt id="PRODUCT_NAME_COMPLETED" class="constant">
     <span class="name ">PRODUCT_NAME_COMPLETED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -323,11 +323,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.completed(tag: &#39;en:product-name&#39;)</code></span>
+      <span class="signature"><code>const ProductState.completed(tag: &#39;en:product-name&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="PHOTOS_VALIDATED" class="constant">
+            <dt id="PHOTOS_VALIDATED" class="constant">
     <span class="name ">PHOTOS_VALIDATED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -338,11 +338,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.simple(tag: &#39;en:photos&#39;, action: &#39;validated&#39;)</code></span>
+      <span class="signature"><code>const ProductState.simple(tag: &#39;en:photos&#39;, action: &#39;validated&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="PACKAGING_PHOTO_SELECTED" class="constant">
+            <dt id="PACKAGING_PHOTO_SELECTED" class="constant">
     <span class="name ">PACKAGING_PHOTO_SELECTED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -353,11 +353,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.selected(tag: &#39;en:packaging-photo&#39;)</code></span>
+      <span class="signature"><code>const ProductState.selected(tag: &#39;en:packaging-photo&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="NUTRITION_PHOTO_SELECTED" class="constant">
+            <dt id="NUTRITION_PHOTO_SELECTED" class="constant">
     <span class="name ">NUTRITION_PHOTO_SELECTED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -368,11 +368,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.selected(tag: &#39;en:nutrition-photo&#39;)</code></span>
+      <span class="signature"><code>const ProductState.selected(tag: &#39;en:nutrition-photo&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="INGREDIENTS_PHOTO_SELECTED" class="constant">
+            <dt id="INGREDIENTS_PHOTO_SELECTED" class="constant">
     <span class="name ">INGREDIENTS_PHOTO_SELECTED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -383,11 +383,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.selected(tag: &#39;en:ingredients-photo&#39;)</code></span>
+      <span class="signature"><code>const ProductState.selected(tag: &#39;en:ingredients-photo&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="FRONT_PHOTO_SELECTED" class="constant">
+            <dt id="FRONT_PHOTO_SELECTED" class="constant">
     <span class="name ">FRONT_PHOTO_SELECTED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -398,11 +398,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.selected(tag: &#39;en:front-photo&#39;)</code></span>
+      <span class="signature"><code>const ProductState.selected(tag: &#39;en:front-photo&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="PHOTOS_UPLOADED" class="constant">
+            <dt id="PHOTOS_UPLOADED" class="constant">
     <span class="name ">PHOTOS_UPLOADED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>
   
@@ -413,24 +413,23 @@
   
 
     <div>
-      <span class="signature"><code>ProductState.simple(tag: &#39;en:photos&#39;, action: &#39;uploaded&#39;)</code></span>
+      <span class="signature"><code>const ProductState.simple(tag: &#39;en:photos&#39;, action: &#39;uploaded&#39;)</code></span>
     </div>
 </dd>
 
-      </dl>
-    </section>
+        </dl>
+      </section>
 
-    <section
-        class="
-          summary
-          offset-anchor"
-        id="instance-properties">
-      <h2>Properties</h2>
-
-      <dl class="properties">
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
         <dt id="completedTag" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState/completedTag.html">completedTag</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>
+  
 
 </dt>
 <dd>
@@ -440,8 +439,9 @@
 </dd>
 
         <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -451,8 +451,9 @@
 </dd>
 
         <dt id="index" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Enum/index.html">index</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Enum/index.html">index</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -462,8 +463,9 @@
 </dd>
 
         <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Type-class.html">Type</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Type-class.html">Type</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -474,7 +476,8 @@
 
         <dt id="toBeCompletedTag" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState/toBeCompletedTag.html">toBeCompletedTag</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>
+  
 
 </dt>
 <dd>
@@ -483,9 +486,8 @@
 
 </dd>
 
-      </dl>
-    </section>
-
+    </dl>
+  </section>
     
   <section
       class="summary offset-anchor inherited"
@@ -493,7 +495,7 @@
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
@@ -506,8 +508,8 @@
 </dd>
 
         <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>
   </span>
   
 
@@ -527,8 +529,8 @@
     <h2>Operators</h2>
     <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/bool-class.html">bool</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/bool-class.html">bool</a></span>
   </span>
   
 
@@ -551,7 +553,7 @@
     <dl class="properties">
         <dt id="values" class="constant">
     <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState/values-constant.html">values</a></span>
-  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.3.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>&gt;</span></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.4.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_state/ProductState.html">ProductState</a></span>&gt;</span></span>
   
 
 </dt>
@@ -563,10 +565,10 @@
 
     </dl>
   </section>
-  </div><!-- /.main-content -->
+</div><!-- /.main-content -->
 
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+  <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
   <form class="search-sidebar" role="search">
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
@@ -580,12 +582,12 @@
 </ol>
 
 
-    <h5>product_state library</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div>
+  <h5>product_state library</h5>
+  <div id="dartdoc-sidebar-left-content"></div>
+</div>
 
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!-- /.sidebar-offcanvas -->
+<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!-- /.sidebar-offcanvas -->
 
 </main>
 

@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
@@ -36,26 +36,26 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button">
+  <div class="toggle" id="theme-button" title="Toggle brightness">
     <label for="theme">
       <input type="checkbox" id="theme" value="light-theme">
       <span id="dark-theme-button" class="material-symbols-outlined">
-        brightness_4
+        dark_mode
       </span>
       <span id="light-theme-button" class="material-symbols-outlined">
-        brightness_5
+        light_mode
       </span>
     </label>
   </div>
 </header>
 <main>
 
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper&#47;file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper-library-sidebar.html"
-      data-below-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper&#47;GetParametersHelper-class-sidebar.html">
-      <div>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper&#47;file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper-library-sidebar.html"
+    data-below-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper&#47;GetParametersHelper-class-sidebar.html">
+    <div>
 <h1><span class="kind-class">GetParametersHelper</span> class 
     <a href="https://dart.dev/language/class-modifiers#abstract" class="feature feature-abstract" title="This type can not be directly constructed.">abstract</a>
  
@@ -74,11 +74,11 @@
         
         
 
-        <dt>Implementers</dt>
-        <dd><ul class="comma-separated clazz-relationships">
-          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_locations_parameters/GetLocationsParameters-class.html">GetLocationsParameters</a></li>
-          <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_prices_parameters/GetPricesParameters-class.html">GetPricesParameters</a></li>
-        </ul></dd>
+          <dt>Implementers</dt>
+          <dd><ul class="comma-separated clazz-relationships">
+              <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_locations_parameters/GetLocationsParameters-class.html">GetLocationsParameters</a></li>
+              <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_prices_parameters/GetPricesParameters-class.html">GetPricesParameters</a></li>
+          </ul></dd>
 
 
         
@@ -100,14 +100,16 @@
         </dd>
     </dl>
   </section>
-
-    <section class="summary offset-anchor" id="instance-properties">
-      <h2>Properties</h2>
-
-      <dl class="properties">
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
         <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -118,7 +120,8 @@
 
         <dt id="pageNumber" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/GetParametersHelper/pageNumber.html">pageNumber</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a>?</span>
+  
 
 </dt>
 <dd>
@@ -129,7 +132,8 @@
 
         <dt id="pageSize" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/GetParametersHelper/pageSize.html">pageSize</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a>?</span> 
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a>?</span>
+  
 
 </dt>
 <dd>
@@ -140,7 +144,8 @@
 
         <dt id="result" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/GetParametersHelper/result.html">result</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span></span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  
 
 </dt>
 <dd>
@@ -150,8 +155,9 @@
 </dd>
 
         <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Type-class.html">Type</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Type-class.html">Type</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -160,9 +166,8 @@
 
 </dd>
 
-      </dl>
-    </section>
-
+    </dl>
+  </section>
     
   <section
       class="summary offset-anchor"
@@ -170,7 +175,7 @@
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="addNonNullBool" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/GetParametersHelper/addNonNullBool.html">addNonNullBool</a></span><span class="signature">(<wbr><span class="parameter" id="addNonNullBool-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">value</span>, </span><span class="parameter" id="addNonNullBool-param-tag"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">tag</span></span>)
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/GetParametersHelper/addNonNullBool.html">addNonNullBool</a></span><span class="signature">(<wbr><span class="parameter" id="addNonNullBool-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">value</span>, </span><span class="parameter" id="addNonNullBool-param-tag"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">tag</span></span>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
@@ -183,7 +188,7 @@
 </dd>
 
         <dt id="addNonNullDate" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/GetParametersHelper/addNonNullDate.html">addNonNullDate</a></span><span class="signature">(<wbr><span class="parameter" id="addNonNullDate-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">value</span>, </span><span class="parameter" id="addNonNullDate-param-tag"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">tag</span>, </span><span class="parameter" id="addNonNullDate-param-dayOnly">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">dayOnly</span>}</span>)
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/GetParametersHelper/addNonNullDate.html">addNonNullDate</a></span><span class="signature">(<wbr><span class="parameter" id="addNonNullDate-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">value</span>, </span><span class="parameter" id="addNonNullDate-param-tag"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">tag</span>, </span><span class="parameter" id="addNonNullDate-param-dayOnly">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">dayOnly</span>}</span>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
@@ -196,7 +201,7 @@
 </dd>
 
         <dt id="addNonNullInt" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/GetParametersHelper/addNonNullInt.html">addNonNullInt</a></span><span class="signature">(<wbr><span class="parameter" id="addNonNullInt-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">value</span>, </span><span class="parameter" id="addNonNullInt-param-tag"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">tag</span></span>)
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/GetParametersHelper/addNonNullInt.html">addNonNullInt</a></span><span class="signature">(<wbr><span class="parameter" id="addNonNullInt-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">value</span>, </span><span class="parameter" id="addNonNullInt-param-tag"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">tag</span></span>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
@@ -209,7 +214,7 @@
 </dd>
 
         <dt id="addNonNullString" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/GetParametersHelper/addNonNullString.html">addNonNullString</a></span><span class="signature">(<wbr><span class="parameter" id="addNonNullString-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">value</span>, </span><span class="parameter" id="addNonNullString-param-tag"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">tag</span></span>)
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/GetParametersHelper/addNonNullString.html">addNonNullString</a></span><span class="signature">(<wbr><span class="parameter" id="addNonNullString-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">value</span>, </span><span class="parameter" id="addNonNullString-param-tag"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">tag</span></span>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
@@ -223,7 +228,7 @@
 
         <dt id="getQueryParameters" class="callable">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/GetParametersHelper/getQueryParameters.html">getQueryParameters</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>&gt;</span></span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>&gt;</span></span>
   </span>
   
 
@@ -235,7 +240,7 @@
 </dd>
 
         <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
@@ -248,8 +253,8 @@
 </dd>
 
         <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>
   </span>
   
 
@@ -269,8 +274,8 @@
     <h2>Operators</h2>
     <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/bool-class.html">bool</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/bool-class.html">bool</a></span>
   </span>
   
 
@@ -289,8 +294,8 @@
     <h2>Static Methods</h2>
     <dl class="callables">
         <dt id="formatDate" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/GetParametersHelper/formatDate.html">formatDate</a></span><span class="signature">(<wbr><span class="parameter" id="formatDate-param-date"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">date</span>, </span><span class="parameter" id="formatDate-param-dayOnly">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">dayOnly</span> = <span class="default-value">true</span>}</span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_get_parameters_helper/GetParametersHelper/formatDate.html">formatDate</a></span><span class="signature">(<wbr><span class="parameter" id="formatDate-param-date"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">date</span>, </span><span class="parameter" id="formatDate-param-dayOnly">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">dayOnly</span> = <span class="default-value">true</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>
   </span>
   
 

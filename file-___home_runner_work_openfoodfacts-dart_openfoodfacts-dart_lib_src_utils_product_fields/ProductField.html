@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
@@ -36,34 +36,34 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button">
+  <div class="toggle" id="theme-button" title="Toggle brightness">
     <label for="theme">
       <input type="checkbox" id="theme" value="light-theme">
       <span id="dark-theme-button" class="material-symbols-outlined">
-        brightness_4
+        dark_mode
       </span>
       <span id="light-theme-button" class="material-symbols-outlined">
-        brightness_5
+        light_mode
       </span>
     </label>
   </div>
 </header>
 <main>
 
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields&#47;file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields-library-sidebar.html"
-      data-below-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields&#47;ProductField-enum-sidebar.html">
-      <div>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields&#47;file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields-library-sidebar.html"
+    data-below-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields&#47;ProductField-enum-sidebar.html">
+    <div>
 
-        <h1>
-          <span class="kind-enum">ProductField</span>
-          enum 
+      <h1>
+        <span class="kind-enum">ProductField</span>
+        enum 
  
 
-        </h1>
-      </div>
+      </h1>
+    </div>
 
     
 <section class="desc markdown">
@@ -71,31 +71,31 @@
 </section>
 
 
-    <section>
-      <dl class="dl-horizontal">
-        
+      <section>
+        <dl class="dl-horizontal">
+          
   <dt>Inheritance</dt>
   <dd>
     <ul class="gt-separated dark eNum-relationships">
-      <li><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object-class.html">Object</a></li>
-        <li><a href="https://api.dart.dev/stable/3.3.4/dart-core/Enum-class.html">Enum</a></li>
+      <li><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object-class.html">Object</a></li>
+        <li><a href="https://api.dart.dev/stable/3.4.0/dart-core/Enum-class.html">Enum</a></li>
       <li>ProductField</li>
     </ul>
   </dd>
 
-        
+          
   <dt>Implemented types</dt>
   <dd>
     <ul class="comma-separated eNum-relationships">
         <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_off_tagged/OffTagged-class.html">OffTagged</a></li>
     </ul>
   </dd>
-        
-        
+          
+          
 
 
-      </dl>
-    </section>
+        </dl>
+      </section>
 
     
   <section class="summary offset-anchor" id="constructors">
@@ -103,7 +103,7 @@
 
     <dl class="constructor-summary-list">
         <dt id="ProductField" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField/ProductField.html">ProductField</a></span><span class="signature">(<span class="parameter" id="-param-offTag">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">offTag</span>}</span>)</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField/ProductField.html">ProductField</a></span><span class="signature">(<span class="parameter" id="-param-offTag">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">offTag</span>}</span>)</span>
         </dt>
         <dd>
           
@@ -112,11 +112,11 @@
     </dl>
   </section>
 
-    <section class="summary offset-anchor" id="values">
-      <h2>Values</h2>
+      <section class="summary offset-anchor" id="values">
+        <h2>Values</h2>
 
-      <dl class="properties">
-          <dt id="BARCODE" class="constant">
+        <dl class="properties">
+            <dt id="BARCODE" class="constant">
     <span class="name ">BARCODE</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -127,11 +127,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;code&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;code&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="NAME" class="constant">
+            <dt id="NAME" class="constant">
     <span class="name ">NAME</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -142,11 +142,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;product_name&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;product_name&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="NAME_IN_LANGUAGES" class="constant">
+            <dt id="NAME_IN_LANGUAGES" class="constant">
     <span class="name ">NAME_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -157,11 +157,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;product_name_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;product_name_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="NAME_ALL_LANGUAGES" class="constant">
+            <dt id="NAME_ALL_LANGUAGES" class="constant">
     <span class="name ">NAME_ALL_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -172,11 +172,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;product_name_languages&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;product_name_languages&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="GENERIC_NAME" class="constant">
+            <dt id="GENERIC_NAME" class="constant">
     <span class="name ">GENERIC_NAME</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -187,11 +187,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;generic_name&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;generic_name&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="GENERIC_NAME_IN_LANGUAGES" class="constant">
+            <dt id="GENERIC_NAME_IN_LANGUAGES" class="constant">
     <span class="name ">GENERIC_NAME_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -202,11 +202,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;generic_name_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;generic_name_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="GENERIC_NAME_ALL_LANGUAGES" class="constant">
+            <dt id="GENERIC_NAME_ALL_LANGUAGES" class="constant">
     <span class="name ">GENERIC_NAME_ALL_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -217,11 +217,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;generic_name_languages&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;generic_name_languages&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="ABBREVIATED_NAME" class="constant">
+            <dt id="ABBREVIATED_NAME" class="constant">
     <span class="name ">ABBREVIATED_NAME</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -232,11 +232,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;abbreviated_product_name&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;abbreviated_product_name&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="ABBREVIATED_NAME_IN_LANGUAGES" class="constant">
+            <dt id="ABBREVIATED_NAME_IN_LANGUAGES" class="constant">
     <span class="name ">ABBREVIATED_NAME_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -247,11 +247,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;abbreviated_product_name_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;abbreviated_product_name_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="ABBREVIATED_NAME_ALL_LANGUAGES" class="constant">
+            <dt id="ABBREVIATED_NAME_ALL_LANGUAGES" class="constant">
     <span class="name ">ABBREVIATED_NAME_ALL_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -262,11 +262,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;abbreviated_product_name_languages&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;abbreviated_product_name_languages&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="BRANDS" class="constant">
+            <dt id="BRANDS" class="constant">
     <span class="name ">BRANDS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -277,11 +277,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;brands&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;brands&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="BRANDS_TAGS" class="constant">
+            <dt id="BRANDS_TAGS" class="constant">
     <span class="name ">BRANDS_TAGS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -292,11 +292,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;brands_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;brands_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="BRANDS_TAGS_IN_LANGUAGES" class="constant">
+            <dt id="BRANDS_TAGS_IN_LANGUAGES" class="constant">
     <span class="name ">BRANDS_TAGS_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -307,11 +307,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;brands_tags_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;brands_tags_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="COUNTRIES" class="constant">
+            <dt id="COUNTRIES" class="constant">
     <span class="name ">COUNTRIES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -322,11 +322,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;countries&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;countries&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="COUNTRIES_TAGS" class="constant">
+            <dt id="COUNTRIES_TAGS" class="constant">
     <span class="name ">COUNTRIES_TAGS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -337,11 +337,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;countries_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;countries_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="COUNTRIES_TAGS_IN_LANGUAGES" class="constant">
+            <dt id="COUNTRIES_TAGS_IN_LANGUAGES" class="constant">
     <span class="name ">COUNTRIES_TAGS_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -352,11 +352,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;countries_tags_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;countries_tags_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="LANGUAGE" class="constant">
+            <dt id="LANGUAGE" class="constant">
     <span class="name ">LANGUAGE</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -367,11 +367,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;lang&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;lang&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="QUANTITY" class="constant">
+            <dt id="QUANTITY" class="constant">
     <span class="name ">QUANTITY</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -382,11 +382,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;quantity&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;quantity&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="SERVING_SIZE" class="constant">
+            <dt id="SERVING_SIZE" class="constant">
     <span class="name ">SERVING_SIZE</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -397,11 +397,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;serving_size&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;serving_size&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="SERVING_QUANTITY" class="constant">
+            <dt id="SERVING_QUANTITY" class="constant">
     <span class="name ">SERVING_QUANTITY</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -412,11 +412,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;serving_quantity&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;serving_quantity&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="PACKAGING_QUANTITY" class="constant">
+            <dt id="PACKAGING_QUANTITY" class="constant">
     <span class="name ">PACKAGING_QUANTITY</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -427,11 +427,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;product_quantity&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;product_quantity&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="FRONT_IMAGE" class="constant">
+            <dt id="FRONT_IMAGE" class="constant">
     <span class="name ">FRONT_IMAGE</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -442,11 +442,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;image_small_url&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;image_small_url&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="SELECTED_IMAGE" class="constant">
+            <dt id="SELECTED_IMAGE" class="constant">
     <span class="name ">SELECTED_IMAGE</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -457,11 +457,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;selected_images&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;selected_images&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="IMAGE_FRONT_URL" class="constant">
+            <dt id="IMAGE_FRONT_URL" class="constant">
     <span class="name ">IMAGE_FRONT_URL</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -472,11 +472,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;image_front_url&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;image_front_url&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="IMAGE_FRONT_SMALL_URL" class="constant">
+            <dt id="IMAGE_FRONT_SMALL_URL" class="constant">
     <span class="name ">IMAGE_FRONT_SMALL_URL</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -487,11 +487,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;image_front_small_url&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;image_front_small_url&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="IMAGE_INGREDIENTS_URL" class="constant">
+            <dt id="IMAGE_INGREDIENTS_URL" class="constant">
     <span class="name ">IMAGE_INGREDIENTS_URL</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -502,11 +502,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;image_ingredients_url&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;image_ingredients_url&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="IMAGE_INGREDIENTS_SMALL_URL" class="constant">
+            <dt id="IMAGE_INGREDIENTS_SMALL_URL" class="constant">
     <span class="name ">IMAGE_INGREDIENTS_SMALL_URL</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -517,11 +517,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;image_ingredients_small_url&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;image_ingredients_small_url&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="IMAGE_NUTRITION_URL" class="constant">
+            <dt id="IMAGE_NUTRITION_URL" class="constant">
     <span class="name ">IMAGE_NUTRITION_URL</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -532,11 +532,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;image_nutrition_url&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;image_nutrition_url&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="IMAGE_NUTRITION_SMALL_URL" class="constant">
+            <dt id="IMAGE_NUTRITION_SMALL_URL" class="constant">
     <span class="name ">IMAGE_NUTRITION_SMALL_URL</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -547,11 +547,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;image_nutrition_small_url&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;image_nutrition_small_url&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="IMAGE_PACKAGING_URL" class="constant">
+            <dt id="IMAGE_PACKAGING_URL" class="constant">
     <span class="name ">IMAGE_PACKAGING_URL</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -562,11 +562,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;image_packaging_url&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;image_packaging_url&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="IMAGE_PACKAGING_SMALL_URL" class="constant">
+            <dt id="IMAGE_PACKAGING_SMALL_URL" class="constant">
     <span class="name ">IMAGE_PACKAGING_SMALL_URL</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -577,11 +577,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;image_packaging_small_url&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;image_packaging_small_url&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="IMAGES" class="constant">
+            <dt id="IMAGES" class="constant">
     <span class="name ">IMAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -592,11 +592,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;images&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;images&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="INGREDIENTS" class="constant">
+            <dt id="INGREDIENTS" class="constant">
     <span class="name ">INGREDIENTS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -607,11 +607,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;ingredients&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;ingredients&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="INGREDIENTS_TAGS" class="constant">
+            <dt id="INGREDIENTS_TAGS" class="constant">
     <span class="name ">INGREDIENTS_TAGS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -622,11 +622,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;ingredients_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;ingredients_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="INGREDIENTS_TAGS_IN_LANGUAGES" class="constant">
+            <dt id="INGREDIENTS_TAGS_IN_LANGUAGES" class="constant">
     <span class="name ">INGREDIENTS_TAGS_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -637,11 +637,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;ingredients_tags_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;ingredients_tags_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="IMAGES_FRESHNESS_IN_LANGUAGES" class="constant">
+            <dt id="IMAGES_FRESHNESS_IN_LANGUAGES" class="constant">
     <span class="name ">IMAGES_FRESHNESS_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -652,11 +652,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;images_to_update_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;images_to_update_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="NO_NUTRITION_DATA" class="constant">
+            <dt id="NO_NUTRITION_DATA" class="constant">
     <span class="name ">NO_NUTRITION_DATA</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -667,11 +667,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;no_nutrition_data&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;no_nutrition_data&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="NUTRIMENTS" class="constant">
+            <dt id="NUTRIMENTS" class="constant">
     <span class="name ">NUTRIMENTS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -682,11 +682,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;nutriments&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;nutriments&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="ADDITIVES" class="constant">
+            <dt id="ADDITIVES" class="constant">
     <span class="name ">ADDITIVES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -697,11 +697,26 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;additives_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;additives_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="NUTRIENT_LEVELS" class="constant">
+            <dt id="ADDITIVES_TAGS_IN_LANGUAGES" class="constant">
+    <span class="name ">ADDITIVES_TAGS_IN_LANGUAGES</span>
+  <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
+  
+
+</dt>
+<dd>
+  
+  
+
+    <div>
+      <span class="signature"><code>const ProductField(offTag: &#39;additives_tags_&#39;)</code></span>
+    </div>
+</dd>
+
+            <dt id="NUTRIENT_LEVELS" class="constant">
     <span class="name ">NUTRIENT_LEVELS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -712,11 +727,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;nutrient_levels&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;nutrient_levels&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="INGREDIENTS_TEXT" class="constant">
+            <dt id="INGREDIENTS_TEXT" class="constant">
     <span class="name ">INGREDIENTS_TEXT</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -727,11 +742,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;ingredients_text&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;ingredients_text&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="INGREDIENTS_TEXT_IN_LANGUAGES" class="constant">
+            <dt id="INGREDIENTS_TEXT_IN_LANGUAGES" class="constant">
     <span class="name ">INGREDIENTS_TEXT_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -742,11 +757,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;ingredients_text_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;ingredients_text_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="INGREDIENTS_TEXT_ALL_LANGUAGES" class="constant">
+            <dt id="INGREDIENTS_TEXT_ALL_LANGUAGES" class="constant">
     <span class="name ">INGREDIENTS_TEXT_ALL_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -757,11 +772,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;ingredients_text_languages&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;ingredients_text_languages&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="NUTRIMENT_ENERGY_UNIT" class="constant">
+            <dt id="NUTRIMENT_ENERGY_UNIT" class="constant">
     <span class="name ">NUTRIMENT_ENERGY_UNIT</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -772,11 +787,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;nutriment_energy_unit&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;nutriment_energy_unit&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="NUTRIMENT_DATA_PER" class="constant">
+            <dt id="NUTRIMENT_DATA_PER" class="constant">
     <span class="name ">NUTRIMENT_DATA_PER</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -787,11 +802,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;nutrition_data_per&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;nutrition_data_per&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="NUTRITION_DATA" class="constant">
+            <dt id="NUTRITION_DATA" class="constant">
     <span class="name ">NUTRITION_DATA</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -802,11 +817,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;nutrition_data&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;nutrition_data&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="NUTRISCORE" class="constant">
+            <dt id="NUTRISCORE" class="constant">
     <span class="name ">NUTRISCORE</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -817,11 +832,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;nutrition_grade_fr&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;nutrition_grade_fr&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="COMPARED_TO_CATEGORY" class="constant">
+            <dt id="COMPARED_TO_CATEGORY" class="constant">
     <span class="name ">COMPARED_TO_CATEGORY</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -832,11 +847,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;compared_to_category&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;compared_to_category&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="CATEGORIES" class="constant">
+            <dt id="CATEGORIES" class="constant">
     <span class="name ">CATEGORIES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -847,11 +862,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;categories&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;categories&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="CATEGORIES_TAGS" class="constant">
+            <dt id="CATEGORIES_TAGS" class="constant">
     <span class="name ">CATEGORIES_TAGS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -862,11 +877,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;categories_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;categories_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="CATEGORIES_TAGS_IN_LANGUAGES" class="constant">
+            <dt id="CATEGORIES_TAGS_IN_LANGUAGES" class="constant">
     <span class="name ">CATEGORIES_TAGS_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -877,11 +892,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;categories_tags_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;categories_tags_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="LABELS" class="constant">
+            <dt id="LABELS" class="constant">
     <span class="name ">LABELS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -892,11 +907,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;labels&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;labels&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="LABELS_TAGS" class="constant">
+            <dt id="LABELS_TAGS" class="constant">
     <span class="name ">LABELS_TAGS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -907,11 +922,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;labels_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;labels_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="LABELS_TAGS_IN_LANGUAGES" class="constant">
+            <dt id="LABELS_TAGS_IN_LANGUAGES" class="constant">
     <span class="name ">LABELS_TAGS_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -922,11 +937,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;labels_tags_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;labels_tags_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="PACKAGING" class="constant">
+            <dt id="PACKAGING" class="constant">
     <span class="name ">PACKAGING</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -937,11 +952,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;packaging&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;packaging&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="PACKAGINGS" class="constant">
+            <dt id="PACKAGINGS" class="constant">
     <span class="name ">PACKAGINGS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -952,11 +967,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;packagings&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;packagings&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="PACKAGINGS_COMPLETE" class="constant">
+            <dt id="PACKAGINGS_COMPLETE" class="constant">
     <span class="name ">PACKAGINGS_COMPLETE</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -967,11 +982,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;packagings_complete&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;packagings_complete&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="PACKAGING_TAGS" class="constant">
+            <dt id="PACKAGING_TAGS" class="constant">
     <span class="name ">PACKAGING_TAGS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -982,11 +997,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;packaging_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;packaging_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="PACKAGING_TEXT_IN_LANGUAGES" class="constant">
+            <dt id="PACKAGING_TEXT_IN_LANGUAGES" class="constant">
     <span class="name ">PACKAGING_TEXT_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -997,11 +1012,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;packaging_text_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;packaging_text_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="PACKAGING_TEXT_ALL_LANGUAGES" class="constant">
+            <dt id="PACKAGING_TEXT_ALL_LANGUAGES" class="constant">
     <span class="name ">PACKAGING_TEXT_ALL_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1012,11 +1027,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;packaging_text_languages&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;packaging_text_languages&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="MISC_TAGS" class="constant">
+            <dt id="MISC_TAGS" class="constant">
     <span class="name ">MISC_TAGS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1027,11 +1042,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;misc_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;misc_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="MISC_TAGS_IN_LANGUAGES" class="constant">
+            <dt id="MISC_TAGS_IN_LANGUAGES" class="constant">
     <span class="name ">MISC_TAGS_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1042,11 +1057,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;misc_tags_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;misc_tags_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="STATES_TAGS" class="constant">
+            <dt id="STATES_TAGS" class="constant">
     <span class="name ">STATES_TAGS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1057,11 +1072,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;states_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;states_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="STATES_TAGS_IN_LANGUAGES" class="constant">
+            <dt id="STATES_TAGS_IN_LANGUAGES" class="constant">
     <span class="name ">STATES_TAGS_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1072,11 +1087,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;states_tags_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;states_tags_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="TRACES_TAGS" class="constant">
+            <dt id="TRACES_TAGS" class="constant">
     <span class="name ">TRACES_TAGS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1087,11 +1102,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;traces_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;traces_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="TRACES_TAGS_IN_LANGUAGES" class="constant">
+            <dt id="TRACES_TAGS_IN_LANGUAGES" class="constant">
     <span class="name ">TRACES_TAGS_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1102,11 +1117,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;traces_tags_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;traces_tags_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="STORES_TAGS" class="constant">
+            <dt id="STORES_TAGS" class="constant">
     <span class="name ">STORES_TAGS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1117,11 +1132,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;stores_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;stores_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="STORES_TAGS_IN_LANGUAGES" class="constant">
+            <dt id="STORES_TAGS_IN_LANGUAGES" class="constant">
     <span class="name ">STORES_TAGS_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1132,11 +1147,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;stores_tags_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;stores_tags_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="STORES" class="constant">
+            <dt id="STORES" class="constant">
     <span class="name ">STORES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1147,11 +1162,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;stores&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;stores&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="INGREDIENTS_ANALYSIS_TAGS" class="constant">
+            <dt id="INGREDIENTS_ANALYSIS_TAGS" class="constant">
     <span class="name ">INGREDIENTS_ANALYSIS_TAGS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1162,11 +1177,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;ingredients_analysis_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;ingredients_analysis_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES" class="constant">
+            <dt id="INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES" class="constant">
     <span class="name ">INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1177,11 +1192,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;ingredients_analysis_tags_&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;ingredients_analysis_tags_&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="ALLERGENS" class="constant">
+            <dt id="ALLERGENS" class="constant">
     <span class="name ">ALLERGENS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1192,11 +1207,26 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;allergens_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;allergens_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="ATTRIBUTE_GROUPS" class="constant">
+            <dt id="ALLERGENS_TAGS_IN_LANGUAGES" class="constant">
+    <span class="name ">ALLERGENS_TAGS_IN_LANGUAGES</span>
+  <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
+  
+
+</dt>
+<dd>
+  
+  
+
+    <div>
+      <span class="signature"><code>const ProductField(offTag: &#39;allergens_tags_&#39;)</code></span>
+    </div>
+</dd>
+
+            <dt id="ATTRIBUTE_GROUPS" class="constant">
     <span class="name ">ATTRIBUTE_GROUPS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1207,11 +1237,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;attribute_groups&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;attribute_groups&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="LAST_MODIFIED" class="constant">
+            <dt id="LAST_MODIFIED" class="constant">
     <span class="name ">LAST_MODIFIED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1222,11 +1252,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;last_modified_t&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;last_modified_t&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="LAST_MODIFIER" class="constant">
+            <dt id="LAST_MODIFIER" class="constant">
     <span class="name ">LAST_MODIFIER</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1237,11 +1267,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;last_modified_by&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;last_modified_by&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="LAST_CHECKED" class="constant">
+            <dt id="LAST_CHECKED" class="constant">
     <span class="name ">LAST_CHECKED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1252,11 +1282,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;last_checked_t&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;last_checked_t&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="LAST_CHECKER" class="constant">
+            <dt id="LAST_CHECKER" class="constant">
     <span class="name ">LAST_CHECKER</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1267,11 +1297,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;last_checker&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;last_checker&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="LAST_EDITOR" class="constant">
+            <dt id="LAST_EDITOR" class="constant">
     <span class="name ">LAST_EDITOR</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1282,11 +1312,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;last_editor&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;last_editor&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="LAST_IMAGE" class="constant">
+            <dt id="LAST_IMAGE" class="constant">
     <span class="name ">LAST_IMAGE</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1297,11 +1327,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;last_image_t&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;last_image_t&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="ENTRY_DATES" class="constant">
+            <dt id="ENTRY_DATES" class="constant">
     <span class="name ">ENTRY_DATES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1312,11 +1342,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;entry_dates_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;entry_dates_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="LAST_CHECK_DATES" class="constant">
+            <dt id="LAST_CHECK_DATES" class="constant">
     <span class="name ">LAST_CHECK_DATES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1327,11 +1357,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;last_check_dates_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;last_check_dates_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="LAST_EDIT_DATES" class="constant">
+            <dt id="LAST_EDIT_DATES" class="constant">
     <span class="name ">LAST_EDIT_DATES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1342,11 +1372,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;last_edit_dates_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;last_edit_dates_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="LAST_IMAGE_DATES" class="constant">
+            <dt id="LAST_IMAGE_DATES" class="constant">
     <span class="name ">LAST_IMAGE_DATES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1357,11 +1387,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;last_image_dates_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;last_image_dates_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="CREATED" class="constant">
+            <dt id="CREATED" class="constant">
     <span class="name ">CREATED</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1372,11 +1402,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;created_t&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;created_t&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="CREATOR" class="constant">
+            <dt id="CREATOR" class="constant">
     <span class="name ">CREATOR</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1387,11 +1417,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;creator&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;creator&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="EDITORS" class="constant">
+            <dt id="EDITORS" class="constant">
     <span class="name ">EDITORS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1402,11 +1432,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;editors_tags&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;editors_tags&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="ECOSCORE_GRADE" class="constant">
+            <dt id="ECOSCORE_GRADE" class="constant">
     <span class="name ">ECOSCORE_GRADE</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1417,11 +1447,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;ecoscore_grade&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;ecoscore_grade&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="ECOSCORE_SCORE" class="constant">
+            <dt id="ECOSCORE_SCORE" class="constant">
     <span class="name ">ECOSCORE_SCORE</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1432,11 +1462,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;ecoscore_score&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;ecoscore_score&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="ECOSCORE_DATA" class="constant">
+            <dt id="ECOSCORE_DATA" class="constant">
     <span class="name ">ECOSCORE_DATA</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1447,11 +1477,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;ecoscore_data&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;ecoscore_data&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="KNOWLEDGE_PANELS" class="constant">
+            <dt id="KNOWLEDGE_PANELS" class="constant">
     <span class="name ">KNOWLEDGE_PANELS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1462,11 +1492,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;knowledge_panels&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;knowledge_panels&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="EMB_CODES" class="constant">
+            <dt id="EMB_CODES" class="constant">
     <span class="name ">EMB_CODES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1477,11 +1507,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;emb_codes&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;emb_codes&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="MANUFACTURING_PLACES" class="constant">
+            <dt id="MANUFACTURING_PLACES" class="constant">
     <span class="name ">MANUFACTURING_PLACES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1492,11 +1522,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;manufacturing_places&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;manufacturing_places&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="ORIGINS" class="constant">
+            <dt id="ORIGINS" class="constant">
     <span class="name ">ORIGINS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1507,11 +1537,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;origins&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;origins&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="NOVA_GROUP" class="constant">
+            <dt id="NOVA_GROUP" class="constant">
     <span class="name ">NOVA_GROUP</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1522,11 +1552,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;nova_group&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;nova_group&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="WEBSITE" class="constant">
+            <dt id="WEBSITE" class="constant">
     <span class="name ">WEBSITE</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1537,11 +1567,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;link&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;link&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="EXPIRATION_DATE" class="constant">
+            <dt id="EXPIRATION_DATE" class="constant">
     <span class="name ">EXPIRATION_DATE</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1552,11 +1582,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;expiration_date&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;expiration_date&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="OBSOLETE" class="constant">
+            <dt id="OBSOLETE" class="constant">
     <span class="name ">OBSOLETE</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1567,11 +1597,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;obsolete&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;obsolete&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="RAW" class="constant">
+            <dt id="RAW" class="constant">
     <span class="name ">RAW</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1582,11 +1612,11 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;raw&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;raw&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="ALL" class="constant">
+            <dt id="ALL" class="constant">
     <span class="name ">ALL</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>
   
@@ -1597,24 +1627,23 @@
   
 
     <div>
-      <span class="signature"><code>ProductField(offTag: &#39;&#39;)</code></span>
+      <span class="signature"><code>const ProductField(offTag: &#39;&#39;)</code></span>
     </div>
 </dd>
 
-      </dl>
-    </section>
+        </dl>
+      </section>
 
-    <section
-        class="
-          summary
-          offset-anchor"
-        id="instance-properties">
-      <h2>Properties</h2>
-
-      <dl class="properties">
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
         <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -1624,8 +1653,9 @@
 </dd>
 
         <dt id="index" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Enum/index.html">index</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Enum/index.html">index</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -1636,7 +1666,8 @@
 
         <dt id="offTag" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField/offTag.html">offTag</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>
+  
 
 </dt>
 <dd>
@@ -1646,8 +1677,9 @@
 </dd>
 
         <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Type-class.html">Type</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Type-class.html">Type</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -1656,9 +1688,8 @@
 
 </dd>
 
-      </dl>
-    </section>
-
+    </dl>
+  </section>
     
   <section
       class="summary offset-anchor inherited"
@@ -1666,7 +1697,7 @@
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
@@ -1679,8 +1710,8 @@
 </dd>
 
         <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>
   </span>
   
 
@@ -1700,8 +1731,8 @@
     <h2>Operators</h2>
     <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/bool-class.html">bool</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/bool-class.html">bool</a></span>
   </span>
   
 
@@ -1724,7 +1755,7 @@
     <dl class="properties">
         <dt id="values" class="constant">
     <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField/values-constant.html">values</a></span>
-  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.3.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>&gt;</span></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.4.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>&gt;</span></span>
   
 
 </dt>
@@ -1736,10 +1767,10 @@
 
     </dl>
   </section>
-  </div><!-- /.main-content -->
+</div><!-- /.main-content -->
 
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+  <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
   <form class="search-sidebar" role="search">
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
@@ -1753,12 +1784,12 @@
 </ol>
 
 
-    <h5>product_fields library</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div>
+  <h5>product_fields library</h5>
+  <div id="dartdoc-sidebar-left-content"></div>
+</div>
 
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!-- /.sidebar-offcanvas -->
+<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!-- /.sidebar-offcanvas -->
 
 </main>
 

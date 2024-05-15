@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
@@ -36,34 +36,34 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button">
+  <div class="toggle" id="theme-button" title="Toggle brightness">
     <label for="theme">
       <input type="checkbox" id="theme" value="light-theme">
       <span id="dark-theme-button" class="material-symbols-outlined">
-        brightness_4
+        dark_mode
       </span>
       <span id="light-theme-button" class="material-symbols-outlined">
-        brightness_5
+        light_mode
       </span>
     </label>
   </div>
 </header>
 <main>
 
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens&#47;file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens-library-sidebar.html"
-      data-below-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens&#47;AllergensTag-enum-sidebar.html">
-      <div>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens&#47;file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens-library-sidebar.html"
+    data-below-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens&#47;AllergensTag-enum-sidebar.html">
+    <div>
 
-        <h1>
-          <span class="kind-enum">AllergensTag</span>
-          enum 
+      <h1>
+        <span class="kind-enum">AllergensTag</span>
+        enum 
  
 
-        </h1>
-      </div>
+      </h1>
+    </div>
 
     
 <section class="desc markdown">
@@ -71,31 +71,31 @@
 </section>
 
 
-    <section>
-      <dl class="dl-horizontal">
-        
+      <section>
+        <dl class="dl-horizontal">
+          
   <dt>Inheritance</dt>
   <dd>
     <ul class="gt-separated dark eNum-relationships">
-      <li><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object-class.html">Object</a></li>
-        <li><a href="https://api.dart.dev/stable/3.3.4/dart-core/Enum-class.html">Enum</a></li>
+      <li><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object-class.html">Object</a></li>
+        <li><a href="https://api.dart.dev/stable/3.4.0/dart-core/Enum-class.html">Enum</a></li>
       <li>AllergensTag</li>
     </ul>
   </dd>
 
-        
+          
   <dt>Implemented types</dt>
   <dd>
     <ul class="comma-separated eNum-relationships">
         <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_off_tagged/OffTagged-class.html">OffTagged</a></li>
     </ul>
   </dd>
-        
-        
+          
+          
 
 
-      </dl>
-    </section>
+        </dl>
+      </section>
 
     
   <section class="summary offset-anchor" id="constructors">
@@ -103,7 +103,7 @@
 
     <dl class="constructor-summary-list">
         <dt id="AllergensTag" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag/AllergensTag.html">AllergensTag</a></span><span class="signature">(<span class="parameter" id="-param-offTag">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">offTag</span>}</span>)</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag/AllergensTag.html">AllergensTag</a></span><span class="signature">(<span class="parameter" id="-param-offTag">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">offTag</span>}</span>)</span>
         </dt>
         <dd>
           
@@ -112,11 +112,11 @@
     </dl>
   </section>
 
-    <section class="summary offset-anchor" id="values">
-      <h2>Values</h2>
+      <section class="summary offset-anchor" id="values">
+        <h2>Values</h2>
 
-      <dl class="properties">
-          <dt id="GLUTEN" class="constant">
+        <dl class="properties">
+            <dt id="GLUTEN" class="constant">
     <span class="name ">GLUTEN</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>
   
@@ -127,11 +127,11 @@
   
 
     <div>
-      <span class="signature"><code>AllergensTag(offTag: &#39;en:gluten&#39;)</code></span>
+      <span class="signature"><code>const AllergensTag(offTag: &#39;en:gluten&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="MILK" class="constant">
+            <dt id="MILK" class="constant">
     <span class="name ">MILK</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>
   
@@ -142,11 +142,11 @@
   
 
     <div>
-      <span class="signature"><code>AllergensTag(offTag: &#39;en:milk&#39;)</code></span>
+      <span class="signature"><code>const AllergensTag(offTag: &#39;en:milk&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="EGGS" class="constant">
+            <dt id="EGGS" class="constant">
     <span class="name ">EGGS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>
   
@@ -157,11 +157,11 @@
   
 
     <div>
-      <span class="signature"><code>AllergensTag(offTag: &#39;en:eggs&#39;)</code></span>
+      <span class="signature"><code>const AllergensTag(offTag: &#39;en:eggs&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="NUTS" class="constant">
+            <dt id="NUTS" class="constant">
     <span class="name ">NUTS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>
   
@@ -172,11 +172,11 @@
   
 
     <div>
-      <span class="signature"><code>AllergensTag(offTag: &#39;en:nuts&#39;)</code></span>
+      <span class="signature"><code>const AllergensTag(offTag: &#39;en:nuts&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="PEANUTS" class="constant">
+            <dt id="PEANUTS" class="constant">
     <span class="name ">PEANUTS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>
   
@@ -187,11 +187,11 @@
   
 
     <div>
-      <span class="signature"><code>AllergensTag(offTag: &#39;en:peanuts&#39;)</code></span>
+      <span class="signature"><code>const AllergensTag(offTag: &#39;en:peanuts&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="SESAME_SEEDS" class="constant">
+            <dt id="SESAME_SEEDS" class="constant">
     <span class="name ">SESAME_SEEDS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>
   
@@ -202,11 +202,11 @@
   
 
     <div>
-      <span class="signature"><code>AllergensTag(offTag: &#39;en:sesame-seeds&#39;)</code></span>
+      <span class="signature"><code>const AllergensTag(offTag: &#39;en:sesame-seeds&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="SOYBEANS" class="constant">
+            <dt id="SOYBEANS" class="constant">
     <span class="name ">SOYBEANS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>
   
@@ -217,11 +217,11 @@
   
 
     <div>
-      <span class="signature"><code>AllergensTag(offTag: &#39;en:soybeans&#39;)</code></span>
+      <span class="signature"><code>const AllergensTag(offTag: &#39;en:soybeans&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="CELERY" class="constant">
+            <dt id="CELERY" class="constant">
     <span class="name ">CELERY</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>
   
@@ -232,11 +232,11 @@
   
 
     <div>
-      <span class="signature"><code>AllergensTag(offTag: &#39;en:celery&#39;)</code></span>
+      <span class="signature"><code>const AllergensTag(offTag: &#39;en:celery&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="MUSTARD" class="constant">
+            <dt id="MUSTARD" class="constant">
     <span class="name ">MUSTARD</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>
   
@@ -247,11 +247,11 @@
   
 
     <div>
-      <span class="signature"><code>AllergensTag(offTag: &#39;en:mustard&#39;)</code></span>
+      <span class="signature"><code>const AllergensTag(offTag: &#39;en:mustard&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="LUPIN" class="constant">
+            <dt id="LUPIN" class="constant">
     <span class="name ">LUPIN</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>
   
@@ -262,11 +262,11 @@
   
 
     <div>
-      <span class="signature"><code>AllergensTag(offTag: &#39;en:lupin&#39;)</code></span>
+      <span class="signature"><code>const AllergensTag(offTag: &#39;en:lupin&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="FISH" class="constant">
+            <dt id="FISH" class="constant">
     <span class="name ">FISH</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>
   
@@ -277,11 +277,11 @@
   
 
     <div>
-      <span class="signature"><code>AllergensTag(offTag: &#39;en:fish&#39;)</code></span>
+      <span class="signature"><code>const AllergensTag(offTag: &#39;en:fish&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="CRUSTACEANS" class="constant">
+            <dt id="CRUSTACEANS" class="constant">
     <span class="name ">CRUSTACEANS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>
   
@@ -292,11 +292,11 @@
   
 
     <div>
-      <span class="signature"><code>AllergensTag(offTag: &#39;en:crustaceans&#39;)</code></span>
+      <span class="signature"><code>const AllergensTag(offTag: &#39;en:crustaceans&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="MOLLUSCS" class="constant">
+            <dt id="MOLLUSCS" class="constant">
     <span class="name ">MOLLUSCS</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>
   
@@ -307,11 +307,11 @@
   
 
     <div>
-      <span class="signature"><code>AllergensTag(offTag: &#39;en:molluscs&#39;)</code></span>
+      <span class="signature"><code>const AllergensTag(offTag: &#39;en:molluscs&#39;)</code></span>
     </div>
 </dd>
 
-          <dt id="SULPHUR_DIOXIDE_AND_SULPHITES" class="constant">
+            <dt id="SULPHUR_DIOXIDE_AND_SULPHITES" class="constant">
     <span class="name ">SULPHUR_DIOXIDE_AND_SULPHITES</span>
   <span class="signature">&#8594; const <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>
   
@@ -322,24 +322,23 @@
   
 
     <div>
-      <span class="signature"><code>AllergensTag(offTag: &#39;en:sulphur-dioxide-and-sulphites&#39;)</code></span>
+      <span class="signature"><code>const AllergensTag(offTag: &#39;en:sulphur-dioxide-and-sulphites&#39;)</code></span>
     </div>
 </dd>
 
-      </dl>
-    </section>
+        </dl>
+      </section>
 
-    <section
-        class="
-          summary
-          offset-anchor"
-        id="instance-properties">
-      <h2>Properties</h2>
-
-      <dl class="properties">
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
         <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -349,8 +348,9 @@
 </dd>
 
         <dt id="index" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Enum/index.html">index</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/int-class.html">int</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Enum/index.html">index</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/int-class.html">int</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -361,7 +361,8 @@
 
         <dt id="offTag" class="property">
   <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag/offTag.html">offTag</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>
+  
 
 </dt>
 <dd>
@@ -371,8 +372,9 @@
 </dd>
 
         <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/Type-class.html">Type</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/Type-class.html">Type</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -381,9 +383,8 @@
 
 </dd>
 
-      </dl>
-    </section>
-
+    </dl>
+  </section>
     
   <section
       class="summary offset-anchor inherited"
@@ -391,7 +392,7 @@
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
@@ -404,8 +405,8 @@
 </dd>
 
         <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/String-class.html">String</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span>
   </span>
   
 
@@ -425,8 +426,8 @@
     <h2>Operators</h2>
     <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.3.4/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.3.4/dart-core/bool-class.html">bool</a></span>
+  <span class="name"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.0/dart-core/bool-class.html">bool</a></span>
   </span>
   
 
@@ -449,7 +450,7 @@
     <dl class="properties">
         <dt id="values" class="constant">
     <span class="name "><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag/values-constant.html">values</a></span>
-  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.3.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>&gt;</span></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.4.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_allergens/AllergensTag.html">AllergensTag</a></span>&gt;</span></span>
   
 
 </dt>
@@ -461,10 +462,10 @@
 
     </dl>
   </section>
-  </div><!-- /.main-content -->
+</div><!-- /.main-content -->
 
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+  <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
   <form class="search-sidebar" role="search">
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
@@ -478,12 +479,12 @@
 </ol>
 
 
-    <h5>allergens library</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div>
+  <h5>allergens library</h5>
+  <div id="dartdoc-sidebar-left-content"></div>
+</div>
 
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!-- /.sidebar-offcanvas -->
+<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!-- /.sidebar-offcanvas -->
 
 </main>
 
