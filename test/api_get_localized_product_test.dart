@@ -80,6 +80,8 @@ void main() {
         fields: [
           // tags in languages
           ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
+          ProductField.ADDITIVES_TAGS_IN_LANGUAGES,
+          ProductField.ALLERGENS_TAGS_IN_LANGUAGES,
           ProductField.TRACES_TAGS_IN_LANGUAGES,
           ProductField.STORES_TAGS_IN_LANGUAGES,
           ProductField.STATES_TAGS_IN_LANGUAGES,
@@ -91,6 +93,8 @@ void main() {
           ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
           // tags
           ProductField.CATEGORIES_TAGS,
+          ProductField.ADDITIVES,
+          ProductField.ALLERGENS,
           ProductField.TRACES_TAGS,
           ProductField.STORES_TAGS,
           ProductField.STATES_TAGS,
@@ -146,7 +150,7 @@ void main() {
         }
       }
 
-      void checkIngredientAnaysisTags(
+      void checkIngredientAnalysisTags(
         final IngredientsAnalysisTags? tags,
         final Map<OpenFoodFactsLanguage, List<String>>? tagsInLanguages,
         final ProductField productField,
@@ -188,6 +192,17 @@ void main() {
         ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
       );
       check(
+        product.additives?.ids ?? [],
+        product.additivesTagsInLanguages,
+        ProductField.ADDITIVES_TAGS_IN_LANGUAGES,
+      );
+      check(
+        // note that the test product has no allergens
+        product.allergens?.ids ?? [],
+        product.allergensTagsInLanguages,
+        ProductField.ALLERGENS_TAGS_IN_LANGUAGES,
+      );
+      check(
         product.tracesTags,
         product.tracesTagsInLanguages,
         ProductField.TRACES_TAGS_IN_LANGUAGES,
@@ -212,7 +227,7 @@ void main() {
         product.miscTagsInLanguages,
         ProductField.MISC_TAGS_IN_LANGUAGES,
       );
-      checkIngredientAnaysisTags(
+      checkIngredientAnalysisTags(
         product.ingredientsAnalysisTags,
         product.ingredientsAnalysisTagsInLanguages,
         ProductField.INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES,
