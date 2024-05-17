@@ -65,7 +65,6 @@
 
 <span class="returntype"><a href="https://api.dart.dev/stable/3.4.0/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_maybe_error/MaybeError-class.html">MaybeError</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_proof/Proof-class.html">Proof</a></span>&gt;</span></span>&gt;</span></span>
 <span class="name ">uploadProof</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="uploadProof-param-proofType">{<span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_proof_type/ProofType.html">ProofType</a></span> <span class="parameter-name">proofType</span>, </span></li>
-<li><span class="parameter" id="uploadProof-param-isPublic"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isPublic</span>, </span></li>
 <li><span class="parameter" id="uploadProof-param-imageUri"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/Uri-class.html">Uri</a></span> <span class="parameter-name">imageUri</span>, </span></li>
 <li><span class="parameter" id="uploadProof-param-mediaType"><span>required</span> <span class="type-annotation">dynamic</span> <span class="parameter-name">mediaType</span>, </span></li>
 <li><span class="parameter" id="uploadProof-param-bearerToken"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">bearerToken</span>, </span></li>
@@ -83,7 +82,6 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static Future&lt;MaybeError&lt;Proof&gt;&gt; uploadProof({
   required final ProofType proofType,
-  required final bool isPublic,
   required final Uri imageUri,
   required final MediaType mediaType,
   required final String bearerToken,
@@ -102,7 +100,6 @@
   request.fields.addAll(
     &lt;String, String&gt;{
       &#39;type&#39;: proofType.offTag,
-      &#39;is_public&#39;: isPublic ? &#39;true&#39; : &#39;false&#39;,
     },
   );
   final List&lt;int&gt; fileBytes = await UriReader.instance!.readAsBytes(imageUri);

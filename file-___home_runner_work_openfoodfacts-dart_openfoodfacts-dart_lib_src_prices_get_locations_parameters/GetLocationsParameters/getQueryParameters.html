@@ -90,18 +90,6 @@ Map&lt;String, String&gt; getQueryParameters() {
   addNonNullString(osmCityLike, &#39;osm_address_city__like&#39;);
   addNonNullString(osmPostcodeLike, &#39;osm_address_postcode__like&#39;);
   addNonNullString(osmCountryLike, &#39;osm_address_country__like&#39;);
-  addNonNullInt(priceCount, &#39;price_count&#39;);
-  addNonNullInt(priceCountGte, &#39;price_count__gte&#39;);
-  addNonNullInt(priceCountLte, &#39;price_count__lte&#39;);
-  if (orderBy != null) {
-    final List&lt;String&gt; orders = &lt;String&gt;[];
-    for (final OrderBy order in orderBy!) {
-      orders.add(order.offTag);
-    }
-    if (orders.isNotEmpty) {
-      addNonNullString(orders.join(&#39;,&#39;), &#39;order_by&#39;);
-    }
-  }
   return result;
 }</code></pre>
 </section>

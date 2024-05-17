@@ -103,15 +103,6 @@ Map&lt;String, String&gt; getQueryParameters() {
   addNonNullDate(dateLte, &#39;date__lte&#39;, dayOnly: true);
   addNonNullString(owner, &#39;owner&#39;);
   addNonNullDate(createdGte, &#39;created__gte&#39;, dayOnly: false);
-  if (orderBy != null) {
-    final List&lt;String&gt; orders = &lt;String&gt;[];
-    for (final OrderBy order in orderBy!) {
-      orders.add(order.offTag);
-    }
-    if (orders.isNotEmpty) {
-      addNonNullString(orders.join(&#39;,&#39;), &#39;order_by&#39;);
-    }
-  }
   return result;
 }</code></pre>
 </section>
