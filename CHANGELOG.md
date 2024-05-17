@@ -1,5 +1,38 @@
 # Changelog
 
+## [3.8.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.7.0...v3.8.0) (2024-05-10)
+
+
+### Features
+
+* 922 - default currency for each country ([#923](https://github.com/openfoodfacts/openfoodfacts-dart/issues/923)) ([37fd612](https://github.com/openfoodfacts/openfoodfacts-dart/commit/37fd6122cbc16a7b8922f269da920169c1ada976))
+
+## [3.7.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.6.1...v3.7.0) (2024-05-03)
+
+
+### Features
+
+* 919 - new field KnowledgePanelImageElement.link_url ([#920](https://github.com/openfoodfacts/openfoodfacts-dart/issues/920)) ([a161516](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a161516cc209ea55d911e702a6573bb880879661))
+
+## [3.6.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.6.0...v3.6.1) (2024-04-23)
+
+
+### Bug Fixes
+
+* trigger release please ([#917](https://github.com/openfoodfacts/openfoodfacts-dart/issues/917)) ([7a7f1dd](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7a7f1ddfb8e073a675f555f69985a8e4cde4a33b))
+
+## [3.6.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.5.0...v3.6.0) (2024-04-19)
+
+
+### Features
+
+* Allow to receive a cookie and send it later ([#911](https://github.com/openfoodfacts/openfoodfacts-dart/issues/911)) ([ff9c7a8](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ff9c7a88fd04c402f32edebadc9f95ffafb03b7f))
+
+
+### Bug Fixes
+
+* auth label ([#912](https://github.com/openfoodfacts/openfoodfacts-dart/issues/912)) ([ceed92f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ceed92f20af5eb4e5e0b0dd409db79ad79d6e0e8))
+
 ## [3.5.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.4.0...v3.5.0) (2024-04-07)
 
 
