@@ -113,7 +113,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
         (k, e) => MapEntry(
             $enumDecode(_$OpenFoodFactsLanguageEnumMap, k),
             (e as Map<String, dynamic>).map(
-              (k, e) => MapEntry($enumDecode(_$ImageFieldEnumMap, k), e as int),
+              (k, e) => MapEntry(
+                  $enumDecode(_$ImageFieldEnumMap, k), (e as num).toInt()),
             )),
       )
       ..ingredientsAnalysisTagsInLanguages =
@@ -167,7 +168,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       ..embCodes = json['emb_codes'] as String?
       ..manufacturingPlaces = json['manufacturing_places'] as String?
       ..origins = json['origins'] as String?
-      ..novaGroup = json['nova_group'] as int?
+      ..novaGroup = (json['nova_group'] as num?)?.toInt()
       ..website = json['link'] as String?
       ..obsolete = JsonHelper.checkboxFromJSON(json['obsolete'])
       ..expirationDate = json['expiration_date'] as String?;

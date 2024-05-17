@@ -8,7 +8,7 @@ part 'proof.g.dart';
 
 /// Proof of a price.
 ///
-/// cf. ProofFull in https://prices.openfoodfacts.org/api/docs
+/// cf. `ProofFull` in https://prices.openfoodfacts.org/api/docs
 @JsonSerializable()
 class Proof extends JsonObject {
   @JsonKey()
@@ -22,12 +22,6 @@ class Proof extends JsonObject {
 
   @JsonKey()
   ProofType? type;
-
-  /// if true, the proof is public and is included in the API response.
-  ///
-  /// Set false only if the proof contains personal information.
-  @JsonKey(name: 'is_public')
-  late bool isPublic;
 
   /// Number of prices for this proof.
   @JsonKey(name: 'price_count')
