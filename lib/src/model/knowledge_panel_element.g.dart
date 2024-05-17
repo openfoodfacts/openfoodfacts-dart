@@ -43,7 +43,8 @@ KnowledgePanelImageElement _$KnowledgePanelImageElementFromJson(
       url: json['url'] as String,
       width: json['width'] as int?,
       height: json['height'] as int?,
-      altText: json['alt_text'] as String?,
+      altText: json['alt'] as String?,
+      linkUrl: json['link_url'] as String?,
     );
 
 Map<String, dynamic> _$KnowledgePanelImageElementToJson(
@@ -52,7 +53,8 @@ Map<String, dynamic> _$KnowledgePanelImageElementToJson(
       'url': instance.url,
       'width': instance.width,
       'height': instance.height,
-      'alt_text': instance.altText,
+      'alt': instance.altText,
+      'link_url': instance.linkUrl,
     };
 
 KnowledgePanelPanelGroupElement _$KnowledgePanelPanelGroupElementFromJson(
