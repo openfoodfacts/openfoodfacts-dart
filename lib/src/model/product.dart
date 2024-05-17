@@ -307,6 +307,12 @@ class Product extends JsonObject {
       fromJson: Additives.additivesFromJson,
       toJson: Additives.additivesToJson)
   Additives? additives;
+  @JsonKey(
+      name: 'additives_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, List<String>>? additivesTagsInLanguages;
 
   @JsonKey(
       name: 'allergens_tags',
@@ -314,6 +320,12 @@ class Product extends JsonObject {
       fromJson: Allergens.allergensFromJson,
       toJson: Allergens.allergensToJson)
   Allergens? allergens;
+  @JsonKey(
+      name: 'allergens_tags_in_languages',
+      toJson: LanguageHelper.toJsonStringsListMap,
+      fromJson: LanguageHelper.fromJsonStringsListMap,
+      includeIfNull: false)
+  Map<OpenFoodFactsLanguage, List<String>>? allergensTagsInLanguages;
 
   @JsonKey(
       name: 'nutrient_levels',
@@ -669,6 +681,14 @@ class Product extends JsonObject {
           result.categoriesTagsInLanguages ??= {};
           result.categoriesTagsInLanguages![language] = labels;
           break;
+        case ProductField.ADDITIVES_TAGS_IN_LANGUAGES:
+          result.additivesTagsInLanguages ??= {};
+          result.additivesTagsInLanguages![language] = labels;
+          break;
+        case ProductField.ALLERGENS_TAGS_IN_LANGUAGES:
+          result.allergensTagsInLanguages ??= {};
+          result.allergensTagsInLanguages![language] = labels;
+          break;
         case ProductField.TRACES_TAGS_IN_LANGUAGES:
           result.tracesTagsInLanguages ??= {};
           result.tracesTagsInLanguages![language] = labels;
@@ -726,6 +746,8 @@ class Product extends JsonObject {
           setLanguageString(productField, language, json[key]);
           return;
         case ProductField.CATEGORIES_TAGS_IN_LANGUAGES:
+        case ProductField.ADDITIVES_TAGS_IN_LANGUAGES:
+        case ProductField.ALLERGENS_TAGS_IN_LANGUAGES:
         case ProductField.TRACES_TAGS_IN_LANGUAGES:
         case ProductField.BRANDS_TAGS_IN_LANGUAGES:
         case ProductField.STATES_TAGS_IN_LANGUAGES:

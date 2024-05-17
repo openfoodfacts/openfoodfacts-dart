@@ -66,3 +66,7 @@ OxF:
   - any-glob-to-any-file: 'lib/src/prices/*.dart'
   - any-glob-to-any-file: 'lib/src/open_prices_api_client.dart'
   - any-glob-to-any-file: 'test/api_prices_*.dart'
+
+🔐 Authentification:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/login_status.dart'
