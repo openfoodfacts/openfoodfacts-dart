@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.9.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.8.0...v3.9.0) (2024-05-17)
+
+
+### Features
+
+* 831 - prices methods getProofs, getProof and getUsers + fixed uploadProof ([#926](https://github.com/openfoodfacts/openfoodfacts-dart/issues/926)) ([baa1258](https://github.com/openfoodfacts/openfoodfacts-dart/commit/baa1258c71e38dfa194b568c5a20c70ee0dc6c6a))
+* add localized additives and allergens ([#929](https://github.com/openfoodfacts/openfoodfacts-dart/issues/929)) ([9d17073](https://github.com/openfoodfacts/openfoodfacts-dart/commit/9d1707309ab035e3360740e5ef0772915c95120e))
+
 ## [3.8.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.7.0...v3.8.0) (2024-05-10)
 
 
