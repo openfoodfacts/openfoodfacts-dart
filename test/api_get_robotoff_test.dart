@@ -103,7 +103,7 @@ void main() {
       }
     });
 
-    test('FABRICE2 get popular questions with types', () async {
+    test('get popular questions with types', () async {
       Future<List<RobotoffQuestion>> getTopPopularQuestions(
         final OpenFoodFactsCountry country,
       ) async {
