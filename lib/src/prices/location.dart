@@ -23,6 +23,10 @@ class Location extends JsonObject {
   @JsonKey(name: 'osm_type')
   late LocationOSMType type;
 
+  /// Number of prices for this location.
+  @JsonKey(name: 'price_count')
+  late int priceCount;
+
   /// ID in the Prices API.
   @JsonKey(name: 'id')
   late int locationId;

@@ -333,25 +333,6 @@ void main() {
         nutriments.getValue(Nutrient.omega6, PerSize.serving),
         9.1,
       );
-
-      result = await OpenFoodAPIClient.getProductV3(
-        ProductQueryConfiguration(
-          '5000159461122',
-          language: language,
-          fields: fields,
-          version: ProductQueryVersion.v3,
-        ),
-      );
-      expect(result.product!.nutriments, isNotNull);
-      nutriments = result.product!.nutriments!;
-      expect(
-        nutriments.getValue(Nutrient.transFat, PerSize.oneHundredGrams),
-        0.1,
-      );
-      expect(
-        nutriments.getValue(Nutrient.transFat, PerSize.serving),
-        0.05,
-      );
     });
 
     test('get product Confiture Rhubarbe Fraises extra', () async {

@@ -8,7 +8,7 @@ part of 'leaderboard_entry.dart';
 
 LeaderboardEntry _$LeaderboardEntryFromJson(Map<String, dynamic> json) =>
     LeaderboardEntry(
-      score: json['score'] as int,
+      score: (json['score'] as num).toInt(),
       userId: json['user_id'] as String?,
     );
 

@@ -17,7 +17,7 @@ void main() {
     domain: 'openpetfoodfacts.org',
   );
 
-  const String beautyBarcode = '3600550964738';
+  const String beautyBarcode = '3600551054476';
   const String productsBarcode = '7898927451035';
   const String petFoodBarcode = '3564700266809';
 
