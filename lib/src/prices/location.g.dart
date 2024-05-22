@@ -16,6 +16,9 @@ Location _$LocationFromJson(Map<String, dynamic> json) => Location()
   ..postcode = json['osm_address_postcode'] as String?
   ..city = json['osm_address_city'] as String?
   ..country = json['osm_address_country'] as String?
+  ..countryCode = json['osm_address_country_code'] as String?
+  ..osmKey = json['osm_tag_key'] as String?
+  ..osmValue = json['osm_tag_value'] as String?
   ..latitude = (json['osm_lat'] as num?)?.toDouble()
   ..longitude = (json['osm_lon'] as num?)?.toDouble()
   ..created = JsonHelper.stringTimestampToDate(json['created'])
@@ -31,6 +34,9 @@ Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
       'osm_address_postcode': instance.postcode,
       'osm_address_city': instance.city,
       'osm_address_country': instance.country,
+      'osm_address_country_code': instance.countryCode,
+      'osm_tag_key': instance.osmKey,
+      'osm_tag_value': instance.osmValue,
       'osm_lat': instance.latitude,
       'osm_lon': instance.longitude,
       'created': instance.created.toIso8601String(),
