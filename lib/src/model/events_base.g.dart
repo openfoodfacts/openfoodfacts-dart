@@ -11,7 +11,7 @@ EventsBase _$EventsBaseFromJson(Map<String, dynamic> json) => EventsBase(
       timestamp: JsonHelper.nullableStringTimestampToDate(json['timestamp']),
       userId: json['user_id'] as String?,
       barcode: json['barcode'] as String?,
-      points: json['points'] as int?,
+      points: (json['points'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$EventsBaseToJson(EventsBase instance) =>

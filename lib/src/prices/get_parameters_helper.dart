@@ -1,9 +1,11 @@
 import 'package:meta/meta.dart';
+import 'order_by.dart';
 
 /// Helper class for API query parameters.
-abstract class GetParametersHelper {
+abstract class GetParametersHelper<T extends OrderByField> {
   int? pageSize;
   int? pageNumber;
+  List<OrderBy<T>>? orderBy;
 
   final Map<String, String> _result = <String, String>{};
 
@@ -17,6 +19,15 @@ abstract class GetParametersHelper {
     _result.clear();
     addNonNullInt(pageNumber, 'page');
     addNonNullInt(pageSize, 'size');
+    if (orderBy != null) {
+      final List<String> orders = <String>[];
+      for (final OrderBy order in orderBy!) {
+        orders.add(order.offTag);
+      }
+      if (orders.isNotEmpty) {
+        addNonNullString(orders.join(','), 'order_by');
+      }
+    }
     return _result;
   }
 

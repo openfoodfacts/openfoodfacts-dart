@@ -47,8 +47,8 @@ Map<String, dynamic> _$TermCorrectionsToJson(TermCorrections instance) =>
 Correction _$CorrectionFromJson(Map<String, dynamic> json) => Correction(
       json['correction'] as String?,
       json['original'] as String?,
-      json['start_offset'] as int?,
-      json['end_offset'] as int?,
+      (json['start_offset'] as num?)?.toInt(),
+      (json['end_offset'] as num?)?.toInt(),
       json['is_valid'] as bool?,
     );
 
