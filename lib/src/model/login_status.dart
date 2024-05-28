@@ -19,7 +19,10 @@ import '../utils/language_helper.dart';
 ///     "user":{
 ///       "name":"Mr. John Doe",
 ///       "preferred_language":"fr",
-///       "country":"be"
+///       "cc":"be",
+///       "country":"en:belgium",
+///       "admin":0,
+///       "moderator":1
 ///     }
 ///   }
 class LoginStatus {

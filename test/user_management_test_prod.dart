@@ -122,7 +122,7 @@ void main() {
     expect(status!.successful, isTrue);
     expect(status.userId, TestConstants.PROD_USER.userId);
     expect(status.userName, 'Alexander Schacht (TIOLI)');
-    expect(status.preferredLanguage, isNull);
+    expect(status.preferredLanguage, OpenFoodFactsLanguage.ENGLISH);
     expect(status.country, isNull);
     expect(status.isAdmin, isFalse);
     expect(status.isModerator, isFalse);
