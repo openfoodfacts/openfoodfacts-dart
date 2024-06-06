@@ -46,6 +46,15 @@ class Location extends JsonObject {
   @JsonKey(name: 'osm_address_country')
   String? country;
 
+  @JsonKey(name: 'osm_address_country_code')
+  String? countryCode;
+
+  @JsonKey(name: 'osm_tag_key')
+  String? osmKey;
+
+  @JsonKey(name: 'osm_tag_value')
+  String? osmValue;
+
   @JsonKey(name: 'osm_lat')
   double? latitude;
 

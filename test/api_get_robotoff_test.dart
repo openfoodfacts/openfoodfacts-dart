@@ -158,7 +158,9 @@ void main() {
       }
       // highly probable
       expect(germanBarcodes2, isNot(frenchBarcodes1));
-    }, timeout: Timeout(Duration(seconds: 90)));
+    },
+        skip: 'a bit prone to 502 Bad Gateway',
+        timeout: Timeout(Duration(seconds: 90)));
 
     test('get 2 random questions with no specific type', () async {
       final RobotoffQuestionResult result =

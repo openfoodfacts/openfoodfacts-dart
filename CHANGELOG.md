@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.10.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.9.0...v3.10.0) (2024-05-22)
+
+
+### Features
+
+* 933 - added osm location fields (countryCode, osmKey, osmValue) ([#934](https://github.com/openfoodfacts/openfoodfacts-dart/issues/934)) ([f653f6a](https://github.com/openfoodfacts/openfoodfacts-dart/commit/f653f6ab049e6ec30c0726cfae576ede57e5ce46))
+
 ## [3.9.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.8.0...v3.9.0) (2024-05-17)
 
 
