@@ -7,12 +7,11 @@ part of 'proof.dart';
 // **************************************************************************
 
 Proof _$ProofFromJson(Map<String, dynamic> json) => Proof()
-  ..id = json['id'] as int
+  ..id = (json['id'] as num).toInt()
   ..filePath = json['file_path'] as String?
   ..mimetype = json['mimetype'] as String
   ..type = $enumDecodeNullable(_$ProofTypeEnumMap, json['type'])
-  ..isPublic = json['is_public'] as bool
-  ..priceCount = json['price_count'] as int
+  ..priceCount = (json['price_count'] as num).toInt()
   ..owner = json['owner'] as String
   ..created = JsonHelper.stringTimestampToDate(json['created']);
 
@@ -21,7 +20,6 @@ Map<String, dynamic> _$ProofToJson(Proof instance) => <String, dynamic>{
       'file_path': instance.filePath,
       'mimetype': instance.mimetype,
       'type': _$ProofTypeEnumMap[instance.type],
-      'is_public': instance.isPublic,
       'price_count': instance.priceCount,
       'owner': instance.owner,
       'created': instance.created.toIso8601String(),

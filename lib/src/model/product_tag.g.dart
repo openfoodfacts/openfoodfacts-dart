@@ -11,7 +11,7 @@ ProductTag _$ProductTagFromJson(Map<String, dynamic> json) => ProductTag(
       key: json['k'] as String,
       value: json['v'] as String,
       owner: json['owner'] as String,
-      version: json['version'] as int,
+      version: (json['version'] as num).toInt(),
       editor: json['editor'] as String,
       lastEdit: JsonHelper.stringTimestampToDate(json['last_edit']),
       comment: json['comment'] as String,

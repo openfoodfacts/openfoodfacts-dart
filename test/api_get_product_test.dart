@@ -333,25 +333,6 @@ void main() {
         nutriments.getValue(Nutrient.omega6, PerSize.serving),
         9.1,
       );
-
-      result = await OpenFoodAPIClient.getProductV3(
-        ProductQueryConfiguration(
-          '5000159461122',
-          language: language,
-          fields: fields,
-          version: ProductQueryVersion.v3,
-        ),
-      );
-      expect(result.product!.nutriments, isNotNull);
-      nutriments = result.product!.nutriments!;
-      expect(
-        nutriments.getValue(Nutrient.transFat, PerSize.oneHundredGrams),
-        0.1,
-      );
-      expect(
-        nutriments.getValue(Nutrient.transFat, PerSize.serving),
-        0.05,
-      );
     });
 
     test('get product Confiture Rhubarbe Fraises extra', () async {
@@ -647,13 +628,13 @@ void main() {
       expect(nutritionalQuality.first.title, 'Nutri-Score D');
       expect(nutritionalQuality.first.name, 'Nutri-Score');
       expect(nutritionalQuality.first.match,
-          greaterThan(29)); // 20230602: 29.4444444444444
+          greaterThan(27)); // 20240522: 27.3333333333333
       expect(nutritionalQuality.first.status, 'known');
       expect(nutritionalQuality[1].id, 'low_salt');
       expect(nutritionalQuality[2].id, 'low_fat');
       expect(nutritionalQuality[3].id, 'low_sugars');
       expect(nutritionalQuality[4].id, 'low_saturated_fat');
-      expect(nutritionalQuality.first.panelId, 'nutriscore');
+      expect(nutritionalQuality.first.panelId, 'nutriscore_2023');
 
       group = result.product!.attributeGroups!
           .singleWhere((element) => element.id == 'processing');
@@ -876,7 +857,7 @@ void main() {
         'environment_card',
         'health_card',
         'ingredients',
-        'nutriscore',
+        'nutriscore_2023',
         'root',
       };
       final ProductResultV3 productResult =

@@ -41,8 +41,8 @@ KnowledgePanelImageElement _$KnowledgePanelImageElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelImageElement(
       url: json['url'] as String,
-      width: json['width'] as int?,
-      height: json['height'] as int?,
+      width: (json['width'] as num?)?.toInt(),
+      height: (json['height'] as num?)?.toInt(),
       altText: json['alt'] as String?,
       linkUrl: json['link_url'] as String?,
     );

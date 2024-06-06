@@ -8,7 +8,7 @@ part of 'ocr_packaging_result.dart';
 
 OcrPackagingResult _$OcrPackagingResultFromJson(Map<String, dynamic> json) =>
     OcrPackagingResult(
-      status: json['status'] as int?,
+      status: (json['status'] as num?)?.toInt(),
       textFromImageOrig: json['packaging_text_from_image_orig'] as String?,
       textFromImage: json['packaging_text_from_image'] as String?,
     );

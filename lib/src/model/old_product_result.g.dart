@@ -8,7 +8,7 @@ part of 'old_product_result.dart';
 
 OldProductResult _$OldProductResultFromJson(Map<String, dynamic> json) =>
     OldProductResult(
-      status: json['status'] as int?,
+      status: (json['status'] as num?)?.toInt(),
       barcode: json['code'] as String?,
       statusVerbose: json['status_verbose'] as String?,
       product: json['product'] == null

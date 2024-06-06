@@ -11,6 +11,10 @@ import 'prices/get_locations_result.dart';
 import 'prices/get_parameters_helper.dart';
 import 'prices/get_prices_parameters.dart';
 import 'prices/get_prices_result.dart';
+import 'prices/get_proofs_parameters.dart';
+import 'prices/get_proofs_result.dart';
+import 'prices/get_users_parameters.dart';
+import 'prices/get_users_result.dart';
 import 'prices/location.dart';
 import 'prices/location_osm_type.dart';
 import 'prices/price_product.dart';
@@ -383,9 +387,37 @@ class OpenPricesAPIClient {
     return MaybeError<bool>.responseError(response);
   }
 
+  /// Get user proofs.
+  static Future<MaybeError<GetProofsResult>> getProofs(
+    final GetProofsParameters parameters, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+    required final String bearerToken,
+  }) async {
+    final Uri uri = uriHelper.getUri(
+      path: '/api/v1/proofs',
+      queryParameters: parameters.getQueryParameters(),
+      forcedHost: _getHost(uriHelper),
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<GetProofsResult>.value(
+          GetProofsResult.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<GetProofsResult>.responseError(response);
+  }
+
   static Future<MaybeError<Proof>> uploadProof({
     required final ProofType proofType,
-    required final bool isPublic,
     required final Uri imageUri,
     required final MediaType mediaType,
     required final String bearerToken,
@@ -404,7 +436,6 @@ class OpenPricesAPIClient {
     request.fields.addAll(
       <String, String>{
         'type': proofType.offTag,
-        'is_public': isPublic ? 'true' : 'false',
       },
     );
     final List<int> fileBytes = await UriReader.instance!.readAsBytes(imageUri);
@@ -436,6 +467,32 @@ class OpenPricesAPIClient {
     );
   }
 
+  /// Get user proof by id.
+  static Future<MaybeError<Proof>> getProof(
+    final int proofId, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+    required final String bearerToken,
+  }) async {
+    final Uri uri = uriHelper.getUri(
+      path: '/api/v1/proofs/$proofId',
+      forcedHost: _getHost(uriHelper),
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<Proof>.value(Proof.fromJson(decodedResponse));
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<Proof>.responseError(response);
+  }
+
   /// Deletes a proof.
   /// A user can delete only owned proofs. Can delete only proofs that are not associated with prices. A moderator can delete not owned proofs.
   /// Returns true if successful.
@@ -457,5 +514,33 @@ class OpenPricesAPIClient {
       return MaybeError<bool>.value(true);
     }
     return MaybeError<bool>.responseError(response);
+  }
+
+  static Future<MaybeError<GetUsersResult>> getUsers(
+    final GetUsersParameters parameters, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
+  }) async {
+    final Uri uri = uriHelper.getUri(
+      path: '/api/v1/users',
+      queryParameters: parameters.getQueryParameters(),
+      forcedHost: _getHost(uriHelper),
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<GetUsersResult>.value(
+          GetUsersResult.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<GetUsersResult>.responseError(response);
   }
 }
