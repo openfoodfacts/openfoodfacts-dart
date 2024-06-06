@@ -927,4 +927,16 @@ enum Currency {
 
   /// Not really attached to a specific country at all.
   final bool noCountry;
+
+  static Currency? fromName(final String? name) {
+    if (name == null) {
+      return null;
+    }
+    for (final Currency currency in values) {
+      if (currency.name == name) {
+        return currency;
+      }
+    }
+    return null;
+  }
 }

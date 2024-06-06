@@ -10,7 +10,7 @@ void main() {
   group('$OpenFoodAPIClient get user products', () {
     const String userId = 'monsieurtanuki';
     // should be big enough to get everything on page1
-    const int pageSize = 1000;
+    const int pageSize = 100;
     final String toBeCompletedTag = ProductState.COMPLETED.toBeCompletedTag;
 
     Future<int> getCount(
