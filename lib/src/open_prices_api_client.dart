@@ -45,11 +45,13 @@ class OpenPricesAPIClient {
     required final String path,
     final Map<String, dynamic>? queryParameters,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final bool? addUserAgentParameters,
   }) =>
       uriHelper.getUri(
         path: path,
         queryParameters: queryParameters,
         forcedHost: _getHost(uriHelper),
+        addUserAgentParameters: addUserAgentParameters,
       );
 
   static Future<MaybeError<GetPricesResult>> getPrices(
@@ -319,14 +321,8 @@ class OpenPricesAPIClient {
     required final String bearerToken,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
-    final String? appName = OpenFoodAPIConfiguration.userAgent?.name;
     final Uri uri = getUri(
       path: '/api/v1/prices',
-      queryParameters: appName == null
-          ? null
-          : <String, String>{
-              'app_name': appName,
-            },
       uriHelper: uriHelper,
     );
     final StringBuffer body = StringBuffer();
@@ -440,14 +436,8 @@ class OpenPricesAPIClient {
     required final String bearerToken,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
-    final String? appName = OpenFoodAPIConfiguration.userAgent?.name;
     final Uri uri = getUri(
       path: '/api/v1/proofs/upload',
-      queryParameters: appName == null
-          ? null
-          : <String, String>{
-              'app_name': appName,
-            },
       uriHelper: uriHelper,
     );
 

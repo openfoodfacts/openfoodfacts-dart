@@ -55,5 +55,6 @@ class Proof extends JsonObject {
           : OpenPricesAPIClient.getUri(
               path: 'img/$filePath',
               uriHelper: uriProductHelper,
+              addUserAgentParameters: false,
             );
 }
