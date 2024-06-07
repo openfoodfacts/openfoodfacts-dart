@@ -1325,4 +1325,31 @@ class OpenFoodAPIClient {
           'Different imagefield: expected "$id", actual "$imageField"');
     }
   }
+
+  /// Returns the name of each country localized in [language].
+  static Future<Map<OpenFoodFactsCountry, String>> getLocalizedCountryNames(
+    final OpenFoodFactsLanguage language, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Response response = await HttpHelper().doGetRequest(
+      uriHelper.getUri(
+        path: '/cgi/countries.pl',
+        queryParameters: {'lc': language.offTag},
+      ),
+      uriHelper: uriHelper,
+    );
+    final Map<OpenFoodFactsCountry, String> result =
+        <OpenFoodFactsCountry, String>{};
+    final Map<String, dynamic> map = HttpHelper().jsonDecode(response.body);
+    for (final String countryCode in map.keys) {
+      final OpenFoodFactsCountry? country =
+          OpenFoodFactsCountry.fromOffTag(countryCode);
+      if (country == null) {
+        // very unlikely
+        continue;
+      }
+      result[country] = map[countryCode];
+    }
+    return result;
+  }
 }
