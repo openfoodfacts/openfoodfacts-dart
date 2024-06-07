@@ -87,9 +87,9 @@
   required final String bearerToken,
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
-  final Uri uri = uriHelper.getUri(
+  final Uri uri = getUri(
     path: &#39;&#47;api&#47;v1&#47;proofs&#47;upload&#39;,
-    forcedHost: _getHost(uriHelper),
+    uriHelper: uriHelper,
   );
 
   final http.MultipartRequest request = http.MultipartRequest(&#39;POST&#39;, uri);

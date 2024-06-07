@@ -83,9 +83,9 @@
   required final String bearerToken,
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
-  final Uri uri = uriHelper.getUri(
+  final Uri uri = getUri(
     path: &#39;&#47;api&#47;v1&#47;prices&#39;,
-    forcedHost: _getHost(uriHelper),
+    uriHelper: uriHelper,
   );
   final StringBuffer body = StringBuffer();
   body.write(&#39;{&#39;);

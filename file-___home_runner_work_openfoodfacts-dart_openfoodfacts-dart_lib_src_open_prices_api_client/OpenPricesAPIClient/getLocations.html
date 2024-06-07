@@ -83,10 +83,10 @@
   final UriProductHelper uriHelper = uriHelperFoodProd,
   final String? bearerToken,
 }) async {
-  final Uri uri = uriHelper.getUri(
+  final Uri uri = getUri(
     path: &#39;&#47;api&#47;v1&#47;locations&#39;,
     queryParameters: parameters.getQueryParameters(),
-    forcedHost: _getHost(uriHelper),
+    uriHelper: uriHelper,
   );
   final Response response = await HttpHelper().doGetRequest(
     uri,

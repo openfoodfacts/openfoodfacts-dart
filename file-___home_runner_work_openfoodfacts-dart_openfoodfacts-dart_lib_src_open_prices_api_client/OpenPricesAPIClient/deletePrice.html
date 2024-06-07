@@ -88,9 +88,9 @@ Returns true if successful.</p>
   final UriProductHelper uriHelper = uriHelperFoodProd,
   required final String bearerToken,
 }) async {
-  final Uri uri = uriHelper.getUri(
+  final Uri uri = getUri(
     path: &#39;&#47;api&#47;v1&#47;prices&#47;$priceId&#39;,
-    forcedHost: _getHost(uriHelper),
+    uriHelper: uriHelper,
   );
   final Response response = await HttpHelper().doDeleteRequest(
     uri,

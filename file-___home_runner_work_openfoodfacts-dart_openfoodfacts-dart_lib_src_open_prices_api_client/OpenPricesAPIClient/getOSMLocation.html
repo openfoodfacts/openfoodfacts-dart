@@ -83,9 +83,9 @@
   required final LocationOSMType locationOSMType,
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
-  final Uri uri = uriHelper.getUri(
+  final Uri uri = getUri(
     path: &#39;&#47;api&#47;v1&#47;locations&#47;osm&#47;${locationOSMType.offTag}&#47;$locationOSMId&#39;,
-    forcedHost: _getHost(uriHelper),
+    uriHelper: uriHelper,
   );
   final Response response = await HttpHelper().doGetRequest(
     uri,
