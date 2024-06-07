@@ -20,4 +20,8 @@ enum ProofType implements OffTagged {
 
   @override
   final String offTag;
+
+  /// Returns the first [ProofType] that matches the [offTag].
+  static ProofType? fromOffTag(final String? offTag) =>
+      OffTagged.fromOffTag(offTag, ProofType.values) as ProofType?;
 }

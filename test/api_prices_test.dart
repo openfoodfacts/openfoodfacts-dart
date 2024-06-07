@@ -1,3 +1,5 @@
+import 'package:http/http.dart' as http;
+
 import 'package:http_parser/http_parser.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
@@ -8,6 +10,7 @@ void main() {
   const UriProductHelper uriHelper = uriHelperFoodTest;
   const User user = TestConstants.TEST_USER;
   const String invalidBearerToken = 'invalid bearer token';
+  const int HTTP_OK = 200;
 
   group('$OpenPricesAPIClient default', () {
     test('getStatus', () async {
@@ -610,6 +613,11 @@ void main() {
       expect(maybeProof.value.mimetype, proof.mimetype);
       expect(maybeProof.value.created, proof.created);
       expect(maybeProof.value.filePath, proof.filePath);
+      if (proof.filePath != null) {
+        final Uri uri = proof.getFileUrl(uriProductHelper: uriHelper)!;
+        final http.Response response = await http.get(uri);
+        expect(response.statusCode, HTTP_OK);
+      }
     });
 
     test('upload', () async {

@@ -9,6 +9,7 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
   const ProductQueryVersion version = ProductQueryVersion.v3;
+  const int defaultPageSize = 50;
 
   // additional parameter for faster response time
   const Parameter optimParameter = SearchTerms(terms: ['pizza']);
@@ -699,7 +700,7 @@ void main() {
       );
 
       expect(result.page, 1);
-      expect(result.pageSize, 24);
+      expect(result.pageSize, defaultPageSize);
       expect(result.count, BARCODES.length - 1);
       expect(result.products, isNotNull);
       expect(result.products!.length, BARCODES.length - 1);
@@ -780,9 +781,9 @@ void main() {
       );
 
       expect(result.page, 3);
-      expect(result.pageSize, 24);
+      expect(result.pageSize, defaultPageSize);
       expect(result.products, isNotNull);
-      expect(result.products!.length, 24);
+      expect(result.products!.length, defaultPageSize);
       expect(result.products![0].runtimeType, Product);
       expect(result.count, greaterThan(1500));
     }, skip: 'Temporarily not working (server issue)');
@@ -809,14 +810,13 @@ void main() {
       );
 
       expect(result.page, 1);
-      expect(result.pageSize, 24);
+      expect(result.pageSize, defaultPageSize);
       expect(result.count, BARCODES.length - 1);
       expect(result.products, isNotNull);
       expect(result.products!.length, BARCODES.length - 1);
     });
 
     test('nova filter', () async {
-      const int pageSize = 24;
       // Approximated min counts for FRANCE / Carrefour
       // There were too many results for FRANCE, and that made the server crash.
       // That's why we add a filter on STORES.
@@ -841,7 +841,7 @@ void main() {
                 tagFilterType: TagFilterType.STORES,
                 tagName: 'Carrefour',
               ),
-              PageSize(size: pageSize),
+              PageSize(size: defaultPageSize),
             ],
             fields: [ProductField.BARCODE, ProductField.NOVA_GROUP],
             language: OpenFoodFactsLanguage.FRENCH,
@@ -851,14 +851,14 @@ void main() {
         );
 
         expect(result.page, 1);
-        expect(result.pageSize, pageSize);
+        expect(result.pageSize, defaultPageSize);
         expect(
           result.count,
           greaterThanOrEqualTo(novaMinCounts[novaGroup]!),
           reason: 'Not enough values for nova group $novaGroup',
         );
         expect(result.products, isNotNull);
-        expect(result.products!.length, pageSize);
+        expect(result.products!.length, defaultPageSize);
         for (final Product product in result.products!) {
           expect(product.novaGroup, novaGroup);
         }
