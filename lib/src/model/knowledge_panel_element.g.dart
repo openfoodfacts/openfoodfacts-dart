@@ -224,7 +224,7 @@ Map<String, dynamic> _$KnowledgePanelTableElementToJson(
 KnowledgePanelActionElement _$KnowledgePanelActionElementFromJson(
         Map<String, dynamic> json) =>
     KnowledgePanelActionElement(
-      html: json['html'] as String,
+      html: json['html'] as String?,
       actions:
           (json['actions'] as List<dynamic>).map((e) => e as String).toList(),
     );
