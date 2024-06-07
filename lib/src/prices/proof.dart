@@ -37,7 +37,7 @@ class Proof extends JsonObject {
   @JsonKey()
   late String owner;
 
-  // Creation timestamp. Read-only.
+  /// Creation timestamp. Read-only.
   @JsonKey(fromJson: JsonHelper.stringTimestampToDate)
   late DateTime created;
 
