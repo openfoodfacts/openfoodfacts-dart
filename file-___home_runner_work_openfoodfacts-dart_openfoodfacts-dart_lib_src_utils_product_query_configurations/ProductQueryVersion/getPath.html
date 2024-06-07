@@ -76,12 +76,7 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">String getPath(final String barcode) {
-  if (version == 0) {
-    return &#39;&#47;api&#47;v0&#47;product&#47;$barcode.json&#39;;
-  }
-  return &#39;&#47;api&#47;v$version&#47;product&#47;$barcode&#47;&#39;;
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">String getPath(final String barcode) =&gt; &#39;&#47;api&#47;v$version&#47;product&#47;$barcode&#47;&#39;;</code></pre>
 </section>
 
 
