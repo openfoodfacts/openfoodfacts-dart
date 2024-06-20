@@ -26,8 +26,6 @@ void main() {
         name = 'M. $userId';
         email = "$userId@gmail.com";
 
-        print(name);
-
         SignUpStatus response = await OpenFoodAPIClient.register(
           user: User(userId: userId, password: password),
           name: name,
@@ -49,8 +47,10 @@ void main() {
       expect(status!.successful, isTrue);
       expect(status.userId, userId);
       expect(status.userName, name);
-      expect(status.userEmail, email);
-      print('Creating a account and logging in worked in $counter trie(s)');
+      expect(status.preferredLanguage, isNull);
+      expect(status.country, isNull);
+      expect(status.isAdmin, false);
+      expect(status.isModerator, false);
     });
 
     test('Login with invalid credentials', () async {
