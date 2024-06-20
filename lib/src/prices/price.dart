@@ -106,31 +106,35 @@ class Price extends JsonObject {
   @JsonKey(name: 'proof_id')
   int? proofId;
 
+  /// Price ID. Read-only.
   @JsonKey()
   late int id;
 
+  /// Product ID. Read-only.
   @JsonKey(name: 'product_id')
   int? productId;
 
+  /// Location ID. Read-only.
   @JsonKey(name: 'location_id')
   int? locationId;
 
-  /// Proof.
+  /// Proof. Read-only.
   @JsonKey()
   Proof? proof;
 
-  /// Location.
+  /// Location. Read-only.
   @JsonKey()
   Location? location;
 
-  /// Product.
+  /// Product. Read-only.
   @JsonKey()
   PriceProduct? product;
 
-  /// Owner.
+  /// Owner. Read-only.
   @JsonKey()
   late String owner;
 
+  /// Creation timestamp. Read-only.
   @JsonKey(fromJson: JsonHelper.stringTimestampToDate)
   late DateTime created;
 

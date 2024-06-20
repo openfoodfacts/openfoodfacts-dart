@@ -5,20 +5,16 @@ import 'abstract_query_configuration.dart';
 import 'http_helper.dart';
 import 'uri_helper.dart';
 
-/// Api version for product queries
+/// Api version for product queries (minimum forced version number: 2).
 class ProductQueryVersion {
-  const ProductQueryVersion(this.version);
+  const ProductQueryVersion(final int version)
+      : version = version < 2 ? 2 : version;
 
   final int version;
 
   static const ProductQueryVersion v3 = ProductQueryVersion(3);
 
-  String getPath(final String barcode) {
-    if (version == 0) {
-      return '/api/v0/product/$barcode.json';
-    }
-    return '/api/v$version/product/$barcode/';
-  }
+  String getPath(final String barcode) => '/api/v$version/product/$barcode/';
 
   bool matchesV3() => version >= 3;
 }
