@@ -8,6 +8,7 @@ void main() {
 
   test('get product images (all, main and raw)', () async {
     const String barcode = '3019081238643';
+    await getProductTooManyRequestsManager.waitIfNeeded();
     final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
       ProductQueryConfiguration(
         barcode,

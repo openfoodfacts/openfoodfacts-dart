@@ -53,6 +53,7 @@ void main() {
         fields: [ProductField.NAME, ProductField.ATTRIBUTE_GROUPS],
         version: ProductQueryVersion.v3,
       );
+      await getProductTooManyRequestsManager.waitIfNeeded();
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.PROD_USER,

@@ -10,6 +10,7 @@ void main() {
 
   group('$OpenFoodAPIClient json to/from conversions', () {
     test('images', () async {
+      await getProductTooManyRequestsManager.waitIfNeeded();
       final ProductResultV3 productResult =
           await OpenFoodAPIClient.getProductV3(
         ProductQueryConfiguration(

@@ -34,6 +34,7 @@ void main() {
         fields: [ProductField.BARCODE],
         version: ProductQueryVersion(2),
       );
+      await getProductTooManyRequestsManager.waitIfNeeded();
       final OldProductResult result = await OpenFoodAPIClient.getOldProduct(
         configurations,
         uriHelper: uriHelper,

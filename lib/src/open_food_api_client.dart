@@ -47,6 +47,7 @@ import 'utils/product_query_configurations.dart';
 import 'utils/product_search_query_configuration.dart';
 import 'utils/tag_type.dart';
 import 'utils/taxonomy_query_configuration.dart';
+import 'utils/too_many_requests_exception.dart';
 import 'utils/uri_helper.dart';
 
 /// Client calls of the Open Food Facts API
@@ -356,6 +357,7 @@ class OpenFoodAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Response response = await configuration.getResponse(user, uriHelper);
+    TooManyRequestsException.check(response);
     return response.body;
   }
 
@@ -519,6 +521,7 @@ class OpenFoodAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Response response = await configuration.getResponse(user, uriHelper);
+    TooManyRequestsException.check(response);
     final String jsonStr = _replaceQuotes(response.body);
     final SearchResult result = SearchResult.fromJson(
       HttpHelper().jsonDecode(jsonStr),
