@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.11.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.10.0...v3.11.0) (2024-06-07)
+
+
+### Features
+
+* 890 - new method getLocalizedCountryNames ([#904](https://github.com/openfoodfacts/openfoodfacts-dart/issues/904)) ([0fa5941](https://github.com/openfoodfacts/openfoodfacts-dart/commit/0fa59410a1df3e31b0cb2bbe8404b585938f65fa))
+
+
+### Bug Fixes
+
+* 900 - for KnowledgePanelActionElement html is now optional ([#901](https://github.com/openfoodfacts/openfoodfacts-dart/issues/901)) ([e4ec263](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e4ec263a1c1dc309bfb47076870131afd5090aa1))
+* 927 - minimum forced query version is now 2 ([#936](https://github.com/openfoodfacts/openfoodfacts-dart/issues/936)) ([260e482](https://github.com/openfoodfacts/openfoodfacts-dart/commit/260e48275aba37e52f11bbca72353ab58d1c066c))
+* added "app_name" parameter for prices methods uploadProof and createPrice ([#938](https://github.com/openfoodfacts/openfoodfacts-dart/issues/938)) ([e4bd1ed](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e4bd1ed091767c609e12066f08cfee05eea9cffe))
+
 ## [3.10.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.9.0...v3.10.0) (2024-05-22)
 
 
