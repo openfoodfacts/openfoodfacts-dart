@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:http/http.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 
+import 'prices/currency.dart';
 import 'prices/maybe_error.dart';
 import 'prices/price.dart';
 import 'prices/proof.dart';
@@ -20,6 +23,8 @@ import 'prices/location_osm_type.dart';
 import 'prices/price_product.dart';
 import 'prices/proof_type.dart';
 import 'prices/session.dart';
+import 'prices/update_price_parameters.dart';
+import 'prices/update_proof_parameters.dart';
 import 'utils/http_helper.dart';
 import 'utils/open_food_api_configuration.dart';
 import 'utils/uri_helper.dart';
@@ -325,44 +330,27 @@ class OpenPricesAPIClient {
       path: '/api/v1/prices',
       uriHelper: uriHelper,
     );
-    final StringBuffer body = StringBuffer();
-    body.write('{');
-    if (price.productCode != null) {
-      body.write('"product_code": "${price.productCode}",');
-    }
-    if (price.productName != null) {
-      body.write('"product_name": "${price.productName}",');
-    }
-    if (price.categoryTag != null) {
-      body.write('"category_tag": "${price.categoryTag}",');
-    }
-    if (price.labelsTags != null) {
-      body.write('"labels_tags": "${price.labelsTags}",');
-    }
-    if (price.originsTags != null) {
-      body.write('"origins_tags": "${price.originsTags}",');
-    }
-    if (price.proofId != null) {
-      body.write('"proof_id": ${price.proofId},');
-    }
-    if (price.pricePer != null) {
-      body.write('"price_per": "${price.pricePer!.offTag}",');
-    }
-    if (price.priceWithoutDiscount != null) {
-      body.write('"price_without_discount": ${price.priceWithoutDiscount},');
-    }
-    if (price.priceIsDiscounted != null) {
-      body.write('"price_is_discounted": ${price.priceIsDiscounted},');
-    }
-    body.write('"price": ${price.price},');
-    body.write('"currency": "${price.currency.name}",');
-    body.write('"location_osm_id": ${price.locationOSMId},');
-    body.write('"location_osm_type": "${price.locationOSMType.offTag}",');
-    body.write('"date": "${GetParametersHelper.formatDate(price.date)}"');
-    body.write('}');
+    final Map<String, dynamic> body = <String, dynamic>{
+      if (price.productCode != null) 'product_code': price.productCode,
+      if (price.productName != null) 'product_name': price.productName,
+      if (price.categoryTag != null) 'category_tag': price.categoryTag,
+      if (price.labelsTags != null) 'labels_tags': price.labelsTags,
+      if (price.originsTags != null) 'origins_tags': price.originsTags,
+      if (price.proofId != null) 'proof_id': price.proofId,
+      if (price.pricePer != null) 'price_per': price.pricePer!.offTag,
+      if (price.priceWithoutDiscount != null)
+        'price_without_discount': price.priceWithoutDiscount,
+      if (price.priceIsDiscounted != null)
+        'price_is_discounted': price.priceIsDiscounted,
+      'price': price.price,
+      'currency': price.currency.name,
+      'location_osm_id': price.locationOSMId,
+      'location_osm_type': price.locationOSMType.offTag,
+      'date': GetParametersHelper.formatDate(price.date),
+    };
     final Response response = await HttpHelper().doPostJsonRequest(
       uri,
-      body.toString(),
+      jsonEncode(body),
       uriHelper: uriHelper,
       bearerToken: bearerToken,
     );
@@ -370,6 +358,39 @@ class OpenPricesAPIClient {
       try {
         final Map<String, dynamic> json = HttpHelper().jsonDecodeUtf8(response);
         return MaybeError<Price>.value(Price.fromJson(json));
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<Price>.responseError(response);
+  }
+
+  /// Updates a price.
+  ///
+  /// This endpoint requires authentication.
+  /// A user can update only owned prices.
+  static Future<MaybeError<Price>> updatePrice(
+    final int priceId, {
+    required final UpdatePriceParameters parameters,
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+    required final String bearerToken,
+  }) async {
+    final Uri uri = getUri(
+      path: '/api/v1/prices/$priceId',
+      uriHelper: uriHelper,
+    );
+    final Response response = await HttpHelper().doPatchRequest(
+      uri,
+      parameters.toJson(),
+      null,
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+      addUserAgentParameters: false,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<Price>.value(Price.fromJson(decodedResponse));
       } catch (e) {
         //
       }
@@ -433,6 +454,10 @@ class OpenPricesAPIClient {
     required final ProofType proofType,
     required final Uri imageUri,
     required final MediaType mediaType,
+    final int? locationOSMId,
+    final LocationOSMType? locationOSMType,
+    final DateTime? date,
+    final Currency? currency,
     required final String bearerToken,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
@@ -449,6 +474,11 @@ class OpenPricesAPIClient {
     request.fields.addAll(
       <String, String>{
         'type': proofType.offTag,
+        if (locationOSMId != null) 'location_osm_id': locationOSMId.toString(),
+        if (locationOSMType != null)
+          'location_osm_type': locationOSMType.offTag,
+        if (date != null) 'date': GetParametersHelper.formatDate(date),
+        if (currency != null) 'currency': currency.name,
       },
     );
     final List<int> fileBytes = await UriReader.instance!.readAsBytes(imageUri);
@@ -506,8 +536,44 @@ class OpenPricesAPIClient {
     return MaybeError<Proof>.responseError(response);
   }
 
+  /// Updates a proof.
+  ///
+  /// This endpoint requires authentication.
+  /// A user can update only owned proofs.
+  static Future<MaybeError<Proof>> updateProof(
+    final int proofId, {
+    required final UpdateProofParameters parameters,
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+    required final String bearerToken,
+  }) async {
+    final Uri uri = getUri(
+      path: '/api/v1/proofs/$proofId',
+      uriHelper: uriHelper,
+    );
+    final Response response = await HttpHelper().doPatchRequest(
+      uri,
+      parameters.toJson(),
+      null,
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+      addUserAgentParameters: false,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<Proof>.value(Proof.fromJson(decodedResponse));
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<Proof>.responseError(response);
+  }
+
   /// Deletes a proof.
-  /// A user can delete only owned proofs. Can delete only proofs that are not associated with prices. A moderator can delete not owned proofs.
+  ///
+  /// A user can delete only owned proofs.
+  /// Can delete only proofs that are not associated with prices.
+  /// A moderator can delete not owned proofs.
   /// Returns true if successful.
   static Future<MaybeError<bool>> deleteProof({
     required final int proofId,

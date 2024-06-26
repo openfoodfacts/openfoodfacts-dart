@@ -155,6 +155,8 @@ class HttpHelper {
     final Map<String, dynamic> body,
     final User? user, {
     required final UriHelper uriHelper,
+    final String? bearerToken,
+    final bool addUserAgentParameters = true,
   }) async =>
       http.patch(
         uri,
@@ -162,8 +164,13 @@ class HttpHelper {
           user: user,
           uriHelper: uriHelper,
           addCredentialsToHeader: false,
+          bearerToken: bearerToken,
         ),
-        body: jsonEncode(addUserAgentParameters(body)),
+        body: jsonEncode(
+          addUserAgentParameters
+              ? HttpHelper.addUserAgentParameters(body)
+              : body,
+        ),
       );
 
   /// Send a multipart post request to the specified uri.
