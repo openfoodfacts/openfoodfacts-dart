@@ -89,7 +89,6 @@ void main() {
       final Price initialPrice = Price()
         ..productCode = '3560071492755'
         ..price = 3.99
-        ..pricePer = PricePer.unit
         ..currency = Currency.EUR
         ..locationOSMId = 4966187139
         ..locationOSMType = LocationOSMType.node
@@ -98,7 +97,6 @@ void main() {
       final UpdatePriceParameters parameters = UpdatePriceParameters()
         ..currency = Currency.USD
         ..date = DateTime(2024, 1, 19)
-        ..pricePer = PricePer.kilogram
         ..price = 12
         ..priceWithoutDiscount = 13
         ..priceIsDiscounted = true;
@@ -139,8 +137,6 @@ void main() {
           initialPrice.priceWithoutDiscount);
       expect(addedPrice.value.priceIsDiscounted,
           initialPrice.priceIsDiscounted ?? false);
-      // TODO(monsieurtanuki): uncomment when fixed server-side
-      //expect(addedPrice.value.pricePer, initialPrice.pricePer);
       expect(addedPrice.value.currency, initialPrice.currency);
       expect(addedPrice.value.locationOSMId, initialPrice.locationOSMId);
       expect(addedPrice.value.locationOSMType, initialPrice.locationOSMType);
@@ -161,7 +157,6 @@ void main() {
       expect(addedPrice.value.priceWithoutDiscount,
           parameters.priceWithoutDiscount);
       expect(addedPrice.value.priceIsDiscounted, parameters.priceIsDiscounted);
-      expect(addedPrice.value.pricePer, parameters.pricePer);
       expect(addedPrice.value.currency, parameters.currency);
       expect(addedPrice.value.date, parameters.date);
 
