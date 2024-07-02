@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.12.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.11.0...v3.12.0) (2024-07-02)
+
+
+### Features
+
+* 942 - new methods updatePrice, updateProof; new proof parameters ([#946](https://github.com/openfoodfacts/openfoodfacts-dart/issues/946)) ([fbcf7f0](https://github.com/openfoodfacts/openfoodfacts-dart/commit/fbcf7f05dcc81a83d2d74e453b701b16cd18f0ee))
+
 ## [3.11.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.10.0...v3.11.0) (2024-06-07)
 
 
