@@ -37,7 +37,8 @@ Price _$PriceFromJson(Map<String, dynamic> json) => Price()
       ? null
       : PriceProduct.fromJson(json['product'] as Map<String, dynamic>)
   ..owner = json['owner'] as String
-  ..created = JsonHelper.stringTimestampToDate(json['created']);
+  ..created = JsonHelper.stringTimestampToDate(json['created'])
+  ..updated = JsonHelper.nullableStringTimestampToDate(json['updated']);
 
 Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
       'product_code': instance.productCode,
@@ -62,6 +63,7 @@ Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
       'product': instance.product,
       'owner': instance.owner,
       'created': instance.created.toIso8601String(),
+      'updated': instance.updated?.toIso8601String(),
     };
 
 const _$PricePerEnumMap = {
