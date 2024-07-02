@@ -22,8 +22,10 @@ class GetPricesParameters extends GetParametersHelper<GetPricesOrderField> {
   DateTime? dateGte;
   DateTime? dateLt;
   DateTime? dateLte;
+  int? proofId;
   String? owner;
   DateTime? createdGte;
+  DateTime? createdLte;
 
   @override
   Map<String, String> getQueryParameters() {
@@ -43,8 +45,10 @@ class GetPricesParameters extends GetParametersHelper<GetPricesOrderField> {
     addNonNullDate(dateGte, 'date__gte', dayOnly: true);
     addNonNullDate(dateLt, 'date__lt', dayOnly: true);
     addNonNullDate(dateLte, 'date__lte', dayOnly: true);
+    addNonNullInt(proofId, 'proof_id');
     addNonNullString(owner, 'owner');
     addNonNullDate(createdGte, 'created__gte', dayOnly: false);
+    addNonNullDate(createdLte, 'created__lte', dayOnly: false);
     return result;
   }
 }

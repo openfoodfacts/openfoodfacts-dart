@@ -138,6 +138,10 @@ class Price extends JsonObject {
   @JsonKey(fromJson: JsonHelper.stringTimestampToDate)
   late DateTime created;
 
+  /// Latest update timestamp. Read-only.
+  @JsonKey(fromJson: JsonHelper.nullableStringTimestampToDate)
+  DateTime? updated;
+
   Price();
 
   factory Price.fromJson(Map<String, dynamic> json) => _$PriceFromJson(json);
