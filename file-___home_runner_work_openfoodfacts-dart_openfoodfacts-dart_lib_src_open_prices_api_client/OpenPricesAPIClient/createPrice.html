@@ -87,44 +87,27 @@
     path: &#39;&#47;api&#47;v1&#47;prices&#39;,
     uriHelper: uriHelper,
   );
-  final StringBuffer body = StringBuffer();
-  body.write(&#39;{&#39;);
-  if (price.productCode != null) {
-    body.write(&#39;&quot;product_code&quot;: &quot;${price.productCode}&quot;,&#39;);
-  }
-  if (price.productName != null) {
-    body.write(&#39;&quot;product_name&quot;: &quot;${price.productName}&quot;,&#39;);
-  }
-  if (price.categoryTag != null) {
-    body.write(&#39;&quot;category_tag&quot;: &quot;${price.categoryTag}&quot;,&#39;);
-  }
-  if (price.labelsTags != null) {
-    body.write(&#39;&quot;labels_tags&quot;: &quot;${price.labelsTags}&quot;,&#39;);
-  }
-  if (price.originsTags != null) {
-    body.write(&#39;&quot;origins_tags&quot;: &quot;${price.originsTags}&quot;,&#39;);
-  }
-  if (price.proofId != null) {
-    body.write(&#39;&quot;proof_id&quot;: ${price.proofId},&#39;);
-  }
-  if (price.pricePer != null) {
-    body.write(&#39;&quot;price_per&quot;: &quot;${price.pricePer!.offTag}&quot;,&#39;);
-  }
-  if (price.priceWithoutDiscount != null) {
-    body.write(&#39;&quot;price_without_discount&quot;: ${price.priceWithoutDiscount},&#39;);
-  }
-  if (price.priceIsDiscounted != null) {
-    body.write(&#39;&quot;price_is_discounted&quot;: ${price.priceIsDiscounted},&#39;);
-  }
-  body.write(&#39;&quot;price&quot;: ${price.price},&#39;);
-  body.write(&#39;&quot;currency&quot;: &quot;${price.currency.name}&quot;,&#39;);
-  body.write(&#39;&quot;location_osm_id&quot;: ${price.locationOSMId},&#39;);
-  body.write(&#39;&quot;location_osm_type&quot;: &quot;${price.locationOSMType.offTag}&quot;,&#39;);
-  body.write(&#39;&quot;date&quot;: &quot;${GetParametersHelper.formatDate(price.date)}&quot;&#39;);
-  body.write(&#39;}&#39;);
+  final Map&lt;String, dynamic&gt; body = &lt;String, dynamic&gt;{
+    if (price.productCode != null) &#39;product_code&#39;: price.productCode,
+    if (price.productName != null) &#39;product_name&#39;: price.productName,
+    if (price.categoryTag != null) &#39;category_tag&#39;: price.categoryTag,
+    if (price.labelsTags != null) &#39;labels_tags&#39;: price.labelsTags,
+    if (price.originsTags != null) &#39;origins_tags&#39;: price.originsTags,
+    if (price.proofId != null) &#39;proof_id&#39;: price.proofId,
+    if (price.pricePer != null) &#39;price_per&#39;: price.pricePer!.offTag,
+    if (price.priceWithoutDiscount != null)
+      &#39;price_without_discount&#39;: price.priceWithoutDiscount,
+    if (price.priceIsDiscounted != null)
+      &#39;price_is_discounted&#39;: price.priceIsDiscounted,
+    &#39;price&#39;: price.price,
+    &#39;currency&#39;: price.currency.name,
+    &#39;location_osm_id&#39;: price.locationOSMId,
+    &#39;location_osm_type&#39;: price.locationOSMType.offTag,
+    &#39;date&#39;: GetParametersHelper.formatDate(price.date),
+  };
   final Response response = await HttpHelper().doPostJsonRequest(
     uri,
-    body.toString(),
+    jsonEncode(body),
     uriHelper: uriHelper,
     bearerToken: bearerToken,
   );

@@ -101,8 +101,10 @@ Map&lt;String, String&gt; getQueryParameters() {
   addNonNullDate(dateGte, &#39;date__gte&#39;, dayOnly: true);
   addNonNullDate(dateLt, &#39;date__lt&#39;, dayOnly: true);
   addNonNullDate(dateLte, &#39;date__lte&#39;, dayOnly: true);
+  addNonNullInt(proofId, &#39;proof_id&#39;);
   addNonNullString(owner, &#39;owner&#39;);
   addNonNullDate(createdGte, &#39;created__gte&#39;, dayOnly: false);
+  addNonNullDate(createdLte, &#39;created__lte&#39;, dayOnly: false);
   return result;
 }</code></pre>
 </section>

@@ -88,6 +88,15 @@ Map&lt;String, String&gt; getQueryParameters() {
   super.getQueryParameters();
   addNonNullString(owner, &#39;owner&#39;);
   addNonNullString(type?.offTag, &#39;type&#39;);
+  addNonNullInt(locationOSMId, &#39;location_osm_id&#39;);
+  addNonNullString(locationOSMType?.offTag, &#39;location_osm_type&#39;);
+  addNonNullInt(locationId, &#39;location_id&#39;);
+  addNonNullString(currency?.name, &#39;currency&#39;);
+  addNonNullDate(date, &#39;date&#39;, dayOnly: true);
+  addNonNullDate(dateGt, &#39;date__gt&#39;, dayOnly: true);
+  addNonNullDate(dateGte, &#39;date__gte&#39;, dayOnly: true);
+  addNonNullDate(dateLt, &#39;date__lt&#39;, dayOnly: true);
+  addNonNullDate(dateLte, &#39;date__lte&#39;, dayOnly: true);
   return result;
 }</code></pre>
 </section>
