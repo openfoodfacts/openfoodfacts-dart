@@ -7,6 +7,13 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
 
+  Future<ProductResultV3> getProductV3InProd(
+    ProductQueryConfiguration configuration,
+  ) async {
+    await getProductTooManyRequestsManager.waitIfNeeded();
+    return OpenFoodAPIClient.getProductV3(configuration);
+  }
+
   group('$OpenFoodAPIClient get localized product fields', () {
     test('get packaging text in languages (Coca-Cola)', () async {
       const String barcode = '5449000000996';
@@ -22,7 +29,7 @@ void main() {
         fields: [ProductField.PACKAGING_TEXT_IN_LANGUAGES],
         version: ProductQueryVersion.v3,
       );
-      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+      final ProductResultV3 result = await getProductV3InProd(
         configurations,
       );
       expect(result.status, ProductResultV3.statusSuccess);
@@ -42,8 +49,7 @@ void main() {
         OpenFoodFactsLanguage.FRENCH,
       ];
 
-      final ProductResultV3 productResult =
-          await OpenFoodAPIClient.getProductV3(
+      final ProductResultV3 productResult = await getProductV3InProd(
         ProductQueryConfiguration(
           BARCODE_DANISH_BUTTER_COOKIES,
           languages: languages,
@@ -107,7 +113,7 @@ void main() {
         ],
         version: ProductQueryVersion.v3,
       );
-      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+      final ProductResultV3 result = await getProductV3InProd(
         configurations,
       );
       expect(result.status, ProductResultV3.statusSuccess);
@@ -265,7 +271,7 @@ void main() {
         ],
         version: ProductQueryVersion.v3,
       );
-      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+      final ProductResultV3 result = await getProductV3InProd(
         configurations,
       );
       expect(result.status, ProductResultV3.statusSuccess);
@@ -325,7 +331,7 @@ void main() {
         ],
         version: ProductQueryVersion.v3,
       );
-      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+      final ProductResultV3 result = await getProductV3InProd(
         configurations,
       );
       expect(result.status, ProductResultV3.statusSuccess);
@@ -396,7 +402,7 @@ void main() {
         ],
         version: ProductQueryVersion.v3,
       );
-      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+      final ProductResultV3 result = await getProductV3InProd(
         configurations,
       );
       expect(result.status, ProductResultV3.statusSuccess);
@@ -447,7 +453,7 @@ void main() {
         ],
         version: ProductQueryVersion.v3,
       );
-      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+      final ProductResultV3 result = await getProductV3InProd(
         configurations,
       );
       expect(result.status, ProductResultV3.statusSuccess);
