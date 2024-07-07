@@ -82,7 +82,8 @@
   <p>Creates a new user</p>
 <p>Possible <code>status.status</code> responses:</p>
 <p>Returns <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_status/Status/status.html">Status.status</a> 201 = complete; 400 = wrong inputs + <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_status/Status/error.html">Status.error</a>; 500 = server error;</p>
-<p><code>name</code> may not exceed  <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/USER_NAME_MAX_LENGTH-constant.html">OpenFoodAPIClient.USER_NAME_MAX_LENGTH</a></p>
+<p>User id may not exceed  <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/USER_ID_MAX_LENGTH-constant.html">OpenFoodAPIClient.USER_ID_MAX_LENGTH</a>
+<code>name</code> may not exceed  <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient/USER_NAME_MAX_LENGTH-constant.html">OpenFoodAPIClient.USER_NAME_MAX_LENGTH</a></p>
 <p>When creating a <a href="https://world.pro.openfoodfacts.org/">producer account</a> use <code>orgName</code> (former requested_org) to name the Producer or brand</p>
 <pre class="language-dart"><code class="language-dart">  User offUser = User(userId: 'username or email', password: 'password');
 
@@ -118,9 +119,15 @@ and/or a <code>country</code> for a localized content.</p>
   final OpenFoodFactsCountry? country,
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
-  if (user.userId.length &gt; USER_NAME_MAX_LENGTH) {
+  if (user.userId.length &gt; USER_ID_MAX_LENGTH) {
     throw ArgumentError(
-      &#39;A username may not exceed $USER_NAME_MAX_LENGTH characters!&#39;,
+      &#39;A user id may not exceed $USER_ID_MAX_LENGTH characters!&#39;,
+    );
+  }
+
+  if (name.length &gt; USER_NAME_MAX_LENGTH) {
+    throw ArgumentError(
+      &#39;A user name may not exceed $USER_NAME_MAX_LENGTH characters!&#39;,
     );
   }
 
