@@ -87,6 +87,7 @@
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
   final Response response = await configuration.getResponse(user, uriHelper);
+  TooManyRequestsException.check(response);
   return response.body;
 }</code></pre>
 </section>

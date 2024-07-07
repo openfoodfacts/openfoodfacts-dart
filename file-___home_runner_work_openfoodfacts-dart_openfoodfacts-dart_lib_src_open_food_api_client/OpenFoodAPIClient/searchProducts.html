@@ -157,6 +157,7 @@ Search for products related to a user
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
   final Response response = await configuration.getResponse(user, uriHelper);
+  TooManyRequestsException.check(response);
   final String jsonStr = _replaceQuotes(response.body);
   final SearchResult result = SearchResult.fromJson(
     HttpHelper().jsonDecode(jsonStr),
