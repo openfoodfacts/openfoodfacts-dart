@@ -49,7 +49,7 @@ void main() {
 
   /// Returns the width and height (pixels) and size (bytes) of a JPEG URL file
   Future<List<int>> getJpegUrlSize(final String url) async => getJpegSize(
-        await UriReader.instance!.readAsBytes(Uri.parse(url)),
+        await UriReader.instance.readAsBytes(Uri.parse(url)),
       );
 
   /// Returns the imgid, i.e. the unique id for (uploaded image x product)

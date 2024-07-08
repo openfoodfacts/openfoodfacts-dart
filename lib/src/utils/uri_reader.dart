@@ -7,10 +7,14 @@ import 'uri_reader_stub.dart'
 
 /// Abstract reader of URI data, declined in "not web" and "web" versions
 abstract class UriReader {
-  static UriReader? _instance;
+  static late final UriReader _instance;
+  static bool _initialized = false;
 
-  static UriReader? get instance {
-    _instance ??= getUriReaderInstance();
+  static UriReader get instance {
+    if (!_initialized) {
+      _initialized = true;
+      _instance = getUriReaderInstance();
+    }
     return _instance;
   }
 
@@ -32,4 +36,6 @@ abstract class UriReader {
   }
 
   Future<List<int>> readFileAsBytes(final Uri uri);
+
+  bool get isWeb => false;
 }

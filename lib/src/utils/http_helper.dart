@@ -204,8 +204,7 @@ class HttpHelper {
     // add all file entries to the request
     if (files != null) {
       for (MapEntry<String, Uri> entry in files.entries) {
-        List<int> fileBytes =
-            await UriReader.instance!.readAsBytes(entry.value);
+        List<int> fileBytes = await UriReader.instance.readAsBytes(entry.value);
         var multipartFile = http.MultipartFile.fromBytes(entry.key, fileBytes,
             filename: basename(entry.value.toString()));
         request.files.add(multipartFile);
@@ -273,7 +272,8 @@ class HttpHelper {
 
     headers.addAll({
       'Accept': 'application/json',
-      'User-Agent': OpenFoodAPIConfiguration.userAgent!.toValueString(),
+      if (!UriReader.instance.isWeb)
+        'User-Agent': OpenFoodAPIConfiguration.userAgent!.toValueString(),
       'From': _getSafeString(
         OpenFoodAPIConfiguration.getUser(user)?.userId ?? FROM,
       ),
