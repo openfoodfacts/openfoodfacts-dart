@@ -1,5 +1,74 @@
 # Changelog
 
+## [3.12.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.11.0...v3.12.0) (2024-07-02)
+
+
+### Features
+
+* 942 - new methods updatePrice, updateProof; new proof parameters ([#946](https://github.com/openfoodfacts/openfoodfacts-dart/issues/946)) ([fbcf7f0](https://github.com/openfoodfacts/openfoodfacts-dart/commit/fbcf7f05dcc81a83d2d74e453b701b16cd18f0ee))
+
+## [3.11.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.10.0...v3.11.0) (2024-06-07)
+
+
+### Features
+
+* 890 - new method getLocalizedCountryNames ([#904](https://github.com/openfoodfacts/openfoodfacts-dart/issues/904)) ([0fa5941](https://github.com/openfoodfacts/openfoodfacts-dart/commit/0fa59410a1df3e31b0cb2bbe8404b585938f65fa))
+
+
+### Bug Fixes
+
+* 900 - for KnowledgePanelActionElement html is now optional ([#901](https://github.com/openfoodfacts/openfoodfacts-dart/issues/901)) ([e4ec263](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e4ec263a1c1dc309bfb47076870131afd5090aa1))
+* 927 - minimum forced query version is now 2 ([#936](https://github.com/openfoodfacts/openfoodfacts-dart/issues/936)) ([260e482](https://github.com/openfoodfacts/openfoodfacts-dart/commit/260e48275aba37e52f11bbca72353ab58d1c066c))
+* added "app_name" parameter for prices methods uploadProof and createPrice ([#938](https://github.com/openfoodfacts/openfoodfacts-dart/issues/938)) ([e4bd1ed](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e4bd1ed091767c609e12066f08cfee05eea9cffe))
+
+## [3.10.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.9.0...v3.10.0) (2024-05-22)
+
+
+### Features
+
+* 933 - added osm location fields (countryCode, osmKey, osmValue) ([#934](https://github.com/openfoodfacts/openfoodfacts-dart/issues/934)) ([f653f6a](https://github.com/openfoodfacts/openfoodfacts-dart/commit/f653f6ab049e6ec30c0726cfae576ede57e5ce46))
+
+## [3.9.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.8.0...v3.9.0) (2024-05-17)
+
+
+### Features
+
+* 831 - prices methods getProofs, getProof and getUsers + fixed uploadProof ([#926](https://github.com/openfoodfacts/openfoodfacts-dart/issues/926)) ([baa1258](https://github.com/openfoodfacts/openfoodfacts-dart/commit/baa1258c71e38dfa194b568c5a20c70ee0dc6c6a))
+* add localized additives and allergens ([#929](https://github.com/openfoodfacts/openfoodfacts-dart/issues/929)) ([9d17073](https://github.com/openfoodfacts/openfoodfacts-dart/commit/9d1707309ab035e3360740e5ef0772915c95120e))
+
+## [3.8.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.7.0...v3.8.0) (2024-05-10)
+
+
+### Features
+
+* 922 - default currency for each country ([#923](https://github.com/openfoodfacts/openfoodfacts-dart/issues/923)) ([37fd612](https://github.com/openfoodfacts/openfoodfacts-dart/commit/37fd6122cbc16a7b8922f269da920169c1ada976))
+
+## [3.7.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.6.1...v3.7.0) (2024-05-03)
+
+
+### Features
+
+* 919 - new field KnowledgePanelImageElement.link_url ([#920](https://github.com/openfoodfacts/openfoodfacts-dart/issues/920)) ([a161516](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a161516cc209ea55d911e702a6573bb880879661))
+
+## [3.6.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.6.0...v3.6.1) (2024-04-23)
+
+
+### Bug Fixes
+
+* trigger release please ([#917](https://github.com/openfoodfacts/openfoodfacts-dart/issues/917)) ([7a7f1dd](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7a7f1ddfb8e073a675f555f69985a8e4cde4a33b))
+
+## [3.6.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.5.0...v3.6.0) (2024-04-19)
+
+
+### Features
+
+* Allow to receive a cookie and send it later ([#911](https://github.com/openfoodfacts/openfoodfacts-dart/issues/911)) ([ff9c7a8](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ff9c7a88fd04c402f32edebadc9f95ffafb03b7f))
+
+
+### Bug Fixes
+
+* auth label ([#912](https://github.com/openfoodfacts/openfoodfacts-dart/issues/912)) ([ceed92f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ceed92f20af5eb4e5e0b0dd409db79ad79d6e0e8))
+
 ## [3.5.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.4.0...v3.5.0) (2024-04-07)
 
 

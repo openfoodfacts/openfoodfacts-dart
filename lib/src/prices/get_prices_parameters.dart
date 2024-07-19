@@ -1,13 +1,12 @@
 import 'currency.dart';
 import 'get_parameters_helper.dart';
 import 'get_prices_order.dart';
-import 'order_by.dart';
 import 'location_osm_type.dart';
 
 /// Parameters for the "get prices" API query.
 ///
 /// cf. https://prices.openfoodfacts.org/api/docs
-class GetPricesParameters extends GetParametersHelper {
+class GetPricesParameters extends GetParametersHelper<GetPricesOrderField> {
   String? productCode;
   int? productId;
   bool? productIdIsNull;
@@ -23,9 +22,10 @@ class GetPricesParameters extends GetParametersHelper {
   DateTime? dateGte;
   DateTime? dateLt;
   DateTime? dateLte;
+  int? proofId;
   String? owner;
   DateTime? createdGte;
-  List<OrderBy<GetPricesOrderField>>? orderBy;
+  DateTime? createdLte;
 
   @override
   Map<String, String> getQueryParameters() {
@@ -45,17 +45,10 @@ class GetPricesParameters extends GetParametersHelper {
     addNonNullDate(dateGte, 'date__gte', dayOnly: true);
     addNonNullDate(dateLt, 'date__lt', dayOnly: true);
     addNonNullDate(dateLte, 'date__lte', dayOnly: true);
+    addNonNullInt(proofId, 'proof_id');
     addNonNullString(owner, 'owner');
     addNonNullDate(createdGte, 'created__gte', dayOnly: false);
-    if (orderBy != null) {
-      final List<String> orders = <String>[];
-      for (final OrderBy order in orderBy!) {
-        orders.add(order.offTag);
-      }
-      if (orders.isNotEmpty) {
-        addNonNullString(orders.join(','), 'order_by');
-      }
-    }
+    addNonNullDate(createdLte, 'created__lte', dayOnly: false);
     return result;
   }
 }

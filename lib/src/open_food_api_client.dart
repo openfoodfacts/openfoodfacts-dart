@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'model/per_size.dart';
 
 import 'interface/json_object.dart';
 import 'model/login_status.dart';
@@ -11,6 +10,7 @@ import 'model/ocr_packaging_result.dart';
 import 'model/old_product_result.dart';
 import 'model/ordered_nutrients.dart';
 import 'model/parameter/barcode_parameter.dart';
+import 'model/per_size.dart';
 import 'model/product.dart';
 import 'model/product_freshness.dart';
 import 'model/product_image.dart';
@@ -47,6 +47,7 @@ import 'utils/product_query_configurations.dart';
 import 'utils/product_search_query_configuration.dart';
 import 'utils/tag_type.dart';
 import 'utils/taxonomy_query_configuration.dart';
+import 'utils/too_many_requests_exception.dart';
 import 'utils/uri_helper.dart';
 
 /// Client calls of the Open Food Facts API
@@ -356,6 +357,7 @@ class OpenFoodAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Response response = await configuration.getResponse(user, uriHelper);
+    TooManyRequestsException.check(response);
     return response.body;
   }
 
@@ -519,6 +521,7 @@ class OpenFoodAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Response response = await configuration.getResponse(user, uriHelper);
+    TooManyRequestsException.check(response);
     final String jsonStr = _replaceQuotes(response.body);
     final SearchResult result = SearchResult.fromJson(
       HttpHelper().jsonDecode(jsonStr),
@@ -932,14 +935,20 @@ class OpenFoodAPIClient {
       addCredentialsToBody: true,
     );
     if (response.statusCode == 200 || response.statusCode == 403) {
-      return LoginStatus.fromJson(HttpHelper().jsonDecode(response.body));
+      return LoginStatus.fromJson(
+        HttpHelper().jsonDecode(response.body),
+        response.headers,
+      );
     }
 
     return null;
   }
 
-  /// A username may not exceed 20 characters
-  static const USER_NAME_MAX_LENGTH = 20;
+  /// A username may not exceed 60 characters
+  static const USER_NAME_MAX_LENGTH = 60;
+
+  /// A user id may not exceed 40 characters
+  static const USER_ID_MAX_LENGTH = 40;
 
   /// Creates a new user
   ///
@@ -947,6 +956,7 @@ class OpenFoodAPIClient {
   ///
   /// Returns [Status.status] 201 = complete; 400 = wrong inputs + [Status.error]; 500 = server error;
   ///
+  /// User id may not exceed  [OpenFoodAPIClient.USER_ID_MAX_LENGTH]
   /// [name] may not exceed  [OpenFoodAPIClient.USER_NAME_MAX_LENGTH]
   ///
   /// When creating a [producer account](https://world.pro.openfoodfacts.org/) use [orgName] (former requested_org) to name the Producer or brand
@@ -980,9 +990,15 @@ class OpenFoodAPIClient {
     final OpenFoodFactsCountry? country,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
-    if (user.userId.length > USER_NAME_MAX_LENGTH) {
+    if (user.userId.length > USER_ID_MAX_LENGTH) {
       throw ArgumentError(
-        'A username may not exceed $USER_NAME_MAX_LENGTH characters!',
+        'A user id may not exceed $USER_ID_MAX_LENGTH characters!',
+      );
+    }
+
+    if (name.length > USER_NAME_MAX_LENGTH) {
+      throw ArgumentError(
+        'A user name may not exceed $USER_NAME_MAX_LENGTH characters!',
       );
     }
 
@@ -1321,5 +1337,32 @@ class OpenFoodAPIClient {
       throw Exception(
           'Different imagefield: expected "$id", actual "$imageField"');
     }
+  }
+
+  /// Returns the name of each country localized in [language].
+  static Future<Map<OpenFoodFactsCountry, String>> getLocalizedCountryNames(
+    final OpenFoodFactsLanguage language, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Response response = await HttpHelper().doGetRequest(
+      uriHelper.getUri(
+        path: '/cgi/countries.pl',
+        queryParameters: {'lc': language.offTag},
+      ),
+      uriHelper: uriHelper,
+    );
+    final Map<OpenFoodFactsCountry, String> result =
+        <OpenFoodFactsCountry, String>{};
+    final Map<String, dynamic> map = HttpHelper().jsonDecode(response.body);
+    for (final String countryCode in map.keys) {
+      final OpenFoodFactsCountry? country =
+          OpenFoodFactsCountry.fromOffTag(countryCode);
+      if (country == null) {
+        // very unlikely
+        continue;
+      }
+      result[country] = map[countryCode];
+    }
+    return result;
   }
 }

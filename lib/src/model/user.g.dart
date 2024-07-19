@@ -10,6 +10,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       comment: json['comment'] as String?,
       userId: json['user_id'] as String,
       password: json['password'] as String,
+      cookie: json['cookie'] as String?,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) {
@@ -24,5 +25,6 @@ Map<String, dynamic> _$UserToJson(User instance) {
   writeNotNull('comment', instance.comment);
   val['user_id'] = instance.userId;
   val['password'] = instance.password;
+  val['cookie'] = instance.cookie;
   return val;
 }

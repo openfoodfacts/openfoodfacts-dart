@@ -1,8 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'currency.dart';
+import 'location.dart';
 import 'location_osm_type.dart';
 import 'price_per.dart';
+import 'price_product.dart';
+import 'proof.dart';
 import '../interface/json_object.dart';
 import '../utils/json_helper.dart';
 
@@ -103,21 +106,41 @@ class Price extends JsonObject {
   @JsonKey(name: 'proof_id')
   int? proofId;
 
+  /// Price ID. Read-only.
   @JsonKey()
   late int id;
 
+  /// Product ID. Read-only.
   @JsonKey(name: 'product_id')
   int? productId;
 
+  /// Location ID. Read-only.
   @JsonKey(name: 'location_id')
   int? locationId;
 
-  /// Owner.
+  /// Proof. Read-only.
+  @JsonKey()
+  Proof? proof;
+
+  /// Location. Read-only.
+  @JsonKey()
+  Location? location;
+
+  /// Product. Read-only.
+  @JsonKey()
+  PriceProduct? product;
+
+  /// Owner. Read-only.
   @JsonKey()
   late String owner;
 
+  /// Creation timestamp. Read-only.
   @JsonKey(fromJson: JsonHelper.stringTimestampToDate)
   late DateTime created;
+
+  /// Latest update timestamp. Read-only.
+  @JsonKey(fromJson: JsonHelper.nullableStringTimestampToDate)
+  DateTime? updated;
 
   Price();
 

@@ -113,12 +113,17 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
         (k, e) => MapEntry(
             $enumDecode(_$OpenFoodFactsLanguageEnumMap, k),
             (e as Map<String, dynamic>).map(
-              (k, e) => MapEntry($enumDecode(_$ImageFieldEnumMap, k), e as int),
+              (k, e) => MapEntry(
+                  $enumDecode(_$ImageFieldEnumMap, k), (e as num).toInt()),
             )),
       )
       ..ingredientsAnalysisTagsInLanguages =
           LanguageHelper.fromJsonStringsListMap(
               json['ingredients_analysis_tags_in_languages'])
+      ..additivesTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
+          json['additives_tags_in_languages'])
+      ..allergensTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
+          json['allergens_tags_in_languages'])
       ..nutritionData = JsonHelper.checkboxFromJSON(json['nutrition_data'])
       ..comparedToCategory = json['compared_to_category'] as String?
       ..packagings = (json['packagings'] as List<dynamic>?)
@@ -163,7 +168,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       ..embCodes = json['emb_codes'] as String?
       ..manufacturingPlaces = json['manufacturing_places'] as String?
       ..origins = json['origins'] as String?
-      ..novaGroup = json['nova_group'] as int?
+      ..novaGroup = (json['nova_group'] as num?)?.toInt()
       ..website = json['link'] as String?
       ..obsolete = JsonHelper.checkboxFromJSON(json['obsolete'])
       ..expirationDate = json['expiration_date'] as String?;
@@ -231,7 +236,11 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
       LanguageHelper.toJsonStringsListMap(
           instance.ingredientsAnalysisTagsInLanguages));
   writeNotNull('additives_tags', Additives.additivesToJson(instance.additives));
+  writeNotNull('additives_tags_in_languages',
+      LanguageHelper.toJsonStringsListMap(instance.additivesTagsInLanguages));
   writeNotNull('allergens_tags', Allergens.allergensToJson(instance.allergens));
+  writeNotNull('allergens_tags_in_languages',
+      LanguageHelper.toJsonStringsListMap(instance.allergensTagsInLanguages));
   writeNotNull(
       'nutrient_levels', NutrientLevels.toJson(instance.nutrientLevels));
   writeNotNull('nutriment_energy_unit', instance.nutrimentEnergyUnit);

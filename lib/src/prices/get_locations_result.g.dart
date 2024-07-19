@@ -11,10 +11,10 @@ GetLocationsResult _$GetLocationsResultFromJson(Map<String, dynamic> json) =>
       ..items = (json['items'] as List<dynamic>?)
           ?.map((e) => Location.fromJson(e as Map<String, dynamic>))
           .toList()
-      ..total = json['total'] as int?
-      ..pageNumber = json['page'] as int?
-      ..pageSize = json['size'] as int?
-      ..numberOfPages = json['pages'] as int?;
+      ..total = (json['total'] as num?)?.toInt()
+      ..pageNumber = (json['page'] as num?)?.toInt()
+      ..pageSize = (json['size'] as num?)?.toInt()
+      ..numberOfPages = (json['pages'] as num?)?.toInt();
 
 Map<String, dynamic> _$GetLocationsResultToJson(GetLocationsResult instance) =>
     <String, dynamic>{

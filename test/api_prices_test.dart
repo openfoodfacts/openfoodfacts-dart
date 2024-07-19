@@ -1,3 +1,5 @@
+import 'package:http/http.dart' as http;
+
 import 'package:http_parser/http_parser.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
@@ -5,11 +7,12 @@ import 'test_constants.dart';
 
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  const UriProductHelper uriHelper = uriHelperFoodTest;
-  const User user = TestConstants.TEST_USER;
   const String invalidBearerToken = 'invalid bearer token';
+  const int HTTP_OK = 200;
 
   group('$OpenPricesAPIClient default', () {
+    const UriProductHelper uriHelper = uriHelperFoodProd;
+
     test('getStatus', () async {
       final MaybeError<String> status = await OpenPricesAPIClient.getStatus(
         uriHelper: uriHelper,
@@ -20,6 +23,9 @@ void main() {
   });
 
   group('$OpenPricesAPIClient Auth', () {
+    const UriProductHelper uriHelper = uriHelperFoodTest;
+    const User user = TestConstants.TEST_USER;
+
     test('unknown user', () async {
       final MaybeError<String> status =
           await OpenPricesAPIClient.getAuthenticationToken(
@@ -76,6 +82,9 @@ void main() {
   });
 
   group('$OpenPricesAPIClient Prices', () {
+    const UriProductHelper uriHelper = uriHelperFoodTest;
+    const User user = TestConstants.TEST_USER;
+
     test('create', () async {
       final Price initialPrice = Price()
         ..productCode = '3560071492755'
@@ -84,7 +93,13 @@ void main() {
         ..locationOSMId = 4966187139
         ..locationOSMType = LocationOSMType.node
         ..date = DateTime(2024, 1, 18);
-      //,"proof_id":1663,"product_id":null,"location_id":null
+
+      final UpdatePriceParameters parameters = UpdatePriceParameters()
+        ..currency = Currency.USD
+        ..date = DateTime(2024, 1, 19)
+        ..price = 12
+        ..priceWithoutDiscount = 13
+        ..priceIsDiscounted = true;
 
       String bearerToken = invalidBearerToken;
 
@@ -118,6 +133,10 @@ void main() {
       expect(addedPrice.isError, isFalse);
       expect(addedPrice.value.productCode, initialPrice.productCode);
       expect(addedPrice.value.price, initialPrice.price);
+      expect(addedPrice.value.priceWithoutDiscount,
+          initialPrice.priceWithoutDiscount);
+      expect(addedPrice.value.priceIsDiscounted,
+          initialPrice.priceIsDiscounted ?? false);
       expect(addedPrice.value.currency, initialPrice.currency);
       expect(addedPrice.value.locationOSMId, initialPrice.locationOSMId);
       expect(addedPrice.value.locationOSMType, initialPrice.locationOSMType);
@@ -125,6 +144,21 @@ void main() {
       expect(addedPrice.value.owner, user.userId);
 
       final int priceId = addedPrice.value.id;
+
+      // successful price update
+      addedPrice = await OpenPricesAPIClient.updatePrice(
+        priceId,
+        parameters: parameters,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(addedPrice.isError, isFalse);
+      expect(addedPrice.value.price, parameters.price);
+      expect(addedPrice.value.priceWithoutDiscount,
+          parameters.priceWithoutDiscount);
+      expect(addedPrice.value.priceIsDiscounted, parameters.priceIsDiscounted);
+      expect(addedPrice.value.currency, parameters.currency);
+      expect(addedPrice.value.date, parameters.date);
 
       // delete price first time: success
       MaybeError<bool> deleted = await OpenPricesAPIClient.deletePrice(
@@ -156,6 +190,7 @@ void main() {
     });
 
     test('get prices', () async {
+      const UriProductHelper uriHelper = uriHelperFoodProd;
       const int pageNumber = 1;
       const int pageSize = 20;
 
@@ -281,6 +316,8 @@ void main() {
   });
 
   group('$OpenPricesAPIClient Locations', () {
+    const UriProductHelper uriHelper = uriHelperFoodProd;
+
     test('get existing location', () async {
       const int locationId = 1;
       final MaybeError<Location> maybeLocation =
@@ -433,6 +470,8 @@ void main() {
   });
 
   group('$OpenPricesAPIClient Products', () {
+    const UriProductHelper uriHelper = uriHelperFoodProd;
+
     test('get existing product by ID', () async {
       const int productId = 1;
       final MaybeError<PriceProduct> maybePriceProduct =
@@ -490,6 +529,9 @@ void main() {
   });
 
   group('$OpenPricesAPIClient Proofs', () {
+    const UriProductHelper uriHelper = uriHelperFoodTest;
+    const User user = TestConstants.TEST_USER;
+
     test('image file media type', () async {
       final Map<String, MediaType> expectedMediaTypes = <String, MediaType>{
         'toto.jpeg': MediaType('image', 'jpeg'),
@@ -505,9 +547,128 @@ void main() {
       }
     });
 
+    test('get proofs', () async {
+      const int pageNumber = 1;
+      const int pageSize = 20;
+      const GetProofsOrderField orderField = GetProofsOrderField.created;
+      const ProofType proofType = ProofType.receipt;
+
+      late GetProofsResult result;
+
+      final MaybeError<String> token =
+          await OpenPricesAPIClient.getAuthenticationToken(
+        username: user.userId,
+        password: user.password,
+        uriHelper: uriHelper,
+      );
+      expect(token.isError, isFalse);
+      expect(token.value, isNotEmpty);
+      final String bearerToken = token.value;
+
+      // oldest first
+      GetProofsParameters parameters = GetProofsParameters()
+        ..orderBy = <OrderBy<GetProofsOrderField>>[
+          OrderBy(field: orderField, ascending: true),
+        ]
+        ..type = proofType
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber;
+      MaybeError<GetProofsResult> maybeResults;
+      try {
+        maybeResults = await OpenPricesAPIClient.getProofs(
+          parameters,
+          uriHelper: uriHelper,
+          bearerToken: bearerToken,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.numberOfPages, (result.total! / result.pageSize!).ceil());
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(pageSize));
+      for (final Proof proof in result.items!) {
+        expect(proof.type, proofType);
+      }
+      final DateTime oldestDate = result.items!.first.created;
+
+      // newest first
+      parameters = GetProofsParameters()
+        ..orderBy = <OrderBy<GetProofsOrderField>>[
+          OrderBy(field: orderField, ascending: false),
+        ]
+        ..type = proofType
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber;
+      try {
+        maybeResults = await OpenPricesAPIClient.getProofs(
+          parameters,
+          uriHelper: uriHelper,
+          bearerToken: bearerToken,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.numberOfPages, (result.total! / result.pageSize!).ceil());
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(pageSize));
+      for (final Proof proof in result.items!) {
+        expect(proof.type, proofType);
+      }
+      final DateTime newestDate = result.items!.first.created;
+
+      expect(
+        newestDate.millisecondsSinceEpoch,
+        greaterThan(oldestDate.millisecondsSinceEpoch),
+      );
+
+      // Trying to get the same single result, from an item.
+      final Proof proof = result.items!.first;
+      final MaybeError<Proof> maybeProof = await OpenPricesAPIClient.getProof(
+        proof.id,
+        uriHelper: uriHelper,
+        bearerToken: bearerToken,
+      );
+      expect(maybeProof.isError, isFalse);
+      expect(maybeProof.value.id, proof.id);
+      expect(maybeProof.value.type, proof.type);
+      expect(maybeProof.value.owner, proof.owner);
+      expect(maybeProof.value.priceCount, proof.priceCount);
+      expect(maybeProof.value.mimetype, proof.mimetype);
+      expect(maybeProof.value.created, proof.created);
+      expect(maybeProof.value.filePath, proof.filePath);
+      if (proof.filePath != null) {
+        final Uri uri = proof.getFileUrl(uriProductHelper: uriHelper)!;
+        final http.Response response = await http.get(uri);
+        expect(response.statusCode, HTTP_OK);
+      }
+    });
+
     test('upload', () async {
-      final ProofType initialProofType = ProofType.receipt;
-      final bool initialIsPublic = true;
+      final ProofType uploadProofType = ProofType.receipt;
+      const Currency uploadCurrency = Currency.EUR;
+      final DateTime uploadDate = DateTime(2024, 1, 1);
+
+      final UpdateProofParameters parameters = UpdateProofParameters()
+        ..type = ProofType.priceTag
+        ..currency = Currency.USD
+        ..date = DateTime(2024, 1, 2);
+
       // TODO(monsieurtanuki): more relevant image if possible
       final Uri initialImageUri =
           Uri.file('test/test_assets/ingredients_en.jpg');
@@ -518,8 +679,7 @@ void main() {
 
       // failing proof upload with invalid token
       MaybeError<Proof> uploadProof = await OpenPricesAPIClient.uploadProof(
-        proofType: initialProofType,
-        isPublic: initialIsPublic,
+        proofType: uploadProofType,
         imageUri: initialImageUri,
         mediaType: initialMediaType,
         bearerToken: bearerToken,
@@ -542,22 +702,36 @@ void main() {
 
       // successful proof upload with valid token
       uploadProof = await OpenPricesAPIClient.uploadProof(
-        proofType: initialProofType,
-        isPublic: initialIsPublic,
+        proofType: uploadProofType,
         imageUri: initialImageUri,
         mediaType: initialMediaType,
+        currency: uploadCurrency,
+        date: uploadDate,
         bearerToken: bearerToken,
         uriHelper: uriHelper,
       );
       expect(uploadProof.isError, isFalse);
-      expect(uploadProof.value.type, initialProofType);
+      expect(uploadProof.value.type, uploadProofType);
       expect(uploadProof.value.owner, user.userId);
       expect(uploadProof.value.id, isNotNull);
       expect(uploadProof.value.priceCount, 0);
-      expect(uploadProof.value.isPublic, initialIsPublic);
       expect(uploadProof.value.mimetype, initialMediaType.toString());
+      expect(uploadProof.value.currency, uploadCurrency);
+      expect(uploadProof.value.date, uploadDate);
 
       final int proofId = uploadProof.value.id;
+
+      // successful proof update
+      uploadProof = await OpenPricesAPIClient.updateProof(
+        proofId,
+        parameters: parameters,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(uploadProof.isError, isFalse);
+      expect(uploadProof.value.type, parameters.type);
+      expect(uploadProof.value.currency, parameters.currency);
+      expect(uploadProof.value.date, parameters.date);
 
       // delete proof first time: success
       MaybeError<bool> deleted = await OpenPricesAPIClient.deleteProof(
@@ -586,6 +760,84 @@ void main() {
       );
       expect(closedSession.isError, isFalse);
       expect(closedSession.value, isTrue);
+    });
+  });
+
+  group('$OpenPricesAPIClient Users', () {
+    const UriProductHelper uriHelper = uriHelperFoodProd;
+
+    test('get users', () async {
+      const int pageNumber = 1;
+      const int pageSize = 20;
+      const GetUsersOrderField orderField = GetUsersOrderField.priceCount;
+
+      late GetUsersResult result;
+
+      int? priceCountMax;
+      int? priceCountMin;
+
+      // highest first
+      GetUsersParameters parameters = GetUsersParameters()
+        ..orderBy = <OrderBy<GetUsersOrderField>>[
+          OrderBy(field: orderField, ascending: false),
+        ]
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber;
+      MaybeError<GetUsersResult> maybeResults;
+      try {
+        maybeResults = await OpenPricesAPIClient.getUsers(
+          parameters,
+          uriHelper: uriHelper,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.numberOfPages, (result.total! / result.pageSize!).ceil());
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(pageSize));
+      for (final PriceUser user in result.items!) {
+        priceCountMax ??= user.priceCount;
+      }
+
+      // lowest first
+      parameters = GetUsersParameters()
+        ..orderBy = <OrderBy<GetUsersOrderField>>[
+          OrderBy(field: orderField, ascending: true),
+        ]
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber;
+      try {
+        maybeResults = await OpenPricesAPIClient.getUsers(
+          parameters,
+          uriHelper: uriHelperFoodProd,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.numberOfPages, (result.total! / result.pageSize!).ceil());
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(pageSize));
+      for (final PriceUser user in result.items!) {
+        priceCountMin ??= user.priceCount;
+      }
+
+      expect(priceCountMax!, greaterThan(priceCountMin!));
     });
   });
 }

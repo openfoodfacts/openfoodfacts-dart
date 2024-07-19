@@ -66,3 +66,16 @@ OxF:
   - any-glob-to-any-file: 'lib/src/prices/*.dart'
   - any-glob-to-any-file: 'lib/src/open_prices_api_client.dart'
   - any-glob-to-any-file: 'test/api_prices_*.dart'
+  - any-glob-to-any-file: 'lib/src/prices/currency.dart'
+  - any-glob-to-any-file: 'lib/src/prices/price.dart'
+  - any-glob-to-any-file: 'lib/src/prices/proof.dart'
+  - any-glob-to-any-file: 'lib/src/prices/proof_type.dart'
+  - any-glob-to-any-file: 'test/api_prices_test.dart'
+
+Search:
+- changed-files:
+  - any-glob-to-any-file: 'test/api_search_products_test.dart'
+
+🔐 Authentification:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/login_status.dart'

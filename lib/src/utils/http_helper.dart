@@ -65,6 +65,7 @@ class HttpHelper {
     User? user,
     required final UriHelper uriHelper,
     final String? bearerToken,
+    final bool addCookiesToHeader = false,
   }) async {
     http.Response response = await http.get(
       uri,
@@ -73,6 +74,7 @@ class HttpHelper {
         uriHelper: uriHelper,
         addCredentialsToHeader: false,
         bearerToken: bearerToken,
+        addCookieToHeader: addCookiesToHeader,
       ),
     );
 
@@ -153,6 +155,8 @@ class HttpHelper {
     final Map<String, dynamic> body,
     final User? user, {
     required final UriHelper uriHelper,
+    final String? bearerToken,
+    final bool addUserAgentParameters = true,
   }) async =>
       http.patch(
         uri,
@@ -160,8 +164,13 @@ class HttpHelper {
           user: user,
           uriHelper: uriHelper,
           addCredentialsToHeader: false,
+          bearerToken: bearerToken,
         ),
-        body: jsonEncode(addUserAgentParameters(body)),
+        body: jsonEncode(
+          addUserAgentParameters
+              ? HttpHelper.addUserAgentParameters(body)
+              : body,
+        ),
       );
 
   /// Send a multipart post request to the specified uri.
@@ -250,6 +259,7 @@ class HttpHelper {
     required final UriHelper uriHelper,
     required bool addCredentialsToHeader,
     final String? bearerToken,
+    final bool addCookieToHeader = false,
   }) {
     if (bearerToken != null) {
       return _getBearerHeader(bearerToken);
@@ -284,6 +294,10 @@ class HttpHelper {
         headers.addAll({'Authorization': token});
       }
     }
+    if (addCookieToHeader && user?.cookie != null) {
+      headers['Cookie'] = user!.cookie!;
+    }
+
     return headers;
   }
 
