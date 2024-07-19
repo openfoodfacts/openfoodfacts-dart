@@ -481,7 +481,7 @@ class OpenPricesAPIClient {
         if (currency != null) 'currency': currency.name,
       },
     );
-    final List<int> fileBytes = await UriReader.instance!.readAsBytes(imageUri);
+    final List<int> fileBytes = await UriReader.instance.readAsBytes(imageUri);
     final String filename = basename(imageUri.toString());
     final http.MultipartFile multipartFile = http.MultipartFile.fromBytes(
       'file',
