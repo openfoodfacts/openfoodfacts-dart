@@ -64,7 +64,7 @@ void main() {
   }
 
   group('$OpenFoodAPIClient suggestion manager', () {
-    Future<void> testToto(final Autocompleter autocompleter) async {
+    Future<void> testSpeed(final Autocompleter autocompleter) async {
       final AutocompleteManager manager = AutocompleteManager(autocompleter);
       final List<String> countries1 = await manager.getSuggestions(input1);
       final List<String> countries2 = await manager.getSuggestions(input2);
@@ -115,22 +115,20 @@ void main() {
 
     test(
       'countries as TagType',
-      () async => testToto(
+      () async => testSpeed(
         TagTypeAutocompleter(
           tagType: tagType,
           language: language,
-          uriHelper: uriHelperFoodTest,
         ),
       ),
     );
 
     test(
       'countries as TaxonomyName',
-      () async => testToto(
+      () async => testSpeed(
         TaxonomyNameAutocompleter(
           taxonomyNames: <TaxonomyName>[TaxonomyName.country],
           language: language,
-          uriHelper: uriHelperFoodTest,
         ),
       ),
     );

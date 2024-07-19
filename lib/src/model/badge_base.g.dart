@@ -8,7 +8,7 @@ part of 'badge_base.dart';
 
 BadgeBase _$BadgeBaseFromJson(Map<String, dynamic> json) => BadgeBase(
       badgeName: json['badge_name'] as String,
-      level: json['level'] as int,
+      level: (json['level'] as num).toInt(),
       userId: json['user_id'] as String?,
     );
 

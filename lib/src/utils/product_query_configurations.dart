@@ -1,23 +1,20 @@
 import 'package:http/http.dart';
+
+import '../model/user.dart';
 import 'abstract_query_configuration.dart';
 import 'http_helper.dart';
 import 'uri_helper.dart';
-import '../model/user.dart';
 
-/// Api version for product queries
+/// Api version for product queries (minimum forced version number: 2).
 class ProductQueryVersion {
-  const ProductQueryVersion(this.version);
+  const ProductQueryVersion(final int version)
+      : version = version < 2 ? 2 : version;
 
   final int version;
 
   static const ProductQueryVersion v3 = ProductQueryVersion(3);
 
-  String getPath(final String barcode) {
-    if (version == 0) {
-      return '/api/v0/product/$barcode.json';
-    }
-    return '/api/v$version/product/$barcode/';
-  }
+  String getPath(final String barcode) => '/api/v$version/product/$barcode/';
 
   bool matchesV3() => version >= 3;
 }
@@ -60,6 +57,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
         ),
         user: user,
         uriHelper: uriHelper,
+        addCookiesToHeader: true,
       );
     }
     return await HttpHelper().doPostRequest(

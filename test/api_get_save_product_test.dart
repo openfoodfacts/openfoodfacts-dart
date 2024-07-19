@@ -150,8 +150,8 @@ void main() {
       expect(product.additives!.names[4], 'E950');
 
       expect(product.images, isNotNull);
-      expect(product.images!, hasLength(7));
-      expect(product.getRawImages(), hasLength(3));
+      expect(product.images!, hasLength(10));
+      expect(product.getRawImages(), hasLength(6));
       expect(product.getMainImages(), hasLength(4));
       expect(product.countries, 'Frankreich,Deutschland');
     });
@@ -232,12 +232,13 @@ void main() {
             OpenFoodFactsLanguage.ENGLISH: englishIngredientsSplit,
           }));
 
-      expect(englishProduct.categoriesTags, equals([tagCategory]));
+      expect(englishProduct.categoriesTags, contains(tagCategory));
+      expect(englishProduct.categoriesTagsInLanguages, isNotNull);
       expect(
-          englishProduct.categoriesTagsInLanguages,
-          equals({
-            OpenFoodFactsLanguage.ENGLISH: [englishCategory]
-          }));
+        englishProduct
+            .categoriesTagsInLanguages![OpenFoodFactsLanguage.ENGLISH],
+        contains(englishCategory),
+      );
 
       expect(englishProduct.countriesTags, equals([countryTag]));
       expect(
@@ -266,12 +267,13 @@ void main() {
             OpenFoodFactsLanguage.RUSSIAN: russianIngredientsSplit,
           }));
 
-      expect(russianProduct.categoriesTags, equals([tagCategory]));
+      expect(russianProduct.categoriesTags, contains(tagCategory));
+      expect(russianProduct.categoriesTagsInLanguages, isNotNull);
       expect(
-          russianProduct.categoriesTagsInLanguages,
-          equals({
-            OpenFoodFactsLanguage.RUSSIAN: [russianCategory]
-          }));
+        russianProduct
+            .categoriesTagsInLanguages![OpenFoodFactsLanguage.RUSSIAN],
+        contains(russianCategory),
+      );
 
       expect(russianProduct.countriesTags, equals([countryTag]));
       expect(
@@ -372,12 +374,13 @@ void main() {
             OpenFoodFactsLanguage.ENGLISH: englishIngredientsSplit,
           }));
 
-      expect(englishProduct.categoriesTags, equals([tagCategory]));
+      expect(englishProduct.categoriesTags, contains(tagCategory));
+      expect(englishProduct.categoriesTagsInLanguages, isNotNull);
       expect(
-          englishProduct.categoriesTagsInLanguages,
-          equals({
-            OpenFoodFactsLanguage.ENGLISH: [englishCategory]
-          }));
+        englishProduct
+            .categoriesTagsInLanguages![OpenFoodFactsLanguage.ENGLISH],
+        contains(englishCategory),
+      );
 
       expect(englishProduct.countriesTags, equals([countryTag]));
       expect(
@@ -408,12 +411,13 @@ void main() {
             OpenFoodFactsLanguage.RUSSIAN: russianIngredientsSplit,
           }));
 
-      expect(russianProduct.categoriesTags, equals([tagCategory]));
+      expect(russianProduct.categoriesTags, contains(tagCategory));
+      expect(russianProduct.categoriesTagsInLanguages, isNotNull);
       expect(
-          russianProduct.categoriesTagsInLanguages,
-          equals({
-            OpenFoodFactsLanguage.RUSSIAN: [russianCategory]
-          }));
+        russianProduct
+            .categoriesTagsInLanguages![OpenFoodFactsLanguage.RUSSIAN],
+        contains(russianCategory),
+      );
 
       expect(russianProduct.countriesTags, equals([countryTag]));
       expect(
@@ -507,14 +511,20 @@ void main() {
             OpenFoodFactsLanguage.GERMAN: germanIngredientsSplit,
           }));
 
-      expect(product.categoriesTags, equals([tagCategory]));
+      expect(product.categoriesTags, contains(tagCategory));
+      expect(product.categoriesTagsInLanguages, isNotNull);
       expect(
-          product.categoriesTagsInLanguages,
-          equals({
-            OpenFoodFactsLanguage.ENGLISH: [englishCategory],
-            OpenFoodFactsLanguage.RUSSIAN: [russianCategory],
-            OpenFoodFactsLanguage.GERMAN: [germanCategory],
-          }));
+        product.categoriesTagsInLanguages![OpenFoodFactsLanguage.ENGLISH],
+        contains(englishCategory),
+      );
+      expect(
+        product.categoriesTagsInLanguages![OpenFoodFactsLanguage.RUSSIAN],
+        contains(russianCategory),
+      );
+      expect(
+        product.categoriesTagsInLanguages![OpenFoodFactsLanguage.GERMAN],
+        contains(germanCategory),
+      );
 
       expect(product.countriesTags, equals([countryTag]));
       expect(

@@ -95,11 +95,15 @@ class KnowledgePanelImageElement extends JsonObject {
   final int? height;
 
   /// Alt Text of the image.
-  @JsonKey(name: 'alt_text')
+  @JsonKey(name: 'alt')
   final String? altText;
 
+  /// URL, for clickable image.
+  @JsonKey(name: 'link_url')
+  final String? linkUrl;
+
   const KnowledgePanelImageElement(
-      {required this.url, this.width, this.height, this.altText});
+      {required this.url, this.width, this.height, this.altText, this.linkUrl});
 
   factory KnowledgePanelImageElement.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelImageElementFromJson(json);
@@ -299,13 +303,13 @@ class KnowledgePanelTableElement extends JsonObject {
 @JsonSerializable()
 class KnowledgePanelActionElement extends JsonObject {
   /// HTML description.
-  final String html;
+  final String? html;
 
   /// Needed contribute actions, as [KnowledgePanelAction.addCategories.offTag].
   final List<String> actions;
 
   const KnowledgePanelActionElement({
-    required this.html,
+    this.html,
     required this.actions,
   });
 

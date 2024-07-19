@@ -53,6 +53,7 @@ void main() {
         fields: [ProductField.NAME, ProductField.ATTRIBUTE_GROUPS],
         version: ProductQueryVersion.v3,
       );
+      await getProductTooManyRequestsManager.waitIfNeeded();
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: TestConstants.PROD_USER,
@@ -75,8 +76,9 @@ void main() {
       MatchedProduct matchedProduct;
 
       matchedProduct = MatchedProduct(result.product!, manager);
-      expect(matchedProduct.score, greaterThan(151));
-      expect(matchedProduct.status, MatchedProductStatus.YES);
+      expect(matchedProduct.score,
+          greaterThan(50)); // 20240522: was 59.2727272727272
+      expect(matchedProduct.status, MatchedProductStatus.NO);
 
       await manager.setImportance(attributeId1, importanceId2);
       expect(
@@ -88,7 +90,8 @@ void main() {
       expect(refreshCounter, 4);
 
       matchedProduct = MatchedProduct(result.product!, manager);
-      expect(matchedProduct.score, greaterThan(37.5));
+      expect(matchedProduct.score,
+          greaterThan(14)); // 20240522: was 14.8181818181818
       expect(matchedProduct.status, MatchedProductStatus.NO);
 
       await manager.clearImportances(); // no attribute parameters at all

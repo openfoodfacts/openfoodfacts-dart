@@ -359,7 +359,7 @@ void main() {
             language: OpenFoodFactsLanguage.UKRAINIAN,
             input: 'D',
           ));
-    });
+    }, skip: 'Skipping while the issue is not fixed on the server side');
     test('Suggestions empty fields', () async {
       List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.ALLERGENS,

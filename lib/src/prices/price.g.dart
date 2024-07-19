@@ -19,16 +19,26 @@ Price _$PriceFromJson(Map<String, dynamic> json) => Price()
   ..priceWithoutDiscount = json['price_without_discount'] as num?
   ..pricePer = $enumDecodeNullable(_$PricePerEnumMap, json['price_per'])
   ..currency = $enumDecode(_$CurrencyEnumMap, json['currency'])
-  ..locationOSMId = json['location_osm_id'] as int
+  ..locationOSMId = (json['location_osm_id'] as num).toInt()
   ..locationOSMType =
       $enumDecode(_$LocationOSMTypeEnumMap, json['location_osm_type'])
   ..date = JsonHelper.stringTimestampToDate(json['date'])
-  ..proofId = json['proof_id'] as int?
-  ..id = json['id'] as int
-  ..productId = json['product_id'] as int?
-  ..locationId = json['location_id'] as int?
+  ..proofId = (json['proof_id'] as num?)?.toInt()
+  ..id = (json['id'] as num).toInt()
+  ..productId = (json['product_id'] as num?)?.toInt()
+  ..locationId = (json['location_id'] as num?)?.toInt()
+  ..proof = json['proof'] == null
+      ? null
+      : Proof.fromJson(json['proof'] as Map<String, dynamic>)
+  ..location = json['location'] == null
+      ? null
+      : Location.fromJson(json['location'] as Map<String, dynamic>)
+  ..product = json['product'] == null
+      ? null
+      : PriceProduct.fromJson(json['product'] as Map<String, dynamic>)
   ..owner = json['owner'] as String
-  ..created = JsonHelper.stringTimestampToDate(json['created']);
+  ..created = JsonHelper.stringTimestampToDate(json['created'])
+  ..updated = JsonHelper.nullableStringTimestampToDate(json['updated']);
 
 Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
       'product_code': instance.productCode,
@@ -48,8 +58,12 @@ Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
       'id': instance.id,
       'product_id': instance.productId,
       'location_id': instance.locationId,
+      'proof': instance.proof,
+      'location': instance.location,
+      'product': instance.product,
       'owner': instance.owner,
       'created': instance.created.toIso8601String(),
+      'updated': instance.updated?.toIso8601String(),
     };
 
 const _$PricePerEnumMap = {

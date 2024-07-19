@@ -213,5 +213,5 @@ void main() {
       expect(knownSum, knownTotal);
       expect(nullSum, nullTotal);
     });
-  });
+  }, skip: 'Unstable EVENTS server');
 }
