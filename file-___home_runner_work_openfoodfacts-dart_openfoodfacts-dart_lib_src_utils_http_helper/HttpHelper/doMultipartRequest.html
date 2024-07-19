@@ -113,8 +113,7 @@ As result a json object of the "type" Status is expected.</p>
   &#47;&#47; add all file entries to the request
   if (files != null) {
     for (MapEntry&lt;String, Uri&gt; entry in files.entries) {
-      List&lt;int&gt; fileBytes =
-          await UriReader.instance!.readAsBytes(entry.value);
+      List&lt;int&gt; fileBytes = await UriReader.instance.readAsBytes(entry.value);
       var multipartFile = http.MultipartFile.fromBytes(entry.key, fileBytes,
           filename: basename(entry.value.toString()));
       request.files.add(multipartFile);

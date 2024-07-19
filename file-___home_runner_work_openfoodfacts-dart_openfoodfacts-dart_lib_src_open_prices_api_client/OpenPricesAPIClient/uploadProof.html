@@ -115,7 +115,7 @@
       if (currency != null) &#39;currency&#39;: currency.name,
     },
   );
-  final List&lt;int&gt; fileBytes = await UriReader.instance!.readAsBytes(imageUri);
+  final List&lt;int&gt; fileBytes = await UriReader.instance.readAsBytes(imageUri);
   final String filename = basename(imageUri.toString());
   final http.MultipartFile multipartFile = http.MultipartFile.fromBytes(
     &#39;file&#39;,
