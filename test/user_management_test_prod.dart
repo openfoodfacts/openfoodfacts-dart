@@ -185,6 +185,15 @@ void main() {
       expect(status.status, koStatus);
     });
   });
+
+  group('wiki page', () {
+    test('user wiki page', () async {
+      expect(
+        User.getUserWikiPage('teolemon'),
+        'https://wiki.openfoodfacts.org/User:Teolemon',
+      );
+    });
+  });
 }
 
 String _generateRandomString(int length) {
