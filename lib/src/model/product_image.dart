@@ -1,7 +1,7 @@
-import 'off_tagged.dart';
 import '../utils/language_helper.dart';
 import '../utils/open_food_api_configuration.dart';
 import '../utils/uri_helper.dart';
+import 'off_tagged.dart';
 
 enum ImageField implements OffTagged {
   FRONT(offTag: 'front'),
@@ -122,6 +122,7 @@ class ProductImage {
     this.y2,
     this.width,
     this.height,
+    this.contributor,
   });
 
   ProductImage.raw({
@@ -131,6 +132,7 @@ class ProductImage {
     this.width,
     this.height,
     this.uploaded,
+    this.contributor,
   })  : language = null,
         field = null;
 
@@ -141,6 +143,9 @@ class ProductImage {
 
   /// Upload timestamp, for uploaded images only, in seconds since Unix Epoch.
   DateTime? uploaded;
+
+  /// Contributor of this image
+  String? contributor;
 
   /// Revision number
   int? rev;
