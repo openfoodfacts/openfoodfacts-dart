@@ -27,4 +27,11 @@ class User extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$UserToJson(this);
+
+  static String getUserWikiPage(final String userId) => Uri(
+        scheme: 'https',
+        host: 'wiki.openfoodfacts.org',
+        path: 'User:'
+            '${userId.substring(0, 1).toUpperCase()}${userId.substring(1)}',
+      ).toString();
 }

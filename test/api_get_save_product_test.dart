@@ -65,7 +65,7 @@ void main() {
 
       final String barcode = getBookBarcode(0);
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.GERMAN;
-      const String genericName = 'Softdrink';
+      const String genericName = 'Softdrink beverage';
       const List<String> ingredientsText = <String>[
         'Wasser',
         'Kohlensäure',
@@ -711,7 +711,7 @@ void main() {
     }
 
     const String barcode = '111111555555';
-    const String genericName = 'Softdrink';
+    const String genericName = 'Softdrink beverage';
     const String labels = 'MyTestLabel';
     const String quantity = '5.5 Liter';
 
