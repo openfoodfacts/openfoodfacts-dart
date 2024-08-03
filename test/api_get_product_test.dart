@@ -1138,6 +1138,101 @@ void main() {
     expect(result.product!.lastCheckDates, hasLength(3));
     expect(result.product!.entryDates, isNotNull);
     expect(result.product!.entryDates, hasLength(3));
+
+    configuration = ProductQueryConfiguration(
+      '3017620425035',
+      fields: [
+        ProductField.OWNER_FIELDS,
+      ],
+      version: ProductQueryVersion.v3,
+    );
+    result = await getProductV3InProd(
+      configuration,
+    );
+    expect(result.status, ProductResultV3.statusSuccess);
+    expect(result.product, isNotNull);
+    expect(result.product!.ownerFields, isNotNull);
+    const List<ProductField> localizedFields = <ProductField>[
+      ProductField.ABBREVIATED_NAME,
+      ProductField.GENERIC_NAME_ALL_LANGUAGES,
+      ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+      ProductField.NAME,
+    ];
+    const List<ProductField> notLocalizedFields = <ProductField>[
+      ProductField.BRANDS,
+      ProductField.COUNTRIES,
+      ProductField.LANGUAGE,
+      ProductField.NO_NUTRITION_DATA,
+      ProductField.NUTRIMENT_DATA_PER,
+      ProductField.OBSOLETE,
+      ProductField.PACKAGING,
+      ProductField.QUANTITY,
+      ProductField.SERVING_SIZE,
+    ];
+    const List<Nutrient> nutrients = <Nutrient>[
+      Nutrient.carbohydrates,
+      Nutrient.energyKCal,
+      Nutrient.energyKJ,
+      Nutrient.fat,
+      Nutrient.proteins,
+      Nutrient.salt,
+      Nutrient.saturatedFat,
+      Nutrient.sugars,
+    ];
+    const List<String> raws = <String>[
+      'allergens',
+      'conservation_conditions_fr',
+      'customer_service_fr',
+      'data_sources',
+      'energy',
+      'lc',
+      'owner',
+      'producer_version_id',
+    ];
+    for (final ProductField productField in localizedFields) {
+      expect(
+        result.product!.getOwnerFieldTimestamp(OwnerField.productField(
+          productField,
+          OpenFoodFactsLanguage.FRENCH,
+        )),
+        isNotNull,
+      );
+      expect(
+        result.product!.getOwnerFieldTimestamp(OwnerField.productField(
+          productField,
+          OpenFoodFactsLanguage.GERMAN,
+        )),
+        isNull,
+      );
+    }
+    for (final ProductField productField in notLocalizedFields) {
+      expect(
+        result.product!.getOwnerFieldTimestamp(OwnerField.productField(
+          productField,
+          OpenFoodFactsLanguage.FRENCH,
+        )),
+        isNotNull,
+      );
+      expect(
+        result.product!.getOwnerFieldTimestamp(OwnerField.productField(
+          productField,
+          OpenFoodFactsLanguage.GERMAN,
+        )),
+        isNotNull,
+      );
+    }
+    for (final Nutrient nutrient in nutrients) {
+      expect(
+        result.product!.getOwnerFieldTimestamp(OwnerField.nutrient(nutrient)),
+        isNotNull,
+      );
+    }
+    for (final String raw in raws) {
+      expect(
+        result.product!.getOwnerFieldTimestamp(OwnerField.raw(raw)),
+        isNotNull,
+      );
+    }
   });
 
   group('$OpenFoodAPIClient get new packagings field', () {
