@@ -140,7 +140,7 @@ void main() {
       expect(result.product!.ingredientsText, isNotNull);
 
       expect(result.product!.ingredients, isNotNull);
-      expect(result.product!.ingredients!.length, 9);
+      expect(result.product!.ingredients!.length, 10);
 
       findExpectedIngredients(
         result.product!.ingredients!,
