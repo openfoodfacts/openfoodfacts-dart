@@ -32,6 +32,7 @@ export 'src/model/old_product_result.dart';
 export 'src/model/ordered_nutrient.dart';
 export 'src/model/ordered_nutrients.dart';
 export 'src/model/origins_of_ingredients.dart';
+export 'src/model/owner_field.dart';
 export 'src/model/packaging.dart';
 export 'src/model/parameter/allergens_parameter.dart';
 export 'src/model/parameter/barcode_parameter.dart';
