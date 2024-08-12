@@ -86,7 +86,7 @@ the function will throw.</p>
   final fieldsStrings = &lt;String&gt;[];
 
   for (final field in fields) {
-    if (fieldsInLanguages.contains(field)) {
+    if (field.isInLanguages) {
       if (languages.isEmpty) {
         throw ArgumentError(
             &#39;Cannot request in-lang field $field without language&#39;);

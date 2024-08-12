@@ -212,7 +212,7 @@
         result.imagesFreshnessInLanguages![language] = values;
         return;
       default:
-        if (fieldsInLanguages.contains(productField)) {
+        if (productField.isInLanguages) {
           throw Exception(&#39;Unhandled in-languages case for $productField&#39;);
         }
     }
@@ -246,7 +246,10 @@
     &#47;&#47; We store those values in a more structured maps like
     &#47;&#47; [productNameInLanguages].
 
-    ProductField? productField = extractProductField(key, fieldsAllLanguages);
+    ProductField? productField = extractProductField(
+      key,
+      ProductField.getAllLanguagesList(),
+    );
     if (productField != null) {
       final Map&lt;OpenFoodFactsLanguage, String&gt;? localized =
           _getLocalizedStrings(json[key]);
@@ -259,7 +262,10 @@
       continue;
     }
 
-    productField = extractProductField(key, fieldsInLanguages);
+    productField = extractProductField(
+      key,
+      ProductField.getInLanguagesList(),
+    );
     if (productField != null) {
       final OpenFoodFactsLanguage language =
           _langFrom(key, productField.offTag);
