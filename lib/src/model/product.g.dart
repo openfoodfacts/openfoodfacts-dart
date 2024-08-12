@@ -171,6 +171,9 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       ..novaGroup = (json['nova_group'] as num?)?.toInt()
       ..website = json['link'] as String?
       ..obsolete = JsonHelper.checkboxFromJSON(json['obsolete'])
+      ..ownerFields = (json['owner_fields'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, (e as num).toInt()),
+      )
       ..expirationDate = json['expiration_date'] as String?;
 
 Map<String, dynamic> _$ProductToJson(Product instance) {
@@ -306,6 +309,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('nova_group', instance.novaGroup);
   writeNotNull('link', instance.website);
   val['obsolete'] = JsonHelper.checkboxToJSON(instance.obsolete);
+  writeNotNull('owner_fields', instance.ownerFields);
   writeNotNull('expiration_date', instance.expirationDate);
   val['no_nutrition_data'] =
       JsonHelper.checkboxToJSON(instance.noNutritionData);

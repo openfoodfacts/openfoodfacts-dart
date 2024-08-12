@@ -10,6 +10,7 @@ import 'ingredients_analysis_tags.dart';
 import 'knowledge_panels.dart';
 import 'nutrient_levels.dart';
 import 'nutriments.dart';
+import 'owner_field.dart';
 import 'product_image.dart';
 import 'product_packaging.dart';
 import '../interface/json_object.dart';
@@ -562,10 +563,19 @@ class Product extends JsonObject {
   )
   bool? obsolete;
 
+  /// Timestamps of owner_fields, in seconds.
+  ///
+  /// Typically used to say "Was that field set by the owner?".
+  /// Read-only.
+  /// See also [getOwnerFieldTimestamp].
+  @JsonKey(name: 'owner_fields', includeIfNull: false)
+  Map<String, int>? ownerFields;
+
   /// Expiration date / best before. Just a string, no format control.
   @JsonKey(name: 'expiration_date', includeIfNull: false)
   String? expirationDate;
 
+  // TODO(monsieurtanuki): remove all the "this" constructor fields, except maybe "barcode"
   Product(
       {this.barcode,
       this.productName,
@@ -766,7 +776,7 @@ class Product extends JsonObject {
           result.imagesFreshnessInLanguages![language] = values;
           return;
         default:
-          if (fieldsInLanguages.contains(productField)) {
+          if (productField.isInLanguages) {
             throw Exception('Unhandled in-languages case for $productField');
           }
       }
@@ -800,7 +810,10 @@ class Product extends JsonObject {
       // We store those values in a more structured maps like
       // [productNameInLanguages].
 
-      ProductField? productField = extractProductField(key, fieldsAllLanguages);
+      ProductField? productField = extractProductField(
+        key,
+        ProductField.getAllLanguagesList(),
+      );
       if (productField != null) {
         final Map<OpenFoodFactsLanguage, String>? localized =
             _getLocalizedStrings(json[key]);
@@ -813,7 +826,10 @@ class Product extends JsonObject {
         continue;
       }
 
-      productField = extractProductField(key, fieldsInLanguages);
+      productField = extractProductField(
+        key,
+        ProductField.getInLanguagesList(),
+      );
       if (productField != null) {
         final OpenFoodFactsLanguage language =
             _langFrom(key, productField.offTag);
@@ -1073,4 +1089,12 @@ class Product extends JsonObject {
     // quantity: put non breaking spaces between numbers and units
     return '$productNameBrand$separator${quantity!.replaceAll(' ', '\u{00A0}')}';
   }
+
+  /// Returns the timestamp (in seconds) of the owner field.
+  ///
+  /// Typically used to check if the field value was set by the product owner
+  /// (if the timestamp is not null), which means that the user cannot set a
+  /// value.
+  int? getOwnerFieldTimestamp(final OwnerField ownerField) =>
+      ownerFields?[ownerField.offTag];
 }

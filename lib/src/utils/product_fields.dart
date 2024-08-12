@@ -4,21 +4,63 @@ import '../model/off_tagged.dart';
 /// Fields of a [Product]
 enum ProductField implements OffTagged {
   BARCODE(offTag: 'code'),
-  NAME(offTag: 'product_name'),
-  NAME_IN_LANGUAGES(offTag: 'product_name_'),
-  NAME_ALL_LANGUAGES(offTag: 'product_name_languages'),
-  GENERIC_NAME(offTag: 'generic_name'),
-  GENERIC_NAME_IN_LANGUAGES(offTag: 'generic_name_'),
-  GENERIC_NAME_ALL_LANGUAGES(offTag: 'generic_name_languages'),
-  ABBREVIATED_NAME(offTag: 'abbreviated_product_name'),
-  ABBREVIATED_NAME_IN_LANGUAGES(offTag: 'abbreviated_product_name_'),
-  ABBREVIATED_NAME_ALL_LANGUAGES(offTag: 'abbreviated_product_name_languages'),
+  NAME(
+    offTag: 'product_name',
+    inLanguagesProductField: ProductField.NAME_IN_LANGUAGES,
+  ),
+  NAME_IN_LANGUAGES(
+    offTag: 'product_name_',
+    isInLanguages: true,
+  ),
+  NAME_ALL_LANGUAGES(
+    offTag: 'product_name_languages',
+    inLanguagesProductField: ProductField.NAME_IN_LANGUAGES,
+    isAllLanguages: true,
+  ),
+  GENERIC_NAME(
+    offTag: 'generic_name',
+    inLanguagesProductField: ProductField.GENERIC_NAME_IN_LANGUAGES,
+  ),
+  GENERIC_NAME_IN_LANGUAGES(
+    offTag: 'generic_name_',
+    isInLanguages: true,
+  ),
+  GENERIC_NAME_ALL_LANGUAGES(
+    offTag: 'generic_name_languages',
+    inLanguagesProductField: ProductField.GENERIC_NAME_IN_LANGUAGES,
+    isAllLanguages: true,
+  ),
+  ABBREVIATED_NAME(
+    offTag: 'abbreviated_product_name',
+    inLanguagesProductField: ProductField.ABBREVIATED_NAME_IN_LANGUAGES,
+  ),
+  ABBREVIATED_NAME_IN_LANGUAGES(
+    offTag: 'abbreviated_product_name_',
+    isInLanguages: true,
+  ),
+  ABBREVIATED_NAME_ALL_LANGUAGES(
+    offTag: 'abbreviated_product_name_languages',
+    inLanguagesProductField: ProductField.ABBREVIATED_NAME_IN_LANGUAGES,
+    isAllLanguages: true,
+  ),
   BRANDS(offTag: 'brands'),
-  BRANDS_TAGS(offTag: 'brands_tags'),
-  BRANDS_TAGS_IN_LANGUAGES(offTag: 'brands_tags_'),
+  BRANDS_TAGS(
+    offTag: 'brands_tags',
+    inLanguagesProductField: ProductField.BRANDS_TAGS_IN_LANGUAGES,
+  ),
+  BRANDS_TAGS_IN_LANGUAGES(
+    offTag: 'brands_tags_',
+    isInLanguages: true,
+  ),
   COUNTRIES(offTag: 'countries'),
-  COUNTRIES_TAGS(offTag: 'countries_tags'),
-  COUNTRIES_TAGS_IN_LANGUAGES(offTag: 'countries_tags_'),
+  COUNTRIES_TAGS(
+    offTag: 'countries_tags',
+    inLanguagesProductField: ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
+  ),
+  COUNTRIES_TAGS_IN_LANGUAGES(
+    offTag: 'countries_tags_',
+    isInLanguages: true,
+  ),
   LANGUAGE(offTag: 'lang'),
   QUANTITY(offTag: 'quantity'),
   SERVING_SIZE(offTag: 'serving_size'),
@@ -36,47 +78,128 @@ enum ProductField implements OffTagged {
   IMAGE_PACKAGING_SMALL_URL(offTag: 'image_packaging_small_url'),
   IMAGES(offTag: 'images'),
   INGREDIENTS(offTag: 'ingredients'),
-  INGREDIENTS_TAGS(offTag: 'ingredients_tags'),
-  INGREDIENTS_TAGS_IN_LANGUAGES(offTag: 'ingredients_tags_'),
-  IMAGES_FRESHNESS_IN_LANGUAGES(offTag: 'images_to_update_'),
+  INGREDIENTS_TAGS(
+    offTag: 'ingredients_tags',
+    inLanguagesProductField: ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
+  ),
+  INGREDIENTS_TAGS_IN_LANGUAGES(
+    offTag: 'ingredients_tags_',
+    isInLanguages: true,
+  ),
+  IMAGES_FRESHNESS_IN_LANGUAGES(
+    offTag: 'images_to_update_',
+    isInLanguages: true,
+  ),
   NO_NUTRITION_DATA(offTag: 'no_nutrition_data'),
   NUTRIMENTS(offTag: 'nutriments'),
-  ADDITIVES(offTag: 'additives_tags'),
-  ADDITIVES_TAGS_IN_LANGUAGES(offTag: 'additives_tags_'),
+  ADDITIVES(
+    offTag: 'additives_tags',
+    inLanguagesProductField: ProductField.ADDITIVES_TAGS_IN_LANGUAGES,
+  ),
+  ADDITIVES_TAGS_IN_LANGUAGES(
+    offTag: 'additives_tags_',
+    isInLanguages: true,
+  ),
   NUTRIENT_LEVELS(offTag: 'nutrient_levels'),
-  INGREDIENTS_TEXT(offTag: 'ingredients_text'),
-  INGREDIENTS_TEXT_IN_LANGUAGES(offTag: 'ingredients_text_'),
-  INGREDIENTS_TEXT_ALL_LANGUAGES(offTag: 'ingredients_text_languages'),
+  INGREDIENTS_TEXT(
+    offTag: 'ingredients_text',
+    inLanguagesProductField: ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+  ),
+  INGREDIENTS_TEXT_IN_LANGUAGES(
+    offTag: 'ingredients_text_',
+    isInLanguages: true,
+  ),
+  INGREDIENTS_TEXT_ALL_LANGUAGES(
+    offTag: 'ingredients_text_languages',
+    inLanguagesProductField: ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+    isAllLanguages: true,
+  ),
   NUTRIMENT_ENERGY_UNIT(offTag: 'nutriment_energy_unit'),
   NUTRIMENT_DATA_PER(offTag: 'nutrition_data_per'),
   NUTRITION_DATA(offTag: 'nutrition_data'),
   NUTRISCORE(offTag: 'nutrition_grade_fr'),
   COMPARED_TO_CATEGORY(offTag: 'compared_to_category'),
   CATEGORIES(offTag: 'categories'),
-  CATEGORIES_TAGS(offTag: 'categories_tags'),
-  CATEGORIES_TAGS_IN_LANGUAGES(offTag: 'categories_tags_'),
+  CATEGORIES_TAGS(
+    offTag: 'categories_tags',
+    inLanguagesProductField: ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
+  ),
+  CATEGORIES_TAGS_IN_LANGUAGES(
+    offTag: 'categories_tags_',
+    isInLanguages: true,
+  ),
   LABELS(offTag: 'labels'),
-  LABELS_TAGS(offTag: 'labels_tags'),
-  LABELS_TAGS_IN_LANGUAGES(offTag: 'labels_tags_'),
+  LABELS_TAGS(
+    offTag: 'labels_tags',
+    inLanguagesProductField: ProductField.LABELS_TAGS_IN_LANGUAGES,
+  ),
+  LABELS_TAGS_IN_LANGUAGES(
+    offTag: 'labels_tags_',
+    isInLanguages: true,
+  ),
   PACKAGING(offTag: 'packaging'),
   PACKAGINGS(offTag: 'packagings'),
   PACKAGINGS_COMPLETE(offTag: 'packagings_complete'),
   PACKAGING_TAGS(offTag: 'packaging_tags'),
-  PACKAGING_TEXT_IN_LANGUAGES(offTag: 'packaging_text_'),
-  PACKAGING_TEXT_ALL_LANGUAGES(offTag: 'packaging_text_languages'),
-  MISC_TAGS(offTag: 'misc_tags'),
-  MISC_TAGS_IN_LANGUAGES(offTag: 'misc_tags_'),
-  STATES_TAGS(offTag: 'states_tags'),
-  STATES_TAGS_IN_LANGUAGES(offTag: 'states_tags_'),
-  TRACES_TAGS(offTag: 'traces_tags'),
-  TRACES_TAGS_IN_LANGUAGES(offTag: 'traces_tags_'),
-  STORES_TAGS(offTag: 'stores_tags'),
-  STORES_TAGS_IN_LANGUAGES(offTag: 'stores_tags_'),
+  PACKAGING_TEXT_IN_LANGUAGES(
+    offTag: 'packaging_text_',
+    isInLanguages: true,
+  ),
+  PACKAGING_TEXT_ALL_LANGUAGES(
+    offTag: 'packaging_text_languages',
+    inLanguagesProductField: ProductField.PACKAGING_TEXT_IN_LANGUAGES,
+    isAllLanguages: true,
+  ),
+  MISC_TAGS(
+    offTag: 'misc_tags',
+    inLanguagesProductField: ProductField.MISC_TAGS_IN_LANGUAGES,
+  ),
+  MISC_TAGS_IN_LANGUAGES(
+    offTag: 'misc_tags_',
+    isInLanguages: true,
+  ),
+  STATES_TAGS(
+    offTag: 'states_tags',
+    inLanguagesProductField: ProductField.STATES_TAGS_IN_LANGUAGES,
+  ),
+  STATES_TAGS_IN_LANGUAGES(
+    offTag: 'states_tags_',
+    isInLanguages: true,
+  ),
+  TRACES_TAGS(
+    offTag: 'traces_tags',
+    inLanguagesProductField: ProductField.TRACES_TAGS_IN_LANGUAGES,
+  ),
+  TRACES_TAGS_IN_LANGUAGES(
+    offTag: 'traces_tags_',
+    isInLanguages: true,
+  ),
+  STORES_TAGS(
+    offTag: 'stores_tags',
+    inLanguagesProductField: ProductField.STORES_TAGS_IN_LANGUAGES,
+  ),
+  STORES_TAGS_IN_LANGUAGES(
+    offTag: 'stores_tags_',
+    isInLanguages: true,
+  ),
   STORES(offTag: 'stores'),
-  INGREDIENTS_ANALYSIS_TAGS(offTag: 'ingredients_analysis_tags'),
-  INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES(offTag: 'ingredients_analysis_tags_'),
-  ALLERGENS(offTag: 'allergens_tags'),
-  ALLERGENS_TAGS_IN_LANGUAGES(offTag: 'allergens_tags_'),
+  INGREDIENTS_ANALYSIS_TAGS(
+    offTag: 'ingredients_analysis_tags',
+    inLanguagesProductField:
+        ProductField.INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES,
+  ),
+  INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES(
+    offTag: 'ingredients_analysis_tags_',
+    isInLanguages: true,
+  ),
+  ALLERGENS(
+    offTag: 'allergens_tags',
+    inLanguagesProductField: ProductField.ALLERGENS_TAGS_IN_LANGUAGES,
+  ),
+  ALLERGENS_TAGS_IN_LANGUAGES(
+    offTag: 'allergens_tags_',
+    isInLanguages: true,
+  ),
   ATTRIBUTE_GROUPS(offTag: 'attribute_groups'),
   LAST_MODIFIED(offTag: 'last_modified_t'),
   LAST_MODIFIER(offTag: 'last_modified_by'),
@@ -102,6 +225,7 @@ enum ProductField implements OffTagged {
   WEBSITE(offTag: 'link'),
   EXPIRATION_DATE(offTag: 'expiration_date'),
   OBSOLETE(offTag: 'obsolete'),
+  OWNER_FIELDS(offTag: 'owner_fields'),
 
   /// All data as RAW from the server. E.g. packagings are only Strings there.
   RAW(offTag: 'raw'),
@@ -109,12 +233,56 @@ enum ProductField implements OffTagged {
 
   const ProductField({
     required this.offTag,
-  });
+    final ProductField? inLanguagesProductField,
+    this.isInLanguages = false,
+    this.isAllLanguages = false,
+  }) : _inLanguagesProductField = inLanguagesProductField;
 
   @override
   final String offTag;
+
+  final ProductField? _inLanguagesProductField;
+
+  /// Is this field an "in languages" field?
+  final bool isInLanguages;
+
+  /// Is this field an "all languages" field?
+  final bool isAllLanguages;
+
+  /// Returns the corresponding "in languages" field, if relevant.
+  ProductField? get inLanguages =>
+      isInLanguages ? this : _inLanguagesProductField;
+
+  static List<ProductField> _inLanguagesList = <ProductField>[];
+  static List<ProductField> _allLanguagesList = <ProductField>[];
+
+  /// Returns the list of all "in languages" fields.
+  static List<ProductField> getInLanguagesList() {
+    if (_inLanguagesList.isEmpty) {
+      for (final ProductField productField in ProductField.values) {
+        if (productField.isInLanguages) {
+          _inLanguagesList.add(productField);
+        }
+      }
+    }
+    return _inLanguagesList;
+  }
+
+  /// Returns the list of all "all languages" fields.
+  static List<ProductField> getAllLanguagesList() {
+    if (_allLanguagesList.isEmpty) {
+      for (final ProductField productField in ProductField.values) {
+        if (productField.isAllLanguages) {
+          _allLanguagesList.add(productField);
+        }
+      }
+    }
+    return _allLanguagesList;
+  }
 }
 
+// TODO: deprecated from 2024-08-03; remove when old enough
+@Deprecated('Use ProductField.getInLanguagesList() instead')
 const Set<ProductField> fieldsInLanguages = {
   ProductField.NAME_IN_LANGUAGES,
   ProductField.GENERIC_NAME_IN_LANGUAGES,
@@ -136,6 +304,8 @@ const Set<ProductField> fieldsInLanguages = {
   ProductField.IMAGES_FRESHNESS_IN_LANGUAGES,
 };
 
+// TODO: deprecated from 2024-08-03; remove when old enough
+@Deprecated('Use ProductField.getAllLanguagesList() instead')
 const Set<ProductField> fieldsAllLanguages = {
   ProductField.NAME_ALL_LANGUAGES,
   ProductField.GENERIC_NAME_ALL_LANGUAGES,
@@ -151,7 +321,7 @@ List<String> convertFieldsToStrings(
   final fieldsStrings = <String>[];
 
   for (final field in fields) {
-    if (fieldsInLanguages.contains(field)) {
+    if (field.isInLanguages) {
       if (languages.isEmpty) {
         throw ArgumentError(
             'Cannot request in-lang field $field without language');
