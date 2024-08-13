@@ -192,6 +192,10 @@ void main() {
         User.getUserWikiPage('teolemon'),
         'https://wiki.openfoodfacts.org/User:Teolemon',
       );
+      expect(
+        User.getUserWikiDiscussionPage('tacinte'),
+        'https://wiki.openfoodfacts.org/index.php?title=User_talk%3ATacinte&action=edit&section=new',
+      );
     });
   });
 }
