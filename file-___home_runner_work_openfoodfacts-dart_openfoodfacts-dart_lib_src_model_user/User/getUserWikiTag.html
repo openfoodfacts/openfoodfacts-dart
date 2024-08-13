@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the getUserWikiPage method from the User class, for the Dart programming language.">
-  <title>getUserWikiPage method - User class - user library - Dart API</title>
+  <meta name="description" content="API docs for the getUserWikiTag method from the User class, for the Dart programming language.">
+  <title>getUserWikiTag method - User class - user library - Dart API</title>
 
 
   
@@ -31,9 +31,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user-library.html">src&#47;model&#47;user.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a></li>
-    <li class="self-crumb">getUserWikiPage static method</li>
+    <li class="self-crumb">getUserWikiTag static method</li>
   </ol>
-  <div class="self-name">getUserWikiPage</div>
+  <div class="self-name">getUserWikiTag</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -57,14 +57,14 @@
     data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user&#47;User-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">getUserWikiPage</span> static method 
+<h1><span class="kind-method">getUserWikiTag</span> static method 
 </h1></div>
 
     <section class="multi-line-signature">
       
 
 <span class="returntype"><a href="https://api.dart.dev/stable/3.5.0/dart-core/String-class.html">String</a></span>
-<span class="name ">getUserWikiPage</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="getUserWikiPage-param-userId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">userId</span></span></li>
+<span class="name ">getUserWikiTag</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="getUserWikiTag-param-userId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">userId</span></span></li>
 </ol>)
 
       
@@ -76,11 +76,8 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static String getUserWikiPage(final String userId) =&gt; Uri(
-      scheme: &#39;https&#39;,
-      host: &#39;wiki.openfoodfacts.org&#39;,
-      path: &#39;User:${getUserWikiTag(userId)}&#39;,
-    ).toString();</code></pre>
+  <pre class="language-dart"><code class="language-dart">static String getUserWikiTag(final String userId) =&gt;
+    &#39;${userId.substring(0, 1).toUpperCase()}${userId.substring(1)}&#39;;</code></pre>
 </section>
 
 
@@ -98,7 +95,7 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user-library.html">user</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a></li>
-    <li class="self-crumb">getUserWikiPage static method</li>
+    <li class="self-crumb">getUserWikiTag static method</li>
 </ol>
 
 
