@@ -98,6 +98,7 @@ class JsonHelper {
 
   // only for raw images
   static const String _ALL_IMAGES_TAG_UPLOADED = 'uploaded_t';
+  static const String _ALL_IMAGES_TAG_UPLOADER = 'uploader';
 
   // common to main and raw images
   static const String _ALL_IMAGES_TAG_IMAGE_ID = 'imgid';
@@ -169,6 +170,7 @@ class JsonHelper {
               height: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]),
               url: numberObject[_ALL_IMAGES_TAG_URL],
               uploaded: uploaded,
+              contributor: fieldObject[_ALL_IMAGES_TAG_UPLOADER],
             ),
           );
         }
