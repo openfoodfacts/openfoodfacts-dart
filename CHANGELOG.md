@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.13.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.12.0...v3.13.0) (2024-08-13)
+
+
+### Features
+
+* 893 - 4 new fields for user ([#903](https://github.com/openfoodfacts/openfoodfacts-dart/issues/903)) ([a7e195b](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a7e195b44848067267dafb38b0988459caebb956))
+* 951 - new method User.getUserWikiPage ([#955](https://github.com/openfoodfacts/openfoodfacts-dart/issues/955)) ([f57e51c](https://github.com/openfoodfacts/openfoodfacts-dart/commit/f57e51c7b768a31f46493092ae0dea0919ff1a6d))
+* 956 - added product owner fields ([#961](https://github.com/openfoodfacts/openfoodfacts-dart/issues/961)) ([bd3202b](https://github.com/openfoodfacts/openfoodfacts-dart/commit/bd3202b1d7c39b15675ee5dcb9b850bdfa04b0b3))
+* 962 - link to add a discussion topic on the wiki ([#963](https://github.com/openfoodfacts/openfoodfacts-dart/issues/963)) ([1e357ce](https://github.com/openfoodfacts/openfoodfacts-dart/commit/1e357ce3ebd6871e538c4fca10d19e4d91c9da4f))
+
+
+### Bug Fixes
+
+* 937 - removed home-made user agent header when for web ([#950](https://github.com/openfoodfacts/openfoodfacts-dart/issues/950)) ([b7da12b](https://github.com/openfoodfacts/openfoodfacts-dart/commit/b7da12b58d936b3778465c5a31887bda41e2084b))
+* 941 - respect rate-limits during integration tests ([#943](https://github.com/openfoodfacts/openfoodfacts-dart/issues/943)) ([881dc5b](https://github.com/openfoodfacts/openfoodfacts-dart/commit/881dc5bc6e691083e5993e325b3ca278033ef179))
+
 ## [3.12.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.11.0...v3.12.0) (2024-07-02)
 
 
