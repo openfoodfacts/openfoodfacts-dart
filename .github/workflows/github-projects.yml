@@ -4,11 +4,11 @@ on:
   issues:
     types:
       - opened
-      - labelled
+      - labeled
   pull_request:
     types:
       - opened
-      - labelled
+      - labeled
 jobs:
   add-to-project:
     name: Add issue to project
