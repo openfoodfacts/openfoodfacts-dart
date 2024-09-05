@@ -131,6 +131,25 @@ class HttpHelper {
         ),
       );
 
+  /// Sends an http PUT request to the specified uri.
+  Future<http.Response> doPutRequest(
+    Uri uri,
+    final String jsonBody, {
+    User? user,
+    required final UriHelper uriHelper,
+    final String? bearerToken,
+  }) async =>
+      http.put(
+        uri,
+        headers: _buildHeaders(
+          user: user,
+          uriHelper: uriHelper,
+          addCredentialsToHeader: false,
+          bearerToken: bearerToken,
+        ),
+        body: jsonBody,
+      );
+
   /// Sends an http POST request to the specified uri with a JSON body.
   Future<http.Response> doPostJsonRequest(
     final Uri uri,
