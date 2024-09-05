@@ -51,24 +51,54 @@ void main() {
   group('$OpenFoodAPIClient Folksonomy', () {
     test('hello', () async => await FolksonomyAPIClient.hello());
 
-    test('getProductStats - all', () async {
-      final List<ProductStats> result =
-          await FolksonomyAPIClient.getProductStats();
-      expect(result, isNotEmpty);
-      checkProductStatsList(result);
+    group('$FolksonomyAPIClient Auth', () {
+      const UriHelper uriHelper = uriHelperFolksonomyProd;
+      const User user = TestConstants.TEST_USER;
+
+      test('unknown user', () async {
+        final MaybeError<String> status =
+            await FolksonomyAPIClient.getAuthenticationToken(
+          username: 'magritte',
+          password: 'this is not a password',
+          uriHelper: uriHelper,
+        );
+        expect(status.isError, isTrue);
+        expect(status.statusCode, Session.invalidAuthStatusCode);
+        expect(status.detailError, Session.invalidAuthMessage);
+      });
+
+      test('existing user', () async {
+        final MaybeError<String> token =
+            await FolksonomyAPIClient.getAuthenticationToken(
+          username: user.userId,
+          password: user.password,
+          uriHelper: uriHelper,
+        );
+        expect(token.isError, isFalse);
+        expect(token.value, isNotEmpty);
+      });
     });
 
-    test('getProductStats - found', () async {
-      final List<ProductStats> result =
-          await FolksonomyAPIClient.getProductStats(key: knownKey);
-      expect(result, isNotEmpty);
-      checkProductStatsList(result);
-    });
+    group('$FolksonomyAPIClient getProductStats', () {
+      test('all', () async {
+        final List<ProductStats> result =
+            await FolksonomyAPIClient.getProductStats();
+        expect(result, isNotEmpty);
+        checkProductStatsList(result);
+      });
 
-    test('getProductStats - not found', () async {
-      final List<ProductStats> result =
-          await FolksonomyAPIClient.getProductStats(key: unknownKey);
-      expect(result, isEmpty);
+      test('key - found', () async {
+        final List<ProductStats> result =
+            await FolksonomyAPIClient.getProductStats(key: knownKey);
+        expect(result, isNotEmpty);
+        checkProductStatsList(result);
+      });
+
+      test('key - not found', () async {
+        final List<ProductStats> result =
+            await FolksonomyAPIClient.getProductStats(key: unknownKey);
+        expect(result, isEmpty);
+      });
     });
 
     test('getProducts - found key', () async {
@@ -140,37 +170,6 @@ void main() {
       }
     });
 
-    test('getProductTagWithSubKeys - found', () async {
-      final Map<String, ProductTag> result =
-          await FolksonomyAPIClient.getProductTagWithSubKeys(
-        barcode: knownBarcode,
-        key: knownKey,
-      );
-      expect(result, isNotEmpty);
-      checkProductTagList(result.values);
-    });
-
-    test('getProductTagWithSubKeys - not found', () async {
-      for (final unknownParameter in unknownParameters) {
-        final Map<String, ProductTag> result =
-            await FolksonomyAPIClient.getProductTagWithSubKeys(
-          barcode: unknownParameter['barcode']!,
-          key: unknownParameter['key']!,
-        );
-        expect(result, isEmpty);
-      }
-    });
-
-    /* TODO
-    test('deleteProductTag', () async {
-      await FolksonomyAPIClient.deleteProductTag(
-        barcode: '9310036071GDFFDD174',
-        key: 'packaging:character:dswikidata',
-        version: 21434534534,
-      );
-    }, skip: 'To be fixed and run on TEST env');
-     */
-
     test('getProductTagVersions - found', () async {
       final List<ProductTag> result =
           await FolksonomyAPIClient.getProductTagVersions(
@@ -192,39 +191,140 @@ void main() {
       }
     });
 
-    /* TODO
-    test('updateProductTag', () async {
-      await FolksonomyAPIClient.updateProductTag(
-        productTag: ProductTag(
-          barcode: 'barcode',
-          key: 'key',
-          value: 'value',
-          owner: 'owner',
-          version: 0,
-          editor: 'editor',
-          lastEdit: DateTime.now(),
-          comment: 'comment',
-        ),
-      );
-    }, skip: 'To be fixed and run on TEST env');
-     */
+    test('create', () async {
+      const UriHelper uriHelper = uriHelperFolksonomyProd;
+      const User user = TestConstants.TEST_USER;
+      const String barcode = '123';
+      const String key = 'mykey';
+      const String value1 = 'myvalue1';
+      const String value2 = 'myvalue2';
 
-    /* TODO
-    test('addProductTag', () async {
-      await FolksonomyAPIClient.addProductTag(
-        productTag: ProductTag(
-          barcode: 'barcode',
-          key: 'key',
-          value: 'value',
-          owner: 'owner',
-          version: 0,
-          editor: 'editor',
-          lastEdit: DateTime.now(),
-          comment: 'comment',
-        ),
+      // authentication
+      final MaybeError<String> token =
+          await FolksonomyAPIClient.getAuthenticationToken(
+        username: user.userId,
+        password: user.password,
+        uriHelper: uriHelper,
       );
-    }, skip: 'To be fixed and run on TEST env');
-     */
+      expect(token.isError, isFalse);
+      expect(token.value, isNotEmpty);
+      final String bearerToken = token.value;
+
+      MaybeError<bool> deleteResult;
+      ProductTag? productTag;
+      ProductTag? productTag2;
+
+      productTag = await FolksonomyAPIClient.getProductTag(
+        barcode: barcode,
+        key: key,
+        uriHelper: uriHelper,
+      );
+      if (productTag != null) {
+        expect(productTag.barcode, barcode);
+        expect(productTag.key, key);
+        deleteResult = await FolksonomyAPIClient.deleteProductTag(
+          barcode: productTag.barcode,
+          key: productTag.key,
+          version: productTag.version,
+          bearerToken: bearerToken,
+          uriHelper: uriHelper,
+        );
+        expect(deleteResult.isError, false);
+        expect(deleteResult.value, true);
+      }
+      productTag = await FolksonomyAPIClient.getProductTag(
+        barcode: barcode,
+        key: key,
+        uriHelper: uriHelper,
+      );
+      expect(productTag, isNull);
+
+      MaybeError<bool> addResult = await FolksonomyAPIClient.addProductTag(
+        barcode: barcode,
+        key: key,
+        value: value1,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(addResult.isError, false);
+      expect(addResult.value, true);
+
+      addResult = await FolksonomyAPIClient.addProductTag(
+        barcode: barcode,
+        key: key,
+        value: value2,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(addResult.isError, true);
+
+      productTag = await FolksonomyAPIClient.getProductTag(
+        barcode: barcode,
+        key: key,
+        uriHelper: uriHelper,
+      );
+      expect(productTag, isNotNull);
+      expect(productTag!.barcode, barcode);
+      expect(productTag.key, key);
+      expect(productTag.value, value1);
+      expect(productTag.version, 1);
+      expect(productTag.editor, user.userId);
+
+      MaybeError<bool> updateResult =
+          await FolksonomyAPIClient.updateProductTag(
+        barcode: barcode,
+        key: key,
+        value: value2,
+        version: productTag.version,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      // we expect "version + 1";
+      expect(updateResult.isError, true);
+
+      updateResult = await FolksonomyAPIClient.updateProductTag(
+        barcode: barcode,
+        key: key,
+        value: value2,
+        version: productTag.version + 1,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(updateResult.isError, false);
+      expect(updateResult.value, true);
+
+      productTag2 = await FolksonomyAPIClient.getProductTag(
+        barcode: barcode,
+        key: key,
+        uriHelper: uriHelper,
+      );
+      expect(productTag2, isNotNull);
+      expect(productTag2!.barcode, barcode);
+      expect(productTag2.key, key);
+      expect(productTag2.value, value2);
+      expect(productTag2.version, productTag.version + 1);
+      expect(productTag2.editor, user.userId);
+
+      deleteResult = await FolksonomyAPIClient.deleteProductTag(
+        barcode: barcode,
+        key: key,
+        version: productTag.version,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      // not the right version!
+      expect(deleteResult.isError, true);
+
+      deleteResult = await FolksonomyAPIClient.deleteProductTag(
+        barcode: barcode,
+        key: key,
+        version: productTag2.version,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(deleteResult.isError, false);
+      expect(deleteResult.value, true);
+    });
 
     test('getKeys', () async {
       final Map<String, KeyStats> result = await FolksonomyAPIClient.getKeys();
