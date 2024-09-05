@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the getProducts method from the FolksonomyAPIClient class, for the Dart programming language.">
-  <title>getProducts method - FolksonomyAPIClient class - folksonomy library - Dart API</title>
+  <meta name="description" content="API docs for the addProductTag method from the FolksonomyAPIClient class, for the Dart programming language.">
+  <title>addProductTag method - FolksonomyAPIClient class - folksonomy library - Dart API</title>
 
 
   
@@ -31,9 +31,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_folksonomy/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_folksonomy-library.html">src&#47;folksonomy.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_folksonomy/FolksonomyAPIClient-class.html">FolksonomyAPIClient</a></li>
-    <li class="self-crumb">getProducts static method</li>
+    <li class="self-crumb">addProductTag static method</li>
   </ol>
-  <div class="self-name">getProducts</div>
+  <div class="self-name">addProductTag</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -57,62 +57,54 @@
     data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_folksonomy&#47;FolksonomyAPIClient-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">getProducts</span> static method 
+<h1><span class="kind-method">addProductTag</span> static method 
 </h1></div>
 
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.5.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span>
-<span class="name ">getProducts</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="getProducts-param-key"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">key</span>, </span></li>
-<li><span class="parameter" id="getProducts-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">value</span>, </span></li>
-<li><span class="parameter" id="getProducts-param-owner"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">owner</span>, </span></li>
-<li><span class="parameter" id="getProducts-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriHelper-class.html">UriHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFolksonomyProd</span>, </span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.5.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_maybe_error/MaybeError-class.html">MaybeError</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/bool-class.html">bool</a></span>&gt;</span></span>&gt;</span></span>
+<span class="name ">addProductTag</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="addProductTag-param-barcode"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, </span></li>
+<li><span class="parameter" id="addProductTag-param-key"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">key</span>, </span></li>
+<li><span class="parameter" id="addProductTag-param-value"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">value</span>, </span></li>
+<li><span class="parameter" id="addProductTag-param-ownerIfPrivate"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">ownerIfPrivate</span>, </span></li>
+<li><span class="parameter" id="addProductTag-param-bearerToken"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">bearerToken</span>, </span></li>
+<li><span class="parameter" id="addProductTag-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriHelper-class.html">UriHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFolksonomyProd</span>, </span></li>
 </ol>})
 
       
 
     </section>
     
-<section class="desc markdown">
-  <p>Returns all the products with that <code>key</code>.</p>
-<p>The key of the returned map is the barcode, the value is the tag value.</p>
-</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static Future&lt;Map&lt;String, String&gt;&gt; getProducts({
+  <pre class="language-dart"><code class="language-dart">static Future&lt;MaybeError&lt;bool&gt;&gt; addProductTag({
+  required final String barcode,
   required final String key,
-  final String? value,
-  final String? owner,
+  required final String value,
+  final String? ownerIfPrivate,
+  required final String bearerToken,
   final UriHelper uriHelper = uriHelperFolksonomyProd,
 }) async {
-  final Map&lt;String, dynamic&gt; parameters = _buildJson(
-    owner: owner,
+  final Map&lt;String, dynamic&gt; body = _buildJson(
+    barcode: barcode,
     key: key,
     value: value,
+    version: null,
   );
-  final Response response = await HttpHelper().doGetRequest(
-    uriHelper.getUri(
-      path: &#39;products&#39;,
-      queryParameters: parameters,
-    ),
+  final Response response = await HttpHelper().doPostJsonRequest(
+    uriHelper.getUri(path: &#39;&#47;product&#39;),
+    jsonEncode(body),
     uriHelper: uriHelper,
+    bearerToken: bearerToken,
   );
-  _checkResponse(response);
-  final Map&lt;String, String&gt; result = &lt;String, String&gt;{};
-  final List&lt;dynamic&gt; json =
-      HttpHelper().jsonDecode(response.body) as List&lt;dynamic&gt;;
-  for (var element in json) {
-    final ProductList productList = ProductList.fromJson(element);
-    if (productList.key != key) {
-      throw Exception(&#39;Unexpected key: ${productList.key}&#39;);
-    }
-    result[productList.barcode] = productList.value;
+  if (response.statusCode == 200) {
+    return MaybeError&lt;bool&gt;.value(true);
   }
-  return result;
+  return MaybeError&lt;bool&gt;.responseError(response);
 }</code></pre>
 </section>
 
@@ -131,7 +123,7 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_folksonomy/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_folksonomy-library.html">folksonomy</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_folksonomy/FolksonomyAPIClient-class.html">FolksonomyAPIClient</a></li>
-    <li class="self-crumb">getProducts static method</li>
+    <li class="self-crumb">addProductTag static method</li>
 </ol>
 
 
