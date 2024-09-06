@@ -34,10 +34,11 @@ Personalized search:
 - changed-files:
   - any-glob-to-any-file: 'lib/src/personalized_search/**/*'
 
-Folksonomy Engine:
+🔖 Folksonomy engine:
 - changed-files:
   - any-glob-to-any-file: 'lib/src/folksonomy.dart'
-
+  - any-glob-to-any-file: 'test/api_folksonomy_test.dart'
+  
 📦 Packaging:
 - changed-files:
   - any-glob-to-any-file: 'lib/src/model/TaxonomyPackagingMaterial.dart'
