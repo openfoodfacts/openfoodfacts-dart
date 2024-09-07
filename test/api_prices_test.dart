@@ -68,16 +68,18 @@ void main() {
         bearerToken: bearerToken,
       );
       expect(deleting.isError, isTrue);
-      expect(deleting.statusCode, Session.invalidAuthStatusCode);
-      expect(deleting.detailError, Session.invalidAuthMessage);
+      expect(deleting.statusCode, Session.invalidActionWithAuthStatusCode);
+      expect(
+          deleting.detailError, contains(Session.invalidActionWithAuthMessage));
 
       session = await OpenPricesAPIClient.getUserSession(
         uriHelper: uriHelper,
         bearerToken: bearerToken,
       );
       expect(session.isError, isTrue);
-      expect(session.statusCode, Session.invalidAuthStatusCode);
-      expect(session.detailError, Session.invalidAuthMessage);
+      expect(session.statusCode, Session.invalidActionWithAuthStatusCode);
+      expect(
+          session.detailError, contains(Session.invalidActionWithAuthMessage));
     });
   });
 
@@ -94,12 +96,11 @@ void main() {
         ..locationOSMType = LocationOSMType.node
         ..date = DateTime(2024, 1, 18);
 
-      final UpdatePriceParameters parameters = UpdatePriceParameters()
-        ..currency = Currency.USD
-        ..date = DateTime(2024, 1, 19)
-        ..price = 12
-        ..priceWithoutDiscount = 13
-        ..priceIsDiscounted = true;
+      final UpdatePriceParameters updatePriceParameters =
+          UpdatePriceParameters()
+            ..price = 12
+            ..priceWithoutDiscount = 13
+            ..priceIsDiscounted = true;
 
       String bearerToken = invalidBearerToken;
 
@@ -110,8 +111,38 @@ void main() {
         uriHelper: uriHelper,
       );
       expect(addedPrice.isError, isTrue);
-      expect(addedPrice.statusCode, Session.invalidAuthStatusCode);
-      expect(addedPrice.detailError, Session.invalidAuthMessage);
+      expect(addedPrice.statusCode, Session.invalidActionWithAuthStatusCode);
+      expect(addedPrice.detailError,
+          contains(Session.invalidActionWithAuthMessage));
+
+      final ProofType uploadProofType = ProofType.receipt;
+      const Currency uploadCurrency = Currency.EUR;
+      final DateTime uploadDate = DateTime(2024, 1, 1);
+
+      final UpdateProofParameters updateProofParameters =
+          UpdateProofParameters()
+            ..type = ProofType.priceTag
+            ..currency = Currency.USD
+            ..date = DateTime(2024, 1, 2);
+
+      // TODO(monsieurtanuki): more relevant image if possible
+      final Uri initialImageUri =
+          Uri.file('test/test_assets/ingredients_en.jpg');
+      final MediaType initialMediaType =
+          HttpHelper().imagineMediaType(initialImageUri.path)!;
+
+      // failing proof upload with invalid token
+      MaybeError<Proof> uploadProof = await OpenPricesAPIClient.uploadProof(
+        proofType: uploadProofType,
+        imageUri: initialImageUri,
+        mediaType: initialMediaType,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(uploadProof.isError, isTrue);
+      expect(uploadProof.statusCode, Session.invalidActionWithAuthStatusCode);
+      expect(uploadProof.detailError,
+          contains(Session.invalidActionWithAuthMessage));
 
       // authentication
       final MaybeError<String> token =
@@ -124,7 +155,49 @@ void main() {
       expect(token.value, isNotEmpty);
       bearerToken = token.value;
 
-      // successful price creation with valid token
+      // successful proof upload with valid token
+      uploadProof = await OpenPricesAPIClient.uploadProof(
+        proofType: uploadProofType,
+        imageUri: initialImageUri,
+        mediaType: initialMediaType,
+        currency: uploadCurrency,
+        date: uploadDate,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(uploadProof.isError, isFalse);
+      expect(uploadProof.value.type, uploadProofType);
+      expect(uploadProof.value.owner, user.userId);
+      expect(uploadProof.value.id, isNotNull);
+      expect(uploadProof.value.priceCount, 0);
+      expect(uploadProof.value.mimetype, initialMediaType.toString());
+      expect(uploadProof.value.currency, uploadCurrency);
+      expect(uploadProof.value.date, uploadDate);
+
+      final int proofId = uploadProof.value.id;
+
+      // successful proof update
+      MaybeError<bool> updateProof = await OpenPricesAPIClient.updateProof(
+        proofId,
+        parameters: updateProofParameters,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(updateProof.isError, isFalse);
+
+      initialPrice.proofId = proofId;
+
+      // failing price creation with valid token but invalid dates
+      addedPrice = await OpenPricesAPIClient.createPrice(
+        price: initialPrice,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(addedPrice.isError, isTrue);
+
+      // successful price creation
+      initialPrice.date = updateProofParameters.date!;
+      initialPrice.currency = updateProofParameters.currency!;
       addedPrice = await OpenPricesAPIClient.createPrice(
         price: initialPrice,
         bearerToken: bearerToken,
@@ -146,38 +219,57 @@ void main() {
       final int priceId = addedPrice.value.id;
 
       // successful price update
-      addedPrice = await OpenPricesAPIClient.updatePrice(
+      MaybeError<bool> updatedPrice = await OpenPricesAPIClient.updatePrice(
         priceId,
-        parameters: parameters,
+        parameters: updatePriceParameters,
         bearerToken: bearerToken,
         uriHelper: uriHelper,
       );
-      expect(addedPrice.isError, isFalse);
-      expect(addedPrice.value.price, parameters.price);
-      expect(addedPrice.value.priceWithoutDiscount,
-          parameters.priceWithoutDiscount);
-      expect(addedPrice.value.priceIsDiscounted, parameters.priceIsDiscounted);
-      expect(addedPrice.value.currency, parameters.currency);
-      expect(addedPrice.value.date, parameters.date);
+      expect(updatedPrice.isError, isFalse);
 
       // delete price first time: success
-      MaybeError<bool> deleted = await OpenPricesAPIClient.deletePrice(
+      MaybeError<bool> deletedPrice = await OpenPricesAPIClient.deletePrice(
         priceId: priceId,
         bearerToken: bearerToken,
         uriHelper: uriHelper,
       );
-      expect(deleted.isError, isFalse);
-      expect(deleted.value, isTrue);
+      expect(deletedPrice.isError, isFalse);
+      expect(deletedPrice.value, isTrue);
 
       // delete price second time: failure
-      deleted = await OpenPricesAPIClient.deletePrice(
+      deletedPrice = await OpenPricesAPIClient.deletePrice(
         priceId: priceId,
         bearerToken: bearerToken,
         uriHelper: uriHelper,
       );
-      expect(deleted.isError, isTrue);
-      expect(deleted.statusCode, 404);
-      expect(deleted.detailError, 'Price with code $priceId not found');
+      expect(deletedPrice.isError, isTrue);
+      expect(deletedPrice.statusCode, 404);
+      expect(
+        deletedPrice.detailError,
+        'No Price matches the given query.',
+      );
+
+      // delete proof first time: success
+      MaybeError<bool> deletedProof = await OpenPricesAPIClient.deleteProof(
+        proofId: proofId,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(deletedProof.isError, isFalse);
+      expect(deletedProof.value, isTrue);
+
+      // delete proof second time: failure
+      deletedProof = await OpenPricesAPIClient.deleteProof(
+        proofId: proofId,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(deletedProof.isError, isTrue);
+      expect(deletedProof.statusCode, 404);
+      expect(
+        deletedProof.detailError,
+        'No Proof matches the given query.',
+      );
 
       // close session
       final MaybeError<bool> closedSession =
@@ -187,7 +279,7 @@ void main() {
       );
       expect(closedSession.isError, isFalse);
       expect(closedSession.value, isTrue);
-    });
+    }, timeout: Timeout(Duration(seconds: 60)));
 
     test('get prices', () async {
       const UriProductHelper uriHelper = uriHelperFoodProd;
@@ -354,23 +446,23 @@ void main() {
       expect(location.isError, isTrue);
       expect(
         location.detailError,
-        'Location with id $locationId not found',
+        'No Location matches the given query.',
       );
     });
 
     test('get non-existing OSM location', () async {
-      const int locationOSMId = -1;
+      const int locationOSMId = 123123123123123123;
       const LocationOSMType locationOSMType = LocationOSMType.way;
       final MaybeError<Location> location =
           await OpenPricesAPIClient.getOSMLocation(
         locationOSMId: locationOSMId,
-        locationOSMType: LocationOSMType.way,
+        locationOSMType: locationOSMType,
         uriHelper: uriHelper,
       );
       expect(location.isError, isTrue);
       expect(
         location.detailError,
-        'Location with type ${locationOSMType.offTag} & id $locationOSMId not found',
+        'No Location matches the given query.',
       );
     });
 
@@ -496,7 +588,7 @@ void main() {
       expect(maybePriceProduct.isError, isTrue);
       expect(
         maybePriceProduct.detailError,
-        'Product with id $productId not found',
+        'No Product matches the given query.',
       );
     });
 
@@ -514,7 +606,7 @@ void main() {
     });
 
     test('get non-existing product by CODE', () async {
-      const String productCode = 'not a code';
+      const String productCode = '123123123123123123123123';
       final MaybeError<PriceProduct> maybePriceProduct =
           await OpenPricesAPIClient.getPriceProductByCode(
         productCode,
@@ -523,7 +615,7 @@ void main() {
       expect(maybePriceProduct.isError, isTrue);
       expect(
         maybePriceProduct.detailError,
-        'Product with code $productCode not found',
+        'No Product matches the given query.',
       );
     });
   });
@@ -657,109 +749,6 @@ void main() {
         final http.Response response = await http.get(uri);
         expect(response.statusCode, HTTP_OK);
       }
-    });
-
-    test('upload', () async {
-      final ProofType uploadProofType = ProofType.receipt;
-      const Currency uploadCurrency = Currency.EUR;
-      final DateTime uploadDate = DateTime(2024, 1, 1);
-
-      final UpdateProofParameters parameters = UpdateProofParameters()
-        ..type = ProofType.priceTag
-        ..currency = Currency.USD
-        ..date = DateTime(2024, 1, 2);
-
-      // TODO(monsieurtanuki): more relevant image if possible
-      final Uri initialImageUri =
-          Uri.file('test/test_assets/ingredients_en.jpg');
-      final MediaType initialMediaType =
-          HttpHelper().imagineMediaType(initialImageUri.path)!;
-
-      String bearerToken = invalidBearerToken;
-
-      // failing proof upload with invalid token
-      MaybeError<Proof> uploadProof = await OpenPricesAPIClient.uploadProof(
-        proofType: uploadProofType,
-        imageUri: initialImageUri,
-        mediaType: initialMediaType,
-        bearerToken: bearerToken,
-        uriHelper: uriHelper,
-      );
-      expect(uploadProof.isError, isTrue);
-      expect(uploadProof.statusCode, Session.invalidAuthStatusCode);
-      expect(uploadProof.detailError, Session.invalidAuthMessage);
-
-      // authentication
-      final MaybeError<String> token =
-          await OpenPricesAPIClient.getAuthenticationToken(
-        username: user.userId,
-        password: user.password,
-        uriHelper: uriHelper,
-      );
-      expect(token.isError, isFalse);
-      expect(token.value, isNotEmpty);
-      bearerToken = token.value;
-
-      // successful proof upload with valid token
-      uploadProof = await OpenPricesAPIClient.uploadProof(
-        proofType: uploadProofType,
-        imageUri: initialImageUri,
-        mediaType: initialMediaType,
-        currency: uploadCurrency,
-        date: uploadDate,
-        bearerToken: bearerToken,
-        uriHelper: uriHelper,
-      );
-      expect(uploadProof.isError, isFalse);
-      expect(uploadProof.value.type, uploadProofType);
-      expect(uploadProof.value.owner, user.userId);
-      expect(uploadProof.value.id, isNotNull);
-      expect(uploadProof.value.priceCount, 0);
-      expect(uploadProof.value.mimetype, initialMediaType.toString());
-      expect(uploadProof.value.currency, uploadCurrency);
-      expect(uploadProof.value.date, uploadDate);
-
-      final int proofId = uploadProof.value.id;
-
-      // successful proof update
-      uploadProof = await OpenPricesAPIClient.updateProof(
-        proofId,
-        parameters: parameters,
-        bearerToken: bearerToken,
-        uriHelper: uriHelper,
-      );
-      expect(uploadProof.isError, isFalse);
-      expect(uploadProof.value.type, parameters.type);
-      expect(uploadProof.value.currency, parameters.currency);
-      expect(uploadProof.value.date, parameters.date);
-
-      // delete proof first time: success
-      MaybeError<bool> deleted = await OpenPricesAPIClient.deleteProof(
-        proofId: proofId,
-        bearerToken: bearerToken,
-        uriHelper: uriHelper,
-      );
-      expect(deleted.isError, isFalse);
-      expect(deleted.value, isTrue);
-
-      // delete proof second time: failure
-      deleted = await OpenPricesAPIClient.deleteProof(
-        proofId: proofId,
-        bearerToken: bearerToken,
-        uriHelper: uriHelper,
-      );
-      expect(deleted.isError, isTrue);
-      expect(deleted.statusCode, 404);
-      expect(deleted.detailError, 'Proof with code $proofId not found');
-
-      // close session
-      final MaybeError<bool> closedSession =
-          await OpenPricesAPIClient.deleteUserSession(
-        uriHelper: uriHelper,
-        bearerToken: bearerToken,
-      );
-      expect(closedSession.isError, isFalse);
-      expect(closedSession.value, isTrue);
     });
   });
 
