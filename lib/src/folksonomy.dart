@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:http/http.dart';
 
@@ -6,6 +7,7 @@ import 'model/key_stats.dart';
 import 'model/product_list.dart';
 import 'model/product_stats.dart';
 import 'model/product_tag.dart';
+import 'prices/maybe_error.dart';
 import 'utils/http_helper.dart';
 import 'utils/open_food_api_configuration.dart';
 import 'utils/uri_helper.dart';
@@ -29,30 +31,52 @@ class FolksonomyAPIClient {
     _checkResponse(response);
   }
 
+  /// Authentication: provide username/password and get a bearer token in return.
+  ///
+  /// [username]: Open Food Facts user_id (not email)
+  /// [password]: user password (clear text, but HTTPS encrypted)
+  /// token is returned, to be used in later requests with usual
+  /// "Authorization: bearer token" headers
+  static Future<MaybeError<String>> getAuthenticationToken({
+    required final String username,
+    required final String password,
+    final UriHelper uriHelper = uriHelperFolksonomyProd,
+  }) async {
+    final Uri uri = uriHelper.getUri(
+      path: '/auth',
+    );
+    final Response response = await post(
+      uri,
+      body: <String, String>{
+        'username': username,
+        'password': password,
+      },
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<String>.value(decodedResponse['access_token']);
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<String>.responseError(response);
+  }
+
   /// Returns all the [ProductStats], with an optional filter.
   ///
   /// The result can be filtered with that [key], or with [key] = [value].
   static Future<List<ProductStats>> getProductStats({
     final String? key,
     final String? value,
+    final String? owner,
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
-    final Map<String, String> parameters = <String, String>{};
-    /* TODO
-    if (owner != null) {
-      parameters['owner'] = owner;
-    }
-     */
-    if (key == null && value != null) {
-      throw Exception(
-          'Does a value have a meaning without its key? I don\'t think so.');
-    }
-    if (key != null) {
-      parameters['k'] = key;
-    }
-    if (value != null) {
-      parameters['v'] = value;
-    }
+    final Map<String, dynamic> parameters = _buildJson(
+      owner: owner,
+      key: key,
+      value: value,
+    );
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
         path: 'products/stats',
@@ -80,18 +104,14 @@ class FolksonomyAPIClient {
   static Future<Map<String, String>> getProducts({
     required final String key,
     final String? value,
+    final String? owner,
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
-    final Map<String, String> parameters = <String, String>{};
-    /* TODO
-    if (owner != null) {
-      parameters['owner'] = owner;
-    }
-     */
-    parameters['k'] = key;
-    if (value != null) {
-      parameters['v'] = value;
-    }
+    final Map<String, dynamic> parameters = _buildJson(
+      owner: owner,
+      key: key,
+      value: value,
+    );
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
         path: 'products',
@@ -118,14 +138,12 @@ class FolksonomyAPIClient {
   /// The key of the returned map is the tag key.
   static Future<Map<String, ProductTag>> getProductTags({
     required final String barcode,
+    final String? owner,
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
-    final Map<String, String> parameters = <String, String>{};
-    /* TODO
-    if (owner != null) {
-      parameters['owner'] = owner;
-    }
-     */
+    final Map<String, String> parameters = <String, String>{
+      if (owner != null) 'owner': owner,
+    };
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
         path: 'product/$barcode',
@@ -154,14 +172,12 @@ class FolksonomyAPIClient {
   static Future<ProductTag?> getProductTag({
     required final String barcode,
     required final String key,
+    final String? owner,
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
-    final Map<String, String> parameters = <String, String>{};
-    /* TODO
-    if (owner != null) {
-      parameters['owner'] = owner;
-    }
-     */
+    final Map<String, String> parameters = <String, String>{
+      if (owner != null) 'owner': owner,
+    };
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
         path: 'product/$barcode/$key',
@@ -186,17 +202,14 @@ class FolksonomyAPIClient {
   /// Returns all the [ProductTag]s for this product, with their subkeys.
   ///
   /// The key of the returned map is the key.
+  // TODO: deprecated from 2024-09-05; remove when old enough
+  @Deprecated('Not supported anymore; use getProductTags instead')
   static Future<Map<String, ProductTag>> getProductTagWithSubKeys({
     required final String barcode,
     required final String key,
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Map<String, String> parameters = <String, String>{};
-    /* TODO
-    if (owner != null) {
-      parameters['owner'] = owner;
-    }
-     */
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
         path: 'product/$barcode/$key*', // look at the star!
@@ -219,43 +232,41 @@ class FolksonomyAPIClient {
     return result;
   }
 
-/* TODO
-Future<void> deleteProductTag({
-  required final String barcode,
-  required final String key,
-  required final int version,
-  final QueryType? queryType,
-}) async {
-  final Map<String, String> parameters = <String, String>{};
-  /* TODO
-    if (owner != null) {
-      parameters['owner'] = owner;
+  static Future<MaybeError<bool>> deleteProductTag({
+    required final String barcode,
+    required final String key,
+    required final int version,
+    final String? owner,
+    required final String bearerToken,
+    final UriHelper uriHelper = uriHelperFolksonomyProd,
+  }) async {
+    final Response response = await HttpHelper().doDeleteRequest(
+      uriHelper.getUri(
+        path: 'product/$barcode/$key',
+        queryParameters: {
+          'version': '$version',
+          if (owner != null) 'owner': owner,
+        },
+      ),
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    if (response.statusCode == 200) {
+      return MaybeError<bool>.value(true);
     }
-     */
-  final Response response = await HttpHelper().doDeleteRequest(
-    UriHelper.getFolksonomyUri(
-      path: 'product/$barcode/$key',
-      queryParameters: parameters,
-      queryType: queryType,
-    ),
-    queryType: queryType,
-  );
-  _checkResponse(response);
-}
- */
+    return MaybeError<bool>.responseError(response);
+  }
 
   /// Returns the versions of [ProductTag] for this [barcode] and [key].
   static Future<List<ProductTag>> getProductTagVersions({
     required final String barcode,
     required final String key,
+    final String? owner,
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
-    final Map<String, String> parameters = <String, String>{};
-    /* TODO
-    if (owner != null) {
-      parameters['owner'] = owner;
-    }
-     */
+    final Map<String, String> parameters = <String, String>{
+      if (owner != null) 'owner': owner,
+    };
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
         path: 'product/$barcode/$key/versions',
@@ -277,69 +288,89 @@ Future<void> deleteProductTag({
     return result;
   }
 
-  /* TODO
-  /// productTag.version must be equal to previous version + 1
-  static Future<void> updateProductTag({
-    required final ProductTag productTag,
-    final QueryType? queryType,
-  }) async {
-    final Map<String, String> parameters = <String, String>{};
-    /* TODO
-    if (owner != null) {
-      parameters['owner'] = owner;
-    }
-     */
-    final Response response = await HttpHelper().doPutRequest(
-      UriHelper.getFolksonomyUri(
-        path: 'product',
-        queryParameters: parameters,
-        queryType: queryType,
-      ),
-      productTag.toJson().toString(),
-      userAgent: OpenFoodAPIConfiguration.userAgent,
-      queryType: queryType,
-    );
-    _checkResponse(response);
-  }
-   */
+  static Map<String, dynamic> _buildJson({
+    final String? barcode,
+    final String? key,
+    final String? value,
+    final int? version,
+    final String? owner,
+  }) =>
+      <String, dynamic>{
+        if (barcode != null) 'product': barcode,
+        if (owner != null) 'owner': owner,
+        if (key != null) 'k': key,
+        if (value != null) 'v': value,
+        if (version != null) 'version': version,
+      };
 
-  /* TODO
-  /// productTag.version must be equal to 1
-  static Future<void> addProductTag({
-    required final ProductTag productTag,
-    final User? user,
-    final QueryType? queryType,
+  /// productTag.version must be equal to previous version + 1
+  static Future<MaybeError<bool>> updateProductTag({
+    required final String barcode,
+    required final String key,
+    required final String value,
+    required final int version,
+    final String? ownerIfPrivate,
+    required final String bearerToken,
+    final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
-    final Map<String, String> parameters = <String, String>{};
-    /* TODO
-    if (owner != null) {
-      parameters['owner'] = owner;
-    }
-     */
-    final Response response = await HttpHelper().doPostRequest(
-      UriHelper.getFolksonomyUri(
-        path: 'product',
-        queryParameters: parameters,
-        queryType: queryType,
-      ),
-      {}, // TODO later productTag.toJson(),
-      user,
-      queryType: queryType,
+    final Map<String, dynamic> body = _buildJson(
+      barcode: barcode,
+      key: key,
+      value: value,
+      version: version,
     );
-    _checkResponse(response);
+    final Response response = await HttpHelper().doPutRequest(
+      uriHelper.getUri(
+        path: 'product',
+        queryParameters: {
+          'version': '$version',
+          if (ownerIfPrivate != null) 'owner': ownerIfPrivate,
+        },
+      ),
+      jsonEncode(body),
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    if (response.statusCode == 200) {
+      return MaybeError<bool>.value(true);
+    }
+    return MaybeError<bool>.responseError(response);
   }
-   */
+
+  static Future<MaybeError<bool>> addProductTag({
+    required final String barcode,
+    required final String key,
+    required final String value,
+    final String? ownerIfPrivate,
+    required final String bearerToken,
+    final UriHelper uriHelper = uriHelperFolksonomyProd,
+  }) async {
+    final Map<String, dynamic> body = _buildJson(
+      barcode: barcode,
+      key: key,
+      value: value,
+      version: null,
+    );
+    final Response response = await HttpHelper().doPostJsonRequest(
+      uriHelper.getUri(path: '/product'),
+      jsonEncode(body),
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    if (response.statusCode == 200) {
+      return MaybeError<bool>.value(true);
+    }
+    return MaybeError<bool>.responseError(response);
+  }
 
   /// Returns the list of tag keys with statistics.
   static Future<Map<String, KeyStats>> getKeys({
+    final String? owner,
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
-    final Map<String, String> parameters = <String, String>{};
-    /* TODO "The keys list can be restricted to private tags from some owner"
-    if (owner != null) {
-      parameters['owner'] = owner;
-    }
-     */
+    final Map<String, String> parameters = <String, String>{
+      if (owner != null) 'owner': owner,
+    };
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
         path: 'keys',
