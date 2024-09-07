@@ -94,7 +94,7 @@
     uriHelper: uriHelper,
     bearerToken: bearerToken,
   );
-  if (response.statusCode == 200) {
+  if (response.statusCode == 204) {
     return MaybeError&lt;bool&gt;.value(true);
   }
   return MaybeError&lt;bool&gt;.responseError(response);
