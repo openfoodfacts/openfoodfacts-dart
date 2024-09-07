@@ -315,7 +315,7 @@ class OpenPricesAPIClient {
       uriHelper: uriHelper,
       bearerToken: bearerToken,
     );
-    if (response.statusCode == 200) {
+    if (response.statusCode == 204) {
       return MaybeError<bool>.value(true);
     }
     return MaybeError<bool>.responseError(response);
@@ -369,7 +369,7 @@ class OpenPricesAPIClient {
   ///
   /// This endpoint requires authentication.
   /// A user can update only owned prices.
-  static Future<MaybeError<Price>> updatePrice(
+  static Future<MaybeError<bool>> updatePrice(
     final int priceId, {
     required final UpdatePriceParameters parameters,
     final UriProductHelper uriHelper = uriHelperFoodProd,
@@ -388,14 +388,9 @@ class OpenPricesAPIClient {
       addUserAgentParameters: false,
     );
     if (response.statusCode == 200) {
-      try {
-        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        return MaybeError<Price>.value(Price.fromJson(decodedResponse));
-      } catch (e) {
-        //
-      }
+      return MaybeError<bool>.value(true);
     }
-    return MaybeError<Price>.responseError(response);
+    return MaybeError<bool>.responseError(response);
   }
 
   /// Deletes a price.
@@ -540,7 +535,7 @@ class OpenPricesAPIClient {
   ///
   /// This endpoint requires authentication.
   /// A user can update only owned proofs.
-  static Future<MaybeError<Proof>> updateProof(
+  static Future<MaybeError<bool>> updateProof(
     final int proofId, {
     required final UpdateProofParameters parameters,
     final UriProductHelper uriHelper = uriHelperFoodProd,
@@ -559,14 +554,9 @@ class OpenPricesAPIClient {
       addUserAgentParameters: false,
     );
     if (response.statusCode == 200) {
-      try {
-        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        return MaybeError<Proof>.value(Proof.fromJson(decodedResponse));
-      } catch (e) {
-        //
-      }
+      return MaybeError<bool>.value(true);
     }
-    return MaybeError<Proof>.responseError(response);
+    return MaybeError<bool>.responseError(response);
   }
 
   /// Deletes a proof.

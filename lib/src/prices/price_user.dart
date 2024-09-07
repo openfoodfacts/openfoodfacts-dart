@@ -18,7 +18,7 @@ class PriceUser extends JsonObject {
 
   /// Number of prices for this user.
   @JsonKey(name: 'is_moderator')
-  late bool isModerator;
+  bool? isModerator;
 
   PriceUser();
 
