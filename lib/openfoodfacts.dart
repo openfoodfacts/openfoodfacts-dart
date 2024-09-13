@@ -48,6 +48,7 @@ export 'src/model/parameter/without_additives.dart';
 export 'src/model/per_size.dart';
 export 'src/model/product.dart';
 export 'src/model/product_freshness.dart';
+export 'src/model/product_type.dart';
 export 'src/model/product_image.dart';
 export 'src/model/product_packaging.dart';
 export 'src/model/product_result_field_answer.dart';

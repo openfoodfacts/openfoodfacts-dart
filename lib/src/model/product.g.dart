@@ -101,6 +101,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
       noNutritionData: JsonHelper.checkboxFromJSON(json['no_nutrition_data']),
     )
+      ..productType =
+          $enumDecodeNullable(_$ProductTypeEnumMap, json['product_type'])
       ..genericNameInLanguages =
           LanguageHelper.fromJsonStringMap(json['generic_name_in_languages'])
       ..abbreviatedName = json['abbreviated_product_name'] as String?
@@ -179,6 +181,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
 Map<String, dynamic> _$ProductToJson(Product instance) {
   final val = <String, dynamic>{
     'code': instance.barcode,
+    'product_type': _$ProductTypeEnumMap[instance.productType],
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -316,6 +319,13 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   val['nutriments'] = Nutriments.toJsonHelper(instance.nutriments);
   return val;
 }
+
+const _$ProductTypeEnumMap = {
+  ProductType.food: 'food',
+  ProductType.beauty: 'beauty',
+  ProductType.petFood: 'petfood',
+  ProductType.product: 'product',
+};
 
 const _$ImageFieldEnumMap = {
   ImageField.FRONT: 'FRONT',

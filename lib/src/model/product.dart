@@ -13,6 +13,7 @@ import 'nutriments.dart';
 import 'owner_field.dart';
 import 'product_image.dart';
 import 'product_packaging.dart';
+import 'product_type.dart';
 import '../interface/json_object.dart';
 import '../utils/json_helper.dart';
 import '../utils/language_helper.dart';
@@ -89,6 +90,10 @@ class Product extends JsonObject {
   /// Barcode of the product. Will very very very often be not null.
   @JsonKey(name: 'code')
   String? barcode;
+
+  /// Type of the product (e.g. "pet food").
+  @JsonKey(name: 'product_type')
+  ProductType? productType;
 
   /// Product name, either set directly or taken from one of the localizations.
   ///
