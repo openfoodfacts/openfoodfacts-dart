@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.14.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.13.0...v3.14.0) (2024-09-07)
+
+
+### Features
+
+* edit methods for folksonomy ([#967](https://github.com/openfoodfacts/openfoodfacts-dart/issues/967)) ([3775abb](https://github.com/openfoodfacts/openfoodfacts-dart/commit/3775abb5f3619efa683e7382df24c2021df90b40))
+
+
+### Bug Fixes
+
+* 970 - refactored around new Prices API ([#971](https://github.com/openfoodfacts/openfoodfacts-dart/issues/971)) ([a8c696b](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a8c696bae5a0453559b3cf745ec00ec5dcd5d08c))
+
 ## [3.13.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.12.0...v3.13.0) (2024-08-13)
 
 

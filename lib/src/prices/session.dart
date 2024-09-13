@@ -30,6 +30,16 @@ class Session extends JsonObject {
   @override
   Map<String, dynamic> toJson() => _$SessionToJson(this);
 
+  /// Status Code when the authentication fails.
   static const int invalidAuthStatusCode = 401;
+
+  /// Error message when the authentication fails.
   static const String invalidAuthMessage = 'Invalid authentication credentials';
+
+  /// Status Code when we try an edit operation with a wrong authentication.
+  static const int invalidActionWithAuthStatusCode = 403;
+
+  /// Error message when we try an edit operation with a wrong authentication.
+  static const String invalidActionWithAuthMessage =
+      'Authentication credentials were not provided.';
 }

@@ -9,7 +9,7 @@ part of 'price_user.dart';
 PriceUser _$PriceUserFromJson(Map<String, dynamic> json) => PriceUser()
   ..userId = json['user_id'] as String
   ..priceCount = (json['price_count'] as num).toInt()
-  ..isModerator = json['is_moderator'] as bool;
+  ..isModerator = json['is_moderator'] as bool?;
 
 Map<String, dynamic> _$PriceUserToJson(PriceUser instance) => <String, dynamic>{
       'user_id': instance.userId,
