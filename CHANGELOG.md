@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.15.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.14.0...v3.15.0) (2024-09-18)
+
+
+### Features
+
+* 972 - new "product_type" field for Product ([#973](https://github.com/openfoodfacts/openfoodfacts-dart/issues/973)) ([3613a0e](https://github.com/openfoodfacts/openfoodfacts-dart/commit/3613a0ec2ecc987e4c7078ace20c42a05c3c5fa6))
+
 ## [3.14.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.13.0...v3.14.0) (2024-09-07)
 
 
