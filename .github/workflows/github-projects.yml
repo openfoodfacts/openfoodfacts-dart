@@ -22,19 +22,19 @@ jobs:
           label-operator: AND
       - uses: actions/add-to-project@main
         with:
-          project-url: https://github.com/orgs/openfoodfacts/projects/36 # Add issue to the open pet food facts project
+          project-url: https://github.com/orgs/openfoodfacts/projects/36 # Add issue to the Open Pet Food Facts project
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labeled: 🐾 Open Pet Food Facts
           label-operator: OR
       - uses: actions/add-to-project@main
         with:
-          project-url: https://github.com/orgs/openfoodfacts/projects/11 # Add issue to the open products facts project
+          project-url: https://github.com/orgs/openfoodfacts/projects/43 # Add issue to the Open Products Facts project
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labeled: 📸 Open Products Facts
           label-operator: OR
       - uses: actions/add-to-project@main
         with:
-          project-url: https://github.com/orgs/openfoodfacts/projects/37 # Add issue to the open beauty facts project
+          project-url: https://github.com/orgs/openfoodfacts/projects/37 # Add issue to the Open Beauty Facts project
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labeled: 🧴 Open Beauty Facts
           label-operator: OR
@@ -52,19 +52,19 @@ jobs:
           label-operator: OR
       - uses: actions/add-to-project@main
         with:
-          project-url: https://github.com/orgs/openfoodfacts/projects/5 # Add issue to the folksonomy project
+          project-url: https://github.com/orgs/openfoodfacts/projects/5 # Add issue to the Folksonomy project
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labeled: 🏷️ Folksonomy Project
           label-operator: OR         
       - uses: actions/add-to-project@main
         with:
-          project-url: https://github.com/orgs/openfoodfacts/projects/44 # Add issue to the data quality project
+          project-url: https://github.com/orgs/openfoodfacts/projects/44 # Add issue to the Data Quality project
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labeled: 🧽 Data quality
           label-operator: OR    
       - uses: actions/add-to-project@main
         with:
-          project-url: https://github.com/orgs/openfoodfacts/projects/82 # Add issue to the search project
+          project-url: https://github.com/orgs/openfoodfacts/projects/82 # Add issue to the Search project
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labeled: 🔎 Search
           label-operator: OR
