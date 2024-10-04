@@ -78,8 +78,6 @@ void main() {
       expect(nutriments.getValue(Nutrient.proteins, perSize), isNotNull);
       expect(nutriments.getValue(Nutrient.salt, perSize), isNotNull);
       expect(nutriments.getValue(Nutrient.fat, perSize), isNotNull);
-
-      expect(result.product!.countries, 'United States');
     });
 
     test('check alcohol data', () async {

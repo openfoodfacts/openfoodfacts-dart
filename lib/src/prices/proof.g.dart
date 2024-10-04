@@ -9,6 +9,7 @@ part of 'proof.dart';
 Proof _$ProofFromJson(Map<String, dynamic> json) => Proof()
   ..id = (json['id'] as num).toInt()
   ..filePath = json['file_path'] as String?
+  ..imageThumbPath = json['image_thumb_path'] as String?
   ..mimetype = json['mimetype'] as String
   ..type = $enumDecodeNullable(_$ProofTypeEnumMap, json['type'])
   ..priceCount = (json['price_count'] as num).toInt()
@@ -28,6 +29,7 @@ Proof _$ProofFromJson(Map<String, dynamic> json) => Proof()
 Map<String, dynamic> _$ProofToJson(Proof instance) => <String, dynamic>{
       'id': instance.id,
       'file_path': instance.filePath,
+      'image_thumb_path': instance.imageThumbPath,
       'mimetype': instance.mimetype,
       'type': _$ProofTypeEnumMap[instance.type],
       'price_count': instance.priceCount,
@@ -46,6 +48,7 @@ const _$ProofTypeEnumMap = {
   ProofType.priceTag: 'PRICE_TAG',
   ProofType.receipt: 'RECEIPT',
   ProofType.gdprRequest: 'GDPR_REQUEST',
+  ProofType.shopImport: 'SHOP_IMPORT',
 };
 
 const _$LocationOSMTypeEnumMap = {

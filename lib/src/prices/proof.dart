@@ -24,6 +24,10 @@ class Proof extends JsonObject {
   @JsonKey(name: 'file_path')
   String? filePath;
 
+  /// Image thumb file path. Read-only.
+  @JsonKey(name: 'image_thumb_path')
+  String? imageThumbPath;
+
   /// Mime type. Read-only.
   @JsonKey()
   late String mimetype;
@@ -89,12 +93,25 @@ class Proof extends JsonObject {
   @override
   Map<String, dynamic> toJson() => _$ProofToJson(this);
 
-  /// Returns the URL of the proof image.
-  Uri? getFileUrl({required final UriProductHelper uriProductHelper}) =>
-      filePath == null
+  /// Returns the URL of the proof image, thumbnail or full.
+  Uri? getFileUrl({
+    required final UriProductHelper uriProductHelper,
+    final bool isThumbnail = false,
+  }) =>
+      _getFileUrl(
+        uriProductHelper: uriProductHelper,
+        path: isThumbnail ? imageThumbPath : filePath,
+      );
+
+  /// Returns the URL of a proof image.
+  static Uri? _getFileUrl({
+    required final UriProductHelper uriProductHelper,
+    required String? path,
+  }) =>
+      path == null
           ? null
           : OpenPricesAPIClient.getUri(
-              path: 'img/$filePath',
+              path: 'img/$path',
               uriHelper: uriProductHelper,
               addUserAgentParameters: false,
             );

@@ -12,7 +12,10 @@ enum ProofType implements OffTagged {
   receipt(offTag: 'RECEIPT'),
 
   @JsonValue('GDPR_REQUEST')
-  gdprRequest(offTag: 'GDPR_REQUEST');
+  gdprRequest(offTag: 'GDPR_REQUEST'),
+
+  @JsonValue('SHOP_IMPORT')
+  shopImport(offTag: 'SHOP_IMPORT');
 
   const ProofType({
     required this.offTag,
