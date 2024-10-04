@@ -8,7 +8,7 @@ part 'location.g.dart';
 
 /// Location object in the Prices API.
 ///
-/// cf. `LocationBase` in https://prices.openfoodfacts.net/docs
+/// cf. `Location` in https://prices.openfoodfacts.org/api/docs
 @JsonSerializable()
 class Location extends JsonObject {
   /// ID of the location in OpenStreetMap: the store where the product was bought.
@@ -25,7 +25,19 @@ class Location extends JsonObject {
 
   /// Number of prices for this location.
   @JsonKey(name: 'price_count')
-  late int priceCount;
+  int? priceCount;
+
+  /// Number of users for this location.
+  @JsonKey(name: 'user_count')
+  int? userCount;
+
+  /// Number of products for this location.
+  @JsonKey(name: 'product_count')
+  int? productCount;
+
+  /// Number of proofs for this location.
+  @JsonKey(name: 'proof_count')
+  int? proofCount;
 
   /// ID in the Prices API.
   @JsonKey(name: 'id')
@@ -65,7 +77,7 @@ class Location extends JsonObject {
   @JsonKey(fromJson: JsonHelper.stringTimestampToDate)
   late DateTime created;
 
-  /// Date when the product was bought.
+  /// Latest update timestamp.
   @JsonKey(fromJson: JsonHelper.nullableStringTimestampToDate)
   DateTime? updated;
 
