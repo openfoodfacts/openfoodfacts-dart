@@ -96,7 +96,7 @@ class Proof extends JsonObject {
   /// Returns the URL of the proof image, thumbnail or full.
   Uri? getFileUrl({
     required final UriProductHelper uriProductHelper,
-    final bool isThumbnail = true,
+    final bool isThumbnail = false,
   }) =>
       _getFileUrl(
         uriProductHelper: uriProductHelper,
