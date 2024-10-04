@@ -20,6 +20,57 @@ void main() {
       expect(status.isError, isFalse);
       expect(status.value, OpenPricesAPIClient.statusRunning);
     });
+
+    test('getStats', () async {
+      final MaybeError<PriceTotalStats> stats =
+          await OpenPricesAPIClient.getStats(uriHelper: uriHelper);
+      expect(stats.isError, isFalse);
+      expect(stats.value.priceCount, greaterThan(0));
+      expect(stats.value.priceTypeProductCodeCount, greaterThan(0));
+      expect(
+        stats.value.priceTypeProductCodeCount,
+        lessThanOrEqualTo(stats.value.priceCount!),
+      );
+      expect(stats.value.priceTypeCategoryTagCount, greaterThan(0));
+      expect(
+        stats.value.priceTypeCategoryTagCount,
+        lessThanOrEqualTo(stats.value.priceCount!),
+      );
+      expect(stats.value.productCount, greaterThan(0));
+      expect(stats.value.productWithPriceCount, greaterThan(0));
+      expect(
+        stats.value.productWithPriceCount,
+        lessThanOrEqualTo(stats.value.productCount!),
+      );
+      expect(stats.value.locationCount, greaterThan(0));
+      expect(stats.value.locationWithPriceCount, greaterThan(0));
+      expect(
+        stats.value.locationWithPriceCount,
+        lessThanOrEqualTo(stats.value.locationCount!),
+      );
+      expect(stats.value.proofCount, greaterThan(0));
+      expect(stats.value.proofWithPriceCount, greaterThan(0));
+      expect(
+        stats.value.proofWithPriceCount,
+        lessThanOrEqualTo(stats.value.proofCount!),
+      );
+      expect(stats.value.proofTypePriceTagCount, greaterThan(0));
+      expect(
+        stats.value.proofTypeReceiptCount,
+        lessThanOrEqualTo(stats.value.proofCount!),
+      );
+      expect(stats.value.proofTypeReceiptCount, greaterThan(0));
+      expect(
+        stats.value.proofTypeReceiptCount,
+        lessThanOrEqualTo(stats.value.proofCount!),
+      );
+      expect(stats.value.userCount, greaterThan(0));
+      expect(stats.value.userWithPriceCount, greaterThan(0));
+      expect(
+        stats.value.userWithPriceCount,
+        lessThanOrEqualTo(stats.value.userCount!),
+      );
+    });
   });
 
   group('$OpenPricesAPIClient Auth', () {
@@ -744,8 +795,20 @@ void main() {
       expect(maybeProof.value.mimetype, proof.mimetype);
       expect(maybeProof.value.created, proof.created);
       expect(maybeProof.value.filePath, proof.filePath);
+      expect(maybeProof.value.imageThumbPath, proof.imageThumbPath);
       if (proof.filePath != null) {
-        final Uri uri = proof.getFileUrl(uriProductHelper: uriHelper)!;
+        final Uri uri = proof.getFileUrl(
+          uriProductHelper: uriHelper,
+          isThumbnail: false,
+        )!;
+        final http.Response response = await http.get(uri);
+        expect(response.statusCode, HTTP_OK);
+      }
+      if (proof.imageThumbPath != null) {
+        final Uri uri = proof.getFileUrl(
+          uriProductHelper: uriHelper,
+          isThumbnail: true,
+        )!;
         final http.Response response = await http.get(uri);
         expect(response.statusCode, HTTP_OK);
       }

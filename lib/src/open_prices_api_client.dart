@@ -21,6 +21,7 @@ import 'prices/get_users_result.dart';
 import 'prices/location.dart';
 import 'prices/location_osm_type.dart';
 import 'prices/price_product.dart';
+import 'prices/price_total_stats.dart';
 import 'prices/proof_type.dart';
 import 'prices/session.dart';
 import 'prices/update_price_parameters.dart';
@@ -611,5 +612,30 @@ class OpenPricesAPIClient {
       }
     }
     return MaybeError<GetUsersResult>.responseError(response);
+  }
+
+  /// Returns the total stats.
+  static Future<MaybeError<PriceTotalStats>> getStats({
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Uri uri = getUri(
+      path: '/api/v1/stats',
+      uriHelper: uriHelper,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<PriceTotalStats>.value(
+          PriceTotalStats.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<PriceTotalStats>.responseError(response);
   }
 }

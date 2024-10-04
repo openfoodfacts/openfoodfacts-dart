@@ -8,7 +8,10 @@ part of 'price_product.dart';
 
 PriceProduct _$PriceProductFromJson(Map<String, dynamic> json) => PriceProduct()
   ..code = json['code'] as String
-  ..priceCount = (json['price_count'] as num).toInt()
+  ..priceCount = (json['price_count'] as num?)?.toInt()
+  ..locationCount = (json['location_count'] as num?)?.toInt()
+  ..userCount = (json['user_count'] as num?)?.toInt()
+  ..proofCount = (json['proof_count'] as num?)?.toInt()
   ..productId = (json['id'] as num).toInt()
   ..source = $enumDecodeNullable(_$FlavorEnumMap, json['source'])
   ..name = json['product_name'] as String?
@@ -34,6 +37,9 @@ Map<String, dynamic> _$PriceProductToJson(PriceProduct instance) =>
     <String, dynamic>{
       'code': instance.code,
       'price_count': instance.priceCount,
+      'location_count': instance.locationCount,
+      'user_count': instance.userCount,
+      'proof_count': instance.proofCount,
       'id': instance.productId,
       'source': _$FlavorEnumMap[instance.source],
       'product_name': instance.name,

@@ -114,6 +114,7 @@ export 'src/prices/order_by.dart';
 export 'src/prices/price.dart';
 export 'src/prices/price_per.dart';
 export 'src/prices/price_product.dart';
+export 'src/prices/price_total_stats.dart';
 export 'src/prices/price_user.dart';
 export 'src/prices/proof.dart';
 export 'src/prices/proof_type.dart';

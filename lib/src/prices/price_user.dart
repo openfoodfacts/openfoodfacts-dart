@@ -6,7 +6,7 @@ part 'price_user.g.dart';
 
 /// Price user object.
 ///
-/// cf. `UserBase`  in https://prices.openfoodfacts.org/api/docs
+/// cf. `User`  in https://prices.openfoodfacts.org/api/docs
 @JsonSerializable()
 class PriceUser extends JsonObject {
   @JsonKey(name: 'user_id')
@@ -14,11 +14,19 @@ class PriceUser extends JsonObject {
 
   /// Number of prices for this user.
   @JsonKey(name: 'price_count')
-  late int priceCount;
+  int? priceCount;
 
-  /// Number of prices for this user.
-  @JsonKey(name: 'is_moderator')
-  bool? isModerator;
+  /// Number of locations for this user.
+  @JsonKey(name: 'location_count')
+  int? locationCount;
+
+  /// Number of products for this user.
+  @JsonKey(name: 'product_count')
+  int? productCount;
+
+  /// Number of proofs for this user.
+  @JsonKey(name: 'proof_count')
+  int? proofCount;
 
   PriceUser();
 

@@ -8,7 +8,7 @@ part 'price_product.g.dart';
 
 /// Product object in the Prices API.
 ///
-/// cf. `ProductFull` in https://prices.openfoodfacts.net/docs
+/// cf. `ProductFull` in https://prices.openfoodfacts.org/api/docs
 @JsonSerializable()
 class PriceProduct extends JsonObject {
   /// Barcode (EAN) of the product, as a string.
@@ -17,7 +17,19 @@ class PriceProduct extends JsonObject {
 
   /// Number of prices for this product.
   @JsonKey(name: 'price_count')
-  late int priceCount;
+  int? priceCount;
+
+  /// Number of locations for this product.
+  @JsonKey(name: 'location_count')
+  int? locationCount;
+
+  /// Number of users for this product.
+  @JsonKey(name: 'user_count')
+  int? userCount;
+
+  /// Number of proofs for this product.
+  @JsonKey(name: 'proof_count')
+  int? proofCount;
 
   @JsonKey(name: 'id')
   late int productId;
