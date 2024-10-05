@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.16.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.15.0...v3.16.0) (2024-10-04)
+
+
+### Features
+
+* 978 - new prices features (thumbnails, stats) ([#982](https://github.com/openfoodfacts/openfoodfacts-dart/issues/982)) ([b007587](https://github.com/openfoodfacts/openfoodfacts-dart/commit/b007587c2a3a5906c96375ec788f938296457781))
+
+
+### Bug Fixes
+
+* Update github-projects.yml for OPF ([#980](https://github.com/openfoodfacts/openfoodfacts-dart/issues/980)) ([0d3f6fc](https://github.com/openfoodfacts/openfoodfacts-dart/commit/0d3f6fcc5bee067bf92c218b1f05ddc661771970))
+
 ## [3.15.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.14.0...v3.15.0) (2024-09-18)
 
 
