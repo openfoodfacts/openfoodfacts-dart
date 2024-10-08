@@ -268,9 +268,4 @@ enum PnnsGroup2 implements OffTagged {
 
   /// Name in English
   final String name;
-
-  /// Returns the id of the subgroup
-  // TODO: deprecated from 2023-11-15; remove when old enough
-  @Deprecated('Use offTag instead')
-  String get id => offTag;
 }

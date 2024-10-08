@@ -135,21 +135,23 @@ class UriProductHelper extends UriHelper {
   /// Returns the barcode sub-folder (without trailing '/').
   ///
   /// For instance:
-  /// * `12345678` for barcode `12345678`
-  /// * `123/456/789` for barcode `123456789`
-  /// * `123/456/789/0` for barcode `1234567890`
+  /// * `000/001/234/5678` for barcode `12345678`
+  /// * `000/012/345/6789` for barcode `123456789`
+  /// * `000/123/456/7890` for barcode `1234567890`
   /// * `123/456/789/0123` for barcode `1234567890123`
   static String getBarcodeSubPath(final String barcode) {
-    if (barcode.length < 9) {
-      return barcode;
+    const int typicalLength = 13;
+    final int length = barcode.length;
+    final String workBarcode;
+    if (length >= typicalLength) {
+      workBarcode = barcode;
+    } else {
+      workBarcode = '${'0' * (typicalLength - length)}$barcode';
     }
-    final String p1 = barcode.substring(0, 3);
-    final String p2 = barcode.substring(3, 6);
-    final String p3 = barcode.substring(6, 9);
-    if (barcode.length == 9) {
-      return '$p1/$p2/$p3';
-    }
-    final String p4 = barcode.substring(9);
+    final String p1 = workBarcode.substring(0, 3);
+    final String p2 = workBarcode.substring(3, 6);
+    final String p3 = workBarcode.substring(6, 9);
+    final String p4 = workBarcode.substring(9);
     return '$p1/$p2/$p3/$p4';
   }
 }

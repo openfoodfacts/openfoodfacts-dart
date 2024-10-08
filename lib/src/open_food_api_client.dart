@@ -37,7 +37,6 @@ import 'model/user.dart';
 import 'utils/abstract_query_configuration.dart';
 import 'utils/country_helper.dart';
 import 'utils/http_helper.dart';
-import 'utils/image_helper.dart';
 import 'utils/language_helper.dart';
 import 'utils/ocr_field.dart';
 import 'utils/open_food_api_configuration.dart';
@@ -306,47 +305,6 @@ class OpenFoodAPIClient {
       ProductHelper.removeImages(result.product!, configuration.language);
       ProductHelper.createImageUrls(result.product!, uriHelper: uriHelper);
     }
-    return result;
-  }
-
-  /// Returns the ids of all uploaded images for that product.
-  ///
-  /// To be used in combination with [ImageHelper.getUploadedImageUrl].
-  /// Does not depend on language or country.
-  // TODO: deprecated from 2023-11-25; remove when old enough
-  @Deprecated('Use product field "images" instead')
-  static Future<List<int>> getProductImageIds(
-    final String barcode, {
-    final User? user,
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) async {
-    final ProductQueryConfiguration configuration = ProductQueryConfiguration(
-      barcode,
-      version: ProductQueryVersion.v3,
-      fields: <ProductField>[ProductField.IMAGES],
-    );
-    final String productString = await getProductString(
-      configuration,
-      user: user,
-      uriHelper: uriHelper,
-    );
-    final String jsonStr = _replaceQuotes(productString);
-    final json = HttpHelper().jsonDecode(jsonStr);
-    if (json['status'] != 'success') {
-      throw Exception('Error: ${json['status']}');
-    } else if (json['product']['images'] == null) {
-      return <int>[];
-    }
-
-    final Map<String, dynamic> images = json['product']['images'];
-    final List<int> result = <int>[];
-    for (final String key in images.keys) {
-      final int? value = int.tryParse(key);
-      if (value != null) {
-        result.add(value);
-      }
-    }
-    result.sort();
     return result;
   }
 

@@ -76,17 +76,6 @@ class JsonHelper {
     return result;
   }
 
-  /// Returns [ProductImage]s from a JSON map for "Images".
-  ///
-  /// For historical reasons we keep only the 4 main images here, on all sizes
-  /// and languages.
-  // TODO: deprecated from 2023-11-25; remove when old enough
-  @Deprecated('Use allImagesFromJson instead')
-  static List<ProductImage>? imagesFromJson(Map? json) => allImagesFromJson(
-        json,
-        onlyMain: true,
-      );
-
   // only for main images
   static const String _ALL_IMAGES_TAG_REVISION = 'rev';
   static const String _ALL_IMAGES_TAG_ANGLE = 'angle';
@@ -225,14 +214,6 @@ class JsonHelper {
 
     return imageList;
   }
-
-  // TODO: deprecated from 2023-11-25; remove when old enough
-  @Deprecated('Use allImagesToJson instead')
-  static Map<String, dynamic> imagesToJson(List<ProductImage>? images) =>
-      allImagesToJson(
-        images,
-        onlyMain: true,
-      );
 
   static Map<String, dynamic> allImagesToJson(
     final List<ProductImage>? images, {

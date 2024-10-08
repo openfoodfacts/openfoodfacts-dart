@@ -145,7 +145,6 @@ export 'src/utils/product_helper.dart';
 export 'src/utils/product_query_configurations.dart';
 export 'src/utils/product_search_query_configuration.dart';
 export 'src/utils/server_type.dart';
-export 'src/utils/suggestion_manager.dart';
 export 'src/utils/tag_type.dart';
 export 'src/utils/tag_type_autocompleter.dart';
 export 'src/utils/too_many_requests_exception.dart';
