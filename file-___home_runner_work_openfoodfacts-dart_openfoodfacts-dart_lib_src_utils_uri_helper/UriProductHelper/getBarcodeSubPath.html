@@ -63,8 +63,8 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.5.3/dart-core/String-class.html">String</a></span>
-<span class="name ">getBarcodeSubPath</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="getBarcodeSubPath-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.3/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span></span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>
+<span class="name ">getBarcodeSubPath</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="getBarcodeSubPath-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span></span></li>
 </ol>)
 
       
@@ -75,9 +75,9 @@
   <p>Returns the barcode sub-folder (without trailing '/').</p>
 <p>For instance:</p>
 <ul>
-<li><code>12345678</code> for barcode <code>12345678</code></li>
-<li><code>123/456/789</code> for barcode <code>123456789</code></li>
-<li><code>123/456/789/0</code> for barcode <code>1234567890</code></li>
+<li><code>000/001/234/5678</code> for barcode <code>12345678</code></li>
+<li><code>000/012/345/6789</code> for barcode <code>123456789</code></li>
+<li><code>000/123/456/7890</code> for barcode <code>1234567890</code></li>
 <li><code>123/456/789/0123</code> for barcode <code>1234567890123</code></li>
 </ul>
 </section>
@@ -87,16 +87,18 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static String getBarcodeSubPath(final String barcode) {
-  if (barcode.length &lt; 9) {
-    return barcode;
+  const int typicalLength = 13;
+  final int length = barcode.length;
+  final String workBarcode;
+  if (length &gt;= typicalLength) {
+    workBarcode = barcode;
+  } else {
+    workBarcode = &#39;${&#39;0&#39; * (typicalLength - length)}$barcode&#39;;
   }
-  final String p1 = barcode.substring(0, 3);
-  final String p2 = barcode.substring(3, 6);
-  final String p3 = barcode.substring(6, 9);
-  if (barcode.length == 9) {
-    return &#39;$p1&#47;$p2&#47;$p3&#39;;
-  }
-  final String p4 = barcode.substring(9);
+  final String p1 = workBarcode.substring(0, 3);
+  final String p2 = workBarcode.substring(3, 6);
+  final String p3 = workBarcode.substring(6, 9);
+  final String p4 = workBarcode.substring(9);
   return &#39;$p1&#47;$p2&#47;$p3&#47;$p4&#39;;
 }</code></pre>
 </section>
