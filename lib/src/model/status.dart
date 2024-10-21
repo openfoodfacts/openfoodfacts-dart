@@ -7,11 +7,6 @@ part 'status.g.dart';
 
 @JsonSerializable()
 class Status extends JsonObject {
-  // TODO: deprecated from 2023-11-24; remove when old enough
-  @Deprecated('Use wrongUserOrPasswordErrorMessage instead')
-  static const WRONG_USER_OR_PASSWORD_ERROR_MESSAGE =
-      wrongUserOrPasswordErrorMessage;
-
   static const wrongUserOrPasswordErrorMessage =
       'Incorrect user name or password';
 
