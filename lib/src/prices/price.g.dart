@@ -36,6 +36,7 @@ Price _$PriceFromJson(Map<String, dynamic> json) => Price()
   ..product = json['product'] == null
       ? null
       : PriceProduct.fromJson(json['product'] as Map<String, dynamic>)
+  ..receiptQuantity = (json['receipt_quantity'] as num?)?.toInt()
   ..owner = json['owner'] as String
   ..created = JsonHelper.stringTimestampToDate(json['created'])
   ..updated = JsonHelper.nullableStringTimestampToDate(json['updated']);
@@ -61,6 +62,7 @@ Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
       'proof': instance.proof,
       'location': instance.location,
       'product': instance.product,
+      'receipt_quantity': instance.receiptQuantity,
       'owner': instance.owner,
       'created': instance.created.toIso8601String(),
       'updated': instance.updated?.toIso8601String(),

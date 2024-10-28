@@ -6,21 +6,28 @@ import 'package:http/http.dart';
 class MaybeError<T> {
   const MaybeError.value(T this._value)
       : error = null,
-        statusCode = null;
+        statusCode = null,
+        isError = false;
   MaybeError.responseError(final Response response)
       : _value = null,
         error = utf8.decode(response.bodyBytes),
-        statusCode = response.statusCode;
+        statusCode = response.statusCode,
+        isError = true;
+  MaybeError.unreadableResponse(final Response response)
+      : _value = null,
+        error = utf8.decode(response.bodyBytes),
+        statusCode = response.statusCode,
+        isError = false;
   MaybeError.error({
     required String this.error,
     required int this.statusCode,
-  }) : _value = null;
+  })  : _value = null,
+        isError = true;
 
   final T? _value;
+  final bool isError;
   final String? error;
   final int? statusCode;
-
-  bool get isError => _value == null;
 
   T get value => _value!;
 

@@ -322,7 +322,12 @@ class OpenPricesAPIClient {
     return MaybeError<bool>.responseError(response);
   }
 
-  static Future<MaybeError<Price>> createPrice({
+  /// Adds a price. Returns an error, or either the added price or null.
+  ///
+  /// Returned price can be null if we cannot decode it (but the status code is
+  /// good enough to say "price added!", even if we have trouble decoding the
+  /// price).
+  static Future<MaybeError<Price?>> createPrice({
     required final Price price,
     required final String bearerToken,
     final UriProductHelper uriHelper = uriHelperFoodProd,
@@ -348,6 +353,8 @@ class OpenPricesAPIClient {
       'location_osm_id': price.locationOSMId,
       'location_osm_type': price.locationOSMType.offTag,
       'date': GetParametersHelper.formatDate(price.date),
+      if (price.receiptQuantity != null)
+        'receipt_quantity': price.receiptQuantity,
     };
     final Response response = await HttpHelper().doPostJsonRequest(
       uri,
@@ -360,7 +367,7 @@ class OpenPricesAPIClient {
         final Map<String, dynamic> json = HttpHelper().jsonDecodeUtf8(response);
         return MaybeError<Price>.value(Price.fromJson(json));
       } catch (e) {
-        //
+        return MaybeError<Price>.unreadableResponse(response);
       }
     }
     return MaybeError<Price>.responseError(response);
@@ -454,6 +461,8 @@ class OpenPricesAPIClient {
     final LocationOSMType? locationOSMType,
     final DateTime? date,
     final Currency? currency,
+    final int? receiptPriceCount,
+    final num? receiptPriceTotal,
     required final String bearerToken,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
@@ -475,6 +484,10 @@ class OpenPricesAPIClient {
           'location_osm_type': locationOSMType.offTag,
         if (date != null) 'date': GetParametersHelper.formatDate(date),
         if (currency != null) 'currency': currency.name,
+        if (receiptPriceCount != null)
+          'receipt_price_count': receiptPriceCount.toString(),
+        if (receiptPriceTotal != null)
+          'receipt_price_total': receiptPriceTotal.toString(),
       },
     );
     final List<int> fileBytes = await UriReader.instance.readAsBytes(imageUri);
