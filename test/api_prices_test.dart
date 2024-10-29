@@ -48,6 +48,16 @@ void main() {
         stats.value.locationWithPriceCount,
         lessThanOrEqualTo(stats.value.locationCount!),
       );
+      expect(stats.value.locationTypeOsmCount, greaterThan(0));
+      expect(
+        stats.value.locationTypeOsmCount,
+        lessThanOrEqualTo(stats.value.locationCount!),
+      );
+      expect(stats.value.locationTypeOnlineCount, greaterThan(0));
+      expect(
+        stats.value.locationTypeOnlineCount,
+        lessThanOrEqualTo(stats.value.locationCount!),
+      );
       expect(stats.value.proofCount, greaterThan(0));
       expect(stats.value.proofWithPriceCount, greaterThan(0));
       expect(
@@ -62,6 +72,16 @@ void main() {
       expect(stats.value.proofTypeReceiptCount, greaterThan(0));
       expect(
         stats.value.proofTypeReceiptCount,
+        lessThanOrEqualTo(stats.value.proofCount!),
+      );
+      expect(stats.value.proofTypeGdprRequestCount, greaterThan(0));
+      expect(
+        stats.value.proofTypeGdprRequestCount,
+        lessThanOrEqualTo(stats.value.proofCount!),
+      );
+      expect(stats.value.proofTypeShopImportCount, greaterThan(0));
+      expect(
+        stats.value.proofTypeShopImportCount,
         lessThanOrEqualTo(stats.value.proofCount!),
       );
       expect(stats.value.userCount, greaterThan(0));
@@ -156,7 +176,7 @@ void main() {
       String bearerToken = invalidBearerToken;
 
       // failing price creation with invalid token
-      MaybeError<Price> addedPrice = await OpenPricesAPIClient.createPrice(
+      MaybeError<Price?> addedPrice = await OpenPricesAPIClient.createPrice(
         price: initialPrice,
         bearerToken: bearerToken,
         uriHelper: uriHelper,
@@ -172,8 +192,10 @@ void main() {
 
       final UpdateProofParameters updateProofParameters =
           UpdateProofParameters()
-            ..type = ProofType.priceTag
+            ..type = ProofType.receipt
             ..currency = Currency.USD
+            ..receiptPriceCount = 72
+            ..receiptPriceTotal = 1.75
             ..date = DateTime(2024, 1, 2);
 
       // TODO(monsieurtanuki): more relevant image if possible
@@ -236,6 +258,21 @@ void main() {
       );
       expect(updateProof.isError, isFalse);
 
+      final MaybeError<Proof> maybeProof = await OpenPricesAPIClient.getProof(
+        proofId,
+        uriHelper: uriHelper,
+        bearerToken: bearerToken,
+      );
+      expect(maybeProof.isError, isFalse);
+      expect(maybeProof.value.id, proofId);
+      expect(maybeProof.value.type, updateProofParameters.type);
+      expect(maybeProof.value.date, updateProofParameters.date);
+      expect(maybeProof.value.currency, updateProofParameters.currency);
+      expect(maybeProof.value.receiptPriceCount,
+          updateProofParameters.receiptPriceCount);
+      expect(maybeProof.value.receiptPriceTotal,
+          updateProofParameters.receiptPriceTotal);
+
       initialPrice.proofId = proofId;
 
       // failing price creation with valid token but invalid dates
@@ -255,19 +292,20 @@ void main() {
         uriHelper: uriHelper,
       );
       expect(addedPrice.isError, isFalse);
-      expect(addedPrice.value.productCode, initialPrice.productCode);
-      expect(addedPrice.value.price, initialPrice.price);
-      expect(addedPrice.value.priceWithoutDiscount,
-          initialPrice.priceWithoutDiscount);
-      expect(addedPrice.value.priceIsDiscounted,
+      final Price addedValue = addedPrice.value!;
+      expect(addedValue.productCode, initialPrice.productCode);
+      expect(addedValue.price, initialPrice.price);
+      expect(
+          addedValue.priceWithoutDiscount, initialPrice.priceWithoutDiscount);
+      expect(addedValue.priceIsDiscounted,
           initialPrice.priceIsDiscounted ?? false);
-      expect(addedPrice.value.currency, initialPrice.currency);
-      expect(addedPrice.value.locationOSMId, initialPrice.locationOSMId);
-      expect(addedPrice.value.locationOSMType, initialPrice.locationOSMType);
-      expect(addedPrice.value.date, initialPrice.date);
-      expect(addedPrice.value.owner, user.userId);
+      expect(addedValue.currency, initialPrice.currency);
+      expect(addedValue.locationOSMId, initialPrice.locationOSMId);
+      expect(addedValue.locationOSMType, initialPrice.locationOSMType);
+      expect(addedValue.date, initialPrice.date);
+      expect(addedValue.owner, user.userId);
 
-      final int priceId = addedPrice.value.id;
+      final int priceId = addedValue.id;
 
       // successful price update
       MaybeError<bool> updatedPrice = await OpenPricesAPIClient.updatePrice(

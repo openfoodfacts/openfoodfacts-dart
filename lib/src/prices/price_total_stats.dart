@@ -31,6 +31,12 @@ class PriceTotalStats extends JsonObject {
   @JsonKey(name: 'location_with_price_count')
   int? locationWithPriceCount;
 
+  @JsonKey(name: 'location_type_osm_count')
+  int? locationTypeOsmCount;
+
+  @JsonKey(name: 'location_type_online_count')
+  int? locationTypeOnlineCount;
+
   @JsonKey(name: 'proof_count')
   int? proofCount;
 
@@ -42,6 +48,12 @@ class PriceTotalStats extends JsonObject {
 
   @JsonKey(name: 'proof_type_receipt_count')
   int? proofTypeReceiptCount;
+
+  @JsonKey(name: 'proof_type_gdpr_request_count')
+  int? proofTypeGdprRequestCount;
+
+  @JsonKey(name: 'proof_type_shop_import_count')
+  int? proofTypeShopImportCount;
 
   @JsonKey(name: 'user_count')
   int? userCount;

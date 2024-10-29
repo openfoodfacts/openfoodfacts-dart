@@ -109,6 +109,7 @@ export 'src/prices/get_users_parameters.dart';
 export 'src/prices/get_users_result.dart';
 export 'src/prices/location.dart';
 export 'src/prices/location_osm_type.dart';
+export 'src/prices/location_type.dart';
 export 'src/prices/maybe_error.dart';
 export 'src/prices/order_by.dart';
 export 'src/prices/price.dart';

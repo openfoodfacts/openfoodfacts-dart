@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'location_osm_type.dart';
+import 'location_type.dart';
 import '../interface/json_object.dart';
 import '../utils/json_helper.dart';
 
@@ -14,6 +15,10 @@ class Location extends JsonObject {
   /// ID of the location in OpenStreetMap: the store where the product was bought.
   @JsonKey(name: 'osm_id')
   late int osmId;
+
+  /// Type of the location object.
+  @JsonKey(name: 'type')
+  late LocationType locationType;
 
   /// Type of the OpenStreetMap location object.
   ///
@@ -72,6 +77,9 @@ class Location extends JsonObject {
 
   @JsonKey(name: 'osm_lon')
   double? longitude;
+
+  @JsonKey(name: 'website_url')
+  String? websiteUrl;
 
   /// Date when the product was bought.
   @JsonKey(fromJson: JsonHelper.stringTimestampToDate)

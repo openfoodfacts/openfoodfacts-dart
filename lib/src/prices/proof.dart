@@ -40,6 +40,14 @@ class Proof extends JsonObject {
   @JsonKey(name: 'price_count')
   late int priceCount;
 
+  /// Receipt's number of prices (user input).
+  @JsonKey(name: 'receipt_price_count')
+  int? receiptPriceCount;
+
+  /// Receipt's total amount (user input).
+  @JsonKey(name: 'receipt_price_total')
+  num? receiptPriceTotal;
+
   /// ID of the location in OpenStreetMap.
   ///
   /// The store where the product was bought.

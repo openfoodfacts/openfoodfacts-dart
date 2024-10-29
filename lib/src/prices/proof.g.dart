@@ -13,6 +13,8 @@ Proof _$ProofFromJson(Map<String, dynamic> json) => Proof()
   ..mimetype = json['mimetype'] as String
   ..type = $enumDecodeNullable(_$ProofTypeEnumMap, json['type'])
   ..priceCount = (json['price_count'] as num).toInt()
+  ..receiptPriceCount = (json['receipt_price_count'] as num?)?.toInt()
+  ..receiptPriceTotal = json['receipt_price_total'] as num?
   ..locationOSMId = (json['location_osm_id'] as num?)?.toInt()
   ..locationOSMType =
       $enumDecodeNullable(_$LocationOSMTypeEnumMap, json['location_osm_type'])
@@ -33,6 +35,8 @@ Map<String, dynamic> _$ProofToJson(Proof instance) => <String, dynamic>{
       'mimetype': instance.mimetype,
       'type': _$ProofTypeEnumMap[instance.type],
       'price_count': instance.priceCount,
+      'receipt_price_count': instance.receiptPriceCount,
+      'receipt_price_total': instance.receiptPriceTotal,
       'location_osm_id': instance.locationOSMId,
       'location_osm_type': _$LocationOSMTypeEnumMap[instance.locationOSMType],
       'location_id': instance.locationId,

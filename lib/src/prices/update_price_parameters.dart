@@ -25,6 +25,9 @@ class UpdatePriceParameters extends JsonObject {
   /// Date when the product was bought.
   DateTime? date;
 
+  /// Receipt's price quantity (user input).
+  int? receiptQuantity;
+
   @override
   Map<String, dynamic> toJson() => <String, dynamic>{
         if (pricePer != null) 'price_per': pricePer!.offTag,
@@ -34,5 +37,6 @@ class UpdatePriceParameters extends JsonObject {
         if (price != null) 'price': price,
         if (currency != null) 'currency': currency!.name,
         if (date != null) 'date': GetParametersHelper.formatDate(date!),
+        if (receiptQuantity != null) 'receipt_quantity': receiptQuantity,
       };
 }

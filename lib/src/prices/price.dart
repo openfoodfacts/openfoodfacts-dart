@@ -130,6 +130,10 @@ class Price extends JsonObject {
   @JsonKey()
   PriceProduct? product;
 
+  /// Receipt's price quantity (user input).
+  @JsonKey(name: 'receipt_quantity')
+  int? receiptQuantity;
+
   /// Owner. Read-only.
   @JsonKey()
   late String owner;
