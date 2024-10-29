@@ -16,7 +16,7 @@ class Ticket extends JsonObject {
 
   /// Type of the ticket.
   @JsonKey()
-  late String type;
+  late Type type;
 
   /// Url of the ticket. Read-only.
   @JsonKey()
@@ -24,7 +24,7 @@ class Ticket extends JsonObject {
 
   /// Status of the ticket.
   @JsonKey()
-  late String status;
+  late Status status;
 
   /// Image id of the ticket. Read-only.
   @JsonKey(name: 'image_id')
@@ -32,15 +32,54 @@ class Ticket extends JsonObject {
 
   /// Flavor of the ticket.
   @JsonKey()
-  late String flavor;
+  late Flavor flavor;
 
   /// created date of the ticket. Read-only.
   @JsonKey(name: 'created_at')
-  late String createdAt;
+  late String CreatedAt;
 
   Ticket();
 
   factory Ticket.fromJson(Map<String, dynamic> json) => _$TicketFromJson(json);
 
   @override Map<String, dynamic> toJson() => _$TicketToJson(this);
+}
+
+/// Enum for ticket type
+enum Type {
+  @JsonValue('image')
+  image,
+  
+  @JsonValue('product')
+  product,
+
+  @JsonValue('search')
+  search
+}
+
+/// Enum for ticket status
+enum Status {
+  @JsonValue('open')
+  open,
+  
+  @JsonValue('closed')
+  closed
+}
+
+/// Enum for ticket flavor
+enum Flavor {
+  @JsonValue('off')
+  off,
+  
+  @JsonValue('obf')
+  obf,
+
+  @JsonValue('opff')
+  opff,
+
+  @JsonValue('opf')
+  opf,
+
+  @JsonValue('off-pro')
+  offPro
 }
