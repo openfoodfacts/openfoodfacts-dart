@@ -56,4 +56,30 @@ class NutripatrolApiClient {
     }
     return MaybeError<Ticket>.responseError(response);
   }
+
+  static Future<MaybeError<List<Ticket>>> getTickets({
+    required final String barcode,
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Uri uri = getUri(
+      path: '/api/v1/tickets',
+      uriHelper: uriHelper,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        final List<dynamic> tickets = decodedResponse['tickets'];
+        return MaybeError<List<Ticket>>.value(
+          tickets.map((dynamic ticket) => Ticket.fromJson(ticket)).toList(),
+        );
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<List<Ticket>>.responseError(response);
+  }
 }
