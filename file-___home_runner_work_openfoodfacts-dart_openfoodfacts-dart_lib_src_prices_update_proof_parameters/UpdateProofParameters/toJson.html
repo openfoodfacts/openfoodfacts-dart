@@ -85,6 +85,11 @@ Map&lt;String, dynamic&gt; toJson() =&gt; &lt;String, dynamic&gt;{
       if (type != null) &#39;type&#39;: type!.offTag,
       if (date != null) &#39;date&#39;: GetParametersHelper.formatDate(date!),
       if (currency != null) &#39;currency&#39;: currency!.name,
+      if (locationOSMId != null) &#39;location_osm_id&#39;: locationOSMId,
+      if (locationOSMType != null)
+        &#39;location_osm_type&#39;: locationOSMType!.offTag,
+      if (receiptPriceCount != null) &#39;receipt_price_count&#39;: receiptPriceCount,
+      if (receiptPriceTotal != null) &#39;receipt_price_total&#39;: receiptPriceTotal,
     };</code></pre>
 </section>
 
