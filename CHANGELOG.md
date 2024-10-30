@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.17.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.16.0...v3.17.0) (2024-10-30)
+
+
+### Features
+
+* 986 - new Prices fields ([#987](https://github.com/openfoodfacts/openfoodfacts-dart/issues/987)) ([edd18af](https://github.com/openfoodfacts/openfoodfacts-dart/commit/edd18af64333cbdff03ef25b32fee0c476d438c7))
+* new web folder structure for images ([#984](https://github.com/openfoodfacts/openfoodfacts-dart/issues/984)) ([b99f119](https://github.com/openfoodfacts/openfoodfacts-dart/commit/b99f1193748b2c0ebcd3fbee931822414bc88c85))
+
 ## [3.16.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.15.0...v3.16.0) (2024-10-04)
 
 
