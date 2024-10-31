@@ -8,9 +8,9 @@ part of 'get_ticket.dart';
 
 Ticket _$TicketFromJson(Map<String, dynamic> json) => Ticket()
   ..id = (json['id'] as num).toInt()
-  ..barcode = json['barcode'] as String
+  ..barcode = json['barcode'] as String?
   ..type = $enumDecode(_$TypeEnumMap, json['type'])
-  ..url = json['url'] as String?
+  ..url = json['url'] as String
   ..status = $enumDecode(_$StatusEnumMap, json['status'])
   ..imageId = json['image_id'] as String?
   ..flavor = $enumDecode(_$FlavorEnumMap, json['flavor'])
