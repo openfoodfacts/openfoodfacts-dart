@@ -12,7 +12,7 @@ class Ticket extends JsonObject {
 
   /// Barcode of the product. Read-only.
   @JsonKey()
-  late String barcode;
+  String? barcode;
 
   /// Type of the ticket.
   @JsonKey()
@@ -20,7 +20,7 @@ class Ticket extends JsonObject {
 
   /// Url of the ticket. Read-only.
   @JsonKey()
-  String? url;
+  late String url;
 
   /// Status of the ticket.
   @JsonKey()
