@@ -21,7 +21,7 @@ jobs:
           run: dart doc .
 
         - name: Deploy API documentation to Github Pages
-          uses: JamesIves/github-pages-deploy-action@v4.6.8
+          uses: JamesIves/github-pages-deploy-action@v4.6.9
           with:
             BRANCH: gh-pages
             FOLDER: doc/api/
