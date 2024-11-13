@@ -9,9 +9,9 @@ part of 'get_ticket.dart';
 Ticket _$TicketFromJson(Map<String, dynamic> json) => Ticket()
   ..id = (json['id'] as num).toInt()
   ..barcode = json['barcode'] as String?
-  ..type = $enumDecode(_$TypeEnumMap, json['type'])
+  ..type = $enumDecode(_$TicketTypeEnumMap, json['type'])
   ..url = json['url'] as String
-  ..status = $enumDecode(_$StatusEnumMap, json['status'])
+  ..status = $enumDecode(_$TicketStatusEnumMap, json['status'])
   ..imageId = json['image_id'] as String?
   ..flavor = $enumDecode(_$FlavorEnumMap, json['flavor'])
   ..CreatedAt = json['created_at'] as String;
@@ -19,23 +19,23 @@ Ticket _$TicketFromJson(Map<String, dynamic> json) => Ticket()
 Map<String, dynamic> _$TicketToJson(Ticket instance) => <String, dynamic>{
       'id': instance.id,
       'barcode': instance.barcode,
-      'type': _$TypeEnumMap[instance.type]!,
+      'type': _$TicketTypeEnumMap[instance.type]!,
       'url': instance.url,
-      'status': _$StatusEnumMap[instance.status]!,
+      'status': _$TicketStatusEnumMap[instance.status]!,
       'image_id': instance.imageId,
       'flavor': _$FlavorEnumMap[instance.flavor]!,
       'created_at': instance.CreatedAt,
     };
 
-const _$TypeEnumMap = {
-  Type.image: 'image',
-  Type.product: 'product',
-  Type.search: 'search',
+const _$TicketTypeEnumMap = {
+  TicketType.image: 'image',
+  TicketType.product: 'product',
+  TicketType.search: 'search',
 };
 
-const _$StatusEnumMap = {
-  Status.open: 'open',
-  Status.closed: 'closed',
+const _$TicketStatusEnumMap = {
+  TicketStatus.open: 'open',
+  TicketStatus.closed: 'closed',
 };
 
 const _$FlavorEnumMap = {

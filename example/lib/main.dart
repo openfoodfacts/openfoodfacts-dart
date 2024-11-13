@@ -1,6 +1,30 @@
 import 'dart:async';
 
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:json_annotation/src/json_value.dart';
+import 'package:openfoodfacts/src/nutripatrol/get_ticket.dart';
+
+void main() {
+  OpenFoodAPIConfiguration.userAgent = UserAgent(
+    name: 'openfoodfacts-dart',
+    version: '1.0.0',
+    url: '',
+  );
+  getTickets();
+}
+
+/// Get the ticket by its ID
+/// The result will be a MaybeError<Ticket> that can be parsed
+void getTicket() async {
+  await NutripatrolApiClient.getTicket(ticketId: 2);
+}
+
+/// Get all tickets
+/// The result will be a MaybeError<Tickets> that can be parsed
+void getTickets() async {
+  await NutripatrolApiClient.getTickets(
+      status: TicketStatus.open, type_: TicketType.image, page: 1);
+}
 
 /// request a product from the OpenFoodFacts database
 Future<Product?> getProduct() async {

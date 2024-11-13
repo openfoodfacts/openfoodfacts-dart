@@ -16,7 +16,7 @@ class Ticket extends JsonObject {
 
   /// Type of the ticket.
   @JsonKey()
-  late Type type;
+  late TicketType type;
 
   /// Url of the ticket. Read-only.
   @JsonKey()
@@ -24,7 +24,7 @@ class Ticket extends JsonObject {
 
   /// Status of the ticket.
   @JsonKey()
-  late Status status;
+  late TicketStatus status;
 
   /// Image id of the ticket. Read-only.
   @JsonKey(name: 'image_id')
@@ -46,7 +46,7 @@ class Ticket extends JsonObject {
 }
 
 /// Enum for ticket type
-enum Type {
+enum TicketType {
   @JsonValue('image')
   image,
   
@@ -58,7 +58,7 @@ enum Type {
 }
 
 /// Enum for ticket status
-enum Status {
+enum TicketStatus {
   @JsonValue('open')
   open,
   
