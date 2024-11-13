@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:http/http.dart';
+import 'package:openfoodfacts/src/nutripatrol/get_tickets.dart';
 import 'package:openfoodfacts/src/prices/maybe_error.dart';
 import 'utils/http_helper.dart';
 import 'utils/open_food_api_configuration.dart';
@@ -16,7 +15,7 @@ class NutripatrolApiClient {
 
   /// Subdomain of the Nutripatrol API.
   static const String _subdomain = 'nutripatrol';
-  
+
   static String _getHost(final UriProductHelper uriHelper) =>
       uriHelper.getHost(_subdomain);
 
@@ -34,7 +33,7 @@ class NutripatrolApiClient {
       );
 
   /// Get a ticket by its ID.
-  /// 
+  ///
   /// [ticketId] is the ID of the ticket.
   static Future<MaybeError<Ticket>> getTicket({
     required final int ticketId,
@@ -61,12 +60,22 @@ class NutripatrolApiClient {
   }
 
   /// Get all tickets.
-  static Future<MaybeError<List<Ticket>>> getTickets({
-    required final String barcode,
+  static Future<MaybeError<Tickets>> getTickets({
+    final TicketStatus status = TicketStatus.open,
+    final TicketType type_ = TicketType.image,
+    final int? page,
+    final int? pageSize,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
+    final Map<String, String> queryParameters = <String, String>{};
+    queryParameters['status'] = status.toString().split('.').last;
+    queryParameters['type'] = type_.toString().split('.').last;
+    if (page != null) queryParameters['page'] = page.toString();
+    if (pageSize != null) queryParameters['page_size'] = pageSize.toString();
+
     final Uri uri = getUri(
       path: '/api/v1/tickets',
+      queryParameters: queryParameters,
       uriHelper: uriHelper,
     );
     final Response response = await HttpHelper().doGetRequest(
@@ -77,13 +86,16 @@ class NutripatrolApiClient {
       try {
         final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
         final List<dynamic> tickets = decodedResponse['tickets'];
-        return MaybeError<List<Ticket>>.value(
-          tickets.map((dynamic ticket) => Ticket.fromJson(ticket)).toList(),
+        return MaybeError<Tickets>.value(
+          Tickets.fromJson(<String, dynamic>{
+            'tickets': tickets,
+            'max_page': decodedResponse['max_page'],
+          }),
         );
       } catch (_) {
         //
       }
     }
-    return MaybeError<List<Ticket>>.responseError(response);
+    return MaybeError<Tickets>.responseError(response);
   }
 }
