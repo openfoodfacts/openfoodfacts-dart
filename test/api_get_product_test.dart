@@ -51,6 +51,32 @@ void main() {
   }
 
   group('$OpenFoodAPIClient get products', () {
+    test('get KP halfWidthOnMobile', () async {
+      const String barcode = '737628064502';
+
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.KNOWLEDGE_PANELS],
+        version: ProductQueryVersion.v3,
+      );
+      final ProductResultV3 result = await getProductV3InProd(
+        configurations,
+      );
+      expect(result.status, ProductResultV3.statusSuccess);
+      expect(result.barcode, barcode);
+      expect(result.product, isNotNull);
+      bool found = false;
+      for (final KnowledgePanel panel
+          in result.product!.knowledgePanels!.panelIdToPanelMap.values) {
+        if (panel.halfWidthOnMobile == true) {
+          found = true;
+        }
+      }
+      expect(found, isTrue);
+    });
+
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',
         () async {
       //Refactor the test once the issue  #48 is fixed
