@@ -105,6 +105,9 @@ class KnowledgePanel extends JsonObject {
   @JsonKey(unknownEnumValue: KnowledgePanelSize.UNKNOWN)
   final KnowledgePanelSize? size;
 
+  @JsonKey(name: 'half_width_on_mobile')
+  final bool? halfWidthOnMobile;
+
   const KnowledgePanel({
     this.titleElement,
     this.level,
@@ -113,6 +116,7 @@ class KnowledgePanel extends JsonObject {
     this.topics,
     this.evaluation,
     this.size,
+    this.halfWidthOnMobile,
   });
 
   factory KnowledgePanel.fromJson(Map<String, dynamic> json) =>

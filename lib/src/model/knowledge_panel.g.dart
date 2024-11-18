@@ -25,6 +25,7 @@ KnowledgePanel _$KnowledgePanelFromJson(Map<String, dynamic> json) =>
           unknownValue: Evaluation.UNKNOWN),
       size: $enumDecodeNullable(_$KnowledgePanelSizeEnumMap, json['size'],
           unknownValue: KnowledgePanelSize.UNKNOWN),
+      halfWidthOnMobile: json['half_width_on_mobile'] as bool?,
     );
 
 Map<String, dynamic> _$KnowledgePanelToJson(KnowledgePanel instance) =>
@@ -36,6 +37,7 @@ Map<String, dynamic> _$KnowledgePanelToJson(KnowledgePanel instance) =>
       'topics': instance.topics,
       'evaluation': _$EvaluationEnumMap[instance.evaluation],
       'size': _$KnowledgePanelSizeEnumMap[instance.size],
+      'half_width_on_mobile': instance.halfWidthOnMobile,
     };
 
 const _$LevelEnumMap = {
