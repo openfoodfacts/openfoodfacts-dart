@@ -4,6 +4,7 @@ import '../model/off_tagged.dart';
 /// Fields of a [Product]
 enum ProductField implements OffTagged {
   BARCODE(offTag: 'code'),
+  PRODUCT_TYPE(offTag: 'product_type'),
   NAME(
     offTag: 'product_name',
     inLanguagesProductField: ProductField.NAME_IN_LANGUAGES,

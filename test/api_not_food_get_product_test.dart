@@ -7,74 +7,67 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
 
-  const UriProductHelper uriHelperBeautyProd = UriProductHelper(
-    domain: 'openbeautyfacts.org',
-  );
-  const UriProductHelper uriHelperProductsProd = UriProductHelper(
-    domain: 'openproductsfacts.org',
-  );
-  const UriProductHelper uriHelperPetFoodProd = UriProductHelper(
-    domain: 'openpetfoodfacts.org',
-  );
+  const Map<ProductType, String> domains = <ProductType, String>{
+    ProductType.beauty: 'openbeautyfacts.org',
+    ProductType.product: 'openproductsfacts.org',
+    ProductType.petFood: 'openpetfoodfacts.org',
+    ProductType.food: 'openfoodfacts.org',
+  };
 
-  const String beautyBarcode = '3600551054476';
-  const String productsBarcode = '7898927451035';
-  const String petFoodBarcode = '3564700266809';
+  const Map<ProductType, String> barcodes = <ProductType, String>{
+    ProductType.beauty: '3600551054476',
+    ProductType.product: '7898927451035',
+    ProductType.petFood: '3564700266809',
+  };
 
   group('$OpenFoodAPIClient get not food products', () {
-    Future<Product?> findProduct(
+    Future<void> findProduct(
       final String barcode,
-      final UriProductHelper uriHelper,
-      final bool shouldBeThere,
+      final ProductType expectedProductType,
+      final ProductType serverProductType,
     ) async {
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
         barcode,
         language: OpenFoodFactsLanguage.ENGLISH,
-        fields: [ProductField.BARCODE],
+        fields: [
+          ProductField.BARCODE,
+          ProductField.PRODUCT_TYPE,
+        ],
         version: ProductQueryVersion(2),
       );
       await getProductTooManyRequestsManager.waitIfNeeded();
       final OldProductResult result = await OpenFoodAPIClient.getOldProduct(
         configurations,
-        uriHelper: uriHelper,
+        uriHelper: UriProductHelper(
+          domain: domains[serverProductType]!,
+        ),
       );
-      if (shouldBeThere) {
+      if (expectedProductType == serverProductType) {
         expect(result.status, 1);
         expect(result.barcode, barcode);
         expect(result.product, isNotNull);
         expect(result.product!.barcode, barcode);
+        expect(result.product!.productType, expectedProductType);
       } else {
         expect(result.status, 0);
         expect(result.barcode, barcode);
         expect(result.product, isNull);
       }
-      return result.product;
     }
 
-    test('get beauty product', () async {
-      final String barcode = beautyBarcode;
-      await findProduct(barcode, uriHelperBeautyProd, true);
-      await findProduct(barcode, uriHelperProductsProd, false);
-      await findProduct(barcode, uriHelperPetFoodProd, false);
-      await findProduct(barcode, uriHelperPetFoodProd, false);
-      await findProduct(barcode, uriHelperFoodProd, false);
-    });
-
-    test('get products product', () async {
-      final String barcode = productsBarcode;
-      await findProduct(barcode, uriHelperBeautyProd, false);
-      await findProduct(barcode, uriHelperProductsProd, true);
-      await findProduct(barcode, uriHelperPetFoodProd, false);
-      await findProduct(barcode, uriHelperFoodProd, false);
-    });
-
-    test('get pet food product', () async {
-      final String barcode = petFoodBarcode;
-      await findProduct(barcode, uriHelperBeautyProd, false);
-      await findProduct(barcode, uriHelperProductsProd, false);
-      await findProduct(barcode, uriHelperPetFoodProd, true);
-      await findProduct(barcode, uriHelperFoodProd, false);
+    test('get OxF product', () async {
+      for (MapEntry<ProductType, String> item in barcodes.entries) {
+        final ProductType productType = item.key;
+        final String barcode = item.value;
+        for (final ProductType serverProductType in ProductType.values) {
+          await findProduct(
+            barcode,
+            productType,
+            serverProductType,
+          );
+        }
+      }
     });
   },
       timeout: Timeout(
