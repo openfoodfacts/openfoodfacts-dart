@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.17.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.16.0...v3.17.0) (2024-11-18)
+
+
+### Features
+
+* 986 - new Prices fields ([#987](https://github.com/openfoodfacts/openfoodfacts-dart/issues/987)) ([edd18af](https://github.com/openfoodfacts/openfoodfacts-dart/commit/edd18af64333cbdff03ef25b32fee0c476d438c7))
+* 990 - new knowledge panel "halfWidthOnMobile" field ([#992](https://github.com/openfoodfacts/openfoodfacts-dart/issues/992)) ([09d203a](https://github.com/openfoodfacts/openfoodfacts-dart/commit/09d203a78fe8b6cd7267fe711e82e6ce6d2d4f36))
+* new web folder structure for images ([#984](https://github.com/openfoodfacts/openfoodfacts-dart/issues/984)) ([b99f119](https://github.com/openfoodfacts/openfoodfacts-dart/commit/b99f1193748b2c0ebcd3fbee931822414bc88c85))
+* product_type as new product field ([#994](https://github.com/openfoodfacts/openfoodfacts-dart/issues/994)) ([12e72b4](https://github.com/openfoodfacts/openfoodfacts-dart/commit/12e72b4a399eb270fd4a975a5b7b64c27164f55c))
+
 ## [3.16.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.15.0...v3.16.0) (2024-10-04)
 
 
