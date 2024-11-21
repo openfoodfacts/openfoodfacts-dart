@@ -78,7 +78,8 @@ cf. <a href="https://github.com/openfoodfacts/openfoodfacts-dart/issues/104">htt
       
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Map&lt;OpenFoodFactsLanguage, Map&lt;ImageField, int&gt;&gt;? imagesFreshnessInLanguages;</code></pre>
+  <pre class="language-dart"><code class="language-dart">@JsonKey(includeIfNull: true)
+Map&lt;OpenFoodFactsLanguage, Map&lt;ImageField, int&gt;&gt;? imagesFreshnessInLanguages;</code></pre>
 </section>
 
 

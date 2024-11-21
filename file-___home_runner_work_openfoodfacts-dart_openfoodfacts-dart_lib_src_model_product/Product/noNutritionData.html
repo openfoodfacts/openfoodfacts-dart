@@ -81,6 +81,7 @@
   name: &#39;no_nutrition_data&#39;,
   toJson: JsonHelper.checkboxToJSON,
   fromJson: JsonHelper.checkboxFromJSON,
+  includeIfNull: true,
 )
 bool? get noNutritionData {
   if (_noNutritionData != null) {
