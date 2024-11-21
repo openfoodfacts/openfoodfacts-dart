@@ -181,7 +181,6 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
 Map<String, dynamic> _$ProductToJson(Product instance) {
   final val = <String, dynamic>{
     'code': instance.barcode,
-    'product_type': _$ProductTypeEnumMap[instance.productType],
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -190,6 +189,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
     }
   }
 
+  writeNotNull('product_type', _$ProductTypeEnumMap[instance.productType]);
   writeNotNull('product_name', instance.productName);
   writeNotNull('product_name_in_languages',
       LanguageHelper.toJsonStringMap(instance.productNameInLanguages));
