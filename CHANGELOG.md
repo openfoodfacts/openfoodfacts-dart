@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.17.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.17.0...v3.17.1) (2024-11-21)
+
+
+### Bug Fixes
+
+* product_type not included when null ([#996](https://github.com/openfoodfacts/openfoodfacts-dart/issues/996)) ([5ba66a0](https://github.com/openfoodfacts/openfoodfacts-dart/commit/5ba66a060be6b4ee9974e5191311b8aff2168fc1))
+
 ## [3.17.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.16.0...v3.17.0) (2024-11-18)
 
 
