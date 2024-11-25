@@ -222,6 +222,61 @@ class Product extends JsonObject {
   /// Images may be returned in multiple sizes
   List<ProductImage>? getMainImages() => _getImageSubset(true);
 
+  bool? isImageLocked(
+    final ImageField imageField,
+    final OpenFoodFactsLanguage language,
+  ) {
+    if (images == null || owner == null) {
+      return null;
+    }
+    final ProductImage? localizedImage = getLocalizedImage(
+      imageField,
+      language,
+    );
+    final String? imageId = localizedImage?.imgid;
+    if (imageId == null) {
+      return null;
+    }
+    final ProductImage? rawImage = getRawImage(imageId);
+    if (rawImage == null) {
+      return null;
+    }
+    return rawImage.contributor == owner;
+  }
+
+  ProductImage? getLocalizedImage(
+    final ImageField imageField,
+    final OpenFoodFactsLanguage language,
+  ) {
+    if (images == null) {
+      return null;
+    }
+    for (final ProductImage productImage in images!) {
+      if (productImage.field == imageField &&
+          productImage.language == language) {
+        if (productImage.rev == null) {
+          return null;
+        }
+        return productImage;
+      }
+    }
+    return null;
+  }
+
+  ProductImage? getRawImage(final String imageId) {
+    if (images == null) {
+      return null;
+    }
+    for (final ProductImage productImage in images!) {
+      if (!productImage.isMain) {
+        if (productImage.imgid == imageId) {
+          return productImage;
+        }
+      }
+    }
+    return null;
+  }
+
   List<ProductImage>? _getImageSubset(final bool isMain) {
     if (images == null) {
       return null;
@@ -536,6 +591,9 @@ class Product extends JsonObject {
   /// See also [getOwnerFieldTimestamp].
   @JsonKey(name: 'owner_fields')
   Map<String, int>? ownerFields;
+
+  @JsonKey()
+  String? owner;
 
   /// Expiration date / best before. Just a string, no format control.
   @JsonKey(name: 'expiration_date')

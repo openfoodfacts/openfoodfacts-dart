@@ -227,6 +227,7 @@ enum ProductField implements OffTagged {
   EXPIRATION_DATE(offTag: 'expiration_date'),
   OBSOLETE(offTag: 'obsolete'),
   OWNER_FIELDS(offTag: 'owner_fields'),
+  OWNER(offTag: 'owner'),
 
   /// All data as RAW from the server. E.g. packagings are only Strings there.
   RAW(offTag: 'raw'),

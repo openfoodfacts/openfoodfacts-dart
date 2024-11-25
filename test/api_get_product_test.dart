@@ -1259,6 +1259,63 @@ void main() {
     }
   });
 
+  test('check if images are locked', () async {
+    Future<void> checkLocked(
+      final String barcode,
+      final OpenFoodFactsLanguage language,
+      final Map<ImageField, bool> areLocked,
+    ) async {
+      final ProductResultV3 result = await getProductV3InProd(
+        ProductQueryConfiguration(
+          barcode,
+          fields: [
+            ProductField.OWNER,
+            ProductField.IMAGES,
+          ],
+          version: ProductQueryVersion.v3,
+        ),
+      );
+      expect(result.status, ProductResultV3.statusSuccess);
+      expect(result.product, isNotNull);
+      for (final MapEntry<ImageField, bool> entry in areLocked.entries) {
+        expect(result.product!.isImageLocked(entry.key, language), entry.value);
+      }
+    }
+
+    await checkLocked(
+      '3560070800292',
+      OpenFoodFactsLanguage.FRENCH,
+      <ImageField, bool>{
+        ImageField.FRONT: true,
+        ImageField.INGREDIENTS: false,
+        ImageField.NUTRITION: false,
+        ImageField.PACKAGING: false,
+      },
+    );
+
+    await checkLocked(
+      '7300400481588',
+      OpenFoodFactsLanguage.FRENCH,
+      <ImageField, bool>{
+        ImageField.FRONT: true,
+        ImageField.INGREDIENTS: false,
+        ImageField.NUTRITION: false,
+        ImageField.PACKAGING: false,
+      },
+    );
+
+    await checkLocked(
+      '3240931543390',
+      OpenFoodFactsLanguage.FRENCH,
+      <ImageField, bool>{
+        ImageField.FRONT: true,
+        ImageField.INGREDIENTS: true,
+        ImageField.NUTRITION: true,
+        ImageField.PACKAGING: true,
+      },
+    );
+  });
+
   group('$OpenFoodAPIClient get new packagings field', () {
     const String barcode = '3661344723290';
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
