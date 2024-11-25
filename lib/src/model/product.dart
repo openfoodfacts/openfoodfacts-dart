@@ -226,7 +226,7 @@ class Product extends JsonObject {
     final ImageField imageField,
     final OpenFoodFactsLanguage language,
   ) {
-    if (images == null || owner == null) {
+    if (owner == null) {
       return null;
     }
     final ProductImage? localizedImage = getLocalizedImage(
