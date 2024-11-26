@@ -14,7 +14,7 @@ part 'location.g.dart';
 class Location extends JsonObject {
   /// ID of the location in OpenStreetMap: the store where the product was bought.
   @JsonKey(name: 'osm_id')
-  late int osmId;
+  int? osmId;
 
   /// Type of the location object.
   @JsonKey(name: 'type')
@@ -26,7 +26,7 @@ class Location extends JsonObject {
   /// It is necessary to be able to fetch the correct information about the
   /// store using the ID.
   @JsonKey(name: 'osm_type')
-  late LocationOSMType type;
+  LocationOSMType? type;
 
   /// Number of prices for this location.
   @JsonKey(name: 'price_count')

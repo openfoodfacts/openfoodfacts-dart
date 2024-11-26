@@ -514,8 +514,8 @@ void main() {
 
       final MaybeError<Location> maybeSameOSMLocation =
           await OpenPricesAPIClient.getOSMLocation(
-        locationOSMType: location.type,
-        locationOSMId: location.osmId,
+        locationOSMType: location.type!,
+        locationOSMId: location.osmId!,
         uriHelper: uriHelper,
       );
       expect(maybeSameOSMLocation.isError, isFalse);
