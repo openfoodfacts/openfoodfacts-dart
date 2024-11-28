@@ -139,6 +139,9 @@
             item[_ALL_IMAGES_TAG_UPLOADED] =
                 dateToTimestamp(productImage.uploaded);
           }
+          if (productImage.contributor != null) {
+            item[_ALL_IMAGES_TAG_UPLOADER] = productImage.contributor;
+          }
         } else {
           if (productImage.rev != null) {
             item[_ALL_IMAGES_TAG_REVISION] = productImage.rev.toString();

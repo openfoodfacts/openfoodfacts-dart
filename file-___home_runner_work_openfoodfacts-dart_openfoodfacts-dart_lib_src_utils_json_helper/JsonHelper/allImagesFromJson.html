@@ -127,6 +127,7 @@
     if (imageId != null) {
       final DateTime? uploaded =
           timestampToDate(fieldObject[_ALL_IMAGES_TAG_UPLOADED]);
+      final String? contributor = fieldObject[_ALL_IMAGES_TAG_UPLOADER];
       &#47;&#47; get each number object (e.g. 200)
       for (var size in ImageSize.values) {
         var number = size.number;
@@ -142,7 +143,7 @@
             height: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]),
             url: numberObject[_ALL_IMAGES_TAG_URL],
             uploaded: uploaded,
-            contributor: fieldObject[_ALL_IMAGES_TAG_UPLOADER],
+            contributor: contributor,
           ),
         );
       }
