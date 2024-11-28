@@ -242,6 +242,7 @@ class ProductImage {
       '${angle == null ? '' : ',angle=${angle!.degreesClockwise}'}'
       '${url == null ? '' : ',url=$url'}'
       '${uploaded == null ? '' : ',uploaded=$uploaded'}'
+      '${contributor == null ? '' : ',uploader=$contributor'}'
       '${imgid == null ? '' : ',imgid=$imgid'}'
       '${rev == null ? '' : ',rev=$rev'}'
       '${coordinatesImageSize == null ? '' : ',coordinatesImageSize=$coordinatesImageSize'}'
