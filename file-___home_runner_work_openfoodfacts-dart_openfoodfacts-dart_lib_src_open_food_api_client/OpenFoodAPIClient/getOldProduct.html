@@ -31,7 +31,7 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client-library.html">src&#47;open_food_api_client.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
-    <li class="self-crumb">getOldProduct static method</li>
+    <li class="self-crumb"><span class="deprecated">getOldProduct</span> static method</li>
   </ol>
   <div class="self-name">getOldProduct</div>
   <form class="search navbar-right" role="search">
@@ -62,9 +62,14 @@
 
     <section class="multi-line-signature">
       
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.5.4/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use getProductV3 and ProductResultV3 instead&#39;)</li>
+    </ol>
+  </div>
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.5.4/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_old_product_result/OldProductResult-class.html">OldProductResult</a></span>&gt;</span></span>
-<span class="name ">getOldProduct</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="getOldProduct-param-configuration"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryConfiguration-class.html">ProductQueryConfiguration</a></span> <span class="parameter-name">configuration</span>, {</span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.5.4/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a class="deprecated" href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_old_product_result/OldProductResult-class.html">OldProductResult</a></span>&gt;</span></span>
+<span class="name deprecated">getOldProduct</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="getOldProduct-param-configuration"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryConfiguration-class.html">ProductQueryConfiguration</a></span> <span class="parameter-name">configuration</span>, {</span></li>
 <li><span class="parameter" id="getOldProduct-param-user"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span></li>
 <li><span class="parameter" id="getOldProduct-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>, </span></li>
 </ol>})
@@ -82,7 +87,8 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">&#47;&#47; TODO(monsieurtanuki): get rid of it when OBF OPF OPFF support api v3
+  <pre class="language-dart"><code class="language-dart">&#47;&#47; TODO: deprecated from 2024-11-28; remove when old enough
+@Deprecated(&#39;Use getProductV3 and ProductResultV3 instead&#39;)
 static Future&lt;OldProductResult&gt; getOldProduct(
   final ProductQueryConfiguration configuration, {
   final User? user,
@@ -122,7 +128,7 @@ static Future&lt;OldProductResult&gt; getOldProduct(
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client-library.html">open_food_api_client</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_open_food_api_client/OpenFoodAPIClient-class.html">OpenFoodAPIClient</a></li>
-    <li class="self-crumb">getOldProduct static method</li>
+    <li class="self-crumb"><span class="deprecated">getOldProduct</span> static method</li>
 </ol>
 
 

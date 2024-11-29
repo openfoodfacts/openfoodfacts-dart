@@ -95,7 +95,7 @@
 
     <dl class="constructor-summary-list">
         <dt id="ProductQueryConfiguration" class="callable">
-          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryConfiguration/ProductQueryConfiguration.html">ProductQueryConfiguration</a></span><span class="signature">(<span class="parameter" id="-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, {</span><span class="parameter" id="-param-version"><span>required</span> <span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryVersion-class.html">ProductQueryVersion</a></span> <span class="parameter-name">version</span>, </span><span class="parameter" id="-param-language"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a>?</span> <span class="parameter-name">language</span>, </span><span class="parameter" id="-param-languages"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>&gt;</span>?</span> <span class="parameter-name">languages</span>, </span><span class="parameter" id="-param-country"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a>?</span> <span class="parameter-name">country</span>, </span><span class="parameter" id="-param-fields"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>&gt;</span>?</span> <span class="parameter-name">fields</span></span>})</span>
+          <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryConfiguration/ProductQueryConfiguration.html">ProductQueryConfiguration</a></span><span class="signature">(<span class="parameter" id="-param-barcode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">barcode</span>, {</span><span class="parameter" id="-param-version"><span>required</span> <span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryVersion-class.html">ProductQueryVersion</a></span> <span class="parameter-name">version</span>, </span><span class="parameter" id="-param-language"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a>?</span> <span class="parameter-name">language</span>, </span><span class="parameter" id="-param-languages"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span>&gt;</span>?</span> <span class="parameter-name">languages</span>, </span><span class="parameter" id="-param-country"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a>?</span> <span class="parameter-name">country</span>, </span><span class="parameter" id="-param-fields"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>&gt;</span>?</span> <span class="parameter-name">fields</span>, </span><span class="parameter" id="-param-productTypeFilter"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_type_filter/ProductTypeFilter-class.html">ProductTypeFilter</a>?</span> <span class="parameter-name">productTypeFilter</span></span>})</span>
         </dt>
         <dd>
           See <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/languages.html">AbstractQueryConfiguration.languages</a> for
@@ -196,6 +196,18 @@ with fields in multiple languages. I.e.:
 
 </dd>
 
+        <dt id="productTypeFilter" class="property">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryConfiguration/productTypeFilter.html">productTypeFilter</a></span>
+  <span class="signature">&#8594; <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_type_filter/ProductTypeFilter-class.html">ProductTypeFilter</a>?</span>
+  
+
+</dt>
+<dd>
+  Filter on a specific server.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
         <dt id="runtimeType" class="property inherited">
   <span class="name"><a href="https://api.dart.dev/stable/3.5.4/dart-core/Object/runtimeType.html">runtimeType</a></span>
   <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.5.4/dart-core/Type-class.html">Type</a></span>
@@ -241,16 +253,16 @@ with fields in multiple languages. I.e.:
 
 </dd>
 
-        <dt id="getParametersMap" class="callable inherited">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_abstract_query_configuration/AbstractQueryConfiguration/getParametersMap.html">getParametersMap</a></span><span class="signature">(<wbr>)
+        <dt id="getParametersMap" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_configurations/ProductQueryConfiguration/getParametersMap.html">getParametersMap</a></span><span class="signature">(<wbr>)
     <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.5.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>&gt;</span></span>
   </span>
   
 
 </dt>
-<dd class="inherited">
+<dd>
   Returns the corresponding API URI parameter map
-  <div class="features"><span class="feature">inherited</span></div>
+  <div class="features"><span class="feature">override</span></div>
 
 </dd>
 

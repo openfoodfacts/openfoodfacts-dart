@@ -91,8 +91,8 @@ Future&lt;Response&gt; getResponse(
   final User? user,
   final UriProductHelper uriHelper,
 ) async {
-  if (version == ProductQueryVersion.v3) {
-    return await HttpHelper().doGetRequest(
+  if (matchesV3()) {
+    return HttpHelper().doGetRequest(
       uriHelper.getUri(
         path: getUriPath(),
         queryParameters: getParametersMap(),
