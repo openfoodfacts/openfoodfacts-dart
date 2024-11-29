@@ -5,7 +5,8 @@ import 'product.dart';
 part 'old_product_result.g.dart';
 
 /// Product Result (old style).
-// TODO(monsieurtanuki): get rid of it when OBF OPF OPFF support api v3
+// TODO: deprecated from 2024-11-28; remove when old enough
+@Deprecated('Use getProductV3 and ProductResultV3 instead')
 @JsonSerializable()
 class OldProductResult extends JsonObject {
   final int? status;
