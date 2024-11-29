@@ -8,7 +8,7 @@ class ProductTypeFilter implements OffTagged {
   ProductTypeFilter(final ProductType productType)
       : offTag = productType.offTag;
 
-  static const all = ProductTypeFilter._('all');
+  static const ProductTypeFilter all = ProductTypeFilter._('all');
 
   @override
   final String offTag;
