@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.18.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.17.1...v3.18.0) (2024-11-29)
+
+
+### Features
+
+* 995 - support of the new "product type" filter for "get product" ([#1004](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1004)) ([032a547](https://github.com/openfoodfacts/openfoodfacts-dart/commit/032a547e6a35aff308f5b9bff96e117434d92350))
+* 999 - added "bool? product.isImageLocked" method ([#1000](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1000)) ([8a01b5c](https://github.com/openfoodfacts/openfoodfacts-dart/commit/8a01b5c9a1a280c96cb936868ed991cd2764fdc7))
+
+
+### Bug Fixes
+
+* contributor correctly displayed ([#1005](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1005)) ([7a9c761](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7a9c7611e943f26c351054af7c722615cf6b71d1))
+* for online price locations, no OSM fields ([#997](https://github.com/openfoodfacts/openfoodfacts-dart/issues/997)) ([43bb499](https://github.com/openfoodfacts/openfoodfacts-dart/commit/43bb4993c430ad94ceb220d1bfece0bf1b02fb2e))
+
 ## [3.17.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.17.0...v3.17.1) (2024-11-21)
 
 
