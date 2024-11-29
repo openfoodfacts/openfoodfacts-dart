@@ -284,7 +284,8 @@ class OpenFoodAPIClient {
   /// Returns the product for the given barcode, with an old syntax.
   ///
   /// Temporarily needed for OBF, OPF and OPFF, that do not support api v3.
-  // TODO(monsieurtanuki): get rid of it when OBF OPF OPFF support api v3
+  // TODO: deprecated from 2024-11-28; remove when old enough
+  @Deprecated('Use getProductV3 and ProductResultV3 instead')
   static Future<OldProductResult> getOldProduct(
     final ProductQueryConfiguration configuration, {
     final User? user,
