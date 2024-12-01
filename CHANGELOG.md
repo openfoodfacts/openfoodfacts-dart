@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.18.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.18.0...v3.18.1) (2024-12-01)
+
+
+### Bug Fixes
+
+* 1007 - no more lint warnings ([#1008](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1008)) ([addf22b](https://github.com/openfoodfacts/openfoodfacts-dart/commit/addf22b7be28eb6ce7342cc21849678262eca6c9))
+
 ## [3.18.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.17.1...v3.18.0) (2024-11-29)
 
 
