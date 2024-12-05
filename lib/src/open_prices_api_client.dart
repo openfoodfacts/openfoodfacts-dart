@@ -12,6 +12,8 @@ import 'prices/proof.dart';
 import 'prices/get_locations_parameters.dart';
 import 'prices/get_locations_result.dart';
 import 'prices/get_parameters_helper.dart';
+import 'prices/get_price_products_parameters.dart';
+import 'prices/get_price_products_result.dart';
 import 'prices/get_prices_parameters.dart';
 import 'prices/get_prices_result.dart';
 import 'prices/get_proofs_parameters.dart';
@@ -161,6 +163,34 @@ class OpenPricesAPIClient {
       }
     }
     return MaybeError<Location>.responseError(response);
+  }
+
+  static Future<MaybeError<GetPriceProductsResult>> getPriceProducts(
+    final GetPriceProductsParameters parameters, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
+  }) async {
+    final Uri uri = getUri(
+      path: '/api/v1/products',
+      queryParameters: parameters.getQueryParameters(),
+      uriHelper: uriHelper,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<GetPriceProductsResult>.value(
+          GetPriceProductsResult.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<GetPriceProductsResult>.responseError(response);
   }
 
   static Future<MaybeError<PriceProduct>> getPriceProductById(

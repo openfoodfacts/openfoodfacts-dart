@@ -14,7 +14,7 @@ abstract class GetParametersHelper<T extends OrderByField> {
 
   /// Returns the parameters as a query parameter map.
   Map<String, String> getQueryParameters() {
-    _checkIntValue('page_number', pageSize, min: 1);
+    _checkIntValue('page_number', pageNumber, min: 1);
     _checkIntValue('page_size', pageSize, min: 1, max: 100);
     _result.clear();
     addNonNullInt(pageNumber, 'page');
@@ -32,7 +32,7 @@ abstract class GetParametersHelper<T extends OrderByField> {
   }
 
   void _checkIntValue(
-    final String field,
+    final String fieldDescription,
     final int? value, {
     final int? min,
     final int? max,
@@ -43,14 +43,14 @@ abstract class GetParametersHelper<T extends OrderByField> {
     if (min != null) {
       if (value < min) {
         throw Exception(
-          '$field minimum value is $min (actual value is $value)',
+          '$fieldDescription minimum value is $min (actual value is $value)',
         );
       }
     }
     if (max != null) {
       if (value > max) {
         throw Exception(
-          '$field maximum value is $max (actual value is $value)',
+          '$fieldDescription maximum value is $max (actual value is $value)',
         );
       }
     }
