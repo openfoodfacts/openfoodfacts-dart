@@ -1,23 +1,24 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+description: 'Create a report to help us improve the Open Food Facts Dart SDK'
+about: 'Create a report to help us improve the Open Food Facts Dart SDK'
 title: ''
-labels: ''
+type: '🐛 Bug'
 assignees: ''
 
 ---
 
 ### Description
-A clear and concise description of what the bug is.
+<!-- A clear and concise description of what the bug is.-->
 
 ### Expected behavior
-A clear and concise description of what you expected to happen.
+<!-- A clear and concise description of what you expected to happen.-->
 
 ### Stacktraces
-If applicable, provide error stacktraces.
+<!-- If applicable, provide error stacktraces.-->
 
 ### Package information
-Open Food Facts package version:
+<!-- Open Food Facts package version:-->
 
 ### Additional context
-Add any other context about the problem here.
+<!-- Add any other context about the problem here.-->
