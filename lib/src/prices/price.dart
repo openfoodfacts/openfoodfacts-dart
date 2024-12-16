@@ -5,6 +5,7 @@ import 'location.dart';
 import 'location_osm_type.dart';
 import 'price_per.dart';
 import 'price_product.dart';
+import 'price_type.dart';
 import 'proof.dart';
 import '../interface/json_object.dart';
 import '../utils/json_helper.dart';
@@ -133,6 +134,10 @@ class Price extends JsonObject {
   /// Receipt's price quantity (user input).
   @JsonKey(name: 'receipt_quantity')
   int? receiptQuantity;
+
+  /// Type.
+  @JsonKey()
+  PriceType? type;
 
   /// Owner. Read-only.
   @JsonKey()
