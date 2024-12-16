@@ -161,6 +161,7 @@ void main() {
     test('create', () async {
       final Price initialPrice = Price()
         ..productCode = '3560071492755'
+        ..type = PriceType.product
         ..price = 3.99
         ..currency = Currency.EUR
         ..locationOSMId = 4966187139
@@ -173,12 +174,10 @@ void main() {
             ..priceWithoutDiscount = 13
             ..priceIsDiscounted = true;
 
-      String bearerToken = invalidBearerToken;
-
       // failing price creation with invalid token
       MaybeError<Price?> addedPrice = await OpenPricesAPIClient.createPrice(
         price: initialPrice,
-        bearerToken: bearerToken,
+        bearerToken: invalidBearerToken,
         uriHelper: uriHelper,
       );
       expect(addedPrice.isError, isTrue);
@@ -209,7 +208,7 @@ void main() {
         proofType: uploadProofType,
         imageUri: initialImageUri,
         mediaType: initialMediaType,
-        bearerToken: bearerToken,
+        bearerToken: invalidBearerToken,
         uriHelper: uriHelper,
       );
       expect(uploadProof.isError, isTrue);
@@ -226,7 +225,7 @@ void main() {
       );
       expect(token.isError, isFalse);
       expect(token.value, isNotEmpty);
-      bearerToken = token.value;
+      final String bearerToken = token.value;
 
       // successful proof upload with valid token
       uploadProof = await OpenPricesAPIClient.uploadProof(
@@ -294,6 +293,7 @@ void main() {
       expect(addedPrice.isError, isFalse);
       final Price addedValue = addedPrice.value!;
       expect(addedValue.productCode, initialPrice.productCode);
+      expect(addedValue.type, initialPrice.type);
       expect(addedValue.price, initialPrice.price);
       expect(
           addedValue.priceWithoutDiscount, initialPrice.priceWithoutDiscount);

@@ -37,6 +37,7 @@ Price _$PriceFromJson(Map<String, dynamic> json) => Price()
       ? null
       : PriceProduct.fromJson(json['product'] as Map<String, dynamic>)
   ..receiptQuantity = (json['receipt_quantity'] as num?)?.toInt()
+  ..type = $enumDecodeNullable(_$PriceTypeEnumMap, json['type'])
   ..owner = json['owner'] as String
   ..created = JsonHelper.stringTimestampToDate(json['created'])
   ..updated = JsonHelper.nullableStringTimestampToDate(json['updated']);
@@ -63,6 +64,7 @@ Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
       'location': instance.location,
       'product': instance.product,
       'receipt_quantity': instance.receiptQuantity,
+      'type': _$PriceTypeEnumMap[instance.type],
       'owner': instance.owner,
       'created': instance.created.toIso8601String(),
       'updated': instance.updated?.toIso8601String(),
@@ -385,4 +387,9 @@ const _$LocationOSMTypeEnumMap = {
   LocationOSMType.node: 'NODE',
   LocationOSMType.way: 'WAY',
   LocationOSMType.relation: 'RELATION',
+};
+
+const _$PriceTypeEnumMap = {
+  PriceType.product: 'PRODUCT',
+  PriceType.category: 'CATEGORY',
 };
