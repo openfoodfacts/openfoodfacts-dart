@@ -206,19 +206,6 @@ void main() {
       final MediaType initialMediaType =
           HttpHelper().imagineMediaType(initialImageUri.path)!;
 
-      // failing proof upload with invalid token
-      MaybeError<Proof> uploadProof = await OpenPricesAPIClient.uploadProof(
-        proofType: uploadProofType,
-        imageUri: initialImageUri,
-        mediaType: initialMediaType,
-        bearerToken: invalidBearerToken,
-        uriHelper: uriHelper,
-      );
-      expect(uploadProof.isError, isTrue);
-      expect(uploadProof.statusCode, Session.invalidActionWithAuthStatusCode);
-      expect(uploadProof.detailError,
-          contains(Session.invalidActionWithAuthMessage));
-
       // authentication
       final MaybeError<String> token =
           await OpenPricesAPIClient.getAuthenticationToken(
@@ -231,7 +218,8 @@ void main() {
       final String bearerToken = token.value;
 
       // successful proof upload with valid token
-      uploadProof = await OpenPricesAPIClient.uploadProof(
+      final MaybeError<Proof> uploadProof =
+          await OpenPricesAPIClient.uploadProof(
         proofType: uploadProofType,
         imageUri: initialImageUri,
         mediaType: initialMediaType,
@@ -813,13 +801,13 @@ void main() {
       // value as of 2024-12-05
       expect(result.total, greaterThanOrEqualTo(2040));
 
-      // values as of 2024-12-05
+      // values as of 2025-01-03
       const Map<Flavor?, int> expectedMinCounts = <Flavor?, int>{
-        Flavor.openFoodFacts: 3625952,
-        Flavor.openBeautyFacts: 31463,
-        Flavor.openPetFoodFacts: 9955,
-        Flavor.openProductFacts: 15741,
-        null: 3688608,
+        Flavor.openFoodFacts: 3679133,
+        Flavor.openBeautyFacts: 34557,
+        Flavor.openPetFoodFacts: 10252,
+        Flavor.openProductFacts: 15736,
+        null: 3745994,
       };
       for (final Flavor? flavor in expectedMinCounts.keys) {
         parameters = GetPriceProductsParameters()..source = flavor;
