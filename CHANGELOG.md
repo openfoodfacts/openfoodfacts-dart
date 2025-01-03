@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.19.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.18.1...v3.19.0) (2025-01-03)
+
+
+### Features
+
+* 1003 - new price type field ([#1016](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1016)) ([5f7b911](https://github.com/openfoodfacts/openfoodfacts-dart/commit/5f7b9117b721f0568ba80e296b47fd3f1e5f5fe3))
+* 1011 - new "getPriceProducts" method ([#1012](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1012)) ([c583648](https://github.com/openfoodfacts/openfoodfacts-dart/commit/c5836487b196f2b5b6d46e853af4f28ed8fdbd33))
+
 ## [3.18.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.18.0...v3.18.1) (2024-12-01)
 
 
