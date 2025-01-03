@@ -73,7 +73,7 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">Map&lt;String, String&gt; getQueryParameters() {
-  _checkIntValue(&#39;page_number&#39;, pageSize, min: 1);
+  _checkIntValue(&#39;page_number&#39;, pageNumber, min: 1);
   _checkIntValue(&#39;page_size&#39;, pageSize, min: 1, max: 100);
   _result.clear();
   addNonNullInt(pageNumber, &#39;page&#39;);
