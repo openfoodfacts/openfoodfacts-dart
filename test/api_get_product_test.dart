@@ -179,7 +179,6 @@ void main() {
           'Invertzuckersirup',
           'natürliches Aroma',
           'Schokolade Mürbegebäck',
-          'PflanzenPalmfett',
           'Schokoladenstückchen',
           'Kakaomasse',
           'Kakaobutter',
@@ -655,7 +654,7 @@ void main() {
       expect(nutritionalQuality.first.settingNote, isNull);
       expect(nutritionalQuality.first.description, '');
       expect(nutritionalQuality.first.descriptionShort,
-          'Poor nutritional quality');
+          'Lower nutritional quality');
       expect(nutritionalQuality.first.title, 'Nutri-Score D');
       expect(nutritionalQuality.first.name, 'Nutri-Score');
       expect(nutritionalQuality.first.match,
@@ -884,7 +883,6 @@ void main() {
 
     test('get knowledge panels', () async {
       const Set<String> someExpectedKeys = <String>{
-        'ecoscore',
         'environment_card',
         'health_card',
         'ingredients',
