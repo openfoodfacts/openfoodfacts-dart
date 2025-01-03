@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the uriHelperFoodTest constant from the open_food_api_configuration library, for the Dart programming language.">
-  <title>uriHelperFoodTest constant - open_food_api_configuration library - Dart API</title>
+  <meta name="description" content="API docs for the fieldsAllLanguages constant from the openfoodfacts library, for the Dart programming language.">
+  <title>fieldsAllLanguages constant - openfoodfacts library - Dart API</title>
 
 
   
@@ -16,23 +16,19 @@
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
   <link rel="icon" href="../static-assets/favicon.png?v1">
-
   
 </head>
 
-
 <body data-base-href="../" data-using-base-href="false" class="light-theme">
-
 <div id="overlay-under-drawer"></div>
-
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">openfoodfacts</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_open_food_api_configuration/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_open_food_api_configuration-library.html">src&#47;utils&#47;open_food_api_configuration.dart</a></li>
-    <li class="self-crumb">uriHelperFoodTest constant</li>
+    <li><a href="../openfoodfacts/openfoodfacts-library.html">openfoodfacts.dart</a></li>
+    <li class="self-crumb"><span class="deprecated">fieldsAllLanguages</span> constant</li>
   </ol>
-  <div class="self-name">uriHelperFoodTest</div>
+  <div class="self-name">fieldsAllLanguages</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -49,43 +45,46 @@
   </div>
 </header>
 <main>
-
   <div
       id="dartdoc-main-content"
       class="main-content"
-      data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_open_food_api_configuration&#47;file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_open_food_api_configuration-library-sidebar.html"
+      data-above-sidebar="openfoodfacts&#47;openfoodfacts-library-sidebar.html"
       data-below-sidebar="">
       <div>
-<h1><span class="kind-top-level-property">uriHelperFoodTest</span> top-level constant 
+<h1><span class="kind-top-level-property">fieldsAllLanguages</span> top-level constant 
  
 </h1></div>
 
         <section class="multi-line-signature">
           
-          <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a>
-          const <span class="name ">uriHelperFoodTest</span>
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.6.0/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use ProductField.getAllLanguagesList() instead&#39;)</li>
+    </ol>
+  </div>
+          <a href="https://api.dart.dev/stable/3.6.0/dart-core/Set-class.html">Set</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_fields/ProductField.html">ProductField</a></span>&gt;</span>
+          const <span class="name deprecated">fieldsAllLanguages</span>
           
 
         </section>
         
-<section class="desc markdown">
-  <p>Uri of the test requests to the backend (OFF).</p>
-</section>
 
         
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">const UriProductHelper uriHelperFoodTest = UriProductHelper(
-  domain: &#39;openfoodfacts.net&#39;,
-  userInfoForPatch: HttpHelper.userInfoForTest,
-  isTestMode: true,
-);</code></pre>
+  <pre class="language-dart"><code class="language-dart">@Deprecated(&#39;Use ProductField.getAllLanguagesList() instead&#39;)
+const Set&lt;ProductField&gt; fieldsAllLanguages = {
+  ProductField.NAME_ALL_LANGUAGES,
+  ProductField.GENERIC_NAME_ALL_LANGUAGES,
+  ProductField.ABBREVIATED_NAME_ALL_LANGUAGES,
+  ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
+  ProductField.PACKAGING_TEXT_ALL_LANGUAGES,
+};</code></pre>
 </section>
 
 
 
   </div> <!-- /.main-content -->
-
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
@@ -93,40 +92,30 @@
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
 </header>
-
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../index.html">openfoodfacts</a></li>
-    <li><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_open_food_api_configuration/file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_open_food_api_configuration-library.html">open_food_api_configuration</a></li>
-    <li class="self-crumb">uriHelperFoodTest constant</li>
+    <li><a href="../openfoodfacts/openfoodfacts-library.html">openfoodfacts</a></li>
+    <li class="self-crumb"><span class="deprecated">fieldsAllLanguages</span> constant</li>
 </ol>
 
-
-    <h5>open_food_api_configuration library</h5>
+    <h5>openfoodfacts library</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-left-->
-
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
   </div><!--/.sidebar-offcanvas-->
-
 </main>
-
 <footer>
   <span class="no-break">
     openfoodfacts
       3.18.1
   </span>
-
   
 </footer>
-
 
 
 <script src="../static-assets/highlight.pack.js?v1"></script>
 <script src="../static-assets/docs.dart.js"></script>
 
-
-
 </body>
-
 </html>
 
