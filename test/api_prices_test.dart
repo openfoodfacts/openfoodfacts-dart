@@ -7,8 +7,9 @@ import 'test_constants.dart';
 
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  const String invalidBearerToken = 'invalid bearer token';
   const int HTTP_OK = 200;
+  const int pageNumber = 1;
+  const int pageSize = 20;
 
   group('$OpenPricesAPIClient default', () {
     const UriProductHelper uriHelper = uriHelperFoodProd;
@@ -173,6 +174,7 @@ void main() {
             ..priceWithoutDiscount = 13
             ..priceIsDiscounted = true;
 
+      const String invalidBearerToken = 'invalid bearer token';
       String bearerToken = invalidBearerToken;
 
       // failing price creation with invalid token
@@ -372,8 +374,6 @@ void main() {
 
     test('get prices', () async {
       const UriProductHelper uriHelper = uriHelperFoodProd;
-      const int pageNumber = 1;
-      const int pageSize = 20;
 
       late GetPricesResult result;
 
@@ -556,9 +556,6 @@ void main() {
     });
 
     test('get locations', () async {
-      const int pageNumber = 1;
-      const int pageSize = 20;
-
       late GetLocationsResult result;
 
       // oldest first
@@ -707,6 +704,133 @@ void main() {
         'No Product matches the given query.',
       );
     });
+
+    test('get products', () async {
+      late GetPriceProductsResult result;
+
+      // oldest first
+      GetPriceProductsParameters parameters = GetPriceProductsParameters()
+        ..orderBy = <OrderBy<GetPriceProductsOrderField>>[
+          OrderBy(field: GetPriceProductsOrderField.created, ascending: true),
+        ]
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber;
+      MaybeError<GetPriceProductsResult> maybeResults;
+      try {
+        maybeResults = await OpenPricesAPIClient.getPriceProducts(
+          parameters,
+          uriHelper: uriHelper,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.numberOfPages, (result.total! / result.pageSize!).ceil());
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(pageSize));
+      final DateTime oldestDate = result.items!.first.created;
+
+      // newest first
+      parameters = GetPriceProductsParameters()
+        ..orderBy = <OrderBy<GetPriceProductsOrderField>>[
+          OrderBy(field: GetPriceProductsOrderField.created, ascending: false),
+        ]
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber;
+      try {
+        maybeResults = await OpenPricesAPIClient.getPriceProducts(
+          parameters,
+          uriHelper: uriHelper,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.numberOfPages, (result.total! / result.pageSize!).ceil());
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(pageSize));
+      final DateTime newestDate = result.items!.first.created;
+
+      expect(
+        newestDate.millisecondsSinceEpoch,
+        greaterThan(oldestDate.millisecondsSinceEpoch),
+      );
+
+      // most prices first
+      parameters = GetPriceProductsParameters()
+        ..orderBy = <OrderBy<GetPriceProductsOrderField>>[
+          OrderBy(
+            field: GetPriceProductsOrderField.priceCount,
+            ascending: false,
+          ),
+        ]
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber;
+      try {
+        maybeResults = await OpenPricesAPIClient.getPriceProducts(
+          parameters,
+          uriHelper: uriHelper,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.numberOfPages, (result.total! / result.pageSize!).ceil());
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(pageSize));
+      // value as of 2024-12-05
+      expect(result.items!.first.priceCount, greaterThanOrEqualTo(107));
+
+      parameters = GetPriceProductsParameters()..brandsLike = 'ferrero';
+      maybeResults = await OpenPricesAPIClient.getPriceProducts(
+        parameters,
+        uriHelper: uriHelper,
+      );
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      // value as of 2024-12-05
+      expect(result.total, greaterThanOrEqualTo(2040));
+
+      // values as of 2024-12-05
+      const Map<Flavor?, int> expectedMinCounts = <Flavor?, int>{
+        Flavor.openFoodFacts: 3625952,
+        Flavor.openBeautyFacts: 31463,
+        Flavor.openPetFoodFacts: 9955,
+        Flavor.openProductFacts: 15741,
+        null: 3688608,
+      };
+      for (final Flavor? flavor in expectedMinCounts.keys) {
+        parameters = GetPriceProductsParameters()..source = flavor;
+        maybeResults = await OpenPricesAPIClient.getPriceProducts(
+          parameters,
+          uriHelper: uriHelper,
+        );
+        expect(maybeResults.isError, isFalse);
+        result = maybeResults.value;
+        expect(result.total, greaterThanOrEqualTo(expectedMinCounts[flavor]!));
+      }
+    });
   });
 
   group('$OpenPricesAPIClient Proofs', () {
@@ -729,8 +853,6 @@ void main() {
     });
 
     test('get proofs', () async {
-      const int pageNumber = 1;
-      const int pageSize = 20;
       const GetProofsOrderField orderField = GetProofsOrderField.created;
       const ProofType proofType = ProofType.receipt;
 
@@ -857,8 +979,6 @@ void main() {
     const UriProductHelper uriHelper = uriHelperFoodProd;
 
     test('get users', () async {
-      const int pageNumber = 1;
-      const int pageSize = 20;
       const GetUsersOrderField orderField = GetUsersOrderField.priceCount;
 
       late GetUsersResult result;
