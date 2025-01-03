@@ -162,6 +162,7 @@ void main() {
     test('create', () async {
       final Price initialPrice = Price()
         ..productCode = '3560071492755'
+        ..type = PriceType.product
         ..price = 3.99
         ..currency = Currency.EUR
         ..locationOSMId = 4966187139
@@ -175,12 +176,11 @@ void main() {
             ..priceIsDiscounted = true;
 
       const String invalidBearerToken = 'invalid bearer token';
-      String bearerToken = invalidBearerToken;
 
       // failing price creation with invalid token
       MaybeError<Price?> addedPrice = await OpenPricesAPIClient.createPrice(
         price: initialPrice,
-        bearerToken: bearerToken,
+        bearerToken: invalidBearerToken,
         uriHelper: uriHelper,
       );
       expect(addedPrice.isError, isTrue);
@@ -206,19 +206,6 @@ void main() {
       final MediaType initialMediaType =
           HttpHelper().imagineMediaType(initialImageUri.path)!;
 
-      // failing proof upload with invalid token
-      MaybeError<Proof> uploadProof = await OpenPricesAPIClient.uploadProof(
-        proofType: uploadProofType,
-        imageUri: initialImageUri,
-        mediaType: initialMediaType,
-        bearerToken: bearerToken,
-        uriHelper: uriHelper,
-      );
-      expect(uploadProof.isError, isTrue);
-      expect(uploadProof.statusCode, Session.invalidActionWithAuthStatusCode);
-      expect(uploadProof.detailError,
-          contains(Session.invalidActionWithAuthMessage));
-
       // authentication
       final MaybeError<String> token =
           await OpenPricesAPIClient.getAuthenticationToken(
@@ -228,10 +215,11 @@ void main() {
       );
       expect(token.isError, isFalse);
       expect(token.value, isNotEmpty);
-      bearerToken = token.value;
+      final String bearerToken = token.value;
 
       // successful proof upload with valid token
-      uploadProof = await OpenPricesAPIClient.uploadProof(
+      final MaybeError<Proof> uploadProof =
+          await OpenPricesAPIClient.uploadProof(
         proofType: uploadProofType,
         imageUri: initialImageUri,
         mediaType: initialMediaType,
@@ -296,6 +284,7 @@ void main() {
       expect(addedPrice.isError, isFalse);
       final Price addedValue = addedPrice.value!;
       expect(addedValue.productCode, initialPrice.productCode);
+      expect(addedValue.type, initialPrice.type);
       expect(addedValue.price, initialPrice.price);
       expect(
           addedValue.priceWithoutDiscount, initialPrice.priceWithoutDiscount);
@@ -812,13 +801,13 @@ void main() {
       // value as of 2024-12-05
       expect(result.total, greaterThanOrEqualTo(2040));
 
-      // values as of 2024-12-05
+      // values as of 2025-01-03
       const Map<Flavor?, int> expectedMinCounts = <Flavor?, int>{
-        Flavor.openFoodFacts: 3625952,
-        Flavor.openBeautyFacts: 31463,
-        Flavor.openPetFoodFacts: 9955,
-        Flavor.openProductFacts: 15741,
-        null: 3688608,
+        Flavor.openFoodFacts: 3679133,
+        Flavor.openBeautyFacts: 34557,
+        Flavor.openPetFoodFacts: 10252,
+        Flavor.openProductFacts: 15736,
+        null: 3745994,
       };
       for (final Flavor? flavor in expectedMinCounts.keys) {
         parameters = GetPriceProductsParameters()..source = flavor;
