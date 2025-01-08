@@ -61,15 +61,15 @@ class NutripatrolApiClient {
 
   /// Get all tickets.
   static Future<MaybeError<Tickets>> getTickets({
-    final TicketStatus status = TicketStatus.open,
-    final TicketType type_ = TicketType.image,
+    final NutripatrolTicketStatus status = NutripatrolTicketStatus.open,
+    final NutripatrolType type = NutripatrolType.image,
     final int? page,
     final int? pageSize,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Map<String, String> queryParameters = <String, String>{};
     queryParameters['status'] = status.toString().split('.').last;
-    queryParameters['type'] = type_.toString().split('.').last;
+    queryParameters['type_'] = type.toString().split('.').last;
     if (page != null) queryParameters['page'] = page.toString();
     if (pageSize != null) queryParameters['page_size'] = pageSize.toString();
 

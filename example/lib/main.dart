@@ -23,7 +23,9 @@ void getTicket() async {
 /// The result will be a MaybeError<Tickets> that can be parsed
 void getTickets() async {
   await NutripatrolApiClient.getTickets(
-      status: TicketStatus.open, type_: TicketType.image, page: 1);
+      status: NutripatrolTicketStatus.open,
+      type: NutripatrolType.image,
+      page: 1);
 }
 
 /// request a product from the OpenFoodFacts database

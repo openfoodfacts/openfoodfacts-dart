@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 
 import '../interface/json_object.dart';
 
@@ -16,7 +17,7 @@ class Ticket extends JsonObject {
 
   /// Type of the ticket.
   @JsonKey()
-  late TicketType type;
+  late NutripatrolType type;
 
   /// Url of the ticket. Read-only.
   @JsonKey()
@@ -24,7 +25,7 @@ class Ticket extends JsonObject {
 
   /// Status of the ticket.
   @JsonKey()
-  late TicketStatus status;
+  late NutripatrolTicketStatus status;
 
   /// Image id of the ticket. Read-only.
   @JsonKey(name: 'image_id')
@@ -42,14 +43,15 @@ class Ticket extends JsonObject {
 
   factory Ticket.fromJson(Map<String, dynamic> json) => _$TicketFromJson(json);
 
-  @override Map<String, dynamic> toJson() => _$TicketToJson(this);
+  @override
+  Map<String, dynamic> toJson() => _$TicketToJson(this);
 }
 
 /// Enum for ticket type
-enum TicketType {
+enum NutripatrolType {
   @JsonValue('image')
   image,
-  
+
   @JsonValue('product')
   product,
 
@@ -58,28 +60,10 @@ enum TicketType {
 }
 
 /// Enum for ticket status
-enum TicketStatus {
+enum NutripatrolTicketStatus {
   @JsonValue('open')
   open,
-  
+
   @JsonValue('closed')
   closed
-}
-
-/// Enum for ticket flavor
-enum Flavor {
-  @JsonValue('off')
-  off,
-  
-  @JsonValue('obf')
-  obf,
-
-  @JsonValue('opff')
-  opff,
-
-  @JsonValue('opf')
-  opf,
-
-  @JsonValue('off-pro')
-  offPro
 }
