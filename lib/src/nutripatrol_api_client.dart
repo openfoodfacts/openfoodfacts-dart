@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:http/http.dart';
+import 'package:openfoodfacts/src/nutripatrol/create_flag.dart';
 import 'package:openfoodfacts/src/nutripatrol/get_tickets.dart';
 import 'package:openfoodfacts/src/prices/maybe_error.dart';
 import 'utils/http_helper.dart';
@@ -97,5 +100,44 @@ class NutripatrolApiClient {
       }
     }
     return MaybeError<Tickets>.responseError(response);
+  }
+
+  /// Create a Flag for a product.
+  ///
+  /// [flag] is the flag to create.
+  static Future<MaybeError<CreateFlag>> createFlag({
+    required final CreateFlag flag,
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Uri uri = getUri(
+      path: '/api/v1/flags',
+      uriHelper: uriHelper,
+    );
+    final Map<String, dynamic> body = <String, dynamic>{
+      if (flag.barcode != null) 'barcode': flag.barcode,
+      if (flag.comment != null) 'comment': flag.comment,
+      if (flag.confidence != null) 'confidence': flag.confidence,
+      if (flag.imageId != null) 'image_id': flag.imageId,
+      if (flag.reason != null) 'reason': flag.reason,
+      'type': flag.type,
+      'url': flag.url,
+      'user_id': flag.userId,
+      'device_id': flag.deviceId,
+      'source': flag.source,
+      'flavor': flag.flavor,
+    };
+    final Response response = await HttpHelper().doPostJsonRequest(
+        uri, jsonEncode(body),
+        uriHelper: uriHelper, bearerToken: "");
+    if (response.statusCode == 201) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<CreateFlag>.value(
+            CreateFlag.fromJson(decodedResponse));
+      } catch (_) {
+        // Handle parsing errors if necessary
+      }
+    }
+    return MaybeError<CreateFlag>.responseError(response);
   }
 }
