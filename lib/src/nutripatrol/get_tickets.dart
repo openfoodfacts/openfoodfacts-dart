@@ -17,7 +17,9 @@ class Tickets extends JsonObject {
 
   Tickets();
 
-  factory Tickets.fromJson(Map<String, dynamic> json) => _$TicketsFromJson(json);
+  factory Tickets.fromJson(Map<String, dynamic> json) =>
+      _$TicketsFromJson(json);
 
-  @override Map<String, dynamic> toJson() => _$TicketsToJson(this);
+  @override
+  Map<String, dynamic> toJson() => _$TicketsToJson(this);
 }
