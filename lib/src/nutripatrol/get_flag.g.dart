@@ -20,7 +20,7 @@ Flag _$FlagFromJson(Map<String, dynamic> json) => Flag()
   ..flavor = $enumDecode(_$FlavorEnumMap, json['flavor'])
   ..reason = json['reason'] as String?
   ..comment = json['comment'] as String?
-  ..CreatedAt = json['created_at'] as String;
+  ..createdAt = json['created_at'] as String;
 
 Map<String, dynamic> _$FlagToJson(Flag instance) => <String, dynamic>{
       'id': instance.id,
@@ -36,7 +36,7 @@ Map<String, dynamic> _$FlagToJson(Flag instance) => <String, dynamic>{
       'flavor': _$FlavorEnumMap[instance.flavor]!,
       'reason': instance.reason,
       'comment': instance.comment,
-      'created_at': instance.CreatedAt,
+      'created_at': instance.createdAt,
     };
 
 const _$NutripatrolTypeEnumMap = {

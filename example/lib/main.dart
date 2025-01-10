@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:json_annotation/src/json_value.dart';
-import 'package:openfoodfacts/src/nutripatrol/get_ticket.dart';
 
 void main() {
   OpenFoodAPIConfiguration.userAgent = UserAgent(

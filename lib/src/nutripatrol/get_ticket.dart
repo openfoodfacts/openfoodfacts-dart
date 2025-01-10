@@ -37,7 +37,7 @@ class Ticket extends JsonObject {
 
   /// created date of the ticket. Read-only.
   @JsonKey(name: 'created_at')
-  late String CreatedAt;
+  late String createdAt;
 
   Ticket();
 

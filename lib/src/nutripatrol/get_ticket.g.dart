@@ -14,7 +14,7 @@ Ticket _$TicketFromJson(Map<String, dynamic> json) => Ticket()
   ..status = $enumDecode(_$NutripatrolTicketStatusEnumMap, json['status'])
   ..imageId = json['image_id'] as String?
   ..flavor = $enumDecode(_$FlavorEnumMap, json['flavor'])
-  ..CreatedAt = json['created_at'] as String;
+  ..createdAt = json['created_at'] as String;
 
 Map<String, dynamic> _$TicketToJson(Ticket instance) => <String, dynamic>{
       'id': instance.id,
@@ -24,7 +24,7 @@ Map<String, dynamic> _$TicketToJson(Ticket instance) => <String, dynamic>{
       'status': _$NutripatrolTicketStatusEnumMap[instance.status]!,
       'image_id': instance.imageId,
       'flavor': _$FlavorEnumMap[instance.flavor]!,
-      'created_at': instance.CreatedAt,
+      'created_at': instance.createdAt,
     };
 
 const _$NutripatrolTypeEnumMap = {
