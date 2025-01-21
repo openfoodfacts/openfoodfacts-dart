@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/src/nutripatrol/create_flag.dart';
+import 'package:openfoodfacts/src/nutripatrol/create_flag_request.dart';
 import 'package:openfoodfacts/src/nutripatrol/get_tickets.dart';
 import 'package:openfoodfacts/src/prices/maybe_error.dart';
 import 'utils/http_helper.dart';
@@ -106,7 +107,7 @@ class NutripatrolApiClient {
   ///
   /// [flag] is the flag to create.
   static Future<MaybeError<CreateFlag>> createFlag({
-    required final CreateFlag flag,
+    required final CreateFlagRequest flag,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Uri uri = getUri(
