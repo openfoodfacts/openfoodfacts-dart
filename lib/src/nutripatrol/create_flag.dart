@@ -67,14 +67,3 @@ class CreateFlag extends JsonObject {
   @override
   Map<String, dynamic> toJson() => _$CreateFlagToJson(this);
 }
-
-enum NutripatrolSource {
-  @JsonValue('mobile')
-  mobile,
-
-  @JsonValue('web')
-  web,
-
-  @JsonValue('robotoff')
-  robotoff,
-}

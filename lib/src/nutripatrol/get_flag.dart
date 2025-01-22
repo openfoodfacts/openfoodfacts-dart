@@ -3,6 +3,7 @@ import 'package:openfoodfacts/src/nutripatrol/get_ticket.dart';
 import 'package:openfoodfacts/src/prices/flavor.dart';
 
 import '../interface/json_object.dart';
+import '../utils/nutripatrol_source.dart';
 
 part 'get_flag.g.dart';
 
@@ -70,15 +71,4 @@ class Flag extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$FlagToJson(this);
-}
-
-enum NutripatrolSource {
-  @JsonValue('mobile')
-  mobile,
-
-  @JsonValue('web')
-  web,
-
-  @JsonValue('robotoff')
-  robotoff,
 }
