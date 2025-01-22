@@ -109,32 +109,14 @@ class Product extends JsonObject {
       toJson: LanguageHelper.toJsonStringMap)
   Map<OpenFoodFactsLanguage, String>? productNameInLanguages;
 
-  /// The conservation conditions of the product, either set directly or taken from one of the localizations.
-  /// 
-  /// Prefer using [conservationConditionsInLanguages] for more accurate and localized data.
-  @JsonKey(name: 'conservation_conditions')
-  String? conservation_conditions;
-
   /// Localized conservation conditions of the product, stored in a map where each language is represented by its respective key.
-  /// 
-  /// This field is useful when you need to retrieve conservation conditions in a specific language. 
-  /// For general usage, rely on [conservation_conditions] or the localization-specific fields.
   @JsonKey(
       name: 'conservation_conditions_in_languages',
       fromJson: LanguageHelper.fromJsonStringMap,
       toJson: LanguageHelper.toJsonStringMap)
   Map<OpenFoodFactsLanguage, String>? conservationConditionsInLanguages;
 
-  /// The customer service information for the product, either set directly or taken from one of the localizations.
-  /// 
-  /// Prefer using [customerServiceInLanguages] for more accurate and localized data.
-  @JsonKey(name: 'customer_service')
-  String? customer_service;
-
   /// Localized customer service information for the product, stored in a map where each language is represented by its respective key.
-  /// 
-  /// This field is useful when you need to retrieve customer service information in a specific language. 
-  /// For general usage, rely on [customer_service] or the localization-specific fields.
   @JsonKey(
       name: 'customer_service_in_languages',
       fromJson: LanguageHelper.fromJsonStringMap,
@@ -636,8 +618,6 @@ class Product extends JsonObject {
       {this.barcode,
       this.productName,
       this.productNameInLanguages,
-      this.conservation_conditions,
-      this.customer_service,
       this.genericName,
       this.brands,
       this.brandsTags,

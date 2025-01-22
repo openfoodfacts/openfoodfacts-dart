@@ -18,34 +18,12 @@ enum ProductField implements OffTagged {
     inLanguagesProductField: ProductField.NAME_IN_LANGUAGES,
     isAllLanguages: true,
   ),
-   CONSERVATION_CONDITIONS(
-    offTag: 'conservation_conditions',
-    inLanguagesProductField: ProductField.CONSERVATION_CONDITIONS_IN_LANGUAGES,
-  ),
-
-  CONSERVATION_CONDITIONS_IN_LANGUAGES(
-    offTag: 'conservation_conditions_',
-    isInLanguages: true,
-  ),
-
   CONSERVATION_CONDITIONS_ALL_LANGUAGES(
     offTag: 'conservation_conditions_languages',
-    inLanguagesProductField: ProductField.CONSERVATION_CONDITIONS_IN_LANGUAGES,
     isAllLanguages: true,
   ),
-  CUSTOMER_SERVICE(
-    offTag: 'customer_service',
-    inLanguagesProductField: ProductField.CUSTOMER_SERVICE_IN_LANGUAGES,
-  ),
-
-  CUSTOMER_SERVICE_IN_LANGUAGES(
-    offTag: 'customer_service_',
-    isInLanguages: true,
-  ),
-
   CUSTOMER_SERVICE_ALL_LANGUAGES(
     offTag: 'customer_service_languages',
-    inLanguagesProductField: ProductField.CUSTOMER_SERVICE_IN_LANGUAGES,
     isAllLanguages: true,
   ),
   GENERIC_NAME(
@@ -317,8 +295,6 @@ enum ProductField implements OffTagged {
 @Deprecated('Use ProductField.getInLanguagesList() instead')
 const Set<ProductField> fieldsInLanguages = {
   ProductField.NAME_IN_LANGUAGES,
-  ProductField.CONSERVATION_CONDITIONS_IN_LANGUAGES,
-  ProductField.CUSTOMER_SERVICE_IN_LANGUAGES,
   ProductField.GENERIC_NAME_IN_LANGUAGES,
   ProductField.ABBREVIATED_NAME_IN_LANGUAGES,
   ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
@@ -342,6 +318,8 @@ const Set<ProductField> fieldsInLanguages = {
 @Deprecated('Use ProductField.getAllLanguagesList() instead')
 const Set<ProductField> fieldsAllLanguages = {
   ProductField.NAME_ALL_LANGUAGES,
+  ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES,
+  ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES,
   ProductField.GENERIC_NAME_ALL_LANGUAGES,
   ProductField.ABBREVIATED_NAME_ALL_LANGUAGES,
   ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
