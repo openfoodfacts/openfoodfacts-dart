@@ -15,12 +15,12 @@ dependencies:
   meta: ^1.8.0
 
 dev_dependencies:
-  analyzer: 6.11.0
-  build_runner: 2.4.9
-  json_serializable: 6.9.0
-  lints: ">=3.0.0 <5.0.0"
-  test: 1.25.5
-  coverage: 1.8.0
+  analyzer: 7.2.0
+  build_runner: 2.4.14
+  json_serializable: 6.9.3
+  lints: ">=3.0.0 <6.0.0"
+  test: 1.25.14
+  coverage: 1.11.1
 
 funding:
   - "https://donate.openfoodfacts.org/"
