@@ -1,5 +1,4 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/src/model/robotoff_nutrient_extraction_annotation.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';
