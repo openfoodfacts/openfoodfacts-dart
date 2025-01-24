@@ -258,10 +258,7 @@ void main() {
       Nutrient.carbohydrates,
       Nutrient.saturatedFat,
     ]) {
-      RobotoffNutrientAnnotationData annotation =
-          result.getNutrientAnnotation(nutrient, PerSize.oneHundredGrams)!;
-
-      expect(annotation.numericalValue, isNotNull);
+      expect(result.getNutrientAnnotation(nutrient)?.numericalValue, isNotNull);
     }
   });
 }

@@ -40,10 +40,8 @@ class RobotoffNutrientExtractionResult extends JsonObject {
         ?.data?.nutrients?[nutrient.getOffTagPerSize(perSize)];
   }
 
-  RobotoffNutrientAnnotationData? getNutrientAnnotation(
-      Nutrient nutrient, PerSize perSize) {
-    return getLatestInsights
-        ?.data?.annotation?.nutrients?[nutrient.getOffTagPerSize(perSize)];
+  RobotoffNutrientAnnotationData? getNutrientAnnotation(Nutrient nutrient) {
+    return getLatestInsights?.data?.annotation?.nutrients?[nutrient.offTag];
   }
 
   factory RobotoffNutrientExtractionResult.fromJson(
