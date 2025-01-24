@@ -2,6 +2,8 @@
 
 part of 'old_product_result.dart';
 
+// ignore_for_file: deprecated_member_use_from_same_package
+
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
