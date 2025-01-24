@@ -3,7 +3,6 @@ import 'package:openfoodfacts/src/model/nutrient.dart';
 import 'package:openfoodfacts/src/model/per_size.dart';
 
 import '../interface/json_object.dart';
-import '../utils/json_helper.dart';
 import 'robotoff_nutrient_extraction.dart';
 import 'robotoff_nutrient_extraction_annotation.dart';
 
