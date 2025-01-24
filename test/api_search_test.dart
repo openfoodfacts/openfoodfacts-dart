@@ -30,7 +30,7 @@ void main() {
             taxonomyNames: <TaxonomyName>[taxonomyName],
             language: language,
             size: maxSize,
-            excludedItems : []
+            excludedItems : excludedItems
           );
           basicTest(result);
           expect(result.options, hasLength(maxSize));
