@@ -33,6 +33,7 @@ void main() {
 
   const String input1 = 'f';
   const String input2 = 'fr';
+  const List<String> excludedItems = [''];
 
   Future<List<String>> getSlowSuggestions(
     final Autocompleter autoCompleter, {
@@ -40,7 +41,7 @@ void main() {
     required final String input,
   }) async {
     await Future.delayed(Duration(milliseconds: milliseconds));
-    return autoCompleter.getSuggestions(input);
+    return autoCompleter.getSuggestions(input,excludedItems);
   }
 
   /// Returns the result of the longest future.
@@ -66,8 +67,8 @@ void main() {
   group('$OpenFoodAPIClient suggestion manager', () {
     Future<void> testSpeed(final Autocompleter autocompleter) async {
       final AutocompleteManager manager = AutocompleteManager(autocompleter);
-      final List<String> countries1 = await manager.getSuggestions(input1);
-      final List<String> countries2 = await manager.getSuggestions(input2);
+      final List<String> countries1 = await manager.getSuggestions(input1,excludedItems);
+      final List<String> countries2 = await manager.getSuggestions(input2,excludedItems);
       expect(countries1, isNot(equals(countries2)));
 
       // Here we have the second call that takes longer (at least starts later).
@@ -78,8 +79,8 @@ void main() {
       );
       final List<String> countriesFastThenSlow = await last(
         [
-          fastThenSlowManager.getSuggestions(input1),
-          fastThenSlowManager.getSuggestions(input2),
+          fastThenSlowManager.getSuggestions(input1,excludedItems),
+          fastThenSlowManager.getSuggestions(input2,excludedItems),
         ],
       );
       expect(countriesFastThenSlow, countries2);
@@ -92,8 +93,8 @@ void main() {
       );
       final List<String> countriesSlowThenFast = await last(
         [
-          slowThenFastManager.getSuggestions(input1),
-          slowThenFastManager.getSuggestions(input2),
+          slowThenFastManager.getSuggestions(input1,excludedItems),
+          slowThenFastManager.getSuggestions(input2,excludedItems),
         ],
       );
       // regardless, we expect the suggestion for the latest input.
@@ -107,7 +108,7 @@ void main() {
             input: input1,
             milliseconds: millisecondsWait,
           ),
-          autocompleter.getSuggestions(input2),
+          autocompleter.getSuggestions(input2,excludedItems),
         ],
       );
       expect(countriesNormal, countries1);

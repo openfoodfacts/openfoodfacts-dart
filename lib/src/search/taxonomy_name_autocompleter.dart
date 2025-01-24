@@ -32,6 +32,7 @@ class TaxonomyNameAutocompleter implements Autocompleter {
   @override
   Future<List<String>> getSuggestions(
     final String input,
+    final List<String>? excludedItems,
   ) async {
     final AutocompleteSearchResult results =
         await OpenFoodSearchAPIClient.autocomplete(
@@ -42,6 +43,7 @@ class TaxonomyNameAutocompleter implements Autocompleter {
       user: user,
       uriHelper: uriHelper,
       fuzziness: fuzziness,
+      excludedItems: excludedItems
     );
     final List<String> result = <String>[];
     if (results.options == null) {

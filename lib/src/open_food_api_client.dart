@@ -824,6 +824,7 @@ class OpenFoodAPIClient {
     final int limit = 25,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final User? user,
+    final List<String>? excludedItems,
   }) async {
     final Map<String, String> queryParameters = <String, String>{
       'tagtype': taxonomyType.offTag,
@@ -832,7 +833,7 @@ class OpenFoodAPIClient {
       if (country != null) 'cc': country.offTag,
       if (categories != null) 'categories': categories,
       if (shape != null) 'shape': shape,
-      'limit': limit.toString(),
+      'limit': (limit + (excludedItems?.length ?? 0 )).toString(),
     };
     final Uri uri = uriHelper.getUri(
       path: '/api/v3/taxonomy_suggestions',
@@ -849,6 +850,11 @@ class OpenFoodAPIClient {
       for (dynamic value in map['suggestions']) {
         result.add(value.toString());
       }
+    }
+    if (excludedItems != null) {
+      result.removeWhere(
+        (suggestion) => excludedItems.contains(suggestion)
+      );
     }
     return result;
   }

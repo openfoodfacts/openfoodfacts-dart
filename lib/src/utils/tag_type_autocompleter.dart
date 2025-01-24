@@ -34,6 +34,7 @@ class TagTypeAutocompleter implements Autocompleter {
   @override
   Future<List<String>> getSuggestions(
     final String input,
+    final List<String>? excludedItems,
   ) async =>
       OpenFoodAPIClient.getSuggestions(
         tagType,
@@ -45,5 +46,6 @@ class TagTypeAutocompleter implements Autocompleter {
         limit: limit,
         uriHelper: uriHelper,
         user: user,
+        excludedItems : excludedItems
       );
 }

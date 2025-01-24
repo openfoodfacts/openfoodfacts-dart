@@ -62,19 +62,15 @@ class OpenFoodSearchAPIClient {
       user: user,
       uriHelper: uriHelper,
     );
-    // Parse the response
     final AutocompleteSearchResult autocompleteSearchResult =
         AutocompleteSearchResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
     );
-    // If no exclusions are specified, return the result as-is
-    if (excludedItems == null || excludedItems.isEmpty) {
-      return autocompleteSearchResult;
+    if(excludedItems != null){
+      autocompleteSearchResult.options?.removeWhere(
+        (option) => excludedItems.contains(option.text),
+      );
     }
-    // Filter out excluded items
-    autocompleteSearchResult.options?.removeWhere(
-      (option) => excludedItems.contains(option.text),
-    );
     return autocompleteSearchResult;
   }
 }

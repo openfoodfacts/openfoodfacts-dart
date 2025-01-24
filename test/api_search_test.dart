@@ -12,7 +12,7 @@ void main() {
     () {
       const int maxSize = 5;
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
-
+      const List<String> excludedItems = [''];
       void basicTest(final AutocompleteSearchResult result) {
         expect(result.took, greaterThanOrEqualTo(0));
         expect(result.timedOut, false);
@@ -30,6 +30,7 @@ void main() {
             taxonomyNames: <TaxonomyName>[taxonomyName],
             language: language,
             size: maxSize,
+            excludedItems : []
           );
           basicTest(result);
           expect(result.options, hasLength(maxSize));
@@ -76,6 +77,7 @@ void main() {
               size: maxSize,
               // supposed to fix the typo (if relevant)
               fuzziness: inputs[inputValue]!,
+              excludedItems: excludedItems
             );
             basicTest(result);
             expect(result.options, isNotEmpty);
@@ -97,6 +99,7 @@ void main() {
         final String query,
         final String expectedValue, {
         final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH,
+        final List<String>? excludedItems
       }) async {
         final AutocompleteSearchResult result =
             await OpenFoodSearchAPIClient.autocomplete(
@@ -105,6 +108,7 @@ void main() {
           language: language,
           size: maxSize,
           fuzziness: Fuzziness.none,
+          excludedItems: excludedItems
         );
         basicTest(result);
         expect(result.options, isNotEmpty);

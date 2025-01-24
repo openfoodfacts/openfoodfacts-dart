@@ -22,6 +22,7 @@ class AutocompleteManager implements Autocompleter {
   @override
   Future<List<String>> getSuggestions(
     final String input,
+    final List<String>? excludedItems,
   ) async {
     _inputs.add(input);
     final List<String>? cached = _cache[input];
@@ -29,7 +30,7 @@ class AutocompleteManager implements Autocompleter {
       return cached;
     }
     await waitForTestPurpose();
-    _cache[input] = await autocompleter.getSuggestions(input);
+    _cache[input] = await autocompleter.getSuggestions(input , excludedItems ?? []);
     // meanwhile there might have been some calls to this method, adding inputs.
     for (final String latestInput in _inputs.reversed) {
       final List<String>? cached = _cache[latestInput];
