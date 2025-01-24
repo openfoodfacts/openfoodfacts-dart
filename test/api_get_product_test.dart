@@ -234,32 +234,41 @@ void main() {
     });
     
     test('get localized conservation conditions and customer service', () async {
-      ProductQueryConfiguration configuration = ProductQueryConfiguration(
-        '3017620425035', // Using an existing product barcode from previous tests
-        fields: [
-          ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES,
-          ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES,
-        ],
-        version: ProductQueryVersion.v3,
-      );
-      ProductResultV3 result = await getProductV3InProd(
-        configuration,
-      );
-      
-      expect(result.status, ProductResultV3.statusSuccess);
-      expect(result.product, isNotNull);
-      
-      // Check conservation conditions in languages
-      expect(result.product!.conservationConditionsInLanguages, isNotNull);
-      expect(result.product!.conservationConditionsInLanguages, isNotEmpty);
-      expect(result.product!.conservationConditionsInLanguages!.containsKey(OpenFoodFactsLanguage.FRENCH), isTrue);
-      
-      // Check customer service in languages  
-      expect(result.product!.customerServiceInLanguages, isNotNull);
-      expect(result.product!.customerServiceInLanguages, isNotEmpty);
-      expect(result.product!.customerServiceInLanguages!.containsKey(OpenFoodFactsLanguage.FRENCH), isTrue);
-    });
+        ProductQueryConfiguration configuration = ProductQueryConfiguration(
+            '3017620425035',
+            fields: [
+                ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES,
+                ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES,
+            ],
+            version: ProductQueryVersion.v3,
+            language: OpenFoodFactsLanguage.ALL_LANGUAGES,
+        );
 
+        ProductResultV3 result = await getProductV3InProd(configuration);
+
+        expect(result.status, ProductResultV3.statusSuccess);
+        expect(result.product, isNotNull);
+
+        final conservationConditions = result.product!.conservationConditionsInLanguages;
+        expect(conservationConditions, isNotNull);
+        expect(conservationConditions, isNotEmpty);
+        expect(conservationConditions!.containsKey(OpenFoodFactsLanguage.ALL_LANGUAGES), isTrue);
+        expect(conservationConditions[OpenFoodFactsLanguage.ALL_LANGUAGES], isNotEmpty);
+        expect(
+            conservationConditions[OpenFoodFactsLanguage.ALL_LANGUAGES],
+            isA<String>().having((s) => s.trim().isNotEmpty, 'non-empty string', isTrue),
+        );
+
+        final customerService = result.product!.customerServiceInLanguages;
+        expect(customerService, isNotNull);
+        expect(customerService, isNotEmpty);
+        expect(customerService!.containsKey(OpenFoodFactsLanguage.ALL_LANGUAGES), isTrue);
+        expect(customerService[OpenFoodFactsLanguage.ALL_LANGUAGES], isNotEmpty);
+        expect(
+            customerService[OpenFoodFactsLanguage.ALL_LANGUAGES],
+            isA<String>().having((s) => s.trim().isNotEmpty, 'non-empty string', isTrue),
+        );
+    });
     test('get uncommon nutrients', () async {
       // PROD data as of 2021-07-16
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
