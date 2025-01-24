@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:openfoodfacts/src/model/robotoff_nutrient_extraction.dart';
 
 import 'model/insight.dart';
 import 'model/robotoff_question.dart';
 import 'model/robotoff_question_order.dart';
+import 'model/robotoff_nutrient_extraction.dart';
 import 'model/status.dart';
 import 'model/user.dart';
 import 'utils/country_helper.dart';
@@ -196,7 +196,7 @@ class RobotoffAPIClient {
   /// Get nutrient extraction insights for a given barcode
   /// cf. https://robotoff.openfoodfacts.org/api/v1/insights
   static Future<RobotoffNutrientExtractionResult> getNutrientExtraction(
-    String barcode, {
+    final String barcode, {
     final UriHelper uriHelper = uriHelperRobotoffProd,
   }) async {
     final Map<String, String> parameters = <String, String>{

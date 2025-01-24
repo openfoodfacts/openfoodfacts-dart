@@ -1,5 +1,4 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/src/model/robotoff_nutrient_extraction.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';
@@ -232,7 +231,21 @@ void main() {
     expect(result.status, 'found');
     expect(result.insights!, isNotEmpty);
     expect(result.insights![0].barcode, barcode);
-    expect(result.insights![0].data!.nutrients!['fat_100g']!.value, '0.5');
-    expect(result.insights![0].data!.nutrients!['fat_100g']!.unit, 'g');
+    for (Nutrient nutrient in [
+      Nutrient.fat,
+      Nutrient.salt,
+      Nutrient.fiber,
+      Nutrient.sugars,
+      Nutrient.proteins,
+      Nutrient.energyKJ,
+      Nutrient.energyKCal,
+      Nutrient.carbohydrates,
+      Nutrient.saturatedFat,
+    ]) {
+      expect(
+          result.getNutrientEntity(
+              nutrient.getOffTagPerSize(PerSize.oneHundredGrams)),
+          isNotNull);
+    }
   });
 }

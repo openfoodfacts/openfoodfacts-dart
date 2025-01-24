@@ -58,6 +58,7 @@ export 'src/model/product_state.dart';
 export 'src/model/product_stats.dart';
 export 'src/model/product_tag.dart';
 export 'src/model/recommended_daily_intake.dart';
+export 'src/model/robotoff_nutrient_extraction.dart';
 export 'src/model/robotoff_question.dart';
 export 'src/model/robotoff_question_order.dart';
 export 'src/model/search_result.dart';

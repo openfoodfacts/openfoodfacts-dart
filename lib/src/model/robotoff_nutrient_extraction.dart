@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../interface/json_object.dart';
+import 'robotoff_nutrient_extraction_insight.dart';
 
 part 'robotoff_nutrient_extraction.g.dart';
 
@@ -7,7 +8,7 @@ part 'robotoff_nutrient_extraction.g.dart';
 class RobotoffNutrientExtractionResult extends JsonObject {
   final String? status;
   final int? count;
-  final List<NutrientExtractionInsight>? insights;
+  final List<RobotoffNutrientExtractionInsight>? insights;
 
   const RobotoffNutrientExtractionResult({
     this.status,
@@ -15,12 +16,22 @@ class RobotoffNutrientExtractionResult extends JsonObject {
     this.insights,
   });
 
-  NutrientExtractionInsight? get getLatestInsights {
-    insights?.sort((a, b) => a.completedAt!.compareTo(b.completedAt!));
+  RobotoffNutrientExtractionInsight? get getLatestInsights {
+    insights?.sort((a, b) {
+      if (a.completedAt == null && b.completedAt == null) {
+        return 0;
+      } else if (a.completedAt == null) {
+        return 1;
+      } else if (b.completedAt == null) {
+        return -1;
+      }
+
+      return a.completedAt!.compareTo(b.completedAt!);
+    });
     return insights?.last;
   }
 
-  NutrientEntity? getNutrientEntity(String nutrientKey) {
+  RobotoffNutrientEntity? getNutrientEntity(String nutrientKey) {
     return getLatestInsights?.data?.nutrients?[nutrientKey];
   }
 
@@ -34,7 +45,7 @@ class RobotoffNutrientExtractionResult extends JsonObject {
 }
 
 @JsonSerializable()
-class NutrientEntity {
+class RobotoffNutrientEntity {
   final int? start;
   final int? end;
   final String? text;
@@ -48,7 +59,7 @@ class NutrientEntity {
   @JsonKey(name: 'char_end')
   final int? charEnd;
 
-  const NutrientEntity({
+  const RobotoffNutrientEntity({
     this.start,
     this.end,
     this.text,
@@ -61,141 +72,8 @@ class NutrientEntity {
     this.charEnd,
   });
 
-  factory NutrientEntity.fromJson(Map<String, dynamic> json) =>
-      _$NutrientEntityFromJson(json);
+  factory RobotoffNutrientEntity.fromJson(Map<String, dynamic> json) =>
+      _$RobotoffNutrientEntityFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NutrientEntityToJson(this);
-}
-
-@JsonSerializable()
-class NutrientAnnotationData {
-  final String? unit;
-  final String? value;
-
-  const NutrientAnnotationData({
-    this.unit,
-    this.value,
-  });
-
-  factory NutrientAnnotationData.fromJson(Map<String, dynamic> json) =>
-      _$NutrientAnnotationDataFromJson(json);
-
-  Map<String, dynamic> toJson() => _$NutrientAnnotationDataToJson(this);
-}
-
-@JsonSerializable()
-class NutrientAnnotation {
-  final Map<String, NutrientAnnotationData>? nutrients;
-  @JsonKey(name: 'serving_size')
-  final String? servingSize;
-  @JsonKey(name: 'nutrition_data_per')
-  final String? nutritionDataPer;
-
-  const NutrientAnnotation({
-    this.nutrients,
-    this.servingSize,
-    this.nutritionDataPer,
-  });
-
-  factory NutrientAnnotation.fromJson(Map<String, dynamic> json) =>
-      _$NutrientAnnotationFromJson(json);
-
-  Map<String, dynamic> toJson() => _$NutrientAnnotationToJson(this);
-}
-
-@JsonSerializable()
-class NutrientDataWrapper {
-  final Map<String, List<NutrientEntity>>? entities;
-  final Map<String, NutrientEntity>? nutrients;
-  final NutrientAnnotation? annotation;
-  @JsonKey(name: 'was_updated')
-  final bool? wasUpdated;
-
-  const NutrientDataWrapper({
-    this.entities,
-    this.nutrients,
-    this.annotation,
-    this.wasUpdated,
-  });
-
-  factory NutrientDataWrapper.fromJson(Map<String, dynamic> json) =>
-      _$NutrientDataWrapperFromJson(json);
-
-  Map<String, dynamic> toJson() => _$NutrientDataWrapperToJson(this);
-}
-
-@JsonSerializable()
-class NutrientExtractionInsight extends JsonObject {
-  @JsonKey(name: 'id')
-  final String? insightId;
-  final String? barcode;
-  final String? type;
-  final NutrientDataWrapper? data;
-  final String? timestamp;
-  @JsonKey(name: 'completed_at')
-  final String? completedAt;
-  final int? annotation;
-  @JsonKey(name: 'annotated_result')
-  final int? annotatedResult;
-  @JsonKey(name: 'n_votes')
-  final int? nVotes;
-  final String? username;
-  final List<String>? countries;
-  final List<String>? brands;
-  @JsonKey(name: 'process_after')
-  final String? processAfter;
-  @JsonKey(name: 'value_tag')
-  final String? valueTag;
-  final String? value;
-  @JsonKey(name: 'source_image')
-  final String? sourceImage;
-  @JsonKey(name: 'automatic_processing')
-  final bool? automaticProcessing;
-  @JsonKey(name: 'server_type')
-  final String? serverType;
-  @JsonKey(name: 'unique_scans_n')
-  final int? uniqueScansN;
-  @JsonKey(name: 'reserved_barcode')
-  final bool? reservedBarcode;
-  final String? predictor;
-  @JsonKey(name: 'predictor_version')
-  final String? predictorVersion;
-  final List<String>? campaign;
-  final double? confidence;
-  @JsonKey(name: 'bounding_box')
-  final dynamic boundingBox;
-
-  const NutrientExtractionInsight({
-    this.insightId,
-    this.barcode,
-    this.type,
-    this.data,
-    this.timestamp,
-    this.completedAt,
-    this.annotation,
-    this.annotatedResult,
-    this.nVotes,
-    this.username,
-    this.countries,
-    this.brands,
-    this.processAfter,
-    this.valueTag,
-    this.value,
-    this.sourceImage,
-    this.automaticProcessing,
-    this.serverType,
-    this.uniqueScansN,
-    this.reservedBarcode,
-    this.predictor,
-    this.predictorVersion,
-    this.campaign,
-    this.confidence,
-    this.boundingBox,
-  });
-
-  factory NutrientExtractionInsight.fromJson(Map<String, dynamic> json) =>
-      _$NutrientExtractionInsightFromJson(json);
-
-  @override
-  Map<String, dynamic> toJson() => _$NutrientExtractionInsightToJson(this);
+  Map<String, dynamic> toJson() => _$RobotoffNutrientEntityToJson(this);
 }
