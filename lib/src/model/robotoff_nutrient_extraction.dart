@@ -1,5 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:openfoodfacts/src/model/per_size.dart';
+import 'package:openfoodfacts/src/model/robotoff_nutrient_extraction_annotation.dart';
 import '../interface/json_object.dart';
+import 'nutrient.dart';
 import 'robotoff_nutrient_extraction_insight.dart';
 
 part 'robotoff_nutrient_extraction.g.dart';
@@ -31,8 +34,16 @@ class RobotoffNutrientExtractionResult extends JsonObject {
     return insights?.last;
   }
 
-  RobotoffNutrientEntity? getNutrientEntity(String nutrientKey) {
-    return getLatestInsights?.data?.nutrients?[nutrientKey];
+  RobotoffNutrientEntity? getNutrientEntity(
+      Nutrient nutrient, PerSize perSize) {
+    return getLatestInsights
+        ?.data?.nutrients?[nutrient.getOffTagPerSize(perSize)];
+  }
+
+  RobotoffNutrientAnnotationData? getNutrientAnnotation(
+      Nutrient nutrient, PerSize perSize) {
+    return getLatestInsights
+        ?.data?.annotation?.nutrients?[nutrient.getOffTagPerSize(perSize)];
   }
 
   factory RobotoffNutrientExtractionResult.fromJson(

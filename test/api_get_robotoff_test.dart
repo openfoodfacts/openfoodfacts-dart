@@ -1,4 +1,5 @@
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:openfoodfacts/src/model/robotoff_nutrient_extraction_annotation.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';
@@ -242,10 +243,25 @@ void main() {
       Nutrient.carbohydrates,
       Nutrient.saturatedFat,
     ]) {
-      expect(
-          result.getNutrientEntity(
-              nutrient.getOffTagPerSize(PerSize.oneHundredGrams)),
+      expect(result.getNutrientEntity(nutrient, PerSize.oneHundredGrams),
           isNotNull);
+    }
+
+    for (Nutrient nutrient in [
+      Nutrient.fat,
+      Nutrient.salt,
+      Nutrient.fiber,
+      Nutrient.sugars,
+      Nutrient.proteins,
+      Nutrient.energyKJ,
+      Nutrient.energyKCal,
+      Nutrient.carbohydrates,
+      Nutrient.saturatedFat,
+    ]) {
+      RobotoffNutrientAnnotationData annotation =
+          result.getNutrientAnnotation(nutrient, PerSize.oneHundredGrams)!;
+
+      expect(annotation.numericalValue, isNotNull);
     }
   });
 }

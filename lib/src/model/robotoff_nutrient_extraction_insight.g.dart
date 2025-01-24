@@ -42,7 +42,6 @@ RobotoffNutrientExtractionInsight _$RobotoffNutrientExtractionInsightFromJson(
     RobotoffNutrientExtractionInsight(
       insightId: json['id'] as String?,
       barcode: json['barcode'] as String?,
-      type: json['type'] as String?,
       data: json['data'] == null
           ? null
           : RobotoffNutrientDataWrapper.fromJson(
@@ -72,7 +71,6 @@ RobotoffNutrientExtractionInsight _$RobotoffNutrientExtractionInsightFromJson(
           ?.map((e) => e as String)
           .toList(),
       confidence: (json['confidence'] as num?)?.toDouble(),
-      boundingBox: json['bounding_box'],
     );
 
 Map<String, dynamic> _$RobotoffNutrientExtractionInsightToJson(
@@ -80,7 +78,6 @@ Map<String, dynamic> _$RobotoffNutrientExtractionInsightToJson(
     <String, dynamic>{
       'id': instance.insightId,
       'barcode': instance.barcode,
-      'type': instance.type,
       'data': instance.data,
       'timestamp': instance.timestamp,
       'completedAt': instance.completedAt,
@@ -102,5 +99,4 @@ Map<String, dynamic> _$RobotoffNutrientExtractionInsightToJson(
       'predictor_version': instance.predictorVersion,
       'campaign': instance.campaign,
       'confidence': instance.confidence,
-      'bounding_box': instance.boundingBox,
     };
