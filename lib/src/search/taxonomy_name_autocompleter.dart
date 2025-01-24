@@ -36,15 +36,14 @@ class TaxonomyNameAutocompleter implements Autocompleter {
   ) async {
     final AutocompleteSearchResult results =
         await OpenFoodSearchAPIClient.autocomplete(
-      language: language,
-      query: input,
-      taxonomyNames: taxonomyNames,
-      size: limit,
-      user: user,
-      uriHelper: uriHelper,
-      fuzziness: fuzziness,
-      excludedItems: excludedItems
-    );
+            language: language,
+            query: input,
+            taxonomyNames: taxonomyNames,
+            size: limit,
+            user: user,
+            uriHelper: uriHelper,
+            fuzziness: fuzziness,
+            excludedItems: excludedItems);
     final List<String> result = <String>[];
     if (results.options == null) {
       return result;

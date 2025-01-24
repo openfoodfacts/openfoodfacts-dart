@@ -66,7 +66,7 @@ class OpenFoodSearchAPIClient {
         AutocompleteSearchResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
     );
-    if(excludedItems != null){
+    if (excludedItems != null) {
       autocompleteSearchResult.options?.removeWhere(
         (option) => excludedItems.contains(option.text),
       );

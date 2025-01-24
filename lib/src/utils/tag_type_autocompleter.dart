@@ -36,16 +36,14 @@ class TagTypeAutocompleter implements Autocompleter {
     final String input,
     final List<String>? excludedItems,
   ) async =>
-      OpenFoodAPIClient.getSuggestions(
-        tagType,
-        input: input,
-        language: language,
-        country: country,
-        categories: categories,
-        shape: shape,
-        limit: limit,
-        uriHelper: uriHelper,
-        user: user,
-        excludedItems : excludedItems
-      );
+      OpenFoodAPIClient.getSuggestions(tagType,
+          input: input,
+          language: language,
+          country: country,
+          categories: categories,
+          shape: shape,
+          limit: limit,
+          uriHelper: uriHelper,
+          user: user,
+          excludedItems: excludedItems);
 }

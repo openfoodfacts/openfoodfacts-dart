@@ -833,7 +833,7 @@ class OpenFoodAPIClient {
       if (country != null) 'cc': country.offTag,
       if (categories != null) 'categories': categories,
       if (shape != null) 'shape': shape,
-      'limit': (limit + (excludedItems?.length ?? 0 )).toString(),
+      'limit': (limit + (excludedItems?.length ?? 0)).toString(),
     };
     final Uri uri = uriHelper.getUri(
       path: '/api/v3/taxonomy_suggestions',
@@ -852,9 +852,7 @@ class OpenFoodAPIClient {
       }
     }
     if (excludedItems != null) {
-      result.removeWhere(
-        (suggestion) => excludedItems.contains(suggestion)
-      );
+      result.removeWhere((suggestion) => excludedItems.contains(suggestion));
     }
     return result;
   }
