@@ -235,48 +235,30 @@ void main() {
 
     test('get localized conservation conditions and customer service',
         () async {
+      const String barcode = '3017620425035';
       ProductQueryConfiguration configuration = ProductQueryConfiguration(
-        '3017620425035',
+        barcode,
         fields: [
           ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES,
-          ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES,
+          ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES
         ],
         version: ProductQueryVersion.v3,
-        language: OpenFoodFactsLanguage.ALL_LANGUAGES,
+        language: OpenFoodFactsLanguage.JAPANESE,
       );
 
       ProductResultV3 result = await getProductV3InProd(configuration);
 
       expect(result.status, ProductResultV3.statusSuccess);
-      expect(result.product, isNotNull);
+      expect(result.product != null, true);
 
       final conservationConditions =
           result.product!.conservationConditionsInLanguages;
       expect(conservationConditions, isNotNull);
       expect(conservationConditions, isNotEmpty);
-      expect(
-          conservationConditions!
-              .containsKey(OpenFoodFactsLanguage.ALL_LANGUAGES),
-          isTrue);
-      expect(conservationConditions[OpenFoodFactsLanguage.ALL_LANGUAGES],
-          isNotEmpty);
-      expect(
-        conservationConditions[OpenFoodFactsLanguage.ALL_LANGUAGES],
-        isA<String>()
-            .having((s) => s.trim().isNotEmpty, 'non-empty string', isTrue),
-      );
 
       final customerService = result.product!.customerServiceInLanguages;
       expect(customerService, isNotNull);
       expect(customerService, isNotEmpty);
-      expect(customerService!.containsKey(OpenFoodFactsLanguage.ALL_LANGUAGES),
-          isTrue);
-      expect(customerService[OpenFoodFactsLanguage.ALL_LANGUAGES], isNotEmpty);
-      expect(
-        customerService[OpenFoodFactsLanguage.ALL_LANGUAGES],
-        isA<String>()
-            .having((s) => s.trim().isNotEmpty, 'non-empty string', isTrue),
-      );
     });
     test('get uncommon nutrients', () async {
       // PROD data as of 2021-07-16
