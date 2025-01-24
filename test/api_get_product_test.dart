@@ -232,6 +232,33 @@ void main() {
       expect(nutriments.getValue(Nutrient.iron, perSize), 0.00041);
       expect(nutriments.getValue(Nutrient.vitaminC, perSize), 0.0339);
     });
+    
+    test('get localized conservation conditions and customer service', () async {
+      ProductQueryConfiguration configuration = ProductQueryConfiguration(
+        '3017620425035', // Using an existing product barcode from previous tests
+        fields: [
+          ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES,
+          ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES,
+        ],
+        version: ProductQueryVersion.v3,
+      );
+      ProductResultV3 result = await getProductV3InProd(
+        configuration,
+      );
+      
+      expect(result.status, ProductResultV3.statusSuccess);
+      expect(result.product, isNotNull);
+      
+      // Check conservation conditions in languages
+      expect(result.product!.conservationConditionsInLanguages, isNotNull);
+      expect(result.product!.conservationConditionsInLanguages, isNotEmpty);
+      expect(result.product!.conservationConditionsInLanguages!.containsKey(OpenFoodFactsLanguage.FRENCH), isTrue);
+      
+      // Check customer service in languages  
+      expect(result.product!.customerServiceInLanguages, isNotNull);
+      expect(result.product!.customerServiceInLanguages, isNotEmpty);
+      expect(result.product!.customerServiceInLanguages!.containsKey(OpenFoodFactsLanguage.FRENCH), isTrue);
+    });
 
     test('get uncommon nutrients', () async {
       // PROD data as of 2021-07-16
