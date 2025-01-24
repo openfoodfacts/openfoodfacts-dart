@@ -53,7 +53,8 @@ class RobotoffNutrientExtractionInsight extends JsonObject {
   @JsonKey(name: 'id')
   String? insightId;
   String? barcode;
-  final String? type;
+  // TODO: Figure out what this field is and what type it should be
+  // final String? type;
   final RobotoffNutrientDataWrapper? data;
   // @JsonKey(
   //     fromJson: JsonHelper.timestampToDate, toJson: JsonHelper.dateToTimestamp)
@@ -98,13 +99,13 @@ class RobotoffNutrientExtractionInsight extends JsonObject {
   final List<String>? campaign;
   final double? confidence;
   // TODO: Figure out what this field is and what type it should be
-  @JsonKey(name: 'bounding_box')
-  final dynamic boundingBox;
+  // @JsonKey(name: 'bounding_box')
+  // final dynamic boundingBox;
 
   RobotoffNutrientExtractionInsight({
     this.insightId,
     this.barcode,
-    this.type,
+    // this.type,
     this.data,
     this.timestamp,
     this.completedAt,
@@ -126,7 +127,7 @@ class RobotoffNutrientExtractionInsight extends JsonObject {
     this.predictorVersion,
     this.campaign,
     this.confidence,
-    this.boundingBox,
+    // this.boundingBox,
   });
 
   factory RobotoffNutrientExtractionInsight.fromJson(
