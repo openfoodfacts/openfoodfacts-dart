@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:openfoodfacts/src/model/nutrient_modified.dart';
+import 'package:openfoodfacts/src/model/nutrient_modifier.dart';
 import 'package:openfoodfacts/src/model/per_size.dart';
 import 'package:openfoodfacts/src/utils/unit_helper.dart';
 
