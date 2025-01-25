@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:openfoodfacts/src/model/nutrient.dart';
-import 'package:openfoodfacts/src/model/per_size.dart';
+import '../utils/json_helper.dart';
+import 'nutrient.dart';
+import 'per_size.dart';
 
 import '../interface/json_object.dart';
 import 'robotoff_nutrient_extraction.dart';
@@ -56,18 +57,15 @@ class RobotoffNutrientExtractionInsight extends JsonObject {
   // TODO: Figure out what this field is and what type it should be
   // final String? type;
   final RobotoffNutrientDataWrapper? data;
-  // @JsonKey(
-  //     fromJson: JsonHelper.timestampToDate, toJson: JsonHelper.dateToTimestamp)
-  // TODO ask server to send timestamp as milliseconds since epoch
-  // Current format is 2024-12-26T14:13:51.299483
-  final String? timestamp;
-  // @JsonKey(
-  //  name: 'completed_at',
-  //  fromJson: JsonHelper.timestampToDate,
-  //  toJson: JsonHelper.dateToTimestamp)
-  // TODO ask server to send completedAt as milliseconds since epoch
-  // Current format is 2024-12-26T16:32:17.357436
-  final String? completedAt;
+  @JsonKey(
+      fromJson: JsonHelper.nullableStringTimestampToDate,
+      toJson: JsonHelper.nullableDateToStringTimestamp)
+  final DateTime? timestamp;
+  @JsonKey(
+      name: 'completed_at',
+      fromJson: JsonHelper.nullableStringTimestampToDate,
+      toJson: JsonHelper.nullableDateToStringTimestamp)
+  final DateTime? completedAt;
   final int? annotation;
   @JsonKey(name: 'annotated_result')
   final int? annotatedResult;

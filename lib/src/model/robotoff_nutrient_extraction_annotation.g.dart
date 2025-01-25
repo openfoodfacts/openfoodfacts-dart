@@ -10,14 +10,14 @@ RobotoffNutrientAnnotationData _$RobotoffNutrientAnnotationDataFromJson(
         Map<String, dynamic> json) =>
     RobotoffNutrientAnnotationData(
       unit: UnitHelper.stringToUnit(json['unit'] as String?),
-      value: json['value'] as String,
+      valueWithModifer: json['valueWithModifer'] as String,
     );
 
 Map<String, dynamic> _$RobotoffNutrientAnnotationDataToJson(
         RobotoffNutrientAnnotationData instance) =>
     <String, dynamic>{
       'unit': UnitHelper.unitToString(instance.unit),
-      'value': instance.value,
+      'valueWithModifer': instance.valueWithModifer,
     };
 
 RobotoffNutrientAnnotation _$RobotoffNutrientAnnotationFromJson(

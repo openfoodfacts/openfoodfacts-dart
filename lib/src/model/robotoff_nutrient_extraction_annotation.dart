@@ -8,16 +8,24 @@ part 'robotoff_nutrient_extraction_annotation.g.dart';
 @JsonSerializable()
 class RobotoffNutrientAnnotationData {
   @JsonKey(toJson: UnitHelper.unitToString, fromJson: UnitHelper.stringToUnit)
-  final Unit? unit;
-  final String value;
-  final NutrientModifier? modifier;
-  final double? numericalValue;
+  Unit? unit;
+  String valueWithModifer;
 
   RobotoffNutrientAnnotationData({
     this.unit,
-    required this.value,
-  })  : modifier = NutrientModifierExtension.fromValue(value),
-        numericalValue = double.tryParse(value.trim().substring(1));
+    required this.valueWithModifer,
+  });
+
+  get modifier => NutrientModifierExtension.fromValue(valueWithModifer);
+
+  get value {
+    if (valueWithModifer.trim().isEmpty) {
+      return null;
+    }
+    return modifier == null
+        ? double.tryParse(valueWithModifer.trim())
+        : double.tryParse(valueWithModifer.trim().substring(1));
+  }
 
   factory RobotoffNutrientAnnotationData.fromJson(Map<String, dynamic> json) =>
       _$RobotoffNutrientAnnotationDataFromJson(json);

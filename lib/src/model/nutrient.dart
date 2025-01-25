@@ -1,4 +1,4 @@
-import 'package:openfoodfacts/src/model/per_size.dart';
+import 'per_size.dart';
 
 import 'off_tagged.dart';
 import '../utils/unit_helper.dart';
@@ -255,8 +255,6 @@ enum Nutrient implements OffTagged {
   static Nutrient? fromOffTag(final String? offTag) => offTag == 'energy'
       ? Nutrient.energyKJ
       : OffTagged.fromOffTag(offTag, Nutrient.values) as Nutrient?;
-}
 
-extension NutrientExtension on Nutrient {
   String getOffTagPerSize(PerSize perSize) => '${offTag}_${perSize.offTag}';
 }

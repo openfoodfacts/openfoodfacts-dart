@@ -46,8 +46,9 @@ RobotoffNutrientExtractionInsight _$RobotoffNutrientExtractionInsightFromJson(
           ? null
           : RobotoffNutrientDataWrapper.fromJson(
               json['data'] as Map<String, dynamic>),
-      timestamp: json['timestamp'] as String?,
-      completedAt: json['completedAt'] as String?,
+      timestamp: JsonHelper.nullableStringTimestampToDate(json['timestamp']),
+      completedAt:
+          JsonHelper.nullableStringTimestampToDate(json['completed_at']),
       annotation: (json['annotation'] as num?)?.toInt(),
       annotatedResult: (json['annotated_result'] as num?)?.toInt(),
       nVotes: (json['n_votes'] as num?)?.toInt(),
@@ -79,8 +80,9 @@ Map<String, dynamic> _$RobotoffNutrientExtractionInsightToJson(
       'id': instance.insightId,
       'barcode': instance.barcode,
       'data': instance.data,
-      'timestamp': instance.timestamp,
-      'completedAt': instance.completedAt,
+      'timestamp': JsonHelper.nullableDateToStringTimestamp(instance.timestamp),
+      'completed_at':
+          JsonHelper.nullableDateToStringTimestamp(instance.completedAt),
       'annotation': instance.annotation,
       'annotated_result': instance.annotatedResult,
       'n_votes': instance.nVotes,

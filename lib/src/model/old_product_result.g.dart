@@ -1,8 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'old_product_result.dart';
-
 // ignore_for_file: deprecated_member_use_from_same_package
+
+part of 'old_product_result.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

@@ -1,7 +1,12 @@
-enum NutrientModifier {
+import 'package:openfoodfacts/src/model/off_tagged.dart';
+
+enum NutrientModifier implements OffTagged {
   approximately,
   superiorTo,
-  inferiorTo,
+  inferiorTo;
+
+  @override
+  String get offTag => symbol;
 }
 
 extension NutrientModifierExtension on NutrientModifier {
@@ -17,6 +22,12 @@ extension NutrientModifierExtension on NutrientModifier {
   }
 
   static NutrientModifier? fromString(String? modifier) {
+    for (final NutrientModifier value in NutrientModifier.values) {
+      if (value.symbol == modifier) {
+        return value;
+      }
+    }
+
     switch (modifier) {
       case '~':
         return NutrientModifier.approximately;
@@ -30,6 +41,10 @@ extension NutrientModifierExtension on NutrientModifier {
   }
 
   static NutrientModifier? fromValue(String value) {
+    if (value.trim().isEmpty) {
+      return null;
+    }
+
     String modifier = value.trim().substring(0, 1);
     return fromString(modifier);
   }
