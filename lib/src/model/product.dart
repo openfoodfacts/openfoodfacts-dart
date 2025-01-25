@@ -773,6 +773,14 @@ class Product extends JsonObject {
           result.countriesTagsInLanguages ??= {};
           result.countriesTagsInLanguages![language] = labels;
           break;
+        case ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES:
+          result.conservationConditionsInLanguages ??= {};
+          result.conservationConditionsInLanguages![language] = label;
+          break;
+        case ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES:
+          result.customerServiceInLanguages ??= {};
+          result.customerServiceInLanguages![language] = label;
+          break;
         default:
           // not supposed to be called with other ProductField values.
           assert(false);
