@@ -257,7 +257,8 @@ void main() {
       Nutrient.carbohydrates,
       Nutrient.saturatedFat,
     ]) {
-      expect(result.getNutrientAnnotation(nutrient)?.numericalValue, isNotNull);
+      expect(
+          result.getNutrientAnnotation(nutrient)?.valueWithModifer, isNotNull);
     }
   });
 }
