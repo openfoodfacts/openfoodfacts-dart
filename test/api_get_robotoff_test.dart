@@ -231,6 +231,7 @@ void main() {
     expect(result.status, 'found');
     expect(result.insights!, isNotEmpty);
     expect(result.insights![0].barcode, barcode);
+
     for (Nutrient nutrient in [
       Nutrient.fat,
       Nutrient.salt,
@@ -244,19 +245,6 @@ void main() {
     ]) {
       expect(result.getNutrientEntity(nutrient, PerSize.oneHundredGrams),
           isNotNull);
-    }
-
-    for (Nutrient nutrient in [
-      Nutrient.fat,
-      Nutrient.salt,
-      Nutrient.fiber,
-      Nutrient.sugars,
-      Nutrient.proteins,
-      Nutrient.energyKJ,
-      Nutrient.energyKCal,
-      Nutrient.carbohydrates,
-      Nutrient.saturatedFat,
-    ]) {
       expect(
           result.getNutrientAnnotation(nutrient)?.valueWithModifer, isNotNull);
     }

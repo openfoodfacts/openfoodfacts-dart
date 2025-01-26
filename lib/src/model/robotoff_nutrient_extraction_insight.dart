@@ -57,14 +57,10 @@ class RobotoffNutrientExtractionInsight extends JsonObject {
   // TODO: Figure out what this field is and what type it should be
   // final String? type;
   final RobotoffNutrientDataWrapper? data;
-  @JsonKey(
-      fromJson: JsonHelper.nullableStringTimestampToDate,
-      toJson: JsonHelper.nullableDateToStringTimestamp)
+  @JsonKey(fromJson: JsonHelper.nullableStringTimestampToDate)
   final DateTime? timestamp;
   @JsonKey(
-      name: 'completed_at',
-      fromJson: JsonHelper.nullableStringTimestampToDate,
-      toJson: JsonHelper.nullableDateToStringTimestamp)
+      name: 'completed_at', fromJson: JsonHelper.nullableStringTimestampToDate)
   final DateTime? completedAt;
   final int? annotation;
   @JsonKey(name: 'annotated_result')
@@ -103,7 +99,6 @@ class RobotoffNutrientExtractionInsight extends JsonObject {
   RobotoffNutrientExtractionInsight({
     this.insightId,
     this.barcode,
-    // this.type,
     this.data,
     this.timestamp,
     this.completedAt,
@@ -125,7 +120,6 @@ class RobotoffNutrientExtractionInsight extends JsonObject {
     this.predictorVersion,
     this.campaign,
     this.confidence,
-    // this.boundingBox,
   });
 
   factory RobotoffNutrientExtractionInsight.fromJson(

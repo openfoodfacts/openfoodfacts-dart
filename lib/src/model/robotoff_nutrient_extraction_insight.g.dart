@@ -80,9 +80,8 @@ Map<String, dynamic> _$RobotoffNutrientExtractionInsightToJson(
       'id': instance.insightId,
       'barcode': instance.barcode,
       'data': instance.data,
-      'timestamp': JsonHelper.nullableDateToStringTimestamp(instance.timestamp),
-      'completed_at':
-          JsonHelper.nullableDateToStringTimestamp(instance.completedAt),
+      'timestamp': instance.timestamp?.toIso8601String(),
+      'completed_at': instance.completedAt?.toIso8601String(),
       'annotation': instance.annotation,
       'annotated_result': instance.annotatedResult,
       'n_votes': instance.nVotes,

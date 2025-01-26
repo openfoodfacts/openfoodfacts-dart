@@ -9,6 +9,7 @@ part 'robotoff_nutrient_extraction_annotation.g.dart';
 class RobotoffNutrientAnnotationData {
   @JsonKey(toJson: UnitHelper.unitToString, fromJson: UnitHelper.stringToUnit)
   Unit? unit;
+  @JsonKey(name: 'value')
   String valueWithModifer;
 
   RobotoffNutrientAnnotationData({
@@ -16,9 +17,10 @@ class RobotoffNutrientAnnotationData {
     required this.valueWithModifer,
   });
 
-  get modifier => NutrientModifierExtension.fromValue(valueWithModifer);
+  NutrientModifier? get modifier =>
+      NutrientModifier.fromValue(valueWithModifer);
 
-  get value {
+  double? get value {
     if (valueWithModifer.trim().isEmpty) {
       return null;
     }

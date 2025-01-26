@@ -408,12 +408,6 @@ class JsonHelper {
   static DateTime? nullableStringTimestampToDate(dynamic json) =>
       json == null ? null : stringTimestampToDate(json);
 
-  static String dateToStringTimestamp(DateTime dateTime) =>
-      dateTime.toIso8601String();
-
-  static String? nullableDateToStringTimestamp(DateTime? dateTime) =>
-      dateTime == null ? null : dateToStringTimestamp(dateTime);
-
   static const String _checkboxOnValue = 'on';
   static const String _checkboxOffValue = '';
 

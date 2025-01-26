@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:openfoodfacts/src/model/per_size.dart';
-import 'package:openfoodfacts/src/model/robotoff_nutrient_extraction_annotation.dart';
+import 'per_size.dart';
+import 'robotoff_nutrient_extraction_annotation.dart';
 import '../interface/json_object.dart';
 import 'nutrient.dart';
 import 'robotoff_nutrient_extraction_insight.dart';
@@ -12,14 +12,21 @@ class RobotoffNutrientExtractionResult extends JsonObject {
   final String? status;
   final int? count;
   final List<RobotoffNutrientExtractionInsight>? insights;
+  RobotoffNutrientExtractionInsight? _latestInsight;
 
-  const RobotoffNutrientExtractionResult({
+  RobotoffNutrientExtractionResult({
     this.status,
     this.count,
     this.insights,
   });
 
-  RobotoffNutrientExtractionInsight? get getLatestInsights {
+  RobotoffNutrientExtractionInsight? getLatestInsights({
+    bool recompute = false,
+  }) {
+    if (_latestInsight != null && !recompute) {
+      return _latestInsight;
+    }
+
     insights?.sort((a, b) {
       if (a.completedAt == null && b.completedAt == null) {
         return 0;
@@ -31,17 +38,30 @@ class RobotoffNutrientExtractionResult extends JsonObject {
 
       return a.completedAt!.compareTo(b.completedAt!);
     });
-    return insights?.last;
+
+    _latestInsight = insights?.last;
+
+    return _latestInsight;
   }
 
   RobotoffNutrientEntity? getNutrientEntity(
-      Nutrient nutrient, PerSize perSize) {
-    return getLatestInsights
-        ?.data?.nutrients?[nutrient.getOffTagPerSize(perSize)];
+    Nutrient nutrient,
+    PerSize perSize, {
+    bool recomputeLatest = false,
+  }) {
+    return getLatestInsights(recompute: recomputeLatest)
+        ?.data
+        ?.nutrients?[nutrient.getOffTagPerSize(perSize)];
   }
 
-  RobotoffNutrientAnnotationData? getNutrientAnnotation(Nutrient nutrient) {
-    return getLatestInsights?.data?.annotation?.nutrients?[nutrient.offTag];
+  RobotoffNutrientAnnotationData? getNutrientAnnotation(
+    Nutrient nutrient, {
+    bool recomputeLatest = false,
+  }) {
+    return getLatestInsights(recompute: recomputeLatest)
+        ?.data
+        ?.annotation
+        ?.nutrients?[nutrient.offTag];
   }
 
   factory RobotoffNutrientExtractionResult.fromJson(
