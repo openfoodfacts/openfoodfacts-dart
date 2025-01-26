@@ -53,9 +53,6 @@ RobotoffNutrientExtractionInsight _$RobotoffNutrientExtractionInsightFromJson(
       annotatedResult: (json['annotated_result'] as num?)?.toInt(),
       nVotes: (json['n_votes'] as num?)?.toInt(),
       username: json['username'] as String?,
-      countries: (json['countries'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
       brands:
           (json['brands'] as List<dynamic>?)?.map((e) => e as String).toList(),
       processAfter: json['process_after'] as String?,
@@ -86,7 +83,6 @@ Map<String, dynamic> _$RobotoffNutrientExtractionInsightToJson(
       'annotated_result': instance.annotatedResult,
       'n_votes': instance.nVotes,
       'username': instance.username,
-      'countries': instance.countries,
       'brands': instance.brands,
       'process_after': instance.processAfter,
       'value_tag': instance.valueTag,

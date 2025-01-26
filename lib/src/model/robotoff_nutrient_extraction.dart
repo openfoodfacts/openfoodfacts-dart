@@ -20,10 +20,8 @@ class RobotoffNutrientExtractionResult extends JsonObject {
     this.insights,
   });
 
-  RobotoffNutrientExtractionInsight? getLatestInsights({
-    bool recompute = false,
-  }) {
-    if (_latestInsight != null && !recompute) {
+  RobotoffNutrientExtractionInsight? get latestInsight {
+    if (_latestInsight != null) {
       return _latestInsight;
     }
 
@@ -46,22 +44,13 @@ class RobotoffNutrientExtractionResult extends JsonObject {
 
   RobotoffNutrientEntity? getNutrientEntity(
     Nutrient nutrient,
-    PerSize perSize, {
-    bool recomputeLatest = false,
-  }) {
-    return getLatestInsights(recompute: recomputeLatest)
-        ?.data
-        ?.nutrients?[nutrient.getOffTagPerSize(perSize)];
+    PerSize perSize,
+  ) {
+    return latestInsight?.data?.nutrients?[nutrient.getOffTagPerSize(perSize)];
   }
 
-  RobotoffNutrientAnnotationData? getNutrientAnnotation(
-    Nutrient nutrient, {
-    bool recomputeLatest = false,
-  }) {
-    return getLatestInsights(recompute: recomputeLatest)
-        ?.data
-        ?.annotation
-        ?.nutrients?[nutrient.offTag];
+  RobotoffNutrientAnnotationData? getNutrientAnnotation(Nutrient nutrient) {
+    return latestInsight?.data?.annotation?.nutrients?[nutrient.offTag];
   }
 
   factory RobotoffNutrientExtractionResult.fromJson(

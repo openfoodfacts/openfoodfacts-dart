@@ -70,7 +70,7 @@ class RobotoffNutrientExtractionInsight extends JsonObject {
   final String? username;
   // TODO: ask server to send countries as ISO 3166-1 alpha-2 codes
   // Current format is "en:france"
-  final List<String>? countries;
+  // final List<String>? countries;
   final List<String>? brands;
   @JsonKey(name: 'process_after')
   final String? processAfter;
@@ -106,7 +106,6 @@ class RobotoffNutrientExtractionInsight extends JsonObject {
     this.annotatedResult,
     this.nVotes,
     this.username,
-    this.countries,
     this.brands,
     this.processAfter,
     this.valueTag,

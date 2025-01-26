@@ -21,12 +21,13 @@ class RobotoffNutrientAnnotationData {
       NutrientModifier.fromValue(valueWithModifer);
 
   double? get value {
-    if (valueWithModifer.trim().isEmpty) {
+    final String trimmed = valueWithModifer.trim();
+    if (trimmed.isEmpty) {
       return null;
     }
     return modifier == null
-        ? double.tryParse(valueWithModifer.trim())
-        : double.tryParse(valueWithModifer.trim().substring(1));
+        ? double.tryParse(trimmed)
+        : double.tryParse(trimmed.substring(1));
   }
 
   factory RobotoffNutrientAnnotationData.fromJson(Map<String, dynamic> json) =>
