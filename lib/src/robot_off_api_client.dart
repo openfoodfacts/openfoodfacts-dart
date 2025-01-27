@@ -5,6 +5,7 @@ import 'package:http/http.dart';
 import 'model/insight.dart';
 import 'model/robotoff_question.dart';
 import 'model/robotoff_question_order.dart';
+import 'model/robotoff_nutrient_extraction.dart';
 import 'model/status.dart';
 import 'model/user.dart';
 import 'utils/country_helper.dart';
@@ -190,6 +191,32 @@ class RobotoffAPIClient {
       addCredentialsToHeader: true,
     );
     return Status.fromApiResponse(response.body);
+  }
+
+  /// Get nutrient extraction insights for a given barcode
+  /// cf. https://robotoff.openfoodfacts.org/api/v1/insights
+  static Future<RobotoffNutrientExtractionResult> getNutrientExtraction(
+    final String barcode, {
+    final UriHelper uriHelper = uriHelperRobotoffProd,
+  }) async {
+    final Map<String, String> parameters = <String, String>{
+      'barcode': barcode,
+      'insight_types': 'nutrient_extraction',
+    };
+
+    final Uri uri = uriHelper.getUri(
+      path: '/api/v1/insights',
+      queryParameters: parameters,
+    );
+
+    final response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+    );
+
+    return RobotoffNutrientExtractionResult.fromJson(
+      HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
+    );
   }
 
   /// Returns a list of country as comma-separated 2-letter codes
