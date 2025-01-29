@@ -6,20 +6,20 @@ import '../interface/json_object.dart';
 part 'get_tickets.g.dart';
 
 @JsonSerializable()
-class Tickets extends JsonObject {
+class NutripatrolTickets extends JsonObject {
   /// List of Tickets
   @JsonKey()
-  late List<Ticket> tickets;
+  late List<NutripatrolTicket> tickets;
 
   /// Max Page
   @JsonKey(name: 'max_page')
   late int maxPage;
 
-  Tickets();
+  NutripatrolTickets();
 
-  factory Tickets.fromJson(Map<String, dynamic> json) =>
-      _$TicketsFromJson(json);
+  factory NutripatrolTickets.fromJson(Map<String, dynamic> json) =>
+      _$NutripatrolTicketsFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$TicketsToJson(this);
+  Map<String, dynamic> toJson() => _$NutripatrolTicketsToJson(this);
 }

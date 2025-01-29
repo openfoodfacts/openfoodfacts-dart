@@ -6,17 +6,19 @@ part of 'get_ticket.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Ticket _$TicketFromJson(Map<String, dynamic> json) => Ticket()
-  ..id = (json['id'] as num).toInt()
-  ..barcode = json['barcode'] as String?
-  ..type = $enumDecode(_$NutripatrolTypeEnumMap, json['type'])
-  ..url = json['url'] as String
-  ..status = $enumDecode(_$NutripatrolTicketStatusEnumMap, json['status'])
-  ..imageId = json['image_id'] as String?
-  ..flavor = $enumDecode(_$FlavorEnumMap, json['flavor'])
-  ..createdAt = json['created_at'] as String;
+NutripatrolTicket _$NutripatrolTicketFromJson(Map<String, dynamic> json) =>
+    NutripatrolTicket()
+      ..id = (json['id'] as num).toInt()
+      ..barcode = json['barcode'] as String?
+      ..type = $enumDecode(_$NutripatrolTypeEnumMap, json['type'])
+      ..url = json['url'] as String
+      ..status = $enumDecode(_$NutripatrolTicketStatusEnumMap, json['status'])
+      ..imageId = json['image_id'] as String?
+      ..flavor = $enumDecode(_$FlavorEnumMap, json['flavor'])
+      ..createdAt = json['created_at'] as String;
 
-Map<String, dynamic> _$TicketToJson(Ticket instance) => <String, dynamic>{
+Map<String, dynamic> _$NutripatrolTicketToJson(NutripatrolTicket instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'barcode': instance.barcode,
       'type': _$NutripatrolTypeEnumMap[instance.type]!,

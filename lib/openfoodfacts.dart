@@ -48,11 +48,8 @@ export 'src/model/parameter/without_additives.dart';
 export 'src/model/per_size.dart';
 export 'src/model/product.dart';
 export 'src/model/product_freshness.dart';
-<<<<<<< HEAD
 export 'src/model/product_type.dart';
 export 'src/model/product_type_filter.dart';
-=======
->>>>>>> 3b974b5 (Fixes)
 export 'src/model/product_image.dart';
 export 'src/model/product_packaging.dart';
 export 'src/model/product_result_field_answer.dart';
@@ -60,7 +57,6 @@ export 'src/model/product_result_v3.dart';
 export 'src/model/product_state.dart';
 export 'src/model/product_stats.dart';
 export 'src/model/product_tag.dart';
-export 'src/model/product_type.dart';
 export 'src/model/recommended_daily_intake.dart';
 export 'src/model/robotoff_question.dart';
 export 'src/model/robotoff_question_order.dart';

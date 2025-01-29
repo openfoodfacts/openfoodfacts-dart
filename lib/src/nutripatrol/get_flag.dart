@@ -8,14 +8,14 @@ import '../utils/nutripatrol_source.dart';
 part 'get_flag.g.dart';
 
 @JsonSerializable()
-class Flag extends JsonObject {
+class NutripatrolFlag extends JsonObject {
   /// Flag ID. Read-only.
   @JsonKey()
   late String id;
 
   /// Ticket ID. Read-only.
   @JsonKey()
-  late Ticket ticket;
+  late NutripatrolTicket ticket;
 
   /// Barcode of the product. Read-only.
   @JsonKey()
@@ -65,10 +65,11 @@ class Flag extends JsonObject {
   @JsonKey(name: 'created_at')
   late String createdAt;
 
-  Flag();
+  NutripatrolFlag();
 
-  factory Flag.fromJson(Map<String, dynamic> json) => _$FlagFromJson(json);
+  factory NutripatrolFlag.fromJson(Map<String, dynamic> json) =>
+      _$NutripatrolFlagFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$FlagToJson(this);
+  Map<String, dynamic> toJson() => _$NutripatrolFlagToJson(this);
 }

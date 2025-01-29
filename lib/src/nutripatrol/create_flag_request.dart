@@ -1,18 +1,20 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:openfoodfacts/src/utils/nutripatrol_source.dart';
 
 import '../interface/json_object.dart';
 
 part 'create_flag_request.g.dart';
 
 @JsonSerializable()
-class CreateFlagRequest extends JsonObject {
+class CreateNutripatrolFlagRequest extends JsonObject {
   /// Barcode of the product.
   @JsonKey()
   String? barcode;
 
   /// Type of the flag
   @JsonKey()
-  late String type;
+  late NutripatrolType type;
 
   /// Url of the product
   @JsonKey()
@@ -28,7 +30,7 @@ class CreateFlagRequest extends JsonObject {
 
   /// Source of the flag
   @JsonKey()
-  late String source;
+  late NutripatrolSource source;
 
   /// Confidence of the flag
   @JsonKey()
@@ -40,11 +42,11 @@ class CreateFlagRequest extends JsonObject {
 
   /// Flavor of the flag
   @JsonKey()
-  late String flavor;
+  late Flavor flavor;
 
   /// Reason for the flag
   @JsonKey()
-  String? reason;
+  List<NutripatrolFlagReason>? reason;
 
   /// Comment associated with the flag
   @JsonKey()
@@ -54,11 +56,11 @@ class CreateFlagRequest extends JsonObject {
   @JsonKey(name: 'created_at')
   late DateTime createdAt;
 
-  CreateFlagRequest();
+  CreateNutripatrolFlagRequest();
 
-  factory CreateFlagRequest.fromJson(Map<String, dynamic> json) =>
-      _$CreateFlagRequestFromJson(json);
+  factory CreateNutripatrolFlagRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateNutripatrolFlagRequestFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$CreateFlagRequestToJson(this);
+  Map<String, dynamic> toJson() => _$CreateNutripatrolFlagRequestToJson(this);
 }

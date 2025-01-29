@@ -1,12 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:openfoodfacts/src/utils/nutripatrol_source.dart';
 
 import '../interface/json_object.dart';
 
 part 'get_ticket.g.dart';
 
 @JsonSerializable()
-class Ticket extends JsonObject {
+class NutripatrolTicket extends JsonObject {
   /// Flag ID. Read-only.
   @JsonKey()
   late int id;
@@ -39,31 +40,11 @@ class Ticket extends JsonObject {
   @JsonKey(name: 'created_at')
   late String createdAt;
 
-  Ticket();
+  NutripatrolTicket();
 
-  factory Ticket.fromJson(Map<String, dynamic> json) => _$TicketFromJson(json);
+  factory NutripatrolTicket.fromJson(Map<String, dynamic> json) =>
+      _$NutripatrolTicketFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$TicketToJson(this);
-}
-
-/// Enum for ticket type
-enum NutripatrolType {
-  @JsonValue('image')
-  image,
-
-  @JsonValue('product')
-  product,
-
-  @JsonValue('search')
-  search
-}
-
-/// Enum for ticket status
-enum NutripatrolTicketStatus {
-  @JsonValue('open')
-  open,
-
-  @JsonValue('closed')
-  closed
+  Map<String, dynamic> toJson() => _$NutripatrolTicketToJson(this);
 }

@@ -6,23 +6,26 @@ part of 'get_flag.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Flag _$FlagFromJson(Map<String, dynamic> json) => Flag()
-  ..id = json['id'] as String
-  ..ticket = Ticket.fromJson(json['ticket'] as Map<String, dynamic>)
-  ..barcode = json['barcode'] as String?
-  ..type = $enumDecode(_$NutripatrolTypeEnumMap, json['type'])
-  ..url = json['url'] as String
-  ..userId = json['user_id'] as String
-  ..deviceId = json['device_id'] as String
-  ..source = $enumDecode(_$NutripatrolSourceEnumMap, json['source'])
-  ..confidence = (json['confidence'] as num?)?.toDouble()
-  ..imageId = json['image_id'] as String?
-  ..flavor = $enumDecode(_$FlavorEnumMap, json['flavor'])
-  ..reason = json['reason'] as String?
-  ..comment = json['comment'] as String?
-  ..createdAt = json['created_at'] as String;
+NutripatrolFlag _$NutripatrolFlagFromJson(Map<String, dynamic> json) =>
+    NutripatrolFlag()
+      ..id = json['id'] as String
+      ..ticket =
+          NutripatrolTicket.fromJson(json['ticket'] as Map<String, dynamic>)
+      ..barcode = json['barcode'] as String?
+      ..type = $enumDecode(_$NutripatrolTypeEnumMap, json['type'])
+      ..url = json['url'] as String
+      ..userId = json['user_id'] as String
+      ..deviceId = json['device_id'] as String
+      ..source = $enumDecode(_$NutripatrolSourceEnumMap, json['source'])
+      ..confidence = (json['confidence'] as num?)?.toDouble()
+      ..imageId = json['image_id'] as String?
+      ..flavor = $enumDecode(_$FlavorEnumMap, json['flavor'])
+      ..reason = json['reason'] as String?
+      ..comment = json['comment'] as String?
+      ..createdAt = json['created_at'] as String;
 
-Map<String, dynamic> _$FlagToJson(Flag instance) => <String, dynamic>{
+Map<String, dynamic> _$NutripatrolFlagToJson(NutripatrolFlag instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'ticket': instance.ticket,
       'barcode': instance.barcode,

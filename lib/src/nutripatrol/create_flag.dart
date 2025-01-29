@@ -6,10 +6,10 @@ import '../interface/json_object.dart';
 part 'create_flag.g.dart';
 
 @JsonSerializable()
-class CreateFlag extends JsonObject {
+class CreateNutripatrolFlag extends JsonObject {
   /// Ticket ID associated with the flag
   @JsonKey()
-  late Ticket ticket;
+  late NutripatrolTicket ticket;
 
   /// Barcode of the product.
   @JsonKey()
@@ -59,11 +59,11 @@ class CreateFlag extends JsonObject {
   @JsonKey(name: 'created_at')
   late DateTime createdAt;
 
-  CreateFlag();
+  CreateNutripatrolFlag();
 
-  factory CreateFlag.fromJson(Map<String, dynamic> json) =>
-      _$CreateFlagFromJson(json);
+  factory CreateNutripatrolFlag.fromJson(Map<String, dynamic> json) =>
+      _$CreateNutripatrolFlagFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$CreateFlagToJson(this);
+  Map<String, dynamic> toJson() => _$CreateNutripatrolFlagToJson(this);
 }

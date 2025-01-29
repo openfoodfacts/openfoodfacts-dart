@@ -5,6 +5,7 @@ import 'package:openfoodfacts/src/nutripatrol/create_flag.dart';
 import 'package:openfoodfacts/src/nutripatrol/create_flag_request.dart';
 import 'package:openfoodfacts/src/nutripatrol/get_tickets.dart';
 import 'package:openfoodfacts/src/prices/maybe_error.dart';
+import 'package:openfoodfacts/src/utils/nutripatrol_source.dart';
 import 'utils/http_helper.dart';
 import 'utils/open_food_api_configuration.dart';
 import 'utils/uri_helper.dart';
@@ -39,7 +40,7 @@ class NutripatrolApiClient {
   /// Get a ticket by its ID.
   ///
   /// [ticketId] is the ID of the ticket.
-  static Future<MaybeError<Ticket>> getTicket({
+  static Future<MaybeError<NutripatrolTicket>> getTicket({
     required final int ticketId,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
@@ -55,16 +56,17 @@ class NutripatrolApiClient {
     if (response.statusCode == 200) {
       try {
         final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        return MaybeError<Ticket>.value(Ticket.fromJson(decodedResponse));
+        return MaybeError<NutripatrolTicket>.value(
+            NutripatrolTicket.fromJson(decodedResponse));
       } catch (_) {
         //
       }
     }
-    return MaybeError<Ticket>.responseError(response);
+    return MaybeError<NutripatrolTicket>.responseError(response);
   }
 
   /// Get all tickets.
-  static Future<MaybeError<Tickets>> getTickets({
+  static Future<MaybeError<NutripatrolTickets>> getTickets({
     final NutripatrolTicketStatus status = NutripatrolTicketStatus.open,
     final NutripatrolType type = NutripatrolType.image,
     final int? page,
@@ -90,8 +92,8 @@ class NutripatrolApiClient {
       try {
         final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
         final List<dynamic> tickets = decodedResponse['tickets'];
-        return MaybeError<Tickets>.value(
-          Tickets.fromJson(<String, dynamic>{
+        return MaybeError<NutripatrolTickets>.value(
+          NutripatrolTickets.fromJson(<String, dynamic>{
             'tickets': tickets,
             'max_page': decodedResponse['max_page'],
           }),
@@ -100,14 +102,14 @@ class NutripatrolApiClient {
         //
       }
     }
-    return MaybeError<Tickets>.responseError(response);
+    return MaybeError<NutripatrolTickets>.responseError(response);
   }
 
   /// Create a Flag for a product.
   ///
   /// [flag] is the flag to create.
-  static Future<MaybeError<CreateFlag>> createFlag({
-    required final CreateFlagRequest flag,
+  static Future<MaybeError<CreateNutripatrolFlag>> createFlag({
+    required final CreateNutripatrolFlagRequest flag,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Uri uri = getUri(
@@ -133,19 +135,19 @@ class NutripatrolApiClient {
     if (response.statusCode == 201) {
       try {
         final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        return MaybeError<CreateFlag>.value(
-            CreateFlag.fromJson(decodedResponse));
+        return MaybeError<CreateNutripatrolFlag>.value(
+            CreateNutripatrolFlag.fromJson(decodedResponse));
       } catch (_) {
         // Handle parsing errors if necessary
       }
     }
-    return MaybeError<CreateFlag>.responseError(response);
+    return MaybeError<CreateNutripatrolFlag>.responseError(response);
   }
 
   /// Update a Ticket Status by its ID.
   ///
   /// [ticketId] is the ID of the ticket.
-  static Future<MaybeError<Ticket>> updateTicketStatus({
+  static Future<MaybeError<NutripatrolTicket>> updateTicketStatus({
     required final int ticketId,
     required final NutripatrolTicketStatus status,
     final UriProductHelper uriHelper = uriHelperFoodProd,
@@ -167,11 +169,12 @@ class NutripatrolApiClient {
     if (response.statusCode == 200) {
       try {
         final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        return MaybeError<Ticket>.value(Ticket.fromJson(decodedResponse));
+        return MaybeError<NutripatrolTicket>.value(
+            NutripatrolTicket.fromJson(decodedResponse));
       } catch (_) {
         //
       }
     }
-    return MaybeError<Ticket>.responseError(response);
+    return MaybeError<NutripatrolTicket>.responseError(response);
   }
 }
