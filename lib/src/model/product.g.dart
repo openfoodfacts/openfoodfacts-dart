@@ -96,6 +96,23 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           ? null
           : EcoscoreData.fromJson(
               json['ecoscore_data'] as Map<String, dynamic>),
+      dataQualityTags: (json['data_quality_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      dataQualityBugsTags: (json['data_quality_bugs_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      dataQualityErrorsTags:
+          (json['data_quality_errors_tags'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
+      dataQualityInfoTags: (json['data_quality_info_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      dataQualityWarningsTags:
+          (json['data_quality_warnings_tags'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
       nutriments: json['nutriments'] == null
           ? null
           : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
@@ -312,6 +329,11 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('origins', instance.origins);
   writeNotNull('nova_group', instance.novaGroup);
   writeNotNull('link', instance.website);
+  writeNotNull('data_quality_tags', instance.dataQualityTags);
+  writeNotNull('data_quality_bugs_tags', instance.dataQualityBugsTags);
+  writeNotNull('data_quality_errors_tags', instance.dataQualityErrorsTags);
+  writeNotNull('data_quality_info_tags', instance.dataQualityInfoTags);
+  writeNotNull('data_quality_warnings_tags', instance.dataQualityWarningsTags);
   val['obsolete'] = JsonHelper.checkboxToJSON(instance.obsolete);
   writeNotNull('owner_fields', instance.ownerFields);
   writeNotNull('owner', instance.owner);
