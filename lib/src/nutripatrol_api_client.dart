@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:openfoodfacts/src/nutripatrol/create_flag.dart';
-import 'package:openfoodfacts/src/nutripatrol/create_flag_request.dart';
-import 'package:openfoodfacts/src/nutripatrol/get_tickets.dart';
-import 'package:openfoodfacts/src/prices/maybe_error.dart';
-import 'package:openfoodfacts/src/utils/nutripatrol_source.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
+import 'nutripatrol/create_flag.dart';
+import 'nutripatrol/get_tickets.dart';
+import 'prices/maybe_error.dart';
+import 'utils/nutripatrol_types.dart';
 import 'utils/http_helper.dart';
 import 'utils/open_food_api_configuration.dart';
 import 'utils/uri_helper.dart';
@@ -109,29 +109,40 @@ class NutripatrolApiClient {
   ///
   /// [flag] is the flag to create.
   static Future<MaybeError<CreateNutripatrolFlag>> createFlag({
-    required final CreateNutripatrolFlagRequest flag,
+    required final String barcode,
+    required final String comment,
+    required final double confidence,
+    required final String imageId,
+    required final NutripatrolFlagReason reason,
+    required final NutripatrolType type,
+    required final String url,
+    required final String userId,
+    required final String deviceId,
+    required final NutripatrolSource source,
+    required final Flavor flavor,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Uri uri = getUri(
       path: '/api/v1/flags',
       uriHelper: uriHelper,
     );
-    final Map<String, dynamic> body = <String, dynamic>{
-      if (flag.barcode != null) 'barcode': flag.barcode,
-      if (flag.comment != null) 'comment': flag.comment,
-      if (flag.confidence != null) 'confidence': flag.confidence,
-      if (flag.imageId != null) 'image_id': flag.imageId,
-      if (flag.reason != null) 'reason': flag.reason,
-      'type': flag.type,
-      'url': flag.url,
-      'user_id': flag.userId,
-      'device_id': flag.deviceId,
-      'source': flag.source,
-      'flavor': flag.flavor,
-    };
     final Response response = await HttpHelper().doPostJsonRequest(
-        uri, jsonEncode(body),
-        uriHelper: uriHelper, bearerToken: "");
+        uri,
+        jsonEncode(<String, dynamic>{
+          'barcode': barcode,
+          'comment': comment,
+          'confidence': confidence,
+          'image_id': imageId,
+          'reason': reason.toString().split('.').last,
+          'type': type.toString().split('.').last,
+          'url': url,
+          'user_id': userId,
+          'device_id': deviceId,
+          'source': source.toString().split('.').last,
+          'flavor': flavor.offTag,
+        }),
+        uriHelper: uriHelper,
+        bearerToken: "");
     if (response.statusCode == 201) {
       try {
         final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);

@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:openfoodfacts/src/nutripatrol/get_ticket.dart';
-import 'package:openfoodfacts/src/prices/flavor.dart';
+import 'get_ticket.dart';
+import '../prices/flavor.dart';
 
 import '../interface/json_object.dart';
-import '../utils/nutripatrol_source.dart';
+import '../utils/nutripatrol_types.dart';
 
 part 'get_flag.g.dart';
 
@@ -63,7 +63,7 @@ class NutripatrolFlag extends JsonObject {
 
   /// created date of the ticket. Read-only.
   @JsonKey(name: 'created_at')
-  late String createdAt;
+  late DateTime createdAt;
 
   NutripatrolFlag();
 

@@ -15,7 +15,7 @@ NutripatrolTicket _$NutripatrolTicketFromJson(Map<String, dynamic> json) =>
       ..status = $enumDecode(_$NutripatrolTicketStatusEnumMap, json['status'])
       ..imageId = json['image_id'] as String?
       ..flavor = $enumDecode(_$FlavorEnumMap, json['flavor'])
-      ..createdAt = json['created_at'] as String;
+      ..createdAt = DateTime.parse(json['created_at'] as String);
 
 Map<String, dynamic> _$NutripatrolTicketToJson(NutripatrolTicket instance) =>
     <String, dynamic>{
@@ -26,7 +26,7 @@ Map<String, dynamic> _$NutripatrolTicketToJson(NutripatrolTicket instance) =>
       'status': _$NutripatrolTicketStatusEnumMap[instance.status]!,
       'image_id': instance.imageId,
       'flavor': _$FlavorEnumMap[instance.flavor]!,
-      'created_at': instance.createdAt,
+      'created_at': instance.createdAt.toIso8601String(),
     };
 
 const _$NutripatrolTypeEnumMap = {

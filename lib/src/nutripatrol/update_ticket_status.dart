@@ -1,41 +1,42 @@
-import 'package:json_annotation/json_annotation.dart';
+// import 'package:json_annotation/json_annotation.dart';
 
-part 'update_ticket_status.g.dart';
+// part 'update_ticket_status.g.dart';
 
-@JsonSerializable()
-class UpdateTicketStatus {
-  /// Barcode of the product, if any
-  @JsonKey()
-  String? barcode;
 
-  /// Type of the ticket
-  @JsonKey()
-  late String type;
+// @JsonSerializable()
+// class UpdateTicketStatus {
+//   /// Barcode of the product, if any
+//   @JsonKey()
+//   String? barcode;
 
-  /// URL associated with the ticket
-  @JsonKey()
-  late String url;
+//   /// Type of the ticket
+//   @JsonKey()
+//   late String type;
 
-  /// Status of the ticket
-  @JsonKey()
-  late String status;
+//   /// URL associated with the ticket
+//   @JsonKey()
+//   late String url;
 
-  /// Image ID associated with the ticket
-  @JsonKey(name: 'image_id')
-  String? imageId;
+//   /// Status of the ticket
+//   @JsonKey()
+//   late String status;
 
-  /// Flavor of the ticket
-  @JsonKey()
-  late String flavor;
+//   /// Image ID associated with the ticket
+//   @JsonKey(name: 'image_id')
+//   String? imageId;
 
-  /// Created date of the ticket
-  @JsonKey(name: 'created_at')
-  late DateTime createdAt;
+//   /// Flavor of the ticket
+//   @JsonKey()
+//   late String flavor;
 
-  UpdateTicketStatus();
+//   /// Created date of the ticket
+//   @JsonKey(name: 'created_at')
+//   late DateTime createdAt;
 
-  factory UpdateTicketStatus.fromJson(Map<String, dynamic> json) =>
-      _$UpdateTicketStatusFromJson(json);
+//   UpdateTicketStatus();
 
-  Map<String, dynamic> toJson() => _$UpdateTicketStatusToJson(this);
-}
+//   factory UpdateTicketStatus.fromJson(Map<String, dynamic> json) =>
+//       _$UpdateTicketStatusFromJson(json);
+
+//   Map<String, dynamic> toJson() => _$UpdateTicketStatusToJson(this);
+// }
