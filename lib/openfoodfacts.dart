@@ -85,7 +85,6 @@ export 'src/nutripatrol/create_flag.dart';
 export 'src/nutripatrol/get_flag.dart';
 export 'src/nutripatrol/get_ticket.dart';
 export 'src/nutripatrol/get_tickets.dart';
-export 'src/nutripatrol/update_ticket_status.dart';
 export 'src/nutripatrol_api_client.dart';
 export 'src/open_food_api_client.dart';
 export 'src/open_food_search_api_client.dart';

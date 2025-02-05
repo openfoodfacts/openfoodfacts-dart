@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-
 enum NutripatrolSource {
   @JsonValue('mobile')
   mobile,
@@ -21,7 +20,7 @@ enum NutripatrolType {
   product,
 
   @JsonValue('search')
-  search
+  search,
 }
 
 /// Enum for ticket status
@@ -30,7 +29,7 @@ enum NutripatrolTicketStatus {
   open,
 
   @JsonValue('closed')
-  closed
+  closed,
 }
 
 /// Enum for flag reason
@@ -45,5 +44,5 @@ enum NutripatrolFlagReason {
   beauty,
 
   @JsonValue('other')
-  other
+  other,
 }

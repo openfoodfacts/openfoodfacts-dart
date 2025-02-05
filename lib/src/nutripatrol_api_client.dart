@@ -109,11 +109,11 @@ class NutripatrolApiClient {
   ///
   /// [flag] is the flag to create.
   static Future<MaybeError<CreateNutripatrolFlag>> createFlag({
-    required final String barcode,
-    required final String comment,
-    required final double confidence,
-    required final String imageId,
-    required final NutripatrolFlagReason reason,
+    final String? barcode,
+    final String? comment,
+    final double? confidence,
+    final String? imageId,
+    final NutripatrolFlagReason? reason,
     required final NutripatrolType type,
     required final String url,
     required final String userId,
@@ -143,14 +143,10 @@ class NutripatrolApiClient {
         }),
         uriHelper: uriHelper,
         bearerToken: "");
-    if (response.statusCode == 201) {
-      try {
-        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        return MaybeError<CreateNutripatrolFlag>.value(
-            CreateNutripatrolFlag.fromJson(decodedResponse));
-      } catch (_) {
-        // Handle parsing errors if necessary
-      }
+    if (response.statusCode == 200) {
+      final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+      return MaybeError<CreateNutripatrolFlag>.value(
+          CreateNutripatrolFlag.fromJson(decodedResponse));
     }
     return MaybeError<CreateNutripatrolFlag>.responseError(response);
   }
