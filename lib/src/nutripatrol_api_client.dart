@@ -150,38 +150,4 @@ class NutripatrolApiClient {
     }
     return MaybeError<CreateNutripatrolFlag>.responseError(response);
   }
-
-  /// Update a Ticket Status by its ID.
-  ///
-  /// [ticketId] is the ID of the ticket.
-  static Future<MaybeError<NutripatrolTicket>> updateTicketStatus({
-    required final int ticketId,
-    required final NutripatrolTicketStatus status,
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) async {
-    assert(ticketId >= 0, "The id must be >= 0");
-    final Uri uri = getUri(
-      path: '/api/v1/tickets/$ticketId/status',
-      uriHelper: uriHelper,
-    );
-    final Map<String, dynamic> body = <String, dynamic>{
-      'ticket_id': ticketId,
-      'status': status.toString().split('.').last,
-    };
-    final Response response = await HttpHelper().doPutRequest(
-      uri,
-      jsonEncode(body),
-      uriHelper: uriHelper,
-    );
-    if (response.statusCode == 200) {
-      try {
-        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        return MaybeError<NutripatrolTicket>.value(
-            NutripatrolTicket.fromJson(decodedResponse));
-      } catch (_) {
-        //
-      }
-    }
-    return MaybeError<NutripatrolTicket>.responseError(response);
-  }
 }
