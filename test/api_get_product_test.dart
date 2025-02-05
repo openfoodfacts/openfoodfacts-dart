@@ -1378,7 +1378,6 @@ void main() {
       final ProductResultV3 productResult = await getProductV3InProd(
         ProductQueryConfiguration(
           barcode,
-          //fields: [ProductField.DATA_QUALITY_TAGS],
           language: language,
           country: country,
           version: version,
