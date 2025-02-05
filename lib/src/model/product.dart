@@ -670,11 +670,6 @@ class Product extends JsonObject {
       this.ecoscoreGrade,
       this.ecoscoreScore,
       this.ecoscoreData,
-      this.dataQualityTags,
-      this.dataQualityBugsTags,
-      this.dataQualityErrorsTags,
-      this.dataQualityInfoTags,
-      this.dataQualityWarningsTags,
       Nutriments? nutriments,
       bool? noNutritionData})
       : _nutriments = nutriments,
