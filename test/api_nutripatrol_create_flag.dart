@@ -27,7 +27,7 @@ void main() {
         imageId: 'test_image_id',
         reason: NutripatrolFlagReason.inappropriate,
         type: NutripatrolType.image,
-        url: 'https://example.com/product/3274570800026',
+        url: 'https://example.com/product/$barcode',
         userId: userId,
         deviceId: 'test_device',
         source: NutripatrolSource.web,

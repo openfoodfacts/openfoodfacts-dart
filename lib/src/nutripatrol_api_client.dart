@@ -74,8 +74,8 @@ class NutripatrolApiClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Map<String, String> queryParameters = <String, String>{};
-    queryParameters['status'] = status.toString().split('.').last;
-    queryParameters['type_'] = type.toString().split('.').last;
+    queryParameters['status'] = status.label;
+    queryParameters['type_'] = type.label;
     if (page != null) queryParameters['page'] = page.toString();
     if (pageSize != null) queryParameters['page_size'] = pageSize.toString();
 
@@ -133,12 +133,12 @@ class NutripatrolApiClient {
           'comment': comment,
           'confidence': confidence,
           'image_id': imageId,
-          'reason': reason.toString().split('.').last,
-          'type': type.toString().split('.').last,
+          'reason': reason?.label,
+          'type': type.label,
           'url': url,
           'user_id': userId,
           'device_id': deviceId,
-          'source': source.toString().split('.').last,
+          'source': source.label,
           'flavor': flavor.offTag,
         }),
         uriHelper: uriHelper,
