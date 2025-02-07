@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import '../utils/unit_helper.dart';
 import 'per_size.dart';
 import 'robotoff_nutrient_extraction_annotation.dart';
 import '../interface/json_object.dart';
@@ -67,7 +68,8 @@ class RobotoffNutrientEntity {
   final int? start;
   final int? end;
   final String? text;
-  final String? unit;
+  @JsonKey(toJson: UnitHelper.unitToString, fromJson: UnitHelper.stringToUnit)
+  final Unit? unit;
   final double? score;
   final bool? valid;
   final String? value;
