@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.20.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.19.0...v3.20.0) (2025-02-10)
+
+
+### Features
+
+* added product fields 'data_quality_{*_}tags' ([#1033](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1033)) ([8d12daf](https://github.com/openfoodfacts/openfoodfacts-dart/commit/8d12daf081dfe04205ea59fd397fd8fe83230036))
+
 ## [3.19.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.18.1...v3.19.0) (2025-01-27)
 
 
