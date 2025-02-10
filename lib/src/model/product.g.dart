@@ -96,23 +96,6 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           ? null
           : EcoscoreData.fromJson(
               json['ecoscore_data'] as Map<String, dynamic>),
-      dataQualityTags: (json['data_quality_tags'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      dataQualityBugsTags: (json['data_quality_bugs_tags'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      dataQualityErrorsTags:
-          (json['data_quality_errors_tags'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList(),
-      dataQualityInfoTags: (json['data_quality_info_tags'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      dataQualityWarningsTags:
-          (json['data_quality_warnings_tags'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList(),
       nutriments: json['nutriments'] == null
           ? null
           : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
@@ -189,6 +172,23 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       ..origins = json['origins'] as String?
       ..novaGroup = (json['nova_group'] as num?)?.toInt()
       ..website = json['link'] as String?
+      ..dataQualityTags = (json['data_quality_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
+      ..dataQualityBugsTags = (json['data_quality_bugs_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
+      ..dataQualityErrorsTags =
+          (json['data_quality_errors_tags'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList()
+      ..dataQualityInfoTags = (json['data_quality_info_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
+      ..dataQualityWarningsTags =
+          (json['data_quality_warnings_tags'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList()
       ..obsolete = JsonHelper.checkboxFromJSON(json['obsolete'])
       ..ownerFields = (json['owner_fields'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, (e as num).toInt()),
