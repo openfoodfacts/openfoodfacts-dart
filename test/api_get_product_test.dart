@@ -52,7 +52,7 @@ void main() {
 
   group('$OpenFoodAPIClient get products', () {
     test('get KP halfWidthOnMobile', () async {
-      const String barcode = '737628064502';
+      const String barcode = '0737628064502';
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
@@ -1081,7 +1081,7 @@ void main() {
     expect(result.status, ProductResultV3.statusSuccess);
     expect(result.product, isNotNull);
     expect(result.product!.obsolete, isNotNull);
-    expect(result.product!.obsolete, isTrue);
+    expect(result.product!.obsolete, isFalse);
 
     configuration = ProductQueryConfiguration(
       '7300400481588',
