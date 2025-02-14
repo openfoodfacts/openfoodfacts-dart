@@ -109,6 +109,20 @@ class Product extends JsonObject {
       toJson: LanguageHelper.toJsonStringMap)
   Map<OpenFoodFactsLanguage, String>? productNameInLanguages;
 
+  /// Localized conservation conditions of the product, stored in a map where each language is represented by its respective key.
+  @JsonKey(
+      name: 'conservation_conditions_in_languages',
+      fromJson: LanguageHelper.fromJsonStringMap,
+      toJson: LanguageHelper.toJsonStringMap)
+  Map<OpenFoodFactsLanguage, String>? conservationConditionsInLanguages;
+
+  /// Localized customer service information for the product, stored in a map where each language is represented by its respective key.
+  @JsonKey(
+      name: 'customer_service_in_languages',
+      fromJson: LanguageHelper.fromJsonStringMap,
+      toJson: LanguageHelper.toJsonStringMap)
+  Map<OpenFoodFactsLanguage, String>? customerServiceInLanguages;
+
   /// Common name. Example: "Chocolate bar with milk and hazelnuts".
   @JsonKey(name: 'generic_name')
   String? genericName;
@@ -773,6 +787,14 @@ class Product extends JsonObject {
         case ProductField.COUNTRIES_TAGS_IN_LANGUAGES:
           result.countriesTagsInLanguages ??= {};
           result.countriesTagsInLanguages![language] = labels;
+          break;
+        case ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES:
+          result.conservationConditionsInLanguages ??= {};
+          result.conservationConditionsInLanguages![language] = label;
+          break;
+        case ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES:
+          result.customerServiceInLanguages ??= {};
+          result.customerServiceInLanguages![language] = label;
           break;
         default:
           // not supposed to be called with other ProductField values.
