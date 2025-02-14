@@ -406,6 +406,11 @@ Like that:
               nutriments.getValue(nutrient, perSize),
               reason: 'should be the same values for $nutrient',
             );
+            expect(
+              nutriments.getModifier(nutrient),
+              isNull,
+              reason: 'modifier should be null for $nutrient',
+            );
           }
         }
       }
@@ -512,6 +517,98 @@ Like that:
 
       expect(product.noNutritionData, isFalse);
       expect(product.nutriments, isNotNull);
+    });
+
+    test('Nutriments modifiers', () async {
+      Product product = Product(
+          nutriments: Nutriments.empty()
+            ..setValue(
+              Nutrient.energyKCal,
+              PerSize.oneHundredGrams,
+              null,
+              modifier: NutrientModifier.notProvided,
+            )
+            ..setValue(
+              Nutrient.energyKJ,
+              PerSize.oneHundredGrams,
+              1.0,
+              modifier: NutrientModifier.lessThan,
+            )
+            ..setValue(
+              Nutrient.salt,
+              PerSize.oneHundredGrams,
+              1.0,
+              modifier: NutrientModifier.approximately,
+            )
+            ..setValue(
+              Nutrient.sodium,
+              PerSize.oneHundredGrams,
+              1.0,
+              modifier: NutrientModifier.greaterThan,
+            )
+            ..setValue(Nutrient.fat, PerSize.oneHundredGrams, 1.0));
+
+      expect(product.nutriments, isNotNull);
+      expect(
+        product.nutriments?.getModifier(Nutrient.energyKCal),
+        NutrientModifier.notProvided,
+      );
+      expect(
+        product.nutriments?.getValue(Nutrient.energyKCal, PerSize.serving),
+        isNull,
+      );
+      expect(
+        product.nutriments
+            ?.getValue(Nutrient.energyKCal, PerSize.oneHundredGrams),
+        isNull,
+      );
+
+      expect(
+        product.nutriments?.getModifier(Nutrient.energyKJ),
+        NutrientModifier.lessThan,
+      );
+      expect(
+        product.nutriments
+            ?.getValue(Nutrient.energyKJ, PerSize.oneHundredGrams),
+        isNotNull,
+      );
+
+      expect(
+        product.nutriments?.getModifier(Nutrient.salt),
+        NutrientModifier.approximately,
+      );
+      expect(
+        product.nutriments?.getValue(Nutrient.salt, PerSize.oneHundredGrams),
+        isNotNull,
+      );
+
+      expect(
+        product.nutriments?.getModifier(Nutrient.sodium),
+        NutrientModifier.greaterThan,
+      );
+      expect(
+        product.nutriments?.getValue(Nutrient.sodium, PerSize.oneHundredGrams),
+        isNotNull,
+      );
+
+      expect(
+        product.nutriments?.getModifier(Nutrient.fat),
+        isNull,
+      );
+      expect(
+        product.nutriments?.getValue(Nutrient.fat, PerSize.oneHundredGrams),
+        isNotNull,
+      );
+
+      expect(
+        () => product.nutriments!.setValue(
+          Nutrient.energyKCal,
+          PerSize.oneHundredGrams,
+          1.0,
+          modifier: NutrientModifier.notProvided,
+        ),
+        throwsException,
+      );
     });
   });
 }

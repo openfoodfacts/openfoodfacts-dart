@@ -230,7 +230,9 @@ void main() {
       const PerSize perSize = PerSize.oneHundredGrams;
 
       expect(nutriments.getValue(Nutrient.iron, perSize), 0.00041);
+      expect(nutriments.getModifier(Nutrient.iron), isNull);
       expect(nutriments.getValue(Nutrient.vitaminC, perSize), 0.0339);
+      expect(nutriments.getModifier(Nutrient.vitaminC), isNull);
     });
 
     test('get uncommon nutrients', () async {
@@ -1429,5 +1431,82 @@ void main() {
       expect(productResult.product!.dataQualityInfoTags, isNull);
       expect(productResult.product!.dataQualityWarningsTags, isNull);
     });
+  });
+
+  test('check nutrients modifier (set)', () async {
+    final ProductQueryConfiguration configurations = ProductQueryConfiguration(
+      BARCODE_DANISH_BUTTER_COOKIES,
+      language: OpenFoodFactsLanguage.ENGLISH,
+      fields: [ProductField.ALL],
+      version: ProductQueryVersion.v3,
+    );
+    ProductResultV3 result = await getProductV3InProd(
+      configurations,
+    );
+
+    final Nutriments nutriments = result.product!.nutriments!;
+
+    expect(nutriments.getModifier(Nutrient.energyKJ), isNull);
+    expect(nutriments.getModifier(Nutrient.energyKCal), isNull);
+    expect(nutriments.getModifier(Nutrient.sugars), isNull);
+    expect(nutriments.getModifier(Nutrient.salt), isNull);
+    expect(nutriments.getModifier(Nutrient.fiber), isNull);
+    expect(nutriments.getModifier(Nutrient.fat), isNull);
+    expect(nutriments.getModifier(Nutrient.saturatedFat), isNull);
+    expect(nutriments.getModifier(Nutrient.proteins), isNull);
+  });
+
+  test('check nutrients modifier (without)', () async {
+    const String barcode = '3119780259625';
+
+    final ProductQueryConfiguration configurations = ProductQueryConfiguration(
+      barcode,
+      language: OpenFoodFactsLanguage.ENGLISH,
+      fields: [ProductField.ALL],
+      version: ProductQueryVersion.v3,
+    );
+    ProductResultV3 result = await getProductV3InProd(
+      configurations,
+    );
+
+    final Nutriments nutriments = result.product!.nutriments!;
+
+    expect(
+      nutriments.getModifier(Nutrient.salt),
+      NutrientModifier.lessThan,
+    );
+    expect(
+      nutriments.getModifier(Nutrient.sodium),
+      NutrientModifier.lessThan,
+    );
+  });
+
+  test('check nutrients modifier (value not provided = \'-\')', () async {
+    const String barcode = '5060517883638';
+
+    final ProductQueryConfiguration configurations = ProductQueryConfiguration(
+      barcode,
+      language: OpenFoodFactsLanguage.ENGLISH,
+      fields: [ProductField.ALL],
+      version: ProductQueryVersion.v3,
+    );
+    ProductResultV3 result = await getProductV3InProd(
+      configurations,
+    );
+
+    final Nutriments nutriments = result.product!.nutriments!;
+
+    expect(
+      nutriments.getModifier(Nutrient.fiber),
+      NutrientModifier.notProvided,
+    );
+    expect(
+      nutriments.getValue(Nutrient.fiber, PerSize.oneHundredGrams),
+      isNull,
+    );
+    expect(
+      nutriments.getValue(Nutrient.fiber, PerSize.serving),
+      isNull,
+    );
   });
 }
