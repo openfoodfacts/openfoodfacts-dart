@@ -230,9 +230,9 @@ void main() {
       const PerSize perSize = PerSize.oneHundredGrams;
 
       expect(nutriments.getValue(Nutrient.iron, perSize), 0.00041);
-      expect(nutriments.getModifier(Nutrient.iron), isNull);
+      expect(nutriments.getModifier(Nutrient.iron, perSize), isNull);
       expect(nutriments.getValue(Nutrient.vitaminC, perSize), 0.0339);
-      expect(nutriments.getModifier(Nutrient.vitaminC), isNull);
+      expect(nutriments.getModifier(Nutrient.vitaminC, perSize), isNull);
     });
 
     test('get uncommon nutrients', () async {
@@ -1446,14 +1446,23 @@ void main() {
 
     final Nutriments nutriments = result.product!.nutriments!;
 
-    expect(nutriments.getModifier(Nutrient.energyKJ), isNull);
-    expect(nutriments.getModifier(Nutrient.energyKCal), isNull);
-    expect(nutriments.getModifier(Nutrient.sugars), isNull);
-    expect(nutriments.getModifier(Nutrient.salt), isNull);
-    expect(nutriments.getModifier(Nutrient.fiber), isNull);
-    expect(nutriments.getModifier(Nutrient.fat), isNull);
-    expect(nutriments.getModifier(Nutrient.saturatedFat), isNull);
-    expect(nutriments.getModifier(Nutrient.proteins), isNull);
+    expect(nutriments.getModifier(Nutrient.energyKJ, PerSize.oneHundredGrams),
+        isNull);
+    expect(nutriments.getModifier(Nutrient.energyKCal, PerSize.oneHundredGrams),
+        isNull);
+    expect(nutriments.getModifier(Nutrient.sugars, PerSize.oneHundredGrams),
+        isNull);
+    expect(
+        nutriments.getModifier(Nutrient.salt, PerSize.oneHundredGrams), isNull);
+    expect(nutriments.getModifier(Nutrient.fiber, PerSize.oneHundredGrams),
+        isNull);
+    expect(
+        nutriments.getModifier(Nutrient.fat, PerSize.oneHundredGrams), isNull);
+    expect(
+        nutriments.getModifier(Nutrient.saturatedFat, PerSize.oneHundredGrams),
+        isNull);
+    expect(nutriments.getModifier(Nutrient.proteins, PerSize.oneHundredGrams),
+        isNull);
   });
 
   test('check nutrients modifier (NutrientModifier.lessThan)', () async {
@@ -1472,11 +1481,11 @@ void main() {
     final Nutriments nutriments = result.product!.nutriments!;
 
     expect(
-      nutriments.getModifier(Nutrient.salt),
+      nutriments.getModifier(Nutrient.salt, PerSize.oneHundredGrams),
       NutrientModifier.lessThan,
     );
     expect(
-      nutriments.getModifier(Nutrient.sodium),
+      nutriments.getModifier(Nutrient.sodium, PerSize.oneHundredGrams),
       NutrientModifier.lessThan,
     );
   });
@@ -1497,7 +1506,7 @@ void main() {
     final Nutriments nutriments = result.product!.nutriments!;
 
     expect(
-      nutriments.getModifier(Nutrient.fiber),
+      nutriments.getModifier(Nutrient.fiber, PerSize.oneHundredGrams),
       NutrientModifier.notProvided,
     );
     expect(

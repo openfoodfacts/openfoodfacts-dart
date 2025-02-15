@@ -407,7 +407,7 @@ Like that:
               reason: 'should be the same values for $nutrient',
             );
             expect(
-              nutriments.getModifier(nutrient),
+              nutriments.getModifier(nutrient, perSize),
               isNull,
               reason: 'modifier should be null for $nutrient',
             );
@@ -570,61 +570,79 @@ Like that:
         uriHelper: uriHelper,
       );
 
-      expect(product.nutriments, isNotNull);
+      expect(result.product!.nutriments, isNotNull);
       expect(
-        product.nutriments?.getModifier(Nutrient.proteins),
+        result.product!.nutriments?.getModifier(
+          Nutrient.proteins,
+          PerSize.oneHundredGrams,
+        ),
         NutrientModifier.notProvided,
       );
       expect(
-        product.nutriments
+        result.product!.nutriments
             ?.getValue(Nutrient.proteins, PerSize.oneHundredGrams),
         isNull,
       );
       expect(
-        product.nutriments?.getValue(Nutrient.proteins, PerSize.serving),
+        result.product!.nutriments
+            ?.getValue(Nutrient.proteins, PerSize.serving),
         isNull,
       );
 
       expect(
-        product.nutriments?.getModifier(Nutrient.energyKJ),
+        result.product!.nutriments?.getModifier(
+          Nutrient.energyKJ,
+          PerSize.oneHundredGrams,
+        ),
         NutrientModifier.lessThan,
       );
       expect(
-        product.nutriments
+        result.product!.nutriments
             ?.getValue(Nutrient.energyKJ, PerSize.oneHundredGrams),
         isNotNull,
       );
 
       expect(
-        product.nutriments?.getModifier(Nutrient.salt),
+        result.product!.nutriments?.getModifier(
+          Nutrient.salt,
+          PerSize.oneHundredGrams,
+        ),
         NutrientModifier.approximately,
       );
       expect(
-        product.nutriments?.getValue(Nutrient.salt, PerSize.oneHundredGrams),
+        result.product!.nutriments
+            ?.getValue(Nutrient.salt, PerSize.oneHundredGrams),
         isNotNull,
       );
 
       expect(
-        product.nutriments?.getModifier(Nutrient.magnesium),
+        result.product!.nutriments?.getModifier(
+          Nutrient.magnesium,
+          PerSize.oneHundredGrams,
+        ),
         NutrientModifier.greaterThan,
       );
       expect(
-        product.nutriments
+        result.product!.nutriments
             ?.getValue(Nutrient.magnesium, PerSize.oneHundredGrams),
         isNotNull,
       );
 
       expect(
-        product.nutriments?.getModifier(Nutrient.fat),
+        result.product!.nutriments?.getModifier(
+          Nutrient.fat,
+          PerSize.oneHundredGrams,
+        ),
         isNull,
       );
       expect(
-        product.nutriments?.getValue(Nutrient.fat, PerSize.oneHundredGrams),
+        result.product!.nutriments
+            ?.getValue(Nutrient.fat, PerSize.oneHundredGrams),
         isNotNull,
       );
 
       expect(
-        () => product.nutriments!.setValue(
+        () => result.product!.nutriments!.setValue(
           Nutrient.energyKCal,
           PerSize.oneHundredGrams,
           1.0,
