@@ -12,7 +12,7 @@ class Nutriments extends JsonObject {
   /// Nutrient map with start values from [map].
   Nutriments._fromMap(final Map<String, dynamic> map) {
     for (final Nutrient nutrient in Nutrient.values) {
-      NutrientModifier? modifier = NutrientModifier.fromValue(
+      final NutrientModifier? modifier = NutrientModifier.fromValue(
         map[_getModifierTag(nutrient)],
       );
 
