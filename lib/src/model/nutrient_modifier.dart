@@ -1,6 +1,7 @@
 import 'package:openfoodfacts/src/model/off_tagged.dart';
 
 enum NutrientModifier implements OffTagged {
+  notProvided(offTag: '-'),
   approximately(offTag: '~'),
   greaterThan(offTag: '>'),
   lessThan(offTag: '<');
@@ -8,6 +9,7 @@ enum NutrientModifier implements OffTagged {
   const NutrientModifier({
     required this.offTag,
   });
+
   @override
   final String offTag;
 
