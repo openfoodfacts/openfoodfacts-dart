@@ -48,8 +48,8 @@ class Nutriments extends JsonObject {
   /// It is useful to store null values: this way we can make the difference
   /// between totally unknown values and values that have been erased.
   final Map<String, double?> _valueMap = <String, double?>{};
-  final Map<String, NutrientModifier?> _modifierMap =
-      <String, NutrientModifier?>{};
+  final Map<String, NutrientModifier> _modifierMap =
+      <String, NutrientModifier>{};
 
   /// Returns the map key for that [nutrient] and that [perSize].
   String _getTag(
