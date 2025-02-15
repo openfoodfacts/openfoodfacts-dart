@@ -1433,7 +1433,7 @@ void main() {
     });
   });
 
-  test('check nutrients modifier (set)', () async {
+  test('check that all nutriment modifiers are null (by default)', () async {
     final ProductQueryConfiguration configurations = ProductQueryConfiguration(
       BARCODE_DANISH_BUTTER_COOKIES,
       language: OpenFoodFactsLanguage.ENGLISH,
@@ -1456,7 +1456,7 @@ void main() {
     expect(nutriments.getModifier(Nutrient.proteins), isNull);
   });
 
-  test('check nutrients modifier (without)', () async {
+  test('check nutrients modifier (NutrientModifier.lessThan)', () async {
     const String barcode = '3119780259625';
 
     final ProductQueryConfiguration configurations = ProductQueryConfiguration(
@@ -1481,7 +1481,7 @@ void main() {
     );
   });
 
-  test('check nutrients modifier (value not provided = \'-\')', () async {
+  test('check nutrients modifier (NutrientModifier.notProvided)', () async {
     const String barcode = '5060517883638';
 
     final ProductQueryConfiguration configurations = ProductQueryConfiguration(

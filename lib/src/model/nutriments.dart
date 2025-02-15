@@ -13,10 +13,12 @@ class Nutriments extends JsonObject {
   Nutriments._fromMap(final Map<String, dynamic> map) {
     for (final Nutrient nutrient in Nutrient.values) {
       final NutrientModifier? modifier = NutrientModifier.fromValue(
-        map[_getModifierTag(nutrient)],
+        map['${nutrient.offTag}_modifier'],
       );
 
-      _modifierMap[nutrient.offTag] = modifier;
+      if (modifier != null) {
+        _modifierMap[_getModifierTag(nutrient)] = modifier;
+      }
 
       if (modifier == NutrientModifier.notProvided) {
         // Even if values are provided by the server, they should be ignored
@@ -59,8 +61,7 @@ class Nutriments extends JsonObject {
       '${nutrient.offTag}_${perSize.offTag}';
 
   /// Returns the modifier key for a [nutrient]
-  String _getModifierTag(final Nutrient nutrient) =>
-      '${nutrient.offTag}_modifier';
+  String _getModifierTag(final Nutrient nutrient) => nutrient.offTag;
 
   /// Returns the value in grams of that [nutrient] for that [perSize].
   ///
@@ -70,7 +71,7 @@ class Nutriments extends JsonObject {
 
   /// Returns the modifier for a [nutrient].
   NutrientModifier? getModifier(final Nutrient nutrient) =>
-      _modifierMap[nutrient.offTag];
+      _modifierMap[_getModifierTag(nutrient)];
 
   /// Sets the value in grams of that [nutrient] for that [perSize].
   ///
@@ -93,7 +94,7 @@ class Nutriments extends JsonObject {
         _valueMap.remove(_getTag(nutrient, perSize));
         _valueMap.remove(_getTag(nutrient, perSize));
       }
-      _modifierMap[nutrient.offTag] = modifier;
+      _modifierMap[_getModifierTag(nutrient)] = modifier!;
       return this;
     }
 
@@ -104,7 +105,10 @@ class Nutriments extends JsonObject {
     }
 
     _valueMap[_getTag(nutrient, perSize)] = value;
-    _modifierMap[nutrient.offTag] = modifier;
+
+    if (modifier != null) {
+      _modifierMap[_getModifierTag(nutrient)] = modifier;
+    }
     return this;
   }
 
@@ -154,7 +158,8 @@ class Nutriments extends JsonObject {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> result = <String, dynamic>{};
     for (final Nutrient nutrient in Nutrient.values) {
-      String modifierChar = _modifierMap[nutrient.offTag]?.offTag ?? '';
+      String modifierChar =
+          _modifierMap[_getModifierTag(nutrient)]?.offTag ?? '';
 
       for (final PerSize perSize in PerSize.values) {
         final String tag = _getTag(nutrient, perSize);
