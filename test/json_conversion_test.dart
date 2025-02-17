@@ -18,7 +18,7 @@ void main() {
     expect(packingRestored.shape!.id, expectedId);
   });
 
-  test('ProductPackaging bug - covers issue #6369 (part 1)', () {
+  test('ProductPackaging bug - covers Smoothie issue #6369 (part 1)', () {
     final testProduct = Product();
     testProduct.packagings = [];
     final productJson = testProduct.toJson();
@@ -28,7 +28,7 @@ void main() {
     expect(packagings, isEmpty);
   });
 
-  test('ProductPackaging bug - covers issue #6369 (part 2)', () {
+  test('ProductPackaging bug - covers Smoothie issue #6369 (part 2)', () {
     final testProduct = Product();
     testProduct.packagings = null;
     final productJson = testProduct.toJson();
