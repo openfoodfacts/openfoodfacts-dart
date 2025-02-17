@@ -17,4 +17,23 @@ void main() {
     expect(packingRestored.quantityPerUnit, expectedQuantity);
     expect(packingRestored.shape!.id, expectedId);
   });
+
+  test('ProductPackaging bug - covers issue #6369 (part 1)', () {
+    final testProduct = Product();
+    testProduct.packagings = [];
+    final productJson = testProduct.toJson();
+    final productRestored = Product.fromJson(productJson);
+    final packagings = productRestored.packagings;
+    expect(packagings, isNotNull);
+    expect(packagings, isEmpty);
+  });
+
+  test('ProductPackaging bug - covers issue #6369 (part 2)', () {
+    final testProduct = Product();
+    testProduct.packagings = null;
+    final productJson = testProduct.toJson();
+    final productRestored = Product.fromJson(productJson);
+    final packagings = productRestored.packagings;
+    expect(packagings, isNull);
+  });
 }
