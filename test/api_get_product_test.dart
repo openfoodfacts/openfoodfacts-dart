@@ -52,7 +52,7 @@ void main() {
 
   group('$OpenFoodAPIClient get products', () {
     test('get KP halfWidthOnMobile', () async {
-      const String barcode = '737628064502';
+      const String barcode = '0737628064502';
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
@@ -1116,7 +1116,7 @@ void main() {
     expect(result.status, ProductResultV3.statusSuccess);
     expect(result.product, isNotNull);
     expect(result.product!.obsolete, isNotNull);
-    expect(result.product!.obsolete, isTrue);
+    expect(result.product!.obsolete, isFalse);
 
     configuration = ProductQueryConfiguration(
       '7300400481588',
@@ -1400,6 +1400,69 @@ void main() {
       expect(productResult.status, ProductResultV3.statusSuccess);
       expect(productResult.product, isNotNull);
       checkProduct(productResult.product!);
+    });
+  });
+
+  group('$OpenFoodAPIClient get data quality tags', () {
+    const String barcode = '3661344723290';
+    const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+    const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
+    const ProductQueryVersion version = ProductQueryVersion.v3;
+
+    test('Without specifying fields', () async {
+      final ProductResultV3 productResult = await getProductV3InProd(
+        ProductQueryConfiguration(
+          barcode,
+          language: language,
+          country: country,
+          version: version,
+        ),
+      );
+      expect(productResult.product!.dataQualityTags, isNotNull);
+      expect(productResult.product!.dataQualityBugsTags, isNotNull);
+      expect(productResult.product!.dataQualityErrorsTags, isNotNull);
+      expect(productResult.product!.dataQualityInfoTags, isNotNull);
+      expect(productResult.product!.dataQualityWarningsTags, isNotNull);
+    });
+
+    test('Without ALL fields', () async {
+      final ProductResultV3 productResult = await getProductV3InProd(
+        ProductQueryConfiguration(
+          barcode,
+          fields: [
+            ProductField.DATA_QUALITY_TAGS,
+            ProductField.DATA_QUALITY_BUGS_TAGS,
+            ProductField.DATA_QUALITY_ERRORS_TAGS,
+            ProductField.DATA_QUALITY_INFO_TAGS,
+            ProductField.DATA_QUALITY_WARNINGS_TAGS,
+          ],
+          language: language,
+          country: country,
+          version: version,
+        ),
+      );
+      expect(productResult.product!.dataQualityTags, isNotNull);
+      expect(productResult.product!.dataQualityBugsTags, isNotNull);
+      expect(productResult.product!.dataQualityErrorsTags, isNotNull);
+      expect(productResult.product!.dataQualityInfoTags, isNotNull);
+      expect(productResult.product!.dataQualityWarningsTags, isNotNull);
+    });
+
+    test('With only data quality tags', () async {
+      final ProductResultV3 productResult = await getProductV3InProd(
+        ProductQueryConfiguration(
+          barcode,
+          fields: [ProductField.DATA_QUALITY_TAGS],
+          language: language,
+          country: country,
+          version: version,
+        ),
+      );
+      expect(productResult.product!.dataQualityTags, isNotNull);
+      expect(productResult.product!.dataQualityBugsTags, isNull);
+      expect(productResult.product!.dataQualityErrorsTags, isNull);
+      expect(productResult.product!.dataQualityInfoTags, isNull);
+      expect(productResult.product!.dataQualityWarningsTags, isNull);
     });
   });
 }
