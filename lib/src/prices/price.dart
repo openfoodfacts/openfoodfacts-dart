@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'currency.dart';
+import 'discount_type.dart';
 import 'location.dart';
 import 'location_osm_type.dart';
 import 'price_per.dart';
@@ -70,6 +71,9 @@ class Price extends JsonObject {
   @JsonKey(name: 'price_without_discount')
   num? priceWithoutDiscount;
 
+  @JsonKey(name: 'discount_type')
+  DiscountType? discountType;
+
   /// Price per unit, kilogram, ..?
   ///
   /// if the price is about a barcode-less product (if category_tag is
@@ -85,7 +89,7 @@ class Price extends JsonObject {
 
   /// ID of the location in OpenStreetMap: the store where the product was bought.
   @JsonKey(name: 'location_osm_id')
-  late int locationOSMId;
+  int? locationOSMId;
 
   /// Type of the OpenStreetMap location object.
   ///
@@ -93,7 +97,7 @@ class Price extends JsonObject {
   /// It is necessary to be able to fetch the correct information about the
   /// store using the ID.
   @JsonKey(name: 'location_osm_type')
-  late LocationOSMType locationOSMType;
+  LocationOSMType? locationOSMType;
 
   /// Date when the product was bought.
   @JsonKey(fromJson: JsonHelper.stringTimestampToDate)
