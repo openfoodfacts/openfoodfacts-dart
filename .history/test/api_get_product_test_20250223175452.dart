@@ -243,13 +243,21 @@ void main() {
           ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES
         ],
         version: ProductQueryVersion.v3,
-        language: OpenFoodFactsLanguage.JAPANESE,
+        language: OpenFoodFactsLanguage.FRENCH,
       );
 
       ProductResultV3 result = await getProductV3InProd(configuration);
 
       expect(result.status, ProductResultV3.statusSuccess);
       expect(result.product != null, true);
+      expect(
+          result.product!.conservationConditionsInLanguages!
+              .containsKey(OpenFoodFactsLanguage.FRENCH),
+          isTrue);
+      expect(
+          result.product!.customerServiceInLanguages!
+              .containsKey(OpenFoodFactsLanguage.FRENCH),
+          isTrue);
 
       final conservationConditions =
           result.product!.conservationConditionsInLanguages;

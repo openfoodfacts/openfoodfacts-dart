@@ -723,12 +723,14 @@ class Product extends JsonObject {
           result.packagingTextInLanguages ??= {};
           result.packagingTextInLanguages![language] = label;
           break;
+        case ProductField.CONSERVATION_CONDITIONS_IN_LANGUAGES:
         case ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES:
           result.conservationConditionsInLanguages ??= {};
           result.conservationConditionsInLanguages![language] = label;
           break;
+        case ProductField.CUSTOMER_SERVICE_IN_LANGUAGE:
         case ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES:
-          result.customerServiceInLanguages ??= {};
+          result.customerServiceInLanguages??= {};
           result.customerServiceInLanguages![language] = label;
           break;
         default:

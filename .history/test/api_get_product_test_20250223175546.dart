@@ -250,6 +250,14 @@ void main() {
 
       expect(result.status, ProductResultV3.statusSuccess);
       expect(result.product != null, true);
+      expect(
+          result.product!.conservationConditionsInLanguages!
+              .containsKey(OpenFoodFactsLanguage.FRENCH),
+          isTrue);
+      expect(
+          result.product!.customerServiceInLanguages!
+              .containsKey(OpenFoodFactsLanguage.FRENCH),
+          isTrue);
 
       final conservationConditions =
           result.product!.conservationConditionsInLanguages;
