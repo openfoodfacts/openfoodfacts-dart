@@ -1,5 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../interface/json_object.dart';
+import '../utils/json_helper.dart';
+import '../utils/language_helper.dart';
+import '../utils/product_fields.dart';
 import 'additives.dart';
 import 'allergens.dart';
 import 'attribute.dart';
@@ -14,10 +18,6 @@ import 'owner_field.dart';
 import 'product_image.dart';
 import 'product_packaging.dart';
 import 'product_type.dart';
-import '../interface/json_object.dart';
-import '../utils/json_helper.dart';
-import '../utils/language_helper.dart';
-import '../utils/product_fields.dart';
 
 part 'product.g.dart';
 
@@ -575,6 +575,21 @@ class Product extends JsonObject {
   /// Link to the product page on the official site of the producer
   @JsonKey(name: 'link')
   String? website;
+
+  @JsonKey(name: 'data_quality_tags')
+  List<String>? dataQualityTags;
+
+  @JsonKey(name: 'data_quality_bugs_tags')
+  List<String>? dataQualityBugsTags;
+
+  @JsonKey(name: 'data_quality_errors_tags')
+  List<String>? dataQualityErrorsTags;
+
+  @JsonKey(name: 'data_quality_info_tags')
+  List<String>? dataQualityInfoTags;
+
+  @JsonKey(name: 'data_quality_warnings_tags')
+  List<String>? dataQualityWarningsTags;
 
   /// Is the product obsolete?
   @JsonKey(

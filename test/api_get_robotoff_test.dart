@@ -218,4 +218,35 @@ void main() {
       expect(result.insights, isNull);
     });
   });
+
+  test('get product nutrient extraction for 3687080612292', () async {
+    String barcode = '3687080612292';
+
+    final RobotoffNutrientExtractionResult result =
+        await RobotoffAPIClient.getNutrientExtraction(
+      barcode,
+    );
+
+    expect(result.status, isNotNull);
+    expect(result.status, 'found');
+    expect(result.insights!, isNotEmpty);
+    expect(result.insights![0].barcode, barcode);
+
+    for (Nutrient nutrient in [
+      Nutrient.fat,
+      Nutrient.salt,
+      Nutrient.fiber,
+      Nutrient.sugars,
+      Nutrient.proteins,
+      Nutrient.energyKJ,
+      Nutrient.energyKCal,
+      Nutrient.carbohydrates,
+      Nutrient.saturatedFat,
+    ]) {
+      expect(result.getNutrientEntity(nutrient, PerSize.oneHundredGrams),
+          isNotNull);
+      expect(
+          result.getNutrientAnnotation(nutrient)?.valueWithModifer, isNotNull);
+    }
+  });
 }
