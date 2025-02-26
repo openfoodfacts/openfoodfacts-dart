@@ -90,6 +90,32 @@ class OpenPricesAPIClient {
     return MaybeError<GetPricesResult>.responseError(response);
   }
 
+  /// Gets a price.
+  static Future<MaybeError<Price>> getPrice(
+    final int priceId, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Uri uri = getUri(
+      path: '/api/v1/prices/$priceId',
+      uriHelper: uriHelper,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<Price>.value(
+          Price.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<Price>.responseError(response);
+  }
+
   static Future<MaybeError<Location>> getOSMLocation({
     required final int locationOSMId,
     required final LocationOSMType locationOSMType,
@@ -367,6 +393,9 @@ class OpenPricesAPIClient {
       uriHelper: uriHelper,
     );
     final Map<String, dynamic> body = <String, dynamic>{
+      'price': price.price,
+      'currency': price.currency.name,
+      'date': GetParametersHelper.formatDate(price.date),
       if (price.productCode != null) 'product_code': price.productCode,
       if (price.productName != null) 'product_name': price.productName,
       if (price.categoryTag != null) 'category_tag': price.categoryTag,
@@ -378,11 +407,11 @@ class OpenPricesAPIClient {
         'price_without_discount': price.priceWithoutDiscount,
       if (price.priceIsDiscounted != null)
         'price_is_discounted': price.priceIsDiscounted,
-      'price': price.price,
-      'currency': price.currency.name,
-      'location_osm_id': price.locationOSMId,
-      'location_osm_type': price.locationOSMType.offTag,
-      'date': GetParametersHelper.formatDate(price.date),
+      if (price.discountType != null)
+        'discount_type': price.discountType!.offTag,
+      if (price.locationOSMId != null) 'location_osm_id': price.locationOSMId,
+      if (price.locationOSMType != null)
+        'location_osm_type': price.locationOSMType!.offTag,
       if (price.receiptQuantity != null)
         'receipt_quantity': price.receiptQuantity,
     };
