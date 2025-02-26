@@ -1,16 +1,44 @@
-name: Add bugs and PRs to the Release Smoothie GitHub Project
+name: Ventilate issues to the right GitHub projects
 
 on:
   issues:
     types:
       - opened
-      - labeled
       - edited
-  pull_request:
+      - deleted
+      - transferred
+      - pinned
+      - unpinned
+      - closed
+      - reopened
+      - assigned
+      - unassigned
+      - labeled
+      - unlabeled
+      - locked
+      - unlocked
+      - milestoned
+      - demilestoned
+
+  pull_request_target:
     types:
-      - opened
-      - labeled
-      - edited
+    - assigned
+    - unassigned
+    - labeled
+    - unlabeled
+    - opened
+    - edited
+    - closed
+    - reopened
+    - synchronize
+    - converted_to_draft
+    - ready_for_review
+    - locked
+    - unlocked
+    - review_requested
+    - review_request_removed
+    - auto_merge_enabled
+    - auto_merge_disabled
 jobs:
   add-to-project:
     name: Add issue to project
@@ -112,3 +140,9 @@ jobs:
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labeled: "autorelease:pending"
           label-operator: OR
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/111 # Add issue to the Nutri-Patrol project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 🛡️ Nutri-Patrol
+          label-operator: OR 
