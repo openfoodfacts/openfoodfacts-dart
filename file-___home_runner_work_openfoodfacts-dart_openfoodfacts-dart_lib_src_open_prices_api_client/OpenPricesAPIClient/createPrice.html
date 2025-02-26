@@ -88,6 +88,9 @@ price).</p>
     uriHelper: uriHelper,
   );
   final Map&lt;String, dynamic&gt; body = &lt;String, dynamic&gt;{
+    &#39;price&#39;: price.price,
+    &#39;currency&#39;: price.currency.name,
+    &#39;date&#39;: GetParametersHelper.formatDate(price.date),
     if (price.productCode != null) &#39;product_code&#39;: price.productCode,
     if (price.productName != null) &#39;product_name&#39;: price.productName,
     if (price.categoryTag != null) &#39;category_tag&#39;: price.categoryTag,
@@ -99,11 +102,11 @@ price).</p>
       &#39;price_without_discount&#39;: price.priceWithoutDiscount,
     if (price.priceIsDiscounted != null)
       &#39;price_is_discounted&#39;: price.priceIsDiscounted,
-    &#39;price&#39;: price.price,
-    &#39;currency&#39;: price.currency.name,
-    &#39;location_osm_id&#39;: price.locationOSMId,
-    &#39;location_osm_type&#39;: price.locationOSMType.offTag,
-    &#39;date&#39;: GetParametersHelper.formatDate(price.date),
+    if (price.discountType != null)
+      &#39;discount_type&#39;: price.discountType!.offTag,
+    if (price.locationOSMId != null) &#39;location_osm_id&#39;: price.locationOSMId,
+    if (price.locationOSMType != null)
+      &#39;location_osm_type&#39;: price.locationOSMType!.offTag,
     if (price.receiptQuantity != null)
       &#39;receipt_quantity&#39;: price.receiptQuantity,
   };

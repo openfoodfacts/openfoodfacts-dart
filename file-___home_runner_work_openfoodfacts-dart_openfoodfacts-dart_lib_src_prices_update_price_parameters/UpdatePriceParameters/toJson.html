@@ -77,9 +77,15 @@
   <pre class="language-dart"><code class="language-dart">@override
 Map&lt;String, dynamic&gt; toJson() =&gt; &lt;String, dynamic&gt;{
       if (pricePer != null) &#39;price_per&#39;: pricePer!.offTag,
-      if (priceWithoutDiscount != null)
-        &#39;price_without_discount&#39;: priceWithoutDiscount,
       if (priceIsDiscounted != null) &#39;price_is_discounted&#39;: priceIsDiscounted,
+      if (priceIsDiscounted == false)
+        &#39;discount_type&#39;: null
+      else if (discountType != null)
+        &#39;discount_type&#39;: discountType!.offTag,
+      if (priceIsDiscounted == false)
+        &#39;price_without_discount&#39;: null
+      else if (priceWithoutDiscount != null)
+        &#39;price_without_discount&#39;: priceWithoutDiscount,
       if (price != null) &#39;price&#39;: price,
       if (currency != null) &#39;currency&#39;: currency!.name,
       if (date != null) &#39;date&#39;: GetParametersHelper.formatDate(date!),
