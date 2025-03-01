@@ -18,6 +18,14 @@ enum ProductField implements OffTagged {
     inLanguagesProductField: ProductField.NAME_IN_LANGUAGES,
     isAllLanguages: true,
   ),
+  CONSERVATION_CONDITIONS_ALL_LANGUAGES(
+    offTag: 'conservation_conditions_languages',
+    isAllLanguages: true,
+  ),
+  CUSTOMER_SERVICE_ALL_LANGUAGES(
+    offTag: 'customer_service_languages',
+    isAllLanguages: true,
+  ),
   GENERIC_NAME(
     offTag: 'generic_name',
     inLanguagesProductField: ProductField.GENERIC_NAME_IN_LANGUAGES,
@@ -315,6 +323,8 @@ const Set<ProductField> fieldsInLanguages = {
 @Deprecated('Use ProductField.getAllLanguagesList() instead')
 const Set<ProductField> fieldsAllLanguages = {
   ProductField.NAME_ALL_LANGUAGES,
+  ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES,
+  ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES,
   ProductField.GENERIC_NAME_ALL_LANGUAGES,
   ProductField.ABBREVIATED_NAME_ALL_LANGUAGES,
   ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
