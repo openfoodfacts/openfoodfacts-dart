@@ -1,5 +1,5 @@
-import 'language_helper.dart';
 import '../model/off_tagged.dart';
+import 'language_helper.dart';
 
 /// Fields of a [Product]
 enum ProductField implements OffTagged {
@@ -228,6 +228,11 @@ enum ProductField implements OffTagged {
   OBSOLETE(offTag: 'obsolete'),
   OWNER_FIELDS(offTag: 'owner_fields'),
   OWNER(offTag: 'owner'),
+  DATA_QUALITY_TAGS(offTag: 'data_quality_tags'),
+  DATA_QUALITY_BUGS_TAGS(offTag: 'data_quality_bugs_tags'),
+  DATA_QUALITY_ERRORS_TAGS(offTag: 'data_quality_errors_tags'),
+  DATA_QUALITY_INFO_TAGS(offTag: 'data_quality_info_tags'),
+  DATA_QUALITY_WARNINGS_TAGS(offTag: 'data_quality_warnings_tags'),
 
   /// All data as RAW from the server. E.g. packagings are only Strings there.
   RAW(offTag: 'raw'),
