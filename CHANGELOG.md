@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.20.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.19.0...v3.20.0) (2025-03-04)
+
+
+### Features
+
+* 1041 - add wiki url to countries ([#1047](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1047)) ([162abc2](https://github.com/openfoodfacts/openfoodfacts-dart/commit/162abc2996771186c854bcb163034be3c59a2362))
+* added product fields 'data_quality_{*_}tags' ([#1033](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1033)) ([8d12daf](https://github.com/openfoodfacts/openfoodfacts-dart/commit/8d12daf081dfe04205ea59fd397fd8fe83230036))
+
+
+### Bug Fixes
+
+* 1045 - OSM fields now nullable and discountType for Price ([#1046](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1046)) ([1315638](https://github.com/openfoodfacts/openfoodfacts-dart/commit/1315638e56a54cd7c0153cd432247deaec7e1db2))
+* ability to empty packagings list ([#1043](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1043)) ([ad7c276](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ad7c2760ffe40afb7c50df90596bdbc967882169))
+
 ## [3.19.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.18.1...v3.19.0) (2025-01-27)
 
 
