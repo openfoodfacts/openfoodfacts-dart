@@ -1,7 +1,8 @@
-import 'nutrient.dart';
-import 'per_size.dart';
 import '../interface/json_object.dart';
 import '../utils/nutriments_helper.dart';
+import 'nutrient.dart';
+import 'nutrient_modifier.dart';
+import 'per_size.dart';
 
 /// Values in nutrients.
 class Nutriments extends JsonObject {
@@ -11,15 +12,31 @@ class Nutriments extends JsonObject {
   /// Nutrient map with start values from [map].
   Nutriments._fromMap(final Map<String, dynamic> map) {
     for (final Nutrient nutrient in Nutrient.values) {
+      final NutrientModifier? modifier = NutrientModifier.fromValue(
+        map['${nutrient.offTag}_modifier'],
+      );
+
+      if (modifier != null) {
+        _modifierMap[_getModifierTag(nutrient, PerSize.serving)] = modifier;
+        _modifierMap[_getModifierTag(nutrient, PerSize.oneHundredGrams)] =
+            modifier;
+      }
+
+      if (modifier == NutrientModifier.notProvided) {
+        // Even if values are provided by the server, they should be ignored
+        // (= it's an error)
+        continue;
+      }
+
       for (final PerSize perSize in PerSize.values) {
         final String tag = _getTag(nutrient, perSize);
         try {
           final double? value = JsonObject.parseDouble(map[tag]);
           if (value != null) {
-            _map[tag] = value;
+            _valueMap[tag] = value;
           } else if (map.containsKey(tag)) {
             // typical case when null means something: to erase a value
-            _map[tag] = null;
+            _valueMap[tag] = null;
           }
         } catch (e) {
           throw Exception(
@@ -34,7 +51,9 @@ class Nutriments extends JsonObject {
   ///
   /// It is useful to store null values: this way we can make the difference
   /// between totally unknown values and values that have been erased.
-  final Map<String, double?> _map = <String, double?>{};
+  final Map<String, double?> _valueMap = <String, double?>{};
+  final Map<String, NutrientModifier> _modifierMap =
+      <String, NutrientModifier>{};
 
   /// Returns the map key for that [nutrient] and that [perSize].
   String _getTag(
@@ -43,11 +62,20 @@ class Nutriments extends JsonObject {
   ) =>
       '${nutrient.offTag}_${perSize.offTag}';
 
+  /// Returns the modifier key for a [nutrient]
+  String _getModifierTag(final Nutrient nutrient, final PerSize perSize) =>
+      '${nutrient.offTag}_${perSize.offTag}';
+
   /// Returns the value in grams of that [nutrient] for that [perSize].
   ///
   /// It won't be grams for very specific nutrients, like [Nutrient.alcohol].
   double? getValue(final Nutrient nutrient, final PerSize perSize) =>
-      _map[_getTag(nutrient, perSize)];
+      _valueMap[_getTag(nutrient, perSize)];
+
+  /// Returns the modifier for a [nutrient].
+  NutrientModifier? getModifier(
+          final Nutrient nutrient, final PerSize perSize) =>
+      _modifierMap[_getModifierTag(nutrient, perSize)];
 
   /// Sets the value in grams of that [nutrient] for that [perSize].
   ///
@@ -55,9 +83,32 @@ class Nutriments extends JsonObject {
   Nutriments setValue(
     final Nutrient nutrient,
     final PerSize perSize,
-    final double? value,
-  ) {
-    _map[_getTag(nutrient, perSize)] = value;
+    final double? value, {
+    final NutrientModifier? modifier,
+  }) {
+    if (modifier == NutrientModifier.notProvided) {
+      if (value != null) {
+        throw Exception(
+          'When the modifier is set to "NutrientModifier.notProvided", the value must be null.',
+        );
+      }
+
+      _valueMap.remove(_getTag(nutrient, perSize));
+      _modifierMap[_getModifierTag(nutrient, perSize)] = modifier!;
+      return this;
+    }
+
+    if (modifier != null && value == null) {
+      throw Exception(
+        'When the modifier is set, the value must not be null.',
+      );
+    }
+
+    _valueMap[_getTag(nutrient, perSize)] = value;
+
+    if (modifier != null) {
+      _modifierMap[_getModifierTag(nutrient, perSize)] = modifier;
+    }
     return this;
   }
 
@@ -67,13 +118,13 @@ class Nutriments extends JsonObject {
   /// If [isNullEmpty] is true, a null value is a non populated value, and a
   /// [Nutriments] with only null values would be considered empty.
   bool isEmpty({final bool isNullEmpty = false}) {
-    if (_map.isEmpty) {
+    if (_valueMap.isEmpty) {
       return true;
     }
     if (!isNullEmpty) {
       return false;
     }
-    for (final double? value in _map.values) {
+    for (final double? value in _valueMap.values) {
       if (value != null) {
         return false;
       }
@@ -108,15 +159,25 @@ class Nutriments extends JsonObject {
     final Map<String, dynamic> result = <String, dynamic>{};
     for (final Nutrient nutrient in Nutrient.values) {
       for (final PerSize perSize in PerSize.values) {
+        final NutrientModifier? modifier =
+            _modifierMap[_getModifierTag(nutrient, perSize)];
+        final String modifierChar = modifier?.offTag ?? '';
+
         final String tag = _getTag(nutrient, perSize);
-        final double? value = _map[tag];
+        if (modifier == NutrientModifier.notProvided) {
+          result[tag] = NutrientModifier.notProvided.offTag;
+          continue;
+        }
+
+        final double? value = _valueMap[tag];
         if (value != null) {
-          result[tag] = value;
-        } else if (_map.containsKey(tag)) {
+          result[tag] = '$modifierChar$value';
+        } else if (_valueMap.containsKey(tag)) {
           result[tag] = '';
         }
       }
     }
+
     return result;
   }
 
