@@ -1,11 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/src/utils/nutripatrol_types.dart';
+import 'nutripatrol_types.dart';
 
 import '../interface/json_object.dart';
 
 part 'get_ticket.g.dart';
 
+/// Get a ticket by its ID.
 @JsonSerializable()
 class NutripatrolTicket extends JsonObject {
   /// Flag ID. Read-only.
@@ -35,10 +36,6 @@ class NutripatrolTicket extends JsonObject {
   /// Flavor of the ticket.
   @JsonKey()
   late Flavor flavor;
-
-  /// created date of the ticket. Read-only.
-  @JsonKey(name: 'created_at')
-  late DateTime createdAt;
 
   NutripatrolTicket();
 

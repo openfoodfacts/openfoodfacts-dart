@@ -5,6 +5,7 @@ import '../interface/json_object.dart';
 
 part 'create_flag.g.dart';
 
+/// Flag (report) created by the Nutripatrol API.
 @JsonSerializable()
 class CreateNutripatrolFlag extends JsonObject {
   /// Ticket ID associated with the flag

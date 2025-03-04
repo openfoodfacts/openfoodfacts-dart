@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/src/utils/nutripatrol_types.dart';
+import 'package:openfoodfacts/src/nutripatrol/nutripatrol_types.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -11,6 +11,26 @@ void main() {
       version: '1.0.0',
       url: '',
     );
+  });
+  group('$OpenFoodAPIClient get ticket', () {
+    test('Get opened image tickets', () async {
+      final MaybeError<NutripatrolTickets> response =
+          await NutripatrolApiClient.getTickets();
+
+      expect(response.isError, isFalse);
+      expect(response.value, isNotNull);
+    });
+  });
+  group('$OpenFoodAPIClient get ticket', () {
+    test('Get ticket by id', () async {
+      final MaybeError<NutripatrolTicket> response =
+          await NutripatrolApiClient.getTicket(
+        ticketId: 2,
+      );
+
+      expect(response.isError, isFalse);
+      expect(response.value, isNotNull);
+    });
   });
   group('$OpenFoodAPIClient create Nutripatrol flag', () {
     test('Create a valid Nutripatrol flag', () async {

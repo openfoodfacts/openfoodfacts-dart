@@ -5,6 +5,7 @@ import '../interface/json_object.dart';
 
 part 'get_tickets.g.dart';
 
+/// Get the list of tickets.
 @JsonSerializable()
 class NutripatrolTickets extends JsonObject {
   /// List of Tickets

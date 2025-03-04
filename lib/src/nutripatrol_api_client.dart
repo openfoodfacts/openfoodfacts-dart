@@ -2,15 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'nutripatrol/create_flag.dart';
-import 'nutripatrol/get_tickets.dart';
-import 'prices/maybe_error.dart';
-import 'utils/nutripatrol_types.dart';
-import 'utils/http_helper.dart';
-import 'utils/open_food_api_configuration.dart';
-import 'utils/uri_helper.dart';
-
-import 'nutripatrol/get_ticket.dart';
+import 'nutripatrol/nutripatrol_types.dart';
 
 /// Client calls of the Nutripatrol API.
 ///
@@ -54,13 +46,9 @@ class NutripatrolApiClient {
       uriHelper: uriHelper,
     );
     if (response.statusCode == 200) {
-      try {
-        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        return MaybeError<NutripatrolTicket>.value(
-            NutripatrolTicket.fromJson(decodedResponse));
-      } catch (_) {
-        //
-      }
+      final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+      return MaybeError<NutripatrolTicket>.value(
+          NutripatrolTicket.fromJson(decodedResponse));
     }
     return MaybeError<NutripatrolTicket>.responseError(response);
   }
@@ -89,18 +77,14 @@ class NutripatrolApiClient {
       uriHelper: uriHelper,
     );
     if (response.statusCode == 200) {
-      try {
-        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        final List<dynamic> tickets = decodedResponse['tickets'];
-        return MaybeError<NutripatrolTickets>.value(
-          NutripatrolTickets.fromJson(<String, dynamic>{
-            'tickets': tickets,
-            'max_page': decodedResponse['max_page'],
-          }),
-        );
-      } catch (_) {
-        //
-      }
+      final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+      final List<dynamic> tickets = decodedResponse['tickets'];
+      return MaybeError<NutripatrolTickets>.value(
+        NutripatrolTickets.fromJson(<String, dynamic>{
+          'tickets': tickets,
+          'max_page': decodedResponse['max_page'],
+        }),
+      );
     }
     return MaybeError<NutripatrolTickets>.responseError(response);
   }

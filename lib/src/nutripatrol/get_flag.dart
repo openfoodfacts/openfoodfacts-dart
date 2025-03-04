@@ -3,10 +3,11 @@ import 'get_ticket.dart';
 import '../prices/flavor.dart';
 
 import '../interface/json_object.dart';
-import '../utils/nutripatrol_types.dart';
+import 'nutripatrol_types.dart';
 
 part 'get_flag.g.dart';
 
+/// Get one flag by its ID.
 @JsonSerializable()
 class NutripatrolFlag extends JsonObject {
   /// Flag ID. Read-only.
@@ -62,8 +63,8 @@ class NutripatrolFlag extends JsonObject {
   String? comment;
 
   /// created date of the ticket. Read-only.
-  @JsonKey(name: 'created_at')
-  late DateTime createdAt;
+  @JsonKey()
+  late DateTime created;
 
   NutripatrolFlag();
 
