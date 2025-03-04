@@ -33,7 +33,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   ANTARCTICA(offTag: 'aq', currency: null),
 
   /// Argentina
-  ARGENTINA(offTag: 'ar', currency: Currency.ARS),
+  ARGENTINA(
+    offTag: 'ar',
+    currency: Currency.ARS,
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_Argentina',
+  ),
 
   /// American Samoa
   AMERICAN_SAMOA(offTag: 'as', currency: Currency.USD),
@@ -42,7 +46,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   AUSTRIA(offTag: 'at', currency: Currency.EUR),
 
   /// Australia
-  AUSTRALIA(offTag: 'au', currency: Currency.AUD),
+  AUSTRALIA(
+    offTag: 'au',
+    currency: Currency.AUD,
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_Australia',
+  ),
 
   /// Aruba
   ARUBA(offTag: 'aw', currency: Currency.AWG),
@@ -117,7 +125,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   BELIZE(offTag: 'bz', currency: Currency.BZD),
 
   /// Canada
-  CANADA(offTag: 'ca', currency: Currency.CAD),
+  CANADA(
+    offTag: 'ca',
+    currency: Currency.CAD,
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_Canada',
+  ),
 
   /// Cocos (Keeling) Islands
   COCOS_ISLANDS(offTag: 'cc', currency: Currency.AUD),
@@ -147,7 +159,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   CAMEROON(offTag: 'cm', currency: Currency.XAF),
 
   /// China
-  CHINA(offTag: 'cn', currency: Currency.CNY),
+  CHINA(
+    offTag: 'cn',
+    currency: Currency.CNY,
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_China',
+  ),
 
   /// Colombia
   COLOMBIA(offTag: 'co', currency: Currency.COP),
@@ -174,7 +190,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   CZECHIA(offTag: 'cz', currency: Currency.CZK),
 
   /// Germany
-  GERMANY(offTag: 'de', currency: Currency.EUR),
+  GERMANY(
+    offTag: 'de',
+    currency: Currency.EUR,
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_Germany',
+  ),
 
   /// Djibouti
   DJIBOUTI(offTag: 'dj', currency: Currency.DJF),
@@ -207,7 +227,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   ERITREA(offTag: 'er', currency: Currency.ERN),
 
   /// Spain
-  SPAIN(offTag: 'es', currency: Currency.EUR),
+  SPAIN(
+    offTag: 'es',
+    currency: Currency.EUR,
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_Spain',
+  ),
 
   /// Ethiopia
   ETHIOPIA(offTag: 'et', currency: Currency.ETB),
@@ -228,7 +252,12 @@ enum OpenFoodFactsCountry implements OffTagged {
   FAROE_ISLANDS(offTag: 'fo', currency: Currency.DKK),
 
   /// France
-  FRANCE(offTag: 'fr', currency: Currency.EUR),
+  FRANCE(
+    offTag: 'fr',
+    currency: Currency.EUR,
+    wikiUrl:
+        'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
+  ),
 
   /// Gabon
   GABON(offTag: 'ga', currency: Currency.XAF),
@@ -319,7 +348,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   ISLE_OF_MAN(offTag: 'im', currency: Currency.GBP),
 
   /// India
-  INDIA(offTag: 'in', currency: Currency.INR),
+  INDIA(
+    offTag: 'in',
+    currency: Currency.INR,
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_India',
+  ),
 
   /// British Indian Ocean Territory
   BRITISH_INDIAN_OCEAN_TERRITORY(offTag: 'io', currency: Currency.USD),
@@ -334,7 +367,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   ICELAND(offTag: 'is', currency: Currency.ISK),
 
   /// Italy
-  ITALY(offTag: 'it', currency: Currency.EUR),
+  ITALY(
+    offTag: 'it',
+    currency: Currency.EUR,
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_Italy',
+  ),
 
   /// Jersey
   JERSEY(offTag: 'je', currency: Currency.GBP),
@@ -346,7 +383,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   JORDAN(offTag: 'jo', currency: Currency.JOD),
 
   /// Japan
-  JAPAN(offTag: 'jp', currency: Currency.JPY),
+  JAPAN(
+    offTag: 'jp',
+    currency: Currency.JPY,
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_Japan',
+  ),
 
   /// Kenya
   KENYA(offTag: 'ke', currency: Currency.KES),
@@ -370,7 +411,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   NORTH_KOREA(offTag: 'kp', currency: Currency.KPW),
 
   /// Korea, Republic of
-  SOUTH_KOREA(offTag: 'kr', currency: Currency.KRW),
+  SOUTH_KOREA(
+    offTag: 'kr',
+    currency: Currency.KRW,
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_South_Korea',
+  ),
 
   /// Kuwait
   KUWAIT(offTag: 'kw', currency: Currency.KWD),
@@ -475,7 +520,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   MALAWI(offTag: 'mw', currency: Currency.MWK),
 
   /// Mexico
-  MEXICO(offTag: 'mx', currency: Currency.MXN),
+  MEXICO(
+    offTag: 'mx',
+    currency: Currency.MXN,
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_Mexico',
+  ),
 
   /// Malaysia
   MALAYSIA(offTag: 'my', currency: Currency.MYR),
@@ -502,7 +551,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   NICARAGUA(offTag: 'ni', currency: Currency.NIO),
 
   /// Netherlands
-  NETHERLANDS(offTag: 'nl', currency: Currency.EUR),
+  NETHERLANDS(
+    offTag: 'nl',
+    currency: Currency.EUR,
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_Netherlands',
+  ),
 
   /// Norway
   NORWAY(offTag: 'no', currency: Currency.NOK),
@@ -577,7 +630,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   SERBIA(offTag: 'rs', currency: Currency.RSD),
 
   /// Russian Federation
-  RUSSIA(offTag: 'ru', currency: Currency.RUB),
+  RUSSIA(
+    offTag: 'ru',
+    currency: Currency.RUB,
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_Russia',
+  ),
 
   /// Rwanda
   RWANDA(offTag: 'rw', currency: Currency.RWF),
@@ -703,7 +760,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   UNITED_STATES_MINOR_OUTLYING_ISLANDS(offTag: 'um', currency: Currency.USD),
 
   /// United States of America
-  USA(offTag: 'us', currency: Currency.USD),
+  USA(
+    offTag: 'us',
+    currency: Currency.USD,
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_United_States',
+  ),
 
   /// Uruguay
   URUGUAY(offTag: 'uy', currency: Currency.UYU),
@@ -756,6 +817,7 @@ enum OpenFoodFactsCountry implements OffTagged {
   const OpenFoodFactsCountry({
     required this.offTag,
     required this.currency,
+    this.wikiUrl,
   });
 
   /// Lowercase ISO 639-1, except for [UNITED_KINGDOM].
@@ -765,6 +827,9 @@ enum OpenFoodFactsCountry implements OffTagged {
   // TODO(monsieurtanuki): remove ANTARCTICA, with no products and no currency?
   /// Country most probable and up-to-date currency.
   final Currency? currency;
+
+  /// Wiki URL.
+  final String? wikiUrl;
 
   /// Returns the [OpenFoodFactsCountry] that matches the [offTag].
   ///
