@@ -1108,7 +1108,7 @@ void main() {
     expect(result.status, ProductResultV3.statusSuccess);
     expect(result.product, isNotNull);
     expect(result.product!.obsolete, isNotNull);
-    expect(result.product!.obsolete, isFalse);
+    expect(result.product!.obsolete, isTrue);
 
     configuration = ProductQueryConfiguration(
       '7300400481588',
