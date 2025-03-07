@@ -167,13 +167,14 @@ void main() {
         ..currency = Currency.EUR
         ..locationOSMId = 4966187139
         ..locationOSMType = LocationOSMType.node
+        ..priceIsDiscounted = true
+        ..discountType = DiscountType.seasonal
         ..date = DateTime(2024, 1, 18);
 
       final UpdatePriceParameters updatePriceParameters =
           UpdatePriceParameters()
             ..price = 12
-            ..priceWithoutDiscount = 13
-            ..priceIsDiscounted = true;
+            ..priceIsDiscounted = false;
 
       const String invalidBearerToken = 'invalid bearer token';
 
@@ -290,6 +291,7 @@ void main() {
           addedValue.priceWithoutDiscount, initialPrice.priceWithoutDiscount);
       expect(addedValue.priceIsDiscounted,
           initialPrice.priceIsDiscounted ?? false);
+      expect(addedValue.discountType, initialPrice.discountType);
       expect(addedValue.currency, initialPrice.currency);
       expect(addedValue.locationOSMId, initialPrice.locationOSMId);
       expect(addedValue.locationOSMType, initialPrice.locationOSMType);
@@ -306,6 +308,19 @@ void main() {
         uriHelper: uriHelper,
       );
       expect(updatedPrice.isError, isFalse);
+      expect(updatedPrice.value, isTrue);
+
+      final MaybeError<Price> updatedPriceValue =
+          await OpenPricesAPIClient.getPrice(
+        priceId,
+        uriHelper: uriHelper,
+      );
+      expect(updatedPriceValue.isError, isFalse);
+      expect(updatedPriceValue.value.price, updatePriceParameters.price);
+      expect(updatedPriceValue.value.priceIsDiscounted,
+          updatePriceParameters.priceIsDiscounted);
+      expect(updatedPriceValue.value.priceWithoutDiscount, isNull);
+      expect(updatedPriceValue.value.discountType, isNull);
 
       // delete price first time: success
       MaybeError<bool> deletedPrice = await OpenPricesAPIClient.deletePrice(
@@ -400,7 +415,6 @@ void main() {
           expect(price.categoryTag, isNull);
         }
         expect(price.price, greaterThan(0));
-        expect(price.locationOSMId, greaterThan(0));
         expect(price.currency, isNotNull);
         expect(price.price, isNotNull);
       }
@@ -1037,6 +1051,23 @@ void main() {
       }
 
       expect(priceCountMax!, greaterThan(priceCountMin!));
+    });
+  });
+
+  group('$OpenPricesAPIClient Issues', () {
+    test('issue #1045', () async {
+      const UriProductHelper uriHelper = uriHelperFoodProd;
+
+      final MaybeError<Price> maybeResults = await OpenPricesAPIClient.getPrice(
+        80341,
+        uriHelper: uriHelper,
+      );
+      expect(maybeResults.isError, isFalse);
+      final Price price = maybeResults.value;
+      expect(price.productCode, '4010534012093');
+      expect(price.price, 2.99);
+      expect(price.currency, Currency.EUR);
+      expect(price.date, DateTime(2025, 2, 11));
     });
   });
 }
