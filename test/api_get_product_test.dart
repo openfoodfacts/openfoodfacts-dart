@@ -260,6 +260,9 @@ void main() {
       expect(conservationConditions, isNotEmpty);
 
       final customerService = result.product!.customerServiceInLanguages;
+      final customerServiceInFrench = customerService![OpenFoodFactsLanguage.FRENCH];
+      expect(customerServiceInFrench , isNotNull);
+      expect(customerServiceInFrench, isNotEmpty);
       expect(customerService, isNotNull);
       expect(customerService, isNotEmpty);
     });
