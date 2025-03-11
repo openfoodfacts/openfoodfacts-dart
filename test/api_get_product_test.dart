@@ -256,6 +256,7 @@ void main() {
       final conservationConditionsInFrench = conservationConditions![OpenFoodFactsLanguage.FRENCH];
       expect(conservationConditions, isNotNull);
       expect(conservationConditionsInFrench , isNotNull);
+      expect(conservationConditionsInFrench , isNotEmpty);
       expect(conservationConditions, isNotEmpty);
 
       final customerService = result.product!.customerServiceInLanguages;
