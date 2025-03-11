@@ -116,7 +116,7 @@ class Product extends JsonObject {
       toJson: LanguageHelper.toJsonStringMap)
   Map<OpenFoodFactsLanguage, String>? conservationConditionsInLanguages;
 
-  /// Localized customer service information for the product, stored in a map where each language is represented by its respective key.
+  /// Localized customer service information.
   @JsonKey(
       name: 'customer_service_in_languages',
       fromJson: LanguageHelper.fromJsonStringMap,
