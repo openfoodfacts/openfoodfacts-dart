@@ -103,6 +103,10 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
     )
       ..productType =
           $enumDecodeNullable(_$ProductTypeEnumMap, json['product_type'])
+      ..conservationConditionsInLanguages = LanguageHelper.fromJsonStringMap(
+          json['conservation_conditions_in_languages'])
+      ..customerServiceInLanguages = LanguageHelper.fromJsonStringMap(
+          json['customer_service_in_languages'])
       ..genericNameInLanguages =
           LanguageHelper.fromJsonStringMap(json['generic_name_in_languages'])
       ..abbreviatedName = json['abbreviated_product_name'] as String?
@@ -211,6 +215,12 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('product_name', instance.productName);
   writeNotNull('product_name_in_languages',
       LanguageHelper.toJsonStringMap(instance.productNameInLanguages));
+  writeNotNull(
+      'conservation_conditions_in_languages',
+      LanguageHelper.toJsonStringMap(
+          instance.conservationConditionsInLanguages));
+  writeNotNull('customer_service_in_languages',
+      LanguageHelper.toJsonStringMap(instance.customerServiceInLanguages));
   writeNotNull('generic_name', instance.genericName);
   writeNotNull('generic_name_in_languages',
       LanguageHelper.toJsonStringMap(instance.genericNameInLanguages));
