@@ -253,15 +253,17 @@ void main() {
 
       final conservationConditions =
           result.product!.conservationConditionsInLanguages;
-      final conservationConditionsInFrench = conservationConditions![OpenFoodFactsLanguage.FRENCH];
+      final conservationConditionsInFrench =
+          conservationConditions![OpenFoodFactsLanguage.FRENCH];
       expect(conservationConditions, isNotNull);
-      expect(conservationConditionsInFrench , isNotNull);
-      expect(conservationConditionsInFrench , isNotEmpty);
+      expect(conservationConditionsInFrench, isNotNull);
+      expect(conservationConditionsInFrench, isNotEmpty);
       expect(conservationConditions, isNotEmpty);
 
       final customerService = result.product!.customerServiceInLanguages;
-      final customerServiceInFrench = customerService![OpenFoodFactsLanguage.FRENCH];
-      expect(customerServiceInFrench , isNotNull);
+      final customerServiceInFrench =
+          customerService![OpenFoodFactsLanguage.FRENCH];
+      expect(customerServiceInFrench, isNotNull);
       expect(customerServiceInFrench, isNotEmpty);
       expect(customerService, isNotNull);
       expect(customerService, isNotEmpty);
