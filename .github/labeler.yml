@@ -21,7 +21,12 @@ Product:
 🤖 Robotoff:
 - changed-files:
   - any-glob-to-any-file: 'lib/src/model/robotoff_question.g.dart'
-
+  - any-glob-to-any-file: 'lib/src/model/robotoff_nutrient_extraction.dart'
+  - any-glob-to-any-file: 'lib/src/model/robotoff_nutrient_extraction_annotation.dart'
+  - any-glob-to-any-file: 'lib/src/model/robotoff_nutrient_extraction_insight.dart'
+  - any-glob-to-any-file: 'lib/src/robot_off_api_client.dart'
+  - any-glob-to-any-file: 'test/api_get_robotoff_test.dart'
+  
 pubspec:
 - changed-files:
   - any-glob-to-any-file: 'pubspec.yaml'
