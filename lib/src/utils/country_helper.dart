@@ -43,7 +43,7 @@ enum OpenFoodFactsCountry implements OffTagged {
   AMERICAN_SAMOA(
     offTag: 'as', 
     currency: Currency.USD,
-    
+    wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_United_States',
   ),
 
   /// Austria
