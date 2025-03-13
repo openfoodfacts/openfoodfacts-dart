@@ -807,7 +807,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   FRENCH_SOUTHERN_TERRITORIES(
     offTag: 'tf', 
     currency: Currency.EUR,
-    wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
+    wikiUrl:
+        'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
   ),
 
   /// Togo
