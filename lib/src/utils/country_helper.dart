@@ -264,7 +264,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   FINLAND(
     offTag: 'fi', 
     currency: Currency.EUR,
-    wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/FinnishTeam/Country_Support',
+    wikiUrl:
+        'https://wiki.openfoodfacts.org/Local_Communities/FinnishTeam/Country_Support',
   ),
 
   /// Fiji
