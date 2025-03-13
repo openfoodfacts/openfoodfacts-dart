@@ -922,7 +922,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   MAYOTTE(
     offTag: 'yt', 
     currency: Currency.EUR,
-    wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
+    wikiUrl:
+        'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
   ),
 
   /// South Africa
