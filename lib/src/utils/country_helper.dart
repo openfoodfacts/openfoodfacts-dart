@@ -677,7 +677,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   SAINT_PIERRE_AND_MIQUELON(
     offTag: 'pm', 
     currency: Currency.EUR,
-    wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
+    wikiUrl:
+        'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
   ),
 
   /// Pitcairn
