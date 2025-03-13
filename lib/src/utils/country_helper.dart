@@ -653,7 +653,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   FRENCH_POLYNESIA(
     offTag: 'pf', 
     currency: Currency.XPF,
-    wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
+    wikiUrl:
+        'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
   ),
 
   /// Papua New Guinea
