@@ -163,7 +163,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   SWITZERLAND(
     offTag: 'ch', 
     currency: Currency.CHF,
-    wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/SwissTeam/Country_Support',
+    wikiUrl:
+        'https://wiki.openfoodfacts.org/Local_Communities/SwissTeam/Country_Support',
   ),
 
   /// Côte d'Ivoire
