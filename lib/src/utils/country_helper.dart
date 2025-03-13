@@ -710,7 +710,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   REUNION(
     offTag: 're', 
     currency: Currency.EUR,
-    wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
+    wikiUrl:
+        'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
   ),
 
   /// Romania
