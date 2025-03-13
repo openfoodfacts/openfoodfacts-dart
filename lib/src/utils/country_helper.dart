@@ -598,7 +598,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   NEW_CALEDONIA(
     offTag: 'nc', 
     currency: Currency.XPF,
-    wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
+    wikiUrl:
+        'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
   ),
 
   /// Niger
