@@ -395,7 +395,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   ISRAEL(
     offTag: 'il', 
     currency: Currency.ILS,
-    wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/IsraeliTeam/Country_Support',
+    wikiUrl:
+        'https://wiki.openfoodfacts.org/Local_Communities/IsraeliTeam/Country_Support',
   ),
 
   /// Isle of Man
