@@ -746,7 +746,9 @@ enum OpenFoodFactsCountry implements OffTagged {
   SWEDEN(
     offTag: 'se', 
     currency: Currency.SEK,
-    wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/SwedishTeam/Country_Support',
+    wikiUrl:
+      
+  'https://wiki.openfoodfacts.org/Local_Communities/SwedishTeam/Country_Support',
   ),
 
   /// Singapore
