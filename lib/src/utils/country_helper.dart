@@ -50,7 +50,9 @@ enum OpenFoodFactsCountry implements OffTagged {
   AUSTRIA(
     offTag: 'at', 
     currency: Currency.EUR,
-    wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/GermanTeam/Country_Support',
+    wikiUrl:
+       
+ 'https://wiki.openfoodfacts.org/Local_Communities/GermanTeam/Country_Support',
   ),
 
   /// Australia
