@@ -556,7 +556,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   MARTINIQUE(
     offTag: 'mq', 
     currency: Currency.EUR,
-    wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
+    wikiUrl:
+        'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
   ),
 
   /// Mauritania
