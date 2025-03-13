@@ -308,7 +308,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   FRENCH_GUIANA(
     offTag: 'gf', 
     currency: Currency.EUR,
-    wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
+    wikiUrl:
+        'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
   ),
 
   /// Guernsey
