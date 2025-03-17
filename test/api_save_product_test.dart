@@ -406,6 +406,11 @@ Like that:
               nutriments.getValue(nutrient, perSize),
               reason: 'should be the same values for $nutrient',
             );
+            expect(
+              nutriments.getModifier(nutrient, perSize),
+              isNull,
+              reason: 'modifier should be null for $nutrient',
+            );
           }
         }
       }
@@ -494,7 +499,7 @@ Like that:
         Duration(seconds: 90),
       ));
 
-  group('No nutrition data', () {
+  group('Nutrition data / nutriments', () {
     test('No nutrition data with nutriments', () async {
       Product product = Product(
           noNutritionData: true,
@@ -505,7 +510,7 @@ Like that:
       expect(product.nutriments, isNull);
     });
 
-    test('Nutriments', () async {
+    test('With nutriments', () async {
       Product product = Product(
           nutriments: Nutriments.empty()
             ..setValue(Nutrient.salt, PerSize.oneHundredGrams, 1.0));
@@ -513,5 +518,142 @@ Like that:
       expect(product.noNutritionData, isFalse);
       expect(product.nutriments, isNotNull);
     });
+
+    test('Nutriments modifiers (server call)', () async {
+      Product product = Product(
+        barcode: '1234567890123',
+        nutriments: Nutriments.empty()
+          ..setValue(
+            Nutrient.proteins,
+            PerSize.oneHundredGrams,
+            null,
+            modifier: NutrientModifier.notProvided,
+          )
+          ..setValue(
+            Nutrient.energyKJ,
+            PerSize.oneHundredGrams,
+            1.0,
+            modifier: NutrientModifier.lessThan,
+          )
+          ..setValue(
+            Nutrient.salt,
+            PerSize.oneHundredGrams,
+            1.0,
+            modifier: NutrientModifier.approximately,
+          )
+          ..setValue(
+            Nutrient.magnesium,
+            PerSize.oneHundredGrams,
+            1.0,
+            modifier: NutrientModifier.greaterThan,
+          )
+          ..setValue(Nutrient.fat, PerSize.oneHundredGrams, 1.0),
+      );
+
+      final Status status = await OpenFoodAPIClient.saveProduct(
+        TestConstants.TEST_USER,
+        product,
+        uriHelper: uriHelper,
+      );
+
+      expect(status.status, 1);
+      expect(status.error, null);
+
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+        ProductQueryConfiguration(
+          product.barcode!,
+          language: OpenFoodFactsLanguage.GERMAN,
+          fields: null,
+          version: ProductQueryVersion.v3,
+        ),
+        user: TestConstants.TEST_USER,
+        uriHelper: uriHelper,
+      );
+
+      expect(result.product!.nutriments, isNotNull);
+      expect(
+        result.product!.nutriments?.getModifier(
+          Nutrient.proteins,
+          PerSize.oneHundredGrams,
+        ),
+        NutrientModifier.notProvided,
+      );
+      expect(
+        result.product!.nutriments
+            ?.getValue(Nutrient.proteins, PerSize.oneHundredGrams),
+        isNull,
+      );
+      expect(
+        result.product!.nutriments
+            ?.getValue(Nutrient.proteins, PerSize.serving),
+        isNull,
+      );
+
+      expect(
+        result.product!.nutriments?.getModifier(
+          Nutrient.energyKJ,
+          PerSize.oneHundredGrams,
+        ),
+        NutrientModifier.lessThan,
+      );
+      expect(
+        result.product!.nutriments
+            ?.getValue(Nutrient.energyKJ, PerSize.oneHundredGrams),
+        isNotNull,
+      );
+
+      expect(
+        result.product!.nutriments?.getModifier(
+          Nutrient.salt,
+          PerSize.oneHundredGrams,
+        ),
+        NutrientModifier.approximately,
+      );
+      expect(
+        result.product!.nutriments
+            ?.getValue(Nutrient.salt, PerSize.oneHundredGrams),
+        isNotNull,
+      );
+
+      expect(
+        result.product!.nutriments?.getModifier(
+          Nutrient.magnesium,
+          PerSize.oneHundredGrams,
+        ),
+        NutrientModifier.greaterThan,
+      );
+      expect(
+        result.product!.nutriments
+            ?.getValue(Nutrient.magnesium, PerSize.oneHundredGrams),
+        isNotNull,
+      );
+
+      expect(
+        result.product!.nutriments?.getModifier(
+          Nutrient.fat,
+          PerSize.oneHundredGrams,
+        ),
+        isNull,
+      );
+      expect(
+        result.product!.nutriments
+            ?.getValue(Nutrient.fat, PerSize.oneHundredGrams),
+        isNotNull,
+      );
+
+      expect(
+        () => result.product!.nutriments!.setValue(
+          Nutrient.energyKCal,
+          PerSize.oneHundredGrams,
+          1.0,
+          modifier: NutrientModifier.notProvided,
+        ),
+        throwsException,
+      );
+    },
+        timeout: Timeout(
+          // some tests can be slow here
+          Duration(seconds: 90),
+        ));
   });
 }
