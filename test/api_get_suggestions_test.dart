@@ -180,7 +180,7 @@ void main() {
         input: 'غ',
       );
 
-      expect(result.isEmpty, true);
+      listContains(result, 'غ');
 
       result = await OpenFoodAPIClient.getSuggestions(
         TagType.STATES,

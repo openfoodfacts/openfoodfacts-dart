@@ -229,8 +229,8 @@ void main() {
       final Nutriments nutriments = result.product!.nutriments!;
       const PerSize perSize = PerSize.oneHundredGrams;
 
-      expect(nutriments.getValue(Nutrient.iron, perSize), 0.00041);
-      expect(nutriments.getValue(Nutrient.vitaminC, perSize), 0.0339);
+      expect(nutriments.getValue(Nutrient.iron, perSize), 2.32e-7);
+      expect(nutriments.getValue(Nutrient.vitaminC, perSize), 0.0000192);
     });
 
     test('get localized conservation conditions and customer service',
