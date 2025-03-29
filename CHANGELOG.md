@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.21.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.20.0...v3.21.0) (2025-03-29)
+
+
+### Features
+
+* Add localized fields for conservation conditions and customer service in Product object ([#1020](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1020)) ([210a0a3](https://github.com/openfoodfacts/openfoodfacts-dart/commit/210a0a3eb68dda13083ae6b329605242596103f3))
+* added editable product field "traces" ([#1052](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1052)) ([7e921b5](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7e921b585395e3f57ff87b0746c6ee3ad7edbeb1))
+
 ## [3.20.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.19.0...v3.20.0) (2025-03-04)
 
 
