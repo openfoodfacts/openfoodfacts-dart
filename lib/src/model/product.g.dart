@@ -145,6 +145,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           json['states_tags_in_languages'])
       ..tracesTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
           json['traces_tags_in_languages'])
+      ..traces = json['traces'] as String?
       ..storesTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
           json['stores_tags_in_languages'])
       ..lastModifiedBy = json['last_modified_by'] as String?
@@ -307,6 +308,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('traces_tags', instance.tracesTags);
   writeNotNull('traces_tags_in_languages',
       LanguageHelper.toJsonStringsListMap(instance.tracesTagsInLanguages));
+  writeNotNull('traces', instance.traces);
   writeNotNull('stores_tags', instance.storesTags);
   writeNotNull('stores_tags_in_languages',
       LanguageHelper.toJsonStringsListMap(instance.storesTagsInLanguages));

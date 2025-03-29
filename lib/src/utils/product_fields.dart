@@ -183,6 +183,7 @@ enum ProductField implements OffTagged {
     offTag: 'traces_tags_',
     isInLanguages: true,
   ),
+  TRACES(offTag: 'traces'),
   STORES_TAGS(
     offTag: 'stores_tags',
     inLanguagesProductField: ProductField.STORES_TAGS_IN_LANGUAGES,
