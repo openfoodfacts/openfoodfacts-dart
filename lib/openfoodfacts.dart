@@ -26,6 +26,9 @@ export 'src/model/nutrient_modifier.dart';
 export 'src/model/nutrient.dart';
 export 'src/model/nutrient_levels.dart';
 export 'src/model/nutriments.dart';
+export 'src/model/nutriscore.dart';
+export 'src/model/nutriscore_category.dart';
+export 'src/model/nutriscore_enums.dart';
 
 // export 'src/model/product_list.dart'; // not needed
 export 'src/model/ocr_ingredients_result.dart';

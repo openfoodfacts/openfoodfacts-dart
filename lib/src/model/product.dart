@@ -15,6 +15,8 @@ import 'ingredients_analysis_tags.dart';
 import 'knowledge_panels.dart';
 import 'nutrient_levels.dart';
 import 'nutriments.dart';
+import 'nutriscore.dart';
+import 'nutriscore_enums.dart';
 import 'owner_field.dart';
 import 'product_image.dart';
 import 'product_packaging.dart';
@@ -416,6 +418,14 @@ class Product extends JsonObject {
   @JsonKey(name: 'nutrition_grade_fr')
   String? nutriscore;
 
+  /// Map of computed Nutri-Scores for different versions (e.g. 2021, 2023).
+  @JsonKey(
+    name: 'nutriscore',
+    fromJson: NutriScore.fromJson,
+    includeToJson: false,
+  )
+  Map<NutriScoreVersion, NutriScore>? nutriscores;
+
   @JsonKey(name: 'compared_to_category')
   String? comparedToCategory;
   @JsonKey(name: 'categories')
@@ -672,6 +682,7 @@ class Product extends JsonObject {
       this.nutrimentEnergyUnit,
       this.nutrimentDataPer,
       this.nutriscore,
+      this.nutriscores,
       this.categories,
       this.categoriesTags,
       this.categoriesTagsInLanguages,

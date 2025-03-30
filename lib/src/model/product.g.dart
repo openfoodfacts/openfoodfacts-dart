@@ -57,6 +57,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       nutrimentEnergyUnit: json['nutriment_energy_unit'] as String?,
       nutrimentDataPer: json['nutrition_data_per'] as String?,
       nutriscore: json['nutrition_grade_fr'] as String?,
+      nutriscores: NutriScore.fromJson(json['nutriscore']),
       categories: json['categories'] as String?,
       categoriesTags: (json['categories_tags'] as List<dynamic>?)
           ?.map((e) => e as String)
