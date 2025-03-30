@@ -10,6 +10,7 @@ Ingredient _$IngredientFromJson(Map<String, dynamic> json) => Ingredient(
       rank: JsonObject.parseInt(json['rank']),
       id: json['id'] as String?,
       text: json['text'] as String?,
+      isInTaxonomy: JsonObject.parseBool(json['is_in_taxonomy']),
       percent: JsonObject.parseDouble(json['percent']),
       percentEstimate: JsonObject.parseDouble(json['percent_estimate']),
       vegan: ingredientSpecialPropertyStatusFromJson(json['vegan']),
@@ -34,6 +35,7 @@ Map<String, dynamic> _$IngredientToJson(Ingredient instance) {
   writeNotNull('rank', instance.rank);
   writeNotNull('id', instance.id);
   val['text'] = instance.text;
+  writeNotNull('is_in_taxonomy', instance.isInTaxonomy);
   writeNotNull('percent', instance.percent);
   writeNotNull('percent_estimate', instance.percentEstimate);
   writeNotNull('vegan', ingredientSpecialPropertyStatusToJson(instance.vegan));

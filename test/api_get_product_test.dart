@@ -911,6 +911,7 @@ void main() {
       final Ingredient ingredient = result.product!.ingredients!.firstWhere(
         (ingredient) => ingredient.text == 'huile de palme',
       );
+      expect(ingredient.isInTaxonomy, true);
       expect(ingredient.vegan, IngredientSpecialPropertyStatus.POSITIVE);
       expect(ingredient.vegetarian, IngredientSpecialPropertyStatus.POSITIVE);
       expect(ingredient.fromPalmOil, IngredientSpecialPropertyStatus.POSITIVE);
