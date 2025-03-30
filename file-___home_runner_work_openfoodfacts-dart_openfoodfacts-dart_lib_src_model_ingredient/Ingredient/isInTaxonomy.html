@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the toString method from the Ingredient class, for the Dart programming language.">
-  <title>toString method - Ingredient class - ingredient library - Dart API</title>
+  <meta name="description" content="API docs for the isInTaxonomy property from the Ingredient class, for the Dart programming language.">
+  <title>isInTaxonomy property - Ingredient class - ingredient library - Dart API</title>
 
 
   
@@ -27,9 +27,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient">src&#47;model&#47;ingredient.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient/Ingredient-class.html">Ingredient</a></li>
-    <li class="self-crumb">toString method</li>
+    <li class="self-crumb">isInTaxonomy property</li>
   </ol>
-  <div class="self-name">toString</div>
+  <div class="self-name">isInTaxonomy</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -52,60 +52,34 @@
     data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient&#47;Ingredient-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">toString</span> method 
+<h1><span class="kind-property">isInTaxonomy</span> property 
 </h1></div>
 
-    <section class="multi-line-signature">
+    
+      <section class="multi-line-signature">
+        
+        <a href="https://api.dart.dev/stable/3.7.2/dart-core/bool-class.html">bool</a>?
+        <span class="name ">isInTaxonomy</span>
+        <div class="features"><span class="feature">getter/setter pair</span></div>
+
+      </section>
       
-  <div>
-    <ol class="annotation-list">
-        <li>@<a href="https://api.dart.dev/stable/3.7.2/dart-core/override-constant.html">override</a></li>
-    </ol>
-  </div>
-<span class="returntype"><a href="https://api.dart.dev/stable/3.7.2/dart-core/String-class.html">String</a></span>
-<span class="name ">toString</span>(<wbr>)
 
-      <div class="features"><span class="feature">override</span></div>
-
-    </section>
-    
-<section class="desc markdown">
-  <p>A string representation of this object.</p>
-<p>Some classes have a default textual representation,
-often paired with a static <code>parse</code> function (like <a href="https://api.dart.dev/stable/3.7.2/dart-core/int/parse.html">int.parse</a>).
-These classes will provide the textual representation as
-their string representation.</p>
-<p>Other classes have no meaningful textual representation
-that a program will care about.
-Such classes will typically override <code>toString</code> to provide
-useful information when inspecting the object,
-mainly for debugging or logging.</p>
-</section>
-
-
-    
+      
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@override
-String toString() =&gt; &#39;Ingredient(&#39;
-    &#39;${id == null ? &#39;&#39; : &#39;id=$id&#39;}&#39;
-    &#39;${rank == null ? &#39;&#39; : &#39;,rank=$rank&#39;}&#39;
-    &#39;${text == null ? &#39;&#39; : &#39;,text=$text&#39;}&#39;
-    &#39;${isInTaxonomy == null ? &#39;&#39; : &#39;,isInTaxonomy=$isInTaxonomy&#39;}&#39;
-    &#39;${percent == null ? &#39;&#39; : &#39;,percent=$percent&#39;}&#39;
-    &#39;${percentEstimate == null ? &#39;&#39; : &#39;,percentEstimate=$percentEstimate&#39;}&#39;
-    &#39;${vegan == null ? &#39;&#39; : &#39;,vegan=$vegan&#39;}&#39;
-    &#39;${vegetarian == null ? &#39;&#39; : &#39;,vegetarian=$vegetarian&#39;}&#39;
-    &#39;${fromPalmOil == null ? &#39;&#39; : &#39;,fromPalmOil=$fromPalmOil&#39;}&#39;
-    &#39;${bold == null ? &#39;&#39; : &#39;,bold=$bold&#39;}&#39;
-    &#39;${ingredients == null ? &#39;&#39; : &#39;,ingredients=$ingredients&#39;}&#39;
-    &#39;)&#39;;</code></pre>
+  <pre class="language-dart"><code class="language-dart">@JsonKey(
+    name: &#39;is_in_taxonomy&#39;,
+    includeIfNull: false,
+    fromJson: JsonObject.parseBool)
+bool? isInTaxonomy;</code></pre>
 </section>
 
 
-  </div> <!-- /.main-content -->
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+    
+</div> <!-- /.main-content -->
+<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+  <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
   <form class="search-sidebar" role="search">
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
@@ -115,13 +89,13 @@ String toString() =&gt; &#39;Ingredient(&#39;
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient">ingredient</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ingredient/Ingredient-class.html">Ingredient</a></li>
-    <li class="self-crumb">toString method</li>
+    <li class="self-crumb">isInTaxonomy property</li>
 </ol>
 
-    <h5>Ingredient class</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-->
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  <h5>Ingredient class</h5>
+  <div id="dartdoc-sidebar-left-content"></div>
+</div><!--/.sidebar-offcanvas-->
+<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
 </div><!--/.sidebar-offcanvas-->
 </main>
 <footer>
