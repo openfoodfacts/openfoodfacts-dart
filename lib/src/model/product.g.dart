@@ -103,6 +103,10 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
     )
       ..productType =
           $enumDecodeNullable(_$ProductTypeEnumMap, json['product_type'])
+      ..conservationConditionsInLanguages = LanguageHelper.fromJsonStringMap(
+          json['conservation_conditions_in_languages'])
+      ..customerServiceInLanguages = LanguageHelper.fromJsonStringMap(
+          json['customer_service_in_languages'])
       ..genericNameInLanguages =
           LanguageHelper.fromJsonStringMap(json['generic_name_in_languages'])
       ..abbreviatedName = json['abbreviated_product_name'] as String?
@@ -141,6 +145,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           json['states_tags_in_languages'])
       ..tracesTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
           json['traces_tags_in_languages'])
+      ..traces = json['traces'] as String?
       ..storesTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
           json['stores_tags_in_languages'])
       ..lastModifiedBy = json['last_modified_by'] as String?
@@ -211,6 +216,12 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('product_name', instance.productName);
   writeNotNull('product_name_in_languages',
       LanguageHelper.toJsonStringMap(instance.productNameInLanguages));
+  writeNotNull(
+      'conservation_conditions_in_languages',
+      LanguageHelper.toJsonStringMap(
+          instance.conservationConditionsInLanguages));
+  writeNotNull('customer_service_in_languages',
+      LanguageHelper.toJsonStringMap(instance.customerServiceInLanguages));
   writeNotNull('generic_name', instance.genericName);
   writeNotNull('generic_name_in_languages',
       LanguageHelper.toJsonStringMap(instance.genericNameInLanguages));
@@ -297,6 +308,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('traces_tags', instance.tracesTags);
   writeNotNull('traces_tags_in_languages',
       LanguageHelper.toJsonStringsListMap(instance.tracesTagsInLanguages));
+  writeNotNull('traces', instance.traces);
   writeNotNull('stores_tags', instance.storesTags);
   writeNotNull('stores_tags_in_languages',
       LanguageHelper.toJsonStringsListMap(instance.storesTagsInLanguages));

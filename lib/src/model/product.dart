@@ -109,6 +109,20 @@ class Product extends JsonObject {
       toJson: LanguageHelper.toJsonStringMap)
   Map<OpenFoodFactsLanguage, String>? productNameInLanguages;
 
+  /// Localized conservation conditions.
+  @JsonKey(
+      name: 'conservation_conditions_in_languages',
+      fromJson: LanguageHelper.fromJsonStringMap,
+      toJson: LanguageHelper.toJsonStringMap)
+  Map<OpenFoodFactsLanguage, String>? conservationConditionsInLanguages;
+
+  /// Localized customer service information.
+  @JsonKey(
+      name: 'customer_service_in_languages',
+      fromJson: LanguageHelper.fromJsonStringMap,
+      toJson: LanguageHelper.toJsonStringMap)
+  Map<OpenFoodFactsLanguage, String>? customerServiceInLanguages;
+
   /// Common name. Example: "Chocolate bar with milk and hazelnuts".
   @JsonKey(name: 'generic_name')
   String? genericName;
@@ -469,6 +483,8 @@ class Product extends JsonObject {
       toJson: LanguageHelper.toJsonStringsListMap,
       fromJson: LanguageHelper.fromJsonStringsListMap)
   Map<OpenFoodFactsLanguage, List<String>>? tracesTagsInLanguages;
+  @JsonKey(name: 'traces')
+  String? traces;
 
   @JsonKey(name: 'stores_tags')
   List<String>? storesTags;
@@ -708,6 +724,14 @@ class Product extends JsonObject {
         case ProductField.PACKAGING_TEXT_ALL_LANGUAGES:
           result.packagingTextInLanguages ??= {};
           result.packagingTextInLanguages![language] = label;
+          break;
+        case ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES:
+          result.conservationConditionsInLanguages ??= {};
+          result.conservationConditionsInLanguages![language] = label;
+          break;
+        case ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES:
+          result.customerServiceInLanguages ??= {};
+          result.customerServiceInLanguages![language] = label;
           break;
         default:
           // not supposed to be called with other ProductField values.

@@ -229,10 +229,45 @@ void main() {
       final Nutriments nutriments = result.product!.nutriments!;
       const PerSize perSize = PerSize.oneHundredGrams;
 
-      expect(nutriments.getValue(Nutrient.iron, perSize), 0.00041);
-      expect(nutriments.getValue(Nutrient.vitaminC, perSize), 0.0339);
+      expect(nutriments.getValue(Nutrient.iron, perSize), 2.32e-7);
+      expect(nutriments.getValue(Nutrient.vitaminC, perSize), 0.0000192);
     });
 
+    test('get localized conservation conditions and customer service',
+        () async {
+      const String barcode = '3017620425035';
+      ProductQueryConfiguration configuration = ProductQueryConfiguration(
+        barcode,
+        fields: [
+          ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES,
+          ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES
+        ],
+        version: ProductQueryVersion.v3,
+        language: OpenFoodFactsLanguage.JAPANESE,
+      );
+
+      ProductResultV3 result = await getProductV3InProd(configuration);
+
+      expect(result.status, ProductResultV3.statusSuccess);
+      expect(result.product != null, true);
+
+      final conservationConditions =
+          result.product!.conservationConditionsInLanguages;
+      final conservationConditionsInFrench =
+          conservationConditions![OpenFoodFactsLanguage.FRENCH];
+      expect(conservationConditions, isNotNull);
+      expect(conservationConditionsInFrench, isNotNull);
+      expect(conservationConditionsInFrench, isNotEmpty);
+      expect(conservationConditions, isNotEmpty);
+
+      final customerService = result.product!.customerServiceInLanguages;
+      final customerServiceInFrench =
+          customerService![OpenFoodFactsLanguage.FRENCH];
+      expect(customerServiceInFrench, isNotNull);
+      expect(customerServiceInFrench, isNotEmpty);
+      expect(customerService, isNotNull);
+      expect(customerService, isNotEmpty);
+    });
     test('get uncommon nutrients', () async {
       // PROD data as of 2021-07-16
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
@@ -876,6 +911,7 @@ void main() {
       final Ingredient ingredient = result.product!.ingredients!.firstWhere(
         (ingredient) => ingredient.text == 'huile de palme',
       );
+      expect(ingredient.isInTaxonomy, true);
       expect(ingredient.vegan, IngredientSpecialPropertyStatus.POSITIVE);
       expect(ingredient.vegetarian, IngredientSpecialPropertyStatus.POSITIVE);
       expect(ingredient.fromPalmOil, IngredientSpecialPropertyStatus.POSITIVE);
