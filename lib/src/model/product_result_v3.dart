@@ -33,13 +33,13 @@ class ProductResultV3 extends JsonObject {
   /// Errors.
   ///
   /// Typically populated if [status] is [statusFailure].
-  @JsonKey(includeIfNull: false, fromJson: _fromJsonListAnswerForField)
+  @JsonKey(includeIfNull: false, fromJson: fromJsonListAnswerForField)
   List<ProductResultFieldAnswer>? errors;
 
   /// Warnings.
   ///
   /// Typically populated if [status] is [statusWarning].
-  @JsonKey(includeIfNull: false, fromJson: _fromJsonListAnswerForField)
+  @JsonKey(includeIfNull: false, fromJson: fromJsonListAnswerForField)
   List<ProductResultFieldAnswer>? warnings;
 
   @JsonKey(includeIfNull: false)
@@ -70,7 +70,7 @@ class ProductResultV3 extends JsonObject {
   String toString() => toJson().toString();
 
   /// From a `List<AnswerForField>` in `dynamic`'s clothing (JsonKey)
-  static List<ProductResultFieldAnswer>? _fromJsonListAnswerForField(
+  static List<ProductResultFieldAnswer>? fromJsonListAnswerForField(
       dynamic list) {
     if (list == null) {
       return null;

@@ -13,8 +13,8 @@ ProductResultV3 _$ProductResultV3FromJson(Map<String, dynamic> json) =>
           ? null
           : LocalizedTag.fromJson(json['result'] as Map<String, dynamic>)
       ..status = json['status'] as String?
-      ..errors = ProductResultV3._fromJsonListAnswerForField(json['errors'])
-      ..warnings = ProductResultV3._fromJsonListAnswerForField(json['warnings'])
+      ..errors = ProductResultV3.fromJsonListAnswerForField(json['errors'])
+      ..warnings = ProductResultV3.fromJsonListAnswerForField(json['warnings'])
       ..product = json['product'] == null
           ? null
           : Product.fromJson(json['product'] as Map<String, dynamic>);

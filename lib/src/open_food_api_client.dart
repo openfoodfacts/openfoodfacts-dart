@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:meta/meta.dart';
 
 import 'interface/json_object.dart';
 import 'model/login_status.dart';
@@ -34,6 +35,8 @@ import 'model/taxonomy_packaging_material.dart';
 import 'model/taxonomy_packaging_recycling.dart';
 import 'model/taxonomy_packaging_shape.dart';
 import 'model/user.dart';
+import 'model/flexible/flexible_product_result.dart';
+import 'model/flexible/flexible_search_result.dart';
 import 'utils/abstract_query_configuration.dart';
 import 'utils/country_helper.dart';
 import 'utils/http_helper.dart';
@@ -281,6 +284,22 @@ class OpenFoodAPIClient {
     return result;
   }
 
+  @experimental
+  static Future<FlexibleProductResult> getFlexibleProductResult(
+    final ProductQueryConfiguration configuration, {
+    final User? user,
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Response response = await configuration.getResponse(user, uriHelper);
+    TooManyRequestsException.check(response);
+    final String productString = response.body;
+    final String jsonStr = _replaceQuotes(productString);
+    return FlexibleProductResult(
+      HttpHelper().jsonDecode(jsonStr),
+      uriHelper: uriHelper,
+    );
+  }
+
   /// Returns the product for the given barcode, with an old syntax.
   ///
   /// Temporarily needed for OBF, OPF and OPFF, that do not support api v3.
@@ -487,6 +506,21 @@ class OpenFoodAPIClient {
     );
     _removeImages(result, configuration);
     return result;
+  }
+
+  @experimental
+  static Future<FlexibleSearchResult> searchFlexibleProducts(
+    final User? user,
+    final AbstractQueryConfiguration configuration, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Response response = await configuration.getResponse(user, uriHelper);
+    TooManyRequestsException.check(response);
+    final String jsonStr = _replaceQuotes(response.body);
+    return FlexibleSearchResult(
+      HttpHelper().jsonDecode(jsonStr),
+      uriHelper: uriHelper,
+    );
   }
 
   /// Returns the [ProductFreshness] for all the [barcodes].
