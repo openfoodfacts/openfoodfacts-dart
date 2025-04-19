@@ -3,21 +3,11 @@ import 'package:json_annotation/json_annotation.dart';
 import '../interface/json_object.dart';
 import '../utils/json_helper.dart';
 
-part 'price_total_stats.g.dart';
-
 /// Total stats for Prices.
 ///
 /// cf. `TotalStats` in https://prices.openfoodfacts.org/api/docs
-@JsonSerializable(
-  createToJson: true,
-  createFactory: true,
-  includeIfNull: true,
-  explicitToJson: true,
-  anyMap: true,
-)
 class PriceTotalStats extends JsonObject {
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  late Map<String, dynamic> _rawData;
+  final Map<String, dynamic> _rawData;
 
   static const String PRICE_COUNT = 'price_count';
   static const String PRICE_TYPE_PRODUCT_CODE_COUNT =
@@ -80,165 +70,80 @@ class PriceTotalStats extends JsonObject {
   static const String USER_WITH_PRICE_COUNT = 'user_with_price_count';
   static const String UPDATED = 'updated';
 
-  @JsonKey(name: PRICE_COUNT)
-  int? priceCount;
+  int? get priceCount => getInt(PRICE_COUNT);
+  int? get priceTypeProductCodeCount => getInt(PRICE_TYPE_PRODUCT_CODE_COUNT);
+  int? get priceTypeCategoryTagCount => getInt(PRICE_TYPE_CATEGORY_TAG_COUNT);
+  int? get priceWithDiscountCount => getInt(PRICE_WITH_DISCOUNT_COUNT);
+  int? get priceCurrencyCount => getInt(PRICE_CURRENCY_COUNT);
+  int? get priceYearCount => getInt(PRICE_YEAR_COUNT);
+  int? get priceLocationCountryCount => getInt(PRICE_LOCATION_COUNTRY_COUNT);
+  int? get priceKindCommunityCount => getInt(PRICE_KIND_COMMUNITY_COUNT);
+  int? get priceKindConsumptionCount => getInt(PRICE_KIND_CONSUMPTION_COUNT);
+  int? get priceSourceWebCount => getInt(PRICE_SOURCE_WEB_COUNT);
+  int? get priceSourceMobileCount => getInt(PRICE_SOURCE_MOBILE_COUNT);
+  int? get priceSourceApiCount => getInt(PRICE_SOURCE_API_COUNT);
+  int? get priceSourceOtherCount => getInt(PRICE_SOURCE_OTHER_COUNT);
+  int? get productCount => getInt(PRODUCT_COUNT);
+  int? get productSourceOffCount => getInt(PRODUCT_SOURCE_OFF_COUNT);
+  int? get productSourceObfCount => getInt(PRODUCT_SOURCE_OBF_COUNT);
+  int? get productSourceOpffCount => getInt(PRODUCT_SOURCE_OPFF_COUNT);
+  int? get productSourceOpfCount => getInt(PRODUCT_SOURCE_OPF_COUNT);
+  int? get productWithPriceCount => getInt(PRODUCT_WITH_PRICE_COUNT);
+  int? get productSourceOffWithPriceCount =>
+      getInt(PRODUCT_SOURCE_OFF_WITH_PRICE_COUNT);
+  int? get productSourceObfWithPriceCount =>
+      getInt(PRODUCT_SOURCE_OBF_WITH_PRICE_COUNT);
+  int? get productSourceOpffWithPriceCount =>
+      getInt(PRODUCT_SOURCE_OPFF_WITH_PRICE_COUNT);
+  int? get productSourceOpfWithPriceCount =>
+      getInt(PRODUCT_SOURCE_OPF_WITH_PRICE_COUNT);
+  int? get locationCount => getInt(LOCATION_COUNT);
+  int? get locationWithPriceCount => getInt(LOCATION_WITH_PRICE_COUNT);
+  int? get locationTypeOsmCount => getInt(LOCATION_TYPE_OSM_COUNT);
+  int? get locationTypeOnlineCount => getInt(LOCATION_TYPE_ONLINE_COUNT);
+  int? get locationTypeOsmCountryCount =>
+      getInt(LOCATION_TYPE_OSM_COUNTRY_COUNT);
+  int? get proofCount => getInt(PROOF_COUNT);
+  int? get proofWithPriceCount => getInt(PROOF_WITH_PRICE_COUNT);
+  int? get proofTypePriceTagCount => getInt(PROOF_TYPE_PRICE_TAG_COUNT);
+  int? get proofTypeReceiptCount => getInt(PROOF_TYPE_RECEIPT_COUNT);
+  int? get proofTypeGdprRequestCount => getInt(PROOF_TYPE_GDPR_REQUEST_COUNT);
+  int? get proofTypeShopImportCount => getInt(PROOF_TYPE_SHOP_IMPORT_COUNT);
+  int? get proofKindCommunityCount => getInt(PROOF_KIND_COMMUNITY_COUNT);
+  int? get proofKindConsumptionCount => getInt(PROOF_KIND_CONSUMPTION_COUNT);
+  int? get proofSourceWebCount => getInt(PROOF_SOURCE_WEB_COUNT);
+  int? get proofSourceMobileCount => getInt(PROOF_SOURCE_MOBILE_COUNT);
+  int? get proofSourceApiCount => getInt(PROOF_SOURCE_API_COUNT);
+  int? get proofSourceOtherCount => getInt(PROOF_SOURCE_OTHER_COUNT);
+  int? get priceTagCount => getInt(PRICE_TAG_COUNT);
+  int? get priceTagStatusUnknownCount => getInt(PRICE_TAG_STATUS_UNKNOWN_COUNT);
+  int? get priceTagStatusLinkedToPriceCount =>
+      getInt(PRICE_TAG_STATUS_LINKED_TO_PRICE_COUNT);
+  int? get userCount => getInt(USER_COUNT);
+  int? get userWithPriceCount => getInt(USER_WITH_PRICE_COUNT);
 
-  @JsonKey(name: PRICE_TYPE_PRODUCT_CODE_COUNT)
-  int? priceTypeProductCodeCount;
+  DateTime? get updated => _rawData.containsKey(UPDATED)
+      ? JsonHelper.nullableStringTimestampToDate(_rawData[UPDATED])
+      : null;
 
-  @JsonKey(name: PRICE_TYPE_CATEGORY_TAG_COUNT)
-  int? priceTypeCategoryTagCount;
-
-  @JsonKey(name: PRICE_WITH_DISCOUNT_COUNT)
-  int? priceWithDiscountCount;
-
-  @JsonKey(name: PRICE_CURRENCY_COUNT)
-  int? priceCurrencyCount;
-
-  @JsonKey(name: PRICE_YEAR_COUNT)
-  int? priceYearCount;
-
-  @JsonKey(name: PRICE_LOCATION_COUNTRY_COUNT)
-  int? priceLocationCountryCount;
-
-  @JsonKey(name: PRICE_KIND_COMMUNITY_COUNT)
-  int? priceKindCommunityCount;
-
-  @JsonKey(name: PRICE_KIND_CONSUMPTION_COUNT)
-  int? priceKindConsumptionCount;
-
-  @JsonKey(name: PRICE_SOURCE_WEB_COUNT)
-  int? priceSourceWebCount;
-
-  @JsonKey(name: PRICE_SOURCE_MOBILE_COUNT)
-  int? priceSourceMobileCount;
-
-  @JsonKey(name: PRICE_SOURCE_API_COUNT)
-  int? priceSourceApiCount;
-
-  @JsonKey(name: PRICE_SOURCE_OTHER_COUNT)
-  int? priceSourceOtherCount;
-
-  @JsonKey(name: PRODUCT_COUNT)
-  int? productCount;
-
-  @JsonKey(name: PRODUCT_SOURCE_OFF_COUNT)
-  int? productSourceOffCount;
-
-  @JsonKey(name: PRODUCT_SOURCE_OBF_COUNT)
-  int? productSourceObfCount;
-
-  @JsonKey(name: PRODUCT_SOURCE_OPFF_COUNT)
-  int? productSourceOpffCount;
-
-  @JsonKey(name: PRODUCT_SOURCE_OPF_COUNT)
-  int? productSourceOpfCount;
-
-  @JsonKey(name: PRODUCT_WITH_PRICE_COUNT)
-  int? productWithPriceCount;
-
-  @JsonKey(name: PRODUCT_SOURCE_OFF_WITH_PRICE_COUNT)
-  int? productSourceOffWithPriceCount;
-
-  @JsonKey(name: PRODUCT_SOURCE_OBF_WITH_PRICE_COUNT)
-  int? productSourceObfWithPriceCount;
-
-  @JsonKey(name: PRODUCT_SOURCE_OPFF_WITH_PRICE_COUNT)
-  int? productSourceOpffWithPriceCount;
-
-  @JsonKey(name: PRODUCT_SOURCE_OPF_WITH_PRICE_COUNT)
-  int? productSourceOpfWithPriceCount;
-
-  @JsonKey(name: LOCATION_COUNT)
-  int? locationCount;
-
-  @JsonKey(name: LOCATION_WITH_PRICE_COUNT)
-  int? locationWithPriceCount;
-
-  @JsonKey(name: LOCATION_TYPE_OSM_COUNT)
-  int? locationTypeOsmCount;
-
-  @JsonKey(name: LOCATION_TYPE_ONLINE_COUNT)
-  int? locationTypeOnlineCount;
-
-  @JsonKey(name: LOCATION_TYPE_OSM_COUNTRY_COUNT)
-  int? locationTypeOsmCountryCount;
-
-  @JsonKey(name: PROOF_COUNT)
-  int? proofCount;
-
-  @JsonKey(name: PROOF_WITH_PRICE_COUNT)
-  int? proofWithPriceCount;
-
-  @JsonKey(name: PROOF_TYPE_PRICE_TAG_COUNT)
-  int? proofTypePriceTagCount;
-
-  @JsonKey(name: PROOF_TYPE_RECEIPT_COUNT)
-  int? proofTypeReceiptCount;
-
-  @JsonKey(name: PROOF_TYPE_GDPR_REQUEST_COUNT)
-  int? proofTypeGdprRequestCount;
-
-  @JsonKey(name: PROOF_TYPE_SHOP_IMPORT_COUNT)
-  int? proofTypeShopImportCount;
-
-  @JsonKey(name: PROOF_KIND_COMMUNITY_COUNT)
-  int? proofKindCommunityCount;
-
-  @JsonKey(name: PROOF_KIND_CONSUMPTION_COUNT)
-  int? proofKindConsumptionCount;
-
-  @JsonKey(name: PROOF_SOURCE_WEB_COUNT)
-  int? proofSourceWebCount;
-
-  @JsonKey(name: PROOF_SOURCE_MOBILE_COUNT)
-  int? proofSourceMobileCount;
-
-  @JsonKey(name: PROOF_SOURCE_API_COUNT)
-  int? proofSourceApiCount;
-
-  @JsonKey(name: PROOF_SOURCE_OTHER_COUNT)
-  int? proofSourceOtherCount;
-
-  @JsonKey(name: PRICE_TAG_COUNT)
-  int? priceTagCount;
-
-  @JsonKey(name: PRICE_TAG_STATUS_UNKNOWN_COUNT)
-  int? priceTagStatusUnknownCount;
-
-  @JsonKey(name: PRICE_TAG_STATUS_LINKED_TO_PRICE_COUNT)
-  int? priceTagStatusLinkedToPriceCount;
-
-  @JsonKey(name: USER_COUNT)
-  int? userCount;
-
-  @JsonKey(name: USER_WITH_PRICE_COUNT)
-  int? userWithPriceCount;
-
-  @JsonKey(name: UPDATED, fromJson: JsonHelper.nullableStringTimestampToDate)
-  DateTime? updated;
-
-  int? getInt(String key) {
-    if (!_rawData.containsKey(key)) return null;
-    final value = _rawData[key];
-    if (value is int) return value;
-    return int.tryParse(value?.toString() ?? '');
-  }
+  int? getInt(String key) => _rawData.containsKey(key)
+      ? (_rawData[key] is int
+          ? _rawData[key]
+          : int.tryParse(_rawData[key]?.toString() ?? ''))
+      : null;
 
   String? getString(String key) =>
       _rawData.containsKey(key) ? _rawData[key]?.toString() : null;
 
-  double? getDouble(String key) {
-    if (!_rawData.containsKey(key)) return null;
-    final value = _rawData[key];
-    if (value is double) return value;
-    return double.tryParse(value?.toString() ?? '');
-  }
+  double? getDouble(String key) => _rawData.containsKey(key)
+      ? (_rawData[key] is double
+          ? _rawData[key]
+          : double.tryParse(_rawData[key]?.toString() ?? ''))
+      : null;
 
-  bool? getBool(String key) =>
-      _rawData.containsKey(key) && _rawData[key] is bool
-          ? _rawData[key] as bool
-          : null;
+  bool? getBool(String key) => _rawData.containsKey(key)
+      ? (_rawData[key] is bool ? _rawData[key] : null)
+      : null;
 
   DateTime? getDateTime(String key) => _rawData.containsKey(key)
       ? JsonHelper.nullableStringTimestampToDate(_rawData[key])
@@ -248,23 +153,14 @@ class PriceTotalStats extends JsonObject {
 
   Set<String> get availableKeys => _rawData.keys.toSet();
 
-  PriceTotalStats();
+  PriceTotalStats(this._rawData);
+
+  PriceTotalStats.empty() : _rawData = {};
 
   factory PriceTotalStats.fromJson(Map<String, dynamic> json) {
-    final result = _$PriceTotalStatsFromJson(json);
-    result._rawData = Map<String, dynamic>.from(json);
-    return result;
+    return PriceTotalStats(json);
   }
 
   @override
-  Map<String, dynamic> toJson() {
-    final json = _$PriceTotalStatsToJson(this);
-
-    for (final entry in _rawData.entries) {
-      if (!json.containsKey(entry.key)) {
-        json[entry.key] = entry.value;
-      }
-    }
-    return json;
-  }
+  Map<String, dynamic> toJson() => _rawData;
 }
