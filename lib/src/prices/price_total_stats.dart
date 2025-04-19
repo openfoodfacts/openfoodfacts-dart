@@ -1,5 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-
 import '../utils/json_helper.dart';
 
 /// Total stats for Prices.
@@ -9,6 +7,10 @@ class PriceTotalStats {
   final Map<String, dynamic> json;
 
   PriceTotalStats(this.json);
+
+  factory PriceTotalStats.fromJson(Map<String, dynamic> json) {
+    return PriceTotalStats(json);
+  }
 
   int? get priceCount => getInt('price_count');
   int? get priceTypeProductCodeCount => getInt('price_type_product_code_count');
@@ -69,6 +71,5 @@ class PriceTotalStats {
   DateTime? getDateTime(String key) =>
       JsonHelper.nullableStringTimestampToDate(json[key]);
 
-  @override
   Map<String, dynamic> toJson() => json;
 }
