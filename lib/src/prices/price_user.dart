@@ -28,6 +28,39 @@ class PriceUser extends JsonObject {
   @JsonKey(name: 'proof_count')
   int? proofCount;
 
+  @JsonKey(name: 'price_type_product_count')
+  int? priceTypeProductCount;
+
+  @JsonKey(name: 'price_type_category_count')
+  int? priceTypeCategoryCount;
+
+  @JsonKey(name: 'price_kind_community_count')
+  int? priceKindCommunityCount;
+
+  @JsonKey(name: 'price_kind_consumption_count')
+  int? priceKindConsumptionCount;
+
+  @JsonKey(name: 'price_currency_count')
+  int? priceCurrencyCount;
+
+  @JsonKey(name: 'price_in_proof_owned_count')
+  int? priceInProofOwnedCount;
+
+  @JsonKey(name: 'price_in_proof_not_owned_count')
+  int? priceInProofNotOwnedCount;
+
+  @JsonKey(name: 'price_not_owned_in_proof_owned_count')
+  int? priceNotOwnedInProofOwnedCount;
+
+  @JsonKey(name: 'proof_kind_community_count')
+  int? proofKindCommunityCount;
+
+  @JsonKey(name: 'proof_kind_consumption_count')
+  int? proofKindConsumptionCount;
+
+  @JsonKey(name: 'location_type_osm_country_count')
+  int? locationTypeOsmCountryCount;
+
   PriceUser();
 
   factory PriceUser.fromJson(Map<String, dynamic> json) =>
