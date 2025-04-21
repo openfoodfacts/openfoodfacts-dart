@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../model/off_tagged.dart';
 
-/// Type of the Proof.
+/// Kind of the Proof.
 enum ProofKind implements OffTagged {
   @JsonValue('CONSUMPTION')
   online(offTag: 'CONSUMPTION'),
