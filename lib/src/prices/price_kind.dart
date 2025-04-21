@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../model/off_tagged.dart';
 
-/// Type of the Location.
+/// Type of the Price.
 enum PriceKind implements OffTagged {
   @JsonValue('CONSUMPTION')
   online(offTag: 'CONSUMPTION'),
