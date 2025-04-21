@@ -1,3 +1,5 @@
+import 'package:openfoodfacts/src/prices/price_kind.dart';
+
 import 'currency.dart';
 import 'get_parameters_helper.dart';
 import 'get_prices_order.dart';
@@ -26,7 +28,7 @@ class GetPricesParameters extends GetParametersHelper<GetPricesOrderField> {
   String? owner;
   DateTime? createdGte;
   DateTime? createdLte;
-  String? kind;
+  PriceKind? kind;
 
   @override
   Map<String, String> getQueryParameters() {
@@ -50,7 +52,7 @@ class GetPricesParameters extends GetParametersHelper<GetPricesOrderField> {
     addNonNullString(owner, 'owner');
     addNonNullDate(createdGte, 'created__gte', dayOnly: false);
     addNonNullDate(createdLte, 'created__lte', dayOnly: false);
-    addNonNullString(kind, 'kind');
+    addNonNullString(kind?.offTag, 'kind');
     return result;
   }
 }
