@@ -139,10 +139,12 @@ enum OpenFoodFactsCountry implements OffTagged {
   COCOS_ISLANDS(offTag: 'cc', iso3Code: 'CCK', currency: Currency.AUD),
 
   /// Congo, Democratic Republic of the
-  DEMOCRATIC_REPUBLIC_OF_THE_CONGO(offTag: 'cd', iso3Code: 'COD', currency: Currency.CDF),
+  DEMOCRATIC_REPUBLIC_OF_THE_CONGO(
+      offTag: 'cd', iso3Code: 'COD', currency: Currency.CDF),
 
   /// Central African Republic
-  CENTRAL_AFRICAN_REPUBLIC(offTag: 'cf', iso3Code: 'CAF', currency: Currency.XAF),
+  CENTRAL_AFRICAN_REPUBLIC(
+      offTag: 'cf', iso3Code: 'CAF', currency: Currency.XAF),
 
   /// Congo
   CONGO(offTag: 'cg', iso3Code: 'COG', currency: Currency.XAF),
@@ -264,7 +266,7 @@ enum OpenFoodFactsCountry implements OffTagged {
     iso3Code: 'FRA',
     currency: Currency.EUR,
     wikiUrl:
-    'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
+        'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
   ),
 
   /// Gabon
@@ -364,7 +366,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   ),
 
   /// British Indian Ocean Territory
-  BRITISH_INDIAN_OCEAN_TERRITORY(offTag: 'io', iso3Code: 'IOT', currency: Currency.USD),
+  BRITISH_INDIAN_OCEAN_TERRITORY(
+      offTag: 'io', iso3Code: 'IOT', currency: Currency.USD),
 
   /// Iraq
   IRAQ(offTag: 'iq', iso3Code: 'IRQ', currency: Currency.IQD),
@@ -508,7 +511,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   MACAO(offTag: 'mo', iso3Code: 'MAC', currency: Currency.MOP),
 
   /// Northern Mariana Islands
-  NORTHERN_MARIANA_ISLANDS(offTag: 'mp', iso3Code: 'MNP', currency: Currency.USD),
+  NORTHERN_MARIANA_ISLANDS(
+      offTag: 'mp', iso3Code: 'MNP', currency: Currency.USD),
 
   /// Martinique
   MARTINIQUE(offTag: 'mq', iso3Code: 'MTQ', currency: Currency.EUR),
@@ -611,7 +615,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   POLAND(offTag: 'pl', iso3Code: 'POL', currency: Currency.PLN),
 
   /// Saint Pierre and Miquelon
-  SAINT_PIERRE_AND_MIQUELON(offTag: 'pm', iso3Code: 'SPM', currency: Currency.EUR),
+  SAINT_PIERRE_AND_MIQUELON(
+      offTag: 'pm', iso3Code: 'SPM', currency: Currency.EUR),
 
   /// Pitcairn
   PITCAIRN(offTag: 'pn', iso3Code: 'PCN', currency: Currency.NZD),
@@ -718,13 +723,15 @@ enum OpenFoodFactsCountry implements OffTagged {
   ESWATINI(offTag: 'sz', iso3Code: 'SWZ', currency: Currency.SZL),
 
   /// Turks and Caicos Islands
-  TURKS_AND_CAICOS_ISLANDS(offTag: 'tc', iso3Code: 'TCA', currency: Currency.USD),
+  TURKS_AND_CAICOS_ISLANDS(
+      offTag: 'tc', iso3Code: 'TCA', currency: Currency.USD),
 
   /// Chad
   CHAD(offTag: 'td', iso3Code: 'TCD', currency: Currency.XAF),
 
   /// French Southern Territories
-  FRENCH_SOUTHERN_TERRITORIES(offTag: 'tf', iso3Code: 'ATF', currency: Currency.EUR),
+  FRENCH_SOUTHERN_TERRITORIES(
+      offTag: 'tf', iso3Code: 'ATF', currency: Currency.EUR),
 
   /// Togo
   TOGO(offTag: 'tg', iso3Code: 'TGO', currency: Currency.XOF),
@@ -772,7 +779,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   UGANDA(offTag: 'ug', iso3Code: 'UGA', currency: Currency.UGX),
 
   /// United States Minor Outlying Islands
-  UNITED_STATES_MINOR_OUTLYING_ISLANDS(offTag: 'um', iso3Code: 'UMI', currency: Currency.USD),
+  UNITED_STATES_MINOR_OUTLYING_ISLANDS(
+      offTag: 'um', iso3Code: 'UMI', currency: Currency.USD),
 
   /// United States of America
   USA(
@@ -792,7 +800,8 @@ enum OpenFoodFactsCountry implements OffTagged {
   HOLY_SEE(offTag: 'va', iso3Code: 'VAT', currency: Currency.EUR),
 
   /// Saint Vincent and the Grenadines
-  SAINT_VINCENT_AND_THE_GRENADINES(offTag: 'vc', iso3Code: 'VCT', currency: Currency.XCD),
+  SAINT_VINCENT_AND_THE_GRENADINES(
+      offTag: 'vc', iso3Code: 'VCT', currency: Currency.XCD),
 
   /// Venezuela (Bolivarian Republic of)
   VENEZUELA(offTag: 've', iso3Code: 'VEN', currency: Currency.VED),
@@ -862,6 +871,6 @@ enum OpenFoodFactsCountry implements OffTagged {
       return OpenFoodFactsCountry.UNITED_KINGDOM;
     }
     return OffTagged.fromOffTag(offTag, OpenFoodFactsCountry.values)
-    as OpenFoodFactsCountry?;
+        as OpenFoodFactsCountry?;
   }
 }
