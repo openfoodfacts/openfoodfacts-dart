@@ -1,5 +1,4 @@
-import 'package:openfoodfacts/src/prices/proof_kind.dart';
-
+import 'contribution_kind.dart';
 import 'get_price_count_parameters_helper.dart';
 import 'get_proofs_order.dart';
 import 'proof_type.dart';
@@ -22,7 +21,7 @@ class GetProofsParameters
   DateTime? dateGte;
   DateTime? dateLt;
   DateTime? dateLte;
-  ProofKind? kind;
+  ContributionKind? kind;
 
   /// Returns the parameters as a query parameter map.
   @override
@@ -40,6 +39,11 @@ class GetProofsParameters
     addNonNullDate(dateLt, 'date__lt', dayOnly: true);
     addNonNullDate(dateLte, 'date__lte', dayOnly: true);
     addNonNullString(kind?.offTag, 'kind');
+    if (additionalParameters != null) {
+      for (final String key in additionalParameters!.keys) {
+        addNonNullString(additionalParameters![key], key);
+      }
+    }
     return result;
   }
 }
