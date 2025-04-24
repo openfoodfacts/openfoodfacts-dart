@@ -53,9 +53,7 @@ class GetPricesParameters extends GetParametersHelper<GetPricesOrderField> {
     addNonNullDate(createdLte, 'created__lte', dayOnly: false);
     addNonNullString(kind?.offTag, 'kind');
     if (additionalParameters != null) {
-      for (final String key in additionalParameters!.keys) {
-        addNonNullString(additionalParameters![key], key);
-      }
+      result.addAll(additionalParameters!);
     }
     return result;
   }
