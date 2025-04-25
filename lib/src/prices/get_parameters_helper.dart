@@ -6,6 +6,7 @@ abstract class GetParametersHelper<T extends OrderByField> {
   int? pageSize;
   int? pageNumber;
   List<OrderBy<T>>? orderBy;
+  Map<String, String>? additionalParameters;
 
   final Map<String, String> _result = <String, String>{};
 
@@ -27,6 +28,9 @@ abstract class GetParametersHelper<T extends OrderByField> {
       if (orders.isNotEmpty) {
         addNonNullString(orders.join(','), 'order_by');
       }
+    }
+    if (additionalParameters != null) {
+      _result.addAll(additionalParameters!);
     }
     return _result;
   }
