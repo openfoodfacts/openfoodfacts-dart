@@ -29,6 +29,9 @@ abstract class GetParametersHelper<T extends OrderByField> {
         addNonNullString(orders.join(','), 'order_by');
       }
     }
+    if (additionalParameters != null) {
+      _result.addAll(additionalParameters!);
+    }
     return _result;
   }
 

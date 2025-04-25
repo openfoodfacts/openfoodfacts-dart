@@ -39,9 +39,6 @@ class GetProofsParameters
     addNonNullDate(dateLt, 'date__lt', dayOnly: true);
     addNonNullDate(dateLte, 'date__lte', dayOnly: true);
     addNonNullString(kind?.offTag, 'kind');
-    if (additionalParameters != null) {
-      result.addAll(additionalParameters!);
-    }
     return result;
   }
 }
