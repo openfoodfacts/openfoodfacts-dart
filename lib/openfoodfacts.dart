@@ -109,6 +109,7 @@ export 'src/prices/get_locations_parameters.dart';
 export 'src/prices/get_locations_result.dart';
 
 // export 'src/prices/get_parameters_helper.dart'; // uncomment if really needed
+export 'src/prices/contribution_kind.dart';
 export 'src/prices/get_prices_order.dart';
 export 'src/prices/get_prices_parameters.dart';
 export 'src/prices/get_price_products_order.dart';
