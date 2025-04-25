@@ -91,6 +91,7 @@ Map&lt;String, String&gt; getQueryParameters() {
   addNonNullDate(dateGte, &#39;date__gte&#39;, dayOnly: true);
   addNonNullDate(dateLt, &#39;date__lt&#39;, dayOnly: true);
   addNonNullDate(dateLte, &#39;date__lte&#39;, dayOnly: true);
+  addNonNullString(kind?.offTag, &#39;kind&#39;);
   return result;
 }</code></pre>
 </section>

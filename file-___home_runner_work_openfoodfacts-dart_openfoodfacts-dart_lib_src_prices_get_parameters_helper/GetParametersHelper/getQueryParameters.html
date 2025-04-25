@@ -87,6 +87,9 @@
       addNonNullString(orders.join(&#39;,&#39;), &#39;order_by&#39;);
     }
   }
+  if (additionalParameters != null) {
+    _result.addAll(additionalParameters!);
+  }
   return _result;
 }</code></pre>
 </section>

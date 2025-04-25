@@ -99,6 +99,7 @@ Map&lt;String, String&gt; getQueryParameters() {
   addNonNullString(owner, &#39;owner&#39;);
   addNonNullDate(createdGte, &#39;created__gte&#39;, dayOnly: false);
   addNonNullDate(createdLte, &#39;created__lte&#39;, dayOnly: false);
+  addNonNullString(kind?.offTag, &#39;kind&#39;);
   return result;
 }</code></pre>
 </section>
