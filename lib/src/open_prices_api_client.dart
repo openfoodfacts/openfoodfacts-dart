@@ -515,18 +515,18 @@ class OpenPricesAPIClient {
 
 // TODO: deprecated from 2025-04-25 regarding single parameters; remove them when old enough
   static Future<MaybeError<Proof>> uploadProof({
-    @Deprecated('Use UploadProofParameters instead') final ProofType? proofType,
+    @Deprecated('Use CreateProofParameters instead') final ProofType? proofType,
     required final Uri imageUri,
     required final MediaType mediaType,
     final CreateProofParameters? createProofParameters,
-    @Deprecated('Use UploadProofParameters instead') final int? locationOSMId,
-    @Deprecated('Use UploadProofParameters instead')
+    @Deprecated('Use CreateProofParameters instead') final int? locationOSMId,
+    @Deprecated('Use CreateProofParameters instead')
     final LocationOSMType? locationOSMType,
-    @Deprecated('Use UploadProofParameters instead') final DateTime? date,
-    @Deprecated('Use UploadProofParameters instead') final Currency? currency,
-    @Deprecated('Use UploadProofParameters instead')
+    @Deprecated('Use CreateProofParameters instead') final DateTime? date,
+    @Deprecated('Use CreateProofParameters instead') final Currency? currency,
+    @Deprecated('Use CreateProofParameters instead')
     final int? receiptPriceCount,
-    @Deprecated('Use UploadProofParameters instead')
+    @Deprecated('Use CreateProofParameters instead')
     final num? receiptPriceTotal,
     required final String bearerToken,
     final UriProductHelper uriHelper = uriHelperFoodProd,
