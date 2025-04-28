@@ -94,6 +94,18 @@ class Proof extends JsonObject {
   @JsonKey()
   Location? location;
 
+  @JsonKey(name: 'receipt_online_delivery_costs')
+  num? receiptOnlineDeliveryCosts;
+
+  @JsonKey(name: 'ready_for_price_tag_validation')
+  bool? readyForPriceTagValidation;
+
+  @JsonKey(name: 'owner_consumption')
+  bool? ownerConsumption;
+
+  @JsonKey(name: 'owner_comment')
+  String? ownerComment;
+
   Proof();
 
   factory Proof.fromJson(Map<String, dynamic> json) => _$ProofFromJson(json);
