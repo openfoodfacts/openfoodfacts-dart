@@ -52,7 +52,7 @@ enum OpenFoodFactsCountry implements OffTagged {
   /// Austria
   AUSTRIA(
     offTag: 'at',
-    iso3Code: 'AUT'
+    iso3Code: 'AUT',
     currency: Currency.EUR,
     wikiUrl:
         'https://wiki.openfoodfacts.org/Local_Communities/GermanTeam/Country_Support',
