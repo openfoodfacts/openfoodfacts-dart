@@ -355,7 +355,7 @@ enum OpenFoodFactsCountry implements OffTagged {
   /// Guadeloupe
   GUADELOUPE(
     offTag: 'gp',
-    iso3Code: 'GLP'
+    iso3Code: 'GLP',
     currency: Currency.EUR,
     wikiUrl:
         'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
