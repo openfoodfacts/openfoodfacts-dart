@@ -45,8 +45,10 @@ class ChallengeItem {
   String? get icon => json['icon'] as String?;
   String? get subtitle => json['subtitle'] as String?;
 
-  DateTime? get startDate => JsonHelper.nullableStringTimestampToDate(json['start_date']);
-  DateTime? get endDate => JsonHelper.nullableStringTimestampToDate(json['end_date']);
+  DateTime? get startDate =>
+      JsonHelper.nullableStringTimestampToDate(json['start_date']);
+  DateTime? get endDate =>
+      JsonHelper.nullableStringTimestampToDate(json['end_date']);
 
   List<String>? get categories {
     if (json['categories'] == null) return null;
@@ -57,8 +59,10 @@ class ChallengeItem {
   String? get exampleProofUrl => json['example_proof_url'] as String?;
   bool? get isPublished => json['is_published'] as bool?;
 
-  DateTime? get created => JsonHelper.nullableStringTimestampToDate(json['created']);
-  DateTime? get updated => JsonHelper.nullableStringTimestampToDate(json['updated']);
+  DateTime? get created =>
+      JsonHelper.nullableStringTimestampToDate(json['created']);
+  DateTime? get updated =>
+      JsonHelper.nullableStringTimestampToDate(json['updated']);
 
   Map<String, dynamic> toJson() => json;
 }
