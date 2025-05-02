@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
@@ -8,9 +10,11 @@ import 'test_constants.dart';
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   const UriProductHelper uriHelper = uriHelperFoodTest;
+  final Random random = Random();
 
-  // Returns a book barcode (978...), that cannot be confused with food.
-  String getBookBarcode(final int index) => '${9780000000000 + index}';
+  // Returns a random book barcode (978...), that cannot be confused with food.
+  String getRandomBookBarcode() =>
+      '${9780000000000 + random.nextInt(1000000000)}';
 
   const List<String> ingredientsTags = <String>['en:flour', 'en:water'];
   const String tagCategory = 'en:beverages';
@@ -63,9 +67,11 @@ void main() {
         return;
       }
 
-      final String barcode = getBookBarcode(0);
+      final String barcode = getRandomBookBarcode();
+
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.GERMAN;
       const String genericName = 'Softdrink beverage';
+      const String countries = 'Frankreich,Deutschland';
       const List<String> ingredientsText = <String>[
         'Wasser',
         'Kohlensäure',
@@ -85,7 +91,7 @@ void main() {
         barcode: barcode,
         productName: 'Coca Cola Light',
         genericName: genericName,
-        countries: 'Frankreich,Deutschland',
+        countries: countries,
         brands: 'Coca Cola',
         nutrimentDataPer: PerSize.serving.offTag,
         nutrimentEnergyUnit: 'kcal',
@@ -107,11 +113,12 @@ void main() {
         imageField: ImageField.FRONT,
         imageUri: Uri.file('test/test_assets/front_coca_light_de.jpg'),
       );
-      await OpenFoodAPIClient.addProductImage(
+      final Status status = await OpenFoodAPIClient.addProductImage(
         TestConstants.TEST_USER,
         fontImage,
         uriHelper: uriHelper,
       );
+      expect(status.status, Status.statusOK);
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
@@ -150,10 +157,12 @@ void main() {
       expect(product.additives!.names[4], 'E950');
 
       expect(product.images, isNotNull);
-      expect(product.images!, hasLength(10));
-      expect(product.getRawImages(), hasLength(6));
+      expect(product.images!, hasLength(7));
+      // thumb, display, original
+      expect(product.getRawImages(), hasLength(3));
+      // thumb, small, display, original
       expect(product.getMainImages(), hasLength(4));
-      expect(product.countries, 'Frankreich,Deutschland');
+      expect(product.countries, countries);
     });
 
     test(
@@ -668,6 +677,7 @@ void main() {
           return;
         }
 
+        const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.GERMAN;
         const String barcode = '2222222222223';
         const String productName = 'Quoted Coca "cola"';
         const String brands = 'Quoted Coca "Cola"';
@@ -681,12 +691,13 @@ void main() {
           TestConstants.TEST_USER,
           product,
           uriHelper: uriHelper,
+          language: language,
         );
 
         final ProductQueryConfiguration configurations =
             ProductQueryConfiguration(
           barcode,
-          language: OpenFoodFactsLanguage.GERMAN,
+          language: language,
           fields: [ProductField.NAME, ProductField.BRANDS],
           version: ProductQueryVersion.v3,
         );
@@ -710,6 +721,7 @@ void main() {
       return;
     }
 
+    const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.GERMAN;
     const String barcode = '111111555555';
     const String genericName = 'Softdrink beverage';
     const String labels = 'MyTestLabel';
@@ -727,11 +739,12 @@ void main() {
       TestConstants.TEST_USER,
       product,
       uriHelper: uriHelper,
+      language: language,
     );
 
     final ProductQueryConfiguration configurations = ProductQueryConfiguration(
       barcode,
-      language: OpenFoodFactsLanguage.GERMAN,
+      language: language,
       fields: [
         ProductField.GENERIC_NAME,
         ProductField.LABELS,

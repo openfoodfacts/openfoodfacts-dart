@@ -103,6 +103,10 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
     )
       ..productType =
           $enumDecodeNullable(_$ProductTypeEnumMap, json['product_type'])
+      ..conservationConditionsInLanguages = LanguageHelper.fromJsonStringMap(
+          json['conservation_conditions_in_languages'])
+      ..customerServiceInLanguages = LanguageHelper.fromJsonStringMap(
+          json['customer_service_in_languages'])
       ..genericNameInLanguages =
           LanguageHelper.fromJsonStringMap(json['generic_name_in_languages'])
       ..abbreviatedName = json['abbreviated_product_name'] as String?
@@ -141,6 +145,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           json['states_tags_in_languages'])
       ..tracesTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
           json['traces_tags_in_languages'])
+      ..traces = json['traces'] as String?
       ..storesTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
           json['stores_tags_in_languages'])
       ..lastModifiedBy = json['last_modified_by'] as String?
@@ -172,6 +177,23 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       ..origins = json['origins'] as String?
       ..novaGroup = (json['nova_group'] as num?)?.toInt()
       ..website = json['link'] as String?
+      ..dataQualityTags = (json['data_quality_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
+      ..dataQualityBugsTags = (json['data_quality_bugs_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
+      ..dataQualityErrorsTags =
+          (json['data_quality_errors_tags'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList()
+      ..dataQualityInfoTags = (json['data_quality_info_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
+      ..dataQualityWarningsTags =
+          (json['data_quality_warnings_tags'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList()
       ..obsolete = JsonHelper.checkboxFromJSON(json['obsolete'])
       ..ownerFields = (json['owner_fields'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, (e as num).toInt()),
@@ -194,6 +216,12 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('product_name', instance.productName);
   writeNotNull('product_name_in_languages',
       LanguageHelper.toJsonStringMap(instance.productNameInLanguages));
+  writeNotNull(
+      'conservation_conditions_in_languages',
+      LanguageHelper.toJsonStringMap(
+          instance.conservationConditionsInLanguages));
+  writeNotNull('customer_service_in_languages',
+      LanguageHelper.toJsonStringMap(instance.customerServiceInLanguages));
   writeNotNull('generic_name', instance.genericName);
   writeNotNull('generic_name_in_languages',
       LanguageHelper.toJsonStringMap(instance.genericNameInLanguages));
@@ -280,6 +308,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('traces_tags', instance.tracesTags);
   writeNotNull('traces_tags_in_languages',
       LanguageHelper.toJsonStringsListMap(instance.tracesTagsInLanguages));
+  writeNotNull('traces', instance.traces);
   writeNotNull('stores_tags', instance.storesTags);
   writeNotNull('stores_tags_in_languages',
       LanguageHelper.toJsonStringsListMap(instance.storesTagsInLanguages));
@@ -312,6 +341,11 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('origins', instance.origins);
   writeNotNull('nova_group', instance.novaGroup);
   writeNotNull('link', instance.website);
+  writeNotNull('data_quality_tags', instance.dataQualityTags);
+  writeNotNull('data_quality_bugs_tags', instance.dataQualityBugsTags);
+  writeNotNull('data_quality_errors_tags', instance.dataQualityErrorsTags);
+  writeNotNull('data_quality_info_tags', instance.dataQualityInfoTags);
+  writeNotNull('data_quality_warnings_tags', instance.dataQualityWarningsTags);
   val['obsolete'] = JsonHelper.checkboxToJSON(instance.obsolete);
   writeNotNull('owner_fields', instance.ownerFields);
   writeNotNull('owner', instance.owner);

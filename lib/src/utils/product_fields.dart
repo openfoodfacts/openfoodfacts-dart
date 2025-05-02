@@ -1,5 +1,5 @@
-import 'language_helper.dart';
 import '../model/off_tagged.dart';
+import 'language_helper.dart';
 
 /// Fields of a [Product]
 enum ProductField implements OffTagged {
@@ -16,6 +16,14 @@ enum ProductField implements OffTagged {
   NAME_ALL_LANGUAGES(
     offTag: 'product_name_languages',
     inLanguagesProductField: ProductField.NAME_IN_LANGUAGES,
+    isAllLanguages: true,
+  ),
+  CONSERVATION_CONDITIONS_ALL_LANGUAGES(
+    offTag: 'conservation_conditions_languages',
+    isAllLanguages: true,
+  ),
+  CUSTOMER_SERVICE_ALL_LANGUAGES(
+    offTag: 'customer_service_languages',
     isAllLanguages: true,
   ),
   GENERIC_NAME(
@@ -175,6 +183,7 @@ enum ProductField implements OffTagged {
     offTag: 'traces_tags_',
     isInLanguages: true,
   ),
+  TRACES(offTag: 'traces'),
   STORES_TAGS(
     offTag: 'stores_tags',
     inLanguagesProductField: ProductField.STORES_TAGS_IN_LANGUAGES,
@@ -228,6 +237,11 @@ enum ProductField implements OffTagged {
   OBSOLETE(offTag: 'obsolete'),
   OWNER_FIELDS(offTag: 'owner_fields'),
   OWNER(offTag: 'owner'),
+  DATA_QUALITY_TAGS(offTag: 'data_quality_tags'),
+  DATA_QUALITY_BUGS_TAGS(offTag: 'data_quality_bugs_tags'),
+  DATA_QUALITY_ERRORS_TAGS(offTag: 'data_quality_errors_tags'),
+  DATA_QUALITY_INFO_TAGS(offTag: 'data_quality_info_tags'),
+  DATA_QUALITY_WARNINGS_TAGS(offTag: 'data_quality_warnings_tags'),
 
   /// All data as RAW from the server. E.g. packagings are only Strings there.
   RAW(offTag: 'raw'),
@@ -310,6 +324,8 @@ const Set<ProductField> fieldsInLanguages = {
 @Deprecated('Use ProductField.getAllLanguagesList() instead')
 const Set<ProductField> fieldsAllLanguages = {
   ProductField.NAME_ALL_LANGUAGES,
+  ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES,
+  ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES,
   ProductField.GENERIC_NAME_ALL_LANGUAGES,
   ProductField.ABBREVIATED_NAME_ALL_LANGUAGES,
   ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,

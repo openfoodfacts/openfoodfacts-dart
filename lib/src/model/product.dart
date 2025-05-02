@@ -1,5 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../interface/json_object.dart';
+import '../utils/json_helper.dart';
+import '../utils/language_helper.dart';
+import '../utils/product_fields.dart';
 import 'additives.dart';
 import 'allergens.dart';
 import 'attribute.dart';
@@ -14,10 +18,6 @@ import 'owner_field.dart';
 import 'product_image.dart';
 import 'product_packaging.dart';
 import 'product_type.dart';
-import '../interface/json_object.dart';
-import '../utils/json_helper.dart';
-import '../utils/language_helper.dart';
-import '../utils/product_fields.dart';
 
 part 'product.g.dart';
 
@@ -108,6 +108,20 @@ class Product extends JsonObject {
       fromJson: LanguageHelper.fromJsonStringMap,
       toJson: LanguageHelper.toJsonStringMap)
   Map<OpenFoodFactsLanguage, String>? productNameInLanguages;
+
+  /// Localized conservation conditions.
+  @JsonKey(
+      name: 'conservation_conditions_in_languages',
+      fromJson: LanguageHelper.fromJsonStringMap,
+      toJson: LanguageHelper.toJsonStringMap)
+  Map<OpenFoodFactsLanguage, String>? conservationConditionsInLanguages;
+
+  /// Localized customer service information.
+  @JsonKey(
+      name: 'customer_service_in_languages',
+      fromJson: LanguageHelper.fromJsonStringMap,
+      toJson: LanguageHelper.toJsonStringMap)
+  Map<OpenFoodFactsLanguage, String>? customerServiceInLanguages;
 
   /// Common name. Example: "Chocolate bar with milk and hazelnuts".
   @JsonKey(name: 'generic_name')
@@ -469,6 +483,8 @@ class Product extends JsonObject {
       toJson: LanguageHelper.toJsonStringsListMap,
       fromJson: LanguageHelper.fromJsonStringsListMap)
   Map<OpenFoodFactsLanguage, List<String>>? tracesTagsInLanguages;
+  @JsonKey(name: 'traces')
+  String? traces;
 
   @JsonKey(name: 'stores_tags')
   List<String>? storesTags;
@@ -575,6 +591,21 @@ class Product extends JsonObject {
   /// Link to the product page on the official site of the producer
   @JsonKey(name: 'link')
   String? website;
+
+  @JsonKey(name: 'data_quality_tags')
+  List<String>? dataQualityTags;
+
+  @JsonKey(name: 'data_quality_bugs_tags')
+  List<String>? dataQualityBugsTags;
+
+  @JsonKey(name: 'data_quality_errors_tags')
+  List<String>? dataQualityErrorsTags;
+
+  @JsonKey(name: 'data_quality_info_tags')
+  List<String>? dataQualityInfoTags;
+
+  @JsonKey(name: 'data_quality_warnings_tags')
+  List<String>? dataQualityWarningsTags;
 
   /// Is the product obsolete?
   @JsonKey(
@@ -693,6 +724,14 @@ class Product extends JsonObject {
         case ProductField.PACKAGING_TEXT_ALL_LANGUAGES:
           result.packagingTextInLanguages ??= {};
           result.packagingTextInLanguages![language] = label;
+          break;
+        case ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES:
+          result.conservationConditionsInLanguages ??= {};
+          result.conservationConditionsInLanguages![language] = label;
+          break;
+        case ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES:
+          result.customerServiceInLanguages ??= {};
+          result.customerServiceInLanguages![language] = label;
           break;
         default:
           // not supposed to be called with other ProductField values.
