@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.22.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.21.0...v3.22.0) (2025-04-28)
+
+
+### Features
+
+* 1066 - new parameters for proof upload ([#1071](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1071)) ([53b2c42](https://github.com/openfoodfacts/openfoodfacts-dart/commit/53b2c4216ee52ac2464d191d288c311fe6bc8757))
+* add additional parameters to PriceUser model ([#1065](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1065)) ([14174ef](https://github.com/openfoodfacts/openfoodfacts-dart/commit/14174ef6fc347266acedf3e33475ac969f772437))
+* Add flexibility to PriceTotalStats ([#1059](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1059)) ([3f29110](https://github.com/openfoodfacts/openfoodfacts-dart/commit/3f291104bdc497b4db9345af2b08627996bd35d0))
+* Add iso3Code field to OpenFoodFactsCountry enum per [#1067](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1067) ([#1068](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1068)) ([03c0e4e](https://github.com/openfoodfacts/openfoodfacts-dart/commit/03c0e4e3fdccc7de74dcd105d53b2706779e0874))
+* Added kind parameter to getPricesParameters and getProofsParameters ([#1064](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1064)) ([cac6076](https://github.com/openfoodfacts/openfoodfacts-dart/commit/cac6076dd9a830e8d00f143e49d5b07ef6c81d3d))
+
 ## [3.21.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.20.0...v3.21.0) (2025-03-29)
 
 
