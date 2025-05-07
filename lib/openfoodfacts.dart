@@ -162,6 +162,7 @@ export 'src/utils/invalid_barcodes.dart';
 export 'src/utils/json_helper.dart';
 export 'src/utils/language_helper.dart';
 export 'src/utils/nutriments_helper.dart';
+export 'src/utils/nutriscore_helper.dart';
 export 'src/utils/ocr_field.dart';
 export 'src/utils/open_food_api_configuration.dart';
 export 'src/utils/pnns_groups.dart';

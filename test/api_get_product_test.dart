@@ -124,6 +124,18 @@ void main() {
       expect(result.product, isNotNull);
       expect(result.product!.barcode, barcode);
 
+      final nutriScore =
+          result.product!.nutriscoreDetails?[NutriScoreVersion.v2023];
+      expect(nutriScore, isNotNull);
+      expect(nutriScore!.status, NutriScoreStatus.notApplicable);
+      expect(nutriScore.version, NutriScoreVersion.v2023);
+      expect(nutriScore.grade, isNull);
+      expect(nutriScore.score, isNull);
+      expect(nutriScore.category, isNotNull);
+      expect(nutriScore.category!.as2023, NutriScoreCategory2023.beverage);
+      expect(nutriScore.missingData, isEmpty);
+      expect(nutriScore.notApplicableCategory, "en:alcoholic-beverages");
+
       const Nutrient alcohol = Nutrient.alcohol;
       expect(result.product!.nutriments, isNotNull);
       final Nutriments nutriments = result.product!.nutriments!;
@@ -420,6 +432,18 @@ void main() {
       expect(result.product!.selectedImages!.length, 9);
 
       expect(result.product!.nutriscore, 'e');
+
+      final nutriScore =
+          result.product!.nutriscoreDetails?[NutriScoreVersion.v2023];
+      expect(nutriScore, isNotNull);
+      expect(nutriScore!.status, NutriScoreStatus.computed);
+      expect(nutriScore.version, NutriScoreVersion.v2023);
+      expect(nutriScore.grade, NutriScoreGrade.E);
+      expect(nutriScore.score, 25);
+      expect(nutriScore.category, isNotNull);
+      expect(nutriScore.category!.as2023, NutriScoreCategory2023.general);
+      expect(nutriScore.missingData, isEmpty);
+      expect(nutriScore.notApplicableCategory, isNull);
 
       expect(result.product!.nutriments, isNotNull);
       final Nutriments nutriments = result.product!.nutriments!;

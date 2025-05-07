@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../interface/json_object.dart';
 import '../utils/json_helper.dart';
 import '../utils/language_helper.dart';
+import '../utils/nutriscore_helper.dart';
 import '../utils/product_fields.dart';
 import 'nutriscore/nutriscore_details.dart';
 import 'additives.dart';
@@ -421,10 +422,10 @@ class Product extends JsonObject {
   /// Map of computed Nutri-Scores for different versions (e.g. 2021, 2023).
   @JsonKey(
     name: 'nutriscore',
-    fromJson: NutriScore.fromJson,
-    includeToJson: false,
+    fromJson: NutriScoreHelper.fromJson,
+    toJson: NutriScoreHelper.toJson,
   )
-  Map<NutriScoreVersion, NutriScore>? nutriscores;
+  Map<NutriScoreVersion, NutriScore>? nutriscoreDetails;
 
   @JsonKey(name: 'compared_to_category')
   String? comparedToCategory;
@@ -682,7 +683,7 @@ class Product extends JsonObject {
       this.nutrimentEnergyUnit,
       this.nutrimentDataPer,
       this.nutriscore,
-      this.nutriscores,
+      this.nutriscoreDetails,
       this.categories,
       this.categoriesTags,
       this.categoriesTagsInLanguages,
