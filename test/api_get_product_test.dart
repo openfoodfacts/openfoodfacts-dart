@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:openfoodfacts/src/model/nutriscore/nutriscore_grade.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';
@@ -137,6 +138,235 @@ void main() {
       expect(
         nutriments.getValue(alcohol, PerSize.serving),
         nutriments.getValue(alcohol, PerSize.oneHundredGrams),
+      );
+    });
+
+    test('check nutriscore data for alcohol', () async {
+      const String barcode = '3119780259625';
+      const String category = 'en:alcoholic-beverages';
+
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.NUTRISCORE_DETAILS],
+        version: ProductQueryVersion.v3,
+      );
+      final ProductResultV3 result = await getProductV3InProd(
+        configurations,
+      );
+      expect(result.status, ProductResultV3.statusSuccess);
+      expect(result.barcode, barcode);
+      expect(result.product, isNotNull);
+
+      expect(result.product!.nutriScoreDetails, isNotNull);
+      expect(result.product!.nutriScoreDetails!.nutriScore2021, isNotNull);
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.grade,
+        NutriScoreGrade.notApplicable,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.categoryAvailable,
+        isTrue,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.score,
+        isNull,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.nutrientsAvailable,
+        isTrue,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.nutriScoreComputed,
+        isFalse,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.nutriScoreApplicable,
+        isFalse,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.data,
+        isNotNull,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.data!.isBeverage,
+        isTrue,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.data!.isWater,
+        isFalse,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.data!.isCheese,
+        isFalse,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.data!.isFat,
+        isFalse,
+      );
+      expect(
+        result
+            .product!.nutriScoreDetails?.nutriScore2021?.notApplicableCategory,
+        category,
+      );
+
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023,
+        isNotNull,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023!.grade,
+        NutriScoreGrade.notApplicable,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023!.score,
+        isNull,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023!.data,
+        isNotNull,
+      );
+      expect(
+        result
+            .product!.nutriScoreDetails!.nutriScore2023!.notApplicableCategory,
+        category,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023!.data!.isBeverage,
+        isTrue,
+      );
+      expect(
+        result
+            .product!.nutriScoreDetails!.nutriScore2023!.data!.isRedMeatProduct,
+        isFalse,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023!.data!
+            .isFatOilNutsSeeds,
+        isFalse,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023!.data!.isWater,
+        isFalse,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023!.data!.isCheese,
+        isFalse,
+      );
+    });
+
+    test('check nutriscore data for cookies', () async {
+      const String barcode = BARCODE_DANISH_BUTTER_COOKIES;
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.NUTRISCORE_DETAILS],
+        version: ProductQueryVersion.v3,
+      );
+      final ProductResultV3 result = await getProductV3InProd(
+        configurations,
+      );
+
+      expect(result.status, ProductResultV3.statusSuccess);
+      expect(result.barcode, barcode);
+      expect(result.product, isNotNull);
+
+      expect(result.product!.nutriScoreDetails, isNotNull);
+      expect(result.product!.nutriScoreDetails!.nutriScore2021, isNotNull);
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.grade,
+        NutriScoreGrade.e,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.categoryAvailable,
+        isTrue,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.score,
+        23,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.nutrientsAvailable,
+        isTrue,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.nutriScoreComputed,
+        isTrue,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.nutriScoreApplicable,
+        isTrue,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.data,
+        isNotNull,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.data!.isBeverage,
+        isFalse,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.data!.isWater,
+        isFalse,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.data!.isCheese,
+        isFalse,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2021!.data!.isFat,
+        isFalse,
+      );
+      expect(
+        result
+            .product!.nutriScoreDetails?.nutriScore2021?.notApplicableCategory,
+        isNull,
+      );
+
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023,
+        isNotNull,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023!.grade,
+        NutriScoreGrade.e,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023!.score,
+        25,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023!.data,
+        isNotNull,
+      );
+      expect(
+        result
+            .product!.nutriScoreDetails!.nutriScore2023!.notApplicableCategory,
+        isNull,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023!.data!.isBeverage,
+        isFalse,
+      );
+      expect(
+        result
+            .product!.nutriScoreDetails!.nutriScore2023!.data!.isRedMeatProduct,
+        isFalse,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023!.data!
+            .isFatOilNutsSeeds,
+        isFalse,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023!.data!.isWater,
+        isFalse,
+      );
+      expect(
+        result.product!.nutriScoreDetails!.nutriScore2023!.data!.isCheese,
+        isFalse,
       );
     });
 

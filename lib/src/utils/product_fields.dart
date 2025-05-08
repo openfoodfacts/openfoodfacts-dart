@@ -127,6 +127,7 @@ enum ProductField implements OffTagged {
   NUTRIMENT_DATA_PER(offTag: 'nutrition_data_per'),
   NUTRITION_DATA(offTag: 'nutrition_data'),
   NUTRISCORE(offTag: 'nutrition_grade_fr'),
+  NUTRISCORE_DETAILS(offTag: 'nutriscore'),
   COMPARED_TO_CATEGORY(offTag: 'compared_to_category'),
   CATEGORIES(offTag: 'categories'),
   CATEGORIES_TAGS(
