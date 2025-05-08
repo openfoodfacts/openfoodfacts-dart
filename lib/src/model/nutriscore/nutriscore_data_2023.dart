@@ -12,7 +12,7 @@ class NutriScoreData2023 extends JsonObject {
     toJson: JsonHelper.boolToJSON,
     fromJson: JsonHelper.boolFromJSON,
   )
-  bool? countProteins; // or int?
+  bool? countProteins;
 
   @JsonKey(name: 'count_proteins_reason')
   String? countProteinsReason;
@@ -58,14 +58,6 @@ class NutriScoreData2023 extends JsonObject {
   @JsonKey(name: 'negative_points_max')
   int? negativePointsMax;
 
-  /*
-  "positive_nutrients": [
-  "proteins",
-  "fiber",
-  "fruits_vegetables_legumes"
-  ],
-
-   */
   @JsonKey(name: 'positive_points')
   int? positivePoints;
 

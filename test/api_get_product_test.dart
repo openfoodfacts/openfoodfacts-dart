@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/src/model/nutriscore/nutriscore_grade.dart';
 import 'package:test/test.dart';
 
 import 'test_constants.dart';
