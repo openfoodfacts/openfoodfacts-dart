@@ -1,5 +1,6 @@
 import 'package:http/http.dart';
 
+import '../model/product_type_filter.dart';
 import '../model/user.dart';
 import 'abstract_query_configuration.dart';
 import 'http_helper.dart';
@@ -27,6 +28,9 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
   /// The API version
   final ProductQueryVersion version;
 
+  /// Filter on a specific server.
+  final ProductTypeFilter? productTypeFilter;
+
   /// See [AbstractQueryConfiguration.languages] for
   /// parameter's description.
   ProductQueryConfiguration(
@@ -36,7 +40,17 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     super.languages,
     super.country,
     super.fields,
+    this.productTypeFilter,
   });
+
+  @override
+  Map<String, String> getParametersMap() {
+    final Map<String, String> result = super.getParametersMap();
+    if (productTypeFilter != null) {
+      result['product_type'] = productTypeFilter!.offTag;
+    }
+    return result;
+  }
 
   /// If the provided [ProductQueryVersion] matches the API V3 requirements
   bool matchesV3() => version.matchesV3();
@@ -49,8 +63,8 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     final User? user,
     final UriProductHelper uriHelper,
   ) async {
-    if (version == ProductQueryVersion.v3) {
-      return await HttpHelper().doGetRequest(
+    if (matchesV3()) {
+      return HttpHelper().doGetRequest(
         uriHelper.getUri(
           path: getUriPath(),
           queryParameters: getParametersMap(),

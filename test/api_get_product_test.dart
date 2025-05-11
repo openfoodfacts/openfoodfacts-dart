@@ -52,7 +52,7 @@ void main() {
 
   group('$OpenFoodAPIClient get products', () {
     test('get KP halfWidthOnMobile', () async {
-      const String barcode = '737628064502';
+      const String barcode = '0737628064502';
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
@@ -179,7 +179,6 @@ void main() {
           'Invertzuckersirup',
           'natürliches Aroma',
           'Schokolade Mürbegebäck',
-          'PflanzenPalmfett',
           'Schokoladenstückchen',
           'Kakaomasse',
           'Kakaobutter',
@@ -230,10 +229,45 @@ void main() {
       final Nutriments nutriments = result.product!.nutriments!;
       const PerSize perSize = PerSize.oneHundredGrams;
 
-      expect(nutriments.getValue(Nutrient.iron, perSize), 0.00041);
-      expect(nutriments.getValue(Nutrient.vitaminC, perSize), 0.0339);
+      expect(nutriments.getValue(Nutrient.iron, perSize), 2.32e-7);
+      expect(nutriments.getValue(Nutrient.vitaminC, perSize), 0.0000192);
     });
 
+    test('get localized conservation conditions and customer service',
+        () async {
+      const String barcode = '3017620425035';
+      ProductQueryConfiguration configuration = ProductQueryConfiguration(
+        barcode,
+        fields: [
+          ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES,
+          ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES
+        ],
+        version: ProductQueryVersion.v3,
+        language: OpenFoodFactsLanguage.JAPANESE,
+      );
+
+      ProductResultV3 result = await getProductV3InProd(configuration);
+
+      expect(result.status, ProductResultV3.statusSuccess);
+      expect(result.product != null, true);
+
+      final conservationConditions =
+          result.product!.conservationConditionsInLanguages;
+      final conservationConditionsInFrench =
+          conservationConditions![OpenFoodFactsLanguage.FRENCH];
+      expect(conservationConditions, isNotNull);
+      expect(conservationConditionsInFrench, isNotNull);
+      expect(conservationConditionsInFrench, isNotEmpty);
+      expect(conservationConditions, isNotEmpty);
+
+      final customerService = result.product!.customerServiceInLanguages;
+      final customerServiceInFrench =
+          customerService![OpenFoodFactsLanguage.FRENCH];
+      expect(customerServiceInFrench, isNotNull);
+      expect(customerServiceInFrench, isNotEmpty);
+      expect(customerService, isNotNull);
+      expect(customerService, isNotEmpty);
+    });
     test('get uncommon nutrients', () async {
       // PROD data as of 2021-07-16
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
@@ -655,7 +689,7 @@ void main() {
       expect(nutritionalQuality.first.settingNote, isNull);
       expect(nutritionalQuality.first.description, '');
       expect(nutritionalQuality.first.descriptionShort,
-          'Poor nutritional quality');
+          'Lower nutritional quality');
       expect(nutritionalQuality.first.title, 'Nutri-Score D');
       expect(nutritionalQuality.first.name, 'Nutri-Score');
       expect(nutritionalQuality.first.match,
@@ -877,6 +911,7 @@ void main() {
       final Ingredient ingredient = result.product!.ingredients!.firstWhere(
         (ingredient) => ingredient.text == 'huile de palme',
       );
+      expect(ingredient.isInTaxonomy, true);
       expect(ingredient.vegan, IngredientSpecialPropertyStatus.POSITIVE);
       expect(ingredient.vegetarian, IngredientSpecialPropertyStatus.POSITIVE);
       expect(ingredient.fromPalmOil, IngredientSpecialPropertyStatus.POSITIVE);
@@ -884,7 +919,6 @@ void main() {
 
     test('get knowledge panels', () async {
       const Set<String> someExpectedKeys = <String>{
-        'ecoscore',
         'environment_card',
         'health_card',
         'ingredients',
@@ -1367,6 +1401,69 @@ void main() {
       expect(productResult.status, ProductResultV3.statusSuccess);
       expect(productResult.product, isNotNull);
       checkProduct(productResult.product!);
+    });
+  });
+
+  group('$OpenFoodAPIClient get data quality tags', () {
+    const String barcode = '3661344723290';
+    const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+    const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
+    const ProductQueryVersion version = ProductQueryVersion.v3;
+
+    test('Without specifying fields', () async {
+      final ProductResultV3 productResult = await getProductV3InProd(
+        ProductQueryConfiguration(
+          barcode,
+          language: language,
+          country: country,
+          version: version,
+        ),
+      );
+      expect(productResult.product!.dataQualityTags, isNotNull);
+      expect(productResult.product!.dataQualityBugsTags, isNotNull);
+      expect(productResult.product!.dataQualityErrorsTags, isNotNull);
+      expect(productResult.product!.dataQualityInfoTags, isNotNull);
+      expect(productResult.product!.dataQualityWarningsTags, isNotNull);
+    });
+
+    test('Without ALL fields', () async {
+      final ProductResultV3 productResult = await getProductV3InProd(
+        ProductQueryConfiguration(
+          barcode,
+          fields: [
+            ProductField.DATA_QUALITY_TAGS,
+            ProductField.DATA_QUALITY_BUGS_TAGS,
+            ProductField.DATA_QUALITY_ERRORS_TAGS,
+            ProductField.DATA_QUALITY_INFO_TAGS,
+            ProductField.DATA_QUALITY_WARNINGS_TAGS,
+          ],
+          language: language,
+          country: country,
+          version: version,
+        ),
+      );
+      expect(productResult.product!.dataQualityTags, isNotNull);
+      expect(productResult.product!.dataQualityBugsTags, isNotNull);
+      expect(productResult.product!.dataQualityErrorsTags, isNotNull);
+      expect(productResult.product!.dataQualityInfoTags, isNotNull);
+      expect(productResult.product!.dataQualityWarningsTags, isNotNull);
+    });
+
+    test('With only data quality tags', () async {
+      final ProductResultV3 productResult = await getProductV3InProd(
+        ProductQueryConfiguration(
+          barcode,
+          fields: [ProductField.DATA_QUALITY_TAGS],
+          language: language,
+          country: country,
+          version: version,
+        ),
+      );
+      expect(productResult.product!.dataQualityTags, isNotNull);
+      expect(productResult.product!.dataQualityBugsTags, isNull);
+      expect(productResult.product!.dataQualityErrorsTags, isNull);
+      expect(productResult.product!.dataQualityInfoTags, isNull);
+      expect(productResult.product!.dataQualityWarningsTags, isNull);
     });
   });
 }

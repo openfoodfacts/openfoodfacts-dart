@@ -144,6 +144,7 @@ class JsonHelper {
       if (imageId != null) {
         final DateTime? uploaded =
             timestampToDate(fieldObject[_ALL_IMAGES_TAG_UPLOADED]);
+        final String? contributor = fieldObject[_ALL_IMAGES_TAG_UPLOADER];
         // get each number object (e.g. 200)
         for (var size in ImageSize.values) {
           var number = size.number;
@@ -159,7 +160,7 @@ class JsonHelper {
               height: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]),
               url: numberObject[_ALL_IMAGES_TAG_URL],
               uploaded: uploaded,
-              contributor: fieldObject[_ALL_IMAGES_TAG_UPLOADER],
+              contributor: contributor,
             ),
           );
         }
@@ -277,6 +278,9 @@ class JsonHelper {
               item[_ALL_IMAGES_TAG_UPLOADED] =
                   dateToTimestamp(productImage.uploaded);
             }
+            if (productImage.contributor != null) {
+              item[_ALL_IMAGES_TAG_UPLOADER] = productImage.contributor;
+            }
           } else {
             if (productImage.rev != null) {
               item[_ALL_IMAGES_TAG_REVISION] = productImage.rev.toString();
@@ -346,7 +350,7 @@ class JsonHelper {
   /// Returns a JSON map from [ProductPackaging]s
   static List<Map<String, dynamic>>? productPackagingsToJson(
       List<ProductPackaging>? packagings) {
-    if (packagings == null || packagings.isEmpty) {
+    if (packagings == null) {
       return null;
     }
 

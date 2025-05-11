@@ -47,7 +47,6 @@ void main() {
       '3608580823490',
       '3250391660995',
       '3760020506605',
-      '8722700202387',
       '3330720237330',
       '3535800940005',
       '20000691',
@@ -495,7 +494,8 @@ void main() {
       const String brands = 'Bjorg';
       const String categories = 'en:breakfast-cereals';
       const String labels = 'en:organic';
-      const String origins = 'en:european-union-and-non-european-union';
+      const String origins = 'Union Européenne et Non Union Européenne';
+      const String originsTags = 'en:european-union-and-non-european-union';
       const String manufacturingPlaces = 'Allemagne';
       const String purchasePlaces = 'france';
       const String stores = 'franprix';
@@ -513,13 +513,11 @@ void main() {
 
       final parameters = <Parameter>[
         TagFilter.fromType(
-            tagFilterType: TagFilterType.BRANDS, tagName: brands),
-        TagFilter.fromType(
             tagFilterType: TagFilterType.CATEGORIES, tagName: categories),
         TagFilter.fromType(
             tagFilterType: TagFilterType.LABELS, tagName: labels),
         TagFilter.fromType(
-            tagFilterType: TagFilterType.ORIGINS, tagName: origins),
+            tagFilterType: TagFilterType.ORIGINS, tagName: originsTags),
         TagFilter.fromType(
             tagFilterType: TagFilterType.MANUFACTURING_PLACES,
             tagName: manufacturingPlaces),
@@ -579,7 +577,9 @@ void main() {
         expect(product.ingredientsTags, contains(ingredients));
         expect(product.lang.code, lang);
         expect(product.novaGroup, novaGroup);
-        // TODO(monsieurtanuki): extract the origins, manufactoringPlaces, purchasePlaces, languages, creator and editors from the product, and compare them to expected values
+        expect(product.origins, origins);
+        expect(product.manufacturingPlaces, manufacturingPlaces);
+        expect(product.creator, creator);
       }
     });
 
@@ -1485,7 +1485,7 @@ void main() {
       BARCODE_CHIPOLATA: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
       BARCODE_FLEISCHWURST: _Score(100, MatchedProductStatusV2.VERY_GOOD_MATCH),
       BARCODE_POULET: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
-      BARCODE_SAUCISSON: _Score(0, MatchedProductStatusV2.UNKNOWN_MATCH),
+      BARCODE_SAUCISSON: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
       BARCODE_PIZZA: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
       BARCODE_ARDECHE: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
       BARCODE_CHORIZO: _Score(0, MatchedProductStatusV2.DOES_NOT_MATCH),
@@ -1498,8 +1498,8 @@ void main() {
       BARCODE_ORIENTALES,
       BARCODE_HACK,
       BARCODE_SCHNITZEL,
-      BARCODE_SAUCISSON,
       BARCODE_POULET,
+      BARCODE_SAUCISSON,
       BARCODE_PIZZA,
       BARCODE_ARDECHE,
       BARCODE_CHORIZO,

@@ -9,6 +9,83 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   const UriProductHelper uriHelper = uriHelperFoodTest;
 
+  test('save product test, set traces', () async {
+    final Map<String, String> possibleTraces = <String, String>{
+      'en:soybeans': 'Soja',
+      'en:lupin': 'Lupin',
+      'en:mustard': 'Moutarde',
+    };
+    const String barcode = '0048151623426';
+    const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+
+    Future<Product> getProduct() async {
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        language: language,
+        fields: [
+          ProductField.TRACES,
+          ProductField.TRACES_TAGS,
+          ProductField.TRACES_TAGS_IN_LANGUAGES,
+        ],
+        version: ProductQueryVersion.v3,
+      );
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+        configurations,
+        user: TestConstants.TEST_USER,
+        uriHelper: uriHelper,
+      );
+      expect(result.product, isNotNull);
+      final Product product = result.product!;
+      expect(product.traces, isNotNull);
+      expect(product.tracesTags, isNotNull);
+      expect(product.tracesTagsInLanguages, isNotNull);
+      expect(product.tracesTags!.length,
+          product.tracesTagsInLanguages![language]!.length);
+      if (product.traces!.isEmpty) {
+        expect(product.tracesTags, isEmpty);
+        expect(product.tracesTagsInLanguages![language], isEmpty);
+      }
+      return result.product!;
+    }
+
+    Future<void> saveProduct(final String traces) async {
+      final Status status = await OpenFoodAPIClient.saveProduct(
+        TestConstants.TEST_USER,
+        Product(barcode: barcode)..traces = traces,
+        uriHelper: uriHelper,
+        language: language,
+      );
+      expect(status.status, 1);
+      expect(status.statusVerbose, 'fields saved');
+    }
+
+    Future<void> saveEmptyTraces() async {
+      await saveProduct('');
+      final Product product2 = await getProduct();
+      expect(product2.traces, isEmpty);
+    }
+
+    Future<void> saveFullTraces() async {
+      await saveProduct(possibleTraces.values.join(','));
+      final Product product2 = await getProduct();
+      expect(product2.tracesTags, unorderedEquals(possibleTraces.keys));
+      expect(
+        product2.tracesTagsInLanguages![language],
+        unorderedEquals(possibleTraces.values),
+      );
+    }
+
+    final Product product = await getProduct();
+    if (product.tracesTags == null || product.tracesTags!.isNotEmpty) {
+      await saveEmptyTraces();
+      await saveFullTraces();
+    } else {
+      await saveFullTraces();
+      await saveEmptyTraces();
+    }
+  });
+
   group('$OpenFoodAPIClient add new products', () {
     String barcode_1 = '0048151623426';
     String quantity_1 = '230g';

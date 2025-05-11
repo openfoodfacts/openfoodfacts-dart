@@ -6,9 +6,84 @@ import 'package:test/test.dart';
 import 'test_constants.dart';
 
 void main() {
+  const User user = TestConstants.TEST_USER;
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  const String invalidBearerToken = 'invalid bearer token';
   const int HTTP_OK = 200;
+  const int pageNumber = 1;
+  const int pageSize = 20;
+
+  // TODO(monsieurtanuki): more relevant image if possible
+  final Uri initialImageUri = Uri.file('test/test_assets/ingredients_en.jpg');
+  final MediaType initialMediaType =
+      HttpHelper().imagineMediaType(initialImageUri.path)!;
+
+  Future<String> getBearerToken({
+    required final UriProductHelper uriHelper,
+  }) async {
+    final MaybeError<String> token =
+        await OpenPricesAPIClient.getAuthenticationToken(
+      username: user.userId,
+      password: user.password,
+      uriHelper: uriHelper,
+    );
+    expect(token.isError, isFalse);
+    expect(token.value, isNotEmpty);
+    return token.value;
+  }
+
+  Future<void> closeSession({
+    required final String bearerToken,
+    required final UriProductHelper uriHelper,
+  }) async {
+    MaybeError<bool> deleting = await OpenPricesAPIClient.deleteUserSession(
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    expect(deleting.isError, isFalse);
+    expect(deleting.value, isTrue);
+
+    deleting = await OpenPricesAPIClient.deleteUserSession(
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    expect(deleting.isError, isTrue);
+    expect(deleting.statusCode, Session.invalidActionWithAuthStatusCode);
+    expect(
+        deleting.detailError, contains(Session.invalidActionWithAuthMessage));
+  }
+
+  Future<void> deleteProofAndCloseSession({
+    required final int proofId,
+    required final String bearerToken,
+    required final UriProductHelper uriHelper,
+  }) async {
+    // delete proof first time: success
+    MaybeError<bool> deletedProof = await OpenPricesAPIClient.deleteProof(
+      proofId: proofId,
+      bearerToken: bearerToken,
+      uriHelper: uriHelper,
+    );
+    expect(deletedProof.isError, isFalse);
+    expect(deletedProof.value, isTrue);
+
+    // delete proof second time: failure
+    deletedProof = await OpenPricesAPIClient.deleteProof(
+      proofId: proofId,
+      bearerToken: bearerToken,
+      uriHelper: uriHelper,
+    );
+    expect(deletedProof.isError, isTrue);
+    expect(deletedProof.statusCode, 404);
+    expect(
+      deletedProof.detailError,
+      'No Proof matches the given query.',
+    );
+
+    await closeSession(
+      bearerToken: bearerToken,
+      uriHelper: uriHelper,
+    );
+  }
 
   group('$OpenPricesAPIClient default', () {
     const UriProductHelper uriHelper = uriHelperFoodProd;
@@ -110,15 +185,7 @@ void main() {
     });
 
     test('existing user', () async {
-      final MaybeError<String> token =
-          await OpenPricesAPIClient.getAuthenticationToken(
-        username: user.userId,
-        password: user.password,
-        uriHelper: uriHelper,
-      );
-      expect(token.isError, isFalse);
-      expect(token.value, isNotEmpty);
-      final String bearerToken = token.value;
+      final String bearerToken = await getBearerToken(uriHelper: uriHelper);
 
       MaybeError<Session> session = await OpenPricesAPIClient.getUserSession(
         uriHelper: uriHelper,
@@ -127,21 +194,10 @@ void main() {
       expect(session.isError, isFalse);
       expect(session.value.userId, user.userId);
 
-      MaybeError<bool> deleting = await OpenPricesAPIClient.deleteUserSession(
-        uriHelper: uriHelper,
+      await closeSession(
         bearerToken: bearerToken,
-      );
-      expect(deleting.isError, isFalse);
-      expect(deleting.value, isTrue);
-
-      deleting = await OpenPricesAPIClient.deleteUserSession(
         uriHelper: uriHelper,
-        bearerToken: bearerToken,
       );
-      expect(deleting.isError, isTrue);
-      expect(deleting.statusCode, Session.invalidActionWithAuthStatusCode);
-      expect(
-          deleting.detailError, contains(Session.invalidActionWithAuthMessage));
 
       session = await OpenPricesAPIClient.getUserSession(
         uriHelper: uriHelper,
@@ -161,24 +217,26 @@ void main() {
     test('create', () async {
       final Price initialPrice = Price()
         ..productCode = '3560071492755'
+        ..type = PriceType.product
         ..price = 3.99
         ..currency = Currency.EUR
         ..locationOSMId = 4966187139
         ..locationOSMType = LocationOSMType.node
+        ..priceIsDiscounted = true
+        ..discountType = DiscountType.seasonal
         ..date = DateTime(2024, 1, 18);
 
       final UpdatePriceParameters updatePriceParameters =
           UpdatePriceParameters()
             ..price = 12
-            ..priceWithoutDiscount = 13
-            ..priceIsDiscounted = true;
+            ..priceIsDiscounted = false;
 
-      String bearerToken = invalidBearerToken;
+      const String invalidBearerToken = 'invalid bearer token';
 
       // failing price creation with invalid token
       MaybeError<Price?> addedPrice = await OpenPricesAPIClient.createPrice(
         price: initialPrice,
-        bearerToken: bearerToken,
+        bearerToken: invalidBearerToken,
         uriHelper: uriHelper,
       );
       expect(addedPrice.isError, isTrue);
@@ -186,93 +244,27 @@ void main() {
       expect(addedPrice.detailError,
           contains(Session.invalidActionWithAuthMessage));
 
-      final ProofType uploadProofType = ProofType.receipt;
-      const Currency uploadCurrency = Currency.EUR;
-      final DateTime uploadDate = DateTime(2024, 1, 1);
+      final CreateProofParameters createProofParameters =
+          CreateProofParameters(ProofType.priceTag)
+            ..currency = Currency.EUR
+            ..ownerComment = 'just trying'
+            ..date = DateTime(2024, 1, 1);
 
-      final UpdateProofParameters updateProofParameters =
-          UpdateProofParameters()
-            ..type = ProofType.receipt
-            ..currency = Currency.USD
-            ..receiptPriceCount = 72
-            ..receiptPriceTotal = 1.75
-            ..date = DateTime(2024, 1, 2);
-
-      // TODO(monsieurtanuki): more relevant image if possible
-      final Uri initialImageUri =
-          Uri.file('test/test_assets/ingredients_en.jpg');
-      final MediaType initialMediaType =
-          HttpHelper().imagineMediaType(initialImageUri.path)!;
-
-      // failing proof upload with invalid token
-      MaybeError<Proof> uploadProof = await OpenPricesAPIClient.uploadProof(
-        proofType: uploadProofType,
-        imageUri: initialImageUri,
-        mediaType: initialMediaType,
-        bearerToken: bearerToken,
-        uriHelper: uriHelper,
-      );
-      expect(uploadProof.isError, isTrue);
-      expect(uploadProof.statusCode, Session.invalidActionWithAuthStatusCode);
-      expect(uploadProof.detailError,
-          contains(Session.invalidActionWithAuthMessage));
-
-      // authentication
-      final MaybeError<String> token =
-          await OpenPricesAPIClient.getAuthenticationToken(
-        username: user.userId,
-        password: user.password,
-        uriHelper: uriHelper,
-      );
-      expect(token.isError, isFalse);
-      expect(token.value, isNotEmpty);
-      bearerToken = token.value;
+      final String bearerToken = await getBearerToken(uriHelper: uriHelper);
 
       // successful proof upload with valid token
-      uploadProof = await OpenPricesAPIClient.uploadProof(
-        proofType: uploadProofType,
+      final MaybeError<Proof> uploadProof =
+          await OpenPricesAPIClient.uploadProof(
+        createProofParameters: createProofParameters,
         imageUri: initialImageUri,
         mediaType: initialMediaType,
-        currency: uploadCurrency,
-        date: uploadDate,
         bearerToken: bearerToken,
         uriHelper: uriHelper,
       );
       expect(uploadProof.isError, isFalse);
-      expect(uploadProof.value.type, uploadProofType);
-      expect(uploadProof.value.owner, user.userId);
       expect(uploadProof.value.id, isNotNull);
-      expect(uploadProof.value.priceCount, 0);
-      expect(uploadProof.value.mimetype, initialMediaType.toString());
-      expect(uploadProof.value.currency, uploadCurrency);
-      expect(uploadProof.value.date, uploadDate);
 
       final int proofId = uploadProof.value.id;
-
-      // successful proof update
-      MaybeError<bool> updateProof = await OpenPricesAPIClient.updateProof(
-        proofId,
-        parameters: updateProofParameters,
-        bearerToken: bearerToken,
-        uriHelper: uriHelper,
-      );
-      expect(updateProof.isError, isFalse);
-
-      final MaybeError<Proof> maybeProof = await OpenPricesAPIClient.getProof(
-        proofId,
-        uriHelper: uriHelper,
-        bearerToken: bearerToken,
-      );
-      expect(maybeProof.isError, isFalse);
-      expect(maybeProof.value.id, proofId);
-      expect(maybeProof.value.type, updateProofParameters.type);
-      expect(maybeProof.value.date, updateProofParameters.date);
-      expect(maybeProof.value.currency, updateProofParameters.currency);
-      expect(maybeProof.value.receiptPriceCount,
-          updateProofParameters.receiptPriceCount);
-      expect(maybeProof.value.receiptPriceTotal,
-          updateProofParameters.receiptPriceTotal);
-
       initialPrice.proofId = proofId;
 
       // failing price creation with valid token but invalid dates
@@ -284,8 +276,8 @@ void main() {
       expect(addedPrice.isError, isTrue);
 
       // successful price creation
-      initialPrice.date = updateProofParameters.date!;
-      initialPrice.currency = updateProofParameters.currency!;
+      initialPrice.date = createProofParameters.date!;
+      initialPrice.currency = createProofParameters.currency!;
       addedPrice = await OpenPricesAPIClient.createPrice(
         price: initialPrice,
         bearerToken: bearerToken,
@@ -294,11 +286,13 @@ void main() {
       expect(addedPrice.isError, isFalse);
       final Price addedValue = addedPrice.value!;
       expect(addedValue.productCode, initialPrice.productCode);
+      expect(addedValue.type, initialPrice.type);
       expect(addedValue.price, initialPrice.price);
       expect(
           addedValue.priceWithoutDiscount, initialPrice.priceWithoutDiscount);
       expect(addedValue.priceIsDiscounted,
           initialPrice.priceIsDiscounted ?? false);
+      expect(addedValue.discountType, initialPrice.discountType);
       expect(addedValue.currency, initialPrice.currency);
       expect(addedValue.locationOSMId, initialPrice.locationOSMId);
       expect(addedValue.locationOSMType, initialPrice.locationOSMType);
@@ -315,6 +309,19 @@ void main() {
         uriHelper: uriHelper,
       );
       expect(updatedPrice.isError, isFalse);
+      expect(updatedPrice.value, isTrue);
+
+      final MaybeError<Price> updatedPriceValue =
+          await OpenPricesAPIClient.getPrice(
+        priceId,
+        uriHelper: uriHelper,
+      );
+      expect(updatedPriceValue.isError, isFalse);
+      expect(updatedPriceValue.value.price, updatePriceParameters.price);
+      expect(updatedPriceValue.value.priceIsDiscounted,
+          updatePriceParameters.priceIsDiscounted);
+      expect(updatedPriceValue.value.priceWithoutDiscount, isNull);
+      expect(updatedPriceValue.value.discountType, isNull);
 
       // delete price first time: success
       MaybeError<bool> deletedPrice = await OpenPricesAPIClient.deletePrice(
@@ -338,42 +345,15 @@ void main() {
         'No Price matches the given query.',
       );
 
-      // delete proof first time: success
-      MaybeError<bool> deletedProof = await OpenPricesAPIClient.deleteProof(
+      await deleteProofAndCloseSession(
         proofId: proofId,
         bearerToken: bearerToken,
         uriHelper: uriHelper,
       );
-      expect(deletedProof.isError, isFalse);
-      expect(deletedProof.value, isTrue);
-
-      // delete proof second time: failure
-      deletedProof = await OpenPricesAPIClient.deleteProof(
-        proofId: proofId,
-        bearerToken: bearerToken,
-        uriHelper: uriHelper,
-      );
-      expect(deletedProof.isError, isTrue);
-      expect(deletedProof.statusCode, 404);
-      expect(
-        deletedProof.detailError,
-        'No Proof matches the given query.',
-      );
-
-      // close session
-      final MaybeError<bool> closedSession =
-          await OpenPricesAPIClient.deleteUserSession(
-        uriHelper: uriHelper,
-        bearerToken: bearerToken,
-      );
-      expect(closedSession.isError, isFalse);
-      expect(closedSession.value, isTrue);
     }, timeout: Timeout(Duration(seconds: 60)));
 
     test('get prices', () async {
       const UriProductHelper uriHelper = uriHelperFoodProd;
-      const int pageNumber = 1;
-      const int pageSize = 20;
 
       late GetPricesResult result;
 
@@ -411,7 +391,6 @@ void main() {
           expect(price.categoryTag, isNull);
         }
         expect(price.price, greaterThan(0));
-        expect(price.locationOSMId, greaterThan(0));
         expect(price.currency, isNotNull);
         expect(price.price, isNotNull);
       }
@@ -514,8 +493,8 @@ void main() {
 
       final MaybeError<Location> maybeSameOSMLocation =
           await OpenPricesAPIClient.getOSMLocation(
-        locationOSMType: location.type,
-        locationOSMId: location.osmId,
+        locationOSMType: location.type!,
+        locationOSMId: location.osmId!,
         uriHelper: uriHelper,
       );
       expect(maybeSameOSMLocation.isError, isFalse);
@@ -556,9 +535,6 @@ void main() {
     });
 
     test('get locations', () async {
-      const int pageNumber = 1;
-      const int pageSize = 20;
-
       late GetLocationsResult result;
 
       // oldest first
@@ -707,11 +683,250 @@ void main() {
         'No Product matches the given query.',
       );
     });
+
+    test('get products', () async {
+      late GetPriceProductsResult result;
+
+      // oldest first
+      GetPriceProductsParameters parameters = GetPriceProductsParameters()
+        ..orderBy = <OrderBy<GetPriceProductsOrderField>>[
+          OrderBy(field: GetPriceProductsOrderField.created, ascending: true),
+        ]
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber;
+      MaybeError<GetPriceProductsResult> maybeResults;
+      try {
+        maybeResults = await OpenPricesAPIClient.getPriceProducts(
+          parameters,
+          uriHelper: uriHelper,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.numberOfPages, (result.total! / result.pageSize!).ceil());
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(pageSize));
+      final DateTime oldestDate = result.items!.first.created;
+
+      // newest first
+      parameters = GetPriceProductsParameters()
+        ..orderBy = <OrderBy<GetPriceProductsOrderField>>[
+          OrderBy(field: GetPriceProductsOrderField.created, ascending: false),
+        ]
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber;
+      try {
+        maybeResults = await OpenPricesAPIClient.getPriceProducts(
+          parameters,
+          uriHelper: uriHelper,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.numberOfPages, (result.total! / result.pageSize!).ceil());
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(pageSize));
+      final DateTime newestDate = result.items!.first.created;
+
+      expect(
+        newestDate.millisecondsSinceEpoch,
+        greaterThan(oldestDate.millisecondsSinceEpoch),
+      );
+
+      // most prices first
+      parameters = GetPriceProductsParameters()
+        ..orderBy = <OrderBy<GetPriceProductsOrderField>>[
+          OrderBy(
+            field: GetPriceProductsOrderField.priceCount,
+            ascending: false,
+          ),
+        ]
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber;
+      try {
+        maybeResults = await OpenPricesAPIClient.getPriceProducts(
+          parameters,
+          uriHelper: uriHelper,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.numberOfPages, (result.total! / result.pageSize!).ceil());
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(pageSize));
+      // value as of 2024-12-05
+      expect(result.items!.first.priceCount, greaterThanOrEqualTo(107));
+
+      parameters = GetPriceProductsParameters()..brandsLike = 'ferrero';
+      maybeResults = await OpenPricesAPIClient.getPriceProducts(
+        parameters,
+        uriHelper: uriHelper,
+      );
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      // value as of 2024-12-05
+      expect(result.total, greaterThanOrEqualTo(2040));
+
+      // values as of 2025-01-03
+      const Map<Flavor?, int> expectedMinCounts = <Flavor?, int>{
+        Flavor.openFoodFacts: 3679133,
+        Flavor.openBeautyFacts: 34557,
+        Flavor.openPetFoodFacts: 10252,
+        Flavor.openProductFacts: 15736,
+        null: 3745994,
+      };
+      for (final Flavor? flavor in expectedMinCounts.keys) {
+        parameters = GetPriceProductsParameters()..source = flavor;
+        maybeResults = await OpenPricesAPIClient.getPriceProducts(
+          parameters,
+          uriHelper: uriHelper,
+        );
+        expect(maybeResults.isError, isFalse);
+        result = maybeResults.value;
+        expect(result.total, greaterThanOrEqualTo(expectedMinCounts[flavor]!));
+      }
+    });
   });
 
   group('$OpenPricesAPIClient Proofs', () {
     const UriProductHelper uriHelper = uriHelperFoodTest;
-    const User user = TestConstants.TEST_USER;
+
+    void checkProof(
+      final Proof proof,
+      final CommonProofParameters parameters,
+    ) {
+      expect(proof.type, parameters.type);
+      expect(proof.owner, user.userId);
+      expect(proof.id, isNotNull);
+      expect(proof.priceCount, 0);
+      expect(proof.mimetype, initialMediaType.toString());
+      expect(proof.currency, parameters.currency);
+      expect(proof.date, parameters.date);
+      expect(proof.locationOSMId, parameters.locationOSMId);
+      expect(proof.locationOSMType, parameters.locationOSMType);
+      expect(proof.locationId, parameters.locationId);
+      expect(proof.ownerComment, parameters.ownerComment);
+      if (proof.type == ProofType.receipt) {
+        expect(proof.receiptPriceCount, parameters.receiptPriceCount);
+        expect(proof.receiptPriceTotal, parameters.receiptPriceTotal);
+        expect(proof.receiptOnlineDeliveryCosts,
+            parameters.receiptOnlineDeliveryCosts);
+        expect(proof.ownerConsumption, parameters.ownerConsumption);
+      }
+      if (proof.type == ProofType.priceTag) {
+        expect(proof.readyForPriceTagValidation,
+            parameters.readyForPriceTagValidation);
+      }
+    }
+
+    Future<void> checkProofParameters(
+      final CreateProofParameters createProofParameters,
+      final UpdateProofParameters updateProofParameters,
+    ) async {
+      final String bearerToken = await getBearerToken(uriHelper: uriHelper);
+
+      // successful proof upload with valid token
+      final MaybeError<Proof> uploadProof =
+          await OpenPricesAPIClient.uploadProof(
+        createProofParameters: createProofParameters,
+        imageUri: initialImageUri,
+        mediaType: initialMediaType,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(uploadProof.isError, isFalse);
+      checkProof(uploadProof.value, createProofParameters);
+
+      final int proofId = uploadProof.value.id;
+
+      // successful proof update
+      MaybeError<bool> updateProof = await OpenPricesAPIClient.updateProof(
+        proofId,
+        parameters: updateProofParameters,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(updateProof.isError, isFalse);
+
+      final MaybeError<Proof> maybeProof = await OpenPricesAPIClient.getProof(
+        proofId,
+        uriHelper: uriHelper,
+        bearerToken: bearerToken,
+      );
+      expect(maybeProof.isError, isFalse);
+      expect(maybeProof.value.id, proofId);
+      checkProof(maybeProof.value, updateProofParameters);
+
+      await deleteProofAndCloseSession(
+        proofId: proofId,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+    }
+
+    test(
+      'upload and update PRICE TAG',
+      () async => checkProofParameters(
+        CreateProofParameters(ProofType.priceTag)
+          ..currency = Currency.EUR
+          ..ownerComment = 'just trying'
+          ..date = DateTime(2024, 1, 1)
+          ..readyForPriceTagValidation = true,
+        UpdateProofParameters()
+          ..type = ProofType.priceTag
+          ..currency = Currency.USD
+          ..ownerComment = 'nothing in the end'
+          ..date = DateTime(2024, 1, 2)
+          ..readyForPriceTagValidation = false,
+      ),
+    );
+
+    test(
+      'upload and update RECEIPT',
+      () async => checkProofParameters(
+        CreateProofParameters(ProofType.receipt)
+          ..currency = Currency.EUR
+          ..ownerComment = 'just trying'
+          ..date = DateTime(2024, 1, 1)
+          ..receiptPriceCount = 77
+          ..receiptPriceTotal = 1.75
+          ..receiptOnlineDeliveryCosts = 14
+          ..ownerConsumption = false,
+        UpdateProofParameters()
+          ..type = ProofType.receipt
+          ..currency = Currency.USD
+          ..ownerComment = 'nothing in the end'
+          ..date = DateTime(2024, 1, 2)
+          ..receiptPriceCount = 72
+          ..receiptPriceTotal = 1.75
+          ..receiptOnlineDeliveryCosts = 15
+          ..ownerConsumption = true,
+      ),
+    );
 
     test('image file media type', () async {
       final Map<String, MediaType> expectedMediaTypes = <String, MediaType>{
@@ -729,22 +944,12 @@ void main() {
     });
 
     test('get proofs', () async {
-      const int pageNumber = 1;
-      const int pageSize = 20;
       const GetProofsOrderField orderField = GetProofsOrderField.created;
       const ProofType proofType = ProofType.receipt;
 
       late GetProofsResult result;
 
-      final MaybeError<String> token =
-          await OpenPricesAPIClient.getAuthenticationToken(
-        username: user.userId,
-        password: user.password,
-        uriHelper: uriHelper,
-      );
-      expect(token.isError, isFalse);
-      expect(token.value, isNotEmpty);
-      final String bearerToken = token.value;
+      final String bearerToken = await getBearerToken(uriHelper: uriHelper);
 
       // oldest first
       GetProofsParameters parameters = GetProofsParameters()
@@ -857,8 +1062,6 @@ void main() {
     const UriProductHelper uriHelper = uriHelperFoodProd;
 
     test('get users', () async {
-      const int pageNumber = 1;
-      const int pageSize = 20;
       const GetUsersOrderField orderField = GetUsersOrderField.priceCount;
 
       late GetUsersResult result;
@@ -928,6 +1131,23 @@ void main() {
       }
 
       expect(priceCountMax!, greaterThan(priceCountMin!));
+    });
+  });
+
+  group('$OpenPricesAPIClient Issues', () {
+    test('issue #1045', () async {
+      const UriProductHelper uriHelper = uriHelperFoodProd;
+
+      final MaybeError<Price> maybeResults = await OpenPricesAPIClient.getPrice(
+        80341,
+        uriHelper: uriHelper,
+      );
+      expect(maybeResults.isError, isFalse);
+      final Price price = maybeResults.value;
+      expect(price.productCode, '4010534012093');
+      expect(price.price, 2.99);
+      expect(price.currency, Currency.EUR);
+      expect(price.date, DateTime(2025, 2, 11));
     });
   });
 }

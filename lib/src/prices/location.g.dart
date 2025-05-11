@@ -7,9 +7,9 @@ part of 'location.dart';
 // **************************************************************************
 
 Location _$LocationFromJson(Map<String, dynamic> json) => Location()
-  ..osmId = (json['osm_id'] as num).toInt()
+  ..osmId = (json['osm_id'] as num?)?.toInt()
   ..locationType = $enumDecode(_$LocationTypeEnumMap, json['type'])
-  ..type = $enumDecode(_$LocationOSMTypeEnumMap, json['osm_type'])
+  ..type = $enumDecodeNullable(_$LocationOSMTypeEnumMap, json['osm_type'])
   ..priceCount = (json['price_count'] as num?)?.toInt()
   ..userCount = (json['user_count'] as num?)?.toInt()
   ..productCount = (json['product_count'] as num?)?.toInt()
@@ -32,7 +32,7 @@ Location _$LocationFromJson(Map<String, dynamic> json) => Location()
 Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
       'osm_id': instance.osmId,
       'type': _$LocationTypeEnumMap[instance.locationType]!,
-      'osm_type': _$LocationOSMTypeEnumMap[instance.type]!,
+      'osm_type': _$LocationOSMTypeEnumMap[instance.type],
       'price_count': instance.priceCount,
       'user_count': instance.userCount,
       'product_count': instance.productCount,

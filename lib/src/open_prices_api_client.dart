@@ -12,6 +12,8 @@ import 'prices/proof.dart';
 import 'prices/get_locations_parameters.dart';
 import 'prices/get_locations_result.dart';
 import 'prices/get_parameters_helper.dart';
+import 'prices/get_price_products_parameters.dart';
+import 'prices/get_price_products_result.dart';
 import 'prices/get_prices_parameters.dart';
 import 'prices/get_prices_result.dart';
 import 'prices/get_proofs_parameters.dart';
@@ -26,6 +28,7 @@ import 'prices/proof_type.dart';
 import 'prices/session.dart';
 import 'prices/update_price_parameters.dart';
 import 'prices/update_proof_parameters.dart';
+import 'prices/create_proof_parameters.dart';
 import 'utils/http_helper.dart';
 import 'utils/open_food_api_configuration.dart';
 import 'utils/uri_helper.dart';
@@ -86,6 +89,32 @@ class OpenPricesAPIClient {
       }
     }
     return MaybeError<GetPricesResult>.responseError(response);
+  }
+
+  /// Gets a price.
+  static Future<MaybeError<Price>> getPrice(
+    final int priceId, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Uri uri = getUri(
+      path: '/api/v1/prices/$priceId',
+      uriHelper: uriHelper,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<Price>.value(
+          Price.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<Price>.responseError(response);
   }
 
   static Future<MaybeError<Location>> getOSMLocation({
@@ -161,6 +190,34 @@ class OpenPricesAPIClient {
       }
     }
     return MaybeError<Location>.responseError(response);
+  }
+
+  static Future<MaybeError<GetPriceProductsResult>> getPriceProducts(
+    final GetPriceProductsParameters parameters, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
+  }) async {
+    final Uri uri = getUri(
+      path: '/api/v1/products',
+      queryParameters: parameters.getQueryParameters(),
+      uriHelper: uriHelper,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<GetPriceProductsResult>.value(
+          GetPriceProductsResult.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<GetPriceProductsResult>.responseError(response);
   }
 
   static Future<MaybeError<PriceProduct>> getPriceProductById(
@@ -337,6 +394,9 @@ class OpenPricesAPIClient {
       uriHelper: uriHelper,
     );
     final Map<String, dynamic> body = <String, dynamic>{
+      'price': price.price,
+      'currency': price.currency.name,
+      'date': GetParametersHelper.formatDate(price.date),
       if (price.productCode != null) 'product_code': price.productCode,
       if (price.productName != null) 'product_name': price.productName,
       if (price.categoryTag != null) 'category_tag': price.categoryTag,
@@ -348,11 +408,11 @@ class OpenPricesAPIClient {
         'price_without_discount': price.priceWithoutDiscount,
       if (price.priceIsDiscounted != null)
         'price_is_discounted': price.priceIsDiscounted,
-      'price': price.price,
-      'currency': price.currency.name,
-      'location_osm_id': price.locationOSMId,
-      'location_osm_type': price.locationOSMType.offTag,
-      'date': GetParametersHelper.formatDate(price.date),
+      if (price.discountType != null)
+        'discount_type': price.discountType!.offTag,
+      if (price.locationOSMId != null) 'location_osm_id': price.locationOSMId,
+      if (price.locationOSMType != null)
+        'location_osm_type': price.locationOSMType!.offTag,
       if (price.receiptQuantity != null)
         'receipt_quantity': price.receiptQuantity,
     };
@@ -453,15 +513,20 @@ class OpenPricesAPIClient {
     return MaybeError<GetProofsResult>.responseError(response);
   }
 
+// TODO: deprecated from 2025-04-25 regarding single parameters; remove them when old enough
   static Future<MaybeError<Proof>> uploadProof({
-    required final ProofType proofType,
+    @Deprecated('Use CreateProofParameters instead') final ProofType? proofType,
     required final Uri imageUri,
     required final MediaType mediaType,
-    final int? locationOSMId,
+    final CreateProofParameters? createProofParameters,
+    @Deprecated('Use CreateProofParameters instead') final int? locationOSMId,
+    @Deprecated('Use CreateProofParameters instead')
     final LocationOSMType? locationOSMType,
-    final DateTime? date,
-    final Currency? currency,
+    @Deprecated('Use CreateProofParameters instead') final DateTime? date,
+    @Deprecated('Use CreateProofParameters instead') final Currency? currency,
+    @Deprecated('Use CreateProofParameters instead')
     final int? receiptPriceCount,
+    @Deprecated('Use CreateProofParameters instead')
     final num? receiptPriceTotal,
     required final String bearerToken,
     final UriProductHelper uriHelper = uriHelperFoodProd,
@@ -476,20 +541,25 @@ class OpenPricesAPIClient {
       'Authorization': 'bearer $bearerToken',
       'Content-Type': 'multipart/form-data',
     });
-    request.fields.addAll(
-      <String, String>{
-        'type': proofType.offTag,
-        if (locationOSMId != null) 'location_osm_id': locationOSMId.toString(),
-        if (locationOSMType != null)
-          'location_osm_type': locationOSMType.offTag,
-        if (date != null) 'date': GetParametersHelper.formatDate(date),
-        if (currency != null) 'currency': currency.name,
-        if (receiptPriceCount != null)
-          'receipt_price_count': receiptPriceCount.toString(),
-        if (receiptPriceTotal != null)
-          'receipt_price_total': receiptPriceTotal.toString(),
-      },
-    );
+    if (createProofParameters != null) {
+      request.fields.addAll(createProofParameters.toData());
+    } else {
+      request.fields.addAll(
+        <String, String>{
+          'type': proofType!.offTag,
+          if (locationOSMId != null)
+            'location_osm_id': locationOSMId.toString(),
+          if (locationOSMType != null)
+            'location_osm_type': locationOSMType.offTag,
+          if (date != null) 'date': GetParametersHelper.formatDate(date),
+          if (currency != null) 'currency': currency.name,
+          if (receiptPriceCount != null)
+            'receipt_price_count': receiptPriceCount.toString(),
+          if (receiptPriceTotal != null)
+            'receipt_price_total': receiptPriceTotal.toString(),
+        },
+      );
+    }
     final List<int> fileBytes = await UriReader.instance.readAsBytes(imageUri);
     final String filename = basename(imageUri.toString());
     final http.MultipartFile multipartFile = http.MultipartFile.fromBytes(

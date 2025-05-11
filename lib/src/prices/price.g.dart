@@ -17,11 +17,13 @@ Price _$PriceFromJson(Map<String, dynamic> json) => Price()
   ..price = json['price'] as num
   ..priceIsDiscounted = json['price_is_discounted'] as bool?
   ..priceWithoutDiscount = json['price_without_discount'] as num?
+  ..discountType =
+      $enumDecodeNullable(_$DiscountTypeEnumMap, json['discount_type'])
   ..pricePer = $enumDecodeNullable(_$PricePerEnumMap, json['price_per'])
   ..currency = $enumDecode(_$CurrencyEnumMap, json['currency'])
-  ..locationOSMId = (json['location_osm_id'] as num).toInt()
+  ..locationOSMId = (json['location_osm_id'] as num?)?.toInt()
   ..locationOSMType =
-      $enumDecode(_$LocationOSMTypeEnumMap, json['location_osm_type'])
+      $enumDecodeNullable(_$LocationOSMTypeEnumMap, json['location_osm_type'])
   ..date = JsonHelper.stringTimestampToDate(json['date'])
   ..proofId = (json['proof_id'] as num?)?.toInt()
   ..id = (json['id'] as num).toInt()
@@ -37,6 +39,7 @@ Price _$PriceFromJson(Map<String, dynamic> json) => Price()
       ? null
       : PriceProduct.fromJson(json['product'] as Map<String, dynamic>)
   ..receiptQuantity = (json['receipt_quantity'] as num?)?.toInt()
+  ..type = $enumDecodeNullable(_$PriceTypeEnumMap, json['type'])
   ..owner = json['owner'] as String
   ..created = JsonHelper.stringTimestampToDate(json['created'])
   ..updated = JsonHelper.nullableStringTimestampToDate(json['updated']);
@@ -50,10 +53,11 @@ Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
       'price': instance.price,
       'price_is_discounted': instance.priceIsDiscounted,
       'price_without_discount': instance.priceWithoutDiscount,
+      'discount_type': _$DiscountTypeEnumMap[instance.discountType],
       'price_per': _$PricePerEnumMap[instance.pricePer],
       'currency': _$CurrencyEnumMap[instance.currency]!,
       'location_osm_id': instance.locationOSMId,
-      'location_osm_type': _$LocationOSMTypeEnumMap[instance.locationOSMType]!,
+      'location_osm_type': _$LocationOSMTypeEnumMap[instance.locationOSMType],
       'date': instance.date.toIso8601String(),
       'proof_id': instance.proofId,
       'id': instance.id,
@@ -63,10 +67,22 @@ Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
       'location': instance.location,
       'product': instance.product,
       'receipt_quantity': instance.receiptQuantity,
+      'type': _$PriceTypeEnumMap[instance.type],
       'owner': instance.owner,
       'created': instance.created.toIso8601String(),
       'updated': instance.updated?.toIso8601String(),
     };
+
+const _$DiscountTypeEnumMap = {
+  DiscountType.quantity: 'QUANTITY',
+  DiscountType.sale: 'SALE',
+  DiscountType.seasonal: 'SEASONAL',
+  DiscountType.loyaltyProgram: 'LOYALTY_PROGRAM',
+  DiscountType.expiresSoon: 'EXPIRES_SOON',
+  DiscountType.pickItYourself: 'PICK_IT_YOURSELF',
+  DiscountType.secondHand: 'SECOND_HAND',
+  DiscountType.other: 'OTHER',
+};
 
 const _$PricePerEnumMap = {
   PricePer.unit: 'UNIT',
@@ -385,4 +401,9 @@ const _$LocationOSMTypeEnumMap = {
   LocationOSMType.node: 'NODE',
   LocationOSMType.way: 'WAY',
   LocationOSMType.relation: 'RELATION',
+};
+
+const _$PriceTypeEnumMap = {
+  PriceType.product: 'PRODUCT',
+  PriceType.category: 'CATEGORY',
 };

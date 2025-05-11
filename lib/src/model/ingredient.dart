@@ -17,6 +17,12 @@ class Ingredient extends JsonObject {
   @JsonKey()
   String? text;
 
+  @JsonKey(
+      name: 'is_in_taxonomy',
+      includeIfNull: false,
+      fromJson: JsonObject.parseBool)
+  bool? isInTaxonomy;
+
   @JsonKey(includeIfNull: false, fromJson: JsonObject.parseDouble)
   double? percent;
 
@@ -57,6 +63,7 @@ class Ingredient extends JsonObject {
       {this.rank,
       this.id,
       this.text,
+      this.isInTaxonomy,
       this.percent,
       this.percentEstimate,
       this.vegan,
@@ -76,6 +83,7 @@ class Ingredient extends JsonObject {
       '${id == null ? '' : 'id=$id'}'
       '${rank == null ? '' : ',rank=$rank'}'
       '${text == null ? '' : ',text=$text'}'
+      '${isInTaxonomy == null ? '' : ',isInTaxonomy=$isInTaxonomy'}'
       '${percent == null ? '' : ',percent=$percent'}'
       '${percentEstimate == null ? '' : ',percentEstimate=$percentEstimate'}'
       '${vegan == null ? '' : ',vegan=$vegan'}'
