@@ -1,6 +1,6 @@
 import '../utils/json_helper.dart';
 
-/// Get Challege List
+/// Get Challenge List
 class GetChallengeList {
   final Map<String, dynamic> json;
 
