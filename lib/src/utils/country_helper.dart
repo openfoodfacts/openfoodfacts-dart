@@ -853,7 +853,7 @@ enum OpenFoodFactsCountry implements OffTagged {
   /// French Southern Territories
   FRENCH_SOUTHERN_TERRITORIES(
     offTag: 'tf',
-    iso3Code: 'ATF', 
+    iso3Code: 'ATF',
     currency: Currency.EUR,
     wikiUrl:
         'https://wiki.openfoodfacts.org/Local_Communities/FrenchTeam/Country_Support',
@@ -865,11 +865,11 @@ enum OpenFoodFactsCountry implements OffTagged {
   /// Thailand
   THAILAND(
     offTag: 'th',
-    iso3Code: 'THA', 
+    iso3Code: 'THA',
     currency: Currency.THB,
     wikiUrl: 'https://wiki.openfoodfacts.org/Country_Support_-_Thailand',
   ),
-  
+
   /// Tajikistan
   TAJIKISTAN(offTag: 'tj', iso3Code: 'TJK', currency: Currency.TJS),
 
