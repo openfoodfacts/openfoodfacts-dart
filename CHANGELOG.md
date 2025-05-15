@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.23.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.22.0...v3.23.0) (2025-05-15)
+
+
+### Features
+
+* bring supported wiki country page up to date ([#1049](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1049)) ([9364fdf](https://github.com/openfoodfacts/openfoodfacts-dart/commit/9364fdfc55c219f3e02857814120b7ab54248326))
+
 ## [3.22.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.21.0...v3.22.0) (2025-04-28)
 
 
