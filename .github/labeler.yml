@@ -80,3 +80,13 @@ Search:
 🔐 Authentification:
 - changed-files:
   - any-glob-to-any-file: 'lib/src/model/login_status.dart'
+
+Nutri-Patrol:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/nutripatrol/create_flag.dart'
+  - any-glob-to-any-file: 'lib/src/nutripatrol/get_flag.dart'
+  - any-glob-to-any-file: 'lib/src/nutripatrol/get_ticket.dart'
+  - any-glob-to-any-file: 'lib/src/nutripatrol_api_client.dart'
+  - any-glob-to-any-file: 'lib/src/nutripatrol/get_tickets.dart'
+  - any-glob-to-any-file: 'lib/src/nutripatrol/update_ticket_status.dart'
+  - any-glob-to-any-file: 'lib/src/nutripatrol_api_client.dart'
