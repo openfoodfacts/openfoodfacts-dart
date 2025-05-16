@@ -10,12 +10,11 @@ NutriScoreData2023 _$NutriScoreData2023FromJson(Map<String, dynamic> json) =>
     NutriScoreData2023()
       ..countProteins = JsonHelper.boolFromJSON(json['count_proteins'])
       ..countProteinsReason = json['count_proteins_reason'] as String?
-      ..isBeverage = JsonHelper.boolFromJSON(json['is_beverage'])
-      ..isCheese = JsonHelper.boolFromJSON(json['is_cheese'])
-      ..isFatOilNutsSeeds =
-          JsonHelper.boolFromJSON(json['is_fat_oil_nuts_seeds'])
-      ..isRedMeatProduct = JsonHelper.boolFromJSON(json['is_red_meat_product'])
-      ..isWater = JsonHelper.boolFromJSON(json['is_water'])
+      ..isBeverage = JsonObject.parseBool(json['is_beverage'])
+      ..isCheese = JsonObject.parseBool(json['is_cheese'])
+      ..isFatOilNutsSeeds = JsonObject.parseBool(json['is_fat_oil_nuts_seeds'])
+      ..isRedMeatProduct = JsonObject.parseBool(json['is_red_meat_product'])
+      ..isWater = JsonObject.parseBool(json['is_water'])
       ..negativePoints = (json['negative_points'] as num?)?.toInt()
       ..negativePointsMax = (json['negative_points_max'] as num?)?.toInt()
       ..positivePoints = (json['positive_points'] as num?)?.toInt()

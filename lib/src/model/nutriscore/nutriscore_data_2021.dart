@@ -10,28 +10,28 @@ class NutriScoreData2021 extends JsonObject {
   @JsonKey(
     name: 'is_beverage',
     toJson: JsonHelper.boolToJSON,
-    fromJson: JsonHelper.boolFromJSON,
+    fromJson: JsonObject.parseBool,
   )
   bool? isBeverage;
 
   @JsonKey(
     name: 'is_cheese',
     toJson: JsonHelper.boolToJSON,
-    fromJson: JsonHelper.boolFromJSON,
+    fromJson: JsonObject.parseBool,
   )
   bool? isCheese;
 
   @JsonKey(
     name: 'is_fat',
     toJson: JsonHelper.boolToJSON,
-    fromJson: JsonHelper.boolFromJSON,
+    fromJson: JsonObject.parseBool,
   )
   bool? isFat;
 
   @JsonKey(
     name: 'is_water',
     toJson: JsonHelper.boolToJSON,
-    fromJson: JsonHelper.boolFromJSON,
+    fromJson: JsonObject.parseBool,
   )
   bool? isWater;
 

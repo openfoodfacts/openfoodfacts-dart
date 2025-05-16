@@ -8,10 +8,10 @@ part of 'nutriscore_data_2021.dart';
 
 NutriScoreData2021 _$NutriScoreData2021FromJson(Map<String, dynamic> json) =>
     NutriScoreData2021()
-      ..isBeverage = JsonHelper.boolFromJSON(json['is_beverage'])
-      ..isCheese = JsonHelper.boolFromJSON(json['is_cheese'])
-      ..isFat = JsonHelper.boolFromJSON(json['is_fat'])
-      ..isWater = JsonHelper.boolFromJSON(json['is_water'])
+      ..isBeverage = JsonObject.parseBool(json['is_beverage'])
+      ..isCheese = JsonObject.parseBool(json['is_cheese'])
+      ..isFat = JsonObject.parseBool(json['is_fat'])
+      ..isWater = JsonObject.parseBool(json['is_water'])
       ..negativePoints = (json['negative_points'] as num?)?.toInt()
       ..positivePoints = (json['positive_points'] as num?)?.toInt();
 

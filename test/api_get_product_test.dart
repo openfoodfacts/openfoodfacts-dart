@@ -124,18 +124,6 @@ void main() {
       expect(result.product, isNotNull);
       expect(result.product!.barcode, barcode);
 
-      final nutriScore =
-          result.product!.nutriscoreDetails?[NutriScoreVersion.v2023];
-      expect(nutriScore, isNotNull);
-      expect(nutriScore!.status, NutriScoreStatus.notApplicable);
-      expect(nutriScore.version, NutriScoreVersion.v2023);
-      expect(nutriScore.grade, isNull);
-      expect(nutriScore.score, isNull);
-      expect(nutriScore.category, isNotNull);
-      expect(nutriScore.category!.as2023, NutriScoreCategory2023.beverage);
-      expect(nutriScore.missingData, isEmpty);
-      expect(nutriScore.notApplicableCategory, "en:alcoholic-beverages");
-
       const Nutrient alcohol = Nutrient.alcohol;
       expect(result.product!.nutriments, isNotNull);
       final Nutriments nutriments = result.product!.nutriments!;
@@ -170,11 +158,23 @@ void main() {
       expect(result.barcode, barcode);
       expect(result.product, isNotNull);
 
+      // test Nutri-Score with domain model
+      final nutriScore = result.product!.nutriScoreDetails?.get2023();
+      expect(nutriScore, isNotNull);
+      expect(nutriScore!.isNotApplicable, isTrue);
+      expect(nutriScore.grade, isNull);
+      expect(nutriScore.score, isNull);
+      expect(nutriScore.category, isNotNull);
+      expect(nutriScore.category, NutriScoreCategory2023.beverage);
+      expect(nutriScore.missingData, isEmpty);
+      expect(nutriScore.notApplicableCategory, "en:alcoholic-beverages");
+
+      // test Nutri-Score with raw data
       expect(result.product!.nutriScoreDetails, isNotNull);
       expect(result.product!.nutriScoreDetails!.nutriScore2021, isNotNull);
       expect(
         result.product!.nutriScoreDetails!.nutriScore2021!.grade,
-        NutriScoreGrade.notApplicable,
+        "not-applicable",
       );
       expect(
         result.product!.nutriScoreDetails!.nutriScore2021!.categoryAvailable,
@@ -228,7 +228,7 @@ void main() {
       );
       expect(
         result.product!.nutriScoreDetails!.nutriScore2023!.grade,
-        NutriScoreGrade.notApplicable,
+        "not-applicable",
       );
       expect(
         result.product!.nutriScoreDetails!.nutriScore2023!.score,
@@ -284,11 +284,23 @@ void main() {
       expect(result.barcode, barcode);
       expect(result.product, isNotNull);
 
+      // test Nutri-Score with domain model
+      final nutriScore = result.product!.nutriScoreDetails?.get2023();
+      expect(nutriScore, isNotNull);
+      expect(nutriScore!.isComputed, isTrue);
+      expect(nutriScore.grade, NutriScoreGrade.E);
+      expect(nutriScore.score, 25);
+      expect(nutriScore.category, isNotNull);
+      expect(nutriScore.category, NutriScoreCategory2023.general);
+      expect(nutriScore.missingData, isEmpty);
+      expect(nutriScore.notApplicableCategory, isNull);
+
+      // test Nutri-Score with raw data
       expect(result.product!.nutriScoreDetails, isNotNull);
       expect(result.product!.nutriScoreDetails!.nutriScore2021, isNotNull);
       expect(
         result.product!.nutriScoreDetails!.nutriScore2021!.grade,
-        NutriScoreGrade.e,
+        "e",
       );
       expect(
         result.product!.nutriScoreDetails!.nutriScore2021!.categoryAvailable,
@@ -342,7 +354,7 @@ void main() {
       );
       expect(
         result.product!.nutriScoreDetails!.nutriScore2023!.grade,
-        NutriScoreGrade.e,
+        "e",
       );
       expect(
         result.product!.nutriScoreDetails!.nutriScore2023!.score,
@@ -432,18 +444,6 @@ void main() {
       expect(result.product!.selectedImages!.length, 9);
 
       expect(result.product!.nutriscore, 'e');
-
-      final nutriScore =
-          result.product!.nutriscoreDetails?[NutriScoreVersion.v2023];
-      expect(nutriScore, isNotNull);
-      expect(nutriScore!.status, NutriScoreStatus.computed);
-      expect(nutriScore.version, NutriScoreVersion.v2023);
-      expect(nutriScore.grade, NutriScoreGrade.E);
-      expect(nutriScore.score, 25);
-      expect(nutriScore.category, isNotNull);
-      expect(nutriScore.category!.as2023, NutriScoreCategory2023.general);
-      expect(nutriScore.missingData, isEmpty);
-      expect(nutriScore.notApplicableCategory, isNull);
 
       expect(result.product!.nutriments, isNotNull);
       final Nutriments nutriments = result.product!.nutriments!;

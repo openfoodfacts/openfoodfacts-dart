@@ -3,7 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 import '../interface/json_object.dart';
 import '../utils/json_helper.dart';
 import '../utils/language_helper.dart';
-import '../utils/nutriscore_helper.dart';
 import '../utils/product_fields.dart';
 import 'nutriscore/nutriscore_details.dart';
 import 'additives.dart';
@@ -16,8 +15,6 @@ import 'ingredients_analysis_tags.dart';
 import 'knowledge_panels.dart';
 import 'nutrient_levels.dart';
 import 'nutriments.dart';
-import 'nutriscore.dart';
-import 'nutriscore_enums.dart';
 import 'owner_field.dart';
 import 'product_image.dart';
 import 'product_packaging.dart';
@@ -408,9 +405,6 @@ class Product extends JsonObject {
   )
   bool? nutritionData;
 
-  @JsonKey(name: 'nutriscore')
-  NutriScoreDetails? nutriScoreDetails;
-
   /// Size of the product sample for "nutrition data for product as sold".
   ///
   /// Typical values: [nutrimentPer100g] or [nutrimentPerServing].
@@ -419,13 +413,8 @@ class Product extends JsonObject {
   @JsonKey(name: 'nutrition_grade_fr')
   String? nutriscore;
 
-  /// Map of computed Nutri-Scores for different versions (e.g. 2021, 2023).
-  @JsonKey(
-    name: 'nutriscore',
-    fromJson: NutriScoreHelper.fromJson,
-    toJson: NutriScoreHelper.toJson,
-  )
-  Map<NutriScoreVersion, NutriScore>? nutriscoreDetails;
+  @JsonKey(name: 'nutriscore')
+  NutriScoreDetails? nutriScoreDetails;
 
   @JsonKey(name: 'compared_to_category')
   String? comparedToCategory;
@@ -683,7 +672,6 @@ class Product extends JsonObject {
       this.nutrimentEnergyUnit,
       this.nutrimentDataPer,
       this.nutriscore,
-      this.nutriscoreDetails,
       this.categories,
       this.categoriesTags,
       this.categoriesTagsInLanguages,

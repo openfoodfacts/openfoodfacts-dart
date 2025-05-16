@@ -2,15 +2,14 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../interface/json_object.dart';
 import '../../utils/json_helper.dart';
 import 'nutriscore_data_2023.dart';
-import 'nutriscore_grade.dart';
 
 part 'nutriscore_detail_2023.g.dart';
 
 /// Data of NutriScore version 2023.
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class NutriScoreDetail2023 extends JsonObject {
   @JsonKey()
-  NutriScoreGrade? grade;
+  String? grade;
 
   @JsonKey()
   int? score;

@@ -9,7 +9,7 @@ part of 'nutriscore_detail_2023.dart';
 NutriScoreDetail2023 _$NutriScoreDetail2023FromJson(
         Map<String, dynamic> json) =>
     NutriScoreDetail2023()
-      ..grade = $enumDecodeNullable(_$NutriScoreGradeEnumMap, json['grade'])
+      ..grade = json['grade'] as String?
       ..score = (json['score'] as num?)?.toInt()
       ..data = json['data'] == null
           ? null
@@ -26,9 +26,9 @@ NutriScoreDetail2023 _$NutriScoreDetail2023FromJson(
 Map<String, dynamic> _$NutriScoreDetail2023ToJson(
         NutriScoreDetail2023 instance) =>
     <String, dynamic>{
-      'grade': _$NutriScoreGradeEnumMap[instance.grade],
+      'grade': instance.grade,
       'score': instance.score,
-      'data': instance.data,
+      'data': instance.data?.toJson(),
       'not_applicable_category': instance.notApplicableCategory,
       'category_available': JsonHelper.boolToJSON(instance.categoryAvailable),
       'nutrients_available': JsonHelper.boolToJSON(instance.nutrientsAvailable),
@@ -36,12 +36,3 @@ Map<String, dynamic> _$NutriScoreDetail2023ToJson(
           JsonHelper.boolToJSON(instance.nutriScoreApplicable),
       'nutriscore_computed': JsonHelper.boolToJSON(instance.nutriScoreComputed),
     };
-
-const _$NutriScoreGradeEnumMap = {
-  NutriScoreGrade.a: 'a',
-  NutriScoreGrade.b: 'b',
-  NutriScoreGrade.c: 'c',
-  NutriScoreGrade.d: 'd',
-  NutriScoreGrade.e: 'e',
-  NutriScoreGrade.notApplicable: 'not-applicable',
-};

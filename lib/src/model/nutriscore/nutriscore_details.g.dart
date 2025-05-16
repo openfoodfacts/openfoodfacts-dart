@@ -17,6 +17,6 @@ NutriScoreDetails _$NutriScoreDetailsFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$NutriScoreDetailsToJson(NutriScoreDetails instance) =>
     <String, dynamic>{
-      '2021': instance.nutriScore2021,
-      '2023': instance.nutriScore2023,
+      '2021': instance.nutriScore2021?.toJson(),
+      '2023': instance.nutriScore2023?.toJson(),
     };

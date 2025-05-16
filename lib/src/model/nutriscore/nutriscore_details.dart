@@ -6,7 +6,7 @@ import 'nutriscore_detail_2023.dart';
 part 'nutriscore_details.g.dart';
 
 /// NutriScore detailed info.
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class NutriScoreDetails extends JsonObject {
   @JsonKey(name: '2021')
   NutriScoreDetail2021? nutriScore2021;
