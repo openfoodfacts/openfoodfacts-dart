@@ -208,15 +208,23 @@ void main() {
       expect(copy2021?.score, equals(orig2021?.score));
       expect(copy2021?.status, equals(orig2021?.status));
       expect(copy2021?.categoryAvailable, equals(orig2021?.categoryAvailable));
-      expect(copy2021?.nutrientsAvailable, equals(orig2021?.nutrientsAvailable));
+      expect(
+        copy2021?.nutrientsAvailable,
+        equals(orig2021?.nutrientsAvailable),
+      );
       expect(copy2023?.category, equals(orig2023?.category));
       expect(copy2023?.grade, equals(orig2023?.grade));
       expect(copy2023?.score, equals(orig2023?.score));
       expect(copy2023?.status, equals(orig2023?.status));
       expect(copy2023?.categoryAvailable, equals(orig2023?.categoryAvailable));
-      expect(copy2023?.nutrientsAvailable, equals(orig2023?.nutrientsAvailable));
-      expect(copy2023?.notApplicableCategory,
-          equals(orig2023?.notApplicableCategory));
+      expect(
+        copy2023?.nutrientsAvailable,
+        equals(orig2023?.nutrientsAvailable),
+      );
+      expect(
+        copy2023?.notApplicableCategory,
+        equals(orig2023?.notApplicableCategory),
+      );
     }
   });
 }
