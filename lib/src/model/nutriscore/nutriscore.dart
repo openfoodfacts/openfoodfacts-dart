@@ -1,6 +1,14 @@
-import 'package:openfoodfacts/openfoodfacts.dart';
+import '../off_tagged.dart';
 
-enum NutriScoreCategory2021 {
+/// Internal marker interface for version-specific Nutri-Score categories.
+///
+/// This is used internally by the abstract [NutriScore] base class to enable
+/// shared handling of 2021 and 2023 category types. It is intentionally private
+/// to prevent accidental external usage or misimplementation.
+abstract class _NutriScoreCategory {}
+
+/// Nutri-Score categories defined for the 2021 specification.
+enum NutriScoreCategory2021 implements _NutriScoreCategory {
   general,
   cheese,
   fat,
@@ -8,7 +16,8 @@ enum NutriScoreCategory2021 {
   water,
 }
 
-enum NutriScoreCategory2023 {
+/// Nutri-Score categories defined for the 2023 specification.
+enum NutriScoreCategory2023 implements _NutriScoreCategory {
   general,
   cheese,
   redMeatProduct,
@@ -17,119 +26,109 @@ enum NutriScoreCategory2023 {
   water,
 }
 
-enum NutriScoreGrade { A, B, C, D, E }
+/// Nutri-Score letter grades: `A` (best) to `E` (worst).
+///
+/// Implements [OffTagged] to support conversion from tags.
+enum NutriScoreGrade implements OffTagged {
+  a,
+  b,
+  c,
+  d,
+  e;
 
-enum NutriScoreInput { category, nutrients, ingredients }
+  @override
+  String get offTag => name;
+}
 
-typedef NutriScore2021 = _NutriScore<NutriScoreCategory2021>;
-typedef NutriScore2023 = _NutriScore<NutriScoreCategory2023>;
-
-/// Private base class for NutriScore.
-/// It is used to define the common properties and methods for both
-/// NutriScore 2021 and NutriScore 2023.
-class _NutriScore<T extends Enum> {
+/// Abstract base class for Nutri-Score models (e.g. 2021, 2023).
+///
+/// Provides common properties and logic for representing Nutri-Score data
+/// in a version-agnostic, structured way. Subclasses enforce version-specific
+/// category types.
+///
+/// This model ensures:
+/// - Grades are normalized from tags (`a`–`e`)
+/// - Categories are only available when `categoryAvailable` is `true`
+/// - Semantic helpers like `isComputed` and `isApplicable` are provided
+abstract class NutriScore {
+  /// The Nutri-Score grade (`A`–`E`), or `null` if unavailable.
   final NutriScoreGrade? grade;
-  final int? score;
-  final String? notApplicableCategory;
-  final List<NutriScoreInput> missingData;
-  final T? category;
 
-  _NutriScore({
-    this.grade,
-    this.category,
+  /// The raw numeric score used to derive the grade.
+  final int? score;
+
+  /// The version-specific food category used to evaluate the Nutri-Score.
+  final _NutriScoreCategory? category;
+
+  /// Specifies the product's category for which the Nutri-Score is not applicable.
+  final String? notApplicableCategory;
+
+  /// Indicates whether the category required to compute the Nutri-Score is available.
+  final bool categoryAvailable;
+
+  /// Indicates whether the nutrients required to compute the Nutri-Score are available.
+  final bool nutrientsAvailable;
+
+  /// Constructs a [NutriScore] model from raw data and enforces valid semantics.
+  ///
+  /// - If `categoryAvailable` is false, `category` will be set to `null`.
+  /// - Grade tags are parsed to `NutriScoreGrade` (`A`-`E`) via [OffTagged].
+  NutriScore({
+    String? grade,
+    _NutriScoreCategory? category,
     this.score,
     this.notApplicableCategory,
-    this.missingData = const [],
-  }) : assert(
-          (grade != null && score != null && category != null) ||
-              (grade == null && (notApplicableCategory?.isNotEmpty ?? false)) ||
-              (grade == null && missingData.isNotEmpty),
-          'Either NutriScore is computed or not applicable or unknown',
-        );
+    this.categoryAvailable = false,
+    this.nutrientsAvailable = false,
+  })  : grade = OffTagged.fromOffTag(grade, NutriScoreGrade.values)
+            as NutriScoreGrade?,
+        category = categoryAvailable ? category : null;
 
+  /// `true` if Nutri-Score has been computed.
   bool get isComputed => grade != null;
+
+  /// `true` if the Nutri-Score is not applicable to the product (see [notApplicableCategory]).
   bool get isNotApplicable => notApplicableCategory?.isNotEmpty ?? false;
-  bool get isUnknown => missingData.isNotEmpty;
+
+  /// `true` if the Nutri-Score is applicable to the product (but may not be computed due to missing data).
+  bool get isApplicable => categoryAvailable && notApplicableCategory == null;
+
+  /// `true` if any data required to compute the Nutri-Score is missing.
+  bool get hasMissingData => !categoryAvailable || !nutrientsAvailable;
 }
 
-NutriScoreGrade? _parseGrade(String? grade) {
-  switch (grade?.toLowerCase()) {
-    case 'a':
-      return NutriScoreGrade.A;
-    case 'b':
-      return NutriScoreGrade.B;
-    case 'c':
-      return NutriScoreGrade.C;
-    case 'd':
-      return NutriScoreGrade.D;
-    case 'e':
-      return NutriScoreGrade.E;
-    default:
-      return null;
-  }
+/// Nutri-Score domain model for the 2021 specification.
+///
+/// Accepts only [NutriScoreCategory2021] categories.
+class NutriScore2021 extends NutriScore {
+  NutriScore2021({
+    NutriScoreCategory2021? category,
+    super.grade,
+    super.score,
+    super.notApplicableCategory,
+    super.categoryAvailable,
+    super.nutrientsAvailable,
+  }) : super(category: category);
+
+  @override
+  NutriScoreCategory2021? get category =>
+      super.category as NutriScoreCategory2021?;
 }
 
-List<NutriScoreInput> _missingData(bool? hasCategory, bool? hasNutrients) => [
-      if (hasCategory != true) NutriScoreInput.category,
-      if (hasNutrients != true) NutriScoreInput.nutrients,
-    ];
+/// Nutri-Score domain model for the 2023 specification.
+///
+/// Accepts only [NutriScoreCategory2023] categories.
+class NutriScore2023 extends NutriScore {
+  NutriScore2023({
+    NutriScoreCategory2023? category,
+    super.grade,
+    super.score,
+    super.notApplicableCategory,
+    super.categoryAvailable,
+    super.nutrientsAvailable,
+  }) : super(category: category);
 
-extension NutriScoreDetails2021Ext on NutriScoreDetails {
-  /// Returns the NutriScore 2021 as domain model.
-  NutriScore2021? get2021() {
-    if (nutriScore2021 == null) return null;
-
-    return NutriScore2021(
-      category: nutriScore2021?.data?.category,
-      grade: _parseGrade(nutriScore2021?.grade),
-      score: nutriScore2021?.score,
-      notApplicableCategory: nutriScore2021?.notApplicableCategory,
-      missingData: _missingData(
-        nutriScore2021?.categoryAvailable,
-        nutriScore2021?.nutrientsAvailable,
-      ),
-    );
-  }
-
-  /// Returns the NutriScore 2023 as domain model.
-  NutriScore2023? get2023() {
-    if (nutriScore2023 == null) return null;
-
-    return NutriScore2023(
-      category: nutriScore2023?.data?.category,
-      grade: _parseGrade(nutriScore2023?.grade),
-      score: nutriScore2023?.score,
-      notApplicableCategory: nutriScore2023?.notApplicableCategory,
-      missingData: _missingData(
-        nutriScore2023?.categoryAvailable,
-        nutriScore2023?.nutrientsAvailable,
-      ),
-    );
-  }
-}
-
-/// Extension to infer [NutriScoreCategory2021] from boolean flags.
-extension NutriScoreData2021Ext on NutriScoreData2021 {
-  NutriScoreCategory2021 get category {
-    // water must be checked first to avoid beverage+water conflict
-    if (isWater == true) return NutriScoreCategory2021.water;
-    if (isBeverage == true) return NutriScoreCategory2021.beverage;
-    if (isFat == true) return NutriScoreCategory2021.fat;
-    if (isCheese == true) return NutriScoreCategory2021.cheese;
-    return NutriScoreCategory2021.general;
-  }
-}
-
-/// Extension to infer [NutriScoreCategory2023] from boolean flags.
-extension NutriScoreData2023Ext on NutriScoreData2023 {
-  NutriScoreCategory2023 get category {
-    // water must be checked first to avoid beverage+water conflict
-    if (isWater == true) return NutriScoreCategory2023.water;
-    if (isBeverage == true) return NutriScoreCategory2023.beverage;
-    if (isFatOilNutsSeeds == true)
-      return NutriScoreCategory2023.fatOilNutsSeeds;
-    if (isCheese == true) return NutriScoreCategory2023.cheese;
-    if (isRedMeatProduct == true) return NutriScoreCategory2023.redMeatProduct;
-    return NutriScoreCategory2023.general;
-  }
+  @override
+  NutriScoreCategory2023? get category =>
+      super.category as NutriScoreCategory2023?;
 }

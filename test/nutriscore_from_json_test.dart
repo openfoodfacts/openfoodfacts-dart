@@ -6,8 +6,8 @@ void main() {
     test('returns no Nutri-Scores when input is empty', () {
       final result = NutriScoreDetails.fromJson({});
       expect(result, isNotNull);
-      expect(result.nutriScore2021, isNull);
-      expect(result.nutriScore2023, isNull);
+      expect(result.rawNutriScore2021, isNull);
+      expect(result.rawNutriScore2023, isNull);
     });
 
     test('ignores entries with unknown versions or null', () {
@@ -16,8 +16,8 @@ void main() {
         '2021': null,
       });
       expect(result, isNotNull);
-      expect(result.nutriScore2021, isNull);
-      expect(result.nutriScore2023, isNull);
+      expect(result.rawNutriScore2021, isNull);
+      expect(result.rawNutriScore2023, isNull);
     });
 
     test('throws Error on non-map input', () {
@@ -32,13 +32,13 @@ void main() {
     test('parses computed NutriScore for version 2023', () {
       final result = NutriScoreDetails.fromJson(computed);
       expect(result, isNotNull);
-      expect(result.nutriScore2021, isNull);
-      expect(result.nutriScore2023, isNotNull);
+      expect(result.rawNutriScore2021, isNull);
+      expect(result.rawNutriScore2023, isNotNull);
 
-      final nutriScore = result.get2023()!;
+      final NutriScore2023 nutriScore = result.nutriScore2023!;
       expect(nutriScore.isComputed, isTrue);
-      expect(nutriScore.missingData, isEmpty);
-      expect(nutriScore.grade, NutriScoreGrade.B);
+      expect(nutriScore.hasMissingData, isFalse);
+      expect(nutriScore.grade, NutriScoreGrade.b);
       expect(nutriScore.score, 2);
       expect(nutriScore.category, NutriScoreCategory2023.beverage);
     });
@@ -46,13 +46,12 @@ void main() {
     test('parses unknown NutriScore for version 2023', () {
       final result = NutriScoreDetails.fromJson(unknown);
       expect(result, isNotNull);
-      expect(result.nutriScore2021, isNull);
-      expect(result.nutriScore2023, isNotNull);
+      expect(result.rawNutriScore2021, isNull);
+      expect(result.rawNutriScore2023, isNotNull);
 
-      final nutriScore = result.get2023()!;
-      expect(nutriScore.isUnknown, isTrue);
-      expect(nutriScore.missingData.length, 1);
-      expect(nutriScore.missingData, contains(NutriScoreInput.nutrients));
+      final NutriScore2023 nutriScore = result.nutriScore2023!;
+      expect(nutriScore.hasMissingData, isTrue);
+      expect(nutriScore.nutrientsAvailable, isFalse);
       expect(nutriScore.grade, isNull);
       expect(nutriScore.score, isNull);
       expect(nutriScore.category, NutriScoreCategory2023.general);
@@ -61,43 +60,43 @@ void main() {
     test('parses not applicable NutriScore for version 2023', () {
       final result = NutriScoreDetails.fromJson(notApplicable);
       expect(result, isNotNull);
-      expect(result.nutriScore2021, isNull);
-      expect(result.nutriScore2023, isNotNull);
+      expect(result.rawNutriScore2021, isNull);
+      expect(result.rawNutriScore2023, isNotNull);
 
-      final nutriScore = result.get2023()!;
+      final NutriScore2023 nutriScore = result.nutriScore2023!;
       expect(nutriScore.isNotApplicable, isTrue);
       expect(nutriScore.grade, isNull);
       expect(nutriScore.score, isNull);
       expect(nutriScore.category, NutriScoreCategory2023.beverage);
-      expect(nutriScore.missingData, isEmpty);
+      expect(nutriScore.hasMissingData, isFalse);
     });
 
     test('parses mixed data types in categories', () {
       final result = NutriScoreDetails.fromJson(mixedDataTypes);
       expect(result, isNotNull);
-      expect(result.nutriScore2021, isNotNull);
-      expect(result.nutriScore2023, isNull);
+      expect(result.rawNutriScore2021, isNotNull);
+      expect(result.rawNutriScore2023, isNull);
 
-      final nutriScore = result.get2021()!;
+      final NutriScore2021 nutriScore = result.nutriScore2021!;
       expect(nutriScore.isComputed, isTrue);
-      expect(nutriScore.grade, NutriScoreGrade.D);
+      expect(nutriScore.grade, NutriScoreGrade.d);
       expect(nutriScore.score, isNotNull);
       expect(nutriScore.category, NutriScoreCategory2021.cheese);
-      expect(nutriScore.missingData, isEmpty);
+      expect(nutriScore.hasMissingData, isFalse);
     });
 
     test('parses inconsistent NutriScore data', () {
       final result = NutriScoreDetails.fromJson(inconsistent);
       expect(result, isNotNull);
-      expect(result.nutriScore2021, isNotNull);
-      expect(result.nutriScore2023, isNotNull);
+      expect(result.rawNutriScore2021, isNotNull);
+      expect(result.rawNutriScore2023, isNotNull);
 
-      final nutriScore = result.get2021()!;
+      final NutriScore2021 nutriScore = result.nutriScore2021!;
       expect(nutriScore.isNotApplicable, isTrue);
       expect(nutriScore.grade, isNull);
       expect(nutriScore.score, isNull);
       expect(nutriScore.category, NutriScoreCategory2021.water);
-      expect(nutriScore.missingData, isEmpty);
+      expect(nutriScore.hasMissingData, isFalse);
     });
   });
 
@@ -109,19 +108,19 @@ void main() {
       final copy = NutriScoreDetails.fromJson(original.toJson());
       expect(copy, isNotNull);
 
-      final orig2021 = original.get2021();
-      final copy2021 = copy.get2021();
-      final orig2023 = original.get2023();
-      final copy2023 = copy.get2023();
+      final orig2021 = original.nutriScore2021;
+      final copy2021 = copy.nutriScore2021;
+      final orig2023 = original.nutriScore2023;
+      final copy2023 = copy.nutriScore2023;
 
-      expect(copy2021?.category, equals(original.get2021()?.category));
-      expect(copy2021?.grade, equals(original.get2021()?.grade));
+      expect(copy2021?.category, equals(orig2021?.category));
+      expect(copy2021?.grade, equals(orig2021?.grade));
       expect(copy2021?.score, equals(orig2021?.score));
-      expect(copy2021?.missingData, equals(orig2021?.missingData));
+      expect(copy2021?.hasMissingData, equals(orig2021?.hasMissingData));
       expect(copy2023?.category, equals(orig2023?.category));
       expect(copy2023?.grade, equals(orig2023?.grade));
       expect(copy2023?.score, equals(orig2023?.score));
-      expect(copy2023?.missingData, equals(orig2023?.missingData));
+      expect(copy2023?.hasMissingData, equals(orig2023?.hasMissingData));
       expect(copy2023?.notApplicableCategory,
           equals(orig2023?.notApplicableCategory));
     }
