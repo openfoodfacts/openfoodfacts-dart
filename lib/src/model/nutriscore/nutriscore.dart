@@ -40,6 +40,9 @@ enum NutriScoreGrade implements OffTagged {
   String get offTag => name;
 }
 
+/// Represents one of three mutually exclusive Nutri-Score states.
+enum NutriScoreStatus { computed, notApplicable, unknown }
+
 /// Abstract base class for Nutri-Score models (e.g. 2021, 2023).
 ///
 /// Provides common properties and logic for representing Nutri-Score data
@@ -84,17 +87,21 @@ abstract class NutriScore {
             as NutriScoreGrade?,
         category = categoryAvailable ? category : null;
 
-  /// `true` if Nutri-Score has been computed.
-  bool get isComputed => grade != null;
-
-  /// `true` if the Nutri-Score is not applicable to the product (see [notApplicableCategory]).
-  bool get isNotApplicable => notApplicableCategory?.isNotEmpty ?? false;
-
-  /// `true` if the Nutri-Score is applicable to the product (but may not be computed due to missing data).
-  bool get isApplicable => categoryAvailable && notApplicableCategory == null;
-
-  /// `true` if any data required to compute the Nutri-Score is missing.
-  bool get hasMissingData => !categoryAvailable || !nutrientsAvailable;
+  /// Returns the current Nutri-Score status, one of three mutually exclusive states.
+  ///
+  /// - `notApplicable`: Nutri-Score is not applicable to the product
+  ///   (see [notApplicableCategory]).
+  /// - `computed`: Nutri-Score has been computed; [grade] and [score] are available.
+  /// - `unknown`: Nutri-Score cannot be computed due to missing data
+  ///   (see [categoryAvailable] and [nutrientsAvailable]).
+  ///
+  /// Note: In the raw JSON, the `grade` field conflates status and actual grades,
+  /// using values `'unknown'`, `'not-applicable'`, and `'a'`–`'e'`.
+  NutriScoreStatus get status {
+    if (notApplicableCategory != null) return NutriScoreStatus.notApplicable;
+    if (grade != null) return NutriScoreStatus.computed;
+    return NutriScoreStatus.unknown;
+  }
 }
 
 /// Nutri-Score domain model for the 2021 specification.

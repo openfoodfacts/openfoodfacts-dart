@@ -164,12 +164,12 @@ void main() {
       // test Nutri-Score with domain model
       final nutriScore = nutriScoreDetails!.nutriScore2023;
       expect(nutriScore, isNotNull);
-      expect(nutriScore!.isNotApplicable, isTrue);
+      expect(nutriScore!.status, NutriScoreStatus.notApplicable);
       expect(nutriScore.grade, isNull);
       expect(nutriScore.score, isNull);
       expect(nutriScore.category, isNotNull);
       expect(nutriScore.category, NutriScoreCategory2023.beverage);
-      expect(nutriScore.hasMissingData, isFalse);
+      expect(nutriScore.categoryAvailable, isTrue);
       expect(nutriScore.notApplicableCategory, category);
 
       // test Nutri-Score with raw data
@@ -224,12 +224,13 @@ void main() {
       // test Nutri-Score with domain model
       final nutriScore = nutriScoreDetails!.nutriScore2023;
       expect(nutriScore, isNotNull);
-      expect(nutriScore!.isComputed, isTrue);
+      expect(nutriScore!.status, NutriScoreStatus.computed);
       expect(nutriScore.grade, NutriScoreGrade.e);
       expect(nutriScore.score, 25);
       expect(nutriScore.category, isNotNull);
       expect(nutriScore.category, NutriScoreCategory2023.general);
-      expect(nutriScore.hasMissingData, isFalse);
+      expect(nutriScore.categoryAvailable, isTrue);
+      expect(nutriScore.nutrientsAvailable, isTrue);
       expect(nutriScore.notApplicableCategory, isNull);
 
       // test Nutri-Score with raw data
