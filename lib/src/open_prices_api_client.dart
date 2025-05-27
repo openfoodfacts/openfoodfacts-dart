@@ -65,14 +65,15 @@ class OpenPricesAPIClient {
       );
 
   static Future<MaybeError<PriceUser>> getUserProfile(
-    final String username,
-  ) async {
+    final String username, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
     final Uri uri = OpenPricesAPIClient.getUri(
       path: '/api/v1/users/$username',
     );
 
     final http.Response response =
-        await HttpHelper().doGetRequest(uri, uriHelper: uriHelperFoodProd);
+        await HttpHelper().doGetRequest(uri, uriHelper: uriHelper);
     try {
       if (response.statusCode == 200) {
         final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
