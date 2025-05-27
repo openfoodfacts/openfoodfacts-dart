@@ -8,6 +8,7 @@ import 'package:path/path.dart';
 import 'prices/currency.dart';
 import 'prices/maybe_error.dart';
 import 'prices/price.dart';
+import 'prices/price_user.dart';
 import 'prices/proof.dart';
 import 'prices/get_locations_parameters.dart';
 import 'prices/get_locations_result.dart';
@@ -62,6 +63,28 @@ class OpenPricesAPIClient {
         forcedHost: _getHost(uriHelper),
         addUserAgentParameters: addUserAgentParameters,
       );
+
+  static Future<MaybeError<PriceUser>> getUserProfile(
+    final String userId,
+  ) async {
+    final Uri uri = OpenPricesAPIClient.getUri(
+      path: '/api/v1/users/$userId',
+    );
+
+    final http.Response response =
+        await HttpHelper().doGetRequest(uri, uriHelper: uriHelperFoodProd);
+    try {
+      if (response.statusCode == 200) {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<PriceUser>.value(
+          PriceUser.fromJson(decodedResponse),
+        );
+      }
+    } catch (e) {
+      //
+    }
+    return MaybeError<PriceUser>.responseError(response);
+  }
 
   static Future<MaybeError<GetPricesResult>> getPrices(
     final GetPricesParameters parameters, {
