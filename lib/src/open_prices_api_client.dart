@@ -65,10 +65,10 @@ class OpenPricesAPIClient {
       );
 
   static Future<MaybeError<PriceUser>> getUserProfile(
-    final String userId,
+    final String username,
   ) async {
     final Uri uri = OpenPricesAPIClient.getUri(
-      path: '/api/v1/users/$userId',
+      path: '/api/v1/users/$username',
     );
 
     final http.Response response =
