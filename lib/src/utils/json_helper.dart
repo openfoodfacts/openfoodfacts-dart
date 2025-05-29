@@ -450,4 +450,7 @@ class JsonHelper {
     }
     return 0;
   }
+
+  /// Returns a String?, regardless of the input type.
+  static String? stringFromJSON(dynamic jsonValue) => jsonValue?.toString();
 }
