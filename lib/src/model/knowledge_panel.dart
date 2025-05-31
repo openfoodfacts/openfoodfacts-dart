@@ -59,6 +59,8 @@ enum TitleElementType {
   // Title Element depicts a grade like 'Eco-Score' or 'Nutri-Score'.
   @JsonValue('grade')
   GRADE,
+  @JsonValue('percentage')
+  PERCENTAGE,
   UNKNOWN,
 }
 
@@ -133,6 +135,9 @@ class TitleElement extends JsonObject {
   /// Title string of the panel. Example - 'Eco-Score D'.
   final String title;
 
+  /// A short name of this panel, not including any actual values.
+  final String? name;
+
   /// Subtitle of the panel. Example - 'High environmental impact'.
   final String? subtitle;
 
@@ -159,6 +164,7 @@ class TitleElement extends JsonObject {
 
   const TitleElement({
     required this.title,
+    this.name,
     this.subtitle,
     this.grade,
     this.type,
