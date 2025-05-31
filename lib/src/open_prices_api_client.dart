@@ -64,14 +64,13 @@ class OpenPricesAPIClient {
         addUserAgentParameters: addUserAgentParameters,
       );
 
-  static Future<MaybeError<PriceUser>> getUserProfile(
+  static Future<MaybeError<PriceUser>> getUser(
     final String username, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Uri uri = OpenPricesAPIClient.getUri(
       path: '/api/v1/users/$username',
     );
-
     final http.Response response =
         await HttpHelper().doGetRequest(uri, uriHelper: uriHelper);
     try {
