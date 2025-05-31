@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.23.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.22.0...v3.23.0) (2025-05-31)
+
+
+### Features
+
+* add percentage type and name field to TitleElement ([#1086](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1086)) ([11cfccf](https://github.com/openfoodfacts/openfoodfacts-dart/commit/11cfccf3ae695c07999045cc593aa57e2b4a8dd9))
+* Added Get user data function OpenPricesAPIClient ([#1085](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1085)) ([f0cd3aa](https://github.com/openfoodfacts/openfoodfacts-dart/commit/f0cd3aa66dd276d51dc2de01e0c4036ce325ca19))
+* bring supported wiki country page up to date ([#1049](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1049)) ([9364fdf](https://github.com/openfoodfacts/openfoodfacts-dart/commit/9364fdfc55c219f3e02857814120b7ab54248326))
+
 ## [3.22.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.21.0...v3.22.0) (2025-04-28)
 
 
