@@ -64,6 +64,7 @@ const _$KnowledgePanelSizeEnumMap = {
 
 TitleElement _$TitleElementFromJson(Map<String, dynamic> json) => TitleElement(
       title: json['title'] as String,
+      name: json['name'] as String?,
       subtitle: json['subtitle'] as String?,
       grade: $enumDecodeNullable(_$GradeEnumMap, json['grade'],
           unknownValue: Grade.UNKNOWN),
@@ -77,6 +78,7 @@ TitleElement _$TitleElementFromJson(Map<String, dynamic> json) => TitleElement(
 Map<String, dynamic> _$TitleElementToJson(TitleElement instance) =>
     <String, dynamic>{
       'title': instance.title,
+      'name': instance.name,
       'subtitle': instance.subtitle,
       'grade': _$GradeEnumMap[instance.grade],
       'type': _$TitleElementTypeEnumMap[instance.type],
@@ -95,5 +97,6 @@ const _$GradeEnumMap = {
 
 const _$TitleElementTypeEnumMap = {
   TitleElementType.GRADE: 'grade',
+  TitleElementType.PERCENTAGE: 'percentage',
   TitleElementType.UNKNOWN: 'UNKNOWN',
 };

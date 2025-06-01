@@ -352,6 +352,41 @@ void main() {
       );
     }, timeout: Timeout(Duration(seconds: 60)));
 
+    test('get user', () async {
+      const UriProductHelper uriHelper = uriHelperFoodProd;
+      late PriceUser results;
+
+      final String username = 'chetanr25';
+      MaybeError<PriceUser> maybeResults;
+      try {
+        maybeResults =
+            await OpenPricesAPIClient.getUser(username, uriHelper: uriHelper);
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      results = maybeResults.value;
+      expect(results.userId, equals(username));
+      expect(results.priceCount, greaterThanOrEqualTo(0));
+      expect(results.locationCount, greaterThanOrEqualTo(0));
+      expect(results.productCount, greaterThanOrEqualTo(0));
+      expect(results.proofCount, greaterThanOrEqualTo(0));
+      expect(results.priceCurrencyCount, greaterThanOrEqualTo(0));
+      expect(results.priceKindCommunityCount, greaterThanOrEqualTo(0));
+      expect(results.priceKindConsumptionCount, greaterThanOrEqualTo(0));
+      expect(results.proofKindCommunityCount, greaterThanOrEqualTo(0));
+      expect(results.proofKindConsumptionCount, greaterThanOrEqualTo(0));
+      expect(results.priceTypeProductCount, greaterThanOrEqualTo(0));
+      expect(results.priceTypeCategoryCount, greaterThanOrEqualTo(0));
+      expect(results.priceInProofOwnedCount, greaterThanOrEqualTo(0));
+      expect(results.priceInProofNotOwnedCount, greaterThanOrEqualTo(0));
+      expect(results.priceNotOwnedInProofOwnedCount, greaterThanOrEqualTo(0));
+      expect(results.locationTypeOsmCountryCount, greaterThanOrEqualTo(0));
+    });
+
     test('get prices', () async {
       const UriProductHelper uriHelper = uriHelperFoodProd;
 
