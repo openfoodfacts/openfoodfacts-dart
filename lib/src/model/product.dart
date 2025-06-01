@@ -4,6 +4,7 @@ import '../interface/json_object.dart';
 import '../utils/json_helper.dart';
 import '../utils/language_helper.dart';
 import '../utils/product_fields.dart';
+import 'nutriscore/nutriscore_details.dart';
 import 'additives.dart';
 import 'allergens.dart';
 import 'attribute.dart';
@@ -411,6 +412,9 @@ class Product extends JsonObject {
   String? nutrimentDataPer;
   @JsonKey(name: 'nutrition_grade_fr')
   String? nutriscore;
+
+  @JsonKey(name: 'nutriscore')
+  NutriScoreDetails? nutriScoreDetails;
 
   @JsonKey(name: 'compared_to_category')
   String? comparedToCategory;
