@@ -1,13 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'currency.dart';
-import 'location.dart';
-import 'location_osm_type.dart';
-import 'proof_type.dart';
 import '../interface/json_object.dart';
 import '../open_prices_api_client.dart';
 import '../utils/json_helper.dart';
 import '../utils/uri_helper.dart';
+import 'currency.dart';
+import 'location.dart';
+import 'location_osm_type.dart';
+import 'proof_type.dart';
 
 part 'proof.g.dart';
 
@@ -105,6 +105,9 @@ class Proof extends JsonObject {
 
   @JsonKey(name: 'owner_comment')
   String? ownerComment;
+
+  @JsonKey()
+  String? source;
 
   Proof();
 
