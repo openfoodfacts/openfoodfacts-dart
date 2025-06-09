@@ -65,7 +65,11 @@
       
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@JsonKey(name: &#39;default_value&#39;, includeIfNull: false)
+  <pre class="language-dart"><code class="language-dart">@JsonKey(
+  name: &#39;default_value&#39;,
+  includeIfNull: false,
+  fromJson: JsonHelper.stringFromJSON,
+)
 String? defaultValue;</code></pre>
 </section>
 
