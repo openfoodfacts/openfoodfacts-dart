@@ -350,7 +350,7 @@ class JsonHelper {
   /// Returns a JSON map from [ProductPackaging]s
   static List<Map<String, dynamic>>? productPackagingsToJson(
       List<ProductPackaging>? packagings) {
-    if (packagings == null || packagings.isEmpty) {
+    if (packagings == null) {
       return null;
     }
 
@@ -450,4 +450,7 @@ class JsonHelper {
     }
     return 0;
   }
+
+  /// Returns a String?, regardless of the input type.
+  static String? stringFromJSON(dynamic jsonValue) => jsonValue?.toString();
 }

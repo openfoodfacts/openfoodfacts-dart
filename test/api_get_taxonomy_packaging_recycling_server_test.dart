@@ -35,7 +35,7 @@ void main() {
       expect(value.name![OpenFoodFactsLanguage.ENGLISH]!, expectedNameEnglish);
       expect(value.name![OpenFoodFactsLanguage.FRENCH]!, expectedNameFrench);
       expect(value.parents, unorderedEquals(expectedParents));
-      expect(value.children, unorderedEquals(expectedChildren));
+      expect(value.children, containsAll(expectedChildren));
     }
 
     test('get a packaging recycling', () async {

@@ -1,5 +1,61 @@
 # Changelog
 
+## [3.23.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.22.0...v3.23.0) (2025-06-09)
+
+
+### Features
+
+* add percentage type and name field to TitleElement ([#1086](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1086)) ([11cfccf](https://github.com/openfoodfacts/openfoodfacts-dart/commit/11cfccf3ae695c07999045cc593aa57e2b4a8dd9))
+* Added Get user data function OpenPricesAPIClient ([#1085](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1085)) ([f0cd3aa](https://github.com/openfoodfacts/openfoodfacts-dart/commit/f0cd3aa66dd276d51dc2de01e0c4036ce325ca19))
+* bring supported wiki country page up to date ([#1049](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1049)) ([9364fdf](https://github.com/openfoodfacts/openfoodfacts-dart/commit/9364fdfc55c219f3e02857814120b7ab54248326))
+
+
+### Bug Fixes
+
+* 1038 - feedback for incorrect packaging numbers ([#1074](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1074)) ([e5f1df4](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e5f1df43b09208432a7570d171f9808c18a61236))
+
+## [3.22.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.21.0...v3.22.0) (2025-04-28)
+
+
+### Features
+
+* 1066 - new parameters for proof upload ([#1071](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1071)) ([53b2c42](https://github.com/openfoodfacts/openfoodfacts-dart/commit/53b2c4216ee52ac2464d191d288c311fe6bc8757))
+* add additional parameters to PriceUser model ([#1065](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1065)) ([14174ef](https://github.com/openfoodfacts/openfoodfacts-dart/commit/14174ef6fc347266acedf3e33475ac969f772437))
+* Add flexibility to PriceTotalStats ([#1059](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1059)) ([3f29110](https://github.com/openfoodfacts/openfoodfacts-dart/commit/3f291104bdc497b4db9345af2b08627996bd35d0))
+* Add iso3Code field to OpenFoodFactsCountry enum per [#1067](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1067) ([#1068](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1068)) ([03c0e4e](https://github.com/openfoodfacts/openfoodfacts-dart/commit/03c0e4e3fdccc7de74dcd105d53b2706779e0874))
+* Added kind parameter to getPricesParameters and getProofsParameters ([#1064](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1064)) ([cac6076](https://github.com/openfoodfacts/openfoodfacts-dart/commit/cac6076dd9a830e8d00f143e49d5b07ef6c81d3d))
+
+## [3.21.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.20.0...v3.21.0) (2025-03-29)
+
+
+### Features
+
+* Add localized fields for conservation conditions and customer service in Product object ([#1020](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1020)) ([210a0a3](https://github.com/openfoodfacts/openfoodfacts-dart/commit/210a0a3eb68dda13083ae6b329605242596103f3))
+* added editable product field "traces" ([#1052](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1052)) ([7e921b5](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7e921b585395e3f57ff87b0746c6ee3ad7edbeb1))
+
+## [3.20.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.19.0...v3.20.0) (2025-03-04)
+
+
+### Features
+
+* 1041 - add wiki url to countries ([#1047](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1047)) ([162abc2](https://github.com/openfoodfacts/openfoodfacts-dart/commit/162abc2996771186c854bcb163034be3c59a2362))
+* added product fields 'data_quality_{*_}tags' ([#1033](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1033)) ([8d12daf](https://github.com/openfoodfacts/openfoodfacts-dart/commit/8d12daf081dfe04205ea59fd397fd8fe83230036))
+
+
+### Bug Fixes
+
+* 1045 - OSM fields now nullable and discountType for Price ([#1046](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1046)) ([1315638](https://github.com/openfoodfacts/openfoodfacts-dart/commit/1315638e56a54cd7c0153cd432247deaec7e1db2))
+* ability to empty packagings list ([#1043](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1043)) ([ad7c276](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ad7c2760ffe40afb7c50df90596bdbc967882169))
+
+## [3.19.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.18.1...v3.19.0) (2025-01-27)
+
+
+### Features
+
+* 1003 - new price type field ([#1016](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1016)) ([5f7b911](https://github.com/openfoodfacts/openfoodfacts-dart/commit/5f7b9117b721f0568ba80e296b47fd3f1e5f5fe3))
+* 1011 - new "getPriceProducts" method ([#1012](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1012)) ([c583648](https://github.com/openfoodfacts/openfoodfacts-dart/commit/c5836487b196f2b5b6d46e853af4f28ed8fdbd33))
+* Added robotoff nutrient extraction ([#1026](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1026)) ([cadc27d](https://github.com/openfoodfacts/openfoodfacts-dart/commit/cadc27d05eec50d190492db71dd951c846fb5afc))
+
 ## [3.18.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.18.0...v3.18.1) (2024-12-01)
 
 
