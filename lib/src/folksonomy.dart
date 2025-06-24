@@ -190,7 +190,7 @@ class FolksonomyAPIClient {
       response,
       authorizedStatus: <int>[200, 404],
     );
-    if (response.body == 'null') {
+    if (response.body == 'null' || response.body == '[]') {
       // not found
       return null;
     }
