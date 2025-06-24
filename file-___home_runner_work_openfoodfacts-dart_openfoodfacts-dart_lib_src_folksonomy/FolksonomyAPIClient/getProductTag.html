@@ -95,7 +95,7 @@
     response,
     authorizedStatus: &lt;int&gt;[200, 404],
   );
-  if (response.body == &#39;null&#39;) {
+  if (response.body == &#39;null&#39; || response.body == &#39;[]&#39;) {
     &#47;&#47; not found
     return null;
   }
