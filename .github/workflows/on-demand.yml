@@ -9,6 +9,8 @@ jobs:
   # Action to update test results by issuing /lint
   run_lint:
     name: "On demand linting"
+    permissions:
+      contents: write
     if: |
       github.event.issue.pull_request &&
       (github.event.comment.body == '/lint') &&
