@@ -326,12 +326,30 @@ void main() {
       expect(deleteResult.value, true);
     });
 
-    test('getKeys', () async {
+    test('getKeys (all)', () async {
       final Map<String, KeyStats> result = await FolksonomyAPIClient.getKeys();
       final KeyStats keyStats = result[knownKey]!;
       expect(keyStats.key, knownKey);
       expect(keyStats.count, greaterThanOrEqualTo(1));
       expect(keyStats.values, greaterThanOrEqualTo(1));
+    });
+
+    test('getKeys (filtered)', () async {
+      final Map<String, KeyStats> result =
+          await FolksonomyAPIClient.getKeys(query: knownKey);
+      final KeyStats keyStats = result[knownKey]!;
+      expect(keyStats.key, knownKey);
+      expect(keyStats.count, greaterThanOrEqualTo(1));
+      expect(keyStats.values, greaterThanOrEqualTo(1));
+    });
+
+    test('getValues', () async {
+      final Map<String, ValueCount> result =
+          await FolksonomyAPIClient.getValues(key: knownKey);
+      expect(result, isNotEmpty);
+      for (final MapEntry<String, ValueCount> entry in result.entries) {
+        expect(entry.value.productCount, greaterThanOrEqualTo(1));
+      }
     });
 
     test('ping', () async => await FolksonomyAPIClient.ping());
