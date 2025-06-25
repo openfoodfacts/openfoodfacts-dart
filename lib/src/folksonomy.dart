@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:openfoodfacts/src/model/value_count.dart';
 
 import 'model/key_stats.dart';
 import 'model/product_list.dart';
 import 'model/product_stats.dart';
 import 'model/product_tag.dart';
+import 'model/value_count.dart';
 import 'prices/maybe_error.dart';
 import 'utils/http_helper.dart';
 import 'utils/open_food_api_configuration.dart';

@@ -347,9 +347,15 @@ void main() {
       final Map<String, ValueCount> result =
           await FolksonomyAPIClient.getValues(key: knownKey);
       expect(result, isNotEmpty);
+      bool found = false;
       for (final MapEntry<String, ValueCount> entry in result.entries) {
+        expect(entry.key, entry.value.value);
         expect(entry.value.productCount, greaterThanOrEqualTo(1));
+        if (entry.value.value == knownValue) {
+          found = true;
+        }
       }
+      expect(found, isTrue);
     });
 
     test('ping', () async => await FolksonomyAPIClient.ping());
