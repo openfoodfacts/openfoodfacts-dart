@@ -194,7 +194,7 @@
 </dd>
 
         <dt id="getKeys" class="callable">
-  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_folksonomy/FolksonomyAPIClient/getKeys.html">getKeys</a></span><span class="signature">(<wbr>{<span class="parameter" id="getKeys-param-owner"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.8.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">owner</span>, </span><span class="parameter" id="getKeys-param-uriHelper"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriHelper-class.html">UriHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFolksonomyProd</span></span>})
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_folksonomy/FolksonomyAPIClient/getKeys.html">getKeys</a></span><span class="signature">(<wbr>{<span class="parameter" id="getKeys-param-owner"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.8.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">owner</span>, </span><span class="parameter" id="getKeys-param-query"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.8.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">query</span>, </span><span class="parameter" id="getKeys-param-uriHelper"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriHelper-class.html">UriHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFolksonomyProd</span></span>})
     <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.8.1/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.8.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.8.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_key_stats/KeyStats-class.html">KeyStats</a></span>&gt;</span></span>&gt;</span></span>
   </span>
   
@@ -280,6 +280,19 @@
 </dt>
 <dd>
   Returns all the <a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_tag/ProductTag-class.html">ProductTag</a>s for this product, with their subkeys.
+  
+
+</dd>
+
+        <dt id="getValues" class="callable">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_folksonomy/FolksonomyAPIClient/getValues.html">getValues</a></span><span class="signature">(<wbr>{<span class="parameter" id="getValues-param-key"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.8.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">key</span>, </span><span class="parameter" id="getValues-param-owner"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.8.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">owner</span>, </span><span class="parameter" id="getValues-param-query"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.8.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">query</span>, </span><span class="parameter" id="getValues-param-limit"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.8.1/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">limit</span>, </span><span class="parameter" id="getValues-param-uriHelper"><span class="type-annotation"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriHelper-class.html">UriHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFolksonomyProd</span></span>})
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.8.1/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.8.1/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.8.1/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_value_count/ValueCount-class.html">ValueCount</a></span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the list of values related to tag keys with statistics.
   
 
 </dd>
