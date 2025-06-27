@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.24.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.23.0...v3.24.0) (2025-06-27)
+
+
+### Features
+
+* 1104 - folksonomy "getValues" ([#1105](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1105)) ([cc4ee57](https://github.com/openfoodfacts/openfoodfacts-dart/commit/cc4ee57e7cbf6f407ce0b2ee22221ecc3acf78ef))
+
+
+### Bug Fixes
+
+* 1099 - additional test for "folksonomy get product tag": "not found" ([#1102](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1102)) ([ca2447c](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ca2447cb7677b710517b54909add91808f9f2535))
+
 ## [3.23.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.22.0...v3.23.0) (2025-06-09)
 
 
