@@ -7,6 +7,7 @@ import 'model/key_stats.dart';
 import 'model/product_list.dart';
 import 'model/product_stats.dart';
 import 'model/product_tag.dart';
+import 'model/value_count.dart';
 import 'prices/maybe_error.dart';
 import 'utils/http_helper.dart';
 import 'utils/open_food_api_configuration.dart';
@@ -366,10 +367,12 @@ class FolksonomyAPIClient {
   /// Returns the list of tag keys with statistics.
   static Future<Map<String, KeyStats>> getKeys({
     final String? owner,
+    final String? query,
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Map<String, String> parameters = <String, String>{
       if (owner != null) 'owner': owner,
+      if (query != null) 'q': query,
     };
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
@@ -385,6 +388,37 @@ class FolksonomyAPIClient {
     for (var element in json) {
       final KeyStats item = KeyStats.fromJson(element);
       result[item.key] = item;
+    }
+    return result;
+  }
+
+  /// Returns the list of values related to tag keys with statistics.
+  static Future<Map<String, ValueCount>> getValues({
+    required final String key,
+    final String? owner,
+    final String? query,
+    final int? limit,
+    final UriHelper uriHelper = uriHelperFolksonomyProd,
+  }) async {
+    final Map<String, String> parameters = <String, String>{
+      if (owner != null) 'owner': owner,
+      if (query != null) 'q': query,
+      if (limit != null) 'limit': limit.toString(),
+    };
+    final Response response = await HttpHelper().doGetRequest(
+      uriHelper.getUri(
+        path: 'values/$key',
+        queryParameters: parameters,
+      ),
+      uriHelper: uriHelper,
+    );
+    _checkResponse(response);
+    final Map<String, ValueCount> result = <String, ValueCount>{};
+    final List<dynamic> json =
+        HttpHelper().jsonDecode(response.body) as List<dynamic>;
+    for (var element in json) {
+      final ValueCount item = ValueCount.fromJson(element);
+      result[item.value] = item;
     }
     return result;
   }

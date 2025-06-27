@@ -86,6 +86,7 @@ export 'src/model/taxonomy_packaging_recycling.dart';
 export 'src/model/taxonomy_packaging_shape.dart';
 export 'src/model/user.dart';
 export 'src/model/user_agent.dart';
+export 'src/model/value_count.dart';
 export 'src/open_food_api_client.dart';
 export 'src/open_food_search_api_client.dart';
 export 'src/open_prices_api_client.dart';
