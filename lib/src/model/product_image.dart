@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../utils/language_helper.dart';
 import '../utils/open_food_api_configuration.dart';
 import '../utils/uri_helper.dart';
@@ -190,6 +192,17 @@ class ProductImage {
       '${uriHelper.getProductImageRootUrl(barcode)}'
       '/'
       '${getUrlFilename(imageSize: imageSize)}';
+
+  /// Returns the url to display this image, for [FlexibleProduct].
+  @experimental
+  String getFlexibleUrl(
+    final String barcode, {
+    final ImageSize? imageSize,
+    required final String imageUrlBase,
+  }) =>
+      '$imageUrlBase'
+      '/${UriProductHelper.getBarcodeSubPath(barcode)}'
+      '/${getUrlFilename(imageSize: imageSize)}';
 
   /// Returns just the filename of the url to display this image.
   ///
