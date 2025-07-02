@@ -1,11 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../../interface/json_object.dart';
 import '../../utils/json_helper.dart';
-import 'nutriscore.dart';
 
 part 'nutriscore_data_2023.g.dart';
 
-/// Detailed data of NutriScore version 2023.
+/// Detailed data of Nutri-Score version 2023.
 @JsonSerializable()
 class NutriScoreData2023 extends JsonObject {
   @JsonKey(
@@ -66,18 +65,6 @@ class NutriScoreData2023 extends JsonObject {
   int? positivePointsMax;
 
   NutriScoreData2023();
-
-  /// Infers the [NutriScoreCategory2023] based on boolean flags.
-  NutriScoreCategory2023 get category {
-    // water must be checked first to avoid beverage+water conflict
-    if (isWater == true) return NutriScoreCategory2023.water;
-    if (isBeverage == true) return NutriScoreCategory2023.beverage;
-    if (isFatOilNutsSeeds == true)
-      return NutriScoreCategory2023.fatOilNutsSeeds;
-    if (isCheese == true) return NutriScoreCategory2023.cheese;
-    if (isRedMeatProduct == true) return NutriScoreCategory2023.redMeatProduct;
-    return NutriScoreCategory2023.general;
-  }
 
   factory NutriScoreData2023.fromJson(Map<String, dynamic> json) =>
       _$NutriScoreData2023FromJson(json);

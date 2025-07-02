@@ -26,7 +26,6 @@ export 'src/model/nutrient_modifier.dart';
 export 'src/model/nutrient.dart';
 export 'src/model/nutrient_levels.dart';
 export 'src/model/nutriments.dart';
-export 'src/model/nutriscore/nutriscore.dart';
 export 'src/model/nutriscore/nutriscore_data_2021.dart';
 export 'src/model/nutriscore/nutriscore_data_2023.dart';
 export 'src/model/nutriscore/nutriscore_detail_2021.dart';

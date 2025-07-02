@@ -161,44 +161,33 @@ void main() {
       final nutriScoreDetails = result.product!.nutriScoreDetails;
       expect(nutriScoreDetails, isNotNull);
 
-      // test Nutri-Score with domain model
-      final nutriScore = nutriScoreDetails!.nutriScore2023;
-      expect(nutriScore, isNotNull);
-      expect(nutriScore!.status, NutriScoreStatus.notApplicable);
-      expect(nutriScore.grade, isNull);
-      expect(nutriScore.score, isNull);
-      expect(nutriScore.category, isNotNull);
-      expect(nutriScore.category, NutriScoreCategory2023.beverage);
-      expect(nutriScore.categoryAvailable, isTrue);
-      expect(nutriScore.notApplicableCategory, category);
-
       // test Nutri-Score with raw data
-      final rawNutriScore2021 = nutriScoreDetails.rawNutriScore2021;
-      expect(rawNutriScore2021, isNotNull);
-      expect(rawNutriScore2021!.grade, "not-applicable");
-      expect(rawNutriScore2021.categoryAvailable, isTrue);
-      expect(rawNutriScore2021.score, isNull);
-      expect(rawNutriScore2021.nutrientsAvailable, isTrue);
-      expect(rawNutriScore2021.nutriScoreComputed, isFalse);
-      expect(rawNutriScore2021.nutriScoreApplicable, isFalse);
-      expect(rawNutriScore2021.data, isNotNull);
-      expect(rawNutriScore2021.data!.isBeverage, isTrue);
-      expect(rawNutriScore2021.data!.isWater, isFalse);
-      expect(rawNutriScore2021.data!.isCheese, isFalse);
-      expect(rawNutriScore2021.data!.isFat, isFalse);
-      expect(rawNutriScore2021.notApplicableCategory, category);
+      final nutriScore2021 = nutriScoreDetails?.v2021;
+      expect(nutriScore2021, isNotNull);
+      expect(nutriScore2021!.grade, "not-applicable");
+      expect(nutriScore2021.categoryAvailable, isTrue);
+      expect(nutriScore2021.score, isNull);
+      expect(nutriScore2021.nutrientsAvailable, isTrue);
+      expect(nutriScore2021.nutriScoreComputed, isFalse);
+      expect(nutriScore2021.nutriScoreApplicable, isFalse);
+      expect(nutriScore2021.data, isNotNull);
+      expect(nutriScore2021.data!.isBeverage, isTrue);
+      expect(nutriScore2021.data!.isWater, isFalse);
+      expect(nutriScore2021.data!.isCheese, isFalse);
+      expect(nutriScore2021.data!.isFat, isFalse);
+      expect(nutriScore2021.notApplicableCategory, category);
 
-      final rawNutriScore2023 = nutriScoreDetails.rawNutriScore2023;
-      expect(rawNutriScore2023, isNotNull);
-      expect(rawNutriScore2023!.grade, "not-applicable");
-      expect(rawNutriScore2023.score, isNull);
-      expect(rawNutriScore2023.data, isNotNull);
-      expect(rawNutriScore2023.notApplicableCategory, category);
-      expect(rawNutriScore2023.data!.isBeverage, isTrue);
-      expect(rawNutriScore2023.data!.isRedMeatProduct, isFalse);
-      expect(rawNutriScore2023.data!.isFatOilNutsSeeds, isFalse);
-      expect(rawNutriScore2023.data!.isWater, isFalse);
-      expect(rawNutriScore2023.data!.isCheese, isFalse);
+      final nutriScore2023 = nutriScoreDetails?.v2023;
+      expect(nutriScore2023, isNotNull);
+      expect(nutriScore2023!.grade, "not-applicable");
+      expect(nutriScore2023.score, isNull);
+      expect(nutriScore2023.data, isNotNull);
+      expect(nutriScore2023.notApplicableCategory, category);
+      expect(nutriScore2023.data!.isBeverage, isTrue);
+      expect(nutriScore2023.data!.isRedMeatProduct, isFalse);
+      expect(nutriScore2023.data!.isFatOilNutsSeeds, isFalse);
+      expect(nutriScore2023.data!.isWater, isFalse);
+      expect(nutriScore2023.data!.isCheese, isFalse);
     });
 
     test('check nutriscore data for cookies', () async {
@@ -221,45 +210,33 @@ void main() {
       final nutriScoreDetails = result.product!.nutriScoreDetails;
       expect(nutriScoreDetails, isNotNull);
 
-      // test Nutri-Score with domain model
-      final nutriScore = nutriScoreDetails!.nutriScore2023;
-      expect(nutriScore, isNotNull);
-      expect(nutriScore!.status, NutriScoreStatus.computed);
-      expect(nutriScore.grade, NutriScoreGrade.e);
-      expect(nutriScore.score, 25);
-      expect(nutriScore.category, isNotNull);
-      expect(nutriScore.category, NutriScoreCategory2023.general);
-      expect(nutriScore.categoryAvailable, isTrue);
-      expect(nutriScore.nutrientsAvailable, isTrue);
-      expect(nutriScore.notApplicableCategory, isNull);
-
       // test Nutri-Score with raw data
-      final rawNutriScore2021 = nutriScoreDetails.rawNutriScore2021;
-      expect(rawNutriScore2021, isNotNull);
-      expect(rawNutriScore2021!.grade, "e");
-      expect(rawNutriScore2021.categoryAvailable, isTrue);
-      expect(rawNutriScore2021.score, 23);
-      expect(rawNutriScore2021.nutrientsAvailable, isTrue);
-      expect(rawNutriScore2021.nutriScoreComputed, isTrue);
-      expect(rawNutriScore2021.nutriScoreApplicable, isTrue);
-      expect(rawNutriScore2021.data, isNotNull);
-      expect(rawNutriScore2021.data!.isBeverage, isFalse);
-      expect(rawNutriScore2021.data!.isWater, isFalse);
-      expect(rawNutriScore2021.data!.isCheese, isFalse);
-      expect(rawNutriScore2021.data!.isFat, isFalse);
-      expect(rawNutriScore2021.notApplicableCategory, isNull);
+      final nutriScore2021 = nutriScoreDetails?.v2021;
+      expect(nutriScore2021, isNotNull);
+      expect(nutriScore2021!.grade, "e");
+      expect(nutriScore2021.categoryAvailable, isTrue);
+      expect(nutriScore2021.score, 23);
+      expect(nutriScore2021.nutrientsAvailable, isTrue);
+      expect(nutriScore2021.nutriScoreComputed, isTrue);
+      expect(nutriScore2021.nutriScoreApplicable, isTrue);
+      expect(nutriScore2021.data, isNotNull);
+      expect(nutriScore2021.data!.isBeverage, isFalse);
+      expect(nutriScore2021.data!.isWater, isFalse);
+      expect(nutriScore2021.data!.isCheese, isFalse);
+      expect(nutriScore2021.data!.isFat, isFalse);
+      expect(nutriScore2021.notApplicableCategory, isNull);
 
-      final rawNutriScore2023 = nutriScoreDetails.rawNutriScore2023;
-      expect(rawNutriScore2023, isNotNull);
-      expect(rawNutriScore2023!.grade, "e");
-      expect(rawNutriScore2023.score, 25);
-      expect(rawNutriScore2023.data, isNotNull);
-      expect(rawNutriScore2023.notApplicableCategory, isNull);
-      expect(rawNutriScore2023.data!.isBeverage, isFalse);
-      expect(rawNutriScore2023.data!.isRedMeatProduct, isFalse);
-      expect(rawNutriScore2023.data!.isFatOilNutsSeeds, isFalse);
-      expect(rawNutriScore2023.data!.isWater, isFalse);
-      expect(rawNutriScore2023.data!.isCheese, isFalse);
+      final nutriScore2023 = nutriScoreDetails?.v2023;
+      expect(nutriScore2023, isNotNull);
+      expect(nutriScore2023!.grade, "e");
+      expect(nutriScore2023.score, 25);
+      expect(nutriScore2023.data, isNotNull);
+      expect(nutriScore2023.notApplicableCategory, isNull);
+      expect(nutriScore2023.data!.isBeverage, isFalse);
+      expect(nutriScore2023.data!.isRedMeatProduct, isFalse);
+      expect(nutriScore2023.data!.isFatOilNutsSeeds, isFalse);
+      expect(nutriScore2023.data!.isWater, isFalse);
+      expect(nutriScore2023.data!.isCheese, isFalse);
     });
 
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',
