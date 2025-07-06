@@ -106,6 +106,7 @@ class Proof extends JsonObject {
   @JsonKey(name: 'owner_comment')
   String? ownerComment;
 
+  /// Name of the source (app, website…). Read-only.
   @JsonKey()
   String? source;
 
