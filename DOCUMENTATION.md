@@ -283,14 +283,9 @@ dart test
 ## Applications Using This SDK
 
 ### Official Application
-
-  * **Open Food Facts (Codename Smoothie)**: The official app, available on [Android](https://play.google.com/store/apps/details?id=org.openfoodfacts.scanner) and [iOS](https://apps.apple.com/app/open-food-facts/id588797948). Its source code is also on [GitHub](https://github.com/openfoodfacts/smooth-app).
-
-### Third-Party Applications
-
-  * **Glutten Scan**: Available on [Android](https://play.google.com/store/apps/details?id=com.healthyfood.gluten_free_app) and [iOS](https://apps.apple.com/ch/app/gluten-scanner/id1540660083).
-  * **Halal & Healthy**: Available on [Android](https://play.google.com/store/apps/details?id=com.TagIn.Tech.handh) and [iOS](https://apps.apple.com/ch/app/halal-healthy/id1603051382).
-  * **Fitness Tracker**: Available on [Android](https://play.google.com/store/apps/details?id=dk.cepk.fitness_tracker).
-  * [All public repositories using this package](https://github.com/openfoodfacts/openfoodfacts-dart/network/dependents).
+Feel [free to open a PR to add your application in this list](https://github.com/openfoodfacts/openfoodfacts-dart/edit/master/REUSERS.md).
+Please get in touch at reuse@openfoodfacts.org
+We are very interested in learning what the Open Food Facts data is used for. It is not mandatory, but we would very much appreciate it if you tell us about your re-uses (https://forms.gle/hwaeqBfs8ywwhbTg8) so that we can share them with the Open Food Facts community. You can also fill this form to get a chance to get your app featured: https://forms.gle/hwaeqBfs8ywwhbTg8
+[See REUSERS.md for a complete list of reusers and more information.](./REUSERS.md)
 
 -----
