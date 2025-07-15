@@ -24,7 +24,7 @@ The database is constantly growing thanks to contributions from users like you, 
 
 ## How it Works
 
-The SDK leverages the Open\*Facts APIs, which return product data in JSON format. These JSON responses are then converted into easy-to-understand Dart objects, simplifying their use in your applications. The SDK also enables you to edit existing products or upload new ones to the databases using the same straightforward product structures.
+The SDK leverages the Open (Food/PetFood/Beauty/Products) Facts APIs, which return product data in JSON format. These JSON responses are then converted into easy-to-understand Dart objects, simplifying their use in your applications. The SDK also enables you to edit existing products or upload new ones to the databases using the same straightforward product structures.
 
 -----
 
