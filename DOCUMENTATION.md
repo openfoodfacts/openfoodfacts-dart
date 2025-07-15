@@ -1,3 +1,4 @@
+# Open Food Facts - Dart
 The Open Food Facts Dart SDK allows you to access and contribute to a vast open and crowdsourced database that includes **food**, **beauty products**, **pet food**, and other **products**. This SDK provides easy access to information from Open Food Facts, Open Beauty Facts, Open Pet Food Facts, and Open Products Facts.
 
 -----
