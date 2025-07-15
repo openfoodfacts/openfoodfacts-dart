@@ -30,11 +30,11 @@ The SDK leverages the Open (Food/PetFood/Beauty/Products) Facts APIs, which retu
 
 ## Understanding Language Mechanics
 
-When displaying or updating product data in specific languages, it's crucial to understand how the Open\*Facts APIs handle multilingual information. It is **highly recommended** to use the `..InLanguages` fields for both displaying and updating data to prevent accidental overwrites of existing language-specific data.
+When displaying or updating product data in specific languages, it's crucial to understand how the Open(Food/PetFood/Beauty/Products)Facts APIs handle multilingual information. It is **highly recommended** to use the `..InLanguages` fields for both displaying and updating data to prevent accidental overwrites of existing language-specific data.
 
 ### Detailed Explanation
 
-Products in the Open\*Facts databases can have various fields available in multiple languages. These fields fall into two main categories:
+Products in the Open(Food/PetFood/Beauty/Products)Facts databases can have various fields available in multiple languages. These fields fall into two main categories:
 
 1.  **Direct Packaging Information**: Text fields like `productName` and `ingredientsText` are often stored exactly as they appear on the product packaging, without significant backend processing.
 2.  **Meta-Information Tags**: Fields like `countriesTags` (countries where sold) or `categoriesTags` (product categories) contain meta-information. These are processed by the backend and may not always be suitable for direct display without further formatting.
@@ -242,15 +242,16 @@ OpenFoodAPIConfiguration.globalUser = User(
 
 ## Open Data License
 
-The Open\*Facts databases are licensed under the Open Database License (OdBL). This requires attributing the source and contributing back any additions (photos, data), which this package facilitates.
+The Open(Food/PetFood/Beauty/Products)Facts databases are licensed under the Open Database License (OdBL). This requires attributing the source and contributing back any additions (photos, data), which this package facilitates.
 
 -----
 
 ## Useful Resources
 
-  * **API Documentation Issues**: [github.com/openfoodfacts/api-documentation/issues](https://github.com/openfoodfacts/api-documentation/issues)
+  * **API Documentation Issues**: 
+  * **API documentation**: https://openfoodfacts.github.io/openfoodfacts-server/api/
   * **SDK Documentation**: [pub.dev/documentation/openfoodfacts/latest/index.html](https://pub.dev/documentation/openfoodfacts/latest/index.html)
-  * **Open Food Facts Slack**: [openfoodfacts.slack.com](https://openfoodfacts.slack.com)
+  * **Open Food Facts Slack**: [openfoodfacts.slack.com](https://openfoodfacts.slack.com) (Signup first at https://slack.openfoodfacts.org)
 
 -----
 
