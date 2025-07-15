@@ -14,7 +14,7 @@ Open Food Facts is a collaborative, open-source project that collects data on mi
   * **Serving sizes**
   * **Nutri-Score** (for food products)
   * **NOVA group** (for food products, concerning ultra-processing)
-  * **Eco-Score** (for food products, regarding environmental impact)
+  * **Green-Score** (for food products, regarding environmental impact)
   * **Packaging details**
   * **Certifications and labels**
 
