@@ -48,7 +48,29 @@ class FlexibleProduct extends FlexibleMap {
       (json['attribute_groups'] as List<dynamic>?)
           ?.map(AttributeGroup.fromJson);
 
-  String? get brands => json['brands'] as String?;
+  static const String _brandsSeparator = ', ';
+
+  String? get brandsAsString {
+    final result = json['brands'];
+    if (result == null) {
+      return null;
+    }
+    if (result is String) {
+      return result;
+    }
+    return (result as List<String>).join(_brandsSeparator);
+  }
+
+  List<String>? get brandsAsList {
+    final result = json['brands'];
+    if (result == null) {
+      return null;
+    }
+    if (result is List<String>) {
+      return result;
+    }
+    return (result as String).split(_brandsSeparator);
+  }
 
   String? get categories => json['categories'] as String?;
 

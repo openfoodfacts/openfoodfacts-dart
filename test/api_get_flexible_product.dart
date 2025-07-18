@@ -22,7 +22,8 @@ void main() {
     expect(product.abbreviatedName, isNotNull);
     expect(product.additives, isNotNull);
     expect(product.attributeGroups, isNotNull);
-    expect(product.brands, isNotNull);
+    expect(product.brandsAsString, isNotNull);
+    expect(product.brandsAsList, isNotNull);
     expect(product.categories, isNotNull);
     expect(product.categoriesTags, isNotNull);
     expect(product.categoriesTagsInLanguages, isNotNull);
@@ -72,6 +73,7 @@ void main() {
 
   // Smoothie fields as of 2025-04-04
   const List<ProductField> fields = <ProductField>[
+    ProductField.SCHEMA_VERSION,
     ProductField.NAME,
     ProductField.NAME_ALL_LANGUAGES,
     ProductField.BRANDS,
@@ -172,7 +174,7 @@ void main() {
             ProductQueryConfiguration(
           barcode,
           language: language,
-          fields: [ProductField.BARCODE],
+          fields: [ProductField.SCHEMA_VERSION],
           version: ProductQueryVersion(apiVersion),
         );
         final FlexibleProductResult result = await getFlexibleProductInProd(
@@ -194,7 +196,12 @@ void main() {
             ProductQueryConfiguration(
           barcode,
           language: language,
-          fields: [ProductField.BRANDS],
+          fields: [ProductField.BRANDS, ProductField.SCHEMA_VERSION],
+          flexibleFields: <String>[
+            'brands_hierarchy',
+            'brands_lc',
+            'brands_tags'
+          ],
           version: ProductQueryVersion(apiVersion),
         );
         final FlexibleProductResult result = await getFlexibleProductInProd(
@@ -204,7 +211,8 @@ void main() {
         final FlexibleProduct? product = result.product;
         expect(product, isNotNull);
         expect(product!.schemaVersion, expectedSchemaVersion);
-        expect(product.brands, 'Wasa');
+        expect(product.brandsAsString, 'Wasa');
+        expect(product.brandsAsList, <String>['Wasa']);
         if (apiVersion >= 3.2) {
           expect(product.json['brands_hierarchy'], ["xx:Wasa"]);
           expect(product.json['brands_lc'], 'xx');
@@ -212,7 +220,7 @@ void main() {
         } else {
           expect(product.json['brands_hierarchy'], isNull);
           expect(product.json['brands_lc'], isNull);
-          expect(product.json['brands_tags'], isNull);
+          expect(product.json['brands_tags'], ['wasa']);
         }
       }
     });

@@ -40,6 +40,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     super.languages,
     super.country,
     super.fields,
+    super.flexibleFields,
     this.productTypeFilter,
   });
 
