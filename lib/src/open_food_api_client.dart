@@ -7,7 +7,6 @@ import 'interface/json_object.dart';
 import 'model/login_status.dart';
 import 'model/ocr_ingredients_result.dart';
 import 'model/ocr_packaging_result.dart';
-import 'model/old_product_result.dart';
 import 'model/ordered_nutrients.dart';
 import 'model/parameter/barcode_parameter.dart';
 import 'model/per_size.dart';
@@ -274,34 +273,6 @@ class OpenFoodAPIClient {
     final ProductResultV3 result = ProductResultV3.fromJson(
       HttpHelper().jsonDecode(jsonStr),
     );
-    if (result.product != null) {
-      ProductHelper.removeImages(result.product!, configuration.language);
-      ProductHelper.createImageUrls(result.product!, uriHelper: uriHelper);
-    }
-    return result;
-  }
-
-  /// Returns the product for the given barcode, with an old syntax.
-  ///
-  /// Temporarily needed for OBF, OPF and OPFF, that do not support api v3.
-  // TODO: deprecated from 2024-11-28; remove when old enough
-  @Deprecated('Use getProductV3 and ProductResultV3 instead')
-  static Future<OldProductResult> getOldProduct(
-    final ProductQueryConfiguration configuration, {
-    final User? user,
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) async {
-    if (configuration.matchesV3()) {
-      Exception("The configuration must not match V3!");
-    }
-    final String productString = await getProductString(
-      configuration,
-      user: user,
-      uriHelper: uriHelper,
-    );
-    final String jsonStr = _replaceQuotes(productString);
-    final OldProductResult result =
-        OldProductResult.fromJson(jsonDecode(jsonStr));
     if (result.product != null) {
       ProductHelper.removeImages(result.product!, configuration.language);
       ProductHelper.createImageUrls(result.product!, uriHelper: uriHelper);
