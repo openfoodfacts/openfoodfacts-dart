@@ -62,6 +62,9 @@ OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
 
 All possible configurations can be found [here](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIConfiguration-class.html).
 
+### Migrations
+[Find migration instructions here](https://github.com/openfoodfacts/openfoodfacts-dart/edit/master/MIGRATIONS.md).
+
 ### Features
 
 Code examples for the following tasks:
@@ -200,7 +203,7 @@ If found a bug or missing features in this package, please open an issue for it.
 
 ## Support
 
-If you are having issues, that go beyond the scope of this package, please write to us on [Slack](https://openfoodfacts.slack.com) or send us an email at contact@openfoodfacts.org
+If you are having issues, that go beyond the scope of this package, please write to us on [Slack](https://openfoodfacts.slack.com) or send us an email at reuse@openfoodfacts.org (or contact@openfoodfacts if not related to reuse)
 
 ### Testing
 
