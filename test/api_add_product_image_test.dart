@@ -97,7 +97,7 @@ void main() {
         uriHelper: uriHelper,
       );
 
-      expect(status.status, 'status ok');
+      expect(status.status, Status.statusOK);
     }, timeout: Timeout(Duration(seconds: 60)));
 
     test('add ingredients image test', () async {
@@ -113,7 +113,7 @@ void main() {
         uriHelper: uriHelper,
       );
 
-      expect(status.status, 'status ok');
+      expect(status.status, Status.statusOK);
     });
 
     test('add ingredients image test: resend same image', () async {

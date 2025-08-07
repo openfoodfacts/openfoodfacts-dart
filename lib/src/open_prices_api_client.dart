@@ -8,6 +8,7 @@ import 'package:path/path.dart';
 import 'prices/currency.dart';
 import 'prices/maybe_error.dart';
 import 'prices/price.dart';
+import 'prices/price_user.dart';
 import 'prices/proof.dart';
 import 'prices/get_locations_parameters.dart';
 import 'prices/get_locations_result.dart';
@@ -28,6 +29,7 @@ import 'prices/proof_type.dart';
 import 'prices/session.dart';
 import 'prices/update_price_parameters.dart';
 import 'prices/update_proof_parameters.dart';
+import 'prices/create_proof_parameters.dart';
 import 'utils/http_helper.dart';
 import 'utils/open_food_api_configuration.dart';
 import 'utils/uri_helper.dart';
@@ -61,6 +63,28 @@ class OpenPricesAPIClient {
         forcedHost: _getHost(uriHelper),
         addUserAgentParameters: addUserAgentParameters,
       );
+
+  static Future<MaybeError<PriceUser>> getUser(
+    final String username, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Uri uri = OpenPricesAPIClient.getUri(
+      path: '/api/v1/users/$username',
+    );
+    final http.Response response =
+        await HttpHelper().doGetRequest(uri, uriHelper: uriHelper);
+    try {
+      if (response.statusCode == 200) {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<PriceUser>.value(
+          PriceUser.fromJson(decodedResponse),
+        );
+      }
+    } catch (e) {
+      //
+    }
+    return MaybeError<PriceUser>.responseError(response);
+  }
 
   static Future<MaybeError<GetPricesResult>> getPrices(
     final GetPricesParameters parameters, {
@@ -512,15 +536,20 @@ class OpenPricesAPIClient {
     return MaybeError<GetProofsResult>.responseError(response);
   }
 
+// TODO: deprecated from 2025-04-25 regarding single parameters; remove them when old enough
   static Future<MaybeError<Proof>> uploadProof({
-    required final ProofType proofType,
+    @Deprecated('Use CreateProofParameters instead') final ProofType? proofType,
     required final Uri imageUri,
     required final MediaType mediaType,
-    final int? locationOSMId,
+    final CreateProofParameters? createProofParameters,
+    @Deprecated('Use CreateProofParameters instead') final int? locationOSMId,
+    @Deprecated('Use CreateProofParameters instead')
     final LocationOSMType? locationOSMType,
-    final DateTime? date,
-    final Currency? currency,
+    @Deprecated('Use CreateProofParameters instead') final DateTime? date,
+    @Deprecated('Use CreateProofParameters instead') final Currency? currency,
+    @Deprecated('Use CreateProofParameters instead')
     final int? receiptPriceCount,
+    @Deprecated('Use CreateProofParameters instead')
     final num? receiptPriceTotal,
     required final String bearerToken,
     final UriProductHelper uriHelper = uriHelperFoodProd,
@@ -535,20 +564,25 @@ class OpenPricesAPIClient {
       'Authorization': 'bearer $bearerToken',
       'Content-Type': 'multipart/form-data',
     });
-    request.fields.addAll(
-      <String, String>{
-        'type': proofType.offTag,
-        if (locationOSMId != null) 'location_osm_id': locationOSMId.toString(),
-        if (locationOSMType != null)
-          'location_osm_type': locationOSMType.offTag,
-        if (date != null) 'date': GetParametersHelper.formatDate(date),
-        if (currency != null) 'currency': currency.name,
-        if (receiptPriceCount != null)
-          'receipt_price_count': receiptPriceCount.toString(),
-        if (receiptPriceTotal != null)
-          'receipt_price_total': receiptPriceTotal.toString(),
-      },
-    );
+    if (createProofParameters != null) {
+      request.fields.addAll(createProofParameters.toData());
+    } else {
+      request.fields.addAll(
+        <String, String>{
+          'type': proofType!.offTag,
+          if (locationOSMId != null)
+            'location_osm_id': locationOSMId.toString(),
+          if (locationOSMType != null)
+            'location_osm_type': locationOSMType.offTag,
+          if (date != null) 'date': GetParametersHelper.formatDate(date),
+          if (currency != null) 'currency': currency.name,
+          if (receiptPriceCount != null)
+            'receipt_price_count': receiptPriceCount.toString(),
+          if (receiptPriceTotal != null)
+            'receipt_price_total': receiptPriceTotal.toString(),
+        },
+      );
+    }
     final List<int> fileBytes = await UriReader.instance.readAsBytes(imageUri);
     final String filename = basename(imageUri.toString());
     final http.MultipartFile multipartFile = http.MultipartFile.fromBytes(

@@ -18,6 +18,8 @@ class Status extends JsonObject {
 
   static const int serverErrorStatus = 500;
 
+  static const String statusOK = 'status ok';
+
   /// Commonly 1 = ok, 0 = failed
   final dynamic status;
 

@@ -483,6 +483,8 @@ class Product extends JsonObject {
       toJson: LanguageHelper.toJsonStringsListMap,
       fromJson: LanguageHelper.fromJsonStringsListMap)
   Map<OpenFoodFactsLanguage, List<String>>? tracesTagsInLanguages;
+  @JsonKey(name: 'traces')
+  String? traces;
 
   @JsonKey(name: 'stores_tags')
   List<String>? storesTags;

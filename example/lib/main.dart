@@ -60,7 +60,7 @@ void addProductImage() async {
   // query the OpenFoodFacts API
   Status result = await OpenFoodAPIClient.addProductImage(myUser, image);
 
-  if (result.status != 'status ok') {
+  if (result.status != Status.statusOK) {
     throw Exception(
         'image could not be uploaded: ${result.error} ${result.imageId.toString()}');
   }

@@ -26,7 +26,12 @@ Proof _$ProofFromJson(Map<String, dynamic> json) => Proof()
   ..updated = JsonHelper.nullableStringTimestampToDate(json['updated'])
   ..location = json['location'] == null
       ? null
-      : Location.fromJson(json['location'] as Map<String, dynamic>);
+      : Location.fromJson(json['location'] as Map<String, dynamic>)
+  ..receiptOnlineDeliveryCosts = json['receipt_online_delivery_costs'] as num?
+  ..readyForPriceTagValidation = json['ready_for_price_tag_validation'] as bool?
+  ..ownerConsumption = json['owner_consumption'] as bool?
+  ..ownerComment = json['owner_comment'] as String?
+  ..source = json['source'] as String?;
 
 Map<String, dynamic> _$ProofToJson(Proof instance) => <String, dynamic>{
       'id': instance.id,
@@ -46,6 +51,11 @@ Map<String, dynamic> _$ProofToJson(Proof instance) => <String, dynamic>{
       'created': instance.created.toIso8601String(),
       'updated': instance.updated?.toIso8601String(),
       'location': instance.location,
+      'receipt_online_delivery_costs': instance.receiptOnlineDeliveryCosts,
+      'ready_for_price_tag_validation': instance.readyForPriceTagValidation,
+      'owner_consumption': instance.ownerConsumption,
+      'owner_comment': instance.ownerComment,
+      'source': instance.source,
     };
 
 const _$ProofTypeEnumMap = {

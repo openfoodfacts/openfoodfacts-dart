@@ -1,13 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'currency.dart';
-import 'location.dart';
-import 'location_osm_type.dart';
-import 'proof_type.dart';
 import '../interface/json_object.dart';
 import '../open_prices_api_client.dart';
 import '../utils/json_helper.dart';
 import '../utils/uri_helper.dart';
+import 'currency.dart';
+import 'location.dart';
+import 'location_osm_type.dart';
+import 'proof_type.dart';
 
 part 'proof.g.dart';
 
@@ -93,6 +93,22 @@ class Proof extends JsonObject {
   /// Location. Read-only.
   @JsonKey()
   Location? location;
+
+  @JsonKey(name: 'receipt_online_delivery_costs')
+  num? receiptOnlineDeliveryCosts;
+
+  @JsonKey(name: 'ready_for_price_tag_validation')
+  bool? readyForPriceTagValidation;
+
+  @JsonKey(name: 'owner_consumption')
+  bool? ownerConsumption;
+
+  @JsonKey(name: 'owner_comment')
+  String? ownerComment;
+
+  /// Name of the source (app, website…). Read-only.
+  @JsonKey()
+  String? source;
 
   Proof();
 
