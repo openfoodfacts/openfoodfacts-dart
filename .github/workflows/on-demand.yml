@@ -38,7 +38,7 @@ jobs:
     # we need origin/main to have comparison linting work !
     - name: Fetch origin/develop
       run: |
-        git remote set-branches --add origin develop
+        git remote set-branches --add origin main
         git fetch origin
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
