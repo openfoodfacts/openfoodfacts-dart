@@ -47,7 +47,6 @@ jobs:
         cache: true
         flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
         cache-key: flutter-${{ hashFiles('flutter-version.txt')}}-${{ hashFiles('packages/smooth_app/pubspec.lock')}}
-
       # Check for formatting issues and fix them
     - name: Check for formatting issues (run "dart format . ")
       run: dart format .
