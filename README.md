@@ -198,8 +198,8 @@ You can check the terms of use here : [Terms of use](https://world.openfoodfacts
 
 If found a bug or missing features in this package, please open an issue for it.
 
-- Issue Tracker: github.com/openfoodfacts/openfoodfacts-dart/issues
-- Source Code: github.com/openfoodfacts/openfoodfacts-dart
+- Issue Tracker: <https://github.com/openfoodfacts/openfoodfacts-dart/issues>
+- Source Code: <https://github.com/openfoodfacts/openfoodfacts-dart>
 
 ## Support
 
