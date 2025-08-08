@@ -32,7 +32,13 @@ enum KnowledgePanelAction implements OffTagged {
   addLabels(offTag: 'add_labels'),
 
   /// Action: add countries.
-  addCountries(offTag: 'add_countries');
+  addCountries(offTag: 'add_countries'),
+
+  /// Action: edit the product.
+  editProduct(offTag: 'edit_product'),
+
+  /// Action: report the product to Nutripatrol.
+  reportProductToNutripatrol(offTag: 'report_product_to_nutripatrol');
 
   const KnowledgePanelAction({
     required this.offTag,
