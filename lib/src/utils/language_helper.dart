@@ -1,4 +1,8 @@
+import 'package:meta/meta.dart';
+
+import 'product_fields.dart';
 import '../model/off_tagged.dart';
+import '../model/flexible/flexible_map.dart';
 
 /// Available languages
 enum OpenFoodFactsLanguage implements OffTagged {
@@ -711,6 +715,78 @@ class LanguageHelper {
     final result = <OpenFoodFactsLanguage, List<String>>{};
     for (final key in map.keys) {
       result[LanguageHelper.fromJson(key)] = map[key]!.cast<String>();
+    }
+    return result;
+  }
+
+  @experimental
+  static Iterable<OpenFoodFactsLanguage> _getLanguageTags(
+    final JsonMap json,
+    final String prefix,
+  ) {
+    final result = <OpenFoodFactsLanguage>[];
+    for (final key in json.keys) {
+      if (!key.startsWith(prefix)) {
+        continue;
+      }
+      final String languageCode = key.substring(prefix.length);
+      final OpenFoodFactsLanguage? language =
+          OpenFoodFactsLanguage.fromOffTag(languageCode);
+      if (language != null) {
+        result.add(language);
+      }
+    }
+    return result;
+  }
+
+  @experimental
+  static Map<OpenFoodFactsLanguage, String>? fromJsonStringMapWithPrefix(
+    final JsonMap json, {
+    final ProductField? inProductField,
+    final ProductField? allProductField,
+  }) {
+    final result = <OpenFoodFactsLanguage, String>{};
+    if (allProductField != null) {
+      final dynamic translations =
+          json[allProductField.offTag] as Map<String, dynamic>?;
+      if (translations != null) {
+        for (final MapEntry<String, dynamic> entry in translations.entries) {
+          final OpenFoodFactsLanguage? language =
+              OpenFoodFactsLanguage.fromOffTag(entry.key);
+          if (language == null) {
+            continue;
+          }
+          result[language] = entry.value as String;
+        }
+      }
+    }
+    if (inProductField != null) {
+      final String prefix = inProductField.offTag;
+      final Iterable<OpenFoodFactsLanguage> languages = _getLanguageTags(
+        json,
+        prefix,
+      );
+      for (final language in languages) {
+        result[language] = json['$prefix${language.offTag}']! as String;
+      }
+    }
+    return result;
+  }
+
+  @experimental
+  static Map<OpenFoodFactsLanguage, List<String>>?
+      fromJsonStringsListMapWithPrefix(
+    final JsonMap json, {
+    required final ProductField inProductField,
+  }) {
+    final result = <OpenFoodFactsLanguage, List<String>>{};
+    final String prefix = inProductField.offTag;
+    final Iterable<OpenFoodFactsLanguage> languages = _getLanguageTags(
+      json,
+      prefix,
+    );
+    for (final language in languages) {
+      result[language] = json['$prefix${language.offTag}']!.cast<String>();
     }
     return result;
   }

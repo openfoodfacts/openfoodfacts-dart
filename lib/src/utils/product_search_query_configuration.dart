@@ -12,6 +12,7 @@ class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
     super.languages,
     super.country,
     super.fields,
+    super.flexibleFields,
     required List<Parameter> parametersList,
     required this.version,
   }) : super(

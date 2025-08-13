@@ -5,6 +5,7 @@ import 'language_helper.dart';
 enum ProductField implements OffTagged {
   BARCODE(offTag: 'code'),
   PRODUCT_TYPE(offTag: 'product_type'),
+  SCHEMA_VERSION(offTag: 'schema_version'),
   NAME(
     offTag: 'product_name',
     inLanguagesProductField: ProductField.NAME_IN_LANGUAGES,

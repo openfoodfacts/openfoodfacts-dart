@@ -64,6 +64,13 @@ abstract class AbstractQueryConfiguration {
   ///
   List<ProductField>? fields;
 
+  /// Additional fields that aren't [ProductField] yet.
+  ///
+  /// To be used in experimental code, with new server fields that haven't made
+  /// it to off-dart yet.
+  /// Eventually, those fields should be added to [ProductField].
+  List<String>? flexibleFields;
+
   List<Parameter> additionalParameters;
 
   AbstractQueryConfiguration({
@@ -71,6 +78,7 @@ abstract class AbstractQueryConfiguration {
     this.languages,
     this.country,
     this.fields,
+    this.flexibleFields,
     this.additionalParameters = const [],
   }) {
     fields ??= [ProductField.ALL];
@@ -117,6 +125,9 @@ abstract class AbstractQueryConfiguration {
       );
       if (!ignoreFieldsFilter) {
         final fieldsStrings = convertFieldsToStrings(fields!, queryLanguages);
+        if (flexibleFields != null) {
+          fieldsStrings.addAll(flexibleFields!);
+        }
         result.putIfAbsent('fields', () => fieldsStrings.join(','));
       }
     }
