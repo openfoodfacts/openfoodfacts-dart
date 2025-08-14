@@ -12,7 +12,7 @@ void main() {
     () {
       const int maxSize = 5;
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
-
+      const List<String> excludedItems = [''];
       void basicTest(final AutocompleteSearchResult result) {
         expect(result.took, greaterThanOrEqualTo(0));
         expect(result.timedOut, false);
@@ -26,11 +26,11 @@ void main() {
           const TaxonomyName taxonomyName = TaxonomyName.category;
           final AutocompleteSearchResult result =
               await OpenFoodSearchAPIClient.autocomplete(
-            query: 'pizza',
-            taxonomyNames: <TaxonomyName>[taxonomyName],
-            language: language,
-            size: maxSize,
-          );
+                  query: 'pizza',
+                  taxonomyNames: <TaxonomyName>[taxonomyName],
+                  language: language,
+                  size: maxSize,
+                  excludedItems: excludedItems);
           basicTest(result);
           expect(result.options, hasLength(maxSize));
           for (final AutocompleteSingleResult item in result.options!) {
@@ -69,14 +69,14 @@ void main() {
           for (final String inputValue in inputs.keys) {
             final AutocompleteSearchResult result =
                 await OpenFoodSearchAPIClient.autocomplete(
-              // possibly with a typo
-              query: inputValue,
-              taxonomyNames: <TaxonomyName>[taxonomyName],
-              language: language,
-              size: maxSize,
-              // supposed to fix the typo (if relevant)
-              fuzziness: inputs[inputValue]!,
-            );
+                    // possibly with a typo
+                    query: inputValue,
+                    taxonomyNames: <TaxonomyName>[taxonomyName],
+                    language: language,
+                    size: maxSize,
+                    // supposed to fix the typo (if relevant)
+                    fuzziness: inputs[inputValue]!,
+                    excludedItems: excludedItems);
             basicTest(result);
             expect(result.options, isNotEmpty);
             bool found = false;
@@ -92,20 +92,18 @@ void main() {
         },
       );
 
-      Future<void> simpleTest(
-        final TaxonomyName taxonomyName,
-        final String query,
-        final String expectedValue, {
-        final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH,
-      }) async {
+      Future<void> simpleTest(final TaxonomyName taxonomyName,
+          final String query, final String expectedValue,
+          {final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH,
+          final List<String>? excludedItems}) async {
         final AutocompleteSearchResult result =
             await OpenFoodSearchAPIClient.autocomplete(
-          query: query,
-          taxonomyNames: <TaxonomyName>[taxonomyName],
-          language: language,
-          size: maxSize,
-          fuzziness: Fuzziness.none,
-        );
+                query: query,
+                taxonomyNames: <TaxonomyName>[taxonomyName],
+                language: language,
+                size: maxSize,
+                fuzziness: Fuzziness.none,
+                excludedItems: excludedItems);
         basicTest(result);
         expect(result.options, isNotEmpty);
         bool found = false;
