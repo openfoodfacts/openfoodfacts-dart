@@ -8,12 +8,16 @@ import 'product_preferences_manager.dart';
 ///
 /// cf. https://github.com/openfoodfacts/smooth-app/issues/39
 
+// TODO: deprecated from 2025-08-20; remove when old enough
+@Deprecated('Use MatchedProductStatusV2 instead')
 enum MatchedProductStatus {
   YES,
   NO,
   UNKNOWN,
 }
 
+// TODO: deprecated from 2025-08-20; remove when old enough
+@Deprecated('Use MatchedProductV2 instead')
 class MatchedProduct {
   MatchedProduct(
     this.product,
@@ -67,7 +71,9 @@ class MatchedProduct {
   String _debug = '';
 
   double get score => _score;
+
   MatchedProductStatus? get status => _status;
+
   String get debug => _debug;
 
   static List<MatchedProduct> sort(
