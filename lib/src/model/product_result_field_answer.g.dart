@@ -20,17 +20,9 @@ ProductResultFieldAnswer _$ProductResultFieldAnswerFromJson(
           : LocalizedTag.fromJson(json['message'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$ProductResultFieldAnswerToJson(
-    ProductResultFieldAnswer instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('field', instance.field);
-  writeNotNull('impact', instance.impact);
-  writeNotNull('message', instance.message);
-  return val;
-}
+        ProductResultFieldAnswer instance) =>
+    <String, dynamic>{
+      if (instance.field case final value?) 'field': value,
+      if (instance.impact case final value?) 'impact': value,
+      if (instance.message case final value?) 'message': value,
+    };

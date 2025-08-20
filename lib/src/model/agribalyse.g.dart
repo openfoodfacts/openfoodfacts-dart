@@ -10,15 +10,7 @@ Agribalyse _$AgribalyseFromJson(Map<String, dynamic> json) => Agribalyse(
       score: JsonObject.parseDouble(json['score']),
     );
 
-Map<String, dynamic> _$AgribalyseToJson(Agribalyse instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('score', instance.score);
-  return val;
-}
+Map<String, dynamic> _$AgribalyseToJson(Agribalyse instance) =>
+    <String, dynamic>{
+      if (instance.score case final value?) 'score': value,
+    };

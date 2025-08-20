@@ -17,17 +17,10 @@ EcoscoreAdjustments _$EcoscoreAdjustmentsFromJson(Map<String, dynamic> json) =>
               json['origins_of_ingredients'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$EcoscoreAdjustmentsToJson(EcoscoreAdjustments instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('packaging', instance.packaging?.toJson());
-  writeNotNull(
-      'origins_of_ingredients', instance.originsOfIngredients?.toJson());
-  return val;
-}
+Map<String, dynamic> _$EcoscoreAdjustmentsToJson(
+        EcoscoreAdjustments instance) =>
+    <String, dynamic>{
+      if (instance.packaging?.toJson() case final value?) 'packaging': value,
+      if (instance.originsOfIngredients?.toJson() case final value?)
+        'origins_of_ingredients': value,
+    };
