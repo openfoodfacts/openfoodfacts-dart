@@ -9,7 +9,7 @@ void main() {
   const UriProductHelper uriHelper = uriHelperFoodTest;
 
   group('$OpenFoodAPIClient save product V3', () {
-    const String barcode = '12345678';
+    const String barcode = '7300400481588';
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
     const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
 
