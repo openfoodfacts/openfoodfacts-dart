@@ -31,7 +31,7 @@ class ProductPreferencesSelection {
     if (_setImportance == null) {
       return;
     }
-    await _setImportance!(attributeId, importanceId);
+    await _setImportance(attributeId, importanceId);
   }
 
   /// Gets the importance of an attribute, e.g. from a SharedPreferences.
@@ -67,6 +67,6 @@ class ProductPreferencesSelection {
     if (_notify == null) {
       return;
     }
-    _notify!();
+    _notify();
   }
 }

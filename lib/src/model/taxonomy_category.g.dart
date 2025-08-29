@@ -40,65 +40,80 @@ TaxonomyCategory _$TaxonomyCategoryFromJson(Map<String, dynamic> json) =>
       LanguageHelper.fromJsonStringMap(json['wikidata_wikipedia_category']),
     );
 
-Map<String, dynamic> _$TaxonomyCategoryToJson(TaxonomyCategory instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('agribalyse_food_code',
-      LanguageHelper.toJsonStringMap(instance.agribalyseFoodCode));
-  writeNotNull('agribalyse_food_name',
-      LanguageHelper.toJsonStringMap(instance.agribalyseFoodName));
-  writeNotNull('agribalyse_proxy_food_code',
-      LanguageHelper.toJsonStringMap(instance.agribalyseProxyFoodCode));
-  writeNotNull('agribalyse_proxy_food_name',
-      LanguageHelper.toJsonStringMap(instance.agribalyseProxyFoodName));
-  writeNotNull('agribalyse_proxy_name',
-      LanguageHelper.toJsonStringMap(instance.agribalyseProxyName));
-  writeNotNull(
-      'carbon_footprint_fr_foodges_ingredient',
-      LanguageHelper.toJsonStringMap(
-          instance.carbonFootprintFrFoodgesIngredient));
-  writeNotNull('children', instance.children);
-  writeNotNull('ciqual_food_code',
-      LanguageHelper.toJsonStringMap(instance.ciqualFoodCode));
-  writeNotNull('ciqual_food_name',
-      LanguageHelper.toJsonStringMap(instance.ciqualFoodName));
-  writeNotNull('ciqual_proxy_food_code',
-      LanguageHelper.toJsonStringMap(instance.ciqualProxyFoodCode));
-  writeNotNull('ciqual_proxy_food_name',
-      LanguageHelper.toJsonStringMap(instance.ciqualProxyFoodName));
-  writeNotNull('country', LanguageHelper.toJsonStringMap(instance.country));
-  writeNotNull(
-      'grapevariety', LanguageHelper.toJsonStringMap(instance.grapevariety));
-  writeNotNull(
-      'instanceof', LanguageHelper.toJsonStringMap(instance.instanceof));
-  writeNotNull('name', LanguageHelper.toJsonStringMap(instance.name));
-  writeNotNull('nova', LanguageHelper.toJsonStringMap(instance.nova));
-  writeNotNull(
-      'oqali_family', LanguageHelper.toJsonStringMap(instance.oqaliFamily));
-  writeNotNull('origins', LanguageHelper.toJsonStringMap(instance.origins));
-  writeNotNull('parents', instance.parents);
-  writeNotNull(
-      'pnns_group_1', LanguageHelper.toJsonStringMap(instance.pnnsGroup1));
-  writeNotNull(
-      'pnns_group_2', LanguageHelper.toJsonStringMap(instance.pnnsGroup2));
-  writeNotNull('protected_name_file_number',
-      LanguageHelper.toJsonStringMap(instance.protectedNameFileNumber));
-  writeNotNull('protected_name_type',
-      LanguageHelper.toJsonStringMap(instance.protectedNameType));
-  writeNotNull('region', LanguageHelper.toJsonStringMap(instance.region));
-  writeNotNull('season_in_country_fr',
-      LanguageHelper.toJsonStringMap(instance.seasonInCountryFr));
-  writeNotNull('who_id', LanguageHelper.toJsonStringMap(instance.whoId));
-  writeNotNull('wikidata', LanguageHelper.toJsonStringMap(instance.wikidata));
-  writeNotNull('wikidata_category',
-      LanguageHelper.toJsonStringMap(instance.wikidataCategory));
-  writeNotNull('wikidata_wikipedia_category',
-      LanguageHelper.toJsonStringMap(instance.wikidataWikipediaCategory));
-  return val;
-}
+Map<String, dynamic> _$TaxonomyCategoryToJson(TaxonomyCategory instance) =>
+    <String, dynamic>{
+      if (LanguageHelper.toJsonStringMap(instance.agribalyseFoodCode)
+          case final value?)
+        'agribalyse_food_code': value,
+      if (LanguageHelper.toJsonStringMap(instance.agribalyseFoodName)
+          case final value?)
+        'agribalyse_food_name': value,
+      if (LanguageHelper.toJsonStringMap(instance.agribalyseProxyFoodCode)
+          case final value?)
+        'agribalyse_proxy_food_code': value,
+      if (LanguageHelper.toJsonStringMap(instance.agribalyseProxyFoodName)
+          case final value?)
+        'agribalyse_proxy_food_name': value,
+      if (LanguageHelper.toJsonStringMap(instance.agribalyseProxyName)
+          case final value?)
+        'agribalyse_proxy_name': value,
+      if (LanguageHelper.toJsonStringMap(
+              instance.carbonFootprintFrFoodgesIngredient)
+          case final value?)
+        'carbon_footprint_fr_foodges_ingredient': value,
+      if (instance.children case final value?) 'children': value,
+      if (LanguageHelper.toJsonStringMap(instance.ciqualFoodCode)
+          case final value?)
+        'ciqual_food_code': value,
+      if (LanguageHelper.toJsonStringMap(instance.ciqualFoodName)
+          case final value?)
+        'ciqual_food_name': value,
+      if (LanguageHelper.toJsonStringMap(instance.ciqualProxyFoodCode)
+          case final value?)
+        'ciqual_proxy_food_code': value,
+      if (LanguageHelper.toJsonStringMap(instance.ciqualProxyFoodName)
+          case final value?)
+        'ciqual_proxy_food_name': value,
+      if (LanguageHelper.toJsonStringMap(instance.country) case final value?)
+        'country': value,
+      if (LanguageHelper.toJsonStringMap(instance.grapevariety)
+          case final value?)
+        'grapevariety': value,
+      if (LanguageHelper.toJsonStringMap(instance.instanceof) case final value?)
+        'instanceof': value,
+      if (LanguageHelper.toJsonStringMap(instance.name) case final value?)
+        'name': value,
+      if (LanguageHelper.toJsonStringMap(instance.nova) case final value?)
+        'nova': value,
+      if (LanguageHelper.toJsonStringMap(instance.oqaliFamily)
+          case final value?)
+        'oqali_family': value,
+      if (LanguageHelper.toJsonStringMap(instance.origins) case final value?)
+        'origins': value,
+      if (instance.parents case final value?) 'parents': value,
+      if (LanguageHelper.toJsonStringMap(instance.pnnsGroup1) case final value?)
+        'pnns_group_1': value,
+      if (LanguageHelper.toJsonStringMap(instance.pnnsGroup2) case final value?)
+        'pnns_group_2': value,
+      if (LanguageHelper.toJsonStringMap(instance.protectedNameFileNumber)
+          case final value?)
+        'protected_name_file_number': value,
+      if (LanguageHelper.toJsonStringMap(instance.protectedNameType)
+          case final value?)
+        'protected_name_type': value,
+      if (LanguageHelper.toJsonStringMap(instance.region) case final value?)
+        'region': value,
+      if (LanguageHelper.toJsonStringMap(instance.seasonInCountryFr)
+          case final value?)
+        'season_in_country_fr': value,
+      if (LanguageHelper.toJsonStringMap(instance.whoId) case final value?)
+        'who_id': value,
+      if (LanguageHelper.toJsonStringMap(instance.wikidata) case final value?)
+        'wikidata': value,
+      if (LanguageHelper.toJsonStringMap(instance.wikidataCategory)
+          case final value?)
+        'wikidata_category': value,
+      if (LanguageHelper.toJsonStringMap(instance.wikidataWikipediaCategory)
+          case final value?)
+        'wikidata_wikipedia_category': value,
+    };
