@@ -45,7 +45,6 @@ enum Currency {
 
   /// Argentine peso ley
   ARL(unofficialCode: true),
-
   ARM(noCountry: true),
 
   /// Argentine peso argentino
@@ -74,7 +73,6 @@ enum Currency {
 
   /// Bosnia and Herzegovina convertible mark
   BAM,
-
   BAN(noCountry: true),
 
   /// Barbados dollar
@@ -94,19 +92,17 @@ enum Currency {
 
   /// Bulgarian lev
   BGL(historicalCode: true),
-
   BGM(noCountry: true),
 
   /// Bulgarian lev
   BGN,
-
   BGO(noCountry: true),
 
   /// Bahraini dinar
-  BHD,
+  BHD(decimalNumbers: 3),
 
   /// Burundian franc
-  BIF,
+  BIF(decimalNumbers: 0),
 
   /// Bermudian dollar
   BMD,
@@ -116,7 +112,6 @@ enum Currency {
 
   /// Boliviano
   BOB,
-
   BOL(noCountry: true),
 
   /// Bolivian peso
@@ -142,7 +137,6 @@ enum Currency {
 
   /// Brazilian cruzeiro real
   BRR(historicalCode: true),
-
   BRZ(noCountry: true),
 
   /// Bahamian dollar
@@ -183,17 +177,14 @@ enum Currency {
 
   /// WIR franc (complementary currency)
   CHW(complementaryCurrency: true),
-
   CLE(noCountry: true),
 
   /// Unidad de Fomento (funds code)
-  CLF(fundsCode: true),
+  CLF(fundsCode: true, decimalNumbers: 4),
 
   /// Chilean peso
-  CLP,
-
+  CLP(decimalNumbers: 0),
   CNH(noCountry: true),
-
   CNX(noCountry: true),
 
   /// Renminbi
@@ -236,7 +227,7 @@ enum Currency {
   DEM(historicalCode: true),
 
   /// Djiboutian franc
-  DJF,
+  DJF(decimalNumbers: 0),
 
   /// Danish krone
   DKK,
@@ -311,7 +302,7 @@ enum Currency {
   GMD,
 
   /// Guinean franc
-  GNF,
+  GNF(decimalNumbers: 0),
 
   /// Guinean syli
   GNS(historicalCode: true),
@@ -371,7 +362,7 @@ enum Currency {
   INR,
 
   /// Iraqi dinar
-  IQD,
+  IQD(decimalNumbers: 3),
 
   /// Iranian rial
   IRR,
@@ -380,7 +371,7 @@ enum Currency {
   ISJ(historicalCode: true),
 
   /// Icelandic króna
-  ISK,
+  ISK(decimalNumbers: 0),
 
   /// Italian lira
   ITL(historicalCode: true),
@@ -389,10 +380,10 @@ enum Currency {
   JMD,
 
   /// Jordanian dinar
-  JOD,
+  JOD(decimalNumbers: 3),
 
   /// Japanese yen
-  JPY,
+  JPY(decimalNumbers: 0),
 
   /// Kenyan shilling
   KES,
@@ -404,20 +395,18 @@ enum Currency {
   KHR,
 
   /// Comoro franc
-  KMF,
+  KMF(decimalNumbers: 0),
 
   /// North Korean won
   KPW,
-
   KRH(noCountry: true),
-
   KRO(noCountry: true),
 
   /// South Korean won
-  KRW,
+  KRW(decimalNumbers: 0),
 
   /// Kuwaiti dinar
-  KWD,
+  KWD(decimalNumbers: 3),
 
   /// Cayman Islands dollar
   KYD,
@@ -462,7 +451,7 @@ enum Currency {
   LVR(historicalCode: true),
 
   /// Libyan dinar
-  LYD,
+  LYD(decimalNumbers: 3),
 
   /// Moroccan dirham
   MAD,
@@ -472,7 +461,6 @@ enum Currency {
 
   /// Monégasque franc
   MCF(historicalCode: true, unofficialCode: true),
-
   MDC(noCountry: true),
 
   /// Moldovan leu
@@ -516,7 +504,6 @@ enum Currency {
 
   /// Mauritian rupee
   MUR,
-
   MVP(noCountry: true),
 
   /// Maldivian rufiyaa
@@ -571,7 +558,7 @@ enum Currency {
   NZD,
 
   /// Omani rial
-  OMR,
+  OMR(decimalNumbers: 3),
 
   /// Panamanian balboa
   PAB,
@@ -604,7 +591,7 @@ enum Currency {
   PTE(historicalCode: true),
 
   /// Paraguayan guaraní
-  PYG,
+  PYG(decimalNumbers: 0),
 
   /// Qatari riyal
   QAR,
@@ -628,7 +615,7 @@ enum Currency {
   RUR(historicalCode: true),
 
   /// Rwandan franc
-  RWF,
+  RWF(decimalNumbers: 0),
 
   /// Saudi riyal
   SAR,
@@ -715,7 +702,7 @@ enum Currency {
   TMT,
 
   /// Tunisian dinar
-  TND,
+  TND(decimalNumbers: 3),
 
   /// Tongan paʻanga
   TOP,
@@ -748,7 +735,7 @@ enum Currency {
   UGS(historicalCode: true),
 
   /// Ugandan shilling
-  UGX,
+  UGX(decimalNumbers: 0),
 
   /// United States dollar
   USD,
@@ -760,7 +747,7 @@ enum Currency {
   USS(historicalCode: true, fundsCode: true),
 
   /// Uruguay Peso en Unidades Indexadas (URUIURUI) (funds code)
-  UYI(fundsCode: true),
+  UYI(fundsCode: true, decimalNumbers: 0),
 
   /// Uruguay new peso
   UYP(historicalCode: true),
@@ -769,7 +756,7 @@ enum Currency {
   UYU,
 
   /// Unidad previsional
-  UYW(noCountry: true),
+  UYW(noCountry: true, decimalNumbers: 4),
 
   /// Uzbekistani sum
   UZS,
@@ -787,18 +774,17 @@ enum Currency {
   VES(historicalCode: true),
 
   /// Vietnamese đồng
-  VND,
-
+  VND(decimalNumbers: 0),
   VNN(noCountry: true),
 
   /// Vanuatu vatu
-  VUV,
+  VUV(decimalNumbers: 0),
 
   /// Samoan tala
   WST,
 
   /// CFA franc BEAC
-  XAF,
+  XAF(decimalNumbers: 0),
 
   /// Silver (one troy ounce)
   XAG(noCountry: true),
@@ -834,13 +820,13 @@ enum Currency {
   XFU(historicalCode: true),
 
   /// CFA franc BCEAO
-  XOF,
+  XOF(decimalNumbers: 0),
 
   /// Palladium (one troy ounce)
   XPD(noCountry: true),
 
   /// CFP franc (franc Pacifique)
-  XPF,
+  XPF(decimalNumbers: 0),
 
   /// Platinum (one troy ounce)
   XPT(noCountry: true),
@@ -911,6 +897,7 @@ enum Currency {
     this.fundsCode = false,
     this.complementaryCurrency = false,
     this.noCountry = false,
+    this.decimalNumbers = 2,
   });
 
   /// ISO 4217 currency codes until their replacement by another currency.
@@ -927,6 +914,9 @@ enum Currency {
 
   /// Not really attached to a specific country at all.
   final bool noCountry;
+
+  /// The number of digits after the decimal separator.
+  final int decimalNumbers;
 
   static Currency? fromName(final String? name) {
     if (name == null) {
