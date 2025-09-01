@@ -297,41 +297,6 @@ enum ProductField implements OffTagged {
   }
 }
 
-// TODO: deprecated from 2024-08-03; remove when old enough
-@Deprecated('Use ProductField.getInLanguagesList() instead')
-const Set<ProductField> fieldsInLanguages = {
-  ProductField.NAME_IN_LANGUAGES,
-  ProductField.GENERIC_NAME_IN_LANGUAGES,
-  ProductField.ABBREVIATED_NAME_IN_LANGUAGES,
-  ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
-  ProductField.PACKAGING_TEXT_IN_LANGUAGES,
-  ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
-  ProductField.TRACES_TAGS_IN_LANGUAGES,
-  ProductField.STORES_TAGS_IN_LANGUAGES,
-  ProductField.STATES_TAGS_IN_LANGUAGES,
-  ProductField.BRANDS_TAGS_IN_LANGUAGES,
-  ProductField.MISC_TAGS_IN_LANGUAGES,
-  ProductField.INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES,
-  ProductField.ADDITIVES_TAGS_IN_LANGUAGES,
-  ProductField.ALLERGENS_TAGS_IN_LANGUAGES,
-  ProductField.LABELS_TAGS_IN_LANGUAGES,
-  ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
-  ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
-  ProductField.IMAGES_FRESHNESS_IN_LANGUAGES,
-};
-
-// TODO: deprecated from 2024-08-03; remove when old enough
-@Deprecated('Use ProductField.getAllLanguagesList() instead')
-const Set<ProductField> fieldsAllLanguages = {
-  ProductField.NAME_ALL_LANGUAGES,
-  ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES,
-  ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES,
-  ProductField.GENERIC_NAME_ALL_LANGUAGES,
-  ProductField.ABBREVIATED_NAME_ALL_LANGUAGES,
-  ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
-  ProductField.PACKAGING_TEXT_ALL_LANGUAGES,
-};
-
 /// NOTE: if one of the fields is IN_LANGUAGES and [languages] is empty -
 /// the function will throw.
 List<String> convertFieldsToStrings(

@@ -200,39 +200,6 @@ class FolksonomyAPIClient {
     return ProductTag.fromJson(json);
   }
 
-  /// Returns all the [ProductTag]s for this product, with their subkeys.
-  ///
-  /// The key of the returned map is the key.
-  // TODO: deprecated from 2024-09-05; remove when old enough
-  @Deprecated('Not supported anymore; use getProductTags instead')
-  static Future<Map<String, ProductTag>> getProductTagWithSubKeys({
-    required final String barcode,
-    required final String key,
-    final UriHelper uriHelper = uriHelperFolksonomyProd,
-  }) async {
-    final Map<String, String> parameters = <String, String>{};
-    final Response response = await HttpHelper().doGetRequest(
-      uriHelper.getUri(
-        path: 'product/$barcode/$key*', // look at the star!
-        queryParameters: parameters,
-      ),
-      uriHelper: uriHelper,
-    );
-    _checkResponse(response);
-    final Map<String, ProductTag> result = <String, ProductTag>{};
-    if (response.body == 'null') {
-      // not found
-      return result;
-    }
-    final List<dynamic> json =
-        HttpHelper().jsonDecode(response.body) as List<dynamic>;
-    for (var element in json) {
-      final ProductTag productTag = ProductTag.fromJson(element);
-      result[productTag.key] = productTag;
-    }
-    return result;
-  }
-
   static Future<MaybeError<bool>> deleteProductTag({
     required final String barcode,
     required final String key,

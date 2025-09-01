@@ -21,21 +21,13 @@ ProductPackaging _$ProductPackagingFromJson(Map<String, dynamic> json) =>
       ..quantityPerUnit = json['quantity_per_unit'] as String?
       ..weightMeasured = JsonObject.parseDouble(json['weight_measured']);
 
-Map<String, dynamic> _$ProductPackagingToJson(ProductPackaging instance) {
-  final val = <String, dynamic>{
-    'shape': LocalizedTag.objToJson(instance.shape),
-    'material': LocalizedTag.objToJson(instance.material),
-    'recycling': LocalizedTag.objToJson(instance.recycling),
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('number_of_units', instance.numberOfUnits);
-  writeNotNull('quantity_per_unit', instance.quantityPerUnit);
-  writeNotNull('weight_measured', instance.weightMeasured);
-  return val;
-}
+Map<String, dynamic> _$ProductPackagingToJson(ProductPackaging instance) =>
+    <String, dynamic>{
+      'shape': LocalizedTag.objToJson(instance.shape),
+      'material': LocalizedTag.objToJson(instance.material),
+      'recycling': LocalizedTag.objToJson(instance.recycling),
+      if (instance.numberOfUnits case final value?) 'number_of_units': value,
+      if (instance.quantityPerUnit case final value?)
+        'quantity_per_unit': value,
+      if (instance.weightMeasured case final value?) 'weight_measured': value,
+    };
