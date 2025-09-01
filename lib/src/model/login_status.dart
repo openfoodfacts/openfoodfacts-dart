@@ -41,9 +41,6 @@ class LoginStatus {
 
   final int status;
   final String statusVerbose;
-  // TODO: deprecated from 2024-04-09; remove when old enough
-  @Deprecated('Not retrieved anymore from the server')
-  final String? userEmail = null;
   final String? userName;
   final String? userId;
   final OpenFoodFactsLanguage? preferredLanguage;
