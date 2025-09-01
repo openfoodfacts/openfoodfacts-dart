@@ -13,18 +13,9 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       cookie: json['cookie'] as String?,
     );
 
-Map<String, dynamic> _$UserToJson(User instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('comment', instance.comment);
-  val['user_id'] = instance.userId;
-  val['password'] = instance.password;
-  val['cookie'] = instance.cookie;
-  return val;
-}
+Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+      if (instance.comment case final value?) 'comment': value,
+      'user_id': instance.userId,
+      'password': instance.password,
+      'cookie': instance.cookie,
+    };

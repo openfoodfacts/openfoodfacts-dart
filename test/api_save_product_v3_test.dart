@@ -9,7 +9,7 @@ void main() {
   const UriProductHelper uriHelper = uriHelperFoodTest;
 
   group('$OpenFoodAPIClient save product V3', () {
-    const String barcode = '12345678';
+    const String barcode = '7300400481588';
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
     const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
 
@@ -118,5 +118,72 @@ void main() {
         expect(readStatus.product!.packagingsComplete, value);
       }
     });
-  }, skip: 'Avoiding tests on TEST env');
+
+    test('reproducing issue 1038', () async {
+      // Check it's ok if we get numbers instead of String? as warning/error values.
+      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+      const int numberOfUnits = -12;
+      const double weightMeasured = -250;
+      final List<ProductPackaging> inputPackagings = [
+        ProductPackaging()
+          ..shape = (LocalizedTag()..lcName = 'bouteille')
+          ..material = (LocalizedTag()..lcName = 'verre')
+          ..recycling = (LocalizedTag()..lcName = 'bac de tri')
+          ..numberOfUnits = numberOfUnits
+          ..weightMeasured = weightMeasured,
+      ];
+      final ProductResultV3 status =
+          await OpenFoodAPIClient.temporarySaveProductV3(
+        TestConstants.TEST_USER,
+        barcode,
+        uriHelper: uriHelper,
+        country: country,
+        language: language,
+        packagings: inputPackagings,
+      );
+
+      expect(status.status, ProductResultV3.statusWarning);
+      expect(status.errors, isEmpty);
+      expect(status.result, isNull); // result is null for UPDATE queries
+      expect(status.barcode, barcode);
+      expect(status.product, isNotNull);
+
+      expect(status.product!.packagings, isNotNull);
+      final List<ProductPackaging> packagings = status.product!.packagings!;
+      expect(packagings, hasLength(1));
+      final ProductPackaging packaging = packagings.first;
+      // we send crap data, we get "corrected" results.
+      expect(packaging.numberOfUnits, isNull);
+      expect(packaging.weightMeasured, 0);
+
+      expect(status.warnings, isNotEmpty);
+      expect(status.warnings, hasLength(2));
+
+      for (final ProductResultFieldAnswer answer in status.warnings!) {
+        expect(answer.field, isNotNull);
+        expect(answer.impact, isNotNull);
+        expect(answer.message, isNotNull);
+        if (answer.field!.id == 'number_of_units') {
+          expect(answer.field!.value, numberOfUnits.toString());
+          expect(answer.impact!.id, 'field_ignored');
+          expect(answer.impact!.name, isNotNull);
+          expect(answer.impact!.lcName, isNotNull);
+          expect(answer.message!.id, 'invalid_type_must_be_integer');
+          expect(answer.message!.name, isNotNull);
+          expect(answer.message!.lcName, isNotNull);
+        } else if (answer.field!.id == 'weight_measured') {
+          expect(answer.field!.value, weightMeasured.toString());
+          expect(answer.field!.valuedConverted, 0.toString());
+          expect(answer.impact!.id, 'value_converted');
+          expect(answer.impact!.name, isNotNull);
+          expect(answer.impact!.lcName, isNotNull);
+          expect(answer.message!.id, 'invalid_type_must_be_number');
+          expect(answer.message!.name, isNotNull);
+          expect(answer.message!.lcName, isNotNull);
+        } else {
+          fail('Unexpected field id: ${answer.field!.id}');
+        }
+      }
+    });
+  });
 }
