@@ -540,7 +540,7 @@ class OpenPricesAPIClient {
   /// Uploads a proof.
   ///
   /// Returns the proof uploaded on the server.
-  /// The returned status code of will be
+  /// The returned status code will be
   /// * 201 for a proof created on the server
   /// * 200 for a proof that already existed on the server
   static Future<MaybeError<Proof>> uploadProof({
