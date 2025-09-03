@@ -537,6 +537,12 @@ class OpenPricesAPIClient {
   }
 
 // TODO: deprecated from 2025-04-25 regarding single parameters; remove them when old enough
+  /// Uploads a proof.
+  ///
+  /// Returns the proof uploaded on the server.
+  /// The returned status code will be
+  /// * 201 for a proof created on the server
+  /// * 200 for a proof that already existed on the server
   static Future<MaybeError<Proof>> uploadProof({
     @Deprecated('Use CreateProofParameters instead') final ProofType? proofType,
     required final Uri imageUri,
@@ -598,10 +604,14 @@ class OpenPricesAPIClient {
     final String responseBody = await HttpHelper().extractResponseAsString(
       response,
     );
-    if (response.statusCode == 201) {
+    // 201: created, 200: already existing
+    if (response.statusCode == 200 || response.statusCode == 201) {
       try {
         final Map<String, dynamic> json = HttpHelper().jsonDecode(responseBody);
-        return MaybeError<Proof>.value(Proof.fromJson(json));
+        return MaybeError<Proof>.value(
+          Proof.fromJson(json),
+          statusCode: response.statusCode,
+        );
       } catch (e) {
         //
       }

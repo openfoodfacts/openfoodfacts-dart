@@ -265,7 +265,7 @@ class HttpHelper {
     final String bearerToken,
   ) =>
       <String, String>{
-        'Authorization': 'bearer $bearerToken',
+        'Authorization': 'Bearer $bearerToken',
         'Content-Type': 'application/json',
       };
 
