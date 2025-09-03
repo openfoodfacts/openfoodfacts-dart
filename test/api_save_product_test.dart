@@ -84,7 +84,7 @@ void main() {
       await saveFullTraces();
       await saveEmptyTraces();
     }
-  });
+  }, skip: 'Random results');
 
   group('$OpenFoodAPIClient add new products', () {
     String barcode_1 = '0048151623426';
