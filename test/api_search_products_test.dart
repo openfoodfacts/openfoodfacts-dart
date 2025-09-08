@@ -494,7 +494,7 @@ void main() {
       const String brands = 'Bjorg';
       const String categories = 'en:breakfast-cereals';
       const String labels = 'en:organic';
-      const String origins = 'Union Européenne et Non Union Européenne';
+      const String origins = 'European Union and Non European Union';
       const String originsTags = 'en:european-union-and-non-european-union';
       const String manufacturingPlaces = 'Allemagne';
       const String purchasePlaces = 'france';
