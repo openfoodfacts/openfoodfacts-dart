@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.25.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.25.0...v3.25.1) (2025-09-08)
+
+
+### Bug Fixes
+
+* 1128 - minor changes to price tests ([#1131](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1131)) ([369d3a4](https://github.com/openfoodfacts/openfoodfacts-dart/commit/369d3a4be1d9d96d48cada9d553f126477d0e477))
+
 ## [3.25.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.24.0...v3.25.0) (2025-09-05)
 
 
