@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.25.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.24.0...v3.25.0) (2025-09-05)
+
+
+### Features
+
+* 1125 - max number of decimal numbers for each currency ([#1126](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1126)) ([3e66004](https://github.com/openfoodfacts/openfoodfacts-dart/commit/3e660040fd5adff53ba224237ebace699c1c6305))
+* Add `source` to the `Proof` object ([#1091](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1091)) ([c3b1b74](https://github.com/openfoodfacts/openfoodfacts-dart/commit/c3b1b74c2b3ccd232353c7b71674a2550664b76b))
+
 ## [3.24.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.23.0...v3.24.0) (2025-06-27)
 
 
