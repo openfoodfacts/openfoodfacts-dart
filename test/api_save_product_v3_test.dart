@@ -117,7 +117,7 @@ void main() {
         expect(readStatus.product, isNotNull);
         expect(readStatus.product!.packagingsComplete, value);
       }
-    });
+    }, timeout: Timeout(Duration(seconds: 60)));
 
     test('reproducing issue 1038', () async {
       // Check it's ok if we get numbers instead of String? as warning/error values.
