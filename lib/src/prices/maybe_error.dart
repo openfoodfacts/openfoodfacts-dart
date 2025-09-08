@@ -4,9 +4,10 @@ import 'package:http/http.dart';
 
 /// Contains a successful value OR an error.
 class MaybeError<T> {
-  const MaybeError.value(T this._value)
-      : error = null,
-        statusCode = null,
+  const MaybeError.value(
+    T this._value, {
+    this.statusCode,
+  })  : error = null,
         isError = false;
   MaybeError.responseError(final Response response)
       : _value = null,
