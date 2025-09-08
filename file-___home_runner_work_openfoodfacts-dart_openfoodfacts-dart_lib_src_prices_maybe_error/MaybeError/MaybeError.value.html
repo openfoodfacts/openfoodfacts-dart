@@ -54,8 +54,9 @@
 
     <section class="multi-line-signature">
       const
-      <span class="name ">MaybeError&lt;<wbr><span class="type-parameter">T</span>&gt;.value</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="value-param-_value"><span class="type-annotation">T</span> <span class="parameter-name">_value</span></span></li>
-</ol>)
+      <span class="name ">MaybeError&lt;<wbr><span class="type-parameter">T</span>&gt;.value</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="value-param-_value"><span class="type-annotation">T</span> <span class="parameter-name">_value</span>, {</span></li>
+<li><span class="parameter" id="value-param-statusCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">statusCode</span>, </span></li>
+</ol>})
     </section>
     
 
@@ -63,9 +64,10 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">const MaybeError.value(T this._value)
-    : error = null,
-      statusCode = null,
+  <pre class="language-dart"><code class="language-dart">const MaybeError.value(
+  T this._value, {
+  this.statusCode,
+})  : error = null,
       isError = false;</code></pre>
 </section>
 
