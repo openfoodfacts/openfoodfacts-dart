@@ -33,6 +33,7 @@ import 'model/taxonomy_packaging_material.dart';
 import 'model/taxonomy_packaging_recycling.dart';
 import 'model/taxonomy_packaging_shape.dart';
 import 'model/user.dart';
+import 'prices/maybe_error.dart';
 import 'utils/abstract_query_configuration.dart';
 import 'utils/country_helper.dart';
 import 'utils/http_helper.dart';
@@ -822,6 +823,125 @@ class OpenFoodAPIClient {
       }
     }
     return result;
+  }
+
+  static List<String> _cleanTags(final List<String> input) {
+    final Set<String> result = <String>{};
+    for (final String item in input) {
+      final String string = item.trim();
+      if (string.isNotEmpty) {
+        result.add(string);
+      }
+    }
+    return result.toList(growable: false);
+  }
+
+  /// Gets canonical tags from a list of localized names.
+  ///
+  /// An input for INGREDIENTS could be ['banane', 'framboise'].
+  /// The result in FRENCH would then be something like `{'banane': 'en:banana',
+  /// 'framboise': 'en:raspberry'}`.
+  static Future<MaybeError<Map<String, String>>> getCanonicalTags(
+    final TagType taxonomyType, {
+    required final List<String> localizedNames,
+    required final OpenFoodFactsLanguage language,
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final List<String> input = _cleanTags(localizedNames);
+    if (input.isEmpty) {
+      return MaybeError<Map<String, String>>.value(<String, String>{});
+    }
+    final Map<String, String> queryParameters = <String, String>{
+      'tagtype': taxonomyType.offTag,
+      'lc': language.offTag,
+      'local_tags_list': input.join(','),
+    };
+    final Uri uri = uriHelper.getUri(
+      path: '/api/v3/taxonomy_canonicalize_tags',
+      queryParameters: queryParameters,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+    );
+    if (response.statusCode != 200) {
+      return MaybeError<Map<String, String>>.responseError(response);
+    }
+    try {
+      final Map<String, dynamic> json = HttpHelper().jsonDecode(response.body);
+      final String canonicalTags = json['canonical_tags_list'];
+      final List<String> splitResult =
+          canonicalTags.isEmpty ? <String>[] : canonicalTags.split(',');
+      if (input.length != splitResult.length) {
+        return MaybeError.error(
+          statusCode: response.statusCode,
+          error: 'Unmatching result count:'
+              ' input(${input.length})'
+              ',output(${splitResult.length})',
+        );
+      }
+      final Map<String, String> result = <String, String>{};
+      for (int i = 0; i < input.length; i++) {
+        result[input[i]] = splitResult[i];
+      }
+      return MaybeError<Map<String, String>>.value(result);
+    } catch (e) {
+      return MaybeError<Map<String, String>>.unreadableResponse(response);
+    }
+  }
+
+  /// Gets localized names from a list of canonical tags.
+  ///
+  /// An input for INGREDIENTS could be ['en:banana', 'en:raspberry'].
+  /// The result in FRENCH would then be something like `{'en:banana': 'banane',
+  /// 'en:raspberry': 'framboise'}`.
+  static Future<MaybeError<Map<String, String>>> getLocalizedNames(
+    final TagType taxonomyType, {
+    required final List<String> canonicalTags,
+    required final OpenFoodFactsLanguage language,
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final List<String> input = _cleanTags(canonicalTags);
+    if (input.isEmpty) {
+      return MaybeError<Map<String, String>>.value(<String, String>{});
+    }
+    final Map<String, String> queryParameters = <String, String>{
+      'tagtype': taxonomyType.offTag,
+      'lc': language.offTag,
+      'canonical_tags_list': input.join(','),
+    };
+    final Uri uri = uriHelper.getUri(
+      path: '/api/v3/taxonomy_display_tags',
+      queryParameters: queryParameters,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+    );
+    if (response.statusCode != 200) {
+      return MaybeError<Map<String, String>>.responseError(response);
+    }
+    try {
+      final Map<String, dynamic> json = HttpHelper().jsonDecode(response.body);
+      final String result = json['local_tags_list'];
+      final List<String> splitResult =
+          result.isEmpty ? <String>[] : result.split(', ');
+      if (input.length != splitResult.length) {
+        return MaybeError<Map<String, String>>.error(
+          statusCode: response.statusCode,
+          error: 'Unmatching result count:'
+              ' input(${input.length})'
+              ',output(${splitResult.length})',
+        );
+      }
+      final Map<String, String> map = <String, String>{};
+      for (int i = 0; i < input.length; i++) {
+        map[input[i]] = splitResult[i];
+      }
+      return MaybeError<Map<String, String>>.value(map);
+    } catch (e) {
+      return MaybeError<Map<String, String>>.unreadableResponse(response);
+    }
   }
 
   /// Logs in and returns data about the user if relevant.
