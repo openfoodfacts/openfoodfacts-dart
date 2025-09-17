@@ -929,7 +929,7 @@ class OpenFoodAPIClient {
       if (input.length != splitResult.length) {
         return MaybeError<Map<String, String>>.error(
           statusCode: response.statusCode,
-          error: 'Unmatching result count:'
+          error: 'Mismatched result count:'
               ' input(${input.length})'
               ',output(${splitResult.length})',
         );
