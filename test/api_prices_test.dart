@@ -57,6 +57,15 @@ void main() {
     required final String bearerToken,
     required final UriProductHelper uriHelper,
   }) async {
+    final MaybeError<Proof> getProof = await OpenPricesAPIClient.getProof(
+      proofId,
+      bearerToken: bearerToken,
+      uriHelper: uriHelper,
+    );
+    expect(getProof.isError, isFalse);
+    expect(getProof.value.id, proofId);
+    expect(getProof.value.owner, user.userId);
+
     // delete proof first time: success
     MaybeError<bool> deletedProof = await OpenPricesAPIClient.deleteProof(
       proofId: proofId,
@@ -170,7 +179,6 @@ void main() {
 
   group('$OpenPricesAPIClient Auth', () {
     const UriProductHelper uriHelper = uriHelperFoodTest;
-    const User user = TestConstants.TEST_USER;
 
     test('unknown user', () async {
       final MaybeError<String> status =
@@ -212,7 +220,6 @@ void main() {
 
   group('$OpenPricesAPIClient Prices', () {
     const UriProductHelper uriHelper = uriHelperFoodTest;
-    const User user = TestConstants.TEST_USER;
 
     test('create', () async {
       final Price initialPrice = Price()
@@ -224,7 +231,7 @@ void main() {
         ..locationOSMType = LocationOSMType.node
         ..priceIsDiscounted = true
         ..discountType = DiscountType.seasonal
-        ..date = DateTime(2024, 1, 18);
+        ..date = DateTime(2025, 1, 18);
 
       final UpdatePriceParameters updatePriceParameters =
           UpdatePriceParameters()
@@ -248,13 +255,12 @@ void main() {
           CreateProofParameters(ProofType.priceTag)
             ..currency = Currency.EUR
             ..ownerComment = 'just trying'
-            ..date = DateTime(2024, 1, 1);
+            ..date = DateTime(2025, 1, 3);
 
       final String bearerToken = await getBearerToken(uriHelper: uriHelper);
 
       // successful proof upload with valid token
-      final MaybeError<Proof> uploadProof =
-          await OpenPricesAPIClient.uploadProof(
+      MaybeError<Proof> uploadProof = await OpenPricesAPIClient.uploadProof(
         createProofParameters: createProofParameters,
         imageUri: initialImageUri,
         mediaType: initialMediaType,
@@ -263,6 +269,21 @@ void main() {
       );
       expect(uploadProof.isError, isFalse);
       expect(uploadProof.value.id, isNotNull);
+      // 201: proof created
+      expect(uploadProof.statusCode, 201);
+
+      // trying again to upload the proof, as it already exists on the server
+      uploadProof = await OpenPricesAPIClient.uploadProof(
+        createProofParameters: createProofParameters,
+        imageUri: initialImageUri,
+        mediaType: initialMediaType,
+        bearerToken: bearerToken,
+        uriHelper: uriHelper,
+      );
+      expect(uploadProof.isError, isFalse);
+      expect(uploadProof.value.id, isNotNull);
+      // 200: proof already existing
+      expect(uploadProof.statusCode, 200);
 
       final int proofId = uploadProof.value.id;
       initialPrice.proofId = proofId;
@@ -929,13 +950,13 @@ void main() {
         CreateProofParameters(ProofType.priceTag)
           ..currency = Currency.EUR
           ..ownerComment = 'just trying'
-          ..date = DateTime(2024, 1, 1)
+          ..date = DateTime(2025, 1, 1)
           ..readyForPriceTagValidation = true,
         UpdateProofParameters()
           ..type = ProofType.priceTag
           ..currency = Currency.USD
           ..ownerComment = 'nothing in the end'
-          ..date = DateTime(2024, 1, 2)
+          ..date = DateTime(2025, 1, 2)
           ..readyForPriceTagValidation = false,
       ),
     );
@@ -946,7 +967,7 @@ void main() {
         CreateProofParameters(ProofType.receipt)
           ..currency = Currency.EUR
           ..ownerComment = 'just trying'
-          ..date = DateTime(2024, 1, 1)
+          ..date = DateTime(2025, 1, 3)
           ..receiptPriceCount = 77
           ..receiptPriceTotal = 1.75
           ..receiptOnlineDeliveryCosts = 14
@@ -955,7 +976,7 @@ void main() {
           ..type = ProofType.receipt
           ..currency = Currency.USD
           ..ownerComment = 'nothing in the end'
-          ..date = DateTime(2024, 1, 2)
+          ..date = DateTime(2025, 1, 3)
           ..receiptPriceCount = 72
           ..receiptPriceTotal = 1.75
           ..receiptOnlineDeliveryCosts = 15
