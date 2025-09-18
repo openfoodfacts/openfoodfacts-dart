@@ -103,6 +103,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
     )
       ..productType =
           $enumDecodeNullable(_$ProductTypeEnumMap, json['product_type'])
+      ..schemaVersion = (json['schema_version'] as num?)?.toInt()
       ..conservationConditionsInLanguages = LanguageHelper.fromJsonStringMap(
           json['conservation_conditions_in_languages'])
       ..customerServiceInLanguages = LanguageHelper.fromJsonStringMap(
@@ -205,6 +206,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'code': instance.barcode,
       if (_$ProductTypeEnumMap[instance.productType] case final value?)
         'product_type': value,
+      if (instance.schemaVersion case final value?) 'schema_version': value,
       if (instance.productName case final value?) 'product_name': value,
       if (LanguageHelper.toJsonStringMap(instance.productNameInLanguages)
           case final value?)

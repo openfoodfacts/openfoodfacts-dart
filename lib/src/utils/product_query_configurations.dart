@@ -8,10 +8,10 @@ import 'uri_helper.dart';
 
 /// Api version for product queries (minimum forced version number: 2).
 class ProductQueryVersion {
-  const ProductQueryVersion(final int version)
+  const ProductQueryVersion(final num version)
       : version = version < 2 ? 2 : version;
 
-  final int version;
+  final num version;
 
   static const ProductQueryVersion v3 = ProductQueryVersion(3);
 
