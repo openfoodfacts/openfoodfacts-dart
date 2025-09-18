@@ -489,4 +489,54 @@ void main() {
       equals('https://en.wikipedia.org/wiki/Sodium acetate'),
     );
   });
+
+  // Ensure that a "action_element" is well parsed
+  test('Load knowledge panel JSON with an action element', () {
+    final String id = 'action_test';
+
+    final Map<String, dynamic> jsonData = <String, dynamic>{
+      id: {
+        'elements': [
+          {
+            'element_type': 'action',
+            'action_element': {
+              'actions': ['edit_product', 'report_product_to_nutripatrol']
+            }
+          }
+        ],
+        'level': 'info',
+        'size': 'small',
+        'title_element': {'title': 'Action Test'},
+        'topics': ['health']
+      },
+    };
+
+    KnowledgePanels kp = KnowledgePanels.fromJson(jsonData);
+    expect(kp.panelIdToPanelMap.length, equals(1));
+
+    expect(
+      kp.panelIdToPanelMap[id]!.elements!.length,
+      equals(1),
+    );
+    expect(
+      kp.panelIdToPanelMap[id]!.elements!.first.elementType,
+      equals(KnowledgePanelElementType.ACTION),
+    );
+    expect(
+      kp.panelIdToPanelMap[id]!.elements!.first.actionElement,
+      isNotNull,
+    );
+    expect(
+      kp.panelIdToPanelMap[id]!.elements!.first.actionElement!.actions.length,
+      equals(2),
+    );
+    expect(
+      kp.panelIdToPanelMap[id]!.elements!.first.actionElement!.actions[0],
+      equals(KnowledgePanelAction.editProduct.offTag),
+    );
+    expect(
+      kp.panelIdToPanelMap[id]!.elements!.first.actionElement!.actions[1],
+      equals(KnowledgePanelAction.reportProductToNutripatrol.offTag),
+    );
+  });
 }
