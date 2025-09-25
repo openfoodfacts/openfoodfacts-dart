@@ -59,60 +59,16 @@ Open Food Facts is powered by contributors from around the world and is constant
 <h2 id="general-principles-how-does-it-work-">General principles, how does it work ?</h2>
 <p>We use the ability of the Open Food Facts API to return products results in JSON, we then generate easily understandable objects structures to make it simple for you to use.</p>
 <p>This plugin also allows you to edit a product or upload a new one to Open Food Facts. Using the same simple product structure you can create a product object or edit an existing one and send it to the API using a single function.</p>
-<h2 id="migrating-from-2xx-to-3xx-breaking-changes">Migrating from 2.x.x to 3.x.x (breaking changes)</h2>
+<h2 id="weekly-meetings">Weekly meetings</h2>
 <ul>
-<li>Starting with version 3.0.0, we now enforce all clients to provide a valid user agent.
-For this, please ensure to set the SDK before using any other functionality:</li>
-</ul>
-<pre class="language-dart"><code class="language-dart">OpenFoodAPIConfiguration.userAgent = UserAgent(
-  name: '&lt;Name of your app&gt;',
-);
-</code></pre>
-<ul>
-<li>
-<p><code>QueryType</code> has been deleted. Now, for API calls you have to provide a <code>UriProductHelper</code> parameter. By default it will point you to openfoodfacts/prod.</p>
-</li>
-<li>
-<p>For <code>RobotoffAPIClient.getRandomInsights</code> and <code>RobotoffAPIClient.getQuestions</code>, a list of countries instead of a single country as parameter.</p>
-</li>
-<li>
-<p>Use <code>OpenFoodFactsCountry.fromOffTag</code> instead of <code>CountryHelper.fromJson</code>.</p>
-</li>
-<li>
-<p><code>OpenFoodAPIClient.getOrderedNutrients</code> now uses a <code>OpenFoodFactsCountry</code> parameter instead of a 2-letter country code.</p>
-</li>
-<li>
-<p>Methods <code>getProductImageRootUrl</code> and <code>getBarcodeSubPath</code> are moved to <code>UriProductHelper</code> from <code>ImageHelper</code></p>
-</li>
-<li>
-<p>Method <code>buildUrl</code> renamed as <code>getLocalizedProductImageUrl</code> in <code>ImageHelper</code></p>
-</li>
-<li>
-<p>Removal of deprecated code.</p>
-</li>
-</ul>
-<h2 id="migrating-from-1xx-to-2xx-breaking-changes">Migrating from 1.x.x to 2.x.x (breaking changes)</h2>
-<ul>
-<li>Now the only entry point is <code>import 'package:openfoodfacts/openfoodfacts.dart';</code>
-<ul>
-<li>replace all your instances of <code>import 'package:openfoodfacts/...';</code> with a single <code>import 'package:openfoodfacts/openfoodfacts.dart';</code></li>
-</ul>
-</li>
-<li>If you used <code>State</code> from <code>product_state.dart</code>, you have to rename it to <code>ProductState</code></li>
-<li>If you used <code>Level</code> from <code>nutrient_levels.dart</code>, you have to rename it to <code>NutrientLevel</code></li>
-<li>Removed deprecated classes:
-<ul>
-<li><code>Page</code></li>
-<li><code>ProductListQueryConfiguration</code></li>
-<li><code>ToBeCompletedConfiguration</code></li>
-</ul>
-</li>
-<li>Removed deprecated fields and methods in <code>Nutriments</code>
-<ul>
-<li><em>all</em> the single nutrient value <em>fields</em> were removed - use <code>getValue</code> and <code>setValue</code> instead</li>
-<li>instead of <code>getUnit</code> use <code>nutrient.typicalUnit</code></li>
-</ul>
-</li>
+<li>We e-meet on Fridays at 09:00 Paris Time (08:00 London Time, 11:30 IST, 12:00 AM PT)</li>
+<li><img src="https://img.shields.io/badge/Google%20Meet-00897B?logo=google-meet&amp;logoColor=white" alt="Google Meet"> Video call link: <a href="https://meet.google.com/gnp-frks-esc">meet.google.com/gnp-frks-esc</a></li>
+<li>Join by phone: <a href="https://tel.meet/gnp-frks-esc?pin=1110549945262">tel.meet/gnp-frks-esc?pin=1110549945262</a></li>
+<li>Add the Event to your Calendar by <a href="https://wiki.openfoodfacts.org/Events">adding the Open Food Facts community calendar to your calendar</a></li>
+<li><a href="https://docs.google.com/document/d/1MGQqMV7M4JTjFcRsiRvMZ8bnmd9vJWdSyRR3wJHUBMk/edit">Weekly Agenda</a>: please add the Agenda items as early as you can. Make sure to check the Agenda items in advance of the meeting, so that we have the most informed discussions possible, leading to argumented decisions.</li>
+<li>The meeting will handle Agenda items first, and if time permits, collaborative bug triage.</li>
+<li>We strive to timebox the core of the meeting (decision making) to 30 minutes, with an optional free discussion/live debugging afterwards.</li>
+<li>We take comprehensive notes in the Weekly Agenda of agenda item discussions and of decisions taken.</li>
 </ul>
 <h2 id="usage">Usage</h2>
 <h3 id="installation">Installation</h3>
@@ -133,6 +89,8 @@ OpenFoodAPIConfiguration.globalLanguages = &lt;OpenFoodFactsLanguage&gt;[
 OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
 </code></pre>
 <p>All possible configurations can be found <a href="https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/OpenFoodAPIConfiguration-class.html">here</a>.</p>
+<h3 id="migrations">Migrations</h3>
+<p><a href="https://github.com/openfoodfacts/openfoodfacts-dart/edit/master/MIGRATIONS.md">Find migration instructions here</a>.</p>
 <h3 id="features">Features</h3>
 <p>Code examples for the following tasks:</p>
 <h4 id="reading-data">Reading data</h4>
@@ -265,11 +223,11 @@ You can check the terms of use here : <a href="https://world.openfoodfacts.org/t
 <h2 id="contribute-to-the-package">Contribute to the package</h2>
 <p>If found a bug or missing features in this package, please open an issue for it.</p>
 <ul>
-<li>Issue Tracker: github.com/openfoodfacts/openfoodfacts-dart/issues</li>
-<li>Source Code: github.com/openfoodfacts/openfoodfacts-dart</li>
+<li>Issue Tracker: <a href="https://github.com/openfoodfacts/openfoodfacts-dart/issues">github.com/openfoodfacts/openfoodfacts-dart/issues</a></li>
+<li>Source Code: <a href="https://github.com/openfoodfacts/openfoodfacts-dart">github.com/openfoodfacts/openfoodfacts-dart</a></li>
 </ul>
 <h2 id="support">Support</h2>
-<p>If you are having issues, that go beyond the scope of this package, please write to us on <a href="https://openfoodfacts.slack.com">Slack</a> or send us an email at <a href="mailto:contact@openfoodfacts.org">contact@openfoodfacts.org</a></p>
+<p>If you are having issues, that go beyond the scope of this package, please write to us on <a href="https://openfoodfacts.slack.com">Slack</a> or send us an email at <a href="mailto:reuse@openfoodfacts.org">reuse@openfoodfacts.org</a> (or contact@openfoodfacts if not related to reuse)</p>
 <h3 id="testing">Testing</h3>
 <p>Execute the following command from the root of the repository to run the tests:</p>
 <pre class="language-shell"><code class="language-shell">dart test
