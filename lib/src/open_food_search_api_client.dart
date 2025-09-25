@@ -33,6 +33,7 @@ class OpenFoodSearchAPIClient {
     final int size = 10,
     final Fuzziness fuzziness = Fuzziness.none,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final List<String>? excludedItems,
   }) async {
     query = query.trim();
     if (query.isEmpty) {
@@ -52,7 +53,7 @@ class OpenFoodSearchAPIClient {
         'q': query,
         'taxonomy_names': taxonomyTags.join(','),
         'lang': language.offTag,
-        'size': size.toString(),
+        'size': (size + (excludedItems?.length ?? 0)).toString(),
         'fuzziness': fuzziness.offTag,
       },
     );
@@ -61,8 +62,15 @@ class OpenFoodSearchAPIClient {
       user: user,
       uriHelper: uriHelper,
     );
-    return AutocompleteSearchResult.fromJson(
+    final AutocompleteSearchResult autocompleteSearchResult =
+        AutocompleteSearchResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
     );
+    if (excludedItems != null) {
+      autocompleteSearchResult.options?.removeWhere(
+        (option) => excludedItems.contains(option.text),
+      );
+    }
+    return autocompleteSearchResult;
   }
 }
