@@ -72,6 +72,12 @@ OxF:
   - any-glob-to-any-file: 'lib/src/prices/proof.dart'
   - any-glob-to-any-file: 'lib/src/prices/proof_type.dart'
   - any-glob-to-any-file: 'test/api_prices_test.dart'
+  - any-glob-to-any-file: 'lib/src/prices/challenge.g.dart‎'
+  - any-glob-to-any-file: '‎lib/src/prices/get_challenges_order.dart‎'
+  - any-glob-to-any-file: '‎lib/src/prices/get_challenges_parameters.dart‎'
+  - any-glob-to-any-file: '‎lib/src/prices/get_challenges_result.dart‎'
+  - any-glob-to-any-file: '‎lib/src/prices/get_challenges_result.g.dart‎'
+  - any-glob-to-any-file: '‎lib/src/prices/price_user.dart‎'
 
 Search:
 - changed-files:
