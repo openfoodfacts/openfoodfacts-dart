@@ -221,7 +221,7 @@ void main() {
   group('$OpenPricesAPIClient Prices', () {
     const UriProductHelper uriHelper = uriHelperFoodTest;
 
-    test('create', () async {
+    test('FABRICE create', () async {
       final Price initialPrice = Price()
         ..productCode = '3560071492755'
         ..type = PriceType.product
@@ -269,8 +269,8 @@ void main() {
       );
       expect(uploadProof.isError, isFalse);
       expect(uploadProof.value.id, isNotNull);
-      // we may expect also 201(proof created)
-      expect(uploadProof.statusCode, 200);
+      // we may expect 200(proof already existed) and 201(proof created)
+      expect(uploadProof.statusCode, isIn([200, 201]));
 
       // trying again to upload the proof, as it already exists on the server
       uploadProof = await OpenPricesAPIClient.uploadProof(
