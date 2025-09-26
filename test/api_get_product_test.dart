@@ -306,7 +306,7 @@ void main() {
       nutriments = result.product!.nutriments!;
       expect(
         nutriments.getValue(Nutrient.biotin, PerSize.oneHundredGrams),
-        0.0,
+        0.000017,
       );
       expect(nutriments.getValue(Nutrient.biotin, PerSize.serving), isNull);
 

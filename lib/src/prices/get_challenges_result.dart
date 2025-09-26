@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:openfoodfacts/openfoodfacts.dart';
 
+import 'challenge.dart';
 import '../interface/json_object.dart';
 
 part 'get_challenges_result.g.dart';
