@@ -221,7 +221,7 @@ void main() {
   group('$OpenPricesAPIClient Prices', () {
     const UriProductHelper uriHelper = uriHelperFoodTest;
 
-    test('FABRICE create', () async {
+    test('create', () async {
       final Price initialPrice = Price()
         ..productCode = '3560071492755'
         ..type = PriceType.product
