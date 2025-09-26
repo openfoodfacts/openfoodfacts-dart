@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:http/http.dart' as http;
+import 'package:openfoodfacts/src/prices/challenge.dart';
+import 'package:openfoodfacts/src/prices/get_challenges_parameters.dart';
+import 'package:openfoodfacts/src/prices/get_challenges_result.dart';
 import 'package:path/path.dart';
 
 import 'prices/currency.dart';
@@ -213,6 +216,55 @@ class OpenPricesAPIClient {
       }
     }
     return MaybeError<Location>.responseError(response);
+  }
+
+  static Future<MaybeError<GetChallengesResult>> getChallenges(
+    final GetChallengesParameters parameters, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Uri uri = getUri(
+      path: '/api/v1/challenges',
+      queryParameters: parameters.getQueryParameters(),
+      uriHelper: uriHelper,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<GetChallengesResult>.value(
+          GetChallengesResult.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        return MaybeError<GetChallengesResult>.unreadableResponse(response);
+      }
+    }
+    return MaybeError<GetChallengesResult>.responseError(response);
+  }
+
+  static Future<MaybeError<Challenge>> getChallenge(
+    final int challengeId, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Uri uri = getUri(
+      path: '/api/v1/challenges/$challengeId',
+      uriHelper: uriHelper,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<Challenge>.value(Challenge.fromJson(decodedResponse));
+      } catch (e) {
+        return MaybeError<Challenge>.unreadableResponse(response);
+      }
+    }
+    return MaybeError<Challenge>.responseError(response);
   }
 
   static Future<MaybeError<GetPriceProductsResult>> getPriceProducts(

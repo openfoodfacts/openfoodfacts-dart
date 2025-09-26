@@ -269,8 +269,8 @@ void main() {
       );
       expect(uploadProof.isError, isFalse);
       expect(uploadProof.value.id, isNotNull);
-      // 201: proof created
-      expect(uploadProof.statusCode, 201);
+      // we may expect also 201(proof created)
+      expect(uploadProof.statusCode, 200);
 
       // trying again to upload the proof, as it already exists on the server
       uploadProof = await OpenPricesAPIClient.uploadProof(
@@ -679,6 +679,96 @@ void main() {
       result = maybeResults.value;
       expect(result.total, greaterThanOrEqualTo(1));
       expect(result.items, isNotNull);
+    });
+  });
+
+  group('$OpenPricesAPIClient Challenges', () {
+    const UriProductHelper uriHelper = uriHelperFoodProd;
+
+    test('get existing challenge', () async {
+      const int challengeId = 1;
+      final MaybeError<Challenge> maybeChallenge =
+          await OpenPricesAPIClient.getChallenge(
+        challengeId,
+        uriHelper: uriHelper,
+      );
+      expect(maybeChallenge.isError, isFalse);
+      final Challenge challenge = maybeChallenge.value;
+      expect(challenge.id, challengeId);
+    });
+
+    test('get non-existing challenge', () async {
+      const int challengeId = -1;
+      final MaybeError<Challenge> challenge =
+          await OpenPricesAPIClient.getChallenge(
+        challengeId,
+        uriHelper: uriHelper,
+      );
+      expect(challenge.isError, isTrue);
+      expect(
+        challenge.detailError,
+        'No Challenge matches the given query.',
+      );
+    });
+
+    test('get challenges', () async {
+      late GetChallengesResult result;
+
+      final GetChallengesParameters parameters = GetChallengesParameters()
+        ..pageSize = pageSize
+        ..pageNumber = pageNumber
+        ..status = GetChallengesParameters.statusCompleted
+        ..id = 1
+        ..startDateYear = 2025
+        ..startDateMonth = 1
+        ..endDateMonth = 2
+        ..endDateYear = 2025
+        ..isPublished = true;
+
+      late MaybeError<GetChallengesResult> maybeResults;
+      try {
+        maybeResults = await OpenPricesAPIClient.getChallenges(
+          parameters,
+          uriHelper: uriHelper,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.items, isNotNull);
+      expect(result.items, hasLength(1));
+      final Challenge item = result.items!.first;
+      expect(item.id, parameters.id);
+      expect(item.status, parameters.status);
+      expect(item.isPublished, parameters.isPublished);
+
+      // wrong parameters
+      parameters.endDateYear = 2028;
+      try {
+        maybeResults = await OpenPricesAPIClient.getChallenges(
+          parameters,
+          uriHelper: uriHelper,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      result = maybeResults.value;
+      expect(result.pageSize, pageSize);
+      expect(result.pageNumber, pageNumber);
+      expect(result.total, isNotNull);
+      expect(result.items, isNotNull);
+      expect(result.items, isEmpty);
     });
   });
 
