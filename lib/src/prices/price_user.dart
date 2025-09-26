@@ -25,23 +25,30 @@ class PriceUser extends JsonObject {
   int? get proofCount => getInt('proof_count');
 
   /// Number of unique currencies in the user's price contributions
-  int? get priceCurrencyCount => getInt('price_currency_count');
+  int? get priceCurrencyCount => getInt('currency_count');
 
   /// Number of price contributions based on category (Community or Consumption)
   int? get priceKindCommunityCount => getInt('price_kind_community_count');
+
   int? get priceKindConsumptionCount => getInt('price_kind_consumption_count');
 
   /// Number of proof contributions based on category (Community or Consumption)
   int? get proofKindCommunityCount => getInt('proof_kind_community_count');
+
   int? get proofKindConsumptionCount => getInt('proof_kind_consumption_count');
 
   int? get priceTypeProductCount => getInt('price_type_product_count');
+
   int? get priceTypeCategoryCount => getInt('price_type_category_count');
+
   int? get priceInProofOwnedCount => getInt('price_in_proof_owned_count');
+
   int? get priceInProofNotOwnedCount =>
       getInt('price_in_proof_not_owned_count');
+
   int? get priceNotOwnedInProofOwnedCount =>
       getInt('price_not_owned_in_proof_owned_count');
+
   int? get locationTypeOsmCountryCount =>
       getInt('location_type_osm_country_count');
 
