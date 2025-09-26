@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.26.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.25.1...v3.26.0) (2025-09-26)
+
+
+### Features
+
+* 1055 - API versions as decimal, Product.schemaVersion ([#1139](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1139)) ([24dd1de](https://github.com/openfoodfacts/openfoodfacts-dart/commit/24dd1de19c60fdf025ff81f4e1ae73dba4730cc4))
+* 1062 - prices get challenge methods ([#1143](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1143)) ([74048f5](https://github.com/openfoodfacts/openfoodfacts-dart/commit/74048f5838149fefb3806539aa3e65ea5c7d657d))
+* 1135 - getLocalizedNames, getCanonicalTags new taxonomy methods ([#1136](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1136)) ([a8c3517](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a8c3517734bad17e2219d317d13b8f4451b9a9d3))
+
 ## [3.25.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.25.0...v3.25.1) (2025-09-08)
 
 
