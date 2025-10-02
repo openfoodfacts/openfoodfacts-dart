@@ -26,6 +26,7 @@ export 'src/model/nutrient.dart';
 export 'src/model/nutrient_levels.dart';
 export 'src/model/nutrient_modifier.dart';
 export 'src/model/nutriments.dart';
+
 // export 'src/model/product_list.dart'; // not needed
 export 'src/model/ocr_ingredients_result.dart';
 export 'src/model/ocr_packaging_result.dart';
@@ -96,13 +97,18 @@ export 'src/personalized_search/matched_product_v2.dart';
 export 'src/personalized_search/preference_importance.dart';
 export 'src/personalized_search/product_preferences_manager.dart';
 export 'src/personalized_search/product_preferences_selection.dart';
+export 'src/prices/challenge.dart';
 export 'src/prices/common_proof_parameters.dart';
+
 // export 'src/prices/get_parameters_helper.dart'; // uncomment if really needed
 export 'src/prices/contribution_kind.dart';
 export 'src/prices/create_proof_parameters.dart';
 export 'src/prices/currency.dart';
 export 'src/prices/discount_type.dart';
 export 'src/prices/flavor.dart';
+export 'src/prices/get_challenges_order.dart';
+export 'src/prices/get_challenges_parameters.dart';
+export 'src/prices/get_challenges_result.dart';
 export 'src/prices/get_locations_order.dart';
 export 'src/prices/get_locations_parameters.dart';
 export 'src/prices/get_locations_result.dart';
