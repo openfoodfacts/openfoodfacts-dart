@@ -5,37 +5,52 @@ import '../utils/unit_helper.dart';
 /// Nutrient
 enum Nutrient implements OffTagged {
   /// Salt
-  salt(typicalUnit: Unit.G, offTag: 'salt'),
+  salt(typicalUnit: Unit.G, offTag: 'salt', acceptsPercentDV: false),
 
   /// Sodium
-  sodium(typicalUnit: Unit.G, offTag: 'sodium'),
+  sodium(typicalUnit: Unit.G, offTag: 'sodium', acceptsPercentDV: false),
 
   /// Fibers
-  fiber(typicalUnit: Unit.G, offTag: 'fiber'),
+  fiber(typicalUnit: Unit.G, offTag: 'fiber', acceptsPercentDV: false),
 
   /// Sugars
-  sugars(typicalUnit: Unit.G, offTag: 'sugars'),
+  sugars(typicalUnit: Unit.G, offTag: 'sugars', acceptsPercentDV: false),
 
   /// Added Sugars
   addedSugars(typicalUnit: Unit.G, offTag: 'added-sugars'),
 
   /// Fats
-  fat(typicalUnit: Unit.G, offTag: 'fat'),
+  fat(typicalUnit: Unit.G, offTag: 'fat', acceptsPercentDV: false),
 
   /// Saturated Fats
-  saturatedFat(typicalUnit: Unit.G, offTag: 'saturated-fat'),
+  saturatedFat(
+      typicalUnit: Unit.G, offTag: 'saturated-fat', acceptsPercentDV: false),
 
   /// Proteins
-  proteins(typicalUnit: Unit.G, offTag: 'proteins'),
+  proteins(typicalUnit: Unit.G, offTag: 'proteins', acceptsPercentDV: false),
 
   /// Energy in kcal
-  energyKCal(typicalUnit: Unit.KCAL, offTag: 'energy-kcal'),
+  energyKCal(
+    typicalUnit: Unit.KCAL,
+    offTag: 'energy-kcal',
+    acceptsWeight: false,
+    acceptsPercentDV: false,
+  ),
 
   /// Energy in kj
-  energyKJ(typicalUnit: Unit.KJ, offTag: 'energy-kj'),
+  energyKJ(
+    typicalUnit: Unit.KJ,
+    offTag: 'energy-kj',
+    acceptsWeight: false,
+    acceptsPercentDV: false,
+  ),
 
   /// Carbohydrates
-  carbohydrates(typicalUnit: Unit.G, offTag: 'carbohydrates'),
+  carbohydrates(
+    typicalUnit: Unit.G,
+    offTag: 'carbohydrates',
+    acceptsPercentDV: false,
+  ),
 
   /// Caffeine
   caffeine(typicalUnit: Unit.G, offTag: 'caffeine'),
@@ -47,7 +62,7 @@ enum Nutrient implements OffTagged {
   iron(typicalUnit: Unit.MILLI_G, offTag: 'iron'),
 
   /// Vitamin C
-  vitaminC(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-c'),
+  vitaminC(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-c', acceptsIU: true),
 
   /// Magnesium
   magnesium(typicalUnit: Unit.MILLI_G, offTag: 'magnesium'),
@@ -68,13 +83,13 @@ enum Nutrient implements OffTagged {
   selenium(typicalUnit: Unit.MICRO_G, offTag: 'selenium'),
 
   /// Vitamin A
-  vitaminA(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-a'),
+  vitaminA(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-a', acceptsIU: true),
 
   /// Vitamin E
-  vitaminE(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-e'),
+  vitaminE(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-e', acceptsIU: true),
 
   /// Vitamin D
-  vitaminD(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-d'),
+  vitaminD(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-d', acceptsIU: true),
 
   /// Vitamin B1
   vitaminB1(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-b1'),
@@ -146,7 +161,12 @@ enum Nutrient implements OffTagged {
   polyunsaturatedFat(typicalUnit: Unit.G, offTag: 'polyunsaturated-fat'),
 
   /// Alcohol
-  alcohol(typicalUnit: Unit.PERCENT, offTag: 'alcohol'),
+  alcohol(
+    typicalUnit: Unit.PERCENT,
+    offTag: 'alcohol',
+    acceptsWeight: false,
+    acceptsPercentDV: false,
+  ),
 
   /// Pantothenic Acid
   pantothenicAcid(typicalUnit: Unit.MILLI_G, offTag: 'pantothenic-acid'),
@@ -239,10 +259,22 @@ enum Nutrient implements OffTagged {
   const Nutrient({
     required this.typicalUnit,
     required this.offTag,
+    this.acceptsWeight = true,
+    this.acceptsPercentDV = true,
+    this.acceptsIU = false,
   });
 
   /// Typical unit. An educated guess only: may differ according to countries.
   final Unit typicalUnit;
+
+  /// Can this nutrient typically be valued in weight? (g, mg, mcg)
+  final bool acceptsWeight;
+
+  /// Can this nutrient typically be valued in "% DV"?
+  final bool acceptsPercentDV;
+
+  /// Can this nutrient typically be valued in "IU"?
+  final bool acceptsIU;
 
   @override
   final String offTag;
