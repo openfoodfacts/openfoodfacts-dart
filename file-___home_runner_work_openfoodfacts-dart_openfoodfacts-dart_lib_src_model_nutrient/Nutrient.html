@@ -108,7 +108,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;salt&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;salt&#39;, acceptsPercentDV: false)</code></span>
     </div>
 </dd>
 
@@ -123,7 +123,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;sodium&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;sodium&#39;, acceptsPercentDV: false)</code></span>
     </div>
 </dd>
 
@@ -138,7 +138,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;fiber&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;fiber&#39;, acceptsPercentDV: false)</code></span>
     </div>
 </dd>
 
@@ -153,7 +153,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;sugars&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;sugars&#39;, acceptsPercentDV: false)</code></span>
     </div>
 </dd>
 
@@ -183,7 +183,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;fat&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;fat&#39;, acceptsPercentDV: false)</code></span>
     </div>
 </dd>
 
@@ -198,7 +198,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;saturated-fat&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;saturated-fat&#39;, acceptsPercentDV: false)</code></span>
     </div>
 </dd>
 
@@ -213,7 +213,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;proteins&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;proteins&#39;, acceptsPercentDV: false)</code></span>
     </div>
 </dd>
 
@@ -228,7 +228,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.KCAL, offTag: &#39;energy-kcal&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.KCAL, offTag: &#39;energy-kcal&#39;, acceptsWeight: false, acceptsPercentDV: false)</code></span>
     </div>
 </dd>
 
@@ -243,7 +243,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.KJ, offTag: &#39;energy-kj&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.KJ, offTag: &#39;energy-kj&#39;, acceptsWeight: false, acceptsPercentDV: false)</code></span>
     </div>
 </dd>
 
@@ -258,7 +258,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;carbohydrates&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.G, offTag: &#39;carbohydrates&#39;, acceptsPercentDV: false)</code></span>
     </div>
 </dd>
 
@@ -318,7 +318,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-c&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-c&#39;, acceptsIU: true)</code></span>
     </div>
 </dd>
 
@@ -423,7 +423,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-a&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-a&#39;, acceptsIU: true)</code></span>
     </div>
 </dd>
 
@@ -438,7 +438,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-e&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MILLI_G, offTag: &#39;vitamin-e&#39;, acceptsIU: true)</code></span>
     </div>
 </dd>
 
@@ -453,7 +453,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-d&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.MICRO_G, offTag: &#39;vitamin-d&#39;, acceptsIU: true)</code></span>
     </div>
 </dd>
 
@@ -813,7 +813,7 @@
   
 
     <div>
-      <span class="signature"><code>const Nutrient(typicalUnit: Unit.PERCENT, offTag: &#39;alcohol&#39;)</code></span>
+      <span class="signature"><code>const Nutrient(typicalUnit: Unit.PERCENT, offTag: &#39;alcohol&#39;, acceptsWeight: false, acceptsPercentDV: false)</code></span>
     </div>
 </dd>
 
@@ -1261,6 +1261,42 @@
       id="instance-properties">
     <h2>Properties</h2>
     <dl class="properties">
+        <dt id="acceptsIU" class="property">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/acceptsIU.html">acceptsIU</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.4/dart-core/bool-class.html">bool</a></span>
+  
+
+</dt>
+<dd>
+  Can this nutrient typically be valued in "IU"?
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="acceptsPercentDV" class="property">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/acceptsPercentDV.html">acceptsPercentDV</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.4/dart-core/bool-class.html">bool</a></span>
+  
+
+</dt>
+<dd>
+  Can this nutrient typically be valued in "% DV"?
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="acceptsWeight" class="property">
+  <span class="name"><a href="../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient/acceptsWeight.html">acceptsWeight</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.4/dart-core/bool-class.html">bool</a></span>
+  
+
+</dt>
+<dd>
+  Can this nutrient typically be valued in weight? (g, mg, mcg)
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
         <dt id="hashCode" class="property inherited">
   <span class="name"><a href="https://api.dart.dev/stable/3.9.4/dart-core/Object/hashCode.html">hashCode</a></span>
   <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.4/dart-core/int-class.html">int</a></span>

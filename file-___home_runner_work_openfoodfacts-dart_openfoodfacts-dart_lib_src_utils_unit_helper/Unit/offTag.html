@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the stringToUnit method from the UnitHelper class, for the Dart programming language.">
-  <title>stringToUnit method - UnitHelper class - unit_helper library - Dart API</title>
+  <meta name="description" content="API docs for the offTag property from the Unit enum, for the Dart programming language.">
+  <title>offTag property - Unit enum - unit_helper library - Dart API</title>
 
 
   
@@ -26,10 +26,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/">src&#47;utils&#47;unit_helper.dart</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/UnitHelper-class.html">UnitHelper</a></li>
-    <li class="self-crumb">stringToUnit static method</li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/Unit.html">Unit</a></li>
+    <li class="self-crumb">offTag property</li>
   </ol>
-  <div class="self-name">stringToUnit</div>
+  <div class="self-name">offTag</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -46,53 +46,42 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper&#47;UnitHelper-class-sidebar.html"
+    data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper&#47;Unit-enum-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">stringToUnit</span> static method 
+<h1><span class="kind-property">offTag</span> property 
 </h1></div>
 
-    <section class="multi-line-signature">
-      
-<span class="returntype"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/Unit.html">Unit</a>?</span>
-<span class="name ">stringToUnit</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="stringToUnit-param-s"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.4/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">s</span></span></li>
-</ol>)
-
-      
-
-    </section>
     
+      <section class="multi-line-signature">
+        
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.9.4/dart-core/override-constant.html">override</a></li>
+    </ol>
+  </div>
+        <a href="https://api.dart.dev/stable/3.9.4/dart-core/String-class.html">String</a>
+        <span class="name ">offTag</span>
+        <div class="features"><span class="feature">final</span></div>
+
+      </section>
+      
 <section class="desc markdown">
-  <p>Returns the <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/Unit.html">Unit</a> described by <code>s</code></p>
+  <p>Identifying tag used in the rest of OFF.</p>
 </section>
 
-
-    
+      
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static Unit? stringToUnit(String? s) {
-  if (s == null || s.isEmpty) {
-    return null;
-  }
-
-  if (s[0] == String.fromCharCode(0x03BC)) {
-    &#47;&#47; greek letter mu
-    if (s.length &gt; 1 &amp;&amp; s.substring(1) == &#39;g&#39;) {
-      return Unit.MICRO_G;
-    }
-    return Unit.UNKNOWN;
-  }
-
-  return OffTagged.fromOffTag(s, Unit.values) as Unit? ??
-      _ALTERNATE_UNITS[s] ??
-      Unit.UNKNOWN;
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">@override
+final String offTag;</code></pre>
 </section>
 
 
-  </div> <!-- /.main-content -->
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+    
+</div> <!-- /.main-content -->
+<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+  <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
   <form class="search-sidebar" role="search">
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
@@ -101,14 +90,14 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/">unit_helper</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/UnitHelper-class.html">UnitHelper</a></li>
-    <li class="self-crumb">stringToUnit static method</li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/Unit.html">Unit</a></li>
+    <li class="self-crumb">offTag property</li>
 </ol>
 
-    <h5>UnitHelper class</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-->
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  <h5>Unit enum</h5>
+  <div id="dartdoc-sidebar-left-content"></div>
+</div><!--/.sidebar-offcanvas-->
+<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
 </div><!--/.sidebar-offcanvas-->
 </main>
 <footer>
