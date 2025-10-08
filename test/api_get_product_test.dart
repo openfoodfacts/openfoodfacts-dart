@@ -997,28 +997,28 @@ void main() {
       String barcode = '^0104260392550101';
       String normalizedBarcode = '4260392550101';
 
-      getAndValidateProductGS1(barcode, normalizedBarcode);
+      await getAndValidateProductGS1(barcode, normalizedBarcode);
     });
 
     test('get product FNC1', () async {
       String barcode = '\u{001d}0104260392550101';
       String normalizedBarcode = '4260392550101';
 
-      getAndValidateProductGS1(barcode, normalizedBarcode);
+      await getAndValidateProductGS1(barcode, normalizedBarcode);
     });
 
     test('get product GS', () async {
       String barcode = '␝0104260392550101';
       String normalizedBarcode = '4260392550101';
 
-      getAndValidateProductGS1(barcode, normalizedBarcode);
+      await getAndValidateProductGS1(barcode, normalizedBarcode);
     });
 
     test('get product AI Data String', () async {
       String barcode = '(01)04260392550101';
       String normalizedBarcode = '4260392550101';
 
-      getAndValidateProductGS1(barcode, normalizedBarcode);
+      await getAndValidateProductGS1(barcode, normalizedBarcode);
     });
 
     test('get product GS1 Data URI', () async {
@@ -1026,7 +1026,7 @@ void main() {
           'https://id.gs1.org/01/04260392550101/10/ABC/21/123456?17=211200';
       String normalizedBarcode = '4260392550101';
 
-      getAndValidateProductGS1(barcode, normalizedBarcode);
+      await getAndValidateProductGS1(barcode, normalizedBarcode);
     });
   });
 
