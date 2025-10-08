@@ -963,6 +963,73 @@ void main() {
         invalidBarcodes.isBlacklisted(BARCODE_DANISH_BUTTER_COOKIES), isFalse);
   });
 
+  group('$OpenFoodAPIClient get products with GS1 Sunrise 2027 barcodes', () {
+    // Direct replica of ProductOpener's integration tests with additional assertions
+    // https://github.com/openfoodfacts/openfoodfacts-server/blob/e6e17ccc0e4843d485d40078b6d5a389b7a22c5a/tests/integration/api_v3_product_read.t#L72-L101
+    Future<void> getAndValidateProductGS1(
+        final String barcode, final String normalizedBarcode) async {
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.BARCODE],
+        version: ProductQueryVersion.v3,
+      );
+      final ProductResultV3 result = await getProductV3InProd(
+        configurations,
+      );
+      expect(result.status, ProductResultV3.statusWarning);
+      expect(result.barcode, normalizedBarcode);
+      expect(result.product, isNotNull);
+      expect(result.product!.barcode, normalizedBarcode);
+
+      expect(result.warnings, isNotNull);
+      expect(result.warnings, isNotEmpty);
+      expect(result.warnings!.first.field, isNotNull);
+      expect(result.warnings!.first.field!.id, 'code');
+      expect(result.warnings!.first.field!.value, normalizedBarcode);
+      expect(result.warnings!.first.message, isNotNull);
+      expect(result.warnings!.first.message!.id,
+          'different_normalized_product_code');
+    }
+
+    test('get product caret', () async {
+      String barcode = '^0104260392550101';
+      String normalizedBarcode = '4260392550101';
+
+      getAndValidateProductGS1(barcode, normalizedBarcode);
+    });
+
+    test('get product FNC1', () async {
+      String barcode = '\u{001d}0104260392550101';
+      String normalizedBarcode = '4260392550101';
+
+      getAndValidateProductGS1(barcode, normalizedBarcode);
+    });
+
+    test('get product GS', () async {
+      String barcode = '␝0104260392550101';
+      String normalizedBarcode = '4260392550101';
+
+      getAndValidateProductGS1(barcode, normalizedBarcode);
+    });
+
+    test('get product AI Data String', () async {
+      String barcode = '(01)04260392550101';
+      String normalizedBarcode = '4260392550101';
+
+      getAndValidateProductGS1(barcode, normalizedBarcode);
+    });
+
+    test('get product GS1 Data URI', () async {
+      String barcode =
+          'https://id.gs1.org/01/04260392550101/10/ABC/21/123456?17=211200';
+      String normalizedBarcode = '4260392550101';
+
+      getAndValidateProductGS1(barcode, normalizedBarcode);
+    });
+  });
+
   test('get product uri', () async {
     const String barcode = BARCODE_DANISH_BUTTER_COOKIES;
     OpenFoodAPIConfiguration.uuid = 'Should not appear in the url';
