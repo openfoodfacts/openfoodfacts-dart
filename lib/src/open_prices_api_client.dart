@@ -72,7 +72,7 @@ class OpenPricesAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Uri uri = OpenPricesAPIClient.getUri(
-      path: '/api/v1/users/$username',
+      path: '/api/v1/users/${Uri.encodeComponent(username)}',
     );
     final http.Response response =
         await HttpHelper().doGetRequest(uri, uriHelper: uriHelper);
@@ -149,7 +149,8 @@ class OpenPricesAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Uri uri = getUri(
-      path: '/api/v1/locations/osm/${locationOSMType.offTag}/$locationOSMId',
+      path:
+          '/api/v1/locations/osm/${Uri.encodeComponent(locationOSMType.offTag)}/$locationOSMId',
       uriHelper: uriHelper,
     );
     final Response response = await HttpHelper().doGetRequest(
@@ -325,7 +326,7 @@ class OpenPricesAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Uri uri = getUri(
-      path: '/api/v1/products/code/$productCode',
+      path: '/api/v1/products/code/${Uri.encodeComponent(productCode)}',
       uriHelper: uriHelper,
     );
     final Response response = await HttpHelper().doGetRequest(
