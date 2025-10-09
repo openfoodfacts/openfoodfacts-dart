@@ -1084,7 +1084,21 @@ void main() {
         country: OpenFoodFactsCountry.GERMANY,
         replaceSubdomain: true,
       ).toString(),
-      'https://de-es.openfoodfacts.org/product/$barcode',
+      'https://de-es.openfoodfacts.org/product/${Uri.encodeComponent(barcode)}',
+    );
+
+    // Additional test for barcode with URL-unsafe characters
+    const String unsafeBarcode = '(01)1234567890-AB';
+    final String encodedBarcode = Uri.encodeComponent(unsafeBarcode);
+    expect(
+      OpenFoodAPIClient.getProductUri(
+        unsafeBarcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        country: OpenFoodFactsCountry.FRANCE,
+        replaceSubdomain: true,
+      ).toString(),
+      'https://fr-en.openfoodfacts.org/product/$encodedBarcode',
+      reason: 'Barcode with URL-unsafe characters should be URI-encoded',
     );
   });
 
