@@ -163,7 +163,7 @@ class OpenFoodAPIClient {
     }
 
     var productUri = uriHelper.getPatchUri(
-      path: '/api/v3/product/$barcode',
+      path: '/api/v3/product/${Uri.encodeComponent(barcode)}',
     );
 
     final Response response = await HttpHelper().doPatchRequest(
@@ -310,7 +310,7 @@ class OpenFoodAPIClient {
     required final bool replaceSubdomain,
   }) {
     final Uri uri = uriHelper.getUri(
-      path: 'product/$barcode',
+      path: 'product/${Uri.encodeComponent(barcode)}',
       addUserAgentParameters: false,
     );
     if (!replaceSubdomain) {

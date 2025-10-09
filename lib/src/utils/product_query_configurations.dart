@@ -15,7 +15,8 @@ class ProductQueryVersion {
 
   static const ProductQueryVersion v3 = ProductQueryVersion(3);
 
-  String getPath(final String barcode) => '/api/v$version/product/$barcode/';
+  String getPath(final String barcode) =>
+      '/api/v$version/product/${Uri.encodeComponent(barcode)}/';
 
   bool matchesV3() => version >= 3;
 }
