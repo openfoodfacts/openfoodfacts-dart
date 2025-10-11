@@ -21,4 +21,6 @@ class NutriScoreDetails extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => _$NutriScoreDetailsToJson(this);
+
+  static Map<String, dynamic>? toJsonMap(NutriScoreDetails? v) => v?.toJson();
 }

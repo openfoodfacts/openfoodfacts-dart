@@ -303,7 +303,9 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       if (instance.nutrimentDataPer case final value?)
         'nutrition_data_per': value,
       if (instance.nutriscore case final value?) 'nutrition_grade_fr': value,
-      if (instance.nutriScoreDetails case final value?) 'nutriscore': value,
+      if (NutriScoreDetails.toJsonMap(instance.nutriScoreDetails)
+          case final value?)
+        'nutriscore': value,
       if (instance.comparedToCategory case final value?)
         'compared_to_category': value,
       if (instance.categories case final value?) 'categories': value,

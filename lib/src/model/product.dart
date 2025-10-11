@@ -417,7 +417,10 @@ class Product extends JsonObject {
   @JsonKey(name: 'nutrition_grade_fr')
   String? nutriscore;
 
-  @JsonKey(name: 'nutriscore')
+  @JsonKey(
+    name: 'nutriscore',
+    toJson: NutriScoreDetails.toJsonMap,
+  )
   NutriScoreDetails? nutriScoreDetails;
 
   @JsonKey(name: 'compared_to_category')

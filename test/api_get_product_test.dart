@@ -188,6 +188,38 @@ void main() {
       expect(nutriScore2023.data!.isFatOilNutsSeeds, isFalse);
       expect(nutriScore2023.data!.isWater, isFalse);
       expect(nutriScore2023.data!.isCheese, isFalse);
+
+      // test serialization
+      final productJson = result.product!.toJson();
+      final productRestored = Product.fromJson(productJson);
+      expect(productRestored.nutriScoreDetails, isNotNull);
+
+      final restored2021 = productRestored.nutriScoreDetails!.v2021;
+      expect(restored2021, isNotNull);
+      expect(restored2021!.grade, "not-applicable");
+      expect(restored2021.categoryAvailable, isTrue);
+      expect(restored2021.score, isNull);
+      expect(restored2021.nutrientsAvailable, isTrue);
+      expect(restored2021.nutriScoreComputed, isFalse);
+      expect(restored2021.nutriScoreApplicable, isFalse);
+      expect(restored2021.data, isNotNull);
+      expect(restored2021.data!.isBeverage, isTrue);
+      expect(restored2021.data!.isWater, isFalse);
+      expect(restored2021.data!.isCheese, isFalse);
+      expect(restored2021.data!.isFat, isFalse);
+      expect(restored2021.notApplicableCategory, category);
+
+      final restored2023 = productRestored.nutriScoreDetails!.v2023;
+      expect(restored2023, isNotNull);
+      expect(restored2023!.grade, "not-applicable");
+      expect(restored2023.score, isNull);
+      expect(restored2023.data, isNotNull);
+      expect(restored2023.notApplicableCategory, category);
+      expect(restored2023.data!.isBeverage, isTrue);
+      expect(restored2023.data!.isRedMeatProduct, isFalse);
+      expect(restored2023.data!.isFatOilNutsSeeds, isFalse);
+      expect(restored2023.data!.isWater, isFalse);
+      expect(restored2023.data!.isCheese, isFalse);
     });
 
     test('check nutriscore data for cookies', () async {
@@ -237,6 +269,38 @@ void main() {
       expect(nutriScore2023.data!.isFatOilNutsSeeds, isFalse);
       expect(nutriScore2023.data!.isWater, isFalse);
       expect(nutriScore2023.data!.isCheese, isFalse);
+
+      // test serialization
+      final productJson = result.product!.toJson();
+      final productRestored = Product.fromJson(productJson);
+      expect(productRestored.nutriScoreDetails, isNotNull);
+
+      final restored2021 = productRestored.nutriScoreDetails!.v2021;
+      expect(restored2021, isNotNull);
+      expect(restored2021!.grade, "e");
+      expect(restored2021.categoryAvailable, isTrue);
+      expect(restored2021.score, 23);
+      expect(restored2021.nutrientsAvailable, isTrue);
+      expect(restored2021.nutriScoreComputed, isTrue);
+      expect(restored2021.nutriScoreApplicable, isTrue);
+      expect(restored2021.data, isNotNull);
+      expect(restored2021.data!.isBeverage, isFalse);
+      expect(restored2021.data!.isWater, isFalse);
+      expect(restored2021.data!.isCheese, isFalse);
+      expect(restored2021.data!.isFat, isFalse);
+      expect(restored2021.notApplicableCategory, isNull);
+
+      final restored2023 = productRestored.nutriScoreDetails!.v2023;
+      expect(restored2023, isNotNull);
+      expect(restored2023!.grade, "e");
+      expect(restored2023.score, 25);
+      expect(restored2023.data, isNotNull);
+      expect(restored2023.notApplicableCategory, isNull);
+      expect(restored2023.data!.isBeverage, isFalse);
+      expect(restored2023.data!.isRedMeatProduct, isFalse);
+      expect(restored2023.data!.isFatOilNutsSeeds, isFalse);
+      expect(restored2023.data!.isWater, isFalse);
+      expect(restored2023.data!.isCheese, isFalse);
     });
 
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',
