@@ -17,27 +17,19 @@ TaxonomyPackagingShape _$TaxonomyPackagingShapeFromJson(
           (json['parents'] as List<dynamic>?)?.map((e) => e as String).toList();
 
 Map<String, dynamic> _$TaxonomyPackagingShapeToJson(
-    TaxonomyPackagingShape instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull(
-      'name',
-      instance.name
-          ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e)));
-  writeNotNull(
-      'synonyms',
-      instance.synonyms
-          ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e)));
-  writeNotNull('children', instance.children);
-  writeNotNull('parents', instance.parents);
-  return val;
-}
+        TaxonomyPackagingShape instance) =>
+    <String, dynamic>{
+      if (instance.name
+              ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e))
+          case final value?)
+        'name': value,
+      if (instance.synonyms
+              ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e))
+          case final value?)
+        'synonyms': value,
+      if (instance.children case final value?) 'children': value,
+      if (instance.parents case final value?) 'parents': value,
+    };
 
 const _$OpenFoodFactsLanguageEnumMap = {
   OpenFoodFactsLanguage.ENGLISH: 'ENGLISH',

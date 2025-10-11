@@ -46,74 +46,87 @@ TaxonomyAdditive _$TaxonomyAdditiveFromJson(Map<String, dynamic> json) =>
       LanguageHelper.fromJsonStringMap(json['wikidata']),
     );
 
-Map<String, dynamic> _$TaxonomyAdditiveToJson(TaxonomyAdditive instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('additives_classes',
-      LanguageHelper.toJsonStringMap(instance.additivesClasses));
-  writeNotNull(
-      'carbon_footprint_fr_foodges_ingredient',
-      LanguageHelper.toJsonStringMap(
-          instance.carbonFootprintFrFoodgesIngredient));
-  writeNotNull('carbon_footprint_fr_foodges_value',
-      LanguageHelper.toJsonStringMap(instance.carbonFootprintFrFoodgesValue));
-  writeNotNull('children', instance.children);
-  writeNotNull(
-      'colour_index', LanguageHelper.toJsonStringMap(instance.colourIndex));
-  writeNotNull('comment', LanguageHelper.toJsonStringMap(instance.comment));
-  writeNotNull('default_additive_class',
-      LanguageHelper.toJsonStringMap(instance.defaultAdditiveClass));
-  writeNotNull(
-      'description', LanguageHelper.toJsonStringMap(instance.description));
-  writeNotNull('e_number', LanguageHelper.toJsonStringMap(instance.eNumber));
-  writeNotNull('efsa', LanguageHelper.toJsonStringMap(instance.efsa));
-  writeNotNull('efsa_evaluation',
-      LanguageHelper.toJsonStringMap(instance.efsaEvaluation));
-  writeNotNull('efsa_evaluation_adi',
-      LanguageHelper.toJsonStringMap(instance.efsaEvaluationAdi));
-  writeNotNull('efsa_evaluation_adi_established',
-      LanguageHelper.toJsonStringMap(instance.efsaEvaluationAdiEstablished));
-  writeNotNull('efsa_evaluation_date',
-      LanguageHelper.toJsonStringMap(instance.efsaEvaluationDate));
-  writeNotNull(
-      'efsa_evaluation_exposure_95th_greater_than_adi',
-      LanguageHelper.toJsonStringMap(
-          instance.efsaEvaluationExposure95thGreaterThanAdi));
-  writeNotNull(
-      'efsa_evaluation_exposure_95th_greater_than_noael',
-      LanguageHelper.toJsonStringMap(
-          instance.efsaEvaluationExposure95thGreaterThanNoael));
-  writeNotNull(
-      'efsa_evaluation_exposure_mean_greater_than_adi',
-      LanguageHelper.toJsonStringMap(
-          instance.efsaEvaluationExposureMeanGreaterThanAdi));
-  writeNotNull(
-      'efsa_evaluation_exposure_mean_greater_than_noael',
-      LanguageHelper.toJsonStringMap(
-          instance.efsaEvaluationExposureMeanGreaterThanNoael));
-  writeNotNull('efsa_evaluation_overexposure_risk',
-      LanguageHelper.toJsonStringMap(instance.efsaEvaluationOverexposureRisk));
-  writeNotNull('efsa_evaluation_safety_assessed',
-      LanguageHelper.toJsonStringMap(instance.efsaEvaluationSafetyAssessed));
-  writeNotNull('efsa_evaluation_url',
-      LanguageHelper.toJsonStringMap(instance.efsaEvaluationUrl));
-  writeNotNull(
-      'from_palm_oil', LanguageHelper.toJsonStringMap(instance.fromPalmOil));
-  writeNotNull('mandatory_additive_class',
-      LanguageHelper.toJsonStringMap(instance.mandatoryAdditiveClass));
-  writeNotNull('name', LanguageHelper.toJsonStringMap(instance.name));
-  writeNotNull(
-      'organic_eu', LanguageHelper.toJsonStringMap(instance.organicEu));
-  writeNotNull('parents', instance.parents);
-  writeNotNull('vegan', LanguageHelper.toJsonStringMap(instance.vegan));
-  writeNotNull(
-      'vegetarian', LanguageHelper.toJsonStringMap(instance.vegetarian));
-  writeNotNull('wikidata', LanguageHelper.toJsonStringMap(instance.wikidata));
-  return val;
-}
+Map<String, dynamic> _$TaxonomyAdditiveToJson(TaxonomyAdditive instance) =>
+    <String, dynamic>{
+      if (LanguageHelper.toJsonStringMap(instance.additivesClasses)
+          case final value?)
+        'additives_classes': value,
+      if (LanguageHelper.toJsonStringMap(
+              instance.carbonFootprintFrFoodgesIngredient)
+          case final value?)
+        'carbon_footprint_fr_foodges_ingredient': value,
+      if (LanguageHelper.toJsonStringMap(instance.carbonFootprintFrFoodgesValue)
+          case final value?)
+        'carbon_footprint_fr_foodges_value': value,
+      if (instance.children case final value?) 'children': value,
+      if (LanguageHelper.toJsonStringMap(instance.colourIndex)
+          case final value?)
+        'colour_index': value,
+      if (LanguageHelper.toJsonStringMap(instance.comment) case final value?)
+        'comment': value,
+      if (LanguageHelper.toJsonStringMap(instance.defaultAdditiveClass)
+          case final value?)
+        'default_additive_class': value,
+      if (LanguageHelper.toJsonStringMap(instance.description)
+          case final value?)
+        'description': value,
+      if (LanguageHelper.toJsonStringMap(instance.eNumber) case final value?)
+        'e_number': value,
+      if (LanguageHelper.toJsonStringMap(instance.efsa) case final value?)
+        'efsa': value,
+      if (LanguageHelper.toJsonStringMap(instance.efsaEvaluation)
+          case final value?)
+        'efsa_evaluation': value,
+      if (LanguageHelper.toJsonStringMap(instance.efsaEvaluationAdi)
+          case final value?)
+        'efsa_evaluation_adi': value,
+      if (LanguageHelper.toJsonStringMap(instance.efsaEvaluationAdiEstablished)
+          case final value?)
+        'efsa_evaluation_adi_established': value,
+      if (LanguageHelper.toJsonStringMap(instance.efsaEvaluationDate)
+          case final value?)
+        'efsa_evaluation_date': value,
+      if (LanguageHelper.toJsonStringMap(
+              instance.efsaEvaluationExposure95thGreaterThanAdi)
+          case final value?)
+        'efsa_evaluation_exposure_95th_greater_than_adi': value,
+      if (LanguageHelper.toJsonStringMap(
+              instance.efsaEvaluationExposure95thGreaterThanNoael)
+          case final value?)
+        'efsa_evaluation_exposure_95th_greater_than_noael': value,
+      if (LanguageHelper.toJsonStringMap(
+              instance.efsaEvaluationExposureMeanGreaterThanAdi)
+          case final value?)
+        'efsa_evaluation_exposure_mean_greater_than_adi': value,
+      if (LanguageHelper.toJsonStringMap(
+              instance.efsaEvaluationExposureMeanGreaterThanNoael)
+          case final value?)
+        'efsa_evaluation_exposure_mean_greater_than_noael': value,
+      if (LanguageHelper.toJsonStringMap(
+              instance.efsaEvaluationOverexposureRisk)
+          case final value?)
+        'efsa_evaluation_overexposure_risk': value,
+      if (LanguageHelper.toJsonStringMap(instance.efsaEvaluationSafetyAssessed)
+          case final value?)
+        'efsa_evaluation_safety_assessed': value,
+      if (LanguageHelper.toJsonStringMap(instance.efsaEvaluationUrl)
+          case final value?)
+        'efsa_evaluation_url': value,
+      if (LanguageHelper.toJsonStringMap(instance.fromPalmOil)
+          case final value?)
+        'from_palm_oil': value,
+      if (LanguageHelper.toJsonStringMap(instance.mandatoryAdditiveClass)
+          case final value?)
+        'mandatory_additive_class': value,
+      if (LanguageHelper.toJsonStringMap(instance.name) case final value?)
+        'name': value,
+      if (LanguageHelper.toJsonStringMap(instance.organicEu) case final value?)
+        'organic_eu': value,
+      if (instance.parents case final value?) 'parents': value,
+      if (LanguageHelper.toJsonStringMap(instance.vegan) case final value?)
+        'vegan': value,
+      if (LanguageHelper.toJsonStringMap(instance.vegetarian) case final value?)
+        'vegetarian': value,
+      if (LanguageHelper.toJsonStringMap(instance.wikidata) case final value?)
+        'wikidata': value,
+    };

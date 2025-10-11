@@ -14,20 +14,16 @@ TaxonomyLanguage _$TaxonomyLanguageFromJson(Map<String, dynamic> json) =>
       LanguageHelper.fromJsonStringMap(json['wikidata']),
     );
 
-Map<String, dynamic> _$TaxonomyLanguageToJson(TaxonomyLanguage instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('language_code_2',
-      LanguageHelper.toJsonStringMap(instance.languageCode2));
-  writeNotNull('language_code_3',
-      LanguageHelper.toJsonStringMap(instance.languageCode3));
-  writeNotNull('name', LanguageHelper.toJsonStringMap(instance.name));
-  writeNotNull('wikidata', LanguageHelper.toJsonStringMap(instance.wikidata));
-  return val;
-}
+Map<String, dynamic> _$TaxonomyLanguageToJson(TaxonomyLanguage instance) =>
+    <String, dynamic>{
+      if (LanguageHelper.toJsonStringMap(instance.languageCode2)
+          case final value?)
+        'language_code_2': value,
+      if (LanguageHelper.toJsonStringMap(instance.languageCode3)
+          case final value?)
+        'language_code_3': value,
+      if (LanguageHelper.toJsonStringMap(instance.name) case final value?)
+        'name': value,
+      if (LanguageHelper.toJsonStringMap(instance.wikidata) case final value?)
+        'wikidata': value,
+    };

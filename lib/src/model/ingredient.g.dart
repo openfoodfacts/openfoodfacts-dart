@@ -23,28 +23,24 @@ Ingredient _$IngredientFromJson(Map<String, dynamic> json) => Ingredient(
       bold: json['bold'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$IngredientToJson(Ingredient instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('rank', instance.rank);
-  writeNotNull('id', instance.id);
-  val['text'] = instance.text;
-  writeNotNull('is_in_taxonomy', instance.isInTaxonomy);
-  writeNotNull('percent', instance.percent);
-  writeNotNull('percent_estimate', instance.percentEstimate);
-  writeNotNull('vegan', ingredientSpecialPropertyStatusToJson(instance.vegan));
-  writeNotNull(
-      'vegetarian', ingredientSpecialPropertyStatusToJson(instance.vegetarian));
-  writeNotNull('from_palm_oil',
-      ingredientSpecialPropertyStatusToJson(instance.fromPalmOil));
-  writeNotNull(
-      'ingredients', JsonHelper.ingredientsToJson(instance.ingredients));
-  val['bold'] = instance.bold;
-  return val;
-}
+Map<String, dynamic> _$IngredientToJson(Ingredient instance) =>
+    <String, dynamic>{
+      if (instance.rank case final value?) 'rank': value,
+      if (instance.id case final value?) 'id': value,
+      'text': instance.text,
+      if (instance.isInTaxonomy case final value?) 'is_in_taxonomy': value,
+      if (instance.percent case final value?) 'percent': value,
+      if (instance.percentEstimate case final value?) 'percent_estimate': value,
+      if (ingredientSpecialPropertyStatusToJson(instance.vegan)
+          case final value?)
+        'vegan': value,
+      if (ingredientSpecialPropertyStatusToJson(instance.vegetarian)
+          case final value?)
+        'vegetarian': value,
+      if (ingredientSpecialPropertyStatusToJson(instance.fromPalmOil)
+          case final value?)
+        'from_palm_oil': value,
+      if (JsonHelper.ingredientsToJson(instance.ingredients) case final value?)
+        'ingredients': value,
+      'bold': instance.bold,
+    };

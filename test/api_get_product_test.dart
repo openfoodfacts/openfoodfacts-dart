@@ -405,7 +405,7 @@ void main() {
       nutriments = result.product!.nutriments!;
       expect(
         nutriments.getValue(Nutrient.biotin, PerSize.oneHundredGrams),
-        0.0,
+        0.000017,
       );
       expect(nutriments.getValue(Nutrient.biotin, PerSize.serving), isNull);
 
@@ -1563,6 +1563,32 @@ void main() {
       expect(productResult.product!.dataQualityErrorsTags, isNull);
       expect(productResult.product!.dataQualityInfoTags, isNull);
       expect(productResult.product!.dataQualityWarningsTags, isNull);
+    });
+  });
+
+  group('$OpenFoodAPIClient different API versions', () {
+    const String barcode = '3661344723290';
+    const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+    const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
+
+    test('get schema versions', () async {
+      final Map<num, int> schemaVersions = <num, int>{
+        3: 999,
+        3.1: 1000,
+        3.2: 1001,
+      };
+      for (final MapEntry<num, int> version in schemaVersions.entries) {
+        final ProductResultV3 productResult = await getProductV3InProd(
+          ProductQueryConfiguration(barcode,
+              language: language,
+              country: country,
+              version: ProductQueryVersion(version.key),
+              fields: [
+                ProductField.SCHEMA_VERSION,
+              ]),
+        );
+        expect(productResult.product!.schemaVersion, version.value);
+      }
     });
   });
 }

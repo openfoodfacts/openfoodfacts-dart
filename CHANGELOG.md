@@ -1,5 +1,36 @@
 # Changelog
 
+## [3.26.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.25.1...v3.26.0) (2025-10-07)
+
+
+### Features
+
+* 1055 - API versions as decimal, Product.schemaVersion ([#1139](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1139)) ([24dd1de](https://github.com/openfoodfacts/openfoodfacts-dart/commit/24dd1de19c60fdf025ff81f4e1ae73dba4730cc4))
+* 1062 - prices get challenge methods ([#1143](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1143)) ([74048f5](https://github.com/openfoodfacts/openfoodfacts-dart/commit/74048f5838149fefb3806539aa3e65ea5c7d657d))
+* 1135 - getLocalizedNames, getCanonicalTags new taxonomy methods ([#1136](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1136)) ([a8c3517](https://github.com/openfoodfacts/openfoodfacts-dart/commit/a8c3517734bad17e2219d317d13b8f4451b9a9d3))
+* 905 - new units "% DV" and "IU" ([#1146](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1146)) ([301eb90](https://github.com/openfoodfacts/openfoodfacts-dart/commit/301eb90e1c017aefc735fb91ab9737f442251ca0))
+* **knowledge-panels:** Implement 2 new subcases for knowledge panels actions ([#1121](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1121)) ([069a075](https://github.com/openfoodfacts/openfoodfacts-dart/commit/069a075eb5e66246af189599746f21b8c8febd40))
+
+
+### Bug Fixes
+
+* 1089 - removed FROM from http header - for web only ([#1145](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1145)) ([ace8d6b](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ace8d6bf325f8d8fd4b6192fcec0bc4e90a48597))
+
+## [3.25.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.25.0...v3.25.1) (2025-09-08)
+
+
+### Bug Fixes
+
+* 1128 - minor changes to price tests ([#1131](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1131)) ([369d3a4](https://github.com/openfoodfacts/openfoodfacts-dart/commit/369d3a4be1d9d96d48cada9d553f126477d0e477))
+
+## [3.25.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.24.0...v3.25.0) (2025-09-05)
+
+
+### Features
+
+* 1125 - max number of decimal numbers for each currency ([#1126](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1126)) ([3e66004](https://github.com/openfoodfacts/openfoodfacts-dart/commit/3e660040fd5adff53ba224237ebace699c1c6305))
+* Add `source` to the `Proof` object ([#1091](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1091)) ([c3b1b74](https://github.com/openfoodfacts/openfoodfacts-dart/commit/c3b1b74c2b3ccd232353c7b71674a2550664b76b))
+
 ## [3.24.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.23.0...v3.24.0) (2025-06-27)
 
 

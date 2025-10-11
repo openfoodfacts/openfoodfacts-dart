@@ -9,7 +9,7 @@ void main() {
   const UriProductHelper uriHelper = uriHelperFoodTest;
 
   group('$OpenFoodAPIClient save product V3', () {
-    const String barcode = '12345678';
+    const String barcode = '7300400481588';
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
     const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
 
@@ -117,7 +117,7 @@ void main() {
         expect(readStatus.product, isNotNull);
         expect(readStatus.product!.packagingsComplete, value);
       }
-    });
+    }, timeout: Timeout(Duration(seconds: 60)));
 
     test('reproducing issue 1038', () async {
       // Check it's ok if we get numbers instead of String? as warning/error values.

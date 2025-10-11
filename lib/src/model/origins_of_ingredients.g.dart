@@ -16,18 +16,12 @@ OriginsOfIngredients _$OriginsOfIngredientsFromJson(
     );
 
 Map<String, dynamic> _$OriginsOfIngredientsToJson(
-    OriginsOfIngredients instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('epi_score', instance.epiScore);
-  writeNotNull('epi_value', instance.epiValue);
-  writeNotNull('transportation_score', instance.transportationScore);
-  writeNotNull('transportation_value', instance.transportationValue);
-  return val;
-}
+        OriginsOfIngredients instance) =>
+    <String, dynamic>{
+      if (instance.epiScore case final value?) 'epi_score': value,
+      if (instance.epiValue case final value?) 'epi_value': value,
+      if (instance.transportationScore case final value?)
+        'transportation_score': value,
+      if (instance.transportationValue case final value?)
+        'transportation_value': value,
+    };
