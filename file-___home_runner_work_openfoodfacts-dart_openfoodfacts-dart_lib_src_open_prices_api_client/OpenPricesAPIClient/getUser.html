@@ -73,7 +73,7 @@
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
   final Uri uri = OpenPricesAPIClient.getUri(
-    path: &#39;&#47;api&#47;v1&#47;users&#47;$username&#39;,
+    path: &#39;&#47;api&#47;v1&#47;users&#47;${Uri.encodeComponent(username)}&#39;,
   );
   final http.Response response =
       await HttpHelper().doGetRequest(uri, uriHelper: uriHelper);

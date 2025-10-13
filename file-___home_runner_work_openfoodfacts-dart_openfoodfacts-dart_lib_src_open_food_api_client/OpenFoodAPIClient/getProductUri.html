@@ -84,7 +84,7 @@
   required final bool replaceSubdomain,
 }) {
   final Uri uri = uriHelper.getUri(
-    path: &#39;product&#47;$barcode&#39;,
+    path: &#39;product&#47;${Uri.encodeComponent(barcode)}&#39;,
     addUserAgentParameters: false,
   );
   if (!replaceSubdomain) {

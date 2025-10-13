@@ -73,7 +73,7 @@
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
   final Uri uri = getUri(
-    path: &#39;&#47;api&#47;v1&#47;products&#47;code&#47;$productCode&#39;,
+    path: &#39;&#47;api&#47;v1&#47;products&#47;code&#47;${Uri.encodeComponent(productCode)}&#39;,
     uriHelper: uriHelper,
   );
   final Response response = await HttpHelper().doGetRequest(

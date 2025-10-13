@@ -84,7 +84,8 @@
   };
   final Response response = await HttpHelper().doGetRequest(
     uriHelper.getUri(
-      path: &#39;product&#47;$barcode&#47;$key&#47;versions&#39;,
+      path:
+          &#39;product&#47;${Uri.encodeComponent(barcode)}&#47;${Uri.encodeComponent(key)}&#47;versions&#39;,
       queryParameters: parameters,
     ),
     uriHelper: uriHelper,

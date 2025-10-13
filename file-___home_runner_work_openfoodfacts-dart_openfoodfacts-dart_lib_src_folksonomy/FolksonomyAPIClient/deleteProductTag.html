@@ -82,7 +82,8 @@
 }) async {
   final Response response = await HttpHelper().doDeleteRequest(
     uriHelper.getUri(
-      path: &#39;product&#47;$barcode&#47;$key&#39;,
+      path:
+          &#39;product&#47;${Uri.encodeComponent(barcode)}&#47;${Uri.encodeComponent(key)}&#39;,
       queryParameters: {
         &#39;version&#39;: &#39;$version&#39;,
         if (owner != null) &#39;owner&#39;: owner,

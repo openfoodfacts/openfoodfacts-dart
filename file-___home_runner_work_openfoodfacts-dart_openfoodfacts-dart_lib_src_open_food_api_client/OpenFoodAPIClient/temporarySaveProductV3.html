@@ -111,7 +111,7 @@ Long term target is of course more something like <a href="../../file-___home_ru
   }
 
   var productUri = uriHelper.getPatchUri(
-    path: &#39;&#47;api&#47;v3&#47;product&#47;$barcode&#39;,
+    path: &#39;&#47;api&#47;v3&#47;product&#47;${Uri.encodeComponent(barcode)}&#39;,
   );
 
   final Response response = await HttpHelper().doPatchRequest(

@@ -92,7 +92,7 @@
   };
 
   var robotoffQuestionUri = uriHelper.getUri(
-    path: &#39;api&#47;v1&#47;questions&#47;$barcode&#39;,
+    path: &#39;api&#47;v1&#47;questions&#47;${Uri.encodeComponent(barcode)}&#39;,
     queryParameters: parameters,
   );
 
