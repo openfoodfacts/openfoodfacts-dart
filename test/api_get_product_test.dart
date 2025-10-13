@@ -994,37 +994,37 @@ void main() {
     }
 
     test('get product caret', () async {
-      String barcode = '^0104260392550101';
-      String normalizedBarcode = '4260392550101';
+      const barcode = '^0104260392550101';
+      const normalizedBarcode = '4260392550101';
 
       await getAndValidateProductGS1(barcode, normalizedBarcode);
     });
 
     test('get product FNC1', () async {
-      String barcode = '\u{001d}0104260392550101';
-      String normalizedBarcode = '4260392550101';
+      const barcode = '\u{001d}0104260392550101';
+      const normalizedBarcode = '4260392550101';
 
       await getAndValidateProductGS1(barcode, normalizedBarcode);
     });
 
     test('get product GS', () async {
-      String barcode = '␝0104260392550101';
-      String normalizedBarcode = '4260392550101';
+      const barcode = '␝0104260392550101';
+      const normalizedBarcode = '4260392550101';
 
       await getAndValidateProductGS1(barcode, normalizedBarcode);
     });
 
     test('get product AI Data String', () async {
-      String barcode = '(01)04260392550101';
-      String normalizedBarcode = '4260392550101';
+      const barcode = '(01)04260392550101';
+      const normalizedBarcode = '4260392550101';
 
       await getAndValidateProductGS1(barcode, normalizedBarcode);
     });
 
     test('get product GS1 Data URI', () async {
-      String barcode =
+      const barcode =
           'https://id.gs1.org/01/04260392550101/10/ABC/21/123456?17=211200';
-      String normalizedBarcode = '4260392550101';
+      const normalizedBarcode = '4260392550101';
 
       await getAndValidateProductGS1(barcode, normalizedBarcode);
     });
