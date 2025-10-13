@@ -61,7 +61,7 @@ class RobotoffAPIClient {
     };
 
     var insightsUri = uriHelper.getUri(
-      path: 'api/v1/insights/$barcode',
+      path: 'api/v1/insights/${Uri.encodeComponent(barcode)}',
       queryParameters: parameters,
     );
 
@@ -94,7 +94,7 @@ class RobotoffAPIClient {
     };
 
     var robotoffQuestionUri = uriHelper.getUri(
-      path: 'api/v1/questions/$barcode',
+      path: 'api/v1/questions/${Uri.encodeComponent(barcode)}',
       queryParameters: parameters,
     );
 
