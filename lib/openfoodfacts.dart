@@ -26,6 +26,11 @@ export 'src/model/nutrient.dart';
 export 'src/model/nutrient_levels.dart';
 export 'src/model/nutrient_modifier.dart';
 export 'src/model/nutriments.dart';
+export 'src/model/nutriscore/nutriscore_data_2021.dart';
+export 'src/model/nutriscore/nutriscore_data_2023.dart';
+export 'src/model/nutriscore/nutriscore_detail_2021.dart';
+export 'src/model/nutriscore/nutriscore_detail_2023.dart';
+export 'src/model/nutriscore/nutriscore_details.dart';
 
 // export 'src/model/product_list.dart'; // not needed
 export 'src/model/ocr_ingredients_result.dart';
