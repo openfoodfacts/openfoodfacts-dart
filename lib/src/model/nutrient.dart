@@ -253,6 +253,162 @@ enum Nutrient implements OffTagged {
   /// Nervonic Acid
   nervonicAcid(typicalUnit: Unit.G, offTag: 'nervonic-acid'),
 
+  /// Energy from fat
+  energyFromFat(typicalUnit: Unit.KJ, offTag: 'energy-from-fat'),
+
+  /// Unsaturated fat
+  unsaturatedFat(typicalUnit: Unit.G, offTag: 'unsaturated-fat'),
+
+  /// Sucrose
+  sucrose(typicalUnit: Unit.G, offTag: 'sucrose'),
+
+  /// Glucose
+  glucose(typicalUnit: Unit.G, offTag: 'glucose'),
+
+  /// Fructose
+  fructose(typicalUnit: Unit.G, offTag: 'fructose'),
+
+  /// Galactose
+  galactose(typicalUnit: Unit.G, offTag: 'galactose'),
+
+  /// Lactose
+  lactose(typicalUnit: Unit.G, offTag: 'lactose'),
+
+  /// Maltose
+  maltose(typicalUnit: Unit.G, offTag: 'maltose'),
+
+  /// Maltodextrins
+  maltodextrins(typicalUnit: Unit.G, offTag: 'maltodextrins'),
+
+  /// Psicose
+  psicose(typicalUnit: Unit.G, offTag: 'psicose'),
+
+  /// Starch
+  starch(typicalUnit: Unit.G, offTag: 'starch'),
+
+  /// Erythritol
+  erythritol(typicalUnit: Unit.G, offTag: 'erythritol'),
+
+  /// Isomalt
+  isomalt(typicalUnit: Unit.G, offTag: 'isomalt'),
+
+  /// Maltitol
+  maltitol(typicalUnit: Unit.G, offTag: 'maltitol'),
+
+  /// Sorbitol
+  sorbitol(typicalUnit: Unit.G, offTag: 'sorbitol'),
+
+  /// Soluble Fiber
+  solubleFiber(typicalUnit: Unit.G, offTag: 'soluble-fiber'),
+
+  /// Insoluble Fiber
+  insolubleFiber(typicalUnit: Unit.G, offTag: 'insoluble-fiber'),
+
+  /// Casein
+  casein(typicalUnit: Unit.G, offTag: 'casein'),
+
+  /// Serum Proteins
+  serumProteins(typicalUnit: Unit.G, offTag: 'serum-proteins'),
+
+  /// Nucleotides
+  nucleotides(typicalUnit: Unit.G, offTag: 'nucleotides'),
+
+  /// Added Salt
+  addedSalt(typicalUnit: Unit.G, offTag: 'added-salt'),
+
+  /// Folates
+  folates(typicalUnit: Unit.G, offTag: 'folates'),
+
+  /// Silica
+  silica(typicalUnit: Unit.MILLI_G, offTag: 'silica'),
+
+  /// Taurine
+  taurine(typicalUnit: Unit.G, offTag: 'taurine'),
+
+  /// Methylsulfonylmethane
+  methylsulfonylmethane(
+      typicalUnit: Unit.MILLI_G, offTag: 'methylsulfonylmethane'),
+
+  /// pH
+  ph(typicalUnit: Unit.UNKNOWN, offTag: 'ph'),
+
+  /// Fruits Vegetables Nuts
+  fruitsVegetablesNuts(
+      typicalUnit: Unit.PERCENT, offTag: 'fruits-vegetables-nuts'),
+
+  /// Fruits Vegetables Nuts Dried
+  fruitsVegetablesNutsDried(
+      typicalUnit: Unit.PERCENT, offTag: 'fruits-vegetables-nuts-dried'),
+
+  /// Fruits Vegetables Nuts Estimate
+  fruitsVegetablesNutsEstimate(
+      typicalUnit: Unit.PERCENT, offTag: 'fruits-vegetables-nuts-estimate'),
+
+  /// Collagen Meat Protein Ratio
+  collagenMeatProteinRatio(
+      typicalUnit: Unit.PERCENT, offTag: 'collagen-meat-protein-ratio'),
+
+  /// Cocoa
+  cocoa(typicalUnit: Unit.PERCENT, offTag: 'cocoa'),
+
+  /// chlorophyl
+  chlorophyl(typicalUnit: Unit.G, offTag: 'chlorophyl'),
+
+  /// Carbon footprint
+  carbonFootprint(typicalUnit: Unit.G, offTag: 'carbon-footprint'),
+
+  /// Carbon footprint from meat or fish
+  carbonFootprintFromMeatOrFish(
+      typicalUnit: Unit.G, offTag: 'carbon-footprint-from-meat-or-fish'),
+
+  /// Nutrition Score FR
+  nutritionScoreFR(typicalUnit: Unit.UNKNOWN, offTag: 'nutrition-score-fr'),
+
+  /// Nutrition Score UK
+  nutritionScoreUK(typicalUnit: Unit.UNKNOWN, offTag: 'nutrition-score-uk'),
+
+  /// Glycemic index
+  glycemicIndex(typicalUnit: Unit.UNKNOWN, offTag: 'glycemic-index'),
+
+  /// Water hardness
+  waterHardness(typicalUnit: Unit.UNKNOWN, offTag: 'water-hardness'),
+
+  /// Choline
+  choline(typicalUnit: Unit.G, offTag: 'choline'),
+
+  /// Phylloquinone
+  phylloquinone(typicalUnit: Unit.G, offTag: 'phylloquinone'),
+
+  /// Beta-glucan
+  betaGlucan(typicalUnit: Unit.G, offTag: 'beta-glucan'),
+
+  /// Inositol
+  inositol(typicalUnit: Unit.G, offTag: 'inositol'),
+
+  /// Carnitine
+  carnitine(typicalUnit: Unit.G, offTag: 'carnitine'),
+
+  /// Sulphate
+  sulphate(typicalUnit: Unit.MILLI_G, offTag: 'sulphate'),
+
+  /// Nitrate
+  nitrate(typicalUnit: Unit.MILLI_G, offTag: 'nitrate'),
+
+  /// Acidity
+  acidity(typicalUnit: Unit.UNKNOWN, offTag: 'acidity'),
+
+  /// Carbohydrates total
+  carbohydratesTotal(typicalUnit: Unit.G, offTag: 'carbohydrates-total'),
+
+  /// Total Carboydrates
+  totalCarboydrates(typicalUnit: Unit.G, offTag: 'total-carboydrates'),
+
+  /// Sulfate
+  sulfate(typicalUnit: Unit.G, offTag: 'sulfate'),
+
+  /// Melatonin
+  melatonin(typicalUnit: Unit.MICRO_G, offTag: 'melatonin'),
+
   /// Trans Fats
   transFat(typicalUnit: Unit.G, offTag: 'trans-fat');
 
