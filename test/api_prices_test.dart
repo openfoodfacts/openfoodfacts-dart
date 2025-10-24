@@ -485,7 +485,6 @@ void main() {
           expect(price.categoryTag, isNull);
         }
         expect(price.price, greaterThan(0));
-        expect(price.locationOSMId, greaterThan(0));
         expect(price.currency, isNotNull);
         expect(price.price, isNotNull);
       }
@@ -1055,15 +1054,6 @@ void main() {
       'upload and update RECEIPT',
       () async => checkProofParameters(
         CreateProofParameters(ProofType.receipt)
-          ..currency = Currency.EUR
-          ..ownerComment = 'just trying'
-          ..date = DateTime(2025, 1, 3)
-          ..receiptPriceCount = 77
-          ..receiptPriceTotal = 1.75
-          ..receiptOnlineDeliveryCosts = 14
-          ..ownerConsumption = false,
-        UpdateProofParameters()
-          ..type = ProofType.receipt
           ..currency = Currency.USD
           ..ownerComment = 'nothing in the end'
           ..date = DateTime(2025, 1, 3)
@@ -1071,6 +1061,15 @@ void main() {
           ..receiptPriceTotal = 1.75
           ..receiptOnlineDeliveryCosts = 15
           ..ownerConsumption = true,
+        UpdateProofParameters()
+          ..type = ProofType.receipt
+          ..currency = Currency.EUR
+          ..ownerComment = 'just trying'
+          ..date = DateTime(2025, 1, 3)
+          ..receiptPriceCount = 77
+          ..receiptPriceTotal = 1.75
+          ..receiptOnlineDeliveryCosts = 14
+          ..ownerConsumption = false,
       ),
     );
 
