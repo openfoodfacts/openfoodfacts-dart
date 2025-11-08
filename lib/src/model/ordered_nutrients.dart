@@ -17,8 +17,36 @@ class OrderedNutrients extends JsonObject {
 
   OrderedNutrients({required this.nutrients});
 
-  factory OrderedNutrients.fromJson(Map<String, dynamic> json) =>
-      _$OrderedNutrientsFromJson(json);
+  factory OrderedNutrients.fromJson(
+    Map<String, dynamic> json, {
+    final bool excludeReadOnly = true,
+  }) {
+    final OrderedNutrients result = _$OrderedNutrientsFromJson(json);
+    if (excludeReadOnly == false) {
+      return result;
+    }
+    _excludeReadOnly(result.nutrients);
+    return result;
+  }
+
+  // cf. https://github.com/openfoodfacts/openfoodfacts-dart/issues/1160
+  static void _excludeReadOnly(final List<OrderedNutrient>? orderedNutrients) {
+    if (orderedNutrients == null) {
+      return;
+    }
+    final List<int> remove = <int>[];
+    for (int i = 0; i < orderedNutrients.length; i++) {
+      final OrderedNutrient orderedNutrient = orderedNutrients[i];
+      if (orderedNutrient.id.startsWith('nutrition')) {
+        remove.add(i);
+      } else {
+        _excludeReadOnly(orderedNutrient.subNutrients);
+      }
+    }
+    for (int i = remove.length - 1; i >= 0; i--) {
+      orderedNutrients.removeAt(remove[i]);
+    }
+  }
 
   @override
   Map<String, dynamic> toJson() => _$OrderedNutrientsToJson(this);
