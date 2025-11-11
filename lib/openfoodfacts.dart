@@ -1,5 +1,3 @@
-library openfoodfacts;
-
 export 'src/events.dart';
 export 'src/folksonomy.dart';
 export 'src/interface/parameter.dart';
@@ -38,6 +36,8 @@ export 'src/model/packaging.dart';
 export 'src/model/parameter/allergens_parameter.dart';
 export 'src/model/parameter/barcode_parameter.dart';
 export 'src/model/parameter/ingredients_analysis_parameter.dart';
+export 'src/model/parameter/ingredients_filter_parameter.dart';
+export 'src/model/parameter/ingredients_unwanted_parameter.dart';
 export 'src/model/parameter/page_number.dart';
 export 'src/model/parameter/page_size.dart';
 export 'src/model/parameter/pnns_group2_filter.dart';
