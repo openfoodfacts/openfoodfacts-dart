@@ -29,6 +29,15 @@ void main() {
     );
   }
 
+  Future<SearchResult> searchProductsInTest(
+    final AbstractQueryConfiguration configuration,
+  ) async =>
+      OpenFoodAPIClient.searchProducts(
+        TestConstants.TEST_USER,
+        configuration,
+        uriHelper: uriHelperFoodTest,
+      );
+
   // additional parameter for faster response time
   const Parameter optimParameter = SearchTerms(terms: ['pizza']);
 
@@ -1606,6 +1615,97 @@ void main() {
         expect(matched.status, score.status);
         expect(matched.score, score.score);
       }
+    });
+  });
+
+  group('$OpenFoodAPIClient ingredients_*_parameter', () {
+    const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+    const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
+
+    test('check ingredients_filter_parameter', () async {
+      final Map<String, bool> ingredientFilter = <String, bool>{
+        'en:vitamin-b12': true,
+        'en:oat': true,
+        'en:added-sugar': false,
+        'en:calcium': false,
+      };
+      final SearchResult result = await searchProductsInProd(
+        ProductSearchQueryConfiguration(
+          parametersList: [IngredientsFilterParameter(ingredientFilter)],
+          fields: [ProductField.INGREDIENTS_TAGS],
+          language: language,
+          country: country,
+          version: version,
+        ),
+      );
+      expect(result.products, isNotNull);
+      for (final Product product in result.products!) {
+        final List<String> ingredientsTags = product.ingredientsTags!;
+        for (final MapEntry<String, bool> entry in ingredientFilter.entries) {
+          if (entry.value) {
+            expect(entry.key, isIn(ingredientsTags));
+          } else {
+            expect(entry.key, isNot(isIn(ingredientsTags)));
+          }
+        }
+      }
+    });
+
+    test('check ingredients_unwanted_parameter', () async {
+      final List<String> unwantedIngredients = <String>["en:tomato"];
+      final SearchResult result = await searchProductsInTest(
+        ProductSearchQueryConfiguration(
+          parametersList: [
+            optimParameter,
+            IngredientsUnwantedParameter(unwantedIngredients),
+            PageSize(size: 100),
+          ],
+          fields: [
+            ProductField.ATTRIBUTE_GROUPS,
+            ProductField.INGREDIENTS_TAGS,
+          ],
+          language: language,
+          country: country,
+          version: version,
+        ),
+      );
+
+      expect(result.products, isNotNull);
+      int countWith = 0;
+      int countWithout = 0;
+      for (final Product product in result.products!) {
+        final List<String> ingredientsTags = product.ingredientsTags!;
+
+        bool hasAtLeastOneUnwantedIngredient() {
+          for (final String unwanted in unwantedIngredients) {
+            if (ingredientsTags.contains(unwanted)) {
+              return true;
+            }
+          }
+          return false;
+        }
+
+        final bool atLeastOne = hasAtLeastOneUnwantedIngredient();
+
+        final List<AttributeGroup> attributeGroups = product.attributeGroups!;
+        final AttributeGroup attributeGroup = attributeGroups.firstWhere(
+            (final AttributeGroup group) => group.id == 'ingredients');
+        final Attribute attribute = attributeGroup.attributes!.firstWhere(
+            (final Attribute attribute) =>
+                attribute.id == 'unwanted_ingredients');
+        if (attribute.status == 'unknown') {
+          expect(attribute.match, null);
+        } else if (attribute.status == 'known') {
+          expect(attribute.match, equals(atLeastOne ? 0 : 100));
+          if (atLeastOne) {
+            countWith++;
+          } else {
+            countWithout++;
+          }
+        }
+      }
+      expect(countWith, greaterThan(0));
+      expect(countWithout, greaterThan(0));
     });
   });
 }
