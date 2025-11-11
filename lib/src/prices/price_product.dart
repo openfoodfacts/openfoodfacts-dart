@@ -1,90 +1,72 @@
-import 'package:json_annotation/json_annotation.dart';
-
 import 'flavor.dart';
-import '../interface/json_object.dart';
+import '../interface/json_map.dart';
 import '../utils/json_helper.dart';
-
-part 'price_product.g.dart';
 
 /// Product object in the Prices API.
 ///
 /// cf. `ProductFull` in https://prices.openfoodfacts.org/api/docs
-@JsonSerializable()
-class PriceProduct extends JsonObject {
+/// Read-only - we retrieve the data from the Prices API.
+class PriceProduct extends JsonMap {
   /// Barcode (EAN) of the product, as a string.
-  @JsonKey()
-  late String code;
+  String get code => jsonMap['code'] as String;
 
   /// Number of prices for this product.
-  @JsonKey(name: 'price_count')
-  int? priceCount;
+  int? get priceCount => (jsonMap['price_count'] as num?)?.toInt();
 
   /// Number of locations for this product.
-  @JsonKey(name: 'location_count')
-  int? locationCount;
+  int? get locationCount => (jsonMap['location_count'] as num?)?.toInt();
 
   /// Number of users for this product.
-  @JsonKey(name: 'user_count')
-  int? userCount;
+  int? get userCount => (jsonMap['user_count'] as num?)?.toInt();
 
   /// Number of proofs for this product.
-  @JsonKey(name: 'proof_count')
-  int? proofCount;
+  int? get proofCount => (jsonMap['proof_count'] as num?)?.toInt();
 
-  @JsonKey(name: 'id')
-  late int productId;
+  int get productId => (jsonMap['id'] as num).toInt();
 
   /// Source of data.
-  @JsonKey()
-  Flavor? source;
+  Flavor? get source => Flavor.fromOffTag(jsonMap['source'] as String?);
 
-  @JsonKey(name: 'product_name')
-  String? name;
+  String? get name => jsonMap['product_name'] as String?;
 
-  @JsonKey(name: 'product_quantity')
-  int? quantity;
+  num? get quantity => jsonMap['product_quantity'] as num?;
 
-  @JsonKey(name: 'product_quantity_unit')
-  String? quantityUnit;
+  String? get quantityUnit => jsonMap['product_quantity_unit'] as String?;
 
-  @JsonKey(name: 'categories_tags')
-  late List<String> categoriesTags;
+  String? get quantityString => jsonMap['quantity'] as String?;
 
-  @JsonKey()
-  String? brands;
+  List<String> get categoriesTags =>
+      (jsonMap['categories_tags'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList();
 
-  @JsonKey(name: 'brands_tags')
-  late List<String> brandsTags;
+  String? get brands => jsonMap['brands'] as String?;
 
-  @JsonKey(name: 'labels_tags')
-  late List<String> labelsTags;
+  List<String> get brandsTags => (jsonMap['brands_tags'] as List<dynamic>)
+      .map((e) => e as String)
+      .toList();
 
-  @JsonKey(name: 'image_url')
-  String? imageURL;
+  List<String> get labelsTags => (jsonMap['labels_tags'] as List<dynamic>)
+      .map((e) => e as String)
+      .toList();
 
-  @JsonKey(name: 'nutriscore_grade')
-  String? nutriscoreGrade;
+  String? get imageURL => jsonMap['image_url'] as String?;
 
-  @JsonKey(name: 'ecoscore_grade')
-  String? ecoscoreGrade;
+  String? get nutriscoreGrade => jsonMap['nutriscore_grade'] as String?;
 
-  @JsonKey(name: 'nova_group')
-  int? novaGroup;
+  String? get ecoscoreGrade => jsonMap['ecoscore_grade'] as String?;
 
-  @JsonKey(name: 'unique_scans_n')
-  late int uniqueScansNumber;
+  int? get novaGroup => (jsonMap['nova_group'] as num?)?.toInt();
 
-  @JsonKey(fromJson: JsonHelper.stringTimestampToDate)
-  late DateTime created;
+  int get uniqueScansNumber => (jsonMap['unique_scans_n'] as num).toInt();
 
-  @JsonKey(fromJson: JsonHelper.nullableStringTimestampToDate)
-  DateTime? updated;
+  DateTime get created => JsonHelper.stringTimestampToDate(jsonMap['created']);
 
-  PriceProduct();
+  DateTime? get updated =>
+      JsonHelper.nullableStringTimestampToDate(jsonMap['updated']);
 
-  factory PriceProduct.fromJson(Map<String, dynamic> json) =>
-      _$PriceProductFromJson(json);
+  PriceProduct(super.jsonMap);
 
-  @override
-  Map<String, dynamic> toJson() => _$PriceProductToJson(this);
+  factory PriceProduct.fromJson(Map<String, dynamic> jsonMap) =>
+      PriceProduct(jsonMap);
 }

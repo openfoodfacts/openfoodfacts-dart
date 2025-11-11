@@ -33,4 +33,8 @@ enum Flavor implements OffTagged {
 
   @override
   final String offTag;
+
+  /// Returns the first [Flavor] that matches the [offTag].
+  static Flavor? fromOffTag(final String? offTag) =>
+      OffTagged.fromOffTag(offTag, Flavor.values) as Flavor?;
 }
