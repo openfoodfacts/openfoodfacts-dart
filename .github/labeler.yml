@@ -13,6 +13,14 @@ GitHub Actions:
   - any-glob-to-any-file: 'lib/src/model/knowledge_panel.g.dart'
   - any-glob-to-any-file: 'lib/src/model/knowledge_panel_element.g.dart'
 
+3rd party Knowledge Panels:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/external/external_source_filter.dart'
+  - any-glob-to-any-file: 'lib/src/external/external_source_metadata.dart'
+  - any-glob-to-any-file: 'lib/src/external/external_source_product_data.dart'
+  - any-glob-to-any-file: 'lib/src/external/json_map.dart'
+  - any-glob-to-any-file: 'test/api_external_source.dart'
+  
 Product:
 - changed-files:
   - any-glob-to-any-file: 'lib/src/model/product.dart'
