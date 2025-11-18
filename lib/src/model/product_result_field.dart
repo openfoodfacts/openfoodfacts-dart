@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../interface/json_object.dart';
+import '../utils/json_helper.dart';
 
 part 'product_result_field.g.dart';
 
@@ -11,11 +12,27 @@ class ProductResultField extends JsonObject {
   @JsonKey(includeIfNull: false)
   String? id;
 
-  @JsonKey(includeIfNull: false)
+  /// Value sent by the user, here converted to String.
+  @JsonKey(
+    includeIfNull: false,
+    fromJson: JsonHelper.stringFromJSON,
+  )
   String? value;
 
-  @JsonKey(name: 'default_value', includeIfNull: false)
+  @JsonKey(
+    name: 'default_value',
+    includeIfNull: false,
+    fromJson: JsonHelper.stringFromJSON,
+  )
   String? defaultValue;
+
+  /// Value actually used by the server, here converted to String.
+  @JsonKey(
+    name: 'valued_converted',
+    includeIfNull: false,
+    fromJson: JsonHelper.stringFromJSON,
+  )
+  String? valuedConverted;
 
   factory ProductResultField.fromJson(Map<String, dynamic> json) =>
       _$ProductResultFieldFromJson(json);

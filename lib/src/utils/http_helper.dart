@@ -265,7 +265,7 @@ class HttpHelper {
     final String bearerToken,
   ) =>
       <String, String>{
-        'Authorization': 'bearer $bearerToken',
+        'Authorization': 'Bearer $bearerToken',
         'Content-Type': 'application/json',
       };
 
@@ -293,9 +293,10 @@ class HttpHelper {
       'Accept': 'application/json',
       if (!UriReader.instance.isWeb)
         'User-Agent': OpenFoodAPIConfiguration.userAgent!.toValueString(),
-      'From': _getSafeString(
-        OpenFoodAPIConfiguration.getUser(user)?.userId ?? FROM,
-      ),
+      if (!UriReader.instance.isWeb)
+        'From': _getSafeString(
+          OpenFoodAPIConfiguration.getUser(user)?.userId ?? FROM,
+        ),
     });
 
     final bool isTestModeActive = uriHelper.isTestMode;

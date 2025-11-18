@@ -103,6 +103,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
     )
       ..productType =
           $enumDecodeNullable(_$ProductTypeEnumMap, json['product_type'])
+      ..schemaVersion = (json['schema_version'] as num?)?.toInt()
       ..conservationConditionsInLanguages = LanguageHelper.fromJsonStringMap(
           json['conservation_conditions_in_languages'])
       ..customerServiceInLanguages = LanguageHelper.fromJsonStringMap(
@@ -201,160 +202,196 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       ..owner = json['owner'] as String?
       ..expirationDate = json['expiration_date'] as String?;
 
-Map<String, dynamic> _$ProductToJson(Product instance) {
-  final val = <String, dynamic>{
-    'code': instance.barcode,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('product_type', _$ProductTypeEnumMap[instance.productType]);
-  writeNotNull('product_name', instance.productName);
-  writeNotNull('product_name_in_languages',
-      LanguageHelper.toJsonStringMap(instance.productNameInLanguages));
-  writeNotNull(
-      'conservation_conditions_in_languages',
-      LanguageHelper.toJsonStringMap(
-          instance.conservationConditionsInLanguages));
-  writeNotNull('customer_service_in_languages',
-      LanguageHelper.toJsonStringMap(instance.customerServiceInLanguages));
-  writeNotNull('generic_name', instance.genericName);
-  writeNotNull('generic_name_in_languages',
-      LanguageHelper.toJsonStringMap(instance.genericNameInLanguages));
-  writeNotNull('abbreviated_product_name', instance.abbreviatedName);
-  writeNotNull('abbreviated_product_name_in_languages',
-      LanguageHelper.toJsonStringMap(instance.abbreviatedNameInLanguages));
-  writeNotNull('brands', instance.brands);
-  writeNotNull('brands_tags', instance.brandsTags);
-  writeNotNull('brands_tags_in_languages',
-      LanguageHelper.toJsonStringsListMap(instance.brandsTagsInLanguages));
-  writeNotNull('countries', instance.countries);
-  writeNotNull('countries_tags', instance.countriesTags);
-  writeNotNull('countries_tags_in_languages',
-      LanguageHelper.toJsonStringsListMap(instance.countriesTagsInLanguages));
-  val['lang'] = LanguageHelper.toJson(instance.lang);
-  writeNotNull('quantity', instance.quantity);
-  writeNotNull('image_front_url', instance.imageFrontUrl);
-  writeNotNull('image_front_small_url', instance.imageFrontSmallUrl);
-  writeNotNull('image_ingredients_url', instance.imageIngredientsUrl);
-  writeNotNull(
-      'image_ingredients_small_url', instance.imageIngredientsSmallUrl);
-  writeNotNull('image_nutrition_url', instance.imageNutritionUrl);
-  writeNotNull('image_nutrition_small_url', instance.imageNutritionSmallUrl);
-  writeNotNull('image_packaging_url', instance.imagePackagingUrl);
-  writeNotNull('image_packaging_small_url', instance.imagePackagingSmallUrl);
-  writeNotNull('serving_size', instance.servingSize);
-  writeNotNull('serving_quantity', instance.servingQuantity);
-  writeNotNull('product_quantity', instance.packagingQuantity);
-  val['selected_images'] =
-      JsonHelper.selectedImagesToJson(instance.selectedImages);
-  val['images'] = JsonHelper.allImagesToJson(instance.images);
-  writeNotNull(
-      'ingredients', JsonHelper.ingredientsToJson(instance.ingredients));
-  writeNotNull('ingredients_text', instance.ingredientsText);
-  writeNotNull('ingredients_text_in_languages',
-      LanguageHelper.toJsonStringMap(instance.ingredientsTextInLanguages));
-  writeNotNull('ingredients_tags', instance.ingredientsTags);
-  writeNotNull('ingredients_tags_in_languages',
-      LanguageHelper.toJsonStringsListMap(instance.ingredientsTagsInLanguages));
-  val['imagesFreshnessInLanguages'] = instance.imagesFreshnessInLanguages?.map(
-      (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!,
-          e.map((k, e) => MapEntry(_$ImageFieldEnumMap[k]!, e))));
-  val['ingredients_analysis_tags'] =
-      IngredientsAnalysisTags.toJson(instance.ingredientsAnalysisTags);
-  writeNotNull(
-      'ingredients_analysis_tags_in_languages',
-      LanguageHelper.toJsonStringsListMap(
-          instance.ingredientsAnalysisTagsInLanguages));
-  writeNotNull('additives_tags', Additives.additivesToJson(instance.additives));
-  writeNotNull('additives_tags_in_languages',
-      LanguageHelper.toJsonStringsListMap(instance.additivesTagsInLanguages));
-  writeNotNull('allergens_tags', Allergens.allergensToJson(instance.allergens));
-  writeNotNull('allergens_tags_in_languages',
-      LanguageHelper.toJsonStringsListMap(instance.allergensTagsInLanguages));
-  writeNotNull(
-      'nutrient_levels', NutrientLevels.toJson(instance.nutrientLevels));
-  writeNotNull('nutriment_energy_unit', instance.nutrimentEnergyUnit);
-  val['nutrition_data'] = JsonHelper.checkboxToJSON(instance.nutritionData);
-  writeNotNull('nutrition_data_per', instance.nutrimentDataPer);
-  writeNotNull('nutrition_grade_fr', instance.nutriscore);
-  writeNotNull('compared_to_category', instance.comparedToCategory);
-  writeNotNull('categories', instance.categories);
-  writeNotNull('categories_tags', instance.categoriesTags);
-  writeNotNull('categories_tags_in_languages',
-      LanguageHelper.toJsonStringsListMap(instance.categoriesTagsInLanguages));
-  writeNotNull('labels', instance.labels);
-  writeNotNull('labels_tags', instance.labelsTags);
-  writeNotNull('labels_tags_in_languages',
-      LanguageHelper.toJsonStringsListMap(instance.labelsTagsInLanguages));
-  writeNotNull('packaging', instance.packaging);
-  writeNotNull(
-      'packagings', JsonHelper.productPackagingsToJson(instance.packagings));
-  val['packagings_complete'] =
-      JsonHelper.boolToJSON(instance.packagingsComplete);
-  writeNotNull('packaging_tags', instance.packagingTags);
-  writeNotNull('packaging_text_in_languages',
-      LanguageHelper.toJsonStringMap(instance.packagingTextInLanguages));
-  writeNotNull('misc_tags', instance.miscTags);
-  writeNotNull('misc_tags_in_languages',
-      LanguageHelper.toJsonStringsListMap(instance.miscTagsInLanguages));
-  writeNotNull('states_tags', instance.statesTags);
-  writeNotNull('states_tags_in_languages',
-      LanguageHelper.toJsonStringsListMap(instance.statesTagsInLanguages));
-  writeNotNull('traces_tags', instance.tracesTags);
-  writeNotNull('traces_tags_in_languages',
-      LanguageHelper.toJsonStringsListMap(instance.tracesTagsInLanguages));
-  writeNotNull('traces', instance.traces);
-  writeNotNull('stores_tags', instance.storesTags);
-  writeNotNull('stores_tags_in_languages',
-      LanguageHelper.toJsonStringsListMap(instance.storesTagsInLanguages));
-  writeNotNull('stores', instance.stores);
-  writeNotNull('attribute_groups',
-      JsonHelper.attributeGroupsToJson(instance.attributeGroups));
-  writeNotNull(
-      'last_modified_t', JsonHelper.dateToTimestamp(instance.lastModified));
-  writeNotNull('last_modified_by', instance.lastModifiedBy);
-  writeNotNull('last_image_t', JsonHelper.dateToTimestamp(instance.lastImage));
-  writeNotNull('last_editor', instance.lastEditor);
-  writeNotNull('entry_dates_tags', instance.entryDates);
-  writeNotNull('last_check_dates_tags', instance.lastCheckDates);
-  writeNotNull('last_edit_dates_tags', instance.lastEditDates);
-  writeNotNull('last_image_dates_tags', instance.lastImageDates);
-  writeNotNull(
-      'last_checked_t', JsonHelper.dateToTimestamp(instance.lastChecked));
-  writeNotNull('last_checker', instance.lastChecker);
-  writeNotNull('created_t', JsonHelper.dateToTimestamp(instance.created));
-  writeNotNull('creator', instance.creator);
-  writeNotNull('editors_tags', instance.editors);
-  writeNotNull('ecoscore_grade', instance.ecoscoreGrade);
-  writeNotNull('ecoscore_score', instance.ecoscoreScore);
-  writeNotNull(
-      'ecoscore_data', EcoscoreData.toJsonHelper(instance.ecoscoreData));
-  writeNotNull('knowledge_panels',
-      KnowledgePanels.toJsonHelper(instance.knowledgePanels));
-  writeNotNull('emb_codes', instance.embCodes);
-  writeNotNull('manufacturing_places', instance.manufacturingPlaces);
-  writeNotNull('origins', instance.origins);
-  writeNotNull('nova_group', instance.novaGroup);
-  writeNotNull('link', instance.website);
-  writeNotNull('data_quality_tags', instance.dataQualityTags);
-  writeNotNull('data_quality_bugs_tags', instance.dataQualityBugsTags);
-  writeNotNull('data_quality_errors_tags', instance.dataQualityErrorsTags);
-  writeNotNull('data_quality_info_tags', instance.dataQualityInfoTags);
-  writeNotNull('data_quality_warnings_tags', instance.dataQualityWarningsTags);
-  val['obsolete'] = JsonHelper.checkboxToJSON(instance.obsolete);
-  writeNotNull('owner_fields', instance.ownerFields);
-  writeNotNull('owner', instance.owner);
-  writeNotNull('expiration_date', instance.expirationDate);
-  val['no_nutrition_data'] =
-      JsonHelper.checkboxToJSON(instance.noNutritionData);
-  val['nutriments'] = Nutriments.toJsonHelper(instance.nutriments);
-  return val;
-}
+Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
+      'code': instance.barcode,
+      if (_$ProductTypeEnumMap[instance.productType] case final value?)
+        'product_type': value,
+      if (instance.schemaVersion case final value?) 'schema_version': value,
+      if (instance.productName case final value?) 'product_name': value,
+      if (LanguageHelper.toJsonStringMap(instance.productNameInLanguages)
+          case final value?)
+        'product_name_in_languages': value,
+      if (LanguageHelper.toJsonStringMap(
+              instance.conservationConditionsInLanguages)
+          case final value?)
+        'conservation_conditions_in_languages': value,
+      if (LanguageHelper.toJsonStringMap(instance.customerServiceInLanguages)
+          case final value?)
+        'customer_service_in_languages': value,
+      if (instance.genericName case final value?) 'generic_name': value,
+      if (LanguageHelper.toJsonStringMap(instance.genericNameInLanguages)
+          case final value?)
+        'generic_name_in_languages': value,
+      if (instance.abbreviatedName case final value?)
+        'abbreviated_product_name': value,
+      if (LanguageHelper.toJsonStringMap(instance.abbreviatedNameInLanguages)
+          case final value?)
+        'abbreviated_product_name_in_languages': value,
+      if (instance.brands case final value?) 'brands': value,
+      if (instance.brandsTags case final value?) 'brands_tags': value,
+      if (LanguageHelper.toJsonStringsListMap(instance.brandsTagsInLanguages)
+          case final value?)
+        'brands_tags_in_languages': value,
+      if (instance.countries case final value?) 'countries': value,
+      if (instance.countriesTags case final value?) 'countries_tags': value,
+      if (LanguageHelper.toJsonStringsListMap(instance.countriesTagsInLanguages)
+          case final value?)
+        'countries_tags_in_languages': value,
+      'lang': LanguageHelper.toJson(instance.lang),
+      if (instance.quantity case final value?) 'quantity': value,
+      if (instance.imageFrontUrl case final value?) 'image_front_url': value,
+      if (instance.imageFrontSmallUrl case final value?)
+        'image_front_small_url': value,
+      if (instance.imageIngredientsUrl case final value?)
+        'image_ingredients_url': value,
+      if (instance.imageIngredientsSmallUrl case final value?)
+        'image_ingredients_small_url': value,
+      if (instance.imageNutritionUrl case final value?)
+        'image_nutrition_url': value,
+      if (instance.imageNutritionSmallUrl case final value?)
+        'image_nutrition_small_url': value,
+      if (instance.imagePackagingUrl case final value?)
+        'image_packaging_url': value,
+      if (instance.imagePackagingSmallUrl case final value?)
+        'image_packaging_small_url': value,
+      if (instance.servingSize case final value?) 'serving_size': value,
+      if (instance.servingQuantity case final value?) 'serving_quantity': value,
+      if (instance.packagingQuantity case final value?)
+        'product_quantity': value,
+      'selected_images':
+          JsonHelper.selectedImagesToJson(instance.selectedImages),
+      'images': JsonHelper.allImagesToJson(instance.images),
+      if (JsonHelper.ingredientsToJson(instance.ingredients) case final value?)
+        'ingredients': value,
+      if (instance.ingredientsText case final value?) 'ingredients_text': value,
+      if (LanguageHelper.toJsonStringMap(instance.ingredientsTextInLanguages)
+          case final value?)
+        'ingredients_text_in_languages': value,
+      if (instance.ingredientsTags case final value?) 'ingredients_tags': value,
+      if (LanguageHelper.toJsonStringsListMap(
+              instance.ingredientsTagsInLanguages)
+          case final value?)
+        'ingredients_tags_in_languages': value,
+      'imagesFreshnessInLanguages': instance.imagesFreshnessInLanguages?.map(
+          (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!,
+              e.map((k, e) => MapEntry(_$ImageFieldEnumMap[k]!, e)))),
+      'ingredients_analysis_tags':
+          IngredientsAnalysisTags.toJson(instance.ingredientsAnalysisTags),
+      if (LanguageHelper.toJsonStringsListMap(
+              instance.ingredientsAnalysisTagsInLanguages)
+          case final value?)
+        'ingredients_analysis_tags_in_languages': value,
+      if (Additives.additivesToJson(instance.additives) case final value?)
+        'additives_tags': value,
+      if (LanguageHelper.toJsonStringsListMap(instance.additivesTagsInLanguages)
+          case final value?)
+        'additives_tags_in_languages': value,
+      if (Allergens.allergensToJson(instance.allergens) case final value?)
+        'allergens_tags': value,
+      if (LanguageHelper.toJsonStringsListMap(instance.allergensTagsInLanguages)
+          case final value?)
+        'allergens_tags_in_languages': value,
+      if (NutrientLevels.toJson(instance.nutrientLevels) case final value?)
+        'nutrient_levels': value,
+      if (instance.nutrimentEnergyUnit case final value?)
+        'nutriment_energy_unit': value,
+      'nutrition_data': JsonHelper.checkboxToJSON(instance.nutritionData),
+      if (instance.nutrimentDataPer case final value?)
+        'nutrition_data_per': value,
+      if (instance.nutriscore case final value?) 'nutrition_grade_fr': value,
+      if (instance.comparedToCategory case final value?)
+        'compared_to_category': value,
+      if (instance.categories case final value?) 'categories': value,
+      if (instance.categoriesTags case final value?) 'categories_tags': value,
+      if (LanguageHelper.toJsonStringsListMap(
+              instance.categoriesTagsInLanguages)
+          case final value?)
+        'categories_tags_in_languages': value,
+      if (instance.labels case final value?) 'labels': value,
+      if (instance.labelsTags case final value?) 'labels_tags': value,
+      if (LanguageHelper.toJsonStringsListMap(instance.labelsTagsInLanguages)
+          case final value?)
+        'labels_tags_in_languages': value,
+      if (instance.packaging case final value?) 'packaging': value,
+      if (JsonHelper.productPackagingsToJson(instance.packagings)
+          case final value?)
+        'packagings': value,
+      'packagings_complete': JsonHelper.boolToJSON(instance.packagingsComplete),
+      if (instance.packagingTags case final value?) 'packaging_tags': value,
+      if (LanguageHelper.toJsonStringMap(instance.packagingTextInLanguages)
+          case final value?)
+        'packaging_text_in_languages': value,
+      if (instance.miscTags case final value?) 'misc_tags': value,
+      if (LanguageHelper.toJsonStringsListMap(instance.miscTagsInLanguages)
+          case final value?)
+        'misc_tags_in_languages': value,
+      if (instance.statesTags case final value?) 'states_tags': value,
+      if (LanguageHelper.toJsonStringsListMap(instance.statesTagsInLanguages)
+          case final value?)
+        'states_tags_in_languages': value,
+      if (instance.tracesTags case final value?) 'traces_tags': value,
+      if (LanguageHelper.toJsonStringsListMap(instance.tracesTagsInLanguages)
+          case final value?)
+        'traces_tags_in_languages': value,
+      if (instance.traces case final value?) 'traces': value,
+      if (instance.storesTags case final value?) 'stores_tags': value,
+      if (LanguageHelper.toJsonStringsListMap(instance.storesTagsInLanguages)
+          case final value?)
+        'stores_tags_in_languages': value,
+      if (instance.stores case final value?) 'stores': value,
+      if (JsonHelper.attributeGroupsToJson(instance.attributeGroups)
+          case final value?)
+        'attribute_groups': value,
+      if (JsonHelper.dateToTimestamp(instance.lastModified) case final value?)
+        'last_modified_t': value,
+      if (instance.lastModifiedBy case final value?) 'last_modified_by': value,
+      if (JsonHelper.dateToTimestamp(instance.lastImage) case final value?)
+        'last_image_t': value,
+      if (instance.lastEditor case final value?) 'last_editor': value,
+      if (instance.entryDates case final value?) 'entry_dates_tags': value,
+      if (instance.lastCheckDates case final value?)
+        'last_check_dates_tags': value,
+      if (instance.lastEditDates case final value?)
+        'last_edit_dates_tags': value,
+      if (instance.lastImageDates case final value?)
+        'last_image_dates_tags': value,
+      if (JsonHelper.dateToTimestamp(instance.lastChecked) case final value?)
+        'last_checked_t': value,
+      if (instance.lastChecker case final value?) 'last_checker': value,
+      if (JsonHelper.dateToTimestamp(instance.created) case final value?)
+        'created_t': value,
+      if (instance.creator case final value?) 'creator': value,
+      if (instance.editors case final value?) 'editors_tags': value,
+      if (instance.ecoscoreGrade case final value?) 'ecoscore_grade': value,
+      if (instance.ecoscoreScore case final value?) 'ecoscore_score': value,
+      if (EcoscoreData.toJsonHelper(instance.ecoscoreData) case final value?)
+        'ecoscore_data': value,
+      if (KnowledgePanels.toJsonHelper(instance.knowledgePanels)
+          case final value?)
+        'knowledge_panels': value,
+      if (instance.embCodes case final value?) 'emb_codes': value,
+      if (instance.manufacturingPlaces case final value?)
+        'manufacturing_places': value,
+      if (instance.origins case final value?) 'origins': value,
+      if (instance.novaGroup case final value?) 'nova_group': value,
+      if (instance.website case final value?) 'link': value,
+      if (instance.dataQualityTags case final value?)
+        'data_quality_tags': value,
+      if (instance.dataQualityBugsTags case final value?)
+        'data_quality_bugs_tags': value,
+      if (instance.dataQualityErrorsTags case final value?)
+        'data_quality_errors_tags': value,
+      if (instance.dataQualityInfoTags case final value?)
+        'data_quality_info_tags': value,
+      if (instance.dataQualityWarningsTags case final value?)
+        'data_quality_warnings_tags': value,
+      'obsolete': JsonHelper.checkboxToJSON(instance.obsolete),
+      if (instance.ownerFields case final value?) 'owner_fields': value,
+      if (instance.owner case final value?) 'owner': value,
+      if (instance.expirationDate case final value?) 'expiration_date': value,
+      'no_nutrition_data': JsonHelper.checkboxToJSON(instance.noNutritionData),
+      'nutriments': Nutriments.toJsonHelper(instance.nutriments),
+    };
 
 const _$ProductTypeEnumMap = {
   ProductType.food: 'food',
