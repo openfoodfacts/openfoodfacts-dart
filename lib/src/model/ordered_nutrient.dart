@@ -22,6 +22,9 @@ class OrderedNutrient extends JsonObject {
   @JsonKey()
   final bool important;
 
+  @JsonKey()
+  final String? unit;
+
   @JsonKey(name: 'display_in_edit_form')
   final bool displayInEditForm;
 
@@ -32,6 +35,7 @@ class OrderedNutrient extends JsonObject {
   OrderedNutrient({
     required this.important,
     required this.id,
+    required this.unit,
     required this.displayInEditForm,
     this.name,
     this.subNutrients,

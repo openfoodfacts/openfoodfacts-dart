@@ -96,6 +96,10 @@ class Product extends JsonObject {
   @JsonKey(name: 'product_type')
   ProductType? productType;
 
+  /// Server schema version (e.g. "999" for API V3).
+  @JsonKey(name: 'schema_version')
+  int? schemaVersion;
+
   /// Product name, either set directly or taken from one of the localizations.
   ///
   /// Rather use [productNameInLanguages] instead.

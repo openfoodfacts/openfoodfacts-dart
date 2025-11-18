@@ -22,23 +22,17 @@ EcoscoreData _$EcoscoreDataFromJson(Map<String, dynamic> json) => EcoscoreData(
           : JsonObject.parseBool(json['missing_data_warning']),
     );
 
-Map<String, dynamic> _$EcoscoreDataToJson(EcoscoreData instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('grade', instance.grade);
-  writeNotNull('score', instance.score);
-  writeNotNull('status', _$EcoscoreStatusEnumMap[instance.status]);
-  writeNotNull('agribalyse', instance.agribalyse?.toJson());
-  writeNotNull('adjustments', instance.adjustments?.toJson());
-  val['missing_data_warning'] = instance.missingDataWarning;
-  return val;
-}
+Map<String, dynamic> _$EcoscoreDataToJson(EcoscoreData instance) =>
+    <String, dynamic>{
+      if (instance.grade case final value?) 'grade': value,
+      if (instance.score case final value?) 'score': value,
+      if (_$EcoscoreStatusEnumMap[instance.status] case final value?)
+        'status': value,
+      if (instance.agribalyse?.toJson() case final value?) 'agribalyse': value,
+      if (instance.adjustments?.toJson() case final value?)
+        'adjustments': value,
+      'missing_data_warning': instance.missingDataWarning,
+    };
 
 const _$EcoscoreStatusEnumMap = {
   EcoscoreStatus.KNOWN: 'known',

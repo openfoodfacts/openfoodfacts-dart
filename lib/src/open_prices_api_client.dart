@@ -5,10 +5,14 @@ import 'package:http_parser/http_parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 
+import 'prices/challenge.dart';
 import 'prices/currency.dart';
 import 'prices/maybe_error.dart';
 import 'prices/price.dart';
+import 'prices/price_user.dart';
 import 'prices/proof.dart';
+import 'prices/get_challenges_parameters.dart';
+import 'prices/get_challenges_result.dart';
 import 'prices/get_locations_parameters.dart';
 import 'prices/get_locations_result.dart';
 import 'prices/get_parameters_helper.dart';
@@ -62,6 +66,28 @@ class OpenPricesAPIClient {
         forcedHost: _getHost(uriHelper),
         addUserAgentParameters: addUserAgentParameters,
       );
+
+  static Future<MaybeError<PriceUser>> getUser(
+    final String username, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Uri uri = OpenPricesAPIClient.getUri(
+      path: '/api/v1/users/${Uri.encodeComponent(username)}',
+    );
+    final http.Response response =
+        await HttpHelper().doGetRequest(uri, uriHelper: uriHelper);
+    try {
+      if (response.statusCode == 200) {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<PriceUser>.value(
+          PriceUser.fromJson(decodedResponse),
+        );
+      }
+    } catch (e) {
+      //
+    }
+    return MaybeError<PriceUser>.responseError(response);
+  }
 
   static Future<MaybeError<GetPricesResult>> getPrices(
     final GetPricesParameters parameters, {
@@ -123,7 +149,8 @@ class OpenPricesAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Uri uri = getUri(
-      path: '/api/v1/locations/osm/${locationOSMType.offTag}/$locationOSMId',
+      path:
+          '/api/v1/locations/osm/${Uri.encodeComponent(locationOSMType.offTag)}/$locationOSMId',
       uriHelper: uriHelper,
     );
     final Response response = await HttpHelper().doGetRequest(
@@ -192,6 +219,55 @@ class OpenPricesAPIClient {
     return MaybeError<Location>.responseError(response);
   }
 
+  static Future<MaybeError<GetChallengesResult>> getChallenges(
+    final GetChallengesParameters parameters, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Uri uri = getUri(
+      path: '/api/v1/challenges',
+      queryParameters: parameters.getQueryParameters(),
+      uriHelper: uriHelper,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<GetChallengesResult>.value(
+          GetChallengesResult.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        return MaybeError<GetChallengesResult>.unreadableResponse(response);
+      }
+    }
+    return MaybeError<GetChallengesResult>.responseError(response);
+  }
+
+  static Future<MaybeError<Challenge>> getChallenge(
+    final int challengeId, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Uri uri = getUri(
+      path: '/api/v1/challenges/$challengeId',
+      uriHelper: uriHelper,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<Challenge>.value(Challenge.fromJson(decodedResponse));
+      } catch (e) {
+        return MaybeError<Challenge>.unreadableResponse(response);
+      }
+    }
+    return MaybeError<Challenge>.responseError(response);
+  }
+
   static Future<MaybeError<GetPriceProductsResult>> getPriceProducts(
     final GetPriceProductsParameters parameters, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
@@ -250,7 +326,7 @@ class OpenPricesAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Uri uri = getUri(
-      path: '/api/v1/products/code/$productCode',
+      path: '/api/v1/products/code/${Uri.encodeComponent(productCode)}',
       uriHelper: uriHelper,
     );
     final Response response = await HttpHelper().doGetRequest(
@@ -514,6 +590,12 @@ class OpenPricesAPIClient {
   }
 
 // TODO: deprecated from 2025-04-25 regarding single parameters; remove them when old enough
+  /// Uploads a proof.
+  ///
+  /// Returns the proof uploaded on the server.
+  /// The returned status code will be
+  /// * 201 for a proof created on the server
+  /// * 200 for a proof that already existed on the server
   static Future<MaybeError<Proof>> uploadProof({
     @Deprecated('Use CreateProofParameters instead') final ProofType? proofType,
     required final Uri imageUri,
@@ -575,10 +657,14 @@ class OpenPricesAPIClient {
     final String responseBody = await HttpHelper().extractResponseAsString(
       response,
     );
-    if (response.statusCode == 201) {
+    // 201: created, 200: already existing
+    if (response.statusCode == 200 || response.statusCode == 201) {
       try {
         final Map<String, dynamic> json = HttpHelper().jsonDecode(responseBody);
-        return MaybeError<Proof>.value(Proof.fromJson(json));
+        return MaybeError<Proof>.value(
+          Proof.fromJson(json),
+          statusCode: response.statusCode,
+        );
       } catch (e) {
         //
       }

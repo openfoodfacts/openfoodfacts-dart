@@ -17,21 +17,12 @@ SearchResult _$SearchResultFromJson(Map<String, dynamic> json) => SearchResult(
           .toList(),
     );
 
-Map<String, dynamic> _$SearchResultToJson(SearchResult instance) {
-  final val = <String, dynamic>{
-    'page': instance.page,
-    'page_size': instance.pageSize,
-    'count': instance.count,
-    'page_count': instance.pageCount,
-    'skip': instance.skip,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('products', instance.products);
-  return val;
-}
+Map<String, dynamic> _$SearchResultToJson(SearchResult instance) =>
+    <String, dynamic>{
+      'page': instance.page,
+      'page_size': instance.pageSize,
+      'count': instance.count,
+      'page_count': instance.pageCount,
+      'skip': instance.skip,
+      if (instance.products case final value?) 'products': value,
+    };

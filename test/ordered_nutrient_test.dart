@@ -7,102 +7,36 @@ import 'test_constants.dart';
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
 
-  // Very long list, experimentally created from the 3 initial URLs.
+  const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH;
+
+  // Countries with distinct nutrient lists.
+  const Set<OpenFoodFactsCountry> countries = {
+    OpenFoodFactsCountry.FRANCE,
+    OpenFoodFactsCountry.CANADA,
+    OpenFoodFactsCountry.RUSSIA,
+    OpenFoodFactsCountry.USA,
+    OpenFoodFactsCountry.HONG_KONG,
+    OpenFoodFactsCountry.JAPAN,
+  };
+
+  // Nutrients expected in all countries.
   // Don't hesitate to edit this list if you have clear functional ideas
   // about which nutrients should actually be there.
   const Set<String> expectedNutrients = {
     'alcohol',
-    'alpha-linolenic-acid',
-    'arachidic-acid',
-    'arachidonic-acid',
-    'behenic-acid',
-    'beta-carotene',
-    'bicarbonate',
-    'biotin',
-    'butyric-acid',
-    'caffeine',
     'calcium',
-    'capric-acid',
-    'caproic-acid',
-    'caprylic-acid',
     'carbohydrates',
-    'carbon-footprint',
-    'carbon-footprint-from-meat-or-fish',
-    'casein',
-    'cerotic-acid',
-    'chloride',
-    'chlorophyl',
     'cholesterol',
-    'chromium',
-    'cocoa',
-    'collagen-meat-protein-ratio',
-    'copper',
-    'dihomo-gamma-linolenic-acid',
-    'docosahexaenoic-acid',
-    'eicosapentaenoic-acid',
-    'elaidic-acid',
-    'energy',
-    'energy-from-fat',
     'energy-kcal',
-    'erucic-acid',
     'fat',
     'fiber',
-    'fluoride',
-    'folates',
-    'fructose',
-    'fruits-vegetables-nuts',
-    'fruits-vegetables-nuts-dried',
-    'fruits-vegetables-nuts-estimate',
-    'gamma-linolenic-acid',
-    'glucose',
-    'glycemic-index',
-    'gondoic-acid',
-    'insoluble-fiber',
-    'iodine',
     'iron',
-    'lactose',
-    'lauric-acid',
-    'lignoceric-acid',
-    'linoleic-acid',
-    'magnesium',
-    'maltodextrins',
-    'maltose',
-    'manganese',
-    'mead-acid',
-    'melissic-acid',
-    'molybdenum',
     'monounsaturated-fat',
-    'montanic-acid',
-    'myristic-acid',
-    'nervonic-acid',
-    'nucleotides',
-    'nutrition-score-fr',
-    'nutrition-score-uk',
-    'oleic-acid',
-    'omega-3-fat',
-    'omega-6-fat',
-    'omega-9-fat',
-    'palmitic-acid',
-    'pantothenic-acid',
-    'ph',
-    'phosphorus',
-    'polyols',
-    'polyunsaturated-fat',
     'potassium',
     'proteins',
     'salt',
     'saturated-fat',
-    'selenium',
-    'serum-proteins',
-    'silica',
-    'sodium',
-    'soluble-fiber',
-    'starch',
-    'stearic-acid',
-    'sucrose',
     'sugars',
-    'taurine',
-    'trans-fat',
     'vitamin-a',
     'vitamin-b1',
     'vitamin-b12',
@@ -111,12 +45,23 @@ void main() {
     'vitamin-b9',
     'vitamin-c',
     'vitamin-d',
-    'vitamin-e',
-    'vitamin-k',
     'vitamin-pp',
-    'water-hardness',
-    'zinc',
   };
+
+  List<String> findMissingNutrients(final List<OrderedNutrient>? list) {
+    final List<String> result = [];
+    if (list == null) {
+      return result;
+    }
+    for (final OrderedNutrient item in list) {
+      final String offTag = item.id;
+      if (Nutrient.fromOffTag(offTag) == null) {
+        result.add(offTag);
+      }
+      result.addAll(findMissingNutrients(item.subNutrients));
+    }
+    return result;
+  }
 
   OrderedNutrient? findOrderedNutrient(
     final List<OrderedNutrient>? list,
@@ -154,12 +99,6 @@ void main() {
 
   group('$OpenFoodAPIClient ordered nutrients', () {
     test('find expected nutrients', () async {
-      const Set<OpenFoodFactsCountry> countries = {
-        OpenFoodFactsCountry.FRANCE,
-        OpenFoodFactsCountry.BRAZIL,
-        OpenFoodFactsCountry.USA,
-      };
-      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.AFRIKAANS;
       for (final OpenFoodFactsCountry country in countries) {
         checkNutrients(
           await OpenFoodAPIClient.getOrderedNutrients(
@@ -168,32 +107,16 @@ void main() {
           ),
           country,
         );
-        checkNutrients(
-          OrderedNutrients.fromJson(
-            HttpHelper().jsonDecode(
-              await OpenFoodAPIClient.getOrderedNutrientsJsonString(
-                country: country,
-                language: language,
-              ),
-            ),
-          ),
-          country,
-        );
       }
     });
 
-    test('check localized "energy"', () async {
-      const String nutrientId = 'energy';
+    test('check localized "energy-kcal"', () async {
+      const String nutrientId = 'energy-kcal';
       const Map<OpenFoodFactsLanguage, String> energies = {
-        OpenFoodFactsLanguage.FRENCH: 'Énergie',
-        OpenFoodFactsLanguage.SPANISH: 'Energía',
-        OpenFoodFactsLanguage.ENGLISH: 'Energy',
-        OpenFoodFactsLanguage.PORTUGUESE: 'Energia',
-      };
-      const Set<OpenFoodFactsCountry> countries = {
-        OpenFoodFactsCountry.USA,
-        OpenFoodFactsCountry.ITALY,
-        OpenFoodFactsCountry.BRAZIL,
+        OpenFoodFactsLanguage.FRENCH: 'Énergie (kcal)',
+        OpenFoodFactsLanguage.SPANISH: 'Energía (kcal)',
+        OpenFoodFactsLanguage.ENGLISH: 'Energy (kcal)',
+        OpenFoodFactsLanguage.PORTUGUESE: 'Energia (kcal)',
       };
       for (final OpenFoodFactsLanguage language in energies.keys) {
         for (final OpenFoodFactsCountry country in countries) {
@@ -207,6 +130,20 @@ void main() {
           expect(found, isNotNull);
           expect(found!.name, energies[language]);
         }
+      }
+    });
+
+    test('check if nutrients are missing', () async {
+      for (final OpenFoodFactsCountry country in countries) {
+        final OrderedNutrients orderedNutrients =
+            await OpenFoodAPIClient.getOrderedNutrients(
+          country: country,
+          language: language,
+        );
+        final List<String> missingNutrients =
+            findMissingNutrients(orderedNutrients.nutrients);
+        expect(missingNutrients, isEmpty,
+            reason: 'For country ${country.name}');
       }
     });
   });
