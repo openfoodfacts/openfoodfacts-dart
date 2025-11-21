@@ -42,6 +42,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     super.country,
     super.fields,
     this.productTypeFilter,
+    super.activateKnowledgePanelsSimplified,
   });
 
   @override
@@ -50,6 +51,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     if (productTypeFilter != null) {
       result['product_type'] = productTypeFilter!.offTag;
     }
+
     return result;
   }
 
