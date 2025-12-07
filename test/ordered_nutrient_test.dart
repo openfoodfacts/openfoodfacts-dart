@@ -172,5 +172,31 @@ void main() {
             reason: 'For country ${country.name}');
       }
     });
+
+    test('check excludeReadOnly', () async {
+      final List<bool> excludeReadOnlies = <bool>[true, false];
+      for (final bool excludeReadOnly in excludeReadOnlies) {
+        final OrderedNutrients orderedNutrients =
+            await OpenFoodAPIClient.getOrderedNutrients(
+          country: OpenFoodFactsCountry.FRANCE,
+          language: language,
+          excludeReadOnly: excludeReadOnly,
+        );
+        expect(
+          findOrderedNutrient(
+            orderedNutrients.nutrients,
+            'nutrition-score-fr',
+          ),
+          excludeReadOnly ? isNull : isNotNull,
+        );
+        expect(
+          findOrderedNutrient(
+            orderedNutrients.nutrients,
+            'nutrition-score-uk',
+          ),
+          excludeReadOnly ? isNull : isNotNull,
+        );
+      }
+    });
   });
 }
