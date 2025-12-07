@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.28.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.27.0...v3.28.0) (2025-12-07)
+
+
+### Features
+
+* 1160 - automatically excluding read-only pseudo nutrients ([#1161](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1161)) ([3f04c5e](https://github.com/openfoodfacts/openfoodfacts-dart/commit/3f04c5e3e737f0d4775a987646b30c583933b8b7))
+* flavor for product types ([#1153](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1153)) ([faa74ab](https://github.com/openfoodfacts/openfoodfacts-dart/commit/faa74abe7dc36e963d4b7b106150cb8b651cb5a1))
+
 ## [3.27.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.26.0...v3.27.0) (2025-10-24)
 
 
