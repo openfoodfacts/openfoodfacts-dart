@@ -1175,9 +1175,15 @@ class OpenFoodAPIClient {
   ///   print(orderedNutrients.nutrients[5].name);  // Fiber
   ///   print(orderedNutrients.nutrients[10].name); // Vitamin A
   /// ```
+  ///
+  /// By default, some read-only pseudo nutrients are automatically excluded,
+  /// like `nutrition-score-fr`, as they have negative added-value for the apps:
+  /// the users aren't going to set the values, and they can get the values
+  /// elsewhere.
   static Future<OrderedNutrients> getOrderedNutrients({
     required final OpenFoodFactsCountry country,
     required final OpenFoodFactsLanguage language,
+    final bool excludeReadOnly = true,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async =>
       OrderedNutrients.fromJson(
@@ -1188,6 +1194,7 @@ class OpenFoodAPIClient {
             uriHelper: uriHelper,
           ),
         ),
+        excludeReadOnly: excludeReadOnly,
       );
 
   /// Returns the nutrient hierarchy specific to a country, localized, as JSON
