@@ -76,26 +76,52 @@ void main() {
       }
       expect(found, isTrue);
     });
-    test('get KP with simplified panels', () async {
-      const String barcode = '0737628064502';
 
-      final ProductQueryConfiguration configurations =
-          ProductQueryConfiguration(
-        barcode,
-        language: OpenFoodFactsLanguage.ENGLISH,
-        fields: [ProductField.KNOWLEDGE_PANELS],
-        version: ProductQueryVersion.v3,
-        activateKnowledgePanelsSimplified: true,
-      );
-      final ProductResultV3 result = await getProductV3InProd(
-        configurations,
-      );
-      expect(result.status, ProductResultV3.statusSuccess);
-      expect(result.barcode, barcode);
-      expect(result.product, isNotNull);
-      expect(
-          result.product!.knowledgePanels?.panelIdToPanelMap['simplified_root'],
-          isNotNull);
+    group('get KP simplified panels', () {
+      test('get KP with simplified panels', () async {
+        const String barcode = '0737628064502';
+
+        final ProductQueryConfiguration configurations =
+            ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.ENGLISH,
+          fields: [ProductField.KNOWLEDGE_PANELS],
+          version: ProductQueryVersion.v3,
+          activateKnowledgePanelsSimplified: true,
+        );
+        final ProductResultV3 result = await getProductV3InProd(
+          configurations,
+        );
+        expect(result.status, ProductResultV3.statusSuccess);
+        expect(result.barcode, barcode);
+        expect(result.product, isNotNull);
+        expect(
+            result
+                .product!.knowledgePanels?.panelIdToPanelMap[SimplifiedRootKey],
+            isNotNull);
+      });
+      test('get KP without simplified panels', () async {
+        const String barcode = '0737628064502';
+
+        final ProductQueryConfiguration configurations =
+            ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.ENGLISH,
+          fields: [ProductField.KNOWLEDGE_PANELS],
+          version: ProductQueryVersion.v3,
+          activateKnowledgePanelsSimplified: false,
+        );
+        final ProductResultV3 result = await getProductV3InProd(
+          configurations,
+        );
+        expect(result.status, ProductResultV3.statusSuccess);
+        expect(result.barcode, barcode);
+        expect(result.product, isNotNull);
+        expect(
+            result
+                .product!.knowledgePanels?.panelIdToPanelMap[SimplifiedRootKey],
+            isNull);
+      });
     });
 
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',

@@ -72,6 +72,8 @@ enum KnowledgePanelSize {
   UNKNOWN,
 }
 
+const SimplifiedRootKey = 'simplified_root';
+
 /// KnowledgePanels are a standardized and generic units of information that
 /// the client can display on the product page.
 ///
