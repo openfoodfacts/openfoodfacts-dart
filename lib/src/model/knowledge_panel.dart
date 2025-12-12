@@ -141,6 +141,13 @@ class TitleElement extends JsonObject {
   /// Subtitle of the panel. Example - 'High environmental impact'.
   final String? subtitle;
 
+  /// The value of the panel, for example the percentage of sugar for 100g in the product.
+  final double? value;
+
+  /// The value of the panel as a string, this includes the unit, for instance 10%.
+  @JsonKey(name: 'value_string')
+  final String? valueString;
+
   /// Grade of the panel, depicting the level of impact the product has for the
   /// corresponding topics. Client can choose to color code the panel depending
   /// on how good/bad the grade is.
@@ -166,6 +173,8 @@ class TitleElement extends JsonObject {
     required this.title,
     this.name,
     this.subtitle,
+    this.value,
+    this.valueString,
     this.grade,
     this.type,
     this.iconUrl,

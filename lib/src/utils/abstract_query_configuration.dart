@@ -66,12 +66,16 @@ abstract class AbstractQueryConfiguration {
 
   List<Parameter> additionalParameters;
 
+  /// If true, the knowledge panels will be simplified.
+  final bool? activateKnowledgePanelsSimplified;
+
   AbstractQueryConfiguration({
     this.language,
     this.languages,
     this.country,
     this.fields,
     this.additionalParameters = const [],
+    this.activateKnowledgePanelsSimplified,
   }) {
     fields ??= [ProductField.ALL];
     if (languages != null) {
@@ -133,6 +137,11 @@ abstract class AbstractQueryConfiguration {
       } else {
         result.putIfAbsent(p.getName(), () => p.getValue());
       }
+    }
+
+    if (activateKnowledgePanelsSimplified != null) {
+      result['activate_knowledge_panels_simplified'] =
+          activateKnowledgePanelsSimplified.toString();
     }
 
     return result;
