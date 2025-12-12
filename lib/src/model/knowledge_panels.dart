@@ -39,5 +39,5 @@ class KnowledgePanels {
     return result;
   }
 
-  static const String simplifiedRootId = 'knowledge_panels';
+  static const String simplifiedRootId = 'simplified_root';
 }
