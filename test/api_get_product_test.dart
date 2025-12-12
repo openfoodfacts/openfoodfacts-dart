@@ -78,15 +78,17 @@ void main() {
     });
 
     group('get KP simplified panels', () {
+      const String barcode = '0737628064502';
+      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH;
+      const List<ProductField> fields = [ProductField.KNOWLEDGE_PANELS];
+      const ProductQueryVersion version = ProductQueryVersion.v3;
       test('get KP with simplified panels', () async {
-        const String barcode = '0737628064502';
-
         final ProductQueryConfiguration configurations =
             ProductQueryConfiguration(
           barcode,
-          language: OpenFoodFactsLanguage.ENGLISH,
-          fields: [ProductField.KNOWLEDGE_PANELS],
-          version: ProductQueryVersion.v3,
+          language: language,
+          fields: fields,
+          version: version,
           activateKnowledgePanelsSimplified: true,
         );
         final ProductResultV3 result = await getProductV3InProd(
@@ -96,19 +98,17 @@ void main() {
         expect(result.barcode, barcode);
         expect(result.product, isNotNull);
         expect(
-            result
-                .product!.knowledgePanels?.panelIdToPanelMap[SimplifiedRootKey],
+            result.product!.knowledgePanels
+                ?.panelIdToPanelMap[KnowledgePanels.simplifiedRootId],
             isNotNull);
       });
       test('get KP without simplified panels', () async {
-        const String barcode = '0737628064502';
-
         final ProductQueryConfiguration configurations =
             ProductQueryConfiguration(
           barcode,
-          language: OpenFoodFactsLanguage.ENGLISH,
-          fields: [ProductField.KNOWLEDGE_PANELS],
-          version: ProductQueryVersion.v3,
+          language: language,
+          fields: fields,
+          version: version,
           activateKnowledgePanelsSimplified: false,
         );
         final ProductResultV3 result = await getProductV3InProd(
@@ -118,8 +118,8 @@ void main() {
         expect(result.barcode, barcode);
         expect(result.product, isNotNull);
         expect(
-            result
-                .product!.knowledgePanels?.panelIdToPanelMap[SimplifiedRootKey],
+            result.product!.knowledgePanels
+                ?.panelIdToPanelMap[KnowledgePanels.simplifiedRootId],
             isNull);
       });
     });

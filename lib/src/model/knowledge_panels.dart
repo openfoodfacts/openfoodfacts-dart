@@ -38,4 +38,6 @@ class KnowledgePanels {
     }
     return result;
   }
+
+  static const String simplifiedRootId = 'knowledge_panels';
 }
