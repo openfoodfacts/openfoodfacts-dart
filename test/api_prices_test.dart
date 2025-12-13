@@ -1294,5 +1294,41 @@ void main() {
       expect(price.currency, Currency.EUR);
       expect(price.date, DateTime(2025, 2, 11));
     });
+
+    test('issue #1158', () async {
+      const UriProductHelper uriHelper = uriHelperFoodProd;
+      const num numValue = 42.195;
+      const String quantityString = 'marathon';
+
+      // get the latest price
+      late MaybeError<GetPricesResult> maybeResults;
+      final GetPricesParameters parameters = GetPricesParameters()
+        ..orderBy = <OrderBy<GetPricesOrderField>>[
+          OrderBy(field: GetPricesOrderField.created, ascending: false),
+        ]
+        ..pageSize = 1
+        ..pageNumber = 1;
+      try {
+        maybeResults = await OpenPricesAPIClient.getPrices(
+          parameters,
+          uriHelper: uriHelper,
+        );
+      } catch (e) {
+        if (e.toString().contains(TestConstants.badGatewayError)) {
+          return;
+        }
+        rethrow;
+      }
+      expect(maybeResults.isError, isFalse);
+      final GetPricesResult result = maybeResults.value;
+      expect(result.items, isNotNull);
+      for (final Price price in result.items!) {
+        expect(price.product, isNotNull);
+        price.product!.jsonMap['product_quantity'] = numValue;
+        price.product!.jsonMap['quantity'] = quantityString;
+        expect(price.product!.quantityString, quantityString);
+        expect(price.product!.quantity, numValue);
+      }
+    });
   });
 }
