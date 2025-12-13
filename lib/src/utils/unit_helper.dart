@@ -12,6 +12,7 @@ enum Unit implements OffTagged {
   PERCENT('percent'),
   // actually we don't expect a specific offTag for "unknown".
   UNKNOWN('unknown'),
+  G_PER_KG('g/kg'),
   PERCENT_DV('% DV'),
   IU('IU');
 

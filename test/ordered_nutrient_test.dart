@@ -133,6 +133,32 @@ void main() {
       }
     });
 
+    test('check pet foods in Europe', () async {
+      final UriProductHelper uriHelper = UriProductHelper(
+        domain: 'openpetfoodfacts.org',
+      );
+      final OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
+      final OrderedNutrients orderedNutrients =
+          await OpenFoodAPIClient.getOrderedNutrients(
+        country: country,
+        language: language,
+        uriHelper: uriHelper,
+      );
+      // lazily assuming that all nutrients are on the same level
+      for (final Nutrient nutrient in Nutrient.values) {
+        if (!nutrient.probablyPetFood) {
+          continue;
+        }
+        expect(
+          orderedNutrients.nutrients.any(
+              (final OrderedNutrient orderedNutrient) =>
+                  orderedNutrient.id == nutrient.offTag),
+          isTrue,
+          reason: 'Cannot find ${nutrient.offTag}',
+        );
+      }
+    });
+
     test('check if nutrients are missing', () async {
       for (final OpenFoodFactsCountry country in countries) {
         final OrderedNutrients orderedNutrients =
