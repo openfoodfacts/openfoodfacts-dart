@@ -133,7 +133,7 @@ class KnowledgePanel extends JsonObject {
 @JsonSerializable()
 class TitleElement extends JsonObject {
   /// Title string of the panel. Example - 'Eco-Score D'.
-  final String title;
+  final String? title;
 
   /// A short name of this panel, not including any actual values.
   final String? name;
