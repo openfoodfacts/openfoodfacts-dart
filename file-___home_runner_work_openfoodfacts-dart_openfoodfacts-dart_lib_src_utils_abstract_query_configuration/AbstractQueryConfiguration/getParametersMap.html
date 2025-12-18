@@ -54,7 +54,7 @@
 
     <section class="multi-line-signature">
       
-<span class="returntype"><a href="https://api.dart.dev/stable/3.10.3/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.10.3/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.10.3/dart-core/String-class.html">String</a></span>&gt;</span></span>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.10.6/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.10.6/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.10.6/dart-core/String-class.html">String</a></span>&gt;</span></span>
 <span class="name ">getParametersMap</span>(<wbr>)
 
       
@@ -119,6 +119,11 @@
     } else {
       result.putIfAbsent(p.getName(), () =&gt; p.getValue());
     }
+  }
+
+  if (activateKnowledgePanelsSimplified != null) {
+    result[&#39;activate_knowledge_panels_simplified&#39;] =
+        activateKnowledgePanelsSimplified.toString();
   }
 
   return result;
