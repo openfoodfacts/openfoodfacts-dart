@@ -133,13 +133,20 @@ class KnowledgePanel extends JsonObject {
 @JsonSerializable()
 class TitleElement extends JsonObject {
   /// Title string of the panel. Example - 'Eco-Score D'.
-  final String title;
+  final String? title;
 
   /// A short name of this panel, not including any actual values.
   final String? name;
 
   /// Subtitle of the panel. Example - 'High environmental impact'.
   final String? subtitle;
+
+  /// The value of the panel, for example the percentage of sugar for 100g in the product.
+  final double? value;
+
+  /// The value of the panel as a string, this includes the unit, for instance 10%.
+  @JsonKey(name: 'value_string')
+  final String? valueString;
 
   /// Grade of the panel, depicting the level of impact the product has for the
   /// corresponding topics. Client can choose to color code the panel depending
@@ -166,6 +173,8 @@ class TitleElement extends JsonObject {
     required this.title,
     this.name,
     this.subtitle,
+    this.value,
+    this.valueString,
     this.grade,
     this.type,
     this.iconUrl,
