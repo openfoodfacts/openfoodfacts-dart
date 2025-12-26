@@ -52,6 +52,16 @@ jobs:
       # Check for formatting issues and fix them
     - name: Check for formatting issues (run "dart format . ")
       run: dart format .
+    - name: Verify branch head matches checked out SHA
+      run: |
+        set -e
+        BRANCH="${{ steps.get-branch.outputs.branch }}"
+        SHA="${{ steps.get-branch.outputs.sha }}"
+        REMOTE_SHA=$(git ls-remote origin "refs/heads/$BRANCH" | awk '{print $1}')
+        if [ "$REMOTE_SHA" != "$SHA" ]; then
+          echo "Branch $BRANCH has changed since initial checkout (was $SHA, now $REMOTE_SHA). Aborting push."
+          exit 1
+        fi
     - name: Push changes if needed
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
