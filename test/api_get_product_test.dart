@@ -187,6 +187,169 @@ void main() {
       );
     });
 
+    test('check nutriscore data for alcohol', () async {
+      const String barcode = '3119780259625';
+      const String category = 'en:alcoholic-beverages';
+
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.NUTRISCORE_DETAILS],
+        version: ProductQueryVersion.v3,
+      );
+      final ProductResultV3 result = await getProductV3InProd(
+        configurations,
+      );
+      expect(result.status, ProductResultV3.statusSuccess);
+      expect(result.barcode, barcode);
+      expect(result.product, isNotNull);
+
+      final nutriScoreDetails = result.product!.nutriScoreDetails;
+      expect(nutriScoreDetails, isNotNull);
+
+      // test Nutri-Score with raw data
+      final nutriScore2021 = nutriScoreDetails?.v2021;
+      expect(nutriScore2021, isNotNull);
+      expect(nutriScore2021!.grade, "not-applicable");
+      expect(nutriScore2021.categoryAvailable, isTrue);
+      expect(nutriScore2021.score, isNull);
+      expect(nutriScore2021.nutrientsAvailable, isTrue);
+      expect(nutriScore2021.nutriScoreComputed, isFalse);
+      expect(nutriScore2021.nutriScoreApplicable, isFalse);
+      expect(nutriScore2021.data, isNotNull);
+      expect(nutriScore2021.data!.isBeverage, isTrue);
+      expect(nutriScore2021.data!.isWater, isFalse);
+      expect(nutriScore2021.data!.isCheese, isFalse);
+      expect(nutriScore2021.data!.isFat, isFalse);
+      expect(nutriScore2021.notApplicableCategory, category);
+
+      final nutriScore2023 = nutriScoreDetails?.v2023;
+      expect(nutriScore2023, isNotNull);
+      expect(nutriScore2023!.grade, "not-applicable");
+      expect(nutriScore2023.score, isNull);
+      expect(nutriScore2023.data, isNotNull);
+      expect(nutriScore2023.notApplicableCategory, category);
+      expect(nutriScore2023.data!.isBeverage, isTrue);
+      expect(nutriScore2023.data!.isRedMeatProduct, isFalse);
+      expect(nutriScore2023.data!.isFatOilNutsSeeds, isFalse);
+      expect(nutriScore2023.data!.isWater, isFalse);
+      expect(nutriScore2023.data!.isCheese, isFalse);
+
+      // test serialization
+      final productJson = result.product!.toJson();
+      final productRestored = Product.fromJson(productJson);
+      expect(productRestored.nutriScoreDetails, isNotNull);
+
+      final restored2021 = productRestored.nutriScoreDetails!.v2021;
+      expect(restored2021, isNotNull);
+      expect(restored2021!.grade, "not-applicable");
+      expect(restored2021.categoryAvailable, isTrue);
+      expect(restored2021.score, isNull);
+      expect(restored2021.nutrientsAvailable, isTrue);
+      expect(restored2021.nutriScoreComputed, isFalse);
+      expect(restored2021.nutriScoreApplicable, isFalse);
+      expect(restored2021.data, isNotNull);
+      expect(restored2021.data!.isBeverage, isTrue);
+      expect(restored2021.data!.isWater, isFalse);
+      expect(restored2021.data!.isCheese, isFalse);
+      expect(restored2021.data!.isFat, isFalse);
+      expect(restored2021.notApplicableCategory, category);
+
+      final restored2023 = productRestored.nutriScoreDetails!.v2023;
+      expect(restored2023, isNotNull);
+      expect(restored2023!.grade, "not-applicable");
+      expect(restored2023.score, isNull);
+      expect(restored2023.data, isNotNull);
+      expect(restored2023.notApplicableCategory, category);
+      expect(restored2023.data!.isBeverage, isTrue);
+      expect(restored2023.data!.isRedMeatProduct, isFalse);
+      expect(restored2023.data!.isFatOilNutsSeeds, isFalse);
+      expect(restored2023.data!.isWater, isFalse);
+      expect(restored2023.data!.isCheese, isFalse);
+    });
+
+    test('check nutriscore data for cookies', () async {
+      const String barcode = BARCODE_DANISH_BUTTER_COOKIES;
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.GERMAN,
+        fields: [ProductField.NUTRISCORE_DETAILS],
+        version: ProductQueryVersion.v3,
+      );
+      final ProductResultV3 result = await getProductV3InProd(
+        configurations,
+      );
+
+      expect(result.status, ProductResultV3.statusSuccess);
+      expect(result.barcode, barcode);
+      expect(result.product, isNotNull);
+
+      final nutriScoreDetails = result.product!.nutriScoreDetails;
+      expect(nutriScoreDetails, isNotNull);
+
+      // test Nutri-Score with raw data
+      final nutriScore2021 = nutriScoreDetails?.v2021;
+      expect(nutriScore2021, isNotNull);
+      expect(nutriScore2021!.grade, "e");
+      expect(nutriScore2021.categoryAvailable, isTrue);
+      expect(nutriScore2021.score, 23);
+      expect(nutriScore2021.nutrientsAvailable, isTrue);
+      expect(nutriScore2021.nutriScoreComputed, isTrue);
+      expect(nutriScore2021.nutriScoreApplicable, isTrue);
+      expect(nutriScore2021.data, isNotNull);
+      expect(nutriScore2021.data!.isBeverage, isFalse);
+      expect(nutriScore2021.data!.isWater, isFalse);
+      expect(nutriScore2021.data!.isCheese, isFalse);
+      expect(nutriScore2021.data!.isFat, isFalse);
+      expect(nutriScore2021.notApplicableCategory, isNull);
+
+      final nutriScore2023 = nutriScoreDetails?.v2023;
+      expect(nutriScore2023, isNotNull);
+      expect(nutriScore2023!.grade, "e");
+      expect(nutriScore2023.score, 25);
+      expect(nutriScore2023.data, isNotNull);
+      expect(nutriScore2023.notApplicableCategory, isNull);
+      expect(nutriScore2023.data!.isBeverage, isFalse);
+      expect(nutriScore2023.data!.isRedMeatProduct, isFalse);
+      expect(nutriScore2023.data!.isFatOilNutsSeeds, isFalse);
+      expect(nutriScore2023.data!.isWater, isFalse);
+      expect(nutriScore2023.data!.isCheese, isFalse);
+
+      // test serialization
+      final productJson = result.product!.toJson();
+      final productRestored = Product.fromJson(productJson);
+      expect(productRestored.nutriScoreDetails, isNotNull);
+
+      final restored2021 = productRestored.nutriScoreDetails!.v2021;
+      expect(restored2021, isNotNull);
+      expect(restored2021!.grade, "e");
+      expect(restored2021.categoryAvailable, isTrue);
+      expect(restored2021.score, 23);
+      expect(restored2021.nutrientsAvailable, isTrue);
+      expect(restored2021.nutriScoreComputed, isTrue);
+      expect(restored2021.nutriScoreApplicable, isTrue);
+      expect(restored2021.data, isNotNull);
+      expect(restored2021.data!.isBeverage, isFalse);
+      expect(restored2021.data!.isWater, isFalse);
+      expect(restored2021.data!.isCheese, isFalse);
+      expect(restored2021.data!.isFat, isFalse);
+      expect(restored2021.notApplicableCategory, isNull);
+
+      final restored2023 = productRestored.nutriScoreDetails!.v2023;
+      expect(restored2023, isNotNull);
+      expect(restored2023!.grade, "e");
+      expect(restored2023.score, 25);
+      expect(restored2023.data, isNotNull);
+      expect(restored2023.notApplicableCategory, isNull);
+      expect(restored2023.data!.isBeverage, isFalse);
+      expect(restored2023.data!.isRedMeatProduct, isFalse);
+      expect(restored2023.data!.isFatOilNutsSeeds, isFalse);
+      expect(restored2023.data!.isWater, isFalse);
+      expect(restored2023.data!.isCheese, isFalse);
+    });
+
     test('get product Danish Butter Cookies & Chocolate Chip Cookies',
         () async {
       const String barcode = BARCODE_DANISH_BUTTER_COOKIES;
