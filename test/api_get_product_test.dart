@@ -77,6 +77,53 @@ void main() {
       expect(found, isTrue);
     });
 
+    group('get KP simplified panels', () {
+      const String barcode = '0737628064502';
+      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH;
+      const List<ProductField> fields = [ProductField.KNOWLEDGE_PANELS];
+      const ProductQueryVersion version = ProductQueryVersion.v3;
+      test('get KP with simplified panels', () async {
+        final ProductQueryConfiguration configurations =
+            ProductQueryConfiguration(
+          barcode,
+          language: language,
+          fields: fields,
+          version: version,
+          activateKnowledgePanelsSimplified: true,
+        );
+        final ProductResultV3 result = await getProductV3InProd(
+          configurations,
+        );
+        expect(result.status, ProductResultV3.statusSuccess);
+        expect(result.barcode, barcode);
+        expect(result.product, isNotNull);
+        expect(
+            result.product!.knowledgePanels
+                ?.panelIdToPanelMap[KnowledgePanels.simplifiedRootId],
+            isNotNull);
+      });
+      test('get KP without simplified panels', () async {
+        final ProductQueryConfiguration configurations =
+            ProductQueryConfiguration(
+          barcode,
+          language: language,
+          fields: fields,
+          version: version,
+          activateKnowledgePanelsSimplified: false,
+        );
+        final ProductResultV3 result = await getProductV3InProd(
+          configurations,
+        );
+        expect(result.status, ProductResultV3.statusSuccess);
+        expect(result.barcode, barcode);
+        expect(result.product, isNotNull);
+        expect(
+            result.product!.knowledgePanels
+                ?.panelIdToPanelMap[KnowledgePanels.simplifiedRootId],
+            isNull);
+      });
+    });
+
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',
         () async {
       //Refactor the test once the issue  #48 is fixed
