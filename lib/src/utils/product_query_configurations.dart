@@ -15,7 +15,8 @@ class ProductQueryVersion {
 
   static const ProductQueryVersion v3 = ProductQueryVersion(3);
 
-  String getPath(final String barcode) => '/api/v$version/product/$barcode/';
+  String getPath(final String barcode) =>
+      '/api/v$version/product/${Uri.encodeComponent(barcode)}/';
 
   bool matchesV3() => version >= 3;
 }
@@ -40,6 +41,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     super.languages,
     super.country,
     super.fields,
+    super.activateKnowledgePanelsSimplified,
     this.productTypeFilter,
   });
 
@@ -49,6 +51,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     if (productTypeFilter != null) {
       result['product_type'] = productTypeFilter!.offTag;
     }
+
     return result;
   }
 

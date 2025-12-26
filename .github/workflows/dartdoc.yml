@@ -12,7 +12,7 @@ jobs:
         if: github.repository_owner  == 'openfoodfacts'
         steps:
         - name: Checkout code
-          uses: actions/checkout@v5
+          uses: actions/checkout@v6
 
         - name: Setup Dart
           uses: dart-lang/setup-dart@v1
@@ -21,7 +21,7 @@ jobs:
           run: dart doc .
 
         - name: Deploy API documentation to Github Pages
-          uses: JamesIves/github-pages-deploy-action@v4.7.3
+          uses: JamesIves/github-pages-deploy-action@v4.7.6
           with:
             BRANCH: gh-pages
             FOLDER: doc/api/

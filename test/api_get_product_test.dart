@@ -77,6 +77,53 @@ void main() {
       expect(found, isTrue);
     });
 
+    group('get KP simplified panels', () {
+      const String barcode = '0737628064502';
+      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH;
+      const List<ProductField> fields = [ProductField.KNOWLEDGE_PANELS];
+      const ProductQueryVersion version = ProductQueryVersion.v3;
+      test('get KP with simplified panels', () async {
+        final ProductQueryConfiguration configurations =
+            ProductQueryConfiguration(
+          barcode,
+          language: language,
+          fields: fields,
+          version: version,
+          activateKnowledgePanelsSimplified: true,
+        );
+        final ProductResultV3 result = await getProductV3InProd(
+          configurations,
+        );
+        expect(result.status, ProductResultV3.statusSuccess);
+        expect(result.barcode, barcode);
+        expect(result.product, isNotNull);
+        expect(
+            result.product!.knowledgePanels
+                ?.panelIdToPanelMap[KnowledgePanels.simplifiedRootId],
+            isNotNull);
+      });
+      test('get KP without simplified panels', () async {
+        final ProductQueryConfiguration configurations =
+            ProductQueryConfiguration(
+          barcode,
+          language: language,
+          fields: fields,
+          version: version,
+          activateKnowledgePanelsSimplified: false,
+        );
+        final ProductResultV3 result = await getProductV3InProd(
+          configurations,
+        );
+        expect(result.status, ProductResultV3.statusSuccess);
+        expect(result.barcode, barcode);
+        expect(result.product, isNotNull);
+        expect(
+            result.product!.knowledgePanels
+                ?.panelIdToPanelMap[KnowledgePanels.simplifiedRootId],
+            isNull);
+      });
+    });
+
     test('get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',
         () async {
       //Refactor the test once the issue  #48 is fixed
@@ -1126,6 +1173,73 @@ void main() {
         invalidBarcodes.isBlacklisted(BARCODE_DANISH_BUTTER_COOKIES), isFalse);
   });
 
+  group('$OpenFoodAPIClient get products with GS1 Sunrise 2027 barcodes', () {
+    // Direct replica of ProductOpener's integration tests with additional assertions
+    // https://github.com/openfoodfacts/openfoodfacts-server/blob/e6e17ccc0e4843d485d40078b6d5a389b7a22c5a/tests/integration/api_v3_product_read.t#L72-L101
+    Future<void> getAndValidateProductGS1(
+        final String barcode, final String normalizedBarcode) async {
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+        barcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        fields: [ProductField.BARCODE],
+        version: ProductQueryVersion.v3,
+      );
+      final ProductResultV3 result = await getProductV3InProd(
+        configurations,
+      );
+      expect(result.status, ProductResultV3.statusWarning);
+      expect(result.barcode, normalizedBarcode);
+      expect(result.product, isNotNull);
+      expect(result.product!.barcode, normalizedBarcode);
+
+      expect(result.warnings, isNotNull);
+      expect(result.warnings, isNotEmpty);
+      expect(result.warnings!.first.field, isNotNull);
+      expect(result.warnings!.first.field!.id, 'code');
+      expect(result.warnings!.first.field!.value, normalizedBarcode);
+      expect(result.warnings!.first.message, isNotNull);
+      expect(result.warnings!.first.message!.id,
+          'different_normalized_product_code');
+    }
+
+    test('get product caret', () async {
+      const barcode = '^0104260392550101';
+      const normalizedBarcode = '4260392550101';
+
+      await getAndValidateProductGS1(barcode, normalizedBarcode);
+    });
+
+    test('get product FNC1', () async {
+      const barcode = '\u{001d}0104260392550101';
+      const normalizedBarcode = '4260392550101';
+
+      await getAndValidateProductGS1(barcode, normalizedBarcode);
+    });
+
+    test('get product GS', () async {
+      const barcode = '␝0104260392550101';
+      const normalizedBarcode = '4260392550101';
+
+      await getAndValidateProductGS1(barcode, normalizedBarcode);
+    });
+
+    test('get product AI Data String', () async {
+      const barcode = '(01)04260392550101';
+      const normalizedBarcode = '4260392550101';
+
+      await getAndValidateProductGS1(barcode, normalizedBarcode);
+    });
+
+    test('get product GS1 Data URI', () async {
+      const barcode =
+          'https://id.gs1.org/01/04260392550101/10/ABC/21/123456?17=211200';
+      const normalizedBarcode = '4260392550101';
+
+      await getAndValidateProductGS1(barcode, normalizedBarcode);
+    });
+  });
+
   test('get product uri', () async {
     const String barcode = BARCODE_DANISH_BUTTER_COOKIES;
     OpenFoodAPIConfiguration.uuid = 'Should not appear in the url';
@@ -1180,7 +1294,21 @@ void main() {
         country: OpenFoodFactsCountry.GERMANY,
         replaceSubdomain: true,
       ).toString(),
-      'https://de-es.openfoodfacts.org/product/$barcode',
+      'https://de-es.openfoodfacts.org/product/${Uri.encodeComponent(barcode)}',
+    );
+
+    // Additional test for barcode with URL-unsafe characters
+    const String unsafeBarcode = '(01)1234567890-AB';
+    final String encodedBarcode = Uri.encodeComponent(unsafeBarcode);
+    expect(
+      OpenFoodAPIClient.getProductUri(
+        unsafeBarcode,
+        language: OpenFoodFactsLanguage.ENGLISH,
+        country: OpenFoodFactsCountry.FRANCE,
+        replaceSubdomain: true,
+      ).toString(),
+      'https://fr-en.openfoodfacts.org/product/$encodedBarcode',
+      reason: 'Barcode with URL-unsafe characters should be URI-encoded',
     );
   });
 
