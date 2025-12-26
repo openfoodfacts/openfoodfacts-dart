@@ -5,37 +5,52 @@ import '../utils/unit_helper.dart';
 /// Nutrient
 enum Nutrient implements OffTagged {
   /// Salt
-  salt(typicalUnit: Unit.G, offTag: 'salt'),
+  salt(typicalUnit: Unit.G, offTag: 'salt', acceptsPercentDV: false),
 
   /// Sodium
-  sodium(typicalUnit: Unit.G, offTag: 'sodium'),
+  sodium(typicalUnit: Unit.G, offTag: 'sodium', acceptsPercentDV: false),
 
   /// Fibers
-  fiber(typicalUnit: Unit.G, offTag: 'fiber'),
+  fiber(typicalUnit: Unit.G, offTag: 'fiber', acceptsPercentDV: false),
 
   /// Sugars
-  sugars(typicalUnit: Unit.G, offTag: 'sugars'),
+  sugars(typicalUnit: Unit.G, offTag: 'sugars', acceptsPercentDV: false),
 
   /// Added Sugars
   addedSugars(typicalUnit: Unit.G, offTag: 'added-sugars'),
 
   /// Fats
-  fat(typicalUnit: Unit.G, offTag: 'fat'),
+  fat(typicalUnit: Unit.G, offTag: 'fat', acceptsPercentDV: false),
 
   /// Saturated Fats
-  saturatedFat(typicalUnit: Unit.G, offTag: 'saturated-fat'),
+  saturatedFat(
+      typicalUnit: Unit.G, offTag: 'saturated-fat', acceptsPercentDV: false),
 
   /// Proteins
-  proteins(typicalUnit: Unit.G, offTag: 'proteins'),
+  proteins(typicalUnit: Unit.G, offTag: 'proteins', acceptsPercentDV: false),
 
   /// Energy in kcal
-  energyKCal(typicalUnit: Unit.KCAL, offTag: 'energy-kcal'),
+  energyKCal(
+    typicalUnit: Unit.KCAL,
+    offTag: 'energy-kcal',
+    acceptsWeight: false,
+    acceptsPercentDV: false,
+  ),
 
   /// Energy in kj
-  energyKJ(typicalUnit: Unit.KJ, offTag: 'energy-kj'),
+  energyKJ(
+    typicalUnit: Unit.KJ,
+    offTag: 'energy-kj',
+    acceptsWeight: false,
+    acceptsPercentDV: false,
+  ),
 
   /// Carbohydrates
-  carbohydrates(typicalUnit: Unit.G, offTag: 'carbohydrates'),
+  carbohydrates(
+    typicalUnit: Unit.G,
+    offTag: 'carbohydrates',
+    acceptsPercentDV: false,
+  ),
 
   /// Caffeine
   caffeine(typicalUnit: Unit.G, offTag: 'caffeine'),
@@ -47,7 +62,7 @@ enum Nutrient implements OffTagged {
   iron(typicalUnit: Unit.MILLI_G, offTag: 'iron'),
 
   /// Vitamin C
-  vitaminC(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-c'),
+  vitaminC(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-c', acceptsIU: true),
 
   /// Magnesium
   magnesium(typicalUnit: Unit.MILLI_G, offTag: 'magnesium'),
@@ -68,13 +83,13 @@ enum Nutrient implements OffTagged {
   selenium(typicalUnit: Unit.MICRO_G, offTag: 'selenium'),
 
   /// Vitamin A
-  vitaminA(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-a'),
+  vitaminA(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-a', acceptsIU: true),
 
   /// Vitamin E
-  vitaminE(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-e'),
+  vitaminE(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-e', acceptsIU: true),
 
   /// Vitamin D
-  vitaminD(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-d'),
+  vitaminD(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-d', acceptsIU: true),
 
   /// Vitamin B1
   vitaminB1(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-b1'),
@@ -146,7 +161,12 @@ enum Nutrient implements OffTagged {
   polyunsaturatedFat(typicalUnit: Unit.G, offTag: 'polyunsaturated-fat'),
 
   /// Alcohol
-  alcohol(typicalUnit: Unit.PERCENT, offTag: 'alcohol'),
+  alcohol(
+    typicalUnit: Unit.PERCENT,
+    offTag: 'alcohol',
+    acceptsWeight: false,
+    acceptsPercentDV: false,
+  ),
 
   /// Pantothenic Acid
   pantothenicAcid(typicalUnit: Unit.MILLI_G, offTag: 'pantothenic-acid'),
@@ -233,16 +253,184 @@ enum Nutrient implements OffTagged {
   /// Nervonic Acid
   nervonicAcid(typicalUnit: Unit.G, offTag: 'nervonic-acid'),
 
+  /// Energy from fat
+  energyFromFat(typicalUnit: Unit.KJ, offTag: 'energy-from-fat'),
+
+  /// Unsaturated fat
+  unsaturatedFat(typicalUnit: Unit.G, offTag: 'unsaturated-fat'),
+
+  /// Sucrose
+  sucrose(typicalUnit: Unit.G, offTag: 'sucrose'),
+
+  /// Glucose
+  glucose(typicalUnit: Unit.G, offTag: 'glucose'),
+
+  /// Fructose
+  fructose(typicalUnit: Unit.G, offTag: 'fructose'),
+
+  /// Galactose
+  galactose(typicalUnit: Unit.G, offTag: 'galactose'),
+
+  /// Lactose
+  lactose(typicalUnit: Unit.G, offTag: 'lactose'),
+
+  /// Maltose
+  maltose(typicalUnit: Unit.G, offTag: 'maltose'),
+
+  /// Maltodextrins
+  maltodextrins(typicalUnit: Unit.G, offTag: 'maltodextrins'),
+
+  /// Psicose
+  psicose(typicalUnit: Unit.G, offTag: 'psicose'),
+
+  /// Starch
+  starch(typicalUnit: Unit.G, offTag: 'starch'),
+
+  /// Erythritol
+  erythritol(typicalUnit: Unit.G, offTag: 'erythritol'),
+
+  /// Isomalt
+  isomalt(typicalUnit: Unit.G, offTag: 'isomalt'),
+
+  /// Maltitol
+  maltitol(typicalUnit: Unit.G, offTag: 'maltitol'),
+
+  /// Sorbitol
+  sorbitol(typicalUnit: Unit.G, offTag: 'sorbitol'),
+
+  /// Soluble Fiber
+  solubleFiber(typicalUnit: Unit.G, offTag: 'soluble-fiber'),
+
+  /// Insoluble Fiber
+  insolubleFiber(typicalUnit: Unit.G, offTag: 'insoluble-fiber'),
+
+  /// Casein
+  casein(typicalUnit: Unit.G, offTag: 'casein'),
+
+  /// Serum Proteins
+  serumProteins(typicalUnit: Unit.G, offTag: 'serum-proteins'),
+
+  /// Nucleotides
+  nucleotides(typicalUnit: Unit.G, offTag: 'nucleotides'),
+
+  /// Added Salt
+  addedSalt(typicalUnit: Unit.G, offTag: 'added-salt'),
+
+  /// Folates
+  folates(typicalUnit: Unit.G, offTag: 'folates'),
+
+  /// Silica
+  silica(typicalUnit: Unit.MILLI_G, offTag: 'silica'),
+
+  /// Taurine
+  taurine(typicalUnit: Unit.G, offTag: 'taurine'),
+
+  /// Methylsulfonylmethane
+  methylsulfonylmethane(
+      typicalUnit: Unit.MILLI_G, offTag: 'methylsulfonylmethane'),
+
+  /// pH
+  ph(typicalUnit: Unit.UNKNOWN, offTag: 'ph'),
+
+  /// Fruits Vegetables Nuts
+  fruitsVegetablesNuts(
+      typicalUnit: Unit.PERCENT, offTag: 'fruits-vegetables-nuts'),
+
+  /// Fruits Vegetables Nuts Dried
+  fruitsVegetablesNutsDried(
+      typicalUnit: Unit.PERCENT, offTag: 'fruits-vegetables-nuts-dried'),
+
+  /// Fruits Vegetables Nuts Estimate
+  fruitsVegetablesNutsEstimate(
+      typicalUnit: Unit.PERCENT, offTag: 'fruits-vegetables-nuts-estimate'),
+
+  /// Collagen Meat Protein Ratio
+  collagenMeatProteinRatio(
+      typicalUnit: Unit.PERCENT, offTag: 'collagen-meat-protein-ratio'),
+
+  /// Cocoa
+  cocoa(typicalUnit: Unit.PERCENT, offTag: 'cocoa'),
+
+  /// chlorophyl
+  chlorophyl(typicalUnit: Unit.G, offTag: 'chlorophyl'),
+
+  /// Carbon footprint
+  carbonFootprint(typicalUnit: Unit.G, offTag: 'carbon-footprint'),
+
+  /// Carbon footprint from meat or fish
+  carbonFootprintFromMeatOrFish(
+      typicalUnit: Unit.G, offTag: 'carbon-footprint-from-meat-or-fish'),
+
+  /// Nutrition Score FR
+  nutritionScoreFR(typicalUnit: Unit.UNKNOWN, offTag: 'nutrition-score-fr'),
+
+  /// Nutrition Score UK
+  nutritionScoreUK(typicalUnit: Unit.UNKNOWN, offTag: 'nutrition-score-uk'),
+
+  /// Glycemic index
+  glycemicIndex(typicalUnit: Unit.UNKNOWN, offTag: 'glycemic-index'),
+
+  /// Water hardness
+  waterHardness(typicalUnit: Unit.UNKNOWN, offTag: 'water-hardness'),
+
+  /// Choline
+  choline(typicalUnit: Unit.G, offTag: 'choline'),
+
+  /// Phylloquinone
+  phylloquinone(typicalUnit: Unit.G, offTag: 'phylloquinone'),
+
+  /// Beta-glucan
+  betaGlucan(typicalUnit: Unit.G, offTag: 'beta-glucan'),
+
+  /// Inositol
+  inositol(typicalUnit: Unit.G, offTag: 'inositol'),
+
+  /// Carnitine
+  carnitine(typicalUnit: Unit.G, offTag: 'carnitine'),
+
+  /// Sulphate
+  sulphate(typicalUnit: Unit.MILLI_G, offTag: 'sulphate'),
+
+  /// Nitrate
+  nitrate(typicalUnit: Unit.MILLI_G, offTag: 'nitrate'),
+
+  /// Acidity
+  acidity(typicalUnit: Unit.UNKNOWN, offTag: 'acidity'),
+
+  /// Carbohydrates total
+  carbohydratesTotal(typicalUnit: Unit.G, offTag: 'carbohydrates-total'),
+
+  /// Total Carboydrates
+  totalCarboydrates(typicalUnit: Unit.G, offTag: 'total-carboydrates'),
+
+  /// Sulfate
+  sulfate(typicalUnit: Unit.G, offTag: 'sulfate'),
+
+  /// Melatonin
+  melatonin(typicalUnit: Unit.MICRO_G, offTag: 'melatonin'),
+
   /// Trans Fats
   transFat(typicalUnit: Unit.G, offTag: 'trans-fat');
 
   const Nutrient({
     required this.typicalUnit,
     required this.offTag,
+    this.acceptsWeight = true,
+    this.acceptsPercentDV = true,
+    this.acceptsIU = false,
   });
 
   /// Typical unit. An educated guess only: may differ according to countries.
   final Unit typicalUnit;
+
+  /// Can this nutrient typically be valued in weight? (g, mg, mcg)
+  final bool acceptsWeight;
+
+  /// Can this nutrient typically be valued in "% DV"?
+  final bool acceptsPercentDV;
+
+  /// Can this nutrient typically be valued in "IU"?
+  final bool acceptsIU;
 
   @override
   final String offTag;

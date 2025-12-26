@@ -147,7 +147,7 @@ class FolksonomyAPIClient {
     };
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
-        path: 'product/$barcode',
+        path: 'product/${Uri.encodeComponent(barcode)}',
         queryParameters: parameters,
       ),
       uriHelper: uriHelper,
@@ -181,7 +181,8 @@ class FolksonomyAPIClient {
     };
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
-        path: 'product/$barcode/$key',
+        path:
+            'product/${Uri.encodeComponent(barcode)}/${Uri.encodeComponent(key)}',
         queryParameters: parameters,
       ),
       uriHelper: uriHelper,
@@ -210,7 +211,8 @@ class FolksonomyAPIClient {
   }) async {
     final Response response = await HttpHelper().doDeleteRequest(
       uriHelper.getUri(
-        path: 'product/$barcode/$key',
+        path:
+            'product/${Uri.encodeComponent(barcode)}/${Uri.encodeComponent(key)}',
         queryParameters: {
           'version': '$version',
           if (owner != null) 'owner': owner,
@@ -237,7 +239,8 @@ class FolksonomyAPIClient {
     };
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
-        path: 'product/$barcode/$key/versions',
+        path:
+            'product/${Uri.encodeComponent(barcode)}/${Uri.encodeComponent(key)}/versions',
         queryParameters: parameters,
       ),
       uriHelper: uriHelper,

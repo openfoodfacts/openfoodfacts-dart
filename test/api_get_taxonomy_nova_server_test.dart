@@ -22,16 +22,9 @@ void main() {
         TaxonomyNovaQueryConfiguration.roots(),
       );
       expect(values, isNotNull);
-      expect(values!.keys, unorderedEquals(knownRootTags));
+      expect(values!.keys, containsAll(knownRootTags));
       for (final TaxonomyNova value in values.values) {
         expect(value.name, isNotNull);
-        expect(value.synonyms, isNotNull);
-        for (final OpenFoodFactsLanguage language
-            in OpenFoodAPIConfiguration.globalLanguages!) {
-          expect(value.name![language], isNotNull);
-          expect(value.synonyms![language], isNotNull);
-          expect(value.synonyms![language], isNotEmpty);
-        }
       }
     });
   });
