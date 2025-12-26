@@ -148,7 +148,7 @@ jobs:
           label-operator: OR 
       - uses: actions/add-to-project@main
         with:
-          project-url: https://github.com/orgs/openfoodfacts/projects/162 # Add issue to the Nutri-Patrol project
+          project-url: https://github.com/orgs/openfoodfacts/projects/162 # Add issue to the 3rd party kp project
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labeled: 3rd party Knowledge Panels
           label-operator: OR 
