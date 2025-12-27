@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.29.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.28.0...v3.29.0) (2025-12-27)
+
+
+### Features
+
+* added pet food nutrients ([#1162](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1162)) ([96eaec8](https://github.com/openfoodfacts/openfoodfacts-dart/commit/96eaec8b61039b7334210d8547e11ba070ddae1f))
+* Simplified knowledge panels ([#1169](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1169)) ([babf0bf](https://github.com/openfoodfacts/openfoodfacts-dart/commit/babf0bfd81e4d06041bd8789e789e275ff707603))
+
 ## [3.28.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.27.0...v3.28.0) (2025-12-07)
 
 
