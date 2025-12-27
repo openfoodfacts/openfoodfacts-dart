@@ -45,6 +45,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     super.languages,
     super.country,
     super.fields,
+    super.activateKnowledgePanelsSimplified,
     this.productTypeFilter,
     this.unwantedIngredients,
   });
