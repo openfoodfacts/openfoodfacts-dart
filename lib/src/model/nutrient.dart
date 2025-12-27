@@ -33,7 +33,6 @@ enum Nutrient implements OffTagged {
   energyKCal(
     typicalUnit: Unit.KCAL,
     offTag: 'energy-kcal',
-    acceptsWeight: false,
     acceptsPercentDV: false,
   ),
 
@@ -41,7 +40,6 @@ enum Nutrient implements OffTagged {
   energyKJ(
     typicalUnit: Unit.KJ,
     offTag: 'energy-kj',
-    acceptsWeight: false,
     acceptsPercentDV: false,
   ),
 
@@ -164,7 +162,6 @@ enum Nutrient implements OffTagged {
   alcohol(
     typicalUnit: Unit.PERCENT,
     offTag: 'alcohol',
-    acceptsWeight: false,
     acceptsPercentDV: false,
   ),
 
@@ -410,27 +407,154 @@ enum Nutrient implements OffTagged {
   melatonin(typicalUnit: Unit.MICRO_G, offTag: 'melatonin'),
 
   /// Trans Fats
-  transFat(typicalUnit: Unit.G, offTag: 'trans-fat');
+  transFat(typicalUnit: Unit.G, offTag: 'trans-fat'),
+
+  /// Crude Fat
+  crudeFat(
+    typicalUnit: Unit.PERCENT,
+    offTag: 'crude-fat',
+    acceptsPercentDV: false,
+    probablyPetFood: true,
+  ),
+
+  /// Crude Protein
+  crudeProtein(
+    typicalUnit: Unit.PERCENT,
+    offTag: 'crude-protein',
+    acceptsPercentDV: false,
+    probablyPetFood: true,
+  ),
+
+  /// Crude Ash
+  crudeAsh(
+    typicalUnit: Unit.PERCENT,
+    offTag: 'crude-ash',
+    acceptsPercentDV: false,
+    probablyPetFood: true,
+  ),
+
+  /// Crude Ash
+  crudeFiber(
+    typicalUnit: Unit.PERCENT,
+    offTag: 'crude-fibre',
+    acceptsPercentDV: false,
+    probablyPetFood: true,
+  ),
+
+  /// Moisture
+  moisture(
+    typicalUnit: Unit.PERCENT,
+    offTag: 'moisture',
+    acceptsPercentDV: false,
+    probablyPetFood: true,
+  ),
+
+  /// Ammonium Chloride
+  ammoniumChloride(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'ammonium-chloride',
+    probablyPetFood: true,
+  ),
+
+  /// Calcium Iodate Anhydrous
+  calciumIodateAnhydrous(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'calcium-iodate-anhydrous',
+    probablyPetFood: true,
+  ),
+
+  /// Cassia Gum
+  cassiaGum(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'cassia-gum',
+    probablyPetFood: true,
+  ),
+
+  /// Choline Chloride
+  cholineChloride(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'choline-chloride',
+    probablyPetFood: true,
+  ),
+
+  /// Copper II Sulphate Pentahydrate
+  copperIISulphatePentahydrate(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'copper-ii-sulphate-pentahydrate',
+    probablyPetFood: true,
+  ),
+
+  /// Iron II Sulphate Monohydrate
+  ironIISulphateMonohydrate(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'iron-ii-sulphate-monohydrate',
+    probablyPetFood: true,
+  ),
+
+  /// Manganous Sulphate Monohydrate
+  manganousSulphateMonohydrate(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'manganous-sulphate-monohydrate',
+    probablyPetFood: true,
+  ),
+
+  /// Potassium Iodide
+  potassiumIodide(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'potassium-iodide',
+    probablyPetFood: true,
+  ),
+
+  /// Sodium Selenite
+  sodiumSelenite(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'sodium-selenite',
+    probablyPetFood: true,
+  ),
+
+  /// Zinc Sulphate Monohydrate
+  zincSulphateMonohydrate(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'zinc-sulphate-monohydrate',
+    probablyPetFood: true,
+  ),
+
+  /// Protein Value
+  proteinValue(
+    typicalUnit: Unit.G_PER_KG,
+    offTag: 'protein-value',
+    acceptsPercentDV: false,
+    probablyPetFood: true,
+  );
 
   const Nutrient({
     required this.typicalUnit,
     required this.offTag,
-    this.acceptsWeight = true,
     this.acceptsPercentDV = true,
     this.acceptsIU = false,
+    this.probablyPetFood = false,
   });
 
   /// Typical unit. An educated guess only: may differ according to countries.
   final Unit typicalUnit;
 
+  static const List<Unit> _weightUnits = [
+    Unit.G,
+    Unit.MILLI_G,
+    Unit.MICRO_G,
+  ];
+
   /// Can this nutrient typically be valued in weight? (g, mg, mcg)
-  final bool acceptsWeight;
+  bool get acceptsWeight => _weightUnits.contains(typicalUnit);
 
   /// Can this nutrient typically be valued in "% DV"?
   final bool acceptsPercentDV;
 
   /// Can this nutrient typically be valued in "IU"?
   final bool acceptsIU;
+
+  /// Is that nutrient likely to be specific to pet food.
+  final bool probablyPetFood;
 
   @override
   final String offTag;
