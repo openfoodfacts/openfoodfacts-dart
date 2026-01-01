@@ -7,11 +7,11 @@ import '../utils/json_helper.dart';
 /// cf. `ProductFull` in https://prices.openfoodfacts.org/api/docs
 /// Read-only - we retrieve the data from the Prices API.
 class PriceProduct extends JsonMap {
-  /// Number of prices for this product.
-  int? get priceCount => (jsonMap['price_count'] as num?)?.toInt();
-
   /// Barcode (EAN) of the product, as a string.
   String get code => jsonMap['code'] as String;
+
+  /// Number of prices for this product.
+  int? get priceCount => (jsonMap['price_count'] as num?)?.toInt();
 
   /// Number of locations for this product.
   int? get locationCount => (jsonMap['location_count'] as num?)?.toInt();
