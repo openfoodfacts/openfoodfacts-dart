@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 
+import 'external/external_source_metadata.dart';
+import 'external/external_source_product_data.dart';
 import 'interface/json_object.dart';
 import 'model/login_status.dart';
 import 'model/ocr_ingredients_result.dart';
@@ -1399,5 +1401,76 @@ class OpenFoodAPIClient {
       result[country] = map[countryCode];
     }
     return result;
+  }
+
+  /// Returns the list of all external source metadata.
+  static Future<MaybeError<List<ExternalSourceMetadata>>>
+      getExternalSourceMetadatas({
+    final ProductQueryVersion version = ProductQueryVersion.v3,
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Response response = await HttpHelper().doGetRequest(
+      uriHelper.getUri(
+        path: 'api/v${version.version}/external_sources',
+      ),
+      uriHelper: uriHelper,
+    );
+    if (response.statusCode != 200) {
+      return MaybeError<List<ExternalSourceMetadata>>.responseError(response);
+    }
+    try {
+      final List<ExternalSourceMetadata> result = <ExternalSourceMetadata>[];
+      final Map<String, dynamic> json = HttpHelper().jsonDecode(response.body);
+      final List<dynamic> list = json['external_sources'] as List<dynamic>;
+      for (final dynamic item in list) {
+        result.add(ExternalSourceMetadata(item as Map<String, dynamic>));
+      }
+      return MaybeError<List<ExternalSourceMetadata>>.value(result);
+    } catch (e) {
+      return MaybeError<List<ExternalSourceMetadata>>.unreadableResponse(
+          response);
+    }
+  }
+
+  /// Returns the product data from an external source.
+  ///
+  /// Recommended populated product fields:
+  /// * barcode (mandatory)
+  /// * productType (depends on the metadata)
+  /// * categoriesTags (depends on the metadata)
+  static Future<MaybeError<ExternalSourceProductData?>>
+      getExternalSourceProductData({
+    required final ExternalSourceMetadata metadata,
+    required final Product product,
+    required final OpenFoodFactsLanguage language,
+    required final OpenFoodFactsCountry country,
+  }) async {
+    final List<String> rejectionCauses = metadata.filter.getRejectionCauses(
+      product,
+      language,
+      country,
+    );
+    if (rejectionCauses.isNotEmpty) {
+      return MaybeError<ExternalSourceProductData?>.value(null);
+    }
+    final String url = metadata.getProductUrl(
+      product.barcode!,
+      language,
+      country,
+    );
+    final Response response = await get(Uri.parse(url));
+    if (response.statusCode != 200) {
+      return MaybeError<ExternalSourceProductData?>.responseError(response);
+    }
+    try {
+      final Map<String, dynamic> json = HttpHelper().jsonDecodeUtf8(response);
+      return MaybeError<ExternalSourceProductData?>.value(
+        ExternalSourceProductData(json),
+      );
+    } catch (e) {
+      return MaybeError<ExternalSourceProductData?>.unreadableResponse(
+        response,
+      );
+    }
   }
 }
