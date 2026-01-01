@@ -1,4 +1,8 @@
 export 'src/events.dart';
+export 'src/external/external_source_filter.dart';
+export 'src/external/external_source_metadata.dart';
+export 'src/external/external_source_product_data.dart';
+export 'src/external/json_map.dart';
 export 'src/folksonomy.dart';
 export 'src/interface/json_map.dart';
 export 'src/interface/parameter.dart';

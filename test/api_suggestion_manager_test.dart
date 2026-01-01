@@ -6,20 +6,17 @@ import 'package:test/test.dart';
 import 'test_constants.dart';
 
 class _SuggestionManagerTest extends AutocompleteManager {
-  _SuggestionManagerTest(
-    super.autocompleter, {
-    required this.milliSecondWaits,
-  });
+  _SuggestionManagerTest(super.autocompleter, {required this.milliSecondWaits});
 
   final List<int> milliSecondWaits;
   int _index = 0;
 
   @override
   Future<void> waitForTestPurpose() async => Future.delayed(
-        Duration(
-          milliseconds: milliSecondWaits[(_index++) % milliSecondWaits.length],
-        ),
-      );
+    Duration(
+      milliseconds: milliSecondWaits[(_index++) % milliSecondWaits.length],
+    ),
+  );
 }
 
 void main() {
@@ -76,12 +73,10 @@ void main() {
         // the second will start later
         milliSecondWaits: <int>[0, millisecondsWait],
       );
-      final List<String> countriesFastThenSlow = await last(
-        [
-          fastThenSlowManager.getSuggestions(input1),
-          fastThenSlowManager.getSuggestions(input2),
-        ],
-      );
+      final List<String> countriesFastThenSlow = await last([
+        fastThenSlowManager.getSuggestions(input1),
+        fastThenSlowManager.getSuggestions(input2),
+      ]);
       expect(countriesFastThenSlow, countries2);
 
       // Here we have the first call that takes longer (at least starts later).
@@ -90,37 +85,29 @@ void main() {
         // the first will start later
         milliSecondWaits: <int>[millisecondsWait, 0],
       );
-      final List<String> countriesSlowThenFast = await last(
-        [
-          slowThenFastManager.getSuggestions(input1),
-          slowThenFastManager.getSuggestions(input2),
-        ],
-      );
+      final List<String> countriesSlowThenFast = await last([
+        slowThenFastManager.getSuggestions(input1),
+        slowThenFastManager.getSuggestions(input2),
+      ]);
       // regardless, we expect the suggestion for the latest input.
       expect(countriesSlowThenFast, countries2);
 
       // without the manager, we always get the slower result.
-      final List<String> countriesNormal = await last(
-        [
-          getSlowSuggestions(
-            autocompleter,
-            input: input1,
-            milliseconds: millisecondsWait,
-          ),
-          autocompleter.getSuggestions(input2),
-        ],
-      );
+      final List<String> countriesNormal = await last([
+        getSlowSuggestions(
+          autocompleter,
+          input: input1,
+          milliseconds: millisecondsWait,
+        ),
+        autocompleter.getSuggestions(input2),
+      ]);
       expect(countriesNormal, countries1);
     }
 
     test(
       'countries as TagType',
-      () async => testSpeed(
-        TagTypeAutocompleter(
-          tagType: tagType,
-          language: language,
-        ),
-      ),
+      () async =>
+          testSpeed(TagTypeAutocompleter(tagType: tagType, language: language)),
     );
 
     test(

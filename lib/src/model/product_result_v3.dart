@@ -71,7 +71,8 @@ class ProductResultV3 extends JsonObject {
 
   /// From a `List<AnswerForField>` in `dynamic`'s clothing (JsonKey)
   static List<ProductResultFieldAnswer>? _fromJsonListAnswerForField(
-      dynamic list) {
+    dynamic list,
+  ) {
     if (list == null) {
       return null;
     }

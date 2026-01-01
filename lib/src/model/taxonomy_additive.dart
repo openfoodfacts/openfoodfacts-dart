@@ -14,9 +14,11 @@ enum TaxonomyAdditiveField implements OffTagged {
   ALL(offTag: 'all'),
   ADDITIVES_CLASSES(offTag: 'additives_classes'),
   CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT(
-      offTag: 'carbon_footprint_fr_foodges_ingredient'),
+    offTag: 'carbon_footprint_fr_foodges_ingredient',
+  ),
   CARBON_FOOTPRINT_FR_FOODGES_VALUE(
-      offTag: 'carbon_footprint_fr_foodges_value'),
+    offTag: 'carbon_footprint_fr_foodges_value',
+  ),
   COLOUR_INDEX(offTag: 'colour_index'),
   COMMENT(offTag: 'comment'),
   DEFAULT_ADDITIVE_CLASS(offTag: 'default_additive_class'),
@@ -28,15 +30,20 @@ enum TaxonomyAdditiveField implements OffTagged {
   EFSA_EVALUATION_ADI_ESTABLISHED(offTag: 'efsa_evaluation_adi_established'),
   EFSA_EVALUATION_DATE(offTag: 'efsa_evaluation_date'),
   EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_ADI(
-      offTag: 'efsa_evaluation_exposure_95th_greater_than_adi'),
+    offTag: 'efsa_evaluation_exposure_95th_greater_than_adi',
+  ),
   EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_NOAEL(
-      offTag: 'efsa_evaluation_exposure_95th_greater_than_noael'),
+    offTag: 'efsa_evaluation_exposure_95th_greater_than_noael',
+  ),
   EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_ADI(
-      offTag: 'efsa_evaluation_exposure_mean_greater_than_adi'),
+    offTag: 'efsa_evaluation_exposure_mean_greater_than_adi',
+  ),
   EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_NOAEL(
-      offTag: 'efsa_evaluation_exposure_mean_greater_than_noael'),
+    offTag: 'efsa_evaluation_exposure_mean_greater_than_noael',
+  ),
   EFSA_EVALUATION_OVEREXPOSURE_RISK(
-      offTag: 'efsa_evaluation_overexposure_risk'),
+    offTag: 'efsa_evaluation_overexposure_risk',
+  ),
   EFSA_EVALUATION_SAFETY_ASSESSED(offTag: 'efsa_evaluation_safety_assessed'),
   EFSA_EVALUATION_URL(offTag: 'efsa_evaluation_url'),
   FROM_PALM_OIL(offTag: 'from_palm_oil'),
@@ -47,9 +54,7 @@ enum TaxonomyAdditiveField implements OffTagged {
   VEGETARIAN(offTag: 'vegetarian'),
   WIKIDATA(offTag: 'wikidata');
 
-  const TaxonomyAdditiveField({
-    required this.offTag,
-  });
+  const TaxonomyAdditiveField({required this.offTag});
 
   @override
   final String offTag;
@@ -209,7 +214,7 @@ class TaxonomyAdditive extends JsonObject {
     includeIfNull: false,
   )
   Map<OpenFoodFactsLanguage, String>?
-      efsaEvaluationExposure95thGreaterThanNoael;
+  efsaEvaluationExposure95thGreaterThanNoael;
   @JsonKey(
     name: 'efsa_evaluation_exposure_mean_greater_than_adi',
     fromJson: LanguageHelper.fromJsonStringMap,
@@ -224,7 +229,7 @@ class TaxonomyAdditive extends JsonObject {
     includeIfNull: false,
   )
   Map<OpenFoodFactsLanguage, String>?
-      efsaEvaluationExposureMeanGreaterThanNoael;
+  efsaEvaluationExposureMeanGreaterThanNoael;
   @JsonKey(
     name: 'efsa_evaluation_overexposure_risk',
     fromJson: LanguageHelper.fromJsonStringMap,
@@ -303,8 +308,9 @@ class TaxonomyAdditive extends JsonObject {
 }
 
 /// Configuration to get additives
-class TaxonomyAdditiveQueryConfiguration extends TaxonomyQueryConfiguration<
-    TaxonomyAdditive, TaxonomyAdditiveField> {
+class TaxonomyAdditiveQueryConfiguration
+    extends
+        TaxonomyQueryConfiguration<TaxonomyAdditive, TaxonomyAdditiveField> {
   /// Configuration to get additives from their tags
   TaxonomyAdditiveQueryConfiguration({
     required List<String> tags,
@@ -313,14 +319,14 @@ class TaxonomyAdditiveQueryConfiguration extends TaxonomyQueryConfiguration<
     List<TaxonomyAdditiveField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
-          TagType.ADDITIVES,
-          tags,
-          languages: languages,
-          country: country,
-          includeChildren: false,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.ADDITIVES,
+         tags,
+         languages: languages,
+         country: country,
+         includeChildren: false,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   /// Configuration to get the root additives
   TaxonomyAdditiveQueryConfiguration.roots({
@@ -330,21 +336,23 @@ class TaxonomyAdditiveQueryConfiguration extends TaxonomyQueryConfiguration<
     final List<TaxonomyAdditiveField> fields = const [],
     final List<Parameter> additionalParameters = const [],
   }) : super.roots(
-          TagType.ADDITIVES,
-          languages: languages,
-          country: country,
-          includeChildren: includeChildren,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.ADDITIVES,
+         languages: languages,
+         country: country,
+         includeChildren: includeChildren,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   @override
   Map<String, TaxonomyAdditive> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {
       return const {};
     }
-    return jsonData
-        .map<String, TaxonomyAdditive>((String key, dynamic taxonomy) {
+    return jsonData.map<String, TaxonomyAdditive>((
+      String key,
+      dynamic taxonomy,
+    ) {
       if (taxonomy is! Map<String, dynamic>) {
         assert(false, 'Received JSON Additive is not a Map');
         return MapEntry(key, TaxonomyAdditive.fromJson({}));
@@ -354,12 +362,14 @@ class TaxonomyAdditiveQueryConfiguration extends TaxonomyQueryConfiguration<
   }
 
   @override
-  Set<TaxonomyAdditiveField> get ignoredFields =>
-      const {TaxonomyAdditiveField.ALL};
+  Set<TaxonomyAdditiveField> get ignoredFields => const {
+    TaxonomyAdditiveField.ALL,
+  };
 
   @override
   Iterable<String> convertFieldsToStrings(
-      Iterable<TaxonomyAdditiveField> fields) {
+    Iterable<TaxonomyAdditiveField> fields,
+  ) {
     return fields
         .where((TaxonomyAdditiveField field) => !ignoredFields.contains(field))
         .map<String>((TaxonomyAdditiveField field) => field.offTag);

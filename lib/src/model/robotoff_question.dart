@@ -32,14 +32,15 @@ class RobotoffQuestion extends JsonObject {
   @JsonKey(name: 'source_image_url')
   final String? imageUrl;
 
-  const RobotoffQuestion(
-      {this.barcode,
-      this.type,
-      this.value,
-      this.question,
-      this.insightId,
-      this.insightType,
-      this.imageUrl});
+  const RobotoffQuestion({
+    this.barcode,
+    this.type,
+    this.value,
+    this.question,
+    this.insightId,
+    this.insightType,
+    this.imageUrl,
+  });
 
   factory RobotoffQuestion.fromJson(Map<String, dynamic> json) =>
       _$RobotoffQuestionFromJson(json);

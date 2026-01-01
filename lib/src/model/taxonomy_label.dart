@@ -37,9 +37,7 @@ enum TaxonomyLabelField implements OffTagged {
   STORES(offTag: 'stores'),
   WIKIDATA(offTag: 'wikidata');
 
-  const TaxonomyLabelField({
-    required this.offTag,
-  });
+  const TaxonomyLabelField({required this.offTag});
 
   @override
   final String offTag;
@@ -259,14 +257,14 @@ class TaxonomyLabelQueryConfiguration
     List<TaxonomyLabelField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
-          TagType.LABELS,
-          tags,
-          languages: languages,
-          country: country,
-          includeChildren: false,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.LABELS,
+         tags,
+         languages: languages,
+         country: country,
+         includeChildren: false,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   TaxonomyLabelQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages,
@@ -274,13 +272,13 @@ class TaxonomyLabelQueryConfiguration
     List<TaxonomyLabelField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super.roots(
-          TagType.LABELS,
-          languages: languages,
-          country: country,
-          includeChildren: false,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.LABELS,
+         languages: languages,
+         country: country,
+         includeChildren: false,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   @override
   Map<String, TaxonomyLabel> convertResults(dynamic jsonData) {

@@ -33,9 +33,7 @@ enum TagFilterType implements OffTagged {
   INFORMERS(offTag: 'informers'),
   LANG(offTag: 'lang');
 
-  const TagFilterType({
-    required this.offTag,
-  });
+  const TagFilterType({required this.offTag});
 
   @override
   final String offTag;
@@ -77,8 +75,8 @@ class TagFilter extends Parameter {
     required final String tagName,
     final bool contains = true,
   }) : this._(
-          tagType: tagFilterType.offTag,
-          contains: contains,
-          tagName: tagName,
-        );
+         tagType: tagFilterType.offTag,
+         contains: contains,
+         tagName: tagName,
+       );
 }

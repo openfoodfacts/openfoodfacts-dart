@@ -9,11 +9,7 @@ class SignUpStatus extends Status {
   /// A list of errors returned by the server
   final Iterable<SignUpStatusError>? statusErrors;
 
-  SignUpStatus._({
-    super.status,
-    super.error,
-    this.statusErrors,
-  });
+  SignUpStatus._({super.status, super.error, this.statusErrors});
 
   factory SignUpStatus(Status status) {
     if (status.body == null) {
@@ -23,9 +19,7 @@ class SignUpStatus extends Status {
         error: Status.serverErrorInEnglish,
       );
     } else if (status.body!.contains('loggedin')) {
-      return SignUpStatus._(
-        status: 201,
-      );
+      return SignUpStatus._(status: 201);
     } else {
       return SignUpStatus._(
         status: 400,
@@ -78,8 +72,8 @@ class SignUpStatus extends Status {
   /// Lists of errors sent by the server
   /// Sentences are available in
   /// [https://github.com/openfoodfacts/openfoodfacts-translations/blob/main/openfoodfacts-web/openfoodfacts-web-fr.po]
-  static const Map<String, SignUpStatusError> _errorTexts =
-      <String, SignUpStatusError>{
+  static const Map<String, SignUpStatusError>
+  _errorTexts = <String, SignUpStatusError>{
     'Incorrect e-mail address provided.': SignUpStatusError.INCORRECT_EMAIL,
     'The e-mail address is already used by another user.':
         SignUpStatusError.EMAIL_ALREADY_USED,

@@ -20,9 +20,7 @@ class AutocompleteManager implements Autocompleter {
   final Map<String, List<String>> _cache = <String, List<String>>{};
 
   @override
-  Future<List<String>> getSuggestions(
-    final String input,
-  ) async {
+  Future<List<String>> getSuggestions(final String input) async {
     _inputs.add(input);
     final List<String>? cached = _cache[input];
     if (cached != null) {

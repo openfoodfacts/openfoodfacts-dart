@@ -9,7 +9,7 @@ import 'uri_helper.dart';
 /// Api version for product queries (minimum forced version number: 2).
 class ProductQueryVersion {
   const ProductQueryVersion(final num version)
-      : version = version < 2 ? 2 : version;
+    : version = version < 2 ? 2 : version;
 
   final num version;
 
@@ -78,9 +78,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
       );
     }
     return await HttpHelper().doPostRequest(
-      uriHelper.getPostUri(
-        path: getUriPath(),
-      ),
+      uriHelper.getPostUri(path: getUriPath()),
       getParametersMap(),
       user,
       uriHelper: uriHelper,

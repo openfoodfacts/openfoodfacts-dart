@@ -3,10 +3,7 @@
 /// Typically, the server may limit the number of requests to a [maxCount]
 /// during a specific [duration].
 class TooManyRequestsManager {
-  TooManyRequestsManager({
-    required this.maxCount,
-    required this.duration,
-  });
+  TooManyRequestsManager({required this.maxCount, required this.duration});
 
   final int maxCount;
   final Duration duration;
@@ -33,14 +30,8 @@ class TooManyRequestsManager {
 
 /// [TooManyRequestsManager] dedicated to "searchProducts" queries in PROD.
 final TooManyRequestsManager searchProductsTooManyRequestsManager =
-    TooManyRequestsManager(
-  maxCount: 10,
-  duration: Duration(minutes: 1),
-);
+    TooManyRequestsManager(maxCount: 10, duration: Duration(minutes: 1));
 
 /// [TooManyRequestsManager] dedicated to "getProduct" queries in PROD.
 final TooManyRequestsManager getProductTooManyRequestsManager =
-    TooManyRequestsManager(
-  maxCount: 100,
-  duration: Duration(minutes: 1),
-);
+    TooManyRequestsManager(maxCount: 100, duration: Duration(minutes: 1));

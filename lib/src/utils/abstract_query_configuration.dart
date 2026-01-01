@@ -81,7 +81,8 @@ abstract class AbstractQueryConfiguration {
     if (languages != null) {
       if (language != null && languages!.isNotEmpty) {
         throw ArgumentError(
-            '[languages] cannot be used together with [language]');
+          '[languages] cannot be used together with [language]',
+        );
       }
     }
   }
@@ -105,7 +106,9 @@ abstract class AbstractQueryConfiguration {
 
     if (queryLanguages.isNotEmpty) {
       result.putIfAbsent(
-          'lc', () => queryLanguages.map((e) => e.offTag).join(','));
+        'lc',
+        () => queryLanguages.map((e) => e.offTag).join(','),
+      );
       // the result looks like crap if we put several languages
       result.putIfAbsent('tags_lc', () => queryLanguages.first.offTag);
     }
@@ -131,7 +134,9 @@ abstract class AbstractQueryConfiguration {
         TagFilter tf = p;
         result.putIfAbsent('tagtype_$filterTagCount', () => tf.getTagType());
         result.putIfAbsent(
-            'tag_contains_$filterTagCount', () => tf.getContains());
+          'tag_contains_$filterTagCount',
+          () => tf.getContains(),
+        );
         result.putIfAbsent('tag_$filterTagCount', () => tf.getTagName());
         filterTagCount++;
       } else {
@@ -158,14 +163,11 @@ abstract class AbstractQueryConfiguration {
   Future<Response> getResponse(
     final User? user,
     final UriProductHelper uriHelper,
-  ) async =>
-      HttpHelper().doPostRequest(
-        uriHelper.getPostUri(
-          path: getUriPath(),
-        ),
-        getParametersMap(),
-        user,
-        uriHelper: uriHelper,
-        addCredentialsToBody: false,
-      );
+  ) async => HttpHelper().doPostRequest(
+    uriHelper.getPostUri(path: getUriPath()),
+    getParametersMap(),
+    user,
+    uriHelper: uriHelper,
+    addCredentialsToBody: false,
+  );
 }
