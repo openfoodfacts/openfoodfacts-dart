@@ -1,7 +1,7 @@
+import '../interface/json_map.dart';
 import '../utils/country_helper.dart';
 import '../utils/language_helper.dart';
 import 'external_source_filter.dart';
-import 'json_map.dart';
 
 /// External Source Metadata.
 class ExternalSourceMetadata extends JsonMap {

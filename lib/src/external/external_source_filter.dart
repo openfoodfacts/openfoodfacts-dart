@@ -1,7 +1,7 @@
+import '../interface/json_map.dart';
 import '../model/product.dart';
 import '../utils/country_helper.dart';
 import '../utils/language_helper.dart';
-import 'json_map.dart';
 
 /// External Source Filter.
 class ExternalSourceFilter extends JsonMap {
