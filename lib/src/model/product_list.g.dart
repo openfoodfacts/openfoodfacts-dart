@@ -7,10 +7,10 @@ part of 'product_list.dart';
 // **************************************************************************
 
 ProductList _$ProductListFromJson(Map<String, dynamic> json) => ProductList(
-      barcode: json['product'] as String,
-      key: json['k'] as String,
-      value: json['v'] as String,
-    );
+  barcode: json['product'] as String,
+  key: json['k'] as String,
+  value: json['v'] as String,
+);
 
 Map<String, dynamic> _$ProductListToJson(ProductList instance) =>
     <String, dynamic>{

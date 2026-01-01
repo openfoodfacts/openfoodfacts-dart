@@ -1,5 +1,3 @@
-library openfoodfacts;
-
 export 'src/events.dart';
 export 'src/folksonomy.dart';
 export 'src/interface/parameter.dart';

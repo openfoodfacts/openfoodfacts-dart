@@ -21,10 +21,12 @@ PriceProduct _$PriceProductFromJson(Map<String, dynamic> json) => PriceProduct()
       .map((e) => e as String)
       .toList()
   ..brands = json['brands'] as String?
-  ..brandsTags =
-      (json['brands_tags'] as List<dynamic>).map((e) => e as String).toList()
-  ..labelsTags =
-      (json['labels_tags'] as List<dynamic>).map((e) => e as String).toList()
+  ..brandsTags = (json['brands_tags'] as List<dynamic>)
+      .map((e) => e as String)
+      .toList()
+  ..labelsTags = (json['labels_tags'] as List<dynamic>)
+      .map((e) => e as String)
+      .toList()
   ..imageURL = json['image_url'] as String?
   ..nutriscoreGrade = json['nutriscore_grade'] as String?
   ..ecoscoreGrade = json['ecoscore_grade'] as String?

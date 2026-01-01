@@ -23,9 +23,7 @@ void main() {
     'en:cornwall',
     'en:yorkshire',
   };
-  const Set<String> expectedParents = <String>{
-    'en:united-kingdom',
-  };
+  const Set<String> expectedParents = <String>{'en:united-kingdom'};
   const String knownRootTag = 'en:france';
   const String unknownTag = 'en:some_nonexistent_thing';
 
@@ -33,10 +31,14 @@ void main() {
     void checkKnown(final TaxonomyOrigin value) {
       expect(value.name![OpenFoodFactsLanguage.ENGLISH]!, expectedNameEnglish);
       expect(value.name![OpenFoodFactsLanguage.FRENCH]!, expectedNameFrench);
-      expect(value.synonyms![OpenFoodFactsLanguage.ENGLISH]!,
-          contains(expectedNameEnglish));
-      expect(value.synonyms![OpenFoodFactsLanguage.FRENCH]!,
-          contains(expectedNameFrench));
+      expect(
+        value.synonyms![OpenFoodFactsLanguage.ENGLISH]!,
+        contains(expectedNameEnglish),
+      );
+      expect(
+        value.synonyms![OpenFoodFactsLanguage.FRENCH]!,
+        contains(expectedNameFrench),
+      );
       expect(value.parents, unorderedEquals(expectedParents));
       expect(value.children, containsAll(expectedChildren));
     }
@@ -44,8 +46,8 @@ void main() {
     test('get an origin', () async {
       final Map<String, TaxonomyOrigin>? values =
           await OpenFoodAPIClient.getTaxonomyOrigins(
-        TaxonomyOriginQueryConfiguration(tags: <String>[knownTag]),
-      );
+            TaxonomyOriginQueryConfiguration(tags: <String>[knownTag]),
+          );
       expect(values, isNotNull);
       expect(values!.length, equals(1));
       checkKnown(values[knownTag]!);
@@ -54,18 +56,18 @@ void main() {
     test("get an origin that doesn't exist", () async {
       final Map<String, TaxonomyOrigin>? values =
           await OpenFoodAPIClient.getTaxonomyOrigins(
-        TaxonomyOriginQueryConfiguration(tags: <String>[unknownTag]),
-      );
+            TaxonomyOriginQueryConfiguration(tags: <String>[unknownTag]),
+          );
       expect(values, isNull);
     });
 
     test("get an origin that doesn't exist with one that does", () async {
       final Map<String, TaxonomyOrigin>? values =
           await OpenFoodAPIClient.getTaxonomyOrigins(
-        TaxonomyOriginQueryConfiguration(
-          tags: <String>[unknownTag, knownTag],
-        ),
-      );
+            TaxonomyOriginQueryConfiguration(
+              tags: <String>[unknownTag, knownTag],
+            ),
+          );
       expect(values, isNotNull);
       expect(values!.length, equals(1));
       checkKnown(values[knownTag]!);
@@ -74,8 +76,8 @@ void main() {
     test('get all root origins', () async {
       final Map<String, TaxonomyOrigin>? values =
           await OpenFoodAPIClient.getTaxonomyOrigins(
-        TaxonomyOriginQueryConfiguration.roots(),
-      );
+            TaxonomyOriginQueryConfiguration.roots(),
+          );
       expect(values, isNotNull);
       expect(values!.length, greaterThan(250)); // was 288 on 2022-11-06
       expect(values[unknownTag], isNull);

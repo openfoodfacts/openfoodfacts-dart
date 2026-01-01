@@ -74,8 +74,10 @@ void main() {
       if (item.id == nutrientId) {
         return item;
       }
-      final OrderedNutrient? found =
-          findOrderedNutrient(item.subNutrients, nutrientId);
+      final OrderedNutrient? found = findOrderedNutrient(
+        item.subNutrients,
+        nutrientId,
+      );
       if (found != null) {
         return found;
       }
@@ -122,11 +124,13 @@ void main() {
         for (final OpenFoodFactsCountry country in countries) {
           final OrderedNutrients orderedNutrients =
               await OpenFoodAPIClient.getOrderedNutrients(
-            country: country,
-            language: language,
+                country: country,
+                language: language,
+              );
+          final OrderedNutrient? found = findOrderedNutrient(
+            orderedNutrients.nutrients,
+            nutrientId,
           );
-          final OrderedNutrient? found =
-              findOrderedNutrient(orderedNutrients.nutrients, nutrientId);
           expect(found, isNotNull);
           expect(found!.name, energies[language]);
         }
@@ -140,10 +144,10 @@ void main() {
       final OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
       final OrderedNutrients orderedNutrients =
           await OpenFoodAPIClient.getOrderedNutrients(
-        country: country,
-        language: language,
-        uriHelper: uriHelper,
-      );
+            country: country,
+            language: language,
+            uriHelper: uriHelper,
+          );
       // lazily assuming that all nutrients are on the same level
       for (final Nutrient nutrient in Nutrient.values) {
         if (!nutrient.probablyPetFood) {
@@ -151,8 +155,9 @@ void main() {
         }
         expect(
           orderedNutrients.nutrients.any(
-              (final OrderedNutrient orderedNutrient) =>
-                  orderedNutrient.id == nutrient.offTag),
+            (final OrderedNutrient orderedNutrient) =>
+                orderedNutrient.id == nutrient.offTag,
+          ),
           isTrue,
           reason: 'Cannot find ${nutrient.offTag}',
         );
@@ -163,13 +168,17 @@ void main() {
       for (final OpenFoodFactsCountry country in countries) {
         final OrderedNutrients orderedNutrients =
             await OpenFoodAPIClient.getOrderedNutrients(
-          country: country,
-          language: language,
+              country: country,
+              language: language,
+            );
+        final List<String> missingNutrients = findMissingNutrients(
+          orderedNutrients.nutrients,
         );
-        final List<String> missingNutrients =
-            findMissingNutrients(orderedNutrients.nutrients);
-        expect(missingNutrients, isEmpty,
-            reason: 'For country ${country.name}');
+        expect(
+          missingNutrients,
+          isEmpty,
+          reason: 'For country ${country.name}',
+        );
       }
     });
 
@@ -178,22 +187,16 @@ void main() {
       for (final bool excludeReadOnly in excludeReadOnlies) {
         final OrderedNutrients orderedNutrients =
             await OpenFoodAPIClient.getOrderedNutrients(
-          country: OpenFoodFactsCountry.FRANCE,
-          language: language,
-          excludeReadOnly: excludeReadOnly,
-        );
+              country: OpenFoodFactsCountry.FRANCE,
+              language: language,
+              excludeReadOnly: excludeReadOnly,
+            );
         expect(
-          findOrderedNutrient(
-            orderedNutrients.nutrients,
-            'nutrition-score-fr',
-          ),
+          findOrderedNutrient(orderedNutrients.nutrients, 'nutrition-score-fr'),
           excludeReadOnly ? isNull : isNotNull,
         );
         expect(
-          findOrderedNutrient(
-            orderedNutrients.nutrients,
-            'nutrition-score-uk',
-          ),
+          findOrderedNutrient(orderedNutrients.nutrients, 'nutrition-score-uk'),
           excludeReadOnly ? isNull : isNotNull,
         );
       }

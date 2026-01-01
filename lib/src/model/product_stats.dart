@@ -13,10 +13,7 @@ class ProductStats extends JsonObject {
   final int numberOfKeys;
   @JsonKey(name: 'editors')
   final int numberOfEditors;
-  @JsonKey(
-    name: 'last_edit',
-    fromJson: JsonHelper.stringTimestampToDate,
-  )
+  @JsonKey(name: 'last_edit', fromJson: JsonHelper.stringTimestampToDate)
   final DateTime lastEdit;
 
   ProductStats({

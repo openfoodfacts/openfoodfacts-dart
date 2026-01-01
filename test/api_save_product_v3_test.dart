@@ -31,13 +31,13 @@ void main() {
       ];
       final ProductResultV3 status =
           await OpenFoodAPIClient.temporarySaveProductV3(
-        TestConstants.TEST_USER,
-        barcode,
-        uriHelper: uriHelper,
-        country: country,
-        language: language,
-        packagings: inputPackagings,
-      );
+            TestConstants.TEST_USER,
+            barcode,
+            uriHelper: uriHelper,
+            country: country,
+            language: language,
+            packagings: inputPackagings,
+          );
 
       expect(status.status, ProductResultV3.statusWarning);
       expect(status.errors, isEmpty);
@@ -78,13 +78,13 @@ void main() {
       for (final bool value in values) {
         final ProductResultV3 writeStatus =
             await OpenFoodAPIClient.temporarySaveProductV3(
-          TestConstants.TEST_USER,
-          barcode,
-          uriHelper: uriHelper,
-          country: country,
-          language: language,
-          packagingsComplete: value,
-        );
+              TestConstants.TEST_USER,
+              barcode,
+              uriHelper: uriHelper,
+              country: country,
+              language: language,
+              packagingsComplete: value,
+            );
 
         expect(writeStatus.status, ProductResultV3.statusSuccess);
         expect(writeStatus.errors, isEmpty);
@@ -100,10 +100,7 @@ void main() {
             language: language,
             country: country,
             version: ProductQueryVersion.v3,
-            fields: [
-              ProductField.BARCODE,
-              ProductField.PACKAGINGS_COMPLETE,
-            ],
+            fields: [ProductField.BARCODE, ProductField.PACKAGINGS_COMPLETE],
           ),
           user: TestConstants.TEST_USER,
           uriHelper: uriHelper,
@@ -134,13 +131,13 @@ void main() {
       ];
       final ProductResultV3 status =
           await OpenFoodAPIClient.temporarySaveProductV3(
-        TestConstants.TEST_USER,
-        barcode,
-        uriHelper: uriHelper,
-        country: country,
-        language: language,
-        packagings: inputPackagings,
-      );
+            TestConstants.TEST_USER,
+            barcode,
+            uriHelper: uriHelper,
+            country: country,
+            language: language,
+            packagings: inputPackagings,
+          );
 
       expect(status.status, ProductResultV3.statusWarning);
       expect(status.errors, isEmpty);

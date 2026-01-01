@@ -1,4 +1,4 @@
-import 'package:openfoodfacts/src/model/off_tagged.dart';
+import '../model/off_tagged.dart';
 
 /// Fuzziness Level for Elastic Search API.
 ///
@@ -9,9 +9,7 @@ enum Fuzziness implements OffTagged {
   one(offTag: '1'),
   two(offTag: '2');
 
-  const Fuzziness({
-    required this.offTag,
-  });
+  const Fuzziness({required this.offTag});
 
   @override
   final String offTag;
