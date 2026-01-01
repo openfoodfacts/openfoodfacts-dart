@@ -1,6 +1,6 @@
 name: Run sdk tests
 
-on: 
+on:
   push:
   pull_request:
   schedule:
@@ -23,7 +23,7 @@ jobs:
         run: dart pub get
 
       - name: Check for formatting issues (run "flutter format . ")
-        run: dart format --set-exit-if-changed .
+        run: dart --version && dart format --set-exit-if-changed .
 
       - name: Analyze project
         run: dart analyze
