@@ -1,7 +1,7 @@
+import '../interface/json_map.dart';
 import '../utils/country_helper.dart';
 import '../utils/language_helper.dart';
 import 'external_source_filter.dart';
-import 'json_map.dart';
 
 /// External Source Metadata.
 class ExternalSourceMetadata extends JsonMap {
@@ -57,9 +57,8 @@ class ExternalSourceMetadata extends JsonMap {
     final String barcode,
     final OpenFoodFactsLanguage language,
     final OpenFoodFactsCountry country,
-  ) =>
-      knowledgePanelUrl
-          .replaceFirst(r'$code', barcode)
-          .replaceFirst(r'$lc', language.offTag)
-          .replaceFirst(r'$cc', country.offTag);
+  ) => knowledgePanelUrl
+      .replaceFirst(r'$code', barcode)
+      .replaceFirst(r'$lc', language.offTag)
+      .replaceFirst(r'$cc', country.offTag);
 }

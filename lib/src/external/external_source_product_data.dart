@@ -1,5 +1,5 @@
+import '../interface/json_map.dart';
 import '../model/knowledge_panels.dart';
-import 'json_map.dart';
 
 /// External Source Product Data, including knowledge panels.
 class ExternalSourceProductData extends JsonMap {
