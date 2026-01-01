@@ -84,21 +84,18 @@ The result of the request will be returned as string.</p>
   required final UriHelper uriHelper,
   final String? bearerToken,
   final bool addUserAgentParameters = true,
-}) async =&gt;
-    http.patch(
-      uri,
-      headers: _buildHeaders(
-        user: user,
-        uriHelper: uriHelper,
-        addCredentialsToHeader: false,
-        bearerToken: bearerToken,
-      ),
-      body: jsonEncode(
-        addUserAgentParameters
-            ? HttpHelper.addUserAgentParameters(body)
-            : body,
-      ),
-    );</code></pre>
+}) async =&gt; http.patch(
+  uri,
+  headers: _buildHeaders(
+    user: user,
+    uriHelper: uriHelper,
+    addCredentialsToHeader: false,
+    bearerToken: bearerToken,
+  ),
+  body: jsonEncode(
+    addUserAgentParameters ? HttpHelper.addUserAgentParameters(body) : body,
+  ),
+);</code></pre>
 </section>
 
 

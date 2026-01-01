@@ -86,10 +86,7 @@
     value: value,
   );
   final Response response = await HttpHelper().doGetRequest(
-    uriHelper.getUri(
-      path: &#39;products&#47;stats&#39;,
-      queryParameters: parameters,
-    ),
+    uriHelper.getUri(path: &#39;products&#47;stats&#39;, queryParameters: parameters),
     uriHelper: uriHelper,
   );
   _checkResponse(response);

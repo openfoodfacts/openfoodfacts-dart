@@ -64,13 +64,13 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">factory AttributeGroup.fromJson(dynamic json) =&gt; AttributeGroup(
-      id: json[_JSON_TAG_ID] as String?,
-      name: json[_JSON_TAG_NAME] as String?,
-      warning: json[_JSON_TAG_WARNING] as String?,
-      attributes: (json[_JSON_TAG_ATTRIBUTES] as List?)
-          ?.map((item) =&gt; Attribute.fromJson(item))
-          .toList(),
-    );</code></pre>
+  id: json[_JSON_TAG_ID] as String?,
+  name: json[_JSON_TAG_NAME] as String?,
+  warning: json[_JSON_TAG_WARNING] as String?,
+  attributes: (json[_JSON_TAG_ATTRIBUTES] as List?)
+      ?.map((item) =&gt; Attribute.fromJson(item))
+      .toList(),
+);</code></pre>
 </section>
 
 

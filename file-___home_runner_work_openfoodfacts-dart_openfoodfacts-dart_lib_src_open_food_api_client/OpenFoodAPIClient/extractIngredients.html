@@ -96,14 +96,12 @@ or if there is already an ingredients image but no extracted ingredients.</p>
   OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
-  final Uri uri = uriHelper.getPostUri(
-    path: &#39;&#47;cgi&#47;ingredients.pl&#39;,
-  );
+  final Uri uri = uriHelper.getPostUri(path: &#39;&#47;cgi&#47;ingredients.pl&#39;);
   final Map&lt;String, String&gt; queryParameters = &lt;String, String&gt;{
     &#39;code&#39;: barcode,
     &#39;process_image&#39;: &#39;1&#39;,
     &#39;id&#39;: &#39;ingredients_${language.offTag}&#39;,
-    &#39;ocr_engine&#39;: ocrField.offTag
+    &#39;ocr_engine&#39;: ocrField.offTag,
   };
   final Response response = await HttpHelper().doPostRequest(
     uri,

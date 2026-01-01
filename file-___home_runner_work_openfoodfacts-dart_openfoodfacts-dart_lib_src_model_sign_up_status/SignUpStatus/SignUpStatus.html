@@ -71,9 +71,7 @@
       error: Status.serverErrorInEnglish,
     );
   } else if (status.body!.contains(&#39;loggedin&#39;)) {
-    return SignUpStatus._(
-      status: 201,
-    );
+    return SignUpStatus._(status: 201);
   } else {
     return SignUpStatus._(
       status: 400,

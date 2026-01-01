@@ -77,7 +77,8 @@
   <pre class="language-dart"><code class="language-dart">static RecommendedDailyIntake getRecommendedDailyIntakes() {
   &#47;&#47;return RecommendedDailyIntake.fromJson(await _loadRecommendationAsset());
   return RecommendedDailyIntake.fromJson(
-      RecommendedDailyIntakeHelper.getEURecommendationsJson());
+    RecommendedDailyIntakeHelper.getEURecommendationsJson(),
+  );
 }</code></pre>
 </section>
 

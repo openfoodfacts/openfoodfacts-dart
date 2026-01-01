@@ -73,22 +73,21 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Map&lt;String, dynamic&gt; toJson() =&gt; &lt;String, dynamic&gt;{
-      if (type != null) &#39;type&#39;: type!.offTag,
-      if (date != null) &#39;date&#39;: GetParametersHelper.formatDate(date!),
-      if (currency != null) &#39;currency&#39;: currency!.name,
-      if (locationOSMId != null) &#39;location_osm_id&#39;: locationOSMId,
-      if (locationOSMType != null)
-        &#39;location_osm_type&#39;: locationOSMType!.offTag,
-      if (receiptPriceCount != null) &#39;receipt_price_count&#39;: receiptPriceCount,
-      if (receiptPriceTotal != null) &#39;receipt_price_total&#39;: receiptPriceTotal,
-      if (receiptOnlineDeliveryCosts != null)
-        &#39;receipt_online_delivery_costs&#39;: receiptOnlineDeliveryCosts,
-      if (readyForPriceTagValidation != null)
-        &#39;ready_for_price_tag_validation&#39;: readyForPriceTagValidation,
-      if (ownerConsumption != null) &#39;owner_consumption&#39;: ownerConsumption,
-      if (ownerComment != null) &#39;owner_comment&#39;: ownerComment,
-      if (locationId != null) &#39;location_id&#39;: locationId,
-    };</code></pre>
+  if (type != null) &#39;type&#39;: type!.offTag,
+  if (date != null) &#39;date&#39;: GetParametersHelper.formatDate(date!),
+  if (currency != null) &#39;currency&#39;: currency!.name,
+  if (locationOSMId != null) &#39;location_osm_id&#39;: locationOSMId,
+  if (locationOSMType != null) &#39;location_osm_type&#39;: locationOSMType!.offTag,
+  if (receiptPriceCount != null) &#39;receipt_price_count&#39;: receiptPriceCount,
+  if (receiptPriceTotal != null) &#39;receipt_price_total&#39;: receiptPriceTotal,
+  if (receiptOnlineDeliveryCosts != null)
+    &#39;receipt_online_delivery_costs&#39;: receiptOnlineDeliveryCosts,
+  if (readyForPriceTagValidation != null)
+    &#39;ready_for_price_tag_validation&#39;: readyForPriceTagValidation,
+  if (ownerConsumption != null) &#39;owner_consumption&#39;: ownerConsumption,
+  if (ownerComment != null) &#39;owner_comment&#39;: ownerComment,
+  if (locationId != null) &#39;location_id&#39;: locationId,
+};</code></pre>
 </section>
 
 

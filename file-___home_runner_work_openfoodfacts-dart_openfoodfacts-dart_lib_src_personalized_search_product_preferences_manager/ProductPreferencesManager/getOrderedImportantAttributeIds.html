@@ -76,8 +76,9 @@
       if (attributeGroup.attributes != null) {
         for (final Attribute attribute in attributeGroup.attributes!) {
           final String attributeId = attribute.id!;
-          final String importanceId =
-              getImportanceIdForAttributeId(attributeId);
+          final String importanceId = getImportanceIdForAttributeId(
+            attributeId,
+          );
           final int? importanceIndex = _availablePreferenceImportances
               ?.getImportanceIndex(importanceId);
           if (importanceIndex != null) {

@@ -80,10 +80,7 @@ price).</p>
   required final String bearerToken,
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
-  final Uri uri = getUri(
-    path: &#39;&#47;api&#47;v1&#47;prices&#39;,
-    uriHelper: uriHelper,
-  );
+  final Uri uri = getUri(path: &#39;&#47;api&#47;v1&#47;prices&#39;, uriHelper: uriHelper);
   final Map&lt;String, dynamic&gt; body = &lt;String, dynamic&gt;{
     &#39;price&#39;: price.price,
     &#39;currency&#39;: price.currency.name,

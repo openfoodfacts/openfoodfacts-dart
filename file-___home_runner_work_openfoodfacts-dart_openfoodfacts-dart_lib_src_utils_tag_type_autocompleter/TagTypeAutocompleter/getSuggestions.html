@@ -73,9 +73,7 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
-Future&lt;List&lt;String&gt;&gt; getSuggestions(
-  final String input,
-) async =&gt;
+Future&lt;List&lt;String&gt;&gt; getSuggestions(final String input) async =&gt;
     OpenFoodAPIClient.getSuggestions(
       tagType,
       input: input,

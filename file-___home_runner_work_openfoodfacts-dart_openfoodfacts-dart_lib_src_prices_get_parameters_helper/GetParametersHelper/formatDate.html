@@ -71,10 +71,7 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static String formatDate(
-  final DateTime date, {
-  bool dayOnly = true,
-}) {
+  <pre class="language-dart"><code class="language-dart">static String formatDate(final DateTime date, {bool dayOnly = true}) {
   final String result = date.toIso8601String();
   if (dayOnly) {
     return result.substring(0, 10);

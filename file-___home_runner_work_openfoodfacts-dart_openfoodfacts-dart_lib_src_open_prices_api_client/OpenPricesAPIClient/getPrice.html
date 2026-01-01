@@ -86,9 +86,7 @@
   if (response.statusCode == 200) {
     try {
       final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-      return MaybeError&lt;Price&gt;.value(
-        Price.fromJson(decodedResponse),
-      );
+      return MaybeError&lt;Price&gt;.value(Price.fromJson(decodedResponse));
     } catch (e) {
       &#47;&#47;
     }

@@ -78,16 +78,15 @@
   User? user,
   required final UriHelper uriHelper,
   final String? bearerToken,
-}) async =&gt;
-    http.delete(
-      uri,
-      headers: _buildHeaders(
-        user: user,
-        uriHelper: uriHelper,
-        addCredentialsToHeader: false,
-        bearerToken: bearerToken,
-      ),
-    );</code></pre>
+}) async =&gt; http.delete(
+  uri,
+  headers: _buildHeaders(
+    user: user,
+    uriHelper: uriHelper,
+    addCredentialsToHeader: false,
+    bearerToken: bearerToken,
+  ),
+);</code></pre>
 </section>
 
 

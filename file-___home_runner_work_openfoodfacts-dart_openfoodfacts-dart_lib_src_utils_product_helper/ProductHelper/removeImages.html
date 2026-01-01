@@ -77,10 +77,12 @@
   }
 
   for (var field in ImageField.values) {
-    if (product.selectedImages!
-        .any((i) =&gt; i.field == field &amp;&amp; i.language == language)) {
-      product.selectedImages!
-          .removeWhere((i) =&gt; i.field == field &amp;&amp; i.language != language);
+    if (product.selectedImages!.any(
+      (i) =&gt; i.field == field &amp;&amp; i.language == language,
+    )) {
+      product.selectedImages!.removeWhere(
+        (i) =&gt; i.field == field &amp;&amp; i.language != language,
+      );
     }
   }
 }</code></pre>

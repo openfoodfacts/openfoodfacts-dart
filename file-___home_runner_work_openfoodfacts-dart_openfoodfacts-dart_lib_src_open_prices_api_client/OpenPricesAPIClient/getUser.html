@@ -75,14 +75,14 @@
   final Uri uri = OpenPricesAPIClient.getUri(
     path: &#39;&#47;api&#47;v1&#47;users&#47;${Uri.encodeComponent(username)}&#39;,
   );
-  final http.Response response =
-      await HttpHelper().doGetRequest(uri, uriHelper: uriHelper);
+  final http.Response response = await HttpHelper().doGetRequest(
+    uri,
+    uriHelper: uriHelper,
+  );
   try {
     if (response.statusCode == 200) {
       final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-      return MaybeError&lt;PriceUser&gt;.value(
-        PriceUser.fromJson(decodedResponse),
-      );
+      return MaybeError&lt;PriceUser&gt;.value(PriceUser.fromJson(decodedResponse));
     }
   } catch (e) {
     &#47;&#47;

@@ -87,10 +87,7 @@
     if (limit != null) &#39;limit&#39;: limit.toString(),
   };
   final Response response = await HttpHelper().doGetRequest(
-    uriHelper.getUri(
-      path: &#39;values&#47;$key&#39;,
-      queryParameters: parameters,
-    ),
+    uriHelper.getUri(path: &#39;values&#47;$key&#39;, queryParameters: parameters),
     uriHelper: uriHelper,
   );
   _checkResponse(response);

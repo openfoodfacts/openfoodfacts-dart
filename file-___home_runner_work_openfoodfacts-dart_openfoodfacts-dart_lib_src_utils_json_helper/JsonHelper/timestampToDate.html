@@ -76,8 +76,9 @@
   }
   final int timestamp = JsonObject.parseInt(json)!;
   return DateTime.fromMillisecondsSinceEpoch(
-      Duration.millisecondsPerSecond * timestamp,
-      isUtc: true);
+    Duration.millisecondsPerSecond * timestamp,
+    isUtc: true,
+  );
 }</code></pre>
 </section>
 

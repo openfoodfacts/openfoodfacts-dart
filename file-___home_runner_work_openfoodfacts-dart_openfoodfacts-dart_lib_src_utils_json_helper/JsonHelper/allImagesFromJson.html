@@ -116,8 +116,9 @@
     }
 
     if (imageId != null) {
-      final DateTime? uploaded =
-          timestampToDate(fieldObject[_ALL_IMAGES_TAG_UPLOADED]);
+      final DateTime? uploaded = timestampToDate(
+        fieldObject[_ALL_IMAGES_TAG_UPLOADED],
+      );
       final String? contributor = fieldObject[_ALL_IMAGES_TAG_UPLOADER];
       &#47;&#47; get each number object (e.g. 200)
       for (var size in ImageSize.values) {
@@ -141,8 +142,9 @@
       continue;
     }
 
-    final int? rev =
-        JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_REVISION]);
+    final int? rev = JsonObject.parseInt(
+      fieldObject[_ALL_IMAGES_TAG_REVISION],
+    );
     final String imgid = fieldObject[_ALL_IMAGES_TAG_IMAGE_ID].toString();
     final ImageAngle? angle = ImageAngleExtension.fromInt(
       JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_ANGLE]),
@@ -161,10 +163,12 @@
       if (numberObject == null) {
         continue;
       }
-      final int? width =
-          JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_WIDTH]);
-      final int? height =
-          JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]);
+      final int? width = JsonObject.parseInt(
+        numberObject[_ALL_IMAGES_TAG_WIDTH],
+      );
+      final int? height = JsonObject.parseInt(
+        numberObject[_ALL_IMAGES_TAG_HEIGHT],
+      );
       final String? url = numberObject[_ALL_IMAGES_TAG_URL];
 
       var image = ProductImage(

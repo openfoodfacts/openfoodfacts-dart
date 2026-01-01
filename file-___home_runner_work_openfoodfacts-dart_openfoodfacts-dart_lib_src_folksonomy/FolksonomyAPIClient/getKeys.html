@@ -82,10 +82,7 @@
     if (query != null) &#39;q&#39;: query,
   };
   final Response response = await HttpHelper().doGetRequest(
-    uriHelper.getUri(
-      path: &#39;keys&#39;,
-      queryParameters: parameters,
-    ),
+    uriHelper.getUri(path: &#39;keys&#39;, queryParameters: parameters),
     uriHelper: uriHelper,
   );
   _checkResponse(response);

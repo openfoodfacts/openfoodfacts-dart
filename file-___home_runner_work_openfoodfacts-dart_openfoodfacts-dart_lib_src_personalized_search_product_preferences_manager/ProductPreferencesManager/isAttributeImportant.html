@@ -72,8 +72,8 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">bool? isAttributeImportant(String attributeId) {
   final String importanceId = getImportanceIdForAttributeId(attributeId);
-  final int? importanceIndex =
-      _availablePreferenceImportances?.getImportanceIndex(importanceId);
+  final int? importanceIndex = _availablePreferenceImportances
+      ?.getImportanceIndex(importanceId);
   if (importanceIndex == null) {
     return null;
   }

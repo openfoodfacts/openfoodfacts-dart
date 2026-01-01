@@ -96,9 +96,7 @@
   final User user, {
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
-  final Uri uri = uriHelper.getPostUri(
-    path: &#39;&#47;cgi&#47;auth.pl&#39;,
-  );
+  final Uri uri = uriHelper.getPostUri(path: &#39;&#47;cgi&#47;auth.pl&#39;);
   final Response response = await HttpHelper().doPostRequest(
     uri,
     &lt;String, String&gt;{&#39;body&#39;: &#39;1&#39;},

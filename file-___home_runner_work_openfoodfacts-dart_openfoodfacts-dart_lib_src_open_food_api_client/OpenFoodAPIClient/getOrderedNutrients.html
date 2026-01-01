@@ -92,17 +92,16 @@ elsewhere.</p>
   required final OpenFoodFactsLanguage language,
   final bool excludeReadOnly = true,
   final UriProductHelper uriHelper = uriHelperFoodProd,
-}) async =&gt;
-    OrderedNutrients.fromJson(
-      HttpHelper().jsonDecode(
-        await getOrderedNutrientsJsonString(
-          country: country,
-          language: language,
-          uriHelper: uriHelper,
-        ),
-      ),
-      excludeReadOnly: excludeReadOnly,
-    );</code></pre>
+}) async =&gt; OrderedNutrients.fromJson(
+  HttpHelper().jsonDecode(
+    await getOrderedNutrientsJsonString(
+      country: country,
+      language: language,
+      uriHelper: uriHelper,
+    ),
+  ),
+  excludeReadOnly: excludeReadOnly,
+);</code></pre>
 </section>
 
 

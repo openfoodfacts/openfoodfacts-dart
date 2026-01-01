@@ -86,8 +86,9 @@
       &lt;OpenFoodFactsCountry, String&gt;{};
   final Map&lt;String, dynamic&gt; map = HttpHelper().jsonDecode(response.body);
   for (final String countryCode in map.keys) {
-    final OpenFoodFactsCountry? country =
-        OpenFoodFactsCountry.fromOffTag(countryCode);
+    final OpenFoodFactsCountry? country = OpenFoodFactsCountry.fromOffTag(
+      countryCode,
+    );
     if (country == null) {
       &#47;&#47; very unlikely
       continue;

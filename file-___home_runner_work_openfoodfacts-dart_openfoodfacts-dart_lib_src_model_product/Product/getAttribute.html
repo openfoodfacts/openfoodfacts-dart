@@ -70,12 +70,10 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Attribute? getAttribute(
-  final String attributeId,
-) {
-  final Map&lt;String, Attribute&gt; attributes = getAttributes(
-    &lt;String&gt;[attributeId],
-  );
+  <pre class="language-dart"><code class="language-dart">Attribute? getAttribute(final String attributeId) {
+  final Map&lt;String, Attribute&gt; attributes = getAttributes(&lt;String&gt;[
+    attributeId,
+  ]);
   return attributes[attributeId];
 }</code></pre>
 </section>

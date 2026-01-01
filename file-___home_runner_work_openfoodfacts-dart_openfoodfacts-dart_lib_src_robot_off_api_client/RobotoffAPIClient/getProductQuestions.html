@@ -87,8 +87,9 @@
     if (count != null) &#39;count&#39;: count.toString(),
     if (serverType != null) &#39;server_type&#39;: serverType.offTag,
     if (insightTypes != null)
-      &#39;insight_types&#39;:
-          insightTypes.map((InsightType type) =&gt; type.offTag).join(&#39;,&#39;),
+      &#39;insight_types&#39;: insightTypes
+          .map((InsightType type) =&gt; type.offTag)
+          .join(&#39;,&#39;),
   };
 
   var robotoffQuestionUri = uriHelper.getUri(

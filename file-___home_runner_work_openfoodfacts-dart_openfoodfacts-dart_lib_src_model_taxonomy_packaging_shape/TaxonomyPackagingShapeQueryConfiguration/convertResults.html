@@ -81,8 +81,10 @@ Map&lt;String, TaxonomyPackagingShape&gt; convertResults(dynamic jsonData) {
   if (jsonData is! Map&lt;String, dynamic&gt;) {
     return const {};
   }
-  return jsonData
-      .map&lt;String, TaxonomyPackagingShape&gt;((String key, dynamic taxonomy) {
+  return jsonData.map&lt;String, TaxonomyPackagingShape&gt;((
+    String key,
+    dynamic taxonomy,
+  ) {
     if (taxonomy is! Map&lt;String, dynamic&gt;) {
       assert(false, &#39;Received JSON Packaging Shape is not a Map&#39;);
       return MapEntry(key, TaxonomyPackagingShape.fromJson({}));

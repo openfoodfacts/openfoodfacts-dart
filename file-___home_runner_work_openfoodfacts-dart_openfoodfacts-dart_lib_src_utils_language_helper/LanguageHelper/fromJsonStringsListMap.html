@@ -78,7 +78,8 @@
   }
   if (map is! Map&lt;String, dynamic&gt;) {
     throw Exception(
-        &#39;Expected type: Map&lt;String, List&lt;String&gt;&gt;, got ${map.runtimeType}&#39;);
+      &#39;Expected type: Map&lt;String, List&lt;String&gt;&gt;, got ${map.runtimeType}&#39;,
+    );
   }
   final result = &lt;OpenFoodFactsLanguage, List&lt;String&gt;&gt;{};
   for (final key in map.keys) {

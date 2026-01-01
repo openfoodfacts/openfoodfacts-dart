@@ -84,7 +84,8 @@ mainly for debugging or logging.</p>
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
-String toString() =&gt; &#39;EventsBase(eventType: $eventType&#39;
+String toString() =&gt;
+    &#39;EventsBase(eventType: $eventType&#39;
     &#39;${timestamp == null ? &#39;&#39; : &#39;, timestamp: $timestamp&#39;}&#39;
     &#39;${userId == null ? &#39;&#39; : &#39;, userId: $userId&#39;}&#39;
     &#39;${barcode == null ? &#39;&#39; : &#39;, barcode: $barcode&#39;}&#39;

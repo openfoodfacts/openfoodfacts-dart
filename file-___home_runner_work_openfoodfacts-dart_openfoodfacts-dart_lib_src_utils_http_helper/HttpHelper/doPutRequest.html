@@ -80,17 +80,16 @@
   User? user,
   required final UriHelper uriHelper,
   final String? bearerToken,
-}) async =&gt;
-    http.put(
-      uri,
-      headers: _buildHeaders(
-        user: user,
-        uriHelper: uriHelper,
-        addCredentialsToHeader: false,
-        bearerToken: bearerToken,
-      ),
-      body: jsonBody,
-    );</code></pre>
+}) async =&gt; http.put(
+  uri,
+  headers: _buildHeaders(
+    user: user,
+    uriHelper: uriHelper,
+    addCredentialsToHeader: false,
+    bearerToken: bearerToken,
+  ),
+  body: jsonBody,
+);</code></pre>
 </section>
 
 

@@ -79,9 +79,7 @@ Use <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dar
   required final OpenFoodFactsLanguage language,
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
-  final Uri uri = uriHelper.getPostUri(
-    path: &#39;cgi&#47;nutrients.pl&#39;,
-  );
+  final Uri uri = uriHelper.getPostUri(path: &#39;cgi&#47;nutrients.pl&#39;);
   Map&lt;String, String&gt; queryParameters = &lt;String, String&gt;{
     &#39;cc&#39;: country.offTag,
     &#39;lc&#39;: language.offTag,

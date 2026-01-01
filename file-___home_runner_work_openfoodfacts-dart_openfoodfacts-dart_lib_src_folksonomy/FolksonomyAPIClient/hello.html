@@ -74,9 +74,7 @@
   final UriHelper uriHelper = uriHelperFolksonomyProd,
 }) async {
   final Response response = await HttpHelper().doGetRequest(
-    uriHelper.getUri(
-      path: &#39;&#47;&#39;,
-    ),
+    uriHelper.getUri(path: &#39;&#47;&#39;),
     uriHelper: uriHelper,
   );
   _checkResponse(response);

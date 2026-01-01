@@ -78,10 +78,10 @@ values.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Iterable&lt;String&gt; convertFieldsToStrings(
-        Iterable&lt;TaxonomyOriginField&gt; fields) =&gt;
-    fields
-        .where((TaxonomyOriginField field) =&gt; !ignoredFields.contains(field))
-        .map&lt;String&gt;((TaxonomyOriginField field) =&gt; field.offTag);</code></pre>
+  Iterable&lt;TaxonomyOriginField&gt; fields,
+) =&gt; fields
+    .where((TaxonomyOriginField field) =&gt; !ignoredFields.contains(field))
+    .map&lt;String&gt;((TaxonomyOriginField field) =&gt; field.offTag);</code></pre>
 </section>
 
 

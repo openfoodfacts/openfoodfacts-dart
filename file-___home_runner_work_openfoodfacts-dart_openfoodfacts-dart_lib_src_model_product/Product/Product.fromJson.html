@@ -205,8 +205,10 @@
         setLanguageListString(productField, language, json, key);
         return;
       case ProductField.IMAGES_FRESHNESS_IN_LANGUAGES:
-        final Map&lt;ImageField, int&gt; values =
-            _jsonValueToImagesFreshness(json[key], language);
+        final Map&lt;ImageField, int&gt; values = _jsonValueToImagesFreshness(
+          json[key],
+          language,
+        );
         result.imagesFreshnessInLanguages ??= {};
         result.imagesFreshnessInLanguages![language] = values;
         return;
@@ -266,8 +268,10 @@
       ProductField.getInLanguagesList(),
     );
     if (productField != null) {
-      final OpenFoodFactsLanguage language =
-          _langFrom(key, productField.offTag);
+      final OpenFoodFactsLanguage language = _langFrom(
+        key,
+        productField.offTag,
+      );
       if (language != OpenFoodFactsLanguage.UNDEFINED) {
         addInLanguagesData(productField, language, json, key);
       }

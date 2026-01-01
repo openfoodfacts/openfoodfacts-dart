@@ -99,23 +99,22 @@ Returns null if KO, but would probably throw an exception instead.</p>
   required final User user,
   final ImageAngle angle = ImageAngle.NOON,
   final UriProductHelper uriHelper = uriHelperFoodProd,
-}) async =&gt;
-    _callProductImageCrop(
-      barcode: barcode,
-      imageField: imageField,
-      language: language,
-      imgid: imgid,
-      user: user,
-      extraParameters: &lt;String, String&gt;{
-        &#39;x1&#39;: x1.toString(),
-        &#39;y1&#39;: y1.toString(),
-        &#39;x2&#39;: x2.toString(),
-        &#39;y2&#39;: y2.toString(),
-        &#39;angle&#39;: angle.degreesClockwise,
-        &#39;coordinates_image_size&#39;: &#39;full&#39;,
-      },
-      uriHelper: uriHelper,
-    );</code></pre>
+}) async =&gt; _callProductImageCrop(
+  barcode: barcode,
+  imageField: imageField,
+  language: language,
+  imgid: imgid,
+  user: user,
+  extraParameters: &lt;String, String&gt;{
+    &#39;x1&#39;: x1.toString(),
+    &#39;y1&#39;: y1.toString(),
+    &#39;x2&#39;: x2.toString(),
+    &#39;y2&#39;: y2.toString(),
+    &#39;angle&#39;: angle.degreesClockwise,
+    &#39;coordinates_image_size&#39;: &#39;full&#39;,
+  },
+  uriHelper: uriHelper,
+);</code></pre>
 </section>
 
 

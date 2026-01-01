@@ -81,8 +81,9 @@
     }
     for (final Attribute attribute in attributeGroup.attributes!) {
       final String attributeId = attribute.id!;
-      final String foundImportanceId =
-          getImportanceIdForAttributeId(attributeId);
+      final String foundImportanceId = getImportanceIdForAttributeId(
+        attributeId,
+      );
       if (importanceId == foundImportanceId) {
         result.add(attributeId);
       }

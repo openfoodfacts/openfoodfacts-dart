@@ -94,9 +94,7 @@ Future&lt;Response&gt; getResponse(
     );
   }
   return await HttpHelper().doPostRequest(
-    uriHelper.getPostUri(
-      path: getUriPath(),
-    ),
+    uriHelper.getPostUri(path: getUriPath()),
     getParametersMap(),
     user,
     uriHelper: uriHelper,

@@ -104,12 +104,14 @@ The result in FRENCH would then be something like <code>{'en:banana': 'banane', 
   try {
     final Map&lt;String, dynamic&gt; json = HttpHelper().jsonDecode(response.body);
     final String result = json[&#39;local_tags_list&#39;];
-    final List&lt;String&gt; splitResult =
-        result.isEmpty ? &lt;String&gt;[] : result.split(&#39;, &#39;);
+    final List&lt;String&gt; splitResult = result.isEmpty
+        ? &lt;String&gt;[]
+        : result.split(&#39;, &#39;);
     if (input.length != splitResult.length) {
       return MaybeError&lt;Map&lt;String, String&gt;&gt;.error(
         statusCode: response.statusCode,
-        error: &#39;Mismatched result count:&#39;
+        error:
+            &#39;Mismatched result count:&#39;
             &#39; input(${input.length})&#39;
             &#39;,output(${splitResult.length})&#39;,
       );

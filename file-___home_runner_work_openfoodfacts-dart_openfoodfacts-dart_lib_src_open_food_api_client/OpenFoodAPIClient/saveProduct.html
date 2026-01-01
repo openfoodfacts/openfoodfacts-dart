@@ -115,9 +115,7 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
     parameterMap[&#39;cc&#39;] = country.offTag;
   }
 
-  var productUri = uriHelper.getPostUri(
-    path: &#39;&#47;cgi&#47;product_jqm2.pl&#39;,
-  );
+  var productUri = uriHelper.getPostUri(path: &#39;&#47;cgi&#47;product_jqm2.pl&#39;);
 
   if (product.nutriments != null) {
     final Map&lt;String, String&gt; rawNutrients = product.nutriments!.toData();

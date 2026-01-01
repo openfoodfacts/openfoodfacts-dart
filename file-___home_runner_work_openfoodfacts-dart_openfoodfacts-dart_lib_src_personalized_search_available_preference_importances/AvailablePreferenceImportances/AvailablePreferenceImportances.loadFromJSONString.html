@@ -73,8 +73,9 @@
   final Map&lt;String, PreferenceImportance&gt; preferenceImportances =
       &lt;String, PreferenceImportance&gt;{};
   final Map&lt;String, int&gt; importancesReverseIds = &lt;String, int&gt;{};
-  final dynamic inputJson =
-      HttpHelper().jsonDecode(preferenceImportancesString);
+  final dynamic inputJson = HttpHelper().jsonDecode(
+    preferenceImportancesString,
+  );
   for (final dynamic item in inputJson as List&lt;dynamic&gt;) {
     final PreferenceImportance preferenceImportance =
         PreferenceImportance.fromJson(item);
@@ -87,7 +88,8 @@
   }
   if (importanceIds.isEmpty) {
     throw Exception(
-        &#39;Unexpected error: empty preference importance list from json string $preferenceImportancesString&#39;);
+      &#39;Unexpected error: empty preference importance list from json string $preferenceImportancesString&#39;,
+    );
   }
   int i = 0;
   for (final String preferenceImportanceId in importanceIds) {

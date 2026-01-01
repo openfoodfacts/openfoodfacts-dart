@@ -84,17 +84,17 @@ For instance</p>
   final Uri uri, {
   OpenFoodFactsLanguage? language,
   OpenFoodFactsCountry? country,
-}) =&gt;
-    replaceSubdomainWithCodes(
-      uri,
-      languageCode: language?.code ??
-          (OpenFoodAPIConfiguration.globalLanguages != null &amp;&amp;
-                  OpenFoodAPIConfiguration.globalLanguages!.isNotEmpty
-              ? OpenFoodAPIConfiguration.globalLanguages![0].code
-              : null),
-      countryCode:
-          country?.offTag ?? OpenFoodAPIConfiguration.globalCountry?.offTag,
-    );</code></pre>
+}) =&gt; replaceSubdomainWithCodes(
+  uri,
+  languageCode:
+      language?.code ??
+      (OpenFoodAPIConfiguration.globalLanguages != null &amp;&amp;
+              OpenFoodAPIConfiguration.globalLanguages!.isNotEmpty
+          ? OpenFoodAPIConfiguration.globalLanguages![0].code
+          : null),
+  countryCode:
+      country?.offTag ?? OpenFoodAPIConfiguration.globalCountry?.offTag,
+);</code></pre>
 </section>
 
 

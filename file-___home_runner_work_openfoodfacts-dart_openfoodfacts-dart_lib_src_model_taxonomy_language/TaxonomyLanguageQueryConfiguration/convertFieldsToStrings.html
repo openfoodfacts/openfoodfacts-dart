@@ -78,7 +78,8 @@ values.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Iterable&lt;String&gt; convertFieldsToStrings(
-    Iterable&lt;TaxonomyLanguageField&gt; fields) {
+  Iterable&lt;TaxonomyLanguageField&gt; fields,
+) {
   return fields
       .where((TaxonomyLanguageField field) =&gt; !ignoredFields.contains(field))
       .map&lt;String&gt;((TaxonomyLanguageField field) =&gt; field.offTag);

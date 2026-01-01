@@ -79,11 +79,9 @@ values.</p>
   <pre class="language-dart"><code class="language-dart">@override
 Iterable&lt;String&gt; convertFieldsToStrings(
   Iterable&lt;TaxonomyPackagingField&gt; fields,
-) =&gt;
-    fields
-        .where(
-            (TaxonomyPackagingField field) =&gt; !ignoredFields.contains(field))
-        .map&lt;String&gt;((TaxonomyPackagingField field) =&gt; field.offTag);</code></pre>
+) =&gt; fields
+    .where((TaxonomyPackagingField field) =&gt; !ignoredFields.contains(field))
+    .map&lt;String&gt;((TaxonomyPackagingField field) =&gt; field.offTag);</code></pre>
 </section>
 
 

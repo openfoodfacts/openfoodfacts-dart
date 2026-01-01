@@ -81,15 +81,10 @@ token is returned, to be used in later requests with usual
   required final String password,
   final UriHelper uriHelper = uriHelperFolksonomyProd,
 }) async {
-  final Uri uri = uriHelper.getUri(
-    path: &#39;&#47;auth&#39;,
-  );
+  final Uri uri = uriHelper.getUri(path: &#39;&#47;auth&#39;);
   final Response response = await post(
     uri,
-    body: &lt;String, String&gt;{
-      &#39;username&#39;: username,
-      &#39;password&#39;: password,
-    },
+    body: &lt;String, String&gt;{&#39;username&#39;: username, &#39;password&#39;: password},
   );
   if (response.statusCode == 200) {
     try {

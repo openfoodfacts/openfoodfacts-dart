@@ -88,10 +88,11 @@ As result a json object of the "type" Status is expected.</p>
 
   request.headers.addAll(
     _buildHeaders(
-      user: user,
-      uriHelper: uriHelper,
-      addCredentialsToHeader: false,
-    ) as Map&lt;String, String&gt;,
+          user: user,
+          uriHelper: uriHelper,
+          addCredentialsToHeader: false,
+        )
+        as Map&lt;String, String&gt;,
   );
 
   request.headers.addAll({&#39;Content-Type&#39;: &#39;multipart&#47;form-data&#39;});
@@ -105,8 +106,11 @@ As result a json object of the "type" Status is expected.</p>
   if (files != null) {
     for (MapEntry&lt;String, Uri&gt; entry in files.entries) {
       List&lt;int&gt; fileBytes = await UriReader.instance.readAsBytes(entry.value);
-      var multipartFile = http.MultipartFile.fromBytes(entry.key, fileBytes,
-          filename: basename(entry.value.toString()));
+      var multipartFile = http.MultipartFile.fromBytes(
+        entry.key,
+        fileBytes,
+        filename: basename(entry.value.toString()),
+      );
       request.files.add(multipartFile);
     }
   }
@@ -123,10 +127,7 @@ As result a json object of the "type" Status is expected.</p>
       return Status(status: 200, body: responseBody);
     }
   } else {
-    return Status(
-      status: response.statusCode,
-      error: response.reasonPhrase,
-    );
+    return Status(status: response.statusCode, error: response.reasonPhrase);
   }
 }</code></pre>
 </section>

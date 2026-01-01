@@ -95,10 +95,7 @@
     parameters[&#39;limit&#39;] = limit.toString();
   }
   final Response response = await HttpHelper().doGetRequest(
-    uriHelper.getUri(
-      path: &#39;&#47;events&#39;,
-      queryParameters: parameters,
-    ),
+    uriHelper.getUri(path: &#39;&#47;events&#39;, queryParameters: parameters),
     uriHelper: uriHelper,
   );
   _checkResponse(response);

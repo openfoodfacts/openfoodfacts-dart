@@ -87,7 +87,9 @@
 
   if (queryLanguages.isNotEmpty) {
     result.putIfAbsent(
-        &#39;lc&#39;, () =&gt; queryLanguages.map((e) =&gt; e.offTag).join(&#39;,&#39;));
+      &#39;lc&#39;,
+      () =&gt; queryLanguages.map((e) =&gt; e.offTag).join(&#39;,&#39;),
+    );
     &#47;&#47; the result looks like crap if we put several languages
     result.putIfAbsent(&#39;tags_lc&#39;, () =&gt; queryLanguages.first.offTag);
   }
@@ -113,7 +115,9 @@
       TagFilter tf = p;
       result.putIfAbsent(&#39;tagtype_$filterTagCount&#39;, () =&gt; tf.getTagType());
       result.putIfAbsent(
-          &#39;tag_contains_$filterTagCount&#39;, () =&gt; tf.getContains());
+        &#39;tag_contains_$filterTagCount&#39;,
+        () =&gt; tf.getContains(),
+      );
       result.putIfAbsent(&#39;tag_$filterTagCount&#39;, () =&gt; tf.getTagName());
       filterTagCount++;
     } else {

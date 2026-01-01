@@ -86,9 +86,7 @@ Will work OK even when there was no previous selected product image.</p>
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
   final String id = &#39;${imageField.offTag}_${language.offTag}&#39;;
-  final Uri uri = uriHelper.getPostUri(
-    path: &#39;cgi&#47;product_image_unselect.pl&#39;,
-  );
+  final Uri uri = uriHelper.getPostUri(path: &#39;cgi&#47;product_image_unselect.pl&#39;);
   final Map&lt;String, String&gt; queryParameters = &lt;String, String&gt;{
     &#39;code&#39;: barcode,
     &#39;id&#39;: id,
@@ -103,7 +101,8 @@ Will work OK even when there was no previous selected product image.</p>
   );
   if (response.statusCode != 200) {
     throw Exception(
-        &#39;Bad response (${response.statusCode}): ${response.body}&#39;);
+      &#39;Bad response (${response.statusCode}): ${response.body}&#39;,
+    );
   }
   final Map&lt;String, dynamic&gt; json =
       HttpHelper().jsonDecode(response.body) as Map&lt;String, dynamic&gt;;
@@ -118,7 +117,8 @@ Will work OK even when there was no previous selected product image.</p>
   final String imagefield = json[&#39;imagefield&#39;];
   if (imagefield != id) {
     throw Exception(
-        &#39;Different imagefield: expected &quot;$id&quot;, actual &quot;$imageField&quot;&#39;);
+      &#39;Different imagefield: expected &quot;$id&quot;, actual &quot;$imageField&quot;&#39;,
+    );
   }
 }</code></pre>
 </section>

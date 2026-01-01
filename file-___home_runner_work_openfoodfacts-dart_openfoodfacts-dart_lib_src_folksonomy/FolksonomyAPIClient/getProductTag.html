@@ -92,10 +92,7 @@
     uriHelper: uriHelper,
   );
   &#47;&#47; may return 404 (and &quot;null&quot;) when not found.
-  _checkResponse(
-    response,
-    authorizedStatus: &lt;int&gt;[200, 404],
-  );
+  _checkResponse(response, authorizedStatus: &lt;int&gt;[200, 404]);
   if (response.body == &#39;null&#39; || response.body == &#39;[]&#39;) {
     &#47;&#47; not found
     return null;

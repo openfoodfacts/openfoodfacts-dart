@@ -75,10 +75,7 @@ cf. <a href="https://prices.openfoodfacts.org/api/docs#/default/status_endpoint_
   <pre class="language-dart"><code class="language-dart">static Future&lt;MaybeError&lt;String&gt;&gt; getStatus({
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
-  final Uri uri = getUri(
-    path: &#39;&#47;api&#47;v1&#47;status&#39;,
-    uriHelper: uriHelper,
-  );
+  final Uri uri = getUri(path: &#39;&#47;api&#47;v1&#47;status&#39;, uriHelper: uriHelper);
   final Response response = await HttpHelper().doGetRequest(
     uri,
     uriHelper: uriHelper,

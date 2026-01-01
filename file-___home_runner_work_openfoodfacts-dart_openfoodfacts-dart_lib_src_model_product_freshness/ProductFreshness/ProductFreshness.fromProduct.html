@@ -67,7 +67,8 @@
     ProductFreshness._(
       isEcoscoreReady: product.ecoscoreScore != null,
       isNutriscoreReady: product.nutriscore != null,
-      isIngredientsReady: product.ingredientsTags != null &amp;&amp;
+      isIngredientsReady:
+          product.ingredientsTags != null &amp;&amp;
           product.ingredientsTags!.isNotEmpty,
       lastModified: product.lastModified,
       improvements: product.getProductImprovements(),

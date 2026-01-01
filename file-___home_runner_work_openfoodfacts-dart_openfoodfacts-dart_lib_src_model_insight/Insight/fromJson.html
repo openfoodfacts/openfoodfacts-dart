@@ -76,14 +76,17 @@
     final InsightType insightType =
         InsightType.fromOffTag(jsonInsight[&#39;type&#39;]) ?? InsightType.UNDEFINED;
 
-    result.add(Insight(
+    result.add(
+      Insight(
         id: jsonInsight[&#39;id&#39;],
         type: insightType,
         barcode: jsonInsight[&#39;barcode&#39;],
         countries: jsonInsight[&#39;countries&#39;],
         lang: jsonInsight[&#39;lang&#39;],
         model: jsonInsight[&#39;model&#39;],
-        confidence: jsonInsight[&#39;confidence&#39;]));
+        confidence: jsonInsight[&#39;confidence&#39;],
+      ),
+    );
   }
   return result;
 }</code></pre>

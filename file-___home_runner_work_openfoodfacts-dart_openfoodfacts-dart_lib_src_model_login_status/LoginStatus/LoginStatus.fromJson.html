@@ -64,16 +64,19 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">factory LoginStatus.fromJson(Map&lt;String, dynamic&gt; json,
-    [Map&lt;String, String&gt;? headers]) {
+  <pre class="language-dart"><code class="language-dart">factory LoginStatus.fromJson(
+  Map&lt;String, dynamic&gt; json, [
+  Map&lt;String, String&gt;? headers,
+]) {
   final details = json[&#39;user&#39;];
   return LoginStatus(
     status: JsonObject.parseInt(json[&#39;status&#39;])!,
     statusVerbose: json[&#39;status_verbose&#39;] as String,
     userId: json[&#39;user_id&#39;] as String?,
     userName: details?[&#39;name&#39;] as String?,
-    preferredLanguage:
-        OpenFoodFactsLanguage.fromOffTag(details?[&#39;preferred_language&#39;]),
+    preferredLanguage: OpenFoodFactsLanguage.fromOffTag(
+      details?[&#39;preferred_language&#39;],
+    ),
     country: OpenFoodFactsCountry.fromOffTag(details?[&#39;cc&#39;]),
     isModerator: JsonHelper.boolFromJSON(details?[&#39;moderator&#39;]),
     isAdmin: JsonHelper.boolFromJSON(details?[&#39;admin&#39;]),

@@ -73,14 +73,17 @@ the function will throw.</p>
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">List&lt;String&gt; convertFieldsToStrings(
-    List&lt;ProductField&gt; fields, List&lt;OpenFoodFactsLanguage&gt; languages) {
+  List&lt;ProductField&gt; fields,
+  List&lt;OpenFoodFactsLanguage&gt; languages,
+) {
   final fieldsStrings = &lt;String&gt;[];
 
   for (final field in fields) {
     if (field.isInLanguages) {
       if (languages.isEmpty) {
         throw ArgumentError(
-            &#39;Cannot request in-lang field $field without language&#39;);
+          &#39;Cannot request in-lang field $field without language&#39;,
+        );
       }
       for (final language in languages) {
         fieldsStrings.add(&#39;${field.offTag}${language.offTag}&#39;);

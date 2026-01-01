@@ -80,10 +80,7 @@
     parameters[&#39;event_type&#39;] = eventType;
   }
   final Response response = await HttpHelper().doGetRequest(
-    uriHelper.getUri(
-      path: &#39;&#47;leaderboard&#39;,
-      queryParameters: parameters,
-    ),
+    uriHelper.getUri(path: &#39;&#47;leaderboard&#39;, queryParameters: parameters),
     uriHelper: uriHelper,
   );
   _checkResponse(response);

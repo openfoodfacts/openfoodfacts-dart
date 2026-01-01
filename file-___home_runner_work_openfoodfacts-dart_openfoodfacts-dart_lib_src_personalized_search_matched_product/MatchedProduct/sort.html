@@ -74,12 +74,15 @@
 ) {
   final List&lt;MatchedProduct&gt; result = &lt;MatchedProduct&gt;[];
   for (final Product product in products) {
-    final MatchedProduct matchedProduct =
-        MatchedProduct(product, productPreferencesManager);
+    final MatchedProduct matchedProduct = MatchedProduct(
+      product,
+      productPreferencesManager,
+    );
     result.add(matchedProduct);
   }
   result.sort(
-      (MatchedProduct a, MatchedProduct b) =&gt; b.score.compareTo(a.score));
+    (MatchedProduct a, MatchedProduct b) =&gt; b.score.compareTo(a.score),
+  );
   return result;
 }</code></pre>
 </section>

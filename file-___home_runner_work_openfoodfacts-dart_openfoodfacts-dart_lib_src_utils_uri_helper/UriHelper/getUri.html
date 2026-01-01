@@ -83,16 +83,15 @@ parameters in another part of the code.</p>
   final bool? addUserAgentParameters,
   final String? userInfo,
   final String? forcedHost,
-}) =&gt;
-    Uri(
-      scheme: scheme,
-      host: forcedHost ?? host,
-      path: path,
-      queryParameters: addUserAgentParameters ?? defaultAddUserAgentParameters
-          ? HttpHelper.addUserAgentParameters(queryParameters)
-          : queryParameters,
-      userInfo: userInfo,
-    );</code></pre>
+}) =&gt; Uri(
+  scheme: scheme,
+  host: forcedHost ?? host,
+  path: path,
+  queryParameters: addUserAgentParameters ?? defaultAddUserAgentParameters
+      ? HttpHelper.addUserAgentParameters(queryParameters)
+      : queryParameters,
+  userInfo: userInfo,
+);</code></pre>
 </section>
 
 

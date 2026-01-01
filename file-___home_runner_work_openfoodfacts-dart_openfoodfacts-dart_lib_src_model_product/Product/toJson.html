@@ -87,8 +87,10 @@ Map&lt;String, dynamic&gt; toJson() {
         final langKey = entry.key;
         final lang = LanguageHelper.fromJson(langKey);
         if (lang == OpenFoodFactsLanguage.UNDEFINED) {
-          throw StateError(&#39;Cannot send localized field without &#39;
-              &#39;a proper language. Received: $langKey&#39;);
+          throw StateError(
+            &#39;Cannot send localized field without &#39;
+            &#39;a proper language. Received: $langKey&#39;,
+          );
         }
         final keyNoLangs = key.substring(0, key.indexOf(&#39;_in_languages&#39;));
         final realKey = &#39;${keyNoLangs}_${lang.offTag}&#39;;

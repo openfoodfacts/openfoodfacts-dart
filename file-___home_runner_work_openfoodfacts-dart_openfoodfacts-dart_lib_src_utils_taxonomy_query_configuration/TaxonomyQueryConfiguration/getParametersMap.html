@@ -84,12 +84,16 @@
   result[&#39;include_children&#39;] = includeChildren ? &#39;1&#39; : &#39;0&#39;;
 
   if (languages.isNotEmpty) {
-    result.putIfAbsent(&#39;lc&#39;,
-        () =&gt; languages.map&lt;String&gt;((language) =&gt; language.offTag).join(&#39;,&#39;));
+    result.putIfAbsent(
+      &#39;lc&#39;,
+      () =&gt; languages.map&lt;String&gt;((language) =&gt; language.offTag).join(&#39;,&#39;),
+    );
   }
 
-  result.putIfAbsent(&#39;cc&#39;,
-      () =&gt; OpenFoodAPIConfiguration.computeCountryCode(country, null)!);
+  result.putIfAbsent(
+    &#39;cc&#39;,
+    () =&gt; OpenFoodAPIConfiguration.computeCountryCode(country, null)!,
+  );
 
   if (fields.isNotEmpty) {
     final Iterable&lt;String&gt; fieldsStrings = convertFieldsToStrings(fields);

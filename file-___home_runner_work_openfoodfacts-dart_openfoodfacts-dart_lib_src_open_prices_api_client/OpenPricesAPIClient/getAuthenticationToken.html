@@ -93,10 +93,7 @@ To authenticate, you can either:</p>
   );
   final Response response = await post(
     uri,
-    body: &lt;String, String&gt;{
-      &#39;username&#39;: username,
-      &#39;password&#39;: password,
-    },
+    body: &lt;String, String&gt;{&#39;username&#39;: username, &#39;password&#39;: password},
   );
   if (response.statusCode == 200) {
     try {

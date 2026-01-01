@@ -79,10 +79,10 @@
       for (final Attribute attribute in group.attributes!) {
         final PreferenceImportance? preferenceImportance =
             productPreferencesManager.getPreferenceImportanceFromImportanceId(
-          productPreferencesManager.getImportanceIdForAttributeId(
-            attribute.id!,
-          ),
-        );
+              productPreferencesManager.getImportanceIdForAttributeId(
+                attribute.id!,
+              ),
+            );
         if (preferenceImportance != null) {
           final String? importanceId = preferenceImportance.id;
           final int factor = preferenceImportance.factor ?? 0;

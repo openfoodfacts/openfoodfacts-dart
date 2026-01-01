@@ -74,10 +74,7 @@
   final String importanceId, {
   final bool notifyListeners = true,
 }) async {
-  await _productPreferencesSelection.setImportance(
-    attributeId,
-    importanceId,
-  );
+  await _productPreferencesSelection.setImportance(attributeId, importanceId);
   if (notifyListeners) {
     notify();
   }

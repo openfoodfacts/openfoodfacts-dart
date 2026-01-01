@@ -78,10 +78,12 @@ values.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Iterable&lt;String&gt; convertFieldsToStrings(
-    Iterable&lt;TaxonomyIngredientField&gt; fields) {
+  Iterable&lt;TaxonomyIngredientField&gt; fields,
+) {
   return fields
       .where(
-          (TaxonomyIngredientField field) =&gt; !ignoredFields.contains(field))
+        (TaxonomyIngredientField field) =&gt; !ignoredFields.contains(field),
+      )
       .map&lt;String&gt;((TaxonomyIngredientField field) =&gt; field.offTag);
 }</code></pre>
 </section>

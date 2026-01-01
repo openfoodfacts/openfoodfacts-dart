@@ -127,8 +127,9 @@
         first = false;
         if (!productImage.isMain) {
           if (productImage.uploaded != null) {
-            item[_ALL_IMAGES_TAG_UPLOADED] =
-                dateToTimestamp(productImage.uploaded);
+            item[_ALL_IMAGES_TAG_UPLOADED] = dateToTimestamp(
+              productImage.uploaded,
+            );
           }
           if (productImage.contributor != null) {
             item[_ALL_IMAGES_TAG_UPLOADER] = productImage.contributor;
@@ -141,8 +142,8 @@
             item[_ALL_IMAGES_TAG_IMAGE_ID] = productImage.imgid!;
           }
           if (productImage.angle != null) {
-            item[_ALL_IMAGES_TAG_ANGLE] =
-                productImage.angle!.degree.toString();
+            item[_ALL_IMAGES_TAG_ANGLE] = productImage.angle!.degree
+                .toString();
           }
           if (productImage.coordinatesImageSize != null) {
             item[_ALL_IMAGES_TAG_COORDINATES] =

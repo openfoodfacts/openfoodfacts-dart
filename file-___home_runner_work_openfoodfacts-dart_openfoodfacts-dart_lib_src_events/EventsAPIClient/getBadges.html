@@ -85,10 +85,7 @@
     parameters[&#39;device_id&#39;] = deviceId;
   }
   final Response response = await HttpHelper().doGetRequest(
-    uriHelper.getUri(
-      path: &#39;&#47;badges&#39;,
-      queryParameters: parameters,
-    ),
+    uriHelper.getUri(path: &#39;&#47;badges&#39;, queryParameters: parameters),
     uriHelper: uriHelper,
   );
   _checkResponse(response);

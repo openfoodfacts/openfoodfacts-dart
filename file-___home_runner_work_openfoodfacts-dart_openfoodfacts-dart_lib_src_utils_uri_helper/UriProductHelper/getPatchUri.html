@@ -67,14 +67,11 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Uri getPatchUri({
-  required final String path,
-}) =&gt;
-    getUri(
-      path: path,
-      addUserAgentParameters: false,
-      userInfo: userInfoForPatch,
-    );</code></pre>
+  <pre class="language-dart"><code class="language-dart">Uri getPatchUri({required final String path}) =&gt; getUri(
+  path: path,
+  addUserAgentParameters: false,
+  userInfo: userInfoForPatch,
+);</code></pre>
 </section>
 
 
