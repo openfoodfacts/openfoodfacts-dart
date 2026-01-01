@@ -61,618 +61,646 @@ void main() {
     }
   }
 
-  group('$OpenFoodAPIClient get-save products', () {
-    test('get product Coca Cola Light', () async {
-      if (!await checkServer()) {
-        return;
-      }
+  group(
+    '$OpenFoodAPIClient get-save products',
+    () {
+      test('get product Coca Cola Light', () async {
+        if (!await checkServer()) {
+          return;
+        }
 
-      final String barcode = getRandomBookBarcode();
+        final String barcode = getRandomBookBarcode();
 
-      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.GERMAN;
-      const String genericName = 'Softdrink beverage';
-      const String countries = 'Frankreich,Deutschland';
-      const List<String> ingredientsText = <String>[
-        'Wasser',
-        'Kohlensäure',
-        'e150d',
-        'Citronensäure',
-        'Phosphorsäure',
-        'Süßungsmittel',
-        'Natriumcyclamat',
-        'Acesulfam K',
-        'Aroma',
-        'Aroma Koffein',
-        'Aspartam',
-      ];
+        const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.GERMAN;
+        const String genericName = 'Softdrink beverage';
+        const String countries = 'Frankreich,Deutschland';
+        const List<String> ingredientsText = <String>[
+          'Wasser',
+          'Kohlensäure',
+          'e150d',
+          'Citronensäure',
+          'Phosphorsäure',
+          'Süßungsmittel',
+          'Natriumcyclamat',
+          'Acesulfam K',
+          'Aroma',
+          'Aroma Koffein',
+          'Aspartam',
+        ];
 
-      //First add the product to the Test DB
-      final Product inputProduct = Product(
-        barcode: barcode,
-        productName: 'Coca Cola Light',
-        genericName: genericName,
-        countries: countries,
-        brands: 'Coca Cola',
-        nutrimentDataPer: PerSize.serving.offTag,
-        nutrimentEnergyUnit: 'kcal',
-        servingSize: '100g',
-        ingredientsText: ingredientsText.join(', '),
-        additives: Additives(['en:e150d, en:e950'], ['E150d, E950']),
-      );
+        //First add the product to the Test DB
+        final Product inputProduct = Product(
+          barcode: barcode,
+          productName: 'Coca Cola Light',
+          genericName: genericName,
+          countries: countries,
+          brands: 'Coca Cola',
+          nutrimentDataPer: PerSize.serving.offTag,
+          nutrimentEnergyUnit: 'kcal',
+          servingSize: '100g',
+          ingredientsText: ingredientsText.join(', '),
+          additives: Additives(['en:e150d, en:e950'], ['E150d, E950']),
+        );
 
-      await OpenFoodAPIClient.saveProduct(
-        TestConstants.TEST_USER,
-        inputProduct,
-        uriHelper: uriHelper,
-        language: language,
-      );
+        await OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER,
+          inputProduct,
+          uriHelper: uriHelper,
+          language: language,
+        );
 
-      final SendImage fontImage = SendImage(
-        lang: language,
-        barcode: barcode,
-        imageField: ImageField.FRONT,
-        imageUri: Uri.file('test/test_assets/front_coca_light_de.jpg'),
-      );
-      final Status status = await OpenFoodAPIClient.addProductImage(
-        TestConstants.TEST_USER,
-        fontImage,
-        uriHelper: uriHelper,
-      );
-      expect(status.status, Status.statusOK);
+        final SendImage fontImage = SendImage(
+          lang: language,
+          barcode: barcode,
+          imageField: ImageField.FRONT,
+          imageUri: Uri.file('test/test_assets/front_coca_light_de.jpg'),
+        );
+        final Status status = await OpenFoodAPIClient.addProductImage(
+          TestConstants.TEST_USER,
+          fontImage,
+          uriHelper: uriHelper,
+        );
+        expect(status.status, Status.statusOK);
 
-      final ProductQueryConfiguration configurations =
-          ProductQueryConfiguration(
-        barcode,
-        language: language,
-        fields: [ProductField.ALL],
-        version: ProductQueryVersion.v3,
-      );
-      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
-        configurations,
-        uriHelper: uriHelper,
-      );
+        final ProductQueryConfiguration configurations =
+            ProductQueryConfiguration(
+              barcode,
+              language: language,
+              fields: [ProductField.ALL],
+              version: ProductQueryVersion.v3,
+            );
+        final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+          configurations,
+          uriHelper: uriHelper,
+        );
 
-      expect(result.status, ProductResultV3.statusSuccess);
-      expect(result.barcode, barcode);
-      expect(result.product, isNotNull);
-      final Product product = result.product!;
-      expect(product.barcode, barcode);
-      expect(product.lastModified, isNotNull);
+        expect(result.status, ProductResultV3.statusSuccess);
+        expect(result.barcode, barcode);
+        expect(result.product, isNotNull);
+        final Product product = result.product!;
+        expect(product.barcode, barcode);
+        expect(product.lastModified, isNotNull);
 
-      expect(product.genericName, genericName);
-      expect(product.genericNameInLanguages, isNotNull);
-      expect(product.genericNameInLanguages![language], genericName);
+        expect(product.genericName, genericName);
+        expect(product.genericNameInLanguages, isNotNull);
+        expect(product.genericNameInLanguages![language], genericName);
 
-      expect(product.ingredients, isNotNull);
-      expect(product.ingredients!.length, ingredientsText.length);
-      for (final String ingredient in ingredientsText) {
-        expect(product.ingredients!.any((i) => i.text == ingredient), true);
-      }
+        expect(product.ingredients, isNotNull);
+        expect(product.ingredients!.length, ingredientsText.length);
+        for (final String ingredient in ingredientsText) {
+          expect(product.ingredients!.any((i) => i.text == ingredient), true);
+        }
 
-      expect(product.selectedImages!, isNotEmpty);
+        expect(product.selectedImages!, isNotEmpty);
 
-      expect(product.additives!.ids[0], 'en:e150d');
-      expect(product.additives!.names[0], 'E150d');
-      expect(product.additives!.ids[4], 'en:e950');
-      expect(product.additives!.names[4], 'E950');
+        expect(product.additives!.ids[0], 'en:e150d');
+        expect(product.additives!.names[0], 'E150d');
+        expect(product.additives!.ids[4], 'en:e950');
+        expect(product.additives!.names[4], 'E950');
 
-      expect(product.images, isNotNull);
-      expect(product.images!, hasLength(7));
-      // thumb, display, original
-      expect(product.getRawImages(), hasLength(3));
-      // thumb, small, display, original
-      expect(product.getMainImages(), hasLength(4));
-      expect(product.countries, countries);
-    });
+        expect(product.images, isNotNull);
+        expect(product.images!, hasLength(7));
+        // thumb, display, original
+        expect(product.getRawImages(), hasLength(3));
+        // thumb, small, display, original
+        expect(product.getMainImages(), hasLength(4));
+        expect(product.countries, countries);
+      });
 
-    test(
+      test(
         'localized fields when a product is not available in a second language',
         () async {
-      if (!await checkServer()) {
-        return;
-      }
+          if (!await checkServer()) {
+            return;
+          }
 
-      const String barcode = '3333333333333';
+          const String barcode = '3333333333333';
 
-      final Product englishInputProduct = Product(
-        barcode: barcode,
-        productNameInLanguages: {
-          OpenFoodFactsLanguage.ENGLISH: englishProductName,
+          final Product englishInputProduct = Product(
+            barcode: barcode,
+            productNameInLanguages: {
+              OpenFoodFactsLanguage.ENGLISH: englishProductName,
+            },
+            ingredientsTextInLanguages: {
+              OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
+            },
+            categories: englishCategory,
+            countries: englishCountry,
+          );
+
+          await OpenFoodAPIClient.saveProduct(
+            TestConstants.TEST_USER,
+            englishInputProduct,
+            uriHelper: uriHelper,
+            language: OpenFoodFactsLanguage.ENGLISH,
+          );
+
+          final fields = [
+            ProductField.NAME,
+            ProductField.NAME_IN_LANGUAGES,
+            ProductField.INGREDIENTS_TEXT,
+            ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+            ProductField.INGREDIENTS_TAGS,
+            ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
+            ProductField.CATEGORIES_TAGS,
+            ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
+            ProductField.COUNTRIES_TAGS,
+            ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
+          ];
+
+          final ProductQueryConfiguration englishConf =
+              ProductQueryConfiguration(
+                barcode,
+                language: OpenFoodFactsLanguage.ENGLISH,
+                fields: fields,
+                version: ProductQueryVersion.v3,
+              );
+          final ProductQueryConfiguration russianConf =
+              ProductQueryConfiguration(
+                barcode,
+                language: OpenFoodFactsLanguage.RUSSIAN,
+                fields: fields,
+                version: ProductQueryVersion.v3,
+              );
+
+          // English!
+
+          final ProductResultV3 englishResult =
+              await OpenFoodAPIClient.getProductV3(
+                englishConf,
+                uriHelper: uriHelper,
+              );
+          final Product englishProduct = englishResult.product!;
+
+          expect(
+            englishProduct.productNameInLanguages,
+            equals({OpenFoodFactsLanguage.ENGLISH: englishProductName}),
+          );
+
+          expect(
+            englishProduct.ingredientsTextInLanguages,
+            equals({OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll}),
+          );
+
+          expect(englishProduct.ingredientsTags, equals(ingredientsTags));
+          expect(
+            englishProduct.ingredientsTagsInLanguages,
+            equals({OpenFoodFactsLanguage.ENGLISH: englishIngredientsSplit}),
+          );
+
+          expect(englishProduct.categoriesTags, contains(tagCategory));
+          expect(englishProduct.categoriesTagsInLanguages, isNotNull);
+          expect(
+            englishProduct.categoriesTagsInLanguages![OpenFoodFactsLanguage
+                .ENGLISH],
+            contains(englishCategory),
+          );
+
+          expect(englishProduct.countriesTags, equals([countryTag]));
+          expect(
+            englishProduct.countriesTagsInLanguages,
+            equals({
+              OpenFoodFactsLanguage.ENGLISH: [englishCountry],
+            }),
+          );
+
+          // Russian!
+
+          final ProductResultV3 russianResult =
+              await OpenFoodAPIClient.getProductV3(
+                russianConf,
+                uriHelper: uriHelper,
+              );
+          final Product russianProduct = russianResult.product!;
+
+          expect(russianProduct.productNameInLanguages, isNull);
+
+          expect(russianProduct.ingredientsTextInLanguages, isNull);
+
+          expect(russianProduct.ingredientsTags, equals(ingredientsTags));
+          expect(
+            russianProduct.ingredientsTagsInLanguages,
+            equals({OpenFoodFactsLanguage.RUSSIAN: russianIngredientsSplit}),
+          );
+
+          expect(russianProduct.categoriesTags, contains(tagCategory));
+          expect(russianProduct.categoriesTagsInLanguages, isNotNull);
+          expect(
+            russianProduct.categoriesTagsInLanguages![OpenFoodFactsLanguage
+                .RUSSIAN],
+            contains(russianCategory),
+          );
+
+          expect(russianProduct.countriesTags, equals([countryTag]));
+          expect(
+            russianProduct.countriesTagsInLanguages,
+            equals({
+              OpenFoodFactsLanguage.RUSSIAN: [russianCountry],
+            }),
+          );
         },
-        ingredientsTextInLanguages: {
-          OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll
-        },
-        categories: englishCategory,
-        countries: englishCountry,
       );
 
-      await OpenFoodAPIClient.saveProduct(
-        TestConstants.TEST_USER,
-        englishInputProduct,
-        uriHelper: uriHelper,
-        language: OpenFoodFactsLanguage.ENGLISH,
-      );
-
-      final fields = [
-        ProductField.NAME,
-        ProductField.NAME_IN_LANGUAGES,
-        ProductField.INGREDIENTS_TEXT,
-        ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
-        ProductField.INGREDIENTS_TAGS,
-        ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
-        ProductField.CATEGORIES_TAGS,
-        ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
-        ProductField.COUNTRIES_TAGS,
-        ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
-      ];
-
-      final ProductQueryConfiguration englishConf = ProductQueryConfiguration(
-        barcode,
-        language: OpenFoodFactsLanguage.ENGLISH,
-        fields: fields,
-        version: ProductQueryVersion.v3,
-      );
-      final ProductQueryConfiguration russianConf = ProductQueryConfiguration(
-        barcode,
-        language: OpenFoodFactsLanguage.RUSSIAN,
-        fields: fields,
-        version: ProductQueryVersion.v3,
-      );
-
-      // English!
-
-      final ProductResultV3 englishResult =
-          await OpenFoodAPIClient.getProductV3(
-        englishConf,
-        uriHelper: uriHelper,
-      );
-      final Product englishProduct = englishResult.product!;
-
-      expect(englishProduct.productNameInLanguages,
-          equals({OpenFoodFactsLanguage.ENGLISH: englishProductName}));
-
-      expect(englishProduct.ingredientsTextInLanguages,
-          equals({OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll}));
-
-      expect(englishProduct.ingredientsTags, equals(ingredientsTags));
-      expect(
-          englishProduct.ingredientsTagsInLanguages,
-          equals({
-            OpenFoodFactsLanguage.ENGLISH: englishIngredientsSplit,
-          }));
-
-      expect(englishProduct.categoriesTags, contains(tagCategory));
-      expect(englishProduct.categoriesTagsInLanguages, isNotNull);
-      expect(
-        englishProduct
-            .categoriesTagsInLanguages![OpenFoodFactsLanguage.ENGLISH],
-        contains(englishCategory),
-      );
-
-      expect(englishProduct.countriesTags, equals([countryTag]));
-      expect(
-          englishProduct.countriesTagsInLanguages,
-          equals({
-            OpenFoodFactsLanguage.ENGLISH: [englishCountry]
-          }));
-
-      // Russian!
-
-      final ProductResultV3 russianResult =
-          await OpenFoodAPIClient.getProductV3(
-        russianConf,
-        uriHelper: uriHelper,
-      );
-      final Product russianProduct = russianResult.product!;
-
-      expect(russianProduct.productNameInLanguages, isNull);
-
-      expect(russianProduct.ingredientsTextInLanguages, isNull);
-
-      expect(russianProduct.ingredientsTags, equals(ingredientsTags));
-      expect(
-          russianProduct.ingredientsTagsInLanguages,
-          equals({
-            OpenFoodFactsLanguage.RUSSIAN: russianIngredientsSplit,
-          }));
-
-      expect(russianProduct.categoriesTags, contains(tagCategory));
-      expect(russianProduct.categoriesTagsInLanguages, isNotNull);
-      expect(
-        russianProduct
-            .categoriesTagsInLanguages![OpenFoodFactsLanguage.RUSSIAN],
-        contains(russianCategory),
-      );
-
-      expect(russianProduct.countriesTags, equals([countryTag]));
-      expect(
-          russianProduct.countriesTagsInLanguages,
-          equals({
-            OpenFoodFactsLanguage.RUSSIAN: [russianCountry]
-          }));
-    });
-
-    test('localized fields when a product is available in a second language',
+      test(
+        'localized fields when a product is available in a second language',
         () async {
-      if (!await checkServer()) {
-        return;
-      }
+          if (!await checkServer()) {
+            return;
+          }
 
-      const String barcode = '2222222222222';
+          const String barcode = '2222222222222';
 
-      final Product englishInputProduct = Product(
-        barcode: barcode,
-        productNameInLanguages: {
-          OpenFoodFactsLanguage.ENGLISH: englishProductName,
+          final Product englishInputProduct = Product(
+            barcode: barcode,
+            productNameInLanguages: {
+              OpenFoodFactsLanguage.ENGLISH: englishProductName,
+            },
+            ingredientsTextInLanguages: {
+              OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
+            },
+            categories: englishCategory,
+            countries: englishCountry,
+          );
+
+          final Product russianInputProduct = Product(
+            barcode: barcode,
+            productNameInLanguages: {
+              OpenFoodFactsLanguage.RUSSIAN: russianProductName,
+            },
+            ingredientsTextInLanguages: {
+              OpenFoodFactsLanguage.RUSSIAN: russianIngredientsAll,
+            },
+          );
+
+          await OpenFoodAPIClient.saveProduct(
+            TestConstants.TEST_USER,
+            englishInputProduct,
+            uriHelper: uriHelper,
+            language: OpenFoodFactsLanguage.ENGLISH,
+          );
+          await OpenFoodAPIClient.saveProduct(
+            TestConstants.TEST_USER,
+            russianInputProduct,
+            uriHelper: uriHelper,
+            language: OpenFoodFactsLanguage.RUSSIAN,
+          );
+
+          const fields = [
+            ProductField.NAME,
+            ProductField.NAME_IN_LANGUAGES,
+            ProductField.INGREDIENTS_TEXT,
+            ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+            ProductField.INGREDIENTS_TAGS,
+            ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
+            ProductField.CATEGORIES_TAGS,
+            ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
+            ProductField.COUNTRIES_TAGS,
+            ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
+          ];
+
+          final ProductQueryConfiguration englishConf =
+              ProductQueryConfiguration(
+                barcode,
+                language: OpenFoodFactsLanguage.ENGLISH,
+                fields: fields,
+                version: ProductQueryVersion.v3,
+              );
+          final ProductQueryConfiguration russianConf =
+              ProductQueryConfiguration(
+                barcode,
+                language: OpenFoodFactsLanguage.RUSSIAN,
+                fields: fields,
+                version: ProductQueryVersion.v3,
+              );
+
+          // English!
+
+          final ProductResultV3 englishResult =
+              await OpenFoodAPIClient.getProductV3(
+                englishConf,
+                uriHelper: uriHelper,
+              );
+          final Product englishProduct = englishResult.product!;
+
+          expect(
+            englishProduct.productNameInLanguages,
+            equals({OpenFoodFactsLanguage.ENGLISH: englishProductName}),
+          );
+
+          expect(
+            englishProduct.ingredientsTextInLanguages,
+            equals({OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll}),
+          );
+
+          expect(englishProduct.ingredientsTags, equals(ingredientsTags));
+          expect(
+            englishProduct.ingredientsTagsInLanguages,
+            equals({OpenFoodFactsLanguage.ENGLISH: englishIngredientsSplit}),
+          );
+
+          expect(englishProduct.categoriesTags, contains(tagCategory));
+          expect(englishProduct.categoriesTagsInLanguages, isNotNull);
+          expect(
+            englishProduct.categoriesTagsInLanguages![OpenFoodFactsLanguage
+                .ENGLISH],
+            contains(englishCategory),
+          );
+
+          expect(englishProduct.countriesTags, equals([countryTag]));
+          expect(
+            englishProduct.countriesTagsInLanguages,
+            equals({
+              OpenFoodFactsLanguage.ENGLISH: [englishCountry],
+            }),
+          );
+
+          // Russian!
+
+          final ProductResultV3 russianResult =
+              await OpenFoodAPIClient.getProductV3(
+                russianConf,
+                uriHelper: uriHelper,
+              );
+          final Product russianProduct = russianResult.product!;
+
+          expect(
+            russianProduct.productNameInLanguages,
+            equals({OpenFoodFactsLanguage.RUSSIAN: russianProductName}),
+          );
+
+          expect(
+            russianProduct.ingredientsTextInLanguages,
+            equals({OpenFoodFactsLanguage.RUSSIAN: russianIngredientsAll}),
+          );
+
+          expect(russianProduct.ingredientsTags, equals(ingredientsTags));
+          expect(
+            russianProduct.ingredientsTagsInLanguages,
+            equals({OpenFoodFactsLanguage.RUSSIAN: russianIngredientsSplit}),
+          );
+
+          expect(russianProduct.categoriesTags, contains(tagCategory));
+          expect(russianProduct.categoriesTagsInLanguages, isNotNull);
+          expect(
+            russianProduct.categoriesTagsInLanguages![OpenFoodFactsLanguage
+                .RUSSIAN],
+            contains(russianCategory),
+          );
+
+          expect(russianProduct.countriesTags, equals([countryTag]));
+          expect(
+            russianProduct.countriesTagsInLanguages,
+            equals({
+              OpenFoodFactsLanguage.RUSSIAN: [russianCountry],
+            }),
+          );
         },
-        ingredientsTextInLanguages: {
-          OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll
-        },
-        categories: englishCategory,
-        countries: englishCountry,
       );
 
-      final Product russianInputProduct = Product(
-        barcode: barcode,
-        productNameInLanguages: {
-          OpenFoodFactsLanguage.RUSSIAN: russianProductName,
-        },
-        ingredientsTextInLanguages: {
-          OpenFoodFactsLanguage.RUSSIAN: russianIngredientsAll,
-        },
-      );
+      test('multiple languages and in-languages fields', () async {
+        if (!await checkServer()) {
+          return;
+        }
 
-      await OpenFoodAPIClient.saveProduct(
-        TestConstants.TEST_USER,
-        englishInputProduct,
-        uriHelper: uriHelper,
-        language: OpenFoodFactsLanguage.ENGLISH,
-      );
-      await OpenFoodAPIClient.saveProduct(
-        TestConstants.TEST_USER,
-        russianInputProduct,
-        uriHelper: uriHelper,
-        language: OpenFoodFactsLanguage.RUSSIAN,
-      );
+        const String barcode = '2222222222224';
 
-      const fields = [
-        ProductField.NAME,
-        ProductField.NAME_IN_LANGUAGES,
-        ProductField.INGREDIENTS_TEXT,
-        ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
-        ProductField.INGREDIENTS_TAGS,
-        ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
-        ProductField.CATEGORIES_TAGS,
-        ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
-        ProductField.COUNTRIES_TAGS,
-        ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
-      ];
+        final Product inputProduct = Product(
+          barcode: barcode,
+          productNameInLanguages: {
+            OpenFoodFactsLanguage.ENGLISH: englishProductName,
+            OpenFoodFactsLanguage.RUSSIAN: russianProductName,
+            OpenFoodFactsLanguage.GERMAN: germanProductName,
+          },
+          ingredientsTextInLanguages: {
+            OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
+            OpenFoodFactsLanguage.RUSSIAN: russianIngredientsAll,
+            OpenFoodFactsLanguage.GERMAN: germanIngredientsAll,
+          },
+          categories: englishCategory,
+          countries: englishCountry,
+        );
 
-      final ProductQueryConfiguration englishConf = ProductQueryConfiguration(
-        barcode,
-        language: OpenFoodFactsLanguage.ENGLISH,
-        fields: fields,
-        version: ProductQueryVersion.v3,
-      );
-      final ProductQueryConfiguration russianConf = ProductQueryConfiguration(
-        barcode,
-        language: OpenFoodFactsLanguage.RUSSIAN,
-        fields: fields,
-        version: ProductQueryVersion.v3,
-      );
+        await OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER,
+          inputProduct,
+          uriHelper: uriHelper,
+        );
 
-      // English!
+        final fields = [
+          ProductField.NAME,
+          ProductField.NAME_IN_LANGUAGES,
+          ProductField.INGREDIENTS_TEXT,
+          ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+          ProductField.INGREDIENTS_TAGS,
+          ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
+          ProductField.CATEGORIES_TAGS,
+          ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
+          ProductField.COUNTRIES_TAGS,
+          ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
+        ];
 
-      final ProductResultV3 englishResult =
-          await OpenFoodAPIClient.getProductV3(
-        englishConf,
-        uriHelper: uriHelper,
-      );
-      final Product englishProduct = englishResult.product!;
+        final ProductQueryConfiguration conf = ProductQueryConfiguration(
+          barcode,
+          languages: [
+            OpenFoodFactsLanguage.ENGLISH,
+            OpenFoodFactsLanguage.RUSSIAN,
+            OpenFoodFactsLanguage.GERMAN,
+          ],
+          fields: fields,
+          version: ProductQueryVersion.v3,
+        );
 
-      expect(englishProduct.productNameInLanguages,
-          equals({OpenFoodFactsLanguage.ENGLISH: englishProductName}));
+        final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+          conf,
+          uriHelper: uriHelper,
+        );
+        final Product product = result.product!;
 
-      expect(englishProduct.ingredientsTextInLanguages,
-          equals({OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll}));
-
-      expect(englishProduct.ingredientsTags, equals(ingredientsTags));
-      expect(
-          englishProduct.ingredientsTagsInLanguages,
-          equals({
-            OpenFoodFactsLanguage.ENGLISH: englishIngredientsSplit,
-          }));
-
-      expect(englishProduct.categoriesTags, contains(tagCategory));
-      expect(englishProduct.categoriesTagsInLanguages, isNotNull);
-      expect(
-        englishProduct
-            .categoriesTagsInLanguages![OpenFoodFactsLanguage.ENGLISH],
-        contains(englishCategory),
-      );
-
-      expect(englishProduct.countriesTags, equals([countryTag]));
-      expect(
-          englishProduct.countriesTagsInLanguages,
-          equals({
-            OpenFoodFactsLanguage.ENGLISH: [englishCountry]
-          }));
-
-      // Russian!
-
-      final ProductResultV3 russianResult =
-          await OpenFoodAPIClient.getProductV3(
-        russianConf,
-        uriHelper: uriHelper,
-      );
-      final Product russianProduct = russianResult.product!;
-
-      expect(russianProduct.productNameInLanguages,
-          equals({OpenFoodFactsLanguage.RUSSIAN: russianProductName}));
-
-      expect(russianProduct.ingredientsTextInLanguages,
-          equals({OpenFoodFactsLanguage.RUSSIAN: russianIngredientsAll}));
-
-      expect(russianProduct.ingredientsTags, equals(ingredientsTags));
-      expect(
-          russianProduct.ingredientsTagsInLanguages,
-          equals({
-            OpenFoodFactsLanguage.RUSSIAN: russianIngredientsSplit,
-          }));
-
-      expect(russianProduct.categoriesTags, contains(tagCategory));
-      expect(russianProduct.categoriesTagsInLanguages, isNotNull);
-      expect(
-        russianProduct
-            .categoriesTagsInLanguages![OpenFoodFactsLanguage.RUSSIAN],
-        contains(russianCategory),
-      );
-
-      expect(russianProduct.countriesTags, equals([countryTag]));
-      expect(
-          russianProduct.countriesTagsInLanguages,
-          equals({
-            OpenFoodFactsLanguage.RUSSIAN: [russianCountry]
-          }));
-    });
-
-    test('multiple languages and in-languages fields', () async {
-      if (!await checkServer()) {
-        return;
-      }
-
-      const String barcode = '2222222222224';
-
-      final Product inputProduct = Product(
-        barcode: barcode,
-        productNameInLanguages: {
-          OpenFoodFactsLanguage.ENGLISH: englishProductName,
-          OpenFoodFactsLanguage.RUSSIAN: russianProductName,
-          OpenFoodFactsLanguage.GERMAN: germanProductName,
-        },
-        ingredientsTextInLanguages: {
-          OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
-          OpenFoodFactsLanguage.RUSSIAN: russianIngredientsAll,
-          OpenFoodFactsLanguage.GERMAN: germanIngredientsAll,
-        },
-        categories: englishCategory,
-        countries: englishCountry,
-      );
-
-      await OpenFoodAPIClient.saveProduct(
-        TestConstants.TEST_USER,
-        inputProduct,
-        uriHelper: uriHelper,
-      );
-
-      final fields = [
-        ProductField.NAME,
-        ProductField.NAME_IN_LANGUAGES,
-        ProductField.INGREDIENTS_TEXT,
-        ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
-        ProductField.INGREDIENTS_TAGS,
-        ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
-        ProductField.CATEGORIES_TAGS,
-        ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
-        ProductField.COUNTRIES_TAGS,
-        ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
-      ];
-
-      final ProductQueryConfiguration conf = ProductQueryConfiguration(
-        barcode,
-        languages: [
-          OpenFoodFactsLanguage.ENGLISH,
-          OpenFoodFactsLanguage.RUSSIAN,
-          OpenFoodFactsLanguage.GERMAN
-        ],
-        fields: fields,
-        version: ProductQueryVersion.v3,
-      );
-
-      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
-        conf,
-        uriHelper: uriHelper,
-      );
-      final Product product = result.product!;
-
-      expect(
+        expect(
           product.productNameInLanguages,
           equals({
             OpenFoodFactsLanguage.ENGLISH: englishProductName,
             OpenFoodFactsLanguage.RUSSIAN: russianProductName,
             OpenFoodFactsLanguage.GERMAN: germanProductName,
-          }));
+          }),
+        );
 
-      expect(
+        expect(
           product.ingredientsTextInLanguages,
           equals({
             OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
             OpenFoodFactsLanguage.RUSSIAN: russianIngredientsAll,
             OpenFoodFactsLanguage.GERMAN: germanIngredientsAll,
-          }));
+          }),
+        );
 
-      expect(product.ingredientsTags, equals(ingredientsTags));
-      expect(
+        expect(product.ingredientsTags, equals(ingredientsTags));
+        expect(
           product.ingredientsTagsInLanguages,
           equals({
             OpenFoodFactsLanguage.ENGLISH: englishIngredientsSplit,
             OpenFoodFactsLanguage.RUSSIAN: russianIngredientsSplit,
             OpenFoodFactsLanguage.GERMAN: germanIngredientsSplit,
-          }));
+          }),
+        );
 
-      expect(product.categoriesTags, contains(tagCategory));
-      expect(product.categoriesTagsInLanguages, isNotNull);
-      expect(
-        product.categoriesTagsInLanguages![OpenFoodFactsLanguage.ENGLISH],
-        contains(englishCategory),
-      );
-      expect(
-        product.categoriesTagsInLanguages![OpenFoodFactsLanguage.RUSSIAN],
-        contains(russianCategory),
-      );
-      expect(
-        product.categoriesTagsInLanguages![OpenFoodFactsLanguage.GERMAN],
-        contains(germanCategory),
-      );
+        expect(product.categoriesTags, contains(tagCategory));
+        expect(product.categoriesTagsInLanguages, isNotNull);
+        expect(
+          product.categoriesTagsInLanguages![OpenFoodFactsLanguage.ENGLISH],
+          contains(englishCategory),
+        );
+        expect(
+          product.categoriesTagsInLanguages![OpenFoodFactsLanguage.RUSSIAN],
+          contains(russianCategory),
+        );
+        expect(
+          product.categoriesTagsInLanguages![OpenFoodFactsLanguage.GERMAN],
+          contains(germanCategory),
+        );
 
-      expect(product.countriesTags, equals([countryTag]));
-      expect(
+        expect(product.countriesTags, equals([countryTag]));
+        expect(
           product.countriesTagsInLanguages,
           equals({
             OpenFoodFactsLanguage.ENGLISH: [englishCountry],
             OpenFoodFactsLanguage.RUSSIAN: [russianCountry],
             OpenFoodFactsLanguage.GERMAN: [germanCountry],
-          }));
-    });
+          }),
+        );
+      });
 
-    test('all-languages fields', () async {
-      if (!await checkServer()) {
-        return;
-      }
+      test('all-languages fields', () async {
+        if (!await checkServer()) {
+          return;
+        }
 
-      const String barcode = '2222222222226';
+        const String barcode = '2222222222226';
 
-      final Product inputProduct = Product(
-        barcode: barcode,
-        productNameInLanguages: {
-          OpenFoodFactsLanguage.ENGLISH: englishProductName,
-          OpenFoodFactsLanguage.RUSSIAN: russianProductName,
-          OpenFoodFactsLanguage.GERMAN: germanProductName,
-        },
-        ingredientsTextInLanguages: {
-          OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
-          OpenFoodFactsLanguage.GERMAN: germanIngredientsAll,
-        },
-      );
+        final Product inputProduct = Product(
+          barcode: barcode,
+          productNameInLanguages: {
+            OpenFoodFactsLanguage.ENGLISH: englishProductName,
+            OpenFoodFactsLanguage.RUSSIAN: russianProductName,
+            OpenFoodFactsLanguage.GERMAN: germanProductName,
+          },
+          ingredientsTextInLanguages: {
+            OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
+            OpenFoodFactsLanguage.GERMAN: germanIngredientsAll,
+          },
+        );
 
-      await OpenFoodAPIClient.saveProduct(
-        TestConstants.TEST_USER,
-        inputProduct,
-        uriHelper: uriHelper,
-      );
+        await OpenFoodAPIClient.saveProduct(
+          TestConstants.TEST_USER,
+          inputProduct,
+          uriHelper: uriHelper,
+        );
 
-      // Request all available languages for the fields which allow it
-      final fields = [
-        ProductField.NAME_ALL_LANGUAGES,
-        ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
-      ];
-      final ProductQueryConfiguration conf = ProductQueryConfiguration(
-        barcode,
-        fields: fields,
-        version: ProductQueryVersion.v3,
-      );
-      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
-        conf,
-        uriHelper: uriHelper,
-      );
-      final Product product = result.product!;
+        // Request all available languages for the fields which allow it
+        final fields = [
+          ProductField.NAME_ALL_LANGUAGES,
+          ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
+        ];
+        final ProductQueryConfiguration conf = ProductQueryConfiguration(
+          barcode,
+          fields: fields,
+          version: ProductQueryVersion.v3,
+        );
+        final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+          conf,
+          uriHelper: uriHelper,
+        );
+        final Product product = result.product!;
 
-      // Verify that all the available languages are obtained
-      expect(
+        // Verify that all the available languages are obtained
+        expect(
           product.productNameInLanguages,
           equals({
             OpenFoodFactsLanguage.ENGLISH: englishProductName,
             OpenFoodFactsLanguage.RUSSIAN: russianProductName,
             OpenFoodFactsLanguage.GERMAN: germanProductName,
-          }));
-      expect(
+          }),
+        );
+        expect(
           product.ingredientsTextInLanguages,
           equals({
             OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
             OpenFoodFactsLanguage.GERMAN: germanIngredientsAll,
-          }));
-    });
+          }),
+        );
+      });
 
-    test(
+      test(
         'requesting all-langs and in-langs fields together does not break anything',
         () async {
-      if (!await checkServer()) {
-        return;
-      }
+          if (!await checkServer()) {
+            return;
+          }
 
-      const String barcode = '2222222222227';
+          const String barcode = '2222222222227';
 
-      final Product inputProduct = Product(
-        barcode: barcode,
-        productNameInLanguages: {
-          OpenFoodFactsLanguage.ENGLISH: englishProductName,
-          OpenFoodFactsLanguage.RUSSIAN: russianProductName,
-          OpenFoodFactsLanguage.GERMAN: germanProductName,
+          final Product inputProduct = Product(
+            barcode: barcode,
+            productNameInLanguages: {
+              OpenFoodFactsLanguage.ENGLISH: englishProductName,
+              OpenFoodFactsLanguage.RUSSIAN: russianProductName,
+              OpenFoodFactsLanguage.GERMAN: germanProductName,
+            },
+            ingredientsTextInLanguages: {
+              OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
+              OpenFoodFactsLanguage.GERMAN: germanIngredientsAll,
+            },
+          );
+
+          await OpenFoodAPIClient.saveProduct(
+            TestConstants.TEST_USER,
+            inputProduct,
+            uriHelper: uriHelper,
+          );
+
+          // Request both 'all-langs' and 'in-langs' fields types
+          final fields = [
+            ProductField.NAME_ALL_LANGUAGES,
+            ProductField.NAME_IN_LANGUAGES,
+            ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
+            ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+          ];
+          // For 'in-langs' fields specify not all of the available languages
+          ProductQueryConfiguration conf = ProductQueryConfiguration(
+            barcode,
+            languages: [
+              OpenFoodFactsLanguage.RUSSIAN,
+              OpenFoodFactsLanguage.ENGLISH,
+            ],
+            fields: fields,
+            version: ProductQueryVersion.v3,
+          );
+          final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+            conf,
+            uriHelper: uriHelper,
+          );
+          final Product product = result.product!;
+
+          // Verify that all the available languages are obtained
+          expect(
+            product.productNameInLanguages,
+            equals({
+              OpenFoodFactsLanguage.ENGLISH: englishProductName,
+              OpenFoodFactsLanguage.RUSSIAN: russianProductName,
+              OpenFoodFactsLanguage.GERMAN: germanProductName,
+            }),
+          );
+          expect(
+            product.ingredientsTextInLanguages,
+            equals({
+              OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
+              OpenFoodFactsLanguage.GERMAN: germanIngredientsAll,
+            }),
+          );
         },
-        ingredientsTextInLanguages: {
-          OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
-          OpenFoodFactsLanguage.GERMAN: germanIngredientsAll,
-        },
       );
 
-      await OpenFoodAPIClient.saveProduct(
-        TestConstants.TEST_USER,
-        inputProduct,
-        uriHelper: uriHelper,
-      );
-
-      // Request both 'all-langs' and 'in-langs' fields types
-      final fields = [
-        ProductField.NAME_ALL_LANGUAGES,
-        ProductField.NAME_IN_LANGUAGES,
-        ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
-        ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
-      ];
-      // For 'in-langs' fields specify not all of the available languages
-      ProductQueryConfiguration conf = ProductQueryConfiguration(
-        barcode,
-        languages: [
-          OpenFoodFactsLanguage.RUSSIAN,
-          OpenFoodFactsLanguage.ENGLISH,
-        ],
-        fields: fields,
-        version: ProductQueryVersion.v3,
-      );
-      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
-        conf,
-        uriHelper: uriHelper,
-      );
-      final Product product = result.product!;
-
-      // Verify that all the available languages are obtained
-      expect(
-          product.productNameInLanguages,
-          equals({
-            OpenFoodFactsLanguage.ENGLISH: englishProductName,
-            OpenFoodFactsLanguage.RUSSIAN: russianProductName,
-            OpenFoodFactsLanguage.GERMAN: germanProductName,
-          }));
-      expect(
-          product.ingredientsTextInLanguages,
-          equals({
-            OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
-            OpenFoodFactsLanguage.GERMAN: germanIngredientsAll,
-          }));
-    });
-
-    test(
-      'product with quotes',
-      () async {
+      test('product with quotes', () async {
         if (!await checkServer()) {
           return;
         }
@@ -696,11 +724,11 @@ void main() {
 
         final ProductQueryConfiguration configurations =
             ProductQueryConfiguration(
-          barcode,
-          language: language,
-          fields: [ProductField.NAME, ProductField.BRANDS],
-          version: ProductQueryVersion.v3,
-        );
+              barcode,
+              language: language,
+              fields: [ProductField.NAME, ProductField.BRANDS],
+              version: ProductQueryVersion.v3,
+            );
         final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
           configurations,
           uriHelper: uriHelper,
@@ -708,66 +736,70 @@ void main() {
 
         expect(result.product!.productName, productName);
         expect(result.product!.brands, brands);
-      },
-    );
-  },
-      timeout: Timeout(
-        // some tests can be slow here
-        Duration(seconds: 300),
-      ));
+      });
+    },
+    timeout: Timeout(
+      // some tests can be slow here
+      Duration(seconds: 300),
+    ),
+  );
 
-  test('get minified product', () async {
-    if (!await checkServer()) {
-      return;
-    }
+  test(
+    'get minified product',
+    () async {
+      if (!await checkServer()) {
+        return;
+      }
 
-    const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.GERMAN;
-    const String barcode = '111111555555';
-    const String genericName = 'Softdrink beverage';
-    const String labels = 'MyTestLabel';
-    const String quantity = '5.5 Liter';
+      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.GERMAN;
+      const String barcode = '111111555555';
+      const String genericName = 'Softdrink beverage';
+      const String labels = 'MyTestLabel';
+      const String quantity = '5.5 Liter';
 
-    //First add the product to the Test DB
-    final Product product = Product(
-      barcode: barcode,
-      genericName: genericName,
-      labels: labels,
-      quantity: quantity,
-    );
+      //First add the product to the Test DB
+      final Product product = Product(
+        barcode: barcode,
+        genericName: genericName,
+        labels: labels,
+        quantity: quantity,
+      );
 
-    await OpenFoodAPIClient.saveProduct(
-      TestConstants.TEST_USER,
-      product,
-      uriHelper: uriHelper,
-      language: language,
-    );
+      await OpenFoodAPIClient.saveProduct(
+        TestConstants.TEST_USER,
+        product,
+        uriHelper: uriHelper,
+        language: language,
+      );
 
-    final ProductQueryConfiguration configurations = ProductQueryConfiguration(
-      barcode,
-      language: language,
-      fields: [
-        ProductField.GENERIC_NAME,
-        ProductField.LABELS,
-        ProductField.QUANTITY,
-      ],
-      version: ProductQueryVersion.v3,
-    );
+      final ProductQueryConfiguration configurations =
+          ProductQueryConfiguration(
+            barcode,
+            language: language,
+            fields: [
+              ProductField.GENERIC_NAME,
+              ProductField.LABELS,
+              ProductField.QUANTITY,
+            ],
+            version: ProductQueryVersion.v3,
+          );
 
-    final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
-      configurations,
-      uriHelper: uriHelper,
-    );
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+        configurations,
+        uriHelper: uriHelper,
+      );
 
-    expect(result.status, ProductResultV3.statusSuccess);
-    expect(result.product!.barcode, null);
-    expect(result.product!.genericName, genericName);
-    expect(result.product!.labels, labels);
-    expect(result.product!.quantity, quantity);
-  },
-      timeout: Timeout(
-        // some tests can be slow here
-        Duration(seconds: 90),
-      ));
+      expect(result.status, ProductResultV3.statusSuccess);
+      expect(result.product!.barcode, null);
+      expect(result.product!.genericName, genericName);
+      expect(result.product!.labels, labels);
+      expect(result.product!.quantity, quantity);
+    },
+    timeout: Timeout(
+      // some tests can be slow here
+      Duration(seconds: 90),
+    ),
+  );
 
   group('no nutrition data', () {
     // This is barcode refers to a test product
@@ -781,7 +813,7 @@ void main() {
             noNutritionData: noNutritionData,
             nutriments: noNutritionData != true
                 ? (Nutriments.empty()
-                  ..setValue(Nutrient.salt, PerSize.oneHundredGrams, 10.0))
+                    ..setValue(Nutrient.salt, PerSize.oneHundredGrams, 10.0))
                 : null,
           ),
           uriHelper: uriHelper,
@@ -796,13 +828,10 @@ void main() {
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
-        barcode,
-        fields: [
-          ProductField.NO_NUTRITION_DATA,
-          ProductField.NUTRIMENTS,
-        ],
-        version: ProductQueryVersion.v3,
-      );
+            barcode,
+            fields: [ProductField.NO_NUTRITION_DATA, ProductField.NUTRIMENTS],
+            version: ProductQueryVersion.v3,
+          );
 
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
@@ -822,13 +851,10 @@ void main() {
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
-        barcode,
-        fields: [
-          ProductField.NO_NUTRITION_DATA,
-          ProductField.NUTRIMENTS,
-        ],
-        version: ProductQueryVersion.v3,
-      );
+            barcode,
+            fields: [ProductField.NO_NUTRITION_DATA, ProductField.NUTRIMENTS],
+            version: ProductQueryVersion.v3,
+          );
 
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,

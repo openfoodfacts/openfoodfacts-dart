@@ -8,38 +8,37 @@ part of 'taxonomy_country.dart';
 
 TaxonomyCountry _$TaxonomyCountryFromJson(Map<String, dynamic> json) =>
     TaxonomyCountry()
-      ..countryCode2 =
-          LanguageHelper.fromJsonStringMapIsoUnique(json['country_code_2'])
-      ..countryCode3 =
-          LanguageHelper.fromJsonStringMapIsoUnique(json['country_code_3'])
-      ..languages =
-          LanguageHelper.fromJsonStringMapIsoList(json['language_codes'])
+      ..countryCode2 = LanguageHelper.fromJsonStringMapIsoUnique(
+        json['country_code_2'],
+      )
+      ..countryCode3 = LanguageHelper.fromJsonStringMapIsoUnique(
+        json['country_code_3'],
+      )
+      ..languages = LanguageHelper.fromJsonStringMapIsoList(
+        json['language_codes'],
+      )
       ..name = LanguageHelper.fromJsonStringMap(json['name'])
       ..synonyms = LanguageHelper.fromJsonStringMapList(json['synonyms'])
       ..wikidata = LanguageHelper.fromJsonStringMapIsoUnique(json['wikidata'])
       ..officialCountryCode2 = LanguageHelper.fromJsonStringMapIsoUnique(
-          json['official_country_code_2']);
+        json['official_country_code_2'],
+      );
 
 Map<String, dynamic> _$TaxonomyCountryToJson(TaxonomyCountry instance) =>
     <String, dynamic>{
-      if (instance.countryCode2 case final value?) 'country_code_2': value,
-      if (instance.countryCode3 case final value?) 'country_code_3': value,
-      if (instance.languages
-              ?.map((e) => _$OpenFoodFactsLanguageEnumMap[e]!)
-              .toList()
-          case final value?)
-        'language_codes': value,
-      if (instance.name
-              ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e))
-          case final value?)
-        'name': value,
-      if (instance.synonyms
-              ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e))
-          case final value?)
-        'synonyms': value,
-      if (instance.wikidata case final value?) 'wikidata': value,
-      if (instance.officialCountryCode2 case final value?)
-        'official_country_code_2': value,
+      'country_code_2': ?instance.countryCode2,
+      'country_code_3': ?instance.countryCode3,
+      'language_codes': ?instance.languages
+          ?.map((e) => _$OpenFoodFactsLanguageEnumMap[e]!)
+          .toList(),
+      'name': ?instance.name?.map(
+        (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+      ),
+      'synonyms': ?instance.synonyms?.map(
+        (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+      ),
+      'wikidata': ?instance.wikidata,
+      'official_country_code_2': ?instance.officialCountryCode2,
     };
 
 const _$OpenFoodFactsLanguageEnumMap = {

@@ -12,10 +12,7 @@ class ValueCount extends JsonObject {
   @JsonKey(name: 'product_count')
   final int productCount;
 
-  ValueCount({
-    required this.value,
-    required this.productCount,
-  });
+  ValueCount({required this.value, required this.productCount});
 
   factory ValueCount.fromJson(Map<String, dynamic> json) =>
       _$ValueCountFromJson(json);

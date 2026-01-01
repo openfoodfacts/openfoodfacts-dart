@@ -50,8 +50,13 @@ class Correction extends JsonObject {
   @JsonKey(name: 'is_valid')
   bool? isValid;
 
-  Correction(this.correction, this.original, this.startOffset, this.endOffset,
-      this.isValid);
+  Correction(
+    this.correction,
+    this.original,
+    this.startOffset,
+    this.endOffset,
+    this.isValid,
+  );
 
   factory Correction.fromJson(Map<String, dynamic> json) =>
       _$CorrectionFromJson(json);

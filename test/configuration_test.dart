@@ -13,21 +13,15 @@ void main() {
     OpenFoodAPIConfiguration.userAgent = null;
 
     expect(
-      () => uriHelper.getUri(
-        path: '/test/test.pl',
-      ),
-      throwsA(
-        const TypeMatcher<Exception>(),
-      ),
+      () => uriHelper.getUri(path: '/test/test.pl'),
+      throwsA(const TypeMatcher<Exception>()),
     );
   });
 
   test('Get Uri', () {
     OpenFoodAPIConfiguration.uuid = null;
 
-    Uri uri = uriHelper.getUri(
-      path: '/test/test.pl',
-    );
+    Uri uri = uriHelper.getUri(path: '/test/test.pl');
 
     expect(
       uri.replace(query: '').toString(),
@@ -48,14 +42,14 @@ void main() {
   test('Get Uri with user agent', () {
     const String name = 'UserAgentName';
     const String version = '12';
-    OpenFoodAPIConfiguration.userAgent =
-        UserAgent(name: name, version: version);
+    OpenFoodAPIConfiguration.userAgent = UserAgent(
+      name: name,
+      version: version,
+    );
     OpenFoodAPIConfiguration.uuid = null;
     Uri uri;
 
-    uri = uriHelper.getUri(
-      path: '/test/test.pl',
-    );
+    uri = uriHelper.getUri(path: '/test/test.pl');
     expect(
       uri.toString(),
       'https://world.openfoodfacts.org/test/test.pl?app_name=$name&app_version=$version',
@@ -74,10 +68,7 @@ void main() {
       path: '/test/test.pl',
       addUserAgentParameters: false,
     );
-    expect(
-      uri.toString(),
-      'https://world.openfoodfacts.org/test/test.pl',
-    );
+    expect(uri.toString(), 'https://world.openfoodfacts.org/test/test.pl');
 
     uri = uriHelper.getUri(
       path: '/test/test.pl',
@@ -95,9 +86,7 @@ void main() {
     OpenFoodAPIConfiguration.uuid = uuid;
     Uri uri;
 
-    uri = uriHelper.getUri(
-      path: '/test/test.pl',
-    );
+    uri = uriHelper.getUri(path: '/test/test.pl');
     expect(
       uri.toString(),
       'https://world.openfoodfacts.org/test/test.pl?$_appNameValue&app_uuid=$uuid',
@@ -116,10 +105,7 @@ void main() {
       path: '/test/test.pl',
       addUserAgentParameters: false,
     );
-    expect(
-      uri.toString(),
-      'https://world.openfoodfacts.org/test/test.pl',
-    );
+    expect(uri.toString(), 'https://world.openfoodfacts.org/test/test.pl');
 
     uri = uriHelper.getUri(
       path: '/test/test.pl',
@@ -134,9 +120,7 @@ void main() {
 
   test('Get Test Uri', () {
     OpenFoodAPIConfiguration.uuid = null;
-    Uri uri = uriHelperFoodTest.getUri(
-      path: '/test/test.pl',
-    );
+    Uri uri = uriHelperFoodTest.getUri(path: '/test/test.pl');
     expect(
       uri.toString(),
       'https://world.openfoodfacts.net/test/test.pl?$_appNameValue',
@@ -155,13 +139,8 @@ void main() {
   test('Get Robotoff Uri', () {
     OpenFoodAPIConfiguration.userAgent = null;
     OpenFoodAPIConfiguration.uuid = null;
-    Uri uri = uriHelperRobotoffProd.getUri(
-      path: '/test/test.pl',
-    );
-    expect(
-      uri.toString(),
-      'https://robotoff.openfoodfacts.org/test/test.pl',
-    );
+    Uri uri = uriHelperRobotoffProd.getUri(path: '/test/test.pl');
+    expect(uri.toString(), 'https://robotoff.openfoodfacts.org/test/test.pl');
 
     Uri uri1 = uriHelperRobotoffProd.getUri(
       path: '/test/test.pl',
@@ -176,13 +155,8 @@ void main() {
   test('Get Robotoff Test Uri', () {
     OpenFoodAPIConfiguration.userAgent = null;
     OpenFoodAPIConfiguration.uuid = null;
-    Uri uri = uriHelperRobotoffTest.getUri(
-      path: '/test/test.pl',
-    );
-    expect(
-      uri.toString(),
-      'https://robotoff.openfoodfacts.net/test/test.pl',
-    );
+    Uri uri = uriHelperRobotoffTest.getUri(path: '/test/test.pl');
+    expect(uri.toString(), 'https://robotoff.openfoodfacts.net/test/test.pl');
 
     Uri uri1 = uriHelperRobotoffTest.getUri(
       path: '/test/test.pl',
@@ -200,9 +174,7 @@ void main() {
       domain: 'openfoodfacts.org',
       scheme: 'http',
     );
-    final Uri uri = uriHelper.getUri(
-      path: '/test/test.pl',
-    );
+    final Uri uri = uriHelper.getUri(path: '/test/test.pl');
     expect(
       uri.toString(),
       'http://world.openfoodfacts.org/test/test.pl?$_appNameValue',
@@ -220,7 +192,4 @@ void main() {
 }
 
 String get _appNameValue =>
-    'app_name=${OpenFoodAPIConfiguration.userAgent!.name.replaceAll(
-      ' ',
-      '+',
-    )}';
+    'app_name=${OpenFoodAPIConfiguration.userAgent!.name.replaceAll(' ', '+')}';

@@ -16,10 +16,7 @@ enum ProductType implements OffTagged {
   @JsonValue('product')
   product(offTag: 'product', flavor: Flavor.openProductFacts);
 
-  const ProductType({
-    required this.offTag,
-    required this.flavor,
-  });
+  const ProductType({required this.offTag, required this.flavor});
 
   @override
   final String offTag;
