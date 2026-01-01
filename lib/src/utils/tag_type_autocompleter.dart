@@ -32,9 +32,7 @@ class TagTypeAutocompleter implements Autocompleter {
   final User? user;
 
   @override
-  Future<List<String>> getSuggestions(
-    final String input,
-  ) async =>
+  Future<List<String>> getSuggestions(final String input) async =>
       OpenFoodAPIClient.getSuggestions(
         tagType,
         input: input,

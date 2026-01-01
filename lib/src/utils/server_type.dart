@@ -14,9 +14,7 @@ enum ServerType implements OffTagged {
   /// Open Product Facts
   openProductFacts(offTag: 'opf');
 
-  const ServerType({
-    required this.offTag,
-  });
+  const ServerType({required this.offTag});
 
   @override
   final String offTag;

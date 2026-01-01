@@ -37,10 +37,7 @@ class Nutriments extends JsonObject {
   final Map<String, double?> _map = <String, double?>{};
 
   /// Returns the map key for that [nutrient] and that [perSize].
-  String _getTag(
-    final Nutrient nutrient,
-    final PerSize perSize,
-  ) =>
+  String _getTag(final Nutrient nutrient, final PerSize perSize) =>
       '${nutrient.offTag}_${perSize.offTag}';
 
   /// Returns the value in grams of that [nutrient] for that [perSize].

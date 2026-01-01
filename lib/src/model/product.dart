@@ -39,7 +39,8 @@ enum ProductImprovement {
   /// https://world.openfoodfacts.org/api/v0/product/3414280980209.json?fields=ecoscore_grade,states_tags
   /// Add a message if we have a category but no nutrition
   CATEGORIES_BUT_NO_NUTRISCORE(
-      category: ProductImprovementCategory.NUTRI_SCORE),
+    category: ProductImprovementCategory.NUTRI_SCORE,
+  ),
 
   /// Possible message: “Add nutrition facts to compute the Nutri-Score”
   /// Add a one-click option to indicate no nutrition facts on the packaging
@@ -59,15 +60,14 @@ enum ProductImprovement {
   /// This product doesn't have nutrition facts
   /// Add a message if the nutrition image is missing
   ADD_NUTRITION_FACTS_AND_CATEGORY(
-      category: ProductImprovementCategory.NUTRI_SCORE),
+    category: ProductImprovementCategory.NUTRI_SCORE,
+  ),
 
   /// Add a message if the nutrition image is obsolete using the image refresh API
   /// https://github.com/openfoodfacts/api-documentation/issues/15
   OBSOLETE_NUTRITION_IMAGE(category: ProductImprovementCategory.NUTRI_SCORE);
 
-  const ProductImprovement({
-    required this.category,
-  });
+  const ProductImprovement({required this.category});
 
   final ProductImprovementCategory category;
 }
@@ -108,23 +108,26 @@ class Product extends JsonObject {
 
   /// Localized product name.
   @JsonKey(
-      name: 'product_name_in_languages',
-      fromJson: LanguageHelper.fromJsonStringMap,
-      toJson: LanguageHelper.toJsonStringMap)
+    name: 'product_name_in_languages',
+    fromJson: LanguageHelper.fromJsonStringMap,
+    toJson: LanguageHelper.toJsonStringMap,
+  )
   Map<OpenFoodFactsLanguage, String>? productNameInLanguages;
 
   /// Localized conservation conditions.
   @JsonKey(
-      name: 'conservation_conditions_in_languages',
-      fromJson: LanguageHelper.fromJsonStringMap,
-      toJson: LanguageHelper.toJsonStringMap)
+    name: 'conservation_conditions_in_languages',
+    fromJson: LanguageHelper.fromJsonStringMap,
+    toJson: LanguageHelper.toJsonStringMap,
+  )
   Map<OpenFoodFactsLanguage, String>? conservationConditionsInLanguages;
 
   /// Localized customer service information.
   @JsonKey(
-      name: 'customer_service_in_languages',
-      fromJson: LanguageHelper.fromJsonStringMap,
-      toJson: LanguageHelper.toJsonStringMap)
+    name: 'customer_service_in_languages',
+    fromJson: LanguageHelper.fromJsonStringMap,
+    toJson: LanguageHelper.toJsonStringMap,
+  )
   Map<OpenFoodFactsLanguage, String>? customerServiceInLanguages;
 
   /// Common name. Example: "Chocolate bar with milk and hazelnuts".
@@ -133,9 +136,10 @@ class Product extends JsonObject {
 
   /// Localized common name.
   @JsonKey(
-      name: 'generic_name_in_languages',
-      fromJson: LanguageHelper.fromJsonStringMap,
-      toJson: LanguageHelper.toJsonStringMap)
+    name: 'generic_name_in_languages',
+    fromJson: LanguageHelper.fromJsonStringMap,
+    toJson: LanguageHelper.toJsonStringMap,
+  )
   Map<OpenFoodFactsLanguage, String>? genericNameInLanguages;
 
   /// Abbreviated product name.
@@ -144,9 +148,10 @@ class Product extends JsonObject {
 
   /// Localized abbreviated product name.
   @JsonKey(
-      name: 'abbreviated_product_name_in_languages',
-      fromJson: LanguageHelper.fromJsonStringMap,
-      toJson: LanguageHelper.toJsonStringMap)
+    name: 'abbreviated_product_name_in_languages',
+    fromJson: LanguageHelper.fromJsonStringMap,
+    toJson: LanguageHelper.toJsonStringMap,
+  )
   Map<OpenFoodFactsLanguage, String>? abbreviatedNameInLanguages;
 
   @JsonKey(name: 'brands')
@@ -154,9 +159,10 @@ class Product extends JsonObject {
   @JsonKey(name: 'brands_tags')
   List<String>? brandsTags;
   @JsonKey(
-      name: 'brands_tags_in_languages',
-      toJson: LanguageHelper.toJsonStringsListMap,
-      fromJson: LanguageHelper.fromJsonStringsListMap)
+    name: 'brands_tags_in_languages',
+    toJson: LanguageHelper.toJsonStringsListMap,
+    fromJson: LanguageHelper.fromJsonStringsListMap,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? brandsTagsInLanguages;
 
   @JsonKey(name: 'countries')
@@ -164,15 +170,17 @@ class Product extends JsonObject {
   @JsonKey(name: 'countries_tags')
   List<String>? countriesTags;
   @JsonKey(
-      name: 'countries_tags_in_languages',
-      toJson: LanguageHelper.toJsonStringsListMap,
-      fromJson: LanguageHelper.fromJsonStringsListMap)
+    name: 'countries_tags_in_languages',
+    toJson: LanguageHelper.toJsonStringsListMap,
+    fromJson: LanguageHelper.fromJsonStringsListMap,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? countriesTagsInLanguages;
 
   @JsonKey(
-      name: 'lang',
-      toJson: LanguageHelper.toJson,
-      fromJson: LanguageHelper.fromJson)
+    name: 'lang',
+    toJson: LanguageHelper.toJson,
+    fromJson: LanguageHelper.fromJson,
+  )
   OpenFoodFactsLanguage? lang;
 
   @JsonKey(name: 'quantity')
@@ -202,30 +210,25 @@ class Product extends JsonObject {
   @JsonKey(name: 'serving_size')
   String? servingSize;
 
-  @JsonKey(
-    name: 'serving_quantity',
-    fromJson: JsonHelper.quantityFromJson,
-  )
+  @JsonKey(name: 'serving_quantity', fromJson: JsonHelper.quantityFromJson)
   double? servingQuantity;
 
-  @JsonKey(
-    name: 'product_quantity',
-    fromJson: JsonHelper.quantityFromJson,
-  )
+  @JsonKey(name: 'product_quantity', fromJson: JsonHelper.quantityFromJson)
   double? packagingQuantity;
 
   /// cause nesting is sooo cool ;)
   @JsonKey(
-      name: 'selected_images',
-      fromJson: JsonHelper.selectedImagesFromJson,
-      toJson: JsonHelper.selectedImagesToJson)
+    name: 'selected_images',
+    fromJson: JsonHelper.selectedImagesFromJson,
+    toJson: JsonHelper.selectedImagesToJson,
+  )
   List<ProductImage>? selectedImages;
 
   @JsonKey(
-      name: 'images',
-      fromJson: JsonHelper.allImagesFromJson,
-      toJson: JsonHelper.allImagesToJson)
-
+    name: 'images',
+    fromJson: JsonHelper.allImagesFromJson,
+    toJson: JsonHelper.allImagesToJson,
+  )
   /// All images in bulk. Will include "main" images and "raw" images.
   ///
   /// See also [getRawImages] and [getMainImages].
@@ -319,17 +322,19 @@ class Product extends JsonObject {
 
   /// Localized ingredients.
   @JsonKey(
-      name: 'ingredients_text_in_languages',
-      fromJson: LanguageHelper.fromJsonStringMap,
-      toJson: LanguageHelper.toJsonStringMap)
+    name: 'ingredients_text_in_languages',
+    fromJson: LanguageHelper.fromJsonStringMap,
+    toJson: LanguageHelper.toJsonStringMap,
+  )
   Map<OpenFoodFactsLanguage, String>? ingredientsTextInLanguages;
 
   @JsonKey(name: 'ingredients_tags')
   List<String>? ingredientsTags;
   @JsonKey(
-      name: 'ingredients_tags_in_languages',
-      toJson: LanguageHelper.toJsonStringsListMap,
-      fromJson: LanguageHelper.fromJsonStringsListMap)
+    name: 'ingredients_tags_in_languages',
+    toJson: LanguageHelper.toJsonStringsListMap,
+    fromJson: LanguageHelper.fromJsonStringsListMap,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? ingredientsTagsInLanguages;
 
   /// Images Freshness in seconds
@@ -341,14 +346,16 @@ class Product extends JsonObject {
   Map<OpenFoodFactsLanguage, Map<ImageField, int>>? imagesFreshnessInLanguages;
 
   @JsonKey(
-      name: 'ingredients_analysis_tags',
-      fromJson: IngredientsAnalysisTags.fromJson,
-      toJson: IngredientsAnalysisTags.toJson)
+    name: 'ingredients_analysis_tags',
+    fromJson: IngredientsAnalysisTags.fromJson,
+    toJson: IngredientsAnalysisTags.toJson,
+  )
   IngredientsAnalysisTags? ingredientsAnalysisTags;
   @JsonKey(
-      name: 'ingredients_analysis_tags_in_languages',
-      toJson: LanguageHelper.toJsonStringsListMap,
-      fromJson: LanguageHelper.fromJsonStringsListMap)
+    name: 'ingredients_analysis_tags_in_languages',
+    toJson: LanguageHelper.toJsonStringsListMap,
+    fromJson: LanguageHelper.fromJsonStringsListMap,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? ingredientsAnalysisTagsInLanguages;
 
   /// When no nutrition data is true, nutriments are always null.
@@ -366,31 +373,36 @@ class Product extends JsonObject {
   Nutriments? _nutriments;
 
   @JsonKey(
-      name: 'additives_tags',
-      fromJson: Additives.additivesFromJson,
-      toJson: Additives.additivesToJson)
+    name: 'additives_tags',
+    fromJson: Additives.additivesFromJson,
+    toJson: Additives.additivesToJson,
+  )
   Additives? additives;
   @JsonKey(
-      name: 'additives_tags_in_languages',
-      toJson: LanguageHelper.toJsonStringsListMap,
-      fromJson: LanguageHelper.fromJsonStringsListMap)
+    name: 'additives_tags_in_languages',
+    toJson: LanguageHelper.toJsonStringsListMap,
+    fromJson: LanguageHelper.fromJsonStringsListMap,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? additivesTagsInLanguages;
 
   @JsonKey(
-      name: 'allergens_tags',
-      fromJson: Allergens.allergensFromJson,
-      toJson: Allergens.allergensToJson)
+    name: 'allergens_tags',
+    fromJson: Allergens.allergensFromJson,
+    toJson: Allergens.allergensToJson,
+  )
   Allergens? allergens;
   @JsonKey(
-      name: 'allergens_tags_in_languages',
-      toJson: LanguageHelper.toJsonStringsListMap,
-      fromJson: LanguageHelper.fromJsonStringsListMap)
+    name: 'allergens_tags_in_languages',
+    toJson: LanguageHelper.toJsonStringsListMap,
+    fromJson: LanguageHelper.fromJsonStringsListMap,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? allergensTagsInLanguages;
 
   @JsonKey(
-      name: 'nutrient_levels',
-      fromJson: NutrientLevels.fromJson,
-      toJson: NutrientLevels.toJson)
+    name: 'nutrient_levels',
+    fromJson: NutrientLevels.fromJson,
+    toJson: NutrientLevels.toJson,
+  )
   NutrientLevels? nutrientLevels;
 
   @JsonKey(name: 'nutriment_energy_unit')
@@ -423,9 +435,10 @@ class Product extends JsonObject {
   @JsonKey(name: 'categories_tags')
   List<String>? categoriesTags;
   @JsonKey(
-      name: 'categories_tags_in_languages',
-      toJson: LanguageHelper.toJsonStringsListMap,
-      fromJson: LanguageHelper.fromJsonStringsListMap)
+    name: 'categories_tags_in_languages',
+    toJson: LanguageHelper.toJsonStringsListMap,
+    fromJson: LanguageHelper.fromJsonStringsListMap,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? categoriesTagsInLanguages;
 
   @JsonKey(name: 'labels')
@@ -433,18 +446,16 @@ class Product extends JsonObject {
   @JsonKey(name: 'labels_tags')
   List<String>? labelsTags;
   @JsonKey(
-      name: 'labels_tags_in_languages',
-      toJson: LanguageHelper.toJsonStringsListMap,
-      fromJson: LanguageHelper.fromJsonStringsListMap)
+    name: 'labels_tags_in_languages',
+    toJson: LanguageHelper.toJsonStringsListMap,
+    fromJson: LanguageHelper.fromJsonStringsListMap,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? labelsTagsInLanguages;
 
   @JsonKey(name: 'packaging')
   String? packaging;
 
-  @JsonKey(
-    name: 'packagings',
-    toJson: JsonHelper.productPackagingsToJson,
-  )
+  @JsonKey(name: 'packagings', toJson: JsonHelper.productPackagingsToJson)
   List<ProductPackaging>? packagings;
 
   /// Is the "packagings" complete?
@@ -459,33 +470,37 @@ class Product extends JsonObject {
   @JsonKey(name: 'packaging_tags')
   List<String>? packagingTags;
   @JsonKey(
-      name: 'packaging_text_in_languages',
-      fromJson: LanguageHelper.fromJsonStringMap,
-      toJson: LanguageHelper.toJsonStringMap)
+    name: 'packaging_text_in_languages',
+    fromJson: LanguageHelper.fromJsonStringMap,
+    toJson: LanguageHelper.toJsonStringMap,
+  )
   Map<OpenFoodFactsLanguage, String>? packagingTextInLanguages;
 
   @JsonKey(name: 'misc_tags')
   List<String>? miscTags;
   @JsonKey(
-      name: 'misc_tags_in_languages',
-      toJson: LanguageHelper.toJsonStringsListMap,
-      fromJson: LanguageHelper.fromJsonStringsListMap)
+    name: 'misc_tags_in_languages',
+    toJson: LanguageHelper.toJsonStringsListMap,
+    fromJson: LanguageHelper.fromJsonStringsListMap,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? miscTagsInLanguages;
 
   @JsonKey(name: 'states_tags')
   List<String>? statesTags;
   @JsonKey(
-      name: 'states_tags_in_languages',
-      toJson: LanguageHelper.toJsonStringsListMap,
-      fromJson: LanguageHelper.fromJsonStringsListMap)
+    name: 'states_tags_in_languages',
+    toJson: LanguageHelper.toJsonStringsListMap,
+    fromJson: LanguageHelper.fromJsonStringsListMap,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? statesTagsInLanguages;
 
   @JsonKey(name: 'traces_tags')
   List<String>? tracesTags;
   @JsonKey(
-      name: 'traces_tags_in_languages',
-      toJson: LanguageHelper.toJsonStringsListMap,
-      fromJson: LanguageHelper.fromJsonStringsListMap)
+    name: 'traces_tags_in_languages',
+    toJson: LanguageHelper.toJsonStringsListMap,
+    fromJson: LanguageHelper.fromJsonStringsListMap,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? tracesTagsInLanguages;
   @JsonKey(name: 'traces')
   String? traces;
@@ -493,9 +508,10 @@ class Product extends JsonObject {
   @JsonKey(name: 'stores_tags')
   List<String>? storesTags;
   @JsonKey(
-      name: 'stores_tags_in_languages',
-      toJson: LanguageHelper.toJsonStringsListMap,
-      fromJson: LanguageHelper.fromJsonStringsListMap)
+    name: 'stores_tags_in_languages',
+    toJson: LanguageHelper.toJsonStringsListMap,
+    fromJson: LanguageHelper.fromJsonStringsListMap,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? storesTagsInLanguages;
   @JsonKey(name: 'stores')
   String? stores;
@@ -505,9 +521,10 @@ class Product extends JsonObject {
 
   /// Latest modification timestamp. Read-only.
   @JsonKey(
-      name: 'last_modified_t',
-      fromJson: JsonHelper.timestampToDate,
-      toJson: JsonHelper.dateToTimestamp)
+    name: 'last_modified_t',
+    fromJson: JsonHelper.timestampToDate,
+    toJson: JsonHelper.dateToTimestamp,
+  )
   DateTime? lastModified;
 
   /// Latest modification user id. Read-only.
@@ -516,9 +533,10 @@ class Product extends JsonObject {
 
   /// Last image timestamp. Read-only.
   @JsonKey(
-      name: 'last_image_t',
-      fromJson: JsonHelper.timestampToDate,
-      toJson: JsonHelper.dateToTimestamp)
+    name: 'last_image_t',
+    fromJson: JsonHelper.timestampToDate,
+    toJson: JsonHelper.dateToTimestamp,
+  )
   DateTime? lastImage;
 
   /// Last editor id. Read-only.
@@ -543,9 +561,10 @@ class Product extends JsonObject {
 
   /// Last check timestamp. Read-only.
   @JsonKey(
-      name: 'last_checked_t',
-      fromJson: JsonHelper.timestampToDate,
-      toJson: JsonHelper.dateToTimestamp)
+    name: 'last_checked_t',
+    fromJson: JsonHelper.timestampToDate,
+    toJson: JsonHelper.dateToTimestamp,
+  )
   DateTime? lastChecked;
 
   /// Last check user id. Read-only.
@@ -554,9 +573,10 @@ class Product extends JsonObject {
 
   /// Creation timestamp. Read-only.
   @JsonKey(
-      name: 'created_t',
-      fromJson: JsonHelper.timestampToDate,
-      toJson: JsonHelper.dateToTimestamp)
+    name: 'created_t',
+    fromJson: JsonHelper.timestampToDate,
+    toJson: JsonHelper.dateToTimestamp,
+  )
   DateTime? created;
 
   /// Creation user id. Read-only.
@@ -575,9 +595,10 @@ class Product extends JsonObject {
   EcoscoreData? ecoscoreData;
 
   @JsonKey(
-      name: 'knowledge_panels',
-      fromJson: KnowledgePanels.fromJsonHelper,
-      toJson: KnowledgePanels.toJsonHelper)
+    name: 'knowledge_panels',
+    fromJson: KnowledgePanels.fromJsonHelper,
+    toJson: KnowledgePanels.toJsonHelper,
+  )
   KnowledgePanels? knowledgePanels;
 
   @JsonKey(name: 'emb_codes')
@@ -635,65 +656,65 @@ class Product extends JsonObject {
   String? expirationDate;
 
   // TODO(monsieurtanuki): remove all the "this" constructor fields, except maybe "barcode"
-  Product(
-      {this.barcode,
-      this.productName,
-      this.productNameInLanguages,
-      this.genericName,
-      this.brands,
-      this.brandsTags,
-      this.countries,
-      this.countriesTags,
-      this.countriesTagsInLanguages,
-      this.lang,
-      this.quantity,
-      this.imageFrontUrl,
-      this.imageFrontSmallUrl,
-      this.imageIngredientsUrl,
-      this.imageIngredientsSmallUrl,
-      this.imageNutritionUrl,
-      this.imageNutritionSmallUrl,
-      this.imagePackagingUrl,
-      this.imagePackagingSmallUrl,
-      this.servingSize,
-      this.servingQuantity,
-      this.packagingQuantity,
-      this.selectedImages,
-      this.images,
-      this.ingredients,
-      this.ingredientsText,
-      this.ingredientsTextInLanguages,
-      this.ingredientsTags,
-      this.ingredientsTagsInLanguages,
-      this.ingredientsAnalysisTags,
-      this.additives,
-      this.allergens,
-      this.nutrientLevels,
-      this.nutrimentEnergyUnit,
-      this.nutrimentDataPer,
-      this.nutriscore,
-      this.categories,
-      this.categoriesTags,
-      this.categoriesTagsInLanguages,
-      this.labels,
-      this.labelsTags,
-      this.labelsTagsInLanguages,
-      this.packaging,
-      this.packagingTags,
-      this.miscTags,
-      this.statesTags,
-      this.tracesTags,
-      this.storesTags,
-      this.stores,
-      this.attributeGroups,
-      this.lastModified,
-      this.ecoscoreGrade,
-      this.ecoscoreScore,
-      this.ecoscoreData,
-      Nutriments? nutriments,
-      bool? noNutritionData})
-      : _nutriments = nutriments,
-        _noNutritionData = noNutritionData;
+  Product({
+    this.barcode,
+    this.productName,
+    this.productNameInLanguages,
+    this.genericName,
+    this.brands,
+    this.brandsTags,
+    this.countries,
+    this.countriesTags,
+    this.countriesTagsInLanguages,
+    this.lang,
+    this.quantity,
+    this.imageFrontUrl,
+    this.imageFrontSmallUrl,
+    this.imageIngredientsUrl,
+    this.imageIngredientsSmallUrl,
+    this.imageNutritionUrl,
+    this.imageNutritionSmallUrl,
+    this.imagePackagingUrl,
+    this.imagePackagingSmallUrl,
+    this.servingSize,
+    this.servingQuantity,
+    this.packagingQuantity,
+    this.selectedImages,
+    this.images,
+    this.ingredients,
+    this.ingredientsText,
+    this.ingredientsTextInLanguages,
+    this.ingredientsTags,
+    this.ingredientsTagsInLanguages,
+    this.ingredientsAnalysisTags,
+    this.additives,
+    this.allergens,
+    this.nutrientLevels,
+    this.nutrimentEnergyUnit,
+    this.nutrimentDataPer,
+    this.nutriscore,
+    this.categories,
+    this.categoriesTags,
+    this.categoriesTagsInLanguages,
+    this.labels,
+    this.labelsTags,
+    this.labelsTagsInLanguages,
+    this.packaging,
+    this.packagingTags,
+    this.miscTags,
+    this.statesTags,
+    this.tracesTags,
+    this.storesTags,
+    this.stores,
+    this.attributeGroups,
+    this.lastModified,
+    this.ecoscoreGrade,
+    this.ecoscoreScore,
+    this.ecoscoreData,
+    Nutriments? nutriments,
+    bool? noNutritionData,
+  }) : _nutriments = nutriments,
+       _noNutritionData = noNutritionData;
 
   factory Product.fromJson(Map<String, dynamic> json) {
     final Product result = _$ProductFromJson(json);
@@ -837,8 +858,10 @@ class Product extends JsonObject {
           setLanguageListString(productField, language, json, key);
           return;
         case ProductField.IMAGES_FRESHNESS_IN_LANGUAGES:
-          final Map<ImageField, int> values =
-              _jsonValueToImagesFreshness(json[key], language);
+          final Map<ImageField, int> values = _jsonValueToImagesFreshness(
+            json[key],
+            language,
+          );
           result.imagesFreshnessInLanguages ??= {};
           result.imagesFreshnessInLanguages![language] = values;
           return;
@@ -898,8 +921,10 @@ class Product extends JsonObject {
         ProductField.getInLanguagesList(),
       );
       if (productField != null) {
-        final OpenFoodFactsLanguage language =
-            _langFrom(key, productField.offTag);
+        final OpenFoodFactsLanguage language = _langFrom(
+          key,
+          productField.offTag,
+        );
         if (language != OpenFoodFactsLanguage.UNDEFINED) {
           addInLanguagesData(productField, language, json, key);
         }
@@ -937,7 +962,9 @@ class Product extends JsonObject {
   }
 
   static Map<ImageField, int> _jsonValueToImagesFreshness(
-      Map value, OpenFoodFactsLanguage language) {
+    Map value,
+    OpenFoodFactsLanguage language,
+  ) {
     final Map<ImageField, int> result = {};
     for (final ImageField imageField in ImageField.values) {
       final int? timestamp = value['${imageField.offTag}_${language.offTag}'];
@@ -969,8 +996,10 @@ class Product extends JsonObject {
           final langKey = entry.key;
           final lang = LanguageHelper.fromJson(langKey);
           if (lang == OpenFoodFactsLanguage.UNDEFINED) {
-            throw StateError('Cannot send localized field without '
-                'a proper language. Received: $langKey');
+            throw StateError(
+              'Cannot send localized field without '
+              'a proper language. Received: $langKey',
+            );
           }
           final keyNoLangs = key.substring(0, key.indexOf('_in_languages'));
           final realKey = '${keyNoLangs}_${lang.offTag}';
@@ -983,9 +1012,7 @@ class Product extends JsonObject {
   }
 
   /// Returns all existing product attributes matching a list of attribute ids.
-  Map<String, Attribute> getAttributes(
-    final List<String> attributeIds,
-  ) {
+  Map<String, Attribute> getAttributes(final List<String> attributeIds) {
     final Map<String, Attribute> result = <String, Attribute>{};
     if (attributeGroups == null) {
       return result;
@@ -1005,12 +1032,10 @@ class Product extends JsonObject {
   }
 
   /// Returns the product attribute matching an attribute id.
-  Attribute? getAttribute(
-    final String attributeId,
-  ) {
-    final Map<String, Attribute> attributes = getAttributes(
-      <String>[attributeId],
-    );
+  Attribute? getAttribute(final String attributeId) {
+    final Map<String, Attribute> attributes = getAttributes(<String>[
+      attributeId,
+    ]);
     return attributes[attributeId];
   }
 
@@ -1049,7 +1074,7 @@ class Product extends JsonObject {
       result.add(ProductImprovement.OBSOLETE_NUTRITION_IMAGE);
     }
 
-// TODO (Optional) Add Nutri-Score disclaimers cf. https://github.com/openfoodfacts/openfoodfacts-dart/issues/193
+    // TODO (Optional) Add Nutri-Score disclaimers cf. https://github.com/openfoodfacts/openfoodfacts-dart/issues/193
     return result;
   }
 
@@ -1077,7 +1102,10 @@ class Product extends JsonObject {
   }
 
   @JsonKey(
-      name: 'nutriments', includeIfNull: false, toJson: Nutriments.toJsonHelper)
+    name: 'nutriments',
+    includeIfNull: false,
+    toJson: Nutriments.toJsonHelper,
+  )
   Nutriments? get nutriments => _noNutritionData == true ? null : _nutriments;
 
   set nutriments(Nutriments? nutriments) {

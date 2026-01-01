@@ -17,9 +17,7 @@ enum ProofType implements OffTagged {
   @JsonValue('SHOP_IMPORT')
   shopImport(offTag: 'SHOP_IMPORT');
 
-  const ProofType({
-    required this.offTag,
-  });
+  const ProofType({required this.offTag});
 
   @override
   final String offTag;

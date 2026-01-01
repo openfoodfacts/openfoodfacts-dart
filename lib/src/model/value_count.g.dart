@@ -7,9 +7,9 @@ part of 'value_count.dart';
 // **************************************************************************
 
 ValueCount _$ValueCountFromJson(Map<String, dynamic> json) => ValueCount(
-      value: json['v'] as String,
-      productCount: (json['product_count'] as num).toInt(),
-    );
+  value: json['v'] as String,
+  productCount: (json['product_count'] as num).toInt(),
+);
 
 Map<String, dynamic> _$ValueCountToJson(ValueCount instance) =>
     <String, dynamic>{

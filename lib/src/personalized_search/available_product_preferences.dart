@@ -12,7 +12,8 @@ class AvailableProductPreferences {
         AvailableAttributeGroups.loadFromJSONString(attributeGroupsString);
     final AvailablePreferenceImportances availablePreferenceImportances =
         AvailablePreferenceImportances.loadFromJSONString(
-            preferenceImportancesString);
+          preferenceImportancesString,
+        );
     _availableAttributeGroups = availableAttributeGroups;
     _availablePreferenceImportances = availablePreferenceImportances;
   }

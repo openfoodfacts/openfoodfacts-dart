@@ -17,35 +17,35 @@ class Attribute extends JsonObject {
   });
 
   factory Attribute.fromJson(dynamic json) => Attribute(
-        id: json[_JSON_TAG_ID] as String,
-        name: json[_JSON_TAG_NAME] as String?,
-        title: json[_JSON_TAG_TITLE] as String?,
-        iconUrl: json[_JSON_TAG_ICON_URL] as String?,
-        defaultF: json[_JSON_TAG_DEFAULT] as String?,
-        settingNote: json[_JSON_TAG_SETTING_NOTE] as String?,
-        settingName: json[_JSON_TAG_SETTING_NAME] as String?,
-        description: json[_JSON_TAG_DESCRIPTION] as String?,
-        descriptionShort: json[_JSON_TAG_DESCRIPTION_SHORT] as String?,
-        match: JsonObject.parseDouble(json[_JSON_TAG_MATCH]),
-        status: json[_JSON_TAG_STATUS] as String?,
-        panelId: json[_JSON_TAG_PANEL_ID] as String?,
-      );
+    id: json[_JSON_TAG_ID] as String,
+    name: json[_JSON_TAG_NAME] as String?,
+    title: json[_JSON_TAG_TITLE] as String?,
+    iconUrl: json[_JSON_TAG_ICON_URL] as String?,
+    defaultF: json[_JSON_TAG_DEFAULT] as String?,
+    settingNote: json[_JSON_TAG_SETTING_NOTE] as String?,
+    settingName: json[_JSON_TAG_SETTING_NAME] as String?,
+    description: json[_JSON_TAG_DESCRIPTION] as String?,
+    descriptionShort: json[_JSON_TAG_DESCRIPTION_SHORT] as String?,
+    match: JsonObject.parseDouble(json[_JSON_TAG_MATCH]),
+    status: json[_JSON_TAG_STATUS] as String?,
+    panelId: json[_JSON_TAG_PANEL_ID] as String?,
+  );
 
   @override
   Map<String, dynamic> toJson() => JsonObject.removeNullEntries({
-        _JSON_TAG_ID: id,
-        _JSON_TAG_NAME: name,
-        _JSON_TAG_TITLE: title,
-        _JSON_TAG_ICON_URL: iconUrl,
-        _JSON_TAG_DEFAULT: defaultF,
-        _JSON_TAG_SETTING_NOTE: settingNote,
-        _JSON_TAG_SETTING_NAME: settingName,
-        _JSON_TAG_DESCRIPTION: description,
-        _JSON_TAG_DESCRIPTION_SHORT: descriptionShort,
-        _JSON_TAG_MATCH: match,
-        _JSON_TAG_STATUS: status,
-        _JSON_TAG_PANEL_ID: panelId,
-      });
+    _JSON_TAG_ID: id,
+    _JSON_TAG_NAME: name,
+    _JSON_TAG_TITLE: title,
+    _JSON_TAG_ICON_URL: iconUrl,
+    _JSON_TAG_DEFAULT: defaultF,
+    _JSON_TAG_SETTING_NOTE: settingNote,
+    _JSON_TAG_SETTING_NAME: settingName,
+    _JSON_TAG_DESCRIPTION: description,
+    _JSON_TAG_DESCRIPTION_SHORT: descriptionShort,
+    _JSON_TAG_MATCH: match,
+    _JSON_TAG_STATUS: status,
+    _JSON_TAG_PANEL_ID: panelId,
+  });
 
   static const String _JSON_TAG_ID = 'id';
   static const String _JSON_TAG_NAME = 'name';

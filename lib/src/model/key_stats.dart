@@ -13,11 +13,7 @@ class KeyStats extends JsonObject {
   @JsonKey(name: 'values')
   final int values;
 
-  KeyStats({
-    required this.key,
-    required this.count,
-    required this.values,
-  });
+  KeyStats({required this.key, required this.count, required this.values});
 
   factory KeyStats.fromJson(Map<String, dynamic> json) =>
       _$KeyStatsFromJson(json);

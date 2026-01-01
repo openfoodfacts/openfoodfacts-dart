@@ -13,7 +13,7 @@ LocalizedTag _$LocalizedTagFromJson(Map<String, dynamic> json) => LocalizedTag()
 
 Map<String, dynamic> _$LocalizedTagToJson(LocalizedTag instance) =>
     <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.lcName case final value?) 'lc_name': value,
+      'id': ?instance.id,
+      'name': ?instance.name,
+      'lc_name': ?instance.lcName,
     };

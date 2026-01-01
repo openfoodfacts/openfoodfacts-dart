@@ -102,8 +102,13 @@ class KnowledgePanelImageElement extends JsonObject {
   @JsonKey(name: 'link_url')
   final String? linkUrl;
 
-  const KnowledgePanelImageElement(
-      {required this.url, this.width, this.height, this.altText, this.linkUrl});
+  const KnowledgePanelImageElement({
+    required this.url,
+    this.width,
+    this.height,
+    this.altText,
+    this.linkUrl,
+  });
 
   factory KnowledgePanelImageElement.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelImageElementFromJson(json);
@@ -122,8 +127,10 @@ class KnowledgePanelPanelGroupElement extends JsonObject {
   @JsonKey(name: 'panel_ids')
   final List<String> panelIds;
 
-  const KnowledgePanelPanelGroupElement(
-      {required this.title, required this.panelIds});
+  const KnowledgePanelPanelGroupElement({
+    required this.title,
+    required this.panelIds,
+  });
 
   factory KnowledgePanelPanelGroupElement.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelPanelGroupElementFromJson(json);
@@ -164,8 +171,12 @@ class KnowledgePanelTableCell extends JsonObject {
   @JsonKey(unknownEnumValue: Evaluation.UNKNOWN)
   final Evaluation? evaluation;
 
-  const KnowledgePanelTableCell(
-      {required this.text, this.percent, this.iconUrl, this.evaluation});
+  const KnowledgePanelTableCell({
+    required this.text,
+    this.percent,
+    this.iconUrl,
+    this.evaluation,
+  });
 
   factory KnowledgePanelTableCell.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelTableCellFromJson(json);
@@ -228,9 +239,7 @@ class KnowledgePanelTableColumn extends JsonObject {
 class KnowledgePanelWorldMapElement extends JsonObject {
   final List<KnowledgePanelGeoPointer> pointers;
 
-  const KnowledgePanelWorldMapElement({
-    required this.pointers,
-  });
+  const KnowledgePanelWorldMapElement({required this.pointers});
 
   factory KnowledgePanelWorldMapElement.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelWorldMapElementFromJson(json);
@@ -244,9 +253,7 @@ class KnowledgePanelWorldMapElement extends JsonObject {
 class KnowledgePanelGeoPointer extends JsonObject {
   final KnowledgePanelLatLng? geo;
 
-  const KnowledgePanelGeoPointer({
-    this.geo,
-  });
+  const KnowledgePanelGeoPointer({this.geo});
 
   factory KnowledgePanelGeoPointer.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelGeoPointerFromJson(json);
@@ -261,10 +268,7 @@ class KnowledgePanelLatLng extends JsonObject {
   final double lat;
   final double lng;
 
-  const KnowledgePanelLatLng({
-    required this.lat,
-    required this.lng,
-  });
+  const KnowledgePanelLatLng({required this.lat, required this.lng});
 
   factory KnowledgePanelLatLng.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelLatLngFromJson(json);
@@ -308,10 +312,7 @@ class KnowledgePanelActionElement extends JsonObject {
   /// Needed contribute actions, as [KnowledgePanelAction.addCategories.offTag].
   final List<String> actions;
 
-  const KnowledgePanelActionElement({
-    this.html,
-    required this.actions,
-  });
+  const KnowledgePanelActionElement({this.html, required this.actions});
 
   factory KnowledgePanelActionElement.fromJson(Map<String, dynamic> json) =>
       _$KnowledgePanelActionElementFromJson(json);
@@ -355,7 +356,9 @@ class KnowledgePanelElement extends JsonObject {
   ///
   /// Client may choose to display the description depending upon the type.
   @JsonKey(
-      name: 'element_type', unknownEnumValue: KnowledgePanelElementType.UNKNOWN)
+    name: 'element_type',
+    unknownEnumValue: KnowledgePanelElementType.UNKNOWN,
+  )
   final KnowledgePanelElementType elementType;
 
   /// Text description of the Knowledge panel.

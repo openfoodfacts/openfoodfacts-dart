@@ -52,16 +52,19 @@ class LoginStatus {
   /// authenticated user.
   final String? cookie;
 
-  factory LoginStatus.fromJson(Map<String, dynamic> json,
-      [Map<String, String>? headers]) {
+  factory LoginStatus.fromJson(
+    Map<String, dynamic> json, [
+    Map<String, String>? headers,
+  ]) {
     final details = json['user'];
     return LoginStatus(
       status: JsonObject.parseInt(json['status'])!,
       statusVerbose: json['status_verbose'] as String,
       userId: json['user_id'] as String?,
       userName: details?['name'] as String?,
-      preferredLanguage:
-          OpenFoodFactsLanguage.fromOffTag(details?['preferred_language']),
+      preferredLanguage: OpenFoodFactsLanguage.fromOffTag(
+        details?['preferred_language'],
+      ),
       country: OpenFoodFactsCountry.fromOffTag(details?['cc']),
       isModerator: JsonHelper.boolFromJSON(details?['moderator']),
       isAdmin: JsonHelper.boolFromJSON(details?['admin']),
@@ -73,7 +76,8 @@ class LoginStatus {
   bool get successful => status == 1;
 
   @override
-  String toString() => 'LoginStatus('
+  String toString() =>
+      'LoginStatus('
       'status:$status'
       ',statusVerbose:$statusVerbose'
       '${userId == null ? '' : ',userId:$userId'}'
