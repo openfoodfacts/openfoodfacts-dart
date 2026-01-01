@@ -58,13 +58,12 @@ class OpenPricesAPIClient {
     final Map<String, dynamic>? queryParameters,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final bool? addUserAgentParameters,
-  }) =>
-      uriHelper.getUri(
-        path: path,
-        queryParameters: queryParameters,
-        forcedHost: _getHost(uriHelper),
-        addUserAgentParameters: addUserAgentParameters,
-      );
+  }) => uriHelper.getUri(
+    path: path,
+    queryParameters: queryParameters,
+    forcedHost: _getHost(uriHelper),
+    addUserAgentParameters: addUserAgentParameters,
+  );
 
   static Future<MaybeError<PriceUser>> getUser(
     final String username, {
@@ -73,14 +72,14 @@ class OpenPricesAPIClient {
     final Uri uri = OpenPricesAPIClient.getUri(
       path: '/api/v1/users/${Uri.encodeComponent(username)}',
     );
-    final http.Response response =
-        await HttpHelper().doGetRequest(uri, uriHelper: uriHelper);
+    final http.Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+    );
     try {
       if (response.statusCode == 200) {
         final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        return MaybeError<PriceUser>.value(
-          PriceUser.fromJson(decodedResponse),
-        );
+        return MaybeError<PriceUser>.value(PriceUser.fromJson(decodedResponse));
       }
     } catch (e) {
       //
@@ -132,9 +131,7 @@ class OpenPricesAPIClient {
     if (response.statusCode == 200) {
       try {
         final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        return MaybeError<Price>.value(
-          Price.fromJson(decodedResponse),
-        );
+        return MaybeError<Price>.value(Price.fromJson(decodedResponse));
       } catch (e) {
         //
       }
@@ -352,10 +349,7 @@ class OpenPricesAPIClient {
   static Future<MaybeError<String>> getStatus({
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/status',
-      uriHelper: uriHelper,
-    );
+    final Uri uri = getUri(path: '/api/v1/status', uriHelper: uriHelper);
     final Response response = await HttpHelper().doGetRequest(
       uri,
       uriHelper: uriHelper,
@@ -391,10 +385,7 @@ class OpenPricesAPIClient {
     );
     final Response response = await post(
       uri,
-      body: <String, String>{
-        'username': username,
-        'password': password,
-      },
+      body: <String, String>{'username': username, 'password': password},
     );
     if (response.statusCode == 200) {
       try {
@@ -412,10 +403,7 @@ class OpenPricesAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
     required final String bearerToken,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/session',
-      uriHelper: uriHelper,
-    );
+    final Uri uri = getUri(path: '/api/v1/session', uriHelper: uriHelper);
     final Response response = await HttpHelper().doGetRequest(
       uri,
       uriHelper: uriHelper,
@@ -439,10 +427,7 @@ class OpenPricesAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
     required final String bearerToken,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/session',
-      uriHelper: uriHelper,
-    );
+    final Uri uri = getUri(path: '/api/v1/session', uriHelper: uriHelper);
     final Response response = await HttpHelper().doDeleteRequest(
       uri,
       uriHelper: uriHelper,
@@ -464,10 +449,7 @@ class OpenPricesAPIClient {
     required final String bearerToken,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/prices',
-      uriHelper: uriHelper,
-    );
+    final Uri uri = getUri(path: '/api/v1/prices', uriHelper: uriHelper);
     final Map<String, dynamic> body = <String, dynamic>{
       'price': price.price,
       'currency': price.currency.name,
@@ -588,7 +570,7 @@ class OpenPricesAPIClient {
     return MaybeError<GetProofsResult>.responseError(response);
   }
 
-// TODO: deprecated from 2025-04-25 regarding single parameters; remove them when old enough
+  // TODO: deprecated from 2025-04-25 regarding single parameters; remove them when old enough
   /// Uploads a proof.
   ///
   /// Returns the proof uploaded on the server.
@@ -612,10 +594,7 @@ class OpenPricesAPIClient {
     required final String bearerToken,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/proofs/upload',
-      uriHelper: uriHelper,
-    );
+    final Uri uri = getUri(path: '/api/v1/proofs/upload', uriHelper: uriHelper);
 
     final http.MultipartRequest request = http.MultipartRequest('POST', uri);
     request.headers.addAll({
@@ -625,21 +604,18 @@ class OpenPricesAPIClient {
     if (createProofParameters != null) {
       request.fields.addAll(createProofParameters.toData());
     } else {
-      request.fields.addAll(
-        <String, String>{
-          'type': proofType!.offTag,
-          if (locationOSMId != null)
-            'location_osm_id': locationOSMId.toString(),
-          if (locationOSMType != null)
-            'location_osm_type': locationOSMType.offTag,
-          if (date != null) 'date': GetParametersHelper.formatDate(date),
-          if (currency != null) 'currency': currency.name,
-          if (receiptPriceCount != null)
-            'receipt_price_count': receiptPriceCount.toString(),
-          if (receiptPriceTotal != null)
-            'receipt_price_total': receiptPriceTotal.toString(),
-        },
-      );
+      request.fields.addAll(<String, String>{
+        'type': proofType!.offTag,
+        if (locationOSMId != null) 'location_osm_id': locationOSMId.toString(),
+        if (locationOSMType != null)
+          'location_osm_type': locationOSMType.offTag,
+        if (date != null) 'date': GetParametersHelper.formatDate(date),
+        if (currency != null) 'currency': currency.name,
+        if (receiptPriceCount != null)
+          'receipt_price_count': receiptPriceCount.toString(),
+        if (receiptPriceTotal != null)
+          'receipt_price_total': receiptPriceTotal.toString(),
+      });
     }
     final List<int> fileBytes = await UriReader.instance.readAsBytes(imageUri);
     final String filename = basename(imageUri.toString());
@@ -786,10 +762,7 @@ class OpenPricesAPIClient {
   static Future<MaybeError<PriceTotalStats>> getStats({
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/stats',
-      uriHelper: uriHelper,
-    );
+    final Uri uri = getUri(path: '/api/v1/stats', uriHelper: uriHelper);
     final Response response = await HttpHelper().doGetRequest(
       uri,
       uriHelper: uriHelper,

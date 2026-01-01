@@ -6,7 +6,7 @@ class ProductTypeFilter implements OffTagged {
   const ProductTypeFilter._(this.offTag);
 
   ProductTypeFilter(final ProductType productType)
-      : offTag = productType.offTag;
+    : offTag = productType.offTag;
 
   static const ProductTypeFilter all = ProductTypeFilter._('all');
 

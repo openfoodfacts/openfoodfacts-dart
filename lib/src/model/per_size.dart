@@ -8,9 +8,7 @@ enum PerSize implements OffTagged {
   /// Per 100 grams of product
   oneHundredGrams(offTag: '100g');
 
-  const PerSize({
-    required this.offTag,
-  });
+  const PerSize({required this.offTag});
 
   @override
   final String offTag;

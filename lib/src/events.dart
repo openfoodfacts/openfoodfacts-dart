@@ -37,10 +37,7 @@ class EventsAPIClient {
       parameters['limit'] = limit.toString();
     }
     final Response response = await HttpHelper().doGetRequest(
-      uriHelper.getUri(
-        path: '/events',
-        queryParameters: parameters,
-      ),
+      uriHelper.getUri(path: '/events', queryParameters: parameters),
       uriHelper: uriHelper,
     );
     _checkResponse(response);
@@ -67,10 +64,7 @@ class EventsAPIClient {
       parameters['device_id'] = deviceId;
     }
     final Response response = await HttpHelper().doGetRequest(
-      uriHelper.getUri(
-        path: '/events/count',
-        queryParameters: parameters,
-      ),
+      uriHelper.getUri(path: '/events/count', queryParameters: parameters),
       uriHelper: uriHelper,
     );
     _checkResponse(response);
@@ -101,10 +95,7 @@ class EventsAPIClient {
       parameters['event_type'] = eventType;
     }
     final Response response = await HttpHelper().doGetRequest(
-      uriHelper.getUri(
-        path: '/scores',
-        queryParameters: parameters,
-      ),
+      uriHelper.getUri(path: '/scores', queryParameters: parameters),
       uriHelper: uriHelper,
     );
     _checkResponse(response);
@@ -127,10 +118,7 @@ class EventsAPIClient {
       parameters['device_id'] = deviceId;
     }
     final Response response = await HttpHelper().doGetRequest(
-      uriHelper.getUri(
-        path: '/badges',
-        queryParameters: parameters,
-      ),
+      uriHelper.getUri(path: '/badges', queryParameters: parameters),
       uriHelper: uriHelper,
     );
     _checkResponse(response);
@@ -153,10 +141,7 @@ class EventsAPIClient {
       parameters['event_type'] = eventType;
     }
     final Response response = await HttpHelper().doGetRequest(
-      uriHelper.getUri(
-        path: '/leaderboard',
-        queryParameters: parameters,
-      ),
+      uriHelper.getUri(path: '/leaderboard', queryParameters: parameters),
       uriHelper: uriHelper,
     );
     _checkResponse(response);

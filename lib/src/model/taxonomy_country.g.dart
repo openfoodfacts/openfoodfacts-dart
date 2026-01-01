@@ -8,17 +8,21 @@ part of 'taxonomy_country.dart';
 
 TaxonomyCountry _$TaxonomyCountryFromJson(Map<String, dynamic> json) =>
     TaxonomyCountry()
-      ..countryCode2 =
-          LanguageHelper.fromJsonStringMapIsoUnique(json['country_code_2'])
-      ..countryCode3 =
-          LanguageHelper.fromJsonStringMapIsoUnique(json['country_code_3'])
-      ..languages =
-          LanguageHelper.fromJsonStringMapIsoList(json['language_codes'])
+      ..countryCode2 = LanguageHelper.fromJsonStringMapIsoUnique(
+        json['country_code_2'],
+      )
+      ..countryCode3 = LanguageHelper.fromJsonStringMapIsoUnique(
+        json['country_code_3'],
+      )
+      ..languages = LanguageHelper.fromJsonStringMapIsoList(
+        json['language_codes'],
+      )
       ..name = LanguageHelper.fromJsonStringMap(json['name'])
       ..synonyms = LanguageHelper.fromJsonStringMapList(json['synonyms'])
       ..wikidata = LanguageHelper.fromJsonStringMapIsoUnique(json['wikidata'])
       ..officialCountryCode2 = LanguageHelper.fromJsonStringMapIsoUnique(
-          json['official_country_code_2']);
+        json['official_country_code_2'],
+      );
 
 Map<String, dynamic> _$TaxonomyCountryToJson(TaxonomyCountry instance) =>
     <String, dynamic>{
@@ -29,12 +33,14 @@ Map<String, dynamic> _$TaxonomyCountryToJson(TaxonomyCountry instance) =>
               .toList()
           case final value?)
         'language_codes': value,
-      if (instance.name
-              ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e))
+      if (instance.name?.map(
+            (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+          )
           case final value?)
         'name': value,
-      if (instance.synonyms
-              ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e))
+      if (instance.synonyms?.map(
+            (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+          )
           case final value?)
         'synonyms': value,
       if (instance.wikidata case final value?) 'wikidata': value,

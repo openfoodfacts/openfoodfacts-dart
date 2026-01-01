@@ -121,22 +121,20 @@ class Proof extends JsonObject {
   Uri? getFileUrl({
     required final UriProductHelper uriProductHelper,
     final bool isThumbnail = false,
-  }) =>
-      _getFileUrl(
-        uriProductHelper: uriProductHelper,
-        path: isThumbnail ? imageThumbPath : filePath,
-      );
+  }) => _getFileUrl(
+    uriProductHelper: uriProductHelper,
+    path: isThumbnail ? imageThumbPath : filePath,
+  );
 
   /// Returns the URL of a proof image.
   static Uri? _getFileUrl({
     required final UriProductHelper uriProductHelper,
     required String? path,
-  }) =>
-      path == null
-          ? null
-          : OpenPricesAPIClient.getUri(
-              path: 'img/$path',
-              uriHelper: uriProductHelper,
-              addUserAgentParameters: false,
-            );
+  }) => path == null
+      ? null
+      : OpenPricesAPIClient.getUri(
+          path: 'img/$path',
+          uriHelper: uriProductHelper,
+          addUserAgentParameters: false,
+        );
 }

@@ -89,8 +89,9 @@ class RobotoffAPIClient {
       if (count != null) 'count': count.toString(),
       if (serverType != null) 'server_type': serverType.offTag,
       if (insightTypes != null)
-        'insight_types':
-            insightTypes.map((InsightType type) => type.offTag).join(','),
+        'insight_types': insightTypes
+            .map((InsightType type) => type.offTag)
+            .join(','),
     };
 
     var robotoffQuestionUri = uriHelper.getUri(
@@ -166,13 +167,11 @@ class RobotoffAPIClient {
     bool update = true,
     final UriHelper uriHelper = uriHelperRobotoffProd,
   }) async {
-    var insightUri = uriHelper.getUri(
-      path: 'api/v1/insights/annotate',
-    );
+    var insightUri = uriHelper.getUri(path: 'api/v1/insights/annotate');
 
     final Map<String, String> annotationData = {
       'annotation': annotation.value.toString(),
-      'update': update ? '1' : '0'
+      'update': update ? '1' : '0',
     };
     if (insightId != null) {
       annotationData['insight_id'] = insightId;
@@ -209,10 +208,7 @@ class RobotoffAPIClient {
       queryParameters: parameters,
     );
 
-    final response = await HttpHelper().doGetRequest(
-      uri,
-      uriHelper: uriHelper,
-    );
+    final response = await HttpHelper().doGetRequest(uri, uriHelper: uriHelper);
 
     return RobotoffNutrientExtractionResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),

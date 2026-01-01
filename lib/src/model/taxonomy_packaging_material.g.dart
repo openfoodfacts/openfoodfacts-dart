@@ -7,29 +7,33 @@ part of 'taxonomy_packaging_material.dart';
 // **************************************************************************
 
 TaxonomyPackagingMaterial _$TaxonomyPackagingMaterialFromJson(
-        Map<String, dynamic> json) =>
-    TaxonomyPackagingMaterial()
-      ..name = LanguageHelper.fromJsonStringMap(json['name'])
-      ..synonyms = LanguageHelper.fromJsonStringMapList(json['synonyms'])
-      ..children =
-          (json['children'] as List<dynamic>?)?.map((e) => e as String).toList()
-      ..parents =
-          (json['parents'] as List<dynamic>?)?.map((e) => e as String).toList();
+  Map<String, dynamic> json,
+) => TaxonomyPackagingMaterial()
+  ..name = LanguageHelper.fromJsonStringMap(json['name'])
+  ..synonyms = LanguageHelper.fromJsonStringMapList(json['synonyms'])
+  ..children = (json['children'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList()
+  ..parents = (json['parents'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList();
 
 Map<String, dynamic> _$TaxonomyPackagingMaterialToJson(
-        TaxonomyPackagingMaterial instance) =>
-    <String, dynamic>{
-      if (instance.name
-              ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e))
-          case final value?)
-        'name': value,
-      if (instance.synonyms
-              ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e))
-          case final value?)
-        'synonyms': value,
-      if (instance.children case final value?) 'children': value,
-      if (instance.parents case final value?) 'parents': value,
-    };
+  TaxonomyPackagingMaterial instance,
+) => <String, dynamic>{
+  if (instance.name?.map(
+        (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+      )
+      case final value?)
+    'name': value,
+  if (instance.synonyms?.map(
+        (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+      )
+      case final value?)
+    'synonyms': value,
+  if (instance.children case final value?) 'children': value,
+  if (instance.parents case final value?) 'parents': value,
+};
 
 const _$OpenFoodFactsLanguageEnumMap = {
   OpenFoodFactsLanguage.ENGLISH: 'ENGLISH',

@@ -32,10 +32,12 @@ void main() {
         ),
       );
       final String languageCode = language.code;
-      final String importanceUrl =
-          AvailablePreferenceImportances.getUrl(languageCode);
-      final String attributeGroupUrl =
-          AvailableAttributeGroups.getUrl(languageCode);
+      final String importanceUrl = AvailablePreferenceImportances.getUrl(
+        languageCode,
+      );
+      final String attributeGroupUrl = AvailableAttributeGroups.getUrl(
+        languageCode,
+      );
       http.Response response;
       response = await http.get(Uri.parse(importanceUrl));
       expect(response.statusCode, HTTP_OK);
@@ -45,9 +47,9 @@ void main() {
       final String attributeGroupsString = response.body;
       manager.availableProductPreferences =
           AvailableProductPreferences.loadFromJSONStrings(
-        preferenceImportancesString: preferenceImportancesString,
-        attributeGroupsString: attributeGroupsString,
-      );
+            preferenceImportancesString: preferenceImportancesString,
+            attributeGroupsString: attributeGroupsString,
+          );
       expect(refreshCounter, 0);
 
       const List<String> allAttributes = <String>[
@@ -99,8 +101,9 @@ void main() {
 
       int count = 0;
       for (final String importance in importances) {
-        final List<String> attributes =
-            manager.getAttributeIdsWithImportance(importance);
+        final List<String> attributes = manager.getAttributeIdsWithImportance(
+          importance,
+        );
         for (final String attribute in attributes) {
           expect(importanceForAttributes[attribute], isNotNull);
           expect(importanceForAttributes[attribute], importance);

@@ -142,8 +142,9 @@ class JsonHelper {
       }
 
       if (imageId != null) {
-        final DateTime? uploaded =
-            timestampToDate(fieldObject[_ALL_IMAGES_TAG_UPLOADED]);
+        final DateTime? uploaded = timestampToDate(
+          fieldObject[_ALL_IMAGES_TAG_UPLOADED],
+        );
         final String? contributor = fieldObject[_ALL_IMAGES_TAG_UPLOADER];
         // get each number object (e.g. 200)
         for (var size in ImageSize.values) {
@@ -167,8 +168,9 @@ class JsonHelper {
         continue;
       }
 
-      final int? rev =
-          JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_REVISION]);
+      final int? rev = JsonObject.parseInt(
+        fieldObject[_ALL_IMAGES_TAG_REVISION],
+      );
       final String imgid = fieldObject[_ALL_IMAGES_TAG_IMAGE_ID].toString();
       final ImageAngle? angle = ImageAngleExtension.fromInt(
         JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_ANGLE]),
@@ -187,10 +189,12 @@ class JsonHelper {
         if (numberObject == null) {
           continue;
         }
-        final int? width =
-            JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_WIDTH]);
-        final int? height =
-            JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]);
+        final int? width = JsonObject.parseInt(
+          numberObject[_ALL_IMAGES_TAG_WIDTH],
+        );
+        final int? height = JsonObject.parseInt(
+          numberObject[_ALL_IMAGES_TAG_HEIGHT],
+        );
         final String? url = numberObject[_ALL_IMAGES_TAG_URL];
 
         var image = ProductImage(
@@ -275,8 +279,9 @@ class JsonHelper {
           first = false;
           if (!productImage.isMain) {
             if (productImage.uploaded != null) {
-              item[_ALL_IMAGES_TAG_UPLOADED] =
-                  dateToTimestamp(productImage.uploaded);
+              item[_ALL_IMAGES_TAG_UPLOADED] = dateToTimestamp(
+                productImage.uploaded,
+              );
             }
             if (productImage.contributor != null) {
               item[_ALL_IMAGES_TAG_UPLOADER] = productImage.contributor;
@@ -289,8 +294,8 @@ class JsonHelper {
               item[_ALL_IMAGES_TAG_IMAGE_ID] = productImage.imgid!;
             }
             if (productImage.angle != null) {
-              item[_ALL_IMAGES_TAG_ANGLE] =
-                  productImage.angle!.degree.toString();
+              item[_ALL_IMAGES_TAG_ANGLE] = productImage.angle!.degree
+                  .toString();
             }
             if (productImage.coordinatesImageSize != null) {
               item[_ALL_IMAGES_TAG_COORDINATES] =
@@ -333,7 +338,8 @@ class JsonHelper {
 
   /// Returns a JSON map from [Ingredient]s
   static List<Map<String, dynamic>>? ingredientsToJson(
-      List<Ingredient>? ingredients) {
+    List<Ingredient>? ingredients,
+  ) {
     if (ingredients == null || ingredients.isEmpty) {
       return null;
     }
@@ -349,7 +355,8 @@ class JsonHelper {
 
   /// Returns a JSON map from [ProductPackaging]s
   static List<Map<String, dynamic>>? productPackagingsToJson(
-      List<ProductPackaging>? packagings) {
+    List<ProductPackaging>? packagings,
+  ) {
     if (packagings == null) {
       return null;
     }
@@ -365,7 +372,8 @@ class JsonHelper {
 
   /// Returns a JSON map from [AttributeGroup]s
   static List<Map<String, dynamic>>? attributeGroupsToJson(
-      List<AttributeGroup>? list) {
+    List<AttributeGroup>? list,
+  ) {
     if (list == null || list.isEmpty) {
       return null;
     }
@@ -386,8 +394,9 @@ class JsonHelper {
     }
     final int timestamp = JsonObject.parseInt(json)!;
     return DateTime.fromMillisecondsSinceEpoch(
-        Duration.millisecondsPerSecond * timestamp,
-        isUtc: true);
+      Duration.millisecondsPerSecond * timestamp,
+      isUtc: true,
+    );
   }
 
   /// Returns UTC seconds since epoch from a [DateTime]

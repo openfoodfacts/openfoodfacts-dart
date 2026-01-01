@@ -13,10 +13,7 @@ class ProductResultField extends JsonObject {
   String? id;
 
   /// Value sent by the user, here converted to String.
-  @JsonKey(
-    includeIfNull: false,
-    fromJson: JsonHelper.stringFromJSON,
-  )
+  @JsonKey(includeIfNull: false, fromJson: JsonHelper.stringFromJSON)
   String? value;
 
   @JsonKey(

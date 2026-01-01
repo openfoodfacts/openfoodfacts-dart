@@ -9,9 +9,7 @@ enum LocationType implements OffTagged {
   @JsonValue('ONLINE')
   online(offTag: 'ONLINE');
 
-  const LocationType({
-    required this.offTag,
-  });
+  const LocationType({required this.offTag});
 
   @override
   final String offTag;

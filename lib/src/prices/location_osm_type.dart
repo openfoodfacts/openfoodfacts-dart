@@ -13,9 +13,7 @@ enum LocationOSMType implements OffTagged {
   @JsonValue('RELATION')
   relation(offTag: 'RELATION');
 
-  const LocationOSMType({
-    required this.offTag,
-  });
+  const LocationOSMType({required this.offTag});
 
   @override
   final String offTag;

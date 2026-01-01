@@ -7,39 +7,45 @@ part of 'taxonomy_packaging_recycling.dart';
 // **************************************************************************
 
 TaxonomyPackagingRecycling _$TaxonomyPackagingRecyclingFromJson(
-        Map<String, dynamic> json) =>
-    TaxonomyPackagingRecycling()
-      ..name = LanguageHelper.fromJsonStringMap(json['name'])
-      ..synonyms = LanguageHelper.fromJsonStringMapList(json['synonyms'])
-      ..shape = LanguageHelper.fromJsonStringMap(json['shape'])
-      ..material = LanguageHelper.fromJsonStringMap(json['material'])
-      ..children =
-          (json['children'] as List<dynamic>?)?.map((e) => e as String).toList()
-      ..parents =
-          (json['parents'] as List<dynamic>?)?.map((e) => e as String).toList();
+  Map<String, dynamic> json,
+) => TaxonomyPackagingRecycling()
+  ..name = LanguageHelper.fromJsonStringMap(json['name'])
+  ..synonyms = LanguageHelper.fromJsonStringMapList(json['synonyms'])
+  ..shape = LanguageHelper.fromJsonStringMap(json['shape'])
+  ..material = LanguageHelper.fromJsonStringMap(json['material'])
+  ..children = (json['children'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList()
+  ..parents = (json['parents'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList();
 
 Map<String, dynamic> _$TaxonomyPackagingRecyclingToJson(
-        TaxonomyPackagingRecycling instance) =>
-    <String, dynamic>{
-      if (instance.name
-              ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e))
-          case final value?)
-        'name': value,
-      if (instance.synonyms
-              ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e))
-          case final value?)
-        'synonyms': value,
-      if (instance.shape
-              ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e))
-          case final value?)
-        'shape': value,
-      if (instance.material
-              ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e))
-          case final value?)
-        'material': value,
-      if (instance.children case final value?) 'children': value,
-      if (instance.parents case final value?) 'parents': value,
-    };
+  TaxonomyPackagingRecycling instance,
+) => <String, dynamic>{
+  if (instance.name?.map(
+        (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+      )
+      case final value?)
+    'name': value,
+  if (instance.synonyms?.map(
+        (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+      )
+      case final value?)
+    'synonyms': value,
+  if (instance.shape?.map(
+        (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+      )
+      case final value?)
+    'shape': value,
+  if (instance.material?.map(
+        (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+      )
+      case final value?)
+    'material': value,
+  if (instance.children case final value?) 'children': value,
+  if (instance.parents case final value?) 'parents': value,
+};
 
 const _$OpenFoodFactsLanguageEnumMap = {
   OpenFoodFactsLanguage.ENGLISH: 'ENGLISH',

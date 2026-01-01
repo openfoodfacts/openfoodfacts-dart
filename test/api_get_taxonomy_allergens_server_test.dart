@@ -26,8 +26,8 @@ void main() {
     test('get all allergens', () async {
       final Map<String, TaxonomyAllergen>? allergens =
           await OpenFoodAPIClient.getTaxonomyAllergens(
-        TaxonomyAllergenQueryConfiguration.all(),
-      );
+            TaxonomyAllergenQueryConfiguration.all(),
+          );
       expect(allergens, isNotNull);
       expect(allergens!.length, greaterThan(10)); // was 15 on 2022-02-25
       for (final TaxonomyAllergen allergen in allergens.values) {
@@ -39,8 +39,8 @@ void main() {
     test('get an allergen', () async {
       final Map<String, TaxonomyAllergen>? allergens =
           await OpenFoodAPIClient.getTaxonomyAllergens(
-        TaxonomyAllergenQueryConfiguration(tags: <String>[knownTag]),
-      );
+            TaxonomyAllergenQueryConfiguration(tags: <String>[knownTag]),
+          );
       expect(allergens, isNotNull);
       expect(allergens!.length, 1);
       final TaxonomyAllergen allergen = allergens[knownTag]!;
@@ -50,18 +50,18 @@ void main() {
     test("get an allergen that doesn't exist", () async {
       final Map<String, TaxonomyAllergen>? allergens =
           await OpenFoodAPIClient.getTaxonomyAllergens(
-        TaxonomyAllergenQueryConfiguration(tags: <String>[unknownTag]),
-      );
+            TaxonomyAllergenQueryConfiguration(tags: <String>[unknownTag]),
+          );
       expect(allergens, isNull);
     });
 
     test("get an allergen that doesn't exist with one that does", () async {
       final Map<String, TaxonomyAllergen>? allergens =
           await OpenFoodAPIClient.getTaxonomyAllergens(
-        TaxonomyAllergenQueryConfiguration(
-          tags: <String>[unknownTag, knownTag],
-        ),
-      );
+            TaxonomyAllergenQueryConfiguration(
+              tags: <String>[unknownTag, knownTag],
+            ),
+          );
       expect(allergens, isNotNull);
       expect(allergens!.length, 1);
       final TaxonomyAllergen allergen = allergens[knownTag]!;

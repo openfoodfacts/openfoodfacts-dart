@@ -1,4 +1,4 @@
-import 'package:openfoodfacts/src/model/off_tagged.dart';
+import '../model/off_tagged.dart';
 
 /// PNNS food groups
 ///
@@ -38,10 +38,7 @@ enum PnnsGroup1 {
   ),
   FAT_AND_SAUCES(
     name: 'Fat and sauces',
-    subGroups: <PnnsGroup2>[
-      PnnsGroup2.DRESSINGS_AND_SAUCES,
-      PnnsGroup2.FATS,
-    ],
+    subGroups: <PnnsGroup2>[PnnsGroup2.DRESSINGS_AND_SAUCES, PnnsGroup2.FATS],
   ),
   FISH_MEAT_AND_EGGS(
     name: 'Fish, meat and eggs',
@@ -49,7 +46,7 @@ enum PnnsGroup1 {
       PnnsGroup2.PROCESSED_MEAT,
       PnnsGroup2.MEAT,
       PnnsGroup2.FISH_AND_SEAFOOD,
-      PnnsGroup2.OFFALS
+      PnnsGroup2.OFFALS,
     ],
   ),
   FRUITS_AND_VEGETABLES(
@@ -83,14 +80,11 @@ enum PnnsGroup1 {
     subGroups: <PnnsGroup2>[
       PnnsGroup2.SWEETS,
       PnnsGroup2.CHOCOLATE_PRODUCTS,
-      PnnsGroup2.ICE_CREAM
+      PnnsGroup2.ICE_CREAM,
     ],
   );
 
-  const PnnsGroup1({
-    required this.name,
-    required this.subGroups,
-  });
+  const PnnsGroup1({required this.name, required this.subGroups});
 
   /// Name in English
   final String name;
@@ -101,10 +95,7 @@ enum PnnsGroup1 {
 
 /// PNNS food subgroups.
 enum PnnsGroup2 implements OffTagged {
-  FRUIT_JUICES(
-    offTag: 'fruit-juices',
-    name: 'Fruit juices',
-  ),
+  FRUIT_JUICES(offTag: 'fruit-juices', name: 'Fruit juices'),
   SWEETENED_BEVERAGES(
     offTag: 'sweetened-beverages',
     name: 'Sweetened beverages',
@@ -125,143 +116,54 @@ enum PnnsGroup2 implements OffTagged {
     offTag: 'waters-and-flavored-waters',
     name: 'Waters and flavored waters',
   ),
-  FRUIT_NECTARS(
-    offTag: 'fruit-nectars',
-    name: 'Fruits nectars',
-  ),
+  FRUIT_NECTARS(offTag: 'fruit-nectars', name: 'Fruits nectars'),
   TEAS_AND_HERBAL_TEAS_AND_COFFEES(
     offTag: 'teas-and-herbal-teas-and-coffees',
     name: 'Teas and herbal teas and coffees',
   ),
-
-  BREAKFAST_CEREALS(
-    offTag: 'breakfast-cereals',
-    name: 'Breakfast cereals',
-  ),
-  PASTRIES(
-    offTag: 'pastries',
-    name: 'Pastries',
-  ),
-  POTATOES(
-    offTag: 'potatoes',
-    name: 'Potatoes',
-  ),
-  CEREALS(
-    offTag: 'cereals',
-    name: 'Cereals',
-  ),
-  BREAD(
-    offTag: 'bread',
-    name: 'Bread',
-  ),
-
+  BREAKFAST_CEREALS(offTag: 'breakfast-cereals', name: 'Breakfast cereals'),
+  PASTRIES(offTag: 'pastries', name: 'Pastries'),
+  POTATOES(offTag: 'potatoes', name: 'Potatoes'),
+  CEREALS(offTag: 'cereals', name: 'Cereals'),
+  BREAD(offTag: 'bread', name: 'Bread'),
   PIZZA_PIES_AND_QUICHE(
     offTag: 'pizza-pies-and-quiche',
     name: 'Pizza, pies and quiche',
   ),
-  SANDWICHES(
-    offTag: 'sandwiches',
-    name: 'Sandwiches',
-  ),
-  SOUPS(
-    offTag: 'soups',
-    name: 'Soups',
-  ),
-  ONE_DISH_MEALS(
-    offTag: 'one-dish-meals',
-    name: 'One dish meals',
-  ),
-
+  SANDWICHES(offTag: 'sandwiches', name: 'Sandwiches'),
+  SOUPS(offTag: 'soups', name: 'Soups'),
+  ONE_DISH_MEALS(offTag: 'one-dish-meals', name: 'One dish meals'),
   DRESSINGS_AND_SAUCES(
     offTag: 'dressings-and-sauces',
     name: 'Dressings and sauces',
   ),
-  FATS(
-    offTag: 'fats',
-    name: 'Fats',
-  ),
-
-  PROCESSED_MEAT(
-    offTag: 'processed-meat',
-    name: 'Processed meat',
-  ),
-  MEAT(
-    offTag: 'meat',
-    name: 'Meat',
-  ),
-  FISH_AND_SEAFOOD(
-    offTag: 'fish-and-seafood',
-    name: 'Fish and seafood',
-  ),
-  OFFALS(
-    offTag: 'offals',
-    name: 'Offals',
-  ),
-
-  FRUITS(
-    offTag: 'fruits',
-    name: 'Fruits',
-  ),
-  VEGETABLES(
-    offTag: 'vegetables',
-    name: 'Vegetables',
-  ),
-  DRIED_FRUITS(
-    offTag: 'dried-fruits',
-    name: 'Dried fruits',
-  ),
-  NUTS(
-    offTag: 'nuts',
-    name: 'Nuts',
-  ),
-  LEGUMES(
-    offTag: 'legumes',
-    name: 'Legumes',
-  ),
-
-  MILK_AND_YOGURT(
-    offTag: 'milk-and-yogurt',
-    name: 'Milk and yogurt',
-  ),
-  DAIRY_DESSERTS(
-    offTag: 'dairy-desserts',
-    name: 'Dairy desserts',
-  ),
-  CHEESE(
-    offTag: 'cheese',
-    name: 'Cheese',
-  ),
+  FATS(offTag: 'fats', name: 'Fats'),
+  PROCESSED_MEAT(offTag: 'processed-meat', name: 'Processed meat'),
+  MEAT(offTag: 'meat', name: 'Meat'),
+  FISH_AND_SEAFOOD(offTag: 'fish-and-seafood', name: 'Fish and seafood'),
+  OFFALS(offTag: 'offals', name: 'Offals'),
+  FRUITS(offTag: 'fruits', name: 'Fruits'),
+  VEGETABLES(offTag: 'vegetables', name: 'Vegetables'),
+  DRIED_FRUITS(offTag: 'dried-fruits', name: 'Dried fruits'),
+  NUTS(offTag: 'nuts', name: 'Nuts'),
+  LEGUMES(offTag: 'legumes', name: 'Legumes'),
+  MILK_AND_YOGURT(offTag: 'milk-and-yogurt', name: 'Milk and yogurt'),
+  DAIRY_DESSERTS(offTag: 'dairy-desserts', name: 'Dairy desserts'),
+  CHEESE(offTag: 'cheese', name: 'Cheese'),
   PLANT_BASED_MILK_SUBSTITUTES(
     offTag: 'plant-based-milk-substitutes',
     name: 'Plant based milk substitutes',
   ),
-
-  APPETIZERS(
-    offTag: 'appetizers',
-    name: 'Appetizers',
-  ),
+  APPETIZERS(offTag: 'appetizers', name: 'Appetizers'),
   SALTY_AND_FATTY_PRODUCTS(
     offTag: 'salty-and-fatty-products',
     name: 'Salty and fatty products',
   ),
+  SWEETS(offTag: 'sweets', name: 'Sweets'),
+  CHOCOLATE_PRODUCTS(offTag: 'chocolate-products', name: 'Chocolate products'),
+  ICE_CREAM(offTag: 'ice-cream', name: 'Ice cream');
 
-  SWEETS(
-    offTag: 'sweets',
-    name: 'Sweets',
-  ),
-  CHOCOLATE_PRODUCTS(
-    offTag: 'chocolate-products',
-    name: 'Chocolate products',
-  ),
-  ICE_CREAM(
-    offTag: 'ice-cream',
-    name: 'Ice cream',
-  );
-
-  const PnnsGroup2({
-    required this.offTag,
-    required this.name,
-  });
+  const PnnsGroup2({required this.offTag, required this.name});
 
   @override
   final String offTag;

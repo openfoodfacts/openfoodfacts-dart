@@ -30,22 +30,18 @@ void main() {
     final ProductQueryConfiguration configurations = ProductQueryConfiguration(
       barcode,
       language: OpenFoodFactsLanguage.ENGLISH,
-      fields: [
-        ProductField.BARCODE,
-        ProductField.PRODUCT_TYPE,
-      ],
+      fields: [ProductField.BARCODE, ProductField.PRODUCT_TYPE],
       version: ProductQueryVersion.v3,
       productTypeFilter: productTypeFilter,
     );
     await getProductTooManyRequestsManager.waitIfNeeded();
-    final bool shouldSucceed = expectedProductType == serverProductType ||
+    final bool shouldSucceed =
+        expectedProductType == serverProductType ||
         productTypeFilter == ProductTypeFilter.all ||
         productTypeFilter?.offTag == expectedProductType.offTag;
     final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
       configurations,
-      uriHelper: UriProductHelper(
-        domain: domains[serverProductType]!,
-      ),
+      uriHelper: UriProductHelper(domain: domains[serverProductType]!),
     );
     if (shouldSucceed) {
       expect(result.status, ProductResultV3.statusSuccess);
@@ -60,19 +56,12 @@ void main() {
     }
   }
 
-  Future<void> checkProduct(
-    final ProductTypeFilter? filter,
-  ) async {
+  Future<void> checkProduct(final ProductTypeFilter? filter) async {
     for (MapEntry<ProductType, String> item in barcodes.entries) {
       final ProductType productType = item.key;
       final String barcode = item.value;
       for (final ProductType serverProductType in domains.keys) {
-        await findProduct(
-          barcode,
-          productType,
-          serverProductType,
-          filter,
-        );
+        await findProduct(barcode, productType, serverProductType, filter);
       }
     }
   }
@@ -80,24 +69,18 @@ void main() {
   group(
     '$OpenFoodAPIClient get not food products v3',
     () {
-      test(
-        'get OxF product without filter',
-        () async => checkProduct(null),
-      );
+      test('get OxF product without filter', () async => checkProduct(null));
 
       test(
         'get OxF product with ALL filter',
         () async => checkProduct(ProductTypeFilter.all),
       );
 
-      test(
-        'get OxF product with specific filter',
-        () async {
-          for (final ProductType productType in ProductType.values) {
-            await checkProduct(ProductTypeFilter(productType));
-          }
-        },
-      );
+      test('get OxF product with specific filter', () async {
+        for (final ProductType productType in ProductType.values) {
+          await checkProduct(ProductTypeFilter(productType));
+        }
+      });
     },
     timeout: Timeout(
       // some tests can be slow here

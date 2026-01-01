@@ -22,8 +22,8 @@ jobs:
       - name: Install dependencies
         run: dart pub get
 
-      - name: Check for formatting issues (run "flutter format . ")
-        run: dart --version && dart format --set-exit-if-changed .
+      - name: Check for formatting issues (run "dart format . ")
+        run: dart format --set-exit-if-changed .
 
       - name: Analyze project
         run: dart analyze

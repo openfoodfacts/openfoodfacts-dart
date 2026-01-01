@@ -37,12 +37,12 @@ Map<String, dynamic> _$TermCorrectionsToJson(TermCorrections instance) =>
     };
 
 Correction _$CorrectionFromJson(Map<String, dynamic> json) => Correction(
-      json['correction'] as String?,
-      json['original'] as String?,
-      (json['start_offset'] as num?)?.toInt(),
-      (json['end_offset'] as num?)?.toInt(),
-      json['is_valid'] as bool?,
-    );
+  json['correction'] as String?,
+  json['original'] as String?,
+  (json['start_offset'] as num?)?.toInt(),
+  (json['end_offset'] as num?)?.toInt(),
+  json['is_valid'] as bool?,
+);
 
 Map<String, dynamic> _$CorrectionToJson(Correction instance) =>
     <String, dynamic>{

@@ -24,7 +24,10 @@ enum Nutrient implements OffTagged {
 
   /// Saturated Fats
   saturatedFat(
-      typicalUnit: Unit.G, offTag: 'saturated-fat', acceptsPercentDV: false),
+    typicalUnit: Unit.G,
+    offTag: 'saturated-fat',
+    acceptsPercentDV: false,
+  ),
 
   /// Proteins
   proteins(typicalUnit: Unit.G, offTag: 'proteins', acceptsPercentDV: false),
@@ -37,11 +40,7 @@ enum Nutrient implements OffTagged {
   ),
 
   /// Energy in kj
-  energyKJ(
-    typicalUnit: Unit.KJ,
-    offTag: 'energy-kj',
-    acceptsPercentDV: false,
-  ),
+  energyKJ(typicalUnit: Unit.KJ, offTag: 'energy-kj', acceptsPercentDV: false),
 
   /// Carbohydrates
   carbohydrates(
@@ -224,7 +223,9 @@ enum Nutrient implements OffTagged {
 
   /// Dihomo-Gamma-Linolenic Acid
   dihomoGammaLinolenicAcid(
-      typicalUnit: Unit.G, offTag: 'dihomo-gamma-linolenic-acid'),
+    typicalUnit: Unit.G,
+    offTag: 'dihomo-gamma-linolenic-acid',
+  ),
 
   /// Elaidic Acid
   elaidicAcid(typicalUnit: Unit.G, offTag: 'elaidic-acid'),
@@ -324,26 +325,36 @@ enum Nutrient implements OffTagged {
 
   /// Methylsulfonylmethane
   methylsulfonylmethane(
-      typicalUnit: Unit.MILLI_G, offTag: 'methylsulfonylmethane'),
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'methylsulfonylmethane',
+  ),
 
   /// pH
   ph(typicalUnit: Unit.UNKNOWN, offTag: 'ph'),
 
   /// Fruits Vegetables Nuts
   fruitsVegetablesNuts(
-      typicalUnit: Unit.PERCENT, offTag: 'fruits-vegetables-nuts'),
+    typicalUnit: Unit.PERCENT,
+    offTag: 'fruits-vegetables-nuts',
+  ),
 
   /// Fruits Vegetables Nuts Dried
   fruitsVegetablesNutsDried(
-      typicalUnit: Unit.PERCENT, offTag: 'fruits-vegetables-nuts-dried'),
+    typicalUnit: Unit.PERCENT,
+    offTag: 'fruits-vegetables-nuts-dried',
+  ),
 
   /// Fruits Vegetables Nuts Estimate
   fruitsVegetablesNutsEstimate(
-      typicalUnit: Unit.PERCENT, offTag: 'fruits-vegetables-nuts-estimate'),
+    typicalUnit: Unit.PERCENT,
+    offTag: 'fruits-vegetables-nuts-estimate',
+  ),
 
   /// Collagen Meat Protein Ratio
   collagenMeatProteinRatio(
-      typicalUnit: Unit.PERCENT, offTag: 'collagen-meat-protein-ratio'),
+    typicalUnit: Unit.PERCENT,
+    offTag: 'collagen-meat-protein-ratio',
+  ),
 
   /// Cocoa
   cocoa(typicalUnit: Unit.PERCENT, offTag: 'cocoa'),
@@ -356,7 +367,9 @@ enum Nutrient implements OffTagged {
 
   /// Carbon footprint from meat or fish
   carbonFootprintFromMeatOrFish(
-      typicalUnit: Unit.G, offTag: 'carbon-footprint-from-meat-or-fish'),
+    typicalUnit: Unit.G,
+    offTag: 'carbon-footprint-from-meat-or-fish',
+  ),
 
   /// Nutrition Score FR
   nutritionScoreFR(typicalUnit: Unit.UNKNOWN, offTag: 'nutrition-score-fr'),
@@ -538,11 +551,7 @@ enum Nutrient implements OffTagged {
   /// Typical unit. An educated guess only: may differ according to countries.
   final Unit typicalUnit;
 
-  static const List<Unit> _weightUnits = [
-    Unit.G,
-    Unit.MILLI_G,
-    Unit.MICRO_G,
-  ];
+  static const List<Unit> _weightUnits = [Unit.G, Unit.MILLI_G, Unit.MICRO_G];
 
   /// Can this nutrient typically be valued in weight? (g, mg, mcg)
   bool get acceptsWeight => _weightUnits.contains(typicalUnit);
