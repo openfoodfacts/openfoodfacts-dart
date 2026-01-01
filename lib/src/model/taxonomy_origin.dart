@@ -79,14 +79,14 @@ class TaxonomyOriginQueryConfiguration
     List<Parameter> additionalParameters = const [],
     bool includeChildren = false,
   }) : super(
-          TagType.ORIGINS,
-          tags,
-          languages: languages,
-          country: country,
-          includeChildren: includeChildren,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.ORIGINS,
+         tags,
+         languages: languages,
+         country: country,
+         includeChildren: includeChildren,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   TaxonomyOriginQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages,
@@ -95,13 +95,13 @@ class TaxonomyOriginQueryConfiguration
     List<Parameter> additionalParameters = const [],
     bool includeChildren = false,
   }) : super.roots(
-          TagType.ORIGINS,
-          languages: languages,
-          country: country,
-          includeChildren: includeChildren,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.ORIGINS,
+         languages: languages,
+         country: country,
+         includeChildren: includeChildren,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   @override
   Map<String, TaxonomyOrigin> convertResults(dynamic jsonData) {
@@ -122,8 +122,8 @@ class TaxonomyOriginQueryConfiguration
 
   @override
   Iterable<String> convertFieldsToStrings(
-          Iterable<TaxonomyOriginField> fields) =>
-      fields
-          .where((TaxonomyOriginField field) => !ignoredFields.contains(field))
-          .map<String>((TaxonomyOriginField field) => field.offTag);
+    Iterable<TaxonomyOriginField> fields,
+  ) => fields
+      .where((TaxonomyOriginField field) => !ignoredFields.contains(field))
+      .map<String>((TaxonomyOriginField field) => field.offTag);
 }

@@ -34,19 +34,19 @@ class UpdatePriceParameters extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => <String, dynamic>{
-        if (pricePer != null) 'price_per': pricePer!.offTag,
-        if (priceIsDiscounted != null) 'price_is_discounted': priceIsDiscounted,
-        if (priceIsDiscounted == false)
-          'discount_type': null
-        else if (discountType != null)
-          'discount_type': discountType!.offTag,
-        if (priceIsDiscounted == false)
-          'price_without_discount': null
-        else if (priceWithoutDiscount != null)
-          'price_without_discount': priceWithoutDiscount,
-        if (price != null) 'price': price,
-        if (currency != null) 'currency': currency!.name,
-        if (date != null) 'date': GetParametersHelper.formatDate(date!),
-        if (receiptQuantity != null) 'receipt_quantity': receiptQuantity,
-      };
+    if (pricePer != null) 'price_per': pricePer!.offTag,
+    if (priceIsDiscounted != null) 'price_is_discounted': priceIsDiscounted,
+    if (priceIsDiscounted == false)
+      'discount_type': null
+    else if (discountType != null)
+      'discount_type': discountType!.offTag,
+    if (priceIsDiscounted == false)
+      'price_without_discount': null
+    else if (priceWithoutDiscount != null)
+      'price_without_discount': priceWithoutDiscount,
+    if (price != null) 'price': price,
+    if (currency != null) 'currency': currency!.name,
+    if (date != null) 'date': GetParametersHelper.formatDate(date!),
+    if (receiptQuantity != null) 'receipt_quantity': receiptQuantity,
+  };
 }

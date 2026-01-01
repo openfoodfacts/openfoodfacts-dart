@@ -4,7 +4,9 @@
 enum ProductState {
   CHECKED(completedTag: 'en:checked', toBeCompletedTag: 'en:to-be-checked'),
   COMPLETED(
-      completedTag: 'en:complete', toBeCompletedTag: 'en:to-be-completed'),
+    completedTag: 'en:complete',
+    toBeCompletedTag: 'en:to-be-completed',
+  ),
   NUTRITION_FACTS_COMPLETED.completed(tag: 'en:nutrition-facts'),
   INGREDIENTS_COMPLETED.completed(tag: 'en:ingredients'),
   EXPIRATION_DATE_COMPLETED.completed(tag: 'en:expiration-date'),
@@ -34,17 +36,17 @@ enum ProductState {
     required final String tag,
     required final String action,
   }) : this(
-          completedTag: '$tag-$action',
-          toBeCompletedTag: '$tag-to-be-$action',
-        );
+         completedTag: '$tag-$action',
+         toBeCompletedTag: '$tag-to-be-$action',
+       );
 
   /// Simple case where we can build the tag values, for 'completed'.
   const ProductState.completed({required final String tag})
-      : this.simple(tag: tag, action: 'completed');
+    : this.simple(tag: tag, action: 'completed');
 
   /// Simple case where we can build the tag values, for 'selected'.
   const ProductState.selected({required final String tag})
-      : this.simple(tag: tag, action: 'selected');
+    : this.simple(tag: tag, action: 'selected');
 
   final String completedTag;
   final String toBeCompletedTag;

@@ -10,12 +10,12 @@ void main() {
     test('get questions for Noix de Saint-Jacques EN and answer', () async {
       RobotoffQuestionResult result =
           await RobotoffAPIClient.getProductQuestions(
-        '0080868000633',
-        OpenFoodFactsLanguage.ENGLISH,
-        user: TestConstants.TEST_USER,
-        count: 1,
-        uriHelper: uriHelper,
-      );
+            '0080868000633',
+            OpenFoodFactsLanguage.ENGLISH,
+            user: TestConstants.TEST_USER,
+            count: 1,
+            uriHelper: uriHelper,
+          );
 
       if (result.status == 'found') {
         Status postResult = await RobotoffAPIClient.postInsightAnnotation(

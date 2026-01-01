@@ -100,9 +100,7 @@ class OpenFoodAPIClient {
       parameterMap['cc'] = country.offTag;
     }
 
-    var productUri = uriHelper.getPostUri(
-      path: '/cgi/product_jqm2.pl',
-    );
+    var productUri = uriHelper.getPostUri(path: '/cgi/product_jqm2.pl');
 
     if (product.nutriments != null) {
       final Map<String, String> rawNutrients = product.nutriments!.toData();
@@ -503,7 +501,7 @@ class OpenFoodAPIClient {
   //TODO(x): Add taxonomy documentation
 
   static Future<Map<String, T>?>
-      getTaxonomy<T extends JsonObject, F extends Enum>(
+  getTaxonomy<T extends JsonObject, F extends Enum>(
     TaxonomyQueryConfiguration<T, F> configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
@@ -536,31 +534,29 @@ class OpenFoodAPIClient {
   }
 
   static Future<Map<String, TaxonomyPackagingShape>?>
-      getTaxonomyPackagingShapes(
+  getTaxonomyPackagingShapes(
     TaxonomyPackagingShapeQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) =>
-          getTaxonomy<TaxonomyPackagingShape, TaxonomyPackagingShapeField>(
-            configuration,
-            user: user,
-            uriHelper: uriHelper,
-          );
+  }) => getTaxonomy<TaxonomyPackagingShape, TaxonomyPackagingShapeField>(
+    configuration,
+    user: user,
+    uriHelper: uriHelper,
+  );
 
-  static Future<
-      Map<String, TaxonomyPackagingMaterial>?> getTaxonomyPackagingMaterials(
+  static Future<Map<String, TaxonomyPackagingMaterial>?>
+  getTaxonomyPackagingMaterials(
     TaxonomyPackagingMaterialQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) =>
-      getTaxonomy<TaxonomyPackagingMaterial, TaxonomyPackagingMaterialField>(
-        configuration,
-        user: user,
-        uriHelper: uriHelper,
-      );
+  }) => getTaxonomy<TaxonomyPackagingMaterial, TaxonomyPackagingMaterialField>(
+    configuration,
+    user: user,
+    uriHelper: uriHelper,
+  );
 
-  static Future<
-      Map<String, TaxonomyPackagingRecycling>?> getTaxonomyPackagingRecycling(
+  static Future<Map<String, TaxonomyPackagingRecycling>?>
+  getTaxonomyPackagingRecycling(
     TaxonomyPackagingRecyclingQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
@@ -575,111 +571,101 @@ class OpenFoodAPIClient {
     TaxonomyNovaQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) =>
-      getTaxonomy<TaxonomyNova, TaxonomyNovaField>(
-        configuration,
-        user: user,
-        uriHelper: uriHelper,
-      );
+  }) => getTaxonomy<TaxonomyNova, TaxonomyNovaField>(
+    configuration,
+    user: user,
+    uriHelper: uriHelper,
+  );
 
   static Future<Map<String, TaxonomyCategory>?> getTaxonomyCategories(
     TaxonomyCategoryQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) =>
-      getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(
-        configuration,
-        user: user,
-        uriHelper: uriHelper,
-      );
+  }) => getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(
+    configuration,
+    user: user,
+    uriHelper: uriHelper,
+  );
 
   static Future<Map<String, TaxonomyAdditive>?> getTaxonomyAdditives(
     TaxonomyAdditiveQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) =>
-      getTaxonomy<TaxonomyAdditive, TaxonomyAdditiveField>(
-        configuration,
-        user: user,
-        uriHelper: uriHelper,
-      );
+  }) => getTaxonomy<TaxonomyAdditive, TaxonomyAdditiveField>(
+    configuration,
+    user: user,
+    uriHelper: uriHelper,
+  );
 
   static Future<Map<String, TaxonomyAllergen>?> getTaxonomyAllergens(
     TaxonomyAllergenQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) =>
-      getTaxonomy<TaxonomyAllergen, TaxonomyAllergenField>(
-        configuration,
-        user: user,
-        uriHelper: uriHelper,
-      );
+  }) => getTaxonomy<TaxonomyAllergen, TaxonomyAllergenField>(
+    configuration,
+    user: user,
+    uriHelper: uriHelper,
+  );
 
   static Future<Map<String, TaxonomyCountry>?> getTaxonomyCountries(
     TaxonomyCountryQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) =>
-      getTaxonomy<TaxonomyCountry, TaxonomyCountryField>(
-        configuration,
-        user: user,
-        uriHelper: uriHelper,
-      );
+  }) => getTaxonomy<TaxonomyCountry, TaxonomyCountryField>(
+    configuration,
+    user: user,
+    uriHelper: uriHelper,
+  );
 
   static Future<Map<String, TaxonomyIngredient>?> getTaxonomyIngredients(
     TaxonomyIngredientQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) =>
-      getTaxonomy<TaxonomyIngredient, TaxonomyIngredientField>(
-        configuration,
-        user: user,
-        uriHelper: uriHelper,
-      );
+  }) => getTaxonomy<TaxonomyIngredient, TaxonomyIngredientField>(
+    configuration,
+    user: user,
+    uriHelper: uriHelper,
+  );
 
   static Future<Map<String, TaxonomyLabel>?> getTaxonomyLabels(
     TaxonomyLabelQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) =>
-      getTaxonomy<TaxonomyLabel, TaxonomyLabelField>(
-        configuration,
-        user: user,
-        uriHelper: uriHelper,
-      );
+  }) => getTaxonomy<TaxonomyLabel, TaxonomyLabelField>(
+    configuration,
+    user: user,
+    uriHelper: uriHelper,
+  );
 
   static Future<Map<String, TaxonomyLanguage>?> getTaxonomyLanguages(
     TaxonomyLanguageQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) =>
-      getTaxonomy<TaxonomyLanguage, TaxonomyLanguageField>(
-        configuration,
-        user: user,
-        uriHelper: uriHelper,
-      );
+  }) => getTaxonomy<TaxonomyLanguage, TaxonomyLanguageField>(
+    configuration,
+    user: user,
+    uriHelper: uriHelper,
+  );
 
   static Future<Map<String, TaxonomyPackaging>?> getTaxonomyPackagings(
     final TaxonomyPackagingQueryConfiguration configuration, {
     final User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) =>
-      getTaxonomy<TaxonomyPackaging, TaxonomyPackagingField>(
-        configuration,
-        user: user,
-        uriHelper: uriHelper,
-      );
+  }) => getTaxonomy<TaxonomyPackaging, TaxonomyPackagingField>(
+    configuration,
+    user: user,
+    uriHelper: uriHelper,
+  );
 
   static Future<Map<String, TaxonomyOrigin>?> getTaxonomyOrigins(
     TaxonomyOriginQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) =>
-      getTaxonomy<TaxonomyOrigin, TaxonomyOriginField>(
-        configuration,
-        user: user,
-        uriHelper: uriHelper,
-      );
+  }) => getTaxonomy<TaxonomyOrigin, TaxonomyOriginField>(
+    configuration,
+    user: user,
+    uriHelper: uriHelper,
+  );
 
   static void _removeImages(
     final SearchResult searchResult,
@@ -718,14 +704,12 @@ class OpenFoodAPIClient {
     OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
-    final Uri uri = uriHelper.getPostUri(
-      path: '/cgi/ingredients.pl',
-    );
+    final Uri uri = uriHelper.getPostUri(path: '/cgi/ingredients.pl');
     final Map<String, String> queryParameters = <String, String>{
       'code': barcode,
       'process_image': '1',
       'id': 'ingredients_${language.offTag}',
-      'ocr_engine': ocrField.offTag
+      'ocr_engine': ocrField.offTag,
     };
     final Response response = await HttpHelper().doPostRequest(
       uri,
@@ -763,14 +747,12 @@ class OpenFoodAPIClient {
     final OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
-    final Uri uri = uriHelper.getPostUri(
-      path: '/cgi/packaging.pl',
-    );
+    final Uri uri = uriHelper.getPostUri(path: '/cgi/packaging.pl');
     final Map<String, String> queryParameters = <String, String>{
       'code': barcode,
       'process_image': '1',
       'id': 'packaging_${language.offTag}',
-      'ocr_engine': ocrField.offTag
+      'ocr_engine': ocrField.offTag,
     };
     final Response response = await HttpHelper().doPostRequest(
       uri,
@@ -872,12 +854,14 @@ class OpenFoodAPIClient {
     try {
       final Map<String, dynamic> json = HttpHelper().jsonDecode(response.body);
       final String canonicalTags = json['canonical_tags_list'];
-      final List<String> splitResult =
-          canonicalTags.isEmpty ? <String>[] : canonicalTags.split(',');
+      final List<String> splitResult = canonicalTags.isEmpty
+          ? <String>[]
+          : canonicalTags.split(',');
       if (input.length != splitResult.length) {
         return MaybeError.error(
           statusCode: response.statusCode,
-          error: 'Mismatched result count:'
+          error:
+              'Mismatched result count:'
               ' input(${input.length})'
               ',output(${splitResult.length})',
         );
@@ -926,12 +910,14 @@ class OpenFoodAPIClient {
     try {
       final Map<String, dynamic> json = HttpHelper().jsonDecode(response.body);
       final String result = json['local_tags_list'];
-      final List<String> splitResult =
-          result.isEmpty ? <String>[] : result.split(', ');
+      final List<String> splitResult = result.isEmpty
+          ? <String>[]
+          : result.split(', ');
       if (input.length != splitResult.length) {
         return MaybeError<Map<String, String>>.error(
           statusCode: response.statusCode,
-          error: 'Mismatched result count:'
+          error:
+              'Mismatched result count:'
               ' input(${input.length})'
               ',output(${splitResult.length})',
         );
@@ -976,9 +962,7 @@ class OpenFoodAPIClient {
     final User user, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
-    final Uri uri = uriHelper.getPostUri(
-      path: '/cgi/auth.pl',
-    );
+    final Uri uri = uriHelper.getPostUri(path: '/cgi/auth.pl');
     final Response response = await HttpHelper().doPostRequest(
       uri,
       <String, String>{'body': '1'},
@@ -1185,17 +1169,16 @@ class OpenFoodAPIClient {
     required final OpenFoodFactsLanguage language,
     final bool excludeReadOnly = true,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) async =>
-      OrderedNutrients.fromJson(
-        HttpHelper().jsonDecode(
-          await getOrderedNutrientsJsonString(
-            country: country,
-            language: language,
-            uriHelper: uriHelper,
-          ),
-        ),
-        excludeReadOnly: excludeReadOnly,
-      );
+  }) async => OrderedNutrients.fromJson(
+    HttpHelper().jsonDecode(
+      await getOrderedNutrientsJsonString(
+        country: country,
+        language: language,
+        uriHelper: uriHelper,
+      ),
+    ),
+    excludeReadOnly: excludeReadOnly,
+  );
 
   /// Returns the nutrient hierarchy specific to a country, localized, as JSON
   /// Use [OpenFoodAPIClient.getOrderedNutrients] to get them as a
@@ -1205,9 +1188,7 @@ class OpenFoodAPIClient {
     required final OpenFoodFactsLanguage language,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
-    final Uri uri = uriHelper.getPostUri(
-      path: 'cgi/nutrients.pl',
-    );
+    final Uri uri = uriHelper.getPostUri(path: 'cgi/nutrients.pl');
     Map<String, String> queryParameters = <String, String>{
       'cc': country.offTag,
       'lc': language.offTag,
@@ -1241,18 +1222,15 @@ class OpenFoodAPIClient {
     required final ImageAngle angle,
     required final User user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) async =>
-      _callProductImageCrop(
-        barcode: barcode,
-        imageField: imageField,
-        language: language,
-        imgid: imgid,
-        user: user,
-        extraParameters: <String, String>{
-          'angle': angle.degreesClockwise,
-        },
-        uriHelper: uriHelper,
-      );
+  }) async => _callProductImageCrop(
+    barcode: barcode,
+    imageField: imageField,
+    language: language,
+    imgid: imgid,
+    user: user,
+    extraParameters: <String, String>{'angle': angle.degreesClockwise},
+    uriHelper: uriHelper,
+  );
 
   /// Crops an already uploaded image.
   ///
@@ -1276,23 +1254,22 @@ class OpenFoodAPIClient {
     required final User user,
     final ImageAngle angle = ImageAngle.NOON,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) async =>
-      _callProductImageCrop(
-        barcode: barcode,
-        imageField: imageField,
-        language: language,
-        imgid: imgid,
-        user: user,
-        extraParameters: <String, String>{
-          'x1': x1.toString(),
-          'y1': y1.toString(),
-          'x2': x2.toString(),
-          'y2': y2.toString(),
-          'angle': angle.degreesClockwise,
-          'coordinates_image_size': 'full',
-        },
-        uriHelper: uriHelper,
-      );
+  }) async => _callProductImageCrop(
+    barcode: barcode,
+    imageField: imageField,
+    language: language,
+    imgid: imgid,
+    user: user,
+    extraParameters: <String, String>{
+      'x1': x1.toString(),
+      'y1': y1.toString(),
+      'x2': x2.toString(),
+      'y2': y2.toString(),
+      'angle': angle.degreesClockwise,
+      'coordinates_image_size': 'full',
+    },
+    uriHelper: uriHelper,
+  );
 
   /// Calls `cgi/product_image_crop.pl` on a [ProductImage].
   ///
@@ -1314,9 +1291,7 @@ class OpenFoodAPIClient {
       'imgid': imgid,
     };
     queryParameters.addAll(extraParameters);
-    final Uri uri = uriHelper.getPostUri(
-      path: 'cgi/product_image_crop.pl',
-    );
+    final Uri uri = uriHelper.getPostUri(path: 'cgi/product_image_crop.pl');
 
     final Response response = await HttpHelper().doPostRequest(
       uri,
@@ -1327,7 +1302,8 @@ class OpenFoodAPIClient {
     );
     if (response.statusCode != 200) {
       throw Exception(
-          'Bad response (${response.statusCode}): ${response.body}');
+        'Bad response (${response.statusCode}): ${response.body}',
+      );
     }
     final Map<String, dynamic> json =
         HttpHelper().jsonDecode(response.body) as Map<String, dynamic>;
@@ -1338,7 +1314,8 @@ class OpenFoodAPIClient {
     final String imagefield = json['imagefield'];
     if (imagefield != id) {
       throw Exception(
-          'Different imagefield: expected "$id", actual "$imageField"');
+        'Different imagefield: expected "$id", actual "$imageField"',
+      );
     }
     final Map<String, dynamic> images = json['image'];
     final String? filename = images['display_url'];
@@ -1362,9 +1339,7 @@ class OpenFoodAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final String id = '${imageField.offTag}_${language.offTag}';
-    final Uri uri = uriHelper.getPostUri(
-      path: 'cgi/product_image_unselect.pl',
-    );
+    final Uri uri = uriHelper.getPostUri(path: 'cgi/product_image_unselect.pl');
     final Map<String, String> queryParameters = <String, String>{
       'code': barcode,
       'id': id,
@@ -1379,7 +1354,8 @@ class OpenFoodAPIClient {
     );
     if (response.statusCode != 200) {
       throw Exception(
-          'Bad response (${response.statusCode}): ${response.body}');
+        'Bad response (${response.statusCode}): ${response.body}',
+      );
     }
     final Map<String, dynamic> json =
         HttpHelper().jsonDecode(response.body) as Map<String, dynamic>;
@@ -1394,7 +1370,8 @@ class OpenFoodAPIClient {
     final String imagefield = json['imagefield'];
     if (imagefield != id) {
       throw Exception(
-          'Different imagefield: expected "$id", actual "$imageField"');
+        'Different imagefield: expected "$id", actual "$imageField"',
+      );
     }
   }
 
@@ -1414,8 +1391,9 @@ class OpenFoodAPIClient {
         <OpenFoodFactsCountry, String>{};
     final Map<String, dynamic> map = HttpHelper().jsonDecode(response.body);
     for (final String countryCode in map.keys) {
-      final OpenFoodFactsCountry? country =
-          OpenFoodFactsCountry.fromOffTag(countryCode);
+      final OpenFoodFactsCountry? country = OpenFoodFactsCountry.fromOffTag(
+        countryCode,
+      );
       if (country == null) {
         // very unlikely
         continue;

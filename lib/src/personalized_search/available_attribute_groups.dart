@@ -14,7 +14,8 @@ class AvailableAttributeGroups {
     }
     if (attributeGroups.isEmpty) {
       throw Exception(
-          'Unexpected error: empty attribute groups from json string $attributeGroupsString');
+        'Unexpected error: empty attribute groups from json string $attributeGroupsString',
+      );
     }
     _attributeGroups = attributeGroups;
   }

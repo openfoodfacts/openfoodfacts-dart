@@ -6,9 +6,7 @@ enum VeganStatus implements OffTagged {
   MAYBE_VEGAN(offTag: 'en:maybe-vegan'),
   VEGAN_STATUS_UNKNOWN(offTag: 'en:vegan-status-unknown');
 
-  const VeganStatus({
-    required this.offTag,
-  });
+  const VeganStatus({required this.offTag});
 
   @override
   final String offTag;
@@ -20,9 +18,7 @@ enum VegetarianStatus implements OffTagged {
   MAYBE_VEGETARIAN(offTag: 'en:maybe-vegetarian'),
   VEGETARIAN_STATUS_UNKNOWN(offTag: 'en:vegetarian-status-unknown');
 
-  const VegetarianStatus({
-    required this.offTag,
-  });
+  const VegetarianStatus({required this.offTag});
 
   @override
   final String offTag;
@@ -34,9 +30,7 @@ enum PalmOilFreeStatus implements OffTagged {
   MAY_CONTAIN_PALM_OIL(offTag: 'en:may-contain-palm-oil'),
   PALM_OIL_CONTENT_UNKNOWN(offTag: 'en:palm-oil-content-unknown');
 
-  const PalmOilFreeStatus({
-    required this.offTag,
-  });
+  const PalmOilFreeStatus({required this.offTag});
 
   @override
   final String offTag;

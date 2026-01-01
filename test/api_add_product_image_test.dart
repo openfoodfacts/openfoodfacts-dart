@@ -16,8 +16,8 @@ void main() {
 
   /// Use a random barcode so that we can create a new product
   /// and really upload images
-  String barcode =
-      (50000000000000 + math.Random().nextInt(100000000)).toString();
+  String barcode = (50000000000000 + math.Random().nextInt(100000000))
+      .toString();
 
   /// Returns the width and height (pixels) and size (bytes) of JPEG data
   ///
@@ -48,9 +48,8 @@ void main() {
   }
 
   /// Returns the width and height (pixels) and size (bytes) of a JPEG URL file
-  Future<List<int>> getJpegUrlSize(final String url) async => getJpegSize(
-        await UriReader.instance.readAsBytes(Uri.parse(url)),
-      );
+  Future<List<int>> getJpegUrlSize(final String url) async =>
+      getJpegSize(await UriReader.instance.readAsBytes(Uri.parse(url)));
 
   /// Returns the imgid, i.e. the unique id for (uploaded image x product)
   ///
@@ -116,30 +115,31 @@ void main() {
       expect(status.status, Status.statusOK);
     });
 
-    test('add ingredients image test: resend same image', () async {
-      SendImage image = SendImage(
-        lang: OpenFoodFactsLanguage.ENGLISH,
-        barcode: barcode,
-        imageField: ImageField.INGREDIENTS,
-        imageUri: Uri.file('test/test_assets/ingredients_en.jpg'),
-      );
-      Status status = await OpenFoodAPIClient.addProductImage(
-        user,
-        image,
-        uriHelper: uriHelper,
-      );
+    test(
+      'add ingredients image test: resend same image',
+      () async {
+        SendImage image = SendImage(
+          lang: OpenFoodFactsLanguage.ENGLISH,
+          barcode: barcode,
+          imageField: ImageField.INGREDIENTS,
+          imageUri: Uri.file('test/test_assets/ingredients_en.jpg'),
+        );
+        Status status = await OpenFoodAPIClient.addProductImage(
+          user,
+          image,
+          uriHelper: uriHelper,
+        );
 
-      expect(status.status, 'status not ok');
-      expect(status.error, 'This picture has already been sent.');
-    }, skip: 'Currently not working');
+        expect(status.status, 'status not ok');
+        expect(status.error, 'This picture has already been sent.');
+      },
+      skip: 'Currently not working',
+    );
 
     test('read image', () async {
       //Get product without setting ProductField
       final ProductQueryConfiguration configurations =
-          ProductQueryConfiguration(
-        barcode,
-        version: ProductQueryVersion.v3,
-      );
+          ProductQueryConfiguration(barcode, version: ProductQueryVersion.v3);
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: user,
@@ -156,122 +156,133 @@ void main() {
   }, skip: 'TEST env is not reliable');
 
   group('$OpenFoodAPIClient modify product image', () {
-    test('image angle', () async {
-      const Set<ImageAngle> tiltedAngles = <ImageAngle>{
-        ImageAngle.NINE_O_CLOCK,
-        ImageAngle.THREE_O_CLOCK,
-      };
+    test(
+      'image angle',
+      () async {
+        const Set<ImageAngle> tiltedAngles = <ImageAngle>{
+          ImageAngle.NINE_O_CLOCK,
+          ImageAngle.THREE_O_CLOCK,
+        };
 
-      final String? imgid = await getImgid(barcode, imageField, language);
-      expect(imgid, isNotNull);
+        final String? imgid = await getImgid(barcode, imageField, language);
+        expect(imgid, isNotNull);
 
-      final String productImageRootUrl = uriHelper.getProductImageRootUrl(
-        barcode,
-      );
-      final String uploadedImageUrl = '$productImageRootUrl/$imgid.jpg';
-      final List<int> uploadedSize = await getJpegUrlSize(uploadedImageUrl);
-      final int uploadedWidth = uploadedSize[0];
-      final int uploadedHeight = uploadedSize[1];
-
-      for (final ImageAngle angle in ImageAngle.values) {
-        final String? newUrl = await OpenFoodAPIClient.setProductImageAngle(
-          barcode: barcode,
-          user: user,
-          imageField: imageField,
-          language: language,
-          imgid: imgid!,
-          angle: angle,
-          uriHelper: uriHelper,
-        );
-        expect(newUrl, isNotNull);
-
-        final List<int> newSize = await getJpegUrlSize(newUrl!);
-        final int newWidth = newSize[0];
-        final int newHeight = newSize[1];
-
-        final bool tilted = tiltedAngles.contains(angle);
-        final int fullExpectedWidth = tilted ? uploadedHeight : uploadedWidth;
-        final int fullExpectedHeight = tilted ? uploadedWidth : uploadedHeight;
-
-        // checking the aspect ratio, using multiplication instead of division
-        final int check1 = newWidth * fullExpectedHeight;
-        final int check2 = newHeight * fullExpectedWidth;
-        expect(check1, check2);
-      }
-    },
-        timeout: Timeout(
-          // this guy is rather slow
-          Duration(seconds: 90),
-        ));
-
-    test('image crop', () async {
-      const int width = 50;
-      const int height = 300;
-      const int x1 = 10;
-      const int y1 = 20;
-
-      final String? imgid = await getImgid(barcode, imageField, language);
-      expect(imgid, isNotNull);
-
-      for (final ImageAngle angle in ImageAngle.values) {
-        final String? newUrl = await OpenFoodAPIClient.setProductImageCrop(
-          barcode: barcode,
-          user: user,
-          imageField: imageField,
-          language: language,
-          imgid: imgid!,
-          angle: angle,
-          x1: x1,
-          y1: y1,
-          x2: x1 + width,
-          y2: y1 + height,
-          uriHelper: uriHelper,
-        );
-        expect(newUrl, isNotNull);
-
-        final List<int> newSize = await getJpegUrlSize(newUrl!);
-        final int newWidth = newSize[0];
-        final int newHeight = newSize[1];
-        expect(newWidth, width);
-        expect(newHeight, height);
-      }
-    },
-        timeout: Timeout(
-          // this guy is rather slow
-          Duration(seconds: 90),
-        ));
-
-    test('image unselect', () async {
-      const ImageField unselectedImageField = ImageField.INGREDIENTS;
-      await OpenFoodAPIClient.unselectProductImage(
-        barcode: barcode,
-        user: user,
-        imageField: unselectedImageField,
-        language: language,
-        uriHelper: uriHelper,
-      );
-
-      final ProductResultV3 productResult =
-          await OpenFoodAPIClient.getProductV3(
-        ProductQueryConfiguration(
+        final String productImageRootUrl = uriHelper.getProductImageRootUrl(
           barcode,
-          fields: <ProductField>[ProductField.SELECTED_IMAGE],
-          version: ProductQueryVersion.v3,
-        ),
-        uriHelper: uriHelper,
-      );
-      expect(productResult.product, isNotNull);
-      expect(productResult.product!.selectedImages, isNotNull);
-      for (final ProductImage productImage
-          in productResult.product!.selectedImages!) {
-        if (productImage.language == language) {
-          expect(productImage.field, isNot(unselectedImageField));
+        );
+        final String uploadedImageUrl = '$productImageRootUrl/$imgid.jpg';
+        final List<int> uploadedSize = await getJpegUrlSize(uploadedImageUrl);
+        final int uploadedWidth = uploadedSize[0];
+        final int uploadedHeight = uploadedSize[1];
+
+        for (final ImageAngle angle in ImageAngle.values) {
+          final String? newUrl = await OpenFoodAPIClient.setProductImageAngle(
+            barcode: barcode,
+            user: user,
+            imageField: imageField,
+            language: language,
+            imgid: imgid!,
+            angle: angle,
+            uriHelper: uriHelper,
+          );
+          expect(newUrl, isNotNull);
+
+          final List<int> newSize = await getJpegUrlSize(newUrl!);
+          final int newWidth = newSize[0];
+          final int newHeight = newSize[1];
+
+          final bool tilted = tiltedAngles.contains(angle);
+          final int fullExpectedWidth = tilted ? uploadedHeight : uploadedWidth;
+          final int fullExpectedHeight = tilted
+              ? uploadedWidth
+              : uploadedHeight;
+
+          // checking the aspect ratio, using multiplication instead of division
+          final int check1 = newWidth * fullExpectedHeight;
+          final int check2 = newHeight * fullExpectedWidth;
+          expect(check1, check2);
         }
-      }
-    },
-        timeout: Timeout(
-          // this guy is rather slow
-          Duration(seconds: 90),
-        ));
+      },
+      timeout: Timeout(
+        // this guy is rather slow
+        Duration(seconds: 90),
+      ),
+    );
+
+    test(
+      'image crop',
+      () async {
+        const int width = 50;
+        const int height = 300;
+        const int x1 = 10;
+        const int y1 = 20;
+
+        final String? imgid = await getImgid(barcode, imageField, language);
+        expect(imgid, isNotNull);
+
+        for (final ImageAngle angle in ImageAngle.values) {
+          final String? newUrl = await OpenFoodAPIClient.setProductImageCrop(
+            barcode: barcode,
+            user: user,
+            imageField: imageField,
+            language: language,
+            imgid: imgid!,
+            angle: angle,
+            x1: x1,
+            y1: y1,
+            x2: x1 + width,
+            y2: y1 + height,
+            uriHelper: uriHelper,
+          );
+          expect(newUrl, isNotNull);
+
+          final List<int> newSize = await getJpegUrlSize(newUrl!);
+          final int newWidth = newSize[0];
+          final int newHeight = newSize[1];
+          expect(newWidth, width);
+          expect(newHeight, height);
+        }
+      },
+      timeout: Timeout(
+        // this guy is rather slow
+        Duration(seconds: 90),
+      ),
+    );
+
+    test(
+      'image unselect',
+      () async {
+        const ImageField unselectedImageField = ImageField.INGREDIENTS;
+        await OpenFoodAPIClient.unselectProductImage(
+          barcode: barcode,
+          user: user,
+          imageField: unselectedImageField,
+          language: language,
+          uriHelper: uriHelper,
+        );
+
+        final ProductResultV3 productResult =
+            await OpenFoodAPIClient.getProductV3(
+              ProductQueryConfiguration(
+                barcode,
+                fields: <ProductField>[ProductField.SELECTED_IMAGE],
+                version: ProductQueryVersion.v3,
+              ),
+              uriHelper: uriHelper,
+            );
+        expect(productResult.product, isNotNull);
+        expect(productResult.product!.selectedImages, isNotNull);
+        for (final ProductImage productImage
+            in productResult.product!.selectedImages!) {
+          if (productImage.language == language) {
+            expect(productImage.field, isNot(unselectedImageField));
+          }
+        }
+      },
+      timeout: Timeout(
+        // this guy is rather slow
+        Duration(seconds: 90),
+      ),
+    );
   }, skip: 'TEST env is not reliable');
 }

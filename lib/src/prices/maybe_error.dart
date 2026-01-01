@@ -4,29 +4,25 @@ import 'package:http/http.dart';
 
 /// Contains a successful value OR an error.
 class MaybeError<T> {
-  const MaybeError.value(
-    T this._value, {
-    this.statusCode,
-  })  : error = null,
-        isError = false;
+  const MaybeError.value(T this._value, {this.statusCode})
+    : error = null,
+      isError = false;
 
   MaybeError.responseError(final Response response)
-      : _value = null,
-        error = utf8.decode(response.bodyBytes),
-        statusCode = response.statusCode,
-        isError = true;
+    : _value = null,
+      error = utf8.decode(response.bodyBytes),
+      statusCode = response.statusCode,
+      isError = true;
 
   MaybeError.unreadableResponse(final Response response)
-      : _value = null,
-        error = utf8.decode(response.bodyBytes),
-        statusCode = response.statusCode,
-        isError = false;
+    : _value = null,
+      error = utf8.decode(response.bodyBytes),
+      statusCode = response.statusCode,
+      isError = false;
 
-  MaybeError.error({
-    required String this.error,
-    required int this.statusCode,
-  })  : _value = null,
-        isError = true;
+  MaybeError.error({required String this.error, required int this.statusCode})
+    : _value = null,
+      isError = true;
 
   final T? _value;
   final bool isError;

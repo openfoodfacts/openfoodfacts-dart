@@ -46,9 +46,7 @@ enum InsightType implements OffTagged {
   UNDEFINED(offTag: 'undefined'),
   UNKNOWN(offTag: 'UNKNOWN');
 
-  const InsightType({
-    required this.offTag,
-  });
+  const InsightType({required this.offTag});
 
   @override
   final String offTag;
@@ -62,10 +60,11 @@ enum InsightType implements OffTagged {
 class InsightsResult extends JsonObject {
   final String? status;
   @JsonKey(
-      name: 'insights',
-      includeIfNull: false,
-      fromJson: Insight.fromJson,
-      toJson: Insight.toJson)
+    name: 'insights',
+    includeIfNull: false,
+    fromJson: Insight.fromJson,
+    toJson: Insight.toJson,
+  )
   final List<Insight>? insights;
 
   const InsightsResult({this.status, this.insights});
@@ -86,14 +85,15 @@ class Insight {
   final String? model;
   final double? confidence;
 
-  const Insight(
-      {this.id,
-      this.type,
-      this.barcode,
-      this.countries,
-      this.lang,
-      this.model,
-      this.confidence});
+  const Insight({
+    this.id,
+    this.type,
+    this.barcode,
+    this.countries,
+    this.lang,
+    this.model,
+    this.confidence,
+  });
 
   static List<Insight>? fromJson(dynamic json) {
     if (json == null) {
@@ -104,14 +104,17 @@ class Insight {
       final InsightType insightType =
           InsightType.fromOffTag(jsonInsight['type']) ?? InsightType.UNDEFINED;
 
-      result.add(Insight(
+      result.add(
+        Insight(
           id: jsonInsight['id'],
           type: insightType,
           barcode: jsonInsight['barcode'],
           countries: jsonInsight['countries'],
           lang: jsonInsight['lang'],
           model: jsonInsight['model'],
-          confidence: jsonInsight['confidence']));
+          confidence: jsonInsight['confidence'],
+        ),
+      );
     }
     return result;
   }

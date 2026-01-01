@@ -40,9 +40,7 @@ enum KnowledgePanelAction implements OffTagged {
   /// Action: report the product to Nutripatrol.
   reportProductToNutripatrol(offTag: 'report_product_to_nutripatrol');
 
-  const KnowledgePanelAction({
-    required this.offTag,
-  });
+  const KnowledgePanelAction({required this.offTag});
 
   @override
   final String offTag;

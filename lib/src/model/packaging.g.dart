@@ -7,11 +7,11 @@ part of 'packaging.dart';
 // **************************************************************************
 
 Packaging _$PackagingFromJson(Map<String, dynamic> json) => Packaging(
-      score: JsonObject.parseDouble(json['score']),
-      value: JsonObject.parseDouble(json['value']),
-    );
+  score: JsonObject.parseDouble(json['score']),
+  value: JsonObject.parseDouble(json['value']),
+);
 
 Map<String, dynamic> _$PackagingToJson(Packaging instance) => <String, dynamic>{
-      if (instance.value case final value?) 'value': value,
-      if (instance.score case final value?) 'score': value,
-    };
+  'value': ?instance.value,
+  'score': ?instance.score,
+};

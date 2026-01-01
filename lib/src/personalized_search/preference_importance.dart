@@ -4,11 +4,11 @@ class PreferenceImportance {
   PreferenceImportance({this.id, this.name, this.factor, this.minimalMatch});
 
   factory PreferenceImportance.fromJson(dynamic json) => PreferenceImportance(
-        id: _checkedId(json['id'] as String),
-        name: json['name'] as String?,
-        factor: json['factor'] as int?,
-        minimalMatch: json['minimum_match'] as int?,
-      );
+    id: _checkedId(json['id'] as String),
+    name: json['name'] as String?,
+    factor: json['factor'] as int?,
+    minimalMatch: json['minimum_match'] as int?,
+  );
 
   final String? id;
   final String? name;
@@ -31,7 +31,8 @@ class PreferenceImportance {
   ];
 
   @override
-  String toString() => 'PreferenceImportance('
+  String toString() =>
+      'PreferenceImportance('
       'id: $id, name: $name, factor: $factor, minimalWatch: $minimalMatch'
       ')';
 

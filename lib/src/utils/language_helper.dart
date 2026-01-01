@@ -564,9 +564,7 @@ enum OpenFoodFactsLanguage implements OffTagged {
   /// Undefined language
   UNDEFINED(offTag: '-');
 
-  const OpenFoodFactsLanguage({
-    required this.offTag,
-  });
+  const OpenFoodFactsLanguage({required this.offTag});
 
   /// ISO 639-1
   @override
@@ -608,7 +606,8 @@ class LanguageHelper {
   /// Helper function without generic types. Needed for the
   /// `@JsonKey` annotation (the annotation can't work with generics).
   static Map<String, String>? toJsonStringMap(
-      Map<OpenFoodFactsLanguage, String>? map) {
+    Map<OpenFoodFactsLanguage, String>? map,
+  ) {
     return toJsonMap(map);
   }
 
@@ -629,7 +628,8 @@ class LanguageHelper {
 
   /// From a `Map<String, String>` in `dynamic`'s clothing (JsonKey annotation)
   static Map<OpenFoodFactsLanguage, List<String>>? fromJsonStringMapList(
-      dynamic map) {
+    dynamic map,
+  ) {
     if (map == null) {
       return null;
     }
@@ -693,7 +693,8 @@ class LanguageHelper {
   /// Helper function without generic types. Needed for the
   /// `@JsonKey` annotation (the annotation can't work with generics).
   static Map<String, List<String>>? toJsonStringsListMap(
-      Map<OpenFoodFactsLanguage, List<String>>? map) {
+    Map<OpenFoodFactsLanguage, List<String>>? map,
+  ) {
     return toJsonMap(map);
   }
 
@@ -706,7 +707,8 @@ class LanguageHelper {
     }
     if (map is! Map<String, dynamic>) {
       throw Exception(
-          'Expected type: Map<String, List<String>>, got ${map.runtimeType}');
+        'Expected type: Map<String, List<String>>, got ${map.runtimeType}',
+      );
     }
     final result = <OpenFoodFactsLanguage, List<String>>{};
     for (final key in map.keys) {

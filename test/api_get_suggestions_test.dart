@@ -100,16 +100,17 @@ void main() {
         expect(result, isEmpty);
 
         expect(
-            await OpenFoodAPIClient.getSuggestions(
-              tagType,
-              language: OpenFoodFactsLanguage.FRENCH,
-              input: 'TUN',
-            ),
-            await OpenFoodAPIClient.getSuggestions(
-              tagType,
-              language: OpenFoodFactsLanguage.FRENCH,
-              input: 'tun',
-            ));
+          await OpenFoodAPIClient.getSuggestions(
+            tagType,
+            language: OpenFoodFactsLanguage.FRENCH,
+            input: 'TUN',
+          ),
+          await OpenFoodAPIClient.getSuggestions(
+            tagType,
+            language: OpenFoodFactsLanguage.FRENCH,
+            input: 'tun',
+          ),
+        );
       }
     });
 
@@ -191,16 +192,17 @@ void main() {
       expect(result.isEmpty, true);
 
       expect(
-          await OpenFoodAPIClient.getSuggestions(
-            TagType.STATES,
-            language: OpenFoodFactsLanguage.ENGLISH,
-            input: 'O',
-          ),
-          await OpenFoodAPIClient.getSuggestions(
-            TagType.STATES,
-            language: OpenFoodFactsLanguage.ENGLISH,
-            input: 'o',
-          ));
+        await OpenFoodAPIClient.getSuggestions(
+          TagType.STATES,
+          language: OpenFoodFactsLanguage.ENGLISH,
+          input: 'O',
+        ),
+        await OpenFoodAPIClient.getSuggestions(
+          TagType.STATES,
+          language: OpenFoodFactsLanguage.ENGLISH,
+          input: 'o',
+        ),
+      );
     });
     test('Suggestions for language', () async {
       List<String> result = await OpenFoodAPIClient.getSuggestions(
@@ -307,24 +309,26 @@ void main() {
       );
       listContains(result, 'conteneur');
     });
-    test('Suggestions for emb_code', () async {
-      List<String> result = await OpenFoodAPIClient.getSuggestions(
-        TagType.EMB_CODES,
-        language: OpenFoodFactsLanguage.FRENCH,
-        input: 'fR',
-      );
+    test(
+      'Suggestions for emb_code',
+      () async {
+        List<String> result = await OpenFoodAPIClient.getSuggestions(
+          TagType.EMB_CODES,
+          language: OpenFoodFactsLanguage.FRENCH,
+          input: 'fR',
+        );
 
-      listContains(result, 'fr');
+        listContains(result, 'fr');
 
-      result = await OpenFoodAPIClient.getSuggestions(
-        TagType.EMB_CODES,
-        language: OpenFoodFactsLanguage.FRENCH,
-        input: 'R',
-      );
+        result = await OpenFoodAPIClient.getSuggestions(
+          TagType.EMB_CODES,
+          language: OpenFoodFactsLanguage.FRENCH,
+          input: 'R',
+        );
 
-      listContains(result, 'r');
+        listContains(result, 'r');
 
-      expect(
+        expect(
           await OpenFoodAPIClient.getSuggestions(
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.ITALIAN,
@@ -334,9 +338,10 @@ void main() {
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.FRENCH,
             input: 'U',
-          ));
+          ),
+        );
 
-      expect(
+        expect(
           await OpenFoodAPIClient.getSuggestions(
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.GERMAN,
@@ -346,9 +351,10 @@ void main() {
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.ENGLISH,
             input: 'C',
-          ));
+          ),
+        );
 
-      expect(
+        expect(
           await OpenFoodAPIClient.getSuggestions(
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.JAPANESE,
@@ -358,8 +364,11 @@ void main() {
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.UKRAINIAN,
             input: 'D',
-          ));
-    }, skip: 'Skipping while the issue is not fixed on the server side');
+          ),
+        );
+      },
+      skip: 'Skipping while the issue is not fixed on the server side',
+    );
     test('Suggestions empty fields', () async {
       List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.ALLERGENS,

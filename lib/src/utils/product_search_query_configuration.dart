@@ -15,9 +15,7 @@ class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
     super.activateKnowledgePanelsSimplified,
     required List<Parameter> parametersList,
     required this.version,
-  }) : super(
-          additionalParameters: parametersList,
-        );
+  }) : super(additionalParameters: parametersList);
 
   final ProductQueryVersion version;
 
