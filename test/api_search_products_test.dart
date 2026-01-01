@@ -31,12 +31,11 @@ void main() {
 
   Future<SearchResult> searchProductsInTest(
     final AbstractQueryConfiguration configuration,
-  ) async =>
-      OpenFoodAPIClient.searchProducts(
-        TestConstants.TEST_USER,
-        configuration,
-        uriHelper: uriHelperFoodTest,
-      );
+  ) async => OpenFoodAPIClient.searchProducts(
+    TestConstants.TEST_USER,
+    configuration,
+    uriHelper: uriHelperFoodTest,
+  );
 
   // additional parameter for faster response time
   const Parameter optimParameter = SearchTerms(terms: ['pizza']);
@@ -1716,10 +1715,11 @@ void main() {
 
         final List<AttributeGroup> attributeGroups = product.attributeGroups!;
         final AttributeGroup attributeGroup = attributeGroups.firstWhere(
-            (final AttributeGroup group) => group.id == 'ingredients');
+          (final AttributeGroup group) => group.id == 'ingredients',
+        );
         final Attribute attribute = attributeGroup.attributes!.firstWhere(
-            (final Attribute attribute) =>
-                attribute.id == 'unwanted_ingredients');
+          (final Attribute attribute) => attribute.id == 'unwanted_ingredients',
+        );
         if (attribute.status == 'unknown') {
           expect(attribute.match, null);
         } else if (attribute.status == 'known') {

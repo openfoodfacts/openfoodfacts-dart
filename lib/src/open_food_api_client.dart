@@ -1405,14 +1405,12 @@ class OpenFoodAPIClient {
 
   /// Returns the list of all external source metadata.
   static Future<MaybeError<List<ExternalSourceMetadata>>>
-      getExternalSourceMetadatas({
+  getExternalSourceMetadatas({
     final ProductQueryVersion version = ProductQueryVersion.v3,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Response response = await HttpHelper().doGetRequest(
-      uriHelper.getUri(
-        path: 'api/v${version.version}/external_sources',
-      ),
+      uriHelper.getUri(path: 'api/v${version.version}/external_sources'),
       uriHelper: uriHelper,
     );
     if (response.statusCode != 200) {
@@ -1428,7 +1426,8 @@ class OpenFoodAPIClient {
       return MaybeError<List<ExternalSourceMetadata>>.value(result);
     } catch (e) {
       return MaybeError<List<ExternalSourceMetadata>>.unreadableResponse(
-          response);
+        response,
+      );
     }
   }
 
@@ -1439,7 +1438,7 @@ class OpenFoodAPIClient {
   /// * productType (depends on the metadata)
   /// * categoriesTags (depends on the metadata)
   static Future<MaybeError<ExternalSourceProductData?>>
-      getExternalSourceProductData({
+  getExternalSourceProductData({
     required final ExternalSourceMetadata metadata,
     required final Product product,
     required final OpenFoodFactsLanguage language,

@@ -15,5 +15,5 @@ class IngredientsFilterParameter extends BoolMapParameter<String> {
   String getTag(final String key, final bool value) => value ? key : '-$key';
 
   const IngredientsFilterParameter(final Map<String, bool> filters)
-      : super(map: filters);
+    : super(map: filters);
 }

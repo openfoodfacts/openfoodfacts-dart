@@ -27,17 +27,15 @@ class ExternalSourceFilter extends JsonMap {
     final Product product,
     final OpenFoodFactsLanguage language,
     final OpenFoodFactsCountry country,
-  ) =>
-      <String>[
-        if (!acceptsString(product.productType?.offTag, productTypes))
-          'productType(${product.productType?.offTag})',
-        if (!acceptsListString(product.categoriesTags, categories))
-          'categories(${product.categoriesTags})',
-        if (!acceptsString(language.offTag, languages))
-          'language(${language.offTag})',
-        if (!acceptsString(country.offTag, countries))
-          'country(${country.offTag})',
-      ];
+  ) => <String>[
+    if (!acceptsString(product.productType?.offTag, productTypes))
+      'productType(${product.productType?.offTag})',
+    if (!acceptsListString(product.categoriesTags, categories))
+      'categories(${product.categoriesTags})',
+    if (!acceptsString(language.offTag, languages))
+      'language(${language.offTag})',
+    if (!acceptsString(country.offTag, countries)) 'country(${country.offTag})',
+  ];
 
   /// Returns true if a value id part of expected values.
   bool acceptsString(final String? value, final List<String> expectedValues) {

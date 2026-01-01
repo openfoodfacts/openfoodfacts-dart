@@ -57,9 +57,8 @@ class ExternalSourceMetadata extends JsonMap {
     final String barcode,
     final OpenFoodFactsLanguage language,
     final OpenFoodFactsCountry country,
-  ) =>
-      knowledgePanelUrl
-          .replaceFirst(r'$code', barcode)
-          .replaceFirst(r'$lc', language.offTag)
-          .replaceFirst(r'$cc', country.offTag);
+  ) => knowledgePanelUrl
+      .replaceFirst(r'$code', barcode)
+      .replaceFirst(r'$lc', language.offTag)
+      .replaceFirst(r'$cc', country.offTag);
 }

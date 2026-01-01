@@ -1635,12 +1635,10 @@ void main() {
               language: language,
               country: country,
               version: ProductQueryVersion.v3,
-              fields: [
-                ProductField.ATTRIBUTE_GROUPS,
-              ],
-              unwantedIngredients: IngredientsUnwantedParameter(
-                <String>['en:tomato'],
-              ),
+              fields: [ProductField.ATTRIBUTE_GROUPS],
+              unwantedIngredients: IngredientsUnwantedParameter(<String>[
+                'en:tomato',
+              ]),
             ),
           );
           expect(productResult.product, isNotNull);
@@ -1648,10 +1646,12 @@ void main() {
 
           final List<AttributeGroup> attributeGroups = product.attributeGroups!;
           final AttributeGroup attributeGroup = attributeGroups.firstWhere(
-              (final AttributeGroup group) => group.id == 'ingredients');
+            (final AttributeGroup group) => group.id == 'ingredients',
+          );
           final Attribute attribute = attributeGroup.attributes!.firstWhere(
-              (final Attribute attribute) =>
-                  attribute.id == 'unwanted_ingredients');
+            (final Attribute attribute) =>
+                attribute.id == 'unwanted_ingredients',
+          );
           expect(attribute.status, 'known');
           expect(attribute.match, entry.value ? 0 : 100);
         }
