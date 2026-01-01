@@ -33,14 +33,10 @@ enum Nutrient implements OffTagged {
   proteins(typicalUnit: Unit.G, offTag: 'proteins', acceptsPercentDV: false),
 
   /// Energy in kcal
-  energyKCal(
-    typicalUnit: Unit.KCAL,
-    offTag: 'energy-kcal',
-    acceptsPercentDV: false,
-  ),
+  energyKCal(typicalUnit: Unit.KCAL, offTag: 'energy-kcal'),
 
   /// Energy in kj
-  energyKJ(typicalUnit: Unit.KJ, offTag: 'energy-kj', acceptsPercentDV: false),
+  energyKJ(typicalUnit: Unit.KJ, offTag: 'energy-kj'),
 
   /// Carbohydrates
   carbohydrates(
@@ -158,11 +154,7 @@ enum Nutrient implements OffTagged {
   polyunsaturatedFat(typicalUnit: Unit.G, offTag: 'polyunsaturated-fat'),
 
   /// Alcohol
-  alcohol(
-    typicalUnit: Unit.PERCENT,
-    offTag: 'alcohol',
-    acceptsPercentDV: false,
-  ),
+  alcohol(typicalUnit: Unit.PERCENT, offTag: 'alcohol'),
 
   /// Pantothenic Acid
   pantothenicAcid(typicalUnit: Unit.MILLI_G, offTag: 'pantothenic-acid'),
@@ -426,7 +418,6 @@ enum Nutrient implements OffTagged {
   crudeFat(
     typicalUnit: Unit.PERCENT,
     offTag: 'crude-fat',
-    acceptsPercentDV: false,
     probablyPetFood: true,
   ),
 
@@ -434,7 +425,6 @@ enum Nutrient implements OffTagged {
   crudeProtein(
     typicalUnit: Unit.PERCENT,
     offTag: 'crude-protein',
-    acceptsPercentDV: false,
     probablyPetFood: true,
   ),
 
@@ -442,7 +432,6 @@ enum Nutrient implements OffTagged {
   crudeAsh(
     typicalUnit: Unit.PERCENT,
     offTag: 'crude-ash',
-    acceptsPercentDV: false,
     probablyPetFood: true,
   ),
 
@@ -450,7 +439,6 @@ enum Nutrient implements OffTagged {
   crudeFiber(
     typicalUnit: Unit.PERCENT,
     offTag: 'crude-fibre',
-    acceptsPercentDV: false,
     probablyPetFood: true,
   ),
 
@@ -458,7 +446,6 @@ enum Nutrient implements OffTagged {
   moisture(
     typicalUnit: Unit.PERCENT,
     offTag: 'moisture',
-    acceptsPercentDV: false,
     probablyPetFood: true,
   ),
 
@@ -536,17 +523,19 @@ enum Nutrient implements OffTagged {
   proteinValue(
     typicalUnit: Unit.G_PER_KG,
     offTag: 'protein-value',
-    acceptsPercentDV: false,
     probablyPetFood: true,
-  );
+  ),
+
+  /// Polydextrose
+  polydextrose(typicalUnit: Unit.G, offTag: 'polydextrose');
 
   const Nutrient({
     required this.typicalUnit,
     required this.offTag,
-    this.acceptsPercentDV = true,
+    bool acceptsPercentDV = true,
     this.acceptsIU = false,
     this.probablyPetFood = false,
-  });
+  }) : _acceptsPercentDV = acceptsPercentDV;
 
   /// Typical unit. An educated guess only: may differ according to countries.
   final Unit typicalUnit;
@@ -557,7 +546,9 @@ enum Nutrient implements OffTagged {
   bool get acceptsWeight => _weightUnits.contains(typicalUnit);
 
   /// Can this nutrient typically be valued in "% DV"?
-  final bool acceptsPercentDV;
+  final bool _acceptsPercentDV;
+
+  bool get acceptsPercentDV => acceptsWeight && _acceptsPercentDV;
 
   /// Can this nutrient typically be valued in "IU"?
   final bool acceptsIU;

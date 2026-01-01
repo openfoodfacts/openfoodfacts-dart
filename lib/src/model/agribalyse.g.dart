@@ -10,4 +10,4 @@ Agribalyse _$AgribalyseFromJson(Map<String, dynamic> json) =>
     Agribalyse(score: JsonObject.parseDouble(json['score']));
 
 Map<String, dynamic> _$AgribalyseToJson(Agribalyse instance) =>
-    <String, dynamic>{if (instance.score case final value?) 'score': value};
+    <String, dynamic>{'score': ?instance.score};

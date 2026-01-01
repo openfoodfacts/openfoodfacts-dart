@@ -21,9 +21,9 @@ OrderedNutrient _$OrderedNutrientFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$OrderedNutrientToJson(OrderedNutrient instance) =>
     <String, dynamic>{
       'id': instance.id,
-      if (instance.name case final value?) 'name': value,
+      'name': ?instance.name,
       'important': instance.important,
-      if (instance.unit case final value?) 'unit': value,
+      'unit': ?instance.unit,
       'display_in_edit_form': instance.displayInEditForm,
-      if (instance.subNutrients case final value?) 'nutrients': value,
+      'nutrients': ?instance.subNutrients,
     };

@@ -24,5 +24,5 @@ Map<String, dynamic> _$SearchResultToJson(SearchResult instance) =>
       'count': instance.count,
       'page_count': instance.pageCount,
       'skip': instance.skip,
-      if (instance.products case final value?) 'products': value,
+      'products': ?instance.products,
     };

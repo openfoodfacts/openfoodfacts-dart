@@ -21,18 +21,14 @@ TaxonomyPackagingMaterial _$TaxonomyPackagingMaterialFromJson(
 Map<String, dynamic> _$TaxonomyPackagingMaterialToJson(
   TaxonomyPackagingMaterial instance,
 ) => <String, dynamic>{
-  if (instance.name?.map(
-        (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
-      )
-      case final value?)
-    'name': value,
-  if (instance.synonyms?.map(
-        (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
-      )
-      case final value?)
-    'synonyms': value,
-  if (instance.children case final value?) 'children': value,
-  if (instance.parents case final value?) 'parents': value,
+  'name': ?instance.name?.map(
+    (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+  ),
+  'synonyms': ?instance.synonyms?.map(
+    (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+  ),
+  'children': ?instance.children,
+  'parents': ?instance.parents,
 };
 
 const _$OpenFoodFactsLanguageEnumMap = {

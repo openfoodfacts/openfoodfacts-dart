@@ -12,6 +12,6 @@ Packaging _$PackagingFromJson(Map<String, dynamic> json) => Packaging(
 );
 
 Map<String, dynamic> _$PackagingToJson(Packaging instance) => <String, dynamic>{
-  if (instance.value case final value?) 'value': value,
-  if (instance.score case final value?) 'score': value,
+  'value': ?instance.value,
+  'score': ?instance.score,
 };

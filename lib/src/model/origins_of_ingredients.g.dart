@@ -18,10 +18,8 @@ OriginsOfIngredients _$OriginsOfIngredientsFromJson(
 Map<String, dynamic> _$OriginsOfIngredientsToJson(
   OriginsOfIngredients instance,
 ) => <String, dynamic>{
-  if (instance.epiScore case final value?) 'epi_score': value,
-  if (instance.epiValue case final value?) 'epi_value': value,
-  if (instance.transportationScore case final value?)
-    'transportation_score': value,
-  if (instance.transportationValue case final value?)
-    'transportation_value': value,
+  'epi_score': ?instance.epiScore,
+  'epi_value': ?instance.epiValue,
+  'transportation_score': ?instance.transportationScore,
+  'transportation_value': ?instance.transportationValue,
 };

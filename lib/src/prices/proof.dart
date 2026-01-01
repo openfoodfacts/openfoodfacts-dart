@@ -110,6 +110,12 @@ class Proof extends JsonObject {
   @JsonKey()
   String? source;
 
+  /// Detail. Read-only.
+  ///
+  /// A "duplicate" value would mean the uploaded proof was pre-existing.
+  @JsonKey()
+  String? detail;
+
   Proof();
 
   factory Proof.fromJson(Map<String, dynamic> json) => _$ProofFromJson(json);

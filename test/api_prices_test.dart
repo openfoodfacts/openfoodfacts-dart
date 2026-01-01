@@ -996,6 +996,10 @@ void main() {
             uriHelper: uriHelper,
           );
       expect(uploadProof.isError, isFalse);
+      if (uploadProof.value.detail == 'duplicate') {
+        // it's irrelevant to expect correct values with a pre-existing proof.
+        return;
+      }
       checkProof(uploadProof.value, createProofParameters);
 
       final int proofId = uploadProof.value.id;

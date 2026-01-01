@@ -12,16 +12,12 @@ TaxonomyNova _$TaxonomyNovaFromJson(Map<String, dynamic> json) => TaxonomyNova()
 
 Map<String, dynamic> _$TaxonomyNovaToJson(TaxonomyNova instance) =>
     <String, dynamic>{
-      if (instance.name?.map(
-            (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
-          )
-          case final value?)
-        'name': value,
-      if (instance.synonyms?.map(
-            (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
-          )
-          case final value?)
-        'synonyms': value,
+      'name': ?instance.name?.map(
+        (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+      ),
+      'synonyms': ?instance.synonyms?.map(
+        (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+      ),
     };
 
 const _$OpenFoodFactsLanguageEnumMap = {

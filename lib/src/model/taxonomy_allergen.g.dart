@@ -13,13 +13,9 @@ TaxonomyAllergen _$TaxonomyAllergenFromJson(Map<String, dynamic> json) =>
       LanguageHelper.fromJsonStringMap(json['wikidata']),
     );
 
-Map<String, dynamic> _$TaxonomyAllergenToJson(
-  TaxonomyAllergen instance,
-) => <String, dynamic>{
-  if (LanguageHelper.toJsonStringMap(instance.name) case final value?)
-    'name': value,
-  if (LanguageHelper.toJsonStringsListMap(instance.synonyms) case final value?)
-    'synonyms': value,
-  if (LanguageHelper.toJsonStringMap(instance.wikidata) case final value?)
-    'wikidata': value,
-};
+Map<String, dynamic> _$TaxonomyAllergenToJson(TaxonomyAllergen instance) =>
+    <String, dynamic>{
+      'name': ?LanguageHelper.toJsonStringMap(instance.name),
+      'synonyms': ?LanguageHelper.toJsonStringsListMap(instance.synonyms),
+      'wikidata': ?LanguageHelper.toJsonStringMap(instance.wikidata),
+    };

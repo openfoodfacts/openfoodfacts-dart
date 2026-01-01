@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 
 import 'prices/challenge.dart';
-import 'prices/currency.dart';
 import 'prices/maybe_error.dart';
 import 'prices/price.dart';
 import 'prices/price_user.dart';
@@ -27,7 +26,6 @@ import 'prices/location.dart';
 import 'prices/location_osm_type.dart';
 import 'prices/price_product.dart';
 import 'prices/price_total_stats.dart';
-import 'prices/proof_type.dart';
 import 'prices/session.dart';
 import 'prices/update_price_parameters.dart';
 import 'prices/update_proof_parameters.dart';
@@ -570,7 +568,6 @@ class OpenPricesAPIClient {
     return MaybeError<GetProofsResult>.responseError(response);
   }
 
-  // TODO: deprecated from 2025-04-25 regarding single parameters; remove them when old enough
   /// Uploads a proof.
   ///
   /// Returns the proof uploaded on the server.
@@ -578,19 +575,9 @@ class OpenPricesAPIClient {
   /// * 201 for a proof created on the server
   /// * 200 for a proof that already existed on the server
   static Future<MaybeError<Proof>> uploadProof({
-    @Deprecated('Use CreateProofParameters instead') final ProofType? proofType,
     required final Uri imageUri,
     required final MediaType mediaType,
-    final CreateProofParameters? createProofParameters,
-    @Deprecated('Use CreateProofParameters instead') final int? locationOSMId,
-    @Deprecated('Use CreateProofParameters instead')
-    final LocationOSMType? locationOSMType,
-    @Deprecated('Use CreateProofParameters instead') final DateTime? date,
-    @Deprecated('Use CreateProofParameters instead') final Currency? currency,
-    @Deprecated('Use CreateProofParameters instead')
-    final int? receiptPriceCount,
-    @Deprecated('Use CreateProofParameters instead')
-    final num? receiptPriceTotal,
+    required final CreateProofParameters createProofParameters,
     required final String bearerToken,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
@@ -601,22 +588,7 @@ class OpenPricesAPIClient {
       'Authorization': 'bearer $bearerToken',
       'Content-Type': 'multipart/form-data',
     });
-    if (createProofParameters != null) {
-      request.fields.addAll(createProofParameters.toData());
-    } else {
-      request.fields.addAll(<String, String>{
-        'type': proofType!.offTag,
-        if (locationOSMId != null) 'location_osm_id': locationOSMId.toString(),
-        if (locationOSMType != null)
-          'location_osm_type': locationOSMType.offTag,
-        if (date != null) 'date': GetParametersHelper.formatDate(date),
-        if (currency != null) 'currency': currency.name,
-        if (receiptPriceCount != null)
-          'receipt_price_count': receiptPriceCount.toString(),
-        if (receiptPriceTotal != null)
-          'receipt_price_total': receiptPriceTotal.toString(),
-      });
-    }
+    request.fields.addAll(createProofParameters.toData());
     final List<int> fileBytes = await UriReader.instance.readAsBytes(imageUri);
     final String filename = basename(imageUri.toString());
     final http.MultipartFile multipartFile = http.MultipartFile.fromBytes(

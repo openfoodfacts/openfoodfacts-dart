@@ -22,7 +22,7 @@ ProductResultFieldAnswer _$ProductResultFieldAnswerFromJson(
 Map<String, dynamic> _$ProductResultFieldAnswerToJson(
   ProductResultFieldAnswer instance,
 ) => <String, dynamic>{
-  if (instance.field case final value?) 'field': value,
-  if (instance.impact case final value?) 'impact': value,
-  if (instance.message case final value?) 'message': value,
+  'field': ?instance.field,
+  'impact': ?instance.impact,
+  'message': ?instance.message,
 };

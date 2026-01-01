@@ -14,7 +14,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
 );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-  if (instance.comment case final value?) 'comment': value,
+  'comment': ?instance.comment,
   'user_id': instance.userId,
   'password': instance.password,
   'cookie': instance.cookie,

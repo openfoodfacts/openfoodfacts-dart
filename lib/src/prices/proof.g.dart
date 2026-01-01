@@ -33,7 +33,8 @@ Proof _$ProofFromJson(Map<String, dynamic> json) => Proof()
   ..readyForPriceTagValidation = json['ready_for_price_tag_validation'] as bool?
   ..ownerConsumption = json['owner_consumption'] as bool?
   ..ownerComment = json['owner_comment'] as String?
-  ..source = json['source'] as String?;
+  ..source = json['source'] as String?
+  ..detail = json['detail'] as String?;
 
 Map<String, dynamic> _$ProofToJson(Proof instance) => <String, dynamic>{
   'id': instance.id,
@@ -58,6 +59,7 @@ Map<String, dynamic> _$ProofToJson(Proof instance) => <String, dynamic>{
   'owner_consumption': instance.ownerConsumption,
   'owner_comment': instance.ownerComment,
   'source': instance.source,
+  'detail': instance.detail,
 };
 
 const _$ProofTypeEnumMap = {

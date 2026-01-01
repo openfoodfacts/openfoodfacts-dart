@@ -21,7 +21,6 @@ EcoscoreAdjustments _$EcoscoreAdjustmentsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$EcoscoreAdjustmentsToJson(
   EcoscoreAdjustments instance,
 ) => <String, dynamic>{
-  if (instance.packaging?.toJson() case final value?) 'packaging': value,
-  if (instance.originsOfIngredients?.toJson() case final value?)
-    'origins_of_ingredients': value,
+  'packaging': ?instance.packaging?.toJson(),
+  'origins_of_ingredients': ?instance.originsOfIngredients?.toJson(),
 };

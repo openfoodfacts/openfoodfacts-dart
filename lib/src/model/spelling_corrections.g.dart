@@ -17,9 +17,9 @@ SpellingCorrection _$SpellingCorrectionFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$SpellingCorrectionToJson(SpellingCorrection instance) =>
     <String, dynamic>{
-      if (instance.corrected case final value?) 'corrected': value,
+      'corrected': ?instance.corrected,
       'text': instance.input,
-      if (instance.termCorrections case final value?) 'corrections': value,
+      'corrections': ?instance.termCorrections,
     };
 
 TermCorrections _$TermCorrectionsFromJson(Map<String, dynamic> json) =>
@@ -46,7 +46,7 @@ Correction _$CorrectionFromJson(Map<String, dynamic> json) => Correction(
 
 Map<String, dynamic> _$CorrectionToJson(Correction instance) =>
     <String, dynamic>{
-      if (instance.correction case final value?) 'correction': value,
+      'correction': ?instance.correction,
       'original': instance.original,
       'start_offset': instance.startOffset,
       'end_offset': instance.endOffset,

@@ -17,12 +17,8 @@ TaxonomyLanguage _$TaxonomyLanguageFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$TaxonomyLanguageToJson(
   TaxonomyLanguage instance,
 ) => <String, dynamic>{
-  if (LanguageHelper.toJsonStringMap(instance.languageCode2) case final value?)
-    'language_code_2': value,
-  if (LanguageHelper.toJsonStringMap(instance.languageCode3) case final value?)
-    'language_code_3': value,
-  if (LanguageHelper.toJsonStringMap(instance.name) case final value?)
-    'name': value,
-  if (LanguageHelper.toJsonStringMap(instance.wikidata) case final value?)
-    'wikidata': value,
+  'language_code_2': ?LanguageHelper.toJsonStringMap(instance.languageCode2),
+  'language_code_3': ?LanguageHelper.toJsonStringMap(instance.languageCode3),
+  'name': ?LanguageHelper.toJsonStringMap(instance.name),
+  'wikidata': ?LanguageHelper.toJsonStringMap(instance.wikidata),
 };
