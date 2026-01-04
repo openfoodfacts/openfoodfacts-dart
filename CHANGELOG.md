@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.30.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.29.0...v3.30.0) (2026-01-04)
+
+
+### Features
+
+* 1134 - added search parameters "unwanted ingredients" and "ingredients filter" ([#1163](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1163)) ([e539b73](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e539b7375988562e578275717529ea447ec09eb3))
+* 1156 - external sources first implementation ([#1157](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1157)) ([4d74b5a](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4d74b5ae7fb8cc6fb888c43f08bede3e980a65ea))
+
 ## [3.29.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.28.0...v3.29.0) (2025-12-27)
 
 
