@@ -359,12 +359,11 @@ Like that:
       }, skip: 'Too often 504 Gateway Time-out');
 
       test('add new product test 5', () async {
-        const PerSize perSize = PerSize.oneHundredGrams;
         final Nutriments nutriments = Nutriments.empty()
-          ..setValue(Nutrient.carbohydrates, perSize, 12)
-          ..setValue(Nutrient.proteins, perSize, 6)
-          ..setValue(Nutrient.fat, perSize, 0.1)
-          ..setValue(Nutrient.energyKJ, perSize, 365);
+          ..setValue(Nutrient.carbohydrates, 12, unit: Unit.G)
+          ..setValue(Nutrient.proteins, 6, unit: Unit.G)
+          ..setValue(Nutrient.fat, 0.1, unit: Unit.G)
+          ..setValue(Nutrient.energyKJ, 365, unit: Unit.KJ);
 
         Product product = Product(
           barcode: '7340011364184',
@@ -448,11 +447,19 @@ Like that:
           final String nutrimentDataPer = perSize.offTag;
           for (int i = 0; i <= 2; i++) {
             final Nutriments nutriments = Nutriments.empty()
-              ..setValue(Nutrient.energyKJ, perSize, ENERGY + i)
-              ..setValue(Nutrient.carbohydrates, perSize, CARBOHYDRATES + i)
-              ..setValue(Nutrient.proteins, perSize, PROTEINS + i)
-              ..setValue(Nutrient.vitaminB12, perSize, VITAMIN_B12 + i)
-              ..setValue(Nutrient.fat, perSize, FAT + i);
+              ..setValue(Nutrient.energyKJ, ENERGY + i, unit: Unit.KJ)
+              ..setValue(
+                Nutrient.carbohydrates,
+                CARBOHYDRATES + i,
+                unit: Unit.G,
+              )
+              ..setValue(Nutrient.proteins, PROTEINS + i, unit: Unit.G)
+              ..setValue(
+                Nutrient.vitaminB12,
+                VITAMIN_B12 + i,
+                unit: Unit.MICRO_G,
+              )
+              ..setValue(Nutrient.fat, FAT + i, unit: Unit.G);
 
             final Product newProduct = Product(
               barcode: BARCODE,
@@ -499,10 +506,7 @@ Like that:
               fail('Nutrients are null');
             }
             for (final Nutrient nutrient in nutrients) {
-              final double? actual = searchedNutriments.getValue(
-                nutrient,
-                perSize,
-              );
+              final double? actual = searchedNutriments.getValue(nutrient);
               expect(
                 actual,
                 isNotNull,
@@ -510,7 +514,7 @@ Like that:
               );
               expect(
                 actual,
-                nutriments.getValue(nutrient, perSize),
+                nutriments.getValue(nutrient),
                 reason: 'should be the same values for $nutrient',
               );
             }
@@ -555,16 +559,12 @@ Like that:
         expect(result.product, isNotNull);
         expect(result.product!.nutriments, isNotNull);
         final Nutriments nutriments = result.product!.nutriments!;
-        const PerSize perSize = PerSize.oneHundredGrams;
-        final double? initialValue = nutriments.getValue(
-          Nutrient.calcium,
-          perSize,
-        );
+        final double? initialValue = nutriments.getValue(Nutrient.calcium);
         expect(initialValue, isNotNull); // in real life: 120mg
 
         // Step 2: save the slightly altered product
         final double nextValue = initialValue! + .001;
-        nutriments.setValue(Nutrient.calcium, perSize, nextValue);
+        nutriments.setValue(Nutrient.calcium, nextValue, unit: Unit.G);
 
         final Product savedProduct = Product(barcode: barcode);
         savedProduct.nutriments = nutriments;
@@ -587,7 +587,6 @@ Like that:
         expect(result.product!.nutriments, isNotNull);
         final double? latestValue = result.product!.nutriments!.getValue(
           Nutrient.calcium,
-          perSize,
         );
         expect(latestValue, closeTo(nextValue, 1E-12));
       });
@@ -605,8 +604,8 @@ Like that:
         noNutritionData: true,
         nutriments: Nutriments.empty().setValue(
           Nutrient.salt,
-          PerSize.oneHundredGrams,
           1.0,
+          unit: Unit.G,
         ),
       );
 
@@ -617,7 +616,7 @@ Like that:
     test('Nutriments', () async {
       Product product = Product(
         nutriments: Nutriments.empty()
-          ..setValue(Nutrient.salt, PerSize.oneHundredGrams, 1.0),
+          ..setValue(Nutrient.salt, 1.0, unit: Unit.G),
       );
 
       expect(product.noNutritionData, isFalse);
