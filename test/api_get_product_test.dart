@@ -1618,5 +1618,44 @@ void main() {
         expect(productResult.product!.schemaVersion, version.value);
       }
     });
+
+    group('$OpenFoodAPIClient ingredients_unwanted_parameter', () {
+      const Map<String, bool> productsWithTomato = <String, bool>{
+        '7613035648463': false,
+        '4001724038993': true,
+      };
+      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+      const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
+
+      test('check ingredients_filter_parameter', () async {
+        for (final MapEntry<String, bool> entry in productsWithTomato.entries) {
+          final ProductResultV3 productResult = await getProductV3InProd(
+            ProductQueryConfiguration(
+              entry.key,
+              language: language,
+              country: country,
+              version: ProductQueryVersion.v3,
+              fields: [ProductField.ATTRIBUTE_GROUPS],
+              unwantedIngredients: IngredientsUnwantedParameter(<String>[
+                'en:tomato',
+              ]),
+            ),
+          );
+          expect(productResult.product, isNotNull);
+          final Product product = productResult.product!;
+
+          final List<AttributeGroup> attributeGroups = product.attributeGroups!;
+          final AttributeGroup attributeGroup = attributeGroups.firstWhere(
+            (final AttributeGroup group) => group.id == 'ingredients',
+          );
+          final Attribute attribute = attributeGroup.attributes!.firstWhere(
+            (final Attribute attribute) =>
+                attribute.id == 'unwanted_ingredients',
+          );
+          expect(attribute.status, 'known');
+          expect(attribute.match, entry.value ? 0 : 100);
+        }
+      });
+    });
   });
 }

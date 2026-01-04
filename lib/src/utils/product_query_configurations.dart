@@ -1,5 +1,6 @@
 import 'package:http/http.dart';
 
+import '../model/parameter/ingredients_unwanted_parameter.dart';
 import '../model/product_type_filter.dart';
 import '../model/user.dart';
 import 'abstract_query_configuration.dart';
@@ -32,6 +33,9 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
   /// Filter on a specific server.
   final ProductTypeFilter? productTypeFilter;
 
+  /// Impacts the score if unwanted ingredients are present.
+  final IngredientsUnwantedParameter? unwantedIngredients;
+
   /// See [AbstractQueryConfiguration.languages] for
   /// parameter's description.
   ProductQueryConfiguration(
@@ -43,6 +47,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     super.fields,
     super.activateKnowledgePanelsSimplified,
     this.productTypeFilter,
+    this.unwantedIngredients,
   });
 
   @override
@@ -51,7 +56,9 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     if (productTypeFilter != null) {
       result['product_type'] = productTypeFilter!.offTag;
     }
-
+    if (unwantedIngredients != null) {
+      result[unwantedIngredients!.getName()] = unwantedIngredients!.getValue();
+    }
     return result;
   }
 
@@ -77,7 +84,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
         addCookiesToHeader: true,
       );
     }
-    return await HttpHelper().doPostRequest(
+    return HttpHelper().doPostRequest(
       uriHelper.getPostUri(path: getUriPath()),
       getParametersMap(),
       user,

@@ -15,8 +15,8 @@ void main() {
   Future<ExternalSourceMetadata> getSufferingMetadata() async {
     final MaybeError<List<ExternalSourceMetadata>> result =
         await OpenFoodAPIClient.getExternalSourceMetadatas(
-      uriHelper: uriHelper,
-    );
+          uriHelper: uriHelper,
+        );
     expect(result.isError, isFalse);
     for (final ExternalSourceMetadata item in result.value) {
       if (item.id == sufferingFingerprintId) {
@@ -30,8 +30,8 @@ void main() {
     test('getExternalSourceMetadata - found', () async {
       final MaybeError<List<ExternalSourceMetadata>> result =
           await OpenFoodAPIClient.getExternalSourceMetadatas(
-        uriHelper: uriHelper,
-      );
+            uriHelper: uriHelper,
+          );
       bool foundExpectedId = false;
       expect(result.isError, isFalse);
       for (final ExternalSourceMetadata item in result.value) {
@@ -64,27 +64,27 @@ void main() {
       const String barcode = '3564700814628';
       final ProductResultV3 productResultV3 =
           await OpenFoodAPIClient.getProductV3(
-        ProductQueryConfiguration(
-          barcode,
-          version: ProductQueryVersion.v3,
-          language: language,
-          country: country,
-          fields: <ProductField>[
-            ProductField.BARCODE,
-            ProductField.PRODUCT_TYPE,
-            ProductField.CATEGORIES_TAGS,
-          ],
-        ),
-      );
+            ProductQueryConfiguration(
+              barcode,
+              version: ProductQueryVersion.v3,
+              language: language,
+              country: country,
+              fields: <ProductField>[
+                ProductField.BARCODE,
+                ProductField.PRODUCT_TYPE,
+                ProductField.CATEGORIES_TAGS,
+              ],
+            ),
+          );
       expect(productResultV3.product, isNotNull);
       final ExternalSourceMetadata metadata = await getSufferingMetadata();
       final MaybeError<ExternalSourceProductData?> maybeProductData =
           await OpenFoodAPIClient.getExternalSourceProductData(
-        metadata: metadata,
-        product: productResultV3.product!,
-        language: language,
-        country: country,
-      );
+            metadata: metadata,
+            product: productResultV3.product!,
+            language: language,
+            country: country,
+          );
       expect(maybeProductData.isError, isFalse);
       expect(maybeProductData.value!.productImageUrl, isNotNull);
       expect(maybeProductData.value!.name, isNotNull);
@@ -96,27 +96,27 @@ void main() {
       const String barcode = '8002270014901';
       final ProductResultV3 productResultV3 =
           await OpenFoodAPIClient.getProductV3(
-        ProductQueryConfiguration(
-          barcode,
-          version: ProductQueryVersion.v3,
-          language: language,
-          country: country,
-          fields: <ProductField>[
-            ProductField.BARCODE,
-            ProductField.PRODUCT_TYPE,
-            ProductField.CATEGORIES_TAGS,
-          ],
-        ),
-      );
+            ProductQueryConfiguration(
+              barcode,
+              version: ProductQueryVersion.v3,
+              language: language,
+              country: country,
+              fields: <ProductField>[
+                ProductField.BARCODE,
+                ProductField.PRODUCT_TYPE,
+                ProductField.CATEGORIES_TAGS,
+              ],
+            ),
+          );
       expect(productResultV3.product, isNotNull);
       final ExternalSourceMetadata metadata = await getSufferingMetadata();
       final MaybeError<ExternalSourceProductData?> maybeProductData =
           await OpenFoodAPIClient.getExternalSourceProductData(
-        metadata: metadata,
-        product: productResultV3.product!,
-        language: language,
-        country: country,
-      );
+            metadata: metadata,
+            product: productResultV3.product!,
+            language: language,
+            country: country,
+          );
       expect(maybeProductData.isError, isFalse);
       expect(maybeProductData.isValueNull, isTrue);
     });
