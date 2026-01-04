@@ -93,7 +93,7 @@ Future&lt;Response&gt; getResponse(
       addCookiesToHeader: true,
     );
   }
-  return await HttpHelper().doPostRequest(
+  return HttpHelper().doPostRequest(
     uriHelper.getPostUri(path: getUriPath()),
     getParametersMap(),
     user,

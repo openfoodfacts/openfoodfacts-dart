@@ -72,14 +72,12 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static Future&lt;MaybeError&lt;List&lt;ExternalSourceMetadata&gt;&gt;&gt;
-    getExternalSourceMetadatas({
+getExternalSourceMetadatas({
   final ProductQueryVersion version = ProductQueryVersion.v3,
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
   final Response response = await HttpHelper().doGetRequest(
-    uriHelper.getUri(
-      path: &#39;api&#47;v${version.version}&#47;external_sources&#39;,
-    ),
+    uriHelper.getUri(path: &#39;api&#47;v${version.version}&#47;external_sources&#39;),
     uriHelper: uriHelper,
   );
   if (response.statusCode != 200) {
@@ -95,7 +93,8 @@
     return MaybeError&lt;List&lt;ExternalSourceMetadata&gt;&gt;.value(result);
   } catch (e) {
     return MaybeError&lt;List&lt;ExternalSourceMetadata&gt;&gt;.unreadableResponse(
-        response);
+      response,
+    );
   }
 }</code></pre>
 </section>

@@ -76,17 +76,15 @@
   final Product product,
   final OpenFoodFactsLanguage language,
   final OpenFoodFactsCountry country,
-) =&gt;
-    &lt;String&gt;[
-      if (!acceptsString(product.productType?.offTag, productTypes))
-        &#39;productType(${product.productType?.offTag})&#39;,
-      if (!acceptsListString(product.categoriesTags, categories))
-        &#39;categories(${product.categoriesTags})&#39;,
-      if (!acceptsString(language.offTag, languages))
-        &#39;language(${language.offTag})&#39;,
-      if (!acceptsString(country.offTag, countries))
-        &#39;country(${country.offTag})&#39;,
-    ];</code></pre>
+) =&gt; &lt;String&gt;[
+  if (!acceptsString(product.productType?.offTag, productTypes))
+    &#39;productType(${product.productType?.offTag})&#39;,
+  if (!acceptsListString(product.categoriesTags, categories))
+    &#39;categories(${product.categoriesTags})&#39;,
+  if (!acceptsString(language.offTag, languages))
+    &#39;language(${language.offTag})&#39;,
+  if (!acceptsString(country.offTag, countries)) &#39;country(${country.offTag})&#39;,
+];</code></pre>
 </section>
 
 

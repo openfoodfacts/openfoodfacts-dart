@@ -76,11 +76,10 @@
   final String barcode,
   final OpenFoodFactsLanguage language,
   final OpenFoodFactsCountry country,
-) =&gt;
-    knowledgePanelUrl
-        .replaceFirst(r&#39;$code&#39;, barcode)
-        .replaceFirst(r&#39;$lc&#39;, language.offTag)
-        .replaceFirst(r&#39;$cc&#39;, country.offTag);</code></pre>
+) =&gt; knowledgePanelUrl
+    .replaceFirst(r&#39;$code&#39;, barcode)
+    .replaceFirst(r&#39;$lc&#39;, language.offTag)
+    .replaceFirst(r&#39;$cc&#39;, country.offTag);</code></pre>
 </section>
 
 

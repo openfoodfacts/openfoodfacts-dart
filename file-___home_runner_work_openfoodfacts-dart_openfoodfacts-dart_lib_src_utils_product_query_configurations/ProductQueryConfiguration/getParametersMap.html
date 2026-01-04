@@ -80,7 +80,9 @@ Map&lt;String, String&gt; getParametersMap() {
   if (productTypeFilter != null) {
     result[&#39;product_type&#39;] = productTypeFilter!.offTag;
   }
-
+  if (unwantedIngredients != null) {
+    result[unwantedIngredients!.getName()] = unwantedIngredients!.getValue();
+  }
   return result;
 }</code></pre>
 </section>
