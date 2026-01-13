@@ -14,6 +14,7 @@ class Attribute extends JsonObject {
     this.match,
     this.status,
     this.panelId,
+    this.values,
   });
 
   factory Attribute.fromJson(dynamic json) => Attribute(
@@ -29,6 +30,9 @@ class Attribute extends JsonObject {
     match: JsonObject.parseDouble(json[_JSON_TAG_MATCH]),
     status: json[_JSON_TAG_STATUS] as String?,
     panelId: json[_JSON_TAG_PANEL_ID] as String?,
+    values: (json[_JSON_TAG_VALUES] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toSet(),
   );
 
   @override
@@ -45,6 +49,7 @@ class Attribute extends JsonObject {
     _JSON_TAG_MATCH: match,
     _JSON_TAG_STATUS: status,
     _JSON_TAG_PANEL_ID: panelId,
+    _JSON_TAG_VALUES: values?.toList(),
   });
 
   static const String _JSON_TAG_ID = 'id';
@@ -59,6 +64,7 @@ class Attribute extends JsonObject {
   static const String _JSON_TAG_MATCH = 'match';
   static const String _JSON_TAG_STATUS = 'status';
   static const String _JSON_TAG_PANEL_ID = 'panel_id';
+  static const String _JSON_TAG_VALUES = 'values';
 
   static const String STATUS_UNKNOWN = 'unknown';
   static const String STATUS_KNOWN = 'known';
@@ -93,6 +99,7 @@ class Attribute extends JsonObject {
   static const String ATTRIBUTE_VEGETARIAN = 'vegetarian';
   static const String ATTRIBUTE_VEGAN = 'vegan';
   static const String ATTRIBUTE_PALM_OIL_FREE = 'palm_oil_free';
+  static const String ATTRIBUTE_UNWANTED_INGREDIENTS = 'unwanted_ingredients';
 
   static const String ATTRIBUTE_LABELS_ORGANIC = 'labels_organic';
   static const String ATTRIBUTE_LABELS_FAIR_TRADE = 'labels_fair_trade';
@@ -112,6 +119,7 @@ class Attribute extends JsonObject {
   final double? match;
   final String? status;
   final String? panelId;
+  final Set<String>? values;
 
   @override
   String toString() => 'Attribute(${toJson()})';
