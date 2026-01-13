@@ -119,7 +119,6 @@ void main() {
           importance,
         );
         for (final String attribute in attributes) {
-          print(attribute);
           expect(importanceForAttributes[attribute], isNotNull);
           expect(importanceForAttributes[attribute], importance);
           count++;
