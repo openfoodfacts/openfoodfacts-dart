@@ -76,7 +76,29 @@
   final dynamic inputJson = HttpHelper().jsonDecode(
     preferenceImportancesString,
   );
-  for (final dynamic item in inputJson as List&lt;dynamic&gt;) {
+
+  &#47;&#47; Handle both new format (object with &quot;preferences&quot; key) and
+  &#47;&#47; old format (array) for backward compatibility with cached data
+  final List&lt;dynamic&gt; jsonList;
+  if (inputJson is Map&lt;String, dynamic&gt;) {
+    &#47;&#47; New format: {&quot;preferences&quot;: [...], &quot;status&quot;: &quot;success&quot;, ...}
+    final dynamic preferencesData = inputJson[&#39;preferences&#39;];
+    if (preferencesData is! List&lt;dynamic&gt;) {
+      throw Exception(
+        &#39;Unexpected error: &quot;preferences&quot; key is missing or not a list in json string $preferenceImportancesString&#39;,
+      );
+    }
+    jsonList = preferencesData;
+  } else if (inputJson is List&lt;dynamic&gt;) {
+    &#47;&#47; Old format: array (backward compatibility)
+    jsonList = inputJson;
+  } else {
+    throw Exception(
+      &#39;Unexpected error: json is neither a list nor a map in json string $preferenceImportancesString&#39;,
+    );
+  }
+
+  for (final dynamic item in jsonList) {
     final PreferenceImportance preferenceImportance =
         PreferenceImportance.fromJson(item);
     final String? id = preferenceImportance.id;

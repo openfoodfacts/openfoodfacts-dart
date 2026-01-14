@@ -76,6 +76,9 @@
   match: JsonObject.parseDouble(json[_JSON_TAG_MATCH]),
   status: json[_JSON_TAG_STATUS] as String?,
   panelId: json[_JSON_TAG_PANEL_ID] as String?,
+  values: (json[_JSON_TAG_VALUES] as List&lt;dynamic&gt;?)
+      ?.map((e) =&gt; e as String)
+      .toSet(),
 );</code></pre>
 </section>
 

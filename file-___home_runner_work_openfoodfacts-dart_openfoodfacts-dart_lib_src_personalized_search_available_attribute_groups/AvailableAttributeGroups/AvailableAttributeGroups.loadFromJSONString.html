@@ -70,8 +70,30 @@
   final String attributeGroupsString,
 ) {
   final dynamic inputJson = HttpHelper().jsonDecode(attributeGroupsString);
+
+  &#47;&#47; Handle both new format (object with &quot;attribute_groups&quot; key) and
+  &#47;&#47; old format (direct array) for backward compatibility with cached data
+  final List&lt;dynamic&gt; jsonList;
+  if (inputJson is Map&lt;String, dynamic&gt;) {
+    &#47;&#47; New format: {&quot;attribute_groups&quot;: [...], &quot;status&quot;: &quot;success&quot;, ...}
+    final dynamic attributeGroupsData = inputJson[&#39;attribute_groups&#39;];
+    if (attributeGroupsData is! List&lt;dynamic&gt;) {
+      throw Exception(
+        &#39;Unexpected error: &quot;attribute_groups&quot; key is missing or not a list in json string $attributeGroupsString&#39;,
+      );
+    }
+    jsonList = attributeGroupsData;
+  } else if (inputJson is List&lt;dynamic&gt;) {
+    &#47;&#47; Old format: direct array (backward compatibility)
+    jsonList = inputJson;
+  } else {
+    throw Exception(
+      &#39;Unexpected error: json is neither a list nor a map in json string $attributeGroupsString&#39;,
+    );
+  }
+
   final List&lt;AttributeGroup&gt; attributeGroups = &lt;AttributeGroup&gt;[];
-  for (final dynamic item in inputJson as List&lt;dynamic&gt;) {
+  for (final dynamic item in jsonList) {
     attributeGroups.add(AttributeGroup.fromJson(item));
   }
   if (attributeGroups.isEmpty) {
