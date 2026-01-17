@@ -14,7 +14,29 @@ class AvailablePreferenceImportances {
     final dynamic inputJson = HttpHelper().jsonDecode(
       preferenceImportancesString,
     );
-    for (final dynamic item in inputJson as List<dynamic>) {
+
+    // Handle both new format (object with "preferences" key) and
+    // old format (array) for backward compatibility with cached data
+    final List<dynamic> jsonList;
+    if (inputJson is Map<String, dynamic>) {
+      // New format: {"preferences": [...], "status": "success", ...}
+      final dynamic preferencesData = inputJson['preferences'];
+      if (preferencesData is! List<dynamic>) {
+        throw Exception(
+          'Unexpected error: "preferences" key is missing or not a list in json string $preferenceImportancesString',
+        );
+      }
+      jsonList = preferencesData;
+    } else if (inputJson is List<dynamic>) {
+      // Old format: array (backward compatibility)
+      jsonList = inputJson;
+    } else {
+      throw Exception(
+        'Unexpected error: json is neither a list nor a map in json string $preferenceImportancesString',
+      );
+    }
+
+    for (final dynamic item in jsonList) {
       final PreferenceImportance preferenceImportance =
           PreferenceImportance.fromJson(item);
       final String? id = preferenceImportance.id;
@@ -46,7 +68,7 @@ class AvailablePreferenceImportances {
   /// Where a localized JSON file can be found.
   /// [languageCode] is a 2-letter language code.
   static String getUrl(final String languageCode) =>
-      'https://world.openfoodfacts.org/api/v2/preferences?lc=$languageCode';
+      'https://world.openfoodfacts.org/api/v3.4/preferences?lc=$languageCode';
 
   /// Returns the index of an importance.
   ///
