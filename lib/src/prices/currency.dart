@@ -95,7 +95,7 @@ enum Currency {
   BGM(noCountry: true),
 
   /// Bulgarian lev
-  BGN,
+  BGN(historicalCode: true),
   BGO(noCountry: true),
 
   /// Bahraini dinar

@@ -99,7 +99,7 @@ enum OpenFoodFactsCountry implements OffTagged {
   BULGARIA(
     offTag: 'bg',
     iso3Code: 'BGR',
-    currency: Currency.BGN,
+    currency: Currency.EUR,
     wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/BulgarianTeam',
   ),
 
