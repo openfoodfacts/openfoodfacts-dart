@@ -1,5 +1,7 @@
 import '../model/attribute_group.dart';
 import '../utils/http_helper.dart';
+import '../utils/open_food_api_configuration.dart';
+import '../utils/uri_helper.dart';
 
 /// Referential of attribute groups, with loader.
 class AvailableAttributeGroups {
@@ -48,6 +50,11 @@ class AvailableAttributeGroups {
 
   /// Where a localized JSON file can be found.
   /// [languageCode] is a 2-letter language code.
-  static String getUrl(final String languageCode) =>
-      'https://world.openfoodfacts.org/api/v3.4/attribute_groups?lc=$languageCode';
+  static Uri getUri(
+    final String languageCode, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) => uriHelper.getUri(
+    path: '/api/v3.4/attribute_groups',
+    queryParameters: {'lc': languageCode},
+  );
 }
