@@ -1015,7 +1015,7 @@ enum OpenFoodFactsCountry implements OffTagged {
     this.wikiUrl,
   });
 
-  /// Lowercase ISO 639-1, except for [UNITED_KINGDOM].
+  /// Lowercase ISO 3166-1 alpha-2, except for [UNITED_KINGDOM].
   @override
   final String offTag;
 
@@ -1043,4 +1043,14 @@ enum OpenFoodFactsCountry implements OffTagged {
     return OffTagged.fromOffTag(offTag, OpenFoodFactsCountry.values)
         as OpenFoodFactsCountry?;
   }
+}
+
+/// Helper class around [OpenFoodFactsCountry]
+class CountryHelper {
+  /// Converts an [OpenFoodFactsCountry] into an ISO 3166-1 alpha-2 code.
+  static String? toJson(OpenFoodFactsCountry? country) => country?.offTag;
+
+  /// Converts an ISO 3166-1 alpha-2 code into an [OpenFoodFactsCountry]
+  static OpenFoodFactsCountry? fromJson(String? code) =>
+      OpenFoodFactsCountry.fromOffTag(code);
 }

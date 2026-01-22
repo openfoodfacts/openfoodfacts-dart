@@ -594,6 +594,14 @@ class LanguageHelper {
   static OpenFoodFactsLanguage fromJson(String? code) =>
       OpenFoodFactsLanguage.fromOffTag(code) ?? OpenFoodFactsLanguage.UNDEFINED;
 
+  /// Converts an [OpenFoodFactsLanguage] into an ISO-639-1 code, or null.
+  static String? toNullableJson(OpenFoodFactsLanguage? language) =>
+      language?.offTag;
+
+  /// Converts an ISO-639-1 code into an [OpenFoodFactsLanguage], or null.
+  static OpenFoodFactsLanguage? fromNullableJson(String? code) =>
+      OpenFoodFactsLanguage.fromOffTag(code);
+
   /// Converts a Map with [OpenFoodFactsLanguage] into
   /// a map with ISO-639-1 codes.
   static Map<String, T>? toJsonMap<T>(Map<OpenFoodFactsLanguage, T>? map) {
