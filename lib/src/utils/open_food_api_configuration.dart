@@ -84,6 +84,18 @@ const UriProductHelper uriHelperFoodProd = UriProductHelper(
   domain: 'openfoodfacts.org',
 );
 
+const UriProductHelper uriHelperProductsProd = UriProductHelper(
+  domain: 'openproductsfacts.org',
+);
+
+const UriProductHelper uriHelperBeautyProd = UriProductHelper(
+  domain: 'openbeautyfacts.org',
+);
+
+const UriProductHelper uriHelperPetFoodProd = UriProductHelper(
+  domain: 'openpetfoodfacts.org',
+);
+
 /// Uri of the test requests to the backend (OFF).
 const UriProductHelper uriHelperFoodTest = UriProductHelper(
   domain: 'openfoodfacts.net',
