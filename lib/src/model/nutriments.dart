@@ -1,91 +1,109 @@
 import 'nutrient.dart';
+import 'nutrient_modifier.dart';
 import 'per_size.dart';
+import '../external/json_map.dart';
 import '../interface/json_object.dart';
 import '../utils/nutriments_helper.dart';
+import '../utils/unit_helper.dart';
 
 /// Values in nutrients.
-class Nutriments extends JsonObject {
+///
+/// Most interesting methods are:
+/// * [setValue]
+/// * [getValue]
+/// * [getUnit]
+/// * [getModifier]
+class Nutriments extends JsonMap {
   /// Empty nutrient map.
-  Nutriments.empty();
+  Nutriments.empty() : super(<String, dynamic>{});
 
   /// Nutrient map with start values from [map].
-  Nutriments._fromMap(final Map<String, dynamic> map) {
-    for (final Nutrient nutrient in Nutrient.values) {
-      for (final PerSize perSize in PerSize.values) {
-        final String tag = _getTag(nutrient, perSize);
-        try {
-          final double? value = JsonObject.parseDouble(map[tag]);
-          if (value != null) {
-            _map[tag] = value;
-          } else if (map.containsKey(tag)) {
-            // typical case when null means something: to erase a value
-            _map[tag] = null;
-          }
-        } catch (e) {
-          throw Exception(
-            'Could not parse the value for $nutrient and $perSize: ${map[tag]}',
-          );
-        }
-      }
-    }
-  }
+  Nutriments._fromMap(super.map);
 
-  /// Nutrient values.
-  ///
-  /// It is useful to store null values: this way we can make the difference
-  /// between totally unknown values and values that have been erased.
-  final Map<String, double?> _map = <String, double?>{};
-
-  /// Returns the map key for that [nutrient] and that [perSize].
-  String _getTag(final Nutrient nutrient, final PerSize perSize) =>
+  /// Returns the value map key for that [nutrient] and that [perSize].
+  String _getValuePerSizeTag(final Nutrient nutrient, final PerSize perSize) =>
       '${nutrient.offTag}_${perSize.offTag}';
 
-  /// Returns the value in grams of that [nutrient] for that [perSize].
-  ///
-  /// It won't be grams for very specific nutrients, like [Nutrient.alcohol].
-  double? getValue(final Nutrient nutrient, final PerSize perSize) =>
-      _map[_getTag(nutrient, perSize)];
+  /// Returns the value map key for that [nutrient].
+  String _getValueTag(final Nutrient nutrient) => '${nutrient.offTag}_value';
 
-  /// Sets the value in grams of that [nutrient] for that [perSize].
+  /// Returns the unit map key for that [nutrient].
+  String _getUnitTag(final Nutrient nutrient) => '${nutrient.offTag}_unit';
+
+  /// Returns the modifier map key for that [nutrient].
+  String _getModifierTag(final Nutrient nutrient) =>
+      '${nutrient.offTag}_modifier';
+
+  /// Returns the computed value of that [nutrient] for that [perSize].
   ///
-  /// It won't be grams for very specific nutrients, like [Nutrient.alcohol].
+  /// Typical use-case is when the "real" unit is "% DV" or "IU": with that
+  /// method we get the computed value, in grams for weight.
+  /// Rather use [getValue] and [getUnit] instead.
+  double? getComputedValue(final Nutrient nutrient, final PerSize perSize) =>
+      JsonObject.parseDouble(jsonMap[_getValuePerSizeTag(nutrient, perSize)]);
+
+  /// Returns the value of that [nutrient].
+  ///
+  /// See also: [getUnit], [getModifier].
+  double? getValue(final Nutrient nutrient) {
+    final dynamic item = jsonMap[_getValueTag(nutrient)];
+    if (item == '') {
+      return null;
+    }
+    return JsonObject.parseDouble(item);
+  }
+
+  /// Returns the unit of that [nutrient].
+  ///
+  /// See also: [getValue], [getModifier].
+  Unit? getUnit(final Nutrient nutrient) =>
+      UnitHelper.stringToUnit(jsonMap[_getUnitTag(nutrient)]);
+
+  /// Returns the unit of that [nutrient].
+  ///
+  /// See also: [getValue], [getUnit].
+  NutrientModifier? getModifier(final Nutrient nutrient) =>
+      NutrientModifier.fromOffTag(jsonMap[_getModifierTag(nutrient)]);
+
+  /// Sets the value, unit and possibly modifier of that [nutrient].
+  ///
+  /// [modifier] is most of the time null, and in that case means "equals".
   Nutriments setValue(
     final Nutrient nutrient,
-    final PerSize perSize,
+    final double value, {
+    required final Unit unit,
+    final NutrientModifier? modifier,
+  }) => _set(nutrient, value: value, unit: unit, modifier: modifier);
+
+  Nutriments deleteValue(final Nutrient nutrient) =>
+      _set(nutrient, value: null);
+
+  Nutriments setValueAsNotSpecified(final Nutrient nutrient) =>
+      _set(nutrient, modifier: NutrientModifier.valueNotSpecified);
+
+  Nutriments _set(
+    final Nutrient nutrient, {
     final double? value,
-  ) {
-    _map[_getTag(nutrient, perSize)] = value;
+    final Unit? unit,
+    final NutrientModifier? modifier,
+  }) {
+    jsonMap[_getValueTag(nutrient)] = value ?? '';
+    jsonMap[_getUnitTag(nutrient)] = unit?.offTag ?? '';
+    jsonMap[_getModifierTag(nutrient)] = modifier?.offTag ?? '';
     return this;
   }
 
   /// Returns true if there are no populated nutrients at all.
-  ///
-  /// Default case: a nutrient with a null value is considered "populated".
-  /// If [isNullEmpty] is true, a null value is a non populated value, and a
-  /// [Nutriments] with only null values would be considered empty.
-  bool isEmpty({final bool isNullEmpty = false}) {
-    if (_map.isEmpty) {
-      return true;
-    }
-    if (!isNullEmpty) {
-      return false;
-    }
-    for (final double? value in _map.values) {
-      if (value != null) {
-        return false;
-      }
-    }
-    return true;
-  }
+  bool isEmpty() => jsonMap.isEmpty;
 
   /// Returns the energy in kJ for that [perSize], direct or computed from kcal.
   double? getComputedKJ(final PerSize perSize) {
     double? result;
-    result = getValue(Nutrient.energyKJ, perSize);
+    result = getComputedValue(Nutrient.energyKJ, perSize);
     if (result != null) {
       return result;
     }
-    result = getValue(Nutrient.energyKCal, perSize);
+    result = getComputedValue(Nutrient.energyKCal, perSize);
     if (result != null) {
       return NutrimentsHelper.fromKCalToKJ(result);
     }
@@ -94,28 +112,6 @@ class Nutriments extends JsonObject {
 
   factory Nutriments.fromJson(Map<String, dynamic> json) =>
       Nutriments._fromMap(json);
-
-  /// Returns a JSON version of the [Nutriments].
-  ///
-  /// When we want to erase a value, we need to set the value to `''`.
-  /// If we put `null` instead the server will interpret it as `0`.
-  /// If we don't set a value the server will keep the previous value.
-  @override
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> result = <String, dynamic>{};
-    for (final Nutrient nutrient in Nutrient.values) {
-      for (final PerSize perSize in PerSize.values) {
-        final String tag = _getTag(nutrient, perSize);
-        final double? value = _map[tag];
-        if (value != null) {
-          result[tag] = value;
-        } else if (_map.containsKey(tag)) {
-          result[tag] = '';
-        }
-      }
-    }
-    return result;
-  }
 
   static Map<String, dynamic> toJsonHelper(Nutriments? n) => n?.toJson() ?? {};
 }

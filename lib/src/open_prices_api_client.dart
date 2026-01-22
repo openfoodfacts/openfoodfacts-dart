@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 
 import 'prices/challenge.dart';
@@ -70,7 +69,7 @@ class OpenPricesAPIClient {
     final Uri uri = OpenPricesAPIClient.getUri(
       path: '/api/v1/users/${Uri.encodeComponent(username)}',
     );
-    final http.Response response = await HttpHelper().doGetRequest(
+    final Response response = await HttpHelper().doGetRequest(
       uri,
       uriHelper: uriHelper,
     );
@@ -583,7 +582,7 @@ class OpenPricesAPIClient {
   }) async {
     final Uri uri = getUri(path: '/api/v1/proofs/upload', uriHelper: uriHelper);
 
-    final http.MultipartRequest request = http.MultipartRequest('POST', uri);
+    final MultipartRequest request = MultipartRequest('POST', uri);
     request.headers.addAll({
       'Authorization': 'bearer $bearerToken',
       'Content-Type': 'multipart/form-data',
@@ -591,7 +590,7 @@ class OpenPricesAPIClient {
     request.fields.addAll(createProofParameters.toData());
     final List<int> fileBytes = await UriReader.instance.readAsBytes(imageUri);
     final String filename = basename(imageUri.toString());
-    final http.MultipartFile multipartFile = http.MultipartFile.fromBytes(
+    final MultipartFile multipartFile = MultipartFile.fromBytes(
       'file',
       fileBytes,
       filename: filename,
