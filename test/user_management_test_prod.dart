@@ -126,11 +126,12 @@ void main() {
     expect(status, isNotNull);
     expect(status!.successful, isTrue);
     expect(status.userId, TestConstants.PROD_USER.userId);
-    expect(status.userName, 'Alexander Schacht (TIOLI)');
-    expect(status.preferredLanguage, OpenFoodFactsLanguage.ENGLISH);
-    expect(status.country, isNull);
-    expect(status.isAdmin, isFalse);
-    expect(status.isModerator, isFalse);
+    final UserDetails userDetails = status.userDetails;
+    expect(userDetails.name, 'Alexander Schacht TIOLI');
+    expect(userDetails.preferredLanguage, OpenFoodFactsLanguage.ENGLISH);
+    expect(userDetails.country, isNull);
+    expect(userDetails.isAdmin, isFalse);
+    expect(userDetails.isModerator, isFalse);
   });
 
   group('reset password', () {
