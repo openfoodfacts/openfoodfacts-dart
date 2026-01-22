@@ -32,17 +32,17 @@ void main() {
         ),
       );
       final String languageCode = language.code;
-      final String importanceUrl = AvailablePreferenceImportances.getUrl(
+      final Uri importanceUrl = AvailablePreferenceImportances.getUri(
         languageCode,
       );
-      final String attributeGroupUrl = AvailableAttributeGroups.getUrl(
+      final Uri attributeGroupUrl = AvailableAttributeGroups.getUri(
         languageCode,
       );
       http.Response response;
-      response = await http.get(Uri.parse(importanceUrl));
+      response = await http.get(importanceUrl);
       expect(response.statusCode, HTTP_OK);
       final String preferenceImportancesString = response.body;
-      response = await http.get(Uri.parse(attributeGroupUrl));
+      response = await http.get(attributeGroupUrl);
       expect(response.statusCode, HTTP_OK);
       final String attributeGroupsString = response.body;
       manager.availableProductPreferences =
