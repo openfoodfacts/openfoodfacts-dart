@@ -470,6 +470,9 @@ class OpenPricesAPIClient {
         'location_osm_type': price.locationOSMType!.offTag,
       if (price.receiptQuantity != null)
         'receipt_quantity': price.receiptQuantity,
+      if (price.locationId != null) 'location_id': price.locationId,
+      if (price.type != null) 'type': price.type!.offTag,
+      if (price.ownerComment != null) 'owner_comment': price.ownerComment,
     };
     final Response response = await HttpHelper().doPostJsonRequest(
       uri,

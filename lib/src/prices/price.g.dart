@@ -47,6 +47,9 @@ Price _$PriceFromJson(Map<String, dynamic> json) => Price()
   ..receiptQuantity = (json['receipt_quantity'] as num?)?.toInt()
   ..type = $enumDecodeNullable(_$PriceTypeEnumMap, json['type'])
   ..owner = json['owner'] as String
+  ..ownerComment = json['owner_comment'] as String?
+  ..source = json['source'] as String?
+  ..duplicateOf = (json['duplicate_of'] as num?)?.toInt()
   ..created = JsonHelper.stringTimestampToDate(json['created'])
   ..updated = JsonHelper.nullableStringTimestampToDate(json['updated']);
 
@@ -75,6 +78,9 @@ Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
   'receipt_quantity': instance.receiptQuantity,
   'type': _$PriceTypeEnumMap[instance.type],
   'owner': instance.owner,
+  'owner_comment': instance.ownerComment,
+  'source': instance.source,
+  'duplicate_of': instance.duplicateOf,
   'created': instance.created.toIso8601String(),
   'updated': instance.updated?.toIso8601String(),
 };
