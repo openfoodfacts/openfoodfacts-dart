@@ -111,10 +111,18 @@ class RobotoffAPIClient {
     return result;
   }
 
+  /// Fetches questions.
+  ///
   /// cf. https://openfoodfacts.github.io/robotoff/references/api/#tag/Questions/paths/~1questions/get
+  /// result.status would typically be 'found'.
+  ///
+  /// cf. [postInsightAnnotation]: if you answer a question with a given `user?`
+  /// and `deviceId?`, it won't be fetched again. Even if both parameters are
+  /// null.
   static Future<RobotoffQuestionResult> getQuestions(
     OpenFoodFactsLanguage language, {
     User? user,
+    String? deviceId,
     int? count,
     int? page,
     List<InsightType>? insightTypes,
@@ -134,6 +142,7 @@ class RobotoffAPIClient {
 
     final Map<String, String> parameters = <String, String>{
       'lang': language.code,
+      if (deviceId != null) 'device_id': deviceId,
       if (count != null) 'count': count.toString(),
       if (page != null) 'page': page.toString(),
       if (serverType != null) 'server_type': serverType.offTag,
@@ -154,15 +163,25 @@ class RobotoffAPIClient {
       robotoffQuestionUri,
       user: user,
       uriHelper: uriHelper,
+      addCredentialsToHeader: user != null,
     );
     return RobotoffQuestionResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
     );
   }
 
+  /// Submits an annotation.
+  ///
+  /// You won't be asked again the same question if [user] or [deviceId] is
+  /// populated.
+  /// result.status would typically be 'vote_saved'.
+  ///
+  /// cf. [getQuestions]: if you answer a question with a given `user?` and
+  /// `deviceId?`, it won't be fetched again. Even if both parameters are null.
   static Future<Status> postInsightAnnotation(
     String? insightId,
     InsightAnnotation annotation, {
+    User? user,
     String? deviceId,
     bool update = true,
     final UriHelper uriHelper = uriHelperRobotoffProd,
@@ -172,22 +191,17 @@ class RobotoffAPIClient {
     final Map<String, String> annotationData = {
       'annotation': annotation.value.toString(),
       'update': update ? '1' : '0',
+      if (insightId != null) 'insight_id': insightId,
+      if (deviceId != null) 'device_id': deviceId,
     };
-    if (insightId != null) {
-      annotationData['insight_id'] = insightId;
-    }
 
-    if (deviceId != null) {
-      annotationData['device_id'] = deviceId;
-    }
-
-    Response response = await HttpHelper().doPostRequest(
+    final Response response = await HttpHelper().doPostRequest(
       insightUri,
       annotationData,
-      null,
+      user,
       uriHelper: uriHelper,
       addCredentialsToBody: false,
-      addCredentialsToHeader: true,
+      addCredentialsToHeader: user != null,
     );
     return Status.fromApiResponse(response.body);
   }

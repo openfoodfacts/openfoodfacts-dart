@@ -99,7 +99,6 @@ const UriHelper uriHelperRobotoffProd = UriHelper(
 /// Uri of the test requests to the backend (RobotOff).
 const UriHelper uriHelperRobotoffTest = UriHelper(
   host: 'robotoff.openfoodfacts.net',
-  isTestMode: true,
 );
 
 /// Uri of the main requests to the backend (Folksonomy).
