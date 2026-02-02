@@ -1,5 +1,7 @@
 import 'preference_importance.dart';
 import '../utils/http_helper.dart';
+import '../utils/open_food_api_configuration.dart';
+import '../utils/uri_helper.dart';
 
 /// Referential of preference importance, with loader.
 class AvailablePreferenceImportances {
@@ -67,8 +69,13 @@ class AvailablePreferenceImportances {
 
   /// Where a localized JSON file can be found.
   /// [languageCode] is a 2-letter language code.
-  static String getUrl(final String languageCode) =>
-      'https://world.openfoodfacts.org/api/v3.4/preferences?lc=$languageCode';
+  static Uri getUri(
+    final String languageCode, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) => uriHelper.getUri(
+    path: '/api/v3.4/preferences',
+    queryParameters: {'lc': languageCode},
+  );
 
   /// Returns the index of an importance.
   ///
