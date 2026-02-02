@@ -1,6 +1,6 @@
+import 'user_details.dart';
 import '../interface/json_object.dart';
 import '../utils/country_helper.dart';
-import '../utils/json_helper.dart';
 import '../utils/language_helper.dart';
 
 /// Status after an attempt to log in.
@@ -29,24 +29,36 @@ class LoginStatus {
   LoginStatus({
     required this.status,
     required this.statusVerbose,
-    String? userEmail,
-    this.userName,
-    this.userId,
-    this.preferredLanguage,
-    this.country,
-    this.isModerator,
-    this.isAdmin,
-    this.cookie,
+    required this.userId,
+    required this.cookie,
+    required this.userDetails,
   });
 
   final int status;
   final String statusVerbose;
-  final String? userName;
   final String? userId;
-  final OpenFoodFactsLanguage? preferredLanguage;
-  final OpenFoodFactsCountry? country;
-  final bool? isModerator;
-  final bool? isAdmin;
+
+  // TODO: deprecated from 2026-01-20; remove when old enough
+  @Deprecated('Use userDetails.name instead')
+  String? get userName => userDetails.name;
+
+  // TODO: deprecated from 2026-01-20; remove when old enough
+  @Deprecated('Use userDetails.preferredLanguage instead')
+  OpenFoodFactsLanguage? get preferredLanguage => userDetails.preferredLanguage;
+
+  // TODO: deprecated from 2026-01-20; remove when old enough
+  @Deprecated('Use userDetails.country instead')
+  OpenFoodFactsCountry? get country => userDetails.country;
+
+  // TODO: deprecated from 2026-01-20; remove when old enough
+  @Deprecated('Use userDetails.isModerator instead')
+  bool? get isModerator => userDetails.isModerator;
+
+  // TODO: deprecated from 2026-01-20; remove when old enough
+  @Deprecated('Use userDetails.isAdmin instead')
+  bool? get isAdmin => userDetails.isAdmin;
+
+  final UserDetails userDetails;
 
   /// The cookie is necessary for some GET requests that require an
   /// authenticated user.
@@ -56,19 +68,12 @@ class LoginStatus {
     Map<String, dynamic> json, [
     Map<String, String>? headers,
   ]) {
-    final details = json['user'];
     return LoginStatus(
       status: JsonObject.parseInt(json['status'])!,
       statusVerbose: json['status_verbose'] as String,
       userId: json['user_id'] as String?,
-      userName: details?['name'] as String?,
-      preferredLanguage: OpenFoodFactsLanguage.fromOffTag(
-        details?['preferred_language'],
-      ),
-      country: OpenFoodFactsCountry.fromOffTag(details?['cc']),
-      isModerator: JsonHelper.boolFromJSON(details?['moderator']),
-      isAdmin: JsonHelper.boolFromJSON(details?['admin']),
       cookie: headers?['set-cookie'],
+      userDetails: UserDetails.fromJson(json['user']),
     );
   }
 
@@ -81,11 +86,7 @@ class LoginStatus {
       'status:$status'
       ',statusVerbose:$statusVerbose'
       '${userId == null ? '' : ',userId:$userId'}'
-      '${userName == null ? '' : ',userName:$userName'}'
-      '${preferredLanguage == null ? '' : ',preferredLanguage:$preferredLanguage'}'
-      '${country == null ? '' : ',country:$country'}'
-      '${isAdmin == null ? '' : ',isAdmin:$isAdmin'}'
-      '${isModerator == null ? '' : ',isModerator:$isModerator'}'
       '${cookie == null ? '' : ',cookie:$cookie'}'
+      ',userDetails:$userDetails'
       ')';
 }

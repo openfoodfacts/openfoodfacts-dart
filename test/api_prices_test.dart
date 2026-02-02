@@ -214,6 +214,51 @@ void main() {
     });
   });
 
+  group('$OpenPricesAPIClient currency', () {
+    test('fixDecimalsForNumbers', () async {
+      // sad but true
+      expect(4.6 * 100, 459.99999999999994);
+
+      expect(Currency.fixDecimalsForNumbers(4.6, 0), 5);
+      expect(Currency.fixDecimalsForNumbers(4.6, 1), 4.6);
+      expect(Currency.fixDecimalsForNumbers(4.6, 2), 4.6);
+      expect(Currency.fixDecimalsForNumbers(4.6, 3), 4.6);
+      expect(Currency.fixDecimalsForNumbers(4.6, 4), 4.6);
+
+      expect(Currency.fixDecimalsForNumbers(4.612345, 0), 5);
+      expect(Currency.fixDecimalsForNumbers(4.612345, 1), 4.6);
+      expect(Currency.fixDecimalsForNumbers(4.612345, 2), 4.61);
+      expect(Currency.fixDecimalsForNumbers(4.612345, 3), 4.612);
+      expect(Currency.fixDecimalsForNumbers(4.612345, 4), 4.6123);
+
+      expect(Currency.fixDecimalsForNumbers(460, 0), 460);
+      expect(Currency.fixDecimalsForNumbers(460, 1), 460);
+      expect(Currency.fixDecimalsForNumbers(460, 2), 460);
+      expect(Currency.fixDecimalsForNumbers(460, 3), 460);
+      expect(Currency.fixDecimalsForNumbers(460, 4), 460);
+    });
+
+    test('fixDecimals', () async {
+      // sad but true
+      expect(4.6 * 100, 459.99999999999994);
+
+      expect(Currency.BIF.fixDecimals(4.6), 5);
+      expect(Currency.EUR.fixDecimals(4.6), 4.6);
+      expect(Currency.BHD.fixDecimals(4.6), 4.6);
+      expect(Currency.CLF.fixDecimals(4.6), 4.6);
+
+      expect(Currency.BIF.fixDecimals(4.612345), 5);
+      expect(Currency.EUR.fixDecimals(4.612345), 4.61);
+      expect(Currency.BHD.fixDecimals(4.612345), 4.612);
+      expect(Currency.CLF.fixDecimals(4.612345), 4.6123);
+
+      expect(Currency.BIF.fixDecimals(460), 460);
+      expect(Currency.EUR.fixDecimals(460), 460);
+      expect(Currency.BHD.fixDecimals(460), 460);
+      expect(Currency.CLF.fixDecimals(460), 460);
+    });
+  });
+
   group('$OpenPricesAPIClient Prices', () {
     const UriProductHelper uriHelper = uriHelperFoodTest;
 

@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:meta/meta.dart';
+
 /// Currency of the price.
 ///
 /// The currency must be a valid currency code.
@@ -928,5 +932,18 @@ enum Currency {
       }
     }
     return null;
+  }
+
+  /// Returns a value with a number of decimals that matches the currency.
+  double fixDecimals(final double price) =>
+      fixDecimalsForNumbers(price, decimalNumbers);
+
+  @visibleForTesting
+  static double fixDecimalsForNumbers(
+    final double price,
+    final int decimalNumbers,
+  ) {
+    final int power10 = pow(10, decimalNumbers).round();
+    return (price * power10).round() / power10;
   }
 }
