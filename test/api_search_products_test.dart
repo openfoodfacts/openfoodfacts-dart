@@ -1572,17 +1572,17 @@ void main() {
         ),
       );
       final String languageCode = language.code;
-      final String importanceUrl = AvailablePreferenceImportances.getUrl(
+      final Uri importanceUrl = AvailablePreferenceImportances.getUri(
         languageCode,
       );
-      final String attributeGroupUrl = AvailableAttributeGroups.getUrl(
+      final Uri attributeGroupUrl = AvailableAttributeGroups.getUri(
         languageCode,
       );
       Response response;
-      response = await get(Uri.parse(importanceUrl));
+      response = await get(importanceUrl);
       expect(response.statusCode, HTTP_OK);
       final String preferenceImportancesString = response.body;
-      response = await get(Uri.parse(attributeGroupUrl));
+      response = await get(attributeGroupUrl);
       expect(response.statusCode, HTTP_OK);
       final String attributeGroupsString = response.body;
       manager.availableProductPreferences =
