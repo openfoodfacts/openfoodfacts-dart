@@ -272,11 +272,14 @@ void main() {
         ..locationOSMType = LocationOSMType.node
         ..priceIsDiscounted = true
         ..discountType = DiscountType.seasonal
+        ..ownerComment = 'just a test'
         ..date = DateTime(2025, 1, 18);
 
       final UpdatePriceParameters updatePriceParameters =
           UpdatePriceParameters()
             ..price = 12
+            ..productCode = '7300400481588'
+            ..ownerComment = 'another test'
             ..priceIsDiscounted = false;
 
       const String invalidBearerToken = 'invalid bearer token';
@@ -364,6 +367,7 @@ void main() {
       expect(addedValue.currency, initialPrice.currency);
       expect(addedValue.locationOSMId, initialPrice.locationOSMId);
       expect(addedValue.locationOSMType, initialPrice.locationOSMType);
+      expect(addedValue.ownerComment, initialPrice.ownerComment);
       expect(addedValue.date, initialPrice.date);
       expect(addedValue.owner, user.userId);
 
@@ -389,6 +393,14 @@ void main() {
       );
       expect(updatedPriceValue.value.priceWithoutDiscount, isNull);
       expect(updatedPriceValue.value.discountType, isNull);
+      expect(
+        updatedPriceValue.value.productCode,
+        updatePriceParameters.productCode,
+      );
+      expect(
+        updatedPriceValue.value.ownerComment,
+        updatePriceParameters.ownerComment,
+      );
 
       // delete price first time: success
       MaybeError<bool> deletedPrice = await OpenPricesAPIClient.deletePrice(
