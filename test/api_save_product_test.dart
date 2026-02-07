@@ -9,6 +9,8 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   const UriProductHelper uriHelper = uriHelperFoodTest;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   test('save product test, set traces', () async {
     final Map<String, String> possibleTraces = <String, String>{
       'en:soybeans': 'Soja',
@@ -28,7 +30,7 @@ void main() {
               ProductField.TRACES_TAGS,
               ProductField.TRACES_TAGS_IN_LANGUAGES,
             ],
-            version: ProductQueryVersion.v3,
+            version: version,
           );
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
@@ -141,7 +143,7 @@ void main() {
           barcode_1,
           language: OpenFoodFactsLanguage.ENGLISH,
           fields: [ProductField.ALL],
-          version: ProductQueryVersion.v3,
+          version: version,
         );
         ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
           configurations,
@@ -236,7 +238,7 @@ void main() {
                 ProductField.BRANDS,
                 ProductField.QUANTITY,
               ],
-              version: ProductQueryVersion.v3,
+              version: version,
             );
         final frenchResult = await OpenFoodAPIClient.getProductV3(
           frenchConfig,
@@ -255,7 +257,7 @@ void main() {
                 ProductField.BRANDS,
                 ProductField.QUANTITY,
               ],
-              version: ProductQueryVersion.v3,
+              version: version,
             );
         final germanResult = await OpenFoodAPIClient.getProductV3(
           germanConfig,
@@ -278,7 +280,7 @@ void main() {
                 ProductField.BRANDS,
                 ProductField.QUANTITY,
               ],
-              version: ProductQueryVersion.v3,
+              version: version,
             );
         final frenchGermanResult = await OpenFoodAPIClient.getProductV3(
           frenchGermanConfig,
@@ -401,7 +403,7 @@ Like that:
 
         ProductQueryConfiguration configurations = ProductQueryConfiguration(
           '7340011364184',
-          version: ProductQueryVersion.v3,
+          version: version,
         );
         ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
           configurations,
@@ -475,7 +477,7 @@ Like that:
               ProductQueryConfiguration(
                 BARCODE,
                 language: OpenFoodFactsLanguage.ENGLISH,
-                version: ProductQueryVersion.v3,
+                version: version,
               ),
               user: USER,
               uriHelper: uriHelper,
@@ -542,7 +544,7 @@ Like that:
               barcode,
               language: OpenFoodFactsLanguage.FRENCH,
               fields: [ProductField.ALL],
-              version: ProductQueryVersion.v3,
+              version: version,
             );
 
         // Step 1: get the product

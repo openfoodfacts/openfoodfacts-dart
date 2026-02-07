@@ -7,6 +7,8 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   const Map<ProductType, String> domains = <ProductType, String>{
     ProductType.beauty: 'openbeautyfacts.org',
     ProductType.product: 'openproductsfacts.org',
@@ -31,7 +33,7 @@ void main() {
       barcode,
       language: OpenFoodFactsLanguage.ENGLISH,
       fields: [ProductField.BARCODE, ProductField.PRODUCT_TYPE],
-      version: ProductQueryVersion.v3,
+      version: version,
       productTypeFilter: productTypeFilter,
     );
     await getProductTooManyRequestsManager.waitIfNeeded();
