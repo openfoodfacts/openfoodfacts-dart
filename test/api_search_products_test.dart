@@ -16,7 +16,7 @@ class _Score {
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
-  const ProductQueryVersion version = ProductQueryVersion.v3;
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
   const int defaultPageSize = 50;
 
   Future<SearchResult> searchProductsInProd(
@@ -885,7 +885,7 @@ void main() {
               fields: [ProductField.BARCODE, ProductField.NOVA_GROUP],
               language: OpenFoodFactsLanguage.FRENCH,
               country: OpenFoodFactsCountry.FRANCE,
-              version: ProductQueryVersion.v3,
+              version: version,
             ),
           );
 
@@ -1164,7 +1164,7 @@ void main() {
                   tagName: store,
                 ),
               ],
-              version: ProductQueryVersion.v3,
+              version: version,
             );
 
         final SearchResult result;
@@ -1275,7 +1275,7 @@ void main() {
               ],
               language: language,
               fields: [ProductField.BARCODE, ProductField.STATES_TAGS],
-              version: ProductQueryVersion.v3,
+              version: version,
             );
 
         final SearchResult result;
@@ -1376,7 +1376,6 @@ void main() {
       const String searchTerms = 'skyr les 2 vaches';
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
       const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
-      const ProductQueryVersion version = ProductQueryVersion.v3;
 
       void checkProduct(final Product product) {
         void checkLocalizedTag(final LocalizedTag? tag) {
@@ -1542,7 +1541,7 @@ void main() {
           parametersList: [BarcodeParameter.list(inputBarcodes)],
           language: language,
           fields: [ProductField.BARCODE, ProductField.ATTRIBUTE_GROUPS],
-          version: ProductQueryVersion.v3,
+          version: version,
         ),
       );
       expect(result.count, expectedScores.keys.length);

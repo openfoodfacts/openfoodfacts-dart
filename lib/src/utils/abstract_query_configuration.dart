@@ -163,11 +163,13 @@ abstract class AbstractQueryConfiguration {
   Future<Response> getResponse(
     final User? user,
     final UriProductHelper uriHelper,
-  ) async => HttpHelper().doPostRequest(
-    uriHelper.getPostUri(path: getUriPath()),
-    getParametersMap(),
-    user,
-    uriHelper: uriHelper,
-    addCredentialsToBody: false,
-  );
+  ) async {
+    return HttpHelper().doPostRequest(
+      uriHelper.getPostUri(path: getUriPath()),
+      getParametersMap(),
+      user,
+      uriHelper: uriHelper,
+      addCredentialsToBody: false,
+    );
+  }
 }

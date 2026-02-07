@@ -8,6 +8,8 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   const UriProductHelper uriHelper = uriHelperFoodTest;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   group('$OpenFoodAPIClient save product V3', () {
     const String barcode = '7300400481588';
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
@@ -99,7 +101,7 @@ void main() {
             barcode,
             language: language,
             country: country,
-            version: ProductQueryVersion.v3,
+            version: version,
             fields: [ProductField.BARCODE, ProductField.PACKAGINGS_COMPLETE],
           ),
           user: TestConstants.TEST_USER,
