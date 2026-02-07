@@ -119,8 +119,8 @@ class Attribute extends JsonObject {
   final double? match;
   final String? status;
   final String? panelId;
-  // Possible importance values for this attribute (e.g. importnant, not_important, etc.)
-  // Some attributes may have a limited set of possible values. Others ay have any value.
+  // Possible importance values for this attribute (e.g. important, not_important, etc.)
+  // Some attributes may have a limited set of possible values. Others may have any value.
   final Set<String>? values;
 
   @override
