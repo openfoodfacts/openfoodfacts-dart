@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
 
-import 'package:http_parser/http_parser.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 import 'test_constants.dart';
@@ -14,7 +13,7 @@ void main() {
 
   // TODO(monsieurtanuki): more relevant image if possible
   final Uri initialImageUri = Uri.file('test/test_assets/ingredients_en.jpg');
-  final MediaType initialMediaType = HttpHelper().imagineMediaType(
+  final http.MediaType initialMediaType = HttpHelper().imagineMediaType(
     initialImageUri.path,
   )!;
 
@@ -1115,12 +1114,13 @@ void main() {
     );
 
     test('image file media type', () async {
-      final Map<String, MediaType> expectedMediaTypes = <String, MediaType>{
-        'toto.jpeg': MediaType('image', 'jpeg'),
-        'toto.jpg': MediaType('image', 'jpeg'),
-        'toto.png': MediaType('image', 'png'),
-        'toto.webp': MediaType('image', 'webp'),
-      };
+      final Map<String, http.MediaType> expectedMediaTypes =
+          <String, http.MediaType>{
+            'toto.jpeg': http.MediaType('image', 'jpeg'),
+            'toto.jpg': http.MediaType('image', 'jpeg'),
+            'toto.png': http.MediaType('image', 'png'),
+            'toto.webp': http.MediaType('image', 'webp'),
+          };
       for (final String filename in expectedMediaTypes.keys) {
         expect(
           HttpHelper().imagineMediaType(filename).toString(),

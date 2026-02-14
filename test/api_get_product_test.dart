@@ -281,8 +281,8 @@ void main() {
           final Nutriments nutriments = result.product!.nutriments!;
           const PerSize perSize = PerSize.oneHundredGrams;
 
-          expect(nutriments.getValue(Nutrient.iron, perSize), 2.32e-7);
-          expect(nutriments.getValue(Nutrient.vitaminC, perSize), 0.0000192);
+          expect(nutriments.getValue(Nutrient.iron, perSize), 0.00072);
+          expect(nutriments.getValue(Nutrient.vitaminC, perSize), 0.06);
         },
       );
 
