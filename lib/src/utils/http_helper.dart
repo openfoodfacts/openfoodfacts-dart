@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 
@@ -374,7 +373,7 @@ class HttpHelper {
   }
 
   /// Returns the probable media type associated to that filename.
-  MediaType? imagineMediaType(final String filename) {
+  http.MediaType? imagineMediaType(final String filename) {
     String ext = extension(filename);
     if (ext.isEmpty) {
       return null;
@@ -383,11 +382,11 @@ class HttpHelper {
     switch (ext) {
       case 'jpg':
       case 'jpeg':
-        return MediaType('image', 'jpeg');
+        return http.MediaType('image', 'jpeg');
       case 'png':
-        return MediaType('image', 'png');
+        return http.MediaType('image', 'png');
       case 'webp':
-        return MediaType('image', 'webp');
+        return http.MediaType('image', 'webp');
     }
     return null;
   }

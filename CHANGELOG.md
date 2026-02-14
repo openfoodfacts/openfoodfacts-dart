@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.30.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.30.0...v3.30.1) (2026-02-14)
+
+
+### Bug Fixes
+
+* back to max pub.dev score! ([#1197](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1197)) ([44f1fbd](https://github.com/openfoodfacts/openfoodfacts-dart/commit/44f1fbd5c248fb526bd753524a5ee8dbc8a8c0c2))
+
 ## [3.30.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.29.0...v3.30.0) (2026-02-12)
 
 

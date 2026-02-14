@@ -802,8 +802,8 @@ class OpenFoodAPIClient {
       'lc': language.offTag,
       'string': input,
       if (country != null) 'cc': country.offTag,
-      if (categories != null) 'categories': categories,
-      if (shape != null) 'shape': shape,
+      'categories': ?categories,
+      'shape': ?shape,
       'limit': limit.toString(),
     };
     final Uri uri = uriHelper.getUri(

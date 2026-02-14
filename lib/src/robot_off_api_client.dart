@@ -30,7 +30,7 @@ class RobotoffAPIClient {
       if (type != null) 'type': type.offTag,
       if (countries?.isNotEmpty == true)
         'countries': _getCountryList(countries!),
-      if (valueTag != null) 'value_tag': valueTag,
+      'value_tag': ?valueTag,
       if (count != null) 'count': count.toString(),
       if (serverType != null) 'server_type': serverType.offTag,
     };
@@ -142,7 +142,7 @@ class RobotoffAPIClient {
 
     final Map<String, String> parameters = <String, String>{
       'lang': language.code,
-      if (deviceId != null) 'device_id': deviceId,
+      'device_id': ?deviceId,
       if (count != null) 'count': count.toString(),
       if (page != null) 'page': page.toString(),
       if (serverType != null) 'server_type': serverType.offTag,
@@ -151,7 +151,7 @@ class RobotoffAPIClient {
       if (questionOrder != null) 'order_by': questionOrder.offTag,
       if (countries?.isNotEmpty == true)
         'countries': _getCountryList(countries!),
-      if (valueTag != null) 'value_tag': valueTag,
+      'value_tag': ?valueTag,
     };
 
     var robotoffQuestionUri = uriHelper.getUri(
@@ -191,8 +191,8 @@ class RobotoffAPIClient {
     final Map<String, String> annotationData = {
       'annotation': annotation.value.toString(),
       'update': update ? '1' : '0',
-      if (insightId != null) 'insight_id': insightId,
-      if (deviceId != null) 'device_id': deviceId,
+      'insight_id': ?insightId,
+      'device_id': ?deviceId,
     };
 
     final Response response = await HttpHelper().doPostRequest(
