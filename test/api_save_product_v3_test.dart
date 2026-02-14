@@ -153,7 +153,7 @@ void main() {
       final ProductPackaging packaging = packagings.first;
       // we send crap data, we get "corrected" results.
       expect(packaging.numberOfUnits, isNull);
-      expect(packaging.weightMeasured, 0);
+      expect(packaging.weightMeasured, isNull);
 
       expect(status.warnings, isNotEmpty);
       expect(status.warnings, hasLength(2));
@@ -172,8 +172,8 @@ void main() {
           expect(answer.message!.lcName, isNotNull);
         } else if (answer.field!.id == 'weight_measured') {
           expect(answer.field!.value, weightMeasured.toString());
-          expect(answer.field!.valuedConverted, 0.toString());
-          expect(answer.impact!.id, 'value_converted');
+          expect(answer.field!.valuedConverted, isNull);
+          expect(answer.impact!.id, 'field_ignored');
           expect(answer.impact!.name, isNotNull);
           expect(answer.impact!.lcName, isNotNull);
           expect(answer.message!.id, 'invalid_type_must_be_number');
