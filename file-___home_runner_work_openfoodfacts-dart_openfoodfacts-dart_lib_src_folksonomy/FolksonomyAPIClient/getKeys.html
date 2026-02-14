@@ -78,8 +78,8 @@
   final UriHelper uriHelper = uriHelperFolksonomyProd,
 }) async {
   final Map&lt;String, String&gt; parameters = &lt;String, String&gt;{
-    if (owner != null) &#39;owner&#39;: owner,
-    if (query != null) &#39;q&#39;: query,
+    &#39;owner&#39;: ?owner,
+    &#39;q&#39;: ?query,
   };
   final Response response = await HttpHelper().doGetRequest(
     uriHelper.getUri(path: &#39;keys&#39;, queryParameters: parameters),

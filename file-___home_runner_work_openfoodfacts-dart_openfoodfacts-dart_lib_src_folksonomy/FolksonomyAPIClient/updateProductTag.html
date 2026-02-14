@@ -94,10 +94,7 @@
   final Response response = await HttpHelper().doPutRequest(
     uriHelper.getUri(
       path: &#39;product&#39;,
-      queryParameters: {
-        &#39;version&#39;: &#39;$version&#39;,
-        if (ownerIfPrivate != null) &#39;owner&#39;: ownerIfPrivate,
-      },
+      queryParameters: {&#39;version&#39;: &#39;$version&#39;, &#39;owner&#39;: ?ownerIfPrivate},
     ),
     jsonEncode(body),
     uriHelper: uriHelper,

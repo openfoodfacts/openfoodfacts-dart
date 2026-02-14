@@ -95,8 +95,8 @@
     &#39;lc&#39;: language.offTag,
     &#39;string&#39;: input,
     if (country != null) &#39;cc&#39;: country.offTag,
-    if (categories != null) &#39;categories&#39;: categories,
-    if (shape != null) &#39;shape&#39;: shape,
+    &#39;categories&#39;: ?categories,
+    &#39;shape&#39;: ?shape,
     &#39;limit&#39;: limit.toString(),
   };
   final Uri uri = uriHelper.getUri(

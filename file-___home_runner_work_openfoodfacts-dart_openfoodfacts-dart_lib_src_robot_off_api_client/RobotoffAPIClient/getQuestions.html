@@ -109,7 +109,7 @@ null.</p>
 
   final Map&lt;String, String&gt; parameters = &lt;String, String&gt;{
     &#39;lang&#39;: language.code,
-    if (deviceId != null) &#39;device_id&#39;: deviceId,
+    &#39;device_id&#39;: ?deviceId,
     if (count != null) &#39;count&#39;: count.toString(),
     if (page != null) &#39;page&#39;: page.toString(),
     if (serverType != null) &#39;server_type&#39;: serverType.offTag,
@@ -118,7 +118,7 @@ null.</p>
     if (questionOrder != null) &#39;order_by&#39;: questionOrder.offTag,
     if (countries?.isNotEmpty == true)
       &#39;countries&#39;: _getCountryList(countries!),
-    if (valueTag != null) &#39;value_tag&#39;: valueTag,
+    &#39;value_tag&#39;: ?valueTag,
   };
 
   var robotoffQuestionUri = uriHelper.getUri(

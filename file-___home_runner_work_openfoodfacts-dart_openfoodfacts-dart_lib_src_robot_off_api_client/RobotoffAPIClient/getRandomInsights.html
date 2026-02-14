@@ -84,7 +84,7 @@
     if (type != null) &#39;type&#39;: type.offTag,
     if (countries?.isNotEmpty == true)
       &#39;countries&#39;: _getCountryList(countries!),
-    if (valueTag != null) &#39;value_tag&#39;: valueTag,
+    &#39;value_tag&#39;: ?valueTag,
     if (count != null) &#39;count&#39;: count.toString(),
     if (serverType != null) &#39;server_type&#39;: serverType.offTag,
   };

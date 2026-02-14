@@ -70,7 +70,7 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">MediaType? imagineMediaType(final String filename) {
+  <pre class="language-dart"><code class="language-dart">http.MediaType? imagineMediaType(final String filename) {
   String ext = extension(filename);
   if (ext.isEmpty) {
     return null;
@@ -79,11 +79,11 @@
   switch (ext) {
     case &#39;jpg&#39;:
     case &#39;jpeg&#39;:
-      return MediaType(&#39;image&#39;, &#39;jpeg&#39;);
+      return http.MediaType(&#39;image&#39;, &#39;jpeg&#39;);
     case &#39;png&#39;:
-      return MediaType(&#39;image&#39;, &#39;png&#39;);
+      return http.MediaType(&#39;image&#39;, &#39;png&#39;);
     case &#39;webp&#39;:
-      return MediaType(&#39;image&#39;, &#39;webp&#39;);
+      return http.MediaType(&#39;image&#39;, &#39;webp&#39;);
   }
   return null;
 }</code></pre>
