@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.30.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.30.1...v3.30.2) (2026-02-15)
+
+
+### Bug Fixes
+
+* downgraded to meta 1.17.0 because of flutter conflicts ([#1200](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1200)) ([163f2c1](https://github.com/openfoodfacts/openfoodfacts-dart/commit/163f2c1c2f6afc2c9516c2e1ef621a340af382b3))
+
 ## [3.30.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.30.0...v3.30.1) (2026-02-14)
 
 
