@@ -12,6 +12,8 @@ void main() {
   const UriProductHelper uriHelper = uriHelperFoodTest;
   final Random random = Random();
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   // Returns a random book barcode (978...), that cannot be confused with food.
   String getRandomBookBarcode() =>
       '${9780000000000 + random.nextInt(1000000000)}';
@@ -48,7 +50,7 @@ void main() {
         ProductQueryConfiguration(
           '7300400481588',
           fields: [ProductField.BARCODE],
-          version: ProductQueryVersion.v3,
+          version: version,
         ),
         uriHelper: uriHelper,
       );
@@ -127,7 +129,7 @@ void main() {
               barcode,
               language: language,
               fields: [ProductField.ALL],
-              version: ProductQueryVersion.v3,
+              version: version,
             );
         final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
           configurations,
@@ -213,14 +215,14 @@ void main() {
                 barcode,
                 language: OpenFoodFactsLanguage.ENGLISH,
                 fields: fields,
-                version: ProductQueryVersion.v3,
+                version: version,
               );
           final ProductQueryConfiguration russianConf =
               ProductQueryConfiguration(
                 barcode,
                 language: OpenFoodFactsLanguage.RUSSIAN,
                 fields: fields,
-                version: ProductQueryVersion.v3,
+                version: version,
               );
 
           // English!
@@ -363,14 +365,14 @@ void main() {
                 barcode,
                 language: OpenFoodFactsLanguage.ENGLISH,
                 fields: fields,
-                version: ProductQueryVersion.v3,
+                version: version,
               );
           final ProductQueryConfiguration russianConf =
               ProductQueryConfiguration(
                 barcode,
                 language: OpenFoodFactsLanguage.RUSSIAN,
                 fields: fields,
-                version: ProductQueryVersion.v3,
+                version: version,
               );
 
           // English!
@@ -507,7 +509,7 @@ void main() {
             OpenFoodFactsLanguage.GERMAN,
           ],
           fields: fields,
-          version: ProductQueryVersion.v3,
+          version: version,
         );
 
         final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
@@ -604,7 +606,7 @@ void main() {
         final ProductQueryConfiguration conf = ProductQueryConfiguration(
           barcode,
           fields: fields,
-          version: ProductQueryVersion.v3,
+          version: version,
         );
         final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
           conf,
@@ -673,7 +675,7 @@ void main() {
               OpenFoodFactsLanguage.ENGLISH,
             ],
             fields: fields,
-            version: ProductQueryVersion.v3,
+            version: version,
           );
           final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
             conf,
@@ -727,7 +729,7 @@ void main() {
               barcode,
               language: language,
               fields: [ProductField.NAME, ProductField.BRANDS],
-              version: ProductQueryVersion.v3,
+              version: version,
             );
         final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
           configurations,
@@ -781,7 +783,7 @@ void main() {
               ProductField.LABELS,
               ProductField.QUANTITY,
             ],
-            version: ProductQueryVersion.v3,
+            version: version,
           );
 
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
@@ -805,19 +807,22 @@ void main() {
     // This is barcode refers to a test product
     const String barcode = '111111555555';
 
-    Future<Status> uploadProduct({required bool noNutritionData}) =>
-        OpenFoodAPIClient.saveProduct(
-          TestConstants.TEST_USER,
-          Product(
-            barcode: barcode,
-            noNutritionData: noNutritionData,
-            nutriments: noNutritionData != true
-                ? (Nutriments.empty()
-                    ..setValue(Nutrient.salt, PerSize.oneHundredGrams, 10.0))
-                : null,
-          ),
-          uriHelper: uriHelper,
-        );
+    Future<void> uploadProduct({required bool noNutritionData}) async {
+      final Status status = await OpenFoodAPIClient.saveProduct(
+        TestConstants.TEST_USER,
+        Product(
+          barcode: barcode,
+          noNutritionData: noNutritionData,
+          nutriments: noNutritionData != true
+              ? (Nutriments.empty()
+                  ..setValue(Nutrient.salt, PerSize.oneHundredGrams, 10.0))
+              : null,
+        ),
+        uriHelper: uriHelper,
+      );
+      expect(status.status, 1);
+      expect(status.statusVerbose, 'fields saved');
+    }
 
     test('Without nutriments', () async {
       if (!await checkServer()) {
@@ -830,7 +835,7 @@ void main() {
           ProductQueryConfiguration(
             barcode,
             fields: [ProductField.NO_NUTRITION_DATA, ProductField.NUTRIMENTS],
-            version: ProductQueryVersion.v3,
+            version: version,
           );
 
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
@@ -853,7 +858,7 @@ void main() {
           ProductQueryConfiguration(
             barcode,
             fields: [ProductField.NO_NUTRITION_DATA, ProductField.NUTRIMENTS],
-            version: ProductQueryVersion.v3,
+            version: version,
           );
 
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(

@@ -8,6 +8,8 @@ import 'test_constants.dart';
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   // Verify that we can save the product as a JSON string and then load it back
   test('Load product from JSON', () async {
     String barcode = '0030000010204';
@@ -15,7 +17,7 @@ void main() {
       barcode,
       languages: [OpenFoodFactsLanguage.ENGLISH, OpenFoodFactsLanguage.FRENCH],
       fields: [ProductField.ALL],
-      version: ProductQueryVersion.v3,
+      version: version,
     );
     ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
       configurations,

@@ -8,6 +8,8 @@ void main() {
 
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   group('$OpenFoodAPIClient json to/from conversions', () {
     test('images', () async {
       await getProductTooManyRequestsManager.waitIfNeeded();
@@ -16,7 +18,7 @@ void main() {
             ProductQueryConfiguration(
               BARCODE_DANISH_BUTTER_COOKIES,
               fields: [ProductField.IMAGES, ProductField.BARCODE],
-              version: ProductQueryVersion.v3,
+              version: version,
             ),
           );
       expect(productResult.product, isNotNull);

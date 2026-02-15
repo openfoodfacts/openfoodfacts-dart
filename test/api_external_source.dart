@@ -12,6 +12,8 @@ void main() {
   const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
   const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   Future<ExternalSourceMetadata> getSufferingMetadata() async {
     final MaybeError<List<ExternalSourceMetadata>> result =
         await OpenFoodAPIClient.getExternalSourceMetadatas(
@@ -66,7 +68,7 @@ void main() {
           await OpenFoodAPIClient.getProductV3(
             ProductQueryConfiguration(
               barcode,
-              version: ProductQueryVersion.v3,
+              version: version,
               language: language,
               country: country,
               fields: <ProductField>[
@@ -98,7 +100,7 @@ void main() {
           await OpenFoodAPIClient.getProductV3(
             ProductQueryConfiguration(
               barcode,
-              version: ProductQueryVersion.v3,
+              version: version,
               language: language,
               country: country,
               fields: <ProductField>[
