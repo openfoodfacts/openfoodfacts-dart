@@ -4,6 +4,22 @@ import 'package:test/test.dart';
 
 import 'test_constants.dart';
 
+class NutrientValue {
+  final double value;
+  final Unit unit;
+  final double gramsPer100g;
+  final double gramsPerServing;
+  final NutrientModifier? modifier;
+
+  NutrientValue({
+    required this.value,
+    required this.unit,
+    required this.gramsPer100g,
+    required this.gramsPerServing,
+    this.modifier,
+  });
+}
+
 void main() {
   const int HTTP_OK = 200;
 
@@ -149,14 +165,14 @@ void main() {
 
           expect(result.product!.nutriments, isNotNull);
           final Nutriments nutriments = result.product!.nutriments!;
-          const PerSize perSize = PerSize.serving;
-          expect(
-            nutriments.getValue(Nutrient.carbohydrates, perSize),
-            isNotNull,
-          );
-          expect(nutriments.getValue(Nutrient.proteins, perSize), isNotNull);
-          expect(nutriments.getValue(Nutrient.salt, perSize), isNotNull);
-          expect(nutriments.getValue(Nutrient.fat, perSize), isNotNull);
+          expect(nutriments.getValue(Nutrient.carbohydrates), isNotNull);
+          expect(nutriments.getUnit(Nutrient.carbohydrates), isNotNull);
+          expect(nutriments.getValue(Nutrient.proteins), isNotNull);
+          expect(nutriments.getUnit(Nutrient.proteins), isNotNull);
+          expect(nutriments.getValue(Nutrient.salt), isNotNull);
+          expect(nutriments.getUnit(Nutrient.salt), isNotNull);
+          expect(nutriments.getValue(Nutrient.fat), isNotNull);
+          expect(nutriments.getUnit(Nutrient.fat), isNotNull);
         },
       );
 
@@ -181,15 +197,7 @@ void main() {
         final Nutriments nutriments = result.product!.nutriments!;
 
         // probably at least 4% vol
-        expect(
-          nutriments.getValue(alcohol, PerSize.oneHundredGrams),
-          greaterThanOrEqualTo(4),
-        );
-        // no reason why values should be different
-        expect(
-          nutriments.getValue(alcohol, PerSize.serving),
-          nutriments.getValue(alcohol, PerSize.oneHundredGrams),
-        );
+        expect(nutriments.getValue(alcohol), greaterThanOrEqualTo(4));
       });
 
       test(
@@ -245,14 +253,24 @@ void main() {
           expect(result.product!.nutriments, isNotNull);
           final Nutriments nutriments = result.product!.nutriments!;
 
-          const PerSize perSize = PerSize.oneHundredGrams;
-          expect(nutriments.getValue(Nutrient.energyKJ, perSize), 2125.0);
-          expect(nutriments.getValue(Nutrient.sugars, perSize), 28.0);
-          expect(nutriments.getValue(Nutrient.salt, perSize), 0.3);
-          expect(nutriments.getValue(Nutrient.fiber, perSize), isNull);
-          expect(nutriments.getValue(Nutrient.fat, perSize), 25.0);
-          expect(nutriments.getValue(Nutrient.saturatedFat, perSize), 15.0);
-          expect(nutriments.getValue(Nutrient.proteins, perSize), 5.3);
+          expect(
+            result.product!.nutrimentDataPer,
+            PerSize.oneHundredGrams.offTag,
+          );
+          expect(nutriments.getValue(Nutrient.energyKJ), 2125.0);
+          expect(nutriments.getUnit(Nutrient.energyKJ), Unit.KJ);
+          expect(nutriments.getValue(Nutrient.sugars), 28.0);
+          expect(nutriments.getUnit(Nutrient.sugars), Unit.G);
+          expect(nutriments.getValue(Nutrient.salt), 0.3);
+          expect(nutriments.getUnit(Nutrient.salt), Unit.G);
+          expect(nutriments.getValue(Nutrient.fiber), isNull);
+          expect(nutriments.getUnit(Nutrient.fiber), isNull);
+          expect(nutriments.getValue(Nutrient.fat), 25.0);
+          expect(nutriments.getUnit(Nutrient.fat), Unit.G);
+          expect(nutriments.getValue(Nutrient.saturatedFat), 15.0);
+          expect(nutriments.getUnit(Nutrient.saturatedFat), Unit.G);
+          expect(nutriments.getValue(Nutrient.proteins), 5.3);
+          expect(nutriments.getUnit(Nutrient.proteins), Unit.G);
           expect(result.product!.novaGroup, 4);
         },
       );
@@ -274,15 +292,87 @@ void main() {
 
           expect(result.status, ProductResultV3.statusSuccess);
           expect(result.barcode, barcode);
-          expect(result.product != null, true);
-          expect(result.product!.barcode, barcode);
+          expect(result.product, isNotNull);
 
-          expect(result.product!.nutriments, isNotNull);
-          final Nutriments nutriments = result.product!.nutriments!;
-          const PerSize perSize = PerSize.oneHundredGrams;
+          final Product product = result.product!;
+          expect(product.barcode, barcode);
+          expect(product.nutriments, isNotNull);
+          final Nutriments nutriments = product.nutriments!;
 
-          expect(nutriments.getValue(Nutrient.iron, perSize), 0.00072);
-          expect(nutriments.getValue(Nutrient.vitaminC, perSize), 0.06);
+          expect(product.nutrimentDataPer, PerSize.serving.offTag);
+          expect(product.servingQuantity, 177);
+
+          final Map<Nutrient, NutrientValue> expectations =
+              <Nutrient, NutrientValue>{
+                Nutrient.vitaminA: NutrientValue(
+                  value: 10,
+                  unit: Unit.PERCENT_DV,
+                  gramsPer100g: 0.0000847,
+                  gramsPerServing: 0.00015,
+                ),
+                Nutrient.vitaminE: NutrientValue(
+                  value: 10,
+                  unit: Unit.PERCENT_DV,
+                  gramsPer100g: 0.00113,
+                  gramsPerServing: 0.002,
+                ),
+                Nutrient.vitaminC: NutrientValue(
+                  value: 100,
+                  unit: Unit.PERCENT_DV,
+                  gramsPer100g: 0.0339,
+                  gramsPerServing: 0.06,
+                ),
+                Nutrient.calcium: NutrientValue(
+                  value: 2,
+                  unit: Unit.PERCENT_DV,
+                  gramsPer100g: 0.0147,
+                  gramsPerServing: 0.026,
+                ),
+                Nutrient.iron: NutrientValue(
+                  value: 4,
+                  unit: Unit.PERCENT_DV,
+                  gramsPer100g: 0.000407,
+                  gramsPerServing: 0.00072,
+                ),
+                Nutrient.proteins: NutrientValue(
+                  value: 1,
+                  unit: Unit.G,
+                  gramsPer100g: 0.565,
+                  gramsPerServing: 1,
+                  modifier: NutrientModifier.lessThan,
+                ),
+              };
+
+          for (final MapEntry<Nutrient, NutrientValue> entry
+              in expectations.entries) {
+            final Nutrient nutrient = entry.key;
+            final NutrientValue expectation = entry.value;
+            expect(
+              nutriments.getValue(nutrient),
+              expectation.value,
+              reason: 'nutrient is ${nutrient.offTag}',
+            );
+            expect(
+              nutriments.getUnit(nutrient),
+              expectation.unit,
+              reason: 'nutrient is ${nutrient.offTag}',
+            );
+            expect(
+              nutriments.getComputedValue(nutrient, PerSize.oneHundredGrams),
+              expectation.gramsPer100g,
+              reason: 'nutrient is ${nutrient.offTag}',
+            );
+            expect(
+              nutriments.getComputedValue(nutrient, PerSize.serving),
+              expectation.gramsPerServing,
+              reason: 'nutrient is ${nutrient.offTag}',
+            );
+            expect(
+              nutriments.getModifier(nutrient),
+              expectation.modifier,
+              reason: 'nutrient is ${nutrient.offTag}',
+            );
+          }
         },
       );
 
@@ -340,15 +430,20 @@ void main() {
         );
         expect(result.product!.nutriments, isNotNull);
         nutriments = result.product!.nutriments!;
+        expect(nutriments.getValue(Nutrient.pantothenicAcid), 4.2);
+        expect(nutriments.getUnit(Nutrient.pantothenicAcid), Unit.MILLI_G);
         expect(
-          nutriments.getValue(
+          nutriments.getComputedValue(
             Nutrient.pantothenicAcid,
             PerSize.oneHundredGrams,
           ),
           .0042,
         );
         expect(
-          nutriments.getValue(Nutrient.pantothenicAcid, PerSize.serving),
+          nutriments.getComputedValue(
+            Nutrient.pantothenicAcid,
+            PerSize.serving,
+          ),
           isNull,
         );
 
@@ -362,11 +457,16 @@ void main() {
         );
         expect(result.product!.nutriments, isNotNull);
         nutriments = result.product!.nutriments!;
+        expect(nutriments.getValue(Nutrient.biotin), 17);
+        expect(nutriments.getUnit(Nutrient.biotin), Unit.MICRO_G);
         expect(
-          nutriments.getValue(Nutrient.biotin, PerSize.oneHundredGrams),
+          nutriments.getComputedValue(Nutrient.biotin, PerSize.oneHundredGrams),
           0.000017,
         );
-        expect(nutriments.getValue(Nutrient.biotin, PerSize.serving), isNull);
+        expect(
+          nutriments.getComputedValue(Nutrient.biotin, PerSize.serving),
+          isNull,
+        );
 
         result = await getProductV3InProd(
           ProductQueryConfiguration(
@@ -378,11 +478,19 @@ void main() {
         );
         expect(result.product!.nutriments, isNotNull);
         nutriments = result.product!.nutriments!;
+        expect(nutriments.getValue(Nutrient.chloride), 15);
+        expect(nutriments.getUnit(Nutrient.chloride), Unit.MILLI_G);
         expect(
-          nutriments.getValue(Nutrient.chloride, PerSize.oneHundredGrams),
+          nutriments.getComputedValue(
+            Nutrient.chloride,
+            PerSize.oneHundredGrams,
+          ),
           .0015,
         );
-        expect(nutriments.getValue(Nutrient.chloride, PerSize.serving), .015);
+        expect(
+          nutriments.getComputedValue(Nutrient.chloride, PerSize.serving),
+          .015,
+        );
 
         result = await getProductV3InProd(
           ProductQueryConfiguration(
@@ -395,26 +503,44 @@ void main() {
         expect(result.product!.nutriments, isNotNull);
         nutriments = result.product!.nutriments!;
         expect(
-          nutriments.getValue(Nutrient.chromium, PerSize.oneHundredGrams),
+          nutriments.getComputedValue(
+            Nutrient.chromium,
+            PerSize.oneHundredGrams,
+          ),
           .000002,
         );
-        expect(nutriments.getValue(Nutrient.chromium, PerSize.serving), .00001);
         expect(
-          nutriments.getValue(Nutrient.iodine, PerSize.oneHundredGrams),
+          nutriments.getComputedValue(Nutrient.chromium, PerSize.serving),
+          .00001,
+        );
+        expect(
+          nutriments.getComputedValue(Nutrient.iodine, PerSize.oneHundredGrams),
           .0000075,
         );
-        expect(nutriments.getValue(Nutrient.iodine, PerSize.serving), .0000375);
         expect(
-          nutriments.getValue(Nutrient.manganese, PerSize.oneHundredGrams),
+          nutriments.getComputedValue(Nutrient.iodine, PerSize.serving),
+          .0000375,
+        );
+        expect(
+          nutriments.getComputedValue(
+            Nutrient.manganese,
+            PerSize.oneHundredGrams,
+          ),
           .0001,
         );
-        expect(nutriments.getValue(Nutrient.manganese, PerSize.serving), .0005);
         expect(
-          nutriments.getValue(Nutrient.molybdenum, PerSize.oneHundredGrams),
+          nutriments.getComputedValue(Nutrient.manganese, PerSize.serving),
+          .0005,
+        );
+        expect(
+          nutriments.getComputedValue(
+            Nutrient.molybdenum,
+            PerSize.oneHundredGrams,
+          ),
           .000004,
         );
         expect(
-          nutriments.getValue(Nutrient.molybdenum, PerSize.serving),
+          nutriments.getComputedValue(Nutrient.molybdenum, PerSize.serving),
           .00002,
         );
 
@@ -429,15 +555,21 @@ void main() {
         expect(result.product!.nutriments, isNotNull);
         nutriments = result.product!.nutriments!;
         expect(
-          nutriments.getValue(Nutrient.omega3, PerSize.oneHundredGrams),
+          nutriments.getComputedValue(Nutrient.omega3, PerSize.oneHundredGrams),
           4,
         );
-        expect(nutriments.getValue(Nutrient.omega3, PerSize.serving), 4);
         expect(
-          nutriments.getValue(Nutrient.omega6, PerSize.oneHundredGrams),
+          nutriments.getComputedValue(Nutrient.omega3, PerSize.serving),
+          4,
+        );
+        expect(
+          nutriments.getComputedValue(Nutrient.omega6, PerSize.oneHundredGrams),
           9.1,
         );
-        expect(nutriments.getValue(Nutrient.omega6, PerSize.serving), 9.1);
+        expect(
+          nutriments.getComputedValue(Nutrient.omega6, PerSize.serving),
+          9.1,
+        );
       });
 
       test('get product Confiture Rhubarbe Fraises extra', () async {
@@ -534,15 +666,21 @@ void main() {
 
         expect(result.product!.nutriments, isNotNull);
         final Nutriments nutriments = result.product!.nutriments!;
-        const PerSize perSize = PerSize.oneHundredGrams;
 
-        expect(nutriments.getValue(Nutrient.energyKJ, perSize), 1081.0);
-        expect(nutriments.getValue(Nutrient.sugars, perSize), 57.0);
-        expect(nutriments.getValue(Nutrient.salt, perSize), 0.06);
-        expect(nutriments.getValue(Nutrient.fiber, perSize), 1.2);
-        expect(nutriments.getValue(Nutrient.fat, perSize), 0.0);
-        expect(nutriments.getValue(Nutrient.saturatedFat, perSize), 0.0);
-        expect(nutriments.getValue(Nutrient.proteins, perSize), 0.6);
+        expect(nutriments.getValue(Nutrient.energyKJ), 1081.0);
+        expect(nutriments.getUnit(Nutrient.energyKJ), Unit.KJ);
+        expect(nutriments.getValue(Nutrient.sugars), 57.0);
+        expect(nutriments.getUnit(Nutrient.sugars), Unit.G);
+        expect(nutriments.getValue(Nutrient.salt), 0.06);
+        expect(nutriments.getUnit(Nutrient.salt), Unit.G);
+        expect(nutriments.getValue(Nutrient.fiber), 1.2);
+        expect(nutriments.getUnit(Nutrient.fiber), Unit.G);
+        expect(nutriments.getValue(Nutrient.fat), 0.0);
+        expect(nutriments.getUnit(Nutrient.fat), Unit.G);
+        expect(nutriments.getValue(Nutrient.saturatedFat), 0.0);
+        expect(nutriments.getUnit(Nutrient.saturatedFat), Unit.G);
+        expect(nutriments.getValue(Nutrient.proteins), 0.6);
+        expect(nutriments.getUnit(Nutrient.proteins), Unit.G);
 
         expect(result.product!.novaGroup, 3);
         expect(result.product!.storesTags!.length, 1);
@@ -898,21 +1036,24 @@ void main() {
 
           expect(result.product!.nutriments, isNotNull);
           final Nutriments nutriments = result.product!.nutriments!;
-          const PerSize perSize = PerSize.oneHundredGrams;
 
-          expect(nutriments.getValue(Nutrient.energyKJ, perSize), 0.8);
-          expect(nutriments.getValue(Nutrient.sugars, perSize), 0.0);
-          expect(nutriments.getValue(Nutrient.salt, perSize), 0.01);
-          expect(nutriments.getValue(Nutrient.fiber, perSize), 0.0);
-          expect(nutriments.getValue(Nutrient.fat, perSize), 0.0);
-          expect(nutriments.getValue(Nutrient.saturatedFat, perSize), 0.0);
-          expect(nutriments.getValue(Nutrient.proteins, perSize), 0.0);
+          expect(nutriments.getValue(Nutrient.energyKJ), 0.8);
+          expect(nutriments.getUnit(Nutrient.energyKJ), Unit.KJ);
+          expect(nutriments.getValue(Nutrient.sugars), 0.0);
+          expect(nutriments.getUnit(Nutrient.sugars), Unit.G);
+          expect(nutriments.getValue(Nutrient.salt), 0.01);
+          expect(nutriments.getUnit(Nutrient.salt), Unit.G);
+          expect(nutriments.getValue(Nutrient.fiber), 0.0);
+          expect(nutriments.getUnit(Nutrient.fiber), Unit.G);
+          expect(nutriments.getValue(Nutrient.fat), 0.0);
+          expect(nutriments.getUnit(Nutrient.fat), Unit.G);
+          expect(nutriments.getValue(Nutrient.saturatedFat), 0.0);
+          expect(nutriments.getUnit(Nutrient.saturatedFat), Unit.G);
+          expect(nutriments.getValue(Nutrient.proteins), 0.0);
+          expect(nutriments.getUnit(Nutrient.proteins), Unit.G);
+          expect(nutriments.getValue(Nutrient.carbohydrates), isNotNull);
+          expect(nutriments.getUnit(Nutrient.carbohydrates), Unit.G);
           expect(result.product!.novaGroup, 4);
-          expect(nutriments.getValue(Nutrient.fat, PerSize.serving), isNotNull);
-          expect(
-            nutriments.getValue(Nutrient.carbohydrates, PerSize.serving),
-            isNotNull,
-          );
 
           expect(result.product!.additives!.ids[0], 'en:e150d');
           expect(result.product!.additives!.names[0], 'E150d');
