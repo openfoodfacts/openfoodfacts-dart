@@ -11,7 +11,7 @@ dependencies:
   json_annotation: ^4.9.0
   http: ^1.6.0
   path: ^1.9.1
-  meta: ^1.18.1
+  meta: ^1.17.0
 
 dev_dependencies:
   analyzer: 8.1.1
