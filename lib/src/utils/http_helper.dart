@@ -87,7 +87,8 @@ class HttpHelper {
   ///
   /// [addCredentialsToBody] should be only use for Robotoff,
   /// See: https://github.com/openfoodfacts/openfoodfacts-dart/issues/553#issuecomment-1269810032
-  /// When using [addCredentialsToBody] a User or globalUser needed, blocks [QueryType.TEST] authentication
+  /// When using [addCredentialsToBody], a user (or global user) is needed;
+  /// this blocks test-mode authentication.
   Future<http.Response> doPostRequest(
     Uri uri,
     Map<String, String> body,
