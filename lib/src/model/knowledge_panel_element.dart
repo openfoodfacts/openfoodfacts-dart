@@ -309,7 +309,7 @@ class KnowledgePanelActionElement extends JsonObject {
   /// HTML description.
   final String? html;
 
-  /// Needed contribute actions, such as `add_categories`.
+  /// Needed contribute actions, taken from [KnowledgePanelAction].
   final List<String> actions;
 
   const KnowledgePanelActionElement({this.html, required this.actions});
