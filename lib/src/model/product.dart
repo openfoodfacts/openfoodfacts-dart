@@ -422,7 +422,7 @@ class Product extends JsonObject {
 
   /// Size of the product sample for "nutrition data for product as sold".
   ///
-  /// Typical values: [nutrimentPer100g] or [nutrimentPerServing].
+  /// Typical values taken from [PerSize].
   @JsonKey(name: 'nutrition_data_per')
   String? nutrimentDataPer;
   @JsonKey(name: 'nutrition_grade_fr')
