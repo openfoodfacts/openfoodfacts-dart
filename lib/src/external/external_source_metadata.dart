@@ -17,7 +17,7 @@ class ExternalSourceMetadata extends JsonMap {
   /// e.g. "Suffering Fingerprint"
   String get name => jsonMap['name'] as String;
 
-  /// e.g. {"categories":["en:eggs"],"product_types":["food"],"countries":[],"languages":[]}
+  /// e.g. `{"categories":["en:eggs"],"product_types":["food"],"countries":[],"languages":[]}`
   ExternalSourceFilter get filter => ExternalSourceFilter(jsonMap['filters']);
 
   /// Localized description

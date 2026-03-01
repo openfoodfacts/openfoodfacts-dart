@@ -7,7 +7,7 @@ import 'json_map.dart';
 class ExternalSourceFilter extends JsonMap {
   ExternalSourceFilter(super.jsonMap);
 
-  /// e.g. ["en:eggs"]
+  /// e.g. `["en:eggs"]`
   List<String> get categories =>
       (jsonMap['categories'] as List<dynamic>).map((e) => e as String).toList();
 
@@ -17,7 +17,7 @@ class ExternalSourceFilter extends JsonMap {
   List<String> get languages =>
       (jsonMap['languages'] as List<dynamic>).map((e) => e as String).toList();
 
-  /// e.g. ["food"]
+  /// e.g. `["food"]`
   List<String> get productTypes => (jsonMap['product_types'] as List<dynamic>)
       .map((e) => e as String)
       .toList();

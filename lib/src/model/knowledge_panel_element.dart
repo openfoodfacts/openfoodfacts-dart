@@ -309,7 +309,7 @@ class KnowledgePanelActionElement extends JsonObject {
   /// HTML description.
   final String? html;
 
-  /// Needed contribute actions, as [KnowledgePanelAction.addCategories.offTag].
+  /// Needed contribute actions, taken from [KnowledgePanelAction].
   final List<String> actions;
 
   const KnowledgePanelActionElement({this.html, required this.actions});
@@ -349,7 +349,7 @@ enum KnowledgePanelElementType {
 
 /// KnowledgePanelElement is a single unit of KnowledgePanel that can be rendered on the client.
 ///
-/// An Element could be one of [{@code ]KnowledgePanelElementType].
+/// An element can be one of the values in [KnowledgePanelElementType].
 @JsonSerializable()
 class KnowledgePanelElement extends JsonObject {
   /// Type of the text description.
@@ -369,18 +369,18 @@ class KnowledgePanelElement extends JsonObject {
   @JsonKey(name: 'image_element')
   final KnowledgePanelImageElement? imageElement;
 
-  /// Id of a KnowledgePanel embedded inside [this] KnowledgePanel.
+  /// Id of a knowledge panel embedded inside this knowledge panel.
   @JsonKey(name: 'panel_element')
   final KnowledgePanelPanelIdElement? panelElement;
 
   @JsonKey(name: 'panel_group_element')
   final KnowledgePanelPanelGroupElement? panelGroupElement;
 
-  /// Id of a KnowledgePanel embedded inside [this] KnowledgePanel.
+  /// Id of a knowledge panel embedded inside this knowledge panel.
   @JsonKey(name: 'table_element')
   final KnowledgePanelTableElement? tableElement;
 
-  /// Map element embedded inside [this] KnowledgePanel.
+  /// Map element embedded inside this knowledge panel.
   @JsonKey(name: 'map_element')
   final KnowledgePanelWorldMapElement? mapElement;
 

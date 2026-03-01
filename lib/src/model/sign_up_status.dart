@@ -3,7 +3,7 @@ import 'status.dart';
 /// The response from a call to the [OpenFoodAPIClient.register] method
 /// The [status] may be:
 /// - 201: Account created + user logged in
-/// - 400: An error occurred - see [statusError] for more information
+/// - 400: An error occurred - see [statusErrors] for more information
 /// - 500: Unknown error
 class SignUpStatus extends Status {
   /// A list of errors returned by the server
