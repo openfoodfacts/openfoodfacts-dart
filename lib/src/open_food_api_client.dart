@@ -769,7 +769,7 @@ class OpenFoodAPIClient {
 
   /// cf. https://openfoodfacts.github.io/openfoodfacts-server/reference/api-v3/#get-/api/v3/taxonomy_suggestions
   ///
-  /// Consider using [SuggestionManager].
+  /// Consider using [AutocompleteManager].
   static Future<List<String>> getSuggestions(
     final TagType taxonomyType, {
     final String input = '',
@@ -822,7 +822,7 @@ class OpenFoodAPIClient {
 
   /// Gets canonical tags from a list of localized names.
   ///
-  /// An input for INGREDIENTS could be ['banane', 'framboise'].
+  /// An input for INGREDIENTS could be `['banane', 'framboise']`.
   /// The result in FRENCH would then be something like `{'banane': 'en:banana',
   /// 'framboise': 'en:raspberry'}`.
   static Future<MaybeError<Map<String, String>>> getCanonicalTags(
@@ -878,7 +878,7 @@ class OpenFoodAPIClient {
 
   /// Gets localized names from a list of canonical tags.
   ///
-  /// An input for INGREDIENTS could be ['en:banana', 'en:raspberry'].
+  /// An input for INGREDIENTS could be `['en:banana', 'en:raspberry']`.
   /// The result in FRENCH would then be something like `{'en:banana': 'banane',
   /// 'en:raspberry': 'framboise'}`.
   static Future<MaybeError<Map<String, String>>> getLocalizedNames(

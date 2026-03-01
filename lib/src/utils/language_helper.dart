@@ -675,7 +675,7 @@ class LanguageHelper {
   /// Special case for ISO codes that should be unique for all languages.
   ///
   /// e.g. "language_codes": {"en":"nl,fr"} will return
-  /// [OpenFoodFactsLanguage.DUTCH, OpenFoodFactsLanguage.FRENCH]
+  /// e.g. `[OpenFoodFactsLanguage.DUTCH`, `OpenFoodFactsLanguage.FRENCH]`
   /// From a `Map<String, String>` in `dynamic`'s clothing (JsonKey annotation)
   static List<OpenFoodFactsLanguage>? fromJsonStringMapIsoList(dynamic map) {
     if (map == null) {
