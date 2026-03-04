@@ -73,6 +73,10 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Map&lt;String, dynamic&gt; toJson() =&gt; &lt;String, dynamic&gt;{
+  if (productCode != null) &#39;product_code&#39;: productCode,
+  if (categoryTag != null) &#39;category_tag&#39;: categoryTag,
+  if (labelsTags != null) &#39;labels_tags&#39;: labelsTags,
+  if (originsTags != null) &#39;origins_tags&#39;: originsTags,
   if (pricePer != null) &#39;price_per&#39;: pricePer!.offTag,
   if (priceIsDiscounted != null) &#39;price_is_discounted&#39;: priceIsDiscounted,
   if (priceIsDiscounted == false)
@@ -87,6 +91,7 @@ Map&lt;String, dynamic&gt; toJson() =&gt; &lt;String, dynamic&gt;{
   if (currency != null) &#39;currency&#39;: currency!.name,
   if (date != null) &#39;date&#39;: GetParametersHelper.formatDate(date!),
   if (receiptQuantity != null) &#39;receipt_quantity&#39;: receiptQuantity,
+  if (ownerComment != null) &#39;owner_comment&#39;: ownerComment,
 };</code></pre>
 </section>
 

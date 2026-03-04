@@ -103,6 +103,9 @@ price).</p>
       &#39;location_osm_type&#39;: price.locationOSMType!.offTag,
     if (price.receiptQuantity != null)
       &#39;receipt_quantity&#39;: price.receiptQuantity,
+    if (price.locationId != null) &#39;location_id&#39;: price.locationId,
+    if (price.type != null) &#39;type&#39;: price.type!.offTag,
+    if (price.ownerComment != null) &#39;owner_comment&#39;: price.ownerComment,
   };
   final Response response = await HttpHelper().doPostJsonRequest(
     uri,
