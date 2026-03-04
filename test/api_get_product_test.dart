@@ -29,6 +29,8 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   Future<ProductResultV3> getProductV3InProd(
     ProductQueryConfiguration configuration,
   ) async {
@@ -77,7 +79,7 @@ void main() {
               barcode,
               language: OpenFoodFactsLanguage.ENGLISH,
               fields: [ProductField.KNOWLEDGE_PANELS],
-              version: ProductQueryVersion.v3,
+              version: version,
             );
         final ProductResultV3 result = await getProductV3InProd(configurations);
         expect(result.status, ProductResultV3.statusSuccess);
@@ -97,7 +99,6 @@ void main() {
         const String barcode = '0737628064502';
         const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH;
         const List<ProductField> fields = [ProductField.KNOWLEDGE_PANELS];
-        const ProductQueryVersion version = ProductQueryVersion.v3;
         test('get KP with simplified panels', () async {
           final ProductQueryConfiguration configurations =
               ProductQueryConfiguration(
@@ -153,7 +154,7 @@ void main() {
                 barcode,
                 language: OpenFoodFactsLanguage.ENGLISH,
                 fields: [ProductField.ALL],
-                version: ProductQueryVersion.v3,
+                version: version,
               );
           final ProductResultV3 result = await getProductV3InProd(
             configurations,
@@ -184,7 +185,7 @@ void main() {
               barcode,
               language: OpenFoodFactsLanguage.ENGLISH,
               fields: [ProductField.ALL],
-              version: ProductQueryVersion.v3,
+              version: version,
             );
         ProductResultV3 result = await getProductV3InProd(configurations);
         expect(result.status, ProductResultV3.statusSuccess);
@@ -209,7 +210,7 @@ void main() {
                 barcode,
                 language: OpenFoodFactsLanguage.GERMAN,
                 fields: [ProductField.ALL],
-                version: ProductQueryVersion.v3,
+                version: version,
               );
           final ProductResultV3 result = await getProductV3InProd(
             configurations,
@@ -284,7 +285,7 @@ void main() {
                 barcode,
                 language: OpenFoodFactsLanguage.ENGLISH,
                 fields: [ProductField.ALL],
-                version: ProductQueryVersion.v3,
+                version: version,
               );
           final ProductResultV3 result = await getProductV3InProd(
             configurations,
@@ -386,7 +387,7 @@ void main() {
               ProductField.CONSERVATION_CONDITIONS_ALL_LANGUAGES,
               ProductField.CUSTOMER_SERVICE_ALL_LANGUAGES,
             ],
-            version: ProductQueryVersion.v3,
+            version: version,
             language: OpenFoodFactsLanguage.JAPANESE,
           );
 
@@ -425,7 +426,7 @@ void main() {
             '5060517883638',
             language: language,
             fields: fields,
-            version: ProductQueryVersion.v3,
+            version: version,
           ),
         );
         expect(result.product!.nutriments, isNotNull);
@@ -452,7 +453,7 @@ void main() {
             '7612100018477',
             language: language,
             fields: fields,
-            version: ProductQueryVersion.v3,
+            version: version,
           ),
         );
         expect(result.product!.nutriments, isNotNull);
@@ -473,7 +474,7 @@ void main() {
             '3057640257773',
             language: language,
             fields: fields,
-            version: ProductQueryVersion.v3,
+            version: version,
           ),
         );
         expect(result.product!.nutriments, isNotNull);
@@ -497,7 +498,7 @@ void main() {
             '4260556630007',
             language: language,
             fields: fields,
-            version: ProductQueryVersion.v3,
+            version: version,
           ),
         );
         expect(result.product!.nutriments, isNotNull);
@@ -549,7 +550,7 @@ void main() {
             '3155251205319',
             language: language,
             fields: fields,
-            version: ProductQueryVersion.v3,
+            version: version,
           ),
         );
         expect(result.product!.nutriments, isNotNull);
@@ -579,7 +580,7 @@ void main() {
               barcode,
               language: OpenFoodFactsLanguage.FRENCH,
               fields: [ProductField.ALL],
-              version: ProductQueryVersion.v3,
+              version: version,
             );
         final ProductResultV3 result = await getProductV3InProd(configurations);
 
@@ -694,7 +695,7 @@ void main() {
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
           fields: [ProductField.ALL],
-          version: ProductQueryVersion.v3,
+          version: version,
         );
         ProductResultV3 result = await getProductV3InProd(configurations);
         expect(result.product, isNull);
@@ -707,7 +708,7 @@ void main() {
               barcode,
               language: OpenFoodFactsLanguage.GERMAN,
               fields: [ProductField.ALL],
-              version: ProductQueryVersion.v3,
+              version: version,
             );
         final ProductResultV3 result = await getProductV3InProd(configurations);
 
@@ -725,7 +726,7 @@ void main() {
             ProductField.ECOSCORE_SCORE,
             ProductField.ECOSCORE_DATA,
           ],
-          version: ProductQueryVersion.v3,
+          version: version,
         );
         ProductResultV3 result = await getProductV3InProd(configurations);
 
@@ -749,7 +750,7 @@ void main() {
             ProductField.BRANDS,
             ProductField.QUANTITY,
           ],
-          version: ProductQueryVersion.v3,
+          version: version,
         );
         ProductResultV3 result = await getProductV3InProd(configurations);
 
@@ -777,7 +778,7 @@ void main() {
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
           fields: [ProductField.NAME, ProductField.LANGUAGE],
-          version: ProductQueryVersion.v3,
+          version: version,
         );
         result = await getProductV3InProd(configurations);
 
@@ -795,7 +796,7 @@ void main() {
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
           fields: [ProductField.NAME, ProductField.COUNTRIES],
-          version: ProductQueryVersion.v3,
+          version: version,
         );
         result = await getProductV3InProd(configurations);
 
@@ -815,7 +816,7 @@ void main() {
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
           fields: [ProductField.NAME, ProductField.COUNTRIES_TAGS],
-          version: ProductQueryVersion.v3,
+          version: version,
         );
         result = await getProductV3InProd(configurations);
 
@@ -838,7 +839,7 @@ void main() {
           barcode,
           language: OpenFoodFactsLanguage.ENGLISH,
           fields: [ProductField.NAME, ProductField.ATTRIBUTE_GROUPS],
-          version: ProductQueryVersion.v3,
+          version: version,
         );
         ProductResultV3 result = await getProductV3InProd(configurations);
 
@@ -899,7 +900,7 @@ void main() {
 
           //Get product without setting OpenFoodFactsLanguage or ProductField
           ProductResultV3 result = await getProductV3InProd(
-            ProductQueryConfiguration(barcode, version: ProductQueryVersion.v3),
+            ProductQueryConfiguration(barcode, version: version),
           );
 
           expect(result.status, ProductResultV3.statusSuccess);
@@ -951,7 +952,7 @@ void main() {
             ProductQueryConfiguration(
               barcode,
               language: OpenFoodFactsLanguage.GERMAN,
-              version: ProductQueryVersion.v3,
+              version: version,
             ),
           );
 
@@ -1009,7 +1010,7 @@ void main() {
             ProductQueryConfiguration(
               barcode,
               fields: [ProductField.ALL],
-              version: ProductQueryVersion.v3,
+              version: version,
             ),
           );
 
@@ -1102,7 +1103,7 @@ void main() {
               '3017620429484',
               language: OpenFoodFactsLanguage.FRENCH,
               fields: [ProductField.ALL],
-              version: ProductQueryVersion.v3,
+              version: version,
             ),
           );
 
@@ -1135,7 +1136,7 @@ void main() {
             BARCODE_DANISH_BUTTER_COOKIES,
             language: OpenFoodFactsLanguage.FRENCH,
             fields: <ProductField>[ProductField.KNOWLEDGE_PANELS],
-            version: ProductQueryVersion.v3,
+            version: version,
           ),
         );
         expect(productResult.product, isNotNull);
@@ -1186,7 +1187,7 @@ void main() {
             barcode,
             language: OpenFoodFactsLanguage.ENGLISH,
             fields: [ProductField.BARCODE],
-            version: ProductQueryVersion.v3,
+            version: version,
           );
       final ProductResultV3 result = await getProductV3InProd(configurations);
       expect(result.status, ProductResultV3.statusWarning);
@@ -1371,7 +1372,7 @@ void main() {
     configuration = ProductQueryConfiguration(
       BARCODE_DANISH_BUTTER_COOKIES,
       fields: [ProductField.COMPARED_TO_CATEGORY],
-      version: ProductQueryVersion.v3,
+      version: version,
     );
     result = await getProductV3InProd(configuration);
     expect(result.status, ProductResultV3.statusSuccess);
@@ -1381,7 +1382,7 @@ void main() {
     configuration = ProductQueryConfiguration(
       '7300400481588',
       fields: [ProductField.WEBSITE, ProductField.EXPIRATION_DATE],
-      version: ProductQueryVersion.v3,
+      version: version,
     );
     result = await getProductV3InProd(configuration);
     expect(result.status, ProductResultV3.statusSuccess);
@@ -1394,7 +1395,7 @@ void main() {
     configuration = ProductQueryConfiguration(
       '8076809517881',
       fields: [ProductField.OBSOLETE],
-      version: ProductQueryVersion.v3,
+      version: version,
     );
     result = await getProductV3InProd(configuration);
     expect(result.status, ProductResultV3.statusSuccess);
@@ -1405,7 +1406,7 @@ void main() {
     configuration = ProductQueryConfiguration(
       '7300400481588',
       fields: [ProductField.OBSOLETE],
-      version: ProductQueryVersion.v3,
+      version: version,
     );
     result = await getProductV3InProd(configuration);
     expect(result.status, ProductResultV3.statusSuccess);
@@ -1430,7 +1431,7 @@ void main() {
         ProductField.LAST_EDIT_DATES,
         ProductField.LAST_IMAGE_DATES,
       ],
-      version: ProductQueryVersion.v3,
+      version: version,
     );
     result = await getProductV3InProd(configuration);
     expect(result.status, ProductResultV3.statusSuccess);
@@ -1479,7 +1480,7 @@ void main() {
     configuration = ProductQueryConfiguration(
       '3017620425035',
       fields: [ProductField.OWNER_FIELDS],
-      version: ProductQueryVersion.v3,
+      version: version,
     );
     result = await getProductV3InProd(configuration);
     expect(result.status, ProductResultV3.statusSuccess);
@@ -1574,7 +1575,7 @@ void main() {
         ProductQueryConfiguration(
           barcode,
           fields: [ProductField.OWNER, ProductField.IMAGES],
-          version: ProductQueryVersion.v3,
+          version: version,
         ),
       );
       expect(result.status, ProductResultV3.statusSuccess);
@@ -1622,7 +1623,6 @@ void main() {
     const String barcode = '3661344723290';
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
     const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
-    const ProductQueryVersion version = ProductQueryVersion.v3;
 
     void checkProduct(final Product product) {
       void checkLocalizedTag(final LocalizedTag? tag) {
@@ -1676,7 +1676,6 @@ void main() {
     const String barcode = '3661344723290';
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
     const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
-    const ProductQueryVersion version = ProductQueryVersion.v3;
 
     test('Without specifying fields', () async {
       final ProductResultV3 productResult = await getProductV3InProd(
@@ -1775,7 +1774,7 @@ void main() {
               entry.key,
               language: language,
               country: country,
-              version: ProductQueryVersion.v3,
+              version: version,
               fields: [ProductField.ATTRIBUTE_GROUPS],
               unwantedIngredients: IngredientsUnwantedParameter(<String>[
                 'en:tomato',
