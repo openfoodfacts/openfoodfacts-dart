@@ -6,6 +6,8 @@ import 'test_constants.dart';
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   Future<void> doTest(
     final String barcode,
     final OpenFoodFactsLanguage language,
@@ -127,7 +129,7 @@ void main() {
             barcode,
             language: OpenFoodFactsLanguage.FRENCH,
             fields: [ProductField.INGREDIENTS_TEXT],
-            version: ProductQueryVersion.v3,
+            version: version,
           );
           await getProductTooManyRequestsManager.waitIfNeeded();
           final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
