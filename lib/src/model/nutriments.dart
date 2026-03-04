@@ -59,7 +59,7 @@ class Nutriments extends JsonMap {
   Unit? getUnit(final Nutrient nutrient) =>
       UnitHelper.stringToUnit(jsonMap[_getUnitTag(nutrient)]);
 
-  /// Returns the unit of that [nutrient].
+  /// Returns the modifier of that [nutrient].
   ///
   /// See also: [getValue], [getUnit].
   NutrientModifier? getModifier(final Nutrient nutrient) =>
