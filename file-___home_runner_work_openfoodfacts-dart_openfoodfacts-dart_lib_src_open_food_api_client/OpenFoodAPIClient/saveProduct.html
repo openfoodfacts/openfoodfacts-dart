@@ -119,15 +119,30 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
 
   if (product.nutriments != null) {
     final Map&lt;String, String&gt; rawNutrients = product.nutriments!.toData();
-    for (final MapEntry&lt;String, String&gt; entry in rawNutrients.entries) {
-      String key = &#39;nutriment_${entry.key}&#39;;
-      for (final option in PerSize.values) {
-        final int pos = key.indexOf(&#39;_${option.offTag}&#39;);
-        if (pos != -1) {
-          key = key.substring(0, pos);
-        }
+    for (final Nutrient nutrient in Nutrient.values) {
+      final String modifier =
+          rawNutrients[&#39;${nutrient.offTag}_modifier&#39;] ?? &#39;&#39;;
+      if (modifier == NutrientModifier.valueNotSpecified.offTag) {
+        parameterMap[&#39;nutriment_${nutrient.offTag}&#39;] = modifier;
+        &#47;&#47; and that&#39;s enough
+        continue;
       }
-      parameterMap[key] = entry.value;
+      String? value = rawNutrients[&#39;${nutrient.offTag}_value&#39;];
+      if (value == null) {
+        &#47;&#47; the nutrient is simply not mentioned
+        continue;
+      }
+      if (value == &#39;&#39;) {
+        &#47;&#47; the nutrient value is deleted
+        parameterMap[&#39;nutriment_${nutrient.offTag}&#39;] = value;
+        continue;
+      }
+      parameterMap[&#39;nutriment_${nutrient.offTag}&#39;] = &#39;$modifier$value&#39;;
+      final String key = &#39;${nutrient.offTag}_unit&#39;;
+      value = rawNutrients[key];
+      if (value != null) {
+        parameterMap[&#39;nutriment_$key&#39;] = value;
+      }
     }
   }
   parameterMap.remove(&#39;nutriments&#39;);

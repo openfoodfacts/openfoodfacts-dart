@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the setValue method from the Nutriments class, for the Dart programming language.">
-  <title>setValue method - Nutriments class - nutriments library - Dart API</title>
+  <meta name="description" content="API docs for the getUnit method from the Nutriments class, for the Dart programming language.">
+  <title>getUnit method - Nutriments class - nutriments library - Dart API</title>
 
 
   
@@ -27,9 +27,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/">src&#47;model&#47;nutriments.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/Nutriments-class.html">Nutriments</a></li>
-    <li class="self-crumb">setValue method</li>
+    <li class="self-crumb">getUnit method</li>
   </ol>
-  <div class="self-name">setValue</div>
+  <div class="self-name">getUnit</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -49,37 +49,30 @@
     data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments&#47;Nutriments-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">setValue</span> method 
+<h1><span class="kind-method">getUnit</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
       
-<span class="returntype"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/Nutriments-class.html">Nutriments</a></span>
-<span class="name ">setValue</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="setValue-param-nutrient"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span> <span class="parameter-name">nutrient</span>, </span></li>
-<li><span class="parameter" id="setValue-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.11.1/dart-core/double-class.html">double</a></span> <span class="parameter-name">value</span>, {</span></li>
-<li><span class="parameter" id="setValue-param-unit"><span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/Unit.html">Unit</a></span> <span class="parameter-name">unit</span>, </span></li>
-<li><span class="parameter" id="setValue-param-modifier"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient_modifier/NutrientModifier.html">NutrientModifier</a>?</span> <span class="parameter-name">modifier</span>, </span></li>
-</ol>})
+<span class="returntype"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_unit_helper/Unit.html">Unit</a>?</span>
+<span class="name ">getUnit</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="getUnit-param-nutrient"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span> <span class="parameter-name">nutrient</span></span></li>
+</ol>)
 
       
 
     </section>
     
 <section class="desc markdown">
-  <p>Sets the value, unit and possibly modifier of that <code>nutrient</code>.</p>
-<p><code>modifier</code> is most of the time null, and in that case means "equals".</p>
+  <p>Returns the unit of that <code>nutrient</code>.</p>
+<p>See also: <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/Nutriments/getValue.html">getValue</a>, <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/Nutriments/getModifier.html">getModifier</a>.</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Nutriments setValue(
-  final Nutrient nutrient,
-  final double value, {
-  required final Unit unit,
-  final NutrientModifier? modifier,
-}) =&gt; _set(nutrient, value: value, unit: unit, modifier: modifier);</code></pre>
+  <pre class="language-dart"><code class="language-dart">Unit? getUnit(final Nutrient nutrient) =&gt;
+    UnitHelper.stringToUnit(jsonMap[_getUnitTag(nutrient)]);</code></pre>
 </section>
 
 
@@ -95,7 +88,7 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/">nutriments</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/Nutriments-class.html">Nutriments</a></li>
-    <li class="self-crumb">setValue method</li>
+    <li class="self-crumb">getUnit method</li>
 </ol>
 
     <h5>Nutriments class</h5>

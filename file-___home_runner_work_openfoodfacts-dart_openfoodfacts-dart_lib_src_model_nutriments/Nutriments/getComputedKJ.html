@@ -72,11 +72,11 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">double? getComputedKJ(final PerSize perSize) {
   double? result;
-  result = getValue(Nutrient.energyKJ, perSize);
+  result = getComputedValue(Nutrient.energyKJ, perSize);
   if (result != null) {
     return result;
   }
-  result = getValue(Nutrient.energyKCal, perSize);
+  result = getComputedValue(Nutrient.energyKCal, perSize);
   if (result != null) {
     return NutrimentsHelper.fromKCalToKJ(result);
   }

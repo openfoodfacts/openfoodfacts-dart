@@ -75,7 +75,7 @@
   final Uri uri = OpenPricesAPIClient.getUri(
     path: &#39;&#47;api&#47;v1&#47;users&#47;${Uri.encodeComponent(username)}&#39;,
   );
-  final http.Response response = await HttpHelper().doGetRequest(
+  final Response response = await HttpHelper().doGetRequest(
     uri,
     uriHelper: uriHelper,
   );
