@@ -9,9 +9,11 @@ import 'price_per.dart';
 /// cf. https://prices.openfoodfacts.org/api/docs
 class UpdatePriceParameters extends JsonObject {
   /// Barcode (EAN) of the product.
+  /// This field is exclusive with [categoryTag].
   String? productCode;
 
   /// ID of the OFF category of the product for products without barcode.
+  /// This field is exclusive with [productCode].
   String? categoryTag;
 
   /// Labels of the product, only for products without barcode.
