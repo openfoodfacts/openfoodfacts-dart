@@ -10,6 +10,8 @@ void main() {
   const UriProductHelper uriHelper = uriHelperFoodTest;
   const User user = TestConstants.TEST_USER;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   /// Common constants for several image operations
   const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.GERMAN;
   const ImageField imageField = ImageField.FRONT;
@@ -63,7 +65,7 @@ void main() {
     final ProductQueryConfiguration configurations = ProductQueryConfiguration(
       barcode,
       fields: <ProductField>[ProductField.IMAGES],
-      version: ProductQueryVersion.v3,
+      version: version,
     );
     final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
       configurations,
@@ -139,7 +141,7 @@ void main() {
     test('read image', () async {
       //Get product without setting ProductField
       final ProductQueryConfiguration configurations =
-          ProductQueryConfiguration(barcode, version: ProductQueryVersion.v3);
+          ProductQueryConfiguration(barcode, version: version);
       final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
         configurations,
         user: user,
@@ -266,7 +268,7 @@ void main() {
               ProductQueryConfiguration(
                 barcode,
                 fields: <ProductField>[ProductField.SELECTED_IMAGE],
-                version: ProductQueryVersion.v3,
+                version: version,
               ),
               uriHelper: uriHelper,
             );

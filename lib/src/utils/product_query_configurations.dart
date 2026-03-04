@@ -1,4 +1,5 @@
 import 'package:http/http.dart';
+import 'package:meta/meta.dart';
 
 import '../model/parameter/ingredients_unwanted_parameter.dart';
 import '../model/product_type_filter.dart';
@@ -20,6 +21,10 @@ class ProductQueryVersion {
       '/api/v$version/product/${Uri.encodeComponent(barcode)}/';
 
   bool matchesV3() => version >= 3;
+
+  /// Useful for testing new API versions.
+  @visibleForTesting
+  static const ProductQueryVersion testVersion = ProductQueryVersion(3);
 }
 
 /// Query Configuration for single barcode

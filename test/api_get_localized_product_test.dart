@@ -7,6 +7,8 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   Future<ProductResultV3> getProductV3InProd(
     ProductQueryConfiguration configuration,
   ) async {
@@ -27,7 +29,7 @@ void main() {
             barcode,
             languages: languages,
             fields: [ProductField.PACKAGING_TEXT_IN_LANGUAGES],
-            version: ProductQueryVersion.v3,
+            version: version,
           );
       final ProductResultV3 result = await getProductV3InProd(configurations);
       expect(result.status, ProductResultV3.statusSuccess);
@@ -52,7 +54,7 @@ void main() {
           BARCODE_DANISH_BUTTER_COOKIES,
           languages: languages,
           fields: [ProductField.IMAGES_FRESHNESS_IN_LANGUAGES],
-          version: ProductQueryVersion.v3,
+          version: version,
         ),
       );
       final Product product = productResult.product!;
@@ -109,7 +111,7 @@ void main() {
               ProductField.COUNTRIES_TAGS,
               ProductField.INGREDIENTS_TAGS,
             ],
-            version: ProductQueryVersion.v3,
+            version: version,
           );
       final ProductResultV3 result = await getProductV3InProd(configurations);
       expect(result.status, ProductResultV3.statusSuccess);
@@ -239,7 +241,7 @@ void main() {
             barcode,
             languages: languages,
             fields: [ProductField.IMAGES_FRESHNESS_IN_LANGUAGES],
-            version: ProductQueryVersion.v3,
+            version: version,
           );
       final ProductResultV3 result = await getProductV3InProd(configurations);
       expect(result.status, ProductResultV3.statusSuccess);
@@ -289,7 +291,7 @@ void main() {
               ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
               ProductField.PACKAGING_TEXT_IN_LANGUAGES,
             ],
-            version: ProductQueryVersion.v3,
+            version: version,
           );
       final ProductResultV3 result = await getProductV3InProd(configurations);
       expect(result.status, ProductResultV3.statusSuccess);
@@ -347,7 +349,7 @@ void main() {
               ProductField.PACKAGING_TEXT_IN_LANGUAGES,
               ProductField.NAME_IN_LANGUAGES,
             ],
-            version: ProductQueryVersion.v3,
+            version: version,
           );
       final ProductResultV3 result = await getProductV3InProd(configurations);
       expect(result.status, ProductResultV3.statusSuccess);
@@ -385,7 +387,7 @@ void main() {
               ProductField.PACKAGING_TEXT_ALL_LANGUAGES,
               ProductField.NAME_ALL_LANGUAGES,
             ],
-            version: ProductQueryVersion.v3,
+            version: version,
           );
       final ProductResultV3 result = await getProductV3InProd(configurations);
       expect(result.status, ProductResultV3.statusSuccess);
