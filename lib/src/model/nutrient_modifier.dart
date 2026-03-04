@@ -1,6 +1,9 @@
 import 'off_tagged.dart';
 
+/// Modifier for the nutrient values.
 enum NutrientModifier implements OffTagged {
+  /// The nutrient value isn't explicitly specified on the product packaging.
+  valueNotSpecified(offTag: '-'),
   approximately(offTag: '~'),
   greaterThan(offTag: '>'),
   lessThan(offTag: '<');

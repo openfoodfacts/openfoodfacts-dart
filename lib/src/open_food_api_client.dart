@@ -7,11 +7,12 @@ import 'external/external_source_metadata.dart';
 import 'external/external_source_product_data.dart';
 import 'interface/json_object.dart';
 import 'model/login_status.dart';
+import 'model/nutrient.dart';
+import 'model/nutrient_modifier.dart';
 import 'model/ocr_ingredients_result.dart';
 import 'model/ocr_packaging_result.dart';
 import 'model/ordered_nutrients.dart';
 import 'model/parameter/barcode_parameter.dart';
-import 'model/per_size.dart';
 import 'model/product.dart';
 import 'model/product_freshness.dart';
 import 'model/product_image.dart';
@@ -104,15 +105,30 @@ class OpenFoodAPIClient {
 
     if (product.nutriments != null) {
       final Map<String, String> rawNutrients = product.nutriments!.toData();
-      for (final MapEntry<String, String> entry in rawNutrients.entries) {
-        String key = 'nutriment_${entry.key}';
-        for (final option in PerSize.values) {
-          final int pos = key.indexOf('_${option.offTag}');
-          if (pos != -1) {
-            key = key.substring(0, pos);
-          }
+      for (final Nutrient nutrient in Nutrient.values) {
+        final String modifier =
+            rawNutrients['${nutrient.offTag}_modifier'] ?? '';
+        if (modifier == NutrientModifier.valueNotSpecified.offTag) {
+          parameterMap['nutriment_${nutrient.offTag}'] = modifier;
+          // and that's enough
+          continue;
         }
-        parameterMap[key] = entry.value;
+        String? value = rawNutrients['${nutrient.offTag}_value'];
+        if (value == null) {
+          // the nutrient is simply not mentioned
+          continue;
+        }
+        if (value == '') {
+          // the nutrient value is deleted
+          parameterMap['nutriment_${nutrient.offTag}'] = value;
+          continue;
+        }
+        parameterMap['nutriment_${nutrient.offTag}'] = '$modifier$value';
+        final String key = '${nutrient.offTag}_unit';
+        value = rawNutrients[key];
+        if (value != null) {
+          parameterMap['nutriment_$key'] = value;
+        }
       }
     }
     parameterMap.remove('nutriments');
