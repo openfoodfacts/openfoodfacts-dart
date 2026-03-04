@@ -75,13 +75,15 @@ dedicates methods in <a href="../../file-___home_runner_work_openfoodfacts-dart_
   <pre class="language-dart"><code class="language-dart">Future&lt;Response&gt; getResponse(
   final User? user,
   final UriProductHelper uriHelper,
-) async =&gt; HttpHelper().doPostRequest(
-  uriHelper.getPostUri(path: getUriPath()),
-  getParametersMap(),
-  user,
-  uriHelper: uriHelper,
-  addCredentialsToBody: false,
-);</code></pre>
+) async {
+  return HttpHelper().doPostRequest(
+    uriHelper.getPostUri(path: getUriPath()),
+    getParametersMap(),
+    user,
+    uriHelper: uriHelper,
+    addCredentialsToBody: false,
+  );
+}</code></pre>
 </section>
 
 
