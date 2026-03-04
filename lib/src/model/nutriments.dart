@@ -18,7 +18,7 @@ class Nutriments extends JsonMap {
   Nutriments.empty() : super(<String, dynamic>{});
 
   /// Nutrient map with start values from [map].
-  Nutriments._fromMap(super.map);
+  Nutriments._fromMap(super.jsonMap);
 
   /// Returns the value map key for that [nutrient] and that [perSize].
   String _getValuePerSizeTag(final Nutrient nutrient, final PerSize perSize) =>
