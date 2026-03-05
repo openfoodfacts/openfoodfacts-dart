@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.31.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.30.2...v3.31.0) (2026-03-05)
+
+
+### Features
+
+* 871 - support nutrient units and modifiers ([#1178](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1178)) ([805a9a8](https://github.com/openfoodfacts/openfoodfacts-dart/commit/805a9a8375e7480367ad5a027035bde6d8f35e84))
+* upgrade for create and upgrade price objects and methods ([#1189](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1189)) ([03943ec](https://github.com/openfoodfacts/openfoodfacts-dart/commit/03943ec17e43d3f333fdbf59ea6bce4120520efd))
+
 ## [3.30.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.30.1...v3.30.2) (2026-02-15)
 
 
