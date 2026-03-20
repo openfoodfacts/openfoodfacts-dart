@@ -821,6 +821,51 @@ void main() {
   group('$OpenPricesAPIClient Products', () {
     const UriProductHelper uriHelper = uriHelperFoodProd;
 
+    test('PriceProduct parses legacy integer product_quantity safely', () {
+      final Map<String, dynamic> legacyJson = {
+        'code': 'dummy_barcode',
+        'id': 123,
+        'unique_scans_n': 1,
+        'created': '2026-03-20T00:00:00Z',
+        'categories_tags': [],
+        'brands_tags': [],
+        'labels_tags': [],
+        //
+        'product_quantity': 5,
+      };
+
+      final product = PriceProduct.fromJson(legacyJson);
+
+      expect(product.productQuantity, 5);
+      expect(product.productQuantity, isA<num>());
+
+      // ignore: deprecated_member_use_from_same_package
+      expect(product.quantity, 5);
+    });
+
+    test(
+      'PriceProduct parses new decimal product_quantity and string quantity',
+      () {
+        final Map<String, dynamic> newJson = {
+          'code': 'dummy_barcode',
+          'id': 123,
+          'unique_scans_n': 1,
+          'created': '2026-03-20T00:00:00Z',
+          'categories_tags': [],
+          'brands_tags': [],
+          'labels_tags': [],
+          //
+          'product_quantity': 1.5,
+          'quantity': '1.5 L',
+        };
+
+        final product = PriceProduct.fromJson(newJson);
+
+        expect(product.productQuantity, 1.5);
+        expect(product.quantityString, '1.5 L');
+      },
+    );
+
     test('get existing product by ID', () async {
       const int productId = 1;
       final MaybeError<PriceProduct> maybePriceProduct =

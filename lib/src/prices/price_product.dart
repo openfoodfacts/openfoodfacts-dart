@@ -41,8 +41,17 @@ class PriceProduct extends JsonObject {
   @JsonKey(name: 'product_name')
   String? name;
 
+  @JsonKey(name: 'quantity')
+  String? quantityString;
+
   @JsonKey(name: 'product_quantity')
-  int? quantity;
+  num? productQuantity;
+
+  @JsonKey(ignore: true)
+  @Deprecated('Use productQuantity instead. - 2026-03-20')
+  int? get quantity => productQuantity?.toInt();
+  @Deprecated('Use productQuantity instead. - 2026-03-20')
+  set quantity(int? value) => productQuantity = value;
 
   @JsonKey(name: 'product_quantity_unit')
   String? quantityUnit;
