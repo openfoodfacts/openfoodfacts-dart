@@ -821,6 +821,28 @@ void main() {
   group('$OpenPricesAPIClient Products', () {
     const UriProductHelper uriHelper = uriHelperFoodProd;
 
+    test('PriceProduct parses legacy integer product_quantity safely', () {
+      final int productQuantity = 5;
+      final Map<String, dynamic> legacyJson = {
+        'code': 'dummy_barcode',
+        'id': 123,
+        'unique_scans_n': 1,
+        'created': '2026-03-20T00:00:00Z',
+        'categories_tags': [],
+        'brands_tags': [],
+        'labels_tags': [],
+        //
+        'product_quantity': productQuantity,
+      };
+
+      final product = PriceProduct.fromJson(legacyJson);
+
+      expect(product.productQuantity, productQuantity);
+
+      // ignore: deprecated_member_use_from_same_package
+      expect(product.quantity, productQuantity);
+    });
+
     test('get existing product by ID', () async {
       const int productId = 1;
       final MaybeError<PriceProduct> maybePriceProduct =
