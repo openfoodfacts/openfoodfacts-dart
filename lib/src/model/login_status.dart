@@ -73,7 +73,7 @@ class LoginStatus {
       statusVerbose: json['status_verbose'] as String,
       userId: json['user_id'] as String?,
       cookie: headers?['set-cookie'],
-      userDetails: UserDetails.fromJson(json['user']),
+      userDetails: UserDetails.fromJson(json['user'] ?? {}),
     );
   }
 
