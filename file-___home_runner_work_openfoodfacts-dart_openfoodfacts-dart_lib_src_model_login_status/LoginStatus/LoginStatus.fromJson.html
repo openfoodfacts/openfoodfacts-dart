@@ -73,7 +73,7 @@
     statusVerbose: json[&#39;status_verbose&#39;] as String,
     userId: json[&#39;user_id&#39;] as String?,
     cookie: headers?[&#39;set-cookie&#39;],
-    userDetails: UserDetails.fromJson(json[&#39;user&#39;]),
+    userDetails: UserDetails.fromJson(json[&#39;user&#39;] ?? {}),
   );
 }</code></pre>
 </section>
