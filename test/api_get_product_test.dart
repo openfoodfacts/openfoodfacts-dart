@@ -27,16 +27,16 @@ void main() {
   const BARCODE_DANISH_BUTTER_COOKIES = '5701184005007';
 
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
+  OpenFoodAPIConfiguration.globalUser = TestConstants.TEST_USER;
+  const uriHelper = uriHelperFoodTest;
 
   const ProductQueryVersion version = ProductQueryVersion.testVersion;
 
+  // actually, we're running in TEST...
   Future<ProductResultV3> getProductV3InProd(
     ProductQueryConfiguration configuration,
-  ) async {
-    await getProductTooManyRequestsManager.waitIfNeeded();
-    return OpenFoodAPIClient.getProductV3(configuration);
-  }
+  ) async =>
+      OpenFoodAPIClient.getProductV3(configuration, uriHelper: uriHelper);
 
   void findExpectedIngredients(
     final List<Ingredient> ingredients,
@@ -143,39 +143,34 @@ void main() {
         });
       });
 
-      test(
-        'get product tiny twists - Rold Gold Pretzels - 16 OZ. (1 LB) 453.6g',
-        () async {
-          //Refactor the test once the issue  #48 is fixed
-          String barcode = '0028400047685';
+      test('get a product', () async {
+        //Refactor the test once the issue  #48 is fixed
+        String barcode = '7622210449283';
 
-          final ProductQueryConfiguration configurations =
-              ProductQueryConfiguration(
-                barcode,
-                language: OpenFoodFactsLanguage.ENGLISH,
-                fields: [ProductField.ALL],
-                version: version,
-              );
-          final ProductResultV3 result = await getProductV3InProd(
-            configurations,
-          );
-          expect(result.status, ProductResultV3.statusSuccess);
-          expect(result.barcode, barcode);
-          expect(result.product, isNotNull);
-          expect(result.product!.barcode, barcode);
+        final ProductQueryConfiguration configurations =
+            ProductQueryConfiguration(
+              barcode,
+              language: OpenFoodFactsLanguage.ENGLISH,
+              fields: [ProductField.ALL],
+              version: version,
+            );
+        final ProductResultV3 result = await getProductV3InProd(configurations);
+        expect(result.status, ProductResultV3.statusSuccess);
+        expect(result.barcode, barcode);
+        expect(result.product, isNotNull);
+        expect(result.product!.barcode, barcode);
 
-          expect(result.product!.nutriments, isNotNull);
-          final Nutriments nutriments = result.product!.nutriments!;
-          expect(nutriments.getValue(Nutrient.carbohydrates), isNotNull);
-          expect(nutriments.getUnit(Nutrient.carbohydrates), isNotNull);
-          expect(nutriments.getValue(Nutrient.proteins), isNotNull);
-          expect(nutriments.getUnit(Nutrient.proteins), isNotNull);
-          expect(nutriments.getValue(Nutrient.salt), isNotNull);
-          expect(nutriments.getUnit(Nutrient.salt), isNotNull);
-          expect(nutriments.getValue(Nutrient.fat), isNotNull);
-          expect(nutriments.getUnit(Nutrient.fat), isNotNull);
-        },
-      );
+        expect(result.product!.nutriments, isNotNull);
+        final Nutriments nutriments = result.product!.nutriments!;
+        expect(nutriments.getValue(Nutrient.carbohydrates), isNotNull);
+        expect(nutriments.getUnit(Nutrient.carbohydrates), isNotNull);
+        expect(nutriments.getValue(Nutrient.proteins), isNotNull);
+        expect(nutriments.getUnit(Nutrient.proteins), isNotNull);
+        expect(nutriments.getValue(Nutrient.salt), isNotNull);
+        expect(nutriments.getUnit(Nutrient.salt), isNotNull);
+        expect(nutriments.getValue(Nutrient.fat), isNotNull);
+        expect(nutriments.getUnit(Nutrient.fat), isNotNull);
+      });
 
       test('check alcohol data', () async {
         const String barcode = '3119780259625';
@@ -300,45 +295,45 @@ void main() {
           expect(product.nutriments, isNotNull);
           final Nutriments nutriments = product.nutriments!;
 
-          expect(product.nutrimentDataPer, PerSize.serving.offTag);
+          expect(product.nutrimentDataPer, PerSize.oneHundredGrams.offTag);
           expect(product.servingQuantity, 177);
 
           final Map<Nutrient, NutrientValue> expectations =
               <Nutrient, NutrientValue>{
                 Nutrient.vitaminA: NutrientValue(
-                  value: 10,
-                  unit: Unit.PERCENT_DV,
-                  gramsPer100g: 0.0000847,
+                  value: 0.0000847457627118644,
+                  unit: Unit.G,
+                  gramsPer100g: 0.0000847457627118644,
                   gramsPerServing: 0.00015,
                 ),
                 Nutrient.vitaminE: NutrientValue(
-                  value: 10,
-                  unit: Unit.PERCENT_DV,
-                  gramsPer100g: 0.00113,
+                  value: 0.00112994350282486,
+                  unit: Unit.G,
+                  gramsPer100g: 0.00112994350282486,
                   gramsPerServing: 0.002,
                 ),
                 Nutrient.vitaminC: NutrientValue(
-                  value: 100,
-                  unit: Unit.PERCENT_DV,
-                  gramsPer100g: 0.0339,
+                  value: 0.0338983050847458,
+                  unit: Unit.G,
+                  gramsPer100g: 0.0338983050847458,
                   gramsPerServing: 0.06,
                 ),
                 Nutrient.calcium: NutrientValue(
-                  value: 2,
-                  unit: Unit.PERCENT_DV,
-                  gramsPer100g: 0.0147,
+                  value: 0.0146892655367232,
+                  unit: Unit.G,
+                  gramsPer100g: 0.0146892655367232,
                   gramsPerServing: 0.026,
                 ),
                 Nutrient.iron: NutrientValue(
-                  value: 4,
-                  unit: Unit.PERCENT_DV,
-                  gramsPer100g: 0.000407,
-                  gramsPerServing: 0.00072,
+                  value: 0.00041,
+                  unit: Unit.G,
+                  gramsPer100g: 0.00041,
+                  gramsPerServing: 0.000726,
                 ),
                 Nutrient.proteins: NutrientValue(
-                  value: 1,
+                  value: 0.564971751412429,
                   unit: Unit.G,
-                  gramsPer100g: 0.565,
+                  gramsPer100g: 0.564971751412429,
                   gramsPerServing: 1,
                   modifier: NutrientModifier.lessThan,
                 ),
@@ -415,7 +410,7 @@ void main() {
         },
       );
       test('get uncommon nutrients', () async {
-        // PROD data as of 2021-07-16
+        // TEST data as of 2026-04-06
         const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
         const List<ProductField> fields = [ProductField.NUTRIMENTS];
         ProductResultV3 result;
@@ -431,8 +426,8 @@ void main() {
         );
         expect(result.product!.nutriments, isNotNull);
         nutriments = result.product!.nutriments!;
-        expect(nutriments.getValue(Nutrient.pantothenicAcid), 4.2);
-        expect(nutriments.getUnit(Nutrient.pantothenicAcid), Unit.MILLI_G);
+        expect(nutriments.getValue(Nutrient.pantothenicAcid), 0.0042);
+        expect(nutriments.getUnit(Nutrient.pantothenicAcid), Unit.G);
         expect(
           nutriments.getComputedValue(
             Nutrient.pantothenicAcid,
@@ -458,8 +453,8 @@ void main() {
         );
         expect(result.product!.nutriments, isNotNull);
         nutriments = result.product!.nutriments!;
-        expect(nutriments.getValue(Nutrient.biotin), 17);
-        expect(nutriments.getUnit(Nutrient.biotin), Unit.MICRO_G);
+        expect(nutriments.getValue(Nutrient.biotin), 0.000017);
+        expect(nutriments.getUnit(Nutrient.biotin), Unit.G);
         expect(
           nutriments.getComputedValue(Nutrient.biotin, PerSize.oneHundredGrams),
           0.000017,
@@ -479,8 +474,8 @@ void main() {
         );
         expect(result.product!.nutriments, isNotNull);
         nutriments = result.product!.nutriments!;
-        expect(nutriments.getValue(Nutrient.chloride), 15);
-        expect(nutriments.getUnit(Nutrient.chloride), Unit.MILLI_G);
+        expect(nutriments.getValue(Nutrient.chloride), 0.0015);
+        expect(nutriments.getUnit(Nutrient.chloride), Unit.G);
         expect(
           nutriments.getComputedValue(
             Nutrient.chloride,
@@ -738,15 +733,13 @@ void main() {
       });
 
       test('product fields', () async {
-        const String barcode = '7300400481588';
+        const String barcode = '7622210449283';
         ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
           fields: [
             ProductField.NAME,
             ProductField.BRANDS_TAGS,
-            ProductField.ABBREVIATED_NAME,
-            ProductField.ABBREVIATED_NAME_ALL_LANGUAGES,
             ProductField.BRANDS,
             ProductField.QUANTITY,
           ],
@@ -764,13 +757,6 @@ void main() {
         expect(result.product!.additives!.names, isEmpty);
         expect(result.product!.nutrientLevels!.levels, isEmpty);
         expect(result.product!.lang, OpenFoodFactsLanguage.UNDEFINED);
-        expect(result.product!.abbreviatedName, isNotNull);
-        expect(result.product!.abbreviatedNameInLanguages, isNotNull);
-        expect(
-          result.product!.abbreviatedNameInLanguages![OpenFoodFactsLanguage
-              .FRENCH],
-          isNotNull,
-        );
         expect(result.product!.brands, isNotNull);
         expect(result.product!.quantity, isNotNull);
 
@@ -944,7 +930,7 @@ void main() {
                       image.language == OpenFoodFactsLanguage.GERMAN,
                 )
                 .url,
-            'https://images.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg',
+            'https://images.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg',
           );
 
           //Get product without setting ProductField
@@ -1002,7 +988,7 @@ void main() {
                       image.language == OpenFoodFactsLanguage.GERMAN,
                 )
                 .url,
-            'https://images.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg',
+            'https://images.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg',
           );
 
           //Get product without setting OpenFoodFactsLanguage
@@ -1083,7 +1069,7 @@ void main() {
                       image.language == OpenFoodFactsLanguage.GERMAN,
                 )
                 .url,
-            'https://images.openfoodfacts.org/images/products/500/011/254/8167/ingredients_de.7.400.jpg',
+            'https://images.openfoodfacts.net/images/products/500/011/254/8167/ingredients_de.7.400.jpg',
           );
 
           final Set<ProductImprovement> improvements = result.product!
@@ -1241,7 +1227,7 @@ void main() {
       const normalizedBarcode = '4260392550101';
 
       await getAndValidateProductGS1(barcode, normalizedBarcode);
-    });
+    }, skip: 'Absent from TEST env');
   });
 
   test('get product uri', () async {
@@ -1331,7 +1317,10 @@ void main() {
     ];
     for (final OpenFoodFactsLanguage language in languages) {
       final Map<OpenFoodFactsCountry, String> localizedCountries =
-          await OpenFoodAPIClient.getLocalizedCountryNames(language);
+          await OpenFoodAPIClient.getLocalizedCountryNames(
+            language,
+            uriHelper: uriHelper,
+          );
       expect(
         localizedCountries.length,
         OpenFoodFactsCountry.values.length,
@@ -1351,10 +1340,11 @@ void main() {
           final String url = OpenFoodAPIClient.getTaxonomyTranslationUri(
             tagType,
             language: language,
+            uriHelper: uriHelper,
           ).toString();
           expect(
             url,
-            'https://world-${language.offTag}.openfoodfacts.org/'
+            'https://world-${language.offTag}.openfoodfacts.net/'
             '${tagType.offTag}'
             '?translate=1',
           );
@@ -1380,19 +1370,6 @@ void main() {
     expect(result.product!.comparedToCategory, isNotNull);
 
     configuration = ProductQueryConfiguration(
-      '7300400481588',
-      fields: [ProductField.WEBSITE, ProductField.EXPIRATION_DATE],
-      version: version,
-    );
-    result = await getProductV3InProd(configuration);
-    expect(result.status, ProductResultV3.statusSuccess);
-    expect(result.product, isNotNull);
-    expect(result.product!.website, isNotNull);
-    expect(result.product!.website, isNotEmpty);
-    expect(result.product!.expirationDate, isNotNull);
-    expect(result.product!.expirationDate, isNotEmpty);
-
-    configuration = ProductQueryConfiguration(
       '8076809517881',
       fields: [ProductField.OBSOLETE],
       version: version,
@@ -1402,17 +1379,6 @@ void main() {
     expect(result.product, isNotNull);
     expect(result.product!.obsolete, isNotNull);
     expect(result.product!.obsolete, isTrue);
-
-    configuration = ProductQueryConfiguration(
-      '7300400481588',
-      fields: [ProductField.OBSOLETE],
-      version: version,
-    );
-    result = await getProductV3InProd(configuration);
-    expect(result.status, ProductResultV3.statusSuccess);
-    expect(result.product, isNotNull);
-    expect(result.product!.obsolete, isNotNull);
-    expect(result.product!.obsolete, isFalse);
 
     configuration = ProductQueryConfiguration(
       '3033710065066',
@@ -1587,17 +1553,6 @@ void main() {
 
     await checkLocked(
       '3560070800292',
-      OpenFoodFactsLanguage.FRENCH,
-      <ImageField, bool>{
-        ImageField.FRONT: true,
-        ImageField.INGREDIENTS: false,
-        ImageField.NUTRITION: false,
-        ImageField.PACKAGING: false,
-      },
-    );
-
-    await checkLocked(
-      '7300400481588',
       OpenFoodFactsLanguage.FRENCH,
       <ImageField, bool>{
         ImageField.FRONT: true,

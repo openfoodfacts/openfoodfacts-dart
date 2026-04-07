@@ -78,9 +78,6 @@ class Nutriments extends JsonMap {
   Nutriments deleteValue(final Nutrient nutrient) =>
       _set(nutrient, value: null);
 
-  Nutriments setValueAsNotSpecified(final Nutrient nutrient) =>
-      _set(nutrient, modifier: NutrientModifier.valueNotSpecified);
-
   Nutriments _set(
     final Nutrient nutrient, {
     final double? value,
@@ -114,4 +111,38 @@ class Nutriments extends JsonMap {
       Nutriments._fromMap(json);
 
   static Map<String, dynamic> toJsonHelper(Nutriments? n) => n?.toJson() ?? {};
+
+  /// Transform the nutriments into a useful map for saving a product.
+  Map<String, String> asSaveProductMap() {
+    final Map<String, String> result = {};
+    final Map<String, String> rawNutrients = toData();
+    for (final Nutrient nutrient in Nutrient.values) {
+      final String inputValueKey = '${nutrient.offTag}_value';
+      final String inputUnitKey = '${nutrient.offTag}_unit';
+      final String inputModifierKey = '${nutrient.offTag}_modifier';
+      final String outputValueKey = 'nutriment_${nutrient.offTag}';
+      final String outputUnitKey = 'nutriment_$inputUnitKey';
+
+      final String? value = rawNutrients[inputValueKey];
+
+      if (value == null) {
+        // the nutrient is simply not mentioned
+        continue;
+      }
+      if (value == '') {
+        // the nutrient value is deleted
+        result[outputValueKey] = value;
+        continue;
+      }
+
+      final String modifier = rawNutrients[inputModifierKey] ?? '';
+      result[outputValueKey] = '$modifier$value';
+
+      final String? unit = rawNutrients[inputUnitKey];
+      if (unit != null) {
+        result[outputUnitKey] = unit;
+      }
+    }
+    return result;
+  }
 }

@@ -7,6 +7,7 @@ import 'test_constants.dart';
 
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
+  const uriHelper = uriHelperFoodTest;
 
   const ProductQueryVersion version = ProductQueryVersion.testVersion;
 
@@ -22,6 +23,7 @@ void main() {
     ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
       configurations,
       user: TestConstants.TEST_USER,
+      uriHelper: uriHelper,
     );
     expect(result.status, ProductResultV3.statusSuccess);
     Product product = result.product!;

@@ -7,8 +7,6 @@ import 'external/external_source_metadata.dart';
 import 'external/external_source_product_data.dart';
 import 'interface/json_object.dart';
 import 'model/login_status.dart';
-import 'model/nutrient.dart';
-import 'model/nutrient_modifier.dart';
 import 'model/ocr_ingredients_result.dart';
 import 'model/ocr_packaging_result.dart';
 import 'model/ordered_nutrients.dart';
@@ -104,32 +102,7 @@ class OpenFoodAPIClient {
     var productUri = uriHelper.getPostUri(path: '/cgi/product_jqm2.pl');
 
     if (product.nutriments != null) {
-      final Map<String, String> rawNutrients = product.nutriments!.toData();
-      for (final Nutrient nutrient in Nutrient.values) {
-        final String modifier =
-            rawNutrients['${nutrient.offTag}_modifier'] ?? '';
-        if (modifier == NutrientModifier.valueNotSpecified.offTag) {
-          parameterMap['nutriment_${nutrient.offTag}'] = modifier;
-          // and that's enough
-          continue;
-        }
-        String? value = rawNutrients['${nutrient.offTag}_value'];
-        if (value == null) {
-          // the nutrient is simply not mentioned
-          continue;
-        }
-        if (value == '') {
-          // the nutrient value is deleted
-          parameterMap['nutriment_${nutrient.offTag}'] = value;
-          continue;
-        }
-        parameterMap['nutriment_${nutrient.offTag}'] = '$modifier$value';
-        final String key = '${nutrient.offTag}_unit';
-        value = rawNutrients[key];
-        if (value != null) {
-          parameterMap['nutriment_$key'] = value;
-        }
-      }
+      parameterMap.addAll(product.nutriments!.asSaveProductMap());
     }
     parameterMap.remove('nutriments');
     final Response response = await HttpHelper().doPostRequest(
@@ -1183,7 +1156,8 @@ class OpenFoodAPIClient {
   static Future<OrderedNutrients> getOrderedNutrients({
     required final OpenFoodFactsCountry country,
     required final OpenFoodFactsLanguage language,
-    final bool excludeReadOnly = true,
+    // TODO: deprecated from 2026-04-06; remove when old enough
+    @Deprecated('Not relevant anymore') final bool excludeReadOnly = true,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async => OrderedNutrients.fromJson(
     HttpHelper().jsonDecode(
@@ -1193,7 +1167,6 @@ class OpenFoodAPIClient {
         uriHelper: uriHelper,
       ),
     ),
-    excludeReadOnly: excludeReadOnly,
   );
 
   /// Returns the nutrient hierarchy specific to a country, localized, as JSON

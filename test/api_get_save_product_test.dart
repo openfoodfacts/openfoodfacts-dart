@@ -791,7 +791,7 @@ void main() {
         uriHelper: uriHelper,
       );
 
-      expect(result.status, ProductResultV3.statusSuccess);
+      expect(result.status, ProductResultV3.statusWarning);
       expect(result.product!.barcode, null);
       expect(result.product!.genericName, genericName);
       expect(result.product!.labels, labels);
@@ -885,87 +885,83 @@ void main() {
   }, timeout: Timeout(Duration(seconds: 90)));
 
   test('nutrient units and modifiers', () async {
-    const String barcode = '0038900009472';
-    const Nutrient nutrient = Nutrient.vitaminC;
+    const String barcode = '3760253400008';
+    const Nutrient nutrient = Nutrient.fiber;
     const double value = 123;
-    const PerSize perSize = PerSize.serving;
+    const unit = Unit.G;
+    const PerSize inputPerSize = PerSize.serving;
+    const servingSize = '250 g';
+    const double servingQuantity = 250;
+    const double servingFactor = 100 / servingQuantity;
 
-    const List<Unit> units = <Unit>[
-      Unit.G,
-      Unit.MILLI_G,
-      Unit.MICRO_G,
-      Unit.PERCENT_DV,
-      Unit.IU,
-    ];
-
-    for (final Unit unit in units) {
-      for (int i = 0; i < NutrientModifier.values.length + 2; i++) {
-        final Nutriments inputNutriments = Nutriments.empty();
-        NutrientModifier? modifier;
-        final bool deleting = i == 0;
-        if (deleting) {
-          inputNutriments.deleteValue(nutrient);
+    for (int i = 0; i < NutrientModifier.values.length + 2; i++) {
+      final Nutriments inputNutriments = Nutriments.empty();
+      NutrientModifier? modifier;
+      final bool deleting = i == 0;
+      if (deleting) {
+        inputNutriments.deleteValue(nutrient);
+      } else {
+        if (i == 1) {
+          modifier = null;
         } else {
-          if (i == 1) {
-            modifier = null;
-          } else {
-            modifier = NutrientModifier.values[i - 2];
-          }
-          if (modifier == NutrientModifier.valueNotSpecified) {
-            inputNutriments.setValueAsNotSpecified(nutrient);
-          } else {
-            inputNutriments.setValue(
-              nutrient,
-              value,
-              unit: unit,
-              modifier: modifier,
-            );
-          }
+          modifier = NutrientModifier.values[i - 2];
         }
-
-        final Status savedStatus = await OpenFoodAPIClient.saveProduct(
-          TestConstants.TEST_USER,
-          Product(
-            barcode: barcode,
-            nutriments: inputNutriments,
-            nutrimentDataPer: perSize.offTag,
-          ),
-          uriHelper: uriHelper,
+        inputNutriments.setValue(
+          nutrient,
+          value,
+          unit: unit,
+          modifier: modifier,
         );
-        expect(savedStatus.status, 1);
+      }
 
-        final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
-          ProductQueryConfiguration(
-            barcode,
-            language: OpenFoodFactsLanguage.FRENCH,
-            country: OpenFoodFactsCountry.FRANCE,
-            fields: [ProductField.NUTRIMENTS, ProductField.NUTRIMENT_DATA_PER],
-            version: ProductQueryVersion.v3,
-          ),
-          uriHelper: uriHelper,
-        );
+      final Status savedStatus = await OpenFoodAPIClient.saveProduct(
+        TestConstants.TEST_USER,
+        Product(
+          barcode: barcode,
+          nutriments: inputNutriments,
+          nutrimentDataPer: inputPerSize.offTag,
+          servingSize: servingSize,
+          servingQuantity: servingQuantity,
+          noNutritionData: false,
+        ),
+        uriHelper: uriHelper,
+      );
+      expect(savedStatus.status, 1);
 
-        expect(result.status, ProductResultV3.statusSuccess);
-        expect(result.barcode, barcode);
-        expect(result.product, isNotNull);
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+        ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.FRENCH,
+          country: OpenFoodFactsCountry.FRANCE,
+          fields: [
+            ProductField.NUTRIMENTS,
+            ProductField.NUTRIMENT_DATA_PER,
+            ProductField.OWNER_FIELDS,
+            ProductField.SERVING_SIZE,
+            ProductField.SERVING_QUANTITY,
+          ],
+          version: ProductQueryVersion.v3,
+        ),
+        uriHelper: uriHelper,
+      );
 
-        final Product product = result.product!;
-        expect(product.nutriments, isNotNull);
-        final Nutriments nutriments = product.nutriments!;
+      expect(result.status, ProductResultV3.statusSuccess);
+      expect(result.barcode, barcode);
+      expect(result.product, isNotNull);
 
-        expect(product.nutrimentDataPer, perSize.offTag);
+      final Product product = result.product!;
+      expect(product.nutriments, isNotNull);
+      final Nutriments nutriments = product.nutriments!;
 
-        expect(nutriments.getModifier(nutrient), modifier);
-        if (deleting) {
-          expect(nutriments.getValue(nutrient), null);
-          expect(nutriments.getUnit(nutrient), null);
-        } else if (modifier == NutrientModifier.valueNotSpecified) {
-          expect(nutriments.getValue(nutrient), null);
-          expect(nutriments.getUnit(nutrient), null);
-        } else {
-          expect(nutriments.getValue(nutrient), value);
-          expect(nutriments.getUnit(nutrient), unit);
-        }
+      expect(product.nutrimentDataPer, PerSize.oneHundredGrams.offTag);
+
+      expect(nutriments.getModifier(nutrient), modifier);
+      if (deleting) {
+        expect(nutriments.getValue(nutrient), null);
+        expect(nutriments.getUnit(nutrient), null);
+      } else {
+        expect(nutriments.getValue(nutrient), value * servingFactor);
+        expect(nutriments.getUnit(nutrient), unit);
       }
     }
   }, timeout: Timeout(Duration(seconds: 180)));

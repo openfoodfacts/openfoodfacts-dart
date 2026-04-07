@@ -6,7 +6,8 @@ import 'test_constants.dart';
 /// Integration test about ingredients.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
+  OpenFoodAPIConfiguration.globalUser = TestConstants.TEST_USER;
+  const uriHelper = uriHelperFoodTest;
   OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
   OpenFoodAPIConfiguration.globalLanguages = [
     OpenFoodFactsLanguage.ENGLISH,
@@ -44,6 +45,7 @@ void main() {
       final Map<String, TaxonomyIngredient>? ingredients =
           await OpenFoodAPIClient.getTaxonomyIngredients(
             TaxonomyIngredientQueryConfiguration.roots(fields: fields),
+            uriHelper: uriHelper,
           );
       expect(ingredients, isNotNull);
       expect(ingredients!.length, greaterThan(700)); // was 795 on 2023-08-12
@@ -60,6 +62,7 @@ void main() {
               tags: <String>[knownTag],
               fields: fields,
             ),
+            uriHelper: uriHelper,
           );
       expect(ingredients, isNotNull);
       expect(ingredients!.length, 1);
@@ -74,6 +77,7 @@ void main() {
               tags: <String>[unknownTag],
               fields: fields,
             ),
+            uriHelper: uriHelper,
           );
       expect(ingredients, isNull);
     });
@@ -85,6 +89,7 @@ void main() {
               tags: <String>[unknownTag, knownTag],
               fields: fields,
             ),
+            uriHelper: uriHelper,
           );
       expect(ingredients, isNotNull);
       expect(ingredients!.length, 1);
