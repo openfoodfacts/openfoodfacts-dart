@@ -119,6 +119,7 @@ void main() {
           taxonomyNames: <TaxonomyName>[TaxonomyName.brand],
           // for brands, language must be English
           language: OpenFoodFactsLanguage.ENGLISH,
+          // looks like we need to be in PROD for brands
           uriHelper: uriHelperFoodProd,
         ),
       ),
