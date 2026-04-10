@@ -808,15 +808,15 @@ void main() {
     const String barcode = '111111555555';
 
     Future<void> uploadProduct({required bool noNutritionData}) async {
+      const perSize = PerSize.oneHundredGrams;
       final Status status = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         Product(
           barcode: barcode,
-          nutrimentDataPer: PerSize.oneHundredGrams.offTag,
+          nutrimentDataPer: perSize.offTag,
           noNutritionData: noNutritionData,
           nutriments: noNutritionData != true
-              ? (Nutriments.empty()
-                  ..setValue(Nutrient.salt, 10.0, unit: Unit.G))
+              ? (Nutriments.empty()..setValue(Nutrient.salt, perSize, 10.0))
               : null,
         ),
         uriHelper: uriHelper,
@@ -876,52 +876,40 @@ void main() {
 
       expect(nutriments.isEmpty(), isTrue);
 
-      nutriments.setValue(Nutrient.calcium, 12, unit: Unit.MILLI_G);
+      const perSize = PerSize.oneHundredGrams;
+
+      nutriments.setValue(Nutrient.calcium, perSize, 12);
       expect(nutriments.isEmpty(), isFalse);
 
-      nutriments.deleteValue(Nutrient.calcium);
+      nutriments.setValue(Nutrient.calcium, perSize, null);
       expect(nutriments.isEmpty(), isFalse);
     });
   }, timeout: Timeout(Duration(seconds: 90)));
 
-  test('nutrient units and modifiers', () async {
-    const String barcode = '3760253400008';
-    const Nutrient nutrient = Nutrient.fiber;
-    const double value = 123;
-    const unit = Unit.G;
-    const PerSize inputPerSize = PerSize.serving;
-    const servingSize = '250 g';
-    const double servingQuantity = 250;
-    const double servingFactor = 100 / servingQuantity;
+  test('nutrient modifiers', () async {
+    const String barcode = '7622210449283';
+    const Nutrient nutrient = Nutrient.fiber; // used to be 4g / 100g
+    double value = 50;
+    const perSize = PerSize.oneHundredGrams;
 
-    for (int i = 0; i < NutrientModifier.values.length + 2; i++) {
+    for (int i = 0; i < NutrientModifier.values.length + 1; i++) {
       final Nutriments inputNutriments = Nutriments.empty();
       NutrientModifier? modifier;
-      final bool deleting = i == 0;
-      if (deleting) {
-        inputNutriments.deleteValue(nutrient);
+      if (i == 0) {
+        modifier = null;
       } else {
-        if (i == 1) {
-          modifier = null;
-        } else {
-          modifier = NutrientModifier.values[i - 2];
-        }
-        inputNutriments.setValue(
-          nutrient,
-          value,
-          unit: unit,
-          modifier: modifier,
-        );
+        modifier = NutrientModifier.values[i - 1];
       }
+      inputNutriments.setValue(nutrient, perSize, ++value, modifier: modifier);
 
       final Status savedStatus = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         Product(
           barcode: barcode,
           nutriments: inputNutriments,
-          nutrimentDataPer: inputPerSize.offTag,
-          servingSize: servingSize,
-          servingQuantity: servingQuantity,
+          nutrimentDataPer: perSize.offTag,
+          servingSize: '250g',
+          servingQuantity: 250,
           noNutritionData: false,
         ),
         uriHelper: uriHelper,
@@ -933,13 +921,7 @@ void main() {
           barcode,
           language: OpenFoodFactsLanguage.FRENCH,
           country: OpenFoodFactsCountry.FRANCE,
-          fields: [
-            ProductField.NUTRIMENTS,
-            ProductField.NUTRIMENT_DATA_PER,
-            ProductField.OWNER_FIELDS,
-            ProductField.SERVING_SIZE,
-            ProductField.SERVING_QUANTITY,
-          ],
+          fields: [ProductField.NUTRIMENTS],
           version: ProductQueryVersion.v3,
         ),
         uriHelper: uriHelper,
@@ -953,16 +935,10 @@ void main() {
       expect(product.nutriments, isNotNull);
       final Nutriments nutriments = product.nutriments!;
 
-      expect(product.nutrimentDataPer, PerSize.oneHundredGrams.offTag);
-
+      expect(nutriments.isEmpty(isNullEmpty: true), isFalse);
+      expect(nutriments.isEmpty(isNullEmpty: false), isFalse);
       expect(nutriments.getModifier(nutrient), modifier);
-      if (deleting) {
-        expect(nutriments.getValue(nutrient), null);
-        expect(nutriments.getUnit(nutrient), null);
-      } else {
-        expect(nutriments.getValue(nutrient), value * servingFactor);
-        expect(nutriments.getUnit(nutrient), unit);
-      }
+      expect(nutriments.getValue(nutrient, perSize), value);
     }
   }, timeout: Timeout(Duration(seconds: 180)));
 }
