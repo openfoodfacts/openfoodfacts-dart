@@ -12,6 +12,11 @@ class TsvHelper {
 
   static const String _tabSeparator = '\t';
   static const String _unknownValue = 'unknown';
+
+  // The offline TSV dump exports product names using pseudo-JSON
+  // with single quotes (e.g. [{'lang': main, 'text': Name}]) instead of
+  // valid JSON double quotes. Because Dart's jsonDecode strictly requires
+  // double quotes, we use RegExp to parse this efficiently.
   static final RegExp _langTextPattern = RegExp(
     r"\{'lang':\s*(\w+)\s*,\s*'text':\s*(.+?)\s*\}",
   );
