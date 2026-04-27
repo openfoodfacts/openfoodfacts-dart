@@ -175,6 +175,7 @@ export 'src/utils/tag_type.dart';
 export 'src/utils/tag_type_autocompleter.dart';
 export 'src/utils/too_many_requests_exception.dart';
 export 'src/utils/too_many_requests_manager.dart';
+export 'src/utils/tsv_helper.dart';
 export 'src/utils/unit_helper.dart';
 export 'src/utils/uri_helper.dart';
 export 'src/utils/uri_reader.dart';
