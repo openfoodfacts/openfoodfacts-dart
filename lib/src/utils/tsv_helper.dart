@@ -1,14 +1,10 @@
-import 'dart:convert';
-
 import '../model/product.dart';
 import 'language_helper.dart';
 
 /// Utility for parsing Open Food Facts TSV database export lines.
 /// Designed for streaming 4M+ line datasets
 class TsvHelper {
-  final bool useRegexp;
-
-  TsvHelper({this.useRegexp = true});
+  TsvHelper();
 
   static const String _tabSeparator = '\t';
   static const String _unknownValue = 'unknown';
@@ -29,7 +25,7 @@ class TsvHelper {
 
     if (columns.length != 7) {
       throw Exception(
-        'Bad number of columns: 7 expected, ${columns.length} instead',
+        'Bad number of columns: 7 expected, ${columns.length} instead.',
       );
     }
 
@@ -38,6 +34,7 @@ class TsvHelper {
     final quantity = _cleanValue(columns[2]);
     final brands = _cleanValue(columns[3]);
     final nutriscore = _cleanUnknown(columns[4]);
+    final novaGroup = columns[5].isEmpty ? null : int.tryParse(columns[5]);
     final ecoscoreGrade = _cleanUnknown(columns[6]);
 
     final product = Product(
@@ -49,7 +46,7 @@ class TsvHelper {
       nutriscore: nutriscore,
       ecoscoreGrade: ecoscoreGrade,
     );
-    product.novaGroup = columns[5].isEmpty ? null : int.tryParse(columns[5]);
+    product.novaGroup = novaGroup;
 
     return product;
   }
@@ -78,59 +75,29 @@ class TsvHelper {
     String? mainName;
     final languages = <OpenFoodFactsLanguage, String>{};
 
-    if (useRegexp) {
-      final matches = _langTextPattern.allMatches(rawData);
-      if (matches.isEmpty) {
-        return null;
+    final matches = _langTextPattern.allMatches(rawData);
+    if (matches.isEmpty) {
+      return null;
+    }
+
+    for (final match in matches) {
+      final langCode = match.group(1);
+      final text = match
+          .group(2)
+          ?.trim(); // Text might have trailing spaces before closing brace
+
+      if (langCode == null || text == null || text.isEmpty) {
+        continue;
       }
 
-      for (final match in matches) {
-        final langCode = match.group(1);
-        final text = match
-            .group(2)
-            ?.trim(); // Text might have trailing spaces before closing brace
-
-        if (langCode == null || text == null || text.isEmpty) {
-          continue;
-        }
-
-        if (langCode == 'main') {
-          mainName = text;
-          continue;
-        }
-
-        final language = _mapLanguageCode(langCode);
-        if (language != null) {
-          languages[language] = text;
-        }
+      if (langCode == 'main') {
+        mainName = text;
+        continue;
       }
-    } else {
-      try {
-        final List<dynamic> jsonList = jsonDecode(rawData);
-        for (final item in jsonList) {
-          if (item is Map<String, dynamic>) {
-            final langCode = item['lang']?.toString();
-            final text = item['text']?.toString().trim();
 
-            if (langCode == null || text == null || text.isEmpty) {
-              continue;
-            }
-
-            if (langCode == 'main') {
-              mainName = text;
-              continue;
-            }
-
-            final language = _mapLanguageCode(langCode);
-            if (language != null) {
-              languages[language] = text;
-            }
-          }
-        }
-      } catch (_) {
-        // We catch and swallow exceptions here because the database dump
-        // often contains malformed pseudo-JSON. This ensures the parsing
-        // stream does not gracefully fail on a single corrupted row.
+      final language = _mapLanguageCode(langCode);
+      if (language != null) {
+        languages[language] = text;
       }
     }
 
