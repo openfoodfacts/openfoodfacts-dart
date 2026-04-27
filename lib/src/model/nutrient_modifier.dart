@@ -1,10 +1,13 @@
 import 'off_tagged.dart';
 
 /// Modifier for the nutrient values.
+///
+/// cf. https://github.com/openfoodfacts/openfoodfacts-server/blob/main/lib/ProductOpener/Nutrition.pm
 enum NutrientModifier implements OffTagged {
-  /// The nutrient value isn't explicitly specified on the product packaging.
-  valueNotSpecified(offTag: '-'),
+  // TODO(monsieurtanuki) add and test valueNotSpecified(offTag: '-'),
   approximately(offTag: '~'),
+  maximum(offTag: '\u{2264}'),
+  minimum(offTag: '\u{2265}'),
   greaterThan(offTag: '>'),
   lessThan(offTag: '<');
 

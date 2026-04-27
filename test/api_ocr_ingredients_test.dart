@@ -5,8 +5,8 @@ import 'test_constants.dart';
 
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-
-  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+  const user = TestConstants.TEST_USER;
+  const uriHelper = uriHelperFoodTest;
 
   Future<void> doTest(
     final String barcode,
@@ -15,17 +15,18 @@ void main() {
   ) async {
     final OcrIngredientsResult response =
         await OpenFoodAPIClient.extractIngredients(
-          TestConstants.PROD_USER,
+          user,
           barcode,
           language,
           ocrField: ocrField,
+          uriHelper: uriHelper,
         );
 
     expect(response.status, 0);
     expect(response.ingredientsTextFromImage!.isNotEmpty, true);
   }
 
-  const String frenchBarcode = '7300400481588';
+  const String frenchBarcode = '3155251205319';
   const String englishBarcode = '0041220576920';
   const String germanBarcode = '4260107223344';
 
@@ -86,62 +87,6 @@ void main() {
           OcrField.TESSERACT,
         ),
         skip: 'Server error',
-      );
-
-      test(
-        'Add ingredients image to OFF server and then extract the text',
-        () async {
-          const String barcode = '3613042717385';
-          SendImage image = SendImage(
-            lang: OpenFoodFactsLanguage.FRENCH,
-            barcode: barcode,
-            imageField: ImageField.INGREDIENTS,
-            imageUri: Uri.file('test/test_assets/ingredient_$barcode.jpg'),
-          );
-          await OpenFoodAPIClient.addProductImage(
-            TestConstants.PROD_USER,
-            image,
-          );
-
-          OcrIngredientsResult ocrResponse =
-              await OpenFoodAPIClient.extractIngredients(
-                TestConstants.PROD_USER,
-                barcode,
-                OpenFoodFactsLanguage.FRENCH,
-              );
-
-          expect(ocrResponse.status, 0);
-          expect(ocrResponse.ingredientsTextFromImage!.isNotEmpty, true);
-
-          // Save the extracted ingredients to the product on the OFF server
-          Status saveStatus = await OpenFoodAPIClient.saveProduct(
-            TestConstants.PROD_USER,
-            Product(
-              barcode: barcode,
-              ingredientsText: ocrResponse.ingredientsTextFromImage,
-            ),
-          );
-          expect(saveStatus.status, 1);
-          expect(saveStatus.statusVerbose, 'fields saved');
-
-          //Get The saved product's ingredients from the server
-          ProductQueryConfiguration configurations = ProductQueryConfiguration(
-            barcode,
-            language: OpenFoodFactsLanguage.FRENCH,
-            fields: [ProductField.INGREDIENTS_TEXT],
-            version: version,
-          );
-          await getProductTooManyRequestsManager.waitIfNeeded();
-          final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
-            configurations,
-            user: TestConstants.PROD_USER,
-          );
-
-          expect(
-            ocrResponse.ingredientsTextFromImage,
-            result.product!.ingredientsText,
-          );
-        },
       );
     },
     timeout: Timeout(

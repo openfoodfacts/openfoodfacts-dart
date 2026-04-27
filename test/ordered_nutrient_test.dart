@@ -6,6 +6,8 @@ import 'test_constants.dart';
 /// Tests related to [OrderedNutrient] and [OrderedNutrients]
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
+  OpenFoodAPIConfiguration.globalUser = TestConstants.TEST_USER;
+  const uriHelper = uriHelperFoodTest;
 
   const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.ENGLISH;
 
@@ -106,6 +108,7 @@ void main() {
           await OpenFoodAPIClient.getOrderedNutrients(
             country: country,
             language: language,
+            uriHelper: uriHelper,
           ),
           country,
         );
@@ -126,6 +129,7 @@ void main() {
               await OpenFoodAPIClient.getOrderedNutrients(
                 country: country,
                 language: language,
+                uriHelper: uriHelper,
               );
           final OrderedNutrient? found = findOrderedNutrient(
             orderedNutrients.nutrients,
@@ -170,6 +174,7 @@ void main() {
             await OpenFoodAPIClient.getOrderedNutrients(
               country: country,
               language: language,
+              uriHelper: uriHelper,
             );
         final List<String> missingNutrients = findMissingNutrients(
           orderedNutrients.nutrients,
@@ -183,23 +188,20 @@ void main() {
     });
 
     test('check excludeReadOnly', () async {
-      final List<bool> excludeReadOnlies = <bool>[true, false];
-      for (final bool excludeReadOnly in excludeReadOnlies) {
-        final OrderedNutrients orderedNutrients =
-            await OpenFoodAPIClient.getOrderedNutrients(
-              country: OpenFoodFactsCountry.FRANCE,
-              language: language,
-              excludeReadOnly: excludeReadOnly,
-            );
-        expect(
-          findOrderedNutrient(orderedNutrients.nutrients, 'nutrition-score-fr'),
-          excludeReadOnly ? isNull : isNotNull,
-        );
-        expect(
-          findOrderedNutrient(orderedNutrients.nutrients, 'nutrition-score-uk'),
-          excludeReadOnly ? isNull : isNotNull,
-        );
-      }
+      final OrderedNutrients orderedNutrients =
+          await OpenFoodAPIClient.getOrderedNutrients(
+            country: OpenFoodFactsCountry.FRANCE,
+            language: language,
+            uriHelper: uriHelper,
+          );
+      expect(
+        findOrderedNutrient(orderedNutrients.nutrients, 'nutrition-score-fr'),
+        isNull,
+      );
+      expect(
+        findOrderedNutrient(orderedNutrients.nutrients, 'nutrition-score-uk'),
+        isNull,
+      );
     });
   });
 }

@@ -84,9 +84,6 @@ void main() {
         }
       });
     },
-    timeout: Timeout(
-      // some tests can be slow here
-      Duration(seconds: 300),
-    ),
+    skip: 'Cannot be tested on TEST env as domains do not exist',
   );
 }

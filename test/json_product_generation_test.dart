@@ -21,6 +21,7 @@ void main() {
     ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
       configurations,
       user: TestConstants.TEST_USER,
+      uriHelper: uriHelperFoodTest,
     );
     expect(result.status, ProductResultV3.statusSuccess);
     Product product = result.product!;

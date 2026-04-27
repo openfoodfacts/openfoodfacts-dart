@@ -23,9 +23,6 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalUser = TestConstants.TEST_USER;
 
-  const TagType tagType = TagType.COUNTRIES;
-  const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
-
   const int millisecondsWait = 3000;
 
   const String input1 = 'f';
@@ -63,9 +60,9 @@ void main() {
   group('$OpenFoodAPIClient suggestion manager', () {
     Future<void> testSpeed(final Autocompleter autocompleter) async {
       final AutocompleteManager manager = AutocompleteManager(autocompleter);
-      final List<String> countries1 = await manager.getSuggestions(input1);
-      final List<String> countries2 = await manager.getSuggestions(input2);
-      expect(countries1, isNot(equals(countries2)));
+      final List<String> suggestions1 = await manager.getSuggestions(input1);
+      final List<String> suggestions2 = await manager.getSuggestions(input2);
+      expect(suggestions1, isNot(equals(suggestions2)));
 
       // Here we have the second call that takes longer (at least starts later).
       final AutocompleteManager fastThenSlowManager = _SuggestionManagerTest(
@@ -73,11 +70,11 @@ void main() {
         // the second will start later
         milliSecondWaits: <int>[0, millisecondsWait],
       );
-      final List<String> countriesFastThenSlow = await last([
+      final List<String> suggestionsFastThenSlow = await last([
         fastThenSlowManager.getSuggestions(input1),
         fastThenSlowManager.getSuggestions(input2),
       ]);
-      expect(countriesFastThenSlow, countries2);
+      expect(suggestionsFastThenSlow, suggestions2);
 
       // Here we have the first call that takes longer (at least starts later).
       final AutocompleteManager slowThenFastManager = _SuggestionManagerTest(
@@ -85,15 +82,15 @@ void main() {
         // the first will start later
         milliSecondWaits: <int>[millisecondsWait, 0],
       );
-      final List<String> countriesSlowThenFast = await last([
+      final List<String> suggestionsSlowThenFast = await last([
         slowThenFastManager.getSuggestions(input1),
         slowThenFastManager.getSuggestions(input2),
       ]);
       // regardless, we expect the suggestion for the latest input.
-      expect(countriesSlowThenFast, countries2);
+      expect(suggestionsSlowThenFast, suggestions2);
 
       // without the manager, we always get the slower result.
-      final List<String> countriesNormal = await last([
+      final List<String> suggestionsNormal = await last([
         getSlowSuggestions(
           autocompleter,
           input: input1,
@@ -101,21 +98,29 @@ void main() {
         ),
         autocompleter.getSuggestions(input2),
       ]);
-      expect(countriesNormal, countries1);
+      expect(suggestionsNormal, suggestions1);
     }
 
     test(
       'countries as TagType',
-      () async =>
-          testSpeed(TagTypeAutocompleter(tagType: tagType, language: language)),
+      () async => testSpeed(
+        TagTypeAutocompleter(
+          tagType: TagType.COUNTRIES,
+          language: OpenFoodFactsLanguage.FRENCH,
+          uriHelper: uriHelperFoodTest,
+        ),
+      ),
     );
 
     test(
-      'countries as TaxonomyName',
+      'brands as TaxonomyName',
       () async => testSpeed(
         TaxonomyNameAutocompleter(
-          taxonomyNames: <TaxonomyName>[TaxonomyName.country],
-          language: language,
+          taxonomyNames: <TaxonomyName>[TaxonomyName.brand],
+          // for brands, language must be English
+          language: OpenFoodFactsLanguage.ENGLISH,
+          // looks like we need to be in PROD for brands
+          uriHelper: uriHelperFoodProd,
         ),
       ),
     );
