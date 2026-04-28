@@ -18,7 +18,7 @@ dev_dependencies:
   build_runner: 2.14.1
   json_serializable: 6.11.2
   lints: 6.1.0
-  test: 1.31.0
+  test: 1.31.1
   coverage: 1.15.0
 
 funding:
