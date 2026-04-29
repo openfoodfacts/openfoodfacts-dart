@@ -30,7 +30,7 @@ void main() {
       expect(product.barcode, expectedBarcode);
       expect(product.quantity, expectedQuantity);
       expect(product.brands, expectedBrands);
-      expect(product.nutriscore, isNull);
+      expect(product.nutriscore, rawNutriscore);
       expect(product.novaGroup, expectedNovaGroup);
       expect(product.ecoscoreGrade, isNull);
       expect(product.productName, expectedName);
@@ -118,7 +118,7 @@ void main() {
       );
     });
 
-    test('maps literal unknown ecoscore to null', () {
+    test('preserves unknown ecoscore as string value', () {
       const expectedBarcode = '1234567890123';
       const expectedName = 'Test Product';
       const expectedQuantity = '100g';
@@ -140,7 +140,7 @@ void main() {
 
       final product = TsvHelper().extractTSVLine(line);
 
-      expect(product.ecoscoreGrade, isNull);
+      expect(product.ecoscoreGrade, rawEcoscoreGrade);
       expect(product.nutriscore, expectedNutriscore);
       expect(product.novaGroup, expectedNovaGroup);
     });
@@ -285,6 +285,34 @@ void main() {
         product.productNameInLanguages![OpenFoodFactsLanguage.ENGLISH],
         expectedEnName,
       );
+    });
+
+    test('preserves not-applicable nutriscore and unknown ecoscore as strings',
+        () {
+      const expectedBarcode = '1234567890123';
+      const expectedName = 'Test Product';
+      const expectedQuantity = '100g';
+      const expectedBrands = 'Brand';
+      const rawNutriscore = 'not-applicable';
+      const rawNovaGroup = '3';
+      const rawEcoscoreGrade = 'unknown';
+      final namesRaw =
+          "[{'lang': main, 'text': $expectedName}, {'lang': en, 'text': $expectedName}]";
+      final line = [
+        expectedBarcode,
+        namesRaw,
+        expectedQuantity,
+        expectedBrands,
+        rawNutriscore,
+        rawNovaGroup,
+        rawEcoscoreGrade,
+      ].join('\t');
+
+      final product = TsvHelper().extractTSVLine(line);
+
+      expect(product.nutriscore, 'not-applicable');
+      expect(product.ecoscoreGrade, 'unknown');
+      expect(product.novaGroup, 3);
     });
   });
 }

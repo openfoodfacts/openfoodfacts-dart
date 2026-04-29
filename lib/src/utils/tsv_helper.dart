@@ -7,7 +7,6 @@ class TsvHelper {
   TsvHelper();
 
   static const String _tabSeparator = '\t';
-  static const String _unknownValue = 'unknown';
 
   // The offline TSV dump exports product names using pseudo-JSON
   // with single quotes (e.g. [{'lang': main, 'text': Name}]) instead of
@@ -33,9 +32,9 @@ class TsvHelper {
     final parsedNames = _parseProductNames(columns[1]);
     final quantity = _cleanValue(columns[2]);
     final brands = _cleanValue(columns[3]);
-    final nutriscore = _cleanUnknown(columns[4]);
+    final nutriscore = _cleanValue(columns[4]);
     final novaGroup = columns[5].isEmpty ? null : int.tryParse(columns[5]);
-    final ecoscoreGrade = _cleanUnknown(columns[6]);
+    final ecoscoreGrade = _cleanValue(columns[6]);
 
     final product = Product(
       barcode: barcode,
@@ -53,13 +52,6 @@ class TsvHelper {
 
   String? _cleanValue(String value) {
     if (value.isEmpty) {
-      return null;
-    }
-    return value;
-  }
-
-  String? _cleanUnknown(String value) {
-    if (value.isEmpty || value == _unknownValue) {
       return null;
     }
     return value;
