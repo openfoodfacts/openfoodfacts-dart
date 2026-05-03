@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.31.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.30.2...v3.31.0) (2026-05-03)
+
+
+### Features
+
+* [#1158](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1158) - Add quantityString and safely type productQuantity to num ([#1212](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1212)) ([b560bee](https://github.com/openfoodfacts/openfoodfacts-dart/commit/b560beece983d5f2aa7fbc4f16ff9c338e5bbafa))
+* 1216 - added iso3code, nativeName and englishName to languages ([#1218](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1218)) ([ca4bd2f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ca4bd2fb16936f23a432105dcc6cf103b13c9236))
+* 871 - support nutrient units and modifiers ([#1178](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1178)) ([805a9a8](https://github.com/openfoodfacts/openfoodfacts-dart/commit/805a9a8375e7480367ad5a027035bde6d8f35e84))
+* upgrade for create and upgrade price objects and methods ([#1189](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1189)) ([03943ec](https://github.com/openfoodfacts/openfoodfacts-dart/commit/03943ec17e43d3f333fdbf59ea6bce4120520efd))
+
+
+### Bug Fixes
+
+* 1217 - clean error when incorrect credentials ([#1219](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1219)) ([6c32341](https://github.com/openfoodfacts/openfoodfacts-dart/commit/6c323416ec94f84eb6785bee59790aefd16098c7))
+
 ## [3.30.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.30.1...v3.30.2) (2026-02-15)
 
 
