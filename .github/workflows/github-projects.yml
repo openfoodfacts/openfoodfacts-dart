@@ -151,4 +151,4 @@ jobs:
           project-url: https://github.com/orgs/openfoodfacts/projects/162 # Add issue to the 3rd party kp project
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labeled: 3rd party Knowledge Panels
-          label-operator: OR 
+          label-operator: OR
