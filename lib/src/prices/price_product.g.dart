@@ -15,16 +15,19 @@ PriceProduct _$PriceProductFromJson(Map<String, dynamic> json) => PriceProduct()
   ..productId = (json['id'] as num).toInt()
   ..source = $enumDecodeNullable(_$FlavorEnumMap, json['source'])
   ..name = json['product_name'] as String?
-  ..quantity = (json['product_quantity'] as num?)?.toInt()
+  ..quantityString = json['quantity'] as String?
+  ..productQuantity = json['product_quantity'] as num?
   ..quantityUnit = json['product_quantity_unit'] as String?
   ..categoriesTags = (json['categories_tags'] as List<dynamic>)
       .map((e) => e as String)
       .toList()
   ..brands = json['brands'] as String?
-  ..brandsTags =
-      (json['brands_tags'] as List<dynamic>).map((e) => e as String).toList()
-  ..labelsTags =
-      (json['labels_tags'] as List<dynamic>).map((e) => e as String).toList()
+  ..brandsTags = (json['brands_tags'] as List<dynamic>)
+      .map((e) => e as String)
+      .toList()
+  ..labelsTags = (json['labels_tags'] as List<dynamic>)
+      .map((e) => e as String)
+      .toList()
   ..imageURL = json['image_url'] as String?
   ..nutriscoreGrade = json['nutriscore_grade'] as String?
   ..ecoscoreGrade = json['ecoscore_grade'] as String?
@@ -43,7 +46,8 @@ Map<String, dynamic> _$PriceProductToJson(PriceProduct instance) =>
       'id': instance.productId,
       'source': _$FlavorEnumMap[instance.source],
       'product_name': instance.name,
-      'product_quantity': instance.quantity,
+      'quantity': instance.quantityString,
+      'product_quantity': instance.productQuantity,
       'product_quantity_unit': instance.quantityUnit,
       'categories_tags': instance.categoriesTags,
       'brands': instance.brands,

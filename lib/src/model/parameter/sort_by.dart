@@ -1,22 +1,13 @@
+import '../off_tagged.dart';
 import '../../interface/parameter.dart';
 
 /// Sort search API parameter
 class SortBy extends Parameter {
-  static const Map<SortOption, String> _VALUES = {
-    SortOption.PRODUCT_NAME: 'product_name',
-    SortOption.CREATED: 'created_t',
-    SortOption.EDIT: 'last_modified_t',
-    SortOption.POPULARITY: 'unique_scans_n',
-    SortOption.NOTHING: 'nothing',
-    SortOption.ECOSCORE: 'ecoscore_score',
-    SortOption.NUTRISCORE: 'nutriscore_score',
-  };
-
   @override
   String getName() => 'sort_by';
 
   @override
-  String getValue() => _VALUES[option] ?? 'unique_scans_n';
+  String getValue() => (option ?? SortOption.POPULARITY).offTag;
 
   final SortOption? option;
 
@@ -24,12 +15,17 @@ class SortBy extends Parameter {
 }
 
 /// Possible sort options for search API
-enum SortOption {
-  POPULARITY,
-  PRODUCT_NAME,
-  CREATED,
-  EDIT,
-  NOTHING,
-  ECOSCORE,
-  NUTRISCORE,
+enum SortOption implements OffTagged {
+  POPULARITY(offTag: 'unique_scans_n'),
+  PRODUCT_NAME(offTag: 'product_name'),
+  CREATED(offTag: 'created_t'),
+  EDIT(offTag: 'last_modified_t'),
+  NOTHING(offTag: 'nothing'),
+  ECOSCORE(offTag: 'ecoscore_score'),
+  NUTRISCORE(offTag: 'nutriscore_score');
+
+  const SortOption({required this.offTag});
+
+  @override
+  final String offTag;
 }

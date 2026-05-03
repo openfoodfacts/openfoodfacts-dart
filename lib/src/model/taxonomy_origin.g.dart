@@ -10,23 +10,23 @@ TaxonomyOrigin _$TaxonomyOriginFromJson(Map<String, dynamic> json) =>
     TaxonomyOrigin()
       ..name = LanguageHelper.fromJsonStringMap(json['name'])
       ..synonyms = LanguageHelper.fromJsonStringMapList(json['synonyms'])
-      ..children =
-          (json['children'] as List<dynamic>?)?.map((e) => e as String).toList()
-      ..parents =
-          (json['parents'] as List<dynamic>?)?.map((e) => e as String).toList();
+      ..children = (json['children'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
+      ..parents = (json['parents'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList();
 
 Map<String, dynamic> _$TaxonomyOriginToJson(TaxonomyOrigin instance) =>
     <String, dynamic>{
-      if (instance.name
-              ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e))
-          case final value?)
-        'name': value,
-      if (instance.synonyms
-              ?.map((k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e))
-          case final value?)
-        'synonyms': value,
-      if (instance.children case final value?) 'children': value,
-      if (instance.parents case final value?) 'parents': value,
+      'name': ?instance.name?.map(
+        (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+      ),
+      'synonyms': ?instance.synonyms?.map(
+        (k, e) => MapEntry(_$OpenFoodFactsLanguageEnumMap[k]!, e),
+      ),
+      'children': ?instance.children,
+      'parents': ?instance.parents,
     };
 
 const _$OpenFoodFactsLanguageEnumMap = {

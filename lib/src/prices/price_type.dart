@@ -9,9 +9,7 @@ enum PriceType implements OffTagged {
   @JsonValue('CATEGORY')
   category(offTag: 'CATEGORY');
 
-  const PriceType({
-    required this.offTag,
-  });
+  const PriceType({required this.offTag});
 
   @override
   final String offTag;

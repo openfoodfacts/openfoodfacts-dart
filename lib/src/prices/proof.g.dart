@@ -16,8 +16,10 @@ Proof _$ProofFromJson(Map<String, dynamic> json) => Proof()
   ..receiptPriceCount = (json['receipt_price_count'] as num?)?.toInt()
   ..receiptPriceTotal = json['receipt_price_total'] as num?
   ..locationOSMId = (json['location_osm_id'] as num?)?.toInt()
-  ..locationOSMType =
-      $enumDecodeNullable(_$LocationOSMTypeEnumMap, json['location_osm_type'])
+  ..locationOSMType = $enumDecodeNullable(
+    _$LocationOSMTypeEnumMap,
+    json['location_osm_type'],
+  )
   ..locationId = (json['location_id'] as num?)?.toInt()
   ..date = JsonHelper.nullableStringTimestampToDate(json['date'])
   ..currency = $enumDecodeNullable(_$CurrencyEnumMap, json['currency'])
@@ -31,32 +33,34 @@ Proof _$ProofFromJson(Map<String, dynamic> json) => Proof()
   ..readyForPriceTagValidation = json['ready_for_price_tag_validation'] as bool?
   ..ownerConsumption = json['owner_consumption'] as bool?
   ..ownerComment = json['owner_comment'] as String?
-  ..source = json['source'] as String?;
+  ..source = json['source'] as String?
+  ..detail = json['detail'] as String?;
 
 Map<String, dynamic> _$ProofToJson(Proof instance) => <String, dynamic>{
-      'id': instance.id,
-      'file_path': instance.filePath,
-      'image_thumb_path': instance.imageThumbPath,
-      'mimetype': instance.mimetype,
-      'type': _$ProofTypeEnumMap[instance.type],
-      'price_count': instance.priceCount,
-      'receipt_price_count': instance.receiptPriceCount,
-      'receipt_price_total': instance.receiptPriceTotal,
-      'location_osm_id': instance.locationOSMId,
-      'location_osm_type': _$LocationOSMTypeEnumMap[instance.locationOSMType],
-      'location_id': instance.locationId,
-      'date': instance.date?.toIso8601String(),
-      'currency': _$CurrencyEnumMap[instance.currency],
-      'owner': instance.owner,
-      'created': instance.created.toIso8601String(),
-      'updated': instance.updated?.toIso8601String(),
-      'location': instance.location,
-      'receipt_online_delivery_costs': instance.receiptOnlineDeliveryCosts,
-      'ready_for_price_tag_validation': instance.readyForPriceTagValidation,
-      'owner_consumption': instance.ownerConsumption,
-      'owner_comment': instance.ownerComment,
-      'source': instance.source,
-    };
+  'id': instance.id,
+  'file_path': instance.filePath,
+  'image_thumb_path': instance.imageThumbPath,
+  'mimetype': instance.mimetype,
+  'type': _$ProofTypeEnumMap[instance.type],
+  'price_count': instance.priceCount,
+  'receipt_price_count': instance.receiptPriceCount,
+  'receipt_price_total': instance.receiptPriceTotal,
+  'location_osm_id': instance.locationOSMId,
+  'location_osm_type': _$LocationOSMTypeEnumMap[instance.locationOSMType],
+  'location_id': instance.locationId,
+  'date': instance.date?.toIso8601String(),
+  'currency': _$CurrencyEnumMap[instance.currency],
+  'owner': instance.owner,
+  'created': instance.created.toIso8601String(),
+  'updated': instance.updated?.toIso8601String(),
+  'location': instance.location,
+  'receipt_online_delivery_costs': instance.receiptOnlineDeliveryCosts,
+  'ready_for_price_tag_validation': instance.readyForPriceTagValidation,
+  'owner_consumption': instance.ownerConsumption,
+  'owner_comment': instance.ownerComment,
+  'source': instance.source,
+  'detail': instance.detail,
+};
 
 const _$ProofTypeEnumMap = {
   ProofType.priceTag: 'PRICE_TAG',

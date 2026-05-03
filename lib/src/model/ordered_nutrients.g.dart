@@ -14,6 +14,4 @@ OrderedNutrients _$OrderedNutrientsFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$OrderedNutrientsToJson(OrderedNutrients instance) =>
-    <String, dynamic>{
-      'nutrients': instance.nutrients,
-    };
+    <String, dynamic>{'nutrients': instance.nutrients};

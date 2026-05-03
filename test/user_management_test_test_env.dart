@@ -46,11 +46,11 @@ void main() {
       expect(status, isNotNull);
       expect(status!.successful, isTrue);
       expect(status.userId, userId);
-      expect(status.userName, name);
-      expect(status.preferredLanguage, isNull);
-      expect(status.country, isNull);
-      expect(status.isAdmin, false);
-      expect(status.isModerator, false);
+      expect(status.userDetails.name, name);
+      expect(status.userDetails.preferredLanguage, isNull);
+      expect(status.userDetails.country, isNull);
+      expect(status.userDetails.isAdmin, false);
+      expect(status.userDetails.isModerator, false);
     });
 
     test('Login with invalid credentials', () async {

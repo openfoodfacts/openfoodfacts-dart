@@ -26,8 +26,8 @@ void main() {
     test('get root additives', () async {
       final Map<String, TaxonomyAdditive>? additives =
           await OpenFoodAPIClient.getTaxonomyAdditives(
-        TaxonomyAdditiveQueryConfiguration.roots(),
-      );
+            TaxonomyAdditiveQueryConfiguration.roots(),
+          );
       expect(additives, isNotNull);
       expect(additives!.length, greaterThan(500)); // was 540 on 2022-02-25
     });
@@ -35,10 +35,8 @@ void main() {
     test('get an additive', () async {
       final Map<String, TaxonomyAdditive>? additives =
           await OpenFoodAPIClient.getTaxonomyAdditives(
-        TaxonomyAdditiveQueryConfiguration(
-          tags: <String>[knownTag],
-        ),
-      );
+            TaxonomyAdditiveQueryConfiguration(tags: <String>[knownTag]),
+          );
       expect(additives, isNotNull);
       expect(additives!.length, equals(1));
       final TaxonomyAdditive additive = additives[knownTag]!;
@@ -48,20 +46,18 @@ void main() {
     test("get an additive that doesn't exist", () async {
       final Map<String, TaxonomyAdditive>? categories =
           await OpenFoodAPIClient.getTaxonomyAdditives(
-        TaxonomyAdditiveQueryConfiguration(
-          tags: <String>[unknownTag],
-        ),
-      );
+            TaxonomyAdditiveQueryConfiguration(tags: <String>[unknownTag]),
+          );
       expect(categories, isNull);
     });
 
     test("get an additive that doesn't exist with one that does", () async {
       final Map<String, TaxonomyAdditive>? additives =
           await OpenFoodAPIClient.getTaxonomyAdditives(
-        TaxonomyAdditiveQueryConfiguration(
-          tags: <String>[unknownTag, knownTag],
-        ),
-      );
+            TaxonomyAdditiveQueryConfiguration(
+              tags: <String>[unknownTag, knownTag],
+            ),
+          );
       expect(additives, isNotNull);
       expect(additives!.length, equals(1));
       final TaxonomyAdditive additive = additives[knownTag]!;

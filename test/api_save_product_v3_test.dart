@@ -8,6 +8,8 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   const UriProductHelper uriHelper = uriHelperFoodTest;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   group('$OpenFoodAPIClient save product V3', () {
     const String barcode = '7300400481588';
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
@@ -31,13 +33,13 @@ void main() {
       ];
       final ProductResultV3 status =
           await OpenFoodAPIClient.temporarySaveProductV3(
-        TestConstants.TEST_USER,
-        barcode,
-        uriHelper: uriHelper,
-        country: country,
-        language: language,
-        packagings: inputPackagings,
-      );
+            TestConstants.TEST_USER,
+            barcode,
+            uriHelper: uriHelper,
+            country: country,
+            language: language,
+            packagings: inputPackagings,
+          );
 
       expect(status.status, ProductResultV3.statusWarning);
       expect(status.errors, isEmpty);
@@ -78,13 +80,13 @@ void main() {
       for (final bool value in values) {
         final ProductResultV3 writeStatus =
             await OpenFoodAPIClient.temporarySaveProductV3(
-          TestConstants.TEST_USER,
-          barcode,
-          uriHelper: uriHelper,
-          country: country,
-          language: language,
-          packagingsComplete: value,
-        );
+              TestConstants.TEST_USER,
+              barcode,
+              uriHelper: uriHelper,
+              country: country,
+              language: language,
+              packagingsComplete: value,
+            );
 
         expect(writeStatus.status, ProductResultV3.statusSuccess);
         expect(writeStatus.errors, isEmpty);
@@ -99,11 +101,8 @@ void main() {
             barcode,
             language: language,
             country: country,
-            version: ProductQueryVersion.v3,
-            fields: [
-              ProductField.BARCODE,
-              ProductField.PACKAGINGS_COMPLETE,
-            ],
+            version: version,
+            fields: [ProductField.BARCODE, ProductField.PACKAGINGS_COMPLETE],
           ),
           user: TestConstants.TEST_USER,
           uriHelper: uriHelper,
@@ -134,13 +133,13 @@ void main() {
       ];
       final ProductResultV3 status =
           await OpenFoodAPIClient.temporarySaveProductV3(
-        TestConstants.TEST_USER,
-        barcode,
-        uriHelper: uriHelper,
-        country: country,
-        language: language,
-        packagings: inputPackagings,
-      );
+            TestConstants.TEST_USER,
+            barcode,
+            uriHelper: uriHelper,
+            country: country,
+            language: language,
+            packagings: inputPackagings,
+          );
 
       expect(status.status, ProductResultV3.statusWarning);
       expect(status.errors, isEmpty);
@@ -154,7 +153,7 @@ void main() {
       final ProductPackaging packaging = packagings.first;
       // we send crap data, we get "corrected" results.
       expect(packaging.numberOfUnits, isNull);
-      expect(packaging.weightMeasured, 0);
+      expect(packaging.weightMeasured, isNull);
 
       expect(status.warnings, isNotEmpty);
       expect(status.warnings, hasLength(2));
@@ -173,8 +172,8 @@ void main() {
           expect(answer.message!.lcName, isNotNull);
         } else if (answer.field!.id == 'weight_measured') {
           expect(answer.field!.value, weightMeasured.toString());
-          expect(answer.field!.valuedConverted, 0.toString());
-          expect(answer.impact!.id, 'value_converted');
+          expect(answer.field!.valuedConverted, isNull);
+          expect(answer.impact!.id, 'field_ignored');
           expect(answer.impact!.name, isNotNull);
           expect(answer.impact!.lcName, isNotNull);
           expect(answer.message!.id, 'invalid_type_must_be_number');

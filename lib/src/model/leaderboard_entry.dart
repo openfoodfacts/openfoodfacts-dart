@@ -12,10 +12,7 @@ class LeaderboardEntry extends JsonObject {
   @JsonKey()
   final int score;
 
-  LeaderboardEntry({
-    required this.score,
-    this.userId,
-  });
+  LeaderboardEntry({required this.score, this.userId});
 
   factory LeaderboardEntry.fromJson(Map<String, dynamic> json) =>
       _$LeaderboardEntryFromJson(json);
@@ -24,7 +21,8 @@ class LeaderboardEntry extends JsonObject {
   Map<String, dynamic> toJson() => _$LeaderboardEntryToJson(this);
 
   @override
-  String toString() => 'LeaderboardEntry(score: $score'
+  String toString() =>
+      'LeaderboardEntry(score: $score'
       '${userId == null ? ', no user id' : ', userId: $userId'}'
       ')';
 }

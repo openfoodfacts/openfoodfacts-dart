@@ -11,11 +11,11 @@ void main() {
       const String barcode = '3274570800026';
       final RobotoffQuestionResult result =
           await RobotoffAPIClient.getProductQuestions(
-        barcode,
-        OpenFoodFactsLanguage.ENGLISH,
-        user: TestConstants.PROD_USER,
-        count: 1,
-      );
+            barcode,
+            OpenFoodFactsLanguage.ENGLISH,
+            user: TestConstants.PROD_USER,
+            count: 1,
+          );
 
       if (result.status != 'no_questions') {
         expect(result.status, isNotNull);
@@ -24,13 +24,19 @@ void main() {
         expect(result.questions![0].barcode, barcode);
         expect(result.questions![0].type, 'add-binary');
         expect(result.questions![0].value, 'Mollusc');
-        expect(result.questions![0].question,
-            'Does the product belong to this category?');
-        expect(result.questions![0].insightId,
-            'a919d649-2d3b-4da3-a123-5c3191d5c41c');
+        expect(
+          result.questions![0].question,
+          'Does the product belong to this category?',
+        );
+        expect(
+          result.questions![0].insightId,
+          'a919d649-2d3b-4da3-a123-5c3191d5c41c',
+        );
         expect(result.questions![0].insightType, InsightType.CATEGORY);
-        expect(result.questions![0].imageUrl,
-            'https://images.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg');
+        expect(
+          result.questions![0].imageUrl,
+          'https://images.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg',
+        );
       }
     });
 
@@ -38,10 +44,10 @@ void main() {
       const String barcode = '3274570800026';
       final RobotoffQuestionResult result =
           await RobotoffAPIClient.getProductQuestions(
-        barcode,
-        OpenFoodFactsLanguage.FRENCH,
-        user: TestConstants.PROD_USER,
-      );
+            barcode,
+            OpenFoodFactsLanguage.FRENCH,
+            user: TestConstants.PROD_USER,
+          );
 
       if (result.status != 'no_questions') {
         expect(result.status, isNotNull);
@@ -50,13 +56,19 @@ void main() {
         expect(result.questions![0].barcode, barcode);
         expect(result.questions![0].type, 'add-binary');
         expect(result.questions![0].value, 'Mollusques');
-        expect(result.questions![0].question,
-            'Le produit appartient-il à cette catégorie ?');
-        expect(result.questions![0].insightId,
-            'a919d649-2d3b-4da3-a123-5c3191d5c41c');
+        expect(
+          result.questions![0].question,
+          'Le produit appartient-il à cette catégorie ?',
+        );
+        expect(
+          result.questions![0].insightId,
+          'a919d649-2d3b-4da3-a123-5c3191d5c41c',
+        );
         expect(result.questions![0].insightType, InsightType.CATEGORY);
-        expect(result.questions![0].imageUrl,
-            'https://images.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg');
+        expect(
+          result.questions![0].imageUrl,
+          'https://images.openfoodfacts.org/images/products/327/457/080/0026/front_en.4.400.jpg',
+        );
       }
     });
 
@@ -66,11 +78,7 @@ void main() {
       final User user = TestConstants.PROD_USER;
 
       final RobotoffQuestionResult productsWithQuestions =
-          await RobotoffAPIClient.getQuestions(
-        language,
-        user: user,
-        count: 5,
-      );
+          await RobotoffAPIClient.getQuestions(language, user: user, count: 5);
 
       // For each question, check if we can get it with [getProductQuestions]
       // with the given insight type
@@ -88,88 +96,87 @@ void main() {
 
         final RobotoffQuestionResult result =
             await RobotoffAPIClient.getProductQuestions(
-          question.barcode!,
-          language,
-          user: user,
-          insightTypes: [insightType],
-        );
+              question.barcode!,
+              language,
+              user: user,
+              insightTypes: [insightType],
+            );
 
         final int count = result.questions!
-            .where((RobotoffQuestion productQuestion) =>
-                productQuestion.insightType == insightType)
+            .where(
+              (RobotoffQuestion productQuestion) =>
+                  productQuestion.insightType == insightType,
+            )
             .length;
 
         expect(count, greaterThan(0));
       }
     });
 
-    test('get popular questions with types', () async {
-      Future<List<RobotoffQuestion>> getTopPopularQuestions(
-        final OpenFoodFactsCountry country,
-      ) async {
-        const InsightType type = InsightType.CATEGORY;
-        const int numQuestions = 10;
-        final RobotoffQuestionResult result =
-            await RobotoffAPIClient.getQuestions(
-          OpenFoodFactsLanguage.GERMAN,
-          user: TestConstants.PROD_USER,
-          insightTypes: [type],
-          count: numQuestions,
-          countries: <OpenFoodFactsCountry>[country],
-          questionOrder: RobotoffQuestionOrder.popularity,
-        );
+    test(
+      'get popular questions with types',
+      () async {
+        Future<List<RobotoffQuestion>> getTopPopularQuestions(
+          final OpenFoodFactsCountry country,
+        ) async {
+          const InsightType type = InsightType.CATEGORY;
+          const int numQuestions = 10;
+          final RobotoffQuestionResult result =
+              await RobotoffAPIClient.getQuestions(
+                OpenFoodFactsLanguage.GERMAN,
+                user: TestConstants.PROD_USER,
+                insightTypes: [type],
+                count: numQuestions,
+                countries: <OpenFoodFactsCountry>[country],
+                questionOrder: RobotoffQuestionOrder.popularity,
+              );
 
-        expect(result.status, isNotNull);
-        expect(result.status, 'found');
-        expect(result.questions, isNotNull);
-        expect(result.questions!.length, numQuestions);
-        for (final RobotoffQuestion question in result.questions!) {
-          expect(question.insightType, type);
+          expect(result.status, isNotNull);
+          expect(result.status, 'found');
+          expect(result.questions, isNotNull);
+          expect(result.questions!.length, numQuestions);
+          for (final RobotoffQuestion question in result.questions!) {
+            expect(question.insightType, type);
+          }
+          return result.questions!;
         }
-        return result.questions!;
-      }
 
-      List<RobotoffQuestion> questions;
+        List<RobotoffQuestion> questions;
 
-      questions = await getTopPopularQuestions(
-        OpenFoodFactsCountry.GERMANY,
-      );
-      final List<String> germanBarcodes1 = <String>[];
-      for (final RobotoffQuestion question in questions) {
-        germanBarcodes1.add(question.barcode!);
-      }
+        questions = await getTopPopularQuestions(OpenFoodFactsCountry.GERMANY);
+        final List<String> germanBarcodes1 = <String>[];
+        for (final RobotoffQuestion question in questions) {
+          germanBarcodes1.add(question.barcode!);
+        }
 
-      questions = await getTopPopularQuestions(
-        OpenFoodFactsCountry.GERMANY,
-      );
-      final List<String> germanBarcodes2 = <String>[];
-      for (final RobotoffQuestion question in questions) {
-        germanBarcodes2.add(question.barcode!);
-      }
-      // highly probable
-      expect(germanBarcodes2, germanBarcodes1);
+        questions = await getTopPopularQuestions(OpenFoodFactsCountry.GERMANY);
+        final List<String> germanBarcodes2 = <String>[];
+        for (final RobotoffQuestion question in questions) {
+          germanBarcodes2.add(question.barcode!);
+        }
+        // highly probable
+        expect(germanBarcodes2, germanBarcodes1);
 
-      questions = await getTopPopularQuestions(
-        OpenFoodFactsCountry.FRANCE,
-      );
-      final List<String> frenchBarcodes1 = <String>[];
-      for (final RobotoffQuestion question in questions) {
-        frenchBarcodes1.add(question.barcode!);
-      }
-      // highly probable
-      expect(germanBarcodes2, isNot(frenchBarcodes1));
-    },
-        skip: 'a bit prone to 502 Bad Gateway',
-        timeout: Timeout(Duration(seconds: 90)));
+        questions = await getTopPopularQuestions(OpenFoodFactsCountry.FRANCE);
+        final List<String> frenchBarcodes1 = <String>[];
+        for (final RobotoffQuestion question in questions) {
+          frenchBarcodes1.add(question.barcode!);
+        }
+        // highly probable
+        expect(germanBarcodes2, isNot(frenchBarcodes1));
+      },
+      skip: 'a bit prone to 502 Bad Gateway',
+      timeout: Timeout(Duration(seconds: 90)),
+    );
 
     test('get 2 random questions with no specific type', () async {
       final RobotoffQuestionResult result =
           await RobotoffAPIClient.getQuestions(
-        OpenFoodFactsLanguage.FRENCH,
-        user: TestConstants.PROD_USER,
-        count: 2,
-        questionOrder: RobotoffQuestionOrder.random,
-      );
+            OpenFoodFactsLanguage.FRENCH,
+            user: TestConstants.PROD_USER,
+            count: 2,
+            questionOrder: RobotoffQuestionOrder.random,
+          );
 
       expect(result.status, isNotNull);
       expect(result.status, 'found');
@@ -223,9 +230,7 @@ void main() {
     String barcode = '3687080612292';
 
     final RobotoffNutrientExtractionResult result =
-        await RobotoffAPIClient.getNutrientExtraction(
-      barcode,
-    );
+        await RobotoffAPIClient.getNutrientExtraction(barcode);
 
     expect(result.status, isNotNull);
     expect(result.status, 'found');
@@ -243,10 +248,14 @@ void main() {
       Nutrient.carbohydrates,
       Nutrient.saturatedFat,
     ]) {
-      expect(result.getNutrientEntity(nutrient, PerSize.oneHundredGrams),
-          isNotNull);
       expect(
-          result.getNutrientAnnotation(nutrient)?.valueWithModifer, isNotNull);
+        result.getNutrientEntity(nutrient, PerSize.oneHundredGrams),
+        isNotNull,
+      );
+      expect(
+        result.getNutrientAnnotation(nutrient)?.valueWithModifer,
+        isNotNull,
+      );
     }
   });
 }

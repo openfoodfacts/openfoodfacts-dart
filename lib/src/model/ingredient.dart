@@ -18,59 +18,66 @@ class Ingredient extends JsonObject {
   String? text;
 
   @JsonKey(
-      name: 'is_in_taxonomy',
-      includeIfNull: false,
-      fromJson: JsonObject.parseBool)
+    name: 'is_in_taxonomy',
+    includeIfNull: false,
+    fromJson: JsonObject.parseBool,
+  )
   bool? isInTaxonomy;
 
   @JsonKey(includeIfNull: false, fromJson: JsonObject.parseDouble)
   double? percent;
 
   @JsonKey(
-      name: 'percent_estimate',
-      includeIfNull: false,
-      fromJson: JsonObject.parseDouble)
+    name: 'percent_estimate',
+    includeIfNull: false,
+    fromJson: JsonObject.parseDouble,
+  )
   double? percentEstimate;
 
   @JsonKey(
-      includeIfNull: false,
-      fromJson: ingredientSpecialPropertyStatusFromJson,
-      toJson: ingredientSpecialPropertyStatusToJson)
+    includeIfNull: false,
+    fromJson: ingredientSpecialPropertyStatusFromJson,
+    toJson: ingredientSpecialPropertyStatusToJson,
+  )
   IngredientSpecialPropertyStatus? vegan;
 
   @JsonKey(
-      includeIfNull: false,
-      fromJson: ingredientSpecialPropertyStatusFromJson,
-      toJson: ingredientSpecialPropertyStatusToJson)
+    includeIfNull: false,
+    fromJson: ingredientSpecialPropertyStatusFromJson,
+    toJson: ingredientSpecialPropertyStatusToJson,
+  )
   IngredientSpecialPropertyStatus? vegetarian;
 
   @JsonKey(
-      name: 'from_palm_oil',
-      includeIfNull: false,
-      fromJson: ingredientSpecialPropertyStatusFromJson,
-      toJson: ingredientSpecialPropertyStatusToJson)
+    name: 'from_palm_oil',
+    includeIfNull: false,
+    fromJson: ingredientSpecialPropertyStatusFromJson,
+    toJson: ingredientSpecialPropertyStatusToJson,
+  )
   IngredientSpecialPropertyStatus? fromPalmOil;
 
   @JsonKey(
-      name: 'ingredients',
-      includeIfNull: false,
-      toJson: JsonHelper.ingredientsToJson)
+    name: 'ingredients',
+    includeIfNull: false,
+    toJson: JsonHelper.ingredientsToJson,
+  )
   List<Ingredient>? ingredients;
 
   bool? bold;
 
-  Ingredient(
-      {this.rank,
-      this.id,
-      this.text,
-      this.isInTaxonomy,
-      this.percent,
-      this.percentEstimate,
-      this.vegan,
-      this.vegetarian,
-      this.fromPalmOil,
-      this.ingredients,
-      this.bold = false});
+  Ingredient({
+    this.rank,
+    this.id,
+    this.text,
+    this.isInTaxonomy,
+    this.percent,
+    this.percentEstimate,
+    this.vegan,
+    this.vegetarian,
+    this.fromPalmOil,
+    this.ingredients,
+    this.bold = false,
+  });
 
   factory Ingredient.fromJson(Map<String, dynamic> json) =>
       _$IngredientFromJson(json);
@@ -79,7 +86,8 @@ class Ingredient extends JsonObject {
   Map<String, dynamic> toJson() => _$IngredientToJson(this);
 
   @override
-  String toString() => 'Ingredient('
+  String toString() =>
+      'Ingredient('
       '${id == null ? '' : 'id=$id'}'
       '${rank == null ? '' : ',rank=$rank'}'
       '${text == null ? '' : ',text=$text'}'
@@ -102,7 +110,8 @@ const Map<IngredientSpecialPropertyStatus, String> _MAP = {
 };
 
 IngredientSpecialPropertyStatus? ingredientSpecialPropertyStatusFromJson(
-    dynamic json) {
+  dynamic json,
+) {
   if (json == null || json is! String) {
     return null;
   }
@@ -116,7 +125,8 @@ IngredientSpecialPropertyStatus? ingredientSpecialPropertyStatusFromJson(
 }
 
 String? ingredientSpecialPropertyStatusToJson(
-    IngredientSpecialPropertyStatus? status) {
+  IngredientSpecialPropertyStatus? status,
+) {
   if (status == null) {
     return null;
   }

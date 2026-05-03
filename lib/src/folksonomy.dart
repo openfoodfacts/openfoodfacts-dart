@@ -24,9 +24,7 @@ class FolksonomyAPIClient {
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Response response = await HttpHelper().doGetRequest(
-      uriHelper.getUri(
-        path: '/',
-      ),
+      uriHelper.getUri(path: '/'),
       uriHelper: uriHelper,
     );
     _checkResponse(response);
@@ -43,15 +41,10 @@ class FolksonomyAPIClient {
     required final String password,
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
-    final Uri uri = uriHelper.getUri(
-      path: '/auth',
-    );
+    final Uri uri = uriHelper.getUri(path: '/auth');
     final Response response = await post(
       uri,
-      body: <String, String>{
-        'username': username,
-        'password': password,
-      },
+      body: <String, String>{'username': username, 'password': password},
     );
     if (response.statusCode == 200) {
       try {
@@ -79,10 +72,7 @@ class FolksonomyAPIClient {
       value: value,
     );
     final Response response = await HttpHelper().doGetRequest(
-      uriHelper.getUri(
-        path: 'products/stats',
-        queryParameters: parameters,
-      ),
+      uriHelper.getUri(path: 'products/stats', queryParameters: parameters),
       uriHelper: uriHelper,
     );
     _checkResponse(response);
@@ -114,10 +104,7 @@ class FolksonomyAPIClient {
       value: value,
     );
     final Response response = await HttpHelper().doGetRequest(
-      uriHelper.getUri(
-        path: 'products',
-        queryParameters: parameters,
-      ),
+      uriHelper.getUri(path: 'products', queryParameters: parameters),
       uriHelper: uriHelper,
     );
     _checkResponse(response);
@@ -142,9 +129,7 @@ class FolksonomyAPIClient {
     final String? owner,
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
-    final Map<String, String> parameters = <String, String>{
-      if (owner != null) 'owner': owner,
-    };
+    final Map<String, String> parameters = <String, String>{'owner': ?owner};
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
         path: 'product/${Uri.encodeComponent(barcode)}',
@@ -176,9 +161,7 @@ class FolksonomyAPIClient {
     final String? owner,
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
-    final Map<String, String> parameters = <String, String>{
-      if (owner != null) 'owner': owner,
-    };
+    final Map<String, String> parameters = <String, String>{'owner': ?owner};
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
         path:
@@ -188,10 +171,7 @@ class FolksonomyAPIClient {
       uriHelper: uriHelper,
     );
     // may return 404 (and "null") when not found.
-    _checkResponse(
-      response,
-      authorizedStatus: <int>[200, 404],
-    );
+    _checkResponse(response, authorizedStatus: <int>[200, 404]);
     if (response.body == 'null' || response.body == '[]') {
       // not found
       return null;
@@ -213,10 +193,7 @@ class FolksonomyAPIClient {
       uriHelper.getUri(
         path:
             'product/${Uri.encodeComponent(barcode)}/${Uri.encodeComponent(key)}',
-        queryParameters: {
-          'version': '$version',
-          if (owner != null) 'owner': owner,
-        },
+        queryParameters: {'version': '$version', 'owner': ?owner},
       ),
       uriHelper: uriHelper,
       bearerToken: bearerToken,
@@ -234,9 +211,7 @@ class FolksonomyAPIClient {
     final String? owner,
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
-    final Map<String, String> parameters = <String, String>{
-      if (owner != null) 'owner': owner,
-    };
+    final Map<String, String> parameters = <String, String>{'owner': ?owner};
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
         path:
@@ -265,14 +240,13 @@ class FolksonomyAPIClient {
     final String? value,
     final int? version,
     final String? owner,
-  }) =>
-      <String, dynamic>{
-        if (barcode != null) 'product': barcode,
-        if (owner != null) 'owner': owner,
-        if (key != null) 'k': key,
-        if (value != null) 'v': value,
-        if (version != null) 'version': version,
-      };
+  }) => <String, dynamic>{
+    'product': ?barcode,
+    'owner': ?owner,
+    'k': ?key,
+    'v': ?value,
+    'version': ?version,
+  };
 
   /// productTag.version must be equal to previous version + 1
   static Future<MaybeError<bool>> updateProductTag({
@@ -293,10 +267,7 @@ class FolksonomyAPIClient {
     final Response response = await HttpHelper().doPutRequest(
       uriHelper.getUri(
         path: 'product',
-        queryParameters: {
-          'version': '$version',
-          if (ownerIfPrivate != null) 'owner': ownerIfPrivate,
-        },
+        queryParameters: {'version': '$version', 'owner': ?ownerIfPrivate},
       ),
       jsonEncode(body),
       uriHelper: uriHelper,
@@ -341,14 +312,11 @@ class FolksonomyAPIClient {
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Map<String, String> parameters = <String, String>{
-      if (owner != null) 'owner': owner,
-      if (query != null) 'q': query,
+      'owner': ?owner,
+      'q': ?query,
     };
     final Response response = await HttpHelper().doGetRequest(
-      uriHelper.getUri(
-        path: 'keys',
-        queryParameters: parameters,
-      ),
+      uriHelper.getUri(path: 'keys', queryParameters: parameters),
       uriHelper: uriHelper,
     );
     _checkResponse(response);
@@ -371,15 +339,12 @@ class FolksonomyAPIClient {
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Map<String, String> parameters = <String, String>{
-      if (owner != null) 'owner': owner,
-      if (query != null) 'q': query,
+      'owner': ?owner,
+      'q': ?query,
       if (limit != null) 'limit': limit.toString(),
     };
     final Response response = await HttpHelper().doGetRequest(
-      uriHelper.getUri(
-        path: 'values/$key',
-        queryParameters: parameters,
-      ),
+      uriHelper.getUri(path: 'values/$key', queryParameters: parameters),
       uriHelper: uriHelper,
     );
     _checkResponse(response);
@@ -397,9 +362,7 @@ class FolksonomyAPIClient {
     final UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Response response = await HttpHelper().doGetRequest(
-      uriHelper.getUri(
-        path: 'ping',
-      ),
+      uriHelper.getUri(path: 'ping'),
       uriHelper: uriHelper,
     );
     _checkResponse(response);

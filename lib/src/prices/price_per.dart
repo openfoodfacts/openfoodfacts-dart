@@ -11,9 +11,7 @@ enum PricePer implements OffTagged {
   @JsonValue('KILOGRAM')
   kilogram(offTag: 'KILOGRAM');
 
-  const PricePer({
-    required this.offTag,
-  });
+  const PricePer({required this.offTag});
 
   @override
   final String offTag;

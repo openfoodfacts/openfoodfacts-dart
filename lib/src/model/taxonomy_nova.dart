@@ -60,13 +60,13 @@ class TaxonomyNovaQueryConfiguration
     List<OpenFoodFactsLanguage>? languages,
     OpenFoodFactsCountry? country,
   }) : super.roots(
-          TagType.NOVA,
-          languages: languages,
-          country: country,
-          includeChildren: false,
-          fields: const [],
-          additionalParameters: const [],
-        );
+         TagType.NOVA,
+         languages: languages,
+         country: country,
+         includeChildren: false,
+         fields: const [],
+         additionalParameters: const [],
+       );
 
   @override
   Map<String, TaxonomyNova> convertResults(dynamic jsonData) {

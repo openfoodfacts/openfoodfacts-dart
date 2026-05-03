@@ -60,7 +60,9 @@ class RobotoffNutrientExtractionInsight extends JsonObject {
   @JsonKey(fromJson: JsonHelper.nullableStringTimestampToDate)
   final DateTime? timestamp;
   @JsonKey(
-      name: 'completed_at', fromJson: JsonHelper.nullableStringTimestampToDate)
+    name: 'completed_at',
+    fromJson: JsonHelper.nullableStringTimestampToDate,
+  )
   final DateTime? completedAt;
   final int? annotation;
   @JsonKey(name: 'annotated_result')
@@ -122,8 +124,8 @@ class RobotoffNutrientExtractionInsight extends JsonObject {
   });
 
   factory RobotoffNutrientExtractionInsight.fromJson(
-          Map<String, dynamic> json) =>
-      _$RobotoffNutrientExtractionInsightFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$RobotoffNutrientExtractionInsightFromJson(json);
 
   @override
   Map<String, dynamic> toJson() =>

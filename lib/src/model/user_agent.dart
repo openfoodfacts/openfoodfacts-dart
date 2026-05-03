@@ -30,10 +30,10 @@ class UserAgent extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => {
-        'name': name,
-        'version': version,
-        'system': system,
-        'url': url,
-        'comment': comment,
-      };
+    'name': name,
+    'version': version,
+    'system': system,
+    'url': url,
+    'comment': comment,
+  };
 }

@@ -18,7 +18,8 @@ class InvalidBarcodes {
     }
     if (_barcodes.isEmpty) {
       throw Exception(
-          'Unexpected error: empty invalid barcode list from json string $jsonString');
+        'Unexpected error: empty invalid barcode list from json string $jsonString',
+      );
     }
   }
 

@@ -11,9 +11,7 @@ enum RobotoffQuestionOrder implements OffTagged {
   /// order by (descending) popularity (=scan count)
   popularity(offTag: 'popularity');
 
-  const RobotoffQuestionOrder({
-    required this.offTag,
-  });
+  const RobotoffQuestionOrder({required this.offTag});
 
   @override
   final String offTag;

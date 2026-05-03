@@ -32,23 +32,38 @@ void main() {
         ),
       );
       final String languageCode = language.code;
-      final String importanceUrl =
-          AvailablePreferenceImportances.getUrl(languageCode);
-      final String attributeGroupUrl =
-          AvailableAttributeGroups.getUrl(languageCode);
+      final Uri importanceUrl = AvailablePreferenceImportances.getUri(
+        languageCode,
+      );
+      final Uri attributeGroupUrl = AvailableAttributeGroups.getUri(
+        languageCode,
+      );
       http.Response response;
-      response = await http.get(Uri.parse(importanceUrl));
+      response = await http.get(importanceUrl);
       expect(response.statusCode, HTTP_OK);
       final String preferenceImportancesString = response.body;
-      response = await http.get(Uri.parse(attributeGroupUrl));
+      response = await http.get(attributeGroupUrl);
       expect(response.statusCode, HTTP_OK);
       final String attributeGroupsString = response.body;
       manager.availableProductPreferences =
           AvailableProductPreferences.loadFromJSONStrings(
-        preferenceImportancesString: preferenceImportancesString,
-        attributeGroupsString: attributeGroupsString,
-      );
+            preferenceImportancesString: preferenceImportancesString,
+            attributeGroupsString: attributeGroupsString,
+          );
       expect(refreshCounter, 0);
+
+      // Verify attribute groups are loaded (new v3.4 JSON format support)
+      expect(manager.attributeGroups, isNotNull);
+      expect(manager.attributeGroups, isNotEmpty);
+
+      // Verify unwanted_ingredients attribute is present (new in v3.4)
+      final Attribute? unwantedIngredientsAttribute = manager
+          .getReferenceAttribute(Attribute.ATTRIBUTE_UNWANTED_INGREDIENTS);
+      expect(unwantedIngredientsAttribute, isNotNull);
+      expect(
+        unwantedIngredientsAttribute!.id,
+        Attribute.ATTRIBUTE_UNWANTED_INGREDIENTS,
+      );
 
       const List<String> allAttributes = <String>[
         Attribute.ATTRIBUTE_NUTRISCORE,
@@ -75,6 +90,7 @@ void main() {
         Attribute.ATTRIBUTE_VEGETARIAN,
         Attribute.ATTRIBUTE_VEGAN,
         Attribute.ATTRIBUTE_PALM_OIL_FREE,
+        Attribute.ATTRIBUTE_UNWANTED_INGREDIENTS,
         Attribute.ATTRIBUTE_LABELS_ORGANIC,
         Attribute.ATTRIBUTE_LABELS_FAIR_TRADE,
         Attribute.ATTRIBUTE_ECOSCORE,
@@ -99,8 +115,9 @@ void main() {
 
       int count = 0;
       for (final String importance in importances) {
-        final List<String> attributes =
-            manager.getAttributeIdsWithImportance(importance);
+        final List<String> attributes = manager.getAttributeIdsWithImportance(
+          importance,
+        );
         for (final String attribute in attributes) {
           expect(importanceForAttributes[attribute], isNotNull);
           expect(importanceForAttributes[attribute], importance);

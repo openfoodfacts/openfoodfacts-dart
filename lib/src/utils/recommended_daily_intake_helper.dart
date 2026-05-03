@@ -35,7 +35,7 @@ class RecommendedDailyIntakeHelper {
     'selenium': {'unit': 'μg', 'value': 55},
     'chromium': {'unit': 'μg', 'value': 40},
     'molybdenum': {'unit': 'μg', 'value': 50},
-    'iodine': {'unit': 'μg', 'value': 150}
+    'iodine': {'unit': 'μg', 'value': 150},
   };
 
   static Map<String, dynamic> getEURecommendationsJson() {

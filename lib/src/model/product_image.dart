@@ -10,9 +10,7 @@ enum ImageField implements OffTagged {
   PACKAGING(offTag: 'packaging'),
   OTHER(offTag: 'other');
 
-  const ImageField({
-    required this.offTag,
-  });
+  const ImageField({required this.offTag});
 
   @override
   final String offTag;
@@ -38,10 +36,7 @@ enum ImageSize implements OffTagged {
   /// Size not available
   UNKNOWN(offTag: 'unknown', number: 'unknown');
 
-  const ImageSize({
-    required this.offTag,
-    required this.number,
-  });
+  const ImageSize({required this.offTag, required this.number});
 
   @override
   final String offTag;
@@ -51,14 +46,14 @@ enum ImageSize implements OffTagged {
 
 extension ImageSizeExtension on ImageSize? {
   static ImageSize getType(String s) => ImageSize.values.firstWhere(
-        (final ImageSize key) => key.offTag == s.toLowerCase(),
-        orElse: () => ImageSize.UNKNOWN,
-      );
+    (final ImageSize key) => key.offTag == s.toLowerCase(),
+    orElse: () => ImageSize.UNKNOWN,
+  );
 
   static ImageSize fromNumber(String s) => ImageSize.values.firstWhere(
-        (final ImageSize key) => key.number == s,
-        orElse: () => ImageSize.UNKNOWN,
-      );
+    (final ImageSize key) => key.number == s,
+    orElse: () => ImageSize.UNKNOWN,
+  );
 }
 
 /// Angle for image rotation.
@@ -75,9 +70,7 @@ enum ImageAngle {
   /// 9 o'clock
   NINE_O_CLOCK(degree: 270);
 
-  const ImageAngle({
-    required this.degree,
-  });
+  const ImageAngle({required this.degree});
 
   /// Degree clockwise.
   final int degree;
@@ -133,8 +126,8 @@ class ProductImage {
     this.height,
     this.uploaded,
     this.contributor,
-  })  : language = null,
-        field = null;
+  }) : language = null,
+       field = null;
 
   final ImageField? field;
   final ImageSize? size;
@@ -194,9 +187,7 @@ class ProductImage {
   /// Returns just the filename of the url to display this image.
   ///
   /// See also [getUrl].
-  String getUrlFilename({
-    final ImageSize? imageSize,
-  }) {
+  String getUrlFilename({final ImageSize? imageSize}) {
     final ImageSize bestImageSize = imageSize ?? size ?? ImageSize.UNKNOWN;
     return isMain
         ? _getMainUrlFilename(bestImageSize)
@@ -235,7 +226,8 @@ class ProductImage {
   }
 
   @override
-  String toString() => 'ProductImage('
+  String toString() =>
+      'ProductImage('
       '${field == null ? '' : 'field=${field!.offTag}'}'
       '${size == null ? '' : ',size=${size!.offTag}'}'
       '${language == null ? '' : ',language=${language.code}'}'

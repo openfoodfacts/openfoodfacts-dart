@@ -13,7 +13,4 @@ LeaderboardEntry _$LeaderboardEntryFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$LeaderboardEntryToJson(LeaderboardEntry instance) =>
-    <String, dynamic>{
-      'user_id': instance.userId,
-      'score': instance.score,
-    };
+    <String, dynamic>{'user_id': instance.userId, 'score': instance.score};

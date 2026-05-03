@@ -33,9 +33,7 @@ enum TaxonomyName implements OffTagged {
   vitamin(offTag: 'vitamin'),
   brand(offTag: 'brand');
 
-  const TaxonomyName({
-    required this.offTag,
-  });
+  const TaxonomyName({required this.offTag});
 
   @override
   final String offTag;

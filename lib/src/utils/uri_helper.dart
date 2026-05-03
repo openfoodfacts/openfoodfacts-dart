@@ -28,24 +28,18 @@ class UriHelper {
     final bool? addUserAgentParameters,
     final String? userInfo,
     final String? forcedHost,
-  }) =>
-      Uri(
-        scheme: scheme,
-        host: forcedHost ?? host,
-        path: path,
-        queryParameters: addUserAgentParameters ?? defaultAddUserAgentParameters
-            ? HttpHelper.addUserAgentParameters(queryParameters)
-            : queryParameters,
-        userInfo: userInfo,
-      );
+  }) => Uri(
+    scheme: scheme,
+    host: forcedHost ?? host,
+    path: path,
+    queryParameters: addUserAgentParameters ?? defaultAddUserAgentParameters
+        ? HttpHelper.addUserAgentParameters(queryParameters)
+        : queryParameters,
+    userInfo: userInfo,
+  );
 
-  Uri getPostUri({
-    required final String path,
-  }) =>
-      getUri(
-        path: path,
-        addUserAgentParameters: false,
-      );
+  Uri getPostUri({required final String path}) =>
+      getUri(path: path, addUserAgentParameters: false);
 
   /// Replaces the subdomain of an URI with specific country and language.
   ///
@@ -59,17 +53,17 @@ class UriHelper {
     final Uri uri, {
     OpenFoodFactsLanguage? language,
     OpenFoodFactsCountry? country,
-  }) =>
-      replaceSubdomainWithCodes(
-        uri,
-        languageCode: language?.code ??
-            (OpenFoodAPIConfiguration.globalLanguages != null &&
-                    OpenFoodAPIConfiguration.globalLanguages!.isNotEmpty
-                ? OpenFoodAPIConfiguration.globalLanguages![0].code
-                : null),
-        countryCode:
-            country?.offTag ?? OpenFoodAPIConfiguration.globalCountry?.offTag,
-      );
+  }) => replaceSubdomainWithCodes(
+    uri,
+    languageCode:
+        language?.code ??
+        (OpenFoodAPIConfiguration.globalLanguages != null &&
+                OpenFoodAPIConfiguration.globalLanguages!.isNotEmpty
+            ? OpenFoodAPIConfiguration.globalLanguages![0].code
+            : null),
+    countryCode:
+        country?.offTag ?? OpenFoodAPIConfiguration.globalCountry?.offTag,
+  );
 
   /// Replaces the subdomain of an URI with specific country and language.
   ///
@@ -117,14 +111,11 @@ class UriProductHelper extends UriHelper {
 
   String getHost(final String subdomain) => '$subdomain.$domain';
 
-  Uri getPatchUri({
-    required final String path,
-  }) =>
-      getUri(
-        path: path,
-        addUserAgentParameters: false,
-        userInfo: userInfoForPatch,
-      );
+  Uri getPatchUri({required final String path}) => getUri(
+    path: path,
+    addUserAgentParameters: false,
+    userInfo: userInfoForPatch,
+  );
 
   /// Returns the web folder of the product images (without trailing '/')
   ///

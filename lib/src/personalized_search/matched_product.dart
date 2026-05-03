@@ -10,11 +10,7 @@ import 'product_preferences_manager.dart';
 
 // TODO: deprecated from 2025-08-20; remove when old enough
 @Deprecated('Use MatchedProductStatusV2 instead')
-enum MatchedProductStatus {
-  YES,
-  NO,
-  UNKNOWN,
-}
+enum MatchedProductStatus { YES, NO, UNKNOWN }
 
 // TODO: deprecated from 2025-08-20; remove when old enough
 @Deprecated('Use MatchedProductV2 instead')
@@ -34,10 +30,10 @@ class MatchedProduct {
         for (final Attribute attribute in group.attributes!) {
           final PreferenceImportance? preferenceImportance =
               productPreferencesManager.getPreferenceImportanceFromImportanceId(
-            productPreferencesManager.getImportanceIdForAttributeId(
-              attribute.id!,
-            ),
-          );
+                productPreferencesManager.getImportanceIdForAttributeId(
+                  attribute.id!,
+                ),
+              );
           if (preferenceImportance != null) {
             final String? importanceId = preferenceImportance.id;
             final int factor = preferenceImportance.factor ?? 0;
@@ -82,12 +78,15 @@ class MatchedProduct {
   ) {
     final List<MatchedProduct> result = <MatchedProduct>[];
     for (final Product product in products) {
-      final MatchedProduct matchedProduct =
-          MatchedProduct(product, productPreferencesManager);
+      final MatchedProduct matchedProduct = MatchedProduct(
+        product,
+        productPreferencesManager,
+      );
       result.add(matchedProduct);
     }
     result.sort(
-        (MatchedProduct a, MatchedProduct b) => b.score.compareTo(a.score));
+      (MatchedProduct a, MatchedProduct b) => b.score.compareTo(a.score),
+    );
     return result;
   }
 }

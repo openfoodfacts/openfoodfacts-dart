@@ -24,12 +24,18 @@ void main() {
   void checkKnown(final TaxonomyIngredient ingredient) {
     // for knownTag
     expect(ingredient.children, isNotEmpty); // probably 'en:mukimame'
-    expect(ingredient.name![OpenFoodFactsLanguage.ENGLISH],
-        isNotEmpty); // probably 'Edamame'
-    expect(ingredient.name![OpenFoodFactsLanguage.FRENCH],
-        isNotEmpty); // probably 'Edamame'
-    expect(ingredient.wikidata![OpenFoodFactsLanguage.ENGLISH],
-        isNotEmpty); // probably 'Q1377879'
+    expect(
+      ingredient.name![OpenFoodFactsLanguage.ENGLISH],
+      isNotEmpty,
+    ); // probably 'Edamame'
+    expect(
+      ingredient.name![OpenFoodFactsLanguage.FRENCH],
+      isNotEmpty,
+    ); // probably 'Edamame'
+    expect(
+      ingredient.wikidata![OpenFoodFactsLanguage.ENGLISH],
+      isNotEmpty,
+    ); // probably 'Q1377879'
     expect(ingredient.parents, isNotEmpty); // probably 'en:soya-bean'
   }
 
@@ -37,8 +43,8 @@ void main() {
     test('get root ingredients', () async {
       final Map<String, TaxonomyIngredient>? ingredients =
           await OpenFoodAPIClient.getTaxonomyIngredients(
-        TaxonomyIngredientQueryConfiguration.roots(fields: fields),
-      );
+            TaxonomyIngredientQueryConfiguration.roots(fields: fields),
+          );
       expect(ingredients, isNotNull);
       expect(ingredients!.length, greaterThan(700)); // was 795 on 2023-08-12
       for (final TaxonomyIngredient ingredient in ingredients.values) {
@@ -50,11 +56,11 @@ void main() {
     test('get an ingredient', () async {
       final Map<String, TaxonomyIngredient>? ingredients =
           await OpenFoodAPIClient.getTaxonomyIngredients(
-        TaxonomyIngredientQueryConfiguration(
-          tags: <String>[knownTag],
-          fields: fields,
-        ),
-      );
+            TaxonomyIngredientQueryConfiguration(
+              tags: <String>[knownTag],
+              fields: fields,
+            ),
+          );
       expect(ingredients, isNotNull);
       expect(ingredients!.length, 1);
       final TaxonomyIngredient ingredient = ingredients[knownTag]!;
@@ -64,22 +70,22 @@ void main() {
     test("get an ingredient that doesn't exist", () async {
       final Map<String, TaxonomyIngredient>? ingredients =
           await OpenFoodAPIClient.getTaxonomyIngredients(
-        TaxonomyIngredientQueryConfiguration(
-          tags: <String>[unknownTag],
-          fields: fields,
-        ),
-      );
+            TaxonomyIngredientQueryConfiguration(
+              tags: <String>[unknownTag],
+              fields: fields,
+            ),
+          );
       expect(ingredients, isNull);
     });
 
     test("get an ingredient that doesn't exist with one that does", () async {
       final Map<String, TaxonomyIngredient>? ingredients =
           await OpenFoodAPIClient.getTaxonomyIngredients(
-        TaxonomyIngredientQueryConfiguration(
-          tags: <String>[unknownTag, knownTag],
-          fields: fields,
-        ),
-      );
+            TaxonomyIngredientQueryConfiguration(
+              tags: <String>[unknownTag, knownTag],
+              fields: fields,
+            ),
+          );
       expect(ingredients, isNotNull);
       expect(ingredients!.length, 1);
       final TaxonomyIngredient ingredient = ingredients[knownTag]!;

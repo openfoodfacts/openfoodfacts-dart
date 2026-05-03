@@ -9,7 +9,7 @@ enum EcoscoreStatus {
   @JsonValue('known')
   KNOWN,
   @JsonValue('unknown')
-  UNKNOWN
+  UNKNOWN,
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -24,10 +24,7 @@ class EcoscoreData extends JsonObject {
   Agribalyse? agribalyse;
   @JsonKey(includeIfNull: false)
   EcoscoreAdjustments? adjustments;
-  @JsonKey(
-    name: 'missing_data_warning',
-    fromJson: JsonObject.parseBool,
-  )
+  @JsonKey(name: 'missing_data_warning', fromJson: JsonObject.parseBool)
   bool missingDataWarning;
 
   EcoscoreData({

@@ -15,11 +15,7 @@ class RobotoffNutrientExtractionResult extends JsonObject {
   final List<RobotoffNutrientExtractionInsight>? insights;
   RobotoffNutrientExtractionInsight? _latestInsight;
 
-  RobotoffNutrientExtractionResult({
-    this.status,
-    this.count,
-    this.insights,
-  });
+  RobotoffNutrientExtractionResult({this.status, this.count, this.insights});
 
   RobotoffNutrientExtractionInsight? get latestInsight {
     if (_latestInsight != null) {
@@ -55,8 +51,8 @@ class RobotoffNutrientExtractionResult extends JsonObject {
   }
 
   factory RobotoffNutrientExtractionResult.fromJson(
-          Map<String, dynamic> json) =>
-      _$RobotoffNutrientExtractionResultFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$RobotoffNutrientExtractionResultFromJson(json);
 
   @override
   Map<String, dynamic> toJson() =>

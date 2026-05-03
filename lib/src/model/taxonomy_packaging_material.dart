@@ -59,8 +59,11 @@ class TaxonomyPackagingMaterial extends JsonObject {
 
 /// Configuration for packaging materials API query.
 class TaxonomyPackagingMaterialQueryConfiguration
-    extends TaxonomyQueryConfiguration<TaxonomyPackagingMaterial,
-        TaxonomyPackagingMaterialField> {
+    extends
+        TaxonomyQueryConfiguration<
+          TaxonomyPackagingMaterial,
+          TaxonomyPackagingMaterialField
+        > {
   /// Configuration to get the packaging materials that match the [tags].
   TaxonomyPackagingMaterialQueryConfiguration({
     required List<String> tags,
@@ -70,14 +73,14 @@ class TaxonomyPackagingMaterialQueryConfiguration
     List<Parameter> additionalParameters = const [],
     bool includeChildren = false,
   }) : super(
-          TagType.PACKAGING_MATERIALS,
-          tags,
-          languages: languages,
-          country: country,
-          includeChildren: includeChildren,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.PACKAGING_MATERIALS,
+         tags,
+         languages: languages,
+         country: country,
+         includeChildren: includeChildren,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   TaxonomyPackagingMaterialQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages,
@@ -86,21 +89,23 @@ class TaxonomyPackagingMaterialQueryConfiguration
     List<Parameter> additionalParameters = const [],
     bool includeChildren = false,
   }) : super.roots(
-          TagType.PACKAGING_MATERIALS,
-          languages: languages,
-          country: country,
-          includeChildren: includeChildren,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.PACKAGING_MATERIALS,
+         languages: languages,
+         country: country,
+         includeChildren: includeChildren,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   @override
   Map<String, TaxonomyPackagingMaterial> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {
       return const {};
     }
-    return jsonData
-        .map<String, TaxonomyPackagingMaterial>((String key, dynamic taxonomy) {
+    return jsonData.map<String, TaxonomyPackagingMaterial>((
+      String key,
+      dynamic taxonomy,
+    ) {
       if (taxonomy is! Map<String, dynamic>) {
         assert(false, 'Received JSON Packaging Material is not a Map');
         return MapEntry(key, TaxonomyPackagingMaterial.fromJson({}));
@@ -110,14 +115,17 @@ class TaxonomyPackagingMaterialQueryConfiguration
   }
 
   @override
-  Set<TaxonomyPackagingMaterialField> get ignoredFields =>
-      const {TaxonomyPackagingMaterialField.ALL};
+  Set<TaxonomyPackagingMaterialField> get ignoredFields => const {
+    TaxonomyPackagingMaterialField.ALL,
+  };
 
   @override
   Iterable<String> convertFieldsToStrings(
-          Iterable<TaxonomyPackagingMaterialField> fields) =>
-      fields
-          .where((TaxonomyPackagingMaterialField field) =>
-              !ignoredFields.contains(field))
-          .map<String>((TaxonomyPackagingMaterialField field) => field.offTag);
+    Iterable<TaxonomyPackagingMaterialField> fields,
+  ) => fields
+      .where(
+        (TaxonomyPackagingMaterialField field) =>
+            !ignoredFields.contains(field),
+      )
+      .map<String>((TaxonomyPackagingMaterialField field) => field.offTag);
 }

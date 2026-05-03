@@ -2,29 +2,24 @@ import '../interface/json_object.dart';
 import 'attribute.dart';
 
 class AttributeGroup extends JsonObject {
-  AttributeGroup({
-    this.id,
-    this.name,
-    this.warning,
-    this.attributes,
-  });
+  AttributeGroup({this.id, this.name, this.warning, this.attributes});
 
   factory AttributeGroup.fromJson(dynamic json) => AttributeGroup(
-        id: json[_JSON_TAG_ID] as String?,
-        name: json[_JSON_TAG_NAME] as String?,
-        warning: json[_JSON_TAG_WARNING] as String?,
-        attributes: (json[_JSON_TAG_ATTRIBUTES] as List?)
-            ?.map((item) => Attribute.fromJson(item))
-            .toList(),
-      );
+    id: json[_JSON_TAG_ID] as String?,
+    name: json[_JSON_TAG_NAME] as String?,
+    warning: json[_JSON_TAG_WARNING] as String?,
+    attributes: (json[_JSON_TAG_ATTRIBUTES] as List?)
+        ?.map((item) => Attribute.fromJson(item))
+        .toList(),
+  );
 
   @override
   Map<String, dynamic> toJson() => JsonObject.removeNullEntries({
-        _JSON_TAG_ID: id,
-        _JSON_TAG_NAME: name,
-        _JSON_TAG_WARNING: warning,
-        _JSON_TAG_ATTRIBUTES: _listToJson(),
-      });
+    _JSON_TAG_ID: id,
+    _JSON_TAG_NAME: name,
+    _JSON_TAG_WARNING: warning,
+    _JSON_TAG_ATTRIBUTES: _listToJson(),
+  });
 
   static const String _JSON_TAG_ID = 'id';
   static const String _JSON_TAG_NAME = 'name';

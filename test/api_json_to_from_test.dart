@@ -8,17 +8,19 @@ void main() {
 
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   group('$OpenFoodAPIClient json to/from conversions', () {
     test('images', () async {
       await getProductTooManyRequestsManager.waitIfNeeded();
       final ProductResultV3 productResult =
           await OpenFoodAPIClient.getProductV3(
-        ProductQueryConfiguration(
-          BARCODE_DANISH_BUTTER_COOKIES,
-          fields: [ProductField.IMAGES, ProductField.BARCODE],
-          version: ProductQueryVersion.v3,
-        ),
-      );
+            ProductQueryConfiguration(
+              BARCODE_DANISH_BUTTER_COOKIES,
+              fields: [ProductField.IMAGES, ProductField.BARCODE],
+              version: version,
+            ),
+          );
       expect(productResult.product, isNotNull);
 
       void checkImages(final List<ProductImage>? images) {
@@ -26,9 +28,7 @@ void main() {
         expect(images, isNotEmpty);
 
         final List<ProductImage>? imagesBackAndForth =
-            JsonHelper.allImagesFromJson(
-          JsonHelper.allImagesToJson(images),
-        );
+            JsonHelper.allImagesFromJson(JsonHelper.allImagesToJson(images));
         expect(imagesBackAndForth, isNotNull);
         expect(imagesBackAndForth, isNotEmpty);
 

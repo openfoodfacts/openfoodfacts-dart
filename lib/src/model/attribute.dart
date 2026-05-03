@@ -14,38 +14,43 @@ class Attribute extends JsonObject {
     this.match,
     this.status,
     this.panelId,
+    this.values,
   });
 
   factory Attribute.fromJson(dynamic json) => Attribute(
-        id: json[_JSON_TAG_ID] as String,
-        name: json[_JSON_TAG_NAME] as String?,
-        title: json[_JSON_TAG_TITLE] as String?,
-        iconUrl: json[_JSON_TAG_ICON_URL] as String?,
-        defaultF: json[_JSON_TAG_DEFAULT] as String?,
-        settingNote: json[_JSON_TAG_SETTING_NOTE] as String?,
-        settingName: json[_JSON_TAG_SETTING_NAME] as String?,
-        description: json[_JSON_TAG_DESCRIPTION] as String?,
-        descriptionShort: json[_JSON_TAG_DESCRIPTION_SHORT] as String?,
-        match: JsonObject.parseDouble(json[_JSON_TAG_MATCH]),
-        status: json[_JSON_TAG_STATUS] as String?,
-        panelId: json[_JSON_TAG_PANEL_ID] as String?,
-      );
+    id: json[_JSON_TAG_ID] as String,
+    name: json[_JSON_TAG_NAME] as String?,
+    title: json[_JSON_TAG_TITLE] as String?,
+    iconUrl: json[_JSON_TAG_ICON_URL] as String?,
+    defaultF: json[_JSON_TAG_DEFAULT] as String?,
+    settingNote: json[_JSON_TAG_SETTING_NOTE] as String?,
+    settingName: json[_JSON_TAG_SETTING_NAME] as String?,
+    description: json[_JSON_TAG_DESCRIPTION] as String?,
+    descriptionShort: json[_JSON_TAG_DESCRIPTION_SHORT] as String?,
+    match: JsonObject.parseDouble(json[_JSON_TAG_MATCH]),
+    status: json[_JSON_TAG_STATUS] as String?,
+    panelId: json[_JSON_TAG_PANEL_ID] as String?,
+    values: (json[_JSON_TAG_VALUES] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toSet(),
+  );
 
   @override
   Map<String, dynamic> toJson() => JsonObject.removeNullEntries({
-        _JSON_TAG_ID: id,
-        _JSON_TAG_NAME: name,
-        _JSON_TAG_TITLE: title,
-        _JSON_TAG_ICON_URL: iconUrl,
-        _JSON_TAG_DEFAULT: defaultF,
-        _JSON_TAG_SETTING_NOTE: settingNote,
-        _JSON_TAG_SETTING_NAME: settingName,
-        _JSON_TAG_DESCRIPTION: description,
-        _JSON_TAG_DESCRIPTION_SHORT: descriptionShort,
-        _JSON_TAG_MATCH: match,
-        _JSON_TAG_STATUS: status,
-        _JSON_TAG_PANEL_ID: panelId,
-      });
+    _JSON_TAG_ID: id,
+    _JSON_TAG_NAME: name,
+    _JSON_TAG_TITLE: title,
+    _JSON_TAG_ICON_URL: iconUrl,
+    _JSON_TAG_DEFAULT: defaultF,
+    _JSON_TAG_SETTING_NOTE: settingNote,
+    _JSON_TAG_SETTING_NAME: settingName,
+    _JSON_TAG_DESCRIPTION: description,
+    _JSON_TAG_DESCRIPTION_SHORT: descriptionShort,
+    _JSON_TAG_MATCH: match,
+    _JSON_TAG_STATUS: status,
+    _JSON_TAG_PANEL_ID: panelId,
+    _JSON_TAG_VALUES: values?.toList(),
+  });
 
   static const String _JSON_TAG_ID = 'id';
   static const String _JSON_TAG_NAME = 'name';
@@ -59,6 +64,7 @@ class Attribute extends JsonObject {
   static const String _JSON_TAG_MATCH = 'match';
   static const String _JSON_TAG_STATUS = 'status';
   static const String _JSON_TAG_PANEL_ID = 'panel_id';
+  static const String _JSON_TAG_VALUES = 'values';
 
   static const String STATUS_UNKNOWN = 'unknown';
   static const String STATUS_KNOWN = 'known';
@@ -93,6 +99,7 @@ class Attribute extends JsonObject {
   static const String ATTRIBUTE_VEGETARIAN = 'vegetarian';
   static const String ATTRIBUTE_VEGAN = 'vegan';
   static const String ATTRIBUTE_PALM_OIL_FREE = 'palm_oil_free';
+  static const String ATTRIBUTE_UNWANTED_INGREDIENTS = 'unwanted_ingredients';
 
   static const String ATTRIBUTE_LABELS_ORGANIC = 'labels_organic';
   static const String ATTRIBUTE_LABELS_FAIR_TRADE = 'labels_fair_trade';
@@ -112,6 +119,9 @@ class Attribute extends JsonObject {
   final double? match;
   final String? status;
   final String? panelId;
+  // Possible importance values for this attribute (e.g. important, not_important, etc.)
+  // Some attributes may have a limited set of possible values. Others may have any value.
+  final Set<String>? values;
 
   @override
   String toString() => 'Attribute(${toJson()})';

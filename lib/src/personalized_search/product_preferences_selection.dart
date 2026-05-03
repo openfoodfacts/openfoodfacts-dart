@@ -8,10 +8,10 @@ class ProductPreferencesSelection {
   ProductPreferencesSelection({
     required this.getImportance,
     final Future<void> Function(String attributeId, String importanceId)?
-        setImportance,
+    setImportance,
     final Function()? notify,
-  })  : _setImportance = setImportance,
-        _notify = notify;
+  }) : _setImportance = setImportance,
+       _notify = notify;
 
   /// Sets the importance of an attribute, e.g. in a SharedPreferences.
   ///
@@ -25,7 +25,7 @@ class ProductPreferencesSelection {
   /// setImportance: null
   /// ```
   final Future<void> Function(String attributeId, String importanceId)?
-      _setImportance;
+  _setImportance;
 
   Future<void> setImportance(String attributeId, String importanceId) async {
     if (_setImportance == null) {

@@ -41,20 +41,19 @@ abstract class CommonProofParameters extends JsonObject {
 
   @override
   Map<String, dynamic> toJson() => <String, dynamic>{
-        if (type != null) 'type': type!.offTag,
-        if (date != null) 'date': GetParametersHelper.formatDate(date!),
-        if (currency != null) 'currency': currency!.name,
-        if (locationOSMId != null) 'location_osm_id': locationOSMId,
-        if (locationOSMType != null)
-          'location_osm_type': locationOSMType!.offTag,
-        if (receiptPriceCount != null) 'receipt_price_count': receiptPriceCount,
-        if (receiptPriceTotal != null) 'receipt_price_total': receiptPriceTotal,
-        if (receiptOnlineDeliveryCosts != null)
-          'receipt_online_delivery_costs': receiptOnlineDeliveryCosts,
-        if (readyForPriceTagValidation != null)
-          'ready_for_price_tag_validation': readyForPriceTagValidation,
-        if (ownerConsumption != null) 'owner_consumption': ownerConsumption,
-        if (ownerComment != null) 'owner_comment': ownerComment,
-        if (locationId != null) 'location_id': locationId,
-      };
+    if (type != null) 'type': type!.offTag,
+    if (date != null) 'date': GetParametersHelper.formatDate(date!),
+    if (currency != null) 'currency': currency!.name,
+    if (locationOSMId != null) 'location_osm_id': locationOSMId,
+    if (locationOSMType != null) 'location_osm_type': locationOSMType!.offTag,
+    if (receiptPriceCount != null) 'receipt_price_count': receiptPriceCount,
+    if (receiptPriceTotal != null) 'receipt_price_total': receiptPriceTotal,
+    if (receiptOnlineDeliveryCosts != null)
+      'receipt_online_delivery_costs': receiptOnlineDeliveryCosts,
+    if (readyForPriceTagValidation != null)
+      'ready_for_price_tag_validation': readyForPriceTagValidation,
+    if (ownerConsumption != null) 'owner_consumption': ownerConsumption,
+    if (ownerComment != null) 'owner_comment': ownerComment,
+    if (locationId != null) 'location_id': locationId,
+  };
 }

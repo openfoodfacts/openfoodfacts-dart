@@ -6,9 +6,7 @@ enum NutrientLevel implements OffTagged {
   HIGH(offTag: 'high'),
   UNDEFINED(offTag: 'undefined');
 
-  const NutrientLevel({
-    required this.offTag,
-  });
+  const NutrientLevel({required this.offTag});
 
   @override
   final String offTag;
@@ -35,7 +33,7 @@ class NutrientLevels {
     NUTRIENT_SUGARS,
     NUTRIENT_FAT,
     NUTRIENT_SATURATED_FAT,
-    NUTRIENT_SALT
+    NUTRIENT_SALT,
   ];
 
   Map<String, NutrientLevel> levels; // "nutrient" : Level

@@ -83,10 +83,7 @@ abstract class GetParametersHelper<T extends OrderByField> {
   }
 
   /// Formats a date as DateFormat('yyyy-MM-dd') but without the `intl` package.
-  static String formatDate(
-    final DateTime date, {
-    bool dayOnly = true,
-  }) {
+  static String formatDate(final DateTime date, {bool dayOnly = true}) {
     final String result = date.toIso8601String();
     if (dayOnly) {
       return result.substring(0, 10);

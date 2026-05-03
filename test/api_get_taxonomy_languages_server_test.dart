@@ -20,8 +20,8 @@ void main() {
     test("get all languages", () async {
       final Map<String, TaxonomyLanguage>? languages =
           await OpenFoodAPIClient.getTaxonomyLanguages(
-        TaxonomyLanguageQueryConfiguration.all(),
-      );
+            TaxonomyLanguageQueryConfiguration.all(),
+          );
       expect(languages, isNotNull);
       expect(languages!.length, greaterThan(150)); // was 186 on 2022-02-25
       expect(languages[knownTag], isNotNull);
@@ -30,8 +30,8 @@ void main() {
     test('get a language', () async {
       final Map<String, TaxonomyLanguage>? languages =
           await OpenFoodAPIClient.getTaxonomyLanguages(
-        TaxonomyLanguageQueryConfiguration(tags: <String>[knownTag]),
-      );
+            TaxonomyLanguageQueryConfiguration(tags: <String>[knownTag]),
+          );
       expect(languages, isNotNull);
       expect(languages!.length, equals(1));
       final TaxonomyLanguage language = languages[knownTag]!;
@@ -43,18 +43,18 @@ void main() {
     test("get a language that doesn't exist", () async {
       final Map<String, TaxonomyLanguage>? categories =
           await OpenFoodAPIClient.getTaxonomyLanguages(
-        TaxonomyLanguageQueryConfiguration(tags: <String>[unknownTag]),
-      );
+            TaxonomyLanguageQueryConfiguration(tags: <String>[unknownTag]),
+          );
       expect(categories, isNull);
     });
 
     test("get a language that doesn't exist with one that does", () async {
       final Map<String, TaxonomyLanguage>? languages =
           await OpenFoodAPIClient.getTaxonomyLanguages(
-        TaxonomyLanguageQueryConfiguration(
-          tags: <String>[unknownTag, knownTag],
-        ),
-      );
+            TaxonomyLanguageQueryConfiguration(
+              tags: <String>[unknownTag, knownTag],
+            ),
+          );
       expect(languages, isNotNull);
       expect(languages!.length, equals(1));
       final TaxonomyLanguage language = languages[knownTag]!;

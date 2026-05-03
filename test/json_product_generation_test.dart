@@ -8,13 +8,15 @@ import 'test_constants.dart';
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   test('Generate JSON - database example', () async {
     String barcode = '0030000010204';
     ProductQueryConfiguration configurations = ProductQueryConfiguration(
       barcode,
       language: OpenFoodFactsLanguage.ENGLISH,
       fields: [ProductField.ALL],
-      version: ProductQueryVersion.v3,
+      version: version,
     );
     ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
       configurations,
@@ -48,16 +50,22 @@ void main() {
       'en:non-vegan',
       'en:palm-oil-content-unknown',
     ];
-    IngredientsAnalysisTags ingredientsAnalysisTags =
-        IngredientsAnalysisTags(data);
+    IngredientsAnalysisTags ingredientsAnalysisTags = IngredientsAnalysisTags(
+      data,
+    );
     expect(
-        ingredientsAnalysisTags.vegetarianStatus, VegetarianStatus.VEGETARIAN);
+      ingredientsAnalysisTags.vegetarianStatus,
+      VegetarianStatus.VEGETARIAN,
+    );
     expect(ingredientsAnalysisTags.veganStatus, VeganStatus.NON_VEGAN);
-    expect(ingredientsAnalysisTags.palmOilFreeStatus,
-        PalmOilFreeStatus.PALM_OIL_CONTENT_UNKNOWN);
+    expect(
+      ingredientsAnalysisTags.palmOilFreeStatus,
+      PalmOilFreeStatus.PALM_OIL_CONTENT_UNKNOWN,
+    );
 
-    List<String> jsonStrings =
-        IngredientsAnalysisTags.toJson(ingredientsAnalysisTags);
+    List<String> jsonStrings = IngredientsAnalysisTags.toJson(
+      ingredientsAnalysisTags,
+    );
     expect(jsonStrings[0], 'en:non-vegan');
     expect(jsonStrings[1], 'en:vegetarian');
     expect(jsonStrings[2], 'en:palm-oil-content-unknown');
@@ -67,17 +75,21 @@ void main() {
 Product _createProductWithEcoscoreData() {
   final packaging = Packaging(score: 1.2, value: 4.1);
   final originOfIngredients = OriginsOfIngredients(
-      epiScore: 1.2,
-      epiValue: 3.1,
-      transportationScore: 1.1,
-      transportationValue: 6.7);
+    epiScore: 1.2,
+    epiValue: 3.1,
+    transportationScore: 1.1,
+    transportationValue: 6.7,
+  );
   final adjustments = EcoscoreAdjustments(
-      packaging: packaging, originsOfIngredients: originOfIngredients);
+    packaging: packaging,
+    originsOfIngredients: originOfIngredients,
+  );
   final ecoscoreData = EcoscoreData(
-      grade: 'x',
-      score: 1.2,
-      status: EcoscoreStatus.KNOWN,
-      adjustments: adjustments);
+    grade: 'x',
+    score: 1.2,
+    status: EcoscoreStatus.KNOWN,
+    adjustments: adjustments,
+  );
   final product = Product(productName: 'TestProduct');
   product.ecoscoreData = ecoscoreData;
   return product;

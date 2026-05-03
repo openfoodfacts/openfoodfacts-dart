@@ -23,11 +23,11 @@ void main() {
       final List<String> expectedKeys = expected.keys.toList(growable: false);
       final MaybeError<Map<String, String>> result =
           await OpenFoodAPIClient.getCanonicalTags(
-        TagType.INGREDIENTS,
-        localizedNames: expectedKeys,
-        language: OpenFoodFactsLanguage.FRENCH,
-        uriHelper: uriHelperFoodProd,
-      );
+            TagType.INGREDIENTS,
+            localizedNames: expectedKeys,
+            language: OpenFoodFactsLanguage.FRENCH,
+            uriHelper: uriHelperFoodProd,
+          );
       expect(result.isError, isFalse);
       for (final String key in expectedKeys) {
         expect(result.value[key], expected[key]);
@@ -37,11 +37,11 @@ void main() {
     test("empty list", () async {
       final MaybeError<Map<String, String>> result =
           await OpenFoodAPIClient.getCanonicalTags(
-        TagType.INGREDIENTS,
-        localizedNames: <String>['', '    ', ''],
-        language: OpenFoodFactsLanguage.FRENCH,
-        uriHelper: uriHelperFoodProd,
-      );
+            TagType.INGREDIENTS,
+            localizedNames: <String>['', '    ', ''],
+            language: OpenFoodFactsLanguage.FRENCH,
+            uriHelper: uriHelperFoodProd,
+          );
       expect(result.isError, isFalse);
       expect(result.value, isEmpty);
     });
@@ -54,11 +54,11 @@ void main() {
       ];
       final MaybeError<Map<String, String>> result =
           await OpenFoodAPIClient.getCanonicalTags(
-        TagType.INGREDIENTS,
-        localizedNames: input,
-        language: OpenFoodFactsLanguage.FRENCH,
-        uriHelper: uriHelperFoodProd,
-      );
+            TagType.INGREDIENTS,
+            localizedNames: input,
+            language: OpenFoodFactsLanguage.FRENCH,
+            uriHelper: uriHelperFoodProd,
+          );
       expect(result.isError, isFalse);
       expect(result.value.entries, hasLength(input.length));
     });
@@ -74,11 +74,11 @@ void main() {
       final List<String> expectedKeys = expected.keys.toList(growable: false);
       final MaybeError<Map<String, String>> result =
           await OpenFoodAPIClient.getLocalizedNames(
-        TagType.INGREDIENTS,
-        canonicalTags: expectedKeys,
-        language: OpenFoodFactsLanguage.FRENCH,
-        uriHelper: uriHelperFoodProd,
-      );
+            TagType.INGREDIENTS,
+            canonicalTags: expectedKeys,
+            language: OpenFoodFactsLanguage.FRENCH,
+            uriHelper: uriHelperFoodProd,
+          );
       expect(result.isError, isFalse);
       for (final String key in expectedKeys) {
         expect(result.value[key], expected[key]);
@@ -88,11 +88,11 @@ void main() {
     test("empty list", () async {
       final MaybeError<Map<String, String>> result =
           await OpenFoodAPIClient.getLocalizedNames(
-        TagType.INGREDIENTS,
-        canonicalTags: <String>['', '    ', ''],
-        language: OpenFoodFactsLanguage.FRENCH,
-        uriHelper: uriHelperFoodProd,
-      );
+            TagType.INGREDIENTS,
+            canonicalTags: <String>['', '    ', ''],
+            language: OpenFoodFactsLanguage.FRENCH,
+            uriHelper: uriHelperFoodProd,
+          );
       expect(result.isError, isFalse);
       expect(result.value, isEmpty);
     });
@@ -105,11 +105,11 @@ void main() {
       ];
       final MaybeError<Map<String, String>> result =
           await OpenFoodAPIClient.getLocalizedNames(
-        TagType.INGREDIENTS,
-        canonicalTags: input,
-        language: OpenFoodFactsLanguage.FRENCH,
-        uriHelper: uriHelperFoodProd,
-      );
+            TagType.INGREDIENTS,
+            canonicalTags: input,
+            language: OpenFoodFactsLanguage.FRENCH,
+            uriHelper: uriHelperFoodProd,
+          );
       expect(result.isError, isFalse);
       expect(result.value.entries, hasLength(input.length));
     });

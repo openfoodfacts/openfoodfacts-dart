@@ -16,12 +16,8 @@ void main() {
   const String knownTag = 'en:steel';
   const String expectedNameFrench = 'Acier';
   const String expectedNameEnglish = 'Steel';
-  const Set<String> expectedChildren = <String>{
-    'en:tin-plated-steel',
-  };
-  const Set<String> expectedParents = <String>{
-    'en:metal',
-  };
+  const Set<String> expectedChildren = <String>{'en:tin-plated-steel'};
+  const Set<String> expectedParents = <String>{'en:metal'};
   const String knownRootTag = 'en:metal';
   const String unknownTag = 'en:some_nonexistent_thing';
 
@@ -29,10 +25,14 @@ void main() {
     void checkKnown(final TaxonomyPackagingMaterial value) {
       expect(value.name![OpenFoodFactsLanguage.ENGLISH]!, expectedNameEnglish);
       expect(value.name![OpenFoodFactsLanguage.FRENCH]!, expectedNameFrench);
-      expect(value.synonyms![OpenFoodFactsLanguage.ENGLISH]!,
-          contains(expectedNameEnglish));
-      expect(value.synonyms![OpenFoodFactsLanguage.FRENCH]!,
-          contains(expectedNameFrench));
+      expect(
+        value.synonyms![OpenFoodFactsLanguage.ENGLISH]!,
+        contains(expectedNameEnglish),
+      );
+      expect(
+        value.synonyms![OpenFoodFactsLanguage.FRENCH]!,
+        contains(expectedNameFrench),
+      );
       expect(value.parents, unorderedEquals(expectedParents));
       expect(value.children, unorderedEquals(expectedChildren));
     }
@@ -40,8 +40,10 @@ void main() {
     test('get a packaging material', () async {
       final Map<String, TaxonomyPackagingMaterial>? values =
           await OpenFoodAPIClient.getTaxonomyPackagingMaterials(
-        TaxonomyPackagingMaterialQueryConfiguration(tags: <String>[knownTag]),
-      );
+            TaxonomyPackagingMaterialQueryConfiguration(
+              tags: <String>[knownTag],
+            ),
+          );
       expect(values, isNotNull);
       expect(values!.length, equals(1));
       checkKnown(values[knownTag]!);
@@ -50,29 +52,33 @@ void main() {
     test("get a packaging material that doesn't exist", () async {
       final Map<String, TaxonomyPackagingMaterial>? values =
           await OpenFoodAPIClient.getTaxonomyPackagingMaterials(
-        TaxonomyPackagingMaterialQueryConfiguration(tags: <String>[unknownTag]),
-      );
+            TaxonomyPackagingMaterialQueryConfiguration(
+              tags: <String>[unknownTag],
+            ),
+          );
       expect(values, isNull);
     });
 
-    test("get a packaging material that doesn't exist with one that does",
-        () async {
-      final Map<String, TaxonomyPackagingMaterial>? values =
-          await OpenFoodAPIClient.getTaxonomyPackagingMaterials(
-        TaxonomyPackagingMaterialQueryConfiguration(
-          tags: <String>[unknownTag, knownTag],
-        ),
-      );
-      expect(values, isNotNull);
-      expect(values!.length, equals(1));
-      checkKnown(values[knownTag]!);
-    });
+    test(
+      "get a packaging material that doesn't exist with one that does",
+      () async {
+        final Map<String, TaxonomyPackagingMaterial>? values =
+            await OpenFoodAPIClient.getTaxonomyPackagingMaterials(
+              TaxonomyPackagingMaterialQueryConfiguration(
+                tags: <String>[unknownTag, knownTag],
+              ),
+            );
+        expect(values, isNotNull);
+        expect(values!.length, equals(1));
+        checkKnown(values[knownTag]!);
+      },
+    );
 
     test('get all root packaging materials', () async {
       final Map<String, TaxonomyPackagingMaterial>? values =
           await OpenFoodAPIClient.getTaxonomyPackagingMaterials(
-        TaxonomyPackagingMaterialQueryConfiguration.roots(),
-      );
+            TaxonomyPackagingMaterialQueryConfiguration.roots(),
+          );
       expect(values, isNotNull);
       expect(values!.length, greaterThan(20)); // was 27 on 2022-11-07
       expect(values[unknownTag], isNull);

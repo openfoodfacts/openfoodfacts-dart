@@ -10,20 +10,26 @@ Price _$PriceFromJson(Map<String, dynamic> json) => Price()
   ..productCode = json['product_code'] as String?
   ..productName = json['product_name'] as String?
   ..categoryTag = json['category_tag'] as String?
-  ..labelsTags =
-      (json['labels_tags'] as List<dynamic>?)?.map((e) => e as String).toList()
-  ..originsTags =
-      (json['origins_tags'] as List<dynamic>?)?.map((e) => e as String).toList()
+  ..labelsTags = (json['labels_tags'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList()
+  ..originsTags = (json['origins_tags'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList()
   ..price = json['price'] as num
   ..priceIsDiscounted = json['price_is_discounted'] as bool?
   ..priceWithoutDiscount = json['price_without_discount'] as num?
-  ..discountType =
-      $enumDecodeNullable(_$DiscountTypeEnumMap, json['discount_type'])
+  ..discountType = $enumDecodeNullable(
+    _$DiscountTypeEnumMap,
+    json['discount_type'],
+  )
   ..pricePer = $enumDecodeNullable(_$PricePerEnumMap, json['price_per'])
   ..currency = $enumDecode(_$CurrencyEnumMap, json['currency'])
   ..locationOSMId = (json['location_osm_id'] as num?)?.toInt()
-  ..locationOSMType =
-      $enumDecodeNullable(_$LocationOSMTypeEnumMap, json['location_osm_type'])
+  ..locationOSMType = $enumDecodeNullable(
+    _$LocationOSMTypeEnumMap,
+    json['location_osm_type'],
+  )
   ..date = JsonHelper.stringTimestampToDate(json['date'])
   ..proofId = (json['proof_id'] as num?)?.toInt()
   ..id = (json['id'] as num).toInt()
@@ -41,37 +47,43 @@ Price _$PriceFromJson(Map<String, dynamic> json) => Price()
   ..receiptQuantity = (json['receipt_quantity'] as num?)?.toInt()
   ..type = $enumDecodeNullable(_$PriceTypeEnumMap, json['type'])
   ..owner = json['owner'] as String
+  ..ownerComment = json['owner_comment'] as String?
+  ..source = json['source'] as String?
+  ..duplicateOf = (json['duplicate_of'] as num?)?.toInt()
   ..created = JsonHelper.stringTimestampToDate(json['created'])
   ..updated = JsonHelper.nullableStringTimestampToDate(json['updated']);
 
 Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
-      'product_code': instance.productCode,
-      'product_name': instance.productName,
-      'category_tag': instance.categoryTag,
-      'labels_tags': instance.labelsTags,
-      'origins_tags': instance.originsTags,
-      'price': instance.price,
-      'price_is_discounted': instance.priceIsDiscounted,
-      'price_without_discount': instance.priceWithoutDiscount,
-      'discount_type': _$DiscountTypeEnumMap[instance.discountType],
-      'price_per': _$PricePerEnumMap[instance.pricePer],
-      'currency': _$CurrencyEnumMap[instance.currency]!,
-      'location_osm_id': instance.locationOSMId,
-      'location_osm_type': _$LocationOSMTypeEnumMap[instance.locationOSMType],
-      'date': instance.date.toIso8601String(),
-      'proof_id': instance.proofId,
-      'id': instance.id,
-      'product_id': instance.productId,
-      'location_id': instance.locationId,
-      'proof': instance.proof,
-      'location': instance.location,
-      'product': instance.product,
-      'receipt_quantity': instance.receiptQuantity,
-      'type': _$PriceTypeEnumMap[instance.type],
-      'owner': instance.owner,
-      'created': instance.created.toIso8601String(),
-      'updated': instance.updated?.toIso8601String(),
-    };
+  'product_code': instance.productCode,
+  'product_name': instance.productName,
+  'category_tag': instance.categoryTag,
+  'labels_tags': instance.labelsTags,
+  'origins_tags': instance.originsTags,
+  'price': instance.price,
+  'price_is_discounted': instance.priceIsDiscounted,
+  'price_without_discount': instance.priceWithoutDiscount,
+  'discount_type': _$DiscountTypeEnumMap[instance.discountType],
+  'price_per': _$PricePerEnumMap[instance.pricePer],
+  'currency': _$CurrencyEnumMap[instance.currency]!,
+  'location_osm_id': instance.locationOSMId,
+  'location_osm_type': _$LocationOSMTypeEnumMap[instance.locationOSMType],
+  'date': instance.date.toIso8601String(),
+  'proof_id': instance.proofId,
+  'id': instance.id,
+  'product_id': instance.productId,
+  'location_id': instance.locationId,
+  'proof': instance.proof,
+  'location': instance.location,
+  'product': instance.product,
+  'receipt_quantity': instance.receiptQuantity,
+  'type': _$PriceTypeEnumMap[instance.type],
+  'owner': instance.owner,
+  'owner_comment': instance.ownerComment,
+  'source': instance.source,
+  'duplicate_of': instance.duplicateOf,
+  'created': instance.created.toIso8601String(),
+  'updated': instance.updated?.toIso8601String(),
+};
 
 const _$DiscountTypeEnumMap = {
   DiscountType.quantity: 'QUANTITY',

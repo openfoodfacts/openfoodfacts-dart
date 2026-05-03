@@ -7,20 +7,20 @@ part of 'robotoff_question.dart';
 // **************************************************************************
 
 RobotoffQuestionResult _$RobotoffQuestionResultFromJson(
-        Map<String, dynamic> json) =>
-    RobotoffQuestionResult(
-      status: json['status'] as String?,
-      questions: (json['questions'] as List<dynamic>?)
-          ?.map((e) => RobotoffQuestion.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
+  Map<String, dynamic> json,
+) => RobotoffQuestionResult(
+  status: json['status'] as String?,
+  questions: (json['questions'] as List<dynamic>?)
+      ?.map((e) => RobotoffQuestion.fromJson(e as Map<String, dynamic>))
+      .toList(),
+);
 
 Map<String, dynamic> _$RobotoffQuestionResultToJson(
-        RobotoffQuestionResult instance) =>
-    <String, dynamic>{
-      'status': instance.status,
-      'questions': instance.questions,
-    };
+  RobotoffQuestionResult instance,
+) => <String, dynamic>{
+  'status': instance.status,
+  'questions': instance.questions,
+};
 
 RobotoffQuestion _$RobotoffQuestionFromJson(Map<String, dynamic> json) =>
     RobotoffQuestion(
@@ -30,8 +30,10 @@ RobotoffQuestion _$RobotoffQuestionFromJson(Map<String, dynamic> json) =>
       question: json['question'] as String?,
       insightId: json['insight_id'] as String?,
       insightType: $enumDecodeNullable(
-          _$InsightTypeEnumMap, json['insight_type'],
-          unknownValue: InsightType.UNKNOWN),
+        _$InsightTypeEnumMap,
+        json['insight_type'],
+        unknownValue: InsightType.UNKNOWN,
+      ),
       imageUrl: json['source_image_url'] as String?,
     );
 

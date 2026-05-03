@@ -15,8 +15,8 @@ ProductResultField _$ProductResultFieldFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$ProductResultFieldToJson(ProductResultField instance) =>
     <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.value case final value?) 'value': value,
-      if (instance.defaultValue case final value?) 'default_value': value,
-      if (instance.valuedConverted case final value?) 'valued_converted': value,
+      'id': ?instance.id,
+      'value': ?instance.value,
+      'default_value': ?instance.defaultValue,
+      'valued_converted': ?instance.valuedConverted,
     };
