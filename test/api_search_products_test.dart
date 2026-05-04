@@ -15,27 +15,24 @@ class _Score {
 
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
+  const user = TestConstants.TEST_USER;
+  const uriHelper = uriHelperFoodTest;
+
   const ProductQueryVersion version = ProductQueryVersion.testVersion;
   const int defaultPageSize = 50;
-
-  Future<SearchResult> searchProductsInProd(
-    final AbstractQueryConfiguration configuration,
-  ) async {
-    await searchProductsTooManyRequestsManager.waitIfNeeded();
-    return OpenFoodAPIClient.searchProducts(
-      TestConstants.PROD_USER,
-      configuration,
-    );
-  }
 
   Future<SearchResult> searchProductsInTest(
     final AbstractQueryConfiguration configuration,
   ) async => OpenFoodAPIClient.searchProducts(
-    TestConstants.TEST_USER,
+    user,
     configuration,
-    uriHelper: uriHelperFoodTest,
+    uriHelper: uriHelper,
   );
+
+  // actually, in TEST
+  Future<SearchResult> searchProductsInProd(
+    final AbstractQueryConfiguration configuration,
+  ) async => searchProductsInTest(configuration);
 
   // additional parameter for faster response time
   const Parameter optimParameter = SearchTerms(terms: ['pizza']);
@@ -717,11 +714,7 @@ void main() {
                 version: version,
               );
 
-          final SearchResult result = await OpenFoodAPIClient.searchProducts(
-            TestConstants.TEST_USER,
-            configuration,
-            uriHelper: uriHelperFoodTest,
-          );
+          final SearchResult result = await searchProductsInTest(configuration);
 
           expect(result.products!.length, 1);
           expect(result.products![0].productName, 'Quoted Coca "cola"');
@@ -761,10 +754,11 @@ void main() {
         final Map<String, ProductFreshness> result =
             await OpenFoodAPIClient.getProductFreshness(
               barcodes: BARCODES,
-              user: TestConstants.PROD_USER,
+              user: user,
               language: OpenFoodFactsLanguage.FRENCH,
               country: OpenFoodFactsCountry.FRANCE,
               version: version,
+              uriHelper: uriHelper,
             );
 
         int count = 0;
@@ -1573,9 +1567,11 @@ void main() {
       final String languageCode = language.code;
       final Uri importanceUrl = AvailablePreferenceImportances.getUri(
         languageCode,
+        uriHelper: uriHelper,
       );
       final Uri attributeGroupUrl = AvailableAttributeGroups.getUri(
         languageCode,
+        uriHelper: uriHelper,
       );
       Response response;
       response = await get(importanceUrl);

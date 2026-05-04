@@ -20,6 +20,7 @@ void main() {
               fields: [ProductField.IMAGES, ProductField.BARCODE],
               version: version,
             ),
+            uriHelper: uriHelperFoodTest,
           );
       expect(productResult.product, isNotNull);
 
