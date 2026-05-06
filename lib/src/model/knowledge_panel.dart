@@ -164,8 +164,7 @@ class TitleElement extends JsonObject {
   final String? iconUrl;
 
   /// If true, the icon can be tinted with a color (red/green/yellow/whatever)
-  /// in accordance with the [evaluation] of the knowledge panel as per the
-  /// client's discretion.
+  /// in accordance with the panel evaluation, as per the client's discretion.
   @JsonKey(name: 'icon_color_from_evaluation', defaultValue: false)
   final bool? iconColorFromEvaluation;
 

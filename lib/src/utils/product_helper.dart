@@ -12,10 +12,12 @@ class ProductHelper {
     }
 
     for (var field in ImageField.values) {
-      if (product.selectedImages!
-          .any((i) => i.field == field && i.language == language)) {
-        product.selectedImages!
-            .removeWhere((i) => i.field == field && i.language != language);
+      if (product.selectedImages!.any(
+        (i) => i.field == field && i.language == language,
+      )) {
+        product.selectedImages!.removeWhere(
+          (i) => i.field == field && i.language != language,
+        );
       }
     }
   }

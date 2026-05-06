@@ -18,9 +18,7 @@ enum TagType implements OffTagged {
   NOVA(offTag: 'nova_groups'),
   EMB_CODES(offTag: 'emb_codes');
 
-  const TagType({
-    required this.offTag,
-  });
+  const TagType({required this.offTag});
 
   @override
   final String offTag;

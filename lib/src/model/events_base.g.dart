@@ -7,12 +7,12 @@ part of 'events_base.dart';
 // **************************************************************************
 
 EventsBase _$EventsBaseFromJson(Map<String, dynamic> json) => EventsBase(
-      eventType: json['event_type'] as String,
-      timestamp: JsonHelper.nullableStringTimestampToDate(json['timestamp']),
-      userId: json['user_id'] as String?,
-      barcode: json['barcode'] as String?,
-      points: (json['points'] as num?)?.toInt(),
-    );
+  eventType: json['event_type'] as String,
+  timestamp: JsonHelper.nullableStringTimestampToDate(json['timestamp']),
+  userId: json['user_id'] as String?,
+  barcode: json['barcode'] as String?,
+  points: (json['points'] as num?)?.toInt(),
+);
 
 Map<String, dynamic> _$EventsBaseToJson(EventsBase instance) =>
     <String, dynamic>{

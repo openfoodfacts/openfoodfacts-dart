@@ -34,60 +34,37 @@ TaxonomyLabel _$TaxonomyLabelFromJson(Map<String, dynamic> json) =>
       LanguageHelper.fromJsonStringMap(json['wikidata']),
     );
 
-Map<String, dynamic> _$TaxonomyLabelToJson(TaxonomyLabel instance) =>
-    <String, dynamic>{
-      if (LanguageHelper.toJsonStringMap(instance.authAddress)
-          case final value?)
-        'auth_address': value,
-      if (LanguageHelper.toJsonStringMap(instance.authName) case final value?)
-        'auth_name': value,
-      if (LanguageHelper.toJsonStringMap(instance.authUrl) case final value?)
-        'auth_url': value,
-      if (LanguageHelper.toJsonStringMap(instance.categories) case final value?)
-        'categories': value,
-      if (LanguageHelper.toJsonStringMap(instance.countriesWhereSold)
-          case final value?)
-        'countries_where_sold': value,
-      if (instance.children case final value?) 'children': value,
-      if (LanguageHelper.toJsonStringMap(instance.country) case final value?)
-        'country': value,
-      if (LanguageHelper.toJsonStringMap(instance.description)
-          case final value?)
-        'description': value,
-      if (LanguageHelper.toJsonStringMap(instance.euGroups) case final value?)
-        'eu_groups': value,
-      if (LanguageHelper.toJsonStringMap(instance.exceptions) case final value?)
-        'exceptions': value,
-      if (LanguageHelper.toJsonStringMap(instance.image) case final value?)
-        'image': value,
-      if (LanguageHelper.toJsonStringMap(instance.images) case final value?)
-        'images': value,
-      if (LanguageHelper.toJsonStringMap(instance.ingredients)
-          case final value?)
-        'ingredients': value,
-      if (LanguageHelper.toJsonStringMap(instance.labelCategories)
-          case final value?)
-        'label_categories': value,
-      if (LanguageHelper.toJsonStringMap(instance.manufacturingPlaces)
-          case final value?)
-        'manufacturing_places': value,
-      if (LanguageHelper.toJsonStringMap(instance.name) case final value?)
-        'name': value,
-      if (LanguageHelper.toJsonStringMap(instance.opposite) case final value?)
-        'opposite': value,
-      if (LanguageHelper.toJsonStringMap(instance.origins) case final value?)
-        'origins': value,
-      if (LanguageHelper.toJsonStringMap(instance.packaging) case final value?)
-        'packaging': value,
-      if (LanguageHelper.toJsonStringMap(instance.packagingPlaces)
-          case final value?)
-        'packaging_places': value,
-      if (instance.parents case final value?) 'parents': value,
-      if (LanguageHelper.toJsonStringMap(instance.protectedNameType)
-          case final value?)
-        'protected_name_type': value,
-      if (LanguageHelper.toJsonStringMap(instance.stores) case final value?)
-        'stores': value,
-      if (LanguageHelper.toJsonStringMap(instance.wikidata) case final value?)
-        'wikidata': value,
-    };
+Map<String, dynamic> _$TaxonomyLabelToJson(
+  TaxonomyLabel instance,
+) => <String, dynamic>{
+  'auth_address': ?LanguageHelper.toJsonStringMap(instance.authAddress),
+  'auth_name': ?LanguageHelper.toJsonStringMap(instance.authName),
+  'auth_url': ?LanguageHelper.toJsonStringMap(instance.authUrl),
+  'categories': ?LanguageHelper.toJsonStringMap(instance.categories),
+  'countries_where_sold': ?LanguageHelper.toJsonStringMap(
+    instance.countriesWhereSold,
+  ),
+  'children': ?instance.children,
+  'country': ?LanguageHelper.toJsonStringMap(instance.country),
+  'description': ?LanguageHelper.toJsonStringMap(instance.description),
+  'eu_groups': ?LanguageHelper.toJsonStringMap(instance.euGroups),
+  'exceptions': ?LanguageHelper.toJsonStringMap(instance.exceptions),
+  'image': ?LanguageHelper.toJsonStringMap(instance.image),
+  'images': ?LanguageHelper.toJsonStringMap(instance.images),
+  'ingredients': ?LanguageHelper.toJsonStringMap(instance.ingredients),
+  'label_categories': ?LanguageHelper.toJsonStringMap(instance.labelCategories),
+  'manufacturing_places': ?LanguageHelper.toJsonStringMap(
+    instance.manufacturingPlaces,
+  ),
+  'name': ?LanguageHelper.toJsonStringMap(instance.name),
+  'opposite': ?LanguageHelper.toJsonStringMap(instance.opposite),
+  'origins': ?LanguageHelper.toJsonStringMap(instance.origins),
+  'packaging': ?LanguageHelper.toJsonStringMap(instance.packaging),
+  'packaging_places': ?LanguageHelper.toJsonStringMap(instance.packagingPlaces),
+  'parents': ?instance.parents,
+  'protected_name_type': ?LanguageHelper.toJsonStringMap(
+    instance.protectedNameType,
+  ),
+  'stores': ?LanguageHelper.toJsonStringMap(instance.stores),
+  'wikidata': ?LanguageHelper.toJsonStringMap(instance.wikidata),
+};

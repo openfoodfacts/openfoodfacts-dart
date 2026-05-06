@@ -171,9 +171,7 @@ void main() {
       );
       expect(unknown, 0);
 
-      final int all = await EventsAPIClient.getScores(
-        uriHelper: uriHelper,
-      );
+      final int all = await EventsAPIClient.getScores(uriHelper: uriHelper);
       final int known = await EventsAPIClient.getScores(
         userId: knownUserId,
         uriHelper: uriHelper,
@@ -192,9 +190,7 @@ void main() {
 
     test('getLeaderboard', () async {
       final List<LeaderboardEntry> result =
-          await EventsAPIClient.getLeaderboard(
-        uriHelper: uriHelper,
-      );
+          await EventsAPIClient.getLeaderboard(uriHelper: uriHelper);
       final int knownTotal = getLeaderboardScore(knownUserId, result)!;
       final int nullTotal = getLeaderboardScore(null, result)!;
       expect(getLeaderboardScore(unknownUserId, result), isNull);
@@ -203,9 +199,9 @@ void main() {
       for (final String eventType in typicalEventTypes) {
         final List<LeaderboardEntry> result =
             await EventsAPIClient.getLeaderboard(
-          eventType: eventType,
-          uriHelper: uriHelper,
-        );
+              eventType: eventType,
+              uriHelper: uriHelper,
+            );
         knownSum += getLeaderboardScore(knownUserId, result) ?? 0;
         nullSum += getLeaderboardScore(null, result) ?? 0;
         expect(getLeaderboardScore(unknownUserId, result), isNull);

@@ -12,7 +12,7 @@ Session _$SessionFromJson(Map<String, dynamic> json) => Session()
   ..lastUsed = JsonHelper.nullableStringTimestampToDate(json['last_used']);
 
 Map<String, dynamic> _$SessionToJson(Session instance) => <String, dynamic>{
-      'user_id': instance.userId,
-      'created': instance.created.toIso8601String(),
-      'last_used': instance.lastUsed?.toIso8601String(),
-    };
+  'user_id': instance.userId,
+  'created': instance.created.toIso8601String(),
+  'last_used': instance.lastUsed?.toIso8601String(),
+};

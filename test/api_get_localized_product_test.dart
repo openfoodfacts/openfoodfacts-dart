@@ -7,6 +7,8 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   Future<ProductResultV3> getProductV3InProd(
     ProductQueryConfiguration configuration,
   ) async {
@@ -24,14 +26,12 @@ void main() {
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
-        barcode,
-        languages: languages,
-        fields: [ProductField.PACKAGING_TEXT_IN_LANGUAGES],
-        version: ProductQueryVersion.v3,
-      );
-      final ProductResultV3 result = await getProductV3InProd(
-        configurations,
-      );
+            barcode,
+            languages: languages,
+            fields: [ProductField.PACKAGING_TEXT_IN_LANGUAGES],
+            version: version,
+          );
+      final ProductResultV3 result = await getProductV3InProd(configurations);
       expect(result.status, ProductResultV3.statusSuccess);
       expect(result.product, isNotNull);
       expect(result.product!.packagingTextInLanguages, isNotNull);
@@ -54,7 +54,7 @@ void main() {
           BARCODE_DANISH_BUTTER_COOKIES,
           languages: languages,
           fields: [ProductField.IMAGES_FRESHNESS_IN_LANGUAGES],
-          version: ProductQueryVersion.v3,
+          version: version,
         ),
       );
       final Product product = productResult.product!;
@@ -81,41 +81,39 @@ void main() {
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
-        barcode,
-        languages: languages,
-        fields: [
-          // tags in languages
-          ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
-          ProductField.ADDITIVES_TAGS_IN_LANGUAGES,
-          ProductField.ALLERGENS_TAGS_IN_LANGUAGES,
-          ProductField.TRACES_TAGS_IN_LANGUAGES,
-          ProductField.STORES_TAGS_IN_LANGUAGES,
-          ProductField.STATES_TAGS_IN_LANGUAGES,
-          ProductField.BRANDS_TAGS_IN_LANGUAGES,
-          ProductField.MISC_TAGS_IN_LANGUAGES,
-          ProductField.INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES,
-          ProductField.LABELS_TAGS_IN_LANGUAGES,
-          ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
-          ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
-          // tags
-          ProductField.CATEGORIES_TAGS,
-          ProductField.ADDITIVES,
-          ProductField.ALLERGENS,
-          ProductField.TRACES_TAGS,
-          ProductField.STORES_TAGS,
-          ProductField.STATES_TAGS,
-          ProductField.BRANDS_TAGS,
-          ProductField.MISC_TAGS,
-          ProductField.INGREDIENTS_ANALYSIS_TAGS,
-          ProductField.LABELS_TAGS,
-          ProductField.COUNTRIES_TAGS,
-          ProductField.INGREDIENTS_TAGS,
-        ],
-        version: ProductQueryVersion.v3,
-      );
-      final ProductResultV3 result = await getProductV3InProd(
-        configurations,
-      );
+            barcode,
+            languages: languages,
+            fields: [
+              // tags in languages
+              ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
+              ProductField.ADDITIVES_TAGS_IN_LANGUAGES,
+              ProductField.ALLERGENS_TAGS_IN_LANGUAGES,
+              ProductField.TRACES_TAGS_IN_LANGUAGES,
+              ProductField.STORES_TAGS_IN_LANGUAGES,
+              ProductField.STATES_TAGS_IN_LANGUAGES,
+              ProductField.BRANDS_TAGS_IN_LANGUAGES,
+              ProductField.MISC_TAGS_IN_LANGUAGES,
+              ProductField.INGREDIENTS_ANALYSIS_TAGS_IN_LANGUAGES,
+              ProductField.LABELS_TAGS_IN_LANGUAGES,
+              ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
+              ProductField.INGREDIENTS_TAGS_IN_LANGUAGES,
+              // tags
+              ProductField.CATEGORIES_TAGS,
+              ProductField.ADDITIVES,
+              ProductField.ALLERGENS,
+              ProductField.TRACES_TAGS,
+              ProductField.STORES_TAGS,
+              ProductField.STATES_TAGS,
+              ProductField.BRANDS_TAGS,
+              ProductField.MISC_TAGS,
+              ProductField.INGREDIENTS_ANALYSIS_TAGS,
+              ProductField.LABELS_TAGS,
+              ProductField.COUNTRIES_TAGS,
+              ProductField.INGREDIENTS_TAGS,
+            ],
+            version: version,
+          );
+      final ProductResultV3 result = await getProductV3InProd(configurations);
       expect(result.status, ProductResultV3.statusSuccess);
       expect(result.product, isNotNull);
       final Product product = result.product!;
@@ -125,21 +123,9 @@ void main() {
         final Map<OpenFoodFactsLanguage, List<String>>? tagsInLanguages,
         final ProductField productField,
       ) {
-        expect(
-          tags,
-          isNotNull,
-          reason: productField.offTag,
-        );
-        expect(
-          tagsInLanguages,
-          isNotNull,
-          reason: productField.offTag,
-        );
-        expect(
-          tagsInLanguages,
-          isNotEmpty,
-          reason: productField.offTag,
-        );
+        expect(tags, isNotNull, reason: productField.offTag);
+        expect(tagsInLanguages, isNotNull, reason: productField.offTag);
+        expect(tagsInLanguages, isNotEmpty, reason: productField.offTag);
         final int count = tags!.length;
 
         for (final OpenFoodFactsLanguage language in languages) {
@@ -161,21 +147,9 @@ void main() {
         final Map<OpenFoodFactsLanguage, List<String>>? tagsInLanguages,
         final ProductField productField,
       ) {
-        expect(
-          tags,
-          isNotNull,
-          reason: productField.offTag,
-        );
-        expect(
-          tagsInLanguages,
-          isNotNull,
-          reason: productField.offTag,
-        );
-        expect(
-          tagsInLanguages,
-          isNotEmpty,
-          reason: productField.offTag,
-        );
+        expect(tags, isNotNull, reason: productField.offTag);
+        expect(tagsInLanguages, isNotNull, reason: productField.offTag);
+        expect(tagsInLanguages, isNotEmpty, reason: productField.offTag);
         final int count = 3; // vegetarian, vegan, palm-oil
 
         for (final OpenFoodFactsLanguage language in languages) {
@@ -264,16 +238,12 @@ void main() {
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
-        barcode,
-        languages: languages,
-        fields: [
-          ProductField.IMAGES_FRESHNESS_IN_LANGUAGES,
-        ],
-        version: ProductQueryVersion.v3,
-      );
-      final ProductResultV3 result = await getProductV3InProd(
-        configurations,
-      );
+            barcode,
+            languages: languages,
+            fields: [ProductField.IMAGES_FRESHNESS_IN_LANGUAGES],
+            version: version,
+          );
+      final ProductResultV3 result = await getProductV3InProd(configurations);
       expect(result.status, ProductResultV3.statusSuccess);
       expect(result.product, isNotNull);
       final Product product = result.product!;
@@ -282,16 +252,8 @@ void main() {
         final Map<OpenFoodFactsLanguage, Map<ImageField, int>>? tagsInLanguages,
         final ProductField productField,
       ) {
-        expect(
-          tagsInLanguages,
-          isNotNull,
-          reason: productField.offTag,
-        );
-        expect(
-          tagsInLanguages,
-          isNotEmpty,
-          reason: productField.offTag,
-        );
+        expect(tagsInLanguages, isNotNull, reason: productField.offTag);
+        expect(tagsInLanguages, isNotEmpty, reason: productField.offTag);
 
         for (final OpenFoodFactsLanguage language in languages) {
           expect(
@@ -322,18 +284,16 @@ void main() {
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
-        barcode,
-        languages: languages,
-        fields: [
-          ProductField.NAME_IN_LANGUAGES,
-          ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
-          ProductField.PACKAGING_TEXT_IN_LANGUAGES,
-        ],
-        version: ProductQueryVersion.v3,
-      );
-      final ProductResultV3 result = await getProductV3InProd(
-        configurations,
-      );
+            barcode,
+            languages: languages,
+            fields: [
+              ProductField.NAME_IN_LANGUAGES,
+              ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+              ProductField.PACKAGING_TEXT_IN_LANGUAGES,
+            ],
+            version: version,
+          );
+      final ProductResultV3 result = await getProductV3InProd(configurations);
       expect(result.status, ProductResultV3.statusSuccess);
       expect(result.product, isNotNull);
       final Product product = result.product!;
@@ -342,16 +302,8 @@ void main() {
         final Map<OpenFoodFactsLanguage, String>? tagsInLanguages,
         final ProductField productField,
       ) {
-        expect(
-          tagsInLanguages,
-          isNotNull,
-          reason: productField.offTag,
-        );
-        expect(
-          tagsInLanguages,
-          isNotEmpty,
-          reason: productField.offTag,
-        );
+        expect(tagsInLanguages, isNotNull, reason: productField.offTag);
+        expect(tagsInLanguages, isNotEmpty, reason: productField.offTag);
 
         for (final OpenFoodFactsLanguage language in languages) {
           expect(
@@ -367,10 +319,7 @@ void main() {
         }
       }
 
-      check(
-        product.productNameInLanguages,
-        ProductField.NAME_IN_LANGUAGES,
-      );
+      check(product.productNameInLanguages, ProductField.NAME_IN_LANGUAGES);
       check(
         product.ingredientsTextInLanguages,
         ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
@@ -390,21 +339,19 @@ void main() {
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
-        barcode,
-        languages: languages,
-        fields: [
-          ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
-          ProductField.PACKAGING_TEXT_ALL_LANGUAGES,
-          ProductField.NAME_ALL_LANGUAGES,
-          ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
-          ProductField.PACKAGING_TEXT_IN_LANGUAGES,
-          ProductField.NAME_IN_LANGUAGES,
-        ],
-        version: ProductQueryVersion.v3,
-      );
-      final ProductResultV3 result = await getProductV3InProd(
-        configurations,
-      );
+            barcode,
+            languages: languages,
+            fields: [
+              ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
+              ProductField.PACKAGING_TEXT_ALL_LANGUAGES,
+              ProductField.NAME_ALL_LANGUAGES,
+              ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+              ProductField.PACKAGING_TEXT_IN_LANGUAGES,
+              ProductField.NAME_IN_LANGUAGES,
+            ],
+            version: version,
+          );
+      final ProductResultV3 result = await getProductV3InProd(configurations);
       expect(result.status, ProductResultV3.statusSuccess);
       expect(result.product, isNotNull);
       final Product product = result.product!;
@@ -413,16 +360,8 @@ void main() {
         final Map<OpenFoodFactsLanguage, String>? tagsInLanguages,
         final ProductField productField,
       ) {
-        expect(
-          tagsInLanguages,
-          isNotNull,
-          reason: productField.offTag,
-        );
-        expect(
-          tagsInLanguages,
-          isNotEmpty,
-          reason: productField.offTag,
-        );
+        expect(tagsInLanguages, isNotNull, reason: productField.offTag);
+        expect(tagsInLanguages, isNotEmpty, reason: productField.offTag);
       }
 
       check(
@@ -433,10 +372,7 @@ void main() {
         product.packagingTextInLanguages,
         ProductField.PACKAGING_TEXT_ALL_LANGUAGES,
       );
-      check(
-        product.productNameInLanguages,
-        ProductField.NAME_ALL_LANGUAGES,
-      );
+      check(product.productNameInLanguages, ProductField.NAME_ALL_LANGUAGES);
     });
 
     test('get all "tags in+all languages" (List<String>)', () async {
@@ -444,18 +380,16 @@ void main() {
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
-        barcode,
-        fields: [
-          // tags all languages
-          ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
-          ProductField.PACKAGING_TEXT_ALL_LANGUAGES,
-          ProductField.NAME_ALL_LANGUAGES,
-        ],
-        version: ProductQueryVersion.v3,
-      );
-      final ProductResultV3 result = await getProductV3InProd(
-        configurations,
-      );
+            barcode,
+            fields: [
+              // tags all languages
+              ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
+              ProductField.PACKAGING_TEXT_ALL_LANGUAGES,
+              ProductField.NAME_ALL_LANGUAGES,
+            ],
+            version: version,
+          );
+      final ProductResultV3 result = await getProductV3InProd(configurations);
       expect(result.status, ProductResultV3.statusSuccess);
       expect(result.product, isNotNull);
       final Product product = result.product!;
@@ -464,16 +398,8 @@ void main() {
         final Map<OpenFoodFactsLanguage, String>? tagsInLanguages,
         final ProductField productField,
       ) {
-        expect(
-          tagsInLanguages,
-          isNotNull,
-          reason: productField.offTag,
-        );
-        expect(
-          tagsInLanguages,
-          isNotEmpty,
-          reason: productField.offTag,
-        );
+        expect(tagsInLanguages, isNotNull, reason: productField.offTag);
+        expect(tagsInLanguages, isNotEmpty, reason: productField.offTag);
       }
 
       check(
@@ -484,10 +410,7 @@ void main() {
         product.packagingTextInLanguages,
         ProductField.PACKAGING_TEXT_ALL_LANGUAGES,
       );
-      check(
-        product.productNameInLanguages,
-        ProductField.NAME_ALL_LANGUAGES,
-      );
+      check(product.productNameInLanguages, ProductField.NAME_ALL_LANGUAGES);
     });
   });
 }

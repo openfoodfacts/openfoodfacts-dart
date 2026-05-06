@@ -1,6 +1,8 @@
-library openfoodfacts;
-
 export 'src/events.dart';
+export 'src/external/external_source_filter.dart';
+export 'src/external/external_source_metadata.dart';
+export 'src/external/external_source_product_data.dart';
+export 'src/external/json_map.dart';
 export 'src/folksonomy.dart';
 export 'src/interface/parameter.dart';
 export 'src/model/additives.dart';
@@ -38,6 +40,8 @@ export 'src/model/packaging.dart';
 export 'src/model/parameter/allergens_parameter.dart';
 export 'src/model/parameter/barcode_parameter.dart';
 export 'src/model/parameter/ingredients_analysis_parameter.dart';
+export 'src/model/parameter/ingredients_filter_parameter.dart';
+export 'src/model/parameter/ingredients_unwanted_parameter.dart';
 export 'src/model/parameter/page_number.dart';
 export 'src/model/parameter/page_size.dart';
 export 'src/model/parameter/pnns_group2_filter.dart';
@@ -85,6 +89,7 @@ export 'src/model/taxonomy_packaging_recycling.dart';
 export 'src/model/taxonomy_packaging_shape.dart';
 export 'src/model/user.dart';
 export 'src/model/user_agent.dart';
+export 'src/model/user_details.dart';
 export 'src/model/value_count.dart';
 export 'src/open_food_api_client.dart';
 export 'src/open_food_search_api_client.dart';

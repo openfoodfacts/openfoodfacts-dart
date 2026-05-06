@@ -16,9 +16,11 @@ enum TaxonomyIngredientField implements OffTagged {
   ALLERGENS(offTag: 'allergens'),
   BRIOCHE(offTag: 'brioche'),
   CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT(
-      offTag: 'carbon_footprint_fr_foodges_ingredient'),
+    offTag: 'carbon_footprint_fr_foodges_ingredient',
+  ),
   CARBON_FOOTPRINT_FR_FOODGES_VALUE(
-      offTag: 'carbon_footprint_fr_foodges_value'),
+    offTag: 'carbon_footprint_fr_foodges_value',
+  ),
   CHILDREN(offTag: 'children'),
   CIQUAL_FOOD_CODE(offTag: 'ciqual_food_code'),
   CIQUAL_FOOD_NAME(offTag: 'ciqual_food_name'),
@@ -33,15 +35,20 @@ enum TaxonomyIngredientField implements OffTagged {
   EFSA_EVALUATION_ADI_ESTABLISHED(offTag: 'efsa_evaluation_adi_established'),
   EFSA_EVALUATION_DATE(offTag: 'efsa_evaluation_date'),
   EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_ADI(
-      offTag: 'efsa_evaluation_exposure_95th_greater_than_adi'),
+    offTag: 'efsa_evaluation_exposure_95th_greater_than_adi',
+  ),
   EFSA_EVALUATION_EXPOSURE_95TH_GREATER_THAN_NOAEL(
-      offTag: 'efsa_evaluation_exposure_95th_greater_than_noael'),
+    offTag: 'efsa_evaluation_exposure_95th_greater_than_noael',
+  ),
   EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_ADI(
-      offTag: 'efsa_evaluation_exposure_mean_greater_than_adi'),
+    offTag: 'efsa_evaluation_exposure_mean_greater_than_adi',
+  ),
   EFSA_EVALUATION_EXPOSURE_MEAN_GREATER_THAN_NOAEL(
-      offTag: 'efsa_evaluation_exposure_mean_greater_than_noael'),
+    offTag: 'efsa_evaluation_exposure_mean_greater_than_noael',
+  ),
   EFSA_EVALUATION_OVEREXPOSURE_RISK(
-      offTag: 'efsa_evaluation_overexposure_risk'),
+    offTag: 'efsa_evaluation_overexposure_risk',
+  ),
   EFSA_EVALUATION_SAFETY_ASSESSED(offTag: 'efsa_evaluation_safety_assessed'),
   EFSA_EVALUATION_URL(offTag: 'efsa_evaluation_url'),
   FROM_PALM_OIL(offTag: 'from_palm_oil'),
@@ -50,7 +57,8 @@ enum TaxonomyIngredientField implements OffTagged {
   NAME(offTag: 'name'),
   NOVA(offTag: 'nova'),
   NUTRISCORE_FRUITS_VEGETABLES_NUTS(
-      offTag: 'nutriscore_fruits_vegetables_nuts'),
+    offTag: 'nutriscore_fruits_vegetables_nuts',
+  ),
   ORGANIC_EU(offTag: 'organic_eu'),
   ORIGINS(offTag: 'origins'),
   PARENTS(offTag: 'parents'),
@@ -63,9 +71,7 @@ enum TaxonomyIngredientField implements OffTagged {
   WIKIDATA(offTag: 'wikidata'),
   WIKTIONARY(offTag: 'wiktionary');
 
-  const TaxonomyIngredientField({
-    required this.offTag,
-  });
+  const TaxonomyIngredientField({required this.offTag});
 
   @override
   final String offTag;
@@ -266,7 +272,7 @@ class TaxonomyIngredient extends JsonObject {
     includeIfNull: false,
   )
   Map<OpenFoodFactsLanguage, String>?
-      efsaEvaluationExposure95ThGreaterThanNoael;
+  efsaEvaluationExposure95ThGreaterThanNoael;
   @JsonKey(
     name: 'efsa_evaluation_exposure_mean_greater_than_adi',
     fromJson: LanguageHelper.fromJsonStringMap,
@@ -281,7 +287,7 @@ class TaxonomyIngredient extends JsonObject {
     includeIfNull: false,
   )
   Map<OpenFoodFactsLanguage, String>?
-      efsaEvaluationExposureMeanGreaterThanNoael;
+  efsaEvaluationExposureMeanGreaterThanNoael;
   @JsonKey(
     name: 'efsa_evaluation_overexposure_risk',
     fromJson: LanguageHelper.fromJsonStringMap,
@@ -422,8 +428,12 @@ class TaxonomyIngredient extends JsonObject {
   String toString() => toJson().toString();
 }
 
-class TaxonomyIngredientQueryConfiguration extends TaxonomyQueryConfiguration<
-    TaxonomyIngredient, TaxonomyIngredientField> {
+class TaxonomyIngredientQueryConfiguration
+    extends
+        TaxonomyQueryConfiguration<
+          TaxonomyIngredient,
+          TaxonomyIngredientField
+        > {
   TaxonomyIngredientQueryConfiguration({
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages,
@@ -432,14 +442,14 @@ class TaxonomyIngredientQueryConfiguration extends TaxonomyQueryConfiguration<
     List<Parameter> additionalParameters = const [],
     bool includeChildren = false,
   }) : super(
-          TagType.INGREDIENTS,
-          tags,
-          languages: languages,
-          country: country,
-          includeChildren: includeChildren,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.INGREDIENTS,
+         tags,
+         languages: languages,
+         country: country,
+         includeChildren: includeChildren,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   TaxonomyIngredientQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages,
@@ -448,21 +458,23 @@ class TaxonomyIngredientQueryConfiguration extends TaxonomyQueryConfiguration<
     List<Parameter> additionalParameters = const [],
     bool includeChildren = false,
   }) : super.roots(
-          TagType.INGREDIENTS,
-          languages: languages,
-          country: country,
-          includeChildren: includeChildren,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.INGREDIENTS,
+         languages: languages,
+         country: country,
+         includeChildren: includeChildren,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   @override
   Map<String, TaxonomyIngredient> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {
       return const {};
     }
-    return jsonData
-        .map<String, TaxonomyIngredient>((String key, dynamic taxonomy) {
+    return jsonData.map<String, TaxonomyIngredient>((
+      String key,
+      dynamic taxonomy,
+    ) {
       if (taxonomy is! Map<String, dynamic>) {
         assert(false, 'Received JSON Ingredient is not a Map');
         return MapEntry(key, TaxonomyIngredient.fromJson({}));
@@ -472,15 +484,18 @@ class TaxonomyIngredientQueryConfiguration extends TaxonomyQueryConfiguration<
   }
 
   @override
-  Set<TaxonomyIngredientField> get ignoredFields =>
-      const {TaxonomyIngredientField.ALL};
+  Set<TaxonomyIngredientField> get ignoredFields => const {
+    TaxonomyIngredientField.ALL,
+  };
 
   @override
   Iterable<String> convertFieldsToStrings(
-      Iterable<TaxonomyIngredientField> fields) {
+    Iterable<TaxonomyIngredientField> fields,
+  ) {
     return fields
         .where(
-            (TaxonomyIngredientField field) => !ignoredFields.contains(field))
+          (TaxonomyIngredientField field) => !ignoredFields.contains(field),
+        )
         .map<String>((TaxonomyIngredientField field) => field.offTag);
   }
 }

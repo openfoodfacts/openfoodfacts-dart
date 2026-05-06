@@ -8,6 +8,8 @@ import 'test_constants.dart';
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   // Verify that we can save the product as a JSON string and then load it back
   test('Load product from JSON', () async {
     String barcode = '0030000010204';
@@ -15,7 +17,7 @@ void main() {
       barcode,
       languages: [OpenFoodFactsLanguage.ENGLISH, OpenFoodFactsLanguage.FRENCH],
       fields: [ProductField.ALL],
-      version: ProductQueryVersion.v3,
+      version: version,
     );
     ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
       configurations,
@@ -38,26 +40,27 @@ void main() {
         HttpHelper().jsonDecode(encodedJson) as Map<String, dynamic>;
     Product product = Product.fromJson(decodedJson);
     expect(
-        product.categoriesTagsInLanguages,
-        equals({
-          OpenFoodFactsLanguage.FRENCH: [
-            'Aliments et boissons à base de végétaux',
-            'Aliments d\'origine végétale',
-            'Céréales et pommes de terre',
-            'Aliments à base de fruits et de légumes',
-            'Céréales et dérivés',
-            'Plats préparés',
-            'Sandwichs',
-            'Substituts de viande',
-            'Plats préparés d\'origine végétale',
-            'Céréales préparées',
-            'Steaks végétaux',
-            'Plats à base de boulgour',
-            'Plats préparés à faible teneur en matières grasses',
-            'Hamburgers végétariens',
-            'Galettes de céréales aux légumes',
-            'Plats-prepares-au-fromage'
-          ]
-        }));
+      product.categoriesTagsInLanguages,
+      equals({
+        OpenFoodFactsLanguage.FRENCH: [
+          'Aliments et boissons à base de végétaux',
+          'Aliments d\'origine végétale',
+          'Céréales et pommes de terre',
+          'Aliments à base de fruits et de légumes',
+          'Céréales et dérivés',
+          'Plats préparés',
+          'Sandwichs',
+          'Substituts de viande',
+          'Plats préparés d\'origine végétale',
+          'Céréales préparées',
+          'Steaks végétaux',
+          'Plats à base de boulgour',
+          'Plats préparés à faible teneur en matières grasses',
+          'Hamburgers végétariens',
+          'Galettes de céréales aux légumes',
+          'Plats-prepares-au-fromage',
+        ],
+      }),
+    );
   });
 }

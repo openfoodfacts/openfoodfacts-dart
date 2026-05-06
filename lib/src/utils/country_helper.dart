@@ -99,7 +99,7 @@ enum OpenFoodFactsCountry implements OffTagged {
   BULGARIA(
     offTag: 'bg',
     iso3Code: 'BGR',
-    currency: Currency.BGN,
+    currency: Currency.EUR,
     wikiUrl: 'https://wiki.openfoodfacts.org/Local_Communities/BulgarianTeam',
   ),
 
@@ -161,11 +161,17 @@ enum OpenFoodFactsCountry implements OffTagged {
 
   /// Congo, Democratic Republic of the
   DEMOCRATIC_REPUBLIC_OF_THE_CONGO(
-      offTag: 'cd', iso3Code: 'COD', currency: Currency.CDF),
+    offTag: 'cd',
+    iso3Code: 'COD',
+    currency: Currency.CDF,
+  ),
 
   /// Central African Republic
   CENTRAL_AFRICAN_REPUBLIC(
-      offTag: 'cf', iso3Code: 'CAF', currency: Currency.XAF),
+    offTag: 'cf',
+    iso3Code: 'CAF',
+    currency: Currency.XAF,
+  ),
 
   /// Congo
   CONGO(offTag: 'cg', iso3Code: 'COG', currency: Currency.XAF),
@@ -438,7 +444,10 @@ enum OpenFoodFactsCountry implements OffTagged {
 
   /// British Indian Ocean Territory
   BRITISH_INDIAN_OCEAN_TERRITORY(
-      offTag: 'io', iso3Code: 'IOT', currency: Currency.USD),
+    offTag: 'io',
+    iso3Code: 'IOT',
+    currency: Currency.USD,
+  ),
 
   /// Iraq
   IRAQ(offTag: 'iq', iso3Code: 'IRQ', currency: Currency.IQD),
@@ -583,7 +592,10 @@ enum OpenFoodFactsCountry implements OffTagged {
 
   /// Northern Mariana Islands
   NORTHERN_MARIANA_ISLANDS(
-      offTag: 'mp', iso3Code: 'MNP', currency: Currency.USD),
+    offTag: 'mp',
+    iso3Code: 'MNP',
+    currency: Currency.USD,
+  ),
 
   /// Martinique
   MARTINIQUE(
@@ -845,7 +857,10 @@ enum OpenFoodFactsCountry implements OffTagged {
 
   /// Turks and Caicos Islands
   TURKS_AND_CAICOS_ISLANDS(
-      offTag: 'tc', iso3Code: 'TCA', currency: Currency.USD),
+    offTag: 'tc',
+    iso3Code: 'TCA',
+    currency: Currency.USD,
+  ),
 
   /// Chad
   CHAD(offTag: 'td', iso3Code: 'TCD', currency: Currency.XAF),
@@ -946,7 +961,10 @@ enum OpenFoodFactsCountry implements OffTagged {
 
   /// Saint Vincent and the Grenadines
   SAINT_VINCENT_AND_THE_GRENADINES(
-      offTag: 'vc', iso3Code: 'VCT', currency: Currency.XCD),
+    offTag: 'vc',
+    iso3Code: 'VCT',
+    currency: Currency.XCD,
+  ),
 
   /// Venezuela (Bolivarian Republic of)
   VENEZUELA(offTag: 've', iso3Code: 'VEN', currency: Currency.VED),
@@ -997,7 +1015,7 @@ enum OpenFoodFactsCountry implements OffTagged {
     this.wikiUrl,
   });
 
-  /// Lowercase ISO 639-1, except for [UNITED_KINGDOM].
+  /// Lowercase ISO 3166-1 alpha-2, except for [UNITED_KINGDOM].
   @override
   final String offTag;
 
@@ -1025,4 +1043,14 @@ enum OpenFoodFactsCountry implements OffTagged {
     return OffTagged.fromOffTag(offTag, OpenFoodFactsCountry.values)
         as OpenFoodFactsCountry?;
   }
+}
+
+/// Helper class around [OpenFoodFactsCountry]
+class CountryHelper {
+  /// Converts an [OpenFoodFactsCountry] into an ISO 3166-1 alpha-2 code.
+  static String? toJson(OpenFoodFactsCountry? country) => country?.offTag;
+
+  /// Converts an ISO 3166-1 alpha-2 code into an [OpenFoodFactsCountry]
+  static OpenFoodFactsCountry? fromJson(String? code) =>
+      OpenFoodFactsCountry.fromOffTag(code);
 }

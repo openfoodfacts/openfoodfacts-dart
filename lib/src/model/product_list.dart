@@ -13,11 +13,7 @@ class ProductList extends JsonObject {
   @JsonKey(name: 'v')
   final String value;
 
-  ProductList({
-    required this.barcode,
-    required this.key,
-    required this.value,
-  });
+  ProductList({required this.barcode, required this.key, required this.value});
 
   factory ProductList.fromJson(Map<String, dynamic> json) =>
       _$ProductListFromJson(json);

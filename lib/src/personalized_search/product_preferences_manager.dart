@@ -14,8 +14,7 @@ class ProductPreferencesManager {
 
   set availableProductPreferences(
     AvailableProductPreferences availableProductPreferences,
-  ) =>
-      _availableProductPreferences = availableProductPreferences;
+  ) => _availableProductPreferences = availableProductPreferences;
 
   /// Returns the attribute from the localized referential.
   Attribute? getReferenceAttribute(final String attributeId) {
@@ -50,10 +49,7 @@ class ProductPreferencesManager {
     final String importanceId, {
     final bool notifyListeners = true,
   }) async {
-    await _productPreferencesSelection.setImportance(
-      attributeId,
-      importanceId,
-    );
+    await _productPreferencesSelection.setImportance(attributeId, importanceId);
     if (notifyListeners) {
       notify();
     }
@@ -67,8 +63,9 @@ class ProductPreferencesManager {
         if (attributeGroup.attributes != null) {
           for (final Attribute attribute in attributeGroup.attributes!) {
             final String attributeId = attribute.id!;
-            final String importanceId =
-                getImportanceIdForAttributeId(attributeId);
+            final String importanceId = getImportanceIdForAttributeId(
+              attributeId,
+            );
             final int? importanceIndex = _availablePreferenceImportances
                 ?.getImportanceIndex(importanceId);
             if (importanceIndex != null) {
@@ -114,8 +111,9 @@ class ProductPreferencesManager {
       }
       for (final Attribute attribute in attributeGroup.attributes!) {
         final String attributeId = attribute.id!;
-        final String foundImportanceId =
-            getImportanceIdForAttributeId(attributeId);
+        final String foundImportanceId = getImportanceIdForAttributeId(
+          attributeId,
+        );
         if (importanceId == foundImportanceId) {
           result.add(attributeId);
         }
@@ -127,8 +125,8 @@ class ProductPreferencesManager {
   /// Returns whether an attribute is important as per the user preferences.
   bool? isAttributeImportant(String attributeId) {
     final String importanceId = getImportanceIdForAttributeId(attributeId);
-    final int? importanceIndex =
-        _availablePreferenceImportances?.getImportanceIndex(importanceId);
+    final int? importanceIndex = _availablePreferenceImportances
+        ?.getImportanceIndex(importanceId);
     if (importanceIndex == null) {
       return null;
     }
@@ -139,15 +137,10 @@ class ProductPreferencesManager {
 
   PreferenceImportance? getPreferenceImportanceFromImportanceId(
     final String importanceId,
-  ) =>
-      _availablePreferenceImportances?.getPreferenceImportance(
-        importanceId,
-      );
+  ) => _availablePreferenceImportances?.getPreferenceImportance(importanceId);
 
   int? getImportanceIndex(final String importanceId) =>
-      _availablePreferenceImportances?.getImportanceIndex(
-        importanceId,
-      );
+      _availablePreferenceImportances?.getImportanceIndex(importanceId);
 
   void notify() => _productPreferencesSelection.notify();
 

@@ -1,0 +1,33 @@
+name: Pub.dev score
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: pubdev-score-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  score-package:
+    name: Score package with pana
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Install pana
+        run: dart pub global activate pana
+
+      - name: Check package score
+        run: dart pub global run pana --exit-code-threshold 0 .

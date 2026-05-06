@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:openfoodfacts/openfoodfacts.dart';
 
+import 'price_product.dart';
 import '../interface/json_object.dart';
 
 part 'get_price_products_result.g.dart';

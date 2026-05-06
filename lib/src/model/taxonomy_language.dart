@@ -17,9 +17,7 @@ enum TaxonomyLanguageField implements OffTagged {
   NAME(offTag: 'name'),
   WIKIDATA(offTag: 'wikidata');
 
-  const TaxonomyLanguageField({
-    required this.offTag,
-  });
+  const TaxonomyLanguageField({required this.offTag});
 
   @override
   final String offTag;
@@ -81,8 +79,9 @@ class TaxonomyLanguage extends JsonObject {
 }
 
 /// Configuration for languages API query.
-class TaxonomyLanguageQueryConfiguration extends TaxonomyQueryConfiguration<
-    TaxonomyLanguage, TaxonomyLanguageField> {
+class TaxonomyLanguageQueryConfiguration
+    extends
+        TaxonomyQueryConfiguration<TaxonomyLanguage, TaxonomyLanguageField> {
   /// Configuration to get the languages that match the [tags].
   TaxonomyLanguageQueryConfiguration({
     required List<String> tags,
@@ -91,13 +90,13 @@ class TaxonomyLanguageQueryConfiguration extends TaxonomyQueryConfiguration<
     List<TaxonomyLanguageField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
-          TagType.LANGUAGES,
-          tags,
-          languages: languages,
-          country: country,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.LANGUAGES,
+         tags,
+         languages: languages,
+         country: country,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   /// Configuration to get ALL the languages.
   TaxonomyLanguageQueryConfiguration.all({
@@ -106,20 +105,22 @@ class TaxonomyLanguageQueryConfiguration extends TaxonomyQueryConfiguration<
     List<TaxonomyLanguageField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super.roots(
-          TagType.LANGUAGES,
-          languages: languages,
-          country: country,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.LANGUAGES,
+         languages: languages,
+         country: country,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   @override
   Map<String, TaxonomyLanguage> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {
       return const {};
     }
-    return jsonData
-        .map<String, TaxonomyLanguage>((String key, dynamic taxonomy) {
+    return jsonData.map<String, TaxonomyLanguage>((
+      String key,
+      dynamic taxonomy,
+    ) {
       if (taxonomy is! Map<String, dynamic>) {
         assert(false, 'Received JSON Language is not a Map');
         return MapEntry(key, TaxonomyLanguage.fromJson({}));
@@ -129,12 +130,14 @@ class TaxonomyLanguageQueryConfiguration extends TaxonomyQueryConfiguration<
   }
 
   @override
-  Set<TaxonomyLanguageField> get ignoredFields =>
-      const {TaxonomyLanguageField.ALL};
+  Set<TaxonomyLanguageField> get ignoredFields => const {
+    TaxonomyLanguageField.ALL,
+  };
 
   @override
   Iterable<String> convertFieldsToStrings(
-      Iterable<TaxonomyLanguageField> fields) {
+    Iterable<TaxonomyLanguageField> fields,
+  ) {
     return fields
         .where((TaxonomyLanguageField field) => !ignoredFields.contains(field))
         .map<String>((TaxonomyLanguageField field) => field.offTag);

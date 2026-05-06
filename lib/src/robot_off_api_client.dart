@@ -30,7 +30,7 @@ class RobotoffAPIClient {
       if (type != null) 'type': type.offTag,
       if (countries?.isNotEmpty == true)
         'countries': _getCountryList(countries!),
-      if (valueTag != null) 'value_tag': valueTag,
+      'value_tag': ?valueTag,
       if (count != null) 'count': count.toString(),
       if (serverType != null) 'server_type': serverType.offTag,
     };
@@ -89,8 +89,9 @@ class RobotoffAPIClient {
       if (count != null) 'count': count.toString(),
       if (serverType != null) 'server_type': serverType.offTag,
       if (insightTypes != null)
-        'insight_types':
-            insightTypes.map((InsightType type) => type.offTag).join(','),
+        'insight_types': insightTypes
+            .map((InsightType type) => type.offTag)
+            .join(','),
     };
 
     var robotoffQuestionUri = uriHelper.getUri(
@@ -110,10 +111,18 @@ class RobotoffAPIClient {
     return result;
   }
 
+  /// Fetches questions.
+  ///
   /// cf. https://openfoodfacts.github.io/robotoff/references/api/#tag/Questions/paths/~1questions/get
+  /// result.status would typically be 'found'.
+  ///
+  /// cf. [postInsightAnnotation]: if you answer a question with a given `user?`
+  /// and `deviceId?`, it won't be fetched again. Even if both parameters are
+  /// null.
   static Future<RobotoffQuestionResult> getQuestions(
     OpenFoodFactsLanguage language, {
     User? user,
+    String? deviceId,
     int? count,
     int? page,
     List<InsightType>? insightTypes,
@@ -133,6 +142,7 @@ class RobotoffAPIClient {
 
     final Map<String, String> parameters = <String, String>{
       'lang': language.code,
+      'device_id': ?deviceId,
       if (count != null) 'count': count.toString(),
       if (page != null) 'page': page.toString(),
       if (serverType != null) 'server_type': serverType.offTag,
@@ -141,7 +151,7 @@ class RobotoffAPIClient {
       if (questionOrder != null) 'order_by': questionOrder.offTag,
       if (countries?.isNotEmpty == true)
         'countries': _getCountryList(countries!),
-      if (valueTag != null) 'value_tag': valueTag,
+      'value_tag': ?valueTag,
     };
 
     var robotoffQuestionUri = uriHelper.getUri(
@@ -153,42 +163,45 @@ class RobotoffAPIClient {
       robotoffQuestionUri,
       user: user,
       uriHelper: uriHelper,
+      addCredentialsToHeader: user != null,
     );
     return RobotoffQuestionResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
     );
   }
 
+  /// Submits an annotation.
+  ///
+  /// You won't be asked again the same question if [user] or [deviceId] is
+  /// populated.
+  /// result.status would typically be 'vote_saved'.
+  ///
+  /// cf. [getQuestions]: if you answer a question with a given `user?` and
+  /// `deviceId?`, it won't be fetched again. Even if both parameters are null.
   static Future<Status> postInsightAnnotation(
     String? insightId,
     InsightAnnotation annotation, {
+    User? user,
     String? deviceId,
     bool update = true,
     final UriHelper uriHelper = uriHelperRobotoffProd,
   }) async {
-    var insightUri = uriHelper.getUri(
-      path: 'api/v1/insights/annotate',
-    );
+    var insightUri = uriHelper.getUri(path: 'api/v1/insights/annotate');
 
     final Map<String, String> annotationData = {
       'annotation': annotation.value.toString(),
-      'update': update ? '1' : '0'
+      'update': update ? '1' : '0',
+      'insight_id': ?insightId,
+      'device_id': ?deviceId,
     };
-    if (insightId != null) {
-      annotationData['insight_id'] = insightId;
-    }
 
-    if (deviceId != null) {
-      annotationData['device_id'] = deviceId;
-    }
-
-    Response response = await HttpHelper().doPostRequest(
+    final Response response = await HttpHelper().doPostRequest(
       insightUri,
       annotationData,
-      null,
+      user,
       uriHelper: uriHelper,
       addCredentialsToBody: false,
-      addCredentialsToHeader: true,
+      addCredentialsToHeader: user != null,
     );
     return Status.fromApiResponse(response.body);
   }
@@ -209,10 +222,7 @@ class RobotoffAPIClient {
       queryParameters: parameters,
     );
 
-    final response = await HttpHelper().doGetRequest(
-      uri,
-      uriHelper: uriHelper,
-    );
+    final response = await HttpHelper().doGetRequest(uri, uriHelper: uriHelper);
 
     return RobotoffNutrientExtractionResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),

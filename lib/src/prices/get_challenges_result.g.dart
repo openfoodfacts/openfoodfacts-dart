@@ -17,11 +17,11 @@ GetChallengesResult _$GetChallengesResultFromJson(Map<String, dynamic> json) =>
       ..numberOfPages = (json['pages'] as num?)?.toInt();
 
 Map<String, dynamic> _$GetChallengesResultToJson(
-        GetChallengesResult instance) =>
-    <String, dynamic>{
-      'items': instance.items,
-      'total': instance.total,
-      'page': instance.pageNumber,
-      'size': instance.pageSize,
-      'pages': instance.numberOfPages,
-    };
+  GetChallengesResult instance,
+) => <String, dynamic>{
+  'items': instance.items,
+  'total': instance.total,
+  'page': instance.pageNumber,
+  'size': instance.pageSize,
+  'pages': instance.numberOfPages,
+};

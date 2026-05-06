@@ -19,8 +19,8 @@ void main() {
     test('get all nova', () async {
       final Map<String, TaxonomyNova>? values =
           await OpenFoodAPIClient.getTaxonomyNova(
-        TaxonomyNovaQueryConfiguration.roots(),
-      );
+            TaxonomyNovaQueryConfiguration.roots(),
+          );
       expect(values, isNotNull);
       expect(values!.keys, containsAll(knownRootTags));
       for (final TaxonomyNova value in values.values) {

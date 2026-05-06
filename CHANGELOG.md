@@ -1,5 +1,45 @@
 # Changelog
 
+## [3.30.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.30.1...v3.30.2) (2026-02-15)
+
+
+### Bug Fixes
+
+* downgraded to meta 1.17.0 because of flutter conflicts ([#1200](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1200)) ([163f2c1](https://github.com/openfoodfacts/openfoodfacts-dart/commit/163f2c1c2f6afc2c9516c2e1ef621a340af382b3))
+
+## [3.30.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.30.0...v3.30.1) (2026-02-14)
+
+
+### Bug Fixes
+
+* back to max pub.dev score! ([#1197](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1197)) ([44f1fbd](https://github.com/openfoodfacts/openfoodfacts-dart/commit/44f1fbd5c248fb526bd753524a5ee8dbc8a8c0c2))
+
+## [3.30.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.29.0...v3.30.0) (2026-02-12)
+
+
+### Features
+
+* 1134 - added search parameters "unwanted ingredients" and "ingredients filter" ([#1163](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1163)) ([e539b73](https://github.com/openfoodfacts/openfoodfacts-dart/commit/e539b7375988562e578275717529ea447ec09eb3))
+* 1156 - external sources first implementation ([#1157](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1157)) ([4d74b5a](https://github.com/openfoodfacts/openfoodfacts-dart/commit/4d74b5ae7fb8cc6fb888c43f08bede3e980a65ea))
+* 1184 - new class UserDetails ([#1186](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1186)) ([616211f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/616211f3c36d875693ab9c0ca96fb5865ac89040))
+* Bulgaria now in the Euro zone! ([#1183](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1183)) ([24159b7](https://github.com/openfoodfacts/openfoodfacts-dart/commit/24159b748551523aebe89ed8c81d9463e01f825e))
+* M4 - Added support for multiproject for attributes ([#1185](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1185)) ([51988c2](https://github.com/openfoodfacts/openfoodfacts-dart/commit/51988c22df5de6166e4b680bdb42f5c0b29a51e3))
+* Updated preferences api url to v3.4 - M4 ([#1181](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1181)) ([28aaf0f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/28aaf0fdf31be62edc93634fa68b60e1ed956999))
+
+
+### Bug Fixes
+
+* currency fix decimals methods ([#1188](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1188)) ([56a3940](https://github.com/openfoodfacts/openfoodfacts-dart/commit/56a394054c6f347397ba88793311f9c68f18579a))
+* now in Robotoff not fetching already answered questions ([#1190](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1190)) ([caefacf](https://github.com/openfoodfacts/openfoodfacts-dart/commit/caefacfe80b0751553771e99dbaa037f1b901275))
+
+## [3.29.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.28.0...v3.29.0) (2025-12-27)
+
+
+### Features
+
+* added pet food nutrients ([#1162](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1162)) ([96eaec8](https://github.com/openfoodfacts/openfoodfacts-dart/commit/96eaec8b61039b7334210d8547e11ba070ddae1f))
+* Simplified knowledge panels ([#1169](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1169)) ([babf0bf](https://github.com/openfoodfacts/openfoodfacts-dart/commit/babf0bfd81e4d06041bd8789e789e275ff707603))
+
 ## [3.28.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.27.0...v3.28.0) (2025-12-07)
 
 

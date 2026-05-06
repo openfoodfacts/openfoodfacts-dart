@@ -16,11 +16,7 @@ class AutocompleteSearchResult extends JsonObject {
   @JsonKey()
   final List<AutocompleteSingleResult>? options;
 
-  const AutocompleteSearchResult({
-    this.took,
-    this.timedOut,
-    this.options,
-  });
+  const AutocompleteSearchResult({this.took, this.timedOut, this.options});
 
   factory AutocompleteSearchResult.fromJson(Map<String, dynamic> json) =>
       _$AutocompleteSearchResultFromJson(json);

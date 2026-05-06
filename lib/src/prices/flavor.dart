@@ -27,9 +27,7 @@ enum Flavor implements OffTagged {
   @JsonValue('off-pro')
   openFoodProductFactsPro(offTag: 'off-pro');
 
-  const Flavor({
-    required this.offTag,
-  });
+  const Flavor({required this.offTag});
 
   @override
   final String offTag;

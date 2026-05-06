@@ -16,9 +16,7 @@ enum TaxonomyAllergenField implements OffTagged {
   SYNONYMS(offTag: 'synonyms'),
   WIKIDATA(offTag: 'wikidata');
 
-  const TaxonomyAllergenField({
-    required this.offTag,
-  });
+  const TaxonomyAllergenField({required this.offTag});
 
   @override
   final String offTag;
@@ -30,11 +28,7 @@ enum TaxonomyAllergenField implements OffTagged {
 /// of these.
 @JsonSerializable()
 class TaxonomyAllergen extends JsonObject {
-  TaxonomyAllergen(
-    this.name,
-    this.synonyms,
-    this.wikidata,
-  );
+  TaxonomyAllergen(this.name, this.synonyms, this.wikidata);
 
   factory TaxonomyAllergen.fromJson(Map<String, dynamic> json) {
     return _$TaxonomyAllergenFromJson(json);
@@ -72,8 +66,9 @@ class TaxonomyAllergen extends JsonObject {
 }
 
 /// Configuration for allergens API query.
-class TaxonomyAllergenQueryConfiguration extends TaxonomyQueryConfiguration<
-    TaxonomyAllergen, TaxonomyAllergenField> {
+class TaxonomyAllergenQueryConfiguration
+    extends
+        TaxonomyQueryConfiguration<TaxonomyAllergen, TaxonomyAllergenField> {
   /// Configuration to get the allergens that match the [tags].
   TaxonomyAllergenQueryConfiguration({
     required List<String> tags,
@@ -82,13 +77,13 @@ class TaxonomyAllergenQueryConfiguration extends TaxonomyQueryConfiguration<
     List<TaxonomyAllergenField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
-          TagType.ALLERGENS,
-          tags,
-          languages: languages,
-          country: country,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.ALLERGENS,
+         tags,
+         languages: languages,
+         country: country,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   /// Configuration to get ALL the allergens.
   TaxonomyAllergenQueryConfiguration.all({
@@ -97,20 +92,22 @@ class TaxonomyAllergenQueryConfiguration extends TaxonomyQueryConfiguration<
     final List<TaxonomyAllergenField> fields = const [],
     final List<Parameter> additionalParameters = const [],
   }) : super.roots(
-          TagType.ALLERGENS,
-          languages: languages,
-          country: country,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.ALLERGENS,
+         languages: languages,
+         country: country,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   @override
   Map<String, TaxonomyAllergen> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {
       return const {};
     }
-    return jsonData
-        .map<String, TaxonomyAllergen>((String key, dynamic taxonomy) {
+    return jsonData.map<String, TaxonomyAllergen>((
+      String key,
+      dynamic taxonomy,
+    ) {
       if (taxonomy is! Map<String, dynamic>) {
         assert(false, 'Received JSON Allergen is not a Map');
         return MapEntry(key, TaxonomyAllergen.fromJson({}));
@@ -120,12 +117,14 @@ class TaxonomyAllergenQueryConfiguration extends TaxonomyQueryConfiguration<
   }
 
   @override
-  Set<TaxonomyAllergenField> get ignoredFields =>
-      const {TaxonomyAllergenField.ALL};
+  Set<TaxonomyAllergenField> get ignoredFields => const {
+    TaxonomyAllergenField.ALL,
+  };
 
   @override
   Iterable<String> convertFieldsToStrings(
-      Iterable<TaxonomyAllergenField> fields) {
+    Iterable<TaxonomyAllergenField> fields,
+  ) {
     return fields
         .where((TaxonomyAllergenField field) => !ignoredFields.contains(field))
         .map<String>((TaxonomyAllergenField field) => field.offTag);

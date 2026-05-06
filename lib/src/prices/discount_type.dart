@@ -22,9 +22,7 @@ enum DiscountType implements OffTagged {
   @JsonValue('OTHER')
   other(offTag: 'OTHER');
 
-  const DiscountType({
-    required this.offTag,
-  });
+  const DiscountType({required this.offTag});
 
   @override
   final String offTag;

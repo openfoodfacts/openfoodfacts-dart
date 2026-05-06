@@ -61,15 +61,9 @@ class TaxonomyCountry extends JsonObject {
     includeIfNull: false,
   )
   List<OpenFoodFactsLanguage>? languages;
-  @JsonKey(
-    fromJson: LanguageHelper.fromJsonStringMap,
-    includeIfNull: false,
-  )
+  @JsonKey(fromJson: LanguageHelper.fromJsonStringMap, includeIfNull: false)
   Map<OpenFoodFactsLanguage, String>? name;
-  @JsonKey(
-    fromJson: LanguageHelper.fromJsonStringMapList,
-    includeIfNull: false,
-  )
+  @JsonKey(fromJson: LanguageHelper.fromJsonStringMapList, includeIfNull: false)
   Map<OpenFoodFactsLanguage, List<String>>? synonyms;
   @JsonKey(
     fromJson: LanguageHelper.fromJsonStringMapIsoUnique,
@@ -97,14 +91,14 @@ class TaxonomyCountryQueryConfiguration
     List<TaxonomyCountryField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
-          TagType.COUNTRIES,
-          tags,
-          languages: languages,
-          country: country,
-          includeChildren: false,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.COUNTRIES,
+         tags,
+         languages: languages,
+         country: country,
+         includeChildren: false,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   /// Configuration to get ALL the countries.
   TaxonomyCountryQueryConfiguration.all({
@@ -113,20 +107,22 @@ class TaxonomyCountryQueryConfiguration
     List<TaxonomyCountryField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super.roots(
-          TagType.COUNTRIES,
-          languages: languages,
-          country: country,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.COUNTRIES,
+         languages: languages,
+         country: country,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   @override
   Map<String, TaxonomyCountry> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {
       return const {};
     }
-    return jsonData
-        .map<String, TaxonomyCountry>((String key, dynamic taxonomy) {
+    return jsonData.map<String, TaxonomyCountry>((
+      String key,
+      dynamic taxonomy,
+    ) {
       if (taxonomy is! Map<String, dynamic>) {
         assert(false, 'Received JSON Country is not a Map');
         return MapEntry(key, TaxonomyCountry.fromJson({}));
@@ -136,12 +132,14 @@ class TaxonomyCountryQueryConfiguration
   }
 
   @override
-  Set<TaxonomyCountryField> get ignoredFields =>
-      const {TaxonomyCountryField.ALL};
+  Set<TaxonomyCountryField> get ignoredFields => const {
+    TaxonomyCountryField.ALL,
+  };
 
   @override
   Iterable<String> convertFieldsToStrings(
-      Iterable<TaxonomyCountryField> fields) {
+    Iterable<TaxonomyCountryField> fields,
+  ) {
     return fields
         .where((TaxonomyCountryField field) => !ignoredFields.contains(field))
         .map<String>((TaxonomyCountryField field) => field.offTag);

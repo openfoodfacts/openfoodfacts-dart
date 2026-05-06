@@ -37,7 +37,8 @@ class EventsBase extends JsonObject {
   Map<String, dynamic> toJson() => _$EventsBaseToJson(this);
 
   @override
-  String toString() => 'EventsBase(eventType: $eventType'
+  String toString() =>
+      'EventsBase(eventType: $eventType'
       '${timestamp == null ? '' : ', timestamp: $timestamp'}'
       '${userId == null ? '' : ', userId: $userId'}'
       '${barcode == null ? '' : ', barcode: $barcode'}'

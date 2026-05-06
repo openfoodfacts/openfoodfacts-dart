@@ -10,10 +10,7 @@ enum ProductField implements OffTagged {
     offTag: 'product_name',
     inLanguagesProductField: ProductField.NAME_IN_LANGUAGES,
   ),
-  NAME_IN_LANGUAGES(
-    offTag: 'product_name_',
-    isInLanguages: true,
-  ),
+  NAME_IN_LANGUAGES(offTag: 'product_name_', isInLanguages: true),
   NAME_ALL_LANGUAGES(
     offTag: 'product_name_languages',
     inLanguagesProductField: ProductField.NAME_IN_LANGUAGES,
@@ -31,10 +28,7 @@ enum ProductField implements OffTagged {
     offTag: 'generic_name',
     inLanguagesProductField: ProductField.GENERIC_NAME_IN_LANGUAGES,
   ),
-  GENERIC_NAME_IN_LANGUAGES(
-    offTag: 'generic_name_',
-    isInLanguages: true,
-  ),
+  GENERIC_NAME_IN_LANGUAGES(offTag: 'generic_name_', isInLanguages: true),
   GENERIC_NAME_ALL_LANGUAGES(
     offTag: 'generic_name_languages',
     inLanguagesProductField: ProductField.GENERIC_NAME_IN_LANGUAGES,
@@ -58,19 +52,13 @@ enum ProductField implements OffTagged {
     offTag: 'brands_tags',
     inLanguagesProductField: ProductField.BRANDS_TAGS_IN_LANGUAGES,
   ),
-  BRANDS_TAGS_IN_LANGUAGES(
-    offTag: 'brands_tags_',
-    isInLanguages: true,
-  ),
+  BRANDS_TAGS_IN_LANGUAGES(offTag: 'brands_tags_', isInLanguages: true),
   COUNTRIES(offTag: 'countries'),
   COUNTRIES_TAGS(
     offTag: 'countries_tags',
     inLanguagesProductField: ProductField.COUNTRIES_TAGS_IN_LANGUAGES,
   ),
-  COUNTRIES_TAGS_IN_LANGUAGES(
-    offTag: 'countries_tags_',
-    isInLanguages: true,
-  ),
+  COUNTRIES_TAGS_IN_LANGUAGES(offTag: 'countries_tags_', isInLanguages: true),
   LANGUAGE(offTag: 'lang'),
   QUANTITY(offTag: 'quantity'),
   SERVING_SIZE(offTag: 'serving_size'),
@@ -106,10 +94,7 @@ enum ProductField implements OffTagged {
     offTag: 'additives_tags',
     inLanguagesProductField: ProductField.ADDITIVES_TAGS_IN_LANGUAGES,
   ),
-  ADDITIVES_TAGS_IN_LANGUAGES(
-    offTag: 'additives_tags_',
-    isInLanguages: true,
-  ),
+  ADDITIVES_TAGS_IN_LANGUAGES(offTag: 'additives_tags_', isInLanguages: true),
   NUTRIENT_LEVELS(offTag: 'nutrient_levels'),
   INGREDIENTS_TEXT(
     offTag: 'ingredients_text',
@@ -134,27 +119,18 @@ enum ProductField implements OffTagged {
     offTag: 'categories_tags',
     inLanguagesProductField: ProductField.CATEGORIES_TAGS_IN_LANGUAGES,
   ),
-  CATEGORIES_TAGS_IN_LANGUAGES(
-    offTag: 'categories_tags_',
-    isInLanguages: true,
-  ),
+  CATEGORIES_TAGS_IN_LANGUAGES(offTag: 'categories_tags_', isInLanguages: true),
   LABELS(offTag: 'labels'),
   LABELS_TAGS(
     offTag: 'labels_tags',
     inLanguagesProductField: ProductField.LABELS_TAGS_IN_LANGUAGES,
   ),
-  LABELS_TAGS_IN_LANGUAGES(
-    offTag: 'labels_tags_',
-    isInLanguages: true,
-  ),
+  LABELS_TAGS_IN_LANGUAGES(offTag: 'labels_tags_', isInLanguages: true),
   PACKAGING(offTag: 'packaging'),
   PACKAGINGS(offTag: 'packagings'),
   PACKAGINGS_COMPLETE(offTag: 'packagings_complete'),
   PACKAGING_TAGS(offTag: 'packaging_tags'),
-  PACKAGING_TEXT_IN_LANGUAGES(
-    offTag: 'packaging_text_',
-    isInLanguages: true,
-  ),
+  PACKAGING_TEXT_IN_LANGUAGES(offTag: 'packaging_text_', isInLanguages: true),
   PACKAGING_TEXT_ALL_LANGUAGES(
     offTag: 'packaging_text_languages',
     inLanguagesProductField: ProductField.PACKAGING_TEXT_IN_LANGUAGES,
@@ -164,35 +140,23 @@ enum ProductField implements OffTagged {
     offTag: 'misc_tags',
     inLanguagesProductField: ProductField.MISC_TAGS_IN_LANGUAGES,
   ),
-  MISC_TAGS_IN_LANGUAGES(
-    offTag: 'misc_tags_',
-    isInLanguages: true,
-  ),
+  MISC_TAGS_IN_LANGUAGES(offTag: 'misc_tags_', isInLanguages: true),
   STATES_TAGS(
     offTag: 'states_tags',
     inLanguagesProductField: ProductField.STATES_TAGS_IN_LANGUAGES,
   ),
-  STATES_TAGS_IN_LANGUAGES(
-    offTag: 'states_tags_',
-    isInLanguages: true,
-  ),
+  STATES_TAGS_IN_LANGUAGES(offTag: 'states_tags_', isInLanguages: true),
   TRACES_TAGS(
     offTag: 'traces_tags',
     inLanguagesProductField: ProductField.TRACES_TAGS_IN_LANGUAGES,
   ),
-  TRACES_TAGS_IN_LANGUAGES(
-    offTag: 'traces_tags_',
-    isInLanguages: true,
-  ),
+  TRACES_TAGS_IN_LANGUAGES(offTag: 'traces_tags_', isInLanguages: true),
   TRACES(offTag: 'traces'),
   STORES_TAGS(
     offTag: 'stores_tags',
     inLanguagesProductField: ProductField.STORES_TAGS_IN_LANGUAGES,
   ),
-  STORES_TAGS_IN_LANGUAGES(
-    offTag: 'stores_tags_',
-    isInLanguages: true,
-  ),
+  STORES_TAGS_IN_LANGUAGES(offTag: 'stores_tags_', isInLanguages: true),
   STORES(offTag: 'stores'),
   INGREDIENTS_ANALYSIS_TAGS(
     offTag: 'ingredients_analysis_tags',
@@ -207,10 +171,7 @@ enum ProductField implements OffTagged {
     offTag: 'allergens_tags',
     inLanguagesProductField: ProductField.ALLERGENS_TAGS_IN_LANGUAGES,
   ),
-  ALLERGENS_TAGS_IN_LANGUAGES(
-    offTag: 'allergens_tags_',
-    isInLanguages: true,
-  ),
+  ALLERGENS_TAGS_IN_LANGUAGES(offTag: 'allergens_tags_', isInLanguages: true),
   ATTRIBUTE_GROUPS(offTag: 'attribute_groups'),
   LAST_MODIFIED(offTag: 'last_modified_t'),
   LAST_MODIFIER(offTag: 'last_modified_by'),
@@ -301,14 +262,17 @@ enum ProductField implements OffTagged {
 /// NOTE: if one of the fields is IN_LANGUAGES and [languages] is empty -
 /// the function will throw.
 List<String> convertFieldsToStrings(
-    List<ProductField> fields, List<OpenFoodFactsLanguage> languages) {
+  List<ProductField> fields,
+  List<OpenFoodFactsLanguage> languages,
+) {
   final fieldsStrings = <String>[];
 
   for (final field in fields) {
     if (field.isInLanguages) {
       if (languages.isEmpty) {
         throw ArgumentError(
-            'Cannot request in-lang field $field without language');
+          'Cannot request in-lang field $field without language',
+        );
       }
       for (final language in languages) {
         fieldsStrings.add('${field.offTag}${language.offTag}');

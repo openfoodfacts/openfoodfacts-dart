@@ -24,26 +24,19 @@ enum Nutrient implements OffTagged {
 
   /// Saturated Fats
   saturatedFat(
-      typicalUnit: Unit.G, offTag: 'saturated-fat', acceptsPercentDV: false),
+    typicalUnit: Unit.G,
+    offTag: 'saturated-fat',
+    acceptsPercentDV: false,
+  ),
 
   /// Proteins
   proteins(typicalUnit: Unit.G, offTag: 'proteins', acceptsPercentDV: false),
 
   /// Energy in kcal
-  energyKCal(
-    typicalUnit: Unit.KCAL,
-    offTag: 'energy-kcal',
-    acceptsWeight: false,
-    acceptsPercentDV: false,
-  ),
+  energyKCal(typicalUnit: Unit.KCAL, offTag: 'energy-kcal'),
 
   /// Energy in kj
-  energyKJ(
-    typicalUnit: Unit.KJ,
-    offTag: 'energy-kj',
-    acceptsWeight: false,
-    acceptsPercentDV: false,
-  ),
+  energyKJ(typicalUnit: Unit.KJ, offTag: 'energy-kj'),
 
   /// Carbohydrates
   carbohydrates(
@@ -161,12 +154,7 @@ enum Nutrient implements OffTagged {
   polyunsaturatedFat(typicalUnit: Unit.G, offTag: 'polyunsaturated-fat'),
 
   /// Alcohol
-  alcohol(
-    typicalUnit: Unit.PERCENT,
-    offTag: 'alcohol',
-    acceptsWeight: false,
-    acceptsPercentDV: false,
-  ),
+  alcohol(typicalUnit: Unit.PERCENT, offTag: 'alcohol'),
 
   /// Pantothenic Acid
   pantothenicAcid(typicalUnit: Unit.MILLI_G, offTag: 'pantothenic-acid'),
@@ -227,7 +215,9 @@ enum Nutrient implements OffTagged {
 
   /// Dihomo-Gamma-Linolenic Acid
   dihomoGammaLinolenicAcid(
-      typicalUnit: Unit.G, offTag: 'dihomo-gamma-linolenic-acid'),
+    typicalUnit: Unit.G,
+    offTag: 'dihomo-gamma-linolenic-acid',
+  ),
 
   /// Elaidic Acid
   elaidicAcid(typicalUnit: Unit.G, offTag: 'elaidic-acid'),
@@ -327,26 +317,36 @@ enum Nutrient implements OffTagged {
 
   /// Methylsulfonylmethane
   methylsulfonylmethane(
-      typicalUnit: Unit.MILLI_G, offTag: 'methylsulfonylmethane'),
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'methylsulfonylmethane',
+  ),
 
   /// pH
   ph(typicalUnit: Unit.UNKNOWN, offTag: 'ph'),
 
   /// Fruits Vegetables Nuts
   fruitsVegetablesNuts(
-      typicalUnit: Unit.PERCENT, offTag: 'fruits-vegetables-nuts'),
+    typicalUnit: Unit.PERCENT,
+    offTag: 'fruits-vegetables-nuts',
+  ),
 
   /// Fruits Vegetables Nuts Dried
   fruitsVegetablesNutsDried(
-      typicalUnit: Unit.PERCENT, offTag: 'fruits-vegetables-nuts-dried'),
+    typicalUnit: Unit.PERCENT,
+    offTag: 'fruits-vegetables-nuts-dried',
+  ),
 
   /// Fruits Vegetables Nuts Estimate
   fruitsVegetablesNutsEstimate(
-      typicalUnit: Unit.PERCENT, offTag: 'fruits-vegetables-nuts-estimate'),
+    typicalUnit: Unit.PERCENT,
+    offTag: 'fruits-vegetables-nuts-estimate',
+  ),
 
   /// Collagen Meat Protein Ratio
   collagenMeatProteinRatio(
-      typicalUnit: Unit.PERCENT, offTag: 'collagen-meat-protein-ratio'),
+    typicalUnit: Unit.PERCENT,
+    offTag: 'collagen-meat-protein-ratio',
+  ),
 
   /// Cocoa
   cocoa(typicalUnit: Unit.PERCENT, offTag: 'cocoa'),
@@ -359,7 +359,9 @@ enum Nutrient implements OffTagged {
 
   /// Carbon footprint from meat or fish
   carbonFootprintFromMeatOrFish(
-      typicalUnit: Unit.G, offTag: 'carbon-footprint-from-meat-or-fish'),
+    typicalUnit: Unit.G,
+    offTag: 'carbon-footprint-from-meat-or-fish',
+  ),
 
   /// Nutrition Score FR
   nutritionScoreFR(typicalUnit: Unit.UNKNOWN, offTag: 'nutrition-score-fr'),
@@ -410,27 +412,149 @@ enum Nutrient implements OffTagged {
   melatonin(typicalUnit: Unit.MICRO_G, offTag: 'melatonin'),
 
   /// Trans Fats
-  transFat(typicalUnit: Unit.G, offTag: 'trans-fat');
+  transFat(typicalUnit: Unit.G, offTag: 'trans-fat'),
+
+  /// Crude Fat
+  crudeFat(
+    typicalUnit: Unit.PERCENT,
+    offTag: 'crude-fat',
+    probablyPetFood: true,
+  ),
+
+  /// Crude Protein
+  crudeProtein(
+    typicalUnit: Unit.PERCENT,
+    offTag: 'crude-protein',
+    probablyPetFood: true,
+  ),
+
+  /// Crude Ash
+  crudeAsh(
+    typicalUnit: Unit.PERCENT,
+    offTag: 'crude-ash',
+    probablyPetFood: true,
+  ),
+
+  /// Crude Ash
+  crudeFiber(
+    typicalUnit: Unit.PERCENT,
+    offTag: 'crude-fibre',
+    probablyPetFood: true,
+  ),
+
+  /// Moisture
+  moisture(
+    typicalUnit: Unit.PERCENT,
+    offTag: 'moisture',
+    probablyPetFood: true,
+  ),
+
+  /// Ammonium Chloride
+  ammoniumChloride(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'ammonium-chloride',
+    probablyPetFood: true,
+  ),
+
+  /// Calcium Iodate Anhydrous
+  calciumIodateAnhydrous(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'calcium-iodate-anhydrous',
+    probablyPetFood: true,
+  ),
+
+  /// Cassia Gum
+  cassiaGum(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'cassia-gum',
+    probablyPetFood: true,
+  ),
+
+  /// Choline Chloride
+  cholineChloride(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'choline-chloride',
+    probablyPetFood: true,
+  ),
+
+  /// Copper II Sulphate Pentahydrate
+  copperIISulphatePentahydrate(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'copper-ii-sulphate-pentahydrate',
+    probablyPetFood: true,
+  ),
+
+  /// Iron II Sulphate Monohydrate
+  ironIISulphateMonohydrate(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'iron-ii-sulphate-monohydrate',
+    probablyPetFood: true,
+  ),
+
+  /// Manganous Sulphate Monohydrate
+  manganousSulphateMonohydrate(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'manganous-sulphate-monohydrate',
+    probablyPetFood: true,
+  ),
+
+  /// Potassium Iodide
+  potassiumIodide(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'potassium-iodide',
+    probablyPetFood: true,
+  ),
+
+  /// Sodium Selenite
+  sodiumSelenite(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'sodium-selenite',
+    probablyPetFood: true,
+  ),
+
+  /// Zinc Sulphate Monohydrate
+  zincSulphateMonohydrate(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'zinc-sulphate-monohydrate',
+    probablyPetFood: true,
+  ),
+
+  /// Protein Value
+  proteinValue(
+    typicalUnit: Unit.G_PER_KG,
+    offTag: 'protein-value',
+    probablyPetFood: true,
+  ),
+
+  /// Polydextrose
+  polydextrose(typicalUnit: Unit.G, offTag: 'polydextrose');
 
   const Nutrient({
     required this.typicalUnit,
     required this.offTag,
-    this.acceptsWeight = true,
-    this.acceptsPercentDV = true,
+    bool acceptsPercentDV = true,
     this.acceptsIU = false,
-  });
+    this.probablyPetFood = false,
+  }) : _acceptsPercentDV = acceptsPercentDV;
 
   /// Typical unit. An educated guess only: may differ according to countries.
   final Unit typicalUnit;
 
+  static const List<Unit> _weightUnits = [Unit.G, Unit.MILLI_G, Unit.MICRO_G];
+
   /// Can this nutrient typically be valued in weight? (g, mg, mcg)
-  final bool acceptsWeight;
+  bool get acceptsWeight => _weightUnits.contains(typicalUnit);
 
   /// Can this nutrient typically be valued in "% DV"?
-  final bool acceptsPercentDV;
+  final bool _acceptsPercentDV;
+
+  bool get acceptsPercentDV => acceptsWeight && _acceptsPercentDV;
 
   /// Can this nutrient typically be valued in "IU"?
   final bool acceptsIU;
+
+  /// Is that nutrient likely to be specific to pet food.
+  final bool probablyPetFood;
 
   @override
   final String offTag;

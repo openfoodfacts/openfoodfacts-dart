@@ -1,7 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:openfoodfacts/src/model/nutrient_modifier.dart';
-import 'package:openfoodfacts/src/model/per_size.dart';
-import 'package:openfoodfacts/src/utils/unit_helper.dart';
+
+import 'nutrient_modifier.dart';
+import 'per_size.dart';
+import '../utils/unit_helper.dart';
 
 part 'robotoff_nutrient_extraction_annotation.g.dart';
 
@@ -12,10 +13,7 @@ class RobotoffNutrientAnnotationData {
   @JsonKey(name: 'value')
   String valueWithModifer;
 
-  RobotoffNutrientAnnotationData({
-    this.unit,
-    required this.valueWithModifer,
-  });
+  RobotoffNutrientAnnotationData({this.unit, required this.valueWithModifer});
 
   NutrientModifier? get modifier =>
       NutrientModifier.fromValue(valueWithModifer);

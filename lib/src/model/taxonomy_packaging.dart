@@ -26,9 +26,7 @@ enum TaxonomyPackagingField implements OffTagged {
   //PACKAGING_SHAPE, only 2/122 found for roots
   //TaxonomyPackagingField.PACKAGING_SHAPE:'packaging_shapes',
 
-  const TaxonomyPackagingField({
-    required this.offTag,
-  });
+  const TaxonomyPackagingField({required this.offTag});
 
   @override
   final String offTag;
@@ -79,8 +77,9 @@ class TaxonomyPackaging extends JsonObject {
 }
 
 /// Configuration for packaging API query.
-class TaxonomyPackagingQueryConfiguration extends TaxonomyQueryConfiguration<
-    TaxonomyPackaging, TaxonomyPackagingField> {
+class TaxonomyPackagingQueryConfiguration
+    extends
+        TaxonomyQueryConfiguration<TaxonomyPackaging, TaxonomyPackagingField> {
   /// Configuration to get the packagings that match the [tags].
   TaxonomyPackagingQueryConfiguration({
     required List<String> tags,
@@ -89,13 +88,13 @@ class TaxonomyPackagingQueryConfiguration extends TaxonomyQueryConfiguration<
     List<TaxonomyPackagingField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
-          TagType.PACKAGING,
-          tags,
-          languages: languages,
-          country: country,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.PACKAGING,
+         tags,
+         languages: languages,
+         country: country,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   /// Configuration to get the root packagings.
   TaxonomyPackagingQueryConfiguration.roots({
@@ -104,20 +103,22 @@ class TaxonomyPackagingQueryConfiguration extends TaxonomyQueryConfiguration<
     final List<TaxonomyPackagingField> fields = const [],
     final List<Parameter> additionalParameters = const [],
   }) : super.roots(
-          TagType.PACKAGING,
-          languages: languages,
-          country: country,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.PACKAGING,
+         languages: languages,
+         country: country,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   @override
   Map<String, TaxonomyPackaging> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {
       return const {};
     }
-    return jsonData
-        .map<String, TaxonomyPackaging>((String key, dynamic taxonomy) {
+    return jsonData.map<String, TaxonomyPackaging>((
+      String key,
+      dynamic taxonomy,
+    ) {
       if (taxonomy is! Map<String, dynamic>) {
         assert(false, 'Received JSON Packaging is not a Map');
         return MapEntry(key, TaxonomyPackaging.fromJson({}));
@@ -127,15 +128,14 @@ class TaxonomyPackagingQueryConfiguration extends TaxonomyQueryConfiguration<
   }
 
   @override
-  Set<TaxonomyPackagingField> get ignoredFields =>
-      const {TaxonomyPackagingField.ALL};
+  Set<TaxonomyPackagingField> get ignoredFields => const {
+    TaxonomyPackagingField.ALL,
+  };
 
   @override
   Iterable<String> convertFieldsToStrings(
     Iterable<TaxonomyPackagingField> fields,
-  ) =>
-      fields
-          .where(
-              (TaxonomyPackagingField field) => !ignoredFields.contains(field))
-          .map<String>((TaxonomyPackagingField field) => field.offTag);
+  ) => fields
+      .where((TaxonomyPackagingField field) => !ignoredFields.contains(field))
+      .map<String>((TaxonomyPackagingField field) => field.offTag);
 }

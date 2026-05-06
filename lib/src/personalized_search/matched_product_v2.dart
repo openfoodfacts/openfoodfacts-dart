@@ -153,24 +153,23 @@ class MatchedScoreV2 {
     for (final MatchedScoreV2 score in scores) {
       score._initialOrder = i++;
     }
-    scores.sort(
-      (MatchedScoreV2 a, MatchedScoreV2 b) {
-        late int compare;
-        // Highest score first
-        compare = b.score.compareTo(a.score);
-        if (compare != 0) {
-          return compare;
-        }
-        // Matching products second
-        compare = (b.status == MatchedProductStatusV2.DOES_NOT_MATCH ? 0 : 1) -
-            (a.status == MatchedProductStatusV2.DOES_NOT_MATCH ? 0 : 1);
-        if (compare != 0) {
-          return compare;
-        }
-        // Initial order third
-        return a._initialOrder.compareTo(b._initialOrder);
-      },
-    );
+    scores.sort((MatchedScoreV2 a, MatchedScoreV2 b) {
+      late int compare;
+      // Highest score first
+      compare = b.score.compareTo(a.score);
+      if (compare != 0) {
+        return compare;
+      }
+      // Matching products second
+      compare =
+          (b.status == MatchedProductStatusV2.DOES_NOT_MATCH ? 0 : 1) -
+          (a.status == MatchedProductStatusV2.DOES_NOT_MATCH ? 0 : 1);
+      if (compare != 0) {
+        return compare;
+      }
+      // Initial order third
+      return a._initialOrder.compareTo(b._initialOrder);
+    });
   }
 }
 

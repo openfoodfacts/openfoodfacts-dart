@@ -119,7 +119,7 @@ class Price extends JsonObject {
   @JsonKey(name: 'product_id')
   int? productId;
 
-  /// Location ID. Read-only.
+  /// Location ID.
   @JsonKey(name: 'location_id')
   int? locationId;
 
@@ -135,7 +135,7 @@ class Price extends JsonObject {
   @JsonKey()
   PriceProduct? product;
 
-  /// Receipt's price quantity (user input).
+  /// Receipt's price quantity.
   @JsonKey(name: 'receipt_quantity')
   int? receiptQuantity;
 
@@ -146,6 +146,18 @@ class Price extends JsonObject {
   /// Owner. Read-only.
   @JsonKey()
   late String owner;
+
+  /// Owner comment.
+  @JsonKey(name: 'owner_comment')
+  String? ownerComment;
+
+  /// Source. Read-only.
+  @JsonKey()
+  String? source;
+
+  /// Id of duplicate price. Read-only.
+  @JsonKey(name: 'duplicate_of')
+  int? duplicateOf;
 
   /// Creation timestamp. Read-only.
   @JsonKey(fromJson: JsonHelper.stringTimestampToDate)

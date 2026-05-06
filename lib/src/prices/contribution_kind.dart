@@ -5,9 +5,7 @@ enum ContributionKind implements OffTagged {
   consumption(offTag: 'CONSUMPTION'),
   community(offTag: 'COMMUNITY');
 
-  const ContributionKind({
-    required this.offTag,
-  });
+  const ContributionKind({required this.offTag});
   @override
   final String offTag;
 

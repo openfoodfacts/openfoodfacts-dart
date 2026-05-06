@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 
@@ -24,7 +23,6 @@ class HttpHelper {
   factory HttpHelper() => instance;
 
   @protected
-
   /// A protected constructor to allow subclasses to create themselves.
   HttpHelper.internal();
 
@@ -66,13 +64,14 @@ class HttpHelper {
     required final UriHelper uriHelper,
     final String? bearerToken,
     final bool addCookiesToHeader = false,
+    final bool addCredentialsToHeader = false,
   }) async {
     http.Response response = await http.get(
       uri,
       headers: _buildHeaders(
         user: user,
         uriHelper: uriHelper,
-        addCredentialsToHeader: false,
+        addCredentialsToHeader: addCredentialsToHeader,
         bearerToken: bearerToken,
         addCookieToHeader: addCookiesToHeader,
       ),
@@ -88,7 +87,8 @@ class HttpHelper {
   ///
   /// [addCredentialsToBody] should be only use for Robotoff,
   /// See: https://github.com/openfoodfacts/openfoodfacts-dart/issues/553#issuecomment-1269810032
-  /// When using [addCredentialsToBody] a User or globalUser needed, blocks [QueryType.TEST] authentication
+  /// When using [addCredentialsToBody], a user (or global user) is needed;
+  /// this blocks test-mode authentication.
   Future<http.Response> doPostRequest(
     Uri uri,
     Map<String, String> body,
@@ -120,16 +120,15 @@ class HttpHelper {
     User? user,
     required final UriHelper uriHelper,
     final String? bearerToken,
-  }) async =>
-      http.delete(
-        uri,
-        headers: _buildHeaders(
-          user: user,
-          uriHelper: uriHelper,
-          addCredentialsToHeader: false,
-          bearerToken: bearerToken,
-        ),
-      );
+  }) async => http.delete(
+    uri,
+    headers: _buildHeaders(
+      user: user,
+      uriHelper: uriHelper,
+      addCredentialsToHeader: false,
+      bearerToken: bearerToken,
+    ),
+  );
 
   /// Sends an http PUT request to the specified uri.
   Future<http.Response> doPutRequest(
@@ -138,17 +137,16 @@ class HttpHelper {
     User? user,
     required final UriHelper uriHelper,
     final String? bearerToken,
-  }) async =>
-      http.put(
-        uri,
-        headers: _buildHeaders(
-          user: user,
-          uriHelper: uriHelper,
-          addCredentialsToHeader: false,
-          bearerToken: bearerToken,
-        ),
-        body: jsonBody,
-      );
+  }) async => http.put(
+    uri,
+    headers: _buildHeaders(
+      user: user,
+      uriHelper: uriHelper,
+      addCredentialsToHeader: false,
+      bearerToken: bearerToken,
+    ),
+    body: jsonBody,
+  );
 
   /// Sends an http POST request to the specified uri with a JSON body.
   Future<http.Response> doPostJsonRequest(
@@ -157,11 +155,7 @@ class HttpHelper {
     required final UriHelper uriHelper,
     required final String bearerToken,
   }) async =>
-      http.post(
-        uri,
-        headers: _getBearerHeader(bearerToken),
-        body: jsonBody,
-      );
+      http.post(uri, headers: _getBearerHeader(bearerToken), body: jsonBody);
 
   static const String userInfoForTest = 'off:off';
 
@@ -176,21 +170,18 @@ class HttpHelper {
     required final UriHelper uriHelper,
     final String? bearerToken,
     final bool addUserAgentParameters = true,
-  }) async =>
-      http.patch(
-        uri,
-        headers: _buildHeaders(
-          user: user,
-          uriHelper: uriHelper,
-          addCredentialsToHeader: false,
-          bearerToken: bearerToken,
-        ),
-        body: jsonEncode(
-          addUserAgentParameters
-              ? HttpHelper.addUserAgentParameters(body)
-              : body,
-        ),
-      );
+  }) async => http.patch(
+    uri,
+    headers: _buildHeaders(
+      user: user,
+      uriHelper: uriHelper,
+      addCredentialsToHeader: false,
+      bearerToken: bearerToken,
+    ),
+    body: jsonEncode(
+      addUserAgentParameters ? HttpHelper.addUserAgentParameters(body) : body,
+    ),
+  );
 
   /// Send a multipart post request to the specified uri.
   /// The data / body of the request has to be provided as map. (key, value)
@@ -207,10 +198,11 @@ class HttpHelper {
 
     request.headers.addAll(
       _buildHeaders(
-        user: user,
-        uriHelper: uriHelper,
-        addCredentialsToHeader: false,
-      ) as Map<String, String>,
+            user: user,
+            uriHelper: uriHelper,
+            addCredentialsToHeader: false,
+          )
+          as Map<String, String>,
     );
 
     request.headers.addAll({'Content-Type': 'multipart/form-data'});
@@ -224,8 +216,11 @@ class HttpHelper {
     if (files != null) {
       for (MapEntry<String, Uri> entry in files.entries) {
         List<int> fileBytes = await UriReader.instance.readAsBytes(entry.value);
-        var multipartFile = http.MultipartFile.fromBytes(entry.key, fileBytes,
-            filename: basename(entry.value.toString()));
+        var multipartFile = http.MultipartFile.fromBytes(
+          entry.key,
+          fileBytes,
+          filename: basename(entry.value.toString()),
+        );
         request.files.add(multipartFile);
       }
     }
@@ -242,10 +237,7 @@ class HttpHelper {
         return Status(status: 200, body: responseBody);
       }
     } else {
-      return Status(
-        status: response.statusCode,
-        error: response.reasonPhrase,
-      );
+      return Status(status: response.statusCode, error: response.reasonPhrase);
     }
   }
 
@@ -261,9 +253,7 @@ class HttpHelper {
   /// Returns the request headers.
   ///
   /// Note: [addCredentialsToHeader] and [isTestModeActive] exclude each other.
-  Map<String, String>? _getBearerHeader(
-    final String bearerToken,
-  ) =>
+  Map<String, String>? _getBearerHeader(final String bearerToken) =>
       <String, String>{
         'Authorization': 'Bearer $bearerToken',
         'Content-Type': 'application/json',
@@ -335,7 +325,8 @@ class HttpHelper {
       }
       if (string.startsWith('<h1>Software error:</h1>')) {
         throw Exception(
-            'JSON expected, software error found: ${string.split('\n')[1]}');
+          'JSON expected, software error found: ${string.split('\n')[1]}',
+        );
       }
       if (string.startsWith('<!DOCTYPE html>')) {
         const String titleOpen = '<title>';
@@ -346,7 +337,8 @@ class HttpHelper {
           final int pos2 = string.indexOf(titleClose);
           if (pos2 >= 0 && pos1 < pos2) {
             throw Exception(
-                'JSON expected, server error found: ${string.substring(pos1, pos2)}');
+              'JSON expected, server error found: ${string.substring(pos1, pos2)}',
+            );
           }
         }
       }
@@ -382,7 +374,7 @@ class HttpHelper {
   }
 
   /// Returns the probable media type associated to that filename.
-  MediaType? imagineMediaType(final String filename) {
+  http.MediaType? imagineMediaType(final String filename) {
     String ext = extension(filename);
     if (ext.isEmpty) {
       return null;
@@ -391,11 +383,11 @@ class HttpHelper {
     switch (ext) {
       case 'jpg':
       case 'jpeg':
-        return MediaType('image', 'jpeg');
+        return http.MediaType('image', 'jpeg');
       case 'png':
-        return MediaType('image', 'png');
+        return http.MediaType('image', 'png');
       case 'webp':
-        return MediaType('image', 'webp');
+        return http.MediaType('image', 'webp');
     }
     return null;
   }

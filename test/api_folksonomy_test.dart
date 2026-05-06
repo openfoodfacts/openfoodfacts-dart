@@ -58,10 +58,10 @@ void main() {
       test('unknown user', () async {
         final MaybeError<String> status =
             await FolksonomyAPIClient.getAuthenticationToken(
-          username: 'magritte',
-          password: 'this is not a password',
-          uriHelper: uriHelper,
-        );
+              username: 'magritte',
+              password: 'this is not a password',
+              uriHelper: uriHelper,
+            );
         expect(status.isError, isTrue);
         expect(status.statusCode, Session.invalidAuthStatusCode);
         expect(status.detailError, Session.invalidAuthMessage);
@@ -70,10 +70,10 @@ void main() {
       test('existing user', () async {
         final MaybeError<String> token =
             await FolksonomyAPIClient.getAuthenticationToken(
-          username: user.userId,
-          password: user.password,
-          uriHelper: uriHelper,
-        );
+              username: user.userId,
+              password: user.password,
+              uriHelper: uriHelper,
+            );
         expect(token.isError, isFalse);
         expect(token.value, isNotEmpty);
       });
@@ -135,18 +135,14 @@ void main() {
 
     test('getProductTags - found', () async {
       final Map<String, ProductTag> result =
-          await FolksonomyAPIClient.getProductTags(
-        barcode: knownBarcode,
-      );
+          await FolksonomyAPIClient.getProductTags(barcode: knownBarcode);
       expect(result, isNotEmpty);
       checkProductTagList(result.values);
     });
 
     test('getProductTags - not found', () async {
       final Map<String, ProductTag> result =
-          await FolksonomyAPIClient.getProductTags(
-        barcode: unknownBarcode,
-      );
+          await FolksonomyAPIClient.getProductTags(barcode: unknownBarcode);
       expect(result, isEmpty);
     });
 
@@ -173,9 +169,9 @@ void main() {
     test('getProductTagVersions - found', () async {
       final List<ProductTag> result =
           await FolksonomyAPIClient.getProductTagVersions(
-        barcode: knownBarcode,
-        key: knownKey,
-      );
+            barcode: knownBarcode,
+            key: knownKey,
+          );
       expect(result, isNotEmpty);
       checkProductTagList(result);
     });
@@ -184,9 +180,9 @@ void main() {
       for (final unknownParameter in unknownParameters) {
         final List<ProductTag> result =
             await FolksonomyAPIClient.getProductTagVersions(
-          barcode: unknownParameter['barcode']!,
-          key: unknownParameter['key']!,
-        );
+              barcode: unknownParameter['barcode']!,
+              key: unknownParameter['key']!,
+            );
         expect(result, isEmpty);
       }
     });
@@ -202,10 +198,10 @@ void main() {
       // authentication
       final MaybeError<String> token =
           await FolksonomyAPIClient.getAuthenticationToken(
-        username: user.userId,
-        password: user.password,
-        uriHelper: uriHelper,
-      );
+            username: user.userId,
+            password: user.password,
+            uriHelper: uriHelper,
+          );
       expect(token.isError, isFalse);
       expect(token.value, isNotEmpty);
       final String bearerToken = token.value;
@@ -272,13 +268,13 @@ void main() {
 
       MaybeError<bool> updateResult =
           await FolksonomyAPIClient.updateProductTag(
-        barcode: barcode,
-        key: key,
-        value: value2,
-        version: productTag.version,
-        bearerToken: bearerToken,
-        uriHelper: uriHelper,
-      );
+            barcode: barcode,
+            key: key,
+            value: value2,
+            version: productTag.version,
+            bearerToken: bearerToken,
+            uriHelper: uriHelper,
+          );
       // we expect "version + 1";
       expect(updateResult.isError, true);
 
@@ -335,8 +331,9 @@ void main() {
     });
 
     test('getKeys (filtered)', () async {
-      final Map<String, KeyStats> result =
-          await FolksonomyAPIClient.getKeys(query: knownKey);
+      final Map<String, KeyStats> result = await FolksonomyAPIClient.getKeys(
+        query: knownKey,
+      );
       final KeyStats keyStats = result[knownKey]!;
       expect(keyStats.key, knownKey);
       expect(keyStats.count, greaterThanOrEqualTo(1));

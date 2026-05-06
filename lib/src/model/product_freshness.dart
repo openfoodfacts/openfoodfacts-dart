@@ -20,14 +20,16 @@ class ProductFreshness {
       ProductFreshness._(
         isEcoscoreReady: product.ecoscoreScore != null,
         isNutriscoreReady: product.nutriscore != null,
-        isIngredientsReady: product.ingredientsTags != null &&
+        isIngredientsReady:
+            product.ingredientsTags != null &&
             product.ingredientsTags!.isNotEmpty,
         lastModified: product.lastModified,
         improvements: product.getProductImprovements(),
       );
 
   @override
-  String toString() => 'ProductFreshness('
+  String toString() =>
+      'ProductFreshness('
       'ecoscore:$isEcoscoreReady'
       ','
       'nutriscore:$isNutriscoreReady'

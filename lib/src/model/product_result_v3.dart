@@ -54,10 +54,10 @@ class ProductResultV3 extends JsonObject {
   /// Possible value for [status]: the operation succeeded.
   static const String statusSuccess = 'success';
 
-  /// Possible value for [result.id]: product found
+  /// Possible value for `result.id`: product found.
   static const String resultProductFound = 'product_found';
 
-  /// Possible value for [result.id]: product not found
+  /// Possible value for `result.id`: product not found.
   static const String resultProductNotFound = 'product_not_found';
 
   factory ProductResultV3.fromJson(Map<String, dynamic> json) =>
@@ -71,7 +71,8 @@ class ProductResultV3 extends JsonObject {
 
   /// From a `List<AnswerForField>` in `dynamic`'s clothing (JsonKey)
   static List<ProductResultFieldAnswer>? _fromJsonListAnswerForField(
-      dynamic list) {
+    dynamic list,
+  ) {
     if (list == null) {
       return null;
     }

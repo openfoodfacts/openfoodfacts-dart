@@ -1,5 +1,4 @@
-import 'package:openfoodfacts/src/prices/flavor.dart';
-
+import 'flavor.dart';
 import 'get_price_count_parameters_helper.dart';
 import 'get_price_products_order.dart';
 

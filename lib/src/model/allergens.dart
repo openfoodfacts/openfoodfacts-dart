@@ -17,9 +17,7 @@ enum AllergensTag implements OffTagged {
   MOLLUSCS(offTag: 'en:molluscs'),
   SULPHUR_DIOXIDE_AND_SULPHITES(offTag: 'en:sulphur-dioxide-and-sulphites');
 
-  const AllergensTag({
-    required this.offTag,
-  });
+  const AllergensTag({required this.offTag});
 
   @override
   final String offTag;

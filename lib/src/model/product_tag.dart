@@ -16,10 +16,7 @@ class ProductTag extends JsonObject {
   final String owner;
   final int version;
   final String editor;
-  @JsonKey(
-    name: 'last_edit',
-    fromJson: JsonHelper.stringTimestampToDate,
-  )
+  @JsonKey(name: 'last_edit', fromJson: JsonHelper.stringTimestampToDate)
   final DateTime lastEdit;
   final String comment;
 

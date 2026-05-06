@@ -1,5 +1,7 @@
 import 'package:http/http.dart';
+import 'package:meta/meta.dart';
 
+import '../model/parameter/ingredients_unwanted_parameter.dart';
 import '../model/product_type_filter.dart';
 import '../model/user.dart';
 import 'abstract_query_configuration.dart';
@@ -9,7 +11,7 @@ import 'uri_helper.dart';
 /// Api version for product queries (minimum forced version number: 2).
 class ProductQueryVersion {
   const ProductQueryVersion(final num version)
-      : version = version < 2 ? 2 : version;
+    : version = version < 2 ? 2 : version;
 
   final num version;
 
@@ -19,6 +21,10 @@ class ProductQueryVersion {
       '/api/v$version/product/${Uri.encodeComponent(barcode)}/';
 
   bool matchesV3() => version >= 3;
+
+  /// Useful for testing new API versions.
+  @visibleForTesting
+  static const ProductQueryVersion testVersion = ProductQueryVersion(3);
 }
 
 /// Query Configuration for single barcode
@@ -32,6 +38,9 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
   /// Filter on a specific server.
   final ProductTypeFilter? productTypeFilter;
 
+  /// Impacts the score if unwanted ingredients are present.
+  final IngredientsUnwantedParameter? unwantedIngredients;
+
   /// See [AbstractQueryConfiguration.languages] for
   /// parameter's description.
   ProductQueryConfiguration(
@@ -43,6 +52,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     super.fields,
     super.activateKnowledgePanelsSimplified,
     this.productTypeFilter,
+    this.unwantedIngredients,
   });
 
   @override
@@ -51,7 +61,9 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     if (productTypeFilter != null) {
       result['product_type'] = productTypeFilter!.offTag;
     }
-
+    if (unwantedIngredients != null) {
+      result[unwantedIngredients!.getName()] = unwantedIngredients!.getValue();
+    }
     return result;
   }
 
@@ -77,10 +89,8 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
         addCookiesToHeader: true,
       );
     }
-    return await HttpHelper().doPostRequest(
-      uriHelper.getPostUri(
-        path: getUriPath(),
-      ),
+    return HttpHelper().doPostRequest(
+      uriHelper.getPostUri(path: getUriPath()),
       getParametersMap(),
       user,
       uriHelper: uriHelper,

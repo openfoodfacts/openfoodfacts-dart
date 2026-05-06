@@ -69,8 +69,11 @@ class TaxonomyPackagingRecycling extends JsonObject {
 
 /// Configuration for packaging recycling API query.
 class TaxonomyPackagingRecyclingQueryConfiguration
-    extends TaxonomyQueryConfiguration<TaxonomyPackagingRecycling,
-        TaxonomyPackagingRecyclingField> {
+    extends
+        TaxonomyQueryConfiguration<
+          TaxonomyPackagingRecycling,
+          TaxonomyPackagingRecyclingField
+        > {
   /// Configuration to get the packaging recycling that match the [tags].
   TaxonomyPackagingRecyclingQueryConfiguration({
     required List<String> tags,
@@ -80,14 +83,14 @@ class TaxonomyPackagingRecyclingQueryConfiguration
     List<Parameter> additionalParameters = const [],
     bool includeChildren = false,
   }) : super(
-          TagType.PACKAGING_RECYCLING,
-          tags,
-          languages: languages,
-          country: country,
-          includeChildren: includeChildren,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.PACKAGING_RECYCLING,
+         tags,
+         languages: languages,
+         country: country,
+         includeChildren: includeChildren,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   TaxonomyPackagingRecyclingQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages,
@@ -96,21 +99,23 @@ class TaxonomyPackagingRecyclingQueryConfiguration
     List<Parameter> additionalParameters = const [],
     bool includeChildren = false,
   }) : super.roots(
-          TagType.PACKAGING_RECYCLING,
-          languages: languages,
-          country: country,
-          includeChildren: includeChildren,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.PACKAGING_RECYCLING,
+         languages: languages,
+         country: country,
+         includeChildren: includeChildren,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   @override
   Map<String, TaxonomyPackagingRecycling> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {
       return const {};
     }
-    return jsonData.map<String, TaxonomyPackagingRecycling>(
-        (String key, dynamic taxonomy) {
+    return jsonData.map<String, TaxonomyPackagingRecycling>((
+      String key,
+      dynamic taxonomy,
+    ) {
       if (taxonomy is! Map<String, dynamic>) {
         assert(false, 'Received JSON Packaging Recycling is not a Map');
         return MapEntry(key, TaxonomyPackagingRecycling.fromJson({}));
@@ -120,14 +125,17 @@ class TaxonomyPackagingRecyclingQueryConfiguration
   }
 
   @override
-  Set<TaxonomyPackagingRecyclingField> get ignoredFields =>
-      const {TaxonomyPackagingRecyclingField.ALL};
+  Set<TaxonomyPackagingRecyclingField> get ignoredFields => const {
+    TaxonomyPackagingRecyclingField.ALL,
+  };
 
   @override
   Iterable<String> convertFieldsToStrings(
-          Iterable<TaxonomyPackagingRecyclingField> fields) =>
-      fields
-          .where((TaxonomyPackagingRecyclingField field) =>
-              !ignoredFields.contains(field))
-          .map<String>((TaxonomyPackagingRecyclingField field) => field.offTag);
+    Iterable<TaxonomyPackagingRecyclingField> fields,
+  ) => fields
+      .where(
+        (TaxonomyPackagingRecyclingField field) =>
+            !ignoredFields.contains(field),
+      )
+      .map<String>((TaxonomyPackagingRecyclingField field) => field.offTag);
 }

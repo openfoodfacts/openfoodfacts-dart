@@ -18,7 +18,8 @@ enum TaxonomyCategoryField implements OffTagged {
   AGRIBALYSE_PROXY_FOOD_NAME(offTag: 'agribalyse_proxy_food_name'),
   AGRIBALYSE_PROXY_NAME(offTag: 'agribalyse_proxy_name'),
   CARBON_FOOTPRINT_FR_FOODGES_INGREDIENT(
-      offTag: 'carbon_footprint_fr_foodges_ingredient'),
+    offTag: 'carbon_footprint_fr_foodges_ingredient',
+  ),
   CHILDREN(offTag: 'children'),
   CIQUAL_FOOD_CODE(offTag: 'ciqual_food_code'),
   CIQUAL_FOOD_NAME(offTag: 'ciqual_food_name'),
@@ -43,9 +44,7 @@ enum TaxonomyCategoryField implements OffTagged {
   WIKIDATA_CATEGORY(offTag: 'wikidata_category'),
   WIKIDATA_WIKIPEDIA_CATEGORY(offTag: 'wikidata_wikipedia_category');
 
-  const TaxonomyCategoryField({
-    required this.offTag,
-  });
+  const TaxonomyCategoryField({required this.offTag});
 
   @override
   final String offTag;
@@ -296,8 +295,9 @@ class TaxonomyCategory extends JsonObject {
   String toString() => toJson().toString();
 }
 
-class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<
-    TaxonomyCategory, TaxonomyCategoryField> {
+class TaxonomyCategoryQueryConfiguration
+    extends
+        TaxonomyQueryConfiguration<TaxonomyCategory, TaxonomyCategoryField> {
   TaxonomyCategoryQueryConfiguration({
     required List<String> tags,
     List<OpenFoodFactsLanguage>? languages,
@@ -306,14 +306,14 @@ class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<
     List<TaxonomyCategoryField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super(
-          TagType.CATEGORIES,
-          tags,
-          languages: languages,
-          country: country,
-          includeChildren: includeChildren,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.CATEGORIES,
+         tags,
+         languages: languages,
+         country: country,
+         includeChildren: includeChildren,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   TaxonomyCategoryQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages,
@@ -322,21 +322,23 @@ class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<
     List<TaxonomyCategoryField> fields = const [],
     List<Parameter> additionalParameters = const [],
   }) : super.roots(
-          TagType.CATEGORIES,
-          languages: languages,
-          country: country,
-          includeChildren: includeChildren,
-          fields: fields,
-          additionalParameters: additionalParameters,
-        );
+         TagType.CATEGORIES,
+         languages: languages,
+         country: country,
+         includeChildren: includeChildren,
+         fields: fields,
+         additionalParameters: additionalParameters,
+       );
 
   @override
   Map<String, TaxonomyCategory> convertResults(dynamic jsonData) {
     if (jsonData is! Map<String, dynamic>) {
       return const {};
     }
-    return jsonData
-        .map<String, TaxonomyCategory>((String key, dynamic taxonomy) {
+    return jsonData.map<String, TaxonomyCategory>((
+      String key,
+      dynamic taxonomy,
+    ) {
       if (taxonomy is! Map<String, dynamic>) {
         assert(false, 'Received JSON Category is not a Map');
         return MapEntry(key, TaxonomyCategory.fromJson({}));
@@ -346,12 +348,14 @@ class TaxonomyCategoryQueryConfiguration extends TaxonomyQueryConfiguration<
   }
 
   @override
-  Set<TaxonomyCategoryField> get ignoredFields =>
-      const {TaxonomyCategoryField.ALL};
+  Set<TaxonomyCategoryField> get ignoredFields => const {
+    TaxonomyCategoryField.ALL,
+  };
 
   @override
   Iterable<String> convertFieldsToStrings(
-      Iterable<TaxonomyCategoryField> fields) {
+    Iterable<TaxonomyCategoryField> fields,
+  ) {
     return fields
         .where((TaxonomyCategoryField field) => !ignoredFields.contains(field))
         .map<String>((TaxonomyCategoryField field) => field.offTag);

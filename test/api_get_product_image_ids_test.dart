@@ -6,13 +6,15 @@ import 'test_constants.dart';
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
 
+  const ProductQueryVersion version = ProductQueryVersion.testVersion;
+
   test('get product images (all, main and raw)', () async {
     const String barcode = '3019081238643';
     await getProductTooManyRequestsManager.waitIfNeeded();
     final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
       ProductQueryConfiguration(
         barcode,
-        version: ProductQueryVersion.v3,
+        version: version,
         fields: [ProductField.IMAGES],
       ),
       user: TestConstants.PROD_USER,

@@ -30,19 +30,17 @@ class TaxonomyNameAutocompleter implements Autocompleter {
   final Fuzziness fuzziness;
 
   @override
-  Future<List<String>> getSuggestions(
-    final String input,
-  ) async {
+  Future<List<String>> getSuggestions(final String input) async {
     final AutocompleteSearchResult results =
         await OpenFoodSearchAPIClient.autocomplete(
-      language: language,
-      query: input,
-      taxonomyNames: taxonomyNames,
-      size: limit,
-      user: user,
-      uriHelper: uriHelper,
-      fuzziness: fuzziness,
-    );
+          language: language,
+          query: input,
+          taxonomyNames: taxonomyNames,
+          size: limit,
+          user: user,
+          uriHelper: uriHelper,
+          fuzziness: fuzziness,
+        );
     final List<String> result = <String>[];
     if (results.options == null) {
       return result;

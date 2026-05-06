@@ -11,17 +11,23 @@ class NutrimentsHelper {
 
   static double fromKJtoKCal(final double kJ) => kJ / _kcalToKJFactor;
 
-  /// Calculates the energy for 100g in kJ.
+  /// Calculates the energy from fat, carbs, proteins and fibers.
   /// ! should be used cautiously (might not be displayed to the end user) !
   /// source : https://en.wikipedia.org/wiki/Food_energy
   static double? calculateEnergy(
     Nutriments nutriments, {
     PerSize perSize = PerSize.oneHundredGrams,
   }) {
-    double? fat = nutriments.getValue(Nutrient.fat, perSize);
-    double? carbs = nutriments.getValue(Nutrient.carbohydrates, perSize);
-    double? proteins = nutriments.getValue(Nutrient.proteins, perSize);
-    double? fiber = nutriments.getValue(Nutrient.fiber, perSize);
+    final double? fat = nutriments.getComputedValue(Nutrient.fat, perSize);
+    final double? carbs = nutriments.getComputedValue(
+      Nutrient.carbohydrates,
+      perSize,
+    );
+    final double? proteins = nutriments.getComputedValue(
+      Nutrient.proteins,
+      perSize,
+    );
+    final double? fiber = nutriments.getComputedValue(Nutrient.fiber, perSize);
 
     if (fat == null || carbs == null || proteins == null || fiber == null) {
       return null;

@@ -15,11 +15,7 @@ class BadgeBase extends JsonObject {
   @JsonKey()
   final int level;
 
-  BadgeBase({
-    required this.badgeName,
-    required this.level,
-    this.userId,
-  });
+  BadgeBase({required this.badgeName, required this.level, this.userId});
 
   factory BadgeBase.fromJson(Map<String, dynamic> json) =>
       _$BadgeBaseFromJson(json);
@@ -28,7 +24,8 @@ class BadgeBase extends JsonObject {
   Map<String, dynamic> toJson() => _$BadgeBaseToJson(this);
 
   @override
-  String toString() => 'BadgeBase(badgeName: $badgeName'
+  String toString() =>
+      'BadgeBase(badgeName: $badgeName'
       ', level: $level'
       '${userId == null ? '' : ', userId: $userId'}'
       ')';

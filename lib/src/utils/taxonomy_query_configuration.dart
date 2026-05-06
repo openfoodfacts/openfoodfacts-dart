@@ -17,8 +17,10 @@ import 'uri_helper.dart';
 /// Individual Taxonomies should implement a concrete subclass of this class to
 /// allow creating of the result data from json (See
 /// [TaxonomyCategoryQueryConfiguration] for an example).
-abstract class TaxonomyQueryConfiguration<T extends JsonObject,
-    F extends Enum> {
+abstract class TaxonomyQueryConfiguration<
+  T extends JsonObject,
+  F extends Enum
+> {
   /// The [languages] field should be used to set the desired taxonomy
   /// language(s) when a taxonomy is requested with fields in one or more
   /// languages. The taxonomy's text fields should be filled with the requested
@@ -64,10 +66,11 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
     this.includeChildren = false,
     this.fields = const [],
     this.additionalParameters = const [],
-  })  : _isRootConfiguration = false,
-        languages = languages ??
-            OpenFoodAPIConfiguration.globalLanguages ??
-            const <OpenFoodFactsLanguage>[];
+  }) : _isRootConfiguration = false,
+       languages =
+           languages ??
+           OpenFoodAPIConfiguration.globalLanguages ??
+           const <OpenFoodFactsLanguage>[];
 
   TaxonomyQueryConfiguration.roots(
     this.tagType, {
@@ -76,11 +79,12 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
     this.includeChildren = false,
     this.fields = const [],
     this.additionalParameters = const [],
-  })  : _isRootConfiguration = true,
-        tags = const <String>[],
-        languages = languages ??
-            OpenFoodAPIConfiguration.globalLanguages ??
-            const <OpenFoodFactsLanguage>[];
+  }) : _isRootConfiguration = true,
+       tags = const <String>[],
+       languages =
+           languages ??
+           OpenFoodAPIConfiguration.globalLanguages ??
+           const <OpenFoodFactsLanguage>[];
 
   /// Returns the corresponding API URI parameter map, including
   /// [additionalParameters].
@@ -98,12 +102,16 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
     result['include_children'] = includeChildren ? '1' : '0';
 
     if (languages.isNotEmpty) {
-      result.putIfAbsent('lc',
-          () => languages.map<String>((language) => language.offTag).join(','));
+      result.putIfAbsent(
+        'lc',
+        () => languages.map<String>((language) => language.offTag).join(','),
+      );
     }
 
-    result.putIfAbsent('cc',
-        () => OpenFoodAPIConfiguration.computeCountryCode(country, null)!);
+    result.putIfAbsent(
+      'cc',
+      () => OpenFoodAPIConfiguration.computeCountryCode(country, null)!,
+    );
 
     if (fields.isNotEmpty) {
       final Iterable<String> fieldsStrings = convertFieldsToStrings(fields);
@@ -116,9 +124,8 @@ abstract class TaxonomyQueryConfiguration<T extends JsonObject,
     return result;
   }
 
-  Uri getPostUri(final UriProductHelper uriHelper) => uriHelper.getPostUri(
-        path: 'api/v2/taxonomy',
-      );
+  Uri getPostUri(final UriProductHelper uriHelper) =>
+      uriHelper.getPostUri(path: 'api/v2/taxonomy');
 
   /// Returns the set of fields to ignore if specified in the [fields] parameter.
   ///

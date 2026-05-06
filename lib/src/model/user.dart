@@ -32,20 +32,20 @@ class User extends JsonObject {
       '${userId.substring(0, 1).toUpperCase()}${userId.substring(1)}';
 
   static String getUserWikiPage(final String userId) => Uri(
-        scheme: 'https',
-        host: 'wiki.openfoodfacts.org',
-        path: 'User:${getUserWikiTag(userId)}',
-      ).toString();
+    scheme: 'https',
+    host: 'wiki.openfoodfacts.org',
+    path: 'User:${getUserWikiTag(userId)}',
+  ).toString();
 
   /// Link to add a discussion topic on the OpenFoodFacts wiki page of a user.
   static String getUserWikiDiscussionPage(final String userId) => Uri(
-        scheme: 'https',
-        host: 'wiki.openfoodfacts.org',
-        path: 'index.php',
-        queryParameters: {
-          'title': 'User_talk:${getUserWikiTag(userId)}',
-          'action': 'edit',
-          'section': 'new',
-        },
-      ).toString();
+    scheme: 'https',
+    host: 'wiki.openfoodfacts.org',
+    path: 'index.php',
+    queryParameters: {
+      'title': 'User_talk:${getUserWikiTag(userId)}',
+      'action': 'edit',
+      'section': 'new',
+    },
+  ).toString();
 }

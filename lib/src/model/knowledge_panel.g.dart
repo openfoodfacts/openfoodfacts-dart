@@ -6,27 +6,34 @@ part of 'knowledge_panel.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-KnowledgePanel _$KnowledgePanelFromJson(Map<String, dynamic> json) =>
-    KnowledgePanel(
-      titleElement: json['title_element'] == null
-          ? null
-          : TitleElement.fromJson(
-              json['title_element'] as Map<String, dynamic>),
-      level: $enumDecodeNullable(_$LevelEnumMap, json['level'],
-          unknownValue: Level.UNKNOWN),
-      expanded: json['expanded'] as bool?,
-      elements: (json['elements'] as List<dynamic>?)
-          ?.map(
-              (e) => KnowledgePanelElement.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      topics:
-          (json['topics'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      evaluation: $enumDecodeNullable(_$EvaluationEnumMap, json['evaluation'],
-          unknownValue: Evaluation.UNKNOWN),
-      size: $enumDecodeNullable(_$KnowledgePanelSizeEnumMap, json['size'],
-          unknownValue: KnowledgePanelSize.UNKNOWN),
-      halfWidthOnMobile: json['half_width_on_mobile'] as bool?,
-    );
+KnowledgePanel _$KnowledgePanelFromJson(
+  Map<String, dynamic> json,
+) => KnowledgePanel(
+  titleElement: json['title_element'] == null
+      ? null
+      : TitleElement.fromJson(json['title_element'] as Map<String, dynamic>),
+  level: $enumDecodeNullable(
+    _$LevelEnumMap,
+    json['level'],
+    unknownValue: Level.UNKNOWN,
+  ),
+  expanded: json['expanded'] as bool?,
+  elements: (json['elements'] as List<dynamic>?)
+      ?.map((e) => KnowledgePanelElement.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  topics: (json['topics'] as List<dynamic>?)?.map((e) => e as String).toList(),
+  evaluation: $enumDecodeNullable(
+    _$EvaluationEnumMap,
+    json['evaluation'],
+    unknownValue: Evaluation.UNKNOWN,
+  ),
+  size: $enumDecodeNullable(
+    _$KnowledgePanelSizeEnumMap,
+    json['size'],
+    unknownValue: KnowledgePanelSize.UNKNOWN,
+  ),
+  halfWidthOnMobile: json['half_width_on_mobile'] as bool?,
+);
 
 Map<String, dynamic> _$KnowledgePanelToJson(KnowledgePanel instance) =>
     <String, dynamic>{
@@ -63,19 +70,24 @@ const _$KnowledgePanelSizeEnumMap = {
 };
 
 TitleElement _$TitleElementFromJson(Map<String, dynamic> json) => TitleElement(
-      title: json['title'] as String?,
-      name: json['name'] as String?,
-      subtitle: json['subtitle'] as String?,
-      value: (json['value'] as num?)?.toDouble(),
-      valueString: json['value_string'] as String?,
-      grade: $enumDecodeNullable(_$GradeEnumMap, json['grade'],
-          unknownValue: Grade.UNKNOWN),
-      type: $enumDecodeNullable(_$TitleElementTypeEnumMap, json['type'],
-          unknownValue: TitleElementType.UNKNOWN),
-      iconUrl: json['icon_url'] as String?,
-      iconColorFromEvaluation:
-          json['icon_color_from_evaluation'] as bool? ?? false,
-    );
+  title: json['title'] as String?,
+  name: json['name'] as String?,
+  subtitle: json['subtitle'] as String?,
+  value: (json['value'] as num?)?.toDouble(),
+  valueString: json['value_string'] as String?,
+  grade: $enumDecodeNullable(
+    _$GradeEnumMap,
+    json['grade'],
+    unknownValue: Grade.UNKNOWN,
+  ),
+  type: $enumDecodeNullable(
+    _$TitleElementTypeEnumMap,
+    json['type'],
+    unknownValue: TitleElementType.UNKNOWN,
+  ),
+  iconUrl: json['icon_url'] as String?,
+  iconColorFromEvaluation: json['icon_color_from_evaluation'] as bool? ?? false,
+);
 
 Map<String, dynamic> _$TitleElementToJson(TitleElement instance) =>
     <String, dynamic>{
