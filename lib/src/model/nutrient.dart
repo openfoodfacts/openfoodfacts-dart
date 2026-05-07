@@ -535,6 +535,12 @@ enum Nutrient implements OffTagged {
     probablyPetFood: true,
   ),
 
+  /// Hydroxymethylbutyrate
+  hydroxymethylbutyrate(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'hydroxymethylbutyrate',
+  ),
+
   /// Polydextrose
   polydextrose(typicalUnit: Unit.G, offTag: 'polydextrose');
 
