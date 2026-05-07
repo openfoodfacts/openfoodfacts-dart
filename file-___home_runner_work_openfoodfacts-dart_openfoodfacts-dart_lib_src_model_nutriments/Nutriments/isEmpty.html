@@ -54,8 +54,9 @@
 
     <section class="multi-line-signature">
       
-<span class="returntype"><a href="https://api.dart.dev/stable/3.11.5/dart-core/bool-class.html">bool</a></span>
-<span class="name ">isEmpty</span>(<wbr>)
+<span class="returntype"><a href="https://api.dart.dev/stable/3.11.6/dart-core/bool-class.html">bool</a></span>
+<span class="name ">isEmpty</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="isEmpty-param-isNullEmpty"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.11.6/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isNullEmpty</span> = <span class="default-value">false</span>, </span></li>
+</ol>})
 
       
 
@@ -63,13 +64,29 @@
     
 <section class="desc markdown">
   <p>Returns true if there are no populated nutrients at all.</p>
+<p>Default case: a nutrient with a null value is considered "populated".
+If <code>isNullEmpty</code> is true, a null value is a non populated value, and a
+<a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/Nutriments-class.html">Nutriments</a> with only null values would be considered empty.</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">bool isEmpty() =&gt; jsonMap.isEmpty;</code></pre>
+  <pre class="language-dart"><code class="language-dart">bool isEmpty({final bool isNullEmpty = false}) {
+  if (jsonMap.isEmpty) {
+    return true;
+  }
+  if (!isNullEmpty) {
+    return false;
+  }
+  for (final dynamic value in jsonMap.values) {
+    if (value != null) {
+      return false;
+    }
+  }
+  return true;
+}</code></pre>
 </section>
 
 

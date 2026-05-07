@@ -55,20 +55,24 @@
     <section class="multi-line-signature">
       
 <span class="returntype"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/Nutriments-class.html">Nutriments</a></span>
-<span class="name ">deleteValue</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="deleteValue-param-nutrient"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span> <span class="parameter-name">nutrient</span></span></li>
+<span class="name ">deleteValue</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="deleteValue-param-nutrient"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span> <span class="parameter-name">nutrient</span>, </span></li>
+<li><span class="parameter" id="deleteValue-param-perSize"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_per_size/PerSize.html">PerSize</a></span> <span class="parameter-name">perSize</span></span></li>
 </ol>)
 
       
 
     </section>
     
+<section class="desc markdown">
+  <p>Deletes the value in grams of that <code>nutrient</code> for that <code>perSize</code>.</p>
+</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Nutriments deleteValue(final Nutrient nutrient) =&gt;
-    _set(nutrient, value: null);</code></pre>
+  <pre class="language-dart"><code class="language-dart">Nutriments deleteValue(final Nutrient nutrient, final PerSize perSize) =&gt;
+    _set(nutrient, perSize, value: null);</code></pre>
 </section>
 
 

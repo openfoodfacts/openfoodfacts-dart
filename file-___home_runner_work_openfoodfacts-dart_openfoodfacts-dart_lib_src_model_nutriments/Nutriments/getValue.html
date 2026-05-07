@@ -54,8 +54,9 @@
 
     <section class="multi-line-signature">
       
-<span class="returntype"><a href="https://api.dart.dev/stable/3.11.5/dart-core/double-class.html">double</a>?</span>
-<span class="name ">getValue</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="getValue-param-nutrient"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span> <span class="parameter-name">nutrient</span></span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.11.6/dart-core/double-class.html">double</a>?</span>
+<span class="name ">getValue</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="getValue-param-nutrient"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient</a></span> <span class="parameter-name">nutrient</span>, </span></li>
+<li><span class="parameter" id="getValue-param-perSize"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_per_size/PerSize.html">PerSize</a></span> <span class="parameter-name">perSize</span></span></li>
 </ol>)
 
       
@@ -63,21 +64,16 @@
     </section>
     
 <section class="desc markdown">
-  <p>Returns the value of that <code>nutrient</code>.</p>
-<p>See also: <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/Nutriments/getUnit.html">getUnit</a>, <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/Nutriments/getModifier.html">getModifier</a>.</p>
+  <p>Returns the value of that <code>nutrient</code> for that <code>perSize</code>.</p>
+<p>It won't be in grams for very specific nutrients, like <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutrient/Nutrient.html">Nutrient.alcohol</a>.</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">double? getValue(final Nutrient nutrient) {
-  final dynamic item = jsonMap[_getValueTag(nutrient)];
-  if (item == &#39;&#39;) {
-    return null;
-  }
-  return JsonObject.parseDouble(item);
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">double? getValue(final Nutrient nutrient, final PerSize perSize) =&gt;
+    JsonObject.parseDouble(jsonMap[_getTag(nutrient, perSize)]);</code></pre>
 </section>
 
 

@@ -54,10 +54,10 @@
 
     <section class="multi-line-signature">
       
-<span class="returntype"><a href="https://api.dart.dev/stable/3.11.5/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrients/OrderedNutrients-class.html">OrderedNutrients</a></span>&gt;</span></span>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.11.6/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_ordered_nutrients/OrderedNutrients-class.html">OrderedNutrients</a></span>&gt;</span></span>
 <span class="name ">getOrderedNutrients</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="getOrderedNutrients-param-country"><span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_country_helper/OpenFoodFactsCountry.html">OpenFoodFactsCountry</a></span> <span class="parameter-name">country</span>, </span></li>
 <li><span class="parameter" id="getOrderedNutrients-param-language"><span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span>, </span></li>
-<li><span class="parameter" id="getOrderedNutrients-param-excludeReadOnly"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.11.5/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">excludeReadOnly</span> = <span class="default-value">true</span>, </span></li>
+<li><span class="parameter" id="getOrderedNutrients-param-excludeReadOnly"><span>@<a href="https://api.dart.dev/stable/3.11.6/dart-core/Deprecated/Deprecated.html">Deprecated</a>(&#39;Not relevant anymore&#39;)</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.11.6/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">excludeReadOnly</span> = <span class="default-value">true</span>, </span></li>
 <li><span class="parameter" id="getOrderedNutrients-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>, </span></li>
 </ol>})
 
@@ -90,7 +90,8 @@ elsewhere.</p>
   <pre class="language-dart"><code class="language-dart">static Future&lt;OrderedNutrients&gt; getOrderedNutrients({
   required final OpenFoodFactsCountry country,
   required final OpenFoodFactsLanguage language,
-  final bool excludeReadOnly = true,
+  &#47;&#47; TODO: deprecated from 2026-04-06; remove when old enough
+  @Deprecated(&#39;Not relevant anymore&#39;) final bool excludeReadOnly = true,
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async =&gt; OrderedNutrients.fromJson(
   HttpHelper().jsonDecode(
@@ -100,7 +101,6 @@ elsewhere.</p>
       uriHelper: uriHelper,
     ),
   ),
-  excludeReadOnly: excludeReadOnly,
 );</code></pre>
 </section>
 

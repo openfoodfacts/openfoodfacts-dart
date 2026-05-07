@@ -54,7 +54,7 @@
 
     <section class="multi-line-signature">
       
-<span class="returntype"><a href="https://api.dart.dev/stable/3.11.5/dart-core/double-class.html">double</a>?</span>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.11.6/dart-core/double-class.html">double</a>?</span>
 <span class="name ">calculateEnergy</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="calculateEnergy-param-nutriments"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_nutriments/Nutriments-class.html">Nutriments</a></span> <span class="parameter-name">nutriments</span>, {</span></li>
 <li><span class="parameter" id="calculateEnergy-param-perSize"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_per_size/PerSize.html">PerSize</a></span> <span class="parameter-name">perSize</span> = <span class="default-value">PerSize.oneHundredGrams</span>, </span></li>
 </ol>})
@@ -77,16 +77,10 @@ source : <a href="https://en.wikipedia.org/wiki/Food_energy">https://en.wikipedi
   Nutriments nutriments, {
   PerSize perSize = PerSize.oneHundredGrams,
 }) {
-  final double? fat = nutriments.getComputedValue(Nutrient.fat, perSize);
-  final double? carbs = nutriments.getComputedValue(
-    Nutrient.carbohydrates,
-    perSize,
-  );
-  final double? proteins = nutriments.getComputedValue(
-    Nutrient.proteins,
-    perSize,
-  );
-  final double? fiber = nutriments.getComputedValue(Nutrient.fiber, perSize);
+  double? fat = nutriments.getValue(Nutrient.fat, perSize);
+  double? carbs = nutriments.getValue(Nutrient.carbohydrates, perSize);
+  double? proteins = nutriments.getValue(Nutrient.proteins, perSize);
+  double? fiber = nutriments.getValue(Nutrient.fiber, perSize);
 
   if (fat == null || carbs == null || proteins == null || fiber == null) {
     return null;

@@ -54,7 +54,7 @@
 
     <section class="multi-line-signature">
       
-<span class="returntype"><a href="https://api.dart.dev/stable/3.11.5/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_status/Status-class.html">Status</a></span>&gt;</span></span>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.11.6/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_status/Status-class.html">Status</a></span>&gt;</span></span>
 <span class="name ">saveProduct</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="saveProduct-param-user"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a></span> <span class="parameter-name">user</span>, </span></li>
 <li><span class="parameter" id="saveProduct-param-product"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product-class.html">Product</a></span> <span class="parameter-name">product</span>, {</span></li>
 <li><span class="parameter" id="saveProduct-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>, </span></li>
@@ -118,32 +118,7 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
   var productUri = uriHelper.getPostUri(path: &#39;&#47;cgi&#47;product_jqm2.pl&#39;);
 
   if (product.nutriments != null) {
-    final Map&lt;String, String&gt; rawNutrients = product.nutriments!.toData();
-    for (final Nutrient nutrient in Nutrient.values) {
-      final String modifier =
-          rawNutrients[&#39;${nutrient.offTag}_modifier&#39;] ?? &#39;&#39;;
-      if (modifier == NutrientModifier.valueNotSpecified.offTag) {
-        parameterMap[&#39;nutriment_${nutrient.offTag}&#39;] = modifier;
-        &#47;&#47; and that&#39;s enough
-        continue;
-      }
-      String? value = rawNutrients[&#39;${nutrient.offTag}_value&#39;];
-      if (value == null) {
-        &#47;&#47; the nutrient is simply not mentioned
-        continue;
-      }
-      if (value == &#39;&#39;) {
-        &#47;&#47; the nutrient value is deleted
-        parameterMap[&#39;nutriment_${nutrient.offTag}&#39;] = value;
-        continue;
-      }
-      parameterMap[&#39;nutriment_${nutrient.offTag}&#39;] = &#39;$modifier$value&#39;;
-      final String key = &#39;${nutrient.offTag}_unit&#39;;
-      value = rawNutrients[key];
-      if (value != null) {
-        parameterMap[&#39;nutriment_$key&#39;] = value;
-      }
-    }
+    parameterMap.addAll(product.nutriments!.asSaveProductMap());
   }
   parameterMap.remove(&#39;nutriments&#39;);
   final Response response = await HttpHelper().doPostRequest(
