@@ -97,7 +97,6 @@ export 'src/open_prices_api_client.dart';
 export 'src/personalized_search/available_attribute_groups.dart';
 export 'src/personalized_search/available_preference_importances.dart';
 export 'src/personalized_search/available_product_preferences.dart';
-export 'src/personalized_search/matched_product.dart';
 export 'src/personalized_search/matched_product_v2.dart';
 export 'src/personalized_search/preference_importance.dart';
 export 'src/personalized_search/product_preferences_manager.dart';

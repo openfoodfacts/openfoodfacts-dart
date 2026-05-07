@@ -6,7 +6,8 @@ import 'test_constants.dart';
 /// Integration test about packagings.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
+  OpenFoodAPIConfiguration.globalUser = TestConstants.TEST_USER;
+  const uriHelper = uriHelperFoodTest;
   OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
   OpenFoodAPIConfiguration.globalLanguages = [
     OpenFoodFactsLanguage.ENGLISH,
@@ -33,6 +34,7 @@ void main() {
       final Map<String, TaxonomyPackaging>? packagings =
           await OpenFoodAPIClient.getTaxonomyPackagings(
             TaxonomyPackagingQueryConfiguration.roots(),
+            uriHelper: uriHelper,
           );
       expect(packagings, isNotNull);
       expect(packagings, isNotEmpty);
@@ -49,6 +51,7 @@ void main() {
       final Map<String, TaxonomyPackaging>? packagings =
           await OpenFoodAPIClient.getTaxonomyPackagings(
             TaxonomyPackagingQueryConfiguration(tags: <String>[knownRootTag]),
+            uriHelper: uriHelper,
           );
       expect(packagings, isNotNull);
       expect(packagings!.length, equals(1));
@@ -60,6 +63,7 @@ void main() {
       final Map<String, TaxonomyPackaging>? packagings =
           await OpenFoodAPIClient.getTaxonomyPackagings(
             TaxonomyPackagingQueryConfiguration(tags: <String>[unknownTag]),
+            uriHelper: uriHelper,
           );
       expect(packagings, isNull);
     });
@@ -70,6 +74,7 @@ void main() {
             TaxonomyPackagingQueryConfiguration(
               tags: <String>[unknownTag, knownRootTag],
             ),
+            uriHelper: uriHelper,
           );
       expect(packagings, isNotNull);
       expect(packagings!.length, equals(1));
@@ -87,6 +92,7 @@ void main() {
       final Map<String, TaxonomyPackaging>? sublevel =
           await OpenFoodAPIClient.getTaxonomyPackagings(
             TaxonomyPackagingQueryConfiguration(tags: children),
+            uriHelper: uriHelper,
           );
       expect(sublevel, isNotNull);
       expect(sublevel, isNotEmpty);
@@ -111,6 +117,7 @@ void main() {
       final Map<String, TaxonomyPackaging>? roots =
           await OpenFoodAPIClient.getTaxonomyPackagings(
             TaxonomyPackagingQueryConfiguration.roots(),
+            uriHelper: uriHelper,
           );
       expect(roots, isNotNull);
       expect(roots, isNotEmpty);

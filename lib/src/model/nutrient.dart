@@ -342,6 +342,12 @@ enum Nutrient implements OffTagged {
     offTag: 'fruits-vegetables-nuts-estimate',
   ),
 
+  /// Fruits Vegetables Legumes
+  fruitsVegetablesLegums(
+    typicalUnit: Unit.PERCENT,
+    offTag: 'fruits-vegetables-legumes',
+  ),
+
   /// Collagen Meat Protein Ratio
   collagenMeatProteinRatio(
     typicalUnit: Unit.PERCENT,
@@ -374,6 +380,9 @@ enum Nutrient implements OffTagged {
 
   /// Water hardness
   waterHardness(typicalUnit: Unit.UNKNOWN, offTag: 'water-hardness'),
+
+  /// Water
+  water(typicalUnit: Unit.G, offTag: 'water'),
 
   /// Choline
   choline(typicalUnit: Unit.G, offTag: 'choline'),
@@ -524,6 +533,12 @@ enum Nutrient implements OffTagged {
     typicalUnit: Unit.G_PER_KG,
     offTag: 'protein-value',
     probablyPetFood: true,
+  ),
+
+  /// Hydroxymethylbutyrate
+  hydroxymethylbutyrate(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'hydroxymethylbutyrate',
   ),
 
   /// Polydextrose

@@ -17,7 +17,8 @@ void main() {
         version: version,
         fields: [ProductField.IMAGES],
       ),
-      user: TestConstants.PROD_USER,
+      user: TestConstants.TEST_USER,
+      uriHelper: uriHelperFoodTest,
     );
     expect(result.product, isNotNull);
     expect(result.product!.images, isNotNull);

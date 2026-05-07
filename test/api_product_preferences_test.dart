@@ -12,7 +12,8 @@ void main() {
   const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
-  OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
+  OpenFoodAPIConfiguration.globalUser = TestConstants.TEST_USER;
+  const uriHelper = uriHelperFoodTest;
   OpenFoodAPIConfiguration.globalLanguages = <OpenFoodFactsLanguage>[language];
 
   /// Tests around Product Preferences.
@@ -34,9 +35,11 @@ void main() {
       final String languageCode = language.code;
       final Uri importanceUrl = AvailablePreferenceImportances.getUri(
         languageCode,
+        uriHelper: uriHelper,
       );
       final Uri attributeGroupUrl = AvailableAttributeGroups.getUri(
         languageCode,
+        uriHelper: uriHelper,
       );
       http.Response response;
       response = await http.get(importanceUrl);

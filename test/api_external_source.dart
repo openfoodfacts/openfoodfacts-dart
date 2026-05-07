@@ -5,7 +5,6 @@ import 'test_constants.dart';
 
 /// Tests around External Source
 void main() {
-  // TODO(monsieurtanuki) switch to PROD when relevant
   final UriProductHelper uriHelper = uriHelperFoodTest;
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   const String sufferingFingerprintId = 'empreinte_souffrance';
@@ -77,6 +76,7 @@ void main() {
                 ProductField.CATEGORIES_TAGS,
               ],
             ),
+            uriHelper: uriHelper,
           );
       expect(productResultV3.product, isNotNull);
       final ExternalSourceMetadata metadata = await getSufferingMetadata();
@@ -109,6 +109,7 @@ void main() {
                 ProductField.CATEGORIES_TAGS,
               ],
             ),
+            uriHelper: uriHelper,
           );
       expect(productResultV3.product, isNotNull);
       final ExternalSourceMetadata metadata = await getSufferingMetadata();

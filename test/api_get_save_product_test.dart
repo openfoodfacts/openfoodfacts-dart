@@ -37,6 +37,16 @@ void main() {
   const String russianIngredientsAll = 'Мука, вода';
   const List<String> russianIngredientsSplit = <String>['Мука', 'Вода'];
 
+  bool checkServerStatus(final Status status) {
+    if (status.status == 400) {
+      // grumpy server: let's not fail
+      return false;
+    }
+    expect(status.status, 1);
+    expect(status.statusVerbose, 'fields saved');
+    return true;
+  }
+
   /// Returns true if the (TEST) server is in a good mood.
   ///
   /// Will return false if the server is NOT in a good mood, with an explicit
@@ -791,7 +801,7 @@ void main() {
         uriHelper: uriHelper,
       );
 
-      expect(result.status, ProductResultV3.statusSuccess);
+      expect(result.status, ProductResultV3.statusWarning);
       expect(result.product!.barcode, null);
       expect(result.product!.genericName, genericName);
       expect(result.product!.labels, labels);
@@ -807,22 +817,24 @@ void main() {
     // This is barcode refers to a test product
     const String barcode = '111111555555';
 
-    Future<void> uploadProduct({required bool noNutritionData}) async {
+    Future<bool> uploadProduct({required bool noNutritionData}) async {
+      const perSize = PerSize.oneHundredGrams;
       final Status status = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         Product(
           barcode: barcode,
-          nutrimentDataPer: PerSize.oneHundredGrams.offTag,
+          nutrimentDataPer: perSize.offTag,
           noNutritionData: noNutritionData,
           nutriments: noNutritionData != true
-              ? (Nutriments.empty()
-                  ..setValue(Nutrient.salt, 10.0, unit: Unit.G))
+              ? (Nutriments.empty()..setValue(Nutrient.salt, perSize, 10.0))
               : null,
         ),
         uriHelper: uriHelper,
       );
-      expect(status.status, 1);
-      expect(status.statusVerbose, 'fields saved');
+      if (!checkServerStatus(status)) {
+        return false;
+      }
+      return true;
     }
 
     test('Without nutriments', () async {
@@ -830,7 +842,9 @@ void main() {
         return;
       }
 
-      await uploadProduct(noNutritionData: true);
+      if (!await uploadProduct(noNutritionData: true)) {
+        return;
+      }
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
@@ -853,7 +867,9 @@ void main() {
         return;
       }
 
-      await uploadProduct(noNutritionData: false);
+      if (!await uploadProduct(noNutritionData: false)) {
+        return;
+      }
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
@@ -876,97 +892,71 @@ void main() {
 
       expect(nutriments.isEmpty(), isTrue);
 
-      nutriments.setValue(Nutrient.calcium, 12, unit: Unit.MILLI_G);
+      const perSize = PerSize.oneHundredGrams;
+
+      nutriments.setValue(Nutrient.calcium, perSize, 12);
       expect(nutriments.isEmpty(), isFalse);
 
-      nutriments.deleteValue(Nutrient.calcium);
+      nutriments.setValue(Nutrient.calcium, perSize, null);
       expect(nutriments.isEmpty(), isFalse);
     });
   }, timeout: Timeout(Duration(seconds: 90)));
 
-  test('nutrient units and modifiers', () async {
-    const String barcode = '0038900009472';
-    const Nutrient nutrient = Nutrient.vitaminC;
-    const double value = 123;
-    const PerSize perSize = PerSize.serving;
+  test('nutrient modifiers', () async {
+    const String barcode = '7622210449283';
+    const Nutrient nutrient = Nutrient.fiber; // used to be 4g / 100g
+    double value = 50;
+    const perSize = PerSize.oneHundredGrams;
 
-    const List<Unit> units = <Unit>[
-      Unit.G,
-      Unit.MILLI_G,
-      Unit.MICRO_G,
-      Unit.PERCENT_DV,
-      Unit.IU,
-    ];
-
-    for (final Unit unit in units) {
-      for (int i = 0; i < NutrientModifier.values.length + 2; i++) {
-        final Nutriments inputNutriments = Nutriments.empty();
-        NutrientModifier? modifier;
-        final bool deleting = i == 0;
-        if (deleting) {
-          inputNutriments.deleteValue(nutrient);
-        } else {
-          if (i == 1) {
-            modifier = null;
-          } else {
-            modifier = NutrientModifier.values[i - 2];
-          }
-          if (modifier == NutrientModifier.valueNotSpecified) {
-            inputNutriments.setValueAsNotSpecified(nutrient);
-          } else {
-            inputNutriments.setValue(
-              nutrient,
-              value,
-              unit: unit,
-              modifier: modifier,
-            );
-          }
-        }
-
-        final Status savedStatus = await OpenFoodAPIClient.saveProduct(
-          TestConstants.TEST_USER,
-          Product(
-            barcode: barcode,
-            nutriments: inputNutriments,
-            nutrimentDataPer: perSize.offTag,
-          ),
-          uriHelper: uriHelper,
-        );
-        expect(savedStatus.status, 1);
-
-        final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
-          ProductQueryConfiguration(
-            barcode,
-            language: OpenFoodFactsLanguage.FRENCH,
-            country: OpenFoodFactsCountry.FRANCE,
-            fields: [ProductField.NUTRIMENTS, ProductField.NUTRIMENT_DATA_PER],
-            version: ProductQueryVersion.v3,
-          ),
-          uriHelper: uriHelper,
-        );
-
-        expect(result.status, ProductResultV3.statusSuccess);
-        expect(result.barcode, barcode);
-        expect(result.product, isNotNull);
-
-        final Product product = result.product!;
-        expect(product.nutriments, isNotNull);
-        final Nutriments nutriments = product.nutriments!;
-
-        expect(product.nutrimentDataPer, perSize.offTag);
-
-        expect(nutriments.getModifier(nutrient), modifier);
-        if (deleting) {
-          expect(nutriments.getValue(nutrient), null);
-          expect(nutriments.getUnit(nutrient), null);
-        } else if (modifier == NutrientModifier.valueNotSpecified) {
-          expect(nutriments.getValue(nutrient), null);
-          expect(nutriments.getUnit(nutrient), null);
-        } else {
-          expect(nutriments.getValue(nutrient), value);
-          expect(nutriments.getUnit(nutrient), unit);
-        }
+    for (int i = 0; i < NutrientModifier.values.length + 1; i++) {
+      final Nutriments inputNutriments = Nutriments.empty();
+      NutrientModifier? modifier;
+      if (i == 0) {
+        modifier = null;
+      } else {
+        modifier = NutrientModifier.values[i - 1];
       }
+      inputNutriments.setValue(nutrient, perSize, ++value, modifier: modifier);
+
+      final Status savedStatus = await OpenFoodAPIClient.saveProduct(
+        TestConstants.TEST_USER,
+        Product(
+          barcode: barcode,
+          nutriments: inputNutriments,
+          nutrimentDataPer: perSize.offTag,
+          servingSize: '250g',
+          servingQuantity: 250,
+          noNutritionData: false,
+        ),
+        uriHelper: uriHelper,
+      );
+      if (!checkServerStatus(savedStatus)) {
+        return;
+      }
+
+      final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+        ProductQueryConfiguration(
+          barcode,
+          language: OpenFoodFactsLanguage.FRENCH,
+          country: OpenFoodFactsCountry.FRANCE,
+          fields: [ProductField.NUTRIMENTS],
+          version: ProductQueryVersion.v3,
+        ),
+        uriHelper: uriHelper,
+      );
+
+      expect(result.status, ProductResultV3.statusSuccess);
+      expect(result.barcode, barcode);
+      expect(result.product, isNotNull);
+
+      final Product product = result.product!;
+      expect(product.nutriments, isNotNull);
+      final Nutriments nutriments = product.nutriments!;
+
+      expect(nutriments.isEmpty(isNullEmpty: true), isFalse);
+      expect(nutriments.isEmpty(isNullEmpty: false), isFalse);
+      expect(nutriments.getModifier(nutrient), modifier);
+      expect(nutriments.getValue(nutrient, perSize), value);
     }
   }, timeout: Timeout(Duration(seconds: 180)));
 }

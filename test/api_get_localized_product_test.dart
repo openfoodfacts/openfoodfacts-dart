@@ -5,16 +5,16 @@ import 'test_constants.dart';
 
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
+  OpenFoodAPIConfiguration.globalUser = TestConstants.TEST_USER;
+  const uriHelper = uriHelperFoodTest;
 
   const ProductQueryVersion version = ProductQueryVersion.testVersion;
 
+  // actually, we're running in TEST...
   Future<ProductResultV3> getProductV3InProd(
     ProductQueryConfiguration configuration,
-  ) async {
-    await getProductTooManyRequestsManager.waitIfNeeded();
-    return OpenFoodAPIClient.getProductV3(configuration);
-  }
+  ) async =>
+      OpenFoodAPIClient.getProductV3(configuration, uriHelper: uriHelper);
 
   group('$OpenFoodAPIClient get localized product fields', () {
     test('get packaging text in languages (Coca-Cola)', () async {
