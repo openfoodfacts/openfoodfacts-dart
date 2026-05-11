@@ -1,5 +1,3 @@
-import 'package:openfoodfacts/openfoodfacts.dart';
-
 import '../model/off_tagged.dart';
 
 /// Available languages

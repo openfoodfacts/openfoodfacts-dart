@@ -343,7 +343,6 @@ class Product extends JsonObject {
   /// Read-only
   /// cf. https://github.com/openfoodfacts/openfoodfacts-dart/issues/104
   @JsonKey(
-    //name: 'images_to_update_in_languages',
     toJson: _toJsonFreshness,
     fromJson: _fromJsonFreshness,
     includeIfNull: true,
