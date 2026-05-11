@@ -1,3 +1,5 @@
+import 'package:openfoodfacts/openfoodfacts.dart';
+
 import '../model/off_tagged.dart';
 
 /// Available languages
@@ -1527,6 +1529,14 @@ class LanguageHelper {
     return toJsonMap(map);
   }
 
+  /// Helper function without generic types. Needed for the
+  /// `@JsonKey` annotation (the annotation can't work with generics).
+  static Map<String, List<String>>? toJsonStringMapList(
+    Map<OpenFoodFactsLanguage, List<String>>? map,
+  ) {
+    return toJsonMap(map);
+  }
+
   /// From a `Map<String, String>` in `dynamic`'s clothing (JsonKey annotation)
   static Map<OpenFoodFactsLanguage, String>? fromJsonStringMap(dynamic map) {
     if (map == null) {
@@ -1582,6 +1592,17 @@ class LanguageHelper {
 
   /// Special case for ISO codes that should be unique for all languages.
   ///
+  /// e.g. "country_code_2": {"en": "BY"} will return 'BY'.
+  /// From a `Map<String, String>` in `dynamic`'s clothing (JsonKey annotation)
+  static Map<String, String>? toJsonStringMapIsoUnique(final String? value) {
+    if (value == null) {
+      return null;
+    }
+    return {'en': value};
+  }
+
+  /// Special case for ISO codes that should be unique for all languages.
+  ///
   /// e.g. "language_codes": {"en":"nl,fr"} will return
   /// e.g. `[OpenFoodFactsLanguage.DUTCH`, `OpenFoodFactsLanguage.FRENCH]`
   /// From a `Map<String, String>` in `dynamic`'s clothing (JsonKey annotation)
@@ -1604,6 +1625,23 @@ class LanguageHelper {
       }
     }
     return result;
+  }
+
+  /// Special case for ISO codes that should be unique for all languages.
+  ///
+  /// e.g. "language_codes": {"en":"nl,fr"} will return
+  /// e.g. `[OpenFoodFactsLanguage.DUTCH`, `OpenFoodFactsLanguage.FRENCH]`
+  /// From a `Map<String, String>` in `dynamic`'s clothing (JsonKey annotation)
+  static Map<String, String>? toJsonStringMapIsoList(
+    List<OpenFoodFactsLanguage>? languages,
+  ) {
+    if (languages == null) {
+      return null;
+    }
+    final List<String> list = List<String>.of(
+      languages.map((final OpenFoodFactsLanguage language) => language.offTag),
+    );
+    return {'en': list.join(',')};
   }
 
   /// Helper function without generic types. Needed for the

@@ -46,36 +46,50 @@ class TaxonomyCountry extends JsonObject {
   @JsonKey(
     name: 'country_code_2',
     fromJson: LanguageHelper.fromJsonStringMapIsoUnique,
+    toJson: LanguageHelper.toJsonStringMapIsoUnique,
     includeIfNull: false,
   )
   String? countryCode2;
   @JsonKey(
     name: 'country_code_3',
     fromJson: LanguageHelper.fromJsonStringMapIsoUnique,
+    toJson: LanguageHelper.toJsonStringMapIsoUnique,
     includeIfNull: false,
   )
   String? countryCode3;
   @JsonKey(
     name: 'language_codes',
     fromJson: LanguageHelper.fromJsonStringMapIsoList,
+    toJson: LanguageHelper.toJsonStringMapIsoList,
     includeIfNull: false,
   )
   List<OpenFoodFactsLanguage>? languages;
-  @JsonKey(fromJson: LanguageHelper.fromJsonStringMap, includeIfNull: false)
+  @JsonKey(
+    fromJson: LanguageHelper.fromJsonStringMap,
+    toJson: LanguageHelper.toJsonStringMap,
+    includeIfNull: false,
+  )
   Map<OpenFoodFactsLanguage, String>? name;
-  @JsonKey(fromJson: LanguageHelper.fromJsonStringMapList, includeIfNull: false)
+  @JsonKey(
+    fromJson: LanguageHelper.fromJsonStringMapList,
+    toJson: LanguageHelper.toJsonStringMapList,
+    includeIfNull: false,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? synonyms;
   @JsonKey(
     fromJson: LanguageHelper.fromJsonStringMapIsoUnique,
+    toJson: LanguageHelper.toJsonStringMapIsoUnique,
     includeIfNull: false,
   )
   String? wikidata;
   @JsonKey(
     name: 'official_country_code_2',
     fromJson: LanguageHelper.fromJsonStringMapIsoUnique,
+    toJson: LanguageHelper.toJsonStringMapIsoUnique,
     includeIfNull: false,
   )
   String? officialCountryCode2;
+
   @override
   String toString() => toJson().toString();
 }

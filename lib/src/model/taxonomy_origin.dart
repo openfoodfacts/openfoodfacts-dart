@@ -38,13 +38,21 @@ class TaxonomyOrigin extends JsonObject {
   Map<String, dynamic> toJson() => _$TaxonomyOriginToJson(this);
 
   /// Standard localized name of the origin (e.g., 'Italy' in English).
-  @JsonKey(fromJson: LanguageHelper.fromJsonStringMap, includeIfNull: false)
+  @JsonKey(
+    fromJson: LanguageHelper.fromJsonStringMap,
+    toJson: LanguageHelper.toJsonStringMap,
+    includeIfNull: false,
+  )
   Map<OpenFoodFactsLanguage, String>? name;
 
   /// Localized synonyms of the name of the origin.
   ///
   /// In real life the field contains rarely more than the name already known.
-  @JsonKey(fromJson: LanguageHelper.fromJsonStringMapList, includeIfNull: false)
+  @JsonKey(
+    fromJson: LanguageHelper.fromJsonStringMapList,
+    toJson: LanguageHelper.toJsonStringMapList,
+    includeIfNull: false,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? synonyms;
 
   /// Children of the origin (like, Aquitaine is a child of France).

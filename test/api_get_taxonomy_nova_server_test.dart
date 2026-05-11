@@ -29,5 +29,20 @@ void main() {
         expect(value.name, isNotNull);
       }
     });
+
+    test('check fromJson/toJson', () async {
+      final Map<String, TaxonomyNova>? values =
+          await OpenFoodAPIClient.getTaxonomyNova(
+            TaxonomyNovaQueryConfiguration.roots(),
+            uriHelper: uriHelper,
+          );
+      expect(values, isNotNull);
+      for (final TaxonomyNova item in values!.values) {
+        expect(
+          TaxonomyNova.fromJson(item.toJson()).toString(),
+          item.toString(),
+        );
+      }
+    });
   });
 }

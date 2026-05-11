@@ -72,6 +72,30 @@ void main() {
       }
     });
 
+    test('check freshness fromJson/toJson', () async {
+      const barcode = '7300400481588';
+      const List<OpenFoodFactsLanguage> languages = [
+        OpenFoodFactsLanguage.FRENCH,
+        OpenFoodFactsLanguage.ITALIAN,
+      ];
+
+      final ProductResultV3 productResult = await getProductV3InProd(
+        ProductQueryConfiguration(
+          barcode,
+          languages: languages,
+          fields: [ProductField.IMAGES_FRESHNESS_IN_LANGUAGES],
+          version: version,
+        ),
+      );
+      final Product serverProduct = productResult.product!;
+      final json = serverProduct.toJson();
+      final Product product = Product.fromJson(json);
+      expect(
+        product.imagesFreshnessInLanguages!.toString(),
+        serverProduct.imagesFreshnessInLanguages!.toString(),
+      );
+    });
+
     test('get all "tags in languages" (List<String>)', () async {
       const String barcode = '5449000000996';
       const List<OpenFoodFactsLanguage> languages = [
