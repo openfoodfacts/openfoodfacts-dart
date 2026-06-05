@@ -10,9 +10,11 @@ import 'model/status.dart';
 import 'model/user.dart';
 import 'utils/country_helper.dart';
 import 'utils/http_helper.dart';
+import 'utils/http_status_exception.dart';
 import 'utils/language_helper.dart';
 import 'utils/open_food_api_configuration.dart';
 import 'utils/server_type.dart';
+import 'utils/too_many_requests_exception.dart';
 import 'utils/uri_helper.dart';
 
 class RobotoffAPIClient {
@@ -44,6 +46,7 @@ class RobotoffAPIClient {
       insightUri,
       uriHelper: uriHelper,
     );
+    _checkResponse(response);
     var result = InsightsResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
     );
@@ -69,6 +72,7 @@ class RobotoffAPIClient {
       insightsUri,
       uriHelper: uriHelper,
     );
+    _checkResponse(response);
 
     return InsightsResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
@@ -104,6 +108,7 @@ class RobotoffAPIClient {
       user: user,
       uriHelper: uriHelper,
     );
+    _checkResponse(response);
     var result = RobotoffQuestionResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
     );
@@ -165,6 +170,7 @@ class RobotoffAPIClient {
       uriHelper: uriHelper,
       addCredentialsToHeader: user != null,
     );
+    _checkResponse(response);
     return RobotoffQuestionResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
     );
@@ -203,6 +209,7 @@ class RobotoffAPIClient {
       addCredentialsToBody: false,
       addCredentialsToHeader: user != null,
     );
+    _checkResponse(response);
     return Status.fromApiResponse(response.body);
   }
 
@@ -223,6 +230,7 @@ class RobotoffAPIClient {
     );
 
     final response = await HttpHelper().doGetRequest(uri, uriHelper: uriHelper);
+    _checkResponse(response);
 
     return RobotoffNutrientExtractionResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
@@ -238,5 +246,10 @@ class RobotoffAPIClient {
       result.add(country.offTag);
     }
     return result.join(',');
+  }
+
+  static void _checkResponse(final Response response) {
+    TooManyRequestsException.check(response);
+    HttpStatusException.check(response);
   }
 }

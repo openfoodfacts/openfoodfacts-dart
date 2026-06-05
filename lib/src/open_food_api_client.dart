@@ -49,6 +49,7 @@ import 'utils/tag_type.dart';
 import 'utils/taxonomy_query_configuration.dart';
 import 'utils/too_many_requests_exception.dart';
 import 'utils/uri_helper.dart';
+import 'utils/http_status_exception.dart';
 
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
@@ -112,6 +113,7 @@ class OpenFoodAPIClient {
       uriHelper: uriHelper,
       addCredentialsToBody: true,
     );
+    _checkResponse(response);
     return Status.fromApiResponse(response.body);
   }
 
@@ -161,6 +163,7 @@ class OpenFoodAPIClient {
       user,
       uriHelper: uriHelper,
     );
+    _checkResponse(response);
     return ProductResultV3.fromJson(HttpHelper().jsonDecode(response.body));
   }
 
@@ -277,7 +280,7 @@ class OpenFoodAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Response response = await configuration.getResponse(user, uriHelper);
-    TooManyRequestsException.check(response);
+    _checkResponse(response);
     return response.body;
   }
 
@@ -441,7 +444,7 @@ class OpenFoodAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Response response = await configuration.getResponse(user, uriHelper);
-    TooManyRequestsException.check(response);
+    _checkResponse(response);
     final String jsonStr = _replaceQuotes(response.body);
     final SearchResult result = SearchResult.fromJson(
       HttpHelper().jsonDecode(jsonStr),
@@ -503,6 +506,8 @@ class OpenFoodAPIClient {
       uriHelper: uriHelper,
       addCredentialsToBody: false,
     );
+
+    _checkResponse(response);
 
     Map<String, dynamic> decodedJson =
         HttpHelper().jsonDecode(_replaceQuotes(response.body))
@@ -707,6 +712,7 @@ class OpenFoodAPIClient {
       uriHelper: uriHelper,
       addCredentialsToBody: false,
     );
+    _checkResponse(response);
     return OcrIngredientsResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes))
           as Map<String, dynamic>,
@@ -750,6 +756,7 @@ class OpenFoodAPIClient {
       uriHelper: uriHelper,
       addCredentialsToBody: false,
     );
+    _checkResponse(response);
     return OcrPackagingResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes))
           as Map<String, dynamic>,
@@ -788,6 +795,7 @@ class OpenFoodAPIClient {
       user: user,
       uriHelper: uriHelper,
     );
+    _checkResponse(response);
     final Map<String, dynamic> map = HttpHelper().jsonDecode(response.body);
     final List<String> result = <String>[];
     if (map['suggestions'] != null) {
@@ -1189,9 +1197,7 @@ class OpenFoodAPIClient {
       uriHelper: uriHelper,
       addCredentialsToBody: false,
     );
-    if (response.statusCode != 200) {
-      throw Exception('Could not retrieve ordered nutrients!');
-    }
+    _checkResponse(response);
     return response.body;
   }
 
@@ -1289,11 +1295,7 @@ class OpenFoodAPIClient {
       uriHelper: uriHelper,
       addCredentialsToBody: true,
     );
-    if (response.statusCode != 200) {
-      throw Exception(
-        'Bad response (${response.statusCode}): ${response.body}',
-      );
-    }
+    _checkResponse(response);
     final Map<String, dynamic> json =
         HttpHelper().jsonDecode(response.body) as Map<String, dynamic>;
     final String status = json['status'];
@@ -1341,11 +1343,7 @@ class OpenFoodAPIClient {
       uriHelper: uriHelper,
       addCredentialsToBody: true,
     );
-    if (response.statusCode != 200) {
-      throw Exception(
-        'Bad response (${response.statusCode}): ${response.body}',
-      );
-    }
+    _checkResponse(response);
     final Map<String, dynamic> json =
         HttpHelper().jsonDecode(response.body) as Map<String, dynamic>;
     final String status = json['status'];
@@ -1376,6 +1374,7 @@ class OpenFoodAPIClient {
       ),
       uriHelper: uriHelper,
     );
+    _checkResponse(response);
     final Map<OpenFoodFactsCountry, String> result =
         <OpenFoodFactsCountry, String>{};
     final Map<String, dynamic> map = HttpHelper().jsonDecode(response.body);
@@ -1460,5 +1459,10 @@ class OpenFoodAPIClient {
         response,
       );
     }
+  }
+
+  static void _checkResponse(final Response response) {
+    TooManyRequestsException.check(response);
+    HttpStatusException.check(response);
   }
 }

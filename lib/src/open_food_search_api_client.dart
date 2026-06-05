@@ -4,11 +4,13 @@ import 'package:http/http.dart';
 
 import 'model/user.dart';
 import 'utils/http_helper.dart';
+import 'utils/http_status_exception.dart';
 import 'utils/language_helper.dart';
 import 'utils/open_food_api_configuration.dart';
 import 'search/autocomplete_search_result.dart';
 import 'search/fuzziness.dart';
 import 'search/taxonomy_name.dart';
+import 'utils/too_many_requests_exception.dart';
 import 'utils/uri_helper.dart';
 
 /// Client calls of the Open Food Facts Elastic Search API.
@@ -61,6 +63,8 @@ class OpenFoodSearchAPIClient {
       user: user,
       uriHelper: uriHelper,
     );
+    TooManyRequestsException.check(response);
+    HttpStatusException.check(response);
     return AutocompleteSearchResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
     );
