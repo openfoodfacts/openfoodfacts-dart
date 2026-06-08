@@ -68,6 +68,7 @@
   <pre class="language-dart"><code class="language-dart">@JsonKey(
   name: &#39;language_codes&#39;,
   fromJson: LanguageHelper.fromJsonStringMapIsoList,
+  toJson: LanguageHelper.toJsonStringMapIsoList,
   includeIfNull: false,
 )
 List&lt;OpenFoodFactsLanguage&gt;? languages;</code></pre>

@@ -67,6 +67,7 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@JsonKey(
   fromJson: LanguageHelper.fromJsonStringMapIsoUnique,
+  toJson: LanguageHelper.toJsonStringMapIsoUnique,
   includeIfNull: false,
 )
 String? wikidata;</code></pre>

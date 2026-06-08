@@ -68,7 +68,11 @@
       
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@JsonKey(fromJson: LanguageHelper.fromJsonStringMap, includeIfNull: false)
+  <pre class="language-dart"><code class="language-dart">@JsonKey(
+  fromJson: LanguageHelper.fromJsonStringMap,
+  toJson: LanguageHelper.toJsonStringMap,
+  includeIfNull: false,
+)
 Map&lt;OpenFoodFactsLanguage, String&gt;? material;</code></pre>
 </section>
 
