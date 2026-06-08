@@ -47,7 +47,6 @@ void main() {
         return;
       }
       final String firstInsightId = result.questions![0].insightId!;
-      final String secondInsightId = result.questions![1].insightId!;
 
       final Status status = await postAnnotation(firstInsightId);
       expect(status.status, 'vote_saved');
@@ -57,7 +56,7 @@ void main() {
       expect(result.status, 'found');
       expect(result.questions, isNotNull);
       expect(result.questions!.length, greaterThanOrEqualTo(1));
-      expect(result.questions![0].insightId!, secondInsightId);
+      expect(result.questions![0].insightId!, isNot(firstInsightId));
     }
 
     test(

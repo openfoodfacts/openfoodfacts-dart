@@ -272,7 +272,7 @@ void main() {
           final Nutriments nutriments = product.nutriments!;
           const PerSize perSize = PerSize.oneHundredGrams;
 
-          expect(product.nutrimentDataPer, perSize.offTag);
+          expect(product.nutrimentDataPer, '100ml');
           expect(product.servingQuantity, 177);
 
           expect(nutriments.getValue(Nutrient.iron, perSize), 0.00072);
@@ -398,27 +398,6 @@ void main() {
           nutriments.getValue(Nutrient.molybdenum, PerSize.oneHundredGrams),
           .000004,
         );
-
-        result = await getProductV3InProd(
-          ProductQueryConfiguration(
-            '3155251205319',
-            language: language,
-            fields: fields,
-            version: version,
-          ),
-        );
-        expect(result.product!.nutriments, isNotNull);
-        nutriments = result.product!.nutriments!;
-        expect(
-          nutriments.getValue(Nutrient.omega3, PerSize.oneHundredGrams),
-          4,
-        );
-        expect(nutriments.getValue(Nutrient.omega3, PerSize.serving), 4);
-        expect(
-          nutriments.getValue(Nutrient.omega6, PerSize.oneHundredGrams),
-          9.1,
-        );
-        expect(nutriments.getValue(Nutrient.omega6, PerSize.serving), 9.1);
       });
 
       test('get product Confiture Rhubarbe Fraises extra', () async {

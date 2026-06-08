@@ -120,5 +120,20 @@ void main() {
       final TaxonomyCountry country = countries[knownTag]!;
       checkKnown(country);
     });
+
+    test('check fromJson/toJson', () async {
+      final Map<String, TaxonomyCountry>? values =
+          await OpenFoodAPIClient.getTaxonomyCountries(
+            TaxonomyCountryQueryConfiguration.all(),
+            uriHelper: uriHelper,
+          );
+      expect(values, isNotNull);
+      for (final TaxonomyCountry item in values!.values) {
+        expect(
+          TaxonomyCountry.fromJson(item.toJson()).toString(),
+          item.toString(),
+        );
+      }
+    });
   });
 }

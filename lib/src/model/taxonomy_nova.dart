@@ -42,11 +42,19 @@ class TaxonomyNova extends JsonObject {
   Map<String, dynamic> toJson() => _$TaxonomyNovaToJson(this);
 
   /// Standard localized name.
-  @JsonKey(fromJson: LanguageHelper.fromJsonStringMap, includeIfNull: false)
+  @JsonKey(
+    fromJson: LanguageHelper.fromJsonStringMap,
+    toJson: LanguageHelper.toJsonStringMap,
+    includeIfNull: false,
+  )
   Map<OpenFoodFactsLanguage, String>? name;
 
   /// Localized synonyms of the name.
-  @JsonKey(fromJson: LanguageHelper.fromJsonStringMapList, includeIfNull: false)
+  @JsonKey(
+    fromJson: LanguageHelper.fromJsonStringMapList,
+    toJson: LanguageHelper.toJsonStringMapList,
+    includeIfNull: false,
+  )
   Map<OpenFoodFactsLanguage, List<String>>? synonyms;
 
   @override

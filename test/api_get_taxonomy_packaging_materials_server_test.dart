@@ -89,5 +89,20 @@ void main() {
       expect(values[unknownTag], isNull);
       expect(values[knownRootTag], isNotNull);
     });
+
+    test('check fromJson/toJson', () async {
+      final Map<String, TaxonomyPackagingMaterial>? values =
+          await OpenFoodAPIClient.getTaxonomyPackagingMaterials(
+            TaxonomyPackagingMaterialQueryConfiguration.roots(),
+            uriHelper: uriHelper,
+          );
+      expect(values, isNotNull);
+      for (final TaxonomyPackagingMaterial item in values!.values) {
+        expect(
+          TaxonomyPackagingMaterial.fromJson(item.toJson()).toString(),
+          item.toString(),
+        );
+      }
+    });
   });
 }
