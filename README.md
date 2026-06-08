@@ -22,7 +22,7 @@ We use the ability of the Open Food Facts API to return products results in JSON
 
 This plugin also allows you to edit a product or upload a new one to Open Food Facts. Using the same simple product structure you can create a product object or edit an existing one and send it to the API using a single function.
 
-## Weekly meetings
+## Weekly meetings (currently inactive)
 
 - We e-meet on Fridays at 09:00 Paris Time (08:00 London Time, 11:30 IST, 12:00 AM PT)
 - ![Google Meet](https://img.shields.io/badge/Google%20Meet-00897B?logo=google-meet&logoColor=white) Video call link: <https://meet.google.com/gnp-frks-esc>
