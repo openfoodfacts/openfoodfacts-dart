@@ -518,10 +518,8 @@ void main() {
           fields: [ProductField.ALL],
           version: version,
         );
-        expect(
-          () async => getProductV3InProd(configurations),
-          throwsA(isA<HttpStatusException>()),
-        );
+        ProductResultV3 result = await getProductV3InProd(configurations);
+        expect(result.product, isNull);
       });
 
       test('product ingredients', () async {
