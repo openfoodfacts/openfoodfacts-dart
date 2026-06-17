@@ -14,7 +14,6 @@ import 'utils/http_status_exception.dart';
 import 'utils/language_helper.dart';
 import 'utils/open_food_api_configuration.dart';
 import 'utils/server_type.dart';
-import 'utils/too_many_requests_exception.dart';
 import 'utils/uri_helper.dart';
 
 class RobotoffAPIClient {
@@ -249,7 +248,6 @@ class RobotoffAPIClient {
   }
 
   static void _checkResponse(final Response response) {
-    TooManyRequestsException.check(response);
     HttpStatusException.check(response);
   }
 }

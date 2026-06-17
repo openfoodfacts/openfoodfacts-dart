@@ -2,16 +2,16 @@ import 'package:http/http.dart';
 
 /// Generic exception for non-success HTTP responses.
 class HttpStatusException implements Exception {
-  const HttpStatusException({required this.statusCode, required this.body});
+  const HttpStatusException({required this.statusCode, required this.message});
 
   final int statusCode;
-  final String body;
+  final String message;
 
   static void check(final Response response) {
     if (response.statusCode < 200 || response.statusCode >= 300) {
       throw HttpStatusException(
         statusCode: response.statusCode,
-        body: response.body,
+        message: response.body,
       );
     }
   }

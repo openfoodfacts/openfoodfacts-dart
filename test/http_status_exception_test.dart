@@ -24,7 +24,7 @@ void main() {
       throwsA(
         isA<HttpStatusException>()
             .having((e) => e.statusCode, 'statusCode', 504)
-            .having((e) => e.body, 'body', body),
+            .having((e) => e.message, 'message', body),
       ),
     );
   });
@@ -35,7 +35,7 @@ void main() {
       throwsA(
         isA<HttpStatusException>()
             .having((e) => e.statusCode, 'statusCode', 500)
-            .having((e) => e.body, 'body', 'Internal Server Error'),
+            .having((e) => e.message, 'message', 'Internal Server Error'),
       ),
     );
   });
@@ -61,7 +61,7 @@ void main() {
   });
 
   test('toString contains status code', () {
-    const exception = HttpStatusException(statusCode: 504, body: 'timeout');
+    const exception = HttpStatusException(statusCode: 504, message: 'timeout');
     expect(exception.toString(), contains('504'));
   });
 }

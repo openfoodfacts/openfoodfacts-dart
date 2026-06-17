@@ -280,6 +280,7 @@ class OpenFoodAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Response response = await configuration.getResponse(user, uriHelper);
+    TooManyRequestsException.check(response);
     _checkResponse(response);
     return response.body;
   }
@@ -444,6 +445,7 @@ class OpenFoodAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     final Response response = await configuration.getResponse(user, uriHelper);
+    TooManyRequestsException.check(response);
     _checkResponse(response);
     final String jsonStr = _replaceQuotes(response.body);
     final SearchResult result = SearchResult.fromJson(
@@ -1462,7 +1464,6 @@ class OpenFoodAPIClient {
   }
 
   static void _checkResponse(final Response response) {
-    TooManyRequestsException.check(response);
     HttpStatusException.check(response);
   }
 }
