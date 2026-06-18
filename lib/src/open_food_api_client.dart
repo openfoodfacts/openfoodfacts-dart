@@ -281,10 +281,7 @@ class OpenFoodAPIClient {
   }) async {
     final Response response = await configuration.getResponse(user, uriHelper);
     TooManyRequestsException.check(response);
-    if (response.statusCode == 404) {
-      return response.body;
-    }
-    _checkResponse(response);
+    _checkResponse(response, includeCodes: [404]);
     return response.body;
   }
 
@@ -1466,7 +1463,10 @@ class OpenFoodAPIClient {
     }
   }
 
-  static void _checkResponse(final Response response) {
-    HttpStatusException.check(response);
+  static void _checkResponse(
+    final Response response, {
+    List<int> includeCodes = const [],
+  }) {
+    HttpStatusException.check(response, includeCodes: includeCodes);
   }
 }
