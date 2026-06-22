@@ -32,6 +32,7 @@ class OpenFoodSearchAPIClient {
     final User? user,
     final int size = 10,
     final Fuzziness fuzziness = Fuzziness.none,
+    final List<String> excludedItems = const <String>[],
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     query = query.trim();
@@ -45,6 +46,9 @@ class OpenFoodSearchAPIClient {
     if (taxonomyTags.isEmpty) {
       throw Exception('Taxonomies cannot be empty!');
     }
+    // Ask the API for enough results to keep the requested page size
+    // even after excluded suggestions are removed locally.
+    final int adjustedSize = size + excludedItems.length;
     final Uri uri = uriHelper.getUri(
       path: '/autocomplete',
       forcedHost: _getHost(uriHelper),
@@ -52,7 +56,7 @@ class OpenFoodSearchAPIClient {
         'q': query,
         'taxonomy_names': taxonomyTags.join(','),
         'lang': language.offTag,
-        'size': size.toString(),
+        'size': adjustedSize.toString(),
         'fuzziness': fuzziness.offTag,
       },
     );
@@ -61,8 +65,19 @@ class OpenFoodSearchAPIClient {
       user: user,
       uriHelper: uriHelper,
     );
-    return AutocompleteSearchResult.fromJson(
+    final AutocompleteSearchResult result = AutocompleteSearchResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
+    );
+    // Filter out excluded suggestions and clamp the list back to the
+    // originally requested size.
+    final filteredOptions = result.options
+        ?.where((final item) => !excludedItems.contains(item.text))
+        .take(size)
+        .toList();
+    return AutocompleteSearchResult(
+      took: result.took,
+      timedOut: result.timedOut,
+      options: filteredOptions,
     );
   }
 }
