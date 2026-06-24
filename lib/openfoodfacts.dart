@@ -157,6 +157,7 @@ export 'src/utils/autocompleter.dart';
 export 'src/utils/barcodes_validator.dart';
 export 'src/utils/country_helper.dart';
 export 'src/utils/http_helper.dart';
+export 'src/utils/http_status_exception.dart';
 export 'src/utils/image_helper.dart';
 export 'src/utils/invalid_barcodes.dart';
 export 'src/utils/json_helper.dart';

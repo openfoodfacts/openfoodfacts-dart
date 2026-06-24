@@ -4,6 +4,7 @@ import 'package:http/http.dart';
 
 import 'model/user.dart';
 import 'utils/http_helper.dart';
+import 'utils/http_status_exception.dart';
 import 'utils/language_helper.dart';
 import 'utils/open_food_api_configuration.dart';
 import 'search/autocomplete_search_result.dart';
@@ -61,6 +62,7 @@ class OpenFoodSearchAPIClient {
       user: user,
       uriHelper: uriHelper,
     );
+    HttpStatusException.check(response);
     return AutocompleteSearchResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
     );
