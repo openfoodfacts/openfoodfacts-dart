@@ -113,6 +113,7 @@
     user: user,
     uriHelper: uriHelper,
   );
+  HttpStatusException.check(response);
   return AutocompleteSearchResult.fromJson(
     HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
   );

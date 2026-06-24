@@ -82,6 +82,7 @@
     ),
     uriHelper: uriHelper,
   );
+  _checkResponse(response);
   final Map&lt;OpenFoodFactsCountry, String&gt; result =
       &lt;OpenFoodFactsCountry, String&gt;{};
   final Map&lt;String, dynamic&gt; map = HttpHelper().jsonDecode(response.body);

@@ -105,6 +105,7 @@ result.status would typically be 'vote_saved'.</p>
     addCredentialsToBody: false,
     addCredentialsToHeader: user != null,
   );
+  _checkResponse(response);
   return Status.fromApiResponse(response.body);
 }</code></pre>
 </section>

@@ -110,6 +110,7 @@ or if there is already an ingredients image but no extracted ingredients.</p>
     uriHelper: uriHelper,
     addCredentialsToBody: false,
   );
+  _checkResponse(response);
   return OcrIngredientsResult.fromJson(
     HttpHelper().jsonDecode(utf8.decode(response.bodyBytes))
         as Map&lt;String, dynamic&gt;,

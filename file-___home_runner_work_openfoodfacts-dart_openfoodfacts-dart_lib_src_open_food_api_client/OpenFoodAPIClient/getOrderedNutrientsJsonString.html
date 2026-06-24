@@ -91,9 +91,7 @@ Use <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dar
     uriHelper: uriHelper,
     addCredentialsToBody: false,
   );
-  if (response.statusCode != 200) {
-    throw Exception(&#39;Could not retrieve ordered nutrients!&#39;);
-  }
+  _checkResponse(response);
   return response.body;
 }</code></pre>
 </section>

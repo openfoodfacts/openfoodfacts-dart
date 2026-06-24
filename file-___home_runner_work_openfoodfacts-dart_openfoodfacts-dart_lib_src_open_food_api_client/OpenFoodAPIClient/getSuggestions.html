@@ -108,6 +108,7 @@
     user: user,
     uriHelper: uriHelper,
   );
+  _checkResponse(response);
   final Map&lt;String, dynamic&gt; map = HttpHelper().jsonDecode(response.body);
   final List&lt;String&gt; result = &lt;String&gt;[];
   if (map[&#39;suggestions&#39;] != null) {

@@ -84,6 +84,8 @@ getTaxonomy&lt;T extends JsonObject, F extends Enum&gt;(
     addCredentialsToBody: false,
   );
 
+  _checkResponse(response);
+
   Map&lt;String, dynamic&gt; decodedJson =
       HttpHelper().jsonDecode(_replaceQuotes(response.body))
         ..removeWhere((String key, dynamic value) {

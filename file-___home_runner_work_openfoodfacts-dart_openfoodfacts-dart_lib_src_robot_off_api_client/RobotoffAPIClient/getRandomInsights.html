@@ -98,6 +98,7 @@
     insightUri,
     uriHelper: uriHelper,
   );
+  _checkResponse(response);
   var result = InsightsResult.fromJson(
     HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
   );

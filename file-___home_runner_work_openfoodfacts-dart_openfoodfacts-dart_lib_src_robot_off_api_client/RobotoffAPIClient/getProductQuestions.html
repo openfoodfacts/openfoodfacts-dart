@@ -102,6 +102,7 @@
     user: user,
     uriHelper: uriHelper,
   );
+  _checkResponse(response);
   var result = RobotoffQuestionResult.fromJson(
     HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
   );

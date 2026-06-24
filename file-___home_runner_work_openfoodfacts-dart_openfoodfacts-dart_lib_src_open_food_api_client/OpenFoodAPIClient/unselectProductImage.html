@@ -99,11 +99,7 @@ Will work OK even when there was no previous selected product image.</p>
     uriHelper: uriHelper,
     addCredentialsToBody: true,
   );
-  if (response.statusCode != 200) {
-    throw Exception(
-      &#39;Bad response (${response.statusCode}): ${response.body}&#39;,
-    );
-  }
+  _checkResponse(response);
   final Map&lt;String, dynamic&gt; json =
       HttpHelper().jsonDecode(response.body) as Map&lt;String, dynamic&gt;;
   final String status = json[&#39;status&#39;];

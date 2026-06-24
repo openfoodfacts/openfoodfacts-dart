@@ -79,6 +79,7 @@
 }) async {
   final Response response = await configuration.getResponse(user, uriHelper);
   TooManyRequestsException.check(response);
+  _checkResponse(response, includeCodes: [404]);
   return response.body;
 }</code></pre>
 </section>

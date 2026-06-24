@@ -107,6 +107,7 @@
     uriHelper: uriHelper,
     addCredentialsToBody: false,
   );
+  _checkResponse(response);
   return OcrPackagingResult.fromJson(
     HttpHelper().jsonDecode(utf8.decode(response.bodyBytes))
         as Map&lt;String, dynamic&gt;,

@@ -132,6 +132,7 @@ null.</p>
     uriHelper: uriHelper,
     addCredentialsToHeader: user != null,
   );
+  _checkResponse(response);
   return RobotoffQuestionResult.fromJson(
     HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),
   );

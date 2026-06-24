@@ -87,6 +87,7 @@ cf. <a href="https://robotoff.openfoodfacts.org/api/v1/insights">https://robotof
   );
 
   final response = await HttpHelper().doGetRequest(uri, uriHelper: uriHelper);
+  _checkResponse(response);
 
   return RobotoffNutrientExtractionResult.fromJson(
     HttpHelper().jsonDecode(utf8.decode(response.bodyBytes)),

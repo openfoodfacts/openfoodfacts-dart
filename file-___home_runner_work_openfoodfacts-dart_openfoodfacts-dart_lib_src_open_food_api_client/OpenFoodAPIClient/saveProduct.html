@@ -128,6 +128,7 @@ or update data in specific language: <a href="https://github.com/openfoodfacts/o
     uriHelper: uriHelper,
     addCredentialsToBody: true,
   );
+  _checkResponse(response);
   return Status.fromApiResponse(response.body);
 }</code></pre>
 </section>
