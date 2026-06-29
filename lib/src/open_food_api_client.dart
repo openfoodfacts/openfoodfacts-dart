@@ -1281,6 +1281,9 @@ class OpenFoodAPIClient {
     required final User user,
     required final UriProductHelper uriHelper,
   }) async {
+    if (imageField == ImageField.OTHER) {
+      throw Exception('You cannot set or crop an image as OTHER');
+    }
     final String id = '${imageField.offTag}_${language.offTag}';
     final Map<String, String> queryParameters = <String, String>{
       'code': barcode,
