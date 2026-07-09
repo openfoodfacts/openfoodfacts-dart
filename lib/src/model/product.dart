@@ -342,7 +342,11 @@ class Product extends JsonObject {
   /// 0 seconds means we don't have the picture at all.
   /// Read-only
   /// cf. https://github.com/openfoodfacts/openfoodfacts-dart/issues/104
-  @JsonKey(includeIfNull: true)
+  @JsonKey(
+    toJson: _toJsonFreshness,
+    fromJson: _fromJsonFreshness,
+    includeIfNull: true,
+  )
   Map<OpenFoodFactsLanguage, Map<ImageField, int>>? imagesFreshnessInLanguages;
 
   @JsonKey(
@@ -971,6 +975,65 @@ class Product extends JsonObject {
       if (timestamp != null) {
         result[imageField] = timestamp;
       }
+    }
+    return result;
+  }
+
+  static Map<String, Map<String, int>>? _toJsonFreshness(
+    Map<OpenFoodFactsLanguage, Map<ImageField, int>>? map,
+  ) {
+    if (map == null) {
+      return null;
+    }
+    final Map<String, Map<String, int>> result = <String, Map<String, int>>{};
+    for (final MapEntry<OpenFoodFactsLanguage, Map<ImageField, int>>
+        entryLanguage
+        in map.entries) {
+      final String languageKey = entryLanguage.key.offTag;
+      final Map<String, int> values = <String, int>{};
+      for (final MapEntry<ImageField, int> entryField
+          in entryLanguage.value.entries) {
+        final String fieldKey = entryField.key.offTag;
+        final int value = entryField.value;
+        values['${fieldKey}_$languageKey'] = value;
+      }
+      result['${ProductField.IMAGES_FRESHNESS_IN_LANGUAGES.offTag}$languageKey'] =
+          values;
+    }
+    return result;
+  }
+
+  /// Dealt with by _jsonValueToImagesFreshness
+  static Map<OpenFoodFactsLanguage, Map<ImageField, int>>? _fromJsonFreshness(
+    dynamic map,
+  ) {
+    if (map == null) {
+      return null;
+    }
+    if (map is! Map<String, dynamic>) {
+      throw Exception(
+        'Expected type: Map<String, List<String>>, got ${map.runtimeType}',
+      );
+    }
+    Map<OpenFoodFactsLanguage, Map<ImageField, int>>? result;
+    const String prefix = 'images_to_update_';
+    for (final MapEntry<String, dynamic> entry in map.entries) {
+      if (entry.key.length <= prefix.length) {
+        continue;
+      }
+      final String languageOffTag = entry.key.substring(prefix.length);
+      final OpenFoodFactsLanguage? language = OpenFoodFactsLanguage.fromOffTag(
+        languageOffTag,
+      );
+      if (language == null) {
+        continue;
+      }
+      final Map<ImageField, int> values = _jsonValueToImagesFreshness(
+        entry.value,
+        language,
+      );
+      result ??= <OpenFoodFactsLanguage, Map<ImageField, int>>{};
+      result[language] = values;
     }
     return result;
   }

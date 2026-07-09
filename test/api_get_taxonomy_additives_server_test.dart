@@ -6,7 +6,8 @@ import 'test_constants.dart';
 /// Integration test about additives.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
+  OpenFoodAPIConfiguration.globalUser = TestConstants.TEST_USER;
+  const uriHelper = uriHelperFoodTest;
   OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
   OpenFoodAPIConfiguration.globalLanguages = [
     OpenFoodFactsLanguage.ENGLISH,
@@ -27,6 +28,7 @@ void main() {
       final Map<String, TaxonomyAdditive>? additives =
           await OpenFoodAPIClient.getTaxonomyAdditives(
             TaxonomyAdditiveQueryConfiguration.roots(),
+            uriHelper: uriHelper,
           );
       expect(additives, isNotNull);
       expect(additives!.length, greaterThan(500)); // was 540 on 2022-02-25
@@ -36,6 +38,7 @@ void main() {
       final Map<String, TaxonomyAdditive>? additives =
           await OpenFoodAPIClient.getTaxonomyAdditives(
             TaxonomyAdditiveQueryConfiguration(tags: <String>[knownTag]),
+            uriHelper: uriHelper,
           );
       expect(additives, isNotNull);
       expect(additives!.length, equals(1));
@@ -47,6 +50,7 @@ void main() {
       final Map<String, TaxonomyAdditive>? categories =
           await OpenFoodAPIClient.getTaxonomyAdditives(
             TaxonomyAdditiveQueryConfiguration(tags: <String>[unknownTag]),
+            uriHelper: uriHelper,
           );
       expect(categories, isNull);
     });
@@ -57,6 +61,7 @@ void main() {
             TaxonomyAdditiveQueryConfiguration(
               tags: <String>[unknownTag, knownTag],
             ),
+            uriHelper: uriHelper,
           );
       expect(additives, isNotNull);
       expect(additives!.length, equals(1));

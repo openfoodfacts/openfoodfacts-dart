@@ -6,7 +6,8 @@ import 'test_constants.dart';
 /// Integration test about allergens.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
+  OpenFoodAPIConfiguration.globalUser = TestConstants.TEST_USER;
+  const uriHelper = uriHelperFoodTest;
   OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
   OpenFoodAPIConfiguration.globalLanguages = [
     OpenFoodFactsLanguage.ENGLISH,
@@ -27,6 +28,7 @@ void main() {
       final Map<String, TaxonomyAllergen>? allergens =
           await OpenFoodAPIClient.getTaxonomyAllergens(
             TaxonomyAllergenQueryConfiguration.all(),
+            uriHelper: uriHelper,
           );
       expect(allergens, isNotNull);
       expect(allergens!.length, greaterThan(10)); // was 15 on 2022-02-25
@@ -40,6 +42,7 @@ void main() {
       final Map<String, TaxonomyAllergen>? allergens =
           await OpenFoodAPIClient.getTaxonomyAllergens(
             TaxonomyAllergenQueryConfiguration(tags: <String>[knownTag]),
+            uriHelper: uriHelper,
           );
       expect(allergens, isNotNull);
       expect(allergens!.length, 1);
@@ -51,6 +54,7 @@ void main() {
       final Map<String, TaxonomyAllergen>? allergens =
           await OpenFoodAPIClient.getTaxonomyAllergens(
             TaxonomyAllergenQueryConfiguration(tags: <String>[unknownTag]),
+            uriHelper: uriHelper,
           );
       expect(allergens, isNull);
     });
@@ -61,6 +65,7 @@ void main() {
             TaxonomyAllergenQueryConfiguration(
               tags: <String>[unknownTag, knownTag],
             ),
+            uriHelper: uriHelper,
           );
       expect(allergens, isNotNull);
       expect(allergens!.length, 1);

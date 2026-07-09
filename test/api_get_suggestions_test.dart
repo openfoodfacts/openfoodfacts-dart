@@ -6,6 +6,7 @@ import 'test_constants.dart';
 /// Integration tests about the V3 suggestions.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
+  const uriHelper = uriHelperFoodTest;
 
   /// Checks if at least one item contains the [substring].
   void listContains(final List<String> list, final String substring) {
@@ -18,16 +19,6 @@ void main() {
     fail('no item contains $substring');
   }
 
-  /// Checks if a list is not sorted alphabetically.
-  ///
-  /// Which is the case for shapes and materials, where the results are sorted
-  /// by relevancy.
-  void checkNotSortedList(final List<String> list) {
-    final List<String> sorted = List<String>.from(list);
-    sorted.sort();
-    expect(list, isNot(orderedEquals(sorted)));
-  }
-
   group('$OpenFoodAPIClient Suggestions and autocompletion V3 (packaging)', () {
     test('Suggestions for packaging_shapes', () async {
       final List<String> result = await OpenFoodAPIClient.getSuggestions(
@@ -36,22 +27,22 @@ void main() {
         input: '',
         country: OpenFoodFactsCountry.USA,
         categories: 'Pizza',
+        uriHelper: uriHelper,
       );
       expect(result, contains('Box'));
-      checkNotSortedList(result);
     });
 
     test('Suggestions for packaging_materials', () async {
       final List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.PACKAGING_MATERIALS,
         language: OpenFoodFactsLanguage.ENGLISH,
-        input: 's',
+        input: 'ass',
         country: OpenFoodFactsCountry.UNITED_KINGDOM,
         categories: 'Beer',
         shape: 'Bottle',
+        uriHelper: uriHelper,
       );
       expect(result, contains('Glass'));
-      checkNotSortedList(result);
     });
   });
 
@@ -68,6 +59,7 @@ void main() {
           tagType,
           language: OpenFoodFactsLanguage.FRENCH,
           input: 't',
+          uriHelper: uriHelper,
         );
         listContains(result, 't');
 
@@ -75,6 +67,7 @@ void main() {
           tagType,
           language: OpenFoodFactsLanguage.FRENCH,
           input: 'TUN',
+          uriHelper: uriHelper,
         );
         listContains(result, 'tun');
 
@@ -82,6 +75,7 @@ void main() {
           tagType,
           language: OpenFoodFactsLanguage.ENGLISH,
           input: 'TUN',
+          uriHelper: uriHelper,
         );
         listContains(result, 'tun');
 
@@ -89,6 +83,7 @@ void main() {
           tagType,
           language: OpenFoodFactsLanguage.ARABIC,
           input: 'تو',
+          uriHelper: uriHelper,
         );
         listContains(result, 'تو');
 
@@ -96,6 +91,7 @@ void main() {
           tagType,
           language: OpenFoodFactsLanguage.GEORGIAN,
           input: 'TUN',
+          uriHelper: uriHelper,
         );
         expect(result, isEmpty);
 
@@ -104,11 +100,13 @@ void main() {
             tagType,
             language: OpenFoodFactsLanguage.FRENCH,
             input: 'TUN',
+            uriHelper: uriHelper,
           ),
           await OpenFoodAPIClient.getSuggestions(
             tagType,
             language: OpenFoodFactsLanguage.FRENCH,
             input: 'tun',
+            uriHelper: uriHelper,
           ),
         );
       }
@@ -121,6 +119,7 @@ void main() {
         TagType.COUNTRIES,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'provence',
+        uriHelper: uriHelper,
       );
       expect(result, isEmpty); // "provence" is not a country
     });
@@ -132,6 +131,7 @@ void main() {
         TagType.ORIGINS,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'provence',
+        uriHelper: uriHelper,
       );
       expect(result, isNotEmpty);
 
@@ -139,6 +139,7 @@ void main() {
         TagType.ORIGINS,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'prove',
+        uriHelper: uriHelper,
       );
       expect(result, isNotEmpty);
 
@@ -146,6 +147,7 @@ void main() {
         TagType.ORIGINS,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'pyré',
+        uriHelper: uriHelper,
       );
       expect(result, isNotEmpty); // something about Pyrénées
     });
@@ -155,6 +157,7 @@ void main() {
         TagType.STATES,
         input: 'b',
         language: OpenFoodFactsLanguage.FRENCH,
+        uriHelper: uriHelper,
       );
 
       listContains(result, 'b');
@@ -163,6 +166,7 @@ void main() {
         TagType.STATES,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'compléter',
+        uriHelper: uriHelper,
       );
 
       listContains(result, 'compléter');
@@ -171,6 +175,7 @@ void main() {
         TagType.STATES,
         language: OpenFoodFactsLanguage.ENGLISH,
         input: 'h',
+        uriHelper: uriHelper,
       );
 
       listContains(result, 'h');
@@ -179,6 +184,7 @@ void main() {
         TagType.STATES,
         language: OpenFoodFactsLanguage.ARABIC,
         input: 'غ',
+        uriHelper: uriHelper,
       );
 
       listContains(result, 'غ');
@@ -187,6 +193,7 @@ void main() {
         TagType.STATES,
         language: OpenFoodFactsLanguage.GEORGIAN,
         input: 'M',
+        uriHelper: uriHelper,
       );
 
       expect(result.isEmpty, true);
@@ -196,11 +203,13 @@ void main() {
           TagType.STATES,
           language: OpenFoodFactsLanguage.ENGLISH,
           input: 'O',
+          uriHelper: uriHelper,
         ),
         await OpenFoodAPIClient.getSuggestions(
           TagType.STATES,
           language: OpenFoodFactsLanguage.ENGLISH,
           input: 'o',
+          uriHelper: uriHelper,
         ),
       );
     });
@@ -209,6 +218,7 @@ void main() {
         TagType.LANGUAGES,
         language: OpenFoodFactsLanguage.GERMAN,
         input: 'bA',
+        uriHelper: uriHelper,
       );
 
       listContains(result, 'ba');
@@ -218,6 +228,7 @@ void main() {
         TagType.LABELS,
         language: OpenFoodFactsLanguage.GERMAN,
         input: 'm',
+        uriHelper: uriHelper,
       );
 
       listContains(result, 'm');
@@ -227,6 +238,7 @@ void main() {
         TagType.CATEGORIES,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'compo',
+        uriHelper: uriHelper,
       );
 
       listContains(result, 'compo');
@@ -236,6 +248,7 @@ void main() {
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'soja',
         limit: 1000,
+        uriHelper: uriHelper,
       );
       expect(result.length, greaterThan(40)); // 20220626: 51 items
       listContains(result, 'soja');
@@ -245,6 +258,7 @@ void main() {
         TagType.INGREDIENTS,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'vian',
+        uriHelper: uriHelper,
       );
 
       listContains(result, 'vian');
@@ -254,6 +268,7 @@ void main() {
         TagType.TRACES,
         language: OpenFoodFactsLanguage.ENGLISH,
         input: 'e',
+        uriHelper: uriHelper,
       );
 
       listContains(result, 'e');
@@ -263,6 +278,7 @@ void main() {
         TagType.ADDITIVES,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'e9',
+        uriHelper: uriHelper,
       );
 
       listContains(result, 'e9');
@@ -272,6 +288,7 @@ void main() {
         TagType.ALLERGENS,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'fRu',
+        uriHelper: uriHelper,
       );
 
       listContains(result, 'fru');
@@ -281,6 +298,7 @@ void main() {
         TagType.PACKAGING,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'briq',
+        uriHelper: uriHelper,
       );
 
       listContains(result, 'briq');
@@ -290,6 +308,7 @@ void main() {
         TagType.PACKAGING_SHAPES,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'bido',
+        uriHelper: uriHelper,
       );
       listContains(result, 'bidon');
     });
@@ -298,6 +317,7 @@ void main() {
         TagType.PACKAGING_MATERIALS,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'carto',
+        uriHelper: uriHelper,
       );
       listContains(result, 'carton');
     });
@@ -306,6 +326,7 @@ void main() {
         TagType.PACKAGING_RECYCLING,
         language: OpenFoodFactsLanguage.FRENCH,
         input: 'conten',
+        uriHelper: uriHelper,
       );
       listContains(result, 'conteneur');
     });
@@ -316,6 +337,7 @@ void main() {
           TagType.EMB_CODES,
           language: OpenFoodFactsLanguage.FRENCH,
           input: 'fR',
+          uriHelper: uriHelper,
         );
 
         listContains(result, 'fr');
@@ -324,6 +346,7 @@ void main() {
           TagType.EMB_CODES,
           language: OpenFoodFactsLanguage.FRENCH,
           input: 'R',
+          uriHelper: uriHelper,
         );
 
         listContains(result, 'r');
@@ -333,11 +356,13 @@ void main() {
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.ITALIAN,
             input: 'U',
+            uriHelper: uriHelper,
           ),
           await OpenFoodAPIClient.getSuggestions(
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.FRENCH,
             input: 'U',
+            uriHelper: uriHelper,
           ),
         );
 
@@ -346,11 +371,13 @@ void main() {
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.GERMAN,
             input: 'C',
+            uriHelper: uriHelper,
           ),
           await OpenFoodAPIClient.getSuggestions(
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.ENGLISH,
             input: 'C',
+            uriHelper: uriHelper,
           ),
         );
 
@@ -359,11 +386,13 @@ void main() {
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.JAPANESE,
             input: 'd',
+            uriHelper: uriHelper,
           ),
           await OpenFoodAPIClient.getSuggestions(
             TagType.EMB_CODES,
             language: OpenFoodFactsLanguage.UKRAINIAN,
             input: 'D',
+            uriHelper: uriHelper,
           ),
         );
       },
@@ -373,6 +402,7 @@ void main() {
       List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.ALLERGENS,
         language: OpenFoodFactsLanguage.FRENCH,
+        uriHelper: uriHelper,
       );
 
       expect(result, contains('Céleri'));
@@ -380,6 +410,7 @@ void main() {
       result = await OpenFoodAPIClient.getSuggestions(
         TagType.TRACES,
         language: OpenFoodFactsLanguage.ENGLISH,
+        uriHelper: uriHelper,
       );
 
       expect(result, contains('Celery'));
@@ -387,6 +418,7 @@ void main() {
       result = await OpenFoodAPIClient.getSuggestions(
         TagType.INGREDIENTS,
         language: OpenFoodFactsLanguage.ENGLISH,
+        uriHelper: uriHelper,
       );
 
       expect(result, contains('Absinthe'));

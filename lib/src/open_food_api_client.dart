@@ -7,8 +7,6 @@ import 'external/external_source_metadata.dart';
 import 'external/external_source_product_data.dart';
 import 'interface/json_object.dart';
 import 'model/login_status.dart';
-import 'model/nutrient.dart';
-import 'model/nutrient_modifier.dart';
 import 'model/ocr_ingredients_result.dart';
 import 'model/ocr_packaging_result.dart';
 import 'model/ordered_nutrients.dart';
@@ -51,6 +49,7 @@ import 'utils/tag_type.dart';
 import 'utils/taxonomy_query_configuration.dart';
 import 'utils/too_many_requests_exception.dart';
 import 'utils/uri_helper.dart';
+import 'utils/http_status_exception.dart';
 
 /// Client calls of the Open Food Facts API
 class OpenFoodAPIClient {
@@ -104,32 +103,7 @@ class OpenFoodAPIClient {
     var productUri = uriHelper.getPostUri(path: '/cgi/product_jqm2.pl');
 
     if (product.nutriments != null) {
-      final Map<String, String> rawNutrients = product.nutriments!.toData();
-      for (final Nutrient nutrient in Nutrient.values) {
-        final String modifier =
-            rawNutrients['${nutrient.offTag}_modifier'] ?? '';
-        if (modifier == NutrientModifier.valueNotSpecified.offTag) {
-          parameterMap['nutriment_${nutrient.offTag}'] = modifier;
-          // and that's enough
-          continue;
-        }
-        String? value = rawNutrients['${nutrient.offTag}_value'];
-        if (value == null) {
-          // the nutrient is simply not mentioned
-          continue;
-        }
-        if (value == '') {
-          // the nutrient value is deleted
-          parameterMap['nutriment_${nutrient.offTag}'] = value;
-          continue;
-        }
-        parameterMap['nutriment_${nutrient.offTag}'] = '$modifier$value';
-        final String key = '${nutrient.offTag}_unit';
-        value = rawNutrients[key];
-        if (value != null) {
-          parameterMap['nutriment_$key'] = value;
-        }
-      }
+      parameterMap.addAll(product.nutriments!.asSaveProductMap());
     }
     parameterMap.remove('nutriments');
     final Response response = await HttpHelper().doPostRequest(
@@ -139,6 +113,7 @@ class OpenFoodAPIClient {
       uriHelper: uriHelper,
       addCredentialsToBody: true,
     );
+    _checkResponse(response);
     return Status.fromApiResponse(response.body);
   }
 
@@ -188,6 +163,7 @@ class OpenFoodAPIClient {
       user,
       uriHelper: uriHelper,
     );
+    _checkResponse(response);
     return ProductResultV3.fromJson(HttpHelper().jsonDecode(response.body));
   }
 
@@ -305,6 +281,7 @@ class OpenFoodAPIClient {
   }) async {
     final Response response = await configuration.getResponse(user, uriHelper);
     TooManyRequestsException.check(response);
+    _checkResponse(response, includeCodes: [404]);
     return response.body;
   }
 
@@ -469,6 +446,7 @@ class OpenFoodAPIClient {
   }) async {
     final Response response = await configuration.getResponse(user, uriHelper);
     TooManyRequestsException.check(response);
+    _checkResponse(response);
     final String jsonStr = _replaceQuotes(response.body);
     final SearchResult result = SearchResult.fromJson(
       HttpHelper().jsonDecode(jsonStr),
@@ -530,6 +508,8 @@ class OpenFoodAPIClient {
       uriHelper: uriHelper,
       addCredentialsToBody: false,
     );
+
+    _checkResponse(response);
 
     Map<String, dynamic> decodedJson =
         HttpHelper().jsonDecode(_replaceQuotes(response.body))
@@ -734,6 +714,7 @@ class OpenFoodAPIClient {
       uriHelper: uriHelper,
       addCredentialsToBody: false,
     );
+    _checkResponse(response);
     return OcrIngredientsResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes))
           as Map<String, dynamic>,
@@ -777,6 +758,7 @@ class OpenFoodAPIClient {
       uriHelper: uriHelper,
       addCredentialsToBody: false,
     );
+    _checkResponse(response);
     return OcrPackagingResult.fromJson(
       HttpHelper().jsonDecode(utf8.decode(response.bodyBytes))
           as Map<String, dynamic>,
@@ -815,6 +797,7 @@ class OpenFoodAPIClient {
       user: user,
       uriHelper: uriHelper,
     );
+    _checkResponse(response);
     final Map<String, dynamic> map = HttpHelper().jsonDecode(response.body);
     final List<String> result = <String>[];
     if (map['suggestions'] != null) {
@@ -1183,7 +1166,8 @@ class OpenFoodAPIClient {
   static Future<OrderedNutrients> getOrderedNutrients({
     required final OpenFoodFactsCountry country,
     required final OpenFoodFactsLanguage language,
-    final bool excludeReadOnly = true,
+    // TODO: deprecated from 2026-04-06; remove when old enough
+    @Deprecated('Not relevant anymore') final bool excludeReadOnly = true,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async => OrderedNutrients.fromJson(
     HttpHelper().jsonDecode(
@@ -1193,7 +1177,6 @@ class OpenFoodAPIClient {
         uriHelper: uriHelper,
       ),
     ),
-    excludeReadOnly: excludeReadOnly,
   );
 
   /// Returns the nutrient hierarchy specific to a country, localized, as JSON
@@ -1216,9 +1199,7 @@ class OpenFoodAPIClient {
       uriHelper: uriHelper,
       addCredentialsToBody: false,
     );
-    if (response.statusCode != 200) {
-      throw Exception('Could not retrieve ordered nutrients!');
-    }
+    _checkResponse(response);
     return response.body;
   }
 
@@ -1300,6 +1281,9 @@ class OpenFoodAPIClient {
     required final User user,
     required final UriProductHelper uriHelper,
   }) async {
+    if (imageField == ImageField.OTHER) {
+      throw Exception('You cannot set or crop an image as OTHER');
+    }
     final String id = '${imageField.offTag}_${language.offTag}';
     final Map<String, String> queryParameters = <String, String>{
       'code': barcode,
@@ -1316,11 +1300,7 @@ class OpenFoodAPIClient {
       uriHelper: uriHelper,
       addCredentialsToBody: true,
     );
-    if (response.statusCode != 200) {
-      throw Exception(
-        'Bad response (${response.statusCode}): ${response.body}',
-      );
-    }
+    _checkResponse(response);
     final Map<String, dynamic> json =
         HttpHelper().jsonDecode(response.body) as Map<String, dynamic>;
     final String status = json['status'];
@@ -1368,11 +1348,7 @@ class OpenFoodAPIClient {
       uriHelper: uriHelper,
       addCredentialsToBody: true,
     );
-    if (response.statusCode != 200) {
-      throw Exception(
-        'Bad response (${response.statusCode}): ${response.body}',
-      );
-    }
+    _checkResponse(response);
     final Map<String, dynamic> json =
         HttpHelper().jsonDecode(response.body) as Map<String, dynamic>;
     final String status = json['status'];
@@ -1403,6 +1379,7 @@ class OpenFoodAPIClient {
       ),
       uriHelper: uriHelper,
     );
+    _checkResponse(response);
     final Map<OpenFoodFactsCountry, String> result =
         <OpenFoodFactsCountry, String>{};
     final Map<String, dynamic> map = HttpHelper().jsonDecode(response.body);
@@ -1487,5 +1464,12 @@ class OpenFoodAPIClient {
         response,
       );
     }
+  }
+
+  static void _checkResponse(
+    final Response response, {
+    List<int> includeCodes = const [],
+  }) {
+    HttpStatusException.check(response, includeCodes: includeCodes);
   }
 }

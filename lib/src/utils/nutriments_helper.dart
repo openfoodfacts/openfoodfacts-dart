@@ -18,16 +18,10 @@ class NutrimentsHelper {
     Nutriments nutriments, {
     PerSize perSize = PerSize.oneHundredGrams,
   }) {
-    final double? fat = nutriments.getComputedValue(Nutrient.fat, perSize);
-    final double? carbs = nutriments.getComputedValue(
-      Nutrient.carbohydrates,
-      perSize,
-    );
-    final double? proteins = nutriments.getComputedValue(
-      Nutrient.proteins,
-      perSize,
-    );
-    final double? fiber = nutriments.getComputedValue(Nutrient.fiber, perSize);
+    double? fat = nutriments.getValue(Nutrient.fat, perSize);
+    double? carbs = nutriments.getValue(Nutrient.carbohydrates, perSize);
+    double? proteins = nutriments.getValue(Nutrient.proteins, perSize);
+    double? fiber = nutriments.getValue(Nutrient.fiber, perSize);
 
     if (fat == null || carbs == null || proteins == null || fiber == null) {
       return null;

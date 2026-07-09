@@ -6,7 +6,8 @@ import 'test_constants.dart';
 /// Integration test about languages.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
+  OpenFoodAPIConfiguration.globalUser = TestConstants.TEST_USER;
+  const uriHelper = uriHelperFoodTest;
   OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
   OpenFoodAPIConfiguration.globalLanguages = [
     OpenFoodFactsLanguage.ENGLISH,
@@ -21,6 +22,7 @@ void main() {
       final Map<String, TaxonomyLanguage>? languages =
           await OpenFoodAPIClient.getTaxonomyLanguages(
             TaxonomyLanguageQueryConfiguration.all(),
+            uriHelper: uriHelper,
           );
       expect(languages, isNotNull);
       expect(languages!.length, greaterThan(150)); // was 186 on 2022-02-25
@@ -31,6 +33,7 @@ void main() {
       final Map<String, TaxonomyLanguage>? languages =
           await OpenFoodAPIClient.getTaxonomyLanguages(
             TaxonomyLanguageQueryConfiguration(tags: <String>[knownTag]),
+            uriHelper: uriHelper,
           );
       expect(languages, isNotNull);
       expect(languages!.length, equals(1));
@@ -44,6 +47,7 @@ void main() {
       final Map<String, TaxonomyLanguage>? categories =
           await OpenFoodAPIClient.getTaxonomyLanguages(
             TaxonomyLanguageQueryConfiguration(tags: <String>[unknownTag]),
+            uriHelper: uriHelper,
           );
       expect(categories, isNull);
     });
@@ -54,6 +58,7 @@ void main() {
             TaxonomyLanguageQueryConfiguration(
               tags: <String>[unknownTag, knownTag],
             ),
+            uriHelper: uriHelper,
           );
       expect(languages, isNotNull);
       expect(languages!.length, equals(1));

@@ -6,7 +6,8 @@ import 'test_constants.dart';
 /// Integration test about packaging shapes.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
+  OpenFoodAPIConfiguration.globalUser = TestConstants.TEST_USER;
+  const uriHelper = uriHelperFoodTest;
   OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
   OpenFoodAPIConfiguration.globalLanguages = [
     OpenFoodFactsLanguage.ENGLISH,
@@ -41,6 +42,7 @@ void main() {
       final Map<String, TaxonomyPackagingShape>? values =
           await OpenFoodAPIClient.getTaxonomyPackagingShapes(
             TaxonomyPackagingShapeQueryConfiguration(tags: <String>[knownTag]),
+            uriHelper: uriHelper,
           );
       expect(values, isNotNull);
       expect(values!.length, equals(1));
@@ -53,6 +55,7 @@ void main() {
             TaxonomyPackagingShapeQueryConfiguration(
               tags: <String>[unknownTag],
             ),
+            uriHelper: uriHelper,
           );
       expect(values, isNull);
     });
@@ -65,6 +68,7 @@ void main() {
               TaxonomyPackagingShapeQueryConfiguration(
                 tags: <String>[unknownTag, knownTag],
               ),
+              uriHelper: uriHelper,
             );
         expect(values, isNotNull);
         expect(values!.length, equals(1));
@@ -76,11 +80,28 @@ void main() {
       final Map<String, TaxonomyPackagingShape>? values =
           await OpenFoodAPIClient.getTaxonomyPackagingShapes(
             TaxonomyPackagingShapeQueryConfiguration.roots(),
+            uriHelper: uriHelper,
           );
       expect(values, isNotNull);
       expect(values!.length, greaterThan(70)); // was 80 on 2022-11-07
       expect(values[unknownTag], isNull);
       expect(values[knownRootTag], isNotNull);
+    });
+
+    test('check fromJson/toJson', () async {
+      final Map<String, TaxonomyPackagingShape>? values =
+          await OpenFoodAPIClient.getTaxonomyPackagingShapes(
+            TaxonomyPackagingShapeQueryConfiguration.roots(),
+            uriHelper: uriHelper,
+          );
+      expect(values, isNotNull);
+      expect(values!.length, greaterThan(0));
+      for (final TaxonomyPackagingShape item in values.values) {
+        expect(
+          TaxonomyPackagingShape.fromJson(item.toJson()).toString(),
+          item.toString(),
+        );
+      }
     });
   });
 }

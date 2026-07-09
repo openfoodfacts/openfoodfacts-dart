@@ -6,7 +6,8 @@ import 'test_constants.dart';
 /// Integration test about countries.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
+  OpenFoodAPIConfiguration.globalUser = TestConstants.TEST_USER;
+  const uriHelper = uriHelperFoodTest;
   OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.FRANCE;
   OpenFoodAPIConfiguration.globalLanguages = [
     OpenFoodFactsLanguage.ENGLISH,
@@ -39,6 +40,7 @@ void main() {
       final Map<String, TaxonomyCountry>? countries =
           await OpenFoodAPIClient.getTaxonomyCountries(
             TaxonomyCountryQueryConfiguration.all(),
+            uriHelper: uriHelper,
           );
       expect(countries, isNotNull);
       expect(countries!.length, greaterThan(250)); // was 268 on 2022-03-13
@@ -88,6 +90,7 @@ void main() {
       final Map<String, TaxonomyCountry>? countries =
           await OpenFoodAPIClient.getTaxonomyCountries(
             TaxonomyCountryQueryConfiguration(tags: <String>[knownTag]),
+            uriHelper: uriHelper,
           );
       expect(countries, isNotNull);
       expect(countries!.length, equals(1));
@@ -99,6 +102,7 @@ void main() {
       final Map<String, TaxonomyCountry>? countries =
           await OpenFoodAPIClient.getTaxonomyCountries(
             TaxonomyCountryQueryConfiguration(tags: <String>[unknownTag]),
+            uriHelper: uriHelper,
           );
       expect(countries, isNull);
     });
@@ -109,11 +113,27 @@ void main() {
             TaxonomyCountryQueryConfiguration(
               tags: <String>[unknownTag, knownTag],
             ),
+            uriHelper: uriHelper,
           );
       expect(countries, isNotNull);
       expect(countries!.length, equals(1));
       final TaxonomyCountry country = countries[knownTag]!;
       checkKnown(country);
+    });
+
+    test('check fromJson/toJson', () async {
+      final Map<String, TaxonomyCountry>? values =
+          await OpenFoodAPIClient.getTaxonomyCountries(
+            TaxonomyCountryQueryConfiguration.all(),
+            uriHelper: uriHelper,
+          );
+      expect(values, isNotNull);
+      for (final TaxonomyCountry item in values!.values) {
+        expect(
+          TaxonomyCountry.fromJson(item.toJson()).toString(),
+          item.toString(),
+        );
+      }
     });
   });
 }

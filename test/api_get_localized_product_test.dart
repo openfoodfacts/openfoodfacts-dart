@@ -5,16 +5,16 @@ import 'test_constants.dart';
 
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
-  OpenFoodAPIConfiguration.globalUser = TestConstants.PROD_USER;
+  OpenFoodAPIConfiguration.globalUser = TestConstants.TEST_USER;
+  const uriHelper = uriHelperFoodTest;
 
   const ProductQueryVersion version = ProductQueryVersion.testVersion;
 
+  // actually, we're running in TEST...
   Future<ProductResultV3> getProductV3InProd(
     ProductQueryConfiguration configuration,
-  ) async {
-    await getProductTooManyRequestsManager.waitIfNeeded();
-    return OpenFoodAPIClient.getProductV3(configuration);
-  }
+  ) async =>
+      OpenFoodAPIClient.getProductV3(configuration, uriHelper: uriHelper);
 
   group('$OpenFoodAPIClient get localized product fields', () {
     test('get packaging text in languages (Coca-Cola)', () async {
@@ -70,6 +70,30 @@ void main() {
           }
         }
       }
+    });
+
+    test('check freshness fromJson/toJson', () async {
+      const barcode = '7300400481588';
+      const List<OpenFoodFactsLanguage> languages = [
+        OpenFoodFactsLanguage.FRENCH,
+        OpenFoodFactsLanguage.ITALIAN,
+      ];
+
+      final ProductResultV3 productResult = await getProductV3InProd(
+        ProductQueryConfiguration(
+          barcode,
+          languages: languages,
+          fields: [ProductField.IMAGES_FRESHNESS_IN_LANGUAGES],
+          version: version,
+        ),
+      );
+      final Product serverProduct = productResult.product!;
+      final json = serverProduct.toJson();
+      final Product product = Product.fromJson(json);
+      expect(
+        product.imagesFreshnessInLanguages!.toString(),
+        serverProduct.imagesFreshnessInLanguages!.toString(),
+      );
     });
 
     test('get all "tags in languages" (List<String>)', () async {
