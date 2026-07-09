@@ -33,9 +33,9 @@ jobs:
         fetch-depth: 1
         # grab the PR commit SHA (immutable reference)
         ref: ${{ steps.get-branch.outputs.sha }}
-        # We can't use GITHUB_TOKEN here because, github actions can't trigger actions
+        # We use GITHUB_TOKEN here. Note that pushes made with GITHUB_TOKEN cannot trigger other workflows.
         # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
-        # So this is a personal access token
+        # If triggering other workflows is required, replace this with a suitable personal access token secret.
         token: ${{ secrets.GITHUB_TOKEN }}
     # we need origin/main to have comparison linting work !
     - name: Fetch origin/develop
