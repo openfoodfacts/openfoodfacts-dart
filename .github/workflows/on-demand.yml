@@ -52,10 +52,11 @@ jobs:
     - name: Check for formatting issues (run "dart format . ")
       run: dart format .
     - name: Verify branch head matches checked out SHA
+      env:
+        BRANCH: ${{ steps.get-branch.outputs.branch }}
+        SHA: ${{ steps.get-branch.outputs.sha }}
       run: |
         set -e
-        BRANCH="${{ steps.get-branch.outputs.branch }}"
-        SHA="${{ steps.get-branch.outputs.sha }}"
         REMOTE_SHA=$(git ls-remote origin "refs/heads/$BRANCH" | awk '{print $1}')
         if [ "$REMOTE_SHA" != "$SHA" ]; then
           echo "Branch $BRANCH has changed since initial checkout (was $SHA, now $REMOTE_SHA). Aborting push."
