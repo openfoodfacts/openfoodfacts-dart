@@ -9,6 +9,7 @@ import 'http_helper.dart';
 import 'language_helper.dart';
 import 'open_food_api_configuration.dart';
 import 'product_fields.dart';
+import 'product_query_version.dart';
 import 'uri_helper.dart';
 
 /// Abstract Query Configuration, that helps build API URI
@@ -69,6 +70,9 @@ abstract class AbstractQueryConfiguration {
   /// If true, the knowledge panels will be simplified.
   final bool? activateKnowledgePanelsSimplified;
 
+  /// The API version
+  final ProductQueryVersion version;
+
   AbstractQueryConfiguration({
     this.language,
     this.languages,
@@ -76,6 +80,7 @@ abstract class AbstractQueryConfiguration {
     this.fields,
     this.additionalParameters = const [],
     this.activateKnowledgePanelsSimplified,
+    required this.version,
   }) {
     fields ??= [ProductField.ALL];
     if (languages != null) {

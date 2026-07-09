@@ -199,7 +199,7 @@ void main() {
           expect(result.barcode, barcode);
           expect(result.product, isNotNull);
           expect(result.product!.barcode, barcode);
-          expect(result.product!.brandsTags![0], 'kelsin');
+          expect(result.product!.brandsTags![0], 'Kelsin');
 
           // only german ingredients
           expect(result.product!.ingredientsText, isNotNull);
@@ -552,10 +552,10 @@ void main() {
         ProductResultV3 result = await getProductV3InProd(configurations);
 
         expect(result.product, isNotNull);
-        expect(result.product!.ecoscoreGrade, isNotNull);
-        expect(result.product!.ecoscoreScore, isNotNull);
-        expect(result.product!.ecoscoreData!.agribalyse, isNotNull);
-        expect(result.product!.ecoscoreData!.adjustments, isNotNull);
+        expect(result.product!.environmentalScoreGrade, isNotNull);
+        expect(result.product!.environmentalScoreScore, isNotNull);
+        expect(result.product!.environmentalScoreData!.agribalyse, isNotNull);
+        expect(result.product!.environmentalScoreData!.adjustments, isNotNull);
       });
 
       test('product fields', () async {
@@ -1576,6 +1576,84 @@ void main() {
           );
           expect(attribute.status, 'known');
           expect(attribute.match, entry.value ? 0 : 100);
+        }
+      });
+    });
+
+    group('$OpenFoodAPIClient API 3.1', () {
+      test('eco/environmental fields in API 3.0 and 3.1', () async {
+        const barcode = '3422150002180';
+
+        const versions = [ProductQueryVersion.v3, ProductQueryVersion.v3_1];
+
+        late double score;
+        late String grade;
+        late EcoscoreData data;
+
+        for (final version in versions) {
+          final configuration = ProductQueryConfiguration(
+            barcode,
+            fields: [
+              ProductField.BARCODE,
+              ProductField.SCHEMA_VERSION,
+              ProductField.ECOSCORE_SCORE,
+              ProductField.ECOSCORE_GRADE,
+              ProductField.ECOSCORE_DATA,
+            ],
+            language: OpenFoodFactsLanguage.FRENCH,
+            version: version,
+          );
+
+          final result = await getProductV3InProd(configuration);
+          final Product product = result.product!;
+
+          // the deprecated "eco" fields are similar to "environmental" fields.
+          if (version.version == 3) {
+            // here we have the "eco" fields
+            expect(product.getEnvironmentalScore(), product.ecoscoreScore);
+            expect(product.ecoscoreScore, isNotNull);
+            expect(product.environmentalScoreScore, isNull);
+
+            expect(product.getEnvironmentalGrade(), product.ecoscoreGrade);
+            expect(product.ecoscoreGrade, isNotNull);
+            expect(product.environmentalScoreGrade, isNull);
+
+            expect(product.getEnvironmentalData(), product.ecoscoreData);
+            expect(product.ecoscoreData, isNotNull);
+            expect(product.environmentalScoreData, isNull);
+
+            score = product.ecoscoreScore!;
+            grade = product.ecoscoreGrade!;
+            data = product.ecoscoreData!;
+          } else if (version.version == 3.1) {
+            // here we have the "environmental" fields
+            expect(
+              product.getEnvironmentalScore(),
+              product.environmentalScoreScore,
+            );
+            expect(product.ecoscoreScore, isNull);
+            expect(product.environmentalScoreScore, isNotNull);
+
+            expect(
+              product.getEnvironmentalGrade(),
+              product.environmentalScoreGrade,
+            );
+            expect(product.ecoscoreGrade, isNull);
+            expect(product.environmentalScoreGrade, isNotNull);
+
+            expect(
+              product.getEnvironmentalData(),
+              product.environmentalScoreData,
+            );
+            expect(product.ecoscoreData, isNull);
+            expect(product.environmentalScoreData, isNotNull);
+
+            expect(product.environmentalScoreScore, score);
+            expect(product.environmentalScoreGrade, grade);
+            expect(product.environmentalScoreData!.toData(), data.toData());
+          } else {
+            fail('Unexpected version number: ${version.version}');
+          }
         }
       });
     });

@@ -84,6 +84,16 @@ enum Nutrient implements OffTagged {
   /// Vitamin D
   vitaminD(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-d', acceptsIU: true),
 
+  /// Vitamin D2
+  vitaminD2(
+    typicalUnit: Unit.MICRO_G,
+    offTag: 'vitamin-d2',
+    acceptsPercentDV: false,
+  ),
+
+  /// Vitamin D3
+  vitaminD3(typicalUnit: Unit.MICRO_G, offTag: 'vitamin-d3', acceptsIU: true),
+
   /// Vitamin B1
   vitaminB1(typicalUnit: Unit.MILLI_G, offTag: 'vitamin-b1'),
 

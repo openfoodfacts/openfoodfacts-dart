@@ -1,6 +1,5 @@
 import 'abstract_query_configuration.dart';
 import 'product_fields.dart';
-import 'product_query_configurations.dart';
 import '../interface/parameter.dart';
 
 /// Query Configuration for search parameters
@@ -14,10 +13,8 @@ class ProductSearchQueryConfiguration extends AbstractQueryConfiguration {
     super.fields,
     super.activateKnowledgePanelsSimplified,
     required List<Parameter> parametersList,
-    required this.version,
+    required super.version,
   }) : super(additionalParameters: parametersList);
-
-  final ProductQueryVersion version;
 
   List<String> getFieldsKeys() {
     List<String> result = [];

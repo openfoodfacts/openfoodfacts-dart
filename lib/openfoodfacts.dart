@@ -169,6 +169,7 @@ export 'src/utils/pnns_groups.dart';
 export 'src/utils/product_fields.dart';
 export 'src/utils/product_helper.dart';
 export 'src/utils/product_query_configurations.dart';
+export 'src/utils/product_query_version.dart';
 export 'src/utils/product_search_query_configuration.dart';
 export 'src/utils/server_type.dart';
 export 'src/utils/tag_type.dart';

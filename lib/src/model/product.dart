@@ -591,12 +591,93 @@ class Product extends JsonObject {
   @JsonKey(name: 'editors_tags')
   List<String>? editors;
 
+  /// Read-only.
+  // TODO: deprecated from 2026-07-09; remove when old enough
+  @Deprecated('Use environmentalScoreGrade and API V3.1+ instead')
   @JsonKey(name: 'ecoscore_grade')
-  String? ecoscoreGrade;
+  String? ecoscoreGradeV3;
+
+  // TODO: deprecated from 2026-07-09; remove when old enough
+  @Deprecated('Use environmentalScoreGrade and API V3.1+ instead')
+  @JsonKey(ignore: true)
+  String? get ecoscoreGrade => ecoscoreGradeV3;
+
+  // TODO: deprecated from 2026-07-09; remove when old enough
+  @Deprecated('Use environmentalScoreGrade and API V3.1+ instead')
+  set ecoscoreGrade(String? value) => ecoscoreGradeV3 = value;
+
+  /// Read-only.
+  // TODO: deprecated from 2026-07-09; remove when old enough
+  @Deprecated('Use environmentalScoreScore and API V3.1+ instead')
   @JsonKey(name: 'ecoscore_score', fromJson: JsonObject.parseDouble)
-  double? ecoscoreScore;
+  double? ecoscoreScoreV3;
+
+  // TODO: deprecated from 2026-07-09; remove when old enough
+  @Deprecated('Use environmentalScoreScore and API V3.1+ instead')
+  @JsonKey(ignore: true)
+  double? get ecoscoreScore => ecoscoreScoreV3;
+
+  // TODO: deprecated from 2026-07-09; remove when old enough
+  @Deprecated('Use environmentalScoreScore and API V3.1+ instead')
+  set ecoscoreScore(double? value) => ecoscoreScoreV3 = value;
+
+  /// Read-only.
+  // TODO: deprecated from 2026-07-09; remove when old enough
+  @Deprecated('Use environmentalScoreData and API V3.1+ instead')
   @JsonKey(name: 'ecoscore_data', toJson: EcoscoreData.toJsonHelper)
-  EcoscoreData? ecoscoreData;
+  EcoscoreData? ecoscoreDataV3;
+
+  // TODO: deprecated from 2026-07-09; remove when old enough
+  @Deprecated('Use environmentalScoreData and API V3.1+ instead')
+  @JsonKey(ignore: true)
+  EcoscoreData? get ecoscoreData => ecoscoreDataV3;
+
+  // TODO: deprecated from 2026-07-09; remove when old enough
+  @Deprecated('Use environmentalScoreData and API V3.1+ instead')
+  set ecoscoreData(EcoscoreData? value) => ecoscoreDataV3 = value;
+
+  /// Read-only.
+  @JsonKey(name: 'environmental_score_grade')
+  String? environmentalScoreGrade;
+
+  /// Read-only.
+  @JsonKey(name: 'environmental_score_score', fromJson: JsonObject.parseDouble)
+  double? environmentalScoreScore;
+
+  /// Read-only.
+  @JsonKey(name: 'environmental_score_data', toJson: EcoscoreData.toJsonHelper)
+  EcoscoreData? environmentalScoreData;
+
+  bool? get _atLeastV3_1 {
+    if (schemaVersion == null) {
+      return null;
+    }
+    return schemaVersion! >= 1000;
+  }
+
+  // TODO: deprecated from 2026-07-09; remove when old enough
+  @Deprecated('Use environmentalScoreGrade and API V3.1+ instead')
+  String? getEnvironmentalGrade() => switch (_atLeastV3_1) {
+    true => environmentalScoreGrade,
+    false => ecoscoreGrade,
+    null => environmentalScoreGrade ?? ecoscoreGrade,
+  };
+
+  // TODO: deprecated from 2026-07-09; remove when old enough
+  @Deprecated('Use environmentalScoreScore and API V3.1+ instead')
+  double? getEnvironmentalScore() => switch (_atLeastV3_1) {
+    true => environmentalScoreScore,
+    false => ecoscoreScore,
+    null => environmentalScoreScore ?? ecoscoreScore,
+  };
+
+  // TODO: deprecated from 2026-07-09; remove when old enough
+  @Deprecated('Use environmentalScoreData and API V3.1+ instead')
+  EcoscoreData? getEnvironmentalData() => switch (_atLeastV3_1) {
+    true => environmentalScoreData,
+    false => ecoscoreData,
+    null => environmentalScoreData ?? ecoscoreData,
+  };
 
   @JsonKey(
     name: 'knowledge_panels',
@@ -712,9 +793,6 @@ class Product extends JsonObject {
     this.stores,
     this.attributeGroups,
     this.lastModified,
-    this.ecoscoreGrade,
-    this.ecoscoreScore,
-    this.ecoscoreData,
     Nutriments? nutriments,
     bool? noNutritionData,
   }) : _nutriments = nutriments,

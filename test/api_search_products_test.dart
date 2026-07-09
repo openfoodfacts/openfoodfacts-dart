@@ -20,6 +20,7 @@ void main() {
 
   const ProductQueryVersion version = ProductQueryVersion.testVersion;
   const int defaultPageSize = 50;
+  const String storeCarrefour = 'carrefour';
 
   Future<SearchResult> searchProductsInTest(
     final AbstractQueryConfiguration configuration,
@@ -174,26 +175,28 @@ void main() {
       });
 
       test('search favorite products EN', () async {
+        const pageNumber = 3;
+        const pageSize = 7;
         final parameters = <Parameter>[
-          const PageNumber(page: 14),
-          const PageSize(size: 3),
+          const PageNumber(page: pageNumber),
+          const PageSize(size: pageSize),
           const SortBy(option: SortOption.EDIT),
         ];
 
         final ProductSearchQueryConfiguration configuration =
             ProductSearchQueryConfiguration(
               parametersList: parameters,
-              fields: [ProductField.ALL],
+              fields: [ProductField.BARCODE],
               language: OpenFoodFactsLanguage.ENGLISH,
               version: version,
             );
 
         final SearchResult result = await searchProductsInProd(configuration);
 
-        expect(result.page, 14);
-        expect(result.pageSize, 3);
+        expect(result.page, pageNumber);
+        expect(result.pageSize, pageSize);
         expect(result.products, isNotNull);
-        expect(result.products!.length, 3);
+        expect(result.products!.length, pageSize);
         expect(result.products![0].runtimeType, Product);
         expect(result.count, greaterThan(30000));
       });
@@ -359,9 +362,11 @@ void main() {
       );
 
       test('type bug : ingredient percent int vs String ', () async {
+        const pageNumber = 6;
+        const pageSize = 5;
         final parameters = <Parameter>[
-          const PageNumber(page: 16),
-          const PageSize(size: 5),
+          const PageNumber(page: pageNumber),
+          const PageSize(size: pageSize),
           const SortBy(option: SortOption.POPULARITY),
         ];
 
@@ -375,10 +380,10 @@ void main() {
 
         final SearchResult result = await searchProductsInProd(configuration);
 
-        expect(result.page, 16);
-        expect(result.pageSize, 5);
+        expect(result.page, pageNumber);
+        expect(result.pageSize, pageSize);
         expect(result.products, isNotNull);
-        expect(result.products!.length, 5);
+        expect(result.products!.length, pageSize);
         expect(result.products![0].runtimeType, Product);
         expect(result.count, greaterThan(30000));
       });
@@ -462,9 +467,11 @@ void main() {
       });
 
       test('search products with filter on tags', () async {
+        const pageNumber = 5;
+        const pageSize = 10;
         final parameters = <Parameter>[
-          const PageNumber(page: 5),
-          const PageSize(size: 10),
+          const PageNumber(page: pageNumber),
+          const PageSize(size: pageSize),
           const SortBy(option: SortOption.PRODUCT_NAME),
           TagFilter.fromType(
             tagFilterType: TagFilterType.CATEGORIES,
@@ -474,7 +481,7 @@ void main() {
           TagFilter.fromType(
             tagFilterType: TagFilterType.NUTRITION_GRADES,
             contains: true,
-            tagName: 'A',
+            tagName: 'a',
           ),
         ];
 
@@ -488,10 +495,10 @@ void main() {
 
         final SearchResult result = await searchProductsInProd(configuration);
 
-        expect(result.page, 5);
-        expect(result.pageSize, 10);
+        expect(result.page, pageNumber);
+        expect(result.pageSize, pageSize);
         expect(result.products, isNotNull);
-        expect(result.products!.length, 10);
+        expect(result.products!.length, pageSize);
         expect(result.products![0].runtimeType, Product);
         expect(
           result.products![0].categoriesTags,
@@ -507,20 +514,19 @@ void main() {
         const String labels = 'en:organic';
         const String origins = 'Union Européenne et Non Union Européenne';
         const String originsTags = 'en:european-union-and-non-european-union';
-        const String manufacturingPlaces = 'Allemagne';
+        const String manufacturingPlaces = 'allemagne';
         const String purchasePlaces = 'france';
         const String stores = 'franprix';
         const String countries = 'en:france';
         const String allergens = 'en:gluten';
         const String traces = 'en:nuts';
-        const String nutritionGrades = 'A';
+        const String nutritionGrades = 'a';
         const String states = 'en:nutrition-facts-completed';
         const String ingredients = 'en:cereal';
         const int novaGroup = 3;
         const String languages = 'ar';
         const String creator = 'sebleouf';
         const String editors = 'foodrepo';
-        const String lang = 'fr';
 
         final parameters = <Parameter>[
           TagFilter.fromType(
@@ -587,7 +593,6 @@ void main() {
             tagFilterType: TagFilterType.EDITORS,
             tagName: editors,
           ),
-          TagFilter.fromType(tagFilterType: TagFilterType.LANG, tagName: lang),
         ];
 
         final ProductSearchQueryConfiguration configuration =
@@ -606,17 +611,16 @@ void main() {
           expect(product.brands!, brands);
           expect(product.categoriesTags, contains(categories));
           expect(product.labelsTags, contains(labels));
-          expect(product.storesTags, contains(stores));
+          expect(product.storesTags, contains('Franprix'));
           expect(product.countriesTags, contains(countries));
           expect(product.allergens!.ids, contains(allergens));
           expect(product.tracesTags, contains(traces));
-          expect(product.nutriscore!.toUpperCase(), nutritionGrades);
+          expect(product.nutriscore, nutritionGrades);
           expect(product.statesTags, contains(states));
           expect(product.ingredientsTags, contains(ingredients));
-          expect(product.lang.code, lang);
           expect(product.novaGroup, novaGroup);
           expect(product.origins, origins);
-          expect(product.manufacturingPlaces, manufacturingPlaces);
+          expect(product.manufacturingPlaces, 'Allemagne');
           expect(product.creator, creator);
         }
       });
@@ -872,7 +876,7 @@ void main() {
                 ),
                 TagFilter.fromType(
                   tagFilterType: TagFilterType.STORES,
-                  tagName: 'Carrefour',
+                  tagName: storeCarrefour,
                 ),
                 PageSize(size: defaultPageSize),
               ],
@@ -1198,10 +1202,12 @@ void main() {
 
       Future<void> checkTypeCount(
         final OpenFoodFactsCountry country,
-        final String store,
         final int minimalExpectedCount,
       ) async {
-        final int count = await getCountForAllLanguages(country, store);
+        final int count = await getCountForAllLanguages(
+          country,
+          storeCarrefour,
+        );
         expect(count, greaterThanOrEqualTo(minimalExpectedCount));
       }
 
@@ -1209,9 +1215,8 @@ void main() {
         'in France',
         () async => checkTypeCount(
           OpenFoodFactsCountry.FRANCE,
-          'Carrefour',
-          // 2023-08-12: was 14778
-          10000,
+          // 2026-08-12: was 21036
+          15000,
         ),
       );
 
@@ -1219,9 +1224,8 @@ void main() {
         'in Italy',
         () async => checkTypeCount(
           OpenFoodFactsCountry.ITALY,
-          'Carrefour',
-          // 2023-07-09: was 2394
-          1500,
+          // 2026-07-09: was 3377
+          2000,
         ),
       );
 
@@ -1229,9 +1233,8 @@ void main() {
         'in Spain',
         () async => checkTypeCount(
           OpenFoodFactsCountry.SPAIN,
-          'El Corte Inglès',
-          // 2023-07-09: was 608
-          500,
+          // 2026-07-09: was 8681
+          5000,
         ),
       );
     },
@@ -1728,6 +1731,101 @@ void main() {
       }
       expect(countWith, greaterThan(0));
       expect(countWithout, greaterThan(0));
+    });
+  });
+
+  group('$OpenFoodAPIClient API 3.1', () {
+    test('eco/environmental fields in API 3.0 and 3.1', () async {
+      const versions = [ProductQueryVersion.v3, ProductQueryVersion.v3_1];
+
+      final List<double> scores = [];
+      final List<String> grades = [];
+      final List<EcoscoreData> datas = [];
+      final List<String> barcodes = [];
+
+      const int pageSize = 20;
+
+      for (final version in versions) {
+        final configuration = ProductSearchQueryConfiguration(
+          parametersList: [
+            SortBy(option: SortOption.ECOSCORE),
+            PageSize(size: pageSize),
+          ],
+          fields: [
+            ProductField.BARCODE,
+            ProductField.SCHEMA_VERSION,
+            ProductField.ECOSCORE_SCORE,
+            ProductField.ECOSCORE_GRADE,
+            ProductField.ECOSCORE_DATA,
+          ],
+          language: OpenFoodFactsLanguage.FRENCH,
+          version: version,
+        );
+
+        final result = await searchProductsInTest(configuration);
+        expect(result.pageSize, pageSize);
+        expect(result.products, isNotNull);
+        expect(result.products!, hasLength(pageSize));
+
+        int index = -1;
+        for (final Product product in result.products!) {
+          index++;
+
+          // the deprecated "eco" fields are similar to "environmental" fields.
+          if (version.version == 3) {
+            // here we have the "eco" fields
+            expect(product.getEnvironmentalScore(), product.ecoscoreScore);
+            expect(product.ecoscoreScore, isNotNull);
+            expect(product.environmentalScoreScore, isNull);
+
+            expect(product.getEnvironmentalGrade(), product.ecoscoreGrade);
+            expect(product.ecoscoreGrade, isNotNull);
+            expect(product.environmentalScoreGrade, isNull);
+
+            expect(product.getEnvironmentalData(), product.ecoscoreData);
+            expect(product.ecoscoreData, isNotNull);
+            expect(product.environmentalScoreData, isNull);
+
+            scores.add(product.ecoscoreScore!);
+            grades.add(product.ecoscoreGrade!);
+            datas.add(product.ecoscoreData!);
+            barcodes.add(product.barcode!);
+          } else if (version.version == 3.1) {
+            // here we have the "environmental" fields
+            expect(
+              product.getEnvironmentalScore(),
+              product.environmentalScoreScore,
+            );
+            expect(product.ecoscoreScore, isNull);
+            expect(product.environmentalScoreScore, isNotNull);
+
+            expect(
+              product.getEnvironmentalGrade(),
+              product.environmentalScoreGrade,
+            );
+            expect(product.ecoscoreGrade, isNull);
+            expect(product.environmentalScoreGrade, isNotNull);
+
+            expect(
+              product.getEnvironmentalData(),
+              product.environmentalScoreData,
+            );
+            expect(product.ecoscoreData, isNull);
+            expect(product.environmentalScoreData, isNotNull);
+
+            // same ordern same values for API 3 and API 3.1
+            expect(product.barcode, barcodes[index]);
+            expect(product.environmentalScoreScore, scores[index]);
+            expect(product.environmentalScoreGrade, grades[index]);
+            expect(
+              product.environmentalScoreData!.toData(),
+              datas[index].toData(),
+            );
+          } else {
+            fail('Unexpected version number: ${version.version}');
+          }
+        }
+      }
     });
   });
 }

@@ -104,13 +104,6 @@ Product _$ProductFromJson(Map<String, dynamic> json) =>
             ?.map(AttributeGroup.fromJson)
             .toList(),
         lastModified: JsonHelper.timestampToDate(json['last_modified_t']),
-        ecoscoreGrade: json['ecoscore_grade'] as String?,
-        ecoscoreScore: JsonObject.parseDouble(json['ecoscore_score']),
-        ecoscoreData: json['ecoscore_data'] == null
-            ? null
-            : EcoscoreData.fromJson(
-                json['ecoscore_data'] as Map<String, dynamic>,
-              ),
         nutriments: json['nutriments'] == null
             ? null
             : Nutriments.fromJson(json['nutriments'] as Map<String, dynamic>),
@@ -196,6 +189,20 @@ Product _$ProductFromJson(Map<String, dynamic> json) =>
       ..editors = (json['editors_tags'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList()
+      ..ecoscoreGradeV3 = json['ecoscore_grade'] as String?
+      ..ecoscoreScoreV3 = JsonObject.parseDouble(json['ecoscore_score'])
+      ..ecoscoreDataV3 = json['ecoscore_data'] == null
+          ? null
+          : EcoscoreData.fromJson(json['ecoscore_data'] as Map<String, dynamic>)
+      ..environmentalScoreGrade = json['environmental_score_grade'] as String?
+      ..environmentalScoreScore = JsonObject.parseDouble(
+        json['environmental_score_score'],
+      )
+      ..environmentalScoreData = json['environmental_score_data'] == null
+          ? null
+          : EcoscoreData.fromJson(
+              json['environmental_score_data'] as Map<String, dynamic>,
+            )
       ..knowledgePanels = KnowledgePanels.fromJsonHelper(
         json['knowledge_panels'] as Map?,
       )
@@ -359,9 +366,14 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
   'created_t': ?JsonHelper.dateToTimestamp(instance.created),
   'creator': ?instance.creator,
   'editors_tags': ?instance.editors,
-  'ecoscore_grade': ?instance.ecoscoreGrade,
-  'ecoscore_score': ?instance.ecoscoreScore,
-  'ecoscore_data': ?EcoscoreData.toJsonHelper(instance.ecoscoreData),
+  'ecoscore_grade': ?instance.ecoscoreGradeV3,
+  'ecoscore_score': ?instance.ecoscoreScoreV3,
+  'ecoscore_data': ?EcoscoreData.toJsonHelper(instance.ecoscoreDataV3),
+  'environmental_score_grade': ?instance.environmentalScoreGrade,
+  'environmental_score_score': ?instance.environmentalScoreScore,
+  'environmental_score_data': ?EcoscoreData.toJsonHelper(
+    instance.environmentalScoreData,
+  ),
   'knowledge_panels': ?KnowledgePanels.toJsonHelper(instance.knowledgePanels),
   'emb_codes': ?instance.embCodes,
   'manufacturing_places': ?instance.manufacturingPlaces,
