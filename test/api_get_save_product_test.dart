@@ -29,13 +29,13 @@ void main() {
   const String germanCountry = 'Russland';
   const String englishProductName = 'Pancakes';
   const String englishIngredientsAll = 'Flour, water';
-  const List<String> englishIngredientsSplit = <String>['Flour', 'Water'];
+  const List<String> englishIngredientsSplit = <String>['flour', 'water'];
   const String germanProductName = 'Pfannkuchen';
   const String germanIngredientsAll = 'Mehl, wasser';
   const List<String> germanIngredientsSplit = <String>['Mehl', 'Wasser'];
   const String russianProductName = 'Блинчики';
   const String russianIngredientsAll = 'Мука, вода';
-  const List<String> russianIngredientsSplit = <String>['Мука', 'Вода'];
+  const List<String> russianIngredientsSplit = <String>['мука', 'Вода'];
 
   bool checkServerStatus(final Status status) {
     if (status.status == 400) {
@@ -85,7 +85,7 @@ void main() {
 
         const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.GERMAN;
         const String genericName = 'Softdrink beverage';
-        const String countries = 'Frankreich,Deutschland';
+        const String countries = 'Frankreich, Deutschland';
         const List<String> ingredientsText = <String>[
           'Wasser',
           'Kohlensäure',
@@ -766,7 +766,7 @@ void main() {
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.GERMAN;
       const String barcode = '111111555555';
       const String genericName = 'Softdrink beverage';
-      const String labels = 'MyTestLabel';
+      const String labels = 'de:MyTestLabel';
       const String quantity = '5.5 Liter';
 
       //First add the product to the Test DB

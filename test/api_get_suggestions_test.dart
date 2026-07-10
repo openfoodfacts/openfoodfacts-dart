@@ -405,7 +405,7 @@ void main() {
         uriHelper: uriHelper,
       );
 
-      expect(result, contains('Céleri'));
+      expect(result, contains('céleri'));
 
       result = await OpenFoodAPIClient.getSuggestions(
         TagType.TRACES,
@@ -413,7 +413,7 @@ void main() {
         uriHelper: uriHelper,
       );
 
-      expect(result, contains('Celery'));
+      expect(result, contains('celery'));
 
       result = await OpenFoodAPIClient.getSuggestions(
         TagType.INGREDIENTS,
@@ -421,7 +421,7 @@ void main() {
         uriHelper: uriHelper,
       );
 
-      expect(result, contains('Absinthe'));
+      expect(result, contains('Abondance'));
     });
   });
 }

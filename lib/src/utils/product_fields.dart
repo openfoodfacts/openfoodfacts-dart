@@ -186,9 +186,21 @@ enum ProductField implements OffTagged {
   CREATED(offTag: 'created_t'),
   CREATOR(offTag: 'creator'),
   EDITORS(offTag: 'editors_tags'),
-  ECOSCORE_GRADE(offTag: 'ecoscore_grade'),
-  ECOSCORE_SCORE(offTag: 'ecoscore_score'),
-  ECOSCORE_DATA(offTag: 'ecoscore_data'),
+  ECOSCORE_GRADE(
+    offTag: 'ecoscore_grade',
+    // since API 3.1
+    alternateOffTags: ['environmental_score_grade'],
+  ),
+  ECOSCORE_SCORE(
+    offTag: 'ecoscore_score',
+    // since API 3.1
+    alternateOffTags: ['environmental_score_score'],
+  ),
+  ECOSCORE_DATA(
+    offTag: 'ecoscore_data',
+    // since API 3.1
+    alternateOffTags: ['environmental_score_data'],
+  ),
   KNOWLEDGE_PANELS(offTag: 'knowledge_panels'),
   EMB_CODES(offTag: 'emb_codes'),
   MANUFACTURING_PLACES(offTag: 'manufacturing_places'),
@@ -214,6 +226,7 @@ enum ProductField implements OffTagged {
     final ProductField? inLanguagesProductField,
     this.isInLanguages = false,
     this.isAllLanguages = false,
+    this.alternateOffTags,
   }) : _inLanguagesProductField = inLanguagesProductField;
 
   @override
@@ -230,6 +243,8 @@ enum ProductField implements OffTagged {
   /// Returns the corresponding "in languages" field, if relevant.
   ProductField? get inLanguages =>
       isInLanguages ? this : _inLanguagesProductField;
+
+  final List<String>? alternateOffTags;
 
   static List<ProductField> _inLanguagesList = <ProductField>[];
   static List<ProductField> _allLanguagesList = <ProductField>[];
@@ -279,6 +294,9 @@ List<String> convertFieldsToStrings(
       }
     } else {
       fieldsStrings.add(field.offTag);
+      if (field.alternateOffTags != null) {
+        fieldsStrings.addAll(field.alternateOffTags!);
+      }
     }
   }
 

@@ -10,7 +10,7 @@ Future<Product?> getProduct() async {
     barcode,
     language: OpenFoodFactsLanguage.GERMAN,
     fields: [ProductField.ALL],
-    version: ProductQueryVersion.v3,
+    version: ProductQueryVersion.latestVersion,
   );
   final ProductResultV3 result =
       await OpenFoodAPIClient.getProductV3(configuration);
@@ -129,7 +129,7 @@ void saveAndExtractIngredient() async {
     fields: [
       ProductField.INGREDIENTS_TEXT,
     ],
-    version: ProductQueryVersion.v3,
+    version: ProductQueryVersion.latestVersion,
   );
   final ProductResultV3 productResult = await OpenFoodAPIClient.getProductV3(
     configurations,

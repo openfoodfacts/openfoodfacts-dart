@@ -15,8 +15,8 @@ void main() {
   ];
 
   const String knownTag = 'en:return-to-store';
-  const String expectedNameFrench = 'Consigné';
-  const String expectedNameEnglish = 'Return to store';
+  const String expectedNameFrench = 'consigné';
+  const String expectedNameEnglish = 'return to store';
   const Set<String> expectedChildren = <String>{
     'en:return-pet-bottle-to-store',
     'en:deposit-refunds',

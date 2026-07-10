@@ -21,7 +21,7 @@ enum SortOption implements OffTagged {
   CREATED(offTag: 'created_t'),
   EDIT(offTag: 'last_modified_t'),
   NOTHING(offTag: 'nothing'),
-  ECOSCORE(offTag: 'ecoscore_score'),
+  ECOSCORE(offTag: 'environmental_score_score'),
   NUTRISCORE(offTag: 'nutriscore_score');
 
   const SortOption({required this.offTag});

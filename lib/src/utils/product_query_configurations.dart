@@ -1,5 +1,4 @@
 import 'package:http/http.dart';
-import 'package:meta/meta.dart';
 
 import '../model/parameter/ingredients_unwanted_parameter.dart';
 import '../model/product_type_filter.dart';
@@ -8,32 +7,10 @@ import 'abstract_query_configuration.dart';
 import 'http_helper.dart';
 import 'uri_helper.dart';
 
-/// Api version for product queries (minimum forced version number: 2).
-class ProductQueryVersion {
-  const ProductQueryVersion(final num version)
-    : version = version < 2 ? 2 : version;
-
-  final num version;
-
-  static const ProductQueryVersion v3 = ProductQueryVersion(3);
-
-  String getPath(final String barcode) =>
-      '/api/v$version/product/${Uri.encodeComponent(barcode)}/';
-
-  bool matchesV3() => version >= 3;
-
-  /// Useful for testing new API versions.
-  @visibleForTesting
-  static const ProductQueryVersion testVersion = ProductQueryVersion(3);
-}
-
 /// Query Configuration for single barcode
 class ProductQueryConfiguration extends AbstractQueryConfiguration {
   /// The barcode from the desired product
   final String barcode;
-
-  /// The API version
-  final ProductQueryVersion version;
 
   /// Filter on a specific server.
   final ProductTypeFilter? productTypeFilter;
@@ -45,7 +22,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
   /// parameter's description.
   ProductQueryConfiguration(
     this.barcode, {
-    required this.version,
+    required super.version,
     super.language,
     super.languages,
     super.country,
@@ -68,7 +45,9 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
   }
 
   /// If the provided [ProductQueryVersion] matches the API V3 requirements
-  bool matchesV3() => version.matchesV3();
+  // TODO: deprecated from 2026-07-09; remove when old enough
+  @Deprecated('Minimum version is now 3')
+  bool matchesV3() => true;
 
   @override
   String getUriPath() => version.getPath(barcode);
@@ -78,23 +57,11 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
     final User? user,
     final UriProductHelper uriHelper,
   ) async {
-    if (matchesV3()) {
-      return HttpHelper().doGetRequest(
-        uriHelper.getUri(
-          path: getUriPath(),
-          queryParameters: getParametersMap(),
-        ),
-        user: user,
-        uriHelper: uriHelper,
-        addCookiesToHeader: true,
-      );
-    }
-    return HttpHelper().doPostRequest(
-      uriHelper.getPostUri(path: getUriPath()),
-      getParametersMap(),
-      user,
+    return HttpHelper().doGetRequest(
+      uriHelper.getUri(path: getUriPath(), queryParameters: getParametersMap()),
+      user: user,
       uriHelper: uriHelper,
-      addCredentialsToBody: false,
+      addCookiesToHeader: true,
     );
   }
 }

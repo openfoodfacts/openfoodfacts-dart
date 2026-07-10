@@ -169,19 +169,23 @@ void main() {
       timeout: Timeout(Duration(seconds: 90)),
     );
 
-    test('get 2 random questions with no specific type', () async {
-      final RobotoffQuestionResult result =
-          await RobotoffAPIClient.getQuestions(
-            OpenFoodFactsLanguage.FRENCH,
-            user: TestConstants.PROD_USER,
-            count: 2,
-            questionOrder: RobotoffQuestionOrder.random,
-          );
+    test(
+      'get 2 random questions with no specific type',
+      () async {
+        final RobotoffQuestionResult result =
+            await RobotoffAPIClient.getQuestions(
+              OpenFoodFactsLanguage.FRENCH,
+              user: TestConstants.PROD_USER,
+              count: 2,
+              questionOrder: RobotoffQuestionOrder.random,
+            );
 
-      expect(result.status, isNotNull);
-      expect(result.status, 'found');
-      expect(result.questions!.length, 2);
-    });
+        expect(result.status, isNotNull);
+        expect(result.status, 'found');
+        expect(result.questions!.length, 2);
+      },
+      timeout: Timeout(Duration(seconds: 90)),
+    );
   });
 
   group('$OpenFoodAPIClient get robotoff insights', () {

@@ -44,6 +44,7 @@ import 'utils/open_food_api_configuration.dart';
 import 'utils/product_fields.dart';
 import 'utils/product_helper.dart';
 import 'utils/product_query_configurations.dart';
+import 'utils/product_query_version.dart';
 import 'utils/product_search_query_configuration.dart';
 import 'utils/tag_type.dart';
 import 'utils/taxonomy_query_configuration.dart';
@@ -254,9 +255,6 @@ class OpenFoodAPIClient {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
-    if (!configuration.matchesV3()) {
-      Exception("The configuration must match V3!");
-    }
     final String productString = await getProductString(
       configuration,
       user: user,

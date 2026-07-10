@@ -43,8 +43,8 @@ class TsvHelper {
       quantity: quantity,
       brands: brands,
       nutriscore: nutriscore,
-      ecoscoreGrade: ecoscoreGrade,
     );
+    product.ecoscoreGrade = ecoscoreGrade;
     product.novaGroup = novaGroup;
 
     return product;
