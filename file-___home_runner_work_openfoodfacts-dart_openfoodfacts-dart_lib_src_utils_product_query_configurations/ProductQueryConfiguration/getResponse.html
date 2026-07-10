@@ -82,23 +82,11 @@ Future&lt;Response&gt; getResponse(
   final User? user,
   final UriProductHelper uriHelper,
 ) async {
-  if (matchesV3()) {
-    return HttpHelper().doGetRequest(
-      uriHelper.getUri(
-        path: getUriPath(),
-        queryParameters: getParametersMap(),
-      ),
-      user: user,
-      uriHelper: uriHelper,
-      addCookiesToHeader: true,
-    );
-  }
-  return HttpHelper().doPostRequest(
-    uriHelper.getPostUri(path: getUriPath()),
-    getParametersMap(),
-    user,
+  return HttpHelper().doGetRequest(
+    uriHelper.getUri(path: getUriPath(), queryParameters: getParametersMap()),
+    user: user,
     uriHelper: uriHelper,
-    addCredentialsToBody: false,
+    addCookiesToHeader: true,
   );
 }</code></pre>
 </section>

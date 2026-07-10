@@ -103,9 +103,6 @@ like for example the language to query.</p>
   User? user,
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
-  if (!configuration.matchesV3()) {
-    Exception(&quot;The configuration must match V3!&quot;);
-  }
   final String productString = await getProductString(
     configuration,
     user: user,

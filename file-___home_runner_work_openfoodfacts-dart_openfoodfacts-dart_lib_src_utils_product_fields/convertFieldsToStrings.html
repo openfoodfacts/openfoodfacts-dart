@@ -90,6 +90,9 @@ the function will throw.</p>
       }
     } else {
       fieldsStrings.add(field.offTag);
+      if (field.alternateOffTags != null) {
+        fieldsStrings.addAll(field.alternateOffTags!);
+      }
     }
   }
 
