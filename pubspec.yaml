@@ -14,7 +14,7 @@ dependencies:
   meta: ^1.17.0
 
 dev_dependencies:
-  analyzer: 13.3.0
+  analyzer: 14.1.0
   build_runner: 2.15.2
   json_serializable: 6.14.0
   lints: 6.1.0
