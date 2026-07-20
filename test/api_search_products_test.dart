@@ -1830,7 +1830,7 @@ void main() {
   });
 
   group('$OpenFoodAPIClient API 3.2', () {
-    test('eco/environmental fields in API 3.0 and 3.1', () async {
+    test('brand fields in API 3.1 and 3.2', () async {
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
       const versions = [ProductQueryVersion.v3_1, ProductQueryVersion.v3_2];
 
