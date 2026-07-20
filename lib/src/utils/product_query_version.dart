@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 /// cf. https://openfoodfacts.github.io/openfoodfacts-server/api/ref-api-and-product-schema-change-log/
 class ProductQueryVersion {
   const ProductQueryVersion(final num version)
-      : version = version < 3 ? 3 : version;
+    : version = version < 3 ? 3 : version;
 
   final num version;
 
@@ -32,9 +32,8 @@ class ProductQueryVersion {
   @visibleForTesting
   static const ProductQueryVersion testVersion = latestVersion;
 
-  int? get schemaVersion =>
-      switch (version) {
-        3.1 => 1000,
-        _ => null,
-      };
+  int? get schemaVersion => switch (version) {
+    3.1 => 1000,
+    _ => null,
+  };
 }
