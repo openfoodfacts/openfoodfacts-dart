@@ -156,14 +156,25 @@ class Product extends JsonObject {
 
   @JsonKey(name: 'brands')
   String? brands;
+
   @JsonKey(name: 'brands_tags')
+  /// From API 3.2, entries are prefixed with the language-less "xx:" prefix.
   List<String>? brandsTags;
+
   @JsonKey(
     name: 'brands_tags_in_languages',
     toJson: LanguageHelper.toJsonStringsListMap,
     fromJson: LanguageHelper.fromJsonStringsListMap,
   )
   Map<OpenFoodFactsLanguage, List<String>>? brandsTagsInLanguages;
+  @JsonKey(name: 'brands_hierarchy')
+  List<String>? brandsHierarchy;
+  @JsonKey(
+    name: 'brands_lc',
+    toJson: LanguageHelper.toJson,
+    fromJson: LanguageHelper.fromJson,
+  )
+  OpenFoodFactsLanguage? brandsLanguage;
 
   @JsonKey(name: 'countries')
   String? countries;

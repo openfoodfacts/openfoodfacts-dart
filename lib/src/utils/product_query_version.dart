@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 /// cf. https://openfoodfacts.github.io/openfoodfacts-server/api/ref-api-and-product-schema-change-log/
 class ProductQueryVersion {
   const ProductQueryVersion(final num version)
-    : version = version < 3 ? 3 : version;
+      : version = version < 3 ? 3 : version;
 
   final num version;
 
@@ -13,9 +13,13 @@ class ProductQueryVersion {
   @Deprecated('Use ProductQueryVersion.latestVersion instead')
   static const ProductQueryVersion v3 = ProductQueryVersion(3);
 
+  // TODO: deprecated from 2026-07-20; remove when old enough
+  @Deprecated('Use ProductQueryVersion.latestVersion instead')
   static const ProductQueryVersion v3_1 = ProductQueryVersion(3.1);
 
-  static const ProductQueryVersion latestVersion = v3_1;
+  static const ProductQueryVersion v3_2 = ProductQueryVersion(3.2);
+
+  static const ProductQueryVersion latestVersion = v3_2;
 
   String getPath(final String barcode) =>
       '/api/v$version/product/${Uri.encodeComponent(barcode)}/';
@@ -28,8 +32,9 @@ class ProductQueryVersion {
   @visibleForTesting
   static const ProductQueryVersion testVersion = latestVersion;
 
-  int? get schemaVersion => switch (version) {
-    3.1 => 1000,
-    _ => null,
-  };
+  int? get schemaVersion =>
+      switch (version) {
+        3.1 => 1000,
+        _ => null,
+      };
 }

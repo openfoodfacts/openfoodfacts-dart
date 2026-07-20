@@ -53,6 +53,8 @@ enum ProductField implements OffTagged {
     inLanguagesProductField: ProductField.BRANDS_TAGS_IN_LANGUAGES,
   ),
   BRANDS_TAGS_IN_LANGUAGES(offTag: 'brands_tags_', isInLanguages: true),
+  BRANDS_HIERARCHY(offTag: 'brands_hierarchy'),
+  BRANDS_LC(offTag: 'brands_lc'),
   COUNTRIES(offTag: 'countries'),
   COUNTRIES_TAGS(
     offTag: 'countries_tags',

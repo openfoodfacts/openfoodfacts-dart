@@ -199,7 +199,7 @@ void main() {
           expect(result.barcode, barcode);
           expect(result.product, isNotNull);
           expect(result.product!.barcode, barcode);
-          expect(result.product!.brandsTags![0], 'Kelsin');
+          expect(result.product!.brandsTags![0], 'xx:Kelsin');
 
           // only german ingredients
           expect(result.product!.ingredientsText, isNotNull);
@@ -1651,6 +1651,75 @@ void main() {
             expect(product.environmentalScoreScore, score);
             expect(product.environmentalScoreGrade, grade);
             expect(product.environmentalScoreData!.toData(), data.toData());
+          } else {
+            fail('Unexpected version number: ${version.version}');
+          }
+        }
+      });
+    });
+
+    group('$OpenFoodAPIClient API 3.2', () {
+      test('brand fields in API 3.1 and 3.2', () async {
+        const barcode = '3560071051334';
+        const language = OpenFoodFactsLanguage.FRENCH;
+
+        const versions = [ProductQueryVersion.v3_1, ProductQueryVersion.v3_2];
+
+        late String brands;
+        late List<String> brandsTags;
+        late Map<OpenFoodFactsLanguage, List<String>> brandsTagsInLanguages;
+
+        for (final version in versions) {
+          final configuration = ProductQueryConfiguration(
+            barcode,
+            fields: [
+              ProductField.BARCODE,
+              ProductField.SCHEMA_VERSION,
+              ProductField.BRANDS,
+              ProductField.BRANDS_TAGS,
+              ProductField.BRANDS_TAGS_IN_LANGUAGES,
+              ProductField.BRANDS_HIERARCHY,
+              ProductField.BRANDS_LC,
+            ],
+            language: language,
+            version: version,
+          );
+
+          final result = await getProductV3InProd(configuration);
+          final Product product = result.product!;
+
+          expect(product.brands, isNotNull);
+          expect(product.brandsTags, isNotNull);
+          expect(product.brandsTags, isNotEmpty);
+          expect(product.brandsTagsInLanguages, isNotNull);
+          expect(product.brandsTagsInLanguages![language], isNotNull);
+          expect(product.brandsTagsInLanguages![language], isNotEmpty);
+
+          if (version.version == 3.1) {
+            expect(product.brandsHierarchy, isNull);
+            expect(product.brandsLanguage, OpenFoodFactsLanguage.UNDEFINED);
+
+            brands = product.brands!;
+            brandsTags = product.brandsTags!;
+            brandsTagsInLanguages = product.brandsTagsInLanguages!;
+          } else if (version.version == 3.2) {
+            expect(product.brandsHierarchy, isNotNull);
+            expect(product.brandsLanguage, isNotNull);
+            expect(
+              product.brandsLanguage,
+              isNot(OpenFoodFactsLanguage.UNDEFINED),
+            );
+
+            expect(product.brands, brands);
+            expect(product.brandsTagsInLanguages, brandsTagsInLanguages);
+
+            expect(product.brandsTags!.length, brandsTags.length);
+            for (int i = 0; i < brandsTags.length; i++) {
+              final String before = brandsTags[i];
+              final String after = product.brandsTags![i];
+              final String prefixed = 'xx:$before';
+              expect(prefixed, after);
+            }
           } else {
             fail('Unexpected version number: ${version.version}');
           }

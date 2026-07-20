@@ -18,16 +18,43 @@ void main() {
       expect(result.options!.length, lessThanOrEqualTo(maxSize));
     }
 
+    Future<AutocompleteSearchResult?> autocomplete({
+      required String query,
+      required final List<TaxonomyName> taxonomyNames,
+      required final OpenFoodFactsLanguage language,
+      final Fuzziness fuzziness = Fuzziness.none,
+    }) async {
+      try {
+        final AutocompleteSearchResult result =
+            await OpenFoodSearchAPIClient.autocomplete(
+              query: query,
+              taxonomyNames: taxonomyNames,
+              language: language,
+              size: maxSize,
+              fuzziness: fuzziness,
+              uriHelper: uriHelperFoodProd,
+            );
+        basicTest(result);
+        return result;
+      } on HttpStatusException catch (e) {
+        if (e.statusCode >= 500) {
+          print('Server error: $e');
+          return null;
+        }
+        rethrow;
+      }
+    }
+
     test('category with existing matches', () async {
       const TaxonomyName taxonomyName = TaxonomyName.category;
-      final AutocompleteSearchResult result =
-          await OpenFoodSearchAPIClient.autocomplete(
-            query: 'pizza',
-            taxonomyNames: <TaxonomyName>[taxonomyName],
-            language: language,
-            size: maxSize,
-          );
-      basicTest(result);
+      final AutocompleteSearchResult? result = await autocomplete(
+        query: 'pizza',
+        taxonomyNames: <TaxonomyName>[taxonomyName],
+        language: language,
+      );
+      if (result == null) {
+        return;
+      }
       expect(result.options, hasLength(maxSize));
       for (final AutocompleteSingleResult item in result.options!) {
         expect(item.id, contains(':'));
@@ -37,14 +64,14 @@ void main() {
 
     test('category with non existing matches', () async {
       const TaxonomyName taxonomyName = TaxonomyName.category;
-      final AutocompleteSearchResult result =
-          await OpenFoodSearchAPIClient.autocomplete(
-            query: 'pifsehjfsjkvnskjvbehjszza',
-            taxonomyNames: <TaxonomyName>[taxonomyName],
-            language: language,
-            size: maxSize,
-          );
-      basicTest(result);
+      final AutocompleteSearchResult? result = await autocomplete(
+        query: 'pifsehjfsjkvnskjvbehjszza',
+        taxonomyNames: <TaxonomyName>[taxonomyName],
+        language: language,
+      );
+      if (result == null) {
+        return;
+      }
       expect(result.options, isEmpty);
     });
 
@@ -57,17 +84,17 @@ void main() {
         'Frense': Fuzziness.two,
       };
       for (final String inputValue in inputs.keys) {
-        final AutocompleteSearchResult result =
-            await OpenFoodSearchAPIClient.autocomplete(
-              // possibly with a typo
-              query: inputValue,
-              taxonomyNames: <TaxonomyName>[taxonomyName],
-              language: language,
-              size: maxSize,
-              // supposed to fix the typo (if relevant)
-              fuzziness: inputs[inputValue]!,
-            );
-        basicTest(result);
+        final AutocompleteSearchResult? result = await autocomplete(
+          // possibly with a typo
+          query: inputValue,
+          taxonomyNames: <TaxonomyName>[taxonomyName],
+          language: language,
+          // supposed to fix the typo (if relevant)
+          fuzziness: inputs[inputValue]!,
+        );
+        if (result == null) {
+          return;
+        }
         expect(result.options, isNotEmpty);
         bool found = false;
         for (final AutocompleteSingleResult item in result.options!) {
@@ -87,15 +114,15 @@ void main() {
       final String expectedValue, {
       final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH,
     }) async {
-      final AutocompleteSearchResult result =
-          await OpenFoodSearchAPIClient.autocomplete(
-            query: query,
-            taxonomyNames: <TaxonomyName>[taxonomyName],
-            language: language,
-            size: maxSize,
-            fuzziness: Fuzziness.none,
-          );
-      basicTest(result);
+      final AutocompleteSearchResult? result = await autocomplete(
+        query: query,
+        taxonomyNames: <TaxonomyName>[taxonomyName],
+        language: language,
+        fuzziness: Fuzziness.none,
+      );
+      if (result == null) {
+        return;
+      }
       expect(result.options, isNotEmpty);
       bool found = false;
       for (final AutocompleteSingleResult item in result.options!) {
@@ -170,6 +197,6 @@ void main() {
         'Carrefour',
         language: OpenFoodFactsLanguage.ENGLISH,
       );
-    });
+    }, timeout: Timeout(Duration(seconds: 90)));
   });
 }
