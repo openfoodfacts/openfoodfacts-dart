@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.31.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.30.2...v3.31.0) (2026-07-22)
+
+
+### Features
+
+* [#1158](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1158) - Add quantityString and safely type productQuantity to num ([#1212](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1212)) ([b560bee](https://github.com/openfoodfacts/openfoodfacts-dart/commit/b560beece983d5f2aa7fbc4f16ff9c338e5bbafa))
+* 1216 - added iso3code, nativeName and englishName to languages ([#1218](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1218)) ([ca4bd2f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/ca4bd2fb16936f23a432105dcc6cf103b13c9236))
+* 1238 - support of API 3.1 ([#1243](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1243)) ([86ba988](https://github.com/openfoodfacts/openfoodfacts-dart/commit/86ba988388888b7defe54dae43ce9d0b7a4d16a7))
+* 1244 - support of API 3.2 ([#1247](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1247)) ([04e4b97](https://github.com/openfoodfacts/openfoodfacts-dart/commit/04e4b97003921daa4637b118733562723b30da57))
+* 871 - support nutrient units and modifiers ([#1178](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1178)) ([805a9a8](https://github.com/openfoodfacts/openfoodfacts-dart/commit/805a9a8375e7480367ad5a027035bde6d8f35e84))
+* add TSV parser for offline database export ([#1215](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1215)) ([d622db0](https://github.com/openfoodfacts/openfoodfacts-dart/commit/d622db00c62aaab0514212fe28c71bfa91c9746c))
+* upgrade for create and upgrade price objects and methods ([#1189](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1189)) ([03943ec](https://github.com/openfoodfacts/openfoodfacts-dart/commit/03943ec17e43d3f333fdbf59ea6bce4120520efd))
+
+
+### Bug Fixes
+
+* 1109 - unit test on TEST env, not PROD anymore ([#1220](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1220)) ([0e3c440](https://github.com/openfoodfacts/openfoodfacts-dart/commit/0e3c4409c72f481e04d8d1d8f628a5ffa0a6c0e0))
+* 1217 - clean error when incorrect credentials ([#1219](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1219)) ([6c32341](https://github.com/openfoodfacts/openfoodfacts-dart/commit/6c323416ec94f84eb6785bee59790aefd16098c7))
+* 1239 - throws attemps to set/crop image as OTHER ([#1240](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1240)) ([5ab416f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/5ab416f181b444d20e0631c4961a5f60a8573f97))
+* clean extraction of some language fields ([#1231](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1231)) ([7a38e34](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7a38e34d50d8594f09ffb61aee63a0a4c94090a7))
+* error handling of API calls ([#1233](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1233)) ([1f320c8](https://github.com/openfoodfacts/openfoodfacts-dart/commit/1f320c89a460d0e135557eb2a91d853f852560ff))
+
 ## [3.30.2](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.30.1...v3.30.2) (2026-02-15)
 
 
