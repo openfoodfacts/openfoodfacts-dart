@@ -1828,4 +1828,81 @@ void main() {
       }
     });
   });
+
+  group('$OpenFoodAPIClient API 3.2', () {
+    test('brand fields in API 3.1 and 3.2', () async {
+      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+      const versions = [ProductQueryVersion.v3_1, ProductQueryVersion.v3_2];
+
+      final List<String> brands = [];
+      final List<List<String>> brandsTags = [];
+      final List<Map<OpenFoodFactsLanguage, List<String>>>
+      brandsTagsInLanguages = [];
+
+      const int pageSize = 20;
+
+      for (final version in versions) {
+        final configuration = ProductSearchQueryConfiguration(
+          parametersList: [PageSize(size: pageSize)],
+          fields: [
+            ProductField.BARCODE,
+            ProductField.SCHEMA_VERSION,
+            ProductField.BRANDS,
+            ProductField.BRANDS_TAGS,
+            ProductField.BRANDS_TAGS_IN_LANGUAGES,
+            ProductField.BRANDS_HIERARCHY,
+            ProductField.BRANDS_LC,
+          ],
+          language: language,
+          version: version,
+        );
+
+        final result = await searchProductsInTest(configuration);
+        expect(result.pageSize, pageSize);
+        expect(result.products, isNotNull);
+        expect(result.products!, hasLength(pageSize));
+
+        int index = -1;
+        for (final Product product in result.products!) {
+          index++;
+
+          expect(product.brands, isNotNull);
+          expect(product.brandsTags, isNotNull);
+          expect(product.brandsTags, isNotEmpty);
+          expect(product.brandsTagsInLanguages, isNotNull);
+          expect(product.brandsTagsInLanguages![language], isNotNull);
+          expect(product.brandsTagsInLanguages![language], isNotEmpty);
+
+          if (version.version == 3.1) {
+            expect(product.brandsHierarchy, isNull);
+            expect(product.brandsLanguage, OpenFoodFactsLanguage.UNDEFINED);
+
+            brands.add(product.brands!);
+            brandsTags.add(product.brandsTags!);
+            brandsTagsInLanguages.add(product.brandsTagsInLanguages!);
+          } else if (version.version == 3.2) {
+            expect(product.brandsHierarchy, isNotNull);
+            expect(product.brandsLanguage, isNotNull);
+            expect(
+              product.brandsLanguage,
+              isNot(OpenFoodFactsLanguage.UNDEFINED),
+            );
+
+            expect(product.brands, brands[index]);
+            expect(product.brandsTagsInLanguages, brandsTagsInLanguages[index]);
+
+            expect(product.brandsTags!.length, brandsTags[index].length);
+            for (int i = 0; i < brandsTags[index].length; i++) {
+              final String before = brandsTags[index][i];
+              final String after = product.brandsTags![i];
+              final String prefixed = 'xx:$before';
+              expect(prefixed, after);
+            }
+          } else {
+            fail('Unexpected version number: ${version.version}');
+          }
+        }
+      }
+    });
+  });
 }

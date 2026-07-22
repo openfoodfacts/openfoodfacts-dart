@@ -940,7 +940,7 @@ void main() {
           language: OpenFoodFactsLanguage.FRENCH,
           country: OpenFoodFactsCountry.FRANCE,
           fields: [ProductField.NUTRIMENTS],
-          version: ProductQueryVersion.v3,
+          version: ProductQueryVersion.latestVersion,
         ),
         uriHelper: uriHelper,
       );
