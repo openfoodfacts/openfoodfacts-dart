@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the latestVersion constant from the ProductQueryVersion class, for the Dart programming language.">
-  <title>latestVersion constant - ProductQueryVersion class - product_query_version library - Dart API</title>
+  <meta name="description" content="API docs for the brandsLanguage property from the Product class, for the Dart programming language.">
+  <title>brandsLanguage property - Product class - product library - Dart API</title>
 
 
   
@@ -25,11 +25,11 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">openfoodfacts</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_version/">src&#47;utils&#47;product_query_version.dart</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_version/ProductQueryVersion-class.html">ProductQueryVersion</a></li>
-    <li class="self-crumb">latestVersion constant</li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/">src&#47;model&#47;product.dart</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product-class.html">Product</a></li>
+    <li class="self-crumb">brandsLanguage property</li>
   </ol>
-  <div class="self-name">latestVersion</div>
+  <div class="self-name">brandsLanguage</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -46,18 +46,18 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_version&#47;ProductQueryVersion-class-sidebar.html"
+    data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product&#47;Product-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-property">latestVersion</span> constant 
+<h1><span class="kind-property">brandsLanguage</span> property 
 </h1></div>
 
     
       <section class="multi-line-signature">
         
-        <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_version/ProductQueryVersion-class.html">ProductQueryVersion</a>
-        const <span class="name ">latestVersion</span>
-        
+        <a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a>?
+        <span class="name ">brandsLanguage</span>
+        <div class="features"><span class="feature">getter/setter pair</span></div>
 
       </section>
       
@@ -65,7 +65,12 @@
       
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static const ProductQueryVersion latestVersion = v3_2;</code></pre>
+  <pre class="language-dart"><code class="language-dart">@JsonKey(
+  name: &#39;brands_lc&#39;,
+  toJson: LanguageHelper.toJson,
+  fromJson: LanguageHelper.fromJson,
+)
+OpenFoodFactsLanguage? brandsLanguage;</code></pre>
 </section>
 
 
@@ -80,12 +85,12 @@
 </header>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">openfoodfacts</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_version/">product_query_version</a></li>
-    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_version/ProductQueryVersion-class.html">ProductQueryVersion</a></li>
-    <li class="self-crumb">latestVersion constant</li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/">product</a></li>
+    <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product-class.html">Product</a></li>
+    <li class="self-crumb">brandsLanguage property</li>
 </ol>
 
-  <h5>ProductQueryVersion class</h5>
+  <h5>Product class</h5>
   <div id="dartdoc-sidebar-left-content"></div>
 </div><!--/.sidebar-offcanvas-->
 <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
