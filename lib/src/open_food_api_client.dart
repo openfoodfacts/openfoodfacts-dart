@@ -132,7 +132,6 @@ class OpenFoodAPIClient {
     final OpenFoodFactsLanguage? language,
   }) async {
     final Map<String, dynamic> parameterMap = <String, dynamic>{};
-    parameterMap.addAll(user.toData());
     if (packagings == null && packagingsComplete == null) {
       // For the moment there are limited fields concerned.
       throw Exception('At least one V3 field must be populated.');
