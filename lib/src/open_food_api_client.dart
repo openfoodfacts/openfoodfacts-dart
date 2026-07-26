@@ -131,17 +131,16 @@ class OpenFoodAPIClient {
     final OpenFoodFactsCountry? country,
     final OpenFoodFactsLanguage? language,
   }) async {
-    final Map<String, dynamic> parameterMap = <String, dynamic>{};
-    if (packagings == null && packagingsComplete == null) {
-      // For the moment there are limited fields concerned.
-      throw Exception('At least one V3 field must be populated.');
-    }
+    final Map<String, dynamic> productParameters = <String, dynamic>{};
     if (packagings != null) {
-      parameterMap[ProductField.PACKAGINGS.offTag] = packagings;
+      productParameters[ProductField.PACKAGINGS.offTag] = packagings;
     }
     if (packagingsComplete != null) {
-      parameterMap[ProductField.PACKAGINGS_COMPLETE.offTag] =
+      productParameters[ProductField.PACKAGINGS_COMPLETE.offTag] =
           packagingsComplete;
+    }
+    if (productParameters.isEmpty) {
+      throw Exception('At least one V3 field must be populated.');
     }
     final Map<String, dynamic> extraParameters = <String, dynamic>{};
     if (language != null) {
@@ -154,7 +153,7 @@ class OpenFoodAPIClient {
 
     return patchProductV3(
       barcode: barcode,
-      productParameters: parameterMap,
+      productParameters: productParameters,
       extraParameters: extraParameters,
       user: user,
       uriHelper: uriHelper,
