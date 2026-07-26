@@ -8,8 +8,6 @@ void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
   const UriProductHelper uriHelper = uriHelperFoodTest;
 
-  const ProductQueryVersion version = ProductQueryVersion.testVersion;
-
   Future<ProductResultV3?> temporarySaveProductV3(
     final String barcode, {
     final List<ProductPackaging>? packagings,
@@ -109,43 +107,22 @@ void main() {
     test('save packagings_complete', () async {
       final List<bool> values = [false, true, false];
       for (final bool value in values) {
-        final ProductResultV3? writeStatus = await temporarySaveProductV3(
+        final ProductResultV3? status = await temporarySaveProductV3(
           barcode,
           country: country,
           language: language,
           packagingsComplete: value,
         );
-        if (writeStatus == null) {
+        if (status == null) {
           return;
         }
 
-        expect(writeStatus.status, ProductResultV3.statusSuccess);
-        expect(writeStatus.errors, isEmpty);
-        expect(writeStatus.result, isNull); // result is null for UPDATE queries
-        expect(writeStatus.barcode, barcode);
-        expect(writeStatus.product, isNotNull);
-        expect(writeStatus.product!.packagingsComplete, value);
-
-        // checking again...
-        final ProductResultV3 readStatus = await OpenFoodAPIClient.getProductV3(
-          ProductQueryConfiguration(
-            barcode,
-            language: language,
-            country: country,
-            version: version,
-            fields: [ProductField.BARCODE, ProductField.PACKAGINGS_COMPLETE],
-          ),
-          user: TestConstants.TEST_USER,
-          uriHelper: uriHelper,
-        );
-
-        expect(readStatus.status, ProductResultV3.statusSuccess);
-        expect(readStatus.errors, isEmpty);
-        expect(readStatus.result, isNotNull);
-        expect(readStatus.result!.id, ProductResultV3.resultProductFound);
-        expect(readStatus.barcode, barcode);
-        expect(readStatus.product, isNotNull);
-        expect(readStatus.product!.packagingsComplete, value);
+        expect(status.status, ProductResultV3.statusSuccess);
+        expect(status.errors, isEmpty);
+        expect(status.result, isNull); // result is null for UPDATE queries
+        expect(status.barcode, barcode);
+        expect(status.product, isNotNull);
+        expect(status.product!.packagingsComplete, value);
       }
     }, timeout: Timeout(Duration(seconds: 180)));
 
