@@ -250,41 +250,103 @@ void main() {
         Duration(seconds: 90),
       ),
     );
+  }, skip: 'TEST env is not reliable');
 
-    test(
-      'image unselect',
-      () async {
-        const ImageField unselectedImageField = ImageField.INGREDIENTS;
-        await OpenFoodAPIClient.unselectProductImage(
-          barcode: barcode,
-          user: user,
-          imageField: unselectedImageField,
-          language: language,
-          uriHelper: uriHelper,
-        );
+  group('$OpenFoodAPIClient select/unselect images', () {
+    test('select/unselect', () async {
+      const String barcode = '3019081238643';
+      const ImageField imageField = ImageField.INGREDIENTS;
+      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.CATALAN;
 
+      Future<Product> reload() async {
         final ProductResultV3 productResult =
             await OpenFoodAPIClient.getProductV3(
               ProductQueryConfiguration(
                 barcode,
-                fields: <ProductField>[ProductField.SELECTED_IMAGE],
+                fields: <ProductField>[
+                  ProductField.SELECTED_IMAGE,
+                  ProductField.IMAGES,
+                ],
                 version: version,
               ),
               uriHelper: uriHelper,
             );
-        expect(productResult.product, isNotNull);
-        expect(productResult.product!.selectedImages, isNotNull);
-        for (final ProductImage productImage
-            in productResult.product!.selectedImages!) {
-          if (productImage.language == language) {
-            expect(productImage.field, isNot(unselectedImageField));
+        return productResult.product!;
+      }
+
+      bool find(final Product product) {
+        for (final item in product.selectedImages!) {
+          if (item.field == imageField && item.language == language) {
+            return true;
           }
         }
-      },
-      timeout: Timeout(
-        // this guy is rather slow
-        Duration(seconds: 90),
-      ),
-    );
-  }, skip: 'TEST env is not reliable');
+        return false;
+      }
+
+      int findImageId(final Product product) {
+        for (final item in product.images!) {
+          if (item.imgid != null) {
+            return int.parse(item.imgid!);
+          }
+        }
+        fail("Couldn't find any image id");
+      }
+
+      ProductImage? findProductImage(final Product product) {
+        for (final item in product.images!) {
+          if (item.field == imageField && item.language == language) {
+            return item;
+          }
+        }
+        return null;
+      }
+
+      Future<void> unselect() async {
+        final ProductResultV3 res =
+            await OpenFoodAPIClient.unselectProductImage(
+              barcode: barcode,
+              user: user,
+              imageField: imageField,
+              language: language,
+              uriHelper: uriHelper,
+            );
+        expect(res.status, ProductResultV3.statusSuccess);
+
+        final Product product = await reload();
+        expect(find(product), isFalse);
+        expect(findProductImage(product), isNull);
+      }
+
+      final Product product = await reload();
+      final int imageId = findImageId(product);
+      final bool found = find(product);
+
+      Future<void> select() async {
+        final String? imageUrl = await OpenFoodAPIClient.setProductImageAngle(
+          barcode: barcode,
+          imageField: imageField,
+          language: language,
+          imgid: '$imageId',
+          angle: ImageAngle.NOON,
+          user: user,
+          uriHelper: uriHelper,
+        );
+        expect(imageUrl, isNotNull);
+        final Product product = await reload();
+        expect(find(product), isTrue);
+        final ProductImage productImage = findProductImage(product)!;
+        expect(productImage.imgid, '$imageId');
+      }
+
+      if (found) {
+        await unselect();
+        await select();
+        await unselect();
+      } else {
+        await select();
+        await unselect();
+        await select();
+      }
+    }, timeout: Timeout(Duration(seconds: 120)));
+  });
 }

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:meta/meta.dart';
 
 import '../interface/json_object.dart';
 import '../utils/json_helper.dart';
@@ -246,13 +247,13 @@ class Product extends JsonObject {
   List<ProductImage>? images;
 
   /// "Raw" (uploaded) images: for example "picture 12" resized to "400" size.
-  List<ProductImage>? getRawImages() => _getImageSubset(false);
+  List<ProductImage>? getRawImages() => getImageSubset(false, images);
 
   /// "Main" images: the selected images for certain criteria.
   ///
   /// For example the "front" picture in "French"
   /// Images may be returned in multiple sizes
-  List<ProductImage>? getMainImages() => _getImageSubset(true);
+  List<ProductImage>? getMainImages() => getImageSubset(true, images);
 
   bool? isImageLocked(
     final ImageField imageField,
@@ -309,13 +310,17 @@ class Product extends JsonObject {
     return null;
   }
 
-  List<ProductImage>? _getImageSubset(final bool isMain) {
+  @visibleForTesting
+  static List<ProductImage>? getImageSubset(
+    final bool isSelectedOrUploaded,
+    final List<ProductImage>? images,
+  ) {
     if (images == null) {
       return null;
     }
     final List<ProductImage> result = <ProductImage>[];
-    for (final ProductImage productImage in images!) {
-      if (productImage.isMain == isMain) {
+    for (final ProductImage productImage in images) {
+      if (productImage.isMain == isSelectedOrUploaded) {
         result.add(productImage);
       }
     }

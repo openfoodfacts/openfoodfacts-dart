@@ -516,7 +516,7 @@ void main() {
         const String originsTags = 'en:european-union-and-non-european-union';
         const String manufacturingPlaces = 'allemagne';
         const String purchasePlaces = 'france';
-        const String stores = 'franprix';
+        const String stores = 'leclerc';
         const String countries = 'en:france';
         const String allergens = 'en:gluten';
         const String traces = 'en:nuts';
@@ -524,8 +524,8 @@ void main() {
         const String states = 'en:nutrition-facts-completed';
         const String ingredients = 'en:cereal';
         const int novaGroup = 3;
-        const String languages = 'ar';
-        const String creator = 'sebleouf';
+        const String languages = 'fr';
+        const String creator = 'openfoodfacts-contributors';
         const String editors = 'foodrepo';
 
         final parameters = <Parameter>[
@@ -611,7 +611,7 @@ void main() {
           expect(product.brands!, brands);
           expect(product.categoriesTags, contains(categories));
           expect(product.labelsTags, contains(labels));
-          expect(product.storesTags, contains('Franprix'));
+          expect(product.storesTags, contains('Leclerc'));
           expect(product.countriesTags, contains(countries));
           expect(product.allergens!.ids, contains(allergens));
           expect(product.tracesTags, contains(traces));

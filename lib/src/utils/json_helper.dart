@@ -9,7 +9,9 @@ import '../utils/language_helper.dart';
 class JsonHelper {
   /// Returns [ProductImage]s from a product JSON map for "Selected images"
   static List<ProductImage>? selectedImagesFromJson(Map? json) {
-    if (json == null) return null;
+    if (json == null) {
+      return null;
+    }
 
     var imageList = <ProductImage>[];
     for (var field in ImageField.values) {
@@ -96,91 +98,93 @@ class JsonHelper {
   static const String _ALL_IMAGES_TAG_SIZES = 'sizes';
   static const String _ALL_IMAGES_TAG_URL = 'url';
 
+  // from API 3.3
+  static const _ALL_IMAGES_TAG_3_3_UPLOADED = 'uploaded';
+  static const _ALL_IMAGES_TAG_3_3_SELECTED = 'selected';
+  static const _ALL_IMAGES_TAG_3_3_GENERATION = 'generation';
+
   /// Returns [ProductImage]s from a JSON map for "Images".
-  static List<ProductImage>? allImagesFromJson(
-    Map? json, {
-    final bool onlyMain = false,
-  }) {
-    if (json == null) return null;
+  static List<ProductImage>? allImagesFromJson(Map? json) {
+    if (json == null) {
+      return null;
+    }
 
     var imageList = <ProductImage>[];
 
-    for (final String key in json.keys) {
-      ImageField? field;
-      OpenFoodFactsLanguage? lang;
-      final int? imageId = int.tryParse(key);
-      if (imageId != null) {
-        // the key is an int: it's a "raw" image
-        if (onlyMain) {
-          continue;
-        }
-      } else {
-        // we expect field + '_' + language: it's a "main" image
-        final List<String> values = key.split('_');
-        if (values.length != 2) {
-          continue;
-        }
-        final String fieldString = values[0];
-        field = ImageField.fromOffTag(fieldString);
-        if (field == null) {
-          continue;
-        }
-        final String languageString = values[1];
-        lang = OpenFoodFactsLanguage.fromOffTag(languageString);
-        if (lang == null) {
-          continue;
-        }
-      }
-
-      final Map<String, dynamic> fieldObject = json[key];
-
+    void addUploadedImages({
+      required int imageId,
+      required Map<String, dynamic> fieldObject,
+    }) {
       // get the sizes object
       final Map<String, dynamic>? sizesObject =
           fieldObject[_ALL_IMAGES_TAG_SIZES] as Map<String, dynamic>?;
       if (sizesObject == null) {
-        continue;
+        return;
       }
 
-      if (imageId != null) {
-        final DateTime? uploaded = timestampToDate(
-          fieldObject[_ALL_IMAGES_TAG_UPLOADED],
-        );
-        final String? contributor = fieldObject[_ALL_IMAGES_TAG_UPLOADER];
-        // get each number object (e.g. 200)
-        for (var size in ImageSize.values) {
-          var number = size.number;
-          var numberObject = sizesObject[number] as Map<String, dynamic>?;
-          if (numberObject == null) {
-            continue;
-          }
-          imageList.add(
-            ProductImage.raw(
-              size: size,
-              imgid: imageId.toString(),
-              width: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_WIDTH]),
-              height: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]),
-              url: numberObject[_ALL_IMAGES_TAG_URL],
-              uploaded: uploaded,
-              contributor: contributor,
-            ),
-          );
+      final DateTime? uploaded = timestampToDate(
+        fieldObject[_ALL_IMAGES_TAG_UPLOADED],
+      );
+      final String? contributor = fieldObject[_ALL_IMAGES_TAG_UPLOADER];
+      // get each number object (e.g. 200)
+      for (var size in ImageSize.values) {
+        var number = size.number;
+        var numberObject = sizesObject[number] as Map<String, dynamic>?;
+        if (numberObject == null) {
+          continue;
         }
-        continue;
+        imageList.add(
+          ProductImage.raw(
+            size: size,
+            imgid: imageId.toString(),
+            width: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_WIDTH]),
+            height: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]),
+            url: numberObject[_ALL_IMAGES_TAG_URL],
+            uploaded: uploaded,
+            contributor: contributor,
+          ),
+        );
+      }
+    }
+
+    void addSelectedImages({
+      required ImageField field,
+      required OpenFoodFactsLanguage lang,
+      required Map<String, dynamic> fieldObject,
+      required bool pre3_3Mode,
+    }) {
+      // get the sizes object
+      final Map<String, dynamic>? sizesObject =
+          fieldObject[_ALL_IMAGES_TAG_SIZES] as Map<String, dynamic>?;
+      if (sizesObject == null) {
+        return;
       }
 
       final int? rev = JsonObject.parseInt(
         fieldObject[_ALL_IMAGES_TAG_REVISION],
       );
       final String imgid = fieldObject[_ALL_IMAGES_TAG_IMAGE_ID].toString();
-      final ImageAngle? angle = ImageAngleExtension.fromInt(
-        JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_ANGLE]),
-      );
-      final String? coordinatesImageSize =
-          fieldObject[_ALL_IMAGES_TAG_COORDINATES]?.toString();
-      final int? x1 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_X1]);
-      final int? y1 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_Y1]);
-      final int? x2 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_X2]);
-      final int? y2 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_Y2]);
+
+      ImageAngle? angle;
+      String? coordinatesImageSize;
+      int? x1;
+      int? y1;
+      int? x2;
+      int? y2;
+      final Map<String, dynamic>? generation = pre3_3Mode
+          ? fieldObject
+          : fieldObject[_ALL_IMAGES_TAG_3_3_GENERATION];
+      if (generation != null) {
+        angle = ImageAngleExtension.fromInt(
+          JsonObject.parseInt(generation[_ALL_IMAGES_TAG_ANGLE]),
+        );
+        coordinatesImageSize = generation[_ALL_IMAGES_TAG_COORDINATES]
+            ?.toString();
+        x1 = JsonObject.parseInt(generation[_ALL_IMAGES_TAG_X1]);
+        y1 = JsonObject.parseInt(generation[_ALL_IMAGES_TAG_Y1]);
+        x2 = JsonObject.parseInt(generation[_ALL_IMAGES_TAG_X2]);
+        y2 = JsonObject.parseInt(generation[_ALL_IMAGES_TAG_Y2]);
+      }
 
       // get each number object (e.g. 200)
       for (var size in ImageSize.values) {
@@ -189,41 +193,102 @@ class JsonHelper {
         if (numberObject == null) {
           continue;
         }
-        final int? width = JsonObject.parseInt(
-          numberObject[_ALL_IMAGES_TAG_WIDTH],
+        imageList.add(
+          ProductImage(
+            field: field,
+            size: size,
+            language: lang,
+            rev: rev,
+            imgid: imgid,
+            angle: angle,
+            coordinatesImageSize: coordinatesImageSize,
+            x1: x1,
+            y1: y1,
+            x2: x2,
+            y2: y2,
+            width: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_WIDTH]),
+            height: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]),
+            url: numberObject[_ALL_IMAGES_TAG_URL],
+          ),
         );
-        final int? height = JsonObject.parseInt(
-          numberObject[_ALL_IMAGES_TAG_HEIGHT],
-        );
-        final String? url = numberObject[_ALL_IMAGES_TAG_URL];
-
-        var image = ProductImage(
-          field: field!,
-          size: size,
-          language: lang!,
-          rev: rev,
-          imgid: imgid,
-          angle: angle,
-          coordinatesImageSize: coordinatesImageSize,
-          x1: x1,
-          y1: y1,
-          x2: x2,
-          y2: y2,
-          width: width,
-          height: height,
-          url: url,
-        );
-        imageList.add(image);
       }
+    }
+
+    for (final String key in json.keys) {
+      final Map<String, dynamic> fieldObject = json[key];
+
+      if (key == _ALL_IMAGES_TAG_3_3_UPLOADED) {
+        // here, only raw images are expected
+        for (final MapEntry<String, dynamic> entry in fieldObject.entries) {
+          final int? imageId = int.tryParse(entry.key);
+          if (imageId != null) {
+            addUploadedImages(imageId: imageId, fieldObject: entry.value);
+          }
+        }
+        continue;
+      }
+
+      if (key == _ALL_IMAGES_TAG_3_3_SELECTED) {
+        for (final MapEntry<String, dynamic> entry1 in fieldObject.entries) {
+          final ImageField? field = ImageField.fromOffTag(entry1.key);
+          if (field == null) {
+            continue;
+          }
+          for (final MapEntry<String, dynamic> entry2 in entry1.value.entries) {
+            final OpenFoodFactsLanguage? lang =
+                OpenFoodFactsLanguage.fromOffTag(entry2.key);
+            if (lang == null) {
+              continue;
+            }
+            addSelectedImages(
+              field: field,
+              lang: lang,
+              fieldObject: entry2.value,
+              pre3_3Mode: false,
+            );
+          }
+        }
+        continue;
+      }
+
+      final int? imageId = int.tryParse(key);
+      if (imageId != null) {
+        // the key is an int: it's a "raw" image
+        addUploadedImages(imageId: imageId, fieldObject: fieldObject);
+        continue;
+      }
+
+      // we expect field + '_' + language: it's a "main" image
+      ImageField? field;
+      OpenFoodFactsLanguage? lang;
+      final List<String> values = key.split('_');
+      if (values.length != 2) {
+        continue;
+      }
+      final String fieldString = values[0];
+      field = ImageField.fromOffTag(fieldString);
+      if (field == null) {
+        continue;
+      }
+      final String languageString = values[1];
+      lang = OpenFoodFactsLanguage.fromOffTag(languageString);
+      if (lang == null) {
+        continue;
+      }
+      addSelectedImages(
+        field: field,
+        lang: lang,
+        fieldObject: fieldObject,
+        pre3_3Mode: true,
+      );
     }
 
     return imageList;
   }
 
   static Map<String, dynamic> allImagesToJson(
-    final List<ProductImage>? images, {
-    final bool onlyMain = false,
-  }) {
+    final List<ProductImage>? images,
+  ) {
     final Map<String, dynamic> result = <String, dynamic>{};
     if (images == null || images.isEmpty) {
       return result;
@@ -238,9 +303,6 @@ class JsonHelper {
         key = '${productImage.field!.offTag}_${productImage.language!.offTag}';
       } else {
         // it's a "raw" image
-        if (onlyMain) {
-          continue;
-        }
         key = productImage.imgid!.toString();
       }
       List<ProductImage>? items = sorted[key];
@@ -264,17 +326,12 @@ class JsonHelper {
         if (productImage.size == null) {
           continue;
         }
-        final Map<String, Object> size = <String, Object>{};
-        if (productImage.width != null) {
-          size[_ALL_IMAGES_TAG_WIDTH] = productImage.width!;
-        }
-        if (productImage.height != null) {
-          size[_ALL_IMAGES_TAG_HEIGHT] = productImage.height!;
-        }
-        if (productImage.url != null) {
-          size[_ALL_IMAGES_TAG_URL] = productImage.url!;
-        }
-        item[_ALL_IMAGES_TAG_SIZES]![productImage.size!.number] = size;
+        item[_ALL_IMAGES_TAG_SIZES]![productImage.size!.number] =
+            <String, Object>{
+              _ALL_IMAGES_TAG_WIDTH: ?productImage.width,
+              _ALL_IMAGES_TAG_HEIGHT: ?productImage.height,
+              _ALL_IMAGES_TAG_URL: ?productImage.url,
+            };
         if (first) {
           first = false;
           if (!productImage.isMain) {

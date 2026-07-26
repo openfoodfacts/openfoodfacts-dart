@@ -17,9 +17,13 @@ class ProductQueryVersion {
   @Deprecated('Use ProductQueryVersion.latestVersion instead')
   static const ProductQueryVersion v3_1 = ProductQueryVersion(3.1);
 
+  // TODO: deprecated from 2026-07-26; remove when old enough
+  @Deprecated('Use ProductQueryVersion.latestVersion instead')
   static const ProductQueryVersion v3_2 = ProductQueryVersion(3.2);
 
-  static const ProductQueryVersion latestVersion = v3_2;
+  static const ProductQueryVersion v3_3 = ProductQueryVersion(3.3);
+
+  static const ProductQueryVersion latestVersion = v3_3;
 
   String getPath(final String barcode) =>
       '/api/v$version/product/${Uri.encodeComponent(barcode)}/';

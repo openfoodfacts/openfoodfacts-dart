@@ -137,22 +137,42 @@ class OpenFoodAPIClient {
       // For the moment there are limited fields concerned.
       throw Exception('At least one V3 field must be populated.');
     }
-    const String productTag = 'product';
-    parameterMap[productTag] = {};
     if (packagings != null) {
-      parameterMap[productTag][ProductField.PACKAGINGS.offTag] = packagings;
+      parameterMap[ProductField.PACKAGINGS.offTag] = packagings;
     }
     if (packagingsComplete != null) {
-      parameterMap[productTag][ProductField.PACKAGINGS_COMPLETE.offTag] =
+      parameterMap[ProductField.PACKAGINGS_COMPLETE.offTag] =
           packagingsComplete;
     }
+    final Map<String, dynamic> extraParameters = <String, dynamic>{};
     if (language != null) {
-      parameterMap['lc'] = language.offTag;
-      parameterMap['tags_lc'] = language.offTag;
+      extraParameters['lc'] = language.offTag;
+      extraParameters['tags_lc'] = language.offTag;
     }
     if (country != null) {
-      parameterMap['cc'] = country.offTag;
+      extraParameters['cc'] = country.offTag;
     }
+
+    return patchProductV3(
+      barcode: barcode,
+      productParameters: parameterMap,
+      extraParameters: extraParameters,
+      user: user,
+      uriHelper: uriHelper,
+    );
+  }
+
+  static Future<ProductResultV3> patchProductV3({
+    required final String barcode,
+    required final Map<String, dynamic> productParameters,
+    required final User user,
+    final Map<String, dynamic> extraParameters = const <String, dynamic>{},
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+  }) async {
+    final Map<String, dynamic> parameterMap = <String, dynamic>{};
+    parameterMap.addAll(user.toData());
+    parameterMap.addAll(extraParameters);
+    parameterMap['product'] = productParameters;
 
     var productUri = uriHelper.getPatchUri(
       path: '/api/v3/product/${Uri.encodeComponent(barcode)}',
@@ -1325,45 +1345,24 @@ class OpenFoodAPIClient {
   /// the image as selected for this product x imagefield x language anymore.
   /// Throws an exception if not successful.
   /// Will work OK even when there was no previous selected product image.
-  static Future<void> unselectProductImage({
+  static Future<ProductResultV3> unselectProductImage({
     required final String barcode,
     required final ImageField imageField,
     required final OpenFoodFactsLanguage language,
     required final User user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
-  }) async {
-    final String id = '${imageField.offTag}_${language.offTag}';
-    final Uri uri = uriHelper.getPostUri(path: 'cgi/product_image_unselect.pl');
-    final Map<String, String> queryParameters = <String, String>{
-      'code': barcode,
-      'id': id,
-    };
-
-    final Response response = await HttpHelper().doPostRequest(
-      uri,
-      queryParameters,
-      user,
-      uriHelper: uriHelper,
-      addCredentialsToBody: true,
-    );
-    _checkResponse(response);
-    final Map<String, dynamic> json =
-        HttpHelper().jsonDecode(response.body) as Map<String, dynamic>;
-    final String status = json['status'];
-    if (status != 'status ok') {
-      throw Exception('Status not ok ($status)');
-    }
-    final int statusCode = json['status_code'];
-    if (statusCode != 0) {
-      throw Exception('Status Code not ok ($statusCode)');
-    }
-    final String imagefield = json['imagefield'];
-    if (imagefield != id) {
-      throw Exception(
-        'Different imagefield: expected "$id", actual "$imageField"',
-      );
-    }
-  }
+  }) async => patchProductV3(
+    barcode: barcode,
+    productParameters: {
+      'images': {
+        'selected': {
+          imageField.offTag: {language.offTag: null},
+        },
+      },
+    },
+    user: user,
+    uriHelper: uriHelper,
+  );
 
   /// Returns the name of each country localized in [language].
   static Future<Map<OpenFoodFactsCountry, String>> getLocalizedCountryNames(

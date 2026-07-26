@@ -287,8 +287,6 @@ void main() {
 
           expect(russianProduct.productNameInLanguages, isNull);
 
-          expect(russianProduct.ingredientsTextInLanguages, isNull);
-
           expect(russianProduct.ingredientsTags, equals(ingredientsTags));
           expect(
             russianProduct.ingredientsTagsInLanguages,

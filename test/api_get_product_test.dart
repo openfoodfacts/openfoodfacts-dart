@@ -1726,5 +1726,61 @@ void main() {
         }
       });
     });
+
+    group('$OpenFoodAPIClient API 3.3', () {
+      test('images fields in API 3.2 and 3.3', () async {
+        const barcode = '3019081238643';
+        const language = OpenFoodFactsLanguage.FRENCH;
+
+        const versions = [ProductQueryVersion.v3_2, ProductQueryVersion.v3_3];
+
+        late List<ProductImage> previousImages;
+
+        for (final version in versions) {
+          final configuration = ProductQueryConfiguration(
+            barcode,
+            fields: [ProductField.IMAGES],
+            language: language,
+            version: version,
+          );
+
+          final result = await getProductV3InProd(configuration);
+          final Product product = result.product!;
+
+          expect(product.images, isNotNull);
+          expect(product.images, isNotEmpty);
+
+          if (version.version == 3.2) {
+            previousImages = product.images!;
+          } else if (version.version == 3.3) {
+            var images = product.images!;
+
+            expect(images, unorderedEquals(previousImages));
+            expect(
+              Product.getImageSubset(true, images)!,
+              unorderedEquals(Product.getImageSubset(true, previousImages)!),
+            );
+            expect(
+              Product.getImageSubset(false, images)!,
+              unorderedEquals(Product.getImageSubset(false, previousImages)!),
+            );
+
+            final recodedProduct = Product.fromJson(product.toJson());
+            images = recodedProduct.images!;
+            expect(images, unorderedEquals(previousImages));
+            expect(
+              Product.getImageSubset(true, images)!,
+              unorderedEquals(Product.getImageSubset(true, previousImages)!),
+            );
+            expect(
+              Product.getImageSubset(false, images)!,
+              unorderedEquals(Product.getImageSubset(false, previousImages)!),
+            );
+          } else {
+            fail('Unexpected version number: ${version.version}');
+          }
+        }
+      });
+    });
   });
 }
