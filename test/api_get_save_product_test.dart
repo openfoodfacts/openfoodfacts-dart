@@ -37,13 +37,34 @@ void main() {
   const String russianIngredientsAll = 'Мука, вода';
   const List<String> russianIngredientsSplit = <String>['мука', 'Вода'];
 
-  bool checkServerStatus(final Status status) {
-    if (status.status == 400) {
+  Future<Status?> saveProduct(
+    final Product product, {
+    final OpenFoodFactsLanguage? language,
+  }) async {
+    try {
+      final Status status = await OpenFoodAPIClient.saveProduct(
+        TestConstants.TEST_USER,
+        product,
+        language: language,
+        uriHelper: uriHelper,
+      );
+      return status;
+    } on HttpStatusException catch (e) {
+      if (e.statusCode >= 500) {
+        print('Server error: $e');
+        return null;
+      }
+      rethrow;
+    }
+  }
+
+  bool checkServerStatus(final Status? status) {
+    if (status == null) {
       // grumpy server: let's not fail
       return false;
     }
-    if (status.status >= 500) {
-      // grumpy server, but another way: let's not fail either
+    if (status.status == 400) {
+      // grumpy server: let's not fail
       return false;
     }
     expect(status.status, 1);
@@ -118,12 +139,10 @@ void main() {
           additives: Additives(['en:e150d, en:e950'], ['E150d, E950']),
         );
 
-        await OpenFoodAPIClient.saveProduct(
-          TestConstants.TEST_USER,
-          inputProduct,
-          uriHelper: uriHelper,
-          language: language,
-        );
+        final saved = await saveProduct(inputProduct, language: language);
+        if (saved == null) {
+          return;
+        }
 
         final SendImage fontImage = SendImage(
           lang: language,
@@ -204,12 +223,13 @@ void main() {
             countries: englishCountry,
           );
 
-          await OpenFoodAPIClient.saveProduct(
-            TestConstants.TEST_USER,
+          final saved = await saveProduct(
             englishInputProduct,
-            uriHelper: uriHelper,
             language: OpenFoodFactsLanguage.ENGLISH,
           );
+          if (saved == null) {
+            return;
+          }
 
           final fields = [
             ProductField.NAME,
@@ -346,18 +366,21 @@ void main() {
             },
           );
 
-          await OpenFoodAPIClient.saveProduct(
-            TestConstants.TEST_USER,
+          var saved = await saveProduct(
             englishInputProduct,
-            uriHelper: uriHelper,
             language: OpenFoodFactsLanguage.ENGLISH,
           );
-          await OpenFoodAPIClient.saveProduct(
-            TestConstants.TEST_USER,
+          if (saved == null) {
+            return;
+          }
+
+          saved = await saveProduct(
             russianInputProduct,
-            uriHelper: uriHelper,
             language: OpenFoodFactsLanguage.RUSSIAN,
           );
+          if (saved == null) {
+            return;
+          }
 
           const fields = [
             ProductField.NAME,
@@ -494,11 +517,10 @@ void main() {
           countries: englishCountry,
         );
 
-        await OpenFoodAPIClient.saveProduct(
-          TestConstants.TEST_USER,
-          inputProduct,
-          uriHelper: uriHelper,
-        );
+        final saved = await saveProduct(inputProduct);
+        if (saved == null) {
+          return;
+        }
 
         final fields = [
           ProductField.NAME,
@@ -604,11 +626,10 @@ void main() {
           },
         );
 
-        await OpenFoodAPIClient.saveProduct(
-          TestConstants.TEST_USER,
-          inputProduct,
-          uriHelper: uriHelper,
-        );
+        final saved = await saveProduct(inputProduct);
+        if (saved == null) {
+          return;
+        }
 
         // Request all available languages for the fields which allow it
         final fields = [
@@ -666,11 +687,10 @@ void main() {
             },
           );
 
-          await OpenFoodAPIClient.saveProduct(
-            TestConstants.TEST_USER,
-            inputProduct,
-            uriHelper: uriHelper,
-          );
+          final saved = await saveProduct(inputProduct);
+          if (saved == null) {
+            return;
+          }
 
           // Request both 'all-langs' and 'in-langs' fields types
           final fields = [
@@ -729,12 +749,10 @@ void main() {
           brands: brands,
         );
 
-        await OpenFoodAPIClient.saveProduct(
-          TestConstants.TEST_USER,
-          product,
-          uriHelper: uriHelper,
-          language: language,
-        );
+        final saved = await saveProduct(product, language: language);
+        if (saved == null) {
+          return;
+        }
 
         final ProductQueryConfiguration configurations =
             ProductQueryConfiguration(
@@ -779,12 +797,10 @@ void main() {
         quantity: quantity,
       );
 
-      await OpenFoodAPIClient.saveProduct(
-        TestConstants.TEST_USER,
-        product,
-        uriHelper: uriHelper,
-        language: language,
-      );
+      final saved = await saveProduct(product, language: language);
+      if (saved == null) {
+        return;
+      }
 
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
@@ -821,8 +837,7 @@ void main() {
 
     Future<bool> uploadProduct({required bool noNutritionData}) async {
       const perSize = PerSize.oneHundredGrams;
-      final Status status = await OpenFoodAPIClient.saveProduct(
-        TestConstants.TEST_USER,
+      final Status? status = await saveProduct(
         Product(
           barcode: barcode,
           nutrimentDataPer: perSize.offTag,
@@ -831,7 +846,6 @@ void main() {
               ? (Nutriments.empty()..setValue(Nutrient.salt, perSize, 10.0))
               : null,
         ),
-        uriHelper: uriHelper,
       );
       if (!checkServerStatus(status)) {
         return false;
@@ -920,8 +934,7 @@ void main() {
       }
       inputNutriments.setValue(nutrient, perSize, ++value, modifier: modifier);
 
-      final Status savedStatus = await OpenFoodAPIClient.saveProduct(
-        TestConstants.TEST_USER,
+      final Status? savedStatus = await saveProduct(
         Product(
           barcode: barcode,
           nutriments: inputNutriments,
@@ -930,7 +943,6 @@ void main() {
           servingQuantity: 250,
           noNutritionData: false,
         ),
-        uriHelper: uriHelper,
       );
       if (!checkServerStatus(savedStatus)) {
         return;
