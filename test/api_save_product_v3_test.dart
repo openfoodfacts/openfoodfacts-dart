@@ -10,6 +10,33 @@ void main() {
 
   const ProductQueryVersion version = ProductQueryVersion.testVersion;
 
+  Future<ProductResultV3?> temporarySaveProductV3(
+    final String barcode, {
+    final List<ProductPackaging>? packagings,
+    final bool? packagingsComplete,
+    final OpenFoodFactsCountry? country,
+    final OpenFoodFactsLanguage? language,
+  }) async {
+    try {
+      final result = await OpenFoodAPIClient.temporarySaveProductV3(
+        TestConstants.TEST_USER,
+        barcode,
+        packagings: packagings,
+        packagingsComplete: packagingsComplete,
+        uriHelper: uriHelper,
+        country: country,
+        language: language,
+      );
+      return result;
+    } on HttpStatusException catch (e) {
+      if (e.statusCode >= 500) {
+        print('Server error: $e');
+        return null;
+      }
+      rethrow;
+    }
+  }
+
   group('$OpenFoodAPIClient save product V3', () {
     const String barcode = '7300400481588';
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
@@ -33,15 +60,15 @@ void main() {
             ..quantityPerUnit = quantityPerUnit
             ..weightMeasured = weightMeasured,
         ];
-        final ProductResultV3 status =
-            await OpenFoodAPIClient.temporarySaveProductV3(
-              TestConstants.TEST_USER,
-              barcode,
-              uriHelper: uriHelper,
-              country: country,
-              language: language,
-              packagings: inputPackagings,
-            );
+        final ProductResultV3? status = await temporarySaveProductV3(
+          barcode,
+          country: country,
+          language: language,
+          packagings: inputPackagings,
+        );
+        if (status == null) {
+          return;
+        }
 
         expect(status.status, ProductResultV3.statusWarning);
         expect(status.errors, isEmpty);
@@ -82,15 +109,15 @@ void main() {
     test('save packagings_complete', () async {
       final List<bool> values = [false, true, false];
       for (final bool value in values) {
-        final ProductResultV3 writeStatus =
-            await OpenFoodAPIClient.temporarySaveProductV3(
-              TestConstants.TEST_USER,
-              barcode,
-              uriHelper: uriHelper,
-              country: country,
-              language: language,
-              packagingsComplete: value,
-            );
+        final ProductResultV3? writeStatus = await temporarySaveProductV3(
+          barcode,
+          country: country,
+          language: language,
+          packagingsComplete: value,
+        );
+        if (writeStatus == null) {
+          return;
+        }
 
         expect(writeStatus.status, ProductResultV3.statusSuccess);
         expect(writeStatus.errors, isEmpty);
@@ -135,15 +162,15 @@ void main() {
           ..numberOfUnits = numberOfUnits
           ..weightMeasured = weightMeasured,
       ];
-      final ProductResultV3 status =
-          await OpenFoodAPIClient.temporarySaveProductV3(
-            TestConstants.TEST_USER,
-            barcode,
-            uriHelper: uriHelper,
-            country: country,
-            language: language,
-            packagings: inputPackagings,
-          );
+      final ProductResultV3? status = await temporarySaveProductV3(
+        barcode,
+        country: country,
+        language: language,
+        packagings: inputPackagings,
+      );
+      if (status == null) {
+        return;
+      }
 
       expect(status.status, ProductResultV3.statusWarning);
       expect(status.errors, isEmpty);

@@ -42,6 +42,10 @@ void main() {
       // grumpy server: let's not fail
       return false;
     }
+    if (status.status >= 500) {
+      // grumpy server, but another way: let's not fail either
+      return false;
+    }
     expect(status.status, 1);
     expect(status.statusVerbose, 'fields saved');
     return true;
