@@ -553,10 +553,12 @@ class OpenFoodAPIClient {
     TaxonomyPackagingShapeQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
   }) => getTaxonomy<TaxonomyPackagingShape, TaxonomyPackagingShapeField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
+    version: version,
   );
 
   static Future<Map<String, TaxonomyPackagingMaterial>?>
@@ -564,10 +566,12 @@ class OpenFoodAPIClient {
     TaxonomyPackagingMaterialQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
   }) => getTaxonomy<TaxonomyPackagingMaterial, TaxonomyPackagingMaterialField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
+    version: version,
   );
 
   static Future<Map<String, TaxonomyPackagingRecycling>?>
@@ -575,111 +579,133 @@ class OpenFoodAPIClient {
     TaxonomyPackagingRecyclingQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
   }) =>
       getTaxonomy<TaxonomyPackagingRecycling, TaxonomyPackagingRecyclingField>(
         configuration,
         user: user,
         uriHelper: uriHelper,
+        version: version,
       );
 
   static Future<Map<String, TaxonomyNova>?> getTaxonomyNova(
     TaxonomyNovaQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
   }) => getTaxonomy<TaxonomyNova, TaxonomyNovaField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
+    version: version,
   );
 
   static Future<Map<String, TaxonomyCategory>?> getTaxonomyCategories(
     TaxonomyCategoryQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
   }) => getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
+    version: version,
   );
 
   static Future<Map<String, TaxonomyAdditive>?> getTaxonomyAdditives(
     TaxonomyAdditiveQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
   }) => getTaxonomy<TaxonomyAdditive, TaxonomyAdditiveField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
+    version: version,
   );
 
   static Future<Map<String, TaxonomyAllergen>?> getTaxonomyAllergens(
     TaxonomyAllergenQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
   }) => getTaxonomy<TaxonomyAllergen, TaxonomyAllergenField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
+    version: version,
   );
 
   static Future<Map<String, TaxonomyCountry>?> getTaxonomyCountries(
     TaxonomyCountryQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
   }) => getTaxonomy<TaxonomyCountry, TaxonomyCountryField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
+    version: version,
   );
 
   static Future<Map<String, TaxonomyIngredient>?> getTaxonomyIngredients(
     TaxonomyIngredientQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
   }) => getTaxonomy<TaxonomyIngredient, TaxonomyIngredientField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
+    version: version,
   );
 
   static Future<Map<String, TaxonomyLabel>?> getTaxonomyLabels(
     TaxonomyLabelQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
   }) => getTaxonomy<TaxonomyLabel, TaxonomyLabelField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
+    version: version,
   );
 
   static Future<Map<String, TaxonomyLanguage>?> getTaxonomyLanguages(
     TaxonomyLanguageQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
   }) => getTaxonomy<TaxonomyLanguage, TaxonomyLanguageField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
+    version: version,
   );
 
   static Future<Map<String, TaxonomyPackaging>?> getTaxonomyPackagings(
     final TaxonomyPackagingQueryConfiguration configuration, {
     final User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
   }) => getTaxonomy<TaxonomyPackaging, TaxonomyPackagingField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
+    version: version,
   );
 
   static Future<Map<String, TaxonomyOrigin>?> getTaxonomyOrigins(
     TaxonomyOriginQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
   }) => getTaxonomy<TaxonomyOrigin, TaxonomyOriginField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
+    version: version,
   );
 
   static void _removeImages(
