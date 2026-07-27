@@ -55,9 +55,8 @@
     <section class="multi-line-signature">
       
 <span class="returntype"><a href="https://api.dart.dev/stable/3.12.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage-class.html">ProductImage</a></span>&gt;</span>?</span>
-<span class="name ">allImagesFromJson</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="allImagesFromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.12.2/dart-core/Map-class.html">Map</a>?</span> <span class="parameter-name">json</span>, {</span></li>
-<li><span class="parameter" id="allImagesFromJson-param-onlyMain"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.12.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">onlyMain</span> = <span class="default-value">false</span>, </span></li>
-</ol>})
+<span class="name ">allImagesFromJson</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="allImagesFromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.12.2/dart-core/Map-class.html">Map</a>?</span> <span class="parameter-name">json</span></span></li>
+</ol>)
 
       
 
@@ -71,90 +70,87 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static List&lt;ProductImage&gt;? allImagesFromJson(
-  Map? json, {
-  final bool onlyMain = false,
-}) {
-  if (json == null) return null;
+  <pre class="language-dart"><code class="language-dart">static List&lt;ProductImage&gt;? allImagesFromJson(Map? json) {
+  if (json == null) {
+    return null;
+  }
 
   var imageList = &lt;ProductImage&gt;[];
 
-  for (final String key in json.keys) {
-    ImageField? field;
-    OpenFoodFactsLanguage? lang;
-    final int? imageId = int.tryParse(key);
-    if (imageId != null) {
-      &#47;&#47; the key is an int: it&#39;s a &quot;raw&quot; image
-      if (onlyMain) {
-        continue;
-      }
-    } else {
-      &#47;&#47; we expect field + &#39;_&#39; + language: it&#39;s a &quot;main&quot; image
-      final List&lt;String&gt; values = key.split(&#39;_&#39;);
-      if (values.length != 2) {
-        continue;
-      }
-      final String fieldString = values[0];
-      field = ImageField.fromOffTag(fieldString);
-      if (field == null) {
-        continue;
-      }
-      final String languageString = values[1];
-      lang = OpenFoodFactsLanguage.fromOffTag(languageString);
-      if (lang == null) {
-        continue;
-      }
-    }
-
-    final Map&lt;String, dynamic&gt; fieldObject = json[key];
-
+  void addUploadedImages({
+    required int imageId,
+    required Map&lt;String, dynamic&gt; fieldObject,
+  }) {
     &#47;&#47; get the sizes object
     final Map&lt;String, dynamic&gt;? sizesObject =
         fieldObject[_ALL_IMAGES_TAG_SIZES] as Map&lt;String, dynamic&gt;?;
     if (sizesObject == null) {
-      continue;
+      return;
     }
 
-    if (imageId != null) {
-      final DateTime? uploaded = timestampToDate(
-        fieldObject[_ALL_IMAGES_TAG_UPLOADED],
-      );
-      final String? contributor = fieldObject[_ALL_IMAGES_TAG_UPLOADER];
-      &#47;&#47; get each number object (e.g. 200)
-      for (var size in ImageSize.values) {
-        var number = size.number;
-        var numberObject = sizesObject[number] as Map&lt;String, dynamic&gt;?;
-        if (numberObject == null) {
-          continue;
-        }
-        imageList.add(
-          ProductImage.raw(
-            size: size,
-            imgid: imageId.toString(),
-            width: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_WIDTH]),
-            height: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]),
-            url: numberObject[_ALL_IMAGES_TAG_URL],
-            uploaded: uploaded,
-            contributor: contributor,
-          ),
-        );
+    final DateTime? uploaded = timestampToDate(
+      fieldObject[_ALL_IMAGES_TAG_UPLOADED],
+    );
+    final String? contributor = fieldObject[_ALL_IMAGES_TAG_UPLOADER];
+    &#47;&#47; get each number object (e.g. 200)
+    for (var size in ImageSize.values) {
+      var number = size.number;
+      var numberObject = sizesObject[number] as Map&lt;String, dynamic&gt;?;
+      if (numberObject == null) {
+        continue;
       }
-      continue;
+      imageList.add(
+        ProductImage.raw(
+          size: size,
+          imgid: imageId.toString(),
+          width: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_WIDTH]),
+          height: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]),
+          url: numberObject[_ALL_IMAGES_TAG_URL],
+          uploaded: uploaded,
+          contributor: contributor,
+        ),
+      );
+    }
+  }
+
+  void addSelectedImages({
+    required ImageField field,
+    required OpenFoodFactsLanguage lang,
+    required Map&lt;String, dynamic&gt; fieldObject,
+    required bool pre3_3Mode,
+  }) {
+    &#47;&#47; get the sizes object
+    final Map&lt;String, dynamic&gt;? sizesObject =
+        fieldObject[_ALL_IMAGES_TAG_SIZES] as Map&lt;String, dynamic&gt;?;
+    if (sizesObject == null) {
+      return;
     }
 
     final int? rev = JsonObject.parseInt(
       fieldObject[_ALL_IMAGES_TAG_REVISION],
     );
     final String imgid = fieldObject[_ALL_IMAGES_TAG_IMAGE_ID].toString();
-    final ImageAngle? angle = ImageAngleExtension.fromInt(
-      JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_ANGLE]),
-    );
-    final String? coordinatesImageSize =
-        fieldObject[_ALL_IMAGES_TAG_COORDINATES]?.toString();
-    final int? x1 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_X1]);
-    final int? y1 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_Y1]);
-    final int? x2 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_X2]);
-    final int? y2 = JsonObject.parseInt(fieldObject[_ALL_IMAGES_TAG_Y2]);
+
+    ImageAngle? angle;
+    String? coordinatesImageSize;
+    int? x1;
+    int? y1;
+    int? x2;
+    int? y2;
+    final Map&lt;String, dynamic&gt;? generation = pre3_3Mode
+        ? fieldObject
+        : fieldObject[_ALL_IMAGES_TAG_3_3_GENERATION];
+    if (generation != null) {
+      angle = ImageAngleExtension.fromInt(
+        JsonObject.parseInt(generation[_ALL_IMAGES_TAG_ANGLE]),
+      );
+      coordinatesImageSize = generation[_ALL_IMAGES_TAG_COORDINATES]
+          ?.toString();
+      x1 = JsonObject.parseInt(generation[_ALL_IMAGES_TAG_X1]);
+      y1 = JsonObject.parseInt(generation[_ALL_IMAGES_TAG_Y1]);
+      x2 = JsonObject.parseInt(generation[_ALL_IMAGES_TAG_X2]);
+      y2 = JsonObject.parseInt(generation[_ALL_IMAGES_TAG_Y2]);
+    }
 
     &#47;&#47; get each number object (e.g. 200)
     for (var size in ImageSize.values) {
@@ -163,32 +159,94 @@
       if (numberObject == null) {
         continue;
       }
-      final int? width = JsonObject.parseInt(
-        numberObject[_ALL_IMAGES_TAG_WIDTH],
+      imageList.add(
+        ProductImage(
+          field: field,
+          size: size,
+          language: lang,
+          rev: rev,
+          imgid: imgid,
+          angle: angle,
+          coordinatesImageSize: coordinatesImageSize,
+          x1: x1,
+          y1: y1,
+          x2: x2,
+          y2: y2,
+          width: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_WIDTH]),
+          height: JsonObject.parseInt(numberObject[_ALL_IMAGES_TAG_HEIGHT]),
+          url: numberObject[_ALL_IMAGES_TAG_URL],
+        ),
       );
-      final int? height = JsonObject.parseInt(
-        numberObject[_ALL_IMAGES_TAG_HEIGHT],
-      );
-      final String? url = numberObject[_ALL_IMAGES_TAG_URL];
-
-      var image = ProductImage(
-        field: field!,
-        size: size,
-        language: lang!,
-        rev: rev,
-        imgid: imgid,
-        angle: angle,
-        coordinatesImageSize: coordinatesImageSize,
-        x1: x1,
-        y1: y1,
-        x2: x2,
-        y2: y2,
-        width: width,
-        height: height,
-        url: url,
-      );
-      imageList.add(image);
     }
+  }
+
+  for (final String key in json.keys) {
+    final Map&lt;String, dynamic&gt; fieldObject = json[key];
+
+    if (key == _ALL_IMAGES_TAG_3_3_UPLOADED) {
+      &#47;&#47; here, only raw images are expected
+      for (final MapEntry&lt;String, dynamic&gt; entry in fieldObject.entries) {
+        final int? imageId = int.tryParse(entry.key);
+        if (imageId != null) {
+          addUploadedImages(imageId: imageId, fieldObject: entry.value);
+        }
+      }
+      continue;
+    }
+
+    if (key == _ALL_IMAGES_TAG_3_3_SELECTED) {
+      for (final MapEntry&lt;String, dynamic&gt; entry1 in fieldObject.entries) {
+        final ImageField? field = ImageField.fromOffTag(entry1.key);
+        if (field == null) {
+          continue;
+        }
+        for (final MapEntry&lt;String, dynamic&gt; entry2 in entry1.value.entries) {
+          final OpenFoodFactsLanguage? lang =
+              OpenFoodFactsLanguage.fromOffTag(entry2.key);
+          if (lang == null) {
+            continue;
+          }
+          addSelectedImages(
+            field: field,
+            lang: lang,
+            fieldObject: entry2.value,
+            pre3_3Mode: false,
+          );
+        }
+      }
+      continue;
+    }
+
+    final int? imageId = int.tryParse(key);
+    if (imageId != null) {
+      &#47;&#47; the key is an int: it&#39;s a &quot;raw&quot; image
+      addUploadedImages(imageId: imageId, fieldObject: fieldObject);
+      continue;
+    }
+
+    &#47;&#47; we expect field + &#39;_&#39; + language: it&#39;s a &quot;main&quot; image
+    ImageField? field;
+    OpenFoodFactsLanguage? lang;
+    final List&lt;String&gt; values = key.split(&#39;_&#39;);
+    if (values.length != 2) {
+      continue;
+    }
+    final String fieldString = values[0];
+    field = ImageField.fromOffTag(fieldString);
+    if (field == null) {
+      continue;
+    }
+    final String languageString = values[1];
+    lang = OpenFoodFactsLanguage.fromOffTag(languageString);
+    if (lang == null) {
+      continue;
+    }
+    addSelectedImages(
+      field: field,
+      lang: lang,
+      fieldObject: fieldObject,
+      pre3_3Mode: true,
+    );
   }
 
   return imageList;

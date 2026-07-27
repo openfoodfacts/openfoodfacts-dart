@@ -71,7 +71,9 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static List&lt;ProductImage&gt;? selectedImagesFromJson(Map? json) {
-  if (json == null) return null;
+  if (json == null) {
+    return null;
+  }
 
   var imageList = &lt;ProductImage&gt;[];
   for (var field in ImageField.values) {

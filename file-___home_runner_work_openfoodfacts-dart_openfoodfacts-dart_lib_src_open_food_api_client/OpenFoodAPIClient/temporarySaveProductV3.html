@@ -87,41 +87,33 @@ Long term target is of course more something like <a href="../../file-___home_ru
   final OpenFoodFactsCountry? country,
   final OpenFoodFactsLanguage? language,
 }) async {
-  final Map&lt;String, dynamic&gt; parameterMap = &lt;String, dynamic&gt;{};
-  parameterMap.addAll(user.toData());
-  if (packagings == null &amp;&amp; packagingsComplete == null) {
-    &#47;&#47; For the moment there are limited fields concerned.
-    throw Exception(&#39;At least one V3 field must be populated.&#39;);
-  }
-  const String productTag = &#39;product&#39;;
-  parameterMap[productTag] = {};
+  final Map&lt;String, dynamic&gt; productParameters = &lt;String, dynamic&gt;{};
   if (packagings != null) {
-    parameterMap[productTag][ProductField.PACKAGINGS.offTag] = packagings;
+    productParameters[ProductField.PACKAGINGS.offTag] = packagings;
   }
   if (packagingsComplete != null) {
-    parameterMap[productTag][ProductField.PACKAGINGS_COMPLETE.offTag] =
+    productParameters[ProductField.PACKAGINGS_COMPLETE.offTag] =
         packagingsComplete;
   }
+  if (productParameters.isEmpty) {
+    throw Exception(&#39;At least one V3 field must be populated.&#39;);
+  }
+  final Map&lt;String, dynamic&gt; extraParameters = &lt;String, dynamic&gt;{};
   if (language != null) {
-    parameterMap[&#39;lc&#39;] = language.offTag;
-    parameterMap[&#39;tags_lc&#39;] = language.offTag;
+    extraParameters[&#39;lc&#39;] = language.offTag;
+    extraParameters[&#39;tags_lc&#39;] = language.offTag;
   }
   if (country != null) {
-    parameterMap[&#39;cc&#39;] = country.offTag;
+    extraParameters[&#39;cc&#39;] = country.offTag;
   }
 
-  var productUri = uriHelper.getPatchUri(
-    path: &#39;&#47;api&#47;v3&#47;product&#47;${Uri.encodeComponent(barcode)}&#39;,
-  );
-
-  final Response response = await HttpHelper().doPatchRequest(
-    productUri,
-    parameterMap,
-    user,
+  return patchProductV3(
+    barcode: barcode,
+    productParameters: productParameters,
+    extraParameters: extraParameters,
+    user: user,
     uriHelper: uriHelper,
   );
-  _checkResponse(response);
-  return ProductResultV3.fromJson(HttpHelper().jsonDecode(response.body));
 }</code></pre>
 </section>
 

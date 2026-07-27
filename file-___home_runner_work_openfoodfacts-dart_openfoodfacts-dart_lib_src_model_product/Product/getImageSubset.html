@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the getRawImages method from the Product class, for the Dart programming language.">
-  <title>getRawImages method - Product class - product library - Dart API</title>
+  <meta name="description" content="API docs for the getImageSubset method from the Product class, for the Dart programming language.">
+  <title>getImageSubset method - Product class - product library - Dart API</title>
 
 
   
@@ -27,9 +27,9 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/">src&#47;model&#47;product.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product-class.html">Product</a></li>
-    <li class="self-crumb">getRawImages method</li>
+    <li class="self-crumb">getImageSubset static method</li>
   </ol>
-  <div class="self-name">getRawImages</div>
+  <div class="self-name">getImageSubset</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -49,27 +49,41 @@
     data-above-sidebar="file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product&#47;Product-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">getRawImages</span> method 
+<h1><span class="kind-method">getImageSubset</span> static method 
 </h1></div>
 
     <section class="multi-line-signature">
       
 <span class="returntype"><a href="https://api.dart.dev/stable/3.12.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage-class.html">ProductImage</a></span>&gt;</span>?</span>
-<span class="name ">getRawImages</span>(<wbr>)
+<span class="name ">getImageSubset</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="getImageSubset-param-isSelectedOrUploaded"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.12.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isSelectedOrUploaded</span>, </span></li>
+<li><span class="parameter" id="getImageSubset-param-images"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.12.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product_image/ProductImage-class.html">ProductImage</a></span>&gt;</span>?</span> <span class="parameter-name">images</span></span></li>
+</ol>)
 
       
 
     </section>
     
-<section class="desc markdown">
-  <p>"Raw" (uploaded) images: for example "picture 12" resized to "400" size.</p>
-</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">List&lt;ProductImage&gt;? getRawImages() =&gt; getImageSubset(false, images);</code></pre>
+  <pre class="language-dart"><code class="language-dart">@visibleForTesting
+static List&lt;ProductImage&gt;? getImageSubset(
+  final bool isSelectedOrUploaded,
+  final List&lt;ProductImage&gt;? images,
+) {
+  if (images == null) {
+    return null;
+  }
+  final List&lt;ProductImage&gt; result = &lt;ProductImage&gt;[];
+  for (final ProductImage productImage in images) {
+    if (productImage.isMain == isSelectedOrUploaded) {
+      result.add(productImage);
+    }
+  }
+  return result;
+}</code></pre>
 </section>
 
 
@@ -85,7 +99,7 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/">product</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product-class.html">Product</a></li>
-    <li class="self-crumb">getRawImages method</li>
+    <li class="self-crumb">getImageSubset static method</li>
 </ol>
 
     <h5>Product class</h5>
