@@ -152,6 +152,7 @@ export 'src/search/fuzziness.dart';
 export 'src/search/taxonomy_name.dart';
 export 'src/search/taxonomy_name_autocompleter.dart';
 export 'src/utils/abstract_query_configuration.dart';
+export 'src/utils/api_version.dart';
 export 'src/utils/autocomplete_manager.dart';
 export 'src/utils/autocompleter.dart';
 export 'src/utils/barcodes_validator.dart';

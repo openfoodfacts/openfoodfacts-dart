@@ -50,7 +50,8 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
   bool matchesV3() => true;
 
   @override
-  String getUriPath() => version.getPath(barcode);
+  String getUriPath() =>
+      version.getApiPath('product/${Uri.encodeComponent(barcode)}');
 
   @override
   Future<Response> getResponse(

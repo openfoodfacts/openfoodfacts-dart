@@ -29,6 +29,7 @@ import 'prices/session.dart';
 import 'prices/update_price_parameters.dart';
 import 'prices/update_proof_parameters.dart';
 import 'prices/create_proof_parameters.dart';
+import 'utils/api_version.dart';
 import 'utils/http_helper.dart';
 import 'utils/open_food_api_configuration.dart';
 import 'utils/uri_helper.dart';
@@ -39,6 +40,8 @@ import 'utils/uri_reader.dart';
 /// cf. https://prices.openfoodfacts.org/api/docs
 class OpenPricesAPIClient {
   OpenPricesAPIClient._();
+
+  static const ApiVersion defaultVersion = ApiVersion(1);
 
   /// Status when the server is running (cf. [getStatus]).
   static const String statusRunning = 'running';
@@ -62,12 +65,26 @@ class OpenPricesAPIClient {
     addUserAgentParameters: addUserAgentParameters,
   );
 
+  static Uri getApiUri(
+    final String subpath, {
+    final Map<String, dynamic>? queryParameters,
+    required final UriProductHelper uriHelper,
+    required final ApiVersion version,
+  }) => getUri(
+    path: version.getApiPath(subpath),
+    queryParameters: queryParameters,
+    uriHelper: uriHelper,
+  );
+
   static Future<MaybeError<PriceUser>> getUser(
     final String username, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
   }) async {
-    final Uri uri = OpenPricesAPIClient.getUri(
-      path: '/api/v1/users/${Uri.encodeComponent(username)}',
+    final Uri uri = getApiUri(
+      'users/${Uri.encodeComponent(username)}',
+      uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
@@ -87,12 +104,14 @@ class OpenPricesAPIClient {
   static Future<MaybeError<GetPricesResult>> getPrices(
     final GetPricesParameters parameters, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
     final String? bearerToken,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/prices',
+    final Uri uri = getApiUri(
+      'prices',
       queryParameters: parameters.getQueryParameters(),
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
@@ -116,10 +135,12 @@ class OpenPricesAPIClient {
   static Future<MaybeError<Price>> getPrice(
     final int priceId, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/prices/$priceId',
+    final Uri uri = getApiUri(
+      'prices/$priceId',
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
@@ -140,11 +161,12 @@ class OpenPricesAPIClient {
     required final int locationOSMId,
     required final LocationOSMType locationOSMType,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
   }) async {
-    final Uri uri = getUri(
-      path:
-          '/api/v1/locations/osm/${Uri.encodeComponent(locationOSMType.offTag)}/$locationOSMId',
+    final Uri uri = getApiUri(
+      'locations/osm/${Uri.encodeComponent(locationOSMType.offTag)}/$locationOSMId',
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
@@ -164,12 +186,14 @@ class OpenPricesAPIClient {
   static Future<MaybeError<GetLocationsResult>> getLocations(
     final GetLocationsParameters parameters, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
     final String? bearerToken,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/locations',
+    final Uri uri = getApiUri(
+      'locations',
       queryParameters: parameters.getQueryParameters(),
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
@@ -192,10 +216,12 @@ class OpenPricesAPIClient {
   static Future<MaybeError<Location>> getLocation(
     final int locationId, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/locations/$locationId',
+    final Uri uri = getApiUri(
+      'locations/$locationId',
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
@@ -215,11 +241,13 @@ class OpenPricesAPIClient {
   static Future<MaybeError<GetChallengesResult>> getChallenges(
     final GetChallengesParameters parameters, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/challenges',
+    final Uri uri = getApiUri(
+      'challenges',
       queryParameters: parameters.getQueryParameters(),
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
@@ -241,10 +269,12 @@ class OpenPricesAPIClient {
   static Future<MaybeError<Challenge>> getChallenge(
     final int challengeId, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/challenges/$challengeId',
+    final Uri uri = getApiUri(
+      'challenges/$challengeId',
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
@@ -264,12 +294,14 @@ class OpenPricesAPIClient {
   static Future<MaybeError<GetPriceProductsResult>> getPriceProducts(
     final GetPriceProductsParameters parameters, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
     final String? bearerToken,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/products',
+    final Uri uri = getApiUri(
+      'products',
       queryParameters: parameters.getQueryParameters(),
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
@@ -292,10 +324,12 @@ class OpenPricesAPIClient {
   static Future<MaybeError<PriceProduct>> getPriceProductById(
     final int productId, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/products/$productId',
+    final Uri uri = getApiUri(
+      'products/$productId',
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
@@ -317,10 +351,12 @@ class OpenPricesAPIClient {
   static Future<MaybeError<PriceProduct>> getPriceProductByCode(
     final String productCode, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/products/code/${Uri.encodeComponent(productCode)}',
+    final Uri uri = getApiUri(
+      'products/code/${Uri.encodeComponent(productCode)}',
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
@@ -345,8 +381,9 @@ class OpenPricesAPIClient {
   /// cf. https://prices.openfoodfacts.org/api/docs#/default/status_endpoint_api_v1_status_get
   static Future<MaybeError<String>> getStatus({
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
   }) async {
-    final Uri uri = getUri(path: '/api/v1/status', uriHelper: uriHelper);
+    final Uri uri = getApiUri('status', uriHelper: uriHelper, version: version);
     final Response response = await HttpHelper().doGetRequest(
       uri,
       uriHelper: uriHelper,
@@ -375,10 +412,12 @@ class OpenPricesAPIClient {
     required final String password,
     final bool setCookie = false,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/auth${setCookie ? '?set_cookie=1' : ''}',
+    final Uri uri = getApiUri(
+      'auth${setCookie ? '?set_cookie=1' : ''}',
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await post(
       uri,
@@ -398,9 +437,14 @@ class OpenPricesAPIClient {
   /// Returns the session details related to this [bearerToken].
   static Future<MaybeError<Session>> getUserSession({
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
     required final String bearerToken,
   }) async {
-    final Uri uri = getUri(path: '/api/v1/session', uriHelper: uriHelper);
+    final Uri uri = getApiUri(
+      'session',
+      uriHelper: uriHelper,
+      version: version,
+    );
     final Response response = await HttpHelper().doGetRequest(
       uri,
       uriHelper: uriHelper,
@@ -422,9 +466,14 @@ class OpenPricesAPIClient {
   /// Returns true if successful.
   static Future<MaybeError<bool>> deleteUserSession({
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
     required final String bearerToken,
   }) async {
-    final Uri uri = getUri(path: '/api/v1/session', uriHelper: uriHelper);
+    final Uri uri = getApiUri(
+      'session',
+      uriHelper: uriHelper,
+      version: version,
+    );
     final Response response = await HttpHelper().doDeleteRequest(
       uri,
       uriHelper: uriHelper,
@@ -445,8 +494,9 @@ class OpenPricesAPIClient {
     required final Price price,
     required final String bearerToken,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
   }) async {
-    final Uri uri = getUri(path: '/api/v1/prices', uriHelper: uriHelper);
+    final Uri uri = getApiUri('prices', uriHelper: uriHelper, version: version);
     final Map<String, dynamic> body = <String, dynamic>{
       'price': price.price,
       'currency': price.currency.name,
@@ -498,11 +548,13 @@ class OpenPricesAPIClient {
     final int priceId, {
     required final UpdatePriceParameters parameters,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
     required final String bearerToken,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/prices/$priceId',
+    final Uri uri = getApiUri(
+      'prices/$priceId',
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doPatchRequest(
       uri,
@@ -524,11 +576,13 @@ class OpenPricesAPIClient {
   static Future<MaybeError<bool>> deletePrice({
     required final int priceId,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
     required final String bearerToken,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/prices/$priceId',
+    final Uri uri = getApiUri(
+      'prices/$priceId',
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doDeleteRequest(
       uri,
@@ -545,12 +599,14 @@ class OpenPricesAPIClient {
   static Future<MaybeError<GetProofsResult>> getProofs(
     final GetProofsParameters parameters, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
     required final String bearerToken,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/proofs',
+    final Uri uri = getApiUri(
+      'proofs',
       queryParameters: parameters.getQueryParameters(),
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
@@ -582,8 +638,13 @@ class OpenPricesAPIClient {
     required final CreateProofParameters createProofParameters,
     required final String bearerToken,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
   }) async {
-    final Uri uri = getUri(path: '/api/v1/proofs/upload', uriHelper: uriHelper);
+    final Uri uri = getApiUri(
+      'proofs/upload',
+      uriHelper: uriHelper,
+      version: version,
+    );
 
     final MultipartRequest request = MultipartRequest('POST', uri);
     request.headers.addAll({
@@ -628,11 +689,13 @@ class OpenPricesAPIClient {
   static Future<MaybeError<Proof>> getProof(
     final int proofId, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
     required final String bearerToken,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/proofs/$proofId',
+    final Uri uri = getApiUri(
+      'proofs/$proofId',
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
@@ -658,11 +721,13 @@ class OpenPricesAPIClient {
     final int proofId, {
     required final UpdateProofParameters parameters,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
     required final String bearerToken,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/proofs/$proofId',
+    final Uri uri = getApiUri(
+      'proofs/$proofId',
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doPatchRequest(
       uri,
@@ -687,11 +752,13 @@ class OpenPricesAPIClient {
   static Future<MaybeError<bool>> deleteProof({
     required final int proofId,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
     required final String bearerToken,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/proofs/$proofId',
+    final Uri uri = getApiUri(
+      'proofs/$proofId',
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doDeleteRequest(
       uri,
@@ -707,12 +774,14 @@ class OpenPricesAPIClient {
   static Future<MaybeError<GetUsersResult>> getUsers(
     final GetUsersParameters parameters, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
     final String? bearerToken,
   }) async {
-    final Uri uri = getUri(
-      path: '/api/v1/users',
+    final Uri uri = getApiUri(
+      'users',
       queryParameters: parameters.getQueryParameters(),
       uriHelper: uriHelper,
+      version: version,
     );
     final Response response = await HttpHelper().doGetRequest(
       uri,
@@ -735,8 +804,9 @@ class OpenPricesAPIClient {
   /// Returns the total stats.
   static Future<MaybeError<PriceTotalStats>> getStats({
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
   }) async {
-    final Uri uri = getUri(path: '/api/v1/stats', uriHelper: uriHelper);
+    final Uri uri = getApiUri('stats', uriHelper: uriHelper, version: version);
     final Response response = await HttpHelper().doGetRequest(
       uri,
       uriHelper: uriHelper,

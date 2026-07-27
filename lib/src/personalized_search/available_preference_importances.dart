@@ -1,6 +1,7 @@
 import 'preference_importance.dart';
 import '../utils/http_helper.dart';
 import '../utils/open_food_api_configuration.dart';
+import '../utils/product_query_version.dart';
 import '../utils/uri_helper.dart';
 
 /// Referential of preference importance, with loader.
@@ -63,6 +64,7 @@ class AvailablePreferenceImportances {
   }
 
   List<String>? _importanceIds;
+
   List<String>? get importanceIds => _importanceIds;
   Map<String, PreferenceImportance>? _preferenceImportances;
   Map<String, int>? _importancesReverseIds;
@@ -72,8 +74,9 @@ class AvailablePreferenceImportances {
   static Uri getUri(
     final String languageCode, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ProductQueryVersion version = ProductQueryVersion.latestVersion,
   }) => uriHelper.getUri(
-    path: '/api/v3.4/preferences',
+    path: version.getApiPath('preferences'),
     queryParameters: {'lc': languageCode},
   );
 

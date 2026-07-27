@@ -1,6 +1,7 @@
 import '../model/attribute_group.dart';
 import '../utils/http_helper.dart';
 import '../utils/open_food_api_configuration.dart';
+import '../utils/product_query_version.dart';
 import '../utils/uri_helper.dart';
 
 /// Referential of attribute groups, with loader.
@@ -53,8 +54,9 @@ class AvailableAttributeGroups {
   static Uri getUri(
     final String languageCode, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ProductQueryVersion version = ProductQueryVersion.latestVersion,
   }) => uriHelper.getUri(
-    path: '/api/v3.4/attribute_groups',
+    path: version.getApiPath('attribute_groups'),
     queryParameters: {'lc': languageCode},
   );
 }
