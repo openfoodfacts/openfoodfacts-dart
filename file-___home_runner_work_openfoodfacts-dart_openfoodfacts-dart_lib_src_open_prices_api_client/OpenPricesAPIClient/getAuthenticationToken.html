@@ -59,6 +59,7 @@
 <li><span class="parameter" id="getAuthenticationToken-param-password"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.12.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">password</span>, </span></li>
 <li><span class="parameter" id="getAuthenticationToken-param-setCookie"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.12.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">setCookie</span> = <span class="default-value">false</span>, </span></li>
 <li><span class="parameter" id="getAuthenticationToken-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>, </span></li>
+<li><span class="parameter" id="getAuthenticationToken-param-version"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_api_version/ApiVersion-class.html">ApiVersion</a></span> <span class="parameter-name">version</span> = <span class="default-value">defaultVersion</span>, </span></li>
 </ol>})
 
       
@@ -86,10 +87,12 @@ To authenticate, you can either:</p>
   required final String password,
   final bool setCookie = false,
   final UriProductHelper uriHelper = uriHelperFoodProd,
+  final ApiVersion version = defaultVersion,
 }) async {
-  final Uri uri = getUri(
-    path: &#39;&#47;api&#47;v1&#47;auth${setCookie ? &#39;?set_cookie=1&#39; : &#39;&#39;}&#39;,
+  final Uri uri = getApiUri(
+    &#39;auth${setCookie ? &#39;?set_cookie=1&#39; : &#39;&#39;}&#39;,
     uriHelper: uriHelper,
+    version: version,
   );
   final Response response = await post(
     uri,

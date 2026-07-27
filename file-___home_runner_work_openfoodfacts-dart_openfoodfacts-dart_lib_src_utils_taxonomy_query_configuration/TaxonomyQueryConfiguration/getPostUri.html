@@ -55,8 +55,9 @@
     <section class="multi-line-signature">
       
 <span class="returntype"><a href="https://api.dart.dev/stable/3.12.2/dart-core/Uri-class.html">Uri</a></span>
-<span class="name ">getPostUri</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="getPostUri-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span></span></li>
-</ol>)
+<span class="name ">getPostUri</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="getPostUri-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span>, {</span></li>
+<li><span class="parameter" id="getPostUri-param-version"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_api_version/ApiVersion-class.html">ApiVersion</a></span> <span class="parameter-name">version</span> = <span class="default-value">defaultVersion</span>, </span></li>
+</ol>})
 
       
 
@@ -67,8 +68,10 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Uri getPostUri(final UriProductHelper uriHelper) =&gt;
-    uriHelper.getPostUri(path: &#39;api&#47;v2&#47;taxonomy&#39;);</code></pre>
+  <pre class="language-dart"><code class="language-dart">Uri getPostUri(
+  final UriProductHelper uriHelper, {
+  final ApiVersion version = defaultVersion,
+}) =&gt; uriHelper.getPostUri(path: version.getApiPath(&#39;taxonomy&#39;));</code></pre>
 </section>
 
 

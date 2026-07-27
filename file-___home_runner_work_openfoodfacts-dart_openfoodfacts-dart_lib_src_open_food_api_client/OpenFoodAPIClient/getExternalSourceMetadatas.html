@@ -55,7 +55,7 @@
     <section class="multi-line-signature">
       
 <span class="returntype"><a href="https://api.dart.dev/stable/3.12.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_prices_maybe_error/MaybeError-class.html">MaybeError</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.12.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_external_external_source_metadata/ExternalSourceMetadata-class.html">ExternalSourceMetadata</a></span>&gt;</span></span>&gt;</span></span>&gt;</span></span>
-<span class="name ">getExternalSourceMetadatas</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="getExternalSourceMetadatas-param-version"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_version/ProductQueryVersion-class.html">ProductQueryVersion</a></span> <span class="parameter-name">version</span> = <span class="default-value">ProductQueryVersion.v3</span>, </span></li>
+<span class="name ">getExternalSourceMetadatas</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="getExternalSourceMetadatas-param-version"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_version/ProductQueryVersion-class.html">ProductQueryVersion</a></span> <span class="parameter-name">version</span> = <span class="default-value">ProductQueryVersion.latestVersion</span>, </span></li>
 <li><span class="parameter" id="getExternalSourceMetadatas-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>, </span></li>
 </ol>})
 
@@ -73,11 +73,11 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static Future&lt;MaybeError&lt;List&lt;ExternalSourceMetadata&gt;&gt;&gt;
 getExternalSourceMetadatas({
-  final ProductQueryVersion version = ProductQueryVersion.v3,
+  final ProductQueryVersion version = ProductQueryVersion.latestVersion,
   final UriProductHelper uriHelper = uriHelperFoodProd,
 }) async {
   final Response response = await HttpHelper().doGetRequest(
-    uriHelper.getUri(path: &#39;api&#47;v${version.version}&#47;external_sources&#39;),
+    uriHelper.getUri(path: version.getApiPath(&#39;external_sources&#39;)),
     uriHelper: uriHelper,
   );
   if (response.statusCode != 200) {

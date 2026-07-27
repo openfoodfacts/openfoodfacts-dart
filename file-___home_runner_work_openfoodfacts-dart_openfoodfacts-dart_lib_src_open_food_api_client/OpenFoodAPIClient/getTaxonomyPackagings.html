@@ -58,6 +58,7 @@
 <span class="name ">getTaxonomyPackagings</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="getTaxonomyPackagings-param-configuration"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_taxonomy_packaging/TaxonomyPackagingQueryConfiguration-class.html">TaxonomyPackagingQueryConfiguration</a></span> <span class="parameter-name">configuration</span>, {</span></li>
 <li><span class="parameter" id="getTaxonomyPackagings-param-user"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_user/User-class.html">User</a>?</span> <span class="parameter-name">user</span>, </span></li>
 <li><span class="parameter" id="getTaxonomyPackagings-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>, </span></li>
+<li><span class="parameter" id="getTaxonomyPackagings-param-version"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_api_version/ApiVersion-class.html">ApiVersion</a></span> <span class="parameter-name">version</span> = <span class="default-value">TaxonomyQueryConfiguration.defaultVersion</span>, </span></li>
 </ol>})
 
       
@@ -73,10 +74,12 @@
   final TaxonomyPackagingQueryConfiguration configuration, {
   final User? user,
   final UriProductHelper uriHelper = uriHelperFoodProd,
+  final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
 }) =&gt; getTaxonomy&lt;TaxonomyPackaging, TaxonomyPackagingField&gt;(
   configuration,
   user: user,
   uriHelper: uriHelper,
+  version: version,
 );</code></pre>
 </section>
 

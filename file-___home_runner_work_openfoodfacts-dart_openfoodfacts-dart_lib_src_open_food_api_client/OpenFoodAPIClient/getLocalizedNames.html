@@ -59,6 +59,7 @@
 <li><span class="parameter" id="getLocalizedNames-param-canonicalTags"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.12.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.12.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">canonicalTags</span>, </span></li>
 <li><span class="parameter" id="getLocalizedNames-param-language"><span>required</span> <span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_language_helper/OpenFoodFactsLanguage.html">OpenFoodFactsLanguage</a></span> <span class="parameter-name">language</span>, </span></li>
 <li><span class="parameter" id="getLocalizedNames-param-uriHelper"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_uri_helper/UriProductHelper-class.html">UriProductHelper</a></span> <span class="parameter-name">uriHelper</span> = <span class="default-value">uriHelperFoodProd</span>, </span></li>
+<li><span class="parameter" id="getLocalizedNames-param-version"><span class="type-annotation"><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_utils_product_query_version/ProductQueryVersion-class.html">ProductQueryVersion</a></span> <span class="parameter-name">version</span> = <span class="default-value">ProductQueryVersion.latestVersion</span>, </span></li>
 </ol>})
 
       
@@ -80,6 +81,7 @@ The result in FRENCH would then be something like <code>{'en:banana': 'banane', 
   required final List&lt;String&gt; canonicalTags,
   required final OpenFoodFactsLanguage language,
   final UriProductHelper uriHelper = uriHelperFoodProd,
+  final ProductQueryVersion version = ProductQueryVersion.latestVersion,
 }) async {
   final List&lt;String&gt; input = _cleanTags(canonicalTags);
   if (input.isEmpty) {
@@ -91,7 +93,7 @@ The result in FRENCH would then be something like <code>{'en:banana': 'banane', 
     &#39;canonical_tags_list&#39;: input.join(&#39;,&#39;),
   };
   final Uri uri = uriHelper.getUri(
-    path: &#39;&#47;api&#47;v3&#47;taxonomy_display_tags&#39;,
+    path: version.getApiPath(&#39;taxonomy_display_tags&#39;),
     queryParameters: queryParameters,
   );
   final Response response = await HttpHelper().doGetRequest(
