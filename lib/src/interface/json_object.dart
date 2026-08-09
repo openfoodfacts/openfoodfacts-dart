@@ -70,11 +70,9 @@ abstract class JsonObject {
   /// Returns all values as a String separated by a hyphen
   /// value1 - value2 - value3
   static String toValueStringStatic(Map<String, dynamic> json) {
-    String result = '';
-    for (MapEntry<String, dynamic> entry in json.entries) {
-      result = result + (entry.value != null ? ' - ${entry.value}' : '');
-    }
-
-    return result;
+    return json.values
+      .where((value) => value != null)
+      .map((value) => value.toString())
+      .join(' - ');
   }
 }
