@@ -1,8 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'off_tagged.dart';
 import '../interface/json_object.dart';
-import '../interface/parameter.dart';
-import '../utils/country_helper.dart';
 import '../utils/language_helper.dart';
 import '../utils/taxonomy_query_configuration.dart';
 import '../utils/tag_type.dart';
@@ -80,17 +78,11 @@ class TaxonomyAllergenQueryConfiguration
 
   /// Configuration to get ALL the allergens.
   TaxonomyAllergenQueryConfiguration.all({
-    final List<OpenFoodFactsLanguage>? languages,
-    final OpenFoodFactsCountry? country,
-    final List<TaxonomyAllergenField> fields = const [],
-    final List<Parameter> additionalParameters = const [],
-  }) : super.roots(
-         TagType.ALLERGENS,
-         languages: languages,
-         country: country,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+  }) : super.roots(TagType.ALLERGENS);
 
   @override
   Map<String, TaxonomyAllergen> convertResults(dynamic jsonData) {

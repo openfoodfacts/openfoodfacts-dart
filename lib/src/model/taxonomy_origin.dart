@@ -1,8 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'off_tagged.dart';
 import '../interface/json_object.dart';
-import '../interface/parameter.dart';
-import '../utils/country_helper.dart';
 import '../utils/language_helper.dart';
 import '../utils/taxonomy_query_configuration.dart';
 import '../utils/tag_type.dart';
@@ -89,19 +87,12 @@ class TaxonomyOriginQueryConfiguration
   }) : super(TagType.ORIGINS, tags);
 
   TaxonomyOriginQueryConfiguration.roots({
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyOriginField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-    bool includeChildren = false,
-  }) : super.roots(
-         TagType.ORIGINS,
-         languages: languages,
-         country: country,
-         includeChildren: includeChildren,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+    super.includeChildren = false,
+  }) : super.roots(TagType.ORIGINS);
 
   @override
   Map<String, TaxonomyOrigin> convertResults(dynamic jsonData) {

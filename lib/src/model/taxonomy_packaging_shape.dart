@@ -1,8 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'off_tagged.dart';
 import '../interface/json_object.dart';
-import '../interface/parameter.dart';
-import '../utils/country_helper.dart';
 import '../utils/language_helper.dart';
 import '../utils/taxonomy_query_configuration.dart';
 import '../utils/tag_type.dart';
@@ -83,19 +81,12 @@ class TaxonomyPackagingShapeQueryConfiguration
   }) : super(TagType.PACKAGING_SHAPES, tags);
 
   TaxonomyPackagingShapeQueryConfiguration.roots({
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyPackagingShapeField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-    bool includeChildren = false,
-  }) : super.roots(
-         TagType.PACKAGING_SHAPES,
-         languages: languages,
-         country: country,
-         includeChildren: includeChildren,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+    super.includeChildren = false,
+  }) : super.roots(TagType.PACKAGING_SHAPES);
 
   @override
   Map<String, TaxonomyPackagingShape> convertResults(dynamic jsonData) {
