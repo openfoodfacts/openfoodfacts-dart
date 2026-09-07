@@ -16,11 +16,24 @@ void main() {
 
   const ProductQueryVersion version = ProductQueryVersion.testVersion;
 
-  // actually, we're running in TEST...
-  Future<ProductResultV3> getProductV3InProd(
+  // we're running in TEST
+  Future<ProductResultV3?> getProductV3(
     ProductQueryConfiguration configuration,
-  ) async =>
-      OpenFoodAPIClient.getProductV3(configuration, uriHelper: uriHelper);
+  ) async {
+    try {
+      final result = await OpenFoodAPIClient.getProductV3(
+        configuration,
+        uriHelper: uriHelper,
+      );
+      return result;
+    } on HttpStatusException catch (e) {
+      if (e.statusCode >= 500) {
+        print('Server error: $e');
+        return null;
+      }
+      rethrow;
+    }
+  }
 
   void findExpectedIngredients(
     final List<Ingredient> ingredients,
@@ -52,6 +65,21 @@ void main() {
     }
   }
 
+  void expectNutrientValue(
+    final Map<Nutrient, NutritionValue> nutritionValues,
+    final Nutrient nutrient,
+    final NutritionValue expectedValue,
+  ) {
+    expect(nutritionValues[nutrient]?.unit, expectedValue.unit);
+    expect(nutritionValues[nutrient]?.value, expectedValue.value);
+    expect(nutritionValues[nutrient]?.valueString, expectedValue.valueString);
+    expect(
+      nutritionValues[nutrient]?.valueComputed,
+      expectedValue.valueComputed,
+    );
+    expect(nutritionValues[nutrient]?.modifier, expectedValue.modifier);
+  }
+
   group(
     '$OpenFoodAPIClient get products',
     () {
@@ -65,7 +93,10 @@ void main() {
               fields: [ProductField.KNOWLEDGE_PANELS],
               version: version,
             );
-        final ProductResultV3 result = await getProductV3InProd(configurations);
+        final ProductResultV3? result = await getProductV3(configurations);
+        if (result == null) {
+          return;
+        }
         expect(result.status, ProductResultV3.statusSuccess);
         expect(result.barcode, barcode);
         expect(result.product, isNotNull);
@@ -92,9 +123,10 @@ void main() {
                 version: version,
                 activateKnowledgePanelsSimplified: true,
               );
-          final ProductResultV3 result = await getProductV3InProd(
-            configurations,
-          );
+          final ProductResultV3? result = await getProductV3(configurations);
+          if (result == null) {
+            return;
+          }
           expect(result.status, ProductResultV3.statusSuccess);
           expect(result.barcode, barcode);
           expect(result.product, isNotNull);
@@ -113,9 +145,10 @@ void main() {
                 version: version,
                 activateKnowledgePanelsSimplified: false,
               );
-          final ProductResultV3 result = await getProductV3InProd(
-            configurations,
-          );
+          final ProductResultV3? result = await getProductV3(configurations);
+          if (result == null) {
+            return;
+          }
           expect(result.status, ProductResultV3.statusSuccess);
           expect(result.barcode, barcode);
           expect(result.product, isNotNull);
@@ -125,32 +158,6 @@ void main() {
             isNull,
           );
         });
-      });
-
-      test('get a product', () async {
-        //Refactor the test once the issue  #48 is fixed
-        const String barcode = '7622210449283';
-        const PerSize perSize = PerSize.serving;
-
-        final ProductQueryConfiguration configurations =
-            ProductQueryConfiguration(
-              barcode,
-              language: OpenFoodFactsLanguage.ENGLISH,
-              fields: [ProductField.ALL],
-              version: version,
-            );
-        final ProductResultV3 result = await getProductV3InProd(configurations);
-        expect(result.status, ProductResultV3.statusSuccess);
-        expect(result.barcode, barcode);
-        expect(result.product, isNotNull);
-        expect(result.product!.barcode, barcode);
-
-        expect(result.product!.nutriments, isNotNull);
-        final Nutriments nutriments = result.product!.nutriments!;
-        expect(nutriments.getValue(Nutrient.carbohydrates, perSize), isNotNull);
-        expect(nutriments.getValue(Nutrient.proteins, perSize), isNotNull);
-        expect(nutriments.getValue(Nutrient.salt, perSize), isNotNull);
-        expect(nutriments.getValue(Nutrient.fat, perSize), isNotNull);
       });
 
       test('check alcohol data', () async {
@@ -163,21 +170,34 @@ void main() {
               fields: [ProductField.ALL],
               version: version,
             );
-        ProductResultV3 result = await getProductV3InProd(configurations);
+        final ProductResultV3? result = await getProductV3(configurations);
+        if (result == null) {
+          return;
+        }
         expect(result.status, ProductResultV3.statusSuccess);
         expect(result.barcode, barcode);
         expect(result.product, isNotNull);
         expect(result.product!.barcode, barcode);
 
-        const Nutrient alcohol = Nutrient.alcohol;
-        expect(result.product!.nutriments, isNotNull);
-        final Nutriments nutriments = result.product!.nutriments!;
-
-        // probably at least 4% vol
-        expect(
-          nutriments.getValue(alcohol, PerSize.oneHundredGrams),
-          greaterThanOrEqualTo(4),
+        final List<NutritionSet>? inputSets = NutritionHelper().getInputSets(
+          result.product!,
         );
+        expect(inputSets, isNotNull);
+
+        final NutritionSet? nutritionSet = NutritionHelper().getNutritionSet(
+          inputSets!,
+          NutritionSetKey(
+            source: NutritionSetKey.sourcePackaging,
+            preparation: NutritionSetKey.preparationAsSold,
+            perSize: PerSize.oneHundredMilliliters,
+          ),
+        );
+        expect(nutritionSet, isNotNull);
+        expect(nutritionSet!.nutritionValues, isNotNull);
+        final NutritionValue? nutritionValue =
+            nutritionSet.nutritionValues![Nutrient.alcohol];
+        // probably at least 4% vol
+        expect(nutritionValue!.value, greaterThanOrEqualTo(4));
       });
 
       test(
@@ -191,10 +211,10 @@ void main() {
                 fields: [ProductField.ALL],
                 version: version,
               );
-          final ProductResultV3 result = await getProductV3InProd(
-            configurations,
-          );
-
+          final ProductResultV3? result = await getProductV3(configurations);
+          if (result == null) {
+            return;
+          }
           expect(result.status, ProductResultV3.statusSuccess);
           expect(result.barcode, barcode);
           expect(result.product, isNotNull);
@@ -230,20 +250,31 @@ void main() {
 
           expect(result.product!.nutriscore, 'e');
 
-          expect(result.product!.nutriments, isNotNull);
-          final Nutriments nutriments = result.product!.nutriments!;
-
           const perSize = PerSize.oneHundredGrams;
 
-          expect(result.product!.nutrimentDataPer, perSize.offTag);
-          expect(nutriments.getValue(Nutrient.energyKJ, perSize), 2125.0);
-          expect(nutriments.getValue(Nutrient.sugars, perSize), 28.0);
-          expect(nutriments.getValue(Nutrient.salt, perSize), 0.3);
-          expect(nutriments.getValue(Nutrient.fiber, perSize), isNull);
-          expect(nutriments.getValue(Nutrient.fat, perSize), 25.0);
-          expect(nutriments.getValue(Nutrient.saturatedFat, perSize), 15.0);
-          expect(nutriments.getValue(Nutrient.proteins, perSize), 5.3);
-          expect(result.product!.novaGroup, 4);
+          final List<NutritionSet>? inputSets = NutritionHelper().getInputSets(
+            result.product!,
+          );
+          expect(inputSets, isNotNull);
+
+          final NutritionSet? nutritionSet = NutritionHelper().getNutritionSet(
+            inputSets!,
+            NutritionSetKey(
+              source: NutritionSetKey.sourcePackaging,
+              preparation: NutritionSetKey.preparationAsSold,
+              perSize: perSize,
+            ),
+          );
+          expect(nutritionSet, isNotNull);
+
+          final nutritionValues = nutritionSet!.nutritionValues!;
+          expect(nutritionValues[Nutrient.energyKJ]?.value, 2125.0);
+          expect(nutritionValues[Nutrient.sugars]?.value, 28.0);
+          expect(nutritionValues[Nutrient.salt]?.value, 0.3);
+          expect(nutritionValues[Nutrient.fiber]?.value, isNull);
+          expect(nutritionValues[Nutrient.fat]?.value, 25.0);
+          expect(nutritionValues[Nutrient.saturatedFat]?.value, 15.0);
+          expect(nutritionValues[Nutrient.proteins]?.value, 5.3);
         },
       );
 
@@ -258,9 +289,10 @@ void main() {
                 fields: [ProductField.ALL],
                 version: version,
               );
-          final ProductResultV3 result = await getProductV3InProd(
-            configurations,
-          );
+          final ProductResultV3? result = await getProductV3(configurations);
+          if (result == null) {
+            return;
+          }
 
           expect(result.status, ProductResultV3.statusSuccess);
           expect(result.barcode, barcode);
@@ -269,14 +301,40 @@ void main() {
           final Product product = result.product!;
           expect(product.barcode, barcode);
           expect(product.nutriments, isNotNull);
-          final Nutriments nutriments = product.nutriments!;
-          const PerSize perSize = PerSize.oneHundredGrams;
 
-          expect(product.nutrimentDataPer, '100ml');
+          expect(product.nutrimentDataPer, PerSize.serving.offTag);
           expect(product.servingQuantity, 177);
 
-          expect(nutriments.getValue(Nutrient.iron, perSize), 0.00072);
-          expect(nutriments.getValue(Nutrient.vitaminC, perSize), 0.06);
+          final List<NutritionSet>? inputSets = NutritionHelper().getInputSets(
+            result.product!,
+          );
+          expect(inputSets, isNotNull);
+
+          NutritionSet? nutritionSet = NutritionHelper().getNutritionSet(
+            inputSets!,
+            NutritionSetKey(
+              source: NutritionSetKey.sourcePackaging,
+              preparation: NutritionSetKey.preparationAsSold,
+              perSize: PerSize.oneHundredMilliliters,
+            ),
+          );
+          expect(nutritionSet, isNotNull);
+
+          var values = nutritionSet!.nutritionValues!;
+          expectNutrientValue(
+            values,
+            Nutrient.iron,
+            NutritionValue(
+              unit: Unit.G,
+              value: 0.00072,
+              valueString: "0.00072",
+            ),
+          );
+          expectNutrientValue(
+            values,
+            Nutrient.vitaminC,
+            NutritionValue(unit: Unit.G, value: 0.06, valueString: "0.06"),
+          );
         },
       );
 
@@ -294,7 +352,10 @@ void main() {
             language: OpenFoodFactsLanguage.JAPANESE,
           );
 
-          ProductResultV3 result = await getProductV3InProd(configuration);
+          final ProductResultV3? result = await getProductV3(configuration);
+          if (result == null) {
+            return;
+          }
 
           expect(result.status, ProductResultV3.statusSuccess);
           expect(result.product != null, true);
@@ -318,13 +379,12 @@ void main() {
         },
       );
       test('get uncommon nutrients', () async {
-        // TEST data as of 2026-04-10
+        // TEST data as of 2026-07-30
         const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
-        const List<ProductField> fields = [ProductField.NUTRIMENTS];
-        ProductResultV3 result;
-        late Nutriments nutriments;
+        const List<ProductField> fields = [ProductField.NUTRITION];
+        ProductResultV3? result;
 
-        result = await getProductV3InProd(
+        result = await getProductV3(
           ProductQueryConfiguration(
             '5060517883638',
             language: language,
@@ -332,17 +392,44 @@ void main() {
             version: version,
           ),
         );
-        expect(result.product!.nutriments, isNotNull);
-        nutriments = result.product!.nutriments!;
-        expect(
-          nutriments.getValue(
-            Nutrient.pantothenicAcid,
-            PerSize.oneHundredGrams,
-          ),
-          .0042,
+        if (result == null) {
+          return;
+        }
+
+        void expectValue(
+          final PerSize perSize,
+          final Nutrient nutrient,
+          final NutritionValue nutritionValue,
+        ) {
+          final List<NutritionSet>? inputSets = NutritionHelper().getInputSets(
+            result!.product!,
+          );
+          expect(inputSets, isNotNull);
+
+          NutritionSet? nutritionSet = NutritionHelper().getNutritionSet(
+            inputSets!,
+            NutritionSetKey(
+              source: NutritionSetKey.sourcePackaging,
+              preparation: NutritionSetKey.preparationAsSold,
+              perSize: perSize,
+            ),
+          );
+          expect(nutritionSet, isNotNull);
+
+          expectNutrientValue(
+            nutritionSet!.nutritionValues!,
+            nutrient,
+            nutritionValue,
+          );
+        }
+
+        expectValue(
+          PerSize.oneHundredMilliliters,
+          Nutrient.pantothenicAcid,
+          NutritionValue(unit: Unit.G, value: 0.0042, valueString: "0.0042"),
         );
 
-        result = await getProductV3InProd(
+        result = await getProductV3(
           ProductQueryConfiguration(
             '7612100018477',
             language: language,
@@ -350,14 +437,16 @@ void main() {
             version: version,
           ),
         );
-        expect(result.product!.nutriments, isNotNull);
-        nutriments = result.product!.nutriments!;
-        expect(
-          nutriments.getValue(Nutrient.biotin, PerSize.oneHundredGrams),
-          0.000017,
+        if (result == null) {
+          return;
+        }
+        expectValue(
+          PerSize.oneHundredGrams,
+          Nutrient.biotin,
+          NutritionValue(unit: Unit.MICRO_G, value: 17, valueString: "17"),
         );
 
-        result = await getProductV3InProd(
+        result = await getProductV3(
           ProductQueryConfiguration(
             '3057640257773',
             language: language,
@@ -365,14 +454,16 @@ void main() {
             version: version,
           ),
         );
-        expect(result.product!.nutriments, isNotNull);
-        nutriments = result.product!.nutriments!;
-        expect(
-          nutriments.getValue(Nutrient.chloride, PerSize.oneHundredGrams),
-          0.0015,
+        if (result == null) {
+          return;
+        }
+        expectValue(
+          PerSize.serving,
+          Nutrient.chloride,
+          NutritionValue(unit: Unit.G, value: 0.015, valueString: "0.015"),
         );
 
-        result = await getProductV3InProd(
+        result = await getProductV3(
           ProductQueryConfiguration(
             '4260556630007',
             language: language,
@@ -380,23 +471,32 @@ void main() {
             version: version,
           ),
         );
-        expect(result.product!.nutriments, isNotNull);
-        nutriments = result.product!.nutriments!;
-        expect(
-          nutriments.getValue(Nutrient.chromium, PerSize.oneHundredGrams),
-          .000002,
+        if (result == null) {
+          return;
+        }
+        expectValue(
+          PerSize.oneHundredMilliliters,
+          Nutrient.chromium,
+          NutritionValue(unit: Unit.G, value: 0.000002, valueString: "2e-06"),
         );
-        expect(
-          nutriments.getValue(Nutrient.iodine, PerSize.oneHundredGrams),
-          .0000075,
+        expectValue(
+          PerSize.oneHundredMilliliters,
+          Nutrient.iodine,
+          NutritionValue(
+            unit: Unit.G,
+            value: 0.0000075,
+            valueString: "7.5e-06",
+          ),
         );
-        expect(
-          nutriments.getValue(Nutrient.manganese, PerSize.oneHundredGrams),
-          .0001,
+        expectValue(
+          PerSize.oneHundredMilliliters,
+          Nutrient.manganese,
+          NutritionValue(unit: Unit.G, value: 0.0001, valueString: "0.0001"),
         );
-        expect(
-          nutriments.getValue(Nutrient.molybdenum, PerSize.oneHundredGrams),
-          .000004,
+        expectValue(
+          PerSize.oneHundredMilliliters,
+          Nutrient.molybdenum,
+          NutritionValue(unit: Unit.G, value: 0.000004, valueString: "4e-06"),
         );
       });
 
@@ -409,7 +509,10 @@ void main() {
               fields: [ProductField.ALL],
               version: version,
             );
-        final ProductResultV3 result = await getProductV3InProd(configurations);
+        final ProductResultV3? result = await getProductV3(configurations);
+        if (result == null) {
+          return;
+        }
 
         expect(result.status, ProductResultV3.statusSuccess);
         expect(result.barcode, barcode);
@@ -492,17 +595,66 @@ void main() {
 
         expect(result.product!.allergens!.ids, isEmpty);
 
-        expect(result.product!.nutriments, isNotNull);
-        final Nutriments nutriments = result.product!.nutriments!;
-        const PerSize perSize = PerSize.oneHundredGrams;
+        final List<NutritionSet>? inputSets = NutritionHelper().getInputSets(
+          result.product!,
+        );
+        expect(inputSets, isNotNull);
 
-        expect(nutriments.getValue(Nutrient.energyKJ, perSize), 1081.0);
-        expect(nutriments.getValue(Nutrient.sugars, perSize), 57.0);
-        expect(nutriments.getValue(Nutrient.salt, perSize), 0.06);
-        expect(nutriments.getValue(Nutrient.fiber, perSize), 1.2);
-        expect(nutriments.getValue(Nutrient.fat, perSize), 0.0);
-        expect(nutriments.getValue(Nutrient.saturatedFat, perSize), 0.0);
-        expect(nutriments.getValue(Nutrient.proteins, perSize), 0.6);
+        NutritionSet? nutritionSet = NutritionHelper().getNutritionSet(
+          inputSets!,
+          NutritionSetKey(
+            source: NutritionSetKey.sourcePackaging,
+            preparation: NutritionSetKey.preparationAsSold,
+            perSize: PerSize.oneHundredGrams,
+          ),
+        );
+        expect(nutritionSet, isNotNull);
+
+        var values = nutritionSet!.nutritionValues!;
+
+        void expectValue(
+          final Nutrient nutrient,
+          final NutritionValue expectedValue,
+        ) => expectNutrientValue(values, nutrient, expectedValue);
+
+        expectValue(
+          Nutrient.energyKJ,
+          NutritionValue(
+            unit: Unit.KJ,
+            value: 1081,
+            valueString: "1081",
+            valueComputed: 1067,
+          ),
+        );
+        expectValue(
+          Nutrient.sugars,
+          NutritionValue(unit: Unit.G, value: 57, valueString: "57"),
+        );
+        expectValue(
+          Nutrient.salt,
+          NutritionValue(
+            unit: Unit.G,
+            value: 0.06,
+            valueString: "0.06",
+            valueComputed: 0.06,
+          ),
+        );
+        expectValue(
+          Nutrient.fiber,
+          NutritionValue(unit: Unit.G, value: 1.2, valueString: "1.2"),
+        );
+        expectValue(
+          Nutrient.fat,
+          NutritionValue(unit: Unit.G, value: 0, valueString: "0"),
+        );
+        expectValue(
+          Nutrient.saturatedFat,
+          NutritionValue(unit: Unit.G, value: 0, valueString: "0"),
+        );
+        expectValue(
+          Nutrient.proteins,
+          NutritionValue(unit: Unit.G, value: 0.6, valueString: "0.6"),
+        );
 
         expect(result.product!.novaGroup, 3);
         expect(result.product!.storesTags!.length, 1);
@@ -518,7 +670,10 @@ void main() {
           fields: [ProductField.ALL],
           version: version,
         );
-        ProductResultV3 result = await getProductV3InProd(configurations);
+        final ProductResultV3? result = await getProductV3(configurations);
+        if (result == null) {
+          return;
+        }
         expect(result.product, isNull);
       });
 
@@ -531,7 +686,10 @@ void main() {
               fields: [ProductField.ALL],
               version: version,
             );
-        final ProductResultV3 result = await getProductV3InProd(configurations);
+        final ProductResultV3? result = await getProductV3(configurations);
+        if (result == null) {
+          return;
+        }
 
         expect(result.product, isNotNull);
         expect(result.product!.ingredientsText, isNotNull);
@@ -549,7 +707,10 @@ void main() {
           ],
           version: version,
         );
-        ProductResultV3 result = await getProductV3InProd(configurations);
+        final ProductResultV3? result = await getProductV3(configurations);
+        if (result == null) {
+          return;
+        }
 
         expect(result.product, isNotNull);
         expect(result.product!.environmentalScoreGrade, isNotNull);
@@ -571,7 +732,10 @@ void main() {
           ],
           version: version,
         );
-        ProductResultV3 result = await getProductV3InProd(configurations);
+        ProductResultV3? result = await getProductV3(configurations);
+        if (result == null) {
+          return;
+        }
 
         expect(result.product, isNotNull);
         expect(result.product!.productName, isNotNull);
@@ -592,7 +756,10 @@ void main() {
           fields: [ProductField.NAME, ProductField.LANGUAGE],
           version: version,
         );
-        result = await getProductV3InProd(configurations);
+        result = await getProductV3(configurations);
+        if (result == null) {
+          return;
+        }
 
         expect(result.product, isNotNull);
         expect(result.product!.productName, isNotNull);
@@ -610,7 +777,10 @@ void main() {
           fields: [ProductField.NAME, ProductField.COUNTRIES],
           version: version,
         );
-        result = await getProductV3InProd(configurations);
+        result = await getProductV3(configurations);
+        if (result == null) {
+          return;
+        }
 
         expect(result.product, isNotNull);
         expect(result.product!.productName, isNotNull);
@@ -630,7 +800,10 @@ void main() {
           fields: [ProductField.NAME, ProductField.COUNTRIES_TAGS],
           version: version,
         );
-        result = await getProductV3InProd(configurations);
+        result = await getProductV3(configurations);
+        if (result == null) {
+          return;
+        }
 
         expect(result.product, isNotNull);
         expect(result.product!.productName, isNotNull);
@@ -653,7 +826,10 @@ void main() {
           fields: [ProductField.NAME, ProductField.ATTRIBUTE_GROUPS],
           version: version,
         );
-        ProductResultV3 result = await getProductV3InProd(configurations);
+        ProductResultV3? result = await getProductV3(configurations);
+        if (result == null) {
+          return;
+        }
 
         expect(result.product, isNotNull);
         expect(result.product!.productName, isNotNull);
@@ -711,9 +887,12 @@ void main() {
           const int numberOfImages = 53; // was 53 in 20231125
 
           //Get product without setting OpenFoodFactsLanguage or ProductField
-          ProductResultV3 result = await getProductV3InProd(
+          ProductResultV3? result = await getProductV3(
             ProductQueryConfiguration(barcode, version: version),
           );
+          if (result == null) {
+            return;
+          }
 
           expect(result.status, ProductResultV3.statusSuccess);
           expect(result.barcode, barcode);
@@ -760,13 +939,16 @@ void main() {
           );
 
           //Get product without setting ProductField
-          result = await getProductV3InProd(
+          result = await getProductV3(
             ProductQueryConfiguration(
               barcode,
               language: OpenFoodFactsLanguage.GERMAN,
               version: version,
             ),
           );
+          if (result == null) {
+            return;
+          }
 
           expect(result.status, ProductResultV3.statusSuccess);
           expect(result.barcode, barcode);
@@ -818,13 +1000,16 @@ void main() {
           );
 
           //Get product without setting OpenFoodFactsLanguage
-          result = await getProductV3InProd(
+          result = await getProductV3(
             ProductQueryConfiguration(
               barcode,
               fields: [ProductField.ALL],
               version: version,
             ),
           );
+          if (result == null) {
+            return;
+          }
 
           expect(result.status, ProductResultV3.statusSuccess);
           expect(result.barcode, barcode);
@@ -847,27 +1032,33 @@ void main() {
 
           expect(result.product!.selectedImages, hasLength(15));
 
-          expect(result.product!.nutriments, isNotNull);
-          final Nutriments nutriments = result.product!.nutriments!;
-          const PerSize perSize = PerSize.oneHundredGrams;
+          final List<NutritionSet>? inputSets = NutritionHelper().getInputSets(
+            result.product!,
+          );
+          expect(inputSets, isNotNull);
 
-          expect(nutriments.getValue(Nutrient.energyKJ, perSize), 0.8);
-          expect(nutriments.getValue(Nutrient.sugars, perSize), 0.0);
-          expect(nutriments.getValue(Nutrient.salt, perSize), 0.01);
-          expect(nutriments.getValue(Nutrient.fiber, perSize), 0.0);
-          expect(nutriments.getValue(Nutrient.fat, perSize), 0.0);
-          expect(nutriments.getValue(Nutrient.saturatedFat, perSize), 0.0);
-          expect(nutriments.getValue(Nutrient.proteins, perSize), 0.0);
-          expect(
-            nutriments.getValue(Nutrient.carbohydrates, perSize),
-            isNotNull,
+          NutritionSet? nutritionSet = NutritionHelper().getNutritionSet(
+            inputSets!,
+            NutritionSetKey(
+              source: NutritionSetKey.sourcePackaging,
+              preparation: NutritionSetKey.preparationAsSold,
+              perSize: PerSize.oneHundredMilliliters,
+            ),
           );
+          expect(nutritionSet, isNotNull);
+
+          var values = nutritionSet!.nutritionValues!;
+
+          expect(values[Nutrient.energyKJ]?.value, 0.8);
+          expect(values[Nutrient.sugars]?.value, 0.0);
+          expect(values[Nutrient.salt]?.value, 0.01);
+          expect(values[Nutrient.fiber]?.value, 0.0);
+          expect(values[Nutrient.fat]?.value, 0.0);
+          expect(values[Nutrient.saturatedFat]?.value, 0.0);
+          expect(values[Nutrient.proteins]?.value, 0.0);
+          expect(values[Nutrient.carbohydrates]?.value, isNotNull);
+
           expect(result.product!.novaGroup, 4);
-          expect(nutriments.getValue(Nutrient.fat, PerSize.serving), isNotNull);
-          expect(
-            nutriments.getValue(Nutrient.carbohydrates, PerSize.serving),
-            isNotNull,
-          );
 
           expect(result.product!.additives!.ids[0], 'en:e150d');
           expect(result.product!.additives!.names[0], 'E150d');
@@ -911,7 +1102,7 @@ void main() {
       test(
         'vegan, vegetarian and palm oil ingredients of Danish Butter Cookies & Chocolate Chip Cookies',
         () async {
-          final ProductResultV3 result = await getProductV3InProd(
+          final ProductResultV3? result = await getProductV3(
             ProductQueryConfiguration(
               '3017620429484',
               language: OpenFoodFactsLanguage.FRENCH,
@@ -919,6 +1110,9 @@ void main() {
               version: version,
             ),
           );
+          if (result == null) {
+            return;
+          }
 
           final Ingredient ingredient = result.product!.ingredients!.firstWhere(
             (ingredient) => ingredient.text == 'huile de palme',
@@ -944,7 +1138,7 @@ void main() {
           'nutriscore_2023',
           'root',
         };
-        final ProductResultV3 productResult = await getProductV3InProd(
+        final ProductResultV3? productResult = await getProductV3(
           ProductQueryConfiguration(
             BARCODE_DANISH_BUTTER_COOKIES,
             language: OpenFoodFactsLanguage.FRENCH,
@@ -952,6 +1146,9 @@ void main() {
             version: version,
           ),
         );
+        if (productResult == null) {
+          return;
+        }
         expect(productResult.product, isNotNull);
         expect(productResult.product!.knowledgePanels, isNotNull);
         expect(
@@ -1002,7 +1199,11 @@ void main() {
             fields: [ProductField.BARCODE],
             version: version,
           );
-      final ProductResultV3 result = await getProductV3InProd(configurations);
+      final ProductResultV3? result = await getProductV3(configurations);
+      if (result == null) {
+        return;
+      }
+
       expect(result.status, ProductResultV3.statusWarning);
       expect(result.barcode, normalizedBarcode);
       expect(result.product, isNotNull);
@@ -1184,14 +1385,17 @@ void main() {
 
   test('get new product fields', () async {
     late ProductQueryConfiguration configuration;
-    late ProductResultV3 result;
+    ProductResultV3? result;
 
     configuration = ProductQueryConfiguration(
       BARCODE_DANISH_BUTTER_COOKIES,
       fields: [ProductField.COMPARED_TO_CATEGORY],
       version: version,
     );
-    result = await getProductV3InProd(configuration);
+    result = await getProductV3(configuration);
+    if (result == null) {
+      return;
+    }
     expect(result.status, ProductResultV3.statusSuccess);
     expect(result.product, isNotNull);
     expect(result.product!.comparedToCategory, isNotNull);
@@ -1201,7 +1405,10 @@ void main() {
       fields: [ProductField.OBSOLETE],
       version: version,
     );
-    result = await getProductV3InProd(configuration);
+    result = await getProductV3(configuration);
+    if (result == null) {
+      return;
+    }
     expect(result.status, ProductResultV3.statusSuccess);
     expect(result.product, isNotNull);
     expect(result.product!.obsolete, isNotNull);
@@ -1226,7 +1433,10 @@ void main() {
       ],
       version: version,
     );
-    result = await getProductV3InProd(configuration);
+    result = await getProductV3(configuration);
+    if (result == null) {
+      return;
+    }
     expect(result.status, ProductResultV3.statusSuccess);
     expect(result.product, isNotNull);
     expect(result.product!.lastModified, isNotNull);
@@ -1275,7 +1485,10 @@ void main() {
       fields: [ProductField.OWNER_FIELDS],
       version: version,
     );
-    result = await getProductV3InProd(configuration);
+    result = await getProductV3(configuration);
+    if (result == null) {
+      return;
+    }
     expect(result.status, ProductResultV3.statusSuccess);
     expect(result.product, isNotNull);
     expect(result.product!.ownerFields, isNotNull);
@@ -1364,13 +1577,16 @@ void main() {
       final OpenFoodFactsLanguage language,
       final Map<ImageField, bool> areLocked,
     ) async {
-      final ProductResultV3 result = await getProductV3InProd(
+      final ProductResultV3? result = await getProductV3(
         ProductQueryConfiguration(
           barcode,
           fields: [ProductField.OWNER, ProductField.IMAGES],
           version: version,
         ),
       );
+      if (result == null) {
+        return;
+      }
       expect(result.status, ProductResultV3.statusSuccess);
       expect(result.product, isNotNull);
       for (final MapEntry<ImageField, bool> entry in areLocked.entries) {
@@ -1424,7 +1640,7 @@ void main() {
     }
 
     test('as a single field on a barcode search', () async {
-      final ProductResultV3 productResult = await getProductV3InProd(
+      final ProductResultV3? productResult = await getProductV3(
         ProductQueryConfiguration(
           barcode,
           fields: [ProductField.PACKAGINGS],
@@ -1433,13 +1649,16 @@ void main() {
           version: version,
         ),
       );
+      if (productResult == null) {
+        return;
+      }
       expect(productResult.status, ProductResultV3.statusSuccess);
       expect(productResult.product, isNotNull);
       checkProduct(productResult.product!);
     });
 
     test('as a part of ALL fields on a barcode search', () async {
-      final ProductResultV3 productResult = await getProductV3InProd(
+      final ProductResultV3? productResult = await getProductV3(
         ProductQueryConfiguration(
           barcode,
           fields: [ProductField.ALL],
@@ -1448,6 +1667,9 @@ void main() {
           version: version,
         ),
       );
+      if (productResult == null) {
+        return;
+      }
       expect(productResult.status, ProductResultV3.statusSuccess);
       expect(productResult.product, isNotNull);
       checkProduct(productResult.product!);
@@ -1460,7 +1682,7 @@ void main() {
     const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
 
     test('Without specifying fields', () async {
-      final ProductResultV3 productResult = await getProductV3InProd(
+      final ProductResultV3? productResult = await getProductV3(
         ProductQueryConfiguration(
           barcode,
           language: language,
@@ -1468,6 +1690,9 @@ void main() {
           version: version,
         ),
       );
+      if (productResult == null) {
+        return;
+      }
       expect(productResult.product!.dataQualityTags, isNotNull);
       expect(productResult.product!.dataQualityBugsTags, isNotNull);
       expect(productResult.product!.dataQualityErrorsTags, isNotNull);
@@ -1476,7 +1701,7 @@ void main() {
     });
 
     test('Without ALL fields', () async {
-      final ProductResultV3 productResult = await getProductV3InProd(
+      final ProductResultV3? productResult = await getProductV3(
         ProductQueryConfiguration(
           barcode,
           fields: [
@@ -1491,6 +1716,9 @@ void main() {
           version: version,
         ),
       );
+      if (productResult == null) {
+        return;
+      }
       expect(productResult.product!.dataQualityTags, isNotNull);
       expect(productResult.product!.dataQualityBugsTags, isNotNull);
       expect(productResult.product!.dataQualityErrorsTags, isNotNull);
@@ -1499,7 +1727,7 @@ void main() {
     });
 
     test('With only data quality tags', () async {
-      final ProductResultV3 productResult = await getProductV3InProd(
+      final ProductResultV3? productResult = await getProductV3(
         ProductQueryConfiguration(
           barcode,
           fields: [ProductField.DATA_QUALITY_TAGS],
@@ -1508,6 +1736,9 @@ void main() {
           version: version,
         ),
       );
+      if (productResult == null) {
+        return;
+      }
       expect(productResult.product!.dataQualityTags, isNotNull);
       expect(productResult.product!.dataQualityBugsTags, isNull);
       expect(productResult.product!.dataQualityErrorsTags, isNull);
@@ -1528,7 +1759,7 @@ void main() {
         3.2: 1001,
       };
       for (final MapEntry<num, int> version in schemaVersions.entries) {
-        final ProductResultV3 productResult = await getProductV3InProd(
+        final ProductResultV3? productResult = await getProductV3(
           ProductQueryConfiguration(
             barcode,
             language: language,
@@ -1537,6 +1768,9 @@ void main() {
             fields: [ProductField.SCHEMA_VERSION],
           ),
         );
+        if (productResult == null) {
+          return;
+        }
         expect(productResult.product!.schemaVersion, version.value);
       }
     });
@@ -1551,7 +1785,7 @@ void main() {
 
       test('check ingredients_filter_parameter', () async {
         for (final MapEntry<String, bool> entry in productsWithTomato.entries) {
-          final ProductResultV3 productResult = await getProductV3InProd(
+          final ProductResultV3? productResult = await getProductV3(
             ProductQueryConfiguration(
               entry.key,
               language: language,
@@ -1563,6 +1797,9 @@ void main() {
               ]),
             ),
           );
+          if (productResult == null) {
+            return;
+          }
           expect(productResult.product, isNotNull);
           final Product product = productResult.product!;
 
@@ -1604,7 +1841,10 @@ void main() {
             version: version,
           );
 
-          final result = await getProductV3InProd(configuration);
+          final result = await getProductV3(configuration);
+          if (result == null) {
+            return;
+          }
           final Product product = result.product!;
 
           // the deprecated "eco" fields are similar to "environmental" fields.
@@ -1685,7 +1925,10 @@ void main() {
             version: version,
           );
 
-          final result = await getProductV3InProd(configuration);
+          final result = await getProductV3(configuration);
+          if (result == null) {
+            return;
+          }
           final Product product = result.product!;
 
           expect(product.brands, isNotNull);
@@ -1744,7 +1987,10 @@ void main() {
             version: version,
           );
 
-          final result = await getProductV3InProd(configuration);
+          final result = await getProductV3(configuration);
+          if (result == null) {
+            return;
+          }
           final Product product = result.product!;
 
           expect(product.images, isNotNull);

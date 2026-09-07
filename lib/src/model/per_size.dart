@@ -5,10 +5,17 @@ enum PerSize implements OffTagged {
   /// Per serving of product
   serving(offTag: 'serving'),
 
+  /// Per 1 kg of product (pet food only).
+  oneKg(offTag: '1kg'),
+
+  /// Per 100 ml of product
+  oneHundredMilliliters(offTag: '100ml'),
+
+  /// Per 1 l of product
+  oneLiter(offTag: '1l'),
+
   /// Per 100 grams of product
   oneHundredGrams(offTag: '100g');
-
-  // TODO(monsieurtanuki): add '100ml', '1kg' and '1l'
 
   const PerSize({required this.offTag});
 
