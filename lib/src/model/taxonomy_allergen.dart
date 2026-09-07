@@ -72,18 +72,11 @@ class TaxonomyAllergenQueryConfiguration
   /// Configuration to get the allergens that match the [tags].
   TaxonomyAllergenQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyAllergenField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-  }) : super(
-         TagType.ALLERGENS,
-         tags,
-         languages: languages,
-         country: country,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+  }) : super(TagType.ALLERGENS, tags);
 
   /// Configuration to get ALL the allergens.
   TaxonomyAllergenQueryConfiguration.all({

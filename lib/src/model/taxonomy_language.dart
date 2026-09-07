@@ -85,18 +85,11 @@ class TaxonomyLanguageQueryConfiguration
   /// Configuration to get the languages that match the [tags].
   TaxonomyLanguageQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyLanguageField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-  }) : super(
-         TagType.LANGUAGES,
-         tags,
-         languages: languages,
-         country: country,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+  }) : super(TagType.LANGUAGES, tags);
 
   /// Configuration to get ALL the languages.
   TaxonomyLanguageQueryConfiguration.all({

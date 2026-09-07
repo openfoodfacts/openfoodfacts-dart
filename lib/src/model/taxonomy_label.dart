@@ -252,19 +252,11 @@ class TaxonomyLabelQueryConfiguration
     extends TaxonomyQueryConfiguration<TaxonomyLabel, TaxonomyLabelField> {
   TaxonomyLabelQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyLabelField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-  }) : super(
-         TagType.LABELS,
-         tags,
-         languages: languages,
-         country: country,
-         includeChildren: false,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+  }) : super(TagType.LABELS, tags, includeChildren: false);
 
   TaxonomyLabelQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages,

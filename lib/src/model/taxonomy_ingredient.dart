@@ -436,20 +436,12 @@ class TaxonomyIngredientQueryConfiguration
         > {
   TaxonomyIngredientQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyIngredientField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-    bool includeChildren = false,
-  }) : super(
-         TagType.INGREDIENTS,
-         tags,
-         languages: languages,
-         country: country,
-         includeChildren: includeChildren,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+    super.includeChildren = false,
+  }) : super(TagType.INGREDIENTS, tags);
 
   TaxonomyIngredientQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages,

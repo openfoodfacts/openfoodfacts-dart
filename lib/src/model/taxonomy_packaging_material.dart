@@ -75,20 +75,12 @@ class TaxonomyPackagingMaterialQueryConfiguration
   /// Configuration to get the packaging materials that match the [tags].
   TaxonomyPackagingMaterialQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyPackagingMaterialField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-    bool includeChildren = false,
-  }) : super(
-         TagType.PACKAGING_MATERIALS,
-         tags,
-         languages: languages,
-         country: country,
-         includeChildren: includeChildren,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+    super.includeChildren = false,
+  }) : super(TagType.PACKAGING_MATERIALS, tags);
 
   TaxonomyPackagingMaterialQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages,

@@ -93,20 +93,12 @@ class TaxonomyPackagingRecyclingQueryConfiguration
   /// Configuration to get the packaging recycling that match the [tags].
   TaxonomyPackagingRecyclingQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyPackagingRecyclingField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-    bool includeChildren = false,
-  }) : super(
-         TagType.PACKAGING_RECYCLING,
-         tags,
-         languages: languages,
-         country: country,
-         includeChildren: includeChildren,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+    super.includeChildren = false,
+  }) : super(TagType.PACKAGING_RECYCLING, tags);
 
   TaxonomyPackagingRecyclingQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages,

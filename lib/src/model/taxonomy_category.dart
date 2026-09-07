@@ -300,20 +300,12 @@ class TaxonomyCategoryQueryConfiguration
         TaxonomyQueryConfiguration<TaxonomyCategory, TaxonomyCategoryField> {
   TaxonomyCategoryQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    bool includeChildren = false,
-    List<TaxonomyCategoryField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-  }) : super(
-         TagType.CATEGORIES,
-         tags,
-         languages: languages,
-         country: country,
-         includeChildren: includeChildren,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.includeChildren = false,
+    super.fields = const [],
+    super.additionalParameters = const [],
+  }) : super(TagType.CATEGORIES, tags);
 
   TaxonomyCategoryQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages,

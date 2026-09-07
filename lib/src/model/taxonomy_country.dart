@@ -100,19 +100,11 @@ class TaxonomyCountryQueryConfiguration
   /// Configuration to get the countries that match the [tags].
   TaxonomyCountryQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyCountryField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-  }) : super(
-         TagType.COUNTRIES,
-         tags,
-         languages: languages,
-         country: country,
-         includeChildren: false,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+  }) : super(TagType.COUNTRIES, tags, includeChildren: false);
 
   /// Configuration to get ALL the countries.
   TaxonomyCountryQueryConfiguration.all({

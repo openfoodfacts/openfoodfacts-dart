@@ -81,20 +81,12 @@ class TaxonomyOriginQueryConfiguration
   /// Configuration to get the origins that match the [tags].
   TaxonomyOriginQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyOriginField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-    bool includeChildren = false,
-  }) : super(
-         TagType.ORIGINS,
-         tags,
-         languages: languages,
-         country: country,
-         includeChildren: includeChildren,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+    super.includeChildren = false,
+  }) : super(TagType.ORIGINS, tags);
 
   TaxonomyOriginQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages,

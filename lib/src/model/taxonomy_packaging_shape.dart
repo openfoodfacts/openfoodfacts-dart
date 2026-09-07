@@ -75,20 +75,12 @@ class TaxonomyPackagingShapeQueryConfiguration
   /// Configuration to get the packaging shapes that match the [tags].
   TaxonomyPackagingShapeQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyPackagingShapeField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-    bool includeChildren = false,
-  }) : super(
-         TagType.PACKAGING_SHAPES,
-         tags,
-         languages: languages,
-         country: country,
-         includeChildren: includeChildren,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+    super.includeChildren = false,
+  }) : super(TagType.PACKAGING_SHAPES, tags);
 
   TaxonomyPackagingShapeQueryConfiguration.roots({
     List<OpenFoodFactsLanguage>? languages,

@@ -314,19 +314,11 @@ class TaxonomyAdditiveQueryConfiguration
   /// Configuration to get additives from their tags
   TaxonomyAdditiveQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyAdditiveField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-  }) : super(
-         TagType.ADDITIVES,
-         tags,
-         languages: languages,
-         country: country,
-         includeChildren: false,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+  }) : super(TagType.ADDITIVES, tags, includeChildren: false);
 
   /// Configuration to get the root additives
   TaxonomyAdditiveQueryConfiguration.roots({

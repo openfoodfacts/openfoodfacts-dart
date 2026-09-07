@@ -83,18 +83,11 @@ class TaxonomyPackagingQueryConfiguration
   /// Configuration to get the packagings that match the [tags].
   TaxonomyPackagingQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyPackagingField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-  }) : super(
-         TagType.PACKAGING,
-         tags,
-         languages: languages,
-         country: country,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+  }) : super(TagType.PACKAGING, tags);
 
   /// Configuration to get the root packagings.
   TaxonomyPackagingQueryConfiguration.roots({
