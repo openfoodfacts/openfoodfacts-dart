@@ -1,8 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'off_tagged.dart';
 import '../interface/json_object.dart';
-import '../interface/parameter.dart';
-import '../utils/country_helper.dart';
 import '../utils/language_helper.dart';
 import '../utils/taxonomy_query_configuration.dart';
 import '../utils/tag_type.dart';
@@ -300,35 +298,20 @@ class TaxonomyCategoryQueryConfiguration
         TaxonomyQueryConfiguration<TaxonomyCategory, TaxonomyCategoryField> {
   TaxonomyCategoryQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    bool includeChildren = false,
-    List<TaxonomyCategoryField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-  }) : super(
-         TagType.CATEGORIES,
-         tags,
-         languages: languages,
-         country: country,
-         includeChildren: includeChildren,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.includeChildren = false,
+    super.fields = const [],
+    super.additionalParameters = const [],
+  }) : super(TagType.CATEGORIES, tags);
 
   TaxonomyCategoryQueryConfiguration.roots({
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    bool includeChildren = false,
-    List<TaxonomyCategoryField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-  }) : super.roots(
-         TagType.CATEGORIES,
-         languages: languages,
-         country: country,
-         includeChildren: includeChildren,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.includeChildren = false,
+    super.fields = const [],
+    super.additionalParameters = const [],
+  }) : super.roots(TagType.CATEGORIES);
 
   @override
   Map<String, TaxonomyCategory> convertResults(dynamic jsonData) {
