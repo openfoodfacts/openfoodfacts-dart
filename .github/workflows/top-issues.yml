@@ -1,4 +1,7 @@
 name: Top issues action.
+permissions:
+  contents: read
+  issues: write
 on:
   schedule:
   - cron:  '0 0 */1 * *'
