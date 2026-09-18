@@ -123,11 +123,16 @@ class OpenFoodAPIClient {
   ///
   /// For the moment that's the only field supported in WRITE by API V3.
   /// Long term target is of course more something like [saveProduct].
+  /// cf. https://github.com/openfoodfacts/openfoodfacts-server/blob/main/lib/ProductOpener/APIProductWrite.pm
+  /// cf. https://github.com/openfoodfacts/openfoodfacts-server/blob/main/lib/ProductOpener/Nutrition.pm
   static Future<ProductResultV3> temporarySaveProductV3(
     final User user,
     final String barcode, {
     final List<ProductPackaging>? packagings,
     final bool? packagingsComplete,
+    final dynamic nutritionInputSets,
+    // typically useful for nutrition input sets with per "serving"
+    final String? servingSize,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final OpenFoodFactsCountry? country,
     final OpenFoodFactsLanguage? language,
@@ -139,6 +144,14 @@ class OpenFoodAPIClient {
     if (packagingsComplete != null) {
       productParameters[ProductField.PACKAGINGS_COMPLETE.offTag] =
           packagingsComplete;
+    }
+    if (nutritionInputSets != null) {
+      productParameters[ProductField.NUTRITION.offTag] = {};
+      productParameters[ProductField.NUTRITION.offTag]['input_sets'] =
+          nutritionInputSets;
+    }
+    if (servingSize != null) {
+      productParameters[ProductField.SERVING_SIZE.offTag] = servingSize;
     }
     if (productParameters.isEmpty) {
       throw Exception('At least one V3 field must be populated.');

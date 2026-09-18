@@ -141,6 +141,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) =>
           LanguageHelper.fromJsonStringsListMap(
             json['ingredients_analysis_tags_in_languages'],
           )
+      ..nutrition = json['nutrition'] as Map<String, dynamic>?
       ..additivesTagsInLanguages = LanguageHelper.fromJsonStringsListMap(
         json['additives_tags_in_languages'],
       )
@@ -307,6 +308,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       ?LanguageHelper.toJsonStringsListMap(
         instance.ingredientsAnalysisTagsInLanguages,
       ),
+  'nutrition': ?instance.nutrition,
   'additives_tags': ?Additives.additivesToJson(instance.additives),
   'additives_tags_in_languages': ?LanguageHelper.toJsonStringsListMap(
     instance.additivesTagsInLanguages,

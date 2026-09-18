@@ -390,7 +390,12 @@ class Product extends JsonObject {
   /// This logic is handled by the getters/setters of [noNutritionData] and
   /// [nutriments]
   /// This field is therefore not populated directly by json.
+  // TODO: deprecated from 2026-07-30; remove when old enough
+  @Deprecated('Use nutrition and API V3.5+ instead')
   Nutriments? _nutriments;
+
+  /// Nutrition facts, from API 3.5.
+  Map<String, dynamic>? nutrition;
 
   @JsonKey(
     name: 'additives_tags',
@@ -425,6 +430,8 @@ class Product extends JsonObject {
   )
   NutrientLevels? nutrientLevels;
 
+  // TODO: deprecated from 2026-07-30; remove when old enough
+  @Deprecated('Use nutrition and API V3.5+ instead')
   @JsonKey(name: 'nutriment_energy_unit')
   String? nutrimentEnergyUnit;
 
@@ -432,6 +439,8 @@ class Product extends JsonObject {
   ///
   /// Most of the time, it will be true, e.g. if we type in nutrient data
   /// reading the product packaging.
+  // TODO: deprecated from 2026-07-30; remove when old enough
+  @Deprecated('Use nutrition and API V3.5+ instead')
   @JsonKey(
     name: 'nutrition_data',
     toJson: JsonHelper.checkboxToJSON,
@@ -443,6 +452,8 @@ class Product extends JsonObject {
   /// Size of the product sample for "nutrition data for product as sold".
   ///
   /// Typical values taken from [PerSize].
+  // TODO: deprecated from 2026-07-30; remove when old enough
+  @Deprecated('Use nutrition and API V3.5+ instead')
   @JsonKey(name: 'nutrition_data_per')
   String? nutrimentDataPer;
   @JsonKey(name: 'nutrition_grade_fr')
@@ -1263,8 +1274,12 @@ class Product extends JsonObject {
     includeIfNull: false,
     toJson: Nutriments.toJsonHelper,
   )
+  // TODO: deprecated from 2026-07-30; remove when old enough
+  @Deprecated('Use nutrition and API V3.5+ instead')
   Nutriments? get nutriments => _noNutritionData == true ? null : _nutriments;
 
+  // TODO: deprecated from 2026-07-30; remove when old enough
+  @Deprecated('Use nutrition and API V3.5+ instead')
   set nutriments(Nutriments? nutriments) {
     if (nutriments == null) {
       _noNutritionData = true;

@@ -25,9 +25,13 @@ class ProductQueryVersion extends ApiVersion {
   @Deprecated('Use ProductQueryVersion.latestVersion instead')
   static const ProductQueryVersion v3_3 = ProductQueryVersion(3.3);
 
+  // TODO: deprecated from 2026-07-30; remove when old enough
+  @Deprecated('Use ProductQueryVersion.latestVersion instead')
   static const ProductQueryVersion v3_4 = ProductQueryVersion(3.4);
 
-  static const ProductQueryVersion latestVersion = v3_4;
+  static const ProductQueryVersion v3_5 = ProductQueryVersion(3.5);
+
+  static const ProductQueryVersion latestVersion = v3_5;
 
   // TODO: deprecated from 2026-07-27; remove when old enough
   @Deprecated('Source of confusion. Use getApiPath instead.')

@@ -1,17 +1,21 @@
 import '../model/off_tagged.dart';
 
 /// Unit of measurement for nutrients
+///
+/// cf. get_unit_options_for_nutrient in
+/// https://github.com/openfoodfacts/openfoodfacts-server/blob/main/lib/ProductOpener/Nutrition.pm
 enum Unit implements OffTagged {
   KCAL('kcal'),
-  KJ('kj'),
+  KJ('kJ'),
   G('g'),
   MILLI_G('mg'),
-  MICRO_G('mcg'),
+  MICRO_G('µg'),
   MILLI_L('ml'),
   L('liter'),
-  PERCENT('percent'),
+  PERCENT('%'),
   // actually we don't expect a specific offTag for "unknown".
   UNKNOWN('unknown'),
+  PERCENT_VOL('% vol'),
   G_PER_KG('g/kg'),
   PERCENT_DV('% DV'),
   IU('IU');
@@ -29,12 +33,12 @@ class UnitHelper {
     'kCal': Unit.KCAL,
     'KCal': Unit.KCAL,
     'Kj': Unit.KJ,
-    'kJ': Unit.KJ,
+    'kj': Unit.KJ,
     'KJ': Unit.KJ,
     'G': Unit.G,
     'milli-gram': Unit.MILLI_G,
     'mG': Unit.MILLI_G,
-    'µg': Unit.MICRO_G,
+    'mcg': Unit.MICRO_G,
     '&#181;g': Unit.MICRO_G,
     '&micro;g': Unit.MICRO_G,
     '&#xb5;g': Unit.MICRO_G,
@@ -44,7 +48,7 @@ class UnitHelper {
     'milli-liter': Unit.MILLI_L,
     'L': Unit.L,
     'l': Unit.L,
-    '%': Unit.PERCENT,
+    'percent': Unit.PERCENT,
     'per cent': Unit.PERCENT,
     'μg': Unit.MICRO_G,
   };

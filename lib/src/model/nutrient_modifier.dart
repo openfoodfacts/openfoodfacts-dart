@@ -4,7 +4,7 @@ import 'off_tagged.dart';
 ///
 /// cf. https://github.com/openfoodfacts/openfoodfacts-server/blob/main/lib/ProductOpener/Nutrition.pm
 enum NutrientModifier implements OffTagged {
-  // TODO(monsieurtanuki) add and test valueNotSpecified(offTag: '-'),
+  remove(offTag: '-'),
   approximately(offTag: '~'),
   maximum(offTag: '\u{2264}'),
   minimum(offTag: '\u{2265}'),
