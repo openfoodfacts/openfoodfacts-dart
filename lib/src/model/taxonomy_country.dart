@@ -1,8 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'off_tagged.dart';
 import '../interface/json_object.dart';
-import '../interface/parameter.dart';
-import '../utils/country_helper.dart';
 import '../utils/language_helper.dart';
 import '../utils/taxonomy_query_configuration.dart';
 import '../utils/tag_type.dart';
@@ -100,33 +98,19 @@ class TaxonomyCountryQueryConfiguration
   /// Configuration to get the countries that match the [tags].
   TaxonomyCountryQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyCountryField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-  }) : super(
-         TagType.COUNTRIES,
-         tags,
-         languages: languages,
-         country: country,
-         includeChildren: false,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+  }) : super(TagType.COUNTRIES, tags, includeChildren: false);
 
   /// Configuration to get ALL the countries.
   TaxonomyCountryQueryConfiguration.all({
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyCountryField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-  }) : super.roots(
-         TagType.COUNTRIES,
-         languages: languages,
-         country: country,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+  }) : super.roots(TagType.COUNTRIES);
 
   @override
   Map<String, TaxonomyCountry> convertResults(dynamic jsonData) {
