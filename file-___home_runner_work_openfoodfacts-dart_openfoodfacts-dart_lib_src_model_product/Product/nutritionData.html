@@ -27,7 +27,7 @@
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/">src&#47;model&#47;product.dart</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product-class.html">Product</a></li>
-    <li class="self-crumb">nutritionData property</li>
+    <li class="self-crumb"><span class="deprecated">nutritionData</span> property</li>
   </ol>
   <div class="self-name">nutritionData</div>
   <form class="search navbar-right" role="search">
@@ -55,8 +55,13 @@
     
       <section class="multi-line-signature">
         
-        <a href="https://api.dart.dev/stable/3.13.3/dart-core/bool-class.html">bool</a>?
-        <span class="name ">nutritionData</span>
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.12.2/dart-core/Deprecated/Deprecated.html">Deprecated</a>(&#39;Use nutrition and API V3.5+ instead&#39;)</li>
+    </ol>
+  </div>
+        <a href="https://api.dart.dev/stable/3.12.2/dart-core/bool-class.html">bool</a>?
+        <span class="name deprecated">nutritionData</span>
         <div class="features"><span class="feature">getter/setter pair</span></div>
 
       </section>
@@ -70,7 +75,9 @@ reading the product packaging.</p>
       
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@JsonKey(
+  <pre class="language-dart"><code class="language-dart">&#47;&#47; TODO: deprecated from 2026-07-30; remove when old enough
+@Deprecated(&#39;Use nutrition and API V3.5+ instead&#39;)
+@JsonKey(
   name: &#39;nutrition_data&#39;,
   toJson: JsonHelper.checkboxToJSON,
   fromJson: JsonHelper.checkboxFromJSON,
@@ -93,7 +100,7 @@ bool? nutritionData;</code></pre>
     <li><a href="../../index.html">openfoodfacts</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/">product</a></li>
     <li><a href="../../file-___home_runner_work_openfoodfacts-dart_openfoodfacts-dart_lib_src_model_product/Product-class.html">Product</a></li>
-    <li class="self-crumb">nutritionData property</li>
+    <li class="self-crumb"><span class="deprecated">nutritionData</span> property</li>
 </ol>
 
   <h5>Product class</h5>
