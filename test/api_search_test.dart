@@ -112,12 +112,17 @@ void main() {
       }
     });
 
+    bool serverDown = false;
+
     Future<void> simpleTest(
       final TaxonomyName taxonomyName,
       final String query,
       final String expectedValue, {
       final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH,
     }) async {
+      if (serverDown) {
+        return;
+      }
       final AutocompleteSearchResult? result = await autocomplete(
         query: query,
         taxonomyNames: <TaxonomyName>[taxonomyName],
@@ -125,6 +130,7 @@ void main() {
         fuzziness: Fuzziness.none,
       );
       if (result == null) {
+        serverDown = true;
         return;
       }
       expect(result.options, isNotEmpty);
