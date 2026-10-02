@@ -6,6 +6,7 @@ import 'test_constants.dart';
 /// Tests around the Elastic Search API.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
+  const uriHelper = uriHelperFoodProd;
 
   group('$OpenFoodSearchAPIClient autocomplete', () {
     const int maxSize = 5;
@@ -32,14 +33,14 @@ void main() {
               language: language,
               size: maxSize,
               fuzziness: fuzziness,
-              uriHelper: uriHelperFoodProd,
+              uriHelper: uriHelper,
             );
         basicTest(result);
         return result;
       } on HttpStatusException catch (e) {
         if (e.statusCode >= 500) {
           markTestSkipped(
-            'DEV server returned HTTP ${e.statusCode}; '
+            'Server (${uriHelper.domain}) returned HTTP ${e.statusCode}; '
             'integration assertions were not completed.',
           );
           return null;

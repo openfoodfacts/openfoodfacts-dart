@@ -29,7 +29,7 @@ void main() {
     } on HttpStatusException catch (e) {
       if (e.statusCode >= 500) {
         markTestSkipped(
-          'DEV server returned HTTP ${e.statusCode}; '
+          'Server (${uriHelper.domain}) returned HTTP ${e.statusCode}; '
           'integration assertions were not completed.',
         );
         return null;
