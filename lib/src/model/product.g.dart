@@ -215,6 +215,19 @@ Product _$ProductFromJson(Map<String, dynamic> json) =>
       ..manufacturingPlaces = json['manufacturing_places'] as String?
       ..origins = json['origins'] as String?
       ..novaGroup = (json['nova_group'] as num?)?.toInt()
+      ..novaGroupError = json['nova_group_error'] as String?
+      ..novaGroupsMarkers =
+          (json['nova_groups_markers'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(
+              k,
+              (e as List<dynamic>)
+                  .map(
+                    (e) =>
+                        (e as List<dynamic>).map((e) => e as String).toList(),
+                  )
+                  .toList(),
+            ),
+          )
       ..website = json['link'] as String?
       ..dataQualityTags = (json['data_quality_tags'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -387,6 +400,8 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
   'manufacturing_places': ?instance.manufacturingPlaces,
   'origins': ?instance.origins,
   'nova_group': ?instance.novaGroup,
+  'nova_group_error': ?instance.novaGroupError,
+  'nova_groups_markers': ?instance.novaGroupsMarkers,
   'link': ?instance.website,
   'data_quality_tags': ?instance.dataQualityTags,
   'data_quality_bugs_tags': ?instance.dataQualityBugsTags,

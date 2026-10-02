@@ -725,6 +725,12 @@ class Product extends JsonObject {
   @JsonKey(name: 'nova_group')
   int? novaGroup;
 
+  @JsonKey(name: 'nova_group_error')
+  String? novaGroupError;
+
+  @JsonKey(name: 'nova_groups_markers')
+  Map<String, List<List<String>>>? novaGroupsMarkers;
+
   /// Link to the product page on the official site of the producer
   @JsonKey(name: 'link')
   String? website;
