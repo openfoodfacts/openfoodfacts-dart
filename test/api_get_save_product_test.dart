@@ -51,7 +51,10 @@ void main() {
       return status;
     } on HttpStatusException catch (e) {
       if (e.statusCode >= 500) {
-        print('Server error: $e');
+        markTestSkipped(
+          'DEV server returned HTTP ${e.statusCode}; '
+          'integration assertions were not completed.',
+        );
         return null;
       }
       rethrow;

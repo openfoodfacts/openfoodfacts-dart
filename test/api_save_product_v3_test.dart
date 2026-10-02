@@ -12,7 +12,7 @@ void main() {
     final String barcode, {
     final List<ProductPackaging>? packagings,
     final bool? packagingsComplete,
-    final dynamic nutritionInputSets,
+    final List<NutritionSet>? nutritionInputSets,
     final String? servingSize,
     final OpenFoodFactsCountry? country,
     final OpenFoodFactsLanguage? language,
@@ -32,7 +32,10 @@ void main() {
       return result;
     } on HttpStatusException catch (e) {
       if (e.statusCode >= 500) {
-        print('Server error: $e');
+        markTestSkipped(
+          'DEV server returned HTTP ${e.statusCode}; '
+          'integration assertions were not completed.',
+        );
         return null;
       }
       rethrow;
@@ -396,7 +399,7 @@ void main() {
                     valueString: value.toString(),
                   ),
                 },
-              ).toJson(),
+              ),
             ],
           );
           if (productResultV3 == null) {

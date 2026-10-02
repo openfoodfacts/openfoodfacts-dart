@@ -61,8 +61,8 @@ class NutritionSetKey {
     }
     final String preparation = json['preparation'];
     final String source = json['source'];
-    final num perQuantity = json['per_quantity'];
-    final Unit perUnit = UnitHelper.stringToUnit(json['per_unit'])!;
+    final num? perQuantity = json['per_quantity'];
+    final Unit? perUnit = UnitHelper.stringToUnit(json['per_unit']);
     final int? lastUpdatedT = json['last_updated_t'];
     return NutritionSetKey(
       perSize: perSize,

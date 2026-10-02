@@ -63,7 +63,9 @@ class NutritionValue {
   Map<String, dynamic> toJson() => <String, dynamic>{
     'unit': ?unit?.offTag,
     'value': ?value,
-    'value_string': ?valueString,
+    'value_string': ?(modifier == NutrientModifier.remove
+        ? ''
+        : getCleanString()),
     'value_computed': ?valueComputed,
     'modifier': ?modifier?.offTag,
   };
