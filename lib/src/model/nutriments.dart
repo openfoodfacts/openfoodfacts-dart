@@ -11,6 +11,8 @@ import '../utils/nutriments_helper.dart';
 /// * [setValue]
 /// * [getValue]
 /// * [getModifier]
+// TODO: deprecated from 2026-07-30; remove when old enough
+@Deprecated('Use nutrition and API V3.5+ instead')
 class Nutriments extends JsonMap {
   /// Empty nutrient map.
   Nutriments.empty() : super(<String, dynamic>{});
