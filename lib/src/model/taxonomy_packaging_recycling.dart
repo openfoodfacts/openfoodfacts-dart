@@ -1,8 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'off_tagged.dart';
 import '../interface/json_object.dart';
-import '../interface/parameter.dart';
-import '../utils/country_helper.dart';
 import '../utils/language_helper.dart';
 import '../utils/taxonomy_query_configuration.dart';
 import '../utils/tag_type.dart';
@@ -93,35 +91,20 @@ class TaxonomyPackagingRecyclingQueryConfiguration
   /// Configuration to get the packaging recycling that match the [tags].
   TaxonomyPackagingRecyclingQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyPackagingRecyclingField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-    bool includeChildren = false,
-  }) : super(
-         TagType.PACKAGING_RECYCLING,
-         tags,
-         languages: languages,
-         country: country,
-         includeChildren: includeChildren,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+    super.includeChildren = false,
+  }) : super(TagType.PACKAGING_RECYCLING, tags);
 
   TaxonomyPackagingRecyclingQueryConfiguration.roots({
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyPackagingRecyclingField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-    bool includeChildren = false,
-  }) : super.roots(
-         TagType.PACKAGING_RECYCLING,
-         languages: languages,
-         country: country,
-         includeChildren: includeChildren,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+    super.includeChildren = false,
+  }) : super.roots(TagType.PACKAGING_RECYCLING);
 
   @override
   Map<String, TaxonomyPackagingRecycling> convertResults(dynamic jsonData) {
