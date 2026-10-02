@@ -3,6 +3,9 @@ import 'off_tagged.dart';
 import '../utils/unit_helper.dart';
 
 /// Nutrient
+///
+/// cf. get_unit_options_for_nutrient in
+/// https://github.com/openfoodfacts/openfoodfacts-server/blob/main/lib/ProductOpener/Nutrition.pm
 enum Nutrient implements OffTagged {
   /// Salt
   salt(typicalUnit: Unit.G, offTag: 'salt', acceptsPercentDV: false),

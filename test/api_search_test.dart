@@ -6,6 +6,7 @@ import 'test_constants.dart';
 /// Tests around the Elastic Search API.
 void main() {
   OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
+  const uriHelper = uriHelperFoodProd;
 
   group('$OpenFoodSearchAPIClient autocomplete', () {
     const int maxSize = 5;
@@ -32,13 +33,16 @@ void main() {
               language: language,
               size: maxSize,
               fuzziness: fuzziness,
-              uriHelper: uriHelperFoodProd,
+              uriHelper: uriHelper,
             );
         basicTest(result);
         return result;
       } on HttpStatusException catch (e) {
         if (e.statusCode >= 500) {
-          print('Server error: $e');
+          markTestSkipped(
+            'Server (${uriHelper.domain}) returned HTTP ${e.statusCode}; '
+            'integration assertions were not completed.',
+          );
           return null;
         }
         rethrow;
@@ -108,12 +112,17 @@ void main() {
       }
     });
 
+    bool serverDown = false;
+
     Future<void> simpleTest(
       final TaxonomyName taxonomyName,
       final String query,
       final String expectedValue, {
       final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH,
     }) async {
+      if (serverDown) {
+        return;
+      }
       final AutocompleteSearchResult? result = await autocomplete(
         query: query,
         taxonomyNames: <TaxonomyName>[taxonomyName],
@@ -121,6 +130,7 @@ void main() {
         fuzziness: Fuzziness.none,
       );
       if (result == null) {
+        serverDown = true;
         return;
       }
       expect(result.options, isNotEmpty);
