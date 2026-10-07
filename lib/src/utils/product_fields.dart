@@ -91,7 +91,10 @@ enum ProductField implements OffTagged {
     isInLanguages: true,
   ),
   NO_NUTRITION_DATA(offTag: 'no_nutrition_data'),
+  // TODO: deprecated from 2026-07-30; remove when old enough
+  @Deprecated('Use NUTRITION instead')
   NUTRIMENTS(offTag: 'nutriments'),
+  NUTRITION(offTag: 'nutrition'),
   ADDITIVES(
     offTag: 'additives_tags',
     inLanguagesProductField: ProductField.ADDITIVES_TAGS_IN_LANGUAGES,
@@ -111,8 +114,14 @@ enum ProductField implements OffTagged {
     inLanguagesProductField: ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
     isAllLanguages: true,
   ),
+  // TODO: deprecated from 2026-07-30; remove when old enough
+  @Deprecated('Use NUTRITION instead')
   NUTRIMENT_ENERGY_UNIT(offTag: 'nutriment_energy_unit'),
+  // TODO: deprecated from 2026-07-30; remove when old enough
+  @Deprecated('Use NUTRITION instead')
   NUTRIMENT_DATA_PER(offTag: 'nutrition_data_per'),
+  // TODO: deprecated from 2026-07-30; remove when old enough
+  @Deprecated('Use NUTRITION instead')
   NUTRITION_DATA(offTag: 'nutrition_data'),
   NUTRISCORE(offTag: 'nutrition_grade_fr'),
   COMPARED_TO_CATEGORY(offTag: 'compared_to_category'),
@@ -208,6 +217,8 @@ enum ProductField implements OffTagged {
   MANUFACTURING_PLACES(offTag: 'manufacturing_places'),
   ORIGINS(offTag: 'origins'),
   NOVA_GROUP(offTag: 'nova_group'),
+  NOVA_GROUP_ERROR(offTag: 'nova_group_error'),
+  NOVA_GROUPS_MARKERS(offTag: 'nova_groups_markers'),
   WEBSITE(offTag: 'link'),
   EXPIRATION_DATE(offTag: 'expiration_date'),
   OBSOLETE(offTag: 'obsolete'),
