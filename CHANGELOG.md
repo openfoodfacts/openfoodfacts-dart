@@ -22,7 +22,7 @@
 
 * 1109 - unit test on TEST env, not PROD anymore ([#1220](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1220)) ([0e3c440](https://github.com/openfoodfacts/openfoodfacts-dart/commit/0e3c4409c72f481e04d8d1d8f628a5ffa0a6c0e0))
 * 1217 - clean error when incorrect credentials ([#1219](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1219)) ([6c32341](https://github.com/openfoodfacts/openfoodfacts-dart/commit/6c323416ec94f84eb6785bee59790aefd16098c7))
-* 1239 - throws attemps to set/crop image as OTHER ([#1240](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1240)) ([5ab416f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/5ab416f181b444d20e0631c4961a5f60a8573f97))
+* 1239 - throws on attemps to set/crop image as OTHER ([#1240](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1240)) ([5ab416f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/5ab416f181b444d20e0631c4961a5f60a8573f97))
 * clean extraction of some language fields ([#1231](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1231)) ([7a38e34](https://github.com/openfoodfacts/openfoodfacts-dart/commit/7a38e34d50d8594f09ffb61aee63a0a4c94090a7))
 * error handling of API calls ([#1233](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1233)) ([1f320c8](https://github.com/openfoodfacts/openfoodfacts-dart/commit/1f320c89a460d0e135557eb2a91d853f852560ff))
 
