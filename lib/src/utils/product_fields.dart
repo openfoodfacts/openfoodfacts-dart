@@ -217,6 +217,8 @@ enum ProductField implements OffTagged {
   MANUFACTURING_PLACES(offTag: 'manufacturing_places'),
   ORIGINS(offTag: 'origins'),
   NOVA_GROUP(offTag: 'nova_group'),
+  NOVA_GROUP_ERROR(offTag: 'nova_group_error'),
+  NOVA_GROUPS_MARKERS(offTag: 'nova_groups_markers'),
   WEBSITE(offTag: 'link'),
   EXPIRATION_DATE(offTag: 'expiration_date'),
   OBSOLETE(offTag: 'obsolete'),
