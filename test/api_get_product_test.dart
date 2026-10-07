@@ -2031,5 +2031,61 @@ void main() {
         }
       });
     });
+
+    group('$OpenFoodAPIClient API 3.4', () {
+      test('new field novaGroupError', () async {
+        const barcode = '3329480004115';
+        const language = OpenFoodFactsLanguage.FRENCH;
+
+        final configuration = ProductQueryConfiguration(
+          barcode,
+          fields: [ProductField.NOVA_GROUP_ERROR],
+          language: language,
+          version: version,
+        );
+
+        final result = await getProductV3(configuration);
+        if (result == null) {
+          return;
+        }
+        final Product product = result.product!;
+
+        // Not sure how long it will last. Find another example if needed.
+        expect(product.novaGroupError, 'missing_ingredients');
+      });
+    });
+
+    test('new field nova_groups_markers', () async {
+      const barcode = '3023290234853';
+      const language = OpenFoodFactsLanguage.FRENCH;
+
+      final configuration = ProductQueryConfiguration(
+        barcode,
+        fields: [ProductField.NOVA_GROUPS_MARKERS],
+        language: language,
+        version: version,
+      );
+
+      final result = await getProductV3(configuration);
+      if (result == null) {
+        return;
+      }
+      final Product product = result.product!;
+
+      expect(product.novaGroupsMarkers, isNotNull);
+      expect(product.novaGroupsMarkers, isNotEmpty);
+      const List<String> expectedNovaGroups = ['3', '4'];
+      for (final String expectedNovaGroup in expectedNovaGroups) {
+        final List<List<String>> list =
+            product.novaGroupsMarkers![expectedNovaGroup]!;
+        // we have a list of reasons
+        expect(list, isNotEmpty);
+        for (final item in list) {
+          // each reason has at least one part
+          // e.g. [ingredients, en:sugar]
+          expect(item, isNotEmpty);
+        }
+      }
+    });
   });
 }
