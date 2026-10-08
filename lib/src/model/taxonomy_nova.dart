@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'off_tagged.dart';
 import '../interface/json_object.dart';
-import '../utils/country_helper.dart';
 import '../utils/language_helper.dart';
 import '../utils/taxonomy_query_configuration.dart';
 import '../utils/tag_type.dart';
@@ -64,17 +63,13 @@ class TaxonomyNova extends JsonObject {
 /// Configuration for nova API query.
 class TaxonomyNovaQueryConfiguration
     extends TaxonomyQueryConfiguration<TaxonomyNova, TaxonomyNovaField> {
-  TaxonomyNovaQueryConfiguration.roots({
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-  }) : super.roots(
-         TagType.NOVA,
-         languages: languages,
-         country: country,
-         includeChildren: false,
-         fields: const [],
-         additionalParameters: const [],
-       );
+  TaxonomyNovaQueryConfiguration.roots({super.languages, super.country})
+    : super.roots(
+        TagType.NOVA,
+        includeChildren: false,
+        fields: const [],
+        additionalParameters: const [],
+      );
 
   @override
   Map<String, TaxonomyNova> convertResults(dynamic jsonData) {
