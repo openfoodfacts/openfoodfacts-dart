@@ -20,4 +20,4 @@ permissions:
 
 jobs:
   publish:
-    uses: dart-lang/ecosystem/.github/workflows/publish.yaml@main
+    uses: dart-lang/ecosystem/.github/workflows/publish.yaml@622ef61a7edd5de7df38661e163e55c57606c96a # ratchet:dart-lang/ecosystem/.github/workflows/publish.yaml@main
