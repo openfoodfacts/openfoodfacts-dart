@@ -596,4 +596,22 @@ enum Nutrient implements OffTagged {
       : OffTagged.fromOffTag(offTag, Nutrient.values) as Nutrient?;
 
   String getOffTagPerSize(PerSize perSize) => '${offTag}_${perSize.offTag}';
+
+  /// Returns the list of all possible units.
+  List<Unit> getPossibleUnits() {
+    final List<Unit> result = <Unit>[];
+    if (acceptsWeight) {
+      result.addAll(<Unit>[Unit.G, Unit.MILLI_G, Unit.MICRO_G]);
+    }
+    if (acceptsIU) {
+      result.add(Unit.IU);
+    }
+    if (acceptsPercentDV) {
+      result.add(Unit.PERCENT_DV);
+    }
+    if (!result.contains(typicalUnit)) {
+      result.add(typicalUnit);
+    }
+    return result;
+  }
 }
