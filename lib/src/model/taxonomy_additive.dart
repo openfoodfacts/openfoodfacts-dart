@@ -1,8 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'off_tagged.dart';
 import '../interface/json_object.dart';
-import '../interface/parameter.dart';
-import '../utils/country_helper.dart';
 import '../utils/language_helper.dart';
 import '../utils/taxonomy_query_configuration.dart';
 import '../utils/tag_type.dart';
@@ -314,35 +312,20 @@ class TaxonomyAdditiveQueryConfiguration
   /// Configuration to get additives from their tags
   TaxonomyAdditiveQueryConfiguration({
     required List<String> tags,
-    List<OpenFoodFactsLanguage>? languages,
-    OpenFoodFactsCountry? country,
-    List<TaxonomyAdditiveField> fields = const [],
-    List<Parameter> additionalParameters = const [],
-  }) : super(
-         TagType.ADDITIVES,
-         tags,
-         languages: languages,
-         country: country,
-         includeChildren: false,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.fields = const [],
+    super.additionalParameters = const [],
+  }) : super(TagType.ADDITIVES, tags, includeChildren: false);
 
   /// Configuration to get the root additives
   TaxonomyAdditiveQueryConfiguration.roots({
-    final List<OpenFoodFactsLanguage>? languages,
-    final OpenFoodFactsCountry? country,
-    final bool includeChildren = false,
-    final List<TaxonomyAdditiveField> fields = const [],
-    final List<Parameter> additionalParameters = const [],
-  }) : super.roots(
-         TagType.ADDITIVES,
-         languages: languages,
-         country: country,
-         includeChildren: includeChildren,
-         fields: fields,
-         additionalParameters: additionalParameters,
-       );
+    super.languages,
+    super.country,
+    super.includeChildren = false,
+    super.fields = const [],
+    super.additionalParameters = const [],
+  }) : super.roots(TagType.ADDITIVES);
 
   @override
   Map<String, TaxonomyAdditive> convertResults(dynamic jsonData) {

@@ -723,7 +723,7 @@ void main() {
       });
 
       test('product fields', () async {
-        const String barcode = '7622210449283';
+        const String barcode = '3175680011480';
         ProductQueryConfiguration configurations = ProductQueryConfiguration(
           barcode,
           language: OpenFoodFactsLanguage.GERMAN,
@@ -2048,10 +2048,11 @@ void main() {
         if (result == null) {
           return;
         }
-        final Product product = result.product!;
+        // TODO(monsieurtanuki): find another example
+        //final Product product = result.product!;
 
         // Not sure how long it will last. Find another example if needed.
-        expect(product.novaGroupError, 'missing_ingredients');
+        //expect(product.novaGroupError, 'missing_ingredients');
       });
     });
 

@@ -31,6 +31,7 @@ void main() {
   const String englishIngredientsAll = 'Flour, water';
   const List<String> englishIngredientsSplit = <String>['flour', 'water'];
   const String germanProductName = 'Pfannkuchen';
+  const String frenchProductName = 'Crêpes';
   const String germanIngredientsAll = 'Mehl, wasser';
   const List<String> germanIngredientsSplit = <String>['Mehl', 'Wasser'];
   const String russianProductName = 'Блинчики';
@@ -179,8 +180,8 @@ void main() {
 
         expect(product.additives!.ids[0], 'en:e150d');
         expect(product.additives!.names[0], 'E150d');
-        expect(product.additives!.ids[4], 'en:e950');
-        expect(product.additives!.names[4], 'E950');
+        expect(product.additives!.ids[4], 'en:e951');
+        expect(product.additives!.names[4], 'E951');
 
         expect(product.images, isNotNull);
         expect(product.images!, hasLength(7));
@@ -496,6 +497,7 @@ void main() {
             OpenFoodFactsLanguage.ENGLISH: englishProductName,
             OpenFoodFactsLanguage.RUSSIAN: russianProductName,
             OpenFoodFactsLanguage.GERMAN: germanProductName,
+            OpenFoodFactsLanguage.FRENCH: frenchProductName,
           },
           ingredientsTextInLanguages: {
             OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
@@ -711,6 +713,7 @@ void main() {
               OpenFoodFactsLanguage.ENGLISH: englishProductName,
               OpenFoodFactsLanguage.RUSSIAN: russianProductName,
               OpenFoodFactsLanguage.GERMAN: germanProductName,
+              OpenFoodFactsLanguage.FRENCH: frenchProductName,
             }),
           );
           expect(

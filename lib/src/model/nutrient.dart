@@ -554,6 +554,13 @@ enum Nutrient implements OffTagged {
     offTag: 'hydroxymethylbutyrate',
   ),
 
+  /// Dry residue
+  dryResidue(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'dry-residue',
+    acceptsPercentDV: false,
+  ),
+
   /// Polydextrose
   polydextrose(typicalUnit: Unit.G, offTag: 'polydextrose');
 
