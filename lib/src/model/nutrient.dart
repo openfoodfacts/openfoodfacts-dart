@@ -167,7 +167,7 @@ enum Nutrient implements OffTagged {
   polyunsaturatedFat(typicalUnit: Unit.G, offTag: 'polyunsaturated-fat'),
 
   /// Alcohol
-  alcohol(typicalUnit: Unit.PERCENT, offTag: 'alcohol'),
+  alcohol(typicalUnit: Unit.PERCENT_VOL, offTag: 'alcohol'),
 
   /// Pantothenic Acid
   pantothenicAcid(typicalUnit: Unit.MILLI_G, offTag: 'pantothenic-acid'),

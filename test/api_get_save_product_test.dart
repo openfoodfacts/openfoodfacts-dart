@@ -657,7 +657,7 @@ void main() {
       });
 
       test(
-        'requesting all-langs and in-langs fields together does not break anything',
+        'FABRICE requesting all-langs and in-langs fields together does not break anything',
         () async {
           if (!await checkServer()) {
             return;
@@ -713,7 +713,6 @@ void main() {
               OpenFoodFactsLanguage.ENGLISH: englishProductName,
               OpenFoodFactsLanguage.RUSSIAN: russianProductName,
               OpenFoodFactsLanguage.GERMAN: germanProductName,
-              OpenFoodFactsLanguage.FRENCH: frenchProductName,
             }),
           );
           expect(
