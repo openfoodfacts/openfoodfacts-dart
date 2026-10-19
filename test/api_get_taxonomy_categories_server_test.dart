@@ -14,7 +14,7 @@ void main() {
     OpenFoodFactsLanguage.FRENCH,
   ];
 
-  const String knownTag = 'en:plain-crepes';
+  const String knownTag = 'en:jellyfish';
   const String unknownTag = 'en:some_nonexistent_label';
 
   group('OpenFoodAPIClient getTaxonomyCategories (server)', () {

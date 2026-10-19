@@ -167,7 +167,7 @@ enum Nutrient implements OffTagged {
   polyunsaturatedFat(typicalUnit: Unit.G, offTag: 'polyunsaturated-fat'),
 
   /// Alcohol
-  alcohol(typicalUnit: Unit.PERCENT, offTag: 'alcohol'),
+  alcohol(typicalUnit: Unit.PERCENT_VOL, offTag: 'alcohol'),
 
   /// Pantothenic Acid
   pantothenicAcid(typicalUnit: Unit.MILLI_G, offTag: 'pantothenic-acid'),
@@ -554,6 +554,13 @@ enum Nutrient implements OffTagged {
     offTag: 'hydroxymethylbutyrate',
   ),
 
+  /// Dry residue
+  dryResidue(
+    typicalUnit: Unit.MILLI_G,
+    offTag: 'dry-residue',
+    acceptsPercentDV: false,
+  ),
+
   /// Polydextrose
   polydextrose(typicalUnit: Unit.G, offTag: 'polydextrose');
 
@@ -596,4 +603,22 @@ enum Nutrient implements OffTagged {
       : OffTagged.fromOffTag(offTag, Nutrient.values) as Nutrient?;
 
   String getOffTagPerSize(PerSize perSize) => '${offTag}_${perSize.offTag}';
+
+  /// Returns the list of all possible units.
+  List<Unit> getPossibleUnits() {
+    final List<Unit> result = <Unit>[];
+    if (acceptsWeight) {
+      result.addAll(<Unit>[Unit.G, Unit.MILLI_G, Unit.MICRO_G]);
+    }
+    if (acceptsIU) {
+      result.add(Unit.IU);
+    }
+    if (acceptsPercentDV) {
+      result.add(Unit.PERCENT_DV);
+    }
+    if (!result.contains(typicalUnit)) {
+      result.add(typicalUnit);
+    }
+    return result;
+  }
 }

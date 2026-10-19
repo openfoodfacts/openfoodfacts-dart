@@ -213,6 +213,18 @@ void main() {
       const perSize = PerSize.serving;
       int serving = 250;
 
+      // Sometimes the TEST data is empty for this barcode.
+      // When we remove the nutrient we test (with NutrientModifier.remove), we
+      // may end up with an empty nutrition table.
+      // To avoid that we need to add an unrelated nutrient: the nutrition table
+      // will never be empty, which is good for our tests.
+      const Nutrient constantNutrient = Nutrient.sugars;
+      const NutritionValue constantNutrientValue = NutritionValue(
+        modifier: null,
+        unit: Unit.G,
+        valueString: '69',
+      );
+
       for (int i = 0; i < NutrientModifier.values.length + 1; i++) {
         final NutrientModifier? modifier;
         if (i == 0) {
@@ -240,6 +252,7 @@ void main() {
                   unit: unit,
                   valueString: valueString,
                 ),
+                constantNutrient: constantNutrientValue,
               },
             ),
           ],
@@ -287,7 +300,11 @@ void main() {
         expect(nutritionSet.key.perUnit, Unit.G);
 
         if (modifier == NutrientModifier.remove) {
-          expect(nutritionValue, isNull);
+          if (nutritionValue != null) {
+            expect(nutritionValue.getCleanString(), isNull);
+          }
+          expect(nutritionSet.unspecifiedNutrients, isNotNull);
+          expect(nutritionSet.unspecifiedNutrients!, contains(nutrient));
         } else {
           expect(nutritionValue, isNotNull);
           expect(nutritionValue!.value, value);

@@ -3,7 +3,7 @@ import '../../utils/unit_helper.dart';
 
 /// "Key" of a nutrition set.
 class NutritionSetKey {
-  NutritionSetKey({
+  const NutritionSetKey({
     required this.source,
     required this.preparation,
     required this.perSize,
@@ -11,6 +11,13 @@ class NutritionSetKey {
     this.perUnit,
     this.lastUpdatedT,
   });
+
+  /// Very very common [NutritionSetKey].
+  static const NutritionSetKey standardNutritionSetKey = NutritionSetKey(
+    source: NutritionSetKey.sourcePackaging,
+    preparation: NutritionSetKey.preparationAsSold,
+    perSize: PerSize.oneHundredGrams,
+  );
 
   static const String sourcePackaging = "packaging";
   static const String sourceManufacturer = "manufacturer";

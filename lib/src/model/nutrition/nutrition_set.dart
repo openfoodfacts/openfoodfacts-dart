@@ -42,7 +42,7 @@ class NutritionSet {
     values = json['nutrients'];
     if (values != null) {
       nutritionValues = <Nutrient, NutritionValue>{};
-      for (MapEntry<String, dynamic> entry in values.entries) {
+      for (MapEntry<dynamic, dynamic> entry in values.entries) {
         final Nutrient? nutrient = Nutrient.fromOffTag(entry.key);
         if (nutrient == null) {
           continue;
