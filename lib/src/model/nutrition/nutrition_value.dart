@@ -3,7 +3,7 @@ import '../../utils/unit_helper.dart';
 
 /// Nutrition value for a nutrient.
 class NutritionValue {
-  NutritionValue({
+  const NutritionValue({
     this.unit,
     this.valueString,
     this.value,
