@@ -5,6 +5,20 @@ import 'nutrition_set_key.dart';
 /// Helper for extracting nutrition values from API 3.5.
 class NutritionHelper {
   // TODO(monsieurtanuki): extract other sets, like 'aggregated_set'
+
+  void setInputSets(
+    final Product product,
+    final List<NutritionSet> nutritionSets,
+  ) => setNutritionSets(product, nutritionSets, 'input_sets');
+
+  void setNutritionSets(
+    final Product product,
+    final List<NutritionSet> nutritionSets,
+    final String tag,
+  ) => product.nutrition = <String, dynamic>{
+    tag: [...nutritionSets.map((item) => item.toJson())],
+  };
+
   /// Returns the "input sets", which is the most relevant nutrition sets.
   List<NutritionSet>? getInputSets(final Product product) =>
       getNutritionSets(product, 'input_sets');
