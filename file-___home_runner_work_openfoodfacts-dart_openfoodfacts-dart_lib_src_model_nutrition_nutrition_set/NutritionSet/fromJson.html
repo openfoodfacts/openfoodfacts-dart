@@ -90,7 +90,7 @@
   values = json[&#39;nutrients&#39;];
   if (values != null) {
     nutritionValues = &lt;Nutrient, NutritionValue&gt;{};
-    for (MapEntry&lt;String, dynamic&gt; entry in values.entries) {
+    for (MapEntry&lt;dynamic, dynamic&gt; entry in values.entries) {
       final Nutrient? nutrient = Nutrient.fromOffTag(entry.key);
       if (nutrient == null) {
         continue;

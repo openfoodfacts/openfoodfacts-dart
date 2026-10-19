@@ -68,19 +68,12 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">TaxonomyIngredientQueryConfiguration.roots({
-  List&lt;OpenFoodFactsLanguage&gt;? languages,
-  OpenFoodFactsCountry? country,
-  List&lt;TaxonomyIngredientField&gt; fields = const [],
-  List&lt;Parameter&gt; additionalParameters = const [],
-  bool includeChildren = false,
-}) : super.roots(
-       TagType.INGREDIENTS,
-       languages: languages,
-       country: country,
-       includeChildren: includeChildren,
-       fields: fields,
-       additionalParameters: additionalParameters,
-     );</code></pre>
+  super.languages,
+  super.country,
+  super.fields = const [],
+  super.additionalParameters = const [],
+  super.includeChildren = false,
+}) : super.roots(TagType.INGREDIENTS);</code></pre>
 </section>
 
 

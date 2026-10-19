@@ -72,19 +72,11 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">TaxonomyAdditiveQueryConfiguration({
   required List&lt;String&gt; tags,
-  List&lt;OpenFoodFactsLanguage&gt;? languages,
-  OpenFoodFactsCountry? country,
-  List&lt;TaxonomyAdditiveField&gt; fields = const [],
-  List&lt;Parameter&gt; additionalParameters = const [],
-}) : super(
-       TagType.ADDITIVES,
-       tags,
-       languages: languages,
-       country: country,
-       includeChildren: false,
-       fields: fields,
-       additionalParameters: additionalParameters,
-     );</code></pre>
+  super.languages,
+  super.country,
+  super.fields = const [],
+  super.additionalParameters = const [],
+}) : super(TagType.ADDITIVES, tags, includeChildren: false);</code></pre>
 </section>
 
 

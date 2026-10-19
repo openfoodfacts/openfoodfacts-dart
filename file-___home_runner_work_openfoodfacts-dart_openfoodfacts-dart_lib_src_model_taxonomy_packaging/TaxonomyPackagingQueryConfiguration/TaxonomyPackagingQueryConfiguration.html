@@ -72,18 +72,11 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">TaxonomyPackagingQueryConfiguration({
   required List&lt;String&gt; tags,
-  List&lt;OpenFoodFactsLanguage&gt;? languages,
-  OpenFoodFactsCountry? country,
-  List&lt;TaxonomyPackagingField&gt; fields = const [],
-  List&lt;Parameter&gt; additionalParameters = const [],
-}) : super(
-       TagType.PACKAGING,
-       tags,
-       languages: languages,
-       country: country,
-       fields: fields,
-       additionalParameters: additionalParameters,
-     );</code></pre>
+  super.languages,
+  super.country,
+  super.fields = const [],
+  super.additionalParameters = const [],
+}) : super(TagType.PACKAGING, tags);</code></pre>
 </section>
 
 

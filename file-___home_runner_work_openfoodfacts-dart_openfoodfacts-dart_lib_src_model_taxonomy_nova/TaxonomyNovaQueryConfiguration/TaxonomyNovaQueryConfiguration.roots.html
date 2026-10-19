@@ -64,17 +64,13 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">TaxonomyNovaQueryConfiguration.roots({
-  List&lt;OpenFoodFactsLanguage&gt;? languages,
-  OpenFoodFactsCountry? country,
-}) : super.roots(
-       TagType.NOVA,
-       languages: languages,
-       country: country,
-       includeChildren: false,
-       fields: const [],
-       additionalParameters: const [],
-     );</code></pre>
+  <pre class="language-dart"><code class="language-dart">TaxonomyNovaQueryConfiguration.roots({super.languages, super.country})
+  : super.roots(
+      TagType.NOVA,
+      includeChildren: false,
+      fields: const [],
+      additionalParameters: const [],
+    );</code></pre>
 </section>
 
 

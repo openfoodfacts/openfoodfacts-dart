@@ -68,19 +68,12 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">TaxonomyCategoryQueryConfiguration.roots({
-  List&lt;OpenFoodFactsLanguage&gt;? languages,
-  OpenFoodFactsCountry? country,
-  bool includeChildren = false,
-  List&lt;TaxonomyCategoryField&gt; fields = const [],
-  List&lt;Parameter&gt; additionalParameters = const [],
-}) : super.roots(
-       TagType.CATEGORIES,
-       languages: languages,
-       country: country,
-       includeChildren: includeChildren,
-       fields: fields,
-       additionalParameters: additionalParameters,
-     );</code></pre>
+  super.languages,
+  super.country,
+  super.includeChildren = false,
+  super.fields = const [],
+  super.additionalParameters = const [],
+}) : super.roots(TagType.CATEGORIES);</code></pre>
 </section>
 
 

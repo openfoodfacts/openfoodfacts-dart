@@ -70,17 +70,11 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">TaxonomyCountryQueryConfiguration.all({
-  List&lt;OpenFoodFactsLanguage&gt;? languages,
-  OpenFoodFactsCountry? country,
-  List&lt;TaxonomyCountryField&gt; fields = const [],
-  List&lt;Parameter&gt; additionalParameters = const [],
-}) : super.roots(
-       TagType.COUNTRIES,
-       languages: languages,
-       country: country,
-       fields: fields,
-       additionalParameters: additionalParameters,
-     );</code></pre>
+  super.languages,
+  super.country,
+  super.fields = const [],
+  super.additionalParameters = const [],
+}) : super.roots(TagType.COUNTRIES);</code></pre>
 </section>
 
 

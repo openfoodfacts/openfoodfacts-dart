@@ -70,20 +70,12 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">TaxonomyCategoryQueryConfiguration({
   required List&lt;String&gt; tags,
-  List&lt;OpenFoodFactsLanguage&gt;? languages,
-  OpenFoodFactsCountry? country,
-  bool includeChildren = false,
-  List&lt;TaxonomyCategoryField&gt; fields = const [],
-  List&lt;Parameter&gt; additionalParameters = const [],
-}) : super(
-       TagType.CATEGORIES,
-       tags,
-       languages: languages,
-       country: country,
-       includeChildren: includeChildren,
-       fields: fields,
-       additionalParameters: additionalParameters,
-     );</code></pre>
+  super.languages,
+  super.country,
+  super.includeChildren = false,
+  super.fields = const [],
+  super.additionalParameters = const [],
+}) : super(TagType.CATEGORIES, tags);</code></pre>
 </section>
 
 
