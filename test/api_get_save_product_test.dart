@@ -657,7 +657,7 @@ void main() {
       });
 
       test(
-        'FABRICE requesting all-langs and in-langs fields together does not break anything',
+        'requesting all-langs and in-langs fields together does not break anything',
         () async {
           if (!await checkServer()) {
             return;
@@ -671,6 +671,7 @@ void main() {
               OpenFoodFactsLanguage.ENGLISH: englishProductName,
               OpenFoodFactsLanguage.RUSSIAN: russianProductName,
               OpenFoodFactsLanguage.GERMAN: germanProductName,
+              OpenFoodFactsLanguage.FRENCH: frenchProductName,
             },
             ingredientsTextInLanguages: {
               OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
@@ -713,6 +714,7 @@ void main() {
               OpenFoodFactsLanguage.ENGLISH: englishProductName,
               OpenFoodFactsLanguage.RUSSIAN: russianProductName,
               OpenFoodFactsLanguage.GERMAN: germanProductName,
+              OpenFoodFactsLanguage.FRENCH: frenchProductName,
             }),
           );
           expect(
