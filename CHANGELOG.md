@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.31.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.31.0...v3.31.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* new nutrition fine-tuning ([#1291](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1291)) ([fe69fbc](https://github.com/openfoodfacts/openfoodfacts-dart/commit/fe69fbca7d836a28c562c2550f8d0950440b73d3))
+
 ## [3.31.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.30.2...v3.31.0) (2026-10-07)
 
 
