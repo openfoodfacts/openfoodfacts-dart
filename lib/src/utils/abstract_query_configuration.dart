@@ -167,14 +167,18 @@ abstract class AbstractQueryConfiguration {
   /// dedicates methods in [OpenFoodAPIClient]
   Future<Response> getResponse(
     final User? user,
-    final UriProductHelper uriHelper,
-  ) async {
+    final UriProductHelper uriHelper, {
+    final String? bearerToken,
+  }) async {
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     return HttpHelper().doPostRequest(
       uriHelper.getPostUri(path: getUriPath()),
       getParametersMap(),
       user,
       uriHelper: uriHelper,
       addCredentialsToBody: false,
+      bearerToken: effectiveBearer,
     );
   }
 }
