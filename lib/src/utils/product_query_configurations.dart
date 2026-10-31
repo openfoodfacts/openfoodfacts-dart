@@ -5,6 +5,7 @@ import '../model/product_type_filter.dart';
 import '../model/user.dart';
 import 'abstract_query_configuration.dart';
 import 'http_helper.dart';
+import 'open_food_api_configuration.dart';
 import 'uri_helper.dart';
 
 /// Query Configuration for single barcode
@@ -56,13 +57,17 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
   @override
   Future<Response> getResponse(
     final User? user,
-    final UriProductHelper uriHelper,
-  ) async {
+    final UriProductHelper uriHelper, {
+    final String? bearerToken,
+  }) async {
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     return HttpHelper().doGetRequest(
       uriHelper.getUri(path: getUriPath(), queryParameters: getParametersMap()),
       user: user,
       uriHelper: uriHelper,
       addCookiesToHeader: true,
+      bearerToken: effectiveBearer,
     );
   }
 }
