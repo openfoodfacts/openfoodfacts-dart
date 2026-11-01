@@ -23,6 +23,9 @@ class NutritionSetKey {
   static const String sourceManufacturer = "manufacturer";
   static const String sourceEstimate = "estimate";
 
+  /// Source of the "aggregated set", which mixes the sources. Read-only.
+  static const String sourceAggregated = "aggregated";
+
   static const String preparationAsSold = "as_sold";
   static const String preparationPrepared = "prepared";
 
@@ -67,7 +70,7 @@ class NutritionSetKey {
       return null;
     }
     final String preparation = json['preparation'];
-    final String source = json['source'];
+    final String source = json['source'] ?? sourceAggregated;
     final num? perQuantity = json['per_quantity'];
     final Unit? perUnit = UnitHelper.stringToUnit(json['per_unit']);
     final int? lastUpdatedT = json['last_updated_t'];

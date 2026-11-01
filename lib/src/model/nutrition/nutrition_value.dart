@@ -9,6 +9,7 @@ class NutritionValue {
     this.value,
     this.valueComputed,
     this.modifier,
+    this.source,
   });
 
   /// Unit. Important in write mode - would be defaulted if not set.
@@ -24,6 +25,9 @@ class NutritionValue {
   final num? valueComputed;
 
   final NutrientModifier? modifier;
+
+  /// Source of the value, e.g. "manufacturer". Read-only: only in aggregates.
+  final String? source;
 
   String? getCleanString() {
     if (valueString == null) {
@@ -57,6 +61,7 @@ class NutritionValue {
       valueString: valueString,
       valueComputed: valueComputed,
       modifier: modifier,
+      source: json['source'],
     );
   }
 
