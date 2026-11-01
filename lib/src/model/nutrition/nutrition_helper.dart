@@ -30,7 +30,8 @@ class NutritionHelper {
     return json == null ? null : NutritionSet.fromJson(json);
   }
 
-  /// Returns true if the product explicitly has no nutrition data on packaging.
+  /// Returns true if the product explicitly has no nutrition data on packaging,
+  /// null when unknown.
   bool? getNoNutritionDataOnPackaging(final Product product) =>
       product.nutrition?['no_nutrition_data_on_packaging'];
 
