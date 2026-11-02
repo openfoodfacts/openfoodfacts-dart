@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
 
@@ -69,6 +71,22 @@ void main() {
         NutritionHelper().getNoNutritionDataOnPackaging(Product()),
         isNull,
       );
+    });
+
+    test('is decoded through Product.fromJson', () {
+      final Product decoded = Product.fromJson(
+        jsonDecode(
+          '{"nutrition": {"no_nutrition_data_on_packaging": false,'
+          '"aggregated_set": {"per": "100g", "preparation": "as_sold",'
+          '"nutrients": {"iron": {"source": "manufacturer", "unit": "mg", "value": 5}}}}}',
+        ),
+      );
+      expect(NutritionHelper().getNoNutritionDataOnPackaging(decoded), isFalse);
+      final NutritionValue iron = NutritionHelper()
+          .getAggregatedSet(decoded)!
+          .nutritionValues![Nutrient.iron]!;
+      expect(iron.source, NutritionSetKey.sourceManufacturer);
+      expect(iron.value, 5);
     });
   });
 }
