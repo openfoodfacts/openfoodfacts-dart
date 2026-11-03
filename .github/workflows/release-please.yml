@@ -11,7 +11,7 @@
         
         - name: Release-Please
           id: release
-          uses: GoogleCloudPlatform/release-please-action@v5
+          uses: GoogleCloudPlatform/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # ratchet:GoogleCloudPlatform/release-please-action@v5
           with:
             token: ${{ secrets.OPENFOODFACTS_BOT_PAT }}
             release-type: dart
