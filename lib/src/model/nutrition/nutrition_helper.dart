@@ -4,6 +4,8 @@ import 'nutrition_set_key.dart';
 
 /// Helper for extracting nutrition values from API 3.5.
 class NutritionHelper {
+  // TODO(monsieurtanuki): extract other sets, like 'aggregated_set'
+
   void setInputSets(
     final Product product,
     final List<NutritionSet> nutritionSets,
@@ -20,15 +22,6 @@ class NutritionHelper {
   /// Returns the "input sets", which is the most relevant nutrition sets.
   List<NutritionSet>? getInputSets(final Product product) =>
       getNutritionSets(product, 'input_sets');
-
-  /// Returns the "aggregated set": for each nutrient, the most relevant value.
-  ///
-  /// Read-only. The [NutritionValue.source] of each value tells where it
-  /// comes from.
-  NutritionSet? getAggregatedSet(final Product product) {
-    final dynamic json = product.nutrition?['aggregated_set'];
-    return json == null ? null : NutritionSet.fromJson(json);
-  }
 
   /// Returns true if the product explicitly has no nutrition data on packaging,
   /// null when unknown.
