@@ -18,8 +18,8 @@ class GetReceiptItemsParameters
   @override
   Map<String, String> getQueryParameters() {
     super.getQueryParameters();
-    addNonNullDate(createdGte, 'created__gte', dayOnly: false);
-    addNonNullDate(createdLte, 'created__lte', dayOnly: false);
+    addNonNullDate(createdGte?.toUtc(), 'created__gte', dayOnly: false);
+    addNonNullDate(createdLte?.toUtc(), 'created__lte', dayOnly: false);
     addNonNullString(proofOwner, 'proof__owner');
     addNonNullInt(proofId, 'proof_id');
     addNonNullString(status?.offTag, 'status');

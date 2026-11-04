@@ -111,12 +111,14 @@ void main() {
         imageUrl!.toString(),
         contains('img/price-tags/000/000/000000001.webp'),
       );
+      expect(imageUrl.host, equals(uriHelperFoodProd.getHost('prices')));
 
       final Uri? proofUrl = proof.getFileUrl(
         uriProductHelper: uriHelperFoodProd,
       );
       expect(proofUrl, isNotNull);
       expect(proofUrl!.toString(), contains('img/0017/EpvOksM9yQ.jpg'));
+      expect(proofUrl.host, equals(uriHelperFoodProd.getHost('prices')));
 
       final Uri? thumbUrl = proof.getFileUrl(
         uriProductHelper: uriHelperFoodProd,
@@ -124,6 +126,7 @@ void main() {
       );
       expect(thumbUrl, isNotNull);
       expect(thumbUrl!.toString(), contains('img/0017/EpvOksM9yQ.400.jpg'));
+      expect(thumbUrl.host, equals(uriHelperFoodProd.getHost('prices')));
 
       // Round-trip toJson / fromJson
       final Map<String, dynamic> serialized =
@@ -385,6 +388,35 @@ void main() {
       expect(queryParams['status'], equals('0'));
       expect(queryParams['status__isnull'], equals('true'));
     });
+
+    test('Local DateTime created filters serialize as UTC', () {
+      final DateTime local = DateTime(2025, 1, 1, 12);
+
+      final GetPriceTagsParameters priceTagParams = GetPriceTagsParameters()
+        ..createdGte = local
+        ..createdLte = local;
+      expect(
+        priceTagParams.getQueryParameters()['created__gte'],
+        equals(local.toUtc().toIso8601String()),
+      );
+      expect(
+        priceTagParams.getQueryParameters()['created__lte'],
+        equals(local.toUtc().toIso8601String()),
+      );
+
+      final GetReceiptItemsParameters receiptParams =
+          GetReceiptItemsParameters()
+            ..createdGte = local
+            ..createdLte = local;
+      expect(
+        receiptParams.getQueryParameters()['created__gte'],
+        equals(local.toUtc().toIso8601String()),
+      );
+      expect(
+        receiptParams.getQueryParameters()['created__lte'],
+        equals(local.toUtc().toIso8601String()),
+      );
+    });
   });
 
   group('Offline client methods tests', () {
@@ -412,12 +444,14 @@ void main() {
       final MaybeError<GetPriceTagsResult> result =
           await OpenPricesAPIClient.getPriceTags(
             GetPriceTagsParameters()..pageSize = 10,
+            bearerToken: 'test-token',
           );
 
       expect(result.isError, isFalse);
       expect(result.value.items, hasLength(2));
       expect(mockHttpHelper.lastUri?.path, contains('price-tags'));
       expect(mockHttpHelper.lastUri?.queryParameters['size'], equals('10'));
+      expect(mockHttpHelper.lastBearerToken, equals('test-token'));
     });
 
     test('getPriceTags - non-200 error', () async {
@@ -446,11 +480,13 @@ void main() {
 
       final MaybeError<PriceTag> result = await OpenPricesAPIClient.getPriceTag(
         1,
+        bearerToken: 'test-token',
       );
 
       expect(result.isError, isFalse);
       expect(result.value.id, equals(1));
       expect(mockHttpHelper.lastUri?.path, contains('price-tags/1'));
+      expect(mockHttpHelper.lastBearerToken, equals('test-token'));
     });
 
     test('getPriceTag - non-200 error', () async {
@@ -477,6 +513,7 @@ void main() {
       final MaybeError<GetReceiptItemsResult> result =
           await OpenPricesAPIClient.getReceiptItems(
             GetReceiptItemsParameters()..proofId = 28961,
+            bearerToken: 'test-token',
           );
 
       expect(result.isError, isFalse);
@@ -486,6 +523,7 @@ void main() {
         mockHttpHelper.lastUri?.queryParameters['proof_id'],
         equals('28961'),
       );
+      expect(mockHttpHelper.lastBearerToken, equals('test-token'));
     });
 
     test('getReceiptItems - non-200 error', () async {
@@ -511,11 +549,15 @@ void main() {
       );
 
       final MaybeError<ReceiptItem> result =
-          await OpenPricesAPIClient.getReceiptItem(6520);
+          await OpenPricesAPIClient.getReceiptItem(
+            6520,
+            bearerToken: 'test-token',
+          );
 
       expect(result.isError, isFalse);
       expect(result.value.id, equals(6520));
       expect(mockHttpHelper.lastUri?.path, contains('receipt-items/6520'));
+      expect(mockHttpHelper.lastBearerToken, equals('test-token'));
     });
 
     test('getReceiptItem - non-200 error', () async {
