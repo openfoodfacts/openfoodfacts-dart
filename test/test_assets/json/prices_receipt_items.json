@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "id": 6520,
+      "proof_id": 28961,
+      "price_id": 96248,
+      "order": 0,
+      "predicted_data": {},
+      "status": 1,
+      "schema_version": "1.0",
+      "created": "2025-04-13T17:50:16.219168Z",
+      "updated": "2025-04-13T17:50:16.219472Z",
+      "proof_prediction": null
+    },
+    {
+      "id": 6463,
+      "proof_id": 28892,
+      "price_id": null,
+      "order": 1,
+      "predicted_data": {
+        "price": 2.21,
+        "product": "other",
+        "product_name": "V.BOVINE 1 STE"
+      },
+      "status": null,
+      "schema_version": "1.0",
+      "created": "2025-04-12T17:22:27.980193Z",
+      "updated": "2025-04-12T17:22:27.980490Z",
+      "proof_prediction": 54701
+    }
+  ],
+  "page": 1,
+  "pages": 101630,
+  "size": 2,
+  "total": 203260
+}
+
