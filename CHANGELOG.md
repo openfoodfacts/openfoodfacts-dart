@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.32.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.31.1...v3.32.0) (2026-11-05)
+
+
+### Features
+
+* no nutrition data on packaging flag (API 3.5) ([#1301](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1301)) ([64237b8](https://github.com/openfoodfacts/openfoodfacts-dart/commit/64237b8c7c69dabb17fc1c894ab11dedec5bd1c4))
+
 ## [3.31.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.31.0...v3.31.1) (2026-10-19)
 
 
