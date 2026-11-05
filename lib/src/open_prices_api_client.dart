@@ -15,16 +15,22 @@ import 'prices/get_locations_result.dart';
 import 'prices/get_parameters_helper.dart';
 import 'prices/get_price_products_parameters.dart';
 import 'prices/get_price_products_result.dart';
+import 'prices/get_price_tags_parameters.dart';
+import 'prices/get_price_tags_result.dart';
 import 'prices/get_prices_parameters.dart';
 import 'prices/get_prices_result.dart';
 import 'prices/get_proofs_parameters.dart';
 import 'prices/get_proofs_result.dart';
+import 'prices/get_receipt_items_parameters.dart';
+import 'prices/get_receipt_items_result.dart';
 import 'prices/get_users_parameters.dart';
 import 'prices/get_users_result.dart';
 import 'prices/location.dart';
 import 'prices/location_osm_type.dart';
 import 'prices/price_product.dart';
+import 'prices/price_tag.dart';
 import 'prices/price_total_stats.dart';
+import 'prices/receipt_item.dart';
 import 'prices/session.dart';
 import 'prices/update_price_parameters.dart';
 import 'prices/update_proof_parameters.dart';
@@ -822,5 +828,133 @@ class OpenPricesAPIClient {
       }
     }
     return MaybeError<PriceTotalStats>.responseError(response);
+  }
+
+  /// Gets price tags according to the query parameters.
+  ///
+  /// cf. https://prices.openfoodfacts.org/api/docs
+  static Future<MaybeError<GetPriceTagsResult>> getPriceTags(
+    final GetPriceTagsParameters parameters, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
+    final String? bearerToken,
+  }) async {
+    final Uri uri = getApiUri(
+      'price-tags',
+      queryParameters: parameters.getQueryParameters(),
+      uriHelper: uriHelper,
+      version: version,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<GetPriceTagsResult>.value(
+          GetPriceTagsResult.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<GetPriceTagsResult>.responseError(response);
+  }
+
+  /// Gets a price tag.
+  ///
+  /// cf. https://prices.openfoodfacts.org/api/docs
+  static Future<MaybeError<PriceTag>> getPriceTag(
+    final int priceTagId, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
+    final String? bearerToken,
+  }) async {
+    final Uri uri = getApiUri(
+      'price-tags/$priceTagId',
+      uriHelper: uriHelper,
+      version: version,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<PriceTag>.value(PriceTag.fromJson(decodedResponse));
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<PriceTag>.responseError(response);
+  }
+
+  /// Gets receipt items according to the query parameters.
+  ///
+  /// cf. https://prices.openfoodfacts.org/api/docs
+  static Future<MaybeError<GetReceiptItemsResult>> getReceiptItems(
+    final GetReceiptItemsParameters parameters, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
+    final String? bearerToken,
+  }) async {
+    final Uri uri = getApiUri(
+      'receipt-items',
+      queryParameters: parameters.getQueryParameters(),
+      uriHelper: uriHelper,
+      version: version,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<GetReceiptItemsResult>.value(
+          GetReceiptItemsResult.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<GetReceiptItemsResult>.responseError(response);
+  }
+
+  /// Gets a receipt item.
+  ///
+  /// cf. https://prices.openfoodfacts.org/api/docs
+  static Future<MaybeError<ReceiptItem>> getReceiptItem(
+    final int receiptItemId, {
+    final UriProductHelper uriHelper = uriHelperFoodProd,
+    final ApiVersion version = defaultVersion,
+    final String? bearerToken,
+  }) async {
+    final Uri uri = getApiUri(
+      'receipt-items/$receiptItemId',
+      uriHelper: uriHelper,
+      version: version,
+    );
+    final Response response = await HttpHelper().doGetRequest(
+      uri,
+      uriHelper: uriHelper,
+      bearerToken: bearerToken,
+    );
+    if (response.statusCode == 200) {
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        return MaybeError<ReceiptItem>.value(
+          ReceiptItem.fromJson(decodedResponse),
+        );
+      } catch (e) {
+        //
+      }
+    }
+    return MaybeError<ReceiptItem>.responseError(response);
   }
 }
