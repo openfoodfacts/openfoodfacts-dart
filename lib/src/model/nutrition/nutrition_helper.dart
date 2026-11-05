@@ -23,6 +23,11 @@ class NutritionHelper {
   List<NutritionSet>? getInputSets(final Product product) =>
       getNutritionSets(product, 'input_sets');
 
+  /// Returns true if the product explicitly has no nutrition data on packaging,
+  /// null when unknown.
+  bool? getNoNutritionDataOnPackaging(final Product product) =>
+      product.nutrition?['no_nutrition_data_on_packaging'];
+
   /// Returns the nutrition sets that match a [tag].
   List<NutritionSet>? getNutritionSets(
     final Product product,

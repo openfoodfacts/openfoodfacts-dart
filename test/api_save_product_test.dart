@@ -649,5 +649,36 @@ Like that:
       expect(product.noNutritionData, isFalse);
       expect(product.nutriments, isNotNull);
     });
+
+    test(
+      'set and read back no nutrition data on packaging',
+      () async {
+        const String barcode = '3560070712786';
+        for (final bool value in <bool>[true, false, true]) {
+          final Status status = await OpenFoodAPIClient.saveProduct(
+            TestConstants.TEST_USER,
+            Product(barcode: barcode, noNutritionData: value),
+            uriHelper: uriHelper,
+          );
+          if (!checkServerStatus(status)) {
+            return;
+          }
+          final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+            ProductQueryConfiguration(
+              barcode,
+              fields: <ProductField>[ProductField.NUTRITION],
+              version: ProductQueryVersion.latestVersion,
+            ),
+            uriHelper: uriHelper,
+          );
+          expect(result.product, isNotNull);
+          expect(
+            NutritionHelper().getNoNutritionDataOnPackaging(result.product!),
+            value ? isTrue : isNull,
+          );
+        }
+      },
+      timeout: Timeout(Duration(seconds: 180)),
+    );
   });
 }
