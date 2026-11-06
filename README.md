@@ -145,6 +145,38 @@ There are multiple ways to handle user accounts:
 Currently there is no OAuth workflow, therefor a user is just a [User](https://pub.dev/documentation/openfoodfacts/latest/openfoodfacts/User-class.html) object in this package.
 So you need to get the username as well as the password from the users and store it somewhere save. For Flutter apps we recommend using the [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage) package
 
+#### Bearer token (OIDC / Keycloak) authentication
+
+ProductOpener also accepts `Authorization: Bearer <token>` headers
+(OIDC via Keycloak, scopes `products:read` and `products:write`).
+This package intentionally does **not** depend on an OIDC client package
+such as `openidconnect`: the app owns the login UI, token storage and
+refresh, and only injects the raw token here. That keeps this package pure
+Dart (usable outside Flutter) and dependency-light.
+
+Three equivalent injection points, highest precedence first:
+
+```dart
+// 1. Per request (e.g. from your OIDC client):
+await OpenFoodAPIClient.saveProduct(
+  null, // no User needed when a bearer token is used
+  product,
+  bearerToken: myOidcToken,
+);
+
+// 2. Global static token (refreshed by the app when needed):
+OpenFoodAPIConfiguration.globalBearerToken = myOidcToken;
+
+// 3. Lazy provider callback (called when no explicit/global token is set,
+//    ideal for auto-refresh):
+OpenFoodAPIConfiguration.bearerTokenProvider = () async {
+  return await myAuthService.getValidBearerToken();
+};
+```
+
+When a bearer token is used, user/password form fields are omitted and the
+`Bearer` header takes precedence over any legacy credentials.
+
 For the user to be taken into account you have mount a global user at one point in your app lifecycle:
 
 ```dart
