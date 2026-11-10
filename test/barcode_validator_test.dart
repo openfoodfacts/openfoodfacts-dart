@@ -16,6 +16,11 @@ void main() {
       expect(BarcodeValidator.isValid("12345676"), false);
       expect(BarcodeValidator.isValid("56987943"), false);
     });
+
+    test('Non-digit EAN8 barcodes', () {
+      // the check digit sum happens to work out for "1234567X"
+      expect(() => BarcodeValidator.isValid("1234567X"), throwsException);
+    });
   });
 
   group('EAN13', () {
