@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.32.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.32.0...v3.32.1) (2026-11-11)
+
+
+### Bug Fixes
+
+* barcode validator accepted non-digit characters ([#1310](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1310)) ([831bda2](https://github.com/openfoodfacts/openfoodfacts-dart/commit/831bda2d3ba7b1fba79c56a1681879e1d0a11d83))
+
 ## [3.32.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.31.1...v3.32.0) (2026-11-05)
 
 
