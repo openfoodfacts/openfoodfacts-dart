@@ -87,14 +87,22 @@ class OpenFoodAPIClient {
   ///   print("Upload was successful");
   /// ```
   static Future<Status> saveProduct(
-    final User user,
+    final User? user,
     final Product product, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final OpenFoodFactsCountry? country,
     final OpenFoodFactsLanguage? language,
+    final String? bearerToken,
   }) async {
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     final Map<String, String> parameterMap = <String, String>{};
-    parameterMap.addAll(user.toData());
+    if (effectiveBearer == null) {
+      final User? effectiveUser = OpenFoodAPIConfiguration.getUser(user);
+      if (effectiveUser != null) {
+        parameterMap.addAll(effectiveUser.toData());
+      }
+    }
     parameterMap.addAll(product.toServerData());
     if (language != null) {
       parameterMap['lc'] = language.offTag;
@@ -115,6 +123,7 @@ class OpenFoodAPIClient {
       user,
       uriHelper: uriHelper,
       addCredentialsToBody: true,
+      bearerToken: effectiveBearer,
     );
     _checkResponse(response);
     return Status.fromApiResponse(response.body);
@@ -126,7 +135,7 @@ class OpenFoodAPIClient {
   /// cf. https://github.com/openfoodfacts/openfoodfacts-server/blob/main/lib/ProductOpener/APIProductWrite.pm
   /// cf. https://github.com/openfoodfacts/openfoodfacts-server/blob/main/lib/ProductOpener/Nutrition.pm
   static Future<ProductResultV3> temporarySaveProductV3(
-    final User user,
+    final User? user,
     final String barcode, {
     final List<ProductPackaging>? packagings,
     final bool? packagingsComplete,
@@ -136,6 +145,7 @@ class OpenFoodAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final OpenFoodFactsCountry? country,
     final OpenFoodFactsLanguage? language,
+    final String? bearerToken,
   }) async {
     final Map<String, dynamic> productParameters = <String, dynamic>{};
     if (packagings != null) {
@@ -171,19 +181,28 @@ class OpenFoodAPIClient {
       extraParameters: extraParameters,
       user: user,
       uriHelper: uriHelper,
+      bearerToken: bearerToken,
     );
   }
 
   static Future<ProductResultV3> patchProductV3({
     required final String barcode,
     required final Map<String, dynamic> productParameters,
-    required final User user,
+    final User? user,
     final Map<String, dynamic> extraParameters = const <String, dynamic>{},
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ProductQueryVersion version = ProductQueryVersion.latestVersion,
+    final String? bearerToken,
   }) async {
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     final Map<String, dynamic> parameterMap = <String, dynamic>{};
-    parameterMap.addAll(user.toData());
+    if (effectiveBearer == null) {
+      final User? effectiveUser = OpenFoodAPIConfiguration.getUser(user);
+      if (effectiveUser != null) {
+        parameterMap.addAll(effectiveUser.toData());
+      }
+    }
     parameterMap.addAll(extraParameters);
     parameterMap['product'] = productParameters;
 
@@ -196,6 +215,7 @@ class OpenFoodAPIClient {
       parameterMap,
       user,
       uriHelper: uriHelper,
+      bearerToken: effectiveBearer,
     );
     _checkResponse(response);
     return ProductResultV3.fromJson(HttpHelper().jsonDecode(response.body));
@@ -228,9 +248,10 @@ class OpenFoodAPIClient {
   ///   print("Upload was successful");
   /// ```
   static Future<Status> addProductImage(
-    User user,
+    User? user,
     SendImage image, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
   }) async {
     var dataMap = <String, String>{};
     var fileMap = <String, Uri>{};
@@ -243,12 +264,15 @@ class OpenFoodAPIClient {
       addUserAgentParameters: false,
     );
 
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     return await HttpHelper().doMultipartRequest(
       imageUri,
       dataMap,
       files: fileMap,
       user: user,
       uriHelper: uriHelper,
+      bearerToken: effectiveBearer,
     );
   }
 
@@ -287,11 +311,13 @@ class OpenFoodAPIClient {
     ProductQueryConfiguration configuration, {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
   }) async {
     final String productString = await getProductString(
       configuration,
       user: user,
       uriHelper: uriHelper,
+      bearerToken: bearerToken,
     );
     final String jsonStr = _replaceQuotes(productString);
     final ProductResultV3 result = ProductResultV3.fromJson(
@@ -309,8 +335,15 @@ class OpenFoodAPIClient {
     final ProductQueryConfiguration configuration, {
     final User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
   }) async {
-    final Response response = await configuration.getResponse(user, uriHelper);
+    // NOTE: no token resolution here; ProductQueryConfiguration.getResponse
+    // resolves explicit/global/provider via OpenFoodAPIConfiguration.
+    final Response response = await configuration.getResponse(
+      user,
+      uriHelper,
+      bearerToken: bearerToken,
+    );
     TooManyRequestsException.check(response);
     _checkResponse(response, includeCodes: [404]);
     return response.body;
@@ -474,8 +507,15 @@ class OpenFoodAPIClient {
     final User? user,
     final AbstractQueryConfiguration configuration, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
   }) async {
-    final Response response = await configuration.getResponse(user, uriHelper);
+    // NOTE: no token resolution here; AbstractQueryConfiguration.getResponse
+    // resolves explicit/global/provider via OpenFoodAPIConfiguration.
+    final Response response = await configuration.getResponse(
+      user,
+      uriHelper,
+      bearerToken: bearerToken,
+    );
     TooManyRequestsException.check(response);
     _checkResponse(response);
     final String jsonStr = _replaceQuotes(response.body);
@@ -494,6 +534,7 @@ class OpenFoodAPIClient {
     final OpenFoodFactsLanguage? language,
     final OpenFoodFactsCountry? country,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
   }) async {
     final SearchResult searchResult = await searchProducts(
       user,
@@ -512,6 +553,7 @@ class OpenFoodAPIClient {
         version: version,
       ),
       uriHelper: uriHelper,
+      bearerToken: bearerToken,
     );
     final Map<String, ProductFreshness> result = <String, ProductFreshness>{};
     if (searchResult.products == null) {
@@ -531,7 +573,10 @@ class OpenFoodAPIClient {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
+    final String? bearerToken,
   }) async {
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     final Uri uri = configuration.getPostUri(uriHelper, version: version);
     final Response response = await HttpHelper().doPostRequest(
       uri,
@@ -539,6 +584,7 @@ class OpenFoodAPIClient {
       user,
       uriHelper: uriHelper,
       addCredentialsToBody: false,
+      bearerToken: effectiveBearer,
     );
 
     _checkResponse(response);
@@ -567,11 +613,13 @@ class OpenFoodAPIClient {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
+    final String? bearerToken,
   }) => getTaxonomy<TaxonomyPackagingShape, TaxonomyPackagingShapeField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
     version: version,
+    bearerToken: bearerToken,
   );
 
   static Future<Map<String, TaxonomyPackagingMaterial>?>
@@ -580,11 +628,13 @@ class OpenFoodAPIClient {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
+    final String? bearerToken,
   }) => getTaxonomy<TaxonomyPackagingMaterial, TaxonomyPackagingMaterialField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
     version: version,
+    bearerToken: bearerToken,
   );
 
   static Future<Map<String, TaxonomyPackagingRecycling>?>
@@ -593,12 +643,14 @@ class OpenFoodAPIClient {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
+    final String? bearerToken,
   }) =>
       getTaxonomy<TaxonomyPackagingRecycling, TaxonomyPackagingRecyclingField>(
         configuration,
         user: user,
         uriHelper: uriHelper,
         version: version,
+        bearerToken: bearerToken,
       );
 
   static Future<Map<String, TaxonomyNova>?> getTaxonomyNova(
@@ -606,11 +658,13 @@ class OpenFoodAPIClient {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
+    final String? bearerToken,
   }) => getTaxonomy<TaxonomyNova, TaxonomyNovaField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
     version: version,
+    bearerToken: bearerToken,
   );
 
   static Future<Map<String, TaxonomyCategory>?> getTaxonomyCategories(
@@ -618,11 +672,13 @@ class OpenFoodAPIClient {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
+    final String? bearerToken,
   }) => getTaxonomy<TaxonomyCategory, TaxonomyCategoryField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
     version: version,
+    bearerToken: bearerToken,
   );
 
   static Future<Map<String, TaxonomyAdditive>?> getTaxonomyAdditives(
@@ -630,11 +686,13 @@ class OpenFoodAPIClient {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
+    final String? bearerToken,
   }) => getTaxonomy<TaxonomyAdditive, TaxonomyAdditiveField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
     version: version,
+    bearerToken: bearerToken,
   );
 
   static Future<Map<String, TaxonomyAllergen>?> getTaxonomyAllergens(
@@ -642,11 +700,13 @@ class OpenFoodAPIClient {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
+    final String? bearerToken,
   }) => getTaxonomy<TaxonomyAllergen, TaxonomyAllergenField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
     version: version,
+    bearerToken: bearerToken,
   );
 
   static Future<Map<String, TaxonomyCountry>?> getTaxonomyCountries(
@@ -654,11 +714,13 @@ class OpenFoodAPIClient {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
+    final String? bearerToken,
   }) => getTaxonomy<TaxonomyCountry, TaxonomyCountryField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
     version: version,
+    bearerToken: bearerToken,
   );
 
   static Future<Map<String, TaxonomyIngredient>?> getTaxonomyIngredients(
@@ -666,11 +728,13 @@ class OpenFoodAPIClient {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
+    final String? bearerToken,
   }) => getTaxonomy<TaxonomyIngredient, TaxonomyIngredientField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
     version: version,
+    bearerToken: bearerToken,
   );
 
   static Future<Map<String, TaxonomyLabel>?> getTaxonomyLabels(
@@ -678,11 +742,13 @@ class OpenFoodAPIClient {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
+    final String? bearerToken,
   }) => getTaxonomy<TaxonomyLabel, TaxonomyLabelField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
     version: version,
+    bearerToken: bearerToken,
   );
 
   static Future<Map<String, TaxonomyLanguage>?> getTaxonomyLanguages(
@@ -690,11 +756,13 @@ class OpenFoodAPIClient {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
+    final String? bearerToken,
   }) => getTaxonomy<TaxonomyLanguage, TaxonomyLanguageField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
     version: version,
+    bearerToken: bearerToken,
   );
 
   static Future<Map<String, TaxonomyPackaging>?> getTaxonomyPackagings(
@@ -702,11 +770,13 @@ class OpenFoodAPIClient {
     final User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
+    final String? bearerToken,
   }) => getTaxonomy<TaxonomyPackaging, TaxonomyPackagingField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
     version: version,
+    bearerToken: bearerToken,
   );
 
   static Future<Map<String, TaxonomyOrigin>?> getTaxonomyOrigins(
@@ -714,11 +784,13 @@ class OpenFoodAPIClient {
     User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = TaxonomyQueryConfiguration.defaultVersion,
+    final String? bearerToken,
   }) => getTaxonomy<TaxonomyOrigin, TaxonomyOriginField>(
     configuration,
     user: user,
     uriHelper: uriHelper,
     version: version,
+    bearerToken: bearerToken,
   );
 
   static void _removeImages(
@@ -752,11 +824,12 @@ class OpenFoodAPIClient {
   ///   print(result.ingredientsTextFromImage); // EAU DE SOURCE DE LA DOYE BOUTEILIF Moll
   ///  ´´´
   static Future<OcrIngredientsResult> extractIngredients(
-    User user,
+    User? user,
     String barcode,
     OpenFoodFactsLanguage language, {
     OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
   }) async {
     final Uri uri = uriHelper.getPostUri(path: '/cgi/ingredients.pl');
     final Map<String, String> queryParameters = <String, String>{
@@ -765,12 +838,15 @@ class OpenFoodAPIClient {
       'id': 'ingredients_${language.offTag}',
       'ocr_engine': ocrField.offTag,
     };
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     final Response response = await HttpHelper().doPostRequest(
       uri,
       queryParameters,
       user,
       uriHelper: uriHelper,
       addCredentialsToBody: false,
+      bearerToken: effectiveBearer,
     );
     _checkResponse(response);
     return OcrIngredientsResult.fromJson(
@@ -796,11 +872,12 @@ class OpenFoodAPIClient {
   ///   print(result.textFromImage); // SPRING WATER LE AUSE MGL Bicarbonates...
   /// ```
   static Future<OcrPackagingResult> extractPackaging(
-    final User user,
+    final User? user,
     final String barcode,
     final OpenFoodFactsLanguage language, {
     final OcrField ocrField = OcrField.GOOGLE_CLOUD_VISION,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
   }) async {
     final Uri uri = uriHelper.getPostUri(path: '/cgi/packaging.pl');
     final Map<String, String> queryParameters = <String, String>{
@@ -809,12 +886,15 @@ class OpenFoodAPIClient {
       'id': 'packaging_${language.offTag}',
       'ocr_engine': ocrField.offTag,
     };
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     final Response response = await HttpHelper().doPostRequest(
       uri,
       queryParameters,
       user,
       uriHelper: uriHelper,
       addCredentialsToBody: false,
+      bearerToken: effectiveBearer,
     );
     _checkResponse(response);
     return OcrPackagingResult.fromJson(
@@ -837,6 +917,7 @@ class OpenFoodAPIClient {
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ProductQueryVersion version = ProductQueryVersion.latestVersion,
     final User? user,
+    final String? bearerToken,
   }) async {
     final Map<String, String> queryParameters = <String, String>{
       'tagtype': taxonomyType.offTag,
@@ -851,10 +932,13 @@ class OpenFoodAPIClient {
       path: version.getApiPath('taxonomy_suggestions'),
       queryParameters: queryParameters,
     );
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     final Response response = await HttpHelper().doGetRequest(
       uri,
       user: user,
       uriHelper: uriHelper,
+      bearerToken: effectiveBearer,
     );
     _checkResponse(response);
     final Map<String, dynamic> map = HttpHelper().jsonDecode(response.body);
@@ -889,6 +973,8 @@ class OpenFoodAPIClient {
     required final OpenFoodFactsLanguage language,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ProductQueryVersion version = ProductQueryVersion.latestVersion,
+    final User? user,
+    final String? bearerToken,
   }) async {
     final List<String> input = _cleanTags(localizedNames);
     if (input.isEmpty) {
@@ -903,9 +989,13 @@ class OpenFoodAPIClient {
       path: version.getApiPath('taxonomy_canonicalize_tags'),
       queryParameters: queryParameters,
     );
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     final Response response = await HttpHelper().doGetRequest(
       uri,
+      user: user,
       uriHelper: uriHelper,
+      bearerToken: effectiveBearer,
     );
     if (response.statusCode != 200) {
       return MaybeError<Map<String, String>>.responseError(response);
@@ -946,6 +1036,8 @@ class OpenFoodAPIClient {
     required final OpenFoodFactsLanguage language,
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ProductQueryVersion version = ProductQueryVersion.latestVersion,
+    final User? user,
+    final String? bearerToken,
   }) async {
     final List<String> input = _cleanTags(canonicalTags);
     if (input.isEmpty) {
@@ -960,9 +1052,13 @@ class OpenFoodAPIClient {
       path: version.getApiPath('taxonomy_display_tags'),
       queryParameters: queryParameters,
     );
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     final Response response = await HttpHelper().doGetRequest(
       uri,
+      user: user,
       uriHelper: uriHelper,
+      bearerToken: effectiveBearer,
     );
     if (response.statusCode != 200) {
       return MaybeError<Map<String, String>>.responseError(response);
@@ -1230,12 +1326,14 @@ class OpenFoodAPIClient {
     // TODO: deprecated from 2026-04-06; remove when old enough
     @Deprecated('Not relevant anymore') final bool excludeReadOnly = true,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
   }) async => OrderedNutrients.fromJson(
     HttpHelper().jsonDecode(
       await getOrderedNutrientsJsonString(
         country: country,
         language: language,
         uriHelper: uriHelper,
+        bearerToken: bearerToken,
       ),
     ),
   );
@@ -1247,18 +1345,22 @@ class OpenFoodAPIClient {
     required final OpenFoodFactsCountry country,
     required final OpenFoodFactsLanguage language,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
   }) async {
     final Uri uri = uriHelper.getPostUri(path: 'cgi/nutrients.pl');
     Map<String, String> queryParameters = <String, String>{
       'cc': country.offTag,
       'lc': language.offTag,
     };
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     final Response response = await HttpHelper().doPostRequest(
       uri,
       queryParameters,
       null,
       uriHelper: uriHelper,
       addCredentialsToBody: false,
+      bearerToken: effectiveBearer,
     );
     _checkResponse(response);
     return response.body;
@@ -1278,8 +1380,9 @@ class OpenFoodAPIClient {
     required final OpenFoodFactsLanguage language,
     required final String imgid,
     required final ImageAngle angle,
-    required final User user,
+    final User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
   }) async => _callProductImageCrop(
     barcode: barcode,
     imageField: imageField,
@@ -1288,6 +1391,7 @@ class OpenFoodAPIClient {
     user: user,
     extraParameters: <String, String>{'angle': angle.degreesClockwise},
     uriHelper: uriHelper,
+    bearerToken: bearerToken,
   );
 
   /// Crops an already uploaded image.
@@ -1309,9 +1413,10 @@ class OpenFoodAPIClient {
     required final int y1,
     required final int x2,
     required final int y2,
-    required final User user,
+    final User? user,
     final ImageAngle angle = ImageAngle.NOON,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
   }) async => _callProductImageCrop(
     barcode: barcode,
     imageField: imageField,
@@ -1327,6 +1432,7 @@ class OpenFoodAPIClient {
       'coordinates_image_size': 'full',
     },
     uriHelper: uriHelper,
+    bearerToken: bearerToken,
   );
 
   /// Calls `cgi/product_image_crop.pl` on a [ProductImage].
@@ -1339,8 +1445,9 @@ class OpenFoodAPIClient {
     required final OpenFoodFactsLanguage language,
     required final String imgid,
     required final Map<String, String> extraParameters,
-    required final User user,
+    final User? user,
     required final UriProductHelper uriHelper,
+    final String? bearerToken,
   }) async {
     if (imageField == ImageField.OTHER) {
       throw Exception('You cannot set or crop an image as OTHER');
@@ -1354,12 +1461,15 @@ class OpenFoodAPIClient {
     queryParameters.addAll(extraParameters);
     final Uri uri = uriHelper.getPostUri(path: 'cgi/product_image_crop.pl');
 
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     final Response response = await HttpHelper().doPostRequest(
       uri,
       queryParameters,
       user,
       uriHelper: uriHelper,
       addCredentialsToBody: true,
+      bearerToken: effectiveBearer,
     );
     _checkResponse(response);
     final Map<String, dynamic> json =
@@ -1392,8 +1502,9 @@ class OpenFoodAPIClient {
     required final String barcode,
     required final ImageField imageField,
     required final OpenFoodFactsLanguage language,
-    required final User user,
+    final User? user,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final String? bearerToken,
   }) async => patchProductV3(
     barcode: barcode,
     productParameters: {
@@ -1405,19 +1516,26 @@ class OpenFoodAPIClient {
     },
     user: user,
     uriHelper: uriHelper,
+    bearerToken: bearerToken,
   );
 
   /// Returns the name of each country localized in [language].
   static Future<Map<OpenFoodFactsCountry, String>> getLocalizedCountryNames(
     final OpenFoodFactsLanguage language, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final User? user,
+    final String? bearerToken,
   }) async {
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(
         path: '/cgi/countries.pl',
         queryParameters: {'lc': language.offTag},
       ),
+      user: user,
       uriHelper: uriHelper,
+      bearerToken: effectiveBearer,
     );
     _checkResponse(response);
     final Map<OpenFoodFactsCountry, String> result =
@@ -1441,10 +1559,16 @@ class OpenFoodAPIClient {
   getExternalSourceMetadatas({
     final ProductQueryVersion version = ProductQueryVersion.latestVersion,
     final UriProductHelper uriHelper = uriHelperFoodProd,
+    final User? user,
+    final String? bearerToken,
   }) async {
+    final String? effectiveBearer =
+        await OpenFoodAPIConfiguration.getBearerToken(bearerToken);
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(path: version.getApiPath('external_sources')),
+      user: user,
       uriHelper: uriHelper,
+      bearerToken: effectiveBearer,
     );
     if (response.statusCode != 200) {
       return MaybeError<List<ExternalSourceMetadata>>.responseError(response);

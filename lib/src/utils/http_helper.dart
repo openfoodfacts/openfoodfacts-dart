@@ -7,6 +7,7 @@ import 'package:path/path.dart';
 
 import '../model/status.dart';
 import '../model/user.dart';
+import '../model/user_agent.dart';
 import 'open_food_api_configuration.dart';
 import 'uri_helper.dart';
 import 'uri_reader.dart';
@@ -96,10 +97,17 @@ class HttpHelper {
     required final UriHelper uriHelper,
     required bool addCredentialsToBody,
     bool addCredentialsToHeader = false,
+    final String? bearerToken,
   }) async {
-    if (addCredentialsToBody) {
-      if (user != null) {
-        body.addAll(user.toData());
+    // NOTE: [bearerToken] must already be resolved by the caller
+    // (e.g. OpenFoodAPIClient resolves explicit/global/provider via
+    // OpenFoodAPIConfiguration.getBearerToken). No global fallback here:
+    // Folksonomy/Prices use their own distinct bearer tokens.
+    // Empty strings are treated like null (absent).
+    if (addCredentialsToBody && (bearerToken == null || bearerToken.isEmpty)) {
+      final User? effectiveUser = OpenFoodAPIConfiguration.getUser(user);
+      if (effectiveUser != null) {
+        body.addAll(effectiveUser.toData());
       }
     }
 
@@ -109,6 +117,7 @@ class HttpHelper {
         user: user,
         uriHelper: uriHelper,
         addCredentialsToHeader: addCredentialsToHeader,
+        bearerToken: bearerToken,
       ),
       body: addUserAgentParameters(body),
     );
@@ -137,16 +146,17 @@ class HttpHelper {
     User? user,
     required final UriHelper uriHelper,
     final String? bearerToken,
-  }) async => http.put(
-    uri,
-    headers: _buildHeaders(
+  }) async {
+    final Map<String, String> headers = _buildHeaders(
       user: user,
       uriHelper: uriHelper,
       addCredentialsToHeader: false,
       bearerToken: bearerToken,
-    ),
-    body: jsonBody,
-  );
+    );
+    // PUT bodies are JSON-encoded.
+    headers['Content-Type'] = 'application/json';
+    return http.put(uri, headers: headers, body: jsonBody);
+  }
 
   /// Sends an http POST request to the specified uri with a JSON body.
   Future<http.Response> doPostJsonRequest(
@@ -170,18 +180,24 @@ class HttpHelper {
     required final UriHelper uriHelper,
     final String? bearerToken,
     final bool addUserAgentParameters = true,
-  }) async => http.patch(
-    uri,
-    headers: _buildHeaders(
+  }) async {
+    final Map<String, String> headers = _buildHeaders(
       user: user,
       uriHelper: uriHelper,
       addCredentialsToHeader: false,
       bearerToken: bearerToken,
-    ),
-    body: jsonEncode(
-      addUserAgentParameters ? HttpHelper.addUserAgentParameters(body) : body,
-    ),
-  );
+    );
+    // PATCH bodies are JSON-encoded: make sure the content type reflects that,
+    // with or without bearer authentication.
+    headers['Content-Type'] = 'application/json';
+    return http.patch(
+      uri,
+      headers: headers,
+      body: jsonEncode(
+        addUserAgentParameters ? HttpHelper.addUserAgentParameters(body) : body,
+      ),
+    );
+  }
 
   /// Send a multipart post request to the specified uri.
   /// The data / body of the request has to be provided as map. (key, value)
@@ -193,23 +209,30 @@ class HttpHelper {
     Map<String, Uri>? files,
     User? user,
     required final UriHelper uriHelper,
+    final String? bearerToken,
   }) async {
     var request = http.MultipartRequest('POST', uri);
 
+    // NOTE: no global bearer fallback here (see doPostRequest): callers pass
+    // the already-resolved token; Folksonomy/Prices tokens are distinct.
+
     request.headers.addAll(
       _buildHeaders(
-            user: user,
-            uriHelper: uriHelper,
-            addCredentialsToHeader: false,
-          )
-          as Map<String, String>,
+        user: user,
+        uriHelper: uriHelper,
+        addCredentialsToHeader: false,
+        bearerToken: bearerToken,
+      ),
     );
 
     request.headers.addAll({'Content-Type': 'multipart/form-data'});
     addUserAgentParameters(body);
     request.fields.addAll(body);
-    if (user != null) {
-      request.fields.addAll(user.toData());
+    if (bearerToken == null || bearerToken.isEmpty) {
+      final User? effectiveUser = OpenFoodAPIConfiguration.getUser(user);
+      if (effectiveUser != null) {
+        request.fields.addAll(effectiveUser.toData());
+      }
     }
 
     // add all file entries to the request
@@ -250,27 +273,69 @@ class HttpHelper {
     return completer.future;
   }
 
-  /// Returns the request headers.
+  /// Returns the request headers for JSON APIs secured with a bearer token.
   ///
+  /// Besides [Authorization], the configured [User-Agent] is included when
+  /// available, for statistics purpose. Unlike [_buildHeaders], no exception
+  /// is thrown when no [User-Agent] is set, for backward compatibility with
+  /// callers (e.g. Prices) that never set one.
+  /// Takes the already-resolved explicit token only: no global lookup, so a
+  /// ProductOpener (Keycloak) token can never leak into Folksonomy/Prices
+  /// requests and vice versa.
   /// Note: [addCredentialsToHeader] and [isTestModeActive] exclude each other.
-  Map<String, String>? _getBearerHeader(final String bearerToken) =>
-      <String, String>{
-        'Authorization': 'Bearer $bearerToken',
-        'Content-Type': 'application/json',
-      };
+  Map<String, String> _getBearerHeader(final String bearerToken) {
+    final Map<String, String> headers = <String, String>{
+      'Authorization': 'Bearer $bearerToken',
+      'Content-Type': 'application/json',
+    };
+    final UserAgent? userAgent = OpenFoodAPIConfiguration.userAgent;
+    if (userAgent != null && !UriReader.instance.isWeb) {
+      headers['User-Agent'] = userAgent.toValueString();
+    }
+    return headers;
+  }
 
   /// Returns the request headers.
   ///
+  /// When an explicit [bearerToken] is passed, an
+  /// `Authorization: Bearer ...` header is sent instead of the legacy
+  /// user/password based authentication, which is then skipped.
+  /// No global fallback is applied here: [OpenFoodAPIConfiguration]
+  /// globals are ProductOpener-scoped (Keycloak) and must be resolved by the
+  /// caller, so Folksonomy/Prices tokens (distinct issuers) can never leak
+  /// across backends.
+  /// Empty [bearerToken] strings are treated like null (absent).
   /// Note: [addCredentialsToHeader] and [isTestModeActive] exclude each other.
-  Map<String, String>? _buildHeaders({
+  Map<String, String> _buildHeaders({
     User? user,
     required final UriHelper uriHelper,
     required bool addCredentialsToHeader,
     final String? bearerToken,
     final bool addCookieToHeader = false,
   }) {
-    if (bearerToken != null) {
-      return _getBearerHeader(bearerToken);
+    final String? effectiveBearer =
+        (bearerToken != null && bearerToken.isNotEmpty) ? bearerToken : null;
+    if (effectiveBearer != null) {
+      if (OpenFoodAPIConfiguration.userAgent == null) {
+        throw Exception('A User-Agent must be set before calling this method');
+      }
+      final Map<String, String> headers = <String, String>{
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $effectiveBearer',
+      };
+      if (!UriReader.instance.isWeb) {
+        headers['User-Agent'] = OpenFoodAPIConfiguration.userAgent!
+            .toValueString();
+      }
+      if (!UriReader.instance.isWeb) {
+        headers['From'] = _getSafeString(
+          OpenFoodAPIConfiguration.getUser(user)?.userId ?? FROM,
+        );
+      }
+      if (addCookieToHeader && user?.cookie != null) {
+        headers['Cookie'] = user!.cookie!;
+      }
+      return headers;
     }
 
     Map<String, String>? headers = {};
