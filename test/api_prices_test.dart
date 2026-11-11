@@ -1083,13 +1083,21 @@ void main() {
       final int proofId = uploadProof.value.id;
 
       // successful proof update
-      MaybeError<ProofFull> updateProof = await OpenPricesAPIClient.updateProof(
-        proofId,
-        parameters: updateProofParameters,
-        bearerToken: bearerToken,
-        uriHelper: uriHelper,
-      );
+      MaybeError<ProofUpdate> updateProof =
+          await OpenPricesAPIClient.updateProof(
+            proofId,
+            parameters: updateProofParameters,
+            bearerToken: bearerToken,
+            uriHelper: uriHelper,
+          );
       expect(updateProof.isError, isFalse);
+      expect(
+        updateProof.value.ownerComment,
+        updateProofParameters.ownerComment,
+      );
+      expect(updateProof.value.currency, updateProofParameters.currency);
+      expect(updateProof.value.date, updateProofParameters.date);
+      expect(updateProof.value.type, updateProofParameters.type);
 
       final MaybeError<ProofFull> maybeProof =
           await OpenPricesAPIClient.getProof(

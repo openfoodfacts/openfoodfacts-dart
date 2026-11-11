@@ -223,6 +223,53 @@ void main() {
       );
       expect(json['predictions'], isNotNull);
     });
+
+    test('ProofUpdate serialization and round-trip (PATCH response)', () {
+      final Map<String, dynamic> rawProofUpdate = {
+        'location_osm_id': 675544912,
+        'location_osm_type': 'WAY',
+        'type': 'PRICE_TAG',
+        'currency': 'EUR',
+        'date': '2025-01-02',
+        'receipt_price_count': 5,
+        'receipt_price_total': 12.5,
+        'receipt_online_delivery_costs': 2.0,
+        'ready_for_price_tag_validation': true,
+        'owner_consumption': false,
+        'owner_comment': 'updated comment',
+        'location_id': 1430,
+        // Unknown / extra fields must not throw
+        'some_unknown_future_field': 'hello',
+      };
+
+      final ProofUpdate proofUpdate = ProofUpdate.fromJson(rawProofUpdate);
+      expect(proofUpdate.locationOSMId, equals(675544912));
+      expect(proofUpdate.locationOSMType, equals(LocationOSMType.way));
+      expect(proofUpdate.type, equals(ProofType.priceTag));
+      expect(proofUpdate.currency, equals(Currency.EUR));
+      expect(proofUpdate.date, equals(DateTime(2025, 1, 2)));
+      expect(proofUpdate.receiptPriceCount, equals(5));
+      expect(proofUpdate.receiptPriceTotal, equals(12.5));
+      expect(proofUpdate.receiptOnlineDeliveryCosts, equals(2.0));
+      expect(proofUpdate.readyForPriceTagValidation, isTrue);
+      expect(proofUpdate.ownerConsumption, isFalse);
+      expect(proofUpdate.ownerComment, equals('updated comment'));
+      expect(proofUpdate.locationId, equals(1430));
+
+      final Map<String, dynamic> json = proofUpdate.toJson();
+      expect(json['location_osm_id'], equals(675544912));
+      expect(json['location_osm_type'], equals('WAY'));
+      expect(json['type'], equals('PRICE_TAG'));
+      expect(json['currency'], equals('EUR'));
+      expect(json['date'], startsWith('2025-01-02'));
+      expect(json['receipt_price_count'], equals(5));
+      expect(json['receipt_price_total'], equals(12.5));
+      expect(json['receipt_online_delivery_costs'], equals(2.0));
+      expect(json['ready_for_price_tag_validation'], isTrue);
+      expect(json['owner_consumption'], isFalse);
+      expect(json['owner_comment'], equals('updated comment'));
+      expect(json['location_id'], equals(1430));
+    });
   });
 
   group('Live OpenPricesAPIClient PriceTags and ReceiptItems', () {

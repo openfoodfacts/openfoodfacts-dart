@@ -8,6 +8,7 @@ import 'prices/maybe_error.dart';
 import 'prices/price.dart';
 import 'prices/price_user.dart';
 import 'prices/proof_full.dart';
+import 'prices/proof_update.dart';
 import 'prices/get_challenges_parameters.dart';
 import 'prices/get_challenges_result.dart';
 import 'prices/get_locations_parameters.dart';
@@ -723,7 +724,9 @@ class OpenPricesAPIClient {
   ///
   /// This endpoint requires authentication.
   /// A user can update only owned proofs.
-  static Future<MaybeError<ProofFull>> updateProof(
+  /// Returns the updated fields (the server's PATCH response).
+  /// To retrieve the full proof, use [getProof].
+  static Future<MaybeError<ProofUpdate>> updateProof(
     final int proofId, {
     required final UpdateProofParameters parameters,
     final UriProductHelper uriHelper = uriHelperFoodProd,
@@ -746,22 +749,14 @@ class OpenPricesAPIClient {
     if (response.statusCode == 200) {
       try {
         final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        final Map<String, dynamic> json = Map<String, dynamic>.from(
-          decodedResponse as Map,
+        return MaybeError<ProofUpdate>.value(
+          ProofUpdate.fromJson(decodedResponse),
         );
-        if (json['id'] == null) {
-          json['id'] = proofId;
-          json['mimetype'] ??= '';
-          json['price_count'] ??= 0;
-          json['owner'] ??= '';
-          json['created'] ??= DateTime.now().toUtc().toIso8601String();
-        }
-        return MaybeError<ProofFull>.value(ProofFull.fromJson(json));
       } catch (e) {
         //
       }
     }
-    return MaybeError<ProofFull>.responseError(response);
+    return MaybeError<ProofUpdate>.responseError(response);
   }
 
   /// Deletes a proof.
