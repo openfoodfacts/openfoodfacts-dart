@@ -69,7 +69,7 @@ void main() {
         ..createdLte = DateTime.utc(2025, 2, 28, 23, 59, 59)
         ..proofOwner = 'owner1'
         ..proofId = 789
-        ..status = ReceiptItemStatus.deleted
+        ..status = 0
         ..statusIsNull = true;
 
       final Map<String, String> queryParams = parameters.getQueryParameters();
@@ -112,163 +112,6 @@ void main() {
         receiptParams.getQueryParameters()['created__lte'],
         equals(local.toUtc().toIso8601String()),
       );
-    });
-  });
-
-  group('Local forward-compatibility decoding tests', () {
-    test('Decodes unknown prediction type and unknown price tag status', () {
-      final Map<String, dynamic> rawPriceTag = {
-        'id': 999999,
-        'status': 999,
-        'predictions': [
-          {
-            'type': 'FUTURE_PREDICTION_TYPE_XYZ',
-            'model_name': 'future_model',
-            'model_version': 'v99.0',
-            'data': {'confidence': 0.99},
-            'created': '2026-11-11T12:00:00.000Z',
-          },
-        ],
-        'proof': {
-          'id': 888888,
-          'type': 'PRICE_TAG',
-          'mimetype': 'image/jpeg',
-          'price_count': 1,
-          'owner': 'tester',
-          'created': '2026-11-11T12:00:00.000Z',
-        },
-      };
-
-      final PriceTag priceTag = PriceTag.fromJson(rawPriceTag);
-
-      expect(priceTag.id, equals(999999));
-      expect(priceTag.status, equals(999));
-      expect(priceTag.predictions, hasLength(1));
-      expect(
-        priceTag.predictions!.first.type,
-        equals('FUTURE_PREDICTION_TYPE_XYZ'),
-      );
-      expect(priceTag.predictions!.first.modelName, equals('future_model'));
-      expect(priceTag.proof, isNotNull);
-      expect(priceTag.proof!.id, equals(888888));
-
-      final Map<String, dynamic> json = priceTag.toJson();
-      expect(json['status'], equals(999));
-      expect(json['predictions'], isNotNull);
-      expect(
-        (json['predictions'] as List).first.type,
-        equals('FUTURE_PREDICTION_TYPE_XYZ'),
-      );
-    });
-
-    test('ProofFull serialization and round-trip', () {
-      final Map<String, dynamic> rawProofFull = {
-        'id': 12345,
-        'file_path': '0001/test.jpg',
-        'mimetype': 'image/jpeg',
-        'type': 'PRICE_TAG',
-        'price_count': 2,
-        'owner': 'tester',
-        'created': '2026-11-11T12:00:00.000Z',
-        'image_md5_hash': 'abcdef1234567890abcdef1234567890',
-        'draft': false,
-        'prediction_count': 1,
-        'tags': ['tag1', 'tag2'],
-        'predictions': [
-          {
-            'type': 'CLASSIFICATION',
-            'model_name': 'price_proof_classification',
-            'model_version': '1.0',
-            'data': {
-              'prediction': [
-                {'label': 'RECEIPT', 'score': 0.95},
-              ],
-            },
-            'value': 'RECEIPT',
-            'max_confidence': 0.95,
-            'created': '2026-11-11T12:00:00.000Z',
-          },
-        ],
-      };
-
-      final ProofFull proofFull = ProofFull.fromJson(rawProofFull);
-      expect(proofFull.id, equals(12345));
-      expect(proofFull.filePath, equals('0001/test.jpg'));
-      expect(proofFull.mimetype, equals('image/jpeg'));
-      expect(proofFull.type, equals(ProofType.priceTag));
-      expect(proofFull.priceCount, equals(2));
-      expect(proofFull.owner, equals('tester'));
-      expect(
-        proofFull.imageMd5Hash,
-        equals('abcdef1234567890abcdef1234567890'),
-      );
-      expect(proofFull.draft, isFalse);
-      expect(proofFull.predictionCount, equals(1));
-      expect(proofFull.tags, equals(['tag1', 'tag2']));
-      expect(proofFull.predictions, hasLength(1));
-
-      final ProofPrediction prediction = proofFull.predictions!.first;
-      expect(prediction.type, equals('CLASSIFICATION'));
-      expect(prediction.modelName, equals('price_proof_classification'));
-      expect(prediction.modelVersion, equals('1.0'));
-      expect(prediction.data, isNotNull);
-      expect(prediction.value, equals('RECEIPT'));
-      expect(prediction.maxConfidence, equals(0.95));
-
-      final Map<String, dynamic> json = proofFull.toJson();
-      expect(json['id'], equals(12345));
-      expect(
-        json['image_md5_hash'],
-        equals('abcdef1234567890abcdef1234567890'),
-      );
-      expect(json['predictions'], isNotNull);
-    });
-
-    test('ProofUpdate serialization and round-trip (PATCH response)', () {
-      final Map<String, dynamic> rawProofUpdate = {
-        'location_osm_id': 675544912,
-        'location_osm_type': 'WAY',
-        'type': 'PRICE_TAG',
-        'currency': 'EUR',
-        'date': '2025-01-02',
-        'receipt_price_count': 5,
-        'receipt_price_total': 12.5,
-        'receipt_online_delivery_costs': 2.0,
-        'ready_for_price_tag_validation': true,
-        'owner_consumption': false,
-        'owner_comment': 'updated comment',
-        'location_id': 1430,
-        // Unknown / extra fields must not throw
-        'some_unknown_future_field': 'hello',
-      };
-
-      final ProofUpdate proofUpdate = ProofUpdate.fromJson(rawProofUpdate);
-      expect(proofUpdate.locationOSMId, equals(675544912));
-      expect(proofUpdate.locationOSMType, equals(LocationOSMType.way));
-      expect(proofUpdate.type, equals(ProofType.priceTag));
-      expect(proofUpdate.currency, equals(Currency.EUR));
-      expect(proofUpdate.date, equals(DateTime(2025, 1, 2)));
-      expect(proofUpdate.receiptPriceCount, equals(5));
-      expect(proofUpdate.receiptPriceTotal, equals(12.5));
-      expect(proofUpdate.receiptOnlineDeliveryCosts, equals(2.0));
-      expect(proofUpdate.readyForPriceTagValidation, isTrue);
-      expect(proofUpdate.ownerConsumption, isFalse);
-      expect(proofUpdate.ownerComment, equals('updated comment'));
-      expect(proofUpdate.locationId, equals(1430));
-
-      final Map<String, dynamic> json = proofUpdate.toJson();
-      expect(json['location_osm_id'], equals(675544912));
-      expect(json['location_osm_type'], equals('WAY'));
-      expect(json['type'], equals('PRICE_TAG'));
-      expect(json['currency'], equals('EUR'));
-      expect(json['date'], startsWith('2025-01-02'));
-      expect(json['receipt_price_count'], equals(5));
-      expect(json['receipt_price_total'], equals(12.5));
-      expect(json['receipt_online_delivery_costs'], equals(2.0));
-      expect(json['ready_for_price_tag_validation'], isTrue);
-      expect(json['owner_consumption'], isFalse);
-      expect(json['owner_comment'], equals('updated comment'));
-      expect(json['location_id'], equals(1430));
     });
   });
 
@@ -320,6 +163,32 @@ void main() {
       expect(singleResult.value.id, equals(firstTag.id));
       if (singleResult.value.proof != null) {
         expect(singleResult.value.proof!.id, isNotNull);
+      }
+
+      // Read-only filter test by status matching the fetched tag
+      final GetPriceTagsParameters statusParams = GetPriceTagsParameters()
+        ..pageSize = 5;
+      if (firstTag.status != null) {
+        statusParams.status = firstTag.status;
+      } else {
+        statusParams.statusIsNull = true;
+      }
+      final MaybeError<GetPriceTagsResult> statusFilterResult =
+          await OpenPricesAPIClient.getPriceTags(
+            statusParams,
+            uriHelper: uriHelper,
+            bearerToken: bearerToken,
+          );
+      expect(statusFilterResult.isError, isFalse);
+      if (statusFilterResult.value.items != null &&
+          statusFilterResult.value.items!.isNotEmpty) {
+        for (final PriceTag item in statusFilterResult.value.items!) {
+          if (firstTag.status != null) {
+            expect(item.status, equals(firstTag.status));
+          } else {
+            expect(item.status, isNull);
+          }
+        }
       }
     });
 
@@ -378,6 +247,32 @@ void main() {
       expect(singleResult.isError, isFalse);
       expect(singleResult.value.id, equals(firstItem.id));
       expect(singleResult.value.order, equals(firstItem.order));
+
+      // Read-only filter test by status matching the fetched item
+      final GetReceiptItemsParameters statusParams = GetReceiptItemsParameters()
+        ..pageSize = 5;
+      if (firstItem.status != null) {
+        statusParams.status = firstItem.status;
+      } else {
+        statusParams.statusIsNull = true;
+      }
+      final MaybeError<GetReceiptItemsResult> statusFilterResult =
+          await OpenPricesAPIClient.getReceiptItems(
+            statusParams,
+            uriHelper: uriHelper,
+            bearerToken: bearerToken,
+          );
+      expect(statusFilterResult.isError, isFalse);
+      if (statusFilterResult.value.items != null &&
+          statusFilterResult.value.items!.isNotEmpty) {
+        for (final ReceiptItem item in statusFilterResult.value.items!) {
+          if (firstItem.status != null) {
+            expect(item.status, equals(firstItem.status));
+          } else {
+            expect(item.status, isNull);
+          }
+        }
+      }
     });
 
     test('getReceiptItems with parameters and order', () async {

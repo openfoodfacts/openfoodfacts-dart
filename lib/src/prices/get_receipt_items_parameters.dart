@@ -1,6 +1,5 @@
 import 'get_parameters_helper.dart';
 import 'get_receipt_items_order.dart';
-import 'receipt_item_status.dart';
 
 /// Parameters for the "get receipt items" API query.
 ///
@@ -11,7 +10,7 @@ class GetReceiptItemsParameters
   DateTime? createdLte;
   String? proofOwner;
   int? proofId;
-  ReceiptItemStatus? status;
+  int? status;
   bool? statusIsNull;
 
   /// Returns the parameters as a query parameter map.
@@ -22,7 +21,7 @@ class GetReceiptItemsParameters
     addNonNullDate(createdLte?.toUtc(), 'created__lte', dayOnly: false);
     addNonNullString(proofOwner, 'proof__owner');
     addNonNullInt(proofId, 'proof_id');
-    addNonNullString(status?.offTag, 'status');
+    addNonNullInt(status, 'status');
     addNonNullBool(statusIsNull, 'status__isnull');
     return result;
   }

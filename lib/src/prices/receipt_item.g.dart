@@ -12,7 +12,7 @@ ReceiptItem _$ReceiptItemFromJson(Map<String, dynamic> json) => ReceiptItem()
   ..priceId = (json['price_id'] as num?)?.toInt()
   ..order = (json['order'] as num?)?.toInt()
   ..predictedData = json['predicted_data'] as Map<String, dynamic>?
-  ..status = $enumDecodeNullable(_$ReceiptItemStatusEnumMap, json['status'])
+  ..status = (json['status'] as num?)?.toInt()
   ..schemaVersion = json['schema_version'] as String?
   ..created = JsonHelper.nullableStringTimestampToDate(json['created'])
   ..updated = JsonHelper.nullableStringTimestampToDate(json['updated'])
@@ -25,14 +25,9 @@ Map<String, dynamic> _$ReceiptItemToJson(ReceiptItem instance) =>
       'price_id': instance.priceId,
       'order': instance.order,
       'predicted_data': instance.predictedData,
-      'status': _$ReceiptItemStatusEnumMap[instance.status],
+      'status': instance.status,
       'schema_version': instance.schemaVersion,
       'created': instance.created?.toIso8601String(),
       'updated': instance.updated?.toIso8601String(),
       'proof_prediction': instance.proofPrediction,
     };
-
-const _$ReceiptItemStatusEnumMap = {
-  ReceiptItemStatus.deleted: 0,
-  ReceiptItemStatus.linkedToPrice: 1,
-};

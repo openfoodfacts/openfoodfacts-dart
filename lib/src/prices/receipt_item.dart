@@ -2,7 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../interface/json_object.dart';
 import '../utils/json_helper.dart';
-import 'receipt_item_status.dart';
 
 part 'receipt_item.g.dart';
 
@@ -34,7 +33,7 @@ class ReceiptItem extends JsonObject {
 
   /// The current status of the item.
   @JsonKey()
-  ReceiptItemStatus? status;
+  int? status;
 
   /// The schema version of the predicted data.
   @JsonKey(name: 'schema_version')

@@ -158,7 +158,6 @@ export 'src/prices/proof_prediction.dart';
 export 'src/prices/proof_type.dart';
 export 'src/prices/proof_update.dart';
 export 'src/prices/receipt_item.dart';
-export 'src/prices/receipt_item_status.dart';
 export 'src/prices/session.dart';
 export 'src/prices/update_price_parameters.dart';
 export 'src/prices/update_proof_parameters.dart';
