@@ -180,14 +180,13 @@ void main() {
             bearerToken: bearerToken,
           );
       expect(statusFilterResult.isError, isFalse);
-      if (statusFilterResult.value.items != null &&
-          statusFilterResult.value.items!.isNotEmpty) {
-        for (final PriceTag item in statusFilterResult.value.items!) {
-          if (firstTag.status != null) {
-            expect(item.status, equals(firstTag.status));
-          } else {
-            expect(item.status, isNull);
-          }
+      expect(statusFilterResult.value.items, isNotNull);
+      expect(statusFilterResult.value.items, isNotEmpty);
+      for (final PriceTag item in statusFilterResult.value.items!) {
+        if (firstTag.status != null) {
+          expect(item.status, equals(firstTag.status));
+        } else {
+          expect(item.status, isNull);
         }
       }
     });
@@ -263,14 +262,13 @@ void main() {
             bearerToken: bearerToken,
           );
       expect(statusFilterResult.isError, isFalse);
-      if (statusFilterResult.value.items != null &&
-          statusFilterResult.value.items!.isNotEmpty) {
-        for (final ReceiptItem item in statusFilterResult.value.items!) {
-          if (firstItem.status != null) {
-            expect(item.status, equals(firstItem.status));
-          } else {
-            expect(item.status, isNull);
-          }
+      expect(statusFilterResult.value.items, isNotNull);
+      expect(statusFilterResult.value.items, isNotEmpty);
+      for (final ReceiptItem item in statusFilterResult.value.items!) {
+        if (firstItem.status != null) {
+          expect(item.status, equals(firstItem.status));
+        } else {
+          expect(item.status, isNull);
         }
       }
     });
