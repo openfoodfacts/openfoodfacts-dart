@@ -7,7 +7,7 @@ import 'prices/challenge.dart';
 import 'prices/maybe_error.dart';
 import 'prices/price.dart';
 import 'prices/price_user.dart';
-import 'prices/proof.dart';
+import 'prices/proof_full.dart';
 import 'prices/get_challenges_parameters.dart';
 import 'prices/get_challenges_result.dart';
 import 'prices/get_locations_parameters.dart';
@@ -638,7 +638,7 @@ class OpenPricesAPIClient {
   /// The returned status code will be
   /// * 201 for a proof created on the server
   /// * 200 for a proof that already existed on the server
-  static Future<MaybeError<Proof>> uploadProof({
+  static Future<MaybeError<ProofFull>> uploadProof({
     required final Uri imageUri,
     required final MediaType mediaType,
     required final CreateProofParameters createProofParameters,
@@ -677,22 +677,22 @@ class OpenPricesAPIClient {
     if (response.statusCode == 200 || response.statusCode == 201) {
       try {
         final Map<String, dynamic> json = HttpHelper().jsonDecode(responseBody);
-        return MaybeError<Proof>.value(
-          Proof.fromJson(json),
+        return MaybeError<ProofFull>.value(
+          ProofFull.fromJson(json),
           statusCode: response.statusCode,
         );
       } catch (e) {
         //
       }
     }
-    return MaybeError<Proof>.error(
+    return MaybeError<ProofFull>.error(
       error: responseBody,
       statusCode: response.statusCode,
     );
   }
 
   /// Get user proof by id.
-  static Future<MaybeError<Proof>> getProof(
+  static Future<MaybeError<ProofFull>> getProof(
     final int proofId, {
     final UriProductHelper uriHelper = uriHelperFoodProd,
     final ApiVersion version = defaultVersion,
@@ -711,19 +711,19 @@ class OpenPricesAPIClient {
     if (response.statusCode == 200) {
       try {
         final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        return MaybeError<Proof>.value(Proof.fromJson(decodedResponse));
+        return MaybeError<ProofFull>.value(ProofFull.fromJson(decodedResponse));
       } catch (e) {
         //
       }
     }
-    return MaybeError<Proof>.responseError(response);
+    return MaybeError<ProofFull>.responseError(response);
   }
 
   /// Updates a proof.
   ///
   /// This endpoint requires authentication.
   /// A user can update only owned proofs.
-  static Future<MaybeError<bool>> updateProof(
+  static Future<MaybeError<ProofFull>> updateProof(
     final int proofId, {
     required final UpdateProofParameters parameters,
     final UriProductHelper uriHelper = uriHelperFoodProd,
@@ -744,9 +744,24 @@ class OpenPricesAPIClient {
       addUserAgentParameters: false,
     );
     if (response.statusCode == 200) {
-      return MaybeError<bool>.value(true);
+      try {
+        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
+        final Map<String, dynamic> json = Map<String, dynamic>.from(
+          decodedResponse as Map,
+        );
+        if (json['id'] == null) {
+          json['id'] = proofId;
+          json['mimetype'] ??= '';
+          json['price_count'] ??= 0;
+          json['owner'] ??= '';
+          json['created'] ??= DateTime.now().toUtc().toIso8601String();
+        }
+        return MaybeError<ProofFull>.value(ProofFull.fromJson(json));
+      } catch (e) {
+        //
+      }
     }
-    return MaybeError<bool>.responseError(response);
+    return MaybeError<ProofFull>.responseError(response);
   }
 
   /// Deletes a proof.

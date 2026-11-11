@@ -5,8 +5,7 @@ import '../open_prices_api_client.dart';
 import '../utils/json_helper.dart';
 import '../utils/uri_helper.dart';
 import 'price_tag_prediction.dart';
-import 'price_tag_status.dart';
-import 'proof_half.dart';
+import 'proof.dart';
 
 part 'price_tag.g.dart';
 
@@ -29,7 +28,7 @@ class PriceTag extends JsonObject {
 
   /// Proof nested inside this price tag.
   @JsonKey()
-  ProofHalf? proof;
+  Proof? proof;
 
   /// Image path of the price tag. Read-only.
   @JsonKey(name: 'image_path')
@@ -41,7 +40,7 @@ class PriceTag extends JsonObject {
 
   /// The annotation status.
   @JsonKey()
-  PriceTagStatus? status;
+  int? status;
 
   /// Number of predictions for this price tag.
   @JsonKey(name: 'prediction_count')

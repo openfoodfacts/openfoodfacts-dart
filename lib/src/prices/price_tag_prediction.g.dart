@@ -8,10 +8,7 @@ part of 'price_tag_prediction.dart';
 
 PriceTagPrediction _$PriceTagPredictionFromJson(Map<String, dynamic> json) =>
     PriceTagPrediction()
-      ..type = $enumDecodeNullable(
-        _$PriceTagPredictionTypeEnumMap,
-        json['type'],
-      )
+      ..type = json['type'] as String?
       ..modelName = json['model_name'] as String?
       ..modelVersion = json['model_version'] as String?
       ..schemaVersion = json['schema_version'] as String?
@@ -20,15 +17,10 @@ PriceTagPrediction _$PriceTagPredictionFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$PriceTagPredictionToJson(PriceTagPrediction instance) =>
     <String, dynamic>{
-      'type': _$PriceTagPredictionTypeEnumMap[instance.type],
+      'type': instance.type,
       'model_name': instance.modelName,
       'model_version': instance.modelVersion,
       'schema_version': instance.schemaVersion,
       'data': instance.data,
       'created': instance.created?.toIso8601String(),
     };
-
-const _$PriceTagPredictionTypeEnumMap = {
-  PriceTagPredictionType.priceTagExtraction: 'PRICE_TAG_EXTRACTION',
-  PriceTagPredictionType.priceTagClf: 'PRICE_TAG_CLF',
-};

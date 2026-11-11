@@ -2,7 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../interface/json_object.dart';
 import '../utils/json_helper.dart';
-import 'price_tag_prediction_type.dart';
 
 part 'price_tag_prediction.g.dart';
 
@@ -13,7 +12,7 @@ part 'price_tag_prediction.g.dart';
 class PriceTagPrediction extends JsonObject {
   /// The type of the prediction.
   @JsonKey()
-  PriceTagPredictionType? type;
+  String? type;
 
   /// The name of the model that generated the prediction.
   @JsonKey(name: 'model_name')

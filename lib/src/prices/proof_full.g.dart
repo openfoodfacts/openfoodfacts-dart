@@ -1,71 +1,77 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'proof_half.dart';
+part of 'proof_full.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ProofHalf _$ProofHalfFromJson(Map<String, dynamic> json) => ProofHalf()
-  ..id = (json['id'] as num?)?.toInt()
-  ..locationId = (json['location_id'] as num?)?.toInt()
-  ..location = json['location'] == null
-      ? null
-      : Location.fromJson(json['location'] as Map<String, dynamic>)
+ProofFull _$ProofFullFromJson(Map<String, dynamic> json) => ProofFull()
+  ..id = (json['id'] as num).toInt()
   ..filePath = json['file_path'] as String?
-  ..mimetype = json['mimetype'] as String?
-  ..type = $enumDecodeNullable(_$ProofTypeEnumMap, json['type'])
-  ..imageMd5Hash = json['image_md5_hash'] as String?
   ..imageThumbPath = json['image_thumb_path'] as String?
+  ..mimetype = json['mimetype'] as String
+  ..type = $enumDecodeNullable(_$ProofTypeEnumMap, json['type'])
+  ..priceCount = (json['price_count'] as num).toInt()
+  ..receiptPriceCount = (json['receipt_price_count'] as num?)?.toInt()
+  ..receiptPriceTotal = json['receipt_price_total'] as num?
   ..locationOSMId = (json['location_osm_id'] as num?)?.toInt()
   ..locationOSMType = $enumDecodeNullable(
     _$LocationOSMTypeEnumMap,
     json['location_osm_type'],
   )
+  ..locationId = (json['location_id'] as num?)?.toInt()
   ..date = JsonHelper.nullableStringTimestampToDate(json['date'])
   ..currency = $enumDecodeNullable(_$CurrencyEnumMap, json['currency'])
-  ..receiptPriceCount = (json['receipt_price_count'] as num?)?.toInt()
-  ..receiptPriceTotal = json['receipt_price_total'] as num?
+  ..owner = json['owner'] as String
+  ..created = JsonHelper.stringTimestampToDate(json['created'])
+  ..updated = JsonHelper.nullableStringTimestampToDate(json['updated'])
+  ..location = json['location'] == null
+      ? null
+      : Location.fromJson(json['location'] as Map<String, dynamic>)
   ..receiptOnlineDeliveryCosts = json['receipt_online_delivery_costs'] as num?
   ..readyForPriceTagValidation = json['ready_for_price_tag_validation'] as bool?
   ..ownerConsumption = json['owner_consumption'] as bool?
   ..ownerComment = json['owner_comment'] as String?
-  ..draft = json['draft'] as bool?
-  ..priceCount = (json['price_count'] as num?)?.toInt()
-  ..predictionCount = (json['prediction_count'] as num?)?.toInt()
-  ..owner = json['owner'] as String?
   ..source = json['source'] as String?
+  ..detail = json['detail'] as String?
+  ..imageMd5Hash = json['image_md5_hash'] as String?
+  ..draft = json['draft'] as bool?
+  ..predictionCount = (json['prediction_count'] as num?)?.toInt()
   ..tags = (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList()
-  ..created = JsonHelper.nullableStringTimestampToDate(json['created'])
-  ..updated = JsonHelper.nullableStringTimestampToDate(json['updated']);
+  ..predictions = (json['predictions'] as List<dynamic>?)
+      ?.map((e) => ProofPrediction.fromJson(e as Map<String, dynamic>))
+      .toList();
 
-Map<String, dynamic> _$ProofHalfToJson(ProofHalf instance) => <String, dynamic>{
+Map<String, dynamic> _$ProofFullToJson(ProofFull instance) => <String, dynamic>{
   'id': instance.id,
-  'location_id': instance.locationId,
-  'location': instance.location,
   'file_path': instance.filePath,
+  'image_thumb_path': instance.imageThumbPath,
   'mimetype': instance.mimetype,
   'type': _$ProofTypeEnumMap[instance.type],
-  'image_md5_hash': instance.imageMd5Hash,
-  'image_thumb_path': instance.imageThumbPath,
-  'location_osm_id': instance.locationOSMId,
-  'location_osm_type': _$LocationOSMTypeEnumMap[instance.locationOSMType],
-  'date': instance.date?.toIso8601String(),
-  'currency': _$CurrencyEnumMap[instance.currency],
+  'price_count': instance.priceCount,
   'receipt_price_count': instance.receiptPriceCount,
   'receipt_price_total': instance.receiptPriceTotal,
+  'location_osm_id': instance.locationOSMId,
+  'location_osm_type': _$LocationOSMTypeEnumMap[instance.locationOSMType],
+  'location_id': instance.locationId,
+  'date': instance.date?.toIso8601String(),
+  'currency': _$CurrencyEnumMap[instance.currency],
+  'owner': instance.owner,
+  'created': instance.created.toIso8601String(),
+  'updated': instance.updated?.toIso8601String(),
+  'location': instance.location,
   'receipt_online_delivery_costs': instance.receiptOnlineDeliveryCosts,
   'ready_for_price_tag_validation': instance.readyForPriceTagValidation,
   'owner_consumption': instance.ownerConsumption,
   'owner_comment': instance.ownerComment,
-  'draft': instance.draft,
-  'price_count': instance.priceCount,
-  'prediction_count': instance.predictionCount,
-  'owner': instance.owner,
   'source': instance.source,
+  'detail': instance.detail,
+  'image_md5_hash': instance.imageMd5Hash,
+  'draft': instance.draft,
+  'prediction_count': instance.predictionCount,
   'tags': instance.tags,
-  'created': instance.created?.toIso8601String(),
-  'updated': instance.updated?.toIso8601String(),
+  'predictions': instance.predictions,
 };
 
 const _$ProofTypeEnumMap = {

@@ -34,7 +34,11 @@ Proof _$ProofFromJson(Map<String, dynamic> json) => Proof()
   ..ownerConsumption = json['owner_consumption'] as bool?
   ..ownerComment = json['owner_comment'] as String?
   ..source = json['source'] as String?
-  ..detail = json['detail'] as String?;
+  ..detail = json['detail'] as String?
+  ..imageMd5Hash = json['image_md5_hash'] as String?
+  ..draft = json['draft'] as bool?
+  ..predictionCount = (json['prediction_count'] as num?)?.toInt()
+  ..tags = (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList();
 
 Map<String, dynamic> _$ProofToJson(Proof instance) => <String, dynamic>{
   'id': instance.id,
@@ -60,6 +64,10 @@ Map<String, dynamic> _$ProofToJson(Proof instance) => <String, dynamic>{
   'owner_comment': instance.ownerComment,
   'source': instance.source,
   'detail': instance.detail,
+  'image_md5_hash': instance.imageMd5Hash,
+  'draft': instance.draft,
+  'prediction_count': instance.predictionCount,
+  'tags': instance.tags,
 };
 
 const _$ProofTypeEnumMap = {

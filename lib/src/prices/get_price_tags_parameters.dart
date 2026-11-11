@@ -1,6 +1,5 @@
 import 'get_parameters_helper.dart';
 import 'get_price_tags_order.dart';
-import 'price_tag_status.dart';
 
 /// Parameters for the "get price tags" API query.
 ///
@@ -17,7 +16,7 @@ class GetPriceTagsParameters
   String? proofOwner;
   String? proofLocationOSMAddressCountryCode;
   bool? proofReadyForPriceTagValidation;
-  PriceTagStatus? status;
+  int? status;
   bool? statusIsNull;
   String? tagsContains;
   String? tagsNotContains;
@@ -42,7 +41,7 @@ class GetPriceTagsParameters
       proofReadyForPriceTagValidation,
       'proof__ready_for_price_tag_validation',
     );
-    addNonNullString(status?.offTag, 'status');
+    addNonNullInt(status, 'status');
     addNonNullBool(statusIsNull, 'status__isnull');
     addNonNullString(tagsContains, 'tags__contains');
     addNonNullString(tagsNotContains, 'tags__not_contains');
