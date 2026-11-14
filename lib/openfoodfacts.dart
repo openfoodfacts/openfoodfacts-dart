@@ -154,6 +154,7 @@ export 'src/prices/price_type.dart';
 export 'src/prices/price_user.dart';
 export 'src/prices/proof.dart';
 export 'src/prices/proof_full.dart';
+export 'src/prices/proof_half_full.dart';
 export 'src/prices/proof_prediction.dart';
 export 'src/prices/proof_type.dart';
 export 'src/prices/proof_update.dart';

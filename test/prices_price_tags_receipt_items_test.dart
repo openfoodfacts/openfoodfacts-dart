@@ -161,9 +161,13 @@ void main() {
           );
       expect(singleResult.isError, isFalse);
       expect(singleResult.value.id, equals(firstTag.id));
-      if (singleResult.value.proof != null) {
-        expect(singleResult.value.proof!.id, isNotNull);
-      }
+      expect(singleResult.value.proof, isNotNull);
+      expect(firstTag.proof, isNotNull);
+      final ProofHalfFull proof = singleResult.value.proof!;
+      expect(proof.id, equals(firstTag.proof!.id));
+      expect(proof.mimetype, equals(firstTag.proof!.mimetype));
+      expect(proof.owner, equals(firstTag.proof!.owner));
+      expect(proof.priceCount, equals(firstTag.proof!.priceCount));
 
       // Read-only filter test by status matching the fetched tag
       final GetPriceTagsParameters statusParams = GetPriceTagsParameters()

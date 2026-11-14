@@ -14,7 +14,7 @@ PriceTag _$PriceTagFromJson(Map<String, dynamic> json) => PriceTag()
       .toList()
   ..proof = json['proof'] == null
       ? null
-      : Proof.fromJson(json['proof'] as Map<String, dynamic>)
+      : ProofHalfFull.fromJson(json['proof'] as Map<String, dynamic>)
   ..imagePath = json['image_path'] as String?
   ..boundingBox = (json['bounding_box'] as List<dynamic>?)
       ?.map((e) => (e as num).toDouble())
