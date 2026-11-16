@@ -38,10 +38,5 @@ Map<String, dynamic> _$RobotoffNutrientAnnotationToJson(
 ) => <String, dynamic>{
   'nutrients': instance.nutrients,
   'serving_size': instance.servingSize,
-  'nutrition_data_per': _$PerSizeEnumMap[instance.perSize],
-};
-
-const _$PerSizeEnumMap = {
-  PerSize.serving: 'serving',
-  PerSize.oneHundredGrams: 'oneHundredGrams',
+  'nutrition_data_per': PerSize.toOffTag(instance.perSize),
 };
