@@ -15,6 +15,6 @@ enum PriceType implements OffTagged {
   final String offTag;
 
   /// Returns the first [PriceType] that matches the [offTag].
-  static PriceType? fromOffTag(final String? offTag) =>
+  static PriceType? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, PriceType.values) as PriceType?;
 }

@@ -154,7 +154,7 @@ void main() {
       'get popular questions with types',
       () async {
         Future<List<RobotoffQuestion>?> getTopPopularQuestions(
-          final OpenFoodFactsCountry country,
+          OpenFoodFactsCountry country,
         ) async {
           const InsightType type = InsightType.CATEGORY;
           const int numQuestions = 10;

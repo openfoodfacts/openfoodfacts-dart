@@ -29,7 +29,7 @@ void main() {
   const String unknownTag = 'en:some_nonexistent_thing';
 
   group('OpenFoodAPIClient getTaxonomyOrigins SERVER', () {
-    void checkKnown(final TaxonomyOrigin value) {
+    void checkKnown(TaxonomyOrigin value) {
       expect(value.name![OpenFoodFactsLanguage.ENGLISH]!, expectedNameEnglish);
       expect(value.name![OpenFoodFactsLanguage.FRENCH]!, expectedNameFrench);
       expect(

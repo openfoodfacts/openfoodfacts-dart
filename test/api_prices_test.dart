@@ -18,7 +18,7 @@ void main() {
   )!;
 
   Future<String> getBearerToken({
-    required final UriProductHelper uriHelper,
+    required UriProductHelper uriHelper,
   }) async {
     final MaybeError<String> token =
         await OpenPricesAPIClient.getAuthenticationToken(
@@ -32,8 +32,8 @@ void main() {
   }
 
   Future<void> closeSession({
-    required final String bearerToken,
-    required final UriProductHelper uriHelper,
+    required String bearerToken,
+    required UriProductHelper uriHelper,
   }) async {
     MaybeError<bool> deleting = await OpenPricesAPIClient.deleteUserSession(
       uriHelper: uriHelper,
@@ -55,9 +55,9 @@ void main() {
   }
 
   Future<void> deleteProofAndCloseSession({
-    required final int proofId,
-    required final String bearerToken,
-    required final UriProductHelper uriHelper,
+    required int proofId,
+    required String bearerToken,
+    required UriProductHelper uriHelper,
   }) async {
     final MaybeError<Proof> getProof = await OpenPricesAPIClient.getProof(
       proofId,
@@ -1029,7 +1029,7 @@ void main() {
   group('$OpenPricesAPIClient Proofs', () {
     const UriProductHelper uriHelper = uriHelperFoodTest;
 
-    void checkProof(final Proof proof, final CommonProofParameters parameters) {
+    void checkProof(Proof proof, CommonProofParameters parameters) {
       expect(proof.type, parameters.type);
       expect(proof.owner, user.userId);
       expect(proof.id, isNotNull);
@@ -1059,8 +1059,8 @@ void main() {
     }
 
     Future<void> checkProofParameters(
-      final CreateProofParameters createProofParameters,
-      final UpdateProofParameters updateProofParameters,
+      CreateProofParameters createProofParameters,
+      UpdateProofParameters updateProofParameters,
     ) async {
       final String bearerToken = await getBearerToken(uriHelper: uriHelper);
 

@@ -55,8 +55,8 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
 
   @override
   Future<Response> getResponse(
-    final User? user,
-    final UriProductHelper uriHelper,
+    User? user,
+    UriProductHelper uriHelper,
   ) async {
     return HttpHelper().doGetRequest(
       uriHelper.getUri(path: getUriPath(), queryParameters: getParametersMap()),

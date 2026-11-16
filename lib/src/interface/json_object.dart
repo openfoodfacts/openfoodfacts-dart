@@ -50,7 +50,7 @@ abstract class JsonObject {
   }
 
   static Map<String, dynamic> removeNullEntries(
-    final Map<String, dynamic> input,
+    Map<String, dynamic> input,
   ) {
     final Map<String, dynamic> result = {};
     for (var element in input.entries) {

@@ -16,7 +16,7 @@ enum ImageField implements OffTagged {
   final String offTag;
 
   /// Returns the first [ImageField] that matches the [offTag].
-  static ImageField? fromOffTag(final String? offTag) =>
+  static ImageField? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, ImageField.values) as ImageField?;
 }
 
@@ -46,12 +46,12 @@ enum ImageSize implements OffTagged {
 
 extension ImageSizeExtension on ImageSize? {
   static ImageSize getType(String s) => ImageSize.values.firstWhere(
-    (final ImageSize key) => key.offTag == s.toLowerCase(),
+    (ImageSize key) => key.offTag == s.toLowerCase(),
     orElse: () => ImageSize.UNKNOWN,
   );
 
   static ImageSize fromNumber(String s) => ImageSize.values.firstWhere(
-    (final ImageSize key) => key.number == s,
+    (ImageSize key) => key.number == s,
     orElse: () => ImageSize.UNKNOWN,
   );
 }
@@ -80,7 +80,7 @@ enum ImageAngle {
 
 extension ImageAngleExtension on ImageAngle {
   /// Returns the corresponding [ImageAngle], or null if not found.
-  static ImageAngle? fromInt(final int? clockwiseDegree) {
+  static ImageAngle? fromInt(int? clockwiseDegree) {
     for (final ImageAngle imageAngle in ImageAngle.values) {
       if (imageAngle.degree == clockwiseDegree) {
         return imageAngle;
@@ -176,9 +176,9 @@ class ProductImage {
   ///
   /// cf. https://github.com/openfoodfacts/smooth-app/issues/3065
   String getUrl(
-    final String barcode, {
-    final ImageSize? imageSize,
-    final UriProductHelper uriHelper = uriHelperFoodProd,
+    String barcode, {
+    ImageSize? imageSize,
+    UriProductHelper uriHelper = uriHelperFoodProd,
   }) =>
       '${uriHelper.getProductImageRootUrl(barcode)}'
       '/'
@@ -187,7 +187,7 @@ class ProductImage {
   /// Returns just the filename of the url to display this image.
   ///
   /// See also [getUrl].
-  String getUrlFilename({final ImageSize? imageSize}) {
+  String getUrlFilename({ImageSize? imageSize}) {
     final ImageSize bestImageSize = imageSize ?? size ?? ImageSize.UNKNOWN;
     return isMain
         ? _getMainUrlFilename(bestImageSize)
@@ -199,7 +199,7 @@ class ProductImage {
   /// By default uses the own [image]'s size field.
   /// E.g. "front_fr.4.100.jpg"
   /// cf. https://github.com/openfoodfacts/smooth-app/issues/3065
-  String _getMainUrlFilename(final ImageSize imageSize) =>
+  String _getMainUrlFilename(ImageSize imageSize) =>
       '${field!.offTag}_${language.code}'
       '.$rev'
       '.${imageSize.number}'
@@ -209,7 +209,7 @@ class ProductImage {
   ///
   /// By default uses the own [image]'s size field.
   /// E.g. "7.100.jpg"
-  String _getRawUrlFilename(final ImageSize imageSize) {
+  String _getRawUrlFilename(ImageSize imageSize) {
     switch (imageSize) {
       case ImageSize.THUMB:
       case ImageSize.DISPLAY:

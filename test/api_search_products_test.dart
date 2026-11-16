@@ -23,7 +23,7 @@ void main() {
   const String storeCarrefour = 'carrefour';
 
   Future<SearchResult> searchProductsInTest(
-    final AbstractQueryConfiguration configuration,
+    AbstractQueryConfiguration configuration,
   ) async => OpenFoodAPIClient.searchProducts(
     user,
     configuration,
@@ -32,7 +32,7 @@ void main() {
 
   // actually, in TEST
   Future<SearchResult> searchProductsInProd(
-    final AbstractQueryConfiguration configuration,
+    AbstractQueryConfiguration configuration,
   ) async => searchProductsInTest(configuration);
 
   // additional parameter for faster response time
@@ -203,9 +203,9 @@ void main() {
 
       /// Returns the total number of products, and checks if the statuses match.
       Future<int?> checkIngredientsAnalysis(
-        final VeganStatus? veganStatus,
-        final VegetarianStatus? vegetarianStatus,
-        final PalmOilFreeStatus? palmOilFreeStatus,
+        VeganStatus? veganStatus,
+        VegetarianStatus? vegetarianStatus,
+        PalmOilFreeStatus? palmOilFreeStatus,
       ) async {
         if (veganStatus == null &&
             vegetarianStatus == null &&
@@ -909,7 +909,7 @@ void main() {
   );
 
   /// Returns random and different int's.
-  List<int> getRandomInts({required int count, required final int max}) {
+  List<int> getRandomInts({required int count, required int max}) {
     final Random random = Random();
     final List<int> result = <int>[];
     if (count > max) {
@@ -930,7 +930,7 @@ void main() {
     () {
       /// Returns the total number of products, and checks the allergens.
       Future<int> checkAllergens(
-        final AllergensParameter allergensParameter,
+        AllergensParameter allergensParameter,
       ) async {
         final List<Parameter> parameters = <Parameter>[
           const PageNumber(page: 1),
@@ -1038,7 +1038,7 @@ void main() {
     () {
       /// Returns the total number of products, and checks the states.
       Future<int> checkStatesTags(
-        final StatesTagsParameter statesTagsParameter,
+        StatesTagsParameter statesTagsParameter,
       ) async {
         final List<Parameter> parameters = <Parameter>[
           const PageNumber(page: 1),
@@ -1094,10 +1094,10 @@ void main() {
 
       test('check products with 2 random states tags', () async {
         Future<void> checkExpectations(
-          final ProductState state1,
-          final bool completed1,
-          final ProductState state2,
-          final bool completed2,
+          ProductState state1,
+          bool completed1,
+          ProductState state2,
+          bool completed2,
         ) async {
           final int count1 = await checkStatesTags(
             StatesTagsParameter(map: {state1: completed1}),
@@ -1145,9 +1145,9 @@ void main() {
     '$OpenFoodAPIClient get all to-be-completed products',
     () {
       Future<int?> getCount(
-        final OpenFoodFactsCountry country,
-        final OpenFoodFactsLanguage language,
-        final String store,
+        OpenFoodFactsCountry country,
+        OpenFoodFactsLanguage language,
+        String store,
       ) async {
         final String reason = '($country, $language)';
         final ProductSearchQueryConfiguration configuration =
@@ -1181,8 +1181,8 @@ void main() {
       }
 
       Future<int> getCountForAllLanguages(
-        final OpenFoodFactsCountry country,
-        final String store,
+        OpenFoodFactsCountry country,
+        String store,
       ) async {
         final List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
           OpenFoodFactsLanguage.ENGLISH,
@@ -1201,8 +1201,8 @@ void main() {
       }
 
       Future<void> checkTypeCount(
-        final OpenFoodFactsCountry country,
-        final int minimalExpectedCount,
+        OpenFoodFactsCountry country,
+        int minimalExpectedCount,
       ) async {
         final int count = await getCountForAllLanguages(
           country,
@@ -1253,10 +1253,10 @@ void main() {
       final String toBeCompletedTag = ProductState.COMPLETED.toBeCompletedTag;
 
       Future<int> getCount(
-        final TagFilterType type,
-        final OpenFoodFactsLanguage language,
-        final bool toBeCompleted, {
-        final void Function(Product)? additionalCheck,
+        TagFilterType type,
+        OpenFoodFactsLanguage language,
+        bool toBeCompleted, {
+        void Function(Product)? additionalCheck,
       }) async {
         final String reason = '($language, $type)';
         final ProductSearchQueryConfiguration configuration =
@@ -1294,9 +1294,9 @@ void main() {
       }
 
       Future<int> getCountForAllLanguages(
-        final TagFilterType type,
-        final bool toBeCompleted, {
-        final void Function(Product)? additionalCheck,
+        TagFilterType type,
+        bool toBeCompleted, {
+        void Function(Product)? additionalCheck,
       }) async {
         final List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
           OpenFoodFactsLanguage.ENGLISH,
@@ -1320,10 +1320,10 @@ void main() {
       }
 
       Future<void> checkTypeCount(
-        final TagFilterType type,
-        final int minimalExpectedCount, {
-        final void Function(Product)? additionalCheck,
-        final bool toBeCompleted = false,
+        TagFilterType type,
+        int minimalExpectedCount, {
+        void Function(Product)? additionalCheck,
+        bool toBeCompleted = false,
       }) async {
         final int count = await getCountForAllLanguages(
           type,
@@ -1356,7 +1356,7 @@ void main() {
           TagFilterType.INFORMERS,
           0, // you never know...
           toBeCompleted: true,
-          additionalCheck: (final Product product) {
+          additionalCheck: (Product product) {
             expect(product.statesTags, isNotNull);
             expect(product.statesTags, contains(toBeCompletedTag));
           },
@@ -1374,8 +1374,8 @@ void main() {
       const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
       const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
 
-      void checkProduct(final Product product) {
-        void checkLocalizedTag(final LocalizedTag? tag) {
+      void checkProduct(Product product) {
+        void checkLocalizedTag(LocalizedTag? tag) {
           expect(tag, isNotNull);
           expect(tag!.id, isNotNull);
           expect(tag.lcName, isNotNull);
@@ -1547,7 +1547,7 @@ void main() {
       final List<Product> products = result.products!;
       // sorting them again by the input order
       products.sort(
-        (final Product a, final Product b) => inputBarcodes
+        (Product a, Product b) => inputBarcodes
             .indexOf(a.barcode!)
             .compareTo(inputBarcodes.indexOf(b.barcode!)),
       );
@@ -1713,10 +1713,10 @@ void main() {
 
         final List<AttributeGroup> attributeGroups = product.attributeGroups!;
         final AttributeGroup attributeGroup = attributeGroups.firstWhere(
-          (final AttributeGroup group) => group.id == 'ingredients',
+          (AttributeGroup group) => group.id == 'ingredients',
         );
         final Attribute attribute = attributeGroup.attributes!.firstWhere(
-          (final Attribute attribute) => attribute.id == 'unwanted_ingredients',
+          (Attribute attribute) => attribute.id == 'unwanted_ingredients',
         );
         if (attribute.status == 'unknown') {
           expect(attribute.match, null);

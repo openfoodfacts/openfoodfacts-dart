@@ -8,8 +8,8 @@ void main() {
 
   group('$OpenFoodAPIClient answer robotoff question for FR', () {
     Future<void> testNotAskingAgain({
-      required final User? user,
-      required final String? deviceId,
+      required User? user,
+      required String? deviceId,
     }) async {
       Future<RobotoffQuestionResult> getQuestions() async =>
           RobotoffAPIClient.getQuestions(
@@ -23,7 +23,7 @@ void main() {
             serverType: ServerType.openFoodFacts,
           );
 
-      Future<Status> postAnnotation(final String insightId) async =>
+      Future<Status> postAnnotation(String insightId) async =>
           RobotoffAPIClient.postInsightAnnotation(
             insightId,
             InsightAnnotation.MAYBE,

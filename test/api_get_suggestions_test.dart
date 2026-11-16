@@ -9,7 +9,7 @@ void main() {
   const uriHelper = uriHelperFoodTest;
 
   /// Checks if at least one item contains the [substring].
-  void listContains(final List<String> list, final String substring) {
+  void listContains(List<String> list, String substring) {
     expect(list, isNotEmpty);
     for (final String item in list) {
       if (item.toString().toLowerCase().contains(substring)) {

@@ -20,7 +20,7 @@ class OpenFoodSearchAPIClient {
   static const String _subdomain = 'search';
 
   /// Host of the Elastic Search API.
-  static String _getHost(final UriProductHelper uriHelper) =>
+  static String _getHost(UriProductHelper uriHelper) =>
       uriHelper.getHost(_subdomain);
 
   /// Returns a list of suggestions.
@@ -28,12 +28,12 @@ class OpenFoodSearchAPIClient {
   /// /!\ For brands, language must be English.
   static Future<AutocompleteSearchResult> autocomplete({
     required String query,
-    required final List<TaxonomyName> taxonomyNames,
-    required final OpenFoodFactsLanguage language,
-    final User? user,
-    final int size = 10,
-    final Fuzziness fuzziness = Fuzziness.none,
-    final UriProductHelper uriHelper = uriHelperFoodProd,
+    required List<TaxonomyName> taxonomyNames,
+    required OpenFoodFactsLanguage language,
+    User? user,
+    int size = 10,
+    Fuzziness fuzziness = Fuzziness.none,
+    UriProductHelper uriHelper = uriHelperFoodProd,
   }) async {
     query = query.trim();
     if (query.isEmpty) {

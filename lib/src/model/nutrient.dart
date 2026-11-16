@@ -567,10 +567,10 @@ enum Nutrient implements OffTagged {
   const Nutrient({
     required this.typicalUnit,
     required this.offTag,
-    bool acceptsPercentDV = true,
+    this._acceptsPercentDV = true,
     this.acceptsIU = false,
     this.probablyPetFood = false,
-  }) : _acceptsPercentDV = acceptsPercentDV;
+  });
 
   /// Typical unit. An educated guess only: may differ according to countries.
   final Unit typicalUnit;
@@ -598,7 +598,7 @@ enum Nutrient implements OffTagged {
   ///
   /// Special case for [offTag] 'energy', which can be found in
   /// [OrderedNutrient], and is a duplicate of 'energy-kj'.
-  static Nutrient? fromOffTag(final String? offTag) => offTag == 'energy'
+  static Nutrient? fromOffTag(String? offTag) => offTag == 'energy'
       ? Nutrient.energyKJ
       : OffTagged.fromOffTag(offTag, Nutrient.values) as Nutrient?;
 

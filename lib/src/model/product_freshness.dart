@@ -16,7 +16,7 @@ class ProductFreshness {
   final DateTime? lastModified;
   final Set<ProductImprovement> improvements;
 
-  factory ProductFreshness.fromProduct(final Product product) =>
+  factory ProductFreshness.fromProduct(Product product) =>
       ProductFreshness._(
         isEcoscoreReady: product.ecoscoreScore != null,
         isNutriscoreReady: product.nutriscore != null,

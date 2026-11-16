@@ -11,7 +11,7 @@ void main() {
 
   const ProductQueryVersion version = ProductQueryVersion.testVersion;
 
-  bool checkServerStatus(final Status status) {
+  bool checkServerStatus(Status status) {
     if (status.status == 400) {
       // grumpy server: let's not fail
       return false;
@@ -63,7 +63,7 @@ void main() {
       return result.product!;
     }
 
-    Future<void> saveProduct(final String traces) async {
+    Future<void> saveProduct(String traces) async {
       final Status status = await OpenFoodAPIClient.saveProduct(
         TestConstants.TEST_USER,
         Product(barcode: barcode)..traces = traces,

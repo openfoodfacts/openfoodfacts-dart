@@ -18,7 +18,7 @@ abstract class UriReader {
     return _instance;
   }
 
-  Future<List<int>> readAsBytes(final Uri uri) async {
+  Future<List<int>> readAsBytes(Uri uri) async {
     final Uint8List? content = uri.data?.contentAsBytes();
     if (content != null) {
       return content;
@@ -35,7 +35,7 @@ abstract class UriReader {
     throw Exception('Unknown uri scheme for $uri');
   }
 
-  Future<List<int>> readFileAsBytes(final Uri uri);
+  Future<List<int>> readFileAsBytes(Uri uri);
 
   bool get isWeb => false;
 }

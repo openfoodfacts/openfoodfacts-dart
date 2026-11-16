@@ -23,7 +23,7 @@ void main() {
   const String unknownTag = 'en:some_nonexistent_thing';
 
   group('OpenFoodAPIClient getTaxonomyPackagingMaterials SERVER', () {
-    void checkKnown(final TaxonomyPackagingMaterial value) {
+    void checkKnown(TaxonomyPackagingMaterial value) {
       expect(value.name![OpenFoodFactsLanguage.ENGLISH]!, expectedNameEnglish);
       expect(value.name![OpenFoodFactsLanguage.FRENCH]!, expectedNameFrench);
       expect(

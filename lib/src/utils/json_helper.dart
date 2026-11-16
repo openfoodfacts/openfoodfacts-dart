@@ -287,7 +287,7 @@ class JsonHelper {
   }
 
   static Map<String, dynamic> allImagesToJson(
-    final List<ProductImage>? images,
+    List<ProductImage>? images,
   ) {
     final Map<String, dynamic> result = <String, dynamic>{};
     if (images == null || images.isEmpty) {

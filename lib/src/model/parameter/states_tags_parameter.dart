@@ -7,7 +7,7 @@ class StatesTagsParameter extends BoolMapParameter<ProductState> {
   String getName() => 'states_tags';
 
   @override
-  String getTag(final ProductState key, final bool value) =>
+  String getTag(ProductState key, bool value) =>
       value ? key.completedTag : key.toBeCompletedTag;
 
   const StatesTagsParameter({required super.map});

@@ -23,5 +23,5 @@ abstract class BoolMapParameter<T> extends Parameter {
 
   /// Returns the tag as on or off, like "gluten:with" or "gluten:without"
   @protected
-  String getTag(final T key, final bool value);
+  String getTag(T key, bool value);
 }

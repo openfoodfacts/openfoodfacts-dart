@@ -10,7 +10,7 @@ enum ContributionKind implements OffTagged {
   final String offTag;
 
   /// Returns the first [ContributionKind] that matches the [offTag].
-  static ContributionKind? fromOffTag(final String? offTag) =>
+  static ContributionKind? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, ContributionKind.values)
           as ContributionKind?;
 }

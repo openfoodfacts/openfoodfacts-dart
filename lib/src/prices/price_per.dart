@@ -17,6 +17,6 @@ enum PricePer implements OffTagged {
   final String offTag;
 
   /// Returns the first [PricePer] that matches the [offTag].
-  static PricePer? fromOffTag(final String? offTag) =>
+  static PricePer? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, PricePer.values) as PricePer?;
 }

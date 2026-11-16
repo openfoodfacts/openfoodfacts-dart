@@ -6,7 +6,7 @@ import 'api_version.dart';
 ///
 /// cf. https://openfoodfacts.github.io/openfoodfacts-server/api/ref-api-and-product-schema-change-log/
 class ProductQueryVersion extends ApiVersion {
-  const ProductQueryVersion(final num version)
+  const ProductQueryVersion(num version)
     : super(version < 3 ? 3 : version);
 
   // TODO: deprecated from 2026-06-25; remove when old enough
@@ -35,7 +35,7 @@ class ProductQueryVersion extends ApiVersion {
 
   // TODO: deprecated from 2026-07-27; remove when old enough
   @Deprecated('Source of confusion. Use getApiPath instead.')
-  String getPath(final String barcode) =>
+  String getPath(String barcode) =>
       getApiPath('product/${Uri.encodeComponent(barcode)}/');
 
   // TODO: deprecated from 2026-07-09; remove when old enough

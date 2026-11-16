@@ -1479,7 +1479,7 @@ enum OpenFoodFactsLanguage implements OffTagged {
   final String? englishName;
 
   /// Returns the first [OpenFoodFactsLanguage] that matches the [offTag].
-  static OpenFoodFactsLanguage? fromOffTag(final String? offTag) =>
+  static OpenFoodFactsLanguage? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, OpenFoodFactsLanguage.values)
           as OpenFoodFactsLanguage?;
 }
@@ -1592,7 +1592,7 @@ class LanguageHelper {
   ///
   /// e.g. "country_code_2": {"en": "BY"} will return 'BY'.
   /// From a `Map<String, String>` in `dynamic`'s clothing (JsonKey annotation)
-  static Map<String, String>? toJsonStringMapIsoUnique(final String? value) {
+  static Map<String, String>? toJsonStringMapIsoUnique(String? value) {
     if (value == null) {
       return null;
     }
@@ -1637,7 +1637,7 @@ class LanguageHelper {
       return null;
     }
     final List<String> list = List<String>.of(
-      languages.map((final OpenFoodFactsLanguage language) => language.offTag),
+      languages.map((OpenFoodFactsLanguage language) => language.offTag),
     );
     return {'en': list.join(',')};
   }

@@ -23,11 +23,11 @@ class UriHelper {
   /// request than GET, e.g. POST or MULTIPART, where we add the user agent
   /// parameters in another part of the code.
   Uri getUri({
-    required final String path,
-    final Map<String, dynamic>? queryParameters,
-    final bool? addUserAgentParameters,
-    final String? userInfo,
-    final String? forcedHost,
+    required String path,
+    Map<String, dynamic>? queryParameters,
+    bool? addUserAgentParameters,
+    String? userInfo,
+    String? forcedHost,
   }) => Uri(
     scheme: scheme,
     host: forcedHost ?? host,
@@ -38,7 +38,7 @@ class UriHelper {
     userInfo: userInfo,
   );
 
-  Uri getPostUri({required final String path}) =>
+  Uri getPostUri({required String path}) =>
       getUri(path: path, addUserAgentParameters: false);
 
   /// Replaces the subdomain of an URI with specific country and language.
@@ -50,7 +50,7 @@ class UriHelper {
   /// * https://fr.xxx... would be France
   /// * https://fr-es.xxx... would be France in Spanish
   static Uri replaceSubdomain(
-    final Uri uri, {
+    Uri uri, {
     OpenFoodFactsLanguage? language,
     OpenFoodFactsCountry? country,
   }) => replaceSubdomainWithCodes(
@@ -74,8 +74,8 @@ class UriHelper {
   /// * https://fr.xxx... would be France
   /// * https://fr-es.xxx... would be France in Spanish
   static Uri replaceSubdomainWithCodes(
-    final Uri uri, {
-    final String? languageCode,
+    Uri uri, {
+    String? languageCode,
     String? countryCode,
   }) {
     final String initialSubdomain = uri.host.split('.')[0];
@@ -109,9 +109,9 @@ class UriProductHelper extends UriHelper {
   /// Returns the product images folder (without trailing '/').
   String getImageUrlBase() => '$scheme://images.$domain/images/products';
 
-  String getHost(final String subdomain) => '$subdomain.$domain';
+  String getHost(String subdomain) => '$subdomain.$domain';
 
-  Uri getPatchUri({required final String path}) => getUri(
+  Uri getPatchUri({required String path}) => getUri(
     path: path,
     addUserAgentParameters: false,
     userInfo: userInfoForPatch,
@@ -120,7 +120,7 @@ class UriProductHelper extends UriHelper {
   /// Returns the web folder of the product images (without trailing '/')
   ///
   /// E.g. "https://images.openfoodfacts.org/images/products/359/671/046/2858"
-  String getProductImageRootUrl(final String barcode) =>
+  String getProductImageRootUrl(String barcode) =>
       '${getImageUrlBase()}/${getBarcodeSubPath(barcode)}';
 
   /// Returns the barcode sub-folder (without trailing '/').
@@ -130,7 +130,7 @@ class UriProductHelper extends UriHelper {
   /// * `000/012/345/6789` for barcode `123456789`
   /// * `000/123/456/7890` for barcode `1234567890`
   /// * `123/456/789/0123` for barcode `1234567890123`
-  static String getBarcodeSubPath(final String barcode) {
+  static String getBarcodeSubPath(String barcode) {
     const int typicalLength = 13;
     final int length = barcode.length;
     final String workBarcode;

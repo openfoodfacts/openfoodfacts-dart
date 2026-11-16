@@ -5,8 +5,8 @@ import 'available_preference_importances.dart';
 class AvailableProductPreferences {
   /// Load constructor - may throw an exception.
   AvailableProductPreferences.loadFromJSONStrings({
-    required final String preferenceImportancesString,
-    required final String attributeGroupsString,
+    required String preferenceImportancesString,
+    required String attributeGroupsString,
   }) {
     final AvailableAttributeGroups availableAttributeGroups =
         AvailableAttributeGroups.loadFromJSONString(attributeGroupsString);

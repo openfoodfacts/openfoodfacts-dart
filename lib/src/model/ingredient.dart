@@ -117,7 +117,7 @@ IngredientSpecialPropertyStatus? ingredientSpecialPropertyStatusFromJson(
   }
   try {
     return IngredientSpecialPropertyStatus.values.firstWhere(
-      (final IngredientSpecialPropertyStatus key) => _MAP[key] == json,
+      (IngredientSpecialPropertyStatus key) => _MAP[key] == json,
     );
   } on StateError {
     return null;

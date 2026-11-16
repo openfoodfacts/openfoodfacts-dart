@@ -143,9 +143,9 @@ void main() {
       final Product product = result.product!;
 
       void check(
-        final List<dynamic>? tags,
-        final Map<OpenFoodFactsLanguage, List<String>>? tagsInLanguages,
-        final ProductField productField,
+        List<dynamic>? tags,
+        Map<OpenFoodFactsLanguage, List<String>>? tagsInLanguages,
+        ProductField productField,
       ) {
         expect(tags, isNotNull, reason: productField.offTag);
         expect(tagsInLanguages, isNotNull, reason: productField.offTag);
@@ -167,9 +167,9 @@ void main() {
       }
 
       void checkIngredientAnalysisTags(
-        final IngredientsAnalysisTags? tags,
-        final Map<OpenFoodFactsLanguage, List<String>>? tagsInLanguages,
-        final ProductField productField,
+        IngredientsAnalysisTags? tags,
+        Map<OpenFoodFactsLanguage, List<String>>? tagsInLanguages,
+        ProductField productField,
       ) {
         expect(tags, isNotNull, reason: productField.offTag);
         expect(tagsInLanguages, isNotNull, reason: productField.offTag);
@@ -273,8 +273,8 @@ void main() {
       final Product product = result.product!;
 
       void check(
-        final Map<OpenFoodFactsLanguage, Map<ImageField, int>>? tagsInLanguages,
-        final ProductField productField,
+        Map<OpenFoodFactsLanguage, Map<ImageField, int>>? tagsInLanguages,
+        ProductField productField,
       ) {
         expect(tagsInLanguages, isNotNull, reason: productField.offTag);
         expect(tagsInLanguages, isNotEmpty, reason: productField.offTag);
@@ -323,8 +323,8 @@ void main() {
       final Product product = result.product!;
 
       void check(
-        final Map<OpenFoodFactsLanguage, String>? tagsInLanguages,
-        final ProductField productField,
+        Map<OpenFoodFactsLanguage, String>? tagsInLanguages,
+        ProductField productField,
       ) {
         expect(tagsInLanguages, isNotNull, reason: productField.offTag);
         expect(tagsInLanguages, isNotEmpty, reason: productField.offTag);
@@ -381,8 +381,8 @@ void main() {
       final Product product = result.product!;
 
       void check(
-        final Map<OpenFoodFactsLanguage, String>? tagsInLanguages,
-        final ProductField productField,
+        Map<OpenFoodFactsLanguage, String>? tagsInLanguages,
+        ProductField productField,
       ) {
         expect(tagsInLanguages, isNotNull, reason: productField.offTag);
         expect(tagsInLanguages, isNotEmpty, reason: productField.offTag);
@@ -419,8 +419,8 @@ void main() {
       final Product product = result.product!;
 
       void check(
-        final Map<OpenFoodFactsLanguage, String>? tagsInLanguages,
-        final ProductField productField,
+        Map<OpenFoodFactsLanguage, String>? tagsInLanguages,
+        ProductField productField,
       ) {
         expect(tagsInLanguages, isNotNull, reason: productField.offTag);
         expect(tagsInLanguages, isNotEmpty, reason: productField.offTag);

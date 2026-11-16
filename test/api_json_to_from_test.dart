@@ -24,7 +24,7 @@ void main() {
           );
       expect(productResult.product, isNotNull);
 
-      void checkImages(final List<ProductImage>? images) {
+      void checkImages(List<ProductImage>? images) {
         expect(images, isNotNull);
         expect(images, isNotEmpty);
 

@@ -9,13 +9,13 @@ void main() {
   const UriProductHelper uriHelper = uriHelperFoodTest;
 
   Future<ProductResultV3?> temporarySaveProductV3(
-    final String barcode, {
-    final List<ProductPackaging>? packagings,
-    final bool? packagingsComplete,
-    final List<NutritionSet>? nutritionInputSets,
-    final String? servingSize,
-    final OpenFoodFactsCountry? country,
-    final OpenFoodFactsLanguage? language,
+    String barcode, {
+    List<ProductPackaging>? packagings,
+    bool? packagingsComplete,
+    List<NutritionSet>? nutritionInputSets,
+    String? servingSize,
+    OpenFoodFactsCountry? country,
+    OpenFoodFactsLanguage? language,
   }) async {
     try {
       final result = await OpenFoodAPIClient.temporarySaveProductV3(

@@ -24,6 +24,6 @@ enum TagType implements OffTagged {
   final String offTag;
 
   /// Returns the first [TagType] that matches the [offTag].
-  static TagType? fromOffTag(final String? offTag) =>
+  static TagType? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, TagType.values) as TagType?;
 }

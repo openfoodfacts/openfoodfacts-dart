@@ -21,42 +21,42 @@ class Nutriments extends JsonMap {
   Nutriments._fromMap(super.jsonMap);
 
   /// Returns the value map key for that [nutrient] and that [perSize].
-  String _getTag(final Nutrient nutrient, final PerSize perSize) =>
+  String _getTag(Nutrient nutrient, PerSize perSize) =>
       '${nutrient.offTag}_${perSize.offTag}';
 
   /// Returns the modifier map key for that [nutrient].
-  String _getModifierTag(final Nutrient nutrient) =>
+  String _getModifierTag(Nutrient nutrient) =>
       '${nutrient.offTag}_modifier';
 
   /// Returns the value of that [nutrient] for that [perSize].
   ///
   /// It won't be in grams for very specific nutrients, like [Nutrient.alcohol].
-  double? getValue(final Nutrient nutrient, final PerSize perSize) =>
+  double? getValue(Nutrient nutrient, PerSize perSize) =>
       JsonObject.parseDouble(jsonMap[_getTag(nutrient, perSize)]);
 
   /// Returns the modifier of that [nutrient].
-  NutrientModifier? getModifier(final Nutrient nutrient) =>
+  NutrientModifier? getModifier(Nutrient nutrient) =>
       NutrientModifier.fromOffTag(jsonMap[_getModifierTag(nutrient)]);
 
   /// Sets the value in grams of that [nutrient] for that [perSize].
   ///
   /// It won't be grams for very specific nutrients, like [Nutrient.alcohol].
   Nutriments setValue(
-    final Nutrient nutrient,
-    final PerSize perSize,
-    final double? value, {
-    final NutrientModifier? modifier,
+    Nutrient nutrient,
+    PerSize perSize,
+    double? value, {
+    NutrientModifier? modifier,
   }) => _set(nutrient, perSize, value: value, modifier: modifier);
 
   /// Deletes the value in grams of that [nutrient] for that [perSize].
-  Nutriments deleteValue(final Nutrient nutrient, final PerSize perSize) =>
+  Nutriments deleteValue(Nutrient nutrient, PerSize perSize) =>
       _set(nutrient, perSize, value: null);
 
   Nutriments _set(
-    final Nutrient nutrient,
-    final PerSize perSize, {
-    final double? value,
-    final NutrientModifier? modifier,
+    Nutrient nutrient,
+    PerSize perSize, {
+    double? value,
+    NutrientModifier? modifier,
   }) {
     jsonMap[_getTag(nutrient, perSize)] = value;
     jsonMap[_getModifierTag(nutrient)] = modifier?.offTag;
@@ -68,7 +68,7 @@ class Nutriments extends JsonMap {
   /// Default case: a nutrient with a null value is considered "populated".
   /// If [isNullEmpty] is true, a null value is a non populated value, and a
   /// [Nutriments] with only null values would be considered empty.
-  bool isEmpty({final bool isNullEmpty = false}) {
+  bool isEmpty({bool isNullEmpty = false}) {
     if (jsonMap.isEmpty) {
       return true;
     }
@@ -84,7 +84,7 @@ class Nutriments extends JsonMap {
   }
 
   /// Returns the energy in kJ for that [perSize], direct or computed from kcal.
-  double? getComputedKJ(final PerSize perSize) {
+  double? getComputedKJ(PerSize perSize) {
     double? result;
     result = getValue(Nutrient.energyKJ, perSize);
     if (result != null) {

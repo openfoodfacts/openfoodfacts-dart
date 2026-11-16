@@ -61,10 +61,10 @@ class HttpHelper {
   Future<http.Response> doGetRequest(
     Uri uri, {
     User? user,
-    required final UriHelper uriHelper,
-    final String? bearerToken,
-    final bool addCookiesToHeader = false,
-    final bool addCredentialsToHeader = false,
+    required UriHelper uriHelper,
+    String? bearerToken,
+    bool addCookiesToHeader = false,
+    bool addCredentialsToHeader = false,
   }) async {
     http.Response response = await http.get(
       uri,
@@ -93,7 +93,7 @@ class HttpHelper {
     Uri uri,
     Map<String, String> body,
     User? user, {
-    required final UriHelper uriHelper,
+    required UriHelper uriHelper,
     required bool addCredentialsToBody,
     bool addCredentialsToHeader = false,
   }) async {
@@ -118,8 +118,8 @@ class HttpHelper {
   Future<http.Response> doDeleteRequest(
     Uri uri, {
     User? user,
-    required final UriHelper uriHelper,
-    final String? bearerToken,
+    required UriHelper uriHelper,
+    String? bearerToken,
   }) async => http.delete(
     uri,
     headers: _buildHeaders(
@@ -133,10 +133,10 @@ class HttpHelper {
   /// Sends an http PUT request to the specified uri.
   Future<http.Response> doPutRequest(
     Uri uri,
-    final String jsonBody, {
+    String jsonBody, {
     User? user,
-    required final UriHelper uriHelper,
-    final String? bearerToken,
+    required UriHelper uriHelper,
+    String? bearerToken,
   }) async => http.put(
     uri,
     headers: _buildHeaders(
@@ -150,10 +150,10 @@ class HttpHelper {
 
   /// Sends an http POST request to the specified uri with a JSON body.
   Future<http.Response> doPostJsonRequest(
-    final Uri uri,
-    final String jsonBody, {
-    required final UriHelper uriHelper,
-    required final String bearerToken,
+    Uri uri,
+    String jsonBody, {
+    required UriHelper uriHelper,
+    required String bearerToken,
   }) async =>
       http.post(uri, headers: _getBearerHeader(bearerToken), body: jsonBody);
 
@@ -164,12 +164,12 @@ class HttpHelper {
   /// The data / body of the request has to be provided as map. (key, value)
   /// The result of the request will be returned as string.
   Future<http.Response> doPatchRequest(
-    final Uri uri,
-    final Map<String, dynamic> body,
-    final User? user, {
-    required final UriHelper uriHelper,
-    final String? bearerToken,
-    final bool addUserAgentParameters = true,
+    Uri uri,
+    Map<String, dynamic> body,
+    User? user, {
+    required UriHelper uriHelper,
+    String? bearerToken,
+    bool addUserAgentParameters = true,
   }) async => http.patch(
     uri,
     headers: _buildHeaders(
@@ -192,7 +192,7 @@ class HttpHelper {
     Map<String, String> body, {
     Map<String, Uri>? files,
     User? user,
-    required final UriHelper uriHelper,
+    required UriHelper uriHelper,
   }) async {
     var request = http.MultipartRequest('POST', uri);
 
@@ -253,7 +253,7 @@ class HttpHelper {
   /// Returns the request headers.
   ///
   /// Note: [addCredentialsToHeader] and [isTestModeActive] exclude each other.
-  Map<String, String>? _getBearerHeader(final String bearerToken) =>
+  Map<String, String>? _getBearerHeader(String bearerToken) =>
       <String, String>{
         'Authorization': 'Bearer $bearerToken',
         'Content-Type': 'application/json',
@@ -264,10 +264,10 @@ class HttpHelper {
   /// Note: [addCredentialsToHeader] and [isTestModeActive] exclude each other.
   Map<String, String>? _buildHeaders({
     User? user,
-    required final UriHelper uriHelper,
+    required UriHelper uriHelper,
     required bool addCredentialsToHeader,
-    final String? bearerToken,
-    final bool addCookieToHeader = false,
+    String? bearerToken,
+    bool addCookieToHeader = false,
   }) {
     if (bearerToken != null) {
       return _getBearerHeader(bearerToken);
@@ -316,7 +316,7 @@ class HttpHelper {
   /// Typically, when the OFF server is not happy, it returns an html page.
   /// With this method we display the html page title instead of just a
   /// "it's not a json" exception.
-  dynamic jsonDecode(final String string) {
+  dynamic jsonDecode(String string) {
     try {
       return json.decode(string);
     } catch (e) {
@@ -347,11 +347,11 @@ class HttpHelper {
   }
 
   /// json.decode, with utf8 conversion and additional "html" exception.
-  dynamic jsonDecodeUtf8(final http.Response response) =>
+  dynamic jsonDecodeUtf8(http.Response response) =>
       jsonDecode(utf8.decode(response.bodyBytes));
 
   /// Returns true if the [input] string is ISO-8859-1 encoded.
-  static bool _isIso88591(final String input) {
+  static bool _isIso88591(String input) {
     try {
       latin1.encode(input);
       return true;
@@ -366,7 +366,7 @@ class HttpHelper {
   /// Here instead of encoding systematically, we keep ISO-8859-1 inputs and
   /// only encode the other "problematic" inputs.
   /// cf. https://github.com/openfoodfacts/openfoodfacts-dart/issues/829
-  static String _getSafeString(final String input) {
+  static String _getSafeString(String input) {
     if (_isIso88591(input)) {
       return input;
     }
@@ -374,7 +374,7 @@ class HttpHelper {
   }
 
   /// Returns the probable media type associated to that filename.
-  http.MediaType? imagineMediaType(final String filename) {
+  http.MediaType? imagineMediaType(String filename) {
     String ext = extension(filename);
     if (ext.isEmpty) {
       return null;

@@ -922,7 +922,7 @@ enum Currency {
   /// The number of digits after the decimal separator.
   final int decimalNumbers;
 
-  static Currency? fromName(final String? name) {
+  static Currency? fromName(String? name) {
     if (name == null) {
       return null;
     }
@@ -935,13 +935,13 @@ enum Currency {
   }
 
   /// Returns a value with a number of decimals that matches the currency.
-  double fixDecimals(final double price) =>
+  double fixDecimals(double price) =>
       fixDecimalsForNumbers(price, decimalNumbers);
 
   @visibleForTesting
   static double fixDecimalsForNumbers(
-    final double price,
-    final int decimalNumbers,
+    double price,
+    int decimalNumbers,
   ) {
     final int power10 = pow(10, decimalNumbers).round();
     return (price * power10).round() / power10;

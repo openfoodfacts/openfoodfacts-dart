@@ -54,9 +54,9 @@ class ExternalSourceMetadata extends JsonMap {
 
   /// Returns the URL to product data.
   String getProductUrl(
-    final String barcode,
-    final OpenFoodFactsLanguage language,
-    final OpenFoodFactsCountry country,
+    String barcode,
+    OpenFoodFactsLanguage language,
+    OpenFoodFactsCountry country,
   ) => knowledgePanelUrl
       .replaceFirst(r'$code', barcode)
       .replaceFirst(r'$lc', language.offTag)

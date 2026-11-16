@@ -13,7 +13,7 @@ enum InsightAnnotation {
 
   final int value;
 
-  static InsightAnnotation? fromInt(final int annotation) {
+  static InsightAnnotation? fromInt(int annotation) {
     for (final InsightAnnotation insightAnnotation in values) {
       if (insightAnnotation.value == annotation) {
         return insightAnnotation;
@@ -52,7 +52,7 @@ enum InsightType implements OffTagged {
   final String offTag;
 
   /// Returns the first [InsightType] that matches the [offTag].
-  static InsightType? fromOffTag(final String? offTag) =>
+  static InsightType? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, InsightType.values) as InsightType?;
 }
 

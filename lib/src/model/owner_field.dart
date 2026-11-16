@@ -7,11 +7,11 @@ import 'off_tagged.dart';
 class OwnerField implements OffTagged {
   const OwnerField.raw(this.offTag);
 
-  OwnerField.nutrient(final Nutrient nutrient) : this.raw(nutrient.offTag);
+  OwnerField.nutrient(Nutrient nutrient) : this.raw(nutrient.offTag);
 
   factory OwnerField.productField(
-    final ProductField productField,
-    final OpenFoodFactsLanguage language,
+    ProductField productField,
+    OpenFoodFactsLanguage language,
   ) {
     final ProductField? inLanguages = productField.inLanguages;
     if (inLanguages == null) {

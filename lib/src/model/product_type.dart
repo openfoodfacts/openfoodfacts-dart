@@ -24,6 +24,6 @@ enum ProductType implements OffTagged {
   final Flavor flavor;
 
   /// Returns the first [ProductType] that matches the [offTag].
-  static ProductType? fromOffTag(final String? offTag) =>
+  static ProductType? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, ProductType.values) as ProductType?;
 }

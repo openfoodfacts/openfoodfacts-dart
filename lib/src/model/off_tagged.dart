@@ -7,8 +7,8 @@ abstract class OffTagged {
   ///
   /// Typical use: with `enum`s that implement OffTagged.
   static OffTagged? fromOffTag(
-    final String? offTag,
-    final Iterable<OffTagged> values,
+    String? offTag,
+    Iterable<OffTagged> values,
   ) {
     if (offTag == null) {
       return null;

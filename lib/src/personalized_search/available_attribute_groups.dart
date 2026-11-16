@@ -8,7 +8,7 @@ import '../utils/uri_helper.dart';
 class AvailableAttributeGroups {
   /// Load constructor; may throw an exception.
   AvailableAttributeGroups.loadFromJSONString(
-    final String attributeGroupsString,
+    String attributeGroupsString,
   ) {
     final dynamic inputJson = HttpHelper().jsonDecode(attributeGroupsString);
 
@@ -52,9 +52,9 @@ class AvailableAttributeGroups {
   /// Where a localized JSON file can be found.
   /// [languageCode] is a 2-letter language code.
   static Uri getUri(
-    final String languageCode, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ProductQueryVersion version = ProductQueryVersion.latestVersion,
+    String languageCode, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ProductQueryVersion version = ProductQueryVersion.latestVersion,
   }) => uriHelper.getUri(
     path: version.getApiPath('attribute_groups'),
     queryParameters: {'lc': languageCode},

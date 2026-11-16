@@ -39,8 +39,8 @@ void main() {
   const List<String> russianIngredientsSplit = <String>['мука', 'Вода'];
 
   Future<Status?> saveProduct(
-    final Product product, {
-    final OpenFoodFactsLanguage? language,
+    Product product, {
+    OpenFoodFactsLanguage? language,
   }) async {
     try {
       final Status status = await OpenFoodAPIClient.saveProduct(

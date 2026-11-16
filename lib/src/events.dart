@@ -17,11 +17,11 @@ class EventsAPIClient {
 
   /// Returns all the [EventsBase], with optional filters and paging.
   static Future<List<EventsBase>> getEvents({
-    final String? userId,
-    final String? deviceId,
-    final int? skip,
-    final int? limit,
-    final UriHelper uriHelper = uriHelperEventsProd,
+    String? userId,
+    String? deviceId,
+    int? skip,
+    int? limit,
+    UriHelper uriHelper = uriHelperEventsProd,
   }) async {
     final Map<String, String> parameters = <String, String>{};
     if (userId != null) {
@@ -52,9 +52,9 @@ class EventsAPIClient {
 
   /// Returns all the events counts, with optional filters.
   static Future<Map<String, int>> getEventsCount({
-    final String? userId,
-    final String? deviceId,
-    final UriHelper uriHelper = uriHelperEventsProd,
+    String? userId,
+    String? deviceId,
+    UriHelper uriHelper = uriHelperEventsProd,
   }) async {
     final Map<String, String> parameters = <String, String>{};
     if (userId != null) {
@@ -79,10 +79,10 @@ class EventsAPIClient {
 
   /// Returns the score, with optional filters.
   static Future<int> getScores({
-    final String? userId,
-    final String? deviceId,
-    final String? eventType,
-    final UriHelper uriHelper = uriHelperEventsProd,
+    String? userId,
+    String? deviceId,
+    String? eventType,
+    UriHelper uriHelper = uriHelperEventsProd,
   }) async {
     final Map<String, String> parameters = <String, String>{};
     if (userId != null) {
@@ -106,9 +106,9 @@ class EventsAPIClient {
 
   /// Returns all the [BadgeBase], with optional filters.
   static Future<List<BadgeBase>> getBadges({
-    final String? userId,
-    final String? deviceId,
-    final UriHelper uriHelper = uriHelperEventsProd,
+    String? userId,
+    String? deviceId,
+    UriHelper uriHelper = uriHelperEventsProd,
   }) async {
     final Map<String, String> parameters = <String, String>{};
     if (userId != null) {
@@ -133,8 +133,8 @@ class EventsAPIClient {
 
   /// Returns all the [LeaderboardEntry], with optional filters.
   static Future<List<LeaderboardEntry>> getLeaderboard({
-    final String? eventType,
-    final UriHelper uriHelper = uriHelperEventsProd,
+    String? eventType,
+    UriHelper uriHelper = uriHelperEventsProd,
   }) async {
     final Map<String, String> parameters = <String, String>{};
     if (eventType != null) {
@@ -155,7 +155,7 @@ class EventsAPIClient {
   }
 
   /// Throws a detailed exception if relevant. Does nothing if [response] is OK.
-  static void _checkResponse(final Response response) {
+  static void _checkResponse(Response response) {
     if (response.statusCode != 200) {
       // cf. HTTPValidationError
       String? exception;
