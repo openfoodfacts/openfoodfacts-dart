@@ -26,9 +26,7 @@ class KnowledgePanels {
       ? null
       : KnowledgePanels.fromJson(json as Map<String, dynamic>);
 
-  static Map<String, dynamic>? toJsonHelper(
-    KnowledgePanels? knowledgePanels,
-  ) {
+  static Map<String, dynamic>? toJsonHelper(KnowledgePanels? knowledgePanels) {
     final Map<String, dynamic> result = {};
     if (knowledgePanels == null) {
       return null;

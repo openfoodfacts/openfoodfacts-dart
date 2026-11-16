@@ -255,10 +255,7 @@ class Product extends JsonObject {
   /// Images may be returned in multiple sizes
   List<ProductImage>? getMainImages() => getImageSubset(true, images);
 
-  bool? isImageLocked(
-    ImageField imageField,
-    OpenFoodFactsLanguage language,
-  ) {
+  bool? isImageLocked(ImageField imageField, OpenFoodFactsLanguage language) {
     if (owner == null) {
       return null;
     }
@@ -1333,10 +1330,7 @@ class Product extends JsonObject {
   /// Returns a combo of the best product name and the first brand.
   ///
   /// cf. openfoodfacts-server/lib/ProductOpener/Products.pm
-  String getProductNameBrand(
-    OpenFoodFactsLanguage language,
-    String separator,
-  ) {
+  String getProductNameBrand(OpenFoodFactsLanguage language, String separator) {
     final String bestProductName = getBestProductName(language);
     final String? firstBrand = getFirstBrand();
     if (firstBrand == null) {

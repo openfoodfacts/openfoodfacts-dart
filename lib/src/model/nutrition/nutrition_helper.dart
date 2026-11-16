@@ -6,10 +6,8 @@ import 'nutrition_set_key.dart';
 class NutritionHelper {
   // TODO(monsieurtanuki): extract other sets, like 'aggregated_set'
 
-  void setInputSets(
-    Product product,
-    List<NutritionSet> nutritionSets,
-  ) => setNutritionSets(product, nutritionSets, 'input_sets');
+  void setInputSets(Product product, List<NutritionSet> nutritionSets) =>
+      setNutritionSets(product, nutritionSets, 'input_sets');
 
   void setNutritionSets(
     Product product,
@@ -29,10 +27,7 @@ class NutritionHelper {
       product.nutrition?['no_nutrition_data_on_packaging'];
 
   /// Returns the nutrition sets that match a [tag].
-  List<NutritionSet>? getNutritionSets(
-    Product product,
-    String tag,
-  ) {
+  List<NutritionSet>? getNutritionSets(Product product, String tag) {
     if (product.nutrition == null) {
       return null;
     }
@@ -71,9 +66,7 @@ class NutritionHelper {
   }
 
   /// Returns all the keys of the nutrition sets.
-  List<NutritionSetKey>? getNutritionSetKeys(
-    List<NutritionSet> nutritionSets,
-  ) {
+  List<NutritionSetKey>? getNutritionSetKeys(List<NutritionSet> nutritionSets) {
     final List<NutritionSetKey> result = <NutritionSetKey>[];
     for (final NutritionSet nutritionSet in nutritionSets) {
       result.add(nutritionSet.key);

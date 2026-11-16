@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import '../model/off_tagged.dart';
 
 /// Type of a Price.

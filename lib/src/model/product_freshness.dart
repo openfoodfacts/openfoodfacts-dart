@@ -16,16 +16,14 @@ class ProductFreshness {
   final DateTime? lastModified;
   final Set<ProductImprovement> improvements;
 
-  factory ProductFreshness.fromProduct(Product product) =>
-      ProductFreshness._(
-        isEcoscoreReady: product.ecoscoreScore != null,
-        isNutriscoreReady: product.nutriscore != null,
-        isIngredientsReady:
-            product.ingredientsTags != null &&
-            product.ingredientsTags!.isNotEmpty,
-        lastModified: product.lastModified,
-        improvements: product.getProductImprovements(),
-      );
+  factory ProductFreshness.fromProduct(Product product) => ProductFreshness._(
+    isEcoscoreReady: product.ecoscoreScore != null,
+    isNutriscoreReady: product.nutriscore != null,
+    isIngredientsReady:
+        product.ingredientsTags != null && product.ingredientsTags!.isNotEmpty,
+    lastModified: product.lastModified,
+    improvements: product.getProductImprovements(),
+  );
 
   @override
   String toString() =>

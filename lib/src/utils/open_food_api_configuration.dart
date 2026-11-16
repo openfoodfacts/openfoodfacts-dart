@@ -62,10 +62,7 @@ class OpenFoodAPIConfiguration {
   static User? getUser(User? user) => user ?? globalUser;
 
   /// Returns the most relevant country code
-  static String? computeCountryCode(
-    OpenFoodFactsCountry? country,
-    String? cc,
-  ) {
+  static String? computeCountryCode(OpenFoodFactsCountry? country, String? cc) {
     if (country != null) {
       return country.offTag;
     }

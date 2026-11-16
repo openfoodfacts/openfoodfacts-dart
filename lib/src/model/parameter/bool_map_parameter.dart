@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+
 import '../../interface/parameter.dart';
 
 /// Abstract map of [bool] as [Parameter].

@@ -939,10 +939,7 @@ enum Currency {
       fixDecimalsForNumbers(price, decimalNumbers);
 
   @visibleForTesting
-  static double fixDecimalsForNumbers(
-    double price,
-    int decimalNumbers,
-  ) {
+  static double fixDecimalsForNumbers(double price, int decimalNumbers) {
     final int power10 = pow(10, decimalNumbers).round();
     return (price * power10).round() / power10;
   }

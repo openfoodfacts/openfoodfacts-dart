@@ -198,11 +198,10 @@ class HttpHelper {
 
     request.headers.addAll(
       _buildHeaders(
-            user: user,
-            uriHelper: uriHelper,
-            addCredentialsToHeader: false,
-          )
-          as Map<String, String>,
+        user: user,
+        uriHelper: uriHelper,
+        addCredentialsToHeader: false,
+      ) as Map<String, String>,
     );
 
     request.headers.addAll({'Content-Type': 'multipart/form-data'});
@@ -253,11 +252,10 @@ class HttpHelper {
   /// Returns the request headers.
   ///
   /// Note: [addCredentialsToHeader] and [isTestModeActive] exclude each other.
-  Map<String, String>? _getBearerHeader(String bearerToken) =>
-      <String, String>{
-        'Authorization': 'Bearer $bearerToken',
-        'Content-Type': 'application/json',
-      };
+  Map<String, String>? _getBearerHeader(String bearerToken) => <String, String>{
+    'Authorization': 'Bearer $bearerToken',
+    'Content-Type': 'application/json',
+  };
 
   /// Returns the request headers.
   ///

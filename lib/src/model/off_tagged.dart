@@ -6,10 +6,7 @@ abstract class OffTagged {
   /// Returns the first [OffTagged] of [values] that matches the [offTag].
   ///
   /// Typical use: with `enum`s that implement OffTagged.
-  static OffTagged? fromOffTag(
-    String? offTag,
-    Iterable<OffTagged> values,
-  ) {
+  static OffTagged? fromOffTag(String? offTag, Iterable<OffTagged> values) {
     if (offTag == null) {
       return null;
     }

@@ -7,9 +7,7 @@ import '../utils/uri_helper.dart';
 /// Referential of attribute groups, with loader.
 class AvailableAttributeGroups {
   /// Load constructor; may throw an exception.
-  AvailableAttributeGroups.loadFromJSONString(
-    String attributeGroupsString,
-  ) {
+  AvailableAttributeGroups.loadFromJSONString(String attributeGroupsString) {
     final dynamic inputJson = HttpHelper().jsonDecode(attributeGroupsString);
 
     // Handle both new format (object with "attribute_groups" key) and

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import '../interface/json_object.dart';
 import 'agribalyse.dart';
 import 'ecoscore_adjustments.dart';

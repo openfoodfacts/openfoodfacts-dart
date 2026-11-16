@@ -42,10 +42,7 @@ void main() {
     List<Ingredient> ingredients,
     List<String> labels,
   ) {
-    bool foundIngredient(
-      String label,
-      List<Ingredient> ingredients,
-    ) {
+    bool foundIngredient(String label, List<Ingredient> ingredients) {
       for (final Ingredient ingredient in ingredients) {
         if (ingredient.text == label) {
           return true;
@@ -615,10 +612,8 @@ void main() {
 
         var values = nutritionSet!.nutritionValues!;
 
-        void expectValue(
-          Nutrient nutrient,
-          NutritionValue expectedValue,
-        ) => expectNutrientValue(values, nutrient, expectedValue);
+        void expectValue(Nutrient nutrient, NutritionValue expectedValue) =>
+            expectNutrientValue(values, nutrient, expectedValue);
 
         expectValue(
           Nutrient.energyKJ,
@@ -1102,36 +1097,30 @@ void main() {
         },
       );
 
-      test(
-        'vegan, vegetarian and palm oil ingredients of Danish Butter Cookies & Chocolate Chip Cookies',
-        () async {
-          final ProductResultV3? result = await getProductV3(
-            ProductQueryConfiguration(
-              '3017620429484',
-              language: OpenFoodFactsLanguage.FRENCH,
-              fields: [ProductField.ALL],
-              version: version,
-            ),
-          );
-          if (result == null) {
-            return;
-          }
+      test('vegan, vegetarian and palm oil ingredients of Danish Butter Cookies & Chocolate Chip Cookies', () async {
+        final ProductResultV3? result = await getProductV3(
+          ProductQueryConfiguration(
+            '3017620429484',
+            language: OpenFoodFactsLanguage.FRENCH,
+            fields: [ProductField.ALL],
+            version: version,
+          ),
+        );
+        if (result == null) {
+          return;
+        }
 
-          final Ingredient ingredient = result.product!.ingredients!.firstWhere(
-            (ingredient) => ingredient.text == 'huile de palme',
-          );
-          expect(ingredient.isInTaxonomy, true);
-          expect(ingredient.vegan, IngredientSpecialPropertyStatus.POSITIVE);
-          expect(
-            ingredient.vegetarian,
-            IngredientSpecialPropertyStatus.POSITIVE,
-          );
-          expect(
-            ingredient.fromPalmOil,
-            IngredientSpecialPropertyStatus.POSITIVE,
-          );
-        },
-      );
+        final Ingredient ingredient = result.product!.ingredients!.firstWhere(
+          (ingredient) => ingredient.text == 'huile de palme',
+        );
+        expect(ingredient.isInTaxonomy, true);
+        expect(ingredient.vegan, IngredientSpecialPropertyStatus.POSITIVE);
+        expect(ingredient.vegetarian, IngredientSpecialPropertyStatus.POSITIVE);
+        expect(
+          ingredient.fromPalmOil,
+          IngredientSpecialPropertyStatus.POSITIVE,
+        );
+      });
 
       test('get knowledge panels', () async {
         const Set<String> someExpectedKeys = <String>{
@@ -1811,8 +1800,7 @@ void main() {
             (AttributeGroup group) => group.id == 'ingredients',
           );
           final Attribute attribute = attributeGroup.attributes!.firstWhere(
-            (Attribute attribute) =>
-                attribute.id == 'unwanted_ingredients',
+            (Attribute attribute) => attribute.id == 'unwanted_ingredients',
           );
           expect(attribute.status, 'known');
           expect(attribute.match, entry.value ? 0 : 100);

@@ -656,76 +656,73 @@ void main() {
         );
       });
 
-      test(
-        'requesting all-langs and in-langs fields together does not break anything',
-        () async {
-          if (!await checkServer()) {
-            return;
-          }
+      test('requesting all-langs and in-langs fields together does not break anything', () async {
+        if (!await checkServer()) {
+          return;
+        }
 
-          const String barcode = '2222222222227';
+        const String barcode = '2222222222227';
 
-          final Product inputProduct = Product(
-            barcode: barcode,
-            productNameInLanguages: {
-              OpenFoodFactsLanguage.ENGLISH: englishProductName,
-              OpenFoodFactsLanguage.RUSSIAN: russianProductName,
-              OpenFoodFactsLanguage.GERMAN: germanProductName,
-              OpenFoodFactsLanguage.FRENCH: frenchProductName,
-            },
-            ingredientsTextInLanguages: {
-              OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
-              OpenFoodFactsLanguage.GERMAN: germanIngredientsAll,
-            },
-          );
+        final Product inputProduct = Product(
+          barcode: barcode,
+          productNameInLanguages: {
+            OpenFoodFactsLanguage.ENGLISH: englishProductName,
+            OpenFoodFactsLanguage.RUSSIAN: russianProductName,
+            OpenFoodFactsLanguage.GERMAN: germanProductName,
+            OpenFoodFactsLanguage.FRENCH: frenchProductName,
+          },
+          ingredientsTextInLanguages: {
+            OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
+            OpenFoodFactsLanguage.GERMAN: germanIngredientsAll,
+          },
+        );
 
-          final saved = await saveProduct(inputProduct);
-          if (saved == null) {
-            return;
-          }
+        final saved = await saveProduct(inputProduct);
+        if (saved == null) {
+          return;
+        }
 
-          // Request both 'all-langs' and 'in-langs' fields types
-          final fields = [
-            ProductField.NAME_ALL_LANGUAGES,
-            ProductField.NAME_IN_LANGUAGES,
-            ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
-            ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
-          ];
-          // For 'in-langs' fields specify not all of the available languages
-          ProductQueryConfiguration conf = ProductQueryConfiguration(
-            barcode,
-            languages: [
-              OpenFoodFactsLanguage.RUSSIAN,
-              OpenFoodFactsLanguage.ENGLISH,
-            ],
-            fields: fields,
-            version: version,
-          );
-          final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
-            conf,
-            uriHelper: uriHelper,
-          );
-          final Product product = result.product!;
+        // Request both 'all-langs' and 'in-langs' fields types
+        final fields = [
+          ProductField.NAME_ALL_LANGUAGES,
+          ProductField.NAME_IN_LANGUAGES,
+          ProductField.INGREDIENTS_TEXT_ALL_LANGUAGES,
+          ProductField.INGREDIENTS_TEXT_IN_LANGUAGES,
+        ];
+        // For 'in-langs' fields specify not all of the available languages
+        ProductQueryConfiguration conf = ProductQueryConfiguration(
+          barcode,
+          languages: [
+            OpenFoodFactsLanguage.RUSSIAN,
+            OpenFoodFactsLanguage.ENGLISH,
+          ],
+          fields: fields,
+          version: version,
+        );
+        final ProductResultV3 result = await OpenFoodAPIClient.getProductV3(
+          conf,
+          uriHelper: uriHelper,
+        );
+        final Product product = result.product!;
 
-          // Verify that all the available languages are obtained
-          expect(
-            product.productNameInLanguages,
-            equals({
-              OpenFoodFactsLanguage.ENGLISH: englishProductName,
-              OpenFoodFactsLanguage.RUSSIAN: russianProductName,
-              OpenFoodFactsLanguage.GERMAN: germanProductName,
-              OpenFoodFactsLanguage.FRENCH: frenchProductName,
-            }),
-          );
-          expect(
-            product.ingredientsTextInLanguages,
-            equals({
-              OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
-              OpenFoodFactsLanguage.GERMAN: germanIngredientsAll,
-            }),
-          );
-        },
-      );
+        // Verify that all the available languages are obtained
+        expect(
+          product.productNameInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: englishProductName,
+            OpenFoodFactsLanguage.RUSSIAN: russianProductName,
+            OpenFoodFactsLanguage.GERMAN: germanProductName,
+            OpenFoodFactsLanguage.FRENCH: frenchProductName,
+          }),
+        );
+        expect(
+          product.ingredientsTextInLanguages,
+          equals({
+            OpenFoodFactsLanguage.ENGLISH: englishIngredientsAll,
+            OpenFoodFactsLanguage.GERMAN: germanIngredientsAll,
+          }),
+        );
+      });
 
       test('product with quotes', () async {
         if (!await checkServer()) {

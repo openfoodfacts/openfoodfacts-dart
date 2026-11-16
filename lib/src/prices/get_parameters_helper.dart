@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+
 import 'order_by.dart';
 
 /// Helper class for API query parameters.
@@ -72,11 +73,7 @@ abstract class GetParametersHelper<T extends OrderByField> {
   void addNonNullBool(bool? value, String tag) =>
       addNonNullString(value?.toString(), tag);
 
-  void addNonNullDate(
-    DateTime? value,
-    String tag, {
-    required bool dayOnly,
-  }) {
+  void addNonNullDate(DateTime? value, String tag, {required bool dayOnly}) {
     if (value != null) {
       addNonNullString(formatDate(value, dayOnly: dayOnly), tag);
     }

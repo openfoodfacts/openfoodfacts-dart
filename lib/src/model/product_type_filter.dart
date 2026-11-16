@@ -5,8 +5,7 @@ import 'product_type.dart';
 class ProductTypeFilter implements OffTagged {
   const ProductTypeFilter._(this.offTag);
 
-  ProductTypeFilter(ProductType productType)
-    : offTag = productType.offTag;
+  ProductTypeFilter(ProductType productType) : offTag = productType.offTag;
 
   static const ProductTypeFilter all = ProductTypeFilter._('all');
 

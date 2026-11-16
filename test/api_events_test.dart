@@ -82,10 +82,7 @@ void main() {
     expect(withUserIds, isTrue);
   }
 
-  int? getLeaderboardScore(
-    String? userId,
-    List<LeaderboardEntry> list,
-  ) {
+  int? getLeaderboardScore(String? userId, List<LeaderboardEntry> list) {
     for (final LeaderboardEntry entry in list) {
       if (entry.userId == userId) {
         return entry.score;

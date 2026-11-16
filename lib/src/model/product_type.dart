@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'off_tagged.dart';
 import '../prices/flavor.dart';
 import '../utils/server_type.dart';

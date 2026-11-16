@@ -25,8 +25,7 @@ class Nutriments extends JsonMap {
       '${nutrient.offTag}_${perSize.offTag}';
 
   /// Returns the modifier map key for that [nutrient].
-  String _getModifierTag(Nutrient nutrient) =>
-      '${nutrient.offTag}_modifier';
+  String _getModifierTag(Nutrient nutrient) => '${nutrient.offTag}_modifier';
 
   /// Returns the value of that [nutrient] for that [perSize].
   ///

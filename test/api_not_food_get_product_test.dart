@@ -68,22 +68,18 @@ void main() {
     }
   }
 
-  group(
-    '$OpenFoodAPIClient get not food products v3',
-    () {
-      test('get OxF product without filter', () async => checkProduct(null));
+  group('$OpenFoodAPIClient get not food products v3', () {
+    test('get OxF product without filter', () async => checkProduct(null));
 
-      test(
-        'get OxF product with ALL filter',
-        () async => checkProduct(ProductTypeFilter.all),
-      );
+    test(
+      'get OxF product with ALL filter',
+      () async => checkProduct(ProductTypeFilter.all),
+    );
 
-      test('get OxF product with specific filter', () async {
-        for (final ProductType productType in ProductType.values) {
-          await checkProduct(ProductTypeFilter(productType));
-        }
-      });
-    },
-    skip: 'Cannot be tested on TEST env as domains do not exist',
-  );
+    test('get OxF product with specific filter', () async {
+      for (final ProductType productType in ProductType.values) {
+        await checkProduct(ProductTypeFilter(productType));
+      }
+    });
+  }, skip: 'Cannot be tested on TEST env as domains do not exist');
 }

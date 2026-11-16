@@ -54,10 +54,7 @@ class ProductQueryConfiguration extends AbstractQueryConfiguration {
       version.getApiPath('product/${Uri.encodeComponent(barcode)}');
 
   @override
-  Future<Response> getResponse(
-    User? user,
-    UriProductHelper uriHelper,
-  ) async {
+  Future<Response> getResponse(User? user, UriProductHelper uriHelper) async {
     return HttpHelper().doGetRequest(
       uriHelper.getUri(path: getUriPath(), queryParameters: getParametersMap()),
       user: user,

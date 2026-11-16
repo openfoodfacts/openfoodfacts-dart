@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
+
 import 'test_constants.dart';
 
 void main() {
@@ -17,9 +18,7 @@ void main() {
     initialImageUri.path,
   )!;
 
-  Future<String> getBearerToken({
-    required UriProductHelper uriHelper,
-  }) async {
+  Future<String> getBearerToken({required UriProductHelper uriHelper}) async {
     final MaybeError<String> token =
         await OpenPricesAPIClient.getAuthenticationToken(
           username: user.userId,

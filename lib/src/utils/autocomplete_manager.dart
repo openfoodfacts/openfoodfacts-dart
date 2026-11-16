@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:meta/meta.dart';
+
 import 'autocompleter.dart';
 
 /// Manager that returns the suggestions for the latest input.

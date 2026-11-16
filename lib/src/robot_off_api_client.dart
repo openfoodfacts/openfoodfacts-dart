@@ -270,9 +270,7 @@ class RobotoffAPIClient {
   }
 
   /// Returns a list of country as comma-separated 2-letter codes
-  static String _getCountryList(
-    Iterable<OpenFoodFactsCountry> countries,
-  ) {
+  static String _getCountryList(Iterable<OpenFoodFactsCountry> countries) {
     final List<String> result = <String>[];
     for (final OpenFoodFactsCountry country in countries) {
       result.add(country.offTag);

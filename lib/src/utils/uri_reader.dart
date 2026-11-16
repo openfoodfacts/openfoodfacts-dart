@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
+
 import 'uri_reader_stub.dart'
     if (dart.library.io) 'uri_reader_io.dart'
     if (dart.library.js) 'uri_reader_js.dart';

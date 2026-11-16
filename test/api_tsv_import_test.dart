@@ -42,48 +42,44 @@ void main() {
       );
     });
 
-    test(
-      'parses line with accented characters and special chars in product name',
-      () {
-        const expectedBarcode = '0000101209159';
-        const expectedName =
-            'Véritable pâte à tartiner noisettes chocolat noir';
-        final namesRaw =
-            "[{'lang': main, 'text': $expectedName}, {'lang': fr, 'text': $expectedName}]";
-        const expectedQuantity = '350 g';
-        const expectedBrands = 'Bovetti';
-        const expectedNutriscore = 'e';
-        const rawNovaGroup = '';
-        const rawEcoscoreGrade = '';
+    test('parses line with accented characters and special chars in product name', () {
+      const expectedBarcode = '0000101209159';
+      const expectedName = 'Véritable pâte à tartiner noisettes chocolat noir';
+      final namesRaw =
+          "[{'lang': main, 'text': $expectedName}, {'lang': fr, 'text': $expectedName}]";
+      const expectedQuantity = '350 g';
+      const expectedBrands = 'Bovetti';
+      const expectedNutriscore = 'e';
+      const rawNovaGroup = '';
+      const rawEcoscoreGrade = '';
 
-        final line = [
-          expectedBarcode,
-          namesRaw,
-          expectedQuantity,
-          expectedBrands,
-          expectedNutriscore,
-          rawNovaGroup,
-          rawEcoscoreGrade,
-        ].join('\t');
+      final line = [
+        expectedBarcode,
+        namesRaw,
+        expectedQuantity,
+        expectedBrands,
+        expectedNutriscore,
+        rawNovaGroup,
+        rawEcoscoreGrade,
+      ].join('\t');
 
-        final helper = TsvHelper();
-        final product = helper.extractTSVLine(line);
+      final helper = TsvHelper();
+      final product = helper.extractTSVLine(line);
 
-        expect(product.barcode, expectedBarcode);
-        expect(product.quantity, expectedQuantity);
-        expect(product.brands, expectedBrands);
-        expect(product.nutriscore, expectedNutriscore);
-        expect(product.novaGroup, isNull);
-        expect(product.ecoscoreGrade, isNull);
-        expect(product.productName, expectedName);
-        expect(product.productNameInLanguages, isNotNull);
-        expect(product.productNameInLanguages!.length, 1);
-        expect(
-          product.productNameInLanguages![OpenFoodFactsLanguage.FRENCH],
-          expectedName,
-        );
-      },
-    );
+      expect(product.barcode, expectedBarcode);
+      expect(product.quantity, expectedQuantity);
+      expect(product.brands, expectedBrands);
+      expect(product.nutriscore, expectedNutriscore);
+      expect(product.novaGroup, isNull);
+      expect(product.ecoscoreGrade, isNull);
+      expect(product.productName, expectedName);
+      expect(product.productNameInLanguages, isNotNull);
+      expect(product.productNameInLanguages!.length, 1);
+      expect(
+        product.productNameInLanguages![OpenFoodFactsLanguage.FRENCH],
+        expectedName,
+      );
+    });
 
     test('throws exception for line with insufficient columns', () {
       final line = "0000101209159\tNot enough\tcolumns";
@@ -287,34 +283,31 @@ void main() {
       );
     });
 
-    test(
-      'preserves not-applicable nutriscore and unknown ecoscore as strings',
-      () {
-        const expectedBarcode = '1234567890123';
-        const expectedName = 'Test Product';
-        const expectedQuantity = '100g';
-        const expectedBrands = 'Brand';
-        const rawNutriscore = 'not-applicable';
-        const rawNovaGroup = '3';
-        const rawEcoscoreGrade = 'unknown';
-        final namesRaw =
-            "[{'lang': main, 'text': $expectedName}, {'lang': en, 'text': $expectedName}]";
-        final line = [
-          expectedBarcode,
-          namesRaw,
-          expectedQuantity,
-          expectedBrands,
-          rawNutriscore,
-          rawNovaGroup,
-          rawEcoscoreGrade,
-        ].join('\t');
+    test('preserves not-applicable nutriscore and unknown ecoscore as strings', () {
+      const expectedBarcode = '1234567890123';
+      const expectedName = 'Test Product';
+      const expectedQuantity = '100g';
+      const expectedBrands = 'Brand';
+      const rawNutriscore = 'not-applicable';
+      const rawNovaGroup = '3';
+      const rawEcoscoreGrade = 'unknown';
+      final namesRaw =
+          "[{'lang': main, 'text': $expectedName}, {'lang': en, 'text': $expectedName}]";
+      final line = [
+        expectedBarcode,
+        namesRaw,
+        expectedQuantity,
+        expectedBrands,
+        rawNutriscore,
+        rawNovaGroup,
+        rawEcoscoreGrade,
+      ].join('\t');
 
-        final product = TsvHelper().extractTSVLine(line);
+      final product = TsvHelper().extractTSVLine(line);
 
-        expect(product.nutriscore, 'not-applicable');
-        expect(product.ecoscoreGrade, 'unknown');
-        expect(product.novaGroup, 3);
-      },
-    );
+      expect(product.nutriscore, 'not-applicable');
+      expect(product.ecoscoreGrade, 'unknown');
+      expect(product.novaGroup, 3);
+    });
   });
 }

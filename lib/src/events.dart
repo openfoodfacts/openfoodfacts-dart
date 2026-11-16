@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:http/http.dart';
+
 import 'model/badge_base.dart';
 import 'model/events_base.dart';
 import 'model/leaderboard_entry.dart';

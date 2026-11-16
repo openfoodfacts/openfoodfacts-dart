@@ -117,26 +117,22 @@ void main() {
       expect(status.status, Status.statusOK);
     });
 
-    test(
-      'add ingredients image test: resend same image',
-      () async {
-        SendImage image = SendImage(
-          lang: OpenFoodFactsLanguage.ENGLISH,
-          barcode: barcode,
-          imageField: ImageField.INGREDIENTS,
-          imageUri: Uri.file('test/test_assets/ingredients_en.jpg'),
-        );
-        Status status = await OpenFoodAPIClient.addProductImage(
-          user,
-          image,
-          uriHelper: uriHelper,
-        );
+    test('add ingredients image test: resend same image', () async {
+      SendImage image = SendImage(
+        lang: OpenFoodFactsLanguage.ENGLISH,
+        barcode: barcode,
+        imageField: ImageField.INGREDIENTS,
+        imageUri: Uri.file('test/test_assets/ingredients_en.jpg'),
+      );
+      Status status = await OpenFoodAPIClient.addProductImage(
+        user,
+        image,
+        uriHelper: uriHelper,
+      );
 
-        expect(status.status, 'status not ok');
-        expect(status.error, 'This picture has already been sent.');
-      },
-      skip: 'Currently not working',
-    );
+      expect(status.status, 'status not ok');
+      expect(status.error, 'This picture has already been sent.');
+    }, skip: 'Currently not working');
 
     test('read image', () async {
       //Get product without setting ProductField

@@ -49,10 +49,7 @@ class ExternalSourceFilter extends JsonMap {
   }
 
   /// Returns true if values and expected values share common... erm... values.
-  bool acceptsListString(
-    List<String>? values,
-    List<String> expectedValues,
-  ) {
+  bool acceptsListString(List<String>? values, List<String> expectedValues) {
     if (expectedValues.isEmpty) {
       return true;
     }
