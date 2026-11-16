@@ -46,6 +46,11 @@ void main() {
           reason: 'Problem with currency $currency',
         );
         expect(
+          currency.digitalCode,
+          isFalse,
+          reason: 'Problem with currency $currency',
+        );
+        expect(
           currency.historicalCode,
           isFalse,
           reason: 'Problem with currency $currency',
@@ -66,6 +71,7 @@ void main() {
       expect(
         currency.complementaryCurrency ||
             currency.unofficialCode ||
+            currency.digitalCode ||
             currency.historicalCode ||
             currency.fundsCode ||
             currency.noCountry,

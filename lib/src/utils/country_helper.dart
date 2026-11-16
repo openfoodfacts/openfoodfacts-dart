@@ -223,7 +223,7 @@ enum OpenFoodFactsCountry implements OffTagged {
   CABO_VERDE(offTag: 'cv', iso3Code: 'CPV', currency: Currency.CVE),
 
   /// Curaçao
-  CURACAO(offTag: 'cw', iso3Code: 'CUW', currency: Currency.ANG),
+  CURACAO(offTag: 'cw', iso3Code: 'CUW', currency: Currency.XCG),
 
   /// Christmas Island
   CHRISTMAS_ISLAND(offTag: 'cx', iso3Code: 'CXR', currency: Currency.AUD),
@@ -379,7 +379,7 @@ enum OpenFoodFactsCountry implements OffTagged {
   ),
 
   /// South Georgia and the South Sandwich Islands
-  SOUTH_GEORGIA(offTag: 'gs', iso3Code: 'SGS', currency: Currency.FKP),
+  SOUTH_GEORGIA(offTag: 'gs', iso3Code: 'SGS', currency: Currency.GBP),
 
   /// Guatemala
   GUATEMALA(offTag: 'gt', iso3Code: 'GTM', currency: Currency.GTQ),
@@ -844,10 +844,10 @@ enum OpenFoodFactsCountry implements OffTagged {
   SAO_TOME_AND_PRINCIPE(offTag: 'st', iso3Code: 'STP', currency: Currency.STN),
 
   /// El Salvador
-  EL_SALVADOR(offTag: 'sv', iso3Code: 'SLV', currency: Currency.SVC),
+  EL_SALVADOR(offTag: 'sv', iso3Code: 'SLV', currency: Currency.USD),
 
   /// Sint Maarten (Dutch part)
-  SINT_MAARTEN(offTag: 'sx', iso3Code: 'SXM', currency: Currency.ANG),
+  SINT_MAARTEN(offTag: 'sx', iso3Code: 'SXM', currency: Currency.XCG),
 
   /// Syrian Arab Republic
   SYRIA(offTag: 'sy', iso3Code: 'SYR', currency: Currency.SYP),
@@ -967,7 +967,7 @@ enum OpenFoodFactsCountry implements OffTagged {
   ),
 
   /// Venezuela (Bolivarian Republic of)
-  VENEZUELA(offTag: 've', iso3Code: 'VEN', currency: Currency.VED),
+  VENEZUELA(offTag: 've', iso3Code: 'VEN', currency: Currency.VES),
 
   /// Virgin Islands (British)
   BRITISH_VIRGIN_ISLANDS(offTag: 'vg', iso3Code: 'VGB', currency: Currency.USD),
@@ -1006,7 +1006,7 @@ enum OpenFoodFactsCountry implements OffTagged {
   ZAMBIA(offTag: 'zm', iso3Code: 'ZMB', currency: Currency.ZMW),
 
   /// Zimbabwe
-  ZIMBABWE(offTag: 'zw', iso3Code: 'ZWE', currency: Currency.ZWL);
+  ZIMBABWE(offTag: 'zw', iso3Code: 'ZWE', currency: Currency.ZWG);
 
   const OpenFoodFactsCountry({
     required this.offTag,
