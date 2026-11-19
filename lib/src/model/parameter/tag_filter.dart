@@ -71,9 +71,9 @@ class TagFilter extends Parameter {
   });
 
   TagFilter.fromType({
-    required final TagFilterType tagFilterType,
-    required final String tagName,
-    final bool contains = true,
+    required TagFilterType tagFilterType,
+    required String tagName,
+    bool contains = true,
   }) : this._(
          tagType: tagFilterType.offTag,
          contains: contains,

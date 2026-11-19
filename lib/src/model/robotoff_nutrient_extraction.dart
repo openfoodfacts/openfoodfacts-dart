@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import '../utils/unit_helper.dart';
 import 'per_size.dart';
 import 'robotoff_nutrient_extraction_annotation.dart';

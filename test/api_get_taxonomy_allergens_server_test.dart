@@ -17,7 +17,7 @@ void main() {
   const String knownTag = 'en:gluten';
   const String unknownTag = 'en:some_nonexistent_label';
 
-  void checkKnown(final TaxonomyAllergen allergen) {
+  void checkKnown(TaxonomyAllergen allergen) {
     expect(allergen.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
     expect(allergen.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
     expect(allergen.wikidata![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);

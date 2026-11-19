@@ -9,13 +9,13 @@ void main() {
   const UriProductHelper uriHelper = uriHelperFoodTest;
 
   Future<ProductResultV3?> temporarySaveProductV3(
-    final String barcode, {
-    final List<ProductPackaging>? packagings,
-    final bool? packagingsComplete,
-    final List<NutritionSet>? nutritionInputSets,
-    final String? servingSize,
-    final OpenFoodFactsCountry? country,
-    final OpenFoodFactsLanguage? language,
+    String barcode, {
+    List<ProductPackaging>? packagings,
+    bool? packagingsComplete,
+    List<NutritionSet>? nutritionInputSets,
+    String? servingSize,
+    OpenFoodFactsCountry? country,
+    OpenFoodFactsLanguage? language,
   }) async {
     try {
       final result = await OpenFoodAPIClient.temporarySaveProductV3(
@@ -47,69 +47,65 @@ void main() {
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
     const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
 
-    test(
-      'save packagings with unknown recycling',
-      () async {
-        // Here we put an unknown recycling label, and we expect related warnings.
-        const String unknownRecycling = 'recyKKlage';
-        const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
-        const int numberOfUnits = 12;
-        const String quantityPerUnit = '50cl';
-        const double weightMeasured = 250;
-        final List<ProductPackaging> inputPackagings = [
-          ProductPackaging()
-            ..shape = (LocalizedTag()..lcName = 'bouteille')
-            ..material = (LocalizedTag()..lcName = 'verre')
-            ..recycling = (LocalizedTag()..lcName = unknownRecycling)
-            ..numberOfUnits = numberOfUnits
-            ..quantityPerUnit = quantityPerUnit
-            ..weightMeasured = weightMeasured,
-        ];
-        final ProductResultV3? status = await temporarySaveProductV3(
-          barcode,
-          country: country,
-          language: language,
-          packagings: inputPackagings,
-        );
-        if (status == null) {
-          return;
-        }
+    test('save packagings with unknown recycling', () async {
+      // Here we put an unknown recycling label, and we expect related warnings.
+      const String unknownRecycling = 'recyKKlage';
+      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+      const int numberOfUnits = 12;
+      const String quantityPerUnit = '50cl';
+      const double weightMeasured = 250;
+      final List<ProductPackaging> inputPackagings = [
+        ProductPackaging()
+          ..shape = (LocalizedTag()..lcName = 'bouteille')
+          ..material = (LocalizedTag()..lcName = 'verre')
+          ..recycling = (LocalizedTag()..lcName = unknownRecycling)
+          ..numberOfUnits = numberOfUnits
+          ..quantityPerUnit = quantityPerUnit
+          ..weightMeasured = weightMeasured,
+      ];
+      final ProductResultV3? status = await temporarySaveProductV3(
+        barcode,
+        country: country,
+        language: language,
+        packagings: inputPackagings,
+      );
+      if (status == null) {
+        return;
+      }
 
-        expect(status.status, ProductResultV3.statusWarning);
-        expect(status.errors, isEmpty);
-        expect(status.result, isNull); // result is null for UPDATE queries
-        expect(status.barcode, barcode);
-        expect(status.product, isNotNull);
+      expect(status.status, ProductResultV3.statusWarning);
+      expect(status.errors, isEmpty);
+      expect(status.result, isNull); // result is null for UPDATE queries
+      expect(status.barcode, barcode);
+      expect(status.product, isNotNull);
 
-        expect(status.product!.packagings, isNotNull);
-        final List<ProductPackaging> packagings = status.product!.packagings!;
-        expect(packagings, hasLength(1));
-        final ProductPackaging packaging = packagings.first;
-        expect(packaging.shape, isNotNull);
-        expect(packaging.material, isNotNull);
-        expect(packaging.recycling, isNotNull);
-        expect(packaging.numberOfUnits, numberOfUnits);
-        expect(packaging.quantityPerUnit, quantityPerUnit);
-        expect(packaging.weightMeasured, weightMeasured);
+      expect(status.product!.packagings, isNotNull);
+      final List<ProductPackaging> packagings = status.product!.packagings!;
+      expect(packagings, hasLength(1));
+      final ProductPackaging packaging = packagings.first;
+      expect(packaging.shape, isNotNull);
+      expect(packaging.material, isNotNull);
+      expect(packaging.recycling, isNotNull);
+      expect(packaging.numberOfUnits, numberOfUnits);
+      expect(packaging.quantityPerUnit, quantityPerUnit);
+      expect(packaging.weightMeasured, weightMeasured);
 
-        expect(status.warnings, isNotEmpty);
-        expect(status.warnings, hasLength(1));
+      expect(status.warnings, isNotEmpty);
+      expect(status.warnings, hasLength(1));
 
-        final ProductResultFieldAnswer answer = status.warnings!.first;
-        expect(answer.impact, isNotNull);
-        expect(answer.impact!.id, 'none');
-        expect(answer.impact!.name, isNotNull);
-        expect(answer.impact!.lcName, isNotNull);
-        expect(answer.message, isNotNull);
-        expect(answer.message!.id, 'unrecognized_value');
-        expect(answer.message!.name, isNotNull);
-        expect(answer.message!.lcName, isNotNull);
-        expect(answer.field, isNotNull);
-        expect(answer.field!.id, 'recycling');
-        expect(answer.field!.value, '${language.offTag}:$unknownRecycling');
-      },
-      timeout: Timeout(Duration(seconds: 180)),
-    );
+      final ProductResultFieldAnswer answer = status.warnings!.first;
+      expect(answer.impact, isNotNull);
+      expect(answer.impact!.id, 'none');
+      expect(answer.impact!.name, isNotNull);
+      expect(answer.impact!.lcName, isNotNull);
+      expect(answer.message, isNotNull);
+      expect(answer.message!.id, 'unrecognized_value');
+      expect(answer.message!.name, isNotNull);
+      expect(answer.message!.lcName, isNotNull);
+      expect(answer.field, isNotNull);
+      expect(answer.field!.id, 'recycling');
+      expect(answer.field!.value, '${language.offTag}:$unknownRecycling');
+    }, timeout: Timeout(Duration(seconds: 180)));
 
     test('save packagings_complete', () async {
       final List<bool> values = [false, true, false];

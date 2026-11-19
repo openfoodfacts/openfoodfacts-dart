@@ -7,11 +7,9 @@
 class ProductPreferencesSelection {
   ProductPreferencesSelection({
     required this.getImportance,
-    final Future<void> Function(String attributeId, String importanceId)?
-    setImportance,
-    final Function()? notify,
-  }) : _setImportance = setImportance,
-       _notify = notify;
+    this._setImportance,
+    Function()? this._notify,
+  });
 
   /// Sets the importance of an attribute, e.g. in a SharedPreferences.
   ///

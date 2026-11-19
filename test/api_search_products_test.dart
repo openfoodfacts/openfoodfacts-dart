@@ -23,7 +23,7 @@ void main() {
   const String storeCarrefour = 'carrefour';
 
   Future<SearchResult> searchProductsInTest(
-    final AbstractQueryConfiguration configuration,
+    AbstractQueryConfiguration configuration,
   ) async => OpenFoodAPIClient.searchProducts(
     user,
     configuration,
@@ -32,7 +32,7 @@ void main() {
 
   // actually, in TEST
   Future<SearchResult> searchProductsInProd(
-    final AbstractQueryConfiguration configuration,
+    AbstractQueryConfiguration configuration,
   ) async => searchProductsInTest(configuration);
 
   // additional parameter for faster response time
@@ -203,9 +203,9 @@ void main() {
 
       /// Returns the total number of products, and checks if the statuses match.
       Future<int?> checkIngredientsAnalysis(
-        final VeganStatus? veganStatus,
-        final VegetarianStatus? vegetarianStatus,
-        final PalmOilFreeStatus? palmOilFreeStatus,
+        VeganStatus? veganStatus,
+        VegetarianStatus? vegetarianStatus,
+        PalmOilFreeStatus? palmOilFreeStatus,
       ) async {
         if (veganStatus == null &&
             vegetarianStatus == null &&
@@ -909,7 +909,7 @@ void main() {
   );
 
   /// Returns random and different int's.
-  List<int> getRandomInts({required int count, required final int max}) {
+  List<int> getRandomInts({required int count, required int max}) {
     final Random random = Random();
     final List<int> result = <int>[];
     if (count > max) {
@@ -929,9 +929,7 @@ void main() {
     '$OpenFoodAPIClient search products with/without allergens',
     () {
       /// Returns the total number of products, and checks the allergens.
-      Future<int> checkAllergens(
-        final AllergensParameter allergensParameter,
-      ) async {
+      Future<int> checkAllergens(AllergensParameter allergensParameter) async {
         final List<Parameter> parameters = <Parameter>[
           const PageNumber(page: 1),
           const PageSize(size: 100),
@@ -1038,7 +1036,7 @@ void main() {
     () {
       /// Returns the total number of products, and checks the states.
       Future<int> checkStatesTags(
-        final StatesTagsParameter statesTagsParameter,
+        StatesTagsParameter statesTagsParameter,
       ) async {
         final List<Parameter> parameters = <Parameter>[
           const PageNumber(page: 1),
@@ -1094,10 +1092,10 @@ void main() {
 
       test('check products with 2 random states tags', () async {
         Future<void> checkExpectations(
-          final ProductState state1,
-          final bool completed1,
-          final ProductState state2,
-          final bool completed2,
+          ProductState state1,
+          bool completed1,
+          ProductState state2,
+          bool completed2,
         ) async {
           final int count1 = await checkStatesTags(
             StatesTagsParameter(map: {state1: completed1}),
@@ -1145,9 +1143,9 @@ void main() {
     '$OpenFoodAPIClient get all to-be-completed products',
     () {
       Future<int?> getCount(
-        final OpenFoodFactsCountry country,
-        final OpenFoodFactsLanguage language,
-        final String store,
+        OpenFoodFactsCountry country,
+        OpenFoodFactsLanguage language,
+        String store,
       ) async {
         final String reason = '($country, $language)';
         final ProductSearchQueryConfiguration configuration =
@@ -1181,8 +1179,8 @@ void main() {
       }
 
       Future<int> getCountForAllLanguages(
-        final OpenFoodFactsCountry country,
-        final String store,
+        OpenFoodFactsCountry country,
+        String store,
       ) async {
         final List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
           OpenFoodFactsLanguage.ENGLISH,
@@ -1201,8 +1199,8 @@ void main() {
       }
 
       Future<void> checkTypeCount(
-        final OpenFoodFactsCountry country,
-        final int minimalExpectedCount,
+        OpenFoodFactsCountry country,
+        int minimalExpectedCount,
       ) async {
         final int count = await getCountForAllLanguages(
           country,
@@ -1244,226 +1242,218 @@ void main() {
     ),
   );
 
-  group(
-    '$OpenFoodAPIClient get user products',
-    () {
-      const String userId = 'monsieurtanuki';
-      // should be big enough to get everything on page1
-      const int pageSize = 100;
-      final String toBeCompletedTag = ProductState.COMPLETED.toBeCompletedTag;
+  group('$OpenFoodAPIClient get user products', () {
+    const String userId = 'monsieurtanuki';
+    // should be big enough to get everything on page1
+    const int pageSize = 100;
+    final String toBeCompletedTag = ProductState.COMPLETED.toBeCompletedTag;
 
-      Future<int> getCount(
-        final TagFilterType type,
-        final OpenFoodFactsLanguage language,
-        final bool toBeCompleted, {
-        final void Function(Product)? additionalCheck,
-      }) async {
-        final String reason = '($language, $type)';
-        final ProductSearchQueryConfiguration configuration =
-            ProductSearchQueryConfiguration(
-              parametersList: [
-                TagFilter.fromType(tagFilterType: type, tagName: userId),
-                PageSize(size: pageSize),
-                if (toBeCompleted)
-                  TagFilter.fromType(
-                    tagFilterType: TagFilterType.STATES,
-                    tagName: toBeCompletedTag,
-                  ),
-              ],
-              language: language,
-              fields: [ProductField.BARCODE, ProductField.STATES_TAGS],
-              version: version,
-            );
-
-        final SearchResult result;
-        try {
-          result = await searchProductsInProd(configuration);
-        } catch (e) {
-          fail('Could not retrieve data for $reason: $e');
-        }
-        expect(result.page, 1, reason: reason); // default
-        expect(result.pageSize, pageSize, reason: reason);
-        expect(result.products, isNotNull, reason: reason);
-        expect(result.products!.length, result.pageCount, reason: reason);
-        if (additionalCheck != null) {
-          for (final Product product in result.products!) {
-            additionalCheck(product);
-          }
-        }
-        return result.pageCount!;
-      }
-
-      Future<int> getCountForAllLanguages(
-        final TagFilterType type,
-        final bool toBeCompleted, {
-        final void Function(Product)? additionalCheck,
-      }) async {
-        final List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
-          OpenFoodFactsLanguage.ENGLISH,
-          OpenFoodFactsLanguage.FRENCH,
-          OpenFoodFactsLanguage.ITALIAN,
-        ];
-        int? result;
-        for (final OpenFoodFactsLanguage language in languages) {
-          final int count = await getCount(
-            type,
-            language,
-            toBeCompleted,
-            additionalCheck: additionalCheck,
+    Future<int> getCount(
+      TagFilterType type,
+      OpenFoodFactsLanguage language,
+      bool toBeCompleted, {
+      void Function(Product)? additionalCheck,
+    }) async {
+      final String reason = '($language, $type)';
+      final ProductSearchQueryConfiguration configuration =
+          ProductSearchQueryConfiguration(
+            parametersList: [
+              TagFilter.fromType(tagFilterType: type, tagName: userId),
+              PageSize(size: pageSize),
+              if (toBeCompleted)
+                TagFilter.fromType(
+                  tagFilterType: TagFilterType.STATES,
+                  tagName: toBeCompletedTag,
+                ),
+            ],
+            language: language,
+            fields: [ProductField.BARCODE, ProductField.STATES_TAGS],
+            version: version,
           );
-          if (result != null) {
-            expect(count, result, reason: language.toString());
-          }
-          result = count;
-        }
-        return result!;
-      }
 
-      Future<void> checkTypeCount(
-        final TagFilterType type,
-        final int minimalExpectedCount, {
-        final void Function(Product)? additionalCheck,
-        final bool toBeCompleted = false,
-      }) async {
-        final int count = await getCountForAllLanguages(
+      final SearchResult result;
+      try {
+        result = await searchProductsInProd(configuration);
+      } catch (e) {
+        fail('Could not retrieve data for $reason: $e');
+      }
+      expect(result.page, 1, reason: reason); // default
+      expect(result.pageSize, pageSize, reason: reason);
+      expect(result.products, isNotNull, reason: reason);
+      expect(result.products!.length, result.pageCount, reason: reason);
+      if (additionalCheck != null) {
+        for (final Product product in result.products!) {
+          additionalCheck(product);
+        }
+      }
+      return result.pageCount!;
+    }
+
+    Future<int> getCountForAllLanguages(
+      TagFilterType type,
+      bool toBeCompleted, {
+      void Function(Product)? additionalCheck,
+    }) async {
+      final List<OpenFoodFactsLanguage> languages = <OpenFoodFactsLanguage>[
+        OpenFoodFactsLanguage.ENGLISH,
+        OpenFoodFactsLanguage.FRENCH,
+        OpenFoodFactsLanguage.ITALIAN,
+      ];
+      int? result;
+      for (final OpenFoodFactsLanguage language in languages) {
+        final int count = await getCount(
           type,
+          language,
           toBeCompleted,
           additionalCheck: additionalCheck,
         );
-        expect(count, greaterThanOrEqualTo(minimalExpectedCount));
+        if (result != null) {
+          expect(count, result, reason: language.toString());
+        }
+        result = count;
+      }
+      return result!;
+    }
+
+    Future<void> checkTypeCount(
+      TagFilterType type,
+      int minimalExpectedCount, {
+      void Function(Product)? additionalCheck,
+      bool toBeCompleted = false,
+    }) async {
+      final int count = await getCountForAllLanguages(
+        type,
+        toBeCompleted,
+        additionalCheck: additionalCheck,
+      );
+      expect(count, greaterThanOrEqualTo(minimalExpectedCount));
+    }
+
+    test(
+      'contributor',
+      () async => checkTypeCount(TagFilterType.CREATOR, 2), // as of 20221229
+    );
+
+    test(
+      'informer',
+      () async =>
+          await checkTypeCount(TagFilterType.INFORMERS, 73), // as of 20221229
+    );
+
+    test(
+      'photographer',
+      () async =>
+          checkTypeCount(TagFilterType.PHOTOGRAPHERS, 48), // as of 20221229
+    );
+
+    test(
+      'to be completed',
+      () async => checkTypeCount(
+        TagFilterType.INFORMERS,
+        0, // you never know...
+        toBeCompleted: true,
+        additionalCheck: (Product product) {
+          expect(product.statesTags, isNotNull);
+          expect(product.statesTags, contains(toBeCompletedTag));
+        },
+      ),
+    );
+  }, timeout: Timeout(Duration(seconds: 300)));
+
+  group('$OpenFoodAPIClient get new packagings field', () {
+    const String barcode = '3661344723290';
+    const String searchTerms = 'skyr les 2 vaches';
+    const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
+    const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
+
+    void checkProduct(Product product) {
+      void checkLocalizedTag(LocalizedTag? tag) {
+        expect(tag, isNotNull);
+        expect(tag!.id, isNotNull);
+        expect(tag.lcName, isNotNull);
       }
 
-      test(
-        'contributor',
-        () async => checkTypeCount(TagFilterType.CREATOR, 2), // as of 20221229
-      );
+      expect(product.packagings, isNotNull);
+      expect(product.packagings!.length, greaterThanOrEqualTo(3));
+      for (final ProductPackaging packaging in product.packagings!) {
+        checkLocalizedTag(packaging.shape);
+        checkLocalizedTag(packaging.material);
+        checkLocalizedTag(packaging.recycling);
+        expect(packaging.recycling!.id, 'en:recycle');
+      }
+    }
 
-      test(
-        'informer',
-        () async =>
-            await checkTypeCount(TagFilterType.INFORMERS, 73), // as of 20221229
-      );
-
-      test(
-        'photographer',
-        () async =>
-            checkTypeCount(TagFilterType.PHOTOGRAPHERS, 48), // as of 20221229
-      );
-
-      test(
-        'to be completed',
-        () async => checkTypeCount(
-          TagFilterType.INFORMERS,
-          0, // you never know...
-          toBeCompleted: true,
-          additionalCheck: (final Product product) {
-            expect(product.statesTags, isNotNull);
-            expect(product.statesTags, contains(toBeCompletedTag));
-          },
+    test('as a single field on a search query', () async {
+      final SearchResult searchResult = await searchProductsInProd(
+        ProductSearchQueryConfiguration(
+          parametersList: [
+            SearchTerms(terms: [searchTerms]),
+          ],
+          fields: [ProductField.PACKAGINGS, ProductField.BARCODE],
+          language: language,
+          country: country,
+          version: version,
         ),
       );
-    },
-    timeout: Timeout(Duration(seconds: 300)),
-  );
-
-  group(
-    '$OpenFoodAPIClient get new packagings field',
-    () {
-      const String barcode = '3661344723290';
-      const String searchTerms = 'skyr les 2 vaches';
-      const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
-      const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
-
-      void checkProduct(final Product product) {
-        void checkLocalizedTag(final LocalizedTag? tag) {
-          expect(tag, isNotNull);
-          expect(tag!.id, isNotNull);
-          expect(tag.lcName, isNotNull);
+      expect(searchResult.products, isNotNull);
+      expect(searchResult.products, isNotEmpty);
+      bool found = false;
+      for (final Product product in searchResult.products!) {
+        if (product.barcode != barcode) {
+          continue;
         }
-
-        expect(product.packagings, isNotNull);
-        expect(product.packagings!.length, greaterThanOrEqualTo(3));
-        for (final ProductPackaging packaging in product.packagings!) {
-          checkLocalizedTag(packaging.shape);
-          checkLocalizedTag(packaging.material);
-          checkLocalizedTag(packaging.recycling);
-          expect(packaging.recycling!.id, 'en:recycle');
-        }
+        found = true;
+        checkProduct(product);
       }
+      expect(found, isTrue);
+    });
 
-      test('as a single field on a search query', () async {
-        final SearchResult searchResult = await searchProductsInProd(
+    test('as a part of ALL fields on a search query', () async {
+      final SearchResult searchResult = await searchProductsInProd(
+        ProductSearchQueryConfiguration(
+          parametersList: [
+            SearchTerms(terms: [searchTerms]),
+          ],
+          fields: [ProductField.ALL],
+          language: language,
+          country: country,
+          version: version,
+        ),
+      );
+      expect(searchResult.products, isNotNull);
+      expect(searchResult.products, isNotEmpty);
+      bool found = false;
+      for (final Product product in searchResult.products!) {
+        if (product.barcode != barcode) {
+          continue;
+        }
+        found = true;
+        checkProduct(product);
+      }
+      expect(found, isTrue);
+    });
+
+    test('as a part of RAW fields on a search query', () async {
+      try {
+        await searchProductsInProd(
           ProductSearchQueryConfiguration(
             parametersList: [
               SearchTerms(terms: [searchTerms]),
             ],
-            fields: [ProductField.PACKAGINGS, ProductField.BARCODE],
+            fields: [ProductField.RAW],
             language: language,
             country: country,
             version: version,
           ),
         );
-        expect(searchResult.products, isNotNull);
-        expect(searchResult.products, isNotEmpty);
-        bool found = false;
-        for (final Product product in searchResult.products!) {
-          if (product.barcode != barcode) {
-            continue;
-          }
-          found = true;
-          checkProduct(product);
-        }
-        expect(found, isTrue);
-      });
-
-      test('as a part of ALL fields on a search query', () async {
-        final SearchResult searchResult = await searchProductsInProd(
-          ProductSearchQueryConfiguration(
-            parametersList: [
-              SearchTerms(terms: [searchTerms]),
-            ],
-            fields: [ProductField.ALL],
-            language: language,
-            country: country,
-            version: version,
-          ),
-        );
-        expect(searchResult.products, isNotNull);
-        expect(searchResult.products, isNotEmpty);
-        bool found = false;
-        for (final Product product in searchResult.products!) {
-          if (product.barcode != barcode) {
-            continue;
-          }
-          found = true;
-          checkProduct(product);
-        }
-        expect(found, isTrue);
-      });
-
-      test('as a part of RAW fields on a search query', () async {
-        try {
-          await searchProductsInProd(
-            ProductSearchQueryConfiguration(
-              parametersList: [
-                SearchTerms(terms: [searchTerms]),
-              ],
-              fields: [ProductField.RAW],
-              language: language,
-              country: country,
-              version: version,
-            ),
-          );
-        } catch (e) {
-          // In RAW mode the packagings are mere String's instead of LocalizedTag's.
-          // Therefore we expect an Exception.
-          return;
-        }
-        fail('On Raw');
-      });
-    },
-    timeout: Timeout(Duration(minutes: 2)),
-  );
+      } catch (e) {
+        // In RAW mode the packagings are mere String's instead of LocalizedTag's.
+        // Therefore we expect an Exception.
+        return;
+      }
+      fail('On Raw');
+    });
+  }, timeout: Timeout(Duration(minutes: 2)));
 
   group('$OpenFoodAPIClient matched product v2', () {
     const int HTTP_OK = 200;
@@ -1547,7 +1537,7 @@ void main() {
       final List<Product> products = result.products!;
       // sorting them again by the input order
       products.sort(
-        (final Product a, final Product b) => inputBarcodes
+        (Product a, Product b) => inputBarcodes
             .indexOf(a.barcode!)
             .compareTo(inputBarcodes.indexOf(b.barcode!)),
       );
@@ -1713,10 +1703,10 @@ void main() {
 
         final List<AttributeGroup> attributeGroups = product.attributeGroups!;
         final AttributeGroup attributeGroup = attributeGroups.firstWhere(
-          (final AttributeGroup group) => group.id == 'ingredients',
+          (AttributeGroup group) => group.id == 'ingredients',
         );
         final Attribute attribute = attributeGroup.attributes!.firstWhere(
-          (final Attribute attribute) => attribute.id == 'unwanted_ingredients',
+          (Attribute attribute) => attribute.id == 'unwanted_ingredients',
         );
         if (attribute.status == 'unknown') {
           expect(attribute.match, null);

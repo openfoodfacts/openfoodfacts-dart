@@ -9,7 +9,7 @@ void main() {
   const uriHelper = uriHelperFoodTest;
 
   /// Checks if at least one item contains the [substring].
-  void listContains(final List<String> list, final String substring) {
+  void listContains(List<String> list, String substring) {
     expect(list, isNotEmpty);
     for (final String item in list) {
       if (item.toString().toLowerCase().contains(substring)) {
@@ -330,74 +330,70 @@ void main() {
       );
       listContains(result, 'conteneur');
     });
-    test(
-      'Suggestions for emb_code',
-      () async {
-        List<String> result = await OpenFoodAPIClient.getSuggestions(
+    test('Suggestions for emb_code', () async {
+      List<String> result = await OpenFoodAPIClient.getSuggestions(
+        TagType.EMB_CODES,
+        language: OpenFoodFactsLanguage.FRENCH,
+        input: 'fR',
+        uriHelper: uriHelper,
+      );
+
+      listContains(result, 'fr');
+
+      result = await OpenFoodAPIClient.getSuggestions(
+        TagType.EMB_CODES,
+        language: OpenFoodFactsLanguage.FRENCH,
+        input: 'R',
+        uriHelper: uriHelper,
+      );
+
+      listContains(result, 'r');
+
+      expect(
+        await OpenFoodAPIClient.getSuggestions(
+          TagType.EMB_CODES,
+          language: OpenFoodFactsLanguage.ITALIAN,
+          input: 'U',
+          uriHelper: uriHelper,
+        ),
+        await OpenFoodAPIClient.getSuggestions(
           TagType.EMB_CODES,
           language: OpenFoodFactsLanguage.FRENCH,
-          input: 'fR',
+          input: 'U',
           uriHelper: uriHelper,
-        );
+        ),
+      );
 
-        listContains(result, 'fr');
-
-        result = await OpenFoodAPIClient.getSuggestions(
+      expect(
+        await OpenFoodAPIClient.getSuggestions(
           TagType.EMB_CODES,
-          language: OpenFoodFactsLanguage.FRENCH,
-          input: 'R',
+          language: OpenFoodFactsLanguage.GERMAN,
+          input: 'C',
           uriHelper: uriHelper,
-        );
+        ),
+        await OpenFoodAPIClient.getSuggestions(
+          TagType.EMB_CODES,
+          language: OpenFoodFactsLanguage.ENGLISH,
+          input: 'C',
+          uriHelper: uriHelper,
+        ),
+      );
 
-        listContains(result, 'r');
-
-        expect(
-          await OpenFoodAPIClient.getSuggestions(
-            TagType.EMB_CODES,
-            language: OpenFoodFactsLanguage.ITALIAN,
-            input: 'U',
-            uriHelper: uriHelper,
-          ),
-          await OpenFoodAPIClient.getSuggestions(
-            TagType.EMB_CODES,
-            language: OpenFoodFactsLanguage.FRENCH,
-            input: 'U',
-            uriHelper: uriHelper,
-          ),
-        );
-
-        expect(
-          await OpenFoodAPIClient.getSuggestions(
-            TagType.EMB_CODES,
-            language: OpenFoodFactsLanguage.GERMAN,
-            input: 'C',
-            uriHelper: uriHelper,
-          ),
-          await OpenFoodAPIClient.getSuggestions(
-            TagType.EMB_CODES,
-            language: OpenFoodFactsLanguage.ENGLISH,
-            input: 'C',
-            uriHelper: uriHelper,
-          ),
-        );
-
-        expect(
-          await OpenFoodAPIClient.getSuggestions(
-            TagType.EMB_CODES,
-            language: OpenFoodFactsLanguage.JAPANESE,
-            input: 'd',
-            uriHelper: uriHelper,
-          ),
-          await OpenFoodAPIClient.getSuggestions(
-            TagType.EMB_CODES,
-            language: OpenFoodFactsLanguage.UKRAINIAN,
-            input: 'D',
-            uriHelper: uriHelper,
-          ),
-        );
-      },
-      skip: 'Skipping while the issue is not fixed on the server side',
-    );
+      expect(
+        await OpenFoodAPIClient.getSuggestions(
+          TagType.EMB_CODES,
+          language: OpenFoodFactsLanguage.JAPANESE,
+          input: 'd',
+          uriHelper: uriHelper,
+        ),
+        await OpenFoodAPIClient.getSuggestions(
+          TagType.EMB_CODES,
+          language: OpenFoodFactsLanguage.UKRAINIAN,
+          input: 'D',
+          uriHelper: uriHelper,
+        ),
+      );
+    }, skip: 'Skipping while the issue is not fixed on the server side');
     test('Suggestions empty fields', () async {
       List<String> result = await OpenFoodAPIClient.getSuggestions(
         TagType.ALLERGENS,

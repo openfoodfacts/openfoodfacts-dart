@@ -165,10 +165,7 @@ abstract class AbstractQueryConfiguration {
 
   /// Performs the query, do not use directly please use
   /// dedicates methods in [OpenFoodAPIClient]
-  Future<Response> getResponse(
-    final User? user,
-    final UriProductHelper uriHelper,
-  ) async {
+  Future<Response> getResponse(User? user, UriProductHelper uriHelper) async {
     return HttpHelper().doPostRequest(
       uriHelper.getPostUri(path: getUriPath()),
       getParametersMap(),

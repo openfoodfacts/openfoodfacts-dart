@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import '../interface/json_object.dart';
 import 'localized_tag.dart';
 import 'product_result_field.dart';

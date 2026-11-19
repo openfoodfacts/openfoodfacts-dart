@@ -8,7 +8,7 @@ import '../utils/uri_helper.dart';
 class AvailablePreferenceImportances {
   /// Load constructor; may throw an exception.
   AvailablePreferenceImportances.loadFromJSONString(
-    final String preferenceImportancesString,
+    String preferenceImportancesString,
   ) {
     final List<String> importanceIds = <String>[];
     final Map<String, PreferenceImportance> preferenceImportances =
@@ -72,9 +72,9 @@ class AvailablePreferenceImportances {
   /// Where a localized JSON file can be found.
   /// [languageCode] is a 2-letter language code.
   static Uri getUri(
-    final String languageCode, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ProductQueryVersion version = ProductQueryVersion.latestVersion,
+    String languageCode, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ProductQueryVersion version = ProductQueryVersion.latestVersion,
   }) => uriHelper.getUri(
     path: version.getApiPath('preferences'),
     queryParameters: {'lc': languageCode},
@@ -83,12 +83,12 @@ class AvailablePreferenceImportances {
   /// Returns the index of an importance.
   ///
   /// From 0: not important.
-  int getImportanceIndex(final String importanceId) =>
+  int getImportanceIndex(String importanceId) =>
       _importancesReverseIds?[importanceId] ??
       PreferenceImportance.INDEX_NOT_IMPORTANT;
 
   /// Returns the importance from its id.
-  PreferenceImportance? getPreferenceImportance(final String importanceId) =>
+  PreferenceImportance? getPreferenceImportance(String importanceId) =>
       _preferenceImportances?[importanceId] ??
       _preferenceImportances?[PreferenceImportance.ID_NOT_IMPORTANT];
 }

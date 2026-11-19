@@ -24,9 +24,9 @@ class ExternalSourceFilter extends JsonMap {
 
   /// Returns the causes of filter rejections, or an empty list if OK.
   List<String> getRejectionCauses(
-    final Product product,
-    final OpenFoodFactsLanguage language,
-    final OpenFoodFactsCountry country,
+    Product product,
+    OpenFoodFactsLanguage language,
+    OpenFoodFactsCountry country,
   ) => <String>[
     if (!acceptsString(product.productType?.offTag, productTypes))
       'productType(${product.productType?.offTag})',
@@ -38,7 +38,7 @@ class ExternalSourceFilter extends JsonMap {
   ];
 
   /// Returns true if a value id part of expected values.
-  bool acceptsString(final String? value, final List<String> expectedValues) {
+  bool acceptsString(String? value, List<String> expectedValues) {
     if (expectedValues.isEmpty) {
       return true;
     }
@@ -49,10 +49,7 @@ class ExternalSourceFilter extends JsonMap {
   }
 
   /// Returns true if values and expected values share common... erm... values.
-  bool acceptsListString(
-    final List<String>? values,
-    final List<String> expectedValues,
-  ) {
+  bool acceptsListString(List<String>? values, List<String> expectedValues) {
     if (expectedValues.isEmpty) {
       return true;
     }

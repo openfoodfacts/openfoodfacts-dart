@@ -21,7 +21,7 @@ class FolksonomyAPIClient {
 
   /// "hello world"
   static Future<void> hello({
-    final UriHelper uriHelper = uriHelperFolksonomyProd,
+    UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(path: '/'),
@@ -37,9 +37,9 @@ class FolksonomyAPIClient {
   /// token is returned, to be used in later requests with usual
   /// "Authorization: bearer token" headers
   static Future<MaybeError<String>> getAuthenticationToken({
-    required final String username,
-    required final String password,
-    final UriHelper uriHelper = uriHelperFolksonomyProd,
+    required String username,
+    required String password,
+    UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Uri uri = uriHelper.getUri(path: '/auth');
     final Response response = await post(
@@ -61,10 +61,10 @@ class FolksonomyAPIClient {
   ///
   /// The result can be filtered with that [key], or with [key] = [value].
   static Future<List<ProductStats>> getProductStats({
-    final String? key,
-    final String? value,
-    final String? owner,
-    final UriHelper uriHelper = uriHelperFolksonomyProd,
+    String? key,
+    String? value,
+    String? owner,
+    UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Map<String, dynamic> parameters = _buildJson(
       owner: owner,
@@ -93,10 +93,10 @@ class FolksonomyAPIClient {
   ///
   /// The key of the returned map is the barcode, the value is the tag value.
   static Future<Map<String, String>> getProducts({
-    required final String key,
-    final String? value,
-    final String? owner,
-    final UriHelper uriHelper = uriHelperFolksonomyProd,
+    required String key,
+    String? value,
+    String? owner,
+    UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Map<String, dynamic> parameters = _buildJson(
       owner: owner,
@@ -125,9 +125,9 @@ class FolksonomyAPIClient {
   ///
   /// The key of the returned map is the tag key.
   static Future<Map<String, ProductTag>> getProductTags({
-    required final String barcode,
-    final String? owner,
-    final UriHelper uriHelper = uriHelperFolksonomyProd,
+    required String barcode,
+    String? owner,
+    UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Map<String, String> parameters = <String, String>{'owner': ?owner};
     final Response response = await HttpHelper().doGetRequest(
@@ -156,10 +156,10 @@ class FolksonomyAPIClient {
   ///
   /// Returns null if not found.
   static Future<ProductTag?> getProductTag({
-    required final String barcode,
-    required final String key,
-    final String? owner,
-    final UriHelper uriHelper = uriHelperFolksonomyProd,
+    required String barcode,
+    required String key,
+    String? owner,
+    UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Map<String, String> parameters = <String, String>{'owner': ?owner};
     final Response response = await HttpHelper().doGetRequest(
@@ -182,12 +182,12 @@ class FolksonomyAPIClient {
   }
 
   static Future<MaybeError<bool>> deleteProductTag({
-    required final String barcode,
-    required final String key,
-    required final int version,
-    final String? owner,
-    required final String bearerToken,
-    final UriHelper uriHelper = uriHelperFolksonomyProd,
+    required String barcode,
+    required String key,
+    required int version,
+    String? owner,
+    required String bearerToken,
+    UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Response response = await HttpHelper().doDeleteRequest(
       uriHelper.getUri(
@@ -206,10 +206,10 @@ class FolksonomyAPIClient {
 
   /// Returns the versions of [ProductTag] for this [barcode] and [key].
   static Future<List<ProductTag>> getProductTagVersions({
-    required final String barcode,
-    required final String key,
-    final String? owner,
-    final UriHelper uriHelper = uriHelperFolksonomyProd,
+    required String barcode,
+    required String key,
+    String? owner,
+    UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Map<String, String> parameters = <String, String>{'owner': ?owner};
     final Response response = await HttpHelper().doGetRequest(
@@ -235,11 +235,11 @@ class FolksonomyAPIClient {
   }
 
   static Map<String, dynamic> _buildJson({
-    final String? barcode,
-    final String? key,
-    final String? value,
-    final int? version,
-    final String? owner,
+    String? barcode,
+    String? key,
+    String? value,
+    int? version,
+    String? owner,
   }) => <String, dynamic>{
     'product': ?barcode,
     'owner': ?owner,
@@ -250,13 +250,13 @@ class FolksonomyAPIClient {
 
   /// productTag.version must be equal to previous version + 1
   static Future<MaybeError<bool>> updateProductTag({
-    required final String barcode,
-    required final String key,
-    required final String value,
-    required final int version,
-    final String? ownerIfPrivate,
-    required final String bearerToken,
-    final UriHelper uriHelper = uriHelperFolksonomyProd,
+    required String barcode,
+    required String key,
+    required String value,
+    required int version,
+    String? ownerIfPrivate,
+    required String bearerToken,
+    UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Map<String, dynamic> body = _buildJson(
       barcode: barcode,
@@ -280,12 +280,12 @@ class FolksonomyAPIClient {
   }
 
   static Future<MaybeError<bool>> addProductTag({
-    required final String barcode,
-    required final String key,
-    required final String value,
-    final String? ownerIfPrivate,
-    required final String bearerToken,
-    final UriHelper uriHelper = uriHelperFolksonomyProd,
+    required String barcode,
+    required String key,
+    required String value,
+    String? ownerIfPrivate,
+    required String bearerToken,
+    UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Map<String, dynamic> body = _buildJson(
       barcode: barcode,
@@ -307,9 +307,9 @@ class FolksonomyAPIClient {
 
   /// Returns the list of tag keys with statistics.
   static Future<Map<String, KeyStats>> getKeys({
-    final String? owner,
-    final String? query,
-    final UriHelper uriHelper = uriHelperFolksonomyProd,
+    String? owner,
+    String? query,
+    UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Map<String, String> parameters = <String, String>{
       'owner': ?owner,
@@ -332,11 +332,11 @@ class FolksonomyAPIClient {
 
   /// Returns the list of values related to tag keys with statistics.
   static Future<Map<String, ValueCount>> getValues({
-    required final String key,
-    final String? owner,
-    final String? query,
-    final int? limit,
-    final UriHelper uriHelper = uriHelperFolksonomyProd,
+    required String key,
+    String? owner,
+    String? query,
+    int? limit,
+    UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Map<String, String> parameters = <String, String>{
       'owner': ?owner,
@@ -359,7 +359,7 @@ class FolksonomyAPIClient {
   }
 
   static Future<void> ping({
-    final UriHelper uriHelper = uriHelperFolksonomyProd,
+    UriHelper uriHelper = uriHelperFolksonomyProd,
   }) async {
     final Response response = await HttpHelper().doGetRequest(
       uriHelper.getUri(path: 'ping'),
@@ -370,8 +370,8 @@ class FolksonomyAPIClient {
 
   /// Throws a detailed exception if relevant. Does nothing if [response] is OK.
   static void _checkResponse(
-    final Response response, {
-    final List<int> authorizedStatus = const <int>[200],
+    Response response, {
+    List<int> authorizedStatus = const <int>[200],
   }) {
     if (!authorizedStatus.contains(response.statusCode)) {
       // TODO have a look at ValidationError in https://api.folksonomy.openfoodfacts.org/docs

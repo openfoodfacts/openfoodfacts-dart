@@ -12,7 +12,7 @@ void main() {
     const int maxSize = 5;
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
 
-    void basicTest(final AutocompleteSearchResult result) {
+    void basicTest(AutocompleteSearchResult result) {
       expect(result.took, greaterThanOrEqualTo(0));
       expect(result.timedOut, false);
       expect(result.options, isNotNull);
@@ -21,9 +21,9 @@ void main() {
 
     Future<AutocompleteSearchResult?> autocomplete({
       required String query,
-      required final List<TaxonomyName> taxonomyNames,
-      required final OpenFoodFactsLanguage language,
-      final Fuzziness fuzziness = Fuzziness.none,
+      required List<TaxonomyName> taxonomyNames,
+      required OpenFoodFactsLanguage language,
+      Fuzziness fuzziness = Fuzziness.none,
     }) async {
       try {
         final AutocompleteSearchResult result =
@@ -115,10 +115,10 @@ void main() {
     bool serverDown = false;
 
     Future<void> simpleTest(
-      final TaxonomyName taxonomyName,
-      final String query,
-      final String expectedValue, {
-      final OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH,
+      TaxonomyName taxonomyName,
+      String query,
+      String expectedValue, {
+      OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH,
     }) async {
       if (serverDown) {
         return;

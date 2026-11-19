@@ -17,7 +17,7 @@ void main() {
   const String knownTag = 'en:e436';
   const String unknownTag = 'en:some_nonexistent_additive';
 
-  void checkKnown(final TaxonomyAdditive additive) {
+  void checkKnown(TaxonomyAdditive additive) {
     expect(additive.name![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);
     expect(additive.name![OpenFoodFactsLanguage.FRENCH]!, isNotEmpty);
     expect(additive.vegan![OpenFoodFactsLanguage.ENGLISH]!, isNotEmpty);

@@ -19,6 +19,6 @@ enum LocationOSMType implements OffTagged {
   final String offTag;
 
   /// Returns the first [LocationOSMType] that matches the [offTag].
-  static LocationOSMType? fromOffTag(final String? offTag) =>
+  static LocationOSMType? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, LocationOSMType.values) as LocationOSMType?;
 }

@@ -14,15 +14,13 @@ void main() {
           {
             'element_type': 'text',
             'text_element': {
-              'html':
-                  'The <a href=\'/ecoscore\'>Eco-Score</a> is an experimental score that summarizes the environmental impacts of food products.',
+              'html': 'The <a href=\'/ecoscore\'>Eco-Score</a> is an experimental score that summarizes the environmental impacts of food products.',
             },
           },
           {
             'element_type': 'text',
             'text_element': {
-              'html':
-                  '\n                    \n                        The Eco-Score was initially developped for France and it is being extended to other European countries. The Eco-Score formula is subject to change as it is regularly improved to make it more precise and better suited to each country.\n                                    \n                ',
+              'html': '\n                    \n                        The Eco-Score was initially developped for France and it is being extended to other European countries. The Eco-Score formula is subject to change as it is regularly improved to make it more precise and better suited to each country.\n                                    \n                ',
               'type': 'note',
             },
           },
@@ -60,8 +58,7 @@ void main() {
         'level': 'info',
         'parent_panel_id': 'root',
         'title_element': {
-          'icon_url':
-              'https://static.openfoodfacts.dev/images/attributes/ecoscore-d.svg',
+          'icon_url': 'https://static.openfoodfacts.dev/images/attributes/ecoscore-d.svg',
           'title': 'Eco-Score D - High environmental impact',
         },
         'topics': ['environment'],
@@ -72,8 +69,7 @@ void main() {
           {
             'element_type': 'text',
             'text_element': {
-              'html':
-                  '\n                    <p>Agribalyse category: \n                    <a href=\'https://www.ecoscore_data.agribalyse.fr/app/aliments/31032\'>Chocolate spread with hazelnuts</a>\n                    </p>\n                    <ul>\n                        <li>\n                            PEF environmental score: 0.74\n                            (the lower the score, the lower the impact)\n                        </li>\n                        <li>\n                            including impact on climate change: 9.87\n                            kg CO2 eq/kg of product\n                        </li>\n                    </ul>\n                    ',
+              'html': '\n                    <p>Agribalyse category: \n                    <a href=\'https://www.ecoscore_data.agribalyse.fr/app/aliments/31032\'>Chocolate spread with hazelnuts</a>\n                    </p>\n                    <ul>\n                        <li>\n                            PEF environmental score: 0.74\n                            (the lower the score, the lower the impact)\n                        </li>\n                        <li>\n                            including impact on climate change: 9.87\n                            kg CO2 eq/kg of product\n                        </li>\n                    </ul>\n                    ',
               'type': 'summary',
             },
           },
@@ -90,8 +86,7 @@ void main() {
                   'id': 'agriculture',
                   'values': [
                     {
-                      'icon_url':
-                          'https://static.openfoodfacts.dev/images/icons/dist/agriculture.svg',
+                      'icon_url': 'https://static.openfoodfacts.dev/images/icons/dist/agriculture.svg',
                       'text': 'Agriculture',
                     },
                     {'percent': 82.6683253659907, 'text': '82.7 %'},
@@ -101,8 +96,7 @@ void main() {
                   'id': 'processing',
                   'values': [
                     {
-                      'icon_url':
-                          'https://static.openfoodfacts.dev/images/icons/dist/processing.svg',
+                      'icon_url': 'https://static.openfoodfacts.dev/images/icons/dist/processing.svg',
                       'text': 'Processing',
                     },
                     {'percent': 11.5205649227182, 'text': '11.5 %'},
@@ -112,8 +106,7 @@ void main() {
                   'id': 'packaging',
                   'values': [
                     {
-                      'icon_url':
-                          'https://static.openfoodfacts.dev/images/icons/dist/packaging.svg',
+                      'icon_url': 'https://static.openfoodfacts.dev/images/icons/dist/packaging.svg',
                       'text': 'Packaging',
                     },
                     {'percent': 2.75038601617178, 'text': '2.8 %'},
@@ -123,8 +116,7 @@ void main() {
                   'id': 'transportation',
                   'values': [
                     {
-                      'icon_url':
-                          'https://static.openfoodfacts.dev/images/icons/dist/transportation.svg',
+                      'icon_url': 'https://static.openfoodfacts.dev/images/icons/dist/transportation.svg',
                       'text': 'Transportation',
                     },
                     {'percent': 2.39678556140912, 'text': '2.4 %'},
@@ -134,8 +126,7 @@ void main() {
                   'id': 'distribution',
                   'values': [
                     {
-                      'icon_url':
-                          'https://static.openfoodfacts.dev/images/icons/dist/distribution.svg',
+                      'icon_url': 'https://static.openfoodfacts.dev/images/icons/dist/distribution.svg',
                       'text': 'Distribution',
                     },
                     {'percent': 0.617299532560963, 'text': '0.6 %'},
@@ -145,8 +136,7 @@ void main() {
                   'id': 'consumption',
                   'values': [
                     {
-                      'icon_url':
-                          'https://static.openfoodfacts.dev/images/icons/dist/consumption.svg',
+                      'icon_url': 'https://static.openfoodfacts.dev/images/icons/dist/consumption.svg',
                       'text': 'Consumption',
                     },
                     {'percent': 0, 'text': '0.0 %'},
@@ -163,8 +153,7 @@ void main() {
         'parent_panel_id': 'ecoscore',
         'title_element': {
           'subtitle': 'Category: Chocolate spread with hazelnuts',
-          'title':
-              'Average impact for products of the same category: C (Score: 40/100)',
+          'title': 'Average impact for products of the same category: C (Score: 40/100)',
         },
         'topics': ['environment'],
         'type': 'score',
@@ -174,8 +163,7 @@ void main() {
           {
             'element_type': 'text',
             'text_element': {
-              'html':
-                  "\n                    <p>The carbon emission figure comes from ADEME's Agribalyse database, for the category: \n                    <a href='https://agribalyse.ademe.fr/app/aliments/31032'>Chocolate spread with hazelnuts</a>\n                    </p>\n                    ",
+              'html': "\n                    <p>The carbon emission figure comes from ADEME's Agribalyse database, for the category: \n                    <a href='https://agribalyse.ademe.fr/app/aliments/31032'>Chocolate spread with hazelnuts</a>\n                    </p>\n                    ",
               'type': 'summary',
               'source_language': 'English',
               'source_lc': 'en',
@@ -196,8 +184,7 @@ void main() {
                   'id': 'agriculture',
                   'values': [
                     {
-                      'icon_url':
-                          'https://static.openfoodfacts.dev/images/icons/dist/agriculture.svg',
+                      'icon_url': 'https://static.openfoodfacts.dev/images/icons/dist/agriculture.svg',
                       'text': 'Agriculture',
                     },
                     {'percent': 88.8889136446762, 'text': '88.9 %'},
@@ -207,8 +194,7 @@ void main() {
                   'id': 'processing',
                   'values': [
                     {
-                      'icon_url':
-                          'https://static.openfoodfacts.dev/images/icons/dist/processing.svg',
+                      'icon_url': 'https://static.openfoodfacts.dev/images/icons/dist/processing.svg',
                       'text': 'Processing',
                     },
                     {'percent': 7.00489485042906, 'text': '7.0 %'},
@@ -218,8 +204,7 @@ void main() {
                   'id': 'packaging',
                   'values': [
                     {
-                      'icon_url':
-                          'https://static.openfoodfacts.dev/images/icons/dist/packaging.svg',
+                      'icon_url': 'https://static.openfoodfacts.dev/images/icons/dist/packaging.svg',
                       'text': 'Packaging',
                     },
                     {'percent': 1.9105118864761, 'text': '1.9 %'},
@@ -229,8 +214,7 @@ void main() {
                   'id': 'transportation',
                   'values': [
                     {
-                      'icon_url':
-                          'https://static.openfoodfacts.dev/images/icons/dist/transportation.svg',
+                      'icon_url': 'https://static.openfoodfacts.dev/images/icons/dist/transportation.svg',
                       'text': 'Transportation',
                     },
                     {'percent': 1.99595294189039, 'text': '2.0 %'},
@@ -240,8 +224,7 @@ void main() {
                   'id': 'distribution',
                   'values': [
                     {
-                      'icon_url':
-                          'https://static.openfoodfacts.dev/images/icons/dist/distribution.svg',
+                      'icon_url': 'https://static.openfoodfacts.dev/images/icons/dist/distribution.svg',
                       'text': 'Distribution',
                     },
                     {'percent': 0.142846509121219, 'text': '0.1 %'},
@@ -251,8 +234,7 @@ void main() {
                   'id': 'consumption',
                   'values': [
                     {
-                      'icon_url':
-                          'https://static.openfoodfacts.dev/images/icons/dist/consumption.svg',
+                      'icon_url': 'https://static.openfoodfacts.dev/images/icons/dist/consumption.svg',
                       'text': 'Consumption',
                     },
                     {'percent': 0, 'text': '0.0 %'},
@@ -366,8 +348,7 @@ void main() {
           {
             'element_type': 'text',
             'text_element': {
-              'html':
-                  '\n                    <p>[give more details here]</p> \n                    ',
+              'html': '\n                    <p>[give more details here]</p> \n                    ',
               'type': 'summary',
             },
           },
@@ -384,8 +365,7 @@ void main() {
           {
             'element_type': 'text',
             'text_element': {
-              'html':
-                  '\n                    Organic food is food produced by methods complying with the standards of organic farming and features practices that cycle resources, promote ecological balance, and conserve biodiversity.\n                    ',
+              'html': '\n                    Organic food is food produced by methods complying with the standards of organic farming and features practices that cycle resources, promote ecological balance, and conserve biodiversity.\n                    ',
               'type': 'default',
             },
           },
@@ -395,8 +375,7 @@ void main() {
         'parent_panel_id': 'ecoscore',
         'title_element': {
           'icon_url': '/images/lang/en/labels/eu-organic.135x90.svg',
-          'subtitle':
-              'Organic agriculture contributes to preserve biodiversity, climate, water quality and soil fertility.',
+          'subtitle': 'Organic agriculture contributes to preserve biodiversity, climate, water quality and soil fertility.',
           'title': 'EU Organic',
         },
         'topics': ['environment'],
@@ -407,8 +386,7 @@ void main() {
           {
             'element_type': 'text',
             'text_element': {
-              'html':
-                  '\n                    Organic food is food produced by methods complying with the standards of organic farming and features practices that cycle resources, promote ecological balance, and conserve biodiversity.\n                    ',
+              'html': '\n                    Organic food is food produced by methods complying with the standards of organic farming and features practices that cycle resources, promote ecological balance, and conserve biodiversity.\n                    ',
               'type': 'default',
             },
           },
@@ -419,8 +397,7 @@ void main() {
         'title_element': {
           'icon_url':
               '/images/lang/fr/labels/ab-agriculture-biologique.74x90.svg',
-          'subtitle':
-              'Organic agriculture contributes to preserve biodiversity, climate, water quality and soil fertility.',
+          'subtitle': 'Organic agriculture contributes to preserve biodiversity, climate, water quality and soil fertility.',
           'title': 'AB Agriculture Biologique',
         },
         'topics': ['environment'],
@@ -441,8 +418,7 @@ void main() {
           {
             'element_type': 'text',
             'text_element': {
-              'html':
-                  '<strong>Sodium acetate:</strong> Sodium acetate, CH3COONa, also abbreviated NaOAc, is the sodium salt of acetic acid. This colorless deliquescent salt has a wide range of uses.',
+              'html': '<strong>Sodium acetate:</strong> Sodium acetate, CH3COONa, also abbreviated NaOAc, is the sodium salt of acetic acid. This colorless deliquescent salt has a wide range of uses.',
               'source_language': 'English',
               'source_lc': 'en',
               'source_text': 'Wikipedia',

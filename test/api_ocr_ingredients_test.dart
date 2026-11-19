@@ -9,9 +9,9 @@ void main() {
   const uriHelper = uriHelperFoodTest;
 
   Future<void> doTest(
-    final String barcode,
-    final OpenFoodFactsLanguage language,
-    final OcrField ocrField,
+    String barcode,
+    OpenFoodFactsLanguage language,
+    OcrField ocrField,
   ) async {
     final OcrIngredientsResult response =
         await OpenFoodAPIClient.extractIngredients(

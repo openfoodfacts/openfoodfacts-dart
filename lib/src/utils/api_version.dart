@@ -4,5 +4,5 @@ class ApiVersion {
 
   final num version;
 
-  String getApiPath(final String subpath) => 'api/v$version/$subpath';
+  String getApiPath(String subpath) => 'api/v$version/$subpath';
 }

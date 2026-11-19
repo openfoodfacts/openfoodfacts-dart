@@ -154,7 +154,7 @@ void main() {
       'get popular questions with types',
       () async {
         Future<List<RobotoffQuestion>?> getTopPopularQuestions(
-          final OpenFoodFactsCountry country,
+          OpenFoodFactsCountry country,
         ) async {
           const InsightType type = InsightType.CATEGORY;
           const int numQuestions = 10;
@@ -217,25 +217,21 @@ void main() {
       timeout: Timeout(Duration(seconds: 90)),
     );
 
-    test(
-      'get 2 random questions with no specific type',
-      () async {
-        final RobotoffQuestionResult? result = await getQuestions(
-          OpenFoodFactsLanguage.FRENCH,
-          user: TestConstants.PROD_USER,
-          count: 2,
-          questionOrder: RobotoffQuestionOrder.random,
-        );
-        if (result == null) {
-          return;
-        }
+    test('get 2 random questions with no specific type', () async {
+      final RobotoffQuestionResult? result = await getQuestions(
+        OpenFoodFactsLanguage.FRENCH,
+        user: TestConstants.PROD_USER,
+        count: 2,
+        questionOrder: RobotoffQuestionOrder.random,
+      );
+      if (result == null) {
+        return;
+      }
 
-        expect(result.status, isNotNull);
-        expect(result.status, 'found');
-        expect(result.questions!.length, 2);
-      },
-      timeout: Timeout(Duration(seconds: 90)),
-    );
+      expect(result.status, isNotNull);
+      expect(result.status, 'found');
+      expect(result.questions!.length, 2);
+    }, timeout: Timeout(Duration(seconds: 90)));
   });
 
   group('$OpenFoodAPIClient get robotoff insights', () {

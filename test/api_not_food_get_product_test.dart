@@ -24,10 +24,10 @@ void main() {
   };
 
   Future<void> findProduct(
-    final String barcode,
-    final ProductType expectedProductType,
-    final ProductType serverProductType,
-    final ProductTypeFilter? productTypeFilter,
+    String barcode,
+    ProductType expectedProductType,
+    ProductType serverProductType,
+    ProductTypeFilter? productTypeFilter,
   ) async {
     final ProductQueryConfiguration configurations = ProductQueryConfiguration(
       barcode,
@@ -58,7 +58,7 @@ void main() {
     }
   }
 
-  Future<void> checkProduct(final ProductTypeFilter? filter) async {
+  Future<void> checkProduct(ProductTypeFilter? filter) async {
     for (MapEntry<ProductType, String> item in barcodes.entries) {
       final ProductType productType = item.key;
       final String barcode = item.value;
@@ -68,22 +68,18 @@ void main() {
     }
   }
 
-  group(
-    '$OpenFoodAPIClient get not food products v3',
-    () {
-      test('get OxF product without filter', () async => checkProduct(null));
+  group('$OpenFoodAPIClient get not food products v3', () {
+    test('get OxF product without filter', () async => checkProduct(null));
 
-      test(
-        'get OxF product with ALL filter',
-        () async => checkProduct(ProductTypeFilter.all),
-      );
+    test(
+      'get OxF product with ALL filter',
+      () async => checkProduct(ProductTypeFilter.all),
+    );
 
-      test('get OxF product with specific filter', () async {
-        for (final ProductType productType in ProductType.values) {
-          await checkProduct(ProductTypeFilter(productType));
-        }
-      });
-    },
-    skip: 'Cannot be tested on TEST env as domains do not exist',
-  );
+    test('get OxF product with specific filter', () async {
+      for (final ProductType productType in ProductType.values) {
+        await checkProduct(ProductTypeFilter(productType));
+      }
+    });
+  }, skip: 'Cannot be tested on TEST env as domains do not exist');
 }

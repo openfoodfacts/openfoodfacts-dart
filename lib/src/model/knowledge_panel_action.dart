@@ -46,7 +46,7 @@ enum KnowledgePanelAction implements OffTagged {
   final String offTag;
 
   /// Returns the first [KnowledgePanelAction] that matches the [offTag].
-  static KnowledgePanelAction? fromOffTag(final String? offTag) =>
+  static KnowledgePanelAction? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, KnowledgePanelAction.values)
           as KnowledgePanelAction?;
 }

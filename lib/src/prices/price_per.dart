@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import '../model/off_tagged.dart';
 
 /// Price Per.
@@ -17,6 +18,6 @@ enum PricePer implements OffTagged {
   final String offTag;
 
   /// Returns the first [PricePer] that matches the [offTag].
-  static PricePer? fromOffTag(final String? offTag) =>
+  static PricePer? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, PricePer.values) as PricePer?;
 }

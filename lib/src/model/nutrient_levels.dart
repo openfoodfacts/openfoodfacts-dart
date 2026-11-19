@@ -12,7 +12,7 @@ enum NutrientLevel implements OffTagged {
   final String offTag;
 
   /// Returns the first [NutrientLevel] that matches the [offTag].
-  static NutrientLevel? fromOffTag(final String? offTag) =>
+  static NutrientLevel? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, NutrientLevel.values) as NutrientLevel?;
 }
 

@@ -10,7 +10,7 @@ class BarcodeParameter extends Parameter {
 
   final List<String> codes;
 
-  BarcodeParameter(final String code) : this.list([code]);
+  BarcodeParameter(String code) : this.list([code]);
 
   const BarcodeParameter.list(this.codes);
 }

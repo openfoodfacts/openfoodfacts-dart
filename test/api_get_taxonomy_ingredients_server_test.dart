@@ -22,7 +22,7 @@ void main() {
     TaxonomyIngredientField.PARENTS,
     TaxonomyIngredientField.WIKIDATA,
   ];
-  void checkKnown(final TaxonomyIngredient ingredient) {
+  void checkKnown(TaxonomyIngredient ingredient) {
     // for knownTag
     expect(ingredient.children, isNotEmpty); // probably 'en:mukimame'
     expect(

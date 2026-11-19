@@ -24,7 +24,7 @@ void main() {
   ];
 
   /// Checks that all [ProductTag]s concern that [barcode], and [key] in option.
-  void checkProductTagList(final Iterable<ProductTag> list) {
+  void checkProductTagList(Iterable<ProductTag> list) {
     bool found = false;
     for (var element in list) {
       expect(element.barcode, knownBarcode);
@@ -37,7 +37,7 @@ void main() {
   }
 
   /// Checks that all [ProductStats]s concern that [barcode], and [key] in option.
-  void checkProductStatsList(final Iterable<ProductStats> list) {
+  void checkProductStatsList(Iterable<ProductStats> list) {
     bool foundBarcode = false;
     for (final ProductStats productStats in list) {
       if (productStats.barcode == knownBarcode) {

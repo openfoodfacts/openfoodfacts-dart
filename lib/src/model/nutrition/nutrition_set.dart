@@ -19,7 +19,7 @@ class NutritionSet {
   final Map<Nutrient, NutritionValue>? nutritionValues;
   final List<Nutrient>? unspecifiedNutrients;
 
-  static NutritionSet? fromJson(final dynamic json) {
+  static NutritionSet? fromJson(dynamic json) {
     final NutritionSetKey? nutritionSetKey = NutritionSetKey.fromJson(json);
     if (nutritionSetKey == null) {
       return null;

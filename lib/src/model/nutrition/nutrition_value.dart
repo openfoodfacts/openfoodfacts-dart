@@ -40,7 +40,7 @@ class NutritionValue {
   String toString() =>
       'NutritionValue($unit,$value,$valueString,$valueComputed,$modifier)';
 
-  static NutritionValue? fromJson(final Map<String, dynamic> json) {
+  static NutritionValue? fromJson(Map<String, dynamic> json) {
     final Unit? unit = UnitHelper.stringToUnit(json['unit']);
     if (unit == null) {
       return null;

@@ -8,13 +8,13 @@ class MaybeError<T> {
     : error = null,
       isError = false;
 
-  MaybeError.responseError(final Response response)
+  MaybeError.responseError(Response response)
     : _value = null,
       error = utf8.decode(response.bodyBytes),
       statusCode = response.statusCode,
       isError = true;
 
-  MaybeError.unreadableResponse(final Response response)
+  MaybeError.unreadableResponse(Response response)
     : _value = null,
       error = utf8.decode(response.bodyBytes),
       statusCode = response.statusCode,

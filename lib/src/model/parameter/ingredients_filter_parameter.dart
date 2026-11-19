@@ -12,8 +12,8 @@ class IngredientsFilterParameter extends BoolMapParameter<String> {
   String getName() => 'ingredients_tags';
 
   @override
-  String getTag(final String key, final bool value) => value ? key : '-$key';
+  String getTag(String key, bool value) => value ? key : '-$key';
 
-  const IngredientsFilterParameter(final Map<String, bool> filters)
+  const IngredientsFilterParameter(Map<String, bool> filters)
     : super(map: filters);
 }
