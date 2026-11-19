@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'off_tagged.dart';
 import '../interface/json_object.dart';
 import '../utils/language_helper.dart';
@@ -15,6 +16,7 @@ enum TaxonomyPackagingField implements OffTagged {
   WIKIDATA(offTag: 'wikidata'),
   CHILDREN(offTag: 'children'),
   PARENTS(offTag: 'parents');
+
   //PACKAGING_MATERIALS, only 4/122 found for roots
   //TaxonomyPackagingField.PACKAGING_MATERIALS: 'packaging_materials',
   //NON_RECYCLABLE_AND_NOT_BIODEGRADABLE, only 4/122 found for roots

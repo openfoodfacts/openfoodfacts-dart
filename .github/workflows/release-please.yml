@@ -3,6 +3,10 @@
    push:
      branches:
        - master
+
+ permissions:
+   contents: read
+
  jobs:
    release:
      runs-on: ubuntu-latest
@@ -11,7 +15,7 @@
         
         - name: Release-Please
           id: release
-          uses: GoogleCloudPlatform/release-please-action@v5
+          uses: googleapis/release-please-action@v5.0.0
           with:
             token: ${{ secrets.OPENFOODFACTS_BOT_PAT }}
             release-type: dart

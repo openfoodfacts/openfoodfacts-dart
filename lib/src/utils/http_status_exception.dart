@@ -7,10 +7,7 @@ class HttpStatusException implements Exception {
   final int statusCode;
   final String message;
 
-  static void check(
-    final Response response, {
-    List<int> includeCodes = const [],
-  }) {
+  static void check(Response response, {List<int> includeCodes = const []}) {
     if ((response.statusCode < 200 || response.statusCode >= 300) &&
         !includeCodes.contains(response.statusCode)) {
       throw HttpStatusException(

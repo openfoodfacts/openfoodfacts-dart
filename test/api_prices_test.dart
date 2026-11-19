@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:test/test.dart';
+
 import 'test_constants.dart';
 
 void main() {
@@ -17,9 +18,7 @@ void main() {
     initialImageUri.path,
   )!;
 
-  Future<String> getBearerToken({
-    required final UriProductHelper uriHelper,
-  }) async {
+  Future<String> getBearerToken({required UriProductHelper uriHelper}) async {
     final MaybeError<String> token =
         await OpenPricesAPIClient.getAuthenticationToken(
           username: user.userId,
@@ -32,8 +31,8 @@ void main() {
   }
 
   Future<void> closeSession({
-    required final String bearerToken,
-    required final UriProductHelper uriHelper,
+    required String bearerToken,
+    required UriProductHelper uriHelper,
   }) async {
     MaybeError<bool> deleting = await OpenPricesAPIClient.deleteUserSession(
       uriHelper: uriHelper,
@@ -55,9 +54,9 @@ void main() {
   }
 
   Future<void> deleteProofAndCloseSession({
-    required final int proofId,
-    required final String bearerToken,
-    required final UriProductHelper uriHelper,
+    required int proofId,
+    required String bearerToken,
+    required UriProductHelper uriHelper,
   }) async {
     final MaybeError<ProofFull> getProof = await OpenPricesAPIClient.getProof(
       proofId,
@@ -1029,7 +1028,7 @@ void main() {
   group('$OpenPricesAPIClient Proofs', () {
     const UriProductHelper uriHelper = uriHelperFoodTest;
 
-    void checkProof(final Proof proof, final CommonProofParameters parameters) {
+    void checkProof(Proof proof, CommonProofParameters parameters) {
       expect(proof.type, parameters.type);
       expect(proof.owner, user.userId);
       expect(proof.id, isNotNull);
@@ -1059,8 +1058,8 @@ void main() {
     }
 
     Future<void> checkProofParameters(
-      final CreateProofParameters createProofParameters,
-      final UpdateProofParameters updateProofParameters,
+      CreateProofParameters createProofParameters,
+      UpdateProofParameters updateProofParameters,
     ) async {
       final String bearerToken = await getBearerToken(uriHelper: uriHelper);
 

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'autocomplete_single_result.dart';
 import '../interface/json_object.dart';
 

@@ -7,9 +7,9 @@ import '../model/per_size.dart';
 class NutrimentsHelper {
   static const double _kcalToKJFactor = 4.1868;
 
-  static double fromKCalToKJ(final double kCal) => kCal * _kcalToKJFactor;
+  static double fromKCalToKJ(double kCal) => kCal * _kcalToKJFactor;
 
-  static double fromKJtoKCal(final double kJ) => kJ / _kcalToKJFactor;
+  static double fromKJtoKCal(double kJ) => kJ / _kcalToKJFactor;
 
   /// Calculates the energy from fat, carbs, proteins and fibers.
   /// ! should be used cautiously (might not be displayed to the end user) !

@@ -6,28 +6,28 @@ import 'nutrition_set_key.dart';
 class NutritionHelper {
   // TODO(monsieurtanuki): extract other sets, like 'aggregated_set'
 
-  void setInputSets(
-    final Product product,
-    final List<NutritionSet> nutritionSets,
-  ) => setNutritionSets(product, nutritionSets, 'input_sets');
+  void setInputSets(Product product, List<NutritionSet> nutritionSets) =>
+      setNutritionSets(product, nutritionSets, 'input_sets');
 
   void setNutritionSets(
-    final Product product,
-    final List<NutritionSet> nutritionSets,
-    final String tag,
+    Product product,
+    List<NutritionSet> nutritionSets,
+    String tag,
   ) => product.nutrition = <String, dynamic>{
     tag: [...nutritionSets.map((item) => item.toJson())],
   };
 
   /// Returns the "input sets", which is the most relevant nutrition sets.
-  List<NutritionSet>? getInputSets(final Product product) =>
+  List<NutritionSet>? getInputSets(Product product) =>
       getNutritionSets(product, 'input_sets');
 
+  /// Returns true if the product explicitly has no nutrition data on packaging,
+  /// null when unknown.
+  bool? getNoNutritionDataOnPackaging(Product product) =>
+      product.nutrition?['no_nutrition_data_on_packaging'];
+
   /// Returns the nutrition sets that match a [tag].
-  List<NutritionSet>? getNutritionSets(
-    final Product product,
-    final String tag,
-  ) {
+  List<NutritionSet>? getNutritionSets(Product product, String tag) {
     if (product.nutrition == null) {
       return null;
     }
@@ -47,8 +47,8 @@ class NutritionHelper {
 
   /// Returns the nutrition set that match a [filterKey].
   NutritionSet? getNutritionSet(
-    final List<NutritionSet> nutritionSets,
-    final NutritionSetKey filterKey,
+    List<NutritionSet> nutritionSets,
+    NutritionSetKey filterKey,
   ) {
     for (final NutritionSet nutritionSet in nutritionSets) {
       if (filterKey.perSize != nutritionSet.key.perSize) {
@@ -66,9 +66,7 @@ class NutritionHelper {
   }
 
   /// Returns all the keys of the nutrition sets.
-  List<NutritionSetKey>? getNutritionSetKeys(
-    final List<NutritionSet> nutritionSets,
-  ) {
+  List<NutritionSetKey>? getNutritionSetKeys(List<NutritionSet> nutritionSets) {
     final List<NutritionSetKey> result = <NutritionSetKey>[];
     for (final NutritionSet nutritionSet in nutritionSets) {
       result.add(nutritionSet.key);

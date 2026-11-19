@@ -11,7 +11,7 @@ import 'http_helper.dart';
 /// product once someone has created it.
 class InvalidBarcodes {
   /// JSON load constructor; may throw an exception.
-  InvalidBarcodes.loadFromJSONString(final String jsonString) {
+  InvalidBarcodes.loadFromJSONString(String jsonString) {
     final List<dynamic> inputJson = HttpHelper().jsonDecode(jsonString);
     for (final dynamic item in inputJson) {
       _barcodes.add(item as String);
@@ -31,7 +31,7 @@ class InvalidBarcodes {
   final List<String> _barcodes = [];
 
   /// Checks if a barcode is blacklisted
-  bool isBlacklisted(final String barcode) => _barcodes.contains(barcode);
+  bool isBlacklisted(String barcode) => _barcodes.contains(barcode);
 
   /// Where the JSON file can be found.
   static String getUrl() =>

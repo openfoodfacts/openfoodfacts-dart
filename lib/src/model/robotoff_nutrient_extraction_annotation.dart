@@ -39,7 +39,11 @@ class RobotoffNutrientAnnotation {
   final Map<String, RobotoffNutrientAnnotationData>? nutrients;
   @JsonKey(name: 'serving_size')
   final String? servingSize;
-  @JsonKey(name: 'nutrition_data_per', fromJson: PerSize.fromOffTag)
+  @JsonKey(
+    name: 'nutrition_data_per',
+    fromJson: PerSize.fromOffTag,
+    toJson: PerSize.toOffTag,
+  )
   final PerSize? perSize;
 
   const RobotoffNutrientAnnotation({

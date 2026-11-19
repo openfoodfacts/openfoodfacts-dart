@@ -28,17 +28,17 @@ class User extends JsonObject {
   @override
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
-  static String getUserWikiTag(final String userId) =>
+  static String getUserWikiTag(String userId) =>
       '${userId.substring(0, 1).toUpperCase()}${userId.substring(1)}';
 
-  static String getUserWikiPage(final String userId) => Uri(
+  static String getUserWikiPage(String userId) => Uri(
     scheme: 'https',
     host: 'wiki.openfoodfacts.org',
     path: 'User:${getUserWikiTag(userId)}',
   ).toString();
 
   /// Link to add a discussion topic on the OpenFoodFacts wiki page of a user.
-  static String getUserWikiDiscussionPage(final String userId) => Uri(
+  static String getUserWikiDiscussionPage(String userId) => Uri(
     scheme: 'https',
     host: 'wiki.openfoodfacts.org',
     path: 'index.php',

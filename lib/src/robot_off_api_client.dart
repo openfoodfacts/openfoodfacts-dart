@@ -23,10 +23,10 @@ class RobotoffAPIClient {
   static const ApiVersion defaultVersion = ApiVersion(1);
 
   static Uri getApiUri(
-    final String subpath, {
-    final Map<String, dynamic>? queryParameters,
-    required final UriHelper uriHelper,
-    required final ApiVersion version,
+    String subpath, {
+    Map<String, dynamic>? queryParameters,
+    required UriHelper uriHelper,
+    required ApiVersion version,
   }) => uriHelper.getUri(
     path: version.getApiPath(subpath),
     queryParameters: queryParameters,
@@ -38,8 +38,8 @@ class RobotoffAPIClient {
     String? valueTag,
     ServerType? serverType,
     int? count,
-    final UriHelper uriHelper = uriHelperRobotoffProd,
-    final ApiVersion version = defaultVersion,
+    UriHelper uriHelper = uriHelperRobotoffProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Map<String, String> parameters = {
       if (type != null) 'type': type.offTag,
@@ -72,8 +72,8 @@ class RobotoffAPIClient {
   static Future<InsightsResult> getProductInsights(
     String barcode, {
     ServerType? serverType,
-    final UriHelper uriHelper = uriHelperRobotoffProd,
-    final ApiVersion version = defaultVersion,
+    UriHelper uriHelper = uriHelperRobotoffProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Map<String, String> parameters = <String, String>{
       if (serverType != null) 'server_type': serverType.offTag,
@@ -103,8 +103,8 @@ class RobotoffAPIClient {
     User? user,
     int? count,
     ServerType? serverType,
-    final UriHelper uriHelper = uriHelperRobotoffProd,
-    final ApiVersion version = defaultVersion,
+    UriHelper uriHelper = uriHelperRobotoffProd,
+    ApiVersion version = defaultVersion,
     List<InsightType>? insightTypes,
   }) async {
     final Map<String, String> parameters = <String, String>{
@@ -157,8 +157,8 @@ class RobotoffAPIClient {
     RobotoffQuestionOrder? questionOrder,
     ServerType? serverType,
     String? valueTag,
-    final UriHelper uriHelper = uriHelperRobotoffProd,
-    final ApiVersion version = defaultVersion,
+    UriHelper uriHelper = uriHelperRobotoffProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final List<String> insightValues = [];
     if (insightTypes != null) {
@@ -214,8 +214,8 @@ class RobotoffAPIClient {
     User? user,
     String? deviceId,
     bool update = true,
-    final UriHelper uriHelper = uriHelperRobotoffProd,
-    final ApiVersion version = defaultVersion,
+    UriHelper uriHelper = uriHelperRobotoffProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final insightUri = getApiUri(
       'insights/annotate',
@@ -245,9 +245,9 @@ class RobotoffAPIClient {
   /// Get nutrient extraction insights for a given barcode
   /// cf. https://robotoff.openfoodfacts.org/api/v1/insights
   static Future<RobotoffNutrientExtractionResult> getNutrientExtraction(
-    final String barcode, {
-    final UriHelper uriHelper = uriHelperRobotoffProd,
-    final ApiVersion version = defaultVersion,
+    String barcode, {
+    UriHelper uriHelper = uriHelperRobotoffProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Map<String, String> parameters = <String, String>{
       'barcode': barcode,
@@ -270,9 +270,7 @@ class RobotoffAPIClient {
   }
 
   /// Returns a list of country as comma-separated 2-letter codes
-  static String _getCountryList(
-    final Iterable<OpenFoodFactsCountry> countries,
-  ) {
+  static String _getCountryList(Iterable<OpenFoodFactsCountry> countries) {
     final List<String> result = <String>[];
     for (final OpenFoodFactsCountry country in countries) {
       result.add(country.offTag);
@@ -280,7 +278,7 @@ class RobotoffAPIClient {
     return result.join(',');
   }
 
-  static void _checkResponse(final Response response) {
+  static void _checkResponse(Response response) {
     HttpStatusException.check(response);
   }
 }

@@ -32,20 +32,18 @@ enum ProductState {
   });
 
   /// Simple case where we can build the tag values.
-  const ProductState.simple({
-    required final String tag,
-    required final String action,
-  }) : this(
-         completedTag: '$tag-$action',
-         toBeCompletedTag: '$tag-to-be-$action',
-       );
+  const ProductState.simple({required String tag, required String action})
+    : this(
+        completedTag: '$tag-$action',
+        toBeCompletedTag: '$tag-to-be-$action',
+      );
 
   /// Simple case where we can build the tag values, for 'completed'.
-  const ProductState.completed({required final String tag})
+  const ProductState.completed({required String tag})
     : this.simple(tag: tag, action: 'completed');
 
   /// Simple case where we can build the tag values, for 'selected'.
-  const ProductState.selected({required final String tag})
+  const ProductState.selected({required String tag})
     : this.simple(tag: tag, action: 'selected');
 
   final String completedTag;

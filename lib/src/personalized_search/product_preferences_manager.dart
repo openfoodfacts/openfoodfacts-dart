@@ -17,7 +17,7 @@ class ProductPreferencesManager {
   ) => _availableProductPreferences = availableProductPreferences;
 
   /// Returns the attribute from the localized referential.
-  Attribute? getReferenceAttribute(final String attributeId) {
+  Attribute? getReferenceAttribute(String attributeId) {
     if (attributeGroups != null) {
       for (final AttributeGroup attributeGroup in attributeGroups!) {
         if (attributeGroup.attributes != null) {
@@ -45,9 +45,9 @@ class ProductPreferencesManager {
       _productPreferencesSelection.getImportance(attributeId);
 
   Future<void> setImportance(
-    final String attributeId,
-    final String importanceId, {
-    final bool notifyListeners = true,
+    String attributeId,
+    String importanceId, {
+    bool notifyListeners = true,
   }) async {
     await _productPreferencesSelection.setImportance(attributeId, importanceId);
     if (notifyListeners) {
@@ -100,7 +100,7 @@ class ProductPreferencesManager {
   }
 
   /// Returns all the attributes that match an importance.
-  List<String> getAttributeIdsWithImportance(final String importanceId) {
+  List<String> getAttributeIdsWithImportance(String importanceId) {
     final List<String> result = <String>[];
     if (attributeGroups == null) {
       return result;
@@ -136,16 +136,16 @@ class ProductPreferencesManager {
   }
 
   PreferenceImportance? getPreferenceImportanceFromImportanceId(
-    final String importanceId,
+    String importanceId,
   ) => _availablePreferenceImportances?.getPreferenceImportance(importanceId);
 
-  int? getImportanceIndex(final String importanceId) =>
+  int? getImportanceIndex(String importanceId) =>
       _availablePreferenceImportances?.getImportanceIndex(importanceId);
 
   void notify() => _productPreferencesSelection.notify();
 
   /// Clears all the attributes: sets all of them to "not important".
-  Future<void> clearImportances({final bool notifyListeners = true}) async {
+  Future<void> clearImportances({bool notifyListeners = true}) async {
     if (attributeGroups != null) {
       for (final AttributeGroup attributeGroup in attributeGroups!) {
         if (attributeGroup.attributes != null) {

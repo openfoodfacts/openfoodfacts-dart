@@ -85,7 +85,7 @@ class PriceTag extends JsonObject {
   Map<String, dynamic> toJson() => _$PriceTagToJson(this);
 
   /// Returns the URL of the price tag image.
-  Uri? getImageUrl({required final UriProductHelper uriProductHelper}) =>
+  Uri? getImageUrl({required UriProductHelper uriProductHelper}) =>
       imagePath == null
       ? null
       : OpenPricesAPIClient.getUri(

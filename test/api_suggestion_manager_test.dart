@@ -29,9 +29,9 @@ void main() {
   const String input2 = 'fr';
 
   Future<List<String>> getSlowSuggestions(
-    final Autocompleter autoCompleter, {
-    required final int milliseconds,
-    required final String input,
+    Autocompleter autoCompleter, {
+    required int milliseconds,
+    required String input,
   }) async {
     await Future.delayed(Duration(milliseconds: milliseconds));
     return autoCompleter.getSuggestions(input);
@@ -58,7 +58,7 @@ void main() {
   }
 
   group('$OpenFoodAPIClient suggestion manager', () {
-    Future<void> testSpeed(final Autocompleter autocompleter) async {
+    Future<void> testSpeed(Autocompleter autocompleter) async {
       final AutocompleteManager manager = AutocompleteManager(autocompleter);
       final List<String> suggestions1 = await manager.getSuggestions(input1);
       final List<String> suggestions2 = await manager.getSuggestions(input2);

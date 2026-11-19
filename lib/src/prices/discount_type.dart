@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import '../model/off_tagged.dart';
 
 /// Discount Type, for Prices.
@@ -28,6 +29,6 @@ enum DiscountType implements OffTagged {
   final String offTag;
 
   /// Returns the first [DiscountType] that matches the [offTag].
-  static DiscountType? fromOffTag(final String? offTag) =>
+  static DiscountType? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, DiscountType.values) as DiscountType?;
 }

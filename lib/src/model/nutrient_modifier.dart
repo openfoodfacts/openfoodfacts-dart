@@ -17,11 +17,11 @@ enum NutrientModifier implements OffTagged {
   final String offTag;
 
   /// Returns the first [NutrientModifier] that matches the [offTag].
-  static NutrientModifier? fromOffTag(final String? offTag) =>
+  static NutrientModifier? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, NutrientModifier.values)
           as NutrientModifier?;
 
-  static NutrientModifier? fromValue(final String? value) {
+  static NutrientModifier? fromValue(String? value) {
     if (value == null || value.isEmpty) {
       return null;
     }

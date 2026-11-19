@@ -39,13 +39,10 @@ void main() {
   }
 
   void findExpectedIngredients(
-    final List<Ingredient> ingredients,
-    final List<String> labels,
+    List<Ingredient> ingredients,
+    List<String> labels,
   ) {
-    bool foundIngredient(
-      final String label,
-      final List<Ingredient> ingredients,
-    ) {
+    bool foundIngredient(String label, List<Ingredient> ingredients) {
       for (final Ingredient ingredient in ingredients) {
         if (ingredient.text == label) {
           return true;
@@ -69,9 +66,9 @@ void main() {
   }
 
   void expectNutrientValue(
-    final Map<Nutrient, NutritionValue> nutritionValues,
-    final Nutrient nutrient,
-    final NutritionValue expectedValue,
+    Map<Nutrient, NutritionValue> nutritionValues,
+    Nutrient nutrient,
+    NutritionValue expectedValue,
   ) {
     expect(nutritionValues[nutrient]?.unit, expectedValue.unit);
     expect(nutritionValues[nutrient]?.value, expectedValue.value);
@@ -400,9 +397,9 @@ void main() {
         }
 
         void expectValue(
-          final PerSize perSize,
-          final Nutrient nutrient,
-          final NutritionValue nutritionValue,
+          PerSize perSize,
+          Nutrient nutrient,
+          NutritionValue nutritionValue,
         ) {
           final List<NutritionSet>? inputSets = NutritionHelper().getInputSets(
             result!.product!,
@@ -529,7 +526,7 @@ void main() {
         expect(result.product!.ingredients, isNotNull);
         expect(result.product!.ingredients!.length, 3);
 
-        void checkIngredientNotThere(final String ingredient) => expect(
+        void checkIngredientNotThere(String ingredient) => expect(
           result.product!.ingredients!.any((i) => i.text == ingredient),
           false,
         );
@@ -615,10 +612,8 @@ void main() {
 
         var values = nutritionSet!.nutritionValues!;
 
-        void expectValue(
-          final Nutrient nutrient,
-          final NutritionValue expectedValue,
-        ) => expectNutrientValue(values, nutrient, expectedValue);
+        void expectValue(Nutrient nutrient, NutritionValue expectedValue) =>
+            expectNutrientValue(values, nutrient, expectedValue);
 
         expectValue(
           Nutrient.energyKJ,
@@ -1102,36 +1097,30 @@ void main() {
         },
       );
 
-      test(
-        'vegan, vegetarian and palm oil ingredients of Danish Butter Cookies & Chocolate Chip Cookies',
-        () async {
-          final ProductResultV3? result = await getProductV3(
-            ProductQueryConfiguration(
-              '3017620429484',
-              language: OpenFoodFactsLanguage.FRENCH,
-              fields: [ProductField.ALL],
-              version: version,
-            ),
-          );
-          if (result == null) {
-            return;
-          }
+      test('vegan, vegetarian and palm oil ingredients of Danish Butter Cookies & Chocolate Chip Cookies', () async {
+        final ProductResultV3? result = await getProductV3(
+          ProductQueryConfiguration(
+            '3017620429484',
+            language: OpenFoodFactsLanguage.FRENCH,
+            fields: [ProductField.ALL],
+            version: version,
+          ),
+        );
+        if (result == null) {
+          return;
+        }
 
-          final Ingredient ingredient = result.product!.ingredients!.firstWhere(
-            (ingredient) => ingredient.text == 'huile de palme',
-          );
-          expect(ingredient.isInTaxonomy, true);
-          expect(ingredient.vegan, IngredientSpecialPropertyStatus.POSITIVE);
-          expect(
-            ingredient.vegetarian,
-            IngredientSpecialPropertyStatus.POSITIVE,
-          );
-          expect(
-            ingredient.fromPalmOil,
-            IngredientSpecialPropertyStatus.POSITIVE,
-          );
-        },
-      );
+        final Ingredient ingredient = result.product!.ingredients!.firstWhere(
+          (ingredient) => ingredient.text == 'huile de palme',
+        );
+        expect(ingredient.isInTaxonomy, true);
+        expect(ingredient.vegan, IngredientSpecialPropertyStatus.POSITIVE);
+        expect(ingredient.vegetarian, IngredientSpecialPropertyStatus.POSITIVE);
+        expect(
+          ingredient.fromPalmOil,
+          IngredientSpecialPropertyStatus.POSITIVE,
+        );
+      });
 
       test('get knowledge panels', () async {
         const Set<String> someExpectedKeys = <String>{
@@ -1192,8 +1181,8 @@ void main() {
     // Direct replica of ProductOpener's integration tests with additional assertions
     // https://github.com/openfoodfacts/openfoodfacts-server/blob/e6e17ccc0e4843d485d40078b6d5a389b7a22c5a/tests/integration/api_v3_product_read.t#L72-L101
     Future<void> getAndValidateProductGS1(
-      final String barcode,
-      final String normalizedBarcode,
+      String barcode,
+      String normalizedBarcode,
     ) async {
       final ProductQueryConfiguration configurations =
           ProductQueryConfiguration(
@@ -1576,9 +1565,9 @@ void main() {
 
   test('check if images are locked', () async {
     Future<void> checkLocked(
-      final String barcode,
-      final OpenFoodFactsLanguage language,
-      final Map<ImageField, bool> areLocked,
+      String barcode,
+      OpenFoodFactsLanguage language,
+      Map<ImageField, bool> areLocked,
     ) async {
       final ProductResultV3? result = await getProductV3(
         ProductQueryConfiguration(
@@ -1625,8 +1614,8 @@ void main() {
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
     const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
 
-    void checkProduct(final Product product) {
-      void checkLocalizedTag(final LocalizedTag? tag) {
+    void checkProduct(Product product) {
+      void checkLocalizedTag(LocalizedTag? tag) {
         expect(tag, isNotNull);
         expect(tag!.id, isNotNull);
         expect(tag.lcName, isNotNull);
@@ -1755,6 +1744,10 @@ void main() {
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
     const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
 
+    test('schema version of API 3.5', () {
+      expect(ProductQueryVersion.v3_5.schemaVersion, 1003);
+    });
+
     test('get schema versions', () async {
       final Map<num, int> schemaVersions = <num, int>{
         3: 999,
@@ -1808,11 +1801,10 @@ void main() {
 
           final List<AttributeGroup> attributeGroups = product.attributeGroups!;
           final AttributeGroup attributeGroup = attributeGroups.firstWhere(
-            (final AttributeGroup group) => group.id == 'ingredients',
+            (AttributeGroup group) => group.id == 'ingredients',
           );
           final Attribute attribute = attributeGroup.attributes!.firstWhere(
-            (final Attribute attribute) =>
-                attribute.id == 'unwanted_ingredients',
+            (Attribute attribute) => attribute.id == 'unwanted_ingredients',
           );
           expect(attribute.status, 'known');
           expect(attribute.match, entry.value ? 0 : 100);

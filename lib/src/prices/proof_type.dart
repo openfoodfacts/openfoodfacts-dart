@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import '../model/off_tagged.dart';
 
 /// Type of a Proof.
@@ -23,6 +24,6 @@ enum ProofType implements OffTagged {
   final String offTag;
 
   /// Returns the first [ProofType] that matches the [offTag].
-  static ProofType? fromOffTag(final String? offTag) =>
+  static ProofType? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, ProofType.values) as ProofType?;
 }

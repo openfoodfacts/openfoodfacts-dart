@@ -35,8 +35,8 @@ enum MatchedProductStatusV2 {
 /// For performance reasons we store just the barcode, not the product.
 class MatchedScoreV2 {
   MatchedScoreV2(
-    final Product product,
-    final ProductPreferencesManager productPreferencesManager,
+    Product product,
+    ProductPreferencesManager productPreferencesManager,
   ) : barcode = product.barcode! {
     _score = 0;
     _debug = '';
@@ -148,7 +148,7 @@ class MatchedScoreV2 {
     PreferenceImportance.ID_NOT_IMPORTANT: 0,
   };
 
-  static void sort(final List<MatchedScoreV2> scores) {
+  static void sort(List<MatchedScoreV2> scores) {
     int i = 0;
     for (final MatchedScoreV2 score in scores) {
       score._initialOrder = i++;
@@ -177,14 +177,14 @@ class MatchedScoreV2 {
 class MatchedProductV2 extends MatchedScoreV2 {
   MatchedProductV2(
     this.product,
-    final ProductPreferencesManager productPreferencesManager,
+    ProductPreferencesManager productPreferencesManager,
   ) : super(product, productPreferencesManager);
 
   final Product product;
 
   static List<MatchedProductV2> sort(
-    final List<Product> products,
-    final ProductPreferencesManager productPreferencesManager,
+    List<Product> products,
+    ProductPreferencesManager productPreferencesManager,
   ) {
     final List<MatchedProductV2> scores = <MatchedProductV2>[];
     for (final Product product in products) {

@@ -50,7 +50,7 @@ void main() {
     'vitamin-pp',
   };
 
-  List<String> findMissingNutrients(final List<OrderedNutrient>? list) {
+  List<String> findMissingNutrients(List<OrderedNutrient>? list) {
     final List<String> result = [];
     if (list == null) {
       return result;
@@ -66,8 +66,8 @@ void main() {
   }
 
   OrderedNutrient? findOrderedNutrient(
-    final List<OrderedNutrient>? list,
-    final String nutrientId,
+    List<OrderedNutrient>? list,
+    String nutrientId,
   ) {
     if (list == null) {
       return null;
@@ -88,8 +88,8 @@ void main() {
   }
 
   void checkNutrients(
-    final OrderedNutrients orderedNutrients,
-    final OpenFoodFactsCountry country,
+    OrderedNutrients orderedNutrients,
+    OpenFoodFactsCountry country,
   ) {
     for (final String expectedNutrient in expectedNutrients) {
       expect(
@@ -159,7 +159,7 @@ void main() {
         }
         expect(
           orderedNutrients.nutrients.any(
-            (final OrderedNutrient orderedNutrient) =>
+            (OrderedNutrient orderedNutrient) =>
                 orderedNutrient.id == nutrient.offTag,
           ),
           isTrue,

@@ -255,10 +255,7 @@ class Product extends JsonObject {
   /// Images may be returned in multiple sizes
   List<ProductImage>? getMainImages() => getImageSubset(true, images);
 
-  bool? isImageLocked(
-    final ImageField imageField,
-    final OpenFoodFactsLanguage language,
-  ) {
+  bool? isImageLocked(ImageField imageField, OpenFoodFactsLanguage language) {
     if (owner == null) {
       return null;
     }
@@ -278,8 +275,8 @@ class Product extends JsonObject {
   }
 
   ProductImage? getLocalizedImage(
-    final ImageField imageField,
-    final OpenFoodFactsLanguage language,
+    ImageField imageField,
+    OpenFoodFactsLanguage language,
   ) {
     if (images == null) {
       return null;
@@ -296,7 +293,7 @@ class Product extends JsonObject {
     return null;
   }
 
-  ProductImage? getRawImage(final String imageId) {
+  ProductImage? getRawImage(String imageId) {
     if (images == null) {
       return null;
     }
@@ -312,8 +309,8 @@ class Product extends JsonObject {
 
   @visibleForTesting
   static List<ProductImage>? getImageSubset(
-    final bool isSelectedOrUploaded,
-    final List<ProductImage>? images,
+    bool isSelectedOrUploaded,
+    List<ProductImage>? images,
   ) {
     if (images == null) {
       return null;
@@ -826,18 +823,17 @@ class Product extends JsonObject {
     this.stores,
     this.attributeGroups,
     this.lastModified,
-    Nutriments? nutriments,
-    bool? noNutritionData,
-  }) : _nutriments = nutriments,
-       _noNutritionData = noNutritionData;
+    this._nutriments,
+    this._noNutritionData,
+  });
 
   factory Product.fromJson(Map<String, dynamic> json) {
     final Product result = _$ProductFromJson(json);
 
     void setLanguageString(
-      final ProductField productField,
-      final OpenFoodFactsLanguage language,
-      final String label,
+      ProductField productField,
+      OpenFoodFactsLanguage language,
+      String label,
     ) {
       switch (productField) {
         case ProductField.NAME_IN_LANGUAGES:
@@ -880,10 +876,10 @@ class Product extends JsonObject {
     }
 
     void setLanguageListString(
-      final ProductField productField,
-      final OpenFoodFactsLanguage language,
-      final Map<String, dynamic> json,
-      final String key,
+      ProductField productField,
+      OpenFoodFactsLanguage language,
+      Map<String, dynamic> json,
+      String key,
     ) {
       final List<String>? labels = _jsonValueToList(json[key]);
       if (labels == null) {
@@ -945,10 +941,10 @@ class Product extends JsonObject {
     }
 
     void addInLanguagesData(
-      final ProductField productField,
-      final OpenFoodFactsLanguage language,
-      final Map<String, dynamic> json,
-      final String key,
+      ProductField productField,
+      OpenFoodFactsLanguage language,
+      Map<String, dynamic> json,
+      String key,
     ) {
       switch (productField) {
         case ProductField.NAME_IN_LANGUAGES:
@@ -988,8 +984,8 @@ class Product extends JsonObject {
     }
 
     ProductField? extractProductField(
-      final String key,
-      final Iterable<ProductField> iterable,
+      String key,
+      Iterable<ProductField> iterable,
     ) {
       for (final ProductField productField in iterable) {
         if (key.startsWith(productField.offTag)) {
@@ -1050,7 +1046,7 @@ class Product extends JsonObject {
   }
 
   static Map<OpenFoodFactsLanguage, String>? _getLocalizedStrings(
-    final dynamic langs,
+    dynamic langs,
   ) {
     Map<OpenFoodFactsLanguage, String>? result;
     if (langs is! Map<String, dynamic>) {
@@ -1186,7 +1182,7 @@ class Product extends JsonObject {
   }
 
   /// Returns all existing product attributes matching a list of attribute ids.
-  Map<String, Attribute> getAttributes(final List<String> attributeIds) {
+  Map<String, Attribute> getAttributes(List<String> attributeIds) {
     final Map<String, Attribute> result = <String, Attribute>{};
     if (attributeGroups == null) {
       return result;
@@ -1206,7 +1202,7 @@ class Product extends JsonObject {
   }
 
   /// Returns the product attribute matching an attribute id.
-  Attribute? getAttribute(final String attributeId) {
+  Attribute? getAttribute(String attributeId) {
     final Map<String, Attribute> attributes = getAttributes(<String>[
       attributeId,
     ]);
@@ -1296,7 +1292,7 @@ class Product extends JsonObject {
   /// Returns the best version of a product name.
   ///
   /// cf. openfoodfacts-server/lib/ProductOpener/Products.pm
-  String getBestProductName(final OpenFoodFactsLanguage language) {
+  String getBestProductName(OpenFoodFactsLanguage language) {
     String? tmp;
     if ((tmp = productNameInLanguages?[language])?.isNotEmpty == true) {
       return tmp!;
@@ -1334,10 +1330,7 @@ class Product extends JsonObject {
   /// Returns a combo of the best product name and the first brand.
   ///
   /// cf. openfoodfacts-server/lib/ProductOpener/Products.pm
-  String getProductNameBrand(
-    final OpenFoodFactsLanguage language,
-    final String separator,
-  ) {
+  String getProductNameBrand(OpenFoodFactsLanguage language, String separator) {
     final String bestProductName = getBestProductName(language);
     final String? firstBrand = getFirstBrand();
     if (firstBrand == null) {
@@ -1350,8 +1343,8 @@ class Product extends JsonObject {
   ///
   /// cf. openfoodfacts-server/lib/ProductOpener/Products.pm
   String getProductNameBrandQuantity(
-    final OpenFoodFactsLanguage language,
-    final String separator,
+    OpenFoodFactsLanguage language,
+    String separator,
   ) {
     final String productNameBrand = getProductNameBrand(language, separator);
     if (quantity?.isNotEmpty != true) {
@@ -1369,6 +1362,6 @@ class Product extends JsonObject {
   /// Typically used to check if the field value was set by the product owner
   /// (if the timestamp is not null), which means that the user cannot set a
   /// value.
-  int? getOwnerFieldTimestamp(final OwnerField ownerField) =>
+  int? getOwnerFieldTimestamp(OwnerField ownerField) =>
       ownerFields?[ownerField.offTag];
 }

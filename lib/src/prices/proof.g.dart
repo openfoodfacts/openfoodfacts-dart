@@ -361,6 +361,7 @@ const _$CurrencyEnumMap = {
   Currency.XBC: 'XBC',
   Currency.XBD: 'XBD',
   Currency.XCD: 'XCD',
+  Currency.XCG: 'XCG',
   Currency.XDR: 'XDR',
   Currency.XEU: 'XEU',
   Currency.XFO: 'XFO',
@@ -387,6 +388,7 @@ const _$CurrencyEnumMap = {
   Currency.ZRN: 'ZRN',
   Currency.ZRZ: 'ZRZ',
   Currency.ZWD: 'ZWD',
+  Currency.ZWG: 'ZWG',
   Currency.ZWL: 'ZWL',
   Currency.ZWR: 'ZWR',
 };

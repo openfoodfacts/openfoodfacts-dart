@@ -29,8 +29,8 @@ enum Currency {
   /// Armenian dram
   AMD,
 
-  /// Netherlands Antillean guilder
-  ANG,
+  /// Netherlands Antillean guilder, replaced by XCG in 2025
+  ANG(historicalCode: true),
 
   /// Angolan kwanza
   AOA,
@@ -681,8 +681,8 @@ enum Currency {
   /// Soviet Union ruble
   SUR(historicalCode: true),
 
-  /// Salvadoran colón
-  SVC,
+  /// Salvadoran colón, replaced by USD in 2001
+  SVC(historicalCode: true),
 
   /// Syrian pound
   SYP,
@@ -769,13 +769,13 @@ enum Currency {
   VEB(historicalCode: true),
 
   /// Venezuelan digital bolívar
-  VED,
+  VED(digitalCode: true),
 
   /// Venezuelan bolívar fuerte
   VEF(historicalCode: true),
 
   /// Venezuelan sovereign bolívar
-  VES(historicalCode: true),
+  VES,
 
   /// Vietnamese đồng
   VND(decimalNumbers: 0),
@@ -810,6 +810,9 @@ enum Currency {
 
   /// East Caribbean dollar
   XCD,
+
+  /// Caribbean guilder, replaced ANG in 2025
+  XCG,
 
   /// Special drawing rights
   XDR(noCountry: true),
@@ -889,8 +892,11 @@ enum Currency {
   /// Zimbabwean dollar
   ZWD(historicalCode: true),
 
-  /// Zimbabwean dollar
-  ZWL,
+  /// Zimbabwean Gold, replaced ZWL in 2024
+  ZWG,
+
+  /// Zimbabwean dollar, replaced by ZWG in 2024
+  ZWL(historicalCode: true),
 
   /// Zimbabwean dollar
   ZWR(historicalCode: true);
@@ -898,6 +904,7 @@ enum Currency {
   const Currency({
     this.historicalCode = false,
     this.unofficialCode = false,
+    this.digitalCode = false,
     this.fundsCode = false,
     this.complementaryCurrency = false,
     this.noCountry = false,
@@ -909,6 +916,9 @@ enum Currency {
 
   /// Non-standard codes
   final bool unofficialCode;
+
+  /// Digital code
+  final bool digitalCode;
 
   /// Funds code
   final bool fundsCode;
@@ -922,7 +932,7 @@ enum Currency {
   /// The number of digits after the decimal separator.
   final int decimalNumbers;
 
-  static Currency? fromName(final String? name) {
+  static Currency? fromName(String? name) {
     if (name == null) {
       return null;
     }
@@ -935,14 +945,11 @@ enum Currency {
   }
 
   /// Returns a value with a number of decimals that matches the currency.
-  double fixDecimals(final double price) =>
+  double fixDecimals(double price) =>
       fixDecimalsForNumbers(price, decimalNumbers);
 
   @visibleForTesting
-  static double fixDecimalsForNumbers(
-    final double price,
-    final int decimalNumbers,
-  ) {
+  static double fixDecimalsForNumbers(double price, int decimalNumbers) {
     final int power10 = pow(10, decimalNumbers).round();
     return (price * power10).round() / power10;
   }

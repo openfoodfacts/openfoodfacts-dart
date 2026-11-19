@@ -128,8 +128,8 @@ abstract class TaxonomyQueryConfiguration<
   }
 
   Uri getPostUri(
-    final UriProductHelper uriHelper, {
-    final ApiVersion version = defaultVersion,
+    UriProductHelper uriHelper, {
+    ApiVersion version = defaultVersion,
   }) => uriHelper.getPostUri(path: version.getApiPath('taxonomy'));
 
   /// Returns the set of fields to ignore if specified in the [fields] parameter.

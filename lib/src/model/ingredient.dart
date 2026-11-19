@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import '../utils/json_helper.dart';
 import '../interface/json_object.dart';
 
@@ -117,7 +118,7 @@ IngredientSpecialPropertyStatus? ingredientSpecialPropertyStatusFromJson(
   }
   try {
     return IngredientSpecialPropertyStatus.values.firstWhere(
-      (final IngredientSpecialPropertyStatus key) => _MAP[key] == json,
+      (IngredientSpecialPropertyStatus key) => _MAP[key] == json,
     );
   } on StateError {
     return null;

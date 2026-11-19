@@ -57,14 +57,14 @@ class OpenPricesAPIClient {
   static const String _subdomain = 'prices';
 
   /// Host of the Elastic Search API.
-  static String _getHost(final UriProductHelper uriHelper) =>
+  static String _getHost(UriProductHelper uriHelper) =>
       uriHelper.getHost(_subdomain);
 
   static Uri getUri({
-    required final String path,
-    final Map<String, dynamic>? queryParameters,
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final bool? addUserAgentParameters,
+    required String path,
+    Map<String, dynamic>? queryParameters,
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    bool? addUserAgentParameters,
   }) => uriHelper.getUri(
     path: path,
     queryParameters: queryParameters,
@@ -73,10 +73,10 @@ class OpenPricesAPIClient {
   );
 
   static Uri getApiUri(
-    final String subpath, {
-    final Map<String, dynamic>? queryParameters,
-    required final UriProductHelper uriHelper,
-    required final ApiVersion version,
+    String subpath, {
+    Map<String, dynamic>? queryParameters,
+    required UriProductHelper uriHelper,
+    required ApiVersion version,
   }) => getUri(
     path: version.getApiPath(subpath),
     queryParameters: queryParameters,
@@ -84,9 +84,9 @@ class OpenPricesAPIClient {
   );
 
   static Future<MaybeError<PriceUser>> getUser(
-    final String username, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
+    String username, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Uri uri = getApiUri(
       'users/${Uri.encodeComponent(username)}',
@@ -109,10 +109,10 @@ class OpenPricesAPIClient {
   }
 
   static Future<MaybeError<GetPricesResult>> getPrices(
-    final GetPricesParameters parameters, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    final String? bearerToken,
+    GetPricesParameters parameters, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    String? bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'prices',
@@ -140,9 +140,9 @@ class OpenPricesAPIClient {
 
   /// Gets a price.
   static Future<MaybeError<Price>> getPrice(
-    final int priceId, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
+    int priceId, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Uri uri = getApiUri(
       'prices/$priceId',
@@ -165,10 +165,10 @@ class OpenPricesAPIClient {
   }
 
   static Future<MaybeError<Location>> getOSMLocation({
-    required final int locationOSMId,
-    required final LocationOSMType locationOSMType,
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
+    required int locationOSMId,
+    required LocationOSMType locationOSMType,
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Uri uri = getApiUri(
       'locations/osm/${Uri.encodeComponent(locationOSMType.offTag)}/$locationOSMId',
@@ -191,10 +191,10 @@ class OpenPricesAPIClient {
   }
 
   static Future<MaybeError<GetLocationsResult>> getLocations(
-    final GetLocationsParameters parameters, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    final String? bearerToken,
+    GetLocationsParameters parameters, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    String? bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'locations',
@@ -221,9 +221,9 @@ class OpenPricesAPIClient {
   }
 
   static Future<MaybeError<Location>> getLocation(
-    final int locationId, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
+    int locationId, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Uri uri = getApiUri(
       'locations/$locationId',
@@ -246,9 +246,9 @@ class OpenPricesAPIClient {
   }
 
   static Future<MaybeError<GetChallengesResult>> getChallenges(
-    final GetChallengesParameters parameters, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
+    GetChallengesParameters parameters, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Uri uri = getApiUri(
       'challenges',
@@ -274,9 +274,9 @@ class OpenPricesAPIClient {
   }
 
   static Future<MaybeError<Challenge>> getChallenge(
-    final int challengeId, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
+    int challengeId, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Uri uri = getApiUri(
       'challenges/$challengeId',
@@ -299,10 +299,10 @@ class OpenPricesAPIClient {
   }
 
   static Future<MaybeError<GetPriceProductsResult>> getPriceProducts(
-    final GetPriceProductsParameters parameters, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    final String? bearerToken,
+    GetPriceProductsParameters parameters, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    String? bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'products',
@@ -329,9 +329,9 @@ class OpenPricesAPIClient {
   }
 
   static Future<MaybeError<PriceProduct>> getPriceProductById(
-    final int productId, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
+    int productId, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Uri uri = getApiUri(
       'products/$productId',
@@ -356,9 +356,9 @@ class OpenPricesAPIClient {
   }
 
   static Future<MaybeError<PriceProduct>> getPriceProductByCode(
-    final String productCode, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
+    String productCode, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Uri uri = getApiUri(
       'products/code/${Uri.encodeComponent(productCode)}',
@@ -387,8 +387,8 @@ class OpenPricesAPIClient {
   /// Expected value: [statusRunning]
   /// cf. https://prices.openfoodfacts.org/api/docs#/default/status_endpoint_api_v1_status_get
   static Future<MaybeError<String>> getStatus({
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Uri uri = getApiUri('status', uriHelper: uriHelper, version: version);
     final Response response = await HttpHelper().doGetRequest(
@@ -415,11 +415,11 @@ class OpenPricesAPIClient {
   /// - use the Authorization header with the Bearer scheme, e.g.: "Authorization: bearer token"
   /// - use the session cookie, e.g.: "Cookie: session=token"
   static Future<MaybeError<String>> getAuthenticationToken({
-    required final String username,
-    required final String password,
-    final bool setCookie = false,
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
+    required String username,
+    required String password,
+    bool setCookie = false,
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Uri uri = getApiUri(
       'auth${setCookie ? '?set_cookie=1' : ''}',
@@ -443,9 +443,9 @@ class OpenPricesAPIClient {
 
   /// Returns the session details related to this [bearerToken].
   static Future<MaybeError<Session>> getUserSession({
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    required final String bearerToken,
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    required String bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'session',
@@ -472,9 +472,9 @@ class OpenPricesAPIClient {
   ///
   /// Returns true if successful.
   static Future<MaybeError<bool>> deleteUserSession({
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    required final String bearerToken,
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    required String bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'session',
@@ -498,10 +498,10 @@ class OpenPricesAPIClient {
   /// good enough to say "price added!", even if we have trouble decoding the
   /// price).
   static Future<MaybeError<Price?>> createPrice({
-    required final Price price,
-    required final String bearerToken,
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
+    required Price price,
+    required String bearerToken,
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Uri uri = getApiUri('prices', uriHelper: uriHelper, version: version);
     final Map<String, dynamic> body = <String, dynamic>{
@@ -552,11 +552,11 @@ class OpenPricesAPIClient {
   /// This endpoint requires authentication.
   /// A user can update only owned prices.
   static Future<MaybeError<bool>> updatePrice(
-    final int priceId, {
-    required final UpdatePriceParameters parameters,
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    required final String bearerToken,
+    int priceId, {
+    required UpdatePriceParameters parameters,
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    required String bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'prices/$priceId',
@@ -581,10 +581,10 @@ class OpenPricesAPIClient {
   /// A user can delete only owned prices.
   /// Returns true if successful.
   static Future<MaybeError<bool>> deletePrice({
-    required final int priceId,
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    required final String bearerToken,
+    required int priceId,
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    required String bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'prices/$priceId',
@@ -604,10 +604,10 @@ class OpenPricesAPIClient {
 
   /// Get user proofs.
   static Future<MaybeError<GetProofsResult>> getProofs(
-    final GetProofsParameters parameters, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    required final String bearerToken,
+    GetProofsParameters parameters, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    required String bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'proofs',
@@ -640,12 +640,12 @@ class OpenPricesAPIClient {
   /// * 201 for a proof created on the server
   /// * 200 for a proof that already existed on the server
   static Future<MaybeError<ProofFull>> uploadProof({
-    required final Uri imageUri,
-    required final MediaType mediaType,
-    required final CreateProofParameters createProofParameters,
-    required final String bearerToken,
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
+    required Uri imageUri,
+    required MediaType mediaType,
+    required CreateProofParameters createProofParameters,
+    required String bearerToken,
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Uri uri = getApiUri(
       'proofs/upload',
@@ -694,10 +694,10 @@ class OpenPricesAPIClient {
 
   /// Get user proof by id.
   static Future<MaybeError<ProofFull>> getProof(
-    final int proofId, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    required final String bearerToken,
+    int proofId, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    required String bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'proofs/$proofId',
@@ -727,11 +727,11 @@ class OpenPricesAPIClient {
   /// Returns the updated fields (the server's PATCH response).
   /// To retrieve the full proof, use [getProof].
   static Future<MaybeError<ProofUpdate>> updateProof(
-    final int proofId, {
-    required final UpdateProofParameters parameters,
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    required final String bearerToken,
+    int proofId, {
+    required UpdateProofParameters parameters,
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    required String bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'proofs/$proofId',
@@ -766,10 +766,10 @@ class OpenPricesAPIClient {
   /// A moderator can delete not owned proofs.
   /// Returns true if successful.
   static Future<MaybeError<bool>> deleteProof({
-    required final int proofId,
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    required final String bearerToken,
+    required int proofId,
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    required String bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'proofs/$proofId',
@@ -788,10 +788,10 @@ class OpenPricesAPIClient {
   }
 
   static Future<MaybeError<GetUsersResult>> getUsers(
-    final GetUsersParameters parameters, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    final String? bearerToken,
+    GetUsersParameters parameters, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    String? bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'users',
@@ -819,8 +819,8 @@ class OpenPricesAPIClient {
 
   /// Returns the total stats.
   static Future<MaybeError<PriceTotalStats>> getStats({
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
   }) async {
     final Uri uri = getApiUri('stats', uriHelper: uriHelper, version: version);
     final Response response = await HttpHelper().doGetRequest(
@@ -844,10 +844,10 @@ class OpenPricesAPIClient {
   ///
   /// cf. https://prices.openfoodfacts.org/api/docs
   static Future<MaybeError<GetPriceTagsResult>> getPriceTags(
-    final GetPriceTagsParameters parameters, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    final String? bearerToken,
+    GetPriceTagsParameters parameters, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    String? bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'price-tags',
@@ -877,10 +877,10 @@ class OpenPricesAPIClient {
   ///
   /// cf. https://prices.openfoodfacts.org/api/docs
   static Future<MaybeError<PriceTag>> getPriceTag(
-    final int priceTagId, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    final String? bearerToken,
+    int priceTagId, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    String? bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'price-tags/$priceTagId',
@@ -907,10 +907,10 @@ class OpenPricesAPIClient {
   ///
   /// cf. https://prices.openfoodfacts.org/api/docs
   static Future<MaybeError<GetReceiptItemsResult>> getReceiptItems(
-    final GetReceiptItemsParameters parameters, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    final String? bearerToken,
+    GetReceiptItemsParameters parameters, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    String? bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'receipt-items',
@@ -940,10 +940,10 @@ class OpenPricesAPIClient {
   ///
   /// cf. https://prices.openfoodfacts.org/api/docs
   static Future<MaybeError<ReceiptItem>> getReceiptItem(
-    final int receiptItemId, {
-    final UriProductHelper uriHelper = uriHelperFoodProd,
-    final ApiVersion version = defaultVersion,
-    final String? bearerToken,
+    int receiptItemId, {
+    UriProductHelper uriHelper = uriHelperFoodProd,
+    ApiVersion version = defaultVersion,
+    String? bearerToken,
   }) async {
     final Uri uri = getApiUri(
       'receipt-items/$receiptItemId',

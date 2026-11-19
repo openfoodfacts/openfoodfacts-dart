@@ -25,7 +25,7 @@ void main() {
   const String unknownTag = 'en:some_nonexistent_country';
 
   group('OpenFoodAPIClient getTaxonomyCountries SERVER', () {
-    void checkKnown(final TaxonomyCountry country) {
+    void checkKnown(TaxonomyCountry country) {
       expect(
         country.name![OpenFoodFactsLanguage.ENGLISH]!,
         expectedNameEnglish,

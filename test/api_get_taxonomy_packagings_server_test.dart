@@ -17,7 +17,7 @@ void main() {
   const String knownRootTag = 'en:brick';
   const String unknownTag = 'en:some_nonexistent_packaging';
 
-  void checkKnownPackaging(final TaxonomyPackaging packaging) {
+  void checkKnownPackaging(TaxonomyPackaging packaging) {
     expect(packaging.name, isNotNull);
     expect(packaging.name, isNotEmpty);
     expect(packaging.synonyms, isNotNull);
@@ -86,8 +86,8 @@ void main() {
     ///
     /// At the end, [knowItems] will contain everything.
     Future<int> recursiveGet(
-      final Map<String, TaxonomyPackaging> soFar,
-      final List<String> children,
+      Map<String, TaxonomyPackaging> soFar,
+      List<String> children,
     ) async {
       final Map<String, TaxonomyPackaging>? sublevel =
           await OpenFoodAPIClient.getTaxonomyPackagings(

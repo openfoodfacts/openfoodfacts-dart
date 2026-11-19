@@ -72,7 +72,7 @@ class _EANValidator extends _AbstractBarcodeValidator {
 
   static bool _isDigitsOnly(String str) {
     for (int char in str.codeUnits) {
-      if (char < _AbstractBarcodeValidator._CHAR_UNIT_ZERO &&
+      if (char < _AbstractBarcodeValidator._CHAR_UNIT_ZERO ||
           char > _AbstractBarcodeValidator._CHAR_UNIT_NINE) {
         return false;
       }

@@ -236,11 +236,11 @@ enum ProductField implements OffTagged {
 
   const ProductField({
     required this.offTag,
-    final ProductField? inLanguagesProductField,
+    this._inLanguagesProductField,
     this.isInLanguages = false,
     this.isAllLanguages = false,
     this.alternateOffTags,
-  }) : _inLanguagesProductField = inLanguagesProductField;
+  });
 
   @override
   final String offTag;

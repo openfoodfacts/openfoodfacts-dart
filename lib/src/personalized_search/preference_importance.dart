@@ -36,6 +36,6 @@ class PreferenceImportance {
       'id: $id, name: $name, factor: $factor, minimalWatch: $minimalMatch'
       ')';
 
-  static String _checkedId(final String id) =>
+  static String _checkedId(String id) =>
       IDS.contains(id) ? id : throw Exception('Unknown id "$id"');
 }

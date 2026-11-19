@@ -24,7 +24,7 @@ void main() {
     'translation_added',
   };
 
-  void checkEventsBase(final Iterable<EventsBase> list) {
+  void checkEventsBase(Iterable<EventsBase> list) {
     expect(list, isNotEmpty);
     bool withTimestamps = false;
     bool withBarcodes = false;
@@ -50,7 +50,7 @@ void main() {
     expect(withPoints, isTrue);
   }
 
-  void checkEventsCount(final Map<String, int> map, final bool isEmpty) {
+  void checkEventsCount(Map<String, int> map, bool isEmpty) {
     expect(map, isNotEmpty);
 
     expect(map.keys.length, typicalEventTypes.length);
@@ -71,7 +71,7 @@ void main() {
     expect(allZeros, isEmpty);
   }
 
-  void checkBadgeBase(final Iterable<BadgeBase> list) {
+  void checkBadgeBase(Iterable<BadgeBase> list) {
     expect(list, isNotEmpty);
     bool withUserIds = false;
     for (final BadgeBase badgeBase in list) {
@@ -82,10 +82,7 @@ void main() {
     expect(withUserIds, isTrue);
   }
 
-  int? getLeaderboardScore(
-    final String? userId,
-    final List<LeaderboardEntry> list,
-  ) {
+  int? getLeaderboardScore(String? userId, List<LeaderboardEntry> list) {
     for (final LeaderboardEntry entry in list) {
       if (entry.userId == userId) {
         return entry.score;

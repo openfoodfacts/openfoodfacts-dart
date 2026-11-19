@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+
 import 'order_by.dart';
 
 /// Helper class for API query parameters.
@@ -36,10 +37,10 @@ abstract class GetParametersHelper<T extends OrderByField> {
   }
 
   void _checkIntValue(
-    final String fieldDescription,
-    final int? value, {
-    final int? min,
-    final int? max,
+    String fieldDescription,
+    int? value, {
+    int? min,
+    int? max,
   }) {
     if (value == null) {
       return;
@@ -60,30 +61,26 @@ abstract class GetParametersHelper<T extends OrderByField> {
     }
   }
 
-  void addNonNullString(final String? value, final String tag) {
+  void addNonNullString(String? value, String tag) {
     if (value != null) {
       _result[tag] = value;
     }
   }
 
-  void addNonNullInt(final int? value, final String tag) =>
+  void addNonNullInt(int? value, String tag) =>
       addNonNullString(value?.toString(), tag);
 
-  void addNonNullBool(final bool? value, final String tag) =>
+  void addNonNullBool(bool? value, String tag) =>
       addNonNullString(value?.toString(), tag);
 
-  void addNonNullDate(
-    final DateTime? value,
-    final String tag, {
-    required final bool dayOnly,
-  }) {
+  void addNonNullDate(DateTime? value, String tag, {required bool dayOnly}) {
     if (value != null) {
       addNonNullString(formatDate(value, dayOnly: dayOnly), tag);
     }
   }
 
   /// Formats a date as DateFormat('yyyy-MM-dd') but without the `intl` package.
-  static String formatDate(final DateTime date, {bool dayOnly = true}) {
+  static String formatDate(DateTime date, {bool dayOnly = true}) {
     final String result = date.toIso8601String();
     if (dayOnly) {
       return result.substring(0, 10);

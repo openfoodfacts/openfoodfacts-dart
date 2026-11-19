@@ -42,11 +42,11 @@ class Status extends JsonObject {
   });
 
   Status copyWith({
-    final dynamic status,
-    final String? statusVerbose,
-    final String? body,
-    final String? error,
-    final int? imageId,
+    dynamic status,
+    String? statusVerbose,
+    String? body,
+    String? error,
+    int? imageId,
   }) {
     return Status(
       status: status ?? this.status,

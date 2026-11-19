@@ -21,12 +21,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7.0.1
 
       - name: Setup Dart
-        uses: dart-lang/setup-dart@v1.7.2
+        uses: dart-lang/setup-dart@v1.8.1
         with:
-          sdk: 3.12.2
+          sdk: 3.13.7
 
       - name: Install dependencies
         run: dart pub get

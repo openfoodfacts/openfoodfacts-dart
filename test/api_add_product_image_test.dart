@@ -28,7 +28,7 @@ void main() {
   /// * index 1: image height in pixels
   /// * index 2: file size in bytes
   /// Inspiration found in https://github.com/CaiJingLong/dart_image_size_getter
-  List<int> getJpegSize(final List<int> data) {
+  List<int> getJpegSize(List<int> data) {
     int start = 2;
     while (true) {
       if (data[start] != 0xFF) {
@@ -50,7 +50,7 @@ void main() {
   }
 
   /// Returns the width and height (pixels) and size (bytes) of a JPEG URL file
-  Future<List<int>> getJpegUrlSize(final String url) async =>
+  Future<List<int>> getJpegUrlSize(String url) async =>
       getJpegSize(await UriReader.instance.readAsBytes(Uri.parse(url)));
 
   /// Returns the imgid, i.e. the unique id for (uploaded image x product)
@@ -58,9 +58,9 @@ void main() {
   /// That imgid has only sense for this [barcode], and references the image
   /// currently used as a base for this [imageField] and this [language].
   Future<String?> getImgid(
-    final String barcode,
-    final ImageField imageField,
-    final OpenFoodFactsLanguage language,
+    String barcode,
+    ImageField imageField,
+    OpenFoodFactsLanguage language,
   ) async {
     final ProductQueryConfiguration configurations = ProductQueryConfiguration(
       barcode,
@@ -117,26 +117,22 @@ void main() {
       expect(status.status, Status.statusOK);
     });
 
-    test(
-      'add ingredients image test: resend same image',
-      () async {
-        SendImage image = SendImage(
-          lang: OpenFoodFactsLanguage.ENGLISH,
-          barcode: barcode,
-          imageField: ImageField.INGREDIENTS,
-          imageUri: Uri.file('test/test_assets/ingredients_en.jpg'),
-        );
-        Status status = await OpenFoodAPIClient.addProductImage(
-          user,
-          image,
-          uriHelper: uriHelper,
-        );
+    test('add ingredients image test: resend same image', () async {
+      SendImage image = SendImage(
+        lang: OpenFoodFactsLanguage.ENGLISH,
+        barcode: barcode,
+        imageField: ImageField.INGREDIENTS,
+        imageUri: Uri.file('test/test_assets/ingredients_en.jpg'),
+      );
+      Status status = await OpenFoodAPIClient.addProductImage(
+        user,
+        image,
+        uriHelper: uriHelper,
+      );
 
-        expect(status.status, 'status not ok');
-        expect(status.error, 'This picture has already been sent.');
-      },
-      skip: 'Currently not working',
-    );
+      expect(status.status, 'status not ok');
+      expect(status.error, 'This picture has already been sent.');
+    }, skip: 'Currently not working');
 
     test('read image', () async {
       //Get product without setting ProductField
@@ -274,7 +270,7 @@ void main() {
         return productResult.product!;
       }
 
-      bool find(final Product product) {
+      bool find(Product product) {
         for (final item in product.selectedImages!) {
           if (item.field == imageField && item.language == language) {
             return true;
@@ -283,7 +279,7 @@ void main() {
         return false;
       }
 
-      int findImageId(final Product product) {
+      int findImageId(Product product) {
         for (final item in product.images!) {
           if (item.imgid != null) {
             return int.parse(item.imgid!);
@@ -292,7 +288,7 @@ void main() {
         fail("Couldn't find any image id");
       }
 
-      ProductImage? findProductImage(final Product product) {
+      ProductImage? findProductImage(Product product) {
         for (final item in product.images!) {
           if (item.field == imageField && item.language == language) {
             return item;
