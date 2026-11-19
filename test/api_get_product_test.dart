@@ -1744,6 +1744,10 @@ void main() {
     const OpenFoodFactsLanguage language = OpenFoodFactsLanguage.FRENCH;
     const OpenFoodFactsCountry country = OpenFoodFactsCountry.FRANCE;
 
+    test('schema version of API 3.5', () {
+      expect(ProductQueryVersion.v3_5.schemaVersion, 1003);
+    });
+
     test('get schema versions', () async {
       final Map<num, int> schemaVersions = <num, int>{
         3: 999,

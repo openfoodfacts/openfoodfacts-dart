@@ -50,6 +50,7 @@ class ProductQueryVersion extends ApiVersion {
     3.2 => 1001,
     3.3 => 1002,
     3.4 => 1002,
+    3.5 => 1003,
     _ => null,
   };
 }
