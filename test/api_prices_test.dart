@@ -1155,6 +1155,44 @@ void main() {
       ),
     );
 
+    test(
+      'upload and update PRICE TAG with XCG and ZWG currency',
+      () async => checkProofParameters(
+        CreateProofParameters(ProofType.priceTag)
+          ..currency = Currency.XCG
+          ..ownerComment = 'testing XCG'
+          ..date = DateTime(2025, 1, 1)
+          ..readyForPriceTagValidation = true,
+        UpdateProofParameters()
+          ..type = ProofType.priceTag
+          ..currency = Currency.ZWG
+          ..ownerComment = 'testing ZWG'
+          ..date = DateTime(2025, 1, 2)
+          ..readyForPriceTagValidation = false,
+      ),
+    );
+
+    test(
+      'upload and update RECEIPT with ZWG and XCG currency',
+      () async => checkProofParameters(
+        CreateProofParameters(ProofType.receipt)
+          ..currency = Currency.ZWG
+          ..ownerComment = 'testing ZWG receipt'
+          ..date = DateTime(2025, 1, 3)
+          ..receiptPriceCount = 10
+          ..receiptPriceTotal = 50.0
+          ..ownerConsumption = true,
+        UpdateProofParameters()
+          ..type = ProofType.receipt
+          ..currency = Currency.XCG
+          ..ownerComment = 'testing XCG receipt'
+          ..date = DateTime(2025, 1, 4)
+          ..receiptPriceCount = 12
+          ..receiptPriceTotal = 60.0
+          ..ownerConsumption = false,
+      ),
+    );
+
     test('image file media type', () async {
       final Map<String, http.MediaType> expectedMediaTypes =
           <String, http.MediaType>{

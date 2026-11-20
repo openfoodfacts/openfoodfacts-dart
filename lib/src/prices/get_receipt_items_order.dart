@@ -4,8 +4,8 @@ import 'order_by.dart';
 enum GetReceiptItemsOrderField implements OrderByField {
   created(offTag: 'created'),
   id(offTag: 'id'),
-  updated(offTag: 'updated'),
   order(offTag: 'order'),
+  proofId(offTag: 'proof_id'),
   status(offTag: 'status');
 
   const GetReceiptItemsOrderField({required this.offTag});

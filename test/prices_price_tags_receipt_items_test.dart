@@ -14,6 +14,7 @@ void main() {
         ..orderBy = [
           OrderBy(field: GetPriceTagsOrderField.created, ascending: false),
           OrderBy(field: GetPriceTagsOrderField.id, ascending: true),
+          OrderBy(field: GetPriceTagsOrderField.proofId, ascending: false),
         ]
         ..createdGte = DateTime.utc(2025, 1, 1, 12, 0, 0)
         ..createdLte = DateTime.utc(2025, 1, 31, 23, 59, 59)
@@ -34,7 +35,7 @@ void main() {
 
       expect(queryParams['page'], equals('2'));
       expect(queryParams['size'], equals('50'));
-      expect(queryParams['order_by'], equals('-created,id'));
+      expect(queryParams['order_by'], equals('-created,id,-proof_id'));
       expect(queryParams['created__gte'], equals('2025-01-01T12:00:00.000Z'));
       expect(queryParams['created__lte'], equals('2025-01-31T23:59:59.000Z'));
       expect(queryParams['prediction_count'], equals('1'));
@@ -64,6 +65,7 @@ void main() {
         ..orderBy = [
           OrderBy(field: GetReceiptItemsOrderField.order, ascending: true),
           OrderBy(field: GetReceiptItemsOrderField.created, ascending: false),
+          OrderBy(field: GetReceiptItemsOrderField.proofId, ascending: true),
         ]
         ..createdGte = DateTime.utc(2025, 2, 1, 0, 0, 0)
         ..createdLte = DateTime.utc(2025, 2, 28, 23, 59, 59)
@@ -76,7 +78,7 @@ void main() {
 
       expect(queryParams['page'], equals('1'));
       expect(queryParams['size'], equals('20'));
-      expect(queryParams['order_by'], equals('order,-created'));
+      expect(queryParams['order_by'], equals('order,-created,proof_id'));
       expect(queryParams['created__gte'], equals('2025-02-01T00:00:00.000Z'));
       expect(queryParams['created__lte'], equals('2025-02-28T23:59:59.000Z'));
       expect(queryParams['proof__owner'], equals('owner1'));
@@ -215,6 +217,82 @@ void main() {
       expect(listResult.value.items!.length, lessThanOrEqualTo(2));
       expect(listResult.value.pageNumber, equals(1));
       expect(listResult.value.pageSize, equals(2));
+
+      // Deterministic ID ascending and descending ordering
+      final MaybeError<GetPriceTagsResult> idAscResult =
+          await OpenPricesAPIClient.getPriceTags(
+            GetPriceTagsParameters()
+              ..pageSize = 3
+              ..orderBy = [
+                OrderBy(field: GetPriceTagsOrderField.id, ascending: true),
+              ],
+            uriHelper: uriHelper,
+            bearerToken: bearerToken,
+          );
+      expect(idAscResult.isError, isFalse);
+      expect(idAscResult.value.items, isNotNull);
+      final List<PriceTag> ascItems = idAscResult.value.items!;
+      expect(ascItems.length, greaterThanOrEqualTo(2));
+      for (int i = 0; i < ascItems.length - 1; i++) {
+        expect(ascItems[i].id!, lessThan(ascItems[i + 1].id!));
+      }
+
+      final MaybeError<GetPriceTagsResult> idDescResult =
+          await OpenPricesAPIClient.getPriceTags(
+            GetPriceTagsParameters()
+              ..pageSize = 3
+              ..orderBy = [
+                OrderBy(field: GetPriceTagsOrderField.id, ascending: false),
+              ],
+            uriHelper: uriHelper,
+            bearerToken: bearerToken,
+          );
+      expect(idDescResult.isError, isFalse);
+      expect(idDescResult.value.items, isNotNull);
+      final List<PriceTag> descItems = idDescResult.value.items!;
+      expect(descItems.length, greaterThanOrEqualTo(2));
+      for (int i = 0; i < descItems.length - 1; i++) {
+        expect(descItems[i].id!, greaterThan(descItems[i + 1].id!));
+      }
+      expect(ascItems.first.id!, lessThan(descItems.first.id!));
+
+      // proofId ordering
+      final MaybeError<GetPriceTagsResult> proofAscResult =
+          await OpenPricesAPIClient.getPriceTags(
+            GetPriceTagsParameters()
+              ..pageSize = 5
+              ..orderBy = [
+                OrderBy(field: GetPriceTagsOrderField.proofId, ascending: true),
+              ],
+            uriHelper: uriHelper,
+            bearerToken: bearerToken,
+          );
+      expect(proofAscResult.isError, isFalse);
+      expect(proofAscResult.value.items, isNotNull);
+      expect(proofAscResult.value.items, isNotEmpty);
+
+      final MaybeError<GetPriceTagsResult> proofDescResult =
+          await OpenPricesAPIClient.getPriceTags(
+            GetPriceTagsParameters()
+              ..pageSize = 5
+              ..orderBy = [
+                OrderBy(
+                  field: GetPriceTagsOrderField.proofId,
+                  ascending: false,
+                ),
+              ],
+            uriHelper: uriHelper,
+            bearerToken: bearerToken,
+          );
+      expect(proofDescResult.isError, isFalse);
+      expect(proofDescResult.value.items, isNotNull);
+      expect(proofDescResult.value.items, isNotEmpty);
+
+      final int? ascProofId = proofAscResult.value.items!.first.proof?.id;
+      final int? descProofId = proofDescResult.value.items!.first.proof?.id;
+      if (ascProofId != null && descProofId != null) {
+        expect(ascProofId, lessThan(descProofId));
+      }
     });
 
     test('getPriceTag with unknown ID returns error', () async {
@@ -297,6 +375,85 @@ void main() {
       expect(listResult.value.items!.length, lessThanOrEqualTo(2));
       expect(listResult.value.pageNumber, equals(1));
       expect(listResult.value.pageSize, equals(2));
+
+      // Deterministic ID ascending and descending ordering
+      final MaybeError<GetReceiptItemsResult> idAscResult =
+          await OpenPricesAPIClient.getReceiptItems(
+            GetReceiptItemsParameters()
+              ..pageSize = 3
+              ..orderBy = [
+                OrderBy(field: GetReceiptItemsOrderField.id, ascending: true),
+              ],
+            uriHelper: uriHelper,
+            bearerToken: bearerToken,
+          );
+      expect(idAscResult.isError, isFalse);
+      expect(idAscResult.value.items, isNotNull);
+      final List<ReceiptItem> ascItems = idAscResult.value.items!;
+      expect(ascItems.length, greaterThanOrEqualTo(2));
+      for (int i = 0; i < ascItems.length - 1; i++) {
+        expect(ascItems[i].id!, lessThan(ascItems[i + 1].id!));
+      }
+
+      final MaybeError<GetReceiptItemsResult> idDescResult =
+          await OpenPricesAPIClient.getReceiptItems(
+            GetReceiptItemsParameters()
+              ..pageSize = 3
+              ..orderBy = [
+                OrderBy(field: GetReceiptItemsOrderField.id, ascending: false),
+              ],
+            uriHelper: uriHelper,
+            bearerToken: bearerToken,
+          );
+      expect(idDescResult.isError, isFalse);
+      expect(idDescResult.value.items, isNotNull);
+      final List<ReceiptItem> descItems = idDescResult.value.items!;
+      expect(descItems.length, greaterThanOrEqualTo(2));
+      for (int i = 0; i < descItems.length - 1; i++) {
+        expect(descItems[i].id!, greaterThan(descItems[i + 1].id!));
+      }
+      expect(ascItems.first.id!, lessThan(descItems.first.id!));
+
+      // proofId ordering
+      final MaybeError<GetReceiptItemsResult> proofAscResult =
+          await OpenPricesAPIClient.getReceiptItems(
+            GetReceiptItemsParameters()
+              ..pageSize = 5
+              ..orderBy = [
+                OrderBy(
+                  field: GetReceiptItemsOrderField.proofId,
+                  ascending: true,
+                ),
+              ],
+            uriHelper: uriHelper,
+            bearerToken: bearerToken,
+          );
+      expect(proofAscResult.isError, isFalse);
+      expect(proofAscResult.value.items, isNotNull);
+      expect(proofAscResult.value.items, isNotEmpty);
+
+      final MaybeError<GetReceiptItemsResult> proofDescResult =
+          await OpenPricesAPIClient.getReceiptItems(
+            GetReceiptItemsParameters()
+              ..pageSize = 5
+              ..orderBy = [
+                OrderBy(
+                  field: GetReceiptItemsOrderField.proofId,
+                  ascending: false,
+                ),
+              ],
+            uriHelper: uriHelper,
+            bearerToken: bearerToken,
+          );
+      expect(proofDescResult.isError, isFalse);
+      expect(proofDescResult.value.items, isNotNull);
+      expect(proofDescResult.value.items, isNotEmpty);
+
+      final int? ascProofId = proofAscResult.value.items!.first.proofId;
+      final int? descProofId = proofDescResult.value.items!.first.proofId;
+      if (ascProofId != null && descProofId != null) {
+        expect(ascProofId, lessThan(descProofId));
+      }
     });
 
     test('getReceiptItem with unknown ID returns error', () async {

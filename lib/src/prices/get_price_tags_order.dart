@@ -4,8 +4,7 @@ import 'order_by.dart';
 enum GetPriceTagsOrderField implements OrderByField {
   created(offTag: 'created'),
   id(offTag: 'id'),
-  updated(offTag: 'updated'),
-  predictionCount(offTag: 'prediction_count'),
+  proofId(offTag: 'proof_id'),
   status(offTag: 'status');
 
   const GetPriceTagsOrderField({required this.offTag});
