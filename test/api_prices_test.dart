@@ -58,7 +58,7 @@ void main() {
     required String bearerToken,
     required UriProductHelper uriHelper,
   }) async {
-    final MaybeError<Proof> getProof = await OpenPricesAPIClient.getProof(
+    final MaybeError<ProofFull> getProof = await OpenPricesAPIClient.getProof(
       proofId,
       bearerToken: bearerToken,
       uriHelper: uriHelper,
@@ -304,7 +304,7 @@ void main() {
       final String bearerToken = await getBearerToken(uriHelper: uriHelper);
 
       // successful proof upload with valid token
-      MaybeError<Proof> uploadProof = await OpenPricesAPIClient.uploadProof(
+      MaybeError<ProofFull> uploadProof = await OpenPricesAPIClient.uploadProof(
         createProofParameters: createProofParameters,
         imageUri: initialImageUri,
         mediaType: initialMediaType,
@@ -1064,7 +1064,7 @@ void main() {
       final String bearerToken = await getBearerToken(uriHelper: uriHelper);
 
       // successful proof upload with valid token
-      final MaybeError<Proof> uploadProof =
+      final MaybeError<ProofFull> uploadProof =
           await OpenPricesAPIClient.uploadProof(
             createProofParameters: createProofParameters,
             imageUri: initialImageUri,
@@ -1082,19 +1082,28 @@ void main() {
       final int proofId = uploadProof.value.id;
 
       // successful proof update
-      MaybeError<bool> updateProof = await OpenPricesAPIClient.updateProof(
-        proofId,
-        parameters: updateProofParameters,
-        bearerToken: bearerToken,
-        uriHelper: uriHelper,
-      );
+      MaybeError<ProofUpdate> updateProof =
+          await OpenPricesAPIClient.updateProof(
+            proofId,
+            parameters: updateProofParameters,
+            bearerToken: bearerToken,
+            uriHelper: uriHelper,
+          );
       expect(updateProof.isError, isFalse);
-
-      final MaybeError<Proof> maybeProof = await OpenPricesAPIClient.getProof(
-        proofId,
-        uriHelper: uriHelper,
-        bearerToken: bearerToken,
+      expect(
+        updateProof.value.ownerComment,
+        updateProofParameters.ownerComment,
       );
+      expect(updateProof.value.currency, updateProofParameters.currency);
+      expect(updateProof.value.date, updateProofParameters.date);
+      expect(updateProof.value.type, updateProofParameters.type);
+
+      final MaybeError<ProofFull> maybeProof =
+          await OpenPricesAPIClient.getProof(
+            proofId,
+            uriHelper: uriHelper,
+            bearerToken: bearerToken,
+          );
       expect(maybeProof.isError, isFalse);
       expect(maybeProof.value.id, proofId);
       checkProof(maybeProof.value, updateProofParameters);
@@ -1142,6 +1151,44 @@ void main() {
           ..receiptPriceCount = 77
           ..receiptPriceTotal = 1.75
           ..receiptOnlineDeliveryCosts = 14
+          ..ownerConsumption = false,
+      ),
+    );
+
+    test(
+      'upload and update PRICE TAG with XCG and ZWG currency',
+      () async => checkProofParameters(
+        CreateProofParameters(ProofType.priceTag)
+          ..currency = Currency.XCG
+          ..ownerComment = 'testing XCG'
+          ..date = DateTime(2025, 1, 1)
+          ..readyForPriceTagValidation = true,
+        UpdateProofParameters()
+          ..type = ProofType.priceTag
+          ..currency = Currency.ZWG
+          ..ownerComment = 'testing ZWG'
+          ..date = DateTime(2025, 1, 2)
+          ..readyForPriceTagValidation = false,
+      ),
+    );
+
+    test(
+      'upload and update RECEIPT with ZWG and XCG currency',
+      () async => checkProofParameters(
+        CreateProofParameters(ProofType.receipt)
+          ..currency = Currency.ZWG
+          ..ownerComment = 'testing ZWG receipt'
+          ..date = DateTime(2025, 1, 3)
+          ..receiptPriceCount = 10
+          ..receiptPriceTotal = 50.0
+          ..ownerConsumption = true,
+        UpdateProofParameters()
+          ..type = ProofType.receipt
+          ..currency = Currency.XCG
+          ..ownerComment = 'testing XCG receipt'
+          ..date = DateTime(2025, 1, 4)
+          ..receiptPriceCount = 12
+          ..receiptPriceTotal = 60.0
           ..ownerConsumption = false,
       ),
     );
@@ -1244,11 +1291,12 @@ void main() {
 
       // Trying to get the same single result, from an item.
       final Proof proof = result.items!.first;
-      final MaybeError<Proof> maybeProof = await OpenPricesAPIClient.getProof(
-        proof.id,
-        uriHelper: uriHelper,
-        bearerToken: bearerToken,
-      );
+      final MaybeError<ProofFull> maybeProof =
+          await OpenPricesAPIClient.getProof(
+            proof.id,
+            uriHelper: uriHelper,
+            bearerToken: bearerToken,
+          );
       expect(maybeProof.isError, isFalse);
       expect(maybeProof.value.id, proof.id);
       expect(maybeProof.value.type, proof.type);

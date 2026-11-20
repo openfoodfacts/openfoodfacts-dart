@@ -13,7 +13,7 @@ part 'proof.g.dart';
 
 /// Proof of a price.
 ///
-/// cf. `ProofFull` in https://prices.openfoodfacts.org/api/docs
+/// cf. `ProofHalfFull` in https://prices.openfoodfacts.org/api/docs
 @JsonSerializable()
 class Proof extends JsonObject {
   /// Proof ID. Read-only.
@@ -115,6 +115,22 @@ class Proof extends JsonObject {
   /// A "duplicate" value would mean the uploaded proof was pre-existing.
   @JsonKey()
   String? detail;
+
+  /// Image MD5 hash.
+  @JsonKey(name: 'image_md5_hash')
+  String? imageMd5Hash;
+
+  /// Whether this proof is a draft.
+  @JsonKey()
+  bool? draft;
+
+  /// Number of predictions for this proof. Read-only.
+  @JsonKey(name: 'prediction_count')
+  int? predictionCount;
+
+  /// Tags.
+  @JsonKey()
+  List<String>? tags;
 
   Proof();
 
