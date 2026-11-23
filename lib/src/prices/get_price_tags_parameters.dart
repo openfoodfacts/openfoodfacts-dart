@@ -25,8 +25,8 @@ class GetPriceTagsParameters
   @override
   Map<String, String> getQueryParameters() {
     super.getQueryParameters();
-    addNonNullDate(createdGte?.toUtc(), 'created__gte', dayOnly: false);
-    addNonNullDate(createdLte?.toUtc(), 'created__lte', dayOnly: false);
+    addNonNullDate(createdGte, 'created__gte', dayOnly: false);
+    addNonNullDate(createdLte, 'created__lte', dayOnly: false);
     addNonNullInt(predictionCount, 'prediction_count');
     addNonNullInt(predictionCountGte, 'prediction_count__gte');
     addNonNullInt(predictionCountLte, 'prediction_count__lte');

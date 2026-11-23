@@ -73,6 +73,7 @@ abstract class GetParametersHelper<T extends OrderByField> {
   void addNonNullBool(bool? value, String tag) =>
       addNonNullString(value?.toString(), tag);
 
+  // TODO(openfoodfacts): Decide on a consistent timezone policy for dates across prices parameters (e.g. UTC vs local in addNonNullDate).
   void addNonNullDate(DateTime? value, String tag, {required bool dayOnly}) {
     if (value != null) {
       addNonNullString(formatDate(value, dayOnly: dayOnly), tag);

@@ -1,11 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../interface/json_object.dart';
-import '../open_prices_api_client.dart';
 import '../utils/json_helper.dart';
 import '../utils/uri_helper.dart';
 import 'price_tag_prediction.dart';
-import 'proof_half_full.dart';
+import 'proof.dart';
 
 part 'price_tag.g.dart';
 
@@ -28,7 +27,7 @@ class PriceTag extends JsonObject {
 
   /// Proof nested inside this price tag.
   @JsonKey()
-  ProofHalfFull? proof;
+  Proof? proof;
 
   /// Image path of the price tag. Read-only.
   @JsonKey(name: 'image_path')
@@ -86,11 +85,8 @@ class PriceTag extends JsonObject {
 
   /// Returns the URL of the price tag image.
   Uri? getImageUrl({required UriProductHelper uriProductHelper}) =>
-      imagePath == null
-      ? null
-      : OpenPricesAPIClient.getUri(
-          path: 'img/$imagePath',
-          uriHelper: uriProductHelper,
-          addUserAgentParameters: false,
-        );
+      Proof.getFileUrlFromPath(
+        uriProductHelper: uriProductHelper,
+        path: imagePath,
+      );
 }

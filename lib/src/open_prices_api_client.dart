@@ -7,7 +7,7 @@ import 'prices/challenge.dart';
 import 'prices/maybe_error.dart';
 import 'prices/price.dart';
 import 'prices/price_user.dart';
-import 'prices/proof_full.dart';
+import 'prices/proof.dart';
 import 'prices/proof_update.dart';
 import 'prices/get_challenges_parameters.dart';
 import 'prices/get_challenges_result.dart';
@@ -639,7 +639,7 @@ class OpenPricesAPIClient {
   /// The returned status code will be
   /// * 201 for a proof created on the server
   /// * 200 for a proof that already existed on the server
-  static Future<MaybeError<ProofFull>> uploadProof({
+  static Future<MaybeError<Proof>> uploadProof({
     required Uri imageUri,
     required MediaType mediaType,
     required CreateProofParameters createProofParameters,
@@ -678,22 +678,22 @@ class OpenPricesAPIClient {
     if (response.statusCode == 200 || response.statusCode == 201) {
       try {
         final Map<String, dynamic> json = HttpHelper().jsonDecode(responseBody);
-        return MaybeError<ProofFull>.value(
-          ProofFull.fromJson(json),
+        return MaybeError<Proof>.value(
+          Proof.fromJson(json),
           statusCode: response.statusCode,
         );
       } catch (e) {
         //
       }
     }
-    return MaybeError<ProofFull>.error(
+    return MaybeError<Proof>.error(
       error: responseBody,
       statusCode: response.statusCode,
     );
   }
 
   /// Get user proof by id.
-  static Future<MaybeError<ProofFull>> getProof(
+  static Future<MaybeError<Proof>> getProof(
     int proofId, {
     UriProductHelper uriHelper = uriHelperFoodProd,
     ApiVersion version = defaultVersion,
@@ -712,12 +712,12 @@ class OpenPricesAPIClient {
     if (response.statusCode == 200) {
       try {
         final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        return MaybeError<ProofFull>.value(ProofFull.fromJson(decodedResponse));
+        return MaybeError<Proof>.value(Proof.fromJson(decodedResponse));
       } catch (e) {
         //
       }
     }
-    return MaybeError<ProofFull>.responseError(response);
+    return MaybeError<Proof>.responseError(response);
   }
 
   /// Updates a proof.

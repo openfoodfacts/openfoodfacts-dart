@@ -58,7 +58,7 @@ void main() {
     required String bearerToken,
     required UriProductHelper uriHelper,
   }) async {
-    final MaybeError<ProofFull> getProof = await OpenPricesAPIClient.getProof(
+    final MaybeError<Proof> getProof = await OpenPricesAPIClient.getProof(
       proofId,
       bearerToken: bearerToken,
       uriHelper: uriHelper,
@@ -304,7 +304,7 @@ void main() {
       final String bearerToken = await getBearerToken(uriHelper: uriHelper);
 
       // successful proof upload with valid token
-      MaybeError<ProofFull> uploadProof = await OpenPricesAPIClient.uploadProof(
+      MaybeError<Proof> uploadProof = await OpenPricesAPIClient.uploadProof(
         createProofParameters: createProofParameters,
         imageUri: initialImageUri,
         mediaType: initialMediaType,
@@ -1064,7 +1064,7 @@ void main() {
       final String bearerToken = await getBearerToken(uriHelper: uriHelper);
 
       // successful proof upload with valid token
-      final MaybeError<ProofFull> uploadProof =
+      final MaybeError<Proof> uploadProof =
           await OpenPricesAPIClient.uploadProof(
             createProofParameters: createProofParameters,
             imageUri: initialImageUri,
@@ -1098,12 +1098,11 @@ void main() {
       expect(updateProof.value.date, updateProofParameters.date);
       expect(updateProof.value.type, updateProofParameters.type);
 
-      final MaybeError<ProofFull> maybeProof =
-          await OpenPricesAPIClient.getProof(
-            proofId,
-            uriHelper: uriHelper,
-            bearerToken: bearerToken,
-          );
+      final MaybeError<Proof> maybeProof = await OpenPricesAPIClient.getProof(
+        proofId,
+        uriHelper: uriHelper,
+        bearerToken: bearerToken,
+      );
       expect(maybeProof.isError, isFalse);
       expect(maybeProof.value.id, proofId);
       checkProof(maybeProof.value, updateProofParameters);
@@ -1291,12 +1290,11 @@ void main() {
 
       // Trying to get the same single result, from an item.
       final Proof proof = result.items!.first;
-      final MaybeError<ProofFull> maybeProof =
-          await OpenPricesAPIClient.getProof(
-            proof.id,
-            uriHelper: uriHelper,
-            bearerToken: bearerToken,
-          );
+      final MaybeError<Proof> maybeProof = await OpenPricesAPIClient.getProof(
+        proof.id,
+        uriHelper: uriHelper,
+        bearerToken: bearerToken,
+      );
       expect(maybeProof.isError, isFalse);
       expect(maybeProof.value.id, proof.id);
       expect(maybeProof.value.type, proof.type);

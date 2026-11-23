@@ -87,33 +87,160 @@ void main() {
       expect(queryParams['status__isnull'], equals('true'));
     });
 
-    test('Local DateTime created filters serialize as UTC', () {
-      final DateTime local = DateTime(2025, 1, 1, 12);
+    test('DateTime created filters serialize as ISO 8601 string', () {
+      final DateTime date = DateTime(2025, 1, 1, 12);
 
       final GetPriceTagsParameters priceTagParams = GetPriceTagsParameters()
-        ..createdGte = local
-        ..createdLte = local;
+        ..createdGte = date
+        ..createdLte = date;
       expect(
         priceTagParams.getQueryParameters()['created__gte'],
-        equals(local.toUtc().toIso8601String()),
+        equals(date.toIso8601String()),
       );
       expect(
         priceTagParams.getQueryParameters()['created__lte'],
-        equals(local.toUtc().toIso8601String()),
+        equals(date.toIso8601String()),
       );
 
       final GetReceiptItemsParameters receiptParams =
           GetReceiptItemsParameters()
-            ..createdGte = local
-            ..createdLte = local;
+            ..createdGte = date
+            ..createdLte = date;
       expect(
         receiptParams.getQueryParameters()['created__gte'],
-        equals(local.toUtc().toIso8601String()),
+        equals(date.toIso8601String()),
       );
       expect(
         receiptParams.getQueryParameters()['created__lte'],
-        equals(local.toUtc().toIso8601String()),
+        equals(date.toIso8601String()),
       );
+    });
+  });
+
+  group('Proof and PriceTag unit tests', () {
+    const UriProductHelper customUriHelper = UriProductHelper(
+      domain: 'custom.openfoodfacts.net',
+    );
+
+    setUpAll(() {
+      OpenFoodAPIConfiguration.userAgent = TestConstants.TEST_USER_AGENT;
+    });
+
+    test('Proof.getFileUrl returns exact URI without user-agent query or null', () {
+      expect(OpenFoodAPIConfiguration.userAgent, isNotNull);
+
+      final Proof emptyProof = Proof();
+      expect(
+        emptyProof.getFileUrl(
+          uriProductHelper: customUriHelper,
+          isThumbnail: false,
+        ),
+        isNull,
+      );
+      expect(
+        emptyProof.getFileUrl(
+          uriProductHelper: customUriHelper,
+          isThumbnail: true,
+        ),
+        isNull,
+      );
+
+      final Proof proofWithOnlyFull = Proof()..filePath = 'proofs/42/full.webp';
+      expect(
+        proofWithOnlyFull.getFileUrl(
+          uriProductHelper: customUriHelper,
+          isThumbnail: true,
+        ),
+        isNull,
+      );
+      final Uri? fullUri = proofWithOnlyFull.getFileUrl(
+        uriProductHelper: customUriHelper,
+        isThumbnail: false,
+      );
+      expect(
+        fullUri,
+        equals(
+          Uri.parse(
+            'https://prices.custom.openfoodfacts.net/img/proofs/42/full.webp',
+          ),
+        ),
+      );
+      expect(fullUri!.hasQuery, isFalse);
+      expect(fullUri.queryParameters, isEmpty);
+
+      final Proof proofWithOnlyThumb = Proof()
+        ..imageThumbPath = 'proofs/42/thumb.webp';
+      expect(
+        proofWithOnlyThumb.getFileUrl(
+          uriProductHelper: customUriHelper,
+          isThumbnail: false,
+        ),
+        isNull,
+      );
+      final Uri? thumbUri = proofWithOnlyThumb.getFileUrl(
+        uriProductHelper: customUriHelper,
+        isThumbnail: true,
+      );
+      expect(
+        thumbUri,
+        equals(
+          Uri.parse(
+            'https://prices.custom.openfoodfacts.net/img/proofs/42/thumb.webp',
+          ),
+        ),
+      );
+      expect(thumbUri!.hasQuery, isFalse);
+      expect(thumbUri.queryParameters, isEmpty);
+    });
+
+    test(
+      'PriceTag.getImageUrl returns exact URI without user-agent query or null',
+      () {
+        expect(OpenFoodAPIConfiguration.userAgent, isNotNull);
+
+        final PriceTag tagWithoutImage = PriceTag();
+        expect(
+          tagWithoutImage.getImageUrl(uriProductHelper: customUriHelper),
+          isNull,
+        );
+
+        final PriceTag tagWithImage = PriceTag()
+          ..imagePath = 'price-tags/99/crop.jpg';
+        final Uri? uri = tagWithImage.getImageUrl(
+          uriProductHelper: customUriHelper,
+        );
+        expect(
+          uri,
+          equals(
+            Uri.parse(
+              'https://prices.custom.openfoodfacts.net/img/price-tags/99/crop.jpg',
+            ),
+          ),
+        );
+        expect(uri!.hasQuery, isFalse);
+        expect(uri.queryParameters, isEmpty);
+      },
+    );
+
+    test('Proof.getFileUrlFromPath returns exact URI without user-agent query or null', () {
+      expect(
+        Proof.getFileUrlFromPath(uriProductHelper: customUriHelper, path: null),
+        isNull,
+      );
+      final Uri? uri = Proof.getFileUrlFromPath(
+        uriProductHelper: customUriHelper,
+        path: 'proofs/123/original.webp',
+      );
+      expect(
+        uri,
+        equals(
+          Uri.parse(
+            'https://prices.custom.openfoodfacts.net/img/proofs/123/original.webp',
+          ),
+        ),
+      );
+      expect(uri!.hasQuery, isFalse);
+      expect(uri.queryParameters, isEmpty);
     });
   });
 
@@ -165,7 +292,7 @@ void main() {
       expect(singleResult.value.id, equals(firstTag.id));
       expect(singleResult.value.proof, isNotNull);
       expect(firstTag.proof, isNotNull);
-      final ProofHalfFull proof = singleResult.value.proof!;
+      final Proof proof = singleResult.value.proof!;
       expect(proof.id, equals(firstTag.proof!.id));
       expect(proof.mimetype, equals(firstTag.proof!.mimetype));
       expect(proof.owner, equals(firstTag.proof!.owner));
