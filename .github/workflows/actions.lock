@@ -5,9 +5,12 @@ version: 'v0.0.3'
 workflows:
     '.github/workflows/auto-assign-pr.yml':
         - 'toshimaru/auto-author-assign@v3.1.1'
+    '.github/workflows/codeql.yml':
+        - 'actions/checkout@v7.0.1'
+        - 'github/codeql-action@v4.39.3'
     '.github/workflows/dartdoc.yml':
         - 'actions/checkout@v7.0.1'
-        - 'dart-lang/setup-dart@v1.7.2'
+        - 'dart-lang/setup-dart@v1.8.1'
         - 'jamesives/github-pages-deploy-action@v4.9.0'
     '.github/workflows/github-projects.yml':
         - 'actions/add-to-project@v2.0.1'
@@ -17,7 +20,7 @@ workflows:
         - 'mschilde/auto-label-merge-conflicts@master'
     '.github/workflows/pubdev-score.yml':
         - 'actions/checkout@v7.0.1'
-        - 'dart-lang/setup-dart@v1.7.2'
+        - 'dart-lang/setup-dart@v1.8.1'
     '.github/workflows/release-please.yml':
         - 'googleapis/release-please-action@v5.0.0'
     '.github/workflows/release_to_pub.dev.yml': []
@@ -26,7 +29,7 @@ workflows:
     '.github/workflows/test-sdk.yml':
         - 'actions/checkout@v7.0.1'
         - 'codecov/codecov-action@v7.1.1'
-        - 'dart-lang/setup-dart@v1.7.2'
+        - 'dart-lang/setup-dart@v1.8.1'
     '.github/workflows/top-issues.yml':
         - 'rickstaa/top-issues-action@v1.3.101'
 dependencies:
@@ -62,11 +65,16 @@ dependencies:
         repo_id: 200299178
         uses:
             - 'actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd'
-    'dart-lang/setup-dart@v1.7.2':
-        ref: 'v1.7.2'
-        commit: 'sha1-65eb853c7ba17dde3be364c3d2858773e7144260'
+    'dart-lang/setup-dart@v1.8.1':
+        ref: 'v1.8.1'
+        commit: 'sha1-6afc89df92d6eb3834022f73cd65adc8cdfcb92d'
         owner_id: 1609975
         repo_id: 320563763
+    'github/codeql-action@v4.39.3':
+        ref: 'v4.39.3'
+        commit: 'sha1-33d7b85da1a04171e211befe2c739303b9a4c066'
+        owner_id: 9919
+        repo_id: 259445878
     'googleapis/release-please-action@v5.0.0':
         ref: 'v5.0.0'
         commit: 'sha1-45996ed1f6d02564a971a2fa1b5860e934307cf7'
