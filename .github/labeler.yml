@@ -5,108 +5,271 @@ GitHub Actions:
 🧪 Tests:
 - changed-files:
   - any-glob-to-any-file: 'test/**/*'
-  - any-glob-to-any-file: 'test/api_getTaxonomyPackagingMaterialsServer_test.dart'
-  - any-glob-to-any-file: 'test/api_getTaxonomyPackagingShapesServer_test.dart'
 
 📖 Knowledge panels:
 - changed-files:
-  - any-glob-to-any-file: 'lib/src/model/knowledge_panel.g.dart'
-  - any-glob-to-any-file: 'lib/src/model/knowledge_panel_element.g.dart'
+  - any-glob-to-any-file: 'lib/src/model/knowledge_panel*'
+  - any-glob-to-any-file: 'test/knowledge_panels_from_json_test.dart'
 
 3rd party Knowledge Panels:
 - changed-files:
-  - any-glob-to-any-file: 'lib/src/external/external_source_filter.dart'
-  - any-glob-to-any-file: 'lib/src/external/external_source_metadata.dart'
-  - any-glob-to-any-file: 'lib/src/external/external_source_product_data.dart'
-  - any-glob-to-any-file: 'lib/src/external/json_map.dart'
+  - any-glob-to-any-file: 'lib/src/external/**/*'
   - any-glob-to-any-file: 'test/api_external_source.dart'
-  
-Product:
+
+external sources:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/external/**/*'
+  - any-glob-to-any-file: 'test/api_external_source.dart'
+
+product:
 - changed-files:
   - any-glob-to-any-file: 'lib/src/model/product.dart'
   - any-glob-to-any-file: 'lib/src/model/product.g.dart'
+  - any-glob-to-any-file: 'lib/src/model/product_list*'
+  - any-glob-to-any-file: 'lib/src/model/product_result*'
+  - any-glob-to-any-file: 'lib/src/model/product_state.dart'
+  - any-glob-to-any-file: 'lib/src/model/product_stats*'
+  - any-glob-to-any-file: 'lib/src/model/product_tag*'
+  - any-glob-to-any-file: 'lib/src/utils/product_fields.dart'
+  - any-glob-to-any-file: 'lib/src/utils/product_helper.dart'
+  - any-glob-to-any-file: 'test/product_from_json_test.dart'
+  - any-glob-to-any-file: 'test/api_get_product_test.dart'
+  - any-glob-to-any-file: 'test/api_get_localized_product_test.dart'
+  - any-glob-to-any-file: 'test/api_get_save_product_test.dart'
+  - any-glob-to-any-file: 'test/api_not_food_get_product_test.dart'
+  - any-glob-to-any-file: 'test/api_save_product*.dart'
 
 🤖 Robotoff:
 - changed-files:
-  - any-glob-to-any-file: 'lib/src/model/robotoff_question.g.dart'
-  - any-glob-to-any-file: 'lib/src/model/robotoff_nutrient_extraction.dart'
-  - any-glob-to-any-file: 'lib/src/model/robotoff_nutrient_extraction_annotation.dart'
-  - any-glob-to-any-file: 'lib/src/model/robotoff_nutrient_extraction_insight.dart'
+  - any-glob-to-any-file: 'lib/src/model/robotoff_*'
   - any-glob-to-any-file: 'lib/src/robot_off_api_client.dart'
-  - any-glob-to-any-file: 'test/api_get_robotoff_test.dart'
-  
+  - any-glob-to-any-file: 'test/api_*_robotoff_test.dart'
+
 pubspec:
 - changed-files:
   - any-glob-to-any-file: 'pubspec.yaml'
 
 🌱 Eco-Score:
 - changed-files:
-  - any-glob-to-any-file: 'lib/src/model/ecoscore_data.g.dart'
+  - any-glob-to-any-file: 'lib/src/model/ecoscore_*'
+  - any-glob-to-any-file: 'lib/src/model/agribalyse*'
 
-Personalized search:
+🔎 personalized search:
 - changed-files:
   - any-glob-to-any-file: 'lib/src/personalized_search/**/*'
+  - any-glob-to-any-file: 'test/api_product_preferences_test.dart'
 
 🔖 Folksonomy engine:
 - changed-files:
   - any-glob-to-any-file: 'lib/src/folksonomy.dart'
   - any-glob-to-any-file: 'test/api_folksonomy_test.dart'
-  
+
 📦 Packaging:
 - changed-files:
-  - any-glob-to-any-file: 'lib/src/model/TaxonomyPackagingMaterial.dart'
-  - any-glob-to-any-file: 'lib/src/model/TaxonomyPackagingMaterial.g.dart'
-  - any-glob-to-any-file: 'lib/src/model/TaxonomyPackagingShape.dart'
-  - any-glob-to-any-file: 'lib/src/model/TaxonomyPackagingShape.g.dart'
-  - any-glob-to-any-file: 'test/api_getTaxonomyPackagingMaterialsServer_test.dart'
-  - any-glob-to-any-file: 'test/api_getTaxonomyPackagingShapesServer_test.dart'
+  - any-glob-to-any-file: 'lib/src/model/packaging*'
+  - any-glob-to-any-file: 'lib/src/model/product_packaging*'
+  - any-glob-to-any-file: 'lib/src/model/taxonomy_packaging*'
+  - any-glob-to-any-file: 'lib/src/model/ocr_packaging_result*'
+  - any-glob-to-any-file: 'test/api_get_taxonomy_packaging*'
 
-📜 Open Food Facts Events:
-- changed-files:
-  - any-glob-to-any-file: 'lib/src/events.dart'
-
-OxF:
-- changed-files:
-  - any-glob-to-any-file: 'lib/src/utils/server_type.dart'
-
-🖼️ Images:
+🖼️ images:
 - changed-files:
   - any-glob-to-any-file: 'lib/src/model/product_image.dart'
+  - any-glob-to-any-file: 'lib/src/model/send_image.dart'
   - any-glob-to-any-file: 'lib/src/utils/image_helper.dart'
+  - any-glob-to-any-file: 'test/api_add_product_image_test.dart'
   - any-glob-to-any-file: 'test/api_get_product_image_ids_test.dart'
 
-💰 Prices:
+💸 Prices:
 - changed-files:
-  - any-glob-to-any-file: 'lib/src/prices/*.dart'
+  - any-glob-to-any-file: 'lib/src/prices/**/*'
   - any-glob-to-any-file: 'lib/src/open_prices_api_client.dart'
   - any-glob-to-any-file: 'test/api_prices_*.dart'
-  - any-glob-to-any-file: 'lib/src/prices/currency.dart'
-  - any-glob-to-any-file: 'lib/src/prices/price.dart'
-  - any-glob-to-any-file: 'lib/src/prices/proof.dart'
-  - any-glob-to-any-file: 'lib/src/prices/proof_type.dart'
-  - any-glob-to-any-file: 'test/api_prices_test.dart'
-  - any-glob-to-any-file: 'lib/src/prices/challenge.dart‎'
-  - any-glob-to-any-file: 'lib/src/prices/challenge.g.dart‎'
-  - any-glob-to-any-file: '‎lib/src/prices/get_challenges_order.dart‎'
-  - any-glob-to-any-file: '‎lib/src/prices/get_challenges_parameters.dart‎'
-  - any-glob-to-any-file: '‎lib/src/prices/get_challenges_result.dart‎'
-  - any-glob-to-any-file: '‎lib/src/prices/get_challenges_result.g.dart‎'
-  - any-glob-to-any-file: '‎lib/src/prices/price_user.dart‎'
 
-Search:
+🔎 Search:
 - changed-files:
-  - any-glob-to-any-file: 'test/api_search_products_test.dart'
+  - any-glob-to-any-file: 'lib/src/search/**/*'
+  - any-glob-to-any-file: 'lib/src/open_food_search_api_client.dart'
+  - any-glob-to-any-file: 'lib/src/utils/product_search_query_configuration.dart'
+  - any-glob-to-any-file: 'lib/src/model/search_result*'
+  - any-glob-to-any-file: 'lib/src/model/parameter/search_terms.dart'
+  - any-glob-to-any-file: 'test/api_search*.dart'
 
 🔐 Authentification:
 - changed-files:
   - any-glob-to-any-file: 'lib/src/model/login_status.dart'
+  - any-glob-to-any-file: 'lib/src/model/sign_up_status.dart'
+  - any-glob-to-any-file: 'lib/src/model/user.dart'
+  - any-glob-to-any-file: 'lib/src/model/user.g.dart'
+  - any-glob-to-any-file: 'lib/src/model/user_details*'
+  - any-glob-to-any-file: 'test/user_management_test_*.dart'
 
-Nutri-Patrol:
+🛡️ Nutri-Patrol:
 - changed-files:
-  - any-glob-to-any-file: 'lib/src/nutripatrol/create_flag.dart'
-  - any-glob-to-any-file: 'lib/src/nutripatrol/get_flag.dart'
-  - any-glob-to-any-file: 'lib/src/nutripatrol/get_ticket.dart'
+  - any-glob-to-any-file: 'lib/src/nutripatrol/**/*'
   - any-glob-to-any-file: 'lib/src/nutripatrol_api_client.dart'
-  - any-glob-to-any-file: 'lib/src/nutripatrol/get_tickets.dart'
-  - any-glob-to-any-file: 'lib/src/nutripatrol/update_ticket_status.dart'
-  - any-glob-to-any-file: 'lib/src/nutripatrol_api_client.dart'
+
+📚 Documentation:
+- changed-files:
+  - any-glob-to-any-file: '**/*.md'
+  - any-glob-to-any-file: 'example/**/*'
+
+🧬 Taxonomies:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/taxonomy_*'
+  - any-glob-to-any-file: 'lib/src/utils/taxonomy_query_configuration.dart'
+  - any-glob-to-any-file: 'lib/src/search/taxonomy_*'
+  - any-glob-to-any-file: 'test/api_get_taxonomy_*'
+
+Nutrition facts:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/nutrition/**/*'
+  - any-glob-to-any-file: 'lib/src/model/nutrient*'
+  - any-glob-to-any-file: 'lib/src/model/nutriments.dart'
+  - any-glob-to-any-file: 'lib/src/model/ordered_nutrient*'
+  - any-glob-to-any-file: 'lib/src/utils/nutriments_helper.dart'
+  - any-glob-to-any-file: 'lib/src/utils/unit_helper.dart'
+  - any-glob-to-any-file: 'test/ordered_nutrient_test.dart'
+
+Recommended Daily Intake:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/recommended_daily_intake.dart'
+  - any-glob-to-any-file: 'lib/src/utils/recommended_daily_intake_helper.dart'
+  - any-glob-to-any-file: 'test/recommended_daily_intake_test.dart'
+  - any-glob-to-any-file: 'test/test_assets/json/recommended_daily_intakes_source _eu.json'
+
+🧪 Additives:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/additives.dart'
+  - any-glob-to-any-file: 'lib/src/model/taxonomy_additive*'
+  - any-glob-to-any-file: 'lib/src/model/parameter/without_additives.dart'
+  - any-glob-to-any-file: 'test/api_get_taxonomy_additives_server_test.dart'
+
+Allergens:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/allergens.dart'
+  - any-glob-to-any-file: 'lib/src/model/taxonomy_allergen*'
+  - any-glob-to-any-file: 'lib/src/model/parameter/allergens_parameter.dart'
+  - any-glob-to-any-file: 'test/api_get_taxonomy_allergens_server_test.dart'
+
+📍Origins:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/origins_of_ingredients*'
+  - any-glob-to-any-file: 'lib/src/model/taxonomy_origin*'
+  - any-glob-to-any-file: 'test/api_get_taxonomy_origins_server_test.dart'
+
+country:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/taxonomy_country*'
+  - any-glob-to-any-file: 'lib/src/utils/country_helper.dart'
+  - any-glob-to-any-file: 'test/api_get_taxonomy_countries_server_test.dart'
+
+languages:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/taxonomy_language*'
+  - any-glob-to-any-file: 'lib/src/utils/language_helper.dart'
+  - any-glob-to-any-file: 'test/api_get_taxonomy_languages_server_test.dart'
+
+NOVA groups:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/taxonomy_nova*'
+  - any-glob-to-any-file: 'test/api_get_taxonomy_nova_server_test.dart'
+
+PNNS groups:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/utils/pnns_groups.dart'
+  - any-glob-to-any-file: 'lib/src/model/parameter/pnns_group2_filter.dart'
+
+Attributes:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/attribute*'
+  - any-glob-to-any-file: 'lib/src/personalized_search/available_attribute_groups.dart'
+
+barcodes:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/utils/barcodes_validator.dart'
+  - any-glob-to-any-file: 'lib/src/utils/invalid_barcodes.dart'
+  - any-glob-to-any-file: 'lib/src/model/parameter/barcode_parameter.dart'
+  - any-glob-to-any-file: 'test/barcode_validator_test.dart'
+
+OCR:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/ocr_*'
+  - any-glob-to-any-file: 'lib/src/utils/ocr_field.dart'
+  - any-glob-to-any-file: 'test/api_ocr_ingredients_test.dart'
+
+data freshness:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/product_freshness.dart'
+
+autocomplete:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/search/autocomplete_*'
+  - any-glob-to-any-file: 'lib/src/search/taxonomy_name_autocompleter.dart'
+  - any-glob-to-any-file: 'lib/src/utils/autocomplete_manager.dart'
+  - any-glob-to-any-file: 'lib/src/utils/autocompleter.dart'
+  - any-glob-to-any-file: 'lib/src/utils/tag_type_autocompleter.dart'
+
+suggestions:
+- changed-files:
+  - any-glob-to-any-file: 'test/api_get_suggestions_test.dart'
+  - any-glob-to-any-file: 'test/api_suggestion_manager_test.dart'
+
+unwanted ingredients:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/parameter/ingredients_unwanted_parameter.dart'
+
+🥗🔎 ingredient analysis:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/ingredient*'
+  - any-glob-to-any-file: 'lib/src/model/taxonomy_ingredient*'
+  - any-glob-to-any-file: 'lib/src/model/parameter/ingredients_*'
+  - any-glob-to-any-file: 'test/api_get_taxonomy_ingredients_server_test.dart'
+
+code-gen:
+- changed-files:
+  - any-glob-to-any-file: '**/*.g.dart'
+
+user agent:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/user_agent.dart'
+
+signup:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/sign_up_status.dart'
+
+👥 user account:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/model/user.dart'
+  - any-glob-to-any-file: 'lib/src/model/user.g.dart'
+  - any-glob-to-any-file: 'lib/src/model/user_details*'
+  - any-glob-to-any-file: 'test/user_management_test_*.dart'
+
+API schema version:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/utils/api_version.dart'
+  - any-glob-to-any-file: 'lib/src/utils/product_query_version.dart'
+
+offline mode:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/utils/tsv_helper.dart'
+  - any-glob-to-any-file: 'test/api_tsv_import_test.dart'
+
+network:
+- changed-files:
+  - any-glob-to-any-file: 'lib/src/utils/http_*'
+  - any-glob-to-any-file: 'lib/src/utils/too_many_requests_*'
+  - any-glob-to-any-file: 'lib/src/utils/uri_*'
+  - any-glob-to-any-file: 'test/http_status_exception_test.dart'
+
+dart:
+- changed-files:
+  - any-glob-to-any-file: '**/*.dart'
+
+🧹 Linting:
+- changed-files:
+  - any-glob-to-any-file: 'analysis_options.yaml'
+
+License:
+- changed-files:
+  - any-glob-to-any-file: 'LICENSE'
