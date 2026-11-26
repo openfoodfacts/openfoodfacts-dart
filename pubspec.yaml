@@ -19,7 +19,7 @@ dev_dependencies:
   json_serializable: 6.15.2
   lints: 6.1.0
   test: 1.33.0
-  coverage: 1.16.1
+  coverage: 1.16.2
 
 funding:
   - "https://donate.openfoodfacts.org/"

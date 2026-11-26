@@ -26,5 +26,5 @@ enum PerSize implements OffTagged {
   static PerSize? fromOffTag(String? offTag) =>
       OffTagged.fromOffTag(offTag, PerSize.values) as PerSize?;
 
-  static String? toOffTag(final PerSize? perSize) => perSize?.offTag;
+  static String? toOffTag(PerSize? perSize) => perSize?.offTag;
 }
