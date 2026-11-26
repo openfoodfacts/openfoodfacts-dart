@@ -13,7 +13,8 @@ part 'proof.g.dart';
 
 /// Proof of a price.
 ///
-/// cf. `ProofFull` in https://prices.openfoodfacts.org/api/docs
+/// Corresponds to `ProofFull` and embedded `ProofHalfFull` in
+/// https://prices.openfoodfacts.org/api/docs
 @JsonSerializable()
 class Proof extends JsonObject {
   /// Proof ID. Read-only.
@@ -30,7 +31,7 @@ class Proof extends JsonObject {
 
   /// Mime type. Read-only.
   @JsonKey()
-  late String mimetype;
+  String? mimetype;
 
   /// Proof type.
   @JsonKey()
@@ -80,7 +81,7 @@ class Proof extends JsonObject {
 
   /// Owner. Read-only.
   @JsonKey()
-  late String owner;
+  String? owner;
 
   /// Creation timestamp. Read-only.
   @JsonKey(fromJson: JsonHelper.stringTimestampToDate)
@@ -127,13 +128,13 @@ class Proof extends JsonObject {
   Uri? getFileUrl({
     required UriProductHelper uriProductHelper,
     bool isThumbnail = false,
-  }) => _getFileUrl(
+  }) => getFileUrlFromPath(
     uriProductHelper: uriProductHelper,
     path: isThumbnail ? imageThumbPath : filePath,
   );
 
-  /// Returns the URL of a proof image.
-  static Uri? _getFileUrl({
+  /// Returns the URL of an image stored on the prices server from its [path].
+  static Uri? getFileUrlFromPath({
     required UriProductHelper uriProductHelper,
     required String? path,
   }) => path == null

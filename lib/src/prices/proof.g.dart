@@ -10,7 +10,7 @@ Proof _$ProofFromJson(Map<String, dynamic> json) => Proof()
   ..id = (json['id'] as num).toInt()
   ..filePath = json['file_path'] as String?
   ..imageThumbPath = json['image_thumb_path'] as String?
-  ..mimetype = json['mimetype'] as String
+  ..mimetype = json['mimetype'] as String?
   ..type = $enumDecodeNullable(_$ProofTypeEnumMap, json['type'])
   ..priceCount = (json['price_count'] as num).toInt()
   ..receiptPriceCount = (json['receipt_price_count'] as num?)?.toInt()
@@ -23,7 +23,7 @@ Proof _$ProofFromJson(Map<String, dynamic> json) => Proof()
   ..locationId = (json['location_id'] as num?)?.toInt()
   ..date = JsonHelper.nullableStringTimestampToDate(json['date'])
   ..currency = $enumDecodeNullable(_$CurrencyEnumMap, json['currency'])
-  ..owner = json['owner'] as String
+  ..owner = json['owner'] as String?
   ..created = JsonHelper.stringTimestampToDate(json['created'])
   ..updated = JsonHelper.nullableStringTimestampToDate(json['updated'])
   ..location = json['location'] == null
