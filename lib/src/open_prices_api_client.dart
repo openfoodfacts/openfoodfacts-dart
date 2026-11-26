@@ -8,7 +8,6 @@ import 'prices/maybe_error.dart';
 import 'prices/price.dart';
 import 'prices/price_user.dart';
 import 'prices/proof.dart';
-import 'prices/proof_update.dart';
 import 'prices/get_challenges_parameters.dart';
 import 'prices/get_challenges_result.dart';
 import 'prices/get_locations_parameters.dart';
@@ -724,9 +723,7 @@ class OpenPricesAPIClient {
   ///
   /// This endpoint requires authentication.
   /// A user can update only owned proofs.
-  /// Returns the updated fields (the server's PATCH response).
-  /// To retrieve the full proof, use [getProof].
-  static Future<MaybeError<ProofUpdate>> updateProof(
+  static Future<MaybeError<bool>> updateProof(
     int proofId, {
     required UpdateProofParameters parameters,
     UriProductHelper uriHelper = uriHelperFoodProd,
@@ -747,16 +744,9 @@ class OpenPricesAPIClient {
       addUserAgentParameters: false,
     );
     if (response.statusCode == 200) {
-      try {
-        final dynamic decodedResponse = HttpHelper().jsonDecodeUtf8(response);
-        return MaybeError<ProofUpdate>.value(
-          ProofUpdate.fromJson(decodedResponse),
-        );
-      } catch (e) {
-        //
-      }
+      return MaybeError<bool>.value(true);
     }
-    return MaybeError<ProofUpdate>.responseError(response);
+    return MaybeError<bool>.responseError(response);
   }
 
   /// Deletes a proof.

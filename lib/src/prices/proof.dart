@@ -7,7 +7,6 @@ import '../utils/uri_helper.dart';
 import 'currency.dart';
 import 'location.dart';
 import 'location_osm_type.dart';
-import 'proof_prediction.dart';
 import 'proof_type.dart';
 
 part 'proof.g.dart';
@@ -117,26 +116,6 @@ class Proof extends JsonObject {
   /// A "duplicate" value would mean the uploaded proof was pre-existing.
   @JsonKey()
   String? detail;
-
-  /// Image MD5 hash.
-  @JsonKey(name: 'image_md5_hash')
-  String? imageMd5Hash;
-
-  /// Whether this proof is a draft.
-  @JsonKey()
-  bool? draft;
-
-  /// Number of predictions for this proof. Read-only.
-  @JsonKey(name: 'prediction_count')
-  int? predictionCount;
-
-  /// Predictions generated for this proof. Read-only.
-  @JsonKey()
-  List<ProofPrediction>? predictions;
-
-  /// Tags.
-  @JsonKey()
-  List<String>? tags;
 
   Proof();
 
