@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.32.1](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.32.0...v3.32.1) (2026-11-26)
+
+
+### Bug Fixes
+
+* add action pinning per github ([#1314](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1314)) ([f8f4378](https://github.com/openfoodfacts/openfoodfacts-dart/commit/f8f43789564ce413e5d267dbe3bfd96819ae2744))
+* barcode validator accepted non-digit characters ([#1310](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1310)) ([831bda2](https://github.com/openfoodfacts/openfoodfacts-dart/commit/831bda2d3ba7b1fba79c56a1681879e1d0a11d83))
+* latest country/currency updates ([#1312](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1312)) ([04c4e9f](https://github.com/openfoodfacts/openfoodfacts-dart/commit/04c4e9f5825000a33a9538a7f1ea1b2f9612867d))
+* schemaVersion returned null for API 3.5 ([#1313](https://github.com/openfoodfacts/openfoodfacts-dart/issues/1313)) ([bdd35bc](https://github.com/openfoodfacts/openfoodfacts-dart/commit/bdd35bce89790a98919790019ea2af34f9764dd9))
+
 ## [3.32.0](https://github.com/openfoodfacts/openfoodfacts-dart/compare/v3.31.1...v3.32.0) (2026-11-05)
 
 
